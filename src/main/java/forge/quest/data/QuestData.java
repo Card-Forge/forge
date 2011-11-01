@@ -571,8 +571,8 @@ public final class QuestData {
      * @return true, if successful
      */
     public boolean hasSaveFile() {
-        return ForgeProps.getFile(NewConstants.QUEST.DATA).exists()
-                || ForgeProps.getFile(NewConstants.QUEST.XMLDATA).exists();
+        return ForgeProps.getFile(NewConstants.Quest.DATA).exists()
+                || ForgeProps.getFile(NewConstants.Quest.XMLDATA).exists();
     }
 
     /**

@@ -44,8 +44,8 @@ public class ReadPriceList implements NewConstants {
      * </p>
      */
     private void setup() {
-        priceMap = readFile(ForgeProps.getFile(QUEST.PRICE));
-        priceMap.putAll(readFile(ForgeProps.getFile(QUEST.BOOSTER_PRICE)));
+        priceMap = readFile(ForgeProps.getFile(Quest.PRICE));
+        priceMap.putAll(readFile(ForgeProps.getFile(Quest.BOOSTER_PRICE)));
 
     } // setup()
 

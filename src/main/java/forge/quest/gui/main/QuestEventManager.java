@@ -57,11 +57,11 @@ public class QuestEventManager {
         List<String> contents;
         QuestEvent tempEvent;
 
-        File file = ForgeProps.getFile(NewConstants.QUEST.DECKS);
+        File file = ForgeProps.getFile(NewConstants.Quest.DECKS);
 
         DeckManager manager = new DeckManager(file);
 
-        File[] allFiles = ForgeProps.getFile(NewConstants.QUEST.DECKS).listFiles(DeckManager.DCK_FILE_FILTER);
+        File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckManager.DCK_FILE_FILTER);
 
         for (File f : allFiles) {
             contents = FileUtil.readFile(f);

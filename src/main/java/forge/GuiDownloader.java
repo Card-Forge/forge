@@ -54,7 +54,7 @@ import forge.properties.NewConstants;
  * @author Forge
  */
 public abstract class GuiDownloader extends DefaultBoundedRangeModel implements Runnable, NewConstants,
-        NewConstants.LANG.Gui_DownloadPictures {
+        NewConstants.Lang.GuiDownloadPictures {
 
     private static final long serialVersionUID = -8596808503046590349L;
 
@@ -171,7 +171,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         p0.add(port);
 
         // Start
-        final JButton b = new JButton(ForgeProps.getLocalized(BUTTONS.START));
+        final JButton b = new JButton(ForgeProps.getLocalized(Buttons.START));
         b.addActionListener(new ActionListener() {
 
             public void actionPerformed(final ActionEvent e) {
@@ -194,7 +194,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         bar.setPreferredSize(d);
 
         // JOptionPane
-        close = new JButton(ForgeProps.getLocalized(BUTTONS.CANCEL));
+        close = new JButton(ForgeProps.getLocalized(Buttons.CANCEL));
         Object[] options = { b, close };
         dlg = new JOptionPane(p0, DEFAULT_OPTION, PLAIN_MESSAGE, null, options, options[1]);
 
@@ -348,7 +348,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 p = new Proxy(TYPES[type], new InetSocketAddress(addr.getText(), parseInt(port.getText())));
             } catch (Exception ex) {
                 ErrorViewer
-                        .showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), addr.getText(), port.getText());
+                        .showError(ex, ForgeProps.getLocalized(Errors.PROXY_CONNECT), addr.getText(), port.getText());
                 return;
             }
         }
@@ -417,7 +417,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 }
             } // for
         }
-        close.setText(ForgeProps.getLocalized(BUTTONS.CLOSE));
+        close.setText(ForgeProps.getLocalized(Buttons.CLOSE));
     } // run
 
     /**

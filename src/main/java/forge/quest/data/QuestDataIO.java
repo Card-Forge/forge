@@ -68,7 +68,7 @@ public class QuestDataIO {
             // read file "questData"
             QuestData data = null;
 
-            File xmlSaveFile = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
+            File xmlSaveFile = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
 
             GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
 
@@ -172,7 +172,7 @@ public class QuestDataIO {
             xStream.registerConverter(new CardPoolToXml());
             xStream.alias("CardPool", ItemPool.class);
 
-            File f = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
+            File f = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
             BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
             GZIPOutputStream zout = new GZIPOutputStream(bout);
             xStream.toXML(qd, zout);

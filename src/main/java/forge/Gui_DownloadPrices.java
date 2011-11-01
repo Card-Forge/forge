@@ -21,8 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import forge.properties.ForgeProps;
-import forge.properties.NewConstants.LANG.Gui_DownloadPrices.DOWNLOADPRICES;
-import forge.properties.NewConstants.QUEST;
+import forge.properties.NewConstants.Lang.GuiDownloadPrices.DownloadPrices;
+import forge.properties.NewConstants.Quest;
 
 /**
  * <p>
@@ -53,7 +53,7 @@ public class Gui_DownloadPrices extends JFrame {
     private void initialize() {
         this.setSize(386, 200);
         setContentPane(getJContentPane());
-        setTitle(ForgeProps.getLocalized(DOWNLOADPRICES.TITLE));
+        setTitle(ForgeProps.getLocalized(DownloadPrices.TITLE));
     }
 
     /**
@@ -78,7 +78,7 @@ public class Gui_DownloadPrices extends JFrame {
     private JButton getJButton() {
         if (jButton == null) {
             jButton = new JButton();
-            jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.START_UPDATE));
+            jButton.setText(ForgeProps.getLocalized(DownloadPrices.START_UPDATE));
             jButton.setLocation(new Point(120, 46));
             jButton.setSize(158, 89);
 
@@ -102,7 +102,7 @@ public class Gui_DownloadPrices extends JFrame {
                         in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
                         out = new BufferedOutputStream(new FileOutputStream(f));
 
-                        jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.DOWNLOADING));
+                        jButton.setText(ForgeProps.getLocalized(DownloadPrices.DOWNLOADING));
                         jContentPane.paintImmediately(jButton.getBounds());
 
                         int len = 0;
@@ -151,7 +151,7 @@ public class Gui_DownloadPrices extends JFrame {
                         line = inBR.readLine();
                         line = inBR.readLine();
 
-                        jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.COMPILING));
+                        jButton.setText(ForgeProps.getLocalized(DownloadPrices.COMPILING));
                         jContentPane.paintImmediately(jButton.getBounds());
 
                         x = 0;
@@ -211,12 +211,12 @@ public class Gui_DownloadPrices extends JFrame {
                             }
                         }
 
-                        String pfn = ForgeProps.getFile(QUEST.PRICE).getAbsolutePath();
+                        String pfn = ForgeProps.getFile(Quest.PRICE).getAbsolutePath();
                         String pfnb = pfn.replace(".txt", ".bak");
                         File ff = new File(pfn);
                         ff.renameTo(new File(pfnb));
 
-                        fw = new FileWriter(ForgeProps.getFile(QUEST.PRICE));
+                        fw = new FileWriter(ForgeProps.getFile(Quest.PRICE));
                         BufferedWriter outBW = new BufferedWriter(fw);
 
                         // Collection<String> keys = prices.keySet();

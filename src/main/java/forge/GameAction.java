@@ -38,7 +38,7 @@ import forge.gui.input.Input_PayManaCost;
 import forge.gui.input.Input_PayManaCost_Ability;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
-import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
+import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.quest.gui.QuestWinLoseHandler;
 import forge.quest.gui.main.QuestEvent;
 import forge.view.swing.WinLoseFrame;
@@ -1593,10 +1593,10 @@ public class GameAction {
      * </p>
      */
     public final void seeWhoPlaysFirst_CoinToss() {
-        Object[] possibleValues = { ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS),
-                ForgeProps.getLocalized(GAMEACTION_TEXT.TAILS) };
-        Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS_OR_TAILS),
-                ForgeProps.getLocalized(GAMEACTION_TEXT.COIN_TOSS), JOptionPane.DEFAULT_OPTION,
+        Object[] possibleValues = { ForgeProps.getLocalized(GameActionText.HEADS),
+                ForgeProps.getLocalized(GameActionText.TAILS) };
+        Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GameActionText.HEADS_OR_TAILS),
+                ForgeProps.getLocalized(GameActionText.COIN_TOSS), JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
 
         int Flip = MyRandom.getRandom().nextInt(2);
@@ -1605,21 +1605,21 @@ public class GameAction {
         // JOptionPane.showMessageDialog(null, q, "",
         // JOptionPane.INFORMATION_MESSAGE);
         if (q.equals(0)) {
-            Human_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS);
-            Computer_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.TAILS);
+            Human_Flip = ForgeProps.getLocalized(GameActionText.HEADS);
+            Computer_Flip = ForgeProps.getLocalized(GameActionText.TAILS);
         } else {
-            Human_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.TAILS);
-            Computer_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS);
+            Human_Flip = ForgeProps.getLocalized(GameActionText.TAILS);
+            Computer_Flip = ForgeProps.getLocalized(GameActionText.HEADS);
         }
 
         if ((Flip == 0 && q.equals(0)) || (Flip == 1 && q.equals(1))) {
             JOptionPane.showMessageDialog(null,
-                    Human_Flip + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_WIN), "",
+                    Human_Flip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {
             computerStartsGame();
             JOptionPane.showMessageDialog(null,
-                    Computer_Flip + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_WIN), "",
+                    Computer_Flip + "\r\n" + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN), "",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     } // seeWhoPlaysFirst_CoinToss()
@@ -1652,8 +1652,8 @@ public class GameAction {
             } else {
                 computerStartsGame();
                 JOptionPane
-                        .showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_MANA_COST) + "\r\n"
-                                + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_STARTS), "",
+                        .showMessageDialog(null, ForgeProps.getLocalized(GameActionText.HUMAN_MANA_COST) + "\r\n"
+                                + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "",
                                 JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -1661,8 +1661,8 @@ public class GameAction {
             if (CLibrary.size() > 0) {
                 setComputerCut(CLibrary.get(MyRandom.getRandom().nextInt(CLibrary.size())));
             } else {
-                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_MANA_COST)
-                        + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "",
+                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.COMPUTER_MANA_COST)
+                        + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "",
                         JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -1674,37 +1674,37 @@ public class GameAction {
                     AllZone.getGameAction().getComputerCut());
 
             StringBuilder sb = new StringBuilder();
-            sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_CUT) + getHumanCut().getName() + " ("
+            sb.append(ForgeProps.getLocalized(GameActionText.HUMAN_CUT) + getHumanCut().getName() + " ("
                     + getHumanCut().getManaCost() + ")" + "\r\n");
-            sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_CUT) + getComputerCut().getName() + " ("
+            sb.append(ForgeProps.getLocalized(GameActionText.COMPUTER_CUT) + getComputerCut().getName() + " ("
                     + getComputerCut().getManaCost() + ")" + "\r\n");
             sb.append("\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n");
             if (CardUtil.getConvertedManaCost(getComputerCut().getManaCost()) > CardUtil
                     .getConvertedManaCost(getHumanCut().getManaCost())) {
                 computerStartsGame();
-                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_STARTS), "",
+                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "",
                         JOptionPane.INFORMATION_MESSAGE);
                 return;
             } else if (CardUtil.getConvertedManaCost(getComputerCut().getManaCost()) < CardUtil
                     .getConvertedManaCost(getHumanCut().getManaCost())) {
-                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "",
+                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "",
                         JOptionPane.INFORMATION_MESSAGE);
                 return;
             } else {
-                sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.EQUAL_CONVERTED_MANA) + "\r\n");
+                sb.append(ForgeProps.getLocalized(GameActionText.EQUAL_CONVERTED_MANA) + "\r\n");
                 if (i == Cut_CountMax - 1) {
-                    sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.RESOLVE_STARTER));
+                    sb.append(ForgeProps.getLocalized(GameActionText.RESOLVE_STARTER));
                     if (MyRandom.getRandom().nextInt(2) == 1) {
-                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_WIN),
+                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_WIN),
                                 "", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         computerStartsGame();
-                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_WIN),
+                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN),
                                 "", JOptionPane.INFORMATION_MESSAGE);
                     }
                     return;
                 } else {
-                    sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.CUTTING_AGAIN));
+                    sb.append(ForgeProps.getLocalized(GameActionText.CUTTING_AGAIN));
                 }
                 JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
             }

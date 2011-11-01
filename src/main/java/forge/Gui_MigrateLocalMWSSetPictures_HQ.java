@@ -37,7 +37,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.properties.NewConstants.LANG.Gui_DownloadPictures;
+import forge.properties.NewConstants.Lang.GuiDownloadPictures;
 
 //import java.io.BufferedReader;
 //import java.io.FileReader;
@@ -53,7 +53,7 @@ import forge.properties.NewConstants.LANG.Gui_DownloadPictures;
  * @version $Id$
  */
 public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel implements Runnable,
-        NewConstants, NewConstants.LANG.Gui_DownloadPictures {
+        NewConstants, NewConstants.Lang.GuiDownloadPictures {
 
     /** Constant <code>serialVersionUID=-7890794857949935256L</code>. */
     private static final long serialVersionUID = -7890794857949935256L;
@@ -121,8 +121,8 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      */
     private Gui_MigrateLocalMWSSetPictures_HQ(final MCard[] c) {
         this.cards = c;
-        this.addr = new JTextField(ForgeProps.getLocalized(Gui_DownloadPictures.PROXY_ADDRESS));
-        this.port = new JTextField(ForgeProps.getLocalized(Gui_DownloadPictures.PROXY_PORT));
+        this.addr = new JTextField(ForgeProps.getLocalized(GuiDownloadPictures.PROXY_ADDRESS));
+        this.port = new JTextField(ForgeProps.getLocalized(GuiDownloadPictures.PROXY_PORT));
         this.bar = new JProgressBar(this);
 
         final JPanel p0 = new JPanel();
@@ -130,9 +130,9 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
 
         // Proxy Choice
         final ButtonGroup bg = new ButtonGroup();
-        final String[] labels = { ForgeProps.getLocalized(Gui_DownloadPictures.NO_PROXY),
-                ForgeProps.getLocalized(Gui_DownloadPictures.HTTP_PROXY),
-                ForgeProps.getLocalized(Gui_DownloadPictures.SOCKS_PROXY) };
+        final String[] labels = { ForgeProps.getLocalized(GuiDownloadPictures.NO_PROXY),
+                ForgeProps.getLocalized(GuiDownloadPictures.HTTP_PROXY),
+                ForgeProps.getLocalized(GuiDownloadPictures.SOCKS_PROXY) };
         for (int i = 0; i < Gui_MigrateLocalMWSSetPictures_HQ.TYPES.length; i++) {
             final JRadioButton rb = new JRadioButton(labels[i]);
             rb.addChangeListener(new ProxyHandler(i));
@@ -181,7 +181,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         this.bar.setPreferredSize(d);
 
         // JOptionPane
-        this.close = new JButton(ForgeProps.getLocalized(BUTTONS.CANCEL));
+        this.close = new JButton(ForgeProps.getLocalized(Buttons.CANCEL));
         final Object[] options = { b, this.close };
         this.dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
@@ -274,7 +274,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
                         sb.append(String.format("0:%02d remaining.", t2Go / 1000));
                     }
                 } else {
-                    sb.append(String.format(ForgeProps.getLocalized(Gui_DownloadPictures.BAR_CLOSE), this.card,
+                    sb.append(String.format(ForgeProps.getLocalized(GuiDownloadPictures.BAR_CLOSE), this.card,
                             Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length));
                 }
 
@@ -298,7 +298,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      * @return a {@link javax.swing.JDialog} object.
      */
     public JDialog getDlg(final JFrame frame) {
-        final JDialog dlg = this.dlg.createDialog(frame, ForgeProps.getLocalized(Gui_DownloadPictures.TITLE));
+        final JDialog dlg = this.dlg.createDialog(frame, ForgeProps.getLocalized(GuiDownloadPictures.TITLE));
         this.close.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -342,7 +342,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
                 p = new Proxy(Gui_MigrateLocalMWSSetPictures_HQ.TYPES[this.type], new InetSocketAddress(
                         this.addr.getText(), Integer.parseInt(this.port.getText())));
             } catch (final Exception ex) {
-                ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), this.addr.getText(),
+                ErrorViewer.showError(ex, ForgeProps.getLocalized(Errors.PROXY_CONNECT), this.addr.getText(),
                         this.port.getText());
                 // throw new
                 // RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
@@ -427,7 +427,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
                 }
             } // for
         }
-        this.close.setText(ForgeProps.getLocalized(BUTTONS.CLOSE));
+        this.close.setText(ForgeProps.getLocalized(Buttons.CLOSE));
     } // run
 
     /**
@@ -442,7 +442,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         final MCard[] card = Gui_MigrateLocalMWSSetPictures_HQ.getNeededCards();
 
         if (card.length == 0) {
-            JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(Gui_DownloadPictures.NO_MORE));
+            JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(GuiDownloadPictures.NO_MORE));
             return;
         }
 

@@ -169,9 +169,9 @@ public class BugzReporter extends JDialog {
         this.txtUserName.setColumns(4);
         try {
             this.prefs = new ForgePreferences("forge.preferences");
-            if (!this.prefs.BugzName.equals("")) {
-                this.txtUserName.setText(this.prefs.BugzName);
-                this.txtPassword.setText(this.prefs.BugzPwd);
+            if (!this.prefs.bugzName.equals("")) {
+                this.txtUserName.setText(this.prefs.bugzName);
+                this.txtPassword.setText(this.prefs.bugzPwd);
                 this.chkReportAnonymously.setSelected(false);
             } else {
                 this.chkReportAnonymously.setSelected(true);
@@ -189,9 +189,9 @@ public class BugzReporter extends JDialog {
                     BugzReporter.this.txtUserName.setText("ForgeGUI");
                     BugzReporter.this.txtPassword.setText("vi2ccTbfBUu^");
                 } else {
-                    if (!BugzReporter.this.prefs.BugzName.equals("")) {
-                        BugzReporter.this.txtUserName.setText(BugzReporter.this.prefs.BugzName);
-                        BugzReporter.this.txtPassword.setText(BugzReporter.this.prefs.BugzPwd);
+                    if (!BugzReporter.this.prefs.bugzName.equals("")) {
+                        BugzReporter.this.txtUserName.setText(BugzReporter.this.prefs.bugzName);
+                        BugzReporter.this.txtPassword.setText(BugzReporter.this.prefs.bugzPwd);
                     }
                 }
             }
@@ -440,8 +440,8 @@ public class BugzReporter extends JDialog {
                 break Report;
             }
 
-            this.prefs.BugzName = this.txtUserName.getText();
-            this.prefs.BugzPwd = String.valueOf(this.txtPassword.getPassword());
+            this.prefs.bugzName = this.txtUserName.getText();
+            this.prefs.bugzPwd = String.valueOf(this.txtPassword.getPassword());
             try {
                 this.prefs.save();
             } catch (final Exception e) {

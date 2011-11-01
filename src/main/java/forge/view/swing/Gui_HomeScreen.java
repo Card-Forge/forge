@@ -71,8 +71,8 @@ import forge.item.ItemPool;
 import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.StackOffsetType;
 import forge.properties.ForgeProps;
-import forge.properties.NewConstants.LANG;
-import forge.properties.NewConstants.LANG.OldGuiNewGame.NEW_GAME_TEXT;
+import forge.properties.NewConstants.Lang;
+import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 import forge.quest.gui.QuestOptions;
 
 /**
@@ -743,7 +743,7 @@ public class Gui_HomeScreen {
         cmdHowToPlay.setBackground(clrScrollBackground);
         cmdHowToPlay.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent arg0) {
-                String text = ForgeProps.getLocalized(LANG.HowTo.MESSAGE);
+                String text = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
 
                 JTextArea area = new JTextArea(text, 25, 40);
                 area.setWrapStyleWord(true);
@@ -752,7 +752,7 @@ public class Gui_HomeScreen {
                 area.setOpaque(false);
 
                 JOptionPane.showMessageDialog(null, new JScrollPane(area),
-                        ForgeProps.getLocalized(LANG.HowTo.TITLE), JOptionPane.INFORMATION_MESSAGE);
+                        ForgeProps.getLocalized(Lang.HowTo.TITLE), JOptionPane.INFORMATION_MESSAGE);
             }
         });
         pnlUtilities.add(cmdHowToPlay);
@@ -940,8 +940,8 @@ public class Gui_HomeScreen {
             }
 
             String sDeckName = JOptionPane.showInputDialog(null,
-                    ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_MSG),
-                    ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
+                    ForgeProps.getLocalized(NewGameText.SAVE_SEALED_MSG),
+                    ForgeProps.getLocalized(NewGameText.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
             deck.setName(sDeckName);
             deck.setPlayerType(PlayerType.HUMAN);
 

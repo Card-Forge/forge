@@ -22,7 +22,7 @@ import forge.Player;
 import forge.gui.skin.FButton;
 import forge.gui.skin.FPanel;
 import forge.properties.ForgeProps;
-import forge.properties.NewConstants.LANG.WinLoseFrame.WINLOSETEXT;
+import forge.properties.NewConstants.Lang.WinLoseFrame.WinLoseText;
 import forge.quest.data.QuestMatchState;
 
 /**
@@ -171,14 +171,14 @@ public class WinLoseFrame extends JFrame {
         int humanWins = matchState.countGamesWonBy(human.getName());
         int humanLosses = matchState.getGamesPlayedCount() - humanWins;
 
-        lblStats.setText(ForgeProps.getLocalized(WINLOSETEXT.WON) + humanWins
-                + ForgeProps.getLocalized(WINLOSETEXT.LOST) + humanLosses);
+        lblStats.setText(ForgeProps.getLocalized(WinLoseText.WON) + humanWins
+                + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses);
 
         // Show "You Won" or "You Lost"
         if (matchState.hasWonLastGame(human.getName())) {
-            lblTitle.setText(ForgeProps.getLocalized(WINLOSETEXT.WIN));
+            lblTitle.setText(ForgeProps.getLocalized(WinLoseText.WIN));
         } else {
-            lblTitle.setText(ForgeProps.getLocalized(WINLOSETEXT.LOSE));
+            lblTitle.setText(ForgeProps.getLocalized(WinLoseText.LOSE));
         }
 
         // Populate custom panel, if necessary.

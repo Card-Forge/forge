@@ -18,7 +18,7 @@ import java.util.Vector;
 public class Preferences {
 
     /** The props. */
-    protected Properties props;
+    private Properties props;
 
     /**
      * <p>
@@ -26,7 +26,7 @@ public class Preferences {
      * </p>
      */
     public Preferences() {
-        props = new Properties();
+        this.props = new Properties();
     }
 
     /**
@@ -38,7 +38,7 @@ public class Preferences {
      *            a {@link forge.properties.Preferences} object.
      */
     public Preferences(final Preferences prefs) {
-        props = prefs.props;
+        this.props = prefs.props;
     }
 
     /**
@@ -50,8 +50,8 @@ public class Preferences {
      */
     public final synchronized Enumeration<String> keys() {
         @SuppressWarnings({ "unchecked", "rawtypes" })
-        Set<String> keysEnum = (Set) props.keySet();
-        Vector<String> keyList = new Vector<String>();
+        final Set<String> keysEnum = (Set) this.props.keySet();
+        final Vector<String> keyList = new Vector<String>();
         keyList.addAll(keysEnum);
         Collections.sort(keyList);
         return keyList.elements();
@@ -69,13 +69,13 @@ public class Preferences {
      * @return a int.
      */
     public final int getInt(final String name, final int defaultValue) {
-        String value = props.getProperty(name);
+        final String value = this.props.getProperty(name);
         if (value == null) {
             return defaultValue;
         }
         try {
             return Integer.parseInt(value);
-        } catch (NumberFormatException ex) {
+        } catch (final NumberFormatException ex) {
             return defaultValue;
         }
     }
@@ -92,7 +92,7 @@ public class Preferences {
      * @return a boolean.
      */
     public final boolean getBoolean(final String name, final boolean defaultValue) {
-        String value = props.getProperty(name);
+        final String value = this.props.getProperty(name);
         if (value == null) {
             return defaultValue;
         }
@@ -111,7 +111,7 @@ public class Preferences {
      * @return a long.
      */
     public final long getLong(final String name, final long defaultValue) {
-        String value = props.getProperty(name);
+        final String value = this.props.getProperty(name);
         if (value == null) {
             return defaultValue;
         }
@@ -129,7 +129,7 @@ public class Preferences {
      *            a {@link java.lang.Object} object.
      */
     public final void set(final String key, final Object value) {
-        props.setProperty(key, String.valueOf(value));
+        this.props.setProperty(key, String.valueOf(value));
     }
 
     /**
@@ -148,7 +148,7 @@ public class Preferences {
         if (value != null) {
             string = String.valueOf(value);
         }
-        return props.getProperty(key, string);
+        return this.props.getProperty(key, string);
     }
 
     /**
@@ -162,7 +162,7 @@ public class Preferences {
      *             Signals that an I/O exception has occurred.
      */
     public final void load(final FileInputStream stream) throws IOException {
-        props.load(stream);
+        this.props.load(stream);
     }
 
     /**
@@ -178,6 +178,6 @@ public class Preferences {
      *             Signals that an I/O exception has occurred.
      */
     public final void store(final FileOutputStream stream, final String comments) throws IOException {
-        props.store(stream, comments);
+        this.props.store(stream, comments);
     }
 }

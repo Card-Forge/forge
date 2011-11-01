@@ -17,7 +17,7 @@ import java.util.List;
 
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
-import forge.properties.NewConstants.LANG.Gui_DownloadPictures.ERRORS;
+import forge.properties.NewConstants.Lang.GuiDownloadPictures.Errors;
 
 /**
  * <p>
@@ -166,7 +166,7 @@ public final class FileUtil {
             out.flush();
             out.close();
         } catch (IOException ioex) {
-            ErrorViewer.showError(ioex, ForgeProps.getLocalized(ERRORS.OTHER), "deck_temp.html", url);
+            ErrorViewer.showError(ioex, ForgeProps.getLocalized(Errors.OTHER), "deck_temp.html", url);
         }
 
     }

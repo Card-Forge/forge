@@ -125,7 +125,7 @@ public interface NewConstants {
     /**
      * These properties are for a regular game.
      */
-    public static interface REGULAR {
+    public interface Regular {
         /** Property path for a common card. */
         String COMMON = "regular/common";
         /** Property path for an uncommon card. */
@@ -137,7 +137,7 @@ public interface NewConstants {
     /**
      * These properties are for a booster draft.
      */
-    public static interface DRAFT {
+    public interface Draft {
         /** Property path for a common card. */
         String COMMON = "draft/common";
         /** Property path for an uncommon card. */
@@ -149,7 +149,7 @@ public interface NewConstants {
     /**
      * These properties are for a quest game.
      */
-    public static interface QUEST {
+    public interface Quest {
         /** Property path for a common card. */
         String COMMON = "quest/common";
         /** Property path for an uncommon card. */
@@ -191,12 +191,12 @@ public interface NewConstants {
     /**
      * These are GUI-related properties.
      */
-    public static interface GUI {
+    public interface Gui {
 
         /**
          * The Interface GuiDisplay.
          */
-        public static interface GuiDisplay {
+        public interface GuiDisplay {
 
             /** The LAYOUT. */
             String LAYOUT = "gui/Display";
@@ -208,7 +208,7 @@ public interface NewConstants {
         /**
          * The Interface GuiDeckEditor.
          */
-        public static interface GuiDeckEditor {
+        public interface GuiDeckEditor {
 
             /** The LAYOUT. */
             String LAYOUT = "gui/DeckEditor";
@@ -219,7 +219,7 @@ public interface NewConstants {
     /**
      * These are localization properties.
      */
-    public static interface LANG {
+    public interface Lang {
 
         /** The PROGRA m_ name. */
         String PROGRAM_NAME = "%s/program/name";
@@ -230,7 +230,7 @@ public interface NewConstants {
         /**
          * The Interface HowTo.
          */
-        public static interface HowTo {
+        public interface HowTo {
 
             /** The TITLE. */
             String TITLE = "%s/HowTo/title";
@@ -242,7 +242,7 @@ public interface NewConstants {
         /**
          * The Interface ErrorViewer.
          */
-        public static interface ErrorViewer {
+        public interface ErrorViewer {
 
             /** The SHO w_ error. */
             String SHOW_ERROR = "%s/ErrorViewer/show";
@@ -265,7 +265,7 @@ public interface NewConstants {
             /**
              * The Interface ERRORS.
              */
-            public static interface ERRORS {
+            public interface ERRORS {
 
                 /** The SAV e_ message. */
                 String SAVE_MESSAGE = "%s/ErrorViewer/errors/save/message";
@@ -278,7 +278,7 @@ public interface NewConstants {
         /**
          * The Interface Gui_BoosterDraft.
          */
-        public static interface Gui_BoosterDraft {
+        public interface GuiBoosterDraft {
 
             /** The CLOS e_ message. */
             String CLOSE_MESSAGE = "%s/BoosterDraft/close/message";
@@ -305,17 +305,17 @@ public interface NewConstants {
         /**
          * The Interface GuiDisplay.
          */
-        public static interface GuiDisplay {
+        public interface GuiDisplay {
 
             /**
              * The Interface MENU_BAR.
              */
-            public static interface MENU_BAR {
+            public interface MenuBar {
 
                 /**
                  * The Interface MENU.
                  */
-                public static interface MENU {
+                public interface Menu {
 
                     /** The TITLE. */
                     String TITLE = "%s/Display/menu/title";
@@ -324,7 +324,7 @@ public interface NewConstants {
                 /**
                  * The Interface PHASE.
                  */
-                public static interface PHASE {
+                public interface PHASE {
 
                     /** The TITLE. */
                     String TITLE = "%s/Display/phase/title";
@@ -333,7 +333,7 @@ public interface NewConstants {
                 /**
                  * The Interface DEV.
                  */
-                public static interface DEV {
+                public interface DEV {
 
                     /** The TITLE. */
                     String TITLE = "%s/Display/dev/title";
@@ -349,7 +349,7 @@ public interface NewConstants {
             /**
              * The Interface HUMAN_HAND.
              */
-            public static interface HUMAN_HAND {
+            public interface HumanHand {
 
                 /** The TITLE. */
                 String TITLE = "%s/Display/human/hand/title";
@@ -358,7 +358,7 @@ public interface NewConstants {
             /**
              * The Interface HUMAN_LIBRARY.
              */
-            public static interface HUMAN_LIBRARY {
+            public interface HumanLibrary {
 
                 /** The BASE. */
                 String BASE = "%s/Display/human/library";
@@ -379,7 +379,7 @@ public interface NewConstants {
             /**
              * The Interface HUMAN_GRAVEYARD.
              */
-            public static interface HUMAN_GRAVEYARD {
+            public interface HumanGraveyard {
 
                 /** The TITLE. */
                 String TITLE = "%s/Display/human/graveyard/title";
@@ -397,7 +397,7 @@ public interface NewConstants {
             /**
              * The Interface HUMAN_REMOVED.
              */
-            public static interface HUMAN_REMOVED {
+            public interface HumanRemoved {
 
                 /** The TITLE. */
                 String TITLE = "%s/Display/human/removed/title";
@@ -418,7 +418,7 @@ public interface NewConstants {
             /**
              * The Interface HUMAN_FLASHBACK.
              */
-            public static interface HUMAN_FLASHBACK {
+            public interface HumanFlashback {
 
                 /** The TITLE. */
                 String TITLE = "%s/Display/human/flashback/title";
@@ -436,7 +436,7 @@ public interface NewConstants {
             /**
              * The Interface COMPUTER_HAND.
              */
-            public static interface COMPUTER_HAND {
+            public interface ComputerHand {
 
                 /** The BASE. */
                 String BASE = "%s/Display/computer/hand";
@@ -454,7 +454,7 @@ public interface NewConstants {
             /**
              * The Interface COMPUTER_LIBRARY.
              */
-            public static interface COMPUTER_LIBRARY {
+            public interface ComputerLibrary {
 
                 /** The BASE. */
                 String BASE = "%s/Display/computer/library";
@@ -475,7 +475,7 @@ public interface NewConstants {
             /**
              * The Interface COMPUTER_GRAVEYARD.
              */
-            public static interface COMPUTER_GRAVEYARD {
+            public interface ComputerGraveyard {
 
                 /** The TITLE. */
                 String TITLE = "%s/Display/computer/graveyard/title";
@@ -493,7 +493,7 @@ public interface NewConstants {
             /**
              * The Interface COMPUTER_REMOVED.
              */
-            public static interface COMPUTER_REMOVED {
+            public interface ComputerRemoved {
 
                 /** The TITLE. */
                 String TITLE = "%s/Display/computer/removed/title";
@@ -511,7 +511,7 @@ public interface NewConstants {
             /**
              * The Interface CONCEDE.
              */
-            public static interface CONCEDE {
+            public interface Concede {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/concede/button";
@@ -526,7 +526,7 @@ public interface NewConstants {
             /**
              * The Interface MANAGEN.
              */
-            public static interface MANAGEN {
+            public interface Managen {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/managen/button";
@@ -541,7 +541,7 @@ public interface NewConstants {
             /**
              * The Interface SETUPBATTLEFIELD.
              */
-            public static interface SETUPBATTLEFIELD {
+            public interface SetupBattlefield {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/setupbattlefield/button";
@@ -556,7 +556,7 @@ public interface NewConstants {
             /**
              * The Interface TUTOR.
              */
-            public static interface TUTOR {
+            public interface Tutor {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/tutor/button";
@@ -571,7 +571,7 @@ public interface NewConstants {
             /**
              * The Interface ADDCOUNTER.
              */
-            public static interface ADDCOUNTER {
+            public interface AddCounter {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/addcounter/button";
@@ -586,7 +586,7 @@ public interface NewConstants {
             /**
              * The Interface TAPPERM.
              */
-            public static interface TAPPERM {
+            public interface Tapperm {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/tapperm/button";
@@ -601,7 +601,7 @@ public interface NewConstants {
             /**
              * The Interface UNTAPPERM.
              */
-            public static interface UNTAPPERM {
+            public interface Untapperm {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/untapperm/button";
@@ -616,7 +616,7 @@ public interface NewConstants {
             /**
              * The Interface NOLANDLIMIT.
              */
-            public static interface NOLANDLIMIT {
+            public interface NoLandLimit {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/nolandlimit/button";
@@ -631,7 +631,7 @@ public interface NewConstants {
             /**
              * The Interface SETLIFE.
              */
-            public static interface SETLIFE {
+            public interface SetLife {
 
                 /** The BUTTON. */
                 String BUTTON = "%s/Display/setlife/button";
@@ -643,7 +643,7 @@ public interface NewConstants {
             /**
              * The Interface TRIGGER.
              */
-            public static interface TRIGGER {
+            public interface Trigger {
 
                 /** The ALWAYSACCEPT. */
                 String ALWAYSACCEPT = "%s/Display/alwaysaccept";
@@ -659,7 +659,7 @@ public interface NewConstants {
         /**
          * The Interface Gui_DownloadPictures.
          */
-        public static interface Gui_DownloadPictures {
+        public interface GuiDownloadPictures {
 
             /** The TITLE. */
             String TITLE = "%s/DownloadPictures/title";
@@ -694,7 +694,7 @@ public interface NewConstants {
             /**
              * The Interface BUTTONS.
              */
-            public static interface BUTTONS {
+            public interface Buttons {
 
                 /** The START. */
                 String START = "%s/DownloadPictures/button/start";
@@ -709,7 +709,7 @@ public interface NewConstants {
             /**
              * The Interface ERRORS.
              */
-            public static interface ERRORS {
+            public interface Errors {
 
                 /** The PROX y_ connect. */
                 String PROXY_CONNECT = "%s/DownloadPictures/errors/proxy/connect";
@@ -722,12 +722,12 @@ public interface NewConstants {
         /**
          * The Interface OldGuiNewGame.
          */
-        public static interface OldGuiNewGame {
+        public interface OldGuiNewGame {
 
             /**
              * The Interface NEW_GAME_TEXT.
              */
-            public static interface NEW_GAME_TEXT {
+            public interface NewGameText {
 
                 /** The GAMETYPE. */
                 String GAMETYPE = "%s/NewGame/gametype";
@@ -785,12 +785,12 @@ public interface NewConstants {
             /**
              * The Interface MENU_BAR.
              */
-            public static interface MENU_BAR {
+            public interface MenuBar {
 
                 /**
                  * The Interface MENU.
                  */
-                public static interface MENU {
+                public interface Menu {
 
                     /** The TITLE. */
                     String TITLE = "%s/NewGame/menu/title";
@@ -835,7 +835,7 @@ public interface NewConstants {
                 /**
                  * The Interface OPTIONS.
                  */
-                public static interface OPTIONS {
+                public interface Options {
 
                     /** The TITLE. */
                     String TITLE = "%s/NewGame/options/title";
@@ -852,7 +852,7 @@ public interface NewConstants {
                     /**
                      * The Interface GENERATE.
                      */
-                    public static interface GENERATE {
+                    public interface Generate {
 
                         /** The TITLE. */
                         String TITLE = "%s/NewGame/options/generate/title";
@@ -868,7 +868,7 @@ public interface NewConstants {
                 /**
                  * The Interface HELP.
                  */
-                public static interface HELP {
+                public interface Help {
 
                     /** The TITLE. */
                     String TITLE = "%s/NewGame/help/title";
@@ -879,19 +879,19 @@ public interface NewConstants {
             /**
              * The Interface ERRORS.
              */
-            public static interface ERRORS {
+            public interface Errors {
             }
         }
 
         /**
          * The Interface WinLoseFrame.
          */
-        public static interface WinLoseFrame {
+        public interface WinLoseFrame {
 
             /**
              * The Interface WINLOSETEXT.
              */
-            public static interface WINLOSETEXT {
+            public interface WinLoseText {
 
                 /** The WON. */
                 String WON = "%s/WinLose/won";
@@ -922,12 +922,12 @@ public interface NewConstants {
         /**
          * The Interface Gui_WinLose.
          */
-        public static interface Gui_WinLose {
+        public interface GuiWinLose {
 
             /**
              * The Interface WINLOSE_TEXT.
              */
-            public static interface WINLOSE_TEXT {
+            public interface WinLoseText {
 
                 /** The WON. */
                 String WON = "%s/WinLose/won";
@@ -955,12 +955,12 @@ public interface NewConstants {
         /**
          * The Interface Gui_DownloadPrices.
          */
-        public static interface Gui_DownloadPrices {
+        public interface GuiDownloadPrices {
 
             /**
              * The Interface DOWNLOADPRICES.
              */
-            public static interface DOWNLOADPRICES {
+            public interface DownloadPrices {
 
                 /** The TITLE. */
                 String TITLE = "%s/DownloadPrices/title";
@@ -979,12 +979,12 @@ public interface NewConstants {
         /**
          * The Interface GameAction.
          */
-        public static interface GameAction {
+        public interface GameAction {
 
             /**
              * The Interface GAMEACTION_TEXT.
              */
-            public static interface GAMEACTION_TEXT {
+            public interface GameActionText {
 
                 /** The HEADS. */
                 String HEADS = "%s/GameAction/heads";

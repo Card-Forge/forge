@@ -29,8 +29,8 @@ public class FGameState {
     /** The Constant AI_PLAYER_NAME. */
     public static final String AI_PLAYER_NAME = "Computer";
 
-    private Player humanPlayer = new HumanPlayer(HUMAN_PLAYER_NAME);
-    private Player computerPlayer = new AIPlayer(AI_PLAYER_NAME);
+    private Player humanPlayer = new HumanPlayer(FGameState.HUMAN_PLAYER_NAME);
+    private Player computerPlayer = new AIPlayer(FGameState.AI_PLAYER_NAME);
     private EndOfTurn endOfTurn = new EndOfTurn();
     private EndOfCombat endOfCombat = new EndOfCombat();
     private Upkeep upkeep = new Upkeep();
@@ -58,7 +58,7 @@ public class FGameState {
      * @return the humanPlayer
      */
     public final Player getHumanPlayer() {
-        return humanPlayer;
+        return this.humanPlayer;
     }
 
     /**
@@ -77,7 +77,7 @@ public class FGameState {
      * @return the computerPlayer
      */
     public final Player getComputerPlayer() {
-        return computerPlayer;
+        return this.computerPlayer;
     }
 
     /**
@@ -96,7 +96,7 @@ public class FGameState {
      * @return the players
      */
     public final Player[] getPlayers() {
-        return new Player[] {humanPlayer, computerPlayer};
+        return new Player[] { this.humanPlayer, this.computerPlayer };
     }
 
     /**
@@ -105,7 +105,7 @@ public class FGameState {
      * @return the endOfTurn
      */
     public final EndOfTurn getEndOfTurn() {
-        return endOfTurn;
+        return this.endOfTurn;
     }
 
     /**
@@ -124,7 +124,7 @@ public class FGameState {
      * @return the endOfCombat
      */
     public final EndOfCombat getEndOfCombat() {
-        return endOfCombat;
+        return this.endOfCombat;
     }
 
     /**
@@ -143,7 +143,7 @@ public class FGameState {
      * @return the upkeep
      */
     public final Upkeep getUpkeep() {
-        return upkeep;
+        return this.upkeep;
     }
 
     /**
@@ -162,7 +162,7 @@ public class FGameState {
      * @return the phase
      */
     public final Phase getPhase() {
-        return phase;
+        return this.phase;
     }
 
     /**
@@ -181,7 +181,7 @@ public class FGameState {
      * @return the stack
      */
     public final MagicStack getStack() {
-        return stack;
+        return this.stack;
     }
 
     /**
@@ -200,7 +200,7 @@ public class FGameState {
      * @return the gameAction
      */
     public final GameAction getGameAction() {
-        return gameAction;
+        return this.gameAction;
     }
 
     /**
@@ -219,7 +219,7 @@ public class FGameState {
      * @return the staticEffects
      */
     public final StaticEffects getStaticEffects() {
-        return staticEffects;
+        return this.staticEffects;
     }
 
     /**
@@ -238,7 +238,7 @@ public class FGameState {
      * @return the triggerHandler
      */
     public final TriggerHandler getTriggerHandler() {
-        return triggerHandler;
+        return this.triggerHandler;
     }
 
     /**
@@ -257,7 +257,7 @@ public class FGameState {
      * @return the combat
      */
     public final Combat getCombat() {
-        return combat;
+        return this.combat;
     }
 
     /**
@@ -276,7 +276,7 @@ public class FGameState {
      * @return the stackZone
      */
     public final PlayerZone getStackZone() {
-        return stackZone;
+        return this.stackZone;
     }
 
     /**
@@ -295,8 +295,8 @@ public class FGameState {
      * @return the next timestamp
      */
     public final long getNextTimestamp() {
-        setTimestamp(getTimestamp() + 1);
-        return getTimestamp();
+        this.setTimestamp(this.getTimestamp() + 1);
+        return this.getTimestamp();
     }
 
     /**
@@ -305,7 +305,7 @@ public class FGameState {
      * @return the timestamp
      */
     public final long getTimestamp() {
-        return timestamp;
+        return this.timestamp;
     }
 
     /**
@@ -324,29 +324,29 @@ public class FGameState {
      * @return the game info
      */
     public final GameSummary getGameInfo() {
-        return gameInfo;
+        return this.gameInfo;
     }
 
     /**
      * Call this each time you start a new game, ok?.
      */
     public final void newGameCleanup() {
-        gameInfo = new GameSummary(humanPlayer.getName(), computerPlayer.getName());
+        this.gameInfo = new GameSummary(this.humanPlayer.getName(), this.computerPlayer.getName());
 
-        getHumanPlayer().reset();
-        getComputerPlayer().reset();
+        this.getHumanPlayer().reset();
+        this.getComputerPlayer().reset();
 
-        getPhase().reset();
-        getStack().reset();
-        getCombat().reset();
+        this.getPhase().reset();
+        this.getStack().reset();
+        this.getCombat().reset();
 
-        for (Player p : getPlayers()) {
-            for (Zone z : Player.ALL_ZONES) {
+        for (final Player p : this.getPlayers()) {
+            for (final Zone z : Player.ALL_ZONES) {
                 p.getZone(z).reset();
             }
         }
 
-        getStaticEffects().reset();
+        this.getStaticEffects().reset();
     }
 
 }

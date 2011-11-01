@@ -31,7 +31,7 @@ public final class Main {
             final FModel model = new FModel(null);
             Singletons.setModel(model);
 
-            FSkin skin = new FSkin(model.preferences.skin);
+            FSkin skin = new FSkin(model.getPreferences().skin);
             final FView view = new ApplicationView(skin);
             Singletons.setView(view);
 

@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.Serializable;
 
 import forge.properties.ForgeProps;
-import forge.properties.NewConstants.QUEST;
+import forge.properties.NewConstants.Quest;
 
 /**
  * <p>
@@ -99,7 +99,7 @@ public class QuestPreferences implements Serializable {
      */
     public static void grabPrefsFromFile() {
         try {
-            BufferedReader input = new BufferedReader(new FileReader(ForgeProps.getFile(QUEST.PREFS)));
+            BufferedReader input = new BufferedReader(new FileReader(ForgeProps.getFile(Quest.PREFS)));
             String line = null;
             while ((line = input.readLine()) != null) {
                 if (line.startsWith("#") || line.length() == 0) {

@@ -31,7 +31,7 @@ public class FModel {
     private BuildInfo buildInfo;
 
     /** The preferences. */
-    public ForgePreferences preferences;
+    private ForgePreferences preferences;
     private FGameState gameState;
 
     /**
@@ -55,28 +55,28 @@ public class FModel {
         final File logFile = new File("forge.log");
         final boolean deleteSucceeded = logFile.delete();
 
-        if (logFile.exists() && !deleteSucceeded && logFile.length() != 0) {
+        if (logFile.exists() && !deleteSucceeded && (logFile.length() != 0)) {
             throw new IllegalStateException("Could not delete existing logFile:" + logFile.getAbsolutePath());
         }
 
-        logFileStream = new FileOutputStream(logFile);
+        this.logFileStream = new FileOutputStream(logFile);
 
-        oldSystemOut = System.out;
-        System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logFileStream), true));
-        oldSystemErr = System.err;
-        System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
+        this.oldSystemOut = System.out;
+        System.setOut(new PrintStream(new MultiplexOutputStream(System.out, this.logFileStream), true));
+        this.oldSystemErr = System.err;
+        System.setErr(new PrintStream(new MultiplexOutputStream(System.err, this.logFileStream), true));
 
         try {
-            setPreferences(new ForgePreferences("forge.preferences"));
-        } catch (Exception exn) {
+            this.setPreferences(new ForgePreferences("forge.preferences"));
+        } catch (final Exception exn) {
             throw new RuntimeException(exn); // NOPMD by Braids on 8/13/11 8:21
                                              // PM
         }
 
-        Constant.Runtime.MILL[0] = preferences.millingLossCondition;
-        Constant.Runtime.DEV_MODE[0] = preferences.developerMode;
-        Constant.Runtime.UPLOAD_DRAFT[0] = preferences.uploadDraftAI;
-        Constant.Runtime.RANDOM_FOIL[0] = preferences.randCFoil;
+        Constant.Runtime.MILL[0] = this.preferences.millingLossCondition;
+        Constant.Runtime.DEV_MODE[0] = this.preferences.developerMode;
+        Constant.Runtime.UPLOAD_DRAFT[0] = this.preferences.uploadDraftAI;
+        Constant.Runtime.RANDOM_FOIL[0] = this.preferences.randCFoil;
 
         final HttpUtil pinger = new HttpUtil();
         if (pinger.getURL("http://cardforge.org/draftAI/ping.php").equals("pong")) {
@@ -85,7 +85,7 @@ public class FModel {
             Constant.Runtime.UPLOAD_DRAFT[0] = false;
         }
 
-        setBuildInfo(new BuildInfo());
+        this.setBuildInfo(new BuildInfo());
     }
 
     /**
@@ -96,7 +96,7 @@ public class FModel {
      */
     @Override
     protected final void finalize() throws Throwable {
-        close();
+        this.close();
         super.finalize();
     }
 
@@ -105,11 +105,11 @@ public class FModel {
      * file.
      */
     public final void close() {
-        System.setOut(oldSystemOut);
-        System.setErr(oldSystemErr);
+        System.setOut(this.oldSystemOut);
+        System.setErr(this.oldSystemErr);
         try {
-            logFileStream.close();
-        } catch (IOException e) { // NOPMD by Braids on 8/12/11 10:25 AM
+            this.logFileStream.close();
+        } catch (final IOException e) { // NOPMD by Braids on 8/12/11 10:25 AM
             // ignored
         }
     }
@@ -120,7 +120,7 @@ public class FModel {
      * @return the buildInfo
      */
     public final BuildInfo getBuildInfo() {
-        return buildInfo;
+        return this.buildInfo;
     }
 
     /**
@@ -139,7 +139,7 @@ public class FModel {
      * @return the preferences
      */
     public final ForgePreferences getPreferences() {
-        return preferences;
+        return this.preferences;
     }
 
     /**
@@ -158,7 +158,7 @@ public class FModel {
      * @return the game state
      */
     public final FGameState getGameState() {
-        return gameState;
+        return this.gameState;
     }
 
     /**
@@ -167,8 +167,8 @@ public class FModel {
      * @return a fresh game state
      */
     public final FGameState resetGameState() {
-        gameState = new FGameState();
-        return gameState;
+        this.gameState = new FGameState();
+        return this.gameState;
     }
 
 }

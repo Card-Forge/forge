@@ -102,8 +102,8 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewConstants, NewConstants.GUI.GuiDisplay,
-        NewConstants.LANG.GuiDisplay {
+public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewConstants, NewConstants.Gui.GuiDisplay,
+        NewConstants.Lang.GuiDisplay {
     /** Constant <code>serialVersionUID=4519302185194841060L</code>. */
     private static final long serialVersionUID = 4519302185194841060L;
 
@@ -216,7 +216,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 computerGraveyardAction, computerRemovedAction, new JSeparator(), playsoundCheckboxForMenu,
                 new JSeparator(), ErrorViewer.ALL_THREADS_ACTION, concedeAction };
 
-        JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.MENU.TITLE));
+        JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MenuBar.Menu.TITLE));
         for (Object o : obj) {
             if (o instanceof ForgeAction) {
                 gameMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));
@@ -230,7 +230,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         }
 
         // Phase Menu Creation
-        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(MENU_BAR.PHASE.TITLE));
+        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(MenuBar.PHASE.TITLE));
 
         JMenuItem aiLabel = new JMenuItem("Computer");
         JMenuItem humanLabel = new JMenuItem("Human");
@@ -244,18 +244,18 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         }
 
         // Dev Mode Creation
-        JMenu devMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.DEV.TITLE));
+        JMenu devMenu = new JMenu(ForgeProps.getLocalized(MenuBar.DEV.TITLE));
 
         devMenu.setEnabled(Constant.Runtime.DEV_MODE[0]);
 
         if (Constant.Runtime.DEV_MODE[0]) {
             canLoseByDecking.setSelected(Constant.Runtime.MILL[0]);
 
-            Action viewAIHand = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Hand), COMPUTER_HAND.BASE);
+            Action viewAIHand = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Hand), ComputerHand.BASE);
             Action viewAILibrary = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Library),
-                    COMPUTER_LIBRARY.BASE);
+                    ComputerLibrary.BASE);
             Action viewHumanLibrary
-            = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Library), HUMAN_LIBRARY.BASE);
+            = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Library), HumanLibrary.BASE);
             ForgeAction generateMana = new ForgeAction(MANAGEN) {
                 private static final long serialVersionUID = 7171104690016706405L;
 
@@ -860,7 +860,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      */
     private void initComponents() {
         // Preparing the Frame
-        setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
+        setTitle(ForgeProps.getLocalized(Lang.PROGRAM_NAME));
         if (!Singletons.getModel().getPreferences().lafFonts) {
             setFont(new Font("Times New Roman", 0, 16));
         }
@@ -1185,7 +1185,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         // oppPCLabel.setHorizontalAlignment(SwingConstants.TOP);
         oppPCLabel.setForeground(greenColor);
 
-        JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_HAND.BUTTON), SwingConstants.TRAILING);
+        JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(ComputerHand.BUTTON), SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
             oppHandLabel.setFont(statFont);
         }
@@ -1279,12 +1279,12 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         playerPCLabel.setForeground(greenColor);
 
-        JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.BUTTON), SwingConstants.TRAILING);
+        JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HumanLibrary.BUTTON), SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
             playerLibraryLabel.setFont(statFont);
         }
 
-        JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HUMAN_HAND.TITLE), SwingConstants.TRAILING);
+        JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HumanHand.TITLE), SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().lafFonts) {
             playerHandLabel.setFont(statFont);
         }
@@ -1565,7 +1565,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private JLabel playerLifeLabel = new JLabel();
     private JLabel oppPCLabel = new JLabel();
     private JLabel playerPCLabel = new JLabel();
-    private JLabel oppLibraryLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_LIBRARY.BUTTON),
+    private JLabel oppLibraryLabel = new JLabel(ForgeProps.getLocalized(ComputerLibrary.BUTTON),
             SwingConstants.TRAILING);
     private JLabel oppHandValue = new JLabel();
     private JLabel oppLibraryValue = new JLabel();
@@ -1723,7 +1723,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         public TriggerReactionMenu() {
             super();
 
-            ForgeAction actAccept = new ForgeAction(LANG.GuiDisplay.TRIGGER.ALWAYSACCEPT) {
+            ForgeAction actAccept = new ForgeAction(Lang.GuiDisplay.Trigger.ALWAYSACCEPT) {
                 private static final long serialVersionUID = -3734674058185367612L;
 
                 @Override
@@ -1732,7 +1732,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 }
             };
 
-            ForgeAction actDecline = new ForgeAction(LANG.GuiDisplay.TRIGGER.ALWAYSDECLINE) {
+            ForgeAction actDecline = new ForgeAction(Lang.GuiDisplay.Trigger.ALWAYSDECLINE) {
                 private static final long serialVersionUID = -1983295769159971502L;
 
                 @Override
@@ -1741,7 +1741,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 }
             };
 
-            ForgeAction actAsk = new ForgeAction(LANG.GuiDisplay.TRIGGER.ALWAYSASK) {
+            ForgeAction actAsk = new ForgeAction(Lang.GuiDisplay.Trigger.ALWAYSASK) {
                 private static final long serialVersionUID = 5045255351332940821L;
 
                 @Override

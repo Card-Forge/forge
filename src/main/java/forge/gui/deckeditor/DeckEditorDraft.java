@@ -35,7 +35,7 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.properties.NewConstants.LANG.Gui_BoosterDraft;
+import forge.properties.NewConstants.Lang.GuiBoosterDraft;
 import forge.view.swing.Gui_HomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
@@ -47,7 +47,7 @@ import forge.view.swing.OldGuiNewGame;
  * @author Forge
  * @version $Id$
  */
-public class DeckEditorDraft extends DeckEditorBase implements NewConstants, NewConstants.LANG.Gui_BoosterDraft {
+public class DeckEditorDraft extends DeckEditorBase implements NewConstants, NewConstants.Lang.GuiBoosterDraft {
     /**
      * Constant <code>serialVersionUID=-6055633915602448260L</code>.
      */
@@ -116,7 +116,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
             @Override
             public void windowClosing(final WindowEvent ev) {
                 final int n = JOptionPane.showConfirmDialog(null,
-                        ForgeProps.getLocalized(Gui_BoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
+                        ForgeProps.getLocalized(GuiBoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     DeckEditorDraft.this.dispose();
 
@@ -317,8 +317,8 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
     private void saveDraft() {
         String s = "";
         while ((s == null) || (s.length() == 0)) {
-            s = JOptionPane.showInputDialog(null, ForgeProps.getLocalized(Gui_BoosterDraft.SAVE_DRAFT_MESSAGE),
-                    ForgeProps.getLocalized(Gui_BoosterDraft.SAVE_DRAFT_TITLE), JOptionPane.QUESTION_MESSAGE);
+            s = JOptionPane.showInputDialog(null, ForgeProps.getLocalized(GuiBoosterDraft.SAVE_DRAFT_MESSAGE),
+                    ForgeProps.getLocalized(GuiBoosterDraft.SAVE_DRAFT_TITLE), JOptionPane.QUESTION_MESSAGE);
         }
         // TODO: check if overwriting the same name, and let the user delete old
         // drafts

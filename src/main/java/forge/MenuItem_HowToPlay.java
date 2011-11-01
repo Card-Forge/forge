@@ -19,7 +19,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class MenuItem_HowToPlay extends JMenuItem implements NewConstants.LANG.HowTo {
+public class MenuItem_HowToPlay extends JMenuItem implements NewConstants.Lang.HowTo {
     /** Constant <code>serialVersionUID=5552000208438248428L</code>. */
     private static final long serialVersionUID = 5552000208438248428L;
 

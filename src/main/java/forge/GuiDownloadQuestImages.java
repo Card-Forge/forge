@@ -40,14 +40,14 @@ public class GuiDownloadQuestImages extends GuiDownloader {
      */
     protected final DownloadObject[] getNeededImages() {
         // read all card names and urls
-        DownloadObject[] questOpponents = readFile(QUEST.OPPONENT_ICONS, ForgeProps.getFile(QUEST.OPPONENT_DIR));
+        DownloadObject[] questOpponents = readFile(Quest.OPPONENT_ICONS, ForgeProps.getFile(Quest.OPPONENT_DIR));
         DownloadObject[] boosterImages = readFile(PICS_BOOSTER_IMAGES, ForgeProps.getFile(PICS_BOOSTER));
-        DownloadObject[] petIcons = readFileWithNames(QUEST.PET_SHOP_ICONS, ForgeProps.getFile(IMAGE_ICON));
-        DownloadObject[] questPets = readFileWithNames(QUEST.PET_TOKEN_IMAGES, ForgeProps.getFile(IMAGE_TOKEN));
+        DownloadObject[] petIcons = readFileWithNames(Quest.PET_SHOP_ICONS, ForgeProps.getFile(IMAGE_ICON));
+        DownloadObject[] questPets = readFileWithNames(Quest.PET_TOKEN_IMAGES, ForgeProps.getFile(IMAGE_TOKEN));
         ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
 
         File file;
-        File dir = ForgeProps.getFile(QUEST.OPPONENT_DIR);
+        File dir = ForgeProps.getFile(Quest.OPPONENT_DIR);
         for (int i = 0; i < questOpponents.length; i++) {
             file = new File(dir, questOpponents[i].getName().replace("%20", " "));
             if (!file.exists()) {

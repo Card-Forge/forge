@@ -34,7 +34,7 @@ import forge.properties.NewConstants;
  * @author Clemens Koza
  * @version V1.0 02.08.2009
  */
-public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer {
+public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer {
     /** Constant <code>NAME_OS="os.name"</code>. */
     private static final String NAME_OS = "os.name";
     /** Constant <code>VERSION_OS="os.version"</code>. */

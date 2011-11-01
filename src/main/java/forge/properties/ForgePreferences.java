@@ -67,10 +67,10 @@ public class ForgePreferences extends Preferences {
     public boolean deckGenRmvSmall;
 
     /** The Bugz name. */
-    public String BugzName;
+    public String bugzName;
 
     /** The Bugz pwd. */
-    public String BugzPwd;
+    public String bugzPwd;
 
     // Phases
     /** The b ai upkeep. */
@@ -103,7 +103,7 @@ public class ForgePreferences extends Preferences {
     /** The b human end combat. */
     public boolean bHumanEndCombat;
 
-    private List<SavePreferencesListener> saveListeners = new ArrayList<SavePreferencesListener>();
+    private final List<SavePreferencesListener> saveListeners = new ArrayList<SavePreferencesListener>();
     private final String fileName;
 
     /**
@@ -118,56 +118,56 @@ public class ForgePreferences extends Preferences {
      */
     public ForgePreferences(final String fileName) throws Exception {
         this.fileName = fileName;
-        File f = new File(fileName);
+        final File f = new File(fileName);
         if (!f.exists()) {
             f.createNewFile();
         }
         try {
-            FileInputStream stream = new FileInputStream(fileName);
-            load(stream);
+            final FileInputStream stream = new FileInputStream(fileName);
+            this.load(stream);
             stream.close();
-        } catch (FileNotFoundException ex) {
+        } catch (final FileNotFoundException ex) {
             throw new Exception("File not found: \"" + fileName + "\".", ex);
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             throw new Exception("Error reading \"" + fileName + "\".", ex);
         }
 
-        newGui = getBoolean("gui.new", true);
-        stackAiLand = getBoolean("AI.stack.land", false);
-        millingLossCondition = getBoolean("loss.condition.milling", true);
-        developerMode = getBoolean("developer.mode", false);
+        this.newGui = this.getBoolean("gui.new", true);
+        this.stackAiLand = this.getBoolean("AI.stack.land", false);
+        this.millingLossCondition = this.getBoolean("loss.condition.milling", true);
+        this.developerMode = this.getBoolean("developer.mode", false);
 
-        uploadDraftAI = getBoolean("upload.Draft.AI", true);
+        this.uploadDraftAI = this.getBoolean("upload.Draft.AI", true);
 
-        randCFoil = getBoolean("rand.C.Foil", true);
+        this.randCFoil = this.getBoolean("rand.C.Foil", true);
 
-        laf = get("gui.laf", "");
-        lafFonts = getBoolean("gui.laf.fonts", false);
-        skin = get("gui.skin", "default");
+        this.laf = this.get("gui.laf", "");
+        this.lafFonts = this.getBoolean("gui.laf.fonts", false);
+        this.skin = this.get("gui.skin", "default");
 
-        cardOverlay = getBoolean("card.overlay", true);
-        cardSize = CardSizeType.valueOf(get("card.images.size", "medium"));
-        stackOffset = StackOffsetType.valueOf(get("stack.offset", "tiny"));
-        maxStackSize = getInt("stack.max.size", 3);
-        scaleLargerThanOriginal = getBoolean("card.scale.larger.than.original", true);
+        this.cardOverlay = this.getBoolean("card.overlay", true);
+        this.cardSize = CardSizeType.valueOf(this.get("card.images.size", "medium"));
+        this.stackOffset = StackOffsetType.valueOf(this.get("stack.offset", "tiny"));
+        this.maxStackSize = this.getInt("stack.max.size", 3);
+        this.scaleLargerThanOriginal = this.getBoolean("card.scale.larger.than.original", true);
 
-        deckGenRmvArtifacts = getBoolean("deck.gen.rmv.artifacts", false);
-        deckGenRmvSmall = getBoolean("deck.gen.rmv.small", false);
+        this.deckGenRmvArtifacts = this.getBoolean("deck.gen.rmv.artifacts", false);
+        this.deckGenRmvSmall = this.getBoolean("deck.gen.rmv.small", false);
 
-        BugzName = get("bugz.user.name", "");
-        BugzPwd = get("bugz.user.pwd", "");
+        this.bugzName = this.get("bugz.user.name", "");
+        this.bugzPwd = this.get("bugz.user.pwd", "");
 
         // Stop at Phases
-        bAIUpkeep = getBoolean("phase.ai.upkeep", true);
-        bAIDraw = getBoolean("phase.ai.draw", true);
-        bAIEOT = getBoolean("phase.ai.eot", true);
-        bAIBeginCombat = getBoolean("phase.ai.beginCombat", true);
-        bAIEndCombat = getBoolean("phase.ai.endCombat", true);
-        bHumanUpkeep = getBoolean("phase.human.upkeep", true);
-        bHumanDraw = getBoolean("phase.human.draw", true);
-        bHumanEOT = getBoolean("phase.human.eot", true);
-        bHumanBeginCombat = getBoolean("phase.human.beginCombat", true);
-        bHumanEndCombat = getBoolean("phase.human.endCombat", true);
+        this.bAIUpkeep = this.getBoolean("phase.ai.upkeep", true);
+        this.bAIDraw = this.getBoolean("phase.ai.draw", true);
+        this.bAIEOT = this.getBoolean("phase.ai.eot", true);
+        this.bAIBeginCombat = this.getBoolean("phase.ai.beginCombat", true);
+        this.bAIEndCombat = this.getBoolean("phase.ai.endCombat", true);
+        this.bHumanUpkeep = this.getBoolean("phase.human.upkeep", true);
+        this.bHumanDraw = this.getBoolean("phase.human.draw", true);
+        this.bHumanEOT = this.getBoolean("phase.human.eot", true);
+        this.bHumanBeginCombat = this.getBoolean("phase.human.beginCombat", true);
+        this.bHumanEndCombat = this.getBoolean("phase.human.endCombat", true);
     }
 
     /**
@@ -180,51 +180,51 @@ public class ForgePreferences extends Preferences {
      */
     public final void save() throws Exception {
 
-        set("gui.new", newGui);
+        this.set("gui.new", this.newGui);
 
-        set("AI.stack.land", stackAiLand);
-        set("loss.condition.milling", millingLossCondition);
-        set("developer.mode", developerMode);
-        set("upload.Draft.AI", uploadDraftAI);
+        this.set("AI.stack.land", this.stackAiLand);
+        this.set("loss.condition.milling", this.millingLossCondition);
+        this.set("developer.mode", this.developerMode);
+        this.set("upload.Draft.AI", this.uploadDraftAI);
 
-        set("rand.C.Foil", randCFoil);
+        this.set("rand.C.Foil", this.randCFoil);
 
-        set("gui.skin", skin);
-        set("gui.laf", laf);
-        set("gui.laf.fonts", lafFonts);
+        this.set("gui.skin", this.skin);
+        this.set("gui.laf", this.laf);
+        this.set("gui.laf.fonts", this.lafFonts);
 
-        set("card.overlay", cardOverlay);
-        set("card.images.size", cardSize);
-        set("stack.offset", stackOffset);
-        set("stack.max.size", maxStackSize);
-        set("card.scale.larger.than.original", scaleLargerThanOriginal);
-        for (SavePreferencesListener listeners : saveListeners) {
+        this.set("card.overlay", this.cardOverlay);
+        this.set("card.images.size", this.cardSize);
+        this.set("stack.offset", this.stackOffset);
+        this.set("stack.max.size", this.maxStackSize);
+        this.set("card.scale.larger.than.original", this.scaleLargerThanOriginal);
+        for (final SavePreferencesListener listeners : this.saveListeners) {
             listeners.savePreferences();
         }
 
-        set("deck.gen.rmv.artifacts", deckGenRmvArtifacts);
-        set("deck.gen.rmv.small", deckGenRmvSmall);
+        this.set("deck.gen.rmv.artifacts", this.deckGenRmvArtifacts);
+        this.set("deck.gen.rmv.small", this.deckGenRmvSmall);
 
-        set("bugz.user.name", BugzName);
-        set("bugz.user.pwd", BugzPwd);
+        this.set("bugz.user.name", this.bugzName);
+        this.set("bugz.user.pwd", this.bugzPwd);
 
-        set("phase.ai.upkeep", bAIUpkeep);
-        set("phase.ai.draw", bAIDraw);
-        set("phase.ai.eot", bAIEOT);
-        set("phase.ai.beginCombat", bAIBeginCombat);
-        set("phase.ai.endCombat", bAIEndCombat);
-        set("phase.human.upkeep", bHumanUpkeep);
-        set("phase.human.draw", bHumanDraw);
-        set("phase.human.eot", bHumanEOT);
-        set("phase.human.beginCombat", bHumanBeginCombat);
-        set("phase.human.endCombat", bHumanEndCombat);
+        this.set("phase.ai.upkeep", this.bAIUpkeep);
+        this.set("phase.ai.draw", this.bAIDraw);
+        this.set("phase.ai.eot", this.bAIEOT);
+        this.set("phase.ai.beginCombat", this.bAIBeginCombat);
+        this.set("phase.ai.endCombat", this.bAIEndCombat);
+        this.set("phase.human.upkeep", this.bHumanUpkeep);
+        this.set("phase.human.draw", this.bHumanDraw);
+        this.set("phase.human.eot", this.bHumanEOT);
+        this.set("phase.human.beginCombat", this.bHumanBeginCombat);
+        this.set("phase.human.endCombat", this.bHumanEndCombat);
 
         try {
-            FileOutputStream stream = new FileOutputStream(fileName);
-            store(stream, "Forge");
+            final FileOutputStream stream = new FileOutputStream(this.fileName);
+            this.store(stream, "Forge");
             stream.close();
-        } catch (IOException ex) {
-            throw new Exception("Error saving \"" + fileName + "\".", ex);
+        } catch (final IOException ex) {
+            throw new Exception("Error saving \"" + this.fileName + "\".", ex);
         }
     }
 
@@ -237,7 +237,7 @@ public class ForgePreferences extends Preferences {
      *            a {@link forge.properties.SavePreferencesListener} object.
      */
     public final void addSaveListener(final SavePreferencesListener listener) {
-        saveListeners.add(listener);
+        this.saveListeners.add(listener);
     }
 
     /**
@@ -262,7 +262,7 @@ public class ForgePreferences extends Preferences {
     /**
      * The Enum StackOffsetType.
      */
-    static public enum StackOffsetType {
+    public static enum StackOffsetType {
 
         /** The tiny. */
         tiny,

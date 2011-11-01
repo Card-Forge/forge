@@ -57,7 +57,7 @@ public class BuildInfo {
      *            where to find the mock Forge jar
      */
     public BuildInfo(final String pathToMockJarFile) {
-        pathToForgeJar = pathToMockJarFile;
+        this.pathToForgeJar = pathToMockJarFile;
     }
 
     /**
@@ -71,7 +71,7 @@ public class BuildInfo {
         String[] manifestResultArray;
         String result = "0000";
 
-        String version = getVersion();
+        final String version = this.getVersion();
         manifestResultArray = version.split("r");
         manifestResult = manifestResultArray[manifestResultArray.length - 1];
 
@@ -119,14 +119,14 @@ public class BuildInfo {
         InputStream manifestStream = null;
 
         try {
-            if (pathToForgeJar == null) {
+            if (this.pathToForgeJar == null) {
                 // We're definitely not unit testing. Try to load from the
                 // currently running jar.
 
                 manifestStream = ClassLoader.getSystemResourceAsStream("META-INF/MANIFEST.MF");
                 final Manifest manifest = new Manifest(manifestStream);
 
-                result = getMainManifestAttribute(manifest, manifestAttrName);
+                result = this.getMainManifestAttribute(manifest, manifestAttrName);
             }
 
             /*
@@ -148,31 +148,33 @@ public class BuildInfo {
              * System.getProperty("java.class.path")); } } } }
              */
 
-            if (result == null && pathToForgeJar == null) {
+            if ((result == null) && (this.pathToForgeJar == null)) {
                 throw new FileNotFoundException(
                         "There is nothing matching forge-*-with-dependencies.jar in the class path.");
             }
 
             if (result == null) {
-                jar = new JarFile(pathToForgeJar);
+                jar = new JarFile(this.pathToForgeJar);
                 final Manifest manifest = jar.getManifest();
 
                 if (manifest == null) {
-                    throw new IOException("Forge jar at <<" + pathToForgeJar + ">> has no manifest.");
+                    throw new IOException("Forge jar at <<" + this.pathToForgeJar + ">> has no manifest.");
                 }
 
-                result = getMainManifestAttribute(manifest, manifestAttrName);
+                result = this.getMainManifestAttribute(manifest, manifestAttrName);
             }
         } finally {
             try {
                 manifestStream.close();
-            } catch (Throwable ignored) { // NOPMD by Braids on 8/12/11 10:21 AM
+            } catch (final Throwable ignored) { // NOPMD by Braids on 8/12/11
+                                                // 10:21 AM
                 // ignored
             }
 
             try {
                 jar.close();
-            } catch (Throwable ignored) { // NOPMD by Braids on 8/12/11 10:21 AM
+            } catch (final Throwable ignored) { // NOPMD by Braids on 8/12/11
+                                                // 10:21 AM
                 // ignored
             }
         }
@@ -203,7 +205,7 @@ public class BuildInfo {
      * @return a user-friendly string describing the version and build ID
      */
     public final String toPrettyString() {
-        final String rawVersion = getVersion();
+        final String rawVersion = this.getVersion();
         // final String rawBuildID = getBuildID();
 
         String version;

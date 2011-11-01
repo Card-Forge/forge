@@ -6,8 +6,6 @@ package forge.properties;
  * Created on 30.08.2009
  */
 
-import static java.lang.String.format;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -24,54 +22,57 @@ import forge.error.ErrorViewer;
  */
 public class ForgeProps {
     /** Constant <code>properties</code>. */
-    private static final TreeProperties properties;
+    private static final TreeProperties PROPERTIES;
 
     static {
         TreeProperties p;
         try {
             p = new TreeProperties("forge.properties");
             p.rethrow();
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ErrorViewer.showError(ex);
             p = null;
         }
-        properties = p;
+        PROPERTIES = p;
     }
 
     /**
      * Returns the tree properties of forge.
-     *
+     * 
      * @return a {@link tree.properties.TreeProperties} object.
      */
     public static TreeProperties getProperties() {
-        return properties;
+        return ForgeProps.PROPERTIES;
     }
 
     /**
      * Returns the string property value, or null if there's no such property.
-     *
-     * @param key a {@link java.lang.String} object.
+     * 
+     * @param key
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getProperty(final String key) {
-        return getProperty(key, null);
+        return ForgeProps.getProperty(key, null);
     }
 
     /**
      * Returns the string property value, or def if there's no such property.
-     *
-     * @param key a {@link java.lang.String} object.
-     * @param def a {@link java.lang.String} object.
+     * 
+     * @param key
+     *            a {@link java.lang.String} object.
+     * @param def
+     *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getProperty(final String key, final String def) {
         String result;
         try {
-            result = getProperties().getProperty(key);
+            result = ForgeProps.getProperties().getProperty(key);
             if (result == null) {
                 result = def;
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             result = def;
         }
         return result;
@@ -79,29 +80,32 @@ public class ForgeProps {
 
     /**
      * Returns the File property value, or null if there's no such property.
-     *
-     * @param key a {@link java.lang.String} object.
+     * 
+     * @param key
+     *            a {@link java.lang.String} object.
      * @return a {@link java.io.File} object.
      */
     public static File getFile(final String key) {
-        return getFile(key, null);
+        return ForgeProps.getFile(key, null);
     }
 
     /**
      * Returns the File property value, or def if there's no such property.
-     *
-     * @param key a {@link java.lang.String} object.
-     * @param def a {@link java.io.File} object.
+     * 
+     * @param key
+     *            a {@link java.lang.String} object.
+     * @param def
+     *            a {@link java.io.File} object.
      * @return a {@link java.io.File} object.
      */
     public static File getFile(final String key, final File def) {
         File result;
         try {
-            result = getProperties().getFile(key);
+            result = ForgeProps.getProperties().getFile(key);
             if (result == null) {
                 result = def;
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             result = def;
         }
         return result;
@@ -119,7 +123,7 @@ public class ForgeProps {
      * @return a {@link java.lang.String} object.
      */
     public static String getLocalized(final String key) {
-        return getLocalized(key, null);
+        return ForgeProps.getLocalized(key, null);
     }
 
     /**
@@ -140,15 +144,16 @@ public class ForgeProps {
         // the list of languages to look for, in the order to be used
         // the first is the configured language
         // the second is the default locale's language code
-        String[] languages = {getProperty(NewConstants.LANG.LANGUAGE), Locale.getDefault().getLanguage(), "en"};
+        final String[] languages = { ForgeProps.getProperty(NewConstants.Lang.LANGUAGE),
+                Locale.getDefault().getLanguage(), "en" };
         try {
-            for (String lang : languages) {
+            for (final String lang : languages) {
                 // could be if a property does not exist
                 // just skip it, and try the next
                 if (lang == null) {
                     continue;
                 }
-                String result = getProperty(format(key, lang));
+                final String result = ForgeProps.getProperty(String.format(key, lang));
                 if (result != null) {
                     return result;
                 }
@@ -156,7 +161,7 @@ public class ForgeProps {
             // exceptions are skipped here; also the error viewer uses this, and
             // reporting exceptions may result
             // in a more fatal error (stack overflow)
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
         }
         // if no property was found, or an error occurred, return the default
         // value

@@ -80,8 +80,8 @@ import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.StackOffsetType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.MENU;
-import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.OPTIONS;
+import forge.properties.NewConstants.Lang.OldGuiNewGame.MenuBar.Menu;
+import forge.properties.NewConstants.Lang.OldGuiNewGame.MenuBar.Options;
 import forge.quest.gui.QuestOptions;
 
 /*CHOPPIC*/
@@ -94,7 +94,7 @@ import forge.quest.gui.QuestOptions;
  * @author Forge
  * @version $Id$
  */
-public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.LANG.OldGuiNewGame {
+public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.Lang.OldGuiNewGame {
     /** Constant <code>serialVersionUID=-2437047615019135648L</code>. */
     private static final long serialVersionUID = -2437047615019135648L;
 
@@ -142,19 +142,19 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     // use these two variables
     /** Constant <code>removeSmallCreatures</code>. */
     public static JCheckBoxMenuItem removeSmallCreatures = new JCheckBoxMenuItem(
-            ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_SMALL));
+            ForgeProps.getLocalized(MenuBar.Options.Generate.REMOVE_SMALL));
 
     /** Constant <code>removeArtifacts</code>. */
     public static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
-            ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_ARTIFACTS));
+            ForgeProps.getLocalized(MenuBar.Options.Generate.REMOVE_ARTIFACTS));
     /** Constant <code>useLAFFonts</code>. */
-    public static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(ForgeProps.getLocalized(MENU_BAR.OPTIONS.FONT));
+    public static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(ForgeProps.getLocalized(MenuBar.Options.FONT));
     /** Constant <code>cardOverlay</code>. */
     public static JCheckBoxMenuItem cardOverlay = new JCheckBoxMenuItem(
-            ForgeProps.getLocalized(MENU_BAR.OPTIONS.CARD_OVERLAY));
+            ForgeProps.getLocalized(MenuBar.Options.CARD_OVERLAY));
     /** Constant <code>cardScale</code>. */
     public static JCheckBoxMenuItem cardScale = new JCheckBoxMenuItem(
-            ForgeProps.getLocalized(MENU_BAR.OPTIONS.CARD_SCALE));
+            ForgeProps.getLocalized(MenuBar.Options.CARD_SCALE));
     private JButton questButton = new JButton();
 
     private final Action LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
@@ -221,7 +221,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         this.setSize(550, 565);
         GuiUtils.centerFrame(this);
 
-        setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
+        setTitle(ForgeProps.getLocalized(Lang.PROGRAM_NAME));
         setupMenu();
         setVisible(true);
 
@@ -246,7 +246,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ,
                 DOWNLOAD_ACTION_QUEST, IMPORT_PICTURE, CARD_SIZES_ACTION, CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION,
                 BUGZ_REPORTER_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION, EXIT_ACTION };
-        JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
+        JMenu menu = new JMenu(ForgeProps.getLocalized(Menu.TITLE));
         for (Action a : actions) {
             menu.add(a);
             if (a.equals(LOOK_AND_FEEL_ACTION) || a.equals(IMPORT_PICTURE) || a.equals(CARD_STACK_OFFSET_ACTION)
@@ -258,7 +258,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         // useLAFFonts.setSelected(false);
 
         // new stuff
-        JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.TITLE));
+        JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(MenuBar.Options.Generate.TITLE));
 
         generatedDeck.add(removeSmallCreatures);
         removeSmallCreatures.addActionListener(new ActionListener() {
@@ -274,7 +274,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             }
         });
 
-        JMenu optionsMenu = new JMenu(ForgeProps.getLocalized(OPTIONS.TITLE));
+        JMenu optionsMenu = new JMenu(ForgeProps.getLocalized(Options.TITLE));
         optionsMenu.add(generatedDeck);
 
         optionsMenu.add(useLAFFonts);
@@ -288,7 +288,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             }
         });
 
-        JMenu helpMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.HELP.TITLE));
+        JMenu helpMenu = new JMenu(ForgeProps.getLocalized(MenuBar.Help.TITLE));
 
         Action[] helpActions = {HOW_TO_PLAY_ACTION};
         for (Action a : helpActions) {
@@ -396,8 +396,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             }
 
             String sDeckName = JOptionPane.showInputDialog(null,
-                    ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_MSG),
-                    ForgeProps.getLocalized(NEW_GAME_TEXT.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
+                    ForgeProps.getLocalized(NewGameText.SAVE_SEALED_MSG),
+                    ForgeProps.getLocalized(NewGameText.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
 
             deck.setName(sDeckName);
             deck.setPlayerType(PlayerType.HUMAN);
@@ -466,7 +466,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      */
     private void jbInit() throws Exception {
 
-        titleLabel.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GAME));
+        titleLabel.setText(ForgeProps.getLocalized(NewGameText.NEW_GAME));
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
 
         /* CHOPPIC */
@@ -482,10 +482,10 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
 
         /* jPanel2.setBorder(titledBorder1); */
-        setCustomBorder(jPanel2, ForgeProps.getLocalized(NEW_GAME_TEXT.GAMETYPE));
+        setCustomBorder(jPanel2, ForgeProps.getLocalized(NewGameText.GAMETYPE));
         jPanel2.setLayout(new MigLayout("align center"));
 
-        singleRadioButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.CONSTRUCTED_TEXT));
+        singleRadioButton.setText(ForgeProps.getLocalized(NewGameText.CONSTRUCTED_TEXT));
         singleRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 singleRadioButtonActionPerformed(e);
@@ -493,7 +493,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         });
 
         // sealedRadioButton.setToolTipText("");
-        sealedRadioButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.SEALED_TEXT));
+        sealedRadioButton.setText(ForgeProps.getLocalized(NewGameText.SEALED_TEXT));
         sealedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 sealedRadioButtonActionPerformed(e);
@@ -501,7 +501,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         });
 
         // draftRadioButton.setToolTipText("");
-        draftRadioButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.BOOSTER_TEXT));
+        draftRadioButton.setText(ForgeProps.getLocalized(NewGameText.BOOSTER_TEXT));
         draftRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 draftRadioButtonActionPerformed(e);
@@ -513,24 +513,24 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
 
         /* jPanel1.setBorder(titledBorder2); */
-        setCustomBorder(jPanel1, ForgeProps.getLocalized(NEW_GAME_TEXT.LIBRARY));
+        setCustomBorder(jPanel1, ForgeProps.getLocalized(NewGameText.LIBRARY));
         jPanel1.setLayout(new MigLayout("align center"));
 
-        jLabel2.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.YOURDECK));
-        jLabel3.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.OPPONENT));
+        jLabel2.setText(ForgeProps.getLocalized(NewGameText.YOURDECK));
+        jLabel3.setText(ForgeProps.getLocalized(NewGameText.OPPONENT));
 
         /*
          * Settings Panel
          */
 
         /* jPanel3.setBorder(titledBorder3); */
-        setCustomBorder(jPanel3, ForgeProps.getLocalized(NEW_GAME_TEXT.SETTINGS));
+        setCustomBorder(jPanel3, ForgeProps.getLocalized(NewGameText.SETTINGS));
         jPanel3.setLayout(new MigLayout("align center"));
 
         // newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
-        smoothLandCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.AI_LAND));
+        smoothLandCheckBox.setText(ForgeProps.getLocalized(NewGameText.AI_LAND));
 
-        devModeCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DEV_MODE));
+        devModeCheckBox.setText(ForgeProps.getLocalized(NewGameText.DEV_MODE));
         devModeCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 Constant.Runtime.DEV_MODE[0] = devModeCheckBox.isSelected();
@@ -564,7 +564,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
 
         deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 15));
-        deckEditorButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DECK_EDITOR));
+        deckEditorButton.setText(ForgeProps.getLocalized(NewGameText.DECK_EDITOR));
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 deckEditorButtonActionPerformed(GameType.Constructed, null);
@@ -573,7 +573,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         startButton.setFont(new java.awt.Font("Dialog", 0, 18));
         startButton.setHorizontalTextPosition(SwingConstants.LEADING);
-        startButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.START_GAME));
+        startButton.setText(ForgeProps.getLocalized(NewGameText.START_GAME));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 startButtonActionPerformed(e);
@@ -581,7 +581,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         });
 
         questButton.setFont(new java.awt.Font("Dialog", 0, 18));
-        questButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.QUEST_MODE));
+        questButton.setText(ForgeProps.getLocalized(NewGameText.QUEST_MODE));
 
         this.getContentPane().add(titleLabel, "align center, span 3, grow, wrap");
 
@@ -986,7 +986,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          *            the component
          */
         public LookAndFeelAction(final Component component) {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.LF));
+            super(ForgeProps.getLocalized(MenuBar.Menu.LF));
             this.c = component;
         }
 
@@ -1081,7 +1081,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new download price action.
          */
         public DownloadPriceAction() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADPRICE));
+            super(ForgeProps.getLocalized(MenuBar.Menu.DOWNLOADPRICE));
         }
 
         /*
@@ -1161,7 +1161,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new download action lq.
          */
         public DownloadActionLQ() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADLQ));
+            super(ForgeProps.getLocalized(MenuBar.Menu.DOWNLOADLQ));
         }
 
         /*
@@ -1191,7 +1191,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new download action set lq.
          */
         public DownloadActionSetLQ() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADSETLQ));
+            super(ForgeProps.getLocalized(MenuBar.Menu.DOWNLOADSETLQ));
         }
 
         /*
@@ -1221,7 +1221,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new download action quest.
          */
         public DownloadActionQuest() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADQUESTIMG));
+            super(ForgeProps.getLocalized(MenuBar.Menu.DOWNLOADQUESTIMG));
         }
 
         /*
@@ -1253,7 +1253,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new import picture action.
          */
         public ImportPictureAction() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.IMPORTPICTURE));
+            super(ForgeProps.getLocalized(MenuBar.Menu.IMPORTPICTURE));
         }
 
         /*
@@ -1287,7 +1287,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new card sizes action.
          */
         public CardSizesAction() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_SIZES));
+            super(ForgeProps.getLocalized(MenuBar.Menu.CARD_SIZES));
         }
 
         /*
@@ -1362,7 +1362,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new card stack action.
          */
         public CardStackAction() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK));
+            super(ForgeProps.getLocalized(MenuBar.Menu.CARD_STACK));
         }
 
         /*
@@ -1432,7 +1432,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new card stack offset action.
          */
         public CardStackOffsetAction() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK_OFFSET));
+            super(ForgeProps.getLocalized(MenuBar.Menu.CARD_STACK_OFFSET));
         }
 
         /*
@@ -1504,7 +1504,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new how to play action.
          */
         public HowToPlayAction() {
-            super(ForgeProps.getLocalized(LANG.HowTo.TITLE));
+            super(ForgeProps.getLocalized(Lang.HowTo.TITLE));
         }
 
         /*
@@ -1518,7 +1518,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * @param e ActionEvent
          */
         public final void actionPerformed(final ActionEvent e) {
-            String text = ForgeProps.getLocalized(LANG.HowTo.MESSAGE);
+            String text = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
 
             JTextArea area = new JTextArea(text, 25, 40);
             area.setWrapStyleWord(true);
@@ -1526,7 +1526,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             area.setEditable(false);
             area.setOpaque(false);
 
-            JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(LANG.HowTo.TITLE),
+            JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(Lang.HowTo.TITLE),
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -1544,7 +1544,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new about action.
          */
         public AboutAction() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.ABOUT));
+            super(ForgeProps.getLocalized(MenuBar.Menu.ABOUT));
         }
 
         /*
@@ -1593,7 +1593,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * Instantiates a new exit action.
          */
         public ExitAction() {
-            super(ForgeProps.getLocalized(MENU_BAR.MENU.EXIT));
+            super(ForgeProps.getLocalized(MenuBar.Menu.EXIT));
         }
 
         /*
