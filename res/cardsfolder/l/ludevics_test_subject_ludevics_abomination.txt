@@ -5,8 +5,8 @@ Text:no text
 PT:0/3
 K:Defender
 A:AB$PutCounter | Cost$ 1 U | Defined$ Self | CounterType$ HATCHLING | CounterNum$ 1 | SubAbility$ DBTransform | SpellDescription$ Put a hatchling counter on CARDNAME. Then if there are five or more hatchling counters on it, remove all of them and transform it.
-SVar:DBRemCounter:DB$ RemoveCounter | CounterType$ HATCHLING | CounterNum$ All | CheckSVar$ X
-SVar:DBTransform:DB$ChangeState | Defined$ Self | CheckSVar$ X | SubAbility$ DBRemCounter
+SVar:DBRemCounter:DB$ RemoveCounter | CounterType$ HATCHLING | CounterNum$ All | ConditionCheckSVar$ X
+SVar:DBTransform:DB$ChangeState | Defined$ Self | ConditionCheckSVar$ X | SubAbility$ DBRemCounter
 SVar:X:Count$Valid Card.Self+counters_GE5_HATCHLING
 SVar:All:Count$CardCounters.HATCHLING
 SVar:Rarity:Rare
