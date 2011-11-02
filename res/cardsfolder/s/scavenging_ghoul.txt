@@ -6,7 +6,7 @@ PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a corpse counter on CARDNAME for each creature put into a graveyard from the battlefield this turn.
 A:AB$ Regenerate | Cost$ SubCounter<1/CORPSE> | SpellDescription$ Regenerate CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CORPSE | CounterNum$ X
-SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenging_ghoul.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/35.jpg

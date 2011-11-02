@@ -4,7 +4,7 @@ Types:Creature Zubera Spirit
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target opponent discards a card for each Zubera put into a graveyard from the battlefield this turn.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ X | Mode$ TgtChoose
-SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Card.Zubera
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80509.jpg

@@ -3194,7 +3194,7 @@ public class CardFactoryUtil {
         // or
         // Count$ThisTurnEntered <ZoneDestination> <Valid>
         if (sq[0].contains("ThisTurnEntered")) {
-            final String[] workingCopy = l[0].split(" ");
+            final String[] workingCopy = l[0].split("_");
             Zone destination, origin;
             String validFilter;
 
@@ -3216,7 +3216,7 @@ public class CardFactoryUtil {
         // Count$LastTurnCast <Valid>
         if (sq[0].contains("ThisTurnCast") || sq[0].contains("LastTurnCast")) {
 
-            final String[] workingCopy = l[0].split(" ");
+            final String[] workingCopy = l[0].split("_");
             final String validFilter = workingCopy[1];
 
             CardList res;
@@ -3478,6 +3478,19 @@ public class CardFactoryUtil {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("LimitMax")) {
+            if (num < secondaryNum) {
+                return num;
+            } else {
+                return secondaryNum;
+            }
+        } else if (s[0].contains("LimitMin")) {
+            if(num > secondaryNum) {
+                return num;
+            } else {
+                return secondaryNum;
+            }
+            
         } else {
             return num;
         }

@@ -4,7 +4,7 @@ Types:Instant Trap
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ 2 B B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ Exile all cards from target player's graveyard.
 A:SP$ ChangeZoneAll | Cost$ 0 | CheckSVar$ CardsToGraveyard | SVarCompare$ GE3 |Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay 0 rather than pay CARDNAME's mana cost.
-SVar:CardsToGraveyard:Count$ThisTurnEntered Graveyard Card.YouDontCtrl
+SVar:CardsToGraveyard:Count$ThisTurnEntered_Graveyard_Card.YouDontCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_trap.jpg

@@ -4,7 +4,7 @@ Types:Creature Zubera Spirit
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, it deals damage to target creature or player equal to the number of Zubera put into all graveyards from the battlefield this turn.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X
-SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Card.Zubera
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80508.jpg

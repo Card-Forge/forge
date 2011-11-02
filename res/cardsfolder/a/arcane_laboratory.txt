@@ -4,8 +4,8 @@ Types:Enchantment
 Text:no text
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | CheckSVar$ X | Description$ Each player can't cast more than one spell each turn.
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | CheckSVar$ Y
-SVar:X:Count$ThisTurnCast Card.YouCtrl
-SVar:Y:Count$ThisTurnCast Card.YouDontCtrl
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+SVar:Y:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_laboratory.jpg

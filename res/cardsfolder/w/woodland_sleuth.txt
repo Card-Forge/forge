@@ -5,7 +5,7 @@ Text:no text
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | CheckSVar$ Morbid | SVarCompare$ GE1 | TriggerDescription$ Morbid - When CARDNAME enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | ChangeType$ Creature.YouCtrl | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True
-SVar:Morbid:Count$ThisTurnEntered Graveyard from Battlefield Creature
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_sleuth.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/210.jpg

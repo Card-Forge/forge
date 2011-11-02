@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Flying
 S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ Hand | CheckSVar$ X | SVarCompare$ LE0 | Description$ Cast CARDNAME only if you've cast another spell this turn.
-SVar:X:Count$ThisTurnCast Card.YouCtrl
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_condor.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/88.jpg

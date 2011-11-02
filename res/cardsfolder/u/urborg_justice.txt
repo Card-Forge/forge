@@ -3,7 +3,7 @@ ManaCost:B B
 Types:Instant
 Text:no text
 A:SP$Sacrifice | Cost$ B B | ValidTgts$ Opponent | Amount$ X | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
-SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature.YouCtrl
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_justice.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/26.jpg

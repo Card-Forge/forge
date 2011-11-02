@@ -5,7 +5,7 @@ Text:no text
 PT:4/3
 K:Trample
 S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ Hand | CheckSVar$ X | SVarCompare$ EQ0 | Description$ Cast CARDNAME only if you've cast another green spell this turn.
-SVar:X:Count$ThisTurnCast Card.Green+Other+YouCtrl
+SVar:X:Count$ThisTurnCast_Card.Green+Other+YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talaras_battalion.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/77.jpg
