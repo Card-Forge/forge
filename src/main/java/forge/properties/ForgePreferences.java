@@ -146,7 +146,7 @@ public class ForgePreferences extends Preferences {
         this.setSkin(this.get("gui.skin", "default"));
 
         this.setCardOverlay(this.getBoolean("card.overlay", true));
-        this.setCardSize(CardSizeType.valueOf(this.get("card.images.size", "medium")));
+        this.setCardSize(CardSizeType.valueOf(this.get("card.images.size", "small")));
         this.setStackOffset(StackOffsetType.valueOf(this.get("stack.offset", "tiny")));
         this.setMaxStackSize(this.getInt("stack.max.size", 3));
         this.setScaleLargerThanOriginal(this.getBoolean("card.scale.larger.than.original", true));
