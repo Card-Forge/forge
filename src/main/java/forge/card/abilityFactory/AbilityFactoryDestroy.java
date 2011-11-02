@@ -18,8 +18,8 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -48,7 +48,7 @@ public class AbilityFactoryDestroy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDestroy(final AbilityFactory af) {
-        final SpellAbility abDestroy = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDestroy = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -4153613567150919283L;
 
             @Override
@@ -114,10 +114,10 @@ public class AbilityFactoryDestroy {
      * 
      * @param af
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.Ability_Sub} object.
+     * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    public static Ability_Sub createDrawbackDestroy(final AbilityFactory af) {
-        final Ability_Sub dbDestroy = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+    public static AbilitySub createDrawbackDestroy(final AbilityFactory af) {
+        final AbilitySub dbDestroy = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4153613567150919283L;
 
             @Override
@@ -256,7 +256,7 @@ public class AbilityFactoryDestroy {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -370,7 +370,7 @@ public class AbilityFactoryDestroy {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             return subAb.doTrigger(mandatory);
         }
@@ -409,7 +409,7 @@ public class AbilityFactoryDestroy {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(host).append(" - ");
@@ -452,7 +452,7 @@ public class AbilityFactoryDestroy {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -529,7 +529,7 @@ public class AbilityFactoryDestroy {
      */
     public static SpellAbility createAbilityDestroyAll(final AbilityFactory af) {
 
-        final SpellAbility abDestroyAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDestroyAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1376444173137861437L;
 
             private final HashMap<String, String> params = af.getMapParams();
@@ -608,7 +608,7 @@ public class AbilityFactoryDestroy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDestroyAll(final AbilityFactory af) {
-        final SpellAbility dbDestroyAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDestroyAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -242160421677518351L;
 
             private final HashMap<String, String> params = af.getMapParams();
@@ -684,7 +684,7 @@ public class AbilityFactoryDestroy {
             sb.append(" They can't be regenerated");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -773,7 +773,7 @@ public class AbilityFactoryDestroy {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }

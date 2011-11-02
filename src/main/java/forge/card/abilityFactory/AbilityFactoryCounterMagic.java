@@ -10,13 +10,13 @@ import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbility_StackInstance;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
-import forge.card.spellability.Target_Selection;
+import forge.card.spellability.TargetSelection;
 
 //Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
 // -Graveyard (Default)
@@ -77,7 +77,7 @@ public class AbilityFactoryCounterMagic {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityCounter(final AbilityFactory abilityFactory) {
-        final SpellAbility abCounter = new Ability_Activated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+        final SpellAbility abCounter = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -3895990436431818899L;
 
@@ -153,7 +153,7 @@ public class AbilityFactoryCounterMagic {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackCounter(final AbilityFactory abilityFactory) {
-        final SpellAbility dbCounter = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        final SpellAbility dbCounter = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -4272851734871573693L;
 
             @Override
@@ -226,7 +226,7 @@ public class AbilityFactoryCounterMagic {
             }
 
             tgt.resetTargets();
-            if (Target_Selection.matchSpellAbility(sa, topSA, tgt)) {
+            if (TargetSelection.matchSpellAbility(sa, topSA, tgt)) {
                 tgt.addTarget(topSA);
             } else {
                 return false;
@@ -269,7 +269,7 @@ public class AbilityFactoryCounterMagic {
 
         // But really it should be more picky about how it counters things
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             toReturn &= subAb.chkAIDrawback();
         }
@@ -304,7 +304,7 @@ public class AbilityFactoryCounterMagic {
             }
 
             tgt.resetTargets();
-            if (Target_Selection.matchSpellAbility(sa, topSA, tgt)) {
+            if (TargetSelection.matchSpellAbility(sa, topSA, tgt)) {
                 tgt.addTarget(topSA);
             } else {
                 return false;
@@ -348,7 +348,7 @@ public class AbilityFactoryCounterMagic {
 
         // But really it should be more picky about how it counters things
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             toReturn &= subAb.chkAIDrawback();
         }
@@ -392,7 +392,7 @@ public class AbilityFactoryCounterMagic {
                 continue;
             }
 
-            final SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
@@ -427,7 +427,7 @@ public class AbilityFactoryCounterMagic {
 
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -460,7 +460,7 @@ public class AbilityFactoryCounterMagic {
 
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -478,10 +478,10 @@ public class AbilityFactoryCounterMagic {
      * @param srcSA
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param si
-     *            a {@link forge.card.spellability.SpellAbility_StackInstance}
+     *            a {@link forge.card.spellability.SpellAbilityStackInstance}
      *            object.
      */
-    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbility_StackInstance si) {
+    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         AllZone.getStack().remove(si);
 
         if (tgtSA.isAbility()) {

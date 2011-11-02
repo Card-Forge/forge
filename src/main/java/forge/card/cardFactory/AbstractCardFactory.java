@@ -32,19 +32,19 @@ import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Static;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityStatic;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.gui.input.Input;
-import forge.gui.input.Input_PayManaCost;
+import forge.gui.input.InputPayManaCost;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
@@ -484,7 +484,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         // this is so permanents like creatures and artifacts have a "default"
         // spell
         if (card.isPermanent() && !card.isLand() && !card.isAura()) {
-            card.addSpellAbility(new Spell_Permanent(card));
+            card.addSpellAbility(new SpellPermanent(card));
         }
 
         CardFactoryUtil.parseKeywords(card, cardName);
@@ -515,25 +515,25 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         // ************** Link to different CardFactories *******************
         Card card2 = null;
         if (card.isCreature()) {
-            card2 = CardFactory_Creatures.getCard(card, cardName, this);
+            card2 = CardFactoryCreatures.getCard(card, cardName, this);
         } else if (card.isAura()) {
-            card2 = CardFactory_Auras.getCard(card, cardName);
+            card2 = CardFactoryAuras.getCard(card, cardName);
         } else if (card.isEquipment()) {
-            card2 = CardFactory_Equipment.getCard(card, cardName);
+            card2 = CardFactoryEquipment.getCard(card, cardName);
         } else if (card.isPlaneswalker()) {
-            card2 = CardFactory_Planeswalkers.getCard(card, cardName);
+            card2 = CardFactoryPlaneswalkers.getCard(card, cardName);
         } else if (card.isLand()) {
-            card2 = CardFactory_Lands.getCard(card, cardName, this);
+            card2 = CardFactoryLands.getCard(card, cardName, this);
         } else if (card.isInstant()) {
-            card2 = CardFactory_Instants.getCard(card, cardName);
+            card2 = CardFactoryInstants.getCard(card, cardName);
         } else if (card.isSorcery()) {
-            card2 = CardFactory_Sorceries.getCard(card, cardName);
+            card2 = CardFactorySorceries.getCard(card, cardName);
         }
 
         if (card2 != null) {
             return CardFactoryUtil.postFactoryKeywords(card2);
         } else if (cardName.equals("Bridge from Below")) {
-            final SpellAbility spell = new Spell_Permanent(card) {
+            final SpellAbility spell = new SpellPermanent(card) {
                 private static final long serialVersionUID = 7254358703158629514L;
 
                 @Override
@@ -601,7 +601,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                     // card.setChosenType(input[0]);
 
                     final Cost a1Cost = new Cost("3 T", cardName, true);
-                    final Ability_Activated a1 = new Ability_Activated(card, a1Cost, null) {
+                    final AbilityActivated a1 = new AbilityActivated(card, a1Cost, null) {
 
                         private static final long serialVersionUID = -2114111483117171609L;
 
@@ -785,7 +785,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             final Cost dungeonCost = new Cost("Discard<1/Card>", cardName, true);
             final Target dungeonTgt = new Target(card, card + " - Select target player", "Player".split(","));
 
-            final SpellAbility dungeon = new Ability_Activated(card, dungeonCost, dungeonTgt) {
+            final SpellAbility dungeon = new AbilityActivated(card, dungeonCost, dungeonTgt) {
                 private static final long serialVersionUID = 334033015590321821L;
 
                 @Override
@@ -822,7 +822,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             }; // SpellAbility dungeon
 
             final Cost bailCost = new Cost("PayLife<5>", cardName, true);
-            final SpellAbility bail = new Ability_Activated(card, bailCost, null) {
+            final SpellAbility bail = new AbilityActivated(card, bailCost, null) {
                 private static final long serialVersionUID = -8990402917139817175L;
 
                 @Override
@@ -915,7 +915,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
                 }
             };
-            final SpellAbility spell = new Spell_Permanent(card) {
+            final SpellAbility spell = new SpellPermanent(card) {
                 private static final long serialVersionUID = -1818766848857998431L;
 
                 // could never get the AI to work correctly
@@ -950,7 +950,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             // Keywords.
             card.clearFirstSpell();
 
-            card.addSpellAbility(new Spell_Permanent(card) {
+            card.addSpellAbility(new SpellPermanent(card) {
                 private static final long serialVersionUID = 6912683989507840172L;
 
                 @Override
@@ -970,7 +970,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         // *************** START *********** START **************************
         else if (cardName.equals("Goblin Charbelcher")) {
             final Cost abCost = new Cost("3 T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card, "TgtCP")) {
+            final AbilityActivated ability = new AbilityActivated(card, abCost, new Target(card, "TgtCP")) {
                 private static final long serialVersionUID = -840041589720758423L;
 
                 @Override
@@ -1039,7 +1039,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             final Cost abCost = new Cost("1 T Sac<1/CARDNAME>", cardName, true);
             final Target target = new Target(card, "Select target player", new String[] { "Player" });
-            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
+            final AbilityActivated ability = new AbilityActivated(card, abCost, target) {
                 private static final long serialVersionUID = -6711849408085138636L;
 
                 @Override
@@ -1118,7 +1118,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         else if (cardName.equals("Grindstone")) {
             final Target target = new Target(card, "Select target player", new String[] { "Player" });
             final Cost abCost = new Cost("3 T", cardName, true);
-            final Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
+            final AbilityActivated ab1 = new AbilityActivated(card, abCost, target) {
                 private static final long serialVersionUID = -6281219446216L;
 
                 @Override
@@ -1187,7 +1187,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             final Cost cost = new Cost("3", card.getName(), true);
 
-            final SpellAbility ability = new Ability_Activated(card, cost, target) {
+            final SpellAbility ability = new AbilityActivated(card, cost, target) {
                 private static final long serialVersionUID = 8941566961041310961L;
 
                 @Override
@@ -1227,7 +1227,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
         // *************** START *********** START **************************
         else if (cardName.equals("Pithing Needle")) {
-            final SpellAbility ability = new Ability_Static(card, "0") {
+            final SpellAbility ability = new AbilityStatic(card, "0") {
                 @Override
                 public void resolve() {
                     String cardName = "";
@@ -1312,7 +1312,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
         // *************** START *********** START **************************
         else if (cardName.equals("Scroll Rack")) {
             final Cost abCost = new Cost("1 T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
+            final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
                 private static final long serialVersionUID = -5588587187720068547L;
 
                 @Override
@@ -1399,7 +1399,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
              * creature or player.
              */
             final Cost abCost = new Cost("3 T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card, "TgtCP")) {
+            final AbilityActivated ability = new AbilityActivated(card, abCost, new Target(card, "TgtCP")) {
                 private static final long serialVersionUID = 7550743617522146304L;
 
                 @Override
@@ -1506,7 +1506,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             freeCast.setStackDescription(cardName + " - play card without paying its mana cost.");
 
             final Cost abCost = new Cost("5 T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
+            final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
                 private static final long serialVersionUID = -7328518969488588777L;
 
                 @Override
@@ -1615,7 +1615,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             final Target t2 = new Target(card, "Select target creature an opponent controls",
                     "Creature.YouDontCtrl".split(","));
-            final Ability_Sub sub = new Ability_Sub(card, t2) {
+            final AbilitySub sub = new AbilitySub(card, t2) {
                 private static final long serialVersionUID = -572849470457911366L;
 
                 @Override
@@ -1645,7 +1645,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
             final Cost abCost = new Cost("2 Sac<1/CARDNAME>", cardName, true);
             final Target t1 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
-            final Ability_Activated ability = new Ability_Activated(card, abCost, t1) {
+            final AbilityActivated ability = new AbilityActivated(card, abCost, t1) {
                 private static final long serialVersionUID = 2312243293988795896L;
 
                 @Override
@@ -1744,7 +1744,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
                 public void selectCard(final Card c, final PlayerZone z) {
                     if (z.is(Constant.Zone.Battlefield) && c.isArtifact()) {
                         copyTarget[0] = c;
-                        this.stopSetNext(new Input_PayManaCost(copy));
+                        this.stopSetNext(new InputPayManaCost(copy));
                     }
                 }
             };

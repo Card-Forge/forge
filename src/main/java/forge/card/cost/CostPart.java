@@ -174,7 +174,7 @@ public abstract class CostPart {
      *            the payment
      * @return true, if successful
      */
-    public abstract boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment);
+    public abstract boolean decideAIPayment(SpellAbility ability, Card source, CostPayment payment);
 
     /**
      * Pay ai.
@@ -186,7 +186,7 @@ public abstract class CostPart {
      * @param payment
      *            the payment
      */
-    public abstract void payAI(SpellAbility ability, Card source, Cost_Payment payment);
+    public abstract void payAI(SpellAbility ability, Card source, CostPayment payment);
 
     /**
      * Pay human.
@@ -199,7 +199,7 @@ public abstract class CostPart {
      *            the payment
      * @return true, if successful
      */
-    public abstract boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment);
+    public abstract boolean payHuman(SpellAbility ability, Card source, CostPayment payment);
 
     /*
      * (non-Javadoc)

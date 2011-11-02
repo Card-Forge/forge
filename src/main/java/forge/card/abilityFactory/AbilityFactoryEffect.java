@@ -12,8 +12,8 @@ import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.Player;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -40,7 +40,7 @@ public class AbilityFactoryEffect {
      */
     public static SpellAbility createAbilityEffect(final AbilityFactory abilityFactory) {
 
-        final SpellAbility abEffect = new Ability_Activated(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
+        final SpellAbility abEffect = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
 
             private final AbilityFactory af = abilityFactory;
@@ -117,7 +117,7 @@ public class AbilityFactoryEffect {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackEffect(final AbilityFactory abilityFactory) {
-        final SpellAbility dbEffect = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        final SpellAbility dbEffect = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -167,7 +167,7 @@ public class AbilityFactoryEffect {
     public static String effectStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -175,7 +175,7 @@ public class AbilityFactoryEffect {
 
         sb.append(sa.getDescription());
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -247,7 +247,7 @@ public class AbilityFactoryEffect {
         // TODO: Add targeting effects
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }

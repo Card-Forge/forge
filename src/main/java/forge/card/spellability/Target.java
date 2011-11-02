@@ -26,16 +26,16 @@ public class Target {
     // Target Choices (which is specific for the StackInstance)
     private Card srcCard;
     private boolean uniqueTargets = false;
-    private Target_Choices choice = null;
+    private TargetChoices choice = null;
 
     /**
      * <p>
      * getTargetChoices.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.Target_Choices} object.
+     * @return a {@link forge.card.spellability.TargetChoices} object.
      */
-    public final Target_Choices getTargetChoices() {
+    public final TargetChoices getTargetChoices() {
         return this.choice;
     }
 
@@ -45,9 +45,9 @@ public class Target {
      * </p>
      * 
      * @param tc
-     *            a {@link forge.card.spellability.Target_Choices} object.
+     *            a {@link forge.card.spellability.TargetChoices} object.
      */
-    public final void setTargetChoices(final Target_Choices tc) {
+    public final void setTargetChoices(final TargetChoices tc) {
         this.choice = tc;
     }
 
@@ -279,7 +279,7 @@ public class Target {
      */
     public final boolean addTarget(final Object o) {
         if (this.choice == null) {
-            this.choice = new Target_Choices();
+            this.choice = new TargetChoices();
         }
 
         if (o instanceof Card) {

@@ -12,10 +12,10 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.cost.Cost_Payment;
+import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
@@ -120,7 +120,7 @@ public class ComputerUtil {
                 sa.chooseTargetAI();
             }
 
-            Cost_Payment pay = new Cost_Payment(cost, sa);
+            CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(sa);
             }
@@ -253,7 +253,7 @@ public class ComputerUtil {
             bestSA.getBeforePayManaAI().execute();
             AllZone.getStack().addAndUnfreeze(bestSA);
         } else {
-            Cost_Payment pay = new Cost_Payment(cost, bestSA);
+            CostPayment pay = new CostPayment(cost, bestSA);
             if (pay.payComputerCosts()) {
                 AllZone.getStack().addAndUnfreeze(bestSA);
             }
@@ -328,7 +328,7 @@ public class ComputerUtil {
             if (cost == null) {
                 payManaCost(sa);
             } else {
-                Cost_Payment pay = new Cost_Payment(cost, sa);
+                CostPayment pay = new CostPayment(cost, sa);
                 pay.payComputerCosts();
             }
 
@@ -495,7 +495,7 @@ public class ComputerUtil {
                     + " in ComputerUtil.canPayAdditionalCosts() without an activating player");
             sa.setActivatingPlayer(player);
         }
-        return Cost_Payment.canPayAdditionalCosts(sa.getPayCosts(), sa);
+        return CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     }
 
     /**
@@ -581,13 +581,13 @@ public class ComputerUtil {
 
         for (int i = 0; i < manaSources.size(); i++) {
             Card sourceCard = manaSources.get(i);
-            ArrayList<Ability_Mana> manaAbilities = sourceCard.getAIPlayableMana();
+            ArrayList<AbilityMana> manaAbilities = sourceCard.getAIPlayableMana();
 
             boolean used = false; // this is for testing paying mana only
 
             manaAbilities = sortForNeeded(cost, manaAbilities, player);
 
-            for (Ability_Mana m : manaAbilities) {
+            for (AbilityMana m : manaAbilities) {
 
                 if (used) {
                     break; // mana source already used in the test
@@ -620,7 +620,7 @@ public class ComputerUtil {
                         if (!test) {
                             // Pay additional costs
                             if (m.getPayCosts() != null) {
-                                Cost_Payment pay = new Cost_Payment(m.getPayCosts(), m);
+                                CostPayment pay = new CostPayment(m.getPayCosts(), m);
                                 if (!pay.payComputerCosts()) {
                                     continue;
                                 }
@@ -697,13 +697,13 @@ public class ComputerUtil {
      * </p>
      * 
      * @param m
-     *            a {@link forge.card.spellability.Ability_Mana} object.
+     *            a {@link forge.card.spellability.AbilityMana} object.
      * @param player
      *            a {@link forge.Player} object.
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<String> getProduceableColors(final Ability_Mana m, final Player player) {
+    public static ArrayList<String> getProduceableColors(final AbilityMana m, final Player player) {
         ArrayList<String> colors = new ArrayList<String>();
 
         // if the mana ability is not avaiable move to the next one
@@ -759,7 +759,7 @@ public class ComputerUtil {
         CardList list = player.getCardsIn(Zone.Battlefield);
         CardList manaSources = list.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
-                for (Ability_Mana am : c.getAIPlayableMana()) {
+                for (AbilityMana am : c.getAIPlayableMana()) {
                     am.setActivatingPlayer(player);
                     if (am.canPlay()) {
                         return true;
@@ -783,9 +783,9 @@ public class ComputerUtil {
 
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
-            ArrayList<Ability_Mana> manaAbilities = card.getAIPlayableMana();
+            ArrayList<AbilityMana> manaAbilities = card.getAIPlayableMana();
 
-            for (Ability_Mana m : manaAbilities) {
+            for (AbilityMana m : manaAbilities) {
 
                 Cost cost = m.getPayCosts();
                 needsLimitedResources |= !cost.isReusuableResource();
@@ -828,9 +828,9 @@ public class ComputerUtil {
 
                 int usableManaAbilities = 0;
                 boolean needsLimitedResources = false;
-                ArrayList<Ability_Mana> manaAbilities = card.getAIPlayableMana();
+                ArrayList<AbilityMana> manaAbilities = card.getAIPlayableMana();
 
-                for (Ability_Mana m : manaAbilities) {
+                for (AbilityMana m : manaAbilities) {
 
                     Cost cost = m.getPayCosts();
                     needsLimitedResources |= !cost.isReusuableResource();
@@ -884,20 +884,20 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Ability_Mana> sortForNeeded(final ManaCost cost,
-            final ArrayList<Ability_Mana> manaAbilities, final Player player) {
+    public static ArrayList<AbilityMana> sortForNeeded(final ManaCost cost,
+            final ArrayList<AbilityMana> manaAbilities, final Player player) {
 
         ArrayList<String> colors;
 
         ArrayList<String> colorsNeededToAvoidNegativeEffect = cost.getManaNeededToAvoidNegativeEffect();
 
-        ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
+        ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
 
         ManaCost onlyColored = new ManaCost(cost.toString());
 
         onlyColored.removeColorlessMana();
 
-        for (Ability_Mana am : manaAbilities) {
+        for (AbilityMana am : manaAbilities) {
             colors = getProduceableColors(am, player);
             for (int j = 0; j < colors.size(); j++) {
                 if (onlyColored.isNeeded(colors.get(j))) {
@@ -913,7 +913,7 @@ public class ComputerUtil {
             }
         }
 
-        for (Ability_Mana am : manaAbilities) {
+        for (AbilityMana am : manaAbilities) {
 
             if (res.contains(am)) {
                 break;

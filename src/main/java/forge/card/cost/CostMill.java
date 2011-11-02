@@ -63,7 +63,7 @@ public class CostMill extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
 
         Integer c = this.convertAmount();
@@ -93,7 +93,7 @@ public class CostMill extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
             AllZone.getGameAction().moveToGraveyard(c);
         }
@@ -107,7 +107,7 @@ public class CostMill extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();

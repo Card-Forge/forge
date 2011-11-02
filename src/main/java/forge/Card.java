@@ -17,10 +17,10 @@ import forge.card.CardCharacteristics;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.Ability_Mana;
-import forge.card.spellability.Ability_Triggered;
+import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.SpellPermanent;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.item.CardDb;
@@ -310,7 +310,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ArrayList<Card> gainControlTargets = new ArrayList<Card>();
     private ArrayList<Command> gainControlReleaseCommands = new ArrayList<Command>();
 
-    private ArrayList<Ability_Triggered> zcTriggers = new ArrayList<Ability_Triggered>();
+    private ArrayList<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
     private ArrayList<Command> equipCommandList = new ArrayList<Command>();
     private ArrayList<Command> unEquipCommandList = new ArrayList<Command>();
     private ArrayList<Command> enchantCommandList = new ArrayList<Command>();
@@ -2359,7 +2359,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 continue;
             }
 
-            if (sa instanceof Spell_Permanent && primaryCost && !isAura()) {
+            if (sa instanceof SpellPermanent && primaryCost && !isAura()) {
                 // For Alt costs, make sure to display the cost!
                 primaryCost = false;
                 continue;
@@ -2367,14 +2367,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             String sAbility = sa.toString();
 
-            if (sa instanceof Ability_Mana) {
+            if (sa instanceof AbilityMana) {
                 if (addedManaStrings.contains(sAbility)) {
                     continue;
                 }
                 addedManaStrings.add(sAbility);
             }
 
-            if (sa instanceof Spell_Permanent && !isAura()) {
+            if (sa instanceof SpellPermanent && !isAura()) {
                 sb.insert(0, "\r\n");
                 sb.insert(0, sAbility);
             } else if (!sAbility.endsWith(getName())) {
@@ -2455,8 +2455,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Ability_Mana> getManaAbility() {
-        return new ArrayList<Ability_Mana>(getCharacteristics().getManaAbility());
+    public final ArrayList<AbilityMana> getManaAbility() {
+        return new ArrayList<AbilityMana>(getCharacteristics().getManaAbility());
     }
 
     // Returns basic mana abilities plus "reflected mana" abilities
@@ -2467,9 +2467,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Ability_Mana> getAIPlayableMana() {
-        ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
-        for (Ability_Mana am : getManaAbility()) {
+    public final ArrayList<AbilityMana> getAIPlayableMana() {
+        ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
+        for (AbilityMana am : getManaAbility()) {
 
             // if a mana ability has a mana cost the AI will miscalculate
             Cost cost = am.getPayCosts();
@@ -2495,9 +2495,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Ability_Mana> getBasicMana() {
-        ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
-        for (Ability_Mana am : getManaAbility()) {
+    public final ArrayList<AbilityMana> getBasicMana() {
+        ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
+        for (AbilityMana am : getManaAbility()) {
             if (am.isBasic() && !res.contains(am)) {
                 res.add(am);
             }
@@ -2567,12 +2567,12 @@ public class Card extends GameEntity implements Comparable<Card> {
      * getSpellPermanent.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.Spell_Permanent} object.
+     * @return a {@link forge.card.spellability.SpellPermanent} object.
      */
-    public final Spell_Permanent getSpellPermanent() {
+    public final SpellPermanent getSpellPermanent() {
         for (SpellAbility sa : getCharacteristics().getSpellAbility()) {
-            if (sa instanceof Spell_Permanent) {
-                return (Spell_Permanent) sa;
+            if (sa instanceof SpellPermanent) {
+                return (SpellPermanent) sa;
             }
         }
         return null;
@@ -2606,8 +2606,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addFirstSpellAbility(final SpellAbility a) {
         a.setSourceCard(this);
-        if (a instanceof Ability_Mana) {
-            getCharacteristics().getManaAbility().add(0, (Ability_Mana) a);
+        if (a instanceof AbilityMana) {
+            getCharacteristics().getManaAbility().add(0, (AbilityMana) a);
         } else {
             getCharacteristics().getSpellAbility().add(0, a);
         }
@@ -2623,8 +2623,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addSpellAbility(final SpellAbility a) {
         a.setSourceCard(this);
-        if (a instanceof Ability_Mana) {
-            getCharacteristics().getManaAbility().add((Ability_Mana) a);
+        if (a instanceof AbilityMana) {
+            getCharacteristics().getManaAbility().add((AbilityMana) a);
         } else {
             getCharacteristics().getSpellAbility().add(a);
         }
@@ -2639,7 +2639,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void removeSpellAbility(final SpellAbility a) {
-        if (a instanceof Ability_Mana) {
+        if (a instanceof AbilityMana) {
             // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
             // this the way to go??
             getCharacteristics().getManaAbility().remove(a);
@@ -3093,7 +3093,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.ZCTrigger} object.
      */
     public final void addTrigger(final Command c, final ZCTrigger typeIn) {
-        zcTriggers.add(new Ability_Triggered(this, c, typeIn));
+        zcTriggers.add(new AbilityTriggered(this, c, typeIn));
     }
 
     /**
@@ -3107,7 +3107,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.ZCTrigger} object.
      */
     public final void removeTrigger(final Command c, final ZCTrigger typeIn) {
-        zcTriggers.remove(new Ability_Triggered(this, c, typeIn));
+        zcTriggers.remove(new AbilityTriggered(this, c, typeIn));
     }
 
     /**
@@ -3119,7 +3119,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.ZCTrigger} object.
      */
     public final void executeTrigger(final ZCTrigger type) {
-        for (Ability_Triggered t : zcTriggers) {
+        for (AbilityTriggered t : zcTriggers) {
             if (t.getTrigger().equals(type) && t.isBasic()) {
                 t.execute();
             }
@@ -6038,7 +6038,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isReflectedLand() {
-        for (Ability_Mana am : getCharacteristics().getManaAbility()) {
+        for (AbilityMana am : getCharacteristics().getManaAbility()) {
             if (am.isReflectedMana()) {
                 return true;
             }

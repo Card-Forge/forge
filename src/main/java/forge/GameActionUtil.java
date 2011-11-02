@@ -9,12 +9,12 @@ import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input_PayManaCostUtil;
-import forge.gui.input.Input_PayManaCost_Ability;
+import forge.gui.input.InputPayManaCostUtil;
+import forge.gui.input.InputPayManaCostAbility;
 
 /**
  * <p>
@@ -312,7 +312,7 @@ public final class GameActionUtil {
         // resolving Ability
         boolean bResolving = AllZone.getStack().getResolving();
         AllZone.getStack().setResolving(false);
-        AllZone.getInputControl().setInput(new Input_PayManaCost_Ability(message, manaCost, paid, unpaid));
+        AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
         AllZone.getStack().setResolving(bResolving);
     }
 
@@ -577,9 +577,9 @@ public final class GameActionUtil {
                 String color = "";
 
                 Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.ONLY_COLORS);
-                color = Input_PayManaCostUtil.getShortColorString((String) o);
+                color = InputPayManaCostUtil.getShortColorString((String) o);
 
-                Ability_Mana abMana = new Ability_Mana(c, "0", color) {
+                AbilityMana abMana = new AbilityMana(c, "0", color) {
                     private static final long serialVersionUID = -2182129023960978132L;
                 };
                 abMana.produceMana();
@@ -1478,7 +1478,7 @@ public final class GameActionUtil {
 
             // remove all abilities granted by this Command
             for (Card land : lands) {
-                ArrayList<Ability_Mana> sas = land.getManaAbility();
+                ArrayList<AbilityMana> sas = land.getManaAbility();
                 for (SpellAbility sa : sas) {
                     if (sa.getType().equals("BasicLandTypeMana")) {
                         land.removeSpellAbility(sa);

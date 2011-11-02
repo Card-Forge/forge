@@ -118,7 +118,7 @@ public class CostRemoveCounter extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
@@ -134,7 +134,7 @@ public class CostRemoveCounter extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         final Counters type = this.getCounter();
         Integer c = this.convertAmount();
@@ -175,7 +175,7 @@ public class CostRemoveCounter extends CostPart {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         Integer c = this.convertAmount();
         if (c == null) {
             final String sVar = source.getSVar(this.getAmount());

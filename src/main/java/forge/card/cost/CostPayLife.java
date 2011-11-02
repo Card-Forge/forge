@@ -89,7 +89,7 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         AllZone.getComputerPlayer().payLife(this.getLastPaidAmount(), null);
     }
 
@@ -101,7 +101,7 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         final Player activator = ability.getActivatingPlayer();
         final int life = activator.getLife();
@@ -140,7 +140,7 @@ public class CostPayLife extends CostPart {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final Player activator = ability.getActivatingPlayer();
 
         Integer c = this.convertAmount();

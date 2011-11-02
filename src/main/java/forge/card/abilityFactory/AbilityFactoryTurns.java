@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 import forge.AllZone;
 import forge.Player;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -36,7 +36,7 @@ public class AbilityFactoryTurns {
      */
     public static SpellAbility createAbilityAddTurn(final AbilityFactory af) {
 
-        final SpellAbility abAddTurn = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abAddTurn = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -3526200766738015688L;
 
             @Override
@@ -105,7 +105,7 @@ public class AbilityFactoryTurns {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAddTurn(final AbilityFactory af) {
-        final SpellAbility dbAddTurn = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbAddTurn = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -562517287448810951L;
 
             @Override
@@ -148,7 +148,7 @@ public class AbilityFactoryTurns {
         final StringBuilder sb = new StringBuilder();
         final int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -179,7 +179,7 @@ public class AbilityFactoryTurns {
         }
         sb.append(" after this one.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

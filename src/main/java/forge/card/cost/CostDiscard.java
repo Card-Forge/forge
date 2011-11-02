@@ -124,7 +124,7 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         final Player activator = ability.getActivatingPlayer();
         for (final Card c : this.getList()) {
             activator.discard(c, ability);
@@ -139,7 +139,7 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final Player activator = ability.getActivatingPlayer();
         CardList handList = activator.getCardsIn(Zone.Hand);
         final String discType = this.getType();
@@ -211,7 +211,7 @@ public class CostDiscard extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
         final CardList hand = activator.getCardsIn(Zone.Hand);
@@ -268,7 +268,7 @@ public class CostDiscard extends CostPartWithList {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
      * @param nNeeded
@@ -277,7 +277,7 @@ public class CostDiscard extends CostPartWithList {
      * @return a {@link forge.gui.input.Input} object.
      */
     public static Input inputDiscardCost(final String discType, final CardList handList, final SpellAbility sa,
-            final Cost_Payment payment, final CostDiscard part, final int nNeeded) {
+            final CostPayment payment, final CostDiscard part, final int nNeeded) {
         final SpellAbility sp = sa;
         final Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;

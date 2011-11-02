@@ -6,8 +6,8 @@ import forge.AllZone;
 import forge.Card;
 import forge.ComputerUtil;
 import forge.Player;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -42,7 +42,7 @@ public final class AbilityFactoryEndGameCondition {
      */
     public static SpellAbility createAbilityWinsGame(final AbilityFactory af) {
 
-        final SpellAbility abWinsGame = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abWinsGame = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
 
             @Override
@@ -120,7 +120,7 @@ public final class AbilityFactoryEndGameCondition {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackWinsGame(final AbilityFactory af) {
-        final SpellAbility dbWinsGame = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbWinsGame = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
 
             @Override
@@ -173,7 +173,7 @@ public final class AbilityFactoryEndGameCondition {
     public static String winsGameStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -182,7 +182,7 @@ public final class AbilityFactoryEndGameCondition {
         // Let the spell description also be the stack description
         sb.append(sa.getDescription());
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -236,7 +236,7 @@ public final class AbilityFactoryEndGameCondition {
 
         // WinGame abilities usually don't have subAbilities but for
         // consistency...
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -281,7 +281,7 @@ public final class AbilityFactoryEndGameCondition {
      */
     public static SpellAbility createAbilityLosesGame(final AbilityFactory af) {
 
-        final SpellAbility abLosesGame = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abLosesGame = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
 
             @Override
@@ -359,7 +359,7 @@ public final class AbilityFactoryEndGameCondition {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackLosesGame(final AbilityFactory af) {
-        final SpellAbility dbLosesGame = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbLosesGame = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
 
             @Override
@@ -413,7 +413,7 @@ public final class AbilityFactoryEndGameCondition {
         final StringBuilder sb = new StringBuilder();
         final Card source = sa.getSourceCard();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(source.getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -433,7 +433,7 @@ public final class AbilityFactoryEndGameCondition {
 
         sb.append("loses the game.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -506,7 +506,7 @@ public final class AbilityFactoryEndGameCondition {
 
         // WinGame abilities usually don't have subAbilities but for
         // consistency...
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }

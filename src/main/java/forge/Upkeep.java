@@ -6,8 +6,8 @@ import java.util.HashMap;
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Mana;
-import forge.card.spellability.Ability_Static;
+import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -164,7 +164,7 @@ public class Upkeep implements java.io.Serializable {
                 public void resolve() {
                     c.addCounter(Counters.AGE, 1);
                     final int ageCounters = c.getCounters(Counters.AGE);
-                    final Ability_Mana abMana = new Ability_Mana(c, "0", "R", ageCounters) {
+                    final AbilityMana abMana = new AbilityMana(c, "0", "R", ageCounters) {
                         private static final long serialVersionUID = -2182129023960978132L;
                     };
                     if (player.isComputer()) {
@@ -473,7 +473,7 @@ public class Upkeep implements java.io.Serializable {
      * @return a {@link forge.card.spellability.Ability} object.
      */
     private static Ability upkeepAIPayment(final Card c, final String cost) {
-        return new Ability_Static(c, cost) {
+        return new AbilityStatic(c, cost) {
             @Override
             public void resolve() {
 

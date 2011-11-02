@@ -109,7 +109,7 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
             AllZone.getGameAction().moveToHand(c);
         }
@@ -123,7 +123,7 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
@@ -153,7 +153,7 @@ public class CostReturn extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         if (this.getThis()) {
             this.getList().add(source);
@@ -183,14 +183,14 @@ public class CostReturn extends CostPartWithList {
      * @param type
      *            a {@link java.lang.String} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
      * @param nNeeded
      *            the n needed
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input returnType(final SpellAbility sa, final String type, final Cost_Payment payment,
+    public static Input returnType(final SpellAbility sa, final String type, final CostPayment payment,
             final CostReturn part, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
@@ -265,12 +265,12 @@ public class CostReturn extends CostPartWithList {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input returnThis(final SpellAbility sa, final Cost_Payment payment, final CostReturn part) {
+    public static Input returnThis(final SpellAbility sa, final CostPayment payment, final CostReturn part) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
 

@@ -7,8 +7,8 @@ import forge.AllZone;
 import forge.Card;
 import forge.GameActionUtil;
 import forge.Player;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 
@@ -37,7 +37,7 @@ public final class AbilityFactoryClash {
      * @since 1.0.15
      */
     public static SpellAbility getAbilityClash(final AbilityFactory af) {
-        final SpellAbility abClash = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abClash = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -8019637116128196248L;
 
             @Override
@@ -123,7 +123,7 @@ public final class AbilityFactoryClash {
      * @since 1.0.15
      */
     public static SpellAbility getDrawbackClash(final AbilityFactory af) {
-        final SpellAbility dbClash = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbClash = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -3850086157052881360L;
 
             @Override
@@ -183,7 +183,7 @@ public final class AbilityFactoryClash {
                 final SpellAbility win = afOutcomes.getAbility(
                         af.getHostCard().getSVar(af.getMapParams().get("WinSubAbility")), af.getHostCard());
                 win.setActivatingPlayer(af.getHostCard().getController());
-                ((Ability_Sub) win).setParent(sa);
+                ((AbilitySub) win).setParent(sa);
 
                 AbilityFactory.resolve(win, false);
             }
@@ -193,7 +193,7 @@ public final class AbilityFactoryClash {
                 final SpellAbility otherwise = afOutcomes.getAbility(
                         af.getHostCard().getSVar(af.getMapParams().get("OtherwiseSubAbility")), af.getHostCard());
                 otherwise.setActivatingPlayer(af.getHostCard().getController());
-                ((Ability_Sub) otherwise).setParent(sa);
+                ((AbilitySub) otherwise).setParent(sa);
 
                 AbilityFactory.resolve(otherwise, false);
             }
@@ -218,7 +218,7 @@ public final class AbilityFactoryClash {
      * @since 1.0.15
      */
     public static SpellAbility createAbilityFlip(final AbilityFactory af) {
-        final SpellAbility abFlip = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abFlip = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -8293336773930687488L;
 
             @Override
@@ -299,7 +299,7 @@ public final class AbilityFactoryClash {
      * @since 1.0.15
      */
     public static SpellAbility createDrawbackFlip(final AbilityFactory af) {
-        final SpellAbility dbFlip = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbFlip = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 8581978154811461324L;
 
             @Override
@@ -355,7 +355,7 @@ public final class AbilityFactoryClash {
 
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -363,7 +363,7 @@ public final class AbilityFactoryClash {
 
         sb.append(player).append(" flips a coin.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -408,7 +408,7 @@ public final class AbilityFactoryClash {
             if (params.containsKey("WinSubAbility")) {
                 final SpellAbility win = afOutcomes.getAbility(host.getSVar(params.get("WinSubAbility")), host);
                 win.setActivatingPlayer(player);
-                ((Ability_Sub) win).setParent(sa);
+                ((AbilitySub) win).setParent(sa);
 
                 AbilityFactory.resolve(win, false);
             }
@@ -420,7 +420,7 @@ public final class AbilityFactoryClash {
             if (params.containsKey("LoseSubAbility")) {
                 final SpellAbility lose = afOutcomes.getAbility(host.getSVar(params.get("LoseSubAbility")), host);
                 lose.setActivatingPlayer(player);
-                ((Ability_Sub) lose).setParent(sa);
+                ((AbilitySub) lose).setParent(sa);
 
                 AbilityFactory.resolve(lose, false);
             }

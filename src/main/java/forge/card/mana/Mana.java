@@ -2,7 +2,7 @@ package forge.card.mana;
 
 import forge.Card;
 import forge.Constant;
-import forge.gui.input.Input_PayManaCostUtil;
+import forge.gui.input.InputPayManaCostUtil;
 
 /**
  * <p>
@@ -55,7 +55,7 @@ public class Mana {
         String manaString = "";
         final StringBuilder sbMana = new StringBuilder();
 
-        manaString = Input_PayManaCostUtil.getShortColorString(this.color);
+        manaString = InputPayManaCostUtil.getShortColorString(this.color);
 
         for (int i = 0; i < this.amount; i++) {
             sbMana.append(manaString);
@@ -79,7 +79,7 @@ public class Mana {
         String manaString = "";
         final StringBuilder sbMana = new StringBuilder();
 
-        manaString = Input_PayManaCostUtil.getShortColorString(this.color);
+        manaString = InputPayManaCostUtil.getShortColorString(this.color);
 
         for (int i = 0; i < this.amount; i++) {
             sbMana.append(manaString);

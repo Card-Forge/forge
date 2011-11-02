@@ -11,8 +11,8 @@ import forge.CardList;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -31,7 +31,7 @@ public class AbilityFactoryChangeState {
      * @return the change state ability
      */
     public static SpellAbility getChangeStateAbility(final AbilityFactory abilityFactory) {
-        final SpellAbility ret = new Ability_Activated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+        final SpellAbility ret = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1083427558368639457L;
 
@@ -82,7 +82,7 @@ public class AbilityFactoryChangeState {
      * @return the change state drawback
      */
     public static SpellAbility getChangeStateDrawback(final AbilityFactory abilityFactory) {
-        final Ability_Sub ret = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        final AbilitySub ret = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
 
             private static final long serialVersionUID = -3793247725721587468L;
 
@@ -142,7 +142,7 @@ public class AbilityFactoryChangeState {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(host).append(" - ");
@@ -169,7 +169,7 @@ public class AbilityFactoryChangeState {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -211,7 +211,7 @@ public class AbilityFactoryChangeState {
      * @return the change state all ability
      */
     public static SpellAbility getChangeStateAllAbility(final AbilityFactory abilityFactory) {
-        final SpellAbility ret = new Ability_Activated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+        final SpellAbility ret = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
 
             private static final long serialVersionUID = 7841029107610111992L;
@@ -265,7 +265,7 @@ public class AbilityFactoryChangeState {
      * @return the change state all drawback
      */
     public static SpellAbility getChangeStateAllDrawback(final AbilityFactory abilityFactory) {
-        final Ability_Sub ret = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        final AbilitySub ret = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
 
             private static final long serialVersionUID = 4047514893482113436L;
 
@@ -351,7 +351,7 @@ public class AbilityFactoryChangeState {
         final Map<String, String> params = abilityFactory.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(host).append(" - ");
@@ -365,7 +365,7 @@ public class AbilityFactoryChangeState {
 
         sb.append(" permanents.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

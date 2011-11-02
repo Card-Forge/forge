@@ -21,8 +21,8 @@ import forge.PlayerZone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -55,7 +55,7 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityPutCounters(final AbilityFactory af) {
 
-        final SpellAbility abPutCounter = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abPutCounter = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1259638699008542484L;
 
             @Override
@@ -129,7 +129,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPutCounters(final AbilityFactory af) {
-        final SpellAbility dbPutCounter = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbPutCounter = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -323471693082498224L;
 
             @Override
@@ -171,7 +171,7 @@ public class AbilityFactoryCounters {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -216,7 +216,7 @@ public class AbilityFactoryCounters {
 
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -368,7 +368,7 @@ public class AbilityFactoryCounters {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -453,7 +453,7 @@ public class AbilityFactoryCounters {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -557,7 +557,7 @@ public class AbilityFactoryCounters {
             abTgt.addTarget(choice);
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             // chance &= subAb.doTrigger(mandatory);
         }
@@ -704,7 +704,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityRemoveCounters(final AbilityFactory af) {
-        final SpellAbility abRemCounter = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abRemCounter = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 8581011868395954121L;
 
             @Override
@@ -778,7 +778,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRemoveCounters(final AbilityFactory af) {
-        final SpellAbility spRemoveCounter = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility spRemoveCounter = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -5065591869141835456L;
 
             @Override
@@ -821,7 +821,7 @@ public class AbilityFactoryCounters {
         final Card card = af.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(card).append(" - ");
         } else {
             sb.append(" ");
@@ -854,7 +854,7 @@ public class AbilityFactoryCounters {
 
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -928,7 +928,7 @@ public class AbilityFactoryCounters {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -973,7 +973,7 @@ public class AbilityFactoryCounters {
 
         // currently, not targeted
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -1010,7 +1010,7 @@ public class AbilityFactoryCounters {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }
@@ -1078,7 +1078,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityProliferate(final AbilityFactory af) {
-        final SpellAbility abProliferate = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abProliferate = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -6617234927365102930L;
 
             @Override
@@ -1153,7 +1153,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackProliferate(final AbilityFactory af) {
-        final SpellAbility dbProliferate = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbProliferate = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 1265466498444897146L;
 
             @Override
@@ -1196,7 +1196,7 @@ public class AbilityFactoryCounters {
      */
     private static String proliferateStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -1205,7 +1205,7 @@ public class AbilityFactoryCounters {
         sb.append(" (You choose any number of permanents and/or players with ");
         sb.append("counters on them, then give each another counter of a kind already there.)");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1224,7 +1224,7 @@ public class AbilityFactoryCounters {
      */
     private static boolean proliferateShouldPlayAI(final SpellAbility sa) {
         boolean chance = true;
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -1247,7 +1247,7 @@ public class AbilityFactoryCounters {
      */
     private static boolean proliferateDoTriggerAI(final SpellAbility sa, final boolean mandatory) {
         boolean chance = true;
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }
@@ -1457,7 +1457,7 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityPutCounterAll(final AbilityFactory af) {
 
-        final SpellAbility abPutCounterAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abPutCounterAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -712473347429870385L;
 
             @Override
@@ -1526,7 +1526,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPutCounterAll(final AbilityFactory af) {
-        final SpellAbility dbPutCounterAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbPutCounterAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -3101160929130043022L;
 
             @Override
@@ -1568,7 +1568,7 @@ public class AbilityFactoryCounters {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -1583,7 +1583,7 @@ public class AbilityFactoryCounters {
         }
         sb.append(" on each valid permanent.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1692,7 +1692,7 @@ public class AbilityFactoryCounters {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -1766,7 +1766,7 @@ public class AbilityFactoryCounters {
      */
     public static SpellAbility createAbilityRemoveCounterAll(final AbilityFactory af) {
 
-        final SpellAbility abRemoveCounterAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abRemoveCounterAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 1189198508841846311L;
 
             @Override
@@ -1835,7 +1835,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRemoveCounterAll(final AbilityFactory af) {
-        final SpellAbility dbRemoveCounterAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbRemoveCounterAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 9210702927696563686L;
 
             @Override
@@ -1877,7 +1877,7 @@ public class AbilityFactoryCounters {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -1897,7 +1897,7 @@ public class AbilityFactoryCounters {
         }
         sb.append(" from each valid permanent.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1987,7 +1987,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityMoveCounters(final AbilityFactory af) {
-        final SpellAbility abMoveCounter = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abMoveCounter = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4602375375570571305L;
 
             @Override
@@ -2056,7 +2056,7 @@ public class AbilityFactoryCounters {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackMoveCounters(final AbilityFactory af) {
-        final SpellAbility dbMoveCounter = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbMoveCounter = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -9185934729634278014L;
 
             @Override
@@ -2099,7 +2099,7 @@ public class AbilityFactoryCounters {
         final StringBuilder sb = new StringBuilder();
         final Card host = af.getHostCard();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -2131,7 +2131,7 @@ public class AbilityFactoryCounters {
 
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -2169,7 +2169,7 @@ public class AbilityFactoryCounters {
         // prevent run-away activations - first time will always return true
         boolean chance = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -2195,7 +2195,7 @@ public class AbilityFactoryCounters {
     private static boolean moveCounterPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         boolean chance = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -2239,7 +2239,7 @@ public class AbilityFactoryCounters {
             chance = true;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }

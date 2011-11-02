@@ -3,7 +3,7 @@ package forge;
 import forge.card.BoosterGenerator;
 import forge.deck.Deck;
 
-import forge.game.limited.BoosterDraft;
+import forge.game.limited.IBoosterDraft;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  * @version $Id$
  */
 @Test(groups = {"UnitTest"}, timeOut = 1000, enabled = false)
-public class BoosterDraftTest implements BoosterDraft {
+public class BoosterDraftTest implements IBoosterDraft {
     int n = 3;
 
     /**

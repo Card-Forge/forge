@@ -14,7 +14,7 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
-import forge.gui.input.Input_PayManaCostUtil;
+import forge.gui.input.InputPayManaCostUtil;
 
 /**
  * The Class CostMana.
@@ -170,7 +170,7 @@ public class CostMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         ComputerUtil.payManaCost(ability);
     }
 
@@ -182,7 +182,7 @@ public class CostMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         int manaToAdd = 0;
         if (!this.hasNoXManaCost()) {
             // if X cost is a defined value, other than xPaid
@@ -212,7 +212,7 @@ public class CostMana extends CostPart {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         return true;
     }
 
@@ -226,7 +226,7 @@ public class CostMana extends CostPart {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param costMana
      *            TODO
      * @param numX
@@ -234,7 +234,7 @@ public class CostMana extends CostPart {
      * 
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input inputPayXMana(final SpellAbility sa, final Cost_Payment payment, final CostMana costMana,
+    public static Input inputPayXMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
             final int numX) {
         final Input payX = new Input() {
             private static final long serialVersionUID = -6900234444347364050L;
@@ -268,7 +268,7 @@ public class CostMana extends CostPart {
                     return;
                 }
 
-                this.manaCost = Input_PayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
+                this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
                 if (this.manaCost.isPaid()) {
                     this.manaCost = new ManaCost(Integer.toString(numX));
                     this.xPaid++;
@@ -306,14 +306,14 @@ public class CostMana extends CostPart {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param costMana
      *            the cost mana
      * @param manaToAdd
      *            a int.
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input inputPayMana(final SpellAbility sa, final Cost_Payment payment, final CostMana costMana,
+    public static Input inputPayMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
             final int manaToAdd) {
         final ManaCost manaCost;
 
@@ -351,7 +351,7 @@ public class CostMana extends CostPart {
                     return;
                 }
 
-                this.mana = Input_PayManaCostUtil.activateManaAbility(sa, card, this.mana);
+                this.mana = InputPayManaCostUtil.activateManaAbility(sa, card, this.mana);
 
                 if (this.mana.isPaid()) {
                     this.done();

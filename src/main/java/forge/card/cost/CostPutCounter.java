@@ -136,7 +136,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
@@ -160,7 +160,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
@@ -185,7 +185,7 @@ public class CostPutCounter extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         if (this.getThis()) {
             this.addToList(source);
@@ -221,14 +221,14 @@ public class CostPutCounter extends CostPartWithList {
      * @param type
      *            a {@link java.lang.String} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param costPutCounter
      *            TODO
      * @param nNeeded
      *            the n needed
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input putCounterType(final SpellAbility sa, final String type, final Cost_Payment payment,
+    public static Input putCounterType(final SpellAbility sa, final String type, final CostPayment payment,
             final CostPutCounter costPutCounter, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;

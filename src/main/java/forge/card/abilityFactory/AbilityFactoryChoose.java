@@ -19,8 +19,8 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -55,7 +55,7 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseType(final AbilityFactory af) {
 
-        final SpellAbility abChooseType = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abChooseType = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -7734286034988741837L;
 
             @Override
@@ -124,7 +124,7 @@ public final class AbilityFactoryChoose {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackChooseType(final AbilityFactory af) {
-        final SpellAbility dbChooseType = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbChooseType = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 5555184803257696143L;
 
             @Override
@@ -166,7 +166,7 @@ public final class AbilityFactoryChoose {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -186,7 +186,7 @@ public final class AbilityFactoryChoose {
         }
         sb.append("chooses a type.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -410,7 +410,7 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseColor(final AbilityFactory af) {
 
-        final SpellAbility abChooseColor = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abChooseColor = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 7069068165774633355L;
 
             @Override
@@ -481,7 +481,7 @@ public final class AbilityFactoryChoose {
      * @since 1.0.15
      */
     public static SpellAbility createDrawbackChooseColor(final AbilityFactory af) {
-        final SpellAbility dbChooseColor = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbChooseColor = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 6969618586164278998L;
 
             @Override
@@ -523,7 +523,7 @@ public final class AbilityFactoryChoose {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -547,7 +547,7 @@ public final class AbilityFactoryChoose {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -570,7 +570,7 @@ public final class AbilityFactoryChoose {
         // Note: if (AILogic == MostProminentAttackers) return isDuringCombat();
         boolean chance = true;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -690,7 +690,7 @@ public final class AbilityFactoryChoose {
      */
     public static SpellAbility createAbilityChooseNumber(final AbilityFactory af) {
 
-        final SpellAbility abChooseNumber = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abChooseNumber = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -8268155210011368749L;
 
             @Override
@@ -761,7 +761,7 @@ public final class AbilityFactoryChoose {
      * @since 1.1.6
      */
     public static SpellAbility createDrawbackChooseNumber(final AbilityFactory af) {
-        final SpellAbility dbChooseNumber = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbChooseNumber = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -1339609900364066904L;
 
             @Override
@@ -802,7 +802,7 @@ public final class AbilityFactoryChoose {
     private static String chooseNumberStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -822,7 +822,7 @@ public final class AbilityFactoryChoose {
         }
         sb.append("chooses a number.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -936,7 +936,7 @@ public final class AbilityFactoryChoose {
      * @since 1.1.6
      */
     public static SpellAbility createAbilityChoosePlayer(final AbilityFactory af) {
-        final SpellAbility abChoosePlayer = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abChoosePlayer = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 
             private static final long serialVersionUID = 7502903475594562552L;
 
@@ -1009,7 +1009,7 @@ public final class AbilityFactoryChoose {
      * @since 1.1.6
      */
     public static SpellAbility createDrawbackChoosePlayer(final AbilityFactory af) {
-        final SpellAbility dbChoosePlayer = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbChoosePlayer = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
 
             private static final long serialVersionUID = -766158106632103029L;
 
@@ -1051,7 +1051,7 @@ public final class AbilityFactoryChoose {
     private static String choosePlayerStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -1071,7 +1071,7 @@ public final class AbilityFactoryChoose {
         }
         sb.append("chooses a player.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1169,7 +1169,7 @@ public final class AbilityFactoryChoose {
      * @since 1.1.6
      */
     public static SpellAbility createAbilityNameCard(final AbilityFactory af) {
-        final SpellAbility abNameCard = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abNameCard = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 1748714246609515354L;
 
             @Override
@@ -1240,7 +1240,7 @@ public final class AbilityFactoryChoose {
      * @since 1.1.6
      */
     public static SpellAbility createDrawbackNameCard(final AbilityFactory af) {
-        final SpellAbility dbNameCard = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbNameCard = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -7647726271751061495L;
 
             @Override
@@ -1281,7 +1281,7 @@ public final class AbilityFactoryChoose {
     private static String nameCardStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -1301,7 +1301,7 @@ public final class AbilityFactoryChoose {
         }
         sb.append("names a card.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

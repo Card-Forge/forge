@@ -88,14 +88,14 @@ public abstract class SpellAbility {
     /** The chosen target. */
     private Target chosenTarget = null;
 
-    private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
-    private SpellAbility_Condition conditions = new SpellAbility_Condition();
-    private Ability_Sub subAbility = null;
+    private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
+    private SpellAbilityCondition conditions = new SpellAbilityCondition();
+    private AbilitySub subAbility = null;
 
     private AbilityFactory abilityFactory = null;
 
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
-    private final ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
+    private final ArrayList<AbilityMana> paidAbilities = new ArrayList<AbilityMana>();
 
     private HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
 
@@ -690,10 +690,10 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param restrict
-     *            a {@link forge.card.spellability.SpellAbility_Restriction}
+     *            a {@link forge.card.spellability.SpellAbilityRestriction}
      *            object.
      */
-    public void setRestrictions(final SpellAbility_Restriction restrict) {
+    public void setRestrictions(final SpellAbilityRestriction restrict) {
         this.restrictions = restrict;
     }
 
@@ -702,10 +702,10 @@ public abstract class SpellAbility {
      * Getter for the field <code>restrictions</code>.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.SpellAbility_Restriction}
+     * @return a {@link forge.card.spellability.SpellAbilityRestriction}
      *         object.
      */
-    public SpellAbility_Restriction getRestrictions() {
+    public SpellAbilityRestriction getRestrictions() {
         return this.restrictions;
     }
 
@@ -726,11 +726,11 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param condition
-     *            a {@link forge.card.spellability.SpellAbility_Condition}
+     *            a {@link forge.card.spellability.SpellAbilityCondition}
      *            object.
      * @since 1.0.15
      */
-    public void setConditions(final SpellAbility_Condition condition) {
+    public void setConditions(final SpellAbilityCondition condition) {
         this.conditions = condition;
     }
 
@@ -739,10 +739,10 @@ public abstract class SpellAbility {
      * Getter for the field <code>conditions</code>.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.SpellAbility_Condition} object.
+     * @return a {@link forge.card.spellability.SpellAbilityCondition} object.
      * @since 1.0.15
      */
-    public SpellAbility_Condition getConditions() {
+    public SpellAbilityCondition getConditions() {
         return this.conditions;
     }
 
@@ -787,7 +787,7 @@ public abstract class SpellAbility {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Ability_Mana> getPayingManaAbilities() {
+    public ArrayList<AbilityMana> getPayingManaAbilities() {
         return this.paidAbilities;
     }
 
@@ -1136,9 +1136,9 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param subAbility
-     *            a {@link forge.card.spellability.Ability_Sub} object.
+     *            a {@link forge.card.spellability.AbilitySub} object.
      */
-    public void setSubAbility(final Ability_Sub subAbility) {
+    public void setSubAbility(final AbilitySub subAbility) {
         this.subAbility = subAbility;
         if (subAbility != null) {
             subAbility.setParent(this);
@@ -1150,9 +1150,9 @@ public abstract class SpellAbility {
      * Getter for the field <code>subAbility</code>.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.Ability_Sub} object.
+     * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    public Ability_Sub getSubAbility() {
+    public AbilitySub getSubAbility() {
         return this.subAbility;
     }
 
@@ -1500,8 +1500,8 @@ public abstract class SpellAbility {
      * @since 1.0.15
      */
     public final SpellAbility getRootSpellAbility() {
-        if (this instanceof Ability_Sub) {
-            final SpellAbility parent = ((Ability_Sub) this).getParent();
+        if (this instanceof AbilitySub) {
+            final SpellAbility parent = ((AbilitySub) this).getParent();
             if (parent != null) {
                 return parent.getRootSpellAbility();
             }
@@ -1518,8 +1518,8 @@ public abstract class SpellAbility {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public final ArrayList<Target_Choices> getAllTargetChoices() {
-        final ArrayList<Target_Choices> res = new ArrayList<Target_Choices>();
+    public final ArrayList<TargetChoices> getAllTargetChoices() {
+        final ArrayList<TargetChoices> res = new ArrayList<TargetChoices>();
 
         SpellAbility sa = this.getRootSpellAbility();
         if (sa.getTarget() != null) {

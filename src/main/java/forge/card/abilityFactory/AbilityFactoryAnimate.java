@@ -15,8 +15,8 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -52,7 +52,7 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimate(final AbilityFactory af) {
-        final SpellAbility abAnimate = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abAnimate = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 1938171749867735155L;
 
             @Override
@@ -119,7 +119,7 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimate(final AbilityFactory af) {
-        final SpellAbility dbAnimate = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbAnimate = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -8659938411460952874L;
 
             @Override
@@ -194,7 +194,7 @@ public final class AbilityFactoryAnimate {
 
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -267,7 +267,7 @@ public final class AbilityFactoryAnimate {
             sb.append(".");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -352,7 +352,7 @@ public final class AbilityFactoryAnimate {
             useAbility &= AbilityFactoryAnimate.animateTgtAI(af, sa);
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             useAbility &= subAb.chkAIDrawback();
         }
@@ -377,7 +377,7 @@ public final class AbilityFactoryAnimate {
 
         // TODO - restrict the subAbility a bit
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -412,7 +412,7 @@ public final class AbilityFactoryAnimate {
         // Eventually, we can call the trigger of ETB abilities with
         // not mandatory as part of the checks to cast something
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -812,7 +812,7 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityAnimateAll(final AbilityFactory af) {
-        final SpellAbility abAnimateAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abAnimateAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -4969632476557290609L;
 
             @Override
@@ -879,7 +879,7 @@ public final class AbilityFactoryAnimate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackAnimateAll(final AbilityFactory af) {
-        final SpellAbility dbAnimateAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbAnimateAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 2056843302051205632L;
 
             @Override
@@ -921,7 +921,7 @@ public final class AbilityFactoryAnimate {
 
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -936,7 +936,7 @@ public final class AbilityFactoryAnimate {
 
         sb.append(desc);
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -958,7 +958,7 @@ public final class AbilityFactoryAnimate {
     private static boolean animateAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         boolean useAbility = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             useAbility &= subAb.chkAIDrawback();
         }
@@ -980,7 +980,7 @@ public final class AbilityFactoryAnimate {
     private static boolean animateAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         boolean chance = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -1008,7 +1008,7 @@ public final class AbilityFactoryAnimate {
 
         boolean chance = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }

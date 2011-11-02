@@ -3,8 +3,8 @@ package forge.card.abilityFactory;
 import java.util.HashMap;
 
 import forge.AllZone;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
@@ -32,7 +32,7 @@ public class AbilityFactoryDelayedTrigger {
      * @since 1.0.15
      */
     public static SpellAbility getAbility(final AbilityFactory af) {
-        final SpellAbility ability = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility ability = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -7502962478028160305L;
 
             @Override
@@ -97,10 +97,10 @@ public class AbilityFactoryDelayedTrigger {
      * 
      * @param abilityFactory
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.Ability_Sub} object.
+     * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    public static Ability_Sub getDrawback(final AbilityFactory abilityFactory) {
-        final Ability_Sub drawback = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+    public static AbilitySub getDrawback(final AbilityFactory abilityFactory) {
+        final AbilitySub drawback = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override
@@ -139,8 +139,8 @@ public class AbilityFactoryDelayedTrigger {
         final SpellAbility trigsa = AbilityFactoryDelayedTrigger.tempCreator.getAbility(
                 abilityFactory.getHostCard().getSVar(svarName), abilityFactory.getHostCard());
 
-        if (trigsa instanceof Ability_Sub) {
-            return ((Ability_Sub) trigsa).chkAIDrawback();
+        if (trigsa instanceof AbilitySub) {
+            return ((AbilitySub) trigsa).chkAIDrawback();
         } else {
             return trigsa.canPlayAI();
         }
@@ -205,7 +205,7 @@ public class AbilityFactoryDelayedTrigger {
 
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -217,7 +217,7 @@ public class AbilityFactoryDelayedTrigger {
             sb.append(mapParams.get("TriggerDescription"));
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

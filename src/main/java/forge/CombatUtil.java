@@ -13,7 +13,7 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input_PayManaCost_Ability;
+import forge.gui.input.InputPayManaCostAbility;
 
 /**
  * <p>
@@ -2058,7 +2058,7 @@ public class CombatUtil {
 
                 if (c.getController().isHuman()) {
                     AllZone.getInputControl().setInput(
-                            new Input_PayManaCost_Ability(c + " - Pay to Attack\r\n", ability.getManaCost(),
+                            new InputPayManaCostAbility(c + " - Pay to Attack\r\n", ability.getManaCost(),
                                     paidCommand, unpaidCommand));
                 } else { // computer
                     if (ComputerUtil.canPayCost(ability)) {

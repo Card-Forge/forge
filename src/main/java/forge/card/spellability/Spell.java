@@ -11,7 +11,7 @@ import forge.Constant.Zone;
 import forge.Phase;
 import forge.Player;
 import forge.card.cost.Cost;
-import forge.card.cost.Cost_Payment;
+import forge.card.cost.CostPayment;
 import forge.card.staticAbility.StaticAbility;
 import forge.error.ErrorViewer;
 
@@ -95,7 +95,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         if (this.getPayCosts() != null) {
-            if (!Cost_Payment.canPayAdditionalCosts(this.getPayCosts(), this)) {
+            if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
                 return false;
             }
         }

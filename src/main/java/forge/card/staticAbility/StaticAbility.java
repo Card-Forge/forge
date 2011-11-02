@@ -216,7 +216,7 @@ public class StaticAbility {
         }
 
         if (mode.equals("Continuous")) {
-            StaticAbility_Continuous.applyContinuousAbility(this);
+            StaticAbilityContinuous.applyContinuousAbility(this);
         }
     }
 
@@ -249,7 +249,7 @@ public class StaticAbility {
         }
 
         if (mode.equals("PreventDamage")) {
-            return StaticAbility_PreventDamage.applyPreventDamageAbility(this, source, target, in, b);
+            return StaticAbilityPreventDamage.applyPreventDamageAbility(this, source, target, in, b);
         }
 
         return in;
@@ -279,11 +279,11 @@ public class StaticAbility {
         }
 
         if (mode.equals("CantBeCast")) {
-            return StaticAbility_CantBeCast.applyCantBeCastAbility(this, card, activator);
+            return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, activator);
         }
 
         if (mode.equals("CantBeActivated")) {
-            return StaticAbility_CantBeCast.applyCantBeActivatedAbility(this, card, activator);
+            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, activator);
         }
 
         return false;

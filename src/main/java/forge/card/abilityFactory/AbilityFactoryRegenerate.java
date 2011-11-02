@@ -17,8 +17,8 @@ import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -52,7 +52,7 @@ public class AbilityFactoryRegenerate {
      */
     public static SpellAbility getAbilityRegenerate(final AbilityFactory af) {
 
-        final SpellAbility abRegenerate = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abRegenerate = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -6386981911243700037L;
 
             @Override
@@ -124,7 +124,7 @@ public class AbilityFactoryRegenerate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRegenerate(final AbilityFactory af) {
-        final SpellAbility dbRegen = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbRegen = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -2295483806708528744L;
 
             @Override
@@ -176,7 +176,7 @@ public class AbilityFactoryRegenerate {
         }
 
         if (tgtCards.size() > 0) {
-            if (sa instanceof Ability_Sub) {
+            if (sa instanceof AbilitySub) {
                 sb.append(" ");
             } else {
                 sb.append(host).append(" - ");
@@ -199,7 +199,7 @@ public class AbilityFactoryRegenerate {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -312,7 +312,7 @@ public class AbilityFactoryRegenerate {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -348,7 +348,7 @@ public class AbilityFactoryRegenerate {
             chance = AbilityFactoryRegenerate.regenMandatoryTarget(af, sa, mandatory);
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }
@@ -482,7 +482,7 @@ public class AbilityFactoryRegenerate {
      */
     public static SpellAbility getAbilityRegenerateAll(final AbilityFactory af) {
 
-        final SpellAbility abRegenerateAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abRegenerateAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -3001272997209059394L;
 
             @Override
@@ -554,7 +554,7 @@ public class AbilityFactoryRegenerate {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRegenerateAll(final AbilityFactory af) {
-        final SpellAbility dbRegenAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbRegenAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 4777861790603705572L;
 
             @Override
@@ -597,7 +597,7 @@ public class AbilityFactoryRegenerate {
         final StringBuilder sb = new StringBuilder();
         final Card host = af.getHostCard();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(host).append(" - ");
@@ -612,7 +612,7 @@ public class AbilityFactoryRegenerate {
 
         sb.append(desc);
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -686,7 +686,7 @@ public class AbilityFactoryRegenerate {
             chance = true;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -715,7 +715,7 @@ public class AbilityFactoryRegenerate {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }

@@ -2,7 +2,7 @@ package forge;
 
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.limited.BoosterDraft_1;
+import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.deckeditor.DeckEditorDraft;
 
@@ -26,7 +26,7 @@ public class GuiBoosterDraftTest {
         Constant.Runtime.HUMAN_DECK[0] = new Deck(GameType.Sealed);
 
         DeckEditorDraft g = new DeckEditorDraft();
-        g.showGui(new BoosterDraft_1(CardPoolLimitation.Full));
+        g.showGui(new BoosterDraft(CardPoolLimitation.Full));
         Assert.assertNotNull(g);
         g.dispose();
     }

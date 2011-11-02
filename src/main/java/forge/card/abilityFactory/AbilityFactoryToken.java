@@ -15,8 +15,8 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -134,7 +134,7 @@ public class AbilityFactoryToken extends AbilityFactory {
      */
     public final SpellAbility getAbility() {
 
-        final SpellAbility abToken = new Ability_Activated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+        final SpellAbility abToken = new AbilityActivated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
                 this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8460074843405764620L;
 
@@ -200,7 +200,7 @@ public class AbilityFactoryToken extends AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawback() {
-        final SpellAbility dbDealDamage = new Ability_Sub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbDealDamage = new AbilitySub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -374,7 +374,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(host.getName()).append(" - ");

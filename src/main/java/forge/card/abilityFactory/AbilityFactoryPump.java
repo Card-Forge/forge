@@ -20,11 +20,11 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 
 /**
@@ -123,7 +123,7 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPump() {
-        final SpellAbility abPump = new Ability_Activated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility abPump = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1118592153328758083L;
 
             @Override
@@ -159,7 +159,7 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackPump() {
-        final SpellAbility dbPump = new Ability_Sub(this.hostCard, this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbPump = new AbilitySub(this.hostCard, this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 42244224L;
 
             @Override
@@ -420,7 +420,7 @@ public class AbilityFactoryPump {
             return false;
         }
 
-        final SpellAbility_Restriction restrict = sa.getRestrictions();
+        final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
         if ((AllZone.getStack().size() == 0) && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_BEGIN)) {
@@ -796,7 +796,7 @@ public class AbilityFactoryPump {
 
         if (tgtCards.size() > 0) {
 
-            if (sa instanceof Ability_Sub) {
+            if (sa instanceof AbilitySub) {
                 sb.append(" ");
             } else {
                 sb.append(name).append(" - ");
@@ -844,7 +844,7 @@ public class AbilityFactoryPump {
             }
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -967,7 +967,7 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPumpAll() {
-        final SpellAbility abPumpAll = new Ability_Activated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility abPumpAll = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -8299417521903307630L;
 
             @Override
@@ -1033,7 +1033,7 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackPumpAll() {
-        final SpellAbility dbPumpAll = new Ability_Sub(this.hostCard, this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbPumpAll = new AbilitySub(this.hostCard, this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6411531984691660342L;
 
             @Override
@@ -1280,14 +1280,14 @@ public class AbilityFactoryPump {
             desc = this.params.get("PumpAllDescription");
         }
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
         }
         sb.append(desc);
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

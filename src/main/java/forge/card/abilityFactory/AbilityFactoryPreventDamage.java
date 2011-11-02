@@ -17,8 +17,8 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -48,7 +48,7 @@ public class AbilityFactoryPreventDamage {
      */
     public static SpellAbility getAbilityPreventDamage(final AbilityFactory af) {
 
-        final SpellAbility abRegenerate = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abRegenerate = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -6581723619801399347L;
 
             @Override
@@ -120,7 +120,7 @@ public class AbilityFactoryPreventDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPreventDamage(final AbilityFactory af) {
-        final SpellAbility dbRegen = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbRegen = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -2295483806708528744L;
 
             @Override
@@ -170,7 +170,7 @@ public class AbilityFactoryPreventDamage {
             tgts = sa.getTarget().getTargets();
         }
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(host).append(" - ");
@@ -208,7 +208,7 @@ public class AbilityFactoryPreventDamage {
         }
         sb.append(" this turn.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -344,7 +344,7 @@ public class AbilityFactoryPreventDamage {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -381,7 +381,7 @@ public class AbilityFactoryPreventDamage {
             chance = AbilityFactoryPreventDamage.preventDamageMandatoryTarget(af, sa, mandatory);
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
         }

@@ -37,20 +37,20 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Mana;
-import forge.card.spellability.Ability_Static;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbility_Restriction;
-import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.SpellAbilityRestriction;
+import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
-import forge.gui.input.Input_PayManaCost;
-import forge.gui.input.Input_PayManaCostUtil;
+import forge.gui.input.InputPayManaCost;
+import forge.gui.input.InputPayManaCostUtil;
 
 /**
  * <p>
@@ -842,7 +842,7 @@ public class CardFactoryUtil {
                     }
                     this.stop();
                 } else {
-                    this.stopSetNext(new Input_PayManaCost(spell));
+                    this.stopSetNext(new InputPayManaCost(spell));
                 }
             }
         };
@@ -949,12 +949,12 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @param manaCost
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.Ability_Activated} object.
+     * @return a {@link forge.card.spellability.AbilityActivated} object.
      */
-    public static Ability_Activated abilityUnearth(final Card sourceCard, final String manaCost) {
+    public static AbilityActivated abilityUnearth(final Card sourceCard, final String manaCost) {
 
         final Cost cost = new Cost(manaCost, sourceCard.getName(), true);
-        final Ability_Activated unearth = new Ability_Activated(sourceCard, cost, null) {
+        final AbilityActivated unearth = new AbilityActivated(sourceCard, cost, null) {
             private static final long serialVersionUID = -5633945565395478009L;
 
             @Override
@@ -975,7 +975,7 @@ public class CardFactoryUtil {
                 return ComputerUtil.canPayCost(this);
             }
         };
-        final SpellAbility_Restriction restrict = new SpellAbility_Restriction();
+        final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
         restrict.setZone(Zone.Graveyard);
         restrict.setSorcerySpeed(true);
         unearth.setRestrictions(restrict);
@@ -1049,16 +1049,16 @@ public class CardFactoryUtil {
      *            a int.
      * @param d
      *            a int.
-     * @return a {@link forge.card.spellability.Ability_Activated} object.
+     * @return a {@link forge.card.spellability.AbilityActivated} object.
      */
-    public static Ability_Activated abilityMorphUp(final Card sourceCard, final Cost cost, final String orgManaCost,
+    public static AbilityActivated abilityMorphUp(final Card sourceCard, final Cost cost, final String orgManaCost,
             final int a, final int d) {
         // final String player = sourceCard.getController();
         // final String manaCost = cost;
         final int attack = a;
         final int defense = d;
         final String origManaCost = orgManaCost;
-        final Ability_Activated morphUp = new Ability_Activated(sourceCard, cost, null) {
+        final AbilityActivated morphUp = new AbilityActivated(sourceCard, cost, null) {
             private static final long serialVersionUID = -3663857013937085953L;
 
             @Override
@@ -1122,7 +1122,7 @@ public class CardFactoryUtil {
         cycleCost += " Discard<1/CARDNAME>";
         final Cost abCost = new Cost(cycleCost, sourceCard.getName(), true);
 
-        final SpellAbility cycle = new Ability_Activated(sourceCard, abCost, null) {
+        final SpellAbility cycle = new AbilityActivated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1192,7 +1192,7 @@ public class CardFactoryUtil {
         cycleCost += " Discard<1/CARDNAME>";
         final Cost abCost = new Cost(cycleCost, sourceCard.getName(), true);
 
-        final SpellAbility cycle = new Ability_Activated(sourceCard, abCost, null) {
+        final SpellAbility cycle = new AbilityActivated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1276,7 +1276,7 @@ public class CardFactoryUtil {
         transmuteCost += " Discard<1/CARDNAME>";
         final Cost abCost = new Cost(transmuteCost, sourceCard.getName(), true);
 
-        final SpellAbility transmute = new Ability_Activated(sourceCard, abCost, null) {
+        final SpellAbility transmute = new AbilityActivated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1349,7 +1349,7 @@ public class CardFactoryUtil {
      */
     public static SpellAbility abilitySuspend(final Card sourceCard, final String suspendCost, final int suspendCounters) {
         // be careful with Suspend ability, it will not hit the stack
-        final SpellAbility suspend = new Ability_Static(sourceCard, suspendCost) {
+        final SpellAbility suspend = new AbilityStatic(sourceCard, suspendCost) {
             @Override
             public boolean canPlay() {
                 if (!(this.getRestrictions().canPlay(sourceCard, this))) {
@@ -1409,7 +1409,7 @@ public class CardFactoryUtil {
             final String[] extrinsicKeywords, final Cost abCost) {
         final Target target = new Target(sourceCard, "Select target creature you control",
                 "Creature.YouCtrl".split(","));
-        final SpellAbility equip = new Ability_Activated(sourceCard, abCost, target) {
+        final SpellAbility equip = new AbilityActivated(sourceCard, abCost, target) {
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
@@ -1602,11 +1602,11 @@ public class CardFactoryUtil {
      * 
      * @param c
      *            a {@link forge.Card} object.
-     * @return a {@link forge.card.spellability.Ability_Mana} object.
+     * @return a {@link forge.card.spellability.AbilityMana} object.
      */
-    public static Ability_Mana getEldraziSpawnAbility(final Card c) {
+    public static AbilityMana getEldraziSpawnAbility(final Card c) {
         final Cost cost = new Cost("Sac<1/CARDNAME>", c.getName(), true);
-        final Ability_Mana mana = new Ability_Mana(c, cost, "1") {
+        final AbilityMana mana = new AbilityMana(c, cost, "1") {
             private static final long serialVersionUID = -2478676548112738019L;
         };
         mana.setDescription("Sacrifice CARDNAME: Add 1 to your mana pool.");
@@ -1861,7 +1861,7 @@ public class CardFactoryUtil {
                         AllZone.getStack().add(spell);
                         this.stop();
                     } else {
-                        this.stopSetNext(new Input_PayManaCost(spell));
+                        this.stopSetNext(new InputPayManaCost(spell));
                     }
 
                     paid.execute();
@@ -3744,7 +3744,7 @@ public class CardFactoryUtil {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                for (final Ability_Mana am : c.getAIPlayableMana()) {
+                for (final AbilityMana am : c.getAIPlayableMana()) {
                     if (am.canPlay()) {
                         return true;
                     }
@@ -4419,7 +4419,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (!Spell_Permanent.checkETBEffects(card, this, null)) {
+                    if (!SpellPermanent.checkETBEffects(card, this, null)) {
                         return false;
                     }
                     return super.canPlayAI();
@@ -4649,7 +4649,7 @@ public class CardFactoryUtil {
                     final String parse = card.getKeyword().get(cardnameSpot).toString();
                     card.removeIntrinsicKeyword(parse);
                     color += " "
-                            + Input_PayManaCostUtil.getShortColorString(parse.replace("CARDNAME is ", "").replace(".",
+                            + InputPayManaCostUtil.getShortColorString(parse.replace("CARDNAME is ", "").replace(".",
                                     ""));
                     cardnameSpot = CardFactoryUtil.hasKeyword(card, "CARDNAME is ");
                 }
@@ -4742,7 +4742,7 @@ public class CardFactoryUtil {
                     sb.append(" rather than pay ").append(card.getName()).append("'s mana cost.");
                 }
 
-                final SpellAbility_Restriction restriction = new SpellAbility_Restriction();
+                final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
                 restriction.setRestrictions(mapParams);
                 if (!mapParams.containsKey("ActivationZone")) {
                     restriction.setZone(Constant.Zone.Hand);

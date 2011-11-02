@@ -54,7 +54,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final void setInput(final Input in) {
         if (this.model.getGameState().getStack().getResolving()
-                || !((this.input == null) || (this.input instanceof Input_PassPriority))) {
+                || !((this.input == null) || (this.input instanceof InputPassPriority))) {
             this.inputStack.add(in);
         } else {
             this.input = in;
@@ -197,7 +197,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             this.model.getGameState().getStack().freezeStack();
 
             if (playerTurn.isHuman()) {
-                return new Input_Attack();
+                return new InputAttack();
             }
         } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             this.model.getGameState().getStack().freezeStack();
@@ -210,7 +210,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     this.model.getGameState().getPhase().setNeedToNextPhase(true);
                     return null;
                 } else {
-                    return new Input_Block();
+                    return new InputBlock();
                 }
             }
         } else if (phase.equals(Constant.Phase.CLEANUP)) {
@@ -218,7 +218,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             if (this.model.getGameState().getStack().size() == 0) {
                 // resolve things
                 // like Madness
-                return new Input_Cleanup();
+                return new InputCleanup();
             }
         }
 
@@ -234,7 +234,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 this.model.getGameState().getPhase().passPriority();
                 return null;
             } else {
-                return new Input_PassPriority();
+                return new InputPassPriority();
             }
         } else if (playerTurn.isComputer()) {
             return this.aiInput;

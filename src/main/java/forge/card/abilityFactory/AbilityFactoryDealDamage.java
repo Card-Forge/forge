@@ -18,8 +18,8 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -67,7 +67,7 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbility() {
-        final SpellAbility abDamage = new Ability_Activated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+        final SpellAbility abDamage = new AbilityActivated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
                 this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -7560349014757367722L;
 
@@ -136,7 +136,7 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawback() {
-        final SpellAbility dbDealDamage = new Ability_Sub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbDealDamage = new AbilitySub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -191,7 +191,7 @@ public class AbilityFactoryDealDamage {
             tgts = sa.getTarget().getTargets();
         }
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(name).append(" -");
         }
         sb.append(" ");
@@ -359,7 +359,7 @@ public class AbilityFactoryDealDamage {
             }
         }
 
-        final Ability_Sub subAb = saMe.getSubAbility();
+        final AbilitySub subAb = saMe.getSubAbility();
         if (subAb != null) {
             rr &= subAb.chkAIDrawback();
         }
@@ -811,7 +811,7 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getAbilityDamageAll() {
 
-        final SpellAbility abDamageAll = new Ability_Activated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+        final SpellAbility abDamageAll = new AbilityActivated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
                 this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1831356710492849854L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
@@ -886,7 +886,7 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackDamageAll() {
-        final SpellAbility dbDamageAll = new Ability_Sub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbDamageAll = new AbilitySub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -6169562107675964474L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -939,7 +939,7 @@ public class AbilityFactoryDealDamage {
 
         sb.append(name).append(" - Deals " + dmg + " damage to " + desc);
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1028,7 +1028,7 @@ public class AbilityFactoryDealDamage {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }

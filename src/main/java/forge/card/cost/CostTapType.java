@@ -120,7 +120,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
             c.tap();
         }
@@ -134,7 +134,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         CardList typeList = ability.getActivatingPlayer().getCardsIn(Zone.Battlefield);
         typeList = typeList.getValidCards(this.getType().split(";"), ability.getActivatingPlayer(),
                 ability.getSourceCard());
@@ -163,7 +163,7 @@ public class CostTapType extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean tap = payment.getCost().getTap();
         final Integer c = this.convertAmount();
         if (c == null) {
@@ -194,13 +194,13 @@ public class CostTapType extends CostPartWithList {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param nCards
      *            a int.
      * @return a {@link forge.gui.input.Input} object.
      */
     public static Input inputTapXCost(final CostTapType tapType, final CardList cardList, final SpellAbility sa,
-            final Cost_Payment payment, final int nCards) {
+            final CostPayment payment, final int nCards) {
         final Input target = new Input() {
 
             private static final long serialVersionUID = 6438988130447851042L;

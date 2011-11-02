@@ -23,11 +23,11 @@ import forge.PlayerZone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 
@@ -59,7 +59,7 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityChangeZone(final AbilityFactory af) {
-        final SpellAbility abChangeZone = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abChangeZone = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 3728332812890211671L;
 
             @Override
@@ -129,7 +129,7 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackChangeZone(final AbilityFactory af) {
-        final SpellAbility dbChangeZone = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbChangeZone = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 3270484211099902059L;
 
             @Override
@@ -206,7 +206,7 @@ public final class AbilityFactoryChangeZone {
             af.getAbTgt().setZone(origin);
         }
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             if (origin.contains(Zone.Battlefield) || params.get("Destination").equals("Battlefield")) {
                 af.getHostCard().setSVar("PlayMain1", "TRUE");
             }
@@ -430,7 +430,7 @@ public final class AbilityFactoryChangeZone {
 
         chance &= (r.nextFloat() < .8);
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -541,7 +541,7 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             return subAb.doTrigger(mandatory);
         }
@@ -568,7 +568,7 @@ public final class AbilityFactoryChangeZone {
         final StringBuilder sb = new StringBuilder();
         final Card host = af.getHostCard();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(host.getName()).append(" -");
         }
 
@@ -646,7 +646,7 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1204,7 +1204,7 @@ public final class AbilityFactoryChangeZone {
                     return false;
                 }
 
-                final Ability_Sub abSub = sa.getSubAbility();
+                final AbilitySub abSub = sa.getSubAbility();
                 String subAPI = "";
                 if (abSub != null) {
                     subAPI = abSub.getAbilityFactory().getAPI();
@@ -1229,7 +1229,7 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -1277,7 +1277,7 @@ public final class AbilityFactoryChangeZone {
         final Zone destination = Zone.smartValueOf(params.get("Destination"));
         final Target tgt = af.getAbTgt();
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         String subAPI = "";
         String subAffected = "";
         HashMap<String, String> subParams = null;
@@ -1352,7 +1352,7 @@ public final class AbilityFactoryChangeZone {
                             }
                             // counters TODO check good and
                             // bad counters
-                            return Spell_Permanent.checkETBEffects(c, null, null); // checks
+                            return SpellPermanent.checkETBEffects(c, null, null); // checks
                                                                                    // only
                                                                                    // if
                                                                                    // there
@@ -1568,7 +1568,7 @@ public final class AbilityFactoryChangeZone {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             return subAb.doTrigger(mandatory);
         }
@@ -1593,7 +1593,7 @@ public final class AbilityFactoryChangeZone {
         final StringBuilder sb = new StringBuilder();
         final Card host = af.getHostCard();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(host.getName()).append(" -");
         }
 
@@ -1691,7 +1691,7 @@ public final class AbilityFactoryChangeZone {
             sb.append(" into").append(pronoun).append("owner's graveyard.");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1847,7 +1847,7 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityChangeZoneAll(final AbilityFactory af) {
-        final SpellAbility abChangeZone = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abChangeZone = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 3728332812890211671L;
 
             @Override
@@ -1917,7 +1917,7 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackChangeZoneAll(final AbilityFactory af) {
-        final SpellAbility dbChangeZone = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbChangeZone = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 3270484211099902059L;
 
             @Override
@@ -2069,7 +2069,7 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -2112,7 +2112,7 @@ public final class AbilityFactoryChangeZone {
         final StringBuilder sb = new StringBuilder();
         final Card host = af.getHostCard();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(host.getName()).append(" -");
         }
 
@@ -2126,7 +2126,7 @@ public final class AbilityFactoryChangeZone {
             sb.append(desc[0]);
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

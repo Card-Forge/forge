@@ -17,15 +17,15 @@ import forge.card.abilityFactory.AbilityFactoryCharm;
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.Cost_Payment;
+import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Static;
+import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbility_Requirements;
+import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.Target;
-import forge.card.spellability.Target_Selection;
+import forge.card.spellability.TargetSelection;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.deck.Deck;
@@ -33,9 +33,9 @@ import forge.game.GameEndReason;
 import forge.game.GameSummary;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input_Mulligan;
-import forge.gui.input.Input_PayManaCost;
-import forge.gui.input.Input_PayManaCost_Ability;
+import forge.gui.input.InputMulligan;
+import forge.gui.input.InputPayManaCost;
+import forge.gui.input.InputPayManaCostAbility;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
@@ -671,7 +671,7 @@ public class GameAction {
                         if (cast.getManaCost().equals("0")) {
                             AllZone.getStack().add(cast);
                         } else {
-                            AllZone.getInputControl().setInput(new Input_PayManaCost(cast));
+                            AllZone.getInputControl().setInput(new InputPayManaCost(cast));
                         }
                     }
                 } else {
@@ -1072,7 +1072,7 @@ public class GameAction {
                 }
 
                 final Card card = c;
-                final Ability_Static ability = new Ability_Static(crd, "0") {
+                final AbilityStatic ability = new AbilityStatic(crd, "0") {
                     @Override
                     public void resolve() {
                         GameAction.this.destroy(crd);
@@ -1441,7 +1441,7 @@ public class GameAction {
         mp.setImageFilename("mana_pool");
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(mp);
 
-        AllZone.getInputControl().setInput(new Input_Mulligan());
+        AllZone.getInputControl().setInput(new InputMulligan());
         Phase.setGameBegins(1);
     } // newGame()
 
@@ -1854,10 +1854,10 @@ public class GameAction {
      */
     public final void playSpellAbilityForFree(final SpellAbility sa) {
         if (sa.getPayCosts() != null) {
-            final Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
-            final Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
+            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
-            final SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
             req.setFree(true);
             req.fillRequirements();
         } else if (sa.getBeforePayMana() == null) {
@@ -1881,7 +1881,7 @@ public class GameAction {
                         AllZone.getStack().add(sa);
                     }
                 };
-                AllZone.getInputControl().setInput(new Input_PayManaCost_Ability(sa.getAdditionalManaCost(), paid1));
+                AllZone.getInputControl().setInput(new InputPayManaCostAbility(sa.getAdditionalManaCost(), paid1));
             } else {
                 AllZone.getStack().add(sa, x);
             }
@@ -2492,19 +2492,19 @@ public class GameAction {
         }
 
         if (newAbility) {
-            final Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
-            Cost_Payment payment = null;
+            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
+            CostPayment payment = null;
             if (sa.getPayCosts() == null) {
-                payment = new Cost_Payment(new Cost("0", sa.getSourceCard().getName(), sa.isAbility()), sa);
+                payment = new CostPayment(new Cost("0", sa.getSourceCard().getName(), sa.isAbility()), sa);
             } else {
-                payment = new Cost_Payment(sa.getPayCosts(), sa);
+                payment = new CostPayment(sa.getPayCosts(), sa);
             }
 
             if (!sa.isTrigger()) {
                 payment.changeCost();
             }
 
-            final SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
             req.fillRequirements();
         } else {
             ManaCost manaCost = new ManaCost(sa.getManaCost());
@@ -2533,7 +2533,7 @@ public class GameAction {
                     AllZone.getInputControl().setInput(sa.getAfterPayMana());
                 }
             } else if (sa.getBeforePayMana() == null) {
-                AllZone.getInputControl().setInput(new Input_PayManaCost(sa));
+                AllZone.getInputControl().setInput(new InputPayManaCost(sa));
             } else {
                 AllZone.getInputControl().setInput(sa.getBeforePayMana());
             }
@@ -2554,14 +2554,14 @@ public class GameAction {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
         if (sa.getPayCosts() != null) {
-            final Target_Selection ts = new Target_Selection(sa.getTarget(), sa);
-            final Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
+            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
             if (!sa.isTrigger()) {
                 payment.changeCost();
             }
 
-            final SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
             req.setSkipStack(true);
             req.fillRequirements(skipTargeting);
         } else {
@@ -2586,7 +2586,7 @@ public class GameAction {
                     AllZone.getInputControl().setInput(sa.getAfterPayMana());
                 }
             } else if (sa.getBeforePayMana() == null) {
-                AllZone.getInputControl().setInput(new Input_PayManaCost(sa, true));
+                AllZone.getInputControl().setInput(new InputPayManaCost(sa, true));
             } else {
                 AllZone.getInputControl().setInput(sa.getBeforePayMana());
             }

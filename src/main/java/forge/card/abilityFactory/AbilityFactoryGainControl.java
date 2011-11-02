@@ -17,8 +17,8 @@ import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -133,7 +133,7 @@ public class AbilityFactoryGainControl {
      */
     public final SpellAbility getAbilityGainControl() {
 
-        final SpellAbility abControl = new Ability_Activated(this.hostCard, this.af.getAbCost(), this.af.getAbTgt()) {
+        final SpellAbility abControl = new AbilityActivated(this.hostCard, this.af.getAbCost(), this.af.getAbTgt()) {
             private static final long serialVersionUID = -4384705198674678831L;
 
             @Override
@@ -169,7 +169,7 @@ public class AbilityFactoryGainControl {
      * @since 1.0.15
      */
     public final SpellAbility getDrawbackGainControl() {
-        final SpellAbility dbControl = new Ability_Sub(this.hostCard, this.af.getAbTgt()) {
+        final SpellAbility dbControl = new AbilitySub(this.hostCard, this.af.getAbTgt()) {
             private static final long serialVersionUID = -5577742598032345880L;
 
             @Override
@@ -213,7 +213,7 @@ public class AbilityFactoryGainControl {
     private String gainControlStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -246,7 +246,7 @@ public class AbilityFactoryGainControl {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

@@ -19,10 +19,10 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.abilityFactory.AbilityFactoryCharm;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Mana;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.gui.input.Input;
 
@@ -158,63 +158,63 @@ public class TriggerHandler {
 
         final String mode = mapParams.get("Mode");
         if (mode.equals("AbilityCast")) {
-            ret = new Trigger_SpellAbilityCast(mapParams, host, intrinsic);
+            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
         } else if (mode.equals("Always")) {
-            ret = new Trigger_Always(mapParams, host, intrinsic);
+            ret = new TriggerAlways(mapParams, host, intrinsic);
         } else if (mode.equals("AttackerBlocked")) {
-            ret = new Trigger_AttackerBlocked(mapParams, host, intrinsic);
+            ret = new TriggerAttackerBlocked(mapParams, host, intrinsic);
         } else if (mode.equals("AttackersDeclared")) {
-            ret = new Trigger_AttackersDeclared(mapParams, host, intrinsic);
+            ret = new TriggerAttackersDeclared(mapParams, host, intrinsic);
         } else if (mode.equals("AttackerUnblocked")) {
-            ret = new Trigger_AttackerUnblocked(mapParams, host, intrinsic);
+            ret = new TriggerAttackerUnblocked(mapParams, host, intrinsic);
         } else if (mode.equals("Attacks")) {
-            ret = new Trigger_Attacks(mapParams, host, intrinsic);
+            ret = new TriggerAttacks(mapParams, host, intrinsic);
         } else if (mode.equals("BecomesTarget")) {
-            ret = new Trigger_BecomesTarget(mapParams, host, intrinsic);
+            ret = new TriggerBecomesTarget(mapParams, host, intrinsic);
         } else if (mode.equals("Blocks")) {
-            ret = new Trigger_Blocks(mapParams, host, intrinsic);
+            ret = new TriggerBlocks(mapParams, host, intrinsic);
         } else if (mode.equals("Championed")) {
-            ret = new Trigger_Championed(mapParams, host, intrinsic);
+            ret = new TriggerChampioned(mapParams, host, intrinsic);
         } else if (mode.equals("ChangesZone")) {
-            ret = new Trigger_ChangesZone(mapParams, host, intrinsic);
+            ret = new TriggerChangesZone(mapParams, host, intrinsic);
         } else if (mode.equals("Clashed")) {
-            ret = new Trigger_Clashed(mapParams, host, intrinsic);
+            ret = new TriggerClashed(mapParams, host, intrinsic);
         } else if (mode.equals("CounterAdded")) {
-            ret = new Trigger_CounterAdded(mapParams, host, intrinsic);
+            ret = new TriggerCounterAdded(mapParams, host, intrinsic);
         } else if (mode.equals("Cycled")) {
-            ret = new Trigger_Cycled(mapParams, host, intrinsic);
+            ret = new TriggerCycled(mapParams, host, intrinsic);
         } else if (mode.equals("DamageDone")) {
-            ret = new Trigger_DamageDone(mapParams, host, intrinsic);
+            ret = new TriggerDamageDone(mapParams, host, intrinsic);
         } else if (mode.equals("Discarded")) {
-            ret = new Trigger_Discarded(mapParams, host, intrinsic);
+            ret = new TriggerDiscarded(mapParams, host, intrinsic);
         } else if (mode.equals("Drawn")) {
-            ret = new Trigger_Drawn(mapParams, host, intrinsic);
+            ret = new TriggerDrawn(mapParams, host, intrinsic);
         } else if (mode.equals("LandPlayed")) {
-            ret = new Trigger_LandPlayed(mapParams, host, intrinsic);
+            ret = new TriggerLandPlayed(mapParams, host, intrinsic);
         } else if (mode.equals("LifeGained")) {
-            ret = new Trigger_LifeGained(mapParams, host, intrinsic);
+            ret = new TriggerLifeGained(mapParams, host, intrinsic);
         } else if (mode.equals("LifeLost")) {
-            ret = new Trigger_LifeLost(mapParams, host, intrinsic);
+            ret = new TriggerLifeLost(mapParams, host, intrinsic);
         } else if (mode.equals("Phase")) {
-            ret = new Trigger_Phase(mapParams, host, intrinsic);
+            ret = new TriggerPhase(mapParams, host, intrinsic);
         } else if (mode.equals("Sacrificed")) {
-            ret = new Trigger_Sacrificed(mapParams, host, intrinsic);
+            ret = new TriggerSacrificed(mapParams, host, intrinsic);
         } else if (mode.equals("Shuffled")) {
-            ret = new Trigger_Shuffled(mapParams, host, intrinsic);
+            ret = new TriggerShuffled(mapParams, host, intrinsic);
         } else if (mode.equals("SpellAbilityCast")) {
-            ret = new Trigger_SpellAbilityCast(mapParams, host, intrinsic);
+            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
         } else if (mode.equals("SpellCast")) {
-            ret = new Trigger_SpellAbilityCast(mapParams, host, intrinsic);
+            ret = new TriggerSpellAbilityCast(mapParams, host, intrinsic);
         } else if (mode.equals("Taps")) {
-            ret = new Trigger_Taps(mapParams, host, intrinsic);
+            ret = new TriggerTaps(mapParams, host, intrinsic);
         } else if (mode.equals("TapsForMana")) {
-            ret = new Trigger_TapsForMana(mapParams, host, intrinsic);
+            ret = new TriggerTapsForMana(mapParams, host, intrinsic);
         } else if (mode.equals("TurnFaceUp")) {
-            ret = new Trigger_TurnFaceUp(mapParams, host, intrinsic);
+            ret = new TriggerTurnFaceUp(mapParams, host, intrinsic);
         } else if (mode.equals("Unequip")) {
-            ret = new Trigger_Unequip(mapParams, host, intrinsic);
+            ret = new TriggerUnequip(mapParams, host, intrinsic);
         } else if (mode.equals("Untaps")) {
-            ret = new Trigger_Untaps(mapParams, host, intrinsic);
+            ret = new TriggerUntaps(mapParams, host, intrinsic);
         }
 
         return ret;
@@ -356,7 +356,7 @@ public class TriggerHandler {
         if (regtrig.getHostCard().isFaceDown() && regtrig.getIsIntrinsic()) {
             return false; // Morphed cards only have pumped triggers go off.
         }
-        if (regtrig instanceof Trigger_Always) {
+        if (regtrig instanceof TriggerAlways) {
             if (AllZone.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                               // don't trigger again.
@@ -398,8 +398,8 @@ public class TriggerHandler {
         regtrig.setRunParams(runParams);
 
         // All tests passed, execute ability.
-        if (regtrig instanceof Trigger_TapsForMana) {
-            final Ability_Mana abMana = (Ability_Mana) runParams.get("Ability_Mana");
+        if (regtrig instanceof TriggerTapsForMana) {
+            final AbilityMana abMana = (AbilityMana) runParams.get("Ability_Mana");
             if (null != abMana) {
                 abMana.setUndoable(false);
             }
@@ -613,7 +613,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public SpellAbility_Restriction getRestrictions() {
+            public SpellAbilityRestriction getRestrictions() {
                 return sa[0].getRestrictions();
             }
 
@@ -643,7 +643,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public Ability_Sub getSubAbility() {
+            public AbilitySub getSubAbility() {
                 return sa[0].getSubAbility();
             }
 
@@ -849,7 +849,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setRestrictions(final SpellAbility_Restriction restrict) {
+            public void setRestrictions(final SpellAbilityRestriction restrict) {
                 sa[0].setRestrictions(restrict);
             }
 
@@ -864,7 +864,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setSubAbility(final Ability_Sub subAbility) {
+            public void setSubAbility(final AbilitySub subAbility) {
                 sa[0].setSubAbility(subAbility);
             }
 
@@ -928,7 +928,7 @@ public class TriggerHandler {
             // //////////////////////////////////////
             @Override
             public void resolve() {
-                if (!(regtrig instanceof Trigger_Always)) {
+                if (!(regtrig instanceof TriggerAlways)) {
                     // State triggers
                     // don't do the whole
                     // "Intervening If"

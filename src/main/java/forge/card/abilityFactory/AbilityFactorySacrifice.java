@@ -17,8 +17,8 @@ import forge.PlayerUtil;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -46,7 +46,7 @@ public class AbilityFactorySacrifice {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilitySacrifice(final AbilityFactory af) {
-        final SpellAbility abSacrifice = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abSacrifice = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1933592438783630254L;
 
             @Override
@@ -113,7 +113,7 @@ public class AbilityFactorySacrifice {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackSacrifice(final AbilityFactory af) {
-        final SpellAbility dbSacrifice = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbSacrifice = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
             @Override
@@ -154,7 +154,7 @@ public class AbilityFactorySacrifice {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -200,7 +200,7 @@ public class AbilityFactorySacrifice {
             sb.append("Sacrifices ").append(amount).append(" ").append(msg).append(".");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -257,7 +257,7 @@ public class AbilityFactorySacrifice {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -282,7 +282,7 @@ public class AbilityFactorySacrifice {
 
         // TODO: restrict the subAbility a bit
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -318,7 +318,7 @@ public class AbilityFactorySacrifice {
         // Eventually, we can call the trigger of ETB abilities with not
         // mandatory as part of the checks to cast something
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -552,7 +552,7 @@ public class AbilityFactorySacrifice {
      * @since 1.0.15
      */
     public static SpellAbility createAbilitySacrificeAll(final AbilityFactory af) {
-        final SpellAbility abSacrifice = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abSacrifice = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1933592438783630254L;
 
             @Override
@@ -621,7 +621,7 @@ public class AbilityFactorySacrifice {
      * @since 1.0.15
      */
     public static SpellAbility createDrawbackSacrificeAll(final AbilityFactory af) {
-        final SpellAbility dbSacrifice = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbSacrifice = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
             @Override
@@ -666,7 +666,7 @@ public class AbilityFactorySacrifice {
         final Card host = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(host).append(" - ");
@@ -688,7 +688,7 @@ public class AbilityFactorySacrifice {
 
         sb.append("Sacrifice permanents.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -764,7 +764,7 @@ public class AbilityFactorySacrifice {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }

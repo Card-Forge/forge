@@ -146,7 +146,7 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
             AllZone.getGameAction().exile(c);
         }
@@ -160,7 +160,7 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
@@ -195,7 +195,7 @@ public class CostExile extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         if (this.getThis()) {
             this.getList().add(source);
@@ -238,7 +238,7 @@ public class CostExile extends CostPartWithList {
      * @param nNeeded
      *            the n needed
      */
-    public static void exileFromTop(final SpellAbility sa, final CostExile part, final Cost_Payment payment,
+    public static void exileFromTop(final SpellAbility sa, final CostExile part, final CostPayment payment,
             final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
@@ -281,7 +281,7 @@ public class CostExile extends CostPartWithList {
      * @return the input
      */
     public static Input exileFrom(final SpellAbility sa, final CostExile part, final String type,
-            final Cost_Payment payment, final int nNeeded) {
+            final CostPayment payment, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 734256837615635021L;
             private CardList typeList;
@@ -350,13 +350,13 @@ public class CostExile extends CostPartWithList {
      * @param type
      *            a {@link java.lang.String} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param nNeeded
      *            the n needed
      * @return a {@link forge.gui.input.Input} object.
      */
     public static Input exileType(final SpellAbility sa, final CostExile part, final String type,
-            final Cost_Payment payment, final int nNeeded) {
+            final CostPayment payment, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 1403915758082824694L;
 
@@ -434,12 +434,12 @@ public class CostExile extends CostPartWithList {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            the part
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input exileThis(final SpellAbility sa, final Cost_Payment payment, final CostExile part) {
+    public static Input exileThis(final SpellAbility sa, final CostPayment payment, final CostExile part) {
         final Input target = new Input() {
             private static final long serialVersionUID = 678668673002725001L;
 

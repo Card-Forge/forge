@@ -22,10 +22,10 @@ import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.staticAbility.StaticAbility;
 import forge.gui.GuiUtils;
@@ -51,7 +51,7 @@ public class AbilityFactoryAttach {
         if (abilityFactory.getHostCard().isAura()) {
             // The 4th parameter is to resolve an issue with SetDescription in
             // default Spell_Permanent constructor
-            spAttach = new Spell_Permanent(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+            spAttach = new SpellPermanent(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                     abilityFactory.getAbTgt(), false) {
                 private static final long serialVersionUID = 6631124959690157874L;
 
@@ -147,7 +147,7 @@ public class AbilityFactoryAttach {
     public static String attachStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -174,7 +174,7 @@ public class AbilityFactoryAttach {
             sb.append(o).append(" ");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -884,7 +884,7 @@ public class AbilityFactoryAttach {
         // Now are Valid Targets better than my targets?
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }

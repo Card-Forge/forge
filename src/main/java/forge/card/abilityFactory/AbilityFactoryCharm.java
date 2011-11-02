@@ -2,8 +2,8 @@ package forge.card.abilityFactory;
 
 import java.util.ArrayList;
 
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
@@ -34,7 +34,7 @@ public final class AbilityFactoryCharm {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityCharm(final AbilityFactory af) {
-        final SpellAbility abCharm = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abCharm = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -4038591081733095021L;
 
             @Override
@@ -96,7 +96,7 @@ public final class AbilityFactoryCharm {
     private static String charmStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -106,7 +106,7 @@ public final class AbilityFactoryCharm {
         // nothing stack specific for Charm
 
         // begin standard post
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -151,7 +151,7 @@ public final class AbilityFactoryCharm {
                 if (null == o) {
                     break;
                 }
-                final Ability_Sub chosen = (Ability_Sub) o;
+                final AbilitySub chosen = (AbilitySub) o;
                 sa.addCharmChoice(chosen);
                 choices.remove(chosen);
 

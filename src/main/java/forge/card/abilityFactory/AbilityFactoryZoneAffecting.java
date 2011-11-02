@@ -19,8 +19,8 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -49,7 +49,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDraw(final AbilityFactory af) {
-        final SpellAbility abDraw = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDraw = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -118,7 +118,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDraw(final AbilityFactory af) {
-        final SpellAbility dbDraw = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDraw = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -160,7 +160,7 @@ public class AbilityFactoryZoneAffecting {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -210,7 +210,7 @@ public class AbilityFactoryZoneAffecting {
             sb.append(".");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -295,7 +295,7 @@ public class AbilityFactoryZoneAffecting {
             randomReturn = true;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -337,7 +337,7 @@ public class AbilityFactoryZoneAffecting {
         final String num = params.get("NumCards");
         if ((num != null) && num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            if (sa instanceof Ability_Sub) {
+            if (sa instanceof AbilitySub) {
                 numCards = Integer.parseInt(source.getSVar("PayX"));
             } else {
                 numCards = ComputerUtil.determineLeftoverMana(sa);
@@ -389,7 +389,7 @@ public class AbilityFactoryZoneAffecting {
                 } else {
                     // Don't draw too many cards and then risk discarding cards
                     // at EOT
-                    if (!(params.containsKey("NextUpkeep") || (sa instanceof Ability_Sub)) && !mandatory) {
+                    if (!(params.containsKey("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
                         return false;
                     }
                 }
@@ -419,7 +419,7 @@ public class AbilityFactoryZoneAffecting {
                     && AllZone.getPhase().getPlayerTurn().isComputer()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
-                if (!(params.containsKey("NextUpkeep") || (sa instanceof Ability_Sub)) && !mandatory) {
+                if (!(params.containsKey("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
                     return false;
                 }
             }
@@ -450,7 +450,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -545,7 +545,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityMill(final AbilityFactory af) {
-        final SpellAbility abMill = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abMill = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -614,7 +614,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackMill(final AbilityFactory af) {
-        final SpellAbility dbMill = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbMill = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -666,7 +666,7 @@ public class AbilityFactoryZoneAffecting {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -694,7 +694,7 @@ public class AbilityFactoryZoneAffecting {
         }
         sb.append(" from the top of his or her library.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -858,7 +858,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.chkAIDrawback();
         }
@@ -886,7 +886,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -969,7 +969,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDiscard(final AbilityFactory af) {
-        final SpellAbility abDiscard = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDiscard = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4348585353456736817L;
 
             @Override
@@ -1038,7 +1038,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDiscard(final AbilityFactory af) {
-        final SpellAbility dbDiscard = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDiscard = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 4348585353456736817L;
 
             @Override
@@ -1250,7 +1250,7 @@ public class AbilityFactoryZoneAffecting {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -1307,7 +1307,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1419,7 +1419,7 @@ public class AbilityFactoryZoneAffecting {
 
         // some other variables here, like handsize vs. maxHandSize
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -1491,10 +1491,10 @@ public class AbilityFactoryZoneAffecting {
      * @param af
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param subAb
-     *            a {@link forge.card.spellability.Ability_Sub} object.
+     *            a {@link forge.card.spellability.AbilitySub} object.
      * @return a boolean.
      */
-    private static boolean discardCheckDrawbackAI(final AbilityFactory af, final Ability_Sub subAb) {
+    private static boolean discardCheckDrawbackAI(final AbilityFactory af, final AbilitySub subAb) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
         final Target tgt = af.getAbTgt();
@@ -1519,7 +1519,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityShuffle(final AbilityFactory af) {
-        final SpellAbility abShuffle = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abShuffle = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1245185178904838198L;
 
             @Override
@@ -1588,7 +1588,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackShuffle(final AbilityFactory af) {
-        final SpellAbility dbShuffle = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbShuffle = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 5974307947494280639L;
 
             @Override
@@ -1630,7 +1630,7 @@ public class AbilityFactoryZoneAffecting {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -1669,7 +1669,7 @@ public class AbilityFactoryZoneAffecting {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1751,7 +1751,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }

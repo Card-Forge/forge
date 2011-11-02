@@ -18,8 +18,8 @@ import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -54,7 +54,7 @@ public final class AbilityFactoryCopy {
      */
     public static SpellAbility createAbilityCopyPermanent(final AbilityFactory af) {
 
-        final SpellAbility abCopyPermanent = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abCopyPermanent = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4557071554433108024L;
 
             @Override
@@ -123,7 +123,7 @@ public final class AbilityFactoryCopy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackCopyPermanent(final AbilityFactory af) {
-        final SpellAbility dbCopyPermanent = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbCopyPermanent = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -7725564505830285184L;
 
             @Override
@@ -165,7 +165,7 @@ public final class AbilityFactoryCopy {
         final StringBuilder sb = new StringBuilder();
         final HashMap<String, String> params = af.getMapParams();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -190,7 +190,7 @@ public final class AbilityFactoryCopy {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -302,7 +302,7 @@ public final class AbilityFactoryCopy {
         // end Targeting
 
         if (af.hasSubAbility()) {
-            final Ability_Sub abSub = sa.getSubAbility();
+            final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return abSub.chkAIDrawback();
             }
@@ -491,7 +491,7 @@ public final class AbilityFactoryCopy {
      */
     public static SpellAbility createAbilityCopySpell(final AbilityFactory af) {
 
-        final SpellAbility abCopySpell = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abCopySpell = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 5232548517225345052L;
 
             @Override
@@ -560,7 +560,7 @@ public final class AbilityFactoryCopy {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackCopySpell(final AbilityFactory af) {
-        final SpellAbility dbCopySpell = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbCopySpell = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 1927508119173644632L;
 
             @Override
@@ -602,7 +602,7 @@ public final class AbilityFactoryCopy {
         final StringBuilder sb = new StringBuilder();
         final HashMap<String, String> params = af.getMapParams();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -636,7 +636,7 @@ public final class AbilityFactoryCopy {
         sb.append(".");
         // TODO probably add an optional "You may choose new targets..."
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -676,7 +676,7 @@ public final class AbilityFactoryCopy {
         final boolean randomReturn = false;
 
         if (af.hasSubAbility()) {
-            final Ability_Sub abSub = sa.getSubAbility();
+            final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }

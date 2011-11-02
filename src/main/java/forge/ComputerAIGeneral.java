@@ -9,7 +9,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.SpellPermanent;
 
 /**
  * <p>
@@ -352,8 +352,8 @@ public class ComputerAIGeneral implements Computer {
         for (Card c : l) {
             for (SpellAbility sa : c.getSpellAbility()) {
                 // Or if this Permanent has an ETB ability with Counter
-                if (sa instanceof Spell_Permanent) {
-                    if (Spell_Permanent.checkETBEffects(c, sa, "Counter")) {
+                if (sa instanceof SpellPermanent) {
+                    if (SpellPermanent.checkETBEffects(c, sa, "Counter")) {
                         spellAbility.add(sa);
                     }
                 }

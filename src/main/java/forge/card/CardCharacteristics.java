@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 import forge.CardColor;
 import forge.SetInfo;
-import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
@@ -27,7 +27,7 @@ public class CardCharacteristics {
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
     private ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
     private ArrayList<String> intrinsicAbility = new ArrayList<String>();
-    private ArrayList<Ability_Mana> manaAbility = new ArrayList<Ability_Mana>();
+    private ArrayList<AbilityMana> manaAbility = new ArrayList<AbilityMana>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
@@ -237,7 +237,7 @@ public class CardCharacteristics {
      * 
      * @return the manaAbility
      */
-    public final ArrayList<Ability_Mana> getManaAbility() {
+    public final ArrayList<AbilityMana> getManaAbility() {
         return manaAbility;
     }
 
@@ -247,7 +247,7 @@ public class CardCharacteristics {
      * @param manaAbility0
      *            the manaAbility to set
      */
-    public final void setManaAbility(final ArrayList<Ability_Mana> manaAbility0) {
+    public final void setManaAbility(final ArrayList<AbilityMana> manaAbility0) {
         this.manaAbility = manaAbility0; // TODO: Add 0 to parameter's name.
     }
 

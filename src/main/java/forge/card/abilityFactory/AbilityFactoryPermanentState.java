@@ -19,8 +19,8 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -50,7 +50,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityUntap(final AbilityFactory af) {
-        final SpellAbility abUntap = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -119,7 +119,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackUntap(final AbilityFactory af) {
-        final SpellAbility dbUntap = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbUntap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -163,7 +163,7 @@ public class AbilityFactoryPermanentState {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = sa.getSourceCard();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -193,7 +193,7 @@ public class AbilityFactoryPermanentState {
         }
         sb.append(".");
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             sb.append(subAb.getStackDescription());
         }
@@ -235,7 +235,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -314,7 +314,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -613,7 +613,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityTap(final AbilityFactory af) {
-        final SpellAbility abTap = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abTap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -682,7 +682,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackTap(final AbilityFactory af) {
-        final SpellAbility dbTap = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbTap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -725,7 +725,7 @@ public class AbilityFactoryPermanentState {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = sa.getSourceCard();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -751,7 +751,7 @@ public class AbilityFactoryPermanentState {
 
         sb.append(".");
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             sb.append(subAb.getStackDescription());
         }
@@ -811,7 +811,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -888,7 +888,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -1134,7 +1134,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityUntapAll(final AbilityFactory af) {
-        final SpellAbility abUntap = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 8914852730903389831L;
 
             @Override
@@ -1203,7 +1203,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackUntapAll(final AbilityFactory af) {
-        final SpellAbility dbUntapAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbUntapAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -5187900994680626766L;
 
             @Override
@@ -1346,7 +1346,7 @@ public class AbilityFactoryPermanentState {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
             sb.append("Untap all valid cards.");
         } else {
@@ -1354,7 +1354,7 @@ public class AbilityFactoryPermanentState {
             sb.append(params.get("SpellDescription"));
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             sb.append(subAb.getStackDescription());
         }
@@ -1375,7 +1375,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityTapAll(final AbilityFactory af) {
-        final SpellAbility abUntap = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -2095140656782946737L;
 
             @Override
@@ -1444,7 +1444,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackTapAll(final AbilityFactory af) {
-        final SpellAbility dbTap = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbTap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -1609,7 +1609,7 @@ public class AbilityFactoryPermanentState {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
             sb.append("Tap all valid cards.");
         } else {
@@ -1617,7 +1617,7 @@ public class AbilityFactoryPermanentState {
             sb.append(params.get("SpellDescription"));
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             sb.append(subAb.getStackDescription());
         }
@@ -1713,7 +1713,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityTapOrUntap(final AbilityFactory af) {
-        final SpellAbility abTapOrUntap = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abTapOrUntap = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -4713183763302932079L;
 
             @Override
@@ -1782,7 +1782,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackTapOrUntap(final AbilityFactory af) {
-        final SpellAbility dbTapOrUntap = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbTapOrUntap = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -8282868583712773337L;
 
             @Override
@@ -1826,7 +1826,7 @@ public class AbilityFactoryPermanentState {
 
         final HashMap<String, String> params = af.getMapParams();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -1852,7 +1852,7 @@ public class AbilityFactoryPermanentState {
 
         sb.append(".");
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             sb.append(subAb.getStackDescription());
         }
@@ -1902,7 +1902,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -1979,7 +1979,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -2048,7 +2048,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityPhases(final AbilityFactory af) {
-        final SpellAbility abPhases = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abPhases = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 5445572699000471299L;
 
             @Override
@@ -2117,7 +2117,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPhases(final AbilityFactory af) {
-        final SpellAbility dbPhases = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbPhases = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4990932993654533449L;
 
             @Override
@@ -2161,7 +2161,7 @@ public class AbilityFactoryPermanentState {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -2184,7 +2184,7 @@ public class AbilityFactoryPermanentState {
         }
         sb.append(" Phases Out.");
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             sb.append(subAb.getStackDescription());
         }
@@ -2230,7 +2230,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -2297,7 +2297,7 @@ public class AbilityFactoryPermanentState {
             }
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }

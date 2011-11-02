@@ -70,7 +70,7 @@ public class CostReveal extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
         CardList hand = activator.getCardsIn(Zone.Hand);
@@ -106,7 +106,7 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         GuiUtils.getChoiceOptional("Revealed cards:", this.getList().toArray());
     }
 
@@ -118,7 +118,7 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final Player activator = ability.getActivatingPlayer();
         final String amount = this.getAmount();
         this.resetList();
@@ -200,7 +200,7 @@ public class CostReveal extends CostPartWithList {
      * @param handList
      *            a {@link forge.CardList} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
      * @param sa
@@ -209,7 +209,7 @@ public class CostReveal extends CostPartWithList {
      *            a int.
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input inputRevealCost(final String discType, final CardList handList, final Cost_Payment payment,
+    public static Input inputRevealCost(final String discType, final CardList handList, final CostPayment payment,
             final CostReveal part, final SpellAbility sa, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;

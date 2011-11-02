@@ -2,7 +2,7 @@ package forge;
 
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.mana.ManaCost;
-import forge.gui.input.Input_PayManaCostUtil;
+import forge.gui.input.InputPayManaCostUtil;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -210,8 +210,8 @@ public class RunTest {
             check("97", c.isUntapped());
 
             //test Input_PayManaCostUtil
-            check("98", Input_PayManaCostUtil.getLongColorString("G").equals(Constant.Color.GREEN));
-            check("99", Input_PayManaCostUtil.getLongColorString("1").equals(Constant.Color.COLORLESS));
+            check("98", InputPayManaCostUtil.getLongColorString("G").equals(Constant.Color.GREEN));
+            check("99", InputPayManaCostUtil.getLongColorString("1").equals(Constant.Color.COLORLESS));
 
             /*
            check("101", Input_PayManaCostUtil.isManaNeeded(Constant.Color.Green, new ManaCost("5")) == true);

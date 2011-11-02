@@ -107,7 +107,7 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
             AllZone.getGameAction().sacrifice(c);
         }
@@ -121,7 +121,7 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
@@ -161,7 +161,7 @@ public class CostSacrifice extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final Cost_Payment payment) {
+    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         final Player activator = ability.getActivatingPlayer();
         if (this.getThis()) {
@@ -198,13 +198,13 @@ public class CostSacrifice extends CostPartWithList {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
      * @param typeList
      *            TODO
      */
-    public static void sacrificeAll(final SpellAbility sa, final Cost_Payment payment, final CostPart part,
+    public static void sacrificeAll(final SpellAbility sa, final CostPayment payment, final CostPart part,
             final CardList typeList) {
         // TODO Ask First
         for (final Card card : typeList) {
@@ -223,7 +223,7 @@ public class CostSacrifice extends CostPartWithList {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
      * @param typeList
@@ -232,7 +232,7 @@ public class CostSacrifice extends CostPartWithList {
      *            the n needed
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input sacrificeFromList(final SpellAbility sa, final Cost_Payment payment, final CostSacrifice part,
+    public static Input sacrificeFromList(final SpellAbility sa, final CostPayment payment, final CostSacrifice part,
             final CardList typeList, final int nNeeded) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
@@ -304,12 +304,12 @@ public class CostSacrifice extends CostPartWithList {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param payment
-     *            a {@link forge.card.cost.Cost_Payment} object.
+     *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input sacrificeThis(final SpellAbility sa, final Cost_Payment payment, final CostSacrifice part) {
+    public static Input sacrificeThis(final SpellAbility sa, final CostPayment payment, final CostSacrifice part) {
         final Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
 

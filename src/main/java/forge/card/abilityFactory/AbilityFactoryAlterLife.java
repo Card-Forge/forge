@@ -15,8 +15,8 @@ import forge.MyRandom;
 import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -47,7 +47,7 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createAbilityGainLife(final AbilityFactory abilityFactory) {
 
-        final SpellAbility abGainLife = new Ability_Activated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+        final SpellAbility abGainLife = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
 
@@ -131,7 +131,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackGainLife(final AbilityFactory abilityFactory) {
-        final SpellAbility dbGainLife = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        final SpellAbility dbGainLife = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -188,7 +188,7 @@ public class AbilityFactoryAlterLife {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -214,7 +214,7 @@ public class AbilityFactoryAlterLife {
 
         sb.append("gains ").append(amount).append(" life.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -356,7 +356,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -408,7 +408,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityLoseLife(final AbilityFactory abilityFactory) {
-        final SpellAbility abLoseLife = new Ability_Activated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+        final SpellAbility abLoseLife = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 1129762905315395160L;
 
@@ -495,7 +495,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackLoseLife(final AbilityFactory abilityFactory) {
-        final SpellAbility dbLoseLife = new Ability_Sub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+        final SpellAbility dbLoseLife = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -2966932725306192437L;
 
             private final AbilityFactory af = abilityFactory;
@@ -551,7 +551,7 @@ public class AbilityFactoryAlterLife {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -576,7 +576,7 @@ public class AbilityFactoryAlterLife {
 
         sb.append("loses ").append(amount).append(" life.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -723,7 +723,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -780,7 +780,7 @@ public class AbilityFactoryAlterLife {
      */
     public static SpellAbility createAbilityPoison(final AbilityFactory af) {
 
-        final SpellAbility abPoison = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abPoison = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 6598936088284756268L;
 
             @Override
@@ -856,7 +856,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPoison(final AbilityFactory af) {
-        final SpellAbility dbPoison = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbPoison = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -1173479041548558016L;
 
             @Override
@@ -929,7 +929,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -983,7 +983,7 @@ public class AbilityFactoryAlterLife {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), sa);
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -1027,7 +1027,7 @@ public class AbilityFactoryAlterLife {
             sb.append(".");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1104,7 +1104,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilitySetLife(final AbilityFactory af) {
-        final SpellAbility abSetLife = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abSetLife = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -7375434097541097668L;
 
             @Override
@@ -1178,7 +1178,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackSetLife(final AbilityFactory af) {
-        final SpellAbility dbSetLife = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbSetLife = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -7634729949893534023L;
 
             @Override
@@ -1231,7 +1231,7 @@ public class AbilityFactoryAlterLife {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" -");
         } else {
             sb.append(" ");
@@ -1257,7 +1257,7 @@ public class AbilityFactoryAlterLife {
 
         sb.append("life total becomes ").append(amount).append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1419,7 +1419,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -1471,7 +1471,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityExchangeLife(final AbilityFactory af) {
-        final SpellAbility abExLife = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abExLife = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 212548821691286311L;
 
             @Override
@@ -1540,7 +1540,7 @@ public class AbilityFactoryAlterLife {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackExchangeLife(final AbilityFactory af) {
-        final SpellAbility dbExLife = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbExLife = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 6951913863491173483L;
 
             @Override
@@ -1588,7 +1588,7 @@ public class AbilityFactoryAlterLife {
         final StringBuilder sb = new StringBuilder();
         final Player activatingPlayer = sa.getActivatingPlayer();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" -");
@@ -1612,7 +1612,7 @@ public class AbilityFactoryAlterLife {
         }
         sb.append(".");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

@@ -20,11 +20,11 @@ import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 
 /**
@@ -55,7 +55,7 @@ public final class AbilityFactoryDebuff {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityDebuff(final AbilityFactory af) {
-        final SpellAbility abDebuff = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDebuff = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 3536198601841771383L;
 
             @Override
@@ -124,7 +124,7 @@ public final class AbilityFactoryDebuff {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDebuff(final AbilityFactory af) {
-        final SpellAbility dbDebuff = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDebuff = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -4728590185604233229L;
 
             @Override
@@ -194,7 +194,7 @@ public final class AbilityFactoryDebuff {
         }
 
         if (tgtCards.size() > 0) {
-            if (sa instanceof Ability_Sub) {
+            if (sa instanceof AbilitySub) {
                 sb.append(" ");
             } else {
                 sb.append(host).append(" - ");
@@ -226,7 +226,7 @@ public final class AbilityFactoryDebuff {
             sb.append(".");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -268,7 +268,7 @@ public final class AbilityFactoryDebuff {
         }
 
         final HashMap<String, String> params = af.getMapParams();
-        final SpellAbility_Restriction restrict = sa.getRestrictions();
+        final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
         if ((AllZone.getStack().size() == 0) && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_BEGIN)) {
@@ -594,7 +594,7 @@ public final class AbilityFactoryDebuff {
      * @since 1.0.15
      */
     public static SpellAbility createAbilityDebuffAll(final AbilityFactory af) {
-        final SpellAbility abDebuffAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDebuffAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1977027530713097149L;
 
             @Override
@@ -666,7 +666,7 @@ public final class AbilityFactoryDebuff {
      * @since 1.0.15
      */
     public static SpellAbility createDrawbackDebuffAll(final AbilityFactory af) {
-        final SpellAbility dbDebuffAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDebuffAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 3262199296469706708L;
 
             @Override
@@ -856,7 +856,7 @@ public final class AbilityFactoryDebuff {
             desc = params.get("DebuffAllDescription");
         }
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -864,7 +864,7 @@ public final class AbilityFactoryDebuff {
 
         sb.append(desc);
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

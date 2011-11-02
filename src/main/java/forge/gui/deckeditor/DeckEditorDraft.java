@@ -26,7 +26,7 @@ import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
-import forge.game.limited.BoosterDraft;
+import forge.game.limited.IBoosterDraft;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -53,7 +53,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      */
     private static final long serialVersionUID = -6055633915602448260L;
 
-    private BoosterDraft boosterDraft;
+    private IBoosterDraft boosterDraft;
 
     private final JButton jButtonPick = new JButton();
 
@@ -93,7 +93,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
      * @param inBoosterDraft
      *            the in_booster draft
      */
-    public final void showGui(final BoosterDraft inBoosterDraft) {
+    public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
 
         this.setup();
@@ -298,7 +298,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         final ItemPoolView<CardPrinted> list = ItemPool.createFrom(this.getBottomTableWithCards().getCards(), CardPrinted.class);
         deck.addSideboard(list);
 
-        final String landSet = BoosterDraft.LAND_SET_CODE[0];
+        final String landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
         deck.addSideboard(CardDb.instance().getCard("Forest", landSet), landsCount);
         deck.addSideboard(CardDb.instance().getCard("Mountain", landSet), landsCount);

@@ -13,8 +13,8 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -47,7 +47,7 @@ public final class AbilityFactoryCombat {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityFog(final AbilityFactory af) {
-        final SpellAbility abFog = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abFog = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -1933592438783630254L;
 
             @Override
@@ -120,7 +120,7 @@ public final class AbilityFactoryCombat {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackFog(final AbilityFactory af) {
-        final SpellAbility dbFog = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbFog = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
             @Override
@@ -156,7 +156,7 @@ public final class AbilityFactoryCombat {
     public static String fogStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -165,7 +165,7 @@ public final class AbilityFactoryCombat {
         sb.append(sa.getSourceCard().getController());
         sb.append(" prevents all combat damage this turn.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -203,7 +203,7 @@ public final class AbilityFactoryCombat {
             return false;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             if (!subAb.chkAIDrawback()) {
                 return false;
@@ -234,7 +234,7 @@ public final class AbilityFactoryCombat {
             chance = AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DAMAGE);
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -269,7 +269,7 @@ public final class AbilityFactoryCombat {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }
@@ -312,7 +312,7 @@ public final class AbilityFactoryCombat {
      * @since 1.1.01
      */
     public static SpellAbility createAbilityMustAttack(final AbilityFactory af) {
-        final SpellAbility abMustAttack = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abMustAttack = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4559154732470225755L;
 
             @Override
@@ -381,7 +381,7 @@ public final class AbilityFactoryCombat {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackMustAttack(final AbilityFactory af) {
-        final SpellAbility dbMustAttack = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbMustAttack = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 1294949210616598158L;
 
             @Override
@@ -408,7 +408,7 @@ public final class AbilityFactoryCombat {
         final Card host = af.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -438,7 +438,7 @@ public final class AbilityFactoryCombat {
         }
 
         // begin standard post-
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -458,7 +458,7 @@ public final class AbilityFactoryCombat {
         // TODO - implement AI
         chance = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -478,7 +478,7 @@ public final class AbilityFactoryCombat {
         chance = false;
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }
@@ -529,7 +529,7 @@ public final class AbilityFactoryCombat {
      * @since 1.1.6
      */
     public static SpellAbility createAbilityRemoveFromCombat(final AbilityFactory af) {
-        final SpellAbility abRemCombat = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abRemCombat = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -2472319390656924874L;
 
             @Override
@@ -598,7 +598,7 @@ public final class AbilityFactoryCombat {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRemoveFromCombat(final AbilityFactory af) {
-        final SpellAbility dbRemCombat = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbRemCombat = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 5080737903616292224L;
 
             @Override
@@ -624,7 +624,7 @@ public final class AbilityFactoryCombat {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -650,7 +650,7 @@ public final class AbilityFactoryCombat {
         sb.append(" from combat.");
 
         // begin standard post-
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -670,7 +670,7 @@ public final class AbilityFactoryCombat {
         // TODO - implement AI
         chance = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -691,7 +691,7 @@ public final class AbilityFactoryCombat {
         chance = false;
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }
@@ -739,7 +739,7 @@ public final class AbilityFactoryCombat {
      * @since 1.1.6
      */
     public static SpellAbility createAbilityMustBlock(final AbilityFactory af) {
-        final SpellAbility abMustBlock = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abMustBlock = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4237190949098526123L;
 
             @Override
@@ -812,7 +812,7 @@ public final class AbilityFactoryCombat {
      * @since 1.1.6
      */
     public static SpellAbility createDrawbackMustBlock(final AbilityFactory af) {
-        final SpellAbility dbMustBlock = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbMustBlock = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -815813765448972775L;
 
             @Override
@@ -839,7 +839,7 @@ public final class AbilityFactoryCombat {
         final Card host = af.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -870,7 +870,7 @@ public final class AbilityFactoryCombat {
         }
 
         // begin standard post-
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -891,7 +891,7 @@ public final class AbilityFactoryCombat {
         // TODO - implement AI
         chance = false;
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
         }
@@ -967,7 +967,7 @@ public final class AbilityFactoryCombat {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return chance && abSub.doTrigger(mandatory);
         }

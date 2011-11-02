@@ -21,8 +21,8 @@ import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -84,7 +84,7 @@ public final class AbilityFactoryProtection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityProtection(final AbilityFactory af) {
-        final SpellAbility abProtect = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abProtect = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -5295298887428747473L;
 
             @Override
@@ -122,7 +122,7 @@ public final class AbilityFactoryProtection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackProtection(final AbilityFactory af) {
-        final SpellAbility dbProtect = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbProtect = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 8342800124705819366L;
 
             @Override
@@ -590,7 +590,7 @@ public final class AbilityFactoryProtection {
 
         if (tgtCards.size() > 0) {
 
-            if (sa instanceof Ability_Sub) {
+            if (sa instanceof AbilitySub) {
                 sb.append(" ");
             } else {
                 sb.append(host).append(" - ");
@@ -649,7 +649,7 @@ public final class AbilityFactoryProtection {
             sb.append(".");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -849,7 +849,7 @@ public final class AbilityFactoryProtection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityProtectionAll(final AbilityFactory af) {
-        final SpellAbility abProtectAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abProtectAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -8491026929105907288L;
 
             @Override
@@ -887,7 +887,7 @@ public final class AbilityFactoryProtection {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackProtectionAll(final AbilityFactory af) {
-        final SpellAbility dbProtectAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbProtectAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 5096939345199247701L;
 
             @Override
@@ -1022,7 +1022,7 @@ public final class AbilityFactoryProtection {
 
         if (tgtCards.size() > 0) {
 
-            if (sa instanceof Ability_Sub) {
+            if (sa instanceof AbilitySub) {
                 sb.append(" ");
             } else {
                 sb.append(host).append(" - ");
@@ -1039,7 +1039,7 @@ public final class AbilityFactoryProtection {
             }
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }

@@ -2,7 +2,7 @@ package forge.card.abilityFactory;
 
 import java.util.HashMap;
 
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 
 // Cleanup is not the same as other AFs, it is only used as a Drawback, and only used to Cleanup particular card states
@@ -30,10 +30,10 @@ public final class AbilityFactoryCleanup {
      * 
      * @param af
      *            a {@link forge.card.abilityFactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.Ability_Sub} object.
+     * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    public static Ability_Sub getDrawback(final AbilityFactory af) {
-        final Ability_Sub drawback = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+    public static AbilitySub getDrawback(final AbilityFactory af) {
+        final AbilitySub drawback = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 6192972525033429820L;
 
             @Override

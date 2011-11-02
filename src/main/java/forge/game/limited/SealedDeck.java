@@ -20,7 +20,7 @@ import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardSet;
-import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.game.GameType;
@@ -311,7 +311,7 @@ public class SealedDeck {
             lands.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    final ArrayList<Ability_Mana> maList = c.getManaAbility();
+                    final ArrayList<AbilityMana> maList = c.getManaAbility();
                     for (int j = 0; j < maList.size(); j++) {
                         if (maList.get(j).canProduce(aiDC.mana1) || maList.get(j).canProduce(aiDC.mana2)) {
                             return true;

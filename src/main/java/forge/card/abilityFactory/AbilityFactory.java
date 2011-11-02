@@ -17,11 +17,11 @@ import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbility_Condition;
-import forge.card.spellability.SpellAbility_Restriction;
-import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.SpellAbilityCondition;
+import forge.card.spellability.SpellAbilityRestriction;
+import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 
 /**
@@ -1162,7 +1162,7 @@ public class AbilityFactory {
             spellAbility.setSubAbility(this.getSubAbility());
         }
 
-        if (spellAbility instanceof Spell_Permanent) {
+        if (spellAbility instanceof SpellPermanent) {
             spellAbility.setDescription(spellAbility.getSourceCard().getName());
         } else if (this.hasSpDesc) {
             final StringBuilder sb = new StringBuilder();
@@ -1207,7 +1207,7 @@ public class AbilityFactory {
      */
     private void makeRestrictions(final SpellAbility sa) {
         // SpellAbility_Restrictions should be added in here
-        final SpellAbility_Restriction restrict = sa.getRestrictions();
+        final SpellAbilityRestriction restrict = sa.getRestrictions();
         if (this.mapParams.containsKey("Flashback")) {
             sa.setFlashBackAbility(true);
         }
@@ -1224,7 +1224,7 @@ public class AbilityFactory {
      */
     private void makeConditions(final SpellAbility sa) {
         // SpellAbility_Restrictions should be added in here
-        final SpellAbility_Condition condition = sa.getConditions();
+        final SpellAbilityCondition condition = sa.getConditions();
         if (this.mapParams.containsKey("Flashback")) {
             sa.setFlashBackAbility(true);
         }
@@ -1250,10 +1250,10 @@ public class AbilityFactory {
      * getSubAbility.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.Ability_Sub} object.
+     * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    public final Ability_Sub getSubAbility() {
-        Ability_Sub abSub = null;
+    public final AbilitySub getSubAbility() {
+        AbilitySub abSub = null;
 
         String sSub = this.getMapParams().get("SubAbility");
 
@@ -1266,7 +1266,7 @@ public class AbilityFactory {
         if (!sSub.equals("")) {
             // Older style Drawback no longer supported
             final AbilityFactory afDB = new AbilityFactory();
-            abSub = (Ability_Sub) afDB.getAbility(sSub, this.getHostCard());
+            abSub = (AbilitySub) afDB.getAbility(sSub, this.getHostCard());
         } else {
             System.out.println("SubAbility not found for: " + this.getHostCard());
         }
@@ -1657,10 +1657,10 @@ public class AbilityFactory {
             do {
 
                 // did not find any targets
-                if (!(parent instanceof Ability_Sub)) {
+                if (!(parent instanceof AbilitySub)) {
                     return players;
                 }
-                parent = ((Ability_Sub) parent).getParent();
+                parent = ((AbilitySub) parent).getParent();
                 tgt = parent.getTarget();
             } while ((tgt == null) || (tgt.getTargetPlayers().size() == 0));
 
@@ -1854,8 +1854,8 @@ public class AbilityFactory {
      */
     public static SpellAbility findRootAbility(final SpellAbility sa) {
         SpellAbility parent = sa;
-        while (parent instanceof Ability_Sub) {
-            parent = ((Ability_Sub) parent).getParent();
+        while (parent instanceof AbilitySub) {
+            parent = ((AbilitySub) parent).getParent();
         }
 
         return parent;
@@ -1874,10 +1874,10 @@ public class AbilityFactory {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof Ability_Sub)) {
+            if (!(parent instanceof AbilitySub)) {
                 return parent;
             }
-            parent = ((Ability_Sub) parent).getParent();
+            parent = ((AbilitySub) parent).getParent();
         } while ((parent.getTarget() == null) || (parent.getTarget().getTargetCards().size() == 0));
 
         return parent;
@@ -1896,10 +1896,10 @@ public class AbilityFactory {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof Ability_Sub)) {
+            if (!(parent instanceof AbilitySub)) {
                 return parent;
             }
-            parent = ((Ability_Sub) parent).getParent();
+            parent = ((AbilitySub) parent).getParent();
         } while ((parent.getTarget() == null) || (parent.getTarget().getTargetSAs().size() == 0));
 
         return parent;
@@ -1918,10 +1918,10 @@ public class AbilityFactory {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof Ability_Sub)) {
+            if (!(parent instanceof AbilitySub)) {
                 return parent;
             }
-            parent = ((Ability_Sub) parent).getParent();
+            parent = ((AbilitySub) parent).getParent();
         } while ((parent.getTarget() == null) || (parent.getTarget().getTargetPlayers().size() == 0));
 
         return parent;
@@ -2316,7 +2316,7 @@ public class AbilityFactory {
      * @since 1.0.15
      */
     public static void resolveSubAbilities(final SpellAbility sa) {
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if ((abSub == null) || sa.isWrapper()) {
             return;
         }

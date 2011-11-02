@@ -15,7 +15,7 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
 import forge.MyRandom;
-import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.game.GameType;
 
@@ -30,7 +30,7 @@ import forge.game.GameType;
 public class BoosterDraftAI {
 
     /** The bd. */
-    private BoosterDraft bd = null;
+    private IBoosterDraft bd = null;
     // once a deck has this number of creatures the computer randomly
     // picks a card, so the final computer deck has 12-20 creatures
     // minimum of creatures per deck
@@ -211,7 +211,7 @@ public class BoosterDraftAI {
                 typeList = aiPlayables.getType("Land");
                 if (typeList.size() > 0) {
                     for (int i = 0; i < typeList.size(); i++) {
-                        final ArrayList<Ability_Mana> maList = typeList.get(i).getManaAbility();
+                        final ArrayList<AbilityMana> maList = typeList.get(i).getManaAbility();
                         for (int j = 0; j < maList.size(); j++) {
                             if (maList.get(j).canProduce(this.playerColors.get(player).getMana1())
                                     || maList.get(j).canProduce(this.playerColors.get(player).getMana2())) {
@@ -510,7 +510,7 @@ public class BoosterDraftAI {
                     for (int j = 0; j <= nLand; j++) {
                         final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
                                 AllZone.getComputerPlayer());
-                        c.setCurSetCode(BoosterDraft.LAND_SET_CODE[0]);
+                        c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
                         outList.add(c);
                         landsNeeded--;
                     }
@@ -520,7 +520,7 @@ public class BoosterDraftAI {
             while (landsNeeded > 0) {
                 if (clrCnts[n].getCount() > 0) {
                     final Card c = AllZone.getCardFactory().getCard(clrCnts[n].getColor(), AllZone.getComputerPlayer());
-                    c.setCurSetCode(BoosterDraft.LAND_SET_CODE[0]);
+                    c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
                     outList.add(c);
                     landsNeeded--;
 
@@ -652,7 +652,7 @@ public class BoosterDraftAI {
     /**
      * @return the bd
      */
-    public BoosterDraft getBd() {
+    public IBoosterDraft getBd() {
         return this.bd;
     }
 
@@ -660,7 +660,7 @@ public class BoosterDraftAI {
      * @param bd
      *            the bd to set
      */
-    public void setBd(final BoosterDraft bd) {
+    public void setBd(final IBoosterDraft bd) {
         this.bd = bd; // TODO: Add 0 to parameter's name.
     }
 

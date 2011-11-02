@@ -28,7 +28,7 @@ import arcane.ui.util.Animation;
 import forge.Constant.Zone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.AbilityMana;
 import forge.gui.GuiUtils;
 import forge.gui.game.CardPanel;
 import forge.properties.NewConstants;
@@ -142,7 +142,7 @@ public final class GuiDisplayUtil implements NewConstants {
         final Card dummy = new Card();
         dummy.setOwner(AllZone.getHumanPlayer());
         dummy.addController(AllZone.getHumanPlayer());
-        final Ability_Mana abMana = new Ability_Mana(dummy, "0", "W U B G R 1", 10) {
+        final AbilityMana abMana = new AbilityMana(dummy, "0", "W U B G R 1", 10) {
             private static final long serialVersionUID = -2164401486331182356L;
 
         };

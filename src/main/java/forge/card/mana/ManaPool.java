@@ -10,10 +10,10 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Player;
-import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input_PayManaCostUtil;
+import forge.gui.input.InputPayManaCostUtil;
 
 /**
  * <p>
@@ -299,7 +299,7 @@ public class ManaPool extends Card {
         int genericTotal = 0;
 
         for (final String c : manaArr) {
-            final String longStr = Input_PayManaCostUtil.getLongColorString(c);
+            final String longStr = InputPayManaCostUtil.getLongColorString(c);
             if (longStr.equals(Constant.Color.COLORLESS)) {
                 genericTotal += Integer.parseInt(c);
             } else if (color.equals("")) {
@@ -365,7 +365,7 @@ public class ManaPool extends Card {
         final String[] colors = manaStr.split("/");
         boolean wantSnow = false;
         for (int i = 0; i < colors.length; i++) {
-            colors[i] = Input_PayManaCostUtil.getLongColorString(colors[i]);
+            colors[i] = InputPayManaCostUtil.getLongColorString(colors[i]);
             if (colors[i].equals(Constant.Color.SNOW)) {
                 wantSnow = true;
             }
@@ -589,10 +589,10 @@ public class ManaPool extends Card {
      * </p>
      * 
      * @param manaAbility
-     *            a {@link forge.card.spellability.Ability_Mana} object.
+     *            a {@link forge.card.spellability.AbilityMana} object.
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] formatMana(final Ability_Mana manaAbility) {
+    public static String[] formatMana(final AbilityMana manaAbility) {
         return ManaPool.formatMana(manaAbility.mana(), true);
     } // wrapper
 
@@ -733,11 +733,11 @@ public class ManaPool extends Card {
      * @param m
      *            a {@link forge.card.mana.ManaCost} object.
      * @param mAbilities
-     *            a {@link forge.card.spellability.Ability_Mana} object.
+     *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    public final ManaCost subtractMana(final SpellAbility sa, ManaCost m, final Ability_Mana... mAbilities) {
-        final ArrayList<Ability_Mana> paidAbs = sa.getPayingManaAbilities();
+    public final ManaCost subtractMana(final SpellAbility sa, ManaCost m, final AbilityMana... mAbilities) {
+        final ArrayList<AbilityMana> paidAbs = sa.getPayingManaAbilities();
 
         if (mAbilities.length == 0) {
             // paying from Mana Pool
@@ -750,7 +750,7 @@ public class ManaPool extends Card {
         }
 
         // paying via Mana Abilities
-        for (final Ability_Mana mability : mAbilities) {
+        for (final AbilityMana mability : mAbilities) {
             paidAbs.add(mability);
             final String[] cost = ManaPool.formatMana(mability);
             m = this.subtractMultiple(sa, cost, m);
@@ -858,7 +858,7 @@ public class ManaPool extends Card {
      *            a boolean.
      */
     public final void clearPay(final SpellAbility ability, final boolean refund) {
-        final ArrayList<Ability_Mana> payAbs = ability.getPayingManaAbilities();
+        final ArrayList<AbilityMana> payAbs = ability.getPayingManaAbilities();
         final ArrayList<Mana> payMana = ability.getPayingMana();
 
         payAbs.clear();
@@ -897,7 +897,7 @@ public class ManaPool extends Card {
         final boolean flag = false;
 
         String manaStr = mana[i];
-        String color = Input_PayManaCostUtil.getLongColorString(manaStr);
+        String color = InputPayManaCostUtil.getLongColorString(manaStr);
 
         if (!usePay && (this.floatingMana.size() == 0)) {
             return false;
@@ -925,7 +925,7 @@ public class ManaPool extends Card {
                         manaStr = mana[i];
                     }
                 }
-                color = Input_PayManaCostUtil.getLongColorString(manaStr);
+                color = InputPayManaCostUtil.getLongColorString(manaStr);
                 if (usePay) {
                     removePaying.add(m);
                 } else {
@@ -974,10 +974,10 @@ public class ManaPool extends Card {
     public final void unpaid(final SpellAbility sa, final boolean untap) {
         // TODO having some crash in here related to undo and not tracking
         // abilities properly
-        final ArrayList<Ability_Mana> payAbs = sa.getPayingManaAbilities();
+        final ArrayList<AbilityMana> payAbs = sa.getPayingManaAbilities();
 
         // go through paidAbilities if they are undoable
-        for (final Ability_Mana am : payAbs) {
+        for (final AbilityMana am : payAbs) {
             if (am.isUndoable()) {
                 final String[] formattedMana = ManaPool.formatMana(am);
                 if (this.accountFor(sa, formattedMana, am.getSourceCard())) {

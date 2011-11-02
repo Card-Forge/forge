@@ -22,8 +22,8 @@ import forge.Player;
 import forge.PlayerZone;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -58,7 +58,7 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityDig(final AbilityFactory af) {
 
-        final SpellAbility abDig = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDig = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4239474096624403497L;
 
             @Override
@@ -127,7 +127,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDig(final AbilityFactory af) {
-        final SpellAbility dbDig = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDig = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -3372788479421357024L;
 
             @Override
@@ -171,7 +171,7 @@ public final class AbilityFactoryReveal {
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -201,7 +201,7 @@ public final class AbilityFactoryReveal {
         }
         sb.append("library.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -259,7 +259,7 @@ public final class AbilityFactoryReveal {
         }
 
         if (af.hasSubAbility()) {
-            final Ability_Sub abSub = sa.getSubAbility();
+            final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
@@ -592,7 +592,7 @@ public final class AbilityFactoryReveal {
      */
     public static SpellAbility createAbilityDigUntil(final AbilityFactory af) {
 
-        final SpellAbility abDig = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abDig = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 4239474096624403497L;
 
             @Override
@@ -661,7 +661,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackDigUntil(final AbilityFactory af) {
-        final SpellAbility dbDig = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDig = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -3372788479421357024L;
 
             @Override
@@ -714,7 +714,7 @@ public final class AbilityFactoryReveal {
             untilAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
         }
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(host).append(" - ");
         } else {
             sb.append(" ");
@@ -763,7 +763,7 @@ public final class AbilityFactoryReveal {
             }
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -811,7 +811,7 @@ public final class AbilityFactoryReveal {
         }
 
         if (af.hasSubAbility()) {
-            final Ability_Sub abSub = sa.getSubAbility();
+            final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
@@ -951,7 +951,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityRevealHand(final AbilityFactory af) {
-        final SpellAbility abRevealHand = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abRevealHand = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 2785654059206102004L;
 
             @Override
@@ -1020,7 +1020,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackRevealHand(final AbilityFactory af) {
-        final SpellAbility dbRevealHand = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbRevealHand = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -6079668770576878801L;
 
             @Override
@@ -1064,7 +1064,7 @@ public final class AbilityFactoryReveal {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
@@ -1090,7 +1090,7 @@ public final class AbilityFactoryReveal {
         }
         sb.append("hand.");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1147,7 +1147,7 @@ public final class AbilityFactoryReveal {
             randomReturn = true;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -1216,7 +1216,7 @@ public final class AbilityFactoryReveal {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -1286,7 +1286,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityScry(final AbilityFactory af) {
-        final SpellAbility abScry = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abScry = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = 2631175859655699419L;
 
             @Override
@@ -1355,7 +1355,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackScry(final AbilityFactory af) {
-        final SpellAbility dbScry = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbScry = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = 7763043327497404630L;
 
             @Override
@@ -1476,7 +1476,7 @@ public final class AbilityFactoryReveal {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
@@ -1502,7 +1502,7 @@ public final class AbilityFactoryReveal {
 
         sb.append("scrys (").append(num).append(").");
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1538,7 +1538,7 @@ public final class AbilityFactoryReveal {
         }
 
         if (af.hasSubAbility()) {
-            final Ability_Sub abSub = sa.getSubAbility();
+            final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
@@ -1560,7 +1560,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createRearrangeTopOfLibraryAbility(final AbilityFactory af) {
-        final SpellAbility rtolAbility = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility rtolAbility = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -548494891203983219L;
 
             @Override
@@ -1636,7 +1636,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createRearrangeTopOfLibraryDrawback(final AbilityFactory af) {
-        final SpellAbility dbDraw = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbDraw = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -777856059960750319L;
 
             @Override
@@ -1693,7 +1693,7 @@ public final class AbilityFactoryReveal {
         shuffle = params.containsKey("MayShuffle");
 
         final StringBuilder ret = new StringBuilder();
-        if (!(sa instanceof Ability_Sub)) {
+        if (!(sa instanceof AbilitySub)) {
             ret.append(af.getHostCard().getName());
             ret.append(" - ");
         }
@@ -1756,7 +1756,7 @@ public final class AbilityFactoryReveal {
             // if it's just defined, no big deal
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
@@ -1870,7 +1870,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityReveal(final AbilityFactory af) {
-        final SpellAbility abReveal = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abReveal = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -4417404703197532765L;
 
             @Override
@@ -1939,7 +1939,7 @@ public final class AbilityFactoryReveal {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackReveal(final AbilityFactory af) {
-        final SpellAbility dbReveal = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbReveal = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -8059731932417441449L;
 
             @Override
@@ -1984,7 +1984,7 @@ public final class AbilityFactoryReveal {
         final HashMap<String, String> params = af.getMapParams();
         final StringBuilder sb = new StringBuilder();
 
-        if (sa instanceof Ability_Sub) {
+        if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
@@ -2014,7 +2014,7 @@ public final class AbilityFactoryReveal {
             sb.append("Error - no target players for RevealHand. ");
         }
 
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -2072,7 +2072,7 @@ public final class AbilityFactoryReveal {
             randomReturn = true;
         }
 
-        final Ability_Sub subAb = sa.getSubAbility();
+        final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();
         }
@@ -2102,7 +2102,7 @@ public final class AbilityFactoryReveal {
         }
 
         // check SubAbilities DoTrigger?
-        final Ability_Sub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
