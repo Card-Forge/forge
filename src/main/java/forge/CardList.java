@@ -188,7 +188,7 @@ public class CardList implements Iterable<Card> {
 
         CardListFilter clrF = new CardListFilter() {
             public boolean addCard(final Card c) {
-                ArrayList<Card_Color> cClrs = c.getColor();
+                ArrayList<CardColor> cClrs = c.getColor();
                 for (int i = 0; i < cClrs.size(); i++) {
                     if (!cClrs.get(i).toStringArray().get(0).equals(clr1)
                             && !cClrs.get(i).toStringArray().get(0).equals(clr2)) {

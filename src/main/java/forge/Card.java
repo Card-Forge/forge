@@ -1633,7 +1633,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (s.equals("")) {
             s = "0";
         }
-        getCharacteristics().getCardColor().add(new Card_Color(new ManaCost(s), this, false, true));
+        getCharacteristics().getCardColor().add(new CardColor(new ManaCost(s), this, false, true));
     }
 
     /**
@@ -1653,10 +1653,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final long addColor(final String s, final Card c, final boolean addToColors, final boolean bIncrease) {
         if (bIncrease) {
-            Card_Color.increaseTimestamp();
+            CardColor.increaseTimestamp();
         }
-        getCharacteristics().getCardColor().add(new Card_Color(new ManaCost(s), c, addToColors, false));
-        return Card_Color.getTimestamp();
+        getCharacteristics().getCardColor().add(new CardColor(new ManaCost(s), c, addToColors, false));
+        return CardColor.getTimestamp();
     }
 
     /**
@@ -1674,8 +1674,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a long.
      */
     public final void removeColor(final String s, final Card c, final boolean addTo, final long timestampIn) {
-        Card_Color removeCol = null;
-        for (Card_Color cc : getCharacteristics().getCardColor()) {
+        CardColor removeCol = null;
+        for (CardColor cc : getCharacteristics().getCardColor()) {
             if (cc.equals(s, c, addTo, timestampIn)) {
                 removeCol = cc;
             }
@@ -1691,14 +1691,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * determineColor.
      * </p>
      * 
-     * @return a {@link forge.Card_Color} object.
+     * @return a {@link forge.CardColor} object.
      */
-    public final Card_Color determineColor() {
+    public final CardColor determineColor() {
         if (this.isImmutable()) {
-            return new Card_Color(this);
+            return new CardColor(this);
         }
-        Card_Color colors = null;
-        ArrayList<Card_Color> globalChanges = AllZone.getColorChanger().getColorChanges();
+        CardColor colors = null;
+        ArrayList<CardColor> globalChanges = AllZone.getColorChanger().getColorChanges();
         colors = determineColor(globalChanges);
         colors.fixColorless();
         return colors;
@@ -1712,7 +1712,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param colors
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setColor(final ArrayList<Card_Color> colors) {
+    public final void setColor(final ArrayList<CardColor> colors) {
         getCharacteristics().setCardColor(colors);
     }
 
@@ -1723,7 +1723,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Card_Color> getColor() {
+    public final ArrayList<CardColor> getColor() {
         return getCharacteristics().getCardColor();
     }
 
@@ -1735,8 +1735,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an ArrayList<Card_Color>
      * @return a Card_Color
      */
-    final Card_Color determineColor(final ArrayList<Card_Color> globalChanges) {
-        Card_Color colors = new Card_Color(this);
+    final CardColor determineColor(final ArrayList<CardColor> globalChanges) {
+        CardColor colors = new CardColor(this);
         int i = getCharacteristics().getCardColor().size() - 1;
         int j = -1;
         if (globalChanges != null) {
@@ -1744,7 +1744,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         // if both have changes, see which one is most recent
         while (i >= 0 && j >= 0) {
-            Card_Color cc = null;
+            CardColor cc = null;
             if (getCharacteristics().getCardColor().get(i).getStamp() > globalChanges.get(j).getStamp()) {
                 // Card has a more recent color stamp
                 cc = getCharacteristics().getCardColor().get(i);
@@ -1763,7 +1763,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         while (i >= 0) {
-            Card_Color cc = getCharacteristics().getCardColor().get(i);
+            CardColor cc = getCharacteristics().getCardColor().get(i);
             i--;
             for (String s : cc.toStringArray()) {
                 colors.addToCardColor(s);
@@ -1773,7 +1773,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         while (j >= 0) {
-            Card_Color cc = globalChanges.get(j);
+            CardColor cc = globalChanges.get(j);
             j--;
             for (String s : cc.toStringArray()) {
                 colors.addToCardColor(s);

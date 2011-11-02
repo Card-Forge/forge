@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import forge.Card_Color;
+import forge.CardColor;
 import forge.SetInfo;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.SpellAbility;
@@ -20,7 +20,7 @@ public class CardCharacteristics {
     private String name = "";
     private ArrayList<String> type = new ArrayList<String>();
     private String manaCost = "";
-    private ArrayList<Card_Color> cardColor = new ArrayList<Card_Color>();
+    private ArrayList<CardColor> cardColor = new ArrayList<CardColor>();
     private boolean cardColorsOverridden = false;
     private int baseAttack = 0;
     private int baseDefense = 0;
@@ -98,7 +98,7 @@ public class CardCharacteristics {
      * 
      * @return the cardColor
      */
-    public final ArrayList<Card_Color> getCardColor() {
+    public final ArrayList<CardColor> getCardColor() {
         return cardColor;
     }
 
@@ -108,8 +108,8 @@ public class CardCharacteristics {
      * @param cardColor0
      *            the cardColor to set
      */
-    public final void setCardColor(final ArrayList<Card_Color> cardColor0) {
-        this.cardColor = new ArrayList<Card_Color>(cardColor0); // TODO: Add 0
+    public final void setCardColor(final ArrayList<CardColor> cardColor0) {
+        this.cardColor = new ArrayList<CardColor>(cardColor0); // TODO: Add 0
                                                                 // to
                                                                 // parameter's
                                                                 // name.

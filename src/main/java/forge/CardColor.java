@@ -13,7 +13,7 @@ import forge.card.mana.ManaCost;
  * @author Forge
  * @version $Id$
  */
-public class Card_Color {
+public class CardColor {
     // takes care of individual card color, for global color change effects use
     // AllZone.getGameInfo().getColorChanges()
     private EnumSet<Color> col;
@@ -74,7 +74,7 @@ public class Card_Color {
      * @param baseColor
      *            a boolean.
      */
-    Card_Color(final ManaCost mc, final Card c, final boolean addToColors, final boolean baseColor) {
+    CardColor(final ManaCost mc, final Card c, final boolean addToColors, final boolean baseColor) {
         additional = addToColors;
         col = Color.convertManaCostToColor(mc);
         effectingCard = c;
@@ -93,7 +93,7 @@ public class Card_Color {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public Card_Color(final Card c) {
+    public CardColor(final Card c) {
         col = Color.colorless();
         additional = false;
         stamp = 0;

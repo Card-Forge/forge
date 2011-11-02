@@ -468,9 +468,9 @@ public class CardReader implements Runnable, NewConstants {
                     }
                 } else if (line.startsWith("Colors:")) {
                     final String value = line.substring("Colors:".length());
-                    ArrayList<Card_Color> newCols = new ArrayList<Card_Color>();
+                    ArrayList<CardColor> newCols = new ArrayList<CardColor>();
                     for (String col : value.split(",")) {
-                        Card_Color newCol = new Card_Color(card);
+                        CardColor newCol = new CardColor(card);
                         newCol.addToCardColor(col);
                         newCols.add(newCol);
                     }

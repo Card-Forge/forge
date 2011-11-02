@@ -18,7 +18,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
-import forge.Card_Color;
+import forge.CardColor;
 import forge.Combat;
 import forge.CombatUtil;
 import forge.Command;
@@ -1005,7 +1005,7 @@ public class CardFactoryUtil {
                 // card.setName("Morph");
                 sourceCard.setIsFaceDown(true);
                 sourceCard.setManaCost("");
-                sourceCard.setColor(new ArrayList<Card_Color>()); // remove all
+                sourceCard.setColor(new ArrayList<CardColor>()); // remove all
                                                                   // colors
                 sourceCard.addColor("0");
                 sourceCard.setBaseAttack(2);

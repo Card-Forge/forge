@@ -1494,7 +1494,7 @@ public final class GuiDisplayUtil implements NewConstants {
                     }
                     c.setIsFaceDown(true);
                     c.setManaCost("");
-                    c.setColor(new ArrayList<Card_Color>()); // remove all
+                    c.setColor(new ArrayList<CardColor>()); // remove all
                                                              // colors
                     c.addColor("0");
                     c.setBaseAttack(2);

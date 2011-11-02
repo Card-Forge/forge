@@ -913,7 +913,7 @@ public final class CardUtil {
     public static CardList getRadiance(final Card source, final Card origin, final String[] valid) {
         CardList res = new CardList();
 
-        for (Card_Color col : origin.getColor()) {
+        for (CardColor col : origin.getColor()) {
             for (String strCol : col.toStringArray()) {
                 if (strCol.equalsIgnoreCase("Colorless")) {
                     continue;
