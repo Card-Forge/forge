@@ -351,7 +351,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         menuBar.add(gameMenu);
         menuBar.add(gamePhases);
         menuBar.add(devMenu);
-        menuBar.add(new MenuItem_HowToPlay());
+        menuBar.add(new MenuItemHowToPlay());
         this.setJMenuBar(menuBar);
     } // addMenu()
 

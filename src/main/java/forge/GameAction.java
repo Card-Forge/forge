@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 
 import forge.Constant.Zone;
 import forge.card.abilityFactory.AbilityFactory;
-import forge.card.abilityFactory.AbilityFactory_Attach;
-import forge.card.abilityFactory.AbilityFactory_Charm;
+import forge.card.abilityFactory.AbilityFactoryAttach;
+import forge.card.abilityFactory.AbilityFactoryCharm;
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -224,7 +224,7 @@ public class GameAction {
         if (c.isAura() && zone.is(Constant.Zone.Battlefield) && ((prev == null) || !prev.is(Constant.Zone.Stack))) {
             // TODO Need a way to override this for Abilities that put Auras
             // into play attached to things
-            AbilityFactory_Attach.attachAuraOnIndirectEnterBattlefield(c);
+            AbilityFactoryAttach.attachAuraOnIndirectEnterBattlefield(c);
         }
 
         return c;
@@ -2479,7 +2479,7 @@ public class GameAction {
     public final void playSpellAbility(final SpellAbility sa) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
-        AbilityFactory_Charm.setupCharmSAs(sa);
+        AbilityFactoryCharm.setupCharmSAs(sa);
 
         // Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;

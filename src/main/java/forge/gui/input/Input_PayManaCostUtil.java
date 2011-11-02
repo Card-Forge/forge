@@ -9,7 +9,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.card.abilityFactory.AbilityFactory_Mana;
+import forge.card.abilityFactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability_Mana;
@@ -100,7 +100,7 @@ public class Input_PayManaCostUtil {
 
             for (final Ability_Mana am : abilities) {
                 if (am.isReflectedMana()) {
-                    final ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am,
+                    final ArrayList<String> reflectableColors = AbilityFactoryMana.reflectableMana(am,
                             am.getAbilityFactory(), new ArrayList<String>(), new ArrayList<Card>());
                     for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {
@@ -181,7 +181,7 @@ public class Input_PayManaCostUtil {
         }
 
         if (am.isReflectedMana()) {
-            final ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am, am.getAbilityFactory(),
+            final ArrayList<String> reflectableColors = AbilityFactoryMana.reflectableMana(am, am.getAbilityFactory(),
                     new ArrayList<String>(), new ArrayList<Card>());
             for (final String color : reflectableColors) {
                 if (mana.contains(Input_PayManaCostUtil.getShortColorString(color))) {

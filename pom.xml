@@ -231,7 +231,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>forge.GuiNewGame</mainClass>
+                            <mainClass>forge.view.swing.Main</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
@@ -704,7 +704,7 @@
                                     <errTitle>forge</errTitle>
                                     <icon>${configSourceDirectory}/forge.ico</icon>
                                     <classPath>
-                                        <mainClass>forge.GuiNewGame</mainClass>
+                                        <mainClass>forge.view.swing.Main</mainClass>
                                         <addDependencies>false</addDependencies>
                                         <preCp>anything</preCp>
                                     </classPath>
@@ -870,7 +870,7 @@
                                         <mkdir dir="${project.build.directory}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
                                         <taskdef name="jarbundler" classpathref="maven.runtime.classpath" classname="net.sourceforge.jarbundler.JarBundler" />
-                                        <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" version="${project.version}" mainclass="forge.GuiNewGame" icon="${basedir}/${configSourceDirectory}/Forge.icns" jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}" workingdirectory="$APP_PACKAGE/Contents/Resources/Java" jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
+                                        <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" version="${project.version}" mainclass="forge.view.swing.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}" workingdirectory="$APP_PACKAGE/Contents/Resources/Java" jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
                                             <javafileset dir="${basedir}">
                                                 <include name="*.properties" />
                                                 <include name="res/**" />

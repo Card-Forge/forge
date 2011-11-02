@@ -16,7 +16,7 @@ import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
-import forge.card.abilityFactory.AbilityFactory_Charm;
+import forge.card.abilityFactory.AbilityFactoryCharm;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Mana;
@@ -437,7 +437,7 @@ public class TriggerHandler {
         sa[0].setStackDescription(sa[0].toString());
         // TODO - for Charms to supports AI, this needs to be removed
         if (sa[0].getActivatingPlayer().isHuman()) {
-            AbilityFactory_Charm.setupCharmSAs(sa[0]);
+            AbilityFactoryCharm.setupCharmSAs(sa[0]);
         }
         boolean mand = false;
         if (params.containsKey("OptionalDecider")) {
