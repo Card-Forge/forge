@@ -1,8 +1,8 @@
 package forge.card.cardFactory;
 
-import static forge.card.cardFactory.CardFactoryUtil.getMostProminentCreatureType;
-import static forge.card.cardFactory.CardFactoryUtil.isNegativeCounter;
-import static forge.card.cardFactory.CardFactoryUtil.multiplyManaCost;
+import static forge.card.cardfactory.CardFactoryUtil.getMostProminentCreatureType;
+import static forge.card.cardfactory.CardFactoryUtil.isNegativeCounter;
+import static forge.card.cardfactory.CardFactoryUtil.multiplyManaCost;
 
 import org.testng.annotations.Test;
 

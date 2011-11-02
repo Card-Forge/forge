@@ -8,8 +8,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import forge.Constant.Zone;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.cost.CostPayment;

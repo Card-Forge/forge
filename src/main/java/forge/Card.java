@@ -14,14 +14,14 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
 import forge.card.CardCharacteristics;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
-import forge.card.staticAbility.StaticAbility;
+import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.item.CardDb;
 

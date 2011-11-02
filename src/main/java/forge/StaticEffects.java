@@ -7,9 +7,9 @@ import java.util.HashMap;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.staticAbility.StaticAbility;
+import forge.card.staticability.StaticAbility;
 
 /**
  * <p>

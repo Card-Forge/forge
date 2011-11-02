@@ -3,7 +3,7 @@ package forge;
 import java.util.Random;
 
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
 /**

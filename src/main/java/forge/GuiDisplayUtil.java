@@ -26,7 +26,7 @@ import javax.swing.border.Border;
 import arcane.ui.PlayArea;
 import arcane.ui.util.Animation;
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.gui.GuiUtils;

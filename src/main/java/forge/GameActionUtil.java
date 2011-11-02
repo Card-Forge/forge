@@ -6,8 +6,8 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import forge.Constant.Zone;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;

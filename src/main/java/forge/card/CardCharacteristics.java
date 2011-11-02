@@ -9,7 +9,7 @@ import forge.CardColor;
 import forge.SetInfo;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
-import forge.card.staticAbility.StaticAbility;
+import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 
 /**

@@ -9,7 +9,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.card.abilityFactory.AbilityFactoryMana;
+import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;

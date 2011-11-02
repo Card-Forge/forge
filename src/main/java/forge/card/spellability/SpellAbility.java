@@ -9,7 +9,7 @@ import forge.Command;
 import forge.CommandArgs;
 import forge.ComputerUtil;
 import forge.Player;
-import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.gui.input.Input;
@@ -752,7 +752,7 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
     public void setAbilityFactory(final AbilityFactory af) {
         this.abilityFactory = af;
@@ -763,7 +763,7 @@ public abstract class SpellAbility {
      * Getter for the field <code>abilityFactory</code>.
      * </p>
      * 
-     * @return a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
     public AbilityFactory getAbilityFactory() {
         return this.abilityFactory;

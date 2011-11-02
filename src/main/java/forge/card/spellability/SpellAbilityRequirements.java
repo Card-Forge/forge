@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import forge.AllZone;
 import forge.Card;
 import forge.PlayerZone;
-import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.CostPayment;
 
 /**

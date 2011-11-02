@@ -8,8 +8,8 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.Constant;
 import forge.Player;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 
 /**
  * <p>

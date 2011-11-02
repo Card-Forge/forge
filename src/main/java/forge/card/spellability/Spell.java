@@ -12,7 +12,7 @@ import forge.Phase;
 import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
-import forge.card.staticAbility.StaticAbility;
+import forge.card.staticability.StaticAbility;
 import forge.error.ErrorViewer;
 
 /**

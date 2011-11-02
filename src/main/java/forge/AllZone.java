@@ -5,8 +5,8 @@ import java.util.List;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryInterface;
-import forge.card.cardFactory.PreloadingCardFactory;
+import forge.card.cardfactory.CardFactoryInterface;
+import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
 import forge.game.GameSummary;
@@ -276,7 +276,7 @@ public final class AllZone implements NewConstants {
      * getCardFactory.
      * </p>
      * 
-     * @return a {@link forge.card.cardFactory.CardFactoryInterface} object.
+     * @return a {@link forge.card.cardfactory.CardFactoryInterface} object.
      * @since 1.0.15
      */
     public static CardFactoryInterface getCardFactory() {

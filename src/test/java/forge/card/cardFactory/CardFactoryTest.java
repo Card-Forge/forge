@@ -2,6 +2,9 @@ package forge.card.cardFactory;
 
 import forge.Card;
 import forge.CardList;
+import forge.card.cardfactory.CardFactoryInterface;
+import forge.card.cardfactory.LazyCardFactory;
+import forge.card.cardfactory.PreloadingCardFactory;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;

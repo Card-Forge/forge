@@ -8,7 +8,7 @@ import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.Counters;
-import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;

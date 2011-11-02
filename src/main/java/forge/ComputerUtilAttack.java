@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()

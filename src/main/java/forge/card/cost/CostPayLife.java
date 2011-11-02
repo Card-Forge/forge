@@ -4,7 +4,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.GameActionUtil;
 import forge.Player;
-import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 
 /**

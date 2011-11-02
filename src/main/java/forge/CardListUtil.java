@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 
 /**
  * <p>

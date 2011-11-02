@@ -2,7 +2,7 @@ package forge.quest.data.pet;
 
 import forge.AllZone;
 import forge.Card;
-import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 

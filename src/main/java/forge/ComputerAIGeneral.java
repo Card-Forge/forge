@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 

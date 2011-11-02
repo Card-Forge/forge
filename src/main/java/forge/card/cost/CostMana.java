@@ -10,7 +10,7 @@ import forge.Constant.Zone;
 import forge.Phase;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;

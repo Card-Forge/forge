@@ -9,7 +9,7 @@ import java.util.List;
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
 
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 
 /**
  * <p>

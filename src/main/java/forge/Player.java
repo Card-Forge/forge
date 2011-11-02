@@ -12,11 +12,11 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import forge.Constant.Zone;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.staticAbility.StaticAbility;
+import forge.card.staticability.StaticAbility;
 import forge.game.GameLossReason;
 
 /**

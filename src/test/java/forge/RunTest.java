@@ -1,6 +1,6 @@
 package forge;
 
-import forge.card.cardFactory.CardFactoryInterface;
+import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.mana.ManaCost;
 import forge.gui.input.InputPayManaCostUtil;
 import org.testng.annotations.Test;

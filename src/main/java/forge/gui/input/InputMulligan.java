@@ -13,7 +13,7 @@ import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Phase;
 import forge.Player;
-import forge.card.abilityFactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
 import forge.quest.data.QuestData;

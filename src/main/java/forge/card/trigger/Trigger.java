@@ -13,8 +13,8 @@ import forge.CardUtil;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
 /**

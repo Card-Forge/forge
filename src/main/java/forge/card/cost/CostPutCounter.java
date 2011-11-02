@@ -8,8 +8,8 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
 

@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
-import forge.card.abilityFactory.AbilityFactory;
-import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
