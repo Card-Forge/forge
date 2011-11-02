@@ -3,6 +3,7 @@
 /.classpath -text
 /.fbprefs -text
 /.project -text
+.settings/net.sf.jautodoc.prefs -text
 .settings/org.eclipse.jdt.core.prefs -text
 .settings/org.eclipse.jdt.ui.prefs -text
 /CHANGES.txt svneol=native#text/plain
