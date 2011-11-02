@@ -19,14 +19,14 @@ import forge.card.spellability.Spell_Permanent;
  * @author Forge
  * @version $Id$
  */
-public class ComputerAI_General implements Computer {
+public class ComputerAIGeneral implements Computer {
 
     /**
      * <p>
      * Constructor for ComputerAI_General.
      * </p>
      */
-    public ComputerAI_General() {
+    public ComputerAIGeneral() {
 
     }
 
@@ -416,7 +416,7 @@ public class ComputerAI_General implements Computer {
     public final void declareBlockers() {
         CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
 
-        AllZone.setCombat(ComputerUtil_Block2.getBlockers(AllZone.getCombat(), blockers));
+        AllZone.setCombat(ComputerUtilBlock2.getBlockers(AllZone.getCombat(), blockers));
 
         CombatUtil.showCombat();
 

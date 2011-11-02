@@ -12,7 +12,7 @@ import forge.gui.input.Input;
  * @author Forge
  * @version $Id$
  */
-public class ComputerAI_Input extends Input {
+public class ComputerAIInput extends Input {
     /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 
@@ -26,7 +26,7 @@ public class ComputerAI_Input extends Input {
      * @param iComputer
      *            a {@link forge.Computer} object.
      */
-    public ComputerAI_Input(final Computer iComputer) {
+    public ComputerAIInput(final Computer iComputer) {
         computer = iComputer;
     }
 

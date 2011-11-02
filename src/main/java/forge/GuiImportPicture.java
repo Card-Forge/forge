@@ -35,7 +35,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class GUI_ImportPicture extends JDialog implements NewConstants {
+public class GuiImportPicture extends JDialog implements NewConstants {
     /** Constant <code>serialVersionUID=-4191539152208389089L</code>. */
     private static final long serialVersionUID = -4191539152208389089L;
     private JPanel jContentPane = null;
@@ -48,7 +48,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     private JButton jButtonStart = null;
 
     /** The frame. */
-    private GUI_ImportPicture frame;
+    private GuiImportPicture frame;
     private JLabel jLabelHDDFree = null;
     private JLabel jLabelNeedSpace = null;
 
@@ -69,7 +69,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
      * @param owner
      *            a {@link javax.swing.JFrame} object.
      */
-    public GUI_ImportPicture(final JFrame owner) {
+    public GuiImportPicture(final JFrame owner) {
         super(owner);
         frame = this;
         initialize();

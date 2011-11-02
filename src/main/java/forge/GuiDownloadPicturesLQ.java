@@ -16,7 +16,7 @@ import forge.properties.ForgeProps;
  * @author Forge
  * @version $Id$
  */
-public class Gui_DownloadPictures_LQ extends GuiDownloader {
+public class GuiDownloadPicturesLQ extends GuiDownloader {
 
     private static final long serialVersionUID = -2839597792999139007L;
 
@@ -28,7 +28,7 @@ public class Gui_DownloadPictures_LQ extends GuiDownloader {
      * @param frame
      *            a array of {@link javax.swing.JFrame} objects.
      */
-    public Gui_DownloadPictures_LQ(final JFrame frame) {
+    public GuiDownloadPicturesLQ(final JFrame frame) {
         super(frame);
     }
 

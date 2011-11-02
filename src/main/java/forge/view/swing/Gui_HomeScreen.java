@@ -40,10 +40,10 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.GUI_ImportPicture;
+import forge.GuiImportPicture;
 import forge.GuiDisplay4;
-import forge.Gui_DownloadPrices;
-import forge.Gui_DownloadSetPictures_LQ;
+import forge.GuiDownloadPrices;
+import forge.GuiDownloadSetPicturesLQ;
 import forge.MyRandom;
 import forge.PlayerType;
 import forge.Singletons;
@@ -760,7 +760,7 @@ public class Gui_HomeScreen {
         this.cmdDownloadLQSetPics.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                new Gui_DownloadSetPictures_LQ(null);
+                new GuiDownloadSetPicturesLQ(null);
             }
         });
         this.pnlUtilities.add(this.cmdDownloadLQSetPics);
@@ -769,7 +769,7 @@ public class Gui_HomeScreen {
         this.cmdDownloadPrices.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                final Gui_DownloadPrices gdp = new Gui_DownloadPrices();
+                final GuiDownloadPrices gdp = new GuiDownloadPrices();
                 gdp.setVisible(true);
             }
         });
@@ -779,7 +779,7 @@ public class Gui_HomeScreen {
         this.cmdImportPics.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                final GUI_ImportPicture ip = new GUI_ImportPicture(null);
+                final GuiImportPicture ip = new GuiImportPicture(null);
                 ip.setVisible(true);
             }
         });

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Forge
  * @version $Id$
  */
-public class Card_Type implements Comparable<Card_Type> {
+public class CardType implements Comparable<CardType> {
     // takes care of individual card types
     private ArrayList<String> type = new ArrayList<String>();
     private ArrayList<String> removeType = new ArrayList<String>();
@@ -49,7 +49,7 @@ public class Card_Type implements Comparable<Card_Type> {
      * @param stamp
      *            a long
      */
-    Card_Type(final ArrayList<String> types, final ArrayList<String> removeTypes, final boolean removeSuperType,
+    CardType(final ArrayList<String> types, final ArrayList<String> removeTypes, final boolean removeSuperType,
             final boolean removeCardType, final boolean removeSubType, final boolean removeCreatureType,
             final long stamp) {
         type = types;
@@ -127,7 +127,7 @@ public class Card_Type implements Comparable<Card_Type> {
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public final int compareTo(final Card_Type anotherCardType) {
+    public final int compareTo(final CardType anotherCardType) {
         int returnValue = 0;
         long anotherTimeStamp = anotherCardType.getTimestamp();
         if (this.timeStamp < anotherTimeStamp) {

@@ -47,14 +47,14 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.Constant_StringArrayList;
+import forge.ConstantStringArrayList;
 import forge.FileUtil;
-import forge.GUI_ImportPicture;
+import forge.GuiImportPicture;
 import forge.GuiDisplay4;
 import forge.GuiDownloadQuestImages;
-import forge.Gui_DownloadPictures_LQ;
-import forge.Gui_DownloadPrices;
-import forge.Gui_DownloadSetPictures_LQ;
+import forge.GuiDownloadPicturesLQ;
+import forge.GuiDownloadPrices;
+import forge.GuiDownloadSetPicturesLQ;
 import forge.ImageCache;
 import forge.MyRandom;
 import forge.PlayerType;
@@ -1117,7 +1117,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         @Override
         public final void actionPerformed(final ActionEvent e) {
-            final Gui_DownloadPrices gdp = new Gui_DownloadPrices();
+            final GuiDownloadPrices gdp = new GuiDownloadPrices();
             gdp.setVisible(true);
         }
     }
@@ -1205,7 +1205,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         @Override
         public final void actionPerformed(final ActionEvent e) {
-            new Gui_DownloadPictures_LQ(null);
+            new GuiDownloadPicturesLQ(null);
         }
     }
 
@@ -1239,7 +1239,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         @Override
         public final void actionPerformed(final ActionEvent e) {
-            new Gui_DownloadSetPictures_LQ(null);
+            new GuiDownloadSetPicturesLQ(null);
         }
     }
 
@@ -1309,7 +1309,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          */
         @Override
         public final void actionPerformed(final ActionEvent e) {
-            final GUI_ImportPicture ip = new GUI_ImportPicture(null);
+            final GuiImportPicture ip = new GuiImportPicture(null);
             ip.setVisible(true);
         }
     }
@@ -1758,16 +1758,16 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
             ArrayList<String> tList = null;
 
-            Constant.CardTypes.CARD_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.SUPER_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.BASIC_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.LAND_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.CREATURE_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.INSTANT_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.SORCERY_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.ENCHANTMENT_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.ARTIFACT_TYPES[0] = new Constant_StringArrayList();
-            Constant.CardTypes.WALKER_TYPES[0] = new Constant_StringArrayList();
+            Constant.CardTypes.CARD_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.SUPER_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.BASIC_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.LAND_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.CREATURE_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.INSTANT_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.SORCERY_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.ENCHANTMENT_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.ARTIFACT_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.WALKER_TYPES[0] = new ConstantStringArrayList();
 
             if (typeListFile.size() > 0) {
                 for (int i = 0; i < typeListFile.size(); i++) {
@@ -1837,7 +1837,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         if (!Constant.Keywords.LOADED[0]) {
             final ArrayList<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
 
-            Constant.Keywords.NON_STACKING_LIST[0] = new Constant_StringArrayList();
+            Constant.Keywords.NON_STACKING_LIST[0] = new ConstantStringArrayList();
 
             if (nskwListFile.size() > 1) {
                 for (int i = 0; i < nskwListFile.size(); i++) {

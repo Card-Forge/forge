@@ -3,7 +3,7 @@ package forge.gui.input;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import forge.ComputerAI_Input;
+import forge.ComputerAIInput;
 import forge.Constant;
 import forge.MyObservable;
 import forge.Phase;
@@ -31,7 +31,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private final LinkedList<Input> resolvingQueue = new LinkedList<Input>();
 
     private final FModel model;
-    private ComputerAI_Input aiInput; // initialized at runtime to be the latest
+    private ComputerAIInput aiInput; // initialized at runtime to be the latest
                                       // object created
 
     /**
@@ -250,7 +250,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @param computerAI_Input
      *            the new computer
      */
-    public final void setComputer(final ComputerAI_Input computerAI_Input) {
+    public final void setComputer(final ComputerAIInput computerAI_Input) {
         this.aiInput = computerAI_Input;
     }
 } // InputControl

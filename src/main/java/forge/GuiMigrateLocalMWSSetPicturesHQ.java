@@ -52,7 +52,7 @@ import forge.properties.NewConstants.Lang.GuiDownloadPictures;
  * @author Forge
  * @version $Id$
  */
-public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel implements Runnable,
+public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeModel implements Runnable,
         NewConstants, NewConstants.Lang.GuiDownloadPictures {
 
     /** Constant <code>serialVersionUID=-7890794857949935256L</code>. */
@@ -117,9 +117,9 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      * 
      * @param c
      *            an array of
-     *            {@link forge.Gui_MigrateLocalMWSSetPictures_HQ.MCard} objects.
+     *            {@link forge.GuiMigrateLocalMWSSetPicturesHQ.MCard} objects.
      */
-    private Gui_MigrateLocalMWSSetPictures_HQ(final MCard[] c) {
+    private GuiMigrateLocalMWSSetPicturesHQ(final MCard[] c) {
         this.cards = c;
         this.addr = new JTextField(ForgeProps.getLocalized(GuiDownloadPictures.PROXY_ADDRESS));
         this.port = new JTextField(ForgeProps.getLocalized(GuiDownloadPictures.PROXY_PORT));
@@ -133,7 +133,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         final String[] labels = { ForgeProps.getLocalized(GuiDownloadPictures.NO_PROXY),
                 ForgeProps.getLocalized(GuiDownloadPictures.HTTP_PROXY),
                 ForgeProps.getLocalized(GuiDownloadPictures.SOCKS_PROXY) };
-        for (int i = 0; i < Gui_MigrateLocalMWSSetPictures_HQ.TYPES.length; i++) {
+        for (int i = 0; i < GuiMigrateLocalMWSSetPicturesHQ.TYPES.length; i++) {
             final JRadioButton rb = new JRadioButton(labels[i]);
             rb.addChangeListener(new ProxyHandler(i));
             bg.add(rb);
@@ -161,7 +161,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                new Thread(Gui_MigrateLocalMWSSetPictures_HQ.this).start();
+                new Thread(GuiMigrateLocalMWSSetPicturesHQ.this).start();
                 b.setEnabled(false);
             }
         });
@@ -246,16 +246,16 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
              */
             @Override
             public void run() {
-                Gui_MigrateLocalMWSSetPictures_HQ.this.fireStateChanged();
+                GuiMigrateLocalMWSSetPicturesHQ.this.fireStateChanged();
 
                 final StringBuilder sb = new StringBuilder();
 
-                final int a = Gui_MigrateLocalMWSSetPictures_HQ.this.getAverageTimePerCard();
+                final int a = GuiMigrateLocalMWSSetPicturesHQ.this.getAverageTimePerCard();
 
-                if (this.card != Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length) {
-                    sb.append(this.card + "/" + Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length + " - ");
+                if (this.card != GuiMigrateLocalMWSSetPicturesHQ.this.cards.length) {
+                    sb.append(this.card + "/" + GuiMigrateLocalMWSSetPicturesHQ.this.cards.length + " - ");
 
-                    long t2Go = (Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length - this.card) * a;
+                    long t2Go = (GuiMigrateLocalMWSSetPicturesHQ.this.cards.length - this.card) * a;
 
                     boolean secOnly = true;
                     if (t2Go > 3600000) {
@@ -275,14 +275,14 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
                     }
                 } else {
                     sb.append(String.format(ForgeProps.getLocalized(GuiDownloadPictures.BAR_CLOSE), this.card,
-                            Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length));
+                            GuiMigrateLocalMWSSetPicturesHQ.this.cards.length));
                 }
 
-                Gui_MigrateLocalMWSSetPictures_HQ.this.bar.setString(sb.toString());
+                GuiMigrateLocalMWSSetPicturesHQ.this.bar.setString(sb.toString());
                 // bar.setString(String.format(ForgeProps.getLocalized(card ==
                 // cards.length? BAR_CLOSE:BAR_WAIT), card,
                 // cards.length));
-                System.out.println(this.card + "/" + Gui_MigrateLocalMWSSetPictures_HQ.this.cards.length + " - " + a);
+                System.out.println(this.card + "/" + GuiMigrateLocalMWSSetPicturesHQ.this.cards.length + " - " + a);
             }
         }
         EventQueue.invokeLater(new Worker(card));
@@ -339,7 +339,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
             p = Proxy.NO_PROXY;
         } else {
             try {
-                p = new Proxy(Gui_MigrateLocalMWSSetPictures_HQ.TYPES[this.type], new InetSocketAddress(
+                p = new Proxy(GuiMigrateLocalMWSSetPicturesHQ.TYPES[this.type], new InetSocketAddress(
                         this.addr.getText(), Integer.parseInt(this.port.getText())));
             } catch (final Exception ex) {
                 ErrorViewer.showError(ex, ForgeProps.getLocalized(Errors.PROXY_CONNECT), this.addr.getText(),
@@ -439,14 +439,14 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      *            a {@link javax.swing.JFrame} object.
      */
     public static void startDownload(final JFrame frame) {
-        final MCard[] card = Gui_MigrateLocalMWSSetPictures_HQ.getNeededCards();
+        final MCard[] card = GuiMigrateLocalMWSSetPicturesHQ.getNeededCards();
 
         if (card.length == 0) {
             JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(GuiDownloadPictures.NO_MORE));
             return;
         }
 
-        final Gui_MigrateLocalMWSSetPictures_HQ download = new Gui_MigrateLocalMWSSetPictures_HQ(card);
+        final GuiMigrateLocalMWSSetPicturesHQ download = new GuiMigrateLocalMWSSetPicturesHQ(card);
         final JDialog dlg = download.getDlg(frame);
         dlg.setVisible(true);
         dlg.dispose();
@@ -458,7 +458,7 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.Gui_MigrateLocalMWSSetPictures_HQ.MCard}
+     * @return an array of {@link forge.GuiMigrateLocalMWSSetPicturesHQ.MCard}
      *         objects.
      */
     private static MCard[] getNeededCards() {
@@ -578,9 +578,9 @@ public final class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRange
         @Override
         public void stateChanged(final ChangeEvent e) {
             if (((AbstractButton) e.getSource()).isSelected()) {
-                Gui_MigrateLocalMWSSetPictures_HQ.this.type = this.type;
-                Gui_MigrateLocalMWSSetPictures_HQ.this.addr.setEnabled(this.type != 0);
-                Gui_MigrateLocalMWSSetPictures_HQ.this.port.setEnabled(this.type != 0);
+                GuiMigrateLocalMWSSetPicturesHQ.this.type = this.type;
+                GuiMigrateLocalMWSSetPicturesHQ.this.addr.setEnabled(this.type != 0);
+                GuiMigrateLocalMWSSetPicturesHQ.this.port.setEnabled(this.type != 0);
             }
         }
     }

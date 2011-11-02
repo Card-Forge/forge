@@ -12,7 +12,7 @@ import forge.card.cardFactory.CardFactoryUtil;
  * @author Forge
  * @version $Id$
  */
-public class ComputerUtil_Block2 {
+public class ComputerUtilBlock2 {
     /** Constant <code>attackers</code>. */
     private static CardList attackers = new CardList(); // all attackers
     /** Constant <code>attackersLeft</code>. */
@@ -147,7 +147,7 @@ public class ComputerUtil_Block2 {
      *            a int.
      */
     private static void setDiff(final int diff) {
-        ComputerUtil_Block2.diff = (diff);
+        ComputerUtilBlock2.diff = (diff);
     }
 
     // finds the creatures able to block the attacker

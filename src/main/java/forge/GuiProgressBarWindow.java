@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
  * @version $Id$
  * @since 1.0.15
  */
-public class Gui_ProgressBarWindow extends JDialog {
+public class GuiProgressBarWindow extends JDialog {
 
     /**
      *
@@ -28,7 +28,7 @@ public class Gui_ProgressBarWindow extends JDialog {
     /**
      * Create the dialog.
      */
-    public Gui_ProgressBarWindow() {
+    public GuiProgressBarWindow() {
         setResizable(false);
         setTitle("Some Progress");
         Dimension screen = this.getToolkit().getScreenSize();

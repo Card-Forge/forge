@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * The Class Constant_StringArrayList.
  */
-public class Constant_StringArrayList {
+public class ConstantStringArrayList {
 
     /** The list. */
     private ArrayList<String> list = new ArrayList<String>();

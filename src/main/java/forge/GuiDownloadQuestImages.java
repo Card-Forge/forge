@@ -35,7 +35,7 @@ public class GuiDownloadQuestImages extends GuiDownloader {
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.Gui_DownloadSetPictures_LQ}
+     * @return an array of {@link forge.GuiDownloadSetPicturesLQ}
      *         objects.
      */
     protected final DownloadObject[] getNeededImages() {

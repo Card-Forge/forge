@@ -302,34 +302,34 @@ public interface Constant {
         boolean[] LOADED = { false };
 
         /** The card types. */
-        Constant_StringArrayList[] CARD_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] CARD_TYPES = new ConstantStringArrayList[1];
 
         /** The super types. */
-        Constant_StringArrayList[] SUPER_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] SUPER_TYPES = new ConstantStringArrayList[1];
 
         /** The basic types. */
-        Constant_StringArrayList[] BASIC_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] BASIC_TYPES = new ConstantStringArrayList[1];
 
         /** The land types. */
-        Constant_StringArrayList[] LAND_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] LAND_TYPES = new ConstantStringArrayList[1];
 
         /** The creature types. */
-        Constant_StringArrayList[] CREATURE_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] CREATURE_TYPES = new ConstantStringArrayList[1];
 
         /** The instant types. */
-        Constant_StringArrayList[] INSTANT_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] INSTANT_TYPES = new ConstantStringArrayList[1];
 
         /** The sorcery types. */
-        Constant_StringArrayList[] SORCERY_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] SORCERY_TYPES = new ConstantStringArrayList[1];
 
         /** The enchantment types. */
-        Constant_StringArrayList[] ENCHANTMENT_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] ENCHANTMENT_TYPES = new ConstantStringArrayList[1];
 
         /** The artifact types. */
-        Constant_StringArrayList[] ARTIFACT_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] ARTIFACT_TYPES = new ConstantStringArrayList[1];
 
         /** The walker types. */
-        Constant_StringArrayList[] WALKER_TYPES = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] WALKER_TYPES = new ConstantStringArrayList[1];
     }
 
     /**
@@ -341,7 +341,7 @@ public interface Constant {
         boolean[] LOADED = { false };
 
         /** The Non stacking list. */
-        Constant_StringArrayList[] NON_STACKING_LIST = new Constant_StringArrayList[1];
+        ConstantStringArrayList[] NON_STACKING_LIST = new ConstantStringArrayList[1];
     }
 
 } // Constant

@@ -32,7 +32,7 @@ import forge.properties.NewConstants.Quest;
  * @author Forge
  * @version $Id$
  */
-public class Gui_DownloadPrices extends JFrame {
+public class GuiDownloadPrices extends JFrame {
 
     /** Constant <code>serialVersionUID=1L</code>. */
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class Gui_DownloadPrices extends JFrame {
     /**
      * This is the default constructor.
      */
-    public Gui_DownloadPrices() {
+    public GuiDownloadPrices() {
         super();
         initialize();
     }
@@ -85,7 +85,7 @@ public class Gui_DownloadPrices extends JFrame {
             jButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(final java.awt.event.ActionEvent e) {
                     if (jButton.getText().equals("Done!")) {
-                        Gui_DownloadPrices.this.dispose();
+                        GuiDownloadPrices.this.dispose();
                     }
 
                     BufferedInputStream in = null;

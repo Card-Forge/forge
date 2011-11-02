@@ -15,6 +15,6 @@ public class GuiMigrateLocalMWSSetPicturesHQTest {
      */
     @Test(enabled = false, timeOut = 1000)
     public  void GuiMigrateLocalMWSSetPicturesHQ1() {
-        Gui_MigrateLocalMWSSetPictures_HQ.startDownload(null);
+        GuiMigrateLocalMWSSetPicturesHQ.startDownload(null);
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Forge
  * @version $Id: Card_Keywords.java 10217 2011-09-04 10:14:19Z Sloth $
  */
-public class Card_Keywords implements Comparable<Card_Keywords> {
+public class CardKeywords implements Comparable<CardKeywords> {
     // takes care of individual card types
     private ArrayList<String> keywords = new ArrayList<String>();
     private ArrayList<String> removeKeywords = new ArrayList<String>();
@@ -41,7 +41,7 @@ public class Card_Keywords implements Comparable<Card_Keywords> {
      * @param stamp
      *            a long
      */
-    Card_Keywords(final ArrayList<String> keywordList, final ArrayList<String> removeKeywordList,
+    CardKeywords(final ArrayList<String> keywordList, final ArrayList<String> removeKeywordList,
             final boolean removeAll, final long stamp) {
         keywords = keywordList;
         removeKeywords = removeKeywordList;
@@ -85,7 +85,7 @@ public class Card_Keywords implements Comparable<Card_Keywords> {
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public final int compareTo(final Card_Keywords anotherCardKeywords) {
+    public final int compareTo(final CardKeywords anotherCardKeywords) {
         int returnValue = 0;
         long anotherTimeStamp = anotherCardKeywords.getTimestamp();
         if (this.timeStamp < anotherTimeStamp) {

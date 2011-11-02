@@ -201,8 +201,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ArrayList<String> targetsForChoices = new ArrayList<String>();
 
     // changes by AF animate and continuous static effects
-    private ArrayList<Card_Type> changedCardTypes = new ArrayList<Card_Type>();
-    private ArrayList<Card_Keywords> changedCardKeywords = new ArrayList<Card_Keywords>();
+    private ArrayList<CardType> changedCardTypes = new ArrayList<CardType>();
+    private ArrayList<CardKeywords> changedCardKeywords = new ArrayList<CardKeywords>();
 
     private ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private ArrayList<Card> imprintedCards = new ArrayList<Card>();
@@ -4034,10 +4034,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!changedCardTypes.isEmpty()) {
 
             ArrayList<String> newType = new ArrayList<String>(getCharacteristics().getType());
-            ArrayList<Card_Type> types = changedCardTypes;
+            ArrayList<CardType> types = changedCardTypes;
             Collections.sort(types); // sorts types by timeStamp
 
-            for (Card_Type ct : types) {
+            for (CardType ct : types) {
                 ArrayList<String> removeTypes = new ArrayList<String>();
                 if (ct.getRemoveType() != null) {
                     removeTypes.addAll(ct.getRemoveType());
@@ -4080,7 +4080,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param types
      *            a ArrayList<Card_Type>
      */
-    public final void setChangedCardTypes(final ArrayList<Card_Type> types) {
+    public final void setChangedCardTypes(final ArrayList<CardType> types) {
         changedCardTypes = types;
     }
 
@@ -4090,7 +4090,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return ArrayList<Card_Type>
      */
-    public final ArrayList<Card_Type> getChangedCardTypes() {
+    public final ArrayList<CardType> getChangedCardTypes() {
         return changedCardTypes;
     }
 
@@ -4117,7 +4117,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeCreatureTypes, long timestamp) {
 
-        changedCardTypes.add(new Card_Type(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
+        changedCardTypes.add(new CardType(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                 removeCreatureTypes, timestamp));
     }
 
@@ -4166,7 +4166,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeChangedCardTypes(long timestamp) {
         for (int i = 0; i < changedCardTypes.size(); i++) {
-            Card_Type cardT = changedCardTypes.get(i);
+            CardType cardT = changedCardTypes.get(i);
             if (cardT.getTimestamp() == timestamp) {
                 changedCardTypes.remove(cardT);
             }
@@ -4949,7 +4949,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param kw
      *            the new changed card keywords
      */
-    public final void setChangedCardKeywords(final ArrayList<Card_Keywords> kw) {
+    public final void setChangedCardKeywords(final ArrayList<CardKeywords> kw) {
         changedCardKeywords = kw;
     }
 
@@ -4958,7 +4958,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return the changed card keywords
      */
-    public final ArrayList<Card_Keywords> getChangedCardKeywords() {
+    public final ArrayList<CardKeywords> getChangedCardKeywords() {
         return changedCardKeywords;
     }
 
@@ -4977,7 +4977,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedCardKeywords(final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
             final boolean removeAllKeywords, long timestamp) {
 
-        changedCardKeywords.add(new Card_Keywords(keywords, removeKeywords, removeAllKeywords, timestamp));
+        changedCardKeywords.add(new CardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp));
     }
 
     /**
@@ -5015,7 +5015,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeChangedCardKeywords(long timestamp) {
         for (int i = 0; i < changedCardKeywords.size(); i++) {
-            Card_Keywords cardK = changedCardKeywords.get(i);
+            CardKeywords cardK = changedCardKeywords.get(i);
             if (cardK.getTimestamp() == timestamp) {
                 changedCardKeywords.remove(cardK);
             }
@@ -5038,10 +5038,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         // see if keyword changes are in effect
         if (!changedCardKeywords.isEmpty()) {
 
-            ArrayList<Card_Keywords> newKeywords = changedCardKeywords;
+            ArrayList<CardKeywords> newKeywords = changedCardKeywords;
             Collections.sort(newKeywords); // sorts newKeywords by timeStamp
 
-            for (Card_Keywords ck : newKeywords) {
+            for (CardKeywords ck : newKeywords) {
 
                 if (ck.isRemoveAllKeywords()) {
                     keywords.clear();

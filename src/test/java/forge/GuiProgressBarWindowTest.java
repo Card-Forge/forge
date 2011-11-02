@@ -18,7 +18,7 @@ public class GuiProgressBarWindowTest {
     @Test(groups = {"UnitTest", "fast"})
     public void GuiProgressBarWindowTest1() {
         try {
-            Gui_ProgressBarWindow dialog = new Gui_ProgressBarWindow();
+            GuiProgressBarWindow dialog = new GuiProgressBarWindow();
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
             Assert.assertNotNull(dialog);

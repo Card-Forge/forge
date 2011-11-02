@@ -168,7 +168,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         if (damage <= 0) {
             return;
         }
-        new Gui_MultipleBlockers4(attacker, blockers, damage, this);
+        new GuiMultipleBlockers4(attacker, blockers, damage, this);
     }
 
     /**

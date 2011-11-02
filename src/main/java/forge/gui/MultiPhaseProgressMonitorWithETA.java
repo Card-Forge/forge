@@ -8,7 +8,7 @@ import javax.swing.WindowConstants;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
-import forge.Gui_ProgressBarWindow;
+import forge.GuiProgressBarWindow;
 
 /**
  * GUI Progress Monitor that displays the ETA (Estimated Time of Arrival or
@@ -19,7 +19,7 @@ import forge.Gui_ProgressBarWindow;
  */
 public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
-    private transient Gui_ProgressBarWindow dialog;
+    private transient GuiProgressBarWindow dialog;
     private transient String title;
 
     /**
@@ -218,7 +218,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                                 MultiPhaseProgressMonitorWithETA.this.dialog = null;
                             }
 
-                            MultiPhaseProgressMonitorWithETA.this.dialog = new Gui_ProgressBarWindow();
+                            MultiPhaseProgressMonitorWithETA.this.dialog = new GuiProgressBarWindow();
                         }
                     });
         }

@@ -7,12 +7,12 @@ package forge;
  * {@link forge.view.swing.OldGuiNewGame}, which is slowly being refactored out
  * of existence.
  */
-public final class Gui_NewGame {
+public final class GuiNewGame {
 
     /**
      * Do not instantiate.
      */
-    private Gui_NewGame() {
+    private GuiNewGame() {
         // blank
     }
 

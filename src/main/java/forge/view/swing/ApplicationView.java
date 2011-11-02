@@ -10,8 +10,8 @@ import arcane.ui.util.ManaSymbols;
 import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
-import forge.ComputerAI_General;
-import forge.ComputerAI_Input;
+import forge.ComputerAIGeneral;
+import forge.ComputerAIInput;
 import forge.Constant;
 import forge.ImageCache;
 import forge.error.ErrorViewer;
@@ -155,7 +155,7 @@ public class ApplicationView implements FView {
                                                             // web app
                             @Override
                             public void run() {
-                                AllZone.getInputControl().setComputer(new ComputerAI_Input(new ComputerAI_General()));
+                                AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
 
                                 // Enable only one of the following two lines.
                                 // The second
