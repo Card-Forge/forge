@@ -169,7 +169,7 @@ public class ApplicationView implements FView {
                                 if (System.getenv("NG2") != null) {
                                     if (System.getenv("NG2").equalsIgnoreCase("true")) {
                                         final String[] argz = {};
-                                        Gui_HomeScreen.main(argz);
+                                        GuiHomeScreen.main(argz);
                                     } else {
                                         new OldGuiNewGame();
                                     }

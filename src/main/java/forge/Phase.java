@@ -27,7 +27,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
     // Please use getX, setX, and incrementX methods instead of directly
     // accessing the following:
     /** Constant <code>GameBegins=0</code>. */
-    private static int GameBegins = 0;
+    private static int gameBegins = 0;
 
     private final Stack<Player> extraTurns = new Stack<Player>();
 
@@ -925,7 +925,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      *            a int.
      */
     public static void setGameBegins(final int gameBegins) {
-        Phase.GameBegins = gameBegins;
+        Phase.gameBegins = gameBegins;
     }
 
     /**
@@ -936,7 +936,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
      * @return a int.
      */
     public static int getGameBegins() {
-        return Phase.GameBegins;
+        return Phase.gameBegins;
     }
 
     // this is a hack for the setup game state mode, do not use outside of

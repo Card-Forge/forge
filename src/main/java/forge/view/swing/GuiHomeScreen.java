@@ -72,7 +72,7 @@ import forge.quest.gui.QuestOptions;
 /**
  * The Class Gui_HomeScreen.
  */
-public class Gui_HomeScreen {
+public class GuiHomeScreen {
     // Hack... WindowBuilder can't deal with path relative to the project folder
     // like "res/"
     // So... use a full path when debugging or designing with WindowBuilder
@@ -213,7 +213,7 @@ public class Gui_HomeScreen {
             @Override
             public void run() {
                 try {
-                    final Gui_HomeScreen window = new Gui_HomeScreen();
+                    final GuiHomeScreen window = new GuiHomeScreen();
                     window.gHS.setVisible(true);
                 } catch (final Exception e) {
                     e.printStackTrace();
@@ -225,7 +225,7 @@ public class Gui_HomeScreen {
     /**
      * Create the application.
      */
-    public Gui_HomeScreen() {
+    public GuiHomeScreen() {
         this.initialize();
     }
 
@@ -260,20 +260,20 @@ public class Gui_HomeScreen {
         this.cmdConstructed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.gameTypeSelected = GameType.Constructed;
-                Gui_HomeScreen.this.showDecks();
-                Gui_HomeScreen.this.doGameModeSelect();
+                GuiHomeScreen.this.gameTypeSelected = GameType.Constructed;
+                GuiHomeScreen.this.showDecks();
+                GuiHomeScreen.this.doGameModeSelect();
             }
         });
         this.cmdConstructed.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdConstructed.setIcon(Gui_HomeScreen.this.imgConstructedOver);
+                GuiHomeScreen.this.cmdConstructed.setIcon(GuiHomeScreen.this.imgConstructedOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdConstructed.setIcon(Gui_HomeScreen.this.imgConstructedUp);
+                GuiHomeScreen.this.cmdConstructed.setIcon(GuiHomeScreen.this.imgConstructedUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdConstructed);
@@ -292,20 +292,20 @@ public class Gui_HomeScreen {
         this.cmdSealed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.gameTypeSelected = GameType.Sealed;
-                Gui_HomeScreen.this.showDecks();
-                Gui_HomeScreen.this.doGameModeSelect();
+                GuiHomeScreen.this.gameTypeSelected = GameType.Sealed;
+                GuiHomeScreen.this.showDecks();
+                GuiHomeScreen.this.doGameModeSelect();
             }
         });
         this.cmdSealed.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdSealed.setIcon(Gui_HomeScreen.this.imgSealedOver);
+                GuiHomeScreen.this.cmdSealed.setIcon(GuiHomeScreen.this.imgSealedOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdSealed.setIcon(Gui_HomeScreen.this.imgSealedUp);
+                GuiHomeScreen.this.cmdSealed.setIcon(GuiHomeScreen.this.imgSealedUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdSealed);
@@ -324,20 +324,20 @@ public class Gui_HomeScreen {
         this.cmdDraft.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.gameTypeSelected = GameType.Draft;
-                Gui_HomeScreen.this.showDecks();
-                Gui_HomeScreen.this.doGameModeSelect();
+                GuiHomeScreen.this.gameTypeSelected = GameType.Draft;
+                GuiHomeScreen.this.showDecks();
+                GuiHomeScreen.this.doGameModeSelect();
             }
         });
         this.cmdDraft.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdDraft.setIcon(Gui_HomeScreen.this.imgDraftOver);
+                GuiHomeScreen.this.cmdDraft.setIcon(GuiHomeScreen.this.imgDraftOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdDraft.setIcon(Gui_HomeScreen.this.imgDraftUp);
+                GuiHomeScreen.this.cmdDraft.setIcon(GuiHomeScreen.this.imgDraftUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdDraft);
@@ -356,20 +356,20 @@ public class Gui_HomeScreen {
         this.cmdQuest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.gameTypeSelected = GameType.Quest;
-                Gui_HomeScreen.this.showDecks();
-                Gui_HomeScreen.this.doGameModeSelect();
+                GuiHomeScreen.this.gameTypeSelected = GameType.Quest;
+                GuiHomeScreen.this.showDecks();
+                GuiHomeScreen.this.doGameModeSelect();
             }
         });
         this.cmdQuest.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdQuest.setIcon(Gui_HomeScreen.this.imgQuestOver);
+                GuiHomeScreen.this.cmdQuest.setIcon(GuiHomeScreen.this.imgQuestOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdQuest.setIcon(Gui_HomeScreen.this.imgQuestUp);
+                GuiHomeScreen.this.cmdQuest.setIcon(GuiHomeScreen.this.imgQuestUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdQuest);
@@ -392,19 +392,19 @@ public class Gui_HomeScreen {
         this.cmdHumanDeck.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.playerSelected = "Human";
-                Gui_HomeScreen.this.showDecks();
+                GuiHomeScreen.this.playerSelected = "Human";
+                GuiHomeScreen.this.showDecks();
             }
         });
         this.cmdHumanDeck.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdHumanDeck.setIcon(Gui_HomeScreen.this.imgHumanOver);
+                GuiHomeScreen.this.cmdHumanDeck.setIcon(GuiHomeScreen.this.imgHumanOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdHumanDeck.setIcon(Gui_HomeScreen.this.imgHumanUp);
+                GuiHomeScreen.this.cmdHumanDeck.setIcon(GuiHomeScreen.this.imgHumanUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdHumanDeck);
@@ -422,20 +422,20 @@ public class Gui_HomeScreen {
         this.cmdAIDeck.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Gui_HomeScreen.this.playerSelected = "AI";
-                Gui_HomeScreen.this.showDecks();
+                GuiHomeScreen.this.playerSelected = "AI";
+                GuiHomeScreen.this.showDecks();
 
             }
         });
         this.cmdAIDeck.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdAIDeck.setIcon(Gui_HomeScreen.this.imgAIOver);
+                GuiHomeScreen.this.cmdAIDeck.setIcon(GuiHomeScreen.this.imgAIOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdAIDeck.setIcon(Gui_HomeScreen.this.imgAIUp);
+                GuiHomeScreen.this.cmdAIDeck.setIcon(GuiHomeScreen.this.imgAIUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdAIDeck);
@@ -452,18 +452,18 @@ public class Gui_HomeScreen {
         this.cmdDeckEditor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.doShowEditor();
+                GuiHomeScreen.this.doShowEditor();
             }
         });
         this.cmdDeckEditor.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdDeckEditor.setIcon(Gui_HomeScreen.this.imgEditorOver);
+                GuiHomeScreen.this.cmdDeckEditor.setIcon(GuiHomeScreen.this.imgEditorOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdDeckEditor.setIcon(Gui_HomeScreen.this.imgEditorUp);
+                GuiHomeScreen.this.cmdDeckEditor.setIcon(GuiHomeScreen.this.imgEditorUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdDeckEditor);
@@ -479,18 +479,18 @@ public class Gui_HomeScreen {
         this.cmdStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.doStartGame();
+                GuiHomeScreen.this.doStartGame();
             }
         });
         this.cmdStart.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdStart.setIcon(Gui_HomeScreen.this.imgStartDown);
+                GuiHomeScreen.this.cmdStart.setIcon(GuiHomeScreen.this.imgStartDown);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdStart.setIcon(Gui_HomeScreen.this.imgStartUp);
+                GuiHomeScreen.this.cmdStart.setIcon(GuiHomeScreen.this.imgStartUp);
             }
         });
         this.gHS.getContentPane().add(this.cmdStart);
@@ -506,22 +506,22 @@ public class Gui_HomeScreen {
         this.cmdSettings.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdSettings.setIcon(Gui_HomeScreen.this.imgSettingsOver);
+                GuiHomeScreen.this.cmdSettings.setIcon(GuiHomeScreen.this.imgSettingsOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdSettings.setIcon(Gui_HomeScreen.this.imgSettingsUp);
+                GuiHomeScreen.this.cmdSettings.setIcon(GuiHomeScreen.this.imgSettingsUp);
             }
         });
         this.cmdSettings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.pnlIntro.setVisible(false);
-                Gui_HomeScreen.this.pnlDecks.setVisible(false);
-                Gui_HomeScreen.this.pnlUtilities.setVisible(false);
+                GuiHomeScreen.this.pnlIntro.setVisible(false);
+                GuiHomeScreen.this.pnlDecks.setVisible(false);
+                GuiHomeScreen.this.pnlUtilities.setVisible(false);
 
-                Gui_HomeScreen.this.pnlSettings.setVisible(true);
+                GuiHomeScreen.this.pnlSettings.setVisible(true);
             }
         });
         this.gHS.getContentPane().add(this.cmdSettings);
@@ -537,22 +537,22 @@ public class Gui_HomeScreen {
         this.cmdUtilities.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdUtilities.setIcon(Gui_HomeScreen.this.imgUtilitiesOver);
+                GuiHomeScreen.this.cmdUtilities.setIcon(GuiHomeScreen.this.imgUtilitiesOver);
             }
 
             @Override
             public void focusLost(final FocusEvent arg0) {
-                Gui_HomeScreen.this.cmdUtilities.setIcon(Gui_HomeScreen.this.imgUtilitiesUp);
+                GuiHomeScreen.this.cmdUtilities.setIcon(GuiHomeScreen.this.imgUtilitiesUp);
             }
         });
         this.cmdUtilities.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.pnlIntro.setVisible(false);
-                Gui_HomeScreen.this.pnlDecks.setVisible(false);
-                Gui_HomeScreen.this.pnlSettings.setVisible(false);
+                GuiHomeScreen.this.pnlIntro.setVisible(false);
+                GuiHomeScreen.this.pnlDecks.setVisible(false);
+                GuiHomeScreen.this.pnlSettings.setVisible(false);
 
-                Gui_HomeScreen.this.pnlUtilities.setVisible(true);
+                GuiHomeScreen.this.pnlUtilities.setVisible(true);
             }
         });
         this.gHS.getContentPane().add(this.cmdUtilities);
@@ -599,7 +599,7 @@ public class Gui_HomeScreen {
         this.cmdDeckSelect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Gui_HomeScreen.this.doDeckSelect();
+                GuiHomeScreen.this.doDeckSelect();
             }
         });
         this.pnlSettings.setVisible(false);
@@ -626,7 +626,7 @@ public class Gui_HomeScreen {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 Singletons.getModel().getPreferences()
-                        .setDeveloperMode(Gui_HomeScreen.this.chkDeveloperMode.isSelected());
+                        .setDeveloperMode(GuiHomeScreen.this.chkDeveloperMode.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkDeveloperMode);
@@ -636,7 +636,7 @@ public class Gui_HomeScreen {
         this.chkStackAiLand.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().setStackAiLand(Gui_HomeScreen.this.chkStackAiLand.isSelected());
+                Singletons.getModel().getPreferences().setStackAiLand(GuiHomeScreen.this.chkStackAiLand.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkStackAiLand);
@@ -647,7 +647,7 @@ public class Gui_HomeScreen {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 Singletons.getModel().getPreferences()
-                        .setUploadDraftAI(Gui_HomeScreen.this.chkUploadDraftData.isSelected());
+                        .setUploadDraftAI(GuiHomeScreen.this.chkUploadDraftData.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkUploadDraftData);
@@ -660,7 +660,7 @@ public class Gui_HomeScreen {
         this.chkMana.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().setCardOverlay(Gui_HomeScreen.this.chkMana.isSelected());
+                Singletons.getModel().getPreferences().setCardOverlay(GuiHomeScreen.this.chkMana.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkMana);
@@ -670,7 +670,7 @@ public class Gui_HomeScreen {
         this.chkFoil.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().setRandCFoil(Gui_HomeScreen.this.chkFoil.isSelected());
+                Singletons.getModel().getPreferences().setRandCFoil(GuiHomeScreen.this.chkFoil.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkFoil);
@@ -682,7 +682,7 @@ public class Gui_HomeScreen {
         this.cmdLAF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.doLAF();
+                GuiHomeScreen.this.doLAF();
             }
         });
         this.pnlSettingsA.add(this.cmdLAF);
@@ -692,7 +692,7 @@ public class Gui_HomeScreen {
         this.chkLAF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().setLafFonts(Gui_HomeScreen.this.chkLAF.isSelected());
+                Singletons.getModel().getPreferences().setLafFonts(GuiHomeScreen.this.chkLAF.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkLAF);
@@ -701,7 +701,7 @@ public class Gui_HomeScreen {
         this.cmdSize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.doCardSize();
+                GuiHomeScreen.this.doCardSize();
             }
         });
         this.pnlSettingsA.add(this.cmdSize);
@@ -712,7 +712,7 @@ public class Gui_HomeScreen {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 Singletons.getModel().getPreferences()
-                        .setScaleLargerThanOriginal(Gui_HomeScreen.this.chkScale.isSelected());
+                        .setScaleLargerThanOriginal(GuiHomeScreen.this.chkScale.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkScale);
@@ -721,7 +721,7 @@ public class Gui_HomeScreen {
         this.cmdStack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Gui_HomeScreen.this.doStackOffset();
+                GuiHomeScreen.this.doStackOffset();
             }
         });
         this.pnlSettingsA.add(this.cmdStack);
@@ -735,7 +735,7 @@ public class Gui_HomeScreen {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 Singletons.getModel().getPreferences()
-                        .setDeckGenRmvArtifacts(Gui_HomeScreen.this.chkRemoveArtifacts.isSelected());
+                        .setDeckGenRmvArtifacts(GuiHomeScreen.this.chkRemoveArtifacts.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkRemoveArtifacts);
@@ -746,7 +746,7 @@ public class Gui_HomeScreen {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 Singletons.getModel().getPreferences()
-                        .setDeckGenRmvSmall(Gui_HomeScreen.this.chkRemoveSmall.isSelected());
+                        .setDeckGenRmvSmall(GuiHomeScreen.this.chkRemoveSmall.isSelected());
             }
         });
         this.pnlSettingsA.add(this.chkRemoveSmall);
@@ -1139,9 +1139,9 @@ public class Gui_HomeScreen {
     }
 
     private void doShowEditor() {
-        if (Gui_HomeScreen.editor == null) {
+        if (GuiHomeScreen.editor == null) {
 
-            Gui_HomeScreen.editor = new DeckEditorCommon(GameType.Constructed);
+            GuiHomeScreen.editor = new DeckEditorCommon(GameType.Constructed);
 
             final Command exit = new Command() {
                 private static final long serialVersionUID = -9133358399503226853L;
@@ -1149,11 +1149,11 @@ public class Gui_HomeScreen {
                 @Override
                 public void execute() {
                     final String[] ng = { "" };
-                    Gui_HomeScreen.main(ng);
+                    GuiHomeScreen.main(ng);
                 }
             };
-            Gui_HomeScreen.editor.show(exit);
-            Gui_HomeScreen.editor.setVisible(true);
+            GuiHomeScreen.editor.show(exit);
+            GuiHomeScreen.editor.setVisible(true);
         } // if
 
         // refresh decks:
@@ -1165,7 +1165,7 @@ public class Gui_HomeScreen {
         // card name and pressing enter will filter
         // editor.getRootPane().setDefaultButton(editor.filterButton);
 
-        Gui_HomeScreen.editor.setVisible(true);
+        GuiHomeScreen.editor.setVisible(true);
 
         this.gHS.dispose();
     }

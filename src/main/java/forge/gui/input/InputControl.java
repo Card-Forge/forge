@@ -247,10 +247,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     /**
      * Sets the computer.
      * 
-     * @param computerAI_Input
+     * @param computerAIInput
      *            the new computer
      */
-    public final void setComputer(final ComputerAIInput computerAI_Input) {
-        this.aiInput = computerAI_Input;
+    public final void setComputer(final ComputerAIInput computerAIInput) {
+        this.aiInput = computerAIInput;
     }
 } // InputControl

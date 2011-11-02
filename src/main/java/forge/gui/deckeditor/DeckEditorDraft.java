@@ -36,7 +36,7 @@ import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
-import forge.view.swing.Gui_HomeScreen;
+import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
 /**
@@ -123,7 +123,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
                     if (System.getenv("NG2") != null) {
                         if (System.getenv("NG2").equalsIgnoreCase("true")) {
                             final String[] argz = {};
-                            Gui_HomeScreen.main(argz);
+                            GuiHomeScreen.main(argz);
                         } else {
                             new OldGuiNewGame();
                         }
@@ -351,7 +351,7 @@ public class DeckEditorDraft extends DeckEditorBase implements NewConstants, New
         if (System.getenv("NG2") != null) {
             if (System.getenv("NG2").equalsIgnoreCase("true")) {
                 final String[] argz = {};
-                Gui_HomeScreen.main(argz);
+                GuiHomeScreen.main(argz);
             } else {
                 new OldGuiNewGame();
             }

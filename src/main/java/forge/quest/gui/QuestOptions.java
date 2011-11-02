@@ -27,7 +27,7 @@ import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestPreferences;
-import forge.view.swing.Gui_HomeScreen;
+import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
 /**
@@ -104,7 +104,7 @@ public class QuestOptions extends JFrame {
                 if (System.getenv("NG2") != null) {
                     if (System.getenv("NG2").equalsIgnoreCase("true")) {
                         final String[] argz = {};
-                        Gui_HomeScreen.main(argz);
+                        GuiHomeScreen.main(argz);
                     } else {
                         new OldGuiNewGame();
                     }
