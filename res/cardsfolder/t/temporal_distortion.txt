@@ -1,0 +1,15 @@
+Name:Temporal Distortion
+ManaCost:3 U U
+Types:Enchantment
+Text:no text
+T:Mode$ Taps | ValidCard$ Creature,Land | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature or land becomes tapped, put an hourglass counter on it. Permanents with hourglass counters on them don't untap during their controllers' untap steps.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ HOURGLASS | CounterNum$ 1 | Defined$ TriggeredCard
+S:Mode$ Continuous | Affected$ Permanent.counters_GE1_HOURGLASS | AddKeyword$ CARDNAME doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRemoveCounterYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigRemoveCounterOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
+SVar:TrigRemoveCounterYou:AB$ RemoveCounterAll | Cost$ 0 | CounterType$ HOURGLASS | CounterNum$ 1 | ValidCards$ Permanent.YouCtrl
+SVar:TrigRemoveCounterOpp:AB$ RemoveCounterAll | Cost$ 0 | CounterType$ HOURGLASS | CounterNum$ 1 | ValidCards$ Permanent.YouDontCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_distortion.jpg
+End
