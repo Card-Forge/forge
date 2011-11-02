@@ -8495,6 +8495,7 @@ res/cardsfolder/t/tolarian_emissary.txt svneol=native#text/plain
 res/cardsfolder/t/tolarian_entrancer.txt svneol=native#text/plain
 res/cardsfolder/t/tolarian_sentinel.txt svneol=native#text/plain
 res/cardsfolder/t/tolarian_serpent.txt svneol=native#text/plain
+res/cardsfolder/t/tolarian_winds.txt -text
 res/cardsfolder/t/tolsimir_wolfblood.txt svneol=native#text/plain
 res/cardsfolder/t/tomb_hex.txt svneol=native#text/plain
 res/cardsfolder/t/tomb_of_urami.txt svneol=native#text/plain
