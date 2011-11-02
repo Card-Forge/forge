@@ -22,7 +22,7 @@ public class GuiMultipleBlockers4Test {
         list.add(AllZone.getCardFactory().getCard("Frostling", null));
 
         for (int i = 0; i < 2; i++) {
-            new GuiMultipleBlockers4(null, list, i + 1, null);
+            new GuiMultipleBlockers(null, list, i + 1, null);
         }
     }
 }

@@ -17,7 +17,7 @@ import forge.card.trigger.Trigger;
  * @author Forge
  * @version $Id$
  */
-public class ComputerUtilAttack2 {
+public class ComputerUtilAttack {
 
     // possible attackers and blockers
     private CardList attackers;
@@ -46,7 +46,7 @@ public class ComputerUtilAttack2 {
      * @param blockerLife
      *            a int.
      */
-    public ComputerUtilAttack2(final Card[] possibleAttackers, final Card[] possibleBlockers, final int blockerLife) {
+    public ComputerUtilAttack(final Card[] possibleAttackers, final Card[] possibleBlockers, final int blockerLife) {
         this(new CardList(possibleAttackers), new CardList(possibleBlockers), blockerLife);
     }
 
@@ -62,7 +62,7 @@ public class ComputerUtilAttack2 {
      * @param blockerLife
      *            a int.
      */
-    public ComputerUtilAttack2(final CardList possibleAttackers,
+    public ComputerUtilAttack(final CardList possibleAttackers,
             final CardList possibleBlockers, final int blockerLife) {
         humanList = new CardList(possibleBlockers.toArray());
         humanList = humanList.getType("Creature");

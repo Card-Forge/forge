@@ -50,7 +50,7 @@ import forge.Constant;
 import forge.ConstantStringArrayList;
 import forge.FileUtil;
 import forge.GuiImportPicture;
-import forge.GuiDisplay4;
+import forge.GuiDisplay;
 import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadPicturesLQ;
 import forge.GuiDownloadPrices;
@@ -849,7 +849,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         // Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
 
         // if (newGuiCheckBox.isSelected())
-        AllZone.setDisplay(new GuiDisplay4());
+        AllZone.setDisplay(new GuiDisplay());
         // else AllZone.setDisplay(new GuiDisplay3());
 
         Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();

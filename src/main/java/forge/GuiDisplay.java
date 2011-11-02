@@ -102,7 +102,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewConstants, NewConstants.Gui.GuiDisplay,
+public class GuiDisplay extends JFrame implements CardContainer, Display, NewConstants, NewConstants.Gui.GuiDisplay,
         NewConstants.Lang.GuiDisplay {
     /** Constant <code>serialVersionUID=4519302185194841060L</code>. */
     private static final long serialVersionUID = 4519302185194841060L;
@@ -137,7 +137,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * Constructor for GuiDisplay4.
      * </p>
      */
-    public GuiDisplay4() {
+    public GuiDisplay() {
         AllZone.setDisplay(this);
         setupActions();
         initComponents();
@@ -168,7 +168,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         if (damage <= 0) {
             return;
         }
-        new GuiMultipleBlockers4(attacker, blockers, damage, this);
+        new GuiMultipleBlockers(attacker, blockers, damage, this);
     }
 
     /**
@@ -334,7 +334,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             };
             // end DevMode SetLife
 
-            Object[] objDev = { GuiDisplay4.canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary,
+            Object[] objDev = { GuiDisplay.canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary,
                     generateMana, setupBattleField, tutor, addCounter, tapPerm, untapPerm, unlimitedLand, setLife };
             for (Object o : objDev) {
                 if (o instanceof ForgeAction) {

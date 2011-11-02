@@ -416,7 +416,7 @@ public class ComputerAIGeneral implements Computer {
     public final void declareBlockers() {
         CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
 
-        AllZone.setCombat(ComputerUtilBlock2.getBlockers(AllZone.getCombat(), blockers));
+        AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
 
         CombatUtil.showCombat();
 

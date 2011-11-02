@@ -41,7 +41,7 @@ import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.GuiImportPicture;
-import forge.GuiDisplay4;
+import forge.GuiDisplay;
 import forge.GuiDownloadPrices;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.MyRandom;
@@ -1182,7 +1182,7 @@ public class Gui_HomeScreen {
                 return;
             }
 
-            AllZone.setDisplay(new GuiDisplay4());
+            AllZone.setDisplay(new GuiDisplay());
             AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             AllZone.getDisplay().setVisible(true);
         }

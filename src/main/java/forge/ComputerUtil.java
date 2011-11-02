@@ -1402,7 +1402,7 @@ public class ComputerUtil {
      * @return a {@link forge.Combat} object.
      */
     public static Combat getAttackers() {
-        ComputerUtilAttack2 att = new ComputerUtilAttack2(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield),
+        ComputerUtilAttack att = new ComputerUtilAttack(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield),
                 AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield), AllZone.getHumanPlayer().getLife());
 
         return att.getAttackers();
@@ -1418,7 +1418,7 @@ public class ComputerUtil {
     public static Combat getBlockers() {
         CardList blockers = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
-        return ComputerUtilBlock2.getBlockers(AllZone.getCombat(), blockers);
+        return ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers);
     }
 
     /**

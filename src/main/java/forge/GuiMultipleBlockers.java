@@ -26,7 +26,7 @@ import forge.gui.game.CardPanel;
  * very hacky.
  * 
  */
-class GuiMultipleBlockers4 extends JFrame {
+class GuiMultipleBlockers extends JFrame {
     /** Constant <code>serialVersionUID=7622818310877381045L</code>. */
     private static final long serialVersionUID = 7622818310877381045L;
 
@@ -57,7 +57,7 @@ class GuiMultipleBlockers4 extends JFrame {
      * @param display
      *            a {@link forge.CardContainer} object.
      */
-    GuiMultipleBlockers4(final Card attacker, final CardList creatureList,
+    GuiMultipleBlockers(final Card attacker, final CardList creatureList,
             final int damage, final CardContainer display) {
         this();
         assignDamage = damage;
@@ -90,7 +90,7 @@ class GuiMultipleBlockers4 extends JFrame {
      * Constructor for Gui_MultipleBlockers4.
      * </p>
      */
-    public GuiMultipleBlockers4() {
+    public GuiMultipleBlockers() {
         try {
             jbInit();
         } catch (Exception ex) {

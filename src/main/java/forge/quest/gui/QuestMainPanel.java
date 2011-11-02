@@ -29,7 +29,7 @@ import javax.swing.border.TitledBorder;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.GuiDisplay4;
+import forge.GuiDisplay;
 import forge.ImageCache;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
@@ -758,7 +758,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         // DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards
         // are added
         // if (newGUICheckbox.isSelected()) {
-        AllZone.setDisplay(new GuiDisplay4());
+        AllZone.setDisplay(new GuiDisplay());
         // } else {
         // AllZone.setDisplay(new GuiDisplay3());
         // }
