@@ -136,7 +136,7 @@
     </scm>
 
     <prerequisites>
-        <maven>2.2.1</maven>
+        <maven>3.0.3</maven>
     </prerequisites>
 
     <mailingLists>
@@ -350,7 +350,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>1.7</version>
                 </plugin>
 
                 <!--This plugin's configuration is used to store Eclipse m2e settings
@@ -858,7 +858,9 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
