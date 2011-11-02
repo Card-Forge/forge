@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_distortion.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/79.jpg
+Oracle:Whenever a creature or land becomes tapped, put an hourglass counter on it.\nPermanents with hourglass counters on them don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
 End

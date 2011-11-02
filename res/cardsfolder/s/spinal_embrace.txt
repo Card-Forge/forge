@@ -11,4 +11,5 @@ SVar:X:Count$CardToughness
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_embrace.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/276.jpg
+Oracle:Cast Spinal Embrace only during combat.\nUntap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
 End
