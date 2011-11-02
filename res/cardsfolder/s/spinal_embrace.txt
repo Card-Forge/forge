@@ -10,4 +10,5 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ 
 SVar:X:Count$CardToughness
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_embrace.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/276.jpg
 End

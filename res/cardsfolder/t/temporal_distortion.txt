@@ -12,4 +12,5 @@ SVar:TrigRemoveCounterOpp:AB$ RemoveCounterAll | Cost$ 0 | CounterType$ HOURGLAS
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_distortion.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/79.jpg
 End
