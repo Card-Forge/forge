@@ -52,7 +52,7 @@
             </roles>
         </developer>
         <developer>
-            <id>Jendave</id>
+            <id>jendave</id>
             <name>David Hudson</name>
             <roles>
                 <role>developer</role>
@@ -73,7 +73,7 @@
             </roles>
         </developer>
         <developer>
-            <id>FriarSol</id>
+            <id>friarsol</id>
             <name>zenchristo</name>
             <roles>
                 <role>developer</role>
@@ -94,15 +94,29 @@
             </roles>
         </developer>
         <developer>
-            <id>jeffwadsworth2010</id>
+            <id>jeffwadsworth</id>
             <name>jeffwadsworth2010</name>
             <roles>
                 <role>developer</role>
             </roles>
         </developer>
         <developer>
-            <id>0soulstorm0</id>
-            <name>0soulstorm0</name>
+            <id>Doublestrike</id>
+            <name>Doublestrike</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>moonmarc</id>
+            <name>moonmarc</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>SoulStorm</id>
+            <name>soulstorm</name>
             <roles>
                 <role>developer</role>
             </roles>
