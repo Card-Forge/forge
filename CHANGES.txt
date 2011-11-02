@@ -353,6 +353,42 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed trigger descriptions of Tombstone Stairwell to use CARDNAME.
+- fix hardcoded Planeswalkers not having abilities
+- checkstyle and refactor. Turn off magic number check for time being
+- checkstyle
+- checkstyle
+- moveToStack will no longer use copyCard.
+- checkstyle and refactor
+- Fix P/T of Tidal Visionary.
+- Little AI improvement for bounce spells (will only be used before own main2 if the AI controls creatures).
+- Text space fix.
+- checkstyle and refactor
+- Little card text updates and ran scripts.
+- Added the boolean function "isInZone" to the card class. It should be a performance upgrade to "AllZone.getZoneOf(c).equals(zone)".
+- checkstyle and refactor
+- Replaced some unnecessary uses of getZoneOf.
+- checkstyle
+- checkstyle and refactor
+- checkstyle and refactor
+- Fixed Ludevic's Test Subject.
+- checkstyle
+- checkstyle
+- checkstyle and refactor
+- checkstyle
+- rename file
+- rename files
+- rename files
+- Ran set info script.
+- Ran oracle script.
+- rename files to confirm with Java standards
+- rename files to confirm with Java standards
+- more renames
+- rename namespaces per Java standards
+- fix namespaces
+- Little fix Erayo Soratami Ascendant, etc.
+- update developer list
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -509,6 +545,17 @@ Probe
 Kaalia of the Vast
 Tariel, Reckoner of Souls
 Pure Reflection
+Scouting Trek
+Tidal Visionary
+Slimy Kavu
+Coalition Victory
+Vicious Shadows
+Brigid, Hero of Kinsbaile
+Spinal Embrace
+Savage Offensive
+Temporal Distortion
+Akroma's Blessing
+Tooth and Claw
 
 
 end
