@@ -626,7 +626,7 @@ public class GameAction {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public final void discard_PutIntoPlayInstead(final Card c) {
+    public final void discardPutIntoPlayInstead(final Card c) {
         this.moveToPlay(c);
 
         if (c.getName().equals("Dodecapod")) {
@@ -642,7 +642,7 @@ public class GameAction {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public final void discard_madness(final Card c) {
+    public final void discardMadness(final Card c) {
         // Whenever a card with madness is discarded, you may cast it for it's
         // madness cost
         if (!c.hasMadness()) {
@@ -1287,7 +1287,7 @@ public class GameAction {
         Constant.Quest.FANTASY_QUEST[0] = true;
     }
 
-    private boolean Start_Cut = false;
+    private boolean startCut = false;
 
     /**
      * <p>
@@ -1347,7 +1347,7 @@ public class GameAction {
                 }
             }
         }
-        final ArrayList<String> RAICards = new ArrayList<String>();
+        final ArrayList<String> rAICards = new ArrayList<String>();
         for (final Entry<CardPrinted, Integer> stackOfCards : computerDeck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -1371,7 +1371,7 @@ public class GameAction {
                 AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
 
                 if (card.getSVar("RemAIDeck").equals("True")) {
-                    RAICards.add(card.getName());
+                    rAICards.add(card.getName());
                     // get card picture so that it is in the image cache
                     // ImageCache.getImage(card);
                 }
@@ -1383,14 +1383,14 @@ public class GameAction {
                 }
             }
         }
-        if (RAICards.size() > 0) {
+        if (rAICards.size() > 0) {
             final StringBuilder sb = new StringBuilder(
                     "AI deck contains the following cards that it can't play or may be buggy:\n");
-            for (int i = 0; i < RAICards.size(); i++) {
-                sb.append(RAICards.get(i));
+            for (int i = 0; i < rAICards.size(); i++) {
+                sb.append(rAICards.get(i));
                 if (((i % 4) == 0) && (i > 0)) {
                     sb.append("\n");
-                } else if (i != (RAICards.size() - 1)) {
+                } else if (i != (rAICards.size() - 1)) {
                     sb.append(", ");
                 }
             }
@@ -1423,7 +1423,7 @@ public class GameAction {
             if (this.isStartCut()) {
                 this.seeWhoPlaysFirst();
             } else {
-                this.seeWhoPlaysFirst_CoinToss();
+                this.seeWhoPlaysFirstCoinToss();
             }
         } else if (AllZone.getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             // if player won last, AI starts
@@ -1598,40 +1598,40 @@ public class GameAction {
      * seeWhoPlaysFirst_CoinToss.
      * </p>
      */
-    public final void seeWhoPlaysFirst_CoinToss() {
+    public final void seeWhoPlaysFirstCoinToss() {
         final Object[] possibleValues = { ForgeProps.getLocalized(GameActionText.HEADS),
                 ForgeProps.getLocalized(GameActionText.TAILS) };
         final Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GameActionText.HEADS_OR_TAILS),
                 ForgeProps.getLocalized(GameActionText.COIN_TOSS), JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
 
-        final int Flip = MyRandom.getRandom().nextInt(2);
-        String Human_Flip = " ";
-        String Computer_Flip = " ";
+        final int flip = MyRandom.getRandom().nextInt(2);
+        String humanFlip = " ";
+        String computerFlip = " ";
         // JOptionPane.showMessageDialog(null, q, "",
         // JOptionPane.INFORMATION_MESSAGE);
         if (q.equals(0)) {
-            Human_Flip = ForgeProps.getLocalized(GameActionText.HEADS);
-            Computer_Flip = ForgeProps.getLocalized(GameActionText.TAILS);
+            humanFlip = ForgeProps.getLocalized(GameActionText.HEADS);
+            computerFlip = ForgeProps.getLocalized(GameActionText.TAILS);
         } else {
-            Human_Flip = ForgeProps.getLocalized(GameActionText.TAILS);
-            Computer_Flip = ForgeProps.getLocalized(GameActionText.HEADS);
+            humanFlip = ForgeProps.getLocalized(GameActionText.TAILS);
+            computerFlip = ForgeProps.getLocalized(GameActionText.HEADS);
         }
 
-        if (((Flip == 0) && q.equals(0)) || ((Flip == 1) && q.equals(1))) {
+        if (((flip == 0) && q.equals(0)) || ((flip == 1) && q.equals(1))) {
             JOptionPane.showMessageDialog(null,
-                    Human_Flip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
+                    humanFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {
             this.computerStartsGame();
             JOptionPane.showMessageDialog(null,
-                    Computer_Flip + "\r\n" + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN), "",
+                    computerFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN), "",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     } // seeWhoPlaysFirst_CoinToss()
 
-    private Card HumanCut = null;
-    private Card ComputerCut = null;
+    private Card humanCut = null;
+    private Card computerCut = null;
 
     /**
      * <p>
@@ -1640,21 +1640,21 @@ public class GameAction {
      */
     public final void seeWhoPlaysFirst() {
 
-        CardList HLibrary = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-        HLibrary = HLibrary.filter(CardListFilter.NON_LANDS);
-        CardList CLibrary = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
-        CLibrary = CLibrary.filter(CardListFilter.NON_LANDS);
+        CardList hLibrary = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
+        hLibrary = hLibrary.filter(CardListFilter.NON_LANDS);
+        CardList cLibrary = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
+        cLibrary = cLibrary.filter(CardListFilter.NON_LANDS);
 
-        final boolean Starter_Determined = false;
-        int Cut_Count = 0;
-        final int Cut_CountMax = 20;
-        for (int i = 0; i < Cut_CountMax; i++) {
-            if (Starter_Determined) {
+        final boolean starterDetermined = false;
+        int cutCount = 0;
+        final int cutCountMax = 20;
+        for (int i = 0; i < cutCountMax; i++) {
+            if (starterDetermined) {
                 break;
             }
 
-            if (HLibrary.size() > 0) {
-                this.setHumanCut(HLibrary.get(MyRandom.getRandom().nextInt(HLibrary.size())));
+            if (hLibrary.size() > 0) {
+                this.setHumanCut(hLibrary.get(MyRandom.getRandom().nextInt(hLibrary.size())));
             } else {
                 this.computerStartsGame();
                 JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.HUMAN_MANA_COST) + "\r\n"
@@ -1662,15 +1662,15 @@ public class GameAction {
                 return;
             }
 
-            if (CLibrary.size() > 0) {
-                this.setComputerCut(CLibrary.get(MyRandom.getRandom().nextInt(CLibrary.size())));
+            if (cLibrary.size() > 0) {
+                this.setComputerCut(cLibrary.get(MyRandom.getRandom().nextInt(cLibrary.size())));
             } else {
                 JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.COMPUTER_MANA_COST) + "\r\n"
                         + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
 
-            Cut_Count = Cut_Count + 1;
+            cutCount = cutCount + 1;
             AllZone.getGameAction().moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library),
                     AllZone.getGameAction().getHumanCut());
             AllZone.getGameAction().moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library),
@@ -1681,7 +1681,7 @@ public class GameAction {
                     + this.getHumanCut().getManaCost() + ")" + "\r\n");
             sb.append(ForgeProps.getLocalized(GameActionText.COMPUTER_CUT) + this.getComputerCut().getName() + " ("
                     + this.getComputerCut().getManaCost() + ")" + "\r\n");
-            sb.append("\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n");
+            sb.append("\r\n" + "Number of times the deck has been cut: " + cutCount + "\r\n");
             if (CardUtil.getConvertedManaCost(this.getComputerCut().getManaCost()) > CardUtil.getConvertedManaCost(this
                     .getHumanCut().getManaCost())) {
                 this.computerStartsGame();
@@ -1695,7 +1695,7 @@ public class GameAction {
                 return;
             } else {
                 sb.append(ForgeProps.getLocalized(GameActionText.EQUAL_CONVERTED_MANA) + "\r\n");
-                if (i == (Cut_CountMax - 1)) {
+                if (i == (cutCountMax - 1)) {
                     sb.append(ForgeProps.getLocalized(GameActionText.RESOLVE_STARTER));
                     if (MyRandom.getRandom().nextInt(2) == 1) {
                         JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
@@ -1898,10 +1898,10 @@ public class GameAction {
     }
 
     /** The Cost cutting_ get multi micker mana cost paid. */
-    int CostCutting_GetMultiMickerManaCostPaid = 0;
+    private int costCuttingGetMultiMickerManaCostPaid = 0;
 
     /** The Cost cutting_ get multi micker mana cost paid_ colored. */
-    String CostCutting_GetMultiMickerManaCostPaid_Colored = "";
+    private String costCuttingGetMultiMickerManaCostPaidColored = "";
 
     /**
      * <p>
@@ -2051,7 +2051,7 @@ public class GameAction {
         int xBonus = 0;
         final int max = 25;
         if (sa.isMultiKicker()) {
-            this.CostCutting_GetMultiMickerManaCostPaid_Colored = "";
+            this.setCostCuttingGetMultiMickerManaCostPaidColored("");
         }
 
         if (mana.toString().length() == 0) {
@@ -2166,8 +2166,8 @@ public class GameAction {
                         }
                         if (k[7].contains("Affinity")) {
                             final String spilt = k[7];
-                            final String[] color_spilt = spilt.split("/");
-                            k[7] = color_spilt[1];
+                            final String[] colorSpilt = spilt.split("/");
+                            k[7] = colorSpilt[1];
                             CardList playerList = controller.getCardsIn(Zone.Battlefield);
                             playerList = playerList.getType(k[7]);
                             k[3] = String.valueOf(playerList.size());
@@ -2204,18 +2204,18 @@ public class GameAction {
                             for (int no = 0; no < max; no++) {
                                 numbers[no] = String.valueOf(no);
                             }
-                            String Number_ManaCost = " ";
+                            String numberManaCost = " ";
                             if (mana.toString().length() == 1) {
-                                Number_ManaCost = mana.toString().substring(0, 1);
+                                numberManaCost = mana.toString().substring(0, 1);
                             } else if (mana.toString().length() == 0) {
-                                Number_ManaCost = "0"; // Should Never Occur
+                                numberManaCost = "0"; // Should Never Occur
                             } else {
-                                Number_ManaCost = mana.toString().substring(0, 2);
+                                numberManaCost = mana.toString().substring(0, 2);
                             }
-                            Number_ManaCost = Number_ManaCost.trim();
+                            numberManaCost = numberManaCost.trim();
 
                             for (int check = 0; check < max; check++) {
-                                if (Number_ManaCost.equals(numbers[check])) {
+                                if (numberManaCost.equals(numbers[check])) {
                                     mana = mana.replaceFirst(String.valueOf(check),
                                             String.valueOf(check + Integer.valueOf(k[3])));
                                 }
@@ -2247,15 +2247,15 @@ public class GameAction {
                 final Card card = cardsInPlay.get(i);
                 final ArrayList<String> a = card.getKeyword();
                 int costKeywords = 0;
-                final int[] costKeyword_Number = new int[a.size()];
+                final int[] costKeywordNumber = new int[a.size()];
                 for (int x = 0; x < a.size(); x++) {
                     if (a.get(x).toString().startsWith("CostChange")) {
-                        costKeyword_Number[costKeywords] = x;
+                        costKeywordNumber[costKeywords] = x;
                         costKeywords = costKeywords + 1;
                     }
                 }
                 for (int cKeywords = 0; cKeywords < costKeywords; cKeywords++) {
-                    final String parse = card.getKeyword().get(costKeyword_Number[cKeywords]).toString();
+                    final String parse = card.getKeyword().get(costKeywordNumber[cKeywords]).toString();
                     final String[] k = parse.split(":");
                     if (card.equals(originalCard)) {
                         if (!k[4].equals("Self")) {
@@ -2373,18 +2373,18 @@ public class GameAction {
                                 for (int no = 0; no < max; no++) {
                                     numbers[no] = String.valueOf(no);
                                 }
-                                String Number_ManaCost = " ";
+                                String numberManaCost = " ";
                                 if (mana.toString().length() == 1) {
-                                    Number_ManaCost = mana.toString().substring(0, 1);
+                                    numberManaCost = mana.toString().substring(0, 1);
                                 } else if (mana.toString().length() == 0) {
-                                    Number_ManaCost = "0"; // Should Never Occur
+                                    numberManaCost = "0"; // Should Never Occur
                                 } else {
-                                    Number_ManaCost = mana.toString().substring(0, 2);
+                                    numberManaCost = mana.toString().substring(0, 2);
                                 }
-                                Number_ManaCost = Number_ManaCost.trim();
+                                numberManaCost = numberManaCost.trim();
 
                                 for (int check = 0; check < max; check++) {
-                                    if (Number_ManaCost.equals(numbers[check])) {
+                                    if (numberManaCost.equals(numbers[check])) {
                                         if ((spell.isXCost()) || ((spell.isMultiKicker()) && ((check - value) < 0))) {
                                             xBonus = (xBonus - check) + value;
                                         }
@@ -2408,8 +2408,8 @@ public class GameAction {
                                     // Not Included as X Costs are not in
                                     // Colored Mana
                                     if (sa.isMultiKicker()) {
-                                        this.CostCutting_GetMultiMickerManaCostPaid_Colored = this.CostCutting_GetMultiMickerManaCostPaid_Colored
-                                                + k[3];
+                                        this.setCostCuttingGetMultiMickerManaCostPaidColored(this.getCostCuttingGetMultiMickerManaCostPaidColored()
+                                                + k[3]);
                                         // JOptionPane.showMessageDialog(null,
                                         // CostCutting_GetMultiMickerManaCostPaid_Colored,
                                         // "", JOptionPane.INFORMATION_MESSAGE);
@@ -2438,14 +2438,14 @@ public class GameAction {
             }
         }
         if (sa.isXCost()) {
-            for (int XPaid = 0; XPaid < xBonus; XPaid++) {
+            for (int xPaid = 0; xPaid < xBonus; xPaid++) {
                 originalCard.addXManaCostPaid(1);
             }
         }
         if (sa.isMultiKicker()) {
-            this.CostCutting_GetMultiMickerManaCostPaid = 0;
-            for (int XPaid = 0; XPaid < xBonus; XPaid++) {
-                this.CostCutting_GetMultiMickerManaCostPaid = this.CostCutting_GetMultiMickerManaCostPaid + 1;
+            this.setCostCuttingGetMultiMickerManaCostPaid(0);
+            for (int xPaid = 0; xPaid < xBonus; xPaid++) {
+                this.setCostCuttingGetMultiMickerManaCostPaid(this.getCostCuttingGetMultiMickerManaCostPaid() + 1);
             }
         }
 
@@ -2550,7 +2550,7 @@ public class GameAction {
      * @param skipTargeting
      *            a boolean.
      */
-    public final void playSpellAbility_NoStack(final SpellAbility sa, final boolean skipTargeting) {
+    public final void playSpellAbilityNoStack(final SpellAbility sa, final boolean skipTargeting) {
         sa.setActivatingPlayer(AllZone.getHumanPlayer());
 
         if (sa.getPayCosts() != null) {
@@ -2627,7 +2627,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      */
     public final void setComputerCut(final Card computerCut) {
-        this.ComputerCut = computerCut;
+        this.computerCut = computerCut;
     }
 
     /**
@@ -2638,7 +2638,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card getComputerCut() {
-        return this.ComputerCut;
+        return this.computerCut;
     }
 
     /**
@@ -2650,7 +2650,7 @@ public class GameAction {
      *            a boolean.
      */
     public final void setStartCut(final boolean startCutIn) {
-        this.Start_Cut = startCutIn;
+        this.startCut = startCutIn;
     }
 
     /**
@@ -2661,7 +2661,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean isStartCut() {
-        return this.Start_Cut;
+        return this.startCut;
     }
 
     /**
@@ -2673,7 +2673,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      */
     public final void setHumanCut(final Card humanCut) {
-        this.HumanCut = humanCut;
+        this.humanCut = humanCut;
     }
 
     /**
@@ -2684,6 +2684,34 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card getHumanCut() {
-        return this.HumanCut;
+        return this.humanCut;
+    }
+
+    /**
+     * @return the costCuttingGetMultiMickerManaCostPaid
+     */
+    public int getCostCuttingGetMultiMickerManaCostPaid() {
+        return costCuttingGetMultiMickerManaCostPaid;
+    }
+
+    /**
+     * @param costCuttingGetMultiMickerManaCostPaid the costCuttingGetMultiMickerManaCostPaid to set
+     */
+    public void setCostCuttingGetMultiMickerManaCostPaid(int costCuttingGetMultiMickerManaCostPaid) {
+        this.costCuttingGetMultiMickerManaCostPaid = costCuttingGetMultiMickerManaCostPaid; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the costCuttingGetMultiMickerManaCostPaidColored
+     */
+    public String getCostCuttingGetMultiMickerManaCostPaidColored() {
+        return costCuttingGetMultiMickerManaCostPaidColored;
+    }
+
+    /**
+     * @param costCuttingGetMultiMickerManaCostPaidColored the costCuttingGetMultiMickerManaCostPaidColored to set
+     */
+    public void setCostCuttingGetMultiMickerManaCostPaidColored(String costCuttingGetMultiMickerManaCostPaidColored) {
+        this.costCuttingGetMultiMickerManaCostPaidColored = costCuttingGetMultiMickerManaCostPaidColored; // TODO: Add 0 to parameter's name.
     }
 }

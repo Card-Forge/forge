@@ -273,7 +273,7 @@ public class MagicStack extends MyObservable {
         ManaCost manaCost = new ManaCost(sa.getManaCost());
         String mana = manaCost.toString();
 
-        int multiKickerPaid = AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid;
+        int multiKickerPaid = AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaid();
 
         String numberManaCost = " ";
 
@@ -292,12 +292,12 @@ public class MagicStack extends MyObservable {
 
                 if ((check - multiKickerPaid) < 0) {
                     multiKickerPaid = multiKickerPaid - check;
-                    AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid = multiKickerPaid;
+                    AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
                     mana = mana.replaceFirst(String.valueOf(check), "0");
                 } else {
                     mana = mana.replaceFirst(String.valueOf(check), String.valueOf(check - multiKickerPaid));
                     multiKickerPaid = 0;
-                    AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid = multiKickerPaid;
+                    AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
                 }
             }
             mana = mana.trim();
@@ -306,16 +306,15 @@ public class MagicStack extends MyObservable {
             }
             manaCost = new ManaCost(mana);
         }
-        final String colorCut = AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored;
+        final String colorCut = AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored();
 
         for (int colorCutIx = 0; colorCutIx < colorCut.length(); colorCutIx++) {
             if ("WUGRB".contains(colorCut.substring(colorCutIx, colorCutIx + 1))
                     && !mana.equals(mana.replaceFirst((colorCut.substring(colorCutIx, colorCutIx + 1)), ""))) {
                 mana = mana.replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
 
-                AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
-                = AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
-                        .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
+                AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaidColored(AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
+                        .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), ""));
 
                 mana = mana.trim();
                 if (mana.equals("")) {
@@ -492,8 +491,8 @@ public class MagicStack extends MyObservable {
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
-                            if ((AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid == 0)
-                                    && AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored
+                            if ((AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
+                                    && AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
                                             .equals("")) {
 
                                 AllZone.getInputControl().setInput(
@@ -509,13 +508,13 @@ public class MagicStack extends MyObservable {
                                                                 + "\r\n"
                                                                 + "Mana in Reserve: "
                                                                 + ((AllZone.getGameAction()
-                                                                        .CostCutting_GetMultiMickerManaCostPaid != 0)
+                                                                        .getCostCuttingGetMultiMickerManaCostPaid() != 0)
                                                                         ? AllZone
                                                                         .getGameAction()
-                                                                        .CostCutting_GetMultiMickerManaCostPaid
+                                                                        .getCostCuttingGetMultiMickerManaCostPaid()
                                                                         : "")
                                                                 + AllZone.getGameAction()
-                                                                .CostCutting_GetMultiMickerManaCostPaid_Colored
+                                                                .getCostCuttingGetMultiMickerManaCostPaidColored()
                                                                 + "\r\n" + "Times Kicked: "
                                                                 + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
                                                         manaCost.toString(), this, unpaidCommand));
@@ -530,8 +529,8 @@ public class MagicStack extends MyObservable {
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
                     } else {
-                        if ((AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid == 0)
-                                && AllZone.getGameAction().CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
+                        if ((AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
+                                && AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored().equals("")) {
                             AllZone.getInputControl().setInput(
                                     new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n"
                                             + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
@@ -545,13 +544,13 @@ public class MagicStack extends MyObservable {
                                                             + "\r\n"
                                                             + "Mana in Reserve: "
                                                             + ((AllZone.getGameAction()
-                                                                    .CostCutting_GetMultiMickerManaCostPaid != 0)
+                                                                    .getCostCuttingGetMultiMickerManaCostPaid() != 0)
                                                                     ? AllZone
                                                                     .getGameAction()
-                                                                    .CostCutting_GetMultiMickerManaCostPaid
+                                                                    .getCostCuttingGetMultiMickerManaCostPaid()
                                                                     : "")
                                                             + AllZone.getGameAction()
-                                                            .CostCutting_GetMultiMickerManaCostPaid_Colored
+                                                            .getCostCuttingGetMultiMickerManaCostPaidColored()
                                                             + "\r\n" + "Times Kicked: "
                                                             + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
                                                     manaCost.toString(), paidCommand, unpaidCommand));

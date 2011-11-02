@@ -74,13 +74,14 @@ class DeckColors {
      * @return the color1
      */
     public String getColor1() {
-        return color1;
+        return this.color1;
     }
 
     /**
-     * @param color1 the color1 to set
+     * @param color1
+     *            the color1 to set
      */
-    public void setColor1(String color1) {
+    public void setColor1(final String color1) {
         this.color1 = color1; // TODO: Add 0 to parameter's name.
     }
 
@@ -88,13 +89,14 @@ class DeckColors {
      * @return the mana1
      */
     public String getMana1() {
-        return mana1;
+        return this.mana1;
     }
 
     /**
-     * @param mana1 the mana1 to set
+     * @param mana1
+     *            the mana1 to set
      */
-    public void setMana1(String mana1) {
+    public void setMana1(final String mana1) {
         this.mana1 = mana1; // TODO: Add 0 to parameter's name.
     }
 
@@ -102,13 +104,14 @@ class DeckColors {
      * @return the mana2
      */
     public String getMana2() {
-        return mana2;
+        return this.mana2;
     }
 
     /**
-     * @param mana2 the mana2 to set
+     * @param mana2
+     *            the mana2 to set
      */
-    public void setMana2(String mana2) {
+    public void setMana2(final String mana2) {
         this.mana2 = mana2; // TODO: Add 0 to parameter's name.
     }
 
@@ -116,13 +119,14 @@ class DeckColors {
      * @return the color2
      */
     public String getColor2() {
-        return color2;
+        return this.color2;
     }
 
     /**
-     * @param color2 the color2 to set
+     * @param color2
+     *            the color2 to set
      */
-    public void setColor2(String color2) {
+    public void setColor2(final String color2) {
         this.color2 = color2; // TODO: Add 0 to parameter's name.
     }
 

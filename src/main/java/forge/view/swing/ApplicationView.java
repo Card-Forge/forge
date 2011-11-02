@@ -99,7 +99,7 @@ public class ApplicationView implements FView {
             OldGuiNewGame.getUseLAFFonts().setSelected(preferences.isLafFonts());
             // newGuiCheckBox.setSelected(preferences.newGui);
             OldGuiNewGame.getSmoothLandCheckBox().setSelected(preferences.isStackAiLand());
-            OldGuiNewGame.devModeCheckBox.setSelected(preferences.isDeveloperMode());
+            OldGuiNewGame.getDevModeCheckBox().setSelected(preferences.isDeveloperMode());
             OldGuiNewGame.getCardOverlay().setSelected(preferences.isCardOverlay());
 
             // FindBugs doesn't like the next line.
@@ -109,8 +109,8 @@ public class ApplicationView implements FView {
             CardStackOffsetAction.set(preferences.getStackOffset());
             CardStackAction.setVal(preferences.getMaxStackSize());
             CardSizesAction.set(preferences.getCardSize());
-            OldGuiNewGame.upldDrftCheckBox.setSelected(preferences.isUploadDraftAI());
-            OldGuiNewGame.foilRandomCheckBox.setSelected(preferences.isRandCFoil());
+            OldGuiNewGame.getUpldDrftCheckBox().setSelected(preferences.isUploadDraftAI());
+            OldGuiNewGame.getFoilRandomCheckBox().setSelected(preferences.isRandCFoil());
 
             AllZone.setSkin(new FSkin(preferences.getSkin()));
 

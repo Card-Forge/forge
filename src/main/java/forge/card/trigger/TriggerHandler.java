@@ -968,7 +968,7 @@ public class TriggerHandler {
                     // Card src =
                     // (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
                     // System.out.println("Trigger resolving for "+mode+".  Card = "+src);
-                    AllZone.getGameAction().playSpellAbility_NoStack(sa[0], true);
+                    AllZone.getGameAction().playSpellAbilityNoStack(sa[0], true);
                 } else {
                     // commented out because i don't think this should be called
                     // again here
@@ -1000,7 +1000,7 @@ public class TriggerHandler {
         // System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
         if (params.containsKey("Static") && params.get("Static").equals("True")) {
-            AllZone.getGameAction().playSpellAbility_NoStack(wrapperAbility, false);
+            AllZone.getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
         }

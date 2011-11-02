@@ -8,8 +8,8 @@ public enum CardPoolLimitation {
 
     /** The Full. */
     Full,
- /** The Block. */
- Block,
- /** The Custom. */
- Custom
+    /** The Block. */
+    Block,
+    /** The Custom. */
+    Custom
 }

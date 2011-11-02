@@ -47,7 +47,7 @@ public final class BoosterDraft_1 implements BoosterDraft {
     private List<List<CardPrinted>> pack; // size 8
 
     /** The draft picks. */
-    private Map<String, Float> draftPicks = new TreeMap<String, Float>();
+    private final Map<String, Float> draftPicks = new TreeMap<String, Float>();
     private final CardPoolLimitation draftFormat;
 
     private final ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>> packs = new ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>>();
@@ -143,34 +143,34 @@ public final class BoosterDraft_1 implements BoosterDraft {
 
     private void setupCustomDraft(final CustomLimited draft) {
         final DeckManager dio = AllZone.getDeckManager();
-        final Deck dPool = dio.getDeck(draft.DeckFile);
+        final Deck dPool = dio.getDeck(draft.getDeckFile());
         if (dPool == null) {
-            throw new RuntimeException("BoosterGenerator : deck not found - " + draft.DeckFile);
+            throw new RuntimeException("BoosterGenerator : deck not found - " + draft.getDeckFile());
         }
 
         final BoosterGenerator bpCustom = new BoosterGenerator(dPool);
         final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
             @Override
             public List<CardPrinted> apply(final BoosterGenerator pack) {
-                if (draft.IgnoreRarity) {
-                    if (!draft.Singleton) {
-                        return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.NumCards, 0);
+                if (draft.getIgnoreRarity()) {
+                    if (!draft.getSingleton()) {
+                        return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.getNumCards(), 0);
                     } else {
-                        return pack.getSingletonBoosterPack(draft.NumCards);
+                        return pack.getSingletonBoosterPack(draft.getNumCards());
                     }
                 }
-                return pack.getBoosterPack(draft.NumCommons, draft.NumUncommons, 0, draft.NumRares, draft.NumMythics,
-                        draft.NumSpecials, 0, 0, 0);
+                return pack.getBoosterPack(draft.getNumCommons(), draft.getNumUncommons(), 0, draft.getNumRares(), draft.getNumMythics(),
+                        draft.getNumSpecials(), 0, 0, 0);
             }
         };
 
         final Closure1<List<CardPrinted>, BoosterGenerator> picker = new Closure1<List<CardPrinted>, BoosterGenerator>(
                 fnPick, bpCustom);
-        for (int i = 0; i < draft.NumPacks; i++) {
+        for (int i = 0; i < draft.getNumPacks(); i++) {
             this.packs.add(picker);
         }
 
-        BoosterDraft.LAND_SET_CODE[0] = draft.LandSetCode;
+        BoosterDraft.LAND_SET_CODE[0] = draft.getLandSetCode();
     }
 
     /** Looks for res/draft/*.draft files, reads them, returns a list. */

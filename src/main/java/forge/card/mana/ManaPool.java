@@ -29,12 +29,12 @@ public class ManaPool extends Card {
     private final ArrayList<Mana> floatingMana = new ArrayList<Mana>();
     private final int[] floatingTotals = new int[7]; // WUBRGCS
     /** Constant <code>map</code>. */
-    private static final Map<String, Integer> map = new HashMap<String, Integer>();
+    private static final Map<String, Integer> MAP = new HashMap<String, Integer>();
 
     /** Constant <code>colors="WUBRG"</code>. */
-    public static final String colors = "WUBRG";
+    public static final String COLORS = "WUBRG";
     /** Constant <code>mcolors="1WUBRG"</code>. */
-    public static final String mcolors = "1WUBRG";
+    public static final String M_COLORS = "1WUBRG";
     private final Player owner;
 
     /**
@@ -56,13 +56,13 @@ public class ManaPool extends Card {
         this.addIntrinsicKeyword("Indestructible");
         this.setImmutable(true);
         this.clearPool();
-        ManaPool.map.put(Constant.Color.WHITE, 0);
-        ManaPool.map.put(Constant.Color.BLUE, 1);
-        ManaPool.map.put(Constant.Color.BLACK, 2);
-        ManaPool.map.put(Constant.Color.RED, 3);
-        ManaPool.map.put(Constant.Color.GREEN, 4);
-        ManaPool.map.put(Constant.Color.COLORLESS, 5);
-        ManaPool.map.put(Constant.Color.SNOW, 6);
+        ManaPool.MAP.put(Constant.Color.WHITE, 0);
+        ManaPool.MAP.put(Constant.Color.BLUE, 1);
+        ManaPool.MAP.put(Constant.Color.BLACK, 2);
+        ManaPool.MAP.put(Constant.Color.RED, 3);
+        ManaPool.MAP.put(Constant.Color.GREEN, 4);
+        ManaPool.MAP.put(Constant.Color.COLORLESS, 5);
+        ManaPool.MAP.put(Constant.Color.SNOW, 6);
     }
 
     /**
@@ -82,9 +82,9 @@ public class ManaPool extends Card {
 
         for (final Mana m : pool) {
             if (m.isSnow()) {
-                snowMana[ManaPool.map.get(m.getColor())] += m.getAmount();
+                snowMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
             } else {
-                normalMana[ManaPool.map.get(m.getColor())] += m.getAmount();
+                normalMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
             }
         }
 
@@ -135,9 +135,9 @@ public class ManaPool extends Card {
 
         for (final Mana m : pool) {
             if (m.isSnow()) {
-                snowMana[ManaPool.map.get(m.getColor())] += m.getAmount();
+                snowMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
             } else {
-                normalMana[ManaPool.map.get(m.getColor())] += m.getAmount();
+                normalMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
             }
         }
 
@@ -182,7 +182,7 @@ public class ManaPool extends Card {
      * @return a int.
      */
     public final int getAmountOfColor(final String color) {
-        return this.floatingTotals[ManaPool.map.get(color)];
+        return this.floatingTotals[ManaPool.MAP.get(color)];
     }
 
     /**
@@ -223,7 +223,7 @@ public class ManaPool extends Card {
         final String[] parts = manaCost.split(" ");
         final StringBuilder res = new StringBuilder();
         for (String s : parts) {
-            if ((s.length() == 2) && ManaPool.colors.contains(s.charAt(1) + "")) {
+            if ((s.length() == 2) && ManaPool.COLORS.contains(s.charAt(1) + "")) {
                 s = s.charAt(0) + "/" + s.charAt(1);
             }
             if (s.length() == 3) {
@@ -253,9 +253,9 @@ public class ManaPool extends Card {
     public final void addManaToPool(final ArrayList<Mana> pool, final Mana mana) {
         pool.add(mana);
         if (pool.equals(this.floatingMana)) {
-            this.floatingTotals[ManaPool.map.get(mana.getColor())] += mana.getAmount();
+            this.floatingTotals[ManaPool.MAP.get(mana.getColor())] += mana.getAmount();
             if (mana.isSnow()) {
-                this.floatingTotals[ManaPool.map.get(Constant.Color.SNOW)] += mana.getAmount();
+                this.floatingTotals[ManaPool.MAP.get(Constant.Color.SNOW)] += mana.getAmount();
             }
         }
     }
@@ -391,7 +391,7 @@ public class ManaPool extends Card {
                     // give preference to Colorless Snow mana over Colored snow
                     // mana
                     choice = mana;
-                } else if (this.floatingTotals[ManaPool.map.get(mana.getColor())] > this.floatingTotals[ManaPool.map
+                } else if (this.floatingTotals[ManaPool.MAP.get(mana.getColor())] > this.floatingTotals[ManaPool.MAP
                         .get(choice.getColor())]) {
                     // give preference to Colored mana that there is more of to
                     // pay Snow costs
@@ -425,9 +425,9 @@ public class ManaPool extends Card {
                 // loop through manaChoices adding
                 for (final Mana m : manaChoices) {
                     if (m.isSnow()) {
-                        snowMana[ManaPool.map.get(m.getColor())] += m.getAmount();
+                        snowMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
                     } else {
-                        normalMana[ManaPool.map.get(m.getColor())] += m.getAmount();
+                        normalMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
                     }
                 }
 
@@ -575,9 +575,9 @@ public class ManaPool extends Card {
                 choice.decrementAmount();
             }
             if (pool.equals(this.floatingMana)) {
-                this.floatingTotals[ManaPool.map.get(choice.getColor())] -= choice.getAmount();
+                this.floatingTotals[ManaPool.MAP.get(choice.getColor())] -= choice.getAmount();
                 if (choice.isSnow()) {
-                    this.floatingTotals[ManaPool.map.get(Constant.Color.SNOW)] -= choice.getAmount();
+                    this.floatingTotals[ManaPool.MAP.get(Constant.Color.SNOW)] -= choice.getAmount();
                 }
             }
         }
@@ -662,7 +662,7 @@ public class ManaPool extends Card {
                 }
             }
             final String s = c + "";
-            if (ManaPool.colors.contains(s)) {
+            if (ManaPool.COLORS.contains(s)) {
                 res.add(s);
                 if (clessString.trim().equals("")) {
                     continue;

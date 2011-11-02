@@ -4951,7 +4951,7 @@ public class CardFactoryUtil {
                     AllZone.getTriggerHandler().clearSuppression("ChangesZone");
 
                     if (card.getController().isHuman()) {
-                        AllZone.getGameAction().playSpellAbility_NoStack(origSA, false);
+                        AllZone.getGameAction().playSpellAbilityNoStack(origSA, false);
                     } else {
                         ComputerUtil.playNoStack(origSA);
                     }

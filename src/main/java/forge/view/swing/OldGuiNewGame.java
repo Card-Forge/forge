@@ -129,22 +129,22 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     /** Constant <code>smoothLandCheckBox</code>. */
     private static JCheckBox smoothLandCheckBox = new JCheckBox("", false);
     /** Constant <code>devModeCheckBox</code>. */
-    static JCheckBox devModeCheckBox = new JCheckBox("", true);
+    private static JCheckBox devModeCheckBox = new JCheckBox("", true);
 
     /** The upld drft check box. */
-    static JCheckBox upldDrftCheckBox = new JCheckBox("", true);
+    private static JCheckBox upldDrftCheckBox = new JCheckBox("", true);
 
     /** The foil random check box. */
-    static JCheckBox foilRandomCheckBox = new JCheckBox("", true);
+    private static JCheckBox foilRandomCheckBox = new JCheckBox("", true);
 
     // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
     // use these two variables
     /** Constant <code>removeSmallCreatures</code>. */
-    public static JCheckBoxMenuItem removeSmallCreatures = new JCheckBoxMenuItem(
+    private static JCheckBoxMenuItem removeSmallCreatures = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MenuBar.Options.Generate.REMOVE_SMALL));
 
     /** Constant <code>removeArtifacts</code>. */
-    public static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
+    private static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(MenuBar.Options.Generate.REMOVE_ARTIFACTS));
     /** Constant <code>useLAFFonts</code>. */
     private static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(ForgeProps.getLocalized(MenuBar.Options.FONT));
@@ -156,20 +156,20 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             ForgeProps.getLocalized(MenuBar.Options.CARD_SCALE));
     private final JButton questButton = new JButton();
 
-    private final Action LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
+    private final Action lookAndFeelAction = new LookAndFeelAction(this);
     // private Action DOWNLOAD_ACTION = new DownloadAction();
-    private final Action DOWNLOAD_ACTION_LQ = new DownloadActionLQ();
-    private final Action DOWNLOAD_ACTION_SETLQ = new DownloadActionSetLQ();
-    private final Action DOWNLOAD_ACTION_QUEST = new DownloadActionQuest();
-    private final Action IMPORT_PICTURE = new ImportPictureAction();
-    private final Action CARD_SIZES_ACTION = new CardSizesAction();
-    private final Action CARD_STACK_ACTION = new CardStackAction();
-    private final Action CARD_STACK_OFFSET_ACTION = new CardStackOffsetAction();
-    private final Action ABOUT_ACTION = new AboutAction();
-    private final Action HOW_TO_PLAY_ACTION = new HowToPlayAction();
-    private final Action DNLD_PRICES_ACTION = new DownloadPriceAction();
-    private final Action BUGZ_REPORTER_ACTION = new BugzReporterAction();
-    private final Action EXIT_ACTION = new ExitAction();
+    private final Action downloadActionLQ = new DownloadActionLQ();
+    private final Action downloadActionSetLQ = new DownloadActionSetLQ();
+    private final Action downloadActionQuest = new DownloadActionQuest();
+    private final Action importPicture = new ImportPictureAction();
+    private final Action cardSizesAction = new CardSizesAction();
+    private final Action cardStackAction = new CardStackAction();
+    private final Action cardStackOffsetAction = new CardStackOffsetAction();
+    private final Action aboutAction = new AboutAction();
+    private final Action howToPlayAction = new HowToPlayAction();
+    private final Action dnldPricesAction = new DownloadPriceAction();
+    private final Action bugzReporterAction = new BugzReporterAction();
+    private final Action exitAction = new ExitAction();
 
     /**
      * <p>
@@ -242,15 +242,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                 // LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION,
                 // DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE,
                 // CARD_SIZES_ACTION,
-                LOOK_AND_FEEL_ACTION, this.DNLD_PRICES_ACTION, this.DOWNLOAD_ACTION_LQ, this.DOWNLOAD_ACTION_SETLQ,
-                this.DOWNLOAD_ACTION_QUEST, this.IMPORT_PICTURE, this.CARD_SIZES_ACTION, this.CARD_STACK_ACTION,
-                this.CARD_STACK_OFFSET_ACTION, this.BUGZ_REPORTER_ACTION, ErrorViewer.ALL_THREADS_ACTION,
-                this.ABOUT_ACTION, this.EXIT_ACTION };
+                lookAndFeelAction, this.dnldPricesAction, this.downloadActionLQ, this.downloadActionSetLQ,
+                this.downloadActionQuest, this.importPicture, this.cardSizesAction, this.cardStackAction,
+                this.cardStackOffsetAction, this.bugzReporterAction, ErrorViewer.ALL_THREADS_ACTION,
+                this.aboutAction, this.exitAction };
         final JMenu menu = new JMenu(ForgeProps.getLocalized(Menu.TITLE));
         for (final Action a : actions) {
             menu.add(a);
-            if (a.equals(this.LOOK_AND_FEEL_ACTION) || a.equals(this.IMPORT_PICTURE)
-                    || a.equals(this.CARD_STACK_OFFSET_ACTION) || a.equals(ErrorViewer.ALL_THREADS_ACTION)) {
+            if (a.equals(this.lookAndFeelAction) || a.equals(this.importPicture)
+                    || a.equals(this.cardStackOffsetAction) || a.equals(ErrorViewer.ALL_THREADS_ACTION)) {
                 menu.addSeparator();
             }
         }
@@ -295,7 +295,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         final JMenu helpMenu = new JMenu(ForgeProps.getLocalized(MenuBar.Help.TITLE));
 
-        final Action[] helpActions = { this.HOW_TO_PLAY_ACTION };
+        final Action[] helpActions = { this.howToPlayAction };
         for (final Action a : helpActions) {
             helpMenu.add(a);
         }
@@ -539,36 +539,36 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         // newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
         OldGuiNewGame.getSmoothLandCheckBox().setText(ForgeProps.getLocalized(NewGameText.AI_LAND));
 
-        OldGuiNewGame.devModeCheckBox.setText(ForgeProps.getLocalized(NewGameText.DEV_MODE));
-        OldGuiNewGame.devModeCheckBox.addActionListener(new java.awt.event.ActionListener() {
+        OldGuiNewGame.getDevModeCheckBox().setText(ForgeProps.getLocalized(NewGameText.DEV_MODE));
+        OldGuiNewGame.getDevModeCheckBox().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Constant.Runtime.DEV_MODE[0] = OldGuiNewGame.devModeCheckBox.isSelected();
+                Constant.Runtime.DEV_MODE[0] = OldGuiNewGame.getDevModeCheckBox().isSelected();
                 Singletons.getModel().getPreferences().setDeveloperMode(Constant.Runtime.DEV_MODE[0]);
             }
         });
 
-        OldGuiNewGame.upldDrftCheckBox.setText("Upload Draft Picks");
+        OldGuiNewGame.getUpldDrftCheckBox().setText("Upload Draft Picks");
 
-        OldGuiNewGame.upldDrftCheckBox
+        OldGuiNewGame.getUpldDrftCheckBox()
                 .setToolTipText("Your picks and all other participants' picks will help the Forge AI"
                         + " make better draft picks.");
 
-        OldGuiNewGame.upldDrftCheckBox.addActionListener(new java.awt.event.ActionListener() {
+        OldGuiNewGame.getUpldDrftCheckBox().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Constant.Runtime.UPLOAD_DRAFT[0] = OldGuiNewGame.upldDrftCheckBox.isSelected();
+                Constant.Runtime.UPLOAD_DRAFT[0] = OldGuiNewGame.getUpldDrftCheckBox().isSelected();
                 Singletons.getModel().getPreferences().setUploadDraftAI(Constant.Runtime.UPLOAD_DRAFT[0]);
             }
         });
 
-        OldGuiNewGame.foilRandomCheckBox.setText("Random Foiling");
-        OldGuiNewGame.foilRandomCheckBox
+        OldGuiNewGame.getFoilRandomCheckBox().setText("Random Foiling");
+        OldGuiNewGame.getFoilRandomCheckBox()
                 .setToolTipText("Approximately 1:20 cards will appear with foiling effects applied.");
-        OldGuiNewGame.foilRandomCheckBox.addActionListener(new java.awt.event.ActionListener() {
+        OldGuiNewGame.getFoilRandomCheckBox().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Constant.Runtime.RANDOM_FOIL[0] = OldGuiNewGame.foilRandomCheckBox.isSelected();
+                Constant.Runtime.RANDOM_FOIL[0] = OldGuiNewGame.getFoilRandomCheckBox().isSelected();
                 Singletons.getModel().getPreferences().setRandCFoil(Constant.Runtime.RANDOM_FOIL[0]);
             }
         });
@@ -620,9 +620,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         // jPanel3.add(newGuiCheckBox, "wrap");
         this.jPanel3.add(OldGuiNewGame.getSmoothLandCheckBox(), "wrap");
-        this.jPanel3.add(OldGuiNewGame.devModeCheckBox, "wrap");
-        this.jPanel3.add(OldGuiNewGame.upldDrftCheckBox, "wrap");
-        this.jPanel3.add(OldGuiNewGame.foilRandomCheckBox, "wrap");
+        this.jPanel3.add(OldGuiNewGame.getDevModeCheckBox(), "wrap");
+        this.jPanel3.add(OldGuiNewGame.getUpldDrftCheckBox(), "wrap");
+        this.jPanel3.add(OldGuiNewGame.getFoilRandomCheckBox(), "wrap");
         this.updatePanelDisplay(this.jPanel3);
 
         this.getContentPane().add(this.startButton, "sg buttons, align 50% 50%, split 2, flowy");
@@ -1016,53 +1016,53 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         @Override
         public final void actionPerformed(final ActionEvent e) {
             final LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
-            final HashMap<String, String> LAFMap = new HashMap<String, String>();
+            final HashMap<String, String> lafMap = new HashMap<String, String>();
             for (final LookAndFeelInfo anInfo : info) {
-                LAFMap.put(anInfo.getName(), anInfo.getClassName());
+                lafMap.put(anInfo.getName(), anInfo.getClassName());
             }
 
             // add Substance LAFs:
-            LAFMap.put("Autumn", "org.pushingpixels.substance.api.skin.SubstanceAutumnLookAndFeel");
-            LAFMap.put("Business", "org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel");
-            LAFMap.put("Business Black Steel",
+            lafMap.put("Autumn", "org.pushingpixels.substance.api.skin.SubstanceAutumnLookAndFeel");
+            lafMap.put("Business", "org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel");
+            lafMap.put("Business Black Steel",
                     "org.pushingpixels.substance.api.skin.SubstanceBusinessBlackSteelLookAndFeel");
-            LAFMap.put("Business Blue Steel",
+            lafMap.put("Business Blue Steel",
                     "org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel");
-            LAFMap.put("Challenger Deep", "org.pushingpixels.substance.api.skin.SubstanceChallengerDeepLookAndFeel");
-            LAFMap.put("Creme", "org.pushingpixels.substance.api.skin.SubstanceCremeLookAndFeel");
-            LAFMap.put("Creme Coffee", "org.pushingpixels.substance.api.skin.SubstanceCremeCoffeeLookAndFeel");
-            LAFMap.put("Dust", "org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
-            LAFMap.put("Dust Coffee", "org.pushingpixels.substance.api.skin.SubstanceDustCoffeeLookAndFeel");
-            LAFMap.put("Emerald Dusk", "org.pushingpixels.substance.api.skin.SubstanceEmeraldDuskLookAndFeel");
-            LAFMap.put("Gemini", "org.pushingpixels.substance.api.skin.SubstanceGeminiLookAndFeel");
-            LAFMap.put("Graphite", "org.pushingpixels.substance.api.skin.SubstanceGraphiteLookAndFeel");
-            LAFMap.put("Graphite Aqua", "org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
-            LAFMap.put("Graphite Glass", "org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel");
-            LAFMap.put("Magma", "org.pushingpixels.substance.api.skin.SubstanceMagmaLookAndFeel");
-            LAFMap.put("Magellan", "org.pushingpixels.substance.api.skin.SubstanceMagellanLookAndFeel");
+            lafMap.put("Challenger Deep", "org.pushingpixels.substance.api.skin.SubstanceChallengerDeepLookAndFeel");
+            lafMap.put("Creme", "org.pushingpixels.substance.api.skin.SubstanceCremeLookAndFeel");
+            lafMap.put("Creme Coffee", "org.pushingpixels.substance.api.skin.SubstanceCremeCoffeeLookAndFeel");
+            lafMap.put("Dust", "org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
+            lafMap.put("Dust Coffee", "org.pushingpixels.substance.api.skin.SubstanceDustCoffeeLookAndFeel");
+            lafMap.put("Emerald Dusk", "org.pushingpixels.substance.api.skin.SubstanceEmeraldDuskLookAndFeel");
+            lafMap.put("Gemini", "org.pushingpixels.substance.api.skin.SubstanceGeminiLookAndFeel");
+            lafMap.put("Graphite", "org.pushingpixels.substance.api.skin.SubstanceGraphiteLookAndFeel");
+            lafMap.put("Graphite Aqua", "org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
+            lafMap.put("Graphite Glass", "org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel");
+            lafMap.put("Magma", "org.pushingpixels.substance.api.skin.SubstanceMagmaLookAndFeel");
+            lafMap.put("Magellan", "org.pushingpixels.substance.api.skin.SubstanceMagellanLookAndFeel");
             // LAFMap.put("Mariner",
             // "org.pushingpixels.substance.api.skin.SubstanceMarinerLookAndFeel");
-            LAFMap.put("Mist Aqua", "org.pushingpixels.substance.api.skin.SubstanceMistAquaLookAndFeel");
-            LAFMap.put("Mist Silver", "org.pushingpixels.substance.api.skin.SubstanceMistSilverLookAndFeel");
-            LAFMap.put("Moderate", "org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
-            LAFMap.put("Nebula", "org.pushingpixels.substance.api.skin.SubstanceNebulaLookAndFeel");
-            LAFMap.put("Nebula Brick Wall", "org.pushingpixels.substance.api.skin.SubstanceNebulaBrickWallLookAndFeel");
+            lafMap.put("Mist Aqua", "org.pushingpixels.substance.api.skin.SubstanceMistAquaLookAndFeel");
+            lafMap.put("Mist Silver", "org.pushingpixels.substance.api.skin.SubstanceMistSilverLookAndFeel");
+            lafMap.put("Moderate", "org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
+            lafMap.put("Nebula", "org.pushingpixels.substance.api.skin.SubstanceNebulaLookAndFeel");
+            lafMap.put("Nebula Brick Wall", "org.pushingpixels.substance.api.skin.SubstanceNebulaBrickWallLookAndFeel");
             // LAFMap.put("Office Black 2007",
             // "org.pushingpixels.substance.api.skin.SubstanceOfficeBlack2007LookAndFeel");
-            LAFMap.put("Office Blue 2007", "org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel");
-            LAFMap.put("Office Silver 2007",
+            lafMap.put("Office Blue 2007", "org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel");
+            lafMap.put("Office Silver 2007",
                     "org.pushingpixels.substance.api.skin.SubstanceOfficeSilver2007LookAndFeel");
-            LAFMap.put("Raven", "org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
-            LAFMap.put("Raven Graphite", "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteLookAndFeel");
+            lafMap.put("Raven", "org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
+            lafMap.put("Raven Graphite", "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteLookAndFeel");
             // LAFMap.put("Raven Graphite Glass",
             // "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteGlassLookAndFeel");
-            LAFMap.put("Sahara", "org.pushingpixels.substance.api.skin.SubstanceSaharaLookAndFeel");
-            LAFMap.put("Twilight", "org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
+            lafMap.put("Sahara", "org.pushingpixels.substance.api.skin.SubstanceSaharaLookAndFeel");
+            lafMap.put("Twilight", "org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
 
-            final String[] keys = new String[LAFMap.size()];
+            final String[] keys = new String[lafMap.size()];
             int count = 0;
 
-            for (final String s1 : LAFMap.keySet()) {
+            for (final String s1 : lafMap.keySet()) {
                 keys[count++] = s1;
             }
             Arrays.sort(keys);
@@ -1076,8 +1076,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                         return;
                     }
                     // UIManager.setLookAndFeel(info[index].getClassName());
-                    Singletons.getModel().getPreferences().setLaf(LAFMap.get(name));
-                    UIManager.setLookAndFeel(LAFMap.get(name));
+                    Singletons.getModel().getPreferences().setLaf(lafMap.get(name));
+                    UIManager.setLookAndFeel(lafMap.get(name));
 
                     SwingUtilities.updateComponentTreeUI(this.c);
                 } catch (final Exception ex) {
@@ -1920,6 +1920,48 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      */
     static void setSmoothLandCheckBox(JCheckBox smoothLandCheckBox) {
         OldGuiNewGame.smoothLandCheckBox = smoothLandCheckBox; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the devModeCheckBox
+     */
+    public static JCheckBox getDevModeCheckBox() {
+        return devModeCheckBox;
+    }
+
+    /**
+     * @param devModeCheckBox the devModeCheckBox to set
+     */
+    public static void setDevModeCheckBox(JCheckBox devModeCheckBox) {
+        OldGuiNewGame.devModeCheckBox = devModeCheckBox; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the upldDrftCheckBox
+     */
+    public static JCheckBox getUpldDrftCheckBox() {
+        return upldDrftCheckBox;
+    }
+
+    /**
+     * @param upldDrftCheckBox the upldDrftCheckBox to set
+     */
+    public static void setUpldDrftCheckBox(JCheckBox upldDrftCheckBox) {
+        OldGuiNewGame.upldDrftCheckBox = upldDrftCheckBox; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the foilRandomCheckBox
+     */
+    public static JCheckBox getFoilRandomCheckBox() {
+        return foilRandomCheckBox;
+    }
+
+    /**
+     * @param foilRandomCheckBox the foilRandomCheckBox to set
+     */
+    public static void setFoilRandomCheckBox(JCheckBox foilRandomCheckBox) {
+        OldGuiNewGame.foilRandomCheckBox = foilRandomCheckBox; // TODO: Add 0 to parameter's name.
     }
 
 }

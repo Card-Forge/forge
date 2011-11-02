@@ -85,7 +85,8 @@ public class BoosterDraftAI {
             }
         });
 
-        if (this.playerColors.get(player).getColor1().equals("none") && this.playerColors.get(player).getColor2().equals("none")) {
+        if (this.playerColors.get(player).getColor1().equals("none")
+                && this.playerColors.get(player).getColor2().equals("none")) {
             //
             final CardList creatures = aiPlayables.getType("Creature").getColored();
             creatures.sort(this.bestCreature);
@@ -100,19 +101,20 @@ public class BoosterDraftAI {
                     System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).getColor1());
                 }
 
-                this.playerColors.get(player).setMana1(this.playerColors.get(player).colorToMana(
-                        this.playerColors.get(player).getColor1()));
+                this.playerColors.get(player).setMana1(
+                        this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor1()));
 
                 // if the first pick has more than one color add the second as
                 // second color to draft
                 if (pickedCard.getColor().get(0).toStringArray().size() > 1) {
                     this.playerColors.get(player).setColor2(pickedCard.getColor().get(0).toStringArray().get(1));
                     if (Constant.Runtime.DEV_MODE[0]) {
-                        System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
+                        System.out.println("Player[" + player + "] Color2: "
+                                + this.playerColors.get(player).getColor2());
                     }
 
-                    this.playerColors.get(player).setMana2(this.playerColors.get(player).colorToMana(
-                            this.playerColors.get(player).getColor2()));
+                    this.playerColors.get(player).setMana2(
+                            this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor2()));
                 }
 
                 hasPicked = true;
@@ -132,8 +134,8 @@ public class BoosterDraftAI {
                     System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
                 }
 
-                this.playerColors.get(player).setMana2(this.playerColors.get(player).colorToMana(
-                        this.playerColors.get(player).getColor2()));
+                this.playerColors.get(player).setMana2(
+                        this.playerColors.get(player).colorToMana(this.playerColors.get(player).getColor2()));
                 hasPicked = true;
             }
         } else {
@@ -406,7 +408,8 @@ public class BoosterDraftAI {
             cardsNeeded--;
             aiPlayables.remove(c);
 
-            others = aiPlayables.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
+            others = aiPlayables.getNotType("Creature").getNotType("Land")
+                    .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
 
             if (Constant.Runtime.DEV_MODE[0]) {
                 System.out.println("Others[" + ii++ + "]:" + c.getName() + " (" + c.getManaCost() + ")");
@@ -450,7 +453,7 @@ public class BoosterDraftAI {
         }
 
         if (landsNeeded > 0) {
-         // attempt to optimize basic land counts according
+            // attempt to optimize basic land counts according
             // to color representation
 
             final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
@@ -489,8 +492,9 @@ public class BoosterDraftAI {
             // tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (i = 0; i < 5; i++) {
-                if (clrCnts[i].getCount() > 0) { // calculate number of lands for
-                                            // each color
+                if (clrCnts[i].getCount() > 0) { // calculate number of lands
+                                                 // for
+                    // each color
                     final float p = (float) clrCnts[i].getCount() / (float) totalColor;
                     final int nLand = (int) (landsNeeded * p) + 1;
                     // tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand +
@@ -504,7 +508,8 @@ public class BoosterDraftAI {
                     // CardCounts.put(ClrCnts[i].Color, nLand);
 
                     for (int j = 0; j <= nLand; j++) {
-                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(), AllZone.getComputerPlayer());
+                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
+                                AllZone.getComputerPlayer());
                         c.setCurSetCode(BoosterDraft.LAND_SET_CODE[0]);
                         outList.add(c);
                         landsNeeded--;
@@ -648,13 +653,14 @@ public class BoosterDraftAI {
      * @return the bd
      */
     public BoosterDraft getBd() {
-        return bd;
+        return this.bd;
     }
 
     /**
-     * @param bd the bd to set
+     * @param bd
+     *            the bd to set
      */
-    public void setBd(BoosterDraft bd) {
+    public void setBd(final BoosterDraft bd) {
         this.bd = bd; // TODO: Add 0 to parameter's name.
     }
 

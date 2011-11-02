@@ -138,31 +138,31 @@ public class SealedDeck {
                         customs.toArray());
 
                 final DeckManager dio = AllZone.getDeckManager();
-                final Deck dPool = dio.getDeck(draft.DeckFile);
+                final Deck dPool = dio.getDeck(draft.getDeckFile());
                 if (dPool == null) {
-                    throw new RuntimeException("BoosterGenerator : deck not found - " + draft.DeckFile);
+                    throw new RuntimeException("BoosterGenerator : deck not found - " + draft.getDeckFile());
                 }
 
                 final BoosterGenerator bpCustom = new BoosterGenerator(dPool);
                 final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
                     @Override
                     public List<CardPrinted> apply(final BoosterGenerator pack) {
-                        if (draft.IgnoreRarity) {
-                            return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.NumCards, 0);
+                        if (draft.getIgnoreRarity()) {
+                            return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.getNumCards(), 0);
                         }
-                        return pack.getBoosterPack(draft.NumCommons, draft.NumUncommons, 0, draft.NumRares,
-                                draft.NumMythics, draft.NumSpecials, draft.NumDoubleFaced, 0, 0);
+                        return pack.getBoosterPack(draft.getNumCommons(), draft.getNumUncommons(), 0, draft.getNumRares(),
+                                draft.getNumMythics(), draft.getNumSpecials(), draft.getNumDoubleFaced(), 0, 0);
                     }
                 };
 
                 final Closure1<List<CardPrinted>, BoosterGenerator> picker = new Closure1<List<CardPrinted>, BoosterGenerator>(
                         fnPick, bpCustom);
 
-                for (int i = 0; i < draft.NumPacks; i++) {
+                for (int i = 0; i < draft.getNumPacks(); i++) {
                     this.packs.add(picker);
                 }
 
-                this.getLandSetCode()[0] = draft.LandSetCode;
+                this.getLandSetCode()[0] = draft.getLandSetCode();
             }
         }
     }
@@ -335,7 +335,7 @@ public class SealedDeck {
             }
 
             if (landsNeeded > 0) {
-             // attempt to optimize basic land counts
+                // attempt to optimize basic land counts
                 // according to color representation
                 final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                         new CCnt("Mountain", 0), new CCnt("Forest", 0) };
@@ -427,13 +427,14 @@ public class SealedDeck {
      * @return the landSetCode
      */
     public String[] getLandSetCode() {
-        return landSetCode;
+        return this.landSetCode;
     }
 
     /**
-     * @param landSetCode the landSetCode to set
+     * @param landSetCode
+     *            the landSetCode to set
      */
-    public void setLandSetCode(String[] landSetCode) {
+    public void setLandSetCode(final String[] landSetCode) {
         this.landSetCode = landSetCode; // TODO: Add 0 to parameter's name.
     }
 

@@ -135,7 +135,7 @@ public class Input_Mulligan extends Input {
                     if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
                         // If we ever let the AI memorize cards in the players
                         // hand, this would be a place to do so.
-                        AllZone.getGameAction().playSpellAbility_NoStack(effect, false);
+                        AllZone.getGameAction().playSpellAbilityNoStack(effect, false);
                     }
                 }
             }

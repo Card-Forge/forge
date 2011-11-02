@@ -1402,7 +1402,7 @@ public abstract class Player extends GameEntity {
             }
         }
 
-        AllZone.getGameAction().discard_madness(c);
+        AllZone.getGameAction().discardMadness(c);
 
         if ((c.hasKeyword("If a spell or ability an opponent controls causes "
                 + "you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") || c
@@ -1410,7 +1410,7 @@ public abstract class Player extends GameEntity {
                         + "you to discard CARDNAME, put it onto the battlefield with two +1/+1 "
                         + "counters on it instead of putting it into your graveyard."))
                 && null != sa && !c.getController().equals(sa.getSourceCard().getController())) {
-            AllZone.getGameAction().discard_PutIntoPlayInstead(c);
+            AllZone.getGameAction().discardPutIntoPlayInstead(c);
         } else if (c.hasKeyword("If a spell or ability an opponent controls "
                 + "causes you to discard CARDNAME, return it to your hand.")) {
         } else {

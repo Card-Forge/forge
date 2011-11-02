@@ -88,23 +88,23 @@ public class Upkeep implements java.io.Serializable {
      */
     public final void executeAt() {
         AllZone.getStack().freezeStack();
-        Upkeep.upkeep_Braid_Of_Fire();
+        Upkeep.upkeepBraidOfFire();
 
-        Upkeep.upkeep_Slowtrips(); // for
+        Upkeep.upkeepSlowtrips(); // for
         // "Draw a card at the beginning of the next turn's upkeep."
-        Upkeep.upkeep_UpkeepCost(); // sacrifice unless upkeep cost is paid
-        Upkeep.upkeep_Echo();
+        Upkeep.upkeepUpkeepCost(); // sacrifice unless upkeep cost is paid
+        Upkeep.upkeepEcho();
 
-        Upkeep.upkeep_The_Abyss();
+        Upkeep.upkeepTheAbyss();
         Upkeep.upkeepYawgmothDemon();
         Upkeep.upkeepLordOfThePit();
         Upkeep.upkeepDropOfHoney();
         Upkeep.upkeepDemonicHordes();
-        Upkeep.upkeep_Carnophage();
-        Upkeep.upkeep_Sangrophage();
-        Upkeep.upkeep_Dega_Sanctuary();
-        Upkeep.upkeep_Ceta_Sanctuary();
-        Upkeep.upkeep_Tangle_Wire();
+        Upkeep.upkeepCarnophage();
+        Upkeep.upkeepSangrophage();
+        Upkeep.upkeepDegaSanctuary();
+        Upkeep.upkeepCetaSanctuary();
+        Upkeep.upkeepTangleWire();
 
         Upkeep.upkeepVesuvanDoppelgangerKeyword();
 
@@ -113,29 +113,29 @@ public class Upkeep implements java.io.Serializable {
         Upkeep.upkeepKithkinZephyrnaut();
         Upkeep.upkeepLeafCrownedElder();
         Upkeep.upkeepMudbuttonClanger();
-        Upkeep.upkeep_Nightshade_Schemers();
-        Upkeep.upkeep_Pyroclast_Consul();
-        Upkeep.upkeep_Sensation_Gorger();
-        Upkeep.upkeep_Squeaking_Pie_Grubfellows();
-        Upkeep.upkeep_Wandering_Graybeard();
-        Upkeep.upkeep_Waterspout_Weavers();
-        Upkeep.upkeep_Winnower_Patrol();
-        Upkeep.upkeep_Wolf_Skull_Shaman();
+        Upkeep.upkeepNightshadeSchemers();
+        Upkeep.upkeepPyroclastConsul();
+        Upkeep.upkeepSensationGorger();
+        Upkeep.upkeepSqueakingPieGrubfellows();
+        Upkeep.upkeepWanderingGraybeard();
+        Upkeep.upkeepWaterspoutWeavers();
+        Upkeep.upkeepWinnowerPatrol();
+        Upkeep.upkeepWolfSkullShaman();
 
         // upkeep_Dragon_Broodmother(); //put this before bitterblossom and
         // mycoloth, so that they will resolve FIRST
 
-        Upkeep.upkeep_Karma();
-        Upkeep.upkeep_Oath_of_Druids();
-        Upkeep.upkeep_Oath_of_Ghouls();
-        Upkeep.upkeep_Suspend();
-        Upkeep.upkeep_Vanishing();
-        Upkeep.upkeep_Fading();
-        Upkeep.upkeep_Masticore();
-        Upkeep.upkeep_Eldrazi_Monument();
-        Upkeep.upkeep_Blaze_Counters();
+        Upkeep.upkeepKarma();
+        Upkeep.upkeepOathOfDruids();
+        Upkeep.upkeepOathOfGhouls();
+        Upkeep.upkeepSuspend();
+        Upkeep.upkeepVanishing();
+        Upkeep.upkeepFading();
+        Upkeep.upkeepMasticore();
+        Upkeep.upkeepEldraziMonument();
+        Upkeep.upkeepBlazeCounters();
         // upkeep_Dark_Confidant(); // keep this one semi-last
-        Upkeep.upkeep_Power_Surge();
+        Upkeep.upkeepPowerSurge();
         Upkeep.upkeepAlurenAI();
         // experimental, AI abuse aluren
 
@@ -149,7 +149,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Braid_Of_Fire.
      * </p>
      */
-    private static void upkeep_Braid_Of_Fire() {
+    private static void upkeepBraidOfFire() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         final CardList braids = player.getCardsIn(Zone.Battlefield, "Braid of Fire");
@@ -189,7 +189,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Echo.
      * </p>
      */
-    private static void upkeep_Echo() {
+    private static void upkeepEcho() {
         CardList list = AllZone.getPhase().getPlayerTurn().getCardsIn(Zone.Battlefield);
         list = list.filter(new CardListFilter() {
             @Override
@@ -247,7 +247,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Slowtrips. Draw a card at the beginning of the next turn's upkeep.
      * </p>
      */
-    private static void upkeep_Slowtrips() {
+    private static void upkeepSlowtrips() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         CardList list = player.getSlowtripList();
@@ -301,7 +301,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_UpkeepCost.
      * </p>
      */
-    private static void upkeep_UpkeepCost() {
+    private static void upkeepUpkeepCost() {
         final CardList list = AllZone.getPhase().getPlayerTurn().getCardsIn(Zone.Battlefield);
 
         for (int i = 0; i < list.size(); i++) {
@@ -486,7 +486,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_The_Abyss.
      * </p>
      */
-    private static void upkeep_The_Abyss() {
+    private static void upkeepTheAbyss() {
         /*
          * At the beginning of each player's upkeep, destroy target nonartifact
          * creature that player controls of his or her choice. It can't be
@@ -1309,7 +1309,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Nightshade_Schemers.
      * </p>
      */
-    private static void upkeep_Nightshade_Schemers() {
+    private static void upkeepNightshadeSchemers() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Nightshade Schemers");
         final Player opponent = player.getOpponent();
@@ -1395,7 +1395,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Pyroclast_Consul.
      * </p>
      */
-    private static void upkeep_Pyroclast_Consul() {
+    private static void upkeepPyroclastConsul() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Pyroclast Consul");
 
@@ -1495,7 +1495,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Sensation_Gorger.
      * </p>
      */
-    private static void upkeep_Sensation_Gorger() {
+    private static void upkeepSensationGorger() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Sensation Gorger");
         final Player opponent = player.getOpponent();
@@ -1588,7 +1588,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Squeaking_Pie_Grubfellows.
      * </p>
      */
-    private static void upkeep_Squeaking_Pie_Grubfellows() {
+    private static void upkeepSqueakingPieGrubfellows() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Squeaking Pie Grubfellows");
         final Player opponent = player.getOpponent();
@@ -1675,7 +1675,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Wandering_Graybeard.
      * </p>
      */
-    private static void upkeep_Wandering_Graybeard() {
+    private static void upkeepWanderingGraybeard() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Wandering Graybeard");
 
@@ -1760,7 +1760,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Waterspout_Weavers.
      * </p>
      */
-    private static void upkeep_Waterspout_Weavers() {
+    private static void upkeepWaterspoutWeavers() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Waterspout Weavers");
 
@@ -1866,7 +1866,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Winnower_Patrol.
      * </p>
      */
-    private static void upkeep_Winnower_Patrol() {
+    private static void upkeepWinnowerPatrol() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Winnower Patrol");
 
@@ -1951,7 +1951,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Wolf_Skull_Shaman.
      * </p>
      */
-    private static void upkeep_Wolf_Skull_Shaman() {
+    private static void upkeepWolfSkullShaman() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList kinship = player.getCardsIn(Zone.Battlefield, "Wolf-Skull Shaman");
 
@@ -2076,7 +2076,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Suspend.
      * </p>
      */
-    public static void upkeep_Suspend() {
+    public static void upkeepSuspend() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         CardList list = player.getCardsIn(Zone.Exile);
@@ -2105,7 +2105,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Vanishing.
      * </p>
      */
-    private static void upkeep_Vanishing() {
+    private static void upkeepVanishing() {
 
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList list = player.getCardsIn(Zone.Battlefield);
@@ -2141,7 +2141,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Fading.
      * </p>
      */
-    private static void upkeep_Fading() {
+    private static void upkeepFading() {
 
         final Player player = AllZone.getPhase().getPlayerTurn();
         CardList list = player.getCardsIn(Zone.Battlefield);
@@ -2182,7 +2182,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Oath_of_Druids.
      * </p>
      */
-    private static void upkeep_Oath_of_Druids() {
+    private static void upkeepOathOfDruids() {
         final CardList oathList = AllZoneUtil.getCardsIn(Zone.Battlefield, "Oath of Druids");
         if (oathList.isEmpty()) {
             return;
@@ -2263,7 +2263,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Oath_of_Ghouls.
      * </p>
      */
-    private static void upkeep_Oath_of_Ghouls() {
+    private static void upkeepOathOfGhouls() {
         final CardList oathList = AllZoneUtil.getCardsIn(Zone.Battlefield, "Oath of Ghouls");
         if (oathList.isEmpty()) {
             return;
@@ -2312,7 +2312,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Karma.
      * </p>
      */
-    private static void upkeep_Karma() {
+    private static void upkeepKarma() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList karmas = AllZoneUtil.getCardsIn(Zone.Battlefield, "Karma");
         final CardList swamps = player.getCardsIn(Zone.Battlefield).getType("Swamp");
@@ -2351,7 +2351,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Dega_Sanctuary.
      * </p>
      */
-    private static void upkeep_Dega_Sanctuary() {
+    private static void upkeepDegaSanctuary() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Dega Sanctuary");
@@ -2390,7 +2390,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Ceta_Sanctuary.
      * </p>
      */
-    private static void upkeep_Ceta_Sanctuary() {
+    private static void upkeepCetaSanctuary() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Ceta Sanctuary");
@@ -2435,7 +2435,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Power_Surge.
      * </p>
      */
-    private static void upkeep_Power_Surge() {
+    private static void upkeepPowerSurge() {
         /*
          * At the beginning of each player's upkeep, Power Surge deals X damage
          * to that player, where X is the number of untapped lands he or she
@@ -2556,7 +2556,8 @@ public class Upkeep implements java.io.Serializable {
                     });
                 }
             };
-            ability.setDescription("At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
+            ability.setDescription("At the beginning of your upkeep, you may have this creature become "
+            + "a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
             ability.setStackDescription(c.getName() + " - you may have this creature become a copy of target creature.");
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -2569,7 +2570,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Tangle_Wire.
      * </p>
      */
-    private static void upkeep_Tangle_Wire() {
+    private static void upkeepTangleWire() {
         final Player player = AllZone.getPhase().getPlayerTurn();
         final CardList wires = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tangle Wire");
 
@@ -2635,7 +2636,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Masticore.
      * </p>
      */
-    private static void upkeep_Masticore() {
+    private static void upkeepMasticore() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Masticore");
@@ -2706,7 +2707,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Eldrazi_Monument.
      * </p>
      */
-    private static void upkeep_Eldrazi_Monument() {
+    private static void upkeepEldraziMonument() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Eldrazi Monument");
@@ -2754,7 +2755,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Blaze_Counters.
      * </p>
      */
-    private static void upkeep_Blaze_Counters() {
+    private static void upkeepBlazeCounters() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         CardList blaze = player.getCardsIn(Zone.Battlefield);
@@ -2789,7 +2790,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Carnophage.
      * </p>
      */
-    private static void upkeep_Carnophage() {
+    private static void upkeepCarnophage() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Carnophage");
@@ -2821,7 +2822,7 @@ public class Upkeep implements java.io.Serializable {
      * upkeep_Sangrophage.
      * </p>
      */
-    private static void upkeep_Sangrophage() {
+    private static void upkeepSangrophage() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Sangrophage");

@@ -25,7 +25,7 @@ import forge.properties.NewConstants;
 public class ReadPriceList implements NewConstants {
 
     /** Constant <code>comment="//"</code>. */
-    private static final String comment = "//";
+    private static final String COMMENT = "//";
 
     private HashMap<String, Integer> priceMap;
 
@@ -69,7 +69,7 @@ public class ReadPriceList implements NewConstants {
 
             // stop reading if end of file or blank line is read
             while ((line != null) && (line.trim().length() != 0)) {
-                if (!line.startsWith(ReadPriceList.comment)) {
+                if (!line.startsWith(ReadPriceList.COMMENT)) {
                     final String[] s = line.split("=");
                     final String name = s[0].trim();
                     final String price = s[1].trim();

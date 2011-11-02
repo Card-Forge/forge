@@ -15,46 +15,46 @@ import forge.AllZone;
 class CustomLimited {
 
     /** The Name. */
-    public String Name;
+    private String name;
 
     /** The Type. */
-    public String Type;
+    private String type;
 
     /** The Deck file. */
-    public String DeckFile;
+    private String deckFile;
 
     /** The Ignore rarity. */
-    public Boolean IgnoreRarity;
+    private Boolean ignoreRarity;
 
     /** The Singleton. */
-    public Boolean Singleton = false;
+    private Boolean singleton = false;
 
     /** The Num cards. */
-    public int NumCards = 15;
+    private int numCards = 15;
 
     /** The Num specials. */
-    public int NumSpecials = 0;
+    private int numSpecials = 0;
 
     /** The Num mythics. */
-    public int NumMythics = 1;
+    private int numMythics = 1;
 
     /** The Num rares. */
-    public int NumRares = 1;
+    private int numRares = 1;
 
     /** The Num uncommons. */
-    public int NumUncommons = 3;
+    private int numUncommons = 3;
 
     /** The Num commons. */
-    public int NumCommons = 11;
+    private int numCommons = 11;
 
     /** The Num double faced. */
-    public int NumDoubleFaced = 0;
+    private int numDoubleFaced = 0;
 
     /** The Num packs. */
-    public int NumPacks = 3;
+    private int numPacks = 3;
 
     /** The Land set code. */
-    public String LandSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
+    private String landSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
 
     /*
      * (non-Javadoc)
@@ -63,7 +63,7 @@ class CustomLimited {
      */
     @Override
     public String toString() {
-        return this.Name;
+        return this.getName();
     }
 
     /**
@@ -82,49 +82,231 @@ class CustomLimited {
             final String value = v.length > 1 ? v[1].trim() : "";
 
             if (key.equalsIgnoreCase("Name")) {
-                cd.Name = value;
+                cd.setName(value);
             }
             if (key.equalsIgnoreCase("Type")) {
-                cd.Type = value;
+                cd.type = value;
             }
             if (key.equalsIgnoreCase("DeckFile")) {
-                cd.DeckFile = value;
+                cd.setDeckFile(value);
             }
             if (key.equalsIgnoreCase("IgnoreRarity")) {
-                cd.IgnoreRarity = value.equals("True");
+                cd.setIgnoreRarity(value.equals("True"));
             }
             if (key.equalsIgnoreCase("Singleton")) {
-                cd.Singleton = value.equals("True");
+                cd.setSingleton(value.equals("True"));
             }
             if (key.equalsIgnoreCase("LandSetCode")) {
-                cd.LandSetCode = value;
+                cd.setLandSetCode(value);
             }
 
             if (key.equalsIgnoreCase("NumCards")) {
-                cd.NumCards = Integer.parseInt(value);
+                cd.setNumCards(Integer.parseInt(value));
             }
             if (key.equalsIgnoreCase("NumDoubleFaced")) {
-                cd.NumDoubleFaced = Integer.parseInt(value);
+                cd.setNumDoubleFaced(Integer.parseInt(value));
             }
             if (key.equalsIgnoreCase("NumSpecials")) {
-                cd.NumSpecials = Integer.parseInt(value);
+                cd.setNumSpecials(Integer.parseInt(value));
             }
             if (key.equalsIgnoreCase("NumMythics")) {
-                cd.NumMythics = Integer.parseInt(value);
+                cd.setNumMythics(Integer.parseInt(value));
             }
             if (key.equalsIgnoreCase("NumRares")) {
-                cd.NumRares = Integer.parseInt(value);
+                cd.setNumRares(Integer.parseInt(value));
             }
             if (key.equalsIgnoreCase("NumUncommons")) {
-                cd.NumUncommons = Integer.parseInt(value);
+                cd.setNumUncommons(Integer.parseInt(value));
             }
             if (key.equalsIgnoreCase("NumCommons")) {
-                cd.NumCommons = Integer.parseInt(value);
+                cd.setNumCommons(Integer.parseInt(value));
             }
             if (key.equalsIgnoreCase("NumPacks")) {
-                cd.NumPacks = Integer.parseInt(value);
+                cd.setNumPacks(Integer.parseInt(value));
             }
         }
         return cd;
+    }
+
+    /**
+     * @return the numCards
+     */
+    public int getNumCards() {
+        return numCards;
+    }
+
+    /**
+     * @param numCards the numCards to set
+     */
+    public void setNumCards(int numCards) {
+        this.numCards = numCards; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the numPacks
+     */
+    public int getNumPacks() {
+        return numPacks;
+    }
+
+    /**
+     * @param numPacks the numPacks to set
+     */
+    public void setNumPacks(int numPacks) {
+        this.numPacks = numPacks; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the numSpecials
+     */
+    public int getNumSpecials() {
+        return numSpecials;
+    }
+
+    /**
+     * @param numSpecials the numSpecials to set
+     */
+    public void setNumSpecials(int numSpecials) {
+        this.numSpecials = numSpecials; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the singleton
+     */
+    public Boolean getSingleton() {
+        return singleton;
+    }
+
+    /**
+     * @param singleton the singleton to set
+     */
+    public void setSingleton(Boolean singleton) {
+        this.singleton = singleton; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the ignoreRarity
+     */
+    public Boolean getIgnoreRarity() {
+        return ignoreRarity;
+    }
+
+    /**
+     * @param ignoreRarity the ignoreRarity to set
+     */
+    public void setIgnoreRarity(Boolean ignoreRarity) {
+        this.ignoreRarity = ignoreRarity; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the numUncommons
+     */
+    public int getNumUncommons() {
+        return numUncommons;
+    }
+
+    /**
+     * @param numUncommons the numUncommons to set
+     */
+    public void setNumUncommons(int numUncommons) {
+        this.numUncommons = numUncommons; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the numCommons
+     */
+    public int getNumCommons() {
+        return numCommons;
+    }
+
+    /**
+     * @param numCommons the numCommons to set
+     */
+    public void setNumCommons(int numCommons) {
+        this.numCommons = numCommons; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the numRares
+     */
+    public int getNumRares() {
+        return numRares;
+    }
+
+    /**
+     * @param numRares the numRares to set
+     */
+    public void setNumRares(int numRares) {
+        this.numRares = numRares; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the numMythics
+     */
+    public int getNumMythics() {
+        return numMythics;
+    }
+
+    /**
+     * @param numMythics the numMythics to set
+     */
+    public void setNumMythics(int numMythics) {
+        this.numMythics = numMythics; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the deckFile
+     */
+    public String getDeckFile() {
+        return deckFile;
+    }
+
+    /**
+     * @param deckFile the deckFile to set
+     */
+    public void setDeckFile(String deckFile) {
+        this.deckFile = deckFile; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the landSetCode
+     */
+    public String getLandSetCode() {
+        return landSetCode;
+    }
+
+    /**
+     * @param landSetCode the landSetCode to set
+     */
+    public void setLandSetCode(String landSetCode) {
+        this.landSetCode = landSetCode; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the numDoubleFaced
+     */
+    public int getNumDoubleFaced() {
+        return numDoubleFaced;
+    }
+
+    /**
+     * @param numDoubleFaced the numDoubleFaced to set
+     */
+    public void setNumDoubleFaced(int numDoubleFaced) {
+        this.numDoubleFaced = numDoubleFaced; // TODO: Add 0 to parameter's name.
+    }
+
+    /**
+     * @return the name
+     */
+    private String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    private void setName(String name1) {
+        this.name = name; // TODO: Add 0 to parameter's name.
     }
 }
