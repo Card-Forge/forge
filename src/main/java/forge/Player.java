@@ -1395,8 +1395,6 @@ public abstract class Player extends GameEntity {
                         + "counters on it instead of putting it into your graveyard."))
                 && null != sa && !c.getController().equals(sa.getSourceCard().getController())) {
             AllZone.getGameAction().discardPutIntoPlayInstead(c);
-        } else if (c.hasKeyword("If a spell or ability an opponent controls "
-                + "causes you to discard CARDNAME, return it to your hand.")) {
         } else {
             AllZone.getGameAction().moveToGraveyard(c);
         }
