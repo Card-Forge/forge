@@ -14,15 +14,15 @@ import forge.game.GameType;
  * @author Forge
  * @version $Id$
  */
-public interface Constant {
+public final class Constant {
     /** Constant <code>ProgramName="Forge - http://cardforge.org"</code>. */
-    String PROGRAM_NAME = "Forge - http://cardforge.org";
+    public static final String PROGRAM_NAME = "Forge - http://cardforge.org";
 
     // used to pass information between the GUI screens
     /**
      * The Class Runtime.
      */
-    public abstract class Runtime {
+    public static class Runtime {
 
         /** The Constant HumanDeck. */
         public static final Deck[] HUMAN_DECK = new Deck[1];
@@ -110,52 +110,52 @@ public interface Constant {
     /**
      * The Interface Phase.
      */
-    public interface Phase {
+    public static class Phase {
 
         /** The Constant Untap. */
-        String UNTAP = "Untap";
+        public static final String UNTAP = "Untap";
 
         /** The Constant Upkeep. */
-        String UPKEEP = "Upkeep";
+        public static final String UPKEEP = "Upkeep";
 
         /** The Constant Draw. */
-        String DRAW = "Draw";
+        public static final String DRAW = "Draw";
 
         /** The Constant Main1. */
-        String MAIN1 = "Main1";
+        public static final String MAIN1 = "Main1";
 
         /** The Constant Combat_Begin. */
-        String COMBAT_BEGIN = "BeginCombat";
+        public static final String COMBAT_BEGIN = "BeginCombat";
 
         /** The Constant Combat_Declare_Attackers. */
-        String COMBAT_DECLARE_ATTACKERS = "Declare Attackers";
+        public static final String COMBAT_DECLARE_ATTACKERS = "Declare Attackers";
 
         /** The Constant Combat_Declare_Attackers_InstantAbility. */
-        String COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY = "Declare Attackers - Play Instants and Abilities";
+        public static final String COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY = "Declare Attackers - Play Instants and Abilities";
 
         /** The Constant Combat_Declare_Blockers. */
-        String COMBAT_DECLARE_BLOCKERS = "Declare Blockers";
+        public static final String COMBAT_DECLARE_BLOCKERS = "Declare Blockers";
 
         /** The Constant Combat_Declare_Blockers_InstantAbility. */
-        String COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY = "Declare Blockers - Play Instants and Abilities";
+        public static final String COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY = "Declare Blockers - Play Instants and Abilities";
 
         /** The Constant Combat_Damage. */
-        String COMBAT_DAMAGE = "Combat Damage";
+        public static final String COMBAT_DAMAGE = "Combat Damage";
 
         /** The Constant Combat_FirstStrikeDamage. */
-        String COMBAT_FIRST_STRIKE_DAMAGE = "First Strike Damage";
+        public static final String COMBAT_FIRST_STRIKE_DAMAGE = "First Strike Damage";
 
         /** The Constant Combat_End. */
-        String COMBAT_END = "EndCombat";
+        public static final String COMBAT_END = "EndCombat";
 
         /** The Constant Main2. */
-        String MAIN2 = "Main2";
+        public static final String MAIN2 = "Main2";
 
         /** The Constant End_Of_Turn. */
-        String END_OF_TURN = "End of Turn";
+        public static final String END_OF_TURN = "End of Turn";
 
         /** The Constant Cleanup. */
-        String CLEANUP = "Cleanup";
+        public static final String CLEANUP = "Cleanup";
     }
 
     /**
@@ -226,122 +226,122 @@ public interface Constant {
     /**
      * The Interface Color.
      */
-    public interface Color {
+    public static class Color {
 
         /** The Black. */
-        String BLACK = "black";
+        public static final String BLACK = "black";
 
         /** The Blue. */
-        String BLUE = "blue";
+        public static final String BLUE = "blue";
 
         /** The Green. */
-        String GREEN = "green";
+        public static final String GREEN = "green";
 
         /** The Red. */
-        String RED = "red";
+        public static final String RED = "red";
 
         /** The White. */
-        String WHITE = "white";
+        public static final String WHITE = "white";
 
         /** The Colorless. */
-        String COLORLESS = "colorless";
+        public static final String COLORLESS = "colorless";
         // color order "wubrg"
         /** The Colors. */
-        String[] COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
+        public static final String[] COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
 
         /** The only colors. */
-        String[] ONLY_COLORS = { WHITE, BLUE, BLACK, RED, GREEN };
+        public static final String[] ONLY_COLORS = { WHITE, BLUE, BLACK, RED, GREEN };
 
         /** The Snow. */
-        String SNOW = "snow";
+        public static final String SNOW = "snow";
 
         /** The Mana colors. */
-        String[] MANA_COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS, SNOW };
+        public static final String[] MANA_COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS, SNOW };
 
         /** The loaded. */
-        boolean[] LOADED = { false };
+        public static final boolean[] LOADED = { false };
         // public static final Constant_StringHashMap[] LandColor = new
         // Constant_StringHashMap[1];
 
         /** The Basic lands. */
-        String[] BASIC_LANDS = { "Plains", "Island", "Swamp", "Mountain", "Forest" };
+        public static final String[] BASIC_LANDS = { "Plains", "Island", "Swamp", "Mountain", "Forest" };
     }
 
     /**
      * The Interface Quest.
      */
-    public interface Quest {
+    public static class Quest {
 
         /** The fantasy quest. */
-        boolean[] FANTASY_QUEST = new boolean[1];
+        public static final boolean[] FANTASY_QUEST = new boolean[1];
 
         // public static final Quest_Assignment[] qa = new Quest_Assignment[1];
 
         /** The human list. */
-        CardList[] HUMAN_LIST = new CardList[1];
+        public static final CardList[] HUMAN_LIST = new CardList[1];
 
         /** The computer list. */
-        CardList[] COMPUTER_LIST = new CardList[1];
+        public static final CardList[] COMPUTER_LIST = new CardList[1];
 
         /** The human life. */
-        int[] HUMAN_LIFE = new int[1];
+        public static final int[] HUMAN_LIFE = new int[1];
 
         /** The computer life. */
-        int[] COMPUTER_LIFE = new int[1];
+        public static final int[] COMPUTER_LIFE = new int[1];
 
         /** The opp icon name. */
-        String[] OPP_ICON_NAME = new String[1];
+        public static final String[] OPP_ICON_NAME = new String[1];
     }
 
     /**
      * The Interface CardTypes.
      */
-    public interface CardTypes {
+    public static class CardTypes {
 
         /** The loaded. */
-        boolean[] LOADED = { false };
+        public static final boolean[] LOADED = { false };
 
         /** The card types. */
-        ConstantStringArrayList[] CARD_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] CARD_TYPES = new ConstantStringArrayList[1];
 
         /** The super types. */
-        ConstantStringArrayList[] SUPER_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] SUPER_TYPES = new ConstantStringArrayList[1];
 
         /** The basic types. */
-        ConstantStringArrayList[] BASIC_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] BASIC_TYPES = new ConstantStringArrayList[1];
 
         /** The land types. */
-        ConstantStringArrayList[] LAND_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] LAND_TYPES = new ConstantStringArrayList[1];
 
         /** The creature types. */
-        ConstantStringArrayList[] CREATURE_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] CREATURE_TYPES = new ConstantStringArrayList[1];
 
         /** The instant types. */
-        ConstantStringArrayList[] INSTANT_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] INSTANT_TYPES = new ConstantStringArrayList[1];
 
         /** The sorcery types. */
-        ConstantStringArrayList[] SORCERY_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] SORCERY_TYPES = new ConstantStringArrayList[1];
 
         /** The enchantment types. */
-        ConstantStringArrayList[] ENCHANTMENT_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] ENCHANTMENT_TYPES = new ConstantStringArrayList[1];
 
         /** The artifact types. */
-        ConstantStringArrayList[] ARTIFACT_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] ARTIFACT_TYPES = new ConstantStringArrayList[1];
 
         /** The walker types. */
-        ConstantStringArrayList[] WALKER_TYPES = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] WALKER_TYPES = new ConstantStringArrayList[1];
     }
 
     /**
      * The Interface Keywords.
      */
-    public interface Keywords {
+    public static class Keywords {
 
         /** The loaded. */
-        boolean[] LOADED = { false };
+        public static final boolean[] LOADED = { false };
 
         /** The Non stacking list. */
-        ConstantStringArrayList[] NON_STACKING_LIST = new ConstantStringArrayList[1];
+        public static final ConstantStringArrayList[] NON_STACKING_LIST = new ConstantStringArrayList[1];
     }
 
 } // Constant

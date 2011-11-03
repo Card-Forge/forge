@@ -1,31 +1,29 @@
 package forge;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.deckeditor.DeckEditorDraft;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 /**
- * Created by IntelliJ IDEA.
- * User: dhudson
+ * Created by IntelliJ IDEA. User: dhudson
  */
-@Test(groups = {"UnitTest"})
+@Test(groups = { "UnitTest" })
 public class GuiBoosterDraftTest {
 
     /**
-     *
-     *
+     * Gui booster draft test1.
      */
-    @Test(groups = {"UnitTest", "fast"})
-    public void GuiBoosterDraftTest1() {
+    @Test(groups = { "UnitTest", "fast" })
+    public void guiBoosterDraftTest1() {
         Constant.Runtime.setGameType(GameType.Draft);
         Constant.Runtime.HUMAN_DECK[0] = new Deck(GameType.Sealed);
 
-        DeckEditorDraft g = new DeckEditorDraft();
+        final DeckEditorDraft g = new DeckEditorDraft();
         g.showGui(new BoosterDraft(CardPoolLimitation.Full));
         Assert.assertNotNull(g);
         g.dispose();

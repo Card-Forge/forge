@@ -53,8 +53,7 @@ import forge.properties.NewConstants;
  * 
  * @author Forge
  */
-public abstract class GuiDownloader extends DefaultBoundedRangeModel implements Runnable, NewConstants,
-        NewConstants.Lang.GuiDownloadPictures {
+public abstract class GuiDownloader extends DefaultBoundedRangeModel implements Runnable {
 
     private static final long serialVersionUID = -8596808503046590349L;
 
@@ -141,12 +140,12 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         cards = getNeededImages();
 
         if (cards.length == 0) {
-            JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(NO_MORE));
+            JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.NO_MORE));
             return;
         }
 
-        addr = new JTextField(ForgeProps.getLocalized(PROXY_ADDRESS));
-        port = new JTextField(ForgeProps.getLocalized(PROXY_PORT));
+        addr = new JTextField(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.PROXY_ADDRESS));
+        port = new JTextField(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.PROXY_PORT));
         bar = new JProgressBar(this);
 
         JPanel p0 = new JPanel();
@@ -154,8 +153,8 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
         // Proxy Choice
         ButtonGroup bg = new ButtonGroup();
-        String[] labels = { ForgeProps.getLocalized(NO_PROXY), ForgeProps.getLocalized(HTTP_PROXY),
-                ForgeProps.getLocalized(SOCKS_PROXY) };
+        String[] labels = { ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.NO_PROXY), ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.HTTP_PROXY),
+                ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.SOCKS_PROXY) };
         for (int i = 0; i < TYPES.length; i++) {
             JRadioButton rb = new JRadioButton(labels[i]);
             rb.addChangeListener(new ProxyHandler(i));
@@ -171,7 +170,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         p0.add(port);
 
         // Start
-        final JButton b = new JButton(ForgeProps.getLocalized(Buttons.START));
+        final JButton b = new JButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Buttons.START));
         b.addActionListener(new ActionListener() {
 
             public void actionPerformed(final ActionEvent e) {
@@ -194,7 +193,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         bar.setPreferredSize(d);
 
         // JOptionPane
-        close = new JButton(ForgeProps.getLocalized(Buttons.CANCEL));
+        close = new JButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Buttons.CANCEL));
         Object[] options = { b, close };
         dlg = new JOptionPane(p0, DEFAULT_OPTION, PLAIN_MESSAGE, null, options, options[1]);
 
@@ -288,7 +287,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                         sb.append(String.format("0:%02d remaining.", t2Go / 1000));
                     }
                 } else {
-                    sb.append(String.format(ForgeProps.getLocalized(BAR_CLOSE), card, cards.length));
+                    sb.append(String.format(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.BAR_CLOSE), card, cards.length));
                 }
 
                 bar.setString(sb.toString());
@@ -308,7 +307,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      * @return a {@link javax.swing.JDialog} object.
      */
     private JDialog getDlg(final JFrame frame) {
-        final JDialog dlg = this.dlg.createDialog(frame, ForgeProps.getLocalized(TITLE));
+        final JDialog dlg = this.dlg.createDialog(frame, ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.TITLE));
         close.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 dlg.setVisible(false);
@@ -348,7 +347,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 p = new Proxy(TYPES[type], new InetSocketAddress(addr.getText(), parseInt(port.getText())));
             } catch (Exception ex) {
                 ErrorViewer
-                        .showError(ex, ForgeProps.getLocalized(Errors.PROXY_CONNECT), addr.getText(), port.getText());
+                        .showError(ex, ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT), addr.getText(), port.getText());
                 return;
             }
         }
@@ -417,7 +416,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 }
             } // for
         }
-        close.setText(ForgeProps.getLocalized(Buttons.CLOSE));
+        close.setText(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Buttons.CLOSE));
     } // run
 
     /**

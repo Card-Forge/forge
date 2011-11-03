@@ -3,19 +3,17 @@ package forge;
 import org.testng.annotations.Test;
 
 /**
- * Created by IntelliJ IDEA.
- * User: dhudson
+ * Created by IntelliJ IDEA. User: dhudson
  */
-@Test(groups = {"UnitTest"}, timeOut = 1000, enabled = false)
+@Test(groups = { "UnitTest" }, timeOut = 1000, enabled = false)
 public class GuiMultipleBlockers4Test {
 
     /**
-     *
-     *
+     * Gui multiple blockers4 test1.
      */
     @Test(timeOut = 1000, enabled = false)
     public void GuiMultipleBlockers4Test1() {
-        CardList list = new CardList();
+        final CardList list = new CardList();
         list.add(AllZone.getCardFactory().getCard("Elvish Piper", null));
         list.add(AllZone.getCardFactory().getCard("Lantern Kami", null));
         list.add(AllZone.getCardFactory().getCard("Frostling", null));

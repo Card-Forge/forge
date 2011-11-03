@@ -52,8 +52,7 @@ import forge.properties.NewConstants.Lang.GuiDownloadPictures;
  * @author Forge
  * @version $Id$
  */
-public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeModel implements Runnable,
-        NewConstants, NewConstants.Lang.GuiDownloadPictures {
+public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeModel implements Runnable {
 
     /** Constant <code>serialVersionUID=-7890794857949935256L</code>. */
     private static final long serialVersionUID = -7890794857949935256L;
@@ -181,7 +180,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
         this.bar.setPreferredSize(d);
 
         // JOptionPane
-        this.close = new JButton(ForgeProps.getLocalized(Buttons.CANCEL));
+        this.close = new JButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Buttons.CANCEL));
         final Object[] options = { b, this.close };
         this.dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
@@ -342,7 +341,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
                 p = new Proxy(GuiMigrateLocalMWSSetPicturesHQ.TYPES[this.type], new InetSocketAddress(
                         this.addr.getText(), Integer.parseInt(this.port.getText())));
             } catch (final Exception ex) {
-                ErrorViewer.showError(ex, ForgeProps.getLocalized(Errors.PROXY_CONNECT), this.addr.getText(),
+                ErrorViewer.showError(ex, ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT), this.addr.getText(),
                         this.port.getText());
                 // throw new
                 // RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
@@ -427,7 +426,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
                 }
             } // for
         }
-        this.close.setText(ForgeProps.getLocalized(Buttons.CLOSE));
+        this.close.setText(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Buttons.CLOSE));
     } // run
 
     /**

@@ -41,7 +41,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public final class DeckEditorCommonMenu extends JMenuBar implements NewConstants {
+public final class DeckEditorCommonMenu extends JMenuBar {
 
     /** Constant <code>serialVersionUID=-4037993759604768755L</code>. */
     private static final long serialVersionUID = -4037993759604768755L;

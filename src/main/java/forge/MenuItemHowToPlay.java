@@ -19,7 +19,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class MenuItemHowToPlay extends JMenuItem implements NewConstants.Lang.HowTo {
+public class MenuItemHowToPlay extends JMenuItem {
     /** Constant <code>serialVersionUID=5552000208438248428L</code>. */
     private static final long serialVersionUID = 5552000208438248428L;
 
@@ -29,11 +29,11 @@ public class MenuItemHowToPlay extends JMenuItem implements NewConstants.Lang.Ho
      * </p>
      */
     public MenuItemHowToPlay() {
-        super(ForgeProps.getLocalized(TITLE));
+        super(ForgeProps.getLocalized(NewConstants.Lang.HowTo.TITLE));
 
         this.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent a) {
-                String text = ForgeProps.getLocalized(MESSAGE);
+                String text = ForgeProps.getLocalized(NewConstants.Lang.HowTo.MESSAGE);
 
                 JTextArea area = new JTextArea(text, 25, 40);
                 area.setWrapStyleWord(true);
@@ -42,7 +42,7 @@ public class MenuItemHowToPlay extends JMenuItem implements NewConstants.Lang.Ho
 
                 area.setOpaque(false);
 
-                JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(TITLE),
+                JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(NewConstants.Lang.HowTo.TITLE),
                         JOptionPane.INFORMATION_MESSAGE);
             }
         });

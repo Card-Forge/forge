@@ -41,7 +41,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class ImageCache implements NewConstants {
+public class ImageCache {
     /** Constant <code>imageCache</code>. */
     private static final Map<String, BufferedImage> IMAGE_CACHE;
     /** Constant <code>FULL_SIZE</code>. */
@@ -88,9 +88,9 @@ public class ImageCache implements NewConstants {
                         File path;
                         if (key.endsWith(TOKEN)) {
                             key = key.substring(0, key.length() - TOKEN.length());
-                            path = ForgeProps.getFile(IMAGE_TOKEN);
+                            path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
                         } else {
-                            path = ForgeProps.getFile(IMAGE_BASE);
+                            path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
                         }
 
                         File file = null;

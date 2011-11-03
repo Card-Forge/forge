@@ -11,6 +11,7 @@ import forge.card.CardSet;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -45,10 +46,10 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      */
     protected final DownloadObject[] getNeededImages() {
         // read token names and urls
-        DownloadObject[] cardTokenLQ = readFileWithNames(TOKEN_IMAGES, ForgeProps.getFile(IMAGE_TOKEN));
+        DownloadObject[] cardTokenLQ = readFileWithNames(NewConstants.TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
         ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
-        File base = ForgeProps.getFile(IMAGE_BASE);
+        File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
         String urlBase = "http://cardforge.org/fpics/";
         for (CardPrinted c : CardDb.instance().getAllCards()) {
             String setCode3 = c.getSet();
@@ -72,7 +73,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
 
         // add missing tokens to the list of things to download
         File file;
-        File filebase = ForgeProps.getFile(IMAGE_TOKEN);
+        File filebase = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
         for (int i = 0; i < cardTokenLQ.length; i++) {
             file = new File(filebase, cardTokenLQ[i].getName());
             if (!file.exists()) {

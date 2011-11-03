@@ -31,7 +31,6 @@ import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.gui.GuiUtils;
 import forge.gui.game.CardPanel;
-import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -41,7 +40,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public final class GuiDisplayUtil implements NewConstants {
+public final class GuiDisplayUtil {
 
     private GuiDisplayUtil() {
         throw new AssertionError();

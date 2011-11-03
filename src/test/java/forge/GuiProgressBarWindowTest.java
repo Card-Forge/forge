@@ -1,29 +1,28 @@
 package forge;
 
+import javax.swing.WindowConstants;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
-
 /**
- * Created by IntelliJ IDEA.
- * User: dhudson
+ * Created by IntelliJ IDEA. User: dhudson
  */
-@Test(groups = {"UnitTest"})
+@Test(groups = { "UnitTest" })
 public class GuiProgressBarWindowTest {
+    
     /**
-     *
-     *
+     * Gui progress bar window test1.
      */
-    @Test(groups = {"UnitTest", "fast"})
+    @Test(groups = { "UnitTest", "fast" })
     public void GuiProgressBarWindowTest1() {
         try {
-            GuiProgressBarWindow dialog = new GuiProgressBarWindow();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            final GuiProgressBarWindow dialog = new GuiProgressBarWindow();
+            dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
             Assert.assertNotNull(dialog);
             dialog.dispose();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }

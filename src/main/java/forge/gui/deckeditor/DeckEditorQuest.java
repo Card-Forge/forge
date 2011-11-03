@@ -26,7 +26,6 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
-import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 
 //import forge.quest.data.QuestBoosterPack;
@@ -39,7 +38,7 @@ import forge.quest.data.QuestData;
  * @author Forge
  * @version $Id$
  */
-public final class DeckEditorQuest extends DeckEditorBase implements NewConstants {
+public final class DeckEditorQuest extends DeckEditorBase {
     /** Constant <code>serialVersionUID=152061168634545L</code>. */
     private static final long serialVersionUID = 152061168634545L;
 

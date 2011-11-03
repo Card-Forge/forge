@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -41,10 +42,10 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
      */
     protected final DownloadObject[] getNeededImages() {
         // read token names and urls
-        DownloadObject[] cardTokenLQ = readFileWithNames(TOKEN_IMAGES, ForgeProps.getFile(IMAGE_TOKEN));
+        DownloadObject[] cardTokenLQ = readFileWithNames(NewConstants.TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
         ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
-        String base = ForgeProps.getFile(IMAGE_BASE).getPath();
+        String base = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
         for (Card c : AllZone.getCardFactory()) {
             cList.addAll(createDLObjects(c, base));
             if (c.hasAlternateState()) {
@@ -67,7 +68,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         }
 
         // add missing tokens to the list of things to download
-        File filebase = ForgeProps.getFile(IMAGE_TOKEN);
+        File filebase = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
         for (int i = 0; i < cardTokenLQ.length; i++) {
             file = new File(filebase, cardTokenLQ[i].getName());
             if (!file.exists()) {

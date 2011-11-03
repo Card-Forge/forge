@@ -34,7 +34,6 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
 import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
@@ -47,7 +46,7 @@ import forge.view.swing.OldGuiNewGame;
  * @author Forge
  * @version $Id$
  */
-public class DeckEditorDraft extends DeckEditorBase implements NewConstants, NewConstants.Lang.GuiBoosterDraft {
+public class DeckEditorDraft extends DeckEditorBase {
     /**
      * Constant <code>serialVersionUID=-6055633915602448260L</code>.
      */

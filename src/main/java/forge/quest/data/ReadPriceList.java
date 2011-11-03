@@ -22,7 +22,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class ReadPriceList implements NewConstants {
+public class ReadPriceList {
 
     /** Constant <code>comment="//"</code>. */
     private static final String COMMENT = "//";
@@ -44,8 +44,8 @@ public class ReadPriceList implements NewConstants {
      * </p>
      */
     private void setup() {
-        this.priceMap = this.readFile(ForgeProps.getFile(Quest.PRICE));
-        this.priceMap.putAll(this.readFile(ForgeProps.getFile(Quest.BOOSTER_PRICE)));
+        this.priceMap = this.readFile(ForgeProps.getFile(NewConstants.Quest.PRICE));
+        this.priceMap.putAll(this.readFile(ForgeProps.getFile(NewConstants.Quest.BOOSTER_PRICE)));
 
     } // setup()
 

@@ -31,7 +31,6 @@ import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
-import forge.properties.NewConstants;
 import forge.view.FView;
 
 /**
@@ -42,7 +41,7 @@ import forge.view.FView;
  * @author Forge
  * @version $Id$
  */
-public class CardReader implements Runnable, NewConstants {
+public class CardReader implements Runnable {
     // NOPMD by Braids on 8/18/11 10:55
     // PM
     private static final String CARD_FILE_DOT_EXTENSION = ".txt"; // NOPMD by

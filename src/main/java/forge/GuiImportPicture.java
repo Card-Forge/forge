@@ -35,7 +35,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class GuiImportPicture extends JDialog implements NewConstants {
+public class GuiImportPicture extends JDialog {
     /** Constant <code>serialVersionUID=-4191539152208389089L</code>. */
     private static final long serialVersionUID = -4191539152208389089L;
     private JPanel jContentPane = null;
@@ -110,7 +110,7 @@ public class GuiImportPicture extends JDialog implements NewConstants {
             jLabelHDDFree = new JLabel();
             jLabelHDDFree.setBounds(new Rectangle(15, 119, 177, 16));
 
-            File file = ForgeProps.getFile(IMAGE_BASE);
+            File file = ForgeProps.getFile(NewConstants.IMAGE_BASE);
 
             long freeSpace = file.getFreeSpace();
             freeSpaceM = freeSpace / 1024 / 1024;
@@ -200,7 +200,7 @@ public class GuiImportPicture extends JDialog implements NewConstants {
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
                                 fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
-                                File file = new File(ForgeProps.getFile(IMAGE_BASE), fName);
+                                File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
                                 if (!file.exists()) {
                                     filesForCopy = filesForCopy + 1;
                                     filesToCopySize = filesToCopySize + listFiles.get(i).length();
@@ -294,7 +294,7 @@ public class GuiImportPicture extends JDialog implements NewConstants {
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
                                 fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
-                                File file = new File(ForgeProps.getFile(IMAGE_BASE), fName);
+                                File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
                                 if (!file.exists()) {
                                     filesForCopy = filesForCopy + 1;
                                     filesToCopySize = filesToCopySize + listFiles.get(i).length();

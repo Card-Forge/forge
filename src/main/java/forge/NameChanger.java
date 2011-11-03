@@ -26,7 +26,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class NameChanger implements NewConstants {
+public class NameChanger {
     private Map<String, String> mutatedMap = new TreeMap<String, String>();
     private Map<String, String> originalMap = new TreeMap<String, String>();
 
@@ -215,7 +215,7 @@ public class NameChanger implements NewConstants {
     @SuppressWarnings("unused")
     private void readFile() {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NAME_MUTATOR)));
+            BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NewConstants.NAME_MUTATOR)));
 
             String line = in.readLine();
 
@@ -232,7 +232,7 @@ public class NameChanger implements NewConstants {
 
             // ~ (could be cleaner...)
             try {
-                BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NAME_MUTATOR)));
+                BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NewConstants.NAME_MUTATOR)));
 
                 String line;
 

@@ -34,7 +34,7 @@ import forge.properties.NewConstants;
  * @author Clemens Koza
  * @version V1.0 02.08.2009
  */
-public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer {
+public class ErrorViewer {
     /** Constant <code>NAME_OS="os.name"</code>. */
     private static final String NAME_OS = "os.name";
     /** Constant <code>VERSION_OS="os.version"</code>. */
@@ -166,11 +166,11 @@ public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer 
         // Button is not modified, String gets the automatic listener to hide
         // the dialog
         final Object[] options = { new JButton(new BugzAction(area)), new JButton(new SaveAction(area)),
-                ForgeProps.getLocalized(ErrorViewer.BUTTON_CLOSE), new JButton(new ExitAction()) };
+                ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.BUTTON_CLOSE), new JButton(new ExitAction()) };
 
         final JOptionPane pane = new JOptionPane(new JScrollPane(area), JOptionPane.ERROR_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options, options[1]);
-        ErrorViewer.dlg = pane.createDialog(null, ForgeProps.getLocalized(ErrorViewer.TITLE));
+        ErrorViewer.dlg = pane.createDialog(null, ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.TITLE));
         ErrorViewer.dlg.setResizable(true);
         ErrorViewer.dlg.setVisible(true);
         ErrorViewer.dlg.dispose();
@@ -192,7 +192,7 @@ public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer 
         }
         ex.printStackTrace();
 
-        pw.printf(ForgeProps.getLocalized(ErrorViewer.MESSAGE),
+        pw.printf(ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.MESSAGE),
                 ForgeProps.getProperty(NewConstants.HOW_TO_REPORT_BUGS_URL),
                 message != null ? message : ex.getMessage(), Singletons.getModel().getBuildInfo().toPrettyString(),
                 System.getProperty(ErrorViewer.NAME_OS), System.getProperty(ErrorViewer.VERSION_OS),
@@ -213,7 +213,7 @@ public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer 
     private static void printError(final PrintWriter pw, final String message) {
         System.err.println(message);
 
-        pw.printf(ForgeProps.getLocalized(ErrorViewer.MESSAGE),
+        pw.printf(ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.MESSAGE),
                 ForgeProps.getProperty(NewConstants.HOW_TO_REPORT_BUGS_URL), message, Singletons.getModel()
                         .getBuildInfo().toPrettyString(), System.getProperty(ErrorViewer.NAME_OS),
                 System.getProperty(ErrorViewer.VERSION_OS), System.getProperty(ErrorViewer.ARCHITECTURE_OS),
@@ -237,7 +237,7 @@ public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer 
         private final JTextArea area;
 
         public SaveAction(final JTextArea areaParam) {
-            super(ForgeProps.getLocalized(ErrorViewer.BUTTON_SAVE));
+            super(ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.BUTTON_SAVE));
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
             this.area = areaParam;
         }
@@ -265,7 +265,7 @@ public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer 
                 bw.write(this.area.getText());
                 bw.close();
             } catch (final IOException ex) {
-                ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.SAVE_MESSAGE));
+                ErrorViewer.showError(ex, ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.ERRORS.SAVE_MESSAGE));
             }
         }
     }
@@ -296,7 +296,7 @@ public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer 
         private static final long serialVersionUID = 276202595758381626L;
 
         public ExitAction() {
-            super(ForgeProps.getLocalized(ErrorViewer.BUTTON_EXIT));
+            super(ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.BUTTON_EXIT));
         }
 
         @Override
@@ -310,12 +310,12 @@ public class ErrorViewer implements NewConstants, NewConstants.Lang.ErrorViewer 
         private static final long serialVersionUID = 5638147106706803363L;
 
         public ShowAllThreadsAction() {
-            super(ForgeProps.getLocalized(ErrorViewer.SHOW_ERROR));
+            super(ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.SHOW_ERROR));
         }
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            ErrorViewer.showErrorAllThreads(ForgeProps.getLocalized(ERRORS.SHOW_MESSAGE));
+            ErrorViewer.showErrorAllThreads(ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.ERRORS.SHOW_MESSAGE));
         }
     }
 }

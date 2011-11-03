@@ -28,7 +28,7 @@ import forge.quest.gui.main.QuestEventManager;
  * @author Forge
  * @version $Id$
  */
-public final class AllZone implements NewConstants {
+public final class AllZone {
     // only for testing, should read decks from local directory
     // public static final IO IO = new IO("all-decks");
 
@@ -283,7 +283,7 @@ public final class AllZone implements NewConstants {
         if (cardFactory == null) {
             // setCardFactory(new
             // LazyCardFactory(ForgeProps.getFile(CARDSFOLDER)));
-            setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER)));
+            setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER)));
         }
         return cardFactory;
     }
@@ -553,7 +553,7 @@ public final class AllZone implements NewConstants {
      */
     public static DeckManager getDeckManager() {
         if (deckManager == null) {
-            deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));
+            deckManager = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
         }
         return deckManager;
     }

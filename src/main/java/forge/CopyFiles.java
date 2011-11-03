@@ -23,7 +23,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class CopyFiles extends SwingWorker<Void, Integer> implements NewConstants {
+public class CopyFiles extends SwingWorker<Void, Integer> {
 
     private final List<File> fileList;
 

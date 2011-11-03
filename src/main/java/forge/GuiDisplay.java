@@ -93,6 +93,10 @@ import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
+import forge.properties.NewConstants.Lang.GuiDisplay.ComputerLibrary;
+import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
+import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 
 /**
  * <p>
@@ -102,8 +106,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class GuiDisplay extends JFrame implements CardContainer, Display, NewConstants, NewConstants.Gui.GuiDisplay,
-        NewConstants.Lang.GuiDisplay {
+public class GuiDisplay extends JFrame implements CardContainer, Display {
     /** Constant <code>serialVersionUID=4519302185194841060L</code>. */
     private static final long serialVersionUID = 4519302185194841060L;
 
@@ -177,9 +180,9 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
      * </p>
      */
     private void setupActions() {
-        humanGraveyardAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_GRAVEYARD);
-        humanRemovedACtion = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Exile), HUMAN_REMOVED);
-        humanFlashbackAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), HUMAN_FLASHBACK) {
+        humanGraveyardAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD);
+        humanRemovedACtion = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Exile), NewConstants.Lang.GuiDisplay.HUMAN_REMOVED);
+        humanFlashbackAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
 
             private static final long serialVersionUID = 8120331222693706164L;
 
@@ -195,11 +198,11 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             }
         };
         computerGraveyardAction = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Graveyard),
-                COMPUTER_GRAVEYARD);
-        computerRemovedAction = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Exile), COMPUTER_REMOVED);
+                NewConstants.Lang.GuiDisplay.COMPUTER_GRAVEYARD);
+        computerRemovedAction = new ZoneAction(AllZone.getComputerPlayer().getZone(Zone.Exile), NewConstants.Lang.GuiDisplay.COMPUTER_REMOVED);
         concedeAction = new ConcedeAction();
 
-        humanDecklistAction = new DeckListAction(HUMAN_DECKLIST);
+        humanDecklistAction = new DeckListAction(NewConstants.Lang.GuiDisplay.HUMAN_DECKLIST);
     }
 
     /**
@@ -216,7 +219,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
                 computerGraveyardAction, computerRemovedAction, new JSeparator(), playsoundCheckboxForMenu,
                 new JSeparator(), ErrorViewer.ALL_THREADS_ACTION, concedeAction };
 
-        JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MenuBar.Menu.TITLE));
+        JMenu gameMenu = new JMenu(ForgeProps.getLocalized(NewConstants.Lang.GuiDisplay.MenuBar.Menu.TITLE));
         for (Object o : obj) {
             if (o instanceof ForgeAction) {
                 gameMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));
@@ -230,7 +233,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         }
 
         // Phase Menu Creation
-        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(MenuBar.PHASE.TITLE));
+        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(NewConstants.Lang.GuiDisplay.MenuBar.PHASE.TITLE));
 
         JMenuItem aiLabel = new JMenuItem("Computer");
         JMenuItem humanLabel = new JMenuItem("Human");
@@ -244,7 +247,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         }
 
         // Dev Mode Creation
-        JMenu devMenu = new JMenu(ForgeProps.getLocalized(MenuBar.DEV.TITLE));
+        JMenu devMenu = new JMenu(ForgeProps.getLocalized(NewConstants.Lang.GuiDisplay.MenuBar.DEV.TITLE));
 
         devMenu.setEnabled(Constant.Runtime.DEV_MODE[0]);
 
@@ -256,7 +259,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
                     ComputerLibrary.BASE);
             Action viewHumanLibrary
             = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Library), HumanLibrary.BASE);
-            ForgeAction generateMana = new ForgeAction(MANAGEN) {
+            ForgeAction generateMana = new ForgeAction(NewConstants.Lang.GuiDisplay.MANAGEN) {
                 private static final long serialVersionUID = 7171104690016706405L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -265,7 +268,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             };
 
             // + Battlefield setup +
-            ForgeAction setupBattleField = new ForgeAction(SETUPBATTLEFIELD) {
+            ForgeAction setupBattleField = new ForgeAction(NewConstants.Lang.GuiDisplay.SETUPBATTLEFIELD) {
                 private static final long serialVersionUID = -6660930759092583160L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -275,7 +278,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             // - Battlefield setup -
 
             // DevMode Tutor
-            ForgeAction tutor = new ForgeAction(TUTOR) {
+            ForgeAction tutor = new ForgeAction(NewConstants.Lang.GuiDisplay.TUTOR) {
                 private static final long serialVersionUID = 2003222642609217705L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -285,7 +288,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             // end DevMode Tutor
 
             // DevMode AddCounter
-            ForgeAction addCounter = new ForgeAction(ADDCOUNTER) {
+            ForgeAction addCounter = new ForgeAction(NewConstants.Lang.GuiDisplay.ADDCOUNTER) {
                 private static final long serialVersionUID = 3136264111882855268L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -295,7 +298,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             // end DevMode AddCounter
 
             // DevMode Tap
-            ForgeAction tapPerm = new ForgeAction(TAPPERM) {
+            ForgeAction tapPerm = new ForgeAction(NewConstants.Lang.GuiDisplay.TAPPERM) {
                 private static final long serialVersionUID = -6092045653540313527L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -305,7 +308,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             // end DevMode Tap
 
             // DevMode Untap
-            ForgeAction untapPerm = new ForgeAction(UNTAPPERM) {
+            ForgeAction untapPerm = new ForgeAction(NewConstants.Lang.GuiDisplay.UNTAPPERM) {
                 private static final long serialVersionUID = 5425291996157256656L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -315,7 +318,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             // end DevMode Untap
 
             // DevMode UnlimitedLand
-            ForgeAction unlimitedLand = new ForgeAction(NOLANDLIMIT) {
+            ForgeAction unlimitedLand = new ForgeAction(NewConstants.Lang.GuiDisplay.NOLANDLIMIT) {
                 private static final long serialVersionUID = 2184353891062202796L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -325,7 +328,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
             // end DevMode UnlimitedLand
 
             // DevMode SetLife
-            ForgeAction setLife = new ForgeAction(SETLIFE) {
+            ForgeAction setLife = new ForgeAction(NewConstants.Lang.GuiDisplay.SETLIFE) {
                 private static final long serialVersionUID = -1750588303928974918L;
 
                 public void actionPerformed(final ActionEvent arg0) {
@@ -674,7 +677,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         AllZone.getComputerPlayer().updateObservers();
 
         if (AllZone.getQuestData() != null) {
-            File base = ForgeProps.getFile(IMAGE_ICON);
+            File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
             String iconName = "";
             if (Constant.Quest.OPP_ICON_NAME[0] != null) {
                 iconName = Constant.Quest.OPP_ICON_NAME[0];
@@ -860,7 +863,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
      */
     private void initComponents() {
         // Preparing the Frame
-        setTitle(ForgeProps.getLocalized(Lang.PROGRAM_NAME));
+        setTitle(ForgeProps.getLocalized(NewConstants.Lang.PROGRAM_NAME));
         if (!Singletons.getModel().getPreferences().isLafFonts()) {
             setFont(new Font("Times New Roman", 0, 16));
         }
@@ -882,7 +885,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
 
                 // Write the layout to the new file, usually
                 // res/gui/display_new_layout.xml
-                File f = ForgeProps.getFile(LAYOUT_NEW);
+                File f = ForgeProps.getFile(NewConstants.Gui.GuiDisplay.LAYOUT_NEW);
 
                 Node layout = pane.getMultiSplitLayout().getModel();
 
@@ -914,7 +917,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
 
         // Try to load the latest saved layout, usually
         // res/gui/display_new_layout.xml
-        final File file = ForgeProps.getFile(LAYOUT_NEW);
+        final File file = ForgeProps.getFile(NewConstants.Gui.GuiDisplay.LAYOUT_NEW);
 
         try {
             model = loadModel(xstream, file);
@@ -950,7 +953,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
 
         if (model == null) {
             System.err.println("XMLDecoder failed; using default layout.");
-            final File defaultFile = ForgeProps.getFile(LAYOUT);
+            final File defaultFile = ForgeProps.getFile(NewConstants.Gui.GuiDisplay.LAYOUT);
 
             try {
                 model = loadModel(xstream, defaultFile);
@@ -1231,7 +1234,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         oppIconLifePanel.add(oppLifeLabel);
 
         JPanel oppPanel = new JPanel();
-        oppPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMPUTER_TITLE)));
+        oppPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(NewConstants.Lang.GuiDisplay.COMPUTER_TITLE)));
         oppPanel.setLayout(new BorderLayout());
         oppPanel.add(oppNumbersPanel, BorderLayout.WEST);
         // oppPanel.add(oppIconLabel, BorderLayout.CENTER);
@@ -1261,7 +1264,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
 
         JScrollPane combatPane = new JScrollPane(combatArea);
 
-        combatPane.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMBAT)));
+        combatPane.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(NewConstants.Lang.GuiDisplay.COMBAT)));
         pane.add(new ExternalPanel(combatPane), "combat");
     }
 
@@ -1342,7 +1345,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         playerNumbersPanel.add(playerFBValue);
 
         JPanel playerPanel = new JPanel();
-        playerPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(HUMAN_TITLE)));
+        playerPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(NewConstants.Lang.GuiDisplay.HUMAN_TITLE)));
         playerPanel.setLayout(new BorderLayout());
         playerPanel.add(playerNumbersPanel, BorderLayout.WEST);
         playerPanel.add(playerLifeLabel, BorderLayout.EAST);
@@ -1647,7 +1650,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         private static final long serialVersionUID = -6976695235601916762L;
 
         public ConcedeAction() {
-            super(CONCEDE);
+            super(NewConstants.Lang.GuiDisplay.CONCEDE);
         }
 
         public void actionPerformed(final ActionEvent e) {
@@ -1723,7 +1726,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
         public TriggerReactionMenu() {
             super();
 
-            ForgeAction actAccept = new ForgeAction(Lang.GuiDisplay.Trigger.ALWAYSACCEPT) {
+            ForgeAction actAccept = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSACCEPT) {
                 private static final long serialVersionUID = -3734674058185367612L;
 
                 @Override
@@ -1732,7 +1735,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
                 }
             };
 
-            ForgeAction actDecline = new ForgeAction(Lang.GuiDisplay.Trigger.ALWAYSDECLINE) {
+            ForgeAction actDecline = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSDECLINE) {
                 private static final long serialVersionUID = -1983295769159971502L;
 
                 @Override
@@ -1741,7 +1744,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display, NewCon
                 }
             };
 
-            ForgeAction actAsk = new ForgeAction(Lang.GuiDisplay.Trigger.ALWAYSASK) {
+            ForgeAction actAsk = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSASK) {
                 private static final long serialVersionUID = 5045255351332940821L;
 
                 @Override

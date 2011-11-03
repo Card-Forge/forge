@@ -68,7 +68,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public abstract class AbstractCardFactory implements NewConstants, CardFactoryInterface {
+public abstract class AbstractCardFactory implements CardFactoryInterface {
     /**
      * This maps card name Strings to Card instances. The Card instances have no
      * owner, and lack abilities.

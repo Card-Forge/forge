@@ -448,7 +448,7 @@ public final class AbilityFactoryClash {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.7
      */
@@ -486,7 +486,7 @@ public final class AbilityFactoryClash {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.7
      */
@@ -519,7 +519,7 @@ public final class AbilityFactoryClash {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.7
      */

@@ -19,7 +19,6 @@ import javax.swing.border.EmptyBorder;
 
 import forge.AllZone;
 import forge.gui.GuiUtils;
-import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 import forge.quest.data.bazaar.QuestStallDefinition;
 import forge.quest.data.bazaar.QuestStallManager;
@@ -33,7 +32,7 @@ import forge.quest.data.bazaar.QuestStallPurchasable;
  * @author Forge
  * @version $Id$
  */
-public class QuestBazaarStall extends JPanel implements NewConstants {
+public class QuestBazaarStall extends JPanel {
     /** Constant <code>serialVersionUID=-4147745071116906043L</code>. */
     private static final long serialVersionUID = -4147745071116906043L;
 

@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
  * @author Forge
  * @version $Id$
  */
-@Test(groups = {"UnitTest"})
+@Test(groups = { "UnitTest" })
 public class TinyTest {
     /**
      * Just a quick test to see if TestNG and Assert are working.
      */
-    @Test(groups = {"UnitTest", "fast"})
+    @Test(groups = { "UnitTest", "fast" })
     public void test_true() {
         Assert.assertTrue(true);
     }
