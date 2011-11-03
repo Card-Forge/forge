@@ -1,11 +1,13 @@
 Name:Do or Die
 ManaCost:1 B
 Types:Sorcery
-Text:Randomly destroy half of the creatures target player controls. They can't be regenerated.
+Text:Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
+A:SP$ TwoPiles | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select target player | Separator$ You | ChosenPile$ DBDestroy | ValidCards$ Creature | SpellDescription$ Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
+SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | NoRegen$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:None
-SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23059.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/do_or_die.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/102.jpg
 Oracle:Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
 End

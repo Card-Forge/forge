@@ -159,36 +159,6 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Do or Die")) {
-            // TODO Please please please, someone fix this card
-            final Cost cost = new Cost("1 B", cardName, false);
-            final Target tgt = new Target(card, "Select a Player", "Player");
-            final SpellAbility spell = new Spell(card, cost, tgt) {
-                private static final long serialVersionUID = 8241241003478388362L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return 4 <= CardFactoryUtil.getHumanCreatureAI(card, true).size();
-                }
-
-                @Override
-                public void resolve() {
-                    final CardList list = AllZoneUtil.getCreaturesInPlay(this.getTargetPlayer());
-
-                    list.shuffle();
-
-                    for (int i = 0; i < (list.size() / 2); i++) {
-                        AllZone.getGameAction().destroyNoRegeneration(list.get(i));
-                    }
-                }
-            }; // SpellAbility
-            spell.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
-
-            card.setSVar("PlayMain1", "TRUE");
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Insurrection")) {
             /*
              * Untap all creatures and gain control of them until end of turn.
