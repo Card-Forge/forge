@@ -2415,7 +2415,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (Object o : rememberedObjects) {
                 if (o instanceof Card) {
                     Card c = (Card) o;
-                    sb.append(c.getName());
+                    if (c.isFaceDown()) {
+                        sb.append("Face Down ");
+                    } else {
+                        sb.append(c.getName());
+                    }
                     sb.append("(");
                     sb.append(c.getUniqueNumber());
                     sb.append(")");
