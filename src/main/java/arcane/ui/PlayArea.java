@@ -166,6 +166,61 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             allTokens.add(insertIndex == -1 ? allTokens.size() : insertIndex, stack);
         }
 
+        rowSpacing(allLands, allTokens);
+
+        // Get size of all the rows.
+        int x, y = PlayArea.GUTTER_Y;
+        int maxRowWidth = 0;
+        for (final Row row : this.rows) {
+            int rowBottom = 0;
+            x = PlayArea.GUTTER_X;
+            for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
+                final Stack stack = row.get(stackIndex);
+                rowBottom = Math.max(rowBottom, y + stack.getHeight());
+                x += stack.getWidth();
+            }
+            y = rowBottom;
+            maxRowWidth = Math.max(maxRowWidth, x);
+        }
+        this.setPreferredSize(new Dimension(maxRowWidth - this.cardSpacingX, y - this.cardSpacingY));
+        this.revalidate();
+
+        // Position all card panels.
+        x = 0;
+        y = PlayArea.GUTTER_Y;
+        for (final Row row : this.rows) {
+            int rowBottom = 0;
+            x = PlayArea.GUTTER_X;
+            for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
+                final Stack stack = row.get(stackIndex);
+                // Align others to the right.
+                if (RowType.other.isType(stack.get(0).getGameCard())) {
+                    x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
+                    for (int i = stackIndex, n = row.size(); i < n; i++) {
+                        x -= row.get(i).getWidth();
+                    }
+                }
+                for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
+                    final CardPanel panel = stack.get(panelIndex);
+                    final int stackPosition = panelCount - panelIndex - 1;
+                    this.setComponentZOrder(panel, panelIndex);
+                    final int panelX = x + (stackPosition * this.stackSpacingX);
+                    final int panelY = y + (stackPosition * this.stackSpacingY);
+                    panel.setCardBounds(panelX, panelY, this.cardWidth, this.cardHeight);
+                }
+                rowBottom = Math.max(rowBottom, y + stack.getHeight());
+                x += stack.getWidth();
+            }
+            y = rowBottom;
+        }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param allLands
+     * @param allTokens
+     */
+    private void rowSpacing(final Row allLands, final Row allTokens) {
         final Row allCreatures = new Row(this.getCardPanels(), RowType.creatureNonToken);
         final Row allOthers = new Row(this.getCardPanels(), RowType.other);
 
@@ -226,52 +281,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 break;
             }
             this.cardWidth--;
-        }
-
-        // Get size of all the rows.
-        int x, y = PlayArea.GUTTER_Y;
-        int maxRowWidth = 0;
-        for (final Row row : this.rows) {
-            int rowBottom = 0;
-            x = PlayArea.GUTTER_X;
-            for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
-                final Stack stack = row.get(stackIndex);
-                rowBottom = Math.max(rowBottom, y + stack.getHeight());
-                x += stack.getWidth();
-            }
-            y = rowBottom;
-            maxRowWidth = Math.max(maxRowWidth, x);
-        }
-        this.setPreferredSize(new Dimension(maxRowWidth - this.cardSpacingX, y - this.cardSpacingY));
-        this.revalidate();
-
-        // Position all card panels.
-        x = 0;
-        y = PlayArea.GUTTER_Y;
-        for (final Row row : this.rows) {
-            int rowBottom = 0;
-            x = PlayArea.GUTTER_X;
-            for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
-                final Stack stack = row.get(stackIndex);
-                // Align others to the right.
-                if (RowType.other.isType(stack.get(0).getGameCard())) {
-                    x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
-                    for (int i = stackIndex, n = row.size(); i < n; i++) {
-                        x -= row.get(i).getWidth();
-                    }
-                }
-                for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
-                    final CardPanel panel = stack.get(panelIndex);
-                    final int stackPosition = panelCount - panelIndex - 1;
-                    this.setComponentZOrder(panel, panelIndex);
-                    final int panelX = x + (stackPosition * this.stackSpacingX);
-                    final int panelY = y + (stackPosition * this.stackSpacingY);
-                    panel.setCardBounds(panelX, panelY, this.cardWidth, this.cardHeight);
-                }
-                rowBottom = Math.max(rowBottom, y + stack.getHeight());
-                x += stack.getWidth();
-            }
-            y = rowBottom;
         }
     }
 

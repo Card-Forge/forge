@@ -15,10 +15,10 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
+import forge.CardColor;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
-import forge.CardColor;
 import forge.Combat;
 import forge.CombatUtil;
 import forge.Command;
@@ -1006,7 +1006,7 @@ public class CardFactoryUtil {
                 sourceCard.setIsFaceDown(true);
                 sourceCard.setManaCost("");
                 sourceCard.setColor(new ArrayList<CardColor>()); // remove all
-                                                                  // colors
+                                                                 // colors
                 sourceCard.addColor("0");
                 sourceCard.setBaseAttack(2);
                 sourceCard.setBaseDefense(2);
@@ -2965,8 +2965,8 @@ public class CardFactoryUtil {
 
             final String[] colors = { "green", "white", "red", "blue", "black" };
 
-            for (int i = 0; i < colors.length; i++) {
-                if (someCards.getColor(colors[i]).size() > 0) {
+            for (final String color : colors) {
+                if (someCards.getColor(color).size() > 0) {
                     n++;
                 }
             }
@@ -3485,12 +3485,12 @@ public class CardFactoryUtil {
                 return secondaryNum;
             }
         } else if (s[0].contains("LimitMin")) {
-            if(num > secondaryNum) {
+            if (num > secondaryNum) {
                 return num;
             } else {
                 return secondaryNum;
             }
-            
+
         } else {
             return num;
         }
@@ -3581,7 +3581,7 @@ public class CardFactoryUtil {
         final Input untap = new Input() {
             private static final long serialVersionUID = -2167059918040912025L;
 
-            private int stop = n;
+            private final int stop = n;
             private int count = 0;
 
             @Override

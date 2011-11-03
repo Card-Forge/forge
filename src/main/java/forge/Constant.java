@@ -98,14 +98,14 @@ public interface Constant {
     /**
      * The Interface Ability.
      */
-    public interface Ability {
+/*    public interface Ability {
 
-        /** The Triggered. */
+        *//** The Triggered. *//*
         String TRIGGERED = "Triggered";
 
-        /** The Activated. */
+        *//** The Activated. *//*
         String ACTIVATED = "Activated";
-    }
+    }*/
 
     /**
      * The Interface Phase.

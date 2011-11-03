@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.GameLossReason;
