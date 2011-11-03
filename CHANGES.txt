@@ -389,6 +389,21 @@ Fixes/Features:
 - Little fix Erayo Soratami Ascendant, etc.
 - update developer list
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- The parameters of ThisTurnCast, LastTurnCast and ThisTurnCast are now separated by underscore rather than space so that the named and notnamed properties can be used with them.
+- New xMath operators LimitMin and LimitMax. LimitMin.X will return the count if it's >= X or return X otherwise. LimitMax is the same but <= X.
+- Changed the default card size to small.
+- Update Maven antrun plugin.
+- Add jautodoc prefs for Eclipse
+- Fix antrun plugin version. Maven 3.0.3 now required for build
+- cleanup in SpellAbility.java
+- The keyword "Play with the top card of your library revealed." will no longer work outside the battlefield.
+- Necropotence will no longer show the names of the cards exiled face down.
+- Fixed Overburden.
+- Converted Psychic Purge to script.
+- Turned the ability of Quagnoth into a proper triggered ability.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -557,6 +572,10 @@ Temporal Distortion
 Akroma's Blessing
 Tooth and Claw
 Tombstone Stairwell
+Sift Through Sands
+Tolarian Winds
+Spreading Plague
+Metrognome
 
 
 end
