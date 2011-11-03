@@ -1,0 +1,10 @@
+Name:Metrognome
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Gnome | TokenTypes$ Artifact,Creature,Gnome | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$  Put a 1/1 colorless Gnome artifact creature token onto the battlefield.
+T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.YouDontCtrl | Execute$ TrigToken | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, put four 1/1 colorless Gnome artifact creature tokens onto the battlefield.
+SVar:TrigToken:DB$Token | TokenAmount$ 4 | TokenName$ Gnome | TokenTypes$ Artifact,Creature,Gnome | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/metrognome.jpg
+End
