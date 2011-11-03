@@ -306,7 +306,7 @@ class CustomLimited {
     /**
      * @param name the name to set
      */
-    private void setName(String name1) {
+    private void setName(String name) {
         this.name = name; // TODO: Add 0 to parameter's name.
     }
 }

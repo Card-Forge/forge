@@ -24,8 +24,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
     private Input input;
 
-    /** Constant <code>n=0</code>. */
-    private static int n = 0;
     private final Stack<Input> inputStack = new Stack<Input>();
     private final Stack<Input> resolvingStack = new Stack<Input>();
     private final LinkedList<Input> resolvingQueue = new LinkedList<Input>();

@@ -29,7 +29,6 @@ import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.CardList;
 import forge.MyRandom;
 import forge.card.CardRules;
 import forge.card.CardType;
@@ -96,10 +95,6 @@ public class DeckAnalysis extends javax.swing.JDialog {
     private JLabel jLabel2;
     private JButton jButtonOk;
     private final JFrame jF;
-    // private ButtonGroup buttonGroup1;
-
-    /** The filter card list. */
-    private CardList filterCardList;
 
     /** The deck. */
     private ItemPoolView<CardPrinted> deck;

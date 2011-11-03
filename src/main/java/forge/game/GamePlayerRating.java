@@ -7,12 +7,6 @@ package forge.game;
  */
 public class GamePlayerRating {
 
-    /** The has won the coin. */
-    private boolean hasWonTheCoin;
-
-    /** The turns made. */
-    private int turnsMade = 0;
-
     /** The opening hand size. */
     private int openingHandSize = 7;
 
