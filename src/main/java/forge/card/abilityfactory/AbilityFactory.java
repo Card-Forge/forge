@@ -808,6 +808,16 @@ public class AbilityFactory {
             }
         }
 
+        else if (api.equals("TwoPiles")) {
+            if (isAb) {
+                spellAbility = AbilityFactoryClash.createAbilityTwoPiles(this);
+            } else if (isSp) {
+                spellAbility = AbilityFactoryClash.createSpellTwoPiles(this);
+            } else if (isDb) {
+                spellAbility = AbilityFactoryClash.createDrawbackTwoPiles(this);
+            }
+        }
+
         else if (this.api.equals("Animate")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryAnimate.createAbilityAnimate(this);

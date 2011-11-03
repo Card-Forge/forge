@@ -801,7 +801,13 @@ public class AbilityFactorySacrifice {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        CardList list;
+        if (params.containsKey("Defined")) {
+            list = new CardList(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
+        }
+        else {
+            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        }
 
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
         if (remSacrificed) {
