@@ -6292,8 +6292,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        String[] incR = restriction.split("\\."); // Inclusive restrictions are
-                                                  // Card types
+        String[] incR = restriction.split("\\.",2); // Inclusive restrictions are
+                                                    // Card types
 
         if (incR[0].equals("Spell") && !isSpell()) {
             return false;
