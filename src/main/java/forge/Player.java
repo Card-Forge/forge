@@ -1386,22 +1386,6 @@ public abstract class Player extends GameEntity {
             sa.addCostToHashList(c, "Discarded");
         }
 
-        /*
-         * When a spell or ability an opponent controls causes you to discard
-         * Psychic Purge, that player loses 5 life.
-         */
-        if (c.getName().equals("Psychic Purge")) {
-            if (null != sa && !sa.getSourceCard().getController().equals(this)) {
-                SpellAbility ability = new Ability(c, "") {
-                    public void resolve() {
-                        sa.getSourceCard().getController().loseLife(5, c);
-                    }
-                };
-                ability.setStackDescription(c.getName() + " - " + sa.getSourceCard().getController() + " loses 5 life.");
-                AllZone.getStack().add(ability);
-            }
-        }
-
         AllZone.getGameAction().discardMadness(c);
 
         if ((c.hasKeyword("If a spell or ability an opponent controls causes "
