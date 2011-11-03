@@ -1,0 +1,13 @@
+Name:Goblin Machinist
+ManaCost:4 R
+Types:Creature Goblin
+Text:no text
+PT:0/5
+A:AB$ DigUntil | Cost$ 2 R | Valid$ Card.nonLand | ValidDescription$ nonland | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | FoundDestination$ Library | FoundLibraryPosition$ -1 | RememberFound$ True | SubAbility$ DBPump | Shuffle$ False | SpellDescription$ Reveal cards from the top of your library until you reveal a nonland card. CARDNAME gets +X/+0 until end of turn, where X is that card's converted mana cost. Put the revealed cards on the bottom of your library in any order.
+SVar:DBPump:DB$ Pump | NumAtt$ RCX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RCX:Remembered$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_machinist.jpg
+End

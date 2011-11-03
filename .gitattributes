@@ -3321,6 +3321,7 @@ res/cardsfolder/g/goblin_legionnaire.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_lookout.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_lore.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_lyre.txt -text
+res/cardsfolder/g/goblin_machinist.txt -text svneol=unset#text/plain
 res/cardsfolder/g/goblin_marshal.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_masons.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_matron.txt svneol=native#text/plain
