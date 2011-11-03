@@ -1489,6 +1489,7 @@ res/cardsfolder/c/combust.txt svneol=native#text/plain
 res/cardsfolder/c/command_of_unsummoning.txt svneol=native#text/plain
 res/cardsfolder/c/commander_eesha.txt svneol=native#text/plain
 res/cardsfolder/c/commander_greven_il_vec.txt svneol=native#text/plain
+res/cardsfolder/c/commando_raid.txt -text svneol=unset#text/plain
 res/cardsfolder/c/commune_with_nature.txt svneol=native#text/plain
 res/cardsfolder/c/complex_automaton.txt svneol=native#text/plain
 res/cardsfolder/c/composite_golem.txt svneol=native#text/plain
