@@ -1924,6 +1924,7 @@ res/cardsfolder/d/defender_of_law.txt svneol=native#text/plain
 res/cardsfolder/d/defender_of_the_order.txt svneol=native#text/plain
 res/cardsfolder/d/defense_grid.txt svneol=native#text/plain
 res/cardsfolder/d/defense_of_the_heart.txt svneol=native#text/plain
+res/cardsfolder/d/defensive_maneuvers.txt -text svneol=unset#text/plain
 res/cardsfolder/d/defensive_stance.txt svneol=native#text/plain
 res/cardsfolder/d/defiant_elf.txt svneol=native#text/plain
 res/cardsfolder/d/defiant_falcon.txt svneol=native#text/plain
