@@ -13,4 +13,6 @@ SVar:EbonXOpp:Count$OppLifeTotal/HalfUp
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebonblade_reaper.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/141.jpg
+Oracle:Whenever Ebonblade Reaper attacks, you lose half your life, rounded up.\nWhenever Ebonblade Reaper deals combat damage to a player, that player loses half his or her life, rounded up.\nMorph {3}{B}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End
