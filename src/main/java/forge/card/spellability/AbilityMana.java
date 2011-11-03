@@ -359,5 +359,11 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
         return abm.toUnsuppressedString().equals(this.toUnsuppressedString());
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return (41 * (41 + this.getType().hashCode()));
+    }
+
 } // end class Ability_Mana
 

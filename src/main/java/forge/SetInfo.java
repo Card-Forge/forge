@@ -115,12 +115,17 @@ public class SetInfo {
         } else {
             return false;
         }
+    }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return (41 * (41 + this.getCode().hashCode()));
     }
 
     /**
      * Gets the code.
-     *
+     * 
      * @return the code
      */
     public String getCode() {
@@ -129,8 +134,9 @@ public class SetInfo {
 
     /**
      * Sets the code.
-     *
-     * @param code the code to set
+     * 
+     * @param code
+     *            the code to set
      */
     public void setCode(final String code) {
         this.code = code; // TODO: Add 0 to parameter's name.
@@ -138,7 +144,7 @@ public class SetInfo {
 
     /**
      * Gets the rarity.
-     *
+     * 
      * @return the rarity
      */
     public String getRarity() {
@@ -147,8 +153,9 @@ public class SetInfo {
 
     /**
      * Sets the rarity.
-     *
-     * @param rarity the rarity to set
+     * 
+     * @param rarity
+     *            the rarity to set
      */
     public void setRarity(final String rarity) {
         this.rarity = rarity; // TODO: Add 0 to parameter's name.
@@ -156,7 +163,7 @@ public class SetInfo {
 
     /**
      * Gets the url.
-     *
+     * 
      * @return the url
      */
     public String getUrl() {
@@ -165,8 +172,9 @@ public class SetInfo {
 
     /**
      * Sets the url.
-     *
-     * @param url the url to set
+     * 
+     * @param url
+     *            the url to set
      */
     public void setUrl(final String url) {
         this.url = url; // TODO: Add 0 to parameter's name.
@@ -174,7 +182,7 @@ public class SetInfo {
 
     /**
      * Gets the pic count.
-     *
+     * 
      * @return the picCount
      */
     public int getPicCount() {
@@ -183,8 +191,9 @@ public class SetInfo {
 
     /**
      * Sets the pic count.
-     *
-     * @param picCount the picCount to set
+     * 
+     * @param picCount
+     *            the picCount to set
      */
     public void setPicCount(final int picCount) {
         this.picCount = picCount; // TODO: Add 0 to parameter's name.

@@ -51,7 +51,8 @@ public class FrozenCall<T> implements Thunk<T> {
      */
     /**
      * @return boolean
-     * @param obj Object
+     * @param obj
+     *            Object
      */
     @Override
     public final boolean equals(final Object obj) {
@@ -73,5 +74,11 @@ public class FrozenCall<T> implements Thunk<T> {
         }
 
         return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return 41 * (41 + this.args.hashCode());
     }
 }

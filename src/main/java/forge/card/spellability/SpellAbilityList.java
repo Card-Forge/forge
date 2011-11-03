@@ -150,4 +150,10 @@ public class SpellAbilityList {
         }
         return this.toString().equals(o.toString());
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return (41 * (41 + this.toString().hashCode()));
+    }
 }

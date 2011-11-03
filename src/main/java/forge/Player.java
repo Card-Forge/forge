@@ -2489,4 +2489,10 @@ public abstract class Player extends GameEntity {
             return false;
         }
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return (41 * (41 + getName().hashCode()));
+    }
 }

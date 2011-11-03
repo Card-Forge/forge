@@ -212,6 +212,7 @@ public class CardList implements Iterable<Card> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final boolean equals(final Object a) {
         if (a instanceof CardList) {
             CardList b = (CardList) a;
@@ -229,6 +230,11 @@ public class CardList implements Iterable<Card> {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return (41 * (41 + list.size() + list.hashCode()));
     }
 
     // removes one copy of that card

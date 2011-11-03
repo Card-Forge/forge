@@ -2208,107 +2208,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public String getAbilityText() {
         if (isInstant() || isSorcery()) {
-            String s = getSpellText();
-            StringBuilder sb = new StringBuilder();
-
-            // Give spellText line breaks for easier reading
-            sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
-
-            // NOTE:
-            if (sb.toString().contains(" (NOTE: ")) {
-                sb.insert(sb.indexOf("(NOTE: "), "\r\n");
-            }
-            if (sb.toString().contains("(NOTE: ") && sb.toString().endsWith(".)") && !sb.toString().endsWith("\r\n")) {
-                sb.append("\r\n");
-            }
-
-            // Add SpellAbilities
-            SpellAbility[] sa = getSpellAbility();
-            for (int i = 0; i < sa.length; i++) {
-                sb.append(sa[i].toString() + "\r\n");
-            }
-
-            // Add Keywords
-            ArrayList<String> kw = getKeyword();
-
-            // Triggered abilities
-            for (Trigger trig : getCharacteristics().getTriggers()) {
-                if (!trig.isSecondary()) {
-                    sb.append(trig.toString() + "\r\n");
-                }
-            }
-
-            // static abilities
-            for (StaticAbility stAb : getCharacteristics().getStaticAbilities()) {
-                String stAbD = stAb.toString();
-                if (!stAbD.equals("")) {
-                    sb.append(stAbD + "\r\n");
-                }
-            }
-
-            // Ripple + Dredge + Madness + CARDNAME is {color} + Recover.
-            for (int i = 0; i < kw.size(); i++) {
-                if ((kw.get(i).startsWith("Ripple") && !sb.toString().contains("Ripple"))
-                        || (kw.get(i).startsWith("Dredge") && !sb.toString().contains("Dredge"))
-                        || (kw.get(i).startsWith("Madness") && !sb.toString().contains("Madness"))
-                        || (kw.get(i).startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
-                        || (kw.get(i).startsWith("Recover") && !sb.toString().contains("Recover"))) {
-                    sb.append(kw.get(i).replace(":", " ")).append("\r\n");
-                }
-            }
-
-            // Changeling + CARDNAME can't be countered. + Cascade + Multikicker
-            for (int i = 0; i < kw.size(); i++) {
-                if ((kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains(
-                        "CARDNAME can't be countered."))
-                        || (kw.get(i).contains("Cascade") && !sb.toString().contains("Cascade"))
-                        || (kw.get(i).contains("Multikicker") && !sb.toString().contains("Multikicker"))) {
-                    sb.append(kw.get(i)).append("\r\n");
-                }
-            }
-
-            // Storm
-            if (hasKeyword("Storm") && !sb.toString().contains("Storm (When you ")) {
-                if (sb.toString().endsWith("\r\n\r\n")) {
-                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
-                }
-                sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
-                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
-                    sb.append(" You may choose new targets for the copies.");
-                }
-                sb.append(")\r\n");
-            }
-
-            // Replicate
-            for (String keyw : kw) {
-                if (keyw.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
-                    if (sb.toString().endsWith("\r\n\r\n")) {
-                        sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
-                    }
-                    sb.append(keyw);
-                    sb.append(" (When you cast this spell, copy it for each time you paid its replicate cost.");
-                    if (sb.toString().contains("Target") || sb.toString().contains("target")) {
-                        sb.append(" You may choose new targets for the copies.");
-                    }
-                    sb.append(")\r\n");
-                }
-            }
-
-            for (String keyw : kw) {
-                if (keyw.startsWith("Haunt")) {
-                    if (sb.toString().endsWith("\r\n\r\n")) {
-                        sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
-                    }
-                    sb.append("Haunt (");
-                    if (isCreature()) {
-                        sb.append("When this creature dies, exile it haunting target creature.");
-                    } else {
-                        sb.append("When this spell card is put into a graveyard after resolving, ");
-                        sb.append("exile it haunting target creature.");
-                    }
-                    sb.append(")\r\n");
-                }
-            }
+            StringBuilder sb = abilityTextInstantSorcery();
 
             if (haunting != null) {
                 sb.append("Haunting: ").append(haunting);
@@ -2451,6 +2351,115 @@ public class Card extends GameEntity implements Comparable<Card> {
          */
         return sb.toString().replaceAll("CARDNAME", getName()).trim();
     } // getText()
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    private StringBuilder abilityTextInstantSorcery() {
+        String s = getSpellText();
+        StringBuilder sb = new StringBuilder();
+
+        // Give spellText line breaks for easier reading
+        sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
+
+        // NOTE:
+        if (sb.toString().contains(" (NOTE: ")) {
+            sb.insert(sb.indexOf("(NOTE: "), "\r\n");
+        }
+        if (sb.toString().contains("(NOTE: ") && sb.toString().endsWith(".)") && !sb.toString().endsWith("\r\n")) {
+            sb.append("\r\n");
+        }
+
+        // Add SpellAbilities
+        SpellAbility[] sa = getSpellAbility();
+        for (int i = 0; i < sa.length; i++) {
+            sb.append(sa[i].toString() + "\r\n");
+        }
+
+        // Add Keywords
+        ArrayList<String> kw = getKeyword();
+
+        // Triggered abilities
+        for (Trigger trig : getCharacteristics().getTriggers()) {
+            if (!trig.isSecondary()) {
+                sb.append(trig.toString() + "\r\n");
+            }
+        }
+
+        // static abilities
+        for (StaticAbility stAb : getCharacteristics().getStaticAbilities()) {
+            String stAbD = stAb.toString();
+            if (!stAbD.equals("")) {
+                sb.append(stAbD + "\r\n");
+            }
+        }
+
+        // Ripple + Dredge + Madness + CARDNAME is {color} + Recover.
+        for (int i = 0; i < kw.size(); i++) {
+            if ((kw.get(i).startsWith("Ripple") && !sb.toString().contains("Ripple"))
+                    || (kw.get(i).startsWith("Dredge") && !sb.toString().contains("Dredge"))
+                    || (kw.get(i).startsWith("Madness") && !sb.toString().contains("Madness"))
+                    || (kw.get(i).startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
+                    || (kw.get(i).startsWith("Recover") && !sb.toString().contains("Recover"))) {
+                sb.append(kw.get(i).replace(":", " ")).append("\r\n");
+            }
+        }
+
+        // Changeling + CARDNAME can't be countered. + Cascade + Multikicker
+        for (int i = 0; i < kw.size(); i++) {
+            if ((kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains(
+                    "CARDNAME can't be countered."))
+                    || (kw.get(i).contains("Cascade") && !sb.toString().contains("Cascade"))
+                    || (kw.get(i).contains("Multikicker") && !sb.toString().contains("Multikicker"))) {
+                sb.append(kw.get(i)).append("\r\n");
+            }
+        }
+
+        // Storm
+        if (hasKeyword("Storm") && !sb.toString().contains("Storm (When you ")) {
+            if (sb.toString().endsWith("\r\n\r\n")) {
+                sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+            }
+            sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
+            if (sb.toString().contains("Target") || sb.toString().contains("target")) {
+                sb.append(" You may choose new targets for the copies.");
+            }
+            sb.append(")\r\n");
+        }
+
+        // Replicate
+        for (String keyw : kw) {
+            if (keyw.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                }
+                sb.append(keyw);
+                sb.append(" (When you cast this spell, copy it for each time you paid its replicate cost.");
+                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
+                    sb.append(" You may choose new targets for the copies.");
+                }
+                sb.append(")\r\n");
+            }
+        }
+
+        for (String keyw : kw) {
+            if (keyw.startsWith("Haunt")) {
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                }
+                sb.append("Haunt (");
+                if (isCreature()) {
+                    sb.append("When this creature dies, exile it haunting target creature.");
+                } else {
+                    sb.append("When this spell card is put into a graveyard after resolving, ");
+                    sb.append("exile it haunting target creature.");
+                }
+                sb.append(")\r\n");
+            }
+        }
+        return sb;
+    }
 
     /**
      * <p>

@@ -96,8 +96,9 @@ public abstract class Trigger {
 
     /**
      * Sets the map params.
-     *
-     * @param mapParams the mapParams to set
+     * 
+     * @param mapParams
+     *            the mapParams to set
      */
     public final void setMapParams(final HashMap<String, String> mapParams) {
         this.mapParams = mapParams; // TODO: Add 0 to parameter's name.
@@ -581,6 +582,12 @@ public abstract class Trigger {
         return this.getId() == ((Trigger) o).getId();
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return 41 * (41 + this.getId());
+    }
+
     /**
      * <p>
      * performTest.
@@ -670,7 +677,7 @@ public abstract class Trigger {
 
     /**
      * Checks if is intrinsic.
-     *
+     * 
      * @return the isIntrinsic
      */
     public boolean isIntrinsic() {
@@ -679,8 +686,9 @@ public abstract class Trigger {
 
     /**
      * Sets the intrinsic.
-     *
-     * @param isIntrinsic the isIntrinsic to set
+     * 
+     * @param isIntrinsic
+     *            the isIntrinsic to set
      */
     public void setIntrinsic(final boolean isIntrinsic) {
         this.isIntrinsic = isIntrinsic; // TODO: Add 0 to parameter's name.
@@ -688,7 +696,7 @@ public abstract class Trigger {
 
     /**
      * Gets the run params.
-     *
+     * 
      * @return the runParams
      */
     public Map<String, Object> getRunParams() {
@@ -697,8 +705,9 @@ public abstract class Trigger {
 
     /**
      * Sets the run params.
-     *
-     * @param runParams the runParams to set
+     * 
+     * @param runParams
+     *            the runParams to set
      */
     public void setRunParams(final Map<String, Object> runParams) {
         this.runParams = runParams; // TODO: Add 0 to parameter's name.
@@ -706,7 +715,7 @@ public abstract class Trigger {
 
     /**
      * Gets the overriding ability.
-     *
+     * 
      * @return the overridingAbility
      */
     public SpellAbility getOverridingAbility() {
@@ -715,8 +724,9 @@ public abstract class Trigger {
 
     /**
      * Sets the overriding ability.
-     *
-     * @param overridingAbility the overridingAbility to set
+     * 
+     * @param overridingAbility
+     *            the overridingAbility to set
      */
     public void setOverridingAbility(final SpellAbility overridingAbility) {
         this.overridingAbility = overridingAbility; // TODO: Add 0 to
@@ -725,7 +735,7 @@ public abstract class Trigger {
 
     /**
      * Gets the id.
-     *
+     * 
      * @return the id
      */
     public int getId() {
@@ -734,8 +744,9 @@ public abstract class Trigger {
 
     /**
      * Sets the id.
-     *
-     * @param id the id to set
+     * 
+     * @param id
+     *            the id to set
      */
     public void setId(final int id) {
         this.id = id; // TODO: Add 0 to parameter's name.
