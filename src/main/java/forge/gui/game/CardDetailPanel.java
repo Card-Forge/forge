@@ -24,6 +24,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardContainer;
 import forge.Constant.Zone;
+import forge.Constant;
 import forge.Counters;
 import forge.GameEntity;
 import forge.GuiDisplayUtil;
@@ -270,6 +271,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
 
         // top revealed
         if (card.hasKeyword("Play with the top card of your library revealed.") && (card.getController() != null)
+                && card.isInZone(Constant.Zone.Battlefield)
                 && !card.getController().getZone(Zone.Library).isEmpty()) {
             area.append("\r\nTop card: ");
             area.append(card.getController().getCardsIn(Zone.Library, 1));
