@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Triggered.SharesColorWith+Other | NoRegen$ True
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_plague.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/125.jpg
