@@ -26,8 +26,6 @@ import forge.gui.input.Input;
  */
 public abstract class SpellAbility {
 
-    /** The choices_made. */
-    private Object[] choicesMade; // open ended Casting choice storage
     // choices for constructor isPermanent argument
     /** Constant <code>Spell=0</code>. */
     private static final int SPELL = 0;
@@ -75,8 +73,6 @@ public abstract class SpellAbility {
     private int charmNumber;
     private int minCharmNumber;
     private final ArrayList<SpellAbility> charmChoices = new ArrayList<SpellAbility>();
-    // private ArrayList<SpellAbility> charmChoicesMade = new
-    // ArrayList<SpellAbility>();
 
     private Input beforePayMana;
     private Input afterResolve;
