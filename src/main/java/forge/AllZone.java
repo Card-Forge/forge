@@ -512,11 +512,11 @@ public final class AllZone {
             return false;
         }
 
-        if (zone.equals(Constant.Zone.Stack) && gameState.getStackZone().contains(c)) {
-            return true;
-        }
-
-        else {
+        if (zone.equals(Constant.Zone.Stack)) {
+            if (gameState.getStackZone().contains(c)) {
+                return true;
+            }
+        } else {
             for (Player p : gameState.getPlayers()) {
                 if (p.getZone(zone).contains(c)) {
                     return true;
