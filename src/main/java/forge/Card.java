@@ -6442,8 +6442,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!equippedBy.contains(source) && !getEnchantedBy().contains(source)) {
                 return false;
             }
-        } else if (property.startsWith("Attached")) {
+        } else if (property.equals("Attached")) {
             if (!equipping.contains(source) && !source.equals(enchanting)) {
+                return false;
+            }
+        } else if (property.startsWith("AttachedTo")) {
+            String restriction = property.split("AttachedTo ")[1];
+            if (enchanting == null || !enchanting.isValid(restriction, sourceController, source)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
