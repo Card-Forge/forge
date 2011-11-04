@@ -7380,6 +7380,7 @@ res/cardsfolder/s/skinshifter.txt -text
 res/cardsfolder/s/skinthinner.txt svneol=native#text/plain
 res/cardsfolder/s/skinwing.txt svneol=native#text/plain
 res/cardsfolder/s/skirge_familiar.txt svneol=native#text/plain
+res/cardsfolder/s/skirk_commando.txt -text svneol=unset#text/plain
 res/cardsfolder/s/skirk_drill_sergeant.txt -text
 res/cardsfolder/s/skirk_fire_marshal.txt svneol=native#text/plain
 res/cardsfolder/s/skirk_marauder.txt svneol=native#text/plain
