@@ -1,4 +1,4 @@
-Forge Beta: ##-##-2011 ver 1.1.# rev #####
+Forge Beta: 11-04-2011 ver 1.1.7 rev 11767
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
@@ -429,6 +429,25 @@ It likely can't handle all cards with things like this yet, but should be easy t
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed putting cards in alternate states into the library (Grasp of Phantasms on an Ironfang for example)
+- Added a default player to getAttackingPlayer (the player whose turn it is), if the variable has not been set.
+- Added a default player to getDefendingPlayer (the player whose turn it is not), if the variable has not been set.
+- Removing accidentally committed Convoke skeleton.
+- Fixed Hired Muscle.
+- Fixed Counterbore.
+- Fixed similar cards.
+- Updated FSkin with comments and finished TODOs.
+- Simplified color palette for skins
+- Added support for alpha channel in skin colors
+- Updated files affected by color palette change
+- Previous commit incomplete, fixed here.
+- Added "TriggerZones$ Battlefield" to some more flip cards.
+- Added even more "TriggerZones$ Battlefield" to some flip cards.
+- Added LQ pic URL to Stone Idol Trap.
+- Added LQ pic URLs to the new flipped cards.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -615,6 +634,9 @@ Gustcloak Savior
 Gustcloak Sentinel
 Saproling Burst
 Stone Idol Trap
+Leery Fogbeast
+Mistform Mask
+Mistform Wall
 
 
 end
