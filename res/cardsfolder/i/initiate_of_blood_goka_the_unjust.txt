@@ -4,7 +4,7 @@ Types:Creature Ogre Shaman
 Text:no text
 PT:2/2
 A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn. | NumDmg$ 1 | RememberTargets$ True | SpellDescription$ CARDNAME deals 1 damage to target creature that was dealt damage this turn.
-T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ TrigFlip | TriggerDescription$ When that creature dies this turn, flip CARDNAME.
+T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ When that creature dies this turn, flip CARDNAME.
 SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self | SubAbility$ TrigCleanup
 T:Mode$Phase | Phase$ End of Turn | Static$ True | Execute$ TrigCleanup | Secondary$ True | TriggerDescription$ Forgets remembered cards at eot.
 SVar:TrigCleanup:DB$Cleanup | ClearRemembered$ True

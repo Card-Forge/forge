@@ -4,7 +4,7 @@ Types:Legendary Creature Human Monk
 Text:no text
 PT:4/4
 K:CARDNAME can't block.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies , return it to the battlefield flipped.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield flipped.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ TrigFlip
 SVar:TrigFlip:DB$ChangeState | Defined$ Self
 SVar:Rarity:Rare

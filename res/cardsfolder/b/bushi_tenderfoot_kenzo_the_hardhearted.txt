@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 Text:no text
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When a creature dealt damage by CARDNAME this turn dies, flip CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ When a creature dealt damage by CARDNAME this turn dies, flip CARDNAME.
 SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 AlternateMode:Flip
