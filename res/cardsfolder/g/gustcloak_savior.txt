@@ -9,4 +9,5 @@ SVar:TrigUntapRemove:AB$ Untap | Cost$ 0 | Defined$ TriggeredAttacker | SubAbili
 SVar:DBRemoveCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttacker
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_savior.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/36.jpg
 End

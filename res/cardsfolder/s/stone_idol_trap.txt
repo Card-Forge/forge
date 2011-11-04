@@ -8,4 +8,5 @@ SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ E
 K:CostChange:Player:Less:X:Self:All:All:NoSpecial
 SVar:X:Count$Valid Creature.attacking
 SVar:Rarity:Rare
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/93.jpg
 End

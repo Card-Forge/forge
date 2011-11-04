@@ -10,4 +10,5 @@ SVar:RCX:Remembered$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_machinist.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/204.jpg
 End
