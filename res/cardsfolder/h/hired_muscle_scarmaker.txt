@@ -23,8 +23,8 @@ Text:no text
 PT:4/4
 A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ Fear | Tgt$ TgtC | SpellDescription$ Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:Rarity:Uncommon
-# SVar:Picture:http://www.wizards.com/global/images/magic/general/scarmaker.jpg
-# This link 404s
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/scarmaker.jpg
+# This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/168.jpg
 Oracle:Remove a ki counter from Scarmaker: Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 

@@ -18,10 +18,10 @@ ManaCost:2 W
 Colors:white
 Types:Legendary Enchantment
 Text:no text
-S:Mode$Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to creatures you control.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to creatures you control.
 SVar:Rarity:Rare
-#SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_tails_essence.jpg
-#This link 404s
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/rune_tails_essence.jpg
+# This link may be a temporary solution and could change in the near future.
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/166.jpg
 Oracle:Prevent all damage that would be dealt to creatures you control.
 

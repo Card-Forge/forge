@@ -3,7 +3,7 @@ ManaCost:B B B
 Types:Legendary Creature Ogre Monk
 Text:no text
 PT:2/4
-T:Mode$Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if three or more creatures died this turn, flip CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if three or more creatures died this turn, flip CARDNAME.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare
@@ -19,11 +19,11 @@ ManaCost:B B B
 Colors:black
 Types:Legendary Enchantment
 Text:no text
-T:Mode$Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredPlayer | SacValid$ Creature
 SVar:Rarity:Rare
-#SVar:Picture:http://www.wizards.com/global/images/magic/general/kuons_essence.jpg
-#This link 404s.
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/kuons_essence.jpg
+# This link may be a temporary solution and could change in the near future.
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/168.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices a creature.
 

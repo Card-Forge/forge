@@ -23,8 +23,8 @@ Text:no text
 S:Mode$ Continuous | AffectedCards$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddAbility$ ABPump | Description$ Creatures you control get +2/+2 and have flying and "R: This creature gets +1/+0 until end of turn."
 SVar:ABPump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.
 SVar:Rarity:Rare
-# SVar:Picture:http://www.wizards.com/global/images/magic/general/homuras_essence.jpg
-# This link 404s
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homuras_essence.jpg
+# This link may be a temporary solution and could change in the near future.
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/169.jpg
 Oracle:Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."
 
