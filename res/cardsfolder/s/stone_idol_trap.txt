@@ -8,6 +8,7 @@ SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ E
 K:CostChange:Player:Less:X:Self:All:All:NoSpecial
 SVar:X:Count$Valid Creature.attacking
 SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_idol_trap.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/93.jpg
 Oracle:Stone Idol Trap costs {1} less to cast for each attacking creature.\nPut a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.
 End
