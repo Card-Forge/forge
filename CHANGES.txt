@@ -2,10 +2,10 @@ Forge Beta: 11-04-2011 ver 1.1.7 rev 11767
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-#### cards in total.
+9597 cards in total.
 
 
-
+You can now download the quest opponent icon pics, pet pics and the token pics using the New Game -> Menu -> Download Quest Images. We will no longer need to provide a link for these pics with the beta release message on our forum.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
@@ -448,195 +448,208 @@ It likely can't handle all cards with things like this yet, but should be easy t
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- Preparing the changes.txt file for the next bi-weekly build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+Doublestrike
+Friar Sol
+Hellfish
+Jeff Wadsworth
+Marc
+Rob Cashwalker
+Skiera
+Slapshot5
+Sloth
+SoulStorm
+Chris H
 
 
 Added many cards, including:
 
-Grid Monitor
-Steel Golem
-Parallel Lives
-Silence
-Grand Abolisher
-AEther Storm
-Llawan, Cephalid Empress
-Dwarven Recruiter
-Krosan Vorine
-Ethersworn Canonist
-Dream Thief
-Goblin Cohort
-Hotheaded Giant
-Mogg Conscripts
-Soul Reap
-Endless Swarm
-Enduring Ideal
-Eternal Dominion
-Neverending Torment
-City of Solitude
-Dosan the Falling Leaf
-Teferi, Mage of Zhalfir
-Skyshroud Condor
-Talara's Battalion
-Arcane Laboratory
-Rule of Law
-Alpha Status
-Giant Ambush Beetle
-Orcish Squatters
-Touch of Vitae
-Grappling Hook
-Rampant Elephant
-Trumpeting Armodon
-Nevermore
-Voidstone Gargoyle
-Phyrexian Revoker
-Declaration of Naught
-Nature's Kiss
-Telemin Performance
-Skaab Ruinator
-Manor Gargoyle
-Patrol Hound
-Patchwork Gnomes
-Sandstone Deadfall
-Mudhole
-Tombfire
-Gorilla Titan
-Garruk's Horde
-Future Sight
-Magus of the Future
-Yawgmoth's Agenda
-Bushi Tenderfoot / Kenzo the Hardhearted
-Cloistered Youth / Unholy Fiend
-Daybreak Ranger / Nightfall Predator
-Garruk Relentless / Garruk, the Veil-Cursed
-Gatstaf Shepherd / Gatstaf Howler
-Moonmist
-Screeching Bat / Stalking Vampire
-Thraben Sentry / Thraben Militia
-Grizzled Outcasts / Krallenhorde Wantons
-Villagers of Estwald / Howlpack of Estwald
-Budoka Pupil / Ichiga, Who Topples Oaks
-Callow Jushi / Jaraku the Interloper
-Budoka Gardener / Dokai, Weaver of Life
-Cunning Bandit / Azamuki, Treachery Incarnate
-Faithful Squire / Kaiso, Memory of Loyalty
-Hired Muscle / Scarmaker
-Hanweir Watchkeep / Bane of Hanweir
-Reckless Waif / Merciless Predator
-Tormented Pariah / Rampaging Werewolf
-Erayo, Soratami Ascendant / Erayo's Essence
-Initiate of Blood / Goka the Unjust
-Homura, Human Ascendant / Homura's Essence
-Jushi Apprentice / Tomoya the Revealer
-Mayor of Avabruck / HowlPack Alpha
-Instigator Gang / Wildblood Pack
-Nezumi Graverobber / Nighteyes the Desecrator
-Nezumi Shortfang / Stabwhisker the Odious
-Yawgmoth's Will
-Sigil of Sleep
-Urza's Incubator
-Jolrael, Empress of Beasts
-Brutalizer Exarch
-Panacea
-Kuon, Ogre Ascendant / Kuon's Essence
-Orochi Eggwatcher / Shidako Broodmistress
-Rune-Tail, Kitsune Ascendant / Rune-Tail's Essence
-Student of Elements / Tobita, Master of Wind
-Breath of Darigaaz
-Canopy Surge
-Ludevic's Test Subject / Ludevic's Abomination
-Bloodline Keeper / Lord of Lineage
-Volrath's Laboratory
-Spirit Mirror
-Village Ironsmith / Ironfang
-Aven Windreader
-Skyshroud Ranger
-Devouring Rage
-Hanabi Blast
-Hikari, Twilight Guardian
-Explorer's Scope
-Distorting Lens
-Cauldron Dance
-Voice of All
 Addle
-Crosis, the Purger
-Order of the Stars
-Energy Chamber
-Soratami Seer
-Junkyo Bell
-Early Harvest
-Swirling Spriggan
-Madblind Mountain
-Myr Mindservant
-Unerring Sling
+AEther Storm
 Afiya Grove
-Kinscaer Harpoonist
-Sapphire Charm
-Ivory Charm
-Burning Palm Efreet
-Prismatic Lace
-Prismatic Boon
-Kukemssa Serpent
-Lure of Prey
-Collapsing Borders
+Akroma's Blessing
+Alpha Status
+Arcane Laboratory
+Auramancer's Guise
+Aven Windreader
 Barreling Attack
+Bloodline Keeper / Lord of Lineage
+Breath of Darigaaz
+Brigid, Hero of Kinsbaile
+Brutalizer Exarch
+Budoka Gardener / Dokai, Weaver of Life
+Budoka Pupil / Ichiga, Who Topples Oaks
+Burning Palm Efreet
+Bushi Tenderfoot / Kenzo the Hardhearted
+Callow Jushi / Jaraku the Interloper
+Canopy Surge
+Cauldron Dance
 Cautery Sliver
 Circle of Affliction
-Ovinize
-Pouncing Wurm
-Utopia Sprawl
-Might of the Nephilim
-Fertile Imagination
-Evil Twin
-Ulvenwald Mystics / Ulvenwald Primordials
-Jotun Owl Keeper
-Varchild's War-Riders
-Hypnotic Cloud
-Loafing Giant
-Metathran Aerostat
-Orim's Touch
-Grief Tyrrant
-Overload
-Probe
-Kaalia of the Vast
-Tariel, Reckoner of Souls
-Pure Reflection
-Scouting Trek
-Tidal Visionary
-Slimy Kavu
+City of Solitude
+Cloistered Youth / Unholy Fiend
 Coalition Victory
-Vicious Shadows
-Brigid, Hero of Kinsbaile
-Spinal Embrace
-Savage Offensive
-Temporal Distortion
-Akroma's Blessing
-Tooth and Claw
-Tombstone Stairwell
-Sift Through Sands
-Tolarian Winds
-Spreading Plague
-Metrognome
-Liliana of the Veil
+Collapsing Borders
 Commando Raid
+Crosis, the Purger
+Cunning Bandit / Azamuki, Treachery Incarnate
+Daybreak Ranger / Nightfall Predator
+Declaration of Naught
 Defensive Maneuvers
-Savaen Elves
-Miracle Worker
+Devouring Rage
+Distorting Lens
+Dosan the Falling Leaf
+Dream Thief
+Dwarven Recruiter
+Early Harvest
 Ebonblade Reaper
-Auramancer's Guise
-Umbra Mystic
-Golem-Skin Gauntlets
+Endless Swarm
+Enduring Ideal
+Energy Chamber
+Erayo, Soratami Ascendant / Erayo's Essence
+Eternal Dominion
+Ethersworn Canonist
+Evil Twin
+Explorer's Scope
+Faithful Squire / Kaiso, Memory of Loyalty
+Fertile Imagination
+Future Sight
+Garruk Relentless / Garruk, the Veil-Cursed
+Garruk's Horde
+Gatstaf Shepherd / Gatstaf Howler
+Giant Ambush Beetle
+Goblin Cohort
 Goblin Machinist
+Golem-Skin Gauntlets
+Gorilla Titan
+Grand Abolisher
+Grappling Hook
+Grid Monitor
+Grief Tyrrant
+Grizzled Outcasts / Krallenhorde Wantons
 Gustcloak Savior
 Gustcloak Sentinel
-Saproling Burst
-Stone Idol Trap
+Hanabi Blast
+Hanweir Watchkeep / Bane of Hanweir
+Hikari, Twilight Guardian
+Hired Muscle / Scarmaker
+Homura, Human Ascendant / Homura's Essence
+Hotheaded Giant
+Hypnotic Cloud
+Initiate of Blood / Goka the Unjust
+Instigator Gang / Wildblood Pack
+Ivory Charm
+Jolrael, Empress of Beasts
+Jotun Owl Keeper
+Junkyo Bell
+Jushi Apprentice / Tomoya the Revealer
+Kaalia of the Vast
+Kinscaer Harpoonist
+Krosan Vorine
+Kukemssa Serpent
+Kuon, Ogre Ascendant / Kuon's Essence
 Leery Fogbeast
+Liliana of the Veil
+Llawan, Cephalid Empress
+Loafing Giant
+Ludevic's Test Subject / Ludevic's Abomination
+Lure of Prey
+Madblind Mountain
+Magus of the Future
+Manor Gargoyle
+Mayor of Avabruck / HowlPack Alpha
+Metathran Aerostat
+Metrognome
+Might of the Nephilim
+Miracle Worker
 Mistform Mask
 Mistform Wall
+Mogg Conscripts
+Moonmist
+Mudhole
+Myr Mindservant
+Nature's Kiss
+Neverending Torment
+Nevermore
+Nezumi Graverobber / Nighteyes the Desecrator
+Nezumi Shortfang / Stabwhisker the Odious
+Orcish Squatters
+Order of the Stars
+Orim's Touch
+Orochi Eggwatcher / Shidako Broodmistress
+Overload
+Ovinize
+Panacea
+Parallel Lives
+Patchwork Gnomes
+Patrol Hound
+Phyrexian Revoker
+Pouncing Wurm
+Prismatic Boon
+Prismatic Lace
+Probe
+Pure Reflection
+Rampant Elephant
+Reckless Waif / Merciless Predator
+Rule of Law
+Rune-Tail, Kitsune Ascendant / Rune-Tail's Essence
+Sandstone Deadfall
+Sapphire Charm
+Saproling Burst
+Savaen Elves
+Savage Offensive
+Scouting Trek
+Screeching Bat / Stalking Vampire
+Sift Through Sands
+Sigil of Sleep
+Silence
+Skaab Ruinator
+Skyshroud Condor
+Skyshroud Ranger
+Slimy Kavu
+Soratami Seer
+Soul Reap
+Spinal Embrace
+Spirit Mirror
+Spreading Plague
+Steel Golem
+Stone Idol Trap
+Student of Elements / Tobita, Master of Wind
+Swirling Spriggan
+Talara's Battalion
+Tariel, Reckoner of Souls
+Teferi, Mage of Zhalfir
+Telemin Performance
+Temporal Distortion
+Thraben Sentry / Thraben Militia
+Tidal Visionary
+Tolarian Winds
+Tombfire
+Tombstone Stairwell
+Tooth and Claw
+Tormented Pariah / Rampaging Werewolf
+Touch of Vitae
+Trumpeting Armodon
+Ulvenwald Mystics / Ulvenwald Primordials
+Umbra Mystic
+Unerring Sling
+Urza's Incubator
+Utopia Sprawl
+Varchild's War-Riders
+Vicious Shadows
+Village Ironsmith / Ironfang
+Villagers of Estwald / Howlpack of Estwald
+Voice of All
+Voidstone Gargoyle
+Volrath's Laboratory
+Yawgmoth's Agenda
+Yawgmoth's Will
 
 
 end
