@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ 2 W W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target enchantment. Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles his or her library.
-SVar:DBChangeZoneAll:DB$ChangeZoneAll | ChangeType$ Remembered.sameName | DefinedPlayer$ TargetedController | Origin$ Graveyard,Hand,Library | Destination$ Exile | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBChangeZoneAll:DB$ChangeZoneAll | ChangeType$ Remembered.sameName+YouDontCtrl | DefinedPlayer$ TargetedController | Origin$ Graveyard,Hand,Library | Destination$ Exile | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scour.jpg
