@@ -6888,6 +6888,7 @@ res/cardsfolder/s/saprazzan_cove.txt -text
 res/cardsfolder/s/saprazzan_heir.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_raider.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_skerry.txt svneol=native#text/plain
+res/cardsfolder/s/saproling_burst.txt -text
 res/cardsfolder/s/sapseep_forest.txt svneol=native#text/plain
 res/cardsfolder/s/sarcatog.txt svneol=native#text/plain
 res/cardsfolder/s/sarcomancy.txt svneol=native#text/plain
@@ -7921,6 +7922,7 @@ res/cardsfolder/s/stone_calendar.txt svneol=native#text/plain
 res/cardsfolder/s/stone_catapult.txt svneol=native#text/plain
 res/cardsfolder/s/stone_giant.txt svneol=native#text/plain
 res/cardsfolder/s/stone_golem.txt svneol=native#text/plain
+res/cardsfolder/s/stone_idol_trap.txt -text
 res/cardsfolder/s/stone_kavu.txt svneol=native#text/plain
 res/cardsfolder/s/stone_rain.txt svneol=native#text/plain
 res/cardsfolder/s/stone_seeder_hierophant.txt svneol=native#text/plain

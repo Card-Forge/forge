@@ -1,0 +1,11 @@
+Name:Stone Idol Trap
+ManaCost:5 R
+Types:Instant Trap
+Text:CARDNAME costs 1 less to cast for each attacking creature.
+A:SP$ Token | Cost$ 5 R | TokenAmount$ 1 | TokenName$ Construct | TokenTypes$ Artifact,Creature,Construct | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 6 | TokenToughness$ 12 |  RememberTokens$ True | SubAbility$ DelTrig | TokenKeywords$ Trample | SpellDescription$ Put a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.
+SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ Exile Construct at the beginning of your next end step.
+SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.IsRemembered
+K:CostChange:Player:Less:X:Self:All:All:NoSpecial
+SVar:X:Count$Valid Creature.attacking
+SVar:Rarity:Rare
+End
