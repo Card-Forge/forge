@@ -404,6 +404,31 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed two more cards that needed a DefinedPlayer parameter (note that Jester's Mask still does not work).
+- add an AF for "Separate cards into two piles". It has params for:
+* Separator
+* Chooser
+* Target/Defined Player
+* ValidCards
+* ChosenPile (gives the a DB$ XXXX), and it performs that ability on the Chosen Pile (Like SacrificeAll)
+It likely can't handle all cards with things like this yet, but should be easy to build on.
+- Added LQ pic URLs to Ulvenwald Mystics / Ulvenwald Primordials.
+- convert Do or Die to script
+- checkstyle fixes
+- Fixed Mentor of the Meek
+- changed Constants and NewConstants from Interfaces to static classes.
+- a few more cleanups
+- Fixed a possible NPE in isCardInZone.
+- Little fixes and updates in card text files.
+- fix hashcodes
+- Hide old deck generators from New Game gui
+- Converted Skulking Knight to BecomesTarget trigger.
+- Added the property "AttachedTo XXX" to hasProperty.
+- Fixed Devout Harpist.
+- Updated token image download list.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -576,6 +601,20 @@ Sift Through Sands
 Tolarian Winds
 Spreading Plague
 Metrognome
+Liliana of the Veil
+Commando Raid
+Defensive Maneuvers
+Savaen Elves
+Miracle Worker
+Ebonblade Reaper
+Auramancer's Guise
+Umbra Mystic
+Golem-Skin Gauntlets
+Goblin Machinist
+Gustcloak Savior
+Gustcloak Sentinel
+Saproling Burst
+Stone Idol Trap
 
 
 end
