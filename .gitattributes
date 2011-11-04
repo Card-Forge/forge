@@ -6213,6 +6213,7 @@ res/cardsfolder/p/psychic_possession.txt -text
 res/cardsfolder/p/psychic_purge.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_spear.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_surgery.txt svneol=native#text/plain
+res/cardsfolder/p/psychic_trance.txt -text svneol=unset#text/plain
 res/cardsfolder/p/psychic_venom.txt svneol=native#text/plain
 res/cardsfolder/p/psychosis_crawler.txt svneol=native#text/plain
 res/cardsfolder/p/psychotic_fury.txt svneol=native#text/plain
