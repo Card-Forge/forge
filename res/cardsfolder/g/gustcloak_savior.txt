@@ -10,4 +10,5 @@ SVar:DBRemoveCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttacker
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_savior.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/36.jpg
+Oracle:Flying\nWhenever a creature you control becomes blocked, you may untap that creature and remove it from combat.
 End
