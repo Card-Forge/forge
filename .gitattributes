@@ -5186,6 +5186,7 @@ res/cardsfolder/m/mistform_shrieker.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_skyreaver.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_stalker.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_ultimus.txt svneol=native#text/plain
+res/cardsfolder/m/mistform_wall.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mistmeadow_skulk.txt svneol=native#text/plain
 res/cardsfolder/m/mistmeadow_witch.txt svneol=native#text/plain
 res/cardsfolder/m/mistral_charger.txt svneol=native#text/plain
