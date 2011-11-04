@@ -231,7 +231,7 @@ public class Combat {
         if (attackingPlayer != null) {
             return attackingPlayer;
         }
-        else return AllZone.getPhase().getPriorityPlayer();
+        else return AllZone.getPhase().getPlayerTurn();
     }
 
     /**
@@ -242,7 +242,10 @@ public class Combat {
      * @return a {@link forge.Player} object.
      */
     public final Player getDefendingPlayer() {
-        return defendingPlayer;
+        if (attackingPlayer != null) {
+            return defendingPlayer;
+        }
+        else return AllZone.getPhase().getPlayerTurn().getOpponent();
     }
 
     /**
