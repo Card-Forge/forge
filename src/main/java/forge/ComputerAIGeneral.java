@@ -3,10 +3,12 @@ package forge;
 import static forge.error.ErrorViewer.showError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -88,6 +90,8 @@ public class ComputerAIGeneral implements Computer {
     private SpellAbility[] getMain1() {
         // Card list of all cards to consider
         CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+        
+        final boolean hasACardGivingHaste = hasACardGivingHaste();
 
         if (AllZone.getComputerPlayer().getManaPool().isEmpty()) {
             hand = hand.filter(new CardListFilter() {
@@ -102,8 +106,8 @@ public class ComputerAIGeneral implements Computer {
                         return true;
                     }
 
-                    if (c.isCreature() && (c.hasKeyword("Haste")) || c.hasKeyword("Exalted")) {
-                        return true;
+                    if (c.isCreature() && (hasACardGivingHaste || c.hasKeyword("Haste")) || c.hasKeyword("Exalted")) {
+                            return true;
                     }
 
                     // get all cards the computer controls with BuffedBy
@@ -158,6 +162,7 @@ public class ComputerAIGeneral implements Computer {
             });
         }
         CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
         all.addAll(hand);
 
         CardList humanPlayable = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
@@ -171,6 +176,40 @@ public class ComputerAIGeneral implements Computer {
 
         return getPlayable(all);
     } // getMain1()
+    
+    /**
+     * <p>
+     * hasACardGivingHaste.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean hasACardGivingHaste() {
+        CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
+        all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
+        
+        for (Card c : all) {
+            for (SpellAbility sa : c.getSpellAbility()) {
+                if(sa.getAbilityFactory() == null) {
+                    continue;
+                }
+                AbilityFactory af = sa.getAbilityFactory();
+                HashMap<String, String> abilityParams = af.getMapParams();
+                if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
+                    continue;
+                }
+                if (abilityParams.containsKey("SP") && !abilityParams.get("SP").equals("Pump")) {
+                    continue;
+                }
+                if (abilityParams.containsKey("KW") && abilityParams.get("KW").contains("Haste")) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    } //hasACardGivingHaste
 
     /**
      * <p>
