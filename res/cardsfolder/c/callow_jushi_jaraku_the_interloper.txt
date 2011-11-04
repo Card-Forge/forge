@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidControllingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
-T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
 SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
