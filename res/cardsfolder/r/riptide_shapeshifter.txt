@@ -5,6 +5,7 @@ Text:no text
 PT:3/3
 A:AB$ ChooseType | Cost$ 2 U U Sac<1/CARDNAME> | Type$ Creature | SubAbility$ DBDigUntil | SpellDescription$ Choose a creature type. Reveal cards from the top of your library until you reveal a creature card of that type. Put that card onto the battlefield and shuffle the rest into your library.
 SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature.ChosenType | ValidDescription$ creature card of chosen type | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_shapeshifter.jpg
 End
