@@ -541,6 +541,11 @@ public class GameAction {
         if (c.isToken()) {
             return c;
         }
+        
+        if(c.isInAlternateState())
+        {
+            c.changeState();
+        }
 
         if ((p != null) && p.is(Constant.Zone.Battlefield)) {
             c = AllZone.getCardFactory().copyCard(c);
@@ -2031,6 +2036,8 @@ public class GameAction {
                         this.exile(chosen);
                     }
                 }
+            } else if (spell.getSourceCard().hasKeyword("Convoke")) {
+                
             }
         } // isSpell
 
