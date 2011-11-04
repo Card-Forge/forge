@@ -497,11 +497,8 @@ public class CardReader implements Runnable {
             card.changeState();
         }
 
-        CardRules[] crdRules = rulesReader.getCard();
-        listRulesToFill.add(crdRules[0]);
-        if (crdRules[1] != null) {
-            listRulesToFill.add(crdRules[1]);
-        }
+
+        listRulesToFill.add(rulesReader.getCard());
         mapToFill.put(card.getName(), card);
         return card;
     }

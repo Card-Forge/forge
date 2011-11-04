@@ -429,8 +429,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         ch.show();
         final GameFormat selected = ch.getSelectedValue();
 
-        final List<CardPrinted> cardsWon = this.model.qData.getCards().addCards(
-                Predicate.and(selected.getFilterPrinted(), CardPrinted.Predicates.Presets.NON_ALTERNATE));
+        final List<CardPrinted> cardsWon = this.model.qData.getCards().addCards(selected.getFilterPrinted());
 
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + selected.getName() + "\" format!");

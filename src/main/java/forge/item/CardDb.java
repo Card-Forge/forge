@@ -144,8 +144,7 @@ public final class CardDb {
         final CardPrinted[] cardCopies = new CardPrinted[count];
         setMap.put(cardName, cardCopies);
         for (int i = 0; i < count; i++) {
-            lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i, card.isAltState(),
-                    card.isDoubleFaced());
+            lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
             this.allCardsFlat.add(lastAdded);
             cardCopies[i] = lastAdded;
         }

@@ -276,10 +276,10 @@ public class BoosterGenerator {
     }
 
     private void addToRarity(final CardPrinted c) {
-        if (c.isAlternate()) {
+        if (c.getCard().isAltState()) {
             return;
         }
-        if (c.isDoubleFaced() && (this.numDoubleFaced > 0)) {
+        if (c.getCard().isDoubleFaced() && (this.numDoubleFaced > 0)) {
             this.doubleFaced.add(c);
         } else {
             switch (c.getRarity()) {

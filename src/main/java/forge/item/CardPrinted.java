@@ -32,8 +32,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     private final String cardSet;
     private final int artIndex;
     private final boolean foiled;
-    private final boolean isAlternate;
-    private final boolean isDoubleFaced;
 
     // Calculated fields are below:
     private final transient CardRarity rarity; // rarity is given in ctor when
@@ -156,16 +154,13 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     };
 
     // Constructor is private. All non-foiled instances are stored in CardDb
-    private CardPrinted(final CardRules c, final String set, final CardRarity rare, final int index,
-            final boolean foil, final boolean isAlt, final boolean isDF) {
+    private CardPrinted(final CardRules c, final String set, final CardRarity rare, final int index, final boolean foil) {
         this.card = c;
         this.name = c.getName();
         this.cardSet = set;
         this.artIndex = index;
         this.foiled = foil;
         this.rarity = rare;
-        this.isAlternate = isAlt;
-        this.isDoubleFaced = isDF;
         this.nameLcase = this.name.toLowerCase();
     }
 
@@ -187,9 +182,8 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      *            the is df
      * @return the card printed
      */
-    static CardPrinted build(final CardRules c, final String set, final CardRarity rare, final int index,
-            final boolean isAlt, final boolean isDF) {
-        return new CardPrinted(c, set, rare, index, false, isAlt, isDF);
+    static CardPrinted build(final CardRules c, final String set, final CardRarity rare, final int index) {
+        return new CardPrinted(c, set, rare, index, false);
     }
 
     /* foiled don't need to stay in CardDb's structures, so u'r free to create */
@@ -201,7 +195,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @return the card printed
      */
     public static CardPrinted makeFoiled(final CardPrinted c) {
-        return new CardPrinted(c.card, c.cardSet, c.rarity, c.artIndex, true, c.isAlternate, c.isDoubleFaced);
+        return new CardPrinted(c.card, c.cardSet, c.rarity, c.artIndex, true);
     }
 
     // Want this class to be a key for HashTable
@@ -299,24 +293,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     }
 
     /**
-     * Checks if is alternate.
-     * 
-     * @return true, if is alternate
-     */
-    public boolean isAlternate() {
-        return this.isAlternate;
-    }
-
-    /**
-     * Checks if is double faced.
-     * 
-     * @return true, if is double faced
-     */
-    public boolean isDoubleFaced() {
-        return this.isDoubleFaced;
-    }
-
-    /**
      * Number of filters based on CardPrinted values.
      */
     public abstract static class Predicates {
@@ -397,13 +373,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
          */
         public static Predicate<CardPrinted> namesExcept(final List<String> what) {
             return new PredicateNamesExcept(what);
-        }
-
-        private static class PredicateNotAlternate extends Predicate<CardPrinted> {
-            @Override
-            public boolean isTrue(final CardPrinted card) {
-                return !card.isAlternate;
-            }
         }
 
         private static class PredicateRarity extends Predicate<CardPrinted> {
@@ -502,8 +471,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             /** The Constant isTrue. */
             public static final Predicate<CardPrinted> IS_TRUE = Predicate.getTrue(CardPrinted.class);
 
-            /** The Constant nonAlternate. */
-            public static final Predicate<CardPrinted> NON_ALTERNATE = new PredicateNotAlternate();
         }
     }
 }

@@ -204,9 +204,6 @@ public class DeckImport extends JDialog {
                 continue;
             }
             final CardPrinted crd = t.getCard();
-            if (crd.isAlternate()) {
-                continue;
-            }
             if (isMain) {
                 result.addMain(crd, t.getNumber());
             } else {

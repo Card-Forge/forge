@@ -37,6 +37,10 @@ public final class CardRules {
     private boolean isRemovedFromAIDecks = false;
     private boolean isRemovedFromRandomDecks = false;
 
+    private final CardRules slavePart;
+
+    private final boolean hasOtherFace;
+
     // Ctor and builders are needed here
     /**
      * Gets the name.
@@ -170,18 +174,14 @@ public final class CardRules {
         return "";
     }
 
-    private final boolean isAlt;
-
     /**
      * Checks if is alt state.
      * 
      * @return true, if is alt state
      */
     public boolean isAltState() {
-        return isAlt;
+        return isDoubleFaced() && slavePart == null;
     }
-
-    private final boolean isDFC;
 
     /**
      * Checks if is double faced.
@@ -189,7 +189,7 @@ public final class CardRules {
      * @return true, if is double faced
      */
     public boolean isDoubleFaced() {
-        return isDFC;
+        return hasOtherFace;
     }
 
     /**
@@ -206,11 +206,11 @@ public final class CardRules {
      * @param removedFromAIDecks
      *            the removed from ai decks
      */
-    public CardRules(final CardRuleCharacteristics chars, final boolean isDoubleFacedCard, final boolean isAlt0,
+    public CardRules(final CardRuleCharacteristics chars, final boolean isDoubleFacedCard, final CardRules otherPart,
             final boolean removedFromRandomDecks, final boolean removedFromAIDecks) {
         characteristics = chars;
-        isAlt = isAlt0;
-        isDFC = isDoubleFacedCard;
+        slavePart = otherPart;
+        hasOtherFace = isDoubleFacedCard;
         this.isRemovedFromAIDecks = removedFromAIDecks;
         this.isRemovedFromRandomDecks = removedFromRandomDecks;
 

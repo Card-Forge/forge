@@ -101,16 +101,14 @@ public final class MtgDataParser implements Iterator<CardRules> {
      */
     @Override
     public CardRules next() {
-        if (this.chars[1] != null) {
-            final CardRules ret = new CardRules(this.chars[1], false, true, false, false);
-            return ret;
-        }
+        boolean hasOtherPart = false;
         this.chars[0] = new CardRuleCharacteristics();
         final Map<String, CardInSet> sets = new HashMap<String, CardInSet>();
 
         String nextline = this.readSingleCard(this.chars[0]);
         if (nextline != null) {
             if (nextline.equals("----")) {
+                hasOtherPart = true;
                 this.chars[1] = new CardRuleCharacteristics();
                 nextline = this.readSingleCard(this.chars[1]);
             }
@@ -133,7 +131,8 @@ public final class MtgDataParser implements Iterator<CardRules> {
             return null;
         }
 
-        return new CardRules(this.chars[0], false, false, false, false);
+        CardRules otherPart = hasOtherPart ? new CardRules(this.chars[1], hasOtherPart, null, false, false) : null; 
+        return new CardRules(this.chars[0], hasOtherPart, otherPart, false, false);
     }
 
     private String readSingleCard(final CardRuleCharacteristics ret) {

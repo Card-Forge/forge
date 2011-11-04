@@ -46,16 +46,13 @@ public class CardRulesReader {
      * 
      * @return the card
      */
-    public final CardRules[] getCard() {
-        final CardRules[] ret = new CardRules[] {
-                new CardRules(this.characteristics[0], this.isDoubleFacedCard, false, this.removedFromRandomDecks,
-                        this.removedFromAIDecks), null };
-        if (this.characteristics[1] != null) {
-            ret[1] = new CardRules(this.characteristics[1], this.isDoubleFacedCard, true, this.removedFromRandomDecks,
-                    this.removedFromAIDecks);
-        }
+    public final CardRules getCard() {
+        boolean hasOtherPart = this.characteristics[1] != null;
+        CardRules otherPart = hasOtherPart 
+                ? new CardRules(this.characteristics[1], true, null, this.removedFromRandomDecks, this.removedFromAIDecks)
+                : null;
 
-        return ret;
+       return new CardRules(this.characteristics[0], hasOtherPart, otherPart, this.removedFromRandomDecks, this.removedFromAIDecks);
     }
 
     /**

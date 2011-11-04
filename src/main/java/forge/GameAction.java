@@ -1324,9 +1324,6 @@ public class GameAction {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
-                if (cardPrinted.isAlternate()) {
-                    continue;
-                }
                 final Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
                 card.setCurSetCode(cardPrinted.getSet());
 

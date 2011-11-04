@@ -282,9 +282,8 @@ public final class DeckEditorCommon extends DeckEditorBase {
      */
     @Override
     protected Predicate<InventoryItem> buildFilter() {
-        final Predicate<CardPrinted> cardFilter = Predicate.and(
-                Predicate.and(this.getFilterBoxes().buildFilter(), this.filterNameTypeSet.buildFilter()),
-                CardPrinted.Predicates.Presets.NON_ALTERNATE);
+        final Predicate<CardPrinted> cardFilter = 
+                Predicate.and(this.getFilterBoxes().buildFilter(), this.filterNameTypeSet.buildFilter());
         return Predicate.instanceOf(cardFilter, CardPrinted.class);
     }
 
