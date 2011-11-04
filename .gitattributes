@@ -4574,6 +4574,7 @@ res/cardsfolder/l/leeching_bite.txt -text
 res/cardsfolder/l/leechridden_swamp.txt svneol=native#text/plain
 res/cardsfolder/l/leering_emblem.txt svneol=native#text/plain
 res/cardsfolder/l/leering_gargoyle.txt svneol=native#text/plain
+res/cardsfolder/l/leery_fogbeast.txt -text svneol=unset#text/plain
 res/cardsfolder/l/legacy_weapon.txt svneol=native#text/plain
 res/cardsfolder/l/legacys_allure.txt svneol=native#text/plain
 res/cardsfolder/l/legions_of_lim_dul.txt svneol=native#text/plain
