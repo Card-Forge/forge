@@ -6766,6 +6766,16 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.getRemembered().contains(this)) {
                 return false;
             }
+        } else if (property.equals("SameNameAsImprinted")) {
+            boolean b = false;
+            for (Card card : source.getImprinted()) {
+                if (getName().equals(card.getName())) {
+                    b = true;
+                }
+            }
+            if (!b) {
+                return false;
+            }
         } else {
             if (property.equals("ChosenType")) {
                 if (!isType(source.getChosenType())) {
