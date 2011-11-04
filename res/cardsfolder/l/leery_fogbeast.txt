@@ -7,4 +7,5 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigFog | TriggerDescr
 SVar:TrigFog:AB$ Fog | Cost$ 0 | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leery_fogbeast.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/273.jpg
 End

@@ -9,4 +9,5 @@ SVar:DBAnimate:DB$ Animate | Defined$ Enchanted | Types$ ChosenType | OverwriteT
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_mask.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/94.jpg
 End
