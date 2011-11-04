@@ -1,5 +1,6 @@
 package forge.gui.skin;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
 
@@ -76,5 +77,17 @@ public class FPanel extends JPanel {
         if (this.bgImg != null) {
             this.setOpaque(false);
         }
+    }
+    
+    public void setPreferredSize(int w, int h) {
+        setPreferredSize(new Dimension(w,h));
+    }
+    
+    public void setMaximumSize(int w, int h) {
+        setMaximumSize(new Dimension(w,h));
+    }
+    
+    public void setMinimumSize(int w, int h) {
+        setMinimumSize(new Dimension(w,h));
     }
 }

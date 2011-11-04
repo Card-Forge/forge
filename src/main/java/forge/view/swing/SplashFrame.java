@@ -129,8 +129,8 @@ public class SplashFrame extends JFrame {
         contentPane.getActionMap().put("escAction", new CloseAction());
 
         // Set UI to color splash bar fill with theme colors
-        UIManager.put("ProgressBar.foreground", skin.getBg1b()); // Filled
-        UIManager.put("ProgressBar.selectionForeground", skin.getTxt1a()); // Filled
+        UIManager.put("ProgressBar.foreground", skin.getClrTheme()); // When filled
+        UIManager.put("ProgressBar.selectionForeground", skin.getClrText()); // When filled
 
         // Instantiate model and view and tie together.
         this.monitorModel = new SplashProgressModel();

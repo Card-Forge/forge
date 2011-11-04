@@ -207,7 +207,7 @@ public class WinLoseFrame extends JFrame {
             bounds.y = (screen.height - bounds.height) / 2;
         }
 
-        this.setBackground(AllZone.getSkin().getBg1a());
+        this.setBackground(AllZone.getSkin().getClrTheme());
         this.setBounds(bounds);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setUndecorated(true);
@@ -280,68 +280,72 @@ public class WinLoseFrame extends JFrame {
     }
 
     /**
-     * @return the btnContinue
+     * @return {@link forge.gui.skin.FButton} btnContinue
      */
     public FButton getBtnContinue() {
         return btnContinue;
     }
 
     /**
-     * @param btnContinue the btnContinue to set
+     * @param {@link forge.gui.skin.FButton} btnContinue
      */
-    public void setBtnContinue(FButton btnContinue) {
-        this.btnContinue = btnContinue; // TODO: Add 0 to parameter's name.
+    public void setBtnContinue(FButton btnContinue0) {
+        this.btnContinue = btnContinue0;
     }
 
     /**
-     * @return the btnRestart
+     * @return {@link forge.gui.skin.FButton} btnRestart
      */
     public FButton getBtnRestart() {
         return btnRestart;
     }
 
     /**
-     * @param btnRestart the btnRestart to set
+     * @param {@link forge.gui.skin.FButton} btnRestart
      */
-    public void setBtnRestart(FButton btnRestart) {
-        this.btnRestart = btnRestart; // TODO: Add 0 to parameter's name.
+    public void setBtnRestart(FButton btnRestart0) {
+        this.btnRestart = btnRestart0; 
     }
 
     /**
-     * @return the btnQuit
+     * @return {@link forge.gui.skin.FButton} btnQuit
      */
     public FButton getBtnQuit() {
         return btnQuit;
     }
 
     /**
-     * @param btnQuit the btnQuit to set
+     * @param {@link forge.gui.skin.FButton} btnQuit
      */
-    public void setBtnQuit(FButton btnQuit) {
-        this.btnQuit = btnQuit; // TODO: Add 0 to parameter's name.
+    public void setBtnQuit(FButton btnQuit0) {
+        this.btnQuit = btnQuit0; 
     }
 
     /**
-     * @return the pnlCustom
+     * The central panel in the win/lose screen, used for 
+     * presenting customized messages and rewards.
+     * @return {@link javax.swing.JPanel} pnlCustom
      */
     public JPanel getPnlCustom() {
         return pnlCustom;
     }
 
     /**
-     * @param pnlCustom the pnlCustom to set
+     * The central panel in the win/lose screen, used for 
+     * presenting customized messages and rewards.
+     * @param {@link javax.swing.JPanel} pnlCustom
      */
-    public void setPnlCustom(JPanel pnlCustom) {
-        this.pnlCustom = pnlCustom; // TODO: Add 0 to parameter's name.
+    public void setPnlCustom(JPanel pnlCustom0) {
+        this.pnlCustom = pnlCustom0;
     }
 
     private class WinLoseBorder extends AbstractBorder {
         @Override
         public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width,
                 final int height) {
-            g.setColor(AllZone.getSkin().getTxt1a());
+            g.setColor(AllZone.getSkin().getClrText());
             g.drawRect(x + 1, y + 1, width - 3, height - 3);
-            g.setColor(AllZone.getSkin().getBg1a());
+            g.setColor(AllZone.getSkin().getClrTheme());
             g.drawRect(x + 3, y + 3, width - 7, height - 7);
         }
     }

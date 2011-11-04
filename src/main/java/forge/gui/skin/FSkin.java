@@ -19,97 +19,74 @@ import forge.gui.GuiUtils;
 
 public class FSkin {
     // ===== Public fields
-    /** The font1. */
+    /** Primary font used in titles and buttons and most text output. */
     private Font font1 = null;
 
-    /** The font2. */
+    /** Secondary font used where a sub-block of text needs it. */
     private Font font2 = null;
 
-    /** The texture1. */
+    /** Primary texture used in skin. */
     private ImageIcon texture1 = null;
 
-    /** The texture2. */
-    private ImageIcon texture2 = null;
-
-    /** The texture3. */
-    private ImageIcon texture3 = null;
-
-    /** The btn lup. */
+    /** Left side of button, up state. */
     private ImageIcon btnLup = null;
 
-    /** The btn mup. */
+    /** Middle of button, up state. */
     private ImageIcon btnMup = null;
 
-    /** The btn rup. */
+    /** Right side of button, up state. */
     private ImageIcon btnRup = null;
 
-    /** The btn lover. */
+    /** Button, left side, over state. */
     private ImageIcon btnLover = null;
 
-    /** The btn mover. */
+    /** Button, middle, over state. */
     private ImageIcon btnMover = null;
 
-    /** The btn rover. */
+    /** Button, right side, over state. */
     private ImageIcon btnRover = null;
 
-    /** The btn ldown. */
+    /** Button, left side, down state. */
     private ImageIcon btnLdown = null;
 
-    /** The btn mdown. */
+    /** Button, middle, down state. */
     private ImageIcon btnMdown = null;
 
-    /** The btn rdown. */
+    /** Button, right side, down state. */
     private ImageIcon btnRdown = null;
 
-    /** The splash. */
+    /** Splash screen image. */
     private ImageIcon splash = null;
 
-    /** The bg1a. */
-    private Color bg1a = Color.red;
+    /** Base color used in skin. */
+    private Color clrTheme = Color.red;
 
-    /** The bg1b. */
-    private Color bg1b = Color.red;
+    /** Border color. */
+    private Color clrBorders = Color.red;
 
-    /** The bg2a. */
-    private Color bg2a = Color.red;
+    /** Color of zebra striping in grid displays. */
+    private Color clrZebra = Color.red;
 
-    /** The bg2b. */
-    private Color bg2b = Color.red;
+    /** Color of elements in mouseover state. */
+    private Color clrHover = Color.red;
 
-    /** The bg3a. */
-    private Color bg3a = Color.red;
+    /** Color of active (currently selected) elements. */
+    private Color clrActive = Color.red;
 
-    /** The bg3b. */
-    private Color bg3b = Color.red;
+    /** Color of inactive (not currently selected) elements. */
+    private Color clrInactive = Color.red;
 
-    /** The txt1a. */
-    private Color txt1a = Color.red;
+    /** Color of text in skin. */
+    private Color clrText = Color.red;
 
-    /** The txt1b. */
-    private Color txt1b = Color.red;
-
-    /** The txt2a. */
-    private Color txt2a = Color.red;
-
-    /** The txt2b. */
-    private Color txt2b = Color.red;
-
-    /** The txt3a. */
-    private Color txt3a = Color.red;
-
-    /** The txt3b. */
-    private Color txt3b = Color.red;
-
-    /** The name. */
+    /** Name of skin. */
     private String name = "default";
 
     // ===== Private fields
-    private final String paletteFile = "palette.jpg";
+    private final String paletteFile = "palette.png";
     private final String font1file = "font1.ttf";
     private final String font2file = "font2.ttf";
     private final String texture1file = "texture1.jpg";
-    private final String texture2file = "texture2.jpg";
-    private final String texture3file = "texture3.jpg";
     private final String btnLupfile = "btnLup.png";
     private final String btnMupfile = "btnMup.png";
     private final String btnRupfile = "btnRup.png";
@@ -168,8 +145,6 @@ public class FSkin {
 
         // Images
         this.setTexture1(this.retrieveImage(dirName + this.texture1file));
-        this.texture2 = this.retrieveImage(dirName + this.texture2file);
-        this.texture3 = this.retrieveImage(dirName + this.texture3file);
         this.setBtnLup(this.retrieveImage(dirName + this.btnLupfile));
         this.setBtnMup(this.retrieveImage(dirName + this.btnMupfile));
         this.setBtnRup(this.retrieveImage(dirName + this.btnRupfile));
@@ -186,19 +161,13 @@ public class FSkin {
         BufferedImage image;
         try {
             image = ImageIO.read(file);
-            this.setBg1a(this.getColorFromPixel(image.getRGB(10, 30)));
-            this.setBg1b(this.getColorFromPixel(image.getRGB(30, 30)));
-            this.bg2a = this.getColorFromPixel(image.getRGB(50, 30));
-            this.bg2b = this.getColorFromPixel(image.getRGB(70, 30));
-            this.bg3a = this.getColorFromPixel(image.getRGB(90, 30));
-            this.bg3b = this.getColorFromPixel(image.getRGB(110, 30));
-
-            this.setTxt1a(this.getColorFromPixel(image.getRGB(10, 70)));
-            this.txt1b = this.getColorFromPixel(image.getRGB(30, 70));
-            this.txt2a = this.getColorFromPixel(image.getRGB(50, 70));
-            this.txt2b = this.getColorFromPixel(image.getRGB(70, 70));
-            this.txt3a = this.getColorFromPixel(image.getRGB(90, 70));
-            this.txt3b = this.getColorFromPixel(image.getRGB(110, 70));
+            this.setClrTheme(this.getColorFromPixel(image.getRGB(60, 10)));
+            this.setClrBorders(this.getColorFromPixel(image.getRGB(60, 30)));
+            this.setClrZebra(this.getColorFromPixel(image.getRGB(60, 50)));
+            this.setClrHover(this.getColorFromPixel(image.getRGB(60, 70)));
+            this.setClrActive(this.getColorFromPixel(image.getRGB(60, 90)));
+            this.setClrInactive(this.getColorFromPixel(image.getRGB(60, 110)));
+            this.setClrText(this.getColorFromPixel(image.getRGB(60, 130)));
         } catch (final IOException e) {
             System.err.println(this.notfound + this.paletteFile);
         }
@@ -229,8 +198,7 @@ public class FSkin {
      * retrieveFont.
      * </p>
      * Uses GuiUtils to grab a font file at an address. Error will be reported
-     * by GuiUtils if not found. Error also reported by this method if not
-     * found.
+     * by GuiUtils if not found. 
      * 
      * @param {@link java.lang.String} address
      * @return a Font
@@ -249,230 +217,340 @@ public class FSkin {
      * @param {@link java.lang.Integer} pixel information
      */
     private Color getColorFromPixel(final int pixel) {
-        return new Color((pixel & 0x00ff0000) >> 16, (pixel & 0x0000ff00) >> 8, (pixel & 0x000000ff));
+        int r, g, b, a;
+        a = (pixel >> 24) & 0x000000ff;
+        r = (pixel >> 16) & 0x000000ff;
+        g = (pixel >> 8) & 0x000000ff;
+        b = (pixel) & 0x000000ff;
+        
+        return new Color(r,g,b,a);
     }
 
     /**
-     * @return the font1
+     * Primary font used in titles and buttons and most text output.
+     * @return {@link java.awt.font} font1
      */
     public Font getFont1() {
         return font1;
     }
 
     /**
-     * @param font1 the font1 to set
+     * Primary font used in titles and buttons and most text output.
+     * @param {@link java.awt.font} font1
      */
-    public void setFont1(Font font1) {
-        this.font1 = font1; // TODO: Add 0 to parameter's name.
+    public void setFont1(Font font10) {
+        this.font1 = font10;
     }
 
     /**
-     * @return the font2
+     * Secondary font used where a sub-block of text needs it.
+     * @return {@link java.awt.Font} font2
      */
     public Font getFont2() {
         return font2;
     }
 
     /**
-     * @param font2 the font2 to set
+     * Secondary font used where a sub-block of text needs it.
+     * @param {@link java.awt.Font} font2
      */
-    public void setFont2(Font font2) {
-        this.font2 = font2; // TODO: Add 0 to parameter's name.
+    public void setFont2(Font font20) {
+        this.font2 = font20; 
     }
 
     /**
-     * @return the bg1a
-     */
-    public Color getBg1a() {
-        return bg1a;
-    }
-
-    /**
-     * @param bg1a the bg1a to set
-     */
-    public void setBg1a(Color bg1a) {
-        this.bg1a = bg1a; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * @return the splash
+     * Splash screen image.
+     * @return {@link javax.swing.ImageIcon} splash
      */
     public ImageIcon getSplash() {
         return splash;
     }
 
     /**
-     * @param splash the splash to set
+     * Splash screen image.
+     * @param {@link javax.swing.ImageIcon} splash
      */
-    public void setSplash(ImageIcon splash) {
-        this.splash = splash; // TODO: Add 0 to parameter's name.
+    public void setSplash(ImageIcon splash0) {
+        this.splash = splash0; 
+    }
+    
+    /**
+     * Base color used in skin.
+     * @return {@link java.awt.Color} clrTheme
+     */
+    public Color getClrTheme() {
+        return clrTheme;
     }
 
     /**
-     * @return the btnRdown
+     * Base color used in skin.
+     * @param {@link java.awt.Color} clrTheme
      */
-    public ImageIcon getBtnRdown() {
-        return btnRdown;
+    public void setClrTheme(Color clrTheme0) {
+        this.clrTheme = clrTheme0; 
     }
 
     /**
-     * @param btnRdown the btnRdown to set
+     * Border color.
+     * @return {@link java.awt.Color} clrBorders
      */
-    public void setBtnRdown(ImageIcon btnRdown) {
-        this.btnRdown = btnRdown; // TODO: Add 0 to parameter's name.
+    public Color getClrBorders() {
+        return clrBorders;
     }
 
     /**
-     * @return the bg1b
+     * Border color.
+     * @param {@link java.awt.Color} clrBorders
      */
-    public Color getBg1b() {
-        return bg1b;
+    public void setClrBorders(Color clrBorders0) {
+        this.clrBorders = clrBorders0; 
     }
 
     /**
-     * @param bg1b the bg1b to set
-     */
-    public void setBg1b(Color bg1b) {
-        this.bg1b = bg1b; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * @return the texture1
+     * Primary texture used in skin.
+     * @return {@link javax.swing.ImageIcon} texture1
      */
     public ImageIcon getTexture1() {
         return texture1;
     }
 
     /**
-     * @param texture1 the texture1 to set
+     * Primary texture used in skin.
+     * @param {@link javax.swing.ImageIcon} texture1
      */
-    public void setTexture1(ImageIcon texture1) {
-        this.texture1 = texture1; // TODO: Add 0 to parameter's name.
+    public void setTexture1(ImageIcon texture10) {
+        this.texture1 = texture10;
     }
 
     /**
-     * @return the txt1a
+     * Color of zebra striping in grid displays.
+     * @return {@link java.awt.Color} clrZebra
      */
-    public Color getTxt1a() {
-        return txt1a;
+    public Color getClrZebra() {
+        return clrZebra;
     }
 
     /**
-     * @param txt1a the txt1a to set
+     * Color of zebra striping in grid displays.
+     * @param {@link java.awt.Color} clrZebra
      */
-    public void setTxt1a(Color txt1a) {
-        this.txt1a = txt1a; // TODO: Add 0 to parameter's name.
+    public void setClrZebra(Color clrZebra0) {
+        this.clrZebra = clrZebra0; 
+    }
+    
+    /**
+     * Color of elements in mouseover state.
+     * @return {@link java.awt.Color} clrHover
+     */
+    public Color getClrHover() {
+        return clrHover;
     }
 
     /**
-     * @return the btnLup
+     * Color of elements in mouseover state.
+     * @param {@link java.awt.Color} clrHover
+     */
+    public void setClrHover(Color clrHover0) {
+        this.clrHover = clrHover0; 
+    }
+    
+    /**
+     * Color of active (currently selected) elements.
+     * @return {@link java.awt.Color} clrActive
+     */
+    public Color getClrActive() {
+        return clrActive;
+    }
+
+    /**
+     * Color of active (currently selected) elements.
+     * @param {@link java.awt.Color} clrActive
+     */
+    public void setClrActive(Color clrActive0) {
+        this.clrActive = clrActive0; 
+    }
+    
+    /**
+     * Color of inactive (not currently selected) elements.
+     * @return {@link java.awt.Color} clrHover
+     */
+    public Color getClrInactive() {
+        return clrInactive;
+    }
+
+    /**
+     * Color of inactive (not currently selected) elements.
+     * @param {@link java.awt.Color} clrHover
+     */
+    public void setClrInactive(Color clrInactive0) {
+        this.clrInactive = clrInactive0; 
+    }
+    
+    /**
+     * Color of text in skin.
+     * @return {@link java.awt.Color} clrText
+     */
+    public Color getClrText() {
+        return clrText;
+    }
+
+    /**
+     * Color of text in skin.
+     * @param {@link java.awt.Color} clrHover
+     */
+    public void setClrText(Color clrText0) {
+        this.clrText = clrText0; 
+    }
+
+    /**
+     * Left side of button, up state.
+     * @return {@link javax.swing.ImageIcon} btnLup
      */
     public ImageIcon getBtnLup() {
         return btnLup;
     }
 
     /**
-     * @param btnLup the btnLup to set
+     * Left side of button, up state.
+     * @param {@link javax.swing.ImageIcon} btnLup
      */
-    public void setBtnLup(ImageIcon btnLup) {
-        this.btnLup = btnLup; // TODO: Add 0 to parameter's name.
+    public void setBtnLup(ImageIcon btnLup0) {
+        this.btnLup = btnLup0; 
     }
 
     /**
-     * @return the btnMup
+     * Middle of button, up state.
+     * @return {@link javax.swing.ImageIcon} btnMup
      */
     public ImageIcon getBtnMup() {
         return btnMup;
     }
 
     /**
-     * @param btnMup the btnMup to set
+     * Middle of button, up state.
+     * @param {@link javax.swing.ImageIcon} btnMup
      */
-    public void setBtnMup(ImageIcon btnMup) {
-        this.btnMup = btnMup; // TODO: Add 0 to parameter's name.
+    public void setBtnMup(ImageIcon btnMup0) {
+        this.btnMup = btnMup0; 
     }
-
+    
     /**
-     * @return the btnLover
-     */
-    public ImageIcon getBtnLover() {
-        return btnLover;
-    }
-
-    /**
-     * @param btnLover the btnLover to set
-     */
-    public void setBtnLover(ImageIcon btnLover) {
-        this.btnLover = btnLover; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * @return the btnRup
+     * Right side of button, up state.
+     * @return {@link javax.swing.ImageIcon} btnRup
      */
     public ImageIcon getBtnRup() {
         return btnRup;
     }
 
     /**
-     * @param btnRup the btnRup to set
+     * Right side of button, up state.
+     * @param {@link javax.swing.ImageIcon} btnRup
      */
-    public void setBtnRup(ImageIcon btnRup) {
-        this.btnRup = btnRup; // TODO: Add 0 to parameter's name.
+    public void setBtnRup(ImageIcon btnRup0) {
+        this.btnRup = btnRup0; 
     }
 
     /**
-     * @return the btnMover
+     * Left side of button, over state.
+     * @return {@link javax.swing.ImageIcon} btnLover
+     */
+    public ImageIcon getBtnLover() {
+        return btnLover;
+    }
+
+    /**
+     * Left side of button, over state.
+     * @param {@link javax.swing.ImageIcon} btnLover
+     */
+    public void setBtnLover(ImageIcon btnLover0) {
+        this.btnLover = btnLover0; 
+    }
+
+    /**
+     * Middle of button, over state.
+     * @return {@link javax.swing.ImageIcon}  btnMover
      */
     public ImageIcon getBtnMover() {
         return btnMover;
     }
 
     /**
-     * @param btnMover the btnMover to set
+     * Middle of button, over state.
+     * @param {@link javax.swing.ImageIcon} btnMover
      */
-    public void setBtnMover(ImageIcon btnMover) {
-        this.btnMover = btnMover; // TODO: Add 0 to parameter's name.
+    public void setBtnMover(ImageIcon btnMover0) {
+        this.btnMover = btnMover0;
     }
 
     /**
-     * @return the btnRover
+     * Right side of button, over state.
+     * @return {@link javax.swing.ImageIcon}  btnRover
      */
     public ImageIcon getBtnRover() {
         return btnRover;
     }
 
     /**
-     * @param btnRover the btnRover to set
+     * Right side of button, over state.
+     * @param {@link javax.swing.ImageIcon} btnRover
      */
-    public void setBtnRover(ImageIcon btnRover) {
-        this.btnRover = btnRover; // TODO: Add 0 to parameter's name.
+    public void setBtnRover(ImageIcon btnRover0) {
+        this.btnRover = btnRover0; 
     }
 
     /**
-     * @return the btnLdown
+     * Left side of button, down state.
+     * @return {@link javax.swing.ImageIcon} btnLdown
      */
     public ImageIcon getBtnLdown() {
         return btnLdown;
     }
 
     /**
-     * @param btnLdown the btnLdown to set
+     * Left side of button, down state.
+     * @param {@link javax.swing.ImageIcon} btnLdown
      */
-    public void setBtnLdown(ImageIcon btnLdown) {
-        this.btnLdown = btnLdown; // TODO: Add 0 to parameter's name.
+    public void setBtnLdown(ImageIcon btnLdown0) {
+        this.btnLdown = btnLdown0;
+    }
+    
+    /**
+     * Right side of button, down state.
+     * @return {@link javax.swing.ImageIcon} btnRdown
+     */
+    public ImageIcon getBtnRdown() {
+        return btnRdown;
     }
 
     /**
-     * @return the btnMdown
+     * Right side of button, down state.
+     * @param {@link javax.swing.ImageIcon} btnRdown
+     */
+    public void setBtnRdown(ImageIcon btnRdown0) {
+        this.btnRdown = btnRdown0;
+    }
+
+    /**
+     * Middle of button, down state.
+     * @return {@link javax.swing.ImageIcon}  btnMdown
      */
     public ImageIcon getBtnMdown() {
         return btnMdown;
     }
 
     /**
-     * @param btnMdown the btnMdown to set
+     * Middle of button, down state.
+     * @param {@link javax.swing.ImageIcon} btnMdown
      */
-    public void setBtnMdown(ImageIcon btnMdown) {
-        this.btnMdown = btnMdown; // TODO: Add 0 to parameter's name.
+    public void setBtnMdown(ImageIcon btnMdown0) {
+        this.btnMdown = btnMdown0;
+    }
+    
+    /**
+     * Name of skin.
+     * @return {@link java.lang.String} name
+     */
+    public String getName() {
+        return name;
     }
 }
