@@ -2036,8 +2036,6 @@ public class GameAction {
                         this.exile(chosen);
                     }
                 }
-            } else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                
             }
         } // isSpell
 
