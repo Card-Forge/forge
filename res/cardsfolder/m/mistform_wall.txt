@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_wall.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/99.jpg
+Oracle:Mistform Wall has defender as long as it's a Wall.\n{1}: Mistform Wall becomes the creature type of your choice until end of turn.
 End
