@@ -228,7 +228,10 @@ public class Combat {
      * @return a {@link forge.Player} object.
      */
     public final Player getAttackingPlayer() {
-        return attackingPlayer;
+        if (attackingPlayer != null) {
+            return attackingPlayer;
+        }
+        else return AllZone.getPhase().getPriorityPlayer();
     }
 
     /**
