@@ -5,7 +5,24 @@ Forge Beta: 11-##-2011 ver 1.1.# rev #####
 #### cards in total.
 
 
-
+- The AI will now also use spells and abilities from external zones in Main1 (enables unearth).
+- The AI will now cast creature spells in Main1 if an ability or spell that can give it haste is available.
+- Added Cable 2 deck.
+- Fixed doublefaced cards - no CardPrinted would exist for the second face/part
+- Added some text
+- Cleared out the changes.txt file, is ready for new material.
+- Checkstyle updates on FSkin.
+- Apathy's untap ability wasn't scripted properly
+- generalize power, toughness, and cmc hasProperty variable counting (Thanks to slowe I believe).
+- convert Tezzeret the Seeker to script
+- cleanup some minor Java things
+- Added the option "NonMana" to StAb CantBeActivated.
+- Converted Pithing Needle to script.
+- Added Phase requirements to static abilities.
+- Two improvements for the AI of AF Pump Curse:
+- The AI will recognize duplicate HIDDEN keywords.
+- The AI will no longer give "HIDDEN CARDNAME attacks each turn if able." during his own turn.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
@@ -23,7 +40,19 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Psychic Trance
+Exclusion Ritual
+Riptide Chronologist
+Xantid Swarm
+Riptide Shapeshifter
+Skirk Commando
+Coalhauler Swine
+Dryad's Caress
+Invader Parasite
+Hand to Hand
+Basandra, Battle Seraph
+Damping Matrix
+Faith's Fetters
 
 
 end
