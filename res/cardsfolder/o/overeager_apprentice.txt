@@ -1,0 +1,12 @@
+Name:Overeager Apprentice
+ManaCost:2 B
+Types:Creature Thrull
+Text:no text
+PT:1/2
+A:AB$ Mana | Cost$ Discard<1/Card> Sac<1/CARDNAME> | Produced$ B | Amount$ 3 | SpellDescription$ Add B B B to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overeager_apprentice.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/154.jpg
+Oracle:Discard a card, Sacrifice Overeager Apprentice: Add {B}{B}{B} to your mana pool.
+End
