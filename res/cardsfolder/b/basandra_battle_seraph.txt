@@ -1,0 +1,13 @@
+Name:Basandra, Battle Seraph
+ManaCost:3 R W
+Types:Legendary Creature Angel
+Text:no text
+PT:4/4
+K:Flying
+S:Mode$ CantBeCast | ValidCard$ Card | Phases$ BeginCombat->EndCombat | Description$ Players can't cast spells during combat.
+A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME attacks each turn if able. | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/basandra_battle_seraph.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/184.jpg
+Oracle:Flying\nPlayers can't cast spells during combat.\n{R}: Target creature attacks this turn if able.
+End
