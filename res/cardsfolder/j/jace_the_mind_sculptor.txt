@@ -3,6 +3,12 @@ ManaCost:2 U U
 Types:Planeswalker Jace
 Text:no text
 Loyalty:3
+A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0 | Planeswalker$ True | SpellDescription$ Look at the top card of target player's library. You may put that card on the bottom of that player's library.
+A:AB$ Draw | Cost$ 0 | NumCards$ 3 | SubAbility$ DBChangeZone | Planeswalker$ True | SpellDescription$ Draw three cards, then put two cards from your hand on top of your library in any order.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | LibraryPosition$ 0
+A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | Planeswalker$ True | SpellDescription$ Return target creature to its owner's hand.
+A:AB$ ChangeZoneAll | Cost$ SubCounter<12/LOYALTY> | Origin$ Library | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBChangeZone2 | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.
+SVar:DBChangeZone2:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Library | Defined$ Targeted | ChangeType$ Card | Shuffle$ True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_the_mind_sculptor.jpg
 SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/31.jpg
