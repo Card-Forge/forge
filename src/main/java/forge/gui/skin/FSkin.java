@@ -198,7 +198,7 @@ public class FSkin {
      * retrieveFont.
      * </p>
      * Uses GuiUtils to grab a font file at an address. Error will be reported
-     * by GuiUtils if not found. 
+     * by GuiUtils if not found.
      * 
      * @param {@link java.lang.String} address
      * @return a Font
@@ -222,8 +222,7 @@ public class FSkin {
         r = (pixel >> 16) & 0x000000ff;
         g = (pixel >> 8) & 0x000000ff;
         b = (pixel) & 0x000000ff;
-        
-        return new Color(r,g,b,a);
+        return new Color(r, g, b, a);
     }
 
     /**
@@ -236,7 +235,7 @@ public class FSkin {
 
     /**
      * Primary font used in titles and buttons and most text output.
-     * @param {@link java.awt.font} font1
+     * @param font10 &emsp; an image icon
      */
     public void setFont1(Font font10) {
         this.font1 = font10;
@@ -252,10 +251,10 @@ public class FSkin {
 
     /**
      * Secondary font used where a sub-block of text needs it.
-     * @param {@link java.awt.Font} font2
+     * @param font20 &emsp; an image icon
      */
     public void setFont2(Font font20) {
-        this.font2 = font20; 
+        this.font2 = font20;
     }
 
     /**
@@ -268,12 +267,12 @@ public class FSkin {
 
     /**
      * Splash screen image.
-     * @param {@link javax.swing.ImageIcon} splash
+     * @param splash0 &emsp; an image icon
      */
     public void setSplash(ImageIcon splash0) {
-        this.splash = splash0; 
+        this.splash = splash0;
     }
-    
+
     /**
      * Base color used in skin.
      * @return {@link java.awt.Color} clrTheme
@@ -284,10 +283,10 @@ public class FSkin {
 
     /**
      * Base color used in skin.
-     * @param {@link java.awt.Color} clrTheme
+     * @param clrTheme0 &emsp; an image icon
      */
     public void setClrTheme(Color clrTheme0) {
-        this.clrTheme = clrTheme0; 
+        this.clrTheme = clrTheme0;
     }
 
     /**
@@ -300,10 +299,10 @@ public class FSkin {
 
     /**
      * Border color.
-     * @param {@link java.awt.Color} clrBorders
+     * @param clrBorders0 &emsp; an image icon
      */
     public void setClrBorders(Color clrBorders0) {
-        this.clrBorders = clrBorders0; 
+        this.clrBorders = clrBorders0;
     }
 
     /**
@@ -316,7 +315,7 @@ public class FSkin {
 
     /**
      * Primary texture used in skin.
-     * @param {@link javax.swing.ImageIcon} texture1
+     * @param texture10 &emsp; an image icon
      */
     public void setTexture1(ImageIcon texture10) {
         this.texture1 = texture10;
@@ -332,12 +331,12 @@ public class FSkin {
 
     /**
      * Color of zebra striping in grid displays.
-     * @param {@link java.awt.Color} clrZebra
+     * @param clrZebra0 &emsp; an image icon
      */
     public void setClrZebra(Color clrZebra0) {
-        this.clrZebra = clrZebra0; 
+        this.clrZebra = clrZebra0;
     }
-    
+
     /**
      * Color of elements in mouseover state.
      * @return {@link java.awt.Color} clrHover
@@ -348,12 +347,12 @@ public class FSkin {
 
     /**
      * Color of elements in mouseover state.
-     * @param {@link java.awt.Color} clrHover
+     * @param clrHover0 &emsp; an image icon
      */
     public void setClrHover(Color clrHover0) {
-        this.clrHover = clrHover0; 
+        this.clrHover = clrHover0;
     }
-    
+
     /**
      * Color of active (currently selected) elements.
      * @return {@link java.awt.Color} clrActive
@@ -364,12 +363,12 @@ public class FSkin {
 
     /**
      * Color of active (currently selected) elements.
-     * @param {@link java.awt.Color} clrActive
+     * @param clrActive0 &emsp; an image icon
      */
     public void setClrActive(Color clrActive0) {
-        this.clrActive = clrActive0; 
+        this.clrActive = clrActive0;
     }
-    
+
     /**
      * Color of inactive (not currently selected) elements.
      * @return {@link java.awt.Color} clrHover
@@ -380,12 +379,12 @@ public class FSkin {
 
     /**
      * Color of inactive (not currently selected) elements.
-     * @param {@link java.awt.Color} clrHover
+     * @param clrInactive0 &emsp; an image icon
      */
     public void setClrInactive(Color clrInactive0) {
-        this.clrInactive = clrInactive0; 
+        this.clrInactive = clrInactive0;
     }
-    
+
     /**
      * Color of text in skin.
      * @return {@link java.awt.Color} clrText
@@ -396,10 +395,10 @@ public class FSkin {
 
     /**
      * Color of text in skin.
-     * @param {@link java.awt.Color} clrHover
+     * @param clrText0 &emsp; an image icon
      */
     public void setClrText(Color clrText0) {
-        this.clrText = clrText0; 
+        this.clrText = clrText0;
     }
 
     /**
@@ -412,10 +411,10 @@ public class FSkin {
 
     /**
      * Left side of button, up state.
-     * @param {@link javax.swing.ImageIcon} btnLup
+     * @param btnLup0 &emsp; an image icon
      */
     public void setBtnLup(ImageIcon btnLup0) {
-        this.btnLup = btnLup0; 
+        this.btnLup = btnLup0;
     }
 
     /**
@@ -428,12 +427,12 @@ public class FSkin {
 
     /**
      * Middle of button, up state.
-     * @param {@link javax.swing.ImageIcon} btnMup
+     * @param btnMup0 &emsp; an image icon
      */
     public void setBtnMup(ImageIcon btnMup0) {
-        this.btnMup = btnMup0; 
+        this.btnMup = btnMup0;
     }
-    
+
     /**
      * Right side of button, up state.
      * @return {@link javax.swing.ImageIcon} btnRup
@@ -444,10 +443,10 @@ public class FSkin {
 
     /**
      * Right side of button, up state.
-     * @param {@link javax.swing.ImageIcon} btnRup
+     * @param btnRup0 &emsp; an image icon
      */
     public void setBtnRup(ImageIcon btnRup0) {
-        this.btnRup = btnRup0; 
+        this.btnRup = btnRup0;
     }
 
     /**
@@ -460,10 +459,10 @@ public class FSkin {
 
     /**
      * Left side of button, over state.
-     * @param {@link javax.swing.ImageIcon} btnLover
+     * @param btnLover0 &emsp; an image icon
      */
     public void setBtnLover(ImageIcon btnLover0) {
-        this.btnLover = btnLover0; 
+        this.btnLover = btnLover0;
     }
 
     /**
@@ -476,7 +475,7 @@ public class FSkin {
 
     /**
      * Middle of button, over state.
-     * @param {@link javax.swing.ImageIcon} btnMover
+     * @param btnMover0 &emsp; an image icon
      */
     public void setBtnMover(ImageIcon btnMover0) {
         this.btnMover = btnMover0;
@@ -492,15 +491,15 @@ public class FSkin {
 
     /**
      * Right side of button, over state.
-     * @param {@link javax.swing.ImageIcon} btnRover
+     * @param btnRover0 &emsp; an image icon
      */
     public void setBtnRover(ImageIcon btnRover0) {
-        this.btnRover = btnRover0; 
+        this.btnRover = btnRover0;
     }
 
     /**
      * Left side of button, down state.
-     * @return {@link javax.swing.ImageIcon} btnLdown
+     * @return an image icon
      */
     public ImageIcon getBtnLdown() {
         return btnLdown;
@@ -508,15 +507,15 @@ public class FSkin {
 
     /**
      * Left side of button, down state.
-     * @param {@link javax.swing.ImageIcon} btnLdown
+     * @param btnLdown0 &emsp; an image icon
      */
     public void setBtnLdown(ImageIcon btnLdown0) {
         this.btnLdown = btnLdown0;
     }
-    
+
     /**
      * Right side of button, down state.
-     * @return {@link javax.swing.ImageIcon} btnRdown
+     * @return an image icon
      */
     public ImageIcon getBtnRdown() {
         return btnRdown;
@@ -524,7 +523,7 @@ public class FSkin {
 
     /**
      * Right side of button, down state.
-     * @param {@link javax.swing.ImageIcon} btnRdown
+     * @param btnRdown0 an image icon
      */
     public void setBtnRdown(ImageIcon btnRdown0) {
         this.btnRdown = btnRdown0;
@@ -532,23 +531,21 @@ public class FSkin {
 
     /**
      * Middle of button, down state.
-     * @return {@link javax.swing.ImageIcon}  btnMdown
+     * @return an image icon
      */
     public ImageIcon getBtnMdown() {
         return btnMdown;
     }
 
     /**
-     * Middle of button, down state.
-     * @param {@link javax.swing.ImageIcon} btnMdown
+     * @param btnMdown0 &emsp; an image icon
      */
     public void setBtnMdown(ImageIcon btnMdown0) {
         this.btnMdown = btnMdown0;
     }
-    
+
     /**
-     * Name of skin.
-     * @return {@link java.lang.String} name
+     * @return Name of skin.
      */
     public String getName() {
         return name;
