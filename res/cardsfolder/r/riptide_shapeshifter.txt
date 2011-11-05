@@ -8,4 +8,6 @@ SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature.ChosenType | ValidDescription$ cr
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_shapeshifter.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/109.jpg
+Oracle:{2}{U}{U}, Sacrifice Riptide Shapeshifter: Choose a creature type. Reveal cards from the top of your library until you reveal a creature card of that type. Put that card onto the battlefield and shuffle the rest into your library.
 End

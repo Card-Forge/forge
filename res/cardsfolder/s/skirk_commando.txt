@@ -8,4 +8,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self+faceUp | ValidTarget$ Opponent | Com
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature controlled by opponent | NumDmg$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_commando.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/228.jpg
+Oracle:Whenever Skirk Commando deals combat damage to a player, you may have it deal 2 damage to target creature that player controls.\nMorph {2}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End
