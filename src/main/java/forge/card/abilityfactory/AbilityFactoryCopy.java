@@ -675,12 +675,15 @@ public final class AbilityFactoryCopy {
     private static boolean copySpellTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final boolean randomReturn = false;
 
+        //comment out the af.hasSubAbility() until it's used.  randomReturn is always false.
+        /*
         if (af.hasSubAbility()) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 return randomReturn && abSub.chkAIDrawback();
             }
         }
+        */
         return randomReturn;
     }
 

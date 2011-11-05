@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
 import forge.CardList;
 import forge.Constant;

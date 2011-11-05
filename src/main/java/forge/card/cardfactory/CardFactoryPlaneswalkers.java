@@ -441,5 +441,5 @@ public class CardFactoryPlaneswalkers {
 
         return card;
     }
-    
+
 } //end class CardFactoryPlaneswalkers

@@ -6292,7 +6292,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        String[] incR = restriction.split("\\.",2); // Inclusive restrictions are
+        String[] incR = restriction.split("\\.", 2); // Inclusive restrictions are
                                                     // Card types
 
         if (incR[0].equals("Spell") && !isSpell()) {
@@ -6635,8 +6635,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
 
-        } else if (property.startsWith("power") ||
-                property.startsWith("toughness") || property.startsWith("cmc")) {
+        } else if (property.startsWith("power")
+                || property.startsWith("toughness")
+                || property.startsWith("cmc")) {
             int x = 0;
             int y = 0;
             String rhs = "";
