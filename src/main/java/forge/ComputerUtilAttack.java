@@ -334,7 +334,7 @@ public class ComputerUtilAttack {
 
         CardList remainingAttackers = new CardList(attackers.toArray());
         // presumes the Human will block
-        for (int i = 0; i < blockers.size(); i++) {
+        for (int i = 0; i < blockers.size() && i < attackers.size(); i++) {
             remainingAttackers.remove(attackers.get(i));
         }
         
