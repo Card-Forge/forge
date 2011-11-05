@@ -1,0 +1,15 @@
+Name:Faith's Fetters
+ManaCost:3 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant permanent
+A:SP$ Attach | Cost$ 3 W | ValidTgts$ Permanent | AILogic$ Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
+S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | NonMana$ True | Description$ Enchanted permanent's activated abilities can't be activated unless they're mana abilities. If enchanted permanent is a creature, it can't attack or block.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/faiths_fetters.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/16.jpg
+Oracle:Enchant permanent\nWhen Faith's Fetters enters the battlefield, you gain 4 life.\nEnchanted permanent's activated abilities can't be activated unless they're mana abilities. If enchanted permanent is a creature, it can't attack or block.
+End
