@@ -10,5 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hasran_ogress.jpg
 Oracle:Whenever Hasran Ogress attacks, it deals 3 damage to you unless you pay {2}.
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/6.jpg
-SetInfo:ARN|Common|http://magiccards.info/scans/en/an/6.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/6.jpg|2
 End
