@@ -1,0 +1,11 @@
+Name:Dryad's Caress
+ManaCost:4 G G
+Types:Instant
+Text:no text
+A:SP$ GainLife | Cost$ 4 G G | Defined$ You | LifeAmount$ X | SubAbility$ DBUntapAll | SpellDescription$ You gain 1 life for each creature on the battlefield. If W was spent to cast CARDNAME, untap all creatures you control.
+SVar:DBUntapAll:DB$ UntapAll | ConditionManaSpent$ W | ValidCards$ Creature.YouCtrl
+SVar:X:Count$Valid Creature
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_caress.jpg
+End
