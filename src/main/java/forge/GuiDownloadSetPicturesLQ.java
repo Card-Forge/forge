@@ -24,7 +24,8 @@ import forge.properties.NewConstants;
 public class GuiDownloadSetPicturesLQ extends GuiDownloader {
 
     private static final long serialVersionUID = -7890794857949935256L;
-
+    private String picturesPath;
+    
     /**
      * <p>
      * Constructor for Gui_DownloadSetPictures_LQ.
@@ -35,8 +36,29 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      */
     public GuiDownloadSetPicturesLQ(final JFrame frame) {
         super(frame);
+        picturesPath = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
     }
 
+    protected final void addCardToList(ArrayList<DownloadObject> cList, CardPrinted c, String cardName)
+    {
+        final String urlBase = "http://cardforge.org/fpics/";
+
+        String setCode3 = c.getSet();
+        CardSet thisSet = SetUtils.getSetByCode(setCode3);
+        String setCode2 = thisSet.getCode2();
+
+        String imgFN = CardUtil.buildFilename(c, cardName);
+        boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);        
+
+        if (!foundSetImage) {
+            int artsCnt = c.getCard().getSetInfo(setCode3).getCopiesCount();
+            String fn = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
+            cList.add(new DownloadObject(fn, urlBase + setCode2 + "/" + Base64Coder.encodeString(fn, true), 
+                    picturesPath + File.separator + setCode3));
+            System.out.println(String.format("%s [%s - %s]", cardName, setCode3, thisSet.getName() ));
+        }
+    }
+    
     /**
      * <p>
      * getNeededCards.
@@ -49,25 +71,16 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         DownloadObject[] cardTokenLQ = readFileWithNames(NewConstants.TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
         ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
-        File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-        String urlBase = "http://cardforge.org/fpics/";
         for (CardPrinted c : CardDb.instance().getAllCards()) {
             String setCode3 = c.getSet();
             if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
                 continue; // we don't want cards from unknown sets
             }
 
-            CardSet thisSet = SetUtils.getSetByCode(setCode3);
-            String setCode2 = thisSet.getCode2();
-
-            String imgFN = CardUtil.buildFilename(c);
-            boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
-
-            if (!foundSetImage) {
-                int artsCnt = c.getCard().getSetInfo(setCode3).getCopiesCount();
-                String fn = CardUtil.buildIdealFilename(c.getName(), c.getArtIndex(), artsCnt);
-                cList.add(new DownloadObject(fn, urlBase + setCode2 + "/" + Base64Coder.encodeString(fn, true), base
-                        .getPath() + File.separator + setCode3));
+            addCardToList(cList, c, c.getCard().getName());
+            if ( c.getCard().isDoubleFaced() )
+            {
+                addCardToList(cList, c, c.getCard().getSlavePart().getName());
             }
         }
 

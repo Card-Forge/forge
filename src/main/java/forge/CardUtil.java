@@ -680,6 +680,11 @@ public final class CardUtil {
         return buildFilename(card.getName(), card.getSet(), card.getArtIndex(), maxIndex, false);
     }
 
+    public static String buildFilename(final CardPrinted card, String nameToUse) {
+        int maxIndex = card.getCard().getSetInfo(card.getSet()).getCopiesCount();
+        return buildFilename(nameToUse, card.getSet(), card.getArtIndex(), maxIndex, false);
+    }    
+    
     private static String buildFilename(final String cardName, final String setName, final int artIndex,
             final int artIndexMax, final boolean isToken) {
         File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);

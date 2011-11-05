@@ -86,7 +86,9 @@ public final class CardRules {
     public String[] getRules() {
         return characteristics.getCardRules();
     }
-
+    
+    public final CardRules getSlavePart() { return slavePart; }
+    
     /**
      * Gets the sets printed.
      * 
