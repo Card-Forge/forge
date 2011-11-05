@@ -396,6 +396,7 @@ public final class AbilityFactoryCopy {
                     if (c.isDoubleFaced()) { // Cloned DFC's can't transform
                         if (wasInAlt) {
                             copy.changeState();
+                            c.changeState();
                         }
                         copy.clearOtherState();
                     }
