@@ -416,11 +416,10 @@ public final class AbilityFactoryCopy {
                         copy.setManaCost("");
                         copy.setBaseAttack(2);
                         copy.setBaseDefense(2);
-                        copy.setIntrinsicKeyword(new ArrayList<String>()); // remove
-                                                                           // all
-                                                                           // keywords
-                        copy.setType(new ArrayList<String>()); // remove all
-                                                               // types
+                        //remove all keywords
+                        copy.setIntrinsicKeyword(new ArrayList<String>());
+                        //remove all types
+                        copy.setType(new ArrayList<String>());
                         copy.addType("Creature");
                         copy.clearSpellAbility(); // disallow "morph_up"
                         copy.setCurSetCode("");

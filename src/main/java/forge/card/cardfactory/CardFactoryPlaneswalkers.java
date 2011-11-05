@@ -48,8 +48,8 @@ public class CardFactoryPlaneswalkers {
             card.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.LOYALTY,
                     card.getBaseLoyalty()));
         }
-        
-        // *************** START *********** START **************************
+
+        //*************** START *********** START **************************
          if (cardName.equals("Sarkhan the Mad")) {
 
             // Planeswalker book-keeping
