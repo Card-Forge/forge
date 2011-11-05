@@ -81,27 +81,13 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantBeActivated", c, activator)) {
+                if (stAb.applyAbility("CantBeActivated", c, activator, this)) {
                     return false;
                 }
             }
         }
 
         if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
-            return false;
-        }
-
-        CardList pithing = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        pithing.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
-        pithing = pithing.getName("Pithing Needle");
-        pithing = pithing.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card crd) {
-                return crd.getSVar("PithingTarget").equals(c.getName());
-            }
-        });
-
-        if ((pithing.size() != 0) && !(this instanceof AbilityMana)) {
             return false;
         }
 

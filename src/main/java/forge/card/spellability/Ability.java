@@ -18,8 +18,6 @@ import forge.Constant.Zone;
  * @version $Id$
  */
 public abstract class Ability extends SpellAbility {
-    // Slight hack for Pithing Needle
-    private final String sourceCardName;
 
     /**
      * <p>
@@ -34,7 +32,6 @@ public abstract class Ability extends SpellAbility {
     public Ability(final Card sourceCard, final String manaCost) {
         super(SpellAbility.getAbility(), sourceCard);
         this.setManaCost(manaCost);
-        this.sourceCardName = sourceCard.getName();
     }
 
     /**
@@ -62,17 +59,6 @@ public abstract class Ability extends SpellAbility {
             return false;
         }
 
-        CardList pithing = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        pithing.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
-        pithing = pithing.getName("Pithing Needle");
-        pithing = pithing.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                return c.getSVar("PithingTarget").equals(Ability.this.sourceCardName);
-            }
-        });
-
-        return AllZoneUtil.isCardInPlay(this.getSourceCard()) && !this.getSourceCard().isFaceDown()
-                && !this.getSourceCard().getName().equals("Spreading Seas") && (pithing.size() == 0);
+        return AllZoneUtil.isCardInPlay(this.getSourceCard()) && !this.getSourceCard().isFaceDown();
     }
 }

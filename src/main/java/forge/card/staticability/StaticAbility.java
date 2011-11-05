@@ -10,6 +10,7 @@ import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Player;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.spellability.SpellAbility;
 
 /**
  * The Class StaticAbility.
@@ -282,8 +283,35 @@ public class StaticAbility {
             return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, activator);
         }
 
+        return false;
+    }
+    
+    /**
+     * Apply ability.
+     * 
+     * @param mode
+     *            the mode
+     * @param card
+     *            the card
+     * @param activator
+     *            the activator
+     * @param sa
+     *            the ability
+     * @return true, if successful
+     */
+    public final boolean applyAbility(final String mode, final Card card, final Player activator, SpellAbility sa) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!this.mapParams.get("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
         if (mode.equals("CantBeActivated")) {
-            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, activator);
+            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, activator, sa);
         }
 
         return false;

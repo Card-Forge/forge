@@ -1226,7 +1226,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Pithing Needle")) {
+        /*else if (cardName.equals("Pithing Needle")) {
             final SpellAbility ability = new AbilityStatic(card, "0") {
                 @Override
                 public void resolve() {
@@ -1276,7 +1276,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
             card.addComesIntoPlayCommand(intoPlay);
             card.addLeavesPlayCommand(leavesPlay);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Processor")) {
