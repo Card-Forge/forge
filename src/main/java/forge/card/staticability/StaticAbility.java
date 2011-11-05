@@ -327,32 +327,50 @@ public class StaticAbility {
 
         Zone effectZone = Zone.Battlefield; // default
 
-        if (this.mapParams.containsKey("EffectZone")) {
+        if (mapParams.containsKey("EffectZone")) {
             effectZone = Zone.smartValueOf(this.mapParams.get("EffectZone"));
         }
 
-        if ((effectZone != null) && (!this.hostCard.isInZone(effectZone) || this.hostCard.isPhasedOut())) {
+        if ((effectZone != null) && (!hostCard.isInZone(effectZone) || hostCard.isPhasedOut())) {
             return false;
         }
 
-        if (this.mapParams.containsKey("Threshold") && !controller.hasThreshold()) {
+        if (mapParams.containsKey("Threshold") && !controller.hasThreshold()) {
             return false;
         }
 
-        if (this.mapParams.containsKey("Hellbent") && !controller.hasHellbent()) {
+        if (mapParams.containsKey("Hellbent") && !controller.hasHellbent()) {
             return false;
         }
 
-        if (this.mapParams.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
+        if (mapParams.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
             return false;
         }
 
-        if (this.mapParams.containsKey("PlayerTurn") && !AllZone.getPhase().isPlayerTurn(controller)) {
+        if (mapParams.containsKey("PlayerTurn") && !AllZone.getPhase().isPlayerTurn(controller)) {
             return false;
         }
 
-        if (this.mapParams.containsKey("OpponentTurn") && !AllZone.getPhase().isPlayerTurn(controller.getOpponent())) {
+        if (mapParams.containsKey("OpponentTurn") && !AllZone.getPhase().isPlayerTurn(controller.getOpponent())) {
             return false;
+        }
+        
+        if (mapParams.containsKey("Phases")) {
+            String phases = mapParams.get("Phases");
+
+            if (phases.contains("->")) {
+                // If phases lists a Range, split and Build Activate String
+                // Combat_Begin->Combat_End (During Combat)
+                // Draw-> (After Upkeep)
+                // Upkeep->Combat_Begin (Before Declare Attackers)
+
+                final String[] split = phases.split("->", 2);
+                phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
+            }
+
+            if (!phases.contains(AllZone.getPhase().getPhase())) {
+                return false;
+            }
         }
 
         if (this.mapParams.containsKey("TopCardOfLibraryIs")) {

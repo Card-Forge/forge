@@ -1,0 +1,12 @@
+Name:Hand to Hand
+ManaCost:2 R
+Types:Enchantment
+Text:no text
+S:Mode$ CantBeCast | ValidCard$ Instant | Phases$ BeginCombat->EndCombat | Description$ During combat, players can't cast instant spells or activate abilities that aren't mana abilities.
+S:Mode$ CantBeActivated | ValidCard$ Card| Phases$ BeginCombat->EndCombat | NonMana$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_to_hand.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/180.jpg
+Oracle:During combat, players can't cast instant spells or activate abilities that aren't mana abilities.
+End
