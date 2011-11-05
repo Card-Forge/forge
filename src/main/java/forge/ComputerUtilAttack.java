@@ -330,15 +330,24 @@ public class ComputerUtilAttack {
         }
 
         // I think this is right but the assault code may still be a little off
-        CardListUtil.sortAttackLowFirst(attackers);
+        CardListUtil.sortAttack(attackers);
 
-        int totalAttack = 0;
+        CardList remainingAttackers = new CardList(attackers.toArray());
         // presumes the Human will block
-        for (int i = 0; i < (attackers.size() - blockers.size()); i++) {
-            totalAttack += getAttack(attackers.get(i));
+        for (int i = 0; i < blockers.size(); i++) {
+            remainingAttackers.remove(attackers.get(i));
+        }
+        
+        if(CombatUtil.sumDamageIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) > AllZone.getHumanPlayer().getLife()
+                && AllZone.getHumanPlayer().canLoseLife()) {
+            return true;
+        }
+        
+        if(CombatUtil.sumPoisonIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) >= 10 - AllZone.getHumanPlayer().getPoisonCounters()) {
+            return true;
         }
 
-        return blockerLife <= totalAttack;
+        return false;
     } // doAssault()
 
     /**
@@ -643,7 +652,7 @@ public class ComputerUtilAttack {
             for (int i = 0; i < attackersLeft.size(); i++) {
                 if (CombatUtil.canAttack(attackersLeft.get(i), combat)) {
                     combat.addAttacker(attackersLeft.get(i));
-                }
+                } 
             }
         } else {
             System.out.println("Normal attack");

@@ -868,7 +868,7 @@ public class CombatUtil {
      *            a {@link forge.Player} object.
      * @return a int.
      */
-    private static int sumDamageIfUnblocked(final CardList attackers, final Player attacked) {
+    public static int sumDamageIfUnblocked(final CardList attackers, final Player attacked) {
         int sum = 0;
         for (Card attacker : attackers) {
             sum += damageIfUnblocked(attacker, attacked, null);
@@ -888,7 +888,7 @@ public class CombatUtil {
      *            a {@link forge.Player} object.
      * @return a int.
      */
-    private static int sumPoisonIfUnblocked(final CardList attackers, final Player attacked) {
+    public static int sumPoisonIfUnblocked(final CardList attackers, final Player attacked) {
         int sum = 0;
         for (Card attacker : attackers) {
             sum += poisonIfUnblocked(attacker, attacked, null);
