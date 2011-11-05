@@ -1,0 +1,11 @@
+Name:Gather Courage
+ManaCost:G
+Types:Instant
+Text:no text
+K:Convoke
+A:SP$Pump | Cost$ G | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gather_courage.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/165.jpg
+Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nTarget creature gets +2/+2 until end of turn.
+End

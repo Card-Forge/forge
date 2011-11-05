@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
+import forge.gui.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -927,6 +928,32 @@ public final class CardUtil {
         }
 
         return res;
+    }
+    
+    public static ArrayList<String> getConvokableColors(final Card cardToConvoke, ManaCost cost)
+    {
+        ArrayList<String> usableColors = new ArrayList<String>();
+        
+        if(cost.getColorlessManaAmount() > 0)
+        {
+            usableColors.add("colorless");
+        }
+        for(CardColor col : cardToConvoke.getColor())
+        {
+            for(String strCol : col.toStringArray())
+            {
+                if(strCol.equals("colorless"))
+                {
+                    continue;
+                }
+                if(cost.toString().contains(InputPayManaCostUtil.getShortColorString(strCol)))
+                {
+                    usableColors.add(strCol.toString());
+                }
+            }
+        }
+        
+        return usableColors;
     }
 
 } // end class CardUtil

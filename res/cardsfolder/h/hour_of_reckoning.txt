@@ -1,0 +1,12 @@
+Name:Hour of Reckoning
+ManaCost:4 W W W
+Types:Sorcery
+Text:no text
+K:Convoke
+A:SP$DestroyAll | Cost$ 4 W W W | ValidCards$ Creature.nonToken | SpellDescription$ Destroy all nonToken creatures.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_reckoning.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/21.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/15.jpg
+Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nDestroy all nontoken creatures.
+End

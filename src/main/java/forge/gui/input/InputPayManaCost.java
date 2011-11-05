@@ -76,12 +76,27 @@ public class InputPayManaCost extends Input {
      * <p>
      * Constructor for Input_PayManaCost.
      * </p>
+     *  
+     * @param sa
+     *            a  {@link forge.card.spellability.SpellAbility} object.
+     */
+    public InputPayManaCost(final SpellAbility sa) {
+        this(sa,new ManaCost(sa.getManaCost()));
+    }
+
+    /**
+     * <p>
+     * Constructor for Input_PayManaCost.
+     * </p>
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     *            
+     * @param manaCostToPay
+     *            a {@link forge.card.mana.ManaCost} object.
      */
-    public InputPayManaCost(final SpellAbility sa) {
-        this.originalManaCost = sa.getManaCost(); // Change
+    public InputPayManaCost(final SpellAbility sa, final ManaCost manaCostToPay) {
+        this.originalManaCost = manaCostToPay.toString(); // Change
         this.originalCard = sa.getSourceCard();
 
         this.spell = sa;
@@ -95,7 +110,7 @@ public class InputPayManaCost extends Input {
                     AllZone.getStack().add(this.spell);
                 }
             } else {
-                this.manaCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
+                this.manaCost = manaCostToPay;//AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
             }
         } else {
             this.manaCost = new ManaCost(sa.getManaCost());
@@ -196,25 +211,43 @@ public class InputPayManaCost extends Input {
                 }
                 AllZone.getInputControl().resetInput();
             }
+            
+            //If this is a spell with convoke, re-tap all creatures used for it.
+            //This is done to make sure Taps triggers go off at the right time
+            //(i.e. AFTER cost payment, they are tapped previously as well so that 
+            //any mana tapabilities can't be used in payment as well as being tapped for convoke)
+            
+            if(spell.getTappedForConvoke() != null)
+            {
+                AllZone.getTriggerHandler().suppressMode("Untaps");
+                for(Card c : spell.getTappedForConvoke()) {
+                    c.untap();
+                    c.tap();
+                }
+                AllZone.getTriggerHandler().clearSuppression("Untaps");
+                spell.clearTappedForConvoke();
+            }
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
+        //If this is a spell with convoke, untap all creatures used for it.
+        if(spell.getTappedForConvoke() != null)
+        {
+            AllZone.getTriggerHandler().suppressMode("Untaps");
+            for(Card c : spell.getTappedForConvoke()) {
+                c.untap();
+            }
+            AllZone.getTriggerHandler().clearSuppression("Untaps");
+            spell.clearTappedForConvoke();
+        }
+        
         this.resetManaCost();
         AllZone.getHumanPlayer().getManaPool().unpaid(this.spell, true);
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers(); // DO
-                                                                              // NOT
-                                                                              // REMOVE
-                                                                              // THIS,
-                                                                              // otherwise
-                                                                              // the
-                                                                              // cards
-                                                                              // don't
-                                                                              // always
-                                                                              // tap
-
+                
         this.stop();
     }
 

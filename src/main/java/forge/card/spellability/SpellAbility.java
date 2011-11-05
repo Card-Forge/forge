@@ -108,6 +108,8 @@ public abstract class SpellAbility {
         public void execute(final Object o) {
         }
     };
+    
+    private CardList tappedForConvoke = null;
 
     /**
      * <p>
@@ -1705,6 +1707,29 @@ public abstract class SpellAbility {
      */
     public void setChosenTarget(Target chosenTarget) {
         this.chosenTarget = chosenTarget; // TODO: Add 0 to parameter's name.
+    }
+    
+    public void addTappedForConvoke(Card c)
+    {
+        if(tappedForConvoke == null)
+        {
+            tappedForConvoke = new CardList();
+        }
+        
+        tappedForConvoke.add(c);
+    }
+    
+    public CardList getTappedForConvoke()
+    {
+        return tappedForConvoke;
+    }
+    
+    public void clearTappedForConvoke()
+    {
+        if(tappedForConvoke != null)
+        {
+            tappedForConvoke.clear();
+        }
     }
 
 }

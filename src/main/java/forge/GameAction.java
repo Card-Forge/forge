@@ -36,6 +36,7 @@ import forge.gui.GuiUtils;
 import forge.gui.input.InputMulligan;
 import forge.gui.input.InputPayManaCost;
 import forge.gui.input.InputPayManaCostAbility;
+import forge.gui.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
@@ -2032,7 +2033,103 @@ public class GameAction {
 
                         this.exile(chosen);
                     }
+                    manaCost = new ManaCost(originalCost.toString());
+                    manaCost.decreaseColorlessMana(numToExile);
                 }
+            } else if (spell.getSourceCard().hasKeyword("Convoke")) {
+                CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+                untappedCreats = untappedCreats.filter(new CardListFilter() {
+                   public boolean addCard(Card c) {
+                       return !c.isTapped();
+                   }
+                });
+                
+                if(untappedCreats.size() != 0)
+                {  
+                    ArrayList<Object> choices = new ArrayList<Object>();
+                    for(Card c : untappedCreats) {
+                        choices.add(c);
+                    }
+                    choices.add("DONE");
+                    ArrayList<String> usableColors = new ArrayList<String>();
+                    ManaCost newCost = new ManaCost(originalCost.toString());
+                    Object tapForConvoke = null;
+                    if(sa.getActivatingPlayer().isHuman())
+                    {
+                        tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(), choices.toArray());
+                    }
+                    else {
+                        //TODO: AI to choose a creature to tap would go here
+                        //Probably along with deciding how many creatures to tap
+                    }
+                    while(tapForConvoke != null && (tapForConvoke instanceof Card) && untappedCreats.size() != 0) {
+                        Card workingCard = (Card) tapForConvoke;
+                        usableColors = CardUtil.getConvokableColors(workingCard, newCost);
+                        
+                        if(usableColors.size() != 0)
+                        {
+                            String chosenColor = usableColors.get(0);
+                            if(usableColors.size() > 1)
+                            {
+                                if(sa.getActivatingPlayer().isHuman())
+                                {
+                                    chosenColor = (String)GuiUtils.getChoice("Convoke for which color?", usableColors.toArray());
+                                }
+                                else
+                                {
+                                    //TODO: AI for choosing which color to convoke goes here.
+                                }
+                            }
+                            
+                            if(chosenColor.equals("colorless"))
+                            {
+                                newCost.decreaseColorlessMana(1);
+                            }
+                            else
+                            {
+                                String newCostStr = newCost.toString();
+                                newCostStr = newCostStr.replaceFirst(InputPayManaCostUtil.getShortColorString(chosenColor), "");
+                                newCost = new ManaCost(newCostStr.trim());
+                            }
+                            
+                            sa.addTappedForConvoke(workingCard);
+                            choices.remove(workingCard);
+                            untappedCreats.remove(workingCard);
+                            if(choices.size() < 2 || newCost.getConvertedManaCost() == 0) {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            untappedCreats.remove(workingCard);
+                        }
+
+                        if(sa.getActivatingPlayer().isHuman())
+                        {
+                            tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(), choices.toArray());
+                        }
+                        else {
+                            //TODO: AI to choose a creature to tap would go here
+                        }
+                    }
+                    
+                    //will only be null if user cancelled.
+                    if(tapForConvoke != null) {
+                        //Convoked creats are tapped here with triggers suppressed,
+                        //Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
+                        //This is to make sure that triggers go off at the right time
+                        //AND that you can't use mana tapabilities of convoked creatures
+                        //to pay the convoked cost.
+                        AllZone.getTriggerHandler().suppressMode("Taps");
+                        for(Card c : sa.getTappedForConvoke()) {
+                            c.tap();
+                        }
+                        AllZone.getTriggerHandler().clearSuppression("Taps");
+                        
+                        manaCost = newCost;
+                    }
+                }
+                
             }
         } // isSpell
 
@@ -2535,7 +2632,7 @@ public class GameAction {
                     AllZone.getInputControl().setInput(sa.getAfterPayMana());
                 }
             } else if (sa.getBeforePayMana() == null) {
-                AllZone.getInputControl().setInput(new InputPayManaCost(sa));
+                AllZone.getInputControl().setInput(new InputPayManaCost(sa,manaCost));
             } else {
                 AllZone.getInputControl().setInput(sa.getBeforePayMana());
             }

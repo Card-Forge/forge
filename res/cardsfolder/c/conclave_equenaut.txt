@@ -1,0 +1,12 @@
+Name:Conclave Equenaut
+ManaCost:4 W W
+Types:Creature Human Soldier
+Text:no text
+PT:3/3
+K:Flying
+K:Convoke
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conclave_equenaut.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/9.jpg
+Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nFlying
+End

@@ -1,0 +1,13 @@
+Name:Kavu Primarch
+ManaCost:3 G
+Types:Creature Kavu
+Text:no text
+PT:3/3
+K:Convoke
+K:Kicker:4
+K:etbCounter:P1P1:4:isValid Card.kicked:If CARDNAME was kicked, it enters the battlefield with four +1/+1 counters on it.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_primarch.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/128.jpg
+Oracle:Convoke (Each creature you tap while casting this spell reduces its total cost by {1} or by one mana of that creature's color.)\nKicker {4} (You may pay an additional {4} as you cast this spell.)\nIf Kavu Primarch was kicked, it enters the battlefield with four +1/+1 counters on it.
+End

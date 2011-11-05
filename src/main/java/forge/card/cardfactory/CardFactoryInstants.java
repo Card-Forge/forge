@@ -52,53 +52,7 @@ public class CardFactoryInstants {
     public static Card getCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
-        if (cardName.equals("Sprout Swarm")) {
-            final SpellAbility spellOne = new Spell(card) {
-                private static final long serialVersionUID = -609007714604161377L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeTokenSaproling(card.getController());
-                }
-            }; // SpellAbility
-
-            final SpellAbility spellTwo = new Spell(card) {
-                private static final long serialVersionUID = -1387385820860395676L;
-
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeTokenSaproling(card.getController());
-                    // return card to the hand
-                    final PlayerZone hand = card.getController().getZone(Constant.Zone.Hand);
-                    AllZone.getGameAction().moveTo(hand, card);
-                }
-            }; // SpellAbility
-
-            spellOne.setManaCost("1 G");
-            spellTwo.setManaCost("4 G");
-            spellTwo.setAdditionalManaCost("3");
-
-            spellOne.setDescription("Put a 1/1 green Saproling token onto the battlefield.");
-            spellTwo.setDescription("Buyback 3 (You may pay an additional 3 as you cast this spell. "
-                    + "If you do, put this card into your hand as it resolves.)");
-
-            spellOne.setStackDescription("Sprout Swarm - Put a 1/1 green Saproling token onto the battlefield");
-            spellTwo.setStackDescription("Sprout Swarm - Buyback, Put a 1/1 green "
-                    + "Saproling token onto the battlefield");
-
-            spellTwo.setIsBuyBackAbility(true);
-
-            card.addSpellAbility(spellOne);
-            card.addSpellAbility(spellTwo);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Fact or Fiction")) {
+        if (cardName.equals("Fact or Fiction")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1481112451519L;
 

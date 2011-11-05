@@ -1,7 +1,10 @@
 Name:Sprout Swarm
 ManaCost:1 G
 Types:Instant
-Text:(NOTE: "Convoke" is not implemented.)
+Text:no text
+K:Convoke
+A:SP$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+SVar:Buyback:3
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout_swarm.jpg
