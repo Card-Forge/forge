@@ -6635,29 +6635,26 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
 
-        } else if (property.startsWith("power") || // 8/10
+        } else if (property.startsWith("power") ||
                 property.startsWith("toughness") || property.startsWith("cmc")) {
             int x = 0;
             int y = 0;
-            int z = 0;
+            String rhs = "";
 
             if (property.startsWith("power")) {
-                z = 7;
+                rhs = property.substring(7);
                 y = getNetAttack();
             } else if (property.startsWith("toughness")) {
-                z = 11;
+                rhs = property.substring(11);
                 y = getNetDefense();
             } else if (property.startsWith("cmc")) {
-                z = 5;
+                 rhs = property.substring(5);
                 y = getCMC();
             }
-
-            if (property.substring(z).equals("X")) {
-                x = CardFactoryUtil.xCount(source, source.getSVar("X"));
-            } else if (property.substring(z).equals("Y")) {
-                x = CardFactoryUtil.xCount(source, source.getSVar("Y"));
-            } else {
-                x = Integer.parseInt(property.substring(z));
+            try {
+                x = Integer.parseInt(rhs);
+            } catch (NumberFormatException e) {
+                x = CardFactoryUtil.xCount(source, source.getSVar(rhs));
             }
 
             if (!AllZoneUtil.compare(y, property, x)) {
