@@ -3,6 +3,7 @@ ManaCost:5 G G
 Types:Creature Wurm
 Text:no text
 PT:5/5
+K:Trample
 K:Convoke
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_wurm.jpg

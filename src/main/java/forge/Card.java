@@ -2179,6 +2179,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     sb.append(")");
                     continue;
+                } else if (keyword.get(i).equals("Convoke")) {
+                    sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)");
                 } else {
                     if (i != 0 && sb.length() != 0) {
                         sb.append(", ");
@@ -2443,6 +2445,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        //Haunt
         for (String keyw : kw) {
             if (keyw.startsWith("Haunt")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
@@ -2456,6 +2459,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")\r\n");
+            }
+        }
+        
+        //Convoke
+        for (String keyw : kw) {
+            if(keyw.equals("Convoke")) {
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                }
+                
+                sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)\r\n");
             }
         }
         return sb;
