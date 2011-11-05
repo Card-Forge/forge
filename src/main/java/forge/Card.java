@@ -6070,7 +6070,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasKeyword(final String keyword) {
-        return getKeyword().contains(keyword);
+        String kw = new String(keyword);
+        if (kw.startsWith("HIDDEN")) {
+            kw = kw.substring(7);
+        }
+        return getKeyword().contains(kw);
     }
 
     /**

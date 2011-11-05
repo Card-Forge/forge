@@ -360,6 +360,9 @@ public class AbilityFactoryPump {
                 if (!this.containsCombatRelevantKeyword(this.keywords)
                         && AllZone.getPhase().isBefore(Constant.Phase.MAIN2)) {
                     list.clear(); // this keyword is not combat relevenat
+                } else if (this.keywords.get(0).equals("HIDDEN CARDNAME attacks each turn if able.") 
+                        && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
+                    list.clear();
                 }
 
                 list = list.filter(new CardListFilter() {
