@@ -2820,6 +2820,7 @@ res/cardsfolder/f/flailing_ogre.txt svneol=native#text/plain
 res/cardsfolder/f/flailing_soldier.txt svneol=native#text/plain
 res/cardsfolder/f/flame_burst.txt svneol=native#text/plain
 res/cardsfolder/f/flame_elemental.txt svneol=native#text/plain
+res/cardsfolder/f/flame_fusillade.txt -text
 res/cardsfolder/f/flame_jab.txt svneol=native#text/plain
 res/cardsfolder/f/flame_javelin.txt svneol=native#text/plain
 res/cardsfolder/f/flame_jet.txt svneol=native#text/plain
