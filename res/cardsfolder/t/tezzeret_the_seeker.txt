@@ -3,6 +3,11 @@ ManaCost:3 U U
 Types:Planeswalker Tezzeret
 Text:no text
 Loyalty:4
+A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Artifact | TgtPrompt$ Choose target artifact | TargetMin$ 0 | TargetMax$ 2 | Planeswalker$ True | SpellDescription$ Untap up to two target artifacts.
+A:AB$ ChangeZone | Cost$ SubCounter<X/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLEChosenX | ChangeNum$ 1 | Shuffle$ True | Planeswalker$ True | SpellDescription$ Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
+A:AB$ AnimateAll | Cost$ SubCounter<5/LOYALTY> | Power$ 5 | Toughness$ 5 | Types$ Creature,Artifact | ValidCards$ Artifact.YouCtrl | Planeswalker$ True | Ultimate$ True | SpellDescription$ Artifacts you control become 5/5 artifact creatures until end of turn.
+#ChosenX SVar created by Cost payment
+SVar:X:XChoice
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_the_seeker.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/60.jpg
