@@ -6,7 +6,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.CardListFilter;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cost.Cost;

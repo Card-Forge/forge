@@ -1431,7 +1431,7 @@ public class AbilityFactoryDealDamage {
         for (final Object o : tgts) {
             for (Card source : sources) {
                 int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
-                System.out.println(source+" deals "+dmg+" damage to "+o.toString());
+                //System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (AllZoneUtil.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(this.abilityFactory.getHostCard(), c))) {
@@ -1450,7 +1450,7 @@ public class AbilityFactoryDealDamage {
         if (params.containsKey("DefinedCards") && params.get("DefinedCards").equals("Self")) {
             for (Card source : sources) {
                 int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
-                System.out.println(source+" deals "+dmg+" damage to "+source);
+                //System.out.println(source+" deals "+dmg+" damage to "+source);
                 source.addDamage(dmg, source);
             }
         }

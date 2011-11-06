@@ -5,9 +5,6 @@ import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
-import forge.CardListFilter;
-import forge.Constant.Zone;
 
 /**
  * <p>
