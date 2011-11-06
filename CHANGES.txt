@@ -23,6 +23,25 @@ Forge Beta: 11-##-2011 ver 1.1.# rev #####
 - The AI will recognize duplicate HIDDEN keywords.
 - The AI will no longer give "HIDDEN CARDNAME attacks each turn if able." during his own turn.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Added Convoke for the human only. (AI will always pay full cost currently.)
+- Converted Sprout Swarm to script and completed it.
+- Fixed Convoke card text.
+- Fixed Siege Wurm not having Trample.
+- Fixed an issue with AF_CopyPermanent vs DFC cards.
+- Improved the Attack AI deciding to assault (especially with poison involved).
+- Download set lq pictures fixed for 2-faced
+- these have 2 prints
+- Fixing Scattershot Archer's toughness
+- Converted Jace the Mind Sculptor to script.
+- Festerhide Boar was missing trample
+- Temporary fix to Index out of Range Exception in doAssault()
+- little java cleanups
+- add an AF_EachDamage (it's a little different than others to get your head around, since it loops over source as well as targets. It's not completely generalized, but works for the cards that currently use it.)
+- convert Sarkhan the Mad to script
+- little Java cleanups
+- more Java cleanups
+- Ran set info script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
@@ -53,6 +72,28 @@ Hand to Hand
 Basandra, Battle Seraph
 Damping Matrix
 Faith's Fetters
+Autochthon Wurm
+Conclave Equenaut
+Conclave Phalanx
+Conclave's Blessing
+Devouring Light
+Gather Courage
+Guardian of Vitu-Ghazi
+Hour of Reckoning
+Kavu Primarch
+Overwhelm
+Root-Kin Ally
+Scatter the Seeds
+Siege Wurm
+Sundering Vitae
+Overeager Apprentice
+Mindmoil
+Boros Fury-Shield
+Minion Reflector
+Bottled Cloister
+Flame Fusillade
+Endrek Sahr, Master Breeder
+Wave of Reckoning
 
 
 end
