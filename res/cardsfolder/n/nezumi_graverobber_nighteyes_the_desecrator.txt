@@ -22,7 +22,7 @@ Colors:black
 Types:Legendary Creature Rat Wizard
 Text:no text
 PT:4/2
-A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature. | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
+A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature. | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nighteyes_the_desecrator.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/311.jpg
