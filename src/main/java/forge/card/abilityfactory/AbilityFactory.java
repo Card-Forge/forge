@@ -352,11 +352,11 @@ public class AbilityFactory {
             final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
 
             if (this.isAb) {
-                spellAbility = dd.getAbility();
+                spellAbility = dd.getAbilityDealDamage();
             } else if (this.isSp) {
-                spellAbility = dd.getSpell();
+                spellAbility = dd.getSpellDealDamage();
             } else if (this.isDb) {
-                spellAbility = dd.getDrawback();
+                spellAbility = dd.getDrawbackDealDamage();
             }
         }
 
@@ -368,6 +368,17 @@ public class AbilityFactory {
                 spellAbility = dd.getSpellDamageAll();
             } else if (this.isDb) {
                 spellAbility = dd.getDrawbackDamageAll();
+            }
+        }
+
+        else if (this.api.equals("EachDamage")) {
+            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
+            if (this.isAb) {
+                spellAbility = dd.getAbilityEachDamage();
+            } else if (this.isSp) {
+                spellAbility = dd.getSpellEachDamage();
+            } else if (this.isDb) {
+                spellAbility = dd.getDrawbackEachDamage();
             }
         }
 
