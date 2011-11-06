@@ -1364,9 +1364,11 @@ public abstract class Player extends GameEntity {
      *            a {@link forge.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     *  @return a {@link forge.CardList} object.
      */
-    public final void discard(final Card c, final SpellAbility sa) {
+    public final CardList discard(final Card c, final SpellAbility sa) {
         doDiscard(c, sa);
+        return new CardList(c);
     }
 
     /**

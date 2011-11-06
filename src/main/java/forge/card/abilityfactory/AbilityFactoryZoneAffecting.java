@@ -519,6 +519,9 @@ public class AbilityFactoryZoneAffecting {
                     }
                 } else {
                     final CardList drawn = p.drawCards(numCards);
+                    if (params.containsKey("Reveal")) {
+                        GuiUtils.getChoice("Revealing drawn cards", drawn.toArray());
+                    }
                     if (params.containsKey("RememberDrawn")) {
                         for (final Card c : drawn) {
                             source.addRemembered(c);
@@ -1077,6 +1080,7 @@ public class AbilityFactoryZoneAffecting {
      */
     private static void discardResolve(final AbilityFactory af, final SpellAbility sa) {
         final Card source = sa.getSourceCard();
+        final Card host = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
         final String mode = params.get("Mode");
 
@@ -1093,6 +1097,19 @@ public class AbilityFactoryZoneAffecting {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canTarget(sa)) {
+                if (mode.equals("Defined")) {
+                    final ArrayList<Card> toDiscard = AbilityFactory.getDefinedCards(host, params.get("DefinedCards"), sa);
+                    for (Card c : toDiscard) {
+                        discarded.addAll(p.discard(c, sa));
+                    }
+                    if (params.containsKey("RememberDiscarded")) {
+                        for (final Card c : discarded) {
+                            source.addRemembered(c);
+                        }
+                    }
+                    continue;
+                }
+                
                 if (mode.equals("Hand")) {
                     final CardList list = p.discardHand(sa);
                     if (params.containsKey("RememberDiscarded")) {
@@ -1298,6 +1315,10 @@ public class AbilityFactoryZoneAffecting {
                     valid = "Card";
                 }
                 sb.append(" of type: ").append(valid);
+            }
+            
+            if (mode.equals("Defined")) {
+                sb.append(" defined cards");
             }
 
             if (mode.equals("Random")) {
