@@ -2122,6 +2122,7 @@ res/cardsfolder/d/domineer.txt svneol=native#text/plain
 res/cardsfolder/d/dominus_of_fealty.txt svneol=native#text/plain
 res/cardsfolder/d/donate.txt svneol=native#text/plain
 res/cardsfolder/d/doom_blade.txt svneol=native#text/plain
+res/cardsfolder/d/doom_cannon.txt -text
 res/cardsfolder/d/doomed_necromancer.txt svneol=native#text/plain
 res/cardsfolder/d/doomed_traveler.txt -text
 res/cardsfolder/d/doomsday.txt svneol=native#text/plain
