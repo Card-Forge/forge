@@ -36,7 +36,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      */
     public GuiDownloadSetPicturesLQ(final JFrame frame) {
         super(frame);
-        picturesPath = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
+        
     }
 
     protected final void addCardToList(ArrayList<DownloadObject> cList, CardPrinted c, String cardName)
@@ -50,6 +50,10 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         String imgFN = CardUtil.buildFilename(c, cardName);
         boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);        
 
+        if(picturesPath == null)
+        {
+            System.out.println("Oh snap!");
+        }
         if (!foundSetImage) {
             int artsCnt = c.getCard().getSetInfo(setCode3).getCopiesCount();
             String fn = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
@@ -67,6 +71,10 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
      */
     protected final DownloadObject[] getNeededImages() {
+        if(picturesPath == null)
+        {
+            picturesPath = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
+        }
         // read token names and urls
         DownloadObject[] cardTokenLQ = readFileWithNames(NewConstants.TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
         ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
