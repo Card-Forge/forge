@@ -24,7 +24,7 @@ Types:Planeswalker Garruk
 Text:no text
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Black | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Deathtouch | Planeswalker$ True | SpellDescription$ Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.
-A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | RememberSacrificed$ True | SubAbility$ DBSearch | Planeswalker$ True | SpellDescription$ Sacrifice a creature.If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
+A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | Defined$ You | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBSearch | Planeswalker$ True | SpellDescription$ Sacrifice a creature.If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
 A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ X | NumDef$ X | Planeswalker$ True | Ultimate$ True | SpellDescription$ Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
 SVar:X:Count$InYourYard.Creature
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1
