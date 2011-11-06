@@ -567,7 +567,7 @@ public final class AbilityFactoryClash {
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
         String valid = "";
