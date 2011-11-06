@@ -1314,6 +1314,7 @@ public class GameAction {
         this.canShowWinLose = true;
         forge.card.trigger.Trigger.resetIDs();
         AllZone.getTriggerHandler().clearTriggerSettings();
+        AllZone.getTriggerHandler().clearDelayedTrigger();
 
         // friendliness
         final CardFactoryInterface c = AllZone.getCardFactory();

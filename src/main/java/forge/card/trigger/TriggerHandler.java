@@ -75,6 +75,15 @@ public class TriggerHandler {
     public final void registerDelayedTrigger(final Trigger trig) {
         this.delayedTriggers.add(trig);
     }
+    
+    /**
+     * <p>
+     * clearDelayedTrigger.
+     * </p>
+     */
+    public final void clearDelayedTrigger() {
+        delayedTriggers.clear();
+    }
 
     /**
      * <p>
