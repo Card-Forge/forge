@@ -1282,10 +1282,8 @@ public class MagicStack extends MyObservable {
                 activePlayerSAs.remove(next);
 
                 if (next.isTrigger()) {
-                    System.out.println("Stack order: AllZone.getGameAction().playSpellAbility(next)");
                     AllZone.getGameAction().playSpellAbility(next);
                 } else {
-                    System.out.println("Stack order: AllZone.getStack().add(next)");
                     this.add(next);
                 }
             }
