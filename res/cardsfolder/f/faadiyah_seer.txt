@@ -1,0 +1,10 @@
+Name:Fa'adiyah Seer
+ManaCost:1 G
+Types:Creature Human Shaman
+Text:no text
+PT:1/1
+A:AB$ Draw | Cost$ T | NumCards$ 1 | Reveal$ True | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card and reveal it. If it isn't a land card, discard it.
+SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ You | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/faadiyah_seer.jpg
+End
