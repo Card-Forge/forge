@@ -2109,6 +2109,7 @@ res/cardsfolder/d/divine_verdict.txt svneol=native#text/plain
 res/cardsfolder/d/diving_griffin.txt svneol=native#text/plain
 res/cardsfolder/d/divinity_of_pride.txt svneol=native#text/plain
 res/cardsfolder/d/dizzy_spell.txt svneol=native#text/plain
+res/cardsfolder/d/dizzying_gaze.txt -text
 res/cardsfolder/d/djinn_of_the_lamp.txt svneol=native#text/plain
 res/cardsfolder/d/do_or_die.txt svneol=native#text/plain
 res/cardsfolder/d/dodecapod.txt svneol=native#text/plain
@@ -6511,6 +6512,7 @@ res/cardsfolder/r/reclaim.txt svneol=native#text/plain
 res/cardsfolder/r/reclusive_wight.txt svneol=native#text/plain
 res/cardsfolder/r/recoil.txt svneol=native#text/plain
 res/cardsfolder/r/recollect.txt svneol=native#text/plain
+res/cardsfolder/r/reconnaissance.txt -text
 res/cardsfolder/r/reconstruction.txt svneol=native#text/plain
 res/cardsfolder/r/recover.txt svneol=native#text/plain
 res/cardsfolder/r/recumbent_bliss.txt svneol=native#text/plain

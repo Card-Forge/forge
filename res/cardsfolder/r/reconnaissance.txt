@@ -1,0 +1,11 @@
+Name:Reconnaissance
+ManaCost:W
+Types:Enchantment
+Text:no text
+A:AB$RemoveFromCombat | Cost$ 0 | ValidTgts$ Creature.attacking+YouCtrl | TgtPrompt$ Select target attacking creature you control. | SubAbility$ DBUntap | SpellDescription$ Remove target attacking creature you control from combat and untap it.
+SVar:DBUntap:DB$Untap | Defined$ Targeted
+SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/17.jpg
+Oracle:{0}: Remove target attacking creature you control from combat and untap it.
+End
