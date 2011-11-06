@@ -3,6 +3,16 @@ ManaCost:3 B R
 Types:Planeswalker Sarkhan
 Text:no text
 Loyalty:7
+A:AB$Dig | Cost$ AddCounter<0/LOYALTY> | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | RememberChanged$ True | SubAbility$ DBDamage | Planeswalker$ True | SpellDescription$ Reveal the top card of your library and put it into your hand. CARDNAME deals damage to himself equal to that card's converted mana cost.
+SVar:DBDamage:DB$ DealDamage | Defined$ Self | NumDmg$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$CardManaCost
+A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBToken | Planeswalker$ True | SpellDescription$ Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ TargetedController | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying 
+#for this AF, the DefinedCards$ Self is the target for Each damaging.  They EachDamage themselves.
+A:AB$ EachDamage | Cost$ SubCounter<4/LOYALTY> | ValidCards$ Dragon.YouCtrl | ValidDescription$ Dragon you control | NumDmg$ X | DamageDesc$ damage equal to its power | Tgt$ TgtP | Planeswalker$ True | Ultimate$ True | SpellDescription$ Each Dragon creature you control deals damage equal to its power to target player.
+#NumDmg isn't really used here.  It is left for clarity.  The AF pulls Damage straight from "X" hardcoded.
+SVar:X:Count$CardPower
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_the_mad.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/214.jpg
