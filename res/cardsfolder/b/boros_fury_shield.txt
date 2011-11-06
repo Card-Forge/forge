@@ -5,6 +5,7 @@ Text:no text
 A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | IsCurse$ True | SubAbility$ DBDamage | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt by target attacking or blocking creature this turn. If R was spent to cast CARDNAME, it deals damage to that creature's controller equal to the creature's power.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | ConditionManaSpent$ R
 SVar:X:Targeted$CardPower
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_fury_shield.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/5.jpg
