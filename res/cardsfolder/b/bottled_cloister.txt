@@ -11,4 +11,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bottled_cloister.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/256.jpg
+Oracle:At the beginning of each opponent's upkeep, exile all cards from your hand face down.\nAt the beginning of your upkeep, return all cards you own exiled with Bottled Cloister to your hand, then draw a card.
 End
