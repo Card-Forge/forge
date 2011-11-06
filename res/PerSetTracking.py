@@ -124,5 +124,3 @@ with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "CompleteSta
         statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
 
 print "Done!"
-print "Press Enter to exit."
-raw_input("")
