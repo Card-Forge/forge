@@ -1,0 +1,13 @@
+Name:Trickery Charm
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Charm | Cost$ U | Choices$ DBPump,DBChooseType,DBRearrage | SpellDescription$ Choose one — Target creature gains flying until end of turn; or target creature becomes the creature type of your choice until end of turn; or look at the top four cards of your library, then put them back in any order.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn
+SVar:DBChooseType:DB$ ChooseType | Type$ Creature | Defined$ You | SubAbility$ DBAnimate | SpellDescription$ Target creature becomes the creature type of your choice until end of turn
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
+SVar:DBRearrage:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 4 | SpellDescription$ Look at the top four cards of your library, then put them back in any order
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trickery_charm.jpg
+End
