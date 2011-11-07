@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:1/1
 K:Provoke
-A:AB$ Pump | Cost$ 1 W | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. & HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
+A:AB$ Pump | Cost$ 1 W | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. & HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by CARDNAME this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deftblade_elite.jpg

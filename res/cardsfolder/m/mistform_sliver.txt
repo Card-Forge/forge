@@ -9,4 +9,6 @@ SVar:DBAnimate:DB$ Animate | Types$ ChosenType
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_sliver.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/46.jpg
+Oracle:All Slivers have "{1}: This permanent becomes the creature type of your choice in addition to its other types until end of turn."
 End
