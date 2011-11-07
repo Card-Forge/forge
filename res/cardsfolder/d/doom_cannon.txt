@@ -2,10 +2,11 @@ Name:Doom Cannon
 ManaCost:6
 Types:Artifact
 Text:no text
-T:Mode$ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | Execute$ TrigChooseCT | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | Execute$ TrigChooseCT | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
 SVar:TrigChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck
-A:AB$DealDamage | Cost$ 3 T Sac<1/Creature.ChosenType> | NumDmg$ 3 | Tgt$ TgtCP | CostDesc$ 3, Tap, Sacrifice a creature of the chosen type | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
+A:AB$ DealDamage | Cost$ 3 T Sac<1/Creature.ChosenType> | NumDmg$ 3 | Tgt$ TgtCP | CostDesc$ 3, Tap, Sacrifice a creature of the chosen type | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doom_cannon.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/307.jpg
 Oracle:As Doom Cannon enters the battlefield, choose a creature type.\n{3}, {T}, Sacrifice a creature of the chosen type: Doom Cannon deals 3 damage to target creature or player.
 End
