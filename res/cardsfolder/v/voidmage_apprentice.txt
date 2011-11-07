@@ -1,0 +1,11 @@
+Name:Voidmage Apprentice
+ManaCost:1 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+K:Morph:2 U U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, counter target spell.
+SVar:TrigCounter:AB$ Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voidmage_apprentice.jpg
+End
