@@ -10,4 +10,5 @@ SVar:X:Remembered$Amount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promise_of_bunrei.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/24.jpg
+Oracle:When a creature you control dies, sacrifice Promise of Bunrei. If you do, put four 1/1 colorless Spirit creature tokens onto the battlefield.
 End
