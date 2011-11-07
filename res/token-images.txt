@@ -67,6 +67,7 @@ c_x_x_riptide_replicator.jpg           http://www.cardforge.org/fpics/tokens/c_x
 c_x_y_twin.jpg                         http://www.cardforge.org/fpics/tokens/c_x_y_twin.jpg
 g_1_1_butterfly.jpg                    http://www.cardforge.org/fpics/tokens/g_1_1_butterfly.jpg
 g_0_1_plant.jpg                        http://www.cardforge.org/fpics/tokens/g_0_1_plant.jpg
+g_0_1_sheep.jpg                        http://www.cardforge.org/fpics/tokens/g_0_1_sheep.jpg
 g_0_1_wood.jpg                         http://www.cardforge.org/fpics/tokens/g_0_1_wood.jpg
 g_1_1_cat.jpg                          http://www.cardforge.org/fpics/tokens/g_1_1_cat.jpg
 g_1_1_elf_warrior.jpg                  http://www.cardforge.org/fpics/tokens/g_1_1_elf_warrior.jpg
@@ -188,7 +189,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 # //b_x_x_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_x_x_vampire.jpg                      [ZEN] Kalitas, Bloodchief of Ghet
 # //c_1_1_tetravite.jpg                    http://www.cardforge.org/fpics/tokens/c_1_1_tetravite.jpg                    [ATQ/4ED] Tetravus
 # //c_4_4_kaldra.jpg                       http://www.cardforge.org/fpics/tokens/c_4_4_kaldra.jpg                       [5DN] Helm of Kaldra
-# //g_0_1_sheep.jpg                        http://www.cardforge.org/fpics/tokens/g_0_1_sheep.jpg                        [VIS/TSB] Ovinomancer
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //g_2_2_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_2_2_beast.jpg                        [EXO] Keeper of the Beasts
 # //r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg                      [SOK] Rally the Hoard
