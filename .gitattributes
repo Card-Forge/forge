@@ -5220,6 +5220,7 @@ res/cardsfolder/m/mistform_skyreaver.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_sliver.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mistform_stalker.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_ultimus.txt svneol=native#text/plain
+res/cardsfolder/m/mistform_wakecaster.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mistform_wall.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mistmeadow_skulk.txt svneol=native#text/plain
 res/cardsfolder/m/mistmeadow_witch.txt svneol=native#text/plain
