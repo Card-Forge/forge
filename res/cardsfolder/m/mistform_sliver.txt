@@ -1,0 +1,12 @@
+Name:Mistform Sliver
+ManaCost:1 U
+Types:Creature Illusion Sliver
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ ABChooseType | AddSVar$ DBAnimate | Description$ All Slivers have "1: This permanent becomes the creature type of your choice in addition to its other types until end of turn."
+SVar:ABChooseType:AB$ ChooseType | Cost$ 1 | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ This permanent becomes the creature type of your choice in addition to its other types until end of turn.
+SVar:DBAnimate:DB$ Animate | Types$ ChosenType
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_sliver.jpg
+End

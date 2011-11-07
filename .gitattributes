@@ -5217,6 +5217,7 @@ res/cardsfolder/m/mistform_mutant.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_seaswift.txt -text
 res/cardsfolder/m/mistform_shrieker.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_skyreaver.txt svneol=native#text/plain
+res/cardsfolder/m/mistform_sliver.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mistform_stalker.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_ultimus.txt svneol=native#text/plain
 res/cardsfolder/m/mistform_wall.txt -text svneol=unset#text/plain
