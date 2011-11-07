@@ -947,6 +947,10 @@ public final class AbilityFactoryReveal {
                     final Card c = itr.next();
                     AllZone.getGameAction().moveTo(revealedDest, c, revealedLibPos);
                 }
+                
+                if(params.containsKey("Shuffle")) {
+                    p.shuffle();
+                }
             } // end foreach player
         }
     } // end resolve
