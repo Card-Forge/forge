@@ -10,4 +10,5 @@ SVar:TrigCopyPermanent:AB$ CopyPermanent | Cost$ 0 | Defined$ TriggeredCard | Nu
 SVar:X:TriggeredCard$CardCounters.TIME
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronozoa.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/37.jpg
 End
