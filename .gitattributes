@@ -7570,6 +7570,7 @@ res/cardsfolder/s/snap.txt svneol=native#text/plain
 res/cardsfolder/s/snapback.txt svneol=native#text/plain
 res/cardsfolder/s/snapping_creeper.txt svneol=native#text/plain
 res/cardsfolder/s/snapping_drake.txt svneol=native#text/plain
+res/cardsfolder/s/snapping_thragg.txt -text svneol=unset#text/plain
 res/cardsfolder/s/snapsail_glider.txt svneol=native#text/plain
 res/cardsfolder/s/snarling_undorak.txt svneol=native#text/plain
 res/cardsfolder/s/sneak_attack.txt svneol=native#text/plain
