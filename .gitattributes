@@ -7894,6 +7894,7 @@ res/cardsfolder/s/stampeding_serow.txt svneol=native#text/plain
 res/cardsfolder/s/stampeding_wildebeests.txt svneol=native#text/plain
 res/cardsfolder/s/stand_firm.txt svneol=native#text/plain
 res/cardsfolder/s/stand_together.txt -text
+res/cardsfolder/s/standardize.txt -text svneol=unset#text/plain
 res/cardsfolder/s/standing_stones.txt svneol=native#text/plain
 res/cardsfolder/s/standing_troops.txt svneol=native#text/plain
 res/cardsfolder/s/standstill.txt svneol=native#text/plain
