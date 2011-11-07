@@ -1945,6 +1945,7 @@ res/cardsfolder/d/defiant_vanguard.txt -text
 res/cardsfolder/d/defiler_of_souls.txt svneol=native#text/plain
 res/cardsfolder/d/defiling_tears.txt svneol=native#text/plain
 res/cardsfolder/d/deft_duelist.txt svneol=native#text/plain
+res/cardsfolder/d/deftblade_elite.txt -text svneol=unset#text/plain
 res/cardsfolder/d/defy_gravity.txt svneol=native#text/plain
 res/cardsfolder/d/dega_disciple.txt svneol=native#text/plain
 res/cardsfolder/d/dega_sanctuary.txt svneol=native#text/plain
