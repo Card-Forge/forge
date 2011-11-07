@@ -55,7 +55,10 @@ public class BoosterGenerator {
     private final List<CardPrinted> rares = new ArrayList<CardPrinted>();
     private final List<CardPrinted> mythics = new ArrayList<CardPrinted>();
     private final List<CardPrinted> specials = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> doubleFaced = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> doubleFacedCommons = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> doubleFacedUncommons = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> doubleFacedRares = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> doubleFacedMythics = new ArrayList<CardPrinted>();
 
     // private List<CardPrinted> commonCreatures;
     // private List<CardPrinted> commonNonCreatures;
@@ -263,7 +266,20 @@ public class BoosterGenerator {
             temp.addAll(this.pickRandomCards(this.mythics, nMythics));
         }
         if (nDoubls > 0) {
-            temp.addAll(this.pickRandomCards(this.doubleFaced, nDoubls));
+            int dblFacedRarity = MyRandom.getRandom().nextInt(14);
+            List<CardPrinted> listToUse;
+            if (dblFacedRarity < 9) { //Common
+                listToUse = doubleFacedCommons;
+            } else if (dblFacedRarity < 13) { //Uncommon
+                listToUse = doubleFacedUncommons;
+            } else {//Rare or Mythic
+                if(MyRandom.getRandom().nextInt(8) == 0) {
+                    listToUse = doubleFacedMythics;
+                } else {
+                    listToUse = doubleFacedRares;
+                }                
+            }            
+            temp.addAll(this.pickRandomCards(listToUse, nDoubls));
         }
 
         temp.addAll(this.pickRandomCards(this.specials, nSpecs));
@@ -280,7 +296,22 @@ public class BoosterGenerator {
             return;
         }
         if (c.getCard().isDoubleFaced() && (this.numDoubleFaced > 0)) {
-            this.doubleFaced.add(c);
+            switch (c.getRarity()) {
+            case Common:
+                this.doubleFacedCommons.add(c);
+                break;
+            case Uncommon:
+                this.doubleFacedUncommons.add(c);
+                break;
+            case Rare:
+                this.doubleFacedRares.add(c);
+                break;
+            case MythicRare:
+                this.doubleFacedMythics.add(c);
+                break;
+            default:
+                break;
+            }
         } else {
             switch (c.getRarity()) {
             case Common:
