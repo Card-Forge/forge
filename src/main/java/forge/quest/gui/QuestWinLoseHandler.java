@@ -319,26 +319,28 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
 
         // Estates bonus
         credTotal = credBase + credGameplay + credUndefeated;
+        double estateValue = 0;
         switch (this.model.qData.getInventory().getItemLevel("Estates")) {
         case 1:
-            credEstates = (int) 0.1 * credTotal;
-            sb.append("Estates bonus: 10%.<br>");
+            estateValue = .1;
             break;
 
         case 2:
-            credEstates = (int) 0.15 * credTotal;
-            sb.append("Estates bonus: 15%.<br>");
+            estateValue = .15;
             break;
 
         case 3:
-            credEstates = (int) 0.2 * credTotal;
-            sb.append("Estates bonus: 20%.<br>");
+            estateValue = .2;
             break;
 
         default:
             break;
         }
-        credTotal += credEstates;
+        if (estateValue > 0){
+            credEstates = (int) (estateValue * credTotal);
+            sb.append("Estates bonus: ").append((int) (100 * estateValue)).append("%.<br>");
+            credTotal += credEstates;
+        }
 
         // Final output
         String congrats = "<br><h3>";
