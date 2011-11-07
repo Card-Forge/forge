@@ -7,4 +7,6 @@ SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature | Types$ ChosenType | Ov
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/standardize.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/116.jpg
+Oracle:Choose a creature type other than Wall. Each creature becomes that type until end of turn.
 End

@@ -414,8 +414,13 @@ public class AbilityFactoryDestroy {
         } else {
             sb.append(host).append(" - ");
         }
-
-        sb.append("Destroy ");
+        
+        if(params.containsKey("Sacrifice")) {
+            sb.append("Sacrifice ");
+        }
+        else { 
+            sb.append("Destroy ");
+        }
 
         final Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
@@ -474,6 +479,7 @@ public class AbilityFactoryDestroy {
         final HashMap<String, String> params = af.getMapParams();
 
         final boolean noRegen = params.containsKey("NoRegen");
+        final boolean sac = params.containsKey("Sacrifice");
         final Card card = sa.getSourceCard();
 
         ArrayList<Card> tgtCards;
@@ -495,7 +501,9 @@ public class AbilityFactoryDestroy {
 
         for (final Card tgtC : tgtCards) {
             if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || CardFactoryUtil.canTarget(card, tgtC))) {
-                if (noRegen) {
+                if (sac) {
+                    AllZone.getGameAction().sacrifice(tgtC);
+                } else if (noRegen) {
                     AllZone.getGameAction().destroyNoRegeneration(tgtC);
                 } else {
                     AllZone.getGameAction().destroy(tgtC);
@@ -505,7 +513,9 @@ public class AbilityFactoryDestroy {
 
         for (final Card unTgtC : untargetedCards) {
             if (AllZoneUtil.isCardInPlay(unTgtC)) {
-                if (noRegen) {
+                if (sac) {
+                    AllZone.getGameAction().sacrifice(unTgtC);
+                } else  if (noRegen) {
                     AllZone.getGameAction().destroyNoRegeneration(unTgtC);
                 } else {
                     AllZone.getGameAction().destroy(unTgtC);

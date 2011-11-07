@@ -8,4 +8,6 @@ T:Mode$ DamageDone | ValidCard$ Card.Self+faceUp | ValidTarget$ Opponent | Execu
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature opponent controls | NumDmg$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snapping_thragg.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/233.jpg
+Oracle:Whenever Snapping Thragg deals combat damage to a player, you may have it deal 3 damage to target creature that player controls.\nMorph {4}{R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End
