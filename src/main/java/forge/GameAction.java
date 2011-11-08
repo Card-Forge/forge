@@ -1215,6 +1215,7 @@ public class GameAction {
             c.subtractShield();
             c.setDamage(0);
             c.tap();
+            c.addRegeneratedThisTurn();
             AllZone.getCombat().removeFromCombat(c);
             return false;
         }

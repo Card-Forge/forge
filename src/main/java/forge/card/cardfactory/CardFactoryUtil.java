@@ -2922,6 +2922,10 @@ public class CardFactoryUtil {
         if (sq[0].equals("DamageDoneThisTurn")) {
             return CardFactoryUtil.doXMath(c.getDamageDoneThisTurn(), m, c);
         }
+        
+        if (sq[0].contains("RegeneratedThisTurn")) {
+            return CardFactoryUtil.doXMath(c.getRegeneratedThisTurn(), m, c);
+        }
 
         CardList someCards = new CardList();
 
