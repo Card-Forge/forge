@@ -9,4 +9,5 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_charm.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/105.jpg
 End

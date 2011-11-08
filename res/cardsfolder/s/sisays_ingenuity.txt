@@ -12,4 +12,5 @@ SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sisays_ingenuity.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/33.jpg
 End
