@@ -2479,7 +2479,7 @@ public class CardFactoryUtil {
                     }
                 }
 
-                if (kw.equals("CARDNAME can't be the target of Aura spells.")) {
+                if (kw.equals("CARDNAME can't be the target of Aura spells.") || kw.equals("CARDNAME can't be enchanted.")) {
                     if (spell.isAura() && spell.isSpell()) {
                         return false;
                     }
