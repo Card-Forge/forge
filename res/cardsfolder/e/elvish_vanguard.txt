@@ -1,6 +1,6 @@
 Name:Elvish Vanguard
 ManaCost:1 G
-Types:Creature Elf
+Types:Creature Elf Warrior
 Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Elf.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Elf enters the battlefield, put a +1/+1 counter on CARDNAME.
