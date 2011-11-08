@@ -13,6 +13,7 @@ import forge.CardUtil;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -684,15 +685,8 @@ public final class AbilityFactoryClash {
 
                     }
                 } else {
-                    int cmc1 = 0;
-                    int cmc2 = 0;
-
-                    for (Card c : pile1) {
-                        cmc1 += CardUtil.getConvertedManaCost(c);
-                    }
-                    for (Card c : pile2) {
-                        cmc2 += CardUtil.getConvertedManaCost(c);
-                    }
+                    int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
+                    int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
 
                     //for now, this assumes that the outcome will be bad
                     //TODO: This should really have a ChooseLogic param to figure this out
