@@ -268,7 +268,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // regeneration
     private int nShield;
-    private int regeneratedThisTurn;
+    private int regeneratedThisTurn = 0;
 
     private int turnInZone;
 

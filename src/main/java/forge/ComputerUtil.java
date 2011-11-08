@@ -1403,7 +1403,7 @@ public class ComputerUtil {
      */
     public static Combat getAttackers() {
         ComputerUtilAttack att = new ComputerUtilAttack(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield),
-                AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield), AllZone.getHumanPlayer().getLife());
+                AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield));
 
         return att.getAttackers();
     }

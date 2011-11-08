@@ -289,6 +289,19 @@ public class CombatUtil {
         }
         return true;
     }
+    
+    public static boolean canBeBlocked(final Card attacker, final CardList blockers) {
+        if(!canBeBlocked(attacker)) {
+            return false;
+        }
+        for (Card blocker : blockers) {
+            if (canBlock(attacker, blocker)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
     // Has the player chosen all mandatory blocks?
     /**

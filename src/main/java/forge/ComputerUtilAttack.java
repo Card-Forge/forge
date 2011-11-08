@@ -23,7 +23,6 @@ public class ComputerUtilAttack {
     private CardList attackers;
     private CardList blockers;
     private CardList playerCreatures;
-    private int blockerLife;
 
     private Random random = MyRandom.getRandom();
     private final int randomInt = random.nextInt();
@@ -46,8 +45,8 @@ public class ComputerUtilAttack {
      * @param blockerLife
      *            a int.
      */
-    public ComputerUtilAttack(final Card[] possibleAttackers, final Card[] possibleBlockers, final int blockerLife) {
-        this(new CardList(possibleAttackers), new CardList(possibleBlockers), blockerLife);
+    public ComputerUtilAttack(final Card[] possibleAttackers, final Card[] possibleBlockers) {
+        this(new CardList(possibleAttackers), new CardList(possibleBlockers));
     }
 
     /**
@@ -62,8 +61,7 @@ public class ComputerUtilAttack {
      * @param blockerLife
      *            a int.
      */
-    public ComputerUtilAttack(final CardList possibleAttackers,
-            final CardList possibleBlockers, final int blockerLife) {
+    public ComputerUtilAttack(final CardList possibleAttackers, final CardList possibleBlockers) {
         humanList = new CardList(possibleBlockers.toArray());
         humanList = humanList.getType("Creature");
 
@@ -74,7 +72,6 @@ public class ComputerUtilAttack {
 
         attackers = getPossibleAttackers(possibleAttackers);
         blockers = getPossibleBlockers(possibleBlockers, attackers);
-        this.blockerLife = blockerLife;
     } // constructor
 
     /**
@@ -329,13 +326,20 @@ public class ComputerUtilAttack {
             }
         }
 
-        // I think this is right but the assault code may still be a little off
         CardListUtil.sortAttack(attackers);
 
         CardList remainingAttackers = new CardList(attackers.toArray());
+        CardList blockableAttackers = new CardList(attackers.toArray());
+        
+        for (int i = 0; i < attackers.size(); i++) {
+            if(!CombatUtil.canBeBlocked(attackers.get(i), blockers)) {
+                blockableAttackers.remove(attackers.get(i));
+            }
+        }
+        
         // presumes the Human will block
-        for (int i = 0; i < blockers.size() && i < attackers.size(); i++) {
-            remainingAttackers.remove(attackers.get(i));
+        for (int i = 0; i < blockers.size() && i < blockableAttackers.size(); i++) {
+            remainingAttackers.remove(blockableAttackers.get(i));
         }
         
         if(CombatUtil.sumDamageIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) > AllZone.getHumanPlayer().getLife()
