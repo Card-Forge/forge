@@ -56,6 +56,16 @@ Forge Beta: 11-##-2011 ver 1.1.# rev #####
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Added a few LQ pic URLs.
+- Added an optional "Shuffle" parameter to AF DigUntil and fixed Polymorph.
+- Added an optional "Sacrifice" parameter to AF Destroy.
+- Little text file updates.
+- Removing incorrect Ovinomancer (sorry sheep wizard)
+- Added RegeneratedThisTurn to xCount.
+- Ran set info script.
+- Ran oracle script.
+- Added the keyword "CARDNAME can't be enchanted.".
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
@@ -120,6 +130,18 @@ Elkin Bottle
 Promise of Bunrei
 Chronozoa
 Delver of Secrets
+Snapping Thragg
+Standardize
+Trickery Charm
+Deftblade Elite
+Mistform Sliver
+Shape Anew
+Mistform Wakecaster
+Voidmage Apprentice
+Dark Suspicions
+Dromar's Charm
+Sisay's Ingenuity
+Multani's Harmony
 
 
 end
