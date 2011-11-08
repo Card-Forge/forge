@@ -87,6 +87,7 @@ g_1_1_wolf.jpg                         http://www.cardforge.org/fpics/tokens/g_1
 g_1_2_spider.jpg                       http://www.cardforge.org/fpics/tokens/g_1_2_spider.jpg
 g_2_2_ape.jpg                          http://www.cardforge.org/fpics/tokens/g_2_2_ape.jpg
 g_2_2_bear.jpg                         http://www.cardforge.org/fpics/tokens/g_2_2_bear.jpg
+g_2_2_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_2_2_beast.jpg
 g_2_2_cat_warrior.jpg                  http://www.cardforge.org/fpics/tokens/g_2_2_cat_warrior.jpg
 g_2_2_lizard.jpg                       http://www.cardforge.org/fpics/tokens/g_2_2_lizard.jpg
 g_2_2_ooze.jpg                         http://www.cardforge.org/fpics/tokens/g_2_2_ooze.jpg
@@ -190,7 +191,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 # //c_1_1_tetravite.jpg                    http://www.cardforge.org/fpics/tokens/c_1_1_tetravite.jpg                    [ATQ/4ED] Tetravus
 # //c_4_4_kaldra.jpg                       http://www.cardforge.org/fpics/tokens/c_4_4_kaldra.jpg                       [5DN] Helm of Kaldra
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
-# //g_2_2_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_2_2_beast.jpg                        [EXO] Keeper of the Beasts
 # //r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg                      [SOK] Rally the Hoard
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
 # //rg_4_4_giant_warrior.jpg               http://www.cardforge.org/fpics/tokens/rg_4_4_giant_warrior.jpg               [SHM] Giantbaiting

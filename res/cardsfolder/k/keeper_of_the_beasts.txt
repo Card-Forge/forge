@@ -1,0 +1,11 @@
+Name:Keeper of the Beasts
+ManaCost:G G
+Types:Creature Human Wizard
+Text:no text
+PT:1/2
+A:AB$ Token | Cost$ G T | ValidTgts$ Opponent | CheckSVar$ X | SVarCompare$ LTY | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Choose target opponent who controlled more creatures than you did as you activated this ability. Put a 2/2 green Beast creature token onto the battlefield.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:Y:Count$Valid Creature.YouDontCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_beasts.jpg
+End
