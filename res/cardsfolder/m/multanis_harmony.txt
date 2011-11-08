@@ -14,4 +14,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_harmony.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/84.jpg
+Oracle:Enchant creature\nEnchanted creature has "{T}: Add one mana of any color to your mana pool."
 End

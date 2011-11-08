@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_charm.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/105.jpg
+Oracle:Choose one - You gain 5 life; or counter target spell; or target creature gets -2/-2 until end of turn.
 End
