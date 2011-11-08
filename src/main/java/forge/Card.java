@@ -6548,8 +6548,28 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("SharesColorWith")) {
-            if (!sharesColorWith(source)) {
-                return false;
+            if (property.equals("SharesColorWith")) {
+                if(!sharesColorWith(source)) {
+                    return false;
+                }
+            } else {
+                String restriction = property.split("SharesColorWith ")[1];
+                if (restriction.equals("TopCardOfLibrary")) {
+                    CardList list = this.getOwner().getCardsIn(Zone.Library);
+                    if (list.isEmpty() || !sharesColorWith(list.get(0))) {
+                        return false;
+                    }
+                } else {
+                    boolean shares = false;
+                    for (Card card : sourceController.getCardsIn(Constant.Zone.Battlefield)) {
+                        if (card.isValid(restriction, sourceController, source) && sharesColorWith(card)) {
+                            shares = true;
+                        }
+                    }
+                    if(!shares) {
+                        return false;
+                    }
+                }
             }
         } else if (property.startsWith("withFlashback")) {
             boolean fb = false;
