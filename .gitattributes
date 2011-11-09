@@ -6117,6 +6117,7 @@ res/cardsfolder/p/planar_guide.txt svneol=native#text/plain
 res/cardsfolder/p/planar_portal.txt svneol=native#text/plain
 res/cardsfolder/p/planar_void.txt svneol=native#text/plain
 res/cardsfolder/p/planeswalkers_favor.txt -text
+res/cardsfolder/p/planeswalkers_fury.txt -text svneol=unset#text/plain
 res/cardsfolder/p/planeswalkers_mirth.txt -text
 res/cardsfolder/p/planeswalkers_scorn.txt -text
 res/cardsfolder/p/plasma_elemental.txt svneol=native#text/plain
