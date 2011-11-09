@@ -75,6 +75,17 @@ Fixes/Features:
 - Added the keyword "CARDNAME can't be enchanted.".
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
 - Fixed a simple copy / paste problem.
+- Cleanup in ComputerUtilAttack.
+- More improvements in the doAssault() evaluation.
+- Added some more options to the property "SharesColorWith" (for example "SharesColorWith TopOfLibary").
+- The chose Pile AI in AF TwoPiles will now use evaluatePermanentList.
+- Fixed the types for Elvish Vanguard.
+- Fixed Knight of the White Orchid.
+- Fixed Mystifying Maze.
+- Removed zonal restriction for trigger on Spiny Starfish.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -143,6 +154,12 @@ Dark Suspicions
 Dromar's Charm
 Sisay's Ingenuity
 Multani's Harmony
+Keeper of the Beasts
+Cloud Cover
+Crown of Convergence
+Infused Arrows
+Engineered Explosives
+Spiny Starfish
 
 
 end
