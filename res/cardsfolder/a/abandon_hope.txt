@@ -1,0 +1,9 @@
+Name:Abandon Hope
+ManaCost:X 1 B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ X 1 B Discard<X/Card/card> | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ X | SpellDescription$ Look at target opponent's hand and choose X cards from it. That player discards those cards.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+End

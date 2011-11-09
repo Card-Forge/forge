@@ -19,6 +19,7 @@ res/blockdata/formats.txt -text
 res/blockdata/setdata.txt svneol=native#text/plain
 res/booster-decks -text
 res/cardTemplateScript.py -text svneol=unset#text/x-python
+res/cardsfolder/a/abandon_hope.txt -text
 res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
 res/cardsfolder/a/abattoir_ghoul.txt -text
 res/cardsfolder/a/abbey_gargoyles.txt svneol=native#text/plain
@@ -38,6 +39,7 @@ res/cardsfolder/a/absorb.txt svneol=native#text/plain
 res/cardsfolder/a/absorb_vis.txt svneol=native#text/plain
 res/cardsfolder/a/abu_jafar.txt -text
 res/cardsfolder/a/abuna_acolyte.txt svneol=native#text/plain
+res/cardsfolder/a/abunas_chant.txt -text
 res/cardsfolder/a/abyssal_gatekeeper.txt svneol=native#text/plain
 res/cardsfolder/a/abyssal_horror.txt svneol=native#text/plain
 res/cardsfolder/a/abyssal_hunter.txt svneol=native#text/plain
