@@ -317,7 +317,7 @@ public class Combat {
         CardList att = new CardList(getAttackers());
         // sum unblocked attackers' power
         for (int i = 0; i < att.size(); i++) {
-            if (!isBlocked(att.get(i))) {
+            if (!isBlocked(att.get(i)) || (getBlockers(att.get(i)).size() == 0 && att.get(i).hasKeyword("Trample"))) {
 
                 int damageDealt = att.get(i).getNetCombatDamage();
 
