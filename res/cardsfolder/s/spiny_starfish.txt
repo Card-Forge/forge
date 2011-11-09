@@ -4,7 +4,7 @@ Types:Creature Starfish
 Text:no text
 PT:0/1
 A:AB$ Regenerate | Cost$ U | SpellDescription$ Regenerate CARDNAME.
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigToken | CheckSVar$ X | SVarCompare$ GE1 | TriggerDescription$ At the beginning of each end step, if CARDNAME regenerated this turn, put a 0/1 blue Starfish creature token onto the battlefield for each time it regenerated this turn.
+T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | CheckSVar$ X | SVarCompare$ GE1 | TriggerDescription$ At the beginning of each end step, if CARDNAME regenerated this turn, put a 0/1 blue Starfish creature token onto the battlefield for each time it regenerated this turn.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Starfish | TokenTypes$ Creature,Starfish | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 0 | TokenToughness$ 1
 SVar:X:Count$RegeneratedThisTurn
 SVar:Rarity:Uncommon
