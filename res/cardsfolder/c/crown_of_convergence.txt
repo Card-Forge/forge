@@ -8,4 +8,5 @@ A:AB$ Dig | Cost$ G W | LibraryPosition$ -1 | DigNum$ 1 | Reveal$ False | Destin
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_convergence.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/258.jpg
 End

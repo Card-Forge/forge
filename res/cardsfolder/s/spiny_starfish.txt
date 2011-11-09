@@ -8,4 +8,5 @@ T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | CheckSVar$ X | SVarCom
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Starfish | TokenTypes$ Creature,Starfish | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 0 | TokenToughness$ 1
 SVar:X:Count$RegeneratedThisTurn
 SVar:Rarity:Uncommon
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/53.jpg
 End

@@ -6,4 +6,5 @@ T:Mode$ BecomesTarget | ValidTarget$ Permanent.YouCtrl+Other | ValidSource$ Card
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredTarget
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_cover.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/98.jpg
 End
