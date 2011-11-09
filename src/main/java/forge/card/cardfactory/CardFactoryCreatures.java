@@ -522,8 +522,7 @@ public class CardFactoryCreatures {
                         public void selectCard(final Card card, final PlayerZone zone) {
                             if (card.isArtifact() && zone.is(Constant.Zone.Battlefield)
                                     && card.getController().isHuman()) {
-                                ability.setTargetCard(card);
-                                AllZone.getStack().add(ability);
+                                card.addCounter(Counters.PHYLACTERY, 1);
                                 this.stop();
                             }
                         }
@@ -538,13 +537,29 @@ public class CardFactoryCreatures {
                         }
 
                     } else { // computer
-                        final Object o = getArt.execute();
-                        // should never happen, but just in case
-                        if (o != null) {
-                            ability.setTargetCard((Card) o);
-                            AllZone.getStack().addSimultaneousStackEntry(ability);
+                        CardList art = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                        art = art.filter(new CardListFilter() {
+                            @Override
+                            public boolean addCard(final Card c) {
+                                return c.isArtifact();
+                            }
+                        });
 
+                        CardList list = new CardList(art.toArray());
+                        list = list.filter(new CardListFilter() {
+                            @Override
+                            public boolean addCard(final Card c) {
+                                return c.getIntrinsicKeyword().contains("Indestructible");
+                            }
+                        });
+
+                        Card chosen = null;
+                        if (!list.isEmpty()) {
+                            chosen = list.get(0);
+                        } else if (!art.isEmpty()) {
+                            chosen = art.get(0);
                         }
+                        chosen.addCounter(Counters.PHYLACTERY, 1);
                     } // else
                 } // execute()
             };
