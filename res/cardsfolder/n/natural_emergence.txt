@@ -1,0 +1,11 @@
+Name:Natural Emergence
+ManaCost:2 R G
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return a red or green enchantment you control to its owner's hand.
+SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Enchantment.YouCtrl+Red,Enchantment+YouCtrl+Green | ChangeNum$ 1 | Mandatory$ True
+S:Mode$ Continuous | Affected$ Land.YouCtrl | SetPower$ 2 | SetToughness$ 2 | AddType$ Creature | AddKeyword$ First strike | Description$ Lands you control are 2/2 creatures with first strike. They're still lands.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_emergence.jpg
+End
