@@ -139,6 +139,7 @@ rg_3_4_stangg_twin.jpg                 http://www.cardforge.org/fpics/tokens/rg_
 rw_1_1_goblin_soldier.jpg              http://www.cardforge.org/fpics/tokens/rw_1_1_goblin_soldier.jpg
 u_0_1_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_0_1_homunculus.jpg
 u_0_1_plant_wall.jpg                   http://www.cardforge.org/fpics/tokens/u_0_1_plant_wall.jpg
+u_0_1_starfish.jpg                     http://www.cardforge.org/fpics/tokens/u_0_1_starfish.jpg
 u_1_1_bird.jpg                         http://www.cardforge.org/fpics/tokens/u_1_1_bird.jpg
 u_1_1_camarid.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_camarid.jpg
 u_1_1_cloud_sprite.jpg                 http://www.cardforge.org/fpics/tokens/u_1_1_cloud_sprite.jpg
@@ -194,7 +195,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 # //r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg                      [SOK] Rally the Hoard
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
 # //rg_4_4_giant_warrior.jpg               http://www.cardforge.org/fpics/tokens/rg_4_4_giant_warrior.jpg               [SHM] Giantbaiting
-# //u_0_1_starfish.jpg                     http://www.cardforge.org/fpics/tokens/u_0_1_starfish.jpg                     [ALL] Spiny Starfish
 # //u_1_1_merfolk.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_merfolk.jpg                      [ZEN] Lullmage Mentor
 # //u_5_5_dragon_spirit.jpg                http://www.cardforge.org/fpics/tokens/u_5_5_dragon_spirit.jpg                [CHK] Tatsumasa, the Dragon's Fang
 # //u_x_x_orb.jpg                          http://www.cardforge.org/fpics/tokens/u_x_x_orb.jpg                          [ALL] Phantasmal Sphere
