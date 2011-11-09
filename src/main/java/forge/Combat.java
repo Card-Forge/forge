@@ -43,9 +43,6 @@ public class Combat {
     private Player attackingPlayer = null;
     private Player defendingPlayer = null;
 
-    private CardList attackersWithLure = new CardList();
-    private CardList canBlockAttackerWithLure = new CardList();
-
     /**
      * <p>
      * Constructor for Combat.
@@ -71,9 +68,6 @@ public class Combat {
 
         attackingPlayer = null;
         defendingPlayer = null;
-
-        attackersWithLure.clear();
-        canBlockAttackerWithLure.clear();
 
         defenders.clear();
         currentDefender = 0;
