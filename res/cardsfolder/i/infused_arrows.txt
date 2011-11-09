@@ -1,0 +1,14 @@
+Name:Infused Arrows
+ManaCost:4
+Types:Artifact
+Text:no text
+K:Sunburst
+#ChosenX SVar created by Cost payment
+A:AB$ Pump | Cost$ T SubCounter<X/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -ChosenX | NumDef$ -ChosenX | SpellDescription$ Target creature gets -X/-X until end of turn.
+SVar:X:XChoice
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infused_arrows.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/133.jpg
+End

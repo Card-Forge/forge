@@ -239,6 +239,7 @@ public class CostMana extends CostPart {
         final Input payX = new Input() {
             private static final long serialVersionUID = -6900234444347364050L;
             private int xPaid = 0;
+            private String colorsPaid = "";
             private ManaCost manaCost = new ManaCost(Integer.toString(numX));
 
             @Override
@@ -270,6 +271,9 @@ public class CostMana extends CostPart {
 
                 this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
                 if (this.manaCost.isPaid()) {
+                    if (!colorsPaid.contains(this.manaCost.getColorsPaid())) {
+                        colorsPaid += this.manaCost.getColorsPaid();
+                    }
                     this.manaCost = new ManaCost(Integer.toString(numX));
                     this.xPaid++;
                 }
@@ -291,6 +295,8 @@ public class CostMana extends CostPart {
                 this.stop();
                 payment.getCard().setXManaCostPaid(this.xPaid);
                 payment.paidCost(costMana);
+                payment.getCard().setColorsPaid(colorsPaid);
+                payment.getCard().setSunburstValue(colorsPaid.length());
             }
 
         };
