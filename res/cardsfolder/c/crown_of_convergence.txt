@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_convergence.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/258.jpg
+Oracle:Play with the top card of your library revealed.\nAs long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.\n{G}{W}: Put the top card of your library on the bottom of your library.
 End
