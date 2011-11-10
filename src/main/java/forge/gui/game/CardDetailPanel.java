@@ -410,14 +410,6 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             area.append("^");
         }
 
-        // uncastable
-        if (card.isUnCastable()) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("This card can't be cast.");
-        }
-
         // must block
         if (!card.getMustBlockCards().isEmpty()) {
             if (area.length() != 0) {

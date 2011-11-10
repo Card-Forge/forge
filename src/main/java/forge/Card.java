@@ -213,7 +213,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<Card, Integer>();
     private Map<Card, Integer> assignedDamageMap = new TreeMap<Card, Integer>();
 
-    private boolean unCastable;
     private boolean drawnThisTurn = false;
     private boolean tapped;
     private boolean sickness = true; // summoning sickness
@@ -4923,31 +4922,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         setTapped(false);
     }
 
-    /**
-     * <p>
-     * isUnCastable.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isUnCastable() {
-
-        return unCastable;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>unCastable</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setUnCastable(final boolean b) {
-        unCastable = b;
-        updateObservers();
-    }
-
     // keywords are like flying, fear, first strike, etc...
     /**
      * <p>
@@ -6555,7 +6529,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else {
                 String restriction = property.split("SharesColorWith ")[1];
                 if (restriction.equals("TopCardOfLibrary")) {
-                    CardList list = this.getOwner().getCardsIn(Zone.Library);
+                    CardList list = sourceController.getCardsIn(Zone.Library);
                     if (list.isEmpty() || !sharesColorWith(list.get(0))) {
                         return false;
                     }

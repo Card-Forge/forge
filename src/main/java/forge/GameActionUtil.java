@@ -121,7 +121,7 @@ public final class GameActionUtil {
                         } // while
                         GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
 
-                        if (cascadedCard != null && !cascadedCard.isUnCastable()) {
+                        if (cascadedCard != null) {
 
                             if (cascadedCard.getController().isHuman()) {
                                 StringBuilder title = new StringBuilder();
@@ -249,7 +249,7 @@ public final class GameActionUtil {
                             } // for
                             GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
                             for (int i = 0; i < rippleMax; i++) {
-                                if (rippledCards[i] != null && !rippledCards[i].isUnCastable()) {
+                                if (rippledCards[i] != null) {
 
                                     if (rippledCards[i].getController().isHuman()) {
                                         Object[] possibleValues = { "Yes", "No" };
