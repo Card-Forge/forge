@@ -1535,35 +1535,6 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Brood Birthing")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -8303724057068847270L;
-
-                @Override
-                public void resolve() {
-                    int times = 1;
-                    CardList cl;
-                    if (card.getController().getCardsIn(Zone.Battlefield, "Eldrazi Spawn").size() > 0) {
-                        times = 3;
-                    }
-                    for (int i = 0; i < times; i++) {
-                        cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(),
-                                "", new String[] { "Creature", "Eldrazi", "Spawn" }, 0, 1, new String[] {});
-                        for (final Card crd : cl) {
-                            crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
-                        }
-                    }
-                }
-            };
-            final StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - ").append(card.getController());
-            sb.append(" puts one or three 0/1 Eldrazi Spawn creature tokens onto the battlefield.");
-            spell.setStackDescription(sb.toString());
-
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Explosive Revelation")) {
             /*
              * Choose target creature or player. Reveal cards from the top of
