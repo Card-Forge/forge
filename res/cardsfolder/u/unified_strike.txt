@@ -1,0 +1,11 @@
+Name:Unified Strike
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SpellDescription$ Exile target attacking creature if its power is less than or equal to the number of Soldiers on the battlefield.
+SVar:Y:Count$Valid Soldier
+SVar:X:Targeted$Valid Creature.powerLEY
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_strike.jpg
+End

@@ -8,4 +8,5 @@ A:SP$ GainLife | Cost$ 5 W | PrecostDesc$ Entwine | CostDesc$ 2 | LifeAmount$ 5 
 SVar:DBPreventDamage:DB$ PreventDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | Amount$ 5
 SVar:RemAIDeck:True
 SVar:Rarity:Common
+http://www.wizards.com/global/images/magic/general/abunas_chant.jpg
 End
