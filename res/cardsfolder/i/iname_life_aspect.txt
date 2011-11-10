@@ -1,0 +1,13 @@
+Name:Iname, Life Aspect
+ManaCost:4 G G
+Types:Legendary Creature Spirit
+Text:no text
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand.
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidCard$ Card.Self | SubAbility$ DBReturn
+SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Spirit.YouCtrl | TargetMin$ 0 | TargetMax$ X
+SVar:X:Count$TypeInYourYard.Spirit
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/iname_life_aspect.jpg
+End
