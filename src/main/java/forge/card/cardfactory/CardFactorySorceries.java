@@ -1928,7 +1928,7 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Stitch Together")) {
+        /*else if (cardName.equals("Stitch Together")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -57996914115026814L;
 
@@ -2008,7 +2008,7 @@ public class CardFactorySorceries {
                 } // showMessage()
             }; // Input
             spell.setBeforePayMana(target);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Patriarch's Bidding")) {
