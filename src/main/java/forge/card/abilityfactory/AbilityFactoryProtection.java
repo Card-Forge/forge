@@ -204,7 +204,7 @@ public final class AbilityFactoryProtection {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (!CardFactoryUtil.canTarget(hostCard, c)) {
+                if (!c.canTarget(sa)) {
                     return false;
                 }
 
@@ -719,7 +719,7 @@ public final class AbilityFactoryProtection {
             }
 
             // if this is a target, make sure we can still target now
-            if ((tgt != null) && !CardFactoryUtil.canTarget(host, tgtC)) {
+            if ((tgt != null) && !tgtC.canTarget(sa)) {
                 continue;
             }
 

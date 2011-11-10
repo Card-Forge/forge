@@ -395,7 +395,7 @@ public class CardFactoryInstants {
 
                 @Override
                 public void selectCard(final Card card, final PlayerZone zone) {
-                    if (!card.isLand() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(spell, card)) {
+                    if (!card.isLand() && zone.is(Constant.Zone.Battlefield) && card.canTarget(spell)) {
                         spell.setTargetCard(card);
                         if (this.isFree()) {
                             this.setFree(false);

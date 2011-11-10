@@ -335,31 +335,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_getHumanArtifact.
-     * </p>
-     * 
-     * @param spell
-     *            a {@link forge.Card} object.
-     * @param targeted
-     *            a boolean.
-     * @return a {@link forge.CardList} object.
-     */
-    public static CardList getHumanArtifactAI(final Card spell, final boolean targeted) {
-        CardList artifact = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        artifact = artifact.getType("Artifact");
-        if (targeted) {
-            artifact = artifact.filter(new CardListFilter() {
-                @Override
-                public boolean addCard(final Card c) {
-                    return CardFactoryUtil.canTarget(spell, c);
-                }
-            });
-        }
-        return artifact;
-    }
-
-    /**
-     * <p>
      * AI_doesCreatureAttack.
      * </p>
      * 
@@ -1415,7 +1390,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 final Card targetCard = this.getTargetCard();
-                if (AllZoneUtil.isCardInPlay(targetCard) && CardFactoryUtil.canTarget(sourceCard, targetCard)) {
+                if (AllZoneUtil.isCardInPlay(targetCard) && targetCard.canTarget(this)) {
 
                     if (sourceCard.isEquipping()) {
                         final Card crd = sourceCard.getEquipping().get(0);
@@ -1852,7 +1827,7 @@ public class CardFactoryUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (targeted && !CardFactoryUtil.canTarget(spell, card)) {
+                if (targeted && !card.canTarget(spell)) {
                     AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if (choices.contains(card)) {
                     spell.setTargetCard(card);
@@ -2092,7 +2067,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(final Card card2, final PlayerZone zone) {
                 if (card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Battlefield)
-                        && CardFactoryUtil.canTarget(ability, card)) {
+                        && card.canTarget(ability)) {
                     ability.setTargetCard(card2);
                     ability.setStackDescription("Put " + card.getCounters(Counters.P1P1) + " +1/+1 counter/s from "
                             + card + " on " + card2);
@@ -2392,7 +2367,7 @@ public class CardFactoryUtil {
         }
 
         // Make sure it's still targetable as well
-        return CardFactoryUtil.canTarget(source, target);
+        return target.canTarget(ability);
     }
 
     /**
@@ -2406,9 +2381,9 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canTarget(final SpellAbility ability, final Card target) {
-        return CardFactoryUtil.canTarget(ability.getSourceCard(), target);
-    }
+    /*public static boolean canTarget(final SpellAbility ability, final Card target) {
+        return target.canTarget(ability);
+    }*/
 
     /**
      * <p>

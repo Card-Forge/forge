@@ -228,7 +228,7 @@ public class AbilityFactoryPump {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    private CardList getPumpCreatures(final int defense, final int attack) {
+    private CardList getPumpCreatures(final int defense, final int attack, final SpellAbility sa) {
 
         final boolean kHaste = this.keywords.contains("Haste");
         final boolean evasive = (this.keywords.contains("Flying") || this.keywords.contains("Horsemanship")
@@ -245,7 +245,7 @@ public class AbilityFactoryPump {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (!CardFactoryUtil.canTarget(AbilityFactoryPump.this.hostCard, c)) {
+                if (!c.canTarget(sa)) {
                     return false;
                 }
 
@@ -541,7 +541,7 @@ public class AbilityFactoryPump {
         if (this.abilityFactory.isCurse()) {
             list = this.getCurseCreatures(sa, defense, attack);
         } else {
-            list = this.getPumpCreatures(defense, attack);
+            list = this.getPumpCreatures(defense, attack, sa);
         }
 
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -893,7 +893,7 @@ public class AbilityFactoryPump {
             }
 
             // if pump is a target, make sure we can still target now
-            if ((tgt != null) && !CardFactoryUtil.canTarget(this.abilityFactory.getHostCard(), tgtC)) {
+            if ((tgt != null) && !tgtC.canTarget(sa)) {
                 continue;
             }
 

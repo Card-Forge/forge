@@ -11,21 +11,6 @@ import forge.card.spellability.SpellAbility;
  */
 public class StaticAbilityCantTarget {
 
-    /**
-     * TODO Write javadoc for this method.
-     * 
-     * @param stAb
-     *            a StaticAbility
-     * @param source
-     *            the source
-     * @param target
-     *            the target
-     * @param damage
-     *            the damage
-     * @param isCombat
-     *            the is combat
-     * @return the int
-     */
     public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card, SpellAbility sa) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();

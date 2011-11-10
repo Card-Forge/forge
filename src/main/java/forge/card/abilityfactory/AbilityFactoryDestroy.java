@@ -500,7 +500,7 @@ public class AbilityFactoryDestroy {
         }
 
         for (final Card tgtC : tgtCards) {
-            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || CardFactoryUtil.canTarget(card, tgtC))) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canTarget(sa))) {
                 if (sac) {
                     AllZone.getGameAction().sacrifice(tgtC);
                 } else if (noRegen) {

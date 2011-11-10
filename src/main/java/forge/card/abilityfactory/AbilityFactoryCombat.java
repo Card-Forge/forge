@@ -712,7 +712,7 @@ public final class AbilityFactoryCombat {
         }
 
         for (final Card c : tgtCards) {
-            if ((tgt == null) || CardFactoryUtil.canTarget(sa, c)) {
+            if ((tgt == null) || c.canTarget(sa)) {
                 AllZone.getCombat().removeFromCombat(c);
             }
         }
@@ -997,7 +997,7 @@ public final class AbilityFactoryCombat {
         }
 
         for (final Card c : tgtCards) {
-            if ((tgt == null) || CardFactoryUtil.canTarget(sa, c)) {
+            if ((tgt == null) || c.canTarget(sa)) {
                 final Card attacker = cards.get(0);
                 c.addMustBlockCard(attacker);
                 System.out.println(c + " is adding " + attacker + " to mustBlockCards: " + c.getMustBlockCards());

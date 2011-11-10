@@ -550,7 +550,7 @@ public class AbilityFactoryPermanentState {
 
             for (final Card tgtC : tgtCards) {
                 if (AllZoneUtil.isCardInPlay(tgtC)
-                        && ((tgt == null) || CardFactoryUtil.canTarget(af.getHostCard(), tgtC))) {
+                        && ((tgt == null) || tgtC.canTarget(sa))) {
                     tgtC.untap();
                 }
             }
@@ -1115,7 +1115,7 @@ public class AbilityFactoryPermanentState {
         }
 
         for (final Card tgtC : tgtCards) {
-            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || CardFactoryUtil.canTarget(af.getHostCard(), tgtC))) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canTarget(sa))) {
                 tgtC.tap();
             }
         }
@@ -2010,7 +2010,7 @@ public class AbilityFactoryPermanentState {
         }
 
         for (final Card tgtC : tgtCards) {
-            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || CardFactoryUtil.canTarget(af.getHostCard(), tgtC))) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canTarget(sa))) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
                     final Object z = GuiUtils.getChoiceOptional("Tap or Untap " + tgtC + "?", tapOrUntap);

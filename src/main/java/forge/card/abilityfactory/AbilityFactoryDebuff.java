@@ -552,7 +552,7 @@ public final class AbilityFactoryDebuff {
 
         for (final Card tgtC : tgtCards) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
-            if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(host, tgtC)) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canTarget(sa)) {
                 for (final String kw : kws) {
                     if (tgtC.getIntrinsicKeyword().contains(kw)) {
                         hadIntrinsic.add(kw);
@@ -772,7 +772,7 @@ public final class AbilityFactoryDebuff {
 
         for (final Card tgtC : list) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
-            if (AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canTarget(sa)) {
                 for (final String kw : kws) {
                     if (tgtC.getIntrinsicKeyword().contains(kw)) {
                         hadIntrinsic.add(kw);

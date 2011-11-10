@@ -255,7 +255,7 @@ public class AbilityFactoryCounters {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return CardFactoryUtil.canTarget(source, c)
+                return c.canTarget(sa)
                         && !c.hasKeyword("CARDNAME can't have counters placed on it.")
                         && !(c.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && type.equals("M1M1"));
             }
@@ -408,7 +408,7 @@ public class AbilityFactoryCounters {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return CardFactoryUtil.canTarget(source, c);
+                return c.canTarget(sa);
             }
         });
 
@@ -673,7 +673,7 @@ public class AbilityFactoryCounters {
         }
 
         for (final Card tgtCard : tgtCards) {
-            if ((tgt == null) || CardFactoryUtil.canTarget(card, tgtCard)) {
+            if ((tgt == null) || tgtCard.canTarget(sa)) {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(Counters.valueOf(type));
                 }
@@ -1045,7 +1045,7 @@ public class AbilityFactoryCounters {
         }
 
         for (final Card tgtCard : tgtCards) {
-            if ((tgt == null) || CardFactoryUtil.canTarget(card, tgtCard)) {
+            if ((tgt == null) || tgtCard.canTarget(sa)) {
                 final PlayerZone zone = AllZone.getZoneOf(tgtCard);
 
                 if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile)) {

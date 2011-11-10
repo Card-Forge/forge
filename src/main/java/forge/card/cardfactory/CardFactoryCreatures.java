@@ -201,7 +201,7 @@ public class CardFactoryCreatures {
 
                     if (c.sumAllCounters() == 0) {
                         return;
-                    } else if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    } else if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
                         // zerker clean up:
                         for (final Counters c1 : Counters.values()) {
                             if (c.getCounters(c1) > 0) {
@@ -723,7 +723,7 @@ public class CardFactoryCreatures {
                         return;
                     }
 
-                    if (c.isLand() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
+                    if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.canTarget(ability)) {
                         // System.out.println("c is: " +c);
                         target[index[0]] = c;
                         index[0]++;

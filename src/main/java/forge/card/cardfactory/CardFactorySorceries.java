@@ -718,7 +718,7 @@ public class CardFactorySorceries {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                            && this.getTargetCard().canTarget(this)) {
 
                         AllZone.getGameAction().destroy(this.getTargetCard());
 

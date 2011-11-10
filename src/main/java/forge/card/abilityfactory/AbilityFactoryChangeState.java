@@ -10,7 +10,6 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant.Zone;
 import forge.Player;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -190,7 +189,7 @@ public class AbilityFactoryChangeState {
 
         for (final Card tgt : tgtCards) {
             if (abilityFactory.getAbTgt() != null) {
-                if (!CardFactoryUtil.canTarget(abilityFactory.getHostCard(), tgt)) {
+                if (!tgt.canTarget(sa)) {
                     continue;
                 }
             }

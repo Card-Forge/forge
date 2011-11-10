@@ -999,7 +999,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                                && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                                && this.getTargetCard().canTarget(this)) {
                             this.getTargetCard().addDamage(damage, card);
                         }
                     } else {
@@ -1210,7 +1210,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 @Override
                 public void resolve() {
                     final Card target = this.getTargetCard();
-                    if (AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+                    if (AllZoneUtil.isCardInPlay(target) && target.canTarget(this)) {
                         target.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
                     } // is card in play?
                 } // resolve()
@@ -1622,7 +1622,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                     final Card myc = this.getParent().getTargetCard();
                     final Card oppc = this.getTargetCard();
                     if (AllZoneUtil.isCardInPlay(myc) && AllZoneUtil.isCardInPlay(oppc)) {
-                        if (CardFactoryUtil.canTarget(card, myc) && CardFactoryUtil.canTarget(card, oppc)) {
+                        if (myc.canTarget(this) && oppc.canTarget(this)) {
                             final int myPower = myc.getNetAttack();
                             final int oppPower = oppc.getNetAttack();
                             myc.addDamage(oppPower, oppc);

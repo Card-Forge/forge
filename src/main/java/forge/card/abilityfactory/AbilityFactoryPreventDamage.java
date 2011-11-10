@@ -486,7 +486,7 @@ public class AbilityFactoryPreventDamage {
         for (final Object o : tgts) {
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (AllZoneUtil.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(af.getHostCard(), c))) {
+                if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canTarget(sa))) {
                     c.addPreventNextDamage(numDam);
                 }
 

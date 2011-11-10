@@ -2543,7 +2543,7 @@ public class Upkeep implements java.io.Serializable {
                         @Override
                         public void selectCard(final Card selectedCard, final PlayerZone z) {
                             if (z.is(Constant.Zone.Battlefield) && selectedCard.isCreature()
-                                    && CardFactoryUtil.canTarget(c, selectedCard)) {
+                                    && selectedCard.canTarget(switchTargets)) {
                                 newTarget[0] = selectedCard;
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(c.getCloneOrigin()).append(

@@ -342,7 +342,7 @@ public final class AbilityFactoryCopy {
         hostCard.clearClones();
 
         for (final Card c : tgtCards) {
-            if ((tgt == null) || CardFactoryUtil.canTarget(hostCard, c)) {
+            if ((tgt == null) || c.canTarget(sa)) {
 
                 boolean wasInAlt = false;
                 if (c.isInAlternateState()) {
@@ -729,7 +729,7 @@ public final class AbilityFactoryCopy {
         }
 
         chosenSA.setActivatingPlayer(sa.getActivatingPlayer());
-        if ((tgt == null) || CardFactoryUtil.canTarget(card, chosenSA.getSourceCard())) {
+        if ((tgt == null)) {
             for (int i = 0; i < amount; i++) {
                 AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
             }

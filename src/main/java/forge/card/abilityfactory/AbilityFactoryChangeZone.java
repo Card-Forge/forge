@@ -1745,7 +1745,7 @@ public final class AbilityFactoryChangeZone {
 
                 if ((tgt != null) && origin.equals(Zone.Battlefield)) {
                     // check targeting
-                    if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC)) {
+                    if (!tgtC.canTarget(sa)) {
                         continue;
                     }
                 }

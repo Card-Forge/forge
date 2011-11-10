@@ -133,7 +133,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
                         card.enchantEntity(c);
                     }
 
@@ -289,7 +289,7 @@ class CardFactoryAuras {
                     CardListUtil.sortAttack(list);
 
                     for (int i = 0; i < list.size(); i++) {
-                        if (CardFactoryUtil.canTarget(card, list.get(i))) {
+                        if (list.get(i).canTarget(this)) {
                             this.setTargetCard(list.get(i));
                             return super.canPlayAI();
                         }
@@ -303,7 +303,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
                         card.enchantEntity(c);
                         Log.debug("Enchanted: " + this.getTargetCard());
                     }
@@ -392,7 +392,7 @@ class CardFactoryAuras {
                         CardListUtil.sortFlying(list);
 
                         for (int i = 0; i < list.size(); i++) {
-                            if (CardFactoryUtil.canTarget(card, list.get(i))
+                            if (list.get(i).canTarget(this)
                                     && (list.get(i).getNetAttack() >= list.get(i).getNetDefense())
                                     && (list.get(i).getNetAttack() >= 3)) {
                                 this.setTargetCard(list.get(i));
@@ -410,7 +410,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(aura, c)) {
+                    if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
                         aura.enchantEntity(c);
                     }
                 } // resolve()

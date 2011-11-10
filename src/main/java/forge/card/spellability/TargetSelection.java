@@ -13,7 +13,6 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 
@@ -337,7 +336,7 @@ public class TargetSelection {
             public void selectCard(final Card card, final PlayerZone zone) {
                 // leave this in temporarily, there some seriously wrong things
                 // going on here
-                if (targeted && !CardFactoryUtil.canTarget(sa, card)) {
+                if (targeted && !card.canTarget(sa)) {
                     AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } else if (choices.contains(card)) {
                     tgt.addTarget(card);

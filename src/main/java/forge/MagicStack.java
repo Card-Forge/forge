@@ -901,7 +901,7 @@ public class MagicStack extends MyObservable {
                         if (!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
                             return;
                         }
-                        if (CardFactoryUtil.canTarget(source, c)) {
+                        if (c.canTarget(haunterDiesWork)) {
                             haunterDiesWork.setTargetCard(c);
                             MagicStack.this.add(haunterDiesWork);
                             this.stop();
