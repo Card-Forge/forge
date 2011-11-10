@@ -391,11 +391,15 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         final Set<Integer> intSelections = new TreeSet<Integer>();
 
         if (numCards >= this.size()) {
-            throw new IllegalArgumentException("numCards (" + numCards
-                    + ") is larger than the size of the card database.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("numCards (").append(numCards);
+            sb.append(") is larger than the size of the card database.");
+            throw new IllegalArgumentException(sb.toString());
         } else if (numCards >= (this.size() / 4)) {
-            throw new IllegalArgumentException("numCards (" + numCards
-                    + ") is too large for this algorithm; it will take too long to complete.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("numCards (").append(numCards);
+            sb.append(") is too large for this algorithm; it will take too long to complete.");
+            throw new IllegalArgumentException(sb.toString());
         }
 
         while (intSelections.size() < numCards) {
@@ -465,7 +469,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         // o should be Card object
         final Object o = this.map.get(cardName);
         if (o == null) {
-            throw new RuntimeException("CardFactory : getCard() invalid card name - " + cardName);
+            final StringBuilder sb = new StringBuilder();
+            sb.append("CardFactory : getCard() invalid card name - ").append(cardName);
+            throw new RuntimeException(sb.toString());
         }
 
         final Card card = CardFactoryUtil.copyStats(o);
@@ -619,18 +625,23 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void execute() {
-                    ability.setStackDescription("As Sarpadian Empires, Vol. VII enters the battlefield, "
-                            + "choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("As Sarpadian Empires, Vol. VII enters the battlefield, ");
+                    sb.append("choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.");
+                    ability.setStackDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(ability);
 
                 }
             };
-            card.setText("As Sarpadian Empires, Vol. VII enters the battlefield, "
-                    + "choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\r\n"
-                    + "3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.\r\n"
-                    + card.getText()); // In the slight chance that there may be
-                                       // a need to add a note to this card.
+            final StringBuilder sb = new StringBuilder();
+            sb.append("As Sarpadian Empires, Vol. VII enters the battlefield, ");
+            sb.append("choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\r\n");
+            sb.append("3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.\r\n");
+            sb.append(card.getText());   // In the slight chance that there may be
+                                         // a need to add a note to this card.
+            card.setText(sb.toString());
+
             card.addComesIntoPlayCommand(intoPlay);
 
         } // *************** END ************ END **************************
@@ -712,12 +723,15 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 }
             };
 
-            nightSoil.setDescription("1, Exile two creature cards from a single graveyard: "
-                    + "Put a 1/1 green Saproling creature token onto the battlefield.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("1, Exile two creature cards from a single graveyard: ");
+            sbDesc.append("Put a 1/1 green Saproling creature token onto the battlefield.");
+            nightSoil.setDescription(sbDesc.toString());
 
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" puts a 1/1 green Saproling creature token onto the battlefield.");
-            nightSoil.setStackDescription(sb.toString());
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getController());
+            sbStack.append(" puts a 1/1 green Saproling creature token onto the battlefield.");
+            nightSoil.setStackDescription(sbStack.toString());
 
             nightSoil.setAfterPayMana(soilTarget);
             card.addSpellAbility(nightSoil);
@@ -766,8 +780,11 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 } // canPlay()
             }; // SpellAbility ability1
 
-            ability1.setDescription("Any player may play creature cards with converted mana cost 3 or less without "
-                    + "paying their mana cost any time he or she could play an instant.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Any player may play creature cards with converted mana cost 3 or less without ");
+            sb.append("paying their mana cost any time he or she could play an instant.");
+            ability1.setDescription(sb.toString());
+
             ability1.setStackDescription("Aluren - Play creature with converted manacost 3 or less for free.");
             ability1.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability1);
@@ -837,16 +854,20 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
             }; // SpellAbility pay bail
 
-            dungeon.setDescription("Discard a card: "
-                    + "Target player puts a card from his or her hand on top of his or her library. "
-                    + "Activate this ability only any time you could cast a sorcery.");
+            final StringBuilder sbd = new StringBuilder();
+            sbd.append("Discard a card: ");
+            sbd.append("Target player puts a card from his or her hand on top of his or her library. ");
+            sbd.append("Activate this ability only any time you could cast a sorcery.");
+            dungeon.setDescription(sbd.toString());
             dungeon.setStackDescription("CARDNAME - Target player chooses a card in hand and puts on top of library.");
             dungeon.getRestrictions().setSorcerySpeed(true);
 
             bail.getRestrictions().setAnyPlayer(true);
             bail.getRestrictions().setPlayerTurn(true);
-            bail.setDescription("Pay 5 Life: Destroy Volrath's Dungeon. "
-                    + "Any player may activate this ability but only during his or her turn.");
+            final StringBuilder sbb = new StringBuilder();
+            sbb.append("Pay 5 Life: Destroy Volrath's Dungeon. ");
+            sbb.append("Any player may activate this ability but only during his or her turn.");
+            bail.setDescription(sbb.toString());
             bail.setStackDescription("Destroy CARDNAME.");
 
             card.addSpellAbility(dungeon);
@@ -902,9 +923,11 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void execute() {
-                    ability.setStackDescription("If Mox Diamond would enter the battlefield, you may "
-                            + "discard a land card instead. If you do, put Mox Diamond onto the battlefield. "
-                            + "If you don't, put it into its owner's graveyard.");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("If Mox Diamond would enter the battlefield, you may ");
+                    sb.append("discard a land card instead. If you do, put Mox Diamond onto the battlefield. ");
+                    sb.append("If you don't, put it into its owner's graveyard.");
+                    ability.setStackDescription(sb.toString());
                     AllZone.getStack().addSimultaneousStackEntry(ability);
 
                 }
@@ -1010,12 +1033,11 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
             final StringBuilder sb = new StringBuilder();
             sb.append(abCost);
-            sb.append("Reveal cards from the top of your library until you reveal a land card. "
-                    + "Goblin Charbelcher deals damage equal ");
-            sb.append("to the number of nonland cards revealed this way to target creature or player. "
-                    + "If the revealed land card was a Mountain, ");
-            sb.append("Goblin Charbelcher deals double that damage instead. Put the revealed cards on "
-                    + "the bottom of your library in any order.");
+            sb.append("Reveal cards from the top of your library until you reveal a land card. ");
+            sb.append("Goblin Charbelcher deals damage equal to the number of nonland cards revealed ");
+            sb.append("this way to target creature or player. If the revealed land card was a ");
+            sb.append("Mountain, Goblin Charbelcher deals double that damage instead. Put the ");
+            sb.append("revealed cards on the bottom of your library in any order.");
             ability.setDescription(sb.toString());
 
             ability.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
@@ -1101,10 +1123,12 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 }
             }; // ability
 
-            ability.setDescription(abCost
-                    + "Put up to four target basic land cards from a player's graveyard on top of his "
-                    + "or her library in any order. That player draws a card at "
-                    + "the beginning of the next turn's upkeep.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(abCost);
+            sb.append("Put up to four target basic land cards from a player's graveyard on top ");
+            sb.append("of his or her library in any order. That player draws a card at the ");
+            sb.append("beginning of the next turn's upkeep.");
+            ability.setDescription(sb.toString());
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
@@ -1154,9 +1178,11 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 }
             };
             ab1.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
-            ab1.setDescription(abCost
-                    + "Put the top two cards of target player's library into that player's graveyard. "
-                    + "If both cards share a color, repeat this process.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(abCost);
+            sb.append("Put the top two cards of target player's library into that player's graveyard. ");
+            sb.append("If both cards share a color, repeat this process.");
+            ab1.setDescription(sb.toString());
             card.addSpellAbility(ab1);
         } // *************** END ************ END **************************
 
@@ -1319,9 +1345,10 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                             @Override
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage(
-                                        card.getName() + " - Exile cards from hand.  Currently, " + this.exiled.size()
-                                                + " selected.  (Press OK when done.)");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append(card.getName()).append(" - Exile cards from hand.  Currently, ");
+                                sb.append(this.exiled.size()).append(" selected.  (Press OK when done.)");
+                                AllZone.getDisplay().showMessage(sb.toString());
                                 ButtonUtil.enableOnlyOK();
                             }
 
@@ -1354,8 +1381,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                     numCards++;
                                 }
 
-                                AllZone.getDisplay().showMessage(
-                                        card.getName() + " - Returning cards to top of library.");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append(card.getName()).append(" - Returning cards to top of library.");
+                                AllZone.getDisplay().showMessage(sb.toString());
 
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
@@ -1378,10 +1406,16 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                     return false;
                 }
             }; // ability
-            ability.setDescription(abCost + "Exile any number of cards from your hand face down. Put that many cards "
-                    + "from the top of your library into your hand. Then look at the exiled cards "
-                    + "and put them on top of your library in any order.");
-            ability.setStackDescription(cardName + " - exile any number of cards from your hand.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost);
+            sbDesc.append("Exile any number of cards from your hand face down. Put that many cards ");
+            sbDesc.append("from the top of your library into your hand. Then look at the exiled cards ");
+            sbDesc.append("and put them on top of your library in any order.");
+            ability.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName).append(" - exile any number of cards from your hand.");
+            ability.setStackDescription(sbStack.toString());
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
@@ -1441,9 +1475,11 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sbStack.append(card).append(" - Name a card.");
             ability.setStackDescription(sbStack.toString());
 
-            ability.setDescription(abCost
-                    + "Name a card.  Reveal a card at random from your hand.  If it's the named card, "
-                    + "CARDNAME deals 2 damage to target creature or player.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(abCost);
+            sb.append("Name a card. Reveal a card at random from your hand. If it's the named card, ");
+            sb.append("CARDNAME deals 2 damage to target creature or player.");
+            ability.setDescription(sb.toString());
 
             ability.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
             card.addSpellAbility(ability);
@@ -1497,7 +1533,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
             };
             freeCast.setDescription("Play the previously revealed top card of your library for free.");
-            freeCast.setStackDescription(cardName + " - play card without paying its mana cost.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - play card without paying its mana cost.");
+            freeCast.setStackDescription(sb.toString());
 
             final Cost abCost = new Cost("5 T", cardName, true);
             final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
@@ -1541,12 +1579,12 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             ability.setStackDescription(sbStack.toString());
 
             final StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("Shuffle your library, then reveal the top card. ");
-            sbDesc.append("Until end of turn, for as long as that card remains on top of your library, "
-                    + "play with the top card of your library revealed ");
+            sbDesc.append(abCost).append("Shuffle your library, then reveal the top card. ");
+            sbDesc.append("Until end of turn, for as long as that card remains on top of your ");
+            sbDesc.append("library, play with the top card of your library revealed ");
             sbDesc.append("and you may play that card without paying its mana cost. ");
             sbDesc.append("(If it has X in its mana cost, X is 0.)");
-            ability.setDescription(abCost + sbDesc.toString());
+            ability.setDescription(sbDesc.toString());
 
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
@@ -1653,10 +1691,15 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 }
             };
             ability.setSubAbility(sub);
-            ability.setDescription(abCost
-                    + "Choose target creature you control and target creature an opponent controls. "
-                    + "Each of those creatures deals damage equal to its power to the other.");
-            ability.setStackDescription(card + " - Each creature deals damage equal to its power to the other.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost);
+            sbDesc.append("Choose target creature you control and target creature an opponent controls. ");
+            sbDesc.append("Each of those creatures deals damage equal to its power to the other.");
+            ability.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card).append(" - Each creature deals damage equal to its power to the other.");
+            ability.setStackDescription(sbStack.toString());
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
@@ -1725,7 +1768,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage(cardName + " - Select an artifact on the battlefield");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(cardName).append(" - Select an artifact on the battlefield");
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -1746,7 +1791,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(copy);
-            copy.setStackDescription(cardName + " - enters the battlefield as a copy of selected card.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - enters the battlefield as a copy of selected card.");
+            copy.setStackDescription(sb.toString());
             copy.setBeforePayMana(runtime);
         } // *************** END ************ END **************************
 
@@ -1800,9 +1847,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             }; // Ability
 
             final StringBuilder sb = new StringBuilder();
-            sb.append("At the beginning of your draw step, you may draw two additional cards. "
-                    + "If you do, choose two cards in your hand drawn this turn. For each of those cards, "
-                    + "pay 4 life or put the card on top of your library.");
+            sb.append("At the beginning of your draw step, you may draw two additional cards. ");
+            sb.append("If you do, choose two cards in your hand drawn this turn. For each of those cards, ");
+            sb.append("pay 4 life or put the card on top of your library.");
             ability.setStackDescription(sb.toString());
 
             drawStepTrigger.setOverridingAbility(ability);
