@@ -86,6 +86,15 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Added a LQ pic URL to Spiny Starfish.
+- Fixed attackers with first strike and trample not dealing any damage when all their blockers were destroyed.
+- Fixed the first ability of Phylactery Lich to not use the stack (which fixes it for the AI, but the human input still delays it until the always trigger kicks in).
+- Removed two unused variables in the combat class.
+- Text fix to Abuna's Chant.
+- Fixed Kabira Evangel.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -160,6 +169,16 @@ Crown of Convergence
 Infused Arrows
 Engineered Explosives
 Spiny Starfish
+Abandon Hope
+Abuna's Chant
+Patrician's Scorn
+Natural Emergence
+Planeswalker's Fury
+Rethink
+Unified Strike
+Devouring Greed
+Iname, Death Aspect
+Zombie Assassin
 
 
 end
