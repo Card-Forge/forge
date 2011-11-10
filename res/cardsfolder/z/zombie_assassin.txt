@@ -1,0 +1,8 @@
+Name:Zombie Assassin
+ManaCost:4 B
+Types:Creature Zombie Assassin
+Text:no text
+PT:3/2
+A:AB$ Destroy | Cost$ T ExileFromGrave<2/Card> Exile<1/CARDNAME> | CostDesc$ T, Exile two cards from your graveyard and Zombie Assassin: | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
+SVar:Rarity:Common
+End
