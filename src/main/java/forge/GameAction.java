@@ -375,7 +375,7 @@ public class GameAction {
         // Recover keyword
         if (c.isCreature() && origZone.is(Constant.Zone.Battlefield)) {
             for (final Card recoverable : c.getOwner().getCardsIn(Zone.Graveyard)) {
-                if (recoverable.hasStartOfKeyword("Recover")) {
+                if (recoverable.hasStartOfKeyword("Recover") && !recoverable.equals(c)) {
                     final SpellAbility abRecover = new Ability(recoverable, "0") {
                         @Override
                         public void resolve() {
