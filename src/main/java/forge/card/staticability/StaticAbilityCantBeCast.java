@@ -56,10 +56,10 @@ public class StaticAbilityCantBeCast {
      *            the activator
      * @return true, if successful
      */
-    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final Card card, 
-            final Player activator, SpellAbility sa) {
+    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final Card card, SpellAbility sa) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {

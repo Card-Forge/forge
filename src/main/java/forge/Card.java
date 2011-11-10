@@ -8177,5 +8177,85 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean isInZone(final Constant.Zone zone) {
         return AllZone.isCardInZone(this, zone);
     }
+    
+    /**
+     * Can target.
+     * 
+     * @param sa
+     *            the sa
+     * @return a boolean
+     */
+    @Override
+    public final boolean canTarget(final SpellAbility sa) {
+        
+        // CantTarget static abilities
+        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        for (final Card ca : allp) {
+            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.applyAbility("CantTarget", this, sa)) {
+                    return false;
+                }
+            }
+        }
+        
+        if(!isInZone(Constant.Zone.Battlefield)) { //keywords don't work outside the battlefield
+            return true;
+        }
+        
+        if (hasProtectionFrom(sa.getSourceCard())) {
+            return false;
+        }
+
+        if (getKeyword() != null) {
+            final ArrayList<String> list = getKeyword();
+            Card source = sa.getSourceCard();
+
+            String kw = "";
+            for (int i = 0; i < list.size(); i++) {
+                kw = list.get(i);
+                if (kw.equals("Shroud")) {
+                    return false;
+                }
+
+                if (kw.equals("Hexproof")) {
+                    if (!sa.getActivatingPlayer().equals(getController())) {
+                        return false;
+                    }
+                }
+
+                if (kw.equals("CARDNAME can't be the target of Aura spells.") || kw.equals("CARDNAME can't be enchanted.")) {
+                    if (source.isAura() && sa.isSpell()) {
+                        return false;
+                    }
+                }
+
+                if (kw.equals("CARDNAME can't be the target of red spells or abilities from red sources.")) {
+                    if (source.isRed()) {
+                        return false;
+                    }
+                }
+
+                if (kw.equals("CARDNAME can't be the target of black spells.")) {
+                    if (source.isBlack() && sa.isSpell()) {
+                        return false;
+                    }
+                }
+
+                if (kw.equals("CARDNAME can't be the target of blue spells.")) {
+                    if (source.isBlue() && sa.isSpell()) {
+                        return false;
+                    }
+                }
+
+                if (kw.equals("CARDNAME can't be the target of spells.")) {
+                    if (sa.isSpell()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
 } // end Card class

@@ -299,7 +299,7 @@ public class StaticAbility {
      *            the ability
      * @return true, if successful
      */
-    public final boolean applyAbility(final String mode, final Card card, final Player activator, SpellAbility sa) {
+    public final boolean applyAbility(final String mode, final Card card, SpellAbility sa) {
 
         // don't apply the ability if it hasn't got the right mode
         if (!this.mapParams.get("Mode").equals(mode)) {
@@ -311,7 +311,11 @@ public class StaticAbility {
         }
 
         if (mode.equals("CantBeActivated")) {
-            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, activator, sa);
+            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, sa);
+        }
+        
+        if (mode.equals("CantTarget")) {
+            return StaticAbilityCantTarget.applyCantTargetAbility(this, card, sa);
         }
 
         return false;

@@ -10548,6 +10548,7 @@ src/main/java/forge/card/spellability/TargetSelection.java svneol=native#text/pl
 src/main/java/forge/card/spellability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbility.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbilityCantBeCast.java svneol=native#text/plain
+src/main/java/forge/card/staticability/StaticAbilityCantTarget.java -text
 src/main/java/forge/card/staticability/StaticAbilityContinuous.java svneol=native#text/plain
 src/main/java/forge/card/staticability/StaticAbilityPreventDamage.java -text svneol=native#text/plain
 src/main/java/forge/card/staticability/package-info.java svneol=native#text/plain

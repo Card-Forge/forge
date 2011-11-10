@@ -80,7 +80,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantBeActivated", c, activator, this)) {
+                if (stAb.applyAbility("CantBeActivated", c, this)) {
                     return false;
                 }
             }
