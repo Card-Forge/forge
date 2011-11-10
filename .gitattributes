@@ -3120,6 +3120,7 @@ res/cardsfolder/g/garruks_companion.txt svneol=native#text/plain
 res/cardsfolder/g/garruks_horde.txt -text
 res/cardsfolder/g/garruks_packleader.txt svneol=native#text/plain
 res/cardsfolder/g/garza_zol_plague_queen.txt svneol=native#text/plain
+res/cardsfolder/g/garzas_assassin.txt -text svneol=unset#text/plain
 res/cardsfolder/g/gaseous_form.txt svneol=native#text/plain
 res/cardsfolder/g/gate_hound.txt svneol=native#text/plain
 res/cardsfolder/g/gate_to_phyrexia.txt svneol=native#text/plain
