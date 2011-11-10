@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_emergence.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/117.jpg
+Oracle:When Natural Emergence enters the battlefield, return a red or green enchantment you control to its owner's hand.\nLands you control are 2/2 creatures with first strike. They're still lands.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_strike.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/58.jpg
+Oracle:Exile target attacking creature if its power is less than or equal to the number of Soldiers on the battlefield.
 End

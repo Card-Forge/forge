@@ -7,4 +7,5 @@ SVar:X:Targeted$CardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rethink.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/42.jpg
+Oracle:Counter target spell unless its controller pays {X}, where X is its converted mana cost.
 End

@@ -7,4 +7,5 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/1.jpg
+Oracle:As an additional cost to cast Abandon Hope, discard X cards.\nLook at target opponent's hand and choose X cards from it. That player discards those cards.
 End

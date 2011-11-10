@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 http://www.wizards.com/global/images/magic/general/abunas_chant.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/1.jpg
+Oracle:Choose one - You gain 5 life; or prevent the next 5 damage that would be dealt to target creature this turn.\nEntwine {2} (Choose both if you pay the entwine cost.)
 End
