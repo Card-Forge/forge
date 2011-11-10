@@ -7,4 +7,5 @@ A:SP$ DestroyAll | Cost$ 0 | ValidCards$ Enchantment | CheckSVar$ X | SVarCompar
 SVar:X:Count$ThisTurnCast_Card.White+Other+YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patricians_scorn.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/29.jpg
 End

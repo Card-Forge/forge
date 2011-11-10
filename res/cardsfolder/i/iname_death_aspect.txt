@@ -9,4 +9,5 @@ SVar:X:Count$TypeInYourLibrary.Spirit
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iname_death_aspect.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/118.jpg
 End

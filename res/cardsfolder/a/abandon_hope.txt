@@ -6,4 +6,5 @@ A:SP$ Discard | Cost$ X 1 B Discard<X/Card/card> | ValidTgts$ Opponent | Mode$ R
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/1.jpg
 End

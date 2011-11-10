@@ -8,4 +8,5 @@ SVar:X:Targeted$Valid Creature.powerLEY
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_strike.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/58.jpg
 End

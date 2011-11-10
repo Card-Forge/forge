@@ -9,4 +9,5 @@ SVar:DBPreventDamage:DB$ PreventDamage | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 http://www.wizards.com/global/images/magic/general/abunas_chant.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/1.jpg
 End
