@@ -16,7 +16,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
-import forge.CommandReturn;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
@@ -461,48 +460,7 @@ public class CardFactoryCreatures {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Phylactery Lich")) {
-            final CommandReturn getArt = new CommandReturn() {
-                // get target card, may be null
-                @Override
-                public Object execute() {
-                    CardList art = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    art = art.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return c.isArtifact();
-                        }
-                    });
 
-                    CardList list = new CardList(art.toArray());
-                    list = list.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return c.getIntrinsicKeyword().contains("Indestructible");
-                        }
-                    });
-
-                    Card target = null;
-                    if (!list.isEmpty()) {
-                        target = list.get(0);
-                    } else if (!art.isEmpty()) {
-                        target = art.get(0);
-                    }
-
-                    return target;
-                } // execute()
-            }; // CommandReturn
-
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    final Card c = this.getTargetCard();
-
-                    if (AllZoneUtil.isCardInPlay(c) && c.isArtifact()) {
-                        c.addCounter(Counters.PHYLACTERY, 1);
-                        card.setFinishedEnteringBF(true);
-                    }
-                } // resolve()
-            }; // SpellAbility
             final Command intoPlay = new Command() {
                 private static final long serialVersionUID = -1601957445498569156L;
 
@@ -572,8 +530,8 @@ public class CardFactoryCreatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    final Object o = getArt.execute();
-                    return (o != null) && AllZone.getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand);
+                    return (!AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Artifact").isEmpty() 
+                            && AllZone.getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand));
                 }
             });
             card.addComesIntoPlayCommand(intoPlay);
@@ -1163,7 +1121,7 @@ public class CardFactoryCreatures {
                         return;
                     }
 
-                    if (!(CardFactoryUtil.canTarget(card, target) && AllZoneUtil.isCardInPlay(target))) {
+                    if (!(target.canTarget(this) && AllZoneUtil.isCardInPlay(target))) {
                         return;
                     }
 
@@ -1351,7 +1309,7 @@ public class CardFactoryCreatures {
                     final int total = card.getCounters(Counters.P1P1);
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                                && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                                && this.getTargetCard().canTarget(this)) {
                             this.getTargetCard().addDamage(total, card);
                         }
                     } else {
@@ -2036,7 +1994,7 @@ public class CardFactoryCreatures {
                     if (p.canTarget(this)) {
                         p.setSkipNextUntap(true);
                         for (final Card c : targetPerms) {
-                            if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                            if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
                                 c.tap();
                             }
                         }
@@ -2079,7 +2037,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
                     if (zone.is(Constant.Zone.Battlefield, ability.getTargetPlayer()) && !targetPerms.contains(c)) {
-                        if (CardFactoryUtil.canTarget(card, c)) {
+                        if (c.canTarget(ability)) {
                             targetPerms.add(c);
                         }
                     }
@@ -2498,7 +2456,7 @@ public class CardFactoryCreatures {
                     final Card equipment = this.getParent().getTargetCard();
                     final Card creature = this.getTargetCard();
                     if (AllZoneUtil.isCardInPlay(equipment) && AllZoneUtil.isCardInPlay(creature)) {
-                        if (CardFactoryUtil.canTarget(card, equipment) && CardFactoryUtil.canTarget(card, creature)) {
+                        if (CardFactoryUtil.canTarget(card, equipment) && creature.canTarget(this)) {
                             if (equipment.isEquipping()) {
                                 final Card equipped = equipment.getEquipping().get(0);
                                 if (!equipped.equals(creature)) {
@@ -2554,7 +2512,7 @@ public class CardFactoryCreatures {
                 public void resolve() {
                     final Card target = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+                    if (AllZoneUtil.isCardInPlay(target) && target.canTarget(this)) {
                         target.addCounter(Counters.M1M1, 1);
                         if (target.getNetDefense() >= 1) {
                             target.addShield();

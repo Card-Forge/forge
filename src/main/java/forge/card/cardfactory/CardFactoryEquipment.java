@@ -77,7 +77,7 @@ class CardFactoryEquipment {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                            && this.getTargetCard().canTarget(this)) {
 
                         if (card.isEquipping()) {
                             final Card crd = card.getEquipping().get(0);
@@ -185,7 +185,7 @@ class CardFactoryEquipment {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                            && this.getTargetCard().canTarget(this)) {
 
                         if (card.isEquipping()) {
                             final Card crd = card.getEquipping().get(0);

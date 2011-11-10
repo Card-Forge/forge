@@ -249,7 +249,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                            && this.getTargetCard().canTarget(this)) {
                         final Card c = this.getTargetCard();
 
                         c.addTempAttackBoost(-2);
@@ -347,7 +347,7 @@ public class CardFactoryInstants {
                 public void resolve() {
                     // if target card is not in play, just quit
                     if (!AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            || !CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                            || !this.getTargetCard().canTarget(this)) {
                         return;
                     }
 
@@ -528,93 +528,6 @@ public class CardFactoryInstants {
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
 
-        // *************** START *********** START **************************
-        /*
-         * else if (cardName.equals("Echoing Courage")) { Cost cost = new
-         * Cost(card.getManaCost(), cardName, false); Target tgt = new
-         * Target(card, "C"); final SpellAbility spell = new Spell(card, cost,
-         * tgt) { private static final long serialVersionUID =
-         * -8649611733196156346L;
-         * 
-         * public boolean canPlayAI() { CardList list =
-         * AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()); if
-         * (list.isEmpty()) { return false; } else {
-         * setTargetCard(CardFactoryUtil.AI_getBestCreature(list)); return true;
-         * } } //canPlayAI()
-         * 
-         * public void resolve() { if (AllZoneUtil.isCardInPlay(getTargetCard())
-         * && CardFactoryUtil.canTarget(card, getTargetCard())) { final Card c =
-         * getTargetCard();
-         * 
-         * c.addTempAttackBoost(2); c.addTempDefenseBoost(2);
-         * 
-         * AllZone.getEndOfTurn().addUntil(new Command() { private static final
-         * long serialVersionUID = 1327455269456577020L;
-         * 
-         * public void execute() { c.addTempAttackBoost(-2);
-         * c.addTempDefenseBoost(-2); } });
-         * 
-         * //get all creatures CardList list =
-         * AllZoneUtil.getCardsIn(Zone.Battlefield, getTargetCard().getName());
-         * list.remove(getTargetCard());
-         * 
-         * if (!getTargetCard().isFaceDown()) { for (int i = 0; i < list.size();
-         * i++) { final Card crd = list.get(i);
-         * 
-         * crd.addTempAttackBoost(2); crd.addTempDefenseBoost(2);
-         * 
-         * AllZone.getEndOfTurn().addUntil(new Command() { private static final
-         * long serialVersionUID = 5151337777143949221L;
-         * 
-         * public void execute() { crd.addTempAttackBoost(-2);
-         * crd.addTempDefenseBoost(-2); } }); } }
-         * 
-         * } //in play? } //resolve() }; //SpellAbility
-         * 
-         * card.addSpellAbility(spell); }
-         */// *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Hurkyl's Recall")) {
-            /*
-             * Return all artifacts target player owns to his or her hand.
-             */
-            final Target t = new Target(card, "Select target player", "Player");
-            final Cost cost = new Cost("1 U", cardName, false);
-
-            final SpellAbility spell = new Spell(card, cost, t) {
-                private static final long serialVersionUID = -4098702062413878046L;
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList humanArts = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-                    humanArts = humanArts.getType("Artifact");
-                    return humanArts.size() > 0;
-                } // canPlayAI
-
-                @Override
-                public void chooseTargetAI() {
-                    this.setTargetPlayer(AllZone.getHumanPlayer());
-                } // chooseTargetAI()
-
-                @Override
-                public void resolve() {
-                    final Player player = this.getTargetPlayer();
-                    CardList artifacts = AllZoneUtil.getCardsIn(Zone.Battlefield);
-                    artifacts = artifacts.getType("Artifact");
-
-                    for (int i = 0; i < artifacts.size(); i++) {
-                        final Card thisArtifact = artifacts.get(i);
-                        if (thisArtifact.getOwner().equals(player)) {
-                            // moveToHand handles tokens
-                            AllZone.getGameAction().moveToHand(thisArtifact);
-                        }
-                    }
-                } // resolve()
-            };
-
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Suffer the Past")) {
@@ -949,7 +862,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && CardFactoryUtil.canTarget(card, this.getTargetCard())) {
+                            && this.getTargetCard().canTarget(this)) {
                         final Card c = this.getTargetCard();
                         c.addDamage(this.damage, card);
                         if (c.hasKeyword("Infect")) {
@@ -1026,7 +939,7 @@ public class CardFactoryInstants {
                     final Card myc = this.getParent().getTargetCard();
                     final Card tgt = this.getTargetCard();
                     if (AllZoneUtil.isCardInPlay(myc) && AllZoneUtil.isCardInPlay(tgt)) {
-                        if (CardFactoryUtil.canTarget(card, myc) && CardFactoryUtil.canTarget(card, tgt)) {
+                        if (myc.canTarget(this) && tgt.canTarget(this)) {
                             tgt.addDamage(myc.getNetAttack(), myc);
                         }
                     }
