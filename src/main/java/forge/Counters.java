@@ -256,6 +256,9 @@ public enum Counters {
 
     /** The STUDY. */
     STUDY(),
+    
+    /** The THEFT. */
+    THEFT(),
 
     /** The TIDE. */
     TIDE(),

@@ -5568,6 +5568,7 @@ res/cardsfolder/n/nezumi_shortfang_stabwhisker_the_odious.txt -text
 res/cardsfolder/n/niall_silvain.txt svneol=native#text/plain
 res/cardsfolder/n/nicol_bolas.txt svneol=native#text/plain
 res/cardsfolder/n/nicol_bolas_planeswalker.txt svneol=native#text/plain
+res/cardsfolder/n/night_dealings.txt -text svneol=unset#text/plain
 res/cardsfolder/n/night_of_souls_betrayal.txt svneol=native#text/plain
 res/cardsfolder/n/night_revelers.txt -text
 res/cardsfolder/n/night_soil.txt svneol=native#text/plain

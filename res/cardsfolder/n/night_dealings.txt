@@ -1,0 +1,12 @@
+Name:Night Dealings
+ManaCost:2 B B
+Types:Enchantment
+Text:no text
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl | ValidTargets$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a source you control deals damage to another player, put that many theft counters on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ THEFT | CounterNum$ Y
+A:AB$ ChangeZone | Cost$ 2 B B SubCounter<X/THEFT> | Origin$ Library | Destination$ Hand | ChangeType$ Card.nonLand+YouCtrl+cmcEQChosenX | ChangeNum$ 1 | Reveal$ True | Shuffle$ True | SpellDescription$ Search your library for a nonland card with converted mana cost X, reveal it, and put it into your hand. Then shuffle your library. 
+SVar:X:XChoice
+SVar:Y:TriggerCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/night_dealings.jpg
+End
