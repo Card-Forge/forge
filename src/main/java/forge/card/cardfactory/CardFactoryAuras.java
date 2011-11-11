@@ -560,9 +560,13 @@ class CardFactoryAuras {
 
             card.addSpellAbility(animate);
 
-            attach.setStackDescription("Attaching " + cardName + " to creature in graveyard.");
+            final StringBuilder sbA = new StringBuilder();
+            sbA.append("Attaching ").append(cardName).append(" to creature in graveyard.");
+            attach.setStackDescription(sbA.toString());
             card.addComesIntoPlayCommand(attachCmd);
-            detach.setStackDescription(cardName + " left play. Sacrificing creature if still around.");
+            final StringBuilder sbD = new StringBuilder();
+            sbD.append(cardName).append(" left play. Sacrificing creature if still around.");
+            detach.setStackDescription(sbD.toString());
             card.addLeavesPlayCommand(detachCmd);
             card.addUnEnchantCommand(detachCmd);
         } // *************** END ************ END **************************
