@@ -12,6 +12,6 @@ A:AB$Mana | Cost$ T Sac<X/Goat> | CostDescription$ Tap, Sacrifice X Goats | Prod
 SVar:X:XChoice
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ ChosenX | SpellDescription$ You gain X life.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_pasture.jpg
 End
