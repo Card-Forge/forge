@@ -95,6 +95,25 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- added LQ pic url to Abandon Hope and Zombie Assassin.
+- Fixed LQ url for Abuna's Chant.
+- Added the new static ability "CantTarget".
+- Added a currently unused function canTarget to the card class.
+- Little cleanup for the static ability CantBeActivated.
+- Redirected some targeting checks to the new function.
+- More Redirecting of targeting checks to the new function.
+- Fixed Recover to only trigger on other cards.
+- Converted Stitch Together to script.
+- StringBuilder.
+- Removed the unused variable uncastable from the card class.
+- Converted Brood Birthing to script.
+- Added flying to Oona, Queen of the Fae.
+- StringBuilder.
+- Fixed rarity of Springjack Pasture
+- Fixed cost description of Springjack Pasture
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -179,6 +198,13 @@ Unified Strike
 Devouring Greed
 Iname, Death Aspect
 Zombie Assassin
+Rayne, Academy Chancellor
+Sinister Strength
+Iname, Life Aspect
+Garza's Assassin
+Springjack Pasture
+Fertile Ground
+Carrionette
 
 
 end
