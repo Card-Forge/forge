@@ -2706,6 +2706,19 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Hand).size(), m, source);
             }
         }
+        
+        if (sq[0].contains("DomainPlayer")) {
+            CardList someCards = new CardList();
+            someCards.addAll(players.get(0).getCardsIn(Zone.Battlefield));
+            final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
+
+            for (int i = 0; i < basic.length; i++) {
+                if (!someCards.getType(basic[i]).isEmpty()) {
+                    n++;
+                }
+            }
+            return CardFactoryUtil.doXMath(n, m, source);
+        }
 
         if (sq[0].contains("CardsInLibrary")) {
             if (players.size() > 0) {
@@ -2752,6 +2765,7 @@ public class CardFactoryUtil {
 
         return CardFactoryUtil.doXMath(n, m, source);
     }
+    
 
     /**
      * parseSVar TODO - flesh out javadoc for this method.
