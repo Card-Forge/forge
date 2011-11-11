@@ -1,0 +1,17 @@
+Name:Springjack Pasture
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Goat | TokenTypes$ Creature,Goat | TokenOwner$ You | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Put a 0/1 white Goat creature token onto the battlefield.
+A:AB$Mana | Cost$ T Sac<X/Goat> | CostDescription$ Tap, Sacrifice X Goats | Produced$ W | Amount$ ChosenX | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X W to your mana pool.
+A:AB$Mana | Cost$ T Sac<X/Goat> | CostDescription$ Tap, Sacrifice X Goats | Produced$ U | Amount$ ChosenX | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X U to your mana pool.
+A:AB$Mana | Cost$ T Sac<X/Goat> | CostDescription$ Tap, Sacrifice X Goats | Produced$ B | Amount$ ChosenX | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X B to your mana pool.
+A:AB$Mana | Cost$ T Sac<X/Goat> | CostDescription$ Tap, Sacrifice X Goats | Produced$ R | Amount$ ChosenX | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X R to your mana pool.
+A:AB$Mana | Cost$ T Sac<X/Goat> | CostDescription$ Tap, Sacrifice X Goats | Produced$ G | Amount$ ChosenX | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X G to your mana pool.
+SVar:X:XChoice
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ ChosenX | SpellDescription$ You gain X life.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_pasture.jpg
+End
