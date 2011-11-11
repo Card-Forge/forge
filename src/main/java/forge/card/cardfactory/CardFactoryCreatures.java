@@ -237,8 +237,11 @@ public class CardFactoryCreatures {
             }; // SpellAbility
 
             card.addSpellAbility(a1);
-            a1.setDescription(abCost
-                    + "For each counter on target permanent, put another of those counters on that permanent.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(abCost);
+            sb.append("For each counter on target permanent, ");
+            sb.append("put another of those counters on that permanent.");
+            a1.setDescription(sb.toString());
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
@@ -341,8 +344,8 @@ public class CardFactoryCreatures {
                 @Override
                 public void execute() {
                     final StringBuilder sb = new StringBuilder();
-                    sb.append(card.getController())
-                            .append(" sacrifices Drekavac unless he discards a noncreature card");
+                    sb.append(card.getController());
+                    sb.append(" sacrifices Drekavac unless he discards a noncreature card");
                     ability.setStackDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -421,7 +424,8 @@ public class CardFactoryCreatures {
                 @Override
                 public void execute() {
                     final StringBuilder sb = new StringBuilder();
-                    sb.append(card.getController()).append(" - discards at random or sacrifices ").append(cardName);
+                    sb.append(card.getController());
+                    sb.append(" - discards at random or sacrifices ").append(cardName);
                     ability.setStackDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -444,8 +448,10 @@ public class CardFactoryCreatures {
                 }
             };
 
-            ability.setStackDescription("When Sleeper Agent enters the battlefield, "
-                    + "target opponent gains control of it.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("When Sleeper Agent enters the battlefield, ");
+            sb.append("target opponent gains control of it.");
+            ability.setStackDescription(sb.toString());
             final Command intoPlay = new Command() {
                 private static final long serialVersionUID = -3934471871041458847L;
 
@@ -530,7 +536,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    return (!AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Artifact").isEmpty() 
+                    return (!AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Artifact").isEmpty()
                             && AllZone.getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand));
                 }
             });
@@ -609,7 +615,9 @@ public class CardFactoryCreatures {
                     if (zone.is(Constant.Zone.Hand) && !c.isLand()) {
                         AllZone.getGameAction().exile(c);
                         chosen.push(c);
-                        ability.setStackDescription(card.toString() + " - Suspending " + c.toString());
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(card.toString()).append(" - Suspending ").append(c.toString());
+                        ability.setStackDescription(sb.toString());
                         AllZone.getStack().add(ability);
                         this.stop();
                     }
@@ -708,8 +716,9 @@ public class CardFactoryCreatures {
             };
 
             final StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(
-                    " - Exchange control of target land you control and target land an opponent controls.");
+            sb.append(cardName);
+            sb.append(" - Exchange control of target land you control ");
+            sb.append("and target land an opponent controls.");
             ability.setStackDescription(sb.toString());
 
             card.addComesIntoPlayCommand(comesIntoPlay);
@@ -727,9 +736,10 @@ public class CardFactoryCreatures {
                 @Override
                 public void execute() {
 
-                    AllZone.getStack().addSimultaneousStackEntry(
-                            new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0]
-                                    + " from graveyard to the battlefield") {
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Adarkar Valkyrie - Return ").append(target[0]);
+                    sb.append(" from graveyard to the battlefield");
+                    AllZone.getStack().addSimultaneousStackEntry(new Ability(card, "0", sb.toString()) {
                                 @Override
                                 public void resolve() {
                                     final PlayerZone grave = AllZone.getZoneOf(target[0]);
@@ -757,7 +767,9 @@ public class CardFactoryCreatures {
             };
 
             final Cost abCost = new Cost("T", cardName, true);
-            final Target tgt = new Target(card, "Target creature other than " + cardName, "Creature.Other".split(","));
+            final StringBuilder sbTgt = new StringBuilder();
+            sbTgt.append("Target creature other than ").append(cardName);
+            final Target tgt = new Target(card, sbTgt.toString(), "Creature.Other".split(","));
             final AbilityActivated ability = new AbilityActivated(card, abCost, tgt) {
                 private static final long serialVersionUID = -8454685126878522607L;
 
@@ -870,9 +882,11 @@ public class CardFactoryCreatures {
                     });
                 }
             };
-            ability.setStackDescription("When Stangg enters the battlefield, if Stangg is on the battlefield, "
-                    + "put a legendary 3/4 red and green Human Warrior creature token "
-                    + "named Stangg Twin onto the battlefield.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("When Stangg enters the battlefield, if Stangg is on the battlefield, ");
+            sb.append("put a legendary 3/4 red and green Human Warrior creature token ");
+            sb.append("named Stangg Twin onto the battlefield.");
+            ability.setStackDescription(sb.toString());
 
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 6667896040611028600L;
@@ -942,10 +956,15 @@ public class CardFactoryCreatures {
             }; // SpellAbility
             card.addSpellAbility(ability);
 
-            ability.setDescription("W U B R G: You may play target Elemental card from "
-                    + "your graveyard without paying its mana cost.");
-            ability.setStackDescription("Horde of Notions - play Elemental card from "
-                    + "graveyard without paying its mana cost.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("W U B R G: You may play target Elemental card from ");
+            sbDesc.append("your graveyard without paying its mana cost.");
+            ability.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append("Horde of Notions - play Elemental card from ");
+            sbStack.append("graveyard without paying its mana cost.");
+            ability.setStackDescription(sbStack.toString());
             ability.setBeforePayMana(new InputPayManaCost(ability));
         } // *************** END ************ END **************************
 
