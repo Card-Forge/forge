@@ -18,4 +18,5 @@ SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/248.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/252.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/188.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/211.jpg
+Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
 End

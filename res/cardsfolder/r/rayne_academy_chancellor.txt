@@ -10,4 +10,5 @@ SVar:EnchantMe:Once
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rayne_academy_chancellor.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/43.jpg
+Oracle:Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card. You may draw an additional card if Rayne, Academy Chancellor is enchanted.
 End
