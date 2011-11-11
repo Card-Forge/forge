@@ -3,7 +3,7 @@ ManaCost:7 U U U
 Types:Sorcery
 Text:no text
 K:Epic
-A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact,Creature,Enchantment,Land | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
+A:SP$ ChangeZone | Cost$ 7 U U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact,Creature,Enchantment,Land | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
 SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_dominion.jpg
