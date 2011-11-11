@@ -424,7 +424,7 @@ public class AbilityFactoryRegenerate {
             }
         }
 
-        tgt.addTarget(CardFactoryUtil.getCheapestPermanentAI(targetables, hostCard, true));
+        tgt.addTarget(CardFactoryUtil.getCheapestPermanentAI(targetables, sa, true));
         return true;
     }
 

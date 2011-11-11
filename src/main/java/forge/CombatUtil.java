@@ -2212,7 +2212,7 @@ public class CombatUtil {
                         }
                     });
                     if (enchantments.size() > 0) {
-                        Card card = CardFactoryUtil.getBestEnchantmentAI(enchantments, c, false);
+                        Card card = CardFactoryUtil.getBestEnchantmentAI(enchantments, null, false);
                         AllZone.getGameAction().moveToPlay(card);
                         c.getController().shuffle();
                     }
@@ -2582,7 +2582,7 @@ public class CombatUtil {
                                 enchantment = ((Card) check);
                             }
                         } else {
-                            enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantments, attacker, false);
+                            enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantments, this, false);
                         }
                         if (enchantment != null && AllZoneUtil.isCardInPlay(attacker)) {
                             GameAction.changeZone(AllZone.getZoneOf(enchantment),

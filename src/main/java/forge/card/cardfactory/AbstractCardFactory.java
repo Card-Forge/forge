@@ -1225,7 +1225,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 public Card getCreature() {
                     CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                     tappedCreatures = tappedCreatures.filter(CardListFilter.TAPPED);
-                    tappedCreatures = tappedCreatures.getTargetableCards(card);
+                    tappedCreatures = tappedCreatures.getTargetableCards(this);
                     if (tappedCreatures.isEmpty()) {
                         return null;
                     }

@@ -428,7 +428,7 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    private Card dealDamageChooseTgtC(final int d, final boolean noPrevention, final Player pl, final boolean mandatory) {
+    private Card dealDamageChooseTgtC(final SpellAbility saMe, final int d, final boolean noPrevention, final Player pl, final boolean mandatory) {
         final Target tgt = this.abilityFactory.getAbTgt();
         final Card source = this.abilityFactory.getHostCard();
         CardList hPlay = pl.getCardsIn(Zone.Battlefield);
@@ -443,7 +443,7 @@ public class AbilityFactoryDealDamage {
                 }
             }
         }
-        hPlay = hPlay.getTargetableCards(source);
+        hPlay = hPlay.getTargetableCards(saMe);
 
         final CardList killables = hPlay.filter(new CardListFilter() {
             @Override
@@ -530,7 +530,7 @@ public class AbilityFactoryDealDamage {
                     }
                 }
 
-                final Card c = this.dealDamageChooseTgtC(dmg, noPrevention, AllZone.getHumanPlayer(), mandatory);
+                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getHumanPlayer(), mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
                     continue;
@@ -549,7 +549,7 @@ public class AbilityFactoryDealDamage {
                     continue;
                 }
             } else if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(dmg, noPrevention, AllZone.getHumanPlayer(), mandatory);
+                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getHumanPlayer(), mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
                     continue;
@@ -643,7 +643,7 @@ public class AbilityFactoryDealDamage {
         while (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)) {
             // TODO: Consider targeting the planeswalker
             if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(dmg, noPrevention, AllZone.getComputerPlayer(), mandatory);
+                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getComputerPlayer(), mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
                     continue;

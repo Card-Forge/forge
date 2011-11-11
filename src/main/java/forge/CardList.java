@@ -9,7 +9,7 @@ import java.util.List;
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
 
-import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
 
 /**
  * <p>
@@ -757,10 +757,10 @@ public class CardList implements Iterable<Card> {
      *            a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
-    public final CardList getTargetableCards(final Card source) {
+    public final CardList getTargetableCards(final SpellAbility source) {
         return this.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
-                return CardFactoryUtil.canTarget(source, c);
+                return c.canTarget(source);
             }
         });
     }

@@ -333,7 +333,7 @@ public final class GameActionUtil {
             ability = new Ability(list.get(i), "0") {
                 public void resolve() {
                     CardList creats = AllZoneUtil.getCreaturesInPlay(player);
-                    creats = creats.getTargetableCards(card);
+                    creats = creats.getTargetableCards(this);
                     if (creats.size() == 0) {
                         return;
                     }

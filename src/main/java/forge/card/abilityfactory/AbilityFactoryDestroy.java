@@ -166,7 +166,7 @@ public class AbilityFactoryDestroy {
 
         CardList list;
         list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        list = list.getTargetableCards(source);
+        list = list.getTargetableCards(sa);
 
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
@@ -235,7 +235,7 @@ public class AbilityFactoryDestroy {
                                                                        // the
                                                                        // best
                 } else {
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, af.getHostCard(), true);
+                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
                 }
 
                 if (choice == null) { // can't find anything left
@@ -290,7 +290,7 @@ public class AbilityFactoryDestroy {
         if (tgt != null) {
             CardList list;
             list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-            list = list.getTargetableCards(source);
+            list = list.getTargetableCards(sa);
             list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
 
             if ((list.size() == 0) || (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
@@ -339,7 +339,7 @@ public class AbilityFactoryDestroy {
                     } else if (preferred.getNotType("Land").size() == 0) {
                         c = CardFactoryUtil.getBestLandAI(preferred);
                     } else {
-                        c = CardFactoryUtil.getMostExpensivePermanentAI(preferred, source, false);
+                        c = CardFactoryUtil.getMostExpensivePermanentAI(preferred, sa, false);
                     }
                     tgt.addTarget(c);
                     preferred.remove(c);
@@ -354,7 +354,7 @@ public class AbilityFactoryDestroy {
                     if (list.getNotType("Creature").size() == 0) {
                         c = CardFactoryUtil.getWorstCreatureAI(list);
                     } else {
-                        c = CardFactoryUtil.getCheapestPermanentAI(list, source, false);
+                        c = CardFactoryUtil.getCheapestPermanentAI(list, sa, false);
                     }
                     tgt.addTarget(c);
                     list.remove(c);

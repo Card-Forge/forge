@@ -502,12 +502,14 @@ public class Upkeep implements java.io.Serializable {
 
         for (final Card c : cards) {
             final Card abyss = c;
+            
+            final CardList abyssGetTargets = AllZoneUtil.getCreaturesInPlay(player).filter(CardListFilter.NON_ARTIFACTS);
 
             final Ability sacrificeCreature = new Ability(abyss, "") {
                 @Override
                 public void resolve() {
                     if (player.isHuman()) {
-                        if (Upkeep.abyssGetTargets(player, abyss).size() > 0) {
+                        if (abyssGetTargets.getTargetableCards(this).size() > 0) {
                             AllZone.getInputControl().setInput(new Input() {
                                 private static final long serialVersionUID = 4820011040853968644L;
 
@@ -532,11 +534,11 @@ public class Upkeep implements java.io.Serializable {
                             }); // Input
                         }
                     } else { // computer
-                        final CardList targets = Upkeep.abyssGetTargets(player, abyss);
+                        final CardList targets = abyssGetTargets.getTargetableCards(this);
                         final CardList indestruct = targets.getKeyword("Indestructible");
                         if (indestruct.size() > 0) {
                             AllZone.getGameAction().destroyNoRegeneration(indestruct.get(0));
-                        } else {
+                        } else if (targets.size() > 0){
                             final Card target = CardFactoryUtil.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
@@ -551,30 +553,10 @@ public class Upkeep implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
             sacrificeCreature.setStackDescription(sb.toString());
-
-            if (Upkeep.abyssGetTargets(player, abyss).size() > 0) {
-                AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
-            }
+            AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
 
         } // end for
     } // The Abyss
-
-    /**
-     * <p>
-     * abyss_getTargets.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.Player} object.
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.CardList} object.
-     */
-    private static CardList abyssGetTargets(final Player player, final Card card) {
-        CardList creats = AllZoneUtil.getCreaturesInPlay(player).filter(CardListFilter.NON_ARTIFACTS);
-        creats = creats.getTargetableCards(card);
-        return creats;
-    }
 
     /**
      * <p>
@@ -625,7 +607,7 @@ public class Upkeep implements java.io.Serializable {
                             } // selectCard()
                         }); // Input
                     } else { // computer
-                        final Card target = CardFactoryUtil.getCheapestPermanentAI(artifacts, c, false);
+                        final Card target = CardFactoryUtil.getCheapestPermanentAI(artifacts, this, false);
                         if (null == target) {
                             this.tapAndDamage(player);
                         } else {

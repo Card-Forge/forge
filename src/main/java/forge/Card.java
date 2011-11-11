@@ -8162,6 +8162,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final boolean canTarget(final SpellAbility sa) {
         
+        if(sa == null) {
+            return true;
+        }
+        
         // CantTarget static abilities
         final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (final Card ca : allp) {

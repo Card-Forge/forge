@@ -871,20 +871,20 @@ public class MagicStack extends MyObservable {
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && AllZone.getZoneOf(source).is(Constant.Zone.Graveyard)) {
             final CardList creats = AllZoneUtil.getCreaturesInPlay();
+            final Ability haunterDiesWork = new Ability(source, "0") {
+                @Override
+                public void resolve() {
+                    AllZone.getGameAction().exile(source);
+                    this.getTargetCard().addHauntedBy(source);
+                }
+            };
             for (int i = 0; i < creats.size(); i++) {
-                if (!CardFactoryUtil.canTarget(source, creats.get(i))) {
+                if (!creats.get(i).canTarget(haunterDiesWork)) {
                     creats.remove(i);
                     i--;
                 }
             }
             if (creats.size() != 0) {
-                final Ability haunterDiesWork = new Ability(source, "0") {
-                    @Override
-                    public void resolve() {
-                        AllZone.getGameAction().exile(source);
-                        this.getTargetCard().addHauntedBy(source);
-                    }
-                };
                 haunterDiesWork.setDescription("");
 
                 final Input target = new Input() {

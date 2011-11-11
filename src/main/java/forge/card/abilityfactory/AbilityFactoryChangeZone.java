@@ -951,14 +951,14 @@ public final class AbilityFactoryChangeZone {
                                                                   // take the
                                                                   // best
             } else if (Zone.Battlefield.equals(destination) || Zone.Graveyard.equals(destination)) {
-                c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, af.getHostCard(), false);
+                c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
             } else if (Zone.Exile.equals(destination)) {
                 // Exiling your own stuff, if Exiling opponents stuff choose
                 // best
                 if (destZone.getPlayer().isHuman()) {
-                    c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, af.getHostCard(), false);
+                    c = CardFactoryUtil.getMostExpensivePermanentAI(fetchList, sa, false);
                 } else {
-                    c = CardFactoryUtil.getCheapestPermanentAI(fetchList, af.getHostCard(), false);
+                    c = CardFactoryUtil.getCheapestPermanentAI(fetchList, sa, false);
                 }
             } else {
                 // Don't fetch another tutor with the same name
@@ -998,7 +998,7 @@ public final class AbilityFactoryChangeZone {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = AbilityFactoryAttach.getAttachSpellAbility(c);
-                    if (!saAura.getTarget().hasCandidates(false)) {
+                    if (!saAura.getTarget().hasCandidates(saAura, false)) {
                         continue;
                     }
                 }
@@ -1303,7 +1303,7 @@ public final class AbilityFactoryChangeZone {
         // Narrow down the list:
         if (origin.equals(Zone.Battlefield)) {
             // filter out untargetables
-            list = list.getTargetableCards(source);
+            list = list.getTargetableCards(sa);
             CardList aiPermanents = list.getController(AllZone.getComputerPlayer());
 
             // if it's blink or bounce, try to save my about to die stuff
@@ -1415,7 +1415,7 @@ public final class AbilityFactoryChangeZone {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                final Card mostExpensive = CardFactoryUtil.getMostExpensivePermanentAI(list, af.getHostCard(), false);
+                final Card mostExpensive = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false);
                 if (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield)) {
                     if (mostExpensive.isCreature()) {
                         // if a creature is most expensive take the best one
@@ -1485,7 +1485,7 @@ public final class AbilityFactoryChangeZone {
         // Narrow down the list:
         if (origin.equals(Zone.Battlefield)) {
             // filter out untargetables
-            list = list.getTargetableCards(source);
+            list = list.getTargetableCards(sa);
 
             // if Destination is hand, either bounce opponents dangerous stuff
             // or save my about to die stuff
@@ -1510,12 +1510,12 @@ public final class AbilityFactoryChangeZone {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                if (CardFactoryUtil.getMostExpensivePermanentAI(list, af.getHostCard(), false).isCreature()
+                if (CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false).isCreature()
                         && (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield))) {
                     // if a creature is most expensive take the best
                     choice = CardFactoryUtil.getBestCreatureToBounceAI(list);
                 } else if (destination.equals(Zone.Battlefield) || origin.equals(Zone.Battlefield)) {
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, af.getHostCard(), false);
+                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false);
                 } else {
                     // TODO AI needs more improvement to it's retrieval (reuse
                     // some code from spReturn here)
@@ -1779,7 +1779,7 @@ public final class AbilityFactoryChangeZone {
                         // location
                         if (tgtC.isAura()) {
                             final SpellAbility saAura = AbilityFactoryAttach.getAttachSpellAbility(tgtC);
-                            if (!saAura.getTarget().hasCandidates(false)) {
+                            if (!saAura.getTarget().hasCandidates(saAura, false)) {
                                 continue;
                             }
                         }
@@ -2183,7 +2183,7 @@ public final class AbilityFactoryChangeZone {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = AbilityFactoryAttach.getAttachSpellAbility(c);
-                    if (!saAura.getTarget().hasCandidates(false)) {
+                    if (!saAura.getTarget().hasCandidates(saAura, false)) {
                         continue;
                     }
                 }

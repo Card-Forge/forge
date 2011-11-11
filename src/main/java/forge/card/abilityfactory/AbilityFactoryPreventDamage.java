@@ -439,7 +439,7 @@ public class AbilityFactoryPreventDamage {
             return true;
         }
 
-        tgt.addTarget(CardFactoryUtil.getCheapestPermanentAI(targetables, hostCard, true));
+        tgt.addTarget(CardFactoryUtil.getCheapestPermanentAI(targetables, sa, true));
         return true;
     }
 

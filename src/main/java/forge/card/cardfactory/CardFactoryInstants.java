@@ -227,7 +227,7 @@ public class CardFactoryInstants {
 
                 CardList getCreature() {
                     final CardList out = new CardList();
-                    final CardList list = CardFactoryUtil.getHumanCreatureAI("Flying", card, true);
+                    final CardList list = CardFactoryUtil.getHumanCreatureAI("Flying", this, true);
                     list.shuffle();
 
                     for (int i = 0; i < list.size(); i++) {
@@ -238,9 +238,9 @@ public class CardFactoryInstants {
 
                     // in case human player only has a few creatures in play,
                     // target anything
-                    if (out.isEmpty() && (0 < CardFactoryUtil.getHumanCreatureAI(2, card, true).size())
-                            && (3 > CardFactoryUtil.getHumanCreatureAI(card, true).size())) {
-                        out.addAll(CardFactoryUtil.getHumanCreatureAI(2, card, true));
+                    if (out.isEmpty() && (0 < CardFactoryUtil.getHumanCreatureAI(2, this, true).size())
+                            && (3 > CardFactoryUtil.getHumanCreatureAI(this, true).size())) {
+                        out.addAll(CardFactoryUtil.getHumanCreatureAI(2, this, true));
                         CardListUtil.sortFlying(out);
                     }
                     return out;
@@ -333,13 +333,13 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList human = CardFactoryUtil.getHumanCreatureAI(card, true);
+                    final CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
                     return (4 < AllZone.getPhase().getTurn()) && (0 < human.size());
                 }
 
                 @Override
                 public void chooseTargetAI() {
-                    final CardList human = CardFactoryUtil.getHumanCreatureAI(card, true);
+                    final CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
                     this.setTargetCard(CardFactoryUtil.getBestCreatureAI(human));
                 }
 

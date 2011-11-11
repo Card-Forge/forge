@@ -402,7 +402,7 @@ public final class AbilityFactoryDebuff {
             final ArrayList<String> kws) {
         final Card hostCard = af.getHostCard();
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = list.getTargetableCards(hostCard);
+        list = list.getTargetableCards(sa);
 
         if (!list.isEmpty()) {
             list = list.filter(new CardListFilter() {
@@ -458,7 +458,7 @@ public final class AbilityFactoryDebuff {
             if (pref.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
-                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, source, true);
+                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
             }
 
             pref.remove(c);
@@ -477,7 +477,7 @@ public final class AbilityFactoryDebuff {
             if (forced.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
-                c = CardFactoryUtil.getCheapestPermanentAI(forced, source, true);
+                c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);
             }
 
             forced.remove(c);

@@ -502,7 +502,7 @@ public class AbilityFactoryCounters {
             }
         } else {
             list = player.getCardsIn(Zone.Battlefield);
-            list = list.getTargetableCards(source);
+            list = list.getTargetableCards(sa);
             if (abTgt != null) {
                 list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             }
@@ -510,7 +510,7 @@ public class AbilityFactoryCounters {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
                 list = player.getOpponent().getCardsIn(Zone.Battlefield);
-                list = list.getTargetableCards(source);
+                list = list.getTargetableCards(sa);
                 if (abTgt != null) {
                     list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
                 }

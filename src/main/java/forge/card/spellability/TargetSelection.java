@@ -232,7 +232,7 @@ public class TargetSelection {
     public final void chooseValidInput() {
         final Target tgt = this.getTgt();
         final List<Zone> zone = tgt.getZone();
-        final boolean mandatory = this.target.getMandatory() ? this.target.hasCandidates(true) : false;
+        final boolean mandatory = this.target.getMandatory() ? this.target.hasCandidates(ability, true) : false;
 
         if (zone.contains(Constant.Zone.Stack) && (zone.size() == 1)) {
             // If Zone is Stack, the choices are handled slightly differently

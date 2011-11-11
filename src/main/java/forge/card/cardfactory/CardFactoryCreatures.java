@@ -213,10 +213,10 @@ public class CardFactoryCreatures {
                 @Override
                 public void chooseTargetAI() {
                     CardList perms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    perms = perms.filter(new CardListFilter() {
+                    perms = perms.getTargetableCards(this).filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            return (c.sumAllCounters() > 0) && CardFactoryUtil.canTarget(card, c);
+                            return (c.sumAllCounters() > 0);
                         }
                     });
                     perms.shuffle();
@@ -226,10 +226,10 @@ public class CardFactoryCreatures {
                 @Override
                 public boolean canPlayAI() {
                     CardList perms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                    perms = perms.filter(new CardListFilter() {
+                    perms = perms.getTargetableCards(this).filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            return (c.sumAllCounters() > 0) && CardFactoryUtil.canTarget(card, c);
+                            return (c.sumAllCounters() > 0);
                         }
                     });
                     return perms.size() > 0;
@@ -1085,11 +1085,10 @@ public class CardFactoryCreatures {
 
                     CardList targetables = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
 
-                    targetables = targetables.filter(new CardListFilter() {
+                    targetables = targetables.getTargetableCards(this).filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            return CardFactoryUtil.canTarget(card, c) && c.isCreature()
-                                    && (c.getNetDefense() <= totalPower);
+                            return c.isCreature() && (c.getNetDefense() <= totalPower);
                         }
                     });
 
@@ -1293,7 +1292,7 @@ public class CardFactoryCreatures {
                 CardList getCreature() {
 
                     // toughness of 1
-                    CardList list = CardFactoryUtil.getHumanCreatureAI(card.getCounters(Counters.P1P1), card, true);
+                    CardList list = CardFactoryUtil.getHumanCreatureAI(card.getCounters(Counters.P1P1), this, true);
                     list = list.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
@@ -1470,7 +1469,7 @@ public class CardFactoryCreatures {
                         });
 
                         if (list.size() > 0) {
-                            final Card c = CardFactoryUtil.getBestEnchantmentAI(list, card, false);
+                            final Card c = CardFactoryUtil.getBestEnchantmentAI(list, this, false);
 
                             AllZone.getGameAction().moveToPlay(c);
                             if (card.getName().equals("Academy Rector")) {
@@ -2074,7 +2073,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void execute() {
                     final Player player = card.getController();
-                    final CardList list = CardFactoryUtil.getHumanCreatureAI(card, true);
+                    final CardList list = CardFactoryUtil.getHumanCreatureAI(ability, true);
 
                     if (player.isHuman()) {
                         AllZone.getInputControl().setInput(playerInput);
@@ -2456,7 +2455,7 @@ public class CardFactoryCreatures {
                     final Card equipment = this.getParent().getTargetCard();
                     final Card creature = this.getTargetCard();
                     if (AllZoneUtil.isCardInPlay(equipment) && AllZoneUtil.isCardInPlay(creature)) {
-                        if (CardFactoryUtil.canTarget(card, equipment) && creature.canTarget(this)) {
+                        if (equipment.canTarget(this) && creature.canTarget(this)) {
                             if (equipment.isEquipping()) {
                                 final Card equipped = equipment.getEquipping().get(0);
                                 if (!equipped.equals(creature)) {

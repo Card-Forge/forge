@@ -934,7 +934,7 @@ public final class AbilityFactoryCombat {
         boolean chance = false;
 
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
-        list = list.getTargetableCards(source);
+        list = list.getTargetableCards(sa);
 
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);

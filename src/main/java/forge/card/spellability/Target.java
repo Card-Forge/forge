@@ -620,14 +620,14 @@ public class Target {
      * 
      * @return a boolean.
      */
-    public final boolean hasCandidates(final boolean isTargeted) {
+    public final boolean hasCandidates(final SpellAbility sa, final boolean isTargeted) {
         if (this.canTgtPlayer()) {
             return true;
         }
 
         for (final Card c : AllZoneUtil.getCardsIn(this.tgtZone)) {
             if (c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)
-                    && (!isTargeted || CardFactoryUtil.canTarget(this.srcCard, c))) {
+                    && (!isTargeted || c.canTarget(sa))) {
                 return true;
             }
         }

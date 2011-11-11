@@ -154,11 +154,11 @@ public class CardFactoryPlaneswalkers {
                             return !(c.isToken() && c.isType("Dragon"));
                         }
                     });
-                    this.setTargetCard(CardFactoryUtil.getCheapestCreatureAI(cards, card, true));
+                    this.setTargetCard(CardFactoryUtil.getCheapestCreatureAI(cards, this, true));
                     Log.debug(
                             "Sarkhan the Mad",
                             "Sarkhan the Mad caused sacrifice of: "
-                            + CardFactoryUtil.getCheapestCreatureAI(cards, card, true));
+                            + CardFactoryUtil.getCheapestCreatureAI(cards, this, true));
                 }
 
                 @Override

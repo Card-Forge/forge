@@ -696,7 +696,7 @@ public class CardFactorySorceries {
 
                 CardList getCreature() {
                     final CardList out = new CardList();
-                    final CardList list = CardFactoryUtil.getHumanCreatureAI("Flying", card, true);
+                    final CardList list = CardFactoryUtil.getHumanCreatureAI("Flying", this, true);
                     list.shuffle();
 
                     for (int i = 0; i < list.size(); i++) {
@@ -707,9 +707,9 @@ public class CardFactorySorceries {
 
                     // in case human player only has a few creatures in play,
                     // target anything
-                    if (out.isEmpty() && (0 < CardFactoryUtil.getHumanCreatureAI(2, card, true).size())
-                            && (3 > CardFactoryUtil.getHumanCreatureAI(card, true).size())) {
-                        out.addAll(CardFactoryUtil.getHumanCreatureAI(2, card, true));
+                    if (out.isEmpty() && (0 < CardFactoryUtil.getHumanCreatureAI(2, this, true).size())
+                            && (3 > CardFactoryUtil.getHumanCreatureAI(this, true).size())) {
+                        out.addAll(CardFactoryUtil.getHumanCreatureAI(2, this, true));
                         CardListUtil.sortFlying(out);
                     }
                     return out;
@@ -811,7 +811,7 @@ public class CardFactorySorceries {
 
                 // uses "damage" variable
                 Card getFlying() {
-                    final CardList flying = CardFactoryUtil.getHumanCreatureAI("Flying", card, true);
+                    final CardList flying = CardFactoryUtil.getHumanCreatureAI("Flying", this, true);
                     for (int i = 0; i < flying.size(); i++) {
                         if (flying.get(i).getNetDefense() <= this.damage) {
                             return flying.get(i);
@@ -1579,7 +1579,7 @@ public class CardFactorySorceries {
 
                 // uses "damage" variable
                 Card getFlying() {
-                    final CardList flying = CardFactoryUtil.getHumanCreatureAI("Flying", card, true);
+                    final CardList flying = CardFactoryUtil.getHumanCreatureAI("Flying", this, true);
                     for (int i = 0; i < flying.size(); i++) {
                         if (flying.get(i).getNetDefense() <= this.damage) {
                             return flying.get(i);
@@ -2316,7 +2316,7 @@ public class CardFactorySorceries {
                         final Card c = ab1card[0];
                         if (c != null) {
                             if (card.getController().getZone(Zone.Graveyard).contains(c)
-                                    && CardFactoryUtil.canTarget(card, c)) {
+                                    && c.canTarget(this)) {
                                 AllZone.getGameAction().moveToPlay(c);
                             }
                         }
@@ -2327,7 +2327,7 @@ public class CardFactorySorceries {
                         if (card.getChoice(i).equals(cardChoice[2])) {
                             final Card c = ab2card[0];
                             if (c != null) {
-                                if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                                if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
                                     final int boost = x[0] * -1;
                                     c.addTempAttackBoost(boost);
                                     c.addTempDefenseBoost(boost);
@@ -2354,7 +2354,7 @@ public class CardFactorySorceries {
                         final ArrayList<Card> cs = new ArrayList<Card>();
                         cs.addAll(ab3cards);
                         for (final Card c : cs) {
-                            if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                            if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
                                 c.addExtrinsicKeyword("Fear");
                                 final Command untilEOT = new Command() {
                                     private static final long serialVersionUID = 986259855862338866L;
@@ -2432,7 +2432,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)
+                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.canTarget(spell)
                             && !ab3cards.contains(c)) {
                         ab3cards.add(c);
                         this.count++;
@@ -2467,7 +2467,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
+                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.canTarget(spell)) {
                         if (card.isCopiedSpell()) {
                             card.getChoiceTargets().remove(0);
                         }
@@ -2505,7 +2505,7 @@ public class CardFactorySorceries {
                             grave.toArray());
                     if (check != null) {
                         final Card c = (Card) check;
-                        if (CardFactoryUtil.canTarget(card, c)) {
+                        if (c.canTarget(spell)) {
                             ab1card[0] = c;
                         }
                     } else {
@@ -2717,7 +2717,7 @@ public class CardFactorySorceries {
                 @Override
                 public void resolve() {
                     final Card tgt = this.getTargetCard();
-                    if (AllZoneUtil.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
+                    if (AllZoneUtil.isCardInPlay(tgt) && tgt.canTarget(this)) {
                         tgt.addDamage(5, card);
                         final CardList equipment = new CardList(tgt.getEquippedBy());
                         for (final Card eq : equipment) {

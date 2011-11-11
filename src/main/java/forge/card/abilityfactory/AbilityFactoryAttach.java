@@ -242,7 +242,7 @@ public class AbilityFactoryAttach {
         // check that when starting that work
         // But we shouldn't attach to things with Protection
         if (tgt.getZone().contains(Zone.Battlefield) && !mandatory) {
-            list = list.getTargetableCards(attachSource);
+            list = list.getTargetableCards(sa);
         } else {
             list = list.getUnprotectedCards(attachSource);
         }

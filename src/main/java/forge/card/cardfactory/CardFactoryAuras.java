@@ -442,13 +442,7 @@ class CardFactoryAuras {
                 public boolean canPlayAI() {
                     CardList cList = this.getCreturesInGrave();
                     // AI will only target something that will stick in play.
-                    cList = cList.filter(new CardListFilter() {
-                        @Override
-                        public final boolean addCard(final Card crd) {
-                            return CardFactoryUtil.canTarget(card, crd)
-                                    && !CardFactoryUtil.hasProtectionFrom(card, crd);
-                        }
-                    });
+                    cList = cList.getTargetableCards(this);
                     if (cList.size() == 0) {
                         return false;
                     }

@@ -348,7 +348,7 @@ public class AbilityFactoryPermanentState {
         }
 
         CardList untapList = targetController.getCardsIn(Zone.Battlefield);
-        untapList = untapList.getTargetableCards(source);
+        untapList = untapList.getTargetableCards(sa);
         untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
 
         untapList = untapList.filter(CardListFilter.TAPPED);
@@ -382,7 +382,7 @@ public class AbilityFactoryPermanentState {
                                                                         // the
                                                                         // best
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(untapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(untapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left
@@ -422,7 +422,7 @@ public class AbilityFactoryPermanentState {
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
-        list = list.getTargetableCards(source);
+        list = list.getTargetableCards(sa);
 
         // filter by enchantments and planeswalkers, their tapped state doesn't
         // matter.
@@ -501,7 +501,7 @@ public class AbilityFactoryPermanentState {
                                                                       // the
                                                                       // best
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left
@@ -922,7 +922,7 @@ public class AbilityFactoryPermanentState {
         // matter.
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
         tapList = tapList.getValidCards(tappablePermanents, source.getController(), source);
-        tapList = tapList.getTargetableCards(source);
+        tapList = tapList.getTargetableCards(sa);
 
         if (tapList.size() == 0) {
             return false;
@@ -950,7 +950,7 @@ public class AbilityFactoryPermanentState {
                                                                       // the
                                                                       // best
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left
@@ -992,7 +992,7 @@ public class AbilityFactoryPermanentState {
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
-        list = list.getTargetableCards(source);
+        list = list.getTargetableCards(sa);
 
         // filter by enchantments and planeswalkers, their tapped state doesn't
         // matter.
@@ -1070,7 +1070,7 @@ public class AbilityFactoryPermanentState {
                                                                       // the
                                                                       // best
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, af.getHostCard(), false);
+                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left
@@ -2361,7 +2361,7 @@ public class AbilityFactoryPermanentState {
         final Target tgt = sa.getTarget();
 
         CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        list = list.getValidCards(tgt.getValidTgts(), source.getController(), source).getTargetableCards(source);
+        list = list.getValidCards(tgt.getValidTgts(), source.getController(), source).getTargetableCards(sa);
 
         return false;
     }

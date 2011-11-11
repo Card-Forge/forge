@@ -222,11 +222,10 @@ class CardFactoryEquipment {
                 // not changed
                 CardList getCreature() {
                     CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    list = list.filter(new CardListFilter() {
+                    list = list.getTargetableCards(this).filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            return CardFactoryUtil.doesCreatureAttackAI(c) && CardFactoryUtil.canTarget(card, c)
-                                    && (!c.hasKeyword("Defender"));
+                            return CardFactoryUtil.doesCreatureAttackAI(c) && (!c.hasKeyword("Defender"));
                         }
                     });
 
@@ -319,7 +318,6 @@ class CardFactoryEquipment {
                 @Override
                 public void showMessage() {
                     CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    list = list.getTargetableCards(card);
                     AllZone.getDisplay().showMessage(card + " - Select target creature you control to attach");
                     ButtonUtil.disableAll();
                     if (list.size() == 0) {

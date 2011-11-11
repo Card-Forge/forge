@@ -279,7 +279,7 @@ public final class AbilityFactoryCopy {
                 if (list.filter(CardListFilter.CREATURES).size() > 0) {
                     choice = CardFactoryUtil.getBestCreatureAI(list);
                 } else {
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, source, true);
+                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
                 }
 
                 if (choice == null) { // can't find anything left

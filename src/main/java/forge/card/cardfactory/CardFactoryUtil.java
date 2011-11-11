@@ -76,13 +76,13 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card getMostExpensivePermanentAI(final CardList list, final Card spell, final boolean targeted) {
+    public static Card getMostExpensivePermanentAI(final CardList list, final SpellAbility spell, final boolean targeted) {
         CardList all = list;
         if (targeted) {
             all = all.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    return CardFactoryUtil.canTarget(spell, c);
+                    return c.canTarget(spell);
                 }
             });
         }
@@ -137,7 +137,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCheapestCreatureAI(CardList list, final Card spell, final boolean targeted) {
+    public static Card getCheapestCreatureAI(CardList list, final SpellAbility spell, final boolean targeted) {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -160,13 +160,13 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCheapestPermanentAI(final CardList list, final Card spell, final boolean targeted) {
+    public static Card getCheapestPermanentAI(final CardList list, final SpellAbility spell, final boolean targeted) {
         CardList all = list;
         if (targeted) {
             all = all.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    return CardFactoryUtil.canTarget(spell, c);
+                    return c.canTarget(spell);
                 }
             });
         }
@@ -266,7 +266,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card getBestEnchantmentAI(final CardList list, final Card spell, final boolean targeted) {
+    public static Card getBestEnchantmentAI(final CardList list, final SpellAbility spell, final boolean targeted) {
         CardList all = list;
         all = all.getType("Enchantment");
         if (targeted) {
@@ -274,7 +274,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public boolean addCard(final Card c) {
-                    return CardFactoryUtil.canTarget(spell, c);
+                    return c.canTarget(spell);
                 }
             });
         }
@@ -1423,12 +1423,12 @@ public class CardFactoryUtil {
 
             CardList getCreature() {
                 CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                list = list.filter(new CardListFilter() {
+                list = list.getTargetableCards(this).filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
                         return c.isCreature()
                                 && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c) && AllZone.getPhase()
-                                        .is(Constant.Phase.MAIN2))) && CardFactoryUtil.canTarget(sourceCard, c)
+                                        .is(Constant.Phase.MAIN2)))
                                 && (((c.getNetDefense() + tough) > 0) || sourceCard.getName().equals("Skullclamp"));
                     }
                 });
@@ -2090,7 +2090,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanCreatureAI(final Card spell, final boolean targeted) {
+    public static CardList getHumanCreatureAI(final SpellAbility spell, final boolean targeted) {
         CardList creature = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         if (targeted) {
             creature = creature.getTargetableCards(spell);
@@ -2111,13 +2111,13 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanCreatureAI(final String keyword, final Card spell, final boolean targeted) {
+    public static CardList getHumanCreatureAI(final String keyword, final SpellAbility spell, final boolean targeted) {
         CardList creature = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         creature = creature.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
                 if (targeted) {
-                    return c.isCreature() && c.hasKeyword(keyword) && CardFactoryUtil.canTarget(spell, c);
+                    return c.isCreature() && c.hasKeyword(keyword) && c.canTarget(spell);
                 } else {
                     return c.isCreature() && c.hasKeyword(keyword);
                 }
@@ -2139,13 +2139,13 @@ public class CardFactoryUtil {
      *            a boolean.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getHumanCreatureAI(final int toughness, final Card spell, final boolean targeted) {
+    public static CardList getHumanCreatureAI(final int toughness, final SpellAbility spell, final boolean targeted) {
         CardList creature = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         creature = creature.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
                 if (targeted) {
-                    return c.isCreature() && (c.getNetDefense() <= toughness) && CardFactoryUtil.canTarget(spell, c);
+                    return c.isCreature() && (c.getNetDefense() <= toughness) && c.canTarget(spell);
                 } else {
                     return c.isCreature() && (c.getNetDefense() <= toughness);
                 }
@@ -4798,7 +4798,7 @@ public class CardFactoryUtil {
                     if (!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
                         return;
                     }
-                    if (CardFactoryUtil.canTarget(card, c)) {
+                    if (c.canTarget(haunterDiesWork)) {
                         haunterDiesWork.setTargetCard(c);
                         AllZone.getStack().add(haunterDiesWork);
                         this.stop();
@@ -4813,7 +4813,7 @@ public class CardFactoryUtil {
                 public void resolve() {
                     final CardList creats = AllZoneUtil.getCreaturesInPlay();
                     for (int i = 0; i < creats.size(); i++) {
-                        if (!CardFactoryUtil.canTarget(card, creats.get(i))) {
+                        if (!creats.get(i).canTarget(this)) {
                             creats.remove(i);
                             i--;
                         }

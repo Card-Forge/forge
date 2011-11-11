@@ -334,9 +334,9 @@ public class AbilityFactoryGainControl {
             } else if (hasLand) {
                 t = CardFactoryUtil.getBestLandAI(list);
             } else if (hasEnchantment) {
-                t = CardFactoryUtil.getBestEnchantmentAI(list, sa.getSourceCard(), true);
+                t = CardFactoryUtil.getBestEnchantmentAI(list, sa, true);
             } else {
-                t = CardFactoryUtil.getMostExpensivePermanentAI(list, sa.getSourceCard(), true);
+                t = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
             }
 
             tgt.addTarget(t);

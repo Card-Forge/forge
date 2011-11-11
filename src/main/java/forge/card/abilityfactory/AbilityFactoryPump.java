@@ -333,7 +333,7 @@ public class AbilityFactoryPump {
      */
     private CardList getCurseCreatures(final SpellAbility sa, final int defense, final int attack) {
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        list = list.getTargetableCards(this.hostCard);
+        list = list.getTargetableCards(sa);
 
         if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
                                                 // compi will try to destroy a
@@ -640,7 +640,7 @@ public class AbilityFactoryPump {
             if (pref.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.getBestCreatureAI(pref);
             } else {
-                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, source, true);
+                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
             }
 
             pref.remove(c);
@@ -657,7 +657,7 @@ public class AbilityFactoryPump {
             if (forced.getNotType("Creature").size() == 0) {
                 c = CardFactoryUtil.getWorstCreatureAI(forced);
             } else {
-                c = CardFactoryUtil.getCheapestPermanentAI(forced, source, true);
+                c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);
             }
 
             forced.remove(c);
