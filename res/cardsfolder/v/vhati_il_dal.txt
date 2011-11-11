@@ -1,0 +1,12 @@
+Name:Vhati il-Dal
+ManaCost:2 B G
+Types:Legendary Creature Human Warrior
+Text:no text
+PT:3/3
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | IsCurse$ True | SpellDescription$ Target creature's power becomes 1 until end of turn.
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Toughness$ 1 | IsCurse$ True | SpellDescription$ Target creature's toughness becomes 1 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vhati_il-dal.jpg
+SetInfo:TMP|Rare|http://dummy.com/dummy.jpg
+SetInfo:TSB|Rare|http://dummy.com/dummy.jpg
+End

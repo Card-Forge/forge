@@ -6985,6 +6985,7 @@ res/cardsfolder/s/scabland.txt svneol=native#text/plain
 res/cardsfolder/s/scald.txt svneol=native#text/plain
 res/cardsfolder/s/scalding_salamander.txt svneol=native#text/plain
 res/cardsfolder/s/scalding_tarn.txt svneol=native#text/plain
+res/cardsfolder/s/scalding_tongs.txt -text
 res/cardsfolder/s/scale_of_chiss_goria.txt svneol=native#text/plain
 res/cardsfolder/s/scalebanes_elite.txt svneol=native#text/plain
 res/cardsfolder/s/scaled_hulk.txt svneol=native#text/plain
@@ -8498,6 +8499,7 @@ res/cardsfolder/t/thrull_surgeon.txt svneol=native#text/plain
 res/cardsfolder/t/thrumming_stone.txt svneol=native#text/plain
 res/cardsfolder/t/thrummingbird.txt svneol=native#text/plain
 res/cardsfolder/t/thrun_the_last_troll.txt svneol=native#text/plain
+res/cardsfolder/t/thumbscrews.txt -text
 res/cardsfolder/t/thunder_dragon.txt svneol=native#text/plain
 res/cardsfolder/t/thunder_of_hooves.txt svneol=native#text/plain
 res/cardsfolder/t/thunder_spirit.txt svneol=native#text/plain
@@ -9021,6 +9023,7 @@ res/cardsfolder/v/veteran_swordsmith.txt svneol=native#text/plain
 res/cardsfolder/v/veterans_reflexes.txt svneol=native#text/plain
 res/cardsfolder/v/vex.txt svneol=native#text/plain
 res/cardsfolder/v/vexing_beetle.txt svneol=native#text/plain
+res/cardsfolder/v/vhati_il_dal.txt -text
 res/cardsfolder/v/viashino_bladescout.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_cutthroat.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_fangtail.txt svneol=native#text/plain
@@ -9292,6 +9295,7 @@ res/cardsfolder/w/warthog.txt svneol=native#text/plain
 res/cardsfolder/w/wasp_lancer.txt svneol=native#text/plain
 res/cardsfolder/w/waste_away.txt svneol=native#text/plain
 res/cardsfolder/w/wasteland.txt svneol=native#text/plain
+res/cardsfolder/w/watchdog.txt -text
 res/cardsfolder/w/watcher_sliver.txt svneol=native#text/plain
 res/cardsfolder/w/watchwing_scarecrow.txt svneol=native#text/plain
 res/cardsfolder/w/watchwolf.txt svneol=native#text/plain

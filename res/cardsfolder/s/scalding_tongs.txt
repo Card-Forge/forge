@@ -1,0 +1,9 @@
+Name:Scalding Tongs
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ LE3 | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, if you have three or fewer cards in hand, CARDNAME deals 1 damage to target opponent.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_tongs.jpg
+End
