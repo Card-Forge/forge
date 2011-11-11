@@ -7,4 +7,5 @@ A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughess$ 1 | SetColor$ Black | Description$ Enchanted creature gets +3/+1 and is black.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinister_strength.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/54.jpg
 End

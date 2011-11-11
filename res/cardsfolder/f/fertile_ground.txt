@@ -5,7 +5,7 @@ Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigManaChoice | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
-SVar:TrigManaChoice:AB$ Charm | Cost$ 0 | Choices$ TrigManaW,TrigManaU,TrigManaB,TrigManaR,TrigManaG | CharmNum$ 1 
+SVar:TrigManaChoice:AB$ Charm | Cost$ 0 | Choices$ TrigManaW,TrigManaU,TrigManaB,TrigManaR,TrigManaG | CharmNum$ 1
 SVar:TrigManaW:DB$Mana | Cost$ 0 | Produced$ W | Amount$ 1 | Defined$ EnchantedController | SpellDescription$ Add W to your mana pool.
 SVar:TrigManaU:DB$Mana | Cost$ 0 | Produced$ U | Amount$ 1 | Defined$ EnchantedController | SpellDescription$ Add U to your mana pool.
 SVar:TrigManaB:DB$Mana | Cost$ 0 | Produced$ B | Amount$ 1 | Defined$ EnchantedController | SpellDescription$ Add B to your mana pool.
@@ -14,4 +14,8 @@ SVar:TrigManaG:DB$Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ EnchantedC
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fertile_ground.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/248.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/252.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/188.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/211.jpg
 End

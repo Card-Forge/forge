@@ -9,4 +9,5 @@ SVar:TrigAddDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Card.Self+enchanted |
 SVar:EnchantMe:Once
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rayne_academy_chancellor.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/43.jpg
 End
