@@ -2053,9 +2053,10 @@ public class CardFactoryCreatures {
                     if (targetPerms.size() == 5) {
                         this.done();
                     }
-                    AllZone.getDisplay().showMessage(
-                            "Select up to 5 target permanents.  Selected (" + targetPerms.size()
-                                    + ") so far.  Click OK when done.");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Select up to 5 target permanents.  Selected (");
+                    sb.append(targetPerms.size()).append(") so far.  Click OK when done.");
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableOnlyOK();
                 }
 
@@ -2068,9 +2069,9 @@ public class CardFactoryCreatures {
                     // here, we add the ability to the stack since it's
                     // triggered.
                     final StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(
-                            " - tap up to 5 permanents target player controls. "
-                                    + "Target player skips his or her next untap step.");
+                    sb.append(card.getName());
+                    sb.append(" - tap up to 5 permanents target player controls. ");
+                    sb.append("Target player skips his or her next untap step.");
                     ability.setStackDescription(sb.toString());
                     AllZone.getStack().add(ability);
                     this.stop();
@@ -2092,7 +2093,9 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage(card.getName() + " - Select target player");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - Select target player");
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -2205,9 +2208,11 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void execute() {
-                    sacOrSac.setStackDescription("When " + cardName
-                            + " enters the battlefield, sacrifice it unless you "
-                            + "sacrifice any number of creatures with total power 12 or greater.");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("When ").append(cardName);
+                    sb.append(" enters the battlefield, sacrifice it unless you sacrifice ");
+                    sb.append("any number of creatures with total power 12 or greater.");
+                    sacOrSac.setStackDescription(sb.toString());
                     AllZone.getStack().addSimultaneousStackEntry(sacOrSac);
 
                 }
@@ -2305,18 +2310,20 @@ public class CardFactoryCreatures {
                         }
 
                         if (cardName.equals("Vesuvan Doppelganger")) {
-                            cloned[0].addExtrinsicKeyword("At the beginning of your upkeep, "
-                                    + "you may have this creature become a copy of target creature "
-                                    + "except it doesn't copy that creature's color. "
-                                    + "If you do, this creature gains this ability.");
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("At the beginning of your upkeep, you may have ");
+                            sb.append("this creature become a copy of target creature ");
+                            sb.append("except it doesn't copy that creature's color. ");
+                            sb.append("If you do, this creature gains this ability.");
+                            cloned[0].addExtrinsicKeyword(sb.toString());
                             cloned[0].addColor("U", cloned[0], false, true);
                         } else if (cardName.equals("Quicksilver Gargantuan")) {
                             cloned[0].setBaseDefense(7);
                             cloned[0].setBaseAttack(7);
                         } else if (cardName.equals("Phantasmal Image")) {
-                            final StringBuilder trigScript = new StringBuilder(
-                                    "Mode$ BecomesTarget | ValidTarget$ Card.Self | "
-                                            + "TriggerZones$ Battlefield | Execute$ ");
+                            final StringBuilder trigScript = new StringBuilder();
+                            trigScript.append("Mode$ BecomesTarget | ValidTarget$ Card.Self | ");
+                            trigScript.append("TriggerZones$ Battlefield | Execute$ ");
                             final StringBuilder svarName = new StringBuilder("TrigSac");
                             // Couple of hoops to jump through to make sure no
                             // svar is overwritten.
@@ -2331,8 +2338,8 @@ public class CardFactoryCreatures {
                                 }
                             }
                             trigScript.append(svarName.toString());
-                            trigScript.append(" | TriggerDescription$ When this creature "
-                                    + "becomes the target of a spell or ability, sacrifice it.");
+                            trigScript.append(" | TriggerDescription$ When this creature ");
+                            trigScript.append("becomes the target of a spell or ability, sacrifice it.");
                             cloned[0].addTrigger(forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(),
                                     card, true));
                             cloned[0].setSVar(svarName.toString(), "AB$Sacrifice | Cost$ 0 | Defined$ Self");
@@ -2340,12 +2347,11 @@ public class CardFactoryCreatures {
 
                         if (cardName.equals("Evil Twin")) {
                             final AbilityFactory abilityFactory = new AbilityFactory();
-                            final SpellAbility destroySameName = abilityFactory
-                                    .getAbility(
-                                            "AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | "
-                                    + "TgtPrompt$ Select target creature with the same name. | "
-                                                    + "SpellDescription$ Destroy target creature with the same name as this creature.",
-                                            cloned[0]);
+                            final StringBuilder sbET = new StringBuilder();
+                            sbET.append("AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | ");
+                            sbET.append("TgtPrompt$ Select target creature with the same name. | ");
+                            sbET.append("SpellDescription$ Destroy target creature with the same name as this creature.");
+                            final SpellAbility destroySameName = abilityFactory.getAbility(sbET.toString(), cloned[0]);
 
                             cloned[0].addSpellAbility(destroySameName);
                         }
@@ -2410,7 +2416,9 @@ public class CardFactoryCreatures {
             // Keywords.
             card.clearFirstSpell();
             card.addSpellAbility(copy);
-            copy.setStackDescription(cardName + " - enters the battlefield as a copy of selected card.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - enters the battlefield as a copy of selected card.");
+            copy.setStackDescription(sb.toString());
             if (cardName.equals("Body Double")) {
                 copy.setBeforePayMana(graveyardRuntime);
             } else {
