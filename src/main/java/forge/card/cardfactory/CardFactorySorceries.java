@@ -335,13 +335,18 @@ public class CardFactorySorceries {
                                     card.unattachCardByMindDesire(c);
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(null,
-                                        "Player cancelled or there is no more cards available on Mind's Desire.", "",
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append("Player cancelled or there is no more ");
+                                sb.append("cards available on Mind's Desire.");
+                                JOptionPane.showMessageDialog(null, sb.toString(), "",
                                         JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "You can only play an instant at this point in time, "
-                                    + "but none are attached to Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("You can only play an instant at this point in time, ");
+                            sb.append("but none are attached to Mind's Desire.");
+                            JOptionPane.showMessageDialog(null, sb.toString(), "",
+                                    JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 }
@@ -372,9 +377,11 @@ public class CardFactorySorceries {
                         play.remove(card);
                         mindsD = mindsList.get(0);
                     } else {
-                        JOptionPane.showMessageDialog(null,
-                                "Click Mind's Desire to see the available cards to play without paying its mana cost.",
-                                "", JOptionPane.INFORMATION_MESSAGE);
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append("Click Mind's Desire to see the available cards ");
+                        sb.append("to play without paying its mana cost.");
+                        JOptionPane.showMessageDialog(null, sb.toString(), "",
+                                JOptionPane.INFORMATION_MESSAGE);
                     }
                     final CardList libList = player.getCardsIn(Zone.Library);
                     Card c = null;
@@ -454,7 +461,9 @@ public class CardFactorySorceries {
                     int pile1CMC = 0;
                     int pile2CMC = 0;
 
-                    GuiUtils.getChoice("Revealing top " + count + " cards of library: ", cards.toArray());
+                    final StringBuilder msg = new StringBuilder();
+                    msg.append("Revealing top ").append(count).append(" cards of library: ");
+                    GuiUtils.getChoice(msg.toString(), cards.toArray());
                     // Human chooses
                     if (card.getController().isComputer()) {
                         for (int i = 0; i < count; i++) {
@@ -477,14 +486,15 @@ public class CardFactorySorceries {
                             }
                         }
                         final StringBuilder sb = new StringBuilder();
-                        sb.append("You have spilt the cards into the following piles" + "\r\n" + "\r\n");
-                        sb.append("Pile 1: " + "\r\n");
+                        sb.append("You have spilt the cards into the following piles");
+                        sb.append("\r\n").append("\r\n");
+                        sb.append("Pile 1: ").append("\r\n");
                         for (int i = 0; i < pile1.size(); i++) {
-                            sb.append(pile1.get(i).getName() + "\r\n");
+                            sb.append(pile1.get(i).getName()).append("\r\n");
                         }
-                        sb.append("\r\n" + "Pile 2: " + "\r\n");
+                        sb.append("\r\n").append("Pile 2: ").append("\r\n");
                         for (int i = 0; i < pile2.size(); i++) {
-                            sb.append(pile2.get(i).getName() + "\r\n");
+                            sb.append(pile2.get(i).getName()).append("\r\n");
                         }
                         JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
                         if (pile1CMC >= pile2CMC) {
@@ -544,14 +554,15 @@ public class CardFactorySorceries {
                             }
                         }
                         final StringBuilder sb = new StringBuilder();
-                        sb.append("Choose a pile to add to your hand: " + "\r\n" + "\r\n");
-                        sb.append("Pile 1: " + "\r\n");
+                        sb.append("Choose a pile to add to your hand: ");
+                        sb.append("\r\n").append("\r\n");
+                        sb.append("Pile 1: ").append("\r\n");
                         for (int i = 0; i < pile1.size(); i++) {
-                            sb.append(pile1.get(i).getName() + "\r\n");
+                            sb.append(pile1.get(i).getName()).append("\r\n");
                         }
-                        sb.append("\r\n" + "Pile 2: " + "\r\n");
+                        sb.append("\r\n").append("Pile 2: ").append("\r\n");
                         for (int i = 0; i < pile2.size(); i++) {
-                            sb.append(pile2.get(i).getName() + "\r\n");
+                            sb.append(pile2.get(i).getName()).append("\r\n");
                         }
                         final Object[] possibleValues = { "Pile 1", "Pile 2" };
                         final Object q = JOptionPane.showOptionDialog(null, sb, "Brilliant Ultimatum",
@@ -746,7 +757,10 @@ public class CardFactorySorceries {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage("Select target nonland permanent for " + spell.getSourceCard());
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Select target nonland permanent for ");
+                    sb.append(spell.getSourceCard());
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
