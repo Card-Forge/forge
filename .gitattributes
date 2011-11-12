@@ -5915,6 +5915,7 @@ res/cardsfolder/p/pardic_lancer.txt svneol=native#text/plain
 res/cardsfolder/p/pardic_swordsmith.txt svneol=native#text/plain
 res/cardsfolder/p/part_the_veil.txt svneol=native#text/plain
 res/cardsfolder/p/part_water.txt svneol=native#text/plain
+res/cardsfolder/p/past_in_flames.txt -text
 res/cardsfolder/p/patagia_golem.txt svneol=native#text/plain
 res/cardsfolder/p/patagia_viper.txt -text
 res/cardsfolder/p/patchwork_gnomes.txt -text

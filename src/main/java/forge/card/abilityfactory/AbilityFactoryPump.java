@@ -1156,6 +1156,7 @@ public class AbilityFactoryPump {
         final AbilityFactory af = sa.getAbilityFactory();
         CardList list;
         ArrayList<Player> tgtPlayers = null;
+        final ArrayList<Zone> affectedZones = new ArrayList<Zone>();
 
         final Target tgt = af.getAbTgt();
         if (tgt != null) {
@@ -1164,12 +1165,29 @@ public class AbilityFactoryPump {
             // use it
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), this.params.get("Defined"), sa);
         }
-
-        if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        } else {
-            list = tgtPlayers.get(0).getCardsIn(Zone.Battlefield);
+        
+        if(this.params.containsKey("PumpZone")) {
+            for(String zone : this.params.get("PumpZone").split(",")) {
+                affectedZones.add(Zone.valueOf(zone));
+            }
         }
+        else {
+            affectedZones.add(Zone.Battlefield);
+        }
+
+        list = new CardList();
+        if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
+            for(Zone zone : affectedZones) {
+                list.addAll(AllZoneUtil.getCardsIn(zone));
+            }
+            
+        } else {
+            for(Zone zone : affectedZones) {
+                list.addAll(tgtPlayers.get(0).getCardsIn(zone));
+            }
+        }
+        
+        
 
         String valid = "";
         if (this.params.containsKey("ValidCards")) {
@@ -1184,8 +1202,15 @@ public class AbilityFactoryPump {
         for (final Card c : list) {
             final Card tgtC = c;
 
-            // only pump things in play
-            if (!AllZoneUtil.isCardInPlay(tgtC)) {
+            // only pump things in the affected zones.
+            boolean found = false;
+            for(Zone z : affectedZones) {
+                if(c.isInZone(z)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 continue;
             }
 

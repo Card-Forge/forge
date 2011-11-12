@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Sorcery
 Text:no text
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Sorcery.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | KW$ Flashback | PumpZone$ Graveyard | SpellDescription$ Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (Mana cost includes color.)
-A:SP$ Pump | Cost$ 3 R | Flashback$ True | ValidTgts$ Sorcery.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | KW$ Flashback | PumpZone$ Graveyard | CostDesc$ Flashback - 3 R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+A:SP$ Pump | Cost$ 3 R | Flashback$ True | ValidTgts$ Sorcery.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | KW$ Flashback | PumpZone$ Graveyard | PreCostDesc$ Flashback - | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recoup.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/216.jpg
