@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Goblin Warrior
 Text:no text
 PT:2/2
-S:Mode$ Continuous | AffectedCards$ Card.Self | AddKeyword$ HIDDEN CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack unless you've cast a creature spell this turn.
+S:Mode$ Continuous | AffectedCards$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack unless you've cast a creature spell this turn.
 SVar:X:Count$ThisTurnCast_Creature.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_cohort.jpg
