@@ -933,7 +933,6 @@ public class CardFactorySorceries {
                     + "that creature onto the battlefield.");
 
             card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.abilityFlashback(card, "4 G G G"));
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************

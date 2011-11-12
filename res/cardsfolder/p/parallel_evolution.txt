@@ -2,6 +2,7 @@ Name:Parallel Evolution
 ManaCost:3 G G
 Types:Sorcery
 Text:no text
+K:Flashback 4 G G G
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallel_evolution.jpg

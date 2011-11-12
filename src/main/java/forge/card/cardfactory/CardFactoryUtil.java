@@ -858,66 +858,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * ability_Flashback.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param cost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility abilityFlashback(final Card sourceCard, final String cost) {
-        final Cost fbCost = new Cost(cost, sourceCard.getName(), true);
-        final SpellAbility flashback = new Spell(sourceCard) {
-
-            private static final long serialVersionUID = -4196027546564209412L;
-
-            @Override
-            public void resolve() {
-                final SpellAbility[] sa = sourceCard.getSpellAbility();
-                sa[0].setSourceCard(AllZone.getGameAction().moveToStack(sourceCard));
-                final SpellAbility flash = sa[0];
-                flash.setFlashBackAbility(true);
-                AllZone.getStack().add(flash);
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return ComputerUtil.canPayCost(this);
-            }
-
-            @Override
-            public boolean canPlay() {
-                final Card sourceCard = this.getSourceCard();
-
-                return sourceCard.getController().getZone(Zone.Graveyard).contains(sourceCard)
-                        && (sourceCard.isInstant() || Phase.canCastSorcery(sourceCard.getController()));
-
-            }
-
-        };
-
-        flashback.setPayCosts(fbCost);
-        flashback.getRestrictions().setZone(Constant.Zone.Graveyard);
-
-        final String costString = fbCost.toString().replace(":", ".");
-
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Flashback: ").append(costString);
-        flashback.setDescription(sbDesc.toString());
-        // possibly add Flashback into here?
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append("Flashback: ").append(sourceCard.getName());
-        flashback.setStackDescription(sbStack.toString());
-
-        return flashback;
-
-    } // ability_Flashback()
-
-    /**
-     * <p>
      * ability_Unearth.
      * </p>
      * 
@@ -4481,18 +4421,6 @@ public class CardFactoryUtil {
                 card.addSpellAbility(CardFactoryUtil.abilityTypecycle(card, manacost, type));
             }
         } // TypeCycling
-
-        if (CardFactoryUtil.hasKeyword(card, "Flashback:") != -1) {
-            final int n = CardFactoryUtil.hasKeyword(card, "Flashback");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                // card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
-
-                card.addSpellAbility(CardFactoryUtil.abilityFlashback(card, k[1]));
-            }
-        } // flashback
 
         if (CardFactoryUtil.hasKeyword(card, "Transmute") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Transmute");

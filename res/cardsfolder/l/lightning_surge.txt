@@ -2,7 +2,7 @@ Name:Lightning Surge
 ManaCost:3 R R
 Types:Sorcery
 Text:no text
-K:Flashback:5 R R
+K:Flashback 5 R R
 A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
 A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 6 | NoPrevention$ True | Activation$ Threshold | SpellDescription$ Threshold - If seven or more cards are in your graveyard, instead CARDNAME deals 6 damage to that creature or player and the damage can't be prevented.
 SVar:Rarity:Rare
