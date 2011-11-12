@@ -223,8 +223,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // *********************
         // Special phases handled above, everything else is handled simply by
         // priority
-
-        if (priority.isHuman()) {
+        if (priority == null) {
+            return null;
+        }
+        else if (priority.isHuman()) {
             final boolean skip = this.model.getGameState().getPhase().doSkipPhase();
             this.model.getGameState().getPhase().setSkipPhase(false);
             if ((this.model.getGameState().getStack().size() == 0)
@@ -234,9 +236,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             } else {
                 return new InputPassPriority();
             }
-        } else if (playerTurn.isComputer()) {
+        }
+        else if (playerTurn.isComputer()) {
             return this.aiInput;
-        } else {
+        }
+        else {
             this.aiInput.getComputer().stackNotEmpty();
             return null;
         }
