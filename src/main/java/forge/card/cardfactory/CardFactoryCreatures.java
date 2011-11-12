@@ -993,13 +993,16 @@ public class CardFactoryCreatures {
             };
 
             card.addSpellAbility(copyTokens1);
-            copyTokens1.setDescription(abCost + "For each creature token you control, "
-                    + "put a token that's a copy of that creature onto the battlefield.");
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(
-                    " - For each creature token you control, "
-                            + "put a token that's a copy of that creature onto the battlefield.");
-            copyTokens1.setStackDescription(sb.toString());
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost).append("For each creature token you control, ");
+            sbDesc.append("put a token that's a copy of that creature onto the battlefield.");
+            copyTokens1.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName());
+            sbStack.append(" - For each creature token you control, put a token ");
+            sbStack.append("that's a copy of that creature onto the battlefield.");
+            copyTokens1.setStackDescription(sbStack.toString());
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
@@ -1226,9 +1229,11 @@ public class CardFactoryCreatures {
             }; // SpellAbility
 
             final StringBuilder sb = new StringBuilder();
-            sb.append("Tap: Tap all untapped Wolf creatures you control. Each Wolf tapped ");
-            sb.append("this way deals damage equal to its power to target creature. That creature deals ");
-            sb.append("damage equal to its power divided as its controller chooses among any number of those Wolves.");
+            sb.append("Tap: Tap all untapped Wolf creatures you control. ");
+            sb.append("Each Wolf tapped this way deals damage equal to its ");
+            sb.append("power to target creature. That creature deals damage ");
+            sb.append("equal to its power divided as its controller ");
+            sb.append("chooses among any number of those Wolves.");
             ability.setDescription(sb.toString());
 
             card.addSpellAbility(ability);
@@ -1339,14 +1344,17 @@ public class CardFactoryCreatures {
 
             card.addSpellAbility(ability2);
 
-            final StringBuilder sb = new StringBuilder();
-            sb.append(abCost + "Remove all +1/+1 counters from " + cardName + ":  " + cardName);
-            sb.append(" deals damage to target creature or player equal to the "
-                    + "number of +1/+1 counters removed this way.");
-            ability2.setDescription(sb.toString());
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost).append("Remove all +1/+1 counters from ");
+            sbDesc.append(cardName).append(":  ").append(cardName);
+            sbDesc.append(" deals damage to target creature or player equal to the ");
+            sbDesc.append("number of +1/+1 counters removed this way.");
+            ability2.setDescription(sbDesc.toString());
 
-            ability2.setStackDescription("Molten Hydra deals damage to number of "
-                    + "+1/+1 counters on it to target creature or player.");
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append("Molten Hydra deals damage to number of +1/+1 ");
+            sbStack.append("counters on it to target creature or player.");
+            ability2.setStackDescription(sbStack.toString());
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
@@ -1503,7 +1511,8 @@ public class CardFactoryCreatures {
             final StringBuilder sb = new StringBuilder();
             if (card.getName().equals("Academy Rector")) {
                 sb.append("Academy Rector - ").append(card.getController());
-                sb.append(" may exile this card and place an enchantment from his library onto the battlefield.");
+                sb.append(" may exile this card and place an enchantment ");
+                sb.append("from his library onto the battlefield.");
             } else {
                 sb.append("Lost Auramancers - ").append(card.getController());
                 sb.append(" may place an enchantment from his library onto the battlefield.");
@@ -1576,8 +1585,10 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void execute() {
-                    ability.setStackDescription("Kinsbaile Borderguard enters "
-                            + "the battlefield with a +1/+1 counter on it for each other Kithkin you control.");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Kinsbaile Borderguard enters the battlefield with a ");
+                    sb.append("+1/+1 counter on it for each other Kithkin you control.");
+                    ability.setStackDescription(sb.toString());
                     AllZone.getStack().addSimultaneousStackEntry(ability);
 
                 }
@@ -1602,9 +1613,11 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void execute() {
-                    ability2.setStackDescription("When Kinsbaile Borderguard "
-                            + "is put into a graveyard from play, put a 1/1 white "
-                            + "Kithkin Soldier creature token onto the battlefield for each counter on it.");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("When Kinsbaile Borderguard is put into a graveyard ");
+                    sb.append("from play, put a 1/1 white Kithkin Soldier creature ");
+                    sb.append("token onto the battlefield for each counter on it.");
+                    ability2.setStackDescription(sb.toString());
                     AllZone.getStack().addSimultaneousStackEntry(ability2);
 
                 }
@@ -1683,7 +1696,8 @@ public class CardFactoryCreatures {
             };
             final StringBuilder sb = new StringBuilder();
             sb.append(cardName);
-            sb.append(" enters the battlefield with a +1/+1 counter on it for each time it was kicked.");
+            sb.append(" enters the battlefield with a +1/+1 counter ");
+            sb.append("on it for each time it was kicked.");
             ability.setStackDescription(sb.toString());
 
             final Command comesIntoPlay = new Command() {
@@ -1867,7 +1881,11 @@ public class CardFactoryCreatures {
                     try {
                         loseLife = Integer.parseInt(answer.trim());
                     } catch (final NumberFormatException nfe) {
-                        System.out.println(card.getName() + " - NumberFormatException: " + nfe.getMessage());
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(card.getName());
+                        sb.append(" - NumberFormatException: ");
+                        sb.append(nfe.getMessage());
+                        System.out.println(sb.toString());
                     }
 
                     card.setBaseAttack(loseLife);
@@ -1920,9 +1938,10 @@ public class CardFactoryCreatures {
                                 this.stop();
                             }
 
-                            AllZone.getDisplay().showMessage(
-                                    card.getName() + " - Reveal an artifact.  Revealed " + this.revealed.size()
-                                            + " so far.  Click OK when done.");
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append(card.getName()).append(" - Reveal an artifact.  Revealed ");
+                            sb.append(this.revealed.size()).append(" so far.  Click OK when done.");
+                            AllZone.getDisplay().showMessage(sb.toString());
                             ButtonUtil.enableOnlyOK();
                         }
 
@@ -1966,9 +1985,14 @@ public class CardFactoryCreatures {
                 } // resolve()
             }; // SpellAbility
 
-            ability.setDescription(abCost + "Reveal any number of artifact cards in your hand. "
-                    + "Add 2 to your mana pool for each card revealed this way.");
-            ability.setStackDescription(cardName + " - Reveal any number of artifact cards in your hand.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost).append("Reveal any number of artifact cards in your hand. ");
+            sbDesc.append("Add 2 to your mana pool for each card revealed this way.");
+            ability.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName).append(" - Reveal any number of artifact cards in your hand.");
+            ability.setStackDescription(sbStack.toString());
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
