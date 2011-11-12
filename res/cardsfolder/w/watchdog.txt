@@ -9,4 +9,5 @@ SVar:X:Count$Valid Card.Self+untapped
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watchdog.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/304.jpg
+Oracle:Watchdog blocks each turn if able.\nAs long as Watchdog is untapped, all creatures attacking you get -1/-0.
 End

@@ -7,4 +7,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_tongs.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/297.jpg
+Oracle:At the beginning of your upkeep, if you have three or fewer cards in hand, Scalding Tongs deals 1 damage to target opponent.
 End
