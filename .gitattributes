@@ -3324,6 +3324,7 @@ res/cardsfolder/g/goblin_brigand.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bully.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_burrows.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bushwhacker.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_cannon.txt -text
 res/cardsfolder/g/goblin_cavaliers.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_caves.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_charbelcher.txt svneol=native#text/plain
