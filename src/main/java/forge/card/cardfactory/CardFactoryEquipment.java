@@ -312,6 +312,17 @@ class CardFactoryEquipment {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Piston Sledge")) {
+            
+            final CardList targets = new CardList();
+            
+            final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    if (!targets.isEmpty()) {
+                        card.equipCard(targets.get(0));
+                    }
+                } // resolve()
+            }; // comesIntoPlayAbility
 
             final Input in = new Input() {
                 private static final long serialVersionUID = 1782826197612459365L;
@@ -331,20 +342,13 @@ class CardFactoryEquipment {
                 @Override
                 public void selectCard(final Card c, final PlayerZone z) {
                     if (z.is(Constant.Zone.Battlefield, card.getController()) && c.isCreature()
-                            && CardFactoryUtil.canTarget(card, c)) {
-                        card.equipCard(c);
+                            && c.canTarget(comesIntoPlayAbility)) {
+                        targets.add(c);
                         this.stop();
                     }
                 }
 
             };
-
-            final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    AllZone.getInputControl().setInput(in);
-                } // resolve()
-            }; // comesIntoPlayAbility
 
             final Command intoPlay = new Command() {
                 private static final long serialVersionUID = 2985015252466920757L;
@@ -356,6 +360,8 @@ class CardFactoryEquipment {
                     sb.append("When Piston Sledge enters the battlefield, ");
                     sb.append("attach it to target creature you control.");
                     comesIntoPlayAbility.setStackDescription(sb.toString());
+                    
+                    AllZone.getInputControl().setInput(in);
 
                     AllZone.getStack().addSimultaneousStackEntry(comesIntoPlayAbility);
 

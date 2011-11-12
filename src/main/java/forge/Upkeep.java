@@ -508,8 +508,9 @@ public class Upkeep implements java.io.Serializable {
             final Ability sacrificeCreature = new Ability(abyss, "") {
                 @Override
                 public void resolve() {
+                    final CardList targets = abyssGetTargets.getTargetableCards(this);
                     if (player.isHuman()) {
-                        if (abyssGetTargets.getTargetableCards(this).size() > 0) {
+                        if (targets.size() > 0) {
                             AllZone.getInputControl().setInput(new Input() {
                                 private static final long serialVersionUID = 4820011040853968644L;
 
@@ -524,9 +525,7 @@ public class Upkeep implements java.io.Serializable {
                                 public void selectCard(final Card selected, final PlayerZone zone) {
                                     // probably need to restrict by controller
                                     // also
-                                    if (selected.isCreature() && !selected.isArtifact()
-                                            && CardFactoryUtil.canTarget(abyss, selected)
-                                            && zone.is(Constant.Zone.Battlefield) && zone.getPlayer().isHuman()) {
+                                    if (targets.contains(selected)) {
                                         AllZone.getGameAction().destroyNoRegeneration(selected);
                                         this.stop();
                                     }
@@ -534,7 +533,7 @@ public class Upkeep implements java.io.Serializable {
                             }); // Input
                         }
                     } else { // computer
-                        final CardList targets = abyssGetTargets.getTargetableCards(this);
+                        
                         final CardList indestruct = targets.getKeyword("Indestructible");
                         if (indestruct.size() > 0) {
                             AllZone.getGameAction().destroyNoRegeneration(indestruct.get(0));

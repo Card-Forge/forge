@@ -2409,7 +2409,7 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canTarget(final Card spell, final Card target) {
+    /*public static boolean canTarget(final Card spell, final Card target) {
         if (target == null) {
             return true;
         }
@@ -2486,7 +2486,7 @@ public class CardFactoryUtil {
             }
         }
         return true;
-    }
+    }*/
 
     // does "target" have protection from "card"?
     /**
