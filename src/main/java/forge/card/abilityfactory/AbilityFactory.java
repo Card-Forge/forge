@@ -1605,7 +1605,7 @@ public class AbilityFactory {
                 cards.add(AllZoneUtil.getCardState(imprint));
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
-            final String[] workingCopy = defined.split(" ");
+            final String[] workingCopy = defined.split("_");
             Zone destination, origin;
             String validFilter;
 
