@@ -7633,6 +7633,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             addCounter(Counters.M1M1, restDamage);
             return 0;
         }
+        
+        if (getName().equals("Dralnu, Lich Lord")) {
+            CardList choices = getController().getCardsIn(Zone.Battlefield);
+            for(int i = 0;i< restDamage;i++) {
+                getController().sacrificePermanent("Sacrifice a permanent.", choices);
+            }
+            return 0;
+        }
 
         return restDamage;
     }
