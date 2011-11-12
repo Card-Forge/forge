@@ -86,7 +86,9 @@ public class CardFactoryInstants {
                     int pile1CMC = 0;
                     int pile2CMC = 0;
 
-                    GuiUtils.getChoice("Revealing top " + count + " cards of library: ", cards.toArray());
+                    final StringBuilder sbMsg = new StringBuilder();
+                    sbMsg.append("Revealing top ").append(count).append(" cards of library: ");
+                    GuiUtils.getChoice(sbMsg.toString(), cards.toArray());
                     // Human chooses
                     if (card.getController().isComputer()) {
                         for (int i = 0; i < count; i++) {
@@ -109,19 +111,22 @@ public class CardFactoryInstants {
                             }
                         }
                         final StringBuilder sb = new StringBuilder();
-                        sb.append("You have spilt the cards into the following piles" + "\r\n" + "\r\n");
-                        sb.append("Pile 1: " + "\r\n");
+                        sb.append("You have spilt the cards into the following piles");
+                        sb.append("\r\n").append("\r\n");
+                        sb.append("Pile 1: ").append("\r\n");
                         for (int i = 0; i < pile1.size(); i++) {
-                            sb.append(pile1.get(i).getName() + "\r\n");
+                            sb.append(pile1.get(i).getName()).append("\r\n");
                         }
-                        sb.append("\r\n" + "Pile 2: " + "\r\n");
+                        sb.append("\r\n").append("Pile 2: ").append("\r\n");
                         for (int i = 0; i < pile2.size(); i++) {
-                            sb.append(pile2.get(i).getName() + "\r\n");
+                            sb.append(pile2.get(i).getName()).append("\r\n");
                         }
                         JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
                         if (pile1CMC >= pile2CMC) {
-                            JOptionPane.showMessageDialog(null, "Computer adds the first pile to its hand "
-                                    + "and puts the second pile into the graveyard", "",
+                            final StringBuilder sbMsgP1 = new StringBuilder();
+                            sbMsgP1.append("Computer adds the first pile to its hand ");
+                            sbMsgP1.append("and puts the second pile into the graveyard");
+                            JOptionPane.showMessageDialog(null, sbMsgP1.toString(), "",
                                     JOptionPane.INFORMATION_MESSAGE);
                             for (int i = 0; i < pile1.size(); i++) {
                                 AllZone.getGameAction().moveTo(hand, pile1.get(i));
@@ -130,8 +135,11 @@ public class CardFactoryInstants {
                                 AllZone.getGameAction().moveToGraveyard(pile2.get(i));
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Computer adds the second pile to its hand and "
-                                    + "puts the first pile into the graveyard", "", JOptionPane.INFORMATION_MESSAGE);
+                            final StringBuilder sbMsgP2 = new StringBuilder();
+                            sbMsgP2.append("Computer adds the second pile to its hand and ");
+                            sbMsgP2.append("puts the first pile into the graveyard");
+                            JOptionPane.showMessageDialog(null, sbMsgP2.toString(), "",
+                                    JOptionPane.INFORMATION_MESSAGE);
                             for (int i = 0; i < pile2.size(); i++) {
                                 AllZone.getGameAction().moveTo(hand, pile2.get(i));
                             }
@@ -164,14 +172,15 @@ public class CardFactoryInstants {
                             }
                         }
                         final StringBuilder sb = new StringBuilder();
-                        sb.append("Choose a pile to add to your hand: " + "\r\n" + "\r\n");
-                        sb.append("Pile 1: " + "\r\n");
+                        sb.append("Choose a pile to add to your hand: ");
+                        sb.append("\r\n").append("\r\n");
+                        sb.append("Pile 1: ").append("\r\n");
                         for (int i = 0; i < pile1.size(); i++) {
-                            sb.append(pile1.get(i).getName() + "\r\n");
+                            sb.append(pile1.get(i).getName()).append("\r\n");
                         }
-                        sb.append("\r\n" + "Pile 2: " + "\r\n");
+                        sb.append("\r\n").append("Pile 2: ").append("\r\n");
                         for (int i = 0; i < pile2.size(); i++) {
-                            sb.append(pile2.get(i).getName() + "\r\n");
+                            sb.append(pile2.get(i).getName()).append("\r\n");
                         }
                         final Object[] possibleValues = { "Pile 1", "Pile 2" };
                         final Object q = JOptionPane.showOptionDialog(null, sb, "Fact or Fiction",
@@ -384,7 +393,9 @@ public class CardFactoryInstants {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage("Select target nonland permanent for " + spell.getSourceCard());
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Select target nonland permanent for ").append(spell.getSourceCard());
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -632,9 +643,11 @@ public class CardFactoryInstants {
                 }
             }; // SpellAbility
 
-            spell.setStackDescription("Name a card. Exile the top six cards of your library, "
-                    + "then reveal cards from the top of your library until you reveal the named card. "
-                    + "Put that card into your hand and exile all other cards revealed this way");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Name a card. Exile the top six cards of your library, ");
+            sb.append("then reveal cards from the top of your library until you reveal the named card. ");
+            sb.append("Put that card into your hand and exile all other cards revealed this way");
+            spell.setStackDescription(sb.toString());
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
 
@@ -809,7 +822,9 @@ public class CardFactoryInstants {
                 }
             };
 
-            spell.setStackDescription(card + " - destroy/return enchantments.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - destroy/return enchantments.");
+            spell.setStackDescription(sb.toString());
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
@@ -967,10 +982,16 @@ public class CardFactoryInstants {
                 }
             };
             spell.setSubAbility(sub);
-            spell.setDescription("Target creature you control deals damage "
-                    + "equal to its power to target creature with flying.");
-            spell.setStackDescription(card
-                    + " - Creature you control deals damage equal to its power to creature with flying.");
+
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Target creature you control deals damage ");
+            sbDesc.append("equal to its power to target creature with flying.");
+            spell.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card).append(" - Creature you control deals damage ");
+            sbStack.append("equal to its power to creature with flying.");
+            spell.setStackDescription(sbStack.toString());
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
