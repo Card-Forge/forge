@@ -2476,8 +2476,8 @@ public class CardFactoryCreatures {
             discard.getRestrictions().setPlayerTurn(true);
 
             final StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append(abCost).append(
-                    "Name a card. Target opponent reveals X cards at random from his or her hand. ");
+            sbDesc.append(abCost).append("Name a card. ");
+            sbDesc.append("Target opponent reveals X cards at random from his or her hand. ");
             sbDesc.append("Then that player discards all cards with that name revealed this way. ");
             sbDesc.append("Activate this ability only during your turn.");
             discard.setDescription(sbDesc.toString());
@@ -2542,8 +2542,10 @@ public class CardFactoryCreatures {
                 }
             };
             ability.setSubAbility(sub);
-            ability.setStackDescription(cardName
-                    + " - Attach target Equipment you control to target creature you control.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(cardName);
+            sb.append(" - Attach target Equipment you control to target creature you control.");
+            ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
@@ -2580,24 +2582,28 @@ public class CardFactoryCreatures {
             }; // SpellAbility
 
             card.addSpellAbility(ability);
-            ability.setDescription(abCost + "Put a -1/-1 counter on target creature. "
-                    + "Then if that creature's toughness is 1 or greater, regenerate it.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost).append("Put a -1/-1 counter on target creature. ");
+            sbDesc.append("Then if that creature's toughness is 1 or greater, regenerate it.");
+            ability.setDescription(sbDesc.toString());
 
-            final StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" put a -1/-1 counter on target creature.");
-            ability.setStackDescription(sb.toString());
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName).append(" put a -1/-1 counter on target creature.");
+            ability.setStackDescription(sbStack.toString());
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Awakener Druid")) {
             final long[] timeStamp = { 0 };
 
-            final Trigger myTrig = TriggerHandler.parseTrigger(
-                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                            + "ValidCard$ Card.Self | TriggerDescription$ "
-                            + "When CARDNAME enters the battlefield, target Forest "
-                            + "becomes a 4/5 green Treefolk creature for as long as CARDNAME is on the "
-                            + "battlefield. It's still a land.", card, true);
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
+            sbTrig.append("ValidCard$ Card.Self | TriggerDescription$ ");
+            sbTrig.append("When CARDNAME enters the battlefield, target Forest ");
+            sbTrig.append("becomes a 4/5 green Treefolk creature for as long as CARDNAME ");
+            sbTrig.append("is on the battlefield. It's still a land.");
+
+            final Trigger myTrig = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
             final Target myTarget = new Target(card, "Choose target forest.", "Land.Forest".split(","), "1", "1");
             final SpellAbility awaken = new Ability(card, "0") {
                 @Override
@@ -2700,7 +2706,9 @@ public class CardFactoryCreatures {
                                 if (n.isEmpty()) {
                                     this.stop();
                                 }
-                                AllZone.getDisplay().showMessage(card + " - discard one of the cards drawn.");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append(card).append(" - discard one of the cards drawn.");
+                                AllZone.getDisplay().showMessage(sb.toString());
                                 ButtonUtil.disableAll();
                             }
 
@@ -2717,11 +2725,14 @@ public class CardFactoryCreatures {
             }; // SpellAbility
 
             card.addSpellAbility(ability);
-            ability.setDescription("Tap, Discard a black card: " + "Draw two cards, then discard one of them.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Tap, Discard a black card: ");
+            sbDesc.append("Draw two cards, then discard one of them.");
+            ability.setDescription(sbDesc.toString());
 
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - Draw two cards, then discard one of them.");
-            ability.setStackDescription(sb.toString());
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card).append(" - Draw two cards, then discard one of them.");
+            ability.setStackDescription(sbStack.toString());
         } // *************** END ************ END **************************
 
         // ***************************************************
