@@ -2597,7 +2597,7 @@ public class CardFactoryUtil {
     public static boolean activateFromExternalZones(final Card c, final Player player) {
         final PlayerZone zone = AllZone.getZoneOf(c);
         if (zone.is(Constant.Zone.Graveyard)) {
-            if (c.hasFlashback() || c.hasUnearth()) {
+            if (c.hasUnearth()) {
                 return true;
             }
 
@@ -4488,7 +4488,6 @@ public class CardFactoryUtil {
 
                 final String[] k = parse.split(":");
 
-                card.setFlashback(true);
                 card.addSpellAbility(CardFactoryUtil.abilityFlashback(card, k[1]));
             }
         } // flashback

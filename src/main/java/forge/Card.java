@@ -239,7 +239,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean bounceAtUntap = false;
     private boolean finishedEnteringBF = false;
 
-    private boolean flashback = false;
     private boolean unearth = false;
     private boolean unearthed;
 
@@ -5756,29 +5755,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final String toString() {
         return this.getName() + " (" + this.getUniqueNumber() + ")";
-    }
-
-    /**
-     * <p>
-     * hasFlashback.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasFlashback() {
-        return flashback;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>flashback</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setFlashback(final boolean b) {
-        flashback = b;
     }
 
     /**

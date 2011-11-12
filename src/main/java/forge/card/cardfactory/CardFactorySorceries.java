@@ -932,7 +932,6 @@ public class CardFactorySorceries {
                     + "token on the battlefield, its controller puts a token that's a copy of "
                     + "that creature onto the battlefield.");
 
-            card.setFlashback(true);
             card.addSpellAbility(spell);
             card.addSpellAbility(CardFactoryUtil.abilityFlashback(card, "4 G G G"));
         } // *************** END ************ END **************************
