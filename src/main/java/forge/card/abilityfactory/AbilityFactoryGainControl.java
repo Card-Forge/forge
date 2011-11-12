@@ -285,7 +285,7 @@ public class AbilityFactoryGainControl {
             public boolean addCard(final Card c) {
                 final Map<String, String> vars = c.getSVars();
                 return !vars.containsKey("RemAIDeck")
-                        && c.canTarget(sa);
+                        && c.canBeTargetedBy(sa);
             }
         });
 
@@ -388,7 +388,7 @@ public class AbilityFactoryGainControl {
                 this.hostCard.addGainControlTarget(tgtC);
             }
 
-            if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canTarget(sa)) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
 
                 if (this.params.containsKey("NewController")) {
                     tgtC.addController(newController.get(0));

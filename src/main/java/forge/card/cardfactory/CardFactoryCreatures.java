@@ -200,7 +200,7 @@ public class CardFactoryCreatures {
 
                     if (c.sumAllCounters() == 0) {
                         return;
-                    } else if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                    } else if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         // zerker clean up:
                         for (final Counters c1 : Counters.values()) {
                             if (c.getCounters(c1) > 0) {
@@ -689,7 +689,7 @@ public class CardFactoryCreatures {
                         return;
                     }
 
-                    if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.canTarget(ability)) {
+                    if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.canBeTargetedBy(ability)) {
                         // System.out.println("c is: " +c);
                         target[index[0]] = c;
                         index[0]++;
@@ -1142,7 +1142,7 @@ public class CardFactoryCreatures {
                         return;
                     }
 
-                    if (!(target.canTarget(this) && AllZoneUtil.isCardInPlay(target))) {
+                    if (!(target.canBeTargetedBy(this) && AllZoneUtil.isCardInPlay(target))) {
                         return;
                     }
 
@@ -1332,7 +1332,7 @@ public class CardFactoryCreatures {
                     final int total = card.getCounters(Counters.P1P1);
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                                && this.getTargetCard().canTarget(this)) {
+                                && this.getTargetCard().canBeTargetedBy(this)) {
                             this.getTargetCard().addDamage(total, card);
                         }
                     } else {
@@ -2033,10 +2033,10 @@ public class CardFactoryCreatures {
                 @Override
                 public void resolve() {
                     final Player p = this.getTargetPlayer();
-                    if (p.canTarget(this)) {
+                    if (p.canBeTargetedBy(this)) {
                         p.setSkipNextUntap(true);
                         for (final Card c : targetPerms) {
-                            if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                            if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                                 c.tap();
                             }
                         }
@@ -2080,7 +2080,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
                     if (zone.is(Constant.Zone.Battlefield, ability.getTargetPlayer()) && !targetPerms.contains(c)) {
-                        if (c.canTarget(ability)) {
+                        if (c.canBeTargetedBy(ability)) {
                             targetPerms.add(c);
                         }
                     }
@@ -2101,7 +2101,7 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void selectPlayer(final Player p) {
-                    if (p.canTarget(ability)) {
+                    if (p.canBeTargetedBy(ability)) {
                         ability.setTargetPlayer(p);
                         this.stopSetNext(targetInput);
                     }
@@ -2506,7 +2506,7 @@ public class CardFactoryCreatures {
                     final Card equipment = this.getParent().getTargetCard();
                     final Card creature = this.getTargetCard();
                     if (AllZoneUtil.isCardInPlay(equipment) && AllZoneUtil.isCardInPlay(creature)) {
-                        if (equipment.canTarget(this) && creature.canTarget(this)) {
+                        if (equipment.canBeTargetedBy(this) && creature.canBeTargetedBy(this)) {
                             if (equipment.isEquipping()) {
                                 final Card equipped = equipment.getEquipping().get(0);
                                 if (!equipped.equals(creature)) {
@@ -2564,7 +2564,7 @@ public class CardFactoryCreatures {
                 public void resolve() {
                     final Card target = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(target) && target.canTarget(this)) {
+                    if (AllZoneUtil.isCardInPlay(target) && target.canBeTargetedBy(this)) {
                         target.addCounter(Counters.M1M1, 1);
                         if (target.getNetDefense() >= 1) {
                             target.addShield();

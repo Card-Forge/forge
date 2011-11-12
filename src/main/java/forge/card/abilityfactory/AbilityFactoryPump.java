@@ -245,7 +245,7 @@ public class AbilityFactoryPump {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (!c.canTarget(sa)) {
+                if (!c.canBeTargetedBy(sa)) {
                     return false;
                 }
 
@@ -893,7 +893,7 @@ public class AbilityFactoryPump {
             }
 
             // if pump is a target, make sure we can still target now
-            if ((tgt != null) && !tgtC.canTarget(sa)) {
+            if ((tgt != null) && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
 

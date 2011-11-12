@@ -760,7 +760,7 @@ public class CardList implements Iterable<Card> {
     public final CardList getTargetableCards(final SpellAbility source) {
         return this.filter(new CardListFilter() {
             public boolean addCard(final Card c) {
-                return c.canTarget(source);
+                return c.canBeTargetedBy(source);
             }
         });
     }

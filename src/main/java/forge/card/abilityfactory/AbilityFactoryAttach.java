@@ -775,7 +775,7 @@ public class AbilityFactoryAttach {
         if (tgt.canOnlyTgtOpponent()) {
             // If can Only Target Opponent, do so.
             p = AllZone.getHumanPlayer();
-            if (p.canTarget(sa)) {
+            if (p.canBeTargetedBy(sa)) {
                 return p;
             } else {
                 return null;
@@ -788,7 +788,7 @@ public class AbilityFactoryAttach {
             p = AllZone.getComputerPlayer();
         }
 
-        if (p.canTarget(sa)) {
+        if (p.canBeTargetedBy(sa)) {
             return p;
         }
 
@@ -797,7 +797,7 @@ public class AbilityFactoryAttach {
         }
 
         p = p.getOpponent();
-        if (p.canTarget(sa)) {
+        if (p.canBeTargetedBy(sa)) {
             return p;
         }
 

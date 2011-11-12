@@ -262,7 +262,7 @@ public class AbilityFactoryTurns {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
                     AllZone.getPhase().addExtraTurn(p);
                 }

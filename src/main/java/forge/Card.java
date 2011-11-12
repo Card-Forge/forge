@@ -8160,7 +8160,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean
      */
     @Override
-    public final boolean canTarget(final SpellAbility sa) {
+    public final boolean canBeTargetedBy(final SpellAbility sa) {
         
         if(sa == null) {
             return true;

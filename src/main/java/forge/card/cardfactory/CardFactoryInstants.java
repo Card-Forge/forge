@@ -249,7 +249,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canTarget(this)) {
+                            && this.getTargetCard().canBeTargetedBy(this)) {
                         final Card c = this.getTargetCard();
 
                         c.addTempAttackBoost(-2);
@@ -347,7 +347,7 @@ public class CardFactoryInstants {
                 public void resolve() {
                     // if target card is not in play, just quit
                     if (!AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            || !this.getTargetCard().canTarget(this)) {
+                            || !this.getTargetCard().canBeTargetedBy(this)) {
                         return;
                     }
 
@@ -395,7 +395,7 @@ public class CardFactoryInstants {
 
                 @Override
                 public void selectCard(final Card card, final PlayerZone zone) {
-                    if (!card.isLand() && zone.is(Constant.Zone.Battlefield) && card.canTarget(spell)) {
+                    if (!card.isLand() && zone.is(Constant.Zone.Battlefield) && card.canBeTargetedBy(spell)) {
                         spell.setTargetCard(card);
                         if (this.isFree()) {
                             this.setFree(false);
@@ -862,7 +862,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canTarget(this)) {
+                            && this.getTargetCard().canBeTargetedBy(this)) {
                         final Card c = this.getTargetCard();
                         c.addDamage(this.damage, card);
                         if (c.hasKeyword("Infect")) {
@@ -939,7 +939,7 @@ public class CardFactoryInstants {
                     final Card myc = this.getParent().getTargetCard();
                     final Card tgt = this.getTargetCard();
                     if (AllZoneUtil.isCardInPlay(myc) && AllZoneUtil.isCardInPlay(tgt)) {
-                        if (myc.canTarget(this) && tgt.canTarget(this)) {
+                        if (myc.canBeTargetedBy(this) && tgt.canBeTargetedBy(this)) {
                             tgt.addDamage(myc.getNetAttack(), myc);
                         }
                     }

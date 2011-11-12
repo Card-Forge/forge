@@ -281,7 +281,7 @@ public abstract class GameEntity extends MyObservable {
      *            the sa
      * @return a boolean
      */
-    public boolean canTarget(SpellAbility sa) {
+    public boolean canBeTargetedBy(SpellAbility sa) {
         return false;
     }
 

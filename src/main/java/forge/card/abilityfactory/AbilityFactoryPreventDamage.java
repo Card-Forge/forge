@@ -486,13 +486,13 @@ public class AbilityFactoryPreventDamage {
         for (final Object o : tgts) {
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canTarget(sa))) {
+                if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
                     c.addPreventNextDamage(numDam);
                 }
 
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
-                if (!targeted || p.canTarget(sa)) {
+                if (!targeted || p.canBeTargetedBy(sa)) {
                     p.addPreventNextDamage(numDam);
                 }
             }

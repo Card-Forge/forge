@@ -879,7 +879,7 @@ public class MagicStack extends MyObservable {
                 }
             };
             for (int i = 0; i < creats.size(); i++) {
-                if (!creats.get(i).canTarget(haunterDiesWork)) {
+                if (!creats.get(i).canBeTargetedBy(haunterDiesWork)) {
                     creats.remove(i);
                     i--;
                 }
@@ -901,7 +901,7 @@ public class MagicStack extends MyObservable {
                         if (!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
                             return;
                         }
-                        if (c.canTarget(haunterDiesWork)) {
+                        if (c.canBeTargetedBy(haunterDiesWork)) {
                             haunterDiesWork.setTargetCard(c);
                             MagicStack.this.add(haunterDiesWork);
                             this.stop();
@@ -1046,7 +1046,7 @@ public class MagicStack extends MyObservable {
                 for (final Object o : tgts) {
                     if (o instanceof Player) {
                         final Player p = (Player) o;
-                        fizzle &= !(p.canTarget(fizzSA));
+                        fizzle &= !(p.canBeTargetedBy(fizzSA));
                     }
                     if (o instanceof Card) {
                         final Card card = (Card) o;
@@ -1063,7 +1063,7 @@ public class MagicStack extends MyObservable {
                 // since the info isn't available otherwise
                 fizzle &= !CardFactoryUtil.isTargetStillValid(fizzSA, fizzSA.getTargetCard());
             } else if (fizzSA.getTargetPlayer() != null) {
-                fizzle &= !fizzSA.getTargetPlayer().canTarget(fizzSA);
+                fizzle &= !fizzSA.getTargetPlayer().canBeTargetedBy(fizzSA);
             }
 
             if (fizzSA.getSubAbility() != null) {

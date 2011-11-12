@@ -273,7 +273,7 @@ public final class AbilityFactoryChoose {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
 
                 if (type.equals("Card")) {
                     boolean valid = false;
@@ -618,7 +618,7 @@ public final class AbilityFactoryChoose {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (params.containsKey("OrColors")) {
                         final List<String> o = GuiUtils.getChoices("Choose a color or colors",
@@ -897,7 +897,7 @@ public final class AbilityFactoryChoose {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     int chosen;
                     if (random) {
@@ -1138,7 +1138,7 @@ public final class AbilityFactoryChoose {
                 sa.getSourceCard(), params.get("Choices"), sa) : new ArrayList<Player>(AllZone.getPlayersInGame());
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     final Object o = GuiUtils.getChoice("Choose a player", choices.toArray());
                     if (null == o) {
@@ -1373,7 +1373,7 @@ public final class AbilityFactoryChoose {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 boolean ok = false;
                 String name = null;
                 while (!ok) {

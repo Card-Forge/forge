@@ -342,7 +342,7 @@ public final class AbilityFactoryCopy {
         hostCard.clearClones();
 
         for (final Card c : tgtCards) {
-            if ((tgt == null) || c.canTarget(sa)) {
+            if ((tgt == null) || c.canBeTargetedBy(sa)) {
 
                 boolean wasInAlt = false;
                 if (c.isInAlternateState()) {
@@ -472,7 +472,7 @@ public final class AbilityFactoryCopy {
                     // end copied Kiki code
 
                 }
-            } // end canTarget
+            } // end canBeTargetedBy
         } // end foreach Card
     } // end resolve
 

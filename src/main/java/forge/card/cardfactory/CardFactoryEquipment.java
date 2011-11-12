@@ -77,7 +77,7 @@ class CardFactoryEquipment {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canTarget(this)) {
+                            && this.getTargetCard().canBeTargetedBy(this)) {
 
                         if (card.isEquipping()) {
                             final Card crd = card.getEquipping().get(0);
@@ -185,7 +185,7 @@ class CardFactoryEquipment {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canTarget(this)) {
+                            && this.getTargetCard().canBeTargetedBy(this)) {
 
                         if (card.isEquipping()) {
                             final Card crd = card.getEquipping().get(0);
@@ -342,7 +342,7 @@ class CardFactoryEquipment {
                 @Override
                 public void selectCard(final Card c, final PlayerZone z) {
                     if (z.is(Constant.Zone.Battlefield, card.getController()) && c.isCreature()
-                            && c.canTarget(comesIntoPlayAbility)) {
+                            && c.canBeTargetedBy(comesIntoPlayAbility)) {
                         targets.add(c);
                         this.stop();
                     }

@@ -499,15 +499,15 @@ public final class AbilityFactoryChangeZone {
         final Target tgt = af.getAbTgt();
         if ((tgt != null) && tgt.canTgtPlayer()) {
             if (af.isCurse()) {
-                if (AllZone.getHumanPlayer().canTarget(sa)) {
+                if (AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                     tgt.addTarget(AllZone.getHumanPlayer());
-                } else if (mandatory && AllZone.getComputerPlayer().canTarget(sa)) {
+                } else if (mandatory && AllZone.getComputerPlayer().canBeTargetedBy(sa)) {
                     tgt.addTarget(AllZone.getComputerPlayer());
                 }
             } else {
-                if (AllZone.getComputerPlayer().canTarget(sa)) {
+                if (AllZone.getComputerPlayer().canBeTargetedBy(sa)) {
                     tgt.addTarget(AllZone.getComputerPlayer());
-                } else if (mandatory && AllZone.getHumanPlayer().canTarget(sa)) {
+                } else if (mandatory && AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                     tgt.addTarget(AllZone.getHumanPlayer());
                 }
             }
@@ -724,7 +724,7 @@ public final class AbilityFactoryChangeZone {
         if (tgt != null) {
             final ArrayList<Player> players = tgt.getTargetPlayers();
             player = players.get(0);
-            if (players.contains(player) && !player.canTarget(sa)) {
+            if (players.contains(player) && !player.canBeTargetedBy(sa)) {
                 return;
             }
         }
@@ -893,7 +893,7 @@ public final class AbilityFactoryChangeZone {
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
                 player = tgt.getTargetPlayers().get(0);
-                if (!player.canTarget(sa)) {
+                if (!player.canBeTargetedBy(sa)) {
                     return;
                 }
             }
@@ -1745,7 +1745,7 @@ public final class AbilityFactoryChangeZone {
 
                 if ((tgt != null) && origin.equals(Zone.Battlefield)) {
                     // check targeting
-                    if (!tgtC.canTarget(sa)) {
+                    if (!tgtC.canBeTargetedBy(sa)) {
                         continue;
                     }
                 }

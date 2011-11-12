@@ -133,7 +133,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                    if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         card.enchantEntity(c);
                     }
 
@@ -289,7 +289,7 @@ class CardFactoryAuras {
                     CardListUtil.sortAttack(list);
 
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).canTarget(this)) {
+                        if (list.get(i).canBeTargetedBy(this)) {
                             this.setTargetCard(list.get(i));
                             return super.canPlayAI();
                         }
@@ -303,7 +303,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                    if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         card.enchantEntity(c);
                         Log.debug("Enchanted: " + this.getTargetCard());
                     }
@@ -392,7 +392,7 @@ class CardFactoryAuras {
                         CardListUtil.sortFlying(list);
 
                         for (int i = 0; i < list.size(); i++) {
-                            if (list.get(i).canTarget(this)
+                            if (list.get(i).canBeTargetedBy(this)
                                     && (list.get(i).getNetAttack() >= list.get(i).getNetDefense())
                                     && (list.get(i).getNetAttack() >= 3)) {
                                 this.setTargetCard(list.get(i));
@@ -410,7 +410,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                    if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         aura.enchantEntity(c);
                     }
                 } // resolve()

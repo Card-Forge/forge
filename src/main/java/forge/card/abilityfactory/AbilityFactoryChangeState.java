@@ -189,7 +189,7 @@ public class AbilityFactoryChangeState {
 
         for (final Card tgt : tgtCards) {
             if (abilityFactory.getAbTgt() != null) {
-                if (!tgt.canTarget(sa)) {
+                if (!tgt.canBeTargetedBy(sa)) {
                     continue;
                 }
             }

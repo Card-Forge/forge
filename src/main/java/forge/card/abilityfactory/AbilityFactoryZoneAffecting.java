@@ -354,8 +354,8 @@ public class AbilityFactoryZoneAffecting {
             // ability is targeted
             tgt.resetTargets();
 
-            final boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
-            final boolean canTgtComp = AllZone.getComputerPlayer().canTarget(sa);
+            final boolean canTgtHuman = AllZone.getHumanPlayer().canBeTargetedBy(sa);
+            final boolean canTgtComp = AllZone.getComputerPlayer().canBeTargetedBy(sa);
             boolean tgtHuman = false;
 
             if (!canTgtHuman && !canTgtComp) {
@@ -490,7 +490,7 @@ public class AbilityFactoryZoneAffecting {
         final boolean slowDraw = params.containsKey("NextUpkeep");
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (optional) {
                     if (p.isComputer()) {
                         if (numCards >= p.getCardsIn(Zone.Library).size()) {
@@ -807,8 +807,8 @@ public class AbilityFactoryZoneAffecting {
 
         if (tgt != null) {
             tgt.resetTargets();
-            if (!AllZone.getHumanPlayer().canTarget(sa)) {
-                if (mandatory && AllZone.getComputerPlayer().canTarget(sa)) {
+            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                if (mandatory && AllZone.getComputerPlayer().canBeTargetedBy(sa)) {
                     tgt.addTarget(AllZone.getComputerPlayer());
                     return true;
                 }
@@ -927,7 +927,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final CardList milled = p.mill(numCards, destination);
                 if (params.containsKey("RememberMilled")) {
                     for (final Card c : milled) {
@@ -1096,7 +1096,7 @@ public class AbilityFactoryZoneAffecting {
         final CardList discarded = new CardList();
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (mode.equals("Defined")) {
                     final ArrayList<Card> toDiscard = AbilityFactory.getDefinedCards(host, params.get("DefinedCards"), sa);
                     for (Card c : toDiscard) {
@@ -1464,7 +1464,7 @@ public class AbilityFactoryZoneAffecting {
             return false;
         }
         if (tgt != null) {
-            if (AllZone.getHumanPlayer().canTarget(sa)) {
+            if (AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                 tgt.addTarget(AllZone.getHumanPlayer());
                 return true;
             }
@@ -1493,7 +1493,7 @@ public class AbilityFactoryZoneAffecting {
         final Target tgt = af.getAbTgt();
         if (tgt != null) {
             if (!AbilityFactoryZoneAffecting.discardTargetAI(af, sa)) {
-                if (mandatory && AllZone.getComputerPlayer().canTarget(sa)) {
+                if (mandatory && AllZone.getComputerPlayer().canBeTargetedBy(sa)) {
                     tgt.addTarget(AllZone.getComputerPlayer());
                 } else {
                     return false;
@@ -1805,7 +1805,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (optional && sa.getActivatingPlayer().isHuman()
                         && !GameActionUtil.showYesNoDialog(host, "Have " + p + " shuffle?")) {
                 } else {

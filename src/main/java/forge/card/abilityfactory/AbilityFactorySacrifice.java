@@ -345,7 +345,7 @@ public class AbilityFactorySacrifice {
 
         if (tgt != null) {
             tgt.resetTargets();
-            if (AllZone.getHumanPlayer().canTarget(sa)) {
+            if (AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                 tgt.addTarget(AllZone.getHumanPlayer());
             } else {
                 return false;

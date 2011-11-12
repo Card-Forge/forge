@@ -125,7 +125,7 @@ public class CardFactorySorceries {
                         return;
                     }
 
-                    if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.canTarget(spell)) {
+                    if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.canBeTargetedBy(spell)) {
                         target[index[0]] = c;
                         index[0]++;
                         this.showMessage();
@@ -718,7 +718,7 @@ public class CardFactorySorceries {
                 @Override
                 public void resolve() {
                     if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canTarget(this)) {
+                            && this.getTargetCard().canBeTargetedBy(this)) {
 
                         AllZone.getGameAction().destroy(this.getTargetCard());
 
@@ -827,7 +827,7 @@ public class CardFactorySorceries {
 
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                                && this.getTargetCard().canTarget(this)) {
+                                && this.getTargetCard().canBeTargetedBy(this)) {
                             javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " + damage
                                     + " to " + this.getTargetCard());
 
@@ -1318,7 +1318,7 @@ public class CardFactorySorceries {
                 public void resolve() {
                     final Card c = this.getTargetCard();
 
-                    if ((c != null) && AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                    if ((c != null) && AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         // Donate should target both the player and the creature
                         c.addController(card.getController().getOpponent());
                         /*
@@ -1596,7 +1596,7 @@ public class CardFactorySorceries {
 
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                                && this.getTargetCard().canTarget(this)) {
+                                && this.getTargetCard().canBeTargetedBy(this)) {
                             javax.swing.JOptionPane.showMessageDialog(null, cardName + " causes " + damage + " to "
                                     + this.getTargetCard());
 
@@ -1687,13 +1687,13 @@ public class CardFactorySorceries {
                         sb.append(cardName + " - Computer causes " + damage + " to:\n\n");
                         for (int i = 0; i < targets.size(); i++) {
                             final Card target = targets.get(i);
-                            if (AllZoneUtil.isCardInPlay(target) && target.canTarget(this)) {
+                            if (AllZoneUtil.isCardInPlay(target) && target.canBeTargetedBy(this)) {
                                 sb.append(target + "\n");
                             }
                         }
                         for (int i = 0; i < targetPlayers.size(); i++) {
                             final Player p = targetPlayers.get(i);
-                            if (p.canTarget(this)) {
+                            if (p.canBeTargetedBy(this)) {
                                 sb.append(p + "\n");
                             }
                         }
@@ -1701,7 +1701,7 @@ public class CardFactorySorceries {
                     }
                     for (int i = 0; i < targets.size(); i++) {
                         final Card target = targets.get(i);
-                        if (AllZoneUtil.isCardInPlay(target) && target.canTarget(this)) {
+                        if (AllZoneUtil.isCardInPlay(target) && target.canBeTargetedBy(this)) {
                             // DEBUG
                             Log.debug("Fireball", "Fireball does " + damage + " to: " + target);
                             target.addDamage(damage, card);
@@ -1709,7 +1709,7 @@ public class CardFactorySorceries {
                     }
                     for (int i = 0; i < targetPlayers.size(); i++) {
                         final Player p = targetPlayers.get(i);
-                        if (p.canTarget(this)) {
+                        if (p.canBeTargetedBy(this)) {
                             // DEBUG
                             Log.debug("Fireball", "Fireball does " + damage + " to: " + p);
                             p.addDamage(damage, card);
@@ -1780,7 +1780,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (!c.canTarget(spell)) {
+                    if (!c.canBeTargetedBy(spell)) {
                         AllZone.getDisplay().showMessage("Cannot target this card.");
                         return; // cannot target
                     }
@@ -1797,7 +1797,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectPlayer(final Player player) {
-                    if (!player.canTarget(spell)) {
+                    if (!player.canBeTargetedBy(spell)) {
                         AllZone.getDisplay().showMessage("Cannot target this player.");
                         return; // cannot target
                     }
@@ -2303,7 +2303,7 @@ public class CardFactorySorceries {
                         if (card.getChoice(i).equals(cardChoice[0])) {
                             if (ab0player[0] != null) {
                                 this.setTargetPlayer(ab0player[0]);
-                                if (this.getTargetPlayer().canTarget(this)) {
+                                if (this.getTargetPlayer().canBeTargetedBy(this)) {
                                     this.getTargetPlayer().addDamage(x[0], card);
                                 }
                             }
@@ -2316,7 +2316,7 @@ public class CardFactorySorceries {
                         final Card c = ab1card[0];
                         if (c != null) {
                             if (card.getController().getZone(Zone.Graveyard).contains(c)
-                                    && c.canTarget(this)) {
+                                    && c.canBeTargetedBy(this)) {
                                 AllZone.getGameAction().moveToPlay(c);
                             }
                         }
@@ -2327,7 +2327,7 @@ public class CardFactorySorceries {
                         if (card.getChoice(i).equals(cardChoice[2])) {
                             final Card c = ab2card[0];
                             if (c != null) {
-                                if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                                if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                                     final int boost = x[0] * -1;
                                     c.addTempAttackBoost(boost);
                                     c.addTempDefenseBoost(boost);
@@ -2354,7 +2354,7 @@ public class CardFactorySorceries {
                         final ArrayList<Card> cs = new ArrayList<Card>();
                         cs.addAll(ab3cards);
                         for (final Card c : cs) {
-                            if (AllZoneUtil.isCardInPlay(c) && c.canTarget(this)) {
+                            if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                                 c.addExtrinsicKeyword("Fear");
                                 final Command untilEOT = new Command() {
                                     private static final long serialVersionUID = 986259855862338866L;
@@ -2432,7 +2432,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.canTarget(spell)
+                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.canBeTargetedBy(spell)
                             && !ab3cards.contains(c)) {
                         ab3cards.add(c);
                         this.count++;
@@ -2467,7 +2467,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
-                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.canTarget(spell)) {
+                    if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.canBeTargetedBy(spell)) {
                         if (card.isCopiedSpell()) {
                             card.getChoiceTargets().remove(0);
                         }
@@ -2505,7 +2505,7 @@ public class CardFactorySorceries {
                             grave.toArray());
                     if (check != null) {
                         final Card c = (Card) check;
-                        if (c.canTarget(spell)) {
+                        if (c.canBeTargetedBy(spell)) {
                             ab1card[0] = c;
                         }
                     } else {
@@ -2543,7 +2543,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectPlayer(final Player player) {
-                    if (player.canTarget(spell)) {
+                    if (player.canBeTargetedBy(spell)) {
                         if (card.isCopiedSpell()) {
                             card.getChoiceTargets().remove(0);
                         }
@@ -2652,7 +2652,7 @@ public class CardFactorySorceries {
                         CardList grave = card.getController().getCardsIn(Zone.Graveyard);
                         grave = grave.filter(CardListFilter.CREATURES);
 
-                        if (AllZone.getHumanPlayer().canTarget(spell) || AllZone.getComputerPlayer().canTarget(spell)) {
+                        if (AllZone.getHumanPlayer().canBeTargetedBy(spell) || AllZone.getComputerPlayer().canBeTargetedBy(spell)) {
                             display.add("Target player loses X life");
                         }
                         if (grave.size() > 0) {
@@ -2717,7 +2717,7 @@ public class CardFactorySorceries {
                 @Override
                 public void resolve() {
                     final Card tgt = this.getTargetCard();
-                    if (AllZoneUtil.isCardInPlay(tgt) && tgt.canTarget(this)) {
+                    if (AllZoneUtil.isCardInPlay(tgt) && tgt.canBeTargetedBy(this)) {
                         tgt.addDamage(5, card);
                         final CardList equipment = new CardList(tgt.getEquippedBy());
                         for (final Card eq : equipment) {

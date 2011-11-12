@@ -235,7 +235,7 @@ public final class AbilityFactoryReveal {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            if (!AllZone.getHumanPlayer().canTarget(sa)) {
+            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                 return false;
             } else {
                 sa.getTarget().addTarget(AllZone.getHumanPlayer());
@@ -351,7 +351,7 @@ public final class AbilityFactoryReveal {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
 
                 final CardList top = new CardList();
                 CardList valid = new CardList();
@@ -562,7 +562,7 @@ public final class AbilityFactoryReveal {
 
                         }
                     }
-                } // end if canTarget
+                } // end if canBeTargetedBy
             } // end foreach player
         }
     } // end resolve
@@ -811,7 +811,7 @@ public final class AbilityFactoryReveal {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            if (!AllZone.getHumanPlayer().canTarget(sa)) {
+            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                 return false;
             } else {
                 sa.getTarget().addTarget(AllZone.getHumanPlayer());
@@ -908,7 +908,7 @@ public final class AbilityFactoryReveal {
         final int revealedLibPos = AbilityFactory.calculateAmount(host, params.get("RevealedLibraryPosition"), sa);
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final CardList found = new CardList();
                 final CardList revealed = new CardList();
 
@@ -1197,7 +1197,7 @@ public final class AbilityFactoryReveal {
             // ability is targeted
             tgt.resetTargets();
 
-            final boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
+            final boolean canTgtHuman = AllZone.getHumanPlayer().canBeTargetedBy(sa);
 
             if (!canTgtHuman || (humanHandSize == 0)) {
                 return false;
@@ -1266,7 +1266,7 @@ public final class AbilityFactoryReveal {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final CardList hand = p.getCardsIn(Zone.Hand);
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (hand.size() > 0) {
@@ -1430,7 +1430,7 @@ public final class AbilityFactoryReveal {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.scry(num);
             }
         }
@@ -1763,7 +1763,7 @@ public final class AbilityFactoryReveal {
             // ability is targeted
             tgt.resetTargets();
 
-            final boolean canTgtHuman = AllZone.getHumanPlayer().canTarget(sa);
+            final boolean canTgtHuman = AllZone.getHumanPlayer().canBeTargetedBy(sa);
 
             if (!canTgtHuman) {
                 return false;
@@ -1810,7 +1810,7 @@ public final class AbilityFactoryReveal {
             shuffle = params.containsKey("MayShuffle");
 
             for (final Player p : tgtPlayers) {
-                if ((tgt == null) || p.canTarget(sa)) {
+                if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     AbilityFactoryReveal.rearrangeTopOfLibrary(af.getHostCard(), p, numCards, shuffle);
                 }
             }
@@ -2152,7 +2152,7 @@ public final class AbilityFactoryReveal {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final CardList handChoices = p.getCardsIn(Zone.Hand);
                 if (handChoices.size() > 0) {
                     final CardList revealed = new CardList();

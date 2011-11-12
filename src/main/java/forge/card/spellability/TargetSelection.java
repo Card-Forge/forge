@@ -336,7 +336,7 @@ public class TargetSelection {
             public void selectCard(final Card card, final PlayerZone zone) {
                 // leave this in temporarily, there some seriously wrong things
                 // going on here
-                if (targeted && !card.canTarget(sa)) {
+                if (targeted && !card.canBeTargetedBy(sa)) {
                     AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } else if (choices.contains(card)) {
                     tgt.addTarget(card);
@@ -352,7 +352,7 @@ public class TargetSelection {
 
                 if (((tgt.canTgtPlayer() && !tgt.canOnlyTgtOpponent())
                         || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer()
-                        .getOpponent()))) && player.canTarget(sa)) {
+                        .getOpponent()))) && player.canBeTargetedBy(sa)) {
                     tgt.addTarget(player);
                     this.done();
                 }

@@ -773,7 +773,7 @@ public class AbilityFactoryDealDamage {
         for (final Object o : tgts) {
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canTarget(saMe))) {
+                if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(saMe))) {
                     if (noPrevention) {
                         c.addDamageWithoutPrevention(dmg, source);
                     } else {
@@ -783,7 +783,7 @@ public class AbilityFactoryDealDamage {
 
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
-                if (!targeted || p.canTarget(saMe)) {
+                if (!targeted || p.canBeTargetedBy(saMe)) {
                     if (noPrevention) {
                         p.addDamageWithoutPrevention(dmg, source);
                     } else {
@@ -1434,13 +1434,13 @@ public class AbilityFactoryDealDamage {
                 //System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
-                    if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canTarget(sa))) {
+                    if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
                         c.addDamage(dmg, source);
                     }
 
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
-                    if (!targeted || p.canTarget(sa)) {
+                    if (!targeted || p.canBeTargetedBy(sa)) {
                         p.addDamage(dmg, source);
                     }
                 }

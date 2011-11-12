@@ -628,7 +628,7 @@ public final class AbilityFactoryClash {
         }
 
         for (Player p : tgtPlayers) {
-            if (tgt == null || p.canTarget(sa)) {
+            if (tgt == null || p.canBeTargetedBy(sa)) {
                 ArrayList<Card> pile1 = new ArrayList<Card>();
                 ArrayList<Card> pile2 = new ArrayList<Card>();
                 CardList pool = p.getCardsIn(Zone.Battlefield);

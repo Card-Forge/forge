@@ -388,7 +388,7 @@ public class AbilityFactoryAlterLife {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.gainLife(lifeAmount, sa.getSourceCard());
             }
         }
@@ -756,7 +756,7 @@ public class AbilityFactoryAlterLife {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.loseLife(lifeAmount, sa.getSourceCard());
             }
         }
@@ -961,7 +961,7 @@ public class AbilityFactoryAlterLife {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.addPoisonCounters(amount);
             }
         }
@@ -1451,7 +1451,7 @@ public class AbilityFactoryAlterLife {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.setLife(lifeAmount, sa.getSourceCard());
             }
         }
@@ -1651,7 +1651,7 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (AllZone.getHumanPlayer().canTarget(sa)) {
+            if (AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                 // never target self, that would be silly for exchange
                 tgt.addTarget(AllZone.getHumanPlayer());
                 if (!AllZone.getHumanPlayer().canLoseLife()) {

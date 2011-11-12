@@ -460,7 +460,7 @@ public class AbilityFactoryRegenerate {
                 }
             };
 
-            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canTarget(sa))) {
+            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 tgtC.addShield();
                 AllZone.getEndOfTurn().addUntil(untilEOT);
             }

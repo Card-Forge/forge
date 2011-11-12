@@ -499,7 +499,7 @@ public final class AbilityFactoryCombat {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canTarget(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 Object entity;
                 if (params.get("Defender").equals("Self")) {
                     entity = af.getHostCard();
@@ -712,7 +712,7 @@ public final class AbilityFactoryCombat {
         }
 
         for (final Card c : tgtCards) {
-            if ((tgt == null) || c.canTarget(sa)) {
+            if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 AllZone.getCombat().removeFromCombat(c);
             }
         }
@@ -997,7 +997,7 @@ public final class AbilityFactoryCombat {
         }
 
         for (final Card c : tgtCards) {
-            if ((tgt == null) || c.canTarget(sa)) {
+            if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 final Card attacker = cards.get(0);
                 c.addMustBlockCard(attacker);
                 System.out.println(c + " is adding " + attacker + " to mustBlockCards: " + c.getMustBlockCards());

@@ -82,7 +82,7 @@ public class CardFactoryUtil {
             all = all.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    return c.canTarget(spell);
+                    return c.canBeTargetedBy(spell);
                 }
             });
         }
@@ -166,7 +166,7 @@ public class CardFactoryUtil {
             all = all.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    return c.canTarget(spell);
+                    return c.canBeTargetedBy(spell);
                 }
             });
         }
@@ -274,7 +274,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public boolean addCard(final Card c) {
-                    return c.canTarget(spell);
+                    return c.canBeTargetedBy(spell);
                 }
             });
         }
@@ -1390,7 +1390,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 final Card targetCard = this.getTargetCard();
-                if (AllZoneUtil.isCardInPlay(targetCard) && targetCard.canTarget(this)) {
+                if (AllZoneUtil.isCardInPlay(targetCard) && targetCard.canBeTargetedBy(this)) {
 
                     if (sourceCard.isEquipping()) {
                         final Card crd = sourceCard.getEquipping().get(0);
@@ -1827,7 +1827,7 @@ public class CardFactoryUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (targeted && !card.canTarget(spell)) {
+                if (targeted && !card.canBeTargetedBy(spell)) {
                     AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if (choices.contains(card)) {
                     spell.setTargetCard(card);
@@ -2067,7 +2067,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(final Card card2, final PlayerZone zone) {
                 if (card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Battlefield)
-                        && card.canTarget(ability)) {
+                        && card.canBeTargetedBy(ability)) {
                     ability.setTargetCard(card2);
                     ability.setStackDescription("Put " + card.getCounters(Counters.P1P1) + " +1/+1 counter/s from "
                             + card + " on " + card2);
@@ -2117,7 +2117,7 @@ public class CardFactoryUtil {
             @Override
             public boolean addCard(final Card c) {
                 if (targeted) {
-                    return c.isCreature() && c.hasKeyword(keyword) && c.canTarget(spell);
+                    return c.isCreature() && c.hasKeyword(keyword) && c.canBeTargetedBy(spell);
                 } else {
                     return c.isCreature() && c.hasKeyword(keyword);
                 }
@@ -2145,7 +2145,7 @@ public class CardFactoryUtil {
             @Override
             public boolean addCard(final Card c) {
                 if (targeted) {
-                    return c.isCreature() && (c.getNetDefense() <= toughness) && c.canTarget(spell);
+                    return c.isCreature() && (c.getNetDefense() <= toughness) && c.canBeTargetedBy(spell);
                 } else {
                     return c.isCreature() && (c.getNetDefense() <= toughness);
                 }
@@ -2367,12 +2367,12 @@ public class CardFactoryUtil {
         }
 
         // Make sure it's still targetable as well
-        return target.canTarget(ability);
+        return target.canBeTargetedBy(ability);
     }
 
     /**
      * <p>
-     * canTarget.
+     * canBeTargetedBy.
      * </p>
      * 
      * @param ability
@@ -2381,8 +2381,8 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    /*public static boolean canTarget(final SpellAbility ability, final Card target) {
-        return target.canTarget(ability);
+    /*public static boolean canBeTargetedBy(final SpellAbility ability, final Card target) {
+        return target.canBeTargetedBy(ability);
     }*/
 
     /**
@@ -2400,7 +2400,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * canTarget.
+     * canBeTargetedBy.
      * </p>
      * 
      * @param spell
@@ -2409,7 +2409,7 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    /*public static boolean canTarget(final Card spell, final Card target) {
+    /*public static boolean canBeTargetedBy(final Card spell, final Card target) {
         if (target == null) {
             return true;
         }
@@ -4812,7 +4812,7 @@ public class CardFactoryUtil {
                     if (!zone.is(Constant.Zone.Battlefield) || !c.isCreature()) {
                         return;
                     }
-                    if (c.canTarget(haunterDiesWork)) {
+                    if (c.canBeTargetedBy(haunterDiesWork)) {
                         haunterDiesWork.setTargetCard(c);
                         AllZone.getStack().add(haunterDiesWork);
                         this.stop();
@@ -4827,7 +4827,7 @@ public class CardFactoryUtil {
                 public void resolve() {
                     final CardList creats = AllZoneUtil.getCreaturesInPlay();
                     for (int i = 0; i < creats.size(); i++) {
-                        if (!creats.get(i).canTarget(this)) {
+                        if (!creats.get(i).canBeTargetedBy(this)) {
                             creats.remove(i);
                             i--;
                         }

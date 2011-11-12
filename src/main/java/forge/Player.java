@@ -927,7 +927,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean
      */
     @Override
-    public final boolean canTarget(final SpellAbility sa) {
+    public final boolean canBeTargetedBy(final SpellAbility sa) {
         if (hasKeyword("Shroud") || (!this.isPlayer(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))
                 || hasProtectionFrom(sa.getSourceCard())) {
             return false;
