@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/vhati_il-dal.jpg
 SetInfo:TMP|Rare|http://dummy.com/dummy.jpg
 SetInfo:TSB|Rare|http://dummy.com/dummy.jpg
 Oracle:{T}: Target creature's power or toughness becomes 1 until end of turn.
+Oracle:{T}: Target creature's power or toughness becomes 1 until end of turn.
 End
