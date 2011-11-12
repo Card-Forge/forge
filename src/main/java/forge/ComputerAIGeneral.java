@@ -1,7 +1,5 @@
 package forge;
 
-import static forge.error.ErrorViewer.showError;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -339,16 +337,7 @@ public class ComputerAIGeneral implements Computer {
         ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for (Card c : l) {
             for (SpellAbility sa : c.getSpellAbility()) {
-                // if SA is from AF_Counter don't add to getPlayable
-                // This try/catch should fix the "computer is thinking" bug
-                try {
-                    sa.setActivatingPlayer(AllZone.getComputerPlayer());
-                    if (ComputerUtil.canBePlayedAndPayedByAI(sa)) {
-                        spellAbility.add(sa);
-                    }
-                } catch (Exception ex) {
-                    showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
-                }
+                spellAbility.add(sa);
             }
         }
         return spellAbility.toArray(new SpellAbility[spellAbility.size()]);
@@ -506,9 +495,8 @@ public class ComputerAIGeneral implements Computer {
      */
     public final void stackResponse() {
         // if top of stack is empty
-        SpellAbility[] sas = null;
+        SpellAbility[] sas = getOtherPhases();
         if (AllZone.getStack().size() == 0) {
-            sas = getOtherPhases();
 
             boolean pass = (sas.length == 0)
                     || AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
@@ -548,7 +536,6 @@ public class ComputerAIGeneral implements Computer {
             return;
         }
 
-        sas = getOtherPhases();
         if (sas.length > 0) {
             // Spell not Countered
             if (!ComputerUtil.playCards(sas)) {
