@@ -312,9 +312,9 @@ class CardFactoryEquipment {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Piston Sledge")) {
-            
+
             final CardList targets = new CardList();
-            
+
             final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -360,7 +360,7 @@ class CardFactoryEquipment {
                     sb.append("When Piston Sledge enters the battlefield, ");
                     sb.append("attach it to target creature you control.");
                     comesIntoPlayAbility.setStackDescription(sb.toString());
-                    
+
                     AllZone.getInputControl().setInput(in);
 
                     AllZone.getStack().addSimultaneousStackEntry(comesIntoPlayAbility);
