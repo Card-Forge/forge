@@ -112,7 +112,7 @@ public class ApplicationView implements FView {
             OldGuiNewGame.getUpldDrftCheckBox().setSelected(preferences.isUploadDraftAI());
             OldGuiNewGame.getFoilRandomCheckBox().setSelected(preferences.isRandCFoil());
 
-            AllZone.setSkin(AllZone.getSkin());
+            AllZone.setSkin(new FSkin(preferences.getSkin()));
 
         } catch (final Exception exn) {
             Log.error("Error loading preferences: " + exn);
