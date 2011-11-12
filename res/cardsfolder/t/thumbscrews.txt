@@ -6,4 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | Pre
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thumbscrews.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/302.jpg
 End

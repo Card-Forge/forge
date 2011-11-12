@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.YouDontCtrl+attacking | AddPower$ -1 | C
 SVar:X:Count$Valid Card.Self+untapped
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watchdog.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/304.jpg
 End
