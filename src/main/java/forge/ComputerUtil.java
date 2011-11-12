@@ -35,18 +35,6 @@ public class ComputerUtil {
      * playCards.
      * </p>
      * 
-     * @return a boolean.
-     */
-    public static boolean playCards() {
-        return playCards(getSpellAbility());
-    }
-
-    // if return true, go to next phase
-    /**
-     * <p>
-     * playCards.
-     * </p>
-     * 
      * @param all
      *            an array of {@link forge.card.spellability.SpellAbility}
      *            objects.
@@ -338,46 +326,6 @@ public class ComputerUtil {
             AllZone.getGameAction().checkStateEffects();
         }
     } // play()
-
-    // gets Spells of cards in hand and Abilities of cards in play
-    // checks to see
-    // 1. if canPlay() returns true, 2. can pay for mana
-    /**
-     * <p>
-     * getSpellAbility.
-     * </p>
-     * 
-     * @return an array of {@link forge.card.spellability.SpellAbility} objects.
-     */
-    public static SpellAbility[] getSpellAbility() {
-        CardList all = new CardList();
-        all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield));
-        all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
-        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
-
-        CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield));
-        humanPlayable = humanPlayable.filter(new CardListFilter() {
-            public boolean addCard(final Card c) {
-                return (c.canAnyPlayerActivate());
-            }
-        });
-
-        all.addAll(humanPlayable);
-
-        ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
-        for (int outer = 0; outer < all.size(); outer++) {
-            SpellAbility[] sa = all.get(outer).getSpellAbility();
-            for (int i = 0; i < sa.length; i++) {
-                spellAbility.add(sa[i]); // this seems like it needs to be
-                                        // copied, not sure though
-            }
-        }
-
-        SpellAbility[] sa = new SpellAbility[spellAbility.size()];
-        spellAbility.toArray(sa);
-        return sa;
-    }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     /**
