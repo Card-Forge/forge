@@ -16,11 +16,11 @@ Oracle:Homura, Human Ascendant can't block.\nWhen Homura dies, return it to the 
 ALTERNATE
 
 Name:Homura's Essence
-ManaCost:3 R
+ManaCost:4 R R
 Colors:red
 Types:Legendary Enchantment
 Text:no text
-S:Mode$ Continuous | AffectedCards$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddAbility$ ABPump | Description$ Creatures you control get +2/+2 and have flying and "R: This creature gets +1/+0 until end of turn."
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddAbility$ ABPump | Description$ Creatures you control get +2/+2 and have flying and "R: This creature gets +1/+0 until end of turn."
 SVar:ABPump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homuras_essence.jpg
