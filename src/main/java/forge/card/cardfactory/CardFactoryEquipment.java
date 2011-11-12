@@ -298,12 +298,13 @@ class CardFactoryEquipment {
                 }
             };
 
-            final Trigger myTrigger = TriggerHandler.parseTrigger(
-                    "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | "
-                            + "ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigOverride | "
-                            + "TriggerDescription$ Whenever a creature is put into a "
-                            + "graveyard from the battlefield, put a +1/+1 counter on equipped creature. "
-                            + "If equipped creature is a Vampire, put two +1/+1 counters on it instead.", card, true);
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ");
+            sbTrig.append("ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigOverride | ");
+            sbTrig.append("TriggerDescription$ Whenever a creature is put into a graveyard ");
+            sbTrig.append("from the battlefield, put a +1/+1 counter on equipped creature. ");
+            sbTrig.append("If equipped creature is a Vampire, put two +1/+1 counters on it instead.");
+            final Trigger myTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
             myTrigger.setOverridingAbility(triggeredAbility);
 
             card.addTrigger(myTrigger);
@@ -318,7 +319,9 @@ class CardFactoryEquipment {
                 @Override
                 public void showMessage() {
                     CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    AllZone.getDisplay().showMessage(card + " - Select target creature you control to attach");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(card).append(" - Select target creature you control to attach");
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.disableAll();
                     if (list.size() == 0) {
                         this.stop();
@@ -350,7 +353,8 @@ class CardFactoryEquipment {
                 public void execute() {
 
                     final StringBuilder sb = new StringBuilder();
-                    sb.append("When Piston Sledge enters the battlefield, attach it to target creature you control.");
+                    sb.append("When Piston Sledge enters the battlefield, ");
+                    sb.append("attach it to target creature you control.");
                     comesIntoPlayAbility.setStackDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(comesIntoPlayAbility);
@@ -438,12 +442,12 @@ class CardFactoryEquipment {
 
             };
 
-            final Trigger etbTrigger = TriggerHandler.parseTrigger(
-                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                            + "ValidCard$ Card.Self | Execute$ TrigOverriding | TriggerDescription$ "
-                            + "Living Weapon (When this Equipment enters the battlefield, "
-                            + "put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)",
-                    card, true);
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
+            sbTrig.append("ValidCard$ Card.Self | Execute$ TrigOverriding | TriggerDescription$ ");
+            sbTrig.append("Living Weapon (When this Equipment enters the battlefield, ");
+            sbTrig.append("put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)");
+            final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
             etbTrigger.setOverridingAbility(etbAbility);
 
             card.addTrigger(etbTrigger);
