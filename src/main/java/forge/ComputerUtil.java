@@ -51,9 +51,33 @@ public class ComputerUtil {
             if (af != null && af.getAPI().equals("Counter")) {
                 continue;
             }
-
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            if (canBePlayedAndPayedByAI(sa)) {
+            Card source = sa.getSourceCard();
+            
+            boolean flashb = false;
+            
+            //Flashback
+            if (source.isInZone(Constant.Zone.Graveyard) && sa.isSpell() && (source.isInstant() || source.isSorcery())) {
+                for(String keyword : source.getKeyword()) {
+                    if (keyword.startsWith("Flashback")) {
+                        SpellAbility flashback = sa.copy();
+                        flashback.setActivatingPlayer(AllZone.getComputerPlayer());
+                        flashback.setFlashBackAbility(true);
+                        if (!keyword.equals("Flashback")) {//there is a flashback cost (and not the cards cost)
+                            final Cost fbCost = new Cost(keyword.substring(10), source.getName(), false);
+                            flashback.setPayCosts(fbCost);
+                        }
+                        if (canBePlayedAndPayedByAI(flashback)) {
+                            handlePlayingSpellAbility(flashback);
+
+                            return false;
+                        }
+                        flashb = true;
+                    }
+                }
+            }
+
+            if ((!flashb || source.hasStartOfKeyword("May be played")) && canBePlayedAndPayedByAI(sa)) {
                 handlePlayingSpellAbility(sa);
 
                 return false;

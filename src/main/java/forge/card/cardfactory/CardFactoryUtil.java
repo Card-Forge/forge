@@ -2615,7 +2615,7 @@ public class CardFactoryUtil {
             }
 
             if (sa.isSpell() && !zone.is(Zone.Battlefield) && (c.hasStartOfKeyword("May be played")
-                    || (c.hasKeyword("Flashback") && zone.is(Zone.Graveyard)))
+                    || (c.hasStartOfKeyword("Flashback") && zone.is(Zone.Graveyard)))
                     && restrictZone.equals(Zone.Hand)) {
                 return true;
             }

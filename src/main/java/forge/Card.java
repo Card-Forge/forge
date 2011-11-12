@@ -2402,7 +2402,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || (kw.get(i).startsWith("Dredge") && !sb.toString().contains("Dredge"))
                     || (kw.get(i).startsWith("Madness") && !sb.toString().contains("Madness"))
                     || (kw.get(i).startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
-                    || (kw.get(i).equals("Flashback") && !sb.toString().contains("Flashback"))
+                    || kw.get(i).startsWith("Flashback")
                     || (kw.get(i).startsWith("Recover") && !sb.toString().contains("Recover"))) {
                 sb.append(kw.get(i).replace(":", " ")).append("\r\n");
             }

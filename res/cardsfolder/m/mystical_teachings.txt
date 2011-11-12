@@ -2,7 +2,7 @@ Name:Mystical Teachings
 ManaCost:3 U
 Types:Instant
 Text:no text
-K:Flashback:5 B
+K:Flashback 5 B
 A:SP$ ChangeZone | Cost$ 3 U | ChangeType$ Instant,Card.withFlash | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | Shuffle$ True | SpellDescription$ Search your library for an instant card or a card with flash, reveal it, and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
