@@ -114,6 +114,33 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- More Redirecting of targeting checks to the new function.
+- StringBuilder.
+- Fixed Allied Strategies
+- Fixed Eternal Dominion cost.
+- Fixed Callow Jushi text.
+- Minor null pointer fix in InputControl.
+- Skin update: 
+* Can now fully customize progress bar coloring
+* Minor fixes to SplashFrame
+* Minor fixes to FRoundedPanel
+* Improved FButton images in rebel skin
+* Streamlined skin instantiation: previously instantiated 4 times, now only 1
+- StringBuilder.
+- StringBuilder.
+- StringBuilder.
+- StringBuilder.
+- Fixed Homura's Essence and Malignant Growth.
+- Redirected the two remaining targeting checks to the new function and removed the function canTarget from CardFactoryUtil.
+- Fixed Goblin Cohort.
+- Fixed ThisTurnEntered used in Defined.
+- Renamed the functions canTarget to canBeTargetedBy.
+- Removed the unnecessary variable "flashback" from the card class.
+- Added the keyword "Flashback" which represents Flashback with cost equal to the cards mana cost.
+- CheckStyle.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -205,6 +232,12 @@ Garza's Assassin
 Springjack Pasture
 Fertile Ground
 Carrionette
+Scalding Tongs
+Thumbscrews
+Vhati il-Dal
+Watchdog from Tempest
+Night Dealings
+Snapcaster Mage
 
 
 end
