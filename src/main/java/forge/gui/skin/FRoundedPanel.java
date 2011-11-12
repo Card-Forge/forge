@@ -8,6 +8,8 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
+import forge.AllZone;
+
 /**
  * <p>
  * FRoundedPanel.
@@ -20,12 +22,9 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class FRoundedPanel extends JPanel {
-
-    /** The corners. */
     private boolean[] corners = { true, true, true, true }; // NW, SW, SE, NE
-
     private Color shadowColor = new Color(150, 150, 150, 150);
-    private Color borderColor = Color.black;
+    private Color borderColor = AllZone.getSkin().getClrBorders();
     private int shadowOffset = 5;
     private int cornerRadius = 10;
     private boolean showShadow = false;
@@ -58,14 +57,11 @@ public class FRoundedPanel extends JPanel {
     }
 
     /**
-     * <p>
-     * FRoundedPanel.
-     * </p>
+     * paintComponent is the guts of FRoundedPanel.  It paints the borders
+     * and rounded corners determined by the conditional arrays <b>borders[ ]</b>
+     * and <b>corners[ ]</b>.
      * 
-     * Constructor.
-     * 
-     * @param g
-     *            the g
+     * @param g &emsp; Graphics obj
      */
     @Override
     protected void paintComponent(final Graphics g) {

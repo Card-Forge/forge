@@ -79,6 +79,18 @@ public class FSkin {
     /** Color of text in skin. */
     private Color clrText = Color.red;
 
+    /** Color of background in progress bar if unfilled. */
+    private Color clrProgress1 = Color.red;
+
+    /** Color of text in progress bar if filled. */
+    private Color clrProgress2 = Color.red;
+
+    /** Color of background in progress bar if unfilled. */
+    private Color clrProgress3 = Color.red;
+
+    /** Color of text in progress bar if filled. */
+    private Color clrProgress4 = Color.red;
+
     /** Name of skin. */
     private String name = "default";
 
@@ -124,11 +136,7 @@ public class FSkin {
      *             the exception
      */
     public FSkin(final String skinName) throws Exception {
-        this.loadFontAndImages("default");
-
-        if (!skinName.equals("default")) {
-            this.loadFontAndImages(skinName);
-        }
+        this.loadFontAndImages(skinName);
     }
 
     /**
@@ -168,6 +176,10 @@ public class FSkin {
             this.setClrActive(this.getColorFromPixel(image.getRGB(60, 90)));
             this.setClrInactive(this.getColorFromPixel(image.getRGB(60, 110)));
             this.setClrText(this.getColorFromPixel(image.getRGB(60, 130)));
+            this.setClrProgress1(this.getColorFromPixel(image.getRGB(55, 145)));
+            this.setClrProgress2(this.getColorFromPixel(image.getRGB(65, 145)));
+            this.setClrProgress3(this.getColorFromPixel(image.getRGB(55, 155)));
+            this.setClrProgress4(this.getColorFromPixel(image.getRGB(65, 155)));
         } catch (final IOException e) {
             System.err.println(this.notfound + this.paletteFile);
         }
@@ -331,10 +343,10 @@ public class FSkin {
 
     /**
      * Color of zebra striping in grid displays.
-     * @param clrZebra0 &emsp; an image icon
+     * @param clr0 &emsp; Color obj
      */
-    public void setClrZebra(Color clrZebra0) {
-        this.clrZebra = clrZebra0;
+    public void setClrZebra(Color clr0) {
+        this.clrZebra = clr0;
     }
 
     /**
@@ -347,10 +359,10 @@ public class FSkin {
 
     /**
      * Color of elements in mouseover state.
-     * @param clrHover0 &emsp; an image icon
+     * @param clr0 &emsp; Color obj
      */
-    public void setClrHover(Color clrHover0) {
-        this.clrHover = clrHover0;
+    public void setClrHover(Color clr0) {
+        this.clrHover = clr0;
     }
 
     /**
@@ -363,10 +375,10 @@ public class FSkin {
 
     /**
      * Color of active (currently selected) elements.
-     * @param clrActive0 &emsp; an image icon
+     * @param clr0 &emsp; Color obj
      */
-    public void setClrActive(Color clrActive0) {
-        this.clrActive = clrActive0;
+    public void setClrActive(Color clr0) {
+        this.clrActive = clr0;
     }
 
     /**
@@ -379,10 +391,10 @@ public class FSkin {
 
     /**
      * Color of inactive (not currently selected) elements.
-     * @param clrInactive0 &emsp; an image icon
+     * @param clr0 &emsp; Color obj
      */
-    public void setClrInactive(Color clrInactive0) {
-        this.clrInactive = clrInactive0;
+    public void setClrInactive(Color clr0) {
+        this.clrInactive = clr0;
     }
 
     /**
@@ -395,10 +407,74 @@ public class FSkin {
 
     /**
      * Color of text in skin.
-     * @param clrText0 &emsp; an image icon
+     * @param clr0 &emsp; Color obj
      */
-    public void setClrText(Color clrText0) {
-        this.clrText = clrText0;
+    public void setClrText(Color clr0) {
+        this.clrText = clr0;
+    }
+
+    /**
+     * Background of progress bar, "unfilled" state.
+     * @return {@link javax.awt.Color} clrProgress1
+     */
+    public Color getClrProgress1() {
+        return clrProgress1;
+    }
+
+    /**
+     * Background of progress bar, "unfilled" state.
+     * @param clr0 &emsp; Color obj
+     */
+    public void setClrProgress1(Color clr0) {
+        this.clrProgress1 = clr0;
+    }
+
+    /**
+     * Text of progress bar, "unfilled" state.
+     * @return {@link javax.awt.Color} clrProgress1
+     */
+    public Color getClrProgress2() {
+        return clrProgress2;
+    }
+
+    /**
+     * Text of progress bar, "unfilled" state.
+     * @param clr0 &emsp; Color obj
+     */
+    public void setClrProgress2(Color clr0) {
+        this.clrProgress2 = clr0;
+    }
+
+    /**
+     * Background of progress bar, "filled" state.
+     * @return {@link javax.awt.Color} clrProgress1
+     */
+    public Color getClrProgress3() {
+        return clrProgress3;
+    }
+
+    /**
+     * Background of progress bar, "filled" state.
+     * @param clr0 &emsp; Color obj
+     */
+    public void setClrProgress3(Color clr0) {
+        this.clrProgress3 = clr0;
+    }
+
+    /**
+     * Text of progress bar, "filled" state.
+     * @return {@link javax.awt.Color} clrProgress1
+     */
+    public Color getClrProgress4() {
+        return clrProgress4;
+    }
+
+    /**
+     * Text of progress bar, "filled" state.
+     * @param clr0 &emsp; Color obj
+     */
+    public void setClrProgress4(Color clr0) {
+        this.clrProgress4 = clr0;
     }
 
     /**

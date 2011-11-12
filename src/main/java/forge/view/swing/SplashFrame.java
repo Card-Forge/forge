@@ -16,6 +16,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import forge.gui.skin.FSkin;
@@ -128,9 +129,12 @@ public class SplashFrame extends JFrame {
 
         contentPane.getActionMap().put("escAction", new CloseAction());
 
-        // Set UI to color splash bar fill with theme colors
-        UIManager.put("ProgressBar.foreground", skin.getClrTheme()); // When filled
-        UIManager.put("ProgressBar.selectionForeground", skin.getClrText()); // When filled
+        // Set UI to color splash bar fill with skin colors
+        UIManager.put("ProgressBar.background", skin.getClrProgress1());           // Unfilled state
+        UIManager.put("ProgressBar.selectionBackground", skin.getClrProgress2());  // Unfilled state
+        UIManager.put("ProgressBar.foreground", skin.getClrProgress3());           // Filled state
+        UIManager.put("ProgressBar.selectionForeground", skin.getClrProgress4());  // Filled state
+        UIManager.put("ProgressBar.border", new LineBorder(skin.getClrTheme(), 0));
 
         // Instantiate model and view and tie together.
         this.monitorModel = new SplashProgressModel();
@@ -149,8 +153,7 @@ public class SplashFrame extends JFrame {
         final JLabel bgLabel = new JLabel(bgIcon);
 
         // Do not pass Integer.MIN_VALUE directly here; it must be packaged in
-        // an Integer
-        // instance. Otherwise, GUI components will not draw unless moused over.
+        // an Integer instance. Otherwise, GUI components will not draw unless moused over.
         this.getLayeredPane().add(bgLabel, Integer.valueOf(Integer.MIN_VALUE));
 
         bgLabel.setBounds(0, 0, splashWidthPx, splashHeightPx);
