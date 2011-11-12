@@ -101,8 +101,12 @@ public class CardFactoryPlaneswalkers {
                     && (turn[0] != AllZone.getPhase().getTurn()) && Phase.canCastSorcery(card.getController());
                 } // canPlay()
             };
-            ability1.setDescription("0: Reveal the top card of your library and put it "
-                    + "into your hand. Sarkhan the Mad deals damage to himself equal to that card's converted mana cost.");
+            final StringBuilder ab1 = new StringBuilder();
+            ab1.append("0: Reveal the top card of your library and put it ");
+            ab1.append("into your hand. Sarkhan the Mad deals damage ");
+            ab1.append("to himself equal to that card's converted mana cost.");
+            ability1.setDescription(ab1.toString());
+
             final StringBuilder stack1 = new StringBuilder();
             stack1.append(card.getName()).append(" - Reveal top card and do damage.");
             ability1.setStackDescription(stack1.toString());
@@ -155,10 +159,10 @@ public class CardFactoryPlaneswalkers {
                         }
                     });
                     this.setTargetCard(CardFactoryUtil.getCheapestCreatureAI(cards, this, true));
-                    Log.debug(
-                            "Sarkhan the Mad",
-                            "Sarkhan the Mad caused sacrifice of: "
-                            + CardFactoryUtil.getCheapestCreatureAI(cards, this, true));
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Sarkhan the Mad caused sacrifice of: ");
+                    sb.append(CardFactoryUtil.getCheapestCreatureAI(cards, this, true));
+                    Log.debug("Sarkhan the Mad", sb.toString());
                 }
 
                 @Override
@@ -168,8 +172,11 @@ public class CardFactoryPlaneswalkers {
                     && Phase.canCastSorcery(card.getController());
                 } // canPlay()
             };
-            ability2.setDescription("-2: Target creature's controller sacrifices it, "
-                    + "then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.");
+            final StringBuilder ab2 = new StringBuilder();
+            ab2.append("-2: Target creature's controller sacrifices it, ");
+            ab2.append("then that player puts a 5/5 red Dragon creature ");
+            ab2.append("token with flying onto the battlefield.");
+            ability2.setDescription(ab2.toString());
 
             // ability3
             /*
@@ -211,8 +218,10 @@ public class CardFactoryPlaneswalkers {
                     && Phase.canCastSorcery(card.getController());
                 } // canPlay()
             };
-            ability3.setDescription("-4: Each Dragon creature you control "
-                    + "deals damage equal to its power to target player.");
+            final StringBuilder ab3 = new StringBuilder();
+            ab3.append("-4: Each Dragon creature you control ");
+            ab3.append("deals damage equal to its power to target player.");
+            ability3.setDescription(ab3.toString());
 
             card.addSpellAbility(ability1);
             card.addSpellAbility(ability2);
