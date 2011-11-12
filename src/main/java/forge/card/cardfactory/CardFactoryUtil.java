@@ -899,6 +899,7 @@ public class CardFactoryUtil {
         };
 
         flashback.setPayCosts(fbCost);
+        flashback.getRestrictions().setZone(Constant.Zone.Graveyard);
 
         final String costString = fbCost.toString().replace(":", ".");
 
@@ -2613,7 +2614,8 @@ public class CardFactoryUtil {
                 return true;
             }
 
-            if (sa.isSpell() && !zone.is(Zone.Battlefield) && c.hasStartOfKeyword("May be played")
+            if (sa.isSpell() && !zone.is(Zone.Battlefield) && (c.hasStartOfKeyword("May be played")
+                    || (c.hasKeyword("Flashback") && zone.is(Zone.Graveyard)))
                     && restrictZone.equals(Zone.Hand)) {
                 return true;
             }
@@ -4480,7 +4482,7 @@ public class CardFactoryUtil {
             }
         } // TypeCycling
 
-        if (CardFactoryUtil.hasKeyword(card, "Flashback") != -1) {
+        if (CardFactoryUtil.hasKeyword(card, "Flashback:") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Flashback");
             if (n != -1) {
                 final String parse = card.getKeyword().get(n).toString();

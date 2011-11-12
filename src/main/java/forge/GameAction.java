@@ -1783,8 +1783,17 @@ public class GameAction {
             // for uncastables like lotus bloom, check if manaCost is blank
             sa.setActivatingPlayer(human);
             if (sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
-                choices.add(sa.toString());
-                map.put(sa.toString(), sa);
+                if (c.hasKeyword("Flashback") && c.isInZone(Constant.Zone.Graveyard)
+                        && c.getSpells().get(0).equals(sa) && !c.hasStartOfKeyword("May be played")) {
+                    SpellAbility flashback = sa.copy();
+                    flashback.setSourceCard(c);
+                    flashback.setFlashBackAbility(true);
+                    choices.add(flashback.toString());
+                    map.put(flashback.toString(), flashback);
+                } else {
+                    choices.add(sa.toString());
+                    map.put(sa.toString(), sa);
+                }
             }
         }
 
