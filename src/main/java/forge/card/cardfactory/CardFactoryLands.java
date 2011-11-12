@@ -175,20 +175,16 @@ class CardFactoryLands {
                     AllZone.getGameAction().sacrifice(card);
                 }
             };
-            // ability.setDescription("Dark Depths enters the battlefield with
-            // ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark
-            // Depths.
-            // \r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it.
-            // If you do, put an indestructible legendary 20/20 black Avatar
-            // creature token
-            // with flying named Marit Lage onto the battlefield.");
             ability.setDescription("3: remove an Ice Counter.");
             final StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" - remove an ice counter.");
             ability.setStackDescription(sb.toString());
 
             card.addSpellAbility(ability);
-            sacrifice.setStackDescription("Sacrifice " + card.getName());
+            final StringBuilder sbSac = new StringBuilder();
+            sbSac.append("Sacrifice ").append(card.getName());
+            sacrifice.setStackDescription(sbSac.toString());
+
             card.addSpellAbility(sacrifice);
         } // *************** END ************ END **************************
 
@@ -231,10 +227,16 @@ class CardFactoryLands {
                     }
                 }
             };
-            ability.setDescription(abCost
-                    + "Put a +1/+1 counter on each creature that entered the battlefield this turn.");
-            ability.setStackDescription(cardName
-                    + " - Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost);
+            sbDesc.append("Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            ability.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName);
+            sbStack.append(" - Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            ability.setStackDescription(sbStack.toString());
+
             card.addSpellAbility(ability);
         }
         // *************** END ************ END **************************
@@ -261,7 +263,9 @@ class CardFactoryLands {
 
                             @Override
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage(cardName + " - Select an untapped land to sacrifice");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append(cardName).append(" - Select an untapped land to sacrifice");
+                                AllZone.getDisplay().showMessage(sb.toString());
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -277,8 +281,9 @@ class CardFactoryLands {
                                     AllZone.getGameAction().sacrifice(c);
                                     if (paid[0] < 1) {
                                         paid[0]++;
-                                        AllZone.getDisplay().showMessage(
-                                                cardName + " - Select an untapped land to sacrifice");
+                                        final StringBuilder sb = new StringBuilder();
+                                        sb.append(cardName).append(" - Select an untapped land to sacrifice");
+                                        AllZone.getDisplay().showMessage(sb.toString());
                                     } else {
                                         this.stop();
                                     }
@@ -530,14 +535,18 @@ class CardFactoryLands {
 
                         @Override
                         public void showMessage() {
-                            AllZone.getDisplay().showMessage(card.getName() + " - Reveal a card.");
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append(card.getName()).append(" - Reveal a card.");
+                            AllZone.getDisplay().showMessage(sb.toString());
                             ButtonUtil.enableOnlyCancel();
                         }
 
                         @Override
                         public void selectCard(final Card c, final PlayerZone zone) {
                             if (zone.is(Constant.Zone.Hand) && c.isType(type)) {
-                                JOptionPane.showMessageDialog(null, "Revealed card: " + c.getName(), card.getName(),
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append("Revealed card: ").append(c.getName());
+                                JOptionPane.showMessageDialog(null, sb.toString(), card.getName(),
                                         JOptionPane.PLAIN_MESSAGE);
                                 this.stop();
                             }
@@ -552,7 +561,9 @@ class CardFactoryLands {
                 } // execute()
 
                 private void revealCard(final Card c) {
-                    JOptionPane.showMessageDialog(null, c.getController() + " reveals " + c.getName(), card.getName(),
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(c.getController()).append(" reveals ").append(c.getName());
+                    JOptionPane.showMessageDialog(null, sb.toString(), card.getName(),
                             JOptionPane.PLAIN_MESSAGE);
                 }
             });
@@ -655,7 +666,9 @@ class CardFactoryLands {
 
                     num[0] = Integer.parseInt(answer);
 
-                    final String splitNum = (GuiUtils.getChoiceOptional("Number of " + primary + " to add", choices));
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Number of ").append(primary).append(" to add");
+                    final String splitNum = (GuiUtils.getChoiceOptional(sb.toString(), choices));
                     if (splitNum == null) {
                         this.stop();
                         return;
@@ -708,8 +721,10 @@ class CardFactoryLands {
 
                             @Override
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage(
-                                        cardName + " - Select one non-Lair land to return to your hand");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append(cardName);
+                                sb.append(" - Select one non-Lair land to return to your hand");
+                                AllZone.getDisplay().showMessage(sb.toString());
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -757,7 +772,9 @@ class CardFactoryLands {
                 @Override
                 public void resolve() {
                     final Player player = card.getController();
-                    final CardList land = player.getCardsIn(Zone.Battlefield).getValidCards(type[0] + ".untapped",
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(type[0]).append(".untapped");
+                    final CardList land = player.getCardsIn(Zone.Battlefield).getValidCards(sb.toString(),
                             player, card);
 
                     if (player.isComputer()) {
@@ -773,8 +790,10 @@ class CardFactoryLands {
 
                             @Override
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage(
-                                        card + " - Select one untapped " + type[0] + " to return");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append(card).append(" - Select one untapped ");
+                                sb.append(type[0]).append(" to return");
+                                AllZone.getDisplay().showMessage(sb.toString());
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -796,8 +815,11 @@ class CardFactoryLands {
                     }
                 }
             };
-            sacOrNo.setStackDescription("When CARDNAME enters the battlefield, "
-                    + "sacrifice it unless you return an untapped " + type[0] + " you control to its owner's hand.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("When CARDNAME enters the battlefield, ");
+            sb.append("sacrifice it unless you return an untapped ");
+            sb.append(type[0]).append(" you control to its owner's hand.");
+            sacOrNo.setStackDescription(sb.toString());
 
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = -5777499632266148456L;
