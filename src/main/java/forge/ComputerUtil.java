@@ -224,18 +224,37 @@ public class ComputerUtil {
         int bestRestriction = Integer.MIN_VALUE;
 
         for (SpellAbility sa : possibleCounters) {
+            SpellAbility currentSA = sa;
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
-            if (canBePlayedAndPayedByAI(sa)) { // checks everything nescessary
+            Card source = sa.getSourceCard();
+            
+            //Flashback
+            if (source.isInZone(Constant.Zone.Graveyard) && sa.isSpell() && (source.isInstant() || source.isSorcery())) {
+                for(String keyword : source.getKeyword()) {
+                    if (keyword.startsWith("Flashback")) {
+                        SpellAbility flashback = sa.copy();
+                        flashback.setActivatingPlayer(AllZone.getComputerPlayer());
+                        flashback.setFlashBackAbility(true);
+                        if (!keyword.equals("Flashback")) {//there is a flashback cost (and not the cards cost)
+                            final Cost fbCost = new Cost(keyword.substring(10), source.getName(), false);
+                            flashback.setPayCosts(fbCost);
+                        }
+                        currentSA = flashback;
+                    }
+                }
+            }
+            
+            if (canBePlayedAndPayedByAI(currentSA)) { // checks everything nescessary
                 if (bestSA == null) {
-                    bestSA = sa;
-                    bestRestriction = counterSpellRestriction(sa);
+                    bestSA = currentSA;
+                    bestRestriction = counterSpellRestriction(currentSA);
                 } else {
                     // Compare bestSA with this SA
-                    int restrictionLevel = counterSpellRestriction(sa);
+                    int restrictionLevel = counterSpellRestriction(currentSA);
 
                     if (restrictionLevel > bestRestriction) {
                         bestRestriction = restrictionLevel;
-                        bestSA = sa;
+                        bestSA = currentSA;
                     }
                 }
             }
