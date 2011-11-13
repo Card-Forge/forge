@@ -16,6 +16,10 @@ public class StaticAbilityCantTarget {
         final Card hostCard = stAb.getHostCard();
         final Card source = sa.getSourceCard();
         final Player activator = sa.getActivatingPlayer();
+        
+        if (params.containsKey("Spell") && !sa.isSpell()) {
+            return false;
+        }
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
@@ -31,6 +35,7 @@ public class StaticAbilityCantTarget {
                 && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard)) {
             return false;
         }
+
 
         return true;
     }
