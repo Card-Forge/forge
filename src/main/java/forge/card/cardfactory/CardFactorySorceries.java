@@ -2182,7 +2182,9 @@ public class CardFactorySorceries {
                         topCards.add(lib.get(j));
                     }
                     final int num = CardFactoryUtil.getNumberOfManaSymbolsByColor("U", topCards);
-                    GuiUtils.getChoiceOptional("Revealed cards - " + num + " U mana symbols", topCards.toArray());
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Revealed cards - ").append(num).append(" U mana symbols");
+                    GuiUtils.getChoiceOptional(sb.toString(), topCards.toArray());
 
                     // opponent moves this many cards to graveyard
                     opp.mill(num);
@@ -2468,9 +2470,10 @@ public class CardFactorySorceries {
                     if (this.count == 0) {
                         this.stop = x[0];
                     }
-                    AllZone.getDisplay().showMessage(
-                            cardName + " - Select a target creature to gain Fear (up to " + (this.stop - this.count)
-                                    + " more)");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(cardName).append(" - Select a target creature to gain Fear (up to ");
+                    sb.append(this.stop - this.count).append(" more)");
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableAll();
                 }
 
@@ -2510,7 +2513,9 @@ public class CardFactorySorceries {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage(cardName + " - Select target creature to get -X/-X");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(cardName).append(" - Select target creature to get -X/-X");
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -2533,7 +2538,10 @@ public class CardFactorySorceries {
                         if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                             this.stopSetNext(targetXCreatures);
                         } else {
-                            System.out.println("Input_PayManaCost for spell is getting: " + spell.getManaCost());
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("Input_PayManaCost for spell is getting: ");
+                            sb.append(spell.getManaCost());
+                            System.out.println(sb.toString());
                             this.stopSetNext(new InputPayManaCost(spell));
                         }
                     } // if
@@ -2586,7 +2594,9 @@ public class CardFactorySorceries {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage(cardName + " - Select target player to lose life");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(cardName).append(" - Select target player to lose life");
+                    AllZone.getDisplay().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -2781,8 +2791,10 @@ public class CardFactorySorceries {
                 } // resolve()
             }; // SpellAbility
 
-            spell.setDescription(cardName
-                    + " deals 5 damage to target creature. Destroy all Equipment attached to that creature.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" deals 5 damage to target creature. ");
+            sb.append("Destroy all Equipment attached to that creature.");
+            spell.setDescription(sb.toString());
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
