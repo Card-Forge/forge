@@ -2,8 +2,8 @@ Name:Silent Departure
 ManaCost:U
 Types:Sorcery
 Text:no text
+K:Flashback 4 U
 A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
-A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | Flashback$ True | CostDesc$ Flashback - 4 U | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_departure.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/75.jpg

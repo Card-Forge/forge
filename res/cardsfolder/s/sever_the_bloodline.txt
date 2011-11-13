@@ -2,8 +2,8 @@ Name:Sever the Bloodline
 ManaCost:3 B
 Types:Sorcery
 Text:no text
+K:Flashback 5 B B
 A:SP$ ChangeZone | Cost$ 3 B | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBSearch | SpellDescription$ Exile target creature and all other creatures with the same name as that creature.
-A:SP$ ChangeZone | Cost$ 5 B B | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBSearch | Flashback$ True | CostDesc$ Flashback  5 B B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:DBSearch:DB$ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | Defined$ TargetedController | ChangeType$ Remembered.sameName | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare

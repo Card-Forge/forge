@@ -2,8 +2,8 @@ Name:Spider Spawning
 ManaCost:4 G
 Types:Sorcery
 Text:no text
+K:Flashback 6 B
 A:SP$ Token | Cost$ 4 G | TokenImage$ G 1 2 Spider | TokenAmount$ X | TokenName$ Spider | TokenTypes$ Creature,Spider | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 2 | TokenKeywords$ Reach | SpellDescription$ Put a 1/2 green Spider creature token with reach onto the battlefield for each creature card in your graveyard.
-A:SP$ Token | Cost$ 6 B | TokenImage$ G 1 2 Spider | TokenAmount$ X | TokenName$ Spider | TokenTypes$ Creature,Spider | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 2 | TokenKeywords$ Reach | Flashback$ True | CostDesc$ Flashback - 6 B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spider_spawning.jpg

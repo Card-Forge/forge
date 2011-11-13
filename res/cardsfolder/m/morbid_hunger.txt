@@ -2,8 +2,8 @@ Name:Morbid Hunger
 ManaCost:4 B B
 Types:Sorcery
 Text:no text
+K:Flashback 7 B B
 A:SP$ DealDamage | Cost$ 4 B B | Tgt$ TgtCP | NumDmg$ 3 | SubAbility$ SVar=DB | SpellDescription$ CARDNAME deals 3 damage to target creature or player. You gain 3 life.
-A:SP$ DealDamage | Cost$ 7 B B | Tgt$ TgtCP | NumDmg$ 3 | SubAbility$ SVar=DB | Flashback$ True | CostDesc$ Flashback 7 B B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:DB:DB$GainLife | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_hunger.jpg

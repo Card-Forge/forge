@@ -2,8 +2,8 @@ Name:Rally the Peasants
 ManaCost:2 W
 Types:Instant
 Text:no text
+K:Flashback 2 R
 A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | Flashback$ True | CostDesc$ Flashback - 2 R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_peasants.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/28.jpg

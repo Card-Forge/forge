@@ -2,8 +2,8 @@ Name:Volcanic Spray
 ManaCost:1 R
 Types:Sorcery
 Text:no text
+K:Flashback 1 R
 A:SP$ DamageAll | Cost$ 1 R | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying and each player.
-A:SP$ DamageAll | Cost$ 1 R | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | ValidDescription$ each creature without flying and each player. | Flashback$ True | CostDesc$ Flashback 1 R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_spray.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/226.jpg
