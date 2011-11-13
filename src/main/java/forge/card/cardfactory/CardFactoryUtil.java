@@ -1078,8 +1078,8 @@ public class CardFactoryUtil {
         };
         cycle.setIsCycling(true);
         final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Cycling ").append(cycle.getManaCost()).append(" (").append(abCost.toString())
-                .append(" Draw a card.)");
+        sbDesc.append("Cycling ").append(cycle.getManaCost()).append(" (");
+        sbDesc.append(abCost.toString()).append(" Draw a card.)");
         cycle.setDescription(sbDesc.toString());
 
         final StringBuilder sbStack = new StringBuilder();
@@ -1163,8 +1163,9 @@ public class CardFactoryUtil {
 
         cycle.setIsCycling(true);
         final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append(description).append("cycling (").append(abCost.toString()).append(" Search your library for a ");
-        sbDesc.append(description).append(" card, reveal it, and put it into your hand. Then shuffle your library.)");
+        sbDesc.append(description).append("cycling (").append(abCost.toString());
+        sbDesc.append(" Search your library for a ").append(description);
+        sbDesc.append(" card, reveal it, and put it into your hand. Then shuffle your library.)");
         cycle.setDescription(sbDesc.toString());
 
         final StringBuilder sbStack = new StringBuilder();
@@ -1242,8 +1243,8 @@ public class CardFactoryUtil {
         transmute.setDescription(sbDesc.toString());
 
         final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard).append(
-                " Transmute: Search your library for a card with the same converted mana cost.)");
+        sbStack.append(sourceCard).append(" Transmute: Search your library ");
+        sbStack.append("for a card with the same converted mana cost.)");
         transmute.setStackDescription(sbStack.toString());
 
         transmute.getRestrictions().setZone(Constant.Zone.Hand);
@@ -1297,7 +1298,8 @@ public class CardFactoryUtil {
         suspend.setDescription(sbDesc.toString());
 
         final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName()).append(" suspending for ").append(suspendCounters).append(" turns.)");
+        sbStack.append(sourceCard.getName()).append(" suspending for ");
+        sbStack.append(suspendCounters).append(" turns.)");
         suspend.setStackDescription(sbStack.toString());
 
         suspend.getRestrictions().setZone(Constant.Zone.Hand);
@@ -1695,8 +1697,8 @@ public class CardFactoryUtil {
         // The spell description below fails to appear in the card detail panel
         final StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Soulshift ").append(manacost);
-        sbDesc.append(" - When this permanent is put into a graveyard from play, "
-                + "you may return target Spirit card with converted mana cost ");
+        sbDesc.append(" - When this permanent is put into a graveyard from play, ");
+        sbDesc.append("you may return target Spirit card with converted mana cost ");
         sbDesc.append(manacost).append(" or less from your graveyard to your hand.");
         desc.setDescription(sbDesc.toString());
 
@@ -1954,7 +1956,9 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                AllZone.getDisplay().showMessage("Select target wolf to damage for " + spell.getSourceCard());
+                final StringBuilder sb = new StringBuilder();
+                sb.append("Select target wolf to damage for ").append(spell.getSourceCard());
+                AllZone.getDisplay().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -2010,8 +2014,11 @@ public class CardFactoryUtil {
                 if (card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Battlefield)
                         && card.canBeTargetedBy(ability)) {
                     ability.setTargetCard(card2);
-                    ability.setStackDescription("Put " + card.getCounters(Counters.P1P1) + " +1/+1 counter/s from "
-                            + card + " on " + card2);
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Put ").append(card.getCounters(Counters.P1P1));
+                    sb.append(" +1/+1 counter/s from ").append(card);
+                    sb.append(" on ").append(card2);
+                    ability.setStackDescription(sb.toString());
                     AllZone.getStack().add(ability);
                     this.stop();
                 }
