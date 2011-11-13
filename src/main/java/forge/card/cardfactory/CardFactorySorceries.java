@@ -816,8 +816,10 @@ public class CardFactorySorceries {
 
                     final Card c = this.getFlying();
                     if ((c == null) || (!this.check.equals(c))) {
-                        throw new RuntimeException(card + " error in chooseTargetAI() - Card c is " + c
-                                + ",  Card check is " + this.check);
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(card).append(" error in chooseTargetAI() - Card c is ");
+                        sb.append(c).append(",  Card check is ").append(this.check);
+                        throw new RuntimeException(sb.toString());
                     }
 
                     this.setTargetCard(c);
@@ -842,15 +844,19 @@ public class CardFactorySorceries {
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
                                 && this.getTargetCard().canBeTargetedBy(this)) {
-                            javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " + damage
-                                    + " to " + this.getTargetCard());
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("Erratic Explosion causes ").append(damage);
+                            sb.append(" to ").append(this.getTargetCard());
+                            javax.swing.JOptionPane.showMessageDialog(null, sb.toString());
 
                             final Card c = this.getTargetCard();
                             c.addDamage(damage, card);
                         }
                     } else {
-                        javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " + damage + " to "
-                                + this.getTargetPlayer());
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append("Erratic Explosion causes ").append(damage);
+                        sb.append(" to ").append(this.getTargetPlayer());
+                        javax.swing.JOptionPane.showMessageDialog(null, sb.toString());
                         this.getTargetPlayer().addDamage(damage, card);
                     }
                 }
@@ -940,11 +946,16 @@ public class CardFactorySorceries {
                 } // resolve()
             }; // SpellAbility
 
-            spell.setDescription("For each creature token on the battlefield, "
-                    + "its controller puts a token that's a copy of that creature onto the battlefield.");
-            spell.setStackDescription("Parallel Evolution - For each creature "
-                    + "token on the battlefield, its controller puts a token that's a copy of "
-                    + "that creature onto the battlefield.");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("For each creature token on the battlefield, ");
+            sbDesc.append("its controller puts a token that's a copy of that creature onto the battlefield.");
+            spell.setDescription(sbDesc.toString());
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append("Parallel Evolution - For each creature ");
+            sbStack.append("token on the battlefield, its controller puts a token that's a copy of ");
+            sbStack.append("that creature onto the battlefield.");
+            spell.setStackDescription(sbStack.toString());
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
