@@ -71,7 +71,7 @@ public class ComputerAIGeneral implements Computer {
     private void playCards(final String phase) {
         SpellAbility[] sp = phase.equals(Constant.Phase.MAIN1) ? getMain1() : getMain2();
 
-        boolean nextPhase = ComputerUtil.playCards(sp);
+        boolean nextPhase = ComputerUtil.playAbilities(sp);
 
         if (nextPhase) {
             AllZone.getPhase().passPriority();
@@ -501,7 +501,7 @@ public class ComputerAIGeneral implements Computer {
             boolean pass = (sas.length == 0)
                     || AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
             if (!pass) { // Each AF should check the phase individually
-                pass = ComputerUtil.playCards(sas);
+                pass = ComputerUtil.playAbilities(sas);
             }
 
             if (pass) {
@@ -530,7 +530,7 @@ public class ComputerAIGeneral implements Computer {
 
         possibleCounters.clear();
         possibleCounters = getPossibleETBCounters();
-        if (possibleCounters.size() > 0 && !ComputerUtil.playCards(possibleCounters)) {
+        if (possibleCounters.size() > 0 && !ComputerUtil.playAbilities(possibleCounters)) {
             // Responding Permanent w/ ETB Counter is on the Stack
             // AllZone.getPhase().passPriority();
             return;
@@ -538,7 +538,7 @@ public class ComputerAIGeneral implements Computer {
 
         if (sas.length > 0) {
             // Spell not Countered
-            if (!ComputerUtil.playCards(sas)) {
+            if (!ComputerUtil.playAbilities(sas)) {
                 return;
             }
         }

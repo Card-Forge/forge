@@ -40,7 +40,7 @@ public class ComputerUtil {
      *            objects.
      * @return a boolean.
      */
-    public static boolean playCards(final SpellAbility[] all) {
+    public static boolean playAbilities(final SpellAbility[] all) {
         // not sure "playing biggest spell" matters?
         sortSpellAbilityByCost(all);
         // MyRandom.shuffle(all);
@@ -95,12 +95,12 @@ public class ComputerUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a boolean.
      */
-    public static boolean playCards(final ArrayList<SpellAbility> all) {
+    public static boolean playAbilities(final ArrayList<SpellAbility> all) {
         SpellAbility[] sas = new SpellAbility[all.size()];
         for (int i = 0; i < sas.length; i++) {
             sas[i] = all.get(i);
         }
-        return playCards(sas);
+        return playAbilities(sas);
     } // playCards()
 
     /**
