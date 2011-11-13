@@ -141,6 +141,39 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Added PumpZone parameter to AF_PumpAll.
+- StringBuilder.
+- StringBuilder.
+- Temporary fix for the skin crash in WinLose window.
+- Removed canBePlayedAndPayedByAI check from getPlayable because the same check is always done later again (this should speed up AI thinking time).
+- Removed two unused functions in ComputerUtil.
+- Updated two AI Svars.
+- fix Spirit Mirror to check for Reflection tokens instead of just Reflections
+- Added the new version of the flashback keyword.
+- Converted Mystical Teachings and Ancient Grudge.
+- StringBuilder.
+- Removed the old flashback ability.
+- Converted some more flashback cards to the new keyword.
+- StringBuilder.
+- StringBuilder.
+- StringBuilder.
+- StringBuilder.
+- CheckStyle.
+- Fixed Thalakos Deceiver and Whispering Specter.
+- Fixed Disharmony
+- Fixed Morkrut Banshee
+- Fixed the cost description of non mana flashback costs.
+- Converted some more flashback cards to the new keyword.
+- Converted some more flashback cards to the new keyword.
+- FSkin bug fix made a new instance of FSkin. Removed this and used a pre-existing instance instead.
+- Converted some more flashback cards to the new keyword.
+- Minor color update to "Default" skin palette.
+- Enabled the AI to play counterspells with the new flashback keyword.
+- Converted Fervent Denial.
+- Converted some more flashback cards to the new keyword.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -238,6 +271,11 @@ Vhati il-Dal
 Watchdog from Tempest
 Night Dealings
 Snapcaster Mage
+Recoup
+Past in Flames
+Dralnu, Lich Lord
+Goblin Cannon
+Naya Charm
 
 
 end
