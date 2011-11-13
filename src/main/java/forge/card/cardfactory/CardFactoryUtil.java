@@ -3528,7 +3528,9 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                AllZone.getDisplay().showMessage("Select a " + type + " to untap");
+                final StringBuilder sb = new StringBuilder();
+                sb.append("Select a ").append(type).append(" to untap");
+                AllZone.getDisplay().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -4710,20 +4712,29 @@ public class CardFactoryUtil {
                     + abilityDescription.substring(1);
             String hauntDescription;
             if (card.isCreature()) {
-                hauntDescription = "When " + card.getName()
-                        + " enters the battlefield or the creature it haunts dies, " + hauntAbilityDescription;
+                final StringBuilder sb = new StringBuilder();
+                sb.append("When ").append(card.getName());
+                sb.append(" enters the battlefield or the creature it haunts dies, ");
+                sb.append(hauntAbilityDescription);
+                hauntDescription = sb.toString();
             } else {
-                hauntDescription = "When the creature " + card.getName() + " haunts dies, " + hauntAbilityDescription;
+                final StringBuilder sb = new StringBuilder();
+                sb.append("When the creature ").append(card.getName());
+                sb.append(" haunts dies, ").append(hauntAbilityDescription);
+                hauntDescription = sb.toString();
             }
 
             card.getKeyword().remove(hauntPos);
 
             // First, create trigger that runs when the haunter goes to the
             // graveyard
+            final StringBuilder sbHaunter = new StringBuilder();
+            sbHaunter.append("Mode$ ChangesZone | Origin$ Battlefield | ");
+            sbHaunter.append("Destination$ Graveyard | ValidCard$ Card.Self | ");
+            sbHaunter.append("Static$ True | Secondary$ True | TriggerDescription$ Blank");
+
             final Trigger haunterDies = forge.card.trigger.TriggerHandler.parseTrigger(
-                    "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | "
-                            + "ValidCard$ Card.Self | Static$ True | Secondary$ True | TriggerDescription$ Blank",
-                    card, true);
+                    sbHaunter.toString(), card, true);
 
             final Ability haunterDiesWork = new Ability(card, "0") {
                 @Override
@@ -4793,23 +4804,33 @@ public class CardFactoryUtil {
 
             // Second, create the trigger that runs when the haunted creature
             // dies
+            final StringBuilder sbDies = new StringBuilder();
+            sbDies.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ");
+            sbDies.append("ValidCard$ Creature.HauntedBy | Execute$ ").append(hauntSVarName);
+            sbDies.append(" | TriggerDescription$ ").append(hauntDescription);
+
             final Trigger hauntedDies = forge.card.trigger.TriggerHandler.parseTrigger(
-                    "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | "
-                            + "ValidCard$ Creature.HauntedBy | Execute$ " + hauntSVarName + " | TriggerDescription$ "
-                            + hauntDescription, card, true);
+                    sbDies.toString(), card, true);
 
             // Third, create the trigger that runs when the haunting creature
             // enters the battlefield
+            final StringBuilder sbETB = new StringBuilder();
+            sbETB.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ");
+            sbETB.append(hauntSVarName).append(" | Secondary$ True | TriggerDescription$ ");
+            sbETB.append(hauntDescription);
+
             final Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger(
-                    "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ " + hauntSVarName
-                            + " | Secondary$ True | TriggerDescription$ " + hauntDescription, card, true);
+                    sbETB.toString(), card, true);
 
             // Fourth, create a trigger that removes the haunting status if the
             // haunter leaves the exile
+            final StringBuilder sbUnExiled = new StringBuilder();
+            sbUnExiled.append("Mode$ ChangesZone | Origin$ Exile | Destination$ Any | ");
+            sbUnExiled.append("ValidCard$ Card.Self | Static$ True | Secondary$ True | ");
+            sbUnExiled.append("TriggerDescription$ Blank");
+
             final Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger(
-                    "Mode$ ChangesZone | Origin$ Exile | Destination$ Any | "
-                            + "ValidCard$ Card.Self | Static$ True | Secondary$ True | TriggerDescription$ Blank",
-                    card, true);
+                    sbUnExiled.toString(), card, true);
 
             final Ability haunterUnExiledWork = new Ability(card, "0") {
                 @Override
