@@ -1,0 +1,11 @@
+Name:Barbed Foliage
+ManaCost:2 G G
+Types:Enchantment
+Text:no text
+T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | Attacked$ Player | Execute$ TrigDebuff | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks you, it loses flanking until end of turn.
+SVar:TrigDebuff:AB$ Debuff | Cost$ 0 | Defined$ TriggeredAttacker | Keywords$ Flanking
+T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl+withoutFlying | Attacked$ Player | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature without flying attacks you, CARDNAME deals 1 damage to it.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 1 | Defined$ TriggeredAttacker
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_foliage.jpg
+End

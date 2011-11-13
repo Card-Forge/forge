@@ -607,6 +607,7 @@ res/cardsfolder/b/barbary_apes.txt svneol=native#text/plain
 res/cardsfolder/b/barbed_back_wurm.txt -text
 res/cardsfolder/b/barbed_battlegear.txt svneol=native#text/plain
 res/cardsfolder/b/barbed_field.txt svneol=native#text/plain
+res/cardsfolder/b/barbed_foliage.txt -text
 res/cardsfolder/b/barbed_lightning.txt svneol=native#text/plain
 res/cardsfolder/b/barbed_sextant.txt svneol=native#text/plain
 res/cardsfolder/b/barbed_shocker.txt -text
