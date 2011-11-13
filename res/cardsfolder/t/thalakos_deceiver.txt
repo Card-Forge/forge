@@ -4,8 +4,11 @@ Types:Creature Thalakos Wizard
 Text:no text
 PT:1/1
 K:Shadow
-T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. (This effect lasts indefinitely.)
-SVar:TrigGainControl:AB$GainControl | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigSacrifice | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. (This effect lasts indefinitely.)
+SVar:TrigSacrifice:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_deceiver.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/45.jpg
