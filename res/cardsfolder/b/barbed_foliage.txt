@@ -8,4 +8,6 @@ T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl+withoutFlying | Attacked$ Play
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 1 | Defined$ TriggeredAttacker
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_foliage.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/105.jpg
+Oracle:Whenever a creature attacks you, it loses flanking until end of turn.\nWhenever a creature without flying attacks you, Barbed Foliage deals 1 damage to it.
 End

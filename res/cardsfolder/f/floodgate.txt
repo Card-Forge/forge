@@ -11,4 +11,6 @@ SVar:TrigDamage:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature.nonBlue+withoutFl
 SVar:X:Count$Valid Island.YouCtrl/HalfDown
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floodgate.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/67.jpg
+Oracle:Defender (This creature can't attack.)\nWhen Floodgate has flying, sacrifice it.\nWhen Floodgate leaves the battlefield, it deals damage equal to half the number of Islands you control, rounded down, to each nonblue creature without flying.
 End
