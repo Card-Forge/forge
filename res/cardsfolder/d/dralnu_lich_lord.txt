@@ -4,6 +4,7 @@ Types:Legendary Creature Zombie Wizard
 Text:If damage would be dealt to Dralnu, Lich Lord, sacrifice that many permanents instead.
 PT:3/3
 A:AB$Pump | Cost$ T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | KW$ Flashback | TgtZone$ Graveyard | PumpZone$ Graveyard | SpellDescription$ Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnu_lich_lord.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/237.jpg

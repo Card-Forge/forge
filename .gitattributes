@@ -4857,7 +4857,6 @@ res/cardsfolder/l/lys_alana_bowmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_huntmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_scarblade.txt -text
 res/cardsfolder/l/lyzolda_the_blood_witch.txt svneol=native#text/plain
-res/cardsfolder/l/veilstone_amulet.txt -text
 res/cardsfolder/m/ma_chao_western_warrior.txt svneol=native#text/plain
 res/cardsfolder/m/macabre_waltz.txt svneol=native#text/plain
 res/cardsfolder/m/macetail_hystrodon.txt svneol=native#text/plain
@@ -8983,6 +8982,7 @@ res/cardsfolder/v/vedalken_shackles.txt svneol=native#text/plain
 res/cardsfolder/v/veil_of_birds.txt svneol=native#text/plain
 res/cardsfolder/v/veiled_apparition.txt svneol=native#text/plain
 res/cardsfolder/v/veiled_serpent.txt svneol=native#text/plain
+res/cardsfolder/v/veilstone_amulet.txt -text
 res/cardsfolder/v/vein_drinker.txt svneol=native#text/plain
 res/cardsfolder/v/veinfire_borderpost.txt svneol=native#text/plain
 res/cardsfolder/v/veldrane_of_sengir.txt svneol=native#text/plain

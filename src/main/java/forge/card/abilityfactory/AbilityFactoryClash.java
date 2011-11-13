@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardUtil;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;

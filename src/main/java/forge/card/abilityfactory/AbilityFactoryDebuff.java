@@ -400,7 +400,6 @@ public final class AbilityFactoryDebuff {
      */
     private static CardList getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
             final ArrayList<String> kws) {
-        final Card hostCard = af.getHostCard();
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         list = list.getTargetableCards(sa);
 

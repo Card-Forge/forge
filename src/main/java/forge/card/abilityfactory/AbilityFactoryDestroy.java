@@ -480,7 +480,6 @@ public class AbilityFactoryDestroy {
 
         final boolean noRegen = params.containsKey("NoRegen");
         final boolean sac = params.containsKey("Sacrifice");
-        final Card card = sa.getSourceCard();
 
         ArrayList<Card> tgtCards;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();

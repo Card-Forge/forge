@@ -73,8 +73,6 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        final Player activator = this.getActivatingPlayer();
-
         // CantBeActivated static abilities
         final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (final Card ca : allp) {

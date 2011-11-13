@@ -9,7 +9,6 @@ import forge.Card;
 import forge.Constant;
 import forge.Player;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.cardfactory.CardFactoryUtil;
 
 /**
  * <p>
