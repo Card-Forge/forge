@@ -2,8 +2,8 @@ Name:Forbidden Alchemy
 ManaCost:2 U
 Types:Instant
 Text:no text
+K:Flashback 6 B
 A:SP$ Dig | Cost$ 2 U | DigNum$ 4 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
-A:SP$ Dig | Cost$ 6 B | DigNum$ 4 | DestinationZone2$ Graveyard | Flashback$ True | CostDesc$ Flashback  6 B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_alchemy.jpg

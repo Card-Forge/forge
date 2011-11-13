@@ -2,8 +2,8 @@ Name:Earth Rift
 ManaCost:3 R
 Types:Sorcery
 Text:no text
+K:Flashback 5 R R
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land. | SpellDescription$ Destroy target land.
-A:SP$ Destroy | Cost$ 5 R R | ValidTgts$ Land | TgtPrompt$ Select target land. | Flashback$ True | CostDesc$ Flashback 5 R R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_rift.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/189.jpg

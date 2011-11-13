@@ -2,8 +2,8 @@ Name:Elephant Ambush
 ManaCost:2 G G
 Types:Instant
 Text:no text
+K:Flashback 6 G G
 A:SP$ Token | Cost$ 2 G G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Elephant creature token onto the battlefield.
-A:SP$ Token | Cost$ 6 G G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | Flashback$ True | CostDesc$ Flashback 6 G G | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/240.jpg
