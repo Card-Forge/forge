@@ -2911,6 +2911,7 @@ res/cardsfolder/f/floodchaser.txt svneol=native#text/plain
 res/cardsfolder/f/flooded_grove.txt svneol=native#text/plain
 res/cardsfolder/f/flooded_shoreline.txt svneol=native#text/plain
 res/cardsfolder/f/flooded_strand.txt svneol=native#text/plain
+res/cardsfolder/f/floodgate.txt -text
 res/cardsfolder/f/floodwater_dam.txt svneol=native#text/plain
 res/cardsfolder/f/floral_spuzzem.txt svneol=native#text/plain
 res/cardsfolder/f/flourishing_defenses.txt svneol=native#text/plain
