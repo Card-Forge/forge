@@ -1,0 +1,13 @@
+Name:Ground Seal
+ManaCost:1 G
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+S:Mode$ CantTarget | AffectedZone$ Graveyard | Description$ Cards in graveyards can't be the targets of spells or abilities.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ground_seal.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/242.jpg
+Oracle:When Ground Seal enters the battlefield, draw a card.\nCards in graveyards can't be the targets of spells or abilities.
+End

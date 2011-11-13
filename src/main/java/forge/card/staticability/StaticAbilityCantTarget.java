@@ -3,7 +3,9 @@ package forge.card.staticability;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.Constant;
 import forge.Player;
+import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -16,6 +18,16 @@ public class StaticAbilityCantTarget {
         final Card hostCard = stAb.getHostCard();
         final Card source = sa.getSourceCard();
         final Player activator = sa.getActivatingPlayer();
+        
+        if (params.containsKey("AffectedZone")) {
+            if(!card.isInZone(Zone.smartValueOf(params.get("AffectedZone")))) {
+                return false;
+            }
+        } else { // default zone is battlefield
+            if (!card.isInZone(Constant.Zone.Battlefield)) {
+                return false;
+            }
+        }
         
         if (params.containsKey("Spell") && !sa.isSpell()) {
             return false;

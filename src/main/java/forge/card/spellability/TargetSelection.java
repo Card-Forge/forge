@@ -241,7 +241,7 @@ public class TargetSelection {
         }
 
         final CardList choices = AllZoneUtil.getCardsIn(zone).getValidCards(this.target.getValidTgts(),
-                this.ability.getActivatingPlayer(), this.ability.getSourceCard());
+                this.ability.getActivatingPlayer(), this.ability.getSourceCard()).getTargetableCards(this.ability);
 
         ArrayList<Object> objects = new ArrayList<Object>();
         if (tgt.isUniqueTargets()) {
