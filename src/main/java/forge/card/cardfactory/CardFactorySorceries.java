@@ -1054,8 +1054,10 @@ public class CardFactorySorceries {
                         index[0] = 0;
                         this.stop();
                     } else {
-                        AllZone.getDisplay().showMessage(
-                                "Select target " + humanBasic.get(this.count) + " land to not sacrifice");
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append("Select target ").append(humanBasic.get(this.count));
+                        sb.append(" land to not sacrifice");
+                        AllZone.getDisplay().showMessage(sb.toString());
                         ButtonUtil.enableOnlyCancel();
                     }
                 }
@@ -1593,8 +1595,10 @@ public class CardFactorySorceries {
 
                     final Card c = this.getFlying();
                     if ((c == null) || (!this.check.equals(c))) {
-                        throw new RuntimeException(card + " error in chooseTargetAI() - Card c is " + c
-                                + ",  Card check is " + this.check);
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(card).append(" error in chooseTargetAI() - Card c is ");
+                        sb.append(c).append(",  Card check is ").append(this.check);
+                        throw new RuntimeException(sb.toString());
                     }
 
                     this.setTargetCard(c);
@@ -1620,15 +1624,20 @@ public class CardFactorySorceries {
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
                                 && this.getTargetCard().canBeTargetedBy(this)) {
-                            javax.swing.JOptionPane.showMessageDialog(null, cardName + " causes " + damage + " to "
-                                    + this.getTargetCard());
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append(cardName).append(" causes ").append(damage);
+                            sb.append(" to ").append(this.getTargetCard());
+                            javax.swing.JOptionPane.showMessageDialog(null, sb.toString());
 
                             final Card c = this.getTargetCard();
                             c.addDamage(damage, card);
                         }
                     } else {
-                        javax.swing.JOptionPane.showMessageDialog(null,
-                                cardName + " causes " + damage + " to " + this.getTargetPlayer());
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(cardName).append(" causes ").append(damage);
+                        sb.append(" to ").append(this.getTargetPlayer());
+                        javax.swing.JOptionPane.showMessageDialog(null, sb.toString());
+
                         this.getTargetPlayer().addDamage(damage, card);
                     }
                     // System.out.println("Library after: "+card.getController()).getCardsIn(Zone.Library);
@@ -1640,7 +1649,10 @@ public class CardFactorySorceries {
                      * reveal a nonland card.
                      */
                     final CardList lib = card.getController().getCardsIn(Zone.Library);
-                    Log.debug("Explosive Revelation", "Library before: " + lib);
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Library before: ").append(lib);
+                    Log.debug("Explosive Revelation", sb.toString());
+
                     final CardList revealed = new CardList();
                     if (lib.size() > 0) {
                         int index = 0;
@@ -1700,24 +1712,28 @@ public class CardFactorySorceries {
                     final int damage = ((card.getXManaCostPaid() - this.getNumTargets()) + 1) / this.getNumTargets();
                     // add that much damage to each creature
                     // DEBUG
-                    Log.debug("Fireball", "Fireball - damage to each target: " + damage);
+                    final StringBuilder sbDmg = new StringBuilder();
+                    sbDmg.append("Fireball - damage to each target: ").append(damage);
+                    Log.debug("Fireball", sbDmg.toString());
+
                     Log.debug("Fireball", "Fireball - card targets: ");
                     this.printCardTargets();
                     Log.debug("Fireball", "Fireball - player targets: ");
                     this.printPlayerTargets();
                     if (card.getController().isComputer()) {
                         final StringBuilder sb = new StringBuilder();
-                        sb.append(cardName + " - Computer causes " + damage + " to:\n\n");
+                        sb.append(cardName).append(" - Computer causes ");
+                        sb.append(damage).append(" to:\n\n");
                         for (int i = 0; i < targets.size(); i++) {
                             final Card target = targets.get(i);
                             if (AllZoneUtil.isCardInPlay(target) && target.canBeTargetedBy(this)) {
-                                sb.append(target + "\n");
+                                sb.append(target).append("\n");
                             }
                         }
                         for (int i = 0; i < targetPlayers.size(); i++) {
                             final Player p = targetPlayers.get(i);
                             if (p.canBeTargetedBy(this)) {
-                                sb.append(p + "\n");
+                                sb.append(p).append("\n");
                             }
                         }
                         javax.swing.JOptionPane.showMessageDialog(null, sb.toString());
@@ -1726,7 +1742,11 @@ public class CardFactorySorceries {
                         final Card target = targets.get(i);
                         if (AllZoneUtil.isCardInPlay(target) && target.canBeTargetedBy(this)) {
                             // DEBUG
-                            Log.debug("Fireball", "Fireball does " + damage + " to: " + target);
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("Fireball does ").append(damage);
+                            sb.append(" to: ").append(target);
+                            Log.debug("Fireball", sb.toString());
+
                             target.addDamage(damage, card);
                         }
                     }
@@ -1734,7 +1754,11 @@ public class CardFactorySorceries {
                         final Player p = targetPlayers.get(i);
                         if (p.canBeTargetedBy(this)) {
                             // DEBUG
-                            Log.debug("Fireball", "Fireball does " + damage + " to: " + p);
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("Fireball does ").append(damage);
+                            sb.append(" to: ").append(p);
+                            Log.debug("Fireball", sb.toString());
+
                             p.addDamage(damage, card);
                         }
                     }
@@ -1774,9 +1798,10 @@ public class CardFactorySorceries {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage(
-                            "Select target creatures and/or players.  Currently, " + this.getNumTargets()
-                                    + " targets.  Click OK when done.");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Select target creatures and/or players.  Currently, ");
+                    sb.append(this.getNumTargets()).append(" targets.  Click OK when done.");
+                    AllZone.getDisplay().showMessage(sb.toString());
                 }
 
                 private int getNumTargets() {
@@ -1784,7 +1809,10 @@ public class CardFactorySorceries {
                     numTargets += targets.size();
                     numTargets += targetPlayers.size();
                     // DEBUG
-                    Log.debug("Fireball", "Fireball - numTargets = " + numTargets);
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Fireball - numTargets = ").append(numTargets);
+                    Log.debug("Fireball", sb.toString());
+
                     return numTargets;
                 }
 
@@ -1797,7 +1825,10 @@ public class CardFactorySorceries {
 
                 @Override
                 public void selectButtonOK() {
-                    spell.setStackDescription(cardName + " deals X damage to " + this.getNumTargets() + " target(s).");
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(cardName).append(" deals X damage to ");
+                    sb.append(this.getNumTargets()).append(" target(s).");
+                    spell.setStackDescription(sb.toString());
                     this.stopSetNext(new InputPayManaCost(spell));
                 }
 
