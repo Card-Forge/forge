@@ -1,5 +1,6 @@
 package forge.view.swing;
 
+import forge.AllZone;
 import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
@@ -34,6 +35,7 @@ public final class Main {
             final FSkin skin = new FSkin(model.getPreferences().getSkin());
             final FView view = new ApplicationView(skin);
             Singletons.setView(view);
+            AllZone.setSkin(skin);
 
             // Need this soon after card factory is loaded
             OldGuiNewGame.loadDynamicGamedata();
