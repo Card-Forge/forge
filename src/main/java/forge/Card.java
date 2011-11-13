@@ -2398,56 +2398,50 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Ripple + Dredge + Madness + CARDNAME is {color} + Recover.
         for (int i = 0; i < kw.size(); i++) {
-            if ((kw.get(i).startsWith("Ripple") && !sb.toString().contains("Ripple"))
-                    || (kw.get(i).startsWith("Dredge") && !sb.toString().contains("Dredge"))
-                    || (kw.get(i).startsWith("Madness") && !sb.toString().contains("Madness"))
-                    || (kw.get(i).startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
-                    || kw.get(i).startsWith("Flashback")
-                    || (kw.get(i).startsWith("Recover") && !sb.toString().contains("Recover"))) {
-                sb.append(kw.get(i).replace(":", " ")).append("\r\n");
+            String keyword = kw.get(i);
+            if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
+                    || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
+                    || (keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
+                    || (keyword.startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
+                    || (keyword.startsWith("Recover") && !sb.toString().contains("Recover"))) {
+                sb.append(keyword.replace(":", " ")).append("\r\n");
             }
-        }
-
-        // Changeling + CARDNAME can't be countered. + Cascade + Multikicker
-        for (int i = 0; i < kw.size(); i++) {
-            if ((kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains(
+            if ((keyword.equals("CARDNAME can't be countered.") && !sb.toString().contains(
                     "CARDNAME can't be countered."))
-                    || (kw.get(i).contains("Cascade") && !sb.toString().contains("Cascade"))
-                    || (kw.get(i).contains("Multikicker") && !sb.toString().contains("Multikicker"))) {
+                    || (keyword.startsWith("Cascade") && !sb.toString().contains("Cascade"))
+                    || (keyword.startsWith("Multikicker") && !sb.toString().contains("Multikicker"))) {
                 sb.append(kw.get(i)).append("\r\n");
             }
-        }
-
-        // Storm
-        if (hasKeyword("Storm") && !sb.toString().contains("Storm (When you ")) {
-            if (sb.toString().endsWith("\r\n\r\n")) {
-                sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+            if (keyword.startsWith("Flashback")) {
+                sb.append("Flashback");
+                if (keyword.contains(" ")) {
+                    final Cost fbCost = new Cost(keyword.substring(10), getName(), true);
+                    sb.append(" "+fbCost.toString()).delete(sb.length()-2, sb.length()-1);
+                }
+                sb.append("\r\n");
             }
-            sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
-            if (sb.toString().contains("Target") || sb.toString().contains("target")) {
-                sb.append(" You may choose new targets for the copies.");
-            }
-            sb.append(")\r\n");
-        }
-
-        // Replicate
-        for (String keyw : kw) {
-            if (keyw.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
+            if (keyword.startsWith("Storm")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
-                sb.append(keyw);
+                sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
+                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
+                    sb.append(" You may choose new targets for the copies.");
+                }
+                sb.append(")\r\n");
+            }
+            if (keyword.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                }
+                sb.append(keyword);
                 sb.append(" (When you cast this spell, copy it for each time you paid its replicate cost.");
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
                     sb.append(" You may choose new targets for the copies.");
                 }
                 sb.append(")\r\n");
             }
-        }
-
-        //Haunt
-        for (String keyw : kw) {
-            if (keyw.startsWith("Haunt")) {
+            if (keyword.startsWith("Haunt")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
@@ -2460,11 +2454,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append(")\r\n");
             }
-        }
-
-        //Convoke
-        for (String keyw : kw) {
-            if (keyw.equals("Convoke")) {
+            if (keyword.equals("Convoke")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
