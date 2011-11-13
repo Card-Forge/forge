@@ -2,8 +2,8 @@ Name:Gaze of Justice
 ManaCost:W
 Types:Sorcery
 Text:no text
+K:Flashback 5 W tapXType<3/Creature.White/white creature>
 A:SP$ ChangeZone | Cost$ W tapXType<3/Creature.White> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | CostDesc$ As an additional cost to cast CARDNAME, tap three untapped white creatures you control. | SpellDescription$ Exile target creature.
-A:SP$ ChangeZone | Cost$ 5 W tapXType<3/Creature.White> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | Flashback$ True | CostDesc$ Flashback 5 W | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_justice.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/20.jpg

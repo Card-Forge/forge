@@ -2,8 +2,8 @@ Name:Flash of Defiance
 ManaCost:1 R
 Types:Sorcery
 Text:no text
+K:Flashback 1 R PayLife<3>
 A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.Green,Creature.White | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Green creatures and white creatures can't block this turn.
-A:SP$ PumpAll | Cost$ 1 R PayLife<3> | ValidCards$ Creature.Green,Creature.White | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | Flashback$ True | CostDesc$ Flashback 1 R, Pay 3 life | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
