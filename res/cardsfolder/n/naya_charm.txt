@@ -9,4 +9,5 @@ SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature | ValidTgts$ Player | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_charm.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/180.jpg
 End
