@@ -2648,7 +2648,7 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(players.get(0).getCardsIn(Zone.Hand).size(), m, source);
             }
         }
-        
+
         if (sq[0].contains("DomainPlayer")) {
             CardList someCards = new CardList();
             someCards.addAll(players.get(0).getCardsIn(Zone.Battlefield));
@@ -2707,7 +2707,7 @@ public class CardFactoryUtil {
 
         return CardFactoryUtil.doXMath(n, m, source);
     }
-    
+
 
     /**
      * parseSVar TODO - flesh out javadoc for this method.
@@ -2853,7 +2853,7 @@ public class CardFactoryUtil {
         if (sq[0].equals("DamageDoneThisTurn")) {
             return CardFactoryUtil.doXMath(c.getDamageDoneThisTurn(), m, c);
         }
-        
+
         if (sq[0].contains("RegeneratedThisTurn")) {
             return CardFactoryUtil.doXMath(c.getRegeneratedThisTurn(), m, c);
         }
