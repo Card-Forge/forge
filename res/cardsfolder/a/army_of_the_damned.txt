@@ -2,8 +2,8 @@ Name:Army of the Damned
 ManaCost:5 B B B
 Types:Sorcery
 Text:no text
+K:Flashback 7 B B B
 A:SP$Token | Cost$ 5 B B B | TokenImage$ B 2 2 Zombie |  TokenAmount$ 13 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black |  TokenTapped$ True | SpellDescription$ Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.
-A:SP$Token | Cost$ 7 B B B | TokenImage$ B 2 2 Zombie |  TokenAmount$ 13 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black |  TokenTapped$ True | Flashback$ True | CostDesc$ Flashback 7 B B B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/army_of_the_damned.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/87.jpg

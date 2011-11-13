@@ -2,8 +2,8 @@ Name:Creeping Renaissance
 ManaCost:3 G G
 Types:Sorcery
 Text:no text
+K:Flashback 5 G G
 A:SP$ ChooseType | Cost$ 3 G G | Defined$ You | Type$ Card | InvalidTypes$ Instant,Sorcery,Tribal | SubAbility$ DBReturn | SpellDescription$ Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand.
-A:SP$ ChooseType | Cost$ 5 G G | Defined$ You | Type$ Card | InvalidTypes$ Instant,Sorcery,Tribal | SubAbility$ DBReturn |Flashback$ True | CostDesc$ Flashback 5 G G | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.ChosenType
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
