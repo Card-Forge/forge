@@ -8,4 +8,5 @@ SVar:TrigControl:DB$GainControl | Cost$ 0 | Defined$ Self | NewController$ Targe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starke_of_rath.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/205.jpg
+Oracle:{T}: Destroy target artifact or creature. That permanent's controller gains control of Starke of Rath. (This effect lasts indefinitely.)
 End
