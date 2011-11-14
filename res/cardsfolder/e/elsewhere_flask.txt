@@ -1,0 +1,12 @@
+Name:Elsewhere Flask
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+A:AB$ ChooseType | Cost$ Sac<1/CARDNAME> | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Choose a basic land type. Each land you control becomes that type until end of turn.
+SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elsewhere_flash.jpg
+End
