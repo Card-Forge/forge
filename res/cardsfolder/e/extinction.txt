@@ -1,0 +1,9 @@
+Name:Extinction
+ManaCost:4 B
+Types:Sorcery
+Text:no text
+A:SP$ ChooseType | Cost$ 4 B | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls | SubAbility$ DBDestroyAll | SpellDescription$ Destroy all creatures of the creature type of your choice.
+SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Creature.ChosenType
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/extinction.jpg
+End
