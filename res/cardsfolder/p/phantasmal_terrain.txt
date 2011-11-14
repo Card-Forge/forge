@@ -3,6 +3,7 @@ ManaCost:U U
 Types:Enchantment Aura
 Text:As Phantasmal Terrain enters the battlefield, choose a basic land type.\r\nEnchanted land is the chosen type.
 K:Enchant land
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_terrain.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/69.jpg
