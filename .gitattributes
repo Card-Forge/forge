@@ -10767,7 +10767,7 @@ src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
-src/main/java/forge/view/swing/GuiHomeScreen.java -text svneol=native#text/plain
+src/main/java/forge/view/swing/GuiHomeScreen.java svneol=native#text/plain
 src/main/java/forge/view/swing/Main.java svneol=native#text/plain
 src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
 src/main/java/forge/view/swing/SplashFrame.java -text

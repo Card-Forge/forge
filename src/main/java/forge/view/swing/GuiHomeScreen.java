@@ -179,8 +179,10 @@ public class GuiHomeScreen {
     private final JButton cmdSize = new JButton("Choose Card Size");
     private final JCheckBox chkScale = new JCheckBox("Scale Card Image Larger");
     private final JButton cmdStack = new JButton("Choose Stack Offset");
+    private final JCheckBox chkSingletons = new JCheckBox("No Nonland Duplicates");
     private final JCheckBox chkRemoveArtifacts = new JCheckBox("Remove Artifacts");
     private final JCheckBox chkRemoveSmall = new JCheckBox("Remove Small Creatures");
+
 
     // Utilities Panel
     private final JPanel pnlUtilities = new JPanel();
@@ -728,6 +730,17 @@ public class GuiHomeScreen {
         final JLabel lblGenGraphs = new JLabel("<html><u>Deck Generation Settings</u></html>");
         lblGenGraphs.setHorizontalAlignment(SwingConstants.CENTER);
         this.pnlSettingsA.add(lblGenGraphs);
+        this.chkSingletons.setOpaque(false);
+        this.chkSingletons.setBackground(this.clrScrollBackground);
+        this.chkSingletons.setSelected(Singletons.getModel().getPreferences().isDeckGenSingletons());
+        this.chkSingletons.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences()
+                        .setDeckGenSingletons(GuiHomeScreen.this.chkSingletons.isSelected());
+            }
+        });
+        this.pnlSettingsA.add(this.chkSingletons);
         this.chkRemoveArtifacts.setOpaque(false);
         this.chkRemoveArtifacts.setBackground(this.clrScrollBackground);
         this.chkRemoveArtifacts.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvArtifacts());

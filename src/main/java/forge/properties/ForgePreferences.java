@@ -59,6 +59,9 @@ public class ForgePreferences extends Preferences {
 
     /** The scale larger than original. */
     private boolean scaleLargerThanOriginal;
+    
+    /** The deck gen rmv artifacts. */
+    private boolean deckGenSingletons;
 
     /** The deck gen rmv artifacts. */
     private boolean deckGenRmvArtifacts;
@@ -151,6 +154,7 @@ public class ForgePreferences extends Preferences {
         this.setMaxStackSize(this.getInt("stack.max.size", 3));
         this.setScaleLargerThanOriginal(this.getBoolean("card.scale.larger.than.original", true));
 
+        this.setDeckGenSingletons(this.getBoolean("deck.gen.singletons", false));
         this.setDeckGenRmvArtifacts(this.getBoolean("deck.gen.rmv.artifacts", false));
         this.setDeckGenRmvSmall(this.getBoolean("deck.gen.rmv.small", false));
 
@@ -202,6 +206,7 @@ public class ForgePreferences extends Preferences {
             listeners.savePreferences();
         }
 
+        this.set("deck.gen.singletons", this.isDeckGenSingletons());
         this.set("deck.gen.rmv.artifacts", this.isDeckGenRmvArtifacts());
         this.set("deck.gen.rmv.small", this.isDeckGenRmvSmall());
 
@@ -546,6 +551,14 @@ public class ForgePreferences extends Preferences {
      */
     public void setCardOverlay(boolean cardOverlay) {
         this.cardOverlay = cardOverlay; // TODO: Add 0 to parameter's name.
+    }
+    
+    public boolean isDeckGenSingletons() {
+        return deckGenSingletons;
+    }
+
+    public void setDeckGenSingletons(boolean deckSingletons) {
+        this.deckGenSingletons = deckSingletons;
     }
 
     /**

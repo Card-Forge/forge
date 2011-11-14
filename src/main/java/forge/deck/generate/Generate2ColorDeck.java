@@ -13,6 +13,7 @@ import forge.CardListFilter;
 import forge.Constant;
 import forge.MyRandom;
 import forge.PlayerType;
+import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 
@@ -32,6 +33,7 @@ public class Generate2ColorDeck {
     private ArrayList<String> notColors = null;
     private ArrayList<String> dL = null;
     private Map<String, Integer> cardCounts = null;
+    private int maxDuplicates = 4;
 
     /**
      * <p>
@@ -61,6 +63,10 @@ public class Generate2ColorDeck {
         this.notColors.add("black");
         this.notColors.add("red");
         this.notColors.add("green");
+        
+        if(Singletons.getModel().getPreferences().isDeckGenSingletons()) {
+            maxDuplicates = 1;
+        }
 
         if (clr1.equals("AI")) {
             // choose first color
@@ -165,7 +171,7 @@ public class Generate2ColorDeck {
         };
 
         // select cards to build card pools using a mana curve
-        for (int i = 4; i > 0; i--) {
+        for (int i = 5; i > 0; i--) {
             final CardList cr1CMC = cr1.filter(cmcF);
             final CardList cr2CMC = cr2.filter(cmcF);
             final CardList sp1CMC = sp1.filter(cmcF);
@@ -218,7 +224,7 @@ public class Generate2ColorDeck {
             Card c = cr12.get(this.r.nextInt(cr12.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > 3) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
                 c = cr12.get(this.r.nextInt(cr12.size()));
                 lc++;
             }
@@ -236,7 +242,7 @@ public class Generate2ColorDeck {
             Card c = sp12.get(this.r.nextInt(sp12.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > 3) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
                 c = sp12.get(this.r.nextInt(sp12.size()));
                 lc++;
             }

@@ -137,8 +137,9 @@ public class OldGuiNewGame extends JFrame {
     /** The foil random check box. */
     private static JCheckBox foilRandomCheckBox = new JCheckBox("", true);
 
-    // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
-    // use these two variables
+    private static JCheckBoxMenuItem singletons = new JCheckBoxMenuItem(
+            ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.SINGLETONS));
+    
     /** Constant <code>removeSmallCreatures</code>. */
     private static JCheckBoxMenuItem removeSmallCreatures = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.REMOVE_SMALL));
@@ -259,7 +260,25 @@ public class OldGuiNewGame extends JFrame {
 
         // new stuff
         final JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.TITLE));
+        
+        generatedDeck.add(OldGuiNewGame.singletons);
+        OldGuiNewGame.singletons.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences()
+                        .setDeckGenSingletons(OldGuiNewGame.singletons.isSelected());
+            }
+        });
 
+        generatedDeck.add(OldGuiNewGame.removeSmallCreatures);
+        OldGuiNewGame.removeSmallCreatures.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences()
+                        .setDeckGenRmvSmall(OldGuiNewGame.removeSmallCreatures.isSelected());
+            }
+        });
+        
         generatedDeck.add(OldGuiNewGame.removeSmallCreatures);
         OldGuiNewGame.removeSmallCreatures.addActionListener(new ActionListener() {
             @Override
