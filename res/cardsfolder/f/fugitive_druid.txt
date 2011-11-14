@@ -7,6 +7,6 @@ T:Mode$ SpellCast | TargetsValid$ Card.Self | ValidCard$ Enchantment.Aura | Trig
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fugitive_druid.jpg
-SetInfo:TMP|Rare|http://dummy.com/dummy.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/123.jpg
 Oracle:Whenever Fugitive Druid becomes the target of an Aura spell, you draw a card.
 End

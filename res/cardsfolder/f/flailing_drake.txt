@@ -10,4 +10,6 @@ SVar:TrigBlocks:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +1 | Nu
 SVar:TrigBlocked:AB$Pump | Cost$ 0 | Defined$ TriggeredBlocker | NumAtt$ +1 | NumDef$ +1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_drake.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/121.jpg
+Oracle:Flying\nWhenever Flailing Drake blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
 End
