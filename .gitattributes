@@ -6815,6 +6815,7 @@ res/cardsfolder/r/rootwater_depths.txt svneol=native#text/plain
 res/cardsfolder/r/rootwater_diver.txt svneol=native#text/plain
 res/cardsfolder/r/rootwater_hunter.txt svneol=native#text/plain
 res/cardsfolder/r/rootwater_mystic.txt svneol=native#text/plain
+res/cardsfolder/r/rootwater_shaman.txt -text
 res/cardsfolder/r/rootwater_thief.txt svneol=native#text/plain
 res/cardsfolder/r/rorix_bladewing.txt svneol=native#text/plain
 res/cardsfolder/r/rot_wolf.txt svneol=native#text/plain
@@ -6901,6 +6902,7 @@ res/cardsfolder/s/sadistic_hypnotist.txt svneol=native#text/plain
 res/cardsfolder/s/sadistic_sacrament.txt svneol=native#text/plain
 res/cardsfolder/s/safe_haven.txt -text
 res/cardsfolder/s/safe_passage.txt -text
+res/cardsfolder/s/safeguard.txt -text
 res/cardsfolder/s/safehold_duo.txt svneol=native#text/plain
 res/cardsfolder/s/safehold_elite.txt svneol=native#text/plain
 res/cardsfolder/s/safehold_sentry.txt svneol=native#text/plain
@@ -7940,6 +7942,7 @@ res/cardsfolder/s/standing_troops.txt svneol=native#text/plain
 res/cardsfolder/s/standstill.txt svneol=native#text/plain
 res/cardsfolder/s/stangg.txt svneol=native#text/plain
 res/cardsfolder/s/star_compass.txt svneol=native#text/plain
+res/cardsfolder/s/starke_of_rath.txt -text
 res/cardsfolder/s/starlight.txt svneol=native#text/plain
 res/cardsfolder/s/starlight_invoker.txt svneol=native#text/plain
 res/cardsfolder/s/starlit_angel.txt svneol=native#text/plain

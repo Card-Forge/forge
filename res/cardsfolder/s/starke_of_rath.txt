@@ -1,0 +1,10 @@
+Name:Starke of Rath
+ManaCost:1 R R
+Types:Legendary Creature Human Rogue
+Text:no text
+PT:2/2
+A:AB$ Destroy | Cost$ T | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SubAbility$ TrigControl | SpellDescription$ Destroy target artifact or creature.
+SVar:TrigControl:DB$GainControl | Cost$ 0 | Defined$ Self | NewController$ TargetedController | SpellDescription$ That permanent's controller gains control of CARDNAME. (This effect lasts indefinitely.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/starke_of_rath.jpg
+End

@@ -1,0 +1,9 @@
+Name:Rootwater Shaman
+ManaCost:2 U
+Types:Creature Merfolk Shaman
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Aura+withEnchant creature+YouCtrl | AddHiddenKeyword$ HIDDEN Flash | AffectedZone$ Hand,Graveyard,Exile | Description$ You may cast Aura cards with enchant creature as though they had flash.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_shaman.jpg
+End
