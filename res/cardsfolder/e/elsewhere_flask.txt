@@ -8,5 +8,5 @@ A:AB$ ChooseType | Cost$ Sac<1/CARDNAME> | Type$ Basic Land | SubAbility$ DBAnim
 SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elsewhere_flash.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elsewhere_flask.jpg
 End
