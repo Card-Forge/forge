@@ -39,9 +39,9 @@ public abstract class DeckGeneration {
         decks.add("2-Color Deck");
         decks.add("3-Color Deck");
         decks.add("5-Color Deck");
-        //decks.add("2-Color Deck (original)");
-        //decks.add("3-Color Deck (original)");
-        //decks.add("5-Color Deck (original)");
+        decks.add("2-Color Deck (original)");
+        decks.add("3-Color Deck (original)");
+        decks.add("5-Color Deck (original)");
         decks.add("Semi-Random Theme Deck");
 
         final String playerName = playerType.equals(PlayerType.HUMAN) ? "Human" : "Computer";
@@ -55,14 +55,13 @@ public abstract class DeckGeneration {
             d = DeckGeneration.generate3ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(2))) {
             d = DeckGeneration.generate5ColorDeck(playerType);
-        //} else if (o.toString().equals(decks.get(3))) {
-        //    d = DeckGeneration.generateConstructedDeck();
-        //} else if (o.toString().equals(decks.get(4))) {
-        //    d = DeckGeneration.generateConstructed3ColorDeck();
-        //} else if (o.toString().equals(decks.get(5))) {
-        //    d = DeckGeneration.generateConstructed5ColorDeck();
-        //} else if (o.toString().equals(decks.get(6))) {
         } else if (o.toString().equals(decks.get(3))) {
+            d = DeckGeneration.generateConstructedDeck();
+        } else if (o.toString().equals(decks.get(4))) {
+            d = DeckGeneration.generateConstructed3ColorDeck();
+        } else if (o.toString().equals(decks.get(5))) {
+            d = DeckGeneration.generateConstructed5ColorDeck();
+        } else if (o.toString().equals(decks.get(6))) {
             d = DeckGeneration.generateConstructedThemeDeck();
         }
 
