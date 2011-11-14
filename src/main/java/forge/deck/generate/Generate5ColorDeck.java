@@ -13,6 +13,7 @@ import forge.CardListFilter;
 import forge.Constant;
 import forge.MyRandom;
 import forge.PlayerType;
+import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 
@@ -35,6 +36,7 @@ public class Generate5ColorDeck {
     private ArrayList<String> notColors = null;
     private ArrayList<String> dl = null;
     private Map<String, Integer> cardCounts = null;
+    private int maxDuplicates = 4;
 
     /**
      * Instantiates a new generate5 color deck.
@@ -90,6 +92,10 @@ public class Generate5ColorDeck {
         this.notColors.remove(this.color3);
         this.notColors.remove(this.color4);
         this.notColors.remove(this.color5);
+        
+        if(Singletons.getModel().getPreferences().isDeckGenSingletons()) {
+            maxDuplicates = 1;
+        }
 
         this.dl = GenerateDeckUtil.getDualLandList("WUBRG");
 
@@ -132,7 +138,9 @@ public class Generate5ColorDeck {
 
         // reduce to cards that match the colors
         CardList cL1 = allCards.getColor(this.color1);
-        cL1.addAll(allCards.getColor(Constant.Color.COLORLESS));
+        if(!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
+            cL1.addAll(allCards.getColor(Constant.Color.COLORLESS));
+        }
         CardList cL2 = allCards.getColor(this.color2);
         CardList cL3 = allCards.getColor(this.color3);
         CardList cL4 = allCards.getColor(this.color4);
@@ -270,7 +278,7 @@ public class Generate5ColorDeck {
             Card c = cr12345.get(this.r.nextInt(cr12345.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > 3) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
                 c = cr12345.get(this.r.nextInt(cr12345.size()));
                 lc++;
             }
@@ -288,7 +296,7 @@ public class Generate5ColorDeck {
             Card c = sp12345.get(this.r.nextInt(sp12345.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > 3) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
                 c = sp12345.get(this.r.nextInt(sp12345.size()));
                 lc++;
             }

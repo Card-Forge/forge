@@ -13,6 +13,7 @@ import forge.CardListFilter;
 import forge.Constant;
 import forge.MyRandom;
 import forge.PlayerType;
+import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 
@@ -33,6 +34,7 @@ public class Generate3ColorDeck {
     private ArrayList<String> notColors = null;
     private ArrayList<String> dL = null;
     private Map<String, Integer> cardCounts = null;
+    private int maxDuplicates = 4;
 
     /**
      * <p>
@@ -64,6 +66,10 @@ public class Generate3ColorDeck {
         this.notColors.add("black");
         this.notColors.add("red");
         this.notColors.add("green");
+        
+        if(Singletons.getModel().getPreferences().isDeckGenSingletons()) {
+            maxDuplicates = 1;
+        }
 
         if (clr1.equals("AI")) {
             // choose first color
@@ -134,7 +140,9 @@ public class Generate3ColorDeck {
 
         // reduce to cards that match the colors
         CardList cl1 = allCards.getColor(this.color1);
-        cl1.addAll(allCards.getColor(Constant.Color.COLORLESS));
+        if(!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
+            cl1.addAll(allCards.getColor(Constant.Color.COLORLESS));
+        }
         CardList cl2 = allCards.getColor(this.color2);
         CardList cl3 = allCards.getColor(this.color3);
 
@@ -181,7 +189,7 @@ public class Generate3ColorDeck {
         };
 
         // select cards to build card pools using a mana curve
-        for (int i = 3; i > 0; i--) {
+        for (int i = 4; i > 0; i--) {
             final CardList cr1CMC = cr1.filter(cmcF);
             final CardList cr2CMC = cr2.filter(cmcF);
             final CardList cr3CMC = cr3.filter(cmcF);
@@ -244,7 +252,7 @@ public class Generate3ColorDeck {
             Card c = cr123.get(this.r.nextInt(cr123.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > 3) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
                 c = cr123.get(this.r.nextInt(cr123.size()));
                 lc++;
             }
@@ -262,7 +270,7 @@ public class Generate3ColorDeck {
             Card c = sp123.get(this.r.nextInt(sp123.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > 3) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
                 c = sp123.get(this.r.nextInt(sp123.size()));
                 lc++;
             }
