@@ -128,7 +128,9 @@ public class Generate2ColorDeck {
 
         // reduce to cards that match the colors
         CardList cl1 = allCards.getColor(this.color1);
-        cl1.addAll(allCards.getColor(Constant.Color.COLORLESS));
+        if(!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
+            cl1.addAll(allCards.getColor(Constant.Color.COLORLESS));
+        }
         CardList cl2 = allCards.getColor(this.color2);
 
         // remove multicolor cards that don't match the colors

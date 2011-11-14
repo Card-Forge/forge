@@ -262,6 +262,7 @@ public class OldGuiNewGame extends JFrame {
         final JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.TITLE));
         
         generatedDeck.add(OldGuiNewGame.singletons);
+        OldGuiNewGame.singletons.setSelected(Singletons.getModel().getPreferences().isDeckGenSingletons());
         OldGuiNewGame.singletons.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
@@ -269,17 +270,9 @@ public class OldGuiNewGame extends JFrame {
                         .setDeckGenSingletons(OldGuiNewGame.singletons.isSelected());
             }
         });
-
-        generatedDeck.add(OldGuiNewGame.removeSmallCreatures);
-        OldGuiNewGame.removeSmallCreatures.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences()
-                        .setDeckGenRmvSmall(OldGuiNewGame.removeSmallCreatures.isSelected());
-            }
-        });
         
         generatedDeck.add(OldGuiNewGame.removeSmallCreatures);
+        OldGuiNewGame.removeSmallCreatures.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvSmall());
         OldGuiNewGame.removeSmallCreatures.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
@@ -289,6 +282,7 @@ public class OldGuiNewGame extends JFrame {
         });
 
         generatedDeck.add(OldGuiNewGame.removeArtifacts);
+        OldGuiNewGame.removeArtifacts.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvArtifacts());
         OldGuiNewGame.removeArtifacts.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
