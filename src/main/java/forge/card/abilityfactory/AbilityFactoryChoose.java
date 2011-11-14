@@ -2,6 +2,7 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -25,6 +26,9 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
+import forge.gui.ListChooser;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 
 /**
  * <p>
@@ -1380,7 +1384,7 @@ public final class AbilityFactoryChoose {
                     if (sa.getActivatingPlayer().isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc
                                 + " card. (Case sensitive)";
-                        name = JOptionPane.showInputDialog(null, message, host.getName(), JOptionPane.QUESTION_MESSAGE);
+                        /*name = JOptionPane.showInputDialog(null, message, host.getName(), JOptionPane.QUESTION_MESSAGE);
                         if (!valid.equals("Card") && !(null == name)) {
                             try {
                                 final Card temp = AllZone.getCardFactory().getCard(name, p);
@@ -1393,8 +1397,24 @@ public final class AbilityFactoryChoose {
                         }
                         if (ok) {
                             host.setNamedCard(null == name ? "" : name);
+                        }*/
+                        final List<String> cards = new ArrayList<String>();
+                        for (final CardPrinted c : CardDb.instance().getAllUniqueCards()) {
+                            cards.add(c.getName());
                         }
+                        Collections.sort(cards);
 
+                        // use standard forge's list selection dialog
+                        final ListChooser<String> choice = new ListChooser<String>(
+                                message, 1, 1, cards);
+                        choice.show();
+                        // still missing a listener to display the card preview
+                        // in the right
+                        name = choice.getSelectedValue();
+                        if(AllZone.getCardFactory().getCard(name, p).isValid(valid, host.getController(), host)) {
+                            host.setNamedCard(choice.getSelectedValue());
+                            ok = true;
+                        }
                     } else {
                         CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
                         list = list.filter(new CardListFilter() {
