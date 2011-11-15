@@ -2698,7 +2698,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Ixidron")) {
+        /*else if (cardName.equals("Ixidron")) {
             final Trigger tfdTrigger = forge.card.trigger.TriggerHandler
                     .parseTrigger(
                             "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)",
@@ -2725,7 +2725,7 @@ public class CardFactoryCreatures {
             tfdTrigger.setOverridingAbility(triggeredAbility);
 
             card.addTrigger(tfdTrigger);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // ***************************************************
         // end of card specific code
