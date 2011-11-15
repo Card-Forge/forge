@@ -1,0 +1,9 @@
+Name:Imps' Taunt
+ManaCost:1 B
+Types:Instant
+Text:no text
+SVar:Buyback:3
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Select target creature | SpellDescription$ Target creature attacks this turn if able.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/imps_taunt.jpg
+End
