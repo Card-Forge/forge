@@ -5270,6 +5270,7 @@ res/cardsfolder/m/mobilization.txt svneol=native#text/plain
 res/cardsfolder/m/mobilize.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_alarm.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_bombers.txt svneol=native#text/plain
+res/cardsfolder/m/mogg_cannon.txt -text
 res/cardsfolder/m/mogg_conscripts.txt -text
 res/cardsfolder/m/mogg_fanatic.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_hollows.txt svneol=native#text/plain
