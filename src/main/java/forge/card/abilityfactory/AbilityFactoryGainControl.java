@@ -277,6 +277,11 @@ public class AbilityFactoryGainControl {
         // if Defined, then don't worry about targeting
         if (tgt == null) {
             return true;
+        } else if (tgt.canOnlyTgtOpponent()) {
+            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                return false;
+            }
+            tgt.addTarget(AllZone.getHumanPlayer());
         }
 
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
