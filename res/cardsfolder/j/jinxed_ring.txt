@@ -2,7 +2,7 @@ Name:Jinxed Ring
 ManaCost:2
 Types:Artifact
 Text:no text
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.nonToken+YouOwn | Execute$ TrigToken | TriggerZones$ TrigDamage | TriggerDescription$ Whenever a nontoken permanent is put into your graveyard from the battlefield, CARDNAME deals 1 damage to you.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.nonToken+YouOwn | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken permanent is put into your graveyard from the battlefield, CARDNAME deals 1 damage to you.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
 A:AB$ GainControl | Cost$ Sac<1/Creature> | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent gains control of CARDNAME. (This effect lasts indefinitely.)
 SVar:RemAIDeck:True
