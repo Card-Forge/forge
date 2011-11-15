@@ -6,4 +6,6 @@ PT:4/4
 A:AB$ DealDamage | Cost$ T Sac<1/Forest> | Tgt$ TgtP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_giant.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/126.jpg
+Oracle:{T}, Sacrifice a Forest: Heartwood Giant deals 2 damage to target player.
 End

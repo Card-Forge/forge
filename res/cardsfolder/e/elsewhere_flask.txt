@@ -9,4 +9,6 @@ SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Types$ ChosenType | O
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elsewhere_flask.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/250.jpg
+Oracle:When Elsewhere Flask enters the battlefield, draw a card.\nSacrifice Elsewhere Flask: Choose a basic land type. Each land you control becomes that type until end of turn.
 End
