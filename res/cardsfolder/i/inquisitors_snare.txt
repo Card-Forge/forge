@@ -1,0 +1,12 @@
+Name:Inquisitor's Snare
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature.attacking,Creature.blocking | IsCurse$ True | KW$ HIDDEN Prevent all damage that would be dealt by CARDNAME. | SubAbility$ DBDestroy | SpellDescription$ Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:A:Targeted$Valid Creature.Black
+SVar:B:Targeted$Valid Creature.Red
+SVar:X:SVar$A/Plus.B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitors_snare.jpg
+End
