@@ -222,14 +222,17 @@ public class AbilityFactoryGainControl {
         ArrayList<Card> tgtCards;
 
         final Target tgt = this.af.getAbTgt();
-        if (tgt != null) {
+        if (tgt != null  && !params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
         }
 
-        final ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                 this.params.get("NewController"), sa);
+        if (tgt != null && tgt.getTargetPlayers() != null) {
+            newController = tgt.getTargetPlayers();
+        }
         if (newController.size() == 0) {
             newController.add(sa.getActivatingPlayer());
         }
@@ -365,15 +368,18 @@ public class AbilityFactoryGainControl {
         final boolean self = this.params.containsKey("Defined") && this.params.get("Defined").equals("Self");
 
         final Target tgt = this.af.getAbTgt();
-        if (tgt != null) {
+        if (tgt != null && !params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
         }
         // tgtCards.add(hostCard);
 
-        final ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                 this.params.get("NewController"), sa);
+        if (tgt != null && tgt.getTargetPlayers() != null) {
+            newController = tgt.getTargetPlayers();
+        }
         if (newController.size() == 0) {
             newController.add(sa.getActivatingPlayer());
         }
@@ -391,6 +397,8 @@ public class AbilityFactoryGainControl {
             if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
 
                 if (this.params.containsKey("NewController")) {
+                    tgtC.addController(newController.get(0));
+                } else if (tgt != null && tgt.getTargetPlayers() != null){
                     tgtC.addController(newController.get(0));
                 } else {
                     tgtC.addController(this.hostCard);
