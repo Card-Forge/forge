@@ -1713,59 +1713,64 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         else if (cardName.equals("Copy Artifact") || cardName.equals("Sculpting Steel")) {
             final CardFactoryInterface cfact = this;
             final Card[] copyTarget = new Card[1];
-            final Card[] cloned = new Card[1];
-
-            final Command leaves = new Command() {
-                private static final long serialVersionUID = 6212378498863558380L;
-
-                @Override
-                public void execute() {
-
-                    final Card orig = cfact.getCard(card.getName(), card.getController());
-                    final PlayerZone dest = AllZone.getZoneOf(card.getCurrentlyCloningCard());
-                    AllZone.getGameAction().moveTo(dest, orig);
-                    dest.remove(card.getCurrentlyCloningCard());
-
-                }
-            };
 
             final SpellAbility copy = new Spell(card) {
-                private static final long serialVersionUID = 4236580139968159802L;
-
-                @Override
-                public boolean canPlayAI() {
-                    final CardList arts = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.ARTIFACTS);
-                    return !arts.isEmpty();
-                }
+                private static final long serialVersionUID = 4496978456522751302L;
 
                 @Override
                 public void resolve() {
                     if (card.getController().isComputer()) {
-                        final CardList arts = AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.ARTIFACTS);
-                        if (!arts.isEmpty()) {
-                            copyTarget[0] = CardFactoryUtil.getBestArtifactAI(arts);
+                        final CardList creatures = AllZoneUtil.getCreaturesInPlay();
+                        if (!creatures.isEmpty()) {
+                            copyTarget[0] = CardFactoryUtil.getBestCreatureAI(creatures);
                         }
                     }
 
                     if (copyTarget[0] != null) {
-                        cloned[0] = CardFactoryUtil.copyStats(copyTarget[0]);
-                        cloned[0].setOwner(card.getController());
-                        if (cardName.equals("Copy Artifact")) {
-                            cloned[0].addType("Enchantment");
+                        Card cloned;
+                        
+                        cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
+                        card.addAlternateState("Cloner");                        
+                        card.switchStates("Original", "Cloner");
+                        card.setState("Original");
+                        
+                        if(copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
+                            cloned.setState("Transformed");
                         }
-                        cloned[0].setCloneOrigin(card);
-                        cloned[0].addLeavesPlayCommand(leaves);
-                        cloned[0].setCloneLeavesPlayCommand(leaves);
-                        cloned[0].setCurSetCode(copyTarget[0].getCurSetCode());
-                        cloned[0].setImageFilename(copyTarget[0].getImageFilename());
+                        
+                        CardFactoryUtil.copyCharacteristics(cloned,card);
+                        this.grantExtras();
+                        
 
-                        for (final SpellAbility sa : copyTarget[0].getSpellAbilities()) {
-                            cloned[0].addSpellAbility(sa);
+                        //If target is a flipped card, also copy the flipped state.
+                        if(copyTarget[0].isFlip()) {
+                            cloned.setState("Flipped");
+                            cloned.setImageFilename(CardUtil.buildFilename(cloned));
+                            card.addAlternateState("Flipped");
+                            card.setState("Flipped");
+                            CardFactoryUtil.copyCharacteristics(cloned,card);
+                            this.grantExtras();
+                            
+                            card.setFlip(true);
+                            
+                            card.setState("Original");
                         }
-
-                        AllZone.getGameAction().moveToPlay(cloned[0]);
-                        card.setCurrentlyCloningCard(cloned[0]);
+                        else {
+                            card.setFlip(false);
+                        }
+                        
+                        
                     }
+                    
+                    AllZone.getGameAction().moveToPlay(card);
+                }
+                
+                private void grantExtras() {
+                  //Grant stuff from specific cloners
+                    if(cardName.equals("Copy Artifact")) {
+                        card.addType("Enchantment");
+                    }
+                    
                 }
             }; // SpellAbility
 

@@ -340,8 +340,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private Card cloneOrigin = null;
     private ArrayList<Card> clones = new ArrayList<Card>();
-    private Card currentlyCloningCard = null;
-    private Command cloneLeavesPlayCommand = null;
     private ArrayList<Card> gainControlTargets = new ArrayList<Card>();
     private ArrayList<Command> gainControlReleaseCommands = new ArrayList<Command>();
 
@@ -1050,52 +1048,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setCloneOrigin(final Card name) {
         cloneOrigin = name;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>cloneLeavesPlayCommand</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Command} object.
-     */
-    public final Command getCloneLeavesPlayCommand() {
-        return cloneLeavesPlayCommand;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>cloneLeavesPlayCommand</code>.
-     * </p>
-     * 
-     * @param com
-     *            a {@link forge.Command} object.
-     */
-    public final void setCloneLeavesPlayCommand(final Command com) {
-        cloneLeavesPlayCommand = com;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>currentlyCloningCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getCurrentlyCloningCard() {
-        return currentlyCloningCard;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>currentlyCloningCard</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void setCurrentlyCloningCard(final Card c) {
-        currentlyCloningCard = c;
     }
 
     /**
@@ -2080,6 +2032,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (nonAbilityText.length() > 0) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
+        }
+        
+        if(characteristicsMap.get("Cloner") != null) {
+            sb.append("\r\nCloned by:").append(characteristicsMap.get("Cloner").getName()).append(" (").append(getUniqueNumber()).append(")");
         }
 
         return sb.toString();
