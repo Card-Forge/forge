@@ -1715,49 +1715,47 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                     if (copyTarget[0] != null) {
                         Card cloned;
-                        
+
                         cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
-                        card.addAlternateState("Cloner");                        
+                        card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");
                         card.setState("Original");
-                        
-                        if(copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
+
+                        if (copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
                             cloned.setState("Transformed");
                         }
-                        
-                        CardFactoryUtil.copyCharacteristics(cloned,card);
-                        this.grantExtras();
-                        
 
-                        //If target is a flipped card, also copy the flipped state.
-                        if(copyTarget[0].isFlip()) {
+                        CardFactoryUtil.copyCharacteristics(cloned, card);
+                        this.grantExtras();
+
+                        // If target is a flipped card, also copy the flipped
+                        // state.
+                        if (copyTarget[0].isFlip()) {
                             cloned.setState("Flipped");
                             cloned.setImageFilename(CardUtil.buildFilename(cloned));
                             card.addAlternateState("Flipped");
                             card.setState("Flipped");
-                            CardFactoryUtil.copyCharacteristics(cloned,card);
+                            CardFactoryUtil.copyCharacteristics(cloned, card);
                             this.grantExtras();
-                            
+
                             card.setFlip(true);
-                            
+
                             card.setState("Original");
-                        }
-                        else {
+                        } else {
                             card.setFlip(false);
                         }
-                        
-                        
+
                     }
-                    
+
                     AllZone.getGameAction().moveToPlay(card);
                 }
-                
+
                 private void grantExtras() {
-                  //Grant stuff from specific cloners
-                    if(cardName.equals("Copy Artifact")) {
+                    // Grant stuff from specific cloners
+                    if (cardName.equals("Copy Artifact")) {
                         card.addType("Enchantment");
                     }
-                    
+
                 }
             }; // SpellAbility
 
