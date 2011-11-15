@@ -4077,6 +4077,7 @@ res/cardsfolder/i/ink_dissolver.txt svneol=native#text/plain
 res/cardsfolder/i/ink_eyes_servant_of_oni.txt svneol=native#text/plain
 res/cardsfolder/i/inkfathom_divers.txt svneol=native#text/plain
 res/cardsfolder/i/inkfathom_infiltrator.txt svneol=native#text/plain
+res/cardsfolder/i/inkfathom_witch.txt -text svneol=unset#text/plain
 res/cardsfolder/i/inkmoth_nexus.txt svneol=native#text/plain
 res/cardsfolder/i/inkwell_leviathan.txt svneol=native#text/plain
 res/cardsfolder/i/inner_calm_outer_strength.txt svneol=native#text/plain
