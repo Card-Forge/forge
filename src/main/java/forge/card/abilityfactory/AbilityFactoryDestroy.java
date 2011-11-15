@@ -414,11 +414,11 @@ public class AbilityFactoryDestroy {
         } else {
             sb.append(host).append(" - ");
         }
-        
-        if(params.containsKey("Sacrifice")) {
+
+        if (params.containsKey("Sacrifice")) {
             sb.append("Sacrifice ");
         }
-        else { 
+        else {
             sb.append("Destroy ");
         }
 

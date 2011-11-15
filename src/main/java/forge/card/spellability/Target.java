@@ -613,10 +613,9 @@ public class Target {
      * <p>
      * hasCandidates.
      * </p>
-     * 
-     * @param isTargeted
-     *            Check Valid Candidates and Targeting
-     * 
+     *
+     * @param sa the sa
+     * @param isTargeted Check Valid Candidates and Targeting
      * @return a boolean.
      */
     public final boolean hasCandidates(final SpellAbility sa, final boolean isTargeted) {

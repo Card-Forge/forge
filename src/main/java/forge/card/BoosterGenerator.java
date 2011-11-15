@@ -26,8 +26,7 @@ public class BoosterGenerator {
 
     // Function to open a booster as it is.
     /** The Constant IDENTITY_PICK. */
-    public static final Lambda1<List<CardPrinted>, BoosterGenerator> IDENTITY_PICK
-    = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+    public static final Lambda1<List<CardPrinted>, BoosterGenerator> IDENTITY_PICK = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
         @Override
         public List<CardPrinted> apply(final BoosterGenerator arg1) {
             return arg1.getBoosterPack();
@@ -133,8 +132,7 @@ public class BoosterGenerator {
         return this.pickRandomCards(source, count, false);
     }
 
-    private List<CardPrinted> pickRandomCards(final List<CardPrinted> source,
-            final int count, final boolean singleton) {
+    private List<CardPrinted> pickRandomCards(final List<CardPrinted> source, final int count, final boolean singleton) {
         int listSize = source == null ? 0 : source.size();
         if ((count <= 0) || (listSize == 0)) {
             return BoosterGenerator.EMPTY_LIST;
@@ -205,8 +203,9 @@ public class BoosterGenerator {
 
     /**
      * Gets the singleton booster pack.
-     *
-     * @param nAnyCard the n any card
+     * 
+     * @param nAnyCard
+     *            the n any card
      * @return the singleton booster pack
      */
     public final List<CardPrinted> getSingletonBoosterPack(final int nAnyCard) {
@@ -266,19 +265,19 @@ public class BoosterGenerator {
             temp.addAll(this.pickRandomCards(this.mythics, nMythics));
         }
         if (nDoubls > 0) {
-            int dblFacedRarity = MyRandom.getRandom().nextInt(14);
+            final int dblFacedRarity = MyRandom.getRandom().nextInt(14);
             List<CardPrinted> listToUse;
-            if (dblFacedRarity < 9) { //Common
-                listToUse = doubleFacedCommons;
-            } else if (dblFacedRarity < 13) { //Uncommon
-                listToUse = doubleFacedUncommons;
-            } else {//Rare or Mythic
-                if(MyRandom.getRandom().nextInt(8) == 0) {
-                    listToUse = doubleFacedMythics;
+            if (dblFacedRarity < 9) { // Common
+                listToUse = this.doubleFacedCommons;
+            } else if (dblFacedRarity < 13) { // Uncommon
+                listToUse = this.doubleFacedUncommons;
+            } else { // Rare or Mythic
+                if (MyRandom.getRandom().nextInt(8) == 0) {
+                    listToUse = this.doubleFacedMythics;
                 } else {
-                    listToUse = doubleFacedRares;
-                }                
-            }            
+                    listToUse = this.doubleFacedRares;
+                }
+            }
             temp.addAll(this.pickRandomCards(listToUse, nDoubls));
         }
 

@@ -66,9 +66,9 @@ public class Generate3ColorDeck {
         this.notColors.add("black");
         this.notColors.add("red");
         this.notColors.add("green");
-        
-        if(Singletons.getModel().getPreferences().isDeckGenSingletons()) {
-            maxDuplicates = 1;
+
+        if (Singletons.getModel().getPreferences().isDeckGenSingletons()) {
+            this.maxDuplicates = 1;
         }
 
         if (clr1.equals("AI")) {
@@ -140,7 +140,7 @@ public class Generate3ColorDeck {
 
         // reduce to cards that match the colors
         CardList cl1 = allCards.getColor(this.color1);
-        if(!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
+        if (!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
             cl1.addAll(allCards.getColor(Constant.Color.COLORLESS));
         }
         CardList cl2 = allCards.getColor(this.color2);
@@ -252,7 +252,7 @@ public class Generate3ColorDeck {
             Card c = cr123.get(this.r.nextInt(cr123.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > (this.maxDuplicates - 1)) || (lc > 100)) {
                 c = cr123.get(this.r.nextInt(cr123.size()));
                 lc++;
             }
@@ -270,7 +270,7 @@ public class Generate3ColorDeck {
             Card c = sp123.get(this.r.nextInt(sp123.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > (this.maxDuplicates - 1)) || (lc > 100)) {
                 c = sp123.get(this.r.nextInt(sp123.size()));
                 lc++;
             }
@@ -318,7 +318,7 @@ public class Generate3ColorDeck {
         numLands -= ndLands;
 
         if (numLands > 0) {
-         // attempt to optimize basic land counts according to
+            // attempt to optimize basic land counts according to
             // color representation
             final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0), new CCnt("Forest", 0) };
@@ -420,7 +420,7 @@ public class Generate3ColorDeck {
     }
 
     private class CCnt {
-        private String color;
+        private final String color;
         private int count;
 
         public CCnt(final String clr, final int cnt) {

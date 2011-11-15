@@ -108,7 +108,7 @@ public abstract class SpellAbility {
         public void execute(final Object o) {
         }
     };
-    
+
     private CardList tappedForConvoke = null;
 
     /**
@@ -700,8 +700,7 @@ public abstract class SpellAbility {
      * Getter for the field <code>restrictions</code>.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.SpellAbilityRestriction}
-     *         object.
+     * @return a {@link forge.card.spellability.SpellAbilityRestriction} object.
      */
     public SpellAbilityRestriction getRestrictions() {
         return this.restrictions;
@@ -1051,6 +1050,7 @@ public abstract class SpellAbility {
      * </p>
      * 
      * Extrinsic or Intrinsic:
+     * 
      * @param s
      *            a {@link java.lang.String} object.
      */
@@ -1066,7 +1066,7 @@ public abstract class SpellAbility {
      * @return a {@link java.lang.String} object.
      */
     public String getType() {
-     // Extrinsic or Intrinsic:
+        // Extrinsic or Intrinsic:
         return this.type;
     }
 
@@ -1682,53 +1682,69 @@ public abstract class SpellAbility {
     }
 
     /**
+     * Gets the ability.
+     *
      * @return the ability
      */
     public static int getAbility() {
-        return ABILITY;
+        return SpellAbility.ABILITY;
     }
 
     /**
+     * Gets the spell.
+     *
      * @return the spell
      */
     public static int getSpell() {
-        return SPELL;
+        return SpellAbility.SPELL;
     }
 
     /**
+     * Gets the chosen target.
+     *
      * @return the chosenTarget
      */
     public Target getChosenTarget() {
-        return chosenTarget;
+        return this.chosenTarget;
     }
 
     /**
+     * Sets the chosen target.
+     *
      * @param chosenTarget the chosenTarget to set
      */
-    public void setChosenTarget(Target chosenTarget) {
+    public void setChosenTarget(final Target chosenTarget) {
         this.chosenTarget = chosenTarget; // TODO: Add 0 to parameter's name.
     }
-    
-    public void addTappedForConvoke(Card c)
-    {
-        if(tappedForConvoke == null)
-        {
-            tappedForConvoke = new CardList();
+
+    /**
+     * Adds the tapped for convoke.
+     *
+     * @param c the c
+     */
+    public void addTappedForConvoke(final Card c) {
+        if (this.tappedForConvoke == null) {
+            this.tappedForConvoke = new CardList();
         }
-        
-        tappedForConvoke.add(c);
+
+        this.tappedForConvoke.add(c);
     }
-    
-    public CardList getTappedForConvoke()
-    {
-        return tappedForConvoke;
+
+    /**
+     * Gets the tapped for convoke.
+     *
+     * @return the tapped for convoke
+     */
+    public CardList getTappedForConvoke() {
+        return this.tappedForConvoke;
     }
-    
-    public void clearTappedForConvoke()
-    {
-        if(tappedForConvoke != null)
-        {
-            tappedForConvoke.clear();
+
+    /**
+     * Clear tapped for convoke.
+     */
+    public void clearTappedForConvoke() {
+        if (this.tappedForConvoke != null) {
+            this.tappedForConvoke.clear();
         }
     }
 

@@ -23,7 +23,7 @@ public class CardPanelLite extends CardPanelBase {
 
     // Controls to show card details
     /** The detail. */
-    private CardDetailPanel detail = new CardDetailPanel(null);
+    private final CardDetailPanel detail = new CardDetailPanel(null);
     private final CardPicturePanel picture = new CardPicturePanel(null);
     private final JButton bChangeState = new JButton();
 
@@ -110,12 +110,10 @@ public class CardPanelLite extends CardPanelBase {
     private void bChangeStateActionPerformed(final ActionEvent e) {
         final Card cur = this.detail.getCard();
         if (cur != null) {
-            if(cur.isDoubleFaced()) {
-                if(cur.getCurState().equals("Transformed"))
-                {
+            if (cur.isDoubleFaced()) {
+                if (cur.getCurState().equals("Transformed")) {
                     cur.setState("Original");
-                }
-                else {
+                } else {
                     cur.setState("Transformed");
                 }
             }

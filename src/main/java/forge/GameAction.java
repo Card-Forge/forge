@@ -120,7 +120,7 @@ public class GameAction {
                 c.switchStates("Cloner", "Original");
                 c.setState("Original");
             }
-            
+
             copied = AllZone.getCardFactory().copyCard(c);
             lastKnownInfo = CardUtil.getLKICopy(c);
 
@@ -540,9 +540,8 @@ public class GameAction {
         if (c.isToken()) {
             return c;
         }
-        
-        if(c.isInAlternateState())
-        {
+
+        if (c.isInAlternateState()) {
             c.setState("Original");
         }
 
@@ -893,7 +892,8 @@ public class GameAction {
 
                     if (entity instanceof Card) {
                         final Card perm = (Card) entity;
-                        if (!AllZoneUtil.isCardInPlay(perm) || perm.hasProtectionFrom(c) || perm.hasKeyword("CARDNAME can't be enchanted.")
+                        if (!AllZoneUtil.isCardInPlay(perm) || perm.hasProtectionFrom(c)
+                                || perm.hasKeyword("CARDNAME can't be enchanted.")
                                 || ((tgt != null) && !perm.isValid(tgt.getValidTgts(), c.getController(), c))) {
                             c.unEnchantEntity(perm);
                             this.moveToGraveyard(c);
@@ -1342,13 +1342,13 @@ public class GameAction {
                 AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
 
                 if (card.hasAlternateState()) {
-                    if(card.isDoubleFaced()) {
+                    if (card.isDoubleFaced()) {
                         card.setState("Transformed");
                     }
-                    if(card.isFlip()) {
+                    if (card.isFlip()) {
                         card.setState("Flipped");
                     }
-                    
+
                     card.setImageFilename(CardUtil.buildFilename(card));
 
                     card.setState("Original");
@@ -1385,13 +1385,13 @@ public class GameAction {
                 }
 
                 if (card.hasAlternateState()) {
-                    if(card.isDoubleFaced()) {
+                    if (card.isDoubleFaced()) {
                         card.setState("Transformed");
                     }
-                    if(card.isFlip()) {
+                    if (card.isFlip()) {
                         card.setState("Flipped");
                     }
-                    
+
                     card.setImageFilename(CardUtil.buildFilename(card));
 
                     card.setState("Original");
@@ -1634,9 +1634,8 @@ public class GameAction {
         }
 
         if (((flip == 0) && q.equals(0)) || ((flip == 1) && q.equals(1))) {
-            JOptionPane.showMessageDialog(null,
-                    humanFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
-                    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, humanFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN),
+                    "", JOptionPane.INFORMATION_MESSAGE);
         } else {
             this.computerStartsGame();
             JOptionPane.showMessageDialog(null,
@@ -1795,16 +1794,19 @@ public class GameAction {
             // for uncastables like lotus bloom, check if manaCost is blank
             sa.setActivatingPlayer(human);
             if (sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
-                
+
                 boolean flashb = false;
-                
-                //check for flashback keywords
+
+                // check for flashback keywords
                 if (c.isInZone(Constant.Zone.Graveyard) && sa.isSpell() && (c.isInstant() || c.isSorcery())) {
-                    for(String keyword : c.getKeyword()) {
+                    for (final String keyword : c.getKeyword()) {
                         if (keyword.startsWith("Flashback")) {
-                            SpellAbility flashback = sa.copy();
+                            final SpellAbility flashback = sa.copy();
                             flashback.setFlashBackAbility(true);
-                            if (!keyword.equals("Flashback")) {//there is a flashback cost (and not the cards cost)
+                            if (!keyword.equals("Flashback")) { // there is a
+                                                               // flashback cost
+                                                               // (and not the
+                                                               // cards cost)
                                 final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
                                 flashback.setPayCosts(fbCost);
                             }
@@ -2072,97 +2074,94 @@ public class GameAction {
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
                 CardList untappedCreats = spell.getActivatingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
                 untappedCreats = untappedCreats.filter(new CardListFilter() {
-                   public boolean addCard(Card c) {
-                       return !c.isTapped();
-                   }
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return !c.isTapped();
+                    }
                 });
-                
-                if(untappedCreats.size() != 0)
-                {  
-                    ArrayList<Object> choices = new ArrayList<Object>();
-                    for(Card c : untappedCreats) {
+
+                if (untappedCreats.size() != 0) {
+                    final ArrayList<Object> choices = new ArrayList<Object>();
+                    for (final Card c : untappedCreats) {
                         choices.add(c);
                     }
                     choices.add("DONE");
                     ArrayList<String> usableColors = new ArrayList<String>();
                     ManaCost newCost = new ManaCost(originalCost.toString());
                     Object tapForConvoke = null;
-                    if(sa.getActivatingPlayer().isHuman())
-                    {
-                        tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(), choices.toArray());
+                    if (sa.getActivatingPlayer().isHuman()) {
+                        tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(),
+                                choices.toArray());
+                    } else {
+                        // TODO: AI to choose a creature to tap would go here
+                        // Probably along with deciding how many creatures to
+                        // tap
                     }
-                    else {
-                        //TODO: AI to choose a creature to tap would go here
-                        //Probably along with deciding how many creatures to tap
-                    }
-                    while(tapForConvoke != null && (tapForConvoke instanceof Card) && untappedCreats.size() != 0) {
-                        Card workingCard = (Card) tapForConvoke;
+                    while ((tapForConvoke != null) && (tapForConvoke instanceof Card) && (untappedCreats.size() != 0)) {
+                        final Card workingCard = (Card) tapForConvoke;
                         usableColors = CardUtil.getConvokableColors(workingCard, newCost);
-                        
-                        if(usableColors.size() != 0)
-                        {
+
+                        if (usableColors.size() != 0) {
                             String chosenColor = usableColors.get(0);
-                            if(usableColors.size() > 1)
-                            {
-                                if(sa.getActivatingPlayer().isHuman())
-                                {
-                                    chosenColor = (String)GuiUtils.getChoice("Convoke for which color?", usableColors.toArray());
-                                }
-                                else
-                                {
-                                    //TODO: AI for choosing which color to convoke goes here.
+                            if (usableColors.size() > 1) {
+                                if (sa.getActivatingPlayer().isHuman()) {
+                                    chosenColor = (String) GuiUtils.getChoice("Convoke for which color?",
+                                            usableColors.toArray());
+                                } else {
+                                    // TODO: AI for choosing which color to
+                                    // convoke goes here.
                                 }
                             }
-                            
-                            if(chosenColor.equals("colorless"))
-                            {
+
+                            if (chosenColor.equals("colorless")) {
                                 newCost.decreaseColorlessMana(1);
-                            }
-                            else
-                            {
+                            } else {
                                 String newCostStr = newCost.toString();
-                                newCostStr = newCostStr.replaceFirst(InputPayManaCostUtil.getShortColorString(chosenColor), "");
+                                newCostStr = newCostStr.replaceFirst(
+                                        InputPayManaCostUtil.getShortColorString(chosenColor), "");
                                 newCost = new ManaCost(newCostStr.trim());
                             }
-                            
+
                             sa.addTappedForConvoke(workingCard);
                             choices.remove(workingCard);
                             untappedCreats.remove(workingCard);
-                            if(choices.size() < 2 || newCost.getConvertedManaCost() == 0) {
+                            if ((choices.size() < 2) || (newCost.getConvertedManaCost() == 0)) {
                                 break;
                             }
-                        }
-                        else
-                        {
+                        } else {
                             untappedCreats.remove(workingCard);
                         }
 
-                        if(sa.getActivatingPlayer().isHuman())
-                        {
-                            tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(), choices.toArray());
-                        }
-                        else {
-                            //TODO: AI to choose a creature to tap would go here
+                        if (sa.getActivatingPlayer().isHuman()) {
+                            tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(),
+                                    choices.toArray());
+                        } else {
+                            // TODO: AI to choose a creature to tap would go
+                            // here
                         }
                     }
-                    
-                    //will only be null if user cancelled.
-                    if(tapForConvoke != null) {
-                        //Convoked creats are tapped here with triggers suppressed,
-                        //Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
-                        //This is to make sure that triggers go off at the right time
-                        //AND that you can't use mana tapabilities of convoked creatures
-                        //to pay the convoked cost.
+
+                    // will only be null if user cancelled.
+                    if (tapForConvoke != null) {
+                        // Convoked creats are tapped here with triggers
+                        // suppressed,
+                        // Then again when payment is done(In
+                        // InputPayManaCost.done()) with suppression cleared.
+                        // This is to make sure that triggers go off at the
+                        // right time
+                        // AND that you can't use mana tapabilities of convoked
+                        // creatures
+                        // to pay the convoked cost.
                         AllZone.getTriggerHandler().suppressMode("Taps");
-                        for(Card c : sa.getTappedForConvoke()) {
+                        for (final Card c : sa.getTappedForConvoke()) {
                             c.tap();
                         }
                         AllZone.getTriggerHandler().clearSuppression("Taps");
-                        
+
                         manaCost = newCost;
                     }
                 }
-                
+
             }
         } // isSpell
 
@@ -2540,8 +2539,8 @@ public class GameAction {
                                     // Not Included as X Costs are not in
                                     // Colored Mana
                                     if (sa.isMultiKicker()) {
-                                        this.setCostCuttingGetMultiMickerManaCostPaidColored(this.getCostCuttingGetMultiMickerManaCostPaidColored()
-                                                + k[3]);
+                                        this.setCostCuttingGetMultiMickerManaCostPaidColored(this
+                                                .getCostCuttingGetMultiMickerManaCostPaidColored() + k[3]);
                                         // JOptionPane.showMessageDialog(null,
                                         // CostCutting_GetMultiMickerManaCostPaid_Colored,
                                         // "", JOptionPane.INFORMATION_MESSAGE);
@@ -2665,7 +2664,7 @@ public class GameAction {
                     AllZone.getInputControl().setInput(sa.getAfterPayMana());
                 }
             } else if (sa.getBeforePayMana() == null) {
-                AllZone.getInputControl().setInput(new InputPayManaCost(sa,manaCost));
+                AllZone.getInputControl().setInput(new InputPayManaCost(sa, manaCost));
             } else {
                 AllZone.getInputControl().setInput(sa.getBeforePayMana());
             }
@@ -2820,30 +2819,49 @@ public class GameAction {
     }
 
     /**
+     * Gets the cost cutting get multi micker mana cost paid.
+     *
      * @return the costCuttingGetMultiMickerManaCostPaid
      */
     public int getCostCuttingGetMultiMickerManaCostPaid() {
-        return costCuttingGetMultiMickerManaCostPaid;
+        return this.costCuttingGetMultiMickerManaCostPaid;
     }
 
     /**
+     * Sets the cost cutting get multi micker mana cost paid.
+     *
      * @param costCuttingGetMultiMickerManaCostPaid the costCuttingGetMultiMickerManaCostPaid to set
      */
-    public void setCostCuttingGetMultiMickerManaCostPaid(int costCuttingGetMultiMickerManaCostPaid) {
-        this.costCuttingGetMultiMickerManaCostPaid = costCuttingGetMultiMickerManaCostPaid; // TODO: Add 0 to parameter's name.
+    public void setCostCuttingGetMultiMickerManaCostPaid(final int costCuttingGetMultiMickerManaCostPaid) {
+        this.costCuttingGetMultiMickerManaCostPaid = costCuttingGetMultiMickerManaCostPaid; // TODO:
+                                                                                            // Add
+                                                                                            // 0
+                                                                                            // to
+                                                                                            // parameter's
+                                                                                            // name.
     }
 
     /**
+     * Gets the cost cutting get multi micker mana cost paid colored.
+     *
      * @return the costCuttingGetMultiMickerManaCostPaidColored
      */
     public String getCostCuttingGetMultiMickerManaCostPaidColored() {
-        return costCuttingGetMultiMickerManaCostPaidColored;
+        return this.costCuttingGetMultiMickerManaCostPaidColored;
     }
 
     /**
+     * Sets the cost cutting get multi micker mana cost paid colored.
+     *
      * @param costCuttingGetMultiMickerManaCostPaidColored the costCuttingGetMultiMickerManaCostPaidColored to set
      */
-    public void setCostCuttingGetMultiMickerManaCostPaidColored(String costCuttingGetMultiMickerManaCostPaidColored) {
-        this.costCuttingGetMultiMickerManaCostPaidColored = costCuttingGetMultiMickerManaCostPaidColored; // TODO: Add 0 to parameter's name.
+    public void setCostCuttingGetMultiMickerManaCostPaidColored(
+            final String costCuttingGetMultiMickerManaCostPaidColored) {
+        this.costCuttingGetMultiMickerManaCostPaidColored = costCuttingGetMultiMickerManaCostPaidColored; // TODO:
+                                                                                                          // Add
+                                                                                                          // 0
+                                                                                                          // to
+                                                                                                          // parameter's
+                                                                                                          // name.
     }
 }

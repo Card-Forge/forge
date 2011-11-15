@@ -403,7 +403,7 @@ public class AbilityFactoryGainControl {
 
                 if (this.params.containsKey("NewController")) {
                     tgtC.addController(newController.get(0));
-                } else if (tgt != null && tgt.getTargetPlayers() != null){
+                } else if (tgt != null && tgt.getTargetPlayers() != null) {
                     tgtC.addController(newController.get(0));
                 } else {
                     tgtC.addController(this.hostCard);

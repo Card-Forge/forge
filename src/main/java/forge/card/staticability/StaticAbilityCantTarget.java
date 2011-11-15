@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import forge.Card;
 import forge.Constant;
-import forge.Player;
 import forge.Constant.Zone;
+import forge.Player;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -13,14 +13,22 @@ import forge.card.spellability.SpellAbility;
  */
 public class StaticAbilityCantTarget {
 
-    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card, SpellAbility sa) {
-        final HashMap<String, String> params = stAb.getMapParams();
-        final Card hostCard = stAb.getHostCard();
-        final Card source = sa.getSourceCard();
-        final Player activator = sa.getActivatingPlayer();
-        
+    /**
+     * Apply can't target ability.
+     *
+     * @param staticAbility the static ability
+     * @param card the card
+     * @param spellAbility the spell Ability
+     * @return true, if successful
+     */
+    public static boolean applyCantTargetAbility(final StaticAbility staticAbility, final Card card, final SpellAbility spellAbility) {
+        final HashMap<String, String> params = staticAbility.getMapParams();
+        final Card hostCard = staticAbility.getHostCard();
+        final Card source = spellAbility.getSourceCard();
+        final Player activator = spellAbility.getActivatingPlayer();
+
         if (params.containsKey("AffectedZone")) {
-            if(!card.isInZone(Zone.smartValueOf(params.get("AffectedZone")))) {
+            if (!card.isInZone(Zone.smartValueOf(params.get("AffectedZone")))) {
                 return false;
             }
         } else { // default zone is battlefield
@@ -28,8 +36,8 @@ public class StaticAbilityCantTarget {
                 return false;
             }
         }
-        
-        if (params.containsKey("Spell") && !sa.isSpell()) {
+
+        if (params.containsKey("Spell") && !spellAbility.isSpell()) {
             return false;
         }
 
@@ -37,7 +45,7 @@ public class StaticAbilityCantTarget {
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
             return false;
         }
-        
+
         if (params.containsKey("ValidSource")
                 && !source.isValid(params.get("ValidSource").split(","), hostCard.getController(), hostCard)) {
             return false;
@@ -47,7 +55,6 @@ public class StaticAbilityCantTarget {
                 && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard)) {
             return false;
         }
-
 
         return true;
     }

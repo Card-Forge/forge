@@ -282,8 +282,8 @@ public final class DeckEditorCommon extends DeckEditorBase {
      */
     @Override
     protected Predicate<InventoryItem> buildFilter() {
-        final Predicate<CardPrinted> cardFilter = 
-                Predicate.and(this.getFilterBoxes().buildFilter(), this.filterNameTypeSet.buildFilter());
+        final Predicate<CardPrinted> cardFilter = Predicate.and(this.getFilterBoxes().buildFilter(),
+                this.filterNameTypeSet.buildFilter());
         return Predicate.instanceOf(cardFilter, CardPrinted.class);
     }
 
@@ -400,17 +400,20 @@ public final class DeckEditorCommon extends DeckEditorBase {
     }
 
     /**
+     * Gets the custom menu.
+     *
      * @return the customMenu
      */
     public DeckEditorCommonMenu getCustomMenu() {
-        return customMenu;
+        return this.customMenu;
     }
 
     /**
-     * @param customMenu
-     *            the customMenu to set
+     * Sets the custom menu.
+     *
+     * @param customMenu the customMenu to set
      */
-    public void setCustomMenu(DeckEditorCommonMenu customMenu) {
+    public void setCustomMenu(final DeckEditorCommonMenu customMenu) {
         this.customMenu = customMenu; // TODO: Add 0 to parameter's name.
     }
 

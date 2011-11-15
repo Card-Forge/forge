@@ -502,8 +502,9 @@ public class Upkeep implements java.io.Serializable {
 
         for (final Card c : cards) {
             final Card abyss = c;
-            
-            final CardList abyssGetTargets = AllZoneUtil.getCreaturesInPlay(player).filter(CardListFilter.NON_ARTIFACTS);
+
+            final CardList abyssGetTargets = AllZoneUtil.getCreaturesInPlay(player)
+                    .filter(CardListFilter.NON_ARTIFACTS);
 
             final Ability sacrificeCreature = new Ability(abyss, "") {
                 @Override
@@ -533,11 +534,11 @@ public class Upkeep implements java.io.Serializable {
                             }); // Input
                         }
                     } else { // computer
-                        
+
                         final CardList indestruct = targets.getKeyword("Indestructible");
                         if (indestruct.size() > 0) {
                             AllZone.getGameAction().destroyNoRegeneration(indestruct.get(0));
-                        } else if (targets.size() > 0){
+                        } else if (targets.size() > 0) {
                             final Card target = CardFactoryUtil.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
@@ -2455,7 +2456,7 @@ public class Upkeep implements java.io.Serializable {
         // is
         final Player player = AllZone.getPhase().getPlayerTurn();
         final String keyword = "At the beginning of your upkeep, you may have this "
-        + "creature become a copy of target creature except it doesn't copy that "
+                + "creature become a copy of target creature except it doesn't copy that "
                 + "creature's color. If you do, this creature gains this ability.";
         CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.getKeyword(keyword);
@@ -2482,15 +2483,16 @@ public class Upkeep implements java.io.Serializable {
                                  * add new to play
                                  */
 
-                                final Card newCopy = AllZone.getCardFactory().getCard(newTarget[0].getState("Original").getName(), player);
+                                final Card newCopy = AllZone.getCardFactory().getCard(
+                                        newTarget[0].getState("Original").getName(), player);
                                 newCopy.setCurSetCode(newTarget[0].getCurSetCode());
                                 newCopy.setImageFilename(newTarget[0].getImageFilename());
 
                                 newCopy.setState(newTarget[0].getCurState());
-                                
+
                                 CardFactoryUtil.copyCharacteristics(newCopy, c);
                                 c.addColor("U");
-                                
+
                                 c.addExtrinsicKeyword(keyword);
                             }
                         }
@@ -2528,7 +2530,7 @@ public class Upkeep implements java.io.Serializable {
                 }
             };
             ability.setDescription("At the beginning of your upkeep, you may have this creature become "
-            + "a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
+                    + "a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
             ability.setStackDescription(c.getName() + " - you may have this creature become a copy of target creature.");
 
             AllZone.getStack().addSimultaneousStackEntry(ability);

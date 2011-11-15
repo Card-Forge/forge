@@ -48,7 +48,7 @@ public final class CardRules {
      * @return the name
      */
     public String getName() {
-        return characteristics.getCardName();
+        return this.characteristics.getCardName();
     }
 
     /**
@@ -57,7 +57,7 @@ public final class CardRules {
      * @return the type
      */
     public CardType getType() {
-        return characteristics.getCardType();
+        return this.characteristics.getCardType();
     }
 
     /**
@@ -66,7 +66,7 @@ public final class CardRules {
      * @return the mana cost
      */
     public CardManaCost getManaCost() {
-        return characteristics.getManaCost();
+        return this.characteristics.getManaCost();
     }
 
     /**
@@ -75,7 +75,7 @@ public final class CardRules {
      * @return the color
      */
     public CardColor getColor() {
-        return characteristics.getColor();
+        return this.characteristics.getColor();
     }
 
     /**
@@ -84,18 +84,25 @@ public final class CardRules {
      * @return the rules
      */
     public String[] getRules() {
-        return characteristics.getCardRules();
+        return this.characteristics.getCardRules();
     }
-    
-    public final CardRules getSlavePart() { return slavePart; }
-    
+
+    /**
+     * 
+     * Gets Slave Part.
+     * @return CardRules
+     */
+    public CardRules getSlavePart() {
+        return this.slavePart;
+    }
+
     /**
      * Gets the sets printed.
      * 
      * @return the sets printed
      */
     public Set<Entry<String, CardInSet>> getSetsPrinted() {
-        return characteristics.getSetsData().entrySet();
+        return this.characteristics.getSetsData().entrySet();
     }
 
     /**
@@ -104,7 +111,7 @@ public final class CardRules {
      * @return the power
      */
     public String getPower() {
-        return power;
+        return this.power;
     }
 
     /**
@@ -113,7 +120,7 @@ public final class CardRules {
      * @return the int power
      */
     public int getIntPower() {
-        return iPower;
+        return this.iPower;
     }
 
     /**
@@ -122,7 +129,7 @@ public final class CardRules {
      * @return the toughness
      */
     public String getToughness() {
-        return toughness;
+        return this.toughness;
     }
 
     /**
@@ -131,7 +138,7 @@ public final class CardRules {
      * @return the int toughness
      */
     public int getIntToughness() {
-        return iToughness;
+        return this.iToughness;
     }
 
     /**
@@ -140,7 +147,7 @@ public final class CardRules {
      * @return the loyalty
      */
     public String getLoyalty() {
-        return loyalty;
+        return this.loyalty;
     }
 
     /**
@@ -149,7 +156,7 @@ public final class CardRules {
      * @return the rem ai decks
      */
     public boolean getRemAIDecks() {
-        return isRemovedFromAIDecks;
+        return this.isRemovedFromAIDecks;
     }
 
     /**
@@ -158,7 +165,7 @@ public final class CardRules {
      * @return the rem random decks
      */
     public boolean getRemRandomDecks() {
-        return isRemovedFromRandomDecks;
+        return this.isRemovedFromRandomDecks;
     }
 
     /**
@@ -167,11 +174,11 @@ public final class CardRules {
      * @return the p tor loyalty
      */
     public String getPTorLoyalty() {
-        if (getType().isCreature()) {
-            return power + "/" + toughness;
+        if (this.getType().isCreature()) {
+            return this.power + "/" + this.toughness;
         }
-        if (getType().isPlaneswalker()) {
-            return loyalty;
+        if (this.getType().isPlaneswalker()) {
+            return this.loyalty;
         }
         return "";
     }
@@ -182,7 +189,7 @@ public final class CardRules {
      * @return true, if is alt state
      */
     public boolean isAltState() {
-        return isDoubleFaced() && slavePart == null;
+        return this.isDoubleFaced() && (this.slavePart == null);
     }
 
     /**
@@ -191,7 +198,7 @@ public final class CardRules {
      * @return true, if is double faced
      */
     public boolean isDoubleFaced() {
-        return hasOtherFace;
+        return this.hasOtherFace;
     }
 
     /**
@@ -201,8 +208,8 @@ public final class CardRules {
      *            the chars
      * @param isDoubleFacedCard
      *            the is double faced card
-     * @param isAlt0
-     *            the is alt0
+     * @param otherPart
+     *            the otherPart
      * @param removedFromRandomDecks
      *            the removed from random decks
      * @param removedFromAIDecks
@@ -210,31 +217,33 @@ public final class CardRules {
      */
     public CardRules(final CardRuleCharacteristics chars, final boolean isDoubleFacedCard, final CardRules otherPart,
             final boolean removedFromRandomDecks, final boolean removedFromAIDecks) {
-        characteristics = chars;
-        slavePart = otherPart;
-        hasOtherFace = isDoubleFacedCard;
+        this.characteristics = chars;
+        this.slavePart = otherPart;
+        this.hasOtherFace = isDoubleFacedCard;
         this.isRemovedFromAIDecks = removedFromAIDecks;
         this.isRemovedFromRandomDecks = removedFromRandomDecks;
 
         // System.out.println(cardName);
 
-        if (getType().isCreature()) {
-            int slashPos = characteristics.getPtLine() == null ? -1 : characteristics.getPtLine().indexOf('/');
+        if (this.getType().isCreature()) {
+            final int slashPos = this.characteristics.getPtLine() == null ? -1 : this.characteristics.getPtLine()
+                    .indexOf('/');
             if (slashPos == -1) {
-                throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", getName()));
+                throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", this.getName()));
             }
-            this.power = characteristics.getPtLine().substring(0, slashPos);
-            this.toughness = characteristics.getPtLine().substring(slashPos + 1, characteristics.getPtLine().length());
-            this.iPower = StringUtils.isNumeric(power) ? Integer.parseInt(power) : 0;
-            this.iToughness = StringUtils.isNumeric(toughness) ? Integer.parseInt(toughness) : 0;
-        } else if (getType().isPlaneswalker()) {
-            this.loyalty = characteristics.getPtLine();
+            this.power = this.characteristics.getPtLine().substring(0, slashPos);
+            this.toughness = this.characteristics.getPtLine().substring(slashPos + 1,
+                    this.characteristics.getPtLine().length());
+            this.iPower = StringUtils.isNumeric(this.power) ? Integer.parseInt(this.power) : 0;
+            this.iToughness = StringUtils.isNumeric(this.toughness) ? Integer.parseInt(this.toughness) : 0;
+        } else if (this.getType().isPlaneswalker()) {
+            this.loyalty = this.characteristics.getPtLine();
         }
 
-        if (characteristics.getSetsData().isEmpty()) {
-            characteristics.getSetsData().put("???", new CardInSet(CardRarity.Unknown, 1));
+        if (this.characteristics.getSetsData().isEmpty()) {
+            this.characteristics.getSetsData().put("???", new CardInSet(CardRarity.Unknown, 1));
         }
-        setsPrinted = characteristics.getSetsData();
+        this.setsPrinted = this.characteristics.getSetsData();
     }
 
     /**
@@ -245,10 +254,10 @@ public final class CardRules {
      * @return true, if successful
      */
     public boolean rulesContain(final String text) {
-        if (characteristics.getCardRules() == null) {
+        if (this.characteristics.getCardRules() == null) {
             return false;
         }
-        for (String r : characteristics.getCardRules()) {
+        for (final String r : this.characteristics.getCardRules()) {
             if (StringUtils.containsIgnoreCase(r, text)) {
                 return true;
             }
@@ -264,7 +273,7 @@ public final class CardRules {
     public String getLatestSetPrinted() {
         String lastSet = null;
         // TODO: Make a true release-date based sorting
-        for (String cs : setsPrinted.keySet()) {
+        for (final String cs : this.setsPrinted.keySet()) {
             lastSet = cs;
         }
         return lastSet;
@@ -278,11 +287,11 @@ public final class CardRules {
      * @return the sets the info
      */
     public CardInSet getSetInfo(final String setCode) {
-        CardInSet result = setsPrinted.get(setCode);
+        final CardInSet result = this.setsPrinted.get(setCode);
         if (result != null) {
             return result;
         }
-        throw new RuntimeException(String.format("Card '%s' was never printed in set '%s'", getName(), setCode));
+        throw new RuntimeException(String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode));
 
     }
 
@@ -292,7 +301,7 @@ public final class CardRules {
      * @return the rarity from latest set
      */
     public CardRarity getRarityFromLatestSet() {
-        CardInSet cis = setsPrinted.get(getLatestSetPrinted());
+        final CardInSet cis = this.setsPrinted.get(this.getLatestSetPrinted());
         return cis.getRarity();
     }
 
@@ -302,8 +311,8 @@ public final class CardRules {
      * @return the ai status
      */
     public String getAiStatus() {
-        return isRemovedFromAIDecks ? (isRemovedFromRandomDecks ? "AI ?" : "AI")
-                : (isRemovedFromRandomDecks ? "?" : "");
+        return this.isRemovedFromAIDecks ? (this.isRemovedFromRandomDecks ? "AI ?" : "AI")
+                : (this.isRemovedFromRandomDecks ? "?" : "");
     }
 
     /**
@@ -312,11 +321,11 @@ public final class CardRules {
      * @return the ai status comparable
      */
     public Integer getAiStatusComparable() {
-        if (isRemovedFromAIDecks && isRemovedFromRandomDecks) {
+        if (this.isRemovedFromAIDecks && this.isRemovedFromRandomDecks) {
             return Integer.valueOf(3);
-        } else if (isRemovedFromAIDecks) {
+        } else if (this.isRemovedFromAIDecks) {
             return Integer.valueOf(4);
-        } else if (isRemovedFromRandomDecks) {
+        } else if (this.isRemovedFromRandomDecks) {
             return Integer.valueOf(2);
         } else {
             return Integer.valueOf(1);
@@ -447,8 +456,8 @@ public final class CardRules {
          */
         public static Predicate<CardRules> coreType(final boolean isEqual, final String what) {
             try {
-                return coreType(isEqual, CardCoreType.valueOf(CardCoreType.class, what));
-            } catch (Exception e) {
+                return Predicates.coreType(isEqual, Enum.valueOf(CardCoreType.class, what));
+            } catch (final Exception e) {
                 return Predicate.getFalse(CardRules.class);
             }
         }
@@ -477,8 +486,8 @@ public final class CardRules {
          */
         public static Predicate<CardRules> superType(final boolean isEqual, final String what) {
             try {
-                return superType(isEqual, CardSuperType.valueOf(CardSuperType.class, what));
-            } catch (Exception e) {
+                return Predicates.superType(isEqual, Enum.valueOf(CardSuperType.class, what));
+            } catch (final Exception e) {
                 return Predicate.getFalse(CardRules.class);
             }
         }
@@ -564,17 +573,19 @@ public final class CardRules {
             @Override
             public boolean isTrue(final CardRules card) {
                 boolean shouldConatin;
-                switch (field) {
+                switch (this.field) {
                 case NAME:
-                    return op(card.getName(), operand);
+                    return this.op(card.getName(), this.operand);
                 case SUBTYPE:
-                    shouldConatin = getOperator() == StringOp.CONTAINS || getOperator() == StringOp.EQUALS;
-                    return shouldConatin == card.getType().subTypeContains(operand);
+                    shouldConatin = (this.getOperator() == StringOp.CONTAINS)
+                            || (this.getOperator() == StringOp.EQUALS);
+                    return shouldConatin == card.getType().subTypeContains(this.operand);
                 case RULES:
-                    shouldConatin = getOperator() == StringOp.CONTAINS || getOperator() == StringOp.EQUALS;
-                    return shouldConatin == card.rulesContain(operand);
+                    shouldConatin = (this.getOperator() == StringOp.CONTAINS)
+                            || (this.getOperator() == StringOp.EQUALS);
+                    return shouldConatin == card.rulesContain(this.operand);
                 case JOINED_TYPE:
-                    return op(card.getType().toString(), operand);
+                    return this.op(card.getType().toString(), this.operand);
                 default:
                     return false;
                 }
@@ -596,23 +607,23 @@ public final class CardRules {
             private final byte color;
 
             public LeafColor(final ColorOperator operator, final byte thatColor) {
-                op = operator;
-                color = thatColor;
+                this.op = operator;
+                this.color = thatColor;
             }
 
             @Override
             public boolean isTrue(final CardRules subject) {
-                switch (op) {
+                switch (this.op) {
                 case CountColors:
-                    return subject.getColor().countColors() == color;
+                    return subject.getColor().countColors() == this.color;
                 case CountColorsGreaterOrEqual:
-                    return subject.getColor().countColors() >= color;
+                    return subject.getColor().countColors() >= this.color;
                 case Equals:
-                    return subject.getColor().isEqual(color);
+                    return subject.getColor().isEqual(this.color);
                 case HasAllOf:
-                    return subject.getColor().hasAllColors(color);
+                    return subject.getColor().hasAllColors(this.color);
                 case HasAnyOf:
-                    return subject.getColor().hasAnyColor(color);
+                    return subject.getColor().hasAnyColor(this.color);
                 default:
                     return false;
                 }
@@ -630,29 +641,29 @@ public final class CardRules {
 
             public LeafNumber(final CardField field, final ComparableOp op, final int what) {
                 this.field = field;
-                operand = what;
-                operator = op;
+                this.operand = what;
+                this.operator = op;
             }
 
             @Override
             public boolean isTrue(final CardRules card) {
                 int value;
-                switch (field) {
+                switch (this.field) {
                 case CMC:
-                    return op(card.getManaCost().getCMC(), operand);
+                    return this.op(card.getManaCost().getCMC(), this.operand);
                 case POWER:
                     value = card.getIntPower();
-                    return value >= 0 ? op(value, operand) : false;
+                    return value >= 0 ? this.op(value, this.operand) : false;
                 case TOUGHNESS:
                     value = card.getIntToughness();
-                    return value >= 0 ? op(value, operand) : false;
+                    return value >= 0 ? this.op(value, this.operand) : false;
                 default:
                     return false;
                 }
             }
 
             private boolean op(final int op1, final int op2) {
-                switch (operator) {
+                switch (this.operator) {
                 case EQUALS:
                     return op1 == op2;
                 case GREATER_THAN:
@@ -677,12 +688,12 @@ public final class CardRules {
 
             @Override
             public boolean isTrue(final CardRules card) {
-                return shouldBeEqual == card.getType().typeContains(operand);
+                return this.shouldBeEqual == card.getType().typeContains(this.operand);
             }
 
             public PredicateCoreType(final CardCoreType type, final boolean wantEqual) {
-                operand = type;
-                shouldBeEqual = wantEqual;
+                this.operand = type;
+                this.shouldBeEqual = wantEqual;
             }
         }
 
@@ -692,12 +703,12 @@ public final class CardRules {
 
             @Override
             public boolean isTrue(final CardRules card) {
-                return shouldBeEqual == card.getType().superTypeContains(operand);
+                return this.shouldBeEqual == card.getType().superTypeContains(this.operand);
             }
 
             public PredicateSuperType(final CardSuperType type, final boolean wantEqual) {
-                operand = type;
-                shouldBeEqual = wantEqual;
+                this.operand = type;
+                this.shouldBeEqual = wantEqual;
             }
         }
 
@@ -707,12 +718,12 @@ public final class CardRules {
 
             @Override
             public boolean isTrue(final CardRules card) {
-                return card.getRarityFromLatestSet().equals(operand) == shouldBeEqual;
+                return card.getRarityFromLatestSet().equals(this.operand) == this.shouldBeEqual;
             }
 
             public PredicateLastesSetRarity(final CardRarity type, final boolean wantEqual) {
-                operand = type;
-                shouldBeEqual = wantEqual;
+                this.operand = type;
+                this.shouldBeEqual = wantEqual;
             }
         }
 
@@ -720,12 +731,12 @@ public final class CardRules {
             private final List<String> sets;
 
             public PredicateExitsInSets(final List<String> wantSets) {
-                sets = wantSets; // maybe should make a copy here?
+                this.sets = wantSets; // maybe should make a copy here?
             }
 
             @Override
             public boolean isTrue(final CardRules subject) {
-                for (String s : sets) {
+                for (final String s : this.sets) {
                     if (subject.setsPrinted.containsKey(s)) {
                         return true;
                     }
@@ -740,13 +751,13 @@ public final class CardRules {
         public static class Presets {
 
             /** The Constant isCreature. */
-            public static final Predicate<CardRules> IS_CREATURE = coreType(true, CardCoreType.Creature);
+            public static final Predicate<CardRules> IS_CREATURE = Predicates.coreType(true, CardCoreType.Creature);
 
             /** The Constant isArtifact. */
-            public static final Predicate<CardRules> IS_ARTIFACT = coreType(true, CardCoreType.Artifact);
+            public static final Predicate<CardRules> IS_ARTIFACT = Predicates.coreType(true, CardCoreType.Artifact);
 
             /** The Constant isLand. */
-            public static final Predicate<CardRules> IS_LAND = coreType(true, CardCoreType.Land);
+            public static final Predicate<CardRules> IS_LAND = Predicates.coreType(true, CardCoreType.Land);
 
             /** The Constant isBasicLand. */
             public static final Predicate<CardRules> IS_BASIC_LAND = new Predicate<CardRules>() {
@@ -757,54 +768,56 @@ public final class CardRules {
             };
 
             /** The Constant isPlaneswalker. */
-            public static final Predicate<CardRules> IS_PLANESWALKER = coreType(true, CardCoreType.Planeswalker);
+            public static final Predicate<CardRules> IS_PLANESWALKER = Predicates.coreType(true,
+                    CardCoreType.Planeswalker);
 
             /** The Constant isInstant. */
-            public static final Predicate<CardRules> IS_INSTANT = coreType(true, CardCoreType.Instant);
+            public static final Predicate<CardRules> IS_INSTANT = Predicates.coreType(true, CardCoreType.Instant);
 
             /** The Constant isSorcery. */
-            public static final Predicate<CardRules> IS_SORCERY = coreType(true, CardCoreType.Sorcery);
+            public static final Predicate<CardRules> IS_SORCERY = Predicates.coreType(true, CardCoreType.Sorcery);
 
             /** The Constant isEnchantment. */
-            public static final Predicate<CardRules> IS_ENCHANTMENT = coreType(true, CardCoreType.Enchantment);
+            public static final Predicate<CardRules> IS_ENCHANTMENT = Predicates.coreType(true,
+                    CardCoreType.Enchantment);
 
             /** The Constant isNonLand. */
-            public static final Predicate<CardRules> IS_NON_LAND = coreType(false, CardCoreType.Land);
+            public static final Predicate<CardRules> IS_NON_LAND = Predicates.coreType(false, CardCoreType.Land);
 
             /** The Constant isNonCreatureSpell. */
-            public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicate.compose(IS_CREATURE,
-                    PredicatesOp.NOR, IS_LAND);
+            public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicate.compose(Presets.IS_CREATURE,
+                    PredicatesOp.NOR, Presets.IS_LAND);
 
             /** The Constant isWhite. */
-            public static final Predicate<CardRules> IS_WHITE = isColor(CardColor.WHITE);
+            public static final Predicate<CardRules> IS_WHITE = Predicates.isColor(CardColor.WHITE);
 
             /** The Constant isBlue. */
-            public static final Predicate<CardRules> IS_BLUE = isColor(CardColor.BLUE);
+            public static final Predicate<CardRules> IS_BLUE = Predicates.isColor(CardColor.BLUE);
 
             /** The Constant isBlack. */
-            public static final Predicate<CardRules> IS_BLACK = isColor(CardColor.BLACK);
+            public static final Predicate<CardRules> IS_BLACK = Predicates.isColor(CardColor.BLACK);
 
             /** The Constant isRed. */
-            public static final Predicate<CardRules> IS_RED = isColor(CardColor.RED);
+            public static final Predicate<CardRules> IS_RED = Predicates.isColor(CardColor.RED);
 
             /** The Constant isGreen. */
-            public static final Predicate<CardRules> IS_GREEN = isColor(CardColor.GREEN);
+            public static final Predicate<CardRules> IS_GREEN = Predicates.isColor(CardColor.GREEN);
 
             /** The Constant isColorless. */
-            public static final Predicate<CardRules> IS_COLORLESS = hasCntColors((byte) 0);
+            public static final Predicate<CardRules> IS_COLORLESS = Predicates.hasCntColors((byte) 0);
 
             /** The Constant isMulticolor. */
-            public static final Predicate<CardRules> IS_MULTICOLOR = hasAtLeastCntColors((byte) 2);
+            public static final Predicate<CardRules> IS_MULTICOLOR = Predicates.hasAtLeastCntColors((byte) 2);
 
             /** The Constant colors. */
             public static final List<Predicate<CardRules>> COLORS = new ArrayList<Predicate<CardRules>>();
             static {
-                COLORS.add(IS_WHITE);
-                COLORS.add(IS_BLUE);
-                COLORS.add(IS_BLACK);
-                COLORS.add(IS_RED);
-                COLORS.add(IS_GREEN);
-                COLORS.add(IS_COLORLESS);
+                Presets.COLORS.add(Presets.IS_WHITE);
+                Presets.COLORS.add(Presets.IS_BLUE);
+                Presets.COLORS.add(Presets.IS_BLACK);
+                Presets.COLORS.add(Presets.IS_RED);
+                Presets.COLORS.add(Presets.IS_GREEN);
+                Presets.COLORS.add(Presets.IS_COLORLESS);
             }
 
             /** The Constant constantTrue. */
@@ -813,22 +826,23 @@ public final class CardRules {
             // Think twice before using these, since rarity is a prop of printed
             // card.
             /** The Constant isInLatestSetCommon. */
-            public static final Predicate<CardRules> IS_IN_LATEST_SET_COMMON = rarityInCardsLatestSet(true,
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_COMMON = Predicates.rarityInCardsLatestSet(true,
                     CardRarity.Common);
 
             /** The Constant isInLatestSetUncommon. */
-            public static final Predicate<CardRules> IS_IN_LATEST_SET_UNCOMMON = rarityInCardsLatestSet(true,
-                    CardRarity.Uncommon);
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_UNCOMMON = Predicates.rarityInCardsLatestSet(
+                    true, CardRarity.Uncommon);
 
             /** The Constant isInLatestSetRare. */
-            public static final Predicate<CardRules> IS_IN_LATEST_SET_RARE = rarityInCardsLatestSet(true, CardRarity.Rare);
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_RARE = Predicates.rarityInCardsLatestSet(true,
+                    CardRarity.Rare);
 
             /** The Constant isInLatestSetMythicRare. */
-            public static final Predicate<CardRules> IS_IN_LATEST_SET_MYTHIC_RARE = rarityInCardsLatestSet(true,
-                    CardRarity.MythicRare);
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_MYTHIC_RARE = Predicates.rarityInCardsLatestSet(
+                    true, CardRarity.MythicRare);
 
             /** The Constant isInLatestSetSpecial. */
-            public static final Predicate<CardRules> IS_IN_LATEST_SET_SPECIAL = rarityInCardsLatestSet(true,
+            public static final Predicate<CardRules> IS_IN_LATEST_SET_SPECIAL = Predicates.rarityInCardsLatestSet(true,
                     CardRarity.Special);
         }
     }

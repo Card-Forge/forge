@@ -1411,7 +1411,7 @@ public final class AbilityFactoryChoose {
                         // still missing a listener to display the card preview
                         // in the right
                         name = choice.getSelectedValue();
-                        if(AllZone.getCardFactory().getCard(name, p).isValid(valid, host.getController(), host)) {
+                        if (AllZone.getCardFactory().getCard(name, p).isValid(valid, host.getController(), host)) {
                             host.setNamedCard(choice.getSelectedValue());
                             ok = true;
                         }

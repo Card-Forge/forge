@@ -48,7 +48,7 @@ public class CardRulesReader {
      */
     public final CardRules getCard() {
         boolean hasOtherPart = this.characteristics[1] != null;
-        CardRules otherPart = hasOtherPart 
+        CardRules otherPart = hasOtherPart
                 ? new CardRules(this.characteristics[1], true, null, this.removedFromRandomDecks, this.removedFromAIDecks)
                 : null;
 

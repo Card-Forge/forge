@@ -169,7 +169,7 @@ public class GenerateThemeDeck {
 
                 int lc = 0;
                 while ((cardCounts.get(s) >= g.maxCnt) || (lc > size)) {
-                 // looping
+                    // looping
                     // forever
                     s = g.cardnames.get(r.nextInt(cnSize));
                     lc++;
@@ -199,7 +199,7 @@ public class GenerateThemeDeck {
         tmpDeck += "numBLands:" + numBLands + "\n";
 
         if (numBLands > 0) {
-         // attempt to optimize basic land counts according to
+            // attempt to optimize basic land counts according to
             // color representation
             final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0), new CCnt("Forest", 0) };
@@ -317,7 +317,7 @@ public class GenerateThemeDeck {
     class CCnt {
 
         /** The Color. */
-        private String color;
+        private final String color;
 
         /** The Count. */
         private int count;
@@ -344,7 +344,7 @@ public class GenerateThemeDeck {
     class Grp {
 
         /** The Cardnames. */
-        private ArrayList<String> cardnames = new ArrayList<String>();
+        private final ArrayList<String> cardnames = new ArrayList<String>();
 
         /** The Max cnt. */
         private int maxCnt;

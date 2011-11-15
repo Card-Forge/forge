@@ -25,7 +25,7 @@ public class StaticAbility {
     private boolean temporarilySuppressed = false;
 
     /** The suppressed. */
-    private boolean suppressed = false;
+    private final boolean suppressed = false;
 
     /**
      * <p>
@@ -285,7 +285,7 @@ public class StaticAbility {
 
         return false;
     }
-    
+
     /**
      * Apply ability.
      * 
@@ -293,13 +293,11 @@ public class StaticAbility {
      *            the mode
      * @param card
      *            the card
-     * @param activator
-     *            the activator
-     * @param sa
+     * @param spellAbility
      *            the ability
      * @return true, if successful
      */
-    public final boolean applyAbility(final String mode, final Card card, SpellAbility sa) {
+    public final boolean applyAbility(final String mode, final Card card, final SpellAbility spellAbility) {
 
         // don't apply the ability if it hasn't got the right mode
         if (!this.mapParams.get("Mode").equals(mode)) {
@@ -311,11 +309,11 @@ public class StaticAbility {
         }
 
         if (mode.equals("CantBeActivated")) {
-            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, sa);
+            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, spellAbility);
         }
-        
+
         if (mode.equals("CantTarget")) {
-            return StaticAbilityCantTarget.applyCantTargetAbility(this, card, sa);
+            return StaticAbilityCantTarget.applyCantTargetAbility(this, card, spellAbility);
         }
 
         return false;
@@ -331,36 +329,36 @@ public class StaticAbility {
 
         Zone effectZone = Zone.Battlefield; // default
 
-        if (mapParams.containsKey("EffectZone")) {
+        if (this.mapParams.containsKey("EffectZone")) {
             effectZone = Zone.smartValueOf(this.mapParams.get("EffectZone"));
         }
 
-        if ((effectZone != null) && (!hostCard.isInZone(effectZone) || hostCard.isPhasedOut())) {
+        if ((effectZone != null) && (!this.hostCard.isInZone(effectZone) || this.hostCard.isPhasedOut())) {
             return false;
         }
 
-        if (mapParams.containsKey("Threshold") && !controller.hasThreshold()) {
+        if (this.mapParams.containsKey("Threshold") && !controller.hasThreshold()) {
             return false;
         }
 
-        if (mapParams.containsKey("Hellbent") && !controller.hasHellbent()) {
+        if (this.mapParams.containsKey("Hellbent") && !controller.hasHellbent()) {
             return false;
         }
 
-        if (mapParams.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
+        if (this.mapParams.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
             return false;
         }
 
-        if (mapParams.containsKey("PlayerTurn") && !AllZone.getPhase().isPlayerTurn(controller)) {
+        if (this.mapParams.containsKey("PlayerTurn") && !AllZone.getPhase().isPlayerTurn(controller)) {
             return false;
         }
 
-        if (mapParams.containsKey("OpponentTurn") && !AllZone.getPhase().isPlayerTurn(controller.getOpponent())) {
+        if (this.mapParams.containsKey("OpponentTurn") && !AllZone.getPhase().isPlayerTurn(controller.getOpponent())) {
             return false;
         }
-        
-        if (mapParams.containsKey("Phases")) {
-            String phases = mapParams.get("Phases");
+
+        if (this.mapParams.containsKey("Phases")) {
+            String phases = this.mapParams.get("Phases");
 
             if (phases.contains("->")) {
                 // If phases lists a Range, split and Build Activate String

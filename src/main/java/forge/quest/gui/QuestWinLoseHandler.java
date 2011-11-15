@@ -336,7 +336,7 @@ public class QuestWinLoseHandler extends WinLoseModeHandler {
         default:
             break;
         }
-        if (estateValue > 0){
+        if (estateValue > 0) {
             credEstates = (int) (estateValue * credTotal);
             sb.append("Estates bonus: ").append((int) (100 * estateValue)).append("%.<br>");
             credTotal += credEstates;

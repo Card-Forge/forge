@@ -373,14 +373,14 @@ public final class AbilityFactoryReveal {
                         // - for when it exists
                     } else if (params.containsKey("RevealOptional")) {
                         String question = "Reveal: ";
-                        for (Card c : top) {
+                        for (final Card c : top) {
                             question += c + " ";
                         }
                         if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
                             GuiUtils.getChoice("Revealing cards from library", top.toArray());
                             // AllZone.getGameAction().revealToCopmuter(top.toArray());
                             if (params.containsKey("RememberRevealed")) {
-                                for (Card one : top) {
+                                for (final Card one : top) {
                                     host.addRemembered(one);
                                 }
                             }
@@ -947,8 +947,8 @@ public final class AbilityFactoryReveal {
                     final Card c = itr.next();
                     AllZone.getGameAction().moveTo(revealedDest, c, revealedLibPos);
                 }
-                
-                if(params.containsKey("Shuffle")) {
+
+                if (params.containsKey("Shuffle")) {
                     p.shuffle();
                 }
             } // end foreach player

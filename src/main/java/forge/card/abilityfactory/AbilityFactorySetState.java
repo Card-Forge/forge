@@ -193,30 +193,23 @@ public class AbilityFactorySetState {
                     continue;
                 }
             }
-            if(abilityFactory.getMapParams().containsKey("Transform"))
-            {
-                if(tgt.getCurState().equals("Transformed")) {
+            if (abilityFactory.getMapParams().containsKey("Transform")) {
+                if (tgt.getCurState().equals("Transformed")) {
                     tgt.setState("Original");
-                }
-                else if(tgt.hasAlternateState() && tgt.getCurState().equals("Original")) {
-                    if(tgt.isDoubleFaced()) {
+                } else if (tgt.hasAlternateState() && tgt.getCurState().equals("Original")) {
+                    if (tgt.isDoubleFaced()) {
                         tgt.setState("Transformed");
                     }
                 }
-            }
-            else if(abilityFactory.getMapParams().containsKey("Flip")) 
-            {
-                if(tgt.getCurState().equals("Flipped")) {
+            } else if (abilityFactory.getMapParams().containsKey("Flip")) {
+                if (tgt.getCurState().equals("Flipped")) {
                     tgt.setState("Original");
-                }
-                else if(tgt.hasAlternateState()) {
-                    if(tgt.isFlip() && tgt.getCurState().equals("Original")) {
+                } else if (tgt.hasAlternateState()) {
+                    if (tgt.isFlip() && tgt.getCurState().equals("Original")) {
                         tgt.setState("Flipped");
                     }
                 }
-            }
-            else
-            {
+            } else {
                 tgt.setState(abilityFactory.getMapParams().get("NewState"));
             }
         }
@@ -364,38 +357,32 @@ public class AbilityFactorySetState {
 
         for (int i = 0; i < list.size(); i++) {
             String mode = list.get(i).getCurState();
-            if(list.get(i).isDoubleFaced()) {
-                if(list.get(i).getCurState().equals("Original"))
-                {
+            if (list.get(i).isDoubleFaced()) {
+                if (list.get(i).getCurState().equals("Original")) {
                     mode = "Transformed";
-                }
-                else {
+                } else {
                     mode = "Original";
                 }
-                
-                if(list.get(i).setState(mode) && remChanged) {
+
+                if (list.get(i).setState(mode) && remChanged) {
                     card.addRemembered(list.get(i));
                 }
-            }
-            else if(list.get(i).isFlip()) {
-                if(list.get(i).getCurState().equals("Original"))
-                {
+            } else if (list.get(i).isFlip()) {
+                if (list.get(i).getCurState().equals("Original")) {
                     mode = "Flipped";
-                }
-                else if(list.get(i).getCurState().equals("Flipped")){
+                } else if (list.get(i).getCurState().equals("Flipped")) {
                     mode = "Original";
                 }
-                
-                if(list.get(i).setState(mode) && remChanged) {
+
+                if (list.get(i).setState(mode) && remChanged) {
+                    card.addRemembered(list.get(i));
+                }
+            } else {
+                if (list.get(i).setState(abilityFactory.getMapParams().get("NewState")) && remChanged) {
                     card.addRemembered(list.get(i));
                 }
             }
-            else {
-                if(list.get(i).setState(abilityFactory.getMapParams().get("NewState"))  && remChanged) {
-                    card.addRemembered(list.get(i));
-                }
-            }
-            
+
         }
     }
 

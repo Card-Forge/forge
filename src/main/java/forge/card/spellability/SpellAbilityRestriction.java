@@ -182,7 +182,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || cardZone.is(Zone.Battlefield) || !this.getZone().equals(Zone.Hand)) {
                 return false;
-            } else if (!c.hasStartOfKeyword("May be played") 
+            } else if (!c.hasStartOfKeyword("May be played")
                     && !(c.hasStartOfKeyword("Flashback") && cardZone.is(Zone.Graveyard))) {
                 return false;
             }

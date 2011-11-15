@@ -2,7 +2,6 @@ package forge.gui.deckeditor;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -38,13 +37,13 @@ public class CardPanelHeavy extends CardPanelBase {
 
     // Controls to show card details
     /** The detail. */
-    private CardDetailPanel detail = new CardDetailPanel(null);
+    private final CardDetailPanel detail = new CardDetailPanel(null);
 
     /** The picture. */
-    private CardPanel picture = new CardPanel(null);
+    private final CardPanel picture = new CardPanel(null);
 
     /** The picture view panel. */
-    private ViewPanel pictureViewPanel = new ViewPanel();
+    private final ViewPanel pictureViewPanel = new ViewPanel();
 
     // fake card to allow picture changes
     /** The c card hq. */
@@ -149,49 +148,19 @@ public class CardPanelHeavy extends CardPanelBase {
      */
     final void changeStateButtonActionPerformed(final ActionEvent e) {
         final Card cur = this.picture.getCard();
-        if(cur.isInAlternateState()) {
+        if (cur.isInAlternateState()) {
             cur.setState("Original");
-        }
-        else {
-            if(cur.isFlip()) {
+        } else {
+            if (cur.isFlip()) {
                 cur.setState("Flipped");
             }
-            if(cur.isDoubleFaced()) {
+            if (cur.isDoubleFaced()) {
                 cur.setState("Transformed");
             }
         }
 
         this.picture.setCard(cur);
         this.detail.setCard(cur);
-    }
-
-    /**
-     * <p>
-     * changePictureButton_actionPerformed. Removed Oct 25 2011 - Hellfish
-     * </p>
-     * 
-     * @param e
-     *            a {@link java.awt.event.ActionEvent} object.
-     */
-    private void changePictureButtonActionPerformed(final ActionEvent e) {
-        if (this.cCardHQ != null) {
-            final File file = this.getImportFilename();
-            if (file != null) {
-                final String fileName = GuiDisplayUtil.cleanString(this.cCardHQ.getName()) + ".jpg";
-                final File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-                final File f = new File(base, fileName);
-                f.delete();
-
-                try {
-                    org.apache.commons.io.FileUtils.copyFile(file, f);
-                } catch (final IOException e1) {
-                    // TODO Auto-generated catch block ignores the exception,
-                    // but sends it to System.err and probably forge.log.
-                    e1.printStackTrace();
-                }
-                this.setCard(this.cCardHQ);
-            }
-        }
     }
 
     /**
@@ -220,7 +189,7 @@ public class CardPanelHeavy extends CardPanelBase {
     }
 
     /** The dck filter. */
-    private FileFilter dckFilter = new FileFilter() {
+    private final FileFilter dckFilter = new FileFilter() {
 
         @Override
         public boolean accept(final File f) {

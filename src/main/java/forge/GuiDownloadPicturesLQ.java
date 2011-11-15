@@ -52,7 +52,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
                 c.setState("Flip");
                 cList.addAll(createDLObjects(c, base));
             }
-            if(c.isDoubleFaced()) {
+            if (c.isDoubleFaced()) {
                 c.setState("Transformed");
                 cList.addAll(createDLObjects(c, base));
             }

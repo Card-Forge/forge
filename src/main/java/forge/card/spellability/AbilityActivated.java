@@ -7,7 +7,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;

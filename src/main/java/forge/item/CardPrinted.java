@@ -176,10 +176,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      *            the rare
      * @param index
      *            the index
-     * @param isAlt
-     *            the is alt
-     * @param isDF
-     *            the is df
      * @return the card printed
      */
     static CardPrinted build(final CardRules c, final String set, final CardRarity rare, final int index) {

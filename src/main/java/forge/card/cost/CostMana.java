@@ -271,8 +271,8 @@ public class CostMana extends CostPart {
 
                 this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
                 if (this.manaCost.isPaid()) {
-                    if (!colorsPaid.contains(this.manaCost.getColorsPaid())) {
-                        colorsPaid += this.manaCost.getColorsPaid();
+                    if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
+                        this.colorsPaid += this.manaCost.getColorsPaid();
                     }
                     this.manaCost = new ManaCost(Integer.toString(numX));
                     this.xPaid++;
@@ -295,8 +295,8 @@ public class CostMana extends CostPart {
                 this.stop();
                 payment.getCard().setXManaCostPaid(this.xPaid);
                 payment.paidCost(costMana);
-                payment.getCard().setColorsPaid(colorsPaid);
-                payment.getCard().setSunburstValue(colorsPaid.length());
+                payment.getCard().setColorsPaid(this.colorsPaid);
+                payment.getCard().setSunburstValue(this.colorsPaid.length());
             }
 
         };
@@ -393,16 +393,19 @@ public class CostMana extends CostPart {
                     source.setXManaCostPaid(0);
                     CostUtil.setInput(CostMana.inputPayXMana(sa, payment, costMana, costMana.getXMana()));
                 }
-                
-                //If this is a spell with convoke, re-tap all creatures used for it.
-                //This is done to make sure Taps triggers go off at the right time
-                //(i.e. AFTER cost payment, they are tapped previously as well so that 
-                //any mana tapabilities can't be used in payment as well as being tapped for convoke)
-                
-                if(sa.getTappedForConvoke() != null)
-                {
+
+                // If this is a spell with convoke, re-tap all creatures used
+                // for it.
+                // This is done to make sure Taps triggers go off at the right
+                // time
+                // (i.e. AFTER cost payment, they are tapped previously as well
+                // so that
+                // any mana tapabilities can't be used in payment as well as
+                // being tapped for convoke)
+
+                if (sa.getTappedForConvoke() != null) {
                     AllZone.getTriggerHandler().suppressMode("Untaps");
-                    for(Card c : sa.getTappedForConvoke()) {
+                    for (final Card c : sa.getTappedForConvoke()) {
                         c.untap();
                         c.tap();
                     }
@@ -414,17 +417,17 @@ public class CostMana extends CostPart {
 
             @Override
             public void selectButtonCancel() {
-                //If we're paying for a spell with convoke, untap all creatures used for it.
-                if(sa.getTappedForConvoke() != null)
-                {
+                // If we're paying for a spell with convoke, untap all creatures
+                // used for it.
+                if (sa.getTappedForConvoke() != null) {
                     AllZone.getTriggerHandler().suppressMode("Untaps");
-                    for(Card c : sa.getTappedForConvoke()) {
+                    for (final Card c : sa.getTappedForConvoke()) {
                         c.untap();
                     }
                     AllZone.getTriggerHandler().clearSuppression("Untaps");
                     sa.clearTappedForConvoke();
                 }
-                
+
                 this.stop();
                 this.resetManaCost();
                 payment.cancelCost();

@@ -46,20 +46,20 @@ public class StaticAbilityCantBeCast {
     }
 
     /**
-     * TODO Write javadoc for this method.
+     * Applies Cant Be Activated ability.
      * 
-     * @param stAb
+     * @param staticAbility
      *            a StaticAbility
      * @param card
      *            the card
-     * @param activator
-     *            the activator
+     * @param spellAbility
+     *          a SpellAbility
      * @return true, if successful
      */
-    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final Card card, SpellAbility sa) {
-        final HashMap<String, String> params = stAb.getMapParams();
-        final Card hostCard = stAb.getHostCard();
-        final Player activator = sa.getActivatingPlayer();
+    public static boolean applyCantBeActivatedAbility(final StaticAbility staticAbility, final Card card, final SpellAbility spellAbility) {
+        final HashMap<String, String> params = staticAbility.getMapParams();
+        final Card hostCard = staticAbility.getHostCard();
+        final Player activator = spellAbility.getActivatingPlayer();
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
@@ -70,8 +70,8 @@ public class StaticAbilityCantBeCast {
                 && !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard)) {
             return false;
         }
-        
-        if (params.containsKey("NonMana") && sa instanceof AbilityMana) {
+
+        if (params.containsKey("NonMana") && (spellAbility instanceof AbilityMana)) {
             return false;
         }
 

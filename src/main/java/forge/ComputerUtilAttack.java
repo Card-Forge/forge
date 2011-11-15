@@ -20,12 +20,12 @@ import forge.card.trigger.Trigger;
 public class ComputerUtilAttack {
 
     // possible attackers and blockers
-    private CardList attackers;
-    private CardList blockers;
+    private final CardList attackers;
+    private final CardList blockers;
     private CardList playerCreatures;
 
-    private Random random = MyRandom.getRandom();
-    private final int randomInt = random.nextInt();
+    private final Random random = MyRandom.getRandom();
+    private final int randomInt = this.random.nextInt();
 
     private CardList humanList; // holds human player creatures
     private CardList computerList; // holds computer creatures
@@ -42,8 +42,6 @@ public class ComputerUtilAttack {
      *            an array of {@link forge.Card} objects.
      * @param possibleBlockers
      *            an array of {@link forge.Card} objects.
-     * @param blockerLife
-     *            a int.
      */
     public ComputerUtilAttack(final Card[] possibleAttackers, final Card[] possibleBlockers) {
         this(new CardList(possibleAttackers), new CardList(possibleBlockers));
@@ -58,20 +56,18 @@ public class ComputerUtilAttack {
      *            a {@link forge.CardList} object.
      * @param possibleBlockers
      *            a {@link forge.CardList} object.
-     * @param blockerLife
-     *            a int.
      */
     public ComputerUtilAttack(final CardList possibleAttackers, final CardList possibleBlockers) {
-        humanList = new CardList(possibleBlockers.toArray());
-        humanList = humanList.getType("Creature");
+        this.humanList = new CardList(possibleBlockers.toArray());
+        this.humanList = this.humanList.getType("Creature");
 
-        computerList = new CardList(possibleAttackers.toArray());
-        computerList = computerList.getType("Creature");
-        playerCreatures = new CardList(possibleBlockers.toArray());
-        playerCreatures = playerCreatures.getType("Creature");
+        this.computerList = new CardList(possibleAttackers.toArray());
+        this.computerList = this.computerList.getType("Creature");
+        this.playerCreatures = new CardList(possibleBlockers.toArray());
+        this.playerCreatures = this.playerCreatures.getType("Creature");
 
-        attackers = getPossibleAttackers(possibleAttackers);
-        blockers = getPossibleBlockers(possibleBlockers, attackers);
+        this.attackers = this.getPossibleAttackers(possibleAttackers);
+        this.blockers = this.getPossibleBlockers(possibleBlockers, this.attackers);
     } // constructor
 
     /**
@@ -84,20 +80,20 @@ public class ComputerUtilAttack {
      * @return a {@link forge.CardList} object.
      */
     public final CardList sortAttackers(final CardList in) {
-        CardList list = new CardList();
+        final CardList list = new CardList();
 
         // Cards with triggers should come first (for Battle Cry)
-        for (Card attacker : in) {
-            ArrayList<Trigger> registeredTriggers = attacker.getTriggers();
-            for (Trigger trigger : registeredTriggers) {
-                HashMap<String, String> trigParams = trigger.getMapParams();
+        for (final Card attacker : in) {
+            final ArrayList<Trigger> registeredTriggers = attacker.getTriggers();
+            for (final Trigger trigger : registeredTriggers) {
+                final HashMap<String, String> trigParams = trigger.getMapParams();
                 if (trigParams.get("Mode").equals("Attacks")) {
                     list.add(attacker);
                 }
             }
         }
 
-        for (Card attacker : in) {
+        for (final Card attacker : in) {
             if (!list.contains(attacker)) {
                 list.add(attacker);
             }
@@ -121,7 +117,7 @@ public class ComputerUtilAttack {
     public final boolean isEffectiveAttacker(final Card attacker, final Combat combat) {
 
         // if the attacker will die when attacking don't attack
-        if (attacker.getNetDefense() + CombatUtil.predictToughnessBonusOfAttacker(attacker, null, combat) <= 0) {
+        if ((attacker.getNetDefense() + CombatUtil.predictToughnessBonusOfAttacker(attacker, null, combat)) <= 0) {
             return false;
         }
 
@@ -132,10 +128,10 @@ public class ComputerUtilAttack {
             return true;
         }
 
-        CardList controlledByCompy = AllZone.getComputerPlayer().getAllCards();
+        final CardList controlledByCompy = AllZone.getComputerPlayer().getAllCards();
 
-        for (Card c : controlledByCompy) {
-            for (Trigger trigger : c.getTriggers()) {
+        for (final Card c : controlledByCompy) {
+            for (final Trigger trigger : c.getTriggers()) {
                 if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
                     return true;
                 }
@@ -157,6 +153,7 @@ public class ComputerUtilAttack {
     public final CardList getPossibleAttackers(final CardList in) {
         CardList list = new CardList(in.toArray());
         list = list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 return CombatUtil.canAttack(c);
             }
@@ -179,11 +176,12 @@ public class ComputerUtilAttack {
         CardList possibleBlockers = new CardList(blockers.toArray());
         final CardList attackerList = new CardList(attackers.toArray());
         possibleBlockers = possibleBlockers.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 if (!c.isCreature()) {
                     return false;
                 }
-                for (Card attacker : attackerList) {
+                for (final Card attacker : attackerList) {
                     if (CombatUtil.canBlock(attacker, c)) {
                         return true;
                     }
@@ -209,15 +207,15 @@ public class ComputerUtilAttack {
      * @return a {@link forge.CardList} object.
      */
     public final CardList notNeededAsBlockers(final CardList attackers, final Combat combat) {
-        CardList notNeededAsBlockers = new CardList(attackers.toArray());
+        final CardList notNeededAsBlockers = new CardList(attackers.toArray());
         CardListUtil.sortAttackLowFirst(attackers);
         int blockersNeeded = attackers.size();
 
         // don't hold back creatures that can't block any of the human creatures
-        CardList list = getPossibleBlockers(attackers, humanList);
+        final CardList list = this.getPossibleBlockers(attackers, this.humanList);
 
         for (int i = 0; i < list.size(); i++) {
-            if (!doesHumanAttackAndWin(i)) {
+            if (!this.doesHumanAttackAndWin(i)) {
                 blockersNeeded = i;
                 break;
             } else {
@@ -236,34 +234,33 @@ public class ComputerUtilAttack {
         // In addition, if the computer guesses it needs no blockers, make sure
         // that
         // it won't be surprised by Exalted
-        int humanExaltedBonus = countExaltedBonus(AllZone.getHumanPlayer());
+        final int humanExaltedBonus = this.countExaltedBonus(AllZone.getHumanPlayer());
 
         if (humanExaltedBonus > 0) {
-            int nFinestHours = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size();
+            final int nFinestHours = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size();
 
-            if ((blockersNeeded == 0 || nFinestHours > 0) && humanList.size() > 0) {
+            if (((blockersNeeded == 0) || (nFinestHours > 0)) && (this.humanList.size() > 0)) {
                 //
                 // total attack = biggest creature + exalted, *2 if Rafiq is in
                 // play
-                int humanBaseAttack = getAttack(humanList.get(0)) + humanExaltedBonus;
+                int humanBaseAttack = this.getAttack(this.humanList.get(0)) + humanExaltedBonus;
                 if (nFinestHours > 0) {
                     // For Finest Hour, one creature could attack and get the
                     // bonus TWICE
                     humanBaseAttack = humanBaseAttack + humanExaltedBonus;
                 }
-                int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many",
-                        AllZone.getHumanPlayer()) ? 2 * humanBaseAttack
+                final int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getHumanPlayer()) ? 2 * humanBaseAttack
                         : humanBaseAttack;
                 if ((AllZone.getComputerPlayer().getLife() - 3) <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one
                     // blocker
-                    if (blockersNeeded == 0 && notNeededAsBlockers.size() > 0) {
+                    if ((blockersNeeded == 0) && (notNeededAsBlockers.size() > 0)) {
                         notNeededAsBlockers.remove(0);
                     }
 
                     // Finest Hour allows a second Exalted attack: keep a
                     // blocker for that too
-                    if (nFinestHours > 0 && notNeededAsBlockers.size() > 0) {
+                    if ((nFinestHours > 0) && (notNeededAsBlockers.size() > 0)) {
                         notNeededAsBlockers.remove(0);
                     }
                 }
@@ -271,7 +268,7 @@ public class ComputerUtilAttack {
         }
 
         // re-add creatures with vigilance
-        for (Card c : attackers) {
+        for (final Card c : attackers) {
             if (c.hasKeyword("Vigilance")) {
                 notNeededAsBlockers.add(c);
             }
@@ -292,10 +289,10 @@ public class ComputerUtilAttack {
      */
     public final boolean doesHumanAttackAndWin(final int nBlockingCreatures) {
         int totalAttack = 0;
-        int stop = humanList.size() - nBlockingCreatures;
+        final int stop = this.humanList.size() - nBlockingCreatures;
 
         for (int i = 0; i < stop; i++) {
-            totalAttack += getAttack(humanList.get(i));
+            totalAttack += this.getAttack(this.humanList.get(i));
         }
 
         // originally -3 so the computer will try to stay at 3 life
@@ -313,41 +310,43 @@ public class ComputerUtilAttack {
      */
     private boolean doAssault() {
         // Beastmaster Ascension
-        if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.getComputerPlayer()) && attackers.size() > 1) {
-            CardList beastions = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Battlefield)
+        if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.getComputerPlayer())
+                && (this.attackers.size() > 1)) {
+            final CardList beastions = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Battlefield)
                     .getName("Beastmaster Ascension");
             int minCreatures = 7;
-            for (Card beastion : beastions) {
-                int counters = beastion.getCounters(Counters.QUEST);
+            for (final Card beastion : beastions) {
+                final int counters = beastion.getCounters(Counters.QUEST);
                 minCreatures = Math.min(minCreatures, 7 - counters);
             }
-            if (attackers.size() >= minCreatures) {
+            if (this.attackers.size() >= minCreatures) {
                 return true;
             }
         }
 
-        CardListUtil.sortAttack(attackers);
+        CardListUtil.sortAttack(this.attackers);
 
-        CardList remainingAttackers = new CardList(attackers.toArray());
-        CardList blockableAttackers = new CardList(attackers.toArray());
-        
-        for (int i = 0; i < attackers.size(); i++) {
-            if(!CombatUtil.canBeBlocked(attackers.get(i), blockers)) {
-                blockableAttackers.remove(attackers.get(i));
+        final CardList remainingAttackers = new CardList(this.attackers.toArray());
+        final CardList blockableAttackers = new CardList(this.attackers.toArray());
+
+        for (int i = 0; i < this.attackers.size(); i++) {
+            if (!CombatUtil.canBeBlocked(this.attackers.get(i), this.blockers)) {
+                blockableAttackers.remove(this.attackers.get(i));
             }
         }
-        
+
         // presumes the Human will block
-        for (int i = 0; i < blockers.size() && i < blockableAttackers.size(); i++) {
+        for (int i = 0; (i < this.blockers.size()) && (i < blockableAttackers.size()); i++) {
             remainingAttackers.remove(blockableAttackers.get(i));
         }
-        
-        if(CombatUtil.sumDamageIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) > AllZone.getHumanPlayer().getLife()
-                && AllZone.getHumanPlayer().canLoseLife()) {
+
+        if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) > AllZone.getHumanPlayer()
+                .getLife()) && AllZone.getHumanPlayer().canLoseLife()) {
             return true;
         }
-        
-        if(CombatUtil.sumPoisonIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) >= 10 - AllZone.getHumanPlayer().getPoisonCounters()) {
+
+        if (CombatUtil.sumPoisonIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) >= (10 - AllZone
+                .getHumanPlayer().getPoisonCounters())) {
             return true;
         }
 
@@ -367,15 +366,15 @@ public class ComputerUtilAttack {
     public final void chooseDefender(final Combat c, final boolean bAssault) {
         // TODO split attackers to different planeswalker/human
         // AI will only attack one Defender per combat for now
-        ArrayList<Object> defs = c.getDefenders();
+        final ArrayList<Object> defs = c.getDefenders();
 
         // Randomly determine who EVERYONE is attacking
         // would be better to determine more individually
         int n = MyRandom.getRandom().nextInt(defs.size());
 
-        Object entity = AllZone.getComputerPlayer().getMustAttackEntity();
+        final Object entity = AllZone.getComputerPlayer().getMustAttackEntity();
         if (null != entity) {
-            ArrayList<Object> defenders = AllZone.getCombat().getDefenders();
+            final ArrayList<Object> defenders = AllZone.getCombat().getDefenders();
             n = defenders.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
@@ -384,7 +383,7 @@ public class ComputerUtilAttack {
                 c.setCurrentDefender(n);
             }
         } else {
-            if (defs.size() == 1 || bAssault) {
+            if ((defs.size() == 1) || bAssault) {
                 c.setCurrentDefender(0);
             } else {
                 c.setCurrentDefender(n);
@@ -407,22 +406,22 @@ public class ComputerUtilAttack {
         // randomInt is used so that the computer doesn't always
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
-        random.setSeed(AllZone.getPhase().getTurn() + randomInt);
+        this.random.setSeed(AllZone.getPhase().getTurn() + this.randomInt);
 
-        Combat combat = new Combat();
+        final Combat combat = new Combat();
         combat.setAttackingPlayer(AllZone.getCombat().getAttackingPlayer());
         combat.setDefendingPlayer(AllZone.getCombat().getDefendingPlayer());
 
         combat.setDefenders(AllZone.getCombat().getDefenders());
 
-        boolean bAssault = doAssault();
+        final boolean bAssault = this.doAssault();
         // Determine who will be attacked
-        chooseDefender(combat, bAssault);
+        this.chooseDefender(combat, bAssault);
 
-        CardList attackersLeft = new CardList(attackers.toArray());
+        CardList attackersLeft = new CardList(this.attackers.toArray());
 
         // Attackers that don't really have a choice
-        for (Card attacker : attackers) {
+        for (final Card attacker : this.attackers) {
             if ((attacker.hasKeyword("CARDNAME attacks each turn if able.")
                     || attacker.hasKeyword("At the beginning of the end step, destroy CARDNAME.")
                     || attacker.hasKeyword("At the beginning of the end step, exile CARDNAME.")
@@ -443,10 +442,10 @@ public class ComputerUtilAttack {
         int playerForcesForAttritionalAttack = 0;
 
         // examine the potential forces
-        CardList nextTurnAttackers = new CardList();
+        final CardList nextTurnAttackers = new CardList();
         int candidateCounterAttackDamage = 0;
         // int candidateTotalBlockDamage = 0;
-        for (Card pCard : playerCreatures) {
+        for (final Card pCard : this.playerCreatures) {
 
             // if the creature can attack next turn add it to counter attackers
             // list
@@ -472,9 +471,9 @@ public class ComputerUtilAttack {
         }
 
         // get the potential damage and strength of the AI forces
-        CardList candidateAttackers = new CardList();
+        final CardList candidateAttackers = new CardList();
         int candidateUnblockedDamage = 0;
-        for (Card pCard : computerList) {
+        for (final Card pCard : this.computerList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
             if (CombatUtil.canAttackNextTurn(pCard)) {
@@ -502,10 +501,10 @@ public class ComputerUtilAttack {
          */
 
         // determine if the ai outnumbers the player
-        int outNumber = computerForces - playerForces;
+        final int outNumber = computerForces - playerForces;
 
         // compare the ratios, higher = better for ai
-        double ratioDiff = aiLifeToPlayerDamageRatio - playerLifeToDamageRatio;
+        final double ratioDiff = aiLifeToPlayerDamageRatio - playerLifeToDamageRatio;
         /*
          * System.out.println(String.valueOf(ratioDiff) +
          * " = ratio difference, higher = better for ai");
@@ -524,17 +523,17 @@ public class ComputerUtilAttack {
         // *********************
         boolean doAttritionalAttack = false;
         // get list of attackers ordered from low power to high
-        CardListUtil.sortAttackLowFirst(attackers);
+        CardListUtil.sortAttackLowFirst(this.attackers);
         // get player life total
         int playerLife = AllZone.getHumanPlayer().getLife();
         // get the list of attackers up to the first blocked one
-        CardList attritionalAttackers = new CardList();
-        for (int x = 0; x < attackers.size() - playerForces; x++) {
-            attritionalAttackers.add(attackers.getCard(x));
+        final CardList attritionalAttackers = new CardList();
+        for (int x = 0; x < (this.attackers.size() - playerForces); x++) {
+            attritionalAttackers.add(this.attackers.getCard(x));
         }
         // until the attackers are used up or the player would run out of life
         int attackRounds = 1;
-        while (attritionalAttackers.size() > 0 && playerLife > 0 && attackRounds < 99) {
+        while ((attritionalAttackers.size() > 0) && (playerLife > 0) && (attackRounds < 99)) {
             // sum attacker damage
             int damageThisRound = 0;
             for (int y = 0; y < attritionalAttackers.size(); y++) {
@@ -565,11 +564,11 @@ public class ComputerUtilAttack {
         double unblockableDamage = 0;
         double turnsUntilDeathByUnblockable = 0;
         boolean doUnblockableAttack = false;
-        for (Card attacker : attackers) {
+        for (final Card attacker : this.attackers) {
             boolean isUnblockableCreature = true;
             // check blockers individually, as the bulk canBeBlocked doesn't
             // check all circumstances
-            for (Card blocker : blockers) {
+            for (final Card blocker : this.blockers) {
                 if (CombatUtil.canBlock(attacker, blocker)) {
                     isUnblockableCreature = false;
                 }
@@ -592,56 +591,58 @@ public class ComputerUtilAttack {
         // totals and other considerations
         // some bad "magic numbers" here, TODO replace with nice descriptive
         // variable names
-        if ((ratioDiff > 0 && doAttritionalAttack)) { // (playerLifeToDamageRatio
-                                                      // <= 1 && ratioDiff >= 1
-                                                      // && outNumber > 0) ||
-            aiAggression = 5; // attack at all costs
-        } else if ((playerLifeToDamageRatio < 2 && ratioDiff >= 0)
-                || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)) {
-            aiAggression = 3; // attack expecting to kill creatures or damage
-                              // player.
-        } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1) {
+        if (((ratioDiff > 0) && doAttritionalAttack)) { // (playerLifeToDamageRatio
+                                                        // <= 1 && ratioDiff >=
+                                                        // 1
+                                                        // && outNumber > 0) ||
+            this.aiAggression = 5; // attack at all costs
+        } else if (((playerLifeToDamageRatio < 2) && (ratioDiff >= 0)) || (ratioDiff > 3)
+                || ((ratioDiff > 0) && (outNumber > 0))) {
+            this.aiAggression = 3; // attack expecting to kill creatures or
+                                   // damage
+            // player.
+        } else if ((ratioDiff >= 0) || ((ratioDiff + outNumber) >= -1)) {
             // at 0 ratio expect to potentially gain an advantage by attacking
             // first
             // if the ai has a slight advantage
             // or the ai has a significant advantage numerically but only a
             // slight disadvantage damage/life
-            aiAggression = 2; // attack expecting to destroy creatures/be
-                              // unblockable
-        } else if (ratioDiff < 0 && aiLifeToPlayerDamageRatio > 1) {
+            this.aiAggression = 2; // attack expecting to destroy creatures/be
+            // unblockable
+        } else if ((ratioDiff < 0) && (aiLifeToPlayerDamageRatio > 1)) {
             // the player is overmatched but there are a few turns before death
-            aiAggression = 2; // attack expecting to destroy creatures/be
-                              // unblockable
+            this.aiAggression = 2; // attack expecting to destroy creatures/be
+            // unblockable
         } else if (doUnblockableAttack || ((ratioDiff * -1) < turnsUntilDeathByUnblockable)) {
-            aiAggression = 1; // look for unblockable creatures that might be
-                              // able to attack for a bit of
+            this.aiAggression = 1; // look for unblockable creatures that might
+                                   // be
+            // able to attack for a bit of
             // fatal damage even if the player is significantly better
         } else if (ratioDiff < 0) {
-            aiAggression = 0;
+            this.aiAggression = 0;
         } // stay at home to block
-        System.out.println(String.valueOf(aiAggression) + " = ai aggression");
+        System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
 
         // ****************
         // End of edits
         // ****************
 
         // Exalted
-        if (combat.getAttackers().length == 0
-                && (countExaltedBonus(AllZone.getComputerPlayer()) >= 3
+        if ((combat.getAttackers().length == 0)
+                && ((this.countExaltedBonus(AllZone.getComputerPlayer()) >= 3)
                         || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
-                        || AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield,
-                                "Battlegrace Angel").size() >= 2 || (AllZone
-                        .getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1)
-                        && AllZone.getPhase().isFirstCombat()) && !bAssault) {
+                        || (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2) || ((AllZone
+                        .getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1) && AllZone
+                        .getPhase().isFirstCombat())) && !bAssault) {
             int biggest = 0;
             Card att = null;
             for (int i = 0; i < attackersLeft.size(); i++) {
-                if (getAttack(attackersLeft.get(i)) > biggest) {
-                    biggest = getAttack(attackersLeft.get(i));
+                if (this.getAttack(attackersLeft.get(i)) > biggest) {
+                    biggest = this.getAttack(attackersLeft.get(i));
                     att = attackersLeft.get(i);
                 }
             }
-            if (att != null && CombatUtil.canAttack(att, combat)) {
+            if ((att != null) && CombatUtil.canAttack(att, combat)) {
                 combat.addAttacker(att);
             }
 
@@ -656,26 +657,26 @@ public class ComputerUtilAttack {
             for (int i = 0; i < attackersLeft.size(); i++) {
                 if (CombatUtil.canAttack(attackersLeft.get(i), combat)) {
                     combat.addAttacker(attackersLeft.get(i));
-                } 
+                }
             }
         } else {
             System.out.println("Normal attack");
 
-            attackersLeft = notNeededAsBlockers(attackersLeft, combat);
+            attackersLeft = this.notNeededAsBlockers(attackersLeft, combat);
             System.out.println(attackersLeft.size());
 
-            attackersLeft = sortAttackers(attackersLeft);
+            attackersLeft = this.sortAttackers(attackersLeft);
 
             for (int i = 0; i < attackersLeft.size(); i++) {
-                Card attacker = attackersLeft.get(i);
+                final Card attacker = attackersLeft.get(i);
                 int totalFirstStrikeBlockPower = 0;
                 if (!attacker.hasFirstStrike() && !attacker.hasDoubleStrike()) {
                     totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attacker,
                             AllZone.getHumanPlayer());
                 }
 
-                if (shouldAttack(attacker, blockers, combat)
-                        && (totalFirstStrikeBlockPower < attacker.getKillDamage() || aiAggression == 5)
+                if (this.shouldAttack(attacker, this.blockers, combat)
+                        && ((totalFirstStrikeBlockPower < attacker.getKillDamage()) || (this.aiAggression == 5))
                         && CombatUtil.canAttack(attacker, combat)) {
                     combat.addAttacker(attacker);
                 }
@@ -697,6 +698,7 @@ public class ComputerUtilAttack {
     public final int countExaltedBonus(final Player player) {
         CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 return c.hasKeyword("Exalted");
             }
@@ -748,7 +750,7 @@ public class ComputerUtilAttack {
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
 
-        if (!isEffectiveAttacker(attacker, combat)) {
+        if (!this.isEffectiveAttacker(attacker, combat)) {
             return false;
         }
 
@@ -756,7 +758,7 @@ public class ComputerUtilAttack {
         // number of factors about the attacking
         // context that will be relevant to the attackers decision according to
         // the selected strategy
-        for (Card defender : defenders) {
+        for (final Card defender : defenders) {
             if (CombatUtil.canBlock(attacker, defender)) { // , combat )) {
                 canBeBlocked = true;
                 if (CombatUtil.canDestroyAttacker(attacker, defender, combat, false)) {
@@ -793,7 +795,7 @@ public class ComputerUtilAttack {
 
         // decide if the creature should attack based on the prevailing strategy
         // choice in aiAggression
-        switch (aiAggression) {
+        switch (this.aiAggression) {
         case 5: // all out attacking
             System.out.println(attacker.getName() + " = all out attacking");
             return true;

@@ -96,7 +96,7 @@ public class CardReader implements Runnable {
     private transient Enumeration<? extends ZipEntry> zipEnum;
 
     private transient long estimatedFilesRemaining = // NOPMD by Braids on
-                                                     // 8/18/11 10:56 PM
+    CardReader.// 8/18/11 10:56 PM
     UNKNOWN_NUMBER_OF_FILES_REMAINING;
 
     private transient Iterable<File> findNonDirsIterable; // NOPMD by Braids on
@@ -182,7 +182,7 @@ public class CardReader implements Runnable {
         if (useZip && zipFile.exists()) {
             try {
                 this.zip = new ZipFile(zipFile);
-            } catch (Exception exn) {
+            } catch (final Exception exn) {
                 System.err.println("Error reading zip file \"" // NOPMD by
                                                                // Braids on
                                                                // 8/18/11 10:53
@@ -197,12 +197,12 @@ public class CardReader implements Runnable {
 
         }
 
-        if (useZip && zip != null) {
-            zipEnum = zip.entries();
-            estimatedFilesRemaining = zip.size();
+        if (useZip && (this.zip != null)) {
+            this.zipEnum = this.zip.entries();
+            this.estimatedFilesRemaining = this.zip.size();
         }
 
-        setEncoding(DEFAULT_CHARSET_NAME);
+        this.setEncoding(CardReader.DEFAULT_CHARSET_NAME);
 
     } // CardReader()
 
@@ -213,12 +213,13 @@ public class CardReader implements Runnable {
      * @throws Throwable
      *             indirectly
      */
+    @Override
     protected final void finalize() throws Throwable {
         try {
-            if (findNonDirsIterable != null) {
+            if (this.findNonDirsIterable != null) {
                 for (@SuppressWarnings("unused")
-                // Do nothing; just exercising the Iterable.
-                File ignored : findNonDirsIterable) {
+                final// Do nothing; just exercising the Iterable.
+                File ignored : this.findNonDirsIterable) {
                 }
             }
         } finally {
@@ -229,8 +230,9 @@ public class CardReader implements Runnable {
     /**
      * Reads the rest of ALL the cards into memory. This is not lazy.
      */
+    @Override
     public final void run() {
-        loadCardsUntilYouFind(null);
+        this.loadCardsUntilYouFind(null);
     }
 
     /**
@@ -261,27 +263,28 @@ public class CardReader implements Runnable {
 
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
-        if (zip == null) {
-            if (estimatedFilesRemaining == UNKNOWN_NUMBER_OF_FILES_REMAINING) {
-                final Generator<File> findNonDirsGen = new FindNonDirectoriesSkipDotDirectoriesGenerator(cardsfolder);
-                estimatedFilesRemaining = GeneratorFunctions.estimateSize(findNonDirsGen);
-                findNonDirsIterable = YieldUtils.toIterable(findNonDirsGen);
+        if (this.zip == null) {
+            if (this.estimatedFilesRemaining == CardReader.UNKNOWN_NUMBER_OF_FILES_REMAINING) {
+                final Generator<File> findNonDirsGen = new FindNonDirectoriesSkipDotDirectoriesGenerator(
+                        this.cardsfolder);
+                this.estimatedFilesRemaining = GeneratorFunctions.estimateSize(findNonDirsGen);
+                this.findNonDirsIterable = YieldUtils.toIterable(findNonDirsGen);
             }
 
             if (monitor != null) {
-                monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
+                monitor.setTotalUnitsThisPhase(this.estimatedFilesRemaining);
             }
 
-            for (File cardTxtFile : findNonDirsIterable) {
-                if (!cardTxtFile.getName().endsWith(CARD_FILE_DOT_EXTENSION)) {
+            for (final File cardTxtFile : this.findNonDirsIterable) {
+                if (!cardTxtFile.getName().endsWith(CardReader.CARD_FILE_DOT_EXTENSION)) {
                     monitor.incrementUnitsCompletedThisPhase(1L);
                     continue;
                 }
 
-                result = loadCard(cardTxtFile);
+                result = this.loadCard(cardTxtFile);
                 monitor.incrementUnitsCompletedThisPhase(1L);
 
-                if (cardName != null && cardName.equals(result.getName())) {
+                if ((cardName != null) && cardName.equals(result.getName())) {
                     break; // no thread leak here if entire card DB is loaded,
                            // or if this object is finalized.
                 }
@@ -289,22 +292,22 @@ public class CardReader implements Runnable {
             } // endfor
 
         } else {
-            monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
+            monitor.setTotalUnitsThisPhase(this.estimatedFilesRemaining);
             ZipEntry entry;
 
             // zipEnum was initialized in the constructor.
-            while (zipEnum.hasMoreElements()) {
-                entry = (ZipEntry) zipEnum.nextElement();
+            while (this.zipEnum.hasMoreElements()) {
+                entry = this.zipEnum.nextElement();
 
-                if (entry.isDirectory() || !entry.getName().endsWith(CARD_FILE_DOT_EXTENSION)) {
+                if (entry.isDirectory() || !entry.getName().endsWith(CardReader.CARD_FILE_DOT_EXTENSION)) {
                     monitor.incrementUnitsCompletedThisPhase(1L);
                     continue;
                 }
 
-                result = loadCard(entry);
+                result = this.loadCard(entry);
                 monitor.incrementUnitsCompletedThisPhase(1L);
 
-                if (cardName != null && cardName.equals(result.getName())) {
+                if ((cardName != null) && cardName.equals(result.getName())) {
                     break;
                 }
             }
@@ -348,7 +351,7 @@ public class CardReader implements Runnable {
                 line = line.trim();
             }
             return line;
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("CardReader : readLine(Card) error", ex); // NOPMD
                                                                                  // by
@@ -372,17 +375,17 @@ public class CardReader implements Runnable {
      */
     protected final Card loadCard(final InputStream inputStream) {
         final Card card = new Card();
-        rulesReader.reset();
+        this.rulesReader.reset();
 
         InputStreamReader inputStreamReader = null;
         BufferedReader reader = null;
         try {
-            inputStreamReader = new InputStreamReader(inputStream, charset);
+            inputStreamReader = new InputStreamReader(inputStream, this.charset);
             reader = new BufferedReader(inputStreamReader);
 
-            String line = readLine(reader);
+            String line = CardReader.readLine(reader);
             while (!"End".equals(line)) {
-                rulesReader.parseLine(line);
+                this.rulesReader.parseLine(line);
                 if (line.isEmpty()) {
                     // Ignore empty lines.
                 } else if (line.charAt(0) == '#') { // NOPMD by Braids on
@@ -391,7 +394,7 @@ public class CardReader implements Runnable {
                 } else if (line.startsWith("Name:")) {
                     final String value = line.substring(5);
                     // System.out.println(s);
-                    if (mapToFill.containsKey(value)) {
+                    if (this.mapToFill.containsKey(value)) {
                         break; // this card has already been loaded.
                     } else {
                         card.setName(value);
@@ -403,7 +406,7 @@ public class CardReader implements Runnable {
                         card.setManaCost(value);
                     }
                 } else if (line.startsWith("Types:")) {
-                    addTypes(card, line.substring("Types:".length()));
+                    CardReader.addTypes(card, line.substring("Types:".length()));
                 } else if (line.startsWith("Text:")) {
                     String value = line.substring("Text:".length());
                     // if (!t.equals("no text"));
@@ -457,10 +460,9 @@ public class CardReader implements Runnable {
                                                      // 8/18/11 11:08 PM
                 } else if (line.equals("ALTERNATE")) {
                     String mode;
-                    if(card.isFlip()) {
+                    if (card.isFlip()) {
                         mode = "Flipped";
-                    }
-                    else {
+                    } else {
                         mode = "Transformed";
                     }
                     card.addAlternateState(mode);
@@ -474,9 +476,9 @@ public class CardReader implements Runnable {
                     }
                 } else if (line.startsWith("Colors:")) {
                     final String value = line.substring("Colors:".length());
-                    ArrayList<CardColor> newCols = new ArrayList<CardColor>();
-                    for (String col : value.split(",")) {
-                        CardColor newCol = new CardColor(card);
+                    final ArrayList<CardColor> newCols = new ArrayList<CardColor>();
+                    for (final String col : value.split(",")) {
+                        final CardColor newCol = new CardColor(card);
                         newCol.addToCardColor(col);
                         newCols.add(newCol);
                     }
@@ -485,18 +487,20 @@ public class CardReader implements Runnable {
                     card.setCardColorsOverridden(true);
                 }
 
-                line = readLine(reader);
+                line = CardReader.readLine(reader);
             } // while !End
         } finally {
             try {
                 reader.close();
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
-                                            // PM
+            } catch (final IOException ignored) { // NOPMD by Braids on 8/18/11
+                                                  // 11:08
+                // PM
             }
             try {
                 inputStreamReader.close();
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
-                                            // PM
+            } catch (final IOException ignored) { // NOPMD by Braids on 8/18/11
+                                                  // 11:08
+                // PM
             }
         }
 
@@ -504,8 +508,8 @@ public class CardReader implements Runnable {
             card.setState("Original");
         }
 
-        listRulesToFill.add(rulesReader.getCard());
-        mapToFill.put(card.getName(), card);
+        this.listRulesToFill.add(this.rulesReader.getCard());
+        this.mapToFill.put(card.getName(), card);
         return card;
     }
 
@@ -531,16 +535,17 @@ public class CardReader implements Runnable {
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(pathToTxtFile);
-            return loadCard(fileInputStream);
-        } catch (FileNotFoundException ex) {
+            return this.loadCard(fileInputStream);
+        } catch (final FileNotFoundException ex) {
             ErrorViewer.showError(ex, "File \"%s\" exception", pathToTxtFile.getAbsolutePath());
             throw new RuntimeException(// NOPMD by Braids on 8/18/11 10:53 PM
                     "CardReader : run error -- file exception -- filename is " + pathToTxtFile.getPath(), ex);
         } finally {
             try {
                 fileInputStream.close();
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
-                                            // PM
+            } catch (final IOException ignored) { // NOPMD by Braids on 8/18/11
+                                                  // 11:08
+                // PM
             }
         }
     }
@@ -556,10 +561,10 @@ public class CardReader implements Runnable {
     protected final Card loadCard(final ZipEntry entry) {
         InputStream zipInputStream = null;
         try {
-            zipInputStream = zip.getInputStream(entry);
-            return loadCard(zipInputStream);
+            zipInputStream = this.zip.getInputStream(entry);
+            return this.loadCard(zipInputStream);
 
-        } catch (IOException exn) {
+        } catch (final IOException exn) {
             throw new RuntimeException(exn); // NOPMD by Braids on 8/18/11 10:53
                                              // PM
         } finally {
@@ -567,8 +572,9 @@ public class CardReader implements Runnable {
                 if (zipInputStream != null) {
                     zipInputStream.close();
                 }
-            } catch (IOException ignored) { // NOPMD by Braids on 8/18/11 11:08
-                                            // PM
+            } catch (final IOException ignored) { // NOPMD by Braids on 8/18/11
+                                                  // 11:08
+                // PM
             }
         }
     }
@@ -597,19 +603,20 @@ public class CardReader implements Runnable {
          * http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=4887#p63189
          */
 
-        baseFileName = HYPHEN_OR_SPACE.matcher(baseFileName).replaceAll("_");
-        baseFileName = MULTIPLE_UNDERSCORES.matcher(baseFileName).replaceAll("_");
-        baseFileName = PUNCTUATION_TO_ZAP.matcher(baseFileName).replaceAll("");
+        baseFileName = CardReader.HYPHEN_OR_SPACE.matcher(baseFileName).replaceAll("_");
+        baseFileName = CardReader.MULTIPLE_UNDERSCORES.matcher(baseFileName).replaceAll("_");
+        baseFileName = CardReader.PUNCTUATION_TO_ZAP.matcher(baseFileName).replaceAll("");
 
         // Place the file within a single-letter subdirectory.
-        final StringBuffer buf = new StringBuffer(1 + 1 + baseFileName.length() + CARD_FILE_DOT_EXTENSION.length());
+        final StringBuffer buf = new StringBuffer(1 + 1 + baseFileName.length()
+                + CardReader.CARD_FILE_DOT_EXTENSION.length());
         buf.append(Character.toLowerCase(baseFileName.charAt(0)));
 
         // Zip file is always created with unix-style path names.
         buf.append('/');
 
         buf.append(baseFileName.toLowerCase(Locale.ENGLISH));
-        buf.append(CARD_FILE_DOT_EXTENSION);
+        buf.append(CardReader.CARD_FILE_DOT_EXTENSION);
 
         return buf.toString();
     }
@@ -628,25 +635,25 @@ public class CardReader implements Runnable {
                                                                   // 11:08 PM
         UtilFunctions.checkNotNull("canonicalASCIIName", canonicalASCIIName);
 
-        final String cardFilePath = toMostLikelyPath(canonicalASCIIName);
+        final String cardFilePath = this.toMostLikelyPath(canonicalASCIIName);
 
         Card result = null;
 
-        if (zip != null) {
-            final ZipEntry entry = zip.getEntry(cardFilePath);
+        if (this.zip != null) {
+            final ZipEntry entry = this.zip.getEntry(cardFilePath);
 
             if (entry != null) {
-                result = loadCard(entry);
+                result = this.loadCard(entry);
             }
         }
 
         if (result == null) {
-            result = loadCard(new File(cardsfolder, cardFilePath));
+            result = this.loadCard(new File(this.cardsfolder, cardFilePath));
         }
 
-        if (result == null || !(result.getName().equals(canonicalASCIIName))) {
+        if ((result == null) || !(result.getName().equals(canonicalASCIIName))) {
             // System.err.println(":Could not find \"" + cardFilePath + "\".");
-            result = loadCardsUntilYouFind(canonicalASCIIName);
+            result = this.loadCardsUntilYouFind(canonicalASCIIName);
         }
 
         return result;

@@ -225,7 +225,9 @@ public class Combat {
         if (attackingPlayer != null) {
             return attackingPlayer;
         }
-        else return AllZone.getPhase().getPlayerTurn();
+        else {
+            return AllZone.getPhase().getPlayerTurn();
+        }
     }
 
     /**
@@ -239,7 +241,9 @@ public class Combat {
         if (attackingPlayer != null) {
             return defendingPlayer;
         }
-        else return AllZone.getPhase().getPlayerTurn().getOpponent();
+        else {
+            return AllZone.getPhase().getPlayerTurn().getOpponent();
+        }
     }
 
     /**

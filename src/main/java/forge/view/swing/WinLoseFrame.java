@@ -49,10 +49,10 @@ public class WinLoseFrame extends JFrame {
     private FButton btnRestart;
 
     /** The lbl title. */
-    private JLabel lblTitle;
+    private final JLabel lblTitle;
 
     /** The lbl stats. */
-    private JLabel lblStats;
+    private final JLabel lblStats;
 
     /** The pnl custom. */
     private JPanel pnlCustom;
@@ -283,60 +283,62 @@ public class WinLoseFrame extends JFrame {
      * @return {@link forge.gui.skin.FButton} btnContinue
      */
     public FButton getBtnContinue() {
-        return btnContinue;
+        return this.btnContinue;
     }
 
     /**
-     * @param {@link forge.gui.skin.FButton} btnContinue
+     * @param btnContinue {@link forge.gui.skin.FButton}
      */
-    public void setBtnContinue(FButton btnContinue0) {
-        this.btnContinue = btnContinue0;
+    public void setBtnContinue(final FButton btnContinue) {
+        this.btnContinue = btnContinue;
     }
 
     /**
      * @return {@link forge.gui.skin.FButton} btnRestart
      */
     public FButton getBtnRestart() {
-        return btnRestart;
+        return this.btnRestart;
     }
 
     /**
-     * @param {@link forge.gui.skin.FButton} btnRestart
+     * @param btnRestart {@link forge.gui.skin.FButton}
      */
-    public void setBtnRestart(FButton btnRestart0) {
-        this.btnRestart = btnRestart0; 
+    public void setBtnRestart(final FButton btnRestart) {
+        this.btnRestart = btnRestart;
     }
 
     /**
      * @return {@link forge.gui.skin.FButton} btnQuit
      */
     public FButton getBtnQuit() {
-        return btnQuit;
+        return this.btnQuit;
     }
 
     /**
-     * @param {@link forge.gui.skin.FButton} btnQuit
+     * @param btnQuit {@link forge.gui.skin.FButton}
      */
-    public void setBtnQuit(FButton btnQuit0) {
-        this.btnQuit = btnQuit0; 
+    public void setBtnQuit(final FButton btnQuit) {
+        this.btnQuit = btnQuit;
     }
 
     /**
-     * The central panel in the win/lose screen, used for 
-     * presenting customized messages and rewards.
+     * The central panel in the win/lose screen, used for presenting customized
+     * messages and rewards.
+     * 
      * @return {@link javax.swing.JPanel} pnlCustom
      */
     public JPanel getPnlCustom() {
-        return pnlCustom;
+        return this.pnlCustom;
     }
 
     /**
-     * The central panel in the win/lose screen, used for 
-     * presenting customized messages and rewards.
-     * @param {@link javax.swing.JPanel} pnlCustom
+     * The central panel in the win/lose screen, used for presenting customized
+     * messages and rewards.
+     * 
+     * @param pnlCustom {@link javax.swing.JPanel}
      */
-    public void setPnlCustom(JPanel pnlCustom0) {
-        this.pnlCustom = pnlCustom0;
+    public void setPnlCustom(final JPanel pnlCustom) {
+        this.pnlCustom = pnlCustom;
     }
 
     private class WinLoseBorder extends AbstractBorder {

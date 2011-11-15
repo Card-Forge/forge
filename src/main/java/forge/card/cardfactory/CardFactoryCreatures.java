@@ -536,8 +536,8 @@ public class CardFactoryCreatures {
 
                 @Override
                 public boolean canPlayAI() {
-                    return (!AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Artifact").isEmpty()
-                            && AllZone.getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand));
+                    return (!AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Artifact").isEmpty() && AllZone
+                            .getZoneOf(this.getSourceCard()).is(Constant.Zone.Hand));
                 }
             });
             card.addComesIntoPlayCommand(intoPlay);
@@ -740,19 +740,19 @@ public class CardFactoryCreatures {
                     sb.append("Adarkar Valkyrie - Return ").append(target[0]);
                     sb.append(" from graveyard to the battlefield");
                     AllZone.getStack().addSimultaneousStackEntry(new Ability(card, "0", sb.toString()) {
-                                @Override
-                                public void resolve() {
-                                    final PlayerZone grave = AllZone.getZoneOf(target[0]);
-                                    // checks to see if card is still in the
-                                    // graveyard
+                        @Override
+                        public void resolve() {
+                            final PlayerZone grave = AllZone.getZoneOf(target[0]);
+                            // checks to see if card is still in the
+                            // graveyard
 
-                                    if ((grave != null) && grave.contains(target[0])) {
-                                        final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
-                                        target[0].addController(card.getController());
-                                        AllZone.getGameAction().moveTo(play, target[0]);
-                                    }
-                                }
-                            });
+                            if ((grave != null) && grave.contains(target[0])) {
+                                final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
+                                target[0].addController(card.getController());
+                                AllZone.getGameAction().moveTo(play, target[0]);
+                            }
+                        }
+                    });
                 } // execute()
             };
 
@@ -2244,77 +2244,80 @@ public class CardFactoryCreatures {
 
                     if (copyTarget[0] != null) {
                         Card cloned;
-                        
+
                         cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
-                        card.addAlternateState("Cloner");                        
+                        card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");
                         card.setState("Original");
-                        
-                        if(copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
+
+                        if (copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
                             cloned.setState("Transformed");
                         }
-                        
-                        CardFactoryUtil.copyCharacteristics(cloned,card);
-                        this.grantExtras();
-                        
 
-                        //If target is a flipped card, also copy the flipped state.
-                        if(copyTarget[0].isFlip()) {
+                        CardFactoryUtil.copyCharacteristics(cloned, card);
+                        this.grantExtras();
+
+                        // If target is a flipped card, also copy the flipped
+                        // state.
+                        if (copyTarget[0].isFlip()) {
                             cloned.setState("Flipped");
                             cloned.setImageFilename(CardUtil.buildFilename(cloned));
                             card.addAlternateState("Flipped");
                             card.setState("Flipped");
-                            CardFactoryUtil.copyCharacteristics(cloned,card);
+                            CardFactoryUtil.copyCharacteristics(cloned, card);
                             this.grantExtras();
-                            
+
                             card.setFlip(true);
-                            
+
                             card.setState("Original");
-                        }
-                        else {
+                        } else {
                             card.setFlip(false);
                         }
-                        
-                        
+
                     }
-                    
+
                     AllZone.getGameAction().moveToPlay(card);
                 }
-                
+
                 private void grantExtras() {
-                  //Grant stuff from specific cloners
-                    if(cardName.equals("Vesuvan Doppelganger")) {
+                    // Grant stuff from specific cloners
+                    if (cardName.equals("Vesuvan Doppelganger")) {
                         final String keyword = "At the beginning of your upkeep, you may have this "
                                 + "creature become a copy of target creature except it doesn't copy that "
-                                        + "creature's color. If you do, this creature gains this ability.";
+                                + "creature's color. If you do, this creature gains this ability.";
                         card.addIntrinsicKeyword(keyword);
                         card.addColor("U");
-                    }
-                    else if(cardName.equals("Quicksilver Gargantuan")) {
+                    } else if (cardName.equals("Quicksilver Gargantuan")) {
                         card.setBaseAttack(7);
                         card.setBaseDefense(7);
-                    }
-                    else if(cardName.equals("Phyrexian Metamorph")) {
+                    } else if (cardName.equals("Phyrexian Metamorph")) {
                         card.addType("Artifact");
-                    }
-                    else if(cardName.equals("Phantasmal Image")) {
-                        Trigger t = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ BecomesTarget | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.", card, true);
+                    } else if (cardName.equals("Phantasmal Image")) {
+                        final Trigger t = forge.card.trigger.TriggerHandler
+                                .parseTrigger(
+                                        "Mode$ BecomesTarget | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.",
+                                        card, true);
                         card.addTrigger(t);
                         card.setSVar("TrigSac", "AB$Sacrifice | Cost$ 0 | Defined$ Self");
-                    }
-                    else if(cardName.equals("Evil Twin")) {
-                        AbilityFactory af = new AbilityFactory();
-                        
-                        SpellAbility ab = af.getAbility("AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | TgtPrompt$ Select target creature with the same name. | SpellDescription$ Destroy target creature with the same name as this creature.", card);
-                        
+                    } else if (cardName.equals("Evil Twin")) {
+                        final AbilityFactory af = new AbilityFactory();
+
+                        final SpellAbility ab = af
+                                .getAbility(
+                                        "AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | TgtPrompt$ Select target creature with the same name. | SpellDescription$ Destroy target creature with the same name as this creature.",
+                                        card);
+
                         card.addSpellAbility(ab);
-                    }
-                    else if(cardName.equals("Sakashima the Impostor")) {
-                        AbilityFactory af = new AbilityFactory();
-                        SpellAbility ab = af.getAbility("AB$DelayedTrigger | Cost$ 2 U U | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturnSak | TriggerDescription$ Return CARDNAME to it's owners hand at the beginning of the next end step.",card);
-                        
+                    } else if (cardName.equals("Sakashima the Impostor")) {
+                        final AbilityFactory af = new AbilityFactory();
+                        final SpellAbility ab = af
+                                .getAbility(
+                                        "AB$DelayedTrigger | Cost$ 2 U U | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturnSak | TriggerDescription$ Return CARDNAME to it's owners hand at the beginning of the next end step.",
+                                        card);
+
                         card.addSpellAbility(ab);
-                        card.setSVar("TrigReturnSak","AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand");
+                        card.setSVar("TrigReturnSak",
+                                "AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand");
                         card.setName("Sakashima the Impostor");
                         card.addType("Legendary");
                     }
@@ -2609,8 +2612,8 @@ public class CardFactoryCreatures {
                 theCost = "R";
             }
 
-            final SpellAbility finalAb = new AbilityActivated(card, new Cost(theCost, cardName, true), new Target(
-                    card, "Select target creature.", "Creature")) {
+            final SpellAbility finalAb = new AbilityActivated(card, new Cost(theCost, cardName, true), new Target(card,
+                    "Select target creature.", "Creature")) {
                 private static final long serialVersionUID = 2391351140880148283L;
 
                 @Override
@@ -2694,35 +2697,36 @@ public class CardFactoryCreatures {
             ability.setStackDescription(sbStack.toString());
         } // *************** END ************ END **************************
 
-
-        
         // *************** START *********** START **************************
         else if (cardName.equals("Ixidron")) {
-            Trigger tfdTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)", card, true);
-            
+            final Trigger tfdTrigger = forge.card.trigger.TriggerHandler
+                    .parseTrigger(
+                            "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)",
+                            card, true);
+
             final SpellAbility triggeredAbility = new Ability(card, "0") {
                 @Override
                 public void resolve() {
                     CardList creatsInPlay = AllZoneUtil.getCreaturesInPlay();
-                    
+
                     creatsInPlay = creatsInPlay.filter(new CardListFilter() {
                         @Override
-                        public boolean addCard(Card c) {
+                        public boolean addCard(final Card c) {
                             return !c.isToken() && !c.equals(card);
                         }
                     });
-                    
-                    for(Card c : creatsInPlay) {
+
+                    for (final Card c : creatsInPlay) {
                         c.turnFaceDown();
                     }
                 }
             };
-            
+
             tfdTrigger.setOverridingAbility(triggeredAbility);
-            
+
             card.addTrigger(tfdTrigger);
         } // *************** END ************ END **************************
-        
+
         // ***************************************************
         // end of card specific code
         // ***************************************************

@@ -171,8 +171,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
-            String curState = in.getCurState();
-            for(String state : in.getStates()) {
+            final String curState = in.getCurState();
+            for (final String state : in.getStates()) {
                 in.setState(state);
                 out.setState(state);
                 CardFactoryUtil.copyCharacteristics(in, out);
@@ -483,7 +483,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             card.addColor(card.getManaCost());
         }
         // may have to change the spell
-        
+
         // this is so permanents like creatures and artifacts have a "default"
         // spell
         if (card.isPermanent() && !card.isLand() && !card.isAura()) {
@@ -503,7 +503,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         }
 
         if (card.hasAlternateState()) {
-            for(String state : card.getStates()) {
+            for (final String state : card.getStates()) {
                 card.setState(state);
                 this.addAbilityFactoryAbilities(card);
                 stAbs = card.getStaticAbilityStrings();
@@ -513,7 +513,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                     }
                 }
             }
-            
+
             card.setState("Original");
         }
 
@@ -644,8 +644,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sb.append("As Sarpadian Empires, Vol. VII enters the battlefield, ");
             sb.append("choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\r\n");
             sb.append("3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.\r\n");
-            sb.append(card.getText());   // In the slight chance that there may be
-                                         // a need to add a note to this card.
+            sb.append(card.getText()); // In the slight chance that there may be
+                                       // a need to add a note to this card.
             card.setText(sb.toString());
 
             card.addComesIntoPlayCommand(intoPlay);
@@ -1252,57 +1252,44 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*else if (cardName.equals("Pithing Needle")) {
-            final SpellAbility ability = new AbilityStatic(card, "0") {
-                @Override
-                public void resolve() {
-                    String cardName = "";
-                    if (card.getController().isHuman()) {
-                        final List<String> cards = new ArrayList<String>();
-                        for (final CardPrinted c : CardDb.instance().getAllUniqueCards()) {
-                            cards.add(c.getName());
-                        }
-                        Collections.sort(cards);
-
-                        // use standard forge's list selection dialog
-                        final ListChooser<String> c = new ListChooser<String>(
-                                "Name a card to disable activation of its non-mana abilities", 1, 1, cards);
-                        c.show();
-                        // still missing a listener to display the card preview
-                        // in the right
-                        cardName = c.getSelectedValue();
-                    } else {
-                        // AI CODE WILL EVENTUALLY GO HERE!
-                    }
-                    card.setSVar("PithingTarget", cardName);
-                    card.setChosenType(cardName);
-                }
-            }; // ability
-            ability.setStackDescription("As Pithing Needle enters the battlefield, name a card.");
-            final Command intoPlay = new Command() {
-
-                private static final long serialVersionUID = 2266471224097876143L;
-
-                @Override
-                public void execute() {
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                }
-            };
-
-            final Command leavesPlay = new Command() {
-
-                private static final long serialVersionUID = 7079781778752377760L;
-
-                @Override
-                public void execute() {
-                    card.setSVar("Pithing Target", "");
-                }
-            };
-
-            card.addComesIntoPlayCommand(intoPlay);
-            card.addLeavesPlayCommand(leavesPlay);
-        }*/ // *************** END ************ END **************************
+        /*
+         * else if (cardName.equals("Pithing Needle")) { final SpellAbility
+         * ability = new AbilityStatic(card, "0") {
+         * 
+         * @Override public void resolve() { String cardName = ""; if
+         * (card.getController().isHuman()) { final List<String> cards = new
+         * ArrayList<String>(); for (final CardPrinted c :
+         * CardDb.instance().getAllUniqueCards()) { cards.add(c.getName()); }
+         * Collections.sort(cards);
+         * 
+         * // use standard forge's list selection dialog final
+         * ListChooser<String> c = new ListChooser<String>(
+         * "Name a card to disable activation of its non-mana abilities", 1, 1,
+         * cards); c.show(); // still missing a listener to display the card
+         * preview // in the right cardName = c.getSelectedValue(); } else { //
+         * AI CODE WILL EVENTUALLY GO HERE! } card.setSVar("PithingTarget",
+         * cardName); card.setChosenType(cardName); } }; // ability
+         * ability.setStackDescription
+         * ("As Pithing Needle enters the battlefield, name a card."); final
+         * Command intoPlay = new Command() {
+         * 
+         * private static final long serialVersionUID = 2266471224097876143L;
+         * 
+         * @Override public void execute() {
+         * AllZone.getStack().addSimultaneousStackEntry(ability);
+         * 
+         * } };
+         * 
+         * final Command leavesPlay = new Command() {
+         * 
+         * private static final long serialVersionUID = 7079781778752377760L;
+         * 
+         * @Override public void execute() { card.setSVar("Pithing Target", "");
+         * } };
+         * 
+         * card.addComesIntoPlayCommand(intoPlay);
+         * card.addLeavesPlayCommand(leavesPlay); }
+         */// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Processor")) {

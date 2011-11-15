@@ -93,7 +93,8 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellPump() {
-        final SpellAbility spPump = new Spell(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility spPump = new Spell(this.hostCard, this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 42244224L;
 
             @Override
@@ -123,7 +124,8 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPump() {
-        final SpellAbility abPump = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility abPump = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1118592153328758083L;
 
             @Override
@@ -360,7 +362,7 @@ public class AbilityFactoryPump {
                 if (!this.containsCombatRelevantKeyword(this.keywords)
                         && AllZone.getPhase().isBefore(Constant.Phase.MAIN2)) {
                     list.clear(); // this keyword is not combat relevenat
-                } else if (this.keywords.get(0).equals("HIDDEN CARDNAME attacks each turn if able.") 
+                } else if (this.keywords.get(0).equals("HIDDEN CARDNAME attacks each turn if able.")
                         && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.clear();
                 }
@@ -368,8 +370,9 @@ public class AbilityFactoryPump {
                 list = list.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
-                        return !c.hasAnyKeyword(keywords); // don't add duplicate
-                                                      // negative keywords
+                        return !c.hasAnyKeyword(keywords); // don't add
+                                                           // duplicate
+                        // negative keywords
                     }
                 });
             }
@@ -530,8 +533,10 @@ public class AbilityFactoryPump {
      * @return a boolean.
      */
     private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
-        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && !(this.abilityFactory.isCurse() && ((defense < 0) || !this.containsCombatRelevantKeyword(this.keywords)))) {
+        if (!mandatory
+                && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && !(this.abilityFactory.isCurse() && ((defense < 0) || !this
+                        .containsCombatRelevantKeyword(this.keywords)))) {
             return false;
         }
 
@@ -970,7 +975,8 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityPumpAll() {
-        final SpellAbility abPumpAll = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility abPumpAll = new AbilityActivated(this.hostCard, this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -8299417521903307630L;
 
             @Override
@@ -990,7 +996,8 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPump.this.pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
+                return AbilityFactoryPump.this
+                        .pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
 
         }; // SpellAbility
@@ -1006,7 +1013,8 @@ public class AbilityFactoryPump {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellPumpAll() {
-        final SpellAbility spPumpAll = new Spell(this.hostCard, this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility spPumpAll = new Spell(this.hostCard, this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -4055467978660824703L;
 
             @Override
@@ -1056,7 +1064,8 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPump.this.pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
+                return AbilityFactoryPump.this
+                        .pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
         }; // SpellAbility
 
@@ -1165,29 +1174,26 @@ public class AbilityFactoryPump {
             // use it
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), this.params.get("Defined"), sa);
         }
-        
-        if(this.params.containsKey("PumpZone")) {
-            for(String zone : this.params.get("PumpZone").split(",")) {
+
+        if (this.params.containsKey("PumpZone")) {
+            for (final String zone : this.params.get("PumpZone").split(",")) {
                 affectedZones.add(Zone.valueOf(zone));
             }
-        }
-        else {
+        } else {
             affectedZones.add(Zone.Battlefield);
         }
 
         list = new CardList();
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            for(Zone zone : affectedZones) {
+            for (final Zone zone : affectedZones) {
                 list.addAll(AllZoneUtil.getCardsIn(zone));
             }
-            
+
         } else {
-            for(Zone zone : affectedZones) {
+            for (final Zone zone : affectedZones) {
                 list.addAll(tgtPlayers.get(0).getCardsIn(zone));
             }
         }
-        
-        
 
         String valid = "";
         if (this.params.containsKey("ValidCards")) {
@@ -1204,8 +1210,8 @@ public class AbilityFactoryPump {
 
             // only pump things in the affected zones.
             boolean found = false;
-            for(Zone z : affectedZones) {
-                if(c.isInZone(z)) {
+            for (final Zone z : affectedZones) {
+                if (c.isInZone(z)) {
                     found = true;
                     break;
                 }

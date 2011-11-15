@@ -78,16 +78,34 @@ public class FPanel extends JPanel {
             this.setOpaque(false);
         }
     }
-    
-    public void setPreferredSize(int w, int h) {
-        setPreferredSize(new Dimension(w,h));
+
+    /**
+     * Sets the preferred size.
+     *
+     * @param w the w
+     * @param h the h
+     */
+    public void setPreferredSize(final int w, final int h) {
+        this.setPreferredSize(new Dimension(w, h));
     }
-    
-    public void setMaximumSize(int w, int h) {
-        setMaximumSize(new Dimension(w,h));
+
+    /**
+     * Sets the maximum size.
+     *
+     * @param w the w
+     * @param h the h
+     */
+    public void setMaximumSize(final int w, final int h) {
+        this.setMaximumSize(new Dimension(w, h));
     }
-    
-    public void setMinimumSize(int w, int h) {
-        setMinimumSize(new Dimension(w,h));
+
+    /**
+     * Sets the minimum size.
+     *
+     * @param w the w
+     * @param h the h
+     */
+    public void setMinimumSize(final int w, final int h) {
+        this.setMinimumSize(new Dimension(w, h));
     }
 }

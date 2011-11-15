@@ -55,12 +55,12 @@ public final class DeckEditorShop extends DeckEditorBase {
     private double multiplier;
 
     private final QuestData questData;
-    
+
     // get pricelist:
     private final ReadPriceList r = new ReadPriceList();
     private final Map<String, Integer> mapPrices = this.r.getPriceList();
     private Map<CardPrinted, Integer> decksUsingMyCards;
-    
+
     /**
      * Show.
      * 
@@ -77,7 +77,7 @@ public final class DeckEditorShop extends DeckEditorBase {
                 exitCommand.execute();
             }
         };
-        
+
         // do not change this!!!!
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -98,7 +98,7 @@ public final class DeckEditorShop extends DeckEditorBase {
             forSale = this.questData.getCards().getShopList();
         }
         final ItemPoolView<InventoryItem> owned = this.questData.getCards().getCardpool().getView();
-        //newCardsList = questData.getCards().getNewCards();
+        // newCardsList = questData.getCards().getNewCards();
 
         this.setItems(forSale, owned, GameType.Quest);
 
@@ -131,7 +131,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         }
         return result;
     }
-    
+
     /**
      * <p>
      * setup.
@@ -156,7 +156,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         columns.add(new TableColumnInfo<InventoryItem>("Set", 35, PresetColumns.FN_SET_COMPARE,
                 PresetColumns.FN_SET_GET));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
-        
+
         final List<TableColumnInfo<InventoryItem>> columnsBelow = new ArrayList<TableColumnInfo<InventoryItem>>(columns);
         columns.add(new TableColumnInfo<InventoryItem>("Price", 36, this.fnPriceCompare, this.fnPriceGet));
         this.getTopTableWithCards().setup(columns, this.getCardView());
@@ -212,7 +212,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         // removeButton.setIcon(upIcon);
         if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
-            }
+        }
         this.sellButton.setText("Sell Card");
         this.sellButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -250,7 +250,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         }
         this.jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         this.jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
-        
+
         this.getContentPane().add(this.getCardView(), null);
         this.getContentPane().add(this.getTopTableWithCards().getTableDecorated(), null);
         this.getContentPane().add(this.getBottomTableWithCards().getTableDecorated(), null);
@@ -265,7 +265,7 @@ public final class DeckEditorShop extends DeckEditorBase {
     private Integer getCardValue(final InventoryItem card) {
         if (this.mapPrices.containsKey(card.getName())) {
             return this.mapPrices.get(card.getName());
-        } else if (card instanceof CardPrinted)  {
+        } else if (card instanceof CardPrinted) {
             switch (((CardPrinted) card).getRarity()) {
             case BasicLand:
                 return Integer.valueOf(4);
@@ -366,20 +366,20 @@ public final class DeckEditorShop extends DeckEditorBase {
             return (int) (DeckEditorShop.this.multiplier * DeckEditorShop.this.getCardValue(from.getKey()));
         }
     };
-            
+
     @SuppressWarnings("rawtypes")
     private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnDeckCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
-            public Comparable apply(final Entry<InventoryItem, Integer> from) {
+        public Comparable apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = DeckEditorShop.this.decksUsingMyCards.get(from.getKey());
-                return iValue == null ? Integer.valueOf(0) : iValue;
+            return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
     private final Lambda1<Object, Entry<InventoryItem, Integer>> fnDeckGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
-            public Object apply(final Entry<InventoryItem, Integer> from) {
+        public Object apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = DeckEditorShop.this.decksUsingMyCards.get(from.getKey());
-                return iValue == null ? "" : iValue.toString();
+            return iValue == null ? "" : iValue.toString();
         }
     };
 

@@ -51,11 +51,11 @@ public final class CardUtil {
      * @return a int.
      */
     public static int getRandomIndex(final Object[] o) {
-        if (o == null || o.length == 0) {
+        if ((o == null) || (o.length == 0)) {
             throw new RuntimeException("CardUtil : getRandomIndex() argument is null or length is 0");
         }
 
-        return RANDOM.nextInt(o.length);
+        return CardUtil.RANDOM.nextInt(o.length);
     }
 
     /**
@@ -68,7 +68,7 @@ public final class CardUtil {
      * @return a {@link forge.Card} object.
      */
     public static Card getRandom(final Card[] o) {
-        return o[getRandomIndex(o)];
+        return o[CardUtil.getRandomIndex(o)];
     }
 
     /**
@@ -81,11 +81,11 @@ public final class CardUtil {
      * @return a int.
      */
     public static int getRandomIndex(final SpellAbilityList list) {
-        if (list == null || list.size() == 0) {
+        if ((list == null) || (list.size() == 0)) {
             throw new RuntimeException("CardUtil : getRandomIndex(SpellAbilityList) argument is null or length is 0");
         }
 
-        return RANDOM.nextInt(list.size());
+        return CardUtil.RANDOM.nextInt(list.size());
     }
 
     /**
@@ -98,7 +98,7 @@ public final class CardUtil {
      * @return a int.
      */
     public static int getRandomIndex(final CardList c) {
-        return RANDOM.nextInt(c.size());
+        return CardUtil.RANDOM.nextInt(c.size());
     }
 
     // returns Card Name (unique number) attack/defense
@@ -126,11 +126,11 @@ public final class CardUtil {
      * @return an array of {@link forge.Card} objects.
      */
     public static Card[] toCard(final Collection<Card> col) {
-        Object[] o = col.toArray();
-        Card[] c = new Card[o.length];
+        final Object[] o = col.toArray();
+        final Card[] c = new Card[o.length];
 
         for (int i = 0; i < c.length; i++) {
-            Object swap = o[i];
+            final Object swap = o[i];
             if (swap instanceof Card) {
                 c[i] = (Card) o[i];
             } else {
@@ -152,7 +152,7 @@ public final class CardUtil {
      * @return an array of {@link forge.Card} objects.
      */
     public static Card[] toCard(final ArrayList<Card> list) {
-        Card[] c = new Card[list.size()];
+        final Card[] c = new Card[list.size()];
         list.toArray(c);
         return c;
     }
@@ -167,9 +167,9 @@ public final class CardUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Card> toList(final Card[] c) {
-        ArrayList<Card> a = new ArrayList<Card>();
-        for (int i = 0; i < c.length; i++) {
-            a.add(c[i]);
+        final ArrayList<Card> a = new ArrayList<Card>();
+        for (final Card element : c) {
+            a.add(element);
         }
         return a;
     }
@@ -185,14 +185,14 @@ public final class CardUtil {
      * @return a {@link java.lang.String} object.
      */
     public static String getShortColor(final String longColor) {
-        Map<String, String> map = new HashMap<String, String>();
+        final Map<String, String> map = new HashMap<String, String>();
         map.put(Constant.Color.BLACK.toString(), "B");
         map.put(Constant.Color.BLUE.toString(), "U");
         map.put(Constant.Color.GREEN.toString(), "G");
         map.put(Constant.Color.RED.toString(), "R");
         map.put(Constant.Color.WHITE.toString(), "W");
 
-        Object o = map.get(longColor);
+        final Object o = map.get(longColor);
         if (o == null) {
             throw new RuntimeException("CardUtil : getShortColor() invalid argument - " + longColor);
         }
@@ -212,7 +212,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isColor(final Card c, final String col) {
-        ArrayList<String> list = getColors(c);
+        final ArrayList<String> list = CardUtil.getColors(c);
         return list.contains(col);
     }
 
@@ -239,8 +239,8 @@ public final class CardUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> getOnlyColors(final Card c) {
-        String m = c.getManaCost();
-        Set<String> colors = new HashSet<String>();
+        final String m = c.getManaCost();
+        final Set<String> colors = new HashSet<String>();
 
         for (int i = 0; i < m.length(); i++) {
             switch (m.charAt(i)) {
@@ -265,9 +265,9 @@ public final class CardUtil {
                 break;
             }
         }
-        for (String kw : c.getKeyword()) {
+        for (final String kw : c.getKeyword()) {
             if (kw.startsWith(c.getName() + " is ") || kw.startsWith("CARDNAME is ")) {
-                for (String color : Constant.Color.COLORS) {
+                for (final String color : Constant.Color.COLORS) {
                     if (kw.endsWith(color + ".")) {
                         colors.add(color);
                     }
@@ -313,7 +313,7 @@ public final class CardUtil {
      * @return a int.
      */
     public static int getConvertedManaCost(final SpellAbility sa) {
-        return getConvertedManaCost(sa.getManaCost());
+        return CardUtil.getConvertedManaCost(sa.getManaCost());
     }
 
     /**
@@ -329,7 +329,7 @@ public final class CardUtil {
         if (c.isToken() && !c.isCopiedToken()) {
             return 0;
         }
-        return getConvertedManaCost(c.getManaCost());
+        return CardUtil.getConvertedManaCost(c.getManaCost());
     }
 
     /**
@@ -346,7 +346,7 @@ public final class CardUtil {
             return 0;
         }
 
-        ManaCost cost = new ManaCost(manaCost);
+        final ManaCost cost = new ManaCost(manaCost);
         return cost.getConvertedManaCost();
     }
 
@@ -413,8 +413,7 @@ public final class CardUtil {
             return c.getEquipping().get(0);
             // else if(relation.startsWith("target ")) return c.getTargetCard();
         } else {
-            throw new IllegalArgumentException("Error at CardUtil.getRelative: "
-        + relation + "is not a valid relation");
+            throw new IllegalArgumentException("Error at CardUtil.getRelative: " + relation + "is not a valid relation");
         }
     }
 
@@ -428,7 +427,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isACardType(final String cardType) {
-        return getAllCardTypes().contains(cardType);
+        return CardUtil.getAllCardTypes().contains(cardType);
     }
 
     /**
@@ -439,7 +438,7 @@ public final class CardUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> getAllCardTypes() {
-        ArrayList<String> types = new ArrayList<String>();
+        final ArrayList<String> types = new ArrayList<String>();
 
         // types.addAll(getCardTypes());
         types.addAll(Constant.CardTypes.CARD_TYPES[0].getList());
@@ -460,7 +459,7 @@ public final class CardUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> getCardTypes() {
-        ArrayList<String> types = new ArrayList<String>();
+        final ArrayList<String> types = new ArrayList<String>();
 
         // types.add("Artifact");
         // types.add("Creature");
@@ -485,7 +484,7 @@ public final class CardUtil {
      * @since 1.1.3
      */
     public static ArrayList<String> getBasicTypes() {
-        ArrayList<String> types = new ArrayList<String>();
+        final ArrayList<String> types = new ArrayList<String>();
 
         types.addAll(Constant.CardTypes.BASIC_TYPES[0].getList());
 
@@ -498,7 +497,7 @@ public final class CardUtil {
      * @return the land types
      */
     public static ArrayList<String> getLandTypes() {
-        ArrayList<String> types = new ArrayList<String>();
+        final ArrayList<String> types = new ArrayList<String>();
 
         types.addAll(Constant.CardTypes.BASIC_TYPES[0].getList());
         types.addAll(Constant.CardTypes.LAND_TYPES[0].getList());
@@ -515,7 +514,7 @@ public final class CardUtil {
      * @since 1.1.6
      */
     public static ArrayList<String> getCreatureTypes() {
-        ArrayList<String> types = new ArrayList<String>();
+        final ArrayList<String> types = new ArrayList<String>();
 
         types.addAll(Constant.CardTypes.CREATURE_TYPES[0].getList());
 
@@ -546,7 +545,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isASubType(final String cardType) {
-        return (!isASuperType(cardType) && !isACardType(cardType));
+        return (!CardUtil.isASuperType(cardType) && !CardUtil.isACardType(cardType));
     }
 
     /**
@@ -624,7 +623,7 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isStackingKeyword(final String keyword) {
-        return !isNonStackingKeyword(keyword);
+        return !CardUtil.isNonStackingKeyword(keyword);
     }
 
     /**
@@ -639,8 +638,8 @@ public final class CardUtil {
      * @return the string
      */
     public static String buildIdealFilename(final String cardName, final int artIndex, final int artIndexMax) {
-        String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
-        String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
+        final String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
+        final String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
         // 3 letter set code with MWS filename format
         return String.format("%s%s.full.jpg", mwsCardName, nn);
     }
@@ -655,18 +654,19 @@ public final class CardUtil {
      * @return a {@link java.lang.String} object.
      */
     public static String buildFilename(final Card card) {
-        boolean token = card.isToken() && !card.isCopiedToken();
+        final boolean token = card.isToken() && !card.isCopiedToken();
 
         final String set = card.getCurSetCode();
-        Predicate<SetInfo> findSetInfo = new Predicate<SetInfo>() {
+        final Predicate<SetInfo> findSetInfo = new Predicate<SetInfo>() {
             @Override
             public boolean isTrue(final SetInfo subject) {
                 return subject.getCode().equals(set);
             }
         };
-        SetInfo neededSet = findSetInfo.first(card.getSets());
-        int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
-        return buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
+        final SetInfo neededSet = findSetInfo.first(card.getSets());
+        final int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
+        return CardUtil
+                .buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
     }
 
     /**
@@ -677,41 +677,48 @@ public final class CardUtil {
      * @return the string
      */
     public static String buildFilename(final CardPrinted card) {
-        int maxIndex = card.getCard().getSetInfo(card.getSet()).getCopiesCount();
-        return buildFilename(card.getName(), card.getSet(), card.getArtIndex(), maxIndex, false);
+        final int maxIndex = card.getCard().getSetInfo(card.getSet()).getCopiesCount();
+        return CardUtil.buildFilename(card.getName(), card.getSet(), card.getArtIndex(), maxIndex, false);
     }
 
-    public static String buildFilename(final CardPrinted card, String nameToUse) {
-        int maxIndex = card.getCard().getSetInfo(card.getSet()).getCopiesCount();
-        return buildFilename(nameToUse, card.getSet(), card.getArtIndex(), maxIndex, false);
-    }    
-    
+    /**
+     * Builds the filename.
+     *
+     * @param card the card
+     * @param nameToUse the name to use
+     * @return the string
+     */
+    public static String buildFilename(final CardPrinted card, final String nameToUse) {
+        final int maxIndex = card.getCard().getSetInfo(card.getSet()).getCopiesCount();
+        return CardUtil.buildFilename(nameToUse, card.getSet(), card.getArtIndex(), maxIndex, false);
+    }
+
     private static String buildFilename(final String cardName, final String setName, final int artIndex,
             final int artIndexMax, final boolean isToken) {
-        File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);
-        String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
-        String cleanCardName = GuiDisplayUtil.cleanString(cardName);
+        final File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);
+        final String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
+        final String cleanCardName = GuiDisplayUtil.cleanString(cardName);
 
         File f = null;
         if (StringUtils.isNotBlank(setName)) {
-            String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
+            final String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
 
             // First, try 3 letter set code with MWS filename format
-            String mwsSet3 = String.format("%s/%s%s.full", setName, mwsCardName, nn);
+            final String mwsSet3 = String.format("%s/%s%s.full", setName, mwsCardName, nn);
             f = new File(path, mwsSet3 + ".jpg");
             if (f.exists()) {
                 return mwsSet3;
             }
 
             // Second, try 2 letter set code with MWS filename format
-            String mwsSet2 = String.format("%s/%s%s.full", SetUtils.getCode2ByCode(setName), mwsCardName, nn);
+            final String mwsSet2 = String.format("%s/%s%s.full", SetUtils.getCode2ByCode(setName), mwsCardName, nn);
             f = new File(path, mwsSet2 + ".jpg");
             if (f.exists()) {
                 return mwsSet2;
             }
 
             // Third, try 3 letter set code with Forge filename format
-            String forgeSet3 = String.format("%s/%s%s", setName, cleanCardName, nn);
+            final String forgeSet3 = String.format("%s/%s%s", setName, cleanCardName, nn);
             f = new File(path, forgeSet3 + ".jpg");
             if (f.exists()) {
                 return forgeSet3;
@@ -719,7 +726,7 @@ public final class CardUtil {
         }
 
         // Last, give up with set images, go with the old picture type
-        String forgePlain = String.format("%s%s", cleanCardName, nn);
+        final String forgePlain = String.format("%s%s", cleanCardName, nn);
 
         f = new File(path, forgePlain + ".jpg");
         if (f.exists()) {
@@ -750,7 +757,7 @@ public final class CardUtil {
             return 0;
         }
 
-        ManaCost cost = new ManaCost(manaCost);
+        final ManaCost cost = new ManaCost(manaCost);
         return cost.getWeightedManaCost();
     }
 
@@ -765,7 +772,7 @@ public final class CardUtil {
      */
     public static String getShortColorsString(final ArrayList<String> colors) {
         String colorDesc = "";
-        for (String col : colors) {
+        for (final String col : colors) {
             if (col.equalsIgnoreCase("White")) {
                 colorDesc += "W";
             } else if (col.equalsIgnoreCase("Blue")) {
@@ -888,7 +895,7 @@ public final class CardUtil {
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card c) {
-        Card res = AllZone.getCardFactory().copyCard(c);
+        final Card res = AllZone.getCardFactory().copyCard(c);
         res.setControllerObjects(c.getControllerObjects());
         res.addTempAttackBoost(c.getTempAttackBoost());
         res.addTempDefenseBoost(c.getTempDefenseBoost());
@@ -899,7 +906,7 @@ public final class CardUtil {
         res.setNewPT(c.getNewPT());
         res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
         res.setHaunting(c.getHaunting());
-        for (Card haunter : c.getHauntedBy()) {
+        for (final Card haunter : c.getHauntedBy()) {
             res.addHauntedBy(haunter);
         }
 
@@ -918,14 +925,14 @@ public final class CardUtil {
      * @return the radiance
      */
     public static CardList getRadiance(final Card source, final Card origin, final String[] valid) {
-        CardList res = new CardList();
+        final CardList res = new CardList();
 
-        for (CardColor col : origin.getColor()) {
-            for (String strCol : col.toStringArray()) {
+        for (final CardColor col : origin.getColor()) {
+            for (final String strCol : col.toStringArray()) {
                 if (strCol.equalsIgnoreCase("Colorless")) {
                     continue;
                 }
-                for (Card c : AllZoneUtil.getColorInPlay(strCol)) {
+                for (final Card c : AllZoneUtil.getColorInPlay(strCol)) {
                     if (!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
                         res.add(c);
                     }
@@ -935,48 +942,54 @@ public final class CardUtil {
 
         return res;
     }
-    
-    public static ArrayList<String> getConvokableColors(final Card cardToConvoke, ManaCost cost)
-    {
-        ArrayList<String> usableColors = new ArrayList<String>();
-        
-        if(cost.getColorlessManaAmount() > 0)
-        {
+
+    /**
+     * Gets the convokable colors.
+     *
+     * @param cardToConvoke the card to convoke
+     * @param cost the cost
+     * @return the convokable colors
+     */
+    public static ArrayList<String> getConvokableColors(final Card cardToConvoke, final ManaCost cost) {
+        final ArrayList<String> usableColors = new ArrayList<String>();
+
+        if (cost.getColorlessManaAmount() > 0) {
             usableColors.add("colorless");
         }
-        for(CardColor col : cardToConvoke.getColor())
-        {
-            for(String strCol : col.toStringArray())
-            {
-                if(strCol.equals("colorless"))
-                {
+        for (final CardColor col : cardToConvoke.getColor()) {
+            for (final String strCol : col.toStringArray()) {
+                if (strCol.equals("colorless")) {
                     continue;
                 }
-                if(cost.toString().contains(InputPayManaCostUtil.getShortColorString(strCol)))
-                {
+                if (cost.toString().contains(InputPayManaCostUtil.getShortColorString(strCol))) {
                     usableColors.add(strCol.toString());
                 }
             }
         }
-        
+
         return usableColors;
     }
-    
+
+    /**
+     * Gets the face down characteristic.
+     *
+     * @return the face down characteristic
+     */
     public static CardCharacteristics getFaceDownCharacteristic() {
-        ArrayList<String> types = new ArrayList<String>();
+        final ArrayList<String> types = new ArrayList<String>();
         types.add("Creature");
-        
-        CardCharacteristics ret = new CardCharacteristics();
+
+        final CardCharacteristics ret = new CardCharacteristics();
         ret.setBaseAttack(2);
         ret.setBaseDefense(2);
-        
+
         ret.setName("");
         ret.setType(types);
-        
+
         ret.setImageFilename("morph.jpg");
-        
+
         return ret;
-        
+
     }
 
 } // end class CardUtil

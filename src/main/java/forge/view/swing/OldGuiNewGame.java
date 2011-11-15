@@ -49,12 +49,12 @@ import forge.Command;
 import forge.Constant;
 import forge.ConstantStringArrayList;
 import forge.FileUtil;
-import forge.GuiImportPicture;
 import forge.GuiDisplay;
-import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadPicturesLQ;
 import forge.GuiDownloadPrices;
+import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
+import forge.GuiImportPicture;
 import forge.ImageCache;
 import forge.MyRandom;
 import forge.PlayerType;
@@ -139,7 +139,7 @@ public class OldGuiNewGame extends JFrame {
 
     private static JCheckBoxMenuItem singletons = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.SINGLETONS));
-    
+
     /** Constant <code>removeSmallCreatures</code>. */
     private static JCheckBoxMenuItem removeSmallCreatures = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.REMOVE_SMALL));
@@ -148,7 +148,8 @@ public class OldGuiNewGame extends JFrame {
     private static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.REMOVE_ARTIFACTS));
     /** Constant <code>useLAFFonts</code>. */
-    private static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.FONT));
+    private static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(
+            ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.FONT));
     /** Constant <code>cardOverlay</code>. */
     private static JCheckBoxMenuItem cardOverlay = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.CARD_OVERLAY));
@@ -245,8 +246,8 @@ public class OldGuiNewGame extends JFrame {
                 // CARD_SIZES_ACTION,
                 lookAndFeelAction, this.dnldPricesAction, this.downloadActionLQ, this.downloadActionSetLQ,
                 this.downloadActionQuest, this.importPicture, this.cardSizesAction, this.cardStackAction,
-                this.cardStackOffsetAction, this.bugzReporterAction, ErrorViewer.ALL_THREADS_ACTION,
-                this.aboutAction, this.exitAction };
+                this.cardStackOffsetAction, this.bugzReporterAction, ErrorViewer.ALL_THREADS_ACTION, this.aboutAction,
+                this.exitAction };
         final JMenu menu = new JMenu(ForgeProps.getLocalized(Menu.TITLE));
         for (final Action a : actions) {
             menu.add(a);
@@ -259,18 +260,18 @@ public class OldGuiNewGame extends JFrame {
         // useLAFFonts.setSelected(false);
 
         // new stuff
-        final JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.TITLE));
-        
+        final JMenu generatedDeck = new JMenu(
+                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.TITLE));
+
         generatedDeck.add(OldGuiNewGame.singletons);
         OldGuiNewGame.singletons.setSelected(Singletons.getModel().getPreferences().isDeckGenSingletons());
         OldGuiNewGame.singletons.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences()
-                        .setDeckGenSingletons(OldGuiNewGame.singletons.isSelected());
+                Singletons.getModel().getPreferences().setDeckGenSingletons(OldGuiNewGame.singletons.isSelected());
             }
         });
-        
+
         generatedDeck.add(OldGuiNewGame.removeSmallCreatures);
         OldGuiNewGame.removeSmallCreatures.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvSmall());
         OldGuiNewGame.removeSmallCreatures.addActionListener(new ActionListener() {
@@ -416,7 +417,8 @@ public class OldGuiNewGame extends JFrame {
 
             final String sDeckName = JOptionPane.showInputDialog(null,
                     ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
-                    ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL), JOptionPane.QUESTION_MESSAGE);
+                    ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
+                    JOptionPane.QUESTION_MESSAGE);
 
             deck.setName(sDeckName);
             deck.setPlayerType(PlayerType.HUMAN);
@@ -501,10 +503,12 @@ public class OldGuiNewGame extends JFrame {
          */
 
         /* jPanel2.setBorder(titledBorder1); */
-        this.setCustomBorder(this.jPanel2, ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.GAMETYPE));
+        this.setCustomBorder(this.jPanel2,
+                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.GAMETYPE));
         this.jPanel2.setLayout(new MigLayout("align center"));
 
-        this.singleRadioButton.setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.CONSTRUCTED_TEXT));
+        this.singleRadioButton.setText(ForgeProps
+                .getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.CONSTRUCTED_TEXT));
         this.singleRadioButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -513,7 +517,8 @@ public class OldGuiNewGame extends JFrame {
         });
 
         // sealedRadioButton.setToolTipText("");
-        this.sealedRadioButton.setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SEALED_TEXT));
+        this.sealedRadioButton
+                .setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SEALED_TEXT));
         this.sealedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -522,7 +527,8 @@ public class OldGuiNewGame extends JFrame {
         });
 
         // draftRadioButton.setToolTipText("");
-        this.draftRadioButton.setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.BOOSTER_TEXT));
+        this.draftRadioButton
+                .setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.BOOSTER_TEXT));
         this.draftRadioButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -546,13 +552,16 @@ public class OldGuiNewGame extends JFrame {
          */
 
         /* jPanel3.setBorder(titledBorder3); */
-        this.setCustomBorder(this.jPanel3, ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SETTINGS));
+        this.setCustomBorder(this.jPanel3,
+                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SETTINGS));
         this.jPanel3.setLayout(new MigLayout("align center"));
 
         // newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
-        OldGuiNewGame.getSmoothLandCheckBox().setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.AI_LAND));
+        OldGuiNewGame.getSmoothLandCheckBox().setText(
+                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.AI_LAND));
 
-        OldGuiNewGame.getDevModeCheckBox().setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.DEV_MODE));
+        OldGuiNewGame.getDevModeCheckBox().setText(
+                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.DEV_MODE));
         OldGuiNewGame.getDevModeCheckBox().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -563,9 +572,8 @@ public class OldGuiNewGame extends JFrame {
 
         OldGuiNewGame.getUpldDrftCheckBox().setText("Upload Draft Picks");
 
-        OldGuiNewGame.getUpldDrftCheckBox()
-                .setToolTipText("Your picks and all other participants' picks will help the Forge AI"
-                        + " make better draft picks.");
+        OldGuiNewGame.getUpldDrftCheckBox().setToolTipText(
+                "Your picks and all other participants' picks will help the Forge AI" + " make better draft picks.");
 
         OldGuiNewGame.getUpldDrftCheckBox().addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -576,8 +584,8 @@ public class OldGuiNewGame extends JFrame {
         });
 
         OldGuiNewGame.getFoilRandomCheckBox().setText("Random Foiling");
-        OldGuiNewGame.getFoilRandomCheckBox()
-                .setToolTipText("Approximately 1:20 cards will appear with foiling effects applied.");
+        OldGuiNewGame.getFoilRandomCheckBox().setToolTipText(
+                "Approximately 1:20 cards will appear with foiling effects applied.");
         OldGuiNewGame.getFoilRandomCheckBox().addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -1601,8 +1609,8 @@ public class OldGuiNewGame extends JFrame {
             area.setEditable(false);
             area.setOpaque(false);
 
-            JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(NewConstants.Lang.HowTo.TITLE),
-                    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, new JScrollPane(area),
+                    ForgeProps.getLocalized(NewConstants.Lang.HowTo.TITLE), JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -1883,27 +1891,30 @@ public class OldGuiNewGame extends JFrame {
      * @return the cardOverlay
      */
     public static JCheckBoxMenuItem getCardOverlay() {
-        return cardOverlay;
+        return OldGuiNewGame.cardOverlay;
     }
 
     /**
-     * @param cardOverlay the cardOverlay to set
+     * @param cardOverlay
+     *            the cardOverlay to set
      */
-    public static void setCardOverlay(JCheckBoxMenuItem cardOverlay) {
-        OldGuiNewGame.cardOverlay = cardOverlay; // TODO: Add 0 to parameter's name.
+    public static void setCardOverlay(final JCheckBoxMenuItem cardOverlay) {
+        OldGuiNewGame.cardOverlay = cardOverlay; // TODO: Add 0 to parameter's
+                                                 // name.
     }
 
     /**
      * @return the cardScale
      */
     public static JCheckBoxMenuItem getCardScale() {
-        return cardScale;
+        return OldGuiNewGame.cardScale;
     }
 
     /**
-     * @param cardScale the cardScale to set
+     * @param cardScale
+     *            the cardScale to set
      */
-    public static void setCardScale(JCheckBoxMenuItem cardScale) {
+    public static void setCardScale(final JCheckBoxMenuItem cardScale) {
         OldGuiNewGame.cardScale = cardScale; // TODO: Add 0 to parameter's name.
     }
 
@@ -1911,70 +1922,82 @@ public class OldGuiNewGame extends JFrame {
      * @return the useLAFFonts
      */
     public static JCheckBoxMenuItem getUseLAFFonts() {
-        return useLAFFonts;
+        return OldGuiNewGame.useLAFFonts;
     }
 
     /**
-     * @param useLAFFonts the useLAFFonts to set
+     * @param useLAFFonts
+     *            the useLAFFonts to set
      */
-    public static void setUseLAFFonts(JCheckBoxMenuItem useLAFFonts) {
-        OldGuiNewGame.useLAFFonts = useLAFFonts; // TODO: Add 0 to parameter's name.
+    public static void setUseLAFFonts(final JCheckBoxMenuItem useLAFFonts) {
+        OldGuiNewGame.useLAFFonts = useLAFFonts; // TODO: Add 0 to parameter's
+                                                 // name.
     }
 
     /**
      * @return the smoothLandCheckBox
      */
     static JCheckBox getSmoothLandCheckBox() {
-        return smoothLandCheckBox;
+        return OldGuiNewGame.smoothLandCheckBox;
     }
 
     /**
-     * @param smoothLandCheckBox the smoothLandCheckBox to set
+     * @param smoothLandCheckBox
+     *            the smoothLandCheckBox to set
      */
-    static void setSmoothLandCheckBox(JCheckBox smoothLandCheckBox) {
-        OldGuiNewGame.smoothLandCheckBox = smoothLandCheckBox; // TODO: Add 0 to parameter's name.
+    static void setSmoothLandCheckBox(final JCheckBox smoothLandCheckBox) {
+        OldGuiNewGame.smoothLandCheckBox = smoothLandCheckBox; // TODO: Add 0 to
+                                                               // parameter's
+                                                               // name.
     }
 
     /**
      * @return the devModeCheckBox
      */
     public static JCheckBox getDevModeCheckBox() {
-        return devModeCheckBox;
+        return OldGuiNewGame.devModeCheckBox;
     }
 
     /**
-     * @param devModeCheckBox the devModeCheckBox to set
+     * @param devModeCheckBox
+     *            the devModeCheckBox to set
      */
-    public static void setDevModeCheckBox(JCheckBox devModeCheckBox) {
-        OldGuiNewGame.devModeCheckBox = devModeCheckBox; // TODO: Add 0 to parameter's name.
+    public static void setDevModeCheckBox(final JCheckBox devModeCheckBox) {
+        OldGuiNewGame.devModeCheckBox = devModeCheckBox; // TODO: Add 0 to
+                                                         // parameter's name.
     }
 
     /**
      * @return the upldDrftCheckBox
      */
     public static JCheckBox getUpldDrftCheckBox() {
-        return upldDrftCheckBox;
+        return OldGuiNewGame.upldDrftCheckBox;
     }
 
     /**
-     * @param upldDrftCheckBox the upldDrftCheckBox to set
+     * @param upldDrftCheckBox
+     *            the upldDrftCheckBox to set
      */
-    public static void setUpldDrftCheckBox(JCheckBox upldDrftCheckBox) {
-        OldGuiNewGame.upldDrftCheckBox = upldDrftCheckBox; // TODO: Add 0 to parameter's name.
+    public static void setUpldDrftCheckBox(final JCheckBox upldDrftCheckBox) {
+        OldGuiNewGame.upldDrftCheckBox = upldDrftCheckBox; // TODO: Add 0 to
+                                                           // parameter's name.
     }
 
     /**
      * @return the foilRandomCheckBox
      */
     public static JCheckBox getFoilRandomCheckBox() {
-        return foilRandomCheckBox;
+        return OldGuiNewGame.foilRandomCheckBox;
     }
 
     /**
-     * @param foilRandomCheckBox the foilRandomCheckBox to set
+     * @param foilRandomCheckBox
+     *            the foilRandomCheckBox to set
      */
-    public static void setFoilRandomCheckBox(JCheckBox foilRandomCheckBox) {
-        OldGuiNewGame.foilRandomCheckBox = foilRandomCheckBox; // TODO: Add 0 to parameter's name.
+    public static void setFoilRandomCheckBox(final JCheckBox foilRandomCheckBox) {
+        OldGuiNewGame.foilRandomCheckBox = foilRandomCheckBox; // TODO: Add 0 to
+                                                               // parameter's
+                                                               // name.
     }
 
 }

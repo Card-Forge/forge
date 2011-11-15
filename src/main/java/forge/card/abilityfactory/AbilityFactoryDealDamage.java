@@ -63,8 +63,8 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getAbilityDealDamage() {
-        final SpellAbility abDamage = new AbilityActivated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
-                this.abilityFactory.getAbTgt()) {
+        final SpellAbility abDamage = new AbilityActivated(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -7560349014757367722L;
 
             @Override
@@ -74,7 +74,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryDealDamage.this.dealDamageStackDescription(AbilityFactoryDealDamage.this.abilityFactory, this);
+                return AbilityFactoryDealDamage.this.dealDamageStackDescription(
+                        AbilityFactoryDealDamage.this.abilityFactory, this);
             }
 
             @Override
@@ -84,8 +85,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory, this,
-                        mandatory);
+                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(
+                        AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }; // Ability_Activated
 
@@ -100,7 +101,8 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellDealDamage() {
-        final SpellAbility spDealDamage = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility spDealDamage = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -111,7 +113,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryDealDamage.this.dealDamageStackDescription(AbilityFactoryDealDamage.this.abilityFactory, this);
+                return AbilityFactoryDealDamage.this.dealDamageStackDescription(
+                        AbilityFactoryDealDamage.this.abilityFactory, this);
             }
 
             @Override
@@ -132,7 +135,8 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackDealDamage() {
-        final SpellAbility dbDealDamage = new AbilitySub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbDealDamage = new AbilitySub(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -143,7 +147,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryDealDamage.this.dealDamageStackDescription(AbilityFactoryDealDamage.this.abilityFactory, this);
+                return AbilityFactoryDealDamage.this.dealDamageStackDescription(
+                        AbilityFactoryDealDamage.this.abilityFactory, this);
             }
 
             @Override
@@ -153,8 +158,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory, this,
-                        mandatory);
+                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(
+                        AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
 
         }; // Drawback
@@ -428,7 +433,8 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    private Card dealDamageChooseTgtC(final SpellAbility saMe, final int d, final boolean noPrevention, final Player pl, final boolean mandatory) {
+    private Card dealDamageChooseTgtC(final SpellAbility saMe, final int d, final boolean noPrevention,
+            final Player pl, final boolean mandatory) {
         final Target tgt = this.abilityFactory.getAbTgt();
         final Card source = this.abilityFactory.getHostCard();
         CardList hPlay = pl.getCardsIn(Zone.Battlefield);
@@ -594,8 +600,8 @@ public class AbilityFactoryDealDamage {
      */
     private boolean damageChooseNontargeted(final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
-        final ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), this.abilityFactory.getMapParams()
-                .get("Defined"), saMe);
+        final ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), this.abilityFactory
+                .getMapParams().get("Defined"), saMe);
 
         for (final Object o : objects) {
             if (o instanceof Card) {
@@ -643,7 +649,8 @@ public class AbilityFactoryDealDamage {
         while (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)) {
             // TODO: Consider targeting the planeswalker
             if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getComputerPlayer(), mandatory);
+                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getComputerPlayer(),
+                        mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
                     continue;
@@ -757,7 +764,7 @@ public class AbilityFactoryDealDamage {
                     break;
                 }
             }
-         // Can't radiate from a player
+            // Can't radiate from a player
             if (origin != null) {
                 for (final Card c : CardUtil.getRadiance(this.abilityFactory.getHostCard(), origin,
                         params.get("ValidTgts").split(","))) {
@@ -806,8 +813,8 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getAbilityDamageAll() {
 
-        final SpellAbility abDamageAll = new AbilityActivated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
-                this.abilityFactory.getAbTgt()) {
+        final SpellAbility abDamageAll = new AbilityActivated(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1831356710492849854L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -828,8 +835,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory, this,
-                        mandatory);
+                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory,
+                        this, mandatory);
             }
 
         };
@@ -844,7 +851,8 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellDamageAll() {
-        final SpellAbility spDamageAll = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility spDamageAll = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8004957182752984818L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
             private final HashMap<String, String> params = this.af.getMapParams();
@@ -881,7 +889,8 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackDamageAll() {
-        final SpellAbility dbDamageAll = new AbilitySub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbDamageAll = new AbilitySub(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -6169562107675964474L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -903,8 +912,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory, this,
-                        mandatory);
+                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory,
+                        this, mandatory);
             }
 
         };
@@ -1207,7 +1216,7 @@ public class AbilityFactoryDealDamage {
             targetPlayer.addDamage(dmg, card);
         }
     }
-    
+
     // *************************************************************************
     // ***************************** EachDamage ********************************
     // *************************************************************************
@@ -1220,8 +1229,8 @@ public class AbilityFactoryDealDamage {
      */
     public final SpellAbility getAbilityEachDamage() {
 
-        final SpellAbility abEachDamage = new AbilityActivated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
-                this.abilityFactory.getAbTgt()) {
+        final SpellAbility abEachDamage = new AbilityActivated(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1831356710492849854L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -1242,8 +1251,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory, this,
-                        mandatory);
+                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(
+                        AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
 
         };
@@ -1258,7 +1267,8 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpellEachDamage() {
-        final SpellAbility spEachDamage = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility spEachDamage = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8004957182752984818L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
             private final HashMap<String, String> params = this.af.getMapParams();
@@ -1295,7 +1305,8 @@ public class AbilityFactoryDealDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawbackEachDamage() {
-        final SpellAbility dbEachDamage = new AbilitySub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbEachDamage = new AbilitySub(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -6169562107675964474L;
             private final AbilityFactory af = AbilityFactoryDealDamage.this.abilityFactory;
 
@@ -1317,8 +1328,8 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory, this,
-                        mandatory);
+                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(
+                        AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
 
         };
@@ -1339,36 +1350,36 @@ public class AbilityFactoryDealDamage {
     private String eachDamageStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final HashMap<String, String> params = af.getMapParams();
-        
+
         if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
-        
+
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("DefinedPlayers"), sa);
         }
-        
+
         String desc = params.get("ValidCards");
         if (params.containsKey("ValidDescription")) {
             desc = params.get("ValidDescription");
         }
-        
+
         String dmg = "";
         if (params.containsKey("DamageDesc")) {
             dmg = params.get("DamageDesc");
         } else {
-            dmg += getNumDamage(sa) + " damage";
+            dmg += this.getNumDamage(sa) + " damage";
         }
 
         sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
-        for (Player p : tgtPlayers) {
+        for (final Player p : tgtPlayers) {
             sb.append(p);
         }
         if (params.containsKey("DefinedCards")) {
@@ -1394,8 +1405,8 @@ public class AbilityFactoryDealDamage {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
         }
-        
-        return shouldTgtP(sa, getNumDamage(sa), false);
+
+        return this.shouldTgtP(sa, this.getNumDamage(sa), false);
     }
 
     private boolean eachDamageDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -1407,7 +1418,7 @@ public class AbilityFactoryDealDamage {
             return sa.getSubAbility().doTrigger(mandatory);
         }
 
-        return eachDamageCanPlayAI(af, sa);
+        return this.eachDamageCanPlayAI(af, sa);
     }
 
     private void eachDamageResolve(final AbilityFactory af, final SpellAbility sa) {
@@ -1418,7 +1429,7 @@ public class AbilityFactoryDealDamage {
         if (params.containsKey("ValidCards")) {
             sources = sources.getValidCards(params.get("ValidCards"), card.getController(), card);
         }
-        
+
         ArrayList<Object> tgts = new ArrayList<Object>();
         if (sa.getTarget() == null) {
             tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("DefinedPlayers"), sa);
@@ -1429,9 +1440,9 @@ public class AbilityFactoryDealDamage {
         final boolean targeted = (this.abilityFactory.getAbTgt() != null);
 
         for (final Object o : tgts) {
-            for (Card source : sources) {
-                int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
-                //System.out.println(source+" deals "+dmg+" damage to "+o.toString());
+            for (final Card source : sources) {
+                final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
+                // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
@@ -1448,12 +1459,12 @@ public class AbilityFactoryDealDamage {
         }
 
         if (params.containsKey("DefinedCards") && params.get("DefinedCards").equals("Self")) {
-            for (Card source : sources) {
-                int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
-                //System.out.println(source+" deals "+dmg+" damage to "+source);
+            for (final Card source : sources) {
+                final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
+                // System.out.println(source+" deals "+dmg+" damage to "+source);
                 source.addDamage(dmg, source);
             }
         }
     }
-    
-} //end class AbilityFactoryDealDamage
+
+} // end class AbilityFactoryDealDamage

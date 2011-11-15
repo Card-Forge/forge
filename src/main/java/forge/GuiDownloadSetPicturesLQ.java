@@ -25,7 +25,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
 
     private static final long serialVersionUID = -7890794857949935256L;
     private String picturesPath;
-    
+
     /**
      * <p>
      * Constructor for Gui_DownloadSetPictures_LQ.
@@ -36,33 +36,38 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      */
     public GuiDownloadSetPicturesLQ(final JFrame frame) {
         super(frame);
-        
+
     }
 
-    protected final void addCardToList(ArrayList<DownloadObject> cList, CardPrinted c, String cardName)
-    {
+    /**
+     * Adds the card to list.
+     *
+     * @param cList the c list
+     * @param c the c
+     * @param cardName the card name
+     */
+    protected final void addCardToList(final ArrayList<DownloadObject> cList, final CardPrinted c, final String cardName) {
         final String urlBase = "http://cardforge.org/fpics/";
 
-        String setCode3 = c.getSet();
-        CardSet thisSet = SetUtils.getSetByCode(setCode3);
-        String setCode2 = thisSet.getCode2();
+        final String setCode3 = c.getSet();
+        final CardSet thisSet = SetUtils.getSetByCode(setCode3);
+        final String setCode2 = thisSet.getCode2();
 
-        String imgFN = CardUtil.buildFilename(c, cardName);
-        boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);        
+        final String imgFN = CardUtil.buildFilename(c, cardName);
+        final boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
 
-        if(picturesPath == null)
-        {
+        if (this.picturesPath == null) {
             System.out.println("Oh snap!");
         }
         if (!foundSetImage) {
-            int artsCnt = c.getCard().getSetInfo(setCode3).getCopiesCount();
-            String fn = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
-            cList.add(new DownloadObject(fn, urlBase + setCode2 + "/" + Base64Coder.encodeString(fn, true), 
-                    picturesPath + File.separator + setCode3));
-            System.out.println(String.format("%s [%s - %s]", cardName, setCode3, thisSet.getName() ));
+            final int artsCnt = c.getCard().getSetInfo(setCode3).getCopiesCount();
+            final String fn = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
+            cList.add(new DownloadObject(fn, urlBase + setCode2 + "/" + Base64Coder.encodeString(fn, true),
+                    this.picturesPath + File.separator + setCode3));
+            System.out.println(String.format("%s [%s - %s]", cardName, setCode3, thisSet.getName()));
         }
     }
-    
+
     /**
      * <p>
      * getNeededCards.
@@ -70,40 +75,40 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      * 
      * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
      */
+    @Override
     protected final DownloadObject[] getNeededImages() {
-        if(picturesPath == null)
-        {
-            picturesPath = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
+        if (this.picturesPath == null) {
+            this.picturesPath = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
         }
         // read token names and urls
-        DownloadObject[] cardTokenLQ = readFileWithNames(NewConstants.TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
-        ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
+        final DownloadObject[] cardTokenLQ = GuiDownloader.readFileWithNames(NewConstants.TOKEN_IMAGES,
+                ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
+        final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
-        for (CardPrinted c : CardDb.instance().getAllCards()) {
-            String setCode3 = c.getSet();
+        for (final CardPrinted c : CardDb.instance().getAllCards()) {
+            final String setCode3 = c.getSet();
             if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
                 continue; // we don't want cards from unknown sets
             }
 
-            addCardToList(cList, c, c.getCard().getName());
-            if ( c.getCard().isDoubleFaced() )
-            {
-                addCardToList(cList, c, c.getCard().getSlavePart().getName());
+            this.addCardToList(cList, c, c.getCard().getName());
+            if (c.getCard().isDoubleFaced()) {
+                this.addCardToList(cList, c, c.getCard().getSlavePart().getName());
             }
         }
 
         // add missing tokens to the list of things to download
         File file;
-        File filebase = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
-        for (int i = 0; i < cardTokenLQ.length; i++) {
-            file = new File(filebase, cardTokenLQ[i].getName());
+        final File filebase = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
+        for (final DownloadObject element : cardTokenLQ) {
+            file = new File(filebase, element.getName());
             if (!file.exists()) {
-                cList.add(cardTokenLQ[i]);
+                cList.add(element);
             }
         }
 
         // return all card names and urls that are needed
-        DownloadObject[] out = new DownloadObject[cList.size()];
+        final DownloadObject[] out = new DownloadObject[cList.size()];
         cList.toArray(out);
 
         return out;

@@ -92,9 +92,9 @@ public class Generate5ColorDeck {
         this.notColors.remove(this.color3);
         this.notColors.remove(this.color4);
         this.notColors.remove(this.color5);
-        
-        if(Singletons.getModel().getPreferences().isDeckGenSingletons()) {
-            maxDuplicates = 1;
+
+        if (Singletons.getModel().getPreferences().isDeckGenSingletons()) {
+            this.maxDuplicates = 1;
         }
 
         this.dl = GenerateDeckUtil.getDualLandList("WUBRG");
@@ -138,7 +138,7 @@ public class Generate5ColorDeck {
 
         // reduce to cards that match the colors
         CardList cL1 = allCards.getColor(this.color1);
-        if(!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
+        if (!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
             cL1.addAll(allCards.getColor(Constant.Color.COLORLESS));
         }
         CardList cL2 = allCards.getColor(this.color2);
@@ -278,7 +278,7 @@ public class Generate5ColorDeck {
             Card c = cr12345.get(this.r.nextInt(cr12345.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > (this.maxDuplicates - 1)) || (lc > 100)) {
                 c = cr12345.get(this.r.nextInt(cr12345.size()));
                 lc++;
             }
@@ -296,7 +296,7 @@ public class Generate5ColorDeck {
             Card c = sp12345.get(this.r.nextInt(sp12345.size()));
 
             lc = 0;
-            while ((this.cardCounts.get(c.getName()) > maxDuplicates - 1) || (lc > 100)) {
+            while ((this.cardCounts.get(c.getName()) > (this.maxDuplicates - 1)) || (lc > 100)) {
                 c = sp12345.get(this.r.nextInt(sp12345.size()));
                 lc++;
             }
@@ -344,7 +344,7 @@ public class Generate5ColorDeck {
         numLands -= nDLands;
 
         if (numLands > 0) {
-         // attempt to optimize basic land counts according to
+            // attempt to optimize basic land counts according to
             // color representation
             final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0), new CCnt("Forest", 0) };

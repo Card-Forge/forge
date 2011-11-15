@@ -1098,8 +1098,9 @@ public class AbilityFactoryZoneAffecting {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (mode.equals("Defined")) {
-                    final ArrayList<Card> toDiscard = AbilityFactory.getDefinedCards(host, params.get("DefinedCards"), sa);
-                    for (Card c : toDiscard) {
+                    final ArrayList<Card> toDiscard = AbilityFactory.getDefinedCards(host, params.get("DefinedCards"),
+                            sa);
+                    for (final Card c : toDiscard) {
                         discarded.addAll(p.discard(c, sa));
                     }
                     if (params.containsKey("RememberDiscarded")) {
@@ -1109,7 +1110,7 @@ public class AbilityFactoryZoneAffecting {
                     }
                     continue;
                 }
-                
+
                 if (mode.equals("Hand")) {
                     final CardList list = p.discardHand(sa);
                     if (params.containsKey("RememberDiscarded")) {
@@ -1316,7 +1317,7 @@ public class AbilityFactoryZoneAffecting {
                 }
                 sb.append(" of type: ").append(valid);
             }
-            
+
             if (mode.equals("Defined")) {
                 sb.append(" defined cards");
             }

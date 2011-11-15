@@ -184,7 +184,7 @@ public final class QuestData {
     public void newGame(final int diff, final String m0de, final boolean standardStart) {
         this.setDifficulty(diff);
 
-        final Predicate<CardPrinted> filter = standardStart 
+        final Predicate<CardPrinted> filter = standardStart
                 ? SetUtils.getStandard().getFilterPrinted()
                 : CardPrinted.Predicates.Presets.IS_TRUE;
 

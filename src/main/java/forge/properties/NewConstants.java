@@ -856,7 +856,8 @@ public final class NewConstants {
 
                         /** The TITLE. */
                         public static final String TITLE = "%s/NewGame/options/generate/title";
-                        
+
+                        /** The Constant SINGLETONS. */
                         public static final String SINGLETONS = "%s/NewGame/options/generate/singletons";
 
                         /** The REMOV e_ small. */

@@ -15,7 +15,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
-import forge.CardColor;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
@@ -919,7 +918,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 sourceCard.turnFaceDown();
-                
+
                 sourceCard.comesIntoPlay();
 
                 AllZone.getGameAction().moveToPlay(sourceCard);
@@ -958,18 +957,13 @@ public class CardFactoryUtil {
      */
     public static AbilityActivated abilityMorphUp(final Card sourceCard, final Cost cost, final String orgManaCost,
             final int a, final int d) {
-        // final String player = sourceCard.getController();
-        // final String manaCost = cost;
-        final int attack = a;
-        final int defense = d;
-        final String origManaCost = orgManaCost;
         final AbilityActivated morphUp = new AbilityActivated(sourceCard, cost, null) {
             private static final long serialVersionUID = -3663857013937085953L;
 
             @Override
             public void resolve() {
                 sourceCard.turnFaceUp();
-                
+
                 // Run triggers
                 final Map<String, Object> runParams = new TreeMap<String, Object>();
                 runParams.put("Card", sourceCard);
@@ -978,9 +972,6 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
-                // unMorphing a card is a Special Action, and not affected by
-                // Linvala
-                Card c = sourceCard;
                 return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
                         && AllZoneUtil.isCardInPlay(sourceCard);
             }
@@ -2305,16 +2296,14 @@ public class CardFactoryUtil {
      * <p>
      * canBeTargetedBy.
      * </p>
-     * 
-     * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param target
-     *            a {@link forge.Card} object.
+     *
+     * @param c the c
      * @return a boolean.
      */
-    /*public static boolean canBeTargetedBy(final SpellAbility ability, final Card target) {
-        return target.canBeTargetedBy(ability);
-    }*/
+    /*
+     * public static boolean canBeTargetedBy(final SpellAbility ability, final
+     * Card target) { return target.canBeTargetedBy(ability); }
+     */
 
     /**
      * <p>
@@ -2333,91 +2322,57 @@ public class CardFactoryUtil {
      * <p>
      * canBeTargetedBy.
      * </p>
-     * 
-     * @param spell
-     *            a {@link forge.Card} object.
-     * @param target
-     *            a {@link forge.Card} object.
+     *
+     * @param card the card
+     * @param target a {@link forge.Card} object.
      * @return a boolean.
      */
-    /*public static boolean canBeTargetedBy(final Card spell, final Card target) {
-        if (target == null) {
-            return true;
-        }
-
-        if (target.isImmutable()) {
-            return false;
-        }
-
-        final PlayerZone zone = AllZone.getZoneOf(target);
-        // if zone is null, it means its on the stack
-        if ((zone == null) || !zone.is(Constant.Zone.Battlefield)) {
-            // targets not in play, can normally be targeted
-            return true;
-        }
-
-        if (AllZoneUtil.isCardInPlay("Spellbane Centaur", target.getController()) && target.isCreature()
-                && spell.isBlue()) {
-            return false;
-        }
-
-        if (target.getName().equals("Gaea's Revenge") && !spell.isGreen()) {
-            return false;
-        }
-
-        if (CardFactoryUtil.hasProtectionFrom(spell, target)) {
-            return false;
-        }
-
-        if (target.getKeyword() != null) {
-            final ArrayList<String> list = target.getKeyword();
-
-            String kw = "";
-            for (int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
-                if (kw.equals("Shroud")) {
-                    return false;
-                }
-
-                if (kw.equals("Hexproof")) {
-                    if (!spell.getController().equals(target.getController())) {
-                        return false;
-                    }
-                }
-
-                if (kw.equals("CARDNAME can't be the target of Aura spells.") || kw.equals("CARDNAME can't be enchanted.")) {
-                    if (spell.isAura() && spell.isSpell()) {
-                        return false;
-                    }
-                }
-
-                if (kw.equals("CARDNAME can't be the target of red spells or abilities from red sources.")) {
-                    if (spell.isRed()) {
-                        return false;
-                    }
-                }
-
-                if (kw.equals("CARDNAME can't be the target of black spells.")) {
-                    if (spell.isBlack() && spell.isSpell()) {
-                        return false;
-                    }
-                }
-
-                if (kw.equals("CARDNAME can't be the target of blue spells.")) {
-                    if (spell.isBlue() && spell.isSpell()) {
-                        return false;
-                    }
-                }
-
-                if (kw.equals("CARDNAME can't be the target of spells.")) {
-                    if (spell.isSpell()) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }*/
+    /*
+     * public static boolean canBeTargetedBy(final Card spell, final Card
+     * target) { if (target == null) { return true; }
+     * 
+     * if (target.isImmutable()) { return false; }
+     * 
+     * final PlayerZone zone = AllZone.getZoneOf(target); // if zone is null, it
+     * means its on the stack if ((zone == null) ||
+     * !zone.is(Constant.Zone.Battlefield)) { // targets not in play, can
+     * normally be targeted return true; }
+     * 
+     * if (AllZoneUtil.isCardInPlay("Spellbane Centaur", target.getController())
+     * && target.isCreature() && spell.isBlue()) { return false; }
+     * 
+     * if (target.getName().equals("Gaea's Revenge") && !spell.isGreen()) {
+     * return false; }
+     * 
+     * if (CardFactoryUtil.hasProtectionFrom(spell, target)) { return false; }
+     * 
+     * if (target.getKeyword() != null) { final ArrayList<String> list =
+     * target.getKeyword();
+     * 
+     * String kw = ""; for (int i = 0; i < list.size(); i++) { kw = list.get(i);
+     * if (kw.equals("Shroud")) { return false; }
+     * 
+     * if (kw.equals("Hexproof")) { if
+     * (!spell.getController().equals(target.getController())) { return false; }
+     * }
+     * 
+     * if (kw.equals("CARDNAME can't be the target of Aura spells.") ||
+     * kw.equals("CARDNAME can't be enchanted.")) { if (spell.isAura() &&
+     * spell.isSpell()) { return false; } }
+     * 
+     * if (kw.equals(
+     * "CARDNAME can't be the target of red spells or abilities from red sources."
+     * )) { if (spell.isRed()) { return false; } }
+     * 
+     * if (kw.equals("CARDNAME can't be the target of black spells.")) { if
+     * (spell.isBlack() && spell.isSpell()) { return false; } }
+     * 
+     * if (kw.equals("CARDNAME can't be the target of blue spells.")) { if
+     * (spell.isBlue() && spell.isSpell()) { return false; } }
+     * 
+     * if (kw.equals("CARDNAME can't be the target of spells.")) { if
+     * (spell.isSpell()) { return false; } } } } return true; }
+     */
 
     // does "target" have protection from "card"?
     /**
@@ -2544,9 +2499,10 @@ public class CardFactoryUtil {
                 return true;
             }
 
-            if (sa.isSpell() && !zone.is(Zone.Battlefield) && (c.hasStartOfKeyword("May be played")
-                    || (c.hasStartOfKeyword("Flashback") && zone.is(Zone.Graveyard)))
-                    && restrictZone.equals(Zone.Hand)) {
+            if (sa.isSpell()
+                    && !zone.is(Zone.Battlefield)
+                    && (c.hasStartOfKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
+                            .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
                 return true;
             }
         }
@@ -2640,7 +2596,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("DomainPlayer")) {
-            CardList someCards = new CardList();
+            final CardList someCards = new CardList();
             someCards.addAll(players.get(0).getCardsIn(Zone.Battlefield));
             final String[] basic = { "Forest", "Plains", "Mountain", "Island", "Swamp" };
 
@@ -2697,7 +2653,6 @@ public class CardFactoryUtil {
 
         return CardFactoryUtil.doXMath(n, m, source);
     }
-
 
     /**
      * parseSVar TODO - flesh out javadoc for this method.
@@ -4218,14 +4173,14 @@ public class CardFactoryUtil {
 
         CardFactoryUtil.copyCharacteristics(sim, c);
         if (sim.hasAlternateState()) {
-            String origState = sim.getCurState();
-            for(String state : sim.getStates()) {
+            final String origState = sim.getCurState();
+            for (final String state : sim.getStates()) {
                 c.addAlternateState(state);
                 c.setState(state);
                 sim.setState(state);
                 CardFactoryUtil.copyCharacteristics(sim, c);
             }
-            
+
             sim.setState(origState);
             c.setState(origState);
         }
@@ -4265,7 +4220,7 @@ public class CardFactoryUtil {
         to.setImageFilename(from.getImageFilename());
         to.setTriggers(from.getTriggers());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
-        
+
     }
 
     /**
@@ -4720,8 +4675,8 @@ public class CardFactoryUtil {
             sbHaunter.append("Destination$ Graveyard | ValidCard$ Card.Self | ");
             sbHaunter.append("Static$ True | Secondary$ True | TriggerDescription$ Blank");
 
-            final Trigger haunterDies = forge.card.trigger.TriggerHandler.parseTrigger(
-                    sbHaunter.toString(), card, true);
+            final Trigger haunterDies = forge.card.trigger.TriggerHandler
+                    .parseTrigger(sbHaunter.toString(), card, true);
 
             final Ability haunterDiesWork = new Ability(card, "0") {
                 @Override
@@ -4796,8 +4751,7 @@ public class CardFactoryUtil {
             sbDies.append("ValidCard$ Creature.HauntedBy | Execute$ ").append(hauntSVarName);
             sbDies.append(" | TriggerDescription$ ").append(hauntDescription);
 
-            final Trigger hauntedDies = forge.card.trigger.TriggerHandler.parseTrigger(
-                    sbDies.toString(), card, true);
+            final Trigger hauntedDies = forge.card.trigger.TriggerHandler.parseTrigger(sbDies.toString(), card, true);
 
             // Third, create the trigger that runs when the haunting creature
             // enters the battlefield
@@ -4806,8 +4760,7 @@ public class CardFactoryUtil {
             sbETB.append(hauntSVarName).append(" | Secondary$ True | TriggerDescription$ ");
             sbETB.append(hauntDescription);
 
-            final Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger(
-                    sbETB.toString(), card, true);
+            final Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger(sbETB.toString(), card, true);
 
             // Fourth, create a trigger that removes the haunting status if the
             // haunter leaves the exile
@@ -4816,8 +4769,8 @@ public class CardFactoryUtil {
             sbUnExiled.append("ValidCard$ Card.Self | Static$ True | Secondary$ True | ");
             sbUnExiled.append("TriggerDescription$ Blank");
 
-            final Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger(
-                    sbUnExiled.toString(), card, true);
+            final Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger(sbUnExiled.toString(), card,
+                    true);
 
             final Ability haunterUnExiledWork = new Ability(card, "0") {
                 @Override
@@ -5112,11 +5065,11 @@ public class CardFactoryUtil {
                 final String orgManaCost = card.getManaCost();
 
                 card.addSpellAbility(CardFactoryUtil.abilityMorphDown(card));
-                
+
                 card.turnFaceDown();
-                
+
                 card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost, orgManaCost, attack, defense));
-                
+
                 card.turnFaceUp();
             }
         } // Morph

@@ -415,7 +415,7 @@ public class FSkin {
 
     /**
      * Background of progress bar, "unfilled" state.
-     * @return {@link javax.awt.Color} clrProgress1
+     * @return {@link java.awt.Color} clrProgress1
      */
     public Color getClrProgress1() {
         return clrProgress1;
@@ -431,7 +431,7 @@ public class FSkin {
 
     /**
      * Text of progress bar, "unfilled" state.
-     * @return {@link javax.awt.Color} clrProgress1
+     * @return {@link java.awt.Color} clrProgress1
      */
     public Color getClrProgress2() {
         return clrProgress2;
@@ -447,7 +447,7 @@ public class FSkin {
 
     /**
      * Background of progress bar, "filled" state.
-     * @return {@link javax.awt.Color} clrProgress1
+     * @return {@link java.awt.Color} clrProgress1
      */
     public Color getClrProgress3() {
         return clrProgress3;
@@ -463,7 +463,7 @@ public class FSkin {
 
     /**
      * Text of progress bar, "filled" state.
-     * @return {@link javax.awt.Color} clrProgress1
+     * @return {@link java.awt.Color} clrProgress1
      */
     public Color getClrProgress4() {
         return clrProgress4;
