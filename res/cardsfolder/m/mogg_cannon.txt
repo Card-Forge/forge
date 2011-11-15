@@ -5,4 +5,5 @@ Text:no text
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control |  NumAtt$ +1 | NumDef$ +0 | KW$ Flying & At the beginning of the end step, destroy CARDNAME. | SpellDescription$ Target creature you control gets +1/+0 and gains flying until end of turn. Destroy that creature at the beginning of the next end step.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_cannon.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/288.jpg
 End
