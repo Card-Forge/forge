@@ -6,4 +6,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target cr
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_cannon.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/288.jpg
+Oracle:{T}: Target creature you control gets +1/+0 and gains flying until end of turn. Destroy that creature at the beginning of the next end step.
 End
