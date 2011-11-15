@@ -3735,6 +3735,7 @@ res/cardsfolder/h/heartmender.txt svneol=native#text/plain
 res/cardsfolder/h/heartstabber_mosquito.txt svneol=native#text/plain
 res/cardsfolder/h/heartstone.txt svneol=native#text/plain
 res/cardsfolder/h/heartwood_dryad.txt svneol=native#text/plain
+res/cardsfolder/h/heartwood_giant.txt -text
 res/cardsfolder/h/heartwood_shard.txt svneol=native#text/plain
 res/cardsfolder/h/heartwood_storyteller.txt svneol=native#text/plain
 res/cardsfolder/h/heartwood_treefolk.txt svneol=native#text/plain
