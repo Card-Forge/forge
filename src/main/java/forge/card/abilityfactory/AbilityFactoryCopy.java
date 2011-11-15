@@ -347,7 +347,7 @@ public final class AbilityFactoryCopy {
                 boolean wasInAlt = false;
                 if (c.isInAlternateState()) {
                     wasInAlt = true;
-                    c.changeState();
+                    c.setState("Original");
                 }
 
                 // start copied Kiki code
@@ -395,35 +395,22 @@ public final class AbilityFactoryCopy {
 
                     if (c.isDoubleFaced()) { // Cloned DFC's can't transform
                         if (wasInAlt) {
-                            copy.changeState();
-                            c.changeState();
+                            copy.setState("Transformed");
                         }
-                        copy.clearOtherState();
                     }
                     if (c.isFlip()) { // Cloned Flips CAN flip.
-                        copy.changeState();
-                        c.changeState();
+                        copy.setState("Original");
+                        c.setState("Original");
                         copy.setImageFilename(c.getImageFilename());
                         if (!c.isInAlternateState()) {
-                            copy.changeState();
+                            copy.setState("Flipped");
                         }
 
-                        c.changeState();
+                        c.setState("Flipped");
                     }
 
                     if (c.isFaceDown()) {
-                        copy.setIsFaceDown(true);
-                        copy.setManaCost("");
-                        copy.setBaseAttack(2);
-                        copy.setBaseDefense(2);
-                        //remove all keywords
-                        copy.setIntrinsicKeyword(new ArrayList<String>());
-                        //remove all types
-                        copy.setType(new ArrayList<String>());
-                        copy.addType("Creature");
-                        copy.clearSpellAbility(); // disallow "morph_up"
-                        copy.setCurSetCode("");
-                        copy.setImageFilename("morph.jpg");
+                        c.setState("FaceDown");
                     }
                     copy = AllZone.getGameAction().moveToPlay(copy);
 

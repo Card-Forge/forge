@@ -2482,26 +2482,16 @@ public class Upkeep implements java.io.Serializable {
                                  * add new to play
                                  */
 
-                                final Card newCopy = AllZone.getCardFactory().getCard(newTarget[0].getName(), player);
+                                final Card newCopy = AllZone.getCardFactory().getCard(newTarget[0].getState("Original").getName(), player);
                                 newCopy.setCurSetCode(newTarget[0].getCurSetCode());
                                 newCopy.setImageFilename(newTarget[0].getImageFilename());
 
-                                // need to add the leaves play command (2)
-                                newCopy.addLeavesPlayCommand(c.getCloneLeavesPlayCommand());
-                                c.removeTrigger(c.getCloneLeavesPlayCommand(), ZCTrigger.LEAVEFIELD);
-                                newCopy.setCloneLeavesPlayCommand(c.getCloneLeavesPlayCommand());
-
-                                newCopy.addExtrinsicKeyword(keyword);
-                                newCopy.addColor("U", newCopy, false, true);
-                                newCopy.setCloneOrigin(c.getCloneOrigin());
-                                newCopy.getCloneOrigin().setCurrentlyCloningCard(newCopy);
-                                c.setCloneOrigin(null);
-
-                                // 5
-                                final PlayerZone play = AllZone.getZoneOf(c);
-                                play.remove(c);
-
-                                play.add(newCopy);
+                                newCopy.setState(newTarget[0].getCurState());
+                                
+                                CardFactoryUtil.copyCharacteristics(newCopy, c);
+                                c.addColor("U");
+                                
+                                c.addExtrinsicKeyword(keyword);
                             }
                         }
                     };

@@ -20,7 +20,7 @@ import forge.card.spellability.Target;
  * AbilityFactory for abilities that cause cards to change states.
  * 
  */
-public class AbilityFactoryChangeState {
+public class AbilityFactorySetState {
 
     /**
      * Gets the change state ability.
@@ -29,19 +29,19 @@ public class AbilityFactoryChangeState {
      *            the aF
      * @return the change state ability
      */
-    public static SpellAbility getChangeStateAbility(final AbilityFactory abilityFactory) {
+    public static SpellAbility getSetStateAbility(final AbilityFactory abilityFactory) {
         final SpellAbility ret = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -1083427558368639457L;
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeState.changeStateStackDescription(abilityFactory, this);
+                return AbilityFactorySetState.setStateStackDescription(abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                AbilityFactoryChangeState.changeStateResolve(abilityFactory, this);
+                AbilityFactorySetState.setStateResolve(abilityFactory, this);
             }
         };
 
@@ -55,18 +55,18 @@ public class AbilityFactoryChangeState {
      *            the aF
      * @return the change state spell
      */
-    public static SpellAbility getChangeStateSpell(final AbilityFactory abilityFactory) {
+    public static SpellAbility getSetStateSpell(final AbilityFactory abilityFactory) {
         final SpellAbility ret = new Spell(abilityFactory.getHostCard()) {
             private static final long serialVersionUID = -7506856902233086859L;
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeState.changeStateStackDescription(abilityFactory, this);
+                return AbilityFactorySetState.setStateStackDescription(abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                AbilityFactoryChangeState.changeStateResolve(abilityFactory, this);
+                AbilityFactorySetState.setStateResolve(abilityFactory, this);
             }
         };
 
@@ -80,14 +80,14 @@ public class AbilityFactoryChangeState {
      *            the aF
      * @return the change state drawback
      */
-    public static SpellAbility getChangeStateDrawback(final AbilityFactory abilityFactory) {
+    public static SpellAbility getSetStateDrawback(final AbilityFactory abilityFactory) {
         final AbilitySub ret = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
 
             private static final long serialVersionUID = -3793247725721587468L;
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeState.changeStateStackDescription(abilityFactory, this);
+                return AbilityFactorySetState.setStateStackDescription(abilityFactory, this);
             }
 
             @Override
@@ -113,7 +113,7 @@ public class AbilityFactoryChangeState {
 
             @Override
             public void resolve() {
-                AbilityFactoryChangeState.changeStateResolve(abilityFactory, this);
+                AbilityFactorySetState.setStateResolve(abilityFactory, this);
             }
 
         };
@@ -121,7 +121,7 @@ public class AbilityFactoryChangeState {
         return ret;
     }
 
-    private static String changeStateStackDescription(final AbilityFactory abilityFactory, final SpellAbility sa) {
+    private static String setStateStackDescription(final AbilityFactory abilityFactory, final SpellAbility sa) {
         final Map<String, String> params = abilityFactory.getMapParams();
 
         final StringBuilder sb = new StringBuilder();
@@ -176,7 +176,7 @@ public class AbilityFactoryChangeState {
         return sb.toString();
     }
 
-    private static void changeStateResolve(final AbilityFactory abilityFactory, final SpellAbility sa) {
+    private static void setStateResolve(final AbilityFactory abilityFactory, final SpellAbility sa) {
 
         ArrayList<Card> tgtCards;
 
@@ -193,7 +193,32 @@ public class AbilityFactoryChangeState {
                     continue;
                 }
             }
-            tgt.changeState();
+            if(abilityFactory.getMapParams().containsKey("Transform"))
+            {
+                if(tgt.getCurState().equals("Transformed")) {
+                    tgt.setState("Original");
+                }
+                else if(tgt.hasAlternateState() && tgt.getCurState().equals("Original")) {
+                    if(tgt.isDoubleFaced()) {
+                        tgt.setState("Transformed");
+                    }
+                }
+            }
+            else if(abilityFactory.getMapParams().containsKey("Flip")) 
+            {
+                if(tgt.getCurState().equals("Flipped")) {
+                    tgt.setState("Original");
+                }
+                else if(tgt.hasAlternateState()) {
+                    if(tgt.isFlip() && tgt.getCurState().equals("Original")) {
+                        tgt.setState("Flipped");
+                    }
+                }
+            }
+            else
+            {
+                tgt.setState(abilityFactory.getMapParams().get("NewState"));
+            }
         }
 
     }
@@ -209,7 +234,7 @@ public class AbilityFactoryChangeState {
      *            the aF
      * @return the change state all ability
      */
-    public static SpellAbility getChangeStateAllAbility(final AbilityFactory abilityFactory) {
+    public static SpellAbility getSetStateAllAbility(final AbilityFactory abilityFactory) {
         final SpellAbility ret = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
                 abilityFactory.getAbTgt()) {
 
@@ -217,12 +242,12 @@ public class AbilityFactoryChangeState {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeState.changeStateAllStackDescription(abilityFactory, this);
+                return AbilityFactorySetState.setStateAllStackDescription(abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                AbilityFactoryChangeState.changeStateAllResolve(abilityFactory, this);
+                AbilityFactorySetState.setStateAllResolve(abilityFactory, this);
             }
 
         };
@@ -237,19 +262,19 @@ public class AbilityFactoryChangeState {
      *            the aF
      * @return the change state all spell
      */
-    public static SpellAbility getChangeStateAllSpell(final AbilityFactory abilityFactory) {
+    public static SpellAbility getSetStateAllSpell(final AbilityFactory abilityFactory) {
         final SpellAbility ret = new Spell(abilityFactory.getHostCard()) {
 
             private static final long serialVersionUID = 4217632586060204603L;
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeState.changeStateAllStackDescription(abilityFactory, this);
+                return AbilityFactorySetState.setStateAllStackDescription(abilityFactory, this);
             }
 
             @Override
             public void resolve() {
-                AbilityFactoryChangeState.changeStateAllResolve(abilityFactory, this);
+                AbilityFactorySetState.setStateAllResolve(abilityFactory, this);
             }
         };
 
@@ -263,14 +288,14 @@ public class AbilityFactoryChangeState {
      *            the aF
      * @return the change state all drawback
      */
-    public static SpellAbility getChangeStateAllDrawback(final AbilityFactory abilityFactory) {
+    public static SpellAbility getSetStateAllDrawback(final AbilityFactory abilityFactory) {
         final AbilitySub ret = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
 
             private static final long serialVersionUID = 4047514893482113436L;
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeState.changeStateAllStackDescription(abilityFactory, this);
+                return AbilityFactorySetState.setStateAllStackDescription(abilityFactory, this);
             }
 
             @Override
@@ -292,7 +317,7 @@ public class AbilityFactoryChangeState {
 
             @Override
             public void resolve() {
-                AbilityFactoryChangeState.changeStateAllResolve(abilityFactory, this);
+                AbilityFactorySetState.setStateAllResolve(abilityFactory, this);
             }
 
         };
@@ -300,7 +325,7 @@ public class AbilityFactoryChangeState {
         return ret;
     }
 
-    private static void changeStateAllResolve(final AbilityFactory abilityFactory, final SpellAbility sa) {
+    private static void setStateAllResolve(final AbilityFactory abilityFactory, final SpellAbility sa) {
         final HashMap<String, String> params = abilityFactory.getMapParams();
 
         final Card card = sa.getSourceCard();
@@ -338,13 +363,43 @@ public class AbilityFactoryChangeState {
         }
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).changeState()) {
-                card.addRemembered(list.get(i));
+            String mode = list.get(i).getCurState();
+            if(list.get(i).isDoubleFaced()) {
+                if(list.get(i).getCurState().equals("Original"))
+                {
+                    mode = "Transformed";
+                }
+                else {
+                    mode = "Original";
+                }
+                
+                if(list.get(i).setState(mode) && remChanged) {
+                    card.addRemembered(list.get(i));
+                }
             }
+            else if(list.get(i).isFlip()) {
+                if(list.get(i).getCurState().equals("Original"))
+                {
+                    mode = "Flipped";
+                }
+                else if(list.get(i).getCurState().equals("Flipped")){
+                    mode = "Original";
+                }
+                
+                if(list.get(i).setState(mode) && remChanged) {
+                    card.addRemembered(list.get(i));
+                }
+            }
+            else {
+                if(list.get(i).setState(abilityFactory.getMapParams().get("NewState"))  && remChanged) {
+                    card.addRemembered(list.get(i));
+                }
+            }
+            
         }
     }
 
-    private static String changeStateAllStackDescription(final AbilityFactory abilityFactory, final SpellAbility sa) {
+    private static String setStateAllStackDescription(final AbilityFactory abilityFactory, final SpellAbility sa) {
 
         final Card host = abilityFactory.getHostCard();
         final Map<String, String> params = abilityFactory.getMapParams();

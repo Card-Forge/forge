@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:First Strike
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Transform$ True
 SVar:Rarity:Common
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_ironsmith.jpg
@@ -22,7 +22,7 @@ Text:no text
 PT:3/1
 K:First Strike
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Transform$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironfang.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/168b.jpg

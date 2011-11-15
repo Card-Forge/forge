@@ -456,8 +456,15 @@ public class CardReader implements Runnable {
                     card.addSet(new SetInfo(value)); // NOPMD by Braids on
                                                      // 8/18/11 11:08 PM
                 } else if (line.equals("ALTERNATE")) {
-                    card.addAlternateState();
-                    card.changeState();
+                    String mode;
+                    if(card.isFlip()) {
+                        mode = "Flipped";
+                    }
+                    else {
+                        mode = "Transformed";
+                    }
+                    card.addAlternateState(mode);
+                    card.setState(mode);
                 } else if (line.startsWith("AlternateMode:")) {
                     final String value = line.substring("AlternateMode:".length());
                     if (value.equalsIgnoreCase("Flip")) {
@@ -494,9 +501,8 @@ public class CardReader implements Runnable {
         }
 
         if (card.isInAlternateState()) {
-            card.changeState();
+            card.setState("Original");
         }
-
 
         listRulesToFill.add(rulesReader.getCard());
         mapToFill.put(card.getName(), card);

@@ -918,20 +918,9 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                // card.setName("Morph");
-                sourceCard.setIsFaceDown(true);
-                sourceCard.setManaCost("");
-                sourceCard.setColor(new ArrayList<CardColor>()); // remove all
-                                                                 // colors
-                sourceCard.addColor("0");
-                sourceCard.setBaseAttack(2);
-                sourceCard.setBaseDefense(2);
+                sourceCard.turnFaceDown();
+                
                 sourceCard.comesIntoPlay();
-                sourceCard.setIntrinsicKeyword(new ArrayList<String>()); // remove
-                                                                         // all
-                                                                         // keywords
-                sourceCard.setType(new ArrayList<String>()); // remove all types
-                sourceCard.addType("Creature");
 
                 AllZone.getGameAction().moveToPlay(sourceCard);
             }
@@ -979,15 +968,8 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                // card.setName("Morph");
-                sourceCard.setIsFaceDown(false);
-                sourceCard.setManaCost(origManaCost);
-                sourceCard.addColor(origManaCost);
-                sourceCard.setBaseAttack(attack);
-                sourceCard.setBaseDefense(defense);
-                sourceCard.setIntrinsicKeyword(sourceCard.getPrevIntrinsicKeyword());
-                sourceCard.setType(sourceCard.getPrevType());
-
+                sourceCard.turnFaceUp();
+                
                 // Run triggers
                 final Map<String, Object> runParams = new TreeMap<String, Object>();
                 runParams.put("Card", sourceCard);
@@ -998,6 +980,7 @@ public class CardFactoryUtil {
             public boolean canPlay() {
                 // unMorphing a card is a Special Action, and not affected by
                 // Linvala
+                Card c = sourceCard;
                 return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
                         && AllZoneUtil.isCardInPlay(sourceCard);
             }
@@ -4235,12 +4218,16 @@ public class CardFactoryUtil {
 
         CardFactoryUtil.copyCharacteristics(sim, c);
         if (sim.hasAlternateState()) {
-            c.addAlternateState();
-            c.changeState();
-            sim.changeState();
-            CardFactoryUtil.copyCharacteristics(sim, c);
-            c.changeState();
-            sim.changeState();
+            String origState = sim.getCurState();
+            for(String state : sim.getStates()) {
+                c.addAlternateState(state);
+                c.setState(state);
+                sim.setState(state);
+                CardFactoryUtil.copyCharacteristics(sim, c);
+            }
+            
+            sim.setState(origState);
+            c.setState(origState);
         }
 
         c.setFlip(sim.isFlip());
@@ -4278,7 +4265,7 @@ public class CardFactoryUtil {
         to.setImageFilename(from.getImageFilename());
         to.setTriggers(from.getTriggers());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
-
+        
     }
 
     /**
@@ -5124,8 +5111,13 @@ public class CardFactoryUtil {
 
                 final String orgManaCost = card.getManaCost();
 
-                card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost, orgManaCost, attack, defense));
                 card.addSpellAbility(CardFactoryUtil.abilityMorphDown(card));
+                
+                card.turnFaceDown();
+                
+                card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost, orgManaCost, attack, defense));
+                
+                card.turnFaceUp();
             }
         } // Morph
 

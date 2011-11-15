@@ -122,7 +122,7 @@ public class CardPanelHeavy extends CardPanelBase {
     public final void setCard(final Card c) {
         if (this.picture.getCard() != null) {
             if (this.picture.getCard().isInAlternateState()) {
-                this.picture.getCard().changeState();
+                this.picture.getCard().setState("Original");
             }
         }
         this.picture.setCard(c);
@@ -149,7 +149,17 @@ public class CardPanelHeavy extends CardPanelBase {
      */
     final void changeStateButtonActionPerformed(final ActionEvent e) {
         final Card cur = this.picture.getCard();
-        cur.changeState();
+        if(cur.isInAlternateState()) {
+            cur.setState("Original");
+        }
+        else {
+            if(cur.isFlip()) {
+                cur.setState("Flipped");
+            }
+            if(cur.isDoubleFaced()) {
+                cur.setState("Transformed");
+            }
+        }
 
         this.picture.setCard(cur);
         this.detail.setCard(cur);

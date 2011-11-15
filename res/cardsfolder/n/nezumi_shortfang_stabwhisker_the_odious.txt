@@ -4,7 +4,7 @@ Types:Creature Rat Rogue
 Text:no text
 PT:1/1
 A:AB$ Discard | Cost$ 1 B T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBFlip | SpellDescription$  Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
-SVar:DBFlip:DB$ChangeState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:DBFlip:DB$SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Flip$ True
 SVar:X:Count$InOppHand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shortfang.jpg

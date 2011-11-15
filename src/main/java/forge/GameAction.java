@@ -70,15 +70,8 @@ public class GameAction {
 
         // Reset Activations per Turn
         for (final Card card : all) {
-            for (final SpellAbility sa : card.getSpellAbility()) {
+            for (final SpellAbility sa : card.getAllSpellAbilities()) {
                 sa.getRestrictions().resetTurnActivations();
-            }
-            if (card.hasAlternateState()) {
-                card.changeState();
-                for (final SpellAbility sa : card.getSpellAbility()) {
-                    sa.getRestrictions().resetTurnActivations();
-                }
-                card.changeState();
             }
         }
     }
@@ -121,8 +114,13 @@ public class GameAction {
             copied = c;
         } else {
             if (c.isInAlternateState()) {
-                c.changeState();
+                c.setState("Original");
             }
+            if (c.isCloned()) {
+                c.switchStates("Cloner", "Original");
+                c.setState("Original");
+            }
+            
             copied = AllZone.getCardFactory().copyCard(c);
             lastKnownInfo = CardUtil.getLKICopy(c);
 
@@ -545,7 +543,7 @@ public class GameAction {
         
         if(c.isInAlternateState())
         {
-            c.changeState();
+            c.setState("Original");
         }
 
         if ((p != null) && p.is(Constant.Zone.Battlefield)) {
@@ -1344,9 +1342,16 @@ public class GameAction {
                 AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
 
                 if (card.hasAlternateState()) {
-                    card.changeState();
+                    if(card.isDoubleFaced()) {
+                        card.setState("Transformed");
+                    }
+                    if(card.isFlip()) {
+                        card.setState("Flipped");
+                    }
+                    
                     card.setImageFilename(CardUtil.buildFilename(card));
-                    card.changeState();
+
+                    card.setState("Original");
                 }
             }
         }
@@ -1380,9 +1385,16 @@ public class GameAction {
                 }
 
                 if (card.hasAlternateState()) {
-                    card.changeState();
+                    if(card.isDoubleFaced()) {
+                        card.setState("Transformed");
+                    }
+                    if(card.isFlip()) {
+                        card.setState("Flipped");
+                    }
+                    
                     card.setImageFilename(CardUtil.buildFilename(card));
-                    card.changeState();
+
+                    card.setState("Original");
                 }
             }
         }

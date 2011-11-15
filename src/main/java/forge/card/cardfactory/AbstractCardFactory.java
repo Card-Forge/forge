@@ -171,11 +171,14 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
-            in.changeState();
-            out.changeState();
-            CardFactoryUtil.copyCharacteristics(in, out);
-            in.changeState();
-            out.changeState();
+            String curState = in.getCurState();
+            for(String state : in.getStates()) {
+                in.setState(state);
+                out.setState(state);
+                CardFactoryUtil.copyCharacteristics(in, out);
+            }
+            in.setState(curState);
+            out.setState(curState);
         }
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
@@ -480,7 +483,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             card.addColor(card.getManaCost());
         }
         // may have to change the spell
-
+        
         // this is so permanents like creatures and artifacts have a "default"
         // spell
         if (card.isPermanent() && !card.isLand() && !card.isAura()) {
@@ -500,15 +503,18 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         }
 
         if (card.hasAlternateState()) {
-            card.changeState();
-            this.addAbilityFactoryAbilities(card);
-            stAbs = card.getStaticAbilityStrings();
-            if (stAbs.size() > 0) {
-                for (int i = 0; i < stAbs.size(); i++) {
-                    card.addStaticAbility(stAbs.get(i));
+            for(String state : card.getStates()) {
+                card.setState(state);
+                this.addAbilityFactoryAbilities(card);
+                stAbs = card.getStaticAbilityStrings();
+                if (stAbs.size() > 0) {
+                    for (int i = 0; i < stAbs.size(); i++) {
+                        card.addStaticAbility(stAbs.get(i));
+                    }
                 }
             }
-            card.changeState();
+            
+            card.setState("Original");
         }
 
         // ******************************************************************

@@ -843,7 +843,7 @@ public final class AbilityFactoryChangeZone {
                 } else {
                     movedCard = AllZone.getGameAction().moveTo(destZone, c);
                     if (params.containsKey("ExileFaceDown")) {
-                        movedCard.setIsFaceDown(true);
+                        movedCard.setState("FaceDown");
                     }
                 }
 
@@ -1007,7 +1007,7 @@ public final class AbilityFactoryChangeZone {
             } else {
                 newCard = AllZone.getGameAction().moveTo(destZone, c);
                 if (params.containsKey("ExileFaceDown")) {
-                    newCard.setIsFaceDown(true);
+                    newCard.setState("FaceDown");
                 }
             }
 
@@ -1793,7 +1793,7 @@ public final class AbilityFactoryChangeZone {
                     } else {
                         movedCard = AllZone.getGameAction().moveTo(pl.getZone(destination), tgtC);
                         if (params.containsKey("ExileFaceDown")) {
-                            movedCard.setIsFaceDown(true);
+                            movedCard.setState("FaceDown");
                         }
                     }
                 }
@@ -2199,7 +2199,7 @@ public final class AbilityFactoryChangeZone {
             } else {
                 final Card movedCard = AllZone.getGameAction().moveTo(destination, c, libraryPos);
                 if (params.containsKey("ExileFaceDown")) {
-                    movedCard.setIsFaceDown(true);
+                    movedCard.setState("FaceDown");
                 }
             }
 

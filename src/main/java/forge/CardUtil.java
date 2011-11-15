@@ -13,6 +13,7 @@ import net.slightlymagic.maxmtg.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.card.CardCharacteristics;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
@@ -959,6 +960,23 @@ public final class CardUtil {
         }
         
         return usableColors;
+    }
+    
+    public static CardCharacteristics getFaceDownCharacteristic() {
+        ArrayList<String> types = new ArrayList<String>();
+        types.add("Creature");
+        
+        CardCharacteristics ret = new CardCharacteristics();
+        ret.setBaseAttack(2);
+        ret.setBaseDefense(2);
+        
+        ret.setName("");
+        ret.setType(types);
+        
+        ret.setImageFilename("morph.jpg");
+        
+        return ret;
+        
     }
 
 } // end class CardUtil

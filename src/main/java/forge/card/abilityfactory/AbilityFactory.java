@@ -1146,23 +1146,23 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("ChangeState")) {
+        else if (this.api.equals("SetState")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryChangeState.getChangeStateAbility(this);
+                spellAbility = AbilityFactorySetState.getSetStateAbility(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryChangeState.getChangeStateSpell(this);
+                spellAbility = AbilityFactorySetState.getSetStateSpell(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryChangeState.getChangeStateDrawback(this);
+                spellAbility = AbilityFactorySetState.getSetStateDrawback(this);
             }
         }
 
-        else if (this.api.equals("ChangeStateAll")) {
+        else if (this.api.equals("SetStateAll")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryChangeState.getChangeStateAllAbility(this);
+                spellAbility = AbilityFactorySetState.getSetStateAllAbility(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryChangeState.getChangeStateAllSpell(this);
+                spellAbility = AbilityFactorySetState.getSetStateAllSpell(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryChangeState.getChangeStateAllDrawback(this);
+                spellAbility = AbilityFactorySetState.getSetStateAllDrawback(this);
             }
         }
 

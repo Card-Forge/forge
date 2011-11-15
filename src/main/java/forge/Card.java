@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
@@ -41,46 +43,97 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int uniqueNumber = nextUniqueNumber++;
 
     private long value;
+    
+    private Map<String, CardCharacteristics> characteristicsMap = new HashMap<String,CardCharacteristics>();
+    private String curCharacteristics = "Original";
+    private String preTFDCharacteristic = "Original";
 
-    private CardCharacteristics[] characteristics = new CardCharacteristics[] { new CardCharacteristics(), null };
-    private int currentCharacteristic = 0;
     private boolean isDoubleFaced = false;
     private boolean isFlip = false;
-
+    
+    public Card() {
+        characteristicsMap.put("Original", new CardCharacteristics());
+        characteristicsMap.put("FaceDown", CardUtil.getFaceDownCharacteristic());
+    }
+    
+    public boolean setState(String state) {
+        if(state.equals("FaceDown") && isDoubleFaced) {
+            return false; //Doublefaced cards can't be turned face-down.
+        }
+        
+        if(!characteristicsMap.containsKey(state)) {
+            System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
+            return false; //Nonexistant state.
+        }
+        
+        if(state.equals(curCharacteristics)) {
+            return false;
+        }
+        
+        curCharacteristics = state;
+        return true;
+    }
+    
+    public Set<String> getStates() {
+        return characteristicsMap.keySet();
+    }
+    
+    public String getCurState() {
+        return curCharacteristics;
+    }
+    
+    public void switchStates(String from,String to)
+    {
+        CardCharacteristics tmp = characteristicsMap.get(from);
+        characteristicsMap.put(from, characteristicsMap.get(to));
+        characteristicsMap.put(to, tmp);
+    }
+    
+    public void clearStates(String state) {
+        characteristicsMap.remove(state);
+    }
+    
+    public void turnFaceDown() {
+        if(!isDoubleFaced) {
+            preTFDCharacteristic = curCharacteristics;
+            curCharacteristics = "FaceDown";
+        }
+    }
+    
+    public void turnFaceUp() {
+        if(curCharacteristics.equals("FaceDown")) {
+            curCharacteristics = preTFDCharacteristic;
+        }
+    }
+    
+    public boolean isCloned() {
+        for(String state : characteristicsMap.keySet()) {
+            if(state.equals("Cloner")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public CardCharacteristics getState(String state) {
+        return characteristicsMap.get(state);
+    }
+    
     /**
      * Gets the characteristics.
      * 
      * @return the characteristics
      */
     public CardCharacteristics getCharacteristics() {
-        return characteristics[currentCharacteristic];
+        return characteristicsMap.get(curCharacteristics);
     }
 
     /**
      * 
      * addAlternateState.
      */
-    public final void addAlternateState() {
-        characteristics[1] = new CardCharacteristics();
-    }
-
-    /**
-     * 
-     * clearAlternateState.
-     */
-    public final void clearAlternateState() {
-        if (currentCharacteristic == 1) {
-            changeState();
-        }
-        characteristics[1] = null;
-    }
-
-    /**
-     * 
-     * clearOtherState.
-     */
-    public final void clearOtherState() {
-        characteristics[1 - currentCharacteristic] = null;
+    public final void addAlternateState(String state) {
+        characteristicsMap.put(state,new CardCharacteristics());
     }
 
     /*
@@ -110,7 +163,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return boolean
      */
     public final boolean isInAlternateState() {
-        return currentCharacteristic == 1;
+        return !(curCharacteristics.equals("Original") || curCharacteristics.equals("Cloned"));
     }
 
     /**
@@ -120,23 +173,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return boolean
      */
     public final boolean hasAlternateState() {
-        return characteristics[1] != null;
-    }
-
-    /**
-     * 
-     * changeState.
-     * 
-     * @return boolean
-     */
-    public final boolean changeState() {
-        if (characteristics[1 - currentCharacteristic] != null) {
-            currentCharacteristic = 1 - currentCharacteristic;
-
-            return true;
-        }
-
-        return false;
+        return characteristicsMap.keySet().size() > 2;
     }
 
     /**
@@ -231,7 +268,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ArrayList<Card> mustBlockCards = new ArrayList<Card>();
 
     private boolean canMorph = false;
-    private boolean faceDown = false;
     private boolean kicked = false;
     private boolean evoked = false;
 
@@ -2735,12 +2771,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return ArrayList<SpellAbility>
      */
     public final ArrayList<SpellAbility> getAllSpellAbilities() {
-        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(getSpellAbilities());
-        if (hasAlternateState()) {
-            changeState();
+        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+
+        String curState = curCharacteristics;
+        for(String key : characteristicsMap.keySet()) {
+            setState(key);
             res.addAll(getSpellAbilities());
-            changeState();
         }
+        
+        setState(curState);
 
         return res;
     }
@@ -3066,25 +3105,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * setIsFaceDown.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setIsFaceDown(final boolean b) {
-        faceDown = b;
-    }
-
-    /**
-     * <p>
      * isFaceDown.
      * </p>
      * 
      * @return a boolean.
      */
     public final boolean isFaceDown() {
-        return faceDown;
+        return curCharacteristics.equals("FaceDown");
     }
 
     /**

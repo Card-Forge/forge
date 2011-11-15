@@ -48,10 +48,15 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         String base = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
         for (Card c : AllZone.getCardFactory()) {
             cList.addAll(createDLObjects(c, base));
-            if (c.hasAlternateState()) {
-                c.changeState();
+            if (c.isFlip()) {
+                c.setState("Flip");
                 cList.addAll(createDLObjects(c, base));
             }
+            if(c.isDoubleFaced()) {
+                c.setState("Transformed");
+                cList.addAll(createDLObjects(c, base));
+            }
+            c.setState("Original");
         }
 
         ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();

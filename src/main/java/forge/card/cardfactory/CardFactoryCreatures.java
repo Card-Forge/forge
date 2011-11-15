@@ -2225,24 +2225,10 @@ public class CardFactoryCreatures {
         else if (cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger")
                 || cardName.equals("Quicksilver Gargantuan") || cardName.equals("Jwari Shapeshifter")
                 || cardName.equals("Phyrexian Metamorph") || cardName.equals("Phantasmal Image")
-                || cardName.equals("Body Double") || cardName.equals("Evil Twin")) {
+                || cardName.equals("Body Double") || cardName.equals("Evil Twin")
+                || cardName.equals("Sakashima the Impostor")) {
             final CardFactoryInterface cfact = cf;
             final Card[] copyTarget = new Card[1];
-            final Card[] cloned = new Card[1];
-
-            final Command leaves = new Command() {
-                private static final long serialVersionUID = 8590474793502538215L;
-
-                @Override
-                public void execute() {
-
-                    final Card orig = cfact.getCard(card.getName(), card.getController());
-                    final PlayerZone dest = AllZone.getZoneOf(card.getCurrentlyCloningCard());
-                    AllZone.getGameAction().moveTo(dest, orig);
-                    dest.remove(card.getCurrentlyCloningCard());
-
-                }
-            };
 
             final SpellAbility copy = new Spell(card) {
                 private static final long serialVersionUID = 4496978456522751302L;
@@ -2257,107 +2243,80 @@ public class CardFactoryCreatures {
                     }
 
                     if (copyTarget[0] != null) {
-                        final boolean wasInAlt = copyTarget[0].isInAlternateState();
-                        /*
-                         * This cannot just be copyStats with an addSpellAbility
-                         * loop from copyTarget[0]. Unless we get a
-                         * copySpellAbility. Adding the SpellAbility from the
-                         * source card causes many weird and Bad Things to
-                         * happen.
-                         */
-                        try {
-                            if (wasInAlt) {
-                                copyTarget[0].changeState();
-                            }
-                            cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
-                            if (wasInAlt) {
-                                cloned[0].setImageFilename(copyTarget[0].getImageFilename());
-                                copyTarget[0].changeState();
-                            }
-                        } catch (final RuntimeException re) {
-                            // the copyTarget was not found in CardFactory
-                            cloned[0] = CardFactoryUtil.copyStats(copyTarget[0]);
+                        Card cloned;
+                        
+                        cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
+                        card.addAlternateState("Cloner");                        
+                        card.switchStates("Original", "Cloner");
+                        card.setState("Original");
+                        
+                        if(copyTarget[0].getCurState().equals("Transformed") && copyTarget[0].isDoubleFaced()) {
+                            cloned.setState("Transformed");
                         }
-                        cloned[0].setOwner(card.getController());
-                        cloned[0].addController(card.getController());
-                        if (cardName.equals("Phyrexian Metamorph")) {
-                            cloned[0].addType("Artifact");
-                        }
-                        if (cardName.equals("Phantasmal Image")) {
-                            cloned[0].addType("Illusion");
-                        }
-                        cloned[0].setCloneOrigin(card);
-                        cloned[0].addLeavesPlayCommand(leaves);
-                        cloned[0].setCloneLeavesPlayCommand(leaves);
-                        cloned[0].setCurSetCode(copyTarget[0].getCurSetCode());
+                        
+                        CardFactoryUtil.copyCharacteristics(cloned,card);
+                        this.grantExtras();
+                        
 
-                        if (copyTarget[0].isDoubleFaced()) { // Cloned DFC's
-                                                             // can't transform
-                            if (wasInAlt) {
-                                cloned[0].changeState();
-                            }
-                            cloned[0].clearOtherState();
+                        //If target is a flipped card, also copy the flipped state.
+                        if(copyTarget[0].isFlip()) {
+                            cloned.setState("Flipped");
+                            cloned.setImageFilename(CardUtil.buildFilename(cloned));
+                            card.addAlternateState("Flipped");
+                            card.setState("Flipped");
+                            CardFactoryUtil.copyCharacteristics(cloned,card);
+                            this.grantExtras();
+                            
+                            card.setFlip(true);
+                            
+                            card.setState("Original");
                         }
-                        if (copyTarget[0].isFlip()) { // Cloned Flips CAN flip.
-                            cloned[0].changeState();
-                            copyTarget[0].changeState();
-                            cloned[0].setImageFilename(copyTarget[0].getImageFilename());
-                            if (!copyTarget[0].isInAlternateState()) {
-                                cloned[0].changeState();
-                            }
-
-                            copyTarget[0].changeState();
+                        else {
+                            card.setFlip(false);
                         }
-
-                        if (cardName.equals("Vesuvan Doppelganger")) {
-                            final StringBuilder sb = new StringBuilder();
-                            sb.append("At the beginning of your upkeep, you may have ");
-                            sb.append("this creature become a copy of target creature ");
-                            sb.append("except it doesn't copy that creature's color. ");
-                            sb.append("If you do, this creature gains this ability.");
-                            cloned[0].addExtrinsicKeyword(sb.toString());
-                            cloned[0].addColor("U", cloned[0], false, true);
-                        } else if (cardName.equals("Quicksilver Gargantuan")) {
-                            cloned[0].setBaseDefense(7);
-                            cloned[0].setBaseAttack(7);
-                        } else if (cardName.equals("Phantasmal Image")) {
-                            final StringBuilder trigScript = new StringBuilder();
-                            trigScript.append("Mode$ BecomesTarget | ValidTarget$ Card.Self | ");
-                            trigScript.append("TriggerZones$ Battlefield | Execute$ ");
-                            final StringBuilder svarName = new StringBuilder("TrigSac");
-                            // Couple of hoops to jump through to make sure no
-                            // svar is overwritten.
-                            int iter = 0;
-                            while (cloned[0].getSVar(svarName.toString()) != "") {
-                                iter++;
-                                if (svarName.length() == 7) {
-                                    svarName.append(iter);
-                                } else {
-                                    svarName.delete(8, svarName.length());
-                                    svarName.append(iter);
-                                }
-                            }
-                            trigScript.append(svarName.toString());
-                            trigScript.append(" | TriggerDescription$ When this creature ");
-                            trigScript.append("becomes the target of a spell or ability, sacrifice it.");
-                            cloned[0].addTrigger(forge.card.trigger.TriggerHandler.parseTrigger(trigScript.toString(),
-                                    card, true));
-                            cloned[0].setSVar(svarName.toString(), "AB$Sacrifice | Cost$ 0 | Defined$ Self");
-                        }
-
-                        if (cardName.equals("Evil Twin")) {
-                            final AbilityFactory abilityFactory = new AbilityFactory();
-                            final StringBuilder sbET = new StringBuilder();
-                            sbET.append("AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | ");
-                            sbET.append("TgtPrompt$ Select target creature with the same name. | ");
-                            sbET.append("SpellDescription$ Destroy target creature with the same name as this creature.");
-                            final SpellAbility destroySameName = abilityFactory.getAbility(sbET.toString(), cloned[0]);
-
-                            cloned[0].addSpellAbility(destroySameName);
-                        }
-
-                        AllZone.getGameAction().moveToPlayFromHand(cloned[0]);
-                        card.setCurrentlyCloningCard(cloned[0]);
+                        
+                        
+                    }
+                    
+                    AllZone.getGameAction().moveToPlay(card);
+                }
+                
+                private void grantExtras() {
+                  //Grant stuff from specific cloners
+                    if(cardName.equals("Vesuvan Doppelganger")) {
+                        final String keyword = "At the beginning of your upkeep, you may have this "
+                                + "creature become a copy of target creature except it doesn't copy that "
+                                        + "creature's color. If you do, this creature gains this ability.";
+                        card.addIntrinsicKeyword(keyword);
+                        card.addColor("U");
+                    }
+                    else if(cardName.equals("Quicksilver Gargantuan")) {
+                        card.setBaseAttack(7);
+                        card.setBaseDefense(7);
+                    }
+                    else if(cardName.equals("Phyrexian Metamorph")) {
+                        card.addType("Artifact");
+                    }
+                    else if(cardName.equals("Phantasmal Image")) {
+                        Trigger t = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ BecomesTarget | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.", card, true);
+                        card.addTrigger(t);
+                        card.setSVar("TrigSac", "AB$Sacrifice | Cost$ 0 | Defined$ Self");
+                    }
+                    else if(cardName.equals("Evil Twin")) {
+                        AbilityFactory af = new AbilityFactory();
+                        
+                        SpellAbility ab = af.getAbility("AB$Destroy | Cost$ U B T | ValidTgts$ Creature.sameName | TgtPrompt$ Select target creature with the same name. | SpellDescription$ Destroy target creature with the same name as this creature.", card);
+                        
+                        card.addSpellAbility(ab);
+                    }
+                    else if(cardName.equals("Sakashima the Impostor")) {
+                        AbilityFactory af = new AbilityFactory();
+                        SpellAbility ab = af.getAbility("AB$DelayedTrigger | Cost$ 2 U U | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturnSak | TriggerDescription$ Return CARDNAME to it's owners hand at the beginning of the next end step.",card);
+                        
+                        card.addSpellAbility(ab);
+                        card.setSVar("TrigReturnSak","AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand");
+                        card.setName("Sakashima the Impostor");
+                        card.addType("Legendary");
                     }
                 }
             }; // SpellAbility
@@ -2735,6 +2694,35 @@ public class CardFactoryCreatures {
             ability.setStackDescription(sbStack.toString());
         } // *************** END ************ END **************************
 
+
+        
+        // *************** START *********** START **************************
+        else if (cardName.equals("Ixidron")) {
+            Trigger tfdTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)", card, true);
+            
+            final SpellAbility triggeredAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    CardList creatsInPlay = AllZoneUtil.getCreaturesInPlay();
+                    
+                    creatsInPlay = creatsInPlay.filter(new CardListFilter() {
+                        @Override
+                        public boolean addCard(Card c) {
+                            return !c.isToken() && !c.equals(card);
+                        }
+                    });
+                    
+                    for(Card c : creatsInPlay) {
+                        c.turnFaceDown();
+                    }
+                }
+            };
+            
+            tfdTrigger.setOverridingAbility(triggeredAbility);
+            
+            card.addTrigger(tfdTrigger);
+        } // *************** END ************ END **************************
+        
         // ***************************************************
         // end of card specific code
         // ***************************************************

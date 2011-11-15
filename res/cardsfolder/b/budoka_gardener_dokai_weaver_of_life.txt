@@ -4,7 +4,7 @@ Types:Creature Human Monk
 Text:no text
 PT:2/1
 A:AB$ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | OptionalDecider$ You | SubAbility$ DBFlip | SpellDescription$ You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip CARDNAME.
-SVar:DBFlip:DB$ChangeState | Defined$ Self | CheckSVar$ X | SVarCompare$ GE10
+SVar:DBFlip:DB$SetState | Defined$ Self | CheckSVar$ X | SVarCompare$ GE10 | Flip$ True
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Rarity:Rare
 AlternateMode:Flip

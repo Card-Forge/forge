@@ -110,7 +110,15 @@ public class CardPanelLite extends CardPanelBase {
     private void bChangeStateActionPerformed(final ActionEvent e) {
         final Card cur = this.detail.getCard();
         if (cur != null) {
-            cur.changeState();
+            if(cur.isDoubleFaced()) {
+                if(cur.getCurState().equals("Transformed"))
+                {
+                    cur.setState("Original");
+                }
+                else {
+                    cur.setState("Transformed");
+                }
+            }
 
             this.setCard(cur);
         }

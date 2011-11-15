@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Flying
 T:Mode$ SpellCast | CheckSVar$ NumCast | SVarCompare$ EQ4 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever the fourth spell of a turn is cast, flip CARDNAME.
-SVar:TrigFlip:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Flip$ True
 SVar:NumCast:Count$ThisTurnCast_Card
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erayo_soratami_ascendant.jpg

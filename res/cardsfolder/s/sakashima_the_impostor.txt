@@ -1,0 +1,10 @@
+Name:Sakashima the Impostor
+ManaCost:2 U U
+Types:Legendary Creature Human Rogue
+Text:You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except its name is still CARDNAME, it's legendary in addition to its other types, and it gains "2 U U: Return CARDNAME to its owner's hand at the beginning of the next end step."
+PT:3/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sakashima_the_impostor.jpg
+Oracle:You may have Sakashima the Impostor enter the battlefield as a copy of any creature on the battlefield, except its name is still Sakashima the Impostor, it's legendary in addition to its other types, and it gains "{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step."
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/53.jpg
+End

@@ -267,10 +267,15 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             c.setCurSetCode(this.getSet());
             c.setRandomPicture(this.artIndex + 1);
             c.setImageFilename(this.getImageFilename());
-            if (c.hasAlternateState()) {
-                c.changeState();
+            if (c.isFlip()) {
+                c.setState("Flipped");
                 c.setImageFilename(CardUtil.buildFilename(c));
-                c.changeState();
+                c.setState("Original");
+            }
+            if (c.isDoubleFaced()) {
+                c.setState("Transformed");
+                c.setImageFilename(CardUtil.buildFilename(c));
+                c.setState("Original");
             }
         }
         // else throw "Unsupported card";

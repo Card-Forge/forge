@@ -8,7 +8,7 @@ A:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target crea
 A:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | Planeswalker$ True | SpellDescription$ Put a 2/2 green Wolf creature token onto the battlefield.
 SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:Y:Targeted$CardPower
-SVar:TrigTransform:AB$ChangeState | Cost$ 0 | Defined$ Self
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Transform$ True
 AlternateMode:DoubleFaced
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_relentless.jpg

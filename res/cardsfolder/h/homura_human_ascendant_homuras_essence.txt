@@ -6,7 +6,7 @@ PT:4/4
 K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield flipped.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ TrigFlip
-SVar:TrigFlip:DB$ChangeState | Defined$ Self
+SVar:TrigFlip:DB$SetState | Defined$ Self | Flip$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homura_human_ascendant.jpg
 AlternateMode:Flip
