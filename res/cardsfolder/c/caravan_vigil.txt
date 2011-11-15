@@ -1,0 +1,12 @@
+Name:Caravan Vigil
+ManaCost:G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ConditionCheckSVar$ Morbid | ConditionSVarCompare$ EQ0 | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library. Morbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | DestinationAlternative$ Hand  | AlternativeDestinationMessage$ put that card onto the battlefield instead of putting it into your hand? | ChangeType$ Land.Basic | ChangeNum$ 1 | ConditionCheckSVar$ Morbid | ConditionSVarCompare$ GE1
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/caravan_vigil.jpg
+SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/173.jpg
+Oracle:Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.\nMorbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.
+End
