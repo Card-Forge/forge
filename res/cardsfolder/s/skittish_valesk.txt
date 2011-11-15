@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlipACoin | TriggerDescription$ At the beginning of your upkeep, flip a coin. If you lose the flip, return CARDNAME to its owner's hand.
 SVar:TrigFlipACoin:AB$FlipACoin | Cost$ 0 | LoseSubAbility$ DBChange
-SVar:DBChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
+SVar:DBChange:DB$SetState | NewState$ FaceDown
 K:Morph:5 R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittish_valesk.jpg
