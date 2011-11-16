@@ -8,4 +8,6 @@ A:AB$ AnimateAll | Cost$ 2 U B | ValidCards$ Creature.unblocked | Power$ 4 | Tou
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_witch.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/168.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{2}{U}{B}: Each unblocked creature becomes 4/1 until end of turn.
 End
