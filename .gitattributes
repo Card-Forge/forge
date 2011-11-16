@@ -8560,6 +8560,7 @@ res/cardsfolder/t/tidal_courier.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_kraken.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_surge.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_visionary.txt -text
+res/cardsfolder/t/tidal_warrior.txt -text
 res/cardsfolder/t/tidal_wave.txt svneol=native#text/plain
 res/cardsfolder/t/tideforce_elemental.txt svneol=native#text/plain
 res/cardsfolder/t/tidehollow_sculler.txt svneol=native#text/plain
