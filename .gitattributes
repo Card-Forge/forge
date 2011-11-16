@@ -1010,6 +1010,7 @@ res/cardsfolder/b/brave_the_elements.txt svneol=native#text/plain
 res/cardsfolder/b/brawn.txt svneol=native#text/plain
 res/cardsfolder/b/breach.txt svneol=native#text/plain
 res/cardsfolder/b/break_asunder.txt svneol=native#text/plain
+res/cardsfolder/b/break_open.txt -text
 res/cardsfolder/b/breath_of_darigaaz.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_dreams.txt svneol=native#text/plain
 res/cardsfolder/b/breath_of_life.txt svneol=native#text/plain
@@ -4171,6 +4172,7 @@ res/cardsfolder/i/ivory_tower.txt svneol=native#text/plain
 res/cardsfolder/i/ivy_dancer.txt svneol=native#text/plain
 res/cardsfolder/i/ivy_elemental.txt svneol=native#text/plain
 res/cardsfolder/i/iwamori_of_the_open_fist.txt svneol=native#text/plain
+res/cardsfolder/i/ixidor_reality_sculptor.txt -text
 res/cardsfolder/i/ixidors_will.txt svneol=native#text/plain
 res/cardsfolder/i/ixidron.txt -text
 res/cardsfolder/i/izzet_boilerworks.txt svneol=native#text/plain
@@ -7476,6 +7478,7 @@ res/cardsfolder/s/skinshifter.txt -text
 res/cardsfolder/s/skinthinner.txt svneol=native#text/plain
 res/cardsfolder/s/skinwing.txt svneol=native#text/plain
 res/cardsfolder/s/skirge_familiar.txt svneol=native#text/plain
+res/cardsfolder/s/skirk_alarmist.txt -text
 res/cardsfolder/s/skirk_commando.txt -text svneol=unset#text/plain
 res/cardsfolder/s/skirk_drill_sergeant.txt -text
 res/cardsfolder/s/skirk_fire_marshal.txt svneol=native#text/plain
