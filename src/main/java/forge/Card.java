@@ -61,8 +61,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Sets the state.
-     *
-     * @param state the state
+     * 
+     * @param state
+     *            the state
      * @return true, if successful
      */
     public boolean setState(final String state) {
@@ -85,7 +86,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Gets the states.
-     *
+     * 
      * @return the states
      */
     public Set<String> getStates() {
@@ -94,7 +95,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Gets the cur state.
-     *
+     * 
      * @return the cur state
      */
     public String getCurState() {
@@ -103,9 +104,11 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Switch states.
-     *
-     * @param from the from
-     * @param to the to
+     * 
+     * @param from
+     *            the from
+     * @param to
+     *            the to
      */
     public void switchStates(final String from, final String to) {
         final CardCharacteristics tmp = this.characteristicsMap.get(from);
@@ -115,8 +118,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Clear states.
-     *
-     * @param state the state
+     * 
+     * @param state
+     *            the state
      */
     public void clearStates(final String state) {
         this.characteristicsMap.remove(state);
@@ -124,30 +128,34 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Turn face down.
+     *
+     * @return true, if successful
      */
     public boolean turnFaceDown() {
         if (!this.isDoubleFaced) {
             this.preTFDCharacteristic = this.curCharacteristics;
             return this.setState("FaceDown");
         }
-        
+
         return false;
     }
 
     /**
      * Turn face up.
+     *
+     * @return true, if successful
      */
     public boolean turnFaceUp() {
         if (this.curCharacteristics.equals("FaceDown")) {
             return this.setState(this.preTFDCharacteristic);
         }
-        
+
         return false;
     }
 
     /**
      * Checks if is cloned.
-     *
+     * 
      * @return true, if is cloned
      */
     public boolean isCloned() {
@@ -161,8 +169,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Gets the state.
-     *
-     * @param state the state
+     * 
+     * @param state
+     *            the state
      * @return the state
      */
     public CardCharacteristics getState(final String state) {
@@ -180,8 +189,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * addAlternateState.
-     *
-     * @param state the state
+     * 
+     * @param state
+     *            the state
      */
     public final void addAlternateState(final String state) {
         this.characteristicsMap.put(state, new CardCharacteristics());
@@ -2901,7 +2911,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Gets the regenerated this turn.
-     *
+     * 
      * @return the regenerated this turn
      */
     public final int getRegeneratedThisTurn() {
@@ -2910,8 +2920,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Sets the regenerated this turn.
-     *
-     * @param n the new regenerated this turn
+     * 
+     * @param n
+     *            the new regenerated this turn
      */
     public final void setRegeneratedThisTurn(final int n) {
         this.regeneratedThisTurn = n;
@@ -8089,7 +8100,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.getCharacteristics().setCardColorsOverridden(cardColorsOverridden0);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.GameEntity#hasProtectionFrom(forge.Card)
      */
     @Override

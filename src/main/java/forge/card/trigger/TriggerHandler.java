@@ -82,7 +82,7 @@ public class TriggerHandler {
      * </p>
      */
     public final void clearDelayedTrigger() {
-        delayedTriggers.clear();
+        this.delayedTriggers.clear();
     }
 
     /**
@@ -291,16 +291,16 @@ public class TriggerHandler {
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
         CardList allCards = AllZoneUtil.getCardsInGame();
-        
-        //Static triggers
-        for(final Card c : allCards) {
-            for(final Trigger t : c.getTriggers()) {
-                if(t.getMapParams().containsKey("Static")) {
-                    this.runSingleTrigger(t,  mode, runParams);
+
+        // Static triggers
+        for (final Card c : allCards) {
+            for (final Trigger t : c.getTriggers()) {
+                if (t.getMapParams().containsKey("Static")) {
+                    this.runSingleTrigger(t, mode, runParams);
                 }
             }
         }
-        
+
         this.suppressMode("Always");
         AllZone.getGameAction().checkStateEffects(true);
         this.clearSuppression("Always");
@@ -310,8 +310,8 @@ public class TriggerHandler {
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
-                if(!t.getMapParams().containsKey("Static")) {
-                    this.runSingleTrigger(t,  mode, runParams);
+                if (!t.getMapParams().containsKey("Static")) {
+                    this.runSingleTrigger(t, mode, runParams);
                 }
             }
         }
@@ -331,8 +331,8 @@ public class TriggerHandler {
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP.getOpponent()));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
-                if(!t.getMapParams().containsKey("Static")) {
-                    this.runSingleTrigger(t,  mode, runParams);
+                if (!t.getMapParams().containsKey("Static")) {
+                    this.runSingleTrigger(t, mode, runParams);
                 }
             }
         }

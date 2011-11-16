@@ -1156,7 +1156,7 @@ public class AbilityFactoryZoneAffecting {
                         p.discard(c, sa);
                         discarded.add(c);
                     }
-                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") 
+                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")
                         || mode.equals("TgtChoose")) {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
@@ -1173,7 +1173,7 @@ public class AbilityFactoryZoneAffecting {
                         Player chooser = p;
                         if (mode.equals("RevealYouChoose")) {
                             chooser = source.getController();
-                        } else if (mode.equals("RevealOppChoose")){
+                        } else if (mode.equals("RevealOppChoose")) {
                             chooser = source.getController().getOpponent();
                         }
 
@@ -1200,7 +1200,7 @@ public class AbilityFactoryZoneAffecting {
 
                                     final Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
                                     dPChHand.remove(dC);
-                                    
+
                                     if (mode.startsWith("Reveal")) {
                                         final CardList dCs = new CardList();
                                         dCs.add(dC);

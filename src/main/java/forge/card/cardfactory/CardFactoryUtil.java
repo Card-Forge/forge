@@ -4172,7 +4172,7 @@ public class CardFactoryUtil {
     public static Card copyStats(final Object o) {
         final Card sim = (Card) o;
         final Card c = new Card();
-        
+
         c.setFlip(sim.isFlip());
         c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
@@ -4186,7 +4186,7 @@ public class CardFactoryUtil {
         }
 
         sim.setState(origState);
-        c.setState(origState);        
+        c.setState(origState);
 
         return c;
     } // copyStats()

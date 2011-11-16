@@ -493,7 +493,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         CardFactoryUtil.parseKeywords(card, cardName);
 
         for (final String state : card.getStates()) {
-            if(card.isDoubleFaced() && state.equals("FaceDown")) {
+            if (card.isDoubleFaced() && state.equals("FaceDown")) {
                 continue; //Ignore FaceDown for DFC since they have none.
             }
             card.setState(state);
