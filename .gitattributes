@@ -9099,6 +9099,7 @@ res/cardsfolder/v/vigilance.txt svneol=native#text/plain
 res/cardsfolder/v/vigilant_drake.txt svneol=native#text/plain
 res/cardsfolder/v/vigilant_martyr.txt svneol=native#text/plain
 res/cardsfolder/v/vigilant_sentry.txt svneol=native#text/plain
+res/cardsfolder/v/vigor_mortis.txt -text svneol=unset#text/plain
 res/cardsfolder/v/vile_deacon.txt svneol=native#text/plain
 res/cardsfolder/v/vile_requiem.txt svneol=native#text/plain
 res/cardsfolder/v/village_bell_ringer.txt -text
