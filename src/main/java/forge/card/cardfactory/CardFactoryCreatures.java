@@ -436,7 +436,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Sleeper Agent")) {
+        /*else if (cardName.equals("Sleeper Agent")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -462,7 +462,7 @@ public class CardFactoryCreatures {
                 } // execute()
             };
             card.addComesIntoPlayCommand(intoPlay);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Phylactery Lich")) {
@@ -2696,36 +2696,6 @@ public class CardFactoryCreatures {
             sbStack.append(card).append(" - Draw two cards, then discard one of them.");
             ability.setStackDescription(sbStack.toString());
         } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        /*else if (cardName.equals("Ixidron")) {
-            final Trigger tfdTrigger = forge.card.trigger.TriggerHandler
-                    .parseTrigger(
-                            "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)",
-                            card, true);
-
-            final SpellAbility triggeredAbility = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardList creatsInPlay = AllZoneUtil.getCreaturesInPlay();
-
-                    creatsInPlay = creatsInPlay.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return !c.isToken() && !c.equals(card);
-                        }
-                    });
-
-                    for (final Card c : creatsInPlay) {
-                        c.turnFaceDown();
-                    }
-                }
-            };
-
-            tfdTrigger.setOverridingAbility(triggeredAbility);
-
-            card.addTrigger(tfdTrigger);
-        }*/ // *************** END ************ END **************************
 
         // ***************************************************
         // end of card specific code
