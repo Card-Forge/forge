@@ -328,6 +328,8 @@ public class ComputerUtilAttack {
 
         final CardList remainingAttackers = new CardList(this.attackers.toArray());
         final CardList blockableAttackers = new CardList(this.attackers.toArray());
+        final Player human = AllZone.getHumanPlayer();
+        final Player computer = AllZone.getComputerPlayer();
 
         for (int i = 0; i < this.attackers.size(); i++) {
             if (!CombatUtil.canBeBlocked(this.attackers.get(i), this.blockers)) {
@@ -340,8 +342,9 @@ public class ComputerUtilAttack {
             remainingAttackers.remove(blockableAttackers.get(i));
         }
 
-        if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) > AllZone.getHumanPlayer()
-                .getLife()) && AllZone.getHumanPlayer().canLoseLife()) {
+        if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, human) > human.getLife()) 
+                && AllZone.getHumanPlayer().canLoseLife()
+                && !((human.cantLoseForZeroOrLessLife() || human.cantLose() || computer.cantWin()) && human.getLife() < 1)) {
             return true;
         }
 
