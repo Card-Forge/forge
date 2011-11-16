@@ -657,6 +657,10 @@ public final class AbilityFactoryChoose {
                             }
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
+                        if (logic.equals("MostProminentComputerControls")) {
+                            chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer()
+                                    .getCardsIn(Zone.Battlefield));
+                        }
                         if (logic.equals("MostProminentPermanent")) {
                             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
                             chosen = CardFactoryUtil.getMostProminentColor(list);

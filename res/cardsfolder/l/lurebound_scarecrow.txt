@@ -5,9 +5,10 @@ Text:no text
 PT:4/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True| TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
 SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentComputerControls
-T:Mode$ Always | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Static$ True | Execute$ TrigSacrifice | Description$ When you control no permanents of the chosen color, sacrifice CARDNAME.
+T:Mode$ Always | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Static$ True | Execute$ TrigSacrifice | TriggerDescription$ When you control no permanents of the chosen color, sacrifice CARDNAME.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0
 SVar:X:Count$Valid Permanent.YouCtrl+ChosenColor
+SVar:NeedsToPlay:Permanent.nonColorless+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurebound_scarecrow.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/256.jpg
