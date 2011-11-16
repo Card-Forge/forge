@@ -320,8 +320,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean spellWithChoices = false;
     private boolean spellCopyingCard = false;
     private boolean creatureAttackedThisTurn = false;
+    private boolean creatureAttackedLastTurn = false;
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
+    private boolean creatureBlockedThisTurn = false;
     private boolean creatureGotBlockedThisCombat = false;
     private boolean dealtDmgToHumanThisTurn = false;
     private boolean dealtDmgToComputerThisTurn = false;
@@ -866,6 +868,29 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean getCreatureAttackedThisTurn() {
         return this.creatureAttackedThisTurn;
     }
+    
+    /**
+     * <p>
+     * Setter for the field <code>creatureAttackedLastTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setCreatureAttackedLastTurn(final boolean b) {
+        this.creatureAttackedLastTurn = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>creatureAttackedLastTurn</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getCreatureAttackedLastTurn() {
+        return this.creatureAttackedLastTurn;
+    }
 
     /**
      * <p>
@@ -877,6 +902,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setCreatureBlockedThisCombat(final boolean b) {
         this.creatureBlockedThisCombat = b;
+        if(b) {
+            setCreatureBlockedThisTurn(true);
+        }
     }
 
     /**
@@ -888,6 +916,29 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean getCreatureBlockedThisCombat() {
         return this.creatureBlockedThisCombat;
+    }
+    
+    /**
+     * <p>
+     * Setter for the field <code>creatureBlockedThisTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setCreatureBlockedThisTurn(final boolean b) {
+        this.creatureBlockedThisTurn = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>creatureBlockedThisTurn</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getCreatureBlockedThisTurn() {
+        return this.creatureBlockedThisTurn;
     }
 
     /**
@@ -6632,6 +6683,30 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if ((this.getReceivedDamageFromThisTurn().keySet()).isEmpty()) {
+                return false;
+            }
+        } else if (property.startsWith("attackedThisTurn")) {
+            if (!getCreatureAttackedThisTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("attackedLastTurn")) {
+            if (!getCreatureAttackedLastTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("blockedThisTurn")) {
+            if (!getCreatureBlockedThisTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("notAttackedThisTurn")) {
+            if (getCreatureAttackedThisTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("notAttackedLastTurn")) {
+            if (getCreatureAttackedLastTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("notBlockedThisTurn")) {
+            if (getCreatureBlockedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
