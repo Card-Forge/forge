@@ -6,7 +6,7 @@ PT:3/3
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | IsCurse$ True | SpellDescription$ Target creature's power becomes 1 until end of turn.
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Toughness$ 1 | IsCurse$ True | SpellDescription$ Target creature's toughness becomes 1 until end of turn.
 SVar:Rarity:Rare
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=109759&type=card
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vhati_il_dal.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/349.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/104.jpg
 Oracle:{T}: Target creature's power or toughness becomes 1 until end of turn.
