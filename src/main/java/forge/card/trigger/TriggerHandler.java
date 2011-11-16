@@ -290,14 +290,29 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        CardList allCards;
+        CardList allCards = AllZoneUtil.getCardsInGame();
+        
+        //Static triggers
+        for(final Card c : allCards) {
+            for(final Trigger t : c.getTriggers()) {
+                if(t.getMapParams().containsKey("Static")) {
+                    this.runSingleTrigger(t,  mode, runParams);
+                }
+            }
+        }
+        
+        this.suppressMode("Always");
+        AllZone.getGameAction().checkStateEffects(true);
+        this.clearSuppression("Always");
 
         // AP
         allCards = playerAP.getAllCards();
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
-                this.runSingleTrigger(t, mode, runParams);
+                if(!t.getMapParams().containsKey("Static")) {
+                    this.runSingleTrigger(t,  mode, runParams);
+                }
             }
         }
         for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
@@ -316,7 +331,9 @@ public class TriggerHandler {
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP.getOpponent()));
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
-                this.runSingleTrigger(t, mode, runParams);
+                if(!t.getMapParams().containsKey("Static")) {
+                    this.runSingleTrigger(t,  mode, runParams);
+                }
             }
         }
         for (int i = 0; i < delayedTriggersWorkingCopy.size(); i++) {
