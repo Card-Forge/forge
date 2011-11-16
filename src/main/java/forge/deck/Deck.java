@@ -106,7 +106,7 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * @param deckType
      *            a {@link java.lang.String} object.
      */
-    void setDeckType(final GameType deckType) {
+    public void setDeckType(final GameType deckType) {
         if (this.getDeckType() != null) {
             throw new IllegalStateException("Deck : setDeckType() error, deck type has already been set");
         }
