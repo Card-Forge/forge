@@ -200,6 +200,32 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Small fix for Jinxed Ring
+- Added player targeting AI to AF GainControl.
+- Changed Characteristics-handling from an array to a Map.
+- Renamed AF_ChangeState to AF_SetState. SetState can be used with a Transform,Flip or NewState parameter.
+- Rewrote Clones to use Characteristics.
+- Rewrote Morph to use Characteristics.
+- Fixed Skittish Valesk (Thanks Hellfish).
+- Fixed Veinfire Borderpost's text.
+- Corrected the LQ pic URL for Momir Vig, Simic Visionary.
+- Converted Sculpting Steel and Copy Artifact to new Clone-code.
+- Fixed a lot of Checkstyle stuff. Removed some checks - method, class and line length
+- Checkstyle fixes
+- Removed the hardcoded entry of Ixidron and fixed the script.
+- Made setDeckType public for DeckEditor to persist the deckType.
+- Fixing AI Logic of Soul Bleed
+- Fixed Sea's Claim casting cost
+- Ran set info and oracle scripts
+- Fixed bogus set info and duplicate oracle text for Vhati il-Dal
+- Added the missing AILogic for Lurebound Scarecrow and fixed the script.
+- Converted Sleeper Agent to script.
+- Added a Cleanup DB to Sindbad and Fa'adiyah Seer.
+- The "DiscardValid" parameter in AF Discard now also works if the mode is "TgtChoose".
+- Converted Krovikan Sorcerer to script.
+- Corrected Casting of Bones and Soldevi Sage.
+- Fixed Skeletonize (4 errors in a single script!).
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -319,6 +345,15 @@ Heartwood Giant
 Imps' Taunt
 Mogg Cannon
 Jinxed Idol
+Jinxed Ring
+Ixidron
+Sakashima, the Impostor
+Caravan Vigil
+Inkfathom Witch
+Malfegor
+Inquisitor's Snare
+Lurebound Scarecrow
+Tidal Warrior
 
 
 end
