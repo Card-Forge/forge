@@ -5038,6 +5038,7 @@ res/cardsfolder/m/master_decoy.txt svneol=native#text/plain
 res/cardsfolder/m/master_healer.txt svneol=native#text/plain
 res/cardsfolder/m/master_of_arms.txt -text
 res/cardsfolder/m/master_of_etherium.txt svneol=native#text/plain
+res/cardsfolder/m/master_of_the_veil.txt -text
 res/cardsfolder/m/master_of_the_wild_hunt.txt svneol=native#text/plain
 res/cardsfolder/m/master_splicer.txt svneol=native#text/plain
 res/cardsfolder/m/master_thief.txt svneol=native#text/plain
