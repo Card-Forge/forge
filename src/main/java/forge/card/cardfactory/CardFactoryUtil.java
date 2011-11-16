@@ -5050,7 +5050,6 @@ public class CardFactoryUtil {
                 card.setPrevType(card.getType());
 
                 final String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
                 card.setCanMorph(true);
 
                 final String[] k = parse.split(":");

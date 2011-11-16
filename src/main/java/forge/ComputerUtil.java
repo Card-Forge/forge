@@ -39,7 +39,7 @@ public class ComputerUtil {
      *            objects.
      * @return a boolean.
      */
-    public static boolean playAbilities(final SpellAbility[] all) {
+    public static boolean playSpellAbilities(final SpellAbility[] all) {
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
         // MyRandom.shuffle(all);
@@ -102,7 +102,7 @@ public class ComputerUtil {
         for (int i = 0; i < sas.length; i++) {
             sas[i] = all.get(i);
         }
-        return ComputerUtil.playAbilities(sas);
+        return ComputerUtil.playSpellAbilities(sas);
     } // playCards()
 
     /**

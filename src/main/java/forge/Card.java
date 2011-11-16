@@ -2152,7 +2152,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         || keyword.get(i).startsWith("Echo") || keyword.get(i).startsWith("Fading")
                         || keyword.get(i).startsWith("Ripple") || keyword.get(i).startsWith("Unearth")
                         || keyword.get(i).startsWith("Vanishing") || keyword.get(i).startsWith("Madness")
-                        || keyword.get(i).startsWith("Devour")) {
+                        || keyword.get(i).startsWith("Devour") || keyword.get(i).startsWith("Morph")) {
                     String k = keyword.get(i);
                     k = k.replace(":", " ");
                     sbLong.append(k).append("\r\n");

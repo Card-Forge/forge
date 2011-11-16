@@ -73,7 +73,7 @@ public class ComputerAIGeneral implements Computer {
     private void playCards(final String phase) {
         final SpellAbility[] sp = phase.equals(Constant.Phase.MAIN1) ? this.getMain1() : this.getMain2();
 
-        final boolean nextPhase = ComputerUtil.playAbilities(sp);
+        final boolean nextPhase = ComputerUtil.playSpellAbilities(sp);
 
         if (nextPhase) {
             AllZone.getPhase().passPriority();
@@ -519,7 +519,7 @@ public class ComputerAIGeneral implements Computer {
             boolean pass = (sas.length == 0)
                     || AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
             if (!pass) { // Each AF should check the phase individually
-                pass = ComputerUtil.playAbilities(sas);
+                pass = ComputerUtil.playSpellAbilities(sas);
             }
 
             if (pass) {
@@ -556,7 +556,7 @@ public class ComputerAIGeneral implements Computer {
 
         if (sas.length > 0) {
             // Spell not Countered
-            if (!ComputerUtil.playAbilities(sas)) {
+            if (!ComputerUtil.playSpellAbilities(sas)) {
                 return;
             }
         }
