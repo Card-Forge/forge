@@ -492,30 +492,21 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         CardFactoryUtil.parseKeywords(card, cardName);
 
-        this.addAbilityFactoryAbilities(card);
-
-        // register static abilities
-        ArrayList<String> stAbs = card.getStaticAbilityStrings();
-        if (stAbs.size() > 0) {
-            for (int i = 0; i < stAbs.size(); i++) {
-                card.addStaticAbility(stAbs.get(i));
+        for (final String state : card.getStates()) {
+            if(card.isDoubleFaced() && state.equals("FaceDown")) {
+                continue; //Ignore FaceDown for DFC since they have none.
             }
-        }
-
-        if (card.hasAlternateState()) {
-            for (final String state : card.getStates()) {
-                card.setState(state);
-                this.addAbilityFactoryAbilities(card);
-                stAbs = card.getStaticAbilityStrings();
-                if (stAbs.size() > 0) {
-                    for (int i = 0; i < stAbs.size(); i++) {
-                        card.addStaticAbility(stAbs.get(i));
-                    }
+            card.setState(state);
+            this.addAbilityFactoryAbilities(card);
+            ArrayList<String> stAbs = card.getStaticAbilityStrings();
+            if (stAbs.size() > 0) {
+                for (int i = 0; i < stAbs.size(); i++) {
+                    card.addStaticAbility(stAbs.get(i));
                 }
             }
-
-            card.setState("Original");
         }
+
+        card.setState("Original");
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************

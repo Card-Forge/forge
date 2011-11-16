@@ -4170,24 +4170,21 @@ public class CardFactoryUtil {
     public static Card copyStats(final Object o) {
         final Card sim = (Card) o;
         final Card c = new Card();
-
-        CardFactoryUtil.copyCharacteristics(sim, c);
-        if (sim.hasAlternateState()) {
-            final String origState = sim.getCurState();
-            for (final String state : sim.getStates()) {
-                c.addAlternateState(state);
-                c.setState(state);
-                sim.setState(state);
-                CardFactoryUtil.copyCharacteristics(sim, c);
-            }
-
-            sim.setState(origState);
-            c.setState(origState);
-        }
-
+        
         c.setFlip(sim.isFlip());
         c.setDoubleFaced(sim.isDoubleFaced());
         c.setCurSetCode(sim.getCurSetCode());
+
+        final String origState = sim.getCurState();
+        for (final String state : sim.getStates()) {
+            c.addAlternateState(state);
+            c.setState(state);
+            sim.setState(state);
+            CardFactoryUtil.copyCharacteristics(sim, c);
+        }
+
+        sim.setState(origState);
+        c.setState(origState);        
 
         return c;
     } // copyStats()

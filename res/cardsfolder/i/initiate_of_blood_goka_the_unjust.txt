@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn. | NumDmg$ 1 | RememberTargets$ True | SpellDescription$ CARDNAME deals 1 damage to target creature that was dealt damage this turn.
 T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ When that creature dies this turn, flip CARDNAME.
-SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Flip$ True | SubAbility$ TrigCleanup
+SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip | SubAbility$ TrigCleanup
 T:Mode$Phase | Phase$ End of Turn | Static$ True | Execute$ TrigCleanup | Secondary$ True | TriggerDescription$ Forgets remembered cards at eot.
 SVar:TrigCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon

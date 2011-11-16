@@ -4,7 +4,7 @@ Types:Creature Human Werewolf
 Text:no text
 PT:2/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Transform$ True
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatstaf_shepherd.jpg
 AlternateMode:DoubleFaced
@@ -21,7 +21,7 @@ Text:no text
 PT:3/3
 K:Intimidate
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Transform$ True
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatstaf_howler.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/182b.jpg

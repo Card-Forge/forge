@@ -4,7 +4,7 @@ Types:Legendary Creature Fox Monk
 Text:no text
 PT:2/2
 T:Mode$ Always | LifeTotal$ You | LifeAmount$ GE30 | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When you have 30 or more life, flip CARDNAME.
-SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Flip$ True
+SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_tail_kitsune_ascendant.jpg
 AlternateMode:Flip
