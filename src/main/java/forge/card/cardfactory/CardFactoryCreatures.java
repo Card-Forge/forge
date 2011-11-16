@@ -2644,7 +2644,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Krovikan Sorcerer")) {
+        /*else if (cardName.equals("Krovikan Sorcerer")) {
             final Cost abCost = new Cost("T Discard<1/Card.Black>", cardName, true);
             final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
                 private static final long serialVersionUID = 3689290210743241201L;
@@ -2695,7 +2695,7 @@ public class CardFactoryCreatures {
             final StringBuilder sbStack = new StringBuilder();
             sbStack.append(card).append(" - Draw two cards, then discard one of them.");
             ability.setStackDescription(sbStack.toString());
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // ***************************************************
         // end of card specific code

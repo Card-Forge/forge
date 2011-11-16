@@ -1129,12 +1129,8 @@ public class AbilityFactoryZoneAffecting {
                 if (mode.equals("Random")) {
                     final String valid = params.containsKey("DiscardValid") ? params.get("DiscardValid") : "Card";
                     discarded.addAll(p.discardRandom(numCards, sa, valid));
-                } else if (mode.equals("TgtChoose")) {
-                    if (params.containsKey("UnlessType")) {
-                        p.discardUnless(numCards, params.get("UnlessType"), sa);
-                    } else {
-                        discarded.addAll(p.discard(numCards, sa, true));
-                    }
+                } else if (mode.equals("TgtChoose") && params.containsKey("UnlessType")) {
+                    p.discardUnless(numCards, params.get("UnlessType"), sa);
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
                     final CardList dPHand = p.getCardsIn(Zone.Hand);
@@ -1160,7 +1156,8 @@ public class AbilityFactoryZoneAffecting {
                         p.discard(c, sa);
                         discarded.add(c);
                     }
-                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")) {
+                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") 
+                        || mode.equals("TgtChoose")) {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
                     final CardList dPHand = p.getCardsIn(Zone.Hand);
@@ -1173,10 +1170,10 @@ public class AbilityFactoryZoneAffecting {
                             final String[] dValid = params.get("DiscardValid").split(",");
                             dPChHand = dPHand.getValidCards(dValid, source.getController(), source);
                         }
-                        Player chooser = null;
+                        Player chooser = p;
                         if (mode.equals("RevealYouChoose")) {
                             chooser = source.getController();
-                        } else {
+                        } else if (mode.equals("RevealOppChoose")){
                             chooser = source.getController().getOpponent();
                         }
 
@@ -1203,10 +1200,12 @@ public class AbilityFactoryZoneAffecting {
 
                                     final Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
                                     dPChHand.remove(dC);
-
-                                    final CardList dCs = new CardList();
-                                    dCs.add(dC);
-                                    GuiUtils.getChoiceOptional("Computer has chosen", dCs.toArray());
+                                    
+                                    if (mode.startsWith("Reveal")) {
+                                        final CardList dCs = new CardList();
+                                        dCs.add(dC);
+                                        GuiUtils.getChoiceOptional("Computer has chosen", dCs.toArray());
+                                    }
                                     discarded.add(dC);
                                     AllZone.getComputerPlayer().discard(dC, sa); // is
                                                                                  // this
@@ -1215,7 +1214,9 @@ public class AbilityFactoryZoneAffecting {
                             }
                         } else {
                             // human
-                            GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+                            if (mode.startsWith("Reveal")) {
+                                GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+                            }
 
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
