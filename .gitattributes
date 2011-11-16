@@ -4569,6 +4569,7 @@ res/cardsfolder/l/lace_with_moonglove.txt svneol=native#text/plain
 res/cardsfolder/l/lady_caleria.txt svneol=native#text/plain
 res/cardsfolder/l/lady_evangela.txt svneol=native#text/plain
 res/cardsfolder/l/lady_orca.txt svneol=native#text/plain
+res/cardsfolder/l/lady_sun.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lady_zhurong_warrior_queen.txt svneol=native#text/plain
 res/cardsfolder/l/lagac_lizard.txt svneol=native#text/plain
 res/cardsfolder/l/lake_of_the_dead.txt svneol=native#text/plain
