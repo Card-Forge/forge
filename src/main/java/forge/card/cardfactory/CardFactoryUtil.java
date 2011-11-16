@@ -3358,6 +3358,8 @@ public class CardFactoryUtil {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("Mod")) {
+            return num % secondaryNum;
         } else if (s[0].contains("LimitMax")) {
             if (num < secondaryNum) {
                 return num;
