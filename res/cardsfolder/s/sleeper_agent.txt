@@ -1,7 +1,7 @@
 Name:Sleeper Agent
 ManaCost:B
 Types:Creature Minion
-Text:
+Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, target opponent gains control of it.
 SVar:TrigGainControl:AB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
