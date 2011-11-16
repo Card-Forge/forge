@@ -936,18 +936,15 @@ public class AbilityFactoryPump {
 
                 @Override
                 public void execute() {
-                    if (AllZoneUtil.isCardInPlay(applyTo)) {
-                        applyTo.addTempAttackBoost(-1 * a);
-                        applyTo.addTempDefenseBoost(-1 * d);
+                    applyTo.addTempAttackBoost(-1 * a);
+                    applyTo.addTempDefenseBoost(-1 * d);
 
-                        if (AbilityFactoryPump.this.keywords.size() > 0) {
-                            for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
-                                if (!AbilityFactoryPump.this.keywords.get(i).equals("none")) {
-                                    applyTo.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
-                                }
+                    if (AbilityFactoryPump.this.keywords.size() > 0) {
+                        for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
+                            if (!AbilityFactoryPump.this.keywords.get(i).equals("none")) {
+                                applyTo.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
                             }
                         }
-
                     }
                 }
             };
