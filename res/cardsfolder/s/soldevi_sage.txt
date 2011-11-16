@@ -3,8 +3,9 @@ ManaCost:1 U
 Types:Creature Human Wizard
 Text:no text
 PT:1/1
-A:AB$ Draw | Cost$ T Sac<2/Land> | NumCards$ 3 | SpellDescription$ Draw three cards, then discard a card. | SubAbility$ SVar=DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+A:AB$ Draw | Cost$ T Sac<2/Land> | NumCards$ 3 | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Draw three cards, then discard one of them.
+SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_sage.jpg
