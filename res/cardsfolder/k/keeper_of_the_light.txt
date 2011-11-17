@@ -1,0 +1,14 @@
+Name:Keeper of the Light
+ManaCost:W W
+Types:Creature Human Wizard
+Text:no text
+PT:1/2
+A:AB$ GainLife | Cost$ W T | ValidTgts$ Opponent | Defined$ You | CheckSVar$ X | SVarCompare$ LTY | LifeAmount$ 3 | SpellDescription$ Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$OppLifeTotal
+#You will gain the life even though stack says opponent will (due to the targeting)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_light.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/8.jpg
+Oracle:{W}, {T}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
+End

@@ -8,4 +8,6 @@ SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_sun.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/45.jpg
+Oracle:{T}: Return Lady Sun and another target creature to their owners' hands. Activate this ability only during your turn, before attackers are declared.
 End
