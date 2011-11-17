@@ -464,6 +464,7 @@
                     <propertyExpansion>
                         cacheFile=${project.build.directory}/checkstyle-cachefile
                     </propertyExpansion>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
             </plugin>
 
