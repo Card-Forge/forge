@@ -390,6 +390,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
                 }
                 c.setCreatureAttackedThisTurn(false);
                 c.setCreatureBlockedThisTurn(false);
+                c.setCreatureGotBlockedThisTurn(false);
             }
             AllZone.getHumanPlayer().resetPreventNextDamage();
             AllZone.getComputerPlayer().resetPreventNextDamage();

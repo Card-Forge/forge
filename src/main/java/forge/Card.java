@@ -326,6 +326,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureBlockedThisTurn = false;
     private boolean creatureGotBlockedThisCombat = false;
+    private boolean creatureGotBlockedThisTurn = false;
     private boolean dealtDmgToHumanThisTurn = false;
     private boolean dealtDmgToComputerThisTurn = false;
     private boolean sirenAttackOrDestroy = false;
@@ -975,6 +976,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setCreatureGotBlockedThisCombat(final boolean b) {
         this.creatureGotBlockedThisCombat = b;
+        if(b) {
+            setCreatureGotBlockedThisTurn(true);
+        }
     }
 
     /**
@@ -986,6 +990,29 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean getCreatureGotBlockedThisCombat() {
         return this.creatureGotBlockedThisCombat;
+    }
+    
+    /**
+     * <p>
+     * Setter for the field <code>creatureGotBlockedThisTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setCreatureGotBlockedThisTurn(final boolean b) {
+        this.creatureGotBlockedThisTurn = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>creatureGotBlockedThisTurn</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getCreatureGotBlockedThisTurn() {
+        return this.creatureGotBlockedThisTurn;
     }
 
     /**
@@ -6722,6 +6749,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("blockedThisTurn")) {
             if (!getCreatureBlockedThisTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("gotBlockedThisTurn")) {
+            if (!getCreatureGotBlockedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("notAttackedThisTurn")) {

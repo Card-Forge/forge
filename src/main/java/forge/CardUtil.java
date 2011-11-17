@@ -905,6 +905,7 @@ public final class CardUtil {
         res.setChangedCardTypes(c.getChangedCardTypes());
         res.setNewPT(c.getNewPT());
         res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
+        res.setCreatureGotBlockedThisTurn(c.getCreatureGotBlockedThisTurn());
         res.setHaunting(c.getHaunting());
         for (final Card haunter : c.getHauntedBy()) {
             res.addHauntedBy(haunter);
