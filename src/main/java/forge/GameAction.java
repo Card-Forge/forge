@@ -868,7 +868,7 @@ public class GameAction {
 
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);
-                    if (!AllZoneUtil.isCardInPlay(equippedCreature)) {
+                    if (!equippedCreature.isCreature() || !AllZoneUtil.isCardInPlay(equippedCreature)) {
                         c.unEquipCard(equippedCreature);
                         checkAgain = true;
                     }
