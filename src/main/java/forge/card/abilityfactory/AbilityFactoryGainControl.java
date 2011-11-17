@@ -14,6 +14,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.GameEntity;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -379,14 +380,22 @@ public class AbilityFactoryGainControl {
             tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
         }
         // tgtCards.add(hostCard);
+        
+        ArrayList<Player> controllers = new ArrayList<Player>();
 
-        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                this.params.get("NewController"), sa);
-        if (tgt != null && tgt.getTargetPlayers() != null) {
-            newController = tgt.getTargetPlayers();
+        if (params.containsKey("NewController")) {
+            controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+                    this.params.get("NewController"), sa);
+        } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
+            controllers = tgt.getTargetPlayers();
         }
-        if (newController.size() == 0) {
-            newController.add(sa.getActivatingPlayer());
+        
+        GameEntity newController;
+        
+        if (controllers.size() == 0) {
+            newController = this.hostCard;
+        } else {
+            newController = controllers.get(0);
         }
 
         final int size = tgtCards.size();
@@ -401,13 +410,7 @@ public class AbilityFactoryGainControl {
 
             if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
 
-                if (this.params.containsKey("NewController")) {
-                    tgtC.addController(newController.get(0));
-                } else if (tgt != null && tgt.getTargetPlayers() != null) {
-                    tgtC.addController(newController.get(0));
-                } else {
-                    tgtC.addController(this.hostCard);
-                }
+                tgtC.addController(newController);
                 // AllZone.getGameAction().changeController(new CardList(tgtC),
                 // tgtC.getController(), newController.get(0));
 
