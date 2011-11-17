@@ -126,7 +126,7 @@ public class GameAction {
 
             copied.setUnearthed(c.isUnearthed());
         }
-        
+
         if (c.wasSuspendCast()) {
             copied = GameAction.addSuspendTriggers(c);
         }

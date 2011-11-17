@@ -869,7 +869,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean getCreatureAttackedThisTurn() {
         return this.creatureAttackedThisTurn;
     }
-    
+
     /**
      * <p>
      * Setter for the field <code>creatureAttackedLastTurn</code>.
@@ -892,7 +892,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean getCreatureAttackedLastHumanTurn() {
         return this.creatureAttackedLastHumanTurn;
     }
-    
+
     /**
      * <p>
      * Setter for the field <code>creatureAttackedLastTurn</code>.
@@ -926,7 +926,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setCreatureBlockedThisCombat(final boolean b) {
         this.creatureBlockedThisCombat = b;
-        if(b) {
+        if (b) {
             setCreatureBlockedThisTurn(true);
         }
     }
@@ -941,7 +941,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean getCreatureBlockedThisCombat() {
         return this.creatureBlockedThisCombat;
     }
-    
+
     /**
      * <p>
      * Setter for the field <code>creatureBlockedThisTurn</code>.

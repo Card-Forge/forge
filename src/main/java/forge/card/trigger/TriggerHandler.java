@@ -315,7 +315,7 @@ public class TriggerHandler {
         AllZone.getGameAction().checkStateEffects(true);
         this.clearSuppression("Always");
          */
-        
+
         // AP
         allCards = playerAP.getAllCards();
         allCards.addAll(AllZoneUtil.getCardsIn(Constant.Zone.Stack).getController(playerAP));
