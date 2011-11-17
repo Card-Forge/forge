@@ -7690,6 +7690,7 @@ res/cardsfolder/s/soltari_lancer.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_monk.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_priest.txt svneol=native#text/plain
 res/cardsfolder/s/soltari_trooper.txt svneol=native#text/plain
+res/cardsfolder/s/soltari_visionary.txt -text
 res/cardsfolder/s/somber_hoverguard.txt svneol=native#text/plain
 res/cardsfolder/s/somberwald_spider.txt -text
 res/cardsfolder/s/somnomancer.txt svneol=native#text/plain
