@@ -1,0 +1,15 @@
+Name:Witch Engine
+ManaCost:5 B
+Types:Creature Horror
+Text:no text
+PT:4/4
+K:Swampwalk
+A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 4 | SubAbility$ ChangeControl | SpellDescription$ Add B B B B to your mana pool.
+SVar:ChangeControl:DB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ RemCombat | SpellDescription$ Target opponent gains control of CARDNAME.
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_engine.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/169.jpg
+Oracle:Swampwalk\n{T}: Add {B}{B}{B}{B} to your mana pool. Target opponent gains control of Witch Engine. (Activate this ability only any time you could cast an instant.)
+End
