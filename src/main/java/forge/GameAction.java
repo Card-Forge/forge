@@ -124,14 +124,11 @@ public class GameAction {
             copied = AllZone.getCardFactory().copyCard(c);
             lastKnownInfo = CardUtil.getLKICopy(c);
 
-            // TODO improve choices here
-            // Certain attributes need to be copied from Hand->Stack and
-            // Stack->Battlefield
-            // these probably can be moved back to SubtractCounters
-            if (c.wasSuspendCast()) {
-                copied = GameAction.addSuspendTriggers(c);
-            }
-            copied.setUnearthed(c.isUnearthed()); // this might be unnecessary
+            copied.setUnearthed(c.isUnearthed());
+        }
+        
+        if (c.wasSuspendCast()) {
+            copied = GameAction.addSuspendTriggers(c);
         }
 
         for (final Trigger trigger : c.getTriggers()) {
