@@ -4,8 +4,9 @@ Types:Sorcery
 Text:no text
 K:Suspend:3:2 U
 A:SP$ ChangeZone | Cost$ 4 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ SVar=DBChange | SpellDescription$ Return target permanent to its owner's hand. Exile CARDNAME with three time counters on it.
-SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ SVar=DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | CounterType$ TIME | CounterNum$ 3
+SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_strobe.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/43.jpg
