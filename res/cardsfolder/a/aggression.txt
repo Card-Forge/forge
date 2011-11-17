@@ -2,9 +2,12 @@ Name:Aggression
 ManaCost:2 R
 Types:Enchantment Aura
 Text:no text
-K:Enchant creature
-A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature.nonWall | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike & Trample | AddHiddenKeyword$ HIDDEN At the beginning of your end step, destroy this creature if it didn't attack this turn. | Description$ Enchanted creature has first strike and trample. At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.
+K:Enchant non-Wall creature
+A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature.nonWall | TgtPrompt$ Select target non-Wall creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike & Trample | Description$ Enchanted creature has first strike and trample.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDestroy | isPresent$ Card.EnchantedBy+notAttackedThisTurn | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.
+SVar:TrigDestroy:DB$Destroy | Defined$ Enchanted
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aggression.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/169.jpg
