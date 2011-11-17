@@ -8841,7 +8841,6 @@ res/cardsfolder/t/twincast.txt svneol=native#text/plain
 res/cardsfolder/t/twisted_abomination.txt svneol=native#text/plain
 res/cardsfolder/t/twisted_experiment.txt svneol=native#text/plain
 res/cardsfolder/t/twisted_image.txt svneol=native#text/plain
-res/cardsfolder/t/twisted_justice.txt -text svneol=unset#text/plain
 res/cardsfolder/t/twitch.txt svneol=native#text/plain
 res/cardsfolder/t/typhoid_rats.txt -text
 res/cardsfolder/t/typhoon.txt svneol=native#text/plain
