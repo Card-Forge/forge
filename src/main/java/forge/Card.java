@@ -320,7 +320,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean spellWithChoices = false;
     private boolean spellCopyingCard = false;
     private boolean creatureAttackedThisTurn = false;
-    private boolean creatureAttackedLastTurn = false;
+    private boolean creatureAttackedLastHumanTurn = false;
+    private boolean creatureAttackedLastComputerTurn = false;
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureBlockedThisTurn = false;
@@ -877,8 +878,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param b
      *            a boolean.
      */
-    public final void setCreatureAttackedLastTurn(final boolean b) {
-        this.creatureAttackedLastTurn = b;
+    public final void setCreatureAttackedLastHumanTurn(final boolean b) {
+        this.creatureAttackedLastHumanTurn = b;
     }
 
     /**
@@ -888,8 +889,31 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a boolean.
      */
-    public final boolean getCreatureAttackedLastTurn() {
-        return this.creatureAttackedLastTurn;
+    public final boolean getCreatureAttackedLastHumanTurn() {
+        return this.creatureAttackedLastHumanTurn;
+    }
+    
+    /**
+     * <p>
+     * Setter for the field <code>creatureAttackedLastTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setCreatureAttackedLastComputerTurn(final boolean b) {
+        this.creatureAttackedLastComputerTurn = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>creatureAttackedLastTurn</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getCreatureAttackedLastComputerTurn() {
+        return this.creatureAttackedLastComputerTurn;
     }
 
     /**
@@ -6690,7 +6714,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
-            if (!getCreatureAttackedLastTurn()) {
+            if (getController().isComputer() && !getCreatureAttackedLastComputerTurn()) {
+                return false;
+            }
+            if (getController().isHuman() && !getCreatureAttackedLastHumanTurn()) {
                 return false;
             }
         } else if (property.startsWith("blockedThisTurn")) {
@@ -6702,7 +6729,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("notAttackedLastTurn")) {
-            if (getCreatureAttackedLastTurn()) {
+            if (getController().isComputer() && getCreatureAttackedLastComputerTurn()) {
+                return false;
+            }
+            if (getController().isHuman() && getCreatureAttackedLastHumanTurn()) {
                 return false;
             }
         } else if (property.startsWith("notBlockedThisTurn")) {
