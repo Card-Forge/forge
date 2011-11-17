@@ -29,7 +29,7 @@ import forge.view.swing.OldGuiNewGame;
  * @author Forge
  * @version $Id$
  */
-@Test(groups = { "UnitTest" }, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
+@Test(groups = { "UnitTest" }, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS, enabled = false)
 public class CardFactoryTest {
 
     /** The default time to allow a test to run before TestNG ignores it. */
@@ -52,7 +52,7 @@ public class CardFactoryTest {
      * Just a quick test to see if Arc-Slogger is in the database, and if it has
      * the correct owner.
      */
-    @Test(enabled = true, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
+    @Test(enabled = false, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
     public final void test_getCard_1() { // NOPMD by Braids on 8/18/11 11:39 PM
         final Card card = this.factory.getCard("Arc-Slogger", null);
         Assert.assertNotNull(card, "card is not null");
@@ -62,7 +62,7 @@ public class CardFactoryTest {
     /**
      * Make sure the method throws an exception when it's supposed to.
      */
-    @Test(enabled = true, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
+    @Test(enabled = false, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
     public final void test_getRandomCombinationWithoutRepetition_tooLarge() { // NOPMD
                                                                               // by
                                                                               // Braids

@@ -17,7 +17,7 @@ import forge.properties.NewConstants;
 /**
  * Created by hand to test the CardReader class.
  */
-@Test(groups = { "UnitTest" })
+@Test(groups = { "UnitTest" }, enabled = false)
 public class CardReaderTest {
 
     /** The default test-timeout. */
@@ -102,7 +102,7 @@ public class CardReaderTest {
     /**
      * Test_ read card_find card_zip.
      */
-    @Test(groups = { "UnitTest", "fast" }, timeOut = CardReaderTest.TEST_TIMEOUT)
+    @Test(groups = { "UnitTest", "fast" }, timeOut = CardReaderTest.TEST_TIMEOUT, enabled = false)
     public final void test_ReadCard_findCard_zip() {
         final Map<String, Card> map = new HashMap<String, Card>();
         final File cardsfolder = ForgeProps.getFile(NewConstants.CARDSFOLDER);

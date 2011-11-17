@@ -10,7 +10,7 @@ import forge.item.ItemPoolView;
 /**
  * Unit test for simple App.
  */
-@Test(groups = { "UnitTest" }, timeOut = 1000)
+@Test(groups = { "UnitTest" }, timeOut = 1000, enabled = false)
 public class BoosterDraft1Test {
 
     /**
@@ -19,7 +19,7 @@ public class BoosterDraft1Test {
      * @throws Exception
      *             the exception
      */
-    @Test(groups = { "UnitTest", "fast" }, timeOut = 1000)
+    @Test(groups = { "UnitTest", "fast" }, timeOut = 1000, enabled = false)
     public void boosterDraft1Test1() throws Exception {
         final BoosterDraft draft = new BoosterDraft(CardPoolLimitation.Full);
         while (draft.hasNextChoice()) {

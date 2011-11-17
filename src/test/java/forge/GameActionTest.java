@@ -7,7 +7,7 @@ import forge.deck.generate.GenerateConstructedDeck;
 /**
  * The Class GameActionTest.
  */
-@Test(groups = { "UnitTest" }, timeOut = 1000)
+@Test(groups = { "UnitTest" }, timeOut = 1000, enabled = false)
 public class GameActionTest {
 
     /**
@@ -18,7 +18,7 @@ public class GameActionTest {
      * @throws Exception
      *             the exception
      */
-    @Test(groups = { "UnitTest", "fast" }, timeOut = 5000)
+    @Test(groups = { "UnitTest", "fast" }, timeOut = 5000, enabled = false)
     public void gameActionTest1() throws Exception {
         System.out.println("GameActionTest");
         final GameAction gameAction = new GameAction();

@@ -42,7 +42,7 @@ public class BuildInfoTest {
      * @throws IOException
      *             rarely
      */
-    @Test
+    @Test(enabled = false)
     public final void test_BuildInfo_mockJar() throws IOException { // NOPMD by
                                                                     // Braids on
                                                                     // 8/12/11
@@ -71,7 +71,7 @@ public class BuildInfoTest {
      * @throws IOException
      *             indirectly
      */
-    @Test
+    @Test(enabled = false)
     public final void test_BuildInfo_oneJarInCP() throws IOException { // NOPMD
                                                                        // by
                                                                        // Braids
@@ -110,7 +110,7 @@ public class BuildInfoTest {
      * @throws IOException
      *             indirectly
      */
-    @Test
+    @Test(enabled = false)
     public final void test_BuildInfo_twoJarsInCP() throws IOException { // NOPMD
                                                                         // by
                                                                         // Braids
