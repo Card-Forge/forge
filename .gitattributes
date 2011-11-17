@@ -10847,8 +10847,8 @@ src/main/java/tree/properties/types/FileType.java svneol=native#text/plain
 src/main/java/tree/properties/types/package-info.java svneol=native#text/plain
 src/main/resources/proxy-template.ftl -text
 src/site/apt/index.apt -text
+src/test/java/forge/BoosterDraft1Test.java svneol=native#text/plain
 src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
-src/test/java/forge/BoosterDraft_1Test.java svneol=native#text/plain
 src/test/java/forge/CardColorTest.java svneol=native#text/plain
 src/test/java/forge/CardReaderTest.java svneol=native#text/plain
 src/test/java/forge/GameActionTest.java svneol=native#text/plain
@@ -10865,7 +10865,7 @@ src/test/java/forge/RunTest.java svneol=native#text/plain
 src/test/java/forge/TinyTest.java svneol=native#text/plain
 src/test/java/forge/card/cardFactory/CardFactoryTest.java svneol=native#text/plain
 src/test/java/forge/card/cardFactory/CardFactoryUtilTest.java svneol=native#text/plain
-src/test/java/forge/card/mana/Mana_PartTest.java svneol=native#text/plain
+src/test/java/forge/card/mana/ManaPartTest.java svneol=native#text/plain
 src/test/java/forge/deck/generate/Generate2ColorDeckTest.java svneol=native#text/plain
 src/test/java/forge/deck/generate/Generate3ColorDeckTest.java svneol=native#text/plain
 src/test/java/forge/deck/generate/Generate5ColorDeckTest.java svneol=native#text/plain

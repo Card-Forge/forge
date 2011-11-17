@@ -10,12 +10,12 @@ import forge.quest.gui.QuestOptions;
  */
 @Test(groups = { "UnitTest" })
 public class GuiQuestOptionsTest {
-    
+
     /**
      * Gui quest options test1.
      */
     @Test(groups = { "UnitTest", "fast" })
-    public void GuiQuestOptionsTest1() {
+    public void guiQuestOptionsTest1() {
         final QuestOptions dialog = new QuestOptions();
         dialog.setVisible(true);
         Assert.assertNotNull(dialog);

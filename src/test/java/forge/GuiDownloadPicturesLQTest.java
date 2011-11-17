@@ -12,7 +12,7 @@ public class GuiDownloadPicturesLQTest {
      * Gui download pictures test1.
      */
     @Test(enabled = false, timeOut = 1000)
-    public void GuiDownloadPicturesTest1() {
+    public void guiDownloadPicturesTest1() {
         new GuiDownloadPicturesLQ(null);
     }
 }

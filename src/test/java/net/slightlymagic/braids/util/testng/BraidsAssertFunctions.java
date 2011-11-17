@@ -9,31 +9,30 @@ import org.testng.Assert;
  */
 public final class BraidsAssertFunctions {
 
-    /** Do not instantiate.*/
+    /** Do not instantiate. */
     private BraidsAssertFunctions() {
-        //empty
+        // empty
     }
 
     /**
-     * Assert that a function (ClumsyRunnable) throws the given exception, or
-     * a subclass of it.
-     *
-     * @param exnClass  the exception we expect
-     * @param withScissors  the code to run
+     * Assert that a function (ClumsyRunnable) throws the given exception, or a
+     * subclass of it.
+     * 
+     * @param exnClass
+     *            the exception we expect
+     * @param withScissors
+     *            the code to run
      */
-    public static void assertThrowsException(
-            @SuppressWarnings("rawtypes") final Class exnClass,
+    public static void assertThrowsException(@SuppressWarnings("rawtypes") final Class exnClass,
             final ClumsyRunnable withScissors) {
         try {
             withScissors.run();
-        }
-        catch (Exception exn) {
+        } catch (final Exception exn) {
             if (!exnClass.isInstance(exn)) {
-                Assert.fail("caught exception " + exn.getClass().getName()
-                        + ", but expected " + exnClass.getName());
+                Assert.fail("caught exception " + exn.getClass().getName() + ", but expected " + exnClass.getName());
             }
 
-            return;  //success
+            return; // success
         }
 
         Assert.fail("expected exception " + exnClass.getName() + ", but none was thrown");

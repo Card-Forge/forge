@@ -14,11 +14,12 @@ public class GameActionTest {
      * <p>
      * main.
      * </p>
-     *
-     * @throws Exception the exception
+     * 
+     * @throws Exception
+     *             the exception
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 5000)
-    public void GameActionTest1() throws Exception {
+    public void gameActionTest1() throws Exception {
         System.out.println("GameActionTest");
         final GameAction gameAction = new GameAction();
         final GenerateConstructedDeck gen = new GenerateConstructedDeck();
@@ -37,6 +38,6 @@ public class GameActionTest {
                 System.out.println("error - " + check);
                 break;
             }
-        }// for
+        } // for
     }
 }

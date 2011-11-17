@@ -10,12 +10,12 @@ import org.testng.annotations.Test;
  */
 @Test(groups = { "UnitTest" })
 public class GuiProgressBarWindowTest {
-    
+
     /**
      * Gui progress bar window test1.
      */
     @Test(groups = { "UnitTest", "fast" })
-    public void GuiProgressBarWindowTest1() {
+    public void guiProgressBarWindowTest1() {
         try {
             final GuiProgressBarWindow dialog = new GuiProgressBarWindow();
             dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

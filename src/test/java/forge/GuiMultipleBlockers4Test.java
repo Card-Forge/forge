@@ -12,7 +12,7 @@ public class GuiMultipleBlockers4Test {
      * Gui multiple blockers4 test1.
      */
     @Test(timeOut = 1000, enabled = false)
-    public void GuiMultipleBlockers4Test1() {
+    public void guiMultipleBlockers4Test1() {
         final CardList list = new CardList();
         list.add(AllZone.getCardFactory().getCard("Elvish Piper", null));
         list.add(AllZone.getCardFactory().getCard("Lantern Kami", null));

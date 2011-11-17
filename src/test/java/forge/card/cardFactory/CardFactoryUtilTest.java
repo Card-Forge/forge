@@ -27,7 +27,7 @@ public class CardFactoryUtilTest {
      * Card factory test1.
      */
     @Test(timeOut = 1000, enabled = false)
-    public void CardFactoryTest1() {
+    public void cardFactoryTest1() {
 
         Generator<Card> in = YieldUtils.toGenerator(AllZone.getCardFactory());
 

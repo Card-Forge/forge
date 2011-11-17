@@ -19,9 +19,9 @@ import forge.item.ItemPoolView;
  */
 @Test(groups = { "UnitTest" }, timeOut = 1000, enabled = false)
 public class BoosterDraftTest implements IBoosterDraft {
-    
+
     /** The n. */
-    int n = 3;
+    private int n = 3;
 
     /**
      * <p>
@@ -90,7 +90,9 @@ public class BoosterDraftTest implements IBoosterDraft {
         return null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.game.limited.IBoosterDraft#finishedDrafting()
      */
     @Override

@@ -7,12 +7,12 @@ import org.testng.annotations.Test;
  */
 @Test(groups = { "UnitTest" }, timeOut = 5000, enabled = false)
 public class PhaseTest {
-    
+
     /**
      * Phase test1.
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 5000, enabled = false)
-    public void PhaseTest1() {
+    public void phaseTest1() {
         final Phase phase = new Phase();
         for (int i = 0; i < phase.getPhaseOrder().length; i++) {
             System.out.println(phase.getPlayerTurn() + " " + phase.getPhase());

@@ -78,8 +78,9 @@ public class CardReaderTest {
 
     /**
      * Test_ read card_file not folder.
-     *
-     * @throws IOException Signals that an I/O exception has occurred.
+     * 
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = CardReaderTest.TEST_TIMEOUT)
     public final void test_ReadCard_fileNotFolder() throws IOException {
