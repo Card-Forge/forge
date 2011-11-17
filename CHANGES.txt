@@ -226,6 +226,28 @@ Fixes/Features:
 - Corrected Casting of Bones and Soldevi Sage.
 - Fixed Skeletonize (4 errors in a single script!).
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Until end of turn pumps will now also be removed when the pumped card wasn't on the battlefield.
+- Fixed front face of DFCs getting double the abilities.
+- Revised SetState to have a single Mode parameter rather than a lot of different parameters.
+- Added some can't win / can't lose checks to the doAssault AI.
+- Some small fixes and improvements
+- Added LQ pic URl to Ixidron.
+- TriggerHandler now runs static triggers before others. Fixes Adaptive Automaton not pumping Champion of the Parish and others.
+- Fixed Morph costs not being displayed on the cards.
+- Little name change in ComputerUtil.
+- Better LQ pic for Vhati il-Dal (was just a punctuation error before)
+- Added a modulo operator "Mod" to xMath. (Example X/Mod.2 will return 0 if X is even).
+- Checkstyle
+- Added the following properties to hasProperty: attackedThisTurn, attackedLastTurn, blockedThisTurn, notAttackedThisTurn, notAttackedLastTurn and notBlockedThisTurn.
+- Removed Sinstrikers Will. Committed prematurely but not working
+- Ran Oracle and set info scripts
+- Reverted part of the Adaptive Automaton+Champion of the Parish fix so as not to make Auras crash the game.
+- Equipment will now fall off if the equipped permanent is no longer a creature.
+- Fixed Shimian Specter.
+- Fixed Reality Strobe.
+- Fixed suspended creatures not gaining haste.
+- Creatures that change controllers will be summoning sick again.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -354,6 +376,21 @@ Malfegor
 Inquisitor's Snare
 Lurebound Scarecrow
 Tidal Warrior
+Break Open
+Ixidor, Reality Sculptor
+Skirk Alarmist
+Master of the Veil
+Mercy Killing
+Backslide
+Lady Sun
+Lurker
+Vigor Mortis
+Goblin Cadets
+Witch Engine
+Keeper of the Flame
+Keeper of the Light
+Predatory Urge
+Sinstriker's Will
 
 
 end
