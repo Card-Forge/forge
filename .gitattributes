@@ -8331,6 +8331,7 @@ res/cardsfolder/t/tangle_angler.txt -text
 res/cardsfolder/t/tangle_asp.txt svneol=native#text/plain
 res/cardsfolder/t/tangle_golem.txt svneol=native#text/plain
 res/cardsfolder/t/tangle_hulk.txt svneol=native#text/plain
+res/cardsfolder/t/tangle_kelp.txt -text
 res/cardsfolder/t/tangle_mantis.txt svneol=native#text/plain
 res/cardsfolder/t/tangle_spider.txt svneol=native#text/plain
 res/cardsfolder/t/tangle_wire.txt svneol=native#text/plain
