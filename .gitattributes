@@ -8439,6 +8439,7 @@ res/cardsfolder/t/terohs_faithful.txt svneol=native#text/plain
 res/cardsfolder/t/terohs_vanguard.txt svneol=native#text/plain
 res/cardsfolder/t/terra_eternal.txt svneol=native#text/plain
 res/cardsfolder/t/terra_stomper.txt svneol=native#text/plain
+res/cardsfolder/t/terraformer.txt -text svneol=unset#text/plain
 res/cardsfolder/t/terrain_generator.txt svneol=native#text/plain
 res/cardsfolder/t/terramorphic_expanse.txt svneol=native#text/plain
 res/cardsfolder/t/terravore.txt svneol=native#text/plain
