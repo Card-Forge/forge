@@ -6226,6 +6226,7 @@ res/cardsfolder/p/predators_strike.txt svneol=native#text/plain
 res/cardsfolder/p/predatory_advantage.txt svneol=native#text/plain
 res/cardsfolder/p/predatory_hunger.txt svneol=native#text/plain
 res/cardsfolder/p/predatory_nightstalker.txt svneol=native#text/plain
+res/cardsfolder/p/predatory_urge.txt -text
 res/cardsfolder/p/preeminent_captain.txt svneol=native#text/plain
 res/cardsfolder/p/preemptive_strike.txt svneol=native#text/plain
 res/cardsfolder/p/preordain.txt svneol=native#text/plain
@@ -7457,6 +7458,7 @@ res/cardsfolder/s/sinister_strength.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sink_into_takenuma.txt -text
 res/cardsfolder/s/sinkhole.txt svneol=native#text/plain
 res/cardsfolder/s/sinking_feeling.txt svneol=native#text/plain
+res/cardsfolder/s/sinstrikers_will.txt -text
 res/cardsfolder/s/sir_shandlar_of_eberyn.txt svneol=native#text/plain
 res/cardsfolder/s/sire_of_the_storm.txt svneol=native#text/plain
 res/cardsfolder/s/sirens_call.txt svneol=native#text/plain
