@@ -254,19 +254,6 @@ public class EndOfTurn implements java.io.Serializable {
 
         execute(at);
 
-        CardList all2 = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        for (Card c : all2) {
-            c.clearMustBlockCards();
-            if(AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
-                c.setCreatureAttackedLastComputerTurn(c.getCreatureAttackedThisTurn());
-            }
-            if(AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
-                c.setCreatureAttackedLastHumanTurn(c.getCreatureAttackedThisTurn());
-            }
-            c.setCreatureAttackedThisTurn(false);
-            c.setCreatureBlockedThisTurn(false);
-        }
-
     } // executeAt()
 
     /**

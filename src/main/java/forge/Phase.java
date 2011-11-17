@@ -381,6 +381,15 @@ public class Phase extends MyObservable implements java.io.Serializable {
                 c.setDealtDmgToHumanThisTurn(false);
                 c.setDealtDmgToComputerThisTurn(false);
                 c.setRegeneratedThisTurn(0);
+                c.clearMustBlockCards();
+                if(AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
+                    c.setCreatureAttackedLastComputerTurn(c.getCreatureAttackedThisTurn());
+                }
+                if(AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
+                    c.setCreatureAttackedLastHumanTurn(c.getCreatureAttackedThisTurn());
+                }
+                c.setCreatureAttackedThisTurn(false);
+                c.setCreatureBlockedThisTurn(false);
             }
             AllZone.getHumanPlayer().resetPreventNextDamage();
             AllZone.getComputerPlayer().resetPreventNextDamage();
