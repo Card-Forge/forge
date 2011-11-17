@@ -4109,6 +4109,7 @@ res/cardsfolder/i/instigator_gang_wildblood_pack.txt -text
 res/cardsfolder/i/instill_energy.txt svneol=native#text/plain
 res/cardsfolder/i/instill_furor.txt svneol=native#text/plain
 res/cardsfolder/i/instill_infection.txt svneol=native#text/plain
+res/cardsfolder/i/insubordination.txt -text
 res/cardsfolder/i/insurrection.txt svneol=native#text/plain
 res/cardsfolder/i/intangible_virtue.txt -text
 res/cardsfolder/i/intervene.txt svneol=native#text/plain
