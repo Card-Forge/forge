@@ -5,6 +5,7 @@ Text:no text
 A:SP$ DealDamage | Cost$ 4 B | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature and you gain 4 life. If U was spent to cast CARDNAME, draw a card.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionManaSpent$ U
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbons_of_night.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/101.jpg

@@ -5,6 +5,7 @@ Text:no text
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | SubAbility$ DBMill | SpellDescription$ Counter target spell. If B was spent to cast CARDNAME, that spell's controller puts the top X cards of his or her library into his or her graveyard, where X is the spell's converted mana cost.
 SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | ConditionManaSpent$ B
 SVar:X:Targeted$CardManaCost
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/induce_paranoia.jpg
 End

@@ -7,6 +7,7 @@ SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigDamage | sVars$ G
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | Execute$ GainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage, you gain that much life.
 SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_conscription.jpg
 End
