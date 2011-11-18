@@ -898,12 +898,14 @@ public final class CardUtil {
         final Card res = AllZone.getCardFactory().copyCard(c);
         res.setControllerObjects(c.getControllerObjects());
         res.addTempAttackBoost(c.getTempAttackBoost());
+        res.addSemiPermanentAttackBoost(c.getSemiPermanentAttackBoost());
         res.addTempDefenseBoost(c.getTempDefenseBoost());
+        res.addSemiPermanentDefenseBoost(c.getSemiPermanentDefenseBoost());
         res.setCounters(c.getCounters());
         res.setExtrinsicKeyword(c.getExtrinsicKeyword());
         res.setColor(c.getColor());
         res.setChangedCardTypes(c.getChangedCardTypes());
-        res.setNewPT(c.getNewPT());
+        res.setNewPT(new ArrayList<CardPowerToughness>(c.getNewPT()));
         res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
         res.setCreatureGotBlockedThisTurn(c.getCreatureGotBlockedThisTurn());
         res.setHaunting(c.getHaunting());
