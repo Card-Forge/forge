@@ -1,0 +1,12 @@
+Name:Screeching Griffin
+ManaCost:3
+Types:Artifact Creature Construct
+Text:no text
+PT:2/2
+K:Flying
+SVar:Rarity:Common
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_griffin.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/29.jpg
+Oracle:Flying\n{R}: Target creature can't block Screeching Griffin this turn.
+End

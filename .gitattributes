@@ -2766,6 +2766,7 @@ res/cardsfolder/f/festering_goblin.txt svneol=native#text/plain
 res/cardsfolder/f/festering_march.txt svneol=native#text/plain
 res/cardsfolder/f/festering_wound.txt svneol=native#text/plain
 res/cardsfolder/f/festival.txt svneol=native#text/plain
+res/cardsfolder/f/festival_of_the_guildpact.txt -text
 res/cardsfolder/f/festival_of_trokin.txt svneol=native#text/plain
 res/cardsfolder/f/fetid_heath.txt svneol=native#text/plain
 res/cardsfolder/f/fetid_horror.txt svneol=native#text/plain
@@ -7103,6 +7104,7 @@ res/cardsfolder/s/screams_of_the_damned.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_bat_stalking_vampire.txt -text
 res/cardsfolder/s/screeching_buzzard.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_drake.txt svneol=native#text/plain
+res/cardsfolder/s/screeching_griffin.txt -text
 res/cardsfolder/s/screeching_harpy.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_silcaw.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_sliver.txt svneol=native#text/plain

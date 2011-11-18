@@ -1,0 +1,12 @@
+Name:Festival of the Guildpact
+ManaCost:X W
+Types:Instant
+Text:no text
+A:SP$ PreventDamage | Cost$ X W | Defined$ You | Amount$ X | SubAbility$ DBDraw | SpellDescription$ Prevent the next X damage that would be dealt to you this turn.
+SVar:X:Count$xPaid
+SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/festival_of_the_guildpact.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/17.jpg
+Oracle:Prevent the next X damage that would be dealt to you this turn.\nDraw a card.
+End

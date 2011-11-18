@@ -2602,13 +2602,13 @@ public class CardFactoryCreatures {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
-                || cardName.equals("Spin Engine")) {
+                || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
             final String theCost;
             if (cardName.equals("Duct Crawler")) {
                 theCost = "1 R";
             } else if (cardName.equals("Shrewd Hatchling")) {
                 theCost = "UR";
-            } else { // if (cardName.equals("Spin Engine")) {
+            } else { // if (cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
                 theCost = "R";
             }
 
