@@ -266,6 +266,7 @@ Fixes/Features:
 - Improved untapCanPlayAI (it was not using the Defined parameter).
 - Added the property "notEnteredBattlefieldThisTurn".
 - Added the comparator "M2" that returns true if the values are equal modulo 2.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
