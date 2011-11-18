@@ -213,10 +213,10 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean untapCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost cost = sa.getPayCosts();
+        final HashMap<String, String> params = af.getMapParams();
 
         if (!CostUtil.checkAddM1M1CounterCost(cost, source)) {
             return false;
@@ -226,7 +226,9 @@ public class AbilityFactoryPermanentState {
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
         if (tgt == null) {
-            if (sa.getSourceCard().isUntapped()) {
+            final ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"),
+                    sa);
+            if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer()) {
                 return false;
             }
         } else {
