@@ -9292,6 +9292,7 @@ res/cardsfolder/w/wall_of_kelp.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_lava.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_light.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_mulch.txt svneol=native#text/plain
+res/cardsfolder/w/wall_of_nets.txt -text
 res/cardsfolder/w/wall_of_omens.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_opposition.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_pine_needles.txt svneol=native#text/plain

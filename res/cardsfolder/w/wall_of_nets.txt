@@ -1,0 +1,17 @@
+Name:Wall of Nets
+ManaCost:1 W W
+Types:Creature Wall
+Text:no text
+PT:0/7
+K:Defender
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelTrigBlocked | Static$ True | TriggerDescription$ At end of combat, exile all creatures blocked by CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return all cards exiled with CARDNAME to the battlefield under their owners' control.
+SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigExile | TriggerDescription$ Exile blocked creature at end of combat.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredAttacker | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_nets.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/24.jpg
+Oracle:Defender (This creature can't attack.)\nAt end of combat, exile all creatures blocked by Wall of Nets.\nWhen Wall of Nets leaves the battlefield, return all cards exiled with Wall of Nets to the battlefield under their owners' control.
+End
