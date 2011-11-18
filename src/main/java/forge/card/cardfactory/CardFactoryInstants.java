@@ -342,13 +342,15 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
+                    CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
+                    human = human.getNotType("Land");
                     return (4 < AllZone.getPhase().getTurn()) && (0 < human.size());
                 }
 
                 @Override
                 public void chooseTargetAI() {
-                    final CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
+                    CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
+                    human = human.getNotType("Land");
                     this.setTargetCard(CardFactoryUtil.getBestCreatureAI(human));
                 }
 
