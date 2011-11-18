@@ -329,6 +329,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean creatureGotBlockedThisTurn = false;
     private boolean dealtDmgToHumanThisTurn = false;
     private boolean dealtDmgToComputerThisTurn = false;
+    private boolean dealtDmgToHumanThisGame = false;
+    private boolean dealtDmgToComputerThisGame = false;
     private boolean dealtCombatDmgToHumanThisTurn = false;
     private boolean dealtCombatDmgToComputerThisTurn = false;
     private boolean sirenAttackOrDestroy = false;
@@ -1043,6 +1045,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setDealtDmgToHumanThisTurn(final boolean b) {
         this.dealtDmgToHumanThisTurn = b;
+        if (b) {
+            setDealtDmgToHumanThisGame(true);
+        }
     }
 
     /**
@@ -1066,17 +1071,66 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setDealtDmgToComputerThisTurn(final boolean b) {
         this.dealtDmgToComputerThisTurn = b;
+        if (b) {
+            setDealtDmgToComputerThisGame(true);
+        }
     }
-
+    
     /**
      * <p>
-     * Getter for the field <code>dealtCombatDmgToComputerThisTurn</code>.
+     * Getter for the field <code>dealtCombatDmgToComputerThisGame</code>.
      * </p>
      * 
      * @return a boolean.
      */
     public final boolean getDealtDmgToComputerThisTurn() {
         return this.dealtDmgToComputerThisTurn;
+    }
+    
+    /**
+     * <p>
+     * Setter for the field <code>dealtDmgToHumanThisGame</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setDealtDmgToHumanThisGame(final boolean b) {
+        this.dealtDmgToHumanThisGame = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>dealtDmgToHumanThisGame</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getDealtDmgToHumanThisGame() {
+        return this.dealtDmgToHumanThisGame;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>dealtDmgToComputerThisGame</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setDealtDmgToComputerThisGame(final boolean b) {
+        this.dealtDmgToComputerThisGame = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>dealtCombatDmgToComputerThisGame</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getDealtDmgToComputerThisGame() {
+        return this.dealtDmgToComputerThisGame;
     }
     
     /**

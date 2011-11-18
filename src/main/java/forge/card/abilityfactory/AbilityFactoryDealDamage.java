@@ -1202,18 +1202,11 @@ public class AbilityFactoryDealDamage {
             c.addDamage(dmg, card);
         }
 
-        if (players.equals("Each")) {
-            for (final Player p : AllZone.getPlayersInGame()) {
+        if (!players.equals("")) {
+            final ArrayList<Player> playerList = AbilityFactory.getDefinedPlayers(card, players, sa);
+            for (final Player p : playerList) {
                 p.addDamage(dmg, card);
             }
-        } else if (players.equals("EachOpponent")) {
-            for (final Player p : AllZoneUtil.getOpponents(card.getController())) {
-                p.addDamage(dmg, card);
-            }
-        } else if (players.equals("Self")) {
-            card.getController().addDamage(dmg, card);
-        } else if (players.equals("Targeted")) {
-            targetPlayer.addDamage(dmg, card);
         }
     }
 

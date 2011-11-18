@@ -1,0 +1,13 @@
+Name:The Fallen
+ManaCost:1 B B B
+Types:Creature Zombie
+Text:no text
+PT:2/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each opponent it has dealt damage to this game.
+SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidPlayers$ Opponent.wasDealtDamageBySourceThisGame | NumDmg$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_fallen.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/15.jpg
+SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/10.jpg
+Oracle:At the beginning of your upkeep, The Fallen deals 1 damage to each opponent it has dealt damage to this game.
+End

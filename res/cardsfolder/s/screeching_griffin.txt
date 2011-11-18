@@ -1,5 +1,5 @@
 Name:Screeching Griffin
-ManaCost:3
+ManaCost:3 W
 Types:Artifact Creature Construct
 Text:no text
 PT:2/2

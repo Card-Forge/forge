@@ -2203,6 +2203,12 @@ public abstract class Player extends GameEntity {
             if (this.equals(sourceController)) {
                 return false;
             }
+        } else if (property.equals("wasDealtDamageBySourceThisGame")) {
+            if (this.isHuman() && !source.getDealtDmgToHumanThisGame()) {
+                return false;
+            } if (this.isComputer() && !source.getDealtDmgToComputerThisGame()) {
+                return false;
+            }
         }
 
         return true;

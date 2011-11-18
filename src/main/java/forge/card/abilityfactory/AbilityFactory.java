@@ -1781,13 +1781,20 @@ public class AbilityFactory {
             if (!players.contains(p)) {
                 players.add(p);
             }
-        } else {
+        } else if (defined.equals("You") || defined.equals("Opponent") || defined.equals("Each")) {
             if (defined.equals("You") || defined.equals("Each")) {
                 players.add(sa.getActivatingPlayer());
             }
 
             if (defined.equals("Opponent") || defined.equals("Each")) {
                 players.add(sa.getActivatingPlayer().getOpponent());
+            }
+        } else {
+            if(AllZone.getHumanPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
+                players.add(AllZone.getHumanPlayer());
+            }
+            if(AllZone.getComputerPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
+                players.add(AllZone.getComputerPlayer());
             }
         }
         return players;
