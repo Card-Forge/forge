@@ -5,7 +5,7 @@ Text:no text
 PT:2/4
 S:Mode$ Continuous | Affected$ Card.Self+attackedLastTurn | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ CARDNAME can't attack if it attacked during your last turn.
 SVar:Rarity:Common
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/giant_turtle.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_turtle.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/102.jpg
 Oracle:Giant Turtle can't attack if it attacked during your last turn.
 End
