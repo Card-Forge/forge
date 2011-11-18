@@ -8,4 +8,6 @@ A:AB$ Debuff | Cost$ Sac<3/Land> | Keywords$ Defender | SpellDescription$ CARDNA
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torpid_moloch.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/147.jpg
+Oracle:Defender (This creature can't attack.)\nSacrifice three lands: Torpid Moloch loses defender until end of turn.
 End

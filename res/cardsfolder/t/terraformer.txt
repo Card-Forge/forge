@@ -8,4 +8,6 @@ SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Types$ ChosenType | O
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terraformer.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/70.jpg
+Oracle:{1}: Choose a basic land type. Each land you control becomes that type until end of turn.
 End
