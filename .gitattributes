@@ -1326,6 +1326,7 @@ res/cardsfolder/c/channel.txt svneol=native#text/plain
 res/cardsfolder/c/channel_the_suns.txt svneol=native#text/plain
 res/cardsfolder/c/chaos_charm.txt svneol=native#text/plain
 res/cardsfolder/c/chaos_harlequin.txt -text
+res/cardsfolder/c/chaos_lord.txt -text
 res/cardsfolder/c/chaos_warp.txt svneol=native#text/plain
 res/cardsfolder/c/chaosphere.txt svneol=native#text/plain
 res/cardsfolder/c/chaotic_goo.txt svneol=native#text/plain

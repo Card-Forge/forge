@@ -1,0 +1,16 @@
+Name:Chaos Lord
+ManaCost:4 R R R
+Types:Creature Human
+Text:no text
+PT:7/7
+K:First Strike
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ ChangeControl | TriggerDescription$ At the beginning of your upkeep, target opponent gains control of CARDNAME if the number of permanents is even.
+SVar:ChangeControl:AB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ PutCounter | SpellDescription$ Target opponent gains control of CARDNAME.
+SVar:X:Count$Valid Permanent/Mod.2
+S:Mode$ Continuous | Affected$ Card.Self+notEnteredBattlefieldThisTurn | AddHiddenKeyword$ HIDDEN CARDNAME can attack as though it had haste. | Description$ CARDNAME can attack as though it had haste unless it entered the battlefield this turn.
+SVar:RemoveAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_lord.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/178.jpg
+Oracle:First strike\nAt the beginning of your upkeep, target opponent gains control of Chaos Lord if the number of permanents is even.\nChaos Lord can attack as though it had haste unless it entered the battlefield this turn.
+End
