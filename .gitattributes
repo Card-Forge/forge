@@ -8012,6 +8012,7 @@ res/cardsfolder/s/steam_frigate.txt svneol=native#text/plain
 res/cardsfolder/s/steam_spitter.txt svneol=native#text/plain
 res/cardsfolder/s/steam_vents.txt svneol=native#text/plain
 res/cardsfolder/s/steamclaw.txt svneol=native#text/plain
+res/cardsfolder/s/steamcore_weird.txt -text svneol=unset#text/plain
 res/cardsfolder/s/steamflogger_boss.txt svneol=native#text/plain
 res/cardsfolder/s/steel_golem.txt -text
 res/cardsfolder/s/steel_hellkite.txt -text
