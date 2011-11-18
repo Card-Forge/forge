@@ -329,6 +329,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean creatureGotBlockedThisTurn = false;
     private boolean dealtDmgToHumanThisTurn = false;
     private boolean dealtDmgToComputerThisTurn = false;
+    private boolean dealtCombatDmgToHumanThisTurn = false;
+    private boolean dealtCombatDmgToComputerThisTurn = false;
     private boolean sirenAttackOrDestroy = false;
     private final ArrayList<Card> mustBlockCards = new ArrayList<Card>();
 
@@ -1068,13 +1070,59 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Getter for the field <code>dealtDmgToComputerThisTurn</code>.
+     * Getter for the field <code>dealtCombatDmgToComputerThisTurn</code>.
      * </p>
      * 
      * @return a boolean.
      */
     public final boolean getDealtDmgToComputerThisTurn() {
         return this.dealtDmgToComputerThisTurn;
+    }
+    
+    /**
+     * <p>
+     * Setter for the field <code>dealtCombatDmgToHumanThisTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setDealtCombatDmgToHumanThisTurn(final boolean b) {
+        this.dealtCombatDmgToHumanThisTurn = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>dealtDmgToHumanThisTurn</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getDealtCombatDmgToHumanThisTurn() {
+        return this.dealtCombatDmgToHumanThisTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>dealtCombatDmgToComputerThisTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setDealtCombatDmgToComputerThisTurn(final boolean b) {
+        this.dealtCombatDmgToComputerThisTurn = b;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>dealtDmgToComputerThisTurn</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getDealtCombatDmgToComputerThisTurn() {
+        return this.dealtCombatDmgToComputerThisTurn;
     }
 
     /**
@@ -6732,8 +6780,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
-            if (!(this.dealtDmgToHumanThisTurn && this.getController().isPlayer(AllZone.getComputerPlayer()))
-                    && !(this.dealtDmgToComputerThisTurn && this.getController().isPlayer(AllZone.getHumanPlayer()))) {
+            if (!(dealtDmgToHumanThisTurn && sourceController.isHuman())
+                    && !(dealtDmgToComputerThisTurn && sourceController.isComputer())) {
+                return false;
+            }
+        } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
+            if (!(source.dealtCombatDmgToHumanThisTurn && this.getController().isPlayer(AllZone.getHumanPlayer()))
+                    && !(source.dealtCombatDmgToComputerThisTurn && this.getController().isPlayer(AllZone.getComputerPlayer()))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {

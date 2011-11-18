@@ -931,6 +931,13 @@ public final class GameActionUtil {
             executeCelestialMantle(c);
         }
 
+        if (player.isPlayer(AllZone.getHumanPlayer())) {
+            c.setDealtCombatDmgToHumanThisTurn(true);
+        }
+        if (player.isPlayer(AllZone.getComputerPlayer())) {
+            c.setDealtCombatDmgToComputerThisTurn(true);
+        }
+
     } // executeCombatDamageToPlayerEffects
 
     /**

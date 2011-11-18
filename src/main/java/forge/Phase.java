@@ -380,6 +380,8 @@ public class Phase extends MyObservable implements java.io.Serializable {
                 c.resetDealtDamageToThisTurn();
                 c.setDealtDmgToHumanThisTurn(false);
                 c.setDealtDmgToComputerThisTurn(false);
+                c.setDealtCombatDmgToHumanThisTurn(false);
+                c.setDealtCombatDmgToComputerThisTurn(false);
                 c.setRegeneratedThisTurn(0);
                 c.clearMustBlockCards();
                 if (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
