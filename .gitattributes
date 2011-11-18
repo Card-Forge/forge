@@ -5758,6 +5758,7 @@ res/cardsfolder/o/ogre_leadfoot.txt svneol=native#text/plain
 res/cardsfolder/o/ogre_menial.txt svneol=native#text/plain
 res/cardsfolder/o/ogre_recluse.txt svneol=native#text/plain
 res/cardsfolder/o/ogre_resister.txt svneol=native#text/plain
+res/cardsfolder/o/ogre_savant.txt -text svneol=unset#text/plain
 res/cardsfolder/o/ogre_sentry.txt svneol=native#text/plain
 res/cardsfolder/o/ogre_shaman.txt svneol=native#text/plain
 res/cardsfolder/o/ogre_taskmaster.txt svneol=native#text/plain
