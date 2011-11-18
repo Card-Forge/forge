@@ -373,6 +373,8 @@ public abstract class AllZoneUtil {
             return leftSide > rightSide;
         } else if (comp.contains("NE")) {
             return leftSide != rightSide; // not equals
+        } else if (comp.contains("M2")) {
+            return leftSide % 2 == rightSide % 2; // they are equal modulo 2
         }
 
         return false;
