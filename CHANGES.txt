@@ -248,6 +248,24 @@ Fixes/Features:
 - Fixed suspended creatures not gaining haste.
 - Creatures that change controllers will be summoning sick again.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Inserted missing space between variable and pipe in Hand to Hand
+- Moved the updating of attackedThisTurn from the EndOfTurn to the CleanUp phase.
+- Removed the keyword "At the beginning of your end step, sacrifice this creature unless it attacked this turn." and converted Instill Furor.
+- Removed the keyword "At the beginning of your end step, destroy this creature if it didn't attack this turn." and converted Aggression.
+- checkstyle
+- Fixed the loseControl commands in AF GainControl.
+- Cleaning up unit tests
+- Disabled failing tests. Build now requires unit tests to pass.
+- Remove package-info check since it casues a problem with Unit Tests.
+- Added the property "gotBlockedThisTurn".
+- Removed Twisted Justice. Wrong target. Can't be scripted without some code changes.
+- Fixed Soltari Visionary
+- Ran scripts
+- Fixed Echoing Truth.
+- Added the keyword "CARDNAME can attack as though it had haste." and converted Instill Energy.
+- Improved untapCanPlayAI (it was not using the Defined parameter).
+- Added the property "notEnteredBattlefieldThisTurn".
+- Added the comparator "M2" that returns true if the values are equal modulo 2.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -391,6 +409,15 @@ Keeper of the Flame
 Keeper of the Light
 Predatory Urge
 Sinstriker's Will
+Giant Turtle
+Goblin Rock Sled
+Tangle Kelp
+Soltari Visionary
+Insubordination
+Torpid Moloch
+Terraformer
+Fyndhorn Druid
+Ribbons of Night
 
 
 end
