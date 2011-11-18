@@ -1,0 +1,12 @@
+Name:Shrieking Grotesque
+ManaCost:2 W
+Types:Creature Gargoyle
+Text:no text
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, if B was spent to cast Shrieking Grotesque, target player discards a card.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | ConditionManaSpent$ B
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_grotesque.jpg
+End

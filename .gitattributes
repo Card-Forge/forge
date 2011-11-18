@@ -7375,6 +7375,7 @@ res/cardsfolder/s/shriek_of_dread.txt svneol=native#text/plain
 res/cardsfolder/s/shriek_raptor.txt svneol=native#text/plain
 res/cardsfolder/s/shriekhorn.txt svneol=native#text/plain
 res/cardsfolder/s/shrieking_drake.txt svneol=native#text/plain
+res/cardsfolder/s/shrieking_grotesque.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shrieking_mogg.txt svneol=native#text/plain
 res/cardsfolder/s/shrieking_specter.txt svneol=native#text/plain
 res/cardsfolder/s/shriekmaw.txt svneol=native#text/plain
