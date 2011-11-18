@@ -3032,6 +3032,7 @@ res/cardsfolder/f/frenetic_efreet.txt -text
 res/cardsfolder/f/frenetic_ogre.txt svneol=native#text/plain
 res/cardsfolder/f/frenetic_raptor.txt svneol=native#text/plain
 res/cardsfolder/f/frenetic_sliver.txt -text
+res/cardsfolder/f/frenzied_goblin.txt -text svneol=unset#text/plain
 res/cardsfolder/f/frenzied_tilling.txt svneol=native#text/plain
 res/cardsfolder/f/frenzy_sliver.txt svneol=native#text/plain
 res/cardsfolder/f/fresh_meat.txt svneol=native#text/plain
