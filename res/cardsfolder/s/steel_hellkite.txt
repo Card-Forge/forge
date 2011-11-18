@@ -1,0 +1,14 @@
+Name:Steel Hellkite
+ManaCost:6
+Types:Artifact Creature Dragon
+Text:no text
+PT:5/5
+K:Flying
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ DestroyAll | Cost$ X | ValidCards$ Permanent.nonLand+cmcEQX+controllerWasDealtCombatDamageByThisTurn | ActivationLimit$ 1 | Hidden$ True | SpellDescription$ Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by CARDNAME this turn. Activate this ability only once each turn.
+SVar:X:Count$xPaid
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_hellkite.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/205.jpg
+Oracle:Flying\n{2}: Steel Hellkite gets +1/+0 until end of turn.\n{X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn. Activate this ability only once each turn.
+End
