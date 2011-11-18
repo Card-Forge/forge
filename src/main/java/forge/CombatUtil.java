@@ -632,7 +632,7 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(final Card c) {
-        if (c.isTapped() || c.isPhasedOut() || (c.hasSickness() && !c.isEnchantedBy("Instill Energy"))) {
+        if (c.isTapped() || c.isPhasedOut() || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))) {
             return false;
         }
 
