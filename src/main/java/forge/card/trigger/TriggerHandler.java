@@ -1001,7 +1001,7 @@ public class TriggerHandler {
                     }
                 }
 
-                if (sa[0].getSourceCard().getController().isHuman()) {
+                if (sa[0].getActivatingPlayer().isHuman()) {
                     // Card src =
                     // (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
                     // System.out.println("Trigger resolving for "+mode+".  Card = "+src);
