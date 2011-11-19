@@ -1,0 +1,12 @@
+Name:Due Respect
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Effect | Cost$ 1 W | Name$ Due Respect Effect | StaticAbilities$ STETBTapped | SubAbility$ DBDraw | AILogic$ BeginningOfOppTurn | SpellDescription$ Permanents enter the battlefield tapped this turn.
+SVar:STETBTapped:Mode$ ETBTapped | ValidCard$ Permanent | Description$ Permanents enter the battlefield tapped this turn.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/due_respect.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/8.jpg
+Oracle:Permanents enter the battlefield tapped this turn.\nDraw a card.
+End

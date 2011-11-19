@@ -9,8 +9,10 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.ComputerUtil;
+import forge.Constant;
 import forge.Constant.Zone;
 import forge.MyRandom;
+import forge.Phase;
 import forge.Player;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -197,6 +199,20 @@ public class AbilityFactoryEffect {
     public static boolean effectCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final HashMap<String, String> params = af.getMapParams();
+        boolean randomReturn = r.nextFloat() <= .6667;
+        
+        if (params.containsKey("AILogic")) {
+            final String logic = params.get("AILogic");
+            final Phase phase = AllZone.getPhase();
+            if (logic.equals("BeginningOfOppTurn")) {
+                if(phase.isPlayerTurn(AllZone.getComputerPlayer()) 
+                        || phase.isAfter(Constant.Phase.DRAW)) {
+                    return false;
+                } else {
+                    randomReturn = true;
+                }
+            }
+        }
 
         final String stackable = params.get("Stackable");
 
@@ -220,8 +236,13 @@ public class AbilityFactoryEffect {
                 tgt.addTarget(AllZone.getComputerPlayer());
             }
         }
+        
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            randomReturn &= subAb.chkAIDrawback();
+        }
 
-        return ((r.nextFloat() < .6667));
+        return randomReturn;
     }
 
     /**

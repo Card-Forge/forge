@@ -8,4 +8,6 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/induce_paranoia.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/56.jpg
+Oracle:Counter target spell. If {B} was spent to cast Induce Paranoia, that spell's controller puts the top X cards of his or her library into his or her graveyard, where X is the spell's converted mana cost.
 End

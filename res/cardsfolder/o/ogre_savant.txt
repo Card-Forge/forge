@@ -8,4 +8,6 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Ha
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_savant.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/70.jpg
+Oracle:When Ogre Savant enters the battlefield, if {U} was spent to cast Ogre Savant, return target creature to its owner's hand.
 End

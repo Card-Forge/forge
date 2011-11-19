@@ -7,4 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battl
 SVar:TrigPump:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzied_goblin.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/125.jpg
+Oracle:Whenever Frenzied Goblin attacks, you may pay {R}. If you do, target creature can't block this turn.
 End
