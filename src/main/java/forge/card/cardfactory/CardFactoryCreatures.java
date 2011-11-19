@@ -1540,7 +1540,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Deadly Grub")) {
+        /*else if (cardName.equals("Deadly Grub")) {
             final Command destroy = new Command() {
                 private static final long serialVersionUID = -4352349741511065318L;
 
@@ -1554,7 +1554,7 @@ public class CardFactoryCreatures {
             };
 
             card.addDestroyCommand(destroy);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Kinsbaile Borderguard")) {
@@ -2643,60 +2643,6 @@ public class CardFactoryCreatures {
 
             card.addSpellAbility(finalAb);
         } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        /*else if (cardName.equals("Krovikan Sorcerer")) {
-            final Cost abCost = new Cost("T Discard<1/Card.Black>", cardName, true);
-            final AbilityActivated ability = new AbilityActivated(card, abCost, null) {
-                private static final long serialVersionUID = 3689290210743241201L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    final Player player = card.getController();
-                    if (player.isHuman()) {
-                        final CardList n = player.drawCards(2);
-
-                        AllZone.getInputControl().setInput(new Input() {
-                            private static final long serialVersionUID = -1411038851955251074L;
-
-                            @Override
-                            public void showMessage() {
-                                if (n.isEmpty()) {
-                                    this.stop();
-                                }
-                                final StringBuilder sb = new StringBuilder();
-                                sb.append(card).append(" - discard one of the cards drawn.");
-                                AllZone.getDisplay().showMessage(sb.toString());
-                                ButtonUtil.disableAll();
-                            }
-
-                            @Override
-                            public void selectCard(final Card c, final PlayerZone zone) {
-                                if (zone.is(Constant.Zone.Hand) && n.contains(c)) {
-                                    player.discard(c, null);
-                                    this.stop();
-                                }
-                            }
-                        }); // end Input
-                    }
-                } // resolve()
-            }; // SpellAbility
-
-            card.addSpellAbility(ability);
-            final StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("Tap, Discard a black card: ");
-            sbDesc.append("Draw two cards, then discard one of them.");
-            ability.setDescription(sbDesc.toString());
-
-            final StringBuilder sbStack = new StringBuilder();
-            sbStack.append(card).append(" - Draw two cards, then discard one of them.");
-            ability.setStackDescription(sbStack.toString());
-        }*/ // *************** END ************ END **************************
 
         // ***************************************************
         // end of card specific code

@@ -1,9 +1,11 @@
 Name:Deadly Grub
 ManaCost:2 B
 Types:Creature Insect
-Text:When Deadly Grub is put into a graveyard from the battlefield, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can't be the target of spells or abilities.)
+Text:no text
 PT:3/1
 K:Vanishing:3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_EQ0_TIME | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can't be the target of spells or abilities.)
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 6 | TokenToughness$ 1 | TokenKeywords$ Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_grub.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/69.jpg
