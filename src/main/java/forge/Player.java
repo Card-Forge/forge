@@ -2209,6 +2209,10 @@ public abstract class Player extends GameEntity {
             } if (this.isComputer() && !source.getDealtDmgToComputerThisGame()) {
                 return false;
             }
+        } else if (property.equals("IsRemembered")) {
+            if (!source.getRemembered().contains(this)) {
+                return false;
+            }
         }
 
         return true;

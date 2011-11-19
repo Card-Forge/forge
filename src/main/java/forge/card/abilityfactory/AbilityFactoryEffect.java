@@ -201,9 +201,10 @@ public class AbilityFactoryEffect {
         final Random r = MyRandom.getRandom();
         final HashMap<String, String> params = af.getMapParams();
         boolean randomReturn = r.nextFloat() <= .6667;
+        String logic = "";
         
         if (params.containsKey("AILogic")) {
-            final String logic = params.get("AILogic");
+            logic = params.get("AILogic");
             final Phase phase = AllZone.getPhase();
             if (logic.equals("BeginningOfOppTurn")) {
                 if(phase.isPlayerTurn(AllZone.getComputerPlayer()) 
@@ -244,7 +245,7 @@ public class AbilityFactoryEffect {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (tgt.canOnlyTgtOpponent()) {
+            if (tgt.canOnlyTgtOpponent() || logic.equals("BeginningOfOppTurn")) {
                 tgt.addTarget(AllZone.getHumanPlayer());
             } else {
                 tgt.addTarget(AllZone.getComputerPlayer());
@@ -331,8 +332,8 @@ public class AbilityFactoryEffect {
             effectKeywords = params.get("Keywords").split(",");
         }
 
-        if (params.containsKey("RememberCard")) {
-            effectRemembered = params.get("RememberCard");
+        if (params.containsKey("RememberObjects")) {
+            effectRemembered = params.get("RememberObjects");
         }
 
         // Effect eff = new Effect();
@@ -409,8 +410,8 @@ public class AbilityFactoryEffect {
 
         // Set Remembered
         if (effectRemembered != null) {
-            for (final Card c : AbilityFactory.getDefinedCards(card, effectRemembered, sa)) {
-                eff.addRemembered(c);
+            for (final Object o : AbilityFactory.getDefinedObjects(card, effectRemembered, sa)) {
+                eff.addRemembered(o);
             }
         }
 
