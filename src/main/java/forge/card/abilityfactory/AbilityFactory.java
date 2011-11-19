@@ -1672,7 +1672,9 @@ public class AbilityFactory {
         final String defined = (def == null) ? "You" : def;
 
         if (defined.equals("Targeted")) {
-            Target tgt = sa.getTarget();
+            final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
+            players.addAll(parent.getTarget().getTargetPlayers());
+            /*Target tgt = sa.getTarget();
             SpellAbility parent = sa;
 
             do {
@@ -1685,7 +1687,7 @@ public class AbilityFactory {
                 tgt = parent.getTarget();
             } while ((tgt == null) || (tgt.getTargetPlayers().size() == 0));
 
-            players.addAll(tgt.getTargetPlayers());
+            players.addAll(tgt.getTargetPlayers());*/
         } else if (defined.equals("TargetedController")) {
             final ArrayList<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", sa);
             final ArrayList<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(card, "Targeted", sa);
