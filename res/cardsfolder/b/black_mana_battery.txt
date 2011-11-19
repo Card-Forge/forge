@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 A:AB$ PutCounter | Cost$ 2 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ U | Amount$ Y | CostDesc$ Tap, Remove any number of charge counters from CARDNAME: | SpellDescription$ Add B to your mana pool, then add an additional B to your mana pool for each charge counter removed this way.
+A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ B | Amount$ Y | CostDesc$ Tap, Remove any number of charge counters from CARDNAME: | SpellDescription$ Add B to your mana pool, then add an additional B to your mana pool for each charge counter removed this way.
 SVar:Y:Number$1/Plus.ChosenX
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
