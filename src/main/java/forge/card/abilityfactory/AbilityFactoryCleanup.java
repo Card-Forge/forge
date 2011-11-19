@@ -74,6 +74,9 @@ public final class AbilityFactoryCleanup {
         if (params.containsKey("ClearImprinted")) {
             sa.getSourceCard().clearImprinted();
         }
+        if (params.containsKey("ClearChosenX")) {
+            sa.getSourceCard().setSVar("ChosenX", "");
+        }
     }
 
 } // end class AbilityFactory_Cleanup
