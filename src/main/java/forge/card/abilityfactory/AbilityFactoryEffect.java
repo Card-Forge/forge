@@ -7,6 +7,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -208,9 +209,22 @@ public class AbilityFactoryEffect {
                 if(phase.isPlayerTurn(AllZone.getComputerPlayer()) 
                         || phase.isAfter(Constant.Phase.DRAW)) {
                     return false;
-                } else {
-                    randomReturn = true;
                 }
+                randomReturn = true;
+            } else if (logic.equals("Fog")) {
+                if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer())) {
+                    return false;
+                }
+                if (!AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                    return false;
+                }
+                if (AllZone.getStack().size() != 0) {
+                    return false;
+                }
+                if (AllZone.getPhase().isPreventCombatDamageThisTurn()) {
+                    return false;
+                }
+                randomReturn = CombatUtil.lifeInDanger(AllZone.getCombat());
             }
         }
 

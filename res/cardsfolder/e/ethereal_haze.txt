@@ -2,9 +2,8 @@ Name:Ethereal Haze
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$ Effect | Cost$ W | Name$ Chameleon Ethereal Haze Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt by creatures this turn.
+A:SP$ Effect | Cost$ W | Name$ Chameleon Ethereal Haze Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt by creatures this turn.
 SVar:STPrevent:Mode$ PreventDamage | Source$ Creature | Description$ Prevent all damage that would be dealt by creatures this turn.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_haze.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/9.jpg

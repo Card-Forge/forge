@@ -2,9 +2,8 @@ Name:Silence
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast | SpellDescription$ Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
+A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast | AILogic$ BeginningOfOppTurn | SpellDescription$ Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
 SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silence.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/30.jpg
