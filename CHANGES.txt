@@ -267,6 +267,22 @@ Fixes/Features:
 - Added the property "notEnteredBattlefieldThisTurn".
 - Added the comparator "M2" that returns true if the values are equal modulo 2.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Added the property "controllerWasDealtCombatDamageByThisTurn".
+- Added the support for checking isValid in getDefinedPlayers and added the first real property "wasDealtDamageBySourceThisGame".
+- Added some missing info to LKI copies (fixes Glorious Anthem + Proper Burial).
+- some text additions
+- Fixed the LQ pic URL for Goblin Rock Sled.
+- updated Delver of Secrets//Insectile Aberration to new SetState AF
+- Fixed the LQ pic URL for Giant Turtle.
+- The keyword "CARDNAME enters the battlefield tapped." will now be checked at runtime.
+- Added the static ability ETBTapped and converted six cards to script.
+- Added an AILogic parameter to AF Effect.
+- Added the AILogic "Fog" to AF Effect.
+- Removed SVar:RemAIDeck:True from some cards.
+- Fixed cost of Sprite Noble.
+- Added the option "ClearChosenX" to AF Cleanup and fixed Myr Battlesphere.
+- Fixed Black Mana Battery producing U.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -419,6 +435,20 @@ Torpid Moloch
 Terraformer
 Fyndhorn Druid
 Ribbons of Night
+Chaos Lord
+Steel Hellkite
+Festival of the Guildpact
+Screeching Griffin
+The Fallen
+Cold Storage
+Wall of Nets
+Flash Conscription
+Frenzied Goblin
+Induce Paranoia
+Ogre Savant
+Shrieking Grotesque
+Steamcore Weird
+Due Respect
 
 
 end
