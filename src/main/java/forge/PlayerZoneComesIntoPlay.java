@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import forge.Constant.Zone;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
+import forge.card.staticability.StaticAbility;
 
 /**
  * <p>
@@ -49,15 +49,23 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         final Card c = (Card) o;
         final Player player = c.getController();
 
-        if (trigger
-                && ((CardFactoryUtil.oppHasKismet(c.getController())
-                        && (c.isLand() || c.isCreature() || c.isArtifact()))
-                        || (AllZoneUtil.isCardInPlay("Urabrask the Hidden", c.getController().getOpponent()) && c
-                                .isCreature())
-                        || (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact())) || (AllZoneUtil
-                        .isCardInPlay("Orb of Dreams") && c.isPermanent()))) {
-            // it enters the battlefield this way, and should not fire triggers
-            c.setTapped(true);
+        if (trigger) {
+            if (c.hasKeyword("CARDNAME enters the battlefield tapped.")) {
+             // it enters the battlefield this way, and should not fire triggers
+                c.setTapped(true);
+            } else {
+                // ETBTapped static abilities
+                final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                for (final Card ca : allp) {
+                    final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+                    for (final StaticAbility stAb : staticAbilities) {
+                        if (stAb.applyAbility("ETBTapped", c)) {
+                            // it enters the battlefield this way, and should not fire triggers
+                            c.setTapped(true);
+                        }
+                    }
+                }
+            }
         }
 
         // cannot use addComesIntoPlayCommand - trigger might be set to false;

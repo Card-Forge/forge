@@ -318,6 +318,24 @@ public class StaticAbility {
 
         return false;
     }
+    
+    public final boolean applyAbility(final String mode, final Card card) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!this.mapParams.get("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("ETBTapped")) {
+            return StaticAbilityETBTapped.applyETBTappedAbility(this, card);
+        }
+
+        return false;
+    }
 
     /**
      * Check conditions.

@@ -1,7 +1,8 @@
 Name:Root Maze
 ManaCost:G
 Types:Enchantment
-Text:Artifacts and lands enter the battlefield tapped.
+Text:no text
+S:Mode$ ETBTapped | ValidCard$ Artifact,Land | Description$ Artifacts and lands enter the battlefield tapped.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_maze.jpg

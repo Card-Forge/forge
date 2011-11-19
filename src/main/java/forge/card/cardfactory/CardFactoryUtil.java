@@ -4932,7 +4932,7 @@ public class CardFactoryUtil {
      * 
      */
     public static final void parseKeywords(final Card card, final String cardName) {
-        if (card.hasKeyword("CARDNAME enters the battlefield tapped.")) {
+        /*if (card.hasKeyword("CARDNAME enters the battlefield tapped.")) {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 203335252453049234L;
 
@@ -4943,7 +4943,7 @@ public class CardFactoryUtil {
                     card.setTapped(true);
                 }
             });
-        } // if "Comes into play tapped."
+        }*/ // if "Comes into play tapped."
         if (card.hasKeyword("CARDNAME enters the battlefield tapped unless you control two or fewer other lands.")) {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 6436821515525468682L;
