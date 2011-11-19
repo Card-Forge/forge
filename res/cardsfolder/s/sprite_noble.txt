@@ -1,5 +1,5 @@
 Name:Sprite Noble
-ManaCost:2 U
+ManaCost:1 U U
 Types:Creature Faerie
 Text:no text
 PT:2/2
