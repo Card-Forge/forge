@@ -4,7 +4,7 @@ Types:Creature Homonculus
 Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may draw a card.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:SacMe:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oculus.jpg
