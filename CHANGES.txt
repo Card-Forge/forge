@@ -283,6 +283,16 @@ Fixes/Features:
 - Added the option "ClearChosenX" to AF Cleanup and fixed Myr Battlesphere.
 - Fixed Black Mana Battery producing U.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed Phantasmal Image not getting the Illusion type.
+- Converted Deadly Grub to script.
+- Removed Flying from Patchwork Gnomes.
+- Fixed trigger of Oculus (a lot of other cards could use this treatment).
+- Fixed the wrapper ability of triggers setting the activating player of the wrapped ability to the controller of the source card and not the player who controls the triggered ability. This fixes the case of Oculus and Necroskitter in a more general way.
+- Fixed "Targeted" in getDefinedPlayers.
+- Renamed the parameter RememberCards to RememberObjects in AF Effect and allowed storing of any remembered objects.
+- The property "IsRemembered" can now also be used for players.
+- Fixed View from Above.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -449,6 +459,8 @@ Ogre Savant
 Shrieking Grotesque
 Steamcore Weird
 Due Respect
+Abeyance
+Cease-Fire
 
 
 end
