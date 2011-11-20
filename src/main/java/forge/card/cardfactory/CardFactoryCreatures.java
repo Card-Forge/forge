@@ -2255,6 +2255,10 @@ public class CardFactoryCreatures {
                         }
 
                         CardFactoryUtil.copyCharacteristics(cloned, card);
+                        CardFactoryUtil.addAbilityFactoryAbilities(card);
+                        for (int i = 0; i < card.getStaticAbilityStrings().size(); i++) {
+                            card.addStaticAbility(card.getStaticAbilityStrings().get(i));
+                        }
                         this.grantExtras();
 
                         // If target is a flipped card, also copy the flipped
@@ -2265,6 +2269,10 @@ public class CardFactoryCreatures {
                             card.addAlternateState("Flipped");
                             card.setState("Flipped");
                             CardFactoryUtil.copyCharacteristics(cloned, card);
+                            CardFactoryUtil.addAbilityFactoryAbilities(card);
+                            for (int i = 0; i < card.getStaticAbilityStrings().size(); i++) {
+                                card.addStaticAbility(card.getStaticAbilityStrings().get(i));
+                            }
                             this.grantExtras();
 
                             card.setFlip(true);

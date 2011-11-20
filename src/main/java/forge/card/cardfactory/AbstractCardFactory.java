@@ -418,46 +418,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
     }
 
     /**
-     * Adds the ability factory abilities.
-     * 
-     * @param card
-     *            the card
-     */
-    protected final void addAbilityFactoryAbilities(final Card card) {
-        // **************************************************
-        // AbilityFactory cards
-        final ArrayList<String> ia = card.getIntrinsicAbilities();
-        if (ia.size() > 0) {
-            for (int i = 0; i < ia.size(); i++) {
-                final AbilityFactory af = new AbilityFactory();
-                // System.out.println(cardName);
-                final SpellAbility sa = af.getAbility(ia.get(i), card);
-
-                card.addSpellAbility(sa);
-
-                final String bbCost = card.getSVar("Buyback");
-                if (!bbCost.equals("")) {
-                    final SpellAbility bbSA = sa.copy();
-                    final String newCost = CardUtil.addManaCosts(card.getManaCost(), bbCost);
-                    if (bbSA.getPayCosts() != null) {
-                        bbSA.setPayCosts(new Cost(newCost, sa.getSourceCard().getName(), false)); // create
-                                                                                                  // new
-                                                                                                  // abCost
-                    }
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
-                    sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
-                    bbSA.setDescription(sb.toString());
-                    bbSA.setIsBuyBackAbility(true);
-
-                    card.addSpellAbility(bbSA);
-                }
-            }
-
-        }
-    }
-
-    /**
      * <p>
      * getCard2.
      * </p>
@@ -497,7 +457,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 continue; //Ignore FaceDown for DFC since they have none.
             }
             card.setState(state);
-            this.addAbilityFactoryAbilities(card);
+            CardFactoryUtil.addAbilityFactoryAbilities(card);
             ArrayList<String> stAbs = card.getStaticAbilityStrings();
             if (stAbs.size() > 0) {
                 for (int i = 0; i < stAbs.size(); i++) {
