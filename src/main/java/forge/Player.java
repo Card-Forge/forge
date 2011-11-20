@@ -1664,6 +1664,18 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canPlayLand() {
+        
+        // CantBeCast static abilities
+        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        for (final Card ca : allp) {
+            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.applyAbility("CantPlayLand", null, this)) {
+                    return false;
+                }
+            }
+        }
+        
         return Phase.canCastSorcery(this)
                 && (numLandsPlayed < maxLandsToPlay || getCardsIn(Zone.Battlefield, "Fastbond").size() > 0);
     }

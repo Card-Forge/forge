@@ -7694,6 +7694,7 @@ res/cardsfolder/s/soldier_of_fortune.txt svneol=native#text/plain
 res/cardsfolder/s/soldier_replica.txt svneol=native#text/plain
 res/cardsfolder/s/solemn_offering.txt svneol=native#text/plain
 res/cardsfolder/s/solemn_simulacrum.txt svneol=native#text/plain
+res/cardsfolder/s/solfatara.txt -text
 res/cardsfolder/s/solidarity.txt svneol=native#text/plain
 res/cardsfolder/s/soliton.txt svneol=native#text/plain
 res/cardsfolder/s/solkanar_the_swamp_king.txt svneol=native#text/plain
@@ -8838,6 +8839,7 @@ res/cardsfolder/t/tundra_wolves.txt svneol=native#text/plain
 res/cardsfolder/t/tunnel.txt svneol=native#text/plain
 res/cardsfolder/t/tunneler_wurm.txt svneol=native#text/plain
 res/cardsfolder/t/turbulent_dreams.txt -text
+res/cardsfolder/t/turf_wound.txt -text
 res/cardsfolder/t/turn_aside.txt svneol=native#text/plain
 res/cardsfolder/t/turn_the_tide.txt svneol=native#text/plain
 res/cardsfolder/t/turn_to_dust.txt svneol=native#text/plain

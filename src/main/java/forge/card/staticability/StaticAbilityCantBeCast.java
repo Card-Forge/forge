@@ -77,5 +77,33 @@ public class StaticAbilityCantBeCast {
 
         return true;
     }
+    
+    /**
+     * TODO Write javadoc for this method.
+     * 
+     * @param stAb
+     *            a StaticAbility
+     * @param card
+     *            the card
+     * @param activator
+     *            the activator
+     * @return true, if successful
+     */
+    public static boolean applyCantPlayLandAbility(final StaticAbility stAb, final Card card, final Player player) {
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
+
+        if (params.containsKey("ValidCard") && card != null
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            return false;
+        }
+
+        if (params.containsKey("Player") && (player != null)
+                && !player.isValid(params.get("Player"), hostCard.getController(), hostCard)) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

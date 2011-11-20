@@ -282,6 +282,10 @@ public class StaticAbility {
         if (mode.equals("CantBeCast")) {
             return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, activator);
         }
+        
+        if (mode.equals("CantPlayLand")) {
+            return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, activator);
+        }
 
         return false;
     }
