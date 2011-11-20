@@ -26,7 +26,7 @@ import forge.gui.input.Input;
 
 /**
  * <p>
- * CardFactory_Lands class.
+ * CardFactoryLands class.
  * </p>
  * 
  * @author Forge
@@ -310,6 +310,11 @@ class CardFactoryLands {
         // *************** START *********** START **************************
         else if (cardName.equals("Sheltered Valley")) {
 
+            /*
+             * If Sheltered Valley would enter the battlefield, instead sacrifice
+             * each other permanent named Sheltered Valley you control, then
+             * put Sheltered Valley onto the battlefield.
+             */
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 685604326470832887L;
 
@@ -762,4 +767,4 @@ class CardFactoryLands {
         return card;
     }
 
-} // end class CardFactory_Lands
+} // end class CardFactoryLands
