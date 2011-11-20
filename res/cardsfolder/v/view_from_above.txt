@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SubAbility$ DBBounce | SpellDescription$ Target creature gains flying until end of turn. If you control a white permanent, return CARDNAME to its owner's hand.
-SVar:DBBounce:DB$ChangeZone | Origin$ Stack | Destination$ Hand | ConditionPresent$ Permanent.White | ConditionCompare$ GE1
+SVar:DBBounce:DB$ChangeZone | Origin$ Stack | Destination$ Hand | ConditionPresent$ Permanent.White+YouCtrl | ConditionCompare$ GE1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/view_from_above.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/38.jpg
