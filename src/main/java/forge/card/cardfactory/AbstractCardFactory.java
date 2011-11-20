@@ -970,12 +970,15 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                 damage--;
                             }
 
-                            if (crd.getName().equals("Mountain")) {
+                            if (crd.isType("Mountain")) {
                                 damage *= 2;
                             }
                         }
                     } // while
                     GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
+                    for (Card revealedCard : revealed) {
+                        AllZone.getGameAction().moveToBottomOfLibrary(revealedCard);
+                    }
 
                     if (this.getTargetCard() != null) {
                         if (AllZoneUtil.isCardInPlay(this.getTargetCard())
