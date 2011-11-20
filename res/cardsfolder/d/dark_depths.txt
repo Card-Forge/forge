@@ -1,7 +1,12 @@
 Name:Dark Depths
 ManaCost:no cost
 Types:Legendary Snow Land
-Text:Dark Depths enters the battlefield with ten ice counters on it.\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
+Text:no text
+K:etbCounter:ICE:10
+A:AB$ RemoveCounter | Cost$ 3 | CounterType$ ICE | CounterNum$ 1 | SpellDescription$ Remove an ice counter from CARDNAME. 
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_EQ0_ICE | Execute$ TrigSac | TriggerDescription$ When Dark Depths has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and "This creature is indestructible" named Marit Lage onto the battlefield.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBToken
+SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Marit Lage | TokenTypes$ Creature,Avatar,Legendary | TokenOwner$ You | TokenColors$ Black | TokenPower$ 20 | TokenToughness$ 20 | TokenKeywords$ Flying<>Indestructible 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_depths.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/145.jpg
