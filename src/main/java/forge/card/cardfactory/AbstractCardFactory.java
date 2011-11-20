@@ -27,7 +27,6 @@ import forge.FileUtil;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
