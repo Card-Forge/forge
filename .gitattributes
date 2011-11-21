@@ -4195,6 +4195,7 @@ res/cardsfolder/i/izzet_boilerworks.txt svneol=native#text/plain
 res/cardsfolder/i/izzet_chronarch.txt svneol=native#text/plain
 res/cardsfolder/i/izzet_signet.txt svneol=native#text/plain
 res/cardsfolder/j/jabaris_banner.txt svneol=native#text/plain
+res/cardsfolder/j/jabaris_influence.txt -text
 res/cardsfolder/j/jace_beleren.txt svneol=native#text/plain
 res/cardsfolder/j/jace_memory_adept.txt svneol=native#text/plain
 res/cardsfolder/j/jace_the_mind_sculptor.txt svneol=native#text/plain
