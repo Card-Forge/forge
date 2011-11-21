@@ -2652,6 +2652,62 @@ public class CardFactoryCreatures {
             card.addSpellAbility(finalAb);
         } // *************** END ************ END **************************
 
+        // *************** START *********** START **************************
+        else if (cardName.equals("Glint Hawk")) {
+            
+            final SpellAbility sacOrNo = new Ability(card, "") {
+                @Override
+                public void resolve() {
+                    final Player player = card.getController();
+                    final CardList arts = player.getCardsIn(Zone.Battlefield).getType("Artifact");
+
+                    if (player.isComputer()) {
+                        //SVar:RemAIDeck:True
+                    } else { // this is the human resolution
+                        final Input target = new Input() {
+                            private static final long serialVersionUID = -789722084164422578L;
+
+                            @Override
+                            public void showMessage() {
+                                AllZone.getDisplay().showMessage(card + " - Select an artifact you control");
+                                ButtonUtil.enableOnlyCancel();
+                            }
+
+                            @Override
+                            public void selectButtonCancel() {
+                                AllZone.getGameAction().sacrifice(card);
+                                this.stop();
+                            }
+
+                            @Override
+                            public void selectCard(final Card c, final PlayerZone zone) {
+                                if (zone.is(Constant.Zone.Battlefield) && arts.contains(c)) {
+                                    AllZone.getGameAction().moveToHand(c);
+                                    this.stop();
+                                }
+                            } // selectCard()
+                        }; // Input
+                        AllZone.getInputControl().setInput(target);
+                    }
+                }
+            };
+            final StringBuilder sb = new StringBuilder();
+            sb.append("When CARDNAME enters the battlefield, ");
+            sb.append("sacrifice it unless you return an artifact you control to its owner's hand.");
+            sacOrNo.setStackDescription(sb.toString());
+
+            final Command comesIntoPlay = new Command() {
+                private static final long serialVersionUID = 4065476629778198760L;
+
+                @Override
+                public void execute() {
+                    AllZone.getStack().addSimultaneousStackEntry(sacOrNo);
+                }
+            };
+
+            card.addComesIntoPlayCommand(comesIntoPlay);
+        } // *************** END ************ END **************************
+
         // ***************************************************
         // end of card specific code
         // ***************************************************

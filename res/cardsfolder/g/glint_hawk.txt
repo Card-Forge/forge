@@ -1,0 +1,11 @@
+Name:Glint Hawk
+ManaCost:W
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+#TODO - ETB trigger is hard-coded
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk.jpg
+End
