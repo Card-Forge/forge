@@ -342,7 +342,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean levelUp = false;
     private boolean bounceAtUntap = false;
-    private boolean finishedEnteringBF = false;
 
     private boolean unearth = false;
     private boolean unearthed;
@@ -1347,29 +1346,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setBounceAtUntap(final boolean bounce) {
         this.bounceAtUntap = bounce;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>finishedEnteringBF</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getFinishedEnteringBF() {
-        return this.finishedEnteringBF;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>finishedEnteringBF</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setFinishedEnteringBF(final boolean b) {
-        this.finishedEnteringBF = b;
     }
 
     /**
