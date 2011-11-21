@@ -293,6 +293,19 @@ Fixes/Features:
 - The property "IsRemembered" can now also be used for players.
 - Fixed View from Above.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Fixed Clones not copying activated or static abilities.
+- Added the optional "ForgetOtherRemembered" parameter to AF Dig.
+- Fixed Cerebral Eruption.
+- Fixed Goblin Charbelcher not recognizing dual lands as Mountains and not putting the revealed cards on the bottom of the library (NOTE: The order still can't be chosen).
+- java warning cleanup
+- minor text updates in Seachrome Coast
+- Added the static effect "CantPlayLand".
+- convert Dark Depths to script with a real trigger
+- add some comments CardFactoryLands.java
+- fix header
+- Removed the unused variable finishedEnteringBF from the card class.
+- Fixed Twilight Shepherd
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -461,6 +474,11 @@ Steamcore Weird
 Due Respect
 Abeyance
 Cease-Fire
+Solfatara
+Turf Wound
+Thelonite Druid
+Ashling's Prerogative
+Added Uphill Battle
 
 
 end
