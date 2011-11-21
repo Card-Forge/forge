@@ -138,6 +138,8 @@ public class GameAction {
         if (suppress) {
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
         }
+        
+        copied.setTapped(false);
 
         zone.add(copied);
 
