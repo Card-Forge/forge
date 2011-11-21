@@ -2909,12 +2909,14 @@ public class CardFactoryUtil {
 
         // Count$HighestLifeTotal
         if (sq[0].contains("HighestLifeTotal")) {
-            return Math.max(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife());
+            return CardFactoryUtil.
+                    doXMath(Math.max(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife()), m, c);
         }
 
         // Count$LowestLifeTotal
         if (sq[0].contains("LowestLifeTotal")) {
-            return Math.min(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife());
+            return CardFactoryUtil.
+                    doXMath(Math.min(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife()), m, c);
         }
 
         // Count$TopOfLibraryCMC
