@@ -437,6 +437,7 @@ res/cardsfolder/a/ashenmoor_gouger.txt svneol=native#text/plain
 res/cardsfolder/a/ashenmoor_liege.txt svneol=native#text/plain
 res/cardsfolder/a/ashes_of_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/a/ashes_to_ashes.txt svneol=native#text/plain
+res/cardsfolder/a/ashlings_prerogative.txt -text
 res/cardsfolder/a/ashmouth_hound.txt -text
 res/cardsfolder/a/ashnods_altar.txt svneol=native#text/plain
 res/cardsfolder/a/ashnods_battle_gear.txt svneol=native#text/plain
@@ -8938,6 +8939,7 @@ res/cardsfolder/u/unyaro_bees.txt svneol=native#text/plain
 res/cardsfolder/u/unyaro_griffin.txt svneol=native#text/plain
 res/cardsfolder/u/updraft.txt svneol=native#text/plain
 res/cardsfolder/u/upheaval.txt svneol=native#text/plain
+res/cardsfolder/u/uphill_battle.txt -text
 res/cardsfolder/u/uproot.txt svneol=native#text/plain
 res/cardsfolder/u/upwelling.txt svneol=native#text/plain
 res/cardsfolder/u/ur_drago.txt svneol=native#text/plain
