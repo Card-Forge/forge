@@ -6,7 +6,6 @@ PT:2/2
 K:Vigilance
 T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ Whenever another creature you control dies, you may transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
-SVar:Rarity:Common
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_sentry.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/38a.jpg
@@ -21,8 +20,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:5/4
 K:Trample
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_militia.jpg
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/thraben_militia.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/38b.jpg
 Oracle:Trample
 End

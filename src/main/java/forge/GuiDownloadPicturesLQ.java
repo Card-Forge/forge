@@ -48,15 +48,6 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         String base = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
         for (Card c : AllZone.getCardFactory()) {
             cList.addAll(createDLObjects(c, base));
-            if (c.isFlip()) {
-                c.setState("Flip");
-                cList.addAll(createDLObjects(c, base));
-            }
-            if (c.isDoubleFaced()) {
-                c.setState("Transformed");
-                cList.addAll(createDLObjects(c, base));
-            }
-            c.setState("Original");
         }
 
         ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
@@ -91,15 +82,22 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
     private List<DownloadObject> createDLObjects(final Card c, final String base) {
         ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
 
-        String url = c.getSVar("Picture");
-        String[] urls = url.split("\\\\");
-
-        String iName = GuiDisplayUtil.cleanString(c.getImageName());
-        ret.add(new DownloadObject(iName + ".jpg", urls[0], base));
-
-        if (urls.length > 1) {
-            for (int j = 1; j < urls.length; j++) {
-                ret.add(new DownloadObject(iName + j + ".jpg", urls[j], base));
+        for(String SVar : c.getSVars().keySet()) {
+            
+            if(!SVar.startsWith("Picture")) {
+                continue;
+            }
+            
+            String url = c.getSVar(SVar);
+            String[] urls = url.split("\\\\");
+    
+            String iName = GuiDisplayUtil.cleanString(c.getImageName());
+            ret.add(new DownloadObject(iName + ".jpg", urls[0], base));
+    
+            if (urls.length > 1) {
+                for (int j = 1; j < urls.length; j++) {
+                    ret.add(new DownloadObject(iName + j + ".jpg", urls[j], base));
+                }
             }
         }
 

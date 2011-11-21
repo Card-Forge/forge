@@ -33,7 +33,6 @@ public class CardCharacteristics {
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
     private String imageFilename = "";
     private String imageName = "";
-    private Map<String, String> sVars = new TreeMap<String, String>();
     private ArrayList<SetInfo> sets = new ArrayList<SetInfo>();
 
     /**
@@ -311,26 +310,6 @@ public class CardCharacteristics {
      */
     public final void setImageFilename(final String imageFilename0) {
         imageFilename = imageFilename0; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Gets the s vars.
-     * 
-     * @return the sVars
-     */
-    public final Map<String, String> getsVars() {
-        return sVars;
-    }
-
-    /**
-     * Sets vars.
-     * 
-     * @param sVars0
-     *            the sVars to set
-     */
-    public final void setsVars(final Map<String, String> sVars0) {
-        this.sVars = new HashMap<String, String>(sVars0); // TODO: Add 0 to
-                                                          // parameter's name.
     }
 
     /**

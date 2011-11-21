@@ -5,7 +5,6 @@ Text:no text
 PT:1/1
 T:Mode$ Always | IsPresent$ Card.Self+withFlying | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When CARDNAME has flying, flip it.
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_elements.jpg
 AlternateMode:Flip
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/93.jpg
@@ -20,8 +19,7 @@ Types:Legendary Creature Human Wizard
 Text:no text
 PT:3/3
 S:Mode$Continuous | AffectedCards$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/310.jpg
 Oracle:Creatures you control have flying.
 

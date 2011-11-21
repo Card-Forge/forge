@@ -5,8 +5,8 @@ Text:no text
 PT:3/3
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_mystics.jpg
+AlternateMode:DoubleFaced
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/208a.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Ulvenwald Mystics.
 
@@ -21,8 +21,7 @@ PT:5/5
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_primordials.jpg
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/ulvenwald_primordials.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/208b.jpg
 Oracle:{G}: Regenerate Ulvenwald Primordials.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ulvenwald Primordials.
 End

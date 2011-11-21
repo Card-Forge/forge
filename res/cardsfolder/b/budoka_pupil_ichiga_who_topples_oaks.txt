@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidControllingPlayer$
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/budoka_pupil.jpg
 AlternateMode:Flip
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Budoka Pupil.\nAt the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
@@ -23,8 +22,7 @@ Text:no text
 PT:4/3
 K:Trample
 A:AB$ Pump | Cost$ SubCounter<1/KI> | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/ichiga_who_topples_oaks.jpg
+SVar:Picture1:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/ichiga_who_topples_oaks.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Trample\nRemove a ki counter from Ichiga, Who Topples Oaks: Target creature gets +2/+2 until end of turn.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/170.jpg

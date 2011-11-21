@@ -5,7 +5,6 @@ Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When a creature dealt damage by CARDNAME this turn dies, flip CARDNAME.
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
-SVar:Rarity:Uncommon
 AlternateMode:Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bushi_tenderfoot.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/2.jpg
@@ -21,8 +20,7 @@ Text:no text
 PT:3/4
 K:Double Strike
 K:Bushido 2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kenzo_the_hardhearted.jpg
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/kenzo_the_hardhearted.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/307.jpg
 Oracle:Double strike; bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
 

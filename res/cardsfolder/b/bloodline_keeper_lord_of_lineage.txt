@@ -7,7 +7,6 @@ K:Flying
 A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
 A:AB$SetState | Cost$ B | Defined$ Self | CheckSVar$ X | SVarCompare$ GE5 | Mode$ Transform | SpellDescription$ Transform CARDNAME.Activate this ability only if you control five or more Vampires.
 SVar:X:Count$Valid Card.Vampire+YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodline_keeper.jpg
 AlternateMode:DoubleFaced
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/90a.jpg
@@ -24,8 +23,7 @@ PT:5/5
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Vampire creatures you control get +2/+2.
 A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_lineage.jpg
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/lord_of_lineage.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/90b.jpg
 Oracle:Other Vampire creatures you control get +2/+2.\n{T}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
 

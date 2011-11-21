@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidControllingPlayer$
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on CARDNAME, you may flip it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | CounterNum$ 1
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_bandit.jpg
 AlternateMode:Flip
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/99.jpg
@@ -22,8 +21,7 @@ Types:Legendary Creature Spirit
 Text:no text
 PT:5/2
 A:AB$ GainControl | Cost$ SubCounter<1/KI> | Tgt$ TgtC | SpellDescription$ Gain control of target creature until end of turn.
-SVar:Rarity:Uncommon
-SVar:Picture:www.marc-fowler-design.com/cardforge/flippedcards/BOK/azamuki_treachery_incarnate.jpg
+SVar:Picture1:www.marc-fowler-design.com/cardforge/flippedcards/BOK/azamuki_treachery_incarnate.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/169.jpg
 Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.

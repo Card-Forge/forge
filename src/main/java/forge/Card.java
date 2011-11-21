@@ -423,6 +423,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;
+    
+    private Map<String, String> sVars = new TreeMap<String, String>();
 
     /**
      * 
@@ -1703,8 +1705,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getSVar(final String var) {
-        if (this.getCharacteristics().getsVars().containsKey(var)) {
-            return this.getCharacteristics().getsVars().get(var);
+        if (this.sVars.containsKey(var)) {
+            return this.sVars.get(var);
         } else {
             return "";
         }
@@ -1721,11 +1723,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setSVar(final String var, final String str) {
-        if (this.getCharacteristics().getsVars().containsKey(var)) {
-            this.getCharacteristics().getsVars().remove(var);
+        if (this.sVars.containsKey(var)) {
+            this.sVars.remove(var);
         }
 
-        this.getCharacteristics().getsVars().put(var, str);
+        this.sVars.put(var, str);
     }
 
     /**
@@ -1736,7 +1738,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a Map object.
      */
     public final Map<String, String> getSVars() {
-        return this.getCharacteristics().getsVars();
+        return this.sVars;
     }
 
     /**
@@ -1748,7 +1750,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a Map object.
      */
     public final void setSVars(final Map<String, String> newSVars) {
-        this.getCharacteristics().setsVars(newSVars);
+        this.sVars = newSVars;
     }
 
     /**
@@ -8222,8 +8224,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return an int
      */
     public final int getFoil() {
-        if (this.getCharacteristics().getsVars().containsKey("Foil")) {
-            return Integer.parseInt(this.getCharacteristics().getsVars().get("Foil"));
+        if (this.sVars.containsKey("Foil")) {
+            return Integer.parseInt(this.sVars.get("Foil"));
         }
         return 0;
     }
@@ -8236,7 +8238,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an int
      */
     public final void setFoil(final int f) {
-        this.getCharacteristics().getsVars().put("Foil", Integer.toString(f));
+        this.sVars.put("Foil", Integer.toString(f));
     }
 
     /**

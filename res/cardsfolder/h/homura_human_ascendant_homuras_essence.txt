@@ -7,7 +7,6 @@ K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield flipped.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ TrigFlip
 SVar:TrigFlip:DB$SetState | Defined$ Self | Mode$ Flip
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homura_human_ascendant.jpg
 AlternateMode:Flip
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/103.jpg
@@ -22,8 +21,7 @@ Types:Legendary Enchantment
 Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddAbility$ ABPump | Description$ Creatures you control get +2/+2 and have flying and "R: This creature gets +1/+0 until end of turn."
 SVar:ABPump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.
-SVar:Rarity:Rare
-SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homuras_essence.jpg
+SVar:Picture1:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homuras_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/169.jpg
 Oracle:Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."
