@@ -1,0 +1,21 @@
+Name:Ward of Bones
+ManaCost:6
+Types:Artifact
+Text:no text
+S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ Opponent | CheckSVar$ A | SVarCompare$ LTB | Description$ Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
+S:Mode$ CantBeCast | ValidCard$ Artifact | Caster$ Opponent | CheckSVar$ C | SVarCompare$ LTD
+S:Mode$ CantBeCast | ValidCard$ Enchantment | Caster$ Opponent | CheckSVar$ E | SVarCompare$ LTF
+S:Mode$ CantPlayLand | Player$ Opponent | CheckSVar$ G | SVarCompare$ LTH
+SVar:A:Count$Valid Creature.YouCtrl
+SVar:B:Count$Valid Creature.YouDontCtrl
+SVar:C:Count$Valid Artifact.YouCtrl
+SVar:D:Count$Valid Artifact.YouDontCtrl
+SVar:E:Count$Valid Enchantment.YouCtrl
+SVar:F:Count$Valid Enchantment.YouDontCtrl
+SVar:G:Count$Valid Land.YouCtrl
+SVar:H:Count$Valid Land.YouDontCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_of_bones.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/174.jpg
+Oracle:Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
+End
