@@ -935,6 +935,7 @@ res/cardsfolder/b/bond_of_agony.txt -text
 res/cardsfolder/b/bonded_fetch.txt svneol=native#text/plain
 res/cardsfolder/b/bonds_of_faith.txt -text
 res/cardsfolder/b/bonds_of_quicksilver.txt svneol=native#text/plain
+res/cardsfolder/b/bone_dancer.txt -text
 res/cardsfolder/b/bone_flute.txt svneol=native#text/plain
 res/cardsfolder/b/bone_harvest.txt svneol=native#text/plain
 res/cardsfolder/b/bone_saw.txt svneol=native#text/plain
@@ -7072,6 +7073,7 @@ res/cardsfolder/s/scavenged_weaponry.txt svneol=native#text/plain
 res/cardsfolder/s/scavenger_drake.txt svneol=native#text/plain
 res/cardsfolder/s/scavenger_folk.txt svneol=native#text/plain
 res/cardsfolder/s/scavenging_ghoul.txt svneol=native#text/plain
+res/cardsfolder/s/scavenging_ooze.txt -text
 res/cardsfolder/s/scavenging_scarab.txt svneol=native#text/plain
 res/cardsfolder/s/scepter_of_dominance.txt svneol=native#text/plain
 res/cardsfolder/s/scepter_of_empires.txt -text
