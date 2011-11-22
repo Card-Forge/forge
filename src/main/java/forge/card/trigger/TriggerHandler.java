@@ -428,6 +428,7 @@ public class TriggerHandler {
         } // Torpor Orb check
 
         final Player[] decider = new Player[1];
+        final Player[] controller = new Player[1];
 
         // Any trigger should cause the phase not to skip
         AllZone.getPhase().setSkipPhase(false);
@@ -469,7 +470,8 @@ public class TriggerHandler {
         if (regtrig.getStoredTriggeredObjects() != null) {
             sa[0].setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
-
+        
+        controller[0] = host.getController();
         sa[0].setActivatingPlayer(host.getController());
         sa[0].setStackDescription(sa[0].toString());
         // TODO - for Charms to supports AI, this needs to be removed
@@ -1001,7 +1003,7 @@ public class TriggerHandler {
                     }
                 }
 
-                if (sa[0].getActivatingPlayer().isHuman()) {
+                if (controller[0].isHuman()) {
                     // Card src =
                     // (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
                     // System.out.println("Trigger resolving for "+mode+".  Card = "+src);
