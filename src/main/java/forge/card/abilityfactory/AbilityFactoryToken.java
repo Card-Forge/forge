@@ -521,7 +521,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
             for (final Card c : tokens) {
                 if (this.tokenTapped) {
-                    c.tap();
+                    c.setTapped(true);
                 }
                 if (this.tokenAttacking) {
                     AllZone.getCombat().addAttacker(c);

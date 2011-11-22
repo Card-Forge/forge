@@ -125,6 +125,8 @@ public class GameAction {
             lastKnownInfo = CardUtil.getLKICopy(c);
 
             copied.setUnearthed(c.isUnearthed());
+            
+            copied.setTapped(false);
         }
 
         if (c.wasSuspendCast()) {
@@ -138,8 +140,6 @@ public class GameAction {
         if (suppress) {
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
         }
-        
-        copied.setTapped(false);
 
         zone.add(copied);
 

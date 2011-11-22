@@ -829,7 +829,7 @@ public final class AbilityFactoryChangeZone {
                     movedCard = AllZone.getGameAction().moveToLibrary(c, libraryPos);
                 } else if (destination.equals(Zone.Battlefield)) {
                     if (params.containsKey("Tapped")) {
-                        c.tap();
+                        c.setTapped(true);
                     }
                     if (params.containsKey("GainControl")) {
                         c.addController(af.getHostCard());
