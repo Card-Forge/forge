@@ -2220,7 +2220,12 @@ public class AbilityFactoryCounters {
             final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
+        final Target abTgt = af.getAbTgt();
+        final String type = params.get("CounterType");
+        final String amountStr = params.get("CounterNum");
+        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
         boolean chance = false;
+        boolean preferred = true;
 
         // if there is a cost, it's gotta be optional
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
@@ -2230,13 +2235,68 @@ public class AbilityFactoryCounters {
         final Counters cType = Counters.valueOf(params.get("CounterType"));
         final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
         final ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        if ((srcCards.size() > 0)
-                && cType.equals(Counters.P1P1) // move +1/+1 counters away from
-                                               // permanents that cannot use
-                                               // them
-                && (destCards.size() > 0) && destCards.get(0).getController().isComputer()
-                && (!srcCards.get(0).isCreature() || srcCards.get(0).hasStartOfKeyword("CARDNAME can't attack"))) {
-            chance = true;
+        if (abTgt == null) {
+            if ((srcCards.size() > 0)
+                    && cType.equals(Counters.P1P1) // move +1/+1 counters away from
+                                                   // permanents that cannot use
+                                                   // them
+                    && (destCards.size() > 0) && destCards.get(0).getController().isComputer()
+                    && (!srcCards.get(0).isCreature() || srcCards.get(0).hasStartOfKeyword("CARDNAME can't attack"))) {
+                
+                chance = true;
+            }
+        } else { //targeted
+            final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
+            CardList list = player.getCardsIn(Zone.Battlefield);
+            list = list.getTargetableCards(sa);
+            list = list.getValidCards(abTgt.getValidTgts(), host.getController(), host);
+            if (list.isEmpty() && mandatory) {
+                // If there isn't any prefered cards to target, gotta choose
+                // non-preferred ones
+                list = player.getOpponent().getCardsIn(Zone.Battlefield);
+                list = list.getTargetableCards(sa);
+                list = list.getValidCards(abTgt.getValidTgts(), host.getController(), host);
+                preferred = false;
+            }
+            // Not mandatory, or the the list was regenerated and is still
+            // empty,
+            // so return false since there are no targets
+            if (list.isEmpty()) {
+                return false;
+            }
+
+            Card choice = null;
+
+            // Choose targets here:
+            if (af.isCurse()) {
+                if (preferred) {
+                    choice = AbilityFactoryCounters.chooseCursedTarget(list, type, amount);
+                }
+
+                else {
+                    if (type.equals("M1M1")) {
+                        choice = CardFactoryUtil.getWorstCreatureAI(list);
+                    } else {
+                        choice = CardFactoryUtil.getRandomCard(list);
+                    }
+                }
+            } else {
+                if (preferred) {
+                    choice = AbilityFactoryCounters.chooseBoonTarget(list, type);
+                }
+
+                else {
+                    if (type.equals("P1P1")) {
+                        choice = CardFactoryUtil.getWorstCreatureAI(list);
+                    } else {
+                        choice = CardFactoryUtil.getRandomCard(list);
+                    }
+                }
+            }
+
+            // TODO - I think choice can be null here. Is that ok for
+            // addTarget()?
+            abTgt.addTarget(choice);
         }
 
         final AbilitySub subAb = sa.getSubAbility();
