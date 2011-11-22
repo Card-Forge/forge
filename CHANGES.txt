@@ -494,13 +494,14 @@ Solfatara
 Turf Wound
 Thelonite Druid
 Ashling's Prerogative
-Added Uphill Battle
+Uphill Battle
 Jabari's Influence
 Ward of Bones
 Psychic Transfer
 Glint Hawk
 Bone Dancer
 Scavenging Ooze
+World Queller
 
 
 end
