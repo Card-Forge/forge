@@ -8,6 +8,9 @@ Forge Beta: 11-##-2011 ver 1.1.# rev #####
 When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
 
 
+The JuzamJedi cube has been updated with a newer list of cards.
+
+
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
 
@@ -306,6 +309,19 @@ Fixes/Features:
 - Removed the unused variable finishedEnteringBF from the card class.
 - Fixed Twilight Shepherd
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Cards changing zones will now always be untapped.
+- Fixed Pattern of Rebirth.
+- Renamed the alternate LQ pic URL Svars in DFCs and Flips.
+- Removed Rarity SVar from DFCs and Flips.
+- Moved SVars from CardCharacteristics to Card.
+- Altered LQ Picture downloader to check for multiple Picture SVars.
+- Added RemAIDeck to Skirk Alarmist.
+- Fixed SetInfo on Delver of Secrets / Insectile Aberration
+- Added JuzamJedi's updated Cube file.
+- Converted Gerrard's Verdict to script.
+- Little fix for cards that want to put cards onto the battlefield tapped.
+- Converted Barl's Cage to script
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -479,6 +495,12 @@ Turf Wound
 Thelonite Druid
 Ashling's Prerogative
 Added Uphill Battle
+Jabari's Influence
+Ward of Bones
+Psychic Transfer
+Glint Hawk
+Bone Dancer
+Scavenging Ooze
 
 
 end
