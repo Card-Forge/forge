@@ -1160,51 +1160,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Barl's Cage")) {
-            final String[] tgts = { "Creature" };
-            final Target target = new Target(card, "Select target creature.", tgts, "1", "1");
-
-            final Cost cost = new Cost("3", card.getName(), true);
-
-            final SpellAbility ability = new AbilityActivated(card, cost, target) {
-                private static final long serialVersionUID = 8941566961041310961L;
-
-                @Override
-                public boolean canPlayAI() {
-                    final Card c = this.getCreature();
-                    if (c == null) {
-                        return false;
-                    } else {
-                        this.setTargetCard(c);
-                        return true;
-                    }
-                } // canPlayAI()
-
-                // may return null
-                public Card getCreature() {
-                    CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    tappedCreatures = tappedCreatures.filter(CardListFilter.TAPPED);
-                    tappedCreatures = tappedCreatures.getTargetableCards(this);
-                    if (tappedCreatures.isEmpty()) {
-                        return null;
-                    }
-
-                    return CardFactoryUtil.getBestCreatureAI(tappedCreatures);
-                }
-
-                @Override
-                public void resolve() {
-                    final Card target = this.getTargetCard();
-                    if (AllZoneUtil.isCardInPlay(target) && target.canBeTargetedBy(this)) {
-                        target.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
-                    } // is card in play?
-                } // resolve()
-            }; // SpellAbility
-
-            card.addSpellAbility(ability);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         /*
          * else if (cardName.equals("Pithing Needle")) { final SpellAbility
          * ability = new AbilityStatic(card, "0") {
