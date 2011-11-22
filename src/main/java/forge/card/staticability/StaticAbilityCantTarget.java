@@ -9,7 +9,7 @@ import forge.Player;
 import forge.card.spellability.SpellAbility;
 
 /**
- * The Class StaticAbility_PreventDamage.
+ * The Class StaticAbilityCantTarget.
  */
 public class StaticAbilityCantTarget {
 
@@ -18,7 +18,7 @@ public class StaticAbilityCantTarget {
      *
      * @param staticAbility the static ability
      * @param card the card
-     * @param spellAbility the spell Ability
+     * @param spellAbility the spell/ability
      * @return true, if successful
      */
     public static boolean applyCantTargetAbility(final StaticAbility staticAbility, final Card card, final SpellAbility spellAbility) {
