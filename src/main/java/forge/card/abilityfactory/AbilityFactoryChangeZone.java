@@ -1770,7 +1770,7 @@ public final class AbilityFactoryChangeZone {
                 } else {
                     if (destination.equals(Zone.Battlefield)) {
                         if (params.containsKey("Tapped") || params.containsKey("Ninjutsu")) {
-                            tgtC.tap();
+                            tgtC.setTapped(true);
                         }
                         if (params.containsKey("GainControl")) {
                             tgtC.addController(af.getHostCard());
@@ -1824,8 +1824,16 @@ public final class AbilityFactoryChangeZone {
      */
     private static CardList knownDetermineDefined(final SpellAbility sa, final String defined, final Zone origin) {
         final CardList ret = new CardList();
-
-        ret.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa).toArray());
+        final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa);
+        
+        for(Card c : list) {
+            Card actualCard = AllZoneUtil.getCardState(c);
+            if (actualCard != null) {
+                ret.add(actualCard);
+            } else {
+                ret.add(c);
+            }
+        }
         return ret;
     }
 
