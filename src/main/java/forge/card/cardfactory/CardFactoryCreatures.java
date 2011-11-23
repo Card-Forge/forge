@@ -2654,7 +2654,7 @@ public class CardFactoryCreatures {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Glint Hawk")) {
-            
+
             final SpellAbility sacOrNo = new Ability(card, "") {
                 @Override
                 public void resolve() {

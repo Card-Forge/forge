@@ -282,7 +282,7 @@ public class StaticAbility {
         if (mode.equals("CantBeCast")) {
             return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, activator);
         }
-        
+
         if (mode.equals("CantPlayLand")) {
             return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, activator);
         }
@@ -322,7 +322,7 @@ public class StaticAbility {
 
         return false;
     }
-    
+
     public final boolean applyAbility(final String mode, final Card card) {
 
         // don't apply the ability if it hasn't got the right mode

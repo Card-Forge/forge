@@ -2242,7 +2242,7 @@ public class AbilityFactoryCounters {
                                                    // them
                     && (destCards.size() > 0) && destCards.get(0).getController().isComputer()
                     && (!srcCards.get(0).isCreature() || srcCards.get(0).hasStartOfKeyword("CARDNAME can't attack"))) {
-                
+
                 chance = true;
             }
         } else { //targeted

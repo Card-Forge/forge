@@ -77,7 +77,7 @@ public class StaticAbilityCantBeCast {
 
         return true;
     }
-    
+
     /**
      * TODO Write javadoc for this method.
      * 

@@ -470,7 +470,7 @@ public class TriggerHandler {
         if (regtrig.getStoredTriggeredObjects() != null) {
             sa[0].setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
-        
+
         controller[0] = host.getController();
         sa[0].setActivatingPlayer(host.getController());
         sa[0].setStackDescription(sa[0].toString());

@@ -4216,14 +4216,14 @@ public class CardFactoryUtil {
         to.setSVars(from.getSVars());
         to.setSets(from.getSets());
         to.setIntrinsicAbilities(from.getIntrinsicAbilities());
-        
+
         to.setImageName(from.getImageName());
         to.setImageFilename(from.getImageFilename());
         to.setTriggers(from.getTriggers());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
 
     }
-    
+
     /**
      * Adds the ability factory abilities.
      * 

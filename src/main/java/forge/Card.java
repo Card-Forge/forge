@@ -423,7 +423,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;
-    
+
     private Map<String, String> sVars = new TreeMap<String, String>();
 
     /**
@@ -981,7 +981,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setCreatureGotBlockedThisCombat(final boolean b) {
         this.creatureGotBlockedThisCombat = b;
-        if(b) {
+        if (b) {
             setCreatureGotBlockedThisTurn(true);
         }
     }
@@ -996,7 +996,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean getCreatureGotBlockedThisCombat() {
         return this.creatureGotBlockedThisCombat;
     }
-    
+
     /**
      * <p>
      * Setter for the field <code>creatureGotBlockedThisTurn</code>.
@@ -1076,7 +1076,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             setDealtDmgToComputerThisGame(true);
         }
     }
-    
+
     /**
      * <p>
      * Getter for the field <code>dealtCombatDmgToComputerThisGame</code>.
@@ -1087,7 +1087,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean getDealtDmgToComputerThisTurn() {
         return this.dealtDmgToComputerThisTurn;
     }
-    
+
     /**
      * <p>
      * Setter for the field <code>dealtDmgToHumanThisGame</code>.
@@ -1133,7 +1133,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean getDealtDmgToComputerThisGame() {
         return this.dealtDmgToComputerThisGame;
     }
-    
+
     /**
      * <p>
      * Setter for the field <code>dealtCombatDmgToHumanThisTurn</code>.

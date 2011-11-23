@@ -1792,10 +1792,10 @@ public class AbilityFactory {
                 players.add(sa.getActivatingPlayer().getOpponent());
             }
         } else {
-            if(AllZone.getHumanPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
+            if (AllZone.getHumanPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
                 players.add(AllZone.getHumanPlayer());
             }
-            if(AllZone.getComputerPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
+            if (AllZone.getComputerPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
                 players.add(AllZone.getComputerPlayer());
             }
         }

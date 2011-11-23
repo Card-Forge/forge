@@ -82,18 +82,18 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
     private List<DownloadObject> createDLObjects(final Card c, final String base) {
         ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
 
-        for(String SVar : c.getSVars().keySet()) {
-            
-            if(!SVar.startsWith("Picture")) {
+        for (String SVar : c.getSVars().keySet()) {
+
+            if (!SVar.startsWith("Picture")) {
                 continue;
             }
-            
+
             String url = c.getSVar(SVar);
             String[] urls = url.split("\\\\");
-    
+
             String iName = GuiDisplayUtil.cleanString(c.getImageName());
             ret.add(new DownloadObject(iName + ".jpg", urls[0], base));
-    
+
             if (urls.length > 1) {
                 for (int j = 1; j < urls.length; j++) {
                     ret.add(new DownloadObject(iName + j + ".jpg", urls[j], base));

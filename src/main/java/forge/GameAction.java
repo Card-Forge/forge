@@ -125,7 +125,7 @@ public class GameAction {
             lastKnownInfo = CardUtil.getLKICopy(c);
 
             copied.setUnearthed(c.isUnearthed());
-            
+
             copied.setTapped(false);
         }
 

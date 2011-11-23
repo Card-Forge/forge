@@ -202,12 +202,12 @@ public class AbilityFactoryEffect {
         final HashMap<String, String> params = af.getMapParams();
         boolean randomReturn = r.nextFloat() <= .6667;
         String logic = "";
-        
+
         if (params.containsKey("AILogic")) {
             logic = params.get("AILogic");
             final Phase phase = AllZone.getPhase();
             if (logic.equals("BeginningOfOppTurn")) {
-                if(phase.isPlayerTurn(AllZone.getComputerPlayer()) 
+                if (phase.isPlayerTurn(AllZone.getComputerPlayer())
                         || phase.isAfter(Constant.Phase.DRAW)) {
                     return false;
                 }
@@ -251,7 +251,7 @@ public class AbilityFactoryEffect {
                 tgt.addTarget(AllZone.getComputerPlayer());
             }
         }
-        
+
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             randomReturn &= subAb.chkAIDrawback();

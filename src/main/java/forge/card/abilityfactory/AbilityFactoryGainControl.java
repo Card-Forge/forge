@@ -380,7 +380,7 @@ public class AbilityFactoryGainControl {
             tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
         }
         // tgtCards.add(hostCard);
-        
+
         ArrayList<Player> controllers = new ArrayList<Player>();
 
         if (params.containsKey("NewController")) {
@@ -389,9 +389,9 @@ public class AbilityFactoryGainControl {
         } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
             controllers = tgt.getTargetPlayers();
         }
-        
+
         GameEntity newController;
-        
+
         if (controllers.size() == 0) {
             newController = this.hostCard;
         } else {
