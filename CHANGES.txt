@@ -322,6 +322,14 @@ Fixes/Features:
 - Little fix for cards that want to put cards onto the battlefield tapped.
 - Converted Barl's Cage to script
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Added some code for XChoice in decideAIPayment of CostTapType.
+- Copied some AI code from AF AddCounter over to AF MoveCounter to support targeting.
+- Added a NeedsToPlay SVar to Afiya Grove.
+- minor comment fixes in StaticAbilityCantTarget
+- Fixed the controller of triggered abilities not being set correctly.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -502,6 +510,9 @@ Glint Hawk
 Bone Dancer
 Scavenging Ooze
 World Queller
+Elemental Appeal
+Distant Memories
+Witherscale Wurm
 
 
 end
