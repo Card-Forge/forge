@@ -4,7 +4,6 @@ Types:Sorcery
 Text:no text
 A:SP$ GainLife | Cost$ X G | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player gains X life.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_life.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/282.jpg

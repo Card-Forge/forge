@@ -454,7 +454,7 @@ public class ComputerUtil {
         int xMana = 0;
 
         for (int i = 1; i < 99; i++) {
-            if (!ComputerUtil.payManaCost(sa, player, true, xMana)) {
+            if (!ComputerUtil.payManaCost(sa, player, true, i)) {
                 break;
             }
             xMana = i;

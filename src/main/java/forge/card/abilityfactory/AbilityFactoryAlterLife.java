@@ -239,8 +239,16 @@ public class AbilityFactoryAlterLife {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final int life = AllZone.getComputerPlayer().getLife();
-        final int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
         final String amountStr = params.get("LifeAmount");
+        int lifeAmount = 0;
+        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            source.setSVar("PayX", Integer.toString(xPay));
+            lifeAmount = xPay;
+        } else {
+            lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        }
 
         // don't use it if no life to gain
         if (lifeAmount <= 0) {
@@ -296,12 +304,6 @@ public class AbilityFactoryAlterLife {
             } else {
                 tgt.addTarget(AllZone.getComputerPlayer());
             }
-        }
-
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
-            source.setSVar("PayX", Integer.toString(xPay));
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
