@@ -13,4 +13,5 @@ SVar:TrigRemoveCounter:AB$ RemoveCounterAll | Cost$ 0 | CounterType$ M1M1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witherscale_wurm.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/134.jpg
+Oracle:Whenever Witherscale Wurm blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)\nWhenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it.
 End
