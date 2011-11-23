@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Instant
 Text:no text
 K:Flashback 2 U
-A:SP$ Draw | Cost$ 1 R | NumCards$ 2 | SubAbility$ SVar=DBDiscard | SpellDescription$ Draw two cards, then discard a carda at random.
+A:SP$ Draw | Cost$ 1 R | NumCards$ 2 | SubAbility$ SVar=DBDiscard | SpellDescription$ Draw two cards, then discard a card at random.
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ Random
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_ravings.jpg
