@@ -6669,7 +6669,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("AttachedTo")) {
             final String restriction = property.split("AttachedTo ")[1];
             if (((this.enchanting == null) || !this.enchanting.isValid(restriction, sourceController, source))
-                    && (this.equipping.isEmpty() || this.equipping.get(0)
+                    && (this.equipping.isEmpty() || !this.equipping.get(0)
                             .isValid(restriction, sourceController, source))) {
                 return false;
             }
