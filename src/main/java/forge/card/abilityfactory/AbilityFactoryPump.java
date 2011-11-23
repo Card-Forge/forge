@@ -264,6 +264,7 @@ public class AbilityFactoryPump {
                 // give haste to creatures that could attack with it
                 if (c.hasSickness() && kHaste && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
                         && CombatUtil.canAttackNextTurn(c)
+                        && c.isUntapped()
                         && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
                     return true;
                 }
@@ -298,6 +299,7 @@ public class AbilityFactoryPump {
 
                 // is the creature blocked and the blocker would survive
                 if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                        && (attack > 0)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                         && (AllZone.getCombat().getBlockers(c) != null)
                         && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {

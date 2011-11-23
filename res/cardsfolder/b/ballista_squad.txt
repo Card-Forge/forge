@@ -5,7 +5,6 @@ Text:no text
 PT:2/2
 A:AB$ DealDamage | Cost$ X W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballista_squad.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/5.jpg
