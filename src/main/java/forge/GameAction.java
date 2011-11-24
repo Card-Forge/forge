@@ -899,7 +899,7 @@ public class GameAction {
                             this.moveToGraveyard(c);
                             checkAgain = true;
                         }
-                    } else {
+                    } else if (entity instanceof Player) {
                         final Player pl = (Player) entity;
                         boolean invalid = false;
 
