@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19570.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/counterspell.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/57.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/55.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/55.jpg
