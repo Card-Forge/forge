@@ -51,7 +51,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * playCard_Cascade.
+     * playCardCascade.
      * </p>
      * 
      * @param c
@@ -78,13 +78,8 @@ public final class GameActionUtil {
                         }
                     }
                 }
-                if (c.hasKeyword("Cascade") || c.getName().equals("Bituminous Blast")) // keyword
-                                                                                       // gets
-                                                                                       // cleared
-                                                                                       // for
-                                                                                       // Bitumonous
-                                                                                       // Blast
-                {
+                //keyword get cleared for Bitumonous Blast
+                if (c.hasKeyword("Cascade") || c.getName().equals("Bituminous Blast")) {
                     doCascade(c);
                 }
             } // execute()
@@ -164,11 +159,11 @@ public final class GameActionUtil {
             }
         };
         cascade.execute();
-    }
+    } //end playCardCascade
 
     /**
      * <p>
-     * playCard_Ripple.
+     * playCardRipple.
      * </p>
      * 
      * @param c
@@ -320,7 +315,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * endOfTurn_Wall_Of_Reverence.
+     * endOfTurnWallOfReverence.
      * </p>
      */
     public static void endOfTurnWallOfReverence() {
@@ -364,11 +359,11 @@ public final class GameActionUtil {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         }
-    } // endOfTurn_Wall_Of_Reverence()
+    } // endOfTurnWallOfReverence()
 
     /**
      * <p>
-     * endOfTurn_Lighthouse_Chronologist.
+     * endOfTurnLighthouseChronologist.
      * </p>
      */
     public static void endOfTurnLighthouseChronologist() {
@@ -553,7 +548,7 @@ public final class GameActionUtil {
 
         Object q = null;
 
-        q = GuiUtils.getChoiceOptional("Use " + c.getName() + " Landfall?", choices);
+        q = GuiUtils.getChoiceOptional("Use " + c + " Landfall?", choices);
 
         if (q == null || q.equals("No")) {
             return false;
@@ -564,7 +559,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * landfall_Lotus_Cobra.
+     * landfallLotusCobra.
      * </p>
      * 
      * @param c
@@ -863,9 +858,6 @@ public final class GameActionUtil {
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(zone)) {
                             zone.addController(c.getController());
-                            // AllZone.getGameAction().changeController(new
-                            // CardList(zone), zone.getController(),
-                            // c.getController());
                         }
                     }
                 };
@@ -942,7 +934,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * execute_Celestial_Mantle.
+     * executeCelestialMantle.
      * </p>
      * 
      * @param enchanted
@@ -969,7 +961,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * playerCombatDamage_Treva.
+     * playerCombatDamageTreva.
      * </p>
      * 
      * @param c
@@ -987,7 +979,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * playerCombatDamage_Whirling_Dervish.
+     * playerCombatDamageWhirlingDervish.
      * </p>
      * 
      * @param c
@@ -1024,7 +1016,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * playerCombatDamage_lose_halflife_up.
+     * playerCombatDamageLoseHalfLifeUp.
      * </p>
      * 
      * @param c
@@ -1076,7 +1068,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * playerCombatDamage_Scalpelexis.
+     * playerCombatDamageScalpelexis.
      * </p>
      * 
      * @param c
@@ -1412,8 +1404,7 @@ public final class GameActionUtil {
                 return false;
             }
         }
-        if (specialConditions.contains("isValid")) { // does this card meet the
-                                                     // valid description?
+        if (specialConditions.contains("isValid")) {
             String requirements = specialConditions.replaceAll("isValid ", "");
             if (!sourceCard.isValid(requirements, sourceCard.getController(), sourceCard)) {
                 return false;
@@ -1892,12 +1883,11 @@ public final class GameActionUtil {
         } // execute()
     }; // Muraganda_Petroglyphs
 
-    // returns all PlayerZones that has at least 1 Glorious Anthem
-    // if Computer has 2 Glorious Anthems, AllZone.getComputerPlay() will be
-    // returned twice
     /**
      * <p>
-     * getZone.
+     * getZone.  Returns all PlayerZones that has at least 1 Glorious Anthem
+     * if Computer has 2 Glorious Anthems, AllZone.getComputerPlay() will be
+     * returned twice.
      * </p>
      * 
      * @param cardName
@@ -1933,17 +1923,14 @@ public final class GameActionUtil {
         getCommands().put("Homarid", homarid);
 
         getCommands().put("Liu_Bei", liuBei);
-
         getCommands().put("Muraganda_Petroglyphs", muragandaPetroglyphs);
 
         getCommands().put("Old_Man_of_the_Sea", oldManOfTheSea);
-
         getCommands().put("Sound_the_Call_Wolf", soundTheCallWolf);
         getCommands().put("Tarmogoyf", tarmogoyf);
-
         getCommands().put("Umbra_Stalker", umbraStalker);
 
-        // /The commands above are in alphabetical order by cardname.
+        // The commands above are in alphabetical order by cardname.
     }
 
     /**
@@ -1995,8 +1982,8 @@ public final class GameActionUtil {
     /**
      * @param stLandManaAbilities the stLandManaAbilities to set
      */
-    public static void setStLandManaAbilities(Command stLandManaAbilities) {
-        GameActionUtil.stLandManaAbilities = stLandManaAbilities; // TODO: Add 0 to parameter's name.
+    public static void setStLandManaAbilities(Command stLandManaAbilitiesIn) {
+        GameActionUtil.stLandManaAbilities = stLandManaAbilitiesIn;
     }
 
 } // end class GameActionUtil
