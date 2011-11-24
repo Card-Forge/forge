@@ -1,6 +1,6 @@
 Name:Hanabi Blast
 ManaCost:1 R R
-Types:Sorcery
+Types:Instant
 Text:no text
 A:SP$ DealDamage | Cost$ 1 R R | Tgt$TgtCP | NumDmg$ 2 | SubAbility$ DBBounce | SpellDescription$ CARDNAME deals 2 damage to target creature or player. Return CARDNAME to its owner's hand, then discard a card at random.
 SVar:DBBounce:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | SubAbility$ DBDiscard
