@@ -4,7 +4,6 @@ Types:Sorcery
 Text:no text
 A:SP$ Draw | Cost$ X U U | NumCards$ X | SpellDescription$ Draw X cards.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_spring.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/41.jpg
