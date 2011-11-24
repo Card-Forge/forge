@@ -239,6 +239,8 @@ public class AbilityFactoryToken extends AbilityFactory {
      */
     private boolean tokenCanPlayAI(final SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
+        final AbilityFactory af = sa.getAbilityFactory();
+        final HashMap<String, String> mapParams = af.getMapParams();
 
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
@@ -263,7 +265,14 @@ public class AbilityFactoryToken extends AbilityFactory {
 
         // Don't generate tokens without haste before main 2 if possible
         if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2)
-                && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !haste) {
+                && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !haste
+                && !mapParams.containsKey("ActivationPhases")) {
+            return false;
+        }
+        if ((AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) 
+                || AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
+                && !mapParams.containsKey("ActivationPhases")
+                && !AbilityFactory.isSorcerySpeed(sa)) {
             return false;
         }
         if ((AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN) || AllZone.getPhase().isPlayerTurn(
@@ -271,14 +280,6 @@ public class AbilityFactoryToken extends AbilityFactory {
                 && oneShot) {
             return false;
         }
-
-        // TODO: if i don't have enough blockers and my token can block one of
-        // the unblocked creatures
-        // create it after attackers are declared
-        // if
-        // (AllZone.getPhase().is(Constant.Phase.Combat_Declare_Attackers_InstantAbility,
-        // AllZone.getHumanPlayer()))
-        // return true;
 
         // prevent run-away activations - first time will always return true
         final Random r = MyRandom.getRandom();
@@ -313,13 +314,14 @@ public class AbilityFactoryToken extends AbilityFactory {
             }
         }
 
-        if (this.tokenAmount.equals("X")) {
+        if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
+            int x = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
             if (source.getSVar(this.tokenAmount).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtil.determineLeftoverMana(sa);
-                source.setSVar("PayX", Integer.toString(xPay));
+                x = ComputerUtil.determineLeftoverMana(sa);
+                source.setSVar("PayX", Integer.toString(x));
             }
-            if (AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa) <= 0) {
+            if (x <= 0) {
                 return false;
             }
         }
@@ -328,11 +330,14 @@ public class AbilityFactoryToken extends AbilityFactory {
             return chance;
         }
 
+        if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+            return ((r.nextFloat() < .95) && chance);
+        }
         if (sa.isAbility()) {
             return ((r.nextFloat() < .9) && chance);
         }
 
-        return ((r.nextFloat() < .6667) && chance);
+        return ((r.nextFloat() < .8) && chance);
     }
 
     /**
