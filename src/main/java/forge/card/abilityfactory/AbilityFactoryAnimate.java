@@ -26,7 +26,7 @@ import forge.card.trigger.TriggerHandler;
 
 /**
  * <p>
- * AbilityFactory_Animate class.
+ * AbilityFactoryAnimate class.
  * </p>
  * 
  * @author Forge
@@ -799,7 +799,7 @@ public final class AbilityFactoryAnimate {
     }
 
     // **************************************************************
-    // ************************ AnimateAll *************************
+    // ************************ AnimateAll **************************
     // **************************************************************
 
     /**
@@ -1204,4 +1204,4 @@ public final class AbilityFactoryAnimate {
         }
     } // animateAllResolve
 
-} // end class AbilityFactory_Animate
+} // end class AbilityFactoryAnimate
