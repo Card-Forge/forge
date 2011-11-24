@@ -608,7 +608,17 @@ public class AbilityFactoryAlterLife {
 
         // TODO handle proper calculation of X values based on Cost and what
         // would be paid
-        final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+
+        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            amount = ComputerUtil.determineLeftoverMana(sa);
+            source.setSVar("PayX", Integer.toString(amount));
+        }
+        
+        if (amount <= 0) {
+            return false;
+        }
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -655,12 +665,6 @@ public class AbilityFactoryAlterLife {
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
-        }
-
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
-            source.setSVar("PayX", Integer.toString(xPay));
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
