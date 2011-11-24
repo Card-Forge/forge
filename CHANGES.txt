@@ -330,6 +330,23 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- knownDetermineDefined in AF ChangeZone will now use AllZoneUtil.getCardState to grab cards (this fixes the Second Sunrise issue, but has to be watched closely).
+- Fixed the AttachedTo property for equipment.
+- Checkstyle.
+- Removed Knowledge Vault. This can not be done now in script.
+- Fixed a general bug that prevented the AI from using most X costs.
+- Fixed a bug in AF GainLife that prevented the AI from using X costs.
+- Fixed Lightning Surge
+- fixed text for Desperate Ravings
+- Little tweaks in the AI of AF Pump.
+- Removed RemAIDeck SVar from some cards with xCosts.
+- Checkstyle.
+- Fixed cards with SVar ManaNeededToAvoidNegativeEffect.
+- Added the Colossus 2 deck.
+- The AI will no longer use AF LoseLife abilities with X=0.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -513,6 +530,8 @@ World Queller
 Elemental Appeal
 Distant Memories
 Witherscale Wurm
+Shyft
+Dreams of the Dead
 
 
 end
