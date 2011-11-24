@@ -3,15 +3,16 @@
 Name=Wolverine 3
 Title=Wolverine
 Difficulty=hard
-Description=BG deck with Nightmare, Korlash, Heir to Blackblade and Kodama's Reach
+Description=BG Swamp deck with Nightmare, Korlash, Heir to Blackblade and Kodama's Reach
 Icon=Wolverine.jpg
 Deck Type=constructed
 [main]
 4 Bayou
-4 Overgrown Tomb
+3 Overgrown Tomb
 4 Verdant Catacombs
 4 Bloodstained Mire
 10 Swamp
+1 Urborg, Tomb of Yawgmoth
 4 Quag Sickness
 4 Tendrils of Corruption
 4 Korlash, Heir to Blackblade
