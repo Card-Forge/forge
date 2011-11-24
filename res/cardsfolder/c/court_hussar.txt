@@ -8,9 +8,9 @@ T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ W | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless W was spent to cast it.
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 3 | Defined$ You
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
-SVar:X:Count$xPaid
-SVar:ManaNeededToAvoidNegativeEffect:White
+SVar:ManaNeededToAvoidNegativeEffect:white
 SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/court_hussar.jpg
 Oracle:Vigilance\nWhen Court Hussar enters the battlefield, look at the top three cards of your library, then put one of them into your hand and the rest on the bottom of your library in any order.\nWhen Court Hussar enters the battlefield, sacrifice it unless {W} was spent to cast it.
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/43.jpg
