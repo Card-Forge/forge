@@ -2404,11 +2404,28 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean isCounterable(final Card c) {
-        if (!c.hasKeyword("CARDNAME can't be countered.")) {
-            return true;
-        } else {
+        if (c.hasKeyword("CARDNAME can't be countered.")) {
             return false;
         }
+        
+        return true;
+    }
+    
+    /**
+     * <p>
+     * isCounterableBy.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean isCounterableBy(final Card c, final SpellAbility sa) {
+        if (!isCounterable(c)) {
+            return false;
+        }
+        
+        return true;
     }
 
     // returns the number of equipments named "e" card c is equipped by

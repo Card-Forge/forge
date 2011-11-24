@@ -290,7 +290,7 @@ public class AbilityFactoryCounterMagic {
      *            a boolean.
      * @return a boolean.
      */
-    public final boolean counterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean counterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean toReturn = true;
         if (AllZone.getStack().size() < 1) {
             return false;
@@ -388,7 +388,7 @@ public class AbilityFactoryCounterMagic {
         for (final SpellAbility tgtSA : sas) {
             final Card tgtSACard = tgtSA.getSourceCard();
 
-            if (tgtSA.isSpell() && tgtSACard.keywordsContain("CARDNAME can't be countered.")) {
+            if (tgtSA.isSpell() && !CardFactoryUtil.isCounterable(tgtSACard)) {
                 continue;
             }
 
