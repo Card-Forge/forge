@@ -4,7 +4,6 @@ Types:Instant
 Text:no text
 A:SP$ Draw | Cost$ X 2 U | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ X | SpellDescription$ Target player draws X cards.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stroke_of_genius.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/100.jpg

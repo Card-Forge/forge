@@ -783,6 +783,9 @@ public class AbilityFactoryZoneAffecting {
             final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
                     .getCardsIn(Constant.Zone.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
+            if (cardsToDiscard <= 0) {
+                return false;
+            }
         }
 
         return randomReturn;

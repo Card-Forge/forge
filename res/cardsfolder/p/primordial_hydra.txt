@@ -9,6 +9,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDoubleCounters:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ Double
 SVar:X:Count$xPaid
 SVar:Double:Count$CardCounters.P1P1
+SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_hydra.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/189.jpg

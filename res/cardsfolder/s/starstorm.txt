@@ -5,7 +5,7 @@ Text:no text
 K:Cycling:3
 A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:Count$xPaid
-SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starstorm.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/238.jpg
