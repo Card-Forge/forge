@@ -2,9 +2,9 @@ Name:Dreams of the Dead
 ManaCost:3 U
 Types:Enchantment
 Text:no text
-A:AB$ ChangeZone | Cost$ 1 U | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target white or black creature in your graveyard | SubAbility$ DBPump | SpellDescription$ Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep ." If the creature would leave the battlefield, exile it instead of putting it anywhere else.
-SVar:DBPump:DB$Pump | KW$ Cumulative upkeep:1 & HIDDEN If CARDNAME would be put into a graveyard this turn, exile it instead. | Defined$ Targeted | Permanent$ True
-SVar:RemAIDeck:True
+A:AB$ ChangeZone | Cost$ 1 U | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target white or black creature in your graveyard | SubAbility$ DBPump | SpellDescription$ Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep 2." If the creature would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:DBPump:DB$Pump | KW$ Cumulative upkeep:2 & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | Defined$ Targeted | Permanent$ True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreams_of_the_dead.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/66.jpg
