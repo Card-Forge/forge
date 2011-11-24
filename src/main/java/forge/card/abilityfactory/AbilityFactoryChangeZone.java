@@ -2002,7 +2002,15 @@ public final class AbilityFactoryChangeZone {
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
         if (origin.equals(Zone.Hand)) {
-
+            final Target tgt = af.getAbTgt();
+            if (tgt != null) {
+                if (AllZone.getHumanPlayer().getCardsIn(Zone.Hand).isEmpty()
+                        || !AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                    return false;
+                }
+                tgt.resetTargets();
+                tgt.addTarget(AllZone.getHumanPlayer());
+            }
         } else if (origin.equals(Zone.Library)) {
 
         } else if (origin.equals(Zone.Battlefield)) {
@@ -2031,7 +2039,8 @@ public final class AbilityFactoryChangeZone {
         } else if (origin.equals(Zone.Graveyard)) {
             final Target tgt = af.getAbTgt();
             if (tgt != null) {
-                if (AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard).isEmpty()) {
+                if (AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard).isEmpty()
+                        || !AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                     return false;
                 }
                 tgt.resetTargets();
