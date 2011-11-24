@@ -359,7 +359,7 @@ public class GameAction {
             }
         }
 
-        if (c.hasKeyword("If CARDNAME would be put into a graveyard this turn, exile it instead.")) {
+        if (c.hasKeyword("If CARDNAME would be put into a graveyard, exile it instead.")) {
             return this.moveTo(exile, c);
         }
 
