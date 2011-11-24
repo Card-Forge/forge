@@ -1,9 +1,6 @@
 package forge.card;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 import forge.CardColor;
 import forge.SetInfo;
