@@ -2998,6 +2998,7 @@ res/cardsfolder/f/forced_retreat.txt svneol=native#text/plain
 res/cardsfolder/f/forced_worship.txt svneol=native#text/plain
 res/cardsfolder/f/forcemage_advocate.txt svneol=native#text/plain
 res/cardsfolder/f/foresee.txt svneol=native#text/plain
+res/cardsfolder/f/foreshadow.txt -text
 res/cardsfolder/f/foresight.txt svneol=native#text/plain
 res/cardsfolder/f/forest.txt svneol=native#text/plain
 res/cardsfolder/f/forest_bear.txt svneol=native#text/plain
