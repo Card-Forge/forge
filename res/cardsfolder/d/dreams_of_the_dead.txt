@@ -7,4 +7,5 @@ SVar:DBPump:DB$Pump | KW$ Cumulative upkeep:1 & HIDDEN If CARDNAME would be put 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreams_of_the_dead.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/66.jpg
 End

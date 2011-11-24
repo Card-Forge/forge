@@ -8,4 +8,5 @@ SVar:TrigColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | OrColors$ True | SubAb
 SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True | Permanent$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shyft.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/96.jpg
 End
