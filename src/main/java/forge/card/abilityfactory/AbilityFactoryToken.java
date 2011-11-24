@@ -316,7 +316,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
         if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
             int x = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
-            if (source.getSVar(this.tokenAmount).equals("Count$xPaid")) {
+            if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 x = ComputerUtil.determineLeftoverMana(sa);
                 source.setSVar("PayX", Integer.toString(x));

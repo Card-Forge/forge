@@ -4,7 +4,6 @@ Types:Sorcery
 Text:no text
 A:SP$ Token | Cost$ X X G | TokenImage$ G X X Ooze | TokenAmount$ X | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | SpellDescription$ Put X X/X green Ooze creature tokens onto the battlefield.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gelatinous_genesis.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/183.jpg

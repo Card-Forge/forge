@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Legendary Creature Human Wizard
 Text:no text
 PT:2/2
-T:Mode$ SpellCast | ValidCard$ Creature.YouCtrl | Player$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.
 T:Mode$ Always | IsPresent$ Card.Thrull+YouCtrl | PresentCompare$ GE7 | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you control seven or more Thrulls, sacrifice CARDNAME.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenOwner$ You | TokenAmount$ X | TokenName$ Thrull | TokenTypes$ Creature,Thrull | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:TriggeredCard$CardManaCost
