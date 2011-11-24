@@ -143,12 +143,6 @@ class CardFactoryAuras {
             spell.setDescription("");
             card.addSpellAbility(spell);
 
-            // Need to set the spell description for Lingering Mirage since it
-            // has cycling ability.
-            if (card.getName().equals("Lingering Mirage")) {
-                spell.setDescription("Enchanted land is an Island.");
-            }
-
             final Command onEnchant = new Command() {
 
                 private static final long serialVersionUID = 3528675112863241126L;
