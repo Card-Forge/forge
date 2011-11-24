@@ -75,6 +75,10 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
+        if (params.containsKey("TapAbility") && !(spellAbility.getPayCosts().getTap())) {
+            return false;
+        }
+
         return true;
     }
 
