@@ -4469,6 +4469,7 @@ res/cardsfolder/k/kithkin_shielddare.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_spellduster.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_zephyrnaut.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_blademaster.txt svneol=native#text/plain
+res/cardsfolder/k/kitsune_bonesetter.txt -text
 res/cardsfolder/k/kitsune_dawnblade.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_diviner.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_healer.txt -text
@@ -6663,6 +6664,7 @@ res/cardsfolder/r/remove_soul.txt svneol=native#text/plain
 res/cardsfolder/r/rend_flesh.txt svneol=native#text/plain
 res/cardsfolder/r/rend_spirit.txt svneol=native#text/plain
 res/cardsfolder/r/rendclaw_trow.txt svneol=native#text/plain
+res/cardsfolder/r/rending_vines.txt -text
 res/cardsfolder/r/renegade_troops.txt svneol=native#text/plain
 res/cardsfolder/r/renegade_warlord.txt -text
 res/cardsfolder/r/renewal.txt svneol=native#text/plain
@@ -7128,6 +7130,7 @@ res/cardsfolder/s/screeching_harpy.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_silcaw.txt svneol=native#text/plain
 res/cardsfolder/s/screeching_sliver.txt svneol=native#text/plain
 res/cardsfolder/s/scrivener.txt svneol=native#text/plain
+res/cardsfolder/s/scroll_of_origins.txt -text
 res/cardsfolder/s/scroll_rack.txt svneol=native#text/plain
 res/cardsfolder/s/scroll_thief.txt svneol=native#text/plain
 res/cardsfolder/s/scrubland.txt svneol=native#text/plain
@@ -8548,6 +8551,7 @@ res/cardsfolder/t/thoughtcast.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtcutter_agent.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtleech.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtpicker_witch.txt svneol=native#text/plain
+res/cardsfolder/t/thoughts_of_ruin.txt -text
 res/cardsfolder/t/thoughtseize.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtweft_gambit.txt svneol=native#text/plain
 res/cardsfolder/t/thousand_legged_kami.txt svneol=native#text/plain
