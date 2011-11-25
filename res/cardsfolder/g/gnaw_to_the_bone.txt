@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 K:Flashback 2 G
 A:SP$ GainLife | Cost$ 2 G | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature card in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$TypeInYourYard.Creature/Times.2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnaw_to_the_bone.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/183.jpg
