@@ -375,11 +375,27 @@ Fixes/Features:
 - Updated all-prices.txt.
 - clean up the isCounterable code a bit
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Checkstyle.
+- Fixed Rootgrapple.
+- Added the recent commit logs to changes.txt. Preparing for the bi-weekly build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+Doublestrike
+Friar Sol
+Hellfish
+Iran
+Jeff Wadsworth
+Marc
+Max mtg
+Rob Cashwalker
+Slapshot5
+Sloth
+Slowe
+Chris H
 
 
 Added many cards, including:
@@ -563,6 +579,10 @@ Dreams of the Dead
 Katabatic Winds
 Foreshadow
 Samurai of the Pale Curtain
+Kitsune Bonesetter
+Rending Vines
+Scroll of Origins
+Thoughts of Ruin
 
 
 end
