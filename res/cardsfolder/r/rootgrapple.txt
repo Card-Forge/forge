@@ -2,7 +2,7 @@ Name:Rootgrapple
 ManaCost:4 G
 Types:Tribal Instant Treefolk
 Text:no text
-A:SP$ Destroy | Cost$ 4 G | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SpellDescription$ Destroy target noncreature permanent. If you control a Treefolk, draw a card.
+A:SP$ Destroy | Cost$ 4 G | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SubAbility$ DBDraw | SpellDescription$ Destroy target noncreature permanent. If you control a Treefolk, draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Treefolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Treefolk,
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
