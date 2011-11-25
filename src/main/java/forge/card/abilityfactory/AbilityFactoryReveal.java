@@ -310,6 +310,7 @@ public final class AbilityFactoryReveal {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
         final Player player = sa.getActivatingPlayer();
+        Player choser = player;
         int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
         final Zone destZone1 = params.containsKey("DestinationZone") ? Zone.smartValueOf(params.get("DestinationZone"))
                 : Zone.Hand;
@@ -348,6 +349,14 @@ public final class AbilityFactoryReveal {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+        
+        if (params.containsKey("Choser")) {
+            final ArrayList<Player> chosers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Choser"), sa);
+            if (!chosers.isEmpty()) {
+                choser = chosers.get(0);
+                System.out.println("choser: " +choser);
+            }
         }
 
         for (final Player p : tgtPlayers) {
@@ -393,7 +402,7 @@ public final class AbilityFactoryReveal {
                         }
                         // AllZone.getGameAction().revealToCopmuter(top.toArray());
                         // - for when it exists
-                    } else if (player.isHuman()) {
+                    } else if (choser.isHuman()) {
                         // show the user the revealed cards
                         GuiUtils.getChoice("Looking at cards from library", top.toArray());
                     }
@@ -446,16 +455,16 @@ public final class AbilityFactoryReveal {
                             }
                         } else {
                             int j = 0;
-                            if (player.isHuman()) {
+                            if (choser.isHuman()) {
                                 while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
                                     // let user get choice
                                     Card chosen = null;
                                     String prompt = "Choose a card to put into the ";
                                     if (destZone1.equals(Zone.Library) && (libraryPosition == -1)) {
-                                        prompt = "Put the rest on the bottom of the ";
+                                        prompt = "Chose a card to put on the bottom of the ";
                                     }
                                     if (destZone1.equals(Zone.Library) && (libraryPosition == 0)) {
-                                        prompt = "Put the rest on top of the ";
+                                        prompt = "Chose a card to put on top of the ";
                                     }
                                     if (anyNumber || optional) {
                                         chosen = GuiUtils.getChoiceOptional(prompt + destZone1, valid.toArray());
@@ -529,7 +538,7 @@ public final class AbilityFactoryReveal {
 
                         // now, move the rest to destZone2
                         if (destZone2.equals(Zone.Library)) {
-                            if (player.isHuman()) {
+                            if (choser.isHuman()) {
                                 // put them in any order
                                 while (rest.size() > 0) {
                                     Card chosen;
