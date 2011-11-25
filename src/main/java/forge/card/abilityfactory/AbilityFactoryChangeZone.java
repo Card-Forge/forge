@@ -1825,8 +1825,8 @@ public final class AbilityFactoryChangeZone {
     private static CardList knownDetermineDefined(final SpellAbility sa, final String defined, final Zone origin) {
         final CardList ret = new CardList();
         final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa);
-        
-        for(Card c : list) {
+
+        for (Card c : list) {
             Card actualCard = AllZoneUtil.getCardState(c);
             if (actualCard != null) {
                 ret.add(actualCard);

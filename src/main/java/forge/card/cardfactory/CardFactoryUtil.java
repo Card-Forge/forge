@@ -2407,10 +2407,10 @@ public class CardFactoryUtil {
         if (c.hasKeyword("CARDNAME can't be countered.")) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * <p>
      * isCounterableBy.
@@ -2424,7 +2424,7 @@ public class CardFactoryUtil {
         if (!isCounterable(c)) {
             return false;
         }
-        
+
         return true;
     }
 

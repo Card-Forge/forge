@@ -152,7 +152,7 @@ public final class AbilityFactoryClash {
 
         return dbClash;
     }
-    
+
     private static boolean clashCanPlayAI(final SpellAbility sa) {
         final AbilityFactory af = sa.getAbilityFactory();
         final Target tgt = af.getAbTgt();

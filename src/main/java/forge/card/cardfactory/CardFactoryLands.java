@@ -113,7 +113,7 @@ class CardFactoryLands {
                 }
             });
         } // *************** END ************ END **************************
-        
+
         // *************** START *********** START **************************
         else if (cardName.equals("Novijen, Heart of Progress")) {
             card.clearSpellKeepManaAbility();

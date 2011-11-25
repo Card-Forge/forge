@@ -615,7 +615,7 @@ public class AbilityFactoryAlterLife {
             amount = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(amount));
         }
-        
+
         if (amount <= 0) {
             return false;
         }
