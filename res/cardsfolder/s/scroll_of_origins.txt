@@ -2,8 +2,7 @@ Name:Scroll of Origins
 ManaCost:2
 Types:Artifact
 Text:no text
-A:AB$ Draw | Cost$ 2 | NumCards$ 1 | CheckSVar$ X | SVarCompare$ GE7 | SpellDescription$ Draw a card if you have seven or more cards in hand.
-SVar:X:Count$InYourHand
+A:AB$ Draw | Cost$ 2 | NumCards$ 1 | ConditionCardsInHand$ 7 | SpellDescription$ Draw a card if you have seven or more cards in hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_origins.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/159.jpg
