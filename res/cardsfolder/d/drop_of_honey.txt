@@ -5,6 +5,7 @@ Text:At the beginning of your upkeep, destroy the creature with the least power.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When there are no creatures on the battlefield, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Creature
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drop_of_honey.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/31.jpg

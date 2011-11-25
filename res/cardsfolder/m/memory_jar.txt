@@ -5,7 +5,7 @@ Text:no text
 A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | ChangeType$ Card | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ YouDraw | SpellDescription$ Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.
 SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ OppDraw
 SVar:OppDraw:DB$ Draw | Defined$ Opponent | NumCards$ 7 | SubAbility$ DelayedReturn
-SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ YouDiscard | TriggerDescription$ Both players discard their hands.  Return exiled cards to their owners' hands.
+SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ YouDiscard | TriggerDescription$ Both players discard their hands. Return exiled cards to their owners' hands.
 SVar:YouDiscard: AB$ Discard | Cost$ 0 | Defined$ You | Mode$ Hand | SubAbility$ OppDiscard
 SVar:OppDiscard: DB$ Discard | Defined$ Opponent | Mode$ Hand | SubAbility$ ReturnAll
 SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup

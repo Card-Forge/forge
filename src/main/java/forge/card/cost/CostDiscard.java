@@ -51,12 +51,12 @@ public class CostDiscard extends CostPartWithList {
         } else if (this.getType().equals("Hand")) {
             sb.append("your hand");
         } else if (this.getType().equals("LastDrawn")) {
-            sb.append("last drawn card");
+            sb.append("the last card you drew this turn");
         } else {
             final StringBuilder desc = new StringBuilder();
 
             if (this.getType().equals("Card") || this.getType().equals("Random")) {
-                desc.append("Card");
+                desc.append("card");
             } else {
                 desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription()).append(" card");
             }
