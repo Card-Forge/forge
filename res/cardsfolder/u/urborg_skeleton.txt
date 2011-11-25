@@ -1,5 +1,5 @@
 Name:Urborg Skeleton
-ManaCost:1 B
+ManaCost:B
 Types:Creature Skeleton
 Text:no text
 PT:0/1
