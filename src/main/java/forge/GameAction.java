@@ -1181,7 +1181,6 @@ public class GameAction {
                     if (AllZone.getZoneOf(persistCard).is(Constant.Zone.Graveyard)) {
                         final PlayerZone ownerPlay = persistCard.getOwner().getZone(Constant.Zone.Battlefield);
                         final Card card = GameAction.this.moveTo(ownerPlay, persistCard);
-                        AllZone.getGameAction().checkStateEffects(true);
                         card.addCounter(Counters.M1M1, 1);
                     }
                 }

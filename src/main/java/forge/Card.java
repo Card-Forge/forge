@@ -1398,8 +1398,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return;
         }
-        if (this.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counterName.equals(Counters.M1M1)) {
-            return;
+        if (counterName.equals(Counters.M1M1)) {
+            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
+                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
+                    return;
+                }
+            }
+            
         }
         if (this.counters.containsKey(counterName)) {
             final Integer aux = this.counters.get(counterName) + n;
@@ -1464,8 +1469,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return;
         }
-        if (this.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counterName.equals(Counters.M1M1)) {
-            return;
+        if (counterName.equals(Counters.M1M1)) {
+            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
+                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
+                    return;
+                }
+            }
+            
         }
         final int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(this.getController());
         if (this.counters.containsKey(counterName)) {
@@ -1628,8 +1638,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return;
         }
-        if (this.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && counterName.equals(Counters.M1M1)) {
-            return;
+        if (counterName.equals(Counters.M1M1)) {
+            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
+                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
+                    return;
+                }
+            }
+            
         }
         // sometimes you just need to set the value without being affected by
         // DoublingSeason

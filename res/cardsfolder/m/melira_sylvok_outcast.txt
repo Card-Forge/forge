@@ -3,8 +3,8 @@ ManaCost:1 G
 Types:Legendary Creature Human Scout
 Text:no text
 PT:2/2
+K:Creatures you control can't have -1/-1 counters placed on them.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't get poison counters | Description$ You can't get poison counters.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't have -1/-1 counters placed on it. | Description$ Creatures you control can't have -1/-1 counters placed on them.
 S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | RemoveKeyword$ Infect | Description$ Creatures your opponents control lose infect.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melira_sylvok_outcast.jpg
