@@ -347,6 +347,34 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the daily build release.
+- Updated SVars of some cards with X costs.
+- Little AI tweak for X costs in AF Mill.
+- Updated SVars of some cards with X costs.
+- Fixed type of Hanabi Blast.
+- The AI will now try to wait with instant speed token generators to ambush block.
+- Fixed Endrek Sahr, Master Breeder. Should now only trigger when controller casts a creature spell.
+- Fixed Sift Through Sands.
+- More X cost tweaks in the AI of AF token.
+- Updated SVars of some more cards with X costs.
+- Fixed Mogg Conscripts.
+- Fixed the Animate Dead error.
+- Fixed text of Iona, Shield of Emeria.
+- update LQ pic URL for Counterspell
+- Updated a few quest decks.
+- Fixed Perish the Thought.
+- cleanup in GameActionUtil
+- Added some more targeting AI code to AF ChangeZoneAll (to support Identity Crisis).
+- Fixed canPlay in AF Clash always returning true (even when it's a sorcery during any phase).
+- Added a canPlayAI function to AF Clash (for Pulling Teeth).
+- clean up java warnings in CardCharacteristics
+- minor comment cleanup in AbilityFactoryAnimate
+- add a TapAbility param for the CantBeActivated static ability
+- Fixed Dreams of the Dead.
+- Renamed the keyword "If CARDNAME would be put into a graveyardthis turn, exile it instead." to "If CARDNAME would be put into a graveyard, exile it instead."
+- Cleanup in CardFactoryAuras.
+- Updated all-prices.txt.
+- clean up the isCounterable code a bit
+- Added the recent commit logs to changes.txt. Preparing for the daily build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -532,6 +560,9 @@ Distant Memories
 Witherscale Wurm
 Shyft
 Dreams of the Dead
+Katabatic Winds
+Foreshadow
+Samurai of the Pale Curtain
 
 
 end
