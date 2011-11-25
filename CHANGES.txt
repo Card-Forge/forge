@@ -1,17 +1,18 @@
-Forge Beta: 11-##-2011 ver 1.1.# rev #####
+Forge Beta: 11-25-2011 ver 1.1.8 rev 12235
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-#### cards in total.
+9745 cards in total.
 
 
 When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
-
 
 The JuzamJedi cube has been updated with a newer list of cards.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
+
+We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
 
 
 Fixes/Features:
@@ -400,189 +401,189 @@ Chris H
 
 Added many cards, including:
 
-Psychic Trance
-Exclusion Ritual
-Riptide Chronologist
-Xantid Swarm
-Riptide Shapeshifter
-Skirk Commando
-Coalhauler Swine
-Dryad's Caress
-Invader Parasite
-Hand to Hand
-Basandra, Battle Seraph
-Damping Matrix
-Faith's Fetters
+Abandon Hope
+Abeyance
+Abuna's Chant
+Aerial Caravan
+AEther Barrier
+Ashling's Prerogative
 Autochthon Wurm
+Backslide
+Barbed Foliage
+Basandra, Battle Seraph
+Bone Dancer
+Boros Fury-Shield
+Bottled Cloister
+Break Open
+Caravan Vigil
+Carrionette
+Cease-Fire
+Chaos Lord
+Chronozoa
+Cloud Cover
+Coalhauler Swine
+Cold Storage
 Conclave Equenaut
 Conclave Phalanx
 Conclave's Blessing
-Devouring Light
-Gather Courage
-Guardian of Vitu-Ghazi
-Hour of Reckoning
-Kavu Primarch
-Overwhelm
-Root-Kin Ally
-Scatter the Seeds
-Siege Wurm
-Sundering Vitae
-Overeager Apprentice
-Mindmoil
-Boros Fury-Shield
-Minion Reflector
-Bottled Cloister
-Flame Fusillade
-Endrek Sahr, Master Breeder
-Wave of Reckoning
-AEther Barrier
-Doom Cannon
-Drinker of Sorrow
-Dizzying Gaze
-Reconnaissance
-Sindbad
-Fa'adiyah Seer
-Aerial Caravan
-Elkin Bottle
-Promise of Bunrei
-Chronozoa
-Delver of Secrets
-Snapping Thragg
-Standardize
-Trickery Charm
-Deftblade Elite
-Mistform Sliver
-Shape Anew
-Mistform Wakecaster
-Voidmage Apprentice
-Dark Suspicions
-Dromar's Charm
-Sisay's Ingenuity
-Multani's Harmony
-Keeper of the Beasts
-Cloud Cover
 Crown of Convergence
-Infused Arrows
-Engineered Explosives
-Spiny Starfish
-Abandon Hope
-Abuna's Chant
-Patrician's Scorn
-Natural Emergence
-Planeswalker's Fury
-Rethink
-Unified Strike
+Damping Matrix
+Dark Suspicions
+Deftblade Elite
+Delver of Secrets
 Devouring Greed
-Iname, Death Aspect
-Zombie Assassin
-Rayne, Academy Chancellor
-Sinister Strength
-Iname, Life Aspect
-Garza's Assassin
-Springjack Pasture
-Fertile Ground
-Carrionette
-Scalding Tongs
-Thumbscrews
-Vhati il-Dal
-Watchdog
-Night Dealings
-Snapcaster Mage
-Recoup
-Past in Flames
+Devouring Light
+Distant Memories
+Dizzying Gaze
+Doom Cannon
 Dralnu, Lich Lord
-Goblin Cannon
-Naya Charm
-Ground Seal
-Barbed Foliage
-Floodgate
-Veilstone Amulet
-Rootwater Shaman
-Safeguard
-Starke of Rath
-Fugitive Druid
-Flailing Drake
-Myr Servitor
-Extinction
+Dreams of the Dead
+Drinker of Sorrow
+Dromar's Charm
+Dryad's Caress
+Due Respect
+Elemental Appeal
+Elkin Bottle
 Elsewhere Flask
 Endless Scream
+Endrek Sahr, Master Breeder
+Engineered Explosives
+Exclusion Ritual
+Extinction
+Fa'adiyah Seer
+Faith's Fetters
+Fertile Ground
+Festival of the Guildpact
+Flailing Drake
+Flame Fusillade
+Flash Conscription
+Floodgate
+Foreshadow
+Frenzied Goblin
+Fugitive Druid
+Fyndhorn Druid
+Garza's Assassin
+Gather Courage
+Giant Turtle
+Glint Hawk
+Goblin Cadets
+Goblin Cannon
+Goblin Rock Sled
+Ground Seal
+Guardian of Vitu-Ghazi
+Hand to Hand
 Heartwood Giant
+Hour of Reckoning
 Imps' Taunt
-Mogg Cannon
+Iname, Death Aspect
+Iname, Life Aspect
+Induce Paranoia
+Infused Arrows
+Inkfathom Witch
+Inquisitor's Snare
+Insubordination
+Invader Parasite
+Ixidor, Reality Sculptor
+Ixidron
+Jabari's Influence
 Jinxed Idol
 Jinxed Ring
-Ixidron
-Sakashima, the Impostor
-Caravan Vigil
-Inkfathom Witch
-Malfegor
-Inquisitor's Snare
-Lurebound Scarecrow
-Tidal Warrior
-Break Open
-Ixidor, Reality Sculptor
-Skirk Alarmist
-Master of the Veil
-Mercy Killing
-Backslide
-Lady Sun
-Lurker
-Vigor Mortis
-Goblin Cadets
-Witch Engine
+Katabatic Winds
+Kavu Primarch
+Keeper of the Beasts
 Keeper of the Flame
 Keeper of the Light
-Predatory Urge
-Sinstriker's Will
-Giant Turtle
-Goblin Rock Sled
-Tangle Kelp
-Soltari Visionary
-Insubordination
-Torpid Moloch
-Terraformer
-Fyndhorn Druid
-Ribbons of Night
-Chaos Lord
-Steel Hellkite
-Festival of the Guildpact
-Screeching Griffin
-The Fallen
-Cold Storage
-Wall of Nets
-Flash Conscription
-Frenzied Goblin
-Induce Paranoia
-Ogre Savant
-Shrieking Grotesque
-Steamcore Weird
-Due Respect
-Abeyance
-Cease-Fire
-Solfatara
-Turf Wound
-Thelonite Druid
-Ashling's Prerogative
-Uphill Battle
-Jabari's Influence
-Ward of Bones
-Psychic Transfer
-Glint Hawk
-Bone Dancer
-Scavenging Ooze
-World Queller
-Elemental Appeal
-Distant Memories
-Witherscale Wurm
-Shyft
-Dreams of the Dead
-Katabatic Winds
-Foreshadow
-Samurai of the Pale Curtain
 Kitsune Bonesetter
+Lady Sun
+Lurebound Scarecrow
+Lurker
+Malfegor
+Master of the Veil
+Mercy Killing
+Mindmoil
+Minion Reflector
+Mistform Sliver
+Mistform Wakecaster
+Mogg Cannon
+Multani's Harmony
+Myr Servitor
+Natural Emergence
+Naya Charm
+Night Dealings
+Ogre Savant
+Overeager Apprentice
+Overwhelm
+Past in Flames
+Patrician's Scorn
+Planeswalker's Fury
+Predatory Urge
+Promise of Bunrei
+Psychic Trance
+Psychic Transfer
+Rayne, Academy Chancellor
+Reconnaissance
+Recoup
 Rending Vines
+Rethink
+Ribbons of Night
+Riptide Chronologist
+Riptide Shapeshifter
+Root-Kin Ally
+Rootwater Shaman
+Safeguard
+Sakashima, the Impostor
+Samurai of the Pale Curtain
+Scalding Tongs
+Scatter the Seeds
+Scavenging Ooze
+Screeching Griffin
 Scroll of Origins
+Shape Anew
+Shrieking Grotesque
+Shyft
+Siege Wurm
+Sindbad
+Sinister Strength
+Sinstriker's Will
+Sisay's Ingenuity
+Skirk Alarmist
+Skirk Commando
+Snapcaster Mage
+Snapping Thragg
+Solfatara
+Soltari Visionary
+Spiny Starfish
+Springjack Pasture
+Standardize
+Starke of Rath
+Steamcore Weird
+Steel Hellkite
+Sundering Vitae
+Tangle Kelp
+Terraformer
+The Fallen
+Thelonite Druid
 Thoughts of Ruin
+Thumbscrews
+Tidal Warrior
+Torpid Moloch
+Trickery Charm
+Turf Wound
+Unified Strike
+Uphill Battle
+Veilstone Amulet
+Vhati il-Dal
+Vigor Mortis
+Voidmage Apprentice
+Wall of Nets
+Ward of Bones
+Watchdog
+Wave of Reckoning
+Witch Engine
+Witherscale Wurm
+World Queller
+Xantid Swarm
+Zombie Assassin
 
 
 end
