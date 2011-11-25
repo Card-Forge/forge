@@ -7,27 +7,28 @@ Description=WUG Elf deck with elf lords
 Icon=Picard.jpg
 Deck Type=constructed
 [main]
+2 Windswept Heath
+2 Misty Rainforest
 2 Wellwisher
 1 Mox Emerald
 4 Tropical Island
-3 Immaculate Magistrate
+2 Immaculate Magistrate
 1 Island
 1 Ancestral Recall
 1 Mox Pearl
-4 Tundra
+1 Tundra
 4 Savannah
-3 Imperious Perfect
+4 Imperious Perfect
 2 Essence Warden
 3 Gaea's Skyfolk
 1 Mox Sapphire
-2 Plains
-2 Sylvan Messenger
+1 Plains
+3 Sylvan Messenger
 1 Wolf-Skull Shaman
 3 Forest
 1 Winnower Patrol
 1 Timberwatch Elf
-1 Rune-Cervin Rider
-3 Llanowar Elves
+1 Llanowar Elves
 3 Safehold Elite
 1 Rhys the Redeemed
 4 Wilt-Leaf Cavaliers
@@ -35,5 +36,6 @@ Deck Type=constructed
 4 Wilt-Leaf Liege
 1 Elvish Vanguard
 1 Time Walk
-1 Coiling Oracle
+2 Coiling Oracle
+1 Edric, Spymaster of Trest
 [sideboard]

@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Picard 2
+Title=Picard
+Difficulty=medium
+Description=WUG Elf deck with elf lords
+Icon=Picard.jpg
+Deck Type=constructed
+[main]
+4 Seaside Citadel
+1 Treva's Ruins
+5 Forest
+1 Plains
+1 Island
+1 Elfhame Palace
+1 Graypelt Refuge
+1 Razorverge Thicket
+1 Sunpetal Grove
+1 Hinterland Harbor
+1 Tropical Island
+1 Savannah
+2 Windswept Heath
+2 Misty Rainforest
+1 Wellwisher
+1 Immaculate Magistrate
+1 Imperious Perfect
+1 Essence Warden
+3 Gaea's Skyfolk
+1 Sylvan Messenger
+1 Wolf-Skull Shaman
+1 Winnower Patrol
+1 Timberwatch Elf
+1 Rune-Cervin Rider
+1 Llanowar Elves
+3 Safehold Elite
+1 Rhys the Redeemed
+3 Wilt-Leaf Cavaliers
+1 Tolsimir Wolfblood
+3 Wilt-Leaf Liege
+1 Elvish Vanguard
+3 Coiling Oracle
+1 Edric, Spymaster of Trest
+1 Raven's Run Dragoon
+1 Llanowar Knight
+1 Elvish Promenade
+1 Farhaven Elf
+1 Gilt-Leaf Ambush
+1 Lys Alana Bowmaster
+1 Wirewood Herald
+1 Wirewood Hivemaster
+[sideboard]
