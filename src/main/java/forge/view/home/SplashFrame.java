@@ -1,4 +1,4 @@
-package forge.view.swing;
+package forge.view.home;
 
 import java.awt.Color;
 import java.awt.Dimension;

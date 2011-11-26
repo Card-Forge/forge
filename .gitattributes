@@ -10864,6 +10864,9 @@ src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/GuiTopLevel.java -text
 src/main/java/forge/view/editor/EditorTopLevel.java -text
 src/main/java/forge/view/home/HomeTopLevel.java -text
+src/main/java/forge/view/home/SplashFrame.java -text
+src/main/java/forge/view/home/SplashProgressComponent.java -text
+src/main/java/forge/view/home/SplashProgressModel.java -text
 src/main/java/forge/view/match/ViewAreaBattlefield.java -text
 src/main/java/forge/view/match/ViewAreaSidebar.java -text
 src/main/java/forge/view/match/ViewAreaUser.java -text
@@ -10879,9 +10882,6 @@ src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
 src/main/java/forge/view/swing/GuiHomeScreen.java svneol=native#text/plain
 src/main/java/forge/view/swing/Main.java svneol=native#text/plain
 src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
-src/main/java/forge/view/swing/SplashFrame.java -text
-src/main/java/forge/view/swing/SplashProgressComponent.java -text
-src/main/java/forge/view/swing/SplashProgressModel.java -text
 src/main/java/forge/view/swing/WinLoseFrame.java -text
 src/main/java/forge/view/swing/WinLoseModeHandler.java -text
 src/main/java/forge/view/swing/package-info.java svneol=native#text/plain

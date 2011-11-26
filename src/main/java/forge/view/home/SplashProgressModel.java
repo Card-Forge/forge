@@ -1,4 +1,4 @@
-package forge.view.swing;
+package forge.view.home;
 
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 

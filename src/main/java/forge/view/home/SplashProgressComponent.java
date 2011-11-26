@@ -1,4 +1,4 @@
-package forge.view.swing;
+package forge.view.home;
 
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;

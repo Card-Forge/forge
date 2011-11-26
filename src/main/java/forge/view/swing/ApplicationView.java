@@ -19,6 +19,7 @@ import forge.game.GameType;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.view.FView;
+import forge.view.home.SplashFrame;
 import forge.view.swing.OldGuiNewGame.CardSizesAction;
 import forge.view.swing.OldGuiNewGame.CardStackAction;
 import forge.view.swing.OldGuiNewGame.CardStackOffsetAction;
