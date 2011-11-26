@@ -47,6 +47,7 @@ public class ViewInput extends FRoundedPanel {
         tarMessage.setFocusable(false);
         tarMessage.setEditable(false);
         tarMessage.setLineWrap(true);
+        tarMessage.setWrapStyleWord(true);
         tarMessage.setForeground(skin.getClrText());
         tarMessage.setFont(skin.getFont1().deriveFont(Font.PLAIN, 12));
         add(tarMessage, "span 2 1, h 80%!, w 96%!, gapleft 2%, gaptop 1%");
