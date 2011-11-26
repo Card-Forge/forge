@@ -27,8 +27,8 @@ import forge.Player;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.match.ControlTabber;
 import forge.gui.MultiLineLabelUI;
-import forge.gui.skin.FPanel;
-import forge.gui.skin.FSkin;
+import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FVerticalTabPanel;
 
 /** 

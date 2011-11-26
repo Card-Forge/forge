@@ -21,8 +21,8 @@ import forge.control.match.ControlField;
 import forge.control.match.ControlHand;
 import forge.control.match.ControlInput;
 import forge.control.match.ControlTabber;
-import forge.gui.skin.FPanel;
 import forge.properties.ForgePreferences;
+import forge.view.toolbox.FPanel;
 
 /**
  * - Lays out battle, sidebar, user areas in locked % vals and repaints

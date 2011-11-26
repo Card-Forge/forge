@@ -19,7 +19,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
-import forge.gui.skin.FSkin;
+import forge.view.toolbox.FSkin;
 
 /**
  * Shows the splash frame as the application starts.

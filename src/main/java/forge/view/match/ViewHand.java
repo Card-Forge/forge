@@ -21,7 +21,7 @@ import forge.GuiDisplayUtil;
 import forge.ImageCache;
 import forge.control.match.ControlHand;
 
-import forge.gui.skin.FRoundedPanel;
+import forge.view.toolbox.FRoundedPanel;
 
 /** 
  * VIEW - Swing components for user hand.

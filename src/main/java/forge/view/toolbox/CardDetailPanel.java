@@ -19,7 +19,6 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameEntity;
 import forge.GuiDisplayUtil;
-import forge.gui.skin.FSkin;
 
 /** Shows details of card if moused over. */
 @SuppressWarnings("serial")

@@ -8,9 +8,9 @@ import javax.swing.JTextArea;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.match.ControlInput;
-import forge.gui.skin.FButton;
-import forge.gui.skin.FRoundedPanel;
-import forge.gui.skin.FSkin;
+import forge.view.toolbox.FButton;
+import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FSkin;
 
 /** 
  * Assembles Swing components of input area.

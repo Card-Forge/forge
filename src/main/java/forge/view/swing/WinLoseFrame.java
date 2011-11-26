@@ -20,12 +20,12 @@ import forge.AllZone;
 import forge.Constant;
 import forge.Phase;
 import forge.Player;
-import forge.gui.skin.FButton;
-import forge.gui.skin.FPanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.WinLoseFrame.WinLoseText;
 import forge.quest.data.QuestMatchState;
 import forge.view.match.ViewTopLevel;
+import forge.view.toolbox.FButton;
+import forge.view.toolbox.FPanel;
 
 /**
  * <p>
@@ -291,42 +291,42 @@ public class WinLoseFrame extends JFrame {
     }
 
     /**
-     * @return {@link forge.gui.skin.FButton} btnContinue
+     * @return {@link forge.view.toolbox.FButton} btnContinue
      */
     public FButton getBtnContinue() {
         return this.btnContinue;
     }
 
     /**
-     * @param btnContinue {@link forge.gui.skin.FButton}
+     * @param btnContinue {@link forge.view.toolbox.FButton}
      */
     public void setBtnContinue(final FButton btnContinue) {
         this.btnContinue = btnContinue;
     }
 
     /**
-     * @return {@link forge.gui.skin.FButton} btnRestart
+     * @return {@link forge.view.toolbox.FButton} btnRestart
      */
     public FButton getBtnRestart() {
         return this.btnRestart;
     }
 
     /**
-     * @param btnRestart {@link forge.gui.skin.FButton}
+     * @param btnRestart {@link forge.view.toolbox.FButton}
      */
     public void setBtnRestart(final FButton btnRestart) {
         this.btnRestart = btnRestart;
     }
 
     /**
-     * @return {@link forge.gui.skin.FButton} btnQuit
+     * @return {@link forge.view.toolbox.FButton} btnQuit
      */
     public FButton getBtnQuit() {
         return this.btnQuit;
     }
 
     /**
-     * @param btnQuit {@link forge.gui.skin.FButton}
+     * @param btnQuit {@link forge.view.toolbox.FButton}
      */
     public void setBtnQuit(final FButton btnQuit) {
         this.btnQuit = btnQuit;

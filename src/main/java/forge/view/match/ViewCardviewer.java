@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import forge.Card;
 import forge.ImageCache;
 import forge.control.match.ControlCardviewer;
-import forge.gui.skin.FPanel;
 import forge.view.toolbox.CardDetailPanel;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FVerticalTabPanel;
 
 /** 

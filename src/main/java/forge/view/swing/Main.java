@@ -4,9 +4,9 @@ import forge.AllZone;
 import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
-import forge.gui.skin.FSkin;
 import forge.model.FModel;
 import forge.view.FView;
+import forge.view.toolbox.FSkin;
 
 /**
  * Main class for Forge's swing application view.

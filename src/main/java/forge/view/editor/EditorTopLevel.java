@@ -1,4 +1,4 @@
-package forge.view.home;
+package forge.view.editor;
 
 import forge.view.toolbox.FPanel;
 
@@ -9,8 +9,8 @@ import forge.view.toolbox.FPanel;
  */
 
 @SuppressWarnings("serial")
-public class HomeTopLevel extends FPanel {
-	public HomeTopLevel() {
+public class EditorTopLevel extends FPanel {
+	public EditorTopLevel() {
 	    super();
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.gui.skin.FPanel;
+import forge.view.toolbox.FPanel;
 
 /**
  * Battlefield, assembles and contains instances of MatchPlayer.

@@ -29,9 +29,9 @@ import forge.Player;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.match.ControlField;
-import forge.gui.skin.FPanel;
-import forge.gui.skin.FRoundedPanel;
-import forge.gui.skin.FSkin;
+import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FSkin;
 
 /** 
  * Assembles Swing components of player field instance.

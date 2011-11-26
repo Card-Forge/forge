@@ -12,7 +12,7 @@ import forge.deck.DeckManager;
 import forge.game.GameSummary;
 import forge.gui.input.InputControl;
 import forge.view.toolbox.FOverlay;
-import forge.gui.skin.FSkin;
+import forge.view.toolbox.FSkin;
 import forge.model.FGameState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -613,7 +613,7 @@ public final class AllZone {
      * </p>
      * Gets current display skin.
      * 
-     * @return a {@link forge.gui.skin.FSkin} object.
+     * @return a {@link forge.view.toolbox.FSkin} object.
      * @since 1.0.15
      */
     public static FSkin getSkin() {
@@ -627,7 +627,7 @@ public final class AllZone {
      * Sets current display skin.
      * 
      * @param fs
-     *            a {@link forge.gui.skin.FSkin} object.
+     *            a {@link forge.view.toolbox.FSkin} object.
      * @since 1.0.15
      */
     public static void setSkin(final FSkin fs) {

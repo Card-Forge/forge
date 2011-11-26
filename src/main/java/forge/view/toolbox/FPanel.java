@@ -1,4 +1,4 @@
-package forge.gui.skin;
+package forge.view.toolbox;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

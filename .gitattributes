@@ -10790,10 +10790,6 @@ src/main/java/forge/gui/input/InputPayManaCostAbility.java svneol=native#text/pl
 src/main/java/forge/gui/input/InputPayManaCostUtil.java svneol=native#text/plain
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/skin/FButton.java -text
-src/main/java/forge/gui/skin/FPanel.java -text
-src/main/java/forge/gui/skin/FRoundedPanel.java -text
-src/main/java/forge/gui/skin/FSkin.java -text
 src/main/java/forge/gui/skin/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
@@ -10867,6 +10863,7 @@ src/main/java/forge/quest/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/GuiTopLevel.java -text
+src/main/java/forge/view/editor/EditorTopLevel.java -text
 src/main/java/forge/view/home/HomeTopLevel.java -text
 src/main/java/forge/view/match/ViewAreaBattlefield.java -text
 src/main/java/forge/view/match/ViewAreaSidebar.java -text
@@ -10891,7 +10888,11 @@ src/main/java/forge/view/swing/WinLoseModeHandler.java -text
 src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
 src/main/java/forge/view/toolbox/CardDetailPanel.java -text
 src/main/java/forge/view/toolbox/CardViewer.java -text
+src/main/java/forge/view/toolbox/FButton.java -text
 src/main/java/forge/view/toolbox/FOverlay.java -text
+src/main/java/forge/view/toolbox/FPanel.java -text
+src/main/java/forge/view/toolbox/FRoundedPanel.java -text
+src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain

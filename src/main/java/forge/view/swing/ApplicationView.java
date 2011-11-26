@@ -16,13 +16,13 @@ import forge.Constant;
 import forge.ImageCache;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
-import forge.gui.skin.FSkin;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.view.FView;
 import forge.view.swing.OldGuiNewGame.CardSizesAction;
 import forge.view.swing.OldGuiNewGame.CardStackAction;
 import forge.view.swing.OldGuiNewGame.CardStackOffsetAction;
+import forge.view.toolbox.FSkin;
 
 /**
  * The main view for Forge: a java swing application. All view class instances

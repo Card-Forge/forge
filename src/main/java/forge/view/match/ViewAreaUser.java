@@ -3,7 +3,7 @@ package forge.view.match;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.skin.FPanel;
+import forge.view.toolbox.FPanel;
 
 /** 
  * Parent panel for display of input, hand, and dock.

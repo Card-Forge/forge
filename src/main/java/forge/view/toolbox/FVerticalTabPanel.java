@@ -17,8 +17,6 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.gui.skin.FPanel;
-import forge.gui.skin.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

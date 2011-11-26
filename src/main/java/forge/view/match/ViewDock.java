@@ -31,12 +31,12 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.match.ControlDock;
-import forge.gui.skin.FButton;
-import forge.gui.skin.FPanel;
-import forge.gui.skin.FRoundedPanel;
-import forge.gui.skin.FSkin;
 import forge.properties.ForgePreferences;
+import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
+import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FSkin;
 
 /** 
  * Swing component for button dock.
