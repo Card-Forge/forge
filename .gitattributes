@@ -10790,7 +10790,6 @@ src/main/java/forge/gui/input/InputPayManaCostAbility.java svneol=native#text/pl
 src/main/java/forge/gui/input/InputPayManaCostUtil.java svneol=native#text/plain
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/skin/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/CardPrinted.java -text
