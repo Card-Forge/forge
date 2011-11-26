@@ -375,13 +375,17 @@ public class ViewField extends FRoundedPanel {
             final String constraints = "w 50%!, h 12.5%!, growy";
 
             // Hand, library, graveyard, exile, flashback, poison labels
-            lblGraveyard = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_grave.png"), "99");
-            lblGraveyard.setToolTipText("Cards in graveyard");
-            add(lblGraveyard, constraints);
+            lblHand = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_hand.png"), "99");
+            lblHand.setToolTipText("Cards in hand");
+            add(lblHand, constraints);
 
             lblLibrary = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_library.png"), "99");
             lblLibrary.setToolTipText("Cards in library");
             add(lblLibrary, constraints);
+
+            lblGraveyard = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_grave.png"), "99");
+            lblGraveyard.setToolTipText("Cards in graveyard");
+            add(lblGraveyard, constraints);
 
             lblExile = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_exile.png"), "99");
             lblExile.setToolTipText("Exiled cards");
@@ -390,10 +394,6 @@ public class ViewField extends FRoundedPanel {
             lblFlashback = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_flashback.png"), "99");
             lblFlashback.setToolTipText("Flashback cards");
             add(lblFlashback, constraints);
-
-            lblHand = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_hand.png"), "99");
-            lblHand.setToolTipText("Cards in hand");
-            add(lblHand, constraints);
 
             lblPoison = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_poison.png"), "99");
             lblPoison.setToolTipText("Poison counters");
