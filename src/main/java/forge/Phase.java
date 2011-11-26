@@ -516,6 +516,9 @@ public class Phase extends MyObservable implements java.io.Serializable {
             this.turn++;
         }
 
+        // Visual indicators
+        PhaseUtil.visuallyActivatePhase(this.getPhase());
+
         // When consecutively skipping phases (like in combat) this section
         // pushes through that block
         this.updateObservers();

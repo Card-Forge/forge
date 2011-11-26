@@ -6,6 +6,8 @@ import java.util.HashMap;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.gui.input.Input;
+import forge.view.match.ViewField.PhaseLabel;
+import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
@@ -423,6 +425,7 @@ public class PhaseUtil {
      */
     public static void handleUpkeep() {
         Player turn = AllZone.getPhase().getPlayerTurn();
+
         if (skipUpkeep()) {
             // Slowtrips all say "on the next turn's upkeep" if there is no
             // upkeep next turn, the trigger will never occur.
@@ -622,5 +625,47 @@ public class PhaseUtil {
         return phase.equals(Constant.Phase.UNTAP) || phase.equals(Constant.Phase.UPKEEP)
                 || phase.equals(Constant.Phase.DRAW) || phase.equals(Constant.Phase.MAIN1)
                 || phase.equals(Constant.Phase.COMBAT_BEGIN);
+    }
+
+    /**
+     * Retrieves and visually activates phase label for appropriate
+     * phase and player.
+     * 
+     * @param s &emsp; Phase state
+     */
+    public static void visuallyActivatePhase(String s) {
+        PhaseLabel lbl = null;
+        Player p = AllZone.getPhase().getPlayerTurn();
+        ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+
+        int i;  // Index of field; computer is 0, human is 1
+        if (p.isComputer()) {
+            i = 0;
+        }
+        else {
+            i = 1;
+        }
+
+        if (s.equals(Constant.Phase.UPKEEP)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblUpkeep();
+        }
+        else if (s.equals(Constant.Phase.DRAW)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblDraw();
+        }
+        else if (s.equals(Constant.Phase.COMBAT_BEGIN)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblBeginCombat();
+        }
+        else if (s.equals(Constant.Phase.COMBAT_END)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblEndCombat();
+        }
+        else if (s.equals(Constant.Phase.END_OF_TURN)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblEndTurn();
+        }
+        else {
+            return;
+        }
+
+        t.getController().resetAllPhaseButtons();
+        lbl.setActive(true);
     }
 }

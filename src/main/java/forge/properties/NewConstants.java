@@ -760,7 +760,7 @@ public final class NewConstants {
                 public static final String DECK_EDITOR = "%s/NewGame/deckeditor";
 
                 /** The NE w_ gui. */
-                public static final String NEW_GUI = "%s/NewGame/newgui";
+                public static final String OLD_GUI = "%s/NewGame/oldgui";
 
                 /** The A i_ land. */
                 public static final String AI_LAND = "%s/NewGame/ailand";

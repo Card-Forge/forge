@@ -28,6 +28,9 @@ public class FSkin {
     /** Primary texture used in skin. */
     private ImageIcon texture1 = null;
 
+    /** Primary background image used during match play. */
+    private ImageIcon matchBG = null;
+
     /** Left side of button, up state. */
     private ImageIcon btnLup = null;
 
@@ -57,6 +60,17 @@ public class FSkin {
 
     /** Splash screen image. */
     private ImageIcon splash = null;
+
+    /** Splash screen image. */
+    private ImageIcon icoEnabled    = null;
+    private ImageIcon icoDisabled   = null;
+    private ImageIcon icoTap        = null;
+    private ImageIcon icoUntap      = null;
+    private ImageIcon icoPlus       = null;
+    private ImageIcon icoShortcuts  = null;
+    private ImageIcon icoSettings   = null;
+    private ImageIcon icoConcede    = null;
+    private ImageIcon icoEndTurn    = null;
 
     /** Base color used in skin. */
     private Color clrTheme = Color.red;
@@ -95,7 +109,7 @@ public class FSkin {
     private String name = "default";
 
     // ===== Private fields
-    private final String paletteFile = "palette.png";
+    private final String spriteFile = "sprite.png";
     private final String font1file = "font1.ttf";
     private final String font2file = "font2.ttf";
     private final String texture1file = "texture1.jpg";
@@ -109,11 +123,11 @@ public class FSkin {
     private final String btnMdownfile = "btnMdown.png";
     private final String btnRdownfile = "btnRdown.png";
     private final String splashfile = "bg_splash.jpg";
+    private final String matchfile = "bg_match.jpg";
 
     private ImageIcon tempImg;
     private Font tempFont;
-    private String skin;
-    private final String notfound = "FSkin.java: \"" + this.skin + "\" skin can't find ";
+    private final String notfound = "FSkin.java: Can't find ";
 
     /**
      * FSkin constructor. No arguments, will generate default skin settings,
@@ -153,6 +167,7 @@ public class FSkin {
 
         // Images
         this.setTexture1(this.retrieveImage(dirName + this.texture1file));
+        this.setMatchBG(this.retrieveImage(dirName + this.matchfile));
         this.setBtnLup(this.retrieveImage(dirName + this.btnLupfile));
         this.setBtnMup(this.retrieveImage(dirName + this.btnMupfile));
         this.setBtnRup(this.retrieveImage(dirName + this.btnRupfile));
@@ -162,26 +177,35 @@ public class FSkin {
         this.setBtnLdown(this.retrieveImage(dirName + this.btnLdownfile));
         this.setBtnMdown(this.retrieveImage(dirName + this.btnMdownfile));
         this.setBtnRdown(this.retrieveImage(dirName + this.btnRdownfile));
-        this.setSplash(this.retrieveImage(dirName + this.splashfile));
+        this.setSplashBG(this.retrieveImage(dirName + this.splashfile));
 
         // Color palette
-        final File file = new File(dirName + this.paletteFile);
+        final File file = new File(dirName + this.spriteFile);
         BufferedImage image;
         try {
             image = ImageIO.read(file);
-            this.setClrTheme(this.getColorFromPixel(image.getRGB(60, 10)));
-            this.setClrBorders(this.getColorFromPixel(image.getRGB(60, 30)));
-            this.setClrZebra(this.getColorFromPixel(image.getRGB(60, 50)));
-            this.setClrHover(this.getColorFromPixel(image.getRGB(60, 70)));
-            this.setClrActive(this.getColorFromPixel(image.getRGB(60, 90)));
-            this.setClrInactive(this.getColorFromPixel(image.getRGB(60, 110)));
-            this.setClrText(this.getColorFromPixel(image.getRGB(60, 130)));
-            this.setClrProgress1(this.getColorFromPixel(image.getRGB(55, 145)));
-            this.setClrProgress2(this.getColorFromPixel(image.getRGB(65, 145)));
-            this.setClrProgress3(this.getColorFromPixel(image.getRGB(55, 155)));
-            this.setClrProgress4(this.getColorFromPixel(image.getRGB(65, 155)));
+            this.setClrTheme(this.getColorFromPixel(image.getRGB(70, 10)));
+            this.setClrBorders(this.getColorFromPixel(image.getRGB(70, 30)));
+            this.setClrZebra(this.getColorFromPixel(image.getRGB(70, 50)));
+            this.setClrHover(this.getColorFromPixel(image.getRGB(70, 70)));
+            this.setClrActive(this.getColorFromPixel(image.getRGB(70, 90)));
+            this.setClrInactive(this.getColorFromPixel(image.getRGB(70, 110)));
+            this.setClrText(this.getColorFromPixel(image.getRGB(70, 130)));
+            this.setClrProgress1(this.getColorFromPixel(image.getRGB(65, 145)));
+            this.setClrProgress2(this.getColorFromPixel(image.getRGB(75, 145)));
+            this.setClrProgress3(this.getColorFromPixel(image.getRGB(65, 155)));
+            this.setClrProgress4(this.getColorFromPixel(image.getRGB(75, 155)));
+            this.setIconEnabled(image.getSubimage(80, 0, 40, 40));
+            this.setIconDisabled(image.getSubimage(120, 0, 40, 40));
+            this.setIconTap(image.getSubimage(80, 40, 40, 40));
+            this.setIconUntap(image.getSubimage(120, 40, 40, 40));
+            this.setIconPlus(image.getSubimage(80, 80, 40, 40));
+            this.setIconShortcuts(image.getSubimage(160, 0, 80, 80));
+            this.setIconEndTurn(image.getSubimage(160, 80, 80, 80));
+            this.setIconSettings(image.getSubimage(80, 0, 80, 80));
+            this.setIconConcede(image.getSubimage(80, 80, 80, 80));
         } catch (final IOException e) {
-            System.err.println(this.notfound + this.paletteFile);
+            System.err.println(this.notfound + this.spriteFile);
         }
 
     }
@@ -273,7 +297,7 @@ public class FSkin {
      * Splash screen image.
      * @return {@link javax.swing.ImageIcon} splash
      */
-    public ImageIcon getSplash() {
+    public ImageIcon getSplashBG() {
         return splash;
     }
 
@@ -281,7 +305,7 @@ public class FSkin {
      * Splash screen image.
      * @param splash0 &emsp; an image icon
      */
-    public void setSplash(ImageIcon splash0) {
+    public void setSplashBG(ImageIcon splash0) {
         this.splash = splash0;
     }
 
@@ -331,6 +355,22 @@ public class FSkin {
      */
     public void setTexture1(ImageIcon texture10) {
         this.texture1 = texture10;
+    }
+
+    /**
+     * Primary background image used during match play.
+     * @return ImageIcon
+     */
+    public ImageIcon getMatchBG() {
+        return matchBG;
+    }
+
+    /**
+     * Primary background image used during match play.
+     * @param img0 &emsp; an image icon
+     */
+    public void setMatchBG(ImageIcon img0) {
+        this.matchBG = img0;
     }
 
     /**
@@ -625,5 +665,95 @@ public class FSkin {
      */
     public String getName() {
         return name;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconEnabled(BufferedImage bi0) {
+        this.icoEnabled = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconEnabled() {
+        return icoEnabled;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconDisabled(BufferedImage bi0) {
+        this.icoDisabled = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconDisabled() {
+        return icoDisabled;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconTap(BufferedImage bi0) {
+        this.icoTap = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconTap() {
+        return icoTap;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconUntap(BufferedImage bi0) {
+        this.icoUntap = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconUntap() {
+        return icoUntap;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconPlus(BufferedImage bi0) {
+        this.icoPlus = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconPlus() {
+        return icoPlus;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconShortcuts(BufferedImage bi0) {
+        this.icoShortcuts = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconShortcuts() {
+        return icoShortcuts;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconSettings(BufferedImage bi0) {
+        this.icoSettings = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconSettings() {
+        return icoSettings;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconConcede(BufferedImage bi0) {
+        this.icoConcede = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconConcede() {
+        return icoConcede;
+    }
+
+    /** @param bi0 &emsp; BufferedImage */
+    public void setIconEndTurn(BufferedImage bi0) {
+        this.icoEndTurn = new ImageIcon(bi0);
+    }
+
+    /** @return ImageIcon */
+    public ImageIcon getIconEndTurn() {
+        return icoEndTurn;
     }
 }

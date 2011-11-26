@@ -31,7 +31,14 @@ public class FButton extends JButton {
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
 
     /**
-     * Instantiates a new f button.
+     * Instantiates a new FButton.
+     */
+    public FButton() {
+        this("");
+    }
+
+    /**
+     * Instantiates a new FButton.
      * 
      * @param msg
      *            the msg

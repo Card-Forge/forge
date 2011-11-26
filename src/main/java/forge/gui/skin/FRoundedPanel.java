@@ -22,6 +22,7 @@ import forge.AllZone;
  */
 @SuppressWarnings("serial")
 public class FRoundedPanel extends JPanel {
+    private boolean[] borders = { true, true, true, true };
     private boolean[] corners = { true, true, true, true }; // NW, SW, SE, NE
     private Color shadowColor = new Color(150, 150, 150, 150);
     private Color borderColor = AllZone.getSkin().getClrBorders();
@@ -146,39 +147,56 @@ public class FRoundedPanel extends JPanel {
 
         // Mid, left, right rectangles: border
         g2d.setColor(this.borderColor);
-        g2d.drawLine(r, 0, w - r - so, 0);
-        g2d.drawLine(r, h - so - 1, w - r - so, h - so - 1);
-        g2d.drawLine(0, r, 0, h - r - so);
-        g2d.drawLine(w - so - 1, r, w - so - 1, h - r - so);
+
+        if (this.borders[0]) { g2d.drawLine(r, 0, w - r - so, 0); }
+        if (this.borders[1]) { g2d.drawLine(0, r, 0, h - r - so); }
+        if (this.borders[2]) { g2d.drawLine(r, h - so - 1, w - r - so, h - so - 1); }
+        if (this.borders[3]) { g2d.drawLine(w - so - 1, r, w - so - 1, h - r - so); }
 
         // Corners: border
         // NW
         if (this.corners[0]) {
             g2d.drawArc(0, 0, 2 * r, 2 * r, 90, 90);
         } else {
-            g2d.drawLine(0, 0, r, 0);
-            g2d.drawLine(0, 0, 0, r);
+            if (this.borders[0]) {
+                g2d.drawLine(0, 0, r, 0);
+            }
+            if (this.borders[1]) {
+                g2d.drawLine(0, 0, 0, r);
+            }
         }
         // SW
         if (this.corners[1]) {
             g2d.drawArc(0, h - (2 * r) - so, 2 * r, (2 * r) - 1, 180, 90);
         } else {
-            g2d.drawLine(0, h - so - 1, 0, h - r - so - 1);
-            g2d.drawLine(0, h - so - 1, r, h - so - 1);
+            if (this.borders[1]) {
+                g2d.drawLine(0, h - so - 1, 0, h - r - so - 1);
+            }
+            if (this.borders[2]) {
+                g2d.drawLine(0, h - so - 1, r, h - so - 1);
+            }
         }
         // SE
         if (this.corners[2]) {
             g2d.drawArc(w - (2 * r) - so, h - (2 * r) - so, (2 * r) - 1, (2 * r) - 1, 270, 90);
         } else {
-            g2d.drawLine(w - so - 1, h - so - 1, w - so - 1, h - r - so);
-            g2d.drawLine(w - so - 1, h - so - 1, w - r - so, h - so - 1);
+            if (this.borders[2]) {
+                g2d.drawLine(w - so - 1, h - so - 1, w - r - so, h - so - 1);
+            }
+            if (this.borders[3]) {
+                g2d.drawLine(w - so - 1, h - so - 1, w - so - 1, h - r - so);
+            }
         }
         // NE
         if (this.corners[3]) {
             g2d.drawArc(w - (2 * r) - so, 0, (2 * r) - 1, (2 * r) - 1, 0, 90);
         } else {
-            g2d.drawLine(w - so - 1, 0, w - so - r, 0);
-            g2d.drawLine(w - so - 1, 0, w - so - 1, r);
+            if (this.borders[0]) {
+                g2d.drawLine(w - so - 1, 0, w - so - r, 0);
+            }
+            if (this.borders[3]) {
+                g2d.drawLine(w - so - 1, 0, w - so - 1, r);
+            }
         }
     }
 
@@ -230,15 +248,14 @@ public class FRoundedPanel extends JPanel {
      * </p>
      * Sets radius of each corner on rounded panel.
      * 
-     * @param r
-     *            the new corner radius
+     * @param r0 &emsp; int
      */
-    public void setCornerRadius(int r) {
-        if (r < 0) {
-            r = 0;
+    public void setCornerRadius(int r0) {
+        if (r0 < 0) {
+            r0 = 0;
         }
 
-        this.cornerRadius = r;
+        this.cornerRadius = r0;
     }
 
     /**
@@ -248,8 +265,7 @@ public class FRoundedPanel extends JPanel {
      * Sets if corners should be rounded or not in the following order: NW, SW,
      * SE, NE
      * 
-     * @param vals
-     *            the new corners
+     * @param vals &emsp; boolean[4]
      */
     public void setCorners(final boolean[] vals) {
         if (vals.length != 4) {
@@ -257,6 +273,23 @@ public class FRoundedPanel extends JPanel {
         }
 
         this.corners = vals;
+    }
+
+    /**
+     * <p>
+     * setBorders.
+     * </p>
+     * Sets if borders should be displayed or not following order: N, W, S, E.
+     * Only works for square corners, rounded corners will be shown with borders.
+     * 
+     * @param vals &emsp; boolean[4]
+     */
+    public void setBorders(final boolean[] vals) {
+        if (vals.length != 4) {
+            throw new IllegalArgumentException("FRoundedPanel > setBorders requires an array of booleans of length 4.");
+        }
+
+        this.borders = vals;
     }
 
     /**

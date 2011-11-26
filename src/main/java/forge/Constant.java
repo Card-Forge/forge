@@ -40,10 +40,17 @@ public final class Constant {
         public static final boolean[] MILL = new boolean[1];
 
         /** The Constant DevMode. */
-        public static final boolean[] DEV_MODE = new boolean[1]; // one for
-                                                                // normal mode
-                                                                // one for quest
-                                                                // mode
+        // one for normal mode, one for quest mode
+        public static final boolean[] DEV_MODE = new boolean[1];
+
+        /** The Constant HANDVIEW. */
+        public static final boolean[] HANDVIEW = new boolean[1];
+
+        /** The Constant LIBRARYVIEW. */
+        public static final boolean[] LIBRARYVIEW = new boolean[1];
+
+        /** The Constant OLDGUI. */
+        public static final boolean[] OLDGUI = new boolean[1];
 
         /** The Constant NetConn. */
         public static final boolean[] NET_CONN = new boolean[1];

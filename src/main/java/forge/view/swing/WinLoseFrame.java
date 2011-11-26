@@ -17,6 +17,7 @@ import javax.swing.border.AbstractBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Constant;
 import forge.Phase;
 import forge.Player;
 import forge.gui.skin.FButton;
@@ -24,6 +25,7 @@ import forge.gui.skin.FPanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.WinLoseFrame.WinLoseText;
 import forge.quest.data.QuestMatchState;
+import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
@@ -88,7 +90,7 @@ public class WinLoseFrame extends JFrame {
 
         // Place all content in FPanel
         final FPanel contentPanel = new FPanel(new MigLayout("wrap, fill, insets 20 0 10 10"));
-        contentPanel.setBGImg(AllZone.getSkin().getTexture1());
+        contentPanel.setBGTexture(AllZone.getSkin().getTexture1());
         contentPanel.setBorder(new WinLoseBorder());
         this.getContentPane().add(contentPanel);
 
@@ -271,8 +273,17 @@ public class WinLoseFrame extends JFrame {
      * @return {@link javax.swing.JFrame} display frame
      */
     final JFrame closeWinLoseFrame() {
+        JFrame frame;
+
         // Issue 147 - keep battlefield up following win/loss
-        final JFrame frame = (JFrame) AllZone.getDisplay();
+        if (Constant.Runtime.OLDGUI[0]) {
+            frame = (JFrame) AllZone.getDisplay();
+        }
+        else {
+            ViewTopLevel temp = (ViewTopLevel) AllZone.getDisplay();
+            frame = (JFrame) temp.getParent().getParent().getParent().getParent();
+        }
+
         frame.dispose();
         frame.setEnabled(true);
         this.dispose();

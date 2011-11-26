@@ -97,7 +97,7 @@ public class ApplicationView implements FView {
             final ForgePreferences preferences = model.getPreferences();
 
             OldGuiNewGame.getUseLAFFonts().setSelected(preferences.isLafFonts());
-            // newGuiCheckBox.setSelected(preferences.newGui);
+            OldGuiNewGame.getOldGuiCheckBox().setSelected(preferences.isOldGui());
             OldGuiNewGame.getSmoothLandCheckBox().setSelected(preferences.isStackAiLand());
             OldGuiNewGame.getDevModeCheckBox().setSelected(preferences.isDeveloperMode());
             OldGuiNewGame.getCardOverlay().setSelected(preferences.isCardOverlay());

@@ -42,6 +42,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.quest.gui.QuestWinLoseHandler;
 import forge.quest.gui.main.QuestEvent;
+import forge.view.match.ViewTopLevel;
 import forge.view.swing.WinLoseFrame;
 
 /**
@@ -776,14 +777,22 @@ public class GameAction {
         final boolean refreeze = AllZone.getStack().isFrozen();
         AllZone.getStack().setFrozen(true);
 
-        final JFrame frame = (JFrame) AllZone.getDisplay();
-        if (!frame.isDisplayable()) {
-            return;
+        if (Constant.Runtime.OLDGUI[0]) {
+            final JFrame frame = (JFrame) AllZone.getDisplay();
+            if (!frame.isDisplayable()) {
+                return;
+            }
+        }
+        else {
+            final ViewTopLevel frame = (ViewTopLevel) AllZone.getDisplay();
+            if (!frame.isDisplayable()) {
+                return;
+            }
         }
 
         if (this.canShowWinLose && this.checkEndGameSate()) {
             AllZone.getDisplay().savePrefs();
-            frame.setEnabled(false);
+            //frame.setEnabled(false);
             // frame.dispose();
 
             // Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(),

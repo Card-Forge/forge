@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ForgePreferences extends Preferences {
 
-    /** The new gui. */
-    private final boolean newGui;
+    /** Old gui checkbox toggle. */
+    private boolean oldGui;
 
     /** The stack ai land. */
     private boolean stackAiLand;
@@ -27,7 +27,13 @@ public class ForgePreferences extends Preferences {
     /** The milling loss condition. */
     private boolean millingLossCondition;
 
-    /** The developer mode. */
+    /** Hand view toggle. */
+    private boolean handView;
+
+    /** Library view toggle. */
+    private boolean libraryView;
+
+    /** Developer mode. */
     private boolean developerMode;
 
     /** The upload draft ai. */
@@ -106,6 +112,17 @@ public class ForgePreferences extends Preferences {
     /** The b human end combat. */
     private boolean bHumanEndCombat;
 
+    // Keyboard shortcuts
+    private String showStackShortcut;
+    private String showCombatShortcut;
+    private String showConsoleShortcut;
+    private String showPlayersShortcut;
+    private String showDevShortcut;
+    private String concedeShortcut;
+    private String showPictureShortcut;
+    private String showDetailShortcut;
+
+    //
     private final List<SavePreferencesListener> saveListeners = new ArrayList<SavePreferencesListener>();
     private final String fileName;
 
@@ -135,9 +152,11 @@ public class ForgePreferences extends Preferences {
             throw new Exception("Error reading \"" + fileName + "\".", ex);
         }
 
-        this.newGui = this.getBoolean("gui.new", true);
+        this.oldGui = this.getBoolean("gui.old", true);
         this.setStackAiLand(this.getBoolean("AI.stack.land", false));
         this.setMillingLossCondition(this.getBoolean("loss.condition.milling", true));
+        this.setHandView(this.getBoolean("developer.handview", true));
+        this.setLibraryView(this.getBoolean("developer.libraryview", true));
         this.setDeveloperMode(this.getBoolean("developer.mode", false));
 
         this.setUploadDraftAI(this.getBoolean("upload.Draft.AI", true));
@@ -172,6 +191,16 @@ public class ForgePreferences extends Preferences {
         this.setbHumanEOT(this.getBoolean("phase.human.eot", true));
         this.setbHumanBeginCombat(this.getBoolean("phase.human.beginCombat", true));
         this.setbHumanEndCombat(this.getBoolean("phase.human.endCombat", true));
+
+        // Keyboard shortcuts
+        this.setShowStackShortcut(this.get("shortcut.showstack", "83"));
+        this.setShowCombatShortcut(this.get("shortcut.showcombat", "67"));
+        this.setShowConsoleShortcut(this.get("shortcut.showconsole", "76"));
+        this.setShowPlayersShortcut(this.get("shortcut.showplayers", "80"));
+        this.setShowDevShortcut(this.get("shortcut.showdev", "68"));
+        this.setConcedeShortcut(this.get("shortcut.concede", "27"));
+        this.setShowPictureShortcut(this.get("shortcut.showpicture", "17 80"));
+        this.setShowDetailShortcut(this.get("shortcut.showdetail", "17 68"));
     }
 
     /**
@@ -184,10 +213,12 @@ public class ForgePreferences extends Preferences {
      */
     public final void save() throws Exception {
 
-        this.set("gui.new", this.newGui);
+        this.set("gui.old", this.oldGui);
 
         this.set("AI.stack.land", this.isStackAiLand());
         this.set("loss.condition.milling", this.isMillingLossCondition());
+        this.set("developer.handview", this.getHandView());
+        this.set("developer.libraryview", this.getLibraryView());
         this.set("developer.mode", this.isDeveloperMode());
         this.set("upload.Draft.AI", this.isUploadDraftAI());
 
@@ -224,6 +255,16 @@ public class ForgePreferences extends Preferences {
         this.set("phase.human.beginCombat", this.isbHumanBeginCombat());
         this.set("phase.human.endCombat", this.isbHumanEndCombat());
 
+        // Keyboard shortcuts
+        this.set("shortcut.showstack", this.getShowStackShortcut());
+        this.set("shortcut.showcombat", this.getShowCombatShortcut());
+        this.set("shortcut.showconsole", this.getShowConsoleShortcut());
+        this.set("shortcut.showplayers", this.getShowPlayersShortcut());
+        this.set("shortcut.showdev", this.getShowDevShortcut());
+        this.set("shortcut.concede", this.getConcedeShortcut());
+        this.set("shortcut.showpicture", this.getShowPictureShortcut());
+        this.set("shortcut.showdetail", this.getShowDetailShortcut());
+
         try {
             final FileOutputStream stream = new FileOutputStream(this.fileName);
             this.store(stream, "Forge");
@@ -248,7 +289,7 @@ public class ForgePreferences extends Preferences {
     /**
      * Checks if is stack ai land.
      *
-     * @return the stackAiLand
+     * @return boolean
      */
     public boolean isStackAiLand() {
         return this.stackAiLand;
@@ -257,29 +298,78 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the stack ai land.
      *
-     * @param stackAiLand the stackAiLand to set
+     * @param b0 &emsp; boolean
      */
-    public void setStackAiLand(final boolean stackAiLand) {
-        this.stackAiLand = stackAiLand; // TODO: Add 0 to parameter's name.
+    public void setStackAiLand(final boolean b0) {
+        this.stackAiLand = b0;
     }
 
     /**
-     * Checks if is milling loss condition.
+     * Checks if old gui is to be used.
      *
-     * @return the millingLossCondition
+     * @return boolean
+     */
+    public boolean isOldGui() {
+        return this.oldGui;
+    }
+
+    /**
+     * Sets if old gui is to be used.
+     *
+     * @param b0 &emsp; boolean
+     */
+    public void setOldGui(final boolean b0) {
+        this.oldGui = b0;
+    }
+
+    /**
+     * Checks if loss by milling is enabled.
+     *
+     * @return boolean
      */
     public boolean isMillingLossCondition() {
         return this.millingLossCondition;
     }
 
     /**
-     * Sets the milling loss condition.
+     * Sets if loss by milling is enabled.
      *
-     * @param millingLossCondition the millingLossCondition to set
+     * @param millingLossCondition0 the millingLossCondition to set
      */
-    public void setMillingLossCondition(final boolean millingLossCondition) {
-        this.millingLossCondition = millingLossCondition; // TODO: Add 0 to
-                                                          // parameter's name.
+    public void setMillingLossCondition(final boolean millingLossCondition0) {
+        this.millingLossCondition = millingLossCondition0;
+    }
+
+    /**
+     * Determines if "view any hand" option in dev mode is enabled or not.
+     * @return boolean
+     */
+    public boolean getHandView() {
+        return this.handView;
+    }
+
+    /**
+     * Determines if "view any hand" option in dev mode is enabled or not.
+     * @param b0 &emsp; boolean
+     */
+    public void setHandView(final boolean b0) {
+        this.handView = b0;
+    }
+
+    /**
+     * Determines if "view any library" option in dev mode is enabled or not.
+     * @return boolean
+     */
+    public boolean getLibraryView() {
+        return this.libraryView;
+    }
+
+    /**
+     * Determines if "view any library" option in dev mode is enabled or not.
+     * @param b0 &emsp; boolean
+     */
+    public void setLibraryView(final boolean b0) {
+        this.libraryView = b0;
     }
 
     /**
@@ -790,5 +880,86 @@ public class ForgePreferences extends Preferences {
         medium,
         /** The large. */
         large
+    }
+
+    // Keyboard shortcuts
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getShowStackShortcut() {
+        return this.showStackShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setShowStackShortcut(String keycodes) {
+        this.showStackShortcut = keycodes;
+    }
+
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getShowCombatShortcut() {
+        return this.showCombatShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setShowCombatShortcut(String keycodes) {
+        this.showCombatShortcut = keycodes;
+    }
+
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getShowConsoleShortcut() {
+        return this.showConsoleShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setShowConsoleShortcut(String keycodes) {
+        this.showConsoleShortcut = keycodes;
+    }
+
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getShowPlayersShortcut() {
+        return this.showPlayersShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setShowPlayersShortcut(String keycodes) {
+        this.showPlayersShortcut = keycodes;
+    }
+
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getShowDevShortcut() {
+        return this.showDevShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setShowDevShortcut(String keycodes) {
+        this.showDevShortcut = keycodes;
+    }
+
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getConcedeShortcut() {
+        return this.concedeShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setConcedeShortcut(String keycodes) {
+        this.concedeShortcut = keycodes;
+    }
+
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getShowPictureShortcut() {
+        return this.showPictureShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setShowPictureShortcut(String keycodes) {
+        this.showPictureShortcut = keycodes;
+    }
+
+    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    public String getShowDetailShortcut() {
+        return this.showDetailShortcut;
+    }
+
+    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
+    public void setShowDetailShortcut(String keycodes) {
+        this.showDetailShortcut = keycodes;
     }
 }

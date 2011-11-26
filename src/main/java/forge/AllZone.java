@@ -11,6 +11,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
 import forge.game.GameSummary;
 import forge.gui.input.InputControl;
+import forge.view.toolbox.FOverlay;
 import forge.gui.skin.FSkin;
 import forge.model.FGameState;
 import forge.properties.ForgeProps;
@@ -77,6 +78,9 @@ public final class AllZone {
 
     /** Global <code>display</code>. */
     private static Display display;
+
+    /** Global <code>overlay</code>. */
+    private static FOverlay overlay;
 
     /** Constant <code>DECK_MGR</code>. */
     private static DeckManager deckManager;
@@ -628,5 +632,19 @@ public final class AllZone {
      */
     public static void setSkin(final FSkin fs) {
         skin = fs;
+    }
+
+    /**
+     * @return overlay
+     */
+    public static FOverlay getOverlay() {
+        return overlay;
+    }
+
+    /**
+     * @param overlay0 &emsp; Overlay panel
+     */
+    public static void setOverlay(FOverlay overlay0) {
+        overlay = overlay0;
     }
 } // AllZone

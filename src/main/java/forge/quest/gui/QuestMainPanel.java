@@ -31,6 +31,7 @@ import forge.Command;
 import forge.Constant;
 import forge.GuiDisplay;
 import forge.ImageCache;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
@@ -755,13 +756,14 @@ public class QuestMainPanel extends QuestAbstractPanel {
         // Dev Mode occurs before Display
         Constant.Runtime.DEV_MODE[0] = this.devModeCheckBox.isSelected();
 
-        // DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards
-        // are added
-        // if (newGUICheckbox.isSelected()) {
-        AllZone.setDisplay(new GuiDisplay());
-        // } else {
-        // AllZone.setDisplay(new GuiDisplay3());
-        // }
+        if (Constant.Runtime.OLDGUI[0]) {
+            AllZone.setDisplay(new GuiDisplay());
+       }
+       else {
+           ControlAllUI ui = new ControlAllUI();
+           AllZone.setDisplay(ui.getMatchView());
+           ui.getMatchController().initMatch();
+       }
 
         Constant.Runtime.SMOOTH[0] = this.smoothLandCheckBox.isSelected();
 

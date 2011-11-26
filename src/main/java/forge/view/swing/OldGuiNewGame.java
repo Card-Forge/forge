@@ -59,6 +59,7 @@ import forge.ImageCache;
 import forge.MyRandom;
 import forge.PlayerType;
 import forge.Singletons;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -124,8 +125,8 @@ public class OldGuiNewGame extends JFrame {
 
     // @SuppressWarnings("unused")
     // titledBorder2
-    /** Constant <code>newGuiCheckBox</code>. */
-    // private static JCheckBox newGuiCheckBox = new JCheckBox("", true);
+    /** Constant <code>oldGuiCheckBox</code>. */
+    private static JCheckBox oldGuiCheckBox = new JCheckBox("", false);
     /** Constant <code>smoothLandCheckBox</code>. */
     private static JCheckBox smoothLandCheckBox = new JCheckBox("", false);
     /** Constant <code>devModeCheckBox</code>. */
@@ -556,7 +557,7 @@ public class OldGuiNewGame extends JFrame {
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SETTINGS));
         this.jPanel3.setLayout(new MigLayout("align center"));
 
-        // newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
+        oldGuiCheckBox.setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.OLD_GUI));
         OldGuiNewGame.getSmoothLandCheckBox().setText(
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.AI_LAND));
 
@@ -639,7 +640,7 @@ public class OldGuiNewGame extends JFrame {
 
         this.getContentPane().add(this.jPanel3, "span 2, grow");
 
-        // jPanel3.add(newGuiCheckBox, "wrap");
+        jPanel3.add(oldGuiCheckBox, "wrap");
         this.jPanel3.add(OldGuiNewGame.getSmoothLandCheckBox(), "wrap");
         this.jPanel3.add(OldGuiNewGame.getDevModeCheckBox(), "wrap");
         this.jPanel3.add(OldGuiNewGame.getUpldDrftCheckBox(), "wrap");
@@ -865,15 +866,19 @@ public class OldGuiNewGame extends JFrame {
             }
         } // else
 
-        // DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards
-        // are added
-        // Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
+        Constant.Runtime.OLDGUI[0] = oldGuiCheckBox.isSelected();
 
-        // if (newGuiCheckBox.isSelected())
-        AllZone.setDisplay(new GuiDisplay());
-        // else AllZone.setDisplay(new GuiDisplay3());
+        if (Constant.Runtime.OLDGUI[0]) {
+             AllZone.setDisplay(new GuiDisplay());
+        }
+        else {
+            ControlAllUI ui = new ControlAllUI();
+            AllZone.setDisplay(ui.getMatchView());
+            ui.getMatchController().initMatch();
+        }
 
         Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();
+        //Constant.Runtime.DEV_MODE[0] = OldGuiNewGame.devModeCheckBox.isSelected();
 
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         AllZone.getDisplay().setVisible(true);
@@ -1714,7 +1719,7 @@ public class OldGuiNewGame extends JFrame {
             final ForgePreferences preferences = Singletons.getModel().getPreferences();
             preferences.setLaf(UIManager.getLookAndFeel().getClass().getName());
             preferences.setLafFonts(OldGuiNewGame.getUseLAFFonts().isSelected());
-            // preferences.newGui = newGuiCheckBox.isSelected();
+            preferences.setOldGui(oldGuiCheckBox.isSelected());
             preferences.setStackAiLand(OldGuiNewGame.getSmoothLandCheckBox().isSelected());
             preferences.setMillingLossCondition(Constant.Runtime.MILL[0]);
             preferences.setDeveloperMode(Constant.Runtime.DEV_MODE[0]);
@@ -2000,4 +2005,8 @@ public class OldGuiNewGame extends JFrame {
                                                                // name.
     }
 
+    /** @return JCheckBox */
+    public static JCheckBox getOldGuiCheckBox() {
+        return OldGuiNewGame.oldGuiCheckBox;
+    }
 }

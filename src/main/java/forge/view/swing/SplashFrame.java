@@ -69,7 +69,7 @@ public class SplashFrame extends JFrame {
         this.setUndecorated(true);
 
         // Set preferred JFrame properties.
-        final ImageIcon bgIcon = skin.getSplash();
+        final ImageIcon bgIcon = skin.getSplashBG();
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
 
