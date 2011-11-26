@@ -456,6 +456,7 @@ public class ViewField extends FRoundedPanel {
             setMinimumSize(labelSize);
             setBorder(new LineBorder(new Color(0, 0, 0, 0), 1));
             setHorizontalAlignment(CENTER);
+            setVerticalAlignment(CENTER);
 
             // Increment counter and check for zebra. Set default BG
             // so hover effects return to the same color.
