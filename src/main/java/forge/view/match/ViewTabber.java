@@ -132,8 +132,8 @@ public class ViewTabber {
 
         pnlStack.removeAll();
         vtpTabber.showTab(0);
-        Font font = skin.getFont1().deriveFont(Font.PLAIN, 11);
-        Border border = new MatteBorder(0, 0, 1, 0, Color.black);
+        Font font = skin.getFont1().deriveFont(Font.PLAIN, 14);
+        Border border = new MatteBorder(0, 0, 1, 0, skin.getClrBorders());
 
         for (int i = stack.size() - 1; 0 <= i; i--) {
             isOptional = stack.peekAbility(i).isOptionalTrigger() && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
@@ -143,6 +143,7 @@ public class ViewTabber {
             tar.setOpaque(false);
             tar.setBorder(border);
             tar.setFont(font);
+            tar.setForeground(skin.getClrText());
             tar.setFocusable(false);
             tar.setEditable(false);
             tar.setLineWrap(true);
@@ -158,7 +159,7 @@ public class ViewTabber {
                }
             });
 
-            pnlStack.add(tar, "w 100%!");
+            pnlStack.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
         }
     }
 
