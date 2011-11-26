@@ -1,4 +1,4 @@
-package forge.view.swing;
+package forge.view.toolbox;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -20,12 +20,11 @@ import forge.AllZone;
 import forge.Constant;
 import forge.Phase;
 import forge.Player;
+import forge.control.ControlWinLose;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.WinLoseFrame.WinLoseText;
 import forge.quest.data.QuestMatchState;
 import forge.view.match.ViewTopLevel;
-import forge.view.toolbox.FButton;
-import forge.view.toolbox.FPanel;
 
 /**
  * <p>
@@ -39,7 +38,7 @@ import forge.view.toolbox.FPanel;
 public class WinLoseFrame extends JFrame {
 
     private final QuestMatchState matchState;
-    private final WinLoseModeHandler modeHandler;
+    private final ControlWinLose modeHandler;
 
     /** The btn continue. */
     private FButton btnContinue;
@@ -67,7 +66,7 @@ public class WinLoseFrame extends JFrame {
      * 
      */
     public WinLoseFrame() {
-        this(new WinLoseModeHandler());
+        this(new ControlWinLose());
     }
 
     /**
@@ -78,9 +77,9 @@ public class WinLoseFrame extends JFrame {
      * modes (quest, puzzle, etc.)
      * 
      * @param mh
-     *            the mh {@link forge.view.swing.WinLoseModeHandler}
+     *            the mh {@link forge.control.ControlWinLose}
      */
-    public WinLoseFrame(final WinLoseModeHandler mh) {
+    public WinLoseFrame(final ControlWinLose mh) {
         super();
 
         // modeHandler handles the unique display for different game modes.

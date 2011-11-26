@@ -17,6 +17,7 @@ import forge.Constant;
 import forge.MyRandom;
 import forge.Player;
 import forge.SetUtils;
+import forge.control.ControlWinLose;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameLossReason;
@@ -31,7 +32,6 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestUtil;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
-import forge.view.swing.WinLoseModeHandler;
 
 /**
  * <p>
@@ -42,7 +42,7 @@ import forge.view.swing.WinLoseModeHandler;
  * WinLoseFrame should use MigLayout.
  * 
  */
-public class QuestWinLoseHandler extends WinLoseModeHandler {
+public class QuestWinLoseHandler extends ControlWinLose {
     private final boolean wonMatch;
     private ImageIcon icoTemp;
     private JLabel lblTemp1;

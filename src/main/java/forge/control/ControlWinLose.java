@@ -1,11 +1,14 @@
-package forge.view.swing;
+package forge.control;
 
 import forge.AllZone;
 import forge.Constant;
+import forge.view.swing.GuiHomeScreen;
+import forge.view.swing.OldGuiNewGame;
+import forge.view.toolbox.WinLoseFrame;
 
 /**
  * <p>
- * WinLoseModeHandler.
+ * ControlWinLose.
  * </p>
  * 
  * Superclass of custom mode handling for win/lose UI. Can add swing components
@@ -13,7 +16,7 @@ import forge.Constant;
  * extend this class.
  * 
  */
-public class WinLoseModeHandler {
+public class ControlWinLose {
 
     /** The view. */
     private WinLoseFrame view;

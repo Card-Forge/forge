@@ -43,7 +43,7 @@ import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.quest.gui.QuestWinLoseHandler;
 import forge.quest.gui.main.QuestEvent;
 import forge.view.match.ViewTopLevel;
-import forge.view.swing.WinLoseFrame;
+import forge.view.toolbox.WinLoseFrame;
 
 /**
  * <p>

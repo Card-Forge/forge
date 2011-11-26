@@ -10702,6 +10702,7 @@ src/main/java/forge/control/ControlAllUI.java -text
 src/main/java/forge/control/ControlEditorUI.java -text
 src/main/java/forge/control/ControlHomeUI.java -text
 src/main/java/forge/control/ControlMatchUI.java -text
+src/main/java/forge/control/ControlWinLose.java -text
 src/main/java/forge/control/match/ControlCardviewer.java -text
 src/main/java/forge/control/match/ControlDock.java -text
 src/main/java/forge/control/match/ControlField.java -text
@@ -10882,8 +10883,6 @@ src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
 src/main/java/forge/view/swing/GuiHomeScreen.java svneol=native#text/plain
 src/main/java/forge/view/swing/Main.java svneol=native#text/plain
 src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
-src/main/java/forge/view/swing/WinLoseFrame.java -text
-src/main/java/forge/view/swing/WinLoseModeHandler.java -text
 src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
 src/main/java/forge/view/toolbox/CardDetailPanel.java -text
 src/main/java/forge/view/toolbox/CardViewer.java -text
@@ -10893,6 +10892,7 @@ src/main/java/forge/view/toolbox/FPanel.java -text
 src/main/java/forge/view/toolbox/FRoundedPanel.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
+src/main/java/forge/view/toolbox/WinLoseFrame.java -text
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ImmutableIterableFrom.java svneol=native#text/plain
