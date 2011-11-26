@@ -612,7 +612,7 @@ public class ViewField extends FRoundedPanel {
                 c = Color.red;
             }
 
-            if (active && !hover) {
+            if (!active && !hover) {
                 c = c.darker().darker();
             }
 
