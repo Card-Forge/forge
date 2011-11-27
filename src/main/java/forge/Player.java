@@ -47,7 +47,7 @@ public abstract class Player extends GameEntity {
     private String altWinSourceName;
 
     /** The alt lose. */
-    private boolean altLose = false;
+    //private boolean altLose = false;
 
     /** The loss state. */
     private GameLossReason lossState = GameLossReason.DidNotLoseYet;
@@ -149,7 +149,7 @@ public abstract class Player extends GameEntity {
         nTurns = 0;
         altWin = false;
         altWinSourceName = null;
-        altLose = false;
+        //altLose = false;
         lossState = GameLossReason.DidNotLoseYet;
         loseConditionSpell = null;
         maxLandsToPlay = 1;

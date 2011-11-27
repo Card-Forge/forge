@@ -4,16 +4,16 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
+//import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
+//import javax.swing.filechooser.FileFilter;
 
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
 import forge.Card;
 import forge.GuiDisplayUtil;
-import forge.ImagePreviewPanel;
+//import forge.ImagePreviewPanel;
 import forge.Singletons;
 import forge.gui.game.CardDetailPanel;
 import forge.item.CardPrinted;
@@ -50,7 +50,7 @@ public class CardPanelHeavy extends CardPanelBase {
     private Card cCardHQ;
 
     /** Constant <code>previousDirectory</code>. */
-    private static File previousDirectory = null;
+    //private static File previousDirectory = null;
 
     /**
      * Instantiates a new card panel heavy.
@@ -170,6 +170,7 @@ public class CardPanelHeavy extends CardPanelBase {
      * 
      * @return a {@link java.io.File} object.
      */
+    /*
     private File getImportFilename() {
         final JFileChooser chooser = new JFileChooser(CardPanelHeavy.previousDirectory);
         final ImagePreviewPanel preview = new ImagePreviewPanel();
@@ -186,9 +187,10 @@ public class CardPanelHeavy extends CardPanelBase {
 
         return null;
 
-    }
+    } */
 
     /** The dck filter. */
+    /*
     private final FileFilter dckFilter = new FileFilter() {
 
         @Override
@@ -201,7 +203,7 @@ public class CardPanelHeavy extends CardPanelBase {
             return "*.jpg";
         }
 
-    };
+    };*/
 
     /**
      * <p>

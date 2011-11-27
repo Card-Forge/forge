@@ -18,7 +18,7 @@ class CustomLimited {
     private String name;
 
     /** The Type. */
-    private String type;
+    //private String type;
 
     /** The Deck file. */
     private String deckFile;
@@ -85,7 +85,7 @@ class CustomLimited {
                 cd.setName(value);
             }
             if (key.equalsIgnoreCase("Type")) {
-                cd.type = value;
+                //cd.type = value;
             }
             if (key.equalsIgnoreCase("DeckFile")) {
                 cd.setDeckFile(value);
@@ -136,10 +136,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numCards the numCards to set
+     * @param numCardsIn the numCards to set
      */
-    public void setNumCards(int numCards) {
-        this.numCards = numCards; // TODO: Add 0 to parameter's name.
+    public void setNumCards(int numCardsIn) {
+        this.numCards = numCardsIn;
     }
 
     /**
@@ -150,10 +150,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numPacks the numPacks to set
+     * @param numPacksIn the numPacks to set
      */
-    public void setNumPacks(int numPacks) {
-        this.numPacks = numPacks; // TODO: Add 0 to parameter's name.
+    public void setNumPacks(int numPacksIn) {
+        this.numPacks = numPacksIn;
     }
 
     /**
@@ -164,10 +164,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numSpecials the numSpecials to set
+     * @param numSpecialsIn the numSpecials to set
      */
-    public void setNumSpecials(int numSpecials) {
-        this.numSpecials = numSpecials; // TODO: Add 0 to parameter's name.
+    public void setNumSpecials(int numSpecialsIn) {
+        this.numSpecials = numSpecialsIn;
     }
 
     /**
@@ -178,10 +178,10 @@ class CustomLimited {
     }
 
     /**
-     * @param singleton the singleton to set
+     * @param singletonIn the singleton to set
      */
-    public void setSingleton(Boolean singleton) {
-        this.singleton = singleton; // TODO: Add 0 to parameter's name.
+    public void setSingleton(Boolean singletonIn) {
+        this.singleton = singletonIn;
     }
 
     /**
@@ -192,10 +192,10 @@ class CustomLimited {
     }
 
     /**
-     * @param ignoreRarity the ignoreRarity to set
+     * @param ignoreRarityIn the ignoreRarity to set
      */
-    public void setIgnoreRarity(Boolean ignoreRarity) {
-        this.ignoreRarity = ignoreRarity; // TODO: Add 0 to parameter's name.
+    public void setIgnoreRarity(Boolean ignoreRarityIn) {
+        this.ignoreRarity = ignoreRarityIn;
     }
 
     /**
@@ -206,10 +206,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numUncommons the numUncommons to set
+     * @param numUncommonsIn the numUncommons to set
      */
-    public void setNumUncommons(int numUncommons) {
-        this.numUncommons = numUncommons; // TODO: Add 0 to parameter's name.
+    public void setNumUncommons(int numUncommonsIn) {
+        this.numUncommons = numUncommonsIn;
     }
 
     /**
@@ -220,10 +220,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numCommons the numCommons to set
+     * @param numCommonsIn the numCommons to set
      */
-    public void setNumCommons(int numCommons) {
-        this.numCommons = numCommons; // TODO: Add 0 to parameter's name.
+    public void setNumCommons(int numCommonsIn) {
+        this.numCommons = numCommonsIn;
     }
 
     /**
@@ -234,10 +234,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numRares the numRares to set
+     * @param numRaresIn the numRares to set
      */
-    public void setNumRares(int numRares) {
-        this.numRares = numRares; // TODO: Add 0 to parameter's name.
+    public void setNumRares(int numRaresIn) {
+        this.numRares = numRaresIn;
     }
 
     /**
@@ -248,10 +248,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numMythics the numMythics to set
+     * @param numMythicsIn the numMythics to set
      */
-    public void setNumMythics(int numMythics) {
-        this.numMythics = numMythics; // TODO: Add 0 to parameter's name.
+    public void setNumMythics(int numMythicsIn) {
+        this.numMythics = numMythicsIn;
     }
 
     /**
@@ -262,10 +262,10 @@ class CustomLimited {
     }
 
     /**
-     * @param deckFile the deckFile to set
+     * @param deckFileIn the deckFile to set
      */
-    public void setDeckFile(String deckFile) {
-        this.deckFile = deckFile; // TODO: Add 0 to parameter's name.
+    public void setDeckFile(String deckFileIn) {
+        this.deckFile = deckFileIn;
     }
 
     /**
@@ -276,10 +276,10 @@ class CustomLimited {
     }
 
     /**
-     * @param landSetCode the landSetCode to set
+     * @param landSetCodeIn the landSetCode to set
      */
-    public void setLandSetCode(String landSetCode) {
-        this.landSetCode = landSetCode; // TODO: Add 0 to parameter's name.
+    public void setLandSetCode(String landSetCodeIn) {
+        this.landSetCode = landSetCodeIn;
     }
 
     /**
@@ -290,10 +290,10 @@ class CustomLimited {
     }
 
     /**
-     * @param numDoubleFaced the numDoubleFaced to set
+     * @param numDoubleFacedIn the numDoubleFaced to set
      */
-    public void setNumDoubleFaced(int numDoubleFaced) {
-        this.numDoubleFaced = numDoubleFaced; // TODO: Add 0 to parameter's name.
+    public void setNumDoubleFaced(int numDoubleFacedIn) {
+        this.numDoubleFaced = numDoubleFacedIn;
     }
 
     /**
@@ -304,9 +304,9 @@ class CustomLimited {
     }
 
     /**
-     * @param name the name to set
+     * @param nameIn the name to set
      */
-    private void setName(String name) {
-        this.name = name; // TODO: Add 0 to parameter's name.
+    private void setName(String nameIn) {
+        this.name = nameIn;
     }
 }

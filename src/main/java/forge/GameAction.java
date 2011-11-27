@@ -1745,7 +1745,7 @@ public class GameAction {
     public final void computerStartsGame() {
         final Player computer = AllZone.getComputerPlayer();
         AllZone.getPhase().setPlayerTurn(computer);
-        AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
+        //AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
     }
 
     // if Card had the type "Aura" this method would always return true, since

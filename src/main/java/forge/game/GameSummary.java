@@ -21,7 +21,7 @@ public final class GameSummary {
     private String playerWinner = "Nobody";
 
     /** The player got first turn. */
-    private String playerGotFirstTurn = "Nobody";
+    //private String playerGotFirstTurn = "Nobody";
 
     /** The last turn number. */
     private int lastTurnNumber = 0;
@@ -120,9 +120,11 @@ public final class GameSummary {
      *
      * @param playerName the new player who got first turn
      */
+    /*
     public void setPlayerWhoGotFirstTurn(final String playerName) {
         this.playerGotFirstTurn = playerName;
     }
+    */
 
     /**
      * Notify next turn.
