@@ -289,10 +289,11 @@ public class Generate3ColorDeck {
         if (landsPercentage > 0) {
             p = (float) (landsPercentage * .01);
             numLands = (int) (p * size);
-        } else {
+        } 
+        /*else {
             // otherwise, just fill in the rest of the deck with basic lands
             numLands = size - tDeck.size();
-        }
+        }*/
 
         tmpDeck += "numLands:" + numLands + "\n";
 
