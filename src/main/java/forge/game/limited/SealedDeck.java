@@ -241,7 +241,7 @@ public class SealedDeck {
         dcAI.splash = colors[2];
         dcAI.mana1 = dcAI.colorToMana(colors[0]);
         dcAI.mana2 = dcAI.colorToMana(colors[1]);
-        dcAI.manaS = dcAI.colorToMana(colors[2]);
+        //dcAI.manaS = dcAI.colorToMana(colors[2]);
 
         creatures = aiPlayables.getType("Creature").getOnly2Colors(dcAI.color1, dcAI.color2);
         creatures.addAll(aiPlayables.getType("Artifact").getType("Creature"));
@@ -459,7 +459,7 @@ public class SealedDeck {
         private String mana2 = "";
 
         /** The Mana s. */
-        private String manaS = "";
+        //private String manaS = "";
 
         /**
          * Instantiates a new deck colors.

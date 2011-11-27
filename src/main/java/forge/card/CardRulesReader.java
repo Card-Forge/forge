@@ -21,8 +21,8 @@ public class CardRulesReader {
             null };
     private int curCharacteristics = 0;
 
-    private boolean isFlipCard = false;
-    private boolean isDoubleFacedCard = false;
+    //private boolean isFlipCard = false;
+    //private boolean isDoubleFacedCard = false;
 
     private boolean removedFromAIDecks = false;
     private boolean removedFromRandomDecks = false;
@@ -37,8 +37,8 @@ public class CardRulesReader {
         this.curCharacteristics = 0;
         this.removedFromAIDecks = false;
         this.removedFromRandomDecks = false;
-        this.isDoubleFacedCard = false;
-        this.isFlipCard = false;
+        //this.isDoubleFacedCard = false;
+        //this.isFlipCard = false;
     }
 
     /**
@@ -99,9 +99,9 @@ public class CardRulesReader {
             CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
 
         } else if (line.startsWith("AlternateMode:")) {
-            this.isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
-                    "AlternateMode:"));
-            this.isFlipCard = "Flip".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "AlternateMode:"));
+            //this.isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
+            //        "AlternateMode:"));
+            //this.isFlipCard = "Flip".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "AlternateMode:"));
         } else if (line.equals("ALTERNATE")) {
             this.characteristics[1] = new CardRuleCharacteristics();
             this.curCharacteristics = 1;
