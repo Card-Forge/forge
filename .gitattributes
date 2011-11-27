@@ -4477,6 +4477,7 @@ res/cardsfolder/k/kitsune_dawnblade.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_diviner.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_healer.txt -text
 res/cardsfolder/k/kitsune_loreweaver.txt svneol=native#text/plain
+res/cardsfolder/k/kitsune_palliator.txt -text
 res/cardsfolder/k/kitsune_riftwalker.txt svneol=native#text/plain
 res/cardsfolder/k/kiyomaro_first_to_stand.txt -text
 res/cardsfolder/k/kjeldoran_dead.txt svneol=native#text/plain
