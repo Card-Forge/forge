@@ -16,7 +16,7 @@ public abstract class CostPart {
     private boolean isUndoable = false;
 
     /** The optional. */
-    private boolean optional = false;
+    //private boolean optional = false;
 
     /** The optional type. */
     private String optionalType = null;
@@ -218,37 +218,37 @@ public abstract class CostPart {
     public abstract void refund(Card source);
 
     /**
-     * @param isReusable the isReusable to set
+     * @param isReusableIn the isReusable to set
      */
-    public void setReusable(boolean isReusable) {
-        this.isReusable = isReusable; // TODO: Add 0 to parameter's name.
+    public void setReusable(boolean isReusableIn) {
+        this.isReusable = isReusableIn;
     }
 
     /**
-     * @param amount the amount to set
+     * @param amountIn the amount to set
      */
-    public void setAmount(String amount) {
-        this.amount = amount; // TODO: Add 0 to parameter's name.
+    public void setAmount(String amountIn) {
+        this.amount = amountIn;
     }
 
     /**
-     * @param type the type to set
+     * @param typeIn the type to set
      */
-    public void setType(String type) {
-        this.type = type; // TODO: Add 0 to parameter's name.
+    public void setType(String typeIn) {
+        this.type = typeIn;
     }
 
     /**
-     * @param typeDescription the typeDescription to set
+     * @param typeDescriptionIn the typeDescription to set
      */
-    public void setTypeDescription(String typeDescription) {
-        this.typeDescription = typeDescription; // TODO: Add 0 to parameter's name.
+    public void setTypeDescription(String typeDescriptionIn) {
+        this.typeDescription = typeDescriptionIn;
     }
 
     /**
-     * @param isUndoable the isUndoable to set
+     * @param isUndoableIn the isUndoable to set
      */
-    public void setUndoable(boolean isUndoable) {
-        this.isUndoable = isUndoable; // TODO: Add 0 to parameter's name.
+    public void setUndoable(boolean isUndoableIn) {
+        this.isUndoable = isUndoableIn;
     }
 }
