@@ -1,0 +1,10 @@
+Name:Forget
+ManaCost:U U
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ U U | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Target player discards two cards, then draws as many cards as he or she discarded this way.
+SVar:DBDraw:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ X
+SVar:X:Remembered$Amount
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forget.jpg
+End
