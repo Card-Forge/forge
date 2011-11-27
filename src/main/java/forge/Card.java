@@ -1382,6 +1382,21 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean hasSecondStrike() {
         return this.hasDoubleStrike() || !this.hasFirstStrike();
     }
+    
+    public final boolean canHaveCountersPlacedOnIt(final Counters counterName) {
+        if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
+            return false;
+        }
+        if (counterName.equals(Counters.M1M1)) {
+            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
+                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
+                    return false;
+                }
+            }
+            
+        }
+        return true;
+    }
 
     // for costs (like Planeswalker abilities) Doubling Season gets ignored.
     /**
@@ -1395,16 +1410,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void addCounterFromNonEffect(final Counters counterName, final int n) {
-        if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
+        if (!canHaveCountersPlacedOnIt(counterName)) {
             return;
-        }
-        if (counterName.equals(Counters.M1M1)) {
-            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
-                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
-                    return;
-                }
-            }
-            
         }
         if (this.counters.containsKey(counterName)) {
             final Integer aux = this.counters.get(counterName) + n;
@@ -1440,18 +1447,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        // ///////////////
-        //
-        // Not sure if we want to fire triggers on addCounterFromNonEffect
-        // I don't think so since reverting cost payments uses this.
-
-        /*
-         * //Run triggers HashMap<String,Object> runParams = new
-         * HashMap<String,Object>(); runParams.put("Card", this);
-         * runParams.put("CounterType", counterName);
-         * AllZone.getTriggerHandler().runTrigger("CounterAdded", runParams);
-         */
-
         this.updateObservers();
     }
 
@@ -1466,16 +1461,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void addCounter(final Counters counterName, final int n) {
-        if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
+        if (!canHaveCountersPlacedOnIt(counterName)) {
             return;
-        }
-        if (counterName.equals(Counters.M1M1)) {
-            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
-                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
-                    return;
-                }
-            }
-            
         }
         final int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(this.getController());
         if (this.counters.containsKey(counterName)) {
@@ -1635,16 +1622,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a boolean.
      */
     public final void setCounter(final Counters counterName, final int n, final boolean bSetValue) {
-        if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
+        if (!canHaveCountersPlacedOnIt(counterName)) {
             return;
-        }
-        if (counterName.equals(Counters.M1M1)) {
-            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
-                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
-                    return;
-                }
-            }
-            
         }
         // sometimes you just need to set the value without being affected by
         // DoublingSeason
