@@ -15,7 +15,29 @@ We have changed the archival format used for the Forge distributions from ".zip"
 
 Fixes/Features:
 
-
+- Cleared out the changes.txt file, is ready for new material.
+- Updated the three elf decks and added a medium version of Picard.
+- Added the optional parameter "Choser" to AF Dig.
+- Fixed Split second not being displayed on Instants and Sorceries.
+- Fixed activation cost of Engineered Explosives.
+- Fixed Gnaw to the Bone.
+- Fixed Sinister Strength.
+- Fixed Howlack Alpha's transforming ability.
+- Replaced the fix for the interaction of Melira, Sylvok Outcast and Persist with something less buggy.
+- Fixed cost of Urborg Skeleton.
+- Little improvements in the description of discard costs.
+- fix the ability of Scroll of Origins to be a condition, not a restriction
+- Holy Graphical User Interface, Batman!
+- Removed forge.gui.skin package, related components in forge.view.toolbox
+- Splash frame view classes moved into forge.view.home.
+- WinLose controller moved to forge.control.
+- WinLose view moved to forge.view.toolbox.
+- Fixed word wrap style in input area.
+- Inverted color scheme on phase buttons.
+- Stack visibility style update.
+- Reorganized player field labels.
+- Fixed vertical alignment of player field detail labels.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -25,7 +47,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Ashnod's Cylix
 
 
 end
