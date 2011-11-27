@@ -8725,6 +8725,7 @@ res/cardsfolder/t/touch_of_death.txt svneol=native#text/plain
 res/cardsfolder/t/touch_of_invisibility.txt svneol=native#text/plain
 res/cardsfolder/t/touch_of_vitae.txt -text svneol=unset#text/plain
 res/cardsfolder/t/touchstone.txt svneol=native#text/plain
+res/cardsfolder/t/tourachs_gate.txt -text
 res/cardsfolder/t/tower_drake.txt svneol=native#text/plain
 res/cardsfolder/t/tower_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/t/tower_of_calamities.txt svneol=native#text/plain

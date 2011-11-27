@@ -1,0 +1,16 @@
+Name:Tourach's Gate
+ManaCost:1 B B
+Types:Enchantment Aura
+Text:no text
+K:Enchant land you control
+A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | AILogic$ Pump
+A:AB$ PutCounter | Cost$ Sac<1/Thrull> | Defined$ Self | CounterType$ TIME | CounterNum$ 3 | SpellDescription$ Put three time counters on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a time counter from CARDNAME. If there are no time counters on CARDNAME, sacrifice it.
+SVar:TrigSubCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ Sac
+SVar:Sac:DB$ Sacrifice | Defined$ Self | ConditionPresent$ Card.Self+counters_EQ0_TIME
+S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ Pump | Description$ Enchanted land has "T: Attacking creatures you control get +2/-1 until end of turn."
+SVar:Pump:AB$ PumpAll | Cost$ T | ValidCardss$ Creature.attacking+YouCtrl | NumAtt$ 2 | NumDef$ -1 | SpellDescription$ Attacking creatures you control get +2/-1 until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tourachs_gate.jpg
+End
