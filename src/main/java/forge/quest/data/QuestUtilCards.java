@@ -329,6 +329,7 @@ public final class QuestUtilCards {
     /**
      * @return the fnNewCompare
      */
+    @SuppressWarnings("rawtypes")
     public Lambda1<Comparable, Entry<InventoryItem, Integer>> getFnNewCompare() {
         return fnNewCompare;
     }
