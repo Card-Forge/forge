@@ -28,7 +28,7 @@ public abstract class Move {
     public abstract int getScore();
 
     /** The best move. */
-    private Move bestMove = null;
+    //private Move bestMove = null;
 
     /** The best score. */
     private int bestScore = Integer.MIN_VALUE;
@@ -82,7 +82,7 @@ public abstract class Move {
 
             if (first && bestScore < score) {
                 bestScore = score;
-                bestMove = v[i];
+                //bestMove = v[i];
             }
         } // for
         return score;
