@@ -346,102 +346,48 @@ public class AbilityFactory {
         this.hasSpDesc = this.mapParams.containsKey("SpellDescription");
 
         // ***********************************
-        // Match API keywords
+        // Match API keywords.  These are listed in alphabetical order.
 
-        if (this.api.equals("DealDamage")) {
-            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
-
+        if (this.api.equals("AddTurn")) {
             if (this.isAb) {
-                spellAbility = dd.getAbilityDealDamage();
+                spellAbility = AbilityFactoryTurns.createAbilityAddTurn(this);
             } else if (this.isSp) {
-                spellAbility = dd.getSpellDealDamage();
+                spellAbility = AbilityFactoryTurns.createSpellAddTurn(this);
             } else if (this.isDb) {
-                spellAbility = dd.getDrawbackDealDamage();
+                spellAbility = AbilityFactoryTurns.createDrawbackAddTurn(this);
             }
         }
 
-        else if (this.api.equals("DamageAll")) {
-            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
+        else if (this.api.equals("Animate")) {
             if (this.isAb) {
-                spellAbility = dd.getAbilityDamageAll();
+                spellAbility = AbilityFactoryAnimate.createAbilityAnimate(this);
             } else if (this.isSp) {
-                spellAbility = dd.getSpellDamageAll();
+                spellAbility = AbilityFactoryAnimate.createSpellAnimate(this);
             } else if (this.isDb) {
-                spellAbility = dd.getDrawbackDamageAll();
+                spellAbility = AbilityFactoryAnimate.createDrawbackAnimate(this);
             }
         }
 
-        else if (this.api.equals("EachDamage")) {
-            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
+        else if (this.api.equals("AnimateAll")) {
             if (this.isAb) {
-                spellAbility = dd.getAbilityEachDamage();
+                spellAbility = AbilityFactoryAnimate.createAbilityAnimateAll(this);
             } else if (this.isSp) {
-                spellAbility = dd.getSpellEachDamage();
+                spellAbility = AbilityFactoryAnimate.createSpellAnimateAll(this);
             } else if (this.isDb) {
-                spellAbility = dd.getDrawbackEachDamage();
+                spellAbility = AbilityFactoryAnimate.createDrawbackAnimateAll(this);
             }
         }
-
-        else if (this.api.equals("PutCounter")) {
+        
+        else if (this.api.equals("Attach")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityPutCounters(this);
+                spellAbility = AbilityFactoryAttach.createAbilityAttach(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellPutCounters(this);
+                spellAbility = AbilityFactoryAttach.createSpellAttach(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackPutCounters(this);
+                spellAbility = AbilityFactoryAttach.createDrawbackAttach(this);
             }
         }
-
-        else if (this.api.equals("PutCounterAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityPutCounterAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellPutCounterAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackPutCounterAll(this);
-            }
-        }
-
-        else if (this.api.equals("RemoveCounter")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityRemoveCounters(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellRemoveCounters(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackRemoveCounters(this);
-            }
-        }
-
-        else if (this.api.equals("RemoveCounterAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityRemoveCounterAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellRemoveCounterAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackRemoveCounterAll(this);
-            }
-        }
-
-        else if (this.api.equals("Proliferate")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityProliferate(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellProliferate(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackProliferate(this);
-            }
-        }
-
-        else if (this.api.equals("MoveCounter")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityMoveCounters(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellMoveCounters(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackMoveCounters(this);
-            }
-        }
-
+        
         else if (this.api.equals("ChangeZone")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryChangeZone.createAbilityChangeZone(this);
@@ -459,6 +405,490 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryChangeZone.createSpellChangeZoneAll(this);
             } else if (this.isDb) {
                 spellAbility = AbilityFactoryChangeZone.createDrawbackChangeZoneAll(this);
+            }
+        }
+
+        else if (this.api.equals("Charm")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCharm.createAbilityCharm(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCharm.createSpellCharm(this);
+            }
+            spellAbility.setIsCharm(true);
+            final int num = Integer.parseInt(this.mapParams.containsKey("CharmNum") ? this.mapParams.get("CharmNum")
+                    : "1");
+            spellAbility.setCharmNumber(num);
+            final int min = this.mapParams.containsKey("MinCharmNum") ? Integer.parseInt(this.mapParams
+                    .get("MinCharmNum")) : num;
+            spellAbility.setMinCharmNumber(min);
+
+            final String[] saChoices = this.mapParams.get("Choices").split(",");
+            for (final String saChoice : saChoices) {
+                final String ab = this.hostC.getSVar(saChoice);
+                final AbilityFactory charmAF = new AbilityFactory();
+                spellAbility.addCharmChoice(charmAF.getAbility(ab, this.hostC));
+            }
+        }
+
+        else if (this.api.equals("ChooseColor")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryChoose.createAbilityChooseColor(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryChoose.createSpellChooseColor(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryChoose.createDrawbackChooseColor(this);
+            }
+        }
+
+        else if (this.api.equals("ChooseNumber")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryChoose.createAbilityChooseNumber(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryChoose.createSpellChooseNumber(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryChoose.createDrawbackChooseNumber(this);
+            }
+        }
+
+        else if (this.api.equals("ChoosePlayer")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryChoose.createAbilityChoosePlayer(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryChoose.createSpellChoosePlayer(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryChoose.createDrawbackChoosePlayer(this);
+            }
+        }
+
+        else if (this.api.equals("ChooseType")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryChoose.createAbilityChooseType(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryChoose.createSpellChooseType(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryChoose.createDrawbackChooseType(this);
+            }
+        }
+
+        else if (this.api.equals("Clash")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryClash.getAbilityClash(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryClash.getSpellClash(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryClash.getDrawbackClash(this);
+            }
+        }
+
+        else if (this.api.equals("Cleanup")) {
+            if (this.isDb) {
+                spellAbility = AbilityFactoryCleanup.getDrawback(this);
+            }
+        }
+
+        else if (this.api.equals("CopyPermanent")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCopy.createAbilityCopyPermanent(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCopy.createSpellCopyPermanent(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCopy.createDrawbackCopyPermanent(this);
+            }
+        }
+
+        else if (this.api.equals("CopySpell")) {
+            if (this.isTargeted) { // Since all "CopySpell" ABs copy things on
+                                   // the
+                // Stack no need for it to be everywhere
+                this.abTgt.setZone(Zone.Stack);
+            }
+
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCopy.createAbilityCopySpell(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCopy.createSpellCopySpell(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCopy.createDrawbackCopySpell(this);
+            }
+
+            hostCard.setCopiesSpells(true);
+        }
+
+        else if (this.api.equals("Counter")) {
+            final AbilityFactoryCounterMagic c = new AbilityFactoryCounterMagic(this);
+
+            if (this.isTargeted) { // Since all "Counter" ABs Counter things on
+                                   // the
+                // Stack no need for it to be everywhere
+                this.abTgt.setZone(Zone.Stack);
+            }
+
+            if (this.isAb) {
+                spellAbility = c.getAbilityCounter(this);
+            } else if (this.isSp) {
+                spellAbility = c.getSpellCounter(this);
+            } else if (this.isDb) {
+                spellAbility = c.getDrawbackCounter(this);
+            }
+        }
+        
+        else if (this.api.equals("DamageAll")) {
+            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
+            if (this.isAb) {
+                spellAbility = dd.getAbilityDamageAll();
+            } else if (this.isSp) {
+                spellAbility = dd.getSpellDamageAll();
+            } else if (this.isDb) {
+                spellAbility = dd.getDrawbackDamageAll();
+            }
+        }
+
+        else if (this.api.equals("DealDamage")) {
+            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
+
+            if (this.isAb) {
+                spellAbility = dd.getAbilityDealDamage();
+            } else if (this.isSp) {
+                spellAbility = dd.getSpellDealDamage();
+            } else if (this.isDb) {
+                spellAbility = dd.getDrawbackDealDamage();
+            }
+        }
+
+        else if (this.api.equals("Debuff")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryDebuff.createAbilityDebuff(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryDebuff.createSpellDebuff(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryDebuff.createDrawbackDebuff(this);
+            }
+        }
+
+        else if (this.api.equals("DebuffAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryDebuff.createAbilityDebuffAll(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryDebuff.createSpellDebuffAll(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryDebuff.createDrawbackDebuffAll(this);
+            }
+        }
+
+        else if (this.api.equals("DelayedTrigger")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryDelayedTrigger.getAbility(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryDelayedTrigger.getSpell(this);
+            }
+            if (this.isDb) {
+                spellAbility = AbilityFactoryDelayedTrigger.getDrawback(this);
+            }
+        }
+
+        else if (this.api.equals("Destroy")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryDestroy.createAbilityDestroy(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryDestroy.createSpellDestroy(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryDestroy.createDrawbackDestroy(this);
+            }
+        }
+
+        else if (this.api.equals("DestroyAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryDestroy.createAbilityDestroyAll(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryDestroy.createSpellDestroyAll(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryDestroy.createDrawbackDestroyAll(this);
+            }
+        }
+
+        else if (this.api.equals("Dig")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryReveal.createAbilityDig(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryReveal.createSpellDig(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryReveal.createDrawbackDig(this);
+            }
+        }
+
+        else if (this.api.equals("DigUntil")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryReveal.createAbilityDigUntil(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryReveal.createSpellDigUntil(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryReveal.createDrawbackDigUntil(this);
+            }
+        }
+
+        else if (this.api.equals("Discard")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryZoneAffecting.createAbilityDiscard(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryZoneAffecting.createSpellDiscard(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryZoneAffecting.createDrawbackDiscard(this);
+            }
+        }
+
+        else if (this.api.equals("DrainMana")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryMana.createAbilityDrainMana(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryMana.createSpellDrainMana(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryMana.createDrawbackDrainMana(this);
+            }
+        }
+
+        else if (this.api.equals("Draw")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryZoneAffecting.createAbilityDraw(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryZoneAffecting.createSpellDraw(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryZoneAffecting.createDrawbackDraw(this);
+            }
+        }
+
+        else if (this.api.equals("EachDamage")) {
+            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
+            if (this.isAb) {
+                spellAbility = dd.getAbilityEachDamage();
+            } else if (this.isSp) {
+                spellAbility = dd.getSpellEachDamage();
+            } else if (this.isDb) {
+                spellAbility = dd.getDrawbackEachDamage();
+            }
+        }
+
+        else if (this.api.equals("Effect")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryEffect.createAbilityEffect(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryEffect.createSpellEffect(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryEffect.createDrawbackEffect(this);
+            }
+        }
+
+        else if (this.api.equals("ExchangeLife")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryAlterLife.createAbilityExchangeLife(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryAlterLife.createSpellExchangeLife(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryAlterLife.createDrawbackExchangeLife(this);
+            }
+        }
+
+        else if (this.api.equals("FlipACoin")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryClash.createAbilityFlip(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryClash.createSpellFlip(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryClash.createDrawbackFlip(this);
+            }
+        }
+
+        else if (this.api.equals("Fog")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCombat.createAbilityFog(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCombat.createSpellFog(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCombat.createDrawbackFog(this);
+            }
+        }
+
+        else if (this.api.equals("GainControl")) {
+            final AbilityFactoryGainControl afControl = new AbilityFactoryGainControl(this);
+
+            if (this.isAb) {
+                spellAbility = afControl.getAbilityGainControl();
+            } else if (this.isSp) {
+                spellAbility = afControl.getSpellGainControl();
+            } else if (this.isDb) {
+                spellAbility = afControl.getDrawbackGainControl();
+            }
+        }
+
+        else if (this.api.equals("GainLife")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryAlterLife.createAbilityGainLife(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryAlterLife.createSpellGainLife(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryAlterLife.createDrawbackGainLife(this);
+            }
+        }
+
+        else if (this.api.equals("LoseLife")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryAlterLife.createAbilityLoseLife(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryAlterLife.createSpellLoseLife(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryAlterLife.createDrawbackLoseLife(this);
+            }
+        }
+
+        else if (this.api.equals("LosesGame")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryEndGameCondition.createAbilityLosesGame(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryEndGameCondition.createSpellLosesGame(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryEndGameCondition.createDrawbackLosesGame(this);
+            }
+        }
+
+        else if (this.api.equals("Mana")) {
+            final String produced = this.mapParams.get("Produced");
+            if (this.isAb) {
+                spellAbility = AbilityFactoryMana.createAbilityMana(this, produced);
+            }
+            if (this.isSp) {
+                spellAbility = AbilityFactoryMana.createSpellMana(this, produced);
+            }
+            if (this.isDb) {
+                spellAbility = AbilityFactoryMana.createDrawbackMana(this, produced);
+            }
+        }
+
+        else if (this.api.equals("ManaReflected")) {
+            // Reflected mana will have a filler for produced of "1"
+            if (this.isAb) {
+                spellAbility = AbilityFactoryMana.createAbilityManaReflected(this, "1");
+            }
+            if (this.isSp) { // shouldn't really happen i think?
+                spellAbility = AbilityFactoryMana.createSpellManaReflected(this, "1");
+            }
+        }
+
+        else if (this.api.equals("Mill")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryZoneAffecting.createAbilityMill(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryZoneAffecting.createSpellMill(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryZoneAffecting.createDrawbackMill(this);
+            }
+        }
+
+        else if (this.api.equals("MoveCounter")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCounters.createAbilityMoveCounters(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCounters.createSpellMoveCounters(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCounters.createDrawbackMoveCounters(this);
+            }
+        }
+
+        else if (this.api.equals("MustAttack")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCombat.createAbilityMustAttack(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCombat.createSpellMustAttack(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCombat.createDrawbackMustAttack(this);
+            }
+        }
+
+        else if (this.api.equals("MustBlock")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCombat.createAbilityMustBlock(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCombat.createSpellMustBlock(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCombat.createDrawbackMustBlock(this);
+            }
+        }
+
+        else if (this.api.equals("NameCard")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryChoose.createAbilityNameCard(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryChoose.createSpellNameCard(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryChoose.createDrawbackNameCard(this);
+            }
+        }
+
+        else if (this.api.equals("Phases")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryPermanentState.createAbilityPhases(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryPermanentState.createSpellPhases(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryPermanentState.createDrawbackPhases(this);
+            }
+        }
+
+        else if (this.api.equals("Poison")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryAlterLife.createAbilityPoison(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryAlterLife.createSpellPoison(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryAlterLife.createDrawbackPoison(this);
+            }
+        }
+
+        else if (this.api.equals("PreventDamage")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryPreventDamage.createAbilityPreventDamage(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryPreventDamage.createSpellPreventDamage(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryPreventDamage.createDrawbackPreventDamage(this);
+            }
+        }
+
+        else if (this.api.equals("PreventDamageAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryPreventDamage.createAbilityPreventDamageAll(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryPreventDamage.createSpellPreventDamageAll(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryPreventDamage.createDrawbackPreventDamageAll(this);
+            }
+        }
+
+        else if (this.api.equals("Proliferate")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCounters.createAbilityProliferate(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCounters.createSpellProliferate(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCounters.createDrawbackProliferate(this);
+            }
+        }
+
+        else if (this.api.equals("Protection")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryProtection.createAbilityProtection(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryProtection.createSpellProtection(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryProtection.createDrawbackProtection(this);
+            }
+        }
+
+        else if (this.api.equals("ProtectionAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryProtection.createAbilityProtectionAll(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryProtection.createSpellProtectionAll(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryProtection.createDrawbackProtectionAll(this);
             }
         }
 
@@ -494,63 +924,73 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("GainLife")) {
+        else if (this.api.equals("PutCounter")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryAlterLife.createAbilityGainLife(this);
+                spellAbility = AbilityFactoryCounters.createAbilityPutCounters(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryAlterLife.createSpellGainLife(this);
+                spellAbility = AbilityFactoryCounters.createSpellPutCounters(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryAlterLife.createDrawbackGainLife(this);
+                spellAbility = AbilityFactoryCounters.createDrawbackPutCounters(this);
             }
         }
 
-        else if (this.api.equals("LoseLife")) {
+        else if (this.api.equals("PutCounterAll")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryAlterLife.createAbilityLoseLife(this);
+                spellAbility = AbilityFactoryCounters.createAbilityPutCounterAll(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryAlterLife.createSpellLoseLife(this);
+                spellAbility = AbilityFactoryCounters.createSpellPutCounterAll(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryAlterLife.createDrawbackLoseLife(this);
+                spellAbility = AbilityFactoryCounters.createDrawbackPutCounterAll(this);
             }
         }
 
-        else if (this.api.equals("SetLife")) {
+        else if (this.api.equals("RearrangeTopOfLibrary")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryAlterLife.createAbilitySetLife(this);
+                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibraryAbility(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryAlterLife.createSpellSetLife(this);
+                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibrarySpell(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryAlterLife.createDrawbackSetLife(this);
+                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibraryDrawback(this);
             }
         }
 
-        else if (this.api.equals("ExchangeLife")) {
+        else if (this.api.equals("Regenerate")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryAlterLife.createAbilityExchangeLife(this);
+                spellAbility = AbilityFactoryRegenerate.getAbilityRegenerate(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryAlterLife.createSpellExchangeLife(this);
+                spellAbility = AbilityFactoryRegenerate.getSpellRegenerate(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryAlterLife.createDrawbackExchangeLife(this);
+                spellAbility = AbilityFactoryRegenerate.createDrawbackRegenerate(this);
             }
         }
 
-        else if (this.api.equals("Poison")) {
+        else if (this.api.equals("RegenerateAll")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryAlterLife.createAbilityPoison(this);
+                spellAbility = AbilityFactoryRegenerate.getAbilityRegenerateAll(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryAlterLife.createSpellPoison(this);
+                spellAbility = AbilityFactoryRegenerate.getSpellRegenerateAll(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryAlterLife.createDrawbackPoison(this);
+                spellAbility = AbilityFactoryRegenerate.createDrawbackRegenerateAll(this);
             }
         }
 
-        else if (this.api.equals("Fog")) {
+        else if (this.api.equals("RemoveCounter")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryCombat.createAbilityFog(this);
+                spellAbility = AbilityFactoryCounters.createAbilityRemoveCounters(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryCombat.createSpellFog(this);
+                spellAbility = AbilityFactoryCounters.createSpellRemoveCounters(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryCombat.createDrawbackFog(this);
+                spellAbility = AbilityFactoryCounters.createDrawbackRemoveCounters(this);
+            }
+        }
+
+        else if (this.api.equals("RemoveCounterAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryCounters.createAbilityRemoveCounterAll(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryCounters.createSpellRemoveCounterAll(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryCounters.createDrawbackRemoveCounterAll(this);
             }
         }
 
@@ -564,23 +1004,93 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("Untap")) {
+        else if (this.api.equals("Reveal")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityUntap(this);
+                spellAbility = AbilityFactoryReveal.createAbilityReveal(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellUntap(this);
+                spellAbility = AbilityFactoryReveal.createSpellReveal(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackUntap(this);
+                spellAbility = AbilityFactoryReveal.createDrawbackReveal(this);
             }
         }
 
-        else if (this.api.equals("UntapAll")) {
+        else if (this.api.equals("RevealHand")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityUntapAll(this);
+                spellAbility = AbilityFactoryReveal.createAbilityRevealHand(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellUntapAll(this);
+                spellAbility = AbilityFactoryReveal.createSpellRevealHand(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackUntapAll(this);
+                spellAbility = AbilityFactoryReveal.createDrawbackRevealHand(this);
+            }
+        }
+
+        else if (this.api.equals("Sacrifice")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactorySacrifice.createAbilitySacrifice(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactorySacrifice.createSpellSacrifice(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactorySacrifice.createDrawbackSacrifice(this);
+            }
+        }
+
+        else if (this.api.equals("SacrificeAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactorySacrifice.createAbilitySacrificeAll(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactorySacrifice.createSpellSacrificeAll(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactorySacrifice.createDrawbackSacrificeAll(this);
+            }
+        }
+
+        else if (this.api.equals("Scry")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryReveal.createAbilityScry(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryReveal.createSpellScry(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryReveal.createDrawbackScry(this);
+            }
+        }
+
+        else if (this.api.equals("SetLife")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryAlterLife.createAbilitySetLife(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryAlterLife.createSpellSetLife(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryAlterLife.createDrawbackSetLife(this);
+            }
+        }
+
+        else if (this.api.equals("SetState")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactorySetState.getSetStateAbility(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactorySetState.getSetStateSpell(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactorySetState.getSetStateDrawback(this);
+            }
+        }
+
+        else if (this.api.equals("SetStateAll")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactorySetState.getSetStateAllAbility(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactorySetState.getSetStateAllSpell(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactorySetState.getSetStateAllDrawback(this);
+            }
+        }
+
+        else if (this.api.equals("Shuffle")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryZoneAffecting.createAbilityShuffle(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryZoneAffecting.createSpellShuffle(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryZoneAffecting.createDrawbackShuffle(this);
             }
         }
 
@@ -614,139 +1124,6 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("Phases")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityPhases(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellPhases(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackPhases(this);
-            }
-        }
-
-        else if (this.api.equals("PreventDamage")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPreventDamage.getAbilityPreventDamage(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPreventDamage.getSpellPreventDamage(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPreventDamage.createDrawbackPreventDamage(this);
-            }
-        }
-
-        else if (this.api.equals("Regenerate")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryRegenerate.getAbilityRegenerate(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryRegenerate.getSpellRegenerate(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryRegenerate.createDrawbackRegenerate(this);
-            }
-        }
-
-        else if (this.api.equals("Draw")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityDraw(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellDraw(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackDraw(this);
-            }
-        }
-
-        else if (this.api.equals("Mill")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityMill(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellMill(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackMill(this);
-            }
-        }
-
-        else if (this.api.equals("Scry")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityScry(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellScry(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackScry(this);
-            }
-        }
-
-        else if (this.api.equals("RearrangeTopOfLibrary")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibraryAbility(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibrarySpell(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createRearrangeTopOfLibraryDrawback(this);
-            }
-        }
-
-        else if (this.api.equals("Sacrifice")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySacrifice.createAbilitySacrifice(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySacrifice.createSpellSacrifice(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySacrifice.createDrawbackSacrifice(this);
-            }
-        }
-
-        else if (this.api.equals("SacrificeAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySacrifice.createAbilitySacrificeAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySacrifice.createSpellSacrificeAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySacrifice.createDrawbackSacrificeAll(this);
-            }
-        }
-
-        else if (this.api.equals("Destroy")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDestroy.createAbilityDestroy(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDestroy.createSpellDestroy(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDestroy.createDrawbackDestroy(this);
-            }
-        }
-
-        else if (this.api.equals("DestroyAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDestroy.createAbilityDestroyAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDestroy.createSpellDestroyAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDestroy.createDrawbackDestroyAll(this);
-            }
-        }
-
-        else if (this.api.equals("Mana")) {
-            final String produced = this.mapParams.get("Produced");
-            if (this.isAb) {
-                spellAbility = AbilityFactoryMana.createAbilityMana(this, produced);
-            }
-            if (this.isSp) {
-                spellAbility = AbilityFactoryMana.createSpellMana(this, produced);
-            }
-            if (this.isDb) {
-                spellAbility = AbilityFactoryMana.createDrawbackMana(this, produced);
-            }
-        }
-
-        else if (this.api.equals("ManaReflected")) {
-            // Reflected mana will have a filler for produced of "1"
-            if (this.isAb) {
-                spellAbility = AbilityFactoryMana.createAbilityManaReflected(this, "1");
-            }
-            if (this.isSp) { // shouldn't really happen i think?
-                spellAbility = AbilityFactoryMana.createSpellManaReflected(this, "1");
-            }
-        }
-
         else if (this.api.equals("Token")) {
             final AbilityFactoryToken aft = new AbilityFactoryToken(this);
 
@@ -756,66 +1133,6 @@ public class AbilityFactory {
                 spellAbility = aft.getSpell();
             } else if (this.isDb) {
                 spellAbility = aft.getDrawback();
-            }
-        }
-
-        else if (this.api.equals("GainControl")) {
-            final AbilityFactoryGainControl afControl = new AbilityFactoryGainControl(this);
-
-            if (this.isAb) {
-                spellAbility = afControl.getAbilityGainControl();
-            } else if (this.isSp) {
-                spellAbility = afControl.getSpellGainControl();
-            } else if (this.isDb) {
-                spellAbility = afControl.getDrawbackGainControl();
-            }
-        }
-
-        else if (this.api.equals("Discard")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityDiscard(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellDiscard(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackDiscard(this);
-            }
-        }
-
-        else if (this.api.equals("Counter")) {
-            final AbilityFactoryCounterMagic c = new AbilityFactoryCounterMagic(this);
-
-            if (this.isTargeted) { // Since all "Counter" ABs Counter things on
-                                   // the
-                // Stack no need for it to be everywhere
-                this.abTgt.setZone(Zone.Stack);
-            }
-
-            if (this.isAb) {
-                spellAbility = c.getAbilityCounter(this);
-            } else if (this.isSp) {
-                spellAbility = c.getSpellCounter(this);
-            } else if (this.isDb) {
-                spellAbility = c.getDrawbackCounter(this);
-            }
-        }
-
-        else if (this.api.equals("AddTurn")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryTurns.createAbilityAddTurn(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryTurns.createSpellAddTurn(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryTurns.createDrawbackAddTurn(this);
-            }
-        }
-
-        else if (this.api.equals("Clash")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryClash.getAbilityClash(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryClash.getSpellClash(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryClash.getDrawbackClash(this);
             }
         }
 
@@ -829,23 +1146,23 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("Animate")) {
+        else if (this.api.equals("Untap")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryAnimate.createAbilityAnimate(this);
+                spellAbility = AbilityFactoryPermanentState.createAbilityUntap(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryAnimate.createSpellAnimate(this);
+                spellAbility = AbilityFactoryPermanentState.createSpellUntap(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryAnimate.createDrawbackAnimate(this);
+                spellAbility = AbilityFactoryPermanentState.createDrawbackUntap(this);
             }
         }
 
-        else if (this.api.equals("Effect")) {
+        else if (this.api.equals("UntapAll")) {
             if (this.isAb) {
-                spellAbility = AbilityFactoryEffect.createAbilityEffect(this);
+                spellAbility = AbilityFactoryPermanentState.createAbilityUntapAll(this);
             } else if (this.isSp) {
-                spellAbility = AbilityFactoryEffect.createSpellEffect(this);
+                spellAbility = AbilityFactoryPermanentState.createSpellUntapAll(this);
             } else if (this.isDb) {
-                spellAbility = AbilityFactoryEffect.createDrawbackEffect(this);
+                spellAbility = AbilityFactoryPermanentState.createDrawbackUntapAll(this);
             }
         }
 
@@ -858,313 +1175,12 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryEndGameCondition.createDrawbackWinsGame(this);
             }
         }
-
-        else if (this.api.equals("LosesGame")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryEndGameCondition.createAbilityLosesGame(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryEndGameCondition.createSpellLosesGame(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryEndGameCondition.createDrawbackLosesGame(this);
-            }
-        }
-
-        else if (this.api.equals("RevealHand")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityRevealHand(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellRevealHand(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackRevealHand(this);
-            }
-        }
-
-        else if (this.api.equals("Reveal")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityReveal(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellReveal(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackReveal(this);
-            }
-        }
-
-        else if (this.api.equals("Dig")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityDig(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellDig(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackDig(this);
-            }
-        }
-
-        else if (this.api.equals("DigUntil")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityDigUntil(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellDigUntil(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackDigUntil(this);
-            }
-        }
-
-        else if (this.api.equals("Shuffle")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityShuffle(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellShuffle(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackShuffle(this);
-            }
-        }
-
-        else if (this.api.equals("ChooseType")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseType(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseType(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseType(this);
-            }
-        }
-
-        else if (this.api.equals("ChooseColor")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseColor(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseColor(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseColor(this);
-            }
-        }
-
-        else if (this.api.equals("ChooseNumber")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseNumber(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseNumber(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseNumber(this);
-            }
-        }
-
-        else if (this.api.equals("ChoosePlayer")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChoosePlayer(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChoosePlayer(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChoosePlayer(this);
-            }
-        }
-
-        else if (this.api.equals("NameCard")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityNameCard(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellNameCard(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackNameCard(this);
-            }
-        }
-
-        else if (this.api.equals("CopyPermanent")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCopy.createAbilityCopyPermanent(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCopy.createSpellCopyPermanent(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCopy.createDrawbackCopyPermanent(this);
-            }
-        }
-
-        else if (this.api.equals("CopySpell")) {
-            if (this.isTargeted) { // Since all "CopySpell" ABs copy things on
-                                   // the
-                // Stack no need for it to be everywhere
-                this.abTgt.setZone(Zone.Stack);
-            }
-
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCopy.createAbilityCopySpell(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCopy.createSpellCopySpell(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCopy.createDrawbackCopySpell(this);
-            }
-
-            hostCard.setCopiesSpells(true);
-        }
-
-        else if (this.api.equals("FlipACoin")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryClash.createAbilityFlip(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryClash.createSpellFlip(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryClash.createDrawbackFlip(this);
-            }
-        }
-
-        else if (this.api.equals("DelayedTrigger")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDelayedTrigger.getAbility(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDelayedTrigger.getSpell(this);
-            }
-            if (this.isDb) {
-                spellAbility = AbilityFactoryDelayedTrigger.getDrawback(this);
-            }
-        }
-
-        else if (this.api.equals("Cleanup")) {
-            if (this.isDb) {
-                spellAbility = AbilityFactoryCleanup.getDrawback(this);
-            }
-        }
-
-        else if (this.api.equals("RegenerateAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryRegenerate.getAbilityRegenerateAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryRegenerate.getSpellRegenerateAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryRegenerate.createDrawbackRegenerateAll(this);
-            }
-        }
-
-        else if (this.api.equals("AnimateAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryAnimate.createAbilityAnimateAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryAnimate.createSpellAnimateAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryAnimate.createDrawbackAnimateAll(this);
-            }
-        }
-
-        else if (this.api.equals("Debuff")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDebuff.createAbilityDebuff(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDebuff.createSpellDebuff(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDebuff.createDrawbackDebuff(this);
-            }
-        }
-
-        else if (this.api.equals("DebuffAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDebuff.createAbilityDebuffAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDebuff.createSpellDebuffAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDebuff.createDrawbackDebuffAll(this);
-            }
-        }
-
-        else if (this.api.equals("DrainMana")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryMana.createAbilityDrainMana(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryMana.createSpellDrainMana(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryMana.createDrawbackDrainMana(this);
-            }
-        }
-
-        else if (this.api.equals("Protection")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryProtection.createAbilityProtection(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryProtection.createSpellProtection(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryProtection.createDrawbackProtection(this);
-            }
-        }
-
-        else if (this.api.equals("Attach")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryAttach.createAbilityAttach(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryAttach.createSpellAttach(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryAttach.createDrawbackAttach(this);
-            }
-        }
-
-        else if (this.api.equals("ProtectionAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryProtection.createAbilityProtectionAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryProtection.createSpellProtectionAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryProtection.createDrawbackProtectionAll(this);
-            }
-        }
-
-        else if (this.api.equals("MustAttack")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCombat.createAbilityMustAttack(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCombat.createSpellMustAttack(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCombat.createDrawbackMustAttack(this);
-            }
-        }
-
-        else if (this.api.equals("MustBlock")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCombat.createAbilityMustBlock(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCombat.createSpellMustBlock(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCombat.createDrawbackMustBlock(this);
-            }
-        }
-
-        else if (this.api.equals("Charm")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCharm.createAbilityCharm(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCharm.createSpellCharm(this);
-            }
-            spellAbility.setIsCharm(true);
-            final int num = Integer.parseInt(this.mapParams.containsKey("CharmNum") ? this.mapParams.get("CharmNum")
-                    : "1");
-            spellAbility.setCharmNumber(num);
-            final int min = this.mapParams.containsKey("MinCharmNum") ? Integer.parseInt(this.mapParams
-                    .get("MinCharmNum")) : num;
-            spellAbility.setMinCharmNumber(min);
-
-            final String[] saChoices = this.mapParams.get("Choices").split(",");
-            for (final String saChoice : saChoices) {
-                final String ab = this.hostC.getSVar(saChoice);
-                final AbilityFactory charmAF = new AbilityFactory();
-                spellAbility.addCharmChoice(charmAF.getAbility(ab, this.hostC));
-            }
-        }
-
-        else if (this.api.equals("SetState")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySetState.getSetStateAbility(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySetState.getSetStateSpell(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySetState.getSetStateDrawback(this);
-            }
-        }
-
-        else if (this.api.equals("SetStateAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySetState.getSetStateAllAbility(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySetState.getSetStateAllSpell(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySetState.getSetStateAllDrawback(this);
-            }
-        }
+        
+        ////////////////////////
+        //
+        // End API matching.  The above APIs are listed in alphabetical order.
+        //
+        ////////////////////////
 
         if (spellAbility == null) {
             final StringBuilder msg = new StringBuilder();
@@ -1244,7 +1260,7 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void makeConditions(final SpellAbility sa) {
-        // SpellAbility_Restrictions should be added in here
+        // SpellAbilityRestrictions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
         if (this.mapParams.containsKey("Flashback")) {
             sa.setFlashBackAbility(true);

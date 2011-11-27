@@ -39,16 +39,16 @@ public class AbilityFactoryPreventDamage {
 
     /**
      * <p>
-     * getAbilityPreventDamage.
+     * createAbilityPreventDamage.
      * </p>
      * 
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility getAbilityPreventDamage(final AbilityFactory af) {
+    public static SpellAbility createAbilityPreventDamage(final AbilityFactory af) {
 
-        final SpellAbility abRegenerate = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility abPrevent = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -6581723619801399347L;
 
             @Override
@@ -68,26 +68,26 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPreventDamage.doPreventDamageTriggerAI(af, this, mandatory);
+                return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(af, this, mandatory);
             }
 
         }; // Ability_Activated
 
-        return abRegenerate;
+        return abPrevent;
     }
 
     /**
      * <p>
-     * getSpellPreventDamage.
+     * createSpellPreventDamage.
      * </p>
      * 
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static SpellAbility getSpellPreventDamage(final AbilityFactory af) {
+    public static SpellAbility createSpellPreventDamage(final AbilityFactory af) {
 
-        final SpellAbility spRegenerate = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+        final SpellAbility spPrevent = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
             private static final long serialVersionUID = -3899905398102316582L;
 
             @Override
@@ -107,7 +107,7 @@ public class AbilityFactoryPreventDamage {
 
         }; // Spell
 
-        return spRegenerate;
+        return spPrevent;
     }
 
     /**
@@ -120,7 +120,7 @@ public class AbilityFactoryPreventDamage {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackPreventDamage(final AbilityFactory af) {
-        final SpellAbility dbRegen = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+        final SpellAbility dbPrevent = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -2295483806708528744L;
 
             @Override
@@ -140,11 +140,11 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPreventDamage.doPreventDamageTriggerAI(af, this, mandatory);
+                return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(af, this, mandatory);
             }
 
         };
-        return dbRegen;
+        return dbPrevent;
     }
 
     /**
@@ -354,7 +354,7 @@ public class AbilityFactoryPreventDamage {
 
     /**
      * <p>
-     * doPreventDamageTriggerAI.
+     * preventDamageDoTriggerAI.
      * </p>
      * 
      * @param af
@@ -365,7 +365,7 @@ public class AbilityFactoryPreventDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean doPreventDamageTriggerAI(final AbilityFactory af, final SpellAbility sa,
+    private static boolean preventDamageDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         boolean chance = false;
 
@@ -432,7 +432,7 @@ public class AbilityFactoryPreventDamage {
                 }
             }
 
-            // TODO see if something on the stack is about to kill something i
+            // TODO see if something on the stack is about to kill something I
             // can target
 
             tgt.addTarget(combatants.get(0));
@@ -474,7 +474,7 @@ public class AbilityFactoryPreventDamage {
                 }
             }
             if (origin != null) {
-             // Can't radiate from a player
+                // Can't radiate from a player
                 for (final Card c : CardUtil.getRadiance(af.getHostCard(), origin, params.get("ValidTgts").split(","))) {
                     untargetedCards.add(c);
                 }
@@ -503,5 +503,233 @@ public class AbilityFactoryPreventDamage {
                 c.addPreventNextDamage(numDam);
             }
         }
-    } // doResolve
-}
+    } // preventDamageResolve
+
+    // *************************************************************************
+    // ************************* PreventDamageAll ******************************
+    // *************************************************************************
+    
+    /**
+     * <p>
+     * createAbilityPreventDamageAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createAbilityPreventDamageAll(final AbilityFactory af) {
+        final SpellAbility abPreventAll = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 5750726631110311462L;
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryPreventDamage.preventDamageAllCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryPreventDamage.preventDamageAllResolve(af, this);
+            }
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryPreventDamage.preventDamageAllStackDescription(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(af, this, mandatory);
+            }
+
+        }; // Ability_Activated
+
+        return abPreventAll;
+    }
+
+    /**
+     * <p>
+     * createSpellPreventDamageAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createSpellPreventDamageAll(final AbilityFactory af) {
+        final SpellAbility spPreventAll = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 7232585188922284377L;
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryPreventDamage.preventDamageAllCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryPreventDamage.preventDamageAllResolve(af, this);
+            }
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryPreventDamage.preventDamageAllStackDescription(af, this);
+            }
+
+        }; // Spell
+
+        return spPreventAll;
+    }
+
+    /**
+     * <p>
+     * createDrawbackPreventDamageAll.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackPreventDamageAll(final AbilityFactory af) {
+        final SpellAbility dbPreventAll = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -655573137457133314L;
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryPreventDamage.preventDamageAllStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryPreventDamage.preventDamageAllResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAIDrawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbPreventAll;
+    }
+
+    private static String preventDamageAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+        final Card host = af.getHostCard();
+
+        if (sa instanceof AbilitySub) {
+            sb.append(" ");
+        } else {
+            sb.append(host).append(" - ");
+        }
+        
+        String desc = sa.getDescription();
+        
+        if (desc.contains(":")) {
+            desc = desc.split(":")[1];
+        }
+
+        sb.append(desc);
+        
+        final AbilitySub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    private static boolean preventDamageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        final Card hostCard = af.getHostCard();
+        boolean chance = false;
+
+        final Cost cost = sa.getPayCosts();
+
+        // temporarily disabled until better AI
+        if (!CostUtil.checkLifeCost(cost, hostCard, 4)) {
+            return false;
+        }
+
+        if (!CostUtil.checkDiscardCost(cost, hostCard)) {
+            return false;
+        }
+
+        if (!CostUtil.checkSacrificeCost(cost, hostCard)) {
+            return false;
+        }
+
+        if (!CostUtil.checkRemoveCounterCost(cost, hostCard)) {
+            return false;
+        }
+        
+        if (AllZone.getStack().size() > 0) {
+            // TODO check stack for something on the stack will kill anything i
+            // control
+
+        } // Protect combatants
+        else if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            //TODO
+        }
+
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            chance &= subAb.chkAIDrawback();
+        }
+
+        return chance;
+    }
+
+    private static boolean preventDamageAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory) {
+        boolean chance = false;
+
+        if (!ComputerUtil.canPayCost(sa)) {
+            return false;
+        }
+        chance = true;
+
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            chance &= subAb.doTrigger(mandatory);
+        }
+
+        return chance;
+    }
+
+    private static void preventDamageAllResolve(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+        Card source = sa.getSourceCard();
+        final int numDam = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
+
+        String players = "";
+        CardList list = new CardList();
+
+        if (params.containsKey("ValidPlayers")) {
+            players = params.get("ValidPlayers");
+        }
+
+        if (params.containsKey("ValidCards")) {
+            list = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        }
+        
+        list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
+
+        for (final Card c : list) {
+            c.addPreventNextDamage(numDam);
+        }
+
+        if (!players.equals("")) {
+            final ArrayList<Player> playerList = new ArrayList<Player>(AllZone.getPlayersInGame());
+            for (final Player p : playerList) {
+                if (p.isValid(players, source.getController(), source)) {
+                    p.addPreventNextDamage(numDam);
+                }
+            }
+        }
+    } // preventDamageAllResolve
+
+} //end class AbilityFactoryPreventDamage
