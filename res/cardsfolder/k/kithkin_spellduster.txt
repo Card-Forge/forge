@@ -6,7 +6,6 @@ PT:2/3
 K:Flying
 K:Persist
 A:AB$ Destroy | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_spellduster.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/8.jpg

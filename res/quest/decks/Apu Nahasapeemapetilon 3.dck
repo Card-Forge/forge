@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Apu Nahasapeemapetilon 3
+Title=Apu Nahasapeemapetilon
+Difficulty=hard
+Description=WG persist deck with Melira, Sylvok Outcast
+Icon=Apu Nahasapeemapetilon.jpg
+Deck Type=constructed
+[main]
+4 Sunpetal Grove
+5 Forest
+4 Razorverge Thicket
+2 Plains
+4 Savannah
+4 Windswept Heath
+1 Oran-Rief, the Vastwood
+4 Time of Need
+4 Melira, Sylvok Outcast
+2 Heartmender
+4 Kitchen Finks
+4 Safehold Elite
+4 Rendclaw Trow
+4 Scuzzback Marauders
+4 Aerie Ouphes
+1 Kithkin Spellduster
+1 Woodfall Primus
+1 Privileged Position
+2 Swords to Plowshares
+1 Naturalize
+[sideboard]
