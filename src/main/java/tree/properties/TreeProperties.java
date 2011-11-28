@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2009  Clemens Koza
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package tree.properties;
 
 /**
@@ -149,28 +166,23 @@ public class TreeProperties implements Iterable<PropertyElement> {
     }
 
     /**
-     * Delegate to {@link #TreeProperties(File)} with a new
+     * Delegate to {@link #TreeProperties(File)} with a new.
+     *
+     * @param f a {@link java.lang.String} object.
+     * @throws IOException Signals that an I/O exception has occurred.
      * {@link File#File(String)}.
-     * 
-     * @param f
-     *            a {@link java.lang.String} object.
-     * @throws java.io.IOException
-     *             if any.
      */
     public TreeProperties(final String f) throws IOException {
         this(new File(f));
     }
 
     /**
-     * Delegate to {@link #TreeProperties(File)} with a new
+     * Delegate to {@link #TreeProperties(File)} with a new.
+     *
+     * @param parent a {@link java.io.File} object.
+     * @param f a {@link java.lang.String} object.
+     * @throws IOException Signals that an I/O exception has occurred.
      * {@link File#File(File, String)}.
-     * 
-     * @param parent
-     *            a {@link java.io.File} object.
-     * @param f
-     *            a {@link java.lang.String} object.
-     * @throws java.io.IOException
-     *             if any.
      */
     public TreeProperties(final File parent, final String f) throws IOException {
         this(new File(parent, f));
@@ -182,11 +194,9 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * found. Instead, the rest of the properties are processed, so that the
      * erroneous properties are the only ones not present in this
      * TreeProperties. Afterwards, the exceptions can be accessed.
-     * 
-     * @param f
-     *            a {@link java.io.File} object.
-     * @throws java.io.IOException
-     *             if any.
+     *
+     * @param f a {@link java.io.File} object.
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public TreeProperties(final File f) throws IOException {
         if (f == null) {
@@ -252,9 +262,8 @@ public class TreeProperties implements Iterable<PropertyElement> {
     /**
      * If exceptions occurred during construction, this method throws an
      * IOException that combines the messages of those exceptions.
-     * 
-     * @throws java.io.IOException
-     *             if any.
+     *
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public final void rethrow() throws IOException {
         if (exceptions.isEmpty()) {
@@ -339,14 +348,11 @@ public class TreeProperties implements Iterable<PropertyElement> {
     /**
      * Returns a property of the given type. This does not work to retrieve tree
      * properties.
-     * 
-     * @param key
-     *            a {@link java.lang.String} object.
-     * @param cls
-     *            a {@link java.lang.Class} object.
+     *
+     * @param <T> a T object.
+     * @param key a {@link java.lang.String} object.
+     * @param cls a {@link java.lang.Class} object.
      * @return a T object.
-     * @param <T>
-     *            a T object.
      */
     @SuppressWarnings("unchecked")
     public final <T> T getProperty(final String key, final Class<T> cls) {
