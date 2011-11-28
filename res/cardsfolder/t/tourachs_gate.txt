@@ -13,4 +13,5 @@ SVar:Pump:AB$ PumpAll | Cost$ T | ValidCardss$ Creature.attacking+YouCtrl | NumA
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tourachs_gate.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/33.jpg
 End

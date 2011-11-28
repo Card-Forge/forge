@@ -8,4 +8,5 @@ SVar:DBPrevent:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt$ Selec
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balm_of_restoration.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/167.jpg
 End

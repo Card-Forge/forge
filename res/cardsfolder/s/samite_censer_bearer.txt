@@ -7,4 +7,5 @@ A:AB$ PreventDamageAll | Cost$ T | ValidCards$ Creature.YouCtrl | Amount$ 1 | Sp
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_censer_bearer.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/15.jpg
 End
