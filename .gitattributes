@@ -3673,6 +3673,7 @@ res/cardsfolder/h/hallowed_burial.txt svneol=native#text/plain
 res/cardsfolder/h/hallowed_fountain.txt svneol=native#text/plain
 res/cardsfolder/h/hallowed_ground.txt svneol=native#text/plain
 res/cardsfolder/h/hallowed_healer.txt svneol=native#text/plain
+res/cardsfolder/h/halls_of_mist.txt -text
 res/cardsfolder/h/halo_hunter.txt svneol=native#text/plain
 res/cardsfolder/h/halt_order.txt svneol=native#text/plain
 res/cardsfolder/h/hamlet_captain.txt -text
