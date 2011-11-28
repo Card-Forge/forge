@@ -38,6 +38,28 @@ Fixes/Features:
 - Reorganized player field labels.
 - Fixed vertical alignment of player field detail labels.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- minor text fixes for a few cards
+- add the static etb ability for Black Vise
+- Updated two quest decks.
+- add a PreventDamageAll AbilityFactory. (Also, alphabetized the API if-else if block in AbilityFactory class).
+- clean up some java warnings in deck generators
+- The AI will now realize the interaction of Melira, Sylvok Outcast and Persist cards.
+- more java warning cleanup
+- java warning and TODO cleanup in CostPart
+- suppress a warning in QuestUtilCards
+- more java warnings cleanup
+- more java warning and TODO cleanup in GameAction, Player, GameSummary, CustomLimited, and CardPanelHeavy
+- comment out ConstantStringHashMap class. It's not being used, and maybe we just don't need it anymore.
+- Fixed Rending Vines
+- Added a hard version of the Apu deck.
+- Fixed Forget.
+- change what looks to be a copy/paste error in ViewDock.java
+- add AI logic in Black Vise
+- add an AF_ChooseCard. It's pretty specific right now, but can be generalized/tweaked for when/how the needs arise
+- little cleanup in AbstractCardFactory.java
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -48,6 +70,16 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added many cards, including:
 
 Ashnod's Cylix
+Strata Scythe
+Forget
+Tourach's Gate
+Greater Werewolf
+Serra Bestiary
+Kitsune Palliator
+Samite Censer-Bearer
+Balm of Restoration
+Halls of Mist
+Sundering Titan
 
 
 end
