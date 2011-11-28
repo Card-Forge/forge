@@ -1160,46 +1160,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*
-         * else if (cardName.equals("Pithing Needle")) { final SpellAbility
-         * ability = new AbilityStatic(card, "0") {
-         * 
-         * @Override public void resolve() { String cardName = ""; if
-         * (card.getController().isHuman()) { final List<String> cards = new
-         * ArrayList<String>(); for (final CardPrinted c :
-         * CardDb.instance().getAllUniqueCards()) { cards.add(c.getName()); }
-         * Collections.sort(cards);
-         * 
-         * // use standard forge's list selection dialog final
-         * ListChooser<String> c = new ListChooser<String>(
-         * "Name a card to disable activation of its non-mana abilities", 1, 1,
-         * cards); c.show(); // still missing a listener to display the card
-         * preview // in the right cardName = c.getSelectedValue(); } else { //
-         * AI CODE WILL EVENTUALLY GO HERE! } card.setSVar("PithingTarget",
-         * cardName); card.setChosenType(cardName); } }; // ability
-         * ability.setStackDescription
-         * ("As Pithing Needle enters the battlefield, name a card."); final
-         * Command intoPlay = new Command() {
-         * 
-         * private static final long serialVersionUID = 2266471224097876143L;
-         * 
-         * @Override public void execute() {
-         * AllZone.getStack().addSimultaneousStackEntry(ability);
-         * 
-         * } };
-         * 
-         * final Command leavesPlay = new Command() {
-         * 
-         * private static final long serialVersionUID = 7079781778752377760L;
-         * 
-         * @Override public void execute() { card.setSVar("Pithing Target", "");
-         * } };
-         * 
-         * card.addComesIntoPlayCommand(intoPlay);
-         * card.addLeavesPlayCommand(leavesPlay); }
-         */// *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Processor")) {
             final Command intoPlay = new Command() {
                 private static final long serialVersionUID = 5634360316643996274L;
