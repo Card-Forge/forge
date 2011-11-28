@@ -1,4 +1,23 @@
-/** Licensed under both the GPL and the Apache 2.0 License. */
+/*
+ * The files in the directory "net/slightlymagic/braids" and in all subdirectories of it (the "Files") are
+ * Copyright 2011 Braids Cabal-Conjurer. They are available under either Forge's
+ * main license (the GNU Public License; see LICENSE.txt in Forge's top directory)
+ * or under the Apache License, as explained below.
+ *
+ * The Files are additionally licensed under the Apache License, Version 2.0 (the
+ * "Apache License"); you may not use the files in this directory except in
+ * compliance with one of its two licenses.  You may obtain a copy of the Apache
+ * License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Apache License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Apache License for the specific language governing permissions and
+ * limitations under the Apache License.
+ *
+ */
 package net.slightlymagic.braids.util.generator;
 
 import java.io.File;
@@ -40,10 +59,9 @@ public class FindNonDirectoriesSkipDotDirectoriesGenerator implements Generator<
      * </p>
      * 
      * See
+     *
+     * @param yy the yy
      * {@link com.google.code.jyield.YieldUtils#toIterable(com.google.code.jyield.Generator)}
-     * 
-     * @param yy
-     *            the yy
      */
     public final void generate(final Yieldable<File> yy) {
         String[] list = startDir.list();
