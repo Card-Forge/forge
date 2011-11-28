@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.match;
 
 import java.awt.Color;
@@ -31,90 +48,93 @@ import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FVerticalTabPanel;
 
-/** 
- * Vertical tab panel for viewing stack, combat, etc.
- * Unfortunately, cannot extend a Swing component, since
- * vertical tabs are generated dynamically in the constructor.
- *
+/**
+ * Vertical tab panel for viewing stack, combat, etc. Unfortunately, cannot
+ * extend a Swing component, since vertical tabs are generated dynamically in
+ * the constructor.
+ * 
  */
 public class ViewTabber {
-    private List<JPanel> panelList;
+    private final List<JPanel> panelList;
     private HashMap<Player, JLabel[]> detailLabels;
 
-    private ControlTabber control;
-    private FSkin skin;
+    private final ControlTabber control;
+    private final FSkin skin;
 
-    private FPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
+    private final FPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
 
-    private DevLabel lblMilling, lblHandView, lblLibraryView, lblGenerateMana,
-        lblSetupGame, lblTutor, lblCounterPermanent, lblTapPermanent, lblUntapPermanent,
-        lblUnlimitedLands, lblHumanLife;
+    private DevLabel lblMilling, lblHandView, lblLibraryView, lblGenerateMana, lblSetupGame, lblTutor,
+            lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblHumanLife;
 
-    private FVerticalTabPanel vtpTabber;
+    private final FVerticalTabPanel vtpTabber;
 
     /**
      * Assembles Swing components for tabber area in sidebar.
      */
     public ViewTabber() {
-        skin = AllZone.getSkin();
+        this.skin = AllZone.getSkin();
 
         // Assemble card pic viewer
-        panelList = new ArrayList<JPanel>();
-        String constraints = "wrap, insets 0, gap 0";
+        this.panelList = new ArrayList<JPanel>();
+        final String constraints = "wrap, insets 0, gap 0";
 
-        pnlStack = new FPanel();
-        pnlStack.setName("Stack");
-        pnlStack.setOpaque(false);
-        pnlStack.setLayout(new MigLayout(constraints));
-        pnlStack.setToolTipText("View Stack");
-        panelList.add(pnlStack);
+        this.pnlStack = new FPanel();
+        this.pnlStack.setName("Stack");
+        this.pnlStack.setOpaque(false);
+        this.pnlStack.setLayout(new MigLayout(constraints));
+        this.pnlStack.setToolTipText("View Stack");
+        this.panelList.add(this.pnlStack);
 
-        pnlCombat = new FPanel();
-        pnlCombat.setName("Combat");
-        pnlCombat.setOpaque(false);
-        pnlCombat.setLayout(new MigLayout(constraints));
-        pnlCombat.setToolTipText("View Combat");
-        panelList.add(pnlCombat);
+        this.pnlCombat = new FPanel();
+        this.pnlCombat.setName("Combat");
+        this.pnlCombat.setOpaque(false);
+        this.pnlCombat.setLayout(new MigLayout(constraints));
+        this.pnlCombat.setToolTipText("View Combat");
+        this.panelList.add(this.pnlCombat);
 
-        pnlConsole = new FPanel();
-        pnlConsole.setName("Log");
-        pnlConsole.setOpaque(false);
-        pnlConsole.setLayout(new MigLayout(constraints));
-        pnlConsole.setToolTipText("View Console");
-        panelList.add(pnlConsole);
+        this.pnlConsole = new FPanel();
+        this.pnlConsole.setName("Log");
+        this.pnlConsole.setOpaque(false);
+        this.pnlConsole.setLayout(new MigLayout(constraints));
+        this.pnlConsole.setToolTipText("View Console");
+        this.panelList.add(this.pnlConsole);
 
-        pnlPlayers = new FPanel();
-        pnlPlayers.setName("Players");
-        pnlPlayers.setOpaque(false);
-        pnlPlayers.setLayout(new MigLayout(constraints));
-        pnlPlayers.setToolTipText("Player List");
-        panelList.add(pnlPlayers);
+        this.pnlPlayers = new FPanel();
+        this.pnlPlayers.setName("Players");
+        this.pnlPlayers.setOpaque(false);
+        this.pnlPlayers.setLayout(new MigLayout(constraints));
+        this.pnlPlayers.setToolTipText("Player List");
+        this.panelList.add(this.pnlPlayers);
 
-        pnlDev = new FPanel();
-        pnlDev.setName("Dev");
-        pnlDev.setOpaque(false);
-        pnlDev.setLayout(new MigLayout(constraints));
-        pnlDev.setToolTipText("Developer Mode");
+        this.pnlDev = new FPanel();
+        this.pnlDev.setName("Dev");
+        this.pnlDev.setOpaque(false);
+        this.pnlDev.setLayout(new MigLayout(constraints));
+        this.pnlDev.setToolTipText("Developer Mode");
 
         if (Constant.Runtime.DEV_MODE[0]) {
-            panelList.add(pnlDev);
+            this.panelList.add(this.pnlDev);
         }
 
         // Populate the various panels in the tabber.
-        populatePnlDev();
-        populatePnlPlayers();
-        populatePnlConsole();
+        this.populatePnlDev();
+        this.populatePnlPlayers();
+        this.populatePnlConsole();
 
-        vtpTabber = new FVerticalTabPanel(panelList);
-        vtpTabber.getContentPanel().setBorder(new MatteBorder(1, 0, 0, 1, skin.getClrBorders()));
+        this.vtpTabber = new FVerticalTabPanel(this.panelList);
+        this.vtpTabber.getContentPanel().setBorder(new MatteBorder(1, 0, 0, 1, this.skin.getClrBorders()));
 
         // After all components are in place, instantiate controller.
-        control = new ControlTabber(this);
+        this.control = new ControlTabber(this);
     }
 
-    /** @return ControlTabber */
+    /**
+     * Gets the controller.
+     * 
+     * @return ControlTabber
+     */
     public ControlTabber getController() {
-        return control;
+        return this.control;
     }
 
     /**
@@ -130,20 +150,21 @@ public class ViewTabber {
         JTextArea tar;
         String txt, isOptional;
 
-        pnlStack.removeAll();
-        vtpTabber.showTab(0);
-        Font font = skin.getFont1().deriveFont(Font.PLAIN, 14);
-        Border border = new MatteBorder(0, 0, 1, 0, skin.getClrBorders());
+        this.pnlStack.removeAll();
+        this.vtpTabber.showTab(0);
+        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
+        final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
 
         for (int i = stack.size() - 1; 0 <= i; i--) {
-            isOptional = stack.peekAbility(i).isOptionalTrigger() && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
+            isOptional = stack.peekAbility(i).isOptionalTrigger()
+                    && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
             txt = (count++) + ". " + isOptional + stack.peekInstance(i).getStackDescription();
             tar = new JTextArea(txt);
             tar.setToolTipText(txt);
             tar.setOpaque(false);
             tar.setBorder(border);
             tar.setFont(font);
-            tar.setForeground(skin.getClrText());
+            tar.setForeground(this.skin.getClrText());
             tar.setFocusable(false);
             tar.setEditable(false);
             tar.setLineWrap(true);
@@ -152,14 +173,14 @@ public class ViewTabber {
             final SpellAbilityStackInstance spell = stack.peekInstance(i);
 
             tar.addMouseListener(new MouseAdapter() {
-               @Override
-               public void mouseEntered(MouseEvent e) {
-                   t.getCardviewerController().showCard(spell.getSpellAbility().getSourceCard());
-                   System.out.println();
-               }
+                @Override
+                public void mouseEntered(final MouseEvent e) {
+                    t.getCardviewerController().showCard(spell.getSpellAbility().getSourceCard());
+                    System.out.println();
+                }
             });
 
-            pnlStack.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
+            this.pnlStack.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
         }
     }
 
@@ -167,336 +188,424 @@ public class ViewTabber {
      * Removes and adds JTextAreas to combat panel, which briefly summarize the
      * current combat situation.
      * 
-     * @param s &emsp; String message
+     * @param s
+     *            &emsp; String message
      */
 
     // Note: Can (should?) be easily retrofitted to fit stack-style reporting:
-    // multiple text areas, with mouseovers highlighting combat cards.  Doublestrike 06-11-11
-    public void updateCombat(String s) {
-        pnlCombat.removeAll();
-        vtpTabber.showTab(1);
+    // multiple text areas, with mouseovers highlighting combat cards.
+    // Doublestrike 06-11-11
+    public void updateCombat(final String s) {
+        this.pnlCombat.removeAll();
+        this.vtpTabber.showTab(1);
 
-        Font font = skin.getFont1().deriveFont(Font.PLAIN, 11);
-        Border border = new MatteBorder(1, 0, 0, 0, Color.black);
+        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 11);
+        final Border border = new MatteBorder(1, 0, 0, 0, Color.black);
 
-        JTextArea tar = new JTextArea(s);
+        final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
         tar.setBorder(border);
         tar.setFont(font);
         tar.setFocusable(false);
         tar.setLineWrap(true);
-        pnlCombat.add(tar, "h 100%!, w 100%!");
+        this.pnlCombat.add(tar, "h 100%!, w 100%!");
     }
 
-    /** Updates labels in the "player" panel, which display non-critical details about
-     *  each player in the game.
-     *
-     *  @param p0 &emsp; Player obj
+    /**
+     * Updates labels in the "player" panel, which display non-critical details
+     * about each player in the game.
+     * 
+     * @param p0
+     *            &emsp; Player obj
      */
-    public void updatePlayerLabels(Player p0) {
-        JLabel[] temp = detailLabels.get(p0);
+    public void updatePlayerLabels(final Player p0) {
+        final JLabel[] temp = this.detailLabels.get(p0);
         temp[0].setText("Life: " + String.valueOf(p0.getLife()));
         temp[1].setText("Max hand: " + String.valueOf(p0.getMaxHandSize()));
         temp[2].setText("Draw per turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
     }
 
-    /** @return FVerticalTabPanel */
+    /**
+     * Gets the vtp tabber.
+     * 
+     * @return FVerticalTabPanel
+     */
     public FVerticalTabPanel getVtpTabber() {
-        return vtpTabber;
+        return this.vtpTabber;
     }
 
-    /** @return FPanel */
+    /**
+     * Gets the pnl stack.
+     * 
+     * @return FPanel
+     */
     public FPanel getPnlStack() {
-        return pnlStack;
+        return this.pnlStack;
     }
 
-    /** @return FPanel */
+    /**
+     * Gets the pnl combat.
+     * 
+     * @return FPanel
+     */
     public FPanel getPnlCombat() {
-        return pnlCombat;
+        return this.pnlCombat;
     }
 
-    /** @return FPanel */
+    /**
+     * Gets the pnl players.
+     * 
+     * @return FPanel
+     */
     public FPanel getPnlPlayers() {
-        return pnlPlayers;
+        return this.pnlPlayers;
     }
 
-    /** @return FPanel */
+    /**
+     * Gets the pnl dev.
+     * 
+     * @return FPanel
+     */
     public FPanel getPnlDev() {
-        return pnlDev;
+        return this.pnlDev;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl milling.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblMilling() {
-        return lblMilling;
+        return this.lblMilling;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl hand view.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblHandView() {
-        return lblHandView;
+        return this.lblHandView;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl library view.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblLibraryView() {
-        return lblLibraryView;
+        return this.lblLibraryView;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl generate mana.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblGenerateMana() {
-        return lblGenerateMana;
+        return this.lblGenerateMana;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl setup game.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblSetupGame() {
-        return lblSetupGame;
+        return this.lblSetupGame;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl tutor.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblTutor() {
-        return lblTutor;
+        return this.lblTutor;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl counter permanent.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblCounterPermanent() {
-        return lblCounterPermanent;
+        return this.lblCounterPermanent;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl tap permanent.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblTapPermanent() {
-        return lblTapPermanent;
+        return this.lblTapPermanent;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl untap permanent.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblUntapPermanent() {
-        return lblUntapPermanent;
+        return this.lblUntapPermanent;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl unlimited lands.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblUnlimitedLands() {
-        return lblUnlimitedLands;
+        return this.lblUnlimitedLands;
     }
 
-    /** @return DevLabel */
+    /**
+     * Gets the lbl human life.
+     * 
+     * @return DevLabel
+     */
     public DevLabel getLblHumanLife() {
-        return lblHumanLife;
+        return this.lblHumanLife;
     }
 
-    /** @return HashMap<Player, JLabel[]> */
+    /**
+     * Gets the detail labels.
+     * 
+     * @return HashMap<Player, JLabel[]>
+     */
     public HashMap<Player, JLabel[]> getDetailLabels() {
-        return detailLabels;
+        return this.detailLabels;
     }
-
 
     /** Assembles Swing components for "players" panel. */
     private void populatePnlPlayers() {
-        List<Player> players = AllZone.getPlayersInGame();
-        detailLabels = new HashMap<Player, JLabel[]>();
+        final List<Player> players = AllZone.getPlayersInGame();
+        this.detailLabels = new HashMap<Player, JLabel[]>();
 
-        for (Player p : players) {
-            // Create and store labels detailing various non-critical player info.
-            InfoLabel name = new InfoLabel();
-            InfoLabel life = new InfoLabel();
-            InfoLabel hand = new InfoLabel();
-            InfoLabel draw = new InfoLabel();
-            detailLabels.put(p, new JLabel[] {life, hand, draw});
+        for (final Player p : players) {
+            // Create and store labels detailing various non-critical player
+            // info.
+            final InfoLabel name = new InfoLabel();
+            final InfoLabel life = new InfoLabel();
+            final InfoLabel hand = new InfoLabel();
+            final InfoLabel draw = new InfoLabel();
+            this.detailLabels.put(p, new JLabel[] { life, hand, draw });
 
             // Set border on bottom label, and larger font on player name
-            draw.setBorder(new MatteBorder(0, 0, 1, 0, skin.getClrBorders()));
+            draw.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders()));
             name.setText(p.getName());
-            name.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+            name.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 14));
 
             // Add to "players" tab panel
-            String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
-            pnlPlayers.add(name, constraints);
-            pnlPlayers.add(life, constraints);
-            pnlPlayers.add(hand, constraints);
-            pnlPlayers.add(draw, constraints);
+            final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
+            this.pnlPlayers.add(name, constraints);
+            this.pnlPlayers.add(life, constraints);
+            this.pnlPlayers.add(hand, constraints);
+            this.pnlPlayers.add(draw, constraints);
         }
     }
 
     /** Assembles Swing components for "dev mode" panel. */
     private void populatePnlDev() {
-        JPanel viewport = new JPanel();
+        final JPanel viewport = new JPanel();
         viewport.setLayout(new MigLayout("wrap, insets 0"));
         viewport.setOpaque(false);
 
-        JScrollPane jsp = new JScrollPane(viewport, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        final JScrollPane jsp = new JScrollPane(viewport, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jsp.setOpaque(false);
         jsp.getViewport().setOpaque(false);
 
-        pnlDev.add(jsp, "w 100%!, h 100%!");
+        this.pnlDev.add(jsp, "w 100%!, h 100%!");
 
-        lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
-        lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
-        lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
-        lblGenerateMana = new DevLabel("Generate Mana");
-        lblSetupGame = new DevLabel("Setup Game State");
-        lblTutor = new DevLabel("Tutor for card");
-        lblCounterPermanent = new DevLabel("Add Counter to Permanent");
-        lblTapPermanent = new DevLabel("Tap Permanent");
-        lblUntapPermanent = new DevLabel("Untap Permanent");
-        lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn");
-        lblHumanLife = new DevLabel("Set Player Life");
+        this.lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
+        this.lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
+        this.lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
+        this.lblGenerateMana = new DevLabel("Generate Mana");
+        this.lblSetupGame = new DevLabel("Setup Game State");
+        this.lblTutor = new DevLabel("Tutor for card");
+        this.lblCounterPermanent = new DevLabel("Add Counter to Permanent");
+        this.lblTapPermanent = new DevLabel("Tap Permanent");
+        this.lblUntapPermanent = new DevLabel("Untap Permanent");
+        this.lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn");
+        this.lblHumanLife = new DevLabel("Set Player Life");
 
-        String constraints = "w 100%!, gap 0 0 5px 0";
-        viewport.add(lblMilling, constraints);
-        viewport.add(lblHandView, constraints);
-        viewport.add(lblLibraryView, constraints);
-        viewport.add(lblGenerateMana, constraints);
-        viewport.add(lblSetupGame, constraints);
-        viewport.add(lblTutor, constraints);
-        viewport.add(lblCounterPermanent, constraints);
-        viewport.add(lblTapPermanent, constraints);
-        viewport.add(lblUntapPermanent, constraints);
-        viewport.add(lblUnlimitedLands, constraints);
-        viewport.add(lblHumanLife, constraints);
+        final String constraints = "w 100%!, gap 0 0 5px 0";
+        viewport.add(this.lblMilling, constraints);
+        viewport.add(this.lblHandView, constraints);
+        viewport.add(this.lblLibraryView, constraints);
+        viewport.add(this.lblGenerateMana, constraints);
+        viewport.add(this.lblSetupGame, constraints);
+        viewport.add(this.lblTutor, constraints);
+        viewport.add(this.lblCounterPermanent, constraints);
+        viewport.add(this.lblTapPermanent, constraints);
+        viewport.add(this.lblUntapPermanent, constraints);
+        viewport.add(this.lblUnlimitedLands, constraints);
+        viewport.add(this.lblHumanLife, constraints);
     }
 
     /** Assembles swing components for "console" panel. */
     private void populatePnlConsole() {
-        JLabel prompt = new JLabel("IN > ");
-        JTextField input = new JTextField();
+        final JLabel prompt = new JLabel("IN > ");
+        final JTextField input = new JTextField();
 
-        JTextArea log = new JTextArea();
+        final JTextArea log = new JTextArea();
         log.setBackground(new Color(0, 0, 0, 20));
         log.setWrapStyleWord(true);
         log.setLineWrap(true);
         log.setWrapStyleWord(true);
         log.setEditable(false);
         log.setFocusable(false);
-        log.setForeground(skin.getClrText());
-        log.setFont(skin.getFont1().deriveFont(Font.PLAIN, 12));
-        log.setBorder(new MatteBorder(1, 0, 0, 0, skin.getClrBorders()));
+        log.setForeground(this.skin.getClrText());
+        log.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 12));
+        log.setBorder(new MatteBorder(1, 0, 0, 0, this.skin.getClrBorders()));
 
-        log.setText("Not implemented yet. Input codes entered above. "
-                + "Output data recorded below.");
+        log.setText("Not implemented yet. Input codes entered above. " + "Output data recorded below.");
 
-        pnlConsole.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        this.pnlConsole.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        pnlConsole.add(prompt, "w 28%!, h 10%!, gapleft 2%, gaptop 2%, gapbottom 2%");
-        pnlConsole.add(input, "w 68%!, gapright 2%, gaptop 2%, gapbottom 2%");
-        pnlConsole.add(log, "w 94%!, h 80%!, gapleft 4%, span 2 1");
+        this.pnlConsole.add(prompt, "w 28%!, h 10%!, gapleft 2%, gaptop 2%, gapbottom 2%");
+        this.pnlConsole.add(input, "w 68%!, gapright 2%, gaptop 2%, gapbottom 2%");
+        this.pnlConsole.add(log, "w 94%!, h 80%!, gapleft 4%, span 2 1");
     }
 
     /**
-    * Labels that act as buttons which control dev mode functions. Labels
-    * are used to support multiline text.
-    *
-    */
-   public class DevLabel extends JLabel {
-       private static final long serialVersionUID = 7917311680519060700L;
+     * Labels that act as buttons which control dev mode functions. Labels are
+     * used to support multiline text.
+     * 
+     */
+    public class DevLabel extends JLabel {
+        private static final long serialVersionUID = 7917311680519060700L;
 
-       private Color defaultBG = Color.green;
-       private Color hoverBG = skin.getClrHover();
-       private boolean enabled;
-       private String enabledText, disabledText;
-       private int w, h, r, i;  // Width, height, radius, insets (for paintComponent)
+        private Color defaultBG = Color.green;
+        private final Color hoverBG = ViewTabber.this.skin.getClrHover();
+        private boolean enabled;
+        private final String enabledText, disabledText;
+        private int w, h; // Width, height, radius, insets (for paintComponent)
 
-       /** 
-        * Labels that act as buttons which control dev mode functions. Labels
-        * are used (instead of buttons) to support multiline text.
-        * 
-        * Constructor for DevLabel which doesn't use enabled/disabled states;
-        * only single text string required.
-        * 
-        * @param s0 &emsp; String text/tooltip of label
-        */
-       public DevLabel(String s0) {
-           this(s0, s0);
-       }
+        private final int r;
 
-       /**
-        * Labels that act as buttons which control dev mode functions. Labels
-        * are used (instead of buttons) to support multiline text.
-        * 
-        * This constructor for DevLabels empowers an "enable" state that
-        * displays them as green (enabled) or red (disabled).
-        *
-        * @param en0 &emsp; String text/tooltip of label, in "enabled" state
-        * @param dis0 &emsp; String text/tooltip of label, in "disabled" state
-        */
-       public DevLabel(String en0, String dis0) {
-           super();
-           this.setUI(MultiLineLabelUI.getLabelUI());
-           this.setFont(skin.getFont1().deriveFont(Font.PLAIN, 11));
-           this.setBorder(new EmptyBorder(5, 5, 5, 5));
-           this.enabledText = en0;
-           this.disabledText = dis0;
-           this.r = 6;  // Radius (for paintComponent)
-           this.i = 2;  // Insets (for paintComponent)
-           setEnabled(true);
+        private final int i;
 
-           this.addMouseListener(new MouseAdapter() {
-               @Override
-               public void mouseEntered(MouseEvent e) {
-                   setBackground(hoverBG);
-               }
+        /**
+         * Labels that act as buttons which control dev mode functions. Labels
+         * are used (instead of buttons) to support multiline text.
+         * 
+         * Constructor for DevLabel which doesn't use enabled/disabled states;
+         * only single text string required.
+         * 
+         * @param s0
+         *            &emsp; String text/tooltip of label
+         */
+        public DevLabel(final String s0) {
+            this(s0, s0);
+        }
 
-               @Override
-               public void mouseExited(MouseEvent e) {
-                   setBackground(defaultBG);
-               }
-           });
-       }
+        /**
+         * Labels that act as buttons which control dev mode functions. Labels
+         * are used (instead of buttons) to support multiline text.
+         * 
+         * This constructor for DevLabels empowers an "enable" state that
+         * displays them as green (enabled) or red (disabled).
+         * 
+         * @param en0
+         *            &emsp; String text/tooltip of label, in "enabled" state
+         * @param dis0
+         *            &emsp; String text/tooltip of label, in "disabled" state
+         */
+        public DevLabel(final String en0, final String dis0) {
+            super();
+            this.setUI(MultiLineLabelUI.getLabelUI());
+            this.setFont(ViewTabber.this.skin.getFont1().deriveFont(Font.PLAIN, 11));
+            this.setBorder(new EmptyBorder(5, 5, 5, 5));
+            this.enabledText = en0;
+            this.disabledText = dis0;
+            this.r = 6; // Radius (for paintComponent)
+            this.i = 2; // Insets (for paintComponent)
+            this.setEnabled(true);
 
-       /**
-        * Changes enabled state per boolean parameter, automatically updating
-        * text string and background color.
-        * 
-        * @param b &emsp; boolean
-        */
-       public void setEnabled(boolean b) {
-           String s;
-           if (b) {
-               defaultBG = Color.green;
-               s = enabledText;
-           }
-           else {
-               defaultBG = Color.red;
-               s = disabledText;
-           }
-           enabled = b;
-           this.setText(s);
-           this.setToolTipText(s);
-           this.setBackground(defaultBG);
-       }
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(final MouseEvent e) {
+                    DevLabel.this.setBackground(DevLabel.this.hoverBG);
+                }
 
-       /** @return boolean */
-       public boolean getEnabled() {
-           return enabled;
-       }
+                @Override
+                public void mouseExited(final MouseEvent e) {
+                    DevLabel.this.setBackground(DevLabel.this.defaultBG);
+                }
+            });
+        }
 
-       /**
-        * In many cases, a DevLabel state will just be toggling a boolean.
-        * This method sets up and evaluates the condition and toggles as appropriate.
-        * 
-        */
-       public void toggleEnabled() {
-           if (enabled) {
-               setEnabled(false);
-           }
-           else {
-               setEnabled(true);
-           }
-       }
+        /**
+         * Changes enabled state per boolean parameter, automatically updating
+         * text string and background color.
+         * 
+         * @param b
+         *            &emsp; boolean
+         */
+        @Override
+        public void setEnabled(final boolean b) {
+            String s;
+            if (b) {
+                this.defaultBG = Color.green;
+                s = this.enabledText;
+            } else {
+                this.defaultBG = Color.red;
+                s = this.disabledText;
+            }
+            this.enabled = b;
+            this.setText(s);
+            this.setToolTipText(s);
+            this.setBackground(this.defaultBG);
+        }
 
-       @Override
-       protected void paintComponent(Graphics g) {
-           w = getWidth();
-           h = getHeight();
-           g.setColor(this.getBackground());
-           g.fillRoundRect(i, i, w - 2 * i, h - i, r, r);
-           super.paintComponent(g);
-       }
-   }
+        /**
+         * Gets the enabled.
+         * 
+         * @return boolean
+         */
+        public boolean getEnabled() {
+            return this.enabled;
+        }
 
-   /** A quick JLabel for info in "players" panel, to consolidate styling. */
-   @SuppressWarnings("serial")
-   private class InfoLabel extends JLabel {
-       public InfoLabel() {
-           super();
-           this.setFont(skin.getFont1().deriveFont(Font.PLAIN, 11));
-           this.setForeground(skin.getClrText());
-       }
-   }
+        /**
+         * In many cases, a DevLabel state will just be toggling a boolean. This
+         * method sets up and evaluates the condition and toggles as
+         * appropriate.
+         * 
+         */
+        public void toggleEnabled() {
+            if (this.enabled) {
+                this.setEnabled(false);
+            } else {
+                this.setEnabled(true);
+            }
+        }
+
+        /*
+         * (non-Javadoc)
+         * 
+         * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+         */
+        @Override
+        protected void paintComponent(final Graphics g) {
+            this.w = this.getWidth();
+            this.h = this.getHeight();
+            g.setColor(this.getBackground());
+            g.fillRoundRect(this.i, this.i, this.w - (2 * this.i), this.h - this.i, this.r, this.r);
+            super.paintComponent(g);
+        }
+    }
+
+    /** A quick JLabel for info in "players" panel, to consolidate styling. */
+    @SuppressWarnings("serial")
+    private class InfoLabel extends JLabel {
+        public InfoLabel() {
+            super();
+            this.setFont(ViewTabber.this.skin.getFont1().deriveFont(Font.PLAIN, 11));
+            this.setForeground(ViewTabber.this.skin.getClrText());
+        }
+    }
 }

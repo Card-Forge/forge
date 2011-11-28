@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.toolbox;
 
 import java.awt.Color;
@@ -58,11 +75,12 @@ public class FRoundedPanel extends JPanel {
     }
 
     /**
-     * paintComponent is the guts of FRoundedPanel.  It paints the borders
-     * and rounded corners determined by the conditional arrays <b>borders[ ]</b>
+     * paintComponent is the guts of FRoundedPanel. It paints the borders and
+     * rounded corners determined by the conditional arrays <b>borders[ ]</b>
      * and <b>corners[ ]</b>.
      * 
-     * @param g &emsp; Graphics obj
+     * @param g
+     *            &emsp; Graphics obj
      */
     @Override
     protected void paintComponent(final Graphics g) {
@@ -148,10 +166,18 @@ public class FRoundedPanel extends JPanel {
         // Mid, left, right rectangles: border
         g2d.setColor(this.borderColor);
 
-        if (this.borders[0]) { g2d.drawLine(r, 0, w - r - so, 0); }
-        if (this.borders[1]) { g2d.drawLine(0, r, 0, h - r - so); }
-        if (this.borders[2]) { g2d.drawLine(r, h - so - 1, w - r - so, h - so - 1); }
-        if (this.borders[3]) { g2d.drawLine(w - so - 1, r, w - so - 1, h - r - so); }
+        if (this.borders[0]) {
+            g2d.drawLine(r, 0, w - r - so, 0);
+        }
+        if (this.borders[1]) {
+            g2d.drawLine(0, r, 0, h - r - so);
+        }
+        if (this.borders[2]) {
+            g2d.drawLine(r, h - so - 1, w - r - so, h - so - 1);
+        }
+        if (this.borders[3]) {
+            g2d.drawLine(w - so - 1, r, w - so - 1, h - r - so);
+        }
 
         // Corners: border
         // NW
@@ -248,7 +274,8 @@ public class FRoundedPanel extends JPanel {
      * </p>
      * Sets radius of each corner on rounded panel.
      * 
-     * @param r0 &emsp; int
+     * @param r0
+     *            &emsp; int
      */
     public void setCornerRadius(int r0) {
         if (r0 < 0) {
@@ -265,7 +292,8 @@ public class FRoundedPanel extends JPanel {
      * Sets if corners should be rounded or not in the following order: NW, SW,
      * SE, NE
      * 
-     * @param vals &emsp; boolean[4]
+     * @param vals
+     *            &emsp; boolean[4]
      */
     public void setCorners(final boolean[] vals) {
         if (vals.length != 4) {
@@ -280,9 +308,11 @@ public class FRoundedPanel extends JPanel {
      * setBorders.
      * </p>
      * Sets if borders should be displayed or not following order: N, W, S, E.
-     * Only works for square corners, rounded corners will be shown with borders.
+     * Only works for square corners, rounded corners will be shown with
+     * borders.
      * 
-     * @param vals &emsp; boolean[4]
+     * @param vals
+     *            &emsp; boolean[4]
      */
     public void setBorders(final boolean[] vals) {
         if (vals.length != 4) {

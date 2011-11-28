@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.data.bazaar;
 
 /**
@@ -44,60 +61,78 @@ public class QuestStallDefinition {
     }
 
     /**
+     * Gets the fluff.
+     * 
      * @return the fluff
      */
     public String getFluff() {
-        return fluff;
+        return this.fluff;
     }
 
     /**
+     * Sets the fluff.
+     * 
      * @param fluff
      *            the fluff to set
      */
-    public void setFluff(String fluff) {
+    public void setFluff(final String fluff) {
         this.fluff = fluff; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the icon name.
+     * 
      * @return the iconName
      */
     public String getIconName() {
-        return iconName;
+        return this.iconName;
     }
 
     /**
+     * Sets the icon name.
+     * 
      * @param iconName
      *            the iconName to set
      */
-    public void setIconName(String iconName) {
+    public void setIconName(final String iconName) {
         this.iconName = iconName; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the display name.
+     * 
      * @return the displayName
      */
     public String getDisplayName() {
-        return displayName;
+        return this.displayName;
     }
 
     /**
-     * @param displayName the displayName to set
+     * Sets the display name.
+     * 
+     * @param displayName
+     *            the displayName to set
      */
-    public void setDisplayName(String displayName) {
+    public void setDisplayName(final String displayName) {
         this.displayName = displayName; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the name.
+     * 
      * @return the name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
-     * @param name the name to set
+     * Sets the name.
+     * 
+     * @param name
+     *            the name to set
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name; // TODO: Add 0 to parameter's name.
     }
 }

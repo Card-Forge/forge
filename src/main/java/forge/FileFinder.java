@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.io.File;
@@ -51,9 +68,9 @@ public class FileFinder {
      *             the exception
      */
     public final List<File> findFiles(final String startPath, final String mask) throws Exception {
-        fileNames = new ArrayList<String>();
-        fName = new ArrayList<String>();
-        return findWithFull(startPath, mask, FILES);
+        this.fileNames = new ArrayList<String>();
+        this.fName = new ArrayList<String>();
+        return this.findWithFull(startPath, mask, FileFinder.FILES);
     }
 
     /**
@@ -64,7 +81,7 @@ public class FileFinder {
      * @return a long.
      */
     public final long getDirectorySize() {
-        return totalLength;
+        return this.totalLength;
     }
 
     /**
@@ -75,7 +92,7 @@ public class FileFinder {
      * @return a int.
      */
     public final int getFilesNumber() {
-        return filesNumber;
+        return this.filesNumber;
     }
 
     /**
@@ -86,7 +103,7 @@ public class FileFinder {
      * @return a long.
      */
     public final long getDirectoriesNumber() {
-        return directoriesNumber;
+        return this.directoriesNumber;
     }
 
     /**
@@ -100,13 +117,13 @@ public class FileFinder {
      */
     private boolean accept(final String name) {
 
-        if (p == null) {
+        if (this.p == null) {
             return true;
         }
 
-        m = p.matcher(name);
+        this.m = this.p.matcher(name);
 
-        return m.matches();
+        return this.m.matches();
     }
 
     /**
@@ -126,24 +143,24 @@ public class FileFinder {
      */
     private List<File> findWithFull(final String startPath, final String mask, final int objectType) throws Exception {
 
-        if (startPath == null || mask == null) {
+        if ((startPath == null) || (mask == null)) {
             throw new Exception("Error");
         }
-        File topDirectory = new File(startPath);
+        final File topDirectory = new File(startPath);
         if (!topDirectory.exists()) {
             throw new Exception("Error");
         }
 
         if (!mask.equals("")) {
-            p = Pattern.compile(mask, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+            this.p = Pattern.compile(mask, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
         }
-        filesNumber = 0;
-        directoriesNumber = 0;
-        totalLength = 0;
-        ArrayList<File> res = new ArrayList<File>(100);
+        this.filesNumber = 0;
+        this.directoriesNumber = 0;
+        this.totalLength = 0;
+        final ArrayList<File> res = new ArrayList<File>(100);
 
-        searchWithFull(topDirectory, res, objectType);
-        p = null;
+        this.searchWithFull(topDirectory, res, objectType);
+        this.p = null;
         return res;
     }
 
@@ -161,38 +178,38 @@ public class FileFinder {
      */
     private void searchWithFull(final File topDirectory, final List<File> res, final int objectType) {
 
-        File[] list = topDirectory.listFiles();
+        final File[] list = topDirectory.listFiles();
 
-        for (int i = 0; i < list.length; i++) {
+        for (final File element : list) {
 
-            if (list[i].isDirectory()) {
+            if (element.isDirectory()) {
 
-                if (objectType != FILES && accept(list[i].getName())) {
+                if ((objectType != FileFinder.FILES) && this.accept(element.getName())) {
 
-                    directoriesNumber++;
-                    res.add(list[i]);
+                    this.directoriesNumber++;
+                    res.add(element);
                 }
 
-                searchWithFull(list[i], res, objectType);
+                this.searchWithFull(element, res, objectType);
             } else {
 
-                if (objectType != DIRECTORIES && accept(list[i].getName())) {
-                    if (list[i].getName().contains("full")) {
-                        if (fileNames.size() == 0) {
-                            fileNames.add(list[i].getName());
-                            filesNumber++;
-                            totalLength += list[i].length();
-                            res.add(list[i]);
+                if ((objectType != FileFinder.DIRECTORIES) && this.accept(element.getName())) {
+                    if (element.getName().contains("full")) {
+                        if (this.fileNames.size() == 0) {
+                            this.fileNames.add(element.getName());
+                            this.filesNumber++;
+                            this.totalLength += element.length();
+                            res.add(element);
                         }
-                        fName.add(list[i].getName());
-                        if (fileNames.size() >= 1) {
-                            if (Collections.indexOfSubList(fileNames, fName) == -1) {
-                                fileNames.add(list[i].getName());
-                                filesNumber++;
-                                totalLength += list[i].length();
-                                res.add(list[i]);
+                        this.fName.add(element.getName());
+                        if (this.fileNames.size() >= 1) {
+                            if (Collections.indexOfSubList(this.fileNames, this.fName) == -1) {
+                                this.fileNames.add(element.getName());
+                                this.filesNumber++;
+                                this.totalLength += element.length();
+                                res.add(element);
                             }
-                            fName.remove(0);
+                            this.fName.remove(0);
                         }
                     }
                 }

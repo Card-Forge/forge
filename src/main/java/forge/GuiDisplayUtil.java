@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.awt.Color;
@@ -176,8 +193,7 @@ public final class GuiDisplayUtil {
             if (CardUtil.isACardType(t) && !cardTypes.contains(t)) {
                 cardTypes.add(t);
             }
-            if (CardUtil.isASubType(t) && !subTypes.contains(t)
-                    && (!allCreatureTypes || !CardUtil.isACreatureType(t))) {
+            if (CardUtil.isASubType(t) && !subTypes.contains(t) && (!allCreatureTypes || !CardUtil.isACreatureType(t))) {
                 subTypes.add(t);
             }
         }
@@ -654,8 +670,7 @@ public final class GuiDisplayUtil {
                     startANewStack = true;
                 }
 
-                if ((c.isEquipment() || c.isAura()) && (c.isEquipping()
-                        || c.isEnchanting()) && !nextEquippedEnchanted) {
+                if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting()) && !nextEquippedEnchanted) {
                     startANewStack = false;
                 } else if ((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())) {
                     startANewStack = true;
@@ -671,8 +686,7 @@ public final class GuiDisplayUtil {
                 // is equipped/enchanted, and there are more tokens of that same
                 // name
                 else if (((prevCard != null) && c.isCreature() && prevCard.isCreature()
-                        && (prevCard.isEquipped() || prevCard.isEnchanted())
-                        && prevCard.getName().equals(c.getName()))) {
+                        && (prevCard.isEquipped() || prevCard.isEnchanted()) && prevCard.getName().equals(c.getName()))) {
                     startANewStack = true;
                 } else if ((prevCard != null) && c.isCreature() && prevCard.isCreature()
                         && !prevCard.getName().equals(c.getName())) {

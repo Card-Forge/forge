@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.spellability;
 
 import java.util.ArrayList;
@@ -232,7 +249,7 @@ public class TargetSelection {
     public final void chooseValidInput() {
         final Target tgt = this.getTgt();
         final List<Zone> zone = tgt.getZone();
-        final boolean mandatory = this.target.getMandatory() ? this.target.hasCandidates(ability, true) : false;
+        final boolean mandatory = this.target.getMandatory() ? this.target.hasCandidates(this.ability, true) : false;
 
         if (zone.contains(Constant.Zone.Stack) && (zone.size() == 1)) {
             // If Zone is Stack, the choices are handled slightly differently
@@ -240,8 +257,10 @@ public class TargetSelection {
             return;
         }
 
-        final CardList choices = AllZoneUtil.getCardsIn(zone).getValidCards(this.target.getValidTgts(),
-                this.ability.getActivatingPlayer(), this.ability.getSourceCard()).getTargetableCards(this.ability);
+        final CardList choices = AllZoneUtil
+                .getCardsIn(zone)
+                .getValidCards(this.target.getValidTgts(), this.ability.getActivatingPlayer(),
+                        this.ability.getSourceCard()).getTargetableCards(this.ability);
 
         ArrayList<Object> objects = new ArrayList<Object>();
         if (tgt.isUniqueTargets()) {
@@ -350,9 +369,8 @@ public class TargetSelection {
                     return;
                 }
 
-                if (((tgt.canTgtPlayer() && !tgt.canOnlyTgtOpponent())
-                        || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer()
-                        .getOpponent()))) && player.canBeTargetedBy(sa)) {
+                if (((tgt.canTgtPlayer() && !tgt.canOnlyTgtOpponent()) || (tgt.canOnlyTgtOpponent() && player.equals(sa
+                        .getActivatingPlayer().getOpponent()))) && player.canBeTargetedBy(sa)) {
                     tgt.addTarget(player);
                     this.done();
                 }

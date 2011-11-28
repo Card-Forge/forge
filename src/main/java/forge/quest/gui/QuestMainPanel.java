@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.gui;
 
 import java.awt.BorderLayout;
@@ -63,36 +80,36 @@ public class QuestMainPanel extends QuestAbstractPanel {
     private forge.quest.gui.main.QuestEventManager qem;
 
     /** The credits label. */
-    private JLabel creditsLabel = new JLabel();
+    private final JLabel creditsLabel = new JLabel();
 
     /** The life label. */
-    private JLabel lifeLabel = new JLabel();
+    private final JLabel lifeLabel = new JLabel();
 
     /** The stats label. */
-    private JLabel statsLabel = new JLabel();
+    private final JLabel statsLabel = new JLabel();
 
     /** The title label. */
-    private JLabel titleLabel = new JLabel();
+    private final JLabel titleLabel = new JLabel();
 
     /** The next quest label. */
-    private JLabel nextQuestLabel = new JLabel();
+    private final JLabel nextQuestLabel = new JLabel();
 
     /** The pet combo box. */
-    private JComboBox petComboBox = new JComboBox();
+    private final JComboBox petComboBox = new JComboBox();
 
     /** The deck combo box. */
-    private JComboBox deckComboBox = new JComboBox();
+    private final JComboBox deckComboBox = new JComboBox();
 
     /** The event button. */
-    private JButton eventButton = new JButton("Challenges");
+    private final JButton eventButton = new JButton("Challenges");
 
     /** The play button. */
-    private JButton playButton = new JButton("Play");
+    private final JButton playButton = new JButton("Play");
 
     private QuestSelectablePanel selectedOpponent;
 
     /** The next match panel. */
-    private JPanel nextMatchPanel = new JPanel();
+    private final JPanel nextMatchPanel = new JPanel();
 
     /** The next match layout. */
     private CardLayout nextMatchLayout;
@@ -423,7 +440,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
             this.plantBox.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent actionEvent) {
-                    QuestMainPanel.this.questData.getPetManager().setUsePlant(QuestMainPanel.this.plantBox.isSelected());
+                    QuestMainPanel.this.questData.getPetManager()
+                            .setUsePlant(QuestMainPanel.this.plantBox.isSelected());
                 }
             });
 
@@ -758,12 +776,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         if (Constant.Runtime.OLDGUI[0]) {
             AllZone.setDisplay(new GuiDisplay());
-       }
-       else {
-           ControlAllUI ui = new ControlAllUI();
-           AllZone.setDisplay(ui.getMatchView());
-           ui.getMatchController().initMatch();
-       }
+        } else {
+            final ControlAllUI ui = new ControlAllUI();
+            AllZone.setDisplay(ui.getMatchView());
+            ui.getMatchController().initMatch();
+        }
 
         Constant.Runtime.SMOOTH[0] = this.smoothLandCheckBox.isSelected();
 
@@ -868,7 +885,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     class SelectionAdapter extends MouseAdapter {
 
         /** The selectable panel. */
-        private QuestSelectablePanel selectablePanel;
+        private final QuestSelectablePanel selectablePanel;
 
         /**
          * Instantiates a new selection adapter.

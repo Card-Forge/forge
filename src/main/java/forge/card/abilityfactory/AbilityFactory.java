@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -346,7 +363,7 @@ public class AbilityFactory {
         this.hasSpDesc = this.mapParams.containsKey("SpellDescription");
 
         // ***********************************
-        // Match API keywords.  These are listed in alphabetical order.
+        // Match API keywords. These are listed in alphabetical order.
 
         if (this.api.equals("AddTurn")) {
             if (this.isAb) {
@@ -377,7 +394,7 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryAnimate.createDrawbackAnimateAll(this);
             }
         }
-        
+
         else if (this.api.equals("Attach")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryAttach.createAbilityAttach(this);
@@ -387,7 +404,7 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryAttach.createDrawbackAttach(this);
             }
         }
-        
+
         else if (this.api.equals("ChangeZone")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryChangeZone.createAbilityChangeZone(this);
@@ -527,7 +544,8 @@ public class AbilityFactory {
         else if (this.api.equals("Counter")) {
             final AbilityFactoryCounterMagic c = new AbilityFactoryCounterMagic(this);
 
-            //Since all "Counter" ABs Counter things on the Stack no need for it to be everywhere
+            // Since all "Counter" ABs Counter things on the Stack no need for
+            // it to be everywhere
             if (this.isTargeted) {
                 this.abTgt.setZone(Zone.Stack);
             }
@@ -540,7 +558,7 @@ public class AbilityFactory {
                 spellAbility = c.getDrawbackCounter(this);
             }
         }
-        
+
         else if (this.api.equals("DamageAll")) {
             final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
             if (this.isAb) {
@@ -1145,12 +1163,12 @@ public class AbilityFactory {
             }
         }
 
-        else if (api.equals("TwoPiles")) {
-            if (isAb) {
+        else if (this.api.equals("TwoPiles")) {
+            if (this.isAb) {
                 spellAbility = AbilityFactoryClash.createAbilityTwoPiles(this);
-            } else if (isSp) {
+            } else if (this.isSp) {
                 spellAbility = AbilityFactoryClash.createSpellTwoPiles(this);
-            } else if (isDb) {
+            } else if (this.isDb) {
                 spellAbility = AbilityFactoryClash.createDrawbackTwoPiles(this);
             }
         }
@@ -1184,12 +1202,12 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryEndGameCondition.createDrawbackWinsGame(this);
             }
         }
-        
-        ////////////////////////
+
+        // //////////////////////
         //
-        // End API matching.  The above APIs are listed in alphabetical order.
+        // End API matching. The above APIs are listed in alphabetical order.
         //
-        ////////////////////////
+        // //////////////////////
 
         if (spellAbility == null) {
             final StringBuilder msg = new StringBuilder();
@@ -1699,20 +1717,18 @@ public class AbilityFactory {
         if (defined.equals("Targeted")) {
             final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
             players.addAll(parent.getTarget().getTargetPlayers());
-            /*Target tgt = sa.getTarget();
-            SpellAbility parent = sa;
-
-            do {
-
-                // did not find any targets
-                if (!(parent instanceof AbilitySub)) {
-                    return players;
-                }
-                parent = ((AbilitySub) parent).getParent();
-                tgt = parent.getTarget();
-            } while ((tgt == null) || (tgt.getTargetPlayers().size() == 0));
-
-            players.addAll(tgt.getTargetPlayers());*/
+            /*
+             * Target tgt = sa.getTarget(); SpellAbility parent = sa;
+             * 
+             * do {
+             * 
+             * // did not find any targets if (!(parent instanceof AbilitySub))
+             * { return players; } parent = ((AbilitySub) parent).getParent();
+             * tgt = parent.getTarget(); } while ((tgt == null) ||
+             * (tgt.getTargetPlayers().size() == 0));
+             * 
+             * players.addAll(tgt.getTargetPlayers());
+             */
         } else if (defined.equals("TargetedController")) {
             final ArrayList<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", sa);
             final ArrayList<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(card, "Targeted", sa);

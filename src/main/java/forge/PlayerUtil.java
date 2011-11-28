@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import forge.Constant.Zone;
@@ -32,6 +49,7 @@ public final class PlayerUtil {
         CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.getKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
         list = list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 return !c.isFaceDown();
             }
@@ -56,7 +74,7 @@ public final class PlayerUtil {
      */
     public static Input inputDiscardNumUnless(final int nCards, final String uType, final SpellAbility sa) {
         final SpellAbility sp = sa;
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = 8822292413831640944L;
 
             private int n = 0;
@@ -64,31 +82,31 @@ public final class PlayerUtil {
             @Override
             public void showMessage() {
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                    stop();
+                    this.stop();
                 }
                 AllZone.getDisplay().showMessage(
-                        "Select " + (nCards - n) + " cards to discard, unless you discard a " + uType + ".");
+                        "Select " + (nCards - this.n) + " cards to discard, unless you discard a " + uType + ".");
                 ButtonUtil.disableAll();
             }
 
             @Override
             public void selectButtonCancel() {
-                stop();
+                this.stop();
             }
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(Constant.Zone.Hand)) {
                     card.getController().discard(card, sp);
-                    n++;
+                    this.n++;
 
                     if (card.isType(uType.toString())) {
-                        stop();
+                        this.stop();
                     } else {
-                        if (n == nCards || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                            stop();
+                        if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) {
+                            this.stop();
                         } else {
-                            showMessage();
+                            this.showMessage();
                         }
                     }
                 }
@@ -112,7 +130,7 @@ public final class PlayerUtil {
      */
     public static Input inputDiscard(final int nCards, final SpellAbility sa) {
         final SpellAbility sp = sa;
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
 
             private int n = 0;
@@ -120,10 +138,10 @@ public final class PlayerUtil {
             @Override
             public void showMessage() {
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                    stop();
+                    this.stop();
                 }
                 if (nCards == 0) {
-                    stop();
+                    this.stop();
                 }
 
                 AllZone.getDisplay().showMessage("Select a card to discard");
@@ -134,13 +152,13 @@ public final class PlayerUtil {
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(Constant.Zone.Hand)) {
                     card.getController().discard(card, sp);
-                    n++;
+                    this.n++;
 
                     // in case no more cards in hand
-                    if (n == nCards || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                        stop();
+                    if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) {
+                        this.stop();
                     } else {
-                        showMessage();
+                        this.showMessage();
                     }
                 }
             }
@@ -156,13 +174,13 @@ public final class PlayerUtil {
      * @return a {@link forge.gui.input.Input} object.
      */
     public static Input inputChainsDiscard() {
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = 2856894846224546303L;
 
             @Override
             public void showMessage() {
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                    stop();
+                    this.stop();
                 }
 
                 AllZone.getDisplay().showMessage("Chains of Mephistopheles:\n" + "Select a card to discard");
@@ -173,12 +191,12 @@ public final class PlayerUtil {
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(Constant.Zone.Hand)) {
                     card.getController().discard(card, null);
-                    done();
+                    this.done();
                 }
             }
 
             private void done() {
-                stop();
+                this.stop();
                 // hack to not trigger Chains of Mephistopheles recursively
                 AllZone.getHumanPlayer().drawCards(1, true);
             }
@@ -199,7 +217,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanent(final CardList choices, final String message) {
-        return inputSacrificePermanentsFromList(1, choices, message);
+        return PlayerUtil.inputSacrificePermanentsFromList(1, choices, message);
     } // input_sacrifice()
 
     /**
@@ -213,9 +231,9 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards) {
-        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        final CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         list.remove("Mana Pool"); // is this needed?
-        return inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
+        return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } // input_sacrificePermanents()
 
     /**
@@ -235,7 +253,7 @@ public final class PlayerUtil {
         list.remove("Mana Pool"); // is this needed?
 
         list = list.getType(type);
-        return inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
+        return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
     } // input_sacrificePermanents()
 
     /**
@@ -253,19 +271,19 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanentsFromList(final int nCards, final CardList list, final String message) {
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = 1981791992623774490L;
             private int n = 0;
 
             @Override
             public void showMessage() {
                 // in case no more {type}s in play
-                if (n == nCards || list.size() == 0) {
-                    stop();
+                if ((this.n == nCards) || (list.size() == 0)) {
+                    this.stop();
                     return;
                 }
 
-                AllZone.getDisplay().showMessage(message + " (" + (nCards - n) + " left)");
+                AllZone.getDisplay().showMessage(message + " (" + (nCards - this.n) + " left)");
                 ButtonUtil.disableAll();
             }
 
@@ -273,15 +291,15 @@ public final class PlayerUtil {
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.equals(AllZone.getHumanPlayer().getZone(Zone.Battlefield)) && list.contains(card)) {
                     AllZone.getGameAction().sacrifice(card);
-                    n++;
+                    this.n++;
                     list.remove(card);
 
                     // in case no more {type}s in play
-                    if (n == nCards || list.size() == 0) {
-                        stop();
+                    if ((this.n == nCards) || (list.size() == 0)) {
+                        this.stop();
                         return;
                     } else {
-                        showMessage();
+                        this.showMessage();
                     }
                 }
             }
@@ -302,7 +320,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputPutFromHandToLibrary(final String topOrBottom, final int num) {
-        Input target = new Input() {
+        final Input target = new Input() {
             private static final long serialVersionUID = 5178077952030689103L;
             private int n = 0;
 
@@ -311,14 +329,14 @@ public final class PlayerUtil {
                 AllZone.getDisplay().showMessage("Select a card to put on the " + topOrBottom + " of your library.");
                 ButtonUtil.disableAll();
 
-                if (n == num || AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                    stop();
+                if ((this.n == num) || (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) {
+                    this.stop();
                 }
             }
 
             @Override
             public void selectButtonCancel() {
-                stop();
+                this.stop();
             }
 
             @Override
@@ -331,12 +349,12 @@ public final class PlayerUtil {
 
                     AllZone.getGameAction().moveToLibrary(card, position);
 
-                    n++;
-                    if (n == num) {
-                        stop();
+                    this.n++;
+                    if (this.n == num) {
+                        this.stop();
                     }
 
-                    showMessage();
+                    this.showMessage();
                 }
             }
         };

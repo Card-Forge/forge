@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.io.File;
@@ -40,58 +57,60 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
      * 
      * @return an array of {@link forge.GuiDownloader.DownloadObject} objects.
      */
+    @Override
     protected final DownloadObject[] getNeededImages() {
         // read token names and urls
-        DownloadObject[] cardTokenLQ = readFileWithNames(NewConstants.TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
-        ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
+        final DownloadObject[] cardTokenLQ = GuiDownloader.readFileWithNames(NewConstants.TOKEN_IMAGES,
+                ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
+        final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
-        String base = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
-        for (Card c : AllZone.getCardFactory()) {
-            cList.addAll(createDLObjects(c, base));
+        final String base = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
+        for (final Card c : AllZone.getCardFactory()) {
+            cList.addAll(this.createDLObjects(c, base));
         }
 
-        ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
+        final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
         File file;
 
-        DownloadObject[] a = { new DownloadObject("", "", "") };
-        DownloadObject[] cardPlay = cList.toArray(a);
+        final DownloadObject[] a = { new DownloadObject("", "", "") };
+        final DownloadObject[] cardPlay = cList.toArray(a);
         // check to see which cards we already have
-        for (int i = 0; i < cardPlay.length; i++) {
-            file = new File(base, cardPlay[i].getName());
+        for (final DownloadObject element : cardPlay) {
+            file = new File(base, element.getName());
             if (!file.exists()) {
-                list.add(cardPlay[i]);
+                list.add(element);
             }
         }
 
         // add missing tokens to the list of things to download
-        File filebase = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
-        for (int i = 0; i < cardTokenLQ.length; i++) {
-            file = new File(filebase, cardTokenLQ[i].getName());
+        final File filebase = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
+        for (final DownloadObject element : cardTokenLQ) {
+            file = new File(filebase, element.getName());
             if (!file.exists()) {
-                list.add(cardTokenLQ[i]);
+                list.add(element);
             }
         }
 
         // return all card names and urls that are needed
-        DownloadObject[] out = new DownloadObject[list.size()];
+        final DownloadObject[] out = new DownloadObject[list.size()];
         list.toArray(out);
 
         return out;
     } // getNeededImages()
 
     private List<DownloadObject> createDLObjects(final Card c, final String base) {
-        ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
+        final ArrayList<DownloadObject> ret = new ArrayList<DownloadObject>();
 
-        for (String sVar : c.getSVars().keySet()) {
+        for (final String sVar : c.getSVars().keySet()) {
 
             if (!sVar.startsWith("Picture")) {
                 continue;
             }
 
-            String url = c.getSVar(sVar);
-            String[] urls = url.split("\\\\");
+            final String url = c.getSVar(sVar);
+            final String[] urls = url.split("\\\\");
 
-            String iName = GuiDisplayUtil.cleanString(c.getImageName());
+            final String iName = GuiDisplayUtil.cleanString(c.getImageName());
             ret.add(new DownloadObject(iName + ".jpg", urls[0], base));
 
             if (urls.length > 1) {

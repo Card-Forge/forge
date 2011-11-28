@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.awt.Point;
@@ -44,7 +61,7 @@ public class GuiDownloadPrices extends JFrame {
      */
     public GuiDownloadPrices() {
         super();
-        initialize();
+        this.initialize();
     }
 
     /**
@@ -52,8 +69,8 @@ public class GuiDownloadPrices extends JFrame {
      */
     private void initialize() {
         this.setSize(386, 200);
-        setContentPane(getJContentPane());
-        setTitle(ForgeProps.getLocalized(DownloadPrices.TITLE));
+        this.setContentPane(this.getJContentPane());
+        this.setTitle(ForgeProps.getLocalized(DownloadPrices.TITLE));
     }
 
     /**
@@ -62,12 +79,12 @@ public class GuiDownloadPrices extends JFrame {
      * @return javax.swing.JPanel
      */
     private JPanel getJContentPane() {
-        if (jContentPane == null) {
-            jContentPane = new JPanel();
-            jContentPane.setLayout(null);
-            jContentPane.add(getJButton(), null);
+        if (this.jContentPane == null) {
+            this.jContentPane = new JPanel();
+            this.jContentPane.setLayout(null);
+            this.jContentPane.add(this.getJButton(), null);
         }
-        return jContentPane;
+        return this.jContentPane;
     }
 
     /**
@@ -76,25 +93,26 @@ public class GuiDownloadPrices extends JFrame {
      * @return javax.swing.JButton
      */
     private JButton getJButton() {
-        if (jButton == null) {
-            jButton = new JButton();
-            jButton.setText(ForgeProps.getLocalized(DownloadPrices.START_UPDATE));
-            jButton.setLocation(new Point(120, 46));
-            jButton.setSize(158, 89);
+        if (this.jButton == null) {
+            this.jButton = new JButton();
+            this.jButton.setText(ForgeProps.getLocalized(DownloadPrices.START_UPDATE));
+            this.jButton.setLocation(new Point(120, 46));
+            this.jButton.setSize(158, 89);
 
-            jButton.addActionListener(new java.awt.event.ActionListener() {
+            this.jButton.addActionListener(new java.awt.event.ActionListener() {
+                @Override
                 public void actionPerformed(final java.awt.event.ActionEvent e) {
-                    if (jButton.getText().equals("Done!")) {
+                    if (GuiDownloadPrices.this.jButton.getText().equals("Done!")) {
                         GuiDownloadPrices.this.dispose();
                     }
 
                     BufferedInputStream in = null;
                     BufferedOutputStream out = null;
 
-                    File f = new File(".//res//tmppl.txt");
-                    String url = "http://www.magictraders.com/pricelists/current-magic-excel.txt";
-                    Proxy p = Proxy.NO_PROXY;
-                    byte[] buf = new byte[1024];
+                    final File f = new File(".//res//tmppl.txt");
+                    final String url = "http://www.magictraders.com/pricelists/current-magic-excel.txt";
+                    final Proxy p = Proxy.NO_PROXY;
+                    final byte[] buf = new byte[1024];
                     int x = 0;
                     String s = "Downloading";
 
@@ -102,17 +120,18 @@ public class GuiDownloadPrices extends JFrame {
                         in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
                         out = new BufferedOutputStream(new FileOutputStream(f));
 
-                        jButton.setText(ForgeProps.getLocalized(DownloadPrices.DOWNLOADING));
-                        jContentPane.paintImmediately(jButton.getBounds());
+                        GuiDownloadPrices.this.jButton.setText(ForgeProps.getLocalized(DownloadPrices.DOWNLOADING));
+                        GuiDownloadPrices.this.jContentPane.paintImmediately(GuiDownloadPrices.this.jButton.getBounds());
 
                         int len = 0;
                         while ((len = in.read(buf)) != -1) {
                             out.write(buf, 0, len);
 
-                            if (++x % 50 == 0) {
+                            if ((++x % 50) == 0) {
                                 s += ".";
-                                jButton.setText(s);
-                                jContentPane.paintImmediately(jButton.getBounds());
+                                GuiDownloadPrices.this.jButton.setText(s);
+                                GuiDownloadPrices.this.jContentPane.paintImmediately(GuiDownloadPrices.this.jButton
+                                        .getBounds());
 
                                 if (x >= 300) {
                                     x = 0;
@@ -123,7 +142,7 @@ public class GuiDownloadPrices extends JFrame {
                         in.close();
                         out.flush();
                         out.close();
-                    } catch (IOException e1) {
+                    } catch (final IOException e1) {
                         return;
                     } finally {
                         try {
@@ -133,7 +152,7 @@ public class GuiDownloadPrices extends JFrame {
                             if (out != null) {
                                 out.close();
                             }
-                        } catch (IOException ex) {
+                        } catch (final IOException ex) {
                             return;
                         }
                     } // while - read and write file
@@ -143,28 +162,28 @@ public class GuiDownloadPrices extends JFrame {
                     try {
                         fr = new FileReader(".//res//tmppl.txt");
 
-                        BufferedReader inBR = new BufferedReader(fr);
+                        final BufferedReader inBR = new BufferedReader(fr);
                         String line = null;
 
-                        HashMap<String, Integer> prices = new HashMap<String, Integer>();
+                        final HashMap<String, Integer> prices = new HashMap<String, Integer>();
 
                         line = inBR.readLine();
                         line = inBR.readLine();
 
-                        jButton.setText(ForgeProps.getLocalized(DownloadPrices.COMPILING));
-                        jContentPane.paintImmediately(jButton.getBounds());
+                        GuiDownloadPrices.this.jButton.setText(ForgeProps.getLocalized(DownloadPrices.COMPILING));
+                        GuiDownloadPrices.this.jContentPane.paintImmediately(GuiDownloadPrices.this.jButton.getBounds());
 
                         x = 0;
                         s = "Compiling";
-                        while (line != null && !line.equals("")) {
-                            String[] ll = line.split("\\|");
+                        while ((line != null) && !line.equals("")) {
+                            final String[] ll = line.split("\\|");
 
                             if (ll[0].contains("(")) {
-                                int indx = ll[0].indexOf(" (");
+                                final int indx = ll[0].indexOf(" (");
                                 ll[0] = ll[0].substring(0, indx);
                             }
 
-                            Float np = Float.parseFloat(ll[3]) * 100;
+                            final Float np = Float.parseFloat(ll[3]) * 100;
                             int inp = np.intValue();
 
                             if (prices.containsKey(ll[0])) {
@@ -172,12 +191,12 @@ public class GuiDownloadPrices extends JFrame {
                                 float fScl = 0;
 
                                 if (cp >= inp) {
-                                    fScl = 1 - (float) inp / (float) cp;
+                                    fScl = 1 - ((float) inp / (float) cp);
                                     if (fScl > .333) {
                                         cp = cp / 2;
                                     }
                                 } else {
-                                    fScl = 1 - (float) cp / (float) inp;
+                                    fScl = 1 - ((float) cp / (float) inp);
                                     if (fScl > .333) {
                                         inp = inp / 2;
                                     }
@@ -199,10 +218,11 @@ public class GuiDownloadPrices extends JFrame {
                             line = inBR.readLine();
                             // System.out.println(line);
 
-                            if (++x % 100 == 0) {
+                            if ((++x % 100) == 0) {
                                 s += ".";
-                                jButton.setText(s);
-                                jContentPane.paintImmediately(jButton.getBounds());
+                                GuiDownloadPrices.this.jButton.setText(s);
+                                GuiDownloadPrices.this.jContentPane.paintImmediately(GuiDownloadPrices.this.jButton
+                                        .getBounds());
 
                                 if (x >= 500) {
                                     x = 0;
@@ -211,22 +231,22 @@ public class GuiDownloadPrices extends JFrame {
                             }
                         }
 
-                        String pfn = ForgeProps.getFile(Quest.PRICE).getAbsolutePath();
-                        String pfnb = pfn.replace(".txt", ".bak");
-                        File ff = new File(pfn);
+                        final String pfn = ForgeProps.getFile(Quest.PRICE).getAbsolutePath();
+                        final String pfnb = pfn.replace(".txt", ".bak");
+                        final File ff = new File(pfn);
                         ff.renameTo(new File(pfnb));
 
                         fw = new FileWriter(ForgeProps.getFile(Quest.PRICE));
-                        BufferedWriter outBW = new BufferedWriter(fw);
+                        final BufferedWriter outBW = new BufferedWriter(fw);
 
                         // Collection<String> keys = prices.keySet();
-                        ArrayList<String> keys = new ArrayList<String>();
+                        final ArrayList<String> keys = new ArrayList<String>();
                         keys.addAll(prices.keySet());
                         Collections.sort(keys);
 
                         for (int i = 0; i < keys.size(); i++) {
                             // keys.add(key);
-                            String k = keys.get(i);
+                            final String k = keys.get(i);
                             if (k.equals("Plains") || k.equals("Island") || k.equals("Swamp") || k.equals("Mountain")
                                     || k.equals("Forest")) {
                                 outBW.write(k + "=5\r\n");
@@ -238,7 +258,7 @@ public class GuiDownloadPrices extends JFrame {
                                 outBW.write(keys.get(i) + "=" + prices.get(keys.get(i)) + "\r\n");
                             }
 
-                            if (i % 100 == 0) {
+                            if ((i % 100) == 0) {
                                 outBW.flush();
                             }
                         }
@@ -247,10 +267,10 @@ public class GuiDownloadPrices extends JFrame {
                         outBW.close();
                         fw.close();
 
-                        jButton.setText("Done!");
+                        GuiDownloadPrices.this.jButton.setText("Done!");
                         fr.close();
                         f.delete();
-                    } catch (IOException e1) {
+                    } catch (final IOException e1) {
                         return;
                     } finally {
                         try {
@@ -260,7 +280,7 @@ public class GuiDownloadPrices extends JFrame {
                             if (fw != null) {
                                 fw.close();
                             }
-                        } catch (IOException ex) {
+                        } catch (final IOException ex) {
                             return;
                         }
                     }
@@ -268,7 +288,7 @@ public class GuiDownloadPrices extends JFrame {
                 }
             });
         }
-        return jButton;
+        return this.jButton;
     }
 
 } // @jve:decl-index=0:visual-constraint="10,10"

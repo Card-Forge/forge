@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.HashMap;
@@ -43,7 +60,8 @@ public class AbilityFactoryEffect {
      */
     public static SpellAbility createAbilityEffect(final AbilityFactory abilityFactory) {
 
-        final SpellAbility abEffect = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
+        final SpellAbility abEffect = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8869422603616247307L;
 
             private final AbilityFactory af = abilityFactory;
@@ -84,7 +102,8 @@ public class AbilityFactoryEffect {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellEffect(final AbilityFactory abilityFactory) {
-        final SpellAbility spEffect = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
+        final SpellAbility spEffect = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 6631124959690157874L;
 
             private final AbilityFactory af = abilityFactory;
@@ -207,8 +226,7 @@ public class AbilityFactoryEffect {
             logic = params.get("AILogic");
             final Phase phase = AllZone.getPhase();
             if (logic.equals("BeginningOfOppTurn")) {
-                if (phase.isPlayerTurn(AllZone.getComputerPlayer())
-                        || phase.isAfter(Constant.Phase.DRAW)) {
+                if (phase.isPlayerTurn(AllZone.getComputerPlayer()) || phase.isAfter(Constant.Phase.DRAW)) {
                     return false;
                 }
                 randomReturn = true;

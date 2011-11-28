@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import forge.Constant;
@@ -39,13 +56,13 @@ public final class CardColor implements Comparable<CardColor> {
      *            the mana
      */
     public CardColor(final CardManaCost mana) {
-        myColor = mana.getColorProfile();
-        orderWeight = getOrderWeight();
+        this.myColor = mana.getColorProfile();
+        this.orderWeight = this.getOrderWeight();
     }
 
     private CardColor() {
-        myColor = 0;
-        orderWeight = -1;
+        this.myColor = 0;
+        this.orderWeight = -1;
     }
 
     /** The null color. */
@@ -59,7 +76,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasAnyColor(final byte colormask) {
-        return (myColor & colormask) != 0;
+        return (this.myColor & colormask) != 0;
     }
 
     /**
@@ -70,7 +87,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasAllColors(final byte colormask) {
-        return (myColor & colormask) == colormask;
+        return (this.myColor & colormask) == colormask;
     }
 
     /**
@@ -79,7 +96,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return the int
      */
     public int countColors() {
-        byte v = myColor;
+        byte v = this.myColor;
         int c = 0;
         for (; v != 0; c++) {
             v &= v - 1;
@@ -95,7 +112,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return the order weight
      */
     public int getOrderWeight() {
-        return myColor == 0 ? 0x400 : (countColors() == 1 ? myColor : 0x200);
+        return this.myColor == 0 ? 0x400 : (this.countColors() == 1 ? this.myColor : 0x200);
     }
 
     /**
@@ -104,7 +121,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is colorless
      */
     public boolean isColorless() {
-        return myColor == 0;
+        return this.myColor == 0;
     }
 
     /**
@@ -113,7 +130,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is multicolor
      */
     public boolean isMulticolor() {
-        return countColors() > 1;
+        return this.countColors() > 1;
     }
 
     /**
@@ -122,7 +139,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is mono color
      */
     public boolean isMonoColor() {
-        return countColors() == 1;
+        return this.countColors() == 1;
     }
 
     /**
@@ -133,7 +150,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is equal
      */
     public boolean isEqual(final byte color) {
-        return color == myColor;
+        return color == this.myColor;
     }
 
     /*
@@ -143,7 +160,7 @@ public final class CardColor implements Comparable<CardColor> {
      */
     @Override
     public int compareTo(final CardColor other) {
-        return orderWeight - other.orderWeight;
+        return this.orderWeight - other.orderWeight;
     }
 
     // Presets
@@ -153,7 +170,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasWhite() {
-        return hasAnyColor(WHITE);
+        return this.hasAnyColor(CardColor.WHITE);
     }
 
     /**
@@ -162,7 +179,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasBlue() {
-        return hasAnyColor(BLUE);
+        return this.hasAnyColor(CardColor.BLUE);
     }
 
     /**
@@ -171,7 +188,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasBlack() {
-        return hasAnyColor(BLACK);
+        return this.hasAnyColor(CardColor.BLACK);
     }
 
     /**
@@ -180,7 +197,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasRed() {
-        return hasAnyColor(RED);
+        return this.hasAnyColor(CardColor.RED);
     }
 
     /**
@@ -189,7 +206,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasGreen() {
-        return hasAnyColor(GREEN);
+        return this.hasAnyColor(CardColor.GREEN);
     }
 
     /**
@@ -198,7 +215,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is white
      */
     public boolean isWhite() {
-        return isEqual(WHITE);
+        return this.isEqual(CardColor.WHITE);
     }
 
     /**
@@ -207,7 +224,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is blue
      */
     public boolean isBlue() {
-        return isEqual(BLUE);
+        return this.isEqual(CardColor.BLUE);
     }
 
     /**
@@ -216,7 +233,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is black
      */
     public boolean isBlack() {
-        return isEqual(BLACK);
+        return this.isEqual(CardColor.BLACK);
     }
 
     /**
@@ -225,7 +242,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is red
      */
     public boolean isRed() {
-        return isEqual(RED);
+        return this.isEqual(CardColor.RED);
     }
 
     /**
@@ -234,7 +251,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is green
      */
     public boolean isGreen() {
-        return isEqual(GREEN);
+        return this.isEqual(CardColor.GREEN);
     }
 
     /*
@@ -244,10 +261,10 @@ public final class CardColor implements Comparable<CardColor> {
      */
     @Override
     public String toString() {
-        if (orderWeight == -1) {
+        if (this.orderWeight == -1) {
             return "n/a";
         }
-        switch (myColor) {
+        switch (this.myColor) {
         case 0:
             return Constant.Color.COLORLESS;
         case WHITE:
@@ -267,19 +284,20 @@ public final class CardColor implements Comparable<CardColor> {
 
     /**
      * Gets the null color.
-     *
+     * 
      * @return the nullColor
      */
     public static CardColor getNullColor() {
-        return nullColor;
+        return CardColor.nullColor;
     }
 
     /**
      * Sets the null color.
-     *
-     * @param nullColor the nullColor to set
+     * 
+     * @param nullColor
+     *            the nullColor to set
      */
-    public static void setNullColor(CardColor nullColor) {
+    public static void setNullColor(final CardColor nullColor) {
         CardColor.nullColor = nullColor; // TODO: Add 0 to parameter's name.
     }
 }

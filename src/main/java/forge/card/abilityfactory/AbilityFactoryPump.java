@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -263,8 +280,7 @@ public class AbilityFactoryPump {
 
                 // give haste to creatures that could attack with it
                 if (c.hasSickness() && kHaste && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
-                        && CombatUtil.canAttackNextTurn(c)
-                        && c.isUntapped()
+                        && CombatUtil.canAttackNextTurn(c) && c.isUntapped()
                         && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
                     return true;
                 }
@@ -298,8 +314,7 @@ public class AbilityFactoryPump {
                 }
 
                 // is the creature blocked and the blocker would survive
-                if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
-                        && (attack > 0)
+                if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS) && (attack > 0)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                         && (AllZone.getCombat().getBlockers(c) != null)
                         && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {

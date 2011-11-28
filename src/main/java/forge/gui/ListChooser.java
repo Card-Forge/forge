@@ -1,7 +1,19 @@
-/**
- * ListChooser.java
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
  *
- * Created on 31.08.2009
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package forge.gui;
@@ -46,8 +58,9 @@ import javax.swing.event.ListSelectionListener;
  * <li>If the dialog was canceled, the selection will be empty.</li>
  * <li>
  * </ul>
- *
- * @param <T> the generic type
+ * 
+ * @param <T>
+ *            the generic type
  * @author Forge
  * @version $Id$
  */
@@ -362,7 +375,7 @@ public class ListChooser<T> {
     /**
      * Returns if the dialog was closed by pressing "OK" or double clicking an
      * option the last time.
-     *
+     * 
      * @return a boolean.
      */
     public boolean isCommitted() {
@@ -374,7 +387,7 @@ public class ListChooser<T> {
 
     /**
      * Returns the selected indices as a list of integers.
-     *
+     * 
      * @return a {@link java.util.List} object.
      */
     public List<Integer> getSelectedIndices() {
@@ -422,7 +435,7 @@ public class ListChooser<T> {
 
     /**
      * Returns the (minimum) selected index, or -1.
-     *
+     * 
      * @return a int.
      */
     public int getSelectedIndex() {
@@ -434,7 +447,7 @@ public class ListChooser<T> {
 
     /**
      * Returns the (first) selected value, or null.
-     *
+     * 
      * @return a T object.
      */
     @SuppressWarnings("unchecked")

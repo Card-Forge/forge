@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -658,8 +675,8 @@ public final class AbilityFactoryChoose {
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
                         if (logic.equals("MostProminentComputerControls")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer()
-                                    .getCardsIn(Zone.Battlefield));
+                            chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                                    Zone.Battlefield));
                         }
                         if (logic.equals("MostProminentPermanent")) {
                             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
@@ -1159,12 +1176,10 @@ public final class AbilityFactoryChoose {
                     if (params.containsKey("AILogic")) {
                         if (params.get("AILogic").equals("Curse")) {
                             card.setChosenPlayer(AllZone.getHumanPlayer());
-                        }
-                        else {
+                        } else {
                             card.setChosenPlayer(AllZone.getComputerPlayer());
                         }
-                    }
-                    else {
+                    } else {
                         card.setChosenPlayer(AllZone.getComputerPlayer());
                     }
                 }
@@ -1398,20 +1413,17 @@ public final class AbilityFactoryChoose {
                     if (sa.getActivatingPlayer().isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc
                                 + " card. (Case sensitive)";
-                        /*name = JOptionPane.showInputDialog(null, message, host.getName(), JOptionPane.QUESTION_MESSAGE);
-                        if (!valid.equals("Card") && !(null == name)) {
-                            try {
-                                final Card temp = AllZone.getCardFactory().getCard(name, p);
-                                ok = temp.isValid(valid, host.getController(), host);
-                            } catch (final Exception ignored) {
-                                ok = false;
-                            }
-                        } else {
-                            ok = true;
-                        }
-                        if (ok) {
-                            host.setNamedCard(null == name ? "" : name);
-                        }*/
+                        /*
+                         * name = JOptionPane.showInputDialog(null, message,
+                         * host.getName(), JOptionPane.QUESTION_MESSAGE); if
+                         * (!valid.equals("Card") && !(null == name)) { try {
+                         * final Card temp =
+                         * AllZone.getCardFactory().getCard(name, p); ok =
+                         * temp.isValid(valid, host.getController(), host); }
+                         * catch (final Exception ignored) { ok = false; } }
+                         * else { ok = true; } if (ok) { host.setNamedCard(null
+                         * == name ? "" : name); }
+                         */
                         final List<String> cards = new ArrayList<String>();
                         for (final CardPrinted c : CardDb.instance().getAllUniqueCards()) {
                             cards.add(c.getName());
@@ -1419,8 +1431,7 @@ public final class AbilityFactoryChoose {
                         Collections.sort(cards);
 
                         // use standard forge's list selection dialog
-                        final ListChooser<String> choice = new ListChooser<String>(
-                                message, 1, 1, cards);
+                        final ListChooser<String> choice = new ListChooser<String>(message, 1, 1, cards);
                         choice.show();
                         // still missing a listener to display the card preview
                         // in the right
@@ -1465,22 +1476,22 @@ public final class AbilityFactoryChoose {
 
             @Override
             public String getStackDescription() {
-                return chooseCardStackDescription(af, this);
+                return AbilityFactoryChoose.chooseCardStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return chooseCardCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseCardCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                chooseCardResolve(af, this);
+                AbilityFactoryChoose.chooseCardResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return chooseCardTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseCardTriggerAI(af, this, mandatory);
             }
 
         };
@@ -1503,17 +1514,17 @@ public final class AbilityFactoryChoose {
 
             @Override
             public String getStackDescription() {
-                return chooseCardStackDescription(af, this);
+                return AbilityFactoryChoose.chooseCardStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return chooseCardCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseCardCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                chooseCardResolve(af, this);
+                AbilityFactoryChoose.chooseCardResolve(af, this);
             }
 
         };
@@ -1535,12 +1546,12 @@ public final class AbilityFactoryChoose {
 
             @Override
             public String getStackDescription() {
-                return chooseCardStackDescription(af, this);
+                return AbilityFactoryChoose.chooseCardStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                chooseCardResolve(af, this);
+                AbilityFactoryChoose.chooseCardResolve(af, this);
             }
 
             @Override
@@ -1550,7 +1561,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return chooseCardTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseCardTriggerAI(af, this, mandatory);
             }
 
         };
@@ -1569,7 +1580,7 @@ public final class AbilityFactoryChoose {
      * @return a {@link java.lang.String} object.
      */
     private static String chooseCardStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
             sb.append(" ");
@@ -1579,19 +1590,19 @@ public final class AbilityFactoryChoose {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
         }
 
-        for (Player p : tgtPlayers) {
+        for (final Player p : tgtPlayers) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a card.");
 
-        AbilitySub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -1611,7 +1622,7 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean chooseCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return chooseCardTriggerAI(af, sa, false);
+        return AbilityFactoryChoose.chooseCardTriggerAI(af, sa, false);
     }
 
     /**
@@ -1642,12 +1653,12 @@ public final class AbilityFactoryChoose {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void chooseCardResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card host = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1659,20 +1670,20 @@ public final class AbilityFactoryChoose {
             choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canBeTargetedBy(sa)) {
-                ArrayList<Card> chosen = new ArrayList<Card>();
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                final ArrayList<Card> chosen = new ArrayList<Card>();
                 if (sa.getActivatingPlayer().isHuman()) {
-                    CardList land = AllZoneUtil.getLandsInPlay();
+                    final CardList land = AllZoneUtil.getLandsInPlay();
                     final ArrayList<String> basic = CardUtil.getBasicTypes();
 
                     for (final String type : basic) {
                         final CardList cl = land.getType(type);
                         if (cl.size() > 0) {
-                            String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
-                            Object o = GuiUtils.getChoice(prompt, cl.toArray());
+                            final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
+                            final Object o = GuiUtils.getChoice(prompt, cl.toArray());
                             if (null != o) {
-                                Card c = (Card) o;
+                                final Card c = (Card) o;
                                 chosen.add(c);
                             }
                         }

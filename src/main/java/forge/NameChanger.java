@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.io.BufferedReader;
@@ -27,8 +44,8 @@ import forge.properties.NewConstants;
  * @version $Id$
  */
 public class NameChanger {
-    private Map<String, String> mutatedMap = new TreeMap<String, String>();
-    private Map<String, String> originalMap = new TreeMap<String, String>();
+    private final Map<String, String> mutatedMap = new TreeMap<String, String>();
+    private final Map<String, String> originalMap = new TreeMap<String, String>();
 
     private boolean changeCardName;
 
@@ -39,7 +56,7 @@ public class NameChanger {
      */
     public NameChanger() {
         // readFile();
-        setShouldChangeCardName(false);
+        this.setShouldChangeCardName(false);
     }
 
     // should change card name?
@@ -51,7 +68,7 @@ public class NameChanger {
      * @return a boolean.
      */
     public final boolean shouldChangeCardName() {
-        return changeCardName;
+        return this.changeCardName;
     }
 
     /**
@@ -63,7 +80,7 @@ public class NameChanger {
      *            a boolean.
      */
     public final void setShouldChangeCardName(final boolean b) {
-        changeCardName = b;
+        this.changeCardName = b;
     }
 
     /**
@@ -82,9 +99,10 @@ public class NameChanger {
         // Create a new Generator by applying a transform to the
         // inputGenerator.
 
-        Lambda1<Card, Card> transform = new Lambda1<Card, Card>() {
+        final Lambda1<Card, Card> transform = new Lambda1<Card, Card>() {
+            @Override
             public Card apply(final Card toChange) {
-                return changeCard(toChange);
+                return NameChanger.this.changeCard(toChange);
             };
         };
 
@@ -104,22 +122,22 @@ public class NameChanger {
      */
     public final Card changeCard(final Card c) {
         // change name
-        String newName = changeName(c.getName());
+        final String newName = this.changeName(c.getName());
         c.setName(newName);
 
         // change text
         String s;
         s = c.getSpellText();
-        c.setText(changeString(c, s));
+        c.setText(this.changeString(c, s));
 
         // change all SpellAbilities
-        SpellAbility[] spell = c.getSpellAbility();
-        for (int i = 0; i < spell.length; i++) {
-            s = spell[i].getStackDescription();
-            spell[i].setStackDescription(changeString(c, s));
+        final SpellAbility[] spell = c.getSpellAbility();
+        for (final SpellAbility element : spell) {
+            s = element.getStackDescription();
+            element.setStackDescription(this.changeString(c, s));
 
-            s = spell[i].toString();
-            spell[i].setDescription(changeString(c, s));
+            s = element.toString();
+            element.setDescription(this.changeString(c, s));
         }
 
         return c;
@@ -159,8 +177,8 @@ public class NameChanger {
      *         the side effected cards
      */
     public final CardList changeCardsIfNeeded(CardList list) {
-        if (shouldChangeCardName()) {
-            list = new CardList(changeCard(YieldUtils.toGenerator(list)));
+        if (this.shouldChangeCardName()) {
+            list = new CardList(this.changeCard(YieldUtils.toGenerator(list)));
         }
         return list;
     }
@@ -177,7 +195,7 @@ public class NameChanger {
      * @return a {@link java.lang.String} object.
      */
     public final String changeName(final String originalName) {
-        Object o = mutatedMap.get(originalName);
+        final Object o = this.mutatedMap.get(originalName);
 
         if (o == null) {
             return originalName;
@@ -198,7 +216,7 @@ public class NameChanger {
      * @return a {@link java.lang.String} object.
      */
     public final String getOriginalName(final String mutatedName) {
-        Object o = originalMap.get(mutatedName);
+        final Object o = this.originalMap.get(mutatedName);
 
         if (o == null) {
             return mutatedName;
@@ -215,32 +233,33 @@ public class NameChanger {
     @SuppressWarnings("unused")
     private void readFile() {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NewConstants.NAME_MUTATOR)));
+            final BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NewConstants.NAME_MUTATOR)));
 
             String line = in.readLine();
 
             // stop reading if end of file or blank line is read
-            while (line != null && (line.trim().length() != 0)) {
-                processLine(line.trim());
+            while ((line != null) && (line.trim().length() != 0)) {
+                this.processLine(line.trim());
 
                 line = in.readLine();
             } // while
         } // try
-        catch (Exception ex) {
+        catch (final Exception ex) {
             // ~ throw new RuntimeException("NameMutator : readFile() error, "
             // +ex);
 
             // ~ (could be cleaner...)
             try {
-                BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NewConstants.NAME_MUTATOR)));
+                final BufferedReader in = new BufferedReader(new FileReader(
+                        ForgeProps.getFile(NewConstants.NAME_MUTATOR)));
 
                 String line;
 
                 // stop reading if end of file or blank line is read
-                while ((line = in.readLine()) != null && (line.trim().length() != 0)) {
-                    processLine(line.trim());
+                while (((line = in.readLine()) != null) && (line.trim().length() != 0)) {
+                    this.processLine(line.trim());
                 } // while
-            } catch (Exception ex2) {
+            } catch (final Exception ex2) {
                 // Show orig exception
                 ErrorViewer.showError(ex2);
                 throw new RuntimeException(String.format("NameMutator : readFile() error, %s", ex), ex);
@@ -259,18 +278,18 @@ public class NameChanger {
      *            a {@link java.lang.String} object.
      */
     private void processLine(final String line) {
-        StringTokenizer tok = new StringTokenizer(line, ":");
+        final StringTokenizer tok = new StringTokenizer(line, ":");
 
         if (tok.countTokens() != 2) {
             throw new RuntimeException("NameMutator : processLine() error, invalid line in file name-mutator.txt - "
                     + line);
         }
 
-        String original = tok.nextToken().trim();
-        String mutated = tok.nextToken().trim();
+        final String original = tok.nextToken().trim();
+        final String mutated = tok.nextToken().trim();
 
-        mutatedMap.put(original, mutated);
-        originalMap.put(mutated, original);
+        this.mutatedMap.put(original, mutated);
+        this.originalMap.put(mutated, original);
     }
 
     /**
@@ -284,7 +303,7 @@ public class NameChanger {
     @SuppressWarnings("unused")
     // printMap
     private void printMap(final Map<String, String> map) {
-        for (Entry<String, String> e : map.entrySet()) {
+        for (final Entry<String, String> e : map.entrySet()) {
             System.out.println(e.getKey() + " : " + e.getValue());
         }
     }

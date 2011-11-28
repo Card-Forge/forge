@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.cardfactory;
 
 import javax.swing.JOptionPane;
@@ -311,9 +328,9 @@ class CardFactoryLands {
         else if (cardName.equals("Sheltered Valley")) {
 
             /*
-             * If Sheltered Valley would enter the battlefield, instead sacrifice
-             * each other permanent named Sheltered Valley you control, then
-             * put Sheltered Valley onto the battlefield.
+             * If Sheltered Valley would enter the battlefield, instead
+             * sacrifice each other permanent named Sheltered Valley you
+             * control, then put Sheltered Valley onto the battlefield.
              */
             final Command comesIntoPlay = new Command() {
                 private static final long serialVersionUID = 685604326470832887L;
@@ -494,8 +511,7 @@ class CardFactoryLands {
                 private void revealCard(final Card c) {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(c.getController()).append(" reveals ").append(c.getName());
-                    JOptionPane.showMessageDialog(null, sb.toString(), card.getName(),
-                            JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, sb.toString(), card.getName(), JOptionPane.PLAIN_MESSAGE);
                 }
             });
         } // *************** END ************ END **************************
@@ -705,8 +721,8 @@ class CardFactoryLands {
                     final Player player = card.getController();
                     final StringBuilder sb = new StringBuilder();
                     sb.append(type[0]).append(".untapped");
-                    final CardList land = player.getCardsIn(Zone.Battlefield).getValidCards(sb.toString(),
-                            player, card);
+                    final CardList land = player.getCardsIn(Zone.Battlefield)
+                            .getValidCards(sb.toString(), player, card);
 
                     if (player.isComputer()) {
                         if (land.size() > 0) {

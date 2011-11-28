@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.toolbox;
 
 import java.awt.Color;
@@ -24,158 +41,164 @@ import forge.GuiDisplayUtil;
 @SuppressWarnings("serial")
 public class CardDetailPanel extends JPanel implements CardContainer {
     private Card card = null;
-    private JLabel lblCardName, lblCardCost, lblCardType,
-        lblCardID, lblCardPT, lblCardSet, lblCardDmg1, lblCardDmg2;
-    private JTextArea tarInfo;
+    private final JLabel lblCardName, lblCardCost, lblCardType, lblCardID, lblCardPT, lblCardSet, lblCardDmg1,
+            lblCardDmg2;
+    private final JTextArea tarInfo;
     private static final Color PURPLE = new Color(14381203);
 
-    private FSkin skin;
-    private Font f;
-    private Color foreground;
-    private Color zebra;
+    private final FSkin skin;
+    private final Font f;
+    private final Color foreground;
+    private final Color zebra;
 
-    /** */
+    /**
+     * Instantiates a new card detail panel.
+     */
     public CardDetailPanel() {
         super();
-        setLayout(new MigLayout("wrap, insets 0, gap 0"));
+        this.setLayout(new MigLayout("wrap, insets 0, gap 0"));
 
         // Styles used in DetailLabel class
-        skin = AllZone.getSkin();
-        f = skin.getFont1().deriveFont(Font.PLAIN, 11);
-        foreground = skin.getClrText();
-        zebra = skin.getClrZebra();
+        this.skin = AllZone.getSkin();
+        this.f = this.skin.getFont1().deriveFont(Font.PLAIN, 11);
+        this.foreground = this.skin.getClrText();
+        this.zebra = this.skin.getClrZebra();
 
         // DetailLabel instances (true = zebra stripe)
-        lblCardName = new DetailLabel();
-        lblCardCost = new DetailLabel();
-        lblCardType = new DetailLabel();
-        lblCardPT   = new DetailLabel();
-        lblCardDmg1 = new DetailLabel();
-        lblCardDmg2 = new DetailLabel();
-        lblCardID   = new DetailLabel();
-        lblCardSet  = new DetailLabel();
+        this.lblCardName = new DetailLabel();
+        this.lblCardCost = new DetailLabel();
+        this.lblCardType = new DetailLabel();
+        this.lblCardPT = new DetailLabel();
+        this.lblCardDmg1 = new DetailLabel();
+        this.lblCardDmg2 = new DetailLabel();
+        this.lblCardID = new DetailLabel();
+        this.lblCardSet = new DetailLabel();
 
         // Info text area
-        tarInfo = new JTextArea();
-        tarInfo.setFont(f);
-        tarInfo.setLineWrap(true);
-        tarInfo.setWrapStyleWord(true);
-        tarInfo.setFocusable(false);
+        this.tarInfo = new JTextArea();
+        this.tarInfo.setFont(this.f);
+        this.tarInfo.setLineWrap(true);
+        this.tarInfo.setWrapStyleWord(true);
+        this.tarInfo.setFocusable(false);
 
-        add(lblCardName, "w 100%!");
-        add(lblCardCost, "w 100%!");
-        add(lblCardType, "w 100%!");
-        add(lblCardPT, "w 100%!");
-        add(lblCardDmg1, "w 100%!");
-        add(lblCardDmg2, "w 100%!");
-        add(lblCardID, "w 100%!");
-        add(lblCardSet, "w 100%!");
-        add(new JScrollPane(tarInfo,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        this.add(this.lblCardName, "w 100%!");
+        this.add(this.lblCardCost, "w 100%!");
+        this.add(this.lblCardType, "w 100%!");
+        this.add(this.lblCardPT, "w 100%!");
+        this.add(this.lblCardDmg1, "w 100%!");
+        this.add(this.lblCardDmg2, "w 100%!");
+        this.add(this.lblCardID, "w 100%!");
+        this.add(this.lblCardSet, "w 100%!");
+        this.add(new JScrollPane(this.tarInfo, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER), "w 100%!, h 45%!, south");
-        setCard(card);
+        this.setCard(this.card);
     }
 
     /**
-     * A fairly long method testing conditions determining which details to show.
+     * A fairly long method testing conditions determining which details to
+     * show.
      * 
-     * @param c &emsp; Card obj
+     * @param c
+     *            &emsp; Card obj
      */
-    public void setCard(Card c) {
-        lblCardName.setText(" ");
-        lblCardCost.setText(" ");
-        lblCardType.setText(" ");
-        lblCardPT.setText(" ");
-        lblCardDmg1.setText(" ");
-        lblCardDmg2.setText(" ");
-        lblCardID.setText(" ");
-        lblCardSet.setText(" ");
-        lblCardSet.setOpaque(true);
-        lblCardSet.setBorder(null);
-        tarInfo.setText(" ");
+    @Override
+    public void setCard(final Card c) {
+        this.lblCardName.setText(" ");
+        this.lblCardCost.setText(" ");
+        this.lblCardType.setText(" ");
+        this.lblCardPT.setText(" ");
+        this.lblCardDmg1.setText(" ");
+        this.lblCardDmg2.setText(" ");
+        this.lblCardID.setText(" ");
+        this.lblCardSet.setText(" ");
+        this.lblCardSet.setOpaque(true);
+        this.lblCardSet.setBorder(null);
+        this.tarInfo.setText(" ");
 
         this.card = c;
-        if (card == null) {
+        if (this.card == null) {
             return;
         }
 
-        boolean faceDown = card.isFaceDown() && card.getController() != AllZone.getHumanPlayer();
+        final boolean faceDown = this.card.isFaceDown() && (this.card.getController() != AllZone.getHumanPlayer());
 
         if (!faceDown) {
-            lblCardName.setText(card.getName());
-            if (!card.getManaCost().equals("") && !card.isLand()) {
-                lblCardCost.setText(card.getManaCost());
+            this.lblCardName.setText(this.card.getName());
+            if (!this.card.getManaCost().equals("") && !this.card.isLand()) {
+                this.lblCardCost.setText(this.card.getManaCost());
             }
-        }
-        else {
-            lblCardName.setText("Morph");
+        } else {
+            this.lblCardName.setText("Morph");
         }
 
         if (!faceDown) {
-            lblCardType.setText(GuiDisplayUtil.formatCardType(card));
-        }
-        else {
-            lblCardType.setText("Creature");
-        }
-
-        if (card.isCreature()) {
-            lblCardPT.setText(card.getNetAttack() + " / " + card.getNetDefense());
-            lblCardDmg1.setText("Damage: " + card.getDamage());
-            lblCardDmg2.setText("Assigned Damage: " + card.getTotalAssignedDamage());
-        }
-        if (card.isPlaneswalker()) {
-            lblCardDmg2.setText("Assigned Damage: " + card.getTotalAssignedDamage());
+            this.lblCardType.setText(GuiDisplayUtil.formatCardType(this.card));
+        } else {
+            this.lblCardType.setText("Creature");
         }
 
-        lblCardID.setText("Card ID  " + card.getUniqueNumber());
+        if (this.card.isCreature()) {
+            this.lblCardPT.setText(this.card.getNetAttack() + " / " + this.card.getNetDefense());
+            this.lblCardDmg1.setText("Damage: " + this.card.getDamage());
+            this.lblCardDmg2.setText("Assigned Damage: " + this.card.getTotalAssignedDamage());
+        }
+        if (this.card.isPlaneswalker()) {
+            this.lblCardDmg2.setText("Assigned Damage: " + this.card.getTotalAssignedDamage());
+        }
 
-        // Rarity and set of a face down card should not be visible to the opponent
-        if (!card.isFaceDown() || card.getController().isHuman()) {
-            String s = card.getCurSetCode();
+        this.lblCardID.setText("Card ID  " + this.card.getUniqueNumber());
+
+        // Rarity and set of a face down card should not be visible to the
+        // opponent
+        if (!this.card.isFaceDown() || this.card.getController().isHuman()) {
+            final String s = this.card.getCurSetCode();
             if (s.equals("")) {
-                lblCardSet.setText("---");
-            }
-            else {
-                lblCardSet.setText(s);
+                this.lblCardSet.setText("---");
+            } else {
+                this.lblCardSet.setText(s);
             }
         }
 
-        String csr = card.getCurSetRarity();
+        final String csr = this.card.getCurSetRarity();
         if (csr.equals("Common") || csr.equals("Land")) {
-            lblCardSet.setBackground(Color.BLACK);
-            lblCardSet.setForeground(Color.WHITE);
-            //lblCardSet.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            this.lblCardSet.setBackground(Color.BLACK);
+            this.lblCardSet.setForeground(Color.WHITE);
+            // lblCardSet.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         } else if (csr.equals("Uncommon")) {
-            lblCardSet.setBackground(Color.LIGHT_GRAY);
-            lblCardSet.setForeground(Color.BLACK);
-            //lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            this.lblCardSet.setBackground(Color.LIGHT_GRAY);
+            this.lblCardSet.setForeground(Color.BLACK);
+            // lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         } else if (csr.equals("Rare")) {
-            lblCardSet.setBackground(Color.YELLOW);
-            lblCardSet.setForeground(Color.BLACK);
-            //lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            this.lblCardSet.setBackground(Color.YELLOW);
+            this.lblCardSet.setForeground(Color.BLACK);
+            // lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         } else if (csr.equals("Mythic")) {
-            lblCardSet.setBackground(Color.RED);
-            lblCardSet.setForeground(Color.BLACK);
-            //lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            this.lblCardSet.setBackground(Color.RED);
+            this.lblCardSet.setForeground(Color.BLACK);
+            // lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         } else if (csr.equals("Special")) {
             // "Timeshifted" or other Special Rarity Cards
-            lblCardSet.setBackground(PURPLE);
-            lblCardSet.setForeground(Color.BLACK);
-            //lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            this.lblCardSet.setBackground(CardDetailPanel.PURPLE);
+            this.lblCardSet.setForeground(Color.BLACK);
+            // lblCardSet.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
 
         // Fill the card text
-        StringBuilder str = new StringBuilder();
+        final StringBuilder str = new StringBuilder();
 
         // Token
-        if (card.isToken()) { str.append("Token"); }
+        if (this.card.isToken()) {
+            str.append("Token");
+        }
 
         if (!faceDown) {
-            if (str.length() != 0) { str.append("\n"); }
-            String text = card.getText();
+            if (str.length() != 0) {
+                str.append("\n");
+            }
+            String text = this.card.getText();
 
-            //LEVEL [0-9]+-[0-9]+
-            //LEVEL [0-9]+\+
+            // LEVEL [0-9]+-[0-9]+
+            // LEVEL [0-9]+\+
             String regex = "LEVEL [0-9]+-[0-9]+ ";
             text = text.replaceAll(regex, "$0\r\n");
 
@@ -190,187 +213,226 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // Phasing
-        if (card.isPhasedOut()) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.isPhasedOut()) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("Phased Out");
         }
 
         // Counter text
-        Counters[] counters = Counters.values();
-        for (Counters counter : counters) {
-            if (card.getCounters(counter) != 0) {
-                if (str.length() != 0) { str.append("\n"); }
+        final Counters[] counters = Counters.values();
+        for (final Counters counter : counters) {
+            if (this.card.getCounters(counter) != 0) {
+                if (str.length() != 0) {
+                    str.append("\n");
+                }
                 str.append(counter.getName() + " counters: ");
-                str.append(card.getCounters(counter));
+                str.append(this.card.getCounters(counter));
             }
         }
 
         // Regeneration Shields
-        int regenShields = card.getShield();
+        final int regenShields = this.card.getShield();
         if (regenShields > 0) {
-            if (str.length() != 0) { str.append("\n"); }
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("Regeneration Shield(s): ").append(regenShields);
         }
 
         // Damage Prevention
-        int preventNextDamage = card.getPreventNextDamage();
+        final int preventNextDamage = this.card.getPreventNextDamage();
         if (preventNextDamage > 0) {
             str.append("\n");
             str.append("Prevent the next ").append(preventNextDamage).append(" damage that would be dealt to ");
-            str.append(card.getName()).append(" it this turn.");
+            str.append(this.card.getName()).append(" it this turn.");
         }
 
         // Top revealed
-        if (card.hasKeyword("Play with the top card of your library revealed.") && card.getController() != null
-                && !card.getController().getZone(Zone.Library).isEmpty()) {
+        if (this.card.hasKeyword("Play with the top card of your library revealed.")
+                && (this.card.getController() != null) && !this.card.getController().getZone(Zone.Library).isEmpty()) {
             str.append("\r\nTop card: ");
-            str.append(card.getController().getCardsIn(Zone.Library, 1));
+            str.append(this.card.getController().getCardsIn(Zone.Library, 1));
         }
 
         // Chosen type
-        if (card.getChosenType() != "") {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.getChosenType() != "") {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("(chosen type: ");
-            str.append(card.getChosenType());
+            str.append(this.card.getChosenType());
             str.append(")");
         }
 
         // Chosen color
-        if (!card.getChosenColor().isEmpty()) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (!this.card.getChosenColor().isEmpty()) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("(chosen colors: ");
-            str.append(card.getChosenColor());
+            str.append(this.card.getChosenColor());
             str.append(")");
         }
 
         // Named card
-        if (card.getNamedCard() != "") {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.getNamedCard() != "") {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("(named card: ");
-            str.append(card.getNamedCard());
+            str.append(this.card.getNamedCard());
             str.append(")");
         }
 
         // Equipping
-        if (card.getEquipping().size() > 0) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.getEquipping().size() > 0) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("=Equipping ");
-            str.append(card.getEquipping().get(0));
+            str.append(this.card.getEquipping().get(0));
             str.append("=");
         }
 
         // Equipped by
-        if (card.getEquippedBy().size() > 0) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.getEquippedBy().size() > 0) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("=Equipped by ");
-            for (Iterator<Card> it = card.getEquippedBy().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = this.card.getEquippedBy().iterator(); it.hasNext();) {
                 str.append(it.next());
-                if (it.hasNext()) { str.append(", "); }
+                if (it.hasNext()) {
+                    str.append(", ");
+                }
             }
             str.append("=");
         }
 
         // Enchanting
-        GameEntity entity = card.getEnchanting();
+        final GameEntity entity = this.card.getEnchanting();
         if (entity != null) {
-            if (str.length() != 0) { str.append("\n"); }
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("*Enchanting ");
 
             if (entity instanceof Card) {
-                Card temp = (Card) entity;
+                final Card temp = (Card) entity;
                 if (temp.isFaceDown() && temp.getController().isComputer()) {
                     str.append("Morph (");
-                    str.append(card.getUniqueNumber());
+                    str.append(this.card.getUniqueNumber());
                     str.append(")");
-                }
-                else {
+                } else {
                     str.append(entity);
                 }
-            }
-            else {
+            } else {
                 str.append(entity);
             }
             str.append("*");
         }
 
         // Enchanted by
-        if (card.getEnchantedBy().size() > 0) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.getEnchantedBy().size() > 0) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("*Enchanted by ");
-            for (Iterator<Card> it = card.getEnchantedBy().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = this.card.getEnchantedBy().iterator(); it.hasNext();) {
                 str.append(it.next());
-                if (it.hasNext()) { str.append(", "); }
+                if (it.hasNext()) {
+                    str.append(", ");
+                }
             }
             str.append("*");
         }
 
         // Controlling
-        if (card.getGainControlTargets().size() > 0) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.getGainControlTargets().size() > 0) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("+Controlling: ");
-            for (Iterator<Card> it = card.getGainControlTargets().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = this.card.getGainControlTargets().iterator(); it.hasNext();) {
                 str.append(it.next());
-                if (it.hasNext()) { str.append(", "); }
+                if (it.hasNext()) {
+                    str.append(", ");
+                }
             }
             str.append("+");
         }
 
         // Cloned via
-        if (card.getCloneOrigin() != null) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (this.card.getCloneOrigin() != null) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("^Cloned via: ");
-            str.append(card.getCloneOrigin().getName());
+            str.append(this.card.getCloneOrigin().getName());
             str.append("^");
         }
 
         // Imprint
-        if (!card.getImprinted().isEmpty()) {
-            if (str.length() != 0) { str.append("\n"); }
+        if (!this.card.getImprinted().isEmpty()) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
             str.append("^Imprinting: ");
-            for (Iterator<Card> it = card.getImprinted().iterator(); it.hasNext();) {
+            for (final Iterator<Card> it = this.card.getImprinted().iterator(); it.hasNext();) {
                 str.append(it.next());
-                if (it.hasNext()) { str.append(", "); }
+                if (it.hasNext()) {
+                    str.append(", ");
+                }
             }
             str.append("^");
         }
 
         // Uncastable
-        /*if (card.isUnCastable()) {
-            if (str.length() != 0) str.append("\n");
-            str.append("This card can't be cast.");
-        }*/
+        /*
+         * if (card.isUnCastable()) { if (str.length() != 0) str.append("\n");
+         * str.append("This card can't be cast."); }
+         */
 
-        if (card.hasAttachedCardsByMindsDesire()) {
-            if (str.length() != 0) { str.append("\n"); }
-            Card[] cards = card.getAttachedCardsByMindsDesire();
+        if (this.card.hasAttachedCardsByMindsDesire()) {
+            if (str.length() != 0) {
+                str.append("\n");
+            }
+            final Card[] cards = this.card.getAttachedCardsByMindsDesire();
             str.append("=Attached: ");
-            for (Card temp : cards) {
+            for (final Card temp : cards) {
                 str.append(temp.getName());
                 str.append(" ");
             }
             str.append("=");
         }
 
-        tarInfo.setText(str.toString());
+        this.tarInfo.setText(str.toString());
     }
 
-    /** @return Card */
+    /**
+     * Gets the card.
+     * 
+     * @return Card
+     */
+    @Override
     public Card getCard() {
         return this.card;
     }
 
     /** A brief JLabel to consolidate styling. */
     private class DetailLabel extends JLabel {
-        public DetailLabel(boolean zebra0) {
+        public DetailLabel(final boolean zebra0) {
             super();
 
             if (zebra0) {
-               this.setBackground(zebra);
-               this.setOpaque(true);
+                this.setBackground(CardDetailPanel.this.zebra);
+                this.setOpaque(true);
             }
 
-            this.setFont(f);
-            this.setForeground(foreground);
+            this.setFont(CardDetailPanel.this.f);
+            this.setForeground(CardDetailPanel.this.foreground);
             this.setHorizontalAlignment(SwingConstants.CENTER);
         }
 

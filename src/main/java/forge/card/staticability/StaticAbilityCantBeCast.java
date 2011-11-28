@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.staticability;
 
 import java.util.HashMap;
@@ -53,10 +70,11 @@ public class StaticAbilityCantBeCast {
      * @param card
      *            the card
      * @param spellAbility
-     *          a SpellAbility
+     *            a SpellAbility
      * @return true, if successful
      */
-    public static boolean applyCantBeActivatedAbility(final StaticAbility staticAbility, final Card card, final SpellAbility spellAbility) {
+    public static boolean applyCantBeActivatedAbility(final StaticAbility staticAbility, final Card card,
+            final SpellAbility spellAbility) {
         final HashMap<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
@@ -89,15 +107,15 @@ public class StaticAbilityCantBeCast {
      *            a StaticAbility
      * @param card
      *            the card
-     * @param activator
-     *            the activator
+     * @param player
+     *            the player
      * @return true, if successful
      */
     public static boolean applyCantPlayLandAbility(final StaticAbility stAb, final Card card, final Player player) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        if (params.containsKey("ValidCard") && card != null
+        if (params.containsKey("ValidCard") && (card != null)
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
             return false;
         }

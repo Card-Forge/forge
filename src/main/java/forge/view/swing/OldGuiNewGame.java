@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.swing;
 
 import java.awt.Color;
@@ -557,7 +574,8 @@ public class OldGuiNewGame extends JFrame {
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SETTINGS));
         this.jPanel3.setLayout(new MigLayout("align center"));
 
-        oldGuiCheckBox.setText(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.OLD_GUI));
+        OldGuiNewGame.oldGuiCheckBox.setText(ForgeProps
+                .getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.OLD_GUI));
         OldGuiNewGame.getSmoothLandCheckBox().setText(
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.AI_LAND));
 
@@ -640,7 +658,7 @@ public class OldGuiNewGame extends JFrame {
 
         this.getContentPane().add(this.jPanel3, "span 2, grow");
 
-        jPanel3.add(oldGuiCheckBox, "wrap");
+        this.jPanel3.add(OldGuiNewGame.oldGuiCheckBox, "wrap");
         this.jPanel3.add(OldGuiNewGame.getSmoothLandCheckBox(), "wrap");
         this.jPanel3.add(OldGuiNewGame.getDevModeCheckBox(), "wrap");
         this.jPanel3.add(OldGuiNewGame.getUpldDrftCheckBox(), "wrap");
@@ -866,19 +884,19 @@ public class OldGuiNewGame extends JFrame {
             }
         } // else
 
-        Constant.Runtime.OLDGUI[0] = oldGuiCheckBox.isSelected();
+        Constant.Runtime.OLDGUI[0] = OldGuiNewGame.oldGuiCheckBox.isSelected();
 
         if (Constant.Runtime.OLDGUI[0]) {
-             AllZone.setDisplay(new GuiDisplay());
-        }
-        else {
-            ControlAllUI ui = new ControlAllUI();
+            AllZone.setDisplay(new GuiDisplay());
+        } else {
+            final ControlAllUI ui = new ControlAllUI();
             AllZone.setDisplay(ui.getMatchView());
             ui.getMatchController().initMatch();
         }
 
         Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();
-        //Constant.Runtime.DEV_MODE[0] = OldGuiNewGame.devModeCheckBox.isSelected();
+        // Constant.Runtime.DEV_MODE[0] =
+        // OldGuiNewGame.devModeCheckBox.isSelected();
 
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         AllZone.getDisplay().setVisible(true);
@@ -1719,7 +1737,7 @@ public class OldGuiNewGame extends JFrame {
             final ForgePreferences preferences = Singletons.getModel().getPreferences();
             preferences.setLaf(UIManager.getLookAndFeel().getClass().getName());
             preferences.setLafFonts(OldGuiNewGame.getUseLAFFonts().isSelected());
-            preferences.setOldGui(oldGuiCheckBox.isSelected());
+            preferences.setOldGui(OldGuiNewGame.oldGuiCheckBox.isSelected());
             preferences.setStackAiLand(OldGuiNewGame.getSmoothLandCheckBox().isSelected());
             preferences.setMillingLossCondition(Constant.Runtime.MILL[0]);
             preferences.setDeveloperMode(Constant.Runtime.DEV_MODE[0]);
@@ -1893,6 +1911,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Gets the card overlay.
+     * 
      * @return the cardOverlay
      */
     public static JCheckBoxMenuItem getCardOverlay() {
@@ -1900,6 +1920,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Sets the card overlay.
+     * 
      * @param cardOverlay
      *            the cardOverlay to set
      */
@@ -1909,6 +1931,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Gets the card scale.
+     * 
      * @return the cardScale
      */
     public static JCheckBoxMenuItem getCardScale() {
@@ -1916,6 +1940,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Sets the card scale.
+     * 
      * @param cardScale
      *            the cardScale to set
      */
@@ -1924,6 +1950,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Gets the use laf fonts.
+     * 
      * @return the useLAFFonts
      */
     public static JCheckBoxMenuItem getUseLAFFonts() {
@@ -1931,6 +1959,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Sets the use laf fonts.
+     * 
      * @param useLAFFonts
      *            the useLAFFonts to set
      */
@@ -1940,6 +1970,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Gets the smooth land check box.
+     * 
      * @return the smoothLandCheckBox
      */
     static JCheckBox getSmoothLandCheckBox() {
@@ -1947,6 +1979,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Sets the smooth land check box.
+     * 
      * @param smoothLandCheckBox
      *            the smoothLandCheckBox to set
      */
@@ -1957,6 +1991,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Gets the dev mode check box.
+     * 
      * @return the devModeCheckBox
      */
     public static JCheckBox getDevModeCheckBox() {
@@ -1964,6 +2000,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Sets the dev mode check box.
+     * 
      * @param devModeCheckBox
      *            the devModeCheckBox to set
      */
@@ -1973,6 +2011,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Gets the upld drft check box.
+     * 
      * @return the upldDrftCheckBox
      */
     public static JCheckBox getUpldDrftCheckBox() {
@@ -1980,6 +2020,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Sets the upld drft check box.
+     * 
      * @param upldDrftCheckBox
      *            the upldDrftCheckBox to set
      */
@@ -1989,6 +2031,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Gets the foil random check box.
+     * 
      * @return the foilRandomCheckBox
      */
     public static JCheckBox getFoilRandomCheckBox() {
@@ -1996,6 +2040,8 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
+     * Sets the foil random check box.
+     * 
      * @param foilRandomCheckBox
      *            the foilRandomCheckBox to set
      */
@@ -2005,7 +2051,11 @@ public class OldGuiNewGame extends JFrame {
                                                                // name.
     }
 
-    /** @return JCheckBox */
+    /**
+     * Gets the old gui check box.
+     * 
+     * @return JCheckBox
+     */
     public static JCheckBox getOldGuiCheckBox() {
         return OldGuiNewGame.oldGuiCheckBox;
     }

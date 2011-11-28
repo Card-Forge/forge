@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -16,8 +33,8 @@ import forge.card.mana.ManaCost;
 public class CardColor {
     // takes care of individual card color, for global color change effects use
     // AllZone.getGameInfo().getColorChanges()
-    private EnumSet<Color> col;
-    private boolean additional;
+    private final EnumSet<Color> col;
+    private final boolean additional;
 
     /**
      * <p>
@@ -27,7 +44,7 @@ public class CardColor {
      * @return a boolean.
      */
     public final boolean getAdditional() {
-        return additional;
+        return this.additional;
     }
 
     private Card effectingCard = null;
@@ -41,7 +58,7 @@ public class CardColor {
      * @return a long.
      */
     public final long getStamp() {
-        return stamp;
+        return this.stamp;
     }
 
     /**
@@ -57,7 +74,7 @@ public class CardColor {
      * @return a long.
      */
     public static long getTimestamp() {
-        return timeStamp;
+        return CardColor.timeStamp;
     }
 
     /**
@@ -75,13 +92,13 @@ public class CardColor {
      *            a boolean.
      */
     CardColor(final ManaCost mc, final Card c, final boolean addToColors, final boolean baseColor) {
-        additional = addToColors;
-        col = Color.convertManaCostToColor(mc);
-        effectingCard = c;
+        this.additional = addToColors;
+        this.col = Color.convertManaCostToColor(mc);
+        this.effectingCard = c;
         if (baseColor) {
-            stamp = 0;
+            this.stamp = 0;
         } else {
-            stamp = timeStamp;
+            this.stamp = CardColor.timeStamp;
         }
     }
 
@@ -94,10 +111,10 @@ public class CardColor {
      *            a {@link forge.Card} object.
      */
     public CardColor(final Card c) {
-        col = Color.colorless();
-        additional = false;
-        stamp = 0;
-        effectingCard = c;
+        this.col = Color.colorless();
+        this.additional = false;
+        this.stamp = 0;
+        this.effectingCard = c;
     }
 
     /**
@@ -110,9 +127,9 @@ public class CardColor {
      * @return a boolean.
      */
     final boolean addToCardColor(final String s) {
-        Color c = Color.convertFromString(s);
-        if (!col.contains(c)) {
-            col.add(c);
+        final Color c = Color.convertFromString(s);
+        if (!this.col.contains(c)) {
+            this.col.add(c);
             return true;
         }
         return false;
@@ -124,8 +141,8 @@ public class CardColor {
      * </p>
      */
     final void fixColorless() {
-        if (col.size() > 1 && col.contains(Color.Colorless)) {
-            col.remove(Color.Colorless);
+        if ((this.col.size() > 1) && this.col.contains(Color.Colorless)) {
+            this.col.remove(Color.Colorless);
         }
     }
 
@@ -135,7 +152,7 @@ public class CardColor {
      * </p>
      */
     static void increaseTimestamp() {
-        timeStamp++;
+        CardColor.timeStamp++;
     }
 
     /**
@@ -154,7 +171,7 @@ public class CardColor {
      * @return a boolean.
      */
     public final boolean equals(final String cost, final Card c, final boolean addToColors, final long time) {
-        return effectingCard == c && addToColors == additional && stamp == time;
+        return (this.effectingCard == c) && (addToColors == this.additional) && (this.stamp == time);
     }
 
     /**
@@ -165,8 +182,8 @@ public class CardColor {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> toStringArray() {
-        ArrayList<String> list = new ArrayList<String>();
-        for (Color c : col) {
+        final ArrayList<String> list = new ArrayList<String>();
+        for (final Color c : this.col) {
             list.add(c.toString());
         }
         return list;

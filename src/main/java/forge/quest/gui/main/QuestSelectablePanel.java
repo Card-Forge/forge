@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.gui.main;
 
 import java.awt.BorderLayout;
@@ -32,7 +49,7 @@ public class QuestSelectablePanel extends JPanel {
     private static final long serialVersionUID = -1502285997894190742L;
 
     /** The background color. */
-    private Color backgroundColor;
+    private final Color backgroundColor;
     private boolean selected;
     private final QuestEvent event;
     private String iconfilename;
@@ -164,16 +181,21 @@ public class QuestSelectablePanel extends JPanel {
     }
 
     /**
+     * Gets the root panel.
+     * 
      * @return the rootPanel
      */
     public JPanel getRootPanel() {
-        return rootPanel;
+        return this.rootPanel;
     }
 
     /**
-     * @param rootPanel the rootPanel to set
+     * Sets the root panel.
+     * 
+     * @param rootPanel
+     *            the rootPanel to set
      */
-    public void setRootPanel(JPanel rootPanel) {
+    public void setRootPanel(final JPanel rootPanel) {
         this.rootPanel = rootPanel; // TODO: Add 0 to parameter's name.
     }
 }

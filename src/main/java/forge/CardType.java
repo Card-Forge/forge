@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -14,10 +31,10 @@ public class CardType implements Comparable<CardType> {
     // takes care of individual card types
     private ArrayList<String> type = new ArrayList<String>();
     private ArrayList<String> removeType = new ArrayList<String>();
-    private boolean removeSuperTypes;
-    private boolean removeCardTypes;
-    private boolean removeSubTypes;
-    private boolean removeCreatureTypes;
+    private final boolean removeSuperTypes;
+    private final boolean removeCardTypes;
+    private final boolean removeSubTypes;
+    private final boolean removeCreatureTypes;
     private long timeStamp = 0;
 
     /**
@@ -28,7 +45,7 @@ public class CardType implements Comparable<CardType> {
      * @return a long.
      */
     public final long getTimestamp() {
-        return timeStamp;
+        return this.timeStamp;
     }
 
     /**
@@ -52,13 +69,13 @@ public class CardType implements Comparable<CardType> {
     CardType(final ArrayList<String> types, final ArrayList<String> removeTypes, final boolean removeSuperType,
             final boolean removeCardType, final boolean removeSubType, final boolean removeCreatureType,
             final long stamp) {
-        type = types;
-        removeType = removeTypes;
-        removeSuperTypes = removeSuperType;
-        removeCardTypes = removeCardType;
-        removeSubTypes = removeSubType;
-        removeCreatureTypes = removeCreatureType;
-        timeStamp = stamp;
+        this.type = types;
+        this.removeType = removeTypes;
+        this.removeSuperTypes = removeSuperType;
+        this.removeCardTypes = removeCardType;
+        this.removeSubTypes = removeSubType;
+        this.removeCreatureTypes = removeCreatureType;
+        this.timeStamp = stamp;
     }
 
     /**
@@ -68,7 +85,7 @@ public class CardType implements Comparable<CardType> {
      * @return type
      */
     public final ArrayList<String> getType() {
-        return type;
+        return this.type;
     }
 
     /**
@@ -78,7 +95,7 @@ public class CardType implements Comparable<CardType> {
      * @return removeType
      */
     public final ArrayList<String> getRemoveType() {
-        return removeType;
+        return this.removeType;
     }
 
     /**
@@ -88,7 +105,7 @@ public class CardType implements Comparable<CardType> {
      * @return removeSuperTypes
      */
     public final boolean isRemoveSuperTypes() {
-        return removeSuperTypes;
+        return this.removeSuperTypes;
     }
 
     /**
@@ -98,7 +115,7 @@ public class CardType implements Comparable<CardType> {
      * @return removeCardTypes
      */
     public final boolean isRemoveCardTypes() {
-        return removeCardTypes;
+        return this.removeCardTypes;
     }
 
     /**
@@ -108,7 +125,7 @@ public class CardType implements Comparable<CardType> {
      * @return removeSubTypes
      */
     public final boolean isRemoveSubTypes() {
-        return removeSubTypes;
+        return this.removeSubTypes;
     }
 
     /**
@@ -118,7 +135,7 @@ public class CardType implements Comparable<CardType> {
      * @return removeCreatureTypes
      */
     public final boolean isRemoveCreatureTypes() {
-        return removeCreatureTypes;
+        return this.removeCreatureTypes;
     }
 
     /*
@@ -129,7 +146,7 @@ public class CardType implements Comparable<CardType> {
     @Override
     public final int compareTo(final CardType anotherCardType) {
         int returnValue = 0;
-        long anotherTimeStamp = anotherCardType.getTimestamp();
+        final long anotherTimeStamp = anotherCardType.getTimestamp();
         if (this.timeStamp < anotherTimeStamp) {
             returnValue = -1;
         } else if (this.timeStamp > anotherTimeStamp) {

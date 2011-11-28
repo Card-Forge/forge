@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.awt.Rectangle;
@@ -294,7 +311,8 @@ public class DeckEditorDraft extends DeckEditorBase {
         Constant.Runtime.HUMAN_DECK[0] = deck;
 
         // add sideboard to deck
-        final ItemPoolView<CardPrinted> list = ItemPool.createFrom(this.getBottomTableWithCards().getCards(), CardPrinted.class);
+        final ItemPoolView<CardPrinted> list = ItemPool.createFrom(this.getBottomTableWithCards().getCards(),
+                CardPrinted.class);
         deck.addSideboard(list);
 
         final String landSet = IBoosterDraft.LAND_SET_CODE[0];

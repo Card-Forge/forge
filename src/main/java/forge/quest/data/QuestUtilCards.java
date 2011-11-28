@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.data;
 
 import java.util.ArrayList;
@@ -327,18 +344,22 @@ public final class QuestUtilCards {
     }
 
     /**
+     * Gets the fn new compare.
+     * 
      * @return the fnNewCompare
      */
     @SuppressWarnings("rawtypes")
     public Lambda1<Comparable, Entry<InventoryItem, Integer>> getFnNewCompare() {
-        return fnNewCompare;
+        return this.fnNewCompare;
     }
 
     /**
+     * Gets the fn new get.
+     * 
      * @return the fnNewGet
      */
     public Lambda1<Object, Entry<InventoryItem, Integer>> getFnNewGet() {
-        return fnNewGet;
+        return this.fnNewGet;
     }
 
     // These functions provide a way to sort and compare cards in a table
@@ -351,12 +372,13 @@ public final class QuestUtilCards {
     private final Lambda1<Comparable, Entry<InventoryItem, Integer>> fnNewCompare = new Lambda1<Comparable, Entry<InventoryItem, Integer>>() {
         @Override
         public Comparable apply(final Entry<InventoryItem, Integer> from) {
-            return QuestUtilCards.this.q.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+            return QuestUtilCards.this.q.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer
+                    .valueOf(0);
         }
     };
 
     /** The fn new get. */
-    private  final Lambda1<Object, Entry<InventoryItem, Integer>> fnNewGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
+    private final Lambda1<Object, Entry<InventoryItem, Integer>> fnNewGet = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return QuestUtilCards.this.q.getNewCardList().contains(from.getKey()) ? "NEW" : "";

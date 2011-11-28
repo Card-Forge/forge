@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.data;
 
 import java.util.ArrayList;
@@ -55,14 +72,19 @@ public final class QuestData {
     private long credits; // this money is good for all modes
 
     /** The life. */
-    private int life; // for fantasy mode, how much life bought at shop to start game
-              // with
+    private int life; // for fantasy mode, how much life bought at shop to start
+                      // game
+    // with
     /** The inventory. */
-    private QuestInventory inventory = new QuestInventory(); // different gadgets
+    private QuestInventory inventory = new QuestInventory(); // different
+                                                             // gadgets
 
     /** The pet manager. */
-    private QuestPetManager petManager = new QuestPetManager(); // pets that start match
-                                                        // with you
+    private final QuestPetManager petManager = new QuestPetManager(); // pets
+                                                                      // that
+                                                                      // start
+                                                                      // match
+    // with you
 
     // Diffuculty - they store both index and title
     /** The diff index. */
@@ -88,7 +110,7 @@ public final class QuestData {
     // Cards associated with quest
     /** The card pool. */
     private ItemPool<InventoryItem> cardPool = new ItemPool<InventoryItem>(InventoryItem.class); // player's
-                                                                                         // belonging
+    // belonging
     /** The shop list. */
     private ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
     // current
@@ -184,8 +206,7 @@ public final class QuestData {
     public void newGame(final int diff, final String m0de, final boolean standardStart) {
         this.setDifficulty(diff);
 
-        final Predicate<CardPrinted> filter = standardStart
-                ? SetUtils.getStandard().getFilterPrinted()
+        final Predicate<CardPrinted> filter = standardStart ? SetUtils.getStandard().getFilterPrinted()
                 : CardPrinted.Predicates.Presets.IS_TRUE;
 
         this.myCards.setupNewGameCardPool(filter, diff);
@@ -585,86 +606,117 @@ public final class QuestData {
     }
 
     /**
+     * Gets the card pool.
+     * 
      * @return the cardPool
      */
     public ItemPool<InventoryItem> getCardPool() {
-        return cardPool;
+        return this.cardPool;
     }
 
     /**
-     * @param cardPool the cardPool to set
+     * Sets the card pool.
+     * 
+     * @param cardPool
+     *            the cardPool to set
      */
-    public void setCardPool(ItemPool<InventoryItem> cardPool) {
+    public void setCardPool(final ItemPool<InventoryItem> cardPool) {
         this.cardPool = cardPool; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the shop list.
+     * 
      * @return the shopList
      */
     public ItemPool<InventoryItem> getShopList() {
-        return shopList;
+        return this.shopList;
     }
 
     /**
-     * @param shopList the shopList to set
+     * Sets the shop list.
+     * 
+     * @param shopList
+     *            the shopList to set
      */
-    public void setShopList(ItemPool<InventoryItem> shopList) {
+    public void setShopList(final ItemPool<InventoryItem> shopList) {
         this.shopList = shopList; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the new card list.
+     * 
      * @return the newCardList
      */
     public ItemPool<InventoryItem> getNewCardList() {
-        return newCardList;
+        return this.newCardList;
     }
 
     /**
-     * @param newCardList the newCardList to set
+     * Sets the new card list.
+     * 
+     * @param newCardList
+     *            the newCardList to set
      */
-    public void setNewCardList(ItemPool<InventoryItem> newCardList) {
+    public void setNewCardList(final ItemPool<InventoryItem> newCardList) {
         this.newCardList = newCardList; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the my decks.
+     * 
      * @return the myDecks
      */
     public Map<String, Deck> getMyDecks() {
-        return myDecks;
+        return this.myDecks;
     }
 
     /**
-     * @param myDecks the myDecks to set
+     * Sets the my decks.
+     * 
+     * @param myDecks
+     *            the myDecks to set
      */
-    public void setMyDecks(Map<String, Deck> myDecks) {
+    public void setMyDecks(final Map<String, Deck> myDecks) {
         this.myDecks = myDecks; // TODO: Add 0 to parameter's name.
     }
 
     /**
-     * @param inventory the inventory to set
+     * Sets the inventory.
+     * 
+     * @param inventory
+     *            the inventory to set
      */
-    public void setInventory(QuestInventory inventory) {
+    public void setInventory(final QuestInventory inventory) {
         this.inventory = inventory; // TODO: Add 0 to parameter's name.
     }
 
     /**
-     * @param credits the credits to set
+     * Sets the credits.
+     * 
+     * @param credits
+     *            the credits to set
      */
-    public void setCredits(long credits) {
+    public void setCredits(final long credits) {
         this.credits = credits; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the version number.
+     * 
      * @return the versionNumber
      */
     public int getVersionNumber() {
-        return versionNumber;
+        return this.versionNumber;
     }
 
     /**
-     * @param versionNumber the versionNumber to set
+     * Sets the version number.
+     * 
+     * @param versionNumber
+     *            the versionNumber to set
      */
-    public void setVersionNumber(int versionNumber) {
+    public void setVersionNumber(final int versionNumber) {
         this.versionNumber = versionNumber; // TODO: Add 0 to parameter's name.
     }
 }

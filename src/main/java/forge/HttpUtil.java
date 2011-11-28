@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.io.DataOutputStream;
@@ -37,14 +54,14 @@ public class HttpUtil {
         URL url = null;
         try {
             url = new URL(sURL);
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             return;
         }
 
         HttpURLConnection theUrlConnection = null;
         try {
             theUrlConnection = (HttpURLConnection) url.openConnection();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
         theUrlConnection.setDoOutput(true);
@@ -52,32 +69,33 @@ public class HttpUtil {
         theUrlConnection.setUseCaches(false);
         theUrlConnection.setChunkedStreamingMode(1024);
 
-        theUrlConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+        theUrlConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + HttpUtil.BOUNDARY);
 
         DataOutputStream httpOut = null;
         try {
             httpOut = new DataOutputStream(theUrlConnection.getOutputStream());
-        } catch (IOException e1) {
+        } catch (final IOException e1) {
             return;
         }
 
-        File f = new File(file);
-        String str = "--" + BOUNDARY + "\r\n" + "Content-Disposition: form-data;name=\"data\"; filename=\""
-                + f.getName() + "\"\r\n" + "Content-Type: text/plain\r\n\r\n";
+        final File f = new File(file);
+        final String str = "--" + HttpUtil.BOUNDARY + "\r\n"
+                + "Content-Disposition: form-data;name=\"data\"; filename=\"" + f.getName() + "\"\r\n"
+                + "Content-Type: text/plain\r\n\r\n";
 
         try {
             httpOut.write(str.getBytes());
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
 
         FileInputStream uploadFileReader = null;
         try {
             uploadFileReader = new FileInputStream(f);
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             return;
         }
-        int numBytesToRead = 1024;
+        final int numBytesToRead = 1024;
         int availableBytesToRead;
         try {
             while ((availableBytesToRead = uploadFileReader.available()) > 0) {
@@ -88,23 +106,23 @@ public class HttpUtil {
                 httpOut.write(bufferBytesRead);
                 httpOut.flush();
             }
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
         try {
-            httpOut.write(("--" + BOUNDARY + "--\r\n").getBytes());
-        } catch (IOException e) {
+            httpOut.write(("--" + HttpUtil.BOUNDARY + "--\r\n").getBytes());
+        } catch (final IOException e) {
             return;
         }
 
         try {
             httpOut.flush();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
         try {
             httpOut.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
 
@@ -112,21 +130,21 @@ public class HttpUtil {
         InputStream is = null;
         try {
             is = theUrlConnection.getInputStream();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
-        StringBuilder response = new StringBuilder();
-        byte[] respBuffer = new byte[8192];
+        final StringBuilder response = new StringBuilder();
+        final byte[] respBuffer = new byte[8192];
         try {
             while (is.read(respBuffer) >= 0) {
                 response.append(new String(respBuffer).trim());
             }
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
         try {
             is.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return;
         }
         if (Constant.Runtime.DEV_MODE[0]) {
@@ -147,22 +165,22 @@ public class HttpUtil {
         URL url = null;
         try {
             url = new URL(sURL);
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             return "error 1";
         }
         InputStream is = null;
         try {
             is = url.openStream();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return "error 2";
         }
         int ptr = 0;
-        StringBuffer buffer = new StringBuffer();
+        final StringBuffer buffer = new StringBuffer();
         try {
             while ((ptr = is.read()) != -1) {
                 buffer.append((char) ptr);
             }
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return "error 3";
         }
 

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.toolbox;
 
 import java.awt.CardLayout;
@@ -18,168 +35,178 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class FVerticalTabPanel extends FPanel {
-    private CardLayout cards;
-    private JPanel pnlContent;
-    private List<VTab> allVTabs;
+    private final CardLayout cards;
+    private final JPanel pnlContent;
+    private final List<VTab> allVTabs;
 
-    private FSkin skin;
+    private final FSkin skin;
     private int active;
-    private Color activeColor, inactiveColor, hoverColor;
-    private Border inactiveBorder, hoverBorder;
+    private final Color activeColor, inactiveColor, hoverColor;
+    private final Border inactiveBorder, hoverBorder;
 
     /**
-     * Assembles vertical tab panel from list of child panels.  Tooltip
-     * on tab is same as tooltip on child panel.  Title of tab is same
-     * as name of child panel.
+     * Assembles vertical tab panel from list of child panels. Tooltip on tab is
+     * same as tooltip on child panel. Title of tab is same as name of child
+     * panel.
      * 
-     * @param childPanels &emsp; JPanels to be placed  in tabber
+     * @param childPanels
+     *            &emsp; JPanels to be placed in tabber
      */
-    public FVerticalTabPanel(List<JPanel> childPanels) {
+    public FVerticalTabPanel(final List<JPanel> childPanels) {
         // General inits and skin settings
         super();
-        setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-        setOpaque(false);
-        int size = childPanels.size();
-        skin = AllZone.getSkin();
-        hoverColor = skin.getClrHover();
-        activeColor = skin.getClrActive();
-        inactiveColor = skin.getClrInactive();
-        hoverBorder = new MatteBorder(1, 0, 1, 1, skin.getClrBorders());
-        inactiveBorder = new MatteBorder(1, 0, 1, 1, new Color(0, 0, 0, 0));
+        this.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        this.setOpaque(false);
+        final int size = childPanels.size();
+        this.skin = AllZone.getSkin();
+        this.hoverColor = this.skin.getClrHover();
+        this.activeColor = this.skin.getClrActive();
+        this.inactiveColor = this.skin.getClrInactive();
+        this.hoverBorder = new MatteBorder(1, 0, 1, 1, this.skin.getClrBorders());
+        this.inactiveBorder = new MatteBorder(1, 0, 1, 1, new Color(0, 0, 0, 0));
 
-        final int pctTabH = (int) ((100 - 2 - 2) / size);
+        final int pctTabH = ((100 - 2 - 2) / size);
         final int pctTabW = 11;
         final int pctInsetH = 3;
         final int pctSpacing = 1;
 
         // Content panel and card layout inits
-        cards = new CardLayout();
-        pnlContent = new JPanel();
-        pnlContent.setOpaque(false);
-        pnlContent.setLayout(cards);
-        pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, skin.getClrBorders()));
+        this.cards = new CardLayout();
+        this.pnlContent = new JPanel();
+        this.pnlContent.setOpaque(false);
+        this.pnlContent.setLayout(this.cards);
+        this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, this.skin.getClrBorders()));
 
-        add(pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
+        this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
 
-        JPanel topSpacer = new JPanel();
+        final JPanel topSpacer = new JPanel();
         topSpacer.setOpaque(false);
-        add(topSpacer, "w " + pctTabW + "%!, h " + pctInsetH + "%!");
+        this.add(topSpacer, "w " + pctTabW + "%!, h " + pctInsetH + "%!");
 
         // Add all tabs
         VTab tab;
-        allVTabs = new ArrayList<VTab>();
+        this.allVTabs = new ArrayList<VTab>();
 
         for (int i = 0; i < size; i++) {
             tab = new VTab(childPanels.get(i).getName(), i);
             tab.setToolTipText(childPanels.get(i).getToolTipText());
 
             if (i == 0) {
-                tab.setBackground(activeColor);
-                active = 0;
-            }
-            else {
-                tab.setBackground(inactiveColor);
+                tab.setBackground(this.activeColor);
+                this.active = 0;
+            } else {
+                tab.setBackground(this.inactiveColor);
             }
 
-            add(tab, "w " + pctTabW + "%!, h " + (pctTabH - pctSpacing) + "%!, gapbottom " + pctSpacing + "%!");
-            allVTabs.add(tab);
+            this.add(tab, "w " + pctTabW + "%!, h " + (pctTabH - pctSpacing) + "%!, gapbottom " + pctSpacing + "%!");
+            this.allVTabs.add(tab);
 
             // Add card to content panel
-            pnlContent.add(childPanels.get(i), "CARD" + i);
+            this.pnlContent.add(childPanels.get(i), "CARD" + i);
         }
 
-        JPanel bottomSpacer = new JPanel();
+        final JPanel bottomSpacer = new JPanel();
         bottomSpacer.setOpaque(false);
-        add(bottomSpacer, "w 10%!, h " + (pctInsetH + pctSpacing) + "%!");
+        this.add(bottomSpacer, "w 10%!, h " + (pctInsetH + pctSpacing) + "%!");
     }
 
     /**
-     * Programatically flips tab layout to specified number (without needing
-     * a mouse event).
+     * Programatically flips tab layout to specified number (without needing a
+     * mouse event).
      * 
-     * @param index &emsp; Tab number, starting from 0
+     * @param index
+     *            &emsp; Tab number, starting from 0
      */
-    public void showTab(int index) {
+    public void showTab(final int index) {
         if (index >= this.allVTabs.size()) {
             return;
         }
 
-        allVTabs.get(active).setBackground(inactiveColor);
-        active = index;
-        cards.show(pnlContent, "CARD" + index);
-        allVTabs.get(active).setBackground(activeColor);
-    }
-
-    /** @return JPanel */
-    public JPanel getContentPanel() {
-        return pnlContent;
+        this.allVTabs.get(this.active).setBackground(this.inactiveColor);
+        this.active = index;
+        this.cards.show(this.pnlContent, "CARD" + index);
+        this.allVTabs.get(this.active).setBackground(this.activeColor);
     }
 
     /**
-     * A single instance of a vertical tab, with paintComponent overridden
-     * to provide vertical-ness.  Also manages root level hover and click effects.
-     *
+     * Gets the content panel.
+     * 
+     * @return JPanel
+     */
+    public JPanel getContentPanel() {
+        return this.pnlContent;
+    }
+
+    /**
+     * A single instance of a vertical tab, with paintComponent overridden to
+     * provide vertical-ness. Also manages root level hover and click effects.
+     * 
      */
     private class VTab extends JPanel {
-        private String msg;
-        private int id, w;
+        private final String msg;
+        private final int id;
+        private int w;
 
         // ID is used to retrieve this tab from the list of allVTabs.
-        VTab(String txt, int i) {
+        VTab(final String txt, final int i) {
             super();
-            setLayout(new MigLayout("insets 0, gap 0"));
-            setOpaque(true);
-            msg = txt;
-            id = i;
+            this.setLayout(new MigLayout("insets 0, gap 0"));
+            this.setOpaque(true);
+            this.msg = txt;
+            this.id = i;
 
-            addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
-                    if (id != active) {
-                        setBorder(hoverBorder);
-                        setBackground(hoverColor);
+                public void mouseEntered(final MouseEvent e) {
+                    if (VTab.this.id != FVerticalTabPanel.this.active) {
+                        VTab.this.setBorder(FVerticalTabPanel.this.hoverBorder);
+                        VTab.this.setBackground(FVerticalTabPanel.this.hoverColor);
                     }
                 }
 
                 @Override
-                public void mouseExited(MouseEvent e) {
-                    if (id != active) {
-                        setBorder(inactiveBorder);
-                        setBackground(inactiveColor);
+                public void mouseExited(final MouseEvent e) {
+                    if (VTab.this.id != FVerticalTabPanel.this.active) {
+                        VTab.this.setBorder(FVerticalTabPanel.this.inactiveBorder);
+                        VTab.this.setBackground(FVerticalTabPanel.this.inactiveColor);
                     }
                 }
 
                 @Override
-                public void mousePressed(MouseEvent e) {
-                    allVTabs.get(active).setBackground(inactiveColor);
-                    active = id;
-                    cards.show(pnlContent, "CARD" + id);
-                    setBackground(activeColor);
+                public void mousePressed(final MouseEvent e) {
+                    FVerticalTabPanel.this.allVTabs.get(FVerticalTabPanel.this.active).setBackground(
+                            FVerticalTabPanel.this.inactiveColor);
+                    FVerticalTabPanel.this.active = VTab.this.id;
+                    FVerticalTabPanel.this.cards.show(FVerticalTabPanel.this.pnlContent, "CARD" + VTab.this.id);
+                    VTab.this.setBackground(FVerticalTabPanel.this.activeColor);
                 }
             });
         }
 
-        protected void paintComponent(Graphics g) {
+        @Override
+        protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            w = getWidth();
+            this.w = this.getWidth();
 
-            // Careful with this font scale factor; the vertical tabs will be unreadable
+            // Careful with this font scale factor; the vertical tabs will be
+            // unreadable
             // if small window, too big if large window.
-            g.setFont(skin.getFont1().deriveFont(Font.PLAIN, (int) (w * 0.68)));
+            g.setFont(FVerticalTabPanel.this.skin.getFont1().deriveFont(Font.PLAIN, (int) (this.w * 0.68)));
 
-            // Rotate, draw string, rotate back (to allow hover border to be painted properly)
-            Graphics2D g2d = (Graphics2D) g;
-            AffineTransform at = g2d.getTransform();
+            // Rotate, draw string, rotate back (to allow hover border to be
+            // painted properly)
+            final Graphics2D g2d = (Graphics2D) g;
+            final AffineTransform at = g2d.getTransform();
             at.rotate(Math.toRadians(90), 0, 0);
             g2d.setTransform(at);
             g2d.setColor(AllZone.getSkin().getClrText());
-            g2d.drawString(msg, 5, -4);
+            g2d.drawString(this.msg, 5, -4);
 
             at.rotate(Math.toRadians(-90), 0, 0);
             g2d.setTransform(at);

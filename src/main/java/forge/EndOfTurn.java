@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import forge.Constant.Zone;
@@ -17,9 +34,9 @@ public class EndOfTurn implements java.io.Serializable {
     /** Constant <code>serialVersionUID=-3656715295379727275L</code>. */
     private static final long serialVersionUID = -3656715295379727275L;
 
-    private CommandList at = new CommandList();
-    private CommandList until = new CommandList();
-    private CommandList last = new CommandList();
+    private final CommandList at = new CommandList();
+    private final CommandList until = new CommandList();
+    private final CommandList last = new CommandList();
 
     /**
      * <p>
@@ -30,7 +47,7 @@ public class EndOfTurn implements java.io.Serializable {
      *            a {@link forge.Command} object.
      */
     public final void addAt(final Command c) {
-        at.add(c);
+        this.at.add(c);
     }
 
     /**
@@ -42,7 +59,7 @@ public class EndOfTurn implements java.io.Serializable {
      *            a {@link forge.Command} object.
      */
     public final void addUntil(final Command c) {
-        until.add(c);
+        this.until.add(c);
     }
 
     /**
@@ -54,7 +71,7 @@ public class EndOfTurn implements java.io.Serializable {
      *            a {@link forge.Command} object.
      */
     public final void addLast(final Command c) {
-        last.add(c);
+        this.last.add(c);
     }
 
     /**
@@ -65,7 +82,7 @@ public class EndOfTurn implements java.io.Serializable {
     public final void executeAt() {
 
         // Pyrohemia and Pestilence
-        CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         GameActionUtil.endOfTurnWallOfReverence();
         GameActionUtil.endOfTurnLighthouseChronologist();
@@ -77,7 +94,7 @@ public class EndOfTurn implements java.io.Serializable {
 
         AllZone.getStaticEffects().rePopulateStateBasedList();
 
-        for (Card c : all) {
+        for (final Card c : all) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
                 final Card card = c;
                 final SpellAbility sac = new Ability(card, "0") {
@@ -88,7 +105,7 @@ public class EndOfTurn implements java.io.Serializable {
                         }
                     }
                 };
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("Sacrifice ").append(card);
                 sac.setStackDescription(sb.toString());
 
@@ -105,7 +122,7 @@ public class EndOfTurn implements java.io.Serializable {
                         }
                     }
                 };
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("Exile ").append(card);
                 exile.setStackDescription(sb.toString());
 
@@ -122,7 +139,7 @@ public class EndOfTurn implements java.io.Serializable {
                         }
                     }
                 };
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append("Destroy ").append(card);
                 destroy.setStackDescription(sb.toString());
 
@@ -141,7 +158,7 @@ public class EndOfTurn implements java.io.Serializable {
                             }
                         }
                     };
-                    StringBuilder sb = new StringBuilder();
+                    final StringBuilder sb = new StringBuilder();
                     sb.append("Destroy ").append(card);
                     sac.setStackDescription(sb.toString());
 
@@ -149,7 +166,7 @@ public class EndOfTurn implements java.io.Serializable {
 
                 } else {
                     c.removeExtrinsicKeyword("At the beginning of the next end step, "
-                + "destroy CARDNAME if it attacked this turn.");
+                            + "destroy CARDNAME if it attacked this turn.");
                 }
             }
             if (c.hasKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
@@ -164,11 +181,11 @@ public class EndOfTurn implements java.io.Serializable {
                             // vale.getController().getOpponent());
 
                             vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME "
-                            + "at the beginning of the next end step.");
+                                    + "at the beginning of the next end step.");
                         }
                     }
                 };
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append(vale.getName()).append(" changes controllers.");
                 change.setStackDescription(sb.toString());
 
@@ -186,7 +203,7 @@ public class EndOfTurn implements java.io.Serializable {
                         }
                     }
                 };
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append(raider).append(" deals 2 damage to controller.");
                 change.setStackDescription(sb.toString());
 
@@ -204,7 +221,7 @@ public class EndOfTurn implements java.io.Serializable {
                         }
                     }
                 };
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append(source).append(" - At the beginning of your end step, return CARDNAME to its owner's hand.");
                 change.setStackDescription(sb.toString());
 
@@ -214,7 +231,7 @@ public class EndOfTurn implements java.io.Serializable {
 
         }
 
-        execute(at);
+        this.execute(this.at);
 
     } // executeAt()
 
@@ -224,8 +241,8 @@ public class EndOfTurn implements java.io.Serializable {
      * </p>
      */
     public final void executeUntil() {
-        execute(until);
-        execute(last);
+        this.execute(this.until);
+        this.execute(this.last);
     }
 
     /**
@@ -236,7 +253,7 @@ public class EndOfTurn implements java.io.Serializable {
      * @return a int.
      */
     public final int sizeAt() {
-        return at.size();
+        return this.at.size();
     }
 
     /**
@@ -247,7 +264,7 @@ public class EndOfTurn implements java.io.Serializable {
      * @return a int.
      */
     public final int sizeUntil() {
-        return until.size();
+        return this.until.size();
     }
 
     /**
@@ -258,7 +275,7 @@ public class EndOfTurn implements java.io.Serializable {
      * @return a int.
      */
     public final int sizeLast() {
-        return last.size();
+        return this.last.size();
     }
 
     /**
@@ -270,7 +287,7 @@ public class EndOfTurn implements java.io.Serializable {
      *            a {@link forge.CommandList} object.
      */
     private void execute(final CommandList c) {
-        int length = c.size();
+        final int length = c.size();
 
         for (int i = 0; i < length; i++) {
             c.remove(0).execute();

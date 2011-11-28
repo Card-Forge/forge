@@ -1,7 +1,19 @@
-/**
- * ListChooser.java
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
  *
- * Created on 31.08.2009
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package forge.gui;
@@ -61,9 +73,11 @@ public class CardListViewer {
 
     /**
      * Instantiates a new card list viewer.
-     *
-     * @param title the title
-     * @param list the list
+     * 
+     * @param title
+     *            the title
+     * @param list
+     *            the list
      */
     public CardListViewer(final String title, final List<CardPrinted> list) {
         this(title, "", list, null);
@@ -71,10 +85,13 @@ public class CardListViewer {
 
     /**
      * Instantiates a new card list viewer.
-     *
-     * @param title the title
-     * @param message the message
-     * @param list the list
+     * 
+     * @param title
+     *            the title
+     * @param message
+     *            the message
+     * @param list
+     *            the list
      */
     public CardListViewer(final String title, final String message, final List<CardPrinted> list) {
         this(title, message, list, null);
@@ -82,11 +99,15 @@ public class CardListViewer {
 
     /**
      * Instantiates a new card list viewer.
-     *
-     * @param title the title
-     * @param message the message
-     * @param list the list
-     * @param dialogIcon the dialog icon
+     * 
+     * @param title
+     *            the title
+     * @param message
+     *            the message
+     * @param list
+     *            the list
+     * @param dialogIcon
+     *            the dialog icon
      */
     public CardListViewer(final String title, final String message, final List<CardPrinted> list, final Icon dialogIcon) {
         this.title = title;

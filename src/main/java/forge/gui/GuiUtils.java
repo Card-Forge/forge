@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui;
 
 import java.awt.Component;
@@ -211,13 +228,16 @@ public final class GuiUtils {
 
     /**
      * Convenience for getChoices(message, 0, 1, choices).
-     *
-     * @param <T> is automatically inferred.
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
+     * 
+     * @param <T>
+     *            is automatically inferred.
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
      * @return null if choices is missing, empty, or if the users' choices are
-     * empty; otherwise, returns the first item in the List returned by
-     * getChoices.
+     *         empty; otherwise, returns the first item in the List returned by
+     *         getChoices.
      * @see #getChoices(String, int, int, Object...)
      */
     public static <T> T getChoiceOptional(final String message, final T... choices) {
@@ -231,13 +251,16 @@ public final class GuiUtils {
     /**
      * Like getChoiceOptional, but this takes an Iterator instead of a variable
      * number of arguments.
-     *
-     * @param <T> is automatically inferred.
-     * @param message a {@link java.lang.String} object.
-     * @param choices an Iterator over T objects.
+     * 
+     * @param <T>
+     *            is automatically inferred.
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            an Iterator over T objects.
      * @return null if choices is missing, empty, or if the users' choices are
-     * empty; otherwise, returns the first item in the List returned by
-     * getChoices.
+     *         empty; otherwise, returns the first item in the List returned by
+     *         getChoices.
      */
     public static <T> T getChoiceOptional(final String message, final Iterator<T> choices) {
         if ((choices == null) | !choices.hasNext()) {
@@ -257,10 +280,13 @@ public final class GuiUtils {
      * <p>
      * getChoice.
      * </p>
-     *
-     * @param <T> a T object.
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
+     * 
+     * @param <T>
+     *            a T object.
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
      * @return a T object.
      */
     public static <T> T getChoice(final String message, final T... choices) {
@@ -274,10 +300,13 @@ public final class GuiUtils {
      * <p>
      * getChoicesOptional.
      * </p>
-     *
-     * @param <T> a T object.
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
+     * 
+     * @param <T>
+     *            a T object.
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoicesOptional(final String message, final T... choices) {
@@ -289,10 +318,13 @@ public final class GuiUtils {
      * <p>
      * getChoices.
      * </p>
-     *
-     * @param <T> a T object.
-     * @param message a {@link java.lang.String} object.
-     * @param choices a T object.
+     * 
+     * @param <T>
+     *            a T object.
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param choices
+     *            a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoices(final String message, final T... choices) {
@@ -304,12 +336,17 @@ public final class GuiUtils {
      * <p>
      * getChoices.
      * </p>
-     *
-     * @param <T> a T object.
-     * @param message a {@link java.lang.String} object.
-     * @param min a int.
-     * @param max a int.
-     * @param choices a T object.
+     * 
+     * @param <T>
+     *            a T object.
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param min
+     *            a int.
+     * @param max
+     *            a int.
+     * @param choices
+     *            a T object.
      * @return a {@link java.util.List} object.
      */
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T... choices) {

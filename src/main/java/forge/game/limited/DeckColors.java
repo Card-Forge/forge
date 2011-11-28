@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.game.limited;
 
 import forge.Constant;
@@ -71,6 +88,8 @@ class DeckColors {
     }
 
     /**
+     * Gets the color1.
+     * 
      * @return the color1
      */
     public String getColor1() {
@@ -78,6 +97,8 @@ class DeckColors {
     }
 
     /**
+     * Sets the color1.
+     * 
      * @param color1
      *            the color1 to set
      */
@@ -86,6 +107,8 @@ class DeckColors {
     }
 
     /**
+     * Gets the mana1.
+     * 
      * @return the mana1
      */
     public String getMana1() {
@@ -93,6 +116,8 @@ class DeckColors {
     }
 
     /**
+     * Sets the mana1.
+     * 
      * @param mana1
      *            the mana1 to set
      */
@@ -101,6 +126,8 @@ class DeckColors {
     }
 
     /**
+     * Gets the mana2.
+     * 
      * @return the mana2
      */
     public String getMana2() {
@@ -108,6 +135,8 @@ class DeckColors {
     }
 
     /**
+     * Sets the mana2.
+     * 
      * @param mana2
      *            the mana2 to set
      */
@@ -116,6 +145,8 @@ class DeckColors {
     }
 
     /**
+     * Gets the color2.
+     * 
      * @return the color2
      */
     public String getColor2() {
@@ -123,6 +154,8 @@ class DeckColors {
     }
 
     /**
+     * Sets the color2.
+     * 
      * @param color2
      *            the color2 to set
      */

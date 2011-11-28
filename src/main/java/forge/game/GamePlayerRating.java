@@ -1,8 +1,25 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.game;
 
 /**
  * The Class GamePlayerRating.
- *
+ * 
  * @author Max
  */
 public class GamePlayerRating {
@@ -21,7 +38,7 @@ public class GamePlayerRating {
 
     /**
      * Gets the loss reason.
-     *
+     * 
      * @return the loss reason
      */
     public final GameLossReason getLossReason() {
@@ -30,9 +47,11 @@ public class GamePlayerRating {
 
     /**
      * Sets the loss reason.
-     *
-     * @param loseCondition the lose condition
-     * @param spellName the spell name
+     * 
+     * @param loseCondition
+     *            the lose condition
+     * @param spellName
+     *            the spell name
      */
     public void setLossReason(final GameLossReason loseCondition, final String spellName) {
         this.lossReason = loseCondition;
@@ -41,7 +60,7 @@ public class GamePlayerRating {
 
     /**
      * Gets the loss spell name.
-     *
+     * 
      * @return the loss spell name
      */
     public String getLossSpellName() {
@@ -50,7 +69,7 @@ public class GamePlayerRating {
 
     /**
      * Gets the opening hand size.
-     *
+     * 
      * @return the opening hand size
      */
     public final int getOpeningHandSize() {
@@ -66,7 +85,7 @@ public class GamePlayerRating {
 
     /**
      * Gets the mulligan count.
-     *
+     * 
      * @return the mulligan count
      */
     public final int getMulliganCount() {
@@ -75,8 +94,9 @@ public class GamePlayerRating {
 
     /**
      * Notify opening hand size.
-     *
-     * @param newHand the new hand
+     * 
+     * @param newHand
+     *            the new hand
      */
     public final void notifyOpeningHandSize(final int newHand) {
         this.openingHandSize = newHand;

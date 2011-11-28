@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import java.util.ArrayList;
@@ -38,7 +55,7 @@ public class CardCharacteristics {
      * @return the name
      */
     public final String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -57,7 +74,7 @@ public class CardCharacteristics {
      * @return the type
      */
     public final ArrayList<String> getType() {
-        return type;
+        return this.type;
     }
 
     /**
@@ -76,7 +93,7 @@ public class CardCharacteristics {
      * @return the manaCost
      */
     public final String getManaCost() {
-        return manaCost;
+        return this.manaCost;
     }
 
     /**
@@ -95,7 +112,7 @@ public class CardCharacteristics {
      * @return the cardColor
      */
     public final ArrayList<CardColor> getCardColor() {
-        return cardColor;
+        return this.cardColor;
     }
 
     /**
@@ -106,9 +123,9 @@ public class CardCharacteristics {
      */
     public final void setCardColor(final ArrayList<CardColor> cardColor0) {
         this.cardColor = new ArrayList<CardColor>(cardColor0); // TODO: Add 0
-                                                                // to
-                                                                // parameter's
-                                                                // name.
+                                                               // to
+                                                               // parameter's
+                                                               // name.
     }
 
     /**
@@ -117,7 +134,7 @@ public class CardCharacteristics {
      * @return the cardColorsOverridden
      */
     public final boolean isCardColorsOverridden() {
-        return cardColorsOverridden;
+        return this.cardColorsOverridden;
     }
 
     /**
@@ -137,7 +154,7 @@ public class CardCharacteristics {
      * @return the baseAttack
      */
     public final int getBaseAttack() {
-        return baseAttack;
+        return this.baseAttack;
     }
 
     /**
@@ -156,7 +173,7 @@ public class CardCharacteristics {
      * @return the baseDefense
      */
     public final int getBaseDefense() {
-        return baseDefense;
+        return this.baseDefense;
     }
 
     /**
@@ -175,7 +192,7 @@ public class CardCharacteristics {
      * @return the intrinsicKeyword
      */
     public final ArrayList<String> getIntrinsicKeyword() {
-        return intrinsicKeyword;
+        return this.intrinsicKeyword;
     }
 
     /**
@@ -195,7 +212,7 @@ public class CardCharacteristics {
      * @return the spellAbility
      */
     public final ArrayList<SpellAbility> getSpellAbility() {
-        return spellAbility;
+        return this.spellAbility;
     }
 
     /**
@@ -214,7 +231,7 @@ public class CardCharacteristics {
      * @return the intrinsicAbility
      */
     public final ArrayList<String> getIntrinsicAbility() {
-        return intrinsicAbility;
+        return this.intrinsicAbility;
     }
 
     /**
@@ -234,7 +251,7 @@ public class CardCharacteristics {
      * @return the manaAbility
      */
     public final ArrayList<AbilityMana> getManaAbility() {
-        return manaAbility;
+        return this.manaAbility;
     }
 
     /**
@@ -253,7 +270,7 @@ public class CardCharacteristics {
      * @return the triggers
      */
     public final ArrayList<Trigger> getTriggers() {
-        return triggers;
+        return this.triggers;
     }
 
     /**
@@ -272,7 +289,7 @@ public class CardCharacteristics {
      * @return the staticAbilities
      */
     public final ArrayList<StaticAbility> getStaticAbilities() {
-        return staticAbilities;
+        return this.staticAbilities;
     }
 
     /**
@@ -296,7 +313,7 @@ public class CardCharacteristics {
      * @return the imageFilename
      */
     public final String getImageFilename() {
-        return imageFilename;
+        return this.imageFilename;
     }
 
     /**
@@ -306,7 +323,7 @@ public class CardCharacteristics {
      *            the imageFilename to set
      */
     public final void setImageFilename(final String imageFilename0) {
-        imageFilename = imageFilename0; // TODO: Add 0 to parameter's name.
+        this.imageFilename = imageFilename0; // TODO: Add 0 to parameter's name.
     }
 
     /**
@@ -315,7 +332,7 @@ public class CardCharacteristics {
      * @return the sets
      */
     public final ArrayList<SetInfo> getSets() {
-        return sets;
+        return this.sets;
     }
 
     /**
@@ -325,8 +342,8 @@ public class CardCharacteristics {
      *            the sets to set
      */
     public final void setSets(final ArrayList<SetInfo> sets0) {
-        sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's
-                                              // name.
+        this.sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's
+        // name.
     }
 
     /**
@@ -335,7 +352,7 @@ public class CardCharacteristics {
      * @return the staticAbilityStrings
      */
     public final ArrayList<String> getStaticAbilityStrings() {
-        return staticAbilityStrings;
+        return this.staticAbilityStrings;
     }
 
     /**
@@ -350,16 +367,21 @@ public class CardCharacteristics {
     }
 
     /**
+     * Gets the image name.
+     * 
      * @return the imageName
      */
     public String getImageName() {
-        return imageName;
+        return this.imageName;
     }
 
     /**
-     * @param imageName0 the imageName to set
+     * Sets the image name.
+     * 
+     * @param imageName0
+     *            the imageName to set
      */
-    public void setImageName(String imageName0) {
+    public void setImageName(final String imageName0) {
         this.imageName = imageName0; // TODO: Add 0 to parameter's name.
     }
 }

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.trigger;
 
 import java.util.ArrayList;
@@ -302,18 +319,16 @@ public class TriggerHandler {
         }
 
         /*
-        //This was supposed to make sure that things like Adaptive Automaton
-        //that used a static trigger to start pumping something
-        //"As they ETB" to make sure they then trigger cards
-        //already on the bf that would react to it.
-        //However, this broke auras because checkStateEffects
-        //expect auras to be attached to something, which they
-        //aren't yet. And even if it (correctly?) sent unattached
-        //auras to the graveyard,that would result in all auras
-        //going straight to the grave no matter what.
-        this.suppressMode("Always");
-        AllZone.getGameAction().checkStateEffects(true);
-        this.clearSuppression("Always");
+         * //This was supposed to make sure that things like Adaptive Automaton
+         * //that used a static trigger to start pumping something
+         * //"As they ETB" to make sure they then trigger cards //already on the
+         * bf that would react to it. //However, this broke auras because
+         * checkStateEffects //expect auras to be attached to something, which
+         * they //aren't yet. And even if it (correctly?) sent unattached
+         * //auras to the graveyard,that would result in all auras //going
+         * straight to the grave no matter what. this.suppressMode("Always");
+         * AllZone.getGameAction().checkStateEffects(true);
+         * this.clearSuppression("Always");
          */
 
         // AP

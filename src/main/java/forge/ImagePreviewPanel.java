@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.awt.Color;
@@ -29,7 +46,7 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
     private Image image;
     /** Constant <code>ACCSIZE=155</code>. */
     private static final int ACCSIZE = 155;
-    private Color bg;
+    private final Color bg;
 
     /**
      * <p>
@@ -37,17 +54,18 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
      * </p>
      */
     public ImagePreviewPanel() {
-        setPreferredSize(new Dimension(ACCSIZE, -1));
-        bg = getBackground();
+        this.setPreferredSize(new Dimension(ImagePreviewPanel.ACCSIZE, -1));
+        this.bg = this.getBackground();
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void propertyChange(final PropertyChangeEvent e) {
-        String propertyName = e.getPropertyName();
+        final String propertyName = e.getPropertyName();
 
         // Make sure we are responding to the right event.
         if (propertyName.equals(JFileChooser.SELECTED_FILE_CHANGED_PROPERTY)) {
-            File selection = (File) e.getNewValue();
+            final File selection = (File) e.getNewValue();
             String name;
 
             if (selection == null) {
@@ -63,10 +81,10 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
             if ((name != null)
                     && (name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".jpeg")
                             || name.toLowerCase().endsWith(".gif") || name.toLowerCase().endsWith(".png"))) {
-                icon = new ImageIcon(name);
-                image = icon.getImage();
-                scaleImage();
-                repaint();
+                this.icon = new ImageIcon(name);
+                this.image = this.icon.getImage();
+                this.scaleImage();
+                this.repaint();
             }
         }
     }
@@ -77,8 +95,8 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
      * </p>
      */
     private void scaleImage() {
-        width = image.getWidth(this);
-        height = image.getHeight(this);
+        this.width = this.image.getWidth(this);
+        this.height = this.image.getHeight(this);
         double ratio = 1.0;
 
         /*
@@ -86,29 +104,29 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
          * vertically make sure we don't go larger than 150 when scaling
          * vertically.
          */
-        if (width >= height) {
-            ratio = (double) (ACCSIZE - 5) / width;
-            width = ACCSIZE - 5;
-            height = (int) (height * ratio);
+        if (this.width >= this.height) {
+            ratio = (double) (ImagePreviewPanel.ACCSIZE - 5) / this.width;
+            this.width = ImagePreviewPanel.ACCSIZE - 5;
+            this.height = (int) (this.height * ratio);
         } else {
-            if (getHeight() > 150) {
-                ratio = (double) (ACCSIZE - 5) / height;
-                height = ACCSIZE - 5;
-                width = (int) (width * ratio);
+            if (this.getHeight() > 150) {
+                ratio = (double) (ImagePreviewPanel.ACCSIZE - 5) / this.height;
+                this.height = ImagePreviewPanel.ACCSIZE - 5;
+                this.width = (int) (this.width * ratio);
             } else {
-                ratio = (double) getHeight() / height;
-                height = getHeight();
-                width = (int) (width * ratio);
+                ratio = (double) this.getHeight() / this.height;
+                this.height = this.getHeight();
+                this.width = (int) (this.width * ratio);
             }
         }
 
-        image = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        this.image = this.image.getScaledInstance(this.width, this.height, Image.SCALE_DEFAULT);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void paintComponent(final Graphics g) {
-        g.setColor(bg);
+        g.setColor(this.bg);
 
         /*
          * If we don't do this, we will end up with garbage from previous images
@@ -118,8 +136,9 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
          * for the accessory before drawing. This might be a bug in
          * JFileChooser.
          */
-        g.fillRect(0, 0, ACCSIZE, getHeight());
-        g.drawImage(image, getWidth() / 2 - width / 2 + 5, getHeight() / 2 - height / 2, this);
+        g.fillRect(0, 0, ImagePreviewPanel.ACCSIZE, this.getHeight());
+        g.drawImage(this.image, ((this.getWidth() / 2) - (this.width / 2)) + 5, (this.getHeight() / 2)
+                - (this.height / 2), this);
     }
 
 }

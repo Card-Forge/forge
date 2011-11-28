@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.control.match;
 
 import java.awt.event.ComponentAdapter;
@@ -18,30 +35,33 @@ import forge.view.match.ViewHand;
 import forge.view.match.ViewHand.CardPanel;
 import forge.view.match.ViewTopLevel;
 
-/** 
- * Child controller - handles operations related to cards in user's hand
- * and their Swing components, which are assembled in ViewHand.
- *
+/**
+ * Child controller - handles operations related to cards in user's hand and
+ * their Swing components, which are assembled in ViewHand.
+ * 
  */
 public class ControlHand {
-    private List<Card> cardsInPanel;
-    private ViewHand view;
+    private final List<Card> cardsInPanel;
+    private final ViewHand view;
 
-    /** 
-     * Child controller - handles operations related to cards in user's hand
-     * and their Swing components, which are assembled in ViewHand.
-     * @param v &emsp; The Swing component for user hand
+    /**
+     * Child controller - handles operations related to cards in user's hand and
+     * their Swing components, which are assembled in ViewHand.
+     * 
+     * @param v
+     *            &emsp; The Swing component for user hand
      */
-    public ControlHand(ViewHand v) {
-        view = v;
-        cardsInPanel = new ArrayList<Card>();
+    public ControlHand(final ViewHand v) {
+        this.view = v;
+        this.cardsInPanel = new ArrayList<Card>();
     }
 
     /** Adds observers to hand panel. */
     public void addObservers() {
-        Observer o1 = new Observer() {
+        final Observer o1 = new Observer() {
+            @Override
             public void update(final Observable a, final Object b) {
-                resetCards(Arrays.asList(((PlayerZone) a).getCards()));
+                ControlHand.this.resetCards(Arrays.asList(((PlayerZone) a).getCards()));
             }
         };
         AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(o1);
@@ -49,19 +69,21 @@ public class ControlHand {
 
     /** Adds listeners to hand panel: window resize, etc. */
     public void addListeners() {
-        view.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent e) {
+        this.view.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(final ComponentEvent e) {
                 // Ensures cards in hand scale properly with parent.
-                view.refreshLayout();
+                ControlHand.this.view.refreshLayout();
             }
         });
     }
 
     /**
-     * Adds various listeners for cards in hand. Uses CardPanel
-     * instance from ViewHand.
+     * Adds various listeners for cards in hand. Uses CardPanel instance from
+     * ViewHand.
      * 
-     * @param c &emsp; CardPanel object
+     * @param c
+     *            &emsp; CardPanel object
      */
     public void addCardPanelListeners(final CardPanel c) {
         // Grab top level controller to facilitate interaction between children
@@ -77,7 +99,7 @@ public class ControlHand {
         });
 
         // Mouse press
-        c.addMouseListener(new MouseAdapter()  {
+        c.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
 
@@ -85,44 +107,73 @@ public class ControlHand {
                     return;
                 }
 
-                display.getInputController().getInputControl().selectCard(
-                        cardobj, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                display.getInputController().getInputControl()
+                        .selectCard(cardobj, AllZone.getHumanPlayer().getZone(Zone.Hand));
             }
         });
     }
 
-    /** @param c &emsp; Card object */
-    public void addCard(Card c) {
-        cardsInPanel.add(c);
-        view.refreshLayout();
+    /**
+     * Adds the card.
+     * 
+     * @param c
+     *            &emsp; Card object
+     */
+    public void addCard(final Card c) {
+        this.cardsInPanel.add(c);
+        this.view.refreshLayout();
     }
 
-    /** @param c &emsp; List of Card objects */
-    public void addCards(List<Card> c) {
-        cardsInPanel.addAll(c);
-        view.refreshLayout();
+    /**
+     * Adds the cards.
+     * 
+     * @param c
+     *            &emsp; List of Card objects
+     */
+    public void addCards(final List<Card> c) {
+        this.cardsInPanel.addAll(c);
+        this.view.refreshLayout();
     }
 
-    /** @return List<Card> */
+    /**
+     * Gets the cards.
+     * 
+     * @return List<Card>
+     */
     public List<Card> getCards() {
-        return cardsInPanel;
+        return this.cardsInPanel;
     }
 
-    /** @param c &emsp; Card object */
-    public void removeCard(Card c) {
-        cardsInPanel.remove(c);
-        view.refreshLayout();
+    /**
+     * Removes the card.
+     * 
+     * @param c
+     *            &emsp; Card object
+     */
+    public void removeCard(final Card c) {
+        this.cardsInPanel.remove(c);
+        this.view.refreshLayout();
     }
 
-    /** @param c &emsp; List of Card objects */
-    public void removeCards(List<Card> c) {
-        cardsInPanel.removeAll(c);
-        view.refreshLayout();
+    /**
+     * Removes the cards.
+     * 
+     * @param c
+     *            &emsp; List of Card objects
+     */
+    public void removeCards(final List<Card> c) {
+        this.cardsInPanel.removeAll(c);
+        this.view.refreshLayout();
     }
 
-    /** @param c &emsp; List of Card objects */
-    public void resetCards(List<Card> c) {
-        cardsInPanel.clear();
-        addCards(c);
+    /**
+     * Reset cards.
+     * 
+     * @param c
+     *            &emsp; List of Card objects
+     */
+    public void resetCards(final List<Card> c) {
+        this.cardsInPanel.clear();
+        this.addCards(c);
     }
 }

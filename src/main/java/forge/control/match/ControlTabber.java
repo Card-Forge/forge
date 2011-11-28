@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.control.match;
 
 import java.awt.event.MouseAdapter;
@@ -11,50 +28,49 @@ import forge.MyObservable;
 import forge.Singletons;
 import forge.view.match.ViewTabber;
 
-/** 
- * Controls the vertical tabber in sidebar used for
- * viewing gameplay data: stack, combat, etc.
- *
+/**
+ * Controls the vertical tabber in sidebar used for viewing gameplay data:
+ * stack, combat, etc.
+ * 
  */
 public class ControlTabber extends MyObservable {
-    private ViewTabber view;
+    private final ViewTabber view;
 
-    /** 
-     * Controls the vertical tabber in sidebar used for
-     * viewing gameplay data: stack, combat, etc.
-     *
-     * @param v &emsp; The tabber Swing component
+    /**
+     * Controls the vertical tabber in sidebar used for viewing gameplay data:
+     * stack, combat, etc.
+     * 
+     * @param v
+     *            &emsp; The tabber Swing component
      */
-    public ControlTabber(ViewTabber v) {
-        view = v;
+    public ControlTabber(final ViewTabber v) {
+        this.view = v;
         if (Singletons.getModel().getPreferences().isMillingLossCondition()) {
-            view.getLblMilling().setEnabled(true);
-        }
-        else {
-            view.getLblMilling().setEnabled(false);
+            this.view.getLblMilling().setEnabled(true);
+        } else {
+            this.view.getLblMilling().setEnabled(false);
         }
 
         if (Singletons.getModel().getPreferences().getHandView()) {
-            view.getLblHandView().setEnabled(true);
-        }
-        else {
-            view.getLblHandView().setEnabled(false);
+            this.view.getLblHandView().setEnabled(true);
+        } else {
+            this.view.getLblHandView().setEnabled(false);
         }
 
         if (Singletons.getModel().getPreferences().getLibraryView()) {
-            view.getLblLibraryView().setEnabled(true);
-        }
-        else {
-            view.getLblLibraryView().setEnabled(false);
+            this.view.getLblLibraryView().setEnabled(true);
+        } else {
+            this.view.getLblLibraryView().setEnabled(false);
         }
     }
 
     /** Adds observers to tabber. */
     public void addObservers() {
         // Stack
-        Observer o1 = new Observer() {
+        final Observer o1 = new Observer() {
+            @Override
             public void update(final Observable a, final Object b) {
-                view.updateStack();
+                ControlTabber.this.view.updateStack();
             }
         };
 
@@ -64,135 +80,145 @@ public class ControlTabber extends MyObservable {
     /** Adds listeners to various components in tabber. */
     public void addListeners() {
         // Milling enable toggle
-        view.getLblMilling().addMouseListener(new MouseAdapter() {
+        this.view.getLblMilling().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                view.getLblMilling().toggleEnabled();
+            public void mousePressed(final MouseEvent e) {
+                ControlTabber.this.view.getLblMilling().toggleEnabled();
             }
         });
 
         // View any hand toggle
-        view.getLblHandView().addMouseListener(new MouseAdapter() {
+        this.view.getLblHandView().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                view.getLblHandView().toggleEnabled();
+            public void mousePressed(final MouseEvent e) {
+                ControlTabber.this.view.getLblHandView().toggleEnabled();
             }
         });
 
         // DevMode: View any library toggle
-        view.getLblLibraryView().addMouseListener(new MouseAdapter() {
+        this.view.getLblLibraryView().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                view.getLblLibraryView().toggleEnabled();
+            public void mousePressed(final MouseEvent e) {
+                ControlTabber.this.view.getLblLibraryView().toggleEnabled();
             }
         });
 
         // DevMode: Play unlimited land this turn toggle
-        view.getLblUnlimitedLands().addMouseListener(new MouseAdapter() {
+        this.view.getLblUnlimitedLands().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeUnlimitedLand();
 
-                // TODO: Enable toggle for this (e.g. Unlimited land each turn: enabled)
-                // Also must change enabled/disabled text in ViewTabber to reflect this.
-                //view.getLblUnlimitedLands().toggleEnabled();
+                // TODO: Enable toggle for this (e.g. Unlimited land each turn:
+                // enabled)
+                // Also must change enabled/disabled text in ViewTabber to
+                // reflect this.
+                // view.getLblUnlimitedLands().toggleEnabled();
             }
         });
 
         // DevMode: Generate mana
-        view.getLblGenerateMana().addMouseListener(new MouseAdapter() {
+        this.view.getLblGenerateMana().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeGenerateMana();
             }
         });
 
         // DevMode: Battlefield setup
-        view.getLblSetupGame().addMouseListener(new MouseAdapter() {
+        this.view.getLblSetupGame().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devSetupGameState();
             }
         });
 
         // DevMode: Tutor for card
-        view.getLblTutor().addMouseListener(new MouseAdapter() {
+        this.view.getLblTutor().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeTutor();
             }
         });
 
         // DevMode: Add counter to permanent
-        view.getLblCounterPermanent().addMouseListener(new MouseAdapter() {
+        this.view.getLblCounterPermanent().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeAddCounter();
             }
         });
 
         // DevMode: Tap permanent
-        view.getLblTapPermanent().addMouseListener(new MouseAdapter() {
+        this.view.getLblTapPermanent().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeTapPerm();
             }
         });
 
         // DevMode: Untap permanent
-        view.getLblUntapPermanent().addMouseListener(new MouseAdapter() {
+        this.view.getLblUntapPermanent().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeUntapPerm();
             }
         });
 
         // DevMode: Set human life
-        view.getLblHumanLife().addMouseListener(new MouseAdapter() {
+        this.view.getLblHumanLife().addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 GuiDisplayUtil.devModeSetLife();
             }
         });
     }
 
-    /** @return ViewTabber */
+    /**
+     * Gets the view.
+     * 
+     * @return ViewTabber
+     */
     public ViewTabber getView() {
-        return view;
+        return this.view;
     }
 
     /**
      * Programatically forces card layout of sidebar tabber to show "Dev" panel.
      */
     public void showPnlDev() {
-        view.getVtpTabber().showTab(4);
+        this.view.getVtpTabber().showTab(4);
     }
 
     /**
-     * Programatically forces card layout of sidebar tabber to show "Players" panel.
+     * Programatically forces card layout of sidebar tabber to show "Players"
+     * panel.
      */
     public void showPnlPlayers() {
-        view.getVtpTabber().showTab(3);
+        this.view.getVtpTabber().showTab(3);
     }
 
     /**
-     * Programatically forces card layout of sidebar tabber to show "Console" panel.
+     * Programatically forces card layout of sidebar tabber to show "Console"
+     * panel.
      */
     public void showPnlConsole() {
-        view.getVtpTabber().showTab(2);
+        this.view.getVtpTabber().showTab(2);
     }
 
     /**
-     * Programatically forces card layout of sidebar tabber to show "Combat" panel.
+     * Programatically forces card layout of sidebar tabber to show "Combat"
+     * panel.
      */
     public void showPnlCombat() {
-        view.getVtpTabber().showTab(1);
+        this.view.getVtpTabber().showTab(1);
     }
 
     /**
-     * Programatically forces card layout of sidebar tabber to show "Stack" panel.
+     * Programatically forces card layout of sidebar tabber to show "Stack"
+     * panel.
      */
     public void showPnlStack() {
-        view.getVtpTabber().showTab(0);
+        this.view.getVtpTabber().showTab(0);
     }
 }

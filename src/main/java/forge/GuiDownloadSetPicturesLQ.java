@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.io.File;
@@ -41,10 +58,13 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
 
     /**
      * Adds the card to list.
-     *
-     * @param cList the c list
-     * @param c the c
-     * @param cardName the card name
+     * 
+     * @param cList
+     *            the c list
+     * @param c
+     *            the c
+     * @param cardName
+     *            the card name
      */
     protected final void addCardToList(final ArrayList<DownloadObject> cList, final CardPrinted c, final String cardName) {
         final String urlBase = "http://cardforge.org/fpics/";

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.awt.event.FocusEvent;
@@ -255,7 +272,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      */
     /**
      * Gets the row count.
-     *
+     * 
      * @return int
      */
     @Override
@@ -270,7 +287,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      */
     /**
      * Gets the column count.
-     *
+     * 
      * @return int
      */
     @Override
@@ -296,12 +313,13 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * the object created with that class is registered with a component using
      * the component's addColumnListener method. When the column event occurs,
      * that object's appropriate method is invoked.
-     *
+     * 
+     * @see ColumnEvent
      */
     class ColumnListener extends MouseAdapter {
 
         /** The table. */
-        private JTable table;
+        private final JTable table;
 
         /**
          * Instantiates a new column listener.
@@ -321,8 +339,9 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
          */
         /**
          * Mouse clicked.
-         *
-         * @param e MouseEvent
+         * 
+         * @param e
+         *            MouseEvent
          */
         @Override
         public void mouseClicked(final MouseEvent e) {

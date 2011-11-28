@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -32,10 +49,10 @@ public class StaticEffects {
      */
     public final void clearStaticEffects() {
         // remove all static effects
-        for (int i = 0; i < staticEffects.size(); i++) {
-            removeStaticEffect(staticEffects.get(i));
+        for (int i = 0; i < this.staticEffects.size(); i++) {
+            this.removeStaticEffect(this.staticEffects.get(i));
         }
-        staticEffects = new ArrayList<StaticEffect>();
+        this.staticEffects = new ArrayList<StaticEffect>();
 
         AllZone.getTriggerHandler().cleanUpTemporaryTriggers();
     }
@@ -47,7 +64,7 @@ public class StaticEffects {
      *            a StaticEffect
      */
     public final void addStaticEffect(final StaticEffect staticEffect) {
-        staticEffects.add(staticEffect);
+        this.staticEffects.add(staticEffect);
     }
 
     /**
@@ -57,9 +74,9 @@ public class StaticEffects {
      *            a StaticEffect
      */
     final void removeStaticEffect(final StaticEffect se) {
-        CardList affectedCards = se.getAffectedCards();
-        ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
-        HashMap<String, String> params = se.getParams();
+        final CardList affectedCards = se.getAffectedCards();
+        final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
+        final HashMap<String, String> params = se.getParams();
 
         int powerBonus = 0;
         int toughnessBonus = 0;
@@ -107,14 +124,14 @@ public class StaticEffects {
         }
 
         // modify players
-        for (Player p : affectedPlayers) {
+        for (final Player p : affectedPlayers) {
             if (params.containsKey("AddKeyword")) {
                 addKeywords = params.get("AddKeyword").split(" & ");
             }
 
             // add keywords
             if (addKeywords != null) {
-                for (String keyword : addKeywords) {
+                for (final String keyword : addKeywords) {
                     p.removeKeyword(keyword);
                 }
             }
@@ -122,7 +139,7 @@ public class StaticEffects {
 
         // modify the affected card
         for (int i = 0; i < affectedCards.size(); i++) {
-            Card affectedCard = affectedCards.get(i);
+            final Card affectedCard = affectedCards.get(i);
 
             // remove set P/T
             if (!params.containsKey("CharacteristicDefining") && setPT) {
@@ -141,8 +158,8 @@ public class StaticEffects {
 
             // remove abilities
             if (params.containsKey("AddAbility")) {
-                SpellAbility[] spellAbility = affectedCard.getSpellAbility();
-                for (SpellAbility s : spellAbility) {
+                final SpellAbility[] spellAbility = affectedCard.getSpellAbility();
+                for (final SpellAbility s : spellAbility) {
                     if (s.getType().equals("Temporary")) {
                         affectedCard.removeSpellAbility(s);
                     }
@@ -150,20 +167,20 @@ public class StaticEffects {
             }
 
             if (addHiddenKeywords != null) {
-                for (String k : addHiddenKeywords) {
+                for (final String k : addHiddenKeywords) {
                     affectedCard.removeExtrinsicKeyword(k);
                 }
             }
 
             // remove abilities
             if (params.containsKey("RemoveAllAbilities")) {
-                ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
-                for (SpellAbility ab : abilities) {
+                final ArrayList<SpellAbility> abilities = affectedCard.getSpellAbilities();
+                for (final SpellAbility ab : abilities) {
                     ab.setTemporarilySuppressed(false);
                 }
 
-                ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
-                for (StaticAbility stA : staticAbilities) {
+                final ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
+                for (final StaticAbility stA : staticAbilities) {
                     stA.setTemporarilySuppressed(false);
                 }
             }
@@ -185,7 +202,7 @@ public class StaticEffects {
     // **************** End StaticAbility system **************************
 
     // this is used to keep track of all state-based effects in play:
-    private HashMap<String, Integer> stateBasedMap = new HashMap<String, Integer>();
+    private final HashMap<String, Integer> stateBasedMap = new HashMap<String, Integer>();
 
     // this is used to define all cards that are state-based effects, and map
     // the
@@ -199,8 +216,8 @@ public class StaticEffects {
      * </p>
      */
     public StaticEffects() {
-        initStateBasedEffectsList();
-        staticEffects = new ArrayList<StaticEffect>();
+        this.initStateBasedEffectsList();
+        this.staticEffects = new ArrayList<StaticEffect>();
     }
 
     /**
@@ -212,21 +229,21 @@ public class StaticEffects {
         // value has to be an array, since certain cards have multiple commands
         // associated with them
 
-        cardToEffectsList.put("Avatar", new String[] { "Ajani_Avatar_Token" });
+        StaticEffects.cardToEffectsList.put("Avatar", new String[] { "Ajani_Avatar_Token" });
 
-        cardToEffectsList.put("Alpha Status", new String[] { "Alpha_Status" });
-        cardToEffectsList.put("Coat of Arms", new String[] { "Coat_of_Arms" });
+        StaticEffects.cardToEffectsList.put("Alpha Status", new String[] { "Alpha_Status" });
+        StaticEffects.cardToEffectsList.put("Coat of Arms", new String[] { "Coat_of_Arms" });
 
-        cardToEffectsList.put("Homarid", new String[] { "Homarid" });
-        cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] { "Liu_Bei" });
+        StaticEffects.cardToEffectsList.put("Homarid", new String[] { "Homarid" });
+        StaticEffects.cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] { "Liu_Bei" });
 
-        cardToEffectsList.put("Muraganda Petroglyphs", new String[] { "Muraganda_Petroglyphs" });
-        cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });
+        StaticEffects.cardToEffectsList.put("Muraganda Petroglyphs", new String[] { "Muraganda_Petroglyphs" });
+        StaticEffects.cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });
 
-        cardToEffectsList.put("Tarmogoyf", new String[] { "Tarmogoyf" });
+        StaticEffects.cardToEffectsList.put("Tarmogoyf", new String[] { "Tarmogoyf" });
 
-        cardToEffectsList.put("Umbra Stalker", new String[] { "Umbra_Stalker" });
-        cardToEffectsList.put("Wolf", new String[] { "Sound_the_Call_Wolf" });
+        StaticEffects.cardToEffectsList.put("Umbra Stalker", new String[] { "Umbra_Stalker" });
+        StaticEffects.cardToEffectsList.put("Wolf", new String[] { "Sound_the_Call_Wolf" });
 
     }
 
@@ -238,7 +255,7 @@ public class StaticEffects {
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, String[]> getCardToEffectsList() {
-        return cardToEffectsList;
+        return StaticEffects.cardToEffectsList;
     }
 
     /**
@@ -250,10 +267,10 @@ public class StaticEffects {
      *            a {@link java.lang.String} object.
      */
     public final void addStateBasedEffect(final String s) {
-        if (stateBasedMap.containsKey(s)) {
-            stateBasedMap.put(s, stateBasedMap.get(s) + 1);
+        if (this.stateBasedMap.containsKey(s)) {
+            this.stateBasedMap.put(s, this.stateBasedMap.get(s) + 1);
         } else {
-            stateBasedMap.put(s, 1);
+            this.stateBasedMap.put(s, 1);
         }
     }
 
@@ -266,10 +283,10 @@ public class StaticEffects {
      *            a {@link java.lang.String} object.
      */
     public final void removeStateBasedEffect(final String s) {
-        if (stateBasedMap.containsKey(s)) {
-            stateBasedMap.put(s, stateBasedMap.get(s) - 1);
-            if (stateBasedMap.get(s) == 0) {
-                stateBasedMap.remove(s);
+        if (this.stateBasedMap.containsKey(s)) {
+            this.stateBasedMap.put(s, this.stateBasedMap.get(s) - 1);
+            if (this.stateBasedMap.get(s) == 0) {
+                this.stateBasedMap.remove(s);
             }
         }
     }
@@ -282,7 +299,7 @@ public class StaticEffects {
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, Integer> getStateBasedMap() {
-        return stateBasedMap;
+        return this.stateBasedMap;
     }
 
     /**
@@ -291,7 +308,7 @@ public class StaticEffects {
      * </p>
      */
     public final void reset() {
-        stateBasedMap.clear();
+        this.stateBasedMap.clear();
     }
 
     /**
@@ -300,23 +317,23 @@ public class StaticEffects {
      * </p>
      */
     public final void rePopulateStateBasedList() {
-        reset();
+        this.reset();
 
-        CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        final CardList cards = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
         Log.debug("== Start add state effects ==");
         for (int i = 0; i < cards.size(); i++) {
-            Card c = cards.get(i);
-            if (cardToEffectsList.containsKey(c.getName())) {
-                String[] effects = getCardToEffectsList().get(c.getName());
-                for (String effect : effects) {
-                    addStateBasedEffect(effect);
+            final Card c = cards.get(i);
+            if (StaticEffects.cardToEffectsList.containsKey(c.getName())) {
+                final String[] effects = this.getCardToEffectsList().get(c.getName());
+                for (final String effect : effects) {
+                    this.addStateBasedEffect(effect);
                     Log.debug("Added " + effect);
                 }
             }
             if (c.isEmblem() && !CardFactoryUtil.checkEmblemKeyword(c).equals("")) {
-                String s = CardFactoryUtil.checkEmblemKeyword(c);
-                addStateBasedEffect(s);
+                final String s = CardFactoryUtil.checkEmblemKeyword(c);
+                this.addStateBasedEffect(s);
                 Log.debug("Added " + s);
             }
         }

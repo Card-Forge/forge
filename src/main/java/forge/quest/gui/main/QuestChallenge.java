@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.gui.main;
 
 import java.util.ArrayList;
@@ -155,86 +172,121 @@ public class QuestChallenge extends QuestEvent {
     }
 
     /**
+     * Gets the ai extra cards.
+     * 
      * @return the aiExtraCards
      */
     public List<String> getAiExtraCards() {
-        return aiExtraCards;
+        return this.aiExtraCards;
     }
 
     /**
-     * @param aiExtraCards the aiExtraCards to set
+     * Sets the ai extra cards.
+     * 
+     * @param aiExtraCards
+     *            the aiExtraCards to set
      */
-    public void setAiExtraCards(List<String> aiExtraCards) {
+    public void setAiExtraCards(final List<String> aiExtraCards) {
         this.aiExtraCards = aiExtraCards; // TODO: Add 0 to parameter's name.
     }
 
     /**
-     * @param id the id to set
+     * Sets the id.
+     * 
+     * @param id
+     *            the id to set
      */
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Checks if is repeatable.
+     * 
      * @return the repeatable
      */
     public boolean isRepeatable() {
-        return repeatable;
+        return this.repeatable;
     }
 
     /**
-     * @param repeatable the repeatable to set
+     * Sets the repeatable.
+     * 
+     * @param repeatable
+     *            the repeatable to set
      */
-    public void setRepeatable(boolean repeatable) {
+    public void setRepeatable(final boolean repeatable) {
         this.repeatable = repeatable; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the ai life.
+     * 
      * @return the aiLife
      */
     public int getAiLife() {
-        return aiLife;
+        return this.aiLife;
     }
 
     /**
-     * @param aiLife the aiLife to set
+     * Sets the ai life.
+     * 
+     * @param aiLife
+     *            the aiLife to set
      */
-    public void setAiLife(int aiLife) {
+    public void setAiLife(final int aiLife) {
         this.aiLife = aiLife; // TODO: Add 0 to parameter's name.
     }
 
     /**
-     * @param winsReqd the winsReqd to set
+     * Sets the wins reqd.
+     * 
+     * @param winsReqd
+     *            the winsReqd to set
      */
-    public void setWinsReqd(int winsReqd) {
+    public void setWinsReqd(final int winsReqd) {
         this.winsReqd = winsReqd; // TODO: Add 0 to parameter's name.
     }
 
     /**
-     * @param creditsReward the creditsReward to set
+     * Sets the credits reward.
+     * 
+     * @param creditsReward
+     *            the creditsReward to set
      */
-    public void setCreditsReward(int creditsReward) {
+    public void setCreditsReward(final int creditsReward) {
         this.creditsReward = creditsReward; // TODO: Add 0 to parameter's name.
     }
 
     /**
-     * @param cardReward the cardReward to set
+     * Sets the card reward.
+     * 
+     * @param cardReward
+     *            the cardReward to set
      */
-    public void setCardReward(String cardReward) {
+    public void setCardReward(final String cardReward) {
         this.cardReward = cardReward; // TODO: Add 0 to parameter's name.
     }
 
     /**
-     * @param cardRewardList the cardRewardList to set
+     * Sets the card reward list.
+     * 
+     * @param cardRewardList
+     *            the cardRewardList to set
      */
-    public void setCardRewardList(List<CardPrinted> cardRewardList) {
-        this.cardRewardList = cardRewardList; // TODO: Add 0 to parameter's name.
+    public void setCardRewardList(final List<CardPrinted> cardRewardList) {
+        this.cardRewardList = cardRewardList; // TODO: Add 0 to parameter's
+                                              // name.
     }
 
     /**
-     * @param humanExtraCards the humanExtraCards to set
+     * Sets the human extra cards.
+     * 
+     * @param humanExtraCards
+     *            the humanExtraCards to set
      */
-    public void setHumanExtraCards(List<String> humanExtraCards) {
-        this.humanExtraCards = humanExtraCards; // TODO: Add 0 to parameter's name.
+    public void setHumanExtraCards(final List<String> humanExtraCards) {
+        this.humanExtraCards = humanExtraCards; // TODO: Add 0 to parameter's
+                                                // name.
     }
 }

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.match;
 
 import javax.swing.JPanel;
@@ -5,59 +22,75 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import forge.view.toolbox.FPanel;
 
-/** 
- * Parent panel for display of input, hand, and dock.
- * SHOULD PROBABLY COLLAPSE INTO TOP LEVEL.
- *
+/**
+ * Parent panel for display of input, hand, and dock. SHOULD PROBABLY COLLAPSE
+ * INTO TOP LEVEL.
+ * 
  */
 @SuppressWarnings("serial")
 public class ViewAreaUser extends FPanel {
-    private ViewDock pnlDock;
-    private ViewHand pnlHand;
+    private final ViewDock pnlDock;
+    private final ViewHand pnlHand;
 
     private JPanel pnlMessage;
-    private ViewInput pnlInput;
+    private final ViewInput pnlInput;
 
     /**
      * Assembles user area of match UI.
      */
     public ViewAreaUser() {
         super();
-        setOpaque(false);
-        setLayout(new MigLayout("fill, insets 0, gap 0"));
+        this.setOpaque(false);
+        this.setLayout(new MigLayout("fill, insets 0, gap 0"));
 
         // Input panel
-        pnlInput = new ViewInput();
+        this.pnlInput = new ViewInput();
 
         // Hand panel
-        pnlHand = new ViewHand();
+        this.pnlHand = new ViewHand();
 
         // Dock panel
-        pnlDock = new ViewDock();
+        this.pnlDock = new ViewDock();
 
         // A.D.D.
-        add(pnlInput, "h 100%!, west, w 200px!");
-        add(pnlHand, "grow, gapleft 5");
-        add(pnlDock, "growx, h 50px!, south, gaptop 5, gapleft 5");
+        this.add(this.pnlInput, "h 100%!, west, w 200px!");
+        this.add(this.pnlHand, "grow, gapleft 5");
+        this.add(this.pnlDock, "growx, h 50px!, south, gaptop 5, gapleft 5");
     }
 
-    /** @return ViewDock */
+    /**
+     * Gets the pnl dock.
+     * 
+     * @return ViewDock
+     */
     public ViewDock getPnlDock() {
-        return pnlDock;
+        return this.pnlDock;
     }
 
-    /** @return ViewHand */
+    /**
+     * Gets the pnl hand.
+     * 
+     * @return ViewHand
+     */
     public ViewHand getPnlHand() {
-        return pnlHand;
+        return this.pnlHand;
     }
 
-    /** @return JPanel */
+    /**
+     * Gets the pnl message.
+     * 
+     * @return JPanel
+     */
     public JPanel getPnlMessage() {
-        return pnlMessage;
+        return this.pnlMessage;
     }
 
-    /** @return ViewInput */
+    /**
+     * Gets the pnl input.
+     * 
+     * @return ViewInput
+     */
     public ViewInput getPnlInput() {
-        return pnlInput;
+        return this.pnlInput;
     }
 }

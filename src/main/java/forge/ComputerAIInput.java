@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import com.esotericsoftware.minlog.Log;
@@ -27,7 +44,7 @@ public class ComputerAIInput extends Input {
      *            a {@link forge.Computer} object.
      */
     public ComputerAIInput(final Computer iComputer) {
-        computer = iComputer;
+        this.computer = iComputer;
     }
 
     // wrapper method that ComputerAI_StackNotEmpty class calls
@@ -38,7 +55,7 @@ public class ComputerAIInput extends Input {
      * </p>
      */
     public final void stackNotEmpty() {
-        computer.stackNotEmpty();
+        this.computer.stackNotEmpty();
     }
 
     /** {@inheritDoc} */
@@ -51,7 +68,7 @@ public class ComputerAIInput extends Input {
          * send the \"Stack Report\" and the
          * \"Detailed Error Trace\" to the Forge forum.");
          */
-        think();
+        this.think();
     } // getMessage();
 
     /**
@@ -62,7 +79,7 @@ public class ComputerAIInput extends Input {
      * @return a {@link forge.Computer} object.
      */
     public final Computer getComputer() {
-        return computer;
+        return this.computer;
     }
 
     /**
@@ -75,25 +92,25 @@ public class ComputerAIInput extends Input {
         final String phase = AllZone.getPhase().getPhase();
 
         if (AllZone.getStack().size() > 0) {
-            computer.stackNotEmpty();
+            this.computer.stackNotEmpty();
         } else if (phase.equals(Constant.Phase.MAIN1)) {
             Log.debug("Computer main1");
-            computer.main1();
+            this.computer.main1();
         } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
-            computer.beginCombat();
+            this.computer.beginCombat();
         } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
-            computer.declareAttackers();
+            this.computer.declareAttackers();
         } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
-            computer.declareAttackersAfter();
+            this.computer.declareAttackersAfter();
         } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            computer.declareBlockersAfter();
+            this.computer.declareBlockersAfter();
         } else if (phase.equals(Constant.Phase.COMBAT_END)) {
-            computer.endOfCombat();
+            this.computer.endOfCombat();
         } else if (phase.equals(Constant.Phase.MAIN2)) {
             Log.debug("Computer main2");
-            computer.main2();
+            this.computer.main2();
         } else {
-            computer.stackNotEmpty();
+            this.computer.stackNotEmpty();
         }
 
     } // think

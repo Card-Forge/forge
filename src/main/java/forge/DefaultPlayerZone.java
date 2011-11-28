@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -59,7 +76,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            PlayerZone zone = AllZone.getZoneOf(c);
+            final PlayerZone zone = AllZone.getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -69,7 +86,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
         if (this.is(Zone.Graveyard)
                 && c.hasKeyword("If CARDNAME would be put into a graveyard "
-        + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
+                        + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
             final PlayerZone lib = c.getOwner().getZone(Constant.Zone.Library);
             lib.add(c);
             c.getOwner().shuffle();
@@ -118,7 +135,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            PlayerZone zone = AllZone.getZoneOf(c);
+            final PlayerZone zone = AllZone.getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -137,9 +154,11 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @see forge.IPlayerZone#contains(forge.Card)
      */
     /**
-     * @return boolean
+     * Contains.
+     * 
      * @param c
      *            Card
+     * @return boolean
      */
     @Override
     public final boolean contains(final Card c) {
@@ -406,16 +425,21 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     }
 
     /**
+     * Gets the card list.
+     * 
      * @return the cardList
      */
     public List<Card> getCardList() {
-        return cardList;
+        return this.cardList;
     }
 
     /**
-     * @param cardList the cardList to set
+     * Sets the card list.
+     * 
+     * @param cardList
+     *            the cardList to set
      */
-    public void setCardList(List<Card> cardList) {
+    public void setCardList(final List<Card> cardList) {
         this.cardList = cardList; // TODO: Add 0 to parameter's name.
     }
 

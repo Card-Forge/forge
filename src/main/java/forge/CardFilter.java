@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.List;
@@ -33,8 +50,8 @@ public class CardFilter {
     public final CardList cardListNameFilter(final Iterable<Card> toBeFiltered, final String substring) {
         String s;
 
-        CardList listFilter = new CardList();
-        for (Card card : toBeFiltered) {
+        final CardList listFilter = new CardList();
+        for (final Card card : toBeFiltered) {
             s = card.getName().toLowerCase();
 
             if (s.indexOf(substring.toLowerCase()) >= 0) {
@@ -64,7 +81,7 @@ public class CardFilter {
         Card cardName;
         String s;
         s = "";
-        CardList listFilter = new CardList();
+        final CardList listFilter = new CardList();
         for (int i = 0; i < all.size(); i++) {
             cardName = all.getCard(i);
             s = cardName.getText().toLowerCase();
@@ -94,7 +111,7 @@ public class CardFilter {
      */
     public final CardList cardListColorFilter(final CardList all, final String name) {
         Card cardName = new Card();
-        CardList listFilter = new CardList();
+        final CardList listFilter = new CardList();
 
         if (name == "black") {
             for (int i = 0; i < all.size(); i++) {
@@ -174,7 +191,7 @@ public class CardFilter {
      */
     public final CardList cardListTypeFilter(final CardList all, final String name) {
         Card cardName = new Card();
-        CardList listFilter = new CardList();
+        final CardList listFilter = new CardList();
 
         if (name == "artifact") {
             for (int i = 0; i < all.size(); i++) {
@@ -263,8 +280,8 @@ public class CardFilter {
      *         but never null
      */
     public static CardList filter(final Iterable<Card> iterable, final CardListFilter filt) {
-        CardList result = new CardList();
-        for (Card card : iterable) {
+        final CardList result = new CardList();
+        for (final Card card : iterable) {
             if (filt.addCard(card)) {
                 result.add(card);
             }
@@ -294,15 +311,16 @@ public class CardFilter {
 
         final boolean weWantMulticolor = cardColor.equals("Multicolor");
 
-        Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
+        final Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
+            @Override
             public Boolean apply(final Card c) {
                 if (c == null) {
                     return false;
                 }
 
-                if (weWantMulticolor && c.getColor() != null && c.getColor().size() > 1) {
+                if (weWantMulticolor && (c.getColor() != null) && (c.getColor().size() > 1)) {
                     return true;
-                } else if (c.isColor(cardColor) && c.getColor() != null && c.getColor().size() == 1) {
+                } else if (c.isColor(cardColor) && (c.getColor() != null) && (c.getColor().size() == 1)) {
                     return true;
                 }
 
@@ -330,14 +348,15 @@ public class CardFilter {
         UtilFunctions.checkNotNull("inputGenerator", inputGenerator);
         UtilFunctions.checkNotNull("sets", sets);
 
-        Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
+        final Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
+            @Override
             public Boolean apply(final Card c) {
                 if (c == null) {
                     return false;
                 }
 
-                for (SetInfo set : c.getSets()) {
-                    if (set != null && sets.contains(set.toString())) {
+                for (final SetInfo set : c.getSets()) {
+                    if ((set != null) && sets.contains(set.toString())) {
                         return true;
                     }
                 }

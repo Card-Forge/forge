@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.Arrays;
@@ -134,8 +151,8 @@ public class AbilityFactoryToken extends AbilityFactory {
      */
     public final SpellAbility getAbility() {
 
-        final SpellAbility abToken = new AbilityActivated(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
-                this.abilityFactory.getAbTgt()) {
+        final SpellAbility abToken = new AbilityActivated(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 8460074843405764620L;
 
             @Override
@@ -170,7 +187,8 @@ public class AbilityFactoryToken extends AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getSpell() {
-        final SpellAbility spToken = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility spToken = new Spell(this.abilityFactory.getHostCard(), this.abilityFactory.getAbCost(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -8041427947613029670L;
 
             @Override
@@ -200,7 +218,8 @@ public class AbilityFactoryToken extends AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public final SpellAbility getDrawback() {
-        final SpellAbility dbDealDamage = new AbilitySub(this.abilityFactory.getHostCard(), this.abilityFactory.getAbTgt()) {
+        final SpellAbility dbDealDamage = new AbilitySub(this.abilityFactory.getHostCard(),
+                this.abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -269,10 +288,9 @@ public class AbilityFactoryToken extends AbilityFactory {
                 && !mapParams.containsKey("ActivationPhases")) {
             return false;
         }
-        if ((AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
-                || AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
-                && !mapParams.containsKey("ActivationPhases")
-                && !AbilityFactory.isSorcerySpeed(sa)) {
+        if ((AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase().isBefore(
+                Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
+                && !mapParams.containsKey("ActivationPhases") && !AbilityFactory.isSorcerySpeed(sa)) {
             return false;
         }
         if ((AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN) || AllZone.getPhase().isPlayerTurn(
@@ -372,7 +390,8 @@ public class AbilityFactoryToken extends AbilityFactory {
         final Card host = this.abilityFactory.getHostCard();
 
         final int finalPower = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenPower, sa);
-        final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenToughness, sa);
+        final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(),
+                this.tokenToughness, sa);
         final int finalAmount = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
 
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
@@ -459,7 +478,8 @@ public class AbilityFactoryToken extends AbilityFactory {
         controller = AbilityFactory.getDefinedPlayers(this.abilityFactory.getHostCard(), this.tokenOwner, sa).get(0);
 
         final int finalPower = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenPower, sa);
-        final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenToughness, sa);
+        final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(),
+                this.tokenToughness, sa);
         final int finalAmount = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
 
         final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 /**
@@ -32,9 +49,9 @@ public class HandSizeOp {
      *            a int.
      */
     public HandSizeOp(final String m, final int a, final int ts) {
-        setMode(m);
-        setAmount(a);
-        setHsTimeStamp(ts);
+        this.setMode(m);
+        this.setAmount(a);
+        this.setHsTimeStamp(ts);
     }
 
     /**
@@ -44,49 +61,65 @@ public class HandSizeOp {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public final String toString() {
-        return "Mode(" + getMode() + ") Amount(" + getAmount() + ") Timestamp(" + getHsTimeStamp() + ")";
+        return "Mode(" + this.getMode() + ") Amount(" + this.getAmount() + ") Timestamp(" + this.getHsTimeStamp() + ")";
     }
 
     /**
+     * Gets the amount.
+     * 
      * @return the amount
      */
     public int getAmount() {
-        return amount;
+        return this.amount;
     }
 
     /**
-     * @param amount the amount to set
+     * Sets the amount.
+     * 
+     * @param amount
+     *            the amount to set
      */
-    public void setAmount(int amount) {
+    public void setAmount(final int amount) {
         this.amount = amount; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the mode.
+     * 
      * @return the mode
      */
     public String getMode() {
-        return mode;
+        return this.mode;
     }
 
     /**
-     * @param mode the mode to set
+     * Sets the mode.
+     * 
+     * @param mode
+     *            the mode to set
      */
-    public void setMode(String mode) {
+    public void setMode(final String mode) {
         this.mode = mode; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the hs time stamp.
+     * 
      * @return the hsTimeStamp
      */
     public int getHsTimeStamp() {
-        return hsTimeStamp;
+        return this.hsTimeStamp;
     }
 
     /**
-     * @param hsTimeStamp the hsTimeStamp to set
+     * Sets the hs time stamp.
+     * 
+     * @param hsTimeStamp
+     *            the hsTimeStamp to set
      */
-    public void setHsTimeStamp(int hsTimeStamp) {
+    public void setHsTimeStamp(final int hsTimeStamp) {
         this.hsTimeStamp = hsTimeStamp; // TODO: Add 0 to parameter's name.
     }
 }

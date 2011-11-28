@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.match;
 
 import java.awt.Font;
@@ -12,16 +29,16 @@ import forge.view.toolbox.FButton;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 
-/** 
+/**
  * Assembles Swing components of input area.
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class ViewInput extends FRoundedPanel {
-    private ControlInput control;
-    private JButton btnOK, btnCancel;
-    private JTextArea tarMessage;
-    private FSkin skin;
+    private final ControlInput control;
+    private final JButton btnOK, btnCancel;
+    private final JTextArea tarMessage;
+    private final FSkin skin;
 
     /**
      * Assembles UI for input area (buttons and message panel).
@@ -29,52 +46,68 @@ public class ViewInput extends FRoundedPanel {
      */
     public ViewInput() {
         super();
-        skin = AllZone.getSkin();
-        setToolTipText("Input Area");
-        setBackground(skin.getClrTheme());
-        setForeground(skin.getClrText());
-        setCorners(new boolean[] {false, false, false, true});
-        setBorders(new boolean[] {true, false, false, true});
+        this.skin = AllZone.getSkin();
+        this.setToolTipText("Input Area");
+        this.setBackground(this.skin.getClrTheme());
+        this.setForeground(this.skin.getClrText());
+        this.setCorners(new boolean[] { false, false, false, true });
+        this.setBorders(new boolean[] { true, false, false, true });
 
-        setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
+        this.setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
 
         // Cancel button
-        btnCancel = new FButton("Cancel");
-        btnOK = new FButton("OK");
+        this.btnCancel = new FButton("Cancel");
+        this.btnOK = new FButton("OK");
 
-        tarMessage = new JTextArea();
-        tarMessage.setOpaque(false);
-        tarMessage.setFocusable(false);
-        tarMessage.setEditable(false);
-        tarMessage.setLineWrap(true);
-        tarMessage.setWrapStyleWord(true);
-        tarMessage.setForeground(skin.getClrText());
-        tarMessage.setFont(skin.getFont1().deriveFont(Font.PLAIN, 12));
-        add(tarMessage, "span 2 1, h 80%!, w 96%!, gapleft 2%, gaptop 1%");
-        add(btnOK, "w 47%!, gapright 2%, gapleft 1%");
-        add(btnCancel, "w 47%!, gapright 1%");
+        this.tarMessage = new JTextArea();
+        this.tarMessage.setOpaque(false);
+        this.tarMessage.setFocusable(false);
+        this.tarMessage.setEditable(false);
+        this.tarMessage.setLineWrap(true);
+        this.tarMessage.setWrapStyleWord(true);
+        this.tarMessage.setForeground(this.skin.getClrText());
+        this.tarMessage.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 12));
+        this.add(this.tarMessage, "span 2 1, h 80%!, w 96%!, gapleft 2%, gaptop 1%");
+        this.add(this.btnOK, "w 47%!, gapright 2%, gapleft 1%");
+        this.add(this.btnCancel, "w 47%!, gapright 1%");
 
         // After all components are in place, instantiate controller.
-        control = new ControlInput(this);
+        this.control = new ControlInput(this);
     }
 
-    /** @return ControlInput */
+    /**
+     * Gets the controller.
+     * 
+     * @return ControlInput
+     */
     public ControlInput getController() {
-        return control;
+        return this.control;
     }
 
-    /** @return JButton */
+    /**
+     * Gets the btn ok.
+     * 
+     * @return JButton
+     */
     public JButton getBtnOK() {
-        return btnOK;
+        return this.btnOK;
     }
 
-    /** @return JButton */
+    /**
+     * Gets the btn cancel.
+     * 
+     * @return JButton
+     */
     public JButton getBtnCancel() {
-        return btnCancel;
+        return this.btnCancel;
     }
 
-    /** @return JTextArea */
+    /**
+     * Gets the tar message.
+     * 
+     * @return JTextArea
+     */
     public JTextArea getTarMessage() {
-        return tarMessage;
+        return this.tarMessage;
     }
 }

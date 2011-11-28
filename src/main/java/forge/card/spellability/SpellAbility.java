@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.spellability;
 
 import java.util.ArrayList;
@@ -1683,7 +1700,7 @@ public abstract class SpellAbility {
 
     /**
      * Gets the ability.
-     *
+     * 
      * @return the ability
      */
     public static int getAbility() {
@@ -1692,7 +1709,7 @@ public abstract class SpellAbility {
 
     /**
      * Gets the spell.
-     *
+     * 
      * @return the spell
      */
     public static int getSpell() {
@@ -1701,7 +1718,7 @@ public abstract class SpellAbility {
 
     /**
      * Gets the chosen target.
-     *
+     * 
      * @return the chosenTarget
      */
     public Target getChosenTarget() {
@@ -1710,8 +1727,9 @@ public abstract class SpellAbility {
 
     /**
      * Sets the chosen target.
-     *
-     * @param chosenTarget the chosenTarget to set
+     * 
+     * @param chosenTarget
+     *            the chosenTarget to set
      */
     public void setChosenTarget(final Target chosenTarget) {
         this.chosenTarget = chosenTarget; // TODO: Add 0 to parameter's name.
@@ -1719,8 +1737,9 @@ public abstract class SpellAbility {
 
     /**
      * Adds the tapped for convoke.
-     *
-     * @param c the c
+     * 
+     * @param c
+     *            the c
      */
     public void addTappedForConvoke(final Card c) {
         if (this.tappedForConvoke == null) {
@@ -1732,7 +1751,7 @@ public abstract class SpellAbility {
 
     /**
      * Gets the tapped for convoke.
-     *
+     * 
      * @return the tapped for convoke
      */
     public CardList getTappedForConvoke() {

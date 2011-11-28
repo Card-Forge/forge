@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import java.util.ArrayList;
@@ -27,10 +44,10 @@ public final class CardManaCost implements Comparable<CardManaCost> {
 
     // pass mana cost parser here
     private CardManaCost() {
-        hasNoCost = true;
-        genericCost = 0;
-        stringValue = "";
-        shards = Collections.unmodifiableList(new ArrayList<CardManaCostShard>());
+        this.hasNoCost = true;
+        this.genericCost = 0;
+        this.stringValue = "";
+        this.shards = Collections.unmodifiableList(new ArrayList<CardManaCostShard>());
     }
 
     // public ctor, should give it a mana parser
@@ -44,33 +61,34 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
         }
-        List<CardManaCostShard> shardsTemp = new ArrayList<CardManaCostShard>();
-        hasNoCost = false;
+        final List<CardManaCostShard> shardsTemp = new ArrayList<CardManaCostShard>();
+        this.hasNoCost = false;
         while (parser.hasNext()) {
-            CardManaCostShard shard = parser.next();
+            final CardManaCostShard shard = parser.next();
             if (shard != null) {
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
         }
-        genericCost = parser.getTotalColorlessCost(); // collect generic mana
-                                                      // here
-        shards = Collections.unmodifiableList(shardsTemp);
-        stringValue = getSimpleString();
+        this.genericCost = parser.getTotalColorlessCost(); // collect generic
+                                                           // mana
+        // here
+        this.shards = Collections.unmodifiableList(shardsTemp);
+        this.stringValue = this.getSimpleString();
 
     }
 
     private String getSimpleString() {
-        if (shards.isEmpty()) {
-            return Integer.toString(genericCost);
+        if (this.shards.isEmpty()) {
+            return Integer.toString(this.genericCost);
         }
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         boolean isFirst = true;
-        if (genericCost > 0) {
-            sb.append(genericCost);
+        if (this.genericCost > 0) {
+            sb.append(this.genericCost);
             isFirst = false;
         }
-        for (CardManaCostShard s : shards) {
+        for (final CardManaCostShard s : this.shards) {
             if (!isFirst) {
                 sb.append(' ');
             } else {
@@ -88,10 +106,10 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     public int getCMC() {
         int sum = 0;
-        for (CardManaCostShard s : shards) {
+        for (final CardManaCostShard s : this.shards) {
             sum += s.getCmc();
         }
-        return sum + genericCost;
+        return sum + this.genericCost;
     }
 
     /**
@@ -101,7 +119,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     public byte getColorProfile() {
         byte result = 0;
-        for (CardManaCostShard s : shards) {
+        for (final CardManaCostShard s : this.shards) {
             result |= s.getColorMask();
         }
         return result;
@@ -113,7 +131,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @return the shards
      */
     public List<CardManaCostShard> getShards() {
-        return shards;
+        return this.shards;
     }
 
     /**
@@ -122,7 +140,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @return the generic cost
      */
     public int getGenericCost() {
-        return genericCost;
+        return this.genericCost;
     }
 
     /**
@@ -131,7 +149,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @return true, if is empty
      */
     public boolean isEmpty() {
-        return hasNoCost;
+        return this.hasNoCost;
     }
 
     /**
@@ -140,7 +158,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @return true, if is pure generic
      */
     public boolean isPureGeneric() {
-        return shards.isEmpty() && !isEmpty();
+        return this.shards.isEmpty() && !this.isEmpty();
     }
 
     /*
@@ -150,21 +168,21 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     @Override
     public int compareTo(final CardManaCost o) {
-        return getCompareWeight().compareTo(o.getCompareWeight());
+        return this.getCompareWeight().compareTo(o.getCompareWeight());
     }
 
     private Float getCompareWeight() {
-        if (compareWeight == null) {
-            float weight = genericCost;
-            for (CardManaCostShard s : shards) {
+        if (this.compareWeight == null) {
+            float weight = this.genericCost;
+            for (final CardManaCostShard s : this.shards) {
                 weight += s.getCmpc();
             }
-            if (hasNoCost) {
+            if (this.hasNoCost) {
                 weight = -1; // for those who doesn't even have a 0 sign on card
             }
-            compareWeight = Float.valueOf(weight);
+            this.compareWeight = Float.valueOf(weight);
         }
-        return compareWeight;
+        return this.compareWeight;
     }
 
     /*
@@ -174,7 +192,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      */
     @Override
     public String toString() {
-        return stringValue;
+        return this.stringValue;
     }
 
     /**

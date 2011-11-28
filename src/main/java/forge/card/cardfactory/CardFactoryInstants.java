@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.cardfactory;
 
 import javax.swing.JOptionPane;
@@ -126,8 +143,8 @@ public class CardFactoryInstants {
                             final StringBuilder sbMsgP1 = new StringBuilder();
                             sbMsgP1.append("Computer adds the first pile to its hand ");
                             sbMsgP1.append("and puts the second pile into the graveyard");
-                            JOptionPane.showMessageDialog(null, sbMsgP1.toString(), "",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane
+                                    .showMessageDialog(null, sbMsgP1.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                             for (int i = 0; i < pile1.size(); i++) {
                                 AllZone.getGameAction().moveTo(hand, pile1.get(i));
                             }
@@ -138,8 +155,8 @@ public class CardFactoryInstants {
                             final StringBuilder sbMsgP2 = new StringBuilder();
                             sbMsgP2.append("Computer adds the second pile to its hand and ");
                             sbMsgP2.append("puts the first pile into the graveyard");
-                            JOptionPane.showMessageDialog(null, sbMsgP2.toString(), "",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane
+                                    .showMessageDialog(null, sbMsgP2.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                             for (int i = 0; i < pile2.size(); i++) {
                                 AllZone.getGameAction().moveTo(hand, pile2.get(i));
                             }
@@ -257,8 +274,7 @@ public class CardFactoryInstants {
 
                 @Override
                 public void resolve() {
-                    if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canBeTargetedBy(this)) {
+                    if (AllZoneUtil.isCardInPlay(this.getTargetCard()) && this.getTargetCard().canBeTargetedBy(this)) {
                         final Card c = this.getTargetCard();
 
                         c.addTempAttackBoost(-2);
@@ -357,8 +373,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     // if target card is not in play, just quit
-                    if (!AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            || !this.getTargetCard().canBeTargetedBy(this)) {
+                    if (!AllZoneUtil.isCardInPlay(this.getTargetCard()) || !this.getTargetCard().canBeTargetedBy(this)) {
                         return;
                     }
 
@@ -540,7 +555,6 @@ public class CardFactoryInstants {
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-
 
         // *************** START *********** START **************************
         else if (cardName.equals("Suffer the Past")) {
@@ -878,8 +892,7 @@ public class CardFactoryInstants {
 
                 @Override
                 public void resolve() {
-                    if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canBeTargetedBy(this)) {
+                    if (AllZoneUtil.isCardInPlay(this.getTargetCard()) && this.getTargetCard().canBeTargetedBy(this)) {
                         final Card c = this.getTargetCard();
                         c.addDamage(this.damage, card);
                         if (c.hasKeyword("Infect")) {

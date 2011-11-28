@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -255,8 +272,7 @@ public class AbilityFactoryCounters {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return c.canBeTargetedBy(sa)
-                        && !c.hasKeyword("CARDNAME can't have counters placed on it.")
+                return c.canBeTargetedBy(sa) && !c.hasKeyword("CARDNAME can't have counters placed on it.")
                         && !(c.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && type.equals("M1M1"));
             }
         });
@@ -2237,7 +2253,8 @@ public class AbilityFactoryCounters {
         final ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
         if (abTgt == null) {
             if ((srcCards.size() > 0)
-                    && cType.equals(Counters.P1P1) // move +1/+1 counters away from
+                    && cType.equals(Counters.P1P1) // move +1/+1 counters away
+                                                   // from
                                                    // permanents that cannot use
                                                    // them
                     && (destCards.size() > 0) && destCards.get(0).getController().isComputer()
@@ -2245,7 +2262,7 @@ public class AbilityFactoryCounters {
 
                 chance = true;
             }
-        } else { //targeted
+        } else { // targeted
             final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
             CardList list = player.getCardsIn(Zone.Battlefield);
             list = list.getTargetableCards(sa);

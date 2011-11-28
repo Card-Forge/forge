@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import java.util.ArrayList;
@@ -17,9 +34,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 
 public final class CardType implements Comparable<CardType> {
-    private List<String> subType = new ArrayList<String>();
-    private EnumSet<CardCoreType> coreType = EnumSet.noneOf(CardCoreType.class);
-    private EnumSet<CardSuperType> superType = EnumSet.noneOf(CardSuperType.class);
+    private final List<String> subType = new ArrayList<String>();
+    private final EnumSet<CardCoreType> coreType = EnumSet.noneOf(CardCoreType.class);
+    private final EnumSet<CardSuperType> superType = EnumSet.noneOf(CardSuperType.class);
     private String calculatedType = null; // since obj is immutable, this is
                                           // calc'd once
 
@@ -27,11 +44,11 @@ public final class CardType implements Comparable<CardType> {
     private static HashMap<String, CardCoreType> stringToCoreType = new HashMap<String, CardCoreType>();
     private static HashMap<String, CardSuperType> stringToSuperType = new HashMap<String, CardSuperType>();
     static {
-        for (CardSuperType st : CardSuperType.values()) {
-            stringToSuperType.put(st.name(), st);
+        for (final CardSuperType st : CardSuperType.values()) {
+            CardType.stringToSuperType.put(st.name(), st);
         }
-        for (CardCoreType ct : CardCoreType.values()) {
-            stringToCoreType.put(ct.name(), ct);
+        for (final CardCoreType ct : CardCoreType.values()) {
+            CardType.stringToCoreType.put(ct.name(), ct);
         }
     }
 
@@ -50,15 +67,15 @@ public final class CardType implements Comparable<CardType> {
         // Most types and subtypes, except "Serra�s Realm" and
         // "Bolas�s Meditation Realm" consist of only one word
         final char space = ' ';
-        CardType result = new CardType();
+        final CardType result = new CardType();
 
         int iTypeStart = 0;
         int iSpace = typeText.indexOf(space);
         boolean hasMoreTypes = typeText.length() > 0;
         while (hasMoreTypes) {
-            String type = typeText.substring(iTypeStart, iSpace == -1 ? typeText.length() : iSpace);
+            final String type = typeText.substring(iTypeStart, iSpace == -1 ? typeText.length() : iSpace);
             hasMoreTypes = iSpace != -1;
-            if (!isMultiwordType(type) || !hasMoreTypes) {
+            if (!CardType.isMultiwordType(type) || !hasMoreTypes) {
                 iTypeStart = iSpace + 1;
                 result.parseAndAdd(type);
             }
@@ -84,20 +101,20 @@ public final class CardType implements Comparable<CardType> {
             return;
         }
 
-        CardCoreType ct = stringToCoreType.get(type);
+        final CardCoreType ct = CardType.stringToCoreType.get(type);
         if (ct != null) {
-            coreType.add(ct);
+            this.coreType.add(ct);
             return;
         }
 
-        CardSuperType st = stringToSuperType.get(type);
+        final CardSuperType st = CardType.stringToSuperType.get(type);
         if (st != null) {
-            superType.add(st);
+            this.superType.add(st);
             return;
         }
 
         // If not recognized by super- and core- this must be subtype
-        subType.add(type);
+        this.subType.add(type);
     }
 
     /**
@@ -108,7 +125,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if successful
      */
     public boolean subTypeContains(final String operand) {
-        return subType.contains(operand);
+        return this.subType.contains(operand);
     }
 
     /**
@@ -119,7 +136,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if successful
      */
     public boolean typeContains(final CardCoreType operand) {
-        return coreType.contains(operand);
+        return this.coreType.contains(operand);
     }
 
     /**
@@ -130,7 +147,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if successful
      */
     public boolean superTypeContains(final CardSuperType operand) {
-        return superType.contains(operand);
+        return this.superType.contains(operand);
     }
 
     /**
@@ -139,7 +156,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is creature
      */
     public boolean isCreature() {
-        return coreType.contains(CardCoreType.Creature);
+        return this.coreType.contains(CardCoreType.Creature);
     }
 
     /**
@@ -148,7 +165,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is planeswalker
      */
     public boolean isPlaneswalker() {
-        return coreType.contains(CardCoreType.Planeswalker);
+        return this.coreType.contains(CardCoreType.Planeswalker);
     }
 
     /**
@@ -157,7 +174,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is land
      */
     public boolean isLand() {
-        return coreType.contains(CardCoreType.Land);
+        return this.coreType.contains(CardCoreType.Land);
     }
 
     /**
@@ -166,7 +183,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is artifact
      */
     public boolean isArtifact() {
-        return coreType.contains(CardCoreType.Artifact);
+        return this.coreType.contains(CardCoreType.Artifact);
     }
 
     /**
@@ -175,7 +192,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is instant
      */
     public boolean isInstant() {
-        return coreType.contains(CardCoreType.Instant);
+        return this.coreType.contains(CardCoreType.Instant);
     }
 
     /**
@@ -184,7 +201,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is sorcery
      */
     public boolean isSorcery() {
-        return coreType.contains(CardCoreType.Sorcery);
+        return this.coreType.contains(CardCoreType.Sorcery);
     }
 
     /**
@@ -193,7 +210,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is enchantment
      */
     public boolean isEnchantment() {
-        return coreType.contains(CardCoreType.Enchantment);
+        return this.coreType.contains(CardCoreType.Enchantment);
     }
 
     /**
@@ -202,7 +219,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is basic
      */
     public boolean isBasic() {
-        return superType.contains(CardSuperType.Basic);
+        return this.superType.contains(CardSuperType.Basic);
     }
 
     /**
@@ -211,7 +228,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is legendary
      */
     public boolean isLegendary() {
-        return superType.contains(CardSuperType.Legendary);
+        return this.superType.contains(CardSuperType.Legendary);
     }
 
     /**
@@ -220,7 +237,7 @@ public final class CardType implements Comparable<CardType> {
      * @return true, if is basic land
      */
     public boolean isBasicLand() {
-        return isBasic() && isLand();
+        return this.isBasic() && this.isLand();
     }
 
     /**
@@ -229,11 +246,11 @@ public final class CardType implements Comparable<CardType> {
      * @return the types before dash
      */
     public String getTypesBeforeDash() {
-        ArrayList<String> types = new ArrayList<String>();
-        for (CardSuperType st : superType) {
+        final ArrayList<String> types = new ArrayList<String>();
+        for (final CardSuperType st : this.superType) {
             types.add(st.name());
         }
-        for (CardCoreType ct : coreType) {
+        for (final CardCoreType ct : this.coreType) {
             types.add(ct.name());
         }
         return StringUtils.join(types, ' ');
@@ -245,7 +262,7 @@ public final class CardType implements Comparable<CardType> {
      * @return the types after dash
      */
     public String getTypesAfterDash() {
-        return StringUtils.join(subType, " ");
+        return StringUtils.join(this.subType, " ");
     }
 
     /*
@@ -255,17 +272,17 @@ public final class CardType implements Comparable<CardType> {
      */
     @Override
     public String toString() {
-        if (null == calculatedType) {
-            calculatedType = toStringImpl();
+        if (null == this.calculatedType) {
+            this.calculatedType = this.toStringImpl();
         }
-        return calculatedType;
+        return this.calculatedType;
     }
 
     private String toStringImpl() {
-        if (subType.isEmpty()) {
-            return getTypesBeforeDash();
+        if (this.subType.isEmpty()) {
+            return this.getTypesBeforeDash();
         } else {
-            return String.format("%s - %s", getTypesBeforeDash(), getTypesAfterDash());
+            return String.format("%s - %s", this.getTypesBeforeDash(), this.getTypesAfterDash());
         }
     }
 
@@ -276,7 +293,7 @@ public final class CardType implements Comparable<CardType> {
      */
     @Override
     public int compareTo(final CardType o) {
-        return toString().compareTo(o.toString());
+        return this.toString().compareTo(o.toString());
     }
 
 }

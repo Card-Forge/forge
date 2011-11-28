@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.HashMap;
@@ -12,8 +29,8 @@ import java.util.Iterator;
  * @version $Id$
  */
 class SimpleCombat {
-    private HashMap<Card, CardList> map = new HashMap<Card, CardList>();
-    private CardList attackers = new CardList();
+    private final HashMap<Card, CardList> map = new HashMap<Card, CardList>();
+    private final CardList attackers = new CardList();
 
     /**
      * <p>
@@ -32,9 +49,9 @@ class SimpleCombat {
      *            a {@link forge.CardList} object.
      */
     public SimpleCombat(final CardList attackingCreatures) {
-        CardList a = attackingCreatures;
+        final CardList a = attackingCreatures;
         for (int i = 0; i < a.size(); i++) {
-            addAttacker(a.get(i));
+            this.addAttacker(a.get(i));
         }
     }
 
@@ -46,7 +63,7 @@ class SimpleCombat {
      * @return a {@link forge.CardList} object.
      */
     public CardList getAttackers() {
-        return attackers;
+        return this.attackers;
     }
 
     /**
@@ -58,8 +75,8 @@ class SimpleCombat {
      *            a {@link forge.Card} object.
      */
     public void addAttacker(final Card c) {
-        attackers.add(c);
-        map.put(c, new CardList());
+        this.attackers.add(c);
+        this.map.put(c, new CardList());
     }
 
     /**
@@ -72,7 +89,7 @@ class SimpleCombat {
      * @return a {@link forge.CardList} object.
      */
     public CardList getBlockers(final Card attacker) {
-        return map.get(attacker);
+        return this.map.get(attacker);
     }
 
     /**
@@ -86,7 +103,7 @@ class SimpleCombat {
      *            a {@link forge.Card} object.
      */
     public void addBlocker(final Card attacker, final Card blocker) {
-        CardList list = map.get(attacker);
+        final CardList list = this.map.get(attacker);
         if (list == null) {
             throw new RuntimeException("SimpleCombat : addBlocker() attacker not found - " + attacker);
         }
@@ -102,11 +119,11 @@ class SimpleCombat {
      * @return a {@link forge.CardList} object.
      */
     public CardList getUnblockedAttackers() {
-        CardList list = new CardList();
-        Iterator<Card> it = map.keySet().iterator();
+        final CardList list = new CardList();
+        final Iterator<Card> it = this.map.keySet().iterator();
         while (it.hasNext()) {
-            Card attack = it.next();
-            CardList block = map.get(attack);
+            final Card attack = it.next();
+            final CardList block = this.map.get(attack);
             if (block.size() == 0) {
                 list.add(attack);
             }
@@ -125,20 +142,20 @@ class SimpleCombat {
      */
     public CardList[] combatDamage() {
         // aDestroy holds the number of creatures of A's that were destroyed
-        CardList aDestroy = new CardList();
-        CardList bDestroy = new CardList();
+        final CardList aDestroy = new CardList();
+        final CardList bDestroy = new CardList();
 
-        CardList allAttackers = this.getAttackers();
+        final CardList allAttackers = this.getAttackers();
         for (int i = 0; i < allAttackers.size(); i++) {
-            Card attack = allAttackers.get(i);
+            final Card attack = allAttackers.get(i);
             // for now, CardList blockers should only hold 1 Card
-            CardList blockers = map.get(attack);
+            final CardList blockers = this.map.get(attack);
             if (blockers.size() == 0) {
             } else {
 
-                Card block = blockers.get(0);
-                int blockerDamage = block.getNetCombatDamage();
-                int attackerDamage = attack.getNetCombatDamage();
+                final Card block = blockers.get(0);
+                final int blockerDamage = block.getNetCombatDamage();
+                final int attackerDamage = attack.getNetCombatDamage();
 
                 if (attack.getNetDefense() <= blockerDamage) {
                     aDestroy.add(attack);
@@ -155,8 +172,8 @@ class SimpleCombat {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        CardList attack = this.getAttackers();
+        final StringBuilder sb = new StringBuilder();
+        final CardList attack = this.getAttackers();
         CardList block;
         for (int i = 0; i < attack.size(); i++) {
             block = this.getBlockers(attack.get(i));

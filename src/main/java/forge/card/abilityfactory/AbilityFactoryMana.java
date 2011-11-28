@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -84,14 +101,15 @@ public class AbilityFactoryMana {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createSpellMana(final AbilityFactory abilityFactory, final String produced) {
-        final SpellAbility spMana = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
+        final SpellAbility spMana = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
             private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain
             // an Ability_Mana
-            private Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
-            private AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
+            private final Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
+            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override
@@ -142,8 +160,8 @@ public class AbilityFactoryMana {
             private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain
             // an Ability_Mana
-            private Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
-            private AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
+            private final Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
+            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override
@@ -398,14 +416,15 @@ public class AbilityFactoryMana {
     public static SpellAbility createSpellManaReflected(final AbilityFactory abilityFactory, final String produced) {
         // No Spell has Reflected Mana, but might as well put it in for the
         // future
-        final SpellAbility spMana = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(), abilityFactory.getAbTgt()) {
+        final SpellAbility spMana = new Spell(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) {
             private static final long serialVersionUID = -5141246507533353605L;
 
             private final AbilityFactory af = abilityFactory;
             // To get the mana to resolve properly, we need the spell to contain
             // an Ability_Mana
-            private Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
-            private AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
+            private final Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
+            private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
 
                 @Override

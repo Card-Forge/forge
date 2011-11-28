@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.io.BufferedInputStream;
@@ -43,7 +60,7 @@ public final class FileUtil {
      * @return a boolean.
      */
     public static boolean doesFileExist(final String filename) {
-        File f = new File(filename);
+        final File f = new File(filename);
         return f.exists();
     }
 
@@ -58,7 +75,7 @@ public final class FileUtil {
      *            a {@link java.util.List} object.
      */
     public static void writeFile(final String filename, final List<String> data) {
-        writeFile(new File(filename), data);
+        FileUtil.writeFile(new File(filename), data);
     }
 
     // writes each element of ArrayList on a separate line
@@ -79,14 +96,14 @@ public final class FileUtil {
         try {
             Collections.sort(data);
 
-            BufferedWriter io = new BufferedWriter(new FileWriter(file));
+            final BufferedWriter io = new BufferedWriter(new FileWriter(file));
             for (int i = 0; i < data.size(); i++) {
                 io.write(data.get(i) + "\r\n");
             }
 
             io.flush();
             io.close();
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
@@ -102,7 +119,7 @@ public final class FileUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> readFile(final String filename) {
-        return readFile(new File(filename));
+        return FileUtil.readFile(new File(filename));
     }
 
     // reads line by line and adds each line to the ArrayList
@@ -118,11 +135,11 @@ public final class FileUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<String> readFile(final File file) {
-        ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<String>();
         BufferedReader in;
 
         try {
-            if (file == null || !file.exists()) {
+            if ((file == null) || !file.exists()) {
                 return list;
             }
 
@@ -132,7 +149,7 @@ public final class FileUtil {
             while ((line = in.readLine()) != null) {
                 list.add(line);
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
@@ -150,12 +167,12 @@ public final class FileUtil {
      */
     public static void downloadUrlIntoFile(final String url, final File target) {
         try {
-            byte[] buf = new byte[1024];
+            final byte[] buf = new byte[1024];
             int len;
 
-            Proxy p = Proxy.NO_PROXY;
-            BufferedInputStream in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
-            BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(target));
+            final Proxy p = Proxy.NO_PROXY;
+            final BufferedInputStream in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
+            final BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(target));
 
             // while - read and write file
             while ((len = in.read(buf)) != -1) {
@@ -165,7 +182,7 @@ public final class FileUtil {
             in.close();
             out.flush();
             out.close();
-        } catch (IOException ioex) {
+        } catch (final IOException ioex) {
             ErrorViewer.showError(ioex, ForgeProps.getLocalized(Errors.OTHER), "deck_temp.html", url);
         }
 

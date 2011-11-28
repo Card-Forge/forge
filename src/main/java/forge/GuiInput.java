@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.Observable;
@@ -30,10 +47,11 @@ public class GuiInput extends MyObservable implements Observer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void update(final Observable observable, final Object obj) {
-        Input tmp = AllZone.getInputControl().updateInput();
+        final Input tmp = AllZone.getInputControl().updateInput();
         if (tmp != null) {
-            setInput(tmp);
+            this.setInput(tmp);
         }
     }
 
@@ -46,8 +64,8 @@ public class GuiInput extends MyObservable implements Observer {
      *            a {@link forge.gui.input.Input} object.
      */
     private void setInput(final Input in) {
-        input = in;
-        input.showMessage();
+        this.input = in;
+        this.input.showMessage();
     }
 
     /**
@@ -56,7 +74,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      */
     public final void showMessage() {
-        getInput().showMessage();
+        this.getInput().showMessage();
     }
 
     /**
@@ -65,7 +83,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      */
     public final void selectButtonOK() {
-        getInput().selectButtonOK();
+        this.getInput().selectButtonOK();
     }
 
     /**
@@ -74,7 +92,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      */
     public final void selectButtonCancel() {
-        getInput().selectButtonCancel();
+        this.getInput().selectButtonCancel();
     }
 
     /**
@@ -86,7 +104,7 @@ public class GuiInput extends MyObservable implements Observer {
      *            a {@link forge.Player} object.
      */
     public final void selectPlayer(final Player player) {
-        getInput().selectPlayer(player);
+        this.getInput().selectPlayer(player);
     }
 
     /**
@@ -100,19 +118,21 @@ public class GuiInput extends MyObservable implements Observer {
      *            a {@link forge.PlayerZone} object.
      */
     public final void selectCard(final Card card, final PlayerZone zone) {
-        getInput().selectCard(card, zone);
+        this.getInput().selectCard(card, zone);
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return getInput().toString();
+        return this.getInput().toString();
     }
 
     /**
+     * Gets the input.
+     * 
      * @return the input
      */
     public Input getInput() {
-        return input;
+        return this.input;
     }
 }

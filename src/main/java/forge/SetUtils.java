@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -43,7 +60,7 @@ public final class SetUtils {
      * @return the standard
      */
     public static GameFormat getStandard() {
-        return fmtStandard;
+        return SetUtils.fmtStandard;
     }
 
     /**
@@ -52,7 +69,7 @@ public final class SetUtils {
      * @return the extended
      */
     public static GameFormat getExtended() {
-        return fmtExtended;
+        return SetUtils.fmtExtended;
     }
 
     /**
@@ -61,7 +78,7 @@ public final class SetUtils {
      * @return the modern
      */
     public static GameFormat getModern() {
-        return fmtModern;
+        return SetUtils.fmtModern;
     }
 
     // list are immutable, no worries
@@ -71,7 +88,7 @@ public final class SetUtils {
      * @return the formats
      */
     public static List<GameFormat> getFormats() {
-        return formats;
+        return SetUtils.formats;
     }
 
     /**
@@ -80,7 +97,7 @@ public final class SetUtils {
      * @return the blocks
      */
     public static List<CardBlock> getBlocks() {
-        return allBlocks;
+        return SetUtils.allBlocks;
     }
 
     /**
@@ -89,14 +106,14 @@ public final class SetUtils {
      * @return the all sets
      */
     public static List<CardSet> getAllSets() {
-        return allSets;
+        return SetUtils.allSets;
     }
 
     // Perform that first of all
     static {
-        loadSetData(loadBoosterData());
-        loadBlockData();
-        loadFormatData();
+        SetUtils.loadSetData(SetUtils.loadBoosterData());
+        SetUtils.loadBlockData();
+        SetUtils.loadFormatData();
     }
 
     /**
@@ -107,7 +124,7 @@ public final class SetUtils {
      * @return the sets the by code
      */
     public static CardSet getSetByCode(final String code) {
-        return setsByCode.get(code);
+        return SetUtils.setsByCode.get(code);
     }
 
     /**
@@ -118,7 +135,7 @@ public final class SetUtils {
      * @return the sets the by code or throw
      */
     public static CardSet getSetByCodeOrThrow(final String code) {
-        CardSet set = setsByCode.get(code);
+        final CardSet set = SetUtils.setsByCode.get(code);
         if (null == set) {
             throw new RuntimeException(String.format("Set with code '%s' not found", code));
         }
@@ -134,25 +151,25 @@ public final class SetUtils {
      * @return the code2 by code
      */
     public static String getCode2ByCode(final String code) {
-        CardSet set = setsByCode.get(code);
+        final CardSet set = SetUtils.setsByCode.get(code);
         return set == null ? "" : set.getCode2();
     }
 
     private static Map<String, CardSet.BoosterData> loadBoosterData() {
-        ArrayList<String> fData = FileUtil.readFile("res/blockdata/boosters.txt");
-        Map<String, CardSet.BoosterData> result = new HashMap<String, CardSet.BoosterData>();
+        final ArrayList<String> fData = FileUtil.readFile("res/blockdata/boosters.txt");
+        final Map<String, CardSet.BoosterData> result = new HashMap<String, CardSet.BoosterData>();
 
-        for (String s : fData) {
+        for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
             }
 
-            String[] sParts = s.trim().split("\\|");
+            final String[] sParts = s.trim().split("\\|");
             String code = null;
             int nC = 0, nU = 0, nR = 0, nS = 0, nDF = 0;
-            for (String sPart : sParts) {
-                String[] kv = sPart.split(":", 2);
-                String key = kv[0].toLowerCase();
+            for (final String sPart : sParts) {
+                final String[] kv = sPart.split(":", 2);
+                final String key = kv[0].toLowerCase();
 
                 if (key.equalsIgnoreCase("Set")) {
                     code = kv[1];
@@ -180,21 +197,21 @@ public final class SetUtils {
 
     // parser code - quite boring.
     private static void loadSetData(final Map<String, CardSet.BoosterData> boosters) {
-        ArrayList<String> fData = FileUtil.readFile("res/blockdata/setdata.txt");
+        final ArrayList<String> fData = FileUtil.readFile("res/blockdata/setdata.txt");
 
-        for (String s : fData) {
+        for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
             }
 
-            String[] sParts = s.trim().split("\\|");
+            final String[] sParts = s.trim().split("\\|");
             String code = null, code2 = null, name = null;
 
             int index = -1;
             String alias = null;
-            for (String sPart : sParts) {
-                String[] kv = sPart.split(":", 2);
-                String key = kv[0].toLowerCase();
+            for (final String sPart : sParts) {
+                final String[] kv = sPart.split(":", 2);
+                final String key = kv[0].toLowerCase();
                 if ("code3".equals(key)) {
                     code = kv[1];
                 } else if ("code2".equals(key)) {
@@ -207,47 +224,47 @@ public final class SetUtils {
                     alias = kv[1];
                 }
             }
-            CardSet set = new CardSet(index, name, code, code2, boosters.get(code));
+            final CardSet set = new CardSet(index, name, code, code2, boosters.get(code));
             boosters.remove(code);
-            setsByCode.put(code, set);
+            SetUtils.setsByCode.put(code, set);
             if (alias != null) {
-                setsByCode.put(alias, set);
+                SetUtils.setsByCode.put(alias, set);
             }
-            allSets.add(set);
+            SetUtils.allSets.add(set);
         }
         assert boosters.isEmpty();
-        Collections.sort(allSets);
-        allSets = Collections.unmodifiableList(allSets);
+        Collections.sort(SetUtils.allSets);
+        SetUtils.allSets = Collections.unmodifiableList(SetUtils.allSets);
     }
 
     private static void loadBlockData() {
-        ArrayList<String> fData = FileUtil.readFile("res/blockdata/blocks.txt");
+        final ArrayList<String> fData = FileUtil.readFile("res/blockdata/blocks.txt");
 
-        for (String s : fData) {
+        for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
             }
 
-            String[] sParts = s.trim().split("\\|");
+            final String[] sParts = s.trim().split("\\|");
 
             String name = null;
             int index = -1;
-            List<CardSet> sets = new ArrayList<CardSet>(4);
+            final List<CardSet> sets = new ArrayList<CardSet>(4);
             CardSet landSet = null;
             int draftBoosters = 3;
             int sealedBoosters = 6;
 
-            for (String sPart : sParts) {
-                String[] kv = sPart.split(":", 2);
-                String key = kv[0].toLowerCase();
+            for (final String sPart : sParts) {
+                final String[] kv = sPart.split(":", 2);
+                final String key = kv[0].toLowerCase();
                 if ("name".equals(key)) {
                     name = kv[1];
                 } else if ("index".equals(key)) {
                     index = Integer.parseInt(kv[1]);
                 } else if ("set0".equals(key) || "set1".equals(key) || "set2".equals(key)) {
-                    sets.add(getSetByCodeOrThrow(kv[1]));
+                    sets.add(SetUtils.getSetByCodeOrThrow(kv[1]));
                 } else if ("landsetcode".equals(key)) {
-                    landSet = getSetByCodeOrThrow(kv[1]);
+                    landSet = SetUtils.getSetByCodeOrThrow(kv[1]);
                 } else if ("draftpacks".equals(key)) {
                     draftBoosters = Integer.parseInt(kv[1]);
                 } else if ("sealedpacks".equals(key)) {
@@ -255,31 +272,32 @@ public final class SetUtils {
                 }
 
             }
-            allBlocks.add(new CardBlock(index, name, sets, landSet, draftBoosters, sealedBoosters));
+            SetUtils.allBlocks.add(new CardBlock(index, name, sets, landSet, draftBoosters, sealedBoosters));
         }
-        Collections.reverse(allBlocks);
-        allBlocks = Collections.unmodifiableList(allBlocks);
+        Collections.reverse(SetUtils.allBlocks);
+        SetUtils.allBlocks = Collections.unmodifiableList(SetUtils.allBlocks);
     }
 
     private static void loadFormatData() {
-        ArrayList<String> fData = FileUtil.readFile("res/blockdata/formats.txt");
+        final ArrayList<String> fData = FileUtil.readFile("res/blockdata/formats.txt");
 
-        for (String s : fData) {
+        for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
             }
 
             String name = null;
-            List<String> sets = new ArrayList<String>(); // default: all sets
-                                                         // allowed
-            List<String> bannedCards = new ArrayList<String>(); // default:
-                                                                // nothing
-                                                                // banned
+            final List<String> sets = new ArrayList<String>(); // default: all
+                                                               // sets
+            // allowed
+            final List<String> bannedCards = new ArrayList<String>(); // default:
+            // nothing
+            // banned
 
-            String[] sParts = s.trim().split("\\|");
-            for (String sPart : sParts) {
-                String[] kv = sPart.split(":", 2);
-                String key = kv[0].toLowerCase();
+            final String[] sParts = s.trim().split("\\|");
+            for (final String sPart : sParts) {
+                final String[] kv = sPart.split(":", 2);
+                final String key = kv[0].toLowerCase();
                 if ("name".equals(key)) {
                     name = kv[1];
                 } else if ("sets".equals(key)) {
@@ -291,19 +309,19 @@ public final class SetUtils {
             if (name == null) {
                 throw new RuntimeException("Format must have a name! Check formats.txt file");
             }
-            GameFormat thisFormat = new GameFormat(name, sets, bannedCards);
+            final GameFormat thisFormat = new GameFormat(name, sets, bannedCards);
             if (name.equalsIgnoreCase("Standard")) {
-                fmtStandard = thisFormat;
+                SetUtils.fmtStandard = thisFormat;
             }
             if (name.equalsIgnoreCase("Modern")) {
-                fmtModern = thisFormat;
+                SetUtils.fmtModern = thisFormat;
             }
             if (name.equalsIgnoreCase("Extended")) {
-                fmtExtended = thisFormat;
+                SetUtils.fmtExtended = thisFormat;
             }
-            formats.add(thisFormat);
+            SetUtils.formats.add(thisFormat);
         }
-        formats = Collections.unmodifiableList(formats);
+        SetUtils.formats = Collections.unmodifiableList(SetUtils.formats);
     }
 
 }

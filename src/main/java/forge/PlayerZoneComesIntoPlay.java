@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -49,9 +66,10 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         final Card c = (Card) o;
         final Player player = c.getController();
 
-        if (trigger) {
+        if (this.trigger) {
             if (c.hasKeyword("CARDNAME enters the battlefield tapped.")) {
-             // it enters the battlefield this way, and should not fire triggers
+                // it enters the battlefield this way, and should not fire
+                // triggers
                 c.setTapped(true);
             } else {
                 // ETBTapped static abilities
@@ -60,7 +78,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
                     for (final StaticAbility stAb : staticAbilities) {
                         if (stAb.applyAbility("ETBTapped", c)) {
-                            // it enters the battlefield this way, and should not fire triggers
+                            // it enters the battlefield this way, and should
+                            // not fire triggers
                             c.setTapped(true);
                         }
                     }
@@ -100,7 +119,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             }
         }
 
-        if (trigger) {
+        if (this.trigger) {
             c.setSickness(true); // summoning sickness
             c.comesIntoPlay();
 
@@ -114,6 +133,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                  */
 
                 list = list.filter(new CardListFilter() {
+                    @Override
                     public boolean addCard(final Card c) {
                         return c.hasKeyword("Landfall")
                                 || c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, "
@@ -134,21 +154,21 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                  */
 
                 // Tectonic Instability
-                CardList tis = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tectonic Instability");
+                final CardList tis = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tectonic Instability");
                 final Card tisLand = c;
-                for (Card ti : tis) {
+                for (final Card ti : tis) {
                     final Card source = ti;
-                    SpellAbility ability = new Ability(source, "") {
+                    final SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
                             CardList lands = tisLand.getController().getCardsIn(Zone.Battlefield);
                             lands = lands.filter(CardListFilter.LANDS);
-                            for (Card land : lands) {
+                            for (final Card land : lands) {
                                 land.tap();
                             }
                         }
                     };
-                    StringBuilder sb = new StringBuilder();
+                    final StringBuilder sb = new StringBuilder();
                     sb.append(source).append(" - tap all lands ");
                     sb.append(tisLand.getController()).append(" controls.");
                     ability.setStackDescription(sb.toString());
@@ -157,24 +177,24 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
 
                 }
 
-                CardList les = c.getOwner().getOpponent().getCardsIn(Zone.Battlefield, "Land Equilibrium");
+                final CardList les = c.getOwner().getOpponent().getCardsIn(Zone.Battlefield, "Land Equilibrium");
                 final Card lesLand = c;
                 if (les.size() > 0) {
                     final Card source = les.get(0);
-                    SpellAbility ability = new Ability(source, "") {
+                    final SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
-                            CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                            final CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
                             lesLand.getOwner().sacrificePermanent(source.getName() + " - Select a land to sacrifice",
                                     lands);
                         }
                     };
-                    StringBuilder sb = new StringBuilder();
+                    final StringBuilder sb = new StringBuilder();
                     sb.append(source).append(" - ");
                     sb.append(tisLand.getController()).append(" sacrifices a land.");
                     ability.setStackDescription(sb.toString());
-                    CardList pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
-                    CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
+                    final CardList pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                    final CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
                     // (pLands - 1) because this land is in play, and the
                     // ability is before it is in play
                     if (oLands.size() <= (pLands.size() - 1)) {
@@ -187,25 +207,25 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         }
 
         if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
-            String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
-            for (String effect : effects) {
+            final String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
+            for (final String effect : effects) {
                 AllZone.getStaticEffects().addStateBasedEffect(effect);
             }
         }
 
-        CardList meek = player.getCardsIn(Zone.Graveyard, "Sword of the Meek");
+        final CardList meek = player.getCardsIn(Zone.Graveyard, "Sword of the Meek");
 
-        if (meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
+        if ((meek.size() > 0) && c.isCreature() && (c.getNetAttack() == 1) && (c.getNetDefense() == 1)) {
             for (int i = 0; i < meek.size(); i++) {
                 final Card crd = meek.get(i);
 
-                Ability ability = new Ability(meek.get(i), "0") {
+                final Ability ability = new Ability(meek.get(i), "0") {
                     @Override
                     public void resolve() {
                         if (crd.getController().isHuman()) {
                             if (GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
                                 if (player.getZone(Zone.Graveyard).contains(crd) && AllZoneUtil.isCardInPlay(c)
-                                        && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
+                                        && c.isCreature() && (c.getNetAttack() == 1) && (c.getNetDefense() == 1)) {
                                     AllZone.getGameAction().moveToPlay(crd);
 
                                     crd.equipCard(c);
@@ -214,7 +234,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
 
                         } else {
                             if (player.getZone(Zone.Graveyard).contains(crd) && AllZoneUtil.isCardInPlay(c)
-                                    && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
+                                    && c.isCreature() && (c.getNetAttack() == 1) && (c.getNetDefense() == 1)) {
                                 AllZone.getGameAction().moveToPlay(crd);
 
                                 crd.equipCard(c);
@@ -223,7 +243,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                     }
                 };
 
-                StringBuilder sb = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
                 sb.append(crd);
                 sb.append(" - Whenever a 1/1 creature enters the battlefield under your control, you may ");
                 sb.append("return Sword of the Meek from your graveyard to the battlefield, ");
@@ -243,7 +263,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
 
         super.remove(o);
 
-        Card c = (Card) o;
+        final Card c = (Card) o;
 
         // Keep track of max lands can play per turn
         int addMax = 0;
@@ -276,30 +296,30 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             }
         }
 
-        if (leavesTrigger) {
+        if (this.leavesTrigger) {
             c.leavesPlay();
         }
 
         if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
-            String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
+            final String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
             String tempEffect = "";
-            for (String effect : effects) {
+            for (final String effect : effects) {
                 tempEffect = effect;
                 AllZone.getStaticEffects().removeStateBasedEffect(effect);
-                Command comm = GameActionUtil.getCommands().get(tempEffect); // this
-                                                                        // is to
-                                                                        // make
-                                                                        // sure
-                                                                        // cards
-                                                                        // reset
-                                                                        // correctly
+                final Command comm = GameActionUtil.getCommands().get(tempEffect); // this
+                // is to
+                // make
+                // sure
+                // cards
+                // reset
+                // correctly
                 comm.execute();
             }
 
         }
 
-        for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-            Command com = GameActionUtil.getCommands().get(effect);
+        for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
+            final Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
 
@@ -314,7 +334,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
      *            a boolean.
      */
     public final void setTrigger(final boolean b) {
-        trigger = b;
+        this.trigger = b;
     }
 
     /**
@@ -326,7 +346,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
      *            a boolean.
      */
     public final void setLeavesTrigger(final boolean b) {
-        leavesTrigger = b;
+        this.leavesTrigger = b;
     }
 
     /**
@@ -338,8 +358,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
      *            a boolean.
      */
     public final void setTriggers(final boolean b) {
-        trigger = b;
-        leavesTrigger = b;
+        this.trigger = b;
+        this.leavesTrigger = b;
     }
 
     /*
@@ -353,13 +373,13 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         // getCards(false) to get Phased Out cards
         Card[] c;
         if (!filter) {
-            c = new Card[getCardList().size()];
-            getCardList().toArray(c);
+            c = new Card[this.getCardList().size()];
+            this.getCardList().toArray(c);
         } else {
-            Iterator<Card> itr = getCardList().iterator();
-            ArrayList<Card> list = new ArrayList<Card>();
+            final Iterator<Card> itr = this.getCardList().iterator();
+            final ArrayList<Card> list = new ArrayList<Card>();
             while (itr.hasNext()) {
-                Card crd = itr.next();
+                final Card crd = itr.next();
                 if (!crd.isPhasedOut()) {
                     list.add(crd);
                 }

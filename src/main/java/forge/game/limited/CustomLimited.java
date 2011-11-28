@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.game.limited;
 
 import java.util.List;
@@ -18,7 +35,7 @@ class CustomLimited {
     private String name;
 
     /** The Type. */
-    //private String type;
+    // private String type;
 
     /** The Deck file. */
     private String deckFile;
@@ -54,7 +71,8 @@ class CustomLimited {
     private int numPacks = 3;
 
     /** The Land set code. */
-    private String landSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer()).getMostRecentSet();
+    private String landSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer())
+            .getMostRecentSet();
 
     /*
      * (non-Javadoc)
@@ -85,7 +103,7 @@ class CustomLimited {
                 cd.setName(value);
             }
             if (key.equalsIgnoreCase("Type")) {
-                //cd.type = value;
+                // cd.type = value;
             }
             if (key.equalsIgnoreCase("DeckFile")) {
                 cd.setDeckFile(value);
@@ -129,170 +147,230 @@ class CustomLimited {
     }
 
     /**
+     * Gets the num cards.
+     * 
      * @return the numCards
      */
     public int getNumCards() {
-        return numCards;
+        return this.numCards;
     }
 
     /**
-     * @param numCardsIn the numCards to set
+     * Sets the num cards.
+     * 
+     * @param numCardsIn
+     *            the numCards to set
      */
-    public void setNumCards(int numCardsIn) {
+    public void setNumCards(final int numCardsIn) {
         this.numCards = numCardsIn;
     }
 
     /**
+     * Gets the num packs.
+     * 
      * @return the numPacks
      */
     public int getNumPacks() {
-        return numPacks;
+        return this.numPacks;
     }
 
     /**
-     * @param numPacksIn the numPacks to set
+     * Sets the num packs.
+     * 
+     * @param numPacksIn
+     *            the numPacks to set
      */
-    public void setNumPacks(int numPacksIn) {
+    public void setNumPacks(final int numPacksIn) {
         this.numPacks = numPacksIn;
     }
 
     /**
+     * Gets the num specials.
+     * 
      * @return the numSpecials
      */
     public int getNumSpecials() {
-        return numSpecials;
+        return this.numSpecials;
     }
 
     /**
-     * @param numSpecialsIn the numSpecials to set
+     * Sets the num specials.
+     * 
+     * @param numSpecialsIn
+     *            the numSpecials to set
      */
-    public void setNumSpecials(int numSpecialsIn) {
+    public void setNumSpecials(final int numSpecialsIn) {
         this.numSpecials = numSpecialsIn;
     }
 
     /**
+     * Gets the singleton.
+     * 
      * @return the singleton
      */
     public Boolean getSingleton() {
-        return singleton;
+        return this.singleton;
     }
 
     /**
-     * @param singletonIn the singleton to set
+     * Sets the singleton.
+     * 
+     * @param singletonIn
+     *            the singleton to set
      */
-    public void setSingleton(Boolean singletonIn) {
+    public void setSingleton(final Boolean singletonIn) {
         this.singleton = singletonIn;
     }
 
     /**
+     * Gets the ignore rarity.
+     * 
      * @return the ignoreRarity
      */
     public Boolean getIgnoreRarity() {
-        return ignoreRarity;
+        return this.ignoreRarity;
     }
 
     /**
-     * @param ignoreRarityIn the ignoreRarity to set
+     * Sets the ignore rarity.
+     * 
+     * @param ignoreRarityIn
+     *            the ignoreRarity to set
      */
-    public void setIgnoreRarity(Boolean ignoreRarityIn) {
+    public void setIgnoreRarity(final Boolean ignoreRarityIn) {
         this.ignoreRarity = ignoreRarityIn;
     }
 
     /**
+     * Gets the num uncommons.
+     * 
      * @return the numUncommons
      */
     public int getNumUncommons() {
-        return numUncommons;
+        return this.numUncommons;
     }
 
     /**
-     * @param numUncommonsIn the numUncommons to set
+     * Sets the num uncommons.
+     * 
+     * @param numUncommonsIn
+     *            the numUncommons to set
      */
-    public void setNumUncommons(int numUncommonsIn) {
+    public void setNumUncommons(final int numUncommonsIn) {
         this.numUncommons = numUncommonsIn;
     }
 
     /**
+     * Gets the num commons.
+     * 
      * @return the numCommons
      */
     public int getNumCommons() {
-        return numCommons;
+        return this.numCommons;
     }
 
     /**
-     * @param numCommonsIn the numCommons to set
+     * Sets the num commons.
+     * 
+     * @param numCommonsIn
+     *            the numCommons to set
      */
-    public void setNumCommons(int numCommonsIn) {
+    public void setNumCommons(final int numCommonsIn) {
         this.numCommons = numCommonsIn;
     }
 
     /**
+     * Gets the num rares.
+     * 
      * @return the numRares
      */
     public int getNumRares() {
-        return numRares;
+        return this.numRares;
     }
 
     /**
-     * @param numRaresIn the numRares to set
+     * Sets the num rares.
+     * 
+     * @param numRaresIn
+     *            the numRares to set
      */
-    public void setNumRares(int numRaresIn) {
+    public void setNumRares(final int numRaresIn) {
         this.numRares = numRaresIn;
     }
 
     /**
+     * Gets the num mythics.
+     * 
      * @return the numMythics
      */
     public int getNumMythics() {
-        return numMythics;
+        return this.numMythics;
     }
 
     /**
-     * @param numMythicsIn the numMythics to set
+     * Sets the num mythics.
+     * 
+     * @param numMythicsIn
+     *            the numMythics to set
      */
-    public void setNumMythics(int numMythicsIn) {
+    public void setNumMythics(final int numMythicsIn) {
         this.numMythics = numMythicsIn;
     }
 
     /**
+     * Gets the deck file.
+     * 
      * @return the deckFile
      */
     public String getDeckFile() {
-        return deckFile;
+        return this.deckFile;
     }
 
     /**
-     * @param deckFileIn the deckFile to set
+     * Sets the deck file.
+     * 
+     * @param deckFileIn
+     *            the deckFile to set
      */
-    public void setDeckFile(String deckFileIn) {
+    public void setDeckFile(final String deckFileIn) {
         this.deckFile = deckFileIn;
     }
 
     /**
+     * Gets the land set code.
+     * 
      * @return the landSetCode
      */
     public String getLandSetCode() {
-        return landSetCode;
+        return this.landSetCode;
     }
 
     /**
-     * @param landSetCodeIn the landSetCode to set
+     * Sets the land set code.
+     * 
+     * @param landSetCodeIn
+     *            the landSetCode to set
      */
-    public void setLandSetCode(String landSetCodeIn) {
+    public void setLandSetCode(final String landSetCodeIn) {
         this.landSetCode = landSetCodeIn;
     }
 
     /**
+     * Gets the num double faced.
+     * 
      * @return the numDoubleFaced
      */
     public int getNumDoubleFaced() {
-        return numDoubleFaced;
+        return this.numDoubleFaced;
     }
 
     /**
-     * @param numDoubleFacedIn the numDoubleFaced to set
+     * Sets the num double faced.
+     * 
+     * @param numDoubleFacedIn
+     *            the numDoubleFaced to set
      */
-    public void setNumDoubleFaced(int numDoubleFacedIn) {
+    public void setNumDoubleFaced(final int numDoubleFacedIn) {
         this.numDoubleFaced = numDoubleFacedIn;
     }
 
@@ -300,13 +378,14 @@ class CustomLimited {
      * @return the name
      */
     private String getName() {
-        return name;
+        return this.name;
     }
 
     /**
-     * @param nameIn the name to set
+     * @param nameIn
+     *            the name to set
      */
-    private void setName(String nameIn) {
+    private void setName(final String nameIn) {
         this.name = nameIn;
     }
 }

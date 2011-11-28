@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.awt.Color;
@@ -48,7 +65,7 @@ public class GuiImportPicture extends JDialog {
     private JButton jButtonStart = null;
 
     /** The frame. */
-    private GuiImportPicture frame;
+    private final GuiImportPicture frame;
     private JLabel jLabelHDDFree = null;
     private JLabel jLabelNeedSpace = null;
 
@@ -71,16 +88,16 @@ public class GuiImportPicture extends JDialog {
      */
     public GuiImportPicture(final JFrame owner) {
         super(owner);
-        frame = this;
-        initialize();
+        this.frame = this;
+        this.initialize();
     }
 
     /**
      * This method initializes this.
      */
     private void initialize() {
-        Dimension screen = getToolkit().getScreenSize();
-        Rectangle bounds = getBounds();
+        final Dimension screen = this.getToolkit().getScreenSize();
+        final Rectangle bounds = this.getBounds();
 
         bounds.width = 400;
         bounds.height = 295;
@@ -88,10 +105,10 @@ public class GuiImportPicture extends JDialog {
         this.setResizable(false);
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
-        setBounds(bounds);
+        this.setBounds(bounds);
         this.setModal(true);
         this.setTitle("Import Picture");
-        this.setContentPane(getJContentPane());
+        this.setContentPane(this.getJContentPane());
     }
 
     /**
@@ -100,49 +117,49 @@ public class GuiImportPicture extends JDialog {
      * @return javax.swing.JPanel
      */
     private JPanel getJContentPane() {
-        if (jContentPane == null) {
-            jLabelTotalFiles = new JLabel();
-            jLabelTotalFiles.setBounds(new Rectangle(15, 180, 248, 16));
-            jLabelTotalFiles.setText("Total files for copying: Unknown.");
-            jLabelNeedSpace = new JLabel();
-            jLabelNeedSpace.setBounds(new Rectangle(15, 150, 177, 16));
-            jLabelNeedSpace.setText("HDD Need Space: Unknown.");
-            jLabelHDDFree = new JLabel();
-            jLabelHDDFree.setBounds(new Rectangle(15, 119, 177, 16));
+        if (this.jContentPane == null) {
+            this.jLabelTotalFiles = new JLabel();
+            this.jLabelTotalFiles.setBounds(new Rectangle(15, 180, 248, 16));
+            this.jLabelTotalFiles.setText("Total files for copying: Unknown.");
+            this.jLabelNeedSpace = new JLabel();
+            this.jLabelNeedSpace.setBounds(new Rectangle(15, 150, 177, 16));
+            this.jLabelNeedSpace.setText("HDD Need Space: Unknown.");
+            this.jLabelHDDFree = new JLabel();
+            this.jLabelHDDFree.setBounds(new Rectangle(15, 119, 177, 16));
 
-            File file = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+            final File file = ForgeProps.getFile(NewConstants.IMAGE_BASE);
 
-            long freeSpace = file.getFreeSpace();
-            freeSpaceM = freeSpace / 1024 / 1024;
+            final long freeSpace = file.getFreeSpace();
+            this.freeSpaceM = freeSpace / 1024 / 1024;
 
             // MiB here is not a typo; it is the unit for megabytes calculated
             // by powers of 1024 instead of 1000.
-            jLabelHDDFree.setText("HDD Free Space: " + freeSpaceM + " MiB");
+            this.jLabelHDDFree.setText("HDD Free Space: " + this.freeSpaceM + " MiB");
 
-            jLabelSource = new JLabel();
-            jLabelSource.setBounds(new Rectangle(63, 45, 267, 17));
-            jLabelSource.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-            jLabelSource.setText("");
-            jLabel1 = new JLabel();
-            jLabel1.setBounds(new Rectangle(16, 45, 48, 17));
-            jLabel1.setText("Source:");
-            jLabel = new JLabel();
-            jLabel.setBounds(new Rectangle(15, 15, 360, 19));
-            jLabel.setText("Please select source directory:");
-            jContentPane = new JPanel();
-            jContentPane.setLayout(null);
-            jContentPane.add(jLabel, null);
-            jContentPane.add(jLabel1, null);
-            jContentPane.add(jLabelSource, null);
-            jContentPane.add(getJButtonSource(), null);
-            jContentPane.add(getJPanel(), null);
-            jContentPane.add(getJButtonStart(), null);
-            jContentPane.add(jLabelHDDFree, null);
-            jContentPane.add(jLabelNeedSpace, null);
-            jContentPane.add(jLabelTotalFiles, null);
-            jContentPane.add(getJProgressBar(), null);
+            this.jLabelSource = new JLabel();
+            this.jLabelSource.setBounds(new Rectangle(63, 45, 267, 17));
+            this.jLabelSource.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            this.jLabelSource.setText("");
+            this.jLabel1 = new JLabel();
+            this.jLabel1.setBounds(new Rectangle(16, 45, 48, 17));
+            this.jLabel1.setText("Source:");
+            this.jLabel = new JLabel();
+            this.jLabel.setBounds(new Rectangle(15, 15, 360, 19));
+            this.jLabel.setText("Please select source directory:");
+            this.jContentPane = new JPanel();
+            this.jContentPane.setLayout(null);
+            this.jContentPane.add(this.jLabel, null);
+            this.jContentPane.add(this.jLabel1, null);
+            this.jContentPane.add(this.jLabelSource, null);
+            this.jContentPane.add(this.getJButtonSource(), null);
+            this.jContentPane.add(this.getJPanel(), null);
+            this.jContentPane.add(this.getJButtonStart(), null);
+            this.jContentPane.add(this.jLabelHDDFree, null);
+            this.jContentPane.add(this.jLabelNeedSpace, null);
+            this.jContentPane.add(this.jLabelTotalFiles, null);
+            this.jContentPane.add(this.getJProgressBar(), null);
         }
-        return jContentPane;
+        return this.jContentPane;
     }
 
     /**
@@ -151,11 +168,11 @@ public class GuiImportPicture extends JDialog {
      * @return javax.swing.JButton
      */
     private JButton getJButtonSource() {
-        if (jButtonSource == null) {
-            jButtonSource = new JButton();
-            jButtonSource.setBounds(new Rectangle(329, 45, 47, 17));
-            jButtonSource.setText("...");
-            jButtonSource.addMouseListener(new java.awt.event.MouseAdapter() {
+        if (this.jButtonSource == null) {
+            this.jButtonSource = new JButton();
+            this.jButtonSource.setBounds(new Rectangle(329, 45, 47, 17));
+            this.jButtonSource.setText("...");
+            this.jButtonSource.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(final java.awt.event.MouseEvent e) {
                     JFileChooser chooser;
@@ -167,66 +184,73 @@ public class GuiImportPicture extends JDialog {
                     chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
                     chooser.setAcceptAllFileFilterUsed(false);
-                    oldText = jLabelSource.getText();
-                    jLabelSource.setText("Please wait...");
-                    if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
-                        FileFinder ff = new FileFinder();
+                    GuiImportPicture.this.oldText = GuiImportPicture.this.jLabelSource.getText();
+                    GuiImportPicture.this.jLabelSource.setText("Please wait...");
+                    if (chooser.showOpenDialog(GuiImportPicture.this.frame) == JFileChooser.APPROVE_OPTION) {
+                        final FileFinder ff = new FileFinder();
                         try {
-                            listFiles = ff.findFiles(chooser.getSelectedFile().toString(), ".+\\.jpg");
-                        } catch (Exception e2) {
+                            GuiImportPicture.this.listFiles = ff.findFiles(chooser.getSelectedFile().toString(),
+                                    ".+\\.jpg");
+                        } catch (final Exception e2) {
                             e2.printStackTrace();
                         }
-                        jLabelSource.setText(chooser.getSelectedFile().toString());
-                        if (jCheckBox.isSelected()) {
-                            filesForCopy = ff.getFilesNumber();
-                            jLabelTotalFiles.setText("Total files for copying: " + filesForCopy);
-                            jLabelNeedSpace.setText("HDD Need Space: " + ff.getDirectorySize() / 1024 / 1024 + " MB");
-                            jProgressBar.setValue(0);
-                            if ((freeSpaceM > (ff.getDirectorySize() / 1024 / 1024)) && (filesForCopy > 0)) {
-                                jButtonStart.setEnabled(true);
+                        GuiImportPicture.this.jLabelSource.setText(chooser.getSelectedFile().toString());
+                        if (GuiImportPicture.this.jCheckBox.isSelected()) {
+                            GuiImportPicture.this.filesForCopy = ff.getFilesNumber();
+                            GuiImportPicture.this.jLabelTotalFiles.setText("Total files for copying: "
+                                    + GuiImportPicture.this.filesForCopy);
+                            GuiImportPicture.this.jLabelNeedSpace.setText("HDD Need Space: "
+                                    + (ff.getDirectorySize() / 1024 / 1024) + " MB");
+                            GuiImportPicture.this.jProgressBar.setValue(0);
+                            if ((GuiImportPicture.this.freeSpaceM > (ff.getDirectorySize() / 1024 / 1024))
+                                    && (GuiImportPicture.this.filesForCopy > 0)) {
+                                GuiImportPicture.this.jButtonStart.setEnabled(true);
                             }
 
                         } else {
                             String fName;
                             int start;
                             long filesToCopySize;
-                            filesForCopy = 0;
+                            GuiImportPicture.this.filesForCopy = 0;
                             filesToCopySize = 0;
-                            fileCopyList = new ArrayList<File>();
+                            GuiImportPicture.this.fileCopyList = new ArrayList<File>();
 
-                            for (int i = 0; i < listFiles.size(); i++) {
+                            for (int i = 0; i < GuiImportPicture.this.listFiles.size(); i++) {
 
-                                fName = listFiles.get(i).getName();
+                                fName = GuiImportPicture.this.listFiles.get(i).getName();
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
                                 fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
-                                File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
+                                final File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
                                 if (!file.exists()) {
-                                    filesForCopy = filesForCopy + 1;
-                                    filesToCopySize = filesToCopySize + listFiles.get(i).length();
-                                    fileCopyList.add(listFiles.get(i));
+                                    GuiImportPicture.this.filesForCopy = GuiImportPicture.this.filesForCopy + 1;
+                                    filesToCopySize = filesToCopySize + GuiImportPicture.this.listFiles.get(i).length();
+                                    GuiImportPicture.this.fileCopyList.add(GuiImportPicture.this.listFiles.get(i));
                                 }
                             }
-                            jLabelTotalFiles.setText("Total files for copying: " + filesForCopy);
-                            jLabelNeedSpace.setText("HDD Need Space: " + filesToCopySize / 1024 / 1024 + " MB");
-                            jProgressBar.setValue(0);
-                            if ((freeSpaceM > (filesToCopySize / 1024 / 1024)) && (filesForCopy > 0)) {
-                                jButtonStart.setEnabled(true);
+                            GuiImportPicture.this.jLabelTotalFiles.setText("Total files for copying: "
+                                    + GuiImportPicture.this.filesForCopy);
+                            GuiImportPicture.this.jLabelNeedSpace.setText("HDD Need Space: "
+                                    + (filesToCopySize / 1024 / 1024) + " MB");
+                            GuiImportPicture.this.jProgressBar.setValue(0);
+                            if ((GuiImportPicture.this.freeSpaceM > (filesToCopySize / 1024 / 1024))
+                                    && (GuiImportPicture.this.filesForCopy > 0)) {
+                                GuiImportPicture.this.jButtonStart.setEnabled(true);
                             }
                         }
 
                     } else {
-                        if (oldText.equals("")) {
-                            jLabelSource.setText("");
+                        if (GuiImportPicture.this.oldText.equals("")) {
+                            GuiImportPicture.this.jLabelSource.setText("");
                         } else {
-                            jLabelSource.setText(oldText);
+                            GuiImportPicture.this.jLabelSource.setText(GuiImportPicture.this.oldText);
                         }
 
                     }
                 }
             });
         }
-        return jButtonSource;
+        return this.jButtonSource;
     }
 
     /**
@@ -235,19 +259,19 @@ public class GuiImportPicture extends JDialog {
      * @return javax.swing.JPanel
      */
     private JPanel getJPanel() {
-        if (jPanel == null) {
-            GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        if (this.jPanel == null) {
+            final GridBagConstraints gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridwidth = 2;
             gridBagConstraints.insets = new Insets(0, 0, 0, 120);
             gridBagConstraints.gridy = 0;
-            jPanel = new JPanel();
-            jPanel.setLayout(new GridBagLayout());
-            jPanel.setBounds(new Rectangle(15, 74, 362, 31));
-            jPanel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-            jPanel.add(getJCheckBox(), gridBagConstraints);
+            this.jPanel = new JPanel();
+            this.jPanel.setLayout(new GridBagLayout());
+            this.jPanel.setBounds(new Rectangle(15, 74, 362, 31));
+            this.jPanel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            this.jPanel.add(this.getJCheckBox(), gridBagConstraints);
         }
-        return jPanel;
+        return this.jPanel;
     }
 
     /**
@@ -256,63 +280,70 @@ public class GuiImportPicture extends JDialog {
      * @return javax.swing.JCheckBox
      */
     private JCheckBox getJCheckBox() {
-        if (jCheckBox == null) {
-            jCheckBox = new JCheckBox();
-            jCheckBox.setSelected(false);
-            jCheckBox.setText("Overwriting picture in resource folder");
-            jCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {
+        if (this.jCheckBox == null) {
+            this.jCheckBox = new JCheckBox();
+            this.jCheckBox.setSelected(false);
+            this.jCheckBox.setText("Overwriting picture in resource folder");
+            this.jCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(final java.awt.event.MouseEvent e) {
-                    jButtonStart.setEnabled(false);
-                    if (jLabelSource.getText() != "") {
-                        FileFinder ff = new FileFinder();
+                    GuiImportPicture.this.jButtonStart.setEnabled(false);
+                    if (GuiImportPicture.this.jLabelSource.getText() != "") {
+                        final FileFinder ff = new FileFinder();
                         try {
-                            listFiles = ff.findFiles(jLabelSource.getText().toString(), ".+\\.jpg");
-                        } catch (Exception e2) {
+                            GuiImportPicture.this.listFiles = ff.findFiles(GuiImportPicture.this.jLabelSource.getText()
+                                    .toString(), ".+\\.jpg");
+                        } catch (final Exception e2) {
                             e2.printStackTrace();
                         }
-                        if (jCheckBox.isSelected()) {
-                            filesForCopy = ff.getFilesNumber();
-                            jLabelTotalFiles.setText("Total files for copying: " + filesForCopy);
-                            jLabelNeedSpace.setText("HDD Need Space: " + ff.getDirectorySize() / 1024 / 1024 + " MB");
-                            jProgressBar.setValue(0);
-                            if ((freeSpaceM > (ff.getDirectorySize() / 1024 / 1024)) && (filesForCopy > 0)) {
-                                jButtonStart.setEnabled(true);
+                        if (GuiImportPicture.this.jCheckBox.isSelected()) {
+                            GuiImportPicture.this.filesForCopy = ff.getFilesNumber();
+                            GuiImportPicture.this.jLabelTotalFiles.setText("Total files for copying: "
+                                    + GuiImportPicture.this.filesForCopy);
+                            GuiImportPicture.this.jLabelNeedSpace.setText("HDD Need Space: "
+                                    + (ff.getDirectorySize() / 1024 / 1024) + " MB");
+                            GuiImportPicture.this.jProgressBar.setValue(0);
+                            if ((GuiImportPicture.this.freeSpaceM > (ff.getDirectorySize() / 1024 / 1024))
+                                    && (GuiImportPicture.this.filesForCopy > 0)) {
+                                GuiImportPicture.this.jButtonStart.setEnabled(true);
                             }
                         } else {
 
                             String fName;
                             int start;
                             long filesToCopySize;
-                            filesForCopy = 0;
+                            GuiImportPicture.this.filesForCopy = 0;
                             filesToCopySize = 0;
-                            fileCopyList = new ArrayList<File>();
+                            GuiImportPicture.this.fileCopyList = new ArrayList<File>();
 
-                            for (int i = 0; i < listFiles.size(); i++) {
+                            for (int i = 0; i < GuiImportPicture.this.listFiles.size(); i++) {
 
-                                fName = listFiles.get(i).getName();
+                                fName = GuiImportPicture.this.listFiles.get(i).getName();
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
                                 fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
-                                File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
+                                final File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
                                 if (!file.exists()) {
-                                    filesForCopy = filesForCopy + 1;
-                                    filesToCopySize = filesToCopySize + listFiles.get(i).length();
-                                    fileCopyList.add(listFiles.get(i));
+                                    GuiImportPicture.this.filesForCopy = GuiImportPicture.this.filesForCopy + 1;
+                                    filesToCopySize = filesToCopySize + GuiImportPicture.this.listFiles.get(i).length();
+                                    GuiImportPicture.this.fileCopyList.add(GuiImportPicture.this.listFiles.get(i));
                                 }
                             }
-                            jLabelTotalFiles.setText("Total files for copying: " + filesForCopy);
-                            jLabelNeedSpace.setText("HDD Need Space: " + filesToCopySize / 1024 / 1024 + " MB");
-                            jProgressBar.setValue(0);
-                            if ((freeSpaceM > (filesToCopySize / 1024 / 1024)) && (filesForCopy > 0)) {
-                                jButtonStart.setEnabled(true);
+                            GuiImportPicture.this.jLabelTotalFiles.setText("Total files for copying: "
+                                    + GuiImportPicture.this.filesForCopy);
+                            GuiImportPicture.this.jLabelNeedSpace.setText("HDD Need Space: "
+                                    + (filesToCopySize / 1024 / 1024) + " MB");
+                            GuiImportPicture.this.jProgressBar.setValue(0);
+                            if ((GuiImportPicture.this.freeSpaceM > (filesToCopySize / 1024 / 1024))
+                                    && (GuiImportPicture.this.filesForCopy > 0)) {
+                                GuiImportPicture.this.jButtonStart.setEnabled(true);
                             }
                         }
                     }
                 }
             });
         }
-        return jCheckBox;
+        return this.jCheckBox;
     }
 
     /**
@@ -321,43 +352,46 @@ public class GuiImportPicture extends JDialog {
      * @return javax.swing.JButton
      */
     private JButton getJButtonStart() {
-        if (jButtonStart == null) {
-            jButtonStart = new JButton();
-            jButtonStart.setEnabled(false);
-            jButtonStart.setBounds(new Rectangle(136, 239, 123, 17));
-            jButtonStart.setText("Import");
+        if (this.jButtonStart == null) {
+            this.jButtonStart = new JButton();
+            this.jButtonStart.setEnabled(false);
+            this.jButtonStart.setBounds(new Rectangle(136, 239, 123, 17));
+            this.jButtonStart.setText("Import");
             // jButtonStart.addMouseListener(new CustomListener());
-            jButtonStart.addMouseListener(new MouseInputAdapter() {
+            this.jButtonStart.addMouseListener(new MouseInputAdapter() {
                 @Override
                 public void mouseClicked(final MouseEvent e) {
 
-                    if (jButtonStart.isEnabled()) {
-                        jLabelTotalFiles.setText("Please wait while all files are copying.");
-                        if (jCheckBox.isSelected()) {
-                            jButtonStart.setEnabled(false);
-                            jCheckBox.setEnabled(false);
-                            jButtonSource.setEnabled(false);
-                            CopyFiles cFiles = new CopyFiles(listFiles, jLabelTotalFiles, jProgressBar, jCheckBox,
-                                    jButtonSource);
+                    if (GuiImportPicture.this.jButtonStart.isEnabled()) {
+                        GuiImportPicture.this.jLabelTotalFiles.setText("Please wait while all files are copying.");
+                        if (GuiImportPicture.this.jCheckBox.isSelected()) {
+                            GuiImportPicture.this.jButtonStart.setEnabled(false);
+                            GuiImportPicture.this.jCheckBox.setEnabled(false);
+                            GuiImportPicture.this.jButtonSource.setEnabled(false);
+                            final CopyFiles cFiles = new CopyFiles(GuiImportPicture.this.listFiles,
+                                    GuiImportPicture.this.jLabelTotalFiles, GuiImportPicture.this.jProgressBar,
+                                    GuiImportPicture.this.jCheckBox, GuiImportPicture.this.jButtonSource);
                             cFiles.addPropertyChangeListener(new PropertyChangeListener() {
                                 @Override
                                 public void propertyChange(final PropertyChangeEvent evt) {
                                     if ("progress".equals(evt.getPropertyName())) {
-                                        jProgressBar.setValue((Integer) evt.getNewValue());
+                                        GuiImportPicture.this.jProgressBar.setValue((Integer) evt.getNewValue());
                                     }
                                 }
                             });
                             cFiles.execute();
                         } else {
-                            jButtonStart.setEnabled(false);
-                            jCheckBox.setEnabled(false);
-                            jButtonSource.setEnabled(false);
-                            CopyFiles cFiles = new CopyFiles(fileCopyList, jLabelTotalFiles, jProgressBar, jCheckBox,
-                                    jButtonSource);
+                            GuiImportPicture.this.jButtonStart.setEnabled(false);
+                            GuiImportPicture.this.jCheckBox.setEnabled(false);
+                            GuiImportPicture.this.jButtonSource.setEnabled(false);
+                            final CopyFiles cFiles = new CopyFiles(GuiImportPicture.this.fileCopyList,
+                                    GuiImportPicture.this.jLabelTotalFiles, GuiImportPicture.this.jProgressBar,
+                                    GuiImportPicture.this.jCheckBox, GuiImportPicture.this.jButtonSource);
                             cFiles.addPropertyChangeListener(new PropertyChangeListener() {
+                                @Override
                                 public void propertyChange(final PropertyChangeEvent evt) {
                                     if ("progress".equals(evt.getPropertyName())) {
-                                        jProgressBar.setValue((Integer) evt.getNewValue());
+                                        GuiImportPicture.this.jProgressBar.setValue((Integer) evt.getNewValue());
                                     }
                                 }
                             });
@@ -366,7 +400,7 @@ public class GuiImportPicture extends JDialog {
                 }
             });
         }
-        return jButtonStart;
+        return this.jButtonStart;
     }
 
     /**
@@ -375,12 +409,12 @@ public class GuiImportPicture extends JDialog {
      * @return javax.swing.JProgressBar
      */
     private JProgressBar getJProgressBar() {
-        if (jProgressBar == null) {
-            jProgressBar = new JProgressBar();
-            jProgressBar.setBounds(new Rectangle(15, 210, 363, 18));
-            jProgressBar.setMinimum(0);
-            jProgressBar.setMaximum(100);
+        if (this.jProgressBar == null) {
+            this.jProgressBar = new JProgressBar();
+            this.jProgressBar.setBounds(new Rectangle(15, 210, 363, 18));
+            this.jProgressBar.setMinimum(0);
+            this.jProgressBar.setMaximum(100);
         }
-        return jProgressBar;
+        return this.jProgressBar;
     }
 } // @jve:decl-index=0:visual-constraint="10,10"

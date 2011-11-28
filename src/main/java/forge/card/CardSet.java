@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
@@ -67,7 +84,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @return the name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -76,7 +93,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @return the code
      */
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     /**
@@ -85,7 +102,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @return the code2
      */
     public String getCode2() {
-        return code2;
+        return this.code2;
     }
 
     /**
@@ -94,7 +111,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @return the index
      */
     public int getIndex() {
-        return index;
+        return this.index;
     }
 
     /**
@@ -103,7 +120,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @return true, if successful
      */
     public boolean canGenerateBooster() {
-        return boosterData != null;
+        return this.boosterData != null;
     }
 
     /**
@@ -112,7 +129,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @return the booster data
      */
     public BoosterData getBoosterData() {
-        return boosterData;
+        return this.boosterData;
     }
 
     /** The Constant fnGetName. */
@@ -151,7 +168,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      */
     @Override
     public int hashCode() {
-        return code.hashCode() * 17 + name.hashCode();
+        return (this.code.hashCode() * 17) + this.name.hashCode();
     }
 
     /*
@@ -167,11 +184,11 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
 
-        CardSet other = (CardSet) obj;
+        final CardSet other = (CardSet) obj;
         return other.name.equals(this.name) && this.code.equals(other.code);
     }
 
@@ -216,8 +233,8 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         public BoosterData(final int nC, final int nU, final int nR, final int nS, final int nDF) {
             // if this booster has more that 10 cards, there must be a land in
             // 15th slot unless it's already taken
-            this(nC, nU, nR, nS, nDF, nC + nR + nU + nS + nDF > 10 ? CARDS_PER_BOOSTER - nC - nR - nU - nS - nDF : 0,
-                    68);
+            this(nC, nU, nR, nS, nDF, (nC + nR + nU + nS + nDF) > 10 ? BoosterData.CARDS_PER_BOOSTER - nC - nR - nU
+                    - nS - nDF : 0, 68);
         }
 
         /**
@@ -240,13 +257,13 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          */
         public BoosterData(final int nC, final int nU, final int nR, final int nS, final int nDF, final int nL,
                 final int oneFoilPer) {
-            nCommon = nC;
-            nUncommon = nU;
-            nRare = nR;
-            nSpecial = nS;
-            nDoubleFaced = nDF;
-            nLand = nL > 0 ? nL : 0;
-            foilRate = oneFoilPer;
+            this.nCommon = nC;
+            this.nUncommon = nU;
+            this.nRare = nR;
+            this.nSpecial = nS;
+            this.nDoubleFaced = nDF;
+            this.nLand = nL > 0 ? nL : 0;
+            this.foilRate = oneFoilPer;
         }
 
         /**
@@ -255,7 +272,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          * @return the common
          */
         public final int getCommon() {
-            return nCommon;
+            return this.nCommon;
         }
 
         /**
@@ -264,7 +281,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          * @return the uncommon
          */
         public final int getUncommon() {
-            return nUncommon;
+            return this.nUncommon;
         }
 
         /**
@@ -273,7 +290,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          * @return the rare
          */
         public final int getRare() {
-            return nRare;
+            return this.nRare;
         }
 
         /**
@@ -282,7 +299,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          * @return the special
          */
         public final int getSpecial() {
-            return nSpecial;
+            return this.nSpecial;
         }
 
         /**
@@ -291,7 +308,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          * @return the double faced
          */
         public final int getDoubleFaced() {
-            return nDoubleFaced;
+            return this.nDoubleFaced;
         }
 
         /**
@@ -300,7 +317,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          * @return the land
          */
         public final int getLand() {
-            return nLand;
+            return this.nLand;
         }
 
         /**
@@ -309,7 +326,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
          * @return the foil chance
          */
         public final int getFoilChance() {
-            return foilRate;
+            return this.foilRate;
         }
     }
 
@@ -333,6 +350,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         }
 
         private static class CanMakeBooster extends Predicate<CardSet> {
+            @Override
             public boolean isTrue(final CardSet subject) {
                 return subject.canGenerateBooster();
             }
@@ -342,11 +360,12 @@ public final class CardSet implements Comparable<CardSet> { // immutable
             private final GameFormat format;
 
             public LegalInFormat(final GameFormat fmt) {
-                format = fmt;
+                this.format = fmt;
             }
 
+            @Override
             public boolean isTrue(final CardSet subject) {
-                return format.isSetLegal(subject.getCode());
+                return this.format.isSetLegal(subject.getCode());
             }
         }
 
@@ -356,13 +375,14 @@ public final class CardSet implements Comparable<CardSet> { // immutable
         public abstract static class Presets {
 
             /** The Constant setsInT2. */
-            public static final Predicate<CardSet> SETS_IN_STANDARD = isLegalInFormat(SetUtils.getStandard());
+            public static final Predicate<CardSet> SETS_IN_STANDARD = Predicates
+                    .isLegalInFormat(SetUtils.getStandard());
 
             /** The Constant setsInExt. */
-            public static final Predicate<CardSet> SETS_IN_EXT = isLegalInFormat(SetUtils.getExtended());
+            public static final Predicate<CardSet> SETS_IN_EXT = Predicates.isLegalInFormat(SetUtils.getExtended());
 
             /** The Constant setsInModern. */
-            public static final Predicate<CardSet> SET_IN_MODERN = isLegalInFormat(SetUtils.getModern());
+            public static final Predicate<CardSet> SET_IN_MODERN = Predicates.isLegalInFormat(SetUtils.getModern());
         }
     }
 }

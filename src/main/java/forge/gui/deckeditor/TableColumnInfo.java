@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.util.Map.Entry;
@@ -33,12 +50,12 @@ public class TableColumnInfo<T> {
 
     /** The fn sort. */
     private final Lambda1<Comparable, Entry<T, Integer>> fnSort; // this will be
-                                                                // used for
-                                                                // sorting
+                                                                 // used for
+                                                                 // sorting
 
     /** The fn display. */
     private final Lambda1<Object, Entry<T, Integer>> fnDisplay; // this is used
-                                                               // to display
+                                                                // to display
 
     private TableCellRenderer cellRenderer = null;
 
@@ -134,72 +151,97 @@ public class TableColumnInfo<T> {
     }
 
     /**
+     * Gets the min width.
+     * 
      * @return the minWidth
      */
     public int getMinWidth() {
-        return minWidth;
+        return this.minWidth;
     }
 
     /**
-     * @param minWidth the minWidth to set
+     * Sets the min width.
+     * 
+     * @param minWidth
+     *            the minWidth to set
      */
-    public void setMinWidth(int minWidth) {
+    public void setMinWidth(final int minWidth) {
         this.minWidth = minWidth; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the max width.
+     * 
      * @return the maxWidth
      */
     public int getMaxWidth() {
-        return maxWidth;
+        return this.maxWidth;
     }
 
     /**
-     * @param maxWidth the maxWidth to set
+     * Sets the max width.
+     * 
+     * @param maxWidth
+     *            the maxWidth to set
      */
-    public void setMaxWidth(int maxWidth) {
+    public void setMaxWidth(final int maxWidth) {
         this.maxWidth = maxWidth; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the nominal width.
+     * 
      * @return the nominalWidth
      */
     public int getNominalWidth() {
-        return nominalWidth;
+        return this.nominalWidth;
     }
 
     /**
-     * @param nominalWidth the nominalWidth to set
+     * Sets the nominal width.
+     * 
+     * @param nominalWidth
+     *            the nominalWidth to set
      */
-    public void setNominalWidth(int nominalWidth) {
+    public void setNominalWidth(final int nominalWidth) {
         this.nominalWidth = nominalWidth; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Checks if is min max applied.
+     * 
      * @return the isMinMaxApplied
      */
     public boolean isMinMaxApplied() {
-        return isMinMaxApplied;
+        return this.isMinMaxApplied;
     }
 
     /**
-     * @param isMinMaxApplied the isMinMaxApplied to set
+     * Sets the min max applied.
+     * 
+     * @param isMinMaxApplied
+     *            the isMinMaxApplied to set
      */
-    public void setMinMaxApplied(boolean isMinMaxApplied) {
-        this.isMinMaxApplied = isMinMaxApplied; // TODO: Add 0 to parameter's name.
+    public void setMinMaxApplied(final boolean isMinMaxApplied) {
+        this.isMinMaxApplied = isMinMaxApplied; // TODO: Add 0 to parameter's
+                                                // name.
     }
 
     /**
+     * Gets the fn sort.
+     * 
      * @return the fnSort
      */
     public Lambda1<Comparable, Entry<T, Integer>> getFnSort() {
-        return fnSort;
+        return this.fnSort;
     }
 
     /**
+     * Gets the fn display.
+     * 
      * @return the fnDisplay
      */
     public Lambda1<Object, Entry<T, Integer>> getFnDisplay() {
-        return fnDisplay;
+        return this.fnDisplay;
     }
 }

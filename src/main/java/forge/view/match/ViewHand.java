@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.match;
 
 import java.awt.Color;
@@ -20,109 +37,115 @@ import forge.Card;
 import forge.GuiDisplayUtil;
 import forge.ImageCache;
 import forge.control.match.ControlHand;
-
 import forge.view.toolbox.FRoundedPanel;
 
-/** 
+/**
  * VIEW - Swing components for user hand.
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class ViewHand extends JScrollPane {
     private FRoundedPanel pnlContent;
-    private ControlHand control;
+    private final ControlHand control;
     private List<CardPanel> cardPanels = new ArrayList<CardPanel>();
 
     /**
      * VIEW - Swing components for user hand.
      */
     public ViewHand() {
-        super(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        super(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        setOpaque(false);
-        getViewport().setOpaque(false);
-        getHorizontalScrollBar().setUnitIncrement(16);
-        setBorder(null);
+        this.setOpaque(false);
+        this.getViewport().setOpaque(false);
+        this.getHorizontalScrollBar().setUnitIncrement(16);
+        this.setBorder(null);
 
         // After all components are in place, instantiate controller.
-        control = new ControlHand(this);
-    }
-
-    /** @return ControlHand */
-    public ControlHand getController() {
-        return control;
+        this.control = new ControlHand(this);
     }
 
     /**
-     * Rebuilds layout of the hand panel.  Card panels are removed,
-     * the height and card aspect ratio are used to set layout column width,
-     * then card panels are added to the fresh layout.
+     * Gets the controller.
+     * 
+     * @return ControlHand
+     */
+    public ControlHand getController() {
+        return this.control;
+    }
+
+    /**
+     * Rebuilds layout of the hand panel. Card panels are removed, the height
+     * and card aspect ratio are used to set layout column width, then card
+     * panels are added to the fresh layout.
      * 
      */
     // This design choice was made to allow the functionality of a JPanel
-    // while maintaining a scale-able view.  Overridden paint methods could
+    // while maintaining a scale-able view. Overridden paint methods could
     // do this, but require heavy coding.
     public void refreshLayout() {
-        // Remove all panels and recalculate layout scaling based on aspect ratio.
-        pnlContent = new FRoundedPanel();
-        pnlContent.setBackground(AllZone.getSkin().getClrTheme());
-        pnlContent.setCorners(new boolean[] {true, false, false, true});
-        pnlContent.setLayout(new MigLayout("insets 3 10 3 10"));
-        pnlContent.setSize(getViewport().getSize());
-        pnlContent.validate();
-        this.setViewportView(pnlContent);
+        // Remove all panels and recalculate layout scaling based on aspect
+        // ratio.
+        this.pnlContent = new FRoundedPanel();
+        this.pnlContent.setBackground(AllZone.getSkin().getClrTheme());
+        this.pnlContent.setCorners(new boolean[] { true, false, false, true });
+        this.pnlContent.setLayout(new MigLayout("insets 3 10 3 10"));
+        this.pnlContent.setSize(this.getViewport().getSize());
+        this.pnlContent.validate();
+        this.setViewportView(this.pnlContent);
 
-        int h = getViewport().getHeight() - 6;
-        pnlContent.setLayout(new MigLayout("align center"));
+        final int h = this.getViewport().getHeight() - 6;
+        this.pnlContent.setLayout(new MigLayout("align center"));
 
         // Re-insert panel instances. Possible memory management problem
         // from re-adding pre-existing panels. Doublestrike 22-11-11
-        cardPanels = new ArrayList<CardPanel>();
-        for (Card c : control.getCards()) {
-            CardPanel temp = new CardPanel(c);
-            cardPanels.add(temp);
-            pnlContent.add(temp, "h " + h + "px!, w " + (int) (h * 0.7) + "px!");
-            control.addCardPanelListeners(temp);
+        this.cardPanels = new ArrayList<CardPanel>();
+        for (final Card c : this.control.getCards()) {
+            final CardPanel temp = new CardPanel(c);
+            this.cardPanels.add(temp);
+            this.pnlContent.add(temp, "h " + h + "px!, w " + (int) (h * 0.7) + "px!");
+            this.control.addCardPanelListeners(temp);
         }
         // Notify system of change.
     }
 
     /**
-     * 
+     * The Class CardPanel.
      */
     public class CardPanel extends JPanel {
         private static final long serialVersionUID = 509877513760665415L;
         private Card card = null;
-        private Image img;
+        private final Image img;
         private int w, h = 0;
 
         /**
-         * <p>Constructor for CardPanel.</p>
-         *
-         * @param c &emsp; Card object.
+         * <p>
+         * Constructor for CardPanel.
+         * </p>
+         * 
+         * @param c
+         *            &emsp; Card object.
          */
-        public CardPanel(Card c) {
+        public CardPanel(final Card c) {
             super();
             this.card = c;
-            this.img = ImageCache.getImage(card);
+            this.img = ImageCache.getImage(this.card);
 
-            setToolTipText("<html>" + c.getName() + "<br>" + GuiDisplayUtil.formatCardType(c) + "</html>");
+            this.setToolTipText("<html>" + c.getName() + "<br>" + GuiDisplayUtil.formatCardType(c) + "</html>");
 
             // No image?
-            if (img == null) {
-                setBorder(new LineBorder(new Color(240, 240, 240), 1));
-                setLayout(new MigLayout("wrap, insets 2, gap 0"));
-                setOpaque(true);
-                setBackground(new Color(200, 200, 200));
+            if (this.img == null) {
+                this.setBorder(new LineBorder(new Color(240, 240, 240), 1));
+                this.setLayout(new MigLayout("wrap, insets 2, gap 0"));
+                this.setOpaque(true);
+                this.setBackground(new Color(200, 200, 200));
 
-                JLabel lblManaCost = new JLabel(c.getManaCost());
+                final JLabel lblManaCost = new JLabel(c.getManaCost());
                 lblManaCost.setHorizontalAlignment(SwingConstants.RIGHT);
 
-                JLabel lblCardName = new JLabel(c.getName());
+                final JLabel lblCardName = new JLabel(c.getName());
                 lblCardName.setHorizontalAlignment(SwingConstants.CENTER);
 
-                JLabel lblPowerToughness = new JLabel("");
+                final JLabel lblPowerToughness = new JLabel("");
                 lblPowerToughness.setHorizontalAlignment(SwingConstants.RIGHT);
 
                 if (c.isFaceDown()) {
@@ -134,38 +157,49 @@ public class ViewHand extends JScrollPane {
                     lblPowerToughness.setText(c.getNetAttack() + " / " + c.getNetDefense());
                 }
 
-                add(lblManaCost, "w 90%!");
-                add(lblCardName, "w 90%!");
-                add(lblPowerToughness, "w 90%!, gaptop 25");
-            }
-            else {
-                setBorder(new LineBorder(Color.black, 1));
-                w = img.getWidth(null);
-                h = img.getHeight(null);
+                this.add(lblManaCost, "w 90%!");
+                this.add(lblCardName, "w 90%!");
+                this.add(lblPowerToughness, "w 90%!, gaptop 25");
+            } else {
+                this.setBorder(new LineBorder(Color.black, 1));
+                this.w = this.img.getWidth(null);
+                this.h = this.img.getHeight(null);
             }
         }
 
-        /** @return Card */
+        /**
+         * Gets the card.
+         * 
+         * @return Card
+         */
         public Card getCard() {
             return this.card;
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+         */
         @Override
-        public void paintComponent(Graphics g) {
+        public void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            if (img != null) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.drawImage(img, 0, 0, getWidth(), getHeight(), 0, 0, w, h, null);
-            }
-            else {
+            if (this.img != null) {
+                final Graphics2D g2d = (Graphics2D) g;
+                g2d.drawImage(this.img, 0, 0, this.getWidth(), this.getHeight(), 0, 0, this.w, this.h, null);
+            } else {
                 g.setColor(new Color(200, 200, 200));
-                g.drawRect(1, 1, getWidth(), getHeight());
+                g.drawRect(1, 1, this.getWidth(), this.getHeight());
             }
         }
     }
 
-    /** @return List<CardPanel> */
+    /**
+     * Gets the card panels.
+     * 
+     * @return List<CardPanel>
+     */
     public List<CardPanel> getCardPanels() {
-        return cardPanels;
+        return this.cardPanels;
     }
 }

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import java.util.ArrayList;
@@ -40,7 +57,7 @@ public final class CardBlock implements Comparable<CardBlock> {
             final int cntBoostersDraft, final int cntBoostersSealed) {
         this.orderNum = index;
         this.name = name;
-        this.sets = sets.toArray(EMPTY_SET_ARRAY);
+        this.sets = sets.toArray(CardBlock.EMPTY_SET_ARRAY);
         this.landSet = landSet;
         this.cntBoostersDraft = cntBoostersDraft;
         this.cntBoostersSealed = cntBoostersSealed;
@@ -52,7 +69,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @return the name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -61,7 +78,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @return the sets
      */
     public CardSet[] getSets() {
-        return sets;
+        return this.sets;
     }
 
     /**
@@ -70,7 +87,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @return the land set
      */
     public CardSet getLandSet() {
-        return landSet;
+        return this.landSet;
     }
 
     /**
@@ -79,7 +96,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @return the cnt boosters draft
      */
     public int getCntBoostersDraft() {
-        return cntBoostersDraft;
+        return this.cntBoostersDraft;
     }
 
     /**
@@ -88,7 +105,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @return the cnt boosters sealed
      */
     public int getCntBoostersSealed() {
-        return cntBoostersSealed;
+        return this.cntBoostersSealed;
     }
 
     /**
@@ -97,16 +114,16 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @return the filter
      */
     public Predicate<CardPrinted> getFilter() {
-        if (filter == null) {
-            filter = buildFilter();
+        if (this.filter == null) {
+            this.filter = this.buildFilter();
         }
-        return filter;
+        return this.filter;
     }
 
     private Predicate<CardPrinted> buildFilter() {
-        List<String> setCodes = new ArrayList<String>();
-        for (int i = 0; i < sets.length; i++) {
-            setCodes.add(sets[i].getCode());
+        final List<String> setCodes = new ArrayList<String>();
+        for (final CardSet set : this.sets) {
+            setCodes.add(set.getCode());
         }
         return CardPrinted.Predicates.printedInSets(setCodes, true);
     }
@@ -120,8 +137,8 @@ public final class CardBlock implements Comparable<CardBlock> {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((landSet == null) ? 0 : landSet.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = (prime * result) + ((this.landSet == null) ? 0 : this.landSet.hashCode());
+        result = (prime * result) + ((this.name == null) ? 0 : this.name.hashCode());
         return result;
     }
 
@@ -138,15 +155,15 @@ public final class CardBlock implements Comparable<CardBlock> {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
 
-        CardBlock other = (CardBlock) obj;
-        if (!landSet.equals(other.landSet)) {
+        final CardBlock other = (CardBlock) obj;
+        if (!this.landSet.equals(other.landSet)) {
             return false;
         }
-        if (!name.equals(other.name)) {
+        if (!this.name.equals(other.name)) {
             return false;
         }
         return true;
@@ -169,7 +186,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      */
     @Override
     public String toString() {
-        return name + " (block)";
+        return this.name + " (block)";
     }
 
 }

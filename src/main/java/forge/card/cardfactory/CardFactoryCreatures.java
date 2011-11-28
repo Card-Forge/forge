@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
@@ -436,33 +453,27 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*else if (cardName.equals("Sleeper Agent")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    // TODO this need to be targeted
-                    card.addController(card.getController().getOpponent());
-                    // AllZone.getGameAction().changeController(new
-                    // CardList(card), card.getController(),
-                    // card.getController().getOpponent());
-                }
-            };
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("When Sleeper Agent enters the battlefield, ");
-            sb.append("target opponent gains control of it.");
-            ability.setStackDescription(sb.toString());
-            final Command intoPlay = new Command() {
-                private static final long serialVersionUID = -3934471871041458847L;
-
-                @Override
-                public void execute() {
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                } // execute()
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }*/ // *************** END ************ END **************************
+        /*
+         * else if (cardName.equals("Sleeper Agent")) { final SpellAbility
+         * ability = new Ability(card, "0") {
+         * 
+         * @Override public void resolve() { // TODO this need to be targeted
+         * card.addController(card.getController().getOpponent()); //
+         * AllZone.getGameAction().changeController(new // CardList(card),
+         * card.getController(), // card.getController().getOpponent()); } };
+         * 
+         * final StringBuilder sb = new StringBuilder();
+         * sb.append("When Sleeper Agent enters the battlefield, ");
+         * sb.append("target opponent gains control of it.");
+         * ability.setStackDescription(sb.toString()); final Command intoPlay =
+         * new Command() { private static final long serialVersionUID =
+         * -3934471871041458847L;
+         * 
+         * @Override public void execute() {
+         * AllZone.getStack().addSimultaneousStackEntry(ability);
+         * 
+         * } // execute() }; card.addComesIntoPlayCommand(intoPlay); }
+         */// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Phylactery Lich")) {
@@ -1540,21 +1551,18 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*else if (cardName.equals("Deadly Grub")) {
-            final Command destroy = new Command() {
-                private static final long serialVersionUID = -4352349741511065318L;
-
-                @Override
-                public void execute() {
-                    if (card.getCounters(Counters.TIME) <= 0) {
-                        CardFactoryUtil.makeToken("Insect", "G 6 1 Insect", card.getController(), "G", new String[] {
-                                "Creature", "Insect" }, 6, 1, new String[] { "Shroud" });
-                    }
-                }
-            };
-
-            card.addDestroyCommand(destroy);
-        }*/ // *************** END ************ END **************************
+        /*
+         * else if (cardName.equals("Deadly Grub")) { final Command destroy =
+         * new Command() { private static final long serialVersionUID =
+         * -4352349741511065318L;
+         * 
+         * @Override public void execute() { if (card.getCounters(Counters.TIME)
+         * <= 0) { CardFactoryUtil.makeToken("Insect", "G 6 1 Insect",
+         * card.getController(), "G", new String[] { "Creature", "Insect" }, 6,
+         * 1, new String[] { "Shroud" }); } } };
+         * 
+         * card.addDestroyCommand(destroy); }
+         */// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Kinsbaile Borderguard")) {
@@ -2617,7 +2625,8 @@ public class CardFactoryCreatures {
                 theCost = "1 R";
             } else if (cardName.equals("Shrewd Hatchling")) {
                 theCost = "UR";
-            } else { // if (cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
+            } else { // if (cardName.equals("Spin Engine") ||
+                     // cardName.equals("Screeching Griffin")) {
                 theCost = "R";
             }
 
@@ -2662,7 +2671,7 @@ public class CardFactoryCreatures {
                     final CardList arts = player.getCardsIn(Zone.Battlefield).getType("Artifact");
 
                     if (player.isComputer()) {
-                        //SVar:RemAIDeck:True
+                        // SVar:RemAIDeck:True
                     } else { // this is the human resolution
                         final Input target = new Input() {
                             private static final long serialVersionUID = -789722084164422578L;

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -378,11 +395,11 @@ public class AbilityFactoryPermanentState {
 
             if (untapList.getNotType("Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(untapList); // if
-                                                                        // only
-                                                                        // creatures
-                                                                        // take
-                                                                        // the
-                                                                        // best
+                                                                       // only
+                                                                       // creatures
+                                                                       // take
+                                                                       // the
+                                                                       // best
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(untapList, sa, false);
             }
@@ -498,10 +515,10 @@ public class AbilityFactoryPermanentState {
 
             if (tapList.getNotType("Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
-                                                                      // creatures
-                                                                      // take
-                                                                      // the
-                                                                      // best
+                                                                     // creatures
+                                                                     // take
+                                                                     // the
+                                                                     // best
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
@@ -551,8 +568,7 @@ public class AbilityFactoryPermanentState {
             }
 
             for (final Card tgtC : tgtCards) {
-                if (AllZoneUtil.isCardInPlay(tgtC)
-                        && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+                if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                     tgtC.untap();
                 }
             }
@@ -947,10 +963,10 @@ public class AbilityFactoryPermanentState {
 
             if (tapList.getNotType("Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
-                                                                      // creatures
-                                                                      // take
-                                                                      // the
-                                                                      // best
+                                                                     // creatures
+                                                                     // take
+                                                                     // the
+                                                                     // best
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }
@@ -1067,10 +1083,10 @@ public class AbilityFactoryPermanentState {
 
             if (tapList.getNotType("Creature").size() == 0) {
                 choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
-                                                                      // creatures
-                                                                      // take
-                                                                      // the
-                                                                      // best
+                                                                     // creatures
+                                                                     // take
+                                                                     // the
+                                                                     // best
             } else {
                 choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
             }

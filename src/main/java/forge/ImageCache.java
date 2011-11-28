@@ -1,7 +1,21 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
-
-import static java.lang.Double.parseDouble;
-import static java.lang.Math.min;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -58,6 +72,7 @@ public class ImageCache {
 
     static {
         IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+            @Override
             public BufferedImage apply(String key) {
                 try {
                     // DEBUG
@@ -68,33 +83,34 @@ public class ImageCache {
                      */
                     // DEBUG
                     // System.out.printf("New Image for key: %s%n", key);
-                    if (key.endsWith(NORMAL)) {
+                    if (key.endsWith(ImageCache.NORMAL)) {
                         // normal
-                        key = key.substring(0, key.length() - NORMAL.length());
-                        return getNormalSizeImage(IMAGE_CACHE.get(key));
-                    } else if (key.endsWith(TAPPED)) {
+                        key = key.substring(0, key.length() - ImageCache.NORMAL.length());
+                        return ImageCache.getNormalSizeImage(ImageCache.IMAGE_CACHE.get(key));
+                    } else if (key.endsWith(ImageCache.TAPPED)) {
                         // tapped
-                        key = key.substring(0, key.length() - TAPPED.length());
-                        return getTappedSizeImage(IMAGE_CACHE.get(key));
+                        key = key.substring(0, key.length() - ImageCache.TAPPED.length());
+                        return ImageCache.getTappedSizeImage(ImageCache.IMAGE_CACHE.get(key));
                     }
-                    Matcher m = FULL_SIZE.matcher(key);
+                    final Matcher m = ImageCache.FULL_SIZE.matcher(key);
 
                     if (m.matches()) {
                         // full size
                         key = m.group(1);
-                        return getFullSizeImage(IMAGE_CACHE.get(key), parseDouble(m.group(2)));
+                        return ImageCache.getFullSizeImage(ImageCache.IMAGE_CACHE.get(key),
+                                Double.parseDouble(m.group(2)));
                     } else {
                         // original
                         File path;
-                        if (key.endsWith(TOKEN)) {
-                            key = key.substring(0, key.length() - TOKEN.length());
+                        if (key.endsWith(ImageCache.TOKEN)) {
+                            key = key.substring(0, key.length() - ImageCache.TOKEN.length());
                             path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
                         } else {
                             path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
                         }
 
                         File file = null;
-                        String fName = key.endsWith(".png") ? key : key + ".jpg";
+                        final String fName = key.endsWith(".png") ? key : key + ".jpg";
                         file = new File(path, fName);
                         if (!file.exists()) {
                             // DEBUG
@@ -102,10 +118,10 @@ public class ImageCache {
                             // + file);
                             return null;
                         }
-                        BufferedImage image = ImageUtil.getImage(file);
+                        final BufferedImage image = ImageUtil.getImage(file);
                         return image;
                     }
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     // DEBUG
                     // System.err.println("Exception, no image created");
                     if (ex instanceof ComputationException) {
@@ -126,13 +142,13 @@ public class ImageCache {
      * @return a {@link java.awt.image.BufferedImage} object.
      */
     public static BufferedImage getImage(final Card card) {
-        String key = card.isFaceDown() ? "Morph" : getKey(card);
+        String key = card.isFaceDown() ? "Morph" : ImageCache.getKey(card);
         if (card.isTapped()) {
-            key += TAPPED;
+            key += ImageCache.TAPPED;
         } else {
-            key += NORMAL;
+            key += ImageCache.NORMAL;
         }
-        return getImage(key);
+        return ImageCache.getImage(key);
     }
 
     /**
@@ -147,20 +163,20 @@ public class ImageCache {
      * @return a {@link java.awt.image.BufferedImage} object.
      */
     public static BufferedImage getImage(final Card card, final int width, final int height) {
-        String key = (card.isFaceDown() && card.getController().isComputer()) ? "Morph" : getKey(card);
-        BufferedImage original = getImage(key);
+        final String key = (card.isFaceDown() && card.getController().isComputer()) ? "Morph" : ImageCache.getKey(card);
+        final BufferedImage original = ImageCache.getImage(key);
         if (original == null) {
             return null;
         }
 
-        double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
+        double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling, scaling option in menu
         // ?
-        if (scale > 1 && !isScaleLargerThanOriginal()) {
+        if ((scale > 1) && !ImageCache.isScaleLargerThanOriginal()) {
             scale = 1;
         }
 
-        return getImage(key + "#" + scale);
+        return ImageCache.getImage(key + "#" + scale);
     }
 
     /**
@@ -175,20 +191,20 @@ public class ImageCache {
      * @return the image
      */
     public static BufferedImage getImage(final InventoryItem card, final int width, final int height) {
-        String key = card.getImageFilename();
-        BufferedImage original = getImage(key);
+        final String key = card.getImageFilename();
+        final BufferedImage original = ImageCache.getImage(key);
         if (original == null) {
             return null;
         }
 
-        double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
+        double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling, scaling option in menu
         // ?
-        if (scale > 1 && !isScaleLargerThanOriginal()) {
+        if ((scale > 1) && !ImageCache.isScaleLargerThanOriginal()) {
             scale = 1;
         }
 
-        return getImage(key + "#" + scale);
+        return ImageCache.getImage(key + "#" + scale);
     }
 
     /**
@@ -201,8 +217,8 @@ public class ImageCache {
      * @return a {@link java.awt.image.BufferedImage} object.
      */
     public static BufferedImage getOriginalImage(final Card card) {
-        String key = (card.isFaceDown() && card.getController().isComputer()) ? "Morph" : getKey(card);
-        return getImage(key);
+        final String key = (card.isFaceDown() && card.getController().isComputer()) ? "Morph" : ImageCache.getKey(card);
+        return ImageCache.getImage(key);
     }
 
     /**
@@ -214,21 +230,21 @@ public class ImageCache {
      */
     private static BufferedImage getImage(final String key) {
         try {
-            BufferedImage image = IMAGE_CACHE.get(key);
+            BufferedImage image = ImageCache.IMAGE_CACHE.get(key);
             // if an image is still cached and it was not the expected size,
             // drop it
-            if (!isExpectedSize(key, image)) {
-                IMAGE_CACHE.remove(key);
-                image = IMAGE_CACHE.get(key);
+            if (!ImageCache.isExpectedSize(key, image)) {
+                ImageCache.IMAGE_CACHE.remove(key);
+                image = ImageCache.IMAGE_CACHE.get(key);
             }
             return image;
-        } catch (NullPointerException ex) {
+        } catch (final NullPointerException ex) {
             // unfortunately NullOutputException, thrown when apply() returns
             // null, is not public
             // NullOutputException is a subclass of NullPointerException
             // legitimate, happens when a card has no image
             return null;
-        } catch (ComputationException ex) {
+        } catch (final ComputationException ex) {
             if (ex.getCause() instanceof NullPointerException) {
                 return null;
             }
@@ -247,12 +263,12 @@ public class ImageCache {
      * @return a boolean.
      */
     private static boolean isExpectedSize(final String key, final BufferedImage image) {
-        if (key.endsWith(NORMAL)) {
+        if (key.endsWith(ImageCache.NORMAL)) {
             // normal
-            return image.getWidth() == Constant.Runtime.WIDTH[0] && image.getHeight() == Constant.Runtime.HEIGHT[0];
-        } else if (key.endsWith(TAPPED)) {
+            return (image.getWidth() == Constant.Runtime.WIDTH[0]) && (image.getHeight() == Constant.Runtime.HEIGHT[0]);
+        } else if (key.endsWith(ImageCache.TAPPED)) {
             // tapped
-            return image.getWidth() == Constant.Runtime.HEIGHT[0] && image.getHeight() == Constant.Runtime.WIDTH[0];
+            return (image.getWidth() == Constant.Runtime.HEIGHT[0]) && (image.getHeight() == Constant.Runtime.WIDTH[0]);
         } else {
             // original & full is never wrong
             return true;
@@ -269,7 +285,7 @@ public class ImageCache {
     private static String getKey(final Card card) {
 
         if (card.isToken() && !card.isCopiedToken()) {
-            return GuiDisplayUtil.cleanString(card.getImageName()) + TOKEN;
+            return GuiDisplayUtil.cleanString(card.getImageName()) + ImageCache.TOKEN;
         }
 
         return card.getImageFilename(); // key;
@@ -283,12 +299,12 @@ public class ImageCache {
      * @return a {@link java.awt.image.BufferedImage} object.
      */
     private static BufferedImage getNormalSizeImage(final BufferedImage original) {
-        int srcWidth = original.getWidth();
-        int srcHeight = original.getHeight();
-        int tgtWidth = Constant.Runtime.WIDTH[0];
-        int tgtHeight = Constant.Runtime.HEIGHT[0];
+        final int srcWidth = original.getWidth();
+        final int srcHeight = original.getHeight();
+        final int tgtWidth = Constant.Runtime.WIDTH[0];
+        final int tgtHeight = Constant.Runtime.HEIGHT[0];
 
-        if (srcWidth == tgtWidth && srcHeight == tgtHeight) {
+        if ((srcWidth == tgtWidth) && (srcHeight == tgtHeight)) {
             return original;
         }
 
@@ -308,10 +324,10 @@ public class ImageCache {
         // g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6,
         // 1.0f):original, at, null);
         // g2d.dispose();
-        ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight); // defaults
-                                                                     // to
-                                                                     // Lanczos3
-        BufferedImage image = resampleOp.filter(original, null);
+        final ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight); // defaults
+        // to
+        // Lanczos3
+        final BufferedImage image = resampleOp.filter(original, null);
         return image;
     }
 
@@ -328,10 +344,10 @@ public class ImageCache {
          * int srcWidth = original.getWidth(); int srcHeight =
          * original.getHeight();
          */
-        int tgtWidth = Constant.Runtime.WIDTH[0];
-        int tgtHeight = Constant.Runtime.HEIGHT[0];
+        final int tgtWidth = Constant.Runtime.WIDTH[0];
+        final int tgtHeight = Constant.Runtime.HEIGHT[0];
 
-        AffineTransform at = new AffineTransform();
+        final AffineTransform at = new AffineTransform();
         // at.scale((double) tgtWidth / srcWidth, (double) tgtHeight /
         // srcHeight);
         at.translate(tgtHeight, 0);
@@ -348,12 +364,12 @@ public class ImageCache {
         // g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6,
         // 1.0f):original, at, null);
         // g2d.dispose();
-        ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight); // defaults
-                                                                     // to
-                                                                     // Lanczos3
-        BufferedImage image = resampleOp.filter(original, null);
-        BufferedImage rotatedImage = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = (Graphics2D) rotatedImage.getGraphics();
+        final ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight); // defaults
+        // to
+        // Lanczos3
+        final BufferedImage image = resampleOp.filter(original, null);
+        final BufferedImage rotatedImage = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D g2d = (Graphics2D) rotatedImage.getGraphics();
         g2d.drawImage(image, at, null);
         g2d.dispose();
         return rotatedImage;
@@ -386,9 +402,9 @@ public class ImageCache {
         // g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6,
         // 1.0f):original, at, null);
         // g2d.dispose();
-        ResampleOp resampleOp = new ResampleOp((int) (original.getWidth() * scale),
+        final ResampleOp resampleOp = new ResampleOp((int) (original.getWidth() * scale),
                 (int) (original.getHeight() * scale)); // defaults to Lanczos3
-        BufferedImage image = resampleOp.filter(original, null);
+        final BufferedImage image = resampleOp.filter(original, null);
         return image;
     }
 
@@ -398,20 +414,29 @@ public class ImageCache {
      * </p>
      */
     public static void clear() {
-        IMAGE_CACHE.clear();
+        ImageCache.IMAGE_CACHE.clear();
     }
 
     /**
+     * Checks if is scale larger than original.
+     * 
      * @return the scaleLargerThanOriginal
      */
     public static boolean isScaleLargerThanOriginal() {
-        return scaleLargerThanOriginal;
+        return ImageCache.scaleLargerThanOriginal;
     }
 
     /**
-     * @param scaleLargerThanOriginal the scaleLargerThanOriginal to set
+     * Sets the scale larger than original.
+     * 
+     * @param scaleLargerThanOriginal
+     *            the scaleLargerThanOriginal to set
      */
-    public static void setScaleLargerThanOriginal(boolean scaleLargerThanOriginal) {
-        ImageCache.scaleLargerThanOriginal = scaleLargerThanOriginal; // TODO: Add 0 to parameter's name.
+    public static void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal) {
+        ImageCache.scaleLargerThanOriginal = scaleLargerThanOriginal; // TODO:
+                                                                      // Add 0
+                                                                      // to
+                                                                      // parameter's
+                                                                      // name.
     }
 }

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -74,16 +91,21 @@ public final class Constant {
         public static final int[] STACK_OFFSET = new int[1];
 
         /**
+         * Gets the game type.
+         * 
          * @return the gameType
          */
         public static GameType getGameType() {
-            return gameType;
+            return Runtime.gameType;
         }
 
         /**
-         * @param gameType the gameType to set
+         * Sets the game type.
+         * 
+         * @param gameType
+         *            the gameType to set
          */
-        public static void setGameType(GameType gameType) {
+        public static void setGameType(final GameType gameType) {
             Runtime.gameType = gameType; // TODO: Add 0 to parameter's name.
         }
     }
@@ -105,14 +127,15 @@ public final class Constant {
     /**
      * The Interface Ability.
      */
-/*    public interface Ability {
-
-        *//** The Triggered. *//*
-        String TRIGGERED = "Triggered";
-
-        *//** The Activated. *//*
-        String ACTIVATED = "Activated";
-    }*/
+    /*
+     * public interface Ability {
+     *//** The Triggered. */
+    /*
+     * String TRIGGERED = "Triggered";
+     *//** The Activated. */
+    /*
+     * String ACTIVATED = "Activated"; }
+     */
 
     /**
      * The Interface Phase.
@@ -205,8 +228,8 @@ public final class Constant {
             if ("All".equals(value)) {
                 return null;
             }
-            String valToCompate = value.trim();
-            for (Zone v : Zone.values()) {
+            final String valToCompate = value.trim();
+            for (final Zone v : Zone.values()) {
                 if (v.name().compareToIgnoreCase(valToCompate) == 0) {
                     return v;
                 }
@@ -222,9 +245,9 @@ public final class Constant {
          * @return the list
          */
         public static List<Zone> listValueOf(final String values) {
-            List<Zone> result = new ArrayList<Constant.Zone>();
-            for (String s : values.split("[, ]+")) {
-                result.add(smartValueOf(s));
+            final List<Zone> result = new ArrayList<Constant.Zone>();
+            for (final String s : values.split("[, ]+")) {
+                result.add(Zone.smartValueOf(s));
             }
             return result;
         }
@@ -254,16 +277,18 @@ public final class Constant {
         public static final String COLORLESS = "colorless";
         // color order "wubrg"
         /** The Colors. */
-        public static final String[] COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS };
+        public static final String[] COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN,
+                Color.COLORLESS };
 
         /** The only colors. */
-        public static final String[] ONLY_COLORS = { WHITE, BLUE, BLACK, RED, GREEN };
+        public static final String[] ONLY_COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN };
 
         /** The Snow. */
         public static final String SNOW = "snow";
 
         /** The Mana colors. */
-        public static final String[] MANA_COLORS = { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS, SNOW };
+        public static final String[] MANA_COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN,
+                Color.COLORLESS, Color.SNOW };
 
         /** The loaded. */
         public static final boolean[] LOADED = { false };

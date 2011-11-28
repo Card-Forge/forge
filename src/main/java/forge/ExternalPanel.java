@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.awt.BorderLayout;
@@ -29,7 +46,7 @@ public class ExternalPanel extends JPanel {
 
     /** Constant <code>serialVersionUID=9098962430872706173L</code>. */
     private static final long serialVersionUID = 9098962430872706173L;
-    private Component child, head;
+    private final Component child, head;
     private JFrame frame;
 
     /**
@@ -57,13 +74,13 @@ public class ExternalPanel extends JPanel {
     public ExternalPanel(final Component child, final String side) {
         super(new BorderLayout());
         this.child = child;
-        add(this.child);
-        JButton b = new JButton();
+        this.add(this.child);
+        final JButton b = new JButton();
         b.setPreferredSize(new Dimension(6, 6));
         b.setToolTipText("Click to move component into an extra Window");
         b.addActionListener(new ExternListener());
-        head = b;
-        setHeadSide(side);
+        this.head = b;
+        this.setHeadSide(side);
     }
 
     /**
@@ -75,14 +92,14 @@ public class ExternalPanel extends JPanel {
      *            a {@link java.lang.String} object.
      */
     public final void setHeadSide(final String side) {
-        remove(head);
-        add(head, side);
+        this.remove(this.head);
+        this.add(this.head, side);
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void addImpl(final Component comp, final Object constraints, final int index) {
-        if (comp != child && comp != head) {
+        if ((comp != this.child) && (comp != this.head)) {
             throw new IllegalArgumentException();
         }
         super.addImpl(comp, constraints, index);
@@ -90,36 +107,37 @@ public class ExternalPanel extends JPanel {
 
     private final class ExternListener extends WindowAdapter implements ActionListener {
         private void bringOut() {
-            frame = new JFrame();
-            frame.addWindowListener(this);
-            frame.addWindowStateListener(this);
-            frame.add(child);
-            frame.getRootPane().setPreferredSize(child.getSize());
-            frame.pack();
-            frame.setVisible(true);
-            validate();
-            repaint();
+            ExternalPanel.this.frame = new JFrame();
+            ExternalPanel.this.frame.addWindowListener(this);
+            ExternalPanel.this.frame.addWindowStateListener(this);
+            ExternalPanel.this.frame.add(ExternalPanel.this.child);
+            ExternalPanel.this.frame.getRootPane().setPreferredSize(ExternalPanel.this.child.getSize());
+            ExternalPanel.this.frame.pack();
+            ExternalPanel.this.frame.setVisible(true);
+            ExternalPanel.this.validate();
+            ExternalPanel.this.repaint();
         }
 
         private void bringIn() {
-            add(child);
-            frame.dispose();
-            frame = null;
-            validate();
-            repaint();
+            ExternalPanel.this.add(ExternalPanel.this.child);
+            ExternalPanel.this.frame.dispose();
+            ExternalPanel.this.frame = null;
+            ExternalPanel.this.validate();
+            ExternalPanel.this.repaint();
         }
 
+        @Override
         public void actionPerformed(final ActionEvent e) {
-            if (frame == null) {
-                bringOut();
+            if (ExternalPanel.this.frame == null) {
+                this.bringOut();
             } else {
-                bringIn();
+                this.bringIn();
             }
         }
 
         @Override
         public void windowClosing(final WindowEvent e) {
-            bringIn();
+            this.bringIn();
         }
     }
 }

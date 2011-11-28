@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -28,7 +45,7 @@ public class CardListUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList filterToughness(final CardList in, final int atLeastToughness) {
-        CardList out = new CardList();
+        final CardList out = new CardList();
         for (int i = 0; i < in.size(); i++) {
             if (in.get(i).getNetDefense() <= atLeastToughness) {
                 out.add(in.get(i));
@@ -49,7 +66,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortDefense(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 return b.getNetDefense() - a.getNetDefense();
             }
@@ -67,7 +85,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortAttack(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
 
                 if (CombatUtil.isDoranInPlay()) {
@@ -91,7 +110,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortByEvaluateCreature(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 return CardFactoryUtil.evaluateCreature(b) - CardFactoryUtil.evaluateCreature(a);
             }
@@ -110,7 +130,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortByMostExpensive(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 return b.getCMC() - a.getCMC();
             }
@@ -128,7 +149,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortAttackLowFirst(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 if (CombatUtil.isDoranInPlay()) {
                     return a.getNetDefense() - b.getNetDefense();
@@ -149,7 +171,7 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortNonFlyingFirst(final CardList list) {
-        sortFlying(list);
+        CardListUtil.sortFlying(list);
         list.reverse();
     } // sortNonFlyingFirst
 
@@ -163,7 +185,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortFlying(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 if (a.hasKeyword("Flying") && b.hasKeyword("Flying")) {
                     return 0;
@@ -192,7 +215,8 @@ public class CardListUtil {
      */
     public static void sortByKeyword(final CardList list, final String kw) {
         final String keyword = kw;
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 if (a.hasKeyword(keyword) && b.hasKeyword(keyword)) {
                     return 0;
@@ -217,22 +241,23 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortByDestroyEffect(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
-                ArrayList<String> aKeywords = a.getKeyword();
-                ArrayList<String> bKeywords = b.getKeyword();
+                final ArrayList<String> aKeywords = a.getKeyword();
+                final ArrayList<String> bKeywords = b.getKeyword();
 
                 boolean aContains = false;
                 boolean bContains = false;
 
-                for (String kw : aKeywords) {
+                for (final String kw : aKeywords) {
                     if (kw.startsWith("Whenever") && kw.contains("into a graveyard from the battlefield,")) {
                         aContains = true;
                         break;
                     }
                 }
 
-                for (String kw : bKeywords) {
+                for (final String kw : bKeywords) {
                     if (kw.startsWith("Whenever") && kw.contains("into a graveyard from the battlefield,")) {
                         bContains = true;
                         break;
@@ -265,7 +290,8 @@ public class CardListUtil {
         arrList.add("Timber Protector");
         arrList.add("Eldrazi Monument");
 
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 if (arrList.contains(a.getName()) && arrList.contains(b.getName())) {
                     return 0;
@@ -290,7 +316,8 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortByTapped(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
 
                 if (a.isTapped() && b.isTapped()) {
@@ -316,10 +343,11 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortByName(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
-                String aName = a.getName();
-                String bName = b.getName();
+                final String aName = a.getName();
+                final String bName = b.getName();
 
                 return aName.compareTo(bName);
             }
@@ -340,7 +368,8 @@ public class CardListUtil {
      */
     public static void sortBySelectable(final CardList list, final String type) {
         final String t = type;
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
                 if (a.isType(t) && b.isType(t)) {
                     return 0;
@@ -365,10 +394,11 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortByTextLen(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
-                int aLen = a.getText().length();
-                int bLen = b.getText().length();
+                final int aLen = a.getText().length();
+                final int bLen = b.getText().length();
 
                 if (aLen == bLen) {
                     return 0;
@@ -394,10 +424,11 @@ public class CardListUtil {
      *            a {@link forge.CardList} object.
      */
     public static void sortCMC(final CardList list) {
-        Comparator<Card> com = new Comparator<Card>() {
+        final Comparator<Card> com = new Comparator<Card>() {
+            @Override
             public int compare(final Card a, final Card b) {
-                int cmcA = CardUtil.getConvertedManaCost(a.getManaCost());
-                int cmcB = CardUtil.getConvertedManaCost(b.getManaCost());
+                final int cmcA = CardUtil.getConvertedManaCost(a.getManaCost());
+                final int cmcB = CardUtil.getConvertedManaCost(b.getManaCost());
 
                 if (cmcA == cmcB) {
                     return 0;
@@ -428,6 +459,7 @@ public class CardListUtil {
      */
     public static CardList getColor(final CardList list, final String color) {
         return list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 return CardUtil.getColors(c).contains(color);
             }
@@ -445,6 +477,7 @@ public class CardListUtil {
      */
     public static CardList getGoldCards(final CardList list) {
         return list.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
                 return CardUtil.getColors(c).size() >= 2;
             }
@@ -554,7 +587,7 @@ public class CardListUtil {
             return null;
         }
 
-        CardList subList = new CardList();
+        final CardList subList = new CardList();
         while (subList.size() < amount) {
             c.shuffle();
             subList.add(c.get(0));

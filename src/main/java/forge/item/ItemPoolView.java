@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.item;
 
 import java.util.ArrayList;
@@ -90,12 +107,12 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
 
     /** The my class. */
     private final Class<T> myClass; // class does not keep this in runtime by
-                                      // itself
+                                    // itself
 
     // same thing as above, it was copied to provide sorting (needed by table
     // views in deck editors)
     /** The cards list ordered. */
-    private List<Entry<T, Integer>> cardsListOrdered = new ArrayList<Map.Entry<T, Integer>>();
+    private final List<Entry<T, Integer>> cardsListOrdered = new ArrayList<Map.Entry<T, Integer>>();
 
     /** The is list in sync. */
     private boolean isListInSync = false;
@@ -236,65 +253,85 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     }
 
     /**
+     * Gets the cards.
+     * 
      * @return the cards
      */
     public Map<T, Integer> getCards() {
-        return cards;
+        return this.cards;
     }
 
     /**
-     * @param cards the cards to set
+     * Sets the cards.
+     * 
+     * @param cards
+     *            the cards to set
      */
-    public void setCards(Map<T, Integer> cards) {
+    public void setCards(final Map<T, Integer> cards) {
         this.cards = cards; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the my class.
+     * 
      * @return the myClass
      */
     public Class<T> getMyClass() {
-        return myClass;
+        return this.myClass;
     }
 
     /**
+     * Checks if is list in sync.
+     * 
      * @return the isListInSync
      */
     public boolean isListInSync() {
-        return isListInSync;
+        return this.isListInSync;
     }
 
     /**
-     * @param isListInSync the isListInSync to set
+     * Sets the list in sync.
+     * 
+     * @param isListInSync
+     *            the isListInSync to set
      */
-    public void setListInSync(boolean isListInSync) {
+    public void setListInSync(final boolean isListInSync) {
         this.isListInSync = isListInSync; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the fn to card.
+     * 
      * @return the fnToCard
      */
     public Lambda1<CardRules, Entry<T, Integer>> getFnToCard() {
-        return fnToCard;
+        return this.fnToCard;
     }
 
     /**
+     * Gets the fn to card name.
+     * 
      * @return the fnToCardName
      */
     public Lambda1<String, Entry<T, Integer>> getFnToCardName() {
-        return fnToCardName;
+        return this.fnToCardName;
     }
 
     /**
+     * Gets the fn to count.
+     * 
      * @return the fnToCount
      */
     public Lambda1<Integer, Entry<T, Integer>> getFnToCount() {
-        return fnToCount;
+        return this.fnToCount;
     }
 
     /**
+     * Gets the fn to printed.
+     * 
      * @return the fnToPrinted
      */
     public Lambda1<T, Entry<T, Integer>> getFnToPrinted() {
-        return fnToPrinted;
+        return this.fnToPrinted;
     }
 }

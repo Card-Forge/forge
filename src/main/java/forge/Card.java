@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -128,7 +145,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Turn face down.
-     *
+     * 
      * @return true, if successful
      */
     public boolean turnFaceDown() {
@@ -142,7 +159,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Turn face up.
-     *
+     * 
      * @return true, if successful
      */
     public boolean turnFaceUp() {
@@ -358,7 +375,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private long timestamp = -1; // permanents on the battlefield
 
-    //stack of set power/toughness
+    // stack of set power/toughness
     private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>();
     private int baseLoyalty = 0;
     private String baseAttackString = null;
@@ -932,7 +949,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setCreatureBlockedThisCombat(final boolean b) {
         this.creatureBlockedThisCombat = b;
         if (b) {
-            setCreatureBlockedThisTurn(true);
+            this.setCreatureBlockedThisTurn(true);
         }
     }
 
@@ -981,7 +998,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setCreatureGotBlockedThisCombat(final boolean b) {
         this.creatureGotBlockedThisCombat = b;
         if (b) {
-            setCreatureGotBlockedThisTurn(true);
+            this.setCreatureGotBlockedThisTurn(true);
         }
     }
 
@@ -1046,7 +1063,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setDealtDmgToHumanThisTurn(final boolean b) {
         this.dealtDmgToHumanThisTurn = b;
         if (b) {
-            setDealtDmgToHumanThisGame(true);
+            this.setDealtDmgToHumanThisGame(true);
         }
     }
 
@@ -1072,7 +1089,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setDealtDmgToComputerThisTurn(final boolean b) {
         this.dealtDmgToComputerThisTurn = b;
         if (b) {
-            setDealtDmgToComputerThisGame(true);
+            this.setDealtDmgToComputerThisGame(true);
         }
     }
 
@@ -1382,12 +1399,23 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.hasDoubleStrike() || !this.hasFirstStrike();
     }
 
+    /**
+     * Can have counters placed on it.
+     * 
+     * @param counterName
+     *            the counter name
+     * @return true, if successful
+     */
     public final boolean canHaveCountersPlacedOnIt(final Counters counterName) {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
         }
         if (counterName.equals(Counters.M1M1)) {
-            for (Card c : AllZoneUtil.getCreaturesInPlay(this.getController())) { //look for Melira, Sylvok Outcast
+            for (final Card c : AllZoneUtil.getCreaturesInPlay(this.getController())) { // look
+                                                                                        // for
+                                                                                        // Melira,
+                                                                                        // Sylvok
+                                                                                        // Outcast
                 if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
                     return false;
                 }
@@ -1409,7 +1437,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void addCounterFromNonEffect(final Counters counterName, final int n) {
-        if (!canHaveCountersPlacedOnIt(counterName)) {
+        if (!this.canHaveCountersPlacedOnIt(counterName)) {
             return;
         }
         if (this.counters.containsKey(counterName)) {
@@ -1460,7 +1488,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void addCounter(final Counters counterName, final int n) {
-        if (!canHaveCountersPlacedOnIt(counterName)) {
+        if (!this.canHaveCountersPlacedOnIt(counterName)) {
             return;
         }
         final int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(this.getController());
@@ -1621,7 +1649,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a boolean.
      */
     public final void setCounter(final Counters counterName, final int n, final boolean bSetValue) {
-        if (!canHaveCountersPlacedOnIt(counterName)) {
+        if (!this.canHaveCountersPlacedOnIt(counterName)) {
             return;
         }
         // sometimes you just need to set the value without being affected by
@@ -4054,7 +4082,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public final void unEquipAllCards() {
-        //while there exists equipment, unequip the first one
+        // while there exists equipment, unequip the first one
         while (this.equippedBy.size() > 0) {
             this.equippedBy.get(0).unEquipCard(this);
         }
@@ -5372,7 +5400,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void clearAllKeywords() {
         this.getCharacteristics().getIntrinsicKeyword().clear();
         this.extrinsicKeyword.clear();
-        //Hidden keywords won't be displayed on the card
+        // Hidden keywords won't be displayed on the card
         this.hiddenExtrinsicKeyword.clear();
     }
 
@@ -6525,7 +6553,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        //Inclusive restrictions are Card types
+        // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
 
         if (incR[0].equals("Spell") && !this.isSpell()) {
@@ -6687,8 +6715,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("AttachedTo")) {
             final String restriction = property.split("AttachedTo ")[1];
             if (((this.enchanting == null) || !this.enchanting.isValid(restriction, sourceController, source))
-                    && (this.equipping.isEmpty() || !this.equipping.get(0)
-                            .isValid(restriction, sourceController, source))) {
+                    && (this.equipping.isEmpty() || !this.equipping.get(0).isValid(restriction, sourceController,
+                            source))) {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
@@ -6830,13 +6858,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
-            if (!(dealtDmgToHumanThisTurn && sourceController.isHuman())
-                    && !(dealtDmgToComputerThisTurn && sourceController.isComputer())) {
+            if (!(this.dealtDmgToHumanThisTurn && sourceController.isHuman())
+                    && !(this.dealtDmgToComputerThisTurn && sourceController.isComputer())) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
             if (!(source.dealtCombatDmgToHumanThisTurn && this.getController().isPlayer(AllZone.getHumanPlayer()))
-                    && !(source.dealtCombatDmgToComputerThisTurn && this.getController().isPlayer(AllZone.getComputerPlayer()))) {
+                    && !(source.dealtCombatDmgToComputerThisTurn && this.getController().isPlayer(
+                            AllZone.getComputerPlayer()))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
@@ -6844,37 +6873,37 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("attackedThisTurn")) {
-            if (!getCreatureAttackedThisTurn()) {
+            if (!this.getCreatureAttackedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
-            if (getController().isComputer() && !getCreatureAttackedLastComputerTurn()) {
+            if (this.getController().isComputer() && !this.getCreatureAttackedLastComputerTurn()) {
                 return false;
             }
-            if (getController().isHuman() && !getCreatureAttackedLastHumanTurn()) {
+            if (this.getController().isHuman() && !this.getCreatureAttackedLastHumanTurn()) {
                 return false;
             }
         } else if (property.startsWith("blockedThisTurn")) {
-            if (!getCreatureBlockedThisTurn()) {
+            if (!this.getCreatureBlockedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("gotBlockedThisTurn")) {
-            if (!getCreatureGotBlockedThisTurn()) {
+            if (!this.getCreatureGotBlockedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("notAttackedThisTurn")) {
-            if (getCreatureAttackedThisTurn()) {
+            if (this.getCreatureAttackedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("notAttackedLastTurn")) {
-            if (getController().isComputer() && getCreatureAttackedLastComputerTurn()) {
+            if (this.getController().isComputer() && this.getCreatureAttackedLastComputerTurn()) {
                 return false;
             }
-            if (getController().isHuman() && getCreatureAttackedLastHumanTurn()) {
+            if (this.getController().isHuman() && this.getCreatureAttackedLastHumanTurn()) {
                 return false;
             }
         } else if (property.startsWith("notBlockedThisTurn")) {
-            if (getCreatureBlockedThisTurn()) {
+            if (this.getCreatureBlockedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
@@ -7955,7 +7984,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addDamage(final Map<Card, Integer> sourcesMap) {
         for (final Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-            //damage prevention is already checked!
+            // damage prevention is already checked!
             this.addDamageAfterPrevention(entry.getValue(), entry.getKey(), true);
         }
     }
@@ -8467,7 +8496,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        //keywords don't work outside battlefield
+        // keywords don't work outside battlefield
         if (!this.isInZone(Constant.Zone.Battlefield)) {
             return true;
         }

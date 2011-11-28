@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 /**
@@ -40,11 +57,11 @@ public class CardManaCostShard {
      *            the img key
      */
     protected CardManaCostShard(final int value, final String sValue, final String imgKey) {
-        shard = value;
-        cmc = getCMC();
-        cmpc = getCmpCost();
-        stringValue = sValue;
-        imageKey = imgKey;
+        this.shard = value;
+        this.cmc = this.getCMC();
+        this.cmpc = this.getCmpCost();
+        this.stringValue = sValue;
+        this.imageKey = imgKey;
     }
 
     /** A bitmask to represent any mana symbol as an integer. */
@@ -169,14 +186,20 @@ public class CardManaCostShard {
     /** The Constant G2. */
     public static final CardManaCostShard G2 = new CardManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G", "2G");
 
-    private static final CardManaCostShard[] ALL_POSSIBLE = new CardManaCostShard[] { X, WHITE, BLUE, BLACK, RED, GREEN,
-            PW, PU, PB, PR, PG, WU, WB, WR, WG, UB, UR, UG, BR, BG, RG, W2, U2, B2, R2, G2 };
+    private static final CardManaCostShard[] ALL_POSSIBLE = new CardManaCostShard[] { CardManaCostShard.X,
+            CardManaCostShard.WHITE, CardManaCostShard.BLUE, CardManaCostShard.BLACK, CardManaCostShard.RED,
+            CardManaCostShard.GREEN, CardManaCostShard.PW, CardManaCostShard.PU, CardManaCostShard.PB,
+            CardManaCostShard.PR, CardManaCostShard.PG, CardManaCostShard.WU, CardManaCostShard.WB,
+            CardManaCostShard.WR, CardManaCostShard.WG, CardManaCostShard.UB, CardManaCostShard.UR,
+            CardManaCostShard.UG, CardManaCostShard.BR, CardManaCostShard.BG, CardManaCostShard.RG,
+            CardManaCostShard.W2, CardManaCostShard.U2, CardManaCostShard.B2, CardManaCostShard.R2,
+            CardManaCostShard.G2 };
 
     private int getCMC() {
-        if (0 != (shard & Atom.IS_X)) {
+        if (0 != (this.shard & Atom.IS_X)) {
             return 0;
         }
-        if (0 != (shard & Atom.OR_2_COLORLESS)) {
+        if (0 != (this.shard & Atom.OR_2_COLORLESS)) {
             return 2;
         }
         return 1;
@@ -191,27 +214,27 @@ public class CardManaCostShard {
      *         cost + 0.00001 * the number of X's in the cost
      */
     private float getCmpCost() {
-        if (0 != (shard & Atom.IS_X)) {
+        if (0 != (this.shard & Atom.IS_X)) {
             return 0.0001f;
         }
-        float cost = 0 != (shard & Atom.OR_2_COLORLESS) ? 2 : 1;
+        float cost = 0 != (this.shard & Atom.OR_2_COLORLESS) ? 2 : 1;
         // yes, these numbers are magic, slightly-magic
-        if (0 != (shard & Atom.WHITE)) {
+        if (0 != (this.shard & Atom.WHITE)) {
             cost += 0.0005f;
         }
-        if (0 != (shard & Atom.BLUE)) {
+        if (0 != (this.shard & Atom.BLUE)) {
             cost += 0.0020f;
         }
-        if (0 != (shard & Atom.BLACK)) {
+        if (0 != (this.shard & Atom.BLACK)) {
             cost += 0.0080f;
         }
-        if (0 != (shard & Atom.RED)) {
+        if (0 != (this.shard & Atom.RED)) {
             cost += 0.0320f;
         }
-        if (0 != (shard & Atom.GREEN)) {
+        if (0 != (this.shard & Atom.GREEN)) {
             cost += 0.1280f;
         }
-        if (0 != (shard & Atom.OR_2_LIFE)) {
+        if (0 != (this.shard & Atom.OR_2_LIFE)) {
             cost += 0.00003f;
         }
         return cost;
@@ -224,19 +247,19 @@ public class CardManaCostShard {
      */
     final byte getColorMask() {
         byte result = 0;
-        if (0 != (shard & Atom.WHITE)) {
+        if (0 != (this.shard & Atom.WHITE)) {
             result |= CardColor.WHITE;
         }
-        if (0 != (shard & Atom.BLUE)) {
+        if (0 != (this.shard & Atom.BLUE)) {
             result |= CardColor.BLUE;
         }
-        if (0 != (shard & Atom.BLACK)) {
+        if (0 != (this.shard & Atom.BLACK)) {
             result |= CardColor.BLACK;
         }
-        if (0 != (shard & Atom.RED)) {
+        if (0 != (this.shard & Atom.RED)) {
             result |= CardColor.RED;
         }
-        if (0 != (shard & Atom.GREEN)) {
+        if (0 != (this.shard & Atom.GREEN)) {
             result |= CardColor.GREEN;
         }
         return result;
@@ -250,9 +273,9 @@ public class CardManaCostShard {
      * @return the card mana cost shard
      */
     public static CardManaCostShard valueOf(final int atoms) {
-        for (int i = 0; i < ALL_POSSIBLE.length; i++) {
-            if (ALL_POSSIBLE[i].shard == atoms) {
-                return ALL_POSSIBLE[i];
+        for (final CardManaCostShard element : CardManaCostShard.ALL_POSSIBLE) {
+            if (element.shard == atoms) {
+                return element;
             }
         }
         throw new RuntimeException(String.format("Not fount: mana shard with profile = %x", atoms));
@@ -265,27 +288,33 @@ public class CardManaCostShard {
      */
     @Override
     public final String toString() {
-        return stringValue;
+        return this.stringValue;
     }
 
     /**
+     * Gets the cmc.
+     * 
      * @return the cmc
      */
     public int getCmc() {
-        return cmc;
+        return this.cmc;
     }
 
     /**
+     * Gets the cmpc.
+     * 
      * @return the cmpc
      */
     public float getCmpc() {
-        return cmpc;
+        return this.cmpc;
     }
 
     /**
+     * Gets the image key.
+     * 
      * @return the imageKey
      */
     public String getImageKey() {
-        return imageKey;
+        return this.imageKey;
     }
 }

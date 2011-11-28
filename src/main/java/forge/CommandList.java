@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -15,7 +32,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
     /** Constant <code>serialVersionUID=-1532687201812613302L</code>. */
     private static final long serialVersionUID = -1532687201812613302L;
 
-    private ArrayList<Command> a = new ArrayList<Command>();
+    private final ArrayList<Command> a = new ArrayList<Command>();
 
     /**
      * default constructor TODO Write javadoc for Constructor.
@@ -31,7 +48,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      *            a Command
      */
     public CommandList(final Command c) {
-        a.add(c);
+        this.a.add(c);
     }
 
     /**
@@ -41,8 +58,9 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * 
      * @return a {@link java.util.Iterator} object.
      */
+    @Override
     public final Iterator<Command> iterator() {
-        return a.iterator();
+        return this.a.iterator();
     }
 
     // bug fix, when token is pumped up like with Giant Growth
@@ -57,7 +75,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      *            a {@link forge.Command} object.
      */
     public final void add(final Command c) {
-        a.add(0, c);
+        this.a.add(0, c);
     }
 
     /**
@@ -70,7 +88,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * @return a {@link forge.Command} object.
      */
     public final Command get(final int i) {
-        return (Command) a.get(i);
+        return this.a.get(i);
     }
 
     /**
@@ -83,7 +101,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * @return a {@link forge.Command} object.
      */
     public final Command remove(final int i) {
-        return (Command) a.remove(i);
+        return this.a.remove(i);
     }
 
     /**
@@ -94,7 +112,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * @return a int.
      */
     public final int size() {
-        return a.size();
+        return this.a.size();
     }
 
     /**
@@ -103,7 +121,7 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * </p>
      */
     public final void clear() {
-        a.clear();
+        this.a.clear();
     }
 
     /**
@@ -111,9 +129,10 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
      * execute.
      * </p>
      */
+    @Override
     public final void execute() {
-        for (int i = 0; i < size(); i++) {
-            get(i).execute();
+        for (int i = 0; i < this.size(); i++) {
+            this.get(i).execute();
         }
     }
 

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.cost;
 
 import forge.Card;
@@ -16,7 +33,7 @@ public abstract class CostPart {
     private boolean isUndoable = false;
 
     /** The optional. */
-    //private boolean optional = false;
+    // private boolean optional = false;
 
     /** The optional type. */
     private String optionalType = null;
@@ -218,37 +235,52 @@ public abstract class CostPart {
     public abstract void refund(Card source);
 
     /**
-     * @param isReusableIn the isReusable to set
+     * Sets the reusable.
+     * 
+     * @param isReusableIn
+     *            the isReusable to set
      */
-    public void setReusable(boolean isReusableIn) {
+    public void setReusable(final boolean isReusableIn) {
         this.isReusable = isReusableIn;
     }
 
     /**
-     * @param amountIn the amount to set
+     * Sets the amount.
+     * 
+     * @param amountIn
+     *            the amount to set
      */
-    public void setAmount(String amountIn) {
+    public void setAmount(final String amountIn) {
         this.amount = amountIn;
     }
 
     /**
-     * @param typeIn the type to set
+     * Sets the type.
+     * 
+     * @param typeIn
+     *            the type to set
      */
-    public void setType(String typeIn) {
+    public void setType(final String typeIn) {
         this.type = typeIn;
     }
 
     /**
-     * @param typeDescriptionIn the typeDescription to set
+     * Sets the type description.
+     * 
+     * @param typeDescriptionIn
+     *            the typeDescription to set
      */
-    public void setTypeDescription(String typeDescriptionIn) {
+    public void setTypeDescription(final String typeDescriptionIn) {
         this.typeDescription = typeDescriptionIn;
     }
 
     /**
-     * @param isUndoableIn the isUndoable to set
+     * Sets the undoable.
+     * 
+     * @param isUndoableIn
+     *            the isUndoable to set
      */
-    public void setUndoable(boolean isUndoableIn) {
+    public void setUndoable(final boolean isUndoableIn) {
         this.isUndoable = isUndoableIn;
     }
 }

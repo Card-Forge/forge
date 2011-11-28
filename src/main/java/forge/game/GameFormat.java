@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.game;
 
 import java.util.Collections;
@@ -23,10 +40,13 @@ public final class GameFormat {
 
     /**
      * Instantiates a new game format.
-     *
-     * @param fName the f name
-     * @param sets the sets
-     * @param bannedCards the banned cards
+     * 
+     * @param fName
+     *            the f name
+     * @param sets
+     *            the sets
+     * @param bannedCards
+     *            the banned cards
      */
     public GameFormat(final String fName, final List<String> sets, final List<String> bannedCards) {
         this.name = fName;
@@ -46,13 +66,14 @@ public final class GameFormat {
     private Predicate<CardPrinted> buildFilterRules() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
         final Predicate<CardPrinted> allowSets = (this.allowedSetCodes == null) || this.allowedSetCodes.isEmpty() ? CardPrinted.Predicates.Presets.IS_TRUE
-                : Predicate.brigde(CardRules.Predicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES);
+                : Predicate.brigde(CardRules.Predicates.wasPrintedInSets(this.allowedSetCodes),
+                        CardPrinted.FN_GET_RULES);
         return Predicate.and(banNames, allowSets);
     }
 
     /**
      * Gets the name.
-     *
+     * 
      * @return the name
      */
     public String getName() {
@@ -61,7 +82,7 @@ public final class GameFormat {
 
     /**
      * Gets the filter rules.
-     *
+     * 
      * @return the filter rules
      */
     public Predicate<CardPrinted> getFilterRules() {
@@ -70,7 +91,7 @@ public final class GameFormat {
 
     /**
      * Gets the filter printed.
-     *
+     * 
      * @return the filter printed
      */
     public Predicate<CardPrinted> getFilterPrinted() {
@@ -79,15 +100,18 @@ public final class GameFormat {
 
     /**
      * Checks if is sets the legal.
-     *
-     * @param setCode the set code
+     * 
+     * @param setCode
+     *            the set code
      * @return true, if is sets the legal
      */
     public boolean isSetLegal(final String setCode) {
         return this.allowedSetCodes.isEmpty() || this.allowedSetCodes.contains(setCode);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override

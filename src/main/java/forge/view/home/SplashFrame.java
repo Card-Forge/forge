@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.home;
 
 import java.awt.Color;
@@ -86,7 +103,7 @@ public class SplashFrame extends JFrame {
         // Add disclaimer
         final JLabel lblDisclaimer = new JLabel(
                 "<html><center>Forge is not affiliated in any way with Wizards of the Coast."
-        + "<br>Forge is open source software, released under the GNU Public License.</center></html>");
+                        + "<br>Forge is open source software, released under the GNU Public License.</center></html>");
 
         lblDisclaimer.setBounds(0, SplashFrame.DISCLAIMER_TOP, splashWidthPx, SplashFrame.DISCLAIMER_HEIGHT);
 
@@ -130,10 +147,14 @@ public class SplashFrame extends JFrame {
         contentPane.getActionMap().put("escAction", new CloseAction());
 
         // Set UI to color splash bar fill with skin colors
-        UIManager.put("ProgressBar.background", skin.getClrProgress1());           // Unfilled state
-        UIManager.put("ProgressBar.selectionBackground", skin.getClrProgress2());  // Unfilled state
-        UIManager.put("ProgressBar.foreground", skin.getClrProgress3());           // Filled state
-        UIManager.put("ProgressBar.selectionForeground", skin.getClrProgress4());  // Filled state
+        UIManager.put("ProgressBar.background", skin.getClrProgress1()); // Unfilled
+                                                                         // state
+        UIManager.put("ProgressBar.selectionBackground", skin.getClrProgress2()); // Unfilled
+                                                                                  // state
+        UIManager.put("ProgressBar.foreground", skin.getClrProgress3()); // Filled
+                                                                         // state
+        UIManager.put("ProgressBar.selectionForeground", skin.getClrProgress4()); // Filled
+                                                                                  // state
         UIManager.put("ProgressBar.border", new LineBorder(skin.getClrTheme(), 0));
 
         // Instantiate model and view and tie together.
@@ -153,7 +174,8 @@ public class SplashFrame extends JFrame {
         final JLabel bgLabel = new JLabel(bgIcon);
 
         // Do not pass Integer.MIN_VALUE directly here; it must be packaged in
-        // an Integer instance. Otherwise, GUI components will not draw unless moused over.
+        // an Integer instance. Otherwise, GUI components will not draw unless
+        // moused over.
         this.getLayeredPane().add(bgLabel, Integer.valueOf(Integer.MIN_VALUE));
 
         bgLabel.setBounds(0, 0, splashWidthPx, splashHeightPx);

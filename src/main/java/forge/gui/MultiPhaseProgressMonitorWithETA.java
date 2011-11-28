@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui;
 
 import javax.swing.JDialog;
@@ -25,13 +42,17 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
     /**
      * Convenience for MultiPhaseProgressMonitorWithETA(title, numPhases,
      * totalUnitsFirstPhase, minUIUpdateIntervalSec, null).
-     *
-     * @param neoTitle the title to give the dialog box(es)
-     * @param numPhases the total number of phases to expect
-     * @param totalUnitsFirstPhase the total number of units that will be processed in the first
-     * phase
-     * @param minUIUpdateIntervalSec the approximate interval at which to update the dialog box in
-     * seconds
+     * 
+     * @param neoTitle
+     *            the title to give the dialog box(es)
+     * @param numPhases
+     *            the total number of phases to expect
+     * @param totalUnitsFirstPhase
+     *            the total number of units that will be processed in the first
+     *            phase
+     * @param minUIUpdateIntervalSec
+     *            the approximate interval at which to update the dialog box in
+     *            seconds
      * @see #MultiPhaseProgressMonitorWithETA(String,int,long,float,float[])
      */
     public MultiPhaseProgressMonitorWithETA(final String neoTitle, final int numPhases,
@@ -185,8 +206,11 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                 });
     }
 
-    /* (non-Javadoc)
-     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#setTotalUnitsThisPhase(long)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#
+     * setTotalUnitsThisPhase(long)
      */
     @Override
     /**
@@ -246,8 +270,11 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
     }
 
-    /* (non-Javadoc)
-     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#incrementUnitsCompletedThisPhase(long)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#
+     * incrementUnitsCompletedThisPhase(long)
      */
     @Override
     /**
@@ -320,8 +347,12 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
         }
     }
 
-    /* (non-Javadoc)
-     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#dispose()
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#dispose
+     * ()
      */
     @Override
     public final void dispose() {
@@ -336,9 +367,9 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
     /**
      * Gets the dialog.
-     *
+     * 
      * @return the JDialog for the current phase; use this judiciously to
-     * manipulate the dialog directly.
+     *         manipulate the dialog directly.
      */
     public final JDialog getDialog() {
         return this.dialog;

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.awt.event.ActionEvent;
@@ -206,13 +223,14 @@ public class DeckEditorQuestMenu extends JMenuBar {
 
         sb.append(String.format("%d Creatures%n-------------%n",
                 CardRules.Predicates.Presets.IS_CREATURE.aggregate(all, all.getFnToCard(), all.getFnToCount())));
-        for (final Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.IS_CREATURE.select(all, all.getFnToCard())) {
+        for (final Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.IS_CREATURE.select(all,
+                all.getFnToCard())) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
         }
 
         // spells
-        sb.append(String.format("%d Spells%n----------%n",
-                CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL.aggregate(all, all.getFnToCard(), all.getFnToCount())));
+        sb.append(String.format("%d Spells%n----------%n", CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL
+                .aggregate(all, all.getFnToCard(), all.getFnToCount())));
         for (final Entry<CardPrinted, Integer> e : CardRules.Predicates.Presets.IS_NON_CREATURE_SPELL.select(all,
                 all.getFnToCard())) {
             sb.append(String.format("%d x %s%n", e.getValue(), e.getKey().getName()));
@@ -400,8 +418,8 @@ public class DeckEditorQuestMenu extends JMenuBar {
     private final ActionListener renameDeckActionListener = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent a) {
-            final String deckName = DeckEditorQuestMenu.this
-                    .getUserInputGetDeckName(DeckEditorQuestMenu.this.questData.getDeckNames());
+            final String deckName = DeckEditorQuestMenu.this.getUserInputGetDeckName(DeckEditorQuestMenu.this.questData
+                    .getDeckNames());
 
             // check if user cancels
             if (StringUtils.isBlank(deckName)) {

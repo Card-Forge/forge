@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.awt.event.ActionEvent;
@@ -236,17 +253,21 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     } // getDeck()
 
     /**
+     * Gets the item listener updates display.
+     * 
      * @return the itemListenerUpdatesDisplay
      */
     public ItemListener getItemListenerUpdatesDisplay() {
-        return itemListenerUpdatesDisplay;
+        return this.itemListenerUpdatesDisplay;
     }
 
     /**
+     * Sets the item listener updates display.
+     * 
      * @param itemListenerUpdatesDisplay
      *            the itemListenerUpdatesDisplay to set
      */
-    public void setItemListenerUpdatesDisplay(ItemListener itemListenerUpdatesDisplay) {
+    public void setItemListenerUpdatesDisplay(final ItemListener itemListenerUpdatesDisplay) {
         this.itemListenerUpdatesDisplay = itemListenerUpdatesDisplay; // TODO:
                                                                       // Add 0
                                                                       // to
@@ -255,17 +276,21 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     }
 
     /**
+     * Checks if is filters change firing update.
+     * 
      * @return the isFiltersChangeFiringUpdate
      */
     public boolean isFiltersChangeFiringUpdate() {
-        return isFiltersChangeFiringUpdate;
+        return this.isFiltersChangeFiringUpdate;
     }
 
     /**
+     * Sets the filters change firing update.
+     * 
      * @param isFiltersChangeFiringUpdate
      *            the isFiltersChangeFiringUpdate to set
      */
-    public void setFiltersChangeFiringUpdate(boolean isFiltersChangeFiringUpdate) {
+    public void setFiltersChangeFiringUpdate(final boolean isFiltersChangeFiringUpdate) {
         this.isFiltersChangeFiringUpdate = isFiltersChangeFiringUpdate; // TODO:
                                                                         // Add 0
                                                                         // to
@@ -274,63 +299,79 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     }
 
     /**
+     * Gets the card view.
+     * 
      * @return the cardView
      */
     public CardPanelBase getCardView() {
-        return cardView;
+        return this.cardView;
     }
 
     /**
+     * Sets the card view.
+     * 
      * @param cardView
      *            the cardView to set
      */
-    public void setCardView(CardPanelBase cardView) {
+    public void setCardView(final CardPanelBase cardView) {
         this.cardView = cardView; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the filter boxes.
+     * 
      * @return the filterBoxes
      */
     public FilterCheckBoxes getFilterBoxes() {
-        return filterBoxes;
+        return this.filterBoxes;
     }
 
     /**
+     * Sets the filter boxes.
+     * 
      * @param filterBoxes
      *            the filterBoxes to set
      */
-    public void setFilterBoxes(FilterCheckBoxes filterBoxes) {
+    public void setFilterBoxes(final FilterCheckBoxes filterBoxes) {
         this.filterBoxes = filterBoxes; // TODO: Add 0 to parameter's name.
     }
 
     /**
+     * Gets the bottom table with cards.
+     * 
      * @return the bottomTableWithCards
      */
     public TableWithCards getBottomTableWithCards() {
-        return bottomTableWithCards;
+        return this.bottomTableWithCards;
     }
 
     /**
+     * Sets the bottom table with cards.
+     * 
      * @param bottomTableWithCards
      *            the bottomTableWithCards to set
      */
-    public void setBottomTableWithCards(TableWithCards bottomTableWithCards) {
+    public void setBottomTableWithCards(final TableWithCards bottomTableWithCards) {
         this.bottomTableWithCards = bottomTableWithCards; // TODO: Add 0 to
                                                           // parameter's name.
     }
 
     /**
+     * Gets the top table with cards.
+     * 
      * @return the topTableWithCards
      */
     public TableWithCards getTopTableWithCards() {
-        return topTableWithCards;
+        return this.topTableWithCards;
     }
 
     /**
+     * Sets the top table with cards.
+     * 
      * @param topTableWithCards
      *            the topTableWithCards to set
      */
-    public void setTopTableWithCards(TableWithCards topTableWithCards) {
+    public void setTopTableWithCards(final TableWithCards topTableWithCards) {
         this.topTableWithCards = topTableWithCards; // TODO: Add 0 to
                                                     // parameter's name.
     }

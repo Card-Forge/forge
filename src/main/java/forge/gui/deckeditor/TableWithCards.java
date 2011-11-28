@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.awt.Color;
@@ -34,13 +51,13 @@ public final class TableWithCards {
     private TableModel<InventoryItem> model;
 
     /** The table. */
-    private JTable table = new JTable();
+    private final JTable table = new JTable();
 
     /** The j scroll pane. */
-    private JScrollPane jScrollPane = new JScrollPane();
+    private final JScrollPane jScrollPane = new JScrollPane();
 
     /** The stats label. */
-    private JLabel statsLabel = new JLabel();
+    private final JLabel statsLabel = new JLabel();
 
     /** The filter. */
     private Predicate<InventoryItem> filter = null;
@@ -171,7 +188,8 @@ public final class TableWithCards {
      */
     public static String getStats(final ItemPoolView<InventoryItem> deck) {
         final int total = deck.countAll();
-        final int creature = CardRules.Predicates.Presets.IS_CREATURE.aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
+        final int creature = CardRules.Predicates.Presets.IS_CREATURE.aggregate(deck, deck.getFnToCard(),
+                deck.getFnToCount());
         final int land = CardRules.Predicates.Presets.IS_LAND.aggregate(deck, deck.getFnToCard(), deck.getFnToCount());
 
         final StringBuffer show = new StringBuffer();
@@ -344,7 +362,8 @@ public final class TableWithCards {
         }
 
         if (useFilter && this.wantUnique) {
-            this.model.addCards(this.filter.uniqueByLast(this.pool, this.pool.getFnToCardName(), this.pool.getFnToPrinted()));
+            this.model.addCards(this.filter.uniqueByLast(this.pool, this.pool.getFnToCardName(),
+                    this.pool.getFnToPrinted()));
         } else if (useFilter) {
             this.model.addCards(this.filter.select(this.pool, this.pool.getFnToPrinted()));
         } else if (this.wantUnique) {

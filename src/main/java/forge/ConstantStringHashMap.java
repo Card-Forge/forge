@@ -12,4 +12,4 @@ public class ConstantStringHashMap {
     private Map<String, String> map = new HashMap<String, String>();
 
 }
-*/
+ */

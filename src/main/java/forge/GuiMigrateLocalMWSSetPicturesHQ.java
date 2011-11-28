@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.awt.Dimension;
@@ -182,8 +199,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
         // JOptionPane
         this.close = new JButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Buttons.CANCEL));
         final Object[] options = { b, this.close };
-        this.dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+        this.dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
     }
 
     /** {@inheritDoc} */
@@ -341,8 +357,9 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
                 p = new Proxy(GuiMigrateLocalMWSSetPicturesHQ.TYPES[this.type], new InetSocketAddress(
                         this.addr.getText(), Integer.parseInt(this.port.getText())));
             } catch (final Exception ex) {
-                ErrorViewer.showError(ex, ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT), this.addr.getText(),
-                        this.port.getText());
+                ErrorViewer.showError(ex,
+                        ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT),
+                        this.addr.getText(), this.port.getText());
                 // throw new
                 // RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
                 return;
@@ -515,8 +532,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
                             // CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2
                             // + "/" + Base64Coder.encodeString(fn, true),
                             // SC3));
-                            cList.add(new MCard(setCode3 + "\\"
-                            + newFileName, urlBase + setCode2 + "\\" + fn, setCode3));
+                            cList.add(new MCard(setCode3 + "\\" + newFileName, urlBase + setCode2 + "\\" + fn, setCode3));
 
                         }
 

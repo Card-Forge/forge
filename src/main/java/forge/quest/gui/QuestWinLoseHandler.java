@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.quest.gui;
 
 import java.awt.Color;
@@ -49,7 +66,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private JLabel lblTemp2;
 
     /** The spacer. */
-    private int spacer = 50;
+    private final int spacer = 50;
 
     private class CommonObjects {
         private QuestMatchState qMatchState;
@@ -393,8 +410,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
-                + ", gapbottom 10");
+        this.getView().getPnlCustom()
+                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
         this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 
@@ -412,8 +429,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp1 = new TitleLabel("You just won 10 random rares!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
-                + ", gapbottom 10");
+        this.getView().getPnlCustom()
+                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
         this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 
@@ -436,8 +453,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + selected.getName() + "\" format!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer
-                + ", gapbottom 10");
+        this.getView().getPnlCustom()
+                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
         this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 

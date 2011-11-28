@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import java.util.Map;
@@ -21,8 +38,8 @@ public class CardRulesReader {
             null };
     private int curCharacteristics = 0;
 
-    //private boolean isFlipCard = false;
-    //private boolean isDoubleFacedCard = false;
+    // private boolean isFlipCard = false;
+    // private boolean isDoubleFacedCard = false;
 
     private boolean removedFromAIDecks = false;
     private boolean removedFromRandomDecks = false;
@@ -37,8 +54,8 @@ public class CardRulesReader {
         this.curCharacteristics = 0;
         this.removedFromAIDecks = false;
         this.removedFromRandomDecks = false;
-        //this.isDoubleFacedCard = false;
-        //this.isFlipCard = false;
+        // this.isDoubleFacedCard = false;
+        // this.isFlipCard = false;
     }
 
     /**
@@ -47,12 +64,12 @@ public class CardRulesReader {
      * @return the card
      */
     public final CardRules getCard() {
-        boolean hasOtherPart = this.characteristics[1] != null;
-        CardRules otherPart = hasOtherPart
-                ? new CardRules(this.characteristics[1], true, null, this.removedFromRandomDecks, this.removedFromAIDecks)
-                : null;
+        final boolean hasOtherPart = this.characteristics[1] != null;
+        final CardRules otherPart = hasOtherPart ? new CardRules(this.characteristics[1], true, null,
+                this.removedFromRandomDecks, this.removedFromAIDecks) : null;
 
-       return new CardRules(this.characteristics[0], hasOtherPart, otherPart, this.removedFromRandomDecks, this.removedFromAIDecks);
+        return new CardRules(this.characteristics[0], hasOtherPart, otherPart, this.removedFromRandomDecks,
+                this.removedFromAIDecks);
     }
 
     /**
@@ -99,9 +116,12 @@ public class CardRulesReader {
             CardRulesReader.parseSetInfoLine(line, this.characteristics[this.curCharacteristics].getSetsData());
 
         } else if (line.startsWith("AlternateMode:")) {
-            //this.isDoubleFacedCard = "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
-            //        "AlternateMode:"));
-            //this.isFlipCard = "Flip".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line, "AlternateMode:"));
+            // this.isDoubleFacedCard =
+            // "DoubleFaced".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
+            // "AlternateMode:"));
+            // this.isFlipCard =
+            // "Flip".equalsIgnoreCase(CardRulesReader.getValueAfterKey(line,
+            // "AlternateMode:"));
         } else if (line.equals("ALTERNATE")) {
             this.characteristics[1] = new CardRuleCharacteristics();
             this.curCharacteristics = 1;

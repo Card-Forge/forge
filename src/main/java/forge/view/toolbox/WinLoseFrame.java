@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.toolbox;
 
 import java.awt.Color;
@@ -277,9 +294,8 @@ public class WinLoseFrame extends JFrame {
         // Issue 147 - keep battlefield up following win/loss
         if (Constant.Runtime.OLDGUI[0]) {
             frame = (JFrame) AllZone.getDisplay();
-        }
-        else {
-            ViewTopLevel temp = (ViewTopLevel) AllZone.getDisplay();
+        } else {
+            final ViewTopLevel temp = (ViewTopLevel) AllZone.getDisplay();
             frame = (JFrame) temp.getParent().getParent().getParent().getParent();
         }
 
@@ -290,6 +306,8 @@ public class WinLoseFrame extends JFrame {
     }
 
     /**
+     * Gets the btn continue.
+     * 
      * @return {@link forge.view.toolbox.FButton} btnContinue
      */
     public FButton getBtnContinue() {
@@ -297,13 +315,18 @@ public class WinLoseFrame extends JFrame {
     }
 
     /**
-     * @param btnContinue {@link forge.view.toolbox.FButton}
+     * Sets the btn continue.
+     *
+     * @param btnContinue the new btn continue
+     * {@link forge.view.toolbox.FButton}
      */
     public void setBtnContinue(final FButton btnContinue) {
         this.btnContinue = btnContinue;
     }
 
     /**
+     * Gets the btn restart.
+     * 
      * @return {@link forge.view.toolbox.FButton} btnRestart
      */
     public FButton getBtnRestart() {
@@ -311,13 +334,18 @@ public class WinLoseFrame extends JFrame {
     }
 
     /**
-     * @param btnRestart {@link forge.view.toolbox.FButton}
+     * Sets the btn restart.
+     *
+     * @param btnRestart the new btn restart
+     * {@link forge.view.toolbox.FButton}
      */
     public void setBtnRestart(final FButton btnRestart) {
         this.btnRestart = btnRestart;
     }
 
     /**
+     * Gets the btn quit.
+     * 
      * @return {@link forge.view.toolbox.FButton} btnQuit
      */
     public FButton getBtnQuit() {
@@ -325,7 +353,10 @@ public class WinLoseFrame extends JFrame {
     }
 
     /**
-     * @param btnQuit {@link forge.view.toolbox.FButton}
+     * Sets the btn quit.
+     *
+     * @param btnQuit the new btn quit
+     * {@link forge.view.toolbox.FButton}
      */
     public void setBtnQuit(final FButton btnQuit) {
         this.btnQuit = btnQuit;
@@ -344,8 +375,9 @@ public class WinLoseFrame extends JFrame {
     /**
      * The central panel in the win/lose screen, used for presenting customized
      * messages and rewards.
-     * 
-     * @param pnlCustom {@link javax.swing.JPanel}
+     *
+     * @param pnlCustom the new pnl custom
+     * {@link javax.swing.JPanel}
      */
     public void setPnlCustom(final JPanel pnlCustom) {
         this.pnlCustom = pnlCustom;

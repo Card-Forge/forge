@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.properties;
 
 import java.io.File;
@@ -288,7 +305,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is stack ai land.
-     *
+     * 
      * @return boolean
      */
     public boolean isStackAiLand() {
@@ -297,8 +314,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the stack ai land.
-     *
-     * @param b0 &emsp; boolean
+     * 
+     * @param b0
+     *            &emsp; boolean
      */
     public void setStackAiLand(final boolean b0) {
         this.stackAiLand = b0;
@@ -306,7 +324,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if old gui is to be used.
-     *
+     * 
      * @return boolean
      */
     public boolean isOldGui() {
@@ -315,8 +333,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets if old gui is to be used.
-     *
-     * @param b0 &emsp; boolean
+     * 
+     * @param b0
+     *            &emsp; boolean
      */
     public void setOldGui(final boolean b0) {
         this.oldGui = b0;
@@ -324,7 +343,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if loss by milling is enabled.
-     *
+     * 
      * @return boolean
      */
     public boolean isMillingLossCondition() {
@@ -333,8 +352,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets if loss by milling is enabled.
-     *
-     * @param millingLossCondition0 the millingLossCondition to set
+     * 
+     * @param millingLossCondition0
+     *            the millingLossCondition to set
      */
     public void setMillingLossCondition(final boolean millingLossCondition0) {
         this.millingLossCondition = millingLossCondition0;
@@ -342,6 +362,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Determines if "view any hand" option in dev mode is enabled or not.
+     * 
      * @return boolean
      */
     public boolean getHandView() {
@@ -350,7 +371,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Determines if "view any hand" option in dev mode is enabled or not.
-     * @param b0 &emsp; boolean
+     * 
+     * @param b0
+     *            &emsp; boolean
      */
     public void setHandView(final boolean b0) {
         this.handView = b0;
@@ -358,6 +381,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Determines if "view any library" option in dev mode is enabled or not.
+     * 
      * @return boolean
      */
     public boolean getLibraryView() {
@@ -366,7 +390,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Determines if "view any library" option in dev mode is enabled or not.
-     * @param b0 &emsp; boolean
+     * 
+     * @param b0
+     *            &emsp; boolean
      */
     public void setLibraryView(final boolean b0) {
         this.libraryView = b0;
@@ -374,7 +400,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b ai begin combat.
-     *
+     * 
      * @return the bAIBeginCombat
      */
     public boolean isbAIBeginCombat() {
@@ -383,8 +409,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b ai begin combat.
-     *
-     * @param bAIBeginCombat the bAIBeginCombat to set
+     * 
+     * @param bAIBeginCombat
+     *            the bAIBeginCombat to set
      */
     public void setbAIBeginCombat(final boolean bAIBeginCombat) {
         this.bAIBeginCombat = bAIBeginCombat; // TODO: Add 0 to parameter's
@@ -393,7 +420,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b ai end combat.
-     *
+     * 
      * @return the bAIEndCombat
      */
     public boolean isbAIEndCombat() {
@@ -402,8 +429,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b ai end combat.
-     *
-     * @param bAIEndCombat the bAIEndCombat to set
+     * 
+     * @param bAIEndCombat
+     *            the bAIEndCombat to set
      */
     public void setbAIEndCombat(final boolean bAIEndCombat) {
         this.bAIEndCombat = bAIEndCombat; // TODO: Add 0 to parameter's name.
@@ -411,7 +439,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b ai upkeep.
-     *
+     * 
      * @return the bAIUpkeep
      */
     public boolean isbAIUpkeep() {
@@ -420,8 +448,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b ai upkeep.
-     *
-     * @param bAIUpkeep the bAIUpkeep to set
+     * 
+     * @param bAIUpkeep
+     *            the bAIUpkeep to set
      */
     public void setbAIUpkeep(final boolean bAIUpkeep) {
         this.bAIUpkeep = bAIUpkeep; // TODO: Add 0 to parameter's name.
@@ -429,7 +458,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b ai draw.
-     *
+     * 
      * @return the bAIDraw
      */
     public boolean isbAIDraw() {
@@ -438,8 +467,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b ai draw.
-     *
-     * @param bAIDraw the bAIDraw to set
+     * 
+     * @param bAIDraw
+     *            the bAIDraw to set
      */
     public void setbAIDraw(final boolean bAIDraw) {
         this.bAIDraw = bAIDraw; // TODO: Add 0 to parameter's name.
@@ -447,7 +477,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b aieot.
-     *
+     * 
      * @return the bAIEOT
      */
     public boolean isbAIEOT() {
@@ -456,8 +486,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b aieot.
-     *
-     * @param bAIEOT the bAIEOT to set
+     * 
+     * @param bAIEOT
+     *            the bAIEOT to set
      */
     public void setbAIEOT(final boolean bAIEOT) {
         this.bAIEOT = bAIEOT; // TODO: Add 0 to parameter's name.
@@ -465,7 +496,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b human begin combat.
-     *
+     * 
      * @return the bHumanBeginCombat
      */
     public boolean isbHumanBeginCombat() {
@@ -474,8 +505,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b human begin combat.
-     *
-     * @param bHumanBeginCombat the bHumanBeginCombat to set
+     * 
+     * @param bHumanBeginCombat
+     *            the bHumanBeginCombat to set
      */
     public void setbHumanBeginCombat(final boolean bHumanBeginCombat) {
         this.bHumanBeginCombat = bHumanBeginCombat; // TODO: Add 0 to
@@ -484,7 +516,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b human draw.
-     *
+     * 
      * @return the bHumanDraw
      */
     public boolean isbHumanDraw() {
@@ -493,8 +525,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b human draw.
-     *
-     * @param bHumanDraw the bHumanDraw to set
+     * 
+     * @param bHumanDraw
+     *            the bHumanDraw to set
      */
     public void setbHumanDraw(final boolean bHumanDraw) {
         this.bHumanDraw = bHumanDraw; // TODO: Add 0 to parameter's name.
@@ -502,7 +535,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is upload draft ai.
-     *
+     * 
      * @return the uploadDraftAI
      */
     public boolean isUploadDraftAI() {
@@ -511,8 +544,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the upload draft ai.
-     *
-     * @param uploadDraftAI the uploadDraftAI to set
+     * 
+     * @param uploadDraftAI
+     *            the uploadDraftAI to set
      */
     public void setUploadDraftAI(final boolean uploadDraftAI) {
         this.uploadDraftAI = uploadDraftAI; // TODO: Add 0 to parameter's name.
@@ -520,7 +554,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b human end combat.
-     *
+     * 
      * @return the bHumanEndCombat
      */
     public boolean isbHumanEndCombat() {
@@ -529,8 +563,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b human end combat.
-     *
-     * @param bHumanEndCombat the bHumanEndCombat to set
+     * 
+     * @param bHumanEndCombat
+     *            the bHumanEndCombat to set
      */
     public void setbHumanEndCombat(final boolean bHumanEndCombat) {
         this.bHumanEndCombat = bHumanEndCombat; // TODO: Add 0 to parameter's
@@ -539,7 +574,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b human eot.
-     *
+     * 
      * @return the bHumanEOT
      */
     public boolean isbHumanEOT() {
@@ -548,8 +583,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b human eot.
-     *
-     * @param bHumanEOT the bHumanEOT to set
+     * 
+     * @param bHumanEOT
+     *            the bHumanEOT to set
      */
     public void setbHumanEOT(final boolean bHumanEOT) {
         this.bHumanEOT = bHumanEOT; // TODO: Add 0 to parameter's name.
@@ -557,7 +593,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is b human upkeep.
-     *
+     * 
      * @return the bHumanUpkeep
      */
     public boolean isbHumanUpkeep() {
@@ -566,8 +602,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the b human upkeep.
-     *
-     * @param bHumanUpkeep the bHumanUpkeep to set
+     * 
+     * @param bHumanUpkeep
+     *            the bHumanUpkeep to set
      */
     public void setbHumanUpkeep(final boolean bHumanUpkeep) {
         this.bHumanUpkeep = bHumanUpkeep; // TODO: Add 0 to parameter's name.
@@ -575,7 +612,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Gets the bugz name.
-     *
+     * 
      * @return the bugzName
      */
     public String getBugzName() {
@@ -584,8 +621,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the bugz name.
-     *
-     * @param bugzName the bugzName to set
+     * 
+     * @param bugzName
+     *            the bugzName to set
      */
     public void setBugzName(final String bugzName) {
         this.bugzName = bugzName; // TODO: Add 0 to parameter's name.
@@ -593,7 +631,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Gets the bugz pwd.
-     *
+     * 
      * @return the bugzPwd
      */
     public String getBugzPwd() {
@@ -602,8 +640,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the bugz pwd.
-     *
-     * @param bugzPwd the bugzPwd to set
+     * 
+     * @param bugzPwd
+     *            the bugzPwd to set
      */
     public void setBugzPwd(final String bugzPwd) {
         this.bugzPwd = bugzPwd; // TODO: Add 0 to parameter's name.
@@ -611,7 +650,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is rand c foil.
-     *
+     * 
      * @return the randCFoil
      */
     public boolean isRandCFoil() {
@@ -620,8 +659,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the rand c foil.
-     *
-     * @param randCFoil the randCFoil to set
+     * 
+     * @param randCFoil
+     *            the randCFoil to set
      */
     public void setRandCFoil(final boolean randCFoil) {
         this.randCFoil = randCFoil; // TODO: Add 0 to parameter's name.
@@ -629,7 +669,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is developer mode.
-     *
+     * 
      * @return the developerMode
      */
     public boolean isDeveloperMode() {
@@ -638,8 +678,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the developer mode.
-     *
-     * @param developerMode the developerMode to set
+     * 
+     * @param developerMode
+     *            the developerMode to set
      */
     public void setDeveloperMode(final boolean developerMode) {
         this.developerMode = developerMode; // TODO: Add 0 to parameter's name.
@@ -647,7 +688,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Gets the laf.
-     *
+     * 
      * @return the laf
      */
     public String getLaf() {
@@ -656,8 +697,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the laf.
-     *
-     * @param laf the laf to set
+     * 
+     * @param laf
+     *            the laf to set
      */
     public void setLaf(final String laf) {
         this.laf = laf; // TODO: Add 0 to parameter's name.
@@ -665,7 +707,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Gets the skin.
-     *
+     * 
      * @return the skin
      */
     public String getSkin() {
@@ -674,8 +716,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the skin.
-     *
-     * @param skin the skin to set
+     * 
+     * @param skin
+     *            the skin to set
      */
     public void setSkin(final String skin) {
         this.skin = skin; // TODO: Add 0 to parameter's name.
@@ -683,7 +726,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is laf fonts.
-     *
+     * 
      * @return the lafFonts
      */
     public boolean isLafFonts() {
@@ -692,8 +735,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the laf fonts.
-     *
-     * @param lafFonts the lafFonts to set
+     * 
+     * @param lafFonts
+     *            the lafFonts to set
      */
     public void setLafFonts(final boolean lafFonts) {
         this.lafFonts = lafFonts; // TODO: Add 0 to parameter's name.
@@ -701,7 +745,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is scale larger than original.
-     *
+     * 
      * @return the scaleLargerThanOriginal
      */
     public boolean isScaleLargerThanOriginal() {
@@ -710,8 +754,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the scale larger than original.
-     *
-     * @param scaleLargerThanOriginal the scaleLargerThanOriginal to set
+     * 
+     * @param scaleLargerThanOriginal
+     *            the scaleLargerThanOriginal to set
      */
     public void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal) {
         this.scaleLargerThanOriginal = scaleLargerThanOriginal; // TODO: Add 0
@@ -722,7 +767,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is card overlay.
-     *
+     * 
      * @return the cardOverlay
      */
     public boolean isCardOverlay() {
@@ -731,8 +776,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the card overlay.
-     *
-     * @param cardOverlay the cardOverlay to set
+     * 
+     * @param cardOverlay
+     *            the cardOverlay to set
      */
     public void setCardOverlay(final boolean cardOverlay) {
         this.cardOverlay = cardOverlay; // TODO: Add 0 to parameter's name.
@@ -740,7 +786,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is deck gen singletons.
-     *
+     * 
      * @return true, if is deck gen singletons
      */
     public boolean isDeckGenSingletons() {
@@ -749,8 +795,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the deck gen singletons.
-     *
-     * @param deckSingletons the new deck gen singletons
+     * 
+     * @param deckSingletons
+     *            the new deck gen singletons
      */
     public void setDeckGenSingletons(final boolean deckSingletons) {
         this.deckGenSingletons = deckSingletons;
@@ -758,7 +805,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is deck gen rmv artifacts.
-     *
+     * 
      * @return the deckGenRmvArtifacts
      */
     public boolean isDeckGenRmvArtifacts() {
@@ -767,8 +814,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the deck gen rmv artifacts.
-     *
-     * @param deckGenRmvArtifacts the deckGenRmvArtifacts to set
+     * 
+     * @param deckGenRmvArtifacts
+     *            the deckGenRmvArtifacts to set
      */
     public void setDeckGenRmvArtifacts(final boolean deckGenRmvArtifacts) {
         this.deckGenRmvArtifacts = deckGenRmvArtifacts; // TODO: Add 0 to
@@ -777,7 +825,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Checks if is deck gen rmv small.
-     *
+     * 
      * @return the deckGenRmvSmall
      */
     public boolean isDeckGenRmvSmall() {
@@ -786,8 +834,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the deck gen rmv small.
-     *
-     * @param deckGenRmvSmall the deckGenRmvSmall to set
+     * 
+     * @param deckGenRmvSmall
+     *            the deckGenRmvSmall to set
      */
     public void setDeckGenRmvSmall(final boolean deckGenRmvSmall) {
         this.deckGenRmvSmall = deckGenRmvSmall; // TODO: Add 0 to parameter's
@@ -796,7 +845,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Gets the card size.
-     *
+     * 
      * @return the cardSize
      */
     public CardSizeType getCardSize() {
@@ -805,8 +854,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the card size.
-     *
-     * @param cardSize the cardSize to set
+     * 
+     * @param cardSize
+     *            the cardSize to set
      */
     public void setCardSize(final CardSizeType cardSize) {
         this.cardSize = cardSize; // TODO: Add 0 to parameter's name.
@@ -814,7 +864,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Gets the stack offset.
-     *
+     * 
      * @return the stackOffset
      */
     public StackOffsetType getStackOffset() {
@@ -823,8 +873,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the stack offset.
-     *
-     * @param stackOffset the stackOffset to set
+     * 
+     * @param stackOffset
+     *            the stackOffset to set
      */
     public void setStackOffset(final StackOffsetType stackOffset) {
         this.stackOffset = stackOffset; // TODO: Add 0 to parameter's name.
@@ -832,7 +883,7 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Gets the max stack size.
-     *
+     * 
      * @return the maxStackSize
      */
     public int getMaxStackSize() {
@@ -841,8 +892,9 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the max stack size.
-     *
-     * @param maxStackSize the maxStackSize to set
+     * 
+     * @param maxStackSize
+     *            the maxStackSize to set
      */
     public void setMaxStackSize(final int maxStackSize) {
         this.maxStackSize = maxStackSize; // TODO: Add 0 to parameter's name.
@@ -883,83 +935,171 @@ public class ForgePreferences extends Preferences {
     }
 
     // Keyboard shortcuts
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the show stack shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getShowStackShortcut() {
         return this.showStackShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setShowStackShortcut(String keycodes) {
+    /**
+     * Sets the show stack shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setShowStackShortcut(final String keycodes) {
         this.showStackShortcut = keycodes;
     }
 
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the show combat shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getShowCombatShortcut() {
         return this.showCombatShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setShowCombatShortcut(String keycodes) {
+    /**
+     * Sets the show combat shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setShowCombatShortcut(final String keycodes) {
         this.showCombatShortcut = keycodes;
     }
 
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the show console shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getShowConsoleShortcut() {
         return this.showConsoleShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setShowConsoleShortcut(String keycodes) {
+    /**
+     * Sets the show console shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setShowConsoleShortcut(final String keycodes) {
         this.showConsoleShortcut = keycodes;
     }
 
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the show players shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getShowPlayersShortcut() {
         return this.showPlayersShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setShowPlayersShortcut(String keycodes) {
+    /**
+     * Sets the show players shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setShowPlayersShortcut(final String keycodes) {
         this.showPlayersShortcut = keycodes;
     }
 
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the show dev shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getShowDevShortcut() {
         return this.showDevShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setShowDevShortcut(String keycodes) {
+    /**
+     * Sets the show dev shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setShowDevShortcut(final String keycodes) {
         this.showDevShortcut = keycodes;
     }
 
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the concede shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getConcedeShortcut() {
         return this.concedeShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setConcedeShortcut(String keycodes) {
+    /**
+     * Sets the concede shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setConcedeShortcut(final String keycodes) {
         this.concedeShortcut = keycodes;
     }
 
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the show picture shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getShowPictureShortcut() {
         return this.showPictureShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setShowPictureShortcut(String keycodes) {
+    /**
+     * Sets the show picture shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setShowPictureShortcut(final String keycodes) {
         this.showPictureShortcut = keycodes;
     }
 
-    /** @return String &emsp; String of keycodes set for this shortcut, delimited with spaces. */
+    /**
+     * Gets the show detail shortcut.
+     * 
+     * @return String &emsp; String of keycodes set for this shortcut, delimited
+     *         with spaces.
+     */
     public String getShowDetailShortcut() {
         return this.showDetailShortcut;
     }
 
-    /** @param keycodes &emsp; String of keycodes to set for this shortcut, delimited with spaces. */
-    public void setShowDetailShortcut(String keycodes) {
+    /**
+     * Sets the show detail shortcut.
+     * 
+     * @param keycodes
+     *            &emsp; String of keycodes to set for this shortcut, delimited
+     *            with spaces.
+     */
+    public void setShowDetailShortcut(final String keycodes) {
         this.showDetailShortcut = keycodes;
     }
 }

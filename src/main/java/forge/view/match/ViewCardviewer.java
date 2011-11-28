@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.match;
 
 import java.awt.Graphics;
@@ -14,94 +31,124 @@ import forge.view.toolbox.CardDetailPanel;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FVerticalTabPanel;
 
-/** 
+/**
  * Vertical tab panel for viewing card picture and/or details.
- *
+ * 
  */
 public class ViewCardviewer {
-    private List<JPanel> panelList;
-    private ControlCardviewer control;
+    private final List<JPanel> panelList;
+    private final ControlCardviewer control;
 
-    private CardPicPanel pnlCardPic;
-    private CardDetailPanel pnlCardDetail;
-    private FVerticalTabPanel vtpCardviewer;
+    private final CardPicPanel pnlCardPic;
+    private final CardDetailPanel pnlCardDetail;
+    private final FVerticalTabPanel vtpCardviewer;
 
     private int w, h;
 
     /**
-     * 
+     * Instantiates a new view cardviewer.
      */
     public ViewCardviewer() {
         // Assemble card pic viewer
-        panelList = new ArrayList<JPanel>();
+        this.panelList = new ArrayList<JPanel>();
 
-        pnlCardPic = new CardPicPanel();
-        pnlCardPic.setOpaque(false);
-        pnlCardPic.setName("Picture");
-        pnlCardPic.setToolTipText("Card Picture");
-        panelList.add(pnlCardPic);
+        this.pnlCardPic = new CardPicPanel();
+        this.pnlCardPic.setOpaque(false);
+        this.pnlCardPic.setName("Picture");
+        this.pnlCardPic.setToolTipText("Card Picture");
+        this.panelList.add(this.pnlCardPic);
 
-        pnlCardDetail = new CardDetailPanel();
-        pnlCardDetail.setOpaque(false);
-        pnlCardDetail.setName("Detail");
-        pnlCardDetail.setToolTipText("Card Text");
-        panelList.add(pnlCardDetail);
+        this.pnlCardDetail = new CardDetailPanel();
+        this.pnlCardDetail.setOpaque(false);
+        this.pnlCardDetail.setName("Detail");
+        this.pnlCardDetail.setToolTipText("Card Text");
+        this.panelList.add(this.pnlCardDetail);
 
-        vtpCardviewer = new FVerticalTabPanel(panelList);
+        this.vtpCardviewer = new FVerticalTabPanel(this.panelList);
 
         // After all components are in place, instantiate controller.
-        control = new ControlCardviewer(this);
+        this.control = new ControlCardviewer(this);
     }
 
-    /** @return ControlCardviewer */
+    /**
+     * Gets the controller.
+     * 
+     * @return ControlCardviewer
+     */
     public ControlCardviewer getController() {
-        return control;
+        return this.control;
     }
 
     /**
      * Card picture handling in side panel of match.
-     *
+     * 
      */
     @SuppressWarnings("serial")
     public class CardPicPanel extends FPanel {
         private Card card = null;
 
-        /** @param c &emsp; Card object */
-        public void setCard(Card c) {
+        /**
+         * Sets the card.
+         * 
+         * @param c
+         *            &emsp; Card object
+         */
+        public void setCard(final Card c) {
             this.card = c;
-            repaint();
+            this.repaint();
         }
 
-        /** @return Card */
+        /**
+         * Gets the card.
+         * 
+         * @return Card
+         */
         public Card getCard() {
             return this.card;
         }
 
+        /*
+         * (non-Javadoc)
+         * 
+         * @see forge.view.toolbox.FPanel#paintComponent(java.awt.Graphics)
+         */
         @Override
-        public void paintComponent(Graphics g) {
+        public void paintComponent(final Graphics g) {
             super.paintComponent(g);
 
-            if (card != null) {
-                w = getWidth();
-                h = (int) (w / 0.7);
-                BufferedImage img = ImageCache.getImage(card, w, h);
-                g.drawImage(img, 0, (int) ((getHeight() - h) / 2), null);
+            if (this.card != null) {
+                ViewCardviewer.this.w = this.getWidth();
+                ViewCardviewer.this.h = (int) (ViewCardviewer.this.w / 0.7);
+                final BufferedImage img = ImageCache.getImage(this.card, ViewCardviewer.this.w, ViewCardviewer.this.h);
+                g.drawImage(img, 0, ((this.getHeight() - ViewCardviewer.this.h) / 2), null);
             }
         }
     }
 
-    /** @return CardPicPanel */
+    /**
+     * Gets the pnl card pic.
+     * 
+     * @return CardPicPanel
+     */
     public CardPicPanel getPnlCardPic() {
-        return pnlCardPic;
+        return this.pnlCardPic;
     }
 
-    /** @return CardDetailPanel */
+    /**
+     * Gets the pnl card detail.
+     * 
+     * @return CardDetailPanel
+     */
     public CardDetailPanel getPnlCardDetail() {
-        return pnlCardDetail;
+        return this.pnlCardDetail;
     }
 
-    /** @return FVerticalTabPanel */
+    /**
+     * Gets the vtp cardviewer.
+     * 
+     * @return FVerticalTabPanel
+     */
     public FVerticalTabPanel getVtpCardviewer() {
-        return vtpCardviewer;
+        return this.vtpCardviewer;
     }
 }

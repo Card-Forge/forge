@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -25,11 +42,11 @@ public abstract class AllZoneUtil {
      * @return a CardList with all cards currently in a graveyard
      */
     public static CardList getCardsIn(final Constant.Zone zone) {
-        CardList cards = new CardList();
+        final CardList cards = new CardList();
         if (zone == Zone.Stack) {
             cards.addAll(AllZone.getStackZone().getCards());
         } else {
-            for (Player p : AllZone.getPlayersInGame()) {
+            for (final Player p : AllZone.getPlayersInGame()) {
                 cards.addAll(p.getZone(zone).getCards());
             }
         }
@@ -45,14 +62,14 @@ public abstract class AllZoneUtil {
      * @return CardList
      */
     public static CardList getCardsIn(final List<Constant.Zone> zones) {
-        CardList cards = new CardList();
-        for (Zone z : zones) {
+        final CardList cards = new CardList();
+        for (final Zone z : zones) {
             if (z == Zone.Stack) {
                 cards.addAll(AllZone.getStackZone().getCards());
                 continue;
             }
 
-            for (Player p : AllZone.getPlayersInGame()) {
+            for (final Player p : AllZone.getPlayersInGame()) {
                 cards.addAll(p.getZone(z).getCards());
             }
         }
@@ -70,7 +87,7 @@ public abstract class AllZoneUtil {
      * @return a CardList with all cards currently in a graveyard
      */
     public static CardList getCardsIn(final Constant.Zone zone, final String cardName) {
-        return getCardsIn(zone).getName(cardName);
+        return AllZoneUtil.getCardsIn(zone).getName(cardName);
     }
 
     // ////////// Creatures
@@ -82,7 +99,7 @@ public abstract class AllZoneUtil {
      * @return a CardList of all creatures on the battlefield on both sides
      */
     public static CardList getCreaturesInPlay() {
-        CardList creats = getCardsIn(Zone.Battlefield);
+        final CardList creats = AllZoneUtil.getCardsIn(Zone.Battlefield);
         return creats.filter(CardListFilter.CREATURES);
     }
 
@@ -94,7 +111,7 @@ public abstract class AllZoneUtil {
      * @return a CardList containing all creatures a given player has in play
      */
     public static CardList getCreaturesInPlay(final Player player) {
-        CardList creats = player.getCardsIn(Zone.Battlefield);
+        final CardList creats = player.getCardsIn(Zone.Battlefield);
         return creats.filter(CardListFilter.CREATURES);
     }
 
@@ -117,7 +134,7 @@ public abstract class AllZoneUtil {
      * @return a CardList of all lands on the battlefield
      */
     public static CardList getLandsInPlay() {
-        return getCardsIn(Zone.Battlefield).filter(CardListFilter.LANDS);
+        return AllZoneUtil.getCardsIn(Zone.Battlefield).filter(CardListFilter.LANDS);
     }
 
     // =============================================================================
@@ -135,7 +152,7 @@ public abstract class AllZoneUtil {
      * @return true is the card is in Human or Computer's Exile zone
      */
     public static boolean isCardExiled(final Card c) {
-        return getCardsIn(Zone.Exile).contains(c);
+        return AllZoneUtil.getCardsIn(Zone.Exile).contains(c);
     }
 
     // /Check if a certain card is in play
@@ -150,7 +167,7 @@ public abstract class AllZoneUtil {
      * @return a boolean.
      */
     public static boolean isCardInPlay(final Card card) {
-        return getCardsIn(Zone.Battlefield).contains(card);
+        return AllZoneUtil.getCardsIn(Zone.Battlefield).contains(card);
     }
 
     /**
@@ -161,7 +178,7 @@ public abstract class AllZoneUtil {
      * @return true is the card is in play, false otherwise
      */
     public static boolean isCardInPlay(final String cardName) {
-        return getCardsIn(Zone.Battlefield, cardName).size() > 0;
+        return AllZoneUtil.getCardsIn(Zone.Battlefield, cardName).size() > 0;
     }
 
     /**
@@ -187,8 +204,8 @@ public abstract class AllZoneUtil {
      * @return a CardList of all cards in play of a given color
      */
     public static CardList getColorInPlay(final String color) {
-        CardList cards = getPlayerColorInPlay(AllZone.getComputerPlayer(), color);
-        cards.addAll(getPlayerColorInPlay(AllZone.getHumanPlayer(), color));
+        final CardList cards = AllZoneUtil.getPlayerColorInPlay(AllZone.getComputerPlayer(), color);
+        cards.addAll(AllZoneUtil.getPlayerColorInPlay(AllZone.getHumanPlayer(), color));
         return cards;
     }
 
@@ -205,8 +222,9 @@ public abstract class AllZoneUtil {
     public static CardList getPlayerColorInPlay(final Player player, final String color) {
         CardList cards = player.getCardsIn(Zone.Battlefield);
         cards = cards.filter(new CardListFilter() {
+            @Override
             public boolean addCard(final Card c) {
-                ArrayList<String> colorList = CardUtil.getColors(c);
+                final ArrayList<String> colorList = CardUtil.getColors(c);
                 return colorList.contains(color);
             }
         });
@@ -224,7 +242,7 @@ public abstract class AllZoneUtil {
      */
     public static Card getCardState(final Card card) {
 
-        for (Card c : AllZoneUtil.getCardsInGame()) {
+        for (final Card c : AllZoneUtil.getCardsInGame()) {
             if (card.equals(c)) {
                 return c;
             }
@@ -246,9 +264,9 @@ public abstract class AllZoneUtil {
      */
     public static int compareTypeAmountInPlay(final Player player, final String type) {
         // returns the difference between player's
-        Player opponent = player.getOpponent();
-        CardList playerList = player.getCardsIn(Zone.Battlefield).getType(type);
-        CardList opponentList = opponent.getCardsIn(Zone.Battlefield).getType(type);
+        final Player opponent = player.getOpponent();
+        final CardList playerList = player.getCardsIn(Zone.Battlefield).getType(type);
+        final CardList opponentList = opponent.getCardsIn(Zone.Battlefield).getType(type);
         return (playerList.size() - opponentList.size());
     }
 
@@ -265,9 +283,9 @@ public abstract class AllZoneUtil {
      */
     public static int compareTypeAmountInGraveyard(final Player player, final String type) {
         // returns the difference between player's
-        Player opponent = player.getOpponent();
-        CardList playerList = player.getCardsIn(Zone.Graveyard).getType(type);
-        CardList opponentList = opponent.getCardsIn(Zone.Graveyard).getType(type);
+        final Player opponent = player.getOpponent();
+        final CardList playerList = player.getCardsIn(Zone.Graveyard).getType(type);
+        final CardList opponentList = opponent.getCardsIn(Zone.Graveyard).getType(type);
         return (playerList.size() - opponentList.size());
     }
 
@@ -278,8 +296,8 @@ public abstract class AllZoneUtil {
      *         Hands, Graveyards, Libraries, and Exiles.
      */
     public static CardList getCardsInGame() {
-        CardList all = new CardList();
-        for (Player player : AllZone.getPlayersInGame()) {
+        final CardList all = new CardList();
+        for (final Player player : AllZone.getPlayersInGame()) {
             all.addAll(player.getZone(Zone.Graveyard).getCards());
             all.addAll(player.getZone(Zone.Hand).getCards());
             all.addAll(player.getZone(Zone.Library).getCards()); // not sure if
@@ -307,7 +325,7 @@ public abstract class AllZoneUtil {
      * @return a int.
      */
     public static int getDoublingSeasonMagnitude(final Player player) {
-        int doublingSeasons = player.getCardsIn(Zone.Battlefield, "Doubling Season").size();
+        final int doublingSeasons = player.getCardsIn(Zone.Battlefield, "Doubling Season").size();
         return (int) Math.pow(2, doublingSeasons); // pow(a,0) = 1; pow(a,1) = a
                                                    // ... no worries about size
                                                    // = 0
@@ -324,7 +342,7 @@ public abstract class AllZoneUtil {
      * @return a int.
      */
     public static int getTokenDoublersMagnitude(final Player player) {
-        int tokenDoublers = player.getCardsIn(Zone.Battlefield, "Parallel Lives").size()
+        final int tokenDoublers = player.getCardsIn(Zone.Battlefield, "Parallel Lives").size()
                 + player.getCardsIn(Zone.Battlefield, "Doubling Season").size();
         return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a
                                                  // ... no worries about size =
@@ -339,7 +357,7 @@ public abstract class AllZoneUtil {
      * @return a list of all opponents
      */
     public static ArrayList<Player> getOpponents(final Player p) {
-        ArrayList<Player> list = new ArrayList<Player>();
+        final ArrayList<Player> list = new ArrayList<Player>();
         list.add(p.getOpponent());
         return list;
     }
@@ -374,7 +392,7 @@ public abstract class AllZoneUtil {
         } else if (comp.contains("NE")) {
             return leftSide != rightSide; // not equals
         } else if (comp.contains("M2")) {
-            return leftSide % 2 == rightSide % 2; // they are equal modulo 2
+            return (leftSide % 2) == (rightSide % 2); // they are equal modulo 2
         }
 
         return false;

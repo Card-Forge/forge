@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
@@ -2296,8 +2313,9 @@ public class CardFactoryUtil {
      * <p>
      * canBeTargetedBy.
      * </p>
-     *
-     * @param c the c
+     * 
+     * @param c
+     *            the c
      * @return a boolean.
      */
     /*
@@ -2322,9 +2340,11 @@ public class CardFactoryUtil {
      * <p>
      * canBeTargetedBy.
      * </p>
-     *
-     * @param card the card
-     * @param target a {@link forge.Card} object.
+     * 
+     * @param card
+     *            the card
+     * @param target
+     *            a {@link forge.Card} object.
      * @return a boolean.
      */
     /*
@@ -2418,10 +2438,12 @@ public class CardFactoryUtil {
      * 
      * @param c
      *            a {@link forge.Card} object.
+     * @param sa
+     *            the sa
      * @return a boolean.
      */
     public static boolean isCounterableBy(final Card c, final SpellAbility sa) {
-        if (!isCounterable(c)) {
+        if (!CardFactoryUtil.isCounterable(c)) {
             return false;
         }
 
@@ -2926,14 +2948,14 @@ public class CardFactoryUtil {
 
         // Count$HighestLifeTotal
         if (sq[0].contains("HighestLifeTotal")) {
-            return CardFactoryUtil.
-                    doXMath(Math.max(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife()), m, c);
+            return CardFactoryUtil.doXMath(
+                    Math.max(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife()), m, c);
         }
 
         // Count$LowestLifeTotal
         if (sq[0].contains("LowestLifeTotal")) {
-            return CardFactoryUtil.
-                    doXMath(Math.min(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife()), m, c);
+            return CardFactoryUtil.doXMath(
+                    Math.min(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife()), m, c);
         }
 
         // Count$TopOfLibraryCMC
@@ -4991,18 +5013,14 @@ public class CardFactoryUtil {
      * 
      */
     public static final void parseKeywords(final Card card, final String cardName) {
-        /*if (card.hasKeyword("CARDNAME enters the battlefield tapped.")) {
-            card.addComesIntoPlayCommand(new Command() {
-                private static final long serialVersionUID = 203335252453049234L;
-
-                @Override
-                public void execute() {
-                    // it enters the battlefield this way, and should not fire
-                    // triggers
-                    card.setTapped(true);
-                }
-            });
-        }*/ // if "Comes into play tapped."
+        /*
+         * if (card.hasKeyword("CARDNAME enters the battlefield tapped.")) {
+         * card.addComesIntoPlayCommand(new Command() { private static final
+         * long serialVersionUID = 203335252453049234L;
+         * 
+         * @Override public void execute() { // it enters the battlefield this
+         * way, and should not fire // triggers card.setTapped(true); } }); }
+         */// if "Comes into play tapped."
         if (card.hasKeyword("CARDNAME enters the battlefield tapped unless you control two or fewer other lands.")) {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 6436821515525468682L;

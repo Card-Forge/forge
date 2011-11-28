@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.input;
 
 import java.util.LinkedList;
@@ -30,7 +47,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
     private final FModel model;
     private ComputerAIInput aiInput; // initialized at runtime to be the latest
-                                      // object created
+                                     // object created
 
     /**
      * TODO Write javadoc for Constructor.
@@ -225,8 +242,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // priority
         if (priority == null) {
             return null;
-        }
-        else if (priority.isHuman()) {
+        } else if (priority.isHuman()) {
             final boolean skip = this.model.getGameState().getPhase().doSkipPhase();
             this.model.getGameState().getPhase().setSkipPhase(false);
             if ((this.model.getGameState().getStack().size() == 0)
@@ -236,11 +252,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             } else {
                 return new InputPassPriority();
             }
-        }
-        else if (playerTurn.isComputer()) {
+        } else if (playerTurn.isComputer()) {
             return this.aiInput;
-        }
-        else {
+        } else {
             this.aiInput.getComputer().stackNotEmpty();
             return null;
         }

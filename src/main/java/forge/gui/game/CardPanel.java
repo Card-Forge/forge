@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.game;
 
 import java.awt.Color;
@@ -91,17 +108,21 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     /**
+     * Gets the connected card.
+     * 
      * @return the connectedCard
      */
     public CardPanel getConnectedCard() {
-        return connectedCard;
+        return this.connectedCard;
     }
 
     /**
+     * Sets the connected card.
+     * 
      * @param connectedCard
      *            the connectedCard to set
      */
-    public void setConnectedCard(CardPanel connectedCard) {
+    public void setConnectedCard(final CardPanel connectedCard) {
         this.connectedCard = connectedCard; // TODO: Add 0 to parameter's name.
     }
 

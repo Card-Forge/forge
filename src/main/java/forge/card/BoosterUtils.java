@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card;
 
 import java.util.ArrayList;
@@ -68,7 +85,8 @@ public final class BoosterUtils {
                 Predicate.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON), numUncommon, colorFilters));
 
         int nRares = numRare, nMythics = 0;
-        final Predicate<CardPrinted> filterMythics = Predicate.and(filter, CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
+        final Predicate<CardPrinted> filterMythics = Predicate.and(filter,
+                CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
         final boolean haveMythics = filterMythics.any(cardpool);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
             if (MyRandom.getRandom().nextInt(7) < 1) { // a bit higher chance to

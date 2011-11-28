@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -313,8 +330,9 @@ public class MagicStack extends MyObservable {
                     && !mana.equals(mana.replaceFirst((colorCut.substring(colorCutIx, colorCutIx + 1)), ""))) {
                 mana = mana.replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
 
-                AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaidColored(AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
-                        .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), ""));
+                AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaidColored(
+                        AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
+                                .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), ""));
 
                 mana = mana.trim();
                 if (mana.equals("")) {
@@ -453,8 +471,7 @@ public class MagicStack extends MyObservable {
                     // computer
                     final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
 
-                    while (ComputerUtil.canPayCost(ability)
-                            && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
+                    while (ComputerUtil.canPayCost(ability) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
                         ComputerUtil.playNoStack(ability);
                     }
                     this.push(sa);
@@ -508,13 +525,13 @@ public class MagicStack extends MyObservable {
                                                                 + "\r\n"
                                                                 + "Mana in Reserve: "
                                                                 + ((AllZone.getGameAction()
-                                                                        .getCostCuttingGetMultiMickerManaCostPaid() != 0)
-                                                                        ? AllZone
+                                                                        .getCostCuttingGetMultiMickerManaCostPaid() != 0) ? AllZone
                                                                         .getGameAction()
                                                                         .getCostCuttingGetMultiMickerManaCostPaid()
                                                                         : "")
-                                                                + AllZone.getGameAction()
-                                                                .getCostCuttingGetMultiMickerManaCostPaidColored()
+                                                                + AllZone
+                                                                        .getGameAction()
+                                                                        .getCostCuttingGetMultiMickerManaCostPaidColored()
                                                                 + "\r\n" + "Times Kicked: "
                                                                 + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
                                                         manaCost.toString(), this, unpaidCommand));
@@ -536,24 +553,20 @@ public class MagicStack extends MyObservable {
                                             + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
                                             manaCost.toString(), paidCommand, unpaidCommand));
                         } else {
-                            AllZone.getInputControl()
-                                    .setInput(
-                                            new InputPayManaCostAbility(
-                                                    "Multikicker for "
-                                                            + sa.getSourceCard()
-                                                            + "\r\n"
-                                                            + "Mana in Reserve: "
-                                                            + ((AllZone.getGameAction()
-                                                                    .getCostCuttingGetMultiMickerManaCostPaid() != 0)
-                                                                    ? AllZone
-                                                                    .getGameAction()
-                                                                    .getCostCuttingGetMultiMickerManaCostPaid()
-                                                                    : "")
-                                                            + AllZone.getGameAction()
-                                                            .getCostCuttingGetMultiMickerManaCostPaidColored()
-                                                            + "\r\n" + "Times Kicked: "
-                                                            + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
-                                                    manaCost.toString(), paidCommand, unpaidCommand));
+                            AllZone.getInputControl().setInput(
+                                    new InputPayManaCostAbility(
+                                            "Multikicker for "
+                                                    + sa.getSourceCard()
+                                                    + "\r\n"
+                                                    + "Mana in Reserve: "
+                                                    + ((AllZone.getGameAction()
+                                                            .getCostCuttingGetMultiMickerManaCostPaid() != 0) ? AllZone
+                                                            .getGameAction().getCostCuttingGetMultiMickerManaCostPaid()
+                                                            : "")
+                                                    + AllZone.getGameAction()
+                                                            .getCostCuttingGetMultiMickerManaCostPaidColored() + "\r\n"
+                                                    + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
+                                                    + "\r\n", manaCost.toString(), paidCommand, unpaidCommand));
                         }
                     }
                 } else {

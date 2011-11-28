@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -456,22 +473,22 @@ public final class AbilityFactoryClash {
 
             @Override
             public String getStackDescription() {
-                return twoPilesStackDescription(af, this);
+                return AbilityFactoryClash.twoPilesStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return twoPilesCanPlayAI(af, this);
+                return AbilityFactoryClash.twoPilesCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                twoPilesResolve(af, this);
+                AbilityFactoryClash.twoPilesResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return twoPilesTriggerAI(af, this, mandatory);
+                return AbilityFactoryClash.twoPilesTriggerAI(af, this, mandatory);
             }
 
         };
@@ -494,17 +511,17 @@ public final class AbilityFactoryClash {
 
             @Override
             public String getStackDescription() {
-                return twoPilesStackDescription(af, this);
+                return AbilityFactoryClash.twoPilesStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return twoPilesCanPlayAI(af, this);
+                return AbilityFactoryClash.twoPilesCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                twoPilesResolve(af, this);
+                AbilityFactoryClash.twoPilesResolve(af, this);
             }
 
         };
@@ -527,12 +544,12 @@ public final class AbilityFactoryClash {
 
             @Override
             public String getStackDescription() {
-                return twoPilesStackDescription(af, this);
+                return AbilityFactoryClash.twoPilesStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                twoPilesResolve(af, this);
+                AbilityFactoryClash.twoPilesResolve(af, this);
             }
 
             @Override
@@ -542,7 +559,7 @@ public final class AbilityFactoryClash {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return twoPilesTriggerAI(af, this, mandatory);
+                return AbilityFactoryClash.twoPilesTriggerAI(af, this, mandatory);
             }
 
         };
@@ -550,8 +567,8 @@ public final class AbilityFactoryClash {
     }
 
     private static String twoPilesStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
             sb.append(" ");
@@ -561,7 +578,7 @@ public final class AbilityFactoryClash {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -575,12 +592,12 @@ public final class AbilityFactoryClash {
 
         sb.append("Separate all ").append(valid).append(" cards ");
 
-        for (Player p : tgtPlayers) {
+        for (final Player p : tgtPlayers) {
             sb.append(p).append(" ");
         }
         sb.append("controls into two piles.");
 
-        AbilitySub abSub = sa.getSubAbility();
+        final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
@@ -589,7 +606,7 @@ public final class AbilityFactoryClash {
     }
 
     private static boolean twoPilesCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return twoPilesTriggerAI(af, sa, false);
+        return AbilityFactoryClash.twoPilesTriggerAI(af, sa, false);
     }
 
     private static boolean twoPilesTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
@@ -597,8 +614,8 @@ public final class AbilityFactoryClash {
     }
 
     private static void twoPilesResolve(final AbilityFactory af, final SpellAbility sa) {
-        HashMap<String, String> params = af.getMapParams();
-        Card card = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = af.getHostCard();
 
         String valid = "";
         if (params.containsKey("ValidCards")) {
@@ -607,7 +624,7 @@ public final class AbilityFactoryClash {
 
         ArrayList<Player> tgtPlayers;
 
-        Target tgt = af.getAbTgt();
+        final Target tgt = af.getAbTgt();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -624,21 +641,21 @@ public final class AbilityFactoryClash {
             chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa).get(0);
         }
 
-        for (Player p : tgtPlayers) {
-            if (tgt == null || p.canBeTargetedBy(sa)) {
-                ArrayList<Card> pile1 = new ArrayList<Card>();
-                ArrayList<Card> pile2 = new ArrayList<Card>();
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                final ArrayList<Card> pile1 = new ArrayList<Card>();
+                final ArrayList<Card> pile2 = new ArrayList<Card>();
                 CardList pool = p.getCardsIn(Zone.Battlefield);
                 pool = pool.getValidCards(valid, card.getController(), card);
 
-                //first, separate the cards into piles
+                // first, separate the cards into piles
                 if (separator.isHuman()) {
-                    List<Card> l = GuiUtils.getChoicesOptional("Put into pile 1 (multi-select)", pool.toArray());
-                    for (Card c : l) {
+                    final List<Card> l = GuiUtils.getChoicesOptional("Put into pile 1 (multi-select)", pool.toArray());
+                    for (final Card c : l) {
                         pile1.add(c);
                         pool.remove(c);
                     }
-                    for (Card c : pool) {
+                    for (final Card c : pool) {
                         pile2.add(c);
                     }
                 } else {
@@ -648,9 +665,9 @@ public final class AbilityFactoryClash {
                 System.out.println("Pile 1:" + pile1);
                 System.out.println("Pile 2:" + pile2);
 
-                //then, the chooser picks a pile
+                // then, the chooser picks a pile
                 if (chooser.isHuman()) {
-                    Card[] disp = new Card[pile1.size() + pile2.size() + 2];
+                    final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
                     disp[0] = new Card();
                     disp[0].setName("Pile 1");
                     for (int i = 0; i < pile1.size(); i++) {
@@ -662,48 +679,47 @@ public final class AbilityFactoryClash {
                         disp[pile1.size() + i + 2] = pile2.get(i);
                     }
 
-                    //make sure Pile 1 or Pile 2 is clicked on
+                    // make sure Pile 1 or Pile 2 is clicked on
                     boolean chosen = false;
                     while (!chosen) {
-                        Object o = GuiUtils.getChoice("Choose a pile", disp);
-                        Card c = (Card) o;
+                        final Object o = GuiUtils.getChoice("Choose a pile", disp);
+                        final Card c = (Card) o;
                         if (c.getName().equals("Pile 1")) {
                             chosen = true;
-                            for (Card z : pile1) {
+                            for (final Card z : pile1) {
                                 card.addRemembered(z);
                             }
-                        }
-                        else if (c.getName().equals("Pile 2")) {
+                        } else if (c.getName().equals("Pile 2")) {
                             chosen = true;
-                            for (Card z : pile2) {
+                            for (final Card z : pile2) {
                                 card.addRemembered(z);
                             }
                         }
 
                     }
                 } else {
-                    int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
-                    int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
+                    final int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
+                    final int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
 
-                    //for now, this assumes that the outcome will be bad
-                    //TODO: This should really have a ChooseLogic param to figure this out
+                    // for now, this assumes that the outcome will be bad
+                    // TODO: This should really have a ChooseLogic param to
+                    // figure this out
                     if (cmc2 > cmc1) {
                         JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
                                 JOptionPane.INFORMATION_MESSAGE);
-                        for (Card c : pile1) {
+                        for (final Card c : pile1) {
                             card.addRemembered(c);
                         }
-                    }
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Computer chooses the Pile 2", "",
                                 JOptionPane.INFORMATION_MESSAGE);
-                        for (Card c : pile2) {
+                        for (final Card c : pile2) {
                             card.addRemembered(c);
                         }
                     }
                 }
 
-                //take action on the chosen pile
+                // take action on the chosen pile
                 if (params.containsKey("ChosenPile")) {
                     final AbilityFactory afPile = new AbilityFactory();
                     final SpellAbility action = afPile.getAbility(card.getSVar(params.get("ChosenPile")), card);
@@ -714,6 +730,6 @@ public final class AbilityFactoryClash {
                 }
             }
         }
-    } //end twoPiles resolve
+    } // end twoPiles resolve
 
 } // end class AbilityFactory_Clash

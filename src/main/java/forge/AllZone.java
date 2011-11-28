@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.Arrays;
@@ -11,8 +28,6 @@ import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
 import forge.game.GameSummary;
 import forge.gui.input.InputControl;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FSkin;
 import forge.model.FGameState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -20,6 +35,8 @@ import forge.quest.data.QuestData;
 import forge.quest.data.QuestMatchState;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
+import forge.view.toolbox.FOverlay;
+import forge.view.toolbox.FSkin;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -137,7 +154,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static forge.quest.data.QuestData getQuestData() {
-        return questData;
+        return AllZone.questData;
     }
 
     /**
@@ -150,7 +167,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static void setQuestData(final QuestData questData0) {
-        questData = questData0;
+        AllZone.questData = questData0;
     }
 
     /**
@@ -162,7 +179,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static QuestEvent getQuestEvent() {
-        return questEvent;
+        return AllZone.questEvent;
     }
 
     /**
@@ -174,7 +191,7 @@ public final class AllZone {
      *            a {@link forge.quest.gui.main.QuestEvent} object.
      */
     public static void setQuestEvent(final QuestEvent q) {
-        questEvent = q;
+        AllZone.questEvent = q;
     }
 
     /**
@@ -186,7 +203,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static QuestEventManager getQuestEventManager() {
-        return questEventManager;
+        return AllZone.questEventManager;
     }
 
     /**
@@ -198,7 +215,7 @@ public final class AllZone {
      *            a {@link forge.quest.gui.main.QuestEventManager} object
      */
     public static void setQuestEventManager(final QuestEventManager qem) {
-        questEventManager = qem;
+        AllZone.questEventManager = qem;
     }
 
     /**
@@ -210,7 +227,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static NameChanger getNameChanger() {
-        return NAME_CHANGER;
+        return AllZone.NAME_CHANGER;
     }
 
     /**
@@ -284,12 +301,12 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static CardFactoryInterface getCardFactory() {
-        if (cardFactory == null) {
+        if (AllZone.cardFactory == null) {
             // setCardFactory(new
             // LazyCardFactory(ForgeProps.getFile(CARDSFOLDER)));
-            setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER)));
+            AllZone.setCardFactory(new PreloadingCardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER)));
         }
-        return cardFactory;
+        return AllZone.cardFactory;
     }
 
     /**
@@ -300,7 +317,7 @@ public final class AllZone {
      */
     public static void setCardFactory(final CardFactoryInterface factory) {
         UtilFunctions.checkNotNull("factory", factory);
-        cardFactory = factory;
+        AllZone.cardFactory = factory;
     }
 
     /**
@@ -332,7 +349,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static InputControl getInputControl() {
-        return INPUT_CONTROL;
+        return AllZone.INPUT_CONTROL;
     }
 
     /**
@@ -453,7 +470,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static Display getDisplay() {
-        return display;
+        return AllZone.display;
     }
 
     /**
@@ -466,7 +483,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static void setDisplay(final Display display0) {
-        display = display0;
+        AllZone.display = display0;
     }
 
     /**
@@ -488,9 +505,9 @@ public final class AllZone {
             return gameState.getStackZone();
         }
 
-        for (Player p : gameState.getPlayers()) {
-            for (Zone z : Player.ALL_ZONES) {
-                PlayerZone pz = p.getZone(z);
+        for (final Player p : gameState.getPlayers()) {
+            for (final Zone z : Player.ALL_ZONES) {
+                final PlayerZone pz = p.getZone(z);
                 if (pz.contains(c)) {
                     return pz;
                 }
@@ -510,7 +527,7 @@ public final class AllZone {
      *            Constant.Zone
      * @return boolean
      */
-    public static boolean isCardInZone(final Card c, Constant.Zone zone) {
+    public static boolean isCardInZone(final Card c, final Constant.Zone zone) {
         final FGameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) {
             return false;
@@ -521,7 +538,7 @@ public final class AllZone {
                 return true;
             }
         } else {
-            for (Player p : gameState.getPlayers()) {
+            for (final Player p : gameState.getPlayers()) {
                 if (p.getZone(zone).contains(c)) {
                     return true;
                 }
@@ -541,8 +558,8 @@ public final class AllZone {
         if (gameState == null) {
             return;
         }
-        for (Player p : gameState.getPlayers()) {
-            for (Zone z : Player.ALL_ZONES) {
+        for (final Player p : gameState.getPlayers()) {
+            for (final Zone z : Player.ALL_ZONES) {
                 p.getZone(z).resetCardsAddedThisTurn();
             }
         }
@@ -556,10 +573,10 @@ public final class AllZone {
      * @return dMgr
      */
     public static DeckManager getDeckManager() {
-        if (deckManager == null) {
-            deckManager = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
+        if (AllZone.deckManager == null) {
+            AllZone.deckManager = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
         }
-        return deckManager;
+        return AllZone.deckManager;
     }
 
     /**
@@ -581,12 +598,12 @@ public final class AllZone {
     public static void newGameCleanup() {
         Singletons.getModel().getGameState().newGameCleanup();
 
-        getDisplay().showCombat("");
-        getDisplay().loadPrefs();
+        AllZone.getDisplay().showCombat("");
+        AllZone.getDisplay().loadPrefs();
 
-        getInputControl().clearInput();
+        AllZone.getInputControl().clearInput();
 
-        getColorChanger().reset();
+        AllZone.getColorChanger().reset();
     }
 
     /**
@@ -595,7 +612,7 @@ public final class AllZone {
      * @return the matchState
      */
     public static QuestMatchState getMatchState() {
-        return matchState;
+        return AllZone.matchState;
     }
 
     /**
@@ -604,7 +621,7 @@ public final class AllZone {
      * @return the colorChanger
      */
     public static ColorChanger getColorChanger() {
-        return COLOR_CHANGER;
+        return AllZone.COLOR_CHANGER;
     }
 
     /**
@@ -617,7 +634,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static FSkin getSkin() {
-        return skin;
+        return AllZone.skin;
     }
 
     /**
@@ -631,20 +648,25 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static void setSkin(final FSkin fs) {
-        skin = fs;
+        AllZone.skin = fs;
     }
 
     /**
+     * Gets the overlay.
+     * 
      * @return overlay
      */
     public static FOverlay getOverlay() {
-        return overlay;
+        return AllZone.overlay;
     }
 
     /**
-     * @param overlay0 &emsp; Overlay panel
+     * Sets the overlay.
+     * 
+     * @param overlay0
+     *            &emsp; Overlay panel
      */
-    public static void setOverlay(FOverlay overlay0) {
-        overlay = overlay0;
+    public static void setOverlay(final FOverlay overlay0) {
+        AllZone.overlay = overlay0;
     }
 } // AllZone

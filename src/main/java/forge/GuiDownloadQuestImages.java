@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.io.File;
@@ -36,52 +53,56 @@ public class GuiDownloadQuestImages extends GuiDownloader {
      * getNeededCards.
      * </p>
      * 
-     * @return an array of {@link forge.GuiDownloadSetPicturesLQ}
-     *         objects.
+     * @return an array of {@link forge.GuiDownloadSetPicturesLQ} objects.
      */
+    @Override
     protected final DownloadObject[] getNeededImages() {
         // read all card names and urls
-        DownloadObject[] questOpponents = readFile(NewConstants.Quest.OPPONENT_ICONS, ForgeProps.getFile(NewConstants.Quest.OPPONENT_DIR));
-        DownloadObject[] boosterImages = readFile(NewConstants.PICS_BOOSTER_IMAGES, ForgeProps.getFile(NewConstants.PICS_BOOSTER));
-        DownloadObject[] petIcons = readFileWithNames(NewConstants.Quest.PET_SHOP_ICONS, ForgeProps.getFile(NewConstants.IMAGE_ICON));
-        DownloadObject[] questPets = readFileWithNames(NewConstants.Quest.PET_TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
-        ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
+        final DownloadObject[] questOpponents = GuiDownloader.readFile(NewConstants.Quest.OPPONENT_ICONS,
+                ForgeProps.getFile(NewConstants.Quest.OPPONENT_DIR));
+        final DownloadObject[] boosterImages = GuiDownloader.readFile(NewConstants.PICS_BOOSTER_IMAGES,
+                ForgeProps.getFile(NewConstants.PICS_BOOSTER));
+        final DownloadObject[] petIcons = GuiDownloader.readFileWithNames(NewConstants.Quest.PET_SHOP_ICONS,
+                ForgeProps.getFile(NewConstants.IMAGE_ICON));
+        final DownloadObject[] questPets = GuiDownloader.readFileWithNames(NewConstants.Quest.PET_TOKEN_IMAGES,
+                ForgeProps.getFile(NewConstants.IMAGE_TOKEN));
+        final ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
 
         File file;
         File dir = ForgeProps.getFile(NewConstants.Quest.OPPONENT_DIR);
-        for (int i = 0; i < questOpponents.length; i++) {
-            file = new File(dir, questOpponents[i].getName().replace("%20", " "));
+        for (final DownloadObject questOpponent : questOpponents) {
+            file = new File(dir, questOpponent.getName().replace("%20", " "));
             if (!file.exists()) {
-                urls.add(questOpponents[i]);
+                urls.add(questOpponent);
             }
         }
 
         dir = ForgeProps.getFile(NewConstants.PICS_BOOSTER);
-        for (int i = 0; i < boosterImages.length; i++) {
-            file = new File(dir, boosterImages[i].getName().replace("%20", " "));
+        for (final DownloadObject boosterImage : boosterImages) {
+            file = new File(dir, boosterImage.getName().replace("%20", " "));
             if (!file.exists()) {
-                urls.add(boosterImages[i]);
+                urls.add(boosterImage);
             }
         }
 
         dir = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-        for (int i = 0; i < petIcons.length; i++) {
-            file = new File(dir, petIcons[i].getName().replace("%20", " "));
+        for (final DownloadObject petIcon : petIcons) {
+            file = new File(dir, petIcon.getName().replace("%20", " "));
             if (!file.exists()) {
-                urls.add(petIcons[i]);
+                urls.add(petIcon);
             }
         }
 
         dir = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
-        for (int i = 0; i < questPets.length; i++) {
-            file = new File(dir, questPets[i].getName().replace("%20", " "));
+        for (final DownloadObject questPet : questPets) {
+            file = new File(dir, questPet.getName().replace("%20", " "));
             if (!file.exists()) {
-                urls.add(questPets[i]);
+                urls.add(questPet);
             }
         }
 
         // return all card names and urls that are needed
-        DownloadObject[] out = new DownloadObject[urls.size()];
+        final DownloadObject[] out = new DownloadObject[urls.size()];
         urls.toArray(out);
 
         return out;

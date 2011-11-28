@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.Random;
@@ -51,6 +68,7 @@ public class AIPlayer extends Player {
      * 
      * @return a {@link forge.Player} object.
      */
+    @Override
     public final Player getOpponent() {
         return AllZone.getHumanPlayer();
     }
@@ -68,6 +86,7 @@ public class AIPlayer extends Player {
      * 
      * @return a boolean.
      */
+    @Override
     public final boolean isHuman() {
         return false;
     }
@@ -79,6 +98,7 @@ public class AIPlayer extends Player {
      * 
      * @return a boolean.
      */
+    @Override
     public final boolean isComputer() {
         return true;
     }
@@ -96,14 +116,16 @@ public class AIPlayer extends Player {
     // //////////////////////////////
 
     /** {@inheritDoc} */
+    @Override
     public final CardList mayDrawCard() {
-        return mayDrawCards(1);
+        return this.mayDrawCards(1);
     }
 
     /** {@inheritDoc} */
+    @Override
     public final CardList mayDrawCards(final int n) {
-        if (getCardsIn(Zone.Library).size() > n) {
-            return drawCards(n);
+        if (this.getCardsIn(Zone.Library).size() > n) {
+            return this.drawCards(n);
         } else {
             return new CardList();
         }
@@ -116,21 +138,22 @@ public class AIPlayer extends Player {
      * 
      * @return a boolean.
      */
+    @Override
     public final boolean dredge() {
-        CardList dredgers = getDredge();
-        Random random = MyRandom.getRandom();
+        final CardList dredgers = this.getDredge();
+        final Random random = MyRandom.getRandom();
 
         // use dredge if there are more than one of them in your graveyard
-        if (dredgers.size() > 1 || (dredgers.size() == 1 && random.nextBoolean())) {
+        if ((dredgers.size() > 1) || ((dredgers.size() == 1) && random.nextBoolean())) {
             dredgers.shuffle();
-            Card c = dredgers.get(0);
+            final Card c = dredgers.get(0);
             // rule 702.49a
-            if (getDredgeNumber(c) <= getCardsIn(Zone.Library).size()) {
+            if (this.getDredgeNumber(c) <= this.getCardsIn(Zone.Library).size()) {
                 // dredge library, put card in hand
                 AllZone.getGameAction().moveToHand(c);
                 // put dredge number in graveyard
-                for (int i = 0; i < getDredgeNumber(c); i++) {
-                    Card c2 = getCardsIn(Zone.Library).get(0);
+                for (int i = 0; i < this.getDredgeNumber(c); i++) {
+                    final Card c2 = this.getCardsIn(Zone.Library).get(0);
                     AllZone.getGameAction().moveToGraveyard(c2);
                 }
                 return true;
@@ -146,21 +169,23 @@ public class AIPlayer extends Player {
     // //////////////////////////////
 
     /** {@inheritDoc} */
+    @Override
     public final CardList discard(final int num, final SpellAbility sa, final boolean duringResolution) {
-        int max = getCardsIn(Zone.Hand).size();
+        int max = this.getCardsIn(Zone.Hand).size();
         max = Math.min(max, num);
-        CardList discarded = ComputerUtil.discardNumTypeAI(max, null, sa);
+        final CardList discarded = ComputerUtil.discardNumTypeAI(max, null, sa);
         for (int i = 0; i < discarded.size(); i++) {
-            doDiscard(discarded.get(i), sa);
+            this.doDiscard(discarded.get(i), sa);
         }
 
         return discarded;
     } // end discard
 
     /** {@inheritDoc} */
+    @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        CardList hand = getCardsIn(Zone.Hand);
-        CardList tHand = hand.getType(uType);
+        final CardList hand = this.getCardsIn(Zone.Hand);
+        final CardList tHand = hand.getType(uType);
 
         if (tHand.size() > 0) {
             CardListUtil.sortCMC(tHand);
@@ -176,8 +201,9 @@ public class AIPlayer extends Player {
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void handToLibrary(final int numToLibrary, final String libPosIn) {
-        String libPos = libPosIn;
+        final String libPos = libPosIn;
 
         for (int i = 0; i < numToLibrary; i++) {
             int position;
@@ -186,22 +212,22 @@ public class AIPlayer extends Player {
             } else if (libPos.equalsIgnoreCase("Bottom")) {
                 position = -1;
             } else {
-                Random r = MyRandom.getRandom();
+                final Random r = MyRandom.getRandom();
                 if (r.nextBoolean()) {
                     position = 0;
                 } else {
                     position = -1;
                 }
             }
-            CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+            final CardList hand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
             CardList blIP = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
 
             blIP = blIP.getType("Basic");
             if (blIP.size() > 5) {
-                CardList blIH = hand.getType("Basic");
+                final CardList blIH = hand.getType("Basic");
                 if (blIH.size() > 0) {
-                    Card card = blIH.get(CardUtil.getRandomIndex(blIH));
+                    final Card card = blIH.get(CardUtil.getRandomIndex(blIH));
 
                     AllZone.getGameAction().moveToLibrary(card, position);
                 } else {
@@ -221,6 +247,7 @@ public class AIPlayer extends Player {
     // /////////////////////////
 
     /** {@inheritDoc} */
+    @Override
     protected final void doScry(final CardList topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
@@ -228,6 +255,7 @@ public class AIPlayer extends Player {
             if (topN.get(i).isBasicLand()) {
                 CardList bl = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 bl = bl.filter(new CardListFilter() {
+                    @Override
                     public boolean addCard(final Card c) {
                         if (c.isBasicLand()) {
                             return true;
@@ -242,6 +270,7 @@ public class AIPlayer extends Player {
             } else if (topN.get(i).isCreature()) {
                 CardList cl = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
                 cl = cl.filter(new CardListFilter() {
+                    @Override
                     public boolean addCard(final Card c) {
                         if (c.isCreature()) {
                             return true;
@@ -255,7 +284,7 @@ public class AIPlayer extends Player {
                                         // probably don't need more
             }
             if (bottom) {
-                Card c = topN.get(i);
+                final Card c = topN.get(i);
                 AllZone.getGameAction().moveToBottomOfLibrary(c);
                 // topN.remove(c);
             }
@@ -263,24 +292,26 @@ public class AIPlayer extends Player {
         num = topN.size();
         // put the rest on top in random order
         for (int i = 0; i < num; i++) {
-            Random rndm = MyRandom.getRandom();
-            int r = rndm.nextInt(topN.size());
-            Card c = topN.get(r);
+            final Random rndm = MyRandom.getRandom();
+            final int r = rndm.nextInt(topN.size());
+            final Card c = topN.get(r);
             AllZone.getGameAction().moveToLibrary(c);
             topN.remove(r);
         }
     }
 
     /** {@inheritDoc} */
+    @Override
     public final void sacrificePermanent(final String prompt, final CardList choices) {
         if (choices.size() > 0) {
             // TODO - this could probably use better AI
-            Card c = CardFactoryUtil.getWorstPermanentAI(choices, false, false, false, false);
+            final Card c = CardFactoryUtil.getWorstPermanentAI(choices, false, false, false, false);
             AllZone.getGameAction().sacrificeDestroy(c);
         }
     }
 
     /** {@inheritDoc} */
+    @Override
     protected final void clashMoveToTopOrBottom(final Card c) {
         // computer just puts the card back until such time it can make a
         // smarter decision
@@ -294,8 +325,8 @@ public class AIPlayer extends Player {
      */
     @Override
     protected final void discardChainsOfMephistopheles() {
-        discard(null);
-        drawCard();
+        this.discard(null);
+        this.drawCard();
     }
 
 } // end AIPlayer class

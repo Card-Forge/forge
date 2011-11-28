@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.Random;
@@ -26,20 +43,25 @@ public class MyRandom {
      * @return a boolean.
      */
     public static boolean percentTrue(final int percent) {
-        return percent > getRandom().nextInt(100);
+        return percent > MyRandom.getRandom().nextInt(100);
     }
 
     /**
+     * Gets the random.
+     * 
      * @return the random
      */
     public static Random getRandom() {
-        return random;
+        return MyRandom.random;
     }
 
     /**
-     * @param random the random to set
+     * Sets the random.
+     * 
+     * @param random
+     *            the random to set
      */
-    public static void setRandom(Random random) {
+    public static void setRandom(final Random random) {
         MyRandom.random = random; // TODO: Add 0 to parameter's name.
     }
 }

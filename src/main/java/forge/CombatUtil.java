@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -300,9 +317,11 @@ public class CombatUtil {
 
     /**
      * Can be blocked.
-     *
-     * @param attacker the attacker
-     * @param blockers the blockers
+     * 
+     * @param attacker
+     *            the attacker
+     * @param blockers
+     *            the blockers
      * @return true, if successful
      */
     public static boolean canBeBlocked(final Card attacker, final CardList blockers) {
@@ -632,7 +651,8 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(final Card c) {
-        if (c.isTapped() || c.isPhasedOut() || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))) {
+        if (c.isTapped() || c.isPhasedOut()
+                || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))) {
             return false;
         }
 
@@ -1724,8 +1744,8 @@ public class CombatUtil {
             }
         } // flanking
 
-        if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !withoutAbilities))
-                && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect")))
+        if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !withoutAbilities)) && !(defender
+                .hasKeyword("Wither") || defender.hasKeyword("Infect")))
                 || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(Counters.M1M1))) {
             return false;
         }
@@ -1855,8 +1875,8 @@ public class CombatUtil {
             }
         } // flanking
 
-        if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities))
-                && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect")))
+        if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities)) && !(attacker
+                .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
                 || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1))) {
             return false;
         }
@@ -2127,11 +2147,12 @@ public class CombatUtil {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public static void checkDeclareAttackers(final Card c) { // this method checks
-    // triggered effects of
-    // attacking creatures,
-    // right before defending
-    // player declares blockers
+    public static void checkDeclareAttackers(final Card c) { // this method
+                                                             // checks
+        // triggered effects of
+        // attacking creatures,
+        // right before defending
+        // player declares blockers
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", c);

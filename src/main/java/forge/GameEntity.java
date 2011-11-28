@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -27,7 +44,7 @@ public abstract class GameEntity extends MyObservable {
      * @return a {@link java.lang.String} object.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -38,8 +55,8 @@ public abstract class GameEntity extends MyObservable {
      * @param s
      *            a {@link java.lang.String} object.
      */
-    public void setName(String s) {
-        name = s;
+    public void setName(final String s) {
+        this.name = s;
     }
 
     // ////////////////////////
@@ -61,10 +78,10 @@ public abstract class GameEntity extends MyObservable {
     public void addDamage(final int damage, final Card source) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, false);
-        damageToDo = preventDamage(damageToDo, source, false);
+        damageToDo = this.replaceDamage(damageToDo, source, false);
+        damageToDo = this.preventDamage(damageToDo, source, false);
 
-        addDamageAfterPrevention(damageToDo, source, false);
+        this.addDamageAfterPrevention(damageToDo, source, false);
     }
 
     /**
@@ -80,9 +97,9 @@ public abstract class GameEntity extends MyObservable {
     public void addDamageWithoutPrevention(final int damage, final Card source) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, false);
+        damageToDo = this.replaceDamage(damageToDo, source, false);
 
-        addDamageAfterPrevention(damageToDo, source, false);
+        this.addDamageAfterPrevention(damageToDo, source, false);
     }
 
     // This function handles damage after replacement and prevention effects are
@@ -122,8 +139,8 @@ public abstract class GameEntity extends MyObservable {
 
         int restDamage = damage;
 
-        restDamage = staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = this.staticReplaceDamage(restDamage, source, isCombat);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
 
         return restDamage;
     }
@@ -162,7 +179,7 @@ public abstract class GameEntity extends MyObservable {
      *            a boolean.
      * @return a int.
      */
-    public int staticReplaceDamage(final int damage, Card source, boolean isCombat) {
+    public int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
         return 0;
     }
 
@@ -179,7 +196,7 @@ public abstract class GameEntity extends MyObservable {
      *            a boolean.
      * @return a int.
      */
-    public int replaceDamage(final int damage, Card source, boolean isCombat) {
+    public int replaceDamage(final int damage, final Card source, final boolean isCombat) {
         return 0;
     }
 
@@ -196,7 +213,7 @@ public abstract class GameEntity extends MyObservable {
      *            a boolean.
      * @return a int.
      */
-    public int preventDamage(final int damage, Card source, boolean isCombat) {
+    public int preventDamage(final int damage, final Card source, final boolean isCombat) {
         return 0;
     }
 
@@ -215,8 +232,8 @@ public abstract class GameEntity extends MyObservable {
      * @param n
      *            a int.
      */
-    public void setPreventNextDamage(int n) {
-        preventNextDamage = n;
+    public void setPreventNextDamage(final int n) {
+        this.preventNextDamage = n;
     }
 
     /**
@@ -227,7 +244,7 @@ public abstract class GameEntity extends MyObservable {
      * @return a int.
      */
     public int getPreventNextDamage() {
-        return preventNextDamage;
+        return this.preventNextDamage;
     }
 
     /**
@@ -238,8 +255,8 @@ public abstract class GameEntity extends MyObservable {
      * @param n
      *            a int.
      */
-    public void addPreventNextDamage(int n) {
-        preventNextDamage += n;
+    public void addPreventNextDamage(final int n) {
+        this.preventNextDamage += n;
     }
 
     /**
@@ -250,8 +267,8 @@ public abstract class GameEntity extends MyObservable {
      * @param n
      *            a int.
      */
-    public void subtractPreventNextDamage(int n) {
-        preventNextDamage -= n;
+    public void subtractPreventNextDamage(final int n) {
+        this.preventNextDamage -= n;
     }
 
     /**
@@ -260,7 +277,7 @@ public abstract class GameEntity extends MyObservable {
      * </p>
      */
     public void resetPreventNextDamage() {
-        preventNextDamage = 0;
+        this.preventNextDamage = 0;
     }
 
     /**
@@ -270,7 +287,7 @@ public abstract class GameEntity extends MyObservable {
      *            the keyword
      * @return true, if successful
      */
-    public boolean hasKeyword(String keyword) {
+    public boolean hasKeyword(final String keyword) {
         return false;
     }
 
@@ -281,7 +298,7 @@ public abstract class GameEntity extends MyObservable {
      *            the sa
      * @return a boolean
      */
-    public boolean canBeTargetedBy(SpellAbility sa) {
+    public boolean canBeTargetedBy(final SpellAbility sa) {
         return false;
     }
 
@@ -298,8 +315,8 @@ public abstract class GameEntity extends MyObservable {
      */
     public boolean isValid(final String[] restrictions, final Player sourceController, final Card source) {
 
-        for (int i = 0; i < restrictions.length; i++) {
-            if (isValid(restrictions[i], sourceController, source)) {
+        for (final String restriction : restrictions) {
+            if (this.isValid(restriction, sourceController, source)) {
                 return true;
             }
         }
@@ -333,7 +350,7 @@ public abstract class GameEntity extends MyObservable {
      *            the source
      * @return true, if successful
      */
-    public boolean hasProperty(String property, final Player sourceController, final Card source) {
+    public boolean hasProperty(final String property, final Player sourceController, final Card source) {
         return false;
     }
 
@@ -346,7 +363,7 @@ public abstract class GameEntity extends MyObservable {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<Card> getEnchantedBy() {
-        return enchantedBy;
+        return this.enchantedBy;
     }
 
     /**
@@ -358,7 +375,7 @@ public abstract class GameEntity extends MyObservable {
      *            a {@link java.util.ArrayList} object.
      */
     public final void setEnchantedBy(final ArrayList<Card> list) {
-        enchantedBy = list;
+        this.enchantedBy = list;
     }
 
     /**
@@ -369,7 +386,7 @@ public abstract class GameEntity extends MyObservable {
      * @return a boolean.
      */
     public final boolean isEnchanted() {
-        return enchantedBy.size() != 0;
+        return this.enchantedBy.size() != 0;
     }
 
     /**
@@ -381,7 +398,7 @@ public abstract class GameEntity extends MyObservable {
      *            a {@link forge.Card} object.
      */
     public final void addEnchantedBy(final Card c) {
-        enchantedBy.add(c);
+        this.enchantedBy.add(c);
         this.updateObservers();
     }
 
@@ -394,7 +411,7 @@ public abstract class GameEntity extends MyObservable {
      *            a {@link forge.Card} object.
      */
     public final void removeEnchantedBy(final Card c) {
-        enchantedBy.remove(c);
+        this.enchantedBy.remove(c);
         this.updateObservers();
     }
 
@@ -404,18 +421,20 @@ public abstract class GameEntity extends MyObservable {
      * </p>
      */
     public final void unEnchantAllCards() {
-        for (int i = 0; i < enchantedBy.size(); i++) {
-            enchantedBy.get(i).unEnchantEntity(this);
+        for (int i = 0; i < this.enchantedBy.size(); i++) {
+            this.enchantedBy.get(i).unEnchantEntity(this);
         }
     }
 
     /**
      * 
      * hasProtectionFrom.
-     * @param source Card
+     * 
+     * @param source
+     *            Card
      * @return boolean
      */
-    public boolean hasProtectionFrom(Card source) {
+    public boolean hasProtectionFrom(final Card source) {
         return false;
     }
 
@@ -428,6 +447,6 @@ public abstract class GameEntity extends MyObservable {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
 }

@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 /**
@@ -10,8 +27,8 @@ package forge;
  */
 public class CardPowerToughness {
 
-    private int power;
-    private int toughness;
+    private final int power;
+    private final int toughness;
     private long timeStamp = 0;
 
     /**
@@ -22,7 +39,7 @@ public class CardPowerToughness {
      * @return a long.
      */
     public final long getTimestamp() {
-        return timeStamp;
+        return this.timeStamp;
     }
 
     /**
@@ -38,9 +55,9 @@ public class CardPowerToughness {
      *            a long.
      */
     CardPowerToughness(final int newPower, final int newToughness, final long stamp) {
-        power = newPower;
-        toughness = newToughness;
-        timeStamp = stamp;
+        this.power = newPower;
+        this.toughness = newToughness;
+        this.timeStamp = stamp;
     }
 
     /**
@@ -50,7 +67,7 @@ public class CardPowerToughness {
      * @return int
      */
     public final int getPower() {
-        return power;
+        return this.power;
     }
 
     /**
@@ -60,7 +77,7 @@ public class CardPowerToughness {
      * @return int
      */
     public final int getToughness() {
-        return toughness;
+        return this.toughness;
     }
 
     /**
@@ -77,6 +94,6 @@ public class CardPowerToughness {
      * @return a boolean.
      */
     public final boolean equals(final int newPower, final int newToughness, final long stamp) {
-        return timeStamp == stamp && power == newPower && toughness == newToughness;
+        return (this.timeStamp == stamp) && (this.power == newPower) && (this.toughness == newToughness);
     }
 }

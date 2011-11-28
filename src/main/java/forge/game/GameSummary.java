@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.game;
 
 import java.util.HashMap;
@@ -21,7 +38,7 @@ public final class GameSummary {
     private String playerWinner = "Nobody";
 
     /** The player got first turn. */
-    //private String playerGotFirstTurn = "Nobody";
+    // private String playerGotFirstTurn = "Nobody";
 
     /** The last turn number. */
     private int lastTurnNumber = 0;
@@ -37,8 +54,9 @@ public final class GameSummary {
 
     /**
      * Instantiates a new game summary.
-     *
-     * @param names the names
+     * 
+     * @param names
+     *            the names
      */
     public GameSummary(final String... names) {
         for (final String n : names) {
@@ -48,10 +66,13 @@ public final class GameSummary {
 
     /**
      * End.
-     *
-     * @param condition the condition
-     * @param winner the winner
-     * @param spellEffect the spell effect
+     * 
+     * @param condition
+     *            the condition
+     * @param winner
+     *            the winner
+     * @param spellEffect
+     *            the spell effect
      */
     public void end(final GameEndReason condition, final String winner, final String spellEffect) {
         this.winCondition = condition;
@@ -61,7 +82,7 @@ public final class GameSummary {
 
     /**
      * Checks if is draw.
-     *
+     * 
      * @return true, if is draw
      */
     public boolean isDraw() {
@@ -70,8 +91,9 @@ public final class GameSummary {
 
     /**
      * Checks if is winner.
-     *
-     * @param name the name
+     * 
+     * @param name
+     *            the name
      * @return true, if is winner
      */
     public boolean isWinner(final String name) {
@@ -80,7 +102,7 @@ public final class GameSummary {
 
     /**
      * Gets the winner.
-     *
+     * 
      * @return the winner
      */
     public String getWinner() {
@@ -89,7 +111,7 @@ public final class GameSummary {
 
     /**
      * Gets the win condition.
-     *
+     * 
      * @return the win condition
      */
     public GameEndReason getWinCondition() {
@@ -98,8 +120,9 @@ public final class GameSummary {
 
     /**
      * Gets the player rating.
-     *
-     * @param name the name
+     * 
+     * @param name
+     *            the name
      * @return the player rating
      */
     public GamePlayerRating getPlayerRating(final String name) {
@@ -108,7 +131,7 @@ public final class GameSummary {
 
     /**
      * Gets the turn game ended.
-     *
+     * 
      * @return the turn game ended
      */
     public int getTurnGameEnded() {
@@ -117,14 +140,12 @@ public final class GameSummary {
 
     /**
      * Sets the player who got first turn.
-     *
-     * @param playerName the new player who got first turn
+     * 
      */
     /*
-    public void setPlayerWhoGotFirstTurn(final String playerName) {
-        this.playerGotFirstTurn = playerName;
-    }
-    */
+     * public void setPlayerWhoGotFirstTurn(final String playerName) {
+     * this.playerGotFirstTurn = playerName; }
+     */
 
     /**
      * Notify next turn.
@@ -135,7 +156,7 @@ public final class GameSummary {
 
     /**
      * Gets the win spell effect.
-     *
+     * 
      * @return the win spell effect
      */
     public String getWinSpellEffect() {

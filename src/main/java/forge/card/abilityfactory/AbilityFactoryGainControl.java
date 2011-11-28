@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
@@ -223,7 +240,7 @@ public class AbilityFactoryGainControl {
         ArrayList<Card> tgtCards;
 
         final Target tgt = this.af.getAbTgt();
-        if (tgt != null  && !params.containsKey("Defined")) {
+        if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
@@ -231,7 +248,7 @@ public class AbilityFactoryGainControl {
 
         ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                 this.params.get("NewController"), sa);
-        if (tgt != null && tgt.getTargetPlayers() != null) {
+        if ((tgt != null) && (tgt.getTargetPlayers() != null)) {
             newController = tgt.getTargetPlayers();
         }
         if (newController.size() == 0) {
@@ -293,8 +310,7 @@ public class AbilityFactoryGainControl {
             @Override
             public boolean addCard(final Card c) {
                 final Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck")
-                        && c.canBeTargetedBy(sa);
+                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
             }
         });
 
@@ -374,7 +390,7 @@ public class AbilityFactoryGainControl {
         final boolean self = this.params.containsKey("Defined") && this.params.get("Defined").equals("Self");
 
         final Target tgt = this.af.getAbTgt();
-        if (tgt != null && !params.containsKey("Defined")) {
+        if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
@@ -383,10 +399,9 @@ public class AbilityFactoryGainControl {
 
         ArrayList<Player> controllers = new ArrayList<Player>();
 
-        if (params.containsKey("NewController")) {
-            controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    this.params.get("NewController"), sa);
-        } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
+        if (this.params.containsKey("NewController")) {
+            controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), this.params.get("NewController"), sa);
+        } else if ((tgt != null) && (tgt.getTargetPlayers() != null) && tgt.canTgtPlayer()) {
             controllers = tgt.getTargetPlayers();
         }
 

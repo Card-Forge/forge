@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -782,8 +799,7 @@ public class GameAction {
             if (!frame.isDisplayable()) {
                 return;
             }
-        }
-        else {
+        } else {
             final ViewTopLevel frame = (ViewTopLevel) AllZone.getDisplay();
             if (!frame.isDisplayable()) {
                 return;
@@ -792,7 +808,7 @@ public class GameAction {
 
         if (this.canShowWinLose && this.checkEndGameSate()) {
             AllZone.getDisplay().savePrefs();
-            //frame.setEnabled(false);
+            // frame.setEnabled(false);
             // frame.dispose();
 
             // Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(),
@@ -1745,7 +1761,7 @@ public class GameAction {
     public final void computerStartsGame() {
         final Player computer = AllZone.getComputerPlayer();
         AllZone.getPhase().setPlayerTurn(computer);
-        //AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
+        // AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
     }
 
     // if Card had the type "Aura" this method would always return true, since
@@ -1812,9 +1828,10 @@ public class GameAction {
                             final SpellAbility flashback = sa.copy();
                             flashback.setFlashBackAbility(true);
                             if (!keyword.equals("Flashback")) { // there is a
-                                                               // flashback cost
-                                                               // (and not the
-                                                               // cards cost)
+                                                                // flashback
+                                                                // cost
+                                                                // (and not the
+                                                                // cards cost)
                                 final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
                                 flashback.setPayCosts(fbCost);
                             }
@@ -2828,7 +2845,7 @@ public class GameAction {
 
     /**
      * Gets the cost cutting get multi micker mana cost paid.
-     *
+     * 
      * @return the costCuttingGetMultiMickerManaCostPaid
      */
     public int getCostCuttingGetMultiMickerManaCostPaid() {
@@ -2837,8 +2854,9 @@ public class GameAction {
 
     /**
      * Sets the cost cutting get multi micker mana cost paid.
-     *
-     * @param costCuttingGetMultiMickerManaCostPaid the costCuttingGetMultiMickerManaCostPaid to set
+     * 
+     * @param costCuttingGetMultiMickerManaCostPaid
+     *            the costCuttingGetMultiMickerManaCostPaid to set
      */
     public void setCostCuttingGetMultiMickerManaCostPaid(final int costCuttingGetMultiMickerManaCostPaid) {
         this.costCuttingGetMultiMickerManaCostPaid = costCuttingGetMultiMickerManaCostPaid; // TODO:
@@ -2851,7 +2869,7 @@ public class GameAction {
 
     /**
      * Gets the cost cutting get multi micker mana cost paid colored.
-     *
+     * 
      * @return the costCuttingGetMultiMickerManaCostPaidColored
      */
     public String getCostCuttingGetMultiMickerManaCostPaidColored() {
@@ -2860,8 +2878,9 @@ public class GameAction {
 
     /**
      * Sets the cost cutting get multi micker mana cost paid colored.
-     *
-     * @param costCuttingGetMultiMickerManaCostPaidColored the costCuttingGetMultiMickerManaCostPaidColored to set
+     * 
+     * @param costCuttingGetMultiMickerManaCostPaidColored
+     *            the costCuttingGetMultiMickerManaCostPaidColored to set
      */
     public void setCostCuttingGetMultiMickerManaCostPaidColored(
             final String costCuttingGetMultiMickerManaCostPaidColored) {

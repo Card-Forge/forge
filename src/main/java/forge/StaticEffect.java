@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -26,27 +43,27 @@ public class StaticEffect {
     private HashMap<String, String> mapParams = new HashMap<String, String>();
 
     // for P/T
-    private HashMap<Card, String> originalPT = new HashMap<Card, String>();
+    private final HashMap<Card, String> originalPT = new HashMap<Card, String>();
 
     // for types
     private boolean overwriteTypes = false;
     private boolean keepSupertype = false;
     private boolean removeSubTypes = false;
-    private HashMap<Card, ArrayList<String>> types = new HashMap<Card, ArrayList<String>>();
-    private HashMap<Card, ArrayList<String>> originalTypes = new HashMap<Card, ArrayList<String>>();
+    private final HashMap<Card, ArrayList<String>> types = new HashMap<Card, ArrayList<String>>();
+    private final HashMap<Card, ArrayList<String>> originalTypes = new HashMap<Card, ArrayList<String>>();
 
     // keywords
     private boolean overwriteKeywords = false;
-    private HashMap<Card, ArrayList<String>> originalKeywords = new HashMap<Card, ArrayList<String>>();
+    private final HashMap<Card, ArrayList<String>> originalKeywords = new HashMap<Card, ArrayList<String>>();
 
     // for abilities
     private boolean overwriteAbilities = false;
-    private HashMap<Card, ArrayList<SpellAbility>> originalAbilities = new HashMap<Card, ArrayList<SpellAbility>>();
+    private final HashMap<Card, ArrayList<SpellAbility>> originalAbilities = new HashMap<Card, ArrayList<SpellAbility>>();
 
     // for colors
     private String colorDesc = "";
     private boolean overwriteColors = false;
-    private HashMap<Card, Long> timestamps = new HashMap<Card, Long>();
+    private final HashMap<Card, Long> timestamps = new HashMap<Card, Long>();
 
     /**
      * setTimestamp TODO Write javadoc for this method.
@@ -55,7 +72,7 @@ public class StaticEffect {
      *            a long
      */
     public final void setTimestamp(final long t) {
-        timestamp = t;
+        this.timestamp = t;
     }
 
     /**
@@ -64,7 +81,7 @@ public class StaticEffect {
      * @return a long
      */
     public final long getTimestamp() {
-        return timestamp;
+        return this.timestamp;
     }
 
     // overwrite SAs
@@ -76,7 +93,7 @@ public class StaticEffect {
      * @return a boolean.
      */
     public final boolean isOverwriteAbilities() {
-        return overwriteAbilities;
+        return this.overwriteAbilities;
     }
 
     /**
@@ -103,12 +120,12 @@ public class StaticEffect {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void addOriginalAbilities(final Card c, final SpellAbility sa) {
-        if (!originalAbilities.containsKey(c)) {
-            ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
+        if (!this.originalAbilities.containsKey(c)) {
+            final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
             list.add(sa);
-            originalAbilities.put(c, list);
+            this.originalAbilities.put(c, list);
         } else {
-            originalAbilities.get(c).add(sa);
+            this.originalAbilities.get(c).add(sa);
         }
     }
 
@@ -123,12 +140,12 @@ public class StaticEffect {
      *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalAbilities(final Card c, final ArrayList<SpellAbility> s) {
-        ArrayList<SpellAbility> list = new ArrayList<SpellAbility>(s);
-        if (!originalAbilities.containsKey(c)) {
-            originalAbilities.put(c, list);
+        final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>(s);
+        if (!this.originalAbilities.containsKey(c)) {
+            this.originalAbilities.put(c, list);
         } else {
-            originalAbilities.remove(c);
-            originalAbilities.put(c, list);
+            this.originalAbilities.remove(c);
+            this.originalAbilities.put(c, list);
         }
     }
 
@@ -142,9 +159,9 @@ public class StaticEffect {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<SpellAbility> getOriginalAbilities(final Card c) {
-        ArrayList<SpellAbility> returnList = new ArrayList<SpellAbility>();
-        if (originalAbilities.containsKey(c)) {
-            returnList.addAll(originalAbilities.get(c));
+        final ArrayList<SpellAbility> returnList = new ArrayList<SpellAbility>();
+        if (this.originalAbilities.containsKey(c)) {
+            returnList.addAll(this.originalAbilities.get(c));
         }
         return returnList;
     }
@@ -158,8 +175,8 @@ public class StaticEffect {
      *            a {@link forge.Card} object.
      */
     public final void clearOriginalAbilities(final Card c) {
-        if (originalAbilities.containsKey(c)) {
-            originalAbilities.get(c).clear();
+        if (this.originalAbilities.containsKey(c)) {
+            this.originalAbilities.get(c).clear();
         }
     }
 
@@ -169,7 +186,7 @@ public class StaticEffect {
      * </p>
      */
     public final void clearAllOriginalAbilities() {
-        originalAbilities.clear();
+        this.originalAbilities.clear();
     }
 
     // overwrite keywords
@@ -181,7 +198,7 @@ public class StaticEffect {
      * @return a boolean.
      */
     public final boolean isOverwriteKeywords() {
-        return overwriteKeywords;
+        return this.overwriteKeywords;
     }
 
     /**
@@ -208,12 +225,12 @@ public class StaticEffect {
      *            a {@link java.lang.String} object.
      */
     public final void addOriginalKeyword(final Card c, final String s) {
-        if (!originalKeywords.containsKey(c)) {
-            ArrayList<String> list = new ArrayList<String>();
+        if (!this.originalKeywords.containsKey(c)) {
+            final ArrayList<String> list = new ArrayList<String>();
             list.add(s);
-            originalKeywords.put(c, list);
+            this.originalKeywords.put(c, list);
         } else {
-            originalKeywords.get(c).add(s);
+            this.originalKeywords.get(c).add(s);
         }
     }
 
@@ -228,12 +245,12 @@ public class StaticEffect {
      *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalKeywords(final Card c, final ArrayList<String> s) {
-        ArrayList<String> list = new ArrayList<String>(s);
-        if (!originalKeywords.containsKey(c)) {
-            originalKeywords.put(c, list);
+        final ArrayList<String> list = new ArrayList<String>(s);
+        if (!this.originalKeywords.containsKey(c)) {
+            this.originalKeywords.put(c, list);
         } else {
-            originalKeywords.remove(c);
-            originalKeywords.put(c, list);
+            this.originalKeywords.remove(c);
+            this.originalKeywords.put(c, list);
         }
     }
 
@@ -247,9 +264,9 @@ public class StaticEffect {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getOriginalKeywords(final Card c) {
-        ArrayList<String> returnList = new ArrayList<String>();
-        if (originalKeywords.containsKey(c)) {
-            returnList.addAll(originalKeywords.get(c));
+        final ArrayList<String> returnList = new ArrayList<String>();
+        if (this.originalKeywords.containsKey(c)) {
+            returnList.addAll(this.originalKeywords.get(c));
         }
         return returnList;
     }
@@ -263,8 +280,8 @@ public class StaticEffect {
      *            a {@link forge.Card} object.
      */
     public final void clearOriginalKeywords(final Card c) {
-        if (originalKeywords.containsKey(c)) {
-            originalKeywords.get(c).clear();
+        if (this.originalKeywords.containsKey(c)) {
+            this.originalKeywords.get(c).clear();
         }
     }
 
@@ -274,7 +291,7 @@ public class StaticEffect {
      * </p>
      */
     public final void clearAllOriginalKeywords() {
-        originalKeywords.clear();
+        this.originalKeywords.clear();
     }
 
     // original power/toughness
@@ -291,9 +308,9 @@ public class StaticEffect {
      *            a int.
      */
     public final void addOriginalPT(final Card c, final int power, final int toughness) {
-        String pt = power + "/" + toughness;
-        if (!originalPT.containsKey(c)) {
-            originalPT.put(c, pt);
+        final String pt = power + "/" + toughness;
+        if (!this.originalPT.containsKey(c)) {
+            this.originalPT.put(c, pt);
         }
     }
 
@@ -308,8 +325,8 @@ public class StaticEffect {
      */
     public final int getOriginalPower(final Card c) {
         int power = -1;
-        if (originalPT.containsKey(c)) {
-            power = Integer.parseInt(originalPT.get(c).split("/")[0]);
+        if (this.originalPT.containsKey(c)) {
+            power = Integer.parseInt(this.originalPT.get(c).split("/")[0]);
         }
         return power;
     }
@@ -325,8 +342,8 @@ public class StaticEffect {
      */
     public final int getOriginalToughness(final Card c) {
         int tough = -1;
-        if (originalPT.containsKey(c)) {
-            tough = Integer.parseInt(originalPT.get(c).split("/")[1]);
+        if (this.originalPT.containsKey(c)) {
+            tough = Integer.parseInt(this.originalPT.get(c).split("/")[1]);
         }
         return tough;
     }
@@ -337,7 +354,7 @@ public class StaticEffect {
      * </p>
      */
     public final void clearAllOriginalPTs() {
-        originalPT.clear();
+        this.originalPT.clear();
     }
 
     // should we overwrite types?
@@ -349,7 +366,7 @@ public class StaticEffect {
      * @return a boolean.
      */
     public final boolean isOverwriteTypes() {
-        return overwriteTypes;
+        return this.overwriteTypes;
     }
 
     /**
@@ -372,7 +389,7 @@ public class StaticEffect {
      * @return a boolean.
      */
     public final boolean isKeepSupertype() {
-        return keepSupertype;
+        return this.keepSupertype;
     }
 
     /**
@@ -396,7 +413,7 @@ public class StaticEffect {
      * @return a boolean.
      */
     public final boolean isRemoveSubTypes() {
-        return removeSubTypes;
+        return this.removeSubTypes;
     }
 
     /**
@@ -423,12 +440,12 @@ public class StaticEffect {
      *            a {@link java.lang.String} object.
      */
     public final void addOriginalType(final Card c, final String s) {
-        if (!originalTypes.containsKey(c)) {
-            ArrayList<String> list = new ArrayList<String>();
+        if (!this.originalTypes.containsKey(c)) {
+            final ArrayList<String> list = new ArrayList<String>();
             list.add(s);
-            originalTypes.put(c, list);
+            this.originalTypes.put(c, list);
         } else {
-            originalTypes.get(c).add(s);
+            this.originalTypes.get(c).add(s);
         }
     }
 
@@ -443,12 +460,12 @@ public class StaticEffect {
      *            a {@link java.util.ArrayList} object.
      */
     public final void addOriginalTypes(final Card c, final ArrayList<String> s) {
-        ArrayList<String> list = new ArrayList<String>(s);
-        if (!originalTypes.containsKey(c)) {
-            originalTypes.put(c, list);
+        final ArrayList<String> list = new ArrayList<String>(s);
+        if (!this.originalTypes.containsKey(c)) {
+            this.originalTypes.put(c, list);
         } else {
-            originalTypes.remove(c);
-            originalTypes.put(c, list);
+            this.originalTypes.remove(c);
+            this.originalTypes.put(c, list);
         }
     }
 
@@ -462,9 +479,9 @@ public class StaticEffect {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getOriginalTypes(final Card c) {
-        ArrayList<String> returnList = new ArrayList<String>();
-        if (originalTypes.containsKey(c)) {
-            returnList.addAll(originalTypes.get(c));
+        final ArrayList<String> returnList = new ArrayList<String>();
+        if (this.originalTypes.containsKey(c)) {
+            returnList.addAll(this.originalTypes.get(c));
         }
         return returnList;
     }
@@ -478,8 +495,8 @@ public class StaticEffect {
      *            a {@link forge.Card} object.
      */
     public final void clearOriginalTypes(final Card c) {
-        if (originalTypes.containsKey(c)) {
-            originalTypes.get(c).clear();
+        if (this.originalTypes.containsKey(c)) {
+            this.originalTypes.get(c).clear();
         }
     }
 
@@ -489,7 +506,7 @@ public class StaticEffect {
      * </p>
      */
     public final void clearAllOriginalTypes() {
-        originalTypes.clear();
+        this.originalTypes.clear();
     }
 
     // statically assigned types
@@ -504,12 +521,12 @@ public class StaticEffect {
      *            a {@link java.lang.String} object.
      */
     public final void addType(final Card c, final String s) {
-        if (!types.containsKey(c)) {
-            ArrayList<String> list = new ArrayList<String>();
+        if (!this.types.containsKey(c)) {
+            final ArrayList<String> list = new ArrayList<String>();
             list.add(s);
-            types.put(c, list);
+            this.types.put(c, list);
         } else {
-            types.get(c).add(s);
+            this.types.get(c).add(s);
         }
     }
 
@@ -523,9 +540,9 @@ public class StaticEffect {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getTypes(final Card c) {
-        ArrayList<String> returnList = new ArrayList<String>();
-        if (types.containsKey(c)) {
-            returnList.addAll(types.get(c));
+        final ArrayList<String> returnList = new ArrayList<String>();
+        if (this.types.containsKey(c)) {
+            returnList.addAll(this.types.get(c));
         }
         return returnList;
     }
@@ -541,8 +558,8 @@ public class StaticEffect {
      *            a {@link java.lang.String} object.
      */
     public final void removeType(final Card c, final String type) {
-        if (types.containsKey(c)) {
-            types.get(c).remove(type);
+        if (this.types.containsKey(c)) {
+            this.types.get(c).remove(type);
         }
     }
 
@@ -555,8 +572,8 @@ public class StaticEffect {
      *            a {@link forge.Card} object.
      */
     public final void clearTypes(final Card c) {
-        if (types.containsKey(c)) {
-            types.get(c).clear();
+        if (this.types.containsKey(c)) {
+            this.types.get(c).clear();
         }
     }
 
@@ -566,7 +583,7 @@ public class StaticEffect {
      * </p>
      */
     public final void clearAllTypes() {
-        types.clear();
+        this.types.clear();
     }
 
     /**
@@ -577,7 +594,7 @@ public class StaticEffect {
      * @return a {@link java.lang.String} object.
      */
     public final String getColorDesc() {
-        return colorDesc;
+        return this.colorDesc;
     }
 
     /**
@@ -601,7 +618,7 @@ public class StaticEffect {
      * @return a boolean.
      */
     public final boolean isOverwriteColors() {
-        return overwriteColors;
+        return this.overwriteColors;
     }
 
     /**
@@ -624,7 +641,7 @@ public class StaticEffect {
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<Card, Long> getTimestamps() {
-        return timestamps;
+        return this.timestamps;
     }
 
     /**
@@ -638,7 +655,7 @@ public class StaticEffect {
      */
     public final long getTimestamp(final Card c) {
         long stamp = -1;
-        Long l = timestamps.get(c);
+        final Long l = this.timestamps.get(c);
         if (null != l) {
             stamp = l.longValue();
         }
@@ -656,7 +673,7 @@ public class StaticEffect {
      *            a long.
      */
     public final void addTimestamp(final Card c, final long timestamp) {
-        timestamps.put(c, Long.valueOf(timestamp));
+        this.timestamps.put(c, Long.valueOf(timestamp));
     }
 
     /**
@@ -665,7 +682,7 @@ public class StaticEffect {
      * </p>
      */
     public final void clearTimestamps() {
-        timestamps.clear();
+        this.timestamps.clear();
     }
 
     /**
@@ -677,7 +694,7 @@ public class StaticEffect {
      *            a {@link forge.Card} object.
      */
     public final void setSource(final Card card) {
-        source = card;
+        this.source = card;
     }
 
     /**
@@ -688,7 +705,7 @@ public class StaticEffect {
      * @return a {@link forge.Card} object.
      */
     public final Card getSource() {
-        return source;
+        return this.source;
     }
 
     /**
@@ -700,7 +717,7 @@ public class StaticEffect {
      *            a int.
      */
     public final void setKeywordNumber(final int i) {
-        keywordNumber = i;
+        this.keywordNumber = i;
     }
 
     /**
@@ -711,7 +728,7 @@ public class StaticEffect {
      * @return a int.
      */
     public final int getKeywordNumber() {
-        return keywordNumber;
+        return this.keywordNumber;
     }
 
     /**
@@ -722,7 +739,7 @@ public class StaticEffect {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getAffectedCards() {
-        return affectedCards;
+        return this.affectedCards;
     }
 
     /**
@@ -734,7 +751,7 @@ public class StaticEffect {
      *            a {@link forge.CardList} object.
      */
     public final void setAffectedCards(final CardList list) {
-        affectedCards = list;
+        this.affectedCards = list;
     }
 
     /**
@@ -743,7 +760,7 @@ public class StaticEffect {
      * @return the affected players
      */
     public final ArrayList<Player> getAffectedPlayers() {
-        return affectedPlayers;
+        return this.affectedPlayers;
     }
 
     /**
@@ -753,7 +770,7 @@ public class StaticEffect {
      *            the new affected players
      */
     public final void setAffectedPlayers(final ArrayList<Player> list) {
-        affectedPlayers = list;
+        this.affectedPlayers = list;
     }
 
     /**
@@ -765,7 +782,7 @@ public class StaticEffect {
      *            a int.
      */
     public final void setXValue(final int x) {
-        xValue = x;
+        this.xValue = x;
     }
 
     /**
@@ -776,7 +793,7 @@ public class StaticEffect {
      * @return a int.
      */
     public final int getXValue() {
-        return xValue;
+        return this.xValue;
     }
 
     /**
@@ -788,7 +805,7 @@ public class StaticEffect {
      *            a int.
      */
     public final void setYValue(final int y) {
-        yValue = y;
+        this.yValue = y;
     }
 
     /**
@@ -799,7 +816,7 @@ public class StaticEffect {
      * @return a int.
      */
     public final int getYValue() {
-        return yValue;
+        return this.yValue;
     }
 
     /**
@@ -809,7 +826,7 @@ public class StaticEffect {
      *            a HashMap
      */
     public final void setParams(final HashMap<String, String> params) {
-        mapParams = params;
+        this.mapParams = params;
     }
 
     /**
@@ -818,7 +835,7 @@ public class StaticEffect {
      * @return the params
      */
     public final HashMap<String, String> getParams() {
-        return mapParams;
+        return this.mapParams;
     }
 
     /**
@@ -828,7 +845,7 @@ public class StaticEffect {
      *            the new chosen type
      */
     public final void setChosenType(final String type) {
-        chosenType = type;
+        this.chosenType = type;
     }
 
     /**
@@ -837,7 +854,7 @@ public class StaticEffect {
      * @return the chosen type
      */
     public final String getChosenType() {
-        return chosenType;
+        return this.chosenType;
     }
 
 } // end class StaticEffect

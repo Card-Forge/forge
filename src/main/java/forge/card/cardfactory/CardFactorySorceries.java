@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
@@ -338,15 +355,13 @@ public class CardFactorySorceries {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append("Player cancelled or there is no more ");
                                 sb.append("cards available on Mind's Desire.");
-                                JOptionPane.showMessageDialog(null, sb.toString(), "",
-                                        JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
                             final StringBuilder sb = new StringBuilder();
                             sb.append("You can only play an instant at this point in time, ");
                             sb.append("but none are attached to Mind's Desire.");
-                            JOptionPane.showMessageDialog(null, sb.toString(), "",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 }
@@ -380,8 +395,7 @@ public class CardFactorySorceries {
                         final StringBuilder sb = new StringBuilder();
                         sb.append("Click Mind's Desire to see the available cards ");
                         sb.append("to play without paying its mana cost.");
-                        JOptionPane.showMessageDialog(null, sb.toString(), "",
-                                JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                     }
                     final CardList libList = player.getCardsIn(Zone.Library);
                     Card c = null;
@@ -728,8 +742,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void resolve() {
-                    if (AllZoneUtil.isCardInPlay(this.getTargetCard())
-                            && this.getTargetCard().canBeTargetedBy(this)) {
+                    if (AllZoneUtil.isCardInPlay(this.getTargetCard()) && this.getTargetCard().canBeTargetedBy(this)) {
 
                         AllZone.getGameAction().destroy(this.getTargetCard());
 
@@ -1803,8 +1816,8 @@ public class CardFactorySorceries {
                     if (numCards != 0) {
                         numCards = Math.min(numCards, maxCards);
                         if (player.isHuman()) {
-                            AllZone.getInputControl().setInput(
-                                    CardFactoryUtil.inputDiscardRecall(numCards, card, this));
+                            AllZone.getInputControl()
+                                    .setInput(CardFactoryUtil.inputDiscardRecall(numCards, card, this));
                         }
                     }
                     /*
@@ -1862,87 +1875,60 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*else if (cardName.equals("Stitch Together")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -57996914115026814L;
-
-                @Override
-                public void resolve() {
-                    final CardList threshold = card.getController().getCardsIn(Zone.Graveyard);
-                    final Card c = this.getTargetCard();
-
-                    if (threshold.size() >= 7) {
-                        if (card.getController().getZone(Zone.Graveyard).contains(c)) {
-                            final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
-                            AllZone.getGameAction().moveTo(play, c);
-                        }
-                    } else {
-                        if (card.getController().getZone(Zone.Graveyard).contains(c)) {
-                            final PlayerZone hand = card.getController().getZone(Constant.Zone.Hand);
-                            AllZone.getGameAction().moveTo(hand, c);
-                        }
-                    }
-                } // resolve()
-
-                @Override
-                public boolean canPlay() {
-                    return this.getCreatures().length != 0;
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    final CardList check = card.getController().getCardsIn(Zone.Graveyard);
-                    return (this.getCreaturesAI().length != 0) || (check.size() >= 7);
-                }
-
-                public Card[] getCreatures() {
-                    final CardList creature = card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
-                    return creature.toArray();
-                }
-
-                public Card[] getCreaturesAI() {
-                    CardList creature = card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
-                    creature = creature.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return c.getNetAttack() > 4;
-                        }
-                    });
-                    return creature.toArray();
-                }
-
-                @Override
-                public void chooseTargetAI() {
-                    final Card[] c = this.getCreatures();
-                    Card biggest = c[0];
-                    for (final Card element : c) {
-                        if (biggest.getNetAttack() < element.getNetAttack()) {
-                            biggest = element;
-                        }
-                    }
-
-                    this.setTargetCard(biggest);
-                }
-            }; // SpellAbility
-            card.addSpellAbility(spell);
-
-            final Input target = new Input() {
-                private static final long serialVersionUID = -3717723884199321767L;
-
-                @Override
-                public void showMessage() {
-                    final CardList creature = card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
-                    final Object check = GuiUtils.getChoiceOptional("Select creature", creature);
-                    if (check != null) {
-                        spell.setTargetCard((Card) check);
-                        this.stopSetNext(new InputPayManaCost(spell));
-                    } else {
-                        this.stop();
-                    }
-                } // showMessage()
-            }; // Input
-            spell.setBeforePayMana(target);
-        }*/ // *************** END ************ END **************************
+        /*
+         * else if (cardName.equals("Stitch Together")) { final SpellAbility
+         * spell = new Spell(card) { private static final long serialVersionUID
+         * = -57996914115026814L;
+         * 
+         * @Override public void resolve() { final CardList threshold =
+         * card.getController().getCardsIn(Zone.Graveyard); final Card c =
+         * this.getTargetCard();
+         * 
+         * if (threshold.size() >= 7) { if
+         * (card.getController().getZone(Zone.Graveyard).contains(c)) { final
+         * PlayerZone play =
+         * card.getController().getZone(Constant.Zone.Battlefield);
+         * AllZone.getGameAction().moveTo(play, c); } } else { if
+         * (card.getController().getZone(Zone.Graveyard).contains(c)) { final
+         * PlayerZone hand = card.getController().getZone(Constant.Zone.Hand);
+         * AllZone.getGameAction().moveTo(hand, c); } } } // resolve()
+         * 
+         * @Override public boolean canPlay() { return
+         * this.getCreatures().length != 0; }
+         * 
+         * @Override public boolean canPlayAI() { final CardList check =
+         * card.getController().getCardsIn(Zone.Graveyard); return
+         * (this.getCreaturesAI().length != 0) || (check.size() >= 7); }
+         * 
+         * public Card[] getCreatures() { final CardList creature =
+         * card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
+         * return creature.toArray(); }
+         * 
+         * public Card[] getCreaturesAI() { CardList creature =
+         * card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
+         * creature = creature.filter(new CardListFilter() {
+         * 
+         * @Override public boolean addCard(final Card c) { return
+         * c.getNetAttack() > 4; } }); return creature.toArray(); }
+         * 
+         * @Override public void chooseTargetAI() { final Card[] c =
+         * this.getCreatures(); Card biggest = c[0]; for (final Card element :
+         * c) { if (biggest.getNetAttack() < element.getNetAttack()) { biggest =
+         * element; } }
+         * 
+         * this.setTargetCard(biggest); } }; // SpellAbility
+         * card.addSpellAbility(spell);
+         * 
+         * final Input target = new Input() { private static final long
+         * serialVersionUID = -3717723884199321767L;
+         * 
+         * @Override public void showMessage() { final CardList creature =
+         * card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
+         * final Object check = GuiUtils.getChoiceOptional("Select creature",
+         * creature); if (check != null) { spell.setTargetCard((Card) check);
+         * this.stopSetNext(new InputPayManaCost(spell)); } else { this.stop();
+         * } } // showMessage() }; // Input spell.setBeforePayMana(target); }
+         */// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Patriarch's Bidding")) {
@@ -2280,8 +2266,7 @@ public class CardFactorySorceries {
                     if (userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                         final Card c = ab1card[0];
                         if (c != null) {
-                            if (card.getController().getZone(Zone.Graveyard).contains(c)
-                                    && c.canBeTargetedBy(this)) {
+                            if (card.getController().getZone(Zone.Graveyard).contains(c) && c.canBeTargetedBy(this)) {
                                 AllZone.getGameAction().moveToPlay(c);
                             }
                         }
@@ -2625,7 +2610,8 @@ public class CardFactorySorceries {
                         CardList grave = card.getController().getCardsIn(Zone.Graveyard);
                         grave = grave.filter(CardListFilter.CREATURES);
 
-                        if (AllZone.getHumanPlayer().canBeTargetedBy(spell) || AllZone.getComputerPlayer().canBeTargetedBy(spell)) {
+                        if (AllZone.getHumanPlayer().canBeTargetedBy(spell)
+                                || AllZone.getComputerPlayer().canBeTargetedBy(spell)) {
                             display.add("Target player loses X life");
                         }
                         if (grave.size() > 0) {

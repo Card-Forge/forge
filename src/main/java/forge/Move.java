@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 /**
@@ -28,7 +45,7 @@ public abstract class Move {
     public abstract int getScore();
 
     /** The best move. */
-    //private Move bestMove = null;
+    // private Move bestMove = null;
 
     /** The best score. */
     private int bestScore = Integer.MIN_VALUE;
@@ -49,10 +66,10 @@ public abstract class Move {
             return move.getScore();
         }
 
-        Move[] v = move.generateMoves();
+        final Move[] v = move.generateMoves();
         int score = Integer.MAX_VALUE;
-        for (int i = 0; i < v.length; i++) {
-            score = Math.min(score, max(v[i], depth - 1, false));
+        for (final Move element : v) {
+            score = Math.min(score, this.max(element, depth - 1, false));
         }
         return score;
     }
@@ -75,14 +92,14 @@ public abstract class Move {
             return move.getScore();
         }
 
-        Move[] v = move.generateMoves();
+        final Move[] v = move.generateMoves();
         int score = Integer.MIN_VALUE;
-        for (int i = 0; i < v.length; i++) {
-            score = Math.max(score, min(v[i], depth - 1));
+        for (final Move element : v) {
+            score = Math.max(score, this.min(element, depth - 1));
 
-            if (first && bestScore < score) {
-                bestScore = score;
-                //bestMove = v[i];
+            if (first && (this.bestScore < score)) {
+                this.bestScore = score;
+                // bestMove = v[i];
             }
         } // for
         return score;

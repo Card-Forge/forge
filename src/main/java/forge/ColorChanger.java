@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -9,7 +26,7 @@ import forge.card.mana.ManaCost;
  * 
  */
 public class ColorChanger {
-    private ArrayList<CardColor> globalColorChanges = new ArrayList<CardColor>();
+    private final ArrayList<CardColor> globalColorChanges = new ArrayList<CardColor>();
 
     /**
      * <p>
@@ -26,12 +43,11 @@ public class ColorChanger {
      *            a boolean.
      * @return a long.
      */
-    public final long addColorChanges(final String s, final Card c,
-            final boolean addToColors, final boolean bIncrease) {
+    public final long addColorChanges(final String s, final Card c, final boolean addToColors, final boolean bIncrease) {
         if (bIncrease) {
             CardColor.increaseTimestamp();
         }
-        globalColorChanges.add(new CardColor(new ManaCost(s), c, addToColors, false));
+        this.globalColorChanges.add(new CardColor(new ManaCost(s), c, addToColors, false));
         return CardColor.getTimestamp();
     }
 
@@ -51,14 +67,14 @@ public class ColorChanger {
      */
     public final void removeColorChanges(final String s, final Card c, final boolean addTo, final long timestamp) {
         CardColor removeCol = null;
-        for (CardColor cc : globalColorChanges) {
+        for (final CardColor cc : this.globalColorChanges) {
             if (cc.equals(s, c, addTo, timestamp)) {
                 removeCol = cc;
             }
         }
 
         if (removeCol != null) {
-            globalColorChanges.remove(removeCol);
+            this.globalColorChanges.remove(removeCol);
         }
     }
 
@@ -68,7 +84,7 @@ public class ColorChanger {
      * </p>
      */
     public final void reset() {
-        clearColorChanges();
+        this.clearColorChanges();
     }
 
     /**
@@ -78,7 +94,7 @@ public class ColorChanger {
      */
     public final void clearColorChanges() {
         // clear the global color changes at end of each game
-        globalColorChanges.clear();
+        this.globalColorChanges.clear();
     }
 
     /**
@@ -89,6 +105,6 @@ public class ColorChanger {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<CardColor> getColorChanges() {
-        return globalColorChanges;
+        return this.globalColorChanges;
     }
 }

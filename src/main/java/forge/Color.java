@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.EnumSet;
@@ -39,7 +56,7 @@ public enum Color {
      *            a int.
      */
     Color(final int c) {
-        flag = c;
+        this.flag = c;
     }
 
     /**
@@ -50,7 +67,7 @@ public enum Color {
      * @return a {@link java.util.EnumSet} object.
      */
     public static EnumSet<Color> colorless() {
-        EnumSet<Color> colors = EnumSet.of(Color.Colorless);
+        final EnumSet<Color> colors = EnumSet.of(Color.Colorless);
         return colors;
     }
 
@@ -64,10 +81,10 @@ public enum Color {
      * @return a {@link java.util.EnumSet} object.
      */
     public static EnumSet<Color> convertStringsToColor(final String[] s) {
-        EnumSet<Color> colors = EnumSet.of(Color.Colorless);
+        final EnumSet<Color> colors = EnumSet.of(Color.Colorless);
 
-        for (int i = 0; i < s.length; i++) {
-            colors.add(convertFromString(s[i]));
+        for (final String element : s) {
+            colors.add(Color.convertFromString(element));
         }
 
         if (colors.size() > 1) {
@@ -114,7 +131,7 @@ public enum Color {
      * @return a {@link java.util.EnumSet} object.
      */
     public static EnumSet<Color> convertManaCostToColor(final ManaCost m) {
-        EnumSet<Color> colors = EnumSet.of(Color.Colorless);
+        final EnumSet<Color> colors = EnumSet.of(Color.Colorless);
 
         if (m.isColor("W")) {
             colors.add(Color.White);
@@ -146,6 +163,7 @@ public enum Color {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Override
     public String toString() {
         if (this.equals(Color.White)) {
             return Constant.Color.WHITE;

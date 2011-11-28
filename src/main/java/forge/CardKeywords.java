@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge;
 
 import java.util.ArrayList;
@@ -25,7 +42,7 @@ public class CardKeywords implements Comparable<CardKeywords> {
      * @return a long.
      */
     public final long getTimestamp() {
-        return timeStamp;
+        return this.timeStamp;
     }
 
     /**
@@ -43,10 +60,10 @@ public class CardKeywords implements Comparable<CardKeywords> {
      */
     CardKeywords(final ArrayList<String> keywordList, final ArrayList<String> removeKeywordList,
             final boolean removeAll, final long stamp) {
-        keywords = keywordList;
-        removeKeywords = removeKeywordList;
-        removeAllKeywords = removeAll;
-        timeStamp = stamp;
+        this.keywords = keywordList;
+        this.removeKeywords = removeKeywordList;
+        this.removeAllKeywords = removeAll;
+        this.timeStamp = stamp;
     }
 
     /**
@@ -56,7 +73,7 @@ public class CardKeywords implements Comparable<CardKeywords> {
      * @return ArrayList<String>
      */
     public final ArrayList<String> getKeywords() {
-        return keywords;
+        return this.keywords;
     }
 
     /**
@@ -66,7 +83,7 @@ public class CardKeywords implements Comparable<CardKeywords> {
      * @return ArrayList<String>
      */
     public final ArrayList<String> getRemoveKeywords() {
-        return removeKeywords;
+        return this.removeKeywords;
     }
 
     /**
@@ -76,7 +93,7 @@ public class CardKeywords implements Comparable<CardKeywords> {
      * @return boolean
      */
     public final boolean isRemoveAllKeywords() {
-        return removeAllKeywords;
+        return this.removeAllKeywords;
     }
 
     /*
@@ -87,7 +104,7 @@ public class CardKeywords implements Comparable<CardKeywords> {
     @Override
     public final int compareTo(final CardKeywords anotherCardKeywords) {
         int returnValue = 0;
-        long anotherTimeStamp = anotherCardKeywords.getTimestamp();
+        final long anotherTimeStamp = anotherCardKeywords.getTimestamp();
         if (this.timeStamp < anotherTimeStamp) {
             returnValue = -1;
         } else if (this.timeStamp > anotherTimeStamp) {

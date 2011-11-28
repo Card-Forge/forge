@@ -1,19 +1,33 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
 
 import javax.swing.JButton;
-//import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-//import javax.swing.filechooser.FileFilter;
 
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
 import forge.Card;
 import forge.GuiDisplayUtil;
-//import forge.ImagePreviewPanel;
 import forge.Singletons;
 import forge.gui.game.CardDetailPanel;
 import forge.item.CardPrinted;
@@ -50,7 +64,7 @@ public class CardPanelHeavy extends CardPanelBase {
     private Card cCardHQ;
 
     /** Constant <code>previousDirectory</code>. */
-    //private static File previousDirectory = null;
+    // private static File previousDirectory = null;
 
     /**
      * Instantiates a new card panel heavy.
@@ -168,42 +182,38 @@ public class CardPanelHeavy extends CardPanelBase {
      * getImportFilename.
      * </p>
      * 
+     * @param e
+     *            the e
      * @return a {@link java.io.File} object.
      */
     /*
-    private File getImportFilename() {
-        final JFileChooser chooser = new JFileChooser(CardPanelHeavy.previousDirectory);
-        final ImagePreviewPanel preview = new ImagePreviewPanel();
-        chooser.setAccessory(preview);
-        chooser.addPropertyChangeListener(preview);
-        chooser.addChoosableFileFilter(this.dckFilter);
-        final int returnVal = chooser.showOpenDialog(null);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            final File file = chooser.getSelectedFile();
-            CardPanelHeavy.previousDirectory = file.getParentFile();
-            return file;
-        }
-
-        return null;
-
-    } */
+     * private File getImportFilename() { final JFileChooser chooser = new
+     * JFileChooser(CardPanelHeavy.previousDirectory); final ImagePreviewPanel
+     * preview = new ImagePreviewPanel(); chooser.setAccessory(preview);
+     * chooser.addPropertyChangeListener(preview);
+     * chooser.addChoosableFileFilter(this.dckFilter); final int returnVal =
+     * chooser.showOpenDialog(null);
+     * 
+     * if (returnVal == JFileChooser.APPROVE_OPTION) { final File file =
+     * chooser.getSelectedFile(); CardPanelHeavy.previousDirectory =
+     * file.getParentFile(); return file; }
+     * 
+     * return null;
+     * 
+     * }
+     */
 
     /** The dck filter. */
     /*
-    private final FileFilter dckFilter = new FileFilter() {
-
-        @Override
-        public boolean accept(final File f) {
-            return f.getName().endsWith(".jpg") || f.isDirectory();
-        }
-
-        @Override
-        public String getDescription() {
-            return "*.jpg";
-        }
-
-    };*/
+     * private final FileFilter dckFilter = new FileFilter() {
+     * 
+     * @Override public boolean accept(final File f) { return
+     * f.getName().endsWith(".jpg") || f.isDirectory(); }
+     * 
+     * @Override public String getDescription() { return "*.jpg"; }
+     * 
+     * };
+     */
 
     /**
      * <p>

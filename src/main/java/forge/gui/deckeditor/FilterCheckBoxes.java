@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.gui.deckeditor;
 
 import java.util.ArrayList;
@@ -102,10 +119,10 @@ class FilterCheckBoxes {
             this.enchantment = new JCheckBox("Enchant", true);
         }
 
-        this.allColors = Arrays.asList(new JCheckBox[] { this.getWhite(), this.getBlue(), this.getBlack(), this.getRed(), this.getGreen(),
-                this.getColorless() });
-        this.allTypes = Arrays.asList(new JCheckBox[] { this.getLand(), this.getCreature(), this.getSorcery(), this.getInstant(),
-                this.getPlaneswalker(), this.getArtifact(), this.getEnchantment() });
+        this.allColors = Arrays.asList(new JCheckBox[] { this.getWhite(), this.getBlue(), this.getBlack(),
+                this.getRed(), this.getGreen(), this.getColorless() });
+        this.allTypes = Arrays.asList(new JCheckBox[] { this.getLand(), this.getCreature(), this.getSorcery(),
+                this.getInstant(), this.getPlaneswalker(), this.getArtifact(), this.getEnchantment() });
     }
 
     /**
@@ -165,108 +182,138 @@ class FilterCheckBoxes {
     }
 
     /**
+     * Gets the all types.
+     * 
      * @return the allTypes
      */
     public List<JCheckBox> getAllTypes() {
-        return allTypes;
+        return this.allTypes;
     }
 
     /**
+     * Gets the white.
+     * 
      * @return the white
      */
     public JCheckBox getWhite() {
-        return white;
+        return this.white;
     }
 
     /**
+     * Gets the blue.
+     * 
      * @return the blue
      */
     public JCheckBox getBlue() {
-        return blue;
+        return this.blue;
     }
 
     /**
+     * Gets the black.
+     * 
      * @return the black
      */
     public JCheckBox getBlack() {
-        return black;
+        return this.black;
     }
 
     /**
+     * Gets the red.
+     * 
      * @return the red
      */
     public JCheckBox getRed() {
-        return red;
+        return this.red;
     }
 
     /**
+     * Gets the colorless.
+     * 
      * @return the colorless
      */
     public JCheckBox getColorless() {
-        return colorless;
+        return this.colorless;
     }
 
     /**
+     * Gets the green.
+     * 
      * @return the green
      */
     public JCheckBox getGreen() {
-        return green;
+        return this.green;
     }
 
     /**
+     * Gets the land.
+     * 
      * @return the land
      */
     public JCheckBox getLand() {
-        return land;
+        return this.land;
     }
 
     /**
+     * Gets the all colors.
+     * 
      * @return the allColors
      */
     public List<JCheckBox> getAllColors() {
-        return allColors;
+        return this.allColors;
     }
 
     /**
+     * Gets the creature.
+     * 
      * @return the creature
      */
     public JCheckBox getCreature() {
-        return creature;
+        return this.creature;
     }
 
     /**
+     * Gets the sorcery.
+     * 
      * @return the sorcery
      */
     public JCheckBox getSorcery() {
-        return sorcery;
+        return this.sorcery;
     }
 
     /**
+     * Gets the instant.
+     * 
      * @return the instant
      */
     public JCheckBox getInstant() {
-        return instant;
+        return this.instant;
     }
 
     /**
+     * Gets the planeswalker.
+     * 
      * @return the planeswalker
      */
     public JCheckBox getPlaneswalker() {
-        return planeswalker;
+        return this.planeswalker;
     }
 
     /**
+     * Gets the artifact.
+     * 
      * @return the artifact
      */
     public JCheckBox getArtifact() {
-        return artifact;
+        return this.artifact;
     }
 
     /**
+     * Gets the enchantment.
+     * 
      * @return the enchantment
      */
     public JCheckBox getEnchantment() {
-        return enchantment;
+        return this.enchantment;
     }
 
 }
