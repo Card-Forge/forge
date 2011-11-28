@@ -358,10 +358,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private long timestamp = -1; // permanents on the battlefield
 
-    private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>(); // stack
-                                                                                       // of
-                                                                                       // set
-                                                                                       // power/toughness
+    //stack of set power/toughness
+    private ArrayList<CardPowerToughness> newPT = new ArrayList<CardPowerToughness>();
     private int baseLoyalty = 0;
     private String baseAttackString = null;
     private String baseDefenseString = null;
@@ -405,6 +403,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String namedCard = "";
     private int chosenNumber;
     private Player chosenPlayer;
+    private ArrayList<Card> chosenCard = new ArrayList<Card>();
 
     private Card cloneOrigin = null;
     private final ArrayList<Card> clones = new ArrayList<Card>();
@@ -2114,6 +2113,29 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setChosenColor(final ArrayList<String> s) {
         this.chosenColor = s;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>chosenCard</code>.
+     * </p>
+     * 
+     * @return an ArrayList<Card> object.
+     */
+    public final ArrayList<Card> getChosenCard() {
+        return this.chosenCard;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>chosenCard</code>.
+     * </p>
+     * 
+     * @param c
+     *            an ArrayList<String> object.
+     */
+    public final void setChosenCard(final ArrayList<Card> c) {
+        this.chosenCard = c;
     }
 
     // used for cards like Meddling Mage...
@@ -4032,9 +4054,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public final void unEquipAllCards() {
-        while (this.equippedBy.size() > 0) { // while there exists equipment,
-                                             // unequip
-            // the first one
+        //while there exists equipment, unequip the first one
+        while (this.equippedBy.size() > 0) {
             this.equippedBy.get(0).unEquipCard(this);
         }
     }
@@ -5351,9 +5372,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void clearAllKeywords() {
         this.getCharacteristics().getIntrinsicKeyword().clear();
         this.extrinsicKeyword.clear();
-        this.hiddenExtrinsicKeyword.clear(); // Hidden keywords won't be
-                                             // displayed on
-        // the card
+        //Hidden keywords won't be displayed on the card
+        this.hiddenExtrinsicKeyword.clear();
     }
 
     /**
@@ -6505,9 +6525,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        final String[] incR = restriction.split("\\.", 2); // Inclusive
-                                                           // restrictions are
-        // Card types
+        //Inclusive restrictions are Card types
+        final String[] incR = restriction.split("\\.", 2);
 
         if (incR[0].equals("Spell") && !this.isSpell()) {
             return false;
@@ -6564,6 +6583,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("NamedCard")) {
             if (!this.getName().equals(source.getNamedCard())) {
+                return false;
+            }
+        } else if (property.equals("ChosenCard")) {
+            if (!source.getChosenCard().contains(this)) {
                 return false;
             }
         }
@@ -7932,11 +7955,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addDamage(final Map<Card, Integer> sourcesMap) {
         for (final Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-            this.addDamageAfterPrevention(entry.getValue(), entry.getKey(), true); // damage
-            // prevention
-            // is
-            // already
-            // checked!
+            //damage prevention is already checked!
+            this.addDamageAfterPrevention(entry.getValue(), entry.getKey(), true);
         }
     }
 
@@ -8447,9 +8467,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        if (!this.isInZone(Constant.Zone.Battlefield)) { // keywords don't work
-                                                         // outside the
-                                                         // battlefield
+        //keywords don't work outside battlefield
+        if (!this.isInZone(Constant.Zone.Battlefield)) {
             return true;
         }
 

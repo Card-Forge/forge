@@ -430,6 +430,16 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("ChooseCard")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryChoose.createAbilityChooseCard(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryChoose.createSpellChooseCard(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryChoose.createDrawbackChooseCard(this);
+            }
+        }
+
         else if (this.api.equals("ChooseColor")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryChoose.createAbilityChooseColor(this);
@@ -517,9 +527,8 @@ public class AbilityFactory {
         else if (this.api.equals("Counter")) {
             final AbilityFactoryCounterMagic c = new AbilityFactoryCounterMagic(this);
 
-            if (this.isTargeted) { // Since all "Counter" ABs Counter things on
-                                   // the
-                // Stack no need for it to be everywhere
+            //Since all "Counter" ABs Counter things on the Stack no need for it to be everywhere
+            if (this.isTargeted) {
                 this.abTgt.setZone(Zone.Stack);
             }
 

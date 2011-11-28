@@ -32,7 +32,7 @@ import forge.item.CardPrinted;
 
 /**
  * <p>
- * AbilityFactory_Choose class.
+ * AbilityFactoryChoose class.
  * </p>
  * 
  * @author Forge
@@ -1156,7 +1156,17 @@ public final class AbilityFactoryChoose {
                     card.setChosenPlayer(chosen);
 
                 } else {
-                    // TODO - not implemented
+                    if (params.containsKey("AILogic")) {
+                        if (params.get("AILogic").equals("Curse")) {
+                            card.setChosenPlayer(AllZone.getHumanPlayer());
+                        }
+                        else {
+                            card.setChosenPlayer(AllZone.getComputerPlayer());
+                        }
+                    }
+                    else {
+                        card.setChosenPlayer(AllZone.getComputerPlayer());
+                    }
                 }
             }
         }
@@ -1435,5 +1445,245 @@ public final class AbilityFactoryChoose {
             }
         }
     }
+    
+    // *************************************************************************
+    // *************************** ChooseCard **********************************
+    // *************************************************************************
 
-} // end class AbilityFactory_Choose
+    /**
+     * <p>
+     * createAbilityChooseCard.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createAbilityChooseCard(final AbilityFactory af) {
+        final SpellAbility abChooseCard = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 2399435577106102311L;
+
+            @Override
+            public String getStackDescription() {
+                return chooseCardStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return chooseCardCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                chooseCardResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return chooseCardTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abChooseCard;
+    }
+
+    /**
+     * <p>
+     * createSpellChooseCard.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @since 1.1.7
+     */
+    public static SpellAbility createSpellChooseCard(final AbilityFactory af) {
+        final SpellAbility spChooseCard = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 1425536663625668893L;
+
+            @Override
+            public String getStackDescription() {
+                return chooseCardStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return chooseCardCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                chooseCardResolve(af, this);
+            }
+
+        };
+        return spChooseCard;
+    }
+
+    /**
+     * <p>
+     * createDrawbackChooseCard.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackChooseCard(final AbilityFactory af) {
+        final SpellAbility dbChooseCard = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -3255569671897226555L;
+
+            @Override
+            public String getStackDescription() {
+                return chooseCardStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                chooseCardResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAIDrawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return chooseCardTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbChooseCard;
+    }
+
+    /**
+     * <p>
+     * chooseCardStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String chooseCardStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+
+        if (sa instanceof AbilitySub) {
+            sb.append(" ");
+        } else {
+            sb.append(sa.getSourceCard()).append(" - ");
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+        }
+
+        for (Player p : tgtPlayers) {
+            sb.append(p).append(" ");
+        }
+        sb.append("chooses a card.");
+
+        AbilitySub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>
+     * chooseCardCanPlayAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean chooseCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        return chooseCardTriggerAI(af, sa, false);
+    }
+
+    /**
+     * <p>
+     * chooseCardTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean chooseCardTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        return false;
+    }
+
+    /**
+     * <p>
+     * chooseCardResolve.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void chooseCardResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        CardList choices = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        if (params.containsKey("Choices")) {
+            choices = choices.getValidCards(params.get("Choices"), host.getController(), host);
+        }
+
+        for (Player p : tgtPlayers) {
+            if (tgt == null || p.canBeTargetedBy(sa)) {
+                ArrayList<Card> chosen = new ArrayList<Card>();
+                if (sa.getActivatingPlayer().isHuman()) {
+                    CardList land = AllZoneUtil.getLandsInPlay();
+                    final ArrayList<String> basic = CardUtil.getBasicTypes();
+
+                    for (final String type : basic) {
+                        final CardList cl = land.getType(type);
+                        if (cl.size() > 0) {
+                            String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
+                            Object o = GuiUtils.getChoice(prompt, cl.toArray());
+                            if (null != o) {
+                                Card c = (Card) o;
+                                chosen.add(c);
+                            }
+                        }
+                    }
+
+                } else {
+                    // TODO - not implemented
+                }
+                host.setChosenCard(chosen);
+            }
+        }
+    }
+
+} // end class AbilityFactoryChoose
