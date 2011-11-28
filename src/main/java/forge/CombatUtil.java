@@ -1857,7 +1857,7 @@ public class CombatUtil {
 
         if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities))
                 && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect")))
-                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1))){
+                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1))) {
             return false;
         }
 

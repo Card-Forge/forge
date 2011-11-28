@@ -350,12 +350,12 @@ public final class AbilityFactoryReveal {
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-        
+
         if (params.containsKey("Choser")) {
             final ArrayList<Player> chosers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Choser"), sa);
             if (!chosers.isEmpty()) {
                 choser = chosers.get(0);
-                System.out.println("choser: " +choser);
+                System.out.println("choser: " + choser);
             }
         }
 

@@ -172,7 +172,7 @@ public class FGameState {
      *            the phase to set
      */
     protected final void setPhase(final Phase phase0) {
-        System.out.println("asdf:"+phase0);
+        System.out.println("asdf:" + phase0);
         this.phase = phase0;
     }
 

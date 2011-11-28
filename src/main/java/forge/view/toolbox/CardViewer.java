@@ -19,7 +19,7 @@ import java.util.List;
 import static java.util.Collections.unmodifiableList;
 
 /**
- * A simple JPanel that shows three columns: card list, pic, and description.. 
+ * A simple JPanel that shows three columns: card list, pic, and description..
  *
  * @author Forge
  * @version $Id: ListChooser.java 9708 2011-08-09 19:34:12Z jendave $
@@ -34,7 +34,7 @@ public class CardViewer extends JPanel {
     private JList jList;
     private CardDetailPanel detail;
     private CardPicturePanel picture;
-    
+
     public CardViewer(List<CardPrinted> list) {
         this.list = unmodifiableList(list);
         jList = new JList(new ChooserListModel());
@@ -44,7 +44,7 @@ public class CardViewer extends JPanel {
         this.add(new JScrollPane(jList));
         this.add(picture);
         this.add(detail);
-        this.setLayout( new java.awt.GridLayout(1, 3, 6, 0) );
+        this.setLayout(new java.awt.GridLayout(1, 3, 6, 0));
 
         // selection is here
         jList.getSelectionModel().addListSelectionListener(new SelListener());
@@ -62,7 +62,7 @@ public class CardViewer extends JPanel {
 
     private class SelListener implements ListSelectionListener {
         private Card[] cache = null;
-        
+
         public void valueChanged(final ListSelectionEvent e) {
             int row = jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
@@ -73,7 +73,7 @@ public class CardViewer extends JPanel {
                 picture.setCard(cp);
             }
         }
-        
+
         private void ensureCacheHas(int row, CardPrinted cp) {
             if (cache == null) { cache = new Card[list.size()]; }
             if (null == cache[row]) {
@@ -81,7 +81,7 @@ public class CardViewer extends JPanel {
                 card.setCurSetCode(cp.getSet());
                 card.setImageFilename(CardUtil.buildFilename(card));
                 cache[row] = card;
-            }            
+            }
         }
     }
 

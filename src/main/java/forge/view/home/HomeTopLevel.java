@@ -10,7 +10,7 @@ import forge.view.toolbox.FPanel;
 
 @SuppressWarnings("serial")
 public class HomeTopLevel extends FPanel {
-	public HomeTopLevel() {
-	    super();
-	}
+    public HomeTopLevel() {
+        super();
+    }
 }

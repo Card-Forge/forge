@@ -1381,18 +1381,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean hasSecondStrike() {
         return this.hasDoubleStrike() || !this.hasFirstStrike();
     }
-    
+
     public final boolean canHaveCountersPlacedOnIt(final Counters counterName) {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
         }
         if (counterName.equals(Counters.M1M1)) {
-            for (Card c: AllZoneUtil.getCreaturesInPlay(this.getController())) {//look for Melira, Sylvok Outcast
+            for (Card c : AllZoneUtil.getCreaturesInPlay(this.getController())) { //look for Melira, Sylvok Outcast
                 if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
                     return false;
                 }
             }
-            
+
         }
         return true;
     }

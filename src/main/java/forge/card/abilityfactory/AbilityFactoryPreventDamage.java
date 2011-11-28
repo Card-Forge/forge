@@ -508,7 +508,7 @@ public class AbilityFactoryPreventDamage {
     // *************************************************************************
     // ************************* PreventDamageAll ******************************
     // *************************************************************************
-    
+
     /**
      * <p>
      * createAbilityPreventDamageAll.
@@ -626,15 +626,15 @@ public class AbilityFactoryPreventDamage {
         } else {
             sb.append(host).append(" - ");
         }
-        
+
         String desc = sa.getDescription();
-        
+
         if (desc.contains(":")) {
             desc = desc.split(":")[1];
         }
 
         sb.append(desc);
-        
+
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
@@ -665,7 +665,7 @@ public class AbilityFactoryPreventDamage {
         if (!CostUtil.checkRemoveCounterCost(cost, hostCard)) {
             return false;
         }
-        
+
         if (AllZone.getStack().size() > 0) {
             // TODO check stack for something on the stack will kill anything i
             // control
@@ -715,7 +715,7 @@ public class AbilityFactoryPreventDamage {
         if (params.containsKey("ValidCards")) {
             list = AllZoneUtil.getCardsIn(Zone.Battlefield);
         }
-        
+
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
 
         for (final Card c : list) {

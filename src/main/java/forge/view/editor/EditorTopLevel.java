@@ -10,7 +10,7 @@ import forge.view.toolbox.FPanel;
 
 @SuppressWarnings("serial")
 public class EditorTopLevel extends FPanel {
-	public EditorTopLevel() {
-	    super();
-	}
+    public EditorTopLevel() {
+        super();
+    }
 }
