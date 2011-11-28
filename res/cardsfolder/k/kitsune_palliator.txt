@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_palliator.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/14.jpg
+Oracle:{T}: Prevent the next 1 damage that would be dealt to each creature and each player this turn.
 End

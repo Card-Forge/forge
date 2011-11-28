@@ -14,4 +14,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tourachs_gate.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/33.jpg
+Oracle:Enchant land you control\nSacrifice a Thrull: Put three time counters on Tourach's Gate.\nAt the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.\nEnchanted land has "{T}: Attacking creatures you control get +2/-1 until end of turn."
 End
