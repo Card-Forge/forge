@@ -100,7 +100,7 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        JLabel btnEndTurn = new DockButton(skin.getIconEndTurn(), "Game Settings");
+        JLabel btnEndTurn = new DockButton(skin.getIconEndTurn(), "End Turn");
         btnEndTurn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
