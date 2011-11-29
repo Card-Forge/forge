@@ -93,7 +93,7 @@ public class ViewField extends FRoundedPanel {
         this.counter = -1;
 
         final JScrollPane scroller = new JScrollPane();
-        this.tabletop = new PlayArea(scroller, true);
+        this.tabletop = new PlayArea(scroller, player.equals(AllZone.getComputerPlayer()) ? true : false);
 
         scroller.setViewportView(this.tabletop);
         scroller.setOpaque(false);
