@@ -5,7 +5,7 @@ Forge Beta: ##-##-2011 ver 1.#.# rev #####
 #### cards in total.
 
 
-
+A new UI is being developed and it will take some time before it is finished. When you launch Forge you will notice a new checkbox under Settings that is labeled "Old Gui". We invite you to try out the new Gui but you should note that this is not yet finished. You can continue to use the Old Gui while you wait for the new Gui portion of the project to be finished.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
