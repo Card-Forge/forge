@@ -37,7 +37,7 @@ import javax.imageio.ImageIO;
  * @version $Id$
  */
 public class ImageUtil {
-    
+
     /**
      * <p>
      * getImage.
