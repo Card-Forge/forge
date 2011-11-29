@@ -313,7 +313,7 @@ public class WinLoseFrame extends JFrame {
             frame = (JFrame) AllZone.getDisplay();
         } else {
             final ViewTopLevel temp = (ViewTopLevel) AllZone.getDisplay();
-            frame = (JFrame) temp.getParent().getParent().getParent().getParent();
+            frame = (JFrame) temp.getTopLevelFrame();
         }
 
         frame.dispose();

@@ -21,6 +21,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import forge.AllZone;
@@ -549,5 +550,10 @@ public class ViewTopLevel extends FPanel implements Display {
         }
 
         // new Gui_MultipleBlockers4(attacker, blockers, damage, this);
+    }
+
+    /** @return JFrame */
+    public JFrame getTopLevelFrame() {
+        return (JFrame) ViewTopLevel.this.getParent().getParent().getParent().getParent();
     }
 }

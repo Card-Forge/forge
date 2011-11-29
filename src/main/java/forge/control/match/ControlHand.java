@@ -17,22 +17,27 @@
  */
 package forge.control.match;
 
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
+
+import arcane.ui.HandArea;
+import arcane.ui.util.Animation;
+
 import forge.AllZone;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.view.match.ViewHand;
-import forge.view.match.ViewHand.CardPanel;
 import forge.view.match.ViewTopLevel;
 
 /**
@@ -58,13 +63,65 @@ public class ControlHand {
 
     /** Adds observers to hand panel. */
     public void addObservers() {
-        final Observer o1 = new Observer() {
+        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();  // asdf NECESSARY?
+
+        AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(new Observer() {
             @Override
             public void update(final Observable a, final Object b) {
-                ControlHand.this.resetCards(Arrays.asList(((PlayerZone) a).getCards()));
+                final PlayerZone pZone = (PlayerZone) a;
+                final HandArea p = view.getHandArea();
+
+                final Card[] c = pZone.getCards();
+
+                List<Card> tmp, diff;
+                tmp = new ArrayList<Card>();
+                for (final arcane.ui.CardPanel cpa : p.getCardPanels()) {
+                    tmp.add(cpa.getGameCard());
+                }
+                diff = new ArrayList<Card>(tmp);
+                diff.removeAll(Arrays.asList(c));
+                if (diff.size() == p.getCardPanels().size()) {
+                    p.clear();
+                } else {
+                    for (final Card card : diff) {
+                        p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
+                    }
+                }
+                diff = new ArrayList<Card>(Arrays.asList(c));
+                diff.removeAll(tmp);
+
+                JLayeredPane layeredPane = SwingUtilities.getRootPane(t.getTopLevelFrame()).getLayeredPane();
+                int fromZoneX = 0, fromZoneY = 0;
+                final Rectangle pb = t.getFieldControllers().get(1).getView().getLblLibrary().getBounds();
+                final Point zoneLocation = SwingUtilities.convertPoint(t.getFieldControllers().get(1).getView().getLblLibrary(),
+                        Math.round(pb.width / 2.0f), Math.round(pb.height / 2.0f), layeredPane);
+                fromZoneX = zoneLocation.x;
+                fromZoneY = zoneLocation.y;
+                int startWidth, startX, startY;
+                startWidth = 10;
+                startX = fromZoneX - Math.round(startWidth / 2.0f);
+                startY = fromZoneY - Math.round(Math.round(startWidth * arcane.ui.CardPanel.ASPECT_RATIO) / 2.0f);
+
+                int endWidth, endX, endY;
+                arcane.ui.CardPanel toPanel = null;
+
+                for (final Card card : diff) {
+                    toPanel = p.addCard(card);
+                    endWidth = toPanel.getCardWidth();
+                    final Point toPos = SwingUtilities.convertPoint(view.getHandArea(),
+                            toPanel.getCardLocation(), layeredPane);
+                    endX = toPos.x;
+                    endY = toPos.y;
+                    final arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
+                    if (t.getTopLevelFrame().isShowing()) {
+                        Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel,
+                                layeredPane, 500);
+                    } else {
+                        Animation.moveCard(toPanel);
+                    }
+                }
             }
-        };
-        AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(o1);
+        });
     }
 
     /** Adds listeners to hand panel: window resize, etc. */
@@ -73,7 +130,7 @@ public class ControlHand {
             @Override
             public void componentResized(final ComponentEvent e) {
                 // Ensures cards in hand scale properly with parent.
-                ControlHand.this.view.refreshLayout();
+                //ControlHand.this.view.refreshLayout();
             }
         });
     }
@@ -85,7 +142,7 @@ public class ControlHand {
      * @param c
      *            &emsp; CardPanel object
      */
-    public void addCardPanelListeners(final CardPanel c) {
+   /* public void addCardPanelListeners(final CardPanel c) {
         // Grab top level controller to facilitate interaction between children
         final ViewTopLevel display = (ViewTopLevel) (AllZone.getDisplay());
         final Card cardobj = c.getCard();
@@ -111,7 +168,7 @@ public class ControlHand {
                         .selectCard(cardobj, AllZone.getHumanPlayer().getZone(Zone.Hand));
             }
         });
-    }
+    }*/
 
     /**
      * Adds the card.
@@ -121,7 +178,7 @@ public class ControlHand {
      */
     public void addCard(final Card c) {
         this.cardsInPanel.add(c);
-        this.view.refreshLayout();
+        //this.view.refreshLayout();
     }
 
     /**
@@ -132,7 +189,7 @@ public class ControlHand {
      */
     public void addCards(final List<Card> c) {
         this.cardsInPanel.addAll(c);
-        this.view.refreshLayout();
+        //this.view.refreshLayout();
     }
 
     /**
@@ -152,7 +209,7 @@ public class ControlHand {
      */
     public void removeCard(final Card c) {
         this.cardsInPanel.remove(c);
-        this.view.refreshLayout();
+        //this.view.refreshLayout();
     }
 
     /**
@@ -163,7 +220,7 @@ public class ControlHand {
      */
     public void removeCards(final List<Card> c) {
         this.cardsInPanel.removeAll(c);
-        this.view.refreshLayout();
+        //this.view.refreshLayout();
     }
 
     /**
