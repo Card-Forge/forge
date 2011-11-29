@@ -4589,6 +4589,7 @@ res/cardsfolder/k/kuro_pitlord.txt svneol=native#text/plain
 res/cardsfolder/k/kuros_taken.txt svneol=native#text/plain
 res/cardsfolder/k/kyoki_sanitys_eclipse.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_glider.txt svneol=native#text/plain
+res/cardsfolder/k/kyren_legate.txt -text
 res/cardsfolder/k/kyren_negotiations.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_sniper.txt svneol=native#text/plain
 res/cardsfolder/k/kyscu_drake.txt -text
@@ -7030,6 +7031,7 @@ res/cardsfolder/s/sapphire_medallion.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_bailiff.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_cove.txt -text
 res/cardsfolder/s/saprazzan_heir.txt svneol=native#text/plain
+res/cardsfolder/s/saprazzan_legate.txt -text
 res/cardsfolder/s/saprazzan_raider.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_skerry.txt svneol=native#text/plain
 res/cardsfolder/s/saproling_burst.txt -text
