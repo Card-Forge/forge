@@ -527,8 +527,7 @@ public class ViewTopLevel extends FPanel implements Display {
      */
     @Override
     public final void setCard(final Card card) {
-        System.err.println("ViewTopLevel > getCard: Something should happen here!");
-        new Exception().printStackTrace();
+        this.getCardviewerController().showCard(card);
     }
 
     /**
