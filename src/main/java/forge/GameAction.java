@@ -34,6 +34,8 @@ import forge.card.abilityfactory.AbilityFactoryCharm;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostMana;
+import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
@@ -1843,7 +1845,21 @@ public class GameAction {
                         }
                     }
                 }
-                if (!flashb || c.hasStartOfKeyword("May be played")) {
+                if (c.hasStartOfKeyword("May be played without paying its mana cost")) {
+                    final SpellAbility newSA = sa.copy();
+                    final Cost cost = sa.getPayCosts();
+                    for (CostPart part : cost.getCostParts()) {
+                        if (part instanceof CostMana) {
+                            ((CostMana) part).setMana("");
+                        }
+                    }
+                    cost.setNoManaCostChange(true);
+                    newSA.setManaCost("");
+                    newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                    choices.add(newSA.toString());
+                    map.put(newSA.toString(), newSA);
+                }
+                if (!flashb || c.hasKeyword("May be played")) {
                     choices.add(sa.toString());
                     map.put(sa.toString(), sa);
                 }
