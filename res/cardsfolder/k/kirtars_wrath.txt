@@ -7,4 +7,5 @@ SVar:ThreshToken:DB$ Token | Condition$ Threshold | Cost$ 0 | TokenAmount$ 2 | T
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kirtars_wrath.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/28.jpg
+Oracle:Destroy all creatures. They can't be regenerated.\nThreshold - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated.
 End
