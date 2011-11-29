@@ -221,9 +221,10 @@ public class ViewTabber {
      */
     public void updatePlayerLabels(final Player p0) {
         final JLabel[] temp = this.detailLabels.get(p0);
-        temp[0].setText("Life: " + String.valueOf(p0.getLife()));
-        temp[1].setText("Max hand: " + String.valueOf(p0.getMaxHandSize()));
-        temp[2].setText("Draw per turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
+        temp[0].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: " + String.valueOf(p0.getPoisonCounters()));
+        temp[1].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
+        temp[2].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
+        temp[3].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
     }
 
     /**
@@ -391,10 +392,11 @@ public class ViewTabber {
             final InfoLabel life = new InfoLabel();
             final InfoLabel hand = new InfoLabel();
             final InfoLabel draw = new InfoLabel();
-            this.detailLabels.put(p, new JLabel[] { life, hand, draw });
+            final InfoLabel prevention = new InfoLabel();
+            this.detailLabels.put(p, new JLabel[] { life, hand, draw, prevention });
 
             // Set border on bottom label, and larger font on player name
-            draw.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders()));
+            prevention.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders()));
             name.setText(p.getName());
             name.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 14));
 
@@ -404,6 +406,7 @@ public class ViewTabber {
             this.pnlPlayers.add(life, constraints);
             this.pnlPlayers.add(hand, constraints);
             this.pnlPlayers.add(draw, constraints);
+            this.pnlPlayers.add(prevention, constraints);
         }
     }
 
