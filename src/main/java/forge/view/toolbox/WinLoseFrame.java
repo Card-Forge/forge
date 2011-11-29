@@ -37,6 +37,7 @@ import forge.AllZone;
 import forge.Constant;
 import forge.Phase;
 import forge.Player;
+import forge.control.ControlAllUI;
 import forge.control.ControlWinLose;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.WinLoseFrame.WinLoseText;
@@ -242,6 +243,14 @@ public class WinLoseFrame extends JFrame {
      */
     final void btnContinueActionPerformed(final ActionEvent e) {
         this.closeWinLoseFrame();
+
+        // Instantiate a new ControlAllUI if using new UI.
+        if (!Constant.Runtime.OLDGUI[0]) {
+            final ControlAllUI ui = new ControlAllUI();
+            AllZone.setDisplay(ui.getMatchView());
+            ui.getMatchController().initMatch();
+        }
+
         AllZone.getDisplay().setVisible(true);
         this.modeHandler.startNextRound();
     }
@@ -256,6 +265,14 @@ public class WinLoseFrame extends JFrame {
      */
     final void btnRestartActionPerformed(final ActionEvent e) {
         this.closeWinLoseFrame();
+
+        // Instantiate a new ControlAllUI if using new UI.
+        if (!Constant.Runtime.OLDGUI[0]) {
+            final ControlAllUI ui = new ControlAllUI();
+            AllZone.setDisplay(ui.getMatchView());
+            ui.getMatchController().initMatch();
+        }
+
         AllZone.getDisplay().setVisible(true);
         this.matchState.reset();
         this.modeHandler.startNextRound();
@@ -288,7 +305,7 @@ public class WinLoseFrame extends JFrame {
      * 
      * @return {@link javax.swing.JFrame} display frame
      */
-    final JFrame closeWinLoseFrame() {
+    private void closeWinLoseFrame() {
         JFrame frame;
 
         // Issue 147 - keep battlefield up following win/loss
@@ -302,7 +319,6 @@ public class WinLoseFrame extends JFrame {
         frame.dispose();
         frame.setEnabled(true);
         this.dispose();
-        return frame;
     }
 
     /**
