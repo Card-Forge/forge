@@ -199,16 +199,17 @@ public class ViewTabber {
         this.pnlCombat.removeAll();
         this.vtpTabber.showTab(1);
 
-        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 11);
-        final Border border = new MatteBorder(1, 0, 0, 0, Color.black);
+        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
+        final Border border = new MatteBorder(0, 0, 0, 0, skin.getClrBorders());
 
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
         tar.setBorder(border);
         tar.setFont(font);
+        tar.setForeground(skin.getClrText());
         tar.setFocusable(false);
         tar.setLineWrap(true);
-        this.pnlCombat.add(tar, "h 100%!, w 100%!");
+        this.pnlCombat.add(tar, "w 95%!, gapleft 3%, gaptop 1%, h 95%");
     }
 
     /**
