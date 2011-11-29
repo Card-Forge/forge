@@ -1389,7 +1389,9 @@ public final class AbilityFactoryChangeZone {
             }
 
         } else if (origin.equals(Zone.Graveyard)) {
-            // Retrieve from Graveyard to:
+            if (destination.equals(Zone.Hand)) {//only retrieve cards from computer graveyard
+                list = list.getController(AllZone.getComputerPlayer());
+            }
 
         }
 
