@@ -60,6 +60,27 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Checkstyle.
+- Add License header to each file
+- Add Braids license header to her code.
+- Fix for Apathy giving errors (it's not scriptable correctly at the moment and the card is so AI unfriendly it shouldn't be in the game anyway).
+- Add GPL header for code grabbed from the Arcane project
+- Put headers into TreePropery files
+- Fix license headers
+- update all dependencies to latest versions
+- make the Combat text more readable (new GUI)
+- Cards in selection windows (getChoice(...), etc...) will now update the card picture in the top-right panel. (New GUI)
+- fix Human battlefield so creatures are above lands (New GUI)
+- (new GUI) The player detail panel will now also show poison counters and damage prevention.
+- Win/lose screen: continue/restart bug fixed.
+- Fixed phase indicator bug in old UI.
+- Updated two cards text files for AI reasons.
+- Fixed Morph of Skirk Commando.
+- The AI will now only retrieve his own cards from the graveyard to hand.
+- Fixed closing frame no concede bug.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -80,6 +101,8 @@ Samite Censer-Bearer
 Balm of Restoration
 Halls of Mist
 Sundering Titan
+Corrupted Resolve
+Kirtar's Wrath
 
 
 end
