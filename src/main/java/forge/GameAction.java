@@ -396,7 +396,29 @@ public class GameAction {
         if (c.isCreature() && origZone.is(Constant.Zone.Battlefield)) {
             for (final Card recoverable : c.getOwner().getCardsIn(Zone.Graveyard)) {
                 if (recoverable.hasStartOfKeyword("Recover") && !recoverable.equals(c)) {
-                    final SpellAbility abRecover = new Ability(recoverable, "0") {
+                    
+                    final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
+                            .split(":")[1];
+                    
+                    final Command paidCommand = new Command() {
+                        private static final long serialVersionUID = -6357156873861051845L;
+
+                        @Override
+                        public void execute() {
+                            AllZone.getGameAction().moveToHand(recoverable);
+                        }
+                    };
+
+                    final Command unpaidCommand = new Command() {
+                        private static final long serialVersionUID = -7354791599039157375L;
+
+                        @Override
+                        public void execute() {
+                            AllZone.getGameAction().exile(recoverable);
+                        }
+                    };
+                    
+                    final SpellAbility abRecover = new Ability(recoverable, recoverCost) {
                         @Override
                         public void resolve() {
                             AllZone.getGameAction().moveToHand(recoverable);
@@ -411,51 +433,27 @@ public class GameAction {
                         }
                     };
 
-                    final Command notPaid = new Command() {
-                        private static final long serialVersionUID = 5812397026869965462L;
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Recover ").append(recoverable).append("\n");
 
+                    final Ability recoverAbility = new Ability(recoverable, "0") {
                         @Override
-                        public void execute() {
-                            AllZone.getGameAction().exile(recoverable);
+                        public void resolve() {
+                            if (recoverable.getController().isHuman()) {
+                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), recoverCost, paidCommand,
+                                        unpaidCommand);
+                            } else { // computer
+                                if (ComputerUtil.canPayCost(abRecover)) {
+                                    ComputerUtil.playNoStack(abRecover);
+                                } else {
+                                    AllZone.getGameAction().exile(recoverable);
+                                }
+                            }
                         }
                     };
+                    recoverAbility.setStackDescription(sb.toString());
 
-                    abRecover.setCancelCommand(notPaid);
-                    abRecover.setTrigger(true);
-
-                    final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
-                            .split(":")[1];
-                    final Cost abCost = new Cost(recoverCost, recoverable.getName(), false);
-                    abRecover.setPayCosts(abCost);
-
-                    final StringBuilder question = new StringBuilder("Recover ");
-                    question.append(recoverable.getName());
-                    question.append("(");
-                    question.append(recoverable.getUniqueNumber());
-                    question.append(")");
-                    question.append("?");
-
-                    boolean shouldRecoverForAI = false;
-                    boolean shouldRecoverForHuman = false;
-
-                    if (owner.isHuman()) {
-                        shouldRecoverForHuman = GameActionUtil.showYesNoDialog(recoverable, question.toString());
-                    } else if (c.getOwner().isComputer()) {
-                        shouldRecoverForAI = ComputerUtil.canPayCost(abRecover);
-                    }
-
-                    if (shouldRecoverForHuman) {
-                        AllZone.getStack().addSimultaneousStackEntry(abRecover);
-                        // AllZone.getGameAction().playSpellAbility(abRecover);
-                    } else if (shouldRecoverForAI) {
-                        AllZone.getStack().addSimultaneousStackEntry(abRecover);
-                        // ComputerUtil.playStack(abRecover);
-                    }
-
-                    if (!grave.hasChanged()) {
-                        // If the controller declined Recovery or didn't pay the
-                        // cost, exile the recoverable
-                    }
+                    AllZone.getStack().addSimultaneousStackEntry(recoverAbility);
                 }
             }
         }
