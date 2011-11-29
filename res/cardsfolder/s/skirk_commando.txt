@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Creature Goblin
 Text:no text
 PT:2/1
-Morph:2 R
+K:Morph:2 R
 T:Mode$ DamageDone | ValidSource$ Card.Self+faceUp | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have it deal 2 damage to target creature that player controls.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature controlled by opponent | NumDmg$ 2
 SVar:Rarity:Common
