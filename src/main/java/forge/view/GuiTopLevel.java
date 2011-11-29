@@ -19,11 +19,14 @@ package forge.view;
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import forge.AllZone;
+import forge.view.match.ViewTopLevel;
 import forge.view.toolbox.FOverlay;
 
 /**
@@ -40,7 +43,6 @@ public class GuiTopLevel extends JFrame {
     public GuiTopLevel() {
         super();
         this.setMinimumSize(new Dimension(800, 600));
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setExtendedState(this.getExtendedState() | Frame.MAXIMIZED_BOTH);
 
@@ -50,6 +52,14 @@ public class GuiTopLevel extends JFrame {
         this.addOverlay();
 
         this.setVisible(true);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent evt) {
+                ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+                t.getDockController().concede();
+            }
+        });
     }
 
     /**
