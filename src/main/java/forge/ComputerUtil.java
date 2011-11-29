@@ -26,6 +26,8 @@ import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostMana;
+import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
@@ -71,6 +73,24 @@ public class ComputerUtil {
             final Card source = sa.getSourceCard();
 
             boolean flashb = false;
+            
+            if (source.hasStartOfKeyword("May be played without paying its mana cost")) {
+                final SpellAbility newSA = sa.copy();
+                final Cost cost = sa.getPayCosts();
+                for (CostPart part : cost.getCostParts()) {
+                    if (part instanceof CostMana) {
+                        ((CostMana) part).setMana("0");
+                    }
+                }
+                cost.setNoManaCostChange(true);
+                newSA.setManaCost("0");
+                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                if (ComputerUtil.canBePlayedAndPayedByAI(newSA)) {
+                    ComputerUtil.handlePlayingSpellAbility(newSA);
+
+                    return false;
+                }
+            }
 
             // Flashback
             if (source.isInZone(Constant.Zone.Graveyard) && sa.isSpell() && (source.isInstant() || source.isSorcery())) {
@@ -549,7 +569,9 @@ public class ComputerUtil {
 
         ManaCost cost = new ManaCost(mana);
 
-        cost = AllZone.getGameAction().getSpellCostChange(sa, cost);
+        if (sa.getPayCosts() == null || !sa.getPayCosts().getNoManaCostChange()) {
+            cost = AllZone.getGameAction().getSpellCostChange(sa, cost);
+        }
 
         final ManaPool manapool = player.getManaPool();
 
