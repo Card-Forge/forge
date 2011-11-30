@@ -201,8 +201,8 @@ public class Generate5ColorDeck {
         final CardList sp12345 = new CardList();
 
         // used for mana curve in the card pool
-        final int[] minCMC = { 1 };
-        final int[] maxCMC = { 3 };
+        final int[] minCMC = { 0 };
+        final int[] maxCMC = { 2 };
         final CardListFilter cmcF = new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -213,6 +213,9 @@ public class Generate5ColorDeck {
 
         // select cards to build card pools using a mana curve
         for (int i = 3; i > 0; i--) {
+            if (i==1) {
+                maxCMC[0] = 20; //the last category is open ended
+            }
             final CardList cr1CMC = cr1.filter(cmcF);
             final CardList cr2CMC = cr2.filter(cmcF);
             final CardList cr3CMC = cr3.filter(cmcF);
@@ -270,11 +273,10 @@ public class Generate5ColorDeck {
             minCMC[0] += 2;
             maxCMC[0] += 2;
             // resulting mana curve of the card pool
-            // 18x 1 - 3
-            // 12x 3 - 5
-            // 6x 5 - 7
-            // =36x - card pool could support up to a 257 card deck (all 4-ofs
-            // plus basic lands)
+            // 30x 0 - 2
+            // 20x 3 - 5
+            // 10x 6 - 20
+            // =60x - card pool
         }
 
         // shuffle card pools

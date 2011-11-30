@@ -195,8 +195,8 @@ public class Generate3ColorDeck {
         final CardList sp123 = new CardList();
 
         // used for mana curve in the card pool
-        final int[] minCMC = { 1 };
-        final int[] maxCMC = { 3 };
+        final int[] minCMC = { 0 };
+        final int[] maxCMC = { 2 };
         final CardListFilter cmcF = new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -206,7 +206,11 @@ public class Generate3ColorDeck {
         };
 
         // select cards to build card pools using a mana curve
-        for (int i = 4; i > 0; i--) {
+        for (int i = 3; i > 0; i--) {
+            if (i==1) {
+                maxCMC[0] = 20; //the last category is open ended
+                i = 0; // this reduces the number of cards in the last category to 6
+            }
             final CardList cr1CMC = cr1.filter(cmcF);
             final CardList cr2CMC = cr2.filter(cmcF);
             final CardList cr3CMC = cr3.filter(cmcF);
@@ -215,7 +219,7 @@ public class Generate3ColorDeck {
             final CardList sp2CMC = sp2.filter(cmcF);
             final CardList sp3CMC = sp3.filter(cmcF);
 
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < i+1; j++) {
                 Card c = cr1CMC.get(this.r.nextInt(cr1CMC.size()));
                 cr123.add(c);
                 this.cardCounts.put(c.getName(), 0);
@@ -241,14 +245,13 @@ public class Generate3ColorDeck {
                 this.cardCounts.put(c.getName(), 0);
             }
 
-            minCMC[0] += 2;
-            maxCMC[0] += 2;
+            minCMC[0] += 3;
+            maxCMC[0] += 3;
             // resulting mana curve of the card pool
-            // 18x 1 - 3
-            // 12x 3 - 5
-            // 6x 5 - 7
-            // =36x - card pool could support up to a 257 card deck (all 4-ofs
-            // plus basic lands)
+            // 24x 0 - 2
+            // 18x 3 - 5
+            // 6x  6 - 20
+            // =58x - card pool
         }
 
         // shuffle card pools

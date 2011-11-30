@@ -179,7 +179,7 @@ public class Generate2ColorDeck {
         final CardList sp12 = new CardList();
 
         // used for mana curve in the card pool
-        final int[] minCMC = { 1 };
+        final int[] minCMC = { 0 };
         final int[] maxCMC = { 2 };
         final CardListFilter cmcF = new CardListFilter() {
             @Override
@@ -190,13 +190,18 @@ public class Generate2ColorDeck {
         };
 
         // select cards to build card pools using a mana curve
-        for (int i = 5; i > 0; i--) {
+        for (int i = 4; i > 0; i--) {
+            
+            if (i==1) {
+                maxCMC[0] = 20; //the last category is open ended
+                i = 0; // this reduces the number of cards in the last category to 4
+            }
             final CardList cr1CMC = cr1.filter(cmcF);
             final CardList cr2CMC = cr2.filter(cmcF);
             final CardList sp1CMC = sp1.filter(cmcF);
             final CardList sp2CMC = sp2.filter(cmcF);
 
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < i+1; j++) {
                 Card c = cr1CMC.get(this.r.nextInt(cr1CMC.size()));
                 cr12.add(c);
                 this.cardCounts.put(c.getName(), 0);
@@ -215,14 +220,16 @@ public class Generate2ColorDeck {
             }
 
             minCMC[0] += 2;
+            if (i == 4) {
+                minCMC[0] = 3;
+            }
             maxCMC[0] += 2;
             // resulting mana curve of the card pool
-            // 16x 1 - 2
-            // 12x 3 - 4
-            // 8x 5 - 6
-            // 4x 7 - 8
-            // =40x - card pool could support up to a 275 card deck (all 4-ofs
-            // plus basic lands)
+            // 20x 0 - 2
+            // 16x 3 - 4
+            // 12x 5 - 6
+            // 4x 7 - 20
+            // =52x - card pool
         }
 
         // shuffle card pools
