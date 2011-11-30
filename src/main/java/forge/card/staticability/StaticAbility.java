@@ -454,7 +454,7 @@ public class StaticAbility {
                 return false;
             }
         }
-        
+
         if (this.mapParams.containsKey("CheckSecondSVar")) {
             final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckSecondSVar"), null);
             String comparator = "GE1";

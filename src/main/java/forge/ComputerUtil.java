@@ -73,7 +73,7 @@ public class ComputerUtil {
             final Card source = sa.getSourceCard();
 
             boolean flashb = false;
-            
+
             if (source.hasStartOfKeyword("May be played without paying its mana cost")) {
                 final SpellAbility newSA = sa.copy();
                 final Cost cost = sa.getPayCosts();

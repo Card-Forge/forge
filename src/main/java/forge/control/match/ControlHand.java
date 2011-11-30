@@ -127,7 +127,7 @@ public class ControlHand {
     /** Adds listeners to hand panel: clicks, mouseover, etc. */
     public void addListeners() {
         final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
-        
+
         view.getHandArea().addMouseListener(new MouseAdapter() {
             // Card click
             @Override
@@ -141,7 +141,7 @@ public class ControlHand {
                 }
             }
         });
-        
+
         view.getHandArea().addMouseMotionListener(new MouseMotionAdapter() {
             // Card mouseover
             @Override
@@ -150,7 +150,7 @@ public class ControlHand {
                 if (c != null) {
                     t.setCard(c);
                 }
-            } // mouseMoved 
+            } // mouseMoved
         });
     }
 

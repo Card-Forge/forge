@@ -398,10 +398,10 @@ public class GameAction {
         if (c.isCreature() && origZone.is(Constant.Zone.Battlefield)) {
             for (final Card recoverable : c.getOwner().getCardsIn(Zone.Graveyard)) {
                 if (recoverable.hasStartOfKeyword("Recover") && !recoverable.equals(c)) {
-                    
+
                     final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
                             .split(":")[1];
-                    
+
                     final Command paidCommand = new Command() {
                         private static final long serialVersionUID = -6357156873861051845L;
 
@@ -419,7 +419,7 @@ public class GameAction {
                             AllZone.getGameAction().exile(recoverable);
                         }
                     };
-                    
+
                     final SpellAbility abRecover = new Ability(recoverable, recoverCost) {
                         @Override
                         public void resolve() {

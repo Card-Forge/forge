@@ -152,9 +152,9 @@ public class ViewTabber {
 
         this.pnlStack.removeAll();
         this.vtpTabber.showTab(0);
-        
+
         this.vtpTabber.getAllVTabs().get(0).setText("Stack : " + stack.size());
-        
+
         final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
         final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
 
@@ -206,7 +206,7 @@ public class ViewTabber {
         final Border border = new MatteBorder(0, 0, 0, 0, skin.getClrBorders());
 
         this.vtpTabber.getAllVTabs().get(1).setText("Combat : " + AllZone.getCombat().getAttackers().length);
-                
+
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
         tar.setBorder(border);

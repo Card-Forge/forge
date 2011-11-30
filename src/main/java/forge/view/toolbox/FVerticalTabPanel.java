@@ -211,13 +211,13 @@ public class FVerticalTabPanel extends FPanel {
             at.rotate(Math.toRadians(-90), 0, 0);
             g2d.setTransform(at);
         }
-        
+
         /** @param txt0 &emsp; String */
         public void setText(String txt0) {
             this.msg = txt0;
         }
     }
-    
+
     public List<VTab> getAllVTabs() {
         return allVTabs;
     }

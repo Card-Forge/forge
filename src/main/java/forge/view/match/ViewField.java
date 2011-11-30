@@ -566,7 +566,7 @@ public class ViewField extends FRoundedPanel {
                 this.defaultBG = ViewField.this.skin.getClrTheme();
             }
             this.setBackground(this.defaultBG);
-            
+
             // Resize adapter
             this.addComponentListener(new ComponentAdapter() {
                 @Override
@@ -574,7 +574,7 @@ public class ViewField extends FRoundedPanel {
                     setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (getHeight() / 2)));
                 }
             });
-            
+
             // Hover effect
             this.madHover = new MouseAdapter() {
                 @Override
