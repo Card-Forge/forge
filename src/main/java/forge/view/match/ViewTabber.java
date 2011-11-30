@@ -38,8 +38,6 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Card;
-import forge.CardList;
 import forge.Constant;
 import forge.MagicStack;
 import forge.Player;
