@@ -19,8 +19,6 @@ package forge.control.match;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -35,10 +33,8 @@ import javax.swing.SwingUtilities;
 
 import arcane.ui.HandArea;
 import arcane.ui.util.Animation;
-
 import forge.AllZone;
 import forge.Card;
-import forge.GuiDisplay;
 import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.view.match.ViewHand;
