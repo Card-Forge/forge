@@ -2690,6 +2690,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if ((keyword.equals("CARDNAME can't be countered.") && !sb.toString().contains(
                     "CARDNAME can't be countered."))
                     || (keyword.startsWith("Cascade") && !sb.toString().contains("Cascade"))
+                    || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || (keyword.startsWith("Multikicker") && !sb.toString().contains("Multikicker"))) {
                 sb.append(kw.get(i)).append("\r\n");
