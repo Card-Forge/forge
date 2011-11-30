@@ -514,9 +514,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return a {@link forge.Card} object.
      */
     public final Card getCard() {
-        System.err.println("ViewTopLevel > getCard: Something should happen here!");
-        new Exception().printStackTrace();
-        return null; // new Card(); //detail.getCard();
+        return this.getCardviewerController().getCurrentCard();
     }
 
     /**

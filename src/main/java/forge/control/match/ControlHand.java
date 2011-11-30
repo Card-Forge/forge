@@ -21,6 +21,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +38,7 @@ import arcane.ui.util.Animation;
 
 import forge.AllZone;
 import forge.Card;
+import forge.GuiDisplay;
 import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.view.match.ViewHand;
@@ -63,7 +67,7 @@ public class ControlHand {
 
     /** Adds observers to hand panel. */
     public void addObservers() {
-        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();  // asdf NECESSARY?
+        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
 
         AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(new Observer() {
             @Override
@@ -124,14 +128,33 @@ public class ControlHand {
         });
     }
 
-    /** Adds listeners to hand panel: window resize, etc. */
+    /** Adds listeners to hand panel: clicks, mouseover, etc. */
     public void addListeners() {
-        this.view.addComponentListener(new ComponentAdapter() {
+        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+        
+        view.getHandArea().addMouseListener(new MouseAdapter() {
+            // Card click
             @Override
-            public void componentResized(final ComponentEvent e) {
-                // Ensures cards in hand scale properly with parent.
-                //ControlHand.this.view.refreshLayout();
+            public void mousePressed(final MouseEvent e) {
+                if (e.getButton() != MouseEvent.BUTTON1) {
+                    return;
+                }
+                final Card c = view.getHandArea().getCardFromMouseOverPanel();
+                if (c != null) {
+                    t.getInputController().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                }
             }
+        });
+        
+        view.getHandArea().addMouseMotionListener(new MouseMotionAdapter() {
+            // Card mouseover
+            @Override
+            public void mouseMoved(final MouseEvent me) {
+                final Card c = view.getHandArea().getCardFromMouseOverPanel();
+                if (c != null) {
+                    t.setCard(c);
+                }
+            } // mouseMoved 
         });
     }
 
