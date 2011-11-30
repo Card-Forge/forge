@@ -226,10 +226,10 @@ public class WinLoseFrame extends JFrame {
             bounds.y = (screen.height - bounds.height) / 2;
         }
 
+        this.setUndecorated(true);
         this.setBackground(AllZone.getSkin().getClrTheme());
         this.setBounds(bounds);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setUndecorated(true);
         this.setVisible(true);
     }
 
