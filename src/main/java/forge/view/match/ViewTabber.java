@@ -38,6 +38,8 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Card;
+import forge.CardList;
 import forge.Constant;
 import forge.MagicStack;
 import forge.Player;
@@ -205,6 +207,8 @@ public class ViewTabber {
         final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
         final Border border = new MatteBorder(0, 0, 0, 0, skin.getClrBorders());
 
+        this.vtpTabber.getAllVTabs().get(1).setText("Combat : " + AllZone.getCombat().getAttackers().length);
+                
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
         tar.setBorder(border);
