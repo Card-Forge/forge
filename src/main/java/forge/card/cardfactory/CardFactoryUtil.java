@@ -3754,20 +3754,20 @@ public class CardFactoryUtil {
         c.setBaseAttack(baseAttack);
         c.setBaseDefense(baseDefense);
 
-        for (final String kw : intrinsicKeywords) {
-            if (kw.startsWith("HIDDEN")) {
-                c.addExtrinsicKeyword(kw);
-            } else {
-                c.addIntrinsicKeyword(kw);
-            }
-        }
-
         final int multiplier = AllZoneUtil.getTokenDoublersMagnitude(controller);
         // TODO - does this need to set
         // PlayerZone_ComesIntoPlay.SimultaneousEntry like Rite of Replication
         // does?
         for (int i = 0; i < multiplier; i++) {
             Card temp = CardFactoryUtil.copyStats(c);
+            
+            for (final String kw : intrinsicKeywords) {
+                if (kw.startsWith("HIDDEN")) {
+                    temp.addExtrinsicKeyword(kw);//extrinsic keywords won't survive the copyStats treatment 
+                } else {
+                    temp.addIntrinsicKeyword(kw);
+                }
+            }
             temp.setOwner(controller);
             temp.setToken(true);
             CardFactoryUtil.parseKeywords(temp, temp.getName());
