@@ -81,6 +81,25 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- A change of controller will now remove creatures from combat and reset echo.
+- Returned animation capabilities to hand panel.
+- Checkstyle.
+- Added a fluff piece to the changes.txt file.
+- Rewrote the Recover keyword (because it was a mess).
+- Added the keyword "May be played without paying its mana cost" (should not be used generally since additional costs like Kicker are not implemented correctly at the moment).
+- Added the option to check a second SVar in static abilities with "CheckSecondSVar".
+- Enabled the keyword "May be played without paying its mana cost" for the AI.
+- Mouseover and click problem in hand area fixed.
+- Quick checkstyle fix.
+- Fixed hand area resize problem.
+- Fixed "the frame is decorated" exception.
+- Added count of stack to tab.
+- Added # of attackers to combat tab title.
+- Quick checkstyle fix.
+- Fixed massive repaint bug, hopefully also simultaneously cleared up memory leak.
+- Made Mentor of the Meek's trigger optional. (It now works with Always Accept/Decline)
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -103,6 +122,11 @@ Halls of Mist
 Sundering Titan
 Corrupted Resolve
 Kirtar's Wrath
+Rushwood Legate
+Kyren Legate
+Saprazzan Legate
+Quillmane Baku
+Nostalgic Dreams
 
 
 end
