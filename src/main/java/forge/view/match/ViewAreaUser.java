@@ -54,8 +54,8 @@ public class ViewAreaUser extends FPanel {
 
         // A.D.D.
         this.add(this.pnlInput, "h 100%!, west, w 200px!");
-        this.add(this.pnlHand, "grow, gapleft 5");
-        this.add(this.pnlDock, "growx, h 50px!, south, gaptop 5, gapleft 5");
+        this.add(this.pnlHand, "growx, h 79%!, gapleft 5");
+        this.add(this.pnlDock, "growx, h 20%!, south, gaptop 1%, gapleft 5");
     }
 
     /**
