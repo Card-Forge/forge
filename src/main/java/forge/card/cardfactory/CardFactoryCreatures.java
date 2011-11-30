@@ -2703,6 +2703,7 @@ public class CardFactoryCreatures {
             final StringBuilder sb = new StringBuilder();
             sb.append("When CARDNAME enters the battlefield, ");
             sb.append("sacrifice it unless you return an artifact you control to its owner's hand.");
+            sacOrNo.setDescription(sb.toString());
             sacOrNo.setStackDescription(sb.toString());
 
             final Command comesIntoPlay = new Command() {

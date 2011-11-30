@@ -1,7 +1,7 @@
 Name:Glint Hawk
 ManaCost:W
 Types:Creature Bird
-Text:no text
+Text:When CARDNAME enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
 PT:2/2
 K:Flying
 #TODO - ETB trigger is hard-coded
