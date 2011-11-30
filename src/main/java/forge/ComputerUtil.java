@@ -84,7 +84,9 @@ public class ComputerUtil {
                 }
                 cost.setNoManaCostChange(true);
                 newSA.setManaCost("0");
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                final StringBuilder sb = new StringBuilder();
+                sb.append(sa.getDescription()).append(" (without paying its mana cost)");
+                newSA.setDescription(sb.toString());
                 if (ComputerUtil.canBePlayedAndPayedByAI(newSA)) {
                     ComputerUtil.handlePlayingSpellAbility(newSA);
 
@@ -528,8 +530,10 @@ public class ComputerUtil {
      */
     public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player) {
         if (sa.getActivatingPlayer() == null) {
-            System.out.println(sa.getSourceCard()
-                    + " in ComputerUtil.canPayAdditionalCosts() without an activating player");
+            final StringBuilder sb = new StringBuilder();
+            sb.append(sa.getSourceCard());
+            sb.append(" in ComputerUtil.canPayAdditionalCosts() without an activating player");
+            System.out.println(sb.toString());
             sa.setActivatingPlayer(player);
         }
         return CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
@@ -684,8 +688,10 @@ public class ComputerUtil {
                             }
 
                             if (sourceCard.getName().equals("Rainbow Vale")) {
-                                sourceCard.addExtrinsicKeyword("An opponent gains control of CARDNAME "
-                                        + "at the beginning of the next end step.");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append("An opponent gains control of CARDNAME ");
+                                sb.append("at the beginning of the next end step.");
+                                sourceCard.addExtrinsicKeyword(sb.toString());
                             }
 
                             // System.out.println("just subtracted " +
@@ -721,8 +727,10 @@ public class ComputerUtil {
         }
 
         if (!test) {
-            throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for "
-                    + sa.getSourceCard().getName());
+            final StringBuilder sb = new StringBuilder();
+            sb.append("ComputerUtil : payManaCost() cost was not paid for ");
+            sb.append(sa.getSourceCard().getName());
+            throw new RuntimeException(sb.toString());
         }
 
         return false;
