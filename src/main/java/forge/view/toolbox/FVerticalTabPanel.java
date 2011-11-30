@@ -148,9 +148,9 @@ public class FVerticalTabPanel extends FPanel {
      * provide vertical-ness. Also manages root level hover and click effects.
      * 
      */
-    private class VTab extends JPanel {
-        private final String msg;
-        private final int id;
+    public class VTab extends JPanel {
+        private String msg;
+        private int id;
         private int w;
 
         // ID is used to retrieve this tab from the list of allVTabs.
@@ -211,5 +211,14 @@ public class FVerticalTabPanel extends FPanel {
             at.rotate(Math.toRadians(-90), 0, 0);
             g2d.setTransform(at);
         }
+        
+        /** @param txt0 &emsp; String */
+        public void setText(String txt0) {
+            this.msg = txt0;
+        }
+    }
+    
+    public List<VTab> getAllVTabs() {
+        return allVTabs;
     }
 }
