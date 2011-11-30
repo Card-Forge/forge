@@ -22,7 +22,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
+import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
@@ -69,7 +71,7 @@ public class ViewField extends FRoundedPanel {
 
     private PhaseLabel lblUpkeep, lblDraw, lblBeginCombat, lblEndCombat, lblEndTurn;
 
-    private JLabel lblLife;
+    private JLabel lblAvatar, lblLife;
     private Map<String, JLabel> keywordLabels;
     private final Color transparent = new Color(0, 0, 0, 0);
 
@@ -102,10 +104,6 @@ public class ViewField extends FRoundedPanel {
         this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getClrBorders()));
         this.tabletop.setOpaque(false);
 
-        final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
-
-        //
         final Avatar pic = new Avatar("res/pics/icons/unknown.jpg");
         final Details pool = new Details();
 
@@ -354,15 +352,26 @@ public class ViewField extends FRoundedPanel {
      * Shows user icon, keywords, and phase for this field.
      */
     private class Avatar extends FPanel {
-        private final ImageIcon icon;
-        private final Color transparent = new Color(0, 0, 0, 0);
+        private final Image img;
 
         public Avatar(final String filename) {
             // Panel and background image icon init
             super();
             this.setOpaque(false);
             this.setLayout(new MigLayout("fill, wrap, insets 0, gap 0"));
-            this.icon = new ImageIcon(filename);
+            this.img = new ImageIcon(filename).getImage();
+
+            // Resize adapter
+            this.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent e) {
+                    lblLife.setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (getWidth() / 4)));
+                    lblAvatar.setIcon(new ImageIcon(img.getScaledInstance(getWidth(), getWidth(), java.awt.Image.SCALE_SMOOTH)));
+                }
+            });
+
+            lblAvatar = new JLabel();
+            this.add(lblAvatar, "w 100%!, wrap");
 
             // Life label
             ViewField.this.lblLife = new JLabel("--");
@@ -387,7 +396,7 @@ public class ViewField extends FRoundedPanel {
                     ViewField.this.lblLife.setBorder(ViewField.this.inactiveBorder);
                 }
             });
-            this.add(ViewField.this.lblLife, "w 100%!, dock north");
+            this.add(ViewField.this.lblLife, "w 100%!, wrap");
 
             ViewField.this.keywordLabels = new HashMap<String, JLabel>();
             // TODO link these map keys to correct keyword constant
@@ -420,8 +429,7 @@ public class ViewField extends FRoundedPanel {
             phase.setLayout(new MigLayout("fillx, insets 0, gap 0"));
             this.add(phase, "w 100%!, h 20px!");
 
-            // Constraints string must be set once, for ease and also
-            // since dynamic sizing is buggy.
+            // Constraints string, set once
             final String constraints = "w 20%!, h 100%!";
 
             ViewField.this.lblUpkeep = new PhaseLabel("UP");
@@ -443,16 +451,6 @@ public class ViewField extends FRoundedPanel {
             ViewField.this.lblEndTurn = new PhaseLabel("ET");
             ViewField.this.lblEndTurn.setToolTipText("<html>Phase: End Turn<br>Click to toggle.</html>");
             phase.add(ViewField.this.lblEndTurn, constraints);
-        }
-
-        @Override
-        public void paintComponent(final Graphics g) {
-            super.paintComponent(g);
-            this.setBorder(new MatteBorder(this.getWidth(), 0, 0, 0, this.transparent));
-            g.drawImage(this.icon.getImage(), 0, 0, this.getWidth(), this.getWidth(), 0, 0, this.icon.getIconWidth(),
-                    this.icon.getIconHeight(), null);
-            ViewField.this.lblLife
-                    .setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (this.getWidth() / 4)));
         }
     }
 
@@ -568,7 +566,16 @@ public class ViewField extends FRoundedPanel {
                 this.defaultBG = ViewField.this.skin.getClrTheme();
             }
             this.setBackground(this.defaultBG);
-
+            
+            // Resize adapter
+            this.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent e) {
+                    setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (getHeight() / 2)));
+                }
+            });
+            
+            // Hover effect
             this.madHover = new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
@@ -610,7 +617,6 @@ public class ViewField extends FRoundedPanel {
             g.fillRect(0, 0, this.w, this.h);
             g.setColor(this.clrBorders);
             g.drawRect(0, 0, this.w - 1, this.h - 1);
-            this.setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (this.h / 2)));
             super.paintComponent(g);
         }
     }
@@ -666,6 +672,14 @@ public class ViewField extends FRoundedPanel {
                 public void mouseExited(final MouseEvent e) {
                     PhaseLabel.this.hover = false;
                     PhaseLabel.this.repaint();
+                }
+            });
+
+            // Resize adapter
+            this.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent e) {
+                    setFont(new Font("TAHOMA", Font.PLAIN, (getWidth() / 2)));
                 }
             });
         }
@@ -736,8 +750,6 @@ public class ViewField extends FRoundedPanel {
             // Center vertically and horizontally. Show border if active.
             g.setColor(c);
             g.fillRoundRect(1, 1, w - 2, h - 2, 5, 5);
-
-            this.setFont(new Font("TAHOMA", Font.PLAIN, (w / 2)));
             g.setColor(Color.black);
             super.paintComponent(g);
         }
