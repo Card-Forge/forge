@@ -3,26 +3,32 @@
 Name=Mr Slate 3
 Title=Mr Slate
 Difficulty=hard
-Description=WUG Merfolk deck with Lord of Atlantis, Stonybrook Banneret and Stonybrook Schoolmaster
+Description=WU Merfolk deck with Merrow Reejerey, Lord of Atlantis and Stonybrook Banneret
 Icon=Mr Slate.jpg
 Deck Type=constructed
 [main]
-4 Spreading Seas
-3 Cold-Eyed Selkie
-3 Kabira Crossroads
-1 Mox Sapphire
-4 Lord of Atlantis
-3 Plains
-2 Enclave Elite
-6 Island
-4 Merfolk Sovereign
-3 Avian Changeling
-4 Glacial Fortress
-4 Echoing Truth
-1 Mox Pearl
+1 Plains
+8 Island
 4 Tundra
-4 Counterspell
+4 Flooded Strand
+4 Wanderwine Hub
+1 Mox Sapphire
+1 Mox Pearl
+4 Spreading Seas
+1 Merrow Commerce
+3 Cold-Eyed Selkie
+4 Merrow Reejerey
+2 Lord of Atlantis
+2 Coralhelm Commander
 4 Stonybrook Banneret
+1 Merfolk Sovereign
+1 Avian Changeling
+1 Judge of Currents
 1 Stonybrook Schoolmaster
 4 Sejiri Merfolk
+4 Tidal Courier
+1 Wake Thrasher
+1 Time Walk
+1 Ancestral Recall
+2 Path to Exile
 [sideboard]

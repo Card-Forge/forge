@@ -5,7 +5,6 @@ Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Merfolk+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Islandwalk | Description$ Other Merfolk creatures get +1/+1 and have islandwalk.
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_atlantis.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/63.jpg
