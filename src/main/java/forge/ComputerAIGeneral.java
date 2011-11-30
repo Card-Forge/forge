@@ -447,7 +447,10 @@ public class ComputerAIGeneral implements Computer {
         for (final Card element : att) {
             // tapping of attackers happens after Propaganda is paid for
             // if (!att[i].hasKeyword("Vigilance")) att[i].tap();
-            Log.debug("Computer just assigned " + element.getName() + " as an attacker.");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Computer just assigned ");
+            sb.append(element.getName()).append(" as an attacker.");
+            Log.debug(sb.toString());
         }
 
         AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
