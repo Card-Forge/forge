@@ -30,7 +30,6 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.Player;
-import forge.PlayerUtil;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -446,6 +445,7 @@ public class AbilityFactorySacrifice {
 
         msg = "Sacrifice a " + msg;
 
+        final boolean destroy = params.containsKey("Destroy");
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
         if (remSacrificed) {
             card.clearRemembered();
@@ -480,9 +480,9 @@ public class AbilityFactorySacrifice {
             CardList sacList = null;
             for (final Player p : tgts) {
                 if (p.isComputer()) {
-                    sacList = AbilityFactorySacrifice.sacrificeAI(p, amount, valid, sa);
+                    sacList = AbilityFactorySacrifice.sacrificeAI(p, amount, valid, sa, destroy);
                 } else {
-                    sacList = AbilityFactorySacrifice.sacrificeHuman(p, amount, valid, sa, msg);
+                    sacList = AbilityFactorySacrifice.sacrificeHuman(p, amount, valid, sa, destroy);
                 }
                 if (remSacrificed) {
                     for (int i = 0; i < sacList.size(); i++) {
@@ -509,7 +509,8 @@ public class AbilityFactorySacrifice {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static CardList sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa) {
+    private static CardList sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa,
+            final boolean destroy) {
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -535,7 +536,7 @@ public class AbilityFactorySacrifice {
      *            a {@link java.lang.String} object.
      */
     private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
-            final String message) {
+            final boolean destroy) {
         CardList saccedList = new CardList();
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -548,7 +549,16 @@ public class AbilityFactorySacrifice {
             o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
             if (o != null) {
                 final Card c = (Card) o;
-                AllZone.getGameAction().sacrifice(c);
+                
+                if (destroy) {
+                    if(!AllZone.getGameAction().destroy(c)) {
+                        continue;
+                    }
+                } else {
+                    if(!AllZone.getGameAction().sacrifice(c)){
+                        continue;
+                    }
+                }
                 saccedList.add(c);
                 list.remove(c);
             }
