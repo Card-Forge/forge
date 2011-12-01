@@ -1410,6 +1410,9 @@ public class CardFactoryUtil {
             sbDesc.append(" -");
         }
         sbDesc.append(" ").append(costDesc);
+        if (!abCost.isOnlyManaCost()) {
+            sbDesc.append(".");
+        }
         equip.setDescription(sbDesc.toString());
 
         return equip;

@@ -2699,7 +2699,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("Flashback");
                 if (keyword.contains(" ")) {
                     final Cost fbCost = new Cost(keyword.substring(10), this.getName(), true);
-                    sb.append(" " + fbCost.toString()).delete(sb.length() - 2, sb.length() - 1);
+                    if (this.getName().equals("Acorn Harvest")) {
+                        System.out.println("fbCost: |"+fbCost.toString()+"|");
+                    }
+                    if (!fbCost.isOnlyManaCost()) {
+                        sb.append(" -");
+                    }
+                    sb.append(" " + fbCost.toString()).delete(sb.length() - 2, sb.length());
+                    if (this.getName().equals("Acorn Harvest")) {
+                        System.out.println("fbCost: |"+sb.toString()+"|");
+                    }
+                    if (!fbCost.isOnlyManaCost()) {
+                        sb.append(".");
+                    }
                 }
                 sb.append("\r\n");
             }
