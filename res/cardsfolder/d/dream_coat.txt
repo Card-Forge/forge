@@ -1,0 +1,11 @@
+Name:Dream Coat
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+A:AB$ ChooseColor | Cost$ 0 | Defined$ You | OrColors$ True | ActivationLimit$ 1 | SubAbility$ DBAnimate | SpellDescription$ Enchanted creature becomes the color or colors of your choice. Activate this ability only once each turn.
+SVar:DBAnimate:DB$ Animate | Colors$ ChosenColor | OverwriteColors$ True | Defined$ Enchanted | Permanent$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_coat.jpg
+End

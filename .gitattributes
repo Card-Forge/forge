@@ -2219,6 +2219,7 @@ res/cardsfolder/d/dread_wight.txt -text
 res/cardsfolder/d/dreadship_reef.txt svneol=native#text/plain
 res/cardsfolder/d/dreadwing.txt svneol=native#text/plain
 res/cardsfolder/d/dream_cache.txt svneol=native#text/plain
+res/cardsfolder/d/dream_coat.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dream_fighter.txt -text
 res/cardsfolder/d/dream_fracture.txt svneol=native#text/plain
 res/cardsfolder/d/dream_prowler.txt svneol=native#text/plain
