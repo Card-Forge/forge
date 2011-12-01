@@ -576,6 +576,13 @@ public class OldGuiNewGame extends JFrame {
 
         OldGuiNewGame.oldGuiCheckBox.setText(ForgeProps
                 .getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.OLD_GUI));
+        OldGuiNewGame.oldGuiCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                Constant.Runtime.OLDGUI[0] = OldGuiNewGame.oldGuiCheckBox.isSelected();
+            }
+        });
+
         OldGuiNewGame.getSmoothLandCheckBox().setText(
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.AI_LAND));
 
@@ -883,8 +890,6 @@ public class OldGuiNewGame extends JFrame {
                 Constant.Runtime.COMPUTER_DECK[0] = this.deckManager.getDeck(computer);
             }
         } // else
-
-        Constant.Runtime.OLDGUI[0] = OldGuiNewGame.oldGuiCheckBox.isSelected();
 
         if (Constant.Runtime.OLDGUI[0]) {
             AllZone.setDisplay(new GuiDisplay());
