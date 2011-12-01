@@ -100,6 +100,33 @@ Fixes/Features:
 - Made Mentor of the Meek's trigger optional. (It now works with Always Accept/Decline)
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Some changes to the random deck generators (not the original ones): The decks can now contain cards with any converted mana cost (formerly restricted to 1-8) and the balancing has changed a bit.
+- The Epic keyword will now be displayed in the card text.
+- Added the ability description to Glint Hawk.
+- Optional triggers that have the triggering object "Attacker" will now specify the attacker, when you have to chose.
+- Fixed the makeToken function not granting hidden keywords to tokens.
+- Added a copy each of Angry Mob and Cho-Arrim Legate to the Data 2 deck.
+- Made the deck Mr Slate 3 more powerful.
+- Removed Moxen from and diversified the Mr Slate 2 deck.
+- Fixed second mode of Evolution Charm.
+- Fixed Chandra the Firebrand's 2nd ability
+- Checkstyle.
+- StringBuilder.
+- StringBuilder.
+- minor text updates for a couple cards
+- Fixed Quest mode new/old UI checkbox bug.
+- Fixed crash between multiple games, switching between old/new UI.
+- minor text fixes for a few cards.
+- Added spell description for hellbent part of Twinstrike
+- more closely match card text for Flashback and Equip ability costs.
+- remove a little debug code... *sigh*
+- Reorganized ISD Werewolves (and one vampire) to be more clear and not overwrite SVars left and right.
+- Reverted Checkstyle settings
+- Reverted main.properties.
+- The "RememberSacrificed" parameter in AF Sacrifice now works.
+- Added an optional "Destroy" parameter to AF Sacrifice and fixed Imperial Edict with it.
+- AI improvements for AF Sacrifice with the Destroy parameter.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -127,6 +154,12 @@ Kyren Legate
 Saprazzan Legate
 Quillmane Baku
 Nostalgic Dreams
+Cho-Arrim Legate
+Twinstrike
+Steeling Stance
+Magewright's Stone
+Twisted Justice
+Doomgape
 
 
 end
