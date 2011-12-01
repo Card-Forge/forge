@@ -1,0 +1,11 @@
+Name:Dread Charge
+ManaCost:3 B
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ 3 B | ValidCards$ Creature.Black+YouCtrl | KW$ HIDDEN CantBeBlockedBy Creature.nonBlack | SpellDescription$ Until end of turn, black creatures you control can be blocked only by black creatures.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_charge.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/10.jpg
+Oracle:Until end of turn, black creatures you control can be blocked only by black creatures.
+End

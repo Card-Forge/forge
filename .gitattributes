@@ -2204,6 +2204,7 @@ res/cardsfolder/d/dramatic_entrance.txt svneol=native#text/plain
 res/cardsfolder/d/drana_kalastria_bloodchief.txt svneol=native#text/plain
 res/cardsfolder/d/drastic_revelation.txt svneol=native#text/plain
 res/cardsfolder/d/dread.txt svneol=native#text/plain
+res/cardsfolder/d/dread_charge.txt -text
 res/cardsfolder/d/dread_drone.txt svneol=native#text/plain
 res/cardsfolder/d/dread_of_night.txt svneol=native#text/plain
 res/cardsfolder/d/dread_reaper.txt svneol=native#text/plain
