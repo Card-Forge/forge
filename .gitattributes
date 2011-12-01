@@ -1487,6 +1487,7 @@ res/cardsfolder/c/coastal_drake.txt svneol=native#text/plain
 res/cardsfolder/c/coastal_hornclaw.txt svneol=native#text/plain
 res/cardsfolder/c/coastal_piracy.txt svneol=native#text/plain
 res/cardsfolder/c/coastal_tower.txt svneol=native#text/plain
+res/cardsfolder/c/coastal_wizard.txt -text
 res/cardsfolder/c/coat_of_arms.txt svneol=native#text/plain
 res/cardsfolder/c/cobalt_golem.txt svneol=native#text/plain
 res/cardsfolder/c/cobbled_wings.txt -text
