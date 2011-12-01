@@ -7426,6 +7426,7 @@ res/cardsfolder/s/shrink.txt svneol=native#text/plain
 res/cardsfolder/s/shrivel.txt svneol=native#text/plain
 res/cardsfolder/s/shriveling_rot.txt svneol=native#text/plain
 res/cardsfolder/s/shu_cavalry.txt svneol=native#text/plain
+res/cardsfolder/s/shu_defender.txt -text
 res/cardsfolder/s/shu_elite_companions.txt svneol=native#text/plain
 res/cardsfolder/s/shu_elite_infantry.txt svneol=native#text/plain
 res/cardsfolder/s/shu_farmer.txt svneol=native#text/plain
@@ -8758,6 +8759,7 @@ res/cardsfolder/t/tower_of_fortunes.txt svneol=native#text/plain
 res/cardsfolder/t/tower_of_murmurs.txt svneol=native#text/plain
 res/cardsfolder/t/tower_of_the_magistrate.txt svneol=native#text/plain
 res/cardsfolder/t/towering_baloth.txt svneol=native#text/plain
+res/cardsfolder/t/town_sentry.txt -text
 res/cardsfolder/t/toxic_iguanar.txt svneol=native#text/plain
 res/cardsfolder/t/toxic_nim.txt svneol=native#text/plain
 res/cardsfolder/t/toxin_sliver.txt svneol=native#text/plain
