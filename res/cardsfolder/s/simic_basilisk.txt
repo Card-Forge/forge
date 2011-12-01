@@ -1,0 +1,16 @@
+Name:Simic Basilisk
+ManaCost:3 G G
+Types:Creature Basilisk Mutant
+Text:no text
+PT:0/0
+K:Graft 3
+A:AB$ Animate | Cost$ 1 G | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter on it | Triggers$ DestroyTrigger | sVars$ DelTrig,TrigDestroy | SpellDescription$ Until end of turn, target creature with a +1/+1 counter on it gains "Whenever this creature deals combat damage to a creature, destroy that creature at end of combat."
+SVar:DestroyTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
+SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDestroy | TriggerDescription$ Destroy damaged creature at end of combat.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_basilisk.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/91.jpg
+Oracle:Graft 3 (This creature enters the battlefield with three +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{1}{G}: Until end of turn, target creature with a +1/+1 counter on it gains "Whenever this creature deals combat damage to a creature, destroy that creature at end of combat."
+End

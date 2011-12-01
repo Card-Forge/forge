@@ -8,4 +8,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | ValidTgts$ Opponent | SacValid$ Creature |
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/wei_assassins.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/86.jpg
+Oracle:When Wei Assassins enters the battlefield, target opponent chooses a creature he or she controls. Destroy it.
 End
