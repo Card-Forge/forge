@@ -5,6 +5,7 @@ Text:no text
 PT:1/3
 A:AB$ Pump | Cost$ 2 Return<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_envoy.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/49.jpg
