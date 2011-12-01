@@ -10901,10 +10901,12 @@ src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/GuiTopLevel.java -text
 src/main/java/forge/view/editor/EditorTopLevel.java -text
+src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
 src/main/java/forge/view/home/HomeTopLevel.java -text
 src/main/java/forge/view/home/SplashFrame.java -text
 src/main/java/forge/view/home/SplashProgressComponent.java -text
 src/main/java/forge/view/home/SplashProgressModel.java -text
+src/main/java/forge/view/home/package-info.java svneol=native#text/plain
 src/main/java/forge/view/match/ViewBattlefield.java -text
 src/main/java/forge/view/match/ViewDetail.java -text
 src/main/java/forge/view/match/ViewDock.java -text
@@ -10914,6 +10916,7 @@ src/main/java/forge/view/match/ViewInput.java -text
 src/main/java/forge/view/match/ViewPicture.java -text
 src/main/java/forge/view/match/ViewTabber.java -text
 src/main/java/forge/view/match/ViewTopLevel.java -text
+src/main/java/forge/view/match/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
 src/main/java/forge/view/swing/GuiHomeScreen.java svneol=native#text/plain
@@ -10928,6 +10931,7 @@ src/main/java/forge/view/toolbox/FRoundedPanel.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
 src/main/java/forge/view/toolbox/WinLoseFrame.java -text
+src/main/java/forge/view/toolbox/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ImmutableIterableFrom.java svneol=native#text/plain
