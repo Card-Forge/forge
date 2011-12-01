@@ -1963,6 +1963,7 @@ res/cardsfolder/d/defensive_maneuvers.txt -text svneol=unset#text/plain
 res/cardsfolder/d/defensive_stance.txt svneol=native#text/plain
 res/cardsfolder/d/defiant_elf.txt svneol=native#text/plain
 res/cardsfolder/d/defiant_falcon.txt svneol=native#text/plain
+res/cardsfolder/d/defiant_stand.txt -text
 res/cardsfolder/d/defiant_vanguard.txt -text
 res/cardsfolder/d/defiler_of_souls.txt svneol=native#text/plain
 res/cardsfolder/d/defiling_tears.txt svneol=native#text/plain
