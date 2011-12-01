@@ -39,6 +39,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.gui.GuiUtils;
 
 /**
  * <p>
@@ -478,26 +479,15 @@ public class AbilityFactorySacrifice {
         } else {
             CardList sacList = null;
             for (final Player p : tgts) {
-
-                // TODO - Can only add cards computer sacrificed to remembered
-                // list because
-                // human sacrifice choices are buried in a Input. Why is this
-                // hardcoded
-                // into the GUI!?! A better approach would be to have two
-                // different methods
-                // that return the sacrifice choices for the AI and the human
-                // respectively,
-                // then actually sacrifice the cards in this resolve method.
-                // (ArsenalNut 09/20/2011)
                 if (p.isComputer()) {
                     sacList = AbilityFactorySacrifice.sacrificeAI(p, amount, valid, sa);
-                    if (remSacrificed) {
-                        for (int i = 0; i < sacList.size(); i++) {
-                            card.addRemembered(sacList.get(i));
-                        }
-                    }
                 } else {
-                    AbilityFactorySacrifice.sacrificeHuman(p, amount, valid, sa, msg);
+                    sacList = AbilityFactorySacrifice.sacrificeHuman(p, amount, valid, sa, msg);
+                }
+                if (remSacrificed) {
+                    for (int i = 0; i < sacList.size(); i++) {
+                        card.addRemembered(sacList.get(i));
+                    }
                 }
             }
 
@@ -544,14 +534,26 @@ public class AbilityFactorySacrifice {
      * @param message
      *            a {@link java.lang.String} object.
      */
-    private static void sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
+    private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final String message) {
+        CardList saccedList = new CardList();
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
-        // TODO: Wait for Input to finish before moving on with the rest of
-        // Resolution
-        AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanentsFromList(amount, list, message), true);
+        for (int i = 0; i < amount; i++) {
+            if (list.isEmpty()) {
+                break;
+            }
+            Object o;
+            o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
+            if (o != null) {
+                final Card c = (Card) o;
+                AllZone.getGameAction().sacrifice(c);
+                saccedList.add(c);
+                list.remove(c);
+            }
+        }
+        return saccedList;
     }
 
     // **************************************************************
