@@ -1537,7 +1537,7 @@ public class ComputerUtil {
 
         for (int i = 0; i < max; i++) {
             Card c = null;
-            
+
             if (destroy) {
                 CardList indestructibles = list.getKeyword("Indestructible");
                 if (!indestructibles.isEmpty()) {
@@ -1551,9 +1551,9 @@ public class ComputerUtil {
                 } else {
                     c = CardFactoryUtil.getWorstPermanentAI(list, true, true, true, true);
                 }
-    
+
                 final ArrayList<Card> auras = c.getEnchantedBy();
-    
+
                 if (auras.size() > 0) {
                     // TODO: choose "worst" controlled enchanting Aura
                     for (int j = 0; j < auras.size(); j++) {
@@ -1565,11 +1565,11 @@ public class ComputerUtil {
                     }
                 }
                 if (destroy) {
-                    if(!AllZone.getGameAction().destroy(c)) {
+                    if (!AllZone.getGameAction().destroy(c)) {
                         continue;
                     }
                 } else {
-                    if(!AllZone.getGameAction().sacrifice(c)) {
+                    if (!AllZone.getGameAction().sacrifice(c)) {
                         continue;
                     }
                 }

@@ -1007,7 +1007,7 @@ public class TriggerHandler {
                                     regtrig.getHostCard().getName()));
                             buildQuestion.append(")\r\n");
                             if (sa[0].getTriggeringObjects().containsKey("Attacker")) {
-                                buildQuestion.append("[Attacker: " +sa[0].getTriggeringObjects().get("Attacker") + "]");
+                                buildQuestion.append("[Attacker: " + sa[0].getTriggeringObjects().get("Attacker") + "]");
                             }
                             if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
                                 return;

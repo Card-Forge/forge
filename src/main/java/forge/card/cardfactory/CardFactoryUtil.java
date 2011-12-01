@@ -3763,10 +3763,11 @@ public class CardFactoryUtil {
         // does?
         for (int i = 0; i < multiplier; i++) {
             Card temp = CardFactoryUtil.copyStats(c);
-            
+
             for (final String kw : intrinsicKeywords) {
                 if (kw.startsWith("HIDDEN")) {
-                    temp.addExtrinsicKeyword(kw);//extrinsic keywords won't survive the copyStats treatment 
+                    temp.addExtrinsicKeyword(kw);
+                    //extrinsic keywords won't survive the copyStats treatment
                 } else {
                     temp.addIntrinsicKeyword(kw);
                 }

@@ -213,7 +213,7 @@ public class Generate5ColorDeck {
 
         // select cards to build card pools using a mana curve
         for (int i = 3; i > 0; i--) {
-            if (i==1) {
+            if (i == 1) {
                 maxCMC[0] = 20; //the last category is open ended
             }
             final CardList cr1CMC = cr1.filter(cmcF);

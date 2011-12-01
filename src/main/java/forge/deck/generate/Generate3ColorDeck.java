@@ -207,7 +207,7 @@ public class Generate3ColorDeck {
 
         // select cards to build card pools using a mana curve
         for (int i = 3; i > 0; i--) {
-            if (i==1) {
+            if (i == 1) {
                 maxCMC[0] = 20; //the last category is open ended
                 i = 0; // this reduces the number of cards in the last category to 6
             }
@@ -219,7 +219,7 @@ public class Generate3ColorDeck {
             final CardList sp2CMC = sp2.filter(cmcF);
             final CardList sp3CMC = sp3.filter(cmcF);
 
-            for (int j = 0; j < i+1; j++) {
+            for (int j = 0; j < i + 1; j++) {
                 Card c = cr1CMC.get(this.r.nextInt(cr1CMC.size()));
                 cr123.add(c);
                 this.cardCounts.put(c.getName(), 0);

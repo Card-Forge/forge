@@ -554,7 +554,7 @@ public class AbilityFactorySacrifice {
             o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
             if (o != null) {
                 final Card c = (Card) o;
-                
+
                 if (destroy) {
                     if (!AllZone.getGameAction().destroy(c)) {
                         continue;
