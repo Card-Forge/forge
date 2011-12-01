@@ -2043,17 +2043,6 @@ public class CombatUtil {
 
     /**
      * <p>
-     * isDoranInPlay.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public static boolean isDoranInPlay() {
-        return AllZoneUtil.isCardInPlay("Doran, the Siege Tower");
-    }
-
-    /**
-     * <p>
      * checkPropagandaEffects.
      * </p>
      * 

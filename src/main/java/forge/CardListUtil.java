@@ -88,12 +88,7 @@ public class CardListUtil {
         final Comparator<Card> com = new Comparator<Card>() {
             @Override
             public int compare(final Card a, final Card b) {
-
-                if (CombatUtil.isDoranInPlay()) {
-                    return b.getNetDefense() - a.getNetDefense();
-                } else {
-                    return b.getNetAttack() - a.getNetAttack();
-                }
+                return b.getNetCombatDamage() - a.getNetCombatDamage();
             }
         };
         list.sort(com);
@@ -152,11 +147,7 @@ public class CardListUtil {
         final Comparator<Card> com = new Comparator<Card>() {
             @Override
             public int compare(final Card a, final Card b) {
-                if (CombatUtil.isDoranInPlay()) {
-                    return a.getNetDefense() - b.getNetDefense();
-                } else {
-                    return a.getNetAttack() - b.getNetAttack();
-                }
+                    return a.getNetCombatDamage() - b.getNetCombatDamage();
             }
         };
         list.sort(com);
