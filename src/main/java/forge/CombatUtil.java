@@ -2326,33 +2326,6 @@ public class CombatUtil {
 
         } // Witch-Maw Nephilim
 
-        /*
-         * else if (c.getName().equals("Preeminent Captain") &&
-         * !c.getCreatureAttackedThisCombat()) {
-         * System.out.println("Preeminent Captain Attacks");
-         * 
-         * CardList soldiers = c.getController().getCardsIn(Zone.Hand); soldiers
-         * = soldiers.getType("Soldier");
-         * 
-         * if (soldiers.size() > 0) { if (c.getController().isHuman()) { Object
-         * o =
-         * GuiUtils.getChoiceOptional("Pick a soldier to put onto the battlefield"
-         * , soldiers.toArray()); if (o != null) { Card card = (Card) o;
-         * AllZone.getGameAction().moveToPlay(card);
-         * 
-         * card.tap(); AllZone.getCombat().addAttacker(card);
-         * 
-         * card.setCreatureAttackedThisCombat(true); } } else if
-         * (c.getController().isComputer()) { Card card =
-         * CardFactoryUtil.getBestCreatureAI(soldiers); if (card != null) {
-         * AllZone.getGameAction().moveToPlay(card);
-         * 
-         * card.tap(); AllZone.getCombat().addAttacker(card);
-         * card.setCreatureAttackedThisCombat(true); } }
-         * 
-         * } // if (creatures.size() > 0) }
-         */// Preeminent Captain
-
         else if (c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
             final Player player = c.getController();
 
@@ -2508,7 +2481,7 @@ public class CombatUtil {
 
         } // flanking
 
-        if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
+        /*if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
             final Player opp = b.getController();
             final CardList list = opp.getCardsIn(Zone.Hand);
             final int handSize = list.size();
@@ -2516,7 +2489,7 @@ public class CombatUtil {
             // opponent discards their hand,
             opp.discardRandom(handSize, a.getSpellAbility()[0]);
             opp.drawCards(handSize);
-        }
+        }*/
 
         a.setCreatureGotBlockedThisCombat(true);
 
