@@ -9411,6 +9411,7 @@ res/cardsfolder/w/warren_scourge_elf.txt svneol=native#text/plain
 res/cardsfolder/w/warrior_angel.txt svneol=native#text/plain
 res/cardsfolder/w/warriors_charge.txt svneol=native#text/plain
 res/cardsfolder/w/warriors_honor.txt svneol=native#text/plain
+res/cardsfolder/w/warriors_stand.txt -text
 res/cardsfolder/w/warstorm_surge.txt svneol=native#text/plain
 res/cardsfolder/w/warthog.txt svneol=native#text/plain
 res/cardsfolder/w/wasp_lancer.txt svneol=native#text/plain
