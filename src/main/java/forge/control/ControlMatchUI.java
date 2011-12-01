@@ -74,6 +74,22 @@ public class ControlMatchUI {
      * 
      */
     public void initMatch() {
+        // Remove all observers, placed by old UI.
+        AllZone.getHumanPlayer().deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Hand).deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Graveyard).deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Library).deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).deleteObservers();
+
+        AllZone.getComputerPlayer().deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Hand).deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Graveyard).deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Library).deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Battlefield).deleteObservers();
+
+        AllZone.getStack().deleteObservers();
+        AllZone.getInputControl().deleteObservers();
+
         // All child components have been assembled; observers and listeners can
         // be added safely.
         this.view.getAreaSidebar().getTabber().getController().addObservers();

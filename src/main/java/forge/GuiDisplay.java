@@ -692,6 +692,22 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
      * </p>
      */
     private void addObservers() {
+        // Remove all observers, placed by new UI.
+        AllZone.getHumanPlayer().deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Hand).deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Graveyard).deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Library).deleteObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).deleteObservers();
+
+        AllZone.getComputerPlayer().deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Hand).deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Graveyard).deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Library).deleteObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Battlefield).deleteObservers();
+
+        AllZone.getStack().deleteObservers();
+        AllZone.getInputControl().deleteObservers();
+
         // long method
         final Observer o = new Observer() {
             @Override
