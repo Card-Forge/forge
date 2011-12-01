@@ -8818,6 +8818,7 @@ res/cardsfolder/t/treefolk_healer.txt svneol=native#text/plain
 res/cardsfolder/t/treefolk_seedlings.txt svneol=native#text/plain
 res/cardsfolder/t/treespring_lorian.txt svneol=native#text/plain
 res/cardsfolder/t/treetop_bracers.txt svneol=native#text/plain
+res/cardsfolder/t/treetop_defense.txt -text
 res/cardsfolder/t/treetop_rangers.txt svneol=native#text/plain
 res/cardsfolder/t/treetop_scout.txt svneol=native#text/plain
 res/cardsfolder/t/treetop_sentinel.txt svneol=native#text/plain
