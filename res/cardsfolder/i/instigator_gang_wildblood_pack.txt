@@ -5,11 +5,13 @@ Text:no text
 PT:2/3
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instigator_gang.jpg
 AlternateMode:DoubleFaced
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/149a.jpg
 Oracle:Attacking creatures you control get +1/+0.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.
+
+#Shared
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 
 ALTERNATE
 
@@ -22,7 +24,6 @@ PT:5/5
 K:Trample
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 3 | Description$ Attacking creatures you control get +3/+0.
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/wildblood_pack.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/149b.jpg
 Oracle:Attacking creatures you control get +3/+0.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Wildblood Pack.
