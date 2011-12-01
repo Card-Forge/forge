@@ -175,6 +175,9 @@ public enum Counters {
 
     /** The MANA. */
     MANA(),
+    
+    /** The MATRIX. */
+    MATRIX(),
 
     /** The MINE. */
     MINE(),

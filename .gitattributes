@@ -4733,6 +4733,7 @@ res/cardsfolder/l/life_and_limb.txt svneol=native#text/plain
 res/cardsfolder/l/life_burst.txt svneol=native#text/plain
 res/cardsfolder/l/life_chisel.txt svneol=native#text/plain
 res/cardsfolder/l/life_from_the_loam.txt svneol=native#text/plain
+res/cardsfolder/l/life_matrix.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lifeblood.txt svneol=native#text/plain
 res/cardsfolder/l/lifeforce.txt svneol=native#text/plain
 res/cardsfolder/l/lifegift.txt svneol=native#text/plain
