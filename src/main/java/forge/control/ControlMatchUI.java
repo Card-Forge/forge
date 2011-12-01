@@ -74,31 +74,15 @@ public class ControlMatchUI {
      * 
      */
     public void initMatch() {
-        // Remove all observers, placed by old UI.
-        AllZone.getHumanPlayer().deleteObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Hand).deleteObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Graveyard).deleteObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Library).deleteObservers();
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).deleteObservers();
-
-        AllZone.getComputerPlayer().deleteObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Hand).deleteObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Graveyard).deleteObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Library).deleteObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Battlefield).deleteObservers();
-
-        AllZone.getStack().deleteObservers();
-        AllZone.getInputControl().deleteObservers();
-
         // All child components have been assembled; observers and listeners can
         // be added safely.
-        this.view.getAreaSidebar().getTabber().getController().addObservers();
-        this.view.getAreaSidebar().getTabber().getController().addListeners();
+        this.view.getTabberController().addObservers();
+        this.view.getTabberController().addListeners();
 
-        this.view.getAreaUser().getPnlInput().getController().addListeners();
+        this.view.getInputController().addListeners();
 
-        this.view.getAreaUser().getPnlHand().getController().addObservers();
-        this.view.getAreaUser().getPnlHand().getController().addListeners();
+        this.view.getHandController().addObservers();
+        this.view.getHandController().addListeners();
 
         // Update all observers with values for start of match.
         final List<ControlField> fieldControllers = this.view.getFieldControllers();
@@ -113,7 +97,7 @@ public class ControlMatchUI {
         AllZone.getStack().updateObservers();
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
         AllZone.getInputControl().updateObservers();
-        this.view.getAreaSidebar().getTabber().getController().updateObservers();
+        this.view.getTabberController().updateObservers();
         this.mapKeyboardShortcuts();
     }
 
@@ -187,20 +171,6 @@ public class ControlMatchUI {
             }
         };
 
-        final Action actShowPicture = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getCardviewerController().showPnlCardPic();
-            }
-        };
-
-        final Action actShowDetail = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getCardviewerController().showPnlCardDetail();
-            }
-        };
-
         // Show stack
         // (Get keycode string, convert to char, convert to keystroke, put on
         // input map.)
@@ -244,20 +214,6 @@ public class ControlMatchUI {
 
         im.put(key, str);
         ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actConcede);
-
-        // Show card picture
-        str = fp.getShowPictureShortcut();
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actShowPicture);
-
-        // Show card detail
-        str = fp.getShowDetailShortcut();
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actShowDetail);
     }
 
     /**

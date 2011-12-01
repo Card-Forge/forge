@@ -50,9 +50,6 @@ public class ViewInput extends FRoundedPanel {
         this.setToolTipText("Input Area");
         this.setBackground(this.skin.getClrTheme());
         this.setForeground(this.skin.getClrText());
-        this.setCorners(new boolean[] { false, false, false, true });
-        this.setBorders(new boolean[] { true, false, false, true });
-
         this.setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
 
         // Cancel button

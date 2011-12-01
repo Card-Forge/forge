@@ -903,7 +903,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
                 }
             }
         });
-        AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
+        //AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
         // END, self hand
 
         // self play

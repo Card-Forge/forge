@@ -161,7 +161,7 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
-                final Card c = t.getCardviewerController().getCurrentCard();
+                final Card c = t.getDetailController().getCurrentCard();
                 final Input input = t.getInputController().getInputControl().getInput();
 
                 if (c != null) {
@@ -214,7 +214,8 @@ public class ControlField {
                 final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
                 if (c != null) {
-                    t.getCardviewerController().showCard(c);
+                    t.getDetailController().showCard(c);
+                    t.getPictureController().showCard(c);
                 }
             }
         });

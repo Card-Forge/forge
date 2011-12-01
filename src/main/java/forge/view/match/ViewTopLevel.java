@@ -17,27 +17,38 @@
  */
 package forge.view.match;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import net.miginfocom.swing.MigLayout;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardContainer;
 import forge.CardList;
 import forge.Constant;
 import forge.Display;
+import forge.GuiMultipleBlockers;
 import forge.MyButton;
 import forge.Player;
 import forge.Singletons;
 import forge.control.ControlMatchUI;
-import forge.control.match.ControlCardviewer;
+import forge.control.match.ControlDetail;
 import forge.control.match.ControlDock;
 import forge.control.match.ControlField;
 import forge.control.match.ControlHand;
 import forge.control.match.ControlInput;
+import forge.control.match.ControlPicture;
 import forge.control.match.ControlTabber;
 import forge.properties.ForgePreferences;
 import forge.view.toolbox.FPanel;
@@ -52,15 +63,36 @@ import forge.view.toolbox.FPanel;
  */
 
 @SuppressWarnings("serial")
-public class ViewTopLevel extends FPanel implements Display {
-    private final ViewAreaSidebar areaSidebar;
-    private final ViewAreaBattlefield areaBattle;
-    private final ViewAreaUser areaUser;
+public class ViewTopLevel extends FPanel implements CardContainer, Display {
+    private ViewBattlefield battlefield;
+    private ViewDetail detail;
+    private ViewDock dock;
+    private ViewHand hand;
+    private ViewInput input;
+    private ViewPicture picture;
+    private ViewTabber tabber;
 
-    private int w, h;
-    private static final double SIDEBAR_W_PCT = 0.16;
-    private static final double USER_H_PCT = 0.27;
-    private final ControlMatchUI control;
+    private ControlMatchUI control;
+    private int w, h, b;
+    private double delta;
+
+    // Default layout parameters (all in percent!)
+    private static final int BOUNDARY_THICKNESS_PX = 6;
+    private double rightbarWpct = 0.16;
+    private double pictureHpct = 0.5;
+    private double battleWpct = 0.68;
+    private double battleHpct = 0.73;
+    private double dockHpct = 0.2;
+    private double inputHpct = 0.2;
+
+    // Boundary rectangles for all components, and boundary panel objects.
+    private Rectangle pictureBounds, detailBounds, battleBounds,
+        handBounds, tabberBounds, dockBounds, inputBounds;
+
+    private BoundaryPanel pnlB1, pnlB2, pnlB3, pnlB4, pnlB5, pnlB6;
+
+    private RegionPanel pnlPicture, pnlDetail, pnlBattlefield,
+        pnlHand, pnlTabber, pnlDock, pnlInput;
 
     /**
      * - Lays out battle, sidebar, user areas in locked % vals and repaints as
@@ -78,24 +110,234 @@ public class ViewTopLevel extends FPanel implements Display {
         this.setBGTexture(AllZone.getSkin().getTexture1());
         this.setBGImg(AllZone.getSkin().getMatchBG());
         this.setLayout(null);
+        b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 
-        // areaBattle: holds fields for all players in match.
-        this.areaBattle = new ViewAreaBattlefield();
-        this.areaBattle.setBounds(0, 0, this.getWidth() / 2, this.getHeight() / 2);
-        this.add(this.areaBattle);
+        pnlPicture = new RegionPanel();
+        pnlDetail = new RegionPanel();
+        pnlBattlefield = new RegionPanel();
+        pnlHand = new RegionPanel();
+        pnlDock = new RegionPanel();
+        pnlInput = new RegionPanel();
+        pnlTabber = new RegionPanel();
 
-        // areaSidebar: holds card detail, info tabber.
-        this.areaSidebar = new ViewAreaSidebar();
-        this.areaSidebar.setBounds(0, 0, this.getWidth() / 2, this.getHeight() / 2);
-        this.add(this.areaSidebar);
+        pnlB1 = new BoundaryPanel(true);
+        pnlB2 = new BoundaryPanel();
+        pnlB3 = new BoundaryPanel(true);
+        pnlB4 = new BoundaryPanel();
+        pnlB5 = new BoundaryPanel(true);
+        pnlB6 = new BoundaryPanel(true);
 
-        // areaUser: holds input, hand, dock.
-        this.areaUser = new ViewAreaUser();
-        this.areaUser.setBounds(0, 0, this.getWidth() / 2, this.getHeight() / 2);
-        this.add(this.areaUser);
+        add(pnlPicture);
+        add(pnlDetail);
+        add(pnlBattlefield);
+        add(pnlHand);
+        add(pnlDock);
+        add(pnlInput);
+        add(pnlTabber);
+
+        add(pnlB1);
+        add(pnlB2);
+        add(pnlB3);
+        add(pnlB4);
+        add(pnlB5);
+        add(pnlB6);
+
+        input = new ViewInput();
+        hand = new ViewHand();
+        dock = new ViewDock();
+        battlefield = new ViewBattlefield();
+        tabber = new ViewTabber();
+        detail = new ViewDetail();
+        picture = new ViewPicture();
+
+        String constraints = "w 100%!, h 100%!";
+        pnlInput.add(input, constraints);
+        pnlHand.add(hand, constraints);
+        pnlBattlefield.add(battlefield, constraints);
+        pnlDock.add(dock, constraints);
+        pnlTabber.add(tabber, constraints);
+        pnlDetail.add(detail, constraints);
+        pnlPicture.add(picture, constraints);
 
         // After all components are in place, instantiate controller.
+        addDragListeners();
         this.control = new ControlMatchUI(this);
+    }
+
+    /**
+     * Panel resizing algorithms.  Basically, find the change in % per
+     * drag event, then add that to an appropriate parameter.  In some
+     * cases, also remove the delta from an appropriate parameter.
+     */
+    private void addDragListeners() {
+        pnlB1.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getY() / (double) h;
+                pictureHpct += delta;
+                repaint();
+            }
+        });
+
+        pnlB2.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getX() / (double) w;
+                rightbarWpct += delta;
+                battleWpct -= delta;
+                repaint();
+            }
+        });
+
+        pnlB3.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getY() / (double) h;
+                battleHpct += delta;
+                repaint();
+            }
+        });
+
+        pnlB4.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getX() / (double) w;
+                battleWpct += delta;
+                repaint();
+            }
+        });
+
+        pnlB5.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getY() / (double) h;
+                dockHpct += delta;
+                inputHpct -= delta;
+                repaint();
+            }
+        });
+
+        pnlB6.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getY() / (double) h;
+                inputHpct += delta;
+                repaint();
+            }
+        });
+    }
+
+    /**
+     * Put together default layout; most values are dependent
+     * on sibling component dimensions. The whole layout can be
+     * defined from six parameters:
+     * 
+     * rightbarWpct = % width of the right sidebar<br>
+     * pictureHpct = % height of card art<br>
+     * 
+     * battleWpct = % width of the battlefield<br>
+     * battleHpct = % height of the battlefield<br>
+     * 
+     * dockHpct = % height of the dock<br>
+     * inputHpct = % height of the input<br>
+     * 
+     */
+    private void calculateBounds() {
+        pictureBounds = new Rectangle(
+                b, b,
+                (int) (w * rightbarWpct), (int) (h * pictureHpct - 2 * b));
+
+        detailBounds = new Rectangle(
+                b, pictureBounds.height + 3 * b,
+                pictureBounds.width, h - pictureBounds.height - 4 * b);
+
+        battleBounds = new Rectangle(
+                pictureBounds.width + 3 * b, b,
+                (int) (w * battleWpct), (int) (h * battleHpct));
+
+        handBounds = new Rectangle(
+                battleBounds.x, battleBounds.height + 3 * b,
+                battleBounds.width, h - battleBounds.height - 4 * b);
+
+        dockBounds = new Rectangle(
+                pictureBounds.width + battleBounds.width + 5 * b, b,
+                w - pictureBounds.width - battleBounds.width - 6 * b, (int) (h * dockHpct - 2 * b));
+
+        inputBounds = new Rectangle(
+                dockBounds.x, dockBounds.height + 2 * b,
+                dockBounds.width, (int) (h * inputHpct - b));
+
+        tabberBounds = new Rectangle(
+                dockBounds.x, inputBounds.y + inputBounds.height + 2 * b,
+                dockBounds.width, h - inputBounds.y - inputBounds.height - 3 * b);
+
+        // Apply bounds to regions.
+        pnlPicture.setBounds(pictureBounds);
+        pnlDetail.setBounds(detailBounds);
+        pnlBattlefield.setBounds(battleBounds);
+        pnlHand.setBounds(handBounds);
+        pnlDock.setBounds(dockBounds);
+        pnlInput.setBounds(inputBounds);
+        pnlTabber.setBounds(tabberBounds);
+
+        // Apply bounds to boundaries.
+        pnlB1.setBounds(new Rectangle(
+                0, pictureBounds.height + b,
+                pictureBounds.width + b, 2 * b));
+
+        pnlB2.setBounds(new Rectangle(
+                pictureBounds.width + b, 0,
+                2 * b, h));
+
+        pnlB3.setBounds(new Rectangle(
+                pictureBounds.width + 3 * b, battleBounds.height + b,
+                battleBounds.width, 2 * b));
+
+        pnlB4.setBounds(new Rectangle(
+                dockBounds.x - 2 * b, 0,
+                2 * b, h));
+
+        pnlB5.setBounds(new Rectangle(
+                dockBounds.x, dockBounds.height,
+                dockBounds.width, 2 * b));
+
+        pnlB6.setBounds(new Rectangle(
+                dockBounds.x, tabberBounds.y - 2 * b,
+                dockBounds.width, 2 * b));
+
+        this.revalidate();
+    }   // End calculateBounds()
+
+    /** Consolidates cursor and opacity settings in one place. */
+    private class BoundaryPanel extends JPanel {
+        public BoundaryPanel() {
+            this(false);
+        }
+
+        public BoundaryPanel(boolean movesNorthSouth) {
+            super();
+            // For testing, comment this opaque setter.
+            setOpaque(false);
+
+            if (movesNorthSouth) {
+                setBackground(Color.red);
+                setCursor(new Cursor(Cursor.N_RESIZE_CURSOR));
+            }
+            else {
+                setBackground(Color.blue);
+                setCursor(new Cursor(Cursor.E_RESIZE_CURSOR));
+            }
+        }
+    }
+
+    /** Consolidates opacity settings in one place. */
+    private class RegionPanel extends JPanel {
+        public RegionPanel() {
+            super();
+            // For testing, comment this opaque setter. A border helps too.
+            setOpaque(false);
+            setLayout(new MigLayout("insets 0, gap 0"));
+        }
     }
 
     /**
@@ -109,48 +351,15 @@ public class ViewTopLevel extends FPanel implements Display {
      */
     @Override
     protected void paintComponent(final Graphics g) {
+        h = getHeight();
+        w = getWidth();
+
+        calculateBounds();
         super.paintComponent(g);
-        this.w = this.getWidth();
-        this.h = this.getHeight();
-
-        // Set % boundaries of layout control layer
-        this.areaBattle.setBounds(0, 0, (int) (this.w * (1 - ViewTopLevel.SIDEBAR_W_PCT)),
-                (int) (this.h * (1 - ViewTopLevel.USER_H_PCT)));
-        this.areaSidebar.setBounds((int) (this.w * (1 - ViewTopLevel.SIDEBAR_W_PCT)), 0,
-                (int) (this.w * ViewTopLevel.SIDEBAR_W_PCT), this.h);
-        this.areaUser.setBounds(0, (int) (this.h * (1 - ViewTopLevel.USER_H_PCT)),
-                (int) (this.w * (1 - ViewTopLevel.SIDEBAR_W_PCT)), (int) (this.h * ViewTopLevel.USER_H_PCT));
-        this.areaBattle.validate();
     }
 
-    // ========== Retrieval functions for easier interation with children
+    // ========== Retrieval functions for easier interaction with children
     // panels.
-    /**
-     * Gets the area sidebar.
-     * 
-     * @return ViewAreaSidebar
-     */
-    public ViewAreaSidebar getAreaSidebar() {
-        return this.areaSidebar;
-    }
-
-    /**
-     * Gets the area battlefield.
-     * 
-     * @return ViewAreaBattlefield
-     */
-    public ViewAreaBattlefield getAreaBattlefield() {
-        return this.areaBattle;
-    }
-
-    /**
-     * Gets the area user.
-     * 
-     * @return ViewAreaUser
-     */
-    public ViewAreaUser getAreaUser() {
-        return this.areaUser;
-    }
 
     /**
      * Retrieves top level controller (actions, observers, etc.) for this UI.
@@ -162,12 +371,21 @@ public class ViewTopLevel extends FPanel implements Display {
     }
 
     /**
-     * Gets the cardviewer controller.
+     * Gets the detail controller.
      * 
-     * @return ControlCardviewer
+     * @return ControlDetail
      */
-    public ControlCardviewer getCardviewerController() {
-        return this.areaSidebar.getCardviewer().getController();
+    public ControlDetail getDetailController() {
+        return ViewTopLevel.this.detail.getController();
+    }
+
+    /**
+     * Gets the picture controller.
+     * 
+     * @return ControlPicture
+     */
+    public ControlPicture getPictureController() {
+        return ViewTopLevel.this.picture.getController();
     }
 
     /**
@@ -176,7 +394,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return ControlTabber
      */
     public ControlTabber getTabberController() {
-        return this.areaSidebar.getTabber().getController();
+        return ViewTopLevel.this.tabber.getController();
     }
 
     /**
@@ -185,7 +403,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return ControlInput
      */
     public ControlInput getInputController() {
-        return this.areaUser.getPnlInput().getController();
+        return ViewTopLevel.this.input.getController();
     }
 
     /**
@@ -194,7 +412,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return ControlHand
      */
     public ControlHand getHandController() {
-        return this.areaUser.getPnlHand().getController();
+        return ViewTopLevel.this.hand.getController();
     }
 
     /**
@@ -203,7 +421,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return ControlDock
      */
     public ControlDock getDockController() {
-        return this.areaUser.getPnlDock().getController();
+        return ViewTopLevel.this.dock.getController();
     }
 
     /**
@@ -212,7 +430,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return List<ControlField>
      */
     public List<ControlField> getFieldControllers() {
-        final List<ViewField> fields = this.areaBattle.getFields();
+        final List<ViewField> fields = this.battlefield.getFields();
         final List<ControlField> controllers = new ArrayList<ControlField>();
 
         for (final ViewField f : fields) {
@@ -228,7 +446,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return List<ViewField>
      */
     public List<ViewField> getFieldViews() {
-        return this.areaBattle.getFields();
+        return ViewTopLevel.this.battlefield.getFields();
     }
 
     // ========== Input panel and human hand retrieval functions
@@ -241,7 +459,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return <b>JTextArea</b> Message area of input panel.
      */
     public JTextArea getPnlMessage() {
-        return this.areaUser.getPnlInput().getTarMessage();
+        return ViewTopLevel.this.input.getTarMessage();
     }
 
     /**
@@ -250,7 +468,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return <b>ViewHand</b> Retrieves player hand panel.
      */
     public ViewHand getPnlHand() {
-        return this.areaUser.getPnlHand();
+        return ViewTopLevel.this.hand;
     }
 
     // ========== The following methods are required by the Display interface.
@@ -279,27 +497,27 @@ public class ViewTopLevel extends FPanel implements Display {
 
             @Override
             public boolean isSelectable() {
-                return ViewTopLevel.this.areaUser.getPnlInput().getBtnCancel().isEnabled();
+                return ViewTopLevel.this.input.getBtnCancel().isEnabled();
             }
 
             @Override
             public void setSelectable(final boolean b) {
-                ViewTopLevel.this.areaUser.getPnlInput().getBtnCancel().setEnabled(b);
+                ViewTopLevel.this.input.getBtnCancel().setEnabled(b);
             }
 
             @Override
             public String getText() {
-                return ViewTopLevel.this.areaUser.getPnlInput().getBtnCancel().getText();
+                return ViewTopLevel.this.input.getBtnCancel().getText();
             }
 
             @Override
             public void setText(final String text) {
-                ViewTopLevel.this.areaUser.getPnlInput().getBtnCancel().setText(text);
+                ViewTopLevel.this.input.getBtnCancel().setText(text);
             }
 
             @Override
             public void reset() {
-                ViewTopLevel.this.areaUser.getPnlInput().getBtnCancel().setText("Cancel");
+                ViewTopLevel.this.input.getBtnCancel().setText("Cancel");
             }
         };
         return cancel;
@@ -321,27 +539,27 @@ public class ViewTopLevel extends FPanel implements Display {
 
             @Override
             public boolean isSelectable() {
-                return ViewTopLevel.this.areaUser.getPnlInput().getBtnOK().isEnabled();
+                return ViewTopLevel.this.input.getBtnOK().isEnabled();
             }
 
             @Override
             public void setSelectable(final boolean b) {
-                ViewTopLevel.this.areaUser.getPnlInput().getBtnOK().setEnabled(b);
+                ViewTopLevel.this.input.getBtnOK().setEnabled(b);
             }
 
             @Override
             public String getText() {
-                return ViewTopLevel.this.areaUser.getPnlInput().getBtnOK().getText();
+                return ViewTopLevel.this.input.getBtnOK().getText();
             }
 
             @Override
             public void setText(final String text) {
-                ViewTopLevel.this.areaUser.getPnlInput().getBtnOK().setText(text);
+                ViewTopLevel.this.input.getBtnOK().setText(text);
             }
 
             @Override
             public void reset() {
-                ViewTopLevel.this.areaUser.getPnlInput().getBtnOK().setText("OK");
+                ViewTopLevel.this.input.getBtnOK().setText("OK");
             }
         };
 
@@ -514,7 +732,7 @@ public class ViewTopLevel extends FPanel implements Display {
      * @return a {@link forge.Card} object.
      */
     public final Card getCard() {
-        return this.getCardviewerController().getCurrentCard();
+        return this.getDetailController().getCurrentCard();
     }
 
     /**
@@ -526,28 +744,18 @@ public class ViewTopLevel extends FPanel implements Display {
      */
     @Override
     public final void setCard(final Card card) {
-        this.getCardviewerController().showCard(card);
+        this.getDetailController().showCard(card);
+        this.getPictureController().showCard(card);
     }
 
-    /**
-     * Required by Display interface. Assigns damage to multiple blockers. Due
-     * to be deprecated: Gui_MultipleBlockers4 says "very hacky"; needs
-     * rewriting.
-     * 
-     * @param attacker
-     *            &emsp; Card object
-     * @param blockers
-     *            &emsp; Card objects in CardList form
-     * @param damage
-     *            &emsp; int
-     */
+    /** {@inheritDoc} */
     @Override
     public final void assignDamage(final Card attacker, final CardList blockers, final int damage) {
         if (damage <= 0) {
             return;
         }
-
-        // new Gui_MultipleBlockers4(attacker, blockers, damage, this);
+        
+        new GuiMultipleBlockers(attacker, blockers, damage, this);
     }
 
     /** @return JFrame */

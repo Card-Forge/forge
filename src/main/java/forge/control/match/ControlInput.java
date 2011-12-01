@@ -117,4 +117,9 @@ public class ControlInput {
     public GuiInput getInputControl() {
         return this.inputControl;
     }
+
+    /** @return ViewInput */
+    public ViewInput getView() {
+        return view;
+    }
 }

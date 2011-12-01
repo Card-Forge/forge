@@ -30,17 +30,17 @@ import forge.view.toolbox.FPanel;
  * 
  */
 @SuppressWarnings("serial")
-public class ViewAreaBattlefield extends FPanel {
+public class ViewBattlefield extends FPanel {
     private final List<ViewField> fields;
 
     /**
      * An FPanel that adds instances of ViewField fields from player name list.
      * 
      */
-    public ViewAreaBattlefield() {
+    public ViewBattlefield() {
         super();
         this.setOpaque(false);
-        this.setLayout(new MigLayout("wrap, insets 1% 0.5% 0 0, gap 1%, nocache"));
+        this.setLayout(new MigLayout("wrap, insets 0, gap 0"));
 
         // When future codebase upgrades allow, as many fields as
         // necessary can be instantiated here. Doublestrike 29-10-11
@@ -48,13 +48,14 @@ public class ViewAreaBattlefield extends FPanel {
         this.fields = new ArrayList<ViewField>();
 
         ViewField temp;
+        String constraints = "h 49.5%!, w 100%!";
 
         temp = new ViewField(AllZone.getComputerPlayer());
-        this.add(temp, "h 48.5%!, w 99.5%!");
+        this.add(temp, constraints);
         this.fields.add(temp);
 
         temp = new ViewField(AllZone.getHumanPlayer());
-        this.add(temp, "h 48.5%!, w 99.5%!");
+        this.add(temp, constraints + ", gaptop 1%");
         this.fields.add(temp);
     }
 

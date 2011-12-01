@@ -891,6 +891,9 @@ public class OldGuiNewGame extends JFrame {
             }
         } // else
 
+        // Update old gui checkbox for first run
+        Constant.Runtime.OLDGUI[0] = OldGuiNewGame.oldGuiCheckBox.isSelected();
+
         if (Constant.Runtime.OLDGUI[0]) {
             AllZone.setDisplay(new GuiDisplay());
         } else {

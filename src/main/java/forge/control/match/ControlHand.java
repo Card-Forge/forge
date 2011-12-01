@@ -31,6 +31,7 @@ import java.util.Observer;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
+import arcane.ui.CardPanel;
 import arcane.ui.HandArea;
 import arcane.ui.util.Animation;
 import forge.AllZone;
@@ -138,6 +139,7 @@ public class ControlHand {
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
                     t.getInputController().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                    t.getInputController().getView().getBtnOK().requestFocusInWindow();
                 }
             }
         });
@@ -161,16 +163,17 @@ public class ControlHand {
      * @param c
      *            &emsp; CardPanel object
      */
-   /* public void addCardPanelListeners(final CardPanel c) {
+    public void addCardPanelListeners(final CardPanel c) {
         // Grab top level controller to facilitate interaction between children
-        final ViewTopLevel display = (ViewTopLevel) (AllZone.getDisplay());
+        final ViewTopLevel t = (ViewTopLevel) (AllZone.getDisplay());
         final Card cardobj = c.getCard();
 
         // Sidebar pic/detail on card hover
         c.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(final MouseEvent e) {
-                display.getCardviewerController().showCard(cardobj);
+                t.getDetailController().showCard(cardobj);
+                t.getPictureController().showCard(cardobj);
             }
         });
 
@@ -183,11 +186,11 @@ public class ControlHand {
                     return;
                 }
 
-                display.getInputController().getInputControl()
+                t.getInputController().getInputControl()
                         .selectCard(cardobj, AllZone.getHumanPlayer().getZone(Zone.Hand));
             }
         });
-    }*/
+    }
 
     /**
      * Adds the card.

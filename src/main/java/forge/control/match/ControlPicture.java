@@ -16,12 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.control.match;
-
-import java.awt.Image;
-
 import forge.Card;
-import forge.ImageCache;
-import forge.view.match.ViewCardviewer;
+import forge.view.match.ViewPicture;
 
 /**
  * 
@@ -29,8 +25,8 @@ import forge.view.match.ViewCardviewer;
  * picture.
  * 
  */
-public class ControlCardviewer {
-    private final ViewCardviewer view;
+public class ControlPicture {
+    private final ViewPicture view;
     private Card currentCard = null;
 
     /**
@@ -40,8 +36,13 @@ public class ControlCardviewer {
      * @param v
      *            &emsp; The CardViewer Swing component.
      */
-    public ControlCardviewer(final ViewCardviewer v) {
+    public ControlPicture(final ViewPicture v) {
         this.view = v;
+    }
+
+    /** @return ViewPicture */
+    public ViewPicture getView() {
+        return view;
     }
 
     /**
@@ -51,16 +52,8 @@ public class ControlCardviewer {
      *            &emsp; Card object
      */
     public void showCard(final Card c) {
-        final Image img = ImageCache.getImage(c);
         this.currentCard = c;
-        this.view.getPnlCardPic().setCard(c);
-        this.view.getPnlCardDetail().setCard(c);
-
-        if (img != null) {
-            this.showPnlCardPic();
-        } else {
-            this.showPnlCardDetail();
-        }
+        this.view.getPnlPicture().setCard(c);
     }
 
     /**
@@ -70,21 +63,5 @@ public class ControlCardviewer {
      */
     public Card getCurrentCard() {
         return this.currentCard;
-    }
-
-    /**
-     * Programatically forces card layout of sidebar tabber to show "CardDetail"
-     * panel.
-     */
-    public void showPnlCardDetail() {
-        this.view.getVtpCardviewer().showTab(1);
-    }
-
-    /**
-     * Programatically forces card layout of sidebar tabber to show card picture
-     * panel.
-     */
-    public void showPnlCardPic() {
-        this.view.getVtpCardviewer().showTab(0);
     }
 }

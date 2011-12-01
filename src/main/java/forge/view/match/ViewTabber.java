@@ -45,6 +45,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.match.ControlTabber;
 import forge.gui.MultiLineLabelUI;
 import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FVerticalTabPanel;
 
@@ -54,7 +55,8 @@ import forge.view.toolbox.FVerticalTabPanel;
  * the constructor.
  * 
  */
-public class ViewTabber {
+@SuppressWarnings("serial")
+public class ViewTabber extends FRoundedPanel {
     private final List<JPanel> panelList;
     private HashMap<Player, JLabel[]> detailLabels;
 
@@ -122,7 +124,10 @@ public class ViewTabber {
         this.populatePnlConsole();
 
         this.vtpTabber = new FVerticalTabPanel(this.panelList);
-        this.vtpTabber.getContentPanel().setBorder(new MatteBorder(1, 0, 0, 1, this.skin.getClrBorders()));
+        this.setBackground(AllZone.getSkin().getClrTheme());
+        this.setLayout(new MigLayout("insets 0, gap 0"));
+
+        this.add(vtpTabber, "w 100%!, h 100%!");
 
         // After all components are in place, instantiate controller.
         this.control = new ControlTabber(this);
@@ -178,13 +183,15 @@ public class ViewTabber {
             tar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    t.getCardviewerController().showCard(spell.getSpellAbility().getSourceCard());
-                    System.out.println();
+                    t.getDetailController().showCard(spell.getSpellAbility().getSourceCard());
+                    t.getPictureController().showCard(spell.getSpellAbility().getSourceCard());
                 }
             });
 
             this.pnlStack.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
         }
+
+        t.getInputController().getView().getBtnOK().requestFocusInWindow();
     }
 
     /**
@@ -609,7 +616,6 @@ public class ViewTabber {
     }
 
     /** A quick JLabel for info in "players" panel, to consolidate styling. */
-    @SuppressWarnings("serial")
     private class InfoLabel extends JLabel {
         public InfoLabel() {
             super();

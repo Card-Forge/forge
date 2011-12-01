@@ -73,8 +73,6 @@ public class ViewDock extends FRoundedPanel {
      */
     public ViewDock() {
         super();
-        this.setCorners(new boolean[] { true, false, false, true });
-        this.setBorders(new boolean[] { true, true, false, true });
         this.setToolTipText("Shortcut Button Dock");
         this.setBackground(AllZone.getSkin().getClrTheme());
         this.setLayout(new MigLayout("insets 0, gap 0, ay center, ax center"));

@@ -43,7 +43,7 @@ import forge.gui.game.CardPanel;
  * very hacky.
  * 
  */
-class GuiMultipleBlockers extends JFrame {
+public class GuiMultipleBlockers extends JFrame {
     /** Constant <code>serialVersionUID=7622818310877381045L</code>. */
     private static final long serialVersionUID = 7622818310877381045L;
 
@@ -74,7 +74,7 @@ class GuiMultipleBlockers extends JFrame {
      * @param display
      *            a {@link forge.CardContainer} object.
      */
-    GuiMultipleBlockers(final Card attacker, final CardList creatureList, final int damage, final CardContainer display) {
+    public GuiMultipleBlockers(final Card attacker, final CardList creatureList, final int damage, final CardContainer display) {
         this();
         this.assignDamage = damage;
         this.updateDamageLabel(); // update user message about assigning damage
