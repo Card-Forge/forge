@@ -214,7 +214,12 @@ public class AbilityFactorySacrifice {
                 msg = valid;
             }
 
-            sb.append("Sacrifices ").append(amount).append(" ").append(msg).append(".");
+            if (params.containsKey("Destroy")) {
+                sb.append("Destroys ");
+            } else {
+                sb.append("Sacrifices ");
+            }
+            sb.append(amount).append(" ").append(msg).append(".");
         }
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -514,7 +519,7 @@ public class AbilityFactorySacrifice {
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
-        final CardList sacList = ComputerUtil.sacrificePermanents(amount, list);
+        final CardList sacList = ComputerUtil.sacrificePermanents(amount, list, destroy);
 
         return sacList;
     }
@@ -551,11 +556,11 @@ public class AbilityFactorySacrifice {
                 final Card c = (Card) o;
                 
                 if (destroy) {
-                    if(!AllZone.getGameAction().destroy(c)) {
+                    if (!AllZone.getGameAction().destroy(c)) {
                         continue;
                     }
                 } else {
-                    if(!AllZone.getGameAction().sacrifice(c)){
+                    if (!AllZone.getGameAction().sacrifice(c)) {
                         continue;
                     }
                 }

@@ -2179,7 +2179,7 @@ public class CombatUtil {
                         public void resolve() {
                             if (crd.getController().isHuman()) {
                                 final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-                                ComputerUtil.sacrificePermanents(a, list);
+                                ComputerUtil.sacrificePermanents(a, list, false);
                             } else {
                                 AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanents(a));
                             }

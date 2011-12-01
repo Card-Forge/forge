@@ -1524,7 +1524,7 @@ public class ComputerUtil {
      *            a {@link forge.CardList} object.
      * @return the card list
      */
-    public static CardList sacrificePermanents(final int amount, final CardList list) {
+    public static CardList sacrificePermanents(final int amount, final CardList list, boolean destroy) {
         final CardList sacList = new CardList();
         // used in Annihilator and AF_Sacrifice
         int max = list.size();
@@ -1536,33 +1536,46 @@ public class ComputerUtil {
         list.reverse();
 
         for (int i = 0; i < max; i++) {
-            // TODO: use getWorstPermanent() would be wayyyy better
-
-            Card c;
-            if (list.getNotType("Creature").size() == 0) {
-                c = CardFactoryUtil.getWorstCreatureAI(list);
-            } else if (list.getNotType("Land").size() == 0) {
-                c = CardFactoryUtil.getWorstLand(AllZone.getComputerPlayer());
+            Card c = null;
+            
+            if (destroy) {
+                CardList indestructibles = list.getKeyword("Indestructible");
+                if (!indestructibles.isEmpty()) {
+                    c = indestructibles.get(0);
+                }
             } else {
-                c = list.get(0);
-            }
-
-            final ArrayList<Card> auras = c.getEnchantedBy();
-
-            if (auras.size() > 0) {
-                // TODO: choose "worst" controlled enchanting Aura
-                for (int j = 0; j < auras.size(); j++) {
-                    final Card aura = auras.get(j);
-                    if (aura.getController().isPlayer(c.getController()) && list.contains(aura)) {
-                        c = aura;
-                        break;
+                if (list.getNotType("Creature").size() == 0) {
+                    c = CardFactoryUtil.getWorstCreatureAI(list);
+                } else if (list.getNotType("Land").size() == 0) {
+                    c = CardFactoryUtil.getWorstLand(AllZone.getComputerPlayer());
+                } else {
+                    c = CardFactoryUtil.getWorstPermanentAI(list, true, true, true, true);
+                }
+    
+                final ArrayList<Card> auras = c.getEnchantedBy();
+    
+                if (auras.size() > 0) {
+                    // TODO: choose "worst" controlled enchanting Aura
+                    for (int j = 0; j < auras.size(); j++) {
+                        final Card aura = auras.get(j);
+                        if (aura.getController().isPlayer(c.getController()) && list.contains(aura)) {
+                            c = aura;
+                            break;
+                        }
+                    }
+                }
+                if (destroy) {
+                    if(!AllZone.getGameAction().destroy(c)) {
+                        continue;
+                    }
+                } else {
+                    if(!AllZone.getGameAction().sacrifice(c)) {
+                        continue;
                     }
                 }
             }
-
             list.remove(c);
             sacList.add(c);
-            AllZone.getGameAction().sacrifice(c);
         }
         return sacList;
     }
