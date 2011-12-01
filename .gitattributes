@@ -1945,6 +1945,7 @@ res/cardsfolder/d/deep_reconnaissance.txt svneol=native#text/plain
 res/cardsfolder/d/deep_sea_kraken.txt svneol=native#text/plain
 res/cardsfolder/d/deep_sea_serpent.txt svneol=native#text/plain
 res/cardsfolder/d/deep_slumber_titan.txt svneol=native#text/plain
+res/cardsfolder/d/deep_wood.txt -text
 res/cardsfolder/d/deepchannel_mentor.txt svneol=native#text/plain
 res/cardsfolder/d/deepfire_elemental.txt -text
 res/cardsfolder/d/deeptread_merrow.txt svneol=native#text/plain
@@ -3776,6 +3777,7 @@ res/cardsfolder/h/heat_stroke.txt -text
 res/cardsfolder/h/heavens_gate.txt svneol=native#text/plain
 res/cardsfolder/h/heavy_arbalest.txt svneol=native#text/plain
 res/cardsfolder/h/heavy_ballista.txt svneol=native#text/plain
+res/cardsfolder/h/heavy_fog.txt -text
 res/cardsfolder/h/hedge_troll.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_crab.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_matrix.txt svneol=native#text/plain
