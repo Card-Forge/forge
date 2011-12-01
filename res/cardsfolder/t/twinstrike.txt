@@ -3,7 +3,7 @@ ManaCost:3 B R
 Types:Sorcery
 Text:no text
 A:SP$ DealDamage | Cost$ 3 B R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBDestroy | SpellDescription$ CARDNAME deals 2 damage to each of two target creatures.
-SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SpellDescription$ Hellbent - Destroy those creatures instead if you have no cards in hand.
 SVar:X:Count$InYourHand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinstrike.jpg
