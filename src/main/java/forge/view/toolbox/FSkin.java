@@ -88,6 +88,7 @@ public class FSkin {
     private ImageIcon icoSettings = null;
     private ImageIcon icoConcede = null;
     private ImageIcon icoEndTurn = null;
+    private ImageIcon icoViewDeckList = null;
 
     /** Base color used in skin. */
     private Color clrTheme = Color.red;
@@ -219,6 +220,7 @@ public class FSkin {
             this.setIconPlus(image.getSubimage(80, 80, 40, 40));
             this.setIconShortcuts(image.getSubimage(160, 0, 80, 80));
             this.setIconEndTurn(image.getSubimage(160, 80, 80, 80));
+            this.setIconViewDeckList(image.getSubimage(60, 140, 20, 20));
             this.setIconSettings(image.getSubimage(80, 0, 80, 80));
             this.setIconConcede(image.getSubimage(80, 80, 80, 80));
         } catch (final IOException e) {
@@ -931,5 +933,24 @@ public class FSkin {
      */
     public ImageIcon getIconEndTurn() {
         return this.icoEndTurn;
+    }
+
+    /**
+     * Sets the icon view deck list.
+     * 
+     * @param bi0
+     *            &emsp; BufferedImage
+     */
+    public void setIconViewDeckList(final BufferedImage bi0) {
+        this.icoViewDeckList = new ImageIcon(bi0);
+    }
+
+    /**
+     * Gets the icon view deck list.
+     * 
+     * @return ImageIcon
+     */
+    public ImageIcon getIconViewDeckList() {
+        return this.icoViewDeckList;
     }
 }

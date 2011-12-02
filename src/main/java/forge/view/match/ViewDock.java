@@ -126,10 +126,20 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
+        //TODO - get an icon for this
+        final JLabel btnViewDeckList = new DockButton(this.skin.getIconViewDeckList(), "View Deck List");
+        btnViewDeckList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                ViewDock.this.control.viewDeckList();
+            }
+        });
+
         this.add(btnConcede, constraints);
         this.add(btnShortcuts, constraints);
         this.add(btnSettings, constraints);
         this.add(btnEndTurn, constraints);
+        this.add(btnViewDeckList, constraints);
 
         // After all components are in place, instantiate controller.
         this.control = new ControlDock(this);

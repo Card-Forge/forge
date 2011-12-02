@@ -17,21 +17,14 @@
  */
 package forge.control.match;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.ImmutableIterableFrom;
 
@@ -47,7 +40,6 @@ import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.deck.Deck;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -55,7 +47,6 @@ import forge.gui.input.InputAttack;
 import forge.gui.input.InputBlock;
 import forge.gui.input.InputPayManaCost;
 import forge.gui.input.InputPayManaCostAbility;
-import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
@@ -437,78 +428,4 @@ public class ControlField {
         }
     } // End ZoneAction
 
-    /**
-     * Receives click and programmatic requests for viewing a player's library
-     * (typically used in dev mode). Allows copy of the cardlist to clipboard.
-     * 
-     */
-    private class DeckListAction extends ForgeAction {
-        public DeckListAction(final String property) {
-            super(property);
-        }
-
-        private static final long serialVersionUID = 9874492387239847L;
-
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            Deck targetDeck;
-
-            if (Constant.Runtime.HUMAN_DECK[0].countMain() > 1) {
-                targetDeck = Constant.Runtime.HUMAN_DECK[0];
-            } else if (Constant.Runtime.COMPUTER_DECK[0].countMain() > 1) {
-                targetDeck = Constant.Runtime.COMPUTER_DECK[0];
-            } else {
-                return;
-            }
-
-            final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
-
-            for (final Entry<CardPrinted, Integer> s : targetDeck.getMain()) {
-                deckMap.put(s.getKey().getName(), s.getValue());
-            }
-
-            final String nl = System.getProperty("line.separator");
-            final StringBuilder deckList = new StringBuilder();
-            String dName = targetDeck.getName();
-
-            if (dName == null) {
-                dName = "";
-            } else {
-                deckList.append(dName + nl);
-            }
-
-            final ArrayList<String> dmKeys = new ArrayList<String>();
-            for (final String s : deckMap.keySet()) {
-                dmKeys.add(s);
-            }
-
-            Collections.sort(dmKeys);
-
-            for (final String s : dmKeys) {
-                deckList.append(deckMap.get(s) + " x " + s + nl);
-            }
-
-            int rcMsg = -1138;
-            String ttl = "Human's Decklist";
-            if (!dName.equals("")) {
-                ttl += " - " + dName;
-            }
-
-            final StringBuilder msg = new StringBuilder();
-            if (deckMap.keySet().size() <= 32) {
-                msg.append(deckList.toString() + nl);
-            } else {
-                msg.append("Decklist too long for dialog." + nl + nl);
-            }
-
-            msg.append("Copy Decklist to Clipboard?");
-
-            rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
-
-            if (rcMsg == JOptionPane.OK_OPTION) {
-                final StringSelection ss = new StringSelection(deckList.toString());
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-            }
-        }
-    } // End DeckListAction
-}
+} //end class ControlField
