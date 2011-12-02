@@ -1802,8 +1802,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public boolean canPlayAI() {
-                    // for compy to play this wisely, it should check hand, and
-                    // if there
+                    // for compy to play this wisely, it should check hand, and if there
                     // are no spells that canPlayAI(), then use recall. maybe.
                     return false;
                 }
@@ -1834,7 +1833,7 @@ public class CardFactorySorceries {
             }; // SpellAbility
 
             final StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - discard X cards and return X cards to your hand.");
+            sb.append(card).append(" - discard X cards and return X cards to your hand.");
             spell.setStackDescription(sb.toString());
 
             card.addSpellAbility(spell);
@@ -1873,62 +1872,6 @@ public class CardFactorySorceries {
             }; // SpellAbility
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        /*
-         * else if (cardName.equals("Stitch Together")) { final SpellAbility
-         * spell = new Spell(card) { private static final long serialVersionUID
-         * = -57996914115026814L;
-         * 
-         * @Override public void resolve() { final CardList threshold =
-         * card.getController().getCardsIn(Zone.Graveyard); final Card c =
-         * this.getTargetCard();
-         * 
-         * if (threshold.size() >= 7) { if
-         * (card.getController().getZone(Zone.Graveyard).contains(c)) { final
-         * PlayerZone play =
-         * card.getController().getZone(Constant.Zone.Battlefield);
-         * AllZone.getGameAction().moveTo(play, c); } } else { if
-         * (card.getController().getZone(Zone.Graveyard).contains(c)) { final
-         * PlayerZone hand = card.getController().getZone(Constant.Zone.Hand);
-         * AllZone.getGameAction().moveTo(hand, c); } } } // resolve()
-         * 
-         * @Override public boolean canPlay() { return
-         * this.getCreatures().length != 0; }
-         * 
-         * @Override public boolean canPlayAI() { final CardList check =
-         * card.getController().getCardsIn(Zone.Graveyard); return
-         * (this.getCreaturesAI().length != 0) || (check.size() >= 7); }
-         * 
-         * public Card[] getCreatures() { final CardList creature =
-         * card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
-         * return creature.toArray(); }
-         * 
-         * public Card[] getCreaturesAI() { CardList creature =
-         * card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
-         * creature = creature.filter(new CardListFilter() {
-         * 
-         * @Override public boolean addCard(final Card c) { return
-         * c.getNetAttack() > 4; } }); return creature.toArray(); }
-         * 
-         * @Override public void chooseTargetAI() { final Card[] c =
-         * this.getCreatures(); Card biggest = c[0]; for (final Card element :
-         * c) { if (biggest.getNetAttack() < element.getNetAttack()) { biggest =
-         * element; } }
-         * 
-         * this.setTargetCard(biggest); } }; // SpellAbility
-         * card.addSpellAbility(spell);
-         * 
-         * final Input target = new Input() { private static final long
-         * serialVersionUID = -3717723884199321767L;
-         * 
-         * @Override public void showMessage() { final CardList creature =
-         * card.getController().getCardsIn(Zone.Graveyard).getType("Creature");
-         * final Object check = GuiUtils.getChoiceOptional("Select creature",
-         * creature); if (check != null) { spell.setTargetCard((Card) check);
-         * this.stopSetNext(new InputPayManaCost(spell)); } else { this.stop();
-         * } } // showMessage() }; // Input spell.setBeforePayMana(target); }
-         */// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Patriarch's Bidding")) {

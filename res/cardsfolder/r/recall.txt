@@ -1,7 +1,8 @@
 Name:Recall
 ManaCost:X X U
 Types:Sorcery
-Text:Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile Recall.
+Text:Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile CARDNAME.
+SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recall.jpg
