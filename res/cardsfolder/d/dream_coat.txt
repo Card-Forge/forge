@@ -9,4 +9,5 @@ SVar:DBAnimate:DB$ Animate | Colors$ ChosenColor | OverwriteColors$ True | Defin
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_coat.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/51.jpg
+Oracle:Enchant creature\n{0}: Enchanted creature becomes the color or colors of your choice. Activate this ability only once each turn.
 End
