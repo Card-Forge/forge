@@ -60,6 +60,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerLibrary;
+import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTopLevel;
@@ -325,14 +326,20 @@ public class ControlField {
         });
         
         // Hand button
-        if (this.player.isComputer() && Constant.Runtime.DEV_MODE[0]) {
+        if (Constant.Runtime.DEV_MODE[0]) {
             this.view.getLblHand().enableHover();
 
             this.view.getLblHand().addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(final MouseEvent e) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Hand), ComputerHand.BASE)
-                            .actionPerformed(null);
+                    
+                    if (!ControlField.this.player.isComputer()) {
+                        new ZoneAction(ControlField.this.player.getZone(Zone.Hand), HumanHand.BASE)
+                        .actionPerformed(null);
+                    } else {
+                        new ZoneAction(ControlField.this.player.getZone(Zone.Hand), ComputerHand.BASE)
+                        .actionPerformed(null);
+                    }
                 }
             });
         }
