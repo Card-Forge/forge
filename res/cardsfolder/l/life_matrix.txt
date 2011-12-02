@@ -7,4 +7,5 @@ SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Abilities$ Regen | Pe
 SVar:Regen:AB$ Regenerate | Cost$ SubCounter<1/MATRIX> | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/life_matrix.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/229.jpg
 End
