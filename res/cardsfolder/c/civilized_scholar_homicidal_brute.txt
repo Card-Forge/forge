@@ -8,6 +8,7 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Remem
 SVar:DBTransform:DB$ SetState | Cost$ 0 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBUntap | Mode$ Transform
 SVar:DBUntap:DB$ Untap | Cost$ 0 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/civilized_scholar.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/47a.jpg

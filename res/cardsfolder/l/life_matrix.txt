@@ -5,6 +5,7 @@ Text:no text
 A:AB$ PutCounter | Cost$ 4 T | PlayerTurn$ True | ActivationPhases$ Upkeep | CounterType$ MATRIX | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAnimate | SpellDescription$ Put a matrix counter on target creature and that creature gains "Remove a matrix counter from this creature: Regenerate this creature."
 SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Abilities$ Regen | Permanent$ True | SpellDescription$ Activate this ability only during your upkeep.
 SVar:Regen:AB$ Regenerate | Cost$ SubCounter<1/MATRIX> | SpellDescription$ Regenerate CARDNAME.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/life_matrix.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/229.jpg

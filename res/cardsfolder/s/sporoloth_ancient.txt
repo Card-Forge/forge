@@ -9,6 +9,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE
 SVar:MakeSaproling:AB$Token | Cost$ SubCounter<2/SPORE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sporoloth_ancient.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/152.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/152.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Sporoloth Ancient.\nCreatures you control have "Remove two spore counters from this creature: Put a 1/1 green Saproling creature token onto the battlefield."
 End
