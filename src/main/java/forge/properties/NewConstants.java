@@ -367,9 +367,18 @@ public final class NewConstants {
              * The Interface HUMAN_HAND.
              */
             public static class HumanHand {
+                
+                /** The BASE. */
+                public static final String BASE = "%s/Display/human/hand";
 
                 /** The TITLE. */
                 public static final String TITLE = "%s/Display/human/hand/title";
+
+                /** The BUTTON. */
+                public static final String BUTTON = "%s/Display/human/hand/button";
+
+                /** The MENU. */
+                public static final String MENU = "%s/Display/human/hand/menu";
             }
 
             /**
