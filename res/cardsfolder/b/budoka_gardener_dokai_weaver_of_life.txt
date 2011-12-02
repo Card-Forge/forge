@@ -4,12 +4,14 @@ Types:Creature Human Monk
 Text:no text
 PT:2/1
 A:AB$ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | OptionalDecider$ You | SubAbility$ DBFlip | SpellDescription$ You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip CARDNAME.
-SVar:DBFlip:DB$SetState | Defined$ Self | CheckSVar$ X | SVarCompare$ GE10 | Mode$ Flip
-SVar:X:Count$Valid Land.YouCtrl
+SVar:DBFlip:DB$SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | Mode$ Flip
 AlternateMode:Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/budoka_gardener.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/202.jpg
 Oracle:{T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
+
+# Shared
+SVar:X:Count$Valid Land.YouCtrl
 
 ALTERNATE
 
@@ -20,7 +22,6 @@ Types:Legendary Creature Human Monk
 Text:no text
 PT:3/3
 A:AB$Token | Cost$ 4 G G T | TokenAmount$ 1 | TokenName$ Elemental | TokenColors$ Green | TokenTypes$ Creature,Elemental | TokenPower$ X | TokenToughness$ X | TokenOwner$ You | SpellDescription$ Put an X/X green Elemental creature token onto the battlefield, where X is the number of lands you control.
-SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/dokai_weaver_of_life.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/315.jpg
 Oracle:{4}{G}{G}, {T}: Put an X/X green Elemental creature token onto the battlefield, where X is the number of lands you control.
