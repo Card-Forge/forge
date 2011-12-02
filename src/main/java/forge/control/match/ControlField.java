@@ -60,6 +60,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerLibrary;
+import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTopLevel;
 
@@ -267,31 +268,36 @@ public class ControlField {
                 }
             }
         });
+        
         // Library card list button
-        this.view.getLblLibrary().enableHover();
-        this.view.getLblLibrary().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                if (!ControlField.this.player.isComputer()) {
-                    new DeckListAction(NewConstants.Lang.GuiDisplay.HUMAN_DECKLIST).actionPerformed(null);
-                } else {
-                    // TODO DeckListAction has been rewritten to accept either
-                    // human or computer
-                    // decklists. However, NewConstants.Lang.GuiDisplay does not
-                    // have a computer
-                    // decklist available. That needs to be added for the below
-                    // line to work
-                    // properly. The current solution will work in the meantime.
-                    // Doublestrike 15-11-11.
+        if (Constant.Runtime.DEV_MODE[0]) {
+            this.view.getLblLibrary().enableHover();
+            this.view.getLblLibrary().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(final MouseEvent e) {
+                    if (!ControlField.this.player.isComputer()) {
+                        new ZoneAction(ControlField.this.player.getZone(Zone.Library), HumanLibrary.BASE)
+                        .actionPerformed(null);
+                    } else {
+                        // TODO DeckListAction has been rewritten to accept either
+                        // human or computer
+                        // decklists. However, NewConstants.Lang.GuiDisplay does not
+                        // have a computer
+                        // decklist available. That needs to be added for the below
+                        // line to work
+                        // properly. The current solution will work in the meantime.
+                        // Doublestrike 15-11-11.
 
-                    // new
-                    // DeckListAction(NewConstants.Lang.GuiDisplay).actionPerformed(null);
+                        // new
+                        // DeckListAction(NewConstants.Lang.GuiDisplay).actionPerformed(null);
 
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Library), ComputerLibrary.BASE)
-                            .actionPerformed(null);
+                        new ZoneAction(ControlField.this.player.getZone(Zone.Library), ComputerLibrary.BASE)
+                        .actionPerformed(null);
+                    }
                 }
-            }
-        });
+            });
+        }
+        
         // Flashback card list button
         this.view.getLblFlashback().enableHover();
         this.view.getLblFlashback().addMouseListener(new MouseAdapter() {
@@ -317,8 +323,9 @@ public class ControlField {
                 }
             }
         });
+        
         // Hand button
-        if (this.player.isComputer()) {
+        if (this.player.isComputer() && Constant.Runtime.DEV_MODE[0]) {
             this.view.getLblHand().enableHover();
 
             this.view.getLblHand().addMouseListener(new MouseAdapter() {
