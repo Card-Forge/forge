@@ -140,7 +140,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
     private static Color greenColor = new Color(0, 164, 0);
 
     private Action humanGraveyardAction;
-    private Action humanRemovedACtion;
+    private Action humanRemovedAction;
     private Action humanFlashbackAction;
     private Action computerGraveyardAction;
     private Action computerRemovedAction;
@@ -200,7 +200,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
     private void setupActions() {
         this.humanGraveyardAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard),
                 NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD);
-        this.humanRemovedACtion = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Exile),
+        this.humanRemovedAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Exile),
                 NewConstants.Lang.GuiDisplay.HUMAN_REMOVED);
         this.humanFlashbackAction = new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard),
                 NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
@@ -237,7 +237,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         this.triggerMenu = new TriggerReactionMenu();
 
         // Game Menu Creation
-        final Object[] obj = { this.humanDecklistAction, this.humanGraveyardAction, this.humanRemovedACtion,
+        final Object[] obj = { this.humanDecklistAction, this.humanGraveyardAction, this.humanRemovedAction,
                 this.humanFlashbackAction, this.computerGraveyardAction, this.computerRemovedAction, new JSeparator(),
                 GuiDisplay.playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
                 this.concedeAction };
@@ -1406,8 +1406,8 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         final JPanel playerFBPanel = new JPanel(new BorderLayout());
         playerFBPanel.add(playerFlashBackButton, BorderLayout.EAST);
 
-        final JButton playerRemovedButton = new JButton(this.humanRemovedACtion);
-        playerRemovedButton.setText((String) this.humanRemovedACtion.getValue("buttonText"));
+        final JButton playerRemovedButton = new JButton(this.humanRemovedAction);
+        playerRemovedButton.setText((String) this.humanRemovedAction.getValue("buttonText"));
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         // removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if (!Singletons.getModel().getPreferences().isLafFonts()) {
