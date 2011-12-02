@@ -127,6 +127,25 @@ Fixes/Features:
 - Added an optional "Destroy" parameter to AF Sacrifice and fixed Imperial Edict with it.
 - AI improvements for AF Sacrifice with the Destroy parameter.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Resizable, reshuffled, and full detail/pic view. A couple other bug fixes as well.
+- Checkstyle.
+- Fixed cost of Warrior's Stand
+- Add package-info files to view package
+- Added RemAIDeck Svar to Awakener Druid.
+- Converted Robber Fly to script.
+- Cleanup of unnecessary checks for Doran.
+- Fixed bug in Budoka Gardener//Dokai Weaver of Life flip condition
+- New GUI: Viewing computer hand and both libraries now respects Dev Mode. Player Library will now show the list like it did before instead of trying to show the decklist. The DeckListAction code is left in place so it can be hooked up somewhere else.
+- fixed some capitalization inconsistencies in GuiDisplay
+- add a first pass at avatar pics from moomarc. Eventually, this will go in the skin, but in case the skins aren't all done when we do a first release with the new GUI, there will be something there. Also adds basic mana pool updating code so it doesn't always show 99.
+- fixed some comments in NewConstants.java
+- flseh out some stuff related to human hand (NewConstants stuff)
+- New GUI: In DEV MODE, you can now click on the human hand as well to see a pop up list of cards (for consistency)
+- add the View Deck List option to the dock. Added this to the skin, but still need an actual icon for it. Not sure how to add the image itself to the skin in sprite.png?
+- fix Recall
+- Ran set info script
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -160,6 +179,20 @@ Steeling Stance
 Magewright's Stone
 Twisted Justice
 Doomgape
+Wei Assassins
+Simic Basilisk
+Deep Wood
+Heavy Fog
+Rally the Troops
+Warrior's Stand
+Shu Defender
+Town Sentry
+Treetop Defense
+Dread Charge
+Coastal Wizard
+Defiant Stand
+Life Matrix
+Civilized Scholar / Homicidal Brute
 
 
 end
