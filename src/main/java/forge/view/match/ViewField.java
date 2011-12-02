@@ -165,9 +165,9 @@ public class ViewField extends FRoundedPanel {
             lbl.setVisible(false);
         }
 
-        for (final String s : p0.getKeywords()) {
+        /*for (final String s : p0.getKeywords()) {
             this.keywordLabels.get(s).setVisible(true);
-        }
+        }*/
     }
     
     /**

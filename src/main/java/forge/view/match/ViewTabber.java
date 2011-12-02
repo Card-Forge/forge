@@ -237,6 +237,9 @@ public class ViewTabber extends FRoundedPanel {
         temp[1].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
         temp[2].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
         temp[3].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
+        if (!p0.getKeywords().isEmpty()) {
+            temp[4].setText(p0.getKeywords().toString());
+        }
     }
 
     /**
@@ -405,10 +408,11 @@ public class ViewTabber extends FRoundedPanel {
             final InfoLabel hand = new InfoLabel();
             final InfoLabel draw = new InfoLabel();
             final InfoLabel prevention = new InfoLabel();
-            this.detailLabels.put(p, new JLabel[] { life, hand, draw, prevention });
+            final InfoLabel keywords = new InfoLabel();
+            this.detailLabels.put(p, new JLabel[] { life, hand, draw, prevention, keywords });
 
             // Set border on bottom label, and larger font on player name
-            prevention.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders()));
+            keywords.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders()));
             name.setText(p.getName());
             name.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 14));
 
@@ -419,6 +423,7 @@ public class ViewTabber extends FRoundedPanel {
             this.pnlPlayers.add(hand, constraints);
             this.pnlPlayers.add(draw, constraints);
             this.pnlPlayers.add(prevention, constraints);
+            this.pnlPlayers.add(keywords, constraints);
         }
     }
 
