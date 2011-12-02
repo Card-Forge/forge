@@ -54,8 +54,7 @@ import forge.properties.ForgePreferences;
 import forge.view.toolbox.FPanel;
 
 /**
- * - Lays out battle, sidebar, user areas in locked % vals and repaints as
- * necessary.<br>
+ * - Lays out containers and borders for resizeable layout.<br>
  * - Instantiates top-level controller for match UI.<br>
  * - Has access methods for all child controllers<br>
  * - Implements Display interface used in singleton pattern
@@ -77,13 +76,14 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     private double delta;
 
     // Default layout parameters (all in percent!)
-    private static final int BOUNDARY_THICKNESS_PX = 6;
-    private double rightbarWpct = 0.16;
-    private double pictureHpct = 0.5;
+    private double dockWpct = 0.15;
+    private double dockHpct = 0.2;
+    private double tabberHpct = 0.55;
     private double battleWpct = 0.68;
     private double battleHpct = 0.73;
-    private double dockHpct = 0.2;
-    private double inputHpct = 0.2;
+    private double pictureHpct = 0.5;
+
+    private static final int BOUNDARY_THICKNESS_PX = 6;
 
     // Boundary rectangles for all components, and boundary panel objects.
     private Rectangle pictureBounds, detailBounds, battleBounds,
@@ -112,6 +112,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         this.setLayout(null);
         b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 
+        // Declare and add containers and resizers for various regions in layout
         pnlPicture = new RegionPanel();
         pnlDetail = new RegionPanel();
         pnlBattlefield = new RegionPanel();
@@ -121,10 +122,10 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         pnlTabber = new RegionPanel();
 
         pnlB1 = new BoundaryPanel(true);
-        pnlB2 = new BoundaryPanel();
-        pnlB3 = new BoundaryPanel(true);
-        pnlB4 = new BoundaryPanel();
-        pnlB5 = new BoundaryPanel(true);
+        pnlB2 = new BoundaryPanel(true);
+        pnlB3 = new BoundaryPanel();
+        pnlB4 = new BoundaryPanel(true);
+        pnlB5 = new BoundaryPanel();
         pnlB6 = new BoundaryPanel(true);
 
         add(pnlPicture);
@@ -142,6 +143,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         add(pnlB5);
         add(pnlB6);
 
+        // Declare and add various view components
         input = new ViewInput();
         hand = new ViewHand();
         dock = new ViewDock();
@@ -168,13 +170,19 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
      * Panel resizing algorithms.  Basically, find the change in % per
      * drag event, then add that to an appropriate parameter.  In some
      * cases, also remove the delta from an appropriate parameter.
+     * 
      */
+
+    // Formulas here SHOULD NOT BE VERY COMPLICATED at all.  If they're
+    // complicated, you're doing it wrong. The complicated part should
+    // be in calculateBounds().
     private void addDragListeners() {
         pnlB1.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getY() / (double) h;
-                pictureHpct += delta;
+                dockHpct += delta;
+                tabberHpct -= delta;
                 repaint();
             }
         });
@@ -182,14 +190,23 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         pnlB2.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
-                delta = e.getX() / (double) w;
-                rightbarWpct += delta;
-                battleWpct -= delta;
+                delta = e.getY() / (double) h;
+                tabberHpct += delta;
                 repaint();
             }
         });
 
         pnlB3.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getX() / (double) w;
+                battleWpct -= delta;
+                dockWpct += delta;
+                repaint();
+            }
+        });
+
+        pnlB4.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getY() / (double) h;
@@ -198,7 +215,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
             }
         });
 
-        pnlB4.addMouseMotionListener(new MouseMotionAdapter() {
+        pnlB5.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getX() / (double) w;
@@ -207,21 +224,11 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
             }
         });
 
-        pnlB5.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(final MouseEvent e) {
-                delta = e.getY() / (double) h;
-                dockHpct += delta;
-                inputHpct -= delta;
-                repaint();
-            }
-        });
-
         pnlB6.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getY() / (double) h;
-                inputHpct += delta;
+                pictureHpct += delta;
                 repaint();
             }
         });
@@ -230,46 +237,37 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     /**
      * Put together default layout; most values are dependent
      * on sibling component dimensions. The whole layout can be
-     * defined from six parameters:
-     * 
-     * rightbarWpct = % width of the right sidebar<br>
-     * pictureHpct = % height of card art<br>
-     * 
-     * battleWpct = % width of the battlefield<br>
-     * battleHpct = % height of the battlefield<br>
-     * 
-     * dockHpct = % height of the dock<br>
-     * inputHpct = % height of the input<br>
+     * defined from six parameters.
      * 
      */
     private void calculateBounds() {
-        pictureBounds = new Rectangle(
+        dockBounds = new Rectangle(
                 b, b,
-                (int) (w * rightbarWpct), (int) (h * pictureHpct - 2 * b));
+                (int) (dockWpct * w), (int) (dockHpct * h));
 
-        detailBounds = new Rectangle(
-                b, pictureBounds.height + 3 * b,
-                pictureBounds.width, h - pictureBounds.height - 4 * b);
+        tabberBounds = new Rectangle(
+                dockBounds.x, dockBounds.height + 3 * b,
+                dockBounds.width, (int) (tabberHpct * h));
+
+        inputBounds = new Rectangle(
+                dockBounds.x, tabberBounds.y + tabberBounds.height + 2 * b,
+                dockBounds.width, h - tabberBounds.y - tabberBounds.height - 3 * b);
 
         battleBounds = new Rectangle(
-                pictureBounds.width + 3 * b, b,
+                dockBounds.width + 3 * b, b,
                 (int) (w * battleWpct), (int) (h * battleHpct));
 
         handBounds = new Rectangle(
                 battleBounds.x, battleBounds.height + 3 * b,
                 battleBounds.width, h - battleBounds.height - 4 * b);
 
-        dockBounds = new Rectangle(
-                pictureBounds.width + battleBounds.width + 5 * b, b,
-                w - pictureBounds.width - battleBounds.width - 6 * b, (int) (h * dockHpct - 2 * b));
+        pictureBounds = new Rectangle(
+                battleBounds.x + battleBounds.width + 2 * b, b,
+                w - battleBounds.x - battleBounds.width - 3 * b, (int) (h * pictureHpct));
 
-        inputBounds = new Rectangle(
-                dockBounds.x, dockBounds.height + 2 * b,
-                dockBounds.width, (int) (h * inputHpct - b));
-
-        tabberBounds = new Rectangle(
-                dockBounds.x, inputBounds.y + inputBounds.height + 2 * b,
-                dockBounds.width, h - inputBounds.y - inputBounds.height - 3 * b);
+        detailBounds = new Rectangle(
+                pictureBounds.x, pictureBounds.height + 3 * b,
+                pictureBounds.width, h - pictureBounds.height - 4 * b);
 
         // Apply bounds to regions.
         pnlPicture.setBounds(pictureBounds);
@@ -282,28 +280,28 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
         // Apply bounds to boundaries.
         pnlB1.setBounds(new Rectangle(
-                0, pictureBounds.height + b,
-                pictureBounds.width + b, 2 * b));
+                b, dockBounds.height + b,
+                dockBounds.width, 2 * b));
 
         pnlB2.setBounds(new Rectangle(
-                pictureBounds.width + b, 0,
-                2 * b, h));
+                b, dockBounds.height + tabberBounds.height + 3 * b,
+                dockBounds.width, 2 * b));
 
         pnlB3.setBounds(new Rectangle(
-                pictureBounds.width + 3 * b, battleBounds.height + b,
-                battleBounds.width, 2 * b));
+                dockBounds.width + b, b,
+                2 * b, h - 2 * b));
 
         pnlB4.setBounds(new Rectangle(
-                dockBounds.x - 2 * b, 0,
-                2 * b, h));
+                dockBounds.width + 3 * b, battleBounds.height + b,
+                battleBounds.width, 2 * b));
 
         pnlB5.setBounds(new Rectangle(
-                dockBounds.x, dockBounds.height,
-                dockBounds.width, 2 * b));
+                battleBounds.width + dockBounds.width + 3 * b, b,
+                2 * b, h - 2 * b));
 
         pnlB6.setBounds(new Rectangle(
-                dockBounds.x, tabberBounds.y - 2 * b,
-                dockBounds.width, 2 * b));
+                pictureBounds.x, pictureBounds.height + b,
+                pictureBounds.width, 2 * b));
 
         this.revalidate();
     }   // End calculateBounds()
@@ -334,7 +332,8 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     private class RegionPanel extends JPanel {
         public RegionPanel() {
             super();
-            // For testing, comment this opaque setter. A border helps too.
+            // For testing, comment this opaque setter, uncomment the border.
+            //setBorder(new LineBorder(Color.green, 1));
             setOpaque(false);
             setLayout(new MigLayout("insets 0, gap 0"));
         }
@@ -754,7 +753,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         if (damage <= 0) {
             return;
         }
-        
+
         new GuiMultipleBlockers(attacker, blockers, damage, this);
     }
 

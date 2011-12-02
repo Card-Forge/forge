@@ -44,11 +44,22 @@ public class FVerticalTabPanel extends FPanel {
     private final CardLayout cards;
     private final JPanel pnlContent;
     private final List<VTab> allVTabs;
+    private int w, h;
 
     private final FSkin skin;
     private int active;
     private final Color activeColor, inactiveColor, hoverColor;
     private final Border inactiveBorder, hoverBorder;
+
+    private boolean tabsOnRightSide;
+
+    /** Constructor, will automatically place tabs on left side.
+     * 
+     *  @param childPanels &emsp; JPanels to be placed in tabber
+     */
+    public FVerticalTabPanel(final List<JPanel> childPanels) {
+        this(childPanels, false);
+    }
 
     /**
      * Assembles vertical tab panel from list of child panels. Tooltip on tab is
@@ -57,10 +68,12 @@ public class FVerticalTabPanel extends FPanel {
      * 
      * @param childPanels
      *            &emsp; JPanels to be placed in tabber
+     * @param b &emsp; boolean, true if tabs are on right side, false for left side.
      */
-    public FVerticalTabPanel(final List<JPanel> childPanels) {
+    public FVerticalTabPanel(final List<JPanel> childPanels, boolean b) {
         // General inits and skin settings
         super();
+        tabsOnRightSide = b;
         this.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         this.setOpaque(false);
         final int size = childPanels.size();
@@ -81,13 +94,25 @@ public class FVerticalTabPanel extends FPanel {
         this.pnlContent = new JPanel();
         this.pnlContent.setOpaque(false);
         this.pnlContent.setLayout(this.cards);
-        this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, this.skin.getClrBorders()));
 
-        this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
+        // If tabs are on the left side, content panel is added
+        // immediately to define grid.
+        if (tabsOnRightSide) {
+            this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
+            this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, this.skin.getClrBorders()));
+        }
 
+        // Add top spacer in any case.
         final JPanel topSpacer = new JPanel();
         topSpacer.setOpaque(false);
         this.add(topSpacer, "w " + pctTabW + "%!, h " + pctInsetH + "%!");
+
+        // If tabs are on right side, content panel
+        // must be added after spacer, which then defines the grid.
+        if (!tabsOnRightSide) {
+            this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
+            this.pnlContent.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getClrBorders()));
+        }
 
         // Add all tabs
         VTab tab;
@@ -151,9 +176,14 @@ public class FVerticalTabPanel extends FPanel {
     public class VTab extends JPanel {
         private String msg;
         private int id;
-        private int w;
 
         // ID is used to retrieve this tab from the list of allVTabs.
+        /** 
+         * Creates the actual clickable tab.
+         * 
+         * @param txt &emsp; String text in tab
+         * @param i &emsp; int index
+         */
         VTab(final String txt, final int i) {
             super();
             this.setLayout(new MigLayout("insets 0, gap 0"));
@@ -192,23 +222,39 @@ public class FVerticalTabPanel extends FPanel {
         @Override
         protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            this.w = this.getWidth();
+            w = this.getWidth();
+            h = this.getHeight();
 
             // Careful with this font scale factor; the vertical tabs will be
             // unreadable
             // if small window, too big if large window.
-            g.setFont(FVerticalTabPanel.this.skin.getFont1().deriveFont(Font.PLAIN, (int) (this.w * 0.68)));
+            g.setFont(FVerticalTabPanel.this.skin.getFont1().deriveFont(Font.PLAIN, (int) (h * 0.2)));
 
             // Rotate, draw string, rotate back (to allow hover border to be
             // painted properly)
             final Graphics2D g2d = (Graphics2D) g;
             final AffineTransform at = g2d.getTransform();
-            at.rotate(Math.toRadians(90), 0, 0);
-            g2d.setTransform(at);
-            g2d.setColor(AllZone.getSkin().getClrText());
-            g2d.drawString(this.msg, 5, -4);
 
-            at.rotate(Math.toRadians(-90), 0, 0);
+            if (tabsOnRightSide) {
+                at.rotate(Math.toRadians(90), 0, 0);
+                g2d.setTransform(at);
+                g2d.setColor(AllZone.getSkin().getClrText());
+                g2d.drawString(this.msg, 5, -4);
+            }
+            else {
+                at.rotate(Math.toRadians(-90), 0, 0);
+                g2d.setTransform(at);
+                g2d.setColor(AllZone.getSkin().getClrText());
+                g2d.drawString(this.msg, 5 - h, w - 4);
+            }
+
+            if (tabsOnRightSide) {
+                at.rotate(Math.toRadians(-90), 0, 0);
+            }
+            else {
+                at.rotate(Math.toRadians(90), 0, 0);
+            }
+
             g2d.setTransform(at);
         }
 
@@ -218,6 +264,7 @@ public class FVerticalTabPanel extends FPanel {
         }
     }
 
+    /** @return List<VTab> */
     public List<VTab> getAllVTabs() {
         return allVTabs;
     }
