@@ -192,16 +192,16 @@ public final class NewConstants {
         /** The XMLDATA. */
         public static final String XMLDATA = "quest/data-xml";
 
-        /** The OPPONEN t_ icons. */
+        /** The OPPONENT_ICONS. */
         public static final String OPPONENT_ICONS = "quest/opponent/icons";
 
-        /** The OPPONEN t_ dir. */
+        /** The OPPONENT_DIR. */
         public static final String OPPONENT_DIR = "image/icon";
 
-        /** The PE t_ sho p_ icons. */
+        /** The PET_SHOP_ICONS. */
         public static final String PET_SHOP_ICONS = "quest/pet/icons";
 
-        /** The PE t_ toke n_ images. */
+        /** The PET_TOKEN_IMAGES. */
         public static final String PET_TOKEN_IMAGES = "quest/pet/tokens";
     }
 
@@ -238,7 +238,7 @@ public final class NewConstants {
      */
     public static class Lang {
 
-        /** The PROGRA m_ name. */
+        /** The PROGRAM_NAME. */
         public static final String PROGRAM_NAME = "%s/program/name";
 
         /** The LANGUAGE. */
@@ -373,7 +373,7 @@ public final class NewConstants {
             }
 
             /**
-             * The Interface HUMAN_LIBRARY.
+             * The Interface HumanLibrary.
              */
             public static class HumanLibrary {
 
@@ -451,7 +451,7 @@ public final class NewConstants {
             public static final String COMPUTER_TITLE = "%s/Display/computer/title";
 
             /**
-             * The Interface COMPUTER_HAND.
+             * The Interface ComputerHand.
              */
             public static class ComputerHand {
 
@@ -469,7 +469,7 @@ public final class NewConstants {
             }
 
             /**
-             * The Interface COMPUTER_LIBRARY.
+             * The Interface CopmuterLibrary.
              */
             public static class ComputerLibrary {
 
@@ -486,11 +486,11 @@ public final class NewConstants {
                 public static final String MENU = "%s/Display/computer/library/menu";
             }
 
-            /** The COMPUTE r_ graveyard. */
+            /** The COMPUTER_GRAVEYARD. */
             public static final String COMPUTER_GRAVEYARD = "%s/Display/computer/graveyard";
 
             /**
-             * The Interface COMPUTER_GRAVEYARD.
+             * The Interface ComputerGraveyard.
              */
             public static class ComputerGraveyard {
 
@@ -508,7 +508,7 @@ public final class NewConstants {
             public static final String COMPUTER_REMOVED = "%s/Display/computer/removed";
 
             /**
-             * The Interface COMPUTER_REMOVED.
+             * The Interface CopmuterRemoved.
              */
             public static class ComputerRemoved {
 
