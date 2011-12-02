@@ -10050,6 +10050,8 @@ res/pics/icons/GoldIconSmall.png -text svneol=unset#image/png
 res/pics/icons/HeartIcon.png -text svneol=unset#image/png
 res/pics/icons/LeafIconSmall.png -text svneol=unset#image/png
 res/pics/icons/Life.png -text svneol=unset#image/png
+res/pics/icons/Mage01.jpg -text
+res/pics/icons/Mage02.jpg -text
 res/pics/icons/MapIcon.png -text svneol=unset#image/png
 res/pics/icons/MapIconLarge.png -text svneol=unset#image/png
 res/pics/icons/Unknown.jpg -text

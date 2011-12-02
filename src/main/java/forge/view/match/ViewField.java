@@ -45,6 +45,7 @@ import net.miginfocom.swing.MigLayout;
 import arcane.ui.PlayArea;
 import forge.AllZone;
 import forge.Constant.Zone;
+import forge.card.mana.ManaPool;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.match.ControlField;
@@ -103,8 +104,10 @@ public class ViewField extends FRoundedPanel {
         scroller.setBorder(null);
         this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getClrBorders()));
         this.tabletop.setOpaque(false);
+        
+        final String fileString = "res/pics/icons/" + (player.isHuman() ? "Mage01.jpg" : "Mage02.jpg");
 
-        final Avatar pic = new Avatar("res/pics/icons/unknown.jpg");
+        final Avatar pic = new Avatar(fileString);
         final Details pool = new Details();
 
         this.add(pic, "h 98%!, w 10%!");
@@ -153,6 +156,9 @@ public class ViewField extends FRoundedPanel {
         // Poison/life
         this.getLblLife().setText("" + p0.getLife());
         this.getLblPoison().setText("" + p0.getPoisonCounters());
+        
+        //mana pool
+        updateManaPool(p0);
 
         // Hide all keyword labels, then show the appropriate ones.
         for (final JLabel lbl : this.keywordLabels.values()) {
@@ -162,6 +168,22 @@ public class ViewField extends FRoundedPanel {
         for (final String s : p0.getKeywords()) {
             this.keywordLabels.get(s).setVisible(true);
         }
+    }
+    
+    /**
+     * Handles observer update of the mana pool.
+     * 
+     * @param p0
+     *            &emsp; Player obj
+     */
+    public void updateManaPool(final Player p0) {
+        ManaPool m = p0.getManaPool();
+        getLblBlack().setText("" +m.getAmountOfColor(forge.Constant.Color.BLACK));
+        getLblBlue().setText("" +m.getAmountOfColor(forge.Constant.Color.BLUE));
+        getLblGreen().setText("" +m.getAmountOfColor(forge.Constant.Color.GREEN));
+        getLblRed().setText("" +m.getAmountOfColor(forge.Constant.Color.RED));
+        getLblWhite().setText("" +m.getAmountOfColor(forge.Constant.Color.WHITE));
+        getLblColorless().setText("" +m.getAmountOfColor(forge.Constant.Color.COLORLESS));
     }
 
     // ========= Retrieval methods
