@@ -384,8 +384,8 @@ public class PhaseUtil {
         // Remove temporary keywords
         list = player.getCardsIn(Zone.Battlefield);
         for (final Card c : list) {
-            c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
+            c.removeAllExtrinsicKeyword("This card doesn't untap during your next untap step.");
+            c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
         }
     } // end doUntap
 

@@ -336,7 +336,7 @@ class CardFactoryAuras {
                             badTarget[0] = false;
                             crd.addDamage(2, card);
                             crd.removeIntrinsicKeyword("Flying");
-                            crd.removeExtrinsicKeyword("Flying");
+                            crd.removeAllExtrinsicKeyword("Flying");
                         } else {
                             badTarget[0] = true;
                         }

@@ -574,7 +574,7 @@ public final class AbilityFactoryDebuff {
                         hadIntrinsic.add(kw);
                     }
                     tgtC.removeIntrinsicKeyword(kw);
-                    tgtC.removeExtrinsicKeyword(kw);
+                    tgtC.removeAllExtrinsicKeyword(kw);
                 }
             }
             if (!params.containsKey("Permanent")) {

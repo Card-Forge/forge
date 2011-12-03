@@ -230,7 +230,7 @@ public class GameAction {
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
                 && !zone.is(Constant.Zone.Exile)) {
             final PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
-            c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, "
+            c.removeAllExtrinsicKeyword("If CARDNAME would leave the battlefield, "
                     + "exile it instead of putting it anywhere else.");
             return this.moveTo(removed, c);
         }
@@ -550,7 +550,7 @@ public class GameAction {
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")) {
             final PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
-            c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, "
+            c.removeAllExtrinsicKeyword("If CARDNAME would leave the battlefield, "
                     + "exile it instead of putting it anywhere else.");
             return this.moveTo(removed, c);
         }
