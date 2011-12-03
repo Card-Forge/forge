@@ -244,6 +244,8 @@ public class ViewTabber extends FRoundedPanel {
         temp[3].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
         if (!p0.getKeywords().isEmpty()) {
             temp[4].setText(p0.getKeywords().toString());
+        } else {
+            temp[4].setText("");
         }
     }
 
