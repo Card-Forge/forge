@@ -4,6 +4,8 @@ Types:Instant
 Text:no text
 K:Delve
 A:SP$Destroy | Cost$ 5 B | ValidTgts$ Creature.nonGreen | TgtPrompt$ Select target non-green creature. | NoRegen$ True | SpellDescription$ Destroy target non-green creature. It can't be regenerated.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_rattle.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/82.jpg
 Oracle:Delve (You may exile any number of cards from your graveyard as you cast this spell. It costs {1} less to cast for each card exiled this way.)\nDestroy target nongreen creature. It can't be regenerated.
