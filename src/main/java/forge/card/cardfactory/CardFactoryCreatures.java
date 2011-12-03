@@ -2657,6 +2657,7 @@ public class CardFactoryCreatures {
                             + this.getSourceCard().getName() + " this turn.";
                 }
             };
+            finalAb.setDescription(theCost + ": Target creature can't block CARDNAME this turn.");
 
             card.addSpellAbility(finalAb);
         } // *************** END ************ END **************************
