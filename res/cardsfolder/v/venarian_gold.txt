@@ -7,11 +7,10 @@ A:SP$ Attach | Cost$ X U U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature and put X sleep counters on it.
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted | SubAbility$ SVar=DBPutCounter
 SVar:DBPutCounter:DB$PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ SLEEP | CounterNum$ X
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_SLEEP | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step if it has a sleep counter on it.
+S:Mode$ Continuous | Affected$ Creature.AttachedBy+counters_GE1_SLEEP | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step if it has a sleep counter on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, remove a sleep counter from that creature.
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ SLEEP | CounterNum$ 1
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venarian_gold.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/83.jpg

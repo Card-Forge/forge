@@ -1251,7 +1251,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
+        /*else if (cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
                 || cardName.equals("Feral Hydra") || cardName.equals("Krakilin") || cardName.equals("Ivy Elemental")
                 || cardName.equals("Lightning Serpent")) {
 
@@ -1267,17 +1267,17 @@ public class CardFactoryCreatures {
             };
             card.clearFirstSpell();
             card.addFirstSpellAbility(spell);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Apocalypse Hydra")) {
             final SpellAbility spell = new SpellPermanent(card) {
                 private static final long serialVersionUID = -11489323313L;
 
-                @Override
+                /*@Override
                 public boolean canPlayAI() {
                     return super.canPlay() && (5 <= (ComputerUtil.getAvailableMana().size() - 2));
-                }
+                }*/
 
                 @Override
                 public void resolve() {

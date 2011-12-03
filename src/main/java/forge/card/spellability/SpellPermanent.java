@@ -27,6 +27,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.CommandReturn;
+import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
@@ -262,6 +263,18 @@ public class SpellPermanent extends Spell {
     public boolean canPlayAI() {
 
         final Card card = this.getSourceCard();
+        String mana = this.getPayCosts().getTotalMana();
+        System.out.println(card + " mana: " + mana);
+
+        if (mana.contains("X")) {
+            // Set PayX here to maximum value.
+            final int xPay = ComputerUtil.determineLeftoverMana(this);
+            System.out.println("xPay: " + xPay);
+            if (xPay <= 0) {
+                return false;
+            }
+            card.setSVar("PayX", Integer.toString(xPay));
+        }
 
         // check on legendary
         if (card.isType("Legendary")) {
@@ -292,7 +305,7 @@ public class SpellPermanent extends Spell {
         }
 
         if (card.isCreature() && (card.getNetDefense() <= 0) && !card.hasStartOfKeyword("etbCounter")
-                && !card.getText().contains("Modular")) {
+                && !card.getText().contains("Modular") && !mana.contains("X")) {
             return false;
         }
 

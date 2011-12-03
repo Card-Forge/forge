@@ -7,7 +7,6 @@ K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 A:AB$ PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 A:AB$ PutCounterAll | Cost$ T SubCounter<1/P1P1> | ValidCards$ Creature.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each other creature you control.
-SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mikaeus_the_lunarch.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/23.jpg
