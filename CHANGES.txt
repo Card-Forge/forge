@@ -146,6 +146,25 @@ Fixes/Features:
 - Ran set info script
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated some SVars.
+- Latest UI layout reshuffling.
+- (NewGUI) Commented out the old player keyword display (because it caused an error report whenever a keyword was present). Player keywords are now shown in the player details view.
+- Fixed the ability cost for Scroll of Origins.
+- fix Goblin Cannon
+- Field UI streamlining: 
+* added 7 more phase indicators
+* enabled player avatar click to select
+* resized pool, pic, and phase indicator areas.
+-Flashback enabled for human and computer in new UI.
+- Also, an experimental "reminder" for input area included.
+- The AI can now cast permanents with X in their mana cost.
+- Fixed Venarian Gold.
+- Added SVar:RemAIDeck:True to the two delve cards (the implementation in getSpellCostChange doesn't work correctly).
+- New UI: Top spell on stack shown in deail panel.
+- Fixed Natural Emergence.
+- Added a description for the abilities of Duct Crawler and friends.
+- Little fix for the display of player keywords.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -193,6 +212,7 @@ Coastal Wizard
 Defiant Stand
 Life Matrix
 Civilized Scholar / Homicidal Brute
+Kongming's Contraptions
 
 
 end
