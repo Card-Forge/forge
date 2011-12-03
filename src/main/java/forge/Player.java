@@ -1535,7 +1535,7 @@ public abstract class Player extends GameEntity {
      * @return the card list
      */
     public final CardList mill(final int n) {
-        return this.mill(n, Constant.Zone.Graveyard);
+        return this.mill(n, Constant.Zone.Graveyard, false);
     }
 
     /**
@@ -1547,9 +1547,11 @@ public abstract class Player extends GameEntity {
      *            a int.
      * @param zone
      *            a {@link java.lang.String} object.
+     * @param zone
+     *            a boolean.
      * @return the card list
      */
-    public final CardList mill(final int n, final Constant.Zone zone) {
+    public final CardList mill(final int n, final Constant.Zone zone, final boolean bottom) {
         final CardList lib = this.getCardsIn(Zone.Library);
         final CardList milled = new CardList();
 
@@ -1558,7 +1560,11 @@ public abstract class Player extends GameEntity {
         final Zone destination = this.getZone(zone).getZoneType();
 
         for (int i = 0; i < max; i++) {
-            milled.add(AllZone.getGameAction().moveTo(destination, lib.get(i)));
+            if (bottom) {
+                milled.add(AllZone.getGameAction().moveTo(destination, lib.get(lib.size() - 1)));
+            } else {
+                milled.add(AllZone.getGameAction().moveTo(destination, lib.get(i)));
+            }
         }
 
         return milled;

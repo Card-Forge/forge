@@ -931,6 +931,7 @@ public class AbilityFactoryZoneAffecting {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        final boolean bottom = params.containsKey("FromBottom");
 
         ArrayList<Player> tgtPlayers;
 
@@ -948,7 +949,7 @@ public class AbilityFactoryZoneAffecting {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                final CardList milled = p.mill(numCards, destination);
+                final CardList milled = p.mill(numCards, destination, bottom);
                 if (params.containsKey("RememberMilled")) {
                     for (final Card c : milled) {
                         source.addRemembered(c);
