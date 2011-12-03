@@ -23,6 +23,7 @@ import forge.Card;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
@@ -82,6 +83,9 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     public final void selectCard(final Card card, final PlayerZone zone) {
         if (AllZone.getGameAction().playCard(card)) {
             AllZone.getPhase().setPriority(AllZone.getHumanPlayer());
+        }
+        else {
+            ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
         }
     } // selectCard()
 }

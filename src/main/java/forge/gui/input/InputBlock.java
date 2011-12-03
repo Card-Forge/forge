@@ -28,6 +28,7 @@ import forge.Command;
 import forge.Constant;
 import forge.GameActionUtil;
 import forge.PlayerZone;
+import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
@@ -116,6 +117,9 @@ public class InputBlock extends Input {
                 this.allBlocking.add(card);
                 AllZone.getCombat().addBlocker(this.currentAttacker, card);
             }
+        }
+        else {
+            ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
         }
         this.showMessage();
     } // selectCard()

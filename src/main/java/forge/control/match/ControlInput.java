@@ -122,4 +122,9 @@ public class ControlInput {
     public ViewInput getView() {
         return view;
     }
+
+    /** Flashes animation on input panel if play is currently waiting on input. */
+    public void remind() {
+        view.remind();
+    }
 }

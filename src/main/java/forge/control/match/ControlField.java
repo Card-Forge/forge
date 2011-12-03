@@ -39,7 +39,6 @@ import forge.Constant.Zone;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -104,8 +103,7 @@ public class ControlField {
      * stats, etc.
      */
     public void addObservers() {
-        // Hand, Graveyard, Library, Flashback, Exile totals, attached to
-        // respective Zones.
+        // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
         final Observer o1 = new Observer() {
             @Override
             public void update(final Observable a, final Object b) {
@@ -297,21 +295,10 @@ public class ControlField {
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
-                            NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
-
-                        private static final long serialVersionUID = 8120331222693706164L;
-
-                        @Override
-                        protected Iterable<Card> getCardsAsIterable() {
-                            return new ImmutableIterableFrom<Card>(CardFactoryUtil
-                                    .getExternalZoneActivationCards(AllZone.getHumanPlayer()));
-                        }
-
-                        @Override
-                        protected void doAction(final Card c) {
-                            AllZone.getGameAction().playCard(c);
-                        }
-                    };
+                            NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK).actionPerformed(null);
+                } else {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
+                            NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK).actionPerformed(null);
                 }
             }
         });

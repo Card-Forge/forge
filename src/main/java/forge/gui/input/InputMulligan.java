@@ -30,10 +30,12 @@ import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Phase;
 import forge.Player;
+import forge.PlayerZone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
 import forge.quest.data.QuestData;
+import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
@@ -206,5 +208,10 @@ public class InputMulligan extends Input {
         Phase.setGameBegins(1);
         AllZone.getPhase().setNeedToNextPhase(false);
         this.stop();
+    }
+
+    @Override
+    public void selectCard(Card c0, PlayerZone z0) {
+        ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
     }
 }

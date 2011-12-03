@@ -367,7 +367,7 @@ public final class NewConstants {
              * The Interface HUMAN_HAND.
              */
             public static class HumanHand {
-                
+
                 /** The BASE. */
                 public static final String BASE = "%s/Display/human/hand";
 
@@ -441,6 +441,9 @@ public final class NewConstants {
             /** The HUMA n_ flashback. */
             public static final String HUMAN_FLASHBACK = "%s/Display/human/flashback";
 
+            /**  */
+            public static final String COMPUTER_FLASHBACK = "%s/Display/computer/flashback";
+
             /**
              * The Interface HUMAN_FLASHBACK.
              */
@@ -454,6 +457,21 @@ public final class NewConstants {
 
                 /** The MENU. */
                 public static final String MENU = "%s/Display/human/flashback/menu";
+            }
+
+            /**
+             * The Interface COMPUTER_FLASHBACK.
+             */
+            public static class ComputerFlashback {
+
+                /** The TITLE. */
+                public static final String TITLE = "%s/Display/computer/flashback/title";
+
+                /** The BUTTON. */
+                public static final String BUTTON = "%s/Display/computer/flashback/button";
+
+                /** The MENU. */
+                public static final String MENU = "%s/Display/computer/flashback/menu";
             }
 
             /** The COMPUTE r_ title. */

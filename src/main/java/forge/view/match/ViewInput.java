@@ -17,10 +17,14 @@
  */
 package forge.view.match;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
@@ -39,6 +43,9 @@ public class ViewInput extends FRoundedPanel {
     private final JButton btnOK, btnCancel;
     private final JTextArea tarMessage;
     private final FSkin skin;
+    private Timer timer1 = null;
+    private static int counter = 0;
+    private boolean remindIsRunning = false;
 
     /**
      * Assembles UI for input area (buttons and message panel).
@@ -106,5 +113,33 @@ public class ViewInput extends FRoundedPanel {
      */
     public JTextArea getTarMessage() {
         return this.tarMessage;
+    }
+
+    /** Flashes animation on input panel if play is currently waiting on input. */
+    public void remind() {
+        if (remindIsRunning) { return; }
+
+        remindIsRunning = true;
+        final int[] steps = {210, 215, 220, 220, 220, 215, 210};
+        final Color oldBG = getBackground();
+        counter = 0;
+
+        ActionListener fader = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent evt) {
+                counter++;
+                if (counter != (steps.length - 1)) {
+                    setBackground(new Color(255, 0, 0, steps[counter]));
+                }
+                else {
+                    setBackground(oldBG);
+                    remindIsRunning = false;
+                    timer1.stop();
+                }
+            }
+        };
+
+        timer1 = new Timer(100, fader);
+        timer1.start();
     }
 }
