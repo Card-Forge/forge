@@ -2,7 +2,7 @@ Name:Remove
 ManaCost:U
 Types:Instant
 Text:no text
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | ActivationPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast Remove only during the declare attackers step and only if you've been attacked this step. Return target attacking creature to its owner's hand.
+A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | ActivationPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Return target attacking creature to its owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6541.jpg

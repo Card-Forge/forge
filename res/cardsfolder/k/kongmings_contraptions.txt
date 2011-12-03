@@ -1,0 +1,11 @@
+Name:Kongming's Contraptions
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/4
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ 2 | OpponentTurn$ True | ActivationPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ CARDNAME deals 2 damage to target attacking creature. Activate this ability only during the declare attackers step and only if you've been attacked this step.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kongmings_contraptions.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/10.jpg
+Oracle:{T}: Kongming's Contraptions deals 2 damage to target attacking creature. Activate this ability only during the declare attackers step and only if you've been attacked this step.
+End
