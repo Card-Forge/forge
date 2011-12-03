@@ -18,7 +18,6 @@
 package forge.view.match;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -27,17 +26,13 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
@@ -45,11 +40,10 @@ import net.miginfocom.swing.MigLayout;
 import arcane.ui.PlayArea;
 import forge.AllZone;
 import forge.Constant.Zone;
-import forge.card.mana.ManaPool;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
-import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 
@@ -67,13 +61,17 @@ public class ViewField extends FRoundedPanel {
 
     private final Border hoverBorder, inactiveBorder;
 
-    private DetailLabel lblHand, lblGraveyard, lblLibrary, lblExile, lblFlashback, lblPoison, lblBlack, lblBlue,
-            lblGreen, lblRed, lblWhite, lblColorless;
+    private DetailLabel lblHand, lblGraveyard, lblLibrary, lblExile,
+        lblFlashback, lblPoison, lblBlack, lblBlue,
+        lblGreen, lblRed, lblWhite, lblColorless;
 
-    private PhaseLabel lblUpkeep, lblDraw, lblBeginCombat, lblEndCombat, lblEndTurn;
+    private PhaseLabel lblUpkeep, lblDraw, lblMain1, lblBeginCombat,
+        lblDeclareAttackers, lblDeclareBlockers, lblFirstStrike, lblCombatDamage,
+        lblEndCombat, lblMain2, lblEndTurn, lblCleanup;
 
+    private JPanel avatarArea, phaseArea, poolArea;
     private JLabel lblAvatar, lblLife;
-    private Map<String, JLabel> keywordLabels;
+    private Image img;
     private final Color transparent = new Color(0, 0, 0, 0);
 
     /**
@@ -85,7 +83,7 @@ public class ViewField extends FRoundedPanel {
     public ViewField(final Player player) {
         super();
         this.setOpaque(false);
-        this.setLayout(new MigLayout("insets 1% 0.5%, gap 0.5%"));
+        this.setLayout(new MigLayout("insets 0, gap 0"));
         this.setCornerRadius(5);
         this.setToolTipText(player.getName() + " Gameboard");
         this.setBackground(AllZone.getSkin().getClrTheme());
@@ -95,24 +93,81 @@ public class ViewField extends FRoundedPanel {
         this.hoverBorder = new LineBorder(this.skin.getClrBorders(), 1);
         this.counter = -1;
 
+        String filename = "res/pics/icons/" + (player.isHuman() ? "Mage01.jpg" : "Mage02.jpg");
+        img = new ImageIcon(filename).getImage();
+
+        // Avatar and life
+        avatarArea = new JPanel();
+        avatarArea.setOpaque(false);
+        avatarArea.setBackground(skin.getClrHover());
+        avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
+
+        lblAvatar = new JLabel();
+        lblAvatar.setHorizontalAlignment(SwingConstants.CENTER);
+        avatarArea.add(lblAvatar, "w 100%!, wrap, gaptop 2px");
+
+        lblLife = new JLabel();
+        lblLife.setHorizontalAlignment(SwingConstants.CENTER);
+        lblLife.setForeground(skin.getClrText());
+        avatarArea.add(lblLife, "w 100%!, h 30%!");
+
+        this.add(avatarArea, "w 10%!, h 30%!");
+
+        // Phases
+        phaseArea = new JPanel();
+        phaseArea.setOpaque(false);
+        phaseArea.setLayout(new MigLayout("insets 0 0 1% 0, gap 0, wrap"));
+        addPhaseIndicators();
+        this.add(phaseArea, "w 5%!, h 100%!, span 1 2");
+
+        // Play area
         final JScrollPane scroller = new JScrollPane();
+
         this.tabletop = new PlayArea(scroller, player.equals(AllZone.getComputerPlayer()) ? true : false);
+        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getClrBorders()));
+        this.tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
         scroller.setBorder(null);
-        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getClrBorders()));
-        this.tabletop.setOpaque(false);
-        
-        final String fileString = "res/pics/icons/" + (player.isHuman() ? "Mage01.jpg" : "Mage02.jpg");
 
-        final Avatar pic = new Avatar(fileString);
-        final Details pool = new Details();
+        this.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
 
-        this.add(pic, "h 98%!, w 10%!");
-        this.add(pool, "h 98%!, w 11%!");
-        this.add(scroller, "h 98%!, w 77%!");
+        // Pool info
+        poolArea = new JPanel();
+        poolArea.setOpaque(false);
+        poolArea.setLayout(new MigLayout("insets 0, gap 0, wrap 2, filly"));
+        addPoolLabels();
+        this.add(poolArea, "w 10%!, h 70%!");
+
+        // Resize adapter
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int side = (int) (avatarArea.getHeight() * 0.7);
+                int size = (int) (avatarArea.getHeight() * 0.24);
+                lblLife.setFont(ViewField.this.skin.getFont1().deriveFont(Font.BOLD, (size)));
+                lblAvatar.setIcon(new ImageIcon(img.getScaledInstance(side, side, java.awt.Image.SCALE_SMOOTH)));
+            }
+        });
+
+        // Player hover effect
+        avatarArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                ViewField.this.avatarArea.setOpaque(true);
+                ViewField.this.avatarArea.setBorder(ViewField.this.hoverBorder);
+            }
+
+            @Override
+            public void mouseExited(final MouseEvent e) {
+                ViewField.this.avatarArea.setOpaque(false);
+                ViewField.this.avatarArea.setBorder(ViewField.this.inactiveBorder);
+            }
+        });
+
+        //============
 
         // After all components are in place, instantiate controller.
         this.control = new ControlField(player, this);
@@ -127,6 +182,118 @@ public class ViewField extends FRoundedPanel {
         return this.control;
     }
 
+    /** Adds phase indicator labels to phase area JPanel container. */
+    public void addPhaseIndicators() {
+        // Constraints string, set once
+        final String constraints = "w 94%!, h 7.2%, gaptop 1%, gapleft 3%";
+
+        ViewField.this.lblUpkeep = new PhaseLabel("UP");
+        ViewField.this.lblUpkeep.setToolTipText("<html>Phase: Upkeep<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblUpkeep, constraints);
+
+        ViewField.this.lblDraw = new PhaseLabel("DR");
+        ViewField.this.lblDraw.setToolTipText("<html>Phase: Draw<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblDraw, constraints);
+
+        ViewField.this.lblMain1 = new PhaseLabel("M1");
+        ViewField.this.lblMain1.setToolTipText("<html>Phase: Main 1<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblMain1, constraints);
+
+        ViewField.this.lblBeginCombat = new PhaseLabel("BC");
+        ViewField.this.lblBeginCombat.setToolTipText("<html>Phase: Begin Combat<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblBeginCombat, constraints);
+
+        ViewField.this.lblDeclareAttackers = new PhaseLabel("DA");
+        ViewField.this.lblDeclareAttackers.setToolTipText("<html>Phase: Declare Attackers<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblDeclareAttackers, constraints);
+
+        ViewField.this.lblDeclareBlockers = new PhaseLabel("DB");
+        ViewField.this.lblDeclareBlockers.setToolTipText("<html>Phase: Declare Blockers<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblDeclareBlockers, constraints);
+
+        ViewField.this.lblFirstStrike = new PhaseLabel("FS");
+        ViewField.this.lblFirstStrike.setToolTipText("<html>Phase: First Strike Damage<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblFirstStrike, constraints);
+
+        ViewField.this.lblCombatDamage = new PhaseLabel("CD");
+        ViewField.this.lblCombatDamage.setToolTipText("<html>Phase: Combat Damage<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblCombatDamage, constraints);
+
+        ViewField.this.lblEndCombat = new PhaseLabel("EC");
+        ViewField.this.lblEndCombat.setToolTipText("<html>Phase: End Combat<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblEndCombat, constraints);
+
+        ViewField.this.lblMain2 = new PhaseLabel("M2");
+        ViewField.this.lblMain2.setToolTipText("<html>Phase: Main 2<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblMain2, constraints);
+
+        ViewField.this.lblEndTurn = new PhaseLabel("ET");
+        ViewField.this.lblEndTurn.setToolTipText("<html>Phase: End Turn<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblEndTurn, constraints);
+
+        ViewField.this.lblCleanup = new PhaseLabel("CL");
+        ViewField.this.lblCleanup.setToolTipText("<html>Phase: Cleanup<br>Click to toggle.</html>");
+        phaseArea.add(ViewField.this.lblCleanup, constraints);
+    }
+
+    /** Adds various labels to pool area JPanel container. */
+    public void addPoolLabels() {
+        final String constraintsL = "w 47%!, h 12.5%!, growy, gapleft 3%";
+        final String constraintsR = "w 47%!, h 12.5%!, growy, gapright 3%";
+
+        // Hand, library, graveyard, exile, flashback, poison labels
+        ViewField.this.lblHand = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_hand.png"), "99");
+        ViewField.this.lblHand.setToolTipText("Cards in hand");
+        poolArea.add(ViewField.this.lblHand, constraintsL);
+
+        ViewField.this.lblLibrary = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_library.png"), "99");
+        ViewField.this.lblLibrary.setToolTipText("Cards in library");
+        poolArea.add(ViewField.this.lblLibrary, constraintsR);
+
+        ViewField.this.lblGraveyard = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_grave.png"), "99");
+        ViewField.this.lblGraveyard.setToolTipText("Cards in graveyard");
+        poolArea.add(ViewField.this.lblGraveyard, constraintsL);
+
+        ViewField.this.lblExile = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_exile.png"), "99");
+        ViewField.this.lblExile.setToolTipText("Exiled cards");
+        poolArea.add(ViewField.this.lblExile, constraintsR);
+
+        ViewField.this.lblFlashback = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_flashback.png"),
+                "99");
+        ViewField.this.lblFlashback.setToolTipText("Flashback cards");
+        poolArea.add(ViewField.this.lblFlashback, constraintsL);
+
+        ViewField.this.lblPoison = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_poison.png"), "99");
+        ViewField.this.lblPoison.setToolTipText("Poison counters");
+        poolArea.add(ViewField.this.lblPoison, constraintsR);
+
+        // Black, Blue, Colorless, Green, Red, White mana labels
+        ViewField.this.lblBlack = new DetailLabel(new ImageIcon("res/images/symbols-13/B.png"), "99");
+        ViewField.this.lblBlack.setToolTipText("Black mana");
+        poolArea.add(ViewField.this.lblBlack, constraintsL);
+
+        ViewField.this.lblBlue = new DetailLabel(new ImageIcon("res/images/symbols-13/U.png"), "99");
+        ViewField.this.lblBlue.setToolTipText("Blue mana");
+        poolArea.add(ViewField.this.lblBlue, constraintsR);
+
+        ViewField.this.lblGreen = new DetailLabel(new ImageIcon("res/images/symbols-13/G.png"), "99");
+        ViewField.this.lblGreen.setToolTipText("Green mana");
+        poolArea.add(ViewField.this.lblGreen, constraintsL);
+
+        ViewField.this.lblRed = new DetailLabel(new ImageIcon("res/images/symbols-13/R.png"), "99");
+        ViewField.this.lblRed.setToolTipText("Red mana");
+        poolArea.add(ViewField.this.lblRed, constraintsR);
+
+        ViewField.this.lblWhite = new DetailLabel(new ImageIcon("res/images/symbols-13/W.png"), "99");
+        ViewField.this.lblWhite.setToolTipText("White mana");
+        poolArea.add(ViewField.this.lblWhite, constraintsL);
+
+        ViewField.this.lblColorless = new DetailLabel(new ImageIcon("res/images/symbols-13/X.png"), "99");
+        ViewField.this.lblColorless.setToolTipText("Colorless mana");
+        poolArea.add(ViewField.this.lblColorless, constraintsR);
+    }
+
+    // ========== Observer update methods
     /**
      * Handles observer update of player Zones - hand, graveyard, etc.
      * 
@@ -156,20 +323,11 @@ public class ViewField extends FRoundedPanel {
         // Poison/life
         this.getLblLife().setText("" + p0.getLife());
         this.getLblPoison().setText("" + p0.getPoisonCounters());
-        
+
         //mana pool
         updateManaPool(p0);
-
-        // Hide all keyword labels, then show the appropriate ones.
-        for (final JLabel lbl : this.keywordLabels.values()) {
-            lbl.setVisible(false);
-        }
-
-        /*for (final String s : p0.getKeywords()) {
-            this.keywordLabels.get(s).setVisible(true);
-        }*/
     }
-    
+
     /**
      * Handles observer update of the mana pool.
      * 
@@ -178,376 +336,160 @@ public class ViewField extends FRoundedPanel {
      */
     public void updateManaPool(final Player p0) {
         ManaPool m = p0.getManaPool();
-        getLblBlack().setText("" +m.getAmountOfColor(forge.Constant.Color.BLACK));
-        getLblBlue().setText("" +m.getAmountOfColor(forge.Constant.Color.BLUE));
-        getLblGreen().setText("" +m.getAmountOfColor(forge.Constant.Color.GREEN));
-        getLblRed().setText("" +m.getAmountOfColor(forge.Constant.Color.RED));
-        getLblWhite().setText("" +m.getAmountOfColor(forge.Constant.Color.WHITE));
-        getLblColorless().setText("" +m.getAmountOfColor(forge.Constant.Color.COLORLESS));
+        getLblBlack().setText("" + m.getAmountOfColor(forge.Constant.Color.BLACK));
+        getLblBlue().setText("" + m.getAmountOfColor(forge.Constant.Color.BLUE));
+        getLblGreen().setText("" + m.getAmountOfColor(forge.Constant.Color.GREEN));
+        getLblRed().setText("" + m.getAmountOfColor(forge.Constant.Color.RED));
+        getLblWhite().setText("" + m.getAmountOfColor(forge.Constant.Color.WHITE));
+        getLblColorless().setText("" + m.getAmountOfColor(forge.Constant.Color.COLORLESS));
     }
 
     // ========= Retrieval methods
-    /**
-     * Gets the tabletop.
-     * 
-     * @return PlayArea where cards for this field are in play
-     */
+    /** @return PlayArea where cards for this field are in play */
     public PlayArea getTabletop() {
         return this.tabletop;
     }
 
-    /**
-     * Gets the lbl life.
-     * 
-     * @return DetailLabel
-     */
+    /** @return JPanel containing avatar pic and life label */
+    public JPanel getAvatarArea() {
+        return this.avatarArea;
+    }
+
+    /** @return DetailLabel */
     public JLabel getLblLife() {
         return this.lblLife;
     }
 
-    /**
-     * Gets the lbl hand.
-     * 
-     * @return DetailLabel for hand cards
-     */
+    /** @return DetailLabel for hand cards */
     public DetailLabel getLblHand() {
         return this.lblHand;
     }
 
-    /**
-     * Gets the lbl library.
-     * 
-     * @return DetailLabel for library cards
-     */
+    /** @return DetailLabel for library cards */
     public DetailLabel getLblLibrary() {
         return this.lblLibrary;
     }
 
-    /**
-     * Gets the lbl graveyard.
-     * 
-     * @return DetailLabel for graveyard cards
-     */
+    /** @return DetailLabel for graveyard cards */
     public DetailLabel getLblGraveyard() {
         return this.lblGraveyard;
     }
 
-    /**
-     * Gets the lbl exile.
-     * 
-     * @return DetailLabel for exiled cards
-     */
+    /** @return DetailLabel for exiled cards */
     public DetailLabel getLblExile() {
         return this.lblExile;
     }
 
-    /**
-     * Gets the lbl flashback.
-     * 
-     * @return DetailLabel for flashback cards
-     */
+    /** @return DetailLabel for flashback cards */
     public DetailLabel getLblFlashback() {
         return this.lblFlashback;
     }
 
-    /**
-     * Gets the lbl poison.
-     * 
-     * @return DetailLabel for poison counters
-     */
+    /** @return DetailLabel for poison counters */
     public DetailLabel getLblPoison() {
         return this.lblPoison;
     }
 
-    /**
-     * Gets the lbl colorless.
-     * 
-     * @return DetailLabel for colorless mana count
-     */
+    /** @return DetailLabel for colorless mana count */
     public DetailLabel getLblColorless() {
         return this.lblColorless;
     }
 
-    /**
-     * Gets the lbl black.
-     * 
-     * @return DetailLabel for black mana count
-     */
+    /** @return DetailLabel for black mana count */
     public DetailLabel getLblBlack() {
         return this.lblBlack;
     }
 
-    /**
-     * Gets the lbl blue.
-     * 
-     * @return DetailLabel for blue mana count
-     */
+    /** @return DetailLabel for blue mana count */
     public DetailLabel getLblBlue() {
         return this.lblBlue;
     }
 
-    /**
-     * Gets the lbl green.
-     * 
-     * @return DetailLabel for green mana count
-     */
+    /** @return DetailLabel for green mana count */
     public DetailLabel getLblGreen() {
         return this.lblGreen;
     }
 
-    /**
-     * Gets the lbl red.
-     * 
-     * @return DetailLabel for red mana count
-     */
+    /** @return DetailLabel for red mana count */
     public DetailLabel getLblRed() {
         return this.lblRed;
     }
 
-    /**
-     * Gets the lbl white.
-     * 
-     * @return DetailLabel for white mana count
-     */
+    /** @return DetailLabel for white mana count */
     public DetailLabel getLblWhite() {
         return this.lblWhite;
     }
 
     // Phases
-    /**
-     * Gets the lbl upkeep.
-     * 
-     * @return PhaseLabel for upkeep
-     */
+    /** @return PhaseLabel */
     public PhaseLabel getLblUpkeep() {
         return this.lblUpkeep;
     }
 
-    /**
-     * Gets the lbl draw.
-     * 
-     * @return PhaseLabel for draw
-     */
+    /** @return PhaseLabel */
     public PhaseLabel getLblDraw() {
         return this.lblDraw;
     }
 
-    /**
-     * Gets the lbl begin combat.
-     * 
-     * @return PhaseLabel for beginning of combat
-     */
+    /** @return PhaseLabel */
+    public PhaseLabel getLblMain1() {
+        return this.lblMain1;
+    }
+
+    /** @return PhaseLabel */
     public PhaseLabel getLblBeginCombat() {
         return this.lblBeginCombat;
     }
 
-    /**
-     * Gets the lbl end combat.
-     * 
-     * @return PhaseLabel for end of combat
-     */
+    /** @return PhaseLabel */
+    public PhaseLabel getLblDeclareAttackers() {
+        return this.lblDeclareAttackers;
+    }
+
+    /** @return PhaseLabel */
+    public PhaseLabel getLblDeclareBlockers() {
+        return this.lblDeclareBlockers;
+    }
+
+    /** @return PhaseLabel */
+    public PhaseLabel getLblCombatDamage() {
+        return this.lblCombatDamage;
+    }
+
+    /** @return PhaseLabel */
+    public PhaseLabel getLblFirstStrike() {
+        return this.lblFirstStrike;
+    }
+
+    /** @return PhaseLabel */
     public PhaseLabel getLblEndCombat() {
         return this.lblEndCombat;
     }
 
-    /**
-     * Gets the lbl end turn.
-     * 
-     * @return PhaseLabel for end of turn
-     */
+    /** @return PhaseLabel */
+    public PhaseLabel getLblMain2() {
+        return this.lblMain2;
+    }
+
+    /** @return PhaseLabel */
     public PhaseLabel getLblEndTurn() {
         return this.lblEndTurn;
     }
 
-    /**
-     * Gets the keyword labels.
-     * 
-     * @return Map<String,JLabel>
-     */
-    public Map<String, JLabel> getKeywordLabels() {
-        return this.keywordLabels;
+    /** @return PhaseLabel */
+    public PhaseLabel getLblCleanup() {
+        return this.lblCleanup;
     }
 
     // ========== Custom classes
 
     /**
-     * Shows user icon, keywords, and phase for this field.
-     */
-    private class Avatar extends FPanel {
-        private final Image img;
-
-        public Avatar(final String filename) {
-            // Panel and background image icon init
-            super();
-            this.setOpaque(false);
-            this.setLayout(new MigLayout("fill, wrap, insets 0, gap 0"));
-            this.img = new ImageIcon(filename).getImage();
-
-            // Resize adapter
-            this.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    lblLife.setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (getWidth() / 4)));
-                    lblAvatar.setIcon(new ImageIcon(img.getScaledInstance(getWidth(), getWidth(), java.awt.Image.SCALE_SMOOTH)));
-                }
-            });
-
-            lblAvatar = new JLabel();
-            this.add(lblAvatar, "w 100%!, wrap");
-
-            // Life label
-            ViewField.this.lblLife = new JLabel("--");
-            ViewField.this.lblLife.setBorder(ViewField.this.inactiveBorder);
-            ViewField.this.lblLife.setToolTipText("<html>Player life.<br>Click to select player.</html>");
-            ViewField.this.lblLife.setFont(ViewField.this.skin.getFont1().deriveFont(Font.BOLD, 18));
-            ViewField.this.lblLife.setForeground(ViewField.this.skin.getClrText());
-            ViewField.this.lblLife.setBackground(ViewField.this.skin.getClrTheme().darker());
-            ViewField.this.lblLife.setOpaque(true);
-            ViewField.this.lblLife.setHorizontalAlignment(SwingConstants.CENTER);
-            ViewField.this.lblLife.setAlignmentX(Component.CENTER_ALIGNMENT);
-            ViewField.this.lblLife.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(final MouseEvent e) {
-                    ViewField.this.lblLife.setBackground(AllZone.getSkin().getClrHover());
-                    ViewField.this.lblLife.setBorder(ViewField.this.hoverBorder);
-                }
-
-                @Override
-                public void mouseExited(final MouseEvent e) {
-                    ViewField.this.lblLife.setBackground(ViewField.this.skin.getClrTheme());
-                    ViewField.this.lblLife.setBorder(ViewField.this.inactiveBorder);
-                }
-            });
-            this.add(ViewField.this.lblLife, "w 100%!, wrap");
-
-            ViewField.this.keywordLabels = new HashMap<String, JLabel>();
-            // TODO link these map keys to correct keyword constant
-            ViewField.this.keywordLabels.put("shroud", new KeywordLabel("Shroud"));
-            ViewField.this.keywordLabels.put("extraturn", new KeywordLabel("+1 turn"));
-            ViewField.this.keywordLabels.put("skipturn", new KeywordLabel("Skip turn"));
-            ViewField.this.keywordLabels.put("problack", new KeywordLabel("Pro: Black"));
-            ViewField.this.keywordLabels.put("problue", new KeywordLabel("Pro: Blue"));
-            ViewField.this.keywordLabels.put("progreen", new KeywordLabel("Pro: Green"));
-            ViewField.this.keywordLabels.put("prored", new KeywordLabel("Pro: Red"));
-            ViewField.this.keywordLabels.put("prowhite", new KeywordLabel("Pro: White"));
-
-            final JPanel pnlKeywords = new JPanel(new MigLayout("insets 0, wrap, hidemode 2"));
-            pnlKeywords.setOpaque(false);
-            for (final JLabel lbl : ViewField.this.keywordLabels.values()) {
-                pnlKeywords.add(lbl);
-            }
-
-            final JScrollPane scrKeywords = new JScrollPane(pnlKeywords,
-                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-            scrKeywords.setBorder(new EmptyBorder(0, 0, 0, 0));
-            scrKeywords.setOpaque(false);
-            scrKeywords.getViewport().setOpaque(false);
-            scrKeywords.setViewportView(pnlKeywords);
-            this.add(scrKeywords, "w 100%!, growy");
-
-            final JPanel phase = new JPanel();
-            phase.setOpaque(false);
-            phase.setLayout(new MigLayout("fillx, insets 0, gap 0"));
-            this.add(phase, "w 100%!, h 20px!");
-
-            // Constraints string, set once
-            final String constraints = "w 20%!, h 100%!";
-
-            ViewField.this.lblUpkeep = new PhaseLabel("UP");
-            ViewField.this.lblUpkeep.setToolTipText("<html>Phase: Upkeep<br>Click to toggle.</html>");
-            phase.add(ViewField.this.lblUpkeep, constraints);
-
-            ViewField.this.lblDraw = new PhaseLabel("DR");
-            ViewField.this.lblDraw.setToolTipText("<html>Phase: Draw<br>Click to toggle.</html>");
-            phase.add(ViewField.this.lblDraw, constraints);
-
-            ViewField.this.lblBeginCombat = new PhaseLabel("BC");
-            ViewField.this.lblBeginCombat.setToolTipText("<html>Phase: Begin Combat<br>Click to toggle.</html>");
-            phase.add(ViewField.this.lblBeginCombat, constraints);
-
-            ViewField.this.lblEndCombat = new PhaseLabel("EC");
-            ViewField.this.lblEndCombat.setToolTipText("<html>Phase: End Combat<br>Click to toggle.</html>");
-            phase.add(ViewField.this.lblEndCombat, constraints);
-
-            ViewField.this.lblEndTurn = new PhaseLabel("ET");
-            ViewField.this.lblEndTurn.setToolTipText("<html>Phase: End Turn<br>Click to toggle.</html>");
-            phase.add(ViewField.this.lblEndTurn, constraints);
-        }
-    }
-
-    /**
-     * The "details" section of player info: Hand, library, graveyard, exiled,
-     * flashback, poison, and mana pool (BBGRW and colorless).
-     * 
+     * Used to show various values in "details" panel. Also increments grid bag
+     * constraints object as it goes, and zebra-stripes the labels.
      */
     // Design note: Labels are used here since buttons have various
     // difficulties in displaying the desired "flat" background and
     // also strange icon/action behavior.
-    private class Details extends JPanel {
-        public Details() {
-            super();
-            this.setLayout(new MigLayout("insets 0, gap 0, wrap 2, filly"));
-            this.setOpaque(false);
-            final String constraints = "w 50%!, h 12.5%!, growy";
-
-            // Hand, library, graveyard, exile, flashback, poison labels
-            ViewField.this.lblHand = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_hand.png"), "99");
-            ViewField.this.lblHand.setToolTipText("Cards in hand");
-            this.add(ViewField.this.lblHand, constraints);
-
-            ViewField.this.lblLibrary = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_library.png"), "99");
-            ViewField.this.lblLibrary.setToolTipText("Cards in library");
-            this.add(ViewField.this.lblLibrary, constraints);
-
-            ViewField.this.lblGraveyard = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_grave.png"), "99");
-            ViewField.this.lblGraveyard.setToolTipText("Cards in graveyard");
-            this.add(ViewField.this.lblGraveyard, constraints);
-
-            ViewField.this.lblExile = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_exile.png"), "99");
-            ViewField.this.lblExile.setToolTipText("Exiled cards");
-            this.add(ViewField.this.lblExile, constraints);
-
-            ViewField.this.lblFlashback = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_flashback.png"),
-                    "99");
-            ViewField.this.lblFlashback.setToolTipText("Flashback cards");
-            this.add(ViewField.this.lblFlashback, constraints);
-
-            ViewField.this.lblPoison = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_poison.png"), "99");
-            ViewField.this.lblPoison.setToolTipText("Poison counters");
-            this.add(ViewField.this.lblPoison, constraints);
-
-            // Black, Blue, Colorless, Green, Red, White mana labels
-            ViewField.this.lblBlack = new DetailLabel(new ImageIcon("res/images/symbols-13/B.png"), "99");
-            ViewField.this.lblBlack.setToolTipText("Black mana");
-            this.add(ViewField.this.lblBlack, constraints);
-
-            ViewField.this.lblBlue = new DetailLabel(new ImageIcon("res/images/symbols-13/U.png"), "99");
-            ViewField.this.lblBlue.setToolTipText("Blue mana");
-            this.add(ViewField.this.lblBlue, constraints);
-
-            ViewField.this.lblGreen = new DetailLabel(new ImageIcon("res/images/symbols-13/G.png"), "99");
-            ViewField.this.lblGreen.setToolTipText("Green mana");
-            this.add(ViewField.this.lblGreen, constraints);
-
-            ViewField.this.lblRed = new DetailLabel(new ImageIcon("res/images/symbols-13/R.png"), "99");
-            ViewField.this.lblRed.setToolTipText("Red mana");
-            this.add(ViewField.this.lblRed, constraints);
-
-            ViewField.this.lblWhite = new DetailLabel(new ImageIcon("res/images/symbols-13/W.png"), "99");
-            ViewField.this.lblWhite.setToolTipText("White mana");
-            this.add(ViewField.this.lblWhite, constraints);
-
-            ViewField.this.lblColorless = new DetailLabel(new ImageIcon("res/images/symbols-13/X.png"), "99");
-            ViewField.this.lblColorless.setToolTipText("Colorless mana");
-            this.add(ViewField.this.lblColorless, constraints);
-        }
-    }
-
-    /**
-     * Used to show various values in "details" panel. Also increments grid bag
-     * constraints object as it goes, and zebra-stripes the labels.
-     */
     public class DetailLabel extends JLabel {
         private final Dimension labelSize = new Dimension(40, 25);
         private Color defaultBG;
@@ -643,13 +585,6 @@ public class ViewField extends FRoundedPanel {
         }
     }
 
-    private class KeywordLabel extends JLabel {
-        public KeywordLabel(final String s) {
-            super(s);
-            this.setToolTipText(s);
-        }
-    }
-
     /**
      * Shows phase labels, handles repainting and on/off states. A PhaseLabel
      * has "skip" and "active" states, meaning "this phase is (not) skipped" and
@@ -694,14 +629,6 @@ public class ViewField extends FRoundedPanel {
                 public void mouseExited(final MouseEvent e) {
                     PhaseLabel.this.hover = false;
                     PhaseLabel.this.repaint();
-                }
-            });
-
-            // Resize adapter
-            this.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    setFont(new Font("TAHOMA", Font.PLAIN, (getWidth() / 2)));
                 }
             });
         }

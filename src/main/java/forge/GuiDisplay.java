@@ -1561,17 +1561,17 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
     public final boolean loadPrefs() {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
 
-        GuiDisplay.cbAIUpkeep.setSelected(fp.isbAIUpkeep());
-        GuiDisplay.cbAIDraw.setSelected(fp.isbAIDraw());
-        GuiDisplay.cbAIEndOfTurn.setSelected(fp.isbAIEOT());
-        GuiDisplay.cbAIBeginCombat.setSelected(fp.isbAIBeginCombat());
-        GuiDisplay.cbAIEndCombat.setSelected(fp.isbAIEndCombat());
+        GuiDisplay.cbAIUpkeep.setSelected(fp.isAIPhase("phase.ai.upkeep"));
+        GuiDisplay.cbAIDraw.setSelected(fp.isAIPhase("phase.ai.draw"));
+        GuiDisplay.cbAIEndOfTurn.setSelected(fp.isAIPhase("phase.ai.eot"));
+        GuiDisplay.cbAIBeginCombat.setSelected(fp.isAIPhase("phase.ai.beginCombat"));
+        GuiDisplay.cbAIEndCombat.setSelected(fp.isAIPhase("phase.ai.endCombat"));
 
-        GuiDisplay.cbHumanUpkeep.setSelected(fp.isbHumanUpkeep());
-        GuiDisplay.cbHumanDraw.setSelected(fp.isbHumanDraw());
-        GuiDisplay.cbHumanEndOfTurn.setSelected(fp.isbHumanEOT());
-        GuiDisplay.cbHumanBeginCombat.setSelected(fp.isbHumanBeginCombat());
-        GuiDisplay.cbHumanEndCombat.setSelected(fp.isbHumanEndCombat());
+        GuiDisplay.cbHumanUpkeep.setSelected(fp.isHumanPhase("phase.human.upkeep"));
+        GuiDisplay.cbHumanDraw.setSelected(fp.isHumanPhase("phase.human.draw"));
+        GuiDisplay.cbHumanEndOfTurn.setSelected(fp.isHumanPhase("phase.human.eot"));
+        GuiDisplay.cbHumanBeginCombat.setSelected(fp.isHumanPhase("phase.human.beginCombat"));
+        GuiDisplay.cbHumanEndCombat.setSelected(fp.isHumanPhase("phase.human.endCombat"));
 
         GuiDisplay.canLoseByDecking.setSelected(fp.isMillingLossCondition());
 
@@ -1590,17 +1590,17 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         Constant.Runtime.MILL[0] = GuiDisplay.canLoseByDecking.isSelected();
         final ForgePreferences fp = Singletons.getModel().getPreferences();
 
-        fp.setbAIUpkeep(GuiDisplay.cbAIUpkeep.isSelected());
-        fp.setbAIDraw(GuiDisplay.cbAIDraw.isSelected());
-        fp.setbAIEOT(GuiDisplay.cbAIEndOfTurn.isSelected());
-        fp.setbAIBeginCombat(GuiDisplay.cbAIBeginCombat.isSelected());
-        fp.setbAIEndCombat(GuiDisplay.cbAIEndCombat.isSelected());
+        fp.setAIPhase("phase.ai.upkeep", GuiDisplay.cbAIUpkeep.isSelected());
+        fp.setAIPhase("phase.ai.draw", GuiDisplay.cbAIDraw.isSelected());
+        fp.setAIPhase("phase.ai.eot", GuiDisplay.cbAIEndOfTurn.isSelected());
+        fp.setAIPhase("phase.ai.beginCombat", GuiDisplay.cbAIBeginCombat.isSelected());
+        fp.setAIPhase("phase.ai.endCombat", GuiDisplay.cbAIEndCombat.isSelected());
 
-        fp.setbHumanUpkeep(GuiDisplay.cbHumanUpkeep.isSelected());
-        fp.setbHumanDraw(GuiDisplay.cbHumanDraw.isSelected());
-        fp.setbHumanEOT(GuiDisplay.cbHumanEndOfTurn.isSelected());
-        fp.setbHumanBeginCombat(GuiDisplay.cbHumanBeginCombat.isSelected());
-        fp.setbHumanEndCombat(GuiDisplay.cbHumanEndCombat.isSelected());
+        fp.setHumanPhase("phase.human.upkeep", GuiDisplay.cbHumanUpkeep.isSelected());
+        fp.setHumanPhase("phase.human.draw", GuiDisplay.cbHumanDraw.isSelected());
+        fp.setHumanPhase("phase.human.eot", GuiDisplay.cbHumanEndOfTurn.isSelected());
+        fp.setHumanPhase("phase.human.beginCombat", GuiDisplay.cbHumanBeginCombat.isSelected());
+        fp.setHumanPhase("phase.human.endCombat", GuiDisplay.cbHumanEndCombat.isSelected());
 
         fp.setMillingLossCondition(GuiDisplay.canLoseByDecking.isSelected());
 

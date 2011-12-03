@@ -619,18 +619,32 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         final List<ViewField> fieldViews = this.getFieldViews();
 
         // AI field is at index [0]
-        fieldViews.get(0).getLblUpkeep().setEnabled(fp.isbAIUpkeep());
-        fieldViews.get(0).getLblDraw().setEnabled(fp.isbAIDraw());
-        fieldViews.get(0).getLblEndTurn().setEnabled(fp.isbAIEOT());
-        fieldViews.get(0).getLblBeginCombat().setEnabled(fp.isbAIBeginCombat());
-        fieldViews.get(0).getLblEndCombat().setEnabled(fp.isbAIEndCombat());
+        fieldViews.get(0).getLblUpkeep().setEnabled(fp.isAIPhase("phase.ai.upkeep"));
+        fieldViews.get(0).getLblDraw().setEnabled(fp.isAIPhase("phase.ai.draw"));
+        fieldViews.get(0).getLblMain1().setEnabled(fp.isAIPhase("phase.ai.main1"));
+        fieldViews.get(0).getLblBeginCombat().setEnabled(fp.isAIPhase("phase.ai.beginCombat"));
+        fieldViews.get(0).getLblDeclareAttackers().setEnabled(fp.isAIPhase("phase.ai.declareAttackers"));
+        fieldViews.get(0).getLblDeclareBlockers().setEnabled(fp.isAIPhase("phase.ai.declareBlockers"));
+        fieldViews.get(0).getLblFirstStrike().setEnabled(fp.isAIPhase("phase.ai.firstStrike"));
+        fieldViews.get(0).getLblCombatDamage().setEnabled(fp.isAIPhase("phase.ai.combatDamage"));
+        fieldViews.get(0).getLblEndCombat().setEnabled(fp.isAIPhase("phase.ai.endCombat"));
+        fieldViews.get(0).getLblMain2().setEnabled(fp.isAIPhase("phase.ai.main2"));
+        fieldViews.get(0).getLblEndTurn().setEnabled(fp.isAIPhase("phase.ai.eot"));
+        fieldViews.get(0).getLblCleanup().setEnabled(fp.isAIPhase("phase.ai.cleanup"));
 
         // Human field is at index [1]
-        fieldViews.get(1).getLblUpkeep().setEnabled(fp.isbHumanUpkeep());
-        fieldViews.get(1).getLblDraw().setEnabled(fp.isbHumanDraw());
-        fieldViews.get(1).getLblEndTurn().setEnabled(fp.isbHumanEOT());
-        fieldViews.get(1).getLblBeginCombat().setEnabled(fp.isbHumanBeginCombat());
-        fieldViews.get(1).getLblEndCombat().setEnabled(fp.isbHumanEndCombat());
+        fieldViews.get(1).getLblUpkeep().setEnabled(fp.isHumanPhase("phase.human.upkeep"));
+        fieldViews.get(1).getLblDraw().setEnabled(fp.isHumanPhase("phase.human.draw"));
+        fieldViews.get(1).getLblMain1().setEnabled(fp.isHumanPhase("phase.human.main1"));
+        fieldViews.get(1).getLblBeginCombat().setEnabled(fp.isHumanPhase("phase.human.beginCombat"));
+        fieldViews.get(1).getLblDeclareAttackers().setEnabled(fp.isHumanPhase("phase.human.declareAttackers"));
+        fieldViews.get(1).getLblDeclareBlockers().setEnabled(fp.isHumanPhase("phase.human.declareBlockers"));
+        fieldViews.get(1).getLblFirstStrike().setEnabled(fp.isHumanPhase("phase.human.firstStrike"));
+        fieldViews.get(1).getLblCombatDamage().setEnabled(fp.isHumanPhase("phase.human.combatDamage"));
+        fieldViews.get(1).getLblEndCombat().setEnabled(fp.isHumanPhase("phase.human.endCombat"));
+        fieldViews.get(1).getLblMain2().setEnabled(fp.isHumanPhase("phase.human.main2"));
+        fieldViews.get(1).getLblEndTurn().setEnabled(fp.isHumanPhase("phase.human.eot"));
+        fieldViews.get(1).getLblCleanup().setEnabled(fp.isHumanPhase("phase.human.cleanup"));
 
         return true;
     }
@@ -653,18 +667,32 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         final List<ViewField> fieldViews = this.getFieldViews();
 
         // AI field is at index [0]
-        fp.setbAIUpkeep(fieldViews.get(0).getLblUpkeep().getEnabled());
-        fp.setbAIDraw(fieldViews.get(0).getLblDraw().getEnabled());
-        fp.setbAIEOT(fieldViews.get(0).getLblEndTurn().getEnabled());
-        fp.setbAIBeginCombat(fieldViews.get(0).getLblBeginCombat().getEnabled());
-        fp.setbAIEndCombat(fieldViews.get(0).getLblEndCombat().getEnabled());
+        fp.setAIPhase("phase.ai.upkeep", fieldViews.get(0).getLblUpkeep().getEnabled());
+        fp.setAIPhase("phase.ai.draw", fieldViews.get(0).getLblDraw().getEnabled());
+        fp.setAIPhase("phase.ai.main1", fieldViews.get(0).getLblMain1().getEnabled());
+        fp.setAIPhase("phase.ai.beginCombat", fieldViews.get(0).getLblBeginCombat().getEnabled());
+        fp.setAIPhase("phase.ai.declareAttackers", fieldViews.get(0).getLblDeclareAttackers().getEnabled());
+        fp.setAIPhase("phase.ai.declareBlockers", fieldViews.get(0).getLblDeclareBlockers().getEnabled());
+        fp.setAIPhase("phase.ai.firstStrike", fieldViews.get(0).getLblFirstStrike().getEnabled());
+        fp.setAIPhase("phase.ai.combatDamage", fieldViews.get(0).getLblCombatDamage().getEnabled());
+        fp.setAIPhase("phase.ai.endCombat", fieldViews.get(0).getLblEndCombat().getEnabled());
+        fp.setAIPhase("phase.ai.main2", fieldViews.get(0).getLblMain2().getEnabled());
+        fp.setAIPhase("phase.ai.eot", fieldViews.get(0).getLblEndTurn().getEnabled());
+        fp.setAIPhase("phase.ai.cleanup", fieldViews.get(0).getLblCleanup().getEnabled());
 
         // Human field is at index [1]
-        fp.setbHumanUpkeep(fieldViews.get(1).getLblUpkeep().getEnabled());
-        fp.setbHumanDraw(fieldViews.get(1).getLblDraw().getEnabled());
-        fp.setbHumanEOT(fieldViews.get(1).getLblEndTurn().getEnabled());
-        fp.setbHumanBeginCombat(fieldViews.get(1).getLblBeginCombat().getEnabled());
-        fp.setbHumanEndCombat(fieldViews.get(1).getLblEndCombat().getEnabled());
+        fp.setHumanPhase("phase.human.upkeep", fieldViews.get(1).getLblUpkeep().getEnabled());
+        fp.setHumanPhase("phase.human.draw", fieldViews.get(1).getLblDraw().getEnabled());
+        fp.setHumanPhase("phase.human.main1", fieldViews.get(1).getLblMain1().getEnabled());
+        fp.setHumanPhase("phase.human.beginCombat", fieldViews.get(1).getLblBeginCombat().getEnabled());
+        fp.setHumanPhase("phase.human.declareAttackers", fieldViews.get(1).getLblDeclareAttackers().getEnabled());
+        fp.setHumanPhase("phase.human.declareBlockers", fieldViews.get(1).getLblDeclareBlockers().getEnabled());
+        fp.setHumanPhase("phase.human.firstStrike", fieldViews.get(1).getLblFirstStrike().getEnabled());
+        fp.setHumanPhase("phase.human.combatDamage", fieldViews.get(1).getLblCombatDamage().getEnabled());
+        fp.setHumanPhase("phase.human.endCombat", fieldViews.get(1).getLblEndCombat().getEnabled());
+        fp.setHumanPhase("phase.human.main2", fieldViews.get(1).getLblMain2().getEnabled());
+        fp.setHumanPhase("phase.human.eot", fieldViews.get(1).getLblEndTurn().getEnabled());
+        fp.setHumanPhase("phase.human.cleanup", fieldViews.get(1).getLblCleanup().getEnabled());
 
         Constant.Runtime.MILL[0] = this.getTabberController().getView().getLblMilling().getEnabled();
         Constant.Runtime.HANDVIEW[0] = this.getTabberController().getView().getLblHandView().getEnabled();
@@ -695,30 +723,58 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
         // AI field is at index [0]
         if (turn.isComputer()) {
-            if (phase.equals(Constant.Phase.END_OF_TURN)) {
-                return fieldControllers.get(0).getView().getLblEndTurn().getEnabled();
-            } else if (phase.equals(Constant.Phase.UPKEEP)) {
+            if (phase.equals(Constant.Phase.UPKEEP)) {
                 return fieldControllers.get(0).getView().getLblUpkeep().getEnabled();
             } else if (phase.equals(Constant.Phase.DRAW)) {
                 return fieldControllers.get(0).getView().getLblDraw().getEnabled();
+            } else if (phase.equals(Constant.Phase.MAIN1)) {
+                return fieldControllers.get(0).getView().getLblMain1().getEnabled();
             } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
                 return fieldControllers.get(0).getView().getLblBeginCombat().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                return fieldControllers.get(0).getView().getLblDeclareAttackers().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                return fieldControllers.get(0).getView().getLblDeclareBlockers().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+                return fieldControllers.get(0).getView().getLblFirstStrike().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
+                return fieldControllers.get(0).getView().getLblCombatDamage().getEnabled();
             } else if (phase.equals(Constant.Phase.COMBAT_END)) {
                 return fieldControllers.get(0).getView().getLblEndCombat().getEnabled();
+            } else if (phase.equals(Constant.Phase.MAIN2)) {
+                return fieldControllers.get(0).getView().getLblMain2().getEnabled();
+            } else if (phase.equals(Constant.Phase.END_OF_TURN)) {
+                return fieldControllers.get(0).getView().getLblEndTurn().getEnabled();
+            } else if (phase.equals(Constant.Phase.DRAW)) {
+                return fieldControllers.get(0).getView().getLblDraw().getEnabled();
             }
         }
         // Human field is at index [1]
         else {
-            if (phase.equals(Constant.Phase.END_OF_TURN)) {
-                return fieldControllers.get(1).getView().getLblEndTurn().getEnabled();
-            } else if (phase.equals(Constant.Phase.UPKEEP)) {
+            if (phase.equals(Constant.Phase.UPKEEP)) {
                 return fieldControllers.get(1).getView().getLblUpkeep().getEnabled();
             } else if (phase.equals(Constant.Phase.DRAW)) {
                 return fieldControllers.get(1).getView().getLblDraw().getEnabled();
+            } else if (phase.equals(Constant.Phase.MAIN1)) {
+                return fieldControllers.get(1).getView().getLblMain1().getEnabled();
             } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
                 return fieldControllers.get(1).getView().getLblBeginCombat().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                return fieldControllers.get(1).getView().getLblDeclareAttackers().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                return fieldControllers.get(1).getView().getLblDeclareBlockers().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+                return fieldControllers.get(1).getView().getLblFirstStrike().getEnabled();
+            } else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
+                return fieldControllers.get(1).getView().getLblCombatDamage().getEnabled();
             } else if (phase.equals(Constant.Phase.COMBAT_END)) {
                 return fieldControllers.get(1).getView().getLblEndCombat().getEnabled();
+            } else if (phase.equals(Constant.Phase.MAIN2)) {
+                return fieldControllers.get(1).getView().getLblMain2().getEnabled();
+            } else if (phase.equals(Constant.Phase.END_OF_TURN)) {
+                return fieldControllers.get(1).getView().getLblEndTurn().getEnabled();
+            } else if (phase.equals(Constant.Phase.DRAW)) {
+                return fieldControllers.get(1).getView().getLblDraw().getEnabled();
             }
         }
         return true;

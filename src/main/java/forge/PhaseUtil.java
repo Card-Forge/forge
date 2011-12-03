@@ -678,12 +678,26 @@ public class PhaseUtil {
             lbl = t.getFieldControllers().get(i).getView().getLblUpkeep();
         } else if (s.equals(Constant.Phase.DRAW)) {
             lbl = t.getFieldControllers().get(i).getView().getLblDraw();
+        } else if (s.equals(Constant.Phase.MAIN1)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblMain1();
         } else if (s.equals(Constant.Phase.COMBAT_BEGIN)) {
             lbl = t.getFieldControllers().get(i).getView().getLblBeginCombat();
+        } else if (s.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblDeclareAttackers();
+        } else if (s.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblDeclareBlockers();
+        } else if (s.equals(Constant.Phase.COMBAT_DAMAGE)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblCombatDamage();
+        } else if (s.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblFirstStrike();
         } else if (s.equals(Constant.Phase.COMBAT_END)) {
             lbl = t.getFieldControllers().get(i).getView().getLblEndCombat();
+        } else if (s.equals(Constant.Phase.MAIN2)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblMain2();
         } else if (s.equals(Constant.Phase.END_OF_TURN)) {
             lbl = t.getFieldControllers().get(i).getView().getLblEndTurn();
+        } else if (s.equals(Constant.Phase.CLEANUP)) {
+            lbl = t.getFieldControllers().get(i).getView().getLblCleanup();
         } else {
             return;
         }

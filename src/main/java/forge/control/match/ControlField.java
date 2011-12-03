@@ -214,7 +214,7 @@ public class ControlField {
         });
 
         // Player select
-        this.view.getLblLife().addMouseListener(new MouseAdapter() {
+        this.view.getAvatarArea().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
@@ -260,7 +260,7 @@ public class ControlField {
                 }
             }
         });
-        
+
         // Library card list button
         if (Constant.Runtime.DEV_MODE[0]) {
             this.view.getLblLibrary().enableHover();
@@ -289,7 +289,7 @@ public class ControlField {
                 }
             });
         }
-        
+
         // Flashback card list button
         this.view.getLblFlashback().enableHover();
         this.view.getLblFlashback().addMouseListener(new MouseAdapter() {
@@ -315,7 +315,7 @@ public class ControlField {
                 }
             }
         });
-        
+
         // Hand button
         if (Constant.Runtime.DEV_MODE[0]) {
             this.view.getLblHand().enableHover();
@@ -323,7 +323,6 @@ public class ControlField {
             this.view.getLblHand().addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(final MouseEvent e) {
-                    
                     if (!ControlField.this.player.isComputer()) {
                         new ZoneAction(ControlField.this.player.getZone(Zone.Hand), HumanHand.BASE)
                         .actionPerformed(null);
@@ -343,9 +342,16 @@ public class ControlField {
     public void resetPhaseButtons() {
         this.view.getLblUpkeep().setActive(false);
         this.view.getLblDraw().setActive(false);
+        this.view.getLblMain1().setActive(false);
         this.view.getLblBeginCombat().setActive(false);
+        this.view.getLblDeclareAttackers().setActive(false);
+        this.view.getLblDeclareBlockers().setActive(false);
+        this.view.getLblFirstStrike().setActive(false);
+        this.view.getLblCombatDamage().setActive(false);
         this.view.getLblEndCombat().setActive(false);
+        this.view.getLblMain2().setActive(false);
         this.view.getLblEndTurn().setActive(false);
+        this.view.getLblCleanup().setActive(false);
     }
 
     /**

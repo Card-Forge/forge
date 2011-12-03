@@ -23,7 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -98,36 +100,8 @@ public class ForgePreferences extends Preferences {
     /** The Bugz pwd. */
     private String bugzPwd;
 
-    // Phases
-    /** The b ai upkeep. */
-    private boolean bAIUpkeep;
-
-    /** The b ai draw. */
-    private boolean bAIDraw;
-
-    /** The b aieot. */
-    private boolean bAIEOT;
-
-    /** The b ai begin combat. */
-    private boolean bAIBeginCombat;
-
-    /** The b ai end combat. */
-    private boolean bAIEndCombat;
-
-    /** The b human upkeep. */
-    private boolean bHumanUpkeep;
-
-    /** The b human draw. */
-    private boolean bHumanDraw;
-
-    /** The b human eot. */
-    private boolean bHumanEOT;
-
-    /** The b human begin combat. */
-    private boolean bHumanBeginCombat;
-
-    /** The b human end combat. */
-    private boolean bHumanEndCombat;
+    private Map<String, boolean[]> aiPhases = new HashMap<String, boolean[]>();
+    private Map<String, boolean[]> humanPhases = new HashMap<String, boolean[]>();
 
     // Keyboard shortcuts
     private String showStackShortcut;
@@ -197,17 +171,32 @@ public class ForgePreferences extends Preferences {
         this.setBugzName(this.get("bugz.user.name", ""));
         this.setBugzPwd(this.get("bugz.user.pwd", ""));
 
-        // Stop at Phases
-        this.setbAIUpkeep(this.getBoolean("phase.ai.upkeep", true));
-        this.setbAIDraw(this.getBoolean("phase.ai.draw", true));
-        this.setbAIEOT(this.getBoolean("phase.ai.eot", true));
-        this.setbAIBeginCombat(this.getBoolean("phase.ai.beginCombat", true));
-        this.setbAIEndCombat(this.getBoolean("phase.ai.endCombat", true));
-        this.setbHumanUpkeep(this.getBoolean("phase.human.upkeep", true));
-        this.setbHumanDraw(this.getBoolean("phase.human.draw", true));
-        this.setbHumanEOT(this.getBoolean("phase.human.eot", true));
-        this.setbHumanBeginCombat(this.getBoolean("phase.human.beginCombat", true));
-        this.setbHumanEndCombat(this.getBoolean("phase.human.endCombat", true));
+        // Default values for phase stop
+        this.setAIPhase("phase.ai.upkeep", this.getBoolean("phase.ai.upkeep", true));
+        this.setAIPhase("phase.ai.draw", this.getBoolean("phase.ai.draw", true));
+        this.setAIPhase("phase.ai.main1", this.getBoolean("phase.ai.main1", true));
+        this.setAIPhase("phase.ai.beginCombat", this.getBoolean("phase.ai.beginCombat", true));
+        this.setAIPhase("phase.ai.declareAttackers", this.getBoolean("phase.ai.declareAttackers", true));
+        this.setAIPhase("phase.ai.declareBlockers", this.getBoolean("phase.ai.declareBlockers", true));
+        this.setAIPhase("phase.ai.firstStrike", this.getBoolean("phase.ai.firstStrike", true));
+        this.setAIPhase("phase.ai.combatDamage", this.getBoolean("phase.ai.combatDamage", true));
+        this.setAIPhase("phase.ai.endCombat", this.getBoolean("phase.ai.endCombat", true));
+        this.setAIPhase("phase.ai.main2", this.getBoolean("phase.ai.main2", true));
+        this.setAIPhase("phase.ai.eot", this.getBoolean("phase.ai.eot", true));
+        this.setAIPhase("phase.ai.cleanup", this.getBoolean("phase.ai.cleanup", true));
+
+        this.setHumanPhase("phase.human.upkeep", this.getBoolean("phase.human.upkeep", true));
+        this.setHumanPhase("phase.human.draw", this.getBoolean("phase.human.draw", true));
+        this.setHumanPhase("phase.human.main1", this.getBoolean("phase.human.main1", true));
+        this.setHumanPhase("phase.human.beginCombat", this.getBoolean("phase.human.beginCombat", true));
+        this.setHumanPhase("phase.human.declareAttackers", this.getBoolean("phase.human.declareAttackers", true));
+        this.setHumanPhase("phase.human.declareBlockers", this.getBoolean("phase.human.declareBlockers", true));
+        this.setHumanPhase("phase.human.firstStrike", this.getBoolean("phase.human.firstStrike", true));
+        this.setHumanPhase("phase.human.combatDamage", this.getBoolean("phase.human.combatDamage", true));
+        this.setHumanPhase("phase.human.endCombat", this.getBoolean("phase.human.endCombat", true));
+        this.setHumanPhase("phase.human.main2", this.getBoolean("phase.human.main2", true));
+        this.setHumanPhase("phase.human.eot", this.getBoolean("phase.human.eot", true));
+        this.setHumanPhase("phase.human.cleanup", this.getBoolean("phase.human.cleanup", true));
 
         // Keyboard shortcuts
         this.setShowStackShortcut(this.get("shortcut.showstack", "83"));
@@ -229,7 +218,6 @@ public class ForgePreferences extends Preferences {
      *             the exception
      */
     public final void save() throws Exception {
-
         this.set("gui.old", this.oldGui);
 
         this.set("AI.stack.land", this.isStackAiLand());
@@ -261,16 +249,31 @@ public class ForgePreferences extends Preferences {
         this.set("bugz.user.name", this.getBugzName());
         this.set("bugz.user.pwd", this.getBugzPwd());
 
-        this.set("phase.ai.upkeep", this.isbAIUpkeep());
-        this.set("phase.ai.draw", this.isbAIDraw());
-        this.set("phase.ai.eot", this.isbAIEOT());
-        this.set("phase.ai.beginCombat", this.isbAIBeginCombat());
-        this.set("phase.ai.endCombat", this.isbAIEndCombat());
-        this.set("phase.human.upkeep", this.isbHumanUpkeep());
-        this.set("phase.human.draw", this.isbHumanDraw());
-        this.set("phase.human.eot", this.isbHumanEOT());
-        this.set("phase.human.beginCombat", this.isbHumanBeginCombat());
-        this.set("phase.human.endCombat", this.isbHumanEndCombat());
+        this.set("phase.ai.upkeep", isAIPhase("phase.ai.upkeep"));
+        this.set("phase.ai.draw", isAIPhase("phase.ai.draw"));
+        this.set("phase.ai.main1", isAIPhase("phase.ai.main1"));
+        this.set("phase.ai.beginCombat", isAIPhase("phase.ai.beginCombat"));
+        this.set("phase.ai.declareAttackers", isAIPhase("phase.ai.declareAttackers"));
+        this.set("phase.ai.declareBlockers", isAIPhase("phase.ai.declareBlockers"));
+        this.set("phase.ai.firstStrike", isAIPhase("phase.ai.firstStrike"));
+        this.set("phase.ai.combatDamage", isAIPhase("phase.ai.combatDamage"));
+        this.set("phase.ai.endCombat", isAIPhase("phase.ai.endCombat"));
+        this.set("phase.ai.main2", isAIPhase("phase.ai.main2"));
+        this.set("phase.ai.eot", isAIPhase("phase.ai.eot"));
+        this.set("phase.ai.cleanup", isAIPhase("phase.ai.cleanup"));
+
+        this.set("phase.human.upkeep", isHumanPhase("phase.human.upkeep"));
+        this.set("phase.human.draw", isHumanPhase("phase.human.draw"));
+        this.set("phase.human.main1", isHumanPhase("phase.human.main1"));
+        this.set("phase.human.beginCombat", isHumanPhase("phase.human.beginCombat"));
+        this.set("phase.human.declareAttackers", isHumanPhase("phase.human.declareAttackers"));
+        this.set("phase.human.declareBlockers", isHumanPhase("phase.human.declareBlockers"));
+        this.set("phase.human.firstStrike", isHumanPhase("phase.human.firstStrike"));
+        this.set("phase.human.combatDamage", isHumanPhase("phase.human.combatDamage"));
+        this.set("phase.human.endCombat", isHumanPhase("phase.human.endCombat"));
+        this.set("phase.human.main2", isHumanPhase("phase.human.main2"));
+        this.set("phase.human.eot", isHumanPhase("phase.human.eot"));
+        this.set("phase.human.cleanup", isHumanPhase("phase.human.cleanup"));
 
         // Keyboard shortcuts
         this.set("shortcut.showstack", this.getShowStackShortcut());
@@ -398,216 +401,14 @@ public class ForgePreferences extends Preferences {
         this.libraryView = b0;
     }
 
-    /**
-     * Checks if is b ai begin combat.
-     * 
-     * @return the bAIBeginCombat
-     */
-    public boolean isbAIBeginCombat() {
-        return this.bAIBeginCombat;
+    /** @param b0 &emsp; boolean, update AI draft picks */
+    public void setUploadDraftAI(final boolean b0) {
+        this.uploadDraftAI = b0;
     }
 
-    /**
-     * Sets the b ai begin combat.
-     * 
-     * @param bAIBeginCombat
-     *            the bAIBeginCombat to set
-     */
-    public void setbAIBeginCombat(final boolean bAIBeginCombat) {
-        this.bAIBeginCombat = bAIBeginCombat; // TODO: Add 0 to parameter's
-                                              // name.
-    }
-
-    /**
-     * Checks if is b ai end combat.
-     * 
-     * @return the bAIEndCombat
-     */
-    public boolean isbAIEndCombat() {
-        return this.bAIEndCombat;
-    }
-
-    /**
-     * Sets the b ai end combat.
-     * 
-     * @param bAIEndCombat
-     *            the bAIEndCombat to set
-     */
-    public void setbAIEndCombat(final boolean bAIEndCombat) {
-        this.bAIEndCombat = bAIEndCombat; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is b ai upkeep.
-     * 
-     * @return the bAIUpkeep
-     */
-    public boolean isbAIUpkeep() {
-        return this.bAIUpkeep;
-    }
-
-    /**
-     * Sets the b ai upkeep.
-     * 
-     * @param bAIUpkeep
-     *            the bAIUpkeep to set
-     */
-    public void setbAIUpkeep(final boolean bAIUpkeep) {
-        this.bAIUpkeep = bAIUpkeep; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is b ai draw.
-     * 
-     * @return the bAIDraw
-     */
-    public boolean isbAIDraw() {
-        return this.bAIDraw;
-    }
-
-    /**
-     * Sets the b ai draw.
-     * 
-     * @param bAIDraw
-     *            the bAIDraw to set
-     */
-    public void setbAIDraw(final boolean bAIDraw) {
-        this.bAIDraw = bAIDraw; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is b aieot.
-     * 
-     * @return the bAIEOT
-     */
-    public boolean isbAIEOT() {
-        return this.bAIEOT;
-    }
-
-    /**
-     * Sets the b aieot.
-     * 
-     * @param bAIEOT
-     *            the bAIEOT to set
-     */
-    public void setbAIEOT(final boolean bAIEOT) {
-        this.bAIEOT = bAIEOT; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is b human begin combat.
-     * 
-     * @return the bHumanBeginCombat
-     */
-    public boolean isbHumanBeginCombat() {
-        return this.bHumanBeginCombat;
-    }
-
-    /**
-     * Sets the b human begin combat.
-     * 
-     * @param bHumanBeginCombat
-     *            the bHumanBeginCombat to set
-     */
-    public void setbHumanBeginCombat(final boolean bHumanBeginCombat) {
-        this.bHumanBeginCombat = bHumanBeginCombat; // TODO: Add 0 to
-                                                    // parameter's name.
-    }
-
-    /**
-     * Checks if is b human draw.
-     * 
-     * @return the bHumanDraw
-     */
-    public boolean isbHumanDraw() {
-        return this.bHumanDraw;
-    }
-
-    /**
-     * Sets the b human draw.
-     * 
-     * @param bHumanDraw
-     *            the bHumanDraw to set
-     */
-    public void setbHumanDraw(final boolean bHumanDraw) {
-        this.bHumanDraw = bHumanDraw; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is upload draft ai.
-     * 
-     * @return the uploadDraftAI
-     */
+    /** @return boolean */
     public boolean isUploadDraftAI() {
         return this.uploadDraftAI;
-    }
-
-    /**
-     * Sets the upload draft ai.
-     * 
-     * @param uploadDraftAI
-     *            the uploadDraftAI to set
-     */
-    public void setUploadDraftAI(final boolean uploadDraftAI) {
-        this.uploadDraftAI = uploadDraftAI; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is b human end combat.
-     * 
-     * @return the bHumanEndCombat
-     */
-    public boolean isbHumanEndCombat() {
-        return this.bHumanEndCombat;
-    }
-
-    /**
-     * Sets the b human end combat.
-     * 
-     * @param bHumanEndCombat
-     *            the bHumanEndCombat to set
-     */
-    public void setbHumanEndCombat(final boolean bHumanEndCombat) {
-        this.bHumanEndCombat = bHumanEndCombat; // TODO: Add 0 to parameter's
-                                                // name.
-    }
-
-    /**
-     * Checks if is b human eot.
-     * 
-     * @return the bHumanEOT
-     */
-    public boolean isbHumanEOT() {
-        return this.bHumanEOT;
-    }
-
-    /**
-     * Sets the b human eot.
-     * 
-     * @param bHumanEOT
-     *            the bHumanEOT to set
-     */
-    public void setbHumanEOT(final boolean bHumanEOT) {
-        this.bHumanEOT = bHumanEOT; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is b human upkeep.
-     * 
-     * @return the bHumanUpkeep
-     */
-    public boolean isbHumanUpkeep() {
-        return this.bHumanUpkeep;
-    }
-
-    /**
-     * Sets the b human upkeep.
-     * 
-     * @param bHumanUpkeep
-     *            the bHumanUpkeep to set
-     */
-    public void setbHumanUpkeep(final boolean bHumanUpkeep) {
-        this.bHumanUpkeep = bHumanUpkeep; // TODO: Add 0 to parameter's name.
     }
 
     /**
@@ -1101,5 +902,38 @@ public class ForgePreferences extends Preferences {
      */
     public void setShowDetailShortcut(final String keycodes) {
         this.showDetailShortcut = keycodes;
+    }
+
+    //========== Phase setter/getter
+    /**
+     * @param s0 &emsp; String index of phase in aiPhase map.
+     * @param b0 &emsp; boolean, stop at index or not
+     */
+    public void setAIPhase(String s0, boolean b0) {
+        aiPhases.put(s0, new boolean[] {b0});
+    }
+
+    /**
+     * @param s0 &emsp; String index of phase in aiPhase map.
+     * @return boolean
+     */
+    public boolean isAIPhase(String s0) {
+        return aiPhases.get(s0)[0];
+    }
+
+    /**
+     * @param s0 &emsp; String index of phase in humanPhase map.
+     * @param b0 &emsp; boolean, stop at index or not
+     */
+    public void setHumanPhase(String s0, boolean b0) {
+        humanPhases.put(s0, new boolean[] {b0});
+    }
+
+    /**
+     * @param s0 &emsp; String index of phase in humanPhase map.
+     * @return boolean
+     */
+    public boolean isHumanPhase(String s0) {
+        return humanPhases.get(s0)[0];
     }
 }
