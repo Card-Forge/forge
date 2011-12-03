@@ -1,0 +1,13 @@
+Name:Witchbane Orb
+ManaCost:4
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all Curses attached to you.
+SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Curse.AttachedTo You
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/witchbane_orb.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/236.jpg
+Oracle:When Witchbane Orb enters the battlefield, destroy all Curses attached to you.\nYou have hexproof. (You can't be the target of spells or abilities your opponents control, including Aura spells.)
+End
