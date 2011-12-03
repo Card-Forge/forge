@@ -78,7 +78,7 @@ public class ViewTabber extends FRoundedPanel {
 
         // Assemble card pic viewer
         this.panelList = new ArrayList<JPanel>();
-        final String constraints = "wrap, insets 0, gap 0";
+        final String constraints = "wrap, insets 0 3% 0 0, gap 0";
 
         this.pnlStack = new FPanel();
         this.pnlStack.setName("Stack");
@@ -127,7 +127,7 @@ public class ViewTabber extends FRoundedPanel {
         this.setBackground(AllZone.getSkin().getClrTheme());
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
-        this.add(vtpTabber, "w 100%!, h 100%!");
+        this.add(vtpTabber, "w 97%!, h 100%!");
 
         // After all components are in place, instantiate controller.
         this.control = new ControlTabber(this);
@@ -164,21 +164,22 @@ public class ViewTabber extends FRoundedPanel {
         final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
 
         for (int i = stack.size() - 1; 0 <= i; i--) {
+            final SpellAbilityStackInstance spell = stack.peekInstance(i);
+
             isOptional = stack.peekAbility(i).isOptionalTrigger()
                     && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
-            txt = (count++) + ". " + isOptional + stack.peekInstance(i).getStackDescription();
+            txt = (count++) + ". " + isOptional + spell.getStackDescription();
             tar = new JTextArea(txt);
             tar.setToolTipText(txt);
             tar.setOpaque(false);
             tar.setBorder(border);
             tar.setFont(font);
             tar.setForeground(this.skin.getClrText());
+
             tar.setFocusable(false);
             tar.setEditable(false);
             tar.setLineWrap(true);
             tar.setWrapStyleWord(true);
-
-            final SpellAbilityStackInstance spell = stack.peekInstance(i);
 
             tar.addMouseListener(new MouseAdapter() {
                 @Override
@@ -189,6 +190,10 @@ public class ViewTabber extends FRoundedPanel {
             });
 
             this.pnlStack.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
+
+            if (i == 0) {
+                AllZone.getDisplay().setCard(spell.getSourceCard());
+            }
         }
 
         t.getInputController().getView().getBtnOK().requestFocusInWindow();
