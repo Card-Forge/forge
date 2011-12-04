@@ -1890,44 +1890,6 @@ public final class GameActionUtil {
         }
     };
 
-    /** Constant <code>Muraganda_Petroglyphs</code>. */
-    private static Command muragandaPetroglyphs = new Command() {
-        private static final long serialVersionUID = -6715848091817213517L;
-        private final CardList gloriousAnthemList = new CardList();
-
-        @Override
-        public void execute() {
-            final CardList list = this.gloriousAnthemList;
-            Card c;
-            // reset all cards in list - aka "old" cards
-            for (int i = 0; i < list.size(); i++) {
-                c = list.get(i);
-                c.addSemiPermanentAttackBoost(-2);
-                c.addSemiPermanentDefenseBoost(-2);
-            }
-
-            // add +2/+2 to vanilla cards
-            list.clear();
-            final PlayerZone[] zone = GameActionUtil.getZone("Muraganda Petroglyphs");
-
-            // for each zone found add +2/+2 to each vanilla card
-            for (final PlayerZone element : zone) {
-                final CardList creature = AllZoneUtil.getCreaturesInPlay();
-
-                for (int i = 0; i < creature.size(); i++) {
-                    c = creature.get(i);
-                    if (((c.getAbilityText().trim().equals("") || c.isFaceDown()) && (c.getUnhiddenKeyword().size() == 0))) {
-                        c.addSemiPermanentAttackBoost(2);
-                        c.addSemiPermanentDefenseBoost(2);
-
-                        this.gloriousAnthemList.add(c);
-                    }
-
-                } // for inner
-            } // for outer
-        } // execute()
-    }; // Muraganda_Petroglyphs
-
     /**
      * <p>
      * getZone. Returns all PlayerZones that has at least 1 Glorious Anthem if
@@ -1968,8 +1930,6 @@ public final class GameActionUtil {
         GameActionUtil.getCommands().put("Homarid", GameActionUtil.homarid);
 
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
-        GameActionUtil.getCommands().put("Muraganda_Petroglyphs", GameActionUtil.muragandaPetroglyphs);
-
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
         GameActionUtil.getCommands().put("Sound_the_Call_Wolf", GameActionUtil.soundTheCallWolf);
         GameActionUtil.getCommands().put("Tarmogoyf", GameActionUtil.tarmogoyf);

@@ -230,18 +230,13 @@ public class StaticEffects {
         // associated with them
 
         StaticEffects.cardToEffectsList.put("Avatar", new String[] { "Ajani_Avatar_Token" });
-
         StaticEffects.cardToEffectsList.put("Alpha Status", new String[] { "Alpha_Status" });
         StaticEffects.cardToEffectsList.put("Coat of Arms", new String[] { "Coat_of_Arms" });
-
         StaticEffects.cardToEffectsList.put("Homarid", new String[] { "Homarid" });
         StaticEffects.cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] { "Liu_Bei" });
 
-        StaticEffects.cardToEffectsList.put("Muraganda Petroglyphs", new String[] { "Muraganda_Petroglyphs" });
         StaticEffects.cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });
-
         StaticEffects.cardToEffectsList.put("Tarmogoyf", new String[] { "Tarmogoyf" });
-
         StaticEffects.cardToEffectsList.put("Umbra Stalker", new String[] { "Umbra_Stalker" });
         StaticEffects.cardToEffectsList.put("Wolf", new String[] { "Sound_the_Call_Wolf" });
 
