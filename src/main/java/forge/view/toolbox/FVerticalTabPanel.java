@@ -53,9 +53,12 @@ public class FVerticalTabPanel extends FPanel {
 
     private boolean tabsOnRightSide;
 
-    /** Constructor, will automatically place tabs on left side.
+    /**
+     * Constructor, will automatically place tabs on left side.
      * 
-     *  @param childPanels &emsp; JPanels to be placed in tabber
+     * @param childPanels
+     *            &emsp; JPanels to be placed in tabber
+     * @wbp.parser.constructor
      */
     public FVerticalTabPanel(final List<JPanel> childPanels) {
         this(childPanels, false);
@@ -68,7 +71,9 @@ public class FVerticalTabPanel extends FPanel {
      * 
      * @param childPanels
      *            &emsp; JPanels to be placed in tabber
-     * @param b &emsp; boolean, true if tabs are on right side, false for left side.
+     * @param b
+     *            &emsp; boolean, true if tabs are on right side, false for left
+     *            side.
      */
     public FVerticalTabPanel(final List<JPanel> childPanels, boolean b) {
         // General inits and skin settings
@@ -178,11 +183,13 @@ public class FVerticalTabPanel extends FPanel {
         private int id;
 
         // ID is used to retrieve this tab from the list of allVTabs.
-        /** 
+        /**
          * Creates the actual clickable tab.
          * 
-         * @param txt &emsp; String text in tab
-         * @param i &emsp; int index
+         * @param txt
+         *            &emsp; String text in tab
+         * @param i
+         *            &emsp; int index
          */
         VTab(final String txt, final int i) {
             super();
@@ -240,8 +247,7 @@ public class FVerticalTabPanel extends FPanel {
                 g2d.setTransform(at);
                 g2d.setColor(AllZone.getSkin().getClrText());
                 g2d.drawString(this.msg, 5, -4);
-            }
-            else {
+            } else {
                 at.rotate(Math.toRadians(-90), 0, 0);
                 g2d.setTransform(at);
                 g2d.setColor(AllZone.getSkin().getClrText());
@@ -250,15 +256,17 @@ public class FVerticalTabPanel extends FPanel {
 
             if (tabsOnRightSide) {
                 at.rotate(Math.toRadians(-90), 0, 0);
-            }
-            else {
+            } else {
                 at.rotate(Math.toRadians(90), 0, 0);
             }
 
             g2d.setTransform(at);
         }
 
-        /** @param txt0 &emsp; String */
+        /**
+         * @param txt0
+         *            &emsp; String
+         */
         public void setText(String txt0) {
             this.msg = txt0;
         }

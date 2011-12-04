@@ -76,6 +76,8 @@ public class QuestBazaarStall extends JPanel {
      * Constructor for QuestBazaarStall.
      * </p>
      * 
+     * @wbp.parser.constructor
+     * 
      * @param name
      *            a {@link java.lang.String} object.
      * @param stallName
