@@ -155,7 +155,7 @@ Fixes/Features:
 * added 7 more phase indicators
 * enabled player avatar click to select
 * resized pool, pic, and phase indicator areas.
--Flashback enabled for human and computer in new UI.
+- Flashback enabled for human and computer in new UI.
 - Also, an experimental "reminder" for input area included.
 - The AI can now cast permanents with X in their mana cost.
 - Fixed Venarian Gold.
@@ -164,6 +164,27 @@ Fixes/Features:
 - Fixed Natural Emergence.
 - Added a description for the abilities of Duct Crawler and friends.
 - Little fix for the display of player keywords.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Little fix for Cellar Door.
+- Fixed several occasions where all copies of an extrinsic keyword have to be removed (and not only one).
+- Enabled layout size saves.
+- A few aesthetic modifications.
+- Added "smith" skin.
+- Minor fix to skin resources.
+- Java warning cleanup in CardFactoryCreatures
+- Add javadoc params so classes will be parsed correctly by WindowsBuilder Gui tool
+- Add a Game Log (and tie into New GUI). It currently has the ability to log turns, phases, add to stack, resolve from stack, play land, activate mana ability. However, only stack info and turns will show up in the log by default. (There is a logging level that can eventually be used for customization.)
+- center the card pic horizontally within the card picture panel, and make sure it doesn't hang over the edge. This same thing need to be done for vertically, but I couldn't see how to do that.
+- Small changes to make it compatible with WindowBuilder
+- WindowsBuilder changes
+- Fixed input control bug in old UI.
+- Fixed splash frame font bug.
+- Returned "set trigger" functionality.
+- Added colors and internal padding to stack spells.
+- Tiny fix to stack text areas.
+- Fixed flashback bug.
+- Keyworded the abilities of Caverns of Despair, Crawlspace and Silent Arbiter.
+- Little fix for Melira, Sylvok Outcast.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
@@ -213,6 +234,8 @@ Defiant Stand
 Life Matrix
 Civilized Scholar / Homicidal Brute
 Kongming's Contraptions
+Witchbane Orb
+Cellar Door
 
 
 end
