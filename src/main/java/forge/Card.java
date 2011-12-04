@@ -2320,6 +2320,41 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", this.getName()));
         }
+        
+        // Remembered cards
+        if (this.rememberedObjects.size() > 0) {
+            sb.append("\r\nRemembered: \r\n");
+            for (final Object o : this.rememberedObjects) {
+                if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    if (c.isFaceDown()) {
+                        sb.append("Face Down ");
+                    } else {
+                        sb.append(c.getName());
+                    }
+                    sb.append("(");
+                    sb.append(c.getUniqueNumber());
+                    sb.append(")");
+                } else {
+                    sb.append(o.toString());
+                }
+                sb.append("\r\n");
+            }
+        }
+
+        if (this.hauntedBy.size() != 0) {
+            sb.append("Haunted by: ");
+            for (final Card c : this.hauntedBy) {
+                sb.append(c).append(",");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            sb.append("\r\n");
+        }
+
+        if (this.haunting != null) {
+            sb.append("Haunting: ").append(this.haunting);
+            sb.append("\r\n");
+        }
 
         if (this.characteristicsMap.get("Cloner") != null) {
             sb.append("\r\nCloned by:").append(this.characteristicsMap.get("Cloner").getName()).append(" (")
@@ -2513,12 +2548,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         sb.append(this.text.replaceAll("\\\\r\\\\n", "\r\n"));
         sb.append("\r\n");
 
-        /*
-         * if(isAura()) { // Give spellText line breaks for easier reading
-         * sb.append(getSpellText().replaceAll("\\\\r\\\\n",
-         * "\r\n")).append("\r\n"); }
-         */
-
         // Triggered abilities
         for (final Trigger trig : this.getCharacteristics().getTriggers()) {
             if (!trig.isSecondary()) {
@@ -2561,13 +2590,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (!sAbility.endsWith(this.getName())) {
                 sb.append(sAbility);
                 sb.append("\r\n");
-                // The test above appears to prevent the card name from showing
-                // and therefore
-                // it no longer needs to be deleted from the stringbuilder
-                // if (sb.toString().endsWith("CARDNAME"))
-                // sb.replace(sb.toString().lastIndexOf("CARDNAME"),
-                // sb.toString().lastIndexOf("CARDNAME") + name.length() - 1,
-                // "");
             }
         }
 
@@ -2590,46 +2612,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.replace(start, start + 4, "\r\n");
         }
 
-        // Remembered cards
-        if (this.rememberedObjects.size() > 0) {
-            sb.append("\r\nRemembered: \r\n");
-            for (final Object o : this.rememberedObjects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
-                    if (c.isFaceDown()) {
-                        sb.append("Face Down ");
-                    } else {
-                        sb.append(c.getName());
-                    }
-                    sb.append("(");
-                    sb.append(c.getUniqueNumber());
-                    sb.append(")");
-                } else {
-                    sb.append(o.toString());
-                }
-                sb.append("\r\n");
-            }
-        }
-
-        if (this.hauntedBy.size() != 0) {
-            sb.append("Haunted by: ");
-            for (final Card c : this.hauntedBy) {
-                sb.append(c).append(",");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.append("\r\n");
-        }
-
-        if (this.haunting != null) {
-            sb.append("Haunting: ").append(this.haunting);
-            sb.append("\r\n");
-        }
-
-        /*
-         * sb.append("\r\nOwner: ").append(owner).append("\r\n");
-         * sb.append("Controller(s):"); for(Object o : controllerObjects) {
-         * sb.append(o); } sb.append("\r\n");
-         */
         return sb.toString().replaceAll("CARDNAME", this.getName()).trim();
     } // getText()
 
