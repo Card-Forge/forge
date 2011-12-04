@@ -1450,6 +1450,7 @@ public final class AbilityFactoryChoose {
                         });
                         if (!list.isEmpty()) {
                             host.setNamedCard(list.get(0).getName());
+                            ok = true;
                         }
                     }
                 }
