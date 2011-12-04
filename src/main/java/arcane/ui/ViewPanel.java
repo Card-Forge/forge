@@ -30,6 +30,9 @@ import javax.swing.JPanel;
  * @version $Id$
  */
 public class ViewPanel extends JPanel {
+    public ViewPanel() {
+    }
+
     /** Constant <code>serialVersionUID=7016597023142963068L</code>. */
     private static final long serialVersionUID = 7016597023142963068L;
 

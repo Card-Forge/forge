@@ -87,19 +87,21 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         cdLabels.add(this.damageLabel);
 
         final JPanel idr = new JPanel(new GridBagLayout());
-        final GridBagConstraints c = new GridBagConstraints();
+        final GridBagConstraints c1 = new GridBagConstraints();
+        final GridBagConstraints c2 = new GridBagConstraints();
 
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c1.fill = GridBagConstraints.HORIZONTAL;
 
-        c.gridwidth = 2;
-        c.weightx = 1.0;
+        c1.gridwidth = 2;
+        c1.weightx = 1.0;
         this.idLabel = new JLabel();
-        idr.add(this.idLabel, c);
+        idr.add(this.idLabel, c1);
 
-        c.gridwidth = 1;
-        c.weightx = 0.3;
+        c2.gridwidth = 1;
+        c2.weightx = 0.3;
+        c2.fill = GridBagConstraints.HORIZONTAL;
         this.setInfoLabel = new JLabel();
-        idr.add(this.setInfoLabel, c);
+        idr.add(this.setInfoLabel, c2);
 
         cdLabels.add(idr);
 
