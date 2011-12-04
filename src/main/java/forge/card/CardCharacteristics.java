@@ -65,7 +65,7 @@ public class CardCharacteristics {
      *            the name to set
      */
     public final void setName(final String name0) {
-        this.name = name0; // TODO: Add 0 to parameter's name.
+        this.name = name0;
     }
 
     /**
@@ -84,7 +84,7 @@ public class CardCharacteristics {
      *            the type to set
      */
     public final void setType(final ArrayList<String> type0) {
-        this.type = type0; // TODO: Add 0 to parameter's name.
+        this.type = type0;
     }
 
     /**
@@ -103,7 +103,7 @@ public class CardCharacteristics {
      *            the manaCost to set
      */
     public final void setManaCost(final String manaCost0) {
-        this.manaCost = manaCost0; // TODO: Add 0 to parameter's name.
+        this.manaCost = manaCost0;
     }
 
     /**
@@ -122,10 +122,7 @@ public class CardCharacteristics {
      *            the cardColor to set
      */
     public final void setCardColor(final ArrayList<CardColor> cardColor0) {
-        this.cardColor = new ArrayList<CardColor>(cardColor0); // TODO: Add 0
-                                                               // to
-                                                               // parameter's
-                                                               // name.
+        this.cardColor = new ArrayList<CardColor>(cardColor0);
     }
 
     /**
@@ -144,8 +141,7 @@ public class CardCharacteristics {
      *            the cardColorsOverridden to set
      */
     public final void setCardColorsOverridden(final boolean cardColorsOverridden0) {
-        this.cardColorsOverridden = cardColorsOverridden0; // TODO: Add 0 to
-                                                           // parameter's name.
+        this.cardColorsOverridden = cardColorsOverridden0;
     }
 
     /**
@@ -164,7 +160,7 @@ public class CardCharacteristics {
      *            the baseAttack to set
      */
     public final void setBaseAttack(final int baseAttack0) {
-        this.baseAttack = baseAttack0; // TODO: Add 0 to parameter's name.
+        this.baseAttack = baseAttack0;
     }
 
     /**
@@ -183,7 +179,7 @@ public class CardCharacteristics {
      *            the baseDefense to set
      */
     public final void setBaseDefense(final int baseDefense0) {
-        this.baseDefense = baseDefense0; // TODO: Add 0 to parameter's name.
+        this.baseDefense = baseDefense0;
     }
 
     /**
@@ -202,8 +198,7 @@ public class CardCharacteristics {
      *            the intrinsicKeyword to set
      */
     public final void setIntrinsicKeyword(final ArrayList<String> intrinsicKeyword0) {
-        this.intrinsicKeyword = intrinsicKeyword0; // TODO: Add 0 to parameter's
-                                                   // name.
+        this.intrinsicKeyword = intrinsicKeyword0;
     }
 
     /**
@@ -222,7 +217,7 @@ public class CardCharacteristics {
      *            the spellAbility to set
      */
     public final void setSpellAbility(final ArrayList<SpellAbility> spellAbility0) {
-        this.spellAbility = spellAbility0; // TODO: Add 0 to parameter's name.
+        this.spellAbility = spellAbility0;
     }
 
     /**
@@ -241,8 +236,7 @@ public class CardCharacteristics {
      *            the intrinsicAbility to set
      */
     public final void setIntrinsicAbility(final ArrayList<String> intrinsicAbility0) {
-        this.intrinsicAbility = intrinsicAbility0; // TODO: Add 0 to parameter's
-                                                   // name.
+        this.intrinsicAbility = intrinsicAbility0;
     }
 
     /**
@@ -261,7 +255,7 @@ public class CardCharacteristics {
      *            the manaAbility to set
      */
     public final void setManaAbility(final ArrayList<AbilityMana> manaAbility0) {
-        this.manaAbility = manaAbility0; // TODO: Add 0 to parameter's name.
+        this.manaAbility = manaAbility0;
     }
 
     /**
@@ -280,7 +274,7 @@ public class CardCharacteristics {
      *            the triggers to set
      */
     public final void setTriggers(final ArrayList<Trigger> triggers0) {
-        this.triggers = triggers0; // TODO: Add 0 to parameter's name.
+        this.triggers = triggers0;
     }
 
     /**
@@ -299,12 +293,7 @@ public class CardCharacteristics {
      *            the staticAbilities to set
      */
     public final void setStaticAbilities(final ArrayList<StaticAbility> staticAbilities0) {
-        this.staticAbilities = new ArrayList<StaticAbility>(staticAbilities0); // TODO:
-                                                                               // Add
-                                                                               // 0
-                                                                               // to
-                                                                               // parameter's
-                                                                               // name.
+        this.staticAbilities = new ArrayList<StaticAbility>(staticAbilities0);
     }
 
     /**
@@ -323,7 +312,7 @@ public class CardCharacteristics {
      *            the imageFilename to set
      */
     public final void setImageFilename(final String imageFilename0) {
-        this.imageFilename = imageFilename0; // TODO: Add 0 to parameter's name.
+        this.imageFilename = imageFilename0;
     }
 
     /**
@@ -342,7 +331,7 @@ public class CardCharacteristics {
      *            the sets to set
      */
     public final void setSets(final ArrayList<SetInfo> sets0) {
-        this.sets = new ArrayList<SetInfo>(sets0); // TODO: Add 0 to parameter's
+        this.sets = new ArrayList<SetInfo>(sets0);
         // name.
     }
 
@@ -362,8 +351,7 @@ public class CardCharacteristics {
      *            the staticAbilityStrings to set
      */
     public final void setStaticAbilityStrings(final ArrayList<String> staticAbilityStrings0) {
-        this.staticAbilityStrings = staticAbilityStrings0; // TODO: Add 0 to
-                                                           // parameter's name.
+        this.staticAbilityStrings = staticAbilityStrings0;
     }
 
     /**
@@ -382,6 +370,6 @@ public class CardCharacteristics {
      *            the imageName to set
      */
     public void setImageName(final String imageName0) {
-        this.imageName = imageName0; // TODO: Add 0 to parameter's name.
+        this.imageName = imageName0;
     }
 }
