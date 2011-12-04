@@ -1,7 +1,8 @@
 Name:Crawlspace
 ManaCost:3
 Types:Artifact
-Text:No more than two creatures can attack you each combat.
+Text:no text
+K:No more than two creatures can attack you each combat.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crawlspace.jpg

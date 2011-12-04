@@ -59,13 +59,17 @@ public class CombatUtil {
         if (blocker == null) {
             return false;
         }
-
-        if ((combat.getAllBlockers().size() > 1) && AllZoneUtil.isCardInPlay("Caverns of Despair")) {
-            return false;
-        }
-
-        if ((combat.getAllBlockers().size() > 0) && AllZoneUtil.isCardInPlay("Silent Arbiter")) {
-            return false;
+        for (final Card c : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            for (String keyword : c.getKeyword()) {
+                if (keyword.equals("No more than one creature can block each combat.")
+                        && (combat.getAllBlockers().size() > 0)) {
+                    return false;
+                }
+                if (keyword.equals("No more than two creatures can block each combat.")
+                        && (combat.getAllBlockers().size() > 1)) {
+                    return false;
+                }
+            }
         }
 
         if ((combat.getAllBlockers().size() > 0) && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
@@ -620,17 +624,22 @@ public class CombatUtil {
      */
     public static boolean canAttack(final Card c, final Combat combat) {
 
-        if ((combat.getAttackers().length > 1)
-                && AllZoneUtil.isCardInPlay("Crawlspace", c.getController().getOpponent())) {
-            return false;
-        }
-
-        if ((combat.getAttackers().length > 1) && AllZoneUtil.isCardInPlay("Caverns of Despair")) {
-            return false;
-        }
-
-        if ((combat.getAttackers().length > 0) && AllZoneUtil.isCardInPlay("Silent Arbiter")) {
-            return false;
+        for (final Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            for (String keyword : card.getKeyword()) {
+                if (keyword.equals("No more than one creature can attack each combat.")
+                        && (combat.getAttackers().length > 0)) {
+                    return false;
+                }
+                if (keyword.equals("No more than two creatures can attack each combat.")
+                        && (combat.getAttackers().length > 1)) {
+                    return false;
+                }
+                if (keyword.equals("No more than two creatures can attack you each combat.")
+                        && (combat.getAttackers().length > 1)
+                        && card.getController().getOpponent().isPlayer(c.getController())) {
+                    return false;
+                }
+            }
         }
 
         if ((combat.getAttackers().length > 0) && AllZoneUtil.isCardInPlay("Dueling Grounds")) {

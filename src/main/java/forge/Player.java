@@ -1547,7 +1547,7 @@ public abstract class Player extends GameEntity {
      *            a int.
      * @param zone
      *            a {@link java.lang.String} object.
-     * @param zone
+     * @param bottom
      *            a boolean.
      * @return the card list
      */
