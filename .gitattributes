@@ -8901,6 +8901,7 @@ res/cardsfolder/t/turn_to_dust.txt svneol=native#text/plain
 res/cardsfolder/t/turn_to_mist.txt svneol=native#text/plain
 res/cardsfolder/t/turn_to_slag.txt svneol=native#text/plain
 res/cardsfolder/t/turnabout.txt svneol=native#text/plain
+res/cardsfolder/t/turntimber_basilisk.txt -text
 res/cardsfolder/t/turntimber_grove.txt svneol=native#text/plain
 res/cardsfolder/t/turntimber_ranger.txt svneol=native#text/plain
 res/cardsfolder/t/turtleshell_changeling.txt svneol=native#text/plain
