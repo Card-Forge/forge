@@ -33,7 +33,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
 import forge.Command;
-import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
