@@ -23,9 +23,9 @@ public class ViewPicture extends FRoundedPanel {
         pnlPicture.setOpaque(false);
 
         this.setBackground(AllZone.getSkin().getClrTheme());
-        this.setLayout(new MigLayout("insets 0, gap 0"));
+        this.setLayout(new MigLayout("insets 0, gap 0, center"));
 
-        add(pnlPicture, "w 100%!, h 100%!");
+        add(pnlPicture, "w 98%!, h 98%!");
         control = new ControlPicture(this);
     }
 
