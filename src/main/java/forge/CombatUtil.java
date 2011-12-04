@@ -639,7 +639,15 @@ public class CombatUtil {
                         && card.getController().getOpponent().isPlayer(c.getController())) {
                     return false;
                 }
+                if (keyword.equals("CARDNAME can only attack alone.")
+                        && card.isAttacking()) {
+                    return false;
+                }
             }
+        }
+        
+        if ((combat.getAttackers().length > 0) && c.hasKeyword("CARDNAME can only attack alone.")) {
+            return false;
         }
 
         if ((combat.getAttackers().length > 0) && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
