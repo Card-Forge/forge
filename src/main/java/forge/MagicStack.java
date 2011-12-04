@@ -375,6 +375,7 @@ public class MagicStack extends MyObservable {
         if (sp instanceof AbilityMana) { // Mana Abilities go straight through
             sp.resolve();
             sp.resetOnceResolved();
+            AllZone.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
             return;
         }
 
@@ -383,6 +384,28 @@ public class MagicStack extends MyObservable {
             this.getFrozenStack().push(si);
             return;
         }
+        
+        //============= GameLog ======================
+        StringBuilder sb = new StringBuilder();
+        sb.append(sp.getActivatingPlayer());
+        if (sp.isSpell()) {
+            sb.append(" cast ");
+        }
+        else if (sp.isAbility()) {
+            sb.append(" activated ");
+        }
+        sb.append(sp.getSourceCard());
+        
+        if (sp.getTarget() != null) {
+            sb.append(" targeting ");
+            for (TargetChoices ch : chosenTargets) {
+                sb.append(ch.getTargetedString());
+            }
+        }
+        sb.append(".");
+        
+        AllZone.getGameLog().add("AddToStack", sb.toString(), 2);
+        //============= GameLog ======================
 
         // if activating player slips through the cracks, assign activating
         // Player to the controller here
@@ -938,7 +961,8 @@ public class MagicStack extends MyObservable {
                 }
             }
         }
-
+        
+        AllZone.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
     }
 
     /**

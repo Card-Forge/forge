@@ -73,8 +73,17 @@ public class ControlTabber extends MyObservable {
                 ControlTabber.this.view.updateStack();
             }
         };
+        
+        //Game Log
+        final Observer o2 = new Observer() {
+            @Override
+            public void update(final Observable a, final Object b) {
+                ControlTabber.this.view.updateConsole();
+            }
+        };
 
         AllZone.getStack().addObserver(o1);
+        AllZone.getGameLog().addObserver(o2);
     }
 
     /** Adds listeners to various components in tabber. */

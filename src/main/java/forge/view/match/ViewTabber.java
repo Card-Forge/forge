@@ -39,6 +39,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Constant;
+import forge.GameLog;
 import forge.MagicStack;
 import forge.Player;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -230,6 +231,36 @@ public class ViewTabber extends FRoundedPanel {
     }
 
     /**
+     * Sets the text for the GameLog
+     * 
+     * @param s
+     *            &emsp; String message
+     */
+    public void updateConsole() {
+        final GameLog gl = AllZone.getGameLog();
+
+        this.pnlConsole.removeAll();
+
+        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
+        final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
+        
+        //by default, grab everything logging level 2 or less
+        //TODO - some option to make this configurable is probably desirable
+        JTextArea tar = new JTextArea(gl.getLogText(2));
+        tar.setOpaque(false);
+        tar.setBorder(border);
+        tar.setFont(font);
+        tar.setForeground(this.skin.getClrText());
+
+        tar.setFocusable(false);
+        tar.setEditable(false);
+        tar.setLineWrap(true);
+        tar.setWrapStyleWord(true);
+        
+        this.pnlConsole.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
+    }
+
+    /**
      * Updates labels in the "player" panel, which display non-critical details
      * about each player in the game.
      * 
@@ -274,6 +305,15 @@ public class ViewTabber extends FRoundedPanel {
      */
     public FPanel getPnlCombat() {
         return this.pnlCombat;
+    }
+
+    /**
+     * Gets the pnl console.
+     * 
+     * @return FPanel
+     */
+    public FPanel getPnlConsole() {
+        return this.pnlConsole;
     }
 
     /**
@@ -489,7 +529,7 @@ public class ViewTabber extends FRoundedPanel {
         log.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 12));
         log.setBorder(new MatteBorder(1, 0, 0, 0, this.skin.getClrBorders()));
 
-        log.setText("Not implemented yet. Input codes entered above. " + "Output data recorded below.");
+        log.setText("No log information yet. Input codes entered above. " + "Output data recorded below.");
 
         this.pnlConsole.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 

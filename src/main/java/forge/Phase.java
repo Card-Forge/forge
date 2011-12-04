@@ -526,11 +526,14 @@ public class Phase extends MyObservable implements java.io.Serializable {
                 this.bRepeat = false;
             }
         }
+        
+        AllZone.getGameLog().add("Phase", getPlayerTurn() + " " + getPhase(), 6);
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
         if (this.getPhase().equals(Constant.Phase.UNTAP)) {
             this.turn++;
+            AllZone.getGameLog().add("Turn", "Turn " + turn + " ("+getPlayerTurn()+")", 0);
         }
 
         // Visual indicators

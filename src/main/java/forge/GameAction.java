@@ -1486,6 +1486,8 @@ public class GameAction {
 
         AllZone.getInputControl().setInput(new InputMulligan());
         Phase.setGameBegins(1);
+        
+        AllZone.getGameLog().add("Turn", "Turn " + AllZone.getPhase().getTurn() + " (" + AllZone.getPhase().getPlayerTurn()+")", 0);
     } // newGame()
 
     // this is where the computer cheats

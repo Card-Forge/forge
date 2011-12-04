@@ -25,6 +25,7 @@ import forge.DefaultPlayerZone;
 import forge.EndOfCombat;
 import forge.EndOfTurn;
 import forge.GameAction;
+import forge.GameLog;
 import forge.HumanPlayer;
 import forge.MagicStack;
 import forge.Phase;
@@ -57,6 +58,7 @@ public class FGameState {
     private StaticEffects staticEffects = new StaticEffects();
     private TriggerHandler triggerHandler = new TriggerHandler();
     private Combat combat = new Combat();
+    private GameLog gameLog = new GameLog();
 
     private PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
 
@@ -288,6 +290,25 @@ public class FGameState {
     }
 
     /**
+     * Gets the game log.
+     * 
+     * @return the game log
+     */
+    public final GameLog getGameLog() {
+        return this.gameLog;
+    }
+
+    /**
+     * Sets the game log.
+     * 
+     * @param combat0
+     *            the combat to set
+     */
+    public final void setgameLog(final GameLog gl) {
+        this.gameLog = gl;
+    }
+
+    /**
      * Gets the stack zone.
      * 
      * @return the stackZone
@@ -356,6 +377,8 @@ public class FGameState {
         this.getPhase().reset();
         this.getStack().reset();
         this.getCombat().reset();
+        
+        this.getGameLog().reset();
 
         for (final Player p : this.getPlayers()) {
             for (final Zone z : Player.ALL_ZONES) {

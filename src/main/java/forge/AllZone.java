@@ -294,6 +294,24 @@ public final class AllZone {
 
     /**
      * <p>
+     * getGameLog.
+     * </p>
+     * 
+     * @return a {@link forge.GameLog} object; may be null.
+     * @since 1.2.0
+     */
+    public static GameLog getGameLog() {
+        final FGameState gameState = Singletons.getModel().getGameState();
+
+        if (gameState != null) {
+            return gameState.getGameLog();
+        }
+
+        return null;
+    }
+
+    /**
+     * <p>
      * getCardFactory.
      * </p>
      * 
