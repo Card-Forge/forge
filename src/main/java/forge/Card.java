@@ -1410,7 +1410,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
         }
-        if (counterName.equals(Counters.M1M1)) {
+        if (this.isCreature() && counterName.equals(Counters.M1M1)) {
             for (final Card c : AllZoneUtil.getCreaturesInPlay(this.getController())) { // look
                                                                                         // for
                                                                                         // Melira,
@@ -5565,7 +5565,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.extrinsicKeyword.remove(s);
         }
     }
-    
+
     public void removeAllExtrinsicKeyword(final String s) {
         final ArrayList<String> strings = new ArrayList<String>();
         strings.add(s);
