@@ -40,6 +40,7 @@ public class HandArea extends CardArea {
      * <p>
      * Constructor for HandArea.
      * </p>
+     * TODO Make compatible with WindowBuilder
      * 
      * @param scrollPane
      *            a {@link javax.swing.JScrollPane} object.

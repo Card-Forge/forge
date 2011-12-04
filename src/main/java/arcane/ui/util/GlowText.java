@@ -43,6 +43,9 @@ import javax.swing.JLabel;
  * @version $Id$
  */
 public class GlowText extends JLabel {
+    public GlowText() {
+    }
+
     /** Constant <code>serialVersionUID=-2868833097364223352L</code>. */
     private static final long serialVersionUID = -2868833097364223352L;
     private int glowSize;
