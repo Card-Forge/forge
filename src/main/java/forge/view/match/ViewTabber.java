@@ -20,14 +20,17 @@ package forge.view.match;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -44,7 +47,9 @@ import forge.MagicStack;
 import forge.Player;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.match.ControlTabber;
+import forge.gui.ForgeAction;
 import forge.gui.MultiLineLabelUI;
+import forge.properties.NewConstants;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
@@ -63,7 +68,7 @@ public class ViewTabber extends FRoundedPanel {
 
     private final ControlTabber control;
     private final FSkin skin;
-
+    private TriggerReactionMenu triggerMenu;
     private final FPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
 
     private DevLabel lblMilling, lblHandView, lblLibraryView, lblGenerateMana, lblSetupGame, lblTutor,
@@ -80,6 +85,9 @@ public class ViewTabber extends FRoundedPanel {
         // Assemble card pic viewer
         this.panelList = new ArrayList<JPanel>();
         final String constraints = "wrap, insets 0 3% 0 0, gap 0";
+
+        // Trigger Context Menu creation
+        this.triggerMenu = new TriggerReactionMenu();
 
         this.pnlStack = new FPanel();
         this.pnlStack.setName("Stack");
@@ -128,7 +136,7 @@ public class ViewTabber extends FRoundedPanel {
         this.setBackground(AllZone.getSkin().getClrTheme());
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
-        this.add(vtpTabber, "w 97%!, h 100%!, gapleft 3%");
+        this.add(vtpTabber, "w 97%!, h 100%!, gapleft 2%");
 
         // After all components are in place, instantiate controller.
         this.control = new ControlTabber(this);
@@ -162,20 +170,26 @@ public class ViewTabber extends FRoundedPanel {
         this.vtpTabber.getAllVTabs().get(0).setText("Stack : " + stack.size());
 
         final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
-        final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
+        //final Border border = new LineBorder(this.skin.getClrBorders(), 1);
+        final Border border = new EmptyBorder(5, 5, 5, 5);
+        Color[] scheme;
 
         for (int i = stack.size() - 1; 0 <= i; i--) {
             final SpellAbilityStackInstance spell = stack.peekInstance(i);
+            final int index = i;
+
+            scheme = getSpellColor(spell);
 
             isOptional = stack.peekAbility(i).isOptionalTrigger()
                     && stack.peekAbility(i).getSourceCard().getController().isHuman() ? "(OPTIONAL) " : "";
             txt = (count++) + ". " + isOptional + spell.getStackDescription();
             tar = new JTextArea(txt);
             tar.setToolTipText(txt);
-            tar.setOpaque(false);
+            tar.setOpaque(true);
             tar.setBorder(border);
             tar.setFont(font);
-            tar.setForeground(this.skin.getClrText());
+            tar.setForeground(scheme[1]);
+            tar.setBackground(scheme[0]);
 
             tar.setFocusable(false);
             tar.setEditable(false);
@@ -190,14 +204,55 @@ public class ViewTabber extends FRoundedPanel {
                 }
             });
 
-            this.pnlStack.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
+            this.pnlStack.add(tar, "w 98%!, gapleft 1%, gaptop 1%");
 
             if (i == 0) {
                 AllZone.getDisplay().setCard(spell.getSourceCard());
             }
+
+            if (stack.peekInstance(i).isOptionalTrigger()) {
+                tar.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(final MouseEvent e) {
+
+                        if (e.getButton() != MouseEvent.BUTTON3) {
+                            return;
+                        }
+
+                        ViewTabber.this.triggerMenu.setTrigger(stack.peekAbility(index).getSourceTrigger());
+                        ViewTabber.this.triggerMenu.show(e.getComponent(), e.getX(), e.getY());
+                    }
+                });
+            }
         }
 
         t.getInputController().getView().getBtnOK().requestFocusInWindow();
+    }
+
+    private Color[] getSpellColor(SpellAbilityStackInstance s0) {
+        if (s0.getSourceCard().getColor().size() > 1) {
+            return new Color[] {new Color(253, 175, 63), Color.black};
+        }
+        else if (s0.getSourceCard().isBlack()) {
+            return new Color[] {Color.black, Color.white};
+        }
+        else if (s0.getSourceCard().isBlue()) {
+            return new Color[] {new Color(71, 108, 191), Color.white};
+        }
+        else if (s0.getSourceCard().isGreen()) {
+            return new Color[] {new Color(23, 95, 30), Color.white};
+        }
+        else if (s0.getSourceCard().isRed()) {
+            return new Color[] {new Color(214, 8, 8), Color.white};
+        }
+        else if (s0.getSourceCard().isWhite()) {
+            return new Color[] {Color.white, Color.black};
+        }
+        else if (s0.getSourceCard().isArtifact()) {
+            return new Color[] {new Color(111, 75, 43), Color.white};
+        }
+
+        return new Color[] {new Color(0, 0, 0, 0), skin.getClrText()};
     }
 
     /**
@@ -673,6 +728,68 @@ public class ViewTabber extends FRoundedPanel {
             super();
             this.setFont(ViewTabber.this.skin.getFont1().deriveFont(Font.PLAIN, 11));
             this.setForeground(ViewTabber.this.skin.getClrText());
+        }
+    }
+
+    private class TriggerReactionMenu extends JPopupMenu {
+        private static final long serialVersionUID = 6665085414634139984L;
+        private int workTrigID;
+
+        public TriggerReactionMenu() {
+            super();
+
+            final ForgeAction actAccept = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSACCEPT) {
+                private static final long serialVersionUID = -3734674058185367612L;
+
+                @Override
+                public final void actionPerformed(final ActionEvent e) {
+                    AllZone.getTriggerHandler().setAlwaysAcceptTrigger(TriggerReactionMenu.this.workTrigID);
+                }
+            };
+
+            final ForgeAction actDecline = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSDECLINE) {
+                private static final long serialVersionUID = -1983295769159971502L;
+
+                @Override
+                public final void actionPerformed(final ActionEvent e) {
+                    AllZone.getTriggerHandler().setAlwaysDeclineTrigger(TriggerReactionMenu.this.workTrigID);
+                }
+            };
+
+            final ForgeAction actAsk = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSASK) {
+                private static final long serialVersionUID = 5045255351332940821L;
+
+                @Override
+                public final void actionPerformed(final ActionEvent e) {
+                    AllZone.getTriggerHandler().setAlwaysAskTrigger(TriggerReactionMenu.this.workTrigID);
+                }
+            };
+
+            final JCheckBoxMenuItem jcbmiAccept = new JCheckBoxMenuItem(actAccept);
+            final JCheckBoxMenuItem jcbmiDecline = new JCheckBoxMenuItem(actDecline);
+            final JCheckBoxMenuItem jcbmiAsk = new JCheckBoxMenuItem(actAsk);
+
+            this.add(jcbmiAccept);
+            this.add(jcbmiDecline);
+            this.add(jcbmiAsk);
+        }
+
+        public void setTrigger(final int trigID) {
+            this.workTrigID = trigID;
+
+            if (AllZone.getTriggerHandler().isAlwaysAccepted(trigID)) {
+                ((JCheckBoxMenuItem) this.getComponent(0)).setState(true);
+                ((JCheckBoxMenuItem) this.getComponent(1)).setState(false);
+                ((JCheckBoxMenuItem) this.getComponent(2)).setState(false);
+            } else if (AllZone.getTriggerHandler().isAlwaysDeclined(trigID)) {
+                ((JCheckBoxMenuItem) this.getComponent(0)).setState(false);
+                ((JCheckBoxMenuItem) this.getComponent(1)).setState(true);
+                ((JCheckBoxMenuItem) this.getComponent(2)).setState(false);
+            } else {
+                ((JCheckBoxMenuItem) this.getComponent(0)).setState(false);
+                ((JCheckBoxMenuItem) this.getComponent(1)).setState(false);
+                ((JCheckBoxMenuItem) this.getComponent(2)).setState(true);
+            }
         }
     }
 }

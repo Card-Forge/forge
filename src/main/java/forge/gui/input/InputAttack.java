@@ -122,7 +122,7 @@ public class InputAttack extends Input {
 
             CombatUtil.showCombat();
         }
-        else {
+        else if (!Constant.Runtime.OLDGUI[0]) {
             ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
         }
     } // selectCard()

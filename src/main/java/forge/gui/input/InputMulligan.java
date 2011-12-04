@@ -212,6 +212,8 @@ public class InputMulligan extends Input {
 
     @Override
     public void selectCard(Card c0, PlayerZone z0) {
-        ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
+        if (!Constant.Runtime.OLDGUI[0]) {
+            ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
+        }
     }
 }
