@@ -147,7 +147,7 @@ public class ControlDock {
     public void viewDeckList() {
         new DeckListAction(NewConstants.Lang.GuiDisplay.HUMAN_DECKLIST).actionPerformed(null);
     }
-    
+
     /**
      * Receives click and programmatic requests for viewing a player's library
      * (typically used in dev mode). Allows copy of the cardlist to clipboard.

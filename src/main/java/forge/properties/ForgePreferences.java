@@ -40,8 +40,11 @@ public class ForgePreferences extends Preferences {
     /** Old gui checkbox toggle. */
     private boolean oldGui;
 
+    /** UI layout parameter string. */
+    private String uiParams;
+
     /** The stack ai land. */
-    private boolean stackAiLand;
+   private boolean stackAiLand;
 
     /** The milling loss condition. */
     private boolean millingLossCondition;
@@ -144,6 +147,7 @@ public class ForgePreferences extends Preferences {
         }
 
         this.oldGui = this.getBoolean("gui.old", true);
+        this.setUILayout(this.get("gui.params", ""));
         this.setStackAiLand(this.getBoolean("AI.stack.land", false));
         this.setMillingLossCondition(this.getBoolean("loss.condition.milling", true));
         this.setHandView(this.getBoolean("developer.handview", true));
@@ -219,6 +223,7 @@ public class ForgePreferences extends Preferences {
      */
     public final void save() throws Exception {
         this.set("gui.old", this.oldGui);
+        this.set("gui.params", this.getUILayout());
 
         this.set("AI.stack.land", this.isStackAiLand());
         this.set("loss.condition.milling", this.isMillingLossCondition());
@@ -342,6 +347,25 @@ public class ForgePreferences extends Preferences {
      */
     public void setOldGui(final boolean b0) {
         this.oldGui = b0;
+    }
+
+    /**
+     * Gets resizing parameters for UI regions.
+     * 
+     * @return String of six values, comma delimited
+     */
+    public String getUILayout() {
+        return this.uiParams;
+    }
+
+    /**
+     * Sets resizing parameters for UI regions.
+     * 
+     * @param s0
+     *            &emsp; String of six values, comma delimited
+     */
+    public void setUILayout(final String s0) {
+        this.uiParams = s0;
     }
 
     /**

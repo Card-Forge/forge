@@ -49,6 +49,7 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestUtil;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -64,6 +65,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private ImageIcon icoTemp;
     private JLabel lblTemp1;
     private JLabel lblTemp2;
+    private FSkin skin;
 
     /** The spacer. */
     private final int spacer = 50;
@@ -86,6 +88,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qData = AllZone.getQuestData();
         this.model.qEvent = AllZone.getQuestEvent();
         this.wonMatch = this.model.qMatchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
+        this.skin = AllZone.getSkin();
     }
 
     /**
@@ -384,7 +387,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         this.lblTemp2 = new JLabel(sb.toString());
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(AllZone.getSkin().getFont2().deriveFont(Font.PLAIN, 14));
+        this.lblTemp2.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
@@ -489,7 +492,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
-        this.lblTemp2.setFont(AllZone.getSkin().getFont2().deriveFont(Font.PLAIN, 14));
+        this.lblTemp2.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -511,7 +514,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
         this.lblTemp2 = new JLabel("You lose! You have lost 15 credits.");
-        this.lblTemp2.setFont(AllZone.getSkin().getFont2().deriveFont(Font.PLAIN, 14));
+        this.lblTemp2.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -600,7 +603,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private class TitleLabel extends JLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(AllZone.getSkin().getFont2().deriveFont(Font.ITALIC, 16));
+            this.setFont(skin.getFont1().deriveFont(Font.ITALIC, 16));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

@@ -306,6 +306,34 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         this.revalidate();
     }   // End calculateBounds()
 
+    //
+    private String getLayoutParams() {
+        String s = "";
+        s += Double.toString(dockWpct) + ",";
+        s += Double.toString(dockHpct) + ",";
+        s += Double.toString(tabberHpct) + ",";
+        s += Double.toString(battleWpct) + ",";
+        s += Double.toString(battleHpct) + ",";
+        s += Double.toString(pictureHpct);
+
+        return s;
+    }
+
+    private void setLayoutParams(String s0) {
+        if (s0 == null || s0.isEmpty()) {
+            return;
+        }
+
+        String[] vals = s0.split(",");
+
+        dockWpct = Double.parseDouble(vals[0]);
+        dockHpct = Double.parseDouble(vals[1]);
+        tabberHpct = Double.parseDouble(vals[2]);
+        battleWpct = Double.parseDouble(vals[3]);
+        battleHpct = Double.parseDouble(vals[4]);
+        pictureHpct = Double.parseDouble(vals[5]);
+    }
+
     /** Consolidates cursor and opacity settings in one place. */
     private class BoundaryPanel extends JPanel {
         public BoundaryPanel() {
@@ -646,6 +674,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         fieldViews.get(1).getLblEndTurn().setEnabled(fp.isHumanPhase("phase.human.eot"));
         fieldViews.get(1).getLblCleanup().setEnabled(fp.isHumanPhase("phase.human.cleanup"));
 
+        setLayoutParams(fp.getUILayout());
         return true;
     }
 
@@ -701,6 +730,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         fp.setMillingLossCondition(Constant.Runtime.MILL[0]);
         fp.setHandView(Constant.Runtime.HANDVIEW[0]);
         fp.setLibraryView(Constant.Runtime.LIBRARYVIEW[0]);
+        fp.setUILayout(getLayoutParams());
         return true;
     }
 

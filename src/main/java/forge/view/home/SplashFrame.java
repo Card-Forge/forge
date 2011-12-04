@@ -165,6 +165,7 @@ public class SplashFrame extends JFrame {
         this.monitorView.setCurrentModel(this.monitorModel);
 
         // Add prog bar + message, bg image
+        this.monitorView.setFont(skin.getFont1().deriveFont(Font.PLAIN, 15));
         this.monitorView.displayUpdate("Assembling file list...");
         this.monitorView.setBounds(SplashFrame.BAR_PADDING_X, splashHeightPx - SplashFrame.BAR_PADDING_Y
                 - SplashFrame.BAR_HEIGHT, splashWidthPx - (2 * SplashFrame.BAR_PADDING_X), SplashFrame.BAR_HEIGHT);

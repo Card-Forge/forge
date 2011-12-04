@@ -127,7 +127,7 @@ public class ViewTabber extends FRoundedPanel {
         this.setBackground(AllZone.getSkin().getClrTheme());
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
-        this.add(vtpTabber, "w 97%!, h 100%!");
+        this.add(vtpTabber, "w 97%!, h 100%!, gapleft 3%");
 
         // After all components are in place, instantiate controller.
         this.control = new ControlTabber(this);

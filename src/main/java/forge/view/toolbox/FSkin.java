@@ -39,9 +39,6 @@ public class FSkin {
     /** Primary font used in titles and buttons and most text output. */
     private Font font1 = null;
 
-    /** Secondary font used where a sub-block of text needs it. */
-    private Font font2 = null;
-
     /** Primary texture used in skin. */
     private ImageIcon texture1 = null;
 
@@ -129,7 +126,6 @@ public class FSkin {
     // ===== Private fields
     private final String spriteFile = "sprite.png";
     private final String font1file = "font1.ttf";
-    private final String font2file = "font2.ttf";
     private final String texture1file = "texture1.jpg";
     private final String btnLupfile = "btnLup.png";
     private final String btnMupfile = "btnMup.png";
@@ -181,7 +177,6 @@ public class FSkin {
 
         // Fonts
         this.setFont1(this.retrieveFont(dirName + this.font1file));
-        this.setFont2(this.retrieveFont(dirName + this.font2file));
 
         // Images
         this.setTexture1(this.retrieveImage(dirName + this.texture1file));
@@ -297,25 +292,6 @@ public class FSkin {
      */
     public void setFont1(final Font font10) {
         this.font1 = font10;
-    }
-
-    /**
-     * Secondary font used where a sub-block of text needs it.
-     * 
-     * @return {@link java.awt.Font} font2
-     */
-    public Font getFont2() {
-        return this.font2;
-    }
-
-    /**
-     * Secondary font used where a sub-block of text needs it.
-     * 
-     * @param font20
-     *            &emsp; an image icon
-     */
-    public void setFont2(final Font font20) {
-        this.font2 = font20;
     }
 
     /**

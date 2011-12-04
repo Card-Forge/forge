@@ -9878,6 +9878,20 @@ res/images/skins/rebel/font2.ttf -text
 res/images/skins/rebel/palette.png -text
 res/images/skins/rebel/sprite.png -text
 res/images/skins/rebel/texture1.jpg -text
+res/images/skins/smith/bg_match.jpg -text
+res/images/skins/smith/bg_splash.jpg -text
+res/images/skins/smith/btnLdown.png -text
+res/images/skins/smith/btnLover.png -text
+res/images/skins/smith/btnLup.png -text
+res/images/skins/smith/btnMdown.png -text
+res/images/skins/smith/btnMover.png -text
+res/images/skins/smith/btnMup.png -text
+res/images/skins/smith/btnRdown.png -text
+res/images/skins/smith/btnRover.png -text
+res/images/skins/smith/btnRup.png -text
+res/images/skins/smith/font1.ttf -text
+res/images/skins/smith/sprite.png -text
+res/images/skins/smith/texture1.jpg -text
 res/images/symbols-13/0.png -text svneol=unset#image/png
 res/images/symbols-13/1.png -text svneol=unset#image/png
 res/images/symbols-13/10.png -text svneol=unset#image/png
