@@ -204,7 +204,7 @@ public class ViewTabber extends FRoundedPanel {
                 }
             });
 
-            this.pnlStack.add(tar, "w 98%!, gapleft 1%, gaptop 1%");
+            this.pnlStack.add(tar, "w 98%!, gapright 1%, gaptop 1%");
 
             if (i == 0) {
                 AllZone.getDisplay().setCard(spell.getSourceCard());

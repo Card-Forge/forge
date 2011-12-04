@@ -30,7 +30,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -87,8 +86,8 @@ public class FVerticalTabPanel extends FPanel {
         this.hoverColor = this.skin.getClrHover();
         this.activeColor = this.skin.getClrActive();
         this.inactiveColor = this.skin.getClrInactive();
-        this.hoverBorder = new LineBorder(this.skin.getClrBorders(), 1);
-        this.inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
+        this.hoverBorder = new MatteBorder(1, 1, 1, 0, this.skin.getClrBorders());
+        this.inactiveBorder = new MatteBorder(1, 1, 1, 0, new Color(0, 0, 0, 0));
 
         final int pctTabH = ((100 - 2 - 2) / size);
         final int pctTabW = 11;
