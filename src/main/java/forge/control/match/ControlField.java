@@ -39,6 +39,7 @@ import forge.Constant.Zone;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -294,8 +295,22 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
-                            NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK).actionPerformed(null);
+                    new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard),
+                            NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
+
+                        private static final long serialVersionUID = 8120331222693706164L;
+
+                        @Override
+                        protected Iterable<Card> getCardsAsIterable() {
+                            return new ImmutableIterableFrom<Card>(CardFactoryUtil.getExternalZoneActivationCards(AllZone
+                                    .getHumanPlayer()));
+                        }
+
+                        @Override
+                        protected void doAction(final Card c) {
+                            AllZone.getGameAction().playCard(c);
+                        }
+                    } .actionPerformed(null);
                 } else {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
                             NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK).actionPerformed(null);
