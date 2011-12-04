@@ -9858,8 +9858,6 @@ res/images/skins/default/btnRdown.png -text
 res/images/skins/default/btnRover.png -text
 res/images/skins/default/btnRup.png -text
 res/images/skins/default/font1.ttf -text
-res/images/skins/default/font2.ttf -text
-res/images/skins/default/palette.png -text
 res/images/skins/default/sprite.png -text
 res/images/skins/default/texture1.jpg -text
 res/images/skins/rebel/bg_match.jpg -text
@@ -9874,8 +9872,6 @@ res/images/skins/rebel/btnRdown.png -text
 res/images/skins/rebel/btnRover.png -text
 res/images/skins/rebel/btnRup.png -text
 res/images/skins/rebel/font1.ttf -text
-res/images/skins/rebel/font2.ttf -text
-res/images/skins/rebel/palette.png -text
 res/images/skins/rebel/sprite.png -text
 res/images/skins/rebel/texture1.jpg -text
 res/images/skins/smith/bg_match.jpg -text
