@@ -3,9 +3,10 @@ ManaCost:3 R R
 Types:Sorcery
 Text:no text
 K:Suspend:3:2 R
-A:SP$ DealDamage | Cost$ 3 R R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ SVar=DBChange |  SpellDescription$ CARDNAME deals 2 damage to target creature or player. Exile CARDNAME with three time counters on it.
-SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ SVar=DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | CounterType$ TIME | CounterNum$ 3
+A:SP$ DealDamage | Cost$ 3 R R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ DBChange |  SpellDescription$ CARDNAME deals 2 damage to target creature or player. Exile CARDNAME with three time counters on it.
+SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_blade.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/94.jpg

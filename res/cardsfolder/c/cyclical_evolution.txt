@@ -3,9 +3,10 @@ ManaCost:3 G G
 Types:Sorcery
 Text:no text
 K:Suspend:3:2 G
-A:SP$ Pump | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ SVar=DBTimeCounters | SpellDescription$ Target creature gets +3/+3 until end of turn. Exile CARDNAME with three time counters on it.
-SVar:DBTimeCounters:DB$PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 3 | SubAbility$ SVar=DBExile
-SVar:DBExile:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
+A:SP$ Pump | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBChange | SpellDescription$ Target creature gets +3/+3 until end of turn. Exile CARDNAME with three time counters on it.
+SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclical_evolution.jpg
