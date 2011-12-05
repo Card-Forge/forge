@@ -324,6 +324,20 @@ public class ViewField extends FRoundedPanel {
         this.getLblLife().setText("" + p0.getLife());
         this.getLblPoison().setText("" + p0.getPoisonCounters());
 
+        if (p0.getLife() <= 5) {
+            this.getLblLife().setForeground(Color.red);
+        }
+        else {
+            this.getLblLife().setBackground(skin.getClrText());
+        }
+
+        if (p0.getPoisonCounters() >= 8) {
+            this.getLblPoison().setForeground(Color.red);
+        }
+        else {
+            this.getLblPoison().setBackground(skin.getClrText());
+        }
+
         //mana pool
         updateManaPool(p0);
     }
@@ -480,7 +494,7 @@ public class ViewField extends FRoundedPanel {
     public PhaseLabel getLblCleanup() {
         return this.lblCleanup;
     }
-    
+
     // ========= Setter methods
     /** @param i an Image */
     public void setImage(final Image i) {
