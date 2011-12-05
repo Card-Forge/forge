@@ -6811,6 +6811,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.sharesCreatureTypeWith(source)) {
                 return false;
             }
+        } else if (property.startsWith("sharesTypeWith")) {
+            if (!this.sharesTypeWith(source)) {
+                return false;
+            }
         } else if (property.startsWith("withFlashback")) {
             boolean fb = false;
             if (this.hasStartOfUnHiddenKeyword("Flashback")) {
@@ -7276,6 +7280,25 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return true;
             }
             if (CardUtil.isACreatureType(type) && c1.isType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * <p>
+     * sharesTypeWith.
+     * </p>
+     * 
+     * @param c1
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public final boolean sharesTypeWith(final Card c1) {
+        
+        for (String type : this.getType()) {
+            if (c1.isType(type)) {
                 return true;
             }
         }
