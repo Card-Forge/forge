@@ -76,12 +76,12 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     private double delta;
 
     // Default layout parameters (all in percent!)
-    private double dockWpct = 0.15;
-    private double dockHpct = 0.2;
+    private double tabberWpct = 0.15;
     private double tabberHpct = 0.55;
     private double battleWpct = 0.68;
     private double battleHpct = 0.73;
-    private double pictureHpct = 0.5;
+    private double pictureHpct = 0.4;
+    private double detailHpct = 0.4;
 
     private static final int BOUNDARY_THICKNESS_PX = 6;
 
@@ -122,10 +122,10 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         pnlTabber = new RegionPanel();
 
         pnlB1 = new BoundaryPanel(true);
-        pnlB2 = new BoundaryPanel(true);
-        pnlB3 = new BoundaryPanel();
-        pnlB4 = new BoundaryPanel(true);
-        pnlB5 = new BoundaryPanel();
+        pnlB2 = new BoundaryPanel();
+        pnlB3 = new BoundaryPanel(true);
+        pnlB4 = new BoundaryPanel();
+        pnlB5 = new BoundaryPanel(true);
         pnlB6 = new BoundaryPanel(true);
 
         add(pnlPicture);
@@ -181,8 +181,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getY() / (double) h;
-                dockHpct += delta;
-                tabberHpct -= delta;
+                tabberHpct += delta;
                 repaint();
             }
         });
@@ -190,23 +189,14 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         pnlB2.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
-                delta = e.getY() / (double) h;
-                tabberHpct += delta;
+                delta = e.getX() / (double) w;
+                tabberWpct += delta;
+                battleWpct -= delta;
                 repaint();
             }
         });
 
         pnlB3.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(final MouseEvent e) {
-                delta = e.getX() / (double) w;
-                battleWpct -= delta;
-                dockWpct += delta;
-                repaint();
-            }
-        });
-
-        pnlB4.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getY() / (double) h;
@@ -215,7 +205,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
             }
         });
 
-        pnlB5.addMouseMotionListener(new MouseMotionAdapter() {
+        pnlB4.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getX() / (double) w;
@@ -224,11 +214,21 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
             }
         });
 
-        pnlB6.addMouseMotionListener(new MouseMotionAdapter() {
+        pnlB5.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(final MouseEvent e) {
                 delta = e.getY() / (double) h;
                 pictureHpct += delta;
+                detailHpct -= delta;
+                repaint();
+            }
+        });
+
+        pnlB6.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                delta = e.getY() / (double) h;
+                detailHpct += delta;
                 repaint();
             }
         });
@@ -241,20 +241,16 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
      * 
      */
     private void calculateBounds() {
-        dockBounds = new Rectangle(
-                b, b,
-                (int) (dockWpct * w), (int) (dockHpct * h));
-
         tabberBounds = new Rectangle(
-                dockBounds.x, dockBounds.height + 3 * b,
-                dockBounds.width, (int) (tabberHpct * h));
+                b, b,
+                (int) (tabberWpct * w), (int) (tabberHpct * h));
 
         inputBounds = new Rectangle(
-                dockBounds.x, tabberBounds.y + tabberBounds.height + 2 * b,
-                dockBounds.width, h - tabberBounds.y - tabberBounds.height - 3 * b);
+                tabberBounds.x, tabberBounds.height + 3 * b,
+                tabberBounds.width, h - tabberBounds.height - 4 * b);
 
         battleBounds = new Rectangle(
-                dockBounds.width + 3 * b, b,
+                tabberBounds.width + 3 * b, b,
                 (int) (w * battleWpct), (int) (h * battleHpct));
 
         handBounds = new Rectangle(
@@ -267,7 +263,11 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
         detailBounds = new Rectangle(
                 pictureBounds.x, pictureBounds.height + 3 * b,
-                pictureBounds.width, h - pictureBounds.height - 4 * b);
+                pictureBounds.width, (int) (h * detailHpct));
+
+        dockBounds = new Rectangle(
+                pictureBounds.x, detailBounds.y + detailBounds.height + 2 * b,
+                pictureBounds.width, h - detailBounds.y - detailBounds.height - 3 * b);
 
         // Apply bounds to regions.
         pnlPicture.setBounds(pictureBounds);
@@ -280,28 +280,28 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
         // Apply bounds to boundaries.
         pnlB1.setBounds(new Rectangle(
-                b, dockBounds.height + b,
-                dockBounds.width, 2 * b));
+                b, tabberBounds.height + b,
+                tabberBounds.width, 2 * b));
 
         pnlB2.setBounds(new Rectangle(
-                b, dockBounds.height + tabberBounds.height + 3 * b,
-                dockBounds.width, 2 * b));
+                tabberBounds.width + b, b,
+                2 * b, h - 2 * b));
 
         pnlB3.setBounds(new Rectangle(
-                dockBounds.width + b, b,
-                2 * b, h - 2 * b));
-
-        pnlB4.setBounds(new Rectangle(
-                dockBounds.width + 3 * b, battleBounds.height + b,
+                battleBounds.x, battleBounds.height + b,
                 battleBounds.width, 2 * b));
 
-        pnlB5.setBounds(new Rectangle(
-                battleBounds.width + dockBounds.width + 3 * b, b,
+        pnlB4.setBounds(new Rectangle(
+                battleBounds.x + battleBounds.width, b,
                 2 * b, h - 2 * b));
 
-        pnlB6.setBounds(new Rectangle(
+        pnlB5.setBounds(new Rectangle(
                 pictureBounds.x, pictureBounds.height + b,
                 pictureBounds.width, 2 * b));
+
+        pnlB6.setBounds(new Rectangle(
+                pictureBounds.x, detailBounds.y + detailBounds.height,
+                detailBounds.width, 2 * b));
 
         this.revalidate();
     }   // End calculateBounds()
@@ -309,12 +309,12 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     //
     private String getLayoutParams() {
         String s = "";
-        s += Double.toString(dockWpct) + ",";
-        s += Double.toString(dockHpct) + ",";
+        s += Double.toString(tabberWpct) + ",";
         s += Double.toString(tabberHpct) + ",";
         s += Double.toString(battleWpct) + ",";
         s += Double.toString(battleHpct) + ",";
-        s += Double.toString(pictureHpct);
+        s += Double.toString(pictureHpct) + ",";
+        s += Double.toString(detailHpct);
 
         return s;
     }
@@ -326,12 +326,12 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
         String[] vals = s0.split(",");
 
-        dockWpct = Double.parseDouble(vals[0]);
-        dockHpct = Double.parseDouble(vals[1]);
-        tabberHpct = Double.parseDouble(vals[2]);
-        battleWpct = Double.parseDouble(vals[3]);
-        battleHpct = Double.parseDouble(vals[4]);
-        pictureHpct = Double.parseDouble(vals[5]);
+        tabberWpct = Double.parseDouble(vals[0]);
+        tabberHpct = Double.parseDouble(vals[1]);
+        battleWpct = Double.parseDouble(vals[2]);
+        battleHpct = Double.parseDouble(vals[3]);
+        pictureHpct = Double.parseDouble(vals[4]);
+        detailHpct = Double.parseDouble(vals[5]);
     }
 
     /** Consolidates cursor and opacity settings in one place. */

@@ -147,7 +147,7 @@ public class ForgePreferences extends Preferences {
         }
 
         this.oldGui = this.getBoolean("gui.old", true);
-        this.setUILayout(this.get("gui.params", ""));
+        this.setUILayout(this.get("gui.layout", ""));
         this.setStackAiLand(this.getBoolean("AI.stack.land", false));
         this.setMillingLossCondition(this.getBoolean("loss.condition.milling", true));
         this.setHandView(this.getBoolean("developer.handview", true));
@@ -223,7 +223,7 @@ public class ForgePreferences extends Preferences {
      */
     public final void save() throws Exception {
         this.set("gui.old", this.oldGui);
-        this.set("gui.params", this.getUILayout());
+        this.set("gui.layout", this.getUILayout());
 
         this.set("AI.stack.land", this.isStackAiLand());
         this.set("loss.condition.milling", this.isMillingLossCondition());
