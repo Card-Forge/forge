@@ -328,14 +328,14 @@ public class ViewField extends FRoundedPanel {
             this.getLblLife().setForeground(Color.red);
         }
         else {
-            this.getLblLife().setBackground(skin.getClrText());
+            this.getLblLife().setForeground(skin.getClrText());
         }
 
         if (p0.getPoisonCounters() >= 8) {
             this.getLblPoison().setForeground(Color.red);
         }
         else {
-            this.getLblPoison().setBackground(skin.getClrText());
+            this.getLblPoison().setForeground(skin.getClrText());
         }
 
         //mana pool
