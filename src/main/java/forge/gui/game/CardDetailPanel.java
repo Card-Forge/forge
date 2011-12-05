@@ -117,6 +117,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.add(new JScrollPane(this.cdArea));
         this.cdArea.setLineWrap(true);
         this.cdArea.setWrapStyleWord(true);
+        this.cdArea.setEditable(false);
 
         if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
