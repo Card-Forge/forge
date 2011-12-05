@@ -1,0 +1,10 @@
+Name:Superior Numbers
+ManaCost:G G
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ G G | NumDmg$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals damage to target creature equal to the number of creatures you control in excess of the number of creatures target opponent controls.
+SVar:X:Count$Valid Creature.YouCtrl/Minus.Y
+SVar:Y:Count$Valid Creature.YouDontCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/superior_numbers.jpg
+End
