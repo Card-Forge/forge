@@ -933,7 +933,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Merfolk", "Wizard" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -957,7 +956,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1019,8 +1018,7 @@ public class Upkeep implements java.io.Serializable {
         if ((kinship.size() == 0) || (library.size() <= 0)) {
             return;
         }
-
-        final String[] shareTypes = { "Kithkin", "Soldier" };
+        
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1044,7 +1042,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1123,7 +1121,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Treefolk", "Shaman" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1147,7 +1144,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1224,7 +1221,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Goblin", "Warrior" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1248,7 +1244,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1323,7 +1319,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Faerie", "Wizard" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1347,7 +1342,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1408,7 +1403,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Elemental", "Shaman" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1441,7 +1435,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1509,7 +1503,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Goblin", "Shaman" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1534,7 +1527,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1602,7 +1595,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Goblin", "Shaman" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1626,7 +1618,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1688,7 +1680,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Giant", "Wizard" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1712,7 +1703,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1773,7 +1764,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Merfolk", "Wizard" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1797,7 +1787,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1879,7 +1869,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Elf", "Warrior" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1903,7 +1892,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -1964,7 +1953,6 @@ public class Upkeep implements java.io.Serializable {
             return;
         }
 
-        final String[] shareTypes = { "Elf", "Shaman" };
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 
@@ -1988,7 +1976,7 @@ public class Upkeep implements java.io.Serializable {
                     // Dialogs outside of the Ability appear at the previous end
                     // of turn phase !!!
 
-                    if (peek[0].isValid(shareTypes, k.getController(), k)) {
+                    if (peek[0].isValid("Card.sharesCreatureTypeWith", k.getController(), k)) {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
