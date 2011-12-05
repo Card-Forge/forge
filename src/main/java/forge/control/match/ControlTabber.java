@@ -73,7 +73,7 @@ public class ControlTabber extends MyObservable {
                 ControlTabber.this.view.updateStack();
             }
         };
-        
+
         //Game Log
         final Observer o2 = new Observer() {
             @Override

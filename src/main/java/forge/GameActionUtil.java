@@ -1887,7 +1887,7 @@ public final class GameActionUtil {
             }
             return count;
         }
-    };  
+    };
 
     /** Constant <code>commands</code>. */
     private static HashMap<String, Command> commands = new HashMap<String, Command>();

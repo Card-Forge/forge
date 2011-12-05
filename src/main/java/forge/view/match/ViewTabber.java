@@ -286,7 +286,7 @@ public class ViewTabber extends FRoundedPanel {
     }
 
     /**
-     * Sets the text for the GameLog
+     * Sets the text for the GameLog.
      * 
      * @param s
      *            &emsp; String message
@@ -298,7 +298,7 @@ public class ViewTabber extends FRoundedPanel {
 
         final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
         final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
-        
+
         //by default, grab everything logging level 3 or less
         //TODO - some option to make this configurable is probably desirable
         JTextArea tar = new JTextArea(gl.getLogText(3));
@@ -311,7 +311,7 @@ public class ViewTabber extends FRoundedPanel {
         tar.setEditable(false);
         tar.setLineWrap(true);
         tar.setWrapStyleWord(true);
-        
+
         this.pnlConsole.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
     }
 

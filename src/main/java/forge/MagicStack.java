@@ -384,7 +384,7 @@ public class MagicStack extends MyObservable {
             this.getFrozenStack().push(si);
             return;
         }
-        
+
         //============= GameLog ======================
         StringBuilder sb = new StringBuilder();
         sb.append(sp.getActivatingPlayer());
@@ -395,7 +395,7 @@ public class MagicStack extends MyObservable {
             sb.append(" activated ");
         }
         sb.append(sp.getSourceCard());
-        
+
         if (sp.getTarget() != null) {
             sb.append(" targeting ");
             for (TargetChoices ch : chosenTargets) {
@@ -403,7 +403,7 @@ public class MagicStack extends MyObservable {
             }
         }
         sb.append(".");
-        
+
         AllZone.getGameLog().add("AddToStack", sb.toString(), 2);
         //============= GameLog ======================
 
@@ -961,7 +961,7 @@ public class MagicStack extends MyObservable {
                 }
             }
         }
-        
+
         AllZone.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
     }
 

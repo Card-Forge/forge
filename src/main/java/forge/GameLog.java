@@ -3,7 +3,7 @@ package forge;
 
 import java.util.ArrayList;
 
-    
+
 /**
  * <p>
  * GameLog class.
@@ -21,20 +21,20 @@ import java.util.ArrayList;
  */
 public class GameLog extends MyObservable {
     private ArrayList<LogEntry> log = new ArrayList<LogEntry>();
-    
+
     public GameLog() {
-        
+
     }
-    
+
     public void add(final String type, final String message, final int level) {
         log.add(new LogEntry(type, message, level));
         this.updateObservers();
     }
-    
+
     public String getLogText() {
         return getLogText(10);
     }
-    
+
     public String getLogText(final int logLevel) {
         StringBuilder sb = new StringBuilder();
         for (int i = log.size() - 1; i >= 0; i--) {
@@ -47,35 +47,35 @@ public class GameLog extends MyObservable {
         }
         return sb.toString();
     }
-    
+
     public void reset() {
         log.clear();
         this.updateObservers();
     }
-    
+
     public LogEntry getLogEntry(int index) {
         return log.get(index);
     }
-    
+
     private class LogEntry {
         private String type;
         private String message;
         private int level;
-        
+
         LogEntry(final String typeIn, final String messageIn, final int levelIn) {
             type = typeIn;
             message = messageIn;
             level = levelIn;
         }
-        
+
         public String getType() {
             return type;
         }
-        
+
         public String getMessage() {
             return message;
         }
-        
+
         public int getLevel() {
             return level;
         }

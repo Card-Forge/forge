@@ -2320,7 +2320,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", this.getName()));
         }
-        
+
         // Remembered cards
         if (this.rememberedObjects.size() > 0) {
             sb.append("\r\nRemembered: \r\n");

@@ -645,7 +645,7 @@ public class CombatUtil {
                 }
             }
         }
-        
+
         if ((combat.getAttackers().length > 0) && c.hasKeyword("CARDNAME can only attack alone.")) {
             return false;
         }

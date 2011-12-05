@@ -377,7 +377,7 @@ public class FGameState {
         this.getPhase().reset();
         this.getStack().reset();
         this.getCombat().reset();
-        
+
         this.getGameLog().reset();
 
         for (final Player p : this.getPlayers()) {

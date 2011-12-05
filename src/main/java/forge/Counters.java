@@ -175,7 +175,7 @@ public enum Counters {
 
     /** The MANA. */
     MANA(),
-    
+
     /** The MATRIX. */
     MATRIX(),
 

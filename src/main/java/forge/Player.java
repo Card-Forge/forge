@@ -1681,7 +1681,7 @@ public abstract class Player extends GameEntity {
             // check state effects for static animate (Living Lands, Conversion,
             // etc...)
             AllZone.getGameAction().checkStateEffects();
-            
+
             //add to log
             AllZone.getGameLog().add("Land", this + " played " + land, 2);
 
