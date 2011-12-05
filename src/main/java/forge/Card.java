@@ -7259,10 +7259,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         shares |= (this.isWhite() && c1.isWhite());
         return shares;
     }
-    
+
     /**
      * <p>
-     * sharesColorWith.
+     * sharesCreatureTypeWith.
      * </p>
      * 
      * @param c1
@@ -7272,10 +7272,26 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean sharesCreatureTypeWith(final Card c1) {
 
         for (String type : this.getType()) {
-            if (type.equals("AllCreatureTypes")) {
+            if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
                 return true;
             }
             if (CardUtil.isACreatureType(type) && c1.isType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * <p>
+     * hasACreatureType.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean hasACreatureType() {
+        for (String type : this.getType()) {
+            if (CardUtil.isACreatureType(type)) {
                 return true;
             }
         }
