@@ -985,7 +985,7 @@ public class AbilityFactoryAlterLife {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.addPoisonCounters(amount);
+                p.addPoisonCounters(amount, sa.getSourceCard());
             }
         }
     }

@@ -470,7 +470,7 @@ public abstract class Player extends GameEntity {
         final int damageToDo = damage;
 
         if (source.hasKeyword("Infect")) {
-            this.addPoisonCounters(damageToDo);
+            this.addPoisonCounters(damageToDo, source);
         } else {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
@@ -841,9 +841,10 @@ public abstract class Player extends GameEntity {
      * @param num
      *            a int.
      */
-    public final void addPoisonCounters(final int num) {
+    public final void addPoisonCounters(final int num, final Card source) {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
+            AllZone.getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
             this.updateObservers();
         }
     }

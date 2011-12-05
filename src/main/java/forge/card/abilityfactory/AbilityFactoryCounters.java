@@ -1355,13 +1355,13 @@ public class AbilityFactoryCounters {
                     if (player.isHuman() && (!this.selHuman)) {
                         this.selHuman = true;
                         if (AllZone.getHumanPlayer().getPoisonCounters() > 0) {
-                            AllZone.getHumanPlayer().addPoisonCounters(1);
+                            AllZone.getHumanPlayer().addPoisonCounters(1, sa.getSourceCard());
                         }
                     }
                     if (player.isComputer() && (!this.selComputer)) {
                         this.selComputer = true;
                         if (AllZone.getComputerPlayer().getPoisonCounters() > 0) {
-                            AllZone.getComputerPlayer().addPoisonCounters(1);
+                            AllZone.getComputerPlayer().addPoisonCounters(1, sa.getSourceCard());
                         }
                     }
                 }
@@ -1452,7 +1452,7 @@ public class AbilityFactoryCounters {
 
             // give human a poison counter, if he has one
             if (AllZone.getHumanPlayer().getPoisonCounters() > 0) {
-                AllZone.getHumanPlayer().addPoisonCounters(1);
+                AllZone.getHumanPlayer().addPoisonCounters(1, sa.getSourceCard());
             }
 
         } // comp

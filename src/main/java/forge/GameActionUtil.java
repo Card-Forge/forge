@@ -906,12 +906,7 @@ public final class GameActionUtil {
                 public void resolve() {
                     final Player player = crd.getController();
                     final Player opponent = player.getOpponent();
-
-                    if (opponent.isHuman()) {
-                        AllZone.getHumanPlayer().addPoisonCounters(poison);
-                    } else {
-                        AllZone.getComputerPlayer().addPoisonCounters(poison);
-                    }
+                    opponent.addPoisonCounters(poison, c);
                 }
             };
 
@@ -921,7 +916,11 @@ public final class GameActionUtil {
             sb.append(c.getController().getOpponent());
             sb.append(" gets ");
             sb.append(poison);
-            sb.append(" poison counters.");
+            sb.append(" poison counter");
+            if (poison != 1) {
+                sb.append("s");
+            }
+            sb.append(".");
 
             ability.setStackDescription(sb.toString());
             final ArrayList<String> keywords = c.getKeyword();

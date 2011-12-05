@@ -299,9 +299,9 @@ public class ViewTabber extends FRoundedPanel {
         final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
         final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
         
-        //by default, grab everything logging level 2 or less
+        //by default, grab everything logging level 3 or less
         //TODO - some option to make this configurable is probably desirable
-        JTextArea tar = new JTextArea(gl.getLogText(2));
+        JTextArea tar = new JTextArea(gl.getLogText(3));
         tar.setOpaque(false);
         tar.setBorder(border);
         tar.setFont(font);

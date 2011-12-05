@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * Logging level:
  * 0 - Turn
  * 2 - Stack items
+ * 3 - Poison Counters
  * 4 - Mana abilities
  * 6 - All Phase information
  * 
