@@ -188,6 +188,27 @@ Fixes/Features:
 - Keyworded the abilities of Caverns of Despair, Crawlspace and Silent Arbiter.
 - Little fix for Melira, Sylvok Outcast.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the keyword "CARDNAME can only attack alone."
+- remove a bunch of invalid comments in CardCharacteristics
+- convert Muraganda Petroglyphs to script
+- Moved some infos away from getAbilityText that do not belong there now that Muraganda Petroglyphs uses it to check for ability text.
+- The JuzamJedi cube has once again been updated with a newer list of cards.
+- Added a fluff piece to the changes.txt file.
+- Another fix for Cellar Door.
+- Fixed infinite loop in AF_NameCard.
+- New GUI: fix Quest opponent icons not displaying
+- comment out some debug(?) code in SpellPermanent
+- Add source of poisoning for players.
+- Add poisoning to GameLog (shown by default)
+- fix Baru, Fist of Krosa token P/T
+- fix CardDetailPanel so you can't delete spell text
+- fix Java warning for Coat of Arms code in GameActionUtil
+- Color adjustments on life and poison labels
+- Fixed "card hang" bug?
+- Small bug fix.
+- Minor bug fix.
+- New UI: Dock moved to SE.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -238,6 +259,9 @@ Civilized Scholar / Homicidal Brute
 Kongming's Contraptions
 Witchbane Orb
 Cellar Door
+Errantry
+Turntimber Basilisk
+Scrib Nibblers
 
 
 end
