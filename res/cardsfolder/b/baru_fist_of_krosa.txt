@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.
 A:AB$ Token | Cost$ Discard<1/Card.namedBaru, Fist of Krosa> | TokenAmount$ 1 | TokenName$ Wurm | TokenTypes$ Creature,Wurm | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | CostDesc$ Grandeur - Discard another card named CARDNAME: | SpellDescription$ Put an X/X green Wurm creature token onto the battlefield, where X is the number of lands you control.
-SVar:X:Valid Land.YouCtrl
+SVar:X:Count$Valid Land.YouCtrl
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Green+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
 SVar:BuffedBy:Forest
 SVar:Rarity:Rare
