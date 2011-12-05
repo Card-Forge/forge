@@ -21,10 +21,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.ImageIcon;
 
 import net.slightlymagic.braids.util.ImmutableIterableFrom;
 
@@ -122,6 +125,17 @@ public class ControlField {
             }
         };
         this.player.addObserver(o2);
+
+        if (AllZone.getQuestData() != null && this.player.isComputer()) {
+            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+            String iconName = "";
+            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
+                iconName = Constant.Quest.OPP_ICON_NAME[0];
+                final File file = new File(base, iconName);
+                this.getView().setImage(new ImageIcon(file.toString()).getImage());
+
+            }
+        }
 
         // Card play area, attached to battlefield zone.
         final Observer o3 = new Observer() {

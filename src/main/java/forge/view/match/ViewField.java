@@ -480,6 +480,12 @@ public class ViewField extends FRoundedPanel {
     public PhaseLabel getLblCleanup() {
         return this.lblCleanup;
     }
+    
+    // ========= Setter methods
+    /** @param i an Image */
+    public void setImage(final Image i) {
+        img = i;
+    }
 
     // ========== Custom classes
 
