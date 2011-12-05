@@ -1573,10 +1573,10 @@ public final class GameActionUtil {
             }
             // add +1/+1 to cards
             list.clear();
-            final PlayerZone[] zone = GameActionUtil.getZone("Coat of Arms");
+            final int num = AllZoneUtil.getCardsIn(Zone.Battlefield, "Coat of Arms").size();
 
             // for each zone found add +1/+1 to each card
-            for (final PlayerZone element : zone) {
+            for (int j = 0; j < num; j++) {
                 final CardList creature = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
                 for (int i = 0; i < creature.size(); i++) {
@@ -1887,34 +1887,7 @@ public final class GameActionUtil {
             }
             return count;
         }
-    };
-
-    /**
-     * <p>
-     * getZone. Returns all PlayerZones that has at least 1 Glorious Anthem if
-     * Computer has 2 Glorious Anthems, AllZone.getComputerPlay() will be
-     * returned twice.
-     * </p>
-     * 
-     * @param cardName
-     *            a {@link java.lang.String} object.
-     * @return an array of {@link forge.PlayerZone} objects.
-     */
-    private static PlayerZone[] getZone(final String cardName) {
-        final CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
-
-        final ArrayList<PlayerZone> zone = new ArrayList<PlayerZone>();
-        for (int i = 0; i < all.size(); i++) {
-            final Card c = all.get(i);
-            if (c.getName().equals(cardName) && !c.isFaceDown()) {
-                zone.add(AllZone.getZoneOf(c));
-            }
-        }
-
-        final PlayerZone[] z = new PlayerZone[zone.size()];
-        zone.toArray(z);
-        return z;
-    }
+    };  
 
     /** Constant <code>commands</code>. */
     private static HashMap<String, Command> commands = new HashMap<String, Command>();
