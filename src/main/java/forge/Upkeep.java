@@ -1018,7 +1018,7 @@ public class Upkeep implements java.io.Serializable {
         if ((kinship.size() == 0) || (library.size() <= 0)) {
             return;
         }
-        
+
         final Card[] prevCardShown = { null };
         final Card[] peek = { null };
 

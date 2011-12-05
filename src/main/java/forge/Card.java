@@ -7290,7 +7290,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return false;
     }
-    
+
     /**
      * <p>
      * sharesTypeWith.
@@ -7301,7 +7301,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean sharesTypeWith(final Card c1) {
-        
+
         for (String type : this.getType()) {
             if (c1.isType(type)) {
                 return true;
