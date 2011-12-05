@@ -6,7 +6,7 @@ PT:5/5
 K:Flying
 K:Lifelink
 A:AB$PutCounter | Cost$ Sac<1/Creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y | SpellDescription$ Put X +1/+1 counters on Vish Kal, Blood Arbiter, where X is the sacrificed creature's power.
-A:AB$ Pump | Cost$ SubCounter<All/P1P1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ Remove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
+A:AB$ Pump | Cost$ SubCounter<All/P1P1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
 SVar:Y:Sacrificed$CardPower
 SVar:X:SVar$CostCountersRemoved
 SVar:RemAIDeck:True
