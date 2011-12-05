@@ -43,6 +43,10 @@ import javax.swing.JLabel;
  * @version $Id$
  */
 public class GlowText extends JLabel {
+
+    /**
+     * Instantiates a new glow text.
+     */
     public GlowText() {
     }
 

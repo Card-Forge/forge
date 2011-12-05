@@ -62,10 +62,20 @@ public class Cost {
         return this.sacCost;
     }
 
+    /**
+     * Sets the no mana cost change.
+     *
+     * @param b the new no mana cost change
+     */
     public final void setNoManaCostChange(boolean b) {
         noManaCostChange = b;
     }
 
+    /**
+     * Gets the no mana cost change.
+     *
+     * @return the no mana cost change
+     */
     public final boolean getNoManaCostChange() {
         return noManaCostChange;
     }

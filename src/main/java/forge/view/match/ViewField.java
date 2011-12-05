@@ -359,144 +359,256 @@ public class ViewField extends FRoundedPanel {
     }
 
     // ========= Retrieval methods
-    /** @return PlayArea where cards for this field are in play */
+    /**
+     * Gets the tabletop.
+     *
+     * @return PlayArea where cards for this field are in play
+     */
     public PlayArea getTabletop() {
         return this.tabletop;
     }
 
-    /** @return JPanel containing avatar pic and life label */
+    /**
+     * Gets the avatar area.
+     *
+     * @return JPanel containing avatar pic and life label
+     */
     public JPanel getAvatarArea() {
         return this.avatarArea;
     }
 
-    /** @return DetailLabel */
+    /**
+     * Gets the lbl life.
+     *
+     * @return DetailLabel
+     */
     public JLabel getLblLife() {
         return this.lblLife;
     }
 
-    /** @return DetailLabel for hand cards */
+    /**
+     * Gets the lbl hand.
+     *
+     * @return DetailLabel for hand cards
+     */
     public DetailLabel getLblHand() {
         return this.lblHand;
     }
 
-    /** @return DetailLabel for library cards */
+    /**
+     * Gets the lbl library.
+     *
+     * @return DetailLabel for library cards
+     */
     public DetailLabel getLblLibrary() {
         return this.lblLibrary;
     }
 
-    /** @return DetailLabel for graveyard cards */
+    /**
+     * Gets the lbl graveyard.
+     *
+     * @return DetailLabel for graveyard cards
+     */
     public DetailLabel getLblGraveyard() {
         return this.lblGraveyard;
     }
 
-    /** @return DetailLabel for exiled cards */
+    /**
+     * Gets the lbl exile.
+     *
+     * @return DetailLabel for exiled cards
+     */
     public DetailLabel getLblExile() {
         return this.lblExile;
     }
 
-    /** @return DetailLabel for flashback cards */
+    /**
+     * Gets the lbl flashback.
+     *
+     * @return DetailLabel for flashback cards
+     */
     public DetailLabel getLblFlashback() {
         return this.lblFlashback;
     }
 
-    /** @return DetailLabel for poison counters */
+    /**
+     * Gets the lbl poison.
+     *
+     * @return DetailLabel for poison counters
+     */
     public DetailLabel getLblPoison() {
         return this.lblPoison;
     }
 
-    /** @return DetailLabel for colorless mana count */
+    /**
+     * Gets the lbl colorless.
+     *
+     * @return DetailLabel for colorless mana count
+     */
     public DetailLabel getLblColorless() {
         return this.lblColorless;
     }
 
-    /** @return DetailLabel for black mana count */
+    /**
+     * Gets the lbl black.
+     *
+     * @return DetailLabel for black mana count
+     */
     public DetailLabel getLblBlack() {
         return this.lblBlack;
     }
 
-    /** @return DetailLabel for blue mana count */
+    /**
+     * Gets the lbl blue.
+     *
+     * @return DetailLabel for blue mana count
+     */
     public DetailLabel getLblBlue() {
         return this.lblBlue;
     }
 
-    /** @return DetailLabel for green mana count */
+    /**
+     * Gets the lbl green.
+     *
+     * @return DetailLabel for green mana count
+     */
     public DetailLabel getLblGreen() {
         return this.lblGreen;
     }
 
-    /** @return DetailLabel for red mana count */
+    /**
+     * Gets the lbl red.
+     *
+     * @return DetailLabel for red mana count
+     */
     public DetailLabel getLblRed() {
         return this.lblRed;
     }
 
-    /** @return DetailLabel for white mana count */
+    /**
+     * Gets the lbl white.
+     *
+     * @return DetailLabel for white mana count
+     */
     public DetailLabel getLblWhite() {
         return this.lblWhite;
     }
 
     // Phases
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl upkeep.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblUpkeep() {
         return this.lblUpkeep;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl draw.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblDraw() {
         return this.lblDraw;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl main1.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblMain1() {
         return this.lblMain1;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl begin combat.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblBeginCombat() {
         return this.lblBeginCombat;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl declare attackers.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblDeclareAttackers() {
         return this.lblDeclareAttackers;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl declare blockers.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblDeclareBlockers() {
         return this.lblDeclareBlockers;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl combat damage.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblCombatDamage() {
         return this.lblCombatDamage;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl first strike.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblFirstStrike() {
         return this.lblFirstStrike;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl end combat.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblEndCombat() {
         return this.lblEndCombat;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl main2.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblMain2() {
         return this.lblMain2;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl end turn.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblEndTurn() {
         return this.lblEndTurn;
     }
 
-    /** @return PhaseLabel */
+    /**
+     * Gets the lbl cleanup.
+     *
+     * @return PhaseLabel
+     */
     public PhaseLabel getLblCleanup() {
         return this.lblCleanup;
     }
 
     // ========= Setter methods
-    /** @param i an Image */
+    /**
+     * Sets the image.
+     *
+     * @param i an Image
+     */
     public void setImage(final Image i) {
         img = i;
     }

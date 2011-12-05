@@ -300,9 +300,8 @@ public class FGameState {
 
     /**
      * Sets the game log.
-     * 
-     * @param combat0
-     *            the combat to set
+     *
+     * @param gl the new game log
      */
     public final void setgameLog(final GameLog gl) {
         this.gameLog = gl;

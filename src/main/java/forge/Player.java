@@ -837,9 +837,9 @@ public abstract class Player extends GameEntity {
      * <p>
      * addPoisonCounters.
      * </p>
-     * 
-     * @param num
-     *            a int.
+     *
+     * @param num a int.
+     * @param source the source
      */
     public final void addPoisonCounters(final int num, final Card source) {
         if (!this.hasKeyword("You can't get poison counters")) {

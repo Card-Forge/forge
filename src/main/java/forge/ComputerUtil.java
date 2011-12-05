@@ -1517,11 +1517,10 @@ public class ComputerUtil {
      * <p>
      * sacrificePermanents.
      * </p>
-     * 
-     * @param amount
-     *            a int.
-     * @param list
-     *            a {@link forge.CardList} object.
+     *
+     * @param amount a int.
+     * @param list a {@link forge.CardList} object.
+     * @param destroy the destroy
      * @return the card list
      */
     public static CardList sacrificePermanents(final int amount, final CardList list, boolean destroy) {

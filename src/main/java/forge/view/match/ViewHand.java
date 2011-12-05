@@ -64,7 +64,11 @@ public class ViewHand extends FRoundedPanel {
         return ViewHand.this.control;
     }
 
-    /** @return HandArea */
+    /**
+     * Gets the hand area.
+     *
+     * @return HandArea
+     */
     public HandArea getHandArea() {
         return ViewHand.this.hand;
     }

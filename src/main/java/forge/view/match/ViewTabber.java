@@ -287,9 +287,7 @@ public class ViewTabber extends FRoundedPanel {
 
     /**
      * Sets the text for the GameLog.
-     * 
-     * @param s
-     *            &emsp; String message
+     *
      */
     public void updateConsole() {
         final GameLog gl = AllZone.getGameLog();

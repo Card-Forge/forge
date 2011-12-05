@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package forge;
 
@@ -22,19 +39,40 @@ import java.util.ArrayList;
 public class GameLog extends MyObservable {
     private ArrayList<LogEntry> log = new ArrayList<LogEntry>();
 
+    /**
+     * Instantiates a new game log.
+     */
     public GameLog() {
 
     }
 
+    /**
+     * Adds the.
+     *
+     * @param type the type
+     * @param message the message
+     * @param level the level
+     */
     public void add(final String type, final String message, final int level) {
         log.add(new LogEntry(type, message, level));
         this.updateObservers();
     }
 
+    /**
+     * Gets the log text.
+     *
+     * @return the log text
+     */
     public String getLogText() {
         return getLogText(10);
     }
 
+    /**
+     * Gets the log text.
+     *
+     * @param logLevel the log level
+     * @return the log text
+     */
     public String getLogText(final int logLevel) {
         StringBuilder sb = new StringBuilder();
         for (int i = log.size() - 1; i >= 0; i--) {
@@ -48,11 +86,20 @@ public class GameLog extends MyObservable {
         return sb.toString();
     }
 
+    /**
+     * Reset.
+     */
     public void reset() {
         log.clear();
         this.updateObservers();
     }
 
+    /**
+     * Gets the log entry.
+     *
+     * @param index the index
+     * @return the log entry
+     */
     public LogEntry getLogEntry(int index) {
         return log.get(index);
     }

@@ -843,7 +843,11 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         new GuiMultipleBlockers(attacker, blockers, damage, this);
     }
 
-    /** @return JFrame */
+    /**
+     * Gets the top level frame.
+     *
+     * @return JFrame
+     */
     public JFrame getTopLevelFrame() {
         return (JFrame) ViewTopLevel.this.getParent().getParent().getParent().getParent();
     }

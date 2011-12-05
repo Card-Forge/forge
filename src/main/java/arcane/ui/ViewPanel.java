@@ -30,6 +30,10 @@ import javax.swing.JPanel;
  * @version $Id$
  */
 public class ViewPanel extends JPanel {
+
+    /**
+     * Instantiates a new view panel.
+     */
     public ViewPanel() {
     }
 

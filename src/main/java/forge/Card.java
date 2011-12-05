@@ -5548,6 +5548,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
+    /**
+     * Removes the all extrinsic keyword.
+     *
+     * @param s the s
+     */
     public void removeAllExtrinsicKeyword(final String s) {
         final ArrayList<String> strings = new ArrayList<String>();
         strings.add(s);
