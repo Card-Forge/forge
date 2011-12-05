@@ -264,7 +264,7 @@ public class SpellPermanent extends Spell {
 
         final Card card = this.getSourceCard();
         String mana = this.getPayCosts().getTotalMana();
-        System.out.println(card + " mana: " + mana);
+        //System.out.println(card + " mana: " + mana);
 
         if (mana.contains("X")) {
             // Set PayX here to maximum value.
