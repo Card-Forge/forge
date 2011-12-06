@@ -3,7 +3,7 @@ ManaCost:4 U U
 Types:Sorcery
 Text:no text
 A:SP$ ChangeZoneAll | Cost$ 4 U U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True  | SubAbility$ SVar=DBChangeAll | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library
-SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ SVar=DBDraw
+SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ SVar=DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ SVar=DBChange | SpellDescription$ , then draws seven cards.
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ SVar=DBUntap | SpellDescription$ Exile CARDNAME. You untap up to six lands.
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 6
