@@ -209,6 +209,39 @@ Fixes/Features:
 - Minor bug fix.
 - New UI: Dock moved to SE.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Checkstyle.
+- Minor text edit to Vish Kal, Blood Arbiter.
+- Fixed Arc Blade and Cyclical Evolution.
+- Added the property "sharesCreatureTypeWith".
+- Fixed Kinship cards that changed their creature types.
+- Updated the pom file's version number for the next beta release.
+- Little fix for Kinship cards with Changeling.
+- Added the property "sharesTypeWith".
+- Checkstyle fixes
+- checkstyle
+- Rounded tabs in vertical tabber.
+- Centered tab text a little better
+- Dev buttons (like Generate Mana) will now give a visual indication that they've been clicked.
+- fixed Time Spiral not shuffling graveyard
+- minor text tweak in "Tutor for Card" string
+- Fixed the LQ pic URLs for Defiant Stand; Town Sentry and Wei Assassins using multiverseid pics.
+- add Declare Attackers and Assign Blockers to the GameLog
+- make the GameLog scrollable (still need to figure out how to make it transparent.)
+- make the GameLog JScrollPane transparent haHA!
+- Added mana icon versions to each skin.
+- Renamed texture1.jpg to bg_texture.jpg.
+- Removed old icon versions.
+- Added icon and font resize adapters to all pool labels.
+- Removed unused icons in FSkin.
+- Added dock icons to icon map in FSkin.
+- Renamed texture1.jpg to bg_texture.jpg.
+- Converted Aluren to script (which fixes most but not all rules inaccuracies).
+- Fixed a bug when the AI has to block multiple creatures with "All creatures able to block CARDNAME do so.".
+- Little fix for the keyword "May be played without paying its mana cost" (it now only works if the card can otherwise be played).
+- Fixed Festering March.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -262,6 +295,10 @@ Cellar Door
 Errantry
 Turntimber Basilisk
 Scrib Nibblers
+Vish Kal, Blood Arbiter
+Superior Numbers
+Countryside Crusher
+Bloodbond March
 
 
 end
