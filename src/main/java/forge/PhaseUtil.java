@@ -588,6 +588,8 @@ public class PhaseUtil {
             }
 
         }
+        
+        AllZone.getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(), 1);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
@@ -635,6 +637,8 @@ public class PhaseUtil {
         }
 
         AllZone.getStack().unfreezeStack();
+
+        AllZone.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
         CombatUtil.showCombat();
     }
 
