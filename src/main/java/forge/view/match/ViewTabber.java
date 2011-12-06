@@ -601,6 +601,7 @@ public class ViewTabber extends FRoundedPanel {
 
         private Color defaultBG = Color.green;
         private final Color hoverBG = ViewTabber.this.skin.getClrHover();
+        private final Color pressedBG = Color.green.darker().darker();
         private boolean enabled;
         private final String enabledText, disabledText;
         private int w, h; // Width, height, radius, insets (for paintComponent)
@@ -647,6 +648,16 @@ public class ViewTabber extends FRoundedPanel {
             this.setEnabled(true);
 
             this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(final MouseEvent e) {
+                    DevLabel.this.setBackground(DevLabel.this.pressedBG);
+                }
+                
+                @Override
+                public void mouseReleased(final MouseEvent e) {
+                    DevLabel.this.setBackground(DevLabel.this.defaultBG);
+                }
+                
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     DevLabel.this.setBackground(DevLabel.this.hoverBG);
