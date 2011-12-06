@@ -304,8 +304,7 @@ public class ViewTabber extends FRoundedPanel {
         tar.setBorder(border);
         tar.setFont(font);
         
-        //This will set the font to white, which will be needed if I can make the JScrollPane transparent
-        //tar.setForeground(this.skin.getClrText());
+        tar.setForeground(this.skin.getClrText());
 
         tar.setFocusable(false);
         tar.setEditable(false);
@@ -313,6 +312,7 @@ public class ViewTabber extends FRoundedPanel {
         tar.setWrapStyleWord(true);
         
         JScrollPane jsp = new JScrollPane(tar);
+        jsp.setOpaque(false);
         jsp.getViewport().setOpaque(false);
         
         this.pnlConsole.add(jsp, "w 95%!, gapleft 3%, gaptop 1%");
