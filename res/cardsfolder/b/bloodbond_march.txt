@@ -7,4 +7,5 @@ SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Triggered.sameName | O
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodbond_march.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/192.jpg
 End
