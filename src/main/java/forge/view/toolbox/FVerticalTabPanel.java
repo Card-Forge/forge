@@ -22,6 +22,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -218,6 +220,17 @@ public class FVerticalTabPanel extends FPanel {
                     VTab.this.setBackground(FVerticalTabPanel.this.activeColor);
                 }
             });
+
+            // Resize adapter
+            this.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent e) {
+                    // Careful with this font scale factor; the vertical tabs will be
+                    // unreadable
+                    // if small window, too big if large window.
+                    setFont(FVerticalTabPanel.this.skin.getFont1().deriveFont(Font.PLAIN, (int) (h * 0.16)));
+                }
+            });
         }
 
         @Override
@@ -229,11 +242,6 @@ public class FVerticalTabPanel extends FPanel {
             g.setColor(this.getBackground());
             g.fillRoundRect(0, 0, w, h, 10, 10);
             g.fillRect(11, 0, w, h);
-
-            // Careful with this font scale factor; the vertical tabs will be
-            // unreadable
-            // if small window, too big if large window.
-            g.setFont(FVerticalTabPanel.this.skin.getFont1().deriveFont(Font.PLAIN, (int) (h * 0.2)));
 
             // Rotate, draw string, rotate back (to allow hover border to be
             // painted properly)
@@ -249,7 +257,8 @@ public class FVerticalTabPanel extends FPanel {
                 at.rotate(Math.toRadians(-90), 0, 0);
                 g2d.setTransform(at);
                 g2d.setColor(AllZone.getSkin().getClrText());
-                g2d.drawString(this.msg, 5 - h, w - 4);
+                // Rotated, so follows: (this.msg, vertical coord, horizontal coord)
+                g2d.drawString(this.msg, 8 - h, w - 6);
             }
 
             if (tabsOnRightSide) {
