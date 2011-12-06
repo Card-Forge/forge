@@ -6,7 +6,7 @@ A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_stand.jpg
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4380&type=card
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/174.jpg
 Oracle:Cast Defiant Stand only during the declare attackers step and only if you've been attacked this step.\nTarget creature gets +1/+3 until end of turn. Untap that creature.
 End
