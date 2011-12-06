@@ -212,9 +212,11 @@ public class CardList implements Iterable<Card> {
                 }
                 final ArrayList<CardColor> cClrs = c.getColor();
                 for (int i = 0; i < cClrs.size(); i++) {
-                    if (!cClrs.get(i).toStringArray().get(0).equals(clr1)
-                            && !cClrs.get(i).toStringArray().get(0).equals(clr2)) {
-                        return false;
+                    CardColor cc = cClrs.get(i);
+                    for (final String s : cc.toStringArray()) {
+                        if (!s.equals(clr1) && !s.equals(clr2)) {
+                            return false;
+                        }
                     }
                 }
                 return true;
