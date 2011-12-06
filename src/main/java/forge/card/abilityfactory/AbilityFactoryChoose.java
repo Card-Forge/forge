@@ -1468,7 +1468,7 @@ public final class AbilityFactoryChoose {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createAbilityChooseCard(final AbilityFactory af) {
@@ -1505,7 +1505,7 @@ public final class AbilityFactoryChoose {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.1.7
      */
@@ -1538,7 +1538,7 @@ public final class AbilityFactoryChoose {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility createDrawbackChooseCard(final AbilityFactory af) {
@@ -1575,7 +1575,7 @@ public final class AbilityFactoryChoose {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
@@ -1617,7 +1617,7 @@ public final class AbilityFactoryChoose {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
@@ -1632,7 +1632,7 @@ public final class AbilityFactoryChoose {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param mandatory
@@ -1649,7 +1649,7 @@ public final class AbilityFactoryChoose {
      * </p>
      * 
      * @param af
-     *            a {@link forge.card.abilityFactory.AbilityFactory} object.
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */

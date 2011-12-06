@@ -86,13 +86,11 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     private static final int BOUNDARY_THICKNESS_PX = 6;
 
     // Boundary rectangles for all components, and boundary panel objects.
-    private Rectangle pictureBounds, detailBounds, battleBounds,
-        handBounds, tabberBounds, dockBounds, inputBounds;
+    private Rectangle pictureBounds, detailBounds, battleBounds, handBounds, tabberBounds, dockBounds, inputBounds;
 
     private BoundaryPanel pnlB1, pnlB2, pnlB3, pnlB4, pnlB5, pnlB6;
 
-    private RegionPanel pnlPicture, pnlDetail, pnlBattlefield,
-        pnlHand, pnlTabber, pnlDock, pnlInput;
+    private RegionPanel pnlPicture, pnlDetail, pnlBattlefield, pnlHand, pnlTabber, pnlDock, pnlInput;
 
     /**
      * - Lays out battle, sidebar, user areas in locked % vals and repaints as
@@ -167,13 +165,13 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     }
 
     /**
-     * Panel resizing algorithms.  Basically, find the change in % per
-     * drag event, then add that to an appropriate parameter.  In some
-     * cases, also remove the delta from an appropriate parameter.
+     * Panel resizing algorithms. Basically, find the change in % per drag
+     * event, then add that to an appropriate parameter. In some cases, also
+     * remove the delta from an appropriate parameter.
      * 
      */
 
-    // Formulas here SHOULD NOT BE VERY COMPLICATED at all.  If they're
+    // Formulas here SHOULD NOT BE VERY COMPLICATED at all. If they're
     // complicated, you're doing it wrong. The complicated part should
     // be in calculateBounds().
     private void addDragListeners() {
@@ -235,39 +233,30 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     }
 
     /**
-     * Put together default layout; most values are dependent
-     * on sibling component dimensions. The whole layout can be
-     * defined from six parameters.
+     * Put together default layout; most values are dependent on sibling
+     * component dimensions. The whole layout can be defined from six
+     * parameters.
      * 
      */
     private void calculateBounds() {
-        tabberBounds = new Rectangle(
-                b, b,
-                (int) (tabberWpct * w), (int) (tabberHpct * h));
+        tabberBounds = new Rectangle(b, b, (int) (tabberWpct * w), (int) (tabberHpct * h));
 
-        inputBounds = new Rectangle(
-                tabberBounds.x, tabberBounds.height + 3 * b,
-                tabberBounds.width, h - tabberBounds.height - 4 * b);
+        inputBounds = new Rectangle(tabberBounds.x, tabberBounds.height + 3 * b, tabberBounds.width, h
+                - tabberBounds.height - 4 * b);
 
-        battleBounds = new Rectangle(
-                tabberBounds.width + 3 * b, b,
-                (int) (w * battleWpct), (int) (h * battleHpct));
+        battleBounds = new Rectangle(tabberBounds.width + 3 * b, b, (int) (w * battleWpct), (int) (h * battleHpct));
 
-        handBounds = new Rectangle(
-                battleBounds.x, battleBounds.height + 3 * b,
-                battleBounds.width, h - battleBounds.height - 4 * b);
+        handBounds = new Rectangle(battleBounds.x, battleBounds.height + 3 * b, battleBounds.width, h
+                - battleBounds.height - 4 * b);
 
-        pictureBounds = new Rectangle(
-                battleBounds.x + battleBounds.width + 2 * b, b,
-                w - battleBounds.x - battleBounds.width - 3 * b, (int) (h * pictureHpct));
+        pictureBounds = new Rectangle(battleBounds.x + battleBounds.width + 2 * b, b, w - battleBounds.x
+                - battleBounds.width - 3 * b, (int) (h * pictureHpct));
 
-        detailBounds = new Rectangle(
-                pictureBounds.x, pictureBounds.height + 3 * b,
-                pictureBounds.width, (int) (h * detailHpct));
+        detailBounds = new Rectangle(pictureBounds.x, pictureBounds.height + 3 * b, pictureBounds.width,
+                (int) (h * detailHpct));
 
-        dockBounds = new Rectangle(
-                pictureBounds.x, detailBounds.y + detailBounds.height + 2 * b,
-                pictureBounds.width, h - detailBounds.y - detailBounds.height - 3 * b);
+        dockBounds = new Rectangle(pictureBounds.x, detailBounds.y + detailBounds.height + 2 * b, pictureBounds.width,
+                h - detailBounds.y - detailBounds.height - 3 * b);
 
         // Apply bounds to regions.
         pnlPicture.setBounds(pictureBounds);
@@ -279,32 +268,20 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         pnlTabber.setBounds(tabberBounds);
 
         // Apply bounds to boundaries.
-        pnlB1.setBounds(new Rectangle(
-                b, tabberBounds.height + b,
-                tabberBounds.width, 2 * b));
+        pnlB1.setBounds(new Rectangle(b, tabberBounds.height + b, tabberBounds.width, 2 * b));
 
-        pnlB2.setBounds(new Rectangle(
-                tabberBounds.width + b, b,
-                2 * b, h - 2 * b));
+        pnlB2.setBounds(new Rectangle(tabberBounds.width + b, b, 2 * b, h - 2 * b));
 
-        pnlB3.setBounds(new Rectangle(
-                battleBounds.x, battleBounds.height + b,
-                battleBounds.width, 2 * b));
+        pnlB3.setBounds(new Rectangle(battleBounds.x, battleBounds.height + b, battleBounds.width, 2 * b));
 
-        pnlB4.setBounds(new Rectangle(
-                battleBounds.x + battleBounds.width, b,
-                2 * b, h - 2 * b));
+        pnlB4.setBounds(new Rectangle(battleBounds.x + battleBounds.width, b, 2 * b, h - 2 * b));
 
-        pnlB5.setBounds(new Rectangle(
-                pictureBounds.x, pictureBounds.height + b,
-                pictureBounds.width, 2 * b));
+        pnlB5.setBounds(new Rectangle(pictureBounds.x, pictureBounds.height + b, pictureBounds.width, 2 * b));
 
-        pnlB6.setBounds(new Rectangle(
-                pictureBounds.x, detailBounds.y + detailBounds.height,
-                detailBounds.width, 2 * b));
+        pnlB6.setBounds(new Rectangle(pictureBounds.x, detailBounds.y + detailBounds.height, detailBounds.width, 2 * b));
 
         this.revalidate();
-    }   // End calculateBounds()
+    } // End calculateBounds()
 
     //
     private String getLayoutParams() {
@@ -348,8 +325,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
             if (movesNorthSouth) {
                 setBackground(Color.red);
                 setCursor(new Cursor(Cursor.N_RESIZE_CURSOR));
-            }
-            else {
+            } else {
                 setBackground(Color.blue);
                 setCursor(new Cursor(Cursor.E_RESIZE_CURSOR));
             }
@@ -361,7 +337,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
         public RegionPanel() {
             super();
             // For testing, comment this opaque setter, uncomment the border.
-            //setBorder(new LineBorder(Color.green, 1));
+            // setBorder(new LineBorder(Color.green, 1));
             setOpaque(false);
             setLayout(new MigLayout("insets 0, gap 0"));
         }
@@ -374,7 +350,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
      * resizing.
      * 
      * @param g
-     *            &emsp; Graphics object
+     *            Graphics object
      */
     @Override
     protected void paintComponent(final Graphics g) {
@@ -391,7 +367,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
     /**
      * Retrieves top level controller (actions, observers, etc.) for this UI.
      * 
-     * @return {@link java.util.List<MatchPlayer>}
+     * @return ControlMatchUI
      */
     public ControlMatchUI getController() {
         return this.control;
@@ -845,7 +821,7 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
     /**
      * Gets the top level frame.
-     *
+     * 
      * @return JFrame
      */
     public JFrame getTopLevelFrame() {
