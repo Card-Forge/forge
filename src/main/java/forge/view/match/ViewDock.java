@@ -94,7 +94,7 @@ public class ViewDock extends FRoundedPanel {
             }
         };
 
-        final JLabel btnConcede = new DockButton(this.skin.getIconConcede(), "Concede Game");
+        final JLabel btnConcede = new DockButton(skin.getIcon("dock.concede"), "Concede Game");
         btnConcede.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -102,7 +102,7 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        final JLabel btnShortcuts = new DockButton(this.skin.getIconShortcuts(), "Keyboard Shortcuts");
+        final JLabel btnShortcuts = new DockButton(skin.getIcon("dock.shortcuts"), "Keyboard Shortcuts");
         btnShortcuts.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -110,7 +110,7 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        final JLabel btnSettings = new DockButton(this.skin.getIconSettings(), "Game Settings");
+        final JLabel btnSettings = new DockButton(skin.getIcon("dock.settings"), "Game Settings");
         btnSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -118,7 +118,7 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        final JLabel btnEndTurn = new DockButton(this.skin.getIconEndTurn(), "End Turn");
+        final JLabel btnEndTurn = new DockButton(skin.getIcon("dock.endturn"), "End Turn");
         btnEndTurn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -127,7 +127,7 @@ public class ViewDock extends FRoundedPanel {
         });
 
         //TODO - get an icon for this
-        final JLabel btnViewDeckList = new DockButton(this.skin.getIconViewDeckList(), "View Deck List");
+        final JLabel btnViewDeckList = new DockButton(skin.getIcon("dock.decklist"), "View Deck List");
         btnViewDeckList.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
