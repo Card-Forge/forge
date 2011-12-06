@@ -153,8 +153,6 @@ public class Upkeep implements java.io.Serializable {
         Upkeep.upkeepBlazeCounters();
         // upkeep_Dark_Confidant(); // keep this one semi-last
         Upkeep.upkeepPowerSurge();
-        Upkeep.upkeepAlurenAI();
-        // experimental, AI abuse aluren
 
         AllZone.getStack().unfreezeStack();
     }
@@ -882,32 +880,6 @@ public class Upkeep implements java.io.Serializable {
         } // end for loop
 
     } // upkeep_Demonic_Hordes
-
-    /**
-     * <p>
-     * upkeep_AI_Aluren.
-     * </p>
-     */
-    private static void upkeepAlurenAI() {
-        final CardList alurens = AllZoneUtil.getCardsIn(Zone.Battlefield, "Aluren");
-        if (alurens.size() == 0) {
-            return;
-        }
-
-        CardList inHand = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-        inHand = inHand.getType("Creature");
-        final CardList playable = new CardList();
-
-        for (final Card c : inHand) {
-            if (CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) {
-                playable.add(c);
-            }
-        }
-
-        for (final Card c : playable) {
-            AllZone.getGameAction().playSpellAbilityForFree(c.getSpellPermanent());
-        }
-    }
 
     // ///////////////////////
     // Start of Kinship cards

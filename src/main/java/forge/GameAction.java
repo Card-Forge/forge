@@ -129,7 +129,8 @@ public class GameAction {
 
         // Don't copy Tokens, Cards staying in same zone, or cards entering
         // Battlefield
-        if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Stack)) {
+        if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Stack)
+                || prev.is(Constant.Zone.Stack)) {
             lastKnownInfo = c;
             copied = c;
         } else {
@@ -1850,13 +1851,14 @@ public class GameAction {
                 }
                 if (c.hasStartOfKeyword("May be played without paying its mana cost")) {
                     final SpellAbility newSA = sa.copy();
-                    final Cost cost = sa.getPayCosts();
-                    for (CostPart part : cost.getCostParts()) {
-                        if (part instanceof CostMana) {
-                            ((CostMana) part).setMana("");
+                    final Cost cost = new Cost("",c.getName(),false);
+                    for (CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
                         }
                     }
                     cost.setNoManaCostChange(true);
+                    newSA.setPayCosts(cost);
                     newSA.setManaCost("");
                     newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                     choices.add(newSA.toString());

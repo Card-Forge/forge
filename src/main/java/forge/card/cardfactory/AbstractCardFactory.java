@@ -711,7 +711,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Aluren")) {
+        /*else if (cardName.equals("Aluren")) {
             final Ability ability1 = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -761,7 +761,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             ability1.setStackDescription("Aluren - Play creature with converted manacost 3 or less for free.");
             ability1.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability1);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Volrath's Dungeon")) {
