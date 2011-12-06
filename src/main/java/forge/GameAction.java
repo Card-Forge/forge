@@ -1851,7 +1851,7 @@ public class GameAction {
                 }
                 if (c.hasStartOfKeyword("May be played without paying its mana cost")) {
                     final SpellAbility newSA = sa.copy();
-                    final Cost cost = new Cost("",c.getName(),false);
+                    final Cost cost = new Cost("", c.getName(), false);
                     for (CostPart part : newSA.getPayCosts().getCostParts()) {
                         if (!(part instanceof CostMana)) {
                             cost.getCostParts().add(part);

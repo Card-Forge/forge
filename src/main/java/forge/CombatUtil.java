@@ -1986,38 +1986,38 @@ public class CombatUtil {
             c.setDamage(0);
         }
     }
-    
+
     /**
-     * gets a string for the GameLog regarding attackers
+     * gets a string for the GameLog regarding attackers.
      * 
      * @return a String
      */
     public static String getCombatAttackForLog() {
         StringBuilder sb = new StringBuilder();
-        
+
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final Combat combat = AllZone.getCombat();
         final ArrayList<Object> defenders = combat.getDefenders();
         final CardList[] attackers = combat.sortAttackerByDefender();
-        
+
         // Not a big fan of the triple nested loop here
         for (int def = 0; def < defenders.size(); def++) {
             if ((attackers[def] == null) || (attackers[def].size() == 0)) {
                 continue;
             }
-            
+
             sb.append(combat.getAttackingPlayer()).append(" declared ");
             for (Card attacker : attackers[def]) {
                 sb.append(attacker).append(" ");
             }
-            
+
             sb.append("attacking ").append(defenders.get(def).toString()).append(".");
         }
-        
+
         return sb.toString();
     }
-    
+
     /**
      * gets a string for the GameLog regarding assigned blockers.
      * 
@@ -2025,7 +2025,7 @@ public class CombatUtil {
      */
     public static String getCombatBlockForLog() {
         StringBuilder sb = new StringBuilder();
-        
+
         Card[] defend = null;
 
         // Loop through Defenders
@@ -2033,14 +2033,14 @@ public class CombatUtil {
         final Combat combat = AllZone.getCombat();
         final ArrayList<Object> defenders = combat.getDefenders();
         final CardList[] attackers = combat.sortAttackerByDefender();
-        
+
         // Not a big fan of the triple nested loop here
         for (int def = 0; def < defenders.size(); def++) {
             final CardList list = attackers[def];
 
             for (final Card attacker : list) {
                 sb.append(combat.getDefendingPlayer()).append(" assigned ");
-                
+
                 defend = AllZone.getCombat().getBlockers(attacker).toArray();
 
                 if (defend.length > 0) {
@@ -2051,11 +2051,11 @@ public class CombatUtil {
                 } else {
                     sb.append("<nothing> ");
                 }
-                
+
                 sb.append("to block ").append(attacker).append(". ");
             } // loop through attackers
         }
-        
+
         return sb.toString();
     }
 

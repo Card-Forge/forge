@@ -588,7 +588,7 @@ public class PhaseUtil {
             }
 
         }
-        
+
         AllZone.getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(), 1);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();

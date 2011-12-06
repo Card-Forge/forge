@@ -303,18 +303,18 @@ public class ViewTabber extends FRoundedPanel {
         tar.setOpaque(false);
         tar.setBorder(border);
         tar.setFont(font);
-        
+
         tar.setForeground(this.skin.getClrText());
 
         tar.setFocusable(false);
         tar.setEditable(false);
         tar.setLineWrap(true);
         tar.setWrapStyleWord(true);
-        
+
         JScrollPane jsp = new JScrollPane(tar);
         jsp.setOpaque(false);
         jsp.getViewport().setOpaque(false);
-        
+
         this.pnlConsole.add(jsp, "w 95%!, gapleft 3%, gaptop 1%");
     }
 
@@ -657,12 +657,12 @@ public class ViewTabber extends FRoundedPanel {
                 public void mousePressed(final MouseEvent e) {
                     DevLabel.this.setBackground(DevLabel.this.pressedBG);
                 }
-                
+
                 @Override
                 public void mouseReleased(final MouseEvent e) {
                     DevLabel.this.setBackground(DevLabel.this.defaultBG);
                 }
-                
+
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     DevLabel.this.setBackground(DevLabel.this.hoverBG);
