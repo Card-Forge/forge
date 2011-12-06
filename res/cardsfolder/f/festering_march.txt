@@ -3,9 +3,10 @@ ManaCost:3 B B
 Types:Sorcery
 Text:no text
 K:Suspend:3:2 B
-A:SP$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.YouDontCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ SVar=DBChange | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn. Exile CARDNAME with three time counters on it.
-SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ SVar=DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | CounterType$ TIME | CounterNum$ 3
+A:SP$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.YouDontCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBChange | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn. Exile CARDNAME with three time counters on it.
+SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_march.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/65.jpg
