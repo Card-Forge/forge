@@ -274,13 +274,10 @@ public final class BoosterDraft implements IBoosterDraft {
 
         final int iHumansBooster = this.getCurrentBoosterIndex();
         int iPlayer = 0;
-        for (int i = 0; i < this.pack.size(); i++) {
-            if (iHumansBooster == i) {
-                continue;
-            } // don't touch player's booster
+        for (int i = 1; i < this.pack.size(); i++) {
 
             final CardList forAi = new CardList();
-            final List<CardPrinted> booster = this.pack.get(i);
+            final List<CardPrinted> booster = this.pack.get((iHumansBooster+i) % this.pack.size());
             for (final CardPrinted cr : booster) {
                 forAi.add(cr.toForgeCard());
             }
