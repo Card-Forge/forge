@@ -2531,7 +2531,7 @@ public class CardFactoryUtil {
 
         }
 
-        if (c.isLand() && !zone.is(Constant.Zone.Battlefield) && c.hasStartOfKeyword("May be played")) {
+        if (c.isLand() && !zone.is(Constant.Zone.Battlefield) && c.hasKeyword("May be played")) {
             return true;
         }
 
@@ -2543,7 +2543,7 @@ public class CardFactoryUtil {
 
             if (sa.isSpell()
                     && !zone.is(Zone.Battlefield)
-                    && (c.hasStartOfKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
+                    && (c.hasKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
                             .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
                 return true;
             }
