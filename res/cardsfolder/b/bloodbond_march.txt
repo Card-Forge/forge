@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodbond_march.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/192.jpg
+Oracle:Whenever a player casts a creature spell, each player returns all cards with the same name as that spell from his or her graveyard to the battlefield.
 End
