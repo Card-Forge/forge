@@ -1,6 +1,6 @@
 Name:Overeager Apprentice
 ManaCost:2 B
-Types:Creature Thrull
+Types:Creature Human Minion
 Text:no text
 PT:1/2
 A:AB$ Mana | Cost$ Discard<1/Card> Sac<1/CARDNAME> | Produced$ B | Amount$ 3 | SpellDescription$ Add B B B to your mana pool.
