@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -49,7 +48,6 @@ public class FVerticalTabPanel extends FPanel {
     private final FSkin skin;
     private int active;
     private final Color activeColor, inactiveColor, hoverColor;
-    private final Border inactiveBorder, hoverBorder;
 
     private boolean tabsOnRightSide;
 
@@ -86,8 +84,6 @@ public class FVerticalTabPanel extends FPanel {
         this.hoverColor = this.skin.getClrHover();
         this.activeColor = this.skin.getClrActive();
         this.inactiveColor = this.skin.getClrInactive();
-        this.hoverBorder = new MatteBorder(1, 1, 1, 0, this.skin.getClrBorders());
-        this.inactiveBorder = new MatteBorder(1, 1, 1, 0, new Color(0, 0, 0, 0));
 
         final int pctTabH = ((100 - 2 - 2) / size);
         final int pctTabW = 11;
@@ -194,7 +190,7 @@ public class FVerticalTabPanel extends FPanel {
         VTab(final String txt, final int i) {
             super();
             this.setLayout(new MigLayout("insets 0, gap 0"));
-            this.setOpaque(true);
+            this.setOpaque(false);
             this.msg = txt;
             this.id = i;
 
@@ -202,7 +198,6 @@ public class FVerticalTabPanel extends FPanel {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     if (VTab.this.id != FVerticalTabPanel.this.active) {
-                        VTab.this.setBorder(FVerticalTabPanel.this.hoverBorder);
                         VTab.this.setBackground(FVerticalTabPanel.this.hoverColor);
                     }
                 }
@@ -210,7 +205,6 @@ public class FVerticalTabPanel extends FPanel {
                 @Override
                 public void mouseExited(final MouseEvent e) {
                     if (VTab.this.id != FVerticalTabPanel.this.active) {
-                        VTab.this.setBorder(FVerticalTabPanel.this.inactiveBorder);
                         VTab.this.setBackground(FVerticalTabPanel.this.inactiveColor);
                     }
                 }
@@ -228,9 +222,13 @@ public class FVerticalTabPanel extends FPanel {
 
         @Override
         protected void paintComponent(final Graphics g) {
-            super.paintComponent(g);
+            //super.paintComponent(g);
             w = this.getWidth();
             h = this.getHeight();
+
+            g.setColor(this.getBackground());
+            g.fillRoundRect(0, 0, w, h, 10, 10);
+            g.fillRect(11, 0, w, h);
 
             // Careful with this font scale factor; the vertical tabs will be
             // unreadable
