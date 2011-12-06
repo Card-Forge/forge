@@ -5,6 +5,7 @@ Text:no text
 K:Sunburst
 A:AB$ DestroyAll | Cost$ 2 T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQX | SpellDescription$ Destroy each nonland permanent with converted mana cost equal to the number of charge counters on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_explosives.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/118.jpg
