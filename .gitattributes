@@ -853,6 +853,7 @@ res/cardsfolder/b/blood_speaker.txt svneol=native#text/plain
 res/cardsfolder/b/blood_tithe.txt svneol=native#text/plain
 res/cardsfolder/b/blood_tyrant.txt svneol=native#text/plain
 res/cardsfolder/b/blood_vassal.txt svneol=native#text/plain
+res/cardsfolder/b/bloodbond_march.txt -text
 res/cardsfolder/b/bloodbraid_elf.txt svneol=native#text/plain
 res/cardsfolder/b/bloodcrazed_goblin.txt -text
 res/cardsfolder/b/bloodcrazed_neonate.txt -text
@@ -1621,6 +1622,7 @@ res/cardsfolder/c/counterbore.txt svneol=native#text/plain
 res/cardsfolder/c/counterintelligence.txt svneol=native#text/plain
 res/cardsfolder/c/counterspell.txt svneol=native#text/plain
 res/cardsfolder/c/countersquall.txt svneol=native#text/plain
+res/cardsfolder/c/countryside_crusher.txt -text
 res/cardsfolder/c/courier_hawk.txt svneol=native#text/plain
 res/cardsfolder/c/couriers_capsule.txt svneol=native#text/plain
 res/cardsfolder/c/court_archers.txt svneol=native#text/plain

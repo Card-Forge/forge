@@ -1,0 +1,10 @@
+Name:Bloodbond March
+ManaCost:2 B G
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.Creature | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a player casts a creature spell, each player returns all cards with the same name as that spell from his or her graveyard to the battlefield.
+SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Triggered.sameName | Origin$ Graveyard | Destination$ Battlefield
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodbond_march.jpg
+End
