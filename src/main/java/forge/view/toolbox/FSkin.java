@@ -82,11 +82,6 @@ public class FSkin {
     private ImageIcon splash = null;
 
     /** Splash screen image. */
-    private ImageIcon icoEnabled = null;
-    private ImageIcon icoDisabled = null;
-    private ImageIcon icoTap = null;
-    private ImageIcon icoUntap = null;
-    private ImageIcon icoPlus = null;
     private ImageIcon icoShortcuts = null;
     private ImageIcon icoSettings = null;
     private ImageIcon icoConcede = null;
@@ -215,11 +210,6 @@ public class FSkin {
             this.setClrProgress2(this.getColorFromPixel(image.getRGB(75, 145)));
             this.setClrProgress3(this.getColorFromPixel(image.getRGB(65, 155)));
             this.setClrProgress4(this.getColorFromPixel(image.getRGB(75, 155)));
-            this.setIconEnabled(image.getSubimage(80, 0, 40, 40));
-            this.setIconDisabled(image.getSubimage(120, 0, 40, 40));
-            this.setIconTap(image.getSubimage(80, 40, 40, 40));
-            this.setIconUntap(image.getSubimage(120, 40, 40, 40));
-            this.setIconPlus(image.getSubimage(80, 80, 40, 40));
             this.setIconShortcuts(image.getSubimage(160, 0, 80, 80));
             this.setIconEndTurn(image.getSubimage(160, 80, 80, 80));
             this.setIconViewDeckList(image.getSubimage(60, 140, 20, 20));
@@ -761,101 +751,6 @@ public class FSkin {
      */
     public String getName() {
         return this.name;
-    }
-
-    /**
-     * Sets the icon enabled.
-     * 
-     * @param bi0
-     *            &emsp; BufferedImage
-     */
-    public void setIconEnabled(final BufferedImage bi0) {
-        this.icoEnabled = new ImageIcon(bi0);
-    }
-
-    /**
-     * Gets the icon enabled.
-     * 
-     * @return ImageIcon
-     */
-    public ImageIcon getIconEnabled() {
-        return this.icoEnabled;
-    }
-
-    /**
-     * Sets the icon disabled.
-     * 
-     * @param bi0
-     *            &emsp; BufferedImage
-     */
-    public void setIconDisabled(final BufferedImage bi0) {
-        this.icoDisabled = new ImageIcon(bi0);
-    }
-
-    /**
-     * Gets the icon disabled.
-     * 
-     * @return ImageIcon
-     */
-    public ImageIcon getIconDisabled() {
-        return this.icoDisabled;
-    }
-
-    /**
-     * Sets the icon tap.
-     * 
-     * @param bi0
-     *            &emsp; BufferedImage
-     */
-    public void setIconTap(final BufferedImage bi0) {
-        this.icoTap = new ImageIcon(bi0);
-    }
-
-    /**
-     * Gets the icon tap.
-     * 
-     * @return ImageIcon
-     */
-    public ImageIcon getIconTap() {
-        return this.icoTap;
-    }
-
-    /**
-     * Sets the icon untap.
-     * 
-     * @param bi0
-     *            &emsp; BufferedImage
-     */
-    public void setIconUntap(final BufferedImage bi0) {
-        this.icoUntap = new ImageIcon(bi0);
-    }
-
-    /**
-     * Gets the icon untap.
-     * 
-     * @return ImageIcon
-     */
-    public ImageIcon getIconUntap() {
-        return this.icoUntap;
-    }
-
-    /**
-     * Sets the icon plus.
-     * 
-     * @param bi0
-     *            &emsp; BufferedImage
-     */
-    public void setIconPlus(final BufferedImage bi0) {
-        this.icoPlus = new ImageIcon(bi0);
-    }
-
-    /**
-     * Gets the icon plus.
-     * 
-     * @return ImageIcon
-     */
-    public ImageIcon getIconPlus() {
-        return this.icoPlus;
     }
 
     /**
