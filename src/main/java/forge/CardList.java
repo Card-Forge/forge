@@ -958,6 +958,22 @@ public class CardList implements Iterable<Card> {
             }
         });
     }
+    
+    /**
+     * <p>
+     * getMonoColored.
+     * </p>
+     * 
+     * @return a {@link forge.CardList} object.
+     */
+    public final CardList getMonoColored() {
+        return this.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return (CardUtil.getColors(c).size() == 1 && !c.isColorless());
+            }
+        });
+    }
 
     /**
      * getAbove.

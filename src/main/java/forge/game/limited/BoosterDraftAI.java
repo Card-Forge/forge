@@ -138,7 +138,7 @@ public class BoosterDraftAI {
             }
         } else if (!this.playerColors.get(player).getColor1().equals("none")
                 && this.playerColors.get(player).getColor2().equals("none")) {
-            final CardList creatures = aiPlayables.getType("Creature").getColored();
+            final CardList creatures = aiPlayables.getType("Creature").getMonoColored();
             creatures.sort(this.bestCreature);
             // for (int i=0; i<creatures.size(); i++)
             // System.out.println("creature[" + i + "]: " +
@@ -368,7 +368,7 @@ public class BoosterDraftAI {
         final CardList aiPlayables = dList.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return !(c.getSVar("RemAIDeck").equals("True"));
+                return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
             }
         });
         for (int i = 0; i < aiPlayables.size(); i++) {
