@@ -19,9 +19,13 @@ package forge.view.toolbox;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -35,6 +39,8 @@ import forge.gui.GuiUtils;
  */
 
 public class FSkin {
+    private Map<String, BufferedImage> icons;
+
     // ===== Public fields
     /** Primary font used in titles and buttons and most text output. */
     private Font font1 = null;
@@ -126,7 +132,7 @@ public class FSkin {
     // ===== Private fields
     private final String spriteFile = "sprite.png";
     private final String font1file = "font1.ttf";
-    private final String texture1file = "texture1.jpg";
+    private final String texture1file = "bg_texture.jpg";
     private final String btnLupfile = "btnLup.png";
     private final String btnMupfile = "btnMup.png";
     private final String btnRupfile = "btnRup.png";
@@ -174,6 +180,7 @@ public class FSkin {
      */
     private void loadFontAndImages(final String skinName) {
         final String dirName = "res/images/skins/" + skinName + "/";
+        icons = new HashMap<String, BufferedImage>();
 
         // Fonts
         this.setFont1(this.retrieveFont(dirName + this.font1file));
@@ -218,6 +225,22 @@ public class FSkin {
             this.setIconViewDeckList(image.getSubimage(60, 140, 20, 20));
             this.setIconSettings(image.getSubimage(80, 0, 80, 80));
             this.setIconConcede(image.getSubimage(80, 80, 80, 80));
+
+            // All icons should eventually be set and retrieved using this method.
+            // Doublestrike 6-12-11
+            this.setIcon("zone.hand", image.getSubimage(280, 40, 40, 40));
+            this.setIcon("zone.library", image.getSubimage(280, 0, 40, 40));
+            this.setIcon("zone.graveyard", image.getSubimage(320, 0, 40, 40));
+            this.setIcon("zone.exile", image.getSubimage(320, 40, 40, 40));
+            this.setIcon("zone.flashback", image.getSubimage(320, 120, 40, 40));
+            this.setIcon("zone.poison", image.getSubimage(320, 80, 40, 40));
+
+            this.setIcon("mana.black", image.getSubimage(240, 0, 40, 40));
+            this.setIcon("mana.blue", image.getSubimage(240, 40, 40, 40));
+            this.setIcon("mana.green", image.getSubimage(240, 120, 40, 40));
+            this.setIcon("mana.red", image.getSubimage(240, 80, 40, 40));
+            this.setIcon("mana.white", image.getSubimage(280, 120, 40, 40));
+            this.setIcon("mana.colorless", image.getSubimage(280, 80, 40, 40));
         } catch (final IOException e) {
             System.err.println(this.notfound + this.spriteFile);
         }
@@ -928,5 +951,44 @@ public class FSkin {
      */
     public ImageIcon getIconViewDeckList() {
         return this.icoViewDeckList;
+    }
+
+    /**
+     * @param s0 &emsp; String address
+     * @return ImageIcon
+     */
+    public ImageIcon getIcon(String s0) {
+        return new ImageIcon(icons.get(s0));
+    }
+
+    /**
+     * Gets a scaled version of an icon from this skin's icon map.
+     * 
+     * @param s0 String icon address
+     * @param w0 int new width
+     * @param h0 int new height
+     * @return ImageIcon
+     */
+    public ImageIcon getIcon(String s0, int w0, int h0) {
+        w0 = (w0 < 1) ? 1 : w0;
+        h0 = (h0 < 1) ? 1 : h0;
+
+        BufferedImage original = icons.get(s0);
+        BufferedImage scaled = new BufferedImage(w0, h0, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = scaled.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.drawImage(original, 0, 0, w0, h0, 0, 0, original.getWidth(), original.getHeight(), null);
+        g2d.dispose();
+
+        return new ImageIcon(scaled);
+    }
+
+    /** 
+     * @param s0 &emsp; String address
+     * @param bi0 &emsp; BufferedImage
+     */
+    public void setIcon(String s0, BufferedImage bi0) {
+        icons.put(s0, bi0);
     }
 }

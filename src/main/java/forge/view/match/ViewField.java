@@ -242,53 +242,52 @@ public class ViewField extends FRoundedPanel {
         final String constraintsR = "w 47%!, h 12.5%!, growy, gapright 3%";
 
         // Hand, library, graveyard, exile, flashback, poison labels
-        ViewField.this.lblHand = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_hand.png"), "99");
+        ViewField.this.lblHand = new DetailLabel("zone.hand", "99");
         ViewField.this.lblHand.setToolTipText("Cards in hand");
         poolArea.add(ViewField.this.lblHand, constraintsL);
 
-        ViewField.this.lblLibrary = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_library.png"), "99");
+        ViewField.this.lblLibrary = new DetailLabel("zone.library", "99");
         ViewField.this.lblLibrary.setToolTipText("Cards in library");
         poolArea.add(ViewField.this.lblLibrary, constraintsR);
 
-        ViewField.this.lblGraveyard = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_grave.png"), "99");
+        ViewField.this.lblGraveyard = new DetailLabel("zone.graveyard", "99");
         ViewField.this.lblGraveyard.setToolTipText("Cards in graveyard");
         poolArea.add(ViewField.this.lblGraveyard, constraintsL);
 
-        ViewField.this.lblExile = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_exile.png"), "99");
+        ViewField.this.lblExile = new DetailLabel("zone.exile", "99");
         ViewField.this.lblExile.setToolTipText("Exiled cards");
         poolArea.add(ViewField.this.lblExile, constraintsR);
 
-        ViewField.this.lblFlashback = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_flashback.png"),
-                "99");
+        ViewField.this.lblFlashback = new DetailLabel("zone.flashback", "99");
         ViewField.this.lblFlashback.setToolTipText("Flashback cards");
         poolArea.add(ViewField.this.lblFlashback, constraintsL);
 
-        ViewField.this.lblPoison = new DetailLabel(new ImageIcon("res/images/symbols-13/detail_poison.png"), "99");
+        ViewField.this.lblPoison = new DetailLabel("zone.poison", "99");
         ViewField.this.lblPoison.setToolTipText("Poison counters");
         poolArea.add(ViewField.this.lblPoison, constraintsR);
 
         // Black, Blue, Colorless, Green, Red, White mana labels
-        ViewField.this.lblBlack = new DetailLabel(new ImageIcon("res/images/symbols-13/B.png"), "99");
+        ViewField.this.lblBlack = new DetailLabel("mana.black", "99");
         ViewField.this.lblBlack.setToolTipText("Black mana");
         poolArea.add(ViewField.this.lblBlack, constraintsL);
 
-        ViewField.this.lblBlue = new DetailLabel(new ImageIcon("res/images/symbols-13/U.png"), "99");
+        ViewField.this.lblBlue = new DetailLabel("mana.blue", "99");
         ViewField.this.lblBlue.setToolTipText("Blue mana");
         poolArea.add(ViewField.this.lblBlue, constraintsR);
 
-        ViewField.this.lblGreen = new DetailLabel(new ImageIcon("res/images/symbols-13/G.png"), "99");
+        ViewField.this.lblGreen = new DetailLabel("mana.green", "99");
         ViewField.this.lblGreen.setToolTipText("Green mana");
         poolArea.add(ViewField.this.lblGreen, constraintsL);
 
-        ViewField.this.lblRed = new DetailLabel(new ImageIcon("res/images/symbols-13/R.png"), "99");
+        ViewField.this.lblRed = new DetailLabel("mana.red", "99");
         ViewField.this.lblRed.setToolTipText("Red mana");
         poolArea.add(ViewField.this.lblRed, constraintsR);
 
-        ViewField.this.lblWhite = new DetailLabel(new ImageIcon("res/images/symbols-13/W.png"), "99");
+        ViewField.this.lblWhite = new DetailLabel("mana.white", "99");
         ViewField.this.lblWhite.setToolTipText("White mana");
         poolArea.add(ViewField.this.lblWhite, constraintsL);
 
-        ViewField.this.lblColorless = new DetailLabel(new ImageIcon("res/images/symbols-13/X.png"), "99");
+        ViewField.this.lblColorless = new DetailLabel("mana.colorless", "99");
         ViewField.this.lblColorless.setToolTipText("Colorless mana");
         poolArea.add(ViewField.this.lblColorless, constraintsR);
     }
@@ -628,21 +627,25 @@ public class ViewField extends FRoundedPanel {
         private final Color hoverBG;
         private Color clrBorders;
         private final MouseAdapter madHover;
-        private int w, h;
+        private int w, h, padding;
+        private String iconAddress;
 
         /**
          * Instance of JLabel detailing info about field: has icon and optional
          * hover effect.
          * 
-         * @param icon
-         *            &emsp; Label's icon
-         * @param txt
+         * @param s0
+         *            &emsp; Label's icon address
+         * @param txt0
          *            &emsp; Label's text
          */
-        public DetailLabel(final ImageIcon icon, final String txt) {
+        public DetailLabel(final String s0, final String txt0) {
             super();
-            this.setIcon(icon);
-            this.setText(txt);
+            padding = 6;
+            iconAddress = s0;
+
+            this.setIcon(skin.getIcon(iconAddress, h - 2 * padding, h - 2 * padding));
+            this.setText(txt0);
             this.setOpaque(false);
             this.setForeground(ViewField.this.skin.getClrText());
             this.setPreferredSize(this.labelSize);
@@ -668,6 +671,7 @@ public class ViewField extends FRoundedPanel {
                 @Override
                 public void componentResized(ComponentEvent e) {
                     setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (getHeight() / 2)));
+                    setIcon(skin.getIcon(iconAddress, h - 2 * padding, h - 2 * padding));
                 }
             });
 
