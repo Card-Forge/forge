@@ -310,6 +310,16 @@ public class ViewTabber extends FRoundedPanel {
         tar.setLineWrap(true);
         tar.setWrapStyleWord(true);
 
+        /*
+        JScrollPane jsp = new JScrollPane(tar);
+
+        jsp.setOpaque(false);
+        jsp.setBorder(border);
+        jsp.setFont(font);
+        jsp.setForeground(this.skin.getClrText());
+        
+        this.pnlConsole.add(jsp, "w 95%!, gapleft 3%, gaptop 1%");
+        */
         this.pnlConsole.add(tar, "w 95%!, gapleft 3%, gaptop 1%");
     }
 
@@ -545,7 +555,7 @@ public class ViewTabber extends FRoundedPanel {
         this.lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
         this.lblGenerateMana = new DevLabel("Generate Mana");
         this.lblSetupGame = new DevLabel("Setup Game State");
-        this.lblTutor = new DevLabel("Tutor for card");
+        this.lblTutor = new DevLabel("Tutor for Card");
         this.lblCounterPermanent = new DevLabel("Add Counter to Permanent");
         this.lblTapPermanent = new DevLabel("Tap Permanent");
         this.lblUntapPermanent = new DevLabel("Untap Permanent");
