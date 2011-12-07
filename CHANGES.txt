@@ -242,6 +242,33 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Checkstyle.
+- icons for Concede Game and View DeckList were switched in the Skin. This is now fixed.
+- small tweak to GameLog display text
+- Updated some AI SVars.
+- The AI will now also draft colorless cards.
+- Little improvements for the drafting AI (the AI will no longer put cards with RemRandomDeck SVar into draft decks).
+- Fixed boosters in draft not really being passed around.
+- Fixed a bug in getOnly2Colors.
+- Overeager Apprentice is now a Human Minion.
+- Update dependecies to latest versions
+- Fix javadoc problems
+- Fixed the card text problem with the Convoke cards including Autochthon Wurm.
+- only add a vertical scrollbar to the DevPanel if it is needed
+- Font resize adapters applied to (all?) components in UI.
+- Modified dock buttons to wrap on smaller dock sizes.
+- FSkin updated for better data storage and handling for icons, colors, and images. Now uses maps instead of mutators.
+- Minor update to FSkin.
+- WompWomp's icons added.
+- FSkin fully streamlined for better memory management and easier file access.
+- FButtons added into sprite.
+- Fixed Bottled Cloister.
+- Fixed Night Dealings.
+- Added "Mandatory$ True" to the ability of Debtors' Knell.
+- Added "TriggeredCardOpponent" as a defined player.
+- Fixed Kokusho, the Evening Star (is there a better solution for this, otherwise a lot of cards need the same treatment).
+- Another update to the JuzamJedi cube.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -299,6 +326,7 @@ Vish Kal, Blood Arbiter
 Superior Numbers
 Countryside Crusher
 Bloodbond March
+Pardic Miner
 
 
 end
