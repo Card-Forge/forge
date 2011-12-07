@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import forge.AllZone;
@@ -118,6 +119,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.cdArea.setLineWrap(true);
         this.cdArea.setWrapStyleWord(true);
         this.cdArea.setEditable(false);
+        this.cdArea.setBorder(new EmptyBorder(4, 4, 4, 4));
 
         if (!Singletons.getModel().getPreferences().isLafFonts()) {
             this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
@@ -458,5 +460,40 @@ public class CardDetailPanel extends JPanel implements CardContainer {
     @Override
     public final Card getCard() {
         return this.card;
+    }
+
+    /** @return JLabel */
+    public JLabel getNameCostLabel() {
+        return this.nameCostLabel;
+    }
+
+    /** @return JLabel */
+    public JLabel getTypeLabel() {
+        return this.typeLabel;
+    }
+
+    /** @return JLabel */
+    public JLabel getPowerToughnessLabel() {
+        return this.powerToughnessLabel;
+    }
+
+    /** @return JLabel */
+    public JLabel getDamageLabel() {
+        return this.damageLabel;
+    }
+
+    /** @return JLabel */
+    public JLabel getIDLabel() {
+        return this.idLabel;
+    }
+
+    /** @return JLabel */
+    public JLabel getSetInfoLabel() {
+        return this.setInfoLabel;
+    }
+
+    /** @return JLabel */
+    public JTextArea getCDArea() {
+        return this.cdArea;
     }
 }

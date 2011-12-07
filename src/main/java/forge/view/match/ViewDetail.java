@@ -17,11 +17,16 @@
  */
 package forge.view.match;
 
+import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.match.ControlDetail;
 import forge.gui.game.CardDetailPanel;
 import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -30,7 +35,7 @@ import forge.view.toolbox.FRoundedPanel;
 @SuppressWarnings("serial")
 public class ViewDetail extends FRoundedPanel {
     private ControlDetail control;
-
+    private FSkin skin;
     private CardDetailPanel pnlDetail;
 
     /**
@@ -38,6 +43,7 @@ public class ViewDetail extends FRoundedPanel {
      */
     public ViewDetail() {
         super();
+        skin = AllZone.getSkin();
         pnlDetail = new CardDetailPanel(null);
         pnlDetail.setOpaque(false);
 
@@ -46,6 +52,25 @@ public class ViewDetail extends FRoundedPanel {
 
         add(pnlDetail, "w 100%!, h 100%!");
         control = new ControlDetail(this);
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int px =  (int) (ViewDetail.this.getWidth() / 15);
+                px = (px < 11 ? 11 : px);
+                Font font = skin.getFont1().deriveFont(Font.PLAIN, px);
+
+                pnlDetail.getNameCostLabel().setFont(font);
+                pnlDetail.getTypeLabel().setFont(font);
+                pnlDetail.getPowerToughnessLabel().setFont(font);
+                pnlDetail.getDamageLabel().setFont(font);
+                pnlDetail.getIDLabel().setFont(font);
+                pnlDetail.getSetInfoLabel().setFont(font);
+                pnlDetail.getCDArea().setFont(font);
+
+                setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, px));
+            }
+        });
     }
 
     /**

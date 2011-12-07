@@ -21,6 +21,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -75,6 +77,15 @@ public class ViewInput extends FRoundedPanel {
         this.add(this.btnOK, "w 47%!, gapright 2%, gapleft 1%");
         this.add(this.btnCancel, "w 47%!, gapright 1%");
 
+        // Resize adapter
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int px =  (int) (ViewInput.this.getWidth() / 17);
+                px = (px < 11 ? 11 : px);
+                tarMessage.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, px));
+            }
+        });
         // After all components are in place, instantiate controller.
         this.control = new ControlInput(this);
     }
