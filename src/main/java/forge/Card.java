@@ -2494,6 +2494,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append(")");
                     continue;
                 } else if (keyword.get(i).equals("Convoke")) {
+                    if (sb.length() != 0) {
+                        sb.append("\r\n");
+                    }
                     sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)");
                 } else {
                     if ((i != 0) && (sb.length() != 0)) {
