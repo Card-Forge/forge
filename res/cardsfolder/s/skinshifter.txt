@@ -7,6 +7,7 @@ A:AB$ Charm | Cost$ G | Choices$ DBRhino,DBBird,DBPlant | CharmNum$ 1 | Activati
 SVar:DBRhino:DB$Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Rhino | OverwriteTypes$ True | Keywords$ Trample | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Rhino and gains trample.
 SVar:DBBird:DB$Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Bird | OverwriteTypes$ True | Keywords$ Flying | SpellDescription$ Until end of turn, CARDNAME becomes a 2/2 Bird and gains Flying.
 SVar:DBPlant:DB$Animate | Defined$ Self | Power$ 0 | Toughness$ 8 | Types$ Creature,Plant | OverwriteTypes$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 0/8 Plant.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinshifter.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/195.jpg
