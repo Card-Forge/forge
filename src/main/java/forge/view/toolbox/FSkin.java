@@ -78,11 +78,8 @@ public class FSkin {
     private final String name = "default";
 
     // ===== Private fields
-    private final String spriteFile = "sprite.png";
+    private final String spriteFile = "";
     private final String font1file = "font1.ttf";
-    private final String textureFile = "bg_texture.jpg";
-    private final String matchfile = "bg_match.jpg";
-    private final String splashfile = "bg_splash.jpg";
 
     private final String btnLupfile = "btnLup.png";
     private final String btnMupfile = "btnMup.png";
@@ -138,9 +135,9 @@ public class FSkin {
         this.setFont1(this.retrieveFont(dirName + this.font1file));
 
         // Images
-        this.setImage("bg.texture", this.retrieveImage(dirName + this.textureFile));
-        this.setImage("bg.match", this.retrieveImage(dirName + this.matchfile));
-        this.setImage("bg.splash", this.retrieveImage(dirName + this.splashfile));
+        this.setImage("bg.texture", this.retrieveImage(dirName + "bg_texture.jpg"));
+        this.setImage("bg.match", this.retrieveImage(dirName + "bg_match.jpg"));
+        this.setImage("bg.splash", this.retrieveImage(dirName + "bg_splash.jpg"));
 
         this.setBtnLup(this.retrieveImage(dirName + this.btnLupfile));
         this.setBtnMup(this.retrieveImage(dirName + this.btnMupfile));
@@ -153,7 +150,7 @@ public class FSkin {
         this.setBtnRdown(this.retrieveImage(dirName + this.btnRdownfile));
 
         // Sprite
-        final File file = new File(dirName + this.spriteFile);
+        final File file = new File(dirName + "sprite.png");
         BufferedImage image;
         try {
             image = ImageIO.read(file);
