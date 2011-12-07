@@ -21,11 +21,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
@@ -64,7 +69,9 @@ import forge.view.toolbox.FVerticalTabPanel;
 @SuppressWarnings("serial")
 public class ViewTabber extends FRoundedPanel {
     private final List<JPanel> panelList;
-    private HashMap<Player, JLabel[]> detailLabels;
+    private Map<Player, JLabel[]> detailLabels;
+    private List<JTextArea> stackTARs;
+    private List<JTextArea> combatTARs;
 
     private final ControlTabber control;
     private final FSkin skin;
@@ -85,6 +92,8 @@ public class ViewTabber extends FRoundedPanel {
         // Assemble card pic viewer
         this.panelList = new ArrayList<JPanel>();
         final String constraints = "wrap, insets 0 3% 0 0, gap 0";
+        stackTARs = new ArrayList<JTextArea>();
+        combatTARs = new ArrayList<JTextArea>();
 
         // Trigger Context Menu creation
         this.triggerMenu = new TriggerReactionMenu();
@@ -138,6 +147,40 @@ public class ViewTabber extends FRoundedPanel {
 
         this.add(vtpTabber, "w 97%!, h 100%!, gapleft 2%");
 
+        // Resize adapter
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int big = getWidth() / 15, regular, x;
+                big = (big < 13 ? 13 : big);
+                regular = big - 2;
+
+                // Player panel info
+                Iterator<Entry<Player, JLabel[]>> it = detailLabels.entrySet().iterator();
+                while (it.hasNext()) {
+                    JLabel[] labels = (JLabel[]) it.next().getValue();
+                    for (x = 0; x < labels.length; x++) {
+                        if (x > 0) {
+                            labels[x].setFont(skin.getFont1().deriveFont(Font.PLAIN, regular));
+                        }
+                        else {
+                            labels[x].setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                        }
+                    }
+                }
+
+                // Stack text areas
+                for (JTextArea tar : stackTARs) {
+                    tar.setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                }
+
+                // Combat text areas
+                for (JTextArea tar : combatTARs) {
+                    tar.setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                }
+            }
+        });
+
         // After all components are in place, instantiate controller.
         this.control = new ControlTabber(this);
     }
@@ -169,7 +212,6 @@ public class ViewTabber extends FRoundedPanel {
 
         this.vtpTabber.getAllVTabs().get(0).setText("Stack : " + stack.size());
 
-        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
         //final Border border = new LineBorder(this.skin.getClrBorders(), 1);
         final Border border = new EmptyBorder(5, 5, 5, 5);
         Color[] scheme;
@@ -187,7 +229,6 @@ public class ViewTabber extends FRoundedPanel {
             tar.setToolTipText(txt);
             tar.setOpaque(true);
             tar.setBorder(border);
-            tar.setFont(font);
             tar.setForeground(scheme[1]);
             tar.setBackground(scheme[0]);
 
@@ -205,6 +246,7 @@ public class ViewTabber extends FRoundedPanel {
             });
 
             this.pnlStack.add(tar, "w 98%!, gapright 1%, gaptop 1%");
+            stackTARs.add(tar);
 
             if (i == 0) {
                 AllZone.getDisplay().setCard(spell.getSourceCard());
@@ -229,6 +271,7 @@ public class ViewTabber extends FRoundedPanel {
         t.getInputController().getView().getBtnOK().requestFocusInWindow();
     }
 
+    /** Returns array with [background, foreground] colors. */
     private Color[] getSpellColor(SpellAbilityStackInstance s0) {
         if (s0.getSourceCard().getColor().size() > 1) {
             return new Color[] {new Color(253, 175, 63), Color.black};
@@ -270,7 +313,6 @@ public class ViewTabber extends FRoundedPanel {
         this.pnlCombat.removeAll();
         this.vtpTabber.showTab(1);
 
-        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
         final Border border = new MatteBorder(0, 0, 0, 0, skin.getClrBorders());
 
         this.vtpTabber.getAllVTabs().get(1).setText("Combat : " + AllZone.getCombat().getAttackers().length);
@@ -278,11 +320,11 @@ public class ViewTabber extends FRoundedPanel {
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
         tar.setBorder(border);
-        tar.setFont(font);
         tar.setForeground(skin.getClrText());
         tar.setFocusable(false);
         tar.setLineWrap(true);
         this.pnlCombat.add(tar, "w 95%!, gapleft 3%, gaptop 1%, h 95%");
+        combatTARs.add(tar);
     }
 
     /**
@@ -293,17 +335,14 @@ public class ViewTabber extends FRoundedPanel {
         final GameLog gl = AllZone.getGameLog();
 
         this.pnlConsole.removeAll();
-
-        final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
         //final Border border = new MatteBorder(0, 0, 0, 0, this.skin.getClrBorders());
 
         //by default, grab everything logging level 3 or less
         //TODO - some option to make this configurable is probably desirable
+        //TODO - add these components to resize adapter in constructor
         JTextArea tar = new JTextArea(gl.getLogText(3));
         tar.setOpaque(false);
         //tar.setBorder(border);
-        tar.setFont(font);
-
         tar.setForeground(this.skin.getClrText());
 
         tar.setFocusable(false);
@@ -327,14 +366,14 @@ public class ViewTabber extends FRoundedPanel {
      */
     public void updatePlayerLabels(final Player p0) {
         final JLabel[] temp = this.detailLabels.get(p0);
-        temp[0].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: " + String.valueOf(p0.getPoisonCounters()));
-        temp[1].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
-        temp[2].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
-        temp[3].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
+        temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: " + String.valueOf(p0.getPoisonCounters()));
+        temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
+        temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
+        temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
         if (!p0.getKeywords().isEmpty()) {
-            temp[4].setText(p0.getKeywords().toString());
+            temp[5].setText(p0.getKeywords().toString());
         } else {
-            temp[4].setText("");
+            temp[5].setText("");
         }
     }
 
@@ -496,7 +535,7 @@ public class ViewTabber extends FRoundedPanel {
      * 
      * @return HashMap<Player, JLabel[]>
      */
-    public HashMap<Player, JLabel[]> getDetailLabels() {
+    public Map<Player, JLabel[]> getDetailLabels() {
         return this.detailLabels;
     }
 
@@ -514,12 +553,11 @@ public class ViewTabber extends FRoundedPanel {
             final InfoLabel draw = new InfoLabel();
             final InfoLabel prevention = new InfoLabel();
             final InfoLabel keywords = new InfoLabel();
-            this.detailLabels.put(p, new JLabel[] { life, hand, draw, prevention, keywords });
+            this.detailLabels.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords });
 
             // Set border on bottom label, and larger font on player name
             keywords.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders()));
             name.setText(p.getName());
-            name.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 14));
 
             // Add to "players" tab panel
             final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
@@ -584,7 +622,6 @@ public class ViewTabber extends FRoundedPanel {
         log.setEditable(false);
         log.setFocusable(false);
         log.setForeground(this.skin.getClrText());
-        log.setFont(this.skin.getFont1().deriveFont(Font.PLAIN, 12));
         log.setBorder(new MatteBorder(1, 0, 0, 0, this.skin.getClrBorders()));
 
         log.setText("No log information yet. Input codes entered above. " + "Output data recorded below.");
@@ -644,7 +681,6 @@ public class ViewTabber extends FRoundedPanel {
         public DevLabel(final String en0, final String dis0) {
             super();
             this.setUI(MultiLineLabelUI.getLabelUI());
-            this.setFont(ViewTabber.this.skin.getFont1().deriveFont(Font.PLAIN, 11));
             this.setBorder(new EmptyBorder(5, 5, 5, 5));
             this.enabledText = en0;
             this.disabledText = dis0;
@@ -740,7 +776,6 @@ public class ViewTabber extends FRoundedPanel {
     private class InfoLabel extends JLabel {
         public InfoLabel() {
             super();
-            this.setFont(ViewTabber.this.skin.getFont1().deriveFont(Font.PLAIN, 11));
             this.setForeground(ViewTabber.this.skin.getClrText());
         }
     }

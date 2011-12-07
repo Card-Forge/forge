@@ -18,6 +18,8 @@
 package forge.view.match;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -75,8 +77,15 @@ public class ViewDock extends FRoundedPanel {
         super();
         this.setToolTipText("Shortcut Button Dock");
         this.setBackground(AllZone.getSkin().getClrTheme());
-        this.setLayout(new MigLayout("insets 0, gap 0, ay center, ax center"));
-        final String constraints = "w 30px!, h 30px!, gap 0 10px";
+        //this.setLayout(new MigLayout("insets 0, gap 0, ay center, ax center"));
+
+        // Mig layout does not support wrapping!
+        // http://stackoverflow.com/questions/5715833/how-do-you-make-miglayout-behave-like-wrap-layout
+        FlowLayout layFlow = new FlowLayout();
+        layFlow.setHgap(10);
+        layFlow.setVgap(10);
+        this.setLayout(layFlow);
+
         this.skin = AllZone.getSkin();
         this.keyboardShortcutFields = new HashMap<String, KeyboardShortcutField>();
 
@@ -135,11 +144,11 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        this.add(btnConcede, constraints);
-        this.add(btnShortcuts, constraints);
-        this.add(btnSettings, constraints);
-        this.add(btnEndTurn, constraints);
-        this.add(btnViewDeckList, constraints);
+        this.add(btnConcede);
+        this.add(btnShortcuts);
+        this.add(btnSettings);
+        this.add(btnEndTurn);
+        this.add(btnViewDeckList);
 
         // After all components are in place, instantiate controller.
         this.control = new ControlDock(this);
@@ -178,6 +187,11 @@ public class ViewDock extends FRoundedPanel {
             this.setOpaque(false);
             this.setBackground(this.defaultBG);
             this.img = i0.getImage();
+
+            Dimension size = new Dimension(30, 30);
+            this.setMinimumSize(size);
+            this.setMaximumSize(size);
+            this.setPreferredSize(size);
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
