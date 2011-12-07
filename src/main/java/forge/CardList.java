@@ -960,7 +960,7 @@ public class CardList implements Iterable<Card> {
             }
         });
     }
-    
+
     /**
      * <p>
      * getMonoColored.

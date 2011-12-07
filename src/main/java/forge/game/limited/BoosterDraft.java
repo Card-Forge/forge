@@ -277,7 +277,7 @@ public final class BoosterDraft implements IBoosterDraft {
         for (int i = 1; i < this.pack.size(); i++) {
 
             final CardList forAi = new CardList();
-            final List<CardPrinted> booster = this.pack.get((iHumansBooster+i) % this.pack.size());
+            final List<CardPrinted> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
             for (final CardPrinted cr : booster) {
                 forAi.add(cr.toForgeCard());
             }
