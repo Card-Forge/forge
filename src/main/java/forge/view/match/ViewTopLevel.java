@@ -26,6 +26,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -105,8 +106,8 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
         // Set properties
         this.setOpaque(false);
-        this.setBGTexture(AllZone.getSkin().getImage("bg.texture"));
-        this.setBGImg(AllZone.getSkin().getImage("bg.match"));
+        this.setBGTexture(new ImageIcon(AllZone.getSkin().getImage("bg.texture")));
+        this.setBGImg(new ImageIcon(AllZone.getSkin().getImage("bg.match")));
         this.setLayout(null);
         b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 

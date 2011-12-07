@@ -25,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -107,7 +108,7 @@ public class WinLoseFrame extends JFrame {
 
         // Place all content in FPanel
         final FPanel contentPanel = new FPanel(new MigLayout("wrap, fill, insets 20 0 10 10"));
-        contentPanel.setBGTexture(AllZone.getSkin().getImage("bg.texture"));
+        contentPanel.setBGTexture(new ImageIcon(AllZone.getSkin().getImage("bg.texture")));
         contentPanel.setBorder(new WinLoseBorder());
         this.getContentPane().add(contentPanel);
 

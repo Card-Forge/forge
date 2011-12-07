@@ -69,9 +69,9 @@ public class FButton extends JButton {
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
         this.setFont(this.skin.getFont1().deriveFont(Font.BOLD, 15));
-        this.imgL = this.skin.getBtnLup().getImage();
-        this.imgM = this.skin.getBtnMup().getImage();
-        this.imgR = this.skin.getBtnRup().getImage();
+        this.imgL = skin.getImage("button.upLEFT");
+        this.imgM = skin.getImage("button.upCENTER");
+        this.imgR = skin.getImage("button.upRIGHT");
 
         if ((this.imgL != null) && (this.imgM != null) && (this.imgR != null)) {
             this.allImagesPresent = true;
@@ -81,27 +81,27 @@ public class FButton extends JButton {
             @Override
             public void mouseEntered(final java.awt.event.MouseEvent evt) {
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getBtnLover().getImage();
-                    FButton.this.imgM = FButton.this.skin.getBtnMover().getImage();
-                    FButton.this.imgR = FButton.this.skin.getBtnRover().getImage();
+                    FButton.this.imgL = FButton.this.skin.getImage("button.overLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.overCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.overRIGHT");
                 }
             }
 
             @Override
             public void mouseExited(final java.awt.event.MouseEvent evt) {
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getBtnLup().getImage();
-                    FButton.this.imgM = FButton.this.skin.getBtnMup().getImage();
-                    FButton.this.imgR = FButton.this.skin.getBtnRup().getImage();
+                    FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
                 }
             }
 
             @Override
             public void mousePressed(final java.awt.event.MouseEvent evt) {
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getBtnLdown().getImage();
-                    FButton.this.imgM = FButton.this.skin.getBtnMdown().getImage();
-                    FButton.this.imgR = FButton.this.skin.getBtnRdown().getImage();
+                    FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
                 }
             }
         });

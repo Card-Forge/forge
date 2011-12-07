@@ -234,7 +234,7 @@ public class ViewDock extends FRoundedPanel {
         overlay.showOverlay();
 
         final FPanel parent = new FPanel();
-        parent.setBGImg(this.skin.getImage("bg.texture"));
+        parent.setBGImg(new ImageIcon(this.skin.getImage("bg.texture")));
         parent.setBorder(new LineBorder(this.skin.getColor("borders"), 1));
         parent.setLayout(new MigLayout("insets 0, wrap 2, ax center, ay center"));
         overlay.add(parent, "w 80%!, h 80%!, gaptop 10%, gapleft 10%, span 2 1");
