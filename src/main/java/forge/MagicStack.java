@@ -399,7 +399,9 @@ public class MagicStack extends MyObservable {
         if (sp.getTarget() != null) {
             sb.append(" targeting ");
             for (TargetChoices ch : chosenTargets) {
-                sb.append(ch.getTargetedString());
+                if (null != ch) {
+                    sb.append(ch.getTargetedString());
+                }
             }
         }
         sb.append(".");
