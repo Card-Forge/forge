@@ -295,13 +295,13 @@ public class ViewTabber extends FRoundedPanel {
         this.pnlConsole.removeAll();
 
         final Font font = this.skin.getFont1().deriveFont(Font.PLAIN, 14);
-        final Border border = new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders());
+        //final Border border = new MatteBorder(0, 0, 0, 0, this.skin.getClrBorders());
 
         //by default, grab everything logging level 3 or less
         //TODO - some option to make this configurable is probably desirable
         JTextArea tar = new JTextArea(gl.getLogText(3));
         tar.setOpaque(false);
-        tar.setBorder(border);
+        //tar.setBorder(border);
         tar.setFont(font);
 
         tar.setForeground(this.skin.getClrText());
@@ -538,7 +538,7 @@ public class ViewTabber extends FRoundedPanel {
         viewport.setLayout(new MigLayout("wrap, insets 0"));
         viewport.setOpaque(false);
 
-        final JScrollPane jsp = new JScrollPane(viewport, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        final JScrollPane jsp = new JScrollPane(viewport, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jsp.setOpaque(false);
         jsp.getViewport().setOpaque(false);
