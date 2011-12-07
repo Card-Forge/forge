@@ -86,7 +86,7 @@ public class SplashFrame extends JFrame {
         this.setUndecorated(true);
 
         // Set preferred JFrame properties.
-        final ImageIcon bgIcon = skin.getSplashBG();
+        final ImageIcon bgIcon = skin.getImage("bg.splash");
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
 
@@ -146,16 +146,12 @@ public class SplashFrame extends JFrame {
 
         contentPane.getActionMap().put("escAction", new CloseAction());
 
-        // Set UI to color splash bar fill with skin colors
-        UIManager.put("ProgressBar.background", skin.getClrProgress1()); // Unfilled
-                                                                         // state
-        UIManager.put("ProgressBar.selectionBackground", skin.getClrProgress2()); // Unfilled
-                                                                                  // state
-        UIManager.put("ProgressBar.foreground", skin.getClrProgress3()); // Filled
-                                                                         // state
-        UIManager.put("ProgressBar.selectionForeground", skin.getClrProgress4()); // Filled
-                                                                                  // state
-        UIManager.put("ProgressBar.border", new LineBorder(skin.getClrTheme(), 0));
+        // Set UI to color splash bar filled/unfilled states with skin colors
+        UIManager.put("ProgressBar.background", skin.getColor("progress1"));
+        UIManager.put("ProgressBar.selectionBackground", skin.getColor("progress2"));
+        UIManager.put("ProgressBar.foreground", skin.getColor("progress3"));
+        UIManager.put("ProgressBar.selectionForeground", skin.getColor("progress4"));
+        UIManager.put("ProgressBar.border", new LineBorder(skin.getColor("theme"), 0));
 
         // Instantiate model and view and tie together.
         this.monitorModel = new SplashProgressModel();

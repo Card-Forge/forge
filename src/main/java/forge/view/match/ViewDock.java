@@ -76,7 +76,7 @@ public class ViewDock extends FRoundedPanel {
     public ViewDock() {
         super();
         this.setToolTipText("Shortcut Button Dock");
-        this.setBackground(AllZone.getSkin().getClrTheme());
+        this.setBackground(AllZone.getSkin().getColor("theme"));
         //this.setLayout(new MigLayout("insets 0, gap 0, ay center, ax center"));
 
         // Mig layout does not support wrapping!
@@ -168,7 +168,7 @@ public class ViewDock extends FRoundedPanel {
      */
     public class DockButton extends JLabel {
         private final Image img;
-        private final Color hoverBG = ViewDock.this.skin.getClrHover();
+        private final Color hoverBG = ViewDock.this.skin.getColor("hover");
         private final Color defaultBG = new Color(0, 0, 0, 0);
         private Color clrBorders = new Color(0, 0, 0, 0);
         private int w, h;
@@ -196,7 +196,7 @@ public class ViewDock extends FRoundedPanel {
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    DockButton.this.clrBorders = ViewDock.this.skin.getClrBorders();
+                    DockButton.this.clrBorders = ViewDock.this.skin.getColor("borders");
                     DockButton.this.setBackground(DockButton.this.hoverBG);
                 }
 
@@ -234,8 +234,8 @@ public class ViewDock extends FRoundedPanel {
         overlay.showOverlay();
 
         final FPanel parent = new FPanel();
-        parent.setBGImg(this.skin.getTexture1());
-        parent.setBorder(new LineBorder(this.skin.getClrBorders(), 1));
+        parent.setBGImg(this.skin.getImage("bg.texture"));
+        parent.setBorder(new LineBorder(this.skin.getColor("borders"), 1));
         parent.setLayout(new MigLayout("insets 0, wrap 2, ax center, ay center"));
         overlay.add(parent, "w 80%!, h 80%!, gaptop 10%, gapleft 10%, span 2 1");
 
@@ -359,7 +359,7 @@ public class ViewDock extends FRoundedPanel {
         public KeyboardShortcutLabel(final String s0) {
             super(s0);
 
-            this.setForeground(ViewDock.this.skin.getClrText());
+            this.setForeground(ViewDock.this.skin.getColor("text"));
             this.setFont(ViewDock.this.skin.getFont1().deriveFont(Font.PLAIN, 16));
         }
     }
@@ -408,7 +408,7 @@ public class ViewDock extends FRoundedPanel {
             this.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(final FocusEvent e) {
-                    KeyboardShortcutField.this.setBackground(ViewDock.this.skin.getClrActive());
+                    KeyboardShortcutField.this.setBackground(ViewDock.this.skin.getColor("active"));
                 }
 
                 @Override

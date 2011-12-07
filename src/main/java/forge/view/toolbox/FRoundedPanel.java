@@ -42,7 +42,7 @@ public class FRoundedPanel extends JPanel {
     private boolean[] borders = { true, true, true, true };
     private boolean[] corners = { true, true, true, true }; // NW, SW, SE, NE
     private Color shadowColor = new Color(150, 150, 150, 150);
-    private Color borderColor = AllZone.getSkin().getClrBorders();
+    private Color borderColor = AllZone.getSkin().getColor("borders");
     private int shadowOffset = 5;
     private int cornerRadius = 10;
     private boolean showShadow = false;

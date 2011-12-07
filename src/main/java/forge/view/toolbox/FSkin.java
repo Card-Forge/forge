@@ -40,16 +40,12 @@ import forge.gui.GuiUtils;
 
 public class FSkin {
     private Map<String, BufferedImage> icons;
+    private Map<String, Color> colors;
+    private Map<String, ImageIcon> images;
 
     // ===== Public fields
     /** Primary font used in titles and buttons and most text output. */
     private Font font1 = null;
-
-    /** Primary texture used in skin. */
-    private ImageIcon texture1 = null;
-
-    /** Primary background image used during match play. */
-    private ImageIcon matchBG = null;
 
     /** Left side of button, up state. */
     private ImageIcon btnLup = null;
@@ -78,49 +74,16 @@ public class FSkin {
     /** Button, right side, down state. */
     private ImageIcon btnRdown = null;
 
-    /** Splash screen image. */
-    private ImageIcon splash = null;
-
-    /** Base color used in skin. */
-    private Color clrTheme = Color.red;
-
-    /** Border color. */
-    private Color clrBorders = Color.red;
-
-    /** Color of zebra striping in grid displays. */
-    private Color clrZebra = Color.red;
-
-    /** Color of elements in mouseover state. */
-    private Color clrHover = Color.red;
-
-    /** Color of active (currently selected) elements. */
-    private Color clrActive = Color.red;
-
-    /** Color of inactive (not currently selected) elements. */
-    private Color clrInactive = Color.red;
-
-    /** Color of text in skin. */
-    private Color clrText = Color.red;
-
-    /** Color of background in progress bar if unfilled. */
-    private Color clrProgress1 = Color.red;
-
-    /** Color of text in progress bar if filled. */
-    private Color clrProgress2 = Color.red;
-
-    /** Color of background in progress bar if unfilled. */
-    private Color clrProgress3 = Color.red;
-
-    /** Color of text in progress bar if filled. */
-    private Color clrProgress4 = Color.red;
-
     /** Name of skin. */
     private final String name = "default";
 
     // ===== Private fields
     private final String spriteFile = "sprite.png";
     private final String font1file = "font1.ttf";
-    private final String texture1file = "bg_texture.jpg";
+    private final String textureFile = "bg_texture.jpg";
+    private final String matchfile = "bg_match.jpg";
+    private final String splashfile = "bg_splash.jpg";
+
     private final String btnLupfile = "btnLup.png";
     private final String btnMupfile = "btnMup.png";
     private final String btnRupfile = "btnRup.png";
@@ -130,8 +93,6 @@ public class FSkin {
     private final String btnLdownfile = "btnLdown.png";
     private final String btnMdownfile = "btnMdown.png";
     private final String btnRdownfile = "btnRdown.png";
-    private final String splashfile = "bg_splash.jpg";
-    private final String matchfile = "bg_match.jpg";
 
     private ImageIcon tempImg;
     private Font tempFont;
@@ -168,14 +129,19 @@ public class FSkin {
      */
     private void loadFontAndImages(final String skinName) {
         final String dirName = "res/images/skins/" + skinName + "/";
+
         icons = new HashMap<String, BufferedImage>();
+        colors = new HashMap<String, Color>();
+        images = new HashMap<String, ImageIcon>();
 
         // Fonts
         this.setFont1(this.retrieveFont(dirName + this.font1file));
 
         // Images
-        this.setTexture1(this.retrieveImage(dirName + this.texture1file));
-        this.setMatchBG(this.retrieveImage(dirName + this.matchfile));
+        this.setImage("bg.texture", this.retrieveImage(dirName + this.textureFile));
+        this.setImage("bg.match", this.retrieveImage(dirName + this.matchfile));
+        this.setImage("bg.splash", this.retrieveImage(dirName + this.splashfile));
+
         this.setBtnLup(this.retrieveImage(dirName + this.btnLupfile));
         this.setBtnMup(this.retrieveImage(dirName + this.btnMupfile));
         this.setBtnRup(this.retrieveImage(dirName + this.btnRupfile));
@@ -185,24 +151,23 @@ public class FSkin {
         this.setBtnLdown(this.retrieveImage(dirName + this.btnLdownfile));
         this.setBtnMdown(this.retrieveImage(dirName + this.btnMdownfile));
         this.setBtnRdown(this.retrieveImage(dirName + this.btnRdownfile));
-        this.setSplashBG(this.retrieveImage(dirName + this.splashfile));
 
         // Sprite
         final File file = new File(dirName + this.spriteFile);
         BufferedImage image;
         try {
             image = ImageIO.read(file);
-            this.setClrTheme(this.getColorFromPixel(image.getRGB(70, 10)));
-            this.setClrBorders(this.getColorFromPixel(image.getRGB(70, 30)));
-            this.setClrZebra(this.getColorFromPixel(image.getRGB(70, 50)));
-            this.setClrHover(this.getColorFromPixel(image.getRGB(70, 70)));
-            this.setClrActive(this.getColorFromPixel(image.getRGB(70, 90)));
-            this.setClrInactive(this.getColorFromPixel(image.getRGB(70, 110)));
-            this.setClrText(this.getColorFromPixel(image.getRGB(70, 130)));
-            this.setClrProgress1(this.getColorFromPixel(image.getRGB(65, 145)));
-            this.setClrProgress2(this.getColorFromPixel(image.getRGB(75, 145)));
-            this.setClrProgress3(this.getColorFromPixel(image.getRGB(65, 155)));
-            this.setClrProgress4(this.getColorFromPixel(image.getRGB(75, 155)));
+            this.setColor("theme", this.getColorFromPixel(image.getRGB(70, 10)));
+            this.setColor("borders", this.getColorFromPixel(image.getRGB(70, 30)));
+            this.setColor("zebra", this.getColorFromPixel(image.getRGB(70, 50)));
+            this.setColor("hover", this.getColorFromPixel(image.getRGB(70, 70)));
+            this.setColor("active", this.getColorFromPixel(image.getRGB(70, 90)));
+            this.setColor("inactive", this.getColorFromPixel(image.getRGB(70, 110)));
+            this.setColor("text", this.getColorFromPixel(image.getRGB(70, 130)));
+            this.setColor("progress1", this.getColorFromPixel(image.getRGB(65, 145)));
+            this.setColor("progress2", this.getColorFromPixel(image.getRGB(75, 145)));
+            this.setColor("progress3", this.getColorFromPixel(image.getRGB(65, 155)));
+            this.setColor("progress4", this.getColorFromPixel(image.getRGB(75, 155)));
 
             // All icons should eventually be set and retrieved using this method.
             // Doublestrike 6-12-11
@@ -245,6 +210,7 @@ public class FSkin {
      */
     private ImageIcon retrieveImage(final String address) {
         this.tempImg = new ImageIcon(address);
+
         if (this.tempImg.getIconWidth() == -1) {
             System.err.println(this.notfound + address);
         }
@@ -301,272 +267,6 @@ public class FSkin {
      */
     public void setFont1(final Font font10) {
         this.font1 = font10;
-    }
-
-    /**
-     * Splash screen image.
-     * 
-     * @return {@link javax.swing.ImageIcon} splash
-     */
-    public ImageIcon getSplashBG() {
-        return this.splash;
-    }
-
-    /**
-     * Splash screen image.
-     * 
-     * @param splash0
-     *            &emsp; an image icon
-     */
-    public void setSplashBG(final ImageIcon splash0) {
-        this.splash = splash0;
-    }
-
-    /**
-     * Base color used in skin.
-     * 
-     * @return {@link java.awt.Color} clrTheme
-     */
-    public Color getClrTheme() {
-        return this.clrTheme;
-    }
-
-    /**
-     * Base color used in skin.
-     * 
-     * @param clrTheme0
-     *            &emsp; an image icon
-     */
-    public void setClrTheme(final Color clrTheme0) {
-        this.clrTheme = clrTheme0;
-    }
-
-    /**
-     * Border color.
-     * 
-     * @return {@link java.awt.Color} clrBorders
-     */
-    public Color getClrBorders() {
-        return this.clrBorders;
-    }
-
-    /**
-     * Border color.
-     * 
-     * @param clrBorders0
-     *            &emsp; an image icon
-     */
-    public void setClrBorders(final Color clrBorders0) {
-        this.clrBorders = clrBorders0;
-    }
-
-    /**
-     * Primary texture used in skin.
-     * 
-     * @return {@link javax.swing.ImageIcon} texture1
-     */
-    public ImageIcon getTexture1() {
-        return this.texture1;
-    }
-
-    /**
-     * Primary texture used in skin.
-     * 
-     * @param texture10
-     *            &emsp; an image icon
-     */
-    public void setTexture1(final ImageIcon texture10) {
-        this.texture1 = texture10;
-    }
-
-    /**
-     * Primary background image used during match play.
-     * 
-     * @return ImageIcon
-     */
-    public ImageIcon getMatchBG() {
-        return this.matchBG;
-    }
-
-    /**
-     * Primary background image used during match play.
-     * 
-     * @param img0
-     *            &emsp; an image icon
-     */
-    public void setMatchBG(final ImageIcon img0) {
-        this.matchBG = img0;
-    }
-
-    /**
-     * Color of zebra striping in grid displays.
-     * 
-     * @return {@link java.awt.Color} clrZebra
-     */
-    public Color getClrZebra() {
-        return this.clrZebra;
-    }
-
-    /**
-     * Color of zebra striping in grid displays.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrZebra(final Color clr0) {
-        this.clrZebra = clr0;
-    }
-
-    /**
-     * Color of elements in mouseover state.
-     * 
-     * @return {@link java.awt.Color} clrHover
-     */
-    public Color getClrHover() {
-        return this.clrHover;
-    }
-
-    /**
-     * Color of elements in mouseover state.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrHover(final Color clr0) {
-        this.clrHover = clr0;
-    }
-
-    /**
-     * Color of active (currently selected) elements.
-     * 
-     * @return {@link java.awt.Color} clrActive
-     */
-    public Color getClrActive() {
-        return this.clrActive;
-    }
-
-    /**
-     * Color of active (currently selected) elements.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrActive(final Color clr0) {
-        this.clrActive = clr0;
-    }
-
-    /**
-     * Color of inactive (not currently selected) elements.
-     * 
-     * @return {@link java.awt.Color} clrHover
-     */
-    public Color getClrInactive() {
-        return this.clrInactive;
-    }
-
-    /**
-     * Color of inactive (not currently selected) elements.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrInactive(final Color clr0) {
-        this.clrInactive = clr0;
-    }
-
-    /**
-     * Color of text in skin.
-     * 
-     * @return {@link java.awt.Color} clrText
-     */
-    public Color getClrText() {
-        return this.clrText;
-    }
-
-    /**
-     * Color of text in skin.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrText(final Color clr0) {
-        this.clrText = clr0;
-    }
-
-    /**
-     * Background of progress bar, "unfilled" state.
-     * 
-     * @return {@link java.awt.Color} clrProgress1
-     */
-    public Color getClrProgress1() {
-        return this.clrProgress1;
-    }
-
-    /**
-     * Background of progress bar, "unfilled" state.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrProgress1(final Color clr0) {
-        this.clrProgress1 = clr0;
-    }
-
-    /**
-     * Text of progress bar, "unfilled" state.
-     * 
-     * @return {@link java.awt.Color} clrProgress1
-     */
-    public Color getClrProgress2() {
-        return this.clrProgress2;
-    }
-
-    /**
-     * Text of progress bar, "unfilled" state.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrProgress2(final Color clr0) {
-        this.clrProgress2 = clr0;
-    }
-
-    /**
-     * Background of progress bar, "filled" state.
-     * 
-     * @return {@link java.awt.Color} clrProgress1
-     */
-    public Color getClrProgress3() {
-        return this.clrProgress3;
-    }
-
-    /**
-     * Background of progress bar, "filled" state.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrProgress3(final Color clr0) {
-        this.clrProgress3 = clr0;
-    }
-
-    /**
-     * Text of progress bar, "filled" state.
-     * 
-     * @return {@link java.awt.Color} clrProgress1
-     */
-    public Color getClrProgress4() {
-        return this.clrProgress4;
-    }
-
-    /**
-     * Text of progress bar, "filled" state.
-     * 
-     * @param clr0
-     *            &emsp; Color obj
-     */
-    public void setClrProgress4(final Color clr0) {
-        this.clrProgress4 = clr0;
     }
 
     /**
@@ -781,10 +481,52 @@ public class FSkin {
     }
 
     /** 
+     * Sets an icon in this skin's icon map.
+     * 
      * @param s0 &emsp; String address
      * @param bi0 &emsp; BufferedImage
      */
     public void setIcon(String s0, BufferedImage bi0) {
         icons.put(s0, bi0);
+    }
+
+    /**
+     * Retrieves a color from this skin's color map.
+     * 
+     * @param s0 &emsp; String color address
+     * @return Color
+     */
+    public Color getColor(String s0) {
+        return colors.get(s0);
+    }
+
+    /** 
+     * Sets a color in this skin's color map.
+     * 
+     * @param s0 &emsp; String address
+     * @param c0 &emsp; Color
+     */
+    public void setColor(String s0, Color c0) {
+        colors.put(s0, c0);
+    }
+
+    /**
+     * Retrieves an image from this skin's image map.
+     * 
+     * @param s0 &emsp; String color address
+     * @return Color
+     */
+    public ImageIcon getImage(String s0) {
+        return images.get(s0);
+    }
+
+    /** 
+     * Sets an image in this skin's image map.
+     * 
+     * @param s0 &emsp; String address
+     * @param i0 &emsp; ImageIcon
+     */
+    public void setImage(String s0, ImageIcon i0) {
+        images.put(s0, i0);
     }
 }

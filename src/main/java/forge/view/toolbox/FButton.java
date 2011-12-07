@@ -64,7 +64,7 @@ public class FButton extends JButton {
         super(msg);
         this.skin = AllZone.getSkin();
         this.setOpaque(false);
-        this.setForeground(this.skin.getClrText());
+        this.setForeground(this.skin.getColor("text"));
         this.setBackground(Color.red);
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));

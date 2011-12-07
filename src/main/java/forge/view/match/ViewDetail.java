@@ -47,7 +47,7 @@ public class ViewDetail extends FRoundedPanel {
         pnlDetail = new CardDetailPanel(null);
         pnlDetail.setOpaque(false);
 
-        this.setBackground(AllZone.getSkin().getClrTheme());
+        this.setBackground(AllZone.getSkin().getColor("theme"));
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
         add(pnlDetail, "w 100%!, h 100%!");

@@ -105,8 +105,8 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
 
         // Set properties
         this.setOpaque(false);
-        this.setBGTexture(AllZone.getSkin().getTexture1());
-        this.setBGImg(AllZone.getSkin().getMatchBG());
+        this.setBGTexture(AllZone.getSkin().getImage("bg.texture"));
+        this.setBGImg(AllZone.getSkin().getImage("bg.match"));
         this.setLayout(null);
         b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 

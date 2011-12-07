@@ -40,7 +40,7 @@ public class ViewHand extends FRoundedPanel {
     public ViewHand() {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller, null);
-        ViewHand.this.setBackground(AllZone.getSkin().getClrTheme());
+        ViewHand.this.setBackground(AllZone.getSkin().getColor("theme"));
 
         scroller.setViewportView(ViewHand.this.hand);
         scroller.setOpaque(false);

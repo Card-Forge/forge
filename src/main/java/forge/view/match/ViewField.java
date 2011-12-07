@@ -86,11 +86,11 @@ public class ViewField extends FRoundedPanel {
         this.setLayout(new MigLayout("insets 0, gap 0"));
         this.setCornerRadius(5);
         this.setToolTipText(player.getName() + " Gameboard");
-        this.setBackground(AllZone.getSkin().getClrTheme());
+        this.setBackground(AllZone.getSkin().getColor("theme"));
 
         this.skin = AllZone.getSkin();
         this.inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
-        this.hoverBorder = new LineBorder(this.skin.getClrBorders(), 1);
+        this.hoverBorder = new LineBorder(this.skin.getColor("borders"), 1);
         this.counter = -1;
 
         String filename = "res/pics/icons/" + (player.isHuman() ? "Mage01.jpg" : "Mage02.jpg");
@@ -99,7 +99,7 @@ public class ViewField extends FRoundedPanel {
         // Avatar and life
         avatarArea = new JPanel();
         avatarArea.setOpaque(false);
-        avatarArea.setBackground(skin.getClrHover());
+        avatarArea.setBackground(skin.getColor("hover"));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
 
         lblAvatar = new JLabel();
@@ -108,7 +108,7 @@ public class ViewField extends FRoundedPanel {
 
         lblLife = new JLabel();
         lblLife.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLife.setForeground(skin.getClrText());
+        lblLife.setForeground(skin.getColor("text"));
         avatarArea.add(lblLife, "w 100%!, h 30%!");
 
         this.add(avatarArea, "w 10%!, h 30%!");
@@ -124,7 +124,7 @@ public class ViewField extends FRoundedPanel {
         final JScrollPane scroller = new JScrollPane();
 
         this.tabletop = new PlayArea(scroller, player.equals(AllZone.getComputerPlayer()) ? true : false);
-        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getClrBorders()));
+        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getColor("borders")));
         this.tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
@@ -327,14 +327,14 @@ public class ViewField extends FRoundedPanel {
             this.getLblLife().setForeground(Color.red);
         }
         else {
-            this.getLblLife().setForeground(skin.getClrText());
+            this.getLblLife().setForeground(skin.getColor("text"));
         }
 
         if (p0.getPoisonCounters() >= 8) {
             this.getLblPoison().setForeground(Color.red);
         }
         else {
-            this.getLblPoison().setForeground(skin.getClrText());
+            this.getLblPoison().setForeground(skin.getColor("text"));
         }
 
         //mana pool
@@ -647,7 +647,7 @@ public class ViewField extends FRoundedPanel {
             this.setIcon(skin.getIcon(iconAddress, h - 2 * padding, h - 2 * padding));
             this.setText(txt0);
             this.setOpaque(false);
-            this.setForeground(ViewField.this.skin.getClrText());
+            this.setForeground(ViewField.this.skin.getColor("text"));
             this.setPreferredSize(this.labelSize);
             this.setMaximumSize(this.labelSize);
             this.setMinimumSize(this.labelSize);
@@ -660,9 +660,9 @@ public class ViewField extends FRoundedPanel {
             ViewField.this.counter++;
 
             if (((ViewField.this.counter % 4) == 2) || ((ViewField.this.counter % 4) == 3)) {
-                this.defaultBG = ViewField.this.skin.getClrZebra();
+                this.defaultBG = ViewField.this.skin.getColor("zebra");
             } else {
-                this.defaultBG = ViewField.this.skin.getClrTheme();
+                this.defaultBG = ViewField.this.skin.getColor("theme");
             }
             this.setBackground(this.defaultBG);
 
@@ -680,7 +680,7 @@ public class ViewField extends FRoundedPanel {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     DetailLabel.this.setBackground(DetailLabel.this.hoverBG);
-                    DetailLabel.this.clrBorders = ViewField.this.skin.getClrBorders();
+                    DetailLabel.this.clrBorders = ViewField.this.skin.getColor("borders");
                 }
 
                 @Override
@@ -690,7 +690,7 @@ public class ViewField extends FRoundedPanel {
                 }
             };
 
-            this.hoverBG = ViewField.this.skin.getClrHover();
+            this.hoverBG = ViewField.this.skin.getColor("hover");
             this.clrBorders = ViewField.this.transparent;
         }
 
@@ -730,7 +730,7 @@ public class ViewField extends FRoundedPanel {
         private boolean enabled = true;
         private boolean active = false;
         private boolean hover = false;
-        private final Color hoverBG = AllZone.getSkin().getClrHover();
+        private final Color hoverBG = AllZone.getSkin().getColor("hover");
 
         /**
          * Shows phase labels, handles repainting and on/off states. A

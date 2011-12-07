@@ -107,7 +107,7 @@ public class WinLoseFrame extends JFrame {
 
         // Place all content in FPanel
         final FPanel contentPanel = new FPanel(new MigLayout("wrap, fill, insets 20 0 10 10"));
-        contentPanel.setBGTexture(AllZone.getSkin().getTexture1());
+        contentPanel.setBGTexture(AllZone.getSkin().getImage("bg.texture"));
         contentPanel.setBorder(new WinLoseBorder());
         this.getContentPane().add(contentPanel);
 
@@ -227,7 +227,7 @@ public class WinLoseFrame extends JFrame {
         }
 
         this.setUndecorated(true);
-        this.setBackground(AllZone.getSkin().getClrTheme());
+        this.setBackground(AllZone.getSkin().getColor("theme"));
         this.setBounds(bounds);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -403,9 +403,9 @@ public class WinLoseFrame extends JFrame {
         @Override
         public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width,
                 final int height) {
-            g.setColor(AllZone.getSkin().getClrText());
+            g.setColor(AllZone.getSkin().getColor("text"));
             g.drawRect(x + 1, y + 1, width - 3, height - 3);
-            g.setColor(AllZone.getSkin().getClrTheme());
+            g.setColor(AllZone.getSkin().getColor("theme"));
             g.drawRect(x + 3, y + 3, width - 7, height - 7);
         }
     }

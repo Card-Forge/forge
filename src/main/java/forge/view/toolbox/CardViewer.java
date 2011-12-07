@@ -47,7 +47,7 @@ public class CardViewer extends JPanel {
     private final List<CardPrinted> list;
 
     // initialized before; listeners may be added to it
-    private final JList jList;
+    private JList jList = null;
     private final CardDetailPanel detail;
     private final CardPicturePanel picture;
 

@@ -142,7 +142,7 @@ public class ViewTabber extends FRoundedPanel {
         this.populatePnlConsole();
 
         this.vtpTabber = new FVerticalTabPanel(this.panelList);
-        this.setBackground(AllZone.getSkin().getClrTheme());
+        this.setBackground(AllZone.getSkin().getColor("theme"));
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
         this.add(vtpTabber, "w 97%!, h 100%!, gapleft 2%");
@@ -295,7 +295,7 @@ public class ViewTabber extends FRoundedPanel {
             return new Color[] {new Color(111, 75, 43), Color.white};
         }
 
-        return new Color[] {new Color(0, 0, 0, 0), skin.getClrText()};
+        return new Color[] {new Color(0, 0, 0, 0), skin.getColor("text")};
     }
 
     /**
@@ -313,14 +313,14 @@ public class ViewTabber extends FRoundedPanel {
         this.pnlCombat.removeAll();
         this.vtpTabber.showTab(1);
 
-        final Border border = new MatteBorder(0, 0, 0, 0, skin.getClrBorders());
+        final Border border = new MatteBorder(0, 0, 0, 0, skin.getColor("borders"));
 
         this.vtpTabber.getAllVTabs().get(1).setText("Combat : " + AllZone.getCombat().getAttackers().length);
 
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
         tar.setBorder(border);
-        tar.setForeground(skin.getClrText());
+        tar.setForeground(skin.getColor("text"));
         tar.setFocusable(false);
         tar.setLineWrap(true);
         this.pnlCombat.add(tar, "w 95%!, gapleft 3%, gaptop 1%, h 95%");
@@ -343,7 +343,7 @@ public class ViewTabber extends FRoundedPanel {
         JTextArea tar = new JTextArea(gl.getLogText(3));
         tar.setOpaque(false);
         //tar.setBorder(border);
-        tar.setForeground(this.skin.getClrText());
+        tar.setForeground(this.skin.getColor("text"));
 
         tar.setFocusable(false);
         tar.setEditable(false);
@@ -556,7 +556,7 @@ public class ViewTabber extends FRoundedPanel {
             this.detailLabels.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords });
 
             // Set border on bottom label, and larger font on player name
-            keywords.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getClrBorders()));
+            keywords.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getColor("borders")));
             name.setText(p.getName());
 
             // Add to "players" tab panel
@@ -621,8 +621,8 @@ public class ViewTabber extends FRoundedPanel {
         log.setWrapStyleWord(true);
         log.setEditable(false);
         log.setFocusable(false);
-        log.setForeground(this.skin.getClrText());
-        log.setBorder(new MatteBorder(1, 0, 0, 0, this.skin.getClrBorders()));
+        log.setForeground(this.skin.getColor("text"));
+        log.setBorder(new MatteBorder(1, 0, 0, 0, this.skin.getColor("borders")));
 
         log.setText("No log information yet. Input codes entered above. " + "Output data recorded below.");
 
@@ -642,7 +642,7 @@ public class ViewTabber extends FRoundedPanel {
         private static final long serialVersionUID = 7917311680519060700L;
 
         private Color defaultBG = Color.green;
-        private final Color hoverBG = ViewTabber.this.skin.getClrHover();
+        private final Color hoverBG = ViewTabber.this.skin.getColor("hover");
         private final Color pressedBG = Color.green.darker().darker();
         private boolean enabled;
         private final String enabledText, disabledText;
@@ -776,7 +776,7 @@ public class ViewTabber extends FRoundedPanel {
     private class InfoLabel extends JLabel {
         public InfoLabel() {
             super();
-            this.setForeground(ViewTabber.this.skin.getClrText());
+            this.setForeground(ViewTabber.this.skin.getColor("text"));
         }
     }
 

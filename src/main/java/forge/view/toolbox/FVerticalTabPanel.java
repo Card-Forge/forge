@@ -83,9 +83,9 @@ public class FVerticalTabPanel extends FPanel {
         this.setOpaque(false);
         final int size = childPanels.size();
         this.skin = AllZone.getSkin();
-        this.hoverColor = this.skin.getClrHover();
-        this.activeColor = this.skin.getClrActive();
-        this.inactiveColor = this.skin.getClrInactive();
+        this.hoverColor = this.skin.getColor("hover");
+        this.activeColor = this.skin.getColor("active");
+        this.inactiveColor = this.skin.getColor("inactive");
 
         final int pctTabH = ((100 - 2 - 2) / size);
         final int pctTabW = 11;
@@ -102,7 +102,7 @@ public class FVerticalTabPanel extends FPanel {
         // immediately to define grid.
         if (tabsOnRightSide) {
             this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
-            this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, this.skin.getClrBorders()));
+            this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, this.skin.getColor("borders")));
         }
 
         // Add top spacer in any case.
@@ -114,7 +114,7 @@ public class FVerticalTabPanel extends FPanel {
         // must be added after spacer, which then defines the grid.
         if (!tabsOnRightSide) {
             this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
-            this.pnlContent.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getClrBorders()));
+            this.pnlContent.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getColor("borders")));
         }
 
         // Add all tabs
@@ -251,12 +251,12 @@ public class FVerticalTabPanel extends FPanel {
             if (tabsOnRightSide) {
                 at.rotate(Math.toRadians(90), 0, 0);
                 g2d.setTransform(at);
-                g2d.setColor(AllZone.getSkin().getClrText());
+                g2d.setColor(AllZone.getSkin().getColor("text"));
                 g2d.drawString(this.msg, 5, -4);
             } else {
                 at.rotate(Math.toRadians(-90), 0, 0);
                 g2d.setTransform(at);
-                g2d.setColor(AllZone.getSkin().getClrText());
+                g2d.setColor(AllZone.getSkin().getColor("text"));
                 // Rotated, so follows: (this.msg, vertical coord, horizontal coord)
                 g2d.drawString(this.msg, 8 - h, w - 6);
             }
