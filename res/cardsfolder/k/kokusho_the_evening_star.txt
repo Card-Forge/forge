@@ -5,8 +5,8 @@ Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each opponent loses 5 life. You gain life equal to the life lost this way.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 5 | SubAbility$ SVar=DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 5
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardOpponent | LifeAmount$ 5 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$GainLife | Defined$ TriggeredCardController | LifeAmount$ 5
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50445.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/122.jpg

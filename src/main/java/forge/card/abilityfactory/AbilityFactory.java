@@ -1773,6 +1773,16 @@ public class AbilityFactory {
                 if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getSourceCard().getController();
                 }
+            } else if (defined.endsWith("Opponent")) {
+                String triggeringType = defined.substring(9);
+                triggeringType = triggeringType.substring(0, triggeringType.length() - 8);
+                final Object c = root.getTriggeringObject(triggeringType);
+                if (c instanceof Card) {
+                    o = ((Card) c).getController().getOpponent();
+                }
+                if (c instanceof SpellAbility) {
+                    o = ((SpellAbility) c).getSourceCard().getController().getOpponent();
+                }
             } else if (defined.endsWith("Owner")) {
                 String triggeringType = defined.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 5);
