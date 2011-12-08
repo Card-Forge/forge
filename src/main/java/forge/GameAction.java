@@ -723,7 +723,7 @@ public class GameAction {
      * 
      * @return a boolean.
      */
-    public final boolean checkEndGameSate() {
+    public final boolean checkEndGameState() {
         // Win / Lose
         final GameSummary game = AllZone.getGameInfo();
         boolean humanWins = false;
@@ -812,7 +812,7 @@ public class GameAction {
             }
         }
 
-        if (this.canShowWinLose && this.checkEndGameSate()) {
+        if (this.canShowWinLose && this.checkEndGameState()) {
             AllZone.getDisplay().savePrefs();
             // frame.setEnabled(false);
             // frame.dispose();
