@@ -1,0 +1,13 @@
+Name:Brand of Ill Omen
+ManaCost:3 R
+Types:Enchantment Aura
+Text:no text
+K:Cumulative upkeep:R
+A:SP$ Attach | Cost$ 3 R | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ EnchantedController | Description$ Enchanted creature's controller can't cast creature spells.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brand_of_ill_omen.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/177.jpg
+Oracle:Enchant creature\nCumulative upkeep {R} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nEnchanted creature's controller can't cast creature spells.
+End

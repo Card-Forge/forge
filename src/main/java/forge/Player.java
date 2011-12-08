@@ -2219,10 +2219,28 @@ public abstract class Player extends GameEntity {
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
 
         final String[] incR = restriction.split("\\.");
-
-        if (!incR[0].equals("Player") && !(incR[0].equals("Opponent") && !this.equals(sourceController))
-                && !(incR[0].equals("You") && this.equals(sourceController))) {
-            return false;
+        
+        if (incR[0].equals("Opponent")) {
+            if (this.equals(sourceController)) {
+                return false;
+            }
+        } else if (incR[0].equals("You")) {
+            if (!this.equals(sourceController)) {
+                return false;
+            }
+        } else if (incR[0].equals("EnchantedController")) {
+            GameEntity enchanted = source.getEnchanting();
+            if (enchanted == null || !(enchanted instanceof Card)) {
+                return false;
+            }
+            Card enchantedCard = (Card) enchanted;
+            if (!this.equals(enchantedCard.getController())) {
+                return false;
+            }
+        } else {
+            if (!incR[0].equals("Player")) {
+                return false;
+            }
         }
 
         if (incR.length > 1) {
