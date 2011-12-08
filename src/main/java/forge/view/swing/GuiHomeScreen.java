@@ -76,6 +76,7 @@ import forge.gui.deckeditor.DeckEditorCommon;
 import forge.gui.deckeditor.DeckEditorDraft;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.StackOffsetType;
 import forge.properties.ForgeProps;
@@ -1224,7 +1225,12 @@ public class GuiHomeScreen {
                 if (index == -1) {
                     return;
                 }
-                Singletons.getModel().getPreferences().setSkin(name);
+                ForgePreferences preferences = Singletons.getModel().getPreferences();
+                preferences.setSkin(name);
+                final FSkin skin = new FSkin(name);
+                AllZone.setSkin(skin);
+                preferences.save();
+
             } catch (final Exception ex) {
                 ErrorViewer.showError(ex);
             }
