@@ -644,16 +644,14 @@ public class ViewField extends FRoundedPanel {
             padding = 6;
             iconAddress = s0;
 
-            this.setIcon(skin.getIcon(iconAddress, h - 2 * padding, h - 2 * padding));
             this.setText(txt0);
             this.setOpaque(false);
             this.setForeground(ViewField.this.skin.getColor("text"));
             this.setPreferredSize(this.labelSize);
             this.setMaximumSize(this.labelSize);
             this.setMinimumSize(this.labelSize);
-            this.setBorder(new LineBorder(new Color(0, 0, 0, 0), 1));
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setVerticalAlignment(SwingConstants.BOTTOM);
+            this.setIcon(skin.getIcon(iconAddress, h - 2 * padding, h - 2 * padding));
 
             // Increment counter and check for zebra. Set default BG
             // so hover effects return to the same color.
