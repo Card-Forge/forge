@@ -25,6 +25,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +52,16 @@ public class FSkin {
     private final String font1file = "font1.ttf";
     private Font tempFont;
     private final String notfound = "FSkin.java: Can't find ";
+    
+    private final static String[] SKINS = {"default", "rebel", "smith"};
+    
+    public static ArrayList<String> getSkins() {
+        ArrayList<String> mySkins = new ArrayList<String>();
+        for(int i = 0; i < SKINS.length; i++) {
+            mySkins.add(SKINS[i]);
+        }
+        return mySkins;
+    }
 
     /**
      * FSkin constructor. No arguments, will generate default skin settings,
@@ -131,8 +142,6 @@ public class FSkin {
 
             this.setIcon("dock.shortcuts", image.getSubimage(160, 0, 80, 80));
             this.setIcon("dock.settings", image.getSubimage(160, 80, 80, 80));
-            this.setIcon("dock.decklist", image.getSubimage(60, 140, 20, 20));
-            this.setIcon("dock.concede", image.getSubimage(80, 80, 80, 80));
             this.setIcon("dock.endturn", image.getSubimage(80, 0, 80, 80));
             this.setIcon("dock.concede", image.getSubimage(80, 80, 80, 80));
             this.setIcon("dock.decklist", image.getSubimage(80, 160, 80, 80));

@@ -944,9 +944,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
     private void initComponents() {
         // Preparing the Frame
         this.setTitle(ForgeProps.getLocalized(NewConstants.Lang.PROGRAM_NAME));
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.setFont(new Font("Times New Roman", 0, 16));
-        }
+        this.setFont(new Font("Times New Roman", 0, 16));
         this.getContentPane().setLayout(new BorderLayout());
 
         // I tried using the JavaBeanConverter with this, but I got a
@@ -1078,9 +1076,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
 
         // adding the individual parts
 
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.initFonts(this.pane);
-        }
+        this.initFonts(this.pane);
 
         this.initMsgYesNo(this.pane);
         this.initOpp(this.pane);
@@ -1276,17 +1272,13 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         this.oppPCLabel.setForeground(GuiDisplay.greenColor);
 
         final JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(ComputerHand.BUTTON), SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            oppHandLabel.setFont(this.statFont);
-        }
+        oppHandLabel.setFont(this.statFont);
 
         final JButton oppGraveButton = new JButton(this.computerGraveyardAction);
         oppGraveButton.setText((String) this.computerGraveyardAction.getValue("buttonText"));
         oppGraveButton.setMargin(new Insets(0, 0, 0, 0));
         oppGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            oppGraveButton.setFont(this.statFont);
-        }
+        oppGraveButton.setFont(this.statFont);
 
         final JPanel gravePanel = new JPanel(new BorderLayout());
         gravePanel.add(oppGraveButton, BorderLayout.EAST);
@@ -1295,9 +1287,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         oppRemovedButton.setText((String) this.computerRemovedAction.getValue("buttonText"));
         oppRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         // removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            oppRemovedButton.setFont(this.statFont);
-        }
+        oppRemovedButton.setFont(this.statFont);
 
         this.oppHandValue.setHorizontalAlignment(SwingConstants.LEADING);
         this.oppLibraryValue.setHorizontalAlignment(SwingConstants.LEADING);
@@ -1373,14 +1363,10 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
 
         final JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HumanLibrary.BUTTON),
                 SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            playerLibraryLabel.setFont(this.statFont);
-        }
+        playerLibraryLabel.setFont(this.statFont);
 
         final JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HumanHand.TITLE), SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerHandLabel.setFont(this.statFont);
-        }
 
         // JLabel playerGraveLabel = new JLabel("Grave:",
         // SwingConstants.TRAILING);
@@ -1388,17 +1374,13 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         playerGraveButton.setText((String) this.humanGraveyardAction.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
         playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerGraveButton.setFont(this.statFont);
-        }
 
         final JButton playerFlashBackButton = new JButton(this.humanFlashbackAction);
         playerFlashBackButton.setText((String) this.humanFlashbackAction.getValue("buttonText"));
         playerFlashBackButton.setMargin(new Insets(0, 0, 0, 0));
         playerFlashBackButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
             playerFlashBackButton.setFont(this.statFont);
-        }
 
         final JPanel gravePanel = new JPanel(new BorderLayout());
         gravePanel.add(playerGraveButton, BorderLayout.EAST);
@@ -1410,9 +1392,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         playerRemovedButton.setText((String) this.humanRemovedAction.getValue("buttonText"));
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         // removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            playerRemovedButton.setFont(this.statFont);
-        }
+        playerRemovedButton.setFont(this.statFont);
 
         this.playerHandValue.setHorizontalAlignment(SwingConstants.LEADING);
         this.playerLibraryValue.setHorizontalAlignment(SwingConstants.LEADING);

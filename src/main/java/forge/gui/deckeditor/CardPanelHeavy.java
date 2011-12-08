@@ -28,7 +28,6 @@ import arcane.ui.CardPanel;
 import arcane.ui.ViewPanel;
 import forge.Card;
 import forge.GuiDisplayUtil;
-import forge.Singletons;
 import forge.gui.game.CardDetailPanel;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -77,9 +76,7 @@ public class CardPanelHeavy extends CardPanelBase {
                 CardPanelHeavy.this.changeStateButtonActionPerformed(e);
             }
         });
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
-        }
+        this.changeStateButton.setFont(new java.awt.Font("Dialog", 0, 10));
 
         /*
          * Removed Oct 25 2011 - Hellfish

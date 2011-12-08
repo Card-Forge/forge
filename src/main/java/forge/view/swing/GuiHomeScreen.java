@@ -29,8 +29,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -46,8 +44,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.BevelBorder;
 
 import net.slightlymagic.braids.util.UtilFunctions;
@@ -64,6 +60,7 @@ import forge.GuiImportPicture;
 import forge.MyRandom;
 import forge.PlayerType;
 import forge.Singletons;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -85,6 +82,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 import forge.quest.gui.QuestOptions;
+import forge.view.toolbox.FSkin;
 
 /**
  * The Class Gui_HomeScreen.
@@ -191,8 +189,7 @@ public class GuiHomeScreen {
     private final JCheckBox chkDeveloperMode = new JCheckBox("Developer Mode");
     private final JCheckBox chkFoil = new JCheckBox("Random Foiling");
     private final JCheckBox chkMana = new JCheckBox("Use Text and Mana Overlay");
-    private final JButton cmdLAF = new JButton("Choose Look and Feel");
-    private final JCheckBox chkLAF = new JCheckBox("Use Look and Feel Fonts");
+    private final JButton cmdChooseSkin = new JButton("Choose Skin");
     private final JButton cmdSize = new JButton("Choose Card Size");
     private final JCheckBox chkScale = new JCheckBox("Scale Card Image Larger");
     private final JButton cmdStack = new JButton("Choose Stack Offset");
@@ -626,7 +623,7 @@ public class GuiHomeScreen {
         this.pnlSettings.setLayout(null);
         this.gHS.getContentPane().add(this.pnlSettings);
         this.scrSettings.setPreferredSize(new Dimension(1, 3));
-        this.scrSettings.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrSettings.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.scrSettings.setBackground(this.clrScrollBackground);
         this.scrSettings.setOpaque(false);
         this.scrSettings.setBounds(10, 12, 305, 320);
@@ -692,28 +689,17 @@ public class GuiHomeScreen {
             }
         });
         this.pnlSettingsA.add(this.chkFoil);
-        // cmdLAF.setBorderPainted(false);
-        // cmdLAF.setBorder(new BevelBorder(BevelBorder.RAISED, null,
-        // null, null, null));
-        this.cmdLAF.setOpaque(false);
-        this.cmdLAF.setBackground(this.clrScrollBackground);
-        this.cmdLAF.addActionListener(new ActionListener() {
+        
+        this.cmdChooseSkin.setOpaque(false);
+        this.cmdChooseSkin.setBackground(this.clrScrollBackground);
+        this.cmdChooseSkin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                GuiHomeScreen.this.doLAF();
+                GuiHomeScreen.this.doChooseSkin();
             }
         });
-        this.pnlSettingsA.add(this.cmdLAF);
-        this.chkLAF.setOpaque(false);
-        this.chkLAF.setBackground(this.clrScrollBackground);
-        this.chkLAF.setSelected(Singletons.getModel().getPreferences().isLafFonts());
-        this.chkLAF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences().setLafFonts(GuiHomeScreen.this.chkLAF.isSelected());
-            }
-        });
-        this.pnlSettingsA.add(this.chkLAF);
+        this.pnlSettingsA.add(this.cmdChooseSkin);
+        
         this.cmdSize.setOpaque(false);
         this.cmdSize.setBackground(this.clrScrollBackground);
         this.cmdSize.addActionListener(new ActionListener() {
@@ -1211,7 +1197,15 @@ public class GuiHomeScreen {
                 return;
             }
 
-            AllZone.setDisplay(new GuiDisplay());
+            // Instantiate a new ControlAllUI if using new UI.
+            if (!Constant.Runtime.OLDGUI[0]) {
+                final ControlAllUI ui = new ControlAllUI();
+                AllZone.setDisplay(ui.getMatchView());
+                ui.getMatchController().initMatch();
+            } else {
+                AllZone.setDisplay(new GuiDisplay());
+            }
+            
             AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             AllZone.getDisplay().setVisible(true);
         }
@@ -1221,52 +1215,8 @@ public class GuiHomeScreen {
         this.gHS.dispose();
     }
 
-    private void doLAF() {
-        final LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
-        final HashMap<String, String> lafMap = new HashMap<String, String>();
-        for (final LookAndFeelInfo anInfo : info) {
-            lafMap.put(anInfo.getName(), anInfo.getClassName());
-        }
-
-        // add Substance LAFs:
-        lafMap.put("Autumn", "org.pushingpixels.substance.api.skin.SubstanceAutumnLookAndFeel");
-        lafMap.put("Business", "org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel");
-        lafMap.put("Business Black Steel",
-                "org.pushingpixels.substance.api.skin.SubstanceBusinessBlackSteelLookAndFeel");
-        lafMap.put("Business Blue Steel", "org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel");
-        lafMap.put("Challenger Deep", "org.pushingpixels.substance.api.skin.SubstanceChallengerDeepLookAndFeel");
-        lafMap.put("Creme", "org.pushingpixels.substance.api.skin.SubstanceCremeLookAndFeel");
-        lafMap.put("Creme Coffee", "org.pushingpixels.substance.api.skin.SubstanceCremeCoffeeLookAndFeel");
-        lafMap.put("Dust", "org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
-        lafMap.put("Dust Coffee", "org.pushingpixels.substance.api.skin.SubstanceDustCoffeeLookAndFeel");
-        lafMap.put("Emerald Dusk", "org.pushingpixels.substance.api.skin.SubstanceEmeraldDuskLookAndFeel");
-        lafMap.put("Gemini", "org.pushingpixels.substance.api.skin.SubstanceGeminiLookAndFeel");
-        lafMap.put("Graphite", "org.pushingpixels.substance.api.skin.SubstanceGraphiteLookAndFeel");
-        lafMap.put("Graphite Aqua", "org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
-        lafMap.put("Graphite Glass", "org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel");
-        lafMap.put("Magma", "org.pushingpixels.substance.api.skin.SubstanceMagmaLookAndFeel");
-        lafMap.put("Magellan", "org.pushingpixels.substance.api.skin.SubstanceMagellanLookAndFeel");
-        lafMap.put("Mist Aqua", "org.pushingpixels.substance.api.skin.SubstanceMistAquaLookAndFeel");
-        lafMap.put("Mist Silver", "org.pushingpixels.substance.api.skin.SubstanceMistSilverLookAndFeel");
-        lafMap.put("Moderate", "org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
-        lafMap.put("Nebula", "org.pushingpixels.substance.api.skin.SubstanceNebulaLookAndFeel");
-        lafMap.put("Nebula Brick Wall", "org.pushingpixels.substance.api.skin.SubstanceNebulaBrickWallLookAndFeel");
-        lafMap.put("Office Blue 2007", "org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel");
-        lafMap.put("Office Silver 2007", "org.pushingpixels.substance.api.skin.SubstanceOfficeSilver2007LookAndFeel");
-        lafMap.put("Raven", "org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
-        lafMap.put("Raven Graphite", "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteLookAndFeel");
-        lafMap.put("Sahara", "org.pushingpixels.substance.api.skin.SubstanceSaharaLookAndFeel");
-        lafMap.put("Twilight", "org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
-
-        final String[] keys = new String[lafMap.size()];
-        int count = 0;
-
-        for (final String s1 : lafMap.keySet()) {
-            keys[count++] = s1;
-        }
-        Arrays.sort(keys);
-
-        final ListChooser<String> ch = new ListChooser<String>("Choose one", 0, 1, keys);
+    private void doChooseSkin() {
+        final ListChooser<String> ch = new ListChooser<String>("Choose a skin", 0, 1, FSkin.getSkins());
         if (ch.show()) {
             try {
                 final String name = ch.getSelectedValue();
@@ -1274,11 +1224,7 @@ public class GuiHomeScreen {
                 if (index == -1) {
                     return;
                 }
-                // UIManager.setLookAndFeel(info[index].getClassName());
-                Singletons.getModel().getPreferences().setLaf(lafMap.get(name));
-                UIManager.setLookAndFeel(lafMap.get(name));
-
-                // SwingUtilities.updateComponentTreeUI(NG2);
+                Singletons.getModel().getPreferences().setSkin(name);
             } catch (final Exception ex) {
                 ErrorViewer.showError(ex);
             }

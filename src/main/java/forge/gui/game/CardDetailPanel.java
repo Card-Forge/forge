@@ -41,7 +41,6 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameEntity;
 import forge.GuiDisplayUtil;
-import forge.Singletons;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -121,19 +120,17 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.cdArea.setEditable(false);
         this.cdArea.setBorder(new EmptyBorder(4, 4, 4, 4));
 
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            this.typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            this.powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            this.damageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-            this.idLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        this.typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        this.powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        this.damageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        this.idLabel.setFont(new java.awt.Font("Dialog", 0, 14));
 
-            java.awt.Font f = new java.awt.Font("Dialog", 0, 14);
-            f = f.deriveFont(java.awt.Font.BOLD);
-            this.setInfoLabel.setFont(f);
+        java.awt.Font f = new java.awt.Font("Dialog", 0, 14);
+        f = f.deriveFont(java.awt.Font.BOLD);
+        this.setInfoLabel.setFont(f);
 
-            this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
-        }
+        this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
 
         this.setCard(card);
     }

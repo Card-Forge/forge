@@ -67,12 +67,6 @@ public class ForgePreferences extends Preferences {
     /** The skin. */
     private String skin;
 
-    /** The laf. */
-    private String laf;
-
-    /** The laf fonts. */
-    private boolean lafFonts;
-
     /** The stack offset. */
     private StackOffsetType stackOffset;
 
@@ -158,8 +152,6 @@ public class ForgePreferences extends Preferences {
 
         this.setRandCFoil(this.getBoolean("rand.C.Foil", true));
 
-        this.setLaf(this.get("gui.laf", ""));
-        this.setLafFonts(this.getBoolean("gui.laf.fonts", false));
         this.setSkin(this.get("gui.skin", "default"));
 
         this.setCardOverlay(this.getBoolean("card.overlay", true));
@@ -235,8 +227,6 @@ public class ForgePreferences extends Preferences {
         this.set("rand.C.Foil", this.isRandCFoil());
 
         this.set("gui.skin", this.getSkin());
-        this.set("gui.laf", this.getLaf());
-        this.set("gui.laf.fonts", this.isLafFonts());
 
         this.set("card.overlay", this.isCardOverlay());
         this.set("card.images.size", this.getCardSize());
@@ -512,25 +502,6 @@ public class ForgePreferences extends Preferences {
     }
 
     /**
-     * Gets the laf.
-     * 
-     * @return the laf
-     */
-    public String getLaf() {
-        return this.laf;
-    }
-
-    /**
-     * Sets the laf.
-     * 
-     * @param laf
-     *            the laf to set
-     */
-    public void setLaf(final String laf) {
-        this.laf = laf; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
      * Gets the skin.
      * 
      * @return the skin
@@ -545,27 +516,8 @@ public class ForgePreferences extends Preferences {
      * @param skin
      *            the skin to set
      */
-    public void setSkin(final String skin) {
-        this.skin = skin; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Checks if is laf fonts.
-     * 
-     * @return the lafFonts
-     */
-    public boolean isLafFonts() {
-        return this.lafFonts;
-    }
-
-    /**
-     * Sets the laf fonts.
-     * 
-     * @param lafFonts
-     *            the lafFonts to set
-     */
-    public void setLafFonts(final boolean lafFonts) {
-        this.lafFonts = lafFonts; // TODO: Add 0 to parameter's name.
+    public void setSkin(final String skin0) {
+        this.skin = skin0;
     }
 
     /**
@@ -583,11 +535,8 @@ public class ForgePreferences extends Preferences {
      * @param scaleLargerThanOriginal
      *            the scaleLargerThanOriginal to set
      */
-    public void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal) {
-        this.scaleLargerThanOriginal = scaleLargerThanOriginal; // TODO: Add 0
-                                                                // to
-                                                                // parameter's
-                                                                // name.
+    public void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal0) {
+        this.scaleLargerThanOriginal = scaleLargerThanOriginal0;
     }
 
     /**

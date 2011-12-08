@@ -305,20 +305,6 @@ public class UI {
 
     /**
      * <p>
-     * setSystemLookAndFeel.
-     * </p>
-     */
-    public static void setSystemLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            System.err.println("Error setting look and feel:");
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     * <p>
      * setDefaultFont.
      * </p>
      * 

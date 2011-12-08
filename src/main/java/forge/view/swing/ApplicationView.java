@@ -18,7 +18,6 @@
 package forge.view.swing;
 
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
@@ -114,7 +113,6 @@ public class ApplicationView implements FView {
 
             final ForgePreferences preferences = model.getPreferences();
 
-            OldGuiNewGame.getUseLAFFonts().setSelected(preferences.isLafFonts());
             OldGuiNewGame.getOldGuiCheckBox().setSelected(preferences.isOldGui());
             OldGuiNewGame.getSmoothLandCheckBox().setSelected(preferences.isStackAiLand());
             OldGuiNewGame.getDevModeCheckBox().setSelected(preferences.isDeveloperMode());
@@ -133,25 +131,6 @@ public class ApplicationView implements FView {
         } catch (final Exception exn) {
             Log.error("Error loading preferences: " + exn);
         }
-
-        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11
-                                                    // 1:07 PM: this isn't a web
-                                                    // app
-                    @Override
-                    public void run() {
-                        final ForgePreferences finalPreferences = model.getPreferences();
-
-                        try {
-                            if ("".equals(finalPreferences.getLaf())) {
-                                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                            } else {
-                                UIManager.setLookAndFeel(finalPreferences.getLaf());
-                            }
-                        } catch (final Exception ex) {
-                            ErrorViewer.showError(ex);
-                        }
-                    }
-                });
 
         // For the following two blocks, check if user has cancelled
         // SplashFrame.

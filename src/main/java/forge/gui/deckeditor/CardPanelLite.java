@@ -24,7 +24,6 @@ import javax.swing.JButton;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
-import forge.Singletons;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.item.CardPrinted;
@@ -56,9 +55,7 @@ public class CardPanelLite extends CardPanelBase {
                 CardPanelLite.this.bChangeStateActionPerformed(e);
             }
         });
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.bChangeState.setFont(new java.awt.Font("Dialog", 0, 10));
-        }
+        this.bChangeState.setFont(new java.awt.Font("Dialog", 0, 10));
 
         this.setLayout(new MigLayout("fill, ins 0"));
         this.add(this.detail, "w 239, h 303, grow, flowy, wrap");

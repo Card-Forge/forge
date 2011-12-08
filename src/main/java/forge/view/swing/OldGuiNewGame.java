@@ -19,7 +19,6 @@ package forge.view.swing;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,6 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -52,8 +50,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -165,9 +161,6 @@ public class OldGuiNewGame extends JFrame {
     /** Constant <code>removeArtifacts</code>. */
     private static JCheckBoxMenuItem removeArtifacts = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.Generate.REMOVE_ARTIFACTS));
-    /** Constant <code>useLAFFonts</code>. */
-    private static JCheckBoxMenuItem useLAFFonts = new JCheckBoxMenuItem(
-            ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.FONT));
     /** Constant <code>cardOverlay</code>. */
     private static JCheckBoxMenuItem cardOverlay = new JCheckBoxMenuItem(
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.CARD_OVERLAY));
@@ -176,7 +169,6 @@ public class OldGuiNewGame extends JFrame {
             ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Options.CARD_SCALE));
     private final JButton questButton = new JButton();
 
-    private final Action lookAndFeelAction = new LookAndFeelAction(this);
     // private Action DOWNLOAD_ACTION = new DownloadAction();
     private final Action downloadActionLQ = new DownloadActionLQ();
     private final Action downloadActionSetLQ = new DownloadActionSetLQ();
@@ -257,25 +249,23 @@ public class OldGuiNewGame extends JFrame {
      */
     private void setupMenu() {
         final Action[] actions = {
-                this.// Remove the option to download HQ pics since the HQ pics
+                // Remove the option to download HQ pics since the HQ pics
                 // server appears to be offline.
-                // LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION,
+                // DNLD_PRICES_ACTION, DOWNLOAD_ACTION,
                 // DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE,
                 // CARD_SIZES_ACTION,
-                lookAndFeelAction, this.dnldPricesAction, this.downloadActionLQ, this.downloadActionSetLQ,
+                this.dnldPricesAction, this.downloadActionLQ, this.downloadActionSetLQ,
                 this.downloadActionQuest, this.importPicture, this.cardSizesAction, this.cardStackAction,
                 this.cardStackOffsetAction, this.bugzReporterAction, ErrorViewer.ALL_THREADS_ACTION, this.aboutAction,
                 this.exitAction };
         final JMenu menu = new JMenu(ForgeProps.getLocalized(Menu.TITLE));
         for (final Action a : actions) {
             menu.add(a);
-            if (a.equals(this.lookAndFeelAction) || a.equals(this.importPicture)
+            if (a.equals(this.importPicture)
                     || a.equals(this.cardStackOffsetAction) || a.equals(ErrorViewer.ALL_THREADS_ACTION)) {
                 menu.addSeparator();
             }
         }
-
-        // useLAFFonts.setSelected(false);
 
         // new stuff
         final JMenu generatedDeck = new JMenu(
@@ -313,7 +303,6 @@ public class OldGuiNewGame extends JFrame {
         final JMenu optionsMenu = new JMenu(ForgeProps.getLocalized(Options.TITLE));
         optionsMenu.add(generatedDeck);
 
-        optionsMenu.add(OldGuiNewGame.getUseLAFFonts());
         optionsMenu.addSeparator();
         optionsMenu.add(OldGuiNewGame.getCardOverlay());
         optionsMenu.add(OldGuiNewGame.getCardScale());
@@ -1039,107 +1028,6 @@ public class OldGuiNewGame extends JFrame {
     }
 
     /**
-     * The Class LookAndFeelAction.
-     * 
-     * @author dhudson
-     */
-    public static class LookAndFeelAction extends AbstractAction {
-
-        private static final long serialVersionUID = -4447498333866711215L;
-        private final Component c;
-
-        /**
-         * Instantiates a new look and feel action.
-         * 
-         * @param component
-         *            the component
-         */
-        public LookAndFeelAction(final Component component) {
-            super(ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.MenuBar.Menu.LF));
-            this.c = component;
-        }
-
-        /**
-         * Action performed.
-         * 
-         * @param e
-         *            the e
-         */
-        @Override
-        public final void actionPerformed(final ActionEvent e) {
-            final LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
-            final HashMap<String, String> lafMap = new HashMap<String, String>();
-            for (final LookAndFeelInfo anInfo : info) {
-                lafMap.put(anInfo.getName(), anInfo.getClassName());
-            }
-
-            // add Substance LAFs:
-            lafMap.put("Autumn", "org.pushingpixels.substance.api.skin.SubstanceAutumnLookAndFeel");
-            lafMap.put("Business", "org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel");
-            lafMap.put("Business Black Steel",
-                    "org.pushingpixels.substance.api.skin.SubstanceBusinessBlackSteelLookAndFeel");
-            lafMap.put("Business Blue Steel",
-                    "org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel");
-            lafMap.put("Challenger Deep", "org.pushingpixels.substance.api.skin.SubstanceChallengerDeepLookAndFeel");
-            lafMap.put("Creme", "org.pushingpixels.substance.api.skin.SubstanceCremeLookAndFeel");
-            lafMap.put("Creme Coffee", "org.pushingpixels.substance.api.skin.SubstanceCremeCoffeeLookAndFeel");
-            lafMap.put("Dust", "org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
-            lafMap.put("Dust Coffee", "org.pushingpixels.substance.api.skin.SubstanceDustCoffeeLookAndFeel");
-            lafMap.put("Emerald Dusk", "org.pushingpixels.substance.api.skin.SubstanceEmeraldDuskLookAndFeel");
-            lafMap.put("Gemini", "org.pushingpixels.substance.api.skin.SubstanceGeminiLookAndFeel");
-            lafMap.put("Graphite", "org.pushingpixels.substance.api.skin.SubstanceGraphiteLookAndFeel");
-            lafMap.put("Graphite Aqua", "org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
-            lafMap.put("Graphite Glass", "org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel");
-            lafMap.put("Magma", "org.pushingpixels.substance.api.skin.SubstanceMagmaLookAndFeel");
-            lafMap.put("Magellan", "org.pushingpixels.substance.api.skin.SubstanceMagellanLookAndFeel");
-            // LAFMap.put("Mariner",
-            // "org.pushingpixels.substance.api.skin.SubstanceMarinerLookAndFeel");
-            lafMap.put("Mist Aqua", "org.pushingpixels.substance.api.skin.SubstanceMistAquaLookAndFeel");
-            lafMap.put("Mist Silver", "org.pushingpixels.substance.api.skin.SubstanceMistSilverLookAndFeel");
-            lafMap.put("Moderate", "org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
-            lafMap.put("Nebula", "org.pushingpixels.substance.api.skin.SubstanceNebulaLookAndFeel");
-            lafMap.put("Nebula Brick Wall", "org.pushingpixels.substance.api.skin.SubstanceNebulaBrickWallLookAndFeel");
-            // LAFMap.put("Office Black 2007",
-            // "org.pushingpixels.substance.api.skin.SubstanceOfficeBlack2007LookAndFeel");
-            lafMap.put("Office Blue 2007", "org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel");
-            lafMap.put("Office Silver 2007",
-                    "org.pushingpixels.substance.api.skin.SubstanceOfficeSilver2007LookAndFeel");
-            lafMap.put("Raven", "org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
-            lafMap.put("Raven Graphite", "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteLookAndFeel");
-            // LAFMap.put("Raven Graphite Glass",
-            // "org.pushingpixels.substance.api.skin.SubstanceRavenGraphiteGlassLookAndFeel");
-            lafMap.put("Sahara", "org.pushingpixels.substance.api.skin.SubstanceSaharaLookAndFeel");
-            lafMap.put("Twilight", "org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
-
-            final String[] keys = new String[lafMap.size()];
-            int count = 0;
-
-            for (final String s1 : lafMap.keySet()) {
-                keys[count++] = s1;
-            }
-            Arrays.sort(keys);
-
-            final ListChooser<String> ch = new ListChooser<String>("Choose one", 0, 1, keys);
-            if (ch.show()) {
-                try {
-                    final String name = ch.getSelectedValue();
-                    final int index = ch.getSelectedIndex();
-                    if (index == -1) {
-                        return;
-                    }
-                    // UIManager.setLookAndFeel(info[index].getClassName());
-                    Singletons.getModel().getPreferences().setLaf(lafMap.get(name));
-                    UIManager.setLookAndFeel(lafMap.get(name));
-
-                    SwingUtilities.updateComponentTreeUI(this.c);
-                } catch (final Exception ex) {
-                    ErrorViewer.showError(ex);
-                }
-            }
-        }
-    }
-
-    /**
      * The Class DownloadPriceAction.
      * 
      * @author dhudson
@@ -1678,11 +1566,6 @@ public class OldGuiNewGame extends JFrame {
         public final void actionPerformed(final ActionEvent e) {
             final JTextArea area = new JTextArea(12, 25);
 
-            if (OldGuiNewGame.getUseLAFFonts().isSelected()) {
-                final Font f = new Font(area.getFont().getName(), Font.PLAIN, 13);
-                area.setFont(f);
-            }
-
             area.setText("The various people who have contributed to this project apologize with deep remorse"
                     + " for any bugs that you may have noticed.\n\nThe development team.\n\nOriginal author: Forge\n\n"
                     + "(Quest icons used created by Teekatas, from his Legendora set:\n"
@@ -1743,8 +1626,7 @@ public class OldGuiNewGame extends JFrame {
     public final boolean exit() {
         try {
             final ForgePreferences preferences = Singletons.getModel().getPreferences();
-            preferences.setLaf(UIManager.getLookAndFeel().getClass().getName());
-            preferences.setLafFonts(OldGuiNewGame.getUseLAFFonts().isSelected());
+            preferences.setSkin(AllZone.getSkin().getName());
             preferences.setOldGui(OldGuiNewGame.oldGuiCheckBox.isSelected());
             preferences.setStackAiLand(OldGuiNewGame.getSmoothLandCheckBox().isSelected());
             preferences.setMillingLossCondition(Constant.Runtime.MILL[0]);
@@ -1955,26 +1837,6 @@ public class OldGuiNewGame extends JFrame {
      */
     public static void setCardScale(final JCheckBoxMenuItem cardScale) {
         OldGuiNewGame.cardScale = cardScale; // TODO: Add 0 to parameter's name.
-    }
-
-    /**
-     * Gets the use laf fonts.
-     * 
-     * @return the useLAFFonts
-     */
-    public static JCheckBoxMenuItem getUseLAFFonts() {
-        return OldGuiNewGame.useLAFFonts;
-    }
-
-    /**
-     * Sets the use laf fonts.
-     * 
-     * @param useLAFFonts
-     *            the useLAFFonts to set
-     */
-    public static void setUseLAFFonts(final JCheckBoxMenuItem useLAFFonts) {
-        OldGuiNewGame.useLAFFonts = useLAFFonts; // TODO: Add 0 to parameter's
-                                                 // name.
     }
 
     /**

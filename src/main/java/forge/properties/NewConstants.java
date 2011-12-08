@@ -839,9 +839,6 @@ public final class NewConstants {
                     /** The TITLE. */
                     public static final String TITLE = "%s/NewGame/menu/title";
 
-                    /** The LF. */
-                    public static final String LF = "%s/NewGame/menu/lookAndFeel";
-
                     /** The DOWNLOADPRICE. */
                     public static final String DOWNLOADPRICE = "%s/NewGame/menu/downloadPrice";
 

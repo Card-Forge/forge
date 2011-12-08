@@ -40,7 +40,6 @@ import javax.swing.text.Element;
 import javax.swing.text.ElementIterator;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
@@ -106,14 +105,12 @@ public class DeckImport extends JDialog {
         this.setResizable(false);
         this.setTitle("Deck Import (wip)");
 
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            final Font fButtons = new java.awt.Font("Dialog", 0, 13);
-            this.cmdAccept.setFont(fButtons);
-            this.cmdCancel.setFont(fButtons);
+        final Font fButtons = new java.awt.Font("Dialog", 0, 13);
+        this.cmdAccept.setFont(fButtons);
+        this.cmdCancel.setFont(fButtons);
 
-            this.txtInput.setFont(fButtons);
-            // htmlOutput.setFont(fButtons);
-        }
+        this.txtInput.setFont(fButtons);
+        // htmlOutput.setFont(fButtons);
 
         this.htmlOutput.setEditable(false);
 

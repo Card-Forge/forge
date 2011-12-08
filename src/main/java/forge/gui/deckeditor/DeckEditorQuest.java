@@ -34,7 +34,6 @@ import javax.swing.JCheckBox;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.Constant;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -213,9 +212,7 @@ public final class DeckEditorQuest extends DeckEditorBase {
 
         this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
+        this.removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         this.removeButton.setText("Remove Card");
         this.removeButton.addActionListener(new ActionListener() {
             @Override
@@ -231,9 +228,7 @@ public final class DeckEditorQuest extends DeckEditorBase {
             }
         });
         // addButton.setIcon(downIcon);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.addButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
+        this.addButton.setFont(new java.awt.Font("Dialog", 0, 13));
         this.addButton.setBounds(new Rectangle(23, 403, 146, 49));
 
         this.analysisButton.setText("Deck Analysis");
@@ -243,9 +238,7 @@ public final class DeckEditorQuest extends DeckEditorBase {
                 DeckEditorQuest.this.analysisButtonActionPerformed(e);
             }
         });
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
+        this.analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
         this.analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
 
         /**
@@ -261,9 +254,7 @@ public final class DeckEditorQuest extends DeckEditorBase {
 
         final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
-            if (!Singletons.getModel().getPreferences().isLafFonts()) {
-                box.setFont(f);
-            }
+            box.setFont(f);
             box.setOpaque(false);
             box.addItemListener(this.getItemListenerUpdatesDisplay());
         }

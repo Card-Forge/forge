@@ -36,7 +36,6 @@ import javax.swing.JOptionPane;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -227,9 +226,7 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         this.sellButton.setBounds(new Rectangle(180, 403, 146, 49));
         // removeButton.setIcon(upIcon);
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
+        this.sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
         this.sellButton.setText("Sell Card");
         this.sellButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -245,9 +242,7 @@ public final class DeckEditorShop extends DeckEditorBase {
             }
         });
 
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
+        this.buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
         this.buyButton.setBounds(new Rectangle(23, 403, 146, 49));
 
         this.getCardView().setBounds(new Rectangle(765, 23, 239, 710));
@@ -257,14 +252,10 @@ public final class DeckEditorShop extends DeckEditorBase {
 
         this.creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
         this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        }
+        this.creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.sellPercentageLabel.setBounds(new Rectangle(350, 403, 450, 31));
         this.sellPercentageLabel.setText("(Sell percentage: " + this.multiplier + ")");
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        }
+        this.sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         this.jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
 

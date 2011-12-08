@@ -32,7 +32,6 @@ import javax.swing.table.TableCellRenderer;
 
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Constant;
-import forge.Singletons;
 import forge.card.CardRules;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -133,9 +132,7 @@ public final class TableWithCards {
         this.jScrollPane.setToolTipText(tableToolTip);
         this.jScrollPane.getViewport().add(this.table, null);
 
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            this.statsLabel.setFont(new java.awt.Font("Dialog", 0, 13));
-        }
+        this.statsLabel.setFont(new java.awt.Font("Dialog", 0, 13));
         this.statsLabel.setText("Total: 0, Creatures: 0, Land: 0");
 
         // class data

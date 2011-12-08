@@ -39,7 +39,6 @@ import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
 import forge.Command;
-import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.item.CardDb;
@@ -168,14 +167,12 @@ public final class DeckEditorCommon extends DeckEditorBase {
 
     private void jbInit() {
 
-        if (!Singletons.getModel().getPreferences().isLafFonts()) {
-            final Font fButtons = new java.awt.Font("Dialog", 0, 13);
-            this.removeButton.setFont(fButtons);
-            this.addButton.setFont(fButtons);
-            this.importButton.setFont(fButtons);
-            this.clearFilterButton.setFont(fButtons);
-            this.analysisButton.setFont(fButtons);
-        }
+        final Font fButtons = new java.awt.Font("Dialog", 0, 13);
+        this.removeButton.setFont(fButtons);
+        this.addButton.setFont(fButtons);
+        this.importButton.setFont(fButtons);
+        this.clearFilterButton.setFont(fButtons);
+        this.analysisButton.setFont(fButtons);
 
         this.addButton.setText("Add to Deck");
         this.removeButton.setText("Remove from Deck");
@@ -217,9 +214,7 @@ public final class DeckEditorCommon extends DeckEditorBase {
         // Type filtering
         final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
-            if (!Singletons.getModel().getPreferences().isLafFonts()) {
                 box.setFont(f);
-            }
             box.setOpaque(false);
         }
 
