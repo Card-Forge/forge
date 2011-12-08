@@ -26,6 +26,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import forge.AllZone;
@@ -66,6 +67,8 @@ public class FButton extends JButton {
         this.setOpaque(false);
         this.setForeground(this.skin.getColor("text"));
         this.setBackground(Color.red);
+        this.setFocusPainted(false);
+        this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
         this.setFont(this.skin.getFont1().deriveFont(Font.BOLD, 15));
