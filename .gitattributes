@@ -5439,6 +5439,7 @@ res/cardsfolder/m/mothrider_samurai.txt svneol=native#text/plain
 res/cardsfolder/m/mountain.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_bandit.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_goat.txt svneol=native#text/plain
+res/cardsfolder/m/mountain_titan.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mountain_valley.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_yeti.txt svneol=native#text/plain
 res/cardsfolder/m/mournful_zombie.txt svneol=native#text/plain
