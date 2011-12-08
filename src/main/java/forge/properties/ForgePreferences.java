@@ -415,12 +415,20 @@ public class ForgePreferences extends Preferences {
         this.libraryView = b0;
     }
 
-    /** @param b0 &emsp; boolean, update AI draft picks */
+    /**
+     * Sets the upload draft ai.
+     *
+     * @param b0 &emsp; boolean, update AI draft picks
+     */
     public void setUploadDraftAI(final boolean b0) {
         this.uploadDraftAI = b0;
     }
 
-    /** @return boolean */
+    /**
+     * Checks if is upload draft ai.
+     *
+     * @return boolean
+     */
     public boolean isUploadDraftAI() {
         return this.uploadDraftAI;
     }
@@ -512,9 +520,8 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the skin.
-     * 
-     * @param skin
-     *            the skin to set
+     *
+     * @param skin0 the new skin
      */
     public void setSkin(final String skin0) {
         this.skin = skin0;
@@ -531,9 +538,8 @@ public class ForgePreferences extends Preferences {
 
     /**
      * Sets the scale larger than original.
-     * 
-     * @param scaleLargerThanOriginal
-     *            the scaleLargerThanOriginal to set
+     *
+     * @param scaleLargerThanOriginal0 the new scale larger than original
      */
     public void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal0) {
         this.scaleLargerThanOriginal = scaleLargerThanOriginal0;
@@ -879,6 +885,8 @@ public class ForgePreferences extends Preferences {
 
     //========== Phase setter/getter
     /**
+     * Sets the ai phase.
+     *
      * @param s0 &emsp; String index of phase in aiPhase map.
      * @param b0 &emsp; boolean, stop at index or not
      */
@@ -887,6 +895,8 @@ public class ForgePreferences extends Preferences {
     }
 
     /**
+     * Checks if is aI phase.
+     *
      * @param s0 &emsp; String index of phase in aiPhase map.
      * @return boolean
      */
@@ -895,6 +905,8 @@ public class ForgePreferences extends Preferences {
     }
 
     /**
+     * Sets the human phase.
+     *
      * @param s0 &emsp; String index of phase in humanPhase map.
      * @param b0 &emsp; boolean, stop at index or not
      */
@@ -903,6 +915,8 @@ public class ForgePreferences extends Preferences {
     }
 
     /**
+     * Checks if is human phase.
+     *
      * @param s0 &emsp; String index of phase in humanPhase map.
      * @return boolean
      */

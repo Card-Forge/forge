@@ -41,7 +41,7 @@ import forge.view.toolbox.FOverlay;
 @SuppressWarnings("serial")
 public class GuiTopLevel extends JFrame implements Display {
     private final JLayeredPane lpnContent;
-    private ControlAllUI control;
+    private final ControlAllUI control;
 
     /**
      * Parent JFrame for Forge UI.
@@ -59,11 +59,10 @@ public class GuiTopLevel extends JFrame implements Display {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/images/symbols-13/favicon.png"));
         this.setTitle("Forge");
 
-
         this.setVisible(true);
 
         // Init controller
-        control = new ControlAllUI(this);
+        this.control = new ControlAllUI(this);
     }
 
     /**
@@ -79,32 +78,136 @@ public class GuiTopLevel extends JFrame implements Display {
         this.lpnContent.add(pnlOverlay, JLayeredPane.MODAL_LAYER);
     }
 
-    /** @return ControlAllUI */
+    /**
+     * Gets the controller.
+     * 
+     * @return ControlAllUI
+     */
     public ControlAllUI getController() {
-        return control;
+        return this.control;
     }
 
-    /* ========================================================
+    /*
+     * ========================================================
      * 
      * WILL BE DEPRECATED SOON WITH DISPLAY INTERFACE UPDATE!!!
-     *
-     ========================================================*/
+     * 
+     * ========================================================
+     */
 
-    public void showMessage(String s) { }
-    public MyButton getButtonOK() { return new EmptyButton(); }
-    public MyButton getButtonCancel() { return new EmptyButton(); }
-    public void showCombat(String message) { }
-    public void assignDamage(Card attacker, CardList blockers, int damage) { }
-    public boolean stopAtPhase(Player turn, String phase) { return true; }
-    public boolean loadPrefs() { return true; }
-    public boolean savePrefs() { return true; }
-    public boolean canLoseByDecking() { return true; }
-    public void setCard(Card c) { }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#showMessage(java.lang.String)
+     */
+    @Override
+    public void showMessage(final String s) {
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#getButtonOK()
+     */
+    @Override
+    public MyButton getButtonOK() {
+        return new EmptyButton();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#getButtonCancel()
+     */
+    @Override
+    public MyButton getButtonCancel() {
+        return new EmptyButton();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#showCombat(java.lang.String)
+     */
+    @Override
+    public void showCombat(final String message) {
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#assignDamage(forge.Card, forge.CardList, int)
+     */
+    @Override
+    public void assignDamage(final Card attacker, final CardList blockers, final int damage) {
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#stopAtPhase(forge.Player, java.lang.String)
+     */
+    @Override
+    public boolean stopAtPhase(final Player turn, final String phase) {
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#loadPrefs()
+     */
+    @Override
+    public boolean loadPrefs() {
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#savePrefs()
+     */
+    @Override
+    public boolean savePrefs() {
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#canLoseByDecking()
+     */
+    @Override
+    public boolean canLoseByDecking() {
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.Display#setCard(forge.Card)
+     */
+    @Override
+    public void setCard(final Card c) {
+    }
+
     /** THIS CLASS ONLY EXISTS TO KEEP THE INTERFACE HAPPY TEMPORARILY. */
     private class EmptyButton extends JButton implements MyButton {
-        public void reset() {}
-        public void setSelectable(boolean b0) {}
-        public boolean isSelectable() {return true;}
-        public void select() {}
+        @Override
+        public void reset() {
+        }
+
+        @Override
+        public void setSelectable(final boolean b0) {
+        }
+
+        @Override
+        public boolean isSelectable() {
+            return true;
+        }
+
+        @Override
+        public void select() {
+        }
     }
 }

@@ -37,14 +37,13 @@ import forge.gui.GuiUtils;
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
- *
+ * 
  */
 
 public class FSkin {
     private Map<String, ImageIcon> icons;
     private Map<String, Color> colors;
     private Map<String, Image> images;
-
 
     private Font font1 = null;
     private final String name = "default";
@@ -53,12 +52,17 @@ public class FSkin {
     private Font tempFont;
     private final String notfound = "FSkin.java: Can't find ";
 
-    private final static String[] SKINS = {"default", "rebel", "smith"};
+    private static final String[] SKINS = { "default", "rebel", "smith" };
 
+    /**
+     * Gets the skins.
+     *
+     * @return the skins
+     */
     public static ArrayList<String> getSkins() {
-        ArrayList<String> mySkins = new ArrayList<String>();
-        for (int i = 0; i < SKINS.length; i++) {
-            mySkins.add(SKINS[i]);
+        final ArrayList<String> mySkins = new ArrayList<String>();
+        for (final String element : FSkin.SKINS) {
+            mySkins.add(element);
         }
         return mySkins;
     }
@@ -66,7 +70,7 @@ public class FSkin {
     /**
      * FSkin constructor. No arguments, will generate default skin settings,
      * fonts, and backgrounds.
-     *
+     * 
      * @throws Exception
      *             the exception
      */
@@ -77,7 +81,7 @@ public class FSkin {
     /**
      * FSkin constructor, using skin name. Generates custom skin settings,
      * fonts, and backgrounds.
-     *
+     * 
      * @param skinName
      *            the skin name
      * @throws Exception
@@ -89,15 +93,15 @@ public class FSkin {
 
     /**
      * Loads objects from skin folder, prints brief error if not found.
-     *
+     * 
      * @param skinName
      */
     private void loadFontAndImages(final String skinName) {
         final String dirName = "res/images/skins/" + skinName + "/";
 
-        icons = new HashMap<String, ImageIcon>();
-        colors = new HashMap<String, Color>();
-        images = new HashMap<String, Image>();
+        this.icons = new HashMap<String, ImageIcon>();
+        this.colors = new HashMap<String, Color>();
+        this.images = new HashMap<String, Image>();
 
         // Fonts
         this.setFont1(this.retrieveFont(dirName + this.font1file));
@@ -124,7 +128,8 @@ public class FSkin {
             this.setColor("progress3", this.getColorFromPixel(image.getRGB(65, 155)));
             this.setColor("progress4", this.getColorFromPixel(image.getRGB(75, 155)));
 
-            // All icons should eventually be set and retrieved using this method.
+            // All icons should eventually be set and retrieved using this
+            // method.
             // Doublestrike 6-12-11
             this.setIcon("zone.hand", image.getSubimage(280, 40, 40, 40));
             this.setIcon("zone.library", image.getSubimage(280, 0, 40, 40));
@@ -180,12 +185,12 @@ public class FSkin {
      * </p>
      * Tries to instantiate an image icon from a filename. Error reported if not
      * found.
-     *
+     * 
      * @param {@link java.lang.String} address
      * @return a ImageIcon
      */
     private Image retrieveImage(final String address) {
-        ImageIcon tempImg = new ImageIcon(address);
+        final ImageIcon tempImg = new ImageIcon(address);
 
         if (tempImg.getIconWidth() == -1) {
             System.err.println(this.notfound + address);
@@ -200,7 +205,7 @@ public class FSkin {
      * </p>
      * Uses GuiUtils to grab a font file at an address. Error will be reported
      * by GuiUtils if not found.
-     *
+     * 
      * @param {@link java.lang.String} address
      * @return a Font
      */
@@ -214,7 +219,7 @@ public class FSkin {
      * <p>
      * getColorFromPixel.
      * </p>
-     *
+     * 
      * @param {@link java.lang.Integer} pixel information
      */
     private Color getColorFromPixel(final int pixel) {
@@ -228,7 +233,7 @@ public class FSkin {
 
     /**
      * Primary font used in titles and buttons and most text output.
-     *
+     * 
      * @return {@link java.awt.font} font1
      */
     public Font getFont1() {
@@ -237,7 +242,7 @@ public class FSkin {
 
     /**
      * Primary font used in titles and buttons and most text output.
-     *
+     * 
      * @param font10
      *            &emsp; an image icon
      */
@@ -247,7 +252,7 @@ public class FSkin {
 
     /**
      * Gets the name.
-     *
+     * 
      * @return Name of skin.
      */
     public String getName() {
@@ -255,29 +260,34 @@ public class FSkin {
     }
 
     /**
+     * Gets the icon.
+     *
      * @param s0 &emsp; String address
      * @return ImageIcon
      */
-    public ImageIcon getIcon(String s0) {
-        return icons.get(s0);
+    public ImageIcon getIcon(final String s0) {
+        return this.icons.get(s0);
     }
 
     /**
      * Gets a scaled version of an icon from this skin's icon map.
-     *
-     * @param s0 String icon address
-     * @param w0 int new width
-     * @param h0 int new height
+     * 
+     * @param s0
+     *            String icon address
+     * @param w0
+     *            int new width
+     * @param h0
+     *            int new height
      * @return ImageIcon
      */
-    public ImageIcon getIcon(String s0, int w0, int h0) {
+    public ImageIcon getIcon(final String s0, int w0, int h0) {
         w0 = (w0 < 1) ? 1 : w0;
         h0 = (h0 < 1) ? 1 : h0;
 
-        BufferedImage original = (BufferedImage) icons.get(s0).getImage();
-        BufferedImage scaled = new BufferedImage(w0, h0, BufferedImage.TYPE_INT_ARGB);
+        final BufferedImage original = (BufferedImage) this.icons.get(s0).getImage();
+        final BufferedImage scaled = new BufferedImage(w0, h0, BufferedImage.TYPE_INT_ARGB);
 
-        Graphics2D g2d = scaled.createGraphics();
+        final Graphics2D g2d = scaled.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2d.drawImage(original, 0, 0, w0, h0, 0, 0, original.getWidth(), original.getHeight(), null);
         g2d.dispose();
@@ -287,61 +297,71 @@ public class FSkin {
 
     /**
      * Sets an icon in this skin's icon map from a BufferedImage.
-     *
-     * @param s0 &emsp; String address
-     * @param bi0 &emsp; BufferedImage
+     * 
+     * @param s0
+     *            &emsp; String address
+     * @param bi0
+     *            &emsp; BufferedImage
      */
-    public void setIcon(String s0, BufferedImage bi0) {
-        icons.put(s0, new ImageIcon(bi0));
+    public void setIcon(final String s0, final BufferedImage bi0) {
+        this.icons.put(s0, new ImageIcon(bi0));
     }
 
     /**
      * Sets an icon in this skin's icon map from an ImageIcon.
-     *
-     * @param s0 &emsp; String address
-     * @param i0 &emsp; ImageIcon
+     * 
+     * @param s0
+     *            &emsp; String address
+     * @param i0
+     *            &emsp; ImageIcon
      */
-    public void setIcon(String s0, ImageIcon i0) {
-        icons.put(s0, i0);
+    public void setIcon(final String s0, final ImageIcon i0) {
+        this.icons.put(s0, i0);
     }
 
     /**
      * Retrieves a color from this skin's color map.
-     *
-     * @param s0 &emsp; String color address
+     * 
+     * @param s0
+     *            &emsp; String color address
      * @return Color
      */
-    public Color getColor(String s0) {
-        return colors.get(s0);
+    public Color getColor(final String s0) {
+        return this.colors.get(s0);
     }
 
     /**
      * Sets a color in this skin's color map.
-     *
-     * @param s0 &emsp; String address
-     * @param c0 &emsp; Color
+     * 
+     * @param s0
+     *            &emsp; String address
+     * @param c0
+     *            &emsp; Color
      */
-    public void setColor(String s0, Color c0) {
-        colors.put(s0, c0);
+    public void setColor(final String s0, final Color c0) {
+        this.colors.put(s0, c0);
     }
 
     /**
      * Retrieves an image from this skin's image map.
-     *
-     * @param s0 &emsp; String color address
+     * 
+     * @param s0
+     *            &emsp; String color address
      * @return BufferedImage
      */
-    public Image getImage(String s0) {
-        return images.get(s0);
+    public Image getImage(final String s0) {
+        return this.images.get(s0);
     }
 
     /**
      * Sets an image in this skin's image map.
-     *
-     * @param s0 &emsp; String address
-     * @param bi0 &emsp; ImageIcon
+     * 
+     * @param s0
+     *            &emsp; String address
+     * @param bi0
+     *            &emsp; ImageIcon
      */
-    public void setImage(String s0, Image bi0) {
-        images.put(s0, bi0);
+    public void setImage(final String s0, final Image bi0) {
+        this.images.put(s0, bi0);
     }
 }

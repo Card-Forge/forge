@@ -2219,7 +2219,7 @@ public abstract class Player extends GameEntity {
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
 
         final String[] incR = restriction.split("\\.");
-        
+
         if (incR[0].equals("Opponent")) {
             if (this.equals(sourceController)) {
                 return false;

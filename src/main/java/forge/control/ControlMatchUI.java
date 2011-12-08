@@ -174,7 +174,7 @@ public class ControlMatchUI {
                 ControlMatchUI.this.view.getDockController().concede();
             }
         };
-        
+
         ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         // Show stack
