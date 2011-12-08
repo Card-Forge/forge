@@ -653,7 +653,7 @@ public class ViewField extends FRoundedPanel {
             this.setMinimumSize(this.labelSize);
             this.setBorder(new LineBorder(new Color(0, 0, 0, 0), 1));
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setVerticalAlignment(SwingConstants.CENTER);
+            this.setVerticalAlignment(SwingConstants.BOTTOM);
 
             // Increment counter and check for zebra. Set default BG
             // so hover effects return to the same color.

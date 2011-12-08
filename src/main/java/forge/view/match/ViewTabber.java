@@ -69,9 +69,11 @@ import forge.view.toolbox.FVerticalTabPanel;
 @SuppressWarnings("serial")
 public class ViewTabber extends FRoundedPanel {
     private final List<JPanel> panelList;
-    private Map<Player, JLabel[]> detailLabels;
+    private Map<Player, JLabel[]> detalLBLs;
     private List<JTextArea> stackTARs;
     private List<JTextArea> combatTARs;
+    private List<JTextArea> consoleTARs;
+    private List<JLabel> devLBLs;
 
     private final ControlTabber control;
     private final FSkin skin;
@@ -94,6 +96,8 @@ public class ViewTabber extends FRoundedPanel {
         final String constraints = "wrap, insets 0 3% 0 0, gap 0";
         stackTARs = new ArrayList<JTextArea>();
         combatTARs = new ArrayList<JTextArea>();
+        consoleTARs = new ArrayList<JTextArea>();
+        devLBLs = new ArrayList<JLabel>();
 
         // Trigger Context Menu creation
         this.triggerMenu = new TriggerReactionMenu();
@@ -156,7 +160,7 @@ public class ViewTabber extends FRoundedPanel {
                 regular = big - 2;
 
                 // Player panel info
-                Iterator<Entry<Player, JLabel[]>> it = detailLabels.entrySet().iterator();
+                Iterator<Entry<Player, JLabel[]>> it = detalLBLs.entrySet().iterator();
                 while (it.hasNext()) {
                     JLabel[] labels = (JLabel[]) it.next().getValue();
                     for (x = 0; x < labels.length; x++) {
@@ -177,6 +181,16 @@ public class ViewTabber extends FRoundedPanel {
                 // Combat text areas
                 for (JTextArea tar : combatTARs) {
                     tar.setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                }
+
+                // Console text areas
+                for (JTextArea tar : consoleTARs) {
+                    tar.setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                }
+
+                // Devmode Labels
+                for (JLabel lbl : devLBLs) {
+                    lbl.setFont(skin.getFont1().deriveFont(Font.PLAIN, regular));
                 }
             }
         });
@@ -355,6 +369,7 @@ public class ViewTabber extends FRoundedPanel {
         jsp.getViewport().setOpaque(false);
 
         this.pnlConsole.add(jsp, "w 95%!, gapleft 3%, gaptop 1%");
+        consoleTARs.add(tar);
     }
 
     /**
@@ -365,7 +380,7 @@ public class ViewTabber extends FRoundedPanel {
      *            &emsp; Player obj
      */
     public void updatePlayerLabels(final Player p0) {
-        final JLabel[] temp = this.detailLabels.get(p0);
+        final JLabel[] temp = this.detalLBLs.get(p0);
         temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: " + String.valueOf(p0.getPoisonCounters()));
         temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
         temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
@@ -535,14 +550,14 @@ public class ViewTabber extends FRoundedPanel {
      * 
      * @return HashMap<Player, JLabel[]>
      */
-    public Map<Player, JLabel[]> getDetailLabels() {
-        return this.detailLabels;
+    public Map<Player, JLabel[]> getdetalLBLs() {
+        return this.detalLBLs;
     }
 
     /** Assembles Swing components for "players" panel. */
     private void populatePnlPlayers() {
         final List<Player> players = AllZone.getPlayersInGame();
-        this.detailLabels = new HashMap<Player, JLabel[]>();
+        this.detalLBLs = new HashMap<Player, JLabel[]>();
 
         for (final Player p : players) {
             // Create and store labels detailing various non-critical player
@@ -553,7 +568,7 @@ public class ViewTabber extends FRoundedPanel {
             final InfoLabel draw = new InfoLabel();
             final InfoLabel prevention = new InfoLabel();
             final InfoLabel keywords = new InfoLabel();
-            this.detailLabels.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords });
+            this.detalLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords });
 
             // Set border on bottom label, and larger font on player name
             keywords.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getColor("borders")));
@@ -583,19 +598,31 @@ public class ViewTabber extends FRoundedPanel {
 
         this.pnlDev.add(jsp, "w 100%!, h 100%!");
 
-        this.lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
-        this.lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
-        this.lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
-        this.lblGenerateMana = new DevLabel("Generate Mana");
-        this.lblSetupGame = new DevLabel("Setup Game State");
-        this.lblTutor = new DevLabel("Tutor for Card");
-        this.lblCounterPermanent = new DevLabel("Add Counter to Permanent");
-        this.lblTapPermanent = new DevLabel("Tap Permanent");
-        this.lblUntapPermanent = new DevLabel("Untap Permanent");
-        this.lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn");
-        this.lblHumanLife = new DevLabel("Set Player Life");
+        lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
+        lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
+        lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
+        lblGenerateMana = new DevLabel("Generate Mana");
+        lblSetupGame = new DevLabel("Setup Game State");
+        lblTutor = new DevLabel("Tutor for Card");
+        lblCounterPermanent = new DevLabel("Add Counter to Permanent");
+        lblTapPermanent = new DevLabel("Tap Permanent");
+        lblUntapPermanent = new DevLabel("Untap Permanent");
+        lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn");
+        lblHumanLife = new DevLabel("Set Player Life");
 
-        final String constraints = "w 100%!, gap 0 0 5px 0";
+        devLBLs.add(lblMilling);
+        devLBLs.add(lblHandView);
+        devLBLs.add(lblLibraryView);
+        devLBLs.add(lblGenerateMana);
+        devLBLs.add(lblSetupGame);
+        devLBLs.add(lblTutor);
+        devLBLs.add(lblCounterPermanent);
+        devLBLs.add(lblTapPermanent);
+        devLBLs.add(lblUntapPermanent);
+        devLBLs.add(lblUnlimitedLands);
+        devLBLs.add(lblHumanLife);
+
+        final String constraints = "w 95%!, gap 0 0 5px 0";
         viewport.add(this.lblMilling, constraints);
         viewport.add(this.lblHandView, constraints);
         viewport.add(this.lblLibraryView, constraints);
