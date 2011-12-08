@@ -269,6 +269,21 @@ Fixes/Features:
 - Fixed Kokusho, the Evening Star (is there a better solution for this, otherwise a lot of cards need the same treatment).
 - Another update to the JuzamJedi cube.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- add a null check in MagicStack when adding targets to GameLog
+- Updated some SVars.
+- Added plugin and dependency version reports. This will make it easier to keep track of new versions.
+- Checkstyle.
+- GUI updates:
+1) remove LAF stuff
+2) add a Chooser for Skin from the GuiHomeScreen (not fully functional yet)
+3) hook up the GuiHomeScreen to use the New GUI (currently no option to use the old GUI)
+- Resize adapters added to dev labels and console TARs.
+- Updated FButton with removal of LAF aesthetics.
+- Another try at icon alignment in field details.
+- change skins on the fly (form Home screen anyway) and this is persisted between launches of the game
+- Added focus, toggle, and disabled states to FButton and skins. Note: Keyboard functionality had already been lost _before_ this commit.
+- Fixed Butcher of Malakir.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
