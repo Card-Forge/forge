@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -25,6 +25,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -34,7 +36,7 @@ import forge.AllZone;
 /**
  * The core JButton used throughout the Forge project. Follows skin font and
  * theme button styling.
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class FButton extends JButton {
@@ -57,7 +59,7 @@ public class FButton extends JButton {
 
     /**
      * Instantiates a new FButton.
-     * 
+     *
      * @param msg
      *            the msg
      */
@@ -80,6 +82,7 @@ public class FButton extends JButton {
             this.allImagesPresent = true;
         }
 
+        // Mouse events
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(final java.awt.event.MouseEvent evt) {
@@ -92,10 +95,15 @@ public class FButton extends JButton {
 
             @Override
             public void mouseExited(final java.awt.event.MouseEvent evt) {
-                if (FButton.this.isEnabled()) {
+                if (FButton.this.isEnabled() && !FButton.this.isFocusOwner()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+                }
+                else if (FButton.this.isEnabled() && FButton.this.isFocusOwner()) {
+                    FButton.this.imgL = FButton.this.skin.getImage("button.focusLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.focusCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.focusRIGHT");
                 }
             }
 
@@ -107,12 +115,56 @@ public class FButton extends JButton {
                     FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
                 }
             }
+
+            @Override
+            public void mouseReleased(final java.awt.event.MouseEvent evt) {
+                if (FButton.this.isEnabled()) {
+                    FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
+                }
+            }
         });
+
+        // Focus events
+        this.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if (FButton.this.isEnabled()) {
+                    FButton.this.imgL = FButton.this.skin.getImage("button.focusLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.focusCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.focusRIGHT");
+                }
+            }
+
+            public void focusLost(FocusEvent e) {
+                if (FButton.this.isEnabled()) {
+                    FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void setEnabled(boolean b0) {
+        if (!b0) {
+            FButton.this.imgL = FButton.this.skin.getImage("button.disabledLEFT");
+            FButton.this.imgM = FButton.this.skin.getImage("button.disabledCENTER");
+            FButton.this.imgR = FButton.this.skin.getImage("button.disabledRIGHT");
+        }
+        else {
+            FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
+            FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
+            FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+        }
+
+        super.setEnabled(b0);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
      */
     @Override

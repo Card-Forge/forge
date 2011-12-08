@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,7 +37,7 @@ import forge.gui.GuiUtils;
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
- * 
+ *
  */
 
 public class FSkin {
@@ -52,12 +52,12 @@ public class FSkin {
     private final String font1file = "font1.ttf";
     private Font tempFont;
     private final String notfound = "FSkin.java: Can't find ";
-    
+
     private final static String[] SKINS = {"default", "rebel", "smith"};
-    
+
     public static ArrayList<String> getSkins() {
         ArrayList<String> mySkins = new ArrayList<String>();
-        for(int i = 0; i < SKINS.length; i++) {
+        for (int i = 0; i < SKINS.length; i++) {
             mySkins.add(SKINS[i]);
         }
         return mySkins;
@@ -66,7 +66,7 @@ public class FSkin {
     /**
      * FSkin constructor. No arguments, will generate default skin settings,
      * fonts, and backgrounds.
-     * 
+     *
      * @throws Exception
      *             the exception
      */
@@ -77,7 +77,7 @@ public class FSkin {
     /**
      * FSkin constructor, using skin name. Generates custom skin settings,
      * fonts, and backgrounds.
-     * 
+     *
      * @param skinName
      *            the skin name
      * @throws Exception
@@ -89,7 +89,7 @@ public class FSkin {
 
     /**
      * Loads objects from skin folder, prints brief error if not found.
-     * 
+     *
      * @param skinName
      */
     private void loadFontAndImages(final String skinName) {
@@ -161,6 +161,14 @@ public class FSkin {
             this.setImage("button.focusLEFT", image.getSubimage(360, 120, 40, 40));
             this.setImage("button.focusCENTER", image.getSubimage(400, 120, 1, 40));
             this.setImage("button.focusRIGHT", image.getSubimage(440, 120, 40, 40));
+
+            this.setImage("button.toggleLEFT", image.getSubimage(360, 160, 40, 40));
+            this.setImage("button.toggleCENTER", image.getSubimage(400, 160, 1, 40));
+            this.setImage("button.toggleRIGHT", image.getSubimage(440, 160, 40, 40));
+
+            this.setImage("button.disabledLEFT", image.getSubimage(360, 200, 40, 40));
+            this.setImage("button.disabledCENTER", image.getSubimage(400, 200, 1, 40));
+            this.setImage("button.disabledRIGHT", image.getSubimage(440, 200, 40, 40));
         } catch (final IOException e) {
             System.err.println(this.notfound + this.spriteFile);
         }
@@ -172,7 +180,7 @@ public class FSkin {
      * </p>
      * Tries to instantiate an image icon from a filename. Error reported if not
      * found.
-     * 
+     *
      * @param {@link java.lang.String} address
      * @return a ImageIcon
      */
@@ -192,7 +200,7 @@ public class FSkin {
      * </p>
      * Uses GuiUtils to grab a font file at an address. Error will be reported
      * by GuiUtils if not found.
-     * 
+     *
      * @param {@link java.lang.String} address
      * @return a Font
      */
@@ -206,7 +214,7 @@ public class FSkin {
      * <p>
      * getColorFromPixel.
      * </p>
-     * 
+     *
      * @param {@link java.lang.Integer} pixel information
      */
     private Color getColorFromPixel(final int pixel) {
@@ -220,7 +228,7 @@ public class FSkin {
 
     /**
      * Primary font used in titles and buttons and most text output.
-     * 
+     *
      * @return {@link java.awt.font} font1
      */
     public Font getFont1() {
@@ -229,7 +237,7 @@ public class FSkin {
 
     /**
      * Primary font used in titles and buttons and most text output.
-     * 
+     *
      * @param font10
      *            &emsp; an image icon
      */
@@ -239,7 +247,7 @@ public class FSkin {
 
     /**
      * Gets the name.
-     * 
+     *
      * @return Name of skin.
      */
     public String getName() {
@@ -256,7 +264,7 @@ public class FSkin {
 
     /**
      * Gets a scaled version of an icon from this skin's icon map.
-     * 
+     *
      * @param s0 String icon address
      * @param w0 int new width
      * @param h0 int new height
@@ -277,9 +285,9 @@ public class FSkin {
         return new ImageIcon(scaled);
     }
 
-    /** 
+    /**
      * Sets an icon in this skin's icon map from a BufferedImage.
-     * 
+     *
      * @param s0 &emsp; String address
      * @param bi0 &emsp; BufferedImage
      */
@@ -287,9 +295,9 @@ public class FSkin {
         icons.put(s0, new ImageIcon(bi0));
     }
 
-    /** 
+    /**
      * Sets an icon in this skin's icon map from an ImageIcon.
-     * 
+     *
      * @param s0 &emsp; String address
      * @param i0 &emsp; ImageIcon
      */
@@ -299,7 +307,7 @@ public class FSkin {
 
     /**
      * Retrieves a color from this skin's color map.
-     * 
+     *
      * @param s0 &emsp; String color address
      * @return Color
      */
@@ -307,9 +315,9 @@ public class FSkin {
         return colors.get(s0);
     }
 
-    /** 
+    /**
      * Sets a color in this skin's color map.
-     * 
+     *
      * @param s0 &emsp; String address
      * @param c0 &emsp; Color
      */
@@ -319,7 +327,7 @@ public class FSkin {
 
     /**
      * Retrieves an image from this skin's image map.
-     * 
+     *
      * @param s0 &emsp; String color address
      * @return BufferedImage
      */
@@ -327,9 +335,9 @@ public class FSkin {
         return images.get(s0);
     }
 
-    /** 
+    /**
      * Sets an image in this skin's image map.
-     * 
+     *
      * @param s0 &emsp; String address
      * @param bi0 &emsp; ImageIcon
      */
