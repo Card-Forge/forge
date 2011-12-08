@@ -527,9 +527,15 @@ public class AbilityFactoryToken extends AbilityFactory {
             // Grant SVars
             if (this.tokenSVars != null) {
                 for (final String s : this.tokenSVars) {
-                    final String actualSVar = this.abilityFactory.getHostCard().getSVar(s);
+                    String actualSVar = this.abilityFactory.getHostCard().getSVar(s);
+                    String name = s;
+                    if (actualSVar.startsWith("SVar")) {
+                        actualSVar = actualSVar.split("SVar:")[1];
+                        name = actualSVar.split(":")[0];
+                        actualSVar = actualSVar.split(":")[1];
+                    }
                     for (final Card c : tokens) {
-                        c.setSVar(s, actualSVar);
+                        c.setSVar(name, actualSVar);
                     }
                 }
             }
