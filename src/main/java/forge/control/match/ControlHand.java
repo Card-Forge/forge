@@ -38,6 +38,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.PlayerZone;
+import forge.view.GuiTopLevel;
 import forge.view.match.ViewHand;
 import forge.view.match.ViewTopLevel;
 
@@ -64,7 +65,7 @@ public class ControlHand {
 
     /** Adds observers to hand panel. */
     public void addObservers() {
-        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(new Observer() {
             @Override
@@ -127,7 +128,7 @@ public class ControlHand {
 
     /** Adds listeners to hand panel: clicks, mouseover, etc. */
     public void addListeners() {
-        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         view.getHandArea().addMouseListener(new MouseAdapter() {
             // Card click
@@ -165,7 +166,7 @@ public class ControlHand {
      */
     public void addCardPanelListeners(final CardPanel c) {
         // Grab top level controller to facilitate interaction between children
-        final ViewTopLevel t = (ViewTopLevel) (AllZone.getDisplay());
+        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         final Card cardobj = c.getCard();
 
         // Sidebar pic/detail on card hover

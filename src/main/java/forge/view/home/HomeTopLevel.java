@@ -17,7 +17,7 @@
  */
 package forge.view.home;
 
-import forge.view.toolbox.FPanel;
+import forge.view.swing.GuiHomeScreen;
 
 /**
  * Lays out battle, sidebar, user areas in locked % vals and repaints as
@@ -26,12 +26,14 @@ import forge.view.toolbox.FPanel;
  */
 
 @SuppressWarnings("serial")
-public class HomeTopLevel extends FPanel {
+// THIS SHOULD EXTEND FPANEL WHEN DONE PROPERLY, AFTER GUIHOMESCREEN IS PORTED HERE.
+public class HomeTopLevel {
 
     /**
      * Instantiates a new home top level.
      */
     public HomeTopLevel() {
-        super();
+        final String[] argz = {};
+        GuiHomeScreen.main(argz);
     }
 }

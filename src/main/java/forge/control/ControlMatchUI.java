@@ -36,6 +36,7 @@ import forge.Constant.Zone;
 import forge.Singletons;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
+import forge.view.GuiTopLevel;
 import forge.view.match.ViewTopLevel;
 
 /**
@@ -99,6 +100,9 @@ public class ControlMatchUI {
         AllZone.getInputControl().updateObservers();
         this.view.getTabberController().updateObservers();
         this.mapKeyboardShortcuts();
+
+        // This line is probably not necessary.  Doublestrike 8-12-11
+        //((GuiTopLevel) AllZone.getDisplay()).getController().changeState(1);
     }
 
     /**
@@ -122,7 +126,7 @@ public class ControlMatchUI {
      */
     @SuppressWarnings("serial")
     private void mapKeyboardShortcuts() {
-        final InputMap im = ((ViewTopLevel) AllZone.getDisplay())
+        final InputMap im = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView()
                 .getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         final ForgePreferences fp = Singletons.getModel().getPreferences();
         String str;
@@ -170,6 +174,8 @@ public class ControlMatchUI {
                 ControlMatchUI.this.view.getDockController().concede();
             }
         };
+        
+        ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         // Show stack
         // (Get keycode string, convert to char, convert to keystroke, put on
@@ -178,42 +184,42 @@ public class ControlMatchUI {
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actShowStack);
+        t.getActionMap().put(im.get(key), actShowStack);
 
         // Show combat
         str = fp.getShowCombatShortcut();
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actShowCombat);
+        t.getActionMap().put(im.get(key), actShowCombat);
 
         // Show console
         str = fp.getShowConsoleShortcut();
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actShowConsole);
+        t.getActionMap().put(im.get(key), actShowConsole);
 
         // Show players
         str = fp.getShowPlayersShortcut();
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actShowPlayers);
+        t.getActionMap().put(im.get(key), actShowPlayers);
 
         // Show devmode
         str = fp.getShowDevShortcut();
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actShowDev);
+        t.getActionMap().put(im.get(key), actShowDev);
 
         // Concede game
         str = fp.getConcedeShortcut();
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
-        ((ViewTopLevel) AllZone.getDisplay()).getActionMap().put(im.get(key), actConcede);
+        t.getActionMap().put(im.get(key), actConcede);
     }
 
     /**
@@ -255,5 +261,10 @@ public class ControlMatchUI {
         }
 
         return StringUtils.join(displayText, ' ');
+    }
+
+    /** @return ViewTopLevel */
+    public ViewTopLevel getView() {
+        return view;
     }
 }

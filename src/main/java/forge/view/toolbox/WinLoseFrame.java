@@ -38,11 +38,11 @@ import forge.AllZone;
 import forge.Constant;
 import forge.Phase;
 import forge.Player;
-import forge.control.ControlAllUI;
 import forge.control.ControlWinLose;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.WinLoseFrame.WinLoseText;
 import forge.quest.data.QuestMatchState;
+import forge.view.GuiTopLevel;
 import forge.view.match.ViewTopLevel;
 
 /**
@@ -247,9 +247,7 @@ public class WinLoseFrame extends JFrame {
 
         // Instantiate a new ControlAllUI if using new UI.
         if (!Constant.Runtime.OLDGUI[0]) {
-            final ControlAllUI ui = new ControlAllUI();
-            AllZone.setDisplay(ui.getMatchView());
-            ui.getMatchController().initMatch();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
         }
 
         AllZone.getDisplay().setVisible(true);
@@ -269,9 +267,7 @@ public class WinLoseFrame extends JFrame {
 
         // Instantiate a new ControlAllUI if using new UI.
         if (!Constant.Runtime.OLDGUI[0]) {
-            final ControlAllUI ui = new ControlAllUI();
-            AllZone.setDisplay(ui.getMatchView());
-            ui.getMatchController().initMatch();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
         }
 
         AllZone.getDisplay().setVisible(true);
@@ -313,7 +309,7 @@ public class WinLoseFrame extends JFrame {
         if (Constant.Runtime.OLDGUI[0]) {
             frame = (JFrame) AllZone.getDisplay();
         } else {
-            final ViewTopLevel temp = (ViewTopLevel) AllZone.getDisplay();
+            final ViewTopLevel temp = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
             frame = (JFrame) temp.getTopLevelFrame();
         }
 

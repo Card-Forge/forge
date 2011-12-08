@@ -28,7 +28,7 @@ import forge.Command;
 import forge.Constant;
 import forge.GameActionUtil;
 import forge.PlayerZone;
-import forge.view.match.ViewTopLevel;
+import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -119,7 +119,7 @@ public class InputBlock extends Input {
             }
         }
         else if (!Constant.Runtime.OLDGUI[0]) {
-            ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
         this.showMessage();
     } // selectCard()

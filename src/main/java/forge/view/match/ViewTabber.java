@@ -55,6 +55,7 @@ import forge.control.match.ControlTabber;
 import forge.gui.ForgeAction;
 import forge.gui.MultiLineLabelUI;
 import forge.properties.NewConstants;
+import forge.view.GuiTopLevel;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
@@ -215,7 +216,7 @@ public class ViewTabber extends FRoundedPanel {
      */
     public void updateStack() {
         final MagicStack stack = AllZone.getStack();
-        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         int count = 1;
         JTextArea tar;

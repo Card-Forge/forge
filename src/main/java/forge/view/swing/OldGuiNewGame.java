@@ -72,7 +72,6 @@ import forge.ImageCache;
 import forge.MyRandom;
 import forge.PlayerType;
 import forge.Singletons;
-import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -96,6 +95,7 @@ import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.MenuBar.Menu;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.MenuBar.Options;
 import forge.quest.gui.QuestOptions;
+import forge.view.GuiTopLevel;
 
 /*CHOPPIC*/
 
@@ -886,9 +886,7 @@ public class OldGuiNewGame extends JFrame {
         if (Constant.Runtime.OLDGUI[0]) {
             AllZone.setDisplay(new GuiDisplay());
         } else {
-            final ControlAllUI ui = new ControlAllUI();
-            AllZone.setDisplay(ui.getMatchView());
-            ui.getMatchController().initMatch();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
         }
 
         Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();

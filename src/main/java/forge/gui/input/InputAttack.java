@@ -25,7 +25,7 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.view.match.ViewTopLevel;
+import forge.view.GuiTopLevel;
 import forge.GameActionUtil;
 import forge.PlayerZone;
 
@@ -123,7 +123,7 @@ public class InputAttack extends Input {
             CombatUtil.showCombat();
         }
         else if (!Constant.Runtime.OLDGUI[0]) {
-            ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
     } // selectCard()
 

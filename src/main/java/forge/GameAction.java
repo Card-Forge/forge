@@ -61,6 +61,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.quest.gui.QuestWinLoseHandler;
 import forge.quest.gui.main.QuestEvent;
+import forge.view.GuiTopLevel;
 import forge.view.match.ViewTopLevel;
 import forge.view.toolbox.WinLoseFrame;
 
@@ -805,7 +806,7 @@ public class GameAction {
                 return;
             }
         } else {
-            final ViewTopLevel frame = (ViewTopLevel) AllZone.getDisplay();
+            final ViewTopLevel frame = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
             if (!frame.isDisplayable()) {
                 return;
             }

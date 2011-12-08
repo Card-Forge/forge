@@ -24,7 +24,7 @@ import forge.Constant;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.view.match.ViewTopLevel;
+import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -86,7 +86,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
             AllZone.getPhase().setPriority(AllZone.getHumanPlayer());
         }
         else if (!Constant.Runtime.OLDGUI[0]) {
-            ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
     } // selectCard()
 }

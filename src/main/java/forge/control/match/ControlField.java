@@ -56,6 +56,7 @@ import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerLibrary;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
+import forge.view.GuiTopLevel;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTopLevel;
 
@@ -166,7 +167,7 @@ public class ControlField {
         this.view.getTabletop().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 final Card c = t.getDetailController().getCurrentCard();
                 final Input input = t.getInputController().getInputControl().getInput();
 
@@ -217,7 +218,7 @@ public class ControlField {
         this.view.getTabletop().addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(final MouseEvent me) {
-                final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
                 if (c != null) {
                     t.getDetailController().showCard(c);
@@ -230,7 +231,7 @@ public class ControlField {
         this.view.getAvatarArea().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 if (ControlField.this.player.isComputer()) {
                     t.getInputController().getInputControl().selectPlayer(AllZone.getComputerPlayer());
                 } else {

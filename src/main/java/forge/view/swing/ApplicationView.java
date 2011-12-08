@@ -17,6 +17,7 @@
  */
 package forge.view.swing;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
@@ -35,6 +36,7 @@ import forge.game.GameType;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.view.FView;
+import forge.view.GuiTopLevel;
 import forge.view.home.SplashFrame;
 import forge.view.swing.OldGuiNewGame.CardSizesAction;
 import forge.view.swing.OldGuiNewGame.CardStackAction;
@@ -161,14 +163,13 @@ public class ApplicationView implements FView {
 
                                 ApplicationView.this.splashFrame = null;
 
-                                if (System.getenv("NG2") != null) {
-                                    if (System.getenv("NG2").equalsIgnoreCase("true")) {
-                                        final String[] argz = {};
-                                        GuiHomeScreen.main(argz);
-                                    } else {
-                                        new OldGuiNewGame();
-                                    }
-                                } else {
+                                if (!Constant.Runtime.OLDGUI[0]) {
+                                    GuiTopLevel g = new GuiTopLevel();
+                                    g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                    AllZone.setDisplay(g);
+                                    g.getController().changeState(0);
+                                }
+                                else {
                                     new OldGuiNewGame();
                                 }
                             }

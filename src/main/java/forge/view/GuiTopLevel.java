@@ -19,14 +19,19 @@ package forge.view;
 
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Toolkit;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import forge.AllZone;
-import forge.view.match.ViewTopLevel;
+import forge.Card;
+import forge.CardList;
+import forge.Display;
+import forge.MyButton;
+import forge.Player;
+import forge.control.ControlAllUI;
 import forge.view.toolbox.FOverlay;
 
 /**
@@ -34,8 +39,9 @@ import forge.view.toolbox.FOverlay;
  * 
  */
 @SuppressWarnings("serial")
-public class GuiTopLevel extends JFrame {
+public class GuiTopLevel extends JFrame implements Display {
     private final JLayeredPane lpnContent;
+    private ControlAllUI control;
 
     /**
      * Parent JFrame for Forge UI.
@@ -50,16 +56,14 @@ public class GuiTopLevel extends JFrame {
         this.lpnContent.setOpaque(true);
         this.setContentPane(this.lpnContent);
         this.addOverlay();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/images/symbols-13/favicon.png"));
+        this.setTitle("Forge");
+
 
         this.setVisible(true);
 
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent evt) {
-                ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
-                t.getDockController().concede();
-            }
-        });
+        // Init controller
+        control = new ControlAllUI(this);
     }
 
     /**
@@ -73,5 +77,34 @@ public class GuiTopLevel extends JFrame {
         pnlOverlay.setVisible(false);
         pnlOverlay.setBounds(0, 0, this.getWidth(), this.getHeight());
         this.lpnContent.add(pnlOverlay, JLayeredPane.MODAL_LAYER);
+    }
+
+    /** @return ControlAllUI */
+    public ControlAllUI getController() {
+        return control;
+    }
+
+    /* ========================================================
+     * 
+     * WILL BE DEPRECATED SOON WITH DISPLAY INTERFACE UPDATE!!!
+     *
+     ========================================================*/
+
+    public void showMessage(String s) { }
+    public MyButton getButtonOK() { return new EmptyButton(); }
+    public MyButton getButtonCancel() { return new EmptyButton(); }
+    public void showCombat(String message) { }
+    public void assignDamage(Card attacker, CardList blockers, int damage) { }
+    public boolean stopAtPhase(Player turn, String phase) { return true; }
+    public boolean loadPrefs() { return true; }
+    public boolean savePrefs() { return true; }
+    public boolean canLoseByDecking() { return true; }
+    public void setCard(Card c) { }
+    /** THIS CLASS ONLY EXISTS TO KEEP THE INTERFACE HAPPY TEMPORARILY. */
+    private class EmptyButton extends JButton implements MyButton {
+        public void reset() {}
+        public void setSelectable(boolean b0) {}
+        public boolean isSelectable() {return true;}
+        public void select() {}
     }
 }

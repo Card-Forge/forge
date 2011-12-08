@@ -48,7 +48,6 @@ import forge.Command;
 import forge.Constant;
 import forge.GuiDisplay;
 import forge.ImageCache;
-import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
@@ -62,6 +61,7 @@ import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestDuelPanel;
 import forge.quest.gui.main.QuestEventManager;
 import forge.quest.gui.main.QuestSelectablePanel;
+import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -777,9 +777,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         if (Constant.Runtime.OLDGUI[0]) {
             AllZone.setDisplay(new GuiDisplay());
         } else {
-            final ControlAllUI ui = new ControlAllUI();
-            AllZone.setDisplay(ui.getMatchView());
-            ui.getMatchController().initMatch();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
         }
 
         Constant.Runtime.SMOOTH[0] = this.smoothLandCheckBox.isSelected();

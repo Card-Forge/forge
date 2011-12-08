@@ -44,6 +44,7 @@ import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
+import forge.view.GuiTopLevel;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 
@@ -316,7 +317,7 @@ public class ViewField extends FRoundedPanel {
      */
     public void updateDetails(final Player p0) {
         // "Players" panel update
-        final ViewTopLevel t = (ViewTopLevel) AllZone.getDisplay();
+        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         t.getTabberController().getView().updatePlayerLabels(p0);
 
         // Poison/life

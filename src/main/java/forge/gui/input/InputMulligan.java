@@ -35,7 +35,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
 import forge.quest.data.QuestData;
-import forge.view.match.ViewTopLevel;
+import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -213,7 +213,7 @@ public class InputMulligan extends Input {
     @Override
     public void selectCard(Card c0, PlayerZone z0) {
         if (!Constant.Runtime.OLDGUI[0]) {
-            ((ViewTopLevel) AllZone.getDisplay()).getInputController().remind();
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
     }
 }

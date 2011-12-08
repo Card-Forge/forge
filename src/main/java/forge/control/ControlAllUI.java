@@ -20,9 +20,12 @@ package forge.control;
 import java.awt.Component;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JLayeredPane;
 
+import forge.AllZone;
 import forge.view.GuiTopLevel;
 import forge.view.editor.EditorTopLevel;
 import forge.view.home.HomeTopLevel;
@@ -51,25 +54,12 @@ public class ControlAllUI {
      * switches between various display states in that JFrame. Controllers are
      * instantiated separately by each state's top level view class.
      * 
+     * @param v0 &emsp; GuiTopLevel
      */
-    public ControlAllUI() {
-        this.view = new GuiTopLevel();
-
-        this.view.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(final ComponentEvent e) {
-                Component[] children;
-                children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-                children[0].setSize(ControlAllUI.this.display.getSize());
-
-                children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
-                children[0].setSize(ControlAllUI.this.display.getSize());
-            }
-        });
+    public ControlAllUI(GuiTopLevel v0) {
+        this.view = v0;
 
         this.display = (JLayeredPane) this.view.getContentPane();
-
-        this.changeState(1);
     }
 
     /**
@@ -93,12 +83,39 @@ public class ControlAllUI {
         switch (i) {
         case 0: // Home screen
             this.home = new HomeTopLevel();
-            this.display.add(this.home);
+            //this.display.add(this.home);
             break;
 
         case 1: // Match screen
             this.match = new ViewTopLevel();
             this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
+
+            view.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(final WindowEvent evt) {
+                    ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                    t.getDockController().concede();
+                }
+            });
+
+            view.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(final ComponentEvent e) {
+                    Component[] children;
+                    children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+                    children[0].setSize(ControlAllUI.this.display.getSize());
+
+                    children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
+                    children[0].setSize(ControlAllUI.this.display.getSize());
+                }
+            });
+
+            Component[] children;
+            children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+            children[0].setSize(ControlAllUI.this.display.getSize());
+
+            children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
+            children[0].setSize(ControlAllUI.this.display.getSize());
             break;
 
         case 2: // Deck editor screen

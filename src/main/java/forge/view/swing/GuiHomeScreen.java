@@ -23,7 +23,6 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -53,14 +52,12 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.GuiDisplay;
 import forge.GuiDownloadPrices;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
 import forge.MyRandom;
 import forge.PlayerType;
 import forge.Singletons;
-import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -83,6 +80,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 import forge.quest.gui.QuestOptions;
+import forge.view.GuiTopLevel;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -249,13 +247,9 @@ public class GuiHomeScreen {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        this.gHS = new JFrame();
-        this.gHS.setIconImage(Toolkit.getDefaultToolkit().getImage(this.homeScreenPath + "../favicon.png"));
-        this.gHS.setTitle("Forge");
-        this.gHS.setResizable(false);
-        this.gHS.setBounds(100, 100, 605, 627);
-        this.gHS.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.gHS = (JFrame) AllZone.getDisplay();
         this.gHS.getContentPane().setLayout(null);
+
         this.lblGameMode.setFocusable(false);
         this.lblGameMode.setOpaque(false);
         this.lblGameMode.setBorder(null);
@@ -690,7 +684,7 @@ public class GuiHomeScreen {
             }
         });
         this.pnlSettingsA.add(this.chkFoil);
-        
+
         this.cmdChooseSkin.setOpaque(false);
         this.cmdChooseSkin.setBackground(this.clrScrollBackground);
         this.cmdChooseSkin.addActionListener(new ActionListener() {
@@ -700,7 +694,7 @@ public class GuiHomeScreen {
             }
         });
         this.pnlSettingsA.add(this.cmdChooseSkin);
-        
+
         this.cmdSize.setOpaque(false);
         this.cmdSize.setBackground(this.clrScrollBackground);
         this.cmdSize.addActionListener(new ActionListener() {
@@ -834,8 +828,6 @@ public class GuiHomeScreen {
         this.gHS.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { this.lblBackground,
                 this.cmdConstructed, this.cmdSealed, this.cmdDraft, this.cmdQuest, this.cmdHumanDeck, this.cmdAIDeck,
                 this.cmdDeckEditor, this.cmdSettings, this.cmdStart, this.lstDecks, this.cmdDeckSelect }));
-
-        GuiUtils.centerFrame(this.gHS);
 
         // non gui init stuff
         this.allDecks = new ArrayList<Deck>(this.deckManager.getDecks());
@@ -1198,22 +1190,18 @@ public class GuiHomeScreen {
                 return;
             }
 
-            // Instantiate a new ControlAllUI if using new UI.
-            if (!Constant.Runtime.OLDGUI[0]) {
-                final ControlAllUI ui = new ControlAllUI();
-                AllZone.setDisplay(ui.getMatchView());
-                ui.getMatchController().initMatch();
-            } else {
-                AllZone.setDisplay(new GuiDisplay());
-            }
-            
+            GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
+
+            g.getController().changeState(1);
+            g.getController().getMatchController().initMatch();
+
+            Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();
+
             AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             AllZone.getDisplay().setVisible(true);
         }
 
         Constant.Runtime.setGameType(this.gameTypeSelected);
-
-        this.gHS.dispose();
     }
 
     private void doChooseSkin() {
