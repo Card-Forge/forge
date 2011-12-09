@@ -56,13 +56,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * @see #MultiPhaseProgressMonitorWithETA(String,int,long,float,float[])
      */
     public MultiPhaseProgressMonitorWithETA(final String neoTitle, final int numPhases,
-            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec) // NOPMD
-                                                                                 // by
-                                                                                 // Braids
-                                                                                 // on
-                                                                                 // 8/18/11
-                                                                                 // 11:16
-                                                                                 // PM
+            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec)
     {
         this(neoTitle, numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec, null);
     }
@@ -94,13 +88,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * @see BaseProgressMonitor#BaseProgressMonitor(int,long,float,float[])
      */
     public MultiPhaseProgressMonitorWithETA(final String neoTitle, final int numPhases,
-            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec, // NOPMD
-                                                                                 // by
-                                                                                 // Braids
-                                                                                 // on
-                                                                                 // 8/18/11
-                                                                                 // 11:16
-                                                                                 // PM
+            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec,
             final float[] phaseWeights) {
         super(numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec, phaseWeights);
 
@@ -123,18 +111,13 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      */
     public static void main(final String[] args) {
 
-        System.out.println("Initializing..."); // NOPMD by Braids on 8/18/11
-                                               // 11:13 PM
+        System.out.println("Initializing...");
 
-        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on
-                                                    // 8/18/11 11:16 PM
+        SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
 
-                        final int totalUnitsFirstPhase = 5000; // NOPMD by
-                                                               // Braids on
-                                                               // 8/18/11 11:16
-                                                               // PM
+                        final int totalUnitsFirstPhase = 5000;
                         final MultiPhaseProgressMonitorWithETA monitor = new MultiPhaseProgressMonitorWithETA(
                                 "Testing 2 phases", 2, totalUnitsFirstPhase, 1.0f, new float[] { 2, 1 });
 
@@ -142,18 +125,12 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                             @Override
                             public Object doInBackground() {
 
-                                System.out.println("Running..."); // NOPMD by
-                                                                  // Braids on
-                                                                  // 8/18/11
-                                                                  // 11:14 PM
+                                System.out.println("Running...");
 
                                 for (int i = 0; i <= totalUnitsFirstPhase; i++) {
                                     monitor.incrementUnitsCompletedThisPhase(1);
 
-                                    System.out.print("\ri = " + i); // NOPMD by
-                                                                    // Braids on
-                                                                    // 8/18/11
-                                                                    // 11:14 PM
+                                    System.out.print("\ri = " + i);
 
                                     try {
                                         Thread.sleep(1);
@@ -161,25 +138,15 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                                         // blank
                                     }
                                 }
-                                System.out.println(); // NOPMD by Braids on
-                                                      // 8/18/11 11:14 PM
+                                System.out.println();
 
-                                final int totalUnitsSecondPhase = 2000; // NOPMD
-                                                                        // by
-                                                                        // Braids
-                                                                        // on
-                                                                        // 8/18/11
-                                                                        // 11:17
-                                                                        // PM
+                                final int totalUnitsSecondPhase = 2000;
                                 monitor.markCurrentPhaseAsComplete(totalUnitsSecondPhase);
 
                                 for (int i = 0; i <= totalUnitsSecondPhase; i++) {
                                     monitor.incrementUnitsCompletedThisPhase(1);
 
-                                    System.out.print("\ri = " + i); // NOPMD by
-                                                                    // Braids on
-                                                                    // 8/18/11
-                                                                    // 11:14 PM
+                                    System.out.print("\ri = " + i);
 
                                     try {
                                         Thread.sleep(1);
@@ -190,11 +157,8 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
                                 monitor.markCurrentPhaseAsComplete(0);
 
-                                System.out.println(); // NOPMD by Braids on
-                                                      // 8/18/11 11:14 PM
-                                System.out.println("Done!"); // NOPMD by Braids
-                                                             // on 8/18/11 11:14
-                                                             // PM
+                                System.out.println();
+                                System.out.println("Done!");
 
                                 return null;
                             }
@@ -206,18 +170,12 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                 });
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#
-     * setTotalUnitsThisPhase(long)
-     */
-    @Override
     /**
      * @param numUnits cannot be higher than Integer.MAX_VALUE
      *
      * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#setTotalUnitsThisPhase(long)
      */
+    @Override
     public final void setTotalUnitsThisPhase(final long numUnits) {
         super.setTotalUnitsThisPhase(numUnits);
 
@@ -227,13 +185,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
         if (numUnits > 0) {
             // dialog must exist before we exit this method.
-            UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() { // NOPMD
-                                                                              // by
-                                                                              // Braids
-                                                                              // on
-                                                                              // 8/18/11
-                                                                              // 11:17
-                                                                              // PM
+            UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
                         @Override
                         public void run() {
                             // (Re)create the progress bar.
@@ -247,8 +199,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                     });
         }
 
-        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on
-                                                    // 8/18/11 11:18 PM
+        SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         MultiPhaseProgressMonitorWithETA.this.dialog
@@ -270,21 +221,14 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#
-     * incrementUnitsCompletedThisPhase(long)
-     */
-    @Override
     /**
      * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#incrementUnitsCompletedThisPhase(long)
      */
+    @Override
     public final void incrementUnitsCompletedThisPhase(final long numUnits) {
         super.incrementUnitsCompletedThisPhase(numUnits);
 
-        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on
-                                                    // 8/18/11 11:18 PM
+        SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         for (int i = 0; i < numUnits; i++) {
@@ -325,8 +269,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      */
     public final void displayUpdate(final String message) {
 
-        final Runnable proc = new Runnable() { // NOPMD by Braids on 8/18/11
-                                               // 11:18 PM
+        final Runnable proc = new Runnable() {
             @Override
             public void run() {
                 // i've been having trouble getting the dialog to display its
@@ -356,8 +299,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      */
     @Override
     public final void dispose() {
-        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on
-                                                    // 8/18/11 11:18 PM
+        SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         MultiPhaseProgressMonitorWithETA.this.getDialog().dispose();
