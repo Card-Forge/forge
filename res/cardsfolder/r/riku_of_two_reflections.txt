@@ -1,0 +1,12 @@
+Name:Riku of Two Reflections
+ManaCost:2 U R G
+Types:Legendary Creature Human Wizard
+Text:no text
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigCopySpell | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may pay UR. If you do, copy that spell. You may choose new targets for the copy.
+T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, you may pay GU. If you do, put a token that's a copy of that creature onto the battlefield.
+SVar:TrigCopySpell:AB$CopySpell | Cost$ U R | Defined$ TriggeredSpellAbility
+SVar:TrigCopy:AB$CopyPermanent | Cost$ G U | Defined$ TriggeredCard
+SVar:Rarity:Mythic Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riku_of_two_reflections.jpg
+End
