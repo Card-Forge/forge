@@ -72,11 +72,11 @@ public class QuestStallDefinition {
     /**
      * Sets the fluff.
      * 
-     * @param fluff
+     * @param fluff0
      *            the fluff to set
      */
-    public void setFluff(final String fluff) {
-        this.fluff = fluff; // TODO: Add 0 to parameter's name.
+    public void setFluff(final String fluff0) {
+        this.fluff = fluff0;
     }
 
     /**
@@ -91,11 +91,11 @@ public class QuestStallDefinition {
     /**
      * Sets the icon name.
      * 
-     * @param iconName
+     * @param iconName0
      *            the iconName to set
      */
-    public void setIconName(final String iconName) {
-        this.iconName = iconName; // TODO: Add 0 to parameter's name.
+    public void setIconName(final String iconName0) {
+        this.iconName = iconName0;
     }
 
     /**
@@ -110,11 +110,11 @@ public class QuestStallDefinition {
     /**
      * Sets the display name.
      * 
-     * @param displayName
+     * @param displayName0
      *            the displayName to set
      */
-    public void setDisplayName(final String displayName) {
-        this.displayName = displayName; // TODO: Add 0 to parameter's name.
+    public void setDisplayName(final String displayName0) {
+        this.displayName = displayName0;
     }
 
     /**
@@ -129,10 +129,10 @@ public class QuestStallDefinition {
     /**
      * Sets the name.
      * 
-     * @param name
+     * @param name0
      *            the name to set
      */
-    public void setName(final String name) {
-        this.name = name; // TODO: Add 0 to parameter's name.
+    public void setName(final String name0) {
+        this.name = name0;
     }
 }

@@ -255,10 +255,10 @@ public class QuestPetManager {
     /**
      * Sets the use plant.
      * 
-     * @param usePlant
+     * @param usePlant0
      *            the usePlant to set
      */
-    public void setUsePlant(final boolean usePlant) {
-        this.usePlant = usePlant; // TODO: Add 0 to parameter's name.
+    public void setUsePlant(final boolean usePlant0) {
+        this.usePlant = usePlant0;
     }
 }

@@ -617,11 +617,11 @@ public final class QuestData {
     /**
      * Sets the card pool.
      * 
-     * @param cardPool
+     * @param cardPool0
      *            the cardPool to set
      */
-    public void setCardPool(final ItemPool<InventoryItem> cardPool) {
-        this.cardPool = cardPool; // TODO: Add 0 to parameter's name.
+    public void setCardPool(final ItemPool<InventoryItem> cardPool0) {
+        this.cardPool = cardPool0;
     }
 
     /**
@@ -636,11 +636,11 @@ public final class QuestData {
     /**
      * Sets the shop list.
      * 
-     * @param shopList
+     * @param shopList0
      *            the shopList to set
      */
-    public void setShopList(final ItemPool<InventoryItem> shopList) {
-        this.shopList = shopList; // TODO: Add 0 to parameter's name.
+    public void setShopList(final ItemPool<InventoryItem> shopList0) {
+        this.shopList = shopList0;
     }
 
     /**
@@ -655,11 +655,11 @@ public final class QuestData {
     /**
      * Sets the new card list.
      * 
-     * @param newCardList
+     * @param newCardList0
      *            the newCardList to set
      */
-    public void setNewCardList(final ItemPool<InventoryItem> newCardList) {
-        this.newCardList = newCardList; // TODO: Add 0 to parameter's name.
+    public void setNewCardList(final ItemPool<InventoryItem> newCardList0) {
+        this.newCardList = newCardList0;
     }
 
     /**
@@ -674,31 +674,31 @@ public final class QuestData {
     /**
      * Sets the my decks.
      * 
-     * @param myDecks
+     * @param myDecks0
      *            the myDecks to set
      */
-    public void setMyDecks(final Map<String, Deck> myDecks) {
-        this.myDecks = myDecks; // TODO: Add 0 to parameter's name.
+    public void setMyDecks(final Map<String, Deck> myDecks0) {
+        this.myDecks = myDecks0;
     }
 
     /**
      * Sets the inventory.
      * 
-     * @param inventory
+     * @param inventory0
      *            the inventory to set
      */
-    public void setInventory(final QuestInventory inventory) {
-        this.inventory = inventory; // TODO: Add 0 to parameter's name.
+    public void setInventory(final QuestInventory inventory0) {
+        this.inventory = inventory0;
     }
 
     /**
      * Sets the credits.
      * 
-     * @param credits
+     * @param credits0
      *            the credits to set
      */
-    public void setCredits(final long credits) {
-        this.credits = credits; // TODO: Add 0 to parameter's name.
+    public void setCredits(final long credits0) {
+        this.credits = credits0;
     }
 
     /**
@@ -713,10 +713,10 @@ public final class QuestData {
     /**
      * Sets the version number.
      * 
-     * @param versionNumber
+     * @param versionNumber0
      *            the versionNumber to set
      */
-    public void setVersionNumber(final int versionNumber) {
-        this.versionNumber = versionNumber; // TODO: Add 0 to parameter's name.
+    public void setVersionNumber(final int versionNumber0) {
+        this.versionNumber = versionNumber0;
     }
 }
