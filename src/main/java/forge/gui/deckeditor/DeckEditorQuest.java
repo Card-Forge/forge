@@ -211,9 +211,9 @@ public final class DeckEditorQuest extends DeckEditorBase {
         // Filters need to be taller as the bottom part is cut off.
         // this.filterNameTypeSet.setBounds(new Rectangle(19, 10, 726, 25));
         this.filterNameTypeSet.setBounds(new Rectangle(19, 8, 726, 31));
-        // Need to lower the top table.
+        // Need to lower the top table and lessen the total height.
         // this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 40, 726, 316));
-        this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 50, 726, 316));
+        this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 50, 726, 299));
         this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
 
         this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
@@ -285,7 +285,9 @@ public final class DeckEditorQuest extends DeckEditorBase {
         // The card view needs to be moved up and can not be as tall as it was.
         // this.getCardView().setBounds(new Rectangle(765, 23, 239, 687));
         this.getCardView().setBounds(new Rectangle(765, 16, 239, 662));
-        this.getTopTableWithCards().getLabel().setBounds(new Rectangle(19, 365, 720, 31));
+        // Need to raise the label for the top table.
+        // this.getTopTableWithCards().getLabel().setBounds(new Rectangle(19, 365, 720, 31));
+        this.getTopTableWithCards().getLabel().setBounds(new Rectangle(19, 345, 720, 31));
         this.getBottomTableWithCards().getLabel().setBounds(new Rectangle(19, 672, 720, 31));
 
         // Do not lower statsLabel any lower, we want this to be visible at 1024
