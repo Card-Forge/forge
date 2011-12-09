@@ -216,7 +216,9 @@ public final class DeckEditorQuest extends DeckEditorBase {
         this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 50, 726, 299));
         this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
 
-        this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
+        // Raise the remove button.
+        // this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
+        this.removeButton.setBounds(new Rectangle(180, 378, 146, 49));
         // removeButton.setIcon(upIcon);
         this.removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         this.removeButton.setText("Remove Card");
@@ -235,7 +237,9 @@ public final class DeckEditorQuest extends DeckEditorBase {
         });
         // addButton.setIcon(downIcon);
         this.addButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        this.addButton.setBounds(new Rectangle(23, 403, 146, 49));
+        // Raise the add button.
+        // this.addButton.setBounds(new Rectangle(23, 403, 146, 49));
+        this.addButton.setBounds(new Rectangle(23, 378, 146, 49));
 
         this.analysisButton.setText("Deck Analysis");
         this.analysisButton.addActionListener(new ActionListener() {
@@ -245,18 +249,28 @@ public final class DeckEditorQuest extends DeckEditorBase {
             }
         });
         this.analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        this.analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
+        // Raise the analysis button and move slightly to the right.
+        // this.analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
+        this.analysisButton.setBounds(new Rectangle(582, 401, 166, 25));
 
         /**
          * Type filtering
          */
-        this.getFilterBoxes().getLand().setBounds(340, 400, 48, 20);
-        this.getFilterBoxes().getCreature().setBounds(385, 400, 65, 20);
-        this.getFilterBoxes().getSorcery().setBounds(447, 400, 62, 20);
-        this.getFilterBoxes().getInstant().setBounds(505, 400, 60, 20);
-        this.getFilterBoxes().getPlaneswalker().setBounds(558, 400, 85, 20);
-        this.getFilterBoxes().getArtifact().setBounds(638, 400, 58, 20);
-        this.getFilterBoxes().getEnchantment().setBounds(692, 400, 80, 20);
+        // Raise the filter boxes.
+        // this.getFilterBoxes().getLand().setBounds(340, 400, 48, 20);
+        // this.getFilterBoxes().getCreature().setBounds(385, 400, 65, 20);
+        // this.getFilterBoxes().getSorcery().setBounds(447, 400, 62, 20);
+        // this.getFilterBoxes().getInstant().setBounds(505, 400, 60, 20);
+        // this.getFilterBoxes().getPlaneswalker().setBounds(558, 400, 85, 20);
+        // this.getFilterBoxes().getArtifact().setBounds(638, 400, 58, 20);
+        // this.getFilterBoxes().getEnchantment().setBounds(692, 400, 80, 20);
+        this.getFilterBoxes().getLand().setBounds(340, 375, 48, 20);
+        this.getFilterBoxes().getCreature().setBounds(385, 375, 65, 20);
+        this.getFilterBoxes().getSorcery().setBounds(447, 375, 62, 20);
+        this.getFilterBoxes().getInstant().setBounds(505, 375, 60, 20);
+        this.getFilterBoxes().getPlaneswalker().setBounds(558, 375, 85, 20);
+        this.getFilterBoxes().getArtifact().setBounds(638, 375, 58, 20);
+        this.getFilterBoxes().getEnchantment().setBounds(692, 375, 80, 20);
 
         final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
@@ -268,12 +282,19 @@ public final class DeckEditorQuest extends DeckEditorBase {
         /**
          * Color filtering
          */
-        this.getFilterBoxes().getWhite().setBounds(340, 430, 40, 20);
-        this.getFilterBoxes().getBlue().setBounds(380, 430, 40, 20);
-        this.getFilterBoxes().getBlack().setBounds(420, 430, 40, 20);
-        this.getFilterBoxes().getRed().setBounds(460, 430, 40, 20);
-        this.getFilterBoxes().getGreen().setBounds(500, 430, 40, 20);
-        this.getFilterBoxes().getColorless().setBounds(540, 430, 40, 20);
+        // Raise the color filtering boxes.
+        // this.getFilterBoxes().getWhite().setBounds(340, 430, 40, 20);
+        // this.getFilterBoxes().getBlue().setBounds(380, 430, 40, 20);
+        // this.getFilterBoxes().getBlack().setBounds(420, 430, 40, 20);
+        // this.getFilterBoxes().getRed().setBounds(460, 430, 40, 20);
+        // this.getFilterBoxes().getGreen().setBounds(500, 430, 40, 20);
+        // this.getFilterBoxes().getColorless().setBounds(540, 430, 40, 20);
+        this.getFilterBoxes().getWhite().setBounds(340, 405, 40, 20);
+        this.getFilterBoxes().getBlue().setBounds(380, 405, 40, 20);
+        this.getFilterBoxes().getBlack().setBounds(420, 405, 40, 20);
+        this.getFilterBoxes().getRed().setBounds(460, 405, 40, 20);
+        this.getFilterBoxes().getGreen().setBounds(500, 405, 40, 20);
+        this.getFilterBoxes().getColorless().setBounds(540, 405, 40, 20);
 
         for (final JCheckBox box : this.getFilterBoxes().getAllColors()) {
             box.setOpaque(false);
