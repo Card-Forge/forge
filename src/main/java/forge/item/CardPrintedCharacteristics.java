@@ -40,7 +40,7 @@ public class CardPrintedCharacteristics {
      *            the name to set
      */
     public final void setName(final String name0) {
-        this.name = name0; // TODO Add 0 to parameter's name.
+        this.name = name0;
     }
 
     /**
@@ -59,6 +59,6 @@ public class CardPrintedCharacteristics {
      *            the cardSet to set
      */
     public final void setCardSet(final String cardSet0) {
-        this.cardSet = cardSet0; // TODO: Add 0 to parameter's name.
+        this.cardSet = cardSet0;
     }
 }

@@ -122,8 +122,8 @@ public class CardPanel extends JPanel implements CardContainer {
      * @param connectedCard
      *            the connectedCard to set
      */
-    public void setConnectedCard(final CardPanel connectedCard) {
-        this.connectedCard = connectedCard; // TODO: Add 0 to parameter's name.
+    public void setConnectedCard(final CardPanel connectedCard0) {
+        this.connectedCard = connectedCard0;
     }
 
     // ~

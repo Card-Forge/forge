@@ -264,11 +264,11 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     /**
      * Sets the cards.
      * 
-     * @param cards
+     * @param cards0
      *            the cards to set
      */
-    public void setCards(final Map<T, Integer> cards) {
-        this.cards = cards; // TODO: Add 0 to parameter's name.
+    public void setCards(final Map<T, Integer> cards0) {
+        this.cards = cards0;
     }
 
     /**
@@ -292,11 +292,11 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     /**
      * Sets the list in sync.
      * 
-     * @param isListInSync
+     * @param isListInSync0
      *            the isListInSync to set
      */
-    public void setListInSync(final boolean isListInSync) {
-        this.isListInSync = isListInSync; // TODO: Add 0 to parameter's name.
+    public void setListInSync(final boolean isListInSync0) {
+        this.isListInSync = isListInSync0;
     }
 
     /**

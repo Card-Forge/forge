@@ -445,11 +445,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the bugz name.
      * 
-     * @param bugzName
+     * @param bugzName0
      *            the bugzName to set
      */
-    public void setBugzName(final String bugzName) {
-        this.bugzName = bugzName; // TODO: Add 0 to parameter's name.
+    public void setBugzName(final String bugzName0) {
+        this.bugzName = bugzName0;
     }
 
     /**
@@ -464,11 +464,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the bugz pwd.
      * 
-     * @param bugzPwd
+     * @param bugzPwd0
      *            the bugzPwd to set
      */
-    public void setBugzPwd(final String bugzPwd) {
-        this.bugzPwd = bugzPwd; // TODO: Add 0 to parameter's name.
+    public void setBugzPwd(final String bugzPwd0) {
+        this.bugzPwd = bugzPwd0;
     }
 
     /**
@@ -483,11 +483,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the rand c foil.
      * 
-     * @param randCFoil
+     * @param randCFoil0
      *            the randCFoil to set
      */
-    public void setRandCFoil(final boolean randCFoil) {
-        this.randCFoil = randCFoil; // TODO: Add 0 to parameter's name.
+    public void setRandCFoil(final boolean randCFoil0) {
+        this.randCFoil = randCFoil0;
     }
 
     /**
@@ -502,11 +502,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the developer mode.
      * 
-     * @param developerMode
+     * @param developerMode0
      *            the developerMode to set
      */
-    public void setDeveloperMode(final boolean developerMode) {
-        this.developerMode = developerMode; // TODO: Add 0 to parameter's name.
+    public void setDeveloperMode(final boolean developerMode0) {
+        this.developerMode = developerMode0;
     }
 
     /**
@@ -557,11 +557,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the card overlay.
      * 
-     * @param cardOverlay
+     * @param cardOverlay0
      *            the cardOverlay to set
      */
-    public void setCardOverlay(final boolean cardOverlay) {
-        this.cardOverlay = cardOverlay; // TODO: Add 0 to parameter's name.
+    public void setCardOverlay(final boolean cardOverlay0) {
+        this.cardOverlay = cardOverlay0;
     }
 
     /**
@@ -595,12 +595,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the deck gen rmv artifacts.
      * 
-     * @param deckGenRmvArtifacts
+     * @param deckGenRmvArtifacts0
      *            the deckGenRmvArtifacts to set
      */
-    public void setDeckGenRmvArtifacts(final boolean deckGenRmvArtifacts) {
-        this.deckGenRmvArtifacts = deckGenRmvArtifacts; // TODO: Add 0 to
-                                                        // parameter's name.
+    public void setDeckGenRmvArtifacts(final boolean deckGenRmvArtifacts0) {
+        this.deckGenRmvArtifacts = deckGenRmvArtifacts0;
     }
 
     /**
@@ -615,12 +614,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the deck gen rmv small.
      * 
-     * @param deckGenRmvSmall
+     * @param deckGenRmvSmall0
      *            the deckGenRmvSmall to set
      */
-    public void setDeckGenRmvSmall(final boolean deckGenRmvSmall) {
-        this.deckGenRmvSmall = deckGenRmvSmall; // TODO: Add 0 to parameter's
-                                                // name.
+    public void setDeckGenRmvSmall(final boolean deckGenRmvSmall0) {
+        this.deckGenRmvSmall = deckGenRmvSmall0;
     }
 
     /**
@@ -635,11 +633,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the card size.
      * 
-     * @param cardSize
+     * @param cardSize0
      *            the cardSize to set
      */
-    public void setCardSize(final CardSizeType cardSize) {
-        this.cardSize = cardSize; // TODO: Add 0 to parameter's name.
+    public void setCardSize(final CardSizeType cardSize0) {
+        this.cardSize = cardSize0;
     }
 
     /**
@@ -654,11 +652,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the stack offset.
      * 
-     * @param stackOffset
+     * @param stackOffset0
      *            the stackOffset to set
      */
-    public void setStackOffset(final StackOffsetType stackOffset) {
-        this.stackOffset = stackOffset; // TODO: Add 0 to parameter's name.
+    public void setStackOffset(final StackOffsetType stackOffset0) {
+        this.stackOffset = stackOffset0;
     }
 
     /**
@@ -673,11 +671,11 @@ public class ForgePreferences extends Preferences {
     /**
      * Sets the max stack size.
      * 
-     * @param maxStackSize
+     * @param maxStackSize0
      *            the maxStackSize to set
      */
-    public void setMaxStackSize(final int maxStackSize) {
-        this.maxStackSize = maxStackSize; // TODO: Add 0 to parameter's name.
+    public void setMaxStackSize(final int maxStackSize0) {
+        this.maxStackSize = maxStackSize0;
     }
 
     /**
