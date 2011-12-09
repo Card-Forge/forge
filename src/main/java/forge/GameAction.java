@@ -1408,7 +1408,7 @@ public class GameAction {
 
                 AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
 
-                if (card.getSVar("RemAIDeck").equals("True")) {
+                if (card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
                     rAICards.add(card.getName());
                     // get card picture so that it is in the image cache
                     // ImageCache.getImage(card);
