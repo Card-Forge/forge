@@ -1,0 +1,12 @@
+Name:Soldevi Golem
+ManaCost:4
+Types:Artifact Creature Golem
+Text:no text
+PT:5/3
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You  | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap CARDNAME.
+SVar:TrigUntap:AB$ Untap | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl+tapped | TgtPrompt$ Select target tapped creature an opponent controls | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_golem.jpg
+End

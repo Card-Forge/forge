@@ -7741,6 +7741,7 @@ res/cardsfolder/s/solarion.txt svneol=native#text/plain
 res/cardsfolder/s/soldevi_adnate.txt svneol=native#text/plain
 res/cardsfolder/s/soldevi_digger.txt svneol=native#text/plain
 res/cardsfolder/s/soldevi_excavations.txt svneol=native#text/plain
+res/cardsfolder/s/soldevi_golem.txt -text svneol=unset#text/plain
 res/cardsfolder/s/soldevi_heretic.txt svneol=native#text/plain
 res/cardsfolder/s/soldevi_sage.txt svneol=native#text/plain
 res/cardsfolder/s/soldevi_simulacrum.txt svneol=native#text/plain
