@@ -169,7 +169,9 @@ public final class DeckEditorQuest extends DeckEditorBase {
 
         this.filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), this.getItemListenerUpdatesDisplay());
 
-        this.setSize(1024, 768);
+        // Window is too tall, lower height to min size used by constructed mode deck editor
+        // this.setSize(1024, 768);
+        this.setSize(1024, 740);
         GuiUtils.centerFrame(this);
         this.setResizable(false);
 
@@ -206,8 +208,12 @@ public final class DeckEditorQuest extends DeckEditorBase {
         // labelSortHint.setText("Click on the column name (like name or color) to sort the cards");
         // labelSortHint.setBounds(new Rectangle(20, 27, 400, 19));
 
-        this.filterNameTypeSet.setBounds(new Rectangle(19, 10, 726, 25));
-        this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 40, 726, 316));
+        // Filters need to be taller as the bottom part is cut off.
+        // this.filterNameTypeSet.setBounds(new Rectangle(19, 10, 726, 25));
+        this.filterNameTypeSet.setBounds(new Rectangle(19, 8, 726, 31));
+        // Need to lower the top table.
+        // this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 40, 726, 316));
+        this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 50, 726, 316));
         this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
 
         this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
@@ -276,7 +282,9 @@ public final class DeckEditorQuest extends DeckEditorBase {
         /**
          * Other
          */
-        this.getCardView().setBounds(new Rectangle(765, 23, 239, 687));
+        // The card view needs to be moved up and can not be as tall as it was.
+        // this.getCardView().setBounds(new Rectangle(765, 23, 239, 687));
+        this.getCardView().setBounds(new Rectangle(765, 16, 239, 662));
         this.getTopTableWithCards().getLabel().setBounds(new Rectangle(19, 365, 720, 31));
         this.getBottomTableWithCards().getLabel().setBounds(new Rectangle(19, 672, 720, 31));
 
