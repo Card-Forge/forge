@@ -284,6 +284,26 @@ Fixes/Features:
 - Added focus, toggle, and disabled states to FButton and skins. Note: Keyboard functionality had already been lost _before_ this commit.
 - Fixed Butcher of Malakir.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- First step of round 3 architecture change; home screen in new frame and controllers updated.
+- Skeletal Vampire will now use his bats for his abilities.
+- Fixed Mindmoil.
+- fix a spelling error in checkEndGameState method name in GameAction
+- Cleanup of debug code.
+- Fixed Eradicate et al.
+- Added the variable "EnchantedController" to isValid in the player class.
+- Checkstyle
+- Remove redundant dependency version number declaration
+- turn off multi-selection in the New HomeScreen deck chooser
+- clean up a few TODOs in a few different files
+- cleanup a few TODOs in some Quest files
+- Minor adjustments to the layout of the quest mode deck editor. Still needs some more work.
+- Minor adjustments to the layout of the quest mode deck editor. Still needs some more work.
+- Minor adjustments to the layout of the quest mode deck editor. Still needs some more work.
+- Minor adjustments to the layout of the quest mode deck editor.
+- minor text fix when choosing card sizes
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -342,6 +362,9 @@ Superior Numbers
 Countryside Crusher
 Bloodbond March
 Pardic Miner
+Brand of Ill Omen
+Rustmouth Ogre
+Mountain Titan
 
 
 end
