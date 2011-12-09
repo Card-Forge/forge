@@ -89,6 +89,7 @@ public class ManaPool extends Card {
      * 
      * @return a {@link java.lang.String} object.
      */
+    @Deprecated
     public final String getManaList() {
         final Mana[] pool = this.floatingMana.toArray(new Mana[this.floatingMana.size()]);
 
@@ -275,6 +276,7 @@ public class ManaPool extends Card {
                 this.floatingTotals[ManaPool.MAP.get(Constant.Color.SNOW)] += mana.getAmount();
             }
         }
+        owner.updateObservers();
     }
 
     /**
@@ -293,6 +295,7 @@ public class ManaPool extends Card {
             this.addManaToPool(this.floatingMana, m);
         }
         AllZone.getGameAction().checkStateEffects();
+        owner.updateObservers();
     }
 
     /**
@@ -365,6 +368,7 @@ public class ManaPool extends Card {
         } else {
             this.floatingMana.clear();
         }
+        owner.updateObservers();
     }
 
     /**
@@ -597,6 +601,7 @@ public class ManaPool extends Card {
                     this.floatingTotals[ManaPool.MAP.get(Constant.Color.SNOW)] -= choice.getAmount();
                 }
             }
+            owner.updateObservers();
         }
     }
 
