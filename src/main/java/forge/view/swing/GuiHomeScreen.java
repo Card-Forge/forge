@@ -1228,7 +1228,7 @@ public class GuiHomeScreen {
     }
 
     private void doCardSize() {
-        final String[] keys = { "Tiny", "Smaller", "Small", "Medium", "Large(default)", "Huge" };
+        final String[] keys = { "Tiny", "Smaller", "Small", "Medium", "Large (default)", "Huge" };
         final int[] widths = { 52, 80, 120, 200, 300, 400 };
         final int[] heights = { 50, 59, 88, 98, 130, 168 };
 
