@@ -84,6 +84,17 @@ public class CostUtil {
                 if (sac.getThis() && source.isCreature()) {
                     return false;
                 }
+                final String type = sac.getType();
+
+                if (type.equals("CARDNAME")) {
+                    continue;
+                }
+
+                CardList typeList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
+                    return false;
+                }
             }
         }
         return true;

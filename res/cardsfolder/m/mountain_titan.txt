@@ -7,6 +7,7 @@ A:AB$ Animate | Cost$ 1 R R | Triggers$ TrigSpellCast | sVars$ TrigPutCounter | 
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a black spell, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.Black
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_titan.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/377.jpg
