@@ -41,6 +41,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
@@ -1068,6 +1069,7 @@ public class GuiHomeScreen {
 
         final DefaultListModel deckList = new DefaultListModel();
         this.lstDecks.setModel(deckList);
+        this.lstDecks.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         if (this.gameTypeSelected.equals(GameType.Constructed)) {
             if (this.playerSelected.equals("Human")) {
