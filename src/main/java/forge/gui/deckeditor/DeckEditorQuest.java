@@ -17,7 +17,7 @@
  */
 package forge.gui.deckeditor;
 
-import java.awt.Font;
+// import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -216,7 +216,7 @@ public final class DeckEditorQuest extends DeckEditorBase {
         this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 96, 726, 283));
         // Raise the bottom table.
         // this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
-        this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 444, 726, 218));
+        this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 444, 726, 219));
 
         // Lower the remove button and make it not as tall.
         // this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
@@ -266,13 +266,13 @@ public final class DeckEditorQuest extends DeckEditorBase {
         // this.getFilterBoxes().getPlaneswalker().setBounds(558, 400, 85, 20);
         // this.getFilterBoxes().getArtifact().setBounds(638, 400, 58, 20);
         // this.getFilterBoxes().getEnchantment().setBounds(692, 400, 80, 20);
-        this.getFilterBoxes().getLand().setBounds(17, 35, 48, 20);
-        this.getFilterBoxes().getCreature().setBounds(62, 35, 65, 20);
-        this.getFilterBoxes().getSorcery().setBounds(124, 35, 62, 20);
-        this.getFilterBoxes().getInstant().setBounds(182, 35, 60, 20);
-        this.getFilterBoxes().getPlaneswalker().setBounds(235, 35, 85, 20);
-        this.getFilterBoxes().getArtifact().setBounds(315, 35, 58, 20);
-        this.getFilterBoxes().getEnchantment().setBounds(369, 35, 80, 20);
+        this.getFilterBoxes().getLand().setBounds(17, 35, 62, 20);
+        this.getFilterBoxes().getCreature().setBounds(88, 35, 87, 20);
+        this.getFilterBoxes().getSorcery().setBounds(183, 35, 80, 20);
+        this.getFilterBoxes().getInstant().setBounds(270, 35, 80, 20);
+        this.getFilterBoxes().getPlaneswalker().setBounds(355, 35, 117, 20);
+        this.getFilterBoxes().getArtifact().setBounds(479, 35, 80, 20);
+        this.getFilterBoxes().getEnchantment().setBounds(570, 35, 115, 20);
 
         // We can now use default font as the filters have more room.
         // final Font f = new Font("Tahoma", Font.PLAIN, 10);

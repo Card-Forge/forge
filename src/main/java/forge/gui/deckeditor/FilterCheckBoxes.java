@@ -123,7 +123,7 @@ class FilterCheckBoxes {
             this.instant = new JCheckBox("Instant", true);
             this.planeswalker = new JCheckBox("Planeswalker", true);
             this.artifact = new JCheckBox("Artifact", true);
-            this.enchantment = new JCheckBox("Enchant", true);
+            this.enchantment = new JCheckBox("Enchantment", true);
         }
 
         this.allColors = Arrays.asList(new JCheckBox[] { this.getWhite(), this.getBlue(), this.getBlack(),
