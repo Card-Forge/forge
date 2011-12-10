@@ -867,11 +867,10 @@ public class GuiHomeScreen {
                 final Deck rDeck = this.chooseRandomDeck();
 
                 if (rDeck != null) {
+                    Constant.Runtime.HUMAN_DECK[0] = rDeck;
                     final String msg = String.format("You are using deck: %s.",
                             Constant.Runtime.HUMAN_DECK[0].getName());
                     JOptionPane.showMessageDialog(null, msg, "Random Deck Name", JOptionPane.INFORMATION_MESSAGE);
-
-                    Constant.Runtime.HUMAN_DECK[0] = rDeck;
                 } else {
                     JOptionPane.showMessageDialog(null, "No decks available.", "Random Deck Name",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -889,11 +888,10 @@ public class GuiHomeScreen {
                 final Deck rDeck = this.chooseRandomDeck();
 
                 if (rDeck != null) {
+                    Constant.Runtime.COMPUTER_DECK[0] = rDeck;
                     final String msg = String.format("The computer is using deck: %s.",
                             Constant.Runtime.COMPUTER_DECK[0].getName());
                     JOptionPane.showMessageDialog(null, msg, "Random Deck Name", JOptionPane.INFORMATION_MESSAGE);
-
-                    Constant.Runtime.COMPUTER_DECK[0] = rDeck;
                 } else {
                     JOptionPane.showMessageDialog(null, "No decks available.", "Random Deck Name",
                             JOptionPane.INFORMATION_MESSAGE);
