@@ -103,12 +103,19 @@ class FilterCheckBoxes {
             this.artifact = new CheckBoxWithIcon("artifact", "Artifact");
             this.enchantment = new CheckBoxWithIcon("enchant", "Enchantment");
         } else {
-            this.white = new JCheckBox("W", true);
-            this.blue = new JCheckBox("U", true);
-            this.black = new JCheckBox("B", true);
-            this.red = new JCheckBox("R", true);
-            this.green = new JCheckBox("G", true);
-            this.colorless = new JCheckBox("C", true);
+            // We moved the filters and now have room for the full name.
+            // this.white = new JCheckBox("W", true);
+            // this.blue = new JCheckBox("U", true);
+            // this.black = new JCheckBox("B", true);
+            // this.red = new JCheckBox("R", true);
+            // this.green = new JCheckBox("G", true);
+            // this.colorless = new JCheckBox("C", true);
+            this.white = new JCheckBox("White", true);
+            this.blue = new JCheckBox("Blue", true);
+            this.black = new JCheckBox("Black", true);
+            this.red = new JCheckBox("Red", true);
+            this.green = new JCheckBox("Green", true);
+            this.colorless = new JCheckBox("Colorless", true);
 
             this.land = new JCheckBox("Land", true);
             this.creature = new JCheckBox("Creature", true);

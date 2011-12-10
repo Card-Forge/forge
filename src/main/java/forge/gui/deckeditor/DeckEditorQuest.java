@@ -274,9 +274,10 @@ public final class DeckEditorQuest extends DeckEditorBase {
         this.getFilterBoxes().getArtifact().setBounds(315, 35, 58, 20);
         this.getFilterBoxes().getEnchantment().setBounds(369, 35, 80, 20);
 
-        final Font f = new Font("Tahoma", Font.PLAIN, 10);
+        // We can now use default font as the filters have more room.
+        // final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
-            box.setFont(f);
+            // box.setFont(f);
             box.setOpaque(false);
             box.addItemListener(this.getItemListenerUpdatesDisplay());
         }
@@ -291,12 +292,12 @@ public final class DeckEditorQuest extends DeckEditorBase {
         // this.getFilterBoxes().getRed().setBounds(460, 430, 40, 20);
         // this.getFilterBoxes().getGreen().setBounds(500, 430, 40, 20);
         // this.getFilterBoxes().getColorless().setBounds(540, 430, 40, 20);
-        this.getFilterBoxes().getWhite().setBounds(17, 10, 40, 20);
-        this.getFilterBoxes().getBlue().setBounds(57, 10, 40, 20);
-        this.getFilterBoxes().getBlack().setBounds(97, 10, 40, 20);
-        this.getFilterBoxes().getRed().setBounds(137, 10, 40, 20);
-        this.getFilterBoxes().getGreen().setBounds(177, 10, 40, 20);
-        this.getFilterBoxes().getColorless().setBounds(217, 10, 40, 20);
+        this.getFilterBoxes().getWhite().setBounds(17, 10, 67, 20);
+        this.getFilterBoxes().getBlue().setBounds(94, 10, 60, 20);
+        this.getFilterBoxes().getBlack().setBounds(162, 10, 65, 20);
+        this.getFilterBoxes().getRed().setBounds(237, 10, 55, 20);
+        this.getFilterBoxes().getGreen().setBounds(302, 10, 70, 20);
+        this.getFilterBoxes().getColorless().setBounds(380, 10, 100, 20);
 
         for (final JCheckBox box : this.getFilterBoxes().getAllColors()) {
             box.setOpaque(false);
