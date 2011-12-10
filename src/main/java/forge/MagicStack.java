@@ -897,11 +897,14 @@ public class MagicStack extends MyObservable {
         if (this.hasFizzled(sa, source)) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
+            AllZone.getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
             this.finishResolving(sa, true);
         } else if (sa.getAbilityFactory() != null) {
+            AllZone.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             AbilityFactory.handleRemembering(sa.getAbilityFactory());
             AbilityFactory.resolve(sa, true);
         } else {
+            AllZone.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             sa.resolve();
             this.finishResolving(sa, false);
         }
@@ -963,8 +966,6 @@ public class MagicStack extends MyObservable {
                 }
             }
         }
-
-        AllZone.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
     }
 
     /**
