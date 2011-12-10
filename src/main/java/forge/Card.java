@@ -1446,6 +1446,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else {
             this.counters.put(counterName, Integer.valueOf(n));
         }
+        
+        // Run triggers
+        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        runParams.put("Card", this);
+        runParams.put("CounterType", counterName);
+        for (int i = 0; i < n; i++) {
+            AllZone.getTriggerHandler().runTrigger("CounterAdded", runParams);
+        }
 
         if (counterName.equals(Counters.P1P1) || counterName.equals(Counters.M1M1)) {
             // +1/+1 counters should erase -1/-1 counters
@@ -6939,6 +6947,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             final CardList list = AllZoneUtil.getCreaturesInPlay();
             for (final Card crd : list) {
                 if (crd.getCMC() > this.getCMC()) {
+                    return false;
+                }
+            }
+        } else if (property.startsWith("lowestCMC")) {
+            final CardList list = AllZoneUtil.getCreaturesInPlay();
+            for (final Card crd : list) {
+                if (!crd.isLand() && !crd.isImmutable() && crd.getCMC() < this.getCMC()) {
                     return false;
                 }
             }
