@@ -304,6 +304,22 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- remove some poorly formatted (and not needed) comments
+- when displaying the list of cards the AI can't play (when a match is started), only display each card name once.
+- Initial check-in for updating ManaPool observers.
+- Improved checkCreatureSacrificeCost.
+- Minor adjustments to the layout of the quest mode card shop.
+- Fixed Illusions of Grandeur
+- Moved all of the filters to top of window in the quest mode deck editor. Still needs some more work.
+- Improved the labels for the color filters in the quest mode deck editor. Still needs some more work.
+- Improved the labels for the non-color filters in the quest mode deck editor.
+- fix Random Deck option causing NPE in New GUI HomeScreen
+- addCounterFromNonEffect will now trigger CounterAdded triggers.
+- Fixed the triggered ability of Alaborn Cavalier not being optional.
+- moved GameLog code around in MagicStack so Garruk Relentless will not cause crash
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -365,6 +381,8 @@ Pardic Miner
 Brand of Ill Omen
 Rustmouth Ogre
 Mountain Titan
+Riku of Two Reflections
+Soldevi Golem
 
 
 end
