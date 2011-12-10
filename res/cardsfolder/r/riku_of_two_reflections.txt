@@ -9,4 +9,5 @@ SVar:TrigCopySpell:AB$CopySpell | Cost$ U R | Defined$ TriggeredSpellAbility
 SVar:TrigCopy:AB$CopyPermanent | Cost$ G U | Defined$ TriggeredCard
 SVar:Rarity:Mythic Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riku_of_two_reflections.jpg
+SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/220.jpg
 End

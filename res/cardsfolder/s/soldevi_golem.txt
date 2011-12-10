@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$ Untap | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl+tapped | Tg
 SVar:DBUntap:DB$ Untap | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_golem.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/313.jpg
 End
