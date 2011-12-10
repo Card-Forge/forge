@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -603,6 +605,15 @@ public class GuiHomeScreen {
         this.scrDecks.setViewportView(this.lstDecks);
         this.lstDecks.setBackground(this.clrScrollBackground);
         this.lstDecks.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        this.lstDecks.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mousePressed(final MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    GuiHomeScreen.this.doDeckSelect();
+                }
+            } 
+        });
         this.cmdDeckSelect.setBounds(112, 310, 100, 23);
         this.pnlDecks.add(this.cmdDeckSelect);
         this.cmdDeckSelect.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
