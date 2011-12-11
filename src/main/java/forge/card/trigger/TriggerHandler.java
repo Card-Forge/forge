@@ -642,11 +642,6 @@ public class TriggerHandler {
             }
 
             @Override
-            public Command getCancelCommand() {
-                return sa[0].getCancelCommand();
-            }
-
-            @Override
             public CommandArgs getChooseTargetAI() {
                 return sa[0].getChooseTargetAI();
             }
@@ -830,11 +825,6 @@ public class TriggerHandler {
             @Override
             public void setBeforePayManaAI(final Command c) {
                 sa[0].setBeforePayManaAI(c);
-            }
-
-            @Override
-            public void setCancelCommand(final Command cancelCommand) {
-                sa[0].setCancelCommand(cancelCommand);
             }
 
             @Override

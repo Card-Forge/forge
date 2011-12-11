@@ -114,7 +114,6 @@ public abstract class SpellAbility {
 
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
 
-    private Command cancelCommand = Command.BLANK;
     private Command beforePayManaAI = Command.BLANK;
 
     private CommandArgs randomTarget = new CommandArgs() {
@@ -1315,29 +1314,6 @@ public abstract class SpellAbility {
             return null;
         }
         return this.targetPlayer;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>cancelCommand</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Command} object.
-     */
-    public Command getCancelCommand() {
-        return this.cancelCommand;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>cancelCommand</code>.
-     * </p>
-     * 
-     * @param cancelCommand
-     *            a {@link forge.Command} object.
-     */
-    public void setCancelCommand(final Command cancelCommand) {
-        this.cancelCommand = cancelCommand;
     }
 
     /**
