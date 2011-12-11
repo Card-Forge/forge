@@ -451,13 +451,13 @@ public class ControlConstructed {
      */
     public Object[] getDeckNames() {
         deckNames = new ArrayList<String>();
-        deckNames.add("Random");
-        Collection<Deck> allDecks = AllZone.getDeckManager().getDecks();
+        Collection<Deck> allDecks = AllZone.getDeckManager().getConstructedDecks();
         for (Deck d : allDecks) {
-            if (d.getDeckType().equals(GameType.Constructed)) {
                 deckNames.add(d.getName());
-            }
         }
+        
+        //list is alphabetized, but we want the "Random" option first
+        deckNames.add(0, "Random");
         // No pre-constructed decks?
         if (deckNames.size() == 1) { deckNames = new ArrayList<String>(); }
 
