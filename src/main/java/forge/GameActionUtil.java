@@ -1199,50 +1199,6 @@ public final class GameActionUtil {
 
     }
 
-    /** Constant <code>elspethEmblem</code>. */
-    private static Command elspethEmblem = new Command() {
-
-        private static final long serialVersionUID = 7414127991531889390L;
-        private final CardList gloriousAnthemList = new CardList();
-
-        @Override
-        public void execute() {
-            final String keyword = "Indestructible";
-
-            final CardList list = this.gloriousAnthemList;
-            Card c;
-            // reset all cards in list - aka "old" cards
-            for (int i = 0; i < list.size(); i++) {
-                c = list.get(i);
-                c.removeExtrinsicKeyword(keyword);
-            }
-
-            list.clear();
-
-            CardList emblem = AllZoneUtil.getCardsIn(Zone.Battlefield);
-            emblem = emblem.filter(new CardListFilter() {
-                @Override
-                public boolean addCard(final Card c) {
-                    return c.isEmblem()
-                            && c.hasKeyword("Artifacts, creatures, enchantments, "
-                                    + "and lands you control are indestructible.");
-                }
-            });
-
-            for (int i = 0; i < emblem.size(); i++) {
-                final CardList perms = emblem.get(i).getController().getCardsIn(Zone.Battlefield);
-
-                for (int j = 0; j < perms.size(); j++) {
-                    c = perms.get(j);
-                    if (!c.hasKeyword(keyword)) {
-                        c.addExtrinsicKeyword(keyword);
-                        this.gloriousAnthemList.add(c);
-                    }
-                }
-            }
-        } // execute()
-    };
-
     // Special Conditions
     /**
      * <p>
@@ -1887,7 +1843,6 @@ public final class GameActionUtil {
         GameActionUtil.getCommands().put("Ajani_Avatar_Token", GameActionUtil.ajaniAvatarToken);
         GameActionUtil.getCommands().put("Alpha_Status", GameActionUtil.alphaStatus);
         GameActionUtil.getCommands().put("Coat_of_Arms", GameActionUtil.coatOfArms);
-        GameActionUtil.getCommands().put("Elspeth_Emblem", GameActionUtil.elspethEmblem);
         GameActionUtil.getCommands().put("Homarid", GameActionUtil.homarid);
 
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
