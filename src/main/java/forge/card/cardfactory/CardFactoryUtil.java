@@ -2698,6 +2698,12 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(players.get(0).getNumLandsPlayed(), m, source);
             }
         }
+        
+        if (sq[0].contains("CardsDrawn")) {
+            if (players.size() > 0) {
+                return CardFactoryUtil.doXMath(players.get(0).getNumDrawnThisTurn(), m, source);
+            }
+        }
 
         return CardFactoryUtil.doXMath(n, m, source);
     }

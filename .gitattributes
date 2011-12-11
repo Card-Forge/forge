@@ -1293,6 +1293,7 @@ res/cardsfolder/c/cephalid_scout.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_snitch.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_vandal.txt svneol=native#text/plain
 res/cardsfolder/c/cerebral_eruption.txt svneol=native#text/plain
+res/cardsfolder/c/cerebral_vortex.txt -text
 res/cardsfolder/c/ceremonial_guard.txt svneol=native#text/plain
 res/cardsfolder/c/cerodon_yearling.txt svneol=native#text/plain
 res/cardsfolder/c/cerulean_sphinx.txt svneol=native#text/plain
