@@ -19,6 +19,7 @@ package forge.control;
 
 import forge.AllZone;
 import forge.Constant;
+import forge.view.GuiTopLevel;
 import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
 import forge.view.toolbox.WinLoseFrame;
@@ -66,7 +67,11 @@ public class ControlWinLose {
                 new OldGuiNewGame();
             }
         } else {
-            new OldGuiNewGame();
+            if (Constant.Runtime.OLDGUI[0]) {
+                new OldGuiNewGame();
+            } else {
+                ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
+            }
         }
     }
 

@@ -47,6 +47,7 @@ public class FButton extends JButton {
     private Image imgR;
     private int w, h = 0;
     private boolean allImagesPresent = false;
+    private boolean toggle = false;
     private final FSkin skin;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
 
@@ -86,7 +87,7 @@ public class FButton extends JButton {
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(final java.awt.event.MouseEvent evt) {
-                if (FButton.this.isEnabled()) {
+                if (FButton.this.isEnabled() && !isToggled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.overLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.overCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.overRIGHT");
@@ -109,7 +110,7 @@ public class FButton extends JButton {
 
             @Override
             public void mousePressed(final java.awt.event.MouseEvent evt) {
-                if (FButton.this.isEnabled()) {
+                if (FButton.this.isEnabled() && !isToggled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
@@ -118,7 +119,7 @@ public class FButton extends JButton {
 
             @Override
             public void mouseReleased(final java.awt.event.MouseEvent evt) {
-                if (FButton.this.isEnabled()) {
+                if (FButton.this.isEnabled() && !isToggled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
@@ -129,7 +130,7 @@ public class FButton extends JButton {
         // Focus events
         this.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
-                if (FButton.this.isEnabled()) {
+                if (FButton.this.isEnabled() && !isToggled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.focusLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.focusCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.focusRIGHT");
@@ -137,10 +138,15 @@ public class FButton extends JButton {
             }
 
             public void focusLost(FocusEvent e) {
-                if (FButton.this.isEnabled()) {
+                if (FButton.this.isEnabled() && !isToggled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+                }
+                else if (isToggled()) {
+                    FButton.this.imgL = FButton.this.skin.getImage("button.toggleLEFT");
+                    FButton.this.imgM = FButton.this.skin.getImage("button.toggleCENTER");
+                    FButton.this.imgR = FButton.this.skin.getImage("button.toggleRIGHT");
                 }
             }
         });
@@ -160,6 +166,20 @@ public class FButton extends JButton {
         }
 
         super.setEnabled(b0);
+    }
+
+    /** 
+     * Button toggle state, for a "permanently pressed" functionality, e.g. as a tab.
+     * 
+     * @return boolean
+     */
+    public boolean isToggled() {
+        return toggle;
+    }
+
+    /** @param b0 &emsp; boolean. */
+    public void setToggled(boolean b0) {
+        this.toggle = b0;
     }
 
     /*

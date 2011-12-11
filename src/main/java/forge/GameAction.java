@@ -825,7 +825,7 @@ public class GameAction {
             // 02-10-11
             WinLoseFrame gwl;
 
-            if (AllZone.getQuestData() != null) {
+            if (Constant.Runtime.getGameType() == GameType.Quest) {
                 gwl = new WinLoseFrame(new QuestWinLoseHandler());
             } else {
                 gwl = new WinLoseFrame();
@@ -1349,6 +1349,7 @@ public class GameAction {
         final boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
         final Random generator = MyRandom.getRandom();
+
         for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {

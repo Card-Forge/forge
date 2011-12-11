@@ -226,7 +226,6 @@ public abstract class DeckGeneration {
         }
 
         return deck;
-
     }
 
     /**

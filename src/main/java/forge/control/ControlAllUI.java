@@ -45,6 +45,7 @@ public class ControlAllUI {
     private HomeTopLevel home = null;
     private ViewTopLevel match = null;
     private EditorTopLevel editor = null;
+    private WindowAdapter actConcede;
 
     /**
      * <p>
@@ -60,6 +61,14 @@ public class ControlAllUI {
         this.view = v0;
 
         this.display = (JLayeredPane) this.view.getContentPane();
+
+        this.actConcede = new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent evt) {
+                ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                t.getDockController().concede();
+            }
+        };
     }
 
     /**
@@ -79,43 +88,27 @@ public class ControlAllUI {
         this.display.removeAll();
         this.view.addOverlay();
 
+        view.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(final ComponentEvent e) {
+                sizeChildren();
+            }
+        });
+
         // Fire up new state
         switch (i) {
         case 0: // Home screen
             this.home = new HomeTopLevel();
-            //this.display.add(this.home);
+            this.display.add(this.home, JLayeredPane.DEFAULT_LAYER);
+            sizeChildren();
+            view.removeWindowListener(actConcede);
             break;
 
         case 1: // Match screen
             this.match = new ViewTopLevel();
             this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
-
-            view.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(final WindowEvent evt) {
-                    ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-                    t.getDockController().concede();
-                }
-            });
-
-            view.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(final ComponentEvent e) {
-                    Component[] children;
-                    children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-                    children[0].setSize(ControlAllUI.this.display.getSize());
-
-                    children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
-                    children[0].setSize(ControlAllUI.this.display.getSize());
-                }
-            });
-
-            Component[] children;
-            children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-            children[0].setSize(ControlAllUI.this.display.getSize());
-
-            children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
-            children[0].setSize(ControlAllUI.this.display.getSize());
+            sizeChildren();
+            view.addWindowListener(actConcede);
             break;
 
         case 2: // Deck editor screen
@@ -144,5 +137,15 @@ public class ControlAllUI {
      */
     public ControlMatchUI getMatchController() {
         return this.match.getController();
+    }
+
+    /** Sizes children of JLayeredPane to fully fit their layers. */
+    private void sizeChildren() {
+        Component[] children;
+        children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+        children[0].setSize(ControlAllUI.this.display.getSize());
+
+        children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
+        children[0].setSize(ControlAllUI.this.display.getSize());
     }
 }

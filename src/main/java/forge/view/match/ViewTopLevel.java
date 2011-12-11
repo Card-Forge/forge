@@ -826,6 +826,6 @@ public class ViewTopLevel extends FPanel implements CardContainer, Display {
      * @return JFrame
      */
     public JFrame getTopLevelFrame() {
-        return (JFrame) ViewTopLevel.this.getParent().getParent().getParent().getParent();
+        return (JFrame) AllZone.getDisplay();
     }
 }

@@ -43,7 +43,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.WinLoseFrame.WinLoseText;
 import forge.quest.data.QuestMatchState;
 import forge.view.GuiTopLevel;
-import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
@@ -308,13 +307,10 @@ public class WinLoseFrame extends JFrame {
         // Issue 147 - keep battlefield up following win/loss
         if (Constant.Runtime.OLDGUI[0]) {
             frame = (JFrame) AllZone.getDisplay();
-        } else {
-            final ViewTopLevel temp = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-            frame = (JFrame) temp.getTopLevelFrame();
+            frame.dispose();
+            frame.setEnabled(true);
         }
 
-        frame.dispose();
-        frame.setEnabled(true);
         this.dispose();
     }
 
