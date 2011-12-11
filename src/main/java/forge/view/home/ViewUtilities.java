@@ -33,7 +33,7 @@ public class ViewUtilities extends JPanel {
         SubButton btnImportPics = new SubButton("Import Pictures");
         this.add(btnImportPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
-        SubButton btnReportBug = new SubButton("Report a Bgu");
+        SubButton btnReportBug = new SubButton("Report a Bug");
         this.add(btnReportBug, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
         SubButton btnStackReport = new SubButton("Stack Report");
