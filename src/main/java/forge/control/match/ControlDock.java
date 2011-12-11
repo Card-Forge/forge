@@ -134,15 +134,14 @@ public class ControlDock {
      */
     public void endTurn() {
         // Big thanks to you, Gameplay Guru, since I was too lazy to figure this
-        // out
-        // before release. Doublestrike 24-11-11
+        // out before release. Doublestrike 24-11-11
         System.err.println("forge.control.match > ControlDock > endTurn()");
         System.out.println("Should skip to the end of turn, or entire turn.");
         System.err.println("If some gameplay guru could implement this, that would be great...");
     }
 
     /**
-     * End turn.
+     * View deck list.
      */
     public void viewDeckList() {
         new DeckListAction(NewConstants.Lang.GuiDisplay.HUMAN_DECKLIST).actionPerformed(null);

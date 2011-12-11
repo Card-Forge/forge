@@ -135,7 +135,6 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        //TODO - get an icon for this
         final JLabel btnViewDeckList = new DockButton(skin.getIcon("dock.decklist"), "View Deck List");
         btnViewDeckList.addMouseListener(new MouseAdapter() {
             @Override

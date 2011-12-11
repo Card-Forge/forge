@@ -1,11 +1,16 @@
 package forge.control.home;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -22,6 +27,7 @@ import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameType;
+import forge.item.CardPrinted;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewConstructed;
 
@@ -463,4 +469,90 @@ public class ControlConstructed {
 
         return deckNames.toArray();
     }
+    
+    /**
+     * View deck list.
+     */
+    public void viewDeckList(final String player) {
+        new DeckListAction(player).actionPerformed(null);
+    }
+
+    /**
+     * Receives click and programmatic requests for viewing card in a player's deck
+     * 
+     */
+    private class DeckListAction {
+        public DeckListAction(final String playerIn) {
+            player = playerIn;
+        }
+
+        private static final long serialVersionUID = 9874492387239847L;
+        private String player;
+
+        public void actionPerformed(final ActionEvent e) {
+            if (player.equals("Human") && 
+                    (currentHumanSelection.getName().equals("lstColorsHuman") ||
+                    currentHumanSelection.getName().equals("lstThemesHuman"))) {
+                return;
+            }
+            if (player.equals("Computer") && 
+                    (currentAISelection.getName().equals("lstColorsAI") ||
+                    currentAISelection.getName().equals("lstThemesAI"))) {
+                return;
+            }
+            
+            Deck targetDeck = (player.equals("Human")) ? 
+                    AllZone.getDeckManager().getDeck(oa2sa(currentHumanSelection.getSelectedValues())[0]) :
+                    AllZone.getDeckManager().getDeck(oa2sa(currentAISelection.getSelectedValues())[0]);
+
+            final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
+
+            for (final Entry<CardPrinted, Integer> s : targetDeck.getMain()) {
+                deckMap.put(s.getKey().getName(), s.getValue());
+            }
+
+            final String nl = System.getProperty("line.separator");
+            final StringBuilder deckList = new StringBuilder();
+            String dName = targetDeck.getName();
+
+            if (dName == null) {
+                dName = "";
+            } else {
+                deckList.append(dName + nl);
+            }
+
+            final ArrayList<String> dmKeys = new ArrayList<String>();
+            for (final String s : deckMap.keySet()) {
+                dmKeys.add(s);
+            }
+
+            Collections.sort(dmKeys);
+
+            for (final String s : dmKeys) {
+                deckList.append(deckMap.get(s) + " x " + s + nl);
+            }
+
+            int rcMsg = -1138;
+            String ttl = player + "'s Decklist";
+            if (!dName.equals("")) {
+                ttl += " - " + dName;
+            }
+
+            final StringBuilder msg = new StringBuilder();
+            if (deckMap.keySet().size() <= 32) {
+                msg.append(deckList.toString() + nl);
+            } else {
+                msg.append("Decklist too long for dialog." + nl + nl);
+            }
+
+            msg.append("Copy Decklist to Clipboard?");
+
+            rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
+
+            if (rcMsg == JOptionPane.OK_OPTION) {
+                final StringSelection ss = new StringSelection(deckList.toString());
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+            }
+        }
+    } // End DeckListAction
 }
