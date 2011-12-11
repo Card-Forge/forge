@@ -169,7 +169,9 @@ public class HumanPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
-        AllZone.getInputControl().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
+        if (this.getCardsIn(Zone.Hand).size() > 0) {
+            AllZone.getInputControl().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
+        }
     }
 
     /*
