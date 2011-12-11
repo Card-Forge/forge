@@ -1,6 +1,7 @@
 [metadata]
 Name=JuzamjediCube
 Deck Type=Constructed
+Custom Pool=true
 [main]
 1 Absorb|INV
 1 Accorder Paladin|MBS
