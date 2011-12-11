@@ -777,7 +777,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
         if (Constant.Runtime.OLDGUI[0]) {
             AllZone.setDisplay(new GuiDisplay());
         } else {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
+            GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
+            g.getController().changeState(1);
+            g.getController().getMatchController().initMatch();
         }
 
         Constant.Runtime.SMOOTH[0] = this.smoothLandCheckBox.isSelected();
