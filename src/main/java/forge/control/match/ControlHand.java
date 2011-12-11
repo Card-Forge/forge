@@ -151,7 +151,7 @@ public class ControlHand {
             public void mouseMoved(final MouseEvent me) {
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
-                    t.setCard(c);
+                    ((GuiTopLevel) AllZone.getDisplay()).setCard(c);
                 }
             } // mouseMoved
         });

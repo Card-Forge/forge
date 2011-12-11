@@ -612,7 +612,7 @@ public class GuiHomeScreen {
                 if (evt.getClickCount() == 2) {
                     GuiHomeScreen.this.doDeckSelect();
                 }
-            } 
+            }
         });
         this.cmdDeckSelect.setBounds(112, 310, 100, 23);
         this.pnlDecks.add(this.cmdDeckSelect);
