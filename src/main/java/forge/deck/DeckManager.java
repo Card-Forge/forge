@@ -293,6 +293,23 @@ public class DeckManager {
 
     /**
      * 
+     * Get Constructed Decks.
+     * 
+     * @return a Collection<Deck>
+     */
+    public final Collection<Deck> getConstructedDecks() {
+        ArrayList<Deck> list = new ArrayList<Deck>();
+        for (Deck l : this.deckMap.values()) {
+            if (l.getDeckType().equals(GameType.Constructed) && !l.isCustomPool()) {
+                list.add(l);
+            }
+        }
+        Collections.sort(list);
+        return list;
+    }
+
+    /**
+     * 
      * Get draft decks.
      * 
      * @return a Map<String, Deck[]>

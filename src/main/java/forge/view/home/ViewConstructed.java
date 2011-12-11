@@ -74,7 +74,7 @@ public class ViewConstructed extends JPanel {
         // Content menu
         String[] colors = {"Random", "Random", "Random",
                 "Random", "Black", "Blue", "Green", "Red", "White"};
-        String[] decks = objectArrayToStringArray(AllZone.getDeckManager().getDecks().toArray());
+        String[] decks = objectArrayToStringArray(AllZone.getDeckManager().getConstructedDecks().toArray());
         String[] themes = objectArrayToStringArray(gen.getThemeNames().toArray());
 
         lstColorsHuman = new JList(colors);
