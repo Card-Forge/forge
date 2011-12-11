@@ -42,7 +42,7 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class HomeTopLevel extends FPanel {
     private JPanel pnlMenu, pnlContent;
-    private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnEditor;
+    private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnEditor, btnExit;
     private FSkin skin;
     private String constraints;
     private String imgDirAddress;
@@ -125,6 +125,12 @@ public class HomeTopLevel extends FPanel {
 
         btnEditor = new FButton();
         btnEditor.setText("Deck Editor");
+        
+        btnExit = new FButton();
+        btnExit.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) { exit(); }
+        });
+        btnExit.setText("Exit");
 
         add(pnlMenu, "w 36%!, h 96%!, gap 2% 2% 2% 2%");
         add(pnlContent, "w 58%!, h 96%!, gap 0% 2% 2% 2%");
@@ -140,6 +146,7 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnSettings, constraints);
         pnlMenu.add(btnUtilities, constraints);
         pnlMenu.add(btnEditor, constraints);
+        pnlMenu.add(btnExit, constraints);
 
         // Open "constructed" screen on first run.
         constructed();
@@ -197,6 +204,10 @@ public class HomeTopLevel extends FPanel {
         pnlContent.add(utilities, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+    }
+
+    private void exit() {
+        System.exit(0);
     }
 
     /** @return String */
