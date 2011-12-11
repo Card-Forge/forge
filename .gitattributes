@@ -10746,6 +10746,7 @@ src/main/java/forge/control/ControlEditorUI.java -text
 src/main/java/forge/control/ControlHomeUI.java -text
 src/main/java/forge/control/ControlMatchUI.java -text
 src/main/java/forge/control/ControlWinLose.java -text
+src/main/java/forge/control/home/ControlConstructed.java -text
 src/main/java/forge/control/match/ControlDetail.java -text
 src/main/java/forge/control/match/ControlDock.java -text
 src/main/java/forge/control/match/ControlField.java -text

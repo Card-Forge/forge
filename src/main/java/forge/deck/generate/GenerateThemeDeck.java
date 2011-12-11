@@ -59,7 +59,7 @@ public class GenerateThemeDeck {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<String> getThemeNames() {
+    public static final ArrayList<String> getThemeNames() {
         final ArrayList<String> ltNames = new ArrayList<String>();
 
         final File file = new File("res/quest/themes/");
