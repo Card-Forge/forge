@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
@@ -74,8 +76,20 @@ public class ViewConstructed extends JPanel {
         // Content menu
         String[] colors = {"Random", "Random", "Random",
                 "Random", "Black", "Blue", "Green", "Red", "White"};
-        String[] decks = objectArrayToStringArray(AllZone.getDeckManager().getConstructedDecks().toArray());
+
         String[] themes = objectArrayToStringArray(gen.getThemeNames().toArray());
+
+        Deck d;
+        List<String> decknames = new ArrayList<String>();
+        for (final Deck allDeck : AllZone.getDeckManager().getDecks()) {
+            d = allDeck;
+
+            if (d.getDeckType().equals(GameType.Constructed)) {
+                decknames.add(d.getName());
+            }
+        } // for
+
+        String[] decks = objectArrayToStringArray(decknames.toArray());
 
         lstColorsHuman = new JList(colors);
         lstColorsAI = new JList(colors);

@@ -143,6 +143,9 @@ public class ControlAllUI {
     private void sizeChildren() {
         Component[] children;
         children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+
+        if (children.length == 0) { return; }
+
         children[0].setSize(ControlAllUI.this.display.getSize());
 
         children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
