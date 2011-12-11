@@ -257,11 +257,18 @@ public class AbilityFactoryMana {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void manaResolve(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
-        // Spells are not undoable
-        abMana.setUndoable(af.isAbility() && abMana.isUndoable());
 
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
+        
+        if (!AbilityFactory.checkConditional(sa)) {
+            AbilityFactoryMana.doDrawback(af, abMana, card);
+            return;
+        }
+        
+        // Spells are not undoable
+        abMana.setUndoable(af.isAbility() && abMana.isUndoable());
+
 
         ArrayList<Player> tgtPlayers;
 

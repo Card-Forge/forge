@@ -2692,6 +2692,12 @@ public class CardFactoryUtil {
                         m, source);
             }
         }
+        
+        if (sq[0].contains("LandsPlayed")) {
+            if (players.size() > 0) {
+                return CardFactoryUtil.doXMath(players.get(0).getNumLandsPlayed(), m, source);
+            }
+        }
 
         return CardFactoryUtil.doXMath(n, m, source);
     }
@@ -2947,6 +2953,10 @@ public class CardFactoryUtil {
         // Count$YourDamageThisTurn
         if (sq[0].contains("YourDamageThisTurn")) {
             return CardFactoryUtil.doXMath(c.getController().getAssignedDamage(), m, c);
+        }
+        
+        if (sq[0].contains("YourLandsPlayed")) {
+            return CardFactoryUtil.doXMath(c.getController().getNumLandsPlayed(), m, c);
         }
 
         // Count$HighestLifeTotal
