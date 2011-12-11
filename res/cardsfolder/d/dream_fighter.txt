@@ -5,9 +5,9 @@ Text:no text
 PT:1/1
 T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | ValidAttacker$ Creature | Execute$ TrigPhaseAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Dream Fighter and that creature phase out.
 T:Mode$ Blocks | ValidCard$ Creature | TriggerZones$ Battlefield | ValidAttacker$ Card.Self | Execute$ TrigPhaseBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Dream Fighter and that creature phase out.
-SVar:TrigPhaseAttacker:DB$ Phase | Defined$ TriggeredAttacker | SubAbility$ SVar=DBPhaseSelf
-SVar:TrigPhaseBlocker:DB$ Phase | Defined$ TriggeredBlocker | SubAbility$ SVar=DBPhaseSelf
-SVar:DBPhaseSelf:DB$ Phase | Defined$ Self
+SVar:TrigPhaseAttacker:DB$ Phases | Defined$ TriggeredAttacker | SubAbility$ SVar=DBPhaseSelf
+SVar:TrigPhaseBlocker:DB$ Phases | Defined$ TriggeredBlocker | SubAbility$ SVar=DBPhaseSelf
+SVar:DBPhaseSelf:DB$ Phases | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_fighter.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/63.jpg
