@@ -1,0 +1,10 @@
+Name:Serum Powder
+ManaCost:3
+Types:Artifact
+Text:Any time you could mulligan and CARDNAME is in your hand, you may exile all the cards from your hand, then draw that many cards. (You can do this in addition to taking mulligans.)
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_powder.jpg
+End

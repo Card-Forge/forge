@@ -212,7 +212,16 @@ public class InputMulligan extends Input {
 
     @Override
     public void selectCard(Card c0, PlayerZone z0) {
-        if (!Constant.Runtime.OLDGUI[0]) {
+
+        if (c0.getName().equals("Serum Powder") && z0.is(Zone.Hand)) {
+            if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
+                CardList hand = c0.getController().getCardsIn(Zone.Hand);
+                for (Card c : hand) {
+                    AllZone.getGameAction().exile(c);
+                }
+                c0.getController().drawCards(hand.size());
+            }
+        } else if (!Constant.Runtime.OLDGUI[0]) {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
     }
