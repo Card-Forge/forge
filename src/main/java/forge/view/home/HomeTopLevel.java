@@ -28,7 +28,6 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.quest.data.QuestDataIO;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
@@ -62,7 +61,6 @@ public class HomeTopLevel extends FPanel {
         super();
         skin = AllZone.getSkin();
         imgDirAddress = "res/images/ui/HomeScreen/default_600/";
-        AllZone.setQuestData(QuestDataIO.loadData());
 
         constructed = new ViewConstructed(this);
         sealed = new ViewSealed(this);
@@ -228,5 +226,11 @@ public class HomeTopLevel extends FPanel {
         btnQuest.setToggled(false);
         btnSettings.setToggled(false);
         btnUtilities.setToggled(false);
+    }
+
+    /** */
+    public void resetQuest() {
+        quest = new ViewQuest(this);
+        quest();
     }
 }

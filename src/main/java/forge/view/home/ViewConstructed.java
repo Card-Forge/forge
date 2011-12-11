@@ -22,7 +22,7 @@ import forge.control.home.ControlConstructed;
 import forge.view.toolbox.FSkin;
 
 /** 
- * Populates and controls Swing components of "constructed" options in home screen.
+ * Populates Swing components of Constructed mode in home screen.
  * 
  */
 // Control (listeners and logic) could possibly be moved to a new class (ControlConstructed).
@@ -39,7 +39,8 @@ public class ViewConstructed extends JPanel {
     private ControlConstructed control;
 
     /**
-     * Assembles Swing components for "constructed" view in home screen.
+     * Populates Swing components of "constructed" mode in home screen.
+     * 
      * @param v0 &emsp; HomeTopLevel parent view
      */
     public ViewConstructed(HomeTopLevel v0) {

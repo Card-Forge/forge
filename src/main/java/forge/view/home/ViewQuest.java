@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -22,27 +23,22 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Command;
-import forge.Constant;
+import forge.control.home.ControlQuest;
 import forge.gui.GuiUtils;
 import forge.gui.MultiLineLabel;
 import forge.gui.MultiLineLabelUI;
-import forge.gui.deckeditor.DeckEditorQuest;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestUtil;
-import forge.quest.gui.QuestFrame;
+import forge.quest.data.QuestDataIO;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
-import forge.view.GuiTopLevel;
-import forge.view.toolbox.FButton;
 import forge.view.toolbox.FSkin;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Populates Swing components of Quest mode in home screen.
  *
  */
 @SuppressWarnings("serial")
@@ -54,19 +50,26 @@ public class ViewQuest extends JScrollPane {
     private JPanel viewport;
     private SelectablePanel selectedOpponent;
     private JList lstDeckChooser;
+    private ControlQuest control;
+    private JRadioButton radEasy, radMedium, radHard, radExpert, radFantasy, radClassic;
+    private JCheckBox cbStandardStart;
 
     /**
-     * TODO: Write javadoc for Constructor.
+     * Populates Swing components of Quest mode in home screen.
+     *
      * @param v0 &emsp; HomeTopLevel parent view
      */
     public ViewQuest(HomeTopLevel v0) {
+        // Basic init stuff
         super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        AllZone.setQuestData(QuestDataIO.loadData());
         this.setOpaque(false);
         this.setBorder(null);
         parentView = v0;
         skin = AllZone.getSkin();
         questData = AllZone.getQuestData();
 
+        // Panel is dropped into scroll pane for resize safety.
         viewport = new JPanel();
         viewport.setOpaque(false);
         viewport.setLayout(new MigLayout("insets 0, gap 0, wrap"));
@@ -78,8 +81,10 @@ public class ViewQuest extends JScrollPane {
         lblContinue.setFont(skin.getFont1().deriveFont(Font.BOLD, 20));
         viewport.add(lblContinue, "w 90%!, gap 5% 0 2% 0");
 
-        // Quest events and options
+        // Quest events
         populateQuestEvents();
+
+        // Quest options
         populateQuestOptions();
 
         // Start button
@@ -94,14 +99,19 @@ public class ViewQuest extends JScrollPane {
 
         btnStart.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) { start(); }
+            public void mousePressed(MouseEvent e) { control.start(); }
         });
 
         // New Quest
         populateNewQuest();
 
+        // Drop into scroll pane, init controller.
         this.setViewportView(viewport);
+        control = new ControlQuest(this);
     }
+
+    //========= POPULATION METHODS
+    //...mainly here to avoid one big lump of a constructor.
 
     private void populateQuestEvents() {
         // Retrieve quest events, or generate (on first run)
@@ -162,20 +172,51 @@ public class ViewQuest extends JScrollPane {
         btnEditor.setAction(new AbstractAction() {
            @Override
            public void actionPerformed(ActionEvent e) {
-               showDeckEditor();
+               control.showDeckEditor();
            }
         });
         btnEditor.setText("Deck Editor");
 
-        String[] decks = objectArrayToStringArray(questData.getDeckNames().toArray());
-        lstDeckChooser = new JList(decks);
-        lstDeckChooser.setSelectedIndex(0);
+        SubButton btnCardShop = new SubButton("");
+        btnCardShop.setAction(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.showCardShop();
+            }
+         });
+        btnCardShop.setText("Card Shop");
 
-        optionsContainer.add(btnEditor, "w 30%, h 30px!, gapleft 15%, gapbottom 3px");
-        optionsContainer.add(new OptionsCheckBox("Summon Pet"), "w 30%, h 33px!, gapleft 5%, wrap");
-        optionsContainer.add(lstDeckChooser, "w 30%, h 60px!, gapleft 15%, span 1 2");
-        optionsContainer.add(new OptionsCheckBox("Summon Wall"), "w 30%, h 30px!, gapleft 5%, wrap");
-        optionsContainer.add(new OptionsCheckBox("Launch Zeppelin"), "w 30%, h 30px!, gapleft 5%, wrap");
+        SubButton btnBazaar = new SubButton("");
+        btnBazaar.setAction(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.showBazaar();
+            }
+         });
+        btnBazaar.setText("Bazaar");
+
+        OptionsCheckBox cbPet = new OptionsCheckBox("Summon Pet");
+        OptionsCheckBox cbWall = new OptionsCheckBox("Summon Wall");
+        OptionsCheckBox cbZep = new OptionsCheckBox("Launch Zeppelin");
+
+        lstDeckChooser = new JList();
+
+        optionsContainer.add(btnEditor, "w 30%, h 30px!, gapleft 5%, gapright 5%, gapbottom 5px");
+        optionsContainer.add(cbPet, "w 25%, h 30px!, ax center");
+        optionsContainer.add(btnCardShop, "w 25%, h 30px!, gapleft 5%, wrap");
+
+        optionsContainer.add(new JScrollPane(lstDeckChooser), "w 30%, h 60px!, gapleft 5%, gapright 5%, span 1 2");
+        optionsContainer.add(cbWall, "w 25%, h 30px!, ax center, gapbottom 5px, wrap");
+
+        optionsContainer.add(cbZep, "w 25%, h 30px!");
+        optionsContainer.add(btnBazaar, "w 25%, h 30px!, gapleft 5%, wrap");
+
+        if (!questData.isFantasy()) {
+            cbPet.setVisible(false);
+            cbWall.setVisible(false);
+            cbZep.setVisible(false);
+            btnBazaar.setVisible(false);
+        }
 
         viewport.add(optionsContainer, "w 90%, gap 5% 0 1% 1%");
     }
@@ -195,16 +236,37 @@ public class ViewQuest extends JScrollPane {
         lblNotes.setForeground(skin.getColor("text"));
         viewport.add(lblNotes, "w 90%, gapleft 5%");
 
-        JRadioButton radEasy = new OptionsRadio("Easy - 50 games");
-        JRadioButton radMedium = new OptionsRadio("Medium - 100 games");
-        JRadioButton radHard = new OptionsRadio("Hard - 150 games");
-        JRadioButton radExpert = new OptionsRadio("Expert - 200 games");
+        radEasy = new OptionsRadio("Easy - 50 games");
+        radMedium = new OptionsRadio("Medium - 100 games");
+        radHard = new OptionsRadio("Hard - 150 games");
+        radExpert = new OptionsRadio("Expert - 200 games");
 
-        JRadioButton radFantasy = new OptionsRadio("Fantasy");
-        JRadioButton radClassic = new OptionsRadio("Classic");
-        JCheckBox cbStandardStart = new OptionsCheckBox("Standard (Type 2) Starting Pool");
+        ButtonGroup group1 = new ButtonGroup();
+        group1.add(radEasy);
+        group1.add(radMedium);
+        group1.add(radHard);
+        group1.add(radExpert);
 
-        FButton btnEmbark = new FButton("Embark!");
+        radFantasy = new OptionsRadio("Fantasy");
+        radClassic = new OptionsRadio("Classic");
+
+        radEasy.setSelected(true);
+        radClassic.setSelected(true);
+
+        ButtonGroup group2 = new ButtonGroup();
+        group2.add(radFantasy);
+        group2.add(radClassic);
+
+        cbStandardStart = new OptionsCheckBox("Standard (Type 2) Starting Pool");
+
+        SubButton btnEmbark = new SubButton("");
+        btnEmbark.setAction(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.newQuest();
+            }
+         });
+        btnEmbark.setText("Embark!");
 
         JPanel optionsContainer = new JPanel();
         optionsContainer.setOpaque(false);
@@ -224,10 +286,7 @@ public class ViewQuest extends JScrollPane {
         viewport.add(optionsContainer, "w 100%!, gaptop 2%");
     }
 
-    /** @return HomeTopLevel */
-    public HomeTopLevel getParentView() {
-        return parentView;
-    }
+    //========= CUSTOM CLASSES
 
     /** Consolidates radio button styling in one place. */
     private class OptionsRadio extends JRadioButton {
@@ -247,26 +306,11 @@ public class ViewQuest extends JScrollPane {
         }
     }
 
-    private void start() {
-        Constant.Runtime.HUMAN_DECK[0] = this.questData.getDeck((String) lstDeckChooser.getSelectedValue());
-        Constant.Runtime.COMPUTER_DECK[0] = this.selectedOpponent.getEvent().getEventDeck();
-
-        AllZone.setQuestEvent(this.selectedOpponent.getEvent());
-
-        GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-        g.getController().changeState(1);
-        g.getController().getMatchController().initMatch();
-
-        AllZone.getGameAction().newGame(
-                Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
-                QuestUtil.getHumanStartingCards(this.questData),
-                QuestUtil.getComputerStartingCards(this.questData),
-                this.questData.getLife(), 20, null);
-    }
-
-    private class SelectablePanel extends JPanel {
+    /** Selectable panels for duels and challenges. */
+    public class SelectablePanel extends JPanel {
         private QuestEvent event;
 
+        /** @param e0 &emsp; QuestEvent */
         public SelectablePanel(QuestEvent e0) {
             super();
             setBorder(new LineBorder(skin.getColor("borders"), 1));
@@ -325,38 +369,66 @@ public class ViewQuest extends JScrollPane {
             this.add(lblDesc, " h 35px!, w 80%!, gap 1% 0 0 5px");
         }
 
+        /** @return QuestEvent */
         public QuestEvent getEvent() {
             return event;
         }
     }
 
-    private String[] objectArrayToStringArray(Object[] o0) {
-        String[] output = new String[o0.length];
+    //========= RETRIEVAL FUNCTIONS
 
-        for (int i = 0; i < o0.length; i++) {
-            output[i] = o0[i].toString();
-        }
-
-        return output;
+    /** @return JList */
+    public JList getLstDeckChooser() {
+        return lstDeckChooser;
     }
 
-    /** */
-    final void showDeckEditor() {
-        final Command exit = new Command() {
-            private static final long serialVersionUID = -5110231879431074581L;
+    /** @return JRadioButton */
+    public JRadioButton getRadEasy() {
+        return radEasy;
+    }
 
-            @Override
-            public void execute() {
-                // saves all deck data
-                AllZone.getQuestData().saveData();
+    /** @return JRadioButton */
+    public JRadioButton getRadMedium() {
+        return radMedium;
+    }
 
-                new QuestFrame();
-            }
-        };
+    /** @return JRadioButton */
+    public JRadioButton getRadHard() {
+        return radHard;
+    }
 
-        final DeckEditorQuest g = new DeckEditorQuest(AllZone.getQuestData());
+    /** @return JRadioButton */
+    public JRadioButton getRadExpert() {
+        return radExpert;
+    }
 
-        g.show(exit);
-        g.setVisible(true);
-    } // deck editor button
+    /** @return JRadioButton */
+    public JRadioButton getRadFantasy() {
+        return radFantasy;
+    }
+
+    /** @return JRadioButton */
+    public JRadioButton getRadClassic() {
+        return radClassic;
+    }
+
+    /** @return JCheckBox */
+    public JCheckBox getCbStandardStart() {
+        return cbStandardStart;
+    }
+
+    /** @return SelectablePanel */
+    public SelectablePanel getSelectedOpponent() {
+        return selectedOpponent;
+    }
+
+    /** @return HomeTopLevel */
+    public HomeTopLevel getParentView() {
+        return parentView;
+    }
+
+    /** @return ControlQuest */
+    public ControlQuest getController() {
+        return control;
+    }
 }

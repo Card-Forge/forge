@@ -26,8 +26,7 @@ import forge.view.GuiTopLevel;
 import forge.view.home.ViewConstructed;
 
 /** 
- * Controls logic and listeners for "constructed" deck options
- * in home screen.
+ * Controls logic and listeners for Constructed mode in home screen.
  *
  */
 public class ControlConstructed {
@@ -42,8 +41,7 @@ public class ControlConstructed {
 
     /**
      * 
-     * Controls logic and listeners for "constructed" deck options
-     * in home screen.
+     * Controls logic and listeners for "constructed" mode in home screen.
      * 
      * @param v0 &emsp; ViewConstructed
      */
@@ -421,20 +419,20 @@ public class ControlConstructed {
      * Array of color selections present in list boxes. Values
      * correspond to colorVals hash map.
      * 
-     * @return String[]
+     * @return Object[]
      */
     // Four randoms are included which should cover all possibilities.
-    public String[] getColorNames() {
-        return new String[] {"Random", "Random", "Random",
+    public Object[] getColorNames() {
+        return new Object[] {"Random", "Random", "Random",
                 "Random", "Black", "Blue", "Green", "Red", "White"};
     }
 
     /**
      * Array of theme names, usually used in list boxes.
      * 
-     * @return String[]
+     * @return Object[]
      */
-    public String[] getThemeNames() {
+    public Object[] getThemeNames() {
         themeNames = new ArrayList<String>();
         themeNames.add("Random");
         for (String s : GenerateThemeDeck.getThemeNames()) {
@@ -443,15 +441,15 @@ public class ControlConstructed {
         // No theme decks?
         if (themeNames.size() == 1) { themeNames = new ArrayList<String>(); }
 
-        return oa2sa(themeNames.toArray());
+        return themeNames.toArray();
     }
 
     /**
      * Array of pre-constructed deck names, usually used in list boxes.
      *
-     * @return String[]
+     * @return Object[]
      */
-    public String[] getDeckNames() {
+    public Object[] getDeckNames() {
         deckNames = new ArrayList<String>();
         deckNames.add("Random");
         Collection<Deck> allDecks = AllZone.getDeckManager().getDecks();
@@ -463,6 +461,6 @@ public class ControlConstructed {
         // No pre-constructed decks?
         if (deckNames.size() == 1) { deckNames = new ArrayList<String>(); }
 
-        return oa2sa(deckNames.toArray());
+        return deckNames.toArray();
     }
 }
