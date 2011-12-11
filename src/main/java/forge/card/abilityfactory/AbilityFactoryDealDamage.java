@@ -581,7 +581,7 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (tgt.canTgtPlayer()) {
+            else if (tgt.canTgtPlayer() && AbilityFactory.playReusable(saMe)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
                 }
