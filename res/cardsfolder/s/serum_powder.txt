@@ -7,4 +7,6 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_powder.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/138.jpg
+Oracle:{T}: Add {1} to your mana pool.\nAny time you could mulligan and Serum Powder is in your hand, you may exile all the cards from your hand, then draw that many cards. (You can do this in addition to taking mulligans.)
 End
