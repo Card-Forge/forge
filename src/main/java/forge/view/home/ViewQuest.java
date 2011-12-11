@@ -2,8 +2,14 @@ package forge.view.home;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -11,15 +17,27 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Command;
+import forge.Constant;
+import forge.gui.GuiUtils;
+import forge.gui.MultiLineLabel;
+import forge.gui.MultiLineLabelUI;
+import forge.gui.deckeditor.DeckEditorQuest;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
+import forge.quest.data.QuestUtil;
+import forge.quest.gui.QuestFrame;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestDuel;
+import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
-import forge.quest.gui.main.QuestSelectablePanel;
+import forge.view.GuiTopLevel;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FSkin;
 
@@ -34,6 +52,8 @@ public class ViewQuest extends JScrollPane {
     private QuestEventManager qem;
     private QuestData questData;
     private JPanel viewport;
+    private SelectablePanel selectedOpponent;
+    private JList lstDeckChooser;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -58,8 +78,9 @@ public class ViewQuest extends JScrollPane {
         lblContinue.setFont(skin.getFont1().deriveFont(Font.BOLD, 20));
         viewport.add(lblContinue, "w 90%!, gap 5% 0 2% 0");
 
-        // Quest Events (and options)
+        // Quest events and options
         populateQuestEvents();
+        populateQuestOptions();
 
         // Start button
         StartButton btnStart = new StartButton(parentView);
@@ -70,6 +91,11 @@ public class ViewQuest extends JScrollPane {
         pnlButtonContainer.setLayout(new BorderLayout());
         pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
         viewport.add(pnlButtonContainer, "w 100%!, gapbottom 2%, gaptop 2%");
+
+        btnStart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { start(); }
+        });
 
         // New Quest
         populateNewQuest();
@@ -99,17 +125,21 @@ public class ViewQuest extends JScrollPane {
         List<QuestChallenge> challenges = qem.generateChallenges();
 
         for (QuestDuel d : duels) {
-            duelsContainer.add(new QuestSelectablePanel(d), "w 100%, h 70px!, gapbottom 2px");
+            SelectablePanel temp = new SelectablePanel(d);
+            duelsContainer.add(temp, "w 100%, h 70px:70px, gapbottom 5px");
         }
 
         for (QuestChallenge c : challenges) {
-            challengesContainer.add(new QuestSelectablePanel(c), "w 100%, h 70px!, gapbottom 2px");
+            SelectablePanel temp = new SelectablePanel(c);
+            challengesContainer.add(temp, "w 100%, h 70px:70px, gapbottom 5px");
         }
 
         JLabel lblDuels = new JLabel("Available Duels");
+        lblDuels.setForeground(skin.getColor("text"));
         lblDuels.setFont(skin.getFont1().deriveFont(Font.ITALIC, 14));
 
         JLabel lblChallenges = new JLabel("Available Challenges");
+        lblChallenges.setForeground(skin.getColor("text"));
         lblChallenges.setFont(skin.getFont1().deriveFont(Font.ITALIC, 14));
 
         viewport.add(lblDuels, "w 90%, gapleft 5%, gapbottom 1%, gaptop 1%");
@@ -117,12 +147,29 @@ public class ViewQuest extends JScrollPane {
         viewport.add(lblChallenges, "w 90%, gapleft 5%, gapbottom 1%");
         viewport.add(challengesContainer, " w 90%, gapleft 5%, gapbottom 2%");
 
+        // Select first event.
+        selectedOpponent = (SelectablePanel) duelsContainer.getComponent(0);
+        selectedOpponent.setBackground(skin.getColor("active"));
+    }
+
+    /** */
+    private void populateQuestOptions() {
         JPanel optionsContainer = new JPanel();
         optionsContainer.setOpaque(false);
         optionsContainer.setLayout(new MigLayout("insets 0, gap 0"));
 
-        SubButton btnEditor = new SubButton("Deck Editor");
-        JList lstDeckChooser = new JList(new String[] {"Cosmo", "Elaine", "George"});
+        SubButton btnEditor = new SubButton("");
+        btnEditor.setAction(new AbstractAction() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               showDeckEditor();
+           }
+        });
+        btnEditor.setText("Deck Editor");
+
+        String[] decks = objectArrayToStringArray(questData.getDeckNames().toArray());
+        lstDeckChooser = new JList(decks);
+        lstDeckChooser.setSelectedIndex(0);
 
         optionsContainer.add(btnEditor, "w 30%, h 30px!, gapleft 15%, gapbottom 3px");
         optionsContainer.add(new OptionsCheckBox("Summon Pet"), "w 30%, h 33px!, gapleft 5%, wrap");
@@ -135,6 +182,7 @@ public class ViewQuest extends JScrollPane {
 
     private void populateNewQuest() {
         JLabel lblNew = new JLabel("Embark on a new Quest");
+        lblNew.setForeground(skin.getColor("text"));
         lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
         lblNew.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
         viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%");
@@ -144,6 +192,7 @@ public class ViewQuest extends JScrollPane {
                 + "<br>Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle."
                 + "</html>");
         lblNotes.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+        lblNotes.setForeground(skin.getColor("text"));
         viewport.add(lblNotes, "w 90%, gapleft 5%");
 
         JRadioButton radEasy = new OptionsRadio("Easy - 50 games");
@@ -197,4 +246,117 @@ public class ViewQuest extends JScrollPane {
             setOpaque(false);
         }
     }
+
+    private void start() {
+        Constant.Runtime.HUMAN_DECK[0] = this.questData.getDeck((String) lstDeckChooser.getSelectedValue());
+        Constant.Runtime.COMPUTER_DECK[0] = this.selectedOpponent.getEvent().getEventDeck();
+
+        AllZone.setQuestEvent(this.selectedOpponent.getEvent());
+
+        GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
+        g.getController().changeState(1);
+        g.getController().getMatchController().initMatch();
+
+        AllZone.getGameAction().newGame(
+                Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
+                QuestUtil.getHumanStartingCards(this.questData),
+                QuestUtil.getComputerStartingCards(this.questData),
+                this.questData.getLife(), 20, null);
+    }
+
+    private class SelectablePanel extends JPanel {
+        private QuestEvent event;
+
+        public SelectablePanel(QuestEvent e0) {
+            super();
+            setBorder(new LineBorder(skin.getColor("borders"), 1));
+            setBackground(skin.getColor("inactive"));
+            setLayout(new MigLayout("insets 0, gap 0"));
+
+            this.event = e0;
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    SelectablePanel src = (SelectablePanel) e.getSource();
+
+                    if (selectedOpponent != null) {
+                        selectedOpponent.setBackground(skin.getColor("inactive"));
+                    }
+
+                    selectedOpponent = src;
+                    src.setBackground(skin.getColor("active"));
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    if (selectedOpponent != e.getSource()) {
+                        setBackground(skin.getColor("hover"));
+                    }
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    if (selectedOpponent != e.getSource()) {
+                        setBackground(skin.getColor("inactive"));
+                    }
+                }
+            });
+
+            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+            File file = new File(base, event.getIcon());
+
+            if (!file.exists()) {
+                file = new File(base, "Unknown.jpg");
+            }
+
+            JLabel lblIcon = new JLabel(GuiUtils.getResizedIcon(new ImageIcon(file.toString()), 60, 60));
+            lblIcon.setForeground(skin.getColor("text"));
+            this.add(lblIcon, "h 60px!, w 60px!, gap 5px 5px 5px 5px, span 1 2");
+
+            JLabel lblName = new JLabel(event.getTitle() + ": " + event.getDifficulty());
+            lblName.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
+            lblName.setForeground(skin.getColor("text"));
+            this.add(lblName, "h 20px!, gap 1% 1% 5px 5px, wrap");
+
+            MultiLineLabel lblDesc = new MultiLineLabel(event.getDescription());
+            lblDesc.setFont(skin.getFont1().deriveFont(Font.PLAIN, 12));
+            lblDesc.setForeground(skin.getColor("text"));
+            lblDesc.setUI(MultiLineLabelUI.getLabelUI());
+            this.add(lblDesc, " h 35px!, w 80%!, gap 1% 0 0 5px");
+        }
+
+        public QuestEvent getEvent() {
+            return event;
+        }
+    }
+
+    private String[] objectArrayToStringArray(Object[] o0) {
+        String[] output = new String[o0.length];
+
+        for (int i = 0; i < o0.length; i++) {
+            output[i] = o0[i].toString();
+        }
+
+        return output;
+    }
+
+    /** */
+    final void showDeckEditor() {
+        final Command exit = new Command() {
+            private static final long serialVersionUID = -5110231879431074581L;
+
+            @Override
+            public void execute() {
+                // saves all deck data
+                AllZone.getQuestData().saveData();
+
+                new QuestFrame();
+            }
+        };
+
+        final DeckEditorQuest g = new DeckEditorQuest(AllZone.getQuestData());
+
+        g.show(exit);
+        g.setVisible(true);
+    } // deck editor button
 }
