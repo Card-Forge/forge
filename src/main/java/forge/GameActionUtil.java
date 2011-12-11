@@ -224,17 +224,8 @@ public final class GameActionUtil {
                 final Player controller = c.getController();
                 final Card rippleCard = c;
                 boolean activateRipple = false;
-                if (controller.isHuman()) {
-                    final Object[] possibleValues = { "Yes", "No" };
-                    AllZone.getDisplay().showMessage("Activate Ripple? ");
-                    final Object q = JOptionPane.showOptionDialog(null, "Activate Ripple for " + c, "Ripple",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
-                            possibleValues[0]);
-                    if (q.equals(0)) {
+                if (controller.isComputer() || GameActionUtil.showYesNoDialog(c, "Activate Ripple for " + c + "?")) {
                         activateRipple = true;
-                    }
-                } else {
-                    activateRipple = true;
                 }
                 if (activateRipple) {
                     final Ability ability = new Ability(c, "0") {
@@ -306,7 +297,7 @@ public final class GameActionUtil {
             }
         };
         ripple.execute();
-    } // playCard_Ripple()
+    } // playCardRipple()
 
     /**
      * <p>
@@ -837,7 +828,7 @@ public final class GameActionUtil {
 
                 final StringBuilder sb = new StringBuilder();
                 sb.append(lich.getName()).append(" - ").append(lich.getController());
-                sb.append(" sacrifices ").append(damage).append(" nontoken Permanents.");
+                sb.append(" sacrifices ").append(damage).append(" nontoken permanents.");
                 ability.setStackDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -1176,7 +1167,7 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * playerCombatDamage_Spawnwrithe.
+     * playerCombatDamageSpawnwrithe.
      * </p>
      * 
      * @param c
@@ -1208,7 +1199,7 @@ public final class GameActionUtil {
 
     }
 
-    /** Constant <code>Elspeth_Emblem</code>. */
+    /** Constant <code>elspethEmblem</code>. */
     private static Command elspethEmblem = new Command() {
 
         private static final long serialVersionUID = 7414127991531889390L;
@@ -1386,9 +1377,9 @@ public final class GameActionUtil {
                 return false;
             }
         }
-
-        if (specialConditions.contains("isPresent")) { // is a card of a certain
-                                                       // type/color present?
+        // is a card of a certain type/color present?
+        if (specialConditions.contains("isPresent")) { 
+                                                       
             final String requirements = specialConditions.replaceAll("isPresent ", "");
             CardList cardsinPlay = AllZoneUtil.getCardsIn(Zone.Battlefield);
             final String[] conditions = requirements.split(",");
@@ -1397,9 +1388,8 @@ public final class GameActionUtil {
                 return false;
             }
         }
-        if (specialConditions.contains("isInGraveyard")) { // is a card of a
-                                                           // certain type/color
-                                                           // present in yard?
+        //is a card of a certain type/color present in yard
+        if (specialConditions.contains("isInGraveyard")) {
             final String requirements = specialConditions.replaceAll("isInGraveyard ", "");
             CardList cardsinYards = AllZoneUtil.getCardsIn(Zone.Graveyard);
             final String[] conditions = requirements.split(",");
@@ -1408,9 +1398,8 @@ public final class GameActionUtil {
                 return false;
             }
         }
-        if (specialConditions.contains("isNotPresent")) { // is no card of a
-                                                          // certain type/color
-                                                          // present?
+        //is no card of a certain type/color present?
+        if (specialConditions.contains("isNotPresent")) {
             final String requirements = specialConditions.replaceAll("isNotPresent ", "");
             CardList cardsInPlay = AllZoneUtil.getCardsIn(Zone.Battlefield);
             final String[] conditions = requirements.split(",");
@@ -1557,7 +1546,7 @@ public final class GameActionUtil {
 
     }; // stLandManaAbilities
 
-    /** Constant <code>Coat_of_Arms</code>. */
+    /** Constant <code>coatOfArms</code>. */
     private static Command coatOfArms = new Command() {
         private static final long serialVersionUID = 583505612126735693L;
 
@@ -1609,7 +1598,7 @@ public final class GameActionUtil {
                 } // for inner
             } // for outer
         } // execute
-    }; // Coat of Arms
+    }; // coatOfArms
 
     private static Command alphaStatus = new Command() {
         private static final long serialVersionUID = -3213793711304934358L;
@@ -1704,7 +1693,7 @@ public final class GameActionUtil {
         } // execute
     }; // Ajani Avatar
 
-    /** Constant <code>Old_Man_of_the_Sea</code>. */
+    /** Constant <code>oldManOfTheSea</code>. */
     private static Command oldManOfTheSea = new Command() {
         private static final long serialVersionUID = 8076177362922156784L;
 
@@ -1724,7 +1713,7 @@ public final class GameActionUtil {
         }
     }; // Old Man of the Sea
 
-    /** Constant <code>Homarid</code>. */
+    /** Constant <code>homarid</code>. */
     private static Command homarid = new Command() {
         private static final long serialVersionUID = 7156319758035295773L;
 
@@ -1741,7 +1730,7 @@ public final class GameActionUtil {
         } // execute()
     };
 
-    /** Constant <code>Liu_Bei</code>. */
+    /** Constant <code>liuBei</code>. */
     private static Command liuBei = new Command() {
 
         private static final long serialVersionUID = 4235093010715735727L;
@@ -1781,7 +1770,7 @@ public final class GameActionUtil {
 
     }; // Liu_Bei
 
-    /** Constant <code>Sound_the_Call_Wolf</code>. */
+    /** Constant <code>soundTheCallWolf</code>. */
     private static Command soundTheCallWolf = new Command() {
         private static final long serialVersionUID = 4614281706799537283L;
 
@@ -1810,7 +1799,7 @@ public final class GameActionUtil {
             return list.size();
         }
 
-    }; // Sound_the_Call_Wolf
+    }; // sounTheCallWolf
 
     /** Constant <code>Tarmogoyf</code>. */
     private static Command tarmogoyf = new Command() {
@@ -1948,11 +1937,11 @@ public final class GameActionUtil {
     /**
      * Sets the commands.
      * 
-     * @param commands
+     * @param commands0
      *            the commands to set
      */
-    public static void setCommands(final HashMap<String, Command> commands) {
-        GameActionUtil.commands = commands; // TODO: Add 0 to parameter's name.
+    public static void setCommands(final HashMap<String, Command> commands0) {
+        GameActionUtil.commands = commands0;
     }
 
     /**
