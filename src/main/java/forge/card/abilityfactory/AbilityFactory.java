@@ -1270,7 +1270,7 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void makeRestrictions(final SpellAbility sa) {
-        // SpellAbility_Restrictions should be added in here
+        // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
         if (this.mapParams.containsKey("Flashback")) {
             sa.setFlashBackAbility(true);

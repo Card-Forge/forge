@@ -33,7 +33,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 
 /**
  * <p>
- * SpellAbility_Restriction class.
+ * SpellAbilityRestriction class.
  * </p>
  * 
  * @author Forge
@@ -51,7 +51,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
     /**
      * <p>
-     * Constructor for SpellAbility_Restriction.
+     * Constructor for SpellAbilityRestriction.
      * </p>
      */
     public SpellAbilityRestriction() {
@@ -208,7 +208,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {
             activator = c.getController();
-            System.out.println(c.getName() + " Did not have activator set in SpellAbility_Restriction.canPlay()");
+            System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
         if (this.isSorcerySpeed() && !Phase.canCastSorcery(activator)) {
@@ -349,4 +349,4 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         return true;
     } // canPlay()
 
-} // end class SpellAbility_Restriction
+} // end class SpellAbilityRestriction

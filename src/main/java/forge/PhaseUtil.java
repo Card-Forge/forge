@@ -645,7 +645,7 @@ public class PhaseUtil {
 
     // ***** Combat Utility **********
     // TODO: the below functions should be removed and the code blocks that use
-    // them should instead use SA_Restriction
+    // them should instead use SpellAbilityRestriction
     /**
      * <p>
      * isBeforeAttackersAreDeclared.
