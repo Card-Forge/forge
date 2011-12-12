@@ -10,14 +10,20 @@ import forge.AllZone;
 import forge.view.toolbox.FSkin;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Standard button used for for submenus on the home screen.
  *
  */
 @SuppressWarnings("serial")
 public class SubButton extends JButton {
+    /** */
+    public SubButton() {
+        this("");
+    }
+
     /**
      * 
-     * TODO: Write javadoc for Constructor.
+     * Standard button used for for submenus on the home screen.
+     *
      * @param txt0 &emsp; String
      */
     public SubButton(String txt0) {

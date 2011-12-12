@@ -25,7 +25,6 @@ import forge.view.toolbox.FSkin;
  * Populates Swing components of Constructed mode in home screen.
  * 
  */
-// Control (listeners and logic) could possibly be moved to a new class (ControlConstructed).
 @SuppressWarnings("serial")
 public class ViewConstructed extends JPanel {
     private String constraints;
@@ -36,7 +35,7 @@ public class ViewConstructed extends JPanel {
     private int counter;
     private JList lstColorsHuman, lstColorsAI, lstThemesHuman,
         lstThemesAI, lstDecksHuman, lstDecksAI;
-    private JButton viewHumanDeckList, viewAIDeckList;
+    private SubButton viewHumanDeckList, viewAIDeckList;
     private ControlConstructed control;
 
     /**
@@ -73,15 +72,14 @@ public class ViewConstructed extends JPanel {
         this.add(new JScrollPane(lstThemesHuman), constraints);
         this.add(new OrPanel(), "w 5%!, h 30%!");
         this.add(new JScrollPane(lstDecksHuman), constraints + ", wrap");
-        
-        viewHumanDeckList = new JButton();
+
+        viewHumanDeckList = new SubButton();
         viewHumanDeckList.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
                 ViewConstructed.this.control.viewDeckList("Human");
             }
         });
         viewHumanDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        viewHumanDeckList.setForeground(Color.BLACK);
         viewHumanDeckList.setText("View Human Deck List");
         viewHumanDeckList.setVerticalTextPosition(SwingConstants.CENTER);
         this.add(viewHumanDeckList, "w 20%!, h 3%!, gap 2% 2% 2% 0, wrap, span 5 1");
@@ -97,18 +95,17 @@ public class ViewConstructed extends JPanel {
         this.add(new JScrollPane(lstThemesAI), constraints);
         this.add(new OrPanel(), "w 5%!, h 30%!");
         this.add(new JScrollPane(lstDecksAI), constraints + ", wrap");
-        
-        viewAIDeckList = new JButton();
+
+        viewAIDeckList = new SubButton();
         viewAIDeckList.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
                 ViewConstructed.this.control.viewDeckList("Computer");
             }
         });
         viewAIDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        viewAIDeckList.setForeground(Color.BLACK);
         viewAIDeckList.setText("View AI Deck List");
         this.add(viewAIDeckList, "w 20%!, h 3%!, gap 5% 5% 2% 0, wrap, span 5 1");
-        
+
         // List box properties
         this.lstColorsHuman.setName("lstColorsHuman");
         this.lstThemesHuman.setName("lstThemesHuman");
