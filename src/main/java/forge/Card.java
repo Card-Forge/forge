@@ -329,7 +329,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Map<Card, Integer> assignedDamageMap = new TreeMap<Card, Integer>();
 
     private boolean drawnThisTurn = false;
-    private boolean tapped;
+    private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
     private boolean token = false;
     private boolean copiedToken = false;
