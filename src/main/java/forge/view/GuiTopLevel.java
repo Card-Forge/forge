@@ -33,7 +33,6 @@ import forge.CardList;
 import forge.Constant;
 import forge.Display;
 import forge.GuiMultipleBlockers;
-import forge.ImageCache;
 import forge.MyButton;
 import forge.Player;
 import forge.Singletons;
@@ -41,7 +40,6 @@ import forge.control.ControlAllUI;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
 import forge.view.match.ViewField;
-import forge.view.swing.OldGuiNewGame;
 import forge.view.toolbox.FOverlay;
 
 /**

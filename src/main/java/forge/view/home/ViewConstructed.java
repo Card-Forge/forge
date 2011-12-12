@@ -33,9 +33,9 @@ public class ViewConstructed extends JPanel {
 
     private Timer timer1 = null;
     private int counter;
-    private JList lstColorsHuman, lstColorsAI, lstThemesHuman,
+    private JList<String> lstColorsHuman, lstColorsAI, lstThemesHuman,
         lstThemesAI, lstDecksHuman, lstDecksAI;
-    private SubButton viewHumanDeckList, viewAIDeckList;
+    private SubButton btnHumanDeckList, btnAIDeckList;
     private ControlConstructed control;
 
     /**
@@ -53,12 +53,23 @@ public class ViewConstructed extends JPanel {
         control = new ControlConstructed(this);
 
         // Assemble JLists with arrays from above.
-        lstColorsHuman = new JList(control.getColorNames());
-        lstColorsAI = new JList(control.getColorNames());
-        lstDecksHuman = new JList(control.getDeckNames());
-        lstDecksAI = new JList(control.getDeckNames());
-        lstThemesHuman = new JList(control.getThemeNames());
-        lstThemesAI = new JList(control.getThemeNames());
+        lstColorsHuman = new JList<String>();
+        lstColorsHuman.setListData(control.oa2sa(control.getColorNames()));
+
+        lstColorsAI = new JList<String>();
+        lstColorsAI.setListData(control.oa2sa(control.getColorNames()));
+
+        lstDecksHuman = new JList<String>();
+        lstDecksHuman.setListData(control.oa2sa(control.getDeckNames()));
+
+        lstDecksAI = new JList<String>();
+        lstDecksAI.setListData(control.oa2sa(control.getDeckNames()));
+
+        lstThemesHuman = new JList<String>();
+        lstThemesHuman.setListData(control.oa2sa(control.getThemeNames()));
+
+        lstThemesAI = new JList<String>();
+        lstThemesAI.setListData(control.oa2sa(control.getThemeNames()));
 
         // Human deck options area
         JLabel lblHuman = new JLabel("Choose a deck for the human player:");
@@ -66,23 +77,26 @@ public class ViewConstructed extends JPanel {
         lblHuman.setForeground(skin.getColor("text"));
         this.add(lblHuman, "w 90%!, h 5%!, gap 5% 5% 2% 0, wrap, span 5 1");
 
-        constraints = "w 28%!, h 30%!";
-        this.add(new JScrollPane(lstColorsHuman), constraints + ", gapleft 3%");
-        this.add(new OrPanel(), "w 5%!, h 30%!");
-        this.add(new JScrollPane(lstThemesHuman), constraints);
-        this.add(new OrPanel(), "w 5%!, h 30%!");
-        this.add(new JScrollPane(lstDecksHuman), constraints + ", wrap");
-
-        viewHumanDeckList = new SubButton();
-        viewHumanDeckList.setAction(new AbstractAction() {
+        // Human deck list button
+        btnHumanDeckList = new SubButton();
+        btnHumanDeckList.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
                 ViewConstructed.this.control.viewDeckList("Human");
             }
         });
-        viewHumanDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        viewHumanDeckList.setText("View Human Deck List");
-        viewHumanDeckList.setVerticalTextPosition(SwingConstants.CENTER);
-        this.add(viewHumanDeckList, "w 20%!, h 3%!, gap 5% 5% 2% 0, wrap, span 5 1");
+
+        btnHumanDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
+        btnHumanDeckList.setText("View selected deck");
+        btnHumanDeckList.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Add components
+        constraints = "w 28%!, h 30%!, span 1 2";
+        this.add(new JScrollPane(lstColorsHuman), constraints + ", gapleft 3%");
+        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
+        this.add(new JScrollPane(lstThemesHuman), constraints);
+        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
+        this.add(new JScrollPane(lstDecksHuman), "w 28%!, h 25%!, gapbottom 1%, wrap");
+        this.add(btnHumanDeckList, "w 28%!, h 4%!, wrap");
 
         // AI deck options area
         JLabel lblAI = new JLabel("Choose a deck for the AI player:");
@@ -90,21 +104,23 @@ public class ViewConstructed extends JPanel {
         lblAI.setForeground(skin.getColor("text"));
         this.add(lblAI, "w 90%!, h 5%!, gap 5% 5% 2% 0, wrap, span 5 1");
 
-        this.add(new JScrollPane(lstColorsAI), constraints + ", gapleft 3%");
-        this.add(new OrPanel(), "w 5%!, h 30%!");
-        this.add(new JScrollPane(lstThemesAI), constraints);
-        this.add(new OrPanel(), "w 5%!, h 30%!");
-        this.add(new JScrollPane(lstDecksAI), constraints + ", wrap");
-
-        viewAIDeckList = new SubButton();
-        viewAIDeckList.setAction(new AbstractAction() {
+        // AI deck list button
+        btnAIDeckList = new SubButton();
+        btnAIDeckList.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
                 ViewConstructed.this.control.viewDeckList("Computer");
             }
         });
-        viewAIDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        viewAIDeckList.setText("View AI Deck List");
-        this.add(viewAIDeckList, "w 20%!, h 3%!, gap 5% 5% 2% 0, wrap, span 5 1");
+        btnAIDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
+        btnAIDeckList.setText("View selected deck");
+
+        // Add components
+        this.add(new JScrollPane(lstColorsAI), constraints + ", gapleft 3%");
+        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
+        this.add(new JScrollPane(lstThemesAI), constraints);
+        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
+        this.add(new JScrollPane(lstDecksAI), "w 28%!, h 25%!, gapbottom 1%, wrap");
+        this.add(btnAIDeckList, "w 28%!, h 4%!, wrap");
 
         // List box properties
         this.lstColorsHuman.setName("lstColorsHuman");
@@ -178,10 +194,10 @@ public class ViewConstructed extends JPanel {
      *
      * @param lst0 &emsp; JList
      */
-    public void remind(JList lst0) {
+    public void remind(JList<String> lst0) {
         if (timer1 != null) { return; }
 
-        final JList target = lst0;
+        final JList<String> target = lst0;
         final int[] steps = {210, 215, 220, 220, 220, 215, 210};
         final Color oldBG = lst0.getBackground();
         counter = 0;
@@ -207,32 +223,43 @@ public class ViewConstructed extends JPanel {
 
     //========= RETRIEVAL FUNCTIONS
     /** @return JList */
-    public JList getLstColorsHuman() {
+    public JList<String> getLstColorsHuman() {
         return lstColorsHuman;
     }
 
     /** @return JList */
-    public JList getLstThemesHuman() {
+    public JList<String> getLstThemesHuman() {
         return lstThemesHuman;
     }
 
     /** @return JList */
-    public JList getLstDecksHuman() {
+    public JList<String> getLstDecksHuman() {
         return lstDecksHuman;
     }
 
     /** @return JList */
-    public JList getLstColorsAI() {
+    public JList<String> getLstColorsAI() {
         return lstColorsAI;
     }
 
     /** @return JList */
-    public JList getLstThemesAI() {
+    public JList<String> getLstThemesAI() {
         return lstThemesAI;
     }
 
     /** @return JList */
-    public JList getLstDecksAI() {
+    public JList<String> getLstDecksAI() {
         return lstDecksAI;
     }
+
+    /** @return JButton */
+    public JButton getBtnHumanDeckList() {
+        return btnHumanDeckList;
+    }
+
+    /** @return JButton */
+    public JButton getBtnAIDeckList() {
+        return btnAIDeckList;
+    }
+
 }

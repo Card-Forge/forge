@@ -73,7 +73,7 @@ public class CardViewer extends JPanel {
         this.jList.setSelectedIndex(0);
     }
 
-    private class ChooserListModel extends AbstractListModel {
+    private class ChooserListModel extends AbstractListModel<Object> {
 
         private static final long serialVersionUID = 3871965346333840556L;
 

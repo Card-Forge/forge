@@ -1,5 +1,6 @@
 package forge.view.home;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,6 +16,7 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class SubButton extends JButton {
+    private FSkin skin;
     /** */
     public SubButton() {
         this("");
@@ -28,19 +30,27 @@ public class SubButton extends JButton {
      */
     public SubButton(String txt0) {
         super(txt0);
-        final FSkin skin = AllZone.getSkin();
+        skin = AllZone.getSkin();
         setBorder(new LineBorder(skin.getColor("borders"), 1));
         setBackground(skin.getColor("inactive"));
         setForeground(skin.getColor("text"));
 
         this.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                setBackground(skin.getColor("hover"));
+                if (isEnabled()) { setBackground(skin.getColor("hover")); }
             }
 
             public void mouseExited(MouseEvent e) {
-                setBackground(skin.getColor("inactive"));
+                if (isEnabled()) { setBackground(skin.getColor("inactive")); }
             }
         });
+    }
+
+    @Override
+    public void setEnabled(boolean b0) {
+        super.setEnabled(b0);
+
+        if (b0) { setBackground(skin.getColor("inactive")); }
+        else { setBackground(new Color(220, 220, 220)); }
     }
 }

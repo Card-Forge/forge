@@ -38,8 +38,8 @@ import forge.view.home.ViewConstructed;
 public class ControlConstructed {
     private ViewConstructed view;
 
-    private JList currentHumanSelection = null;
-    private JList currentAISelection = null;
+    private JList<String> currentHumanSelection = null;
+    private JList<String> currentAISelection = null;
 
     private Map<String, String> colorVals;
     private List<String> themeNames;
@@ -196,7 +196,7 @@ public class ControlConstructed {
      *
      * @param lst0 &emsp; a JList that has been clicked
      */
-    public void regulateHuman(JList lst0) {
+    public void regulateHuman(JList<String> lst0) {
         if (currentHumanSelection != null && lst0 != currentHumanSelection) {
             currentHumanSelection.clearSelection();
         }
@@ -222,6 +222,14 @@ public class ControlConstructed {
             while (i == 0) { i = r.nextInt(deckNames.size()); }
             lst0.setSelectedIndex(i);
         }
+
+        // Toggle "view" button accordingly
+        if (lst0.getName() != null && lst0.getName().equals("lstDecksHuman")) {
+            view.getBtnHumanDeckList().setEnabled(true);
+        }
+        else {
+            view.getBtnHumanDeckList().setEnabled(false);
+        }
     }
 
     /** 
@@ -229,7 +237,7 @@ public class ControlConstructed {
      * 
      * @param lst0 &emsp; a JList that has been clicked
      */
-    public void regulateAI(JList lst0) {
+    public void regulateAI(JList<String> lst0) {
         if (currentAISelection != null && lst0 != currentAISelection) {
             currentAISelection.clearSelection();
         }
@@ -254,6 +262,14 @@ public class ControlConstructed {
             int i = 0;
             while (i == 0) { i = r.nextInt(deckNames.size()); }
             lst0.setSelectedIndex(i);
+        }
+
+        // Toggle "view" button accordingly
+        if (lst0.getName() != null && lst0.getName().equals("lstDecksAI")) {
+            view.getBtnAIDeckList().setEnabled(true);
+        }
+        else {
+            view.getBtnAIDeckList().setEnabled(false);
         }
     }
 
@@ -457,19 +473,19 @@ public class ControlConstructed {
      */
     public Object[] getDeckNames() {
         deckNames = new ArrayList<String>();
+        deckNames.add(0, "Random");
+
         Collection<Deck> allDecks = AllZone.getDeckManager().getConstructedDecks();
         for (Deck d : allDecks) {
-                deckNames.add(d.getName());
+            deckNames.add(d.getName());
         }
-        
-        //list is alphabetized, but we want the "Random" option first
-        deckNames.add(0, "Random");
+
         // No pre-constructed decks?
         if (deckNames.size() == 1) { deckNames = new ArrayList<String>(); }
 
         return deckNames.toArray();
     }
-    
+
     /**
      * View deck list.
      */
@@ -478,7 +494,7 @@ public class ControlConstructed {
     }
 
     /**
-     * Receives click and programmatic requests for viewing card in a player's deck
+     * Receives click and programmatic requests for viewing card in a player's deck.
      * 
      */
     private class DeckListAction {
