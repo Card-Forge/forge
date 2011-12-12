@@ -82,7 +82,7 @@ public class ViewConstructed extends JPanel {
         viewHumanDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
         viewHumanDeckList.setText("View Human Deck List");
         viewHumanDeckList.setVerticalTextPosition(SwingConstants.CENTER);
-        this.add(viewHumanDeckList, "w 20%!, h 3%!, gap 2% 2% 2% 0, wrap, span 5 1");
+        this.add(viewHumanDeckList, "w 20%!, h 3%!, gap 5% 5% 2% 0, wrap, span 5 1");
 
         // AI deck options area
         JLabel lblAI = new JLabel("Choose a deck for the AI player:");
