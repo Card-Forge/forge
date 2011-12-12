@@ -82,7 +82,7 @@ public class ViewTabber extends FRoundedPanel {
     private final FPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
 
     private DevLabel lblMilling, lblHandView, lblLibraryView, lblGenerateMana, lblSetupGame, lblTutor,
-            lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblHumanLife;
+            lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblSetLife;
 
     private final FVerticalTabPanel vtpTabber;
 
@@ -542,8 +542,8 @@ public class ViewTabber extends FRoundedPanel {
      * 
      * @return DevLabel
      */
-    public DevLabel getLblHumanLife() {
-        return this.lblHumanLife;
+    public DevLabel getLblSetLife() {
+        return this.lblSetLife;
     }
 
     /**
@@ -602,39 +602,39 @@ public class ViewTabber extends FRoundedPanel {
         lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
         lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
         lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
+        lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn: Enabled", "Play Unlimited Lands This Turn: Disabled");
         lblGenerateMana = new DevLabel("Generate Mana");
         lblSetupGame = new DevLabel("Setup Game State");
         lblTutor = new DevLabel("Tutor for Card");
         lblCounterPermanent = new DevLabel("Add Counter to Permanent");
         lblTapPermanent = new DevLabel("Tap Permanent");
         lblUntapPermanent = new DevLabel("Untap Permanent");
-        lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn");
-        lblHumanLife = new DevLabel("Set Player Life");
+        lblSetLife = new DevLabel("Set Player Life");
 
         devLBLs.add(lblMilling);
         devLBLs.add(lblHandView);
         devLBLs.add(lblLibraryView);
+        devLBLs.add(lblUnlimitedLands);
         devLBLs.add(lblGenerateMana);
         devLBLs.add(lblSetupGame);
         devLBLs.add(lblTutor);
         devLBLs.add(lblCounterPermanent);
         devLBLs.add(lblTapPermanent);
         devLBLs.add(lblUntapPermanent);
-        devLBLs.add(lblUnlimitedLands);
-        devLBLs.add(lblHumanLife);
+        devLBLs.add(lblSetLife);
 
         final String constraints = "w 95%!, gap 0 0 5px 0";
         viewport.add(this.lblMilling, constraints);
         viewport.add(this.lblHandView, constraints);
         viewport.add(this.lblLibraryView, constraints);
+        viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblGenerateMana, constraints);
         viewport.add(this.lblSetupGame, constraints);
         viewport.add(this.lblTutor, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, constraints);
         viewport.add(this.lblUntapPermanent, constraints);
-        viewport.add(this.lblUnlimitedLands, constraints);
-        viewport.add(this.lblHumanLife, constraints);
+        viewport.add(this.lblSetLife, constraints);
     }
 
     /** Assembles swing components for "console" panel. */

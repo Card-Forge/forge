@@ -55,6 +55,9 @@ public class ForgePreferences extends Preferences {
     /** Library view toggle. */
     private boolean libraryView;
 
+    /** Unlimited land toggle. */
+    private boolean unlimitedLand;
+
     /** Developer mode. */
     private boolean developerMode;
 
@@ -146,6 +149,7 @@ public class ForgePreferences extends Preferences {
         this.setMillingLossCondition(this.getBoolean("loss.condition.milling", true));
         this.setHandView(this.getBoolean("developer.handview", true));
         this.setLibraryView(this.getBoolean("developer.libraryview", true));
+        this.setUnlimitedLand(this.getBoolean("developer.unlimitedland", true));
         this.setDeveloperMode(this.getBoolean("developer.mode", false));
 
         this.setUploadDraftAI(this.getBoolean("upload.Draft.AI", true));
@@ -221,6 +225,7 @@ public class ForgePreferences extends Preferences {
         this.set("loss.condition.milling", this.isMillingLossCondition());
         this.set("developer.handview", this.getHandView());
         this.set("developer.libraryview", this.getLibraryView());
+        this.set("developer.unlimitedland", this.getUnlimitedLand());
         this.set("developer.mode", this.isDeveloperMode());
         this.set("upload.Draft.AI", this.isUploadDraftAI());
 
@@ -413,6 +418,25 @@ public class ForgePreferences extends Preferences {
      */
     public void setLibraryView(final boolean b0) {
         this.libraryView = b0;
+    }
+
+    /**
+     * Determines if "unlimited land" option in dev mode is enabled or not.
+     * 
+     * @return boolean
+     */
+    public boolean getUnlimitedLand() {
+        return this.unlimitedLand;
+    }
+
+    /**
+     * Determines if "unlimited land" option in dev mode is enabled or not.
+     * 
+     * @param b0
+     *            &emsp; boolean
+     */
+    public void setUnlimitedLand(final boolean b0) {
+        this.unlimitedLand = b0;
     }
 
     /**
