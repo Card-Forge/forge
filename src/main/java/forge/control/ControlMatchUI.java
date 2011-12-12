@@ -100,9 +100,6 @@ public class ControlMatchUI {
         AllZone.getInputControl().updateObservers();
         this.view.getTabberController().updateObservers();
         this.mapKeyboardShortcuts();
-
-        // This line is probably not necessary.  Doublestrike 8-12-11
-        //((GuiTopLevel) AllZone.getDisplay()).getController().changeState(1);
     }
 
     /**

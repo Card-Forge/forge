@@ -70,6 +70,9 @@ public class ControlField {
     private final Player player;
     private final ViewField view;
 
+    private MouseMotionAdapter maCardOver;
+    private MouseAdapter maAvatar, maLibrary, maHand, maExiled, maGraveyard, maFlashback, maCardClick;
+
     /**
      * Child controller, applied to single field in battlefield. Manages player
      * view functions such as card observers, life total changes, graveyard
@@ -83,6 +86,8 @@ public class ControlField {
     public ControlField(final Player p, final ViewField v) {
         this.player = p;
         this.view = v;
+
+        initMouseAdapters();
     }
 
     /**
@@ -164,81 +169,16 @@ public class ControlField {
         this.addZoneListeners();
 
         // Battlefield card clicks
-        this.view.getTabletop().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-                final Card c = t.getDetailController().getCurrentCard();
-                final Input input = t.getInputController().getInputControl().getInput();
-
-                if (c != null) {
-                    if (c.isTapped()
-                            && ((input instanceof InputPayManaCost) || (input instanceof InputPayManaCostAbility))) {
-                        final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
-                                c.getUniqueNumber());
-                        for (final arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
-                            if (cp.getCard().isUntapped()) {
-                                break;
-                            }
-                        }
-                    }
-
-                    final CardList att = new CardList(AllZone.getCombat().getAttackers());
-                    if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
-                            && (input instanceof InputAttack)) {
-                        final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
-                                c.getUniqueNumber());
-                        for (final arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
-                            if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
-                                break;
-                            }
-                        }
-                    }
-
-                    if (e.isMetaDown()) {
-                        if (att.contains(c) && (input instanceof InputAttack)
-                                && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
-                            c.untap();
-                            AllZone.getCombat().removeFromCombat(c);
-                        } else if (input instanceof InputBlock) {
-                            if (c.getController().isHuman()) {
-                                AllZone.getCombat().removeFromCombat(c);
-                            }
-                            ((InputBlock) input).removeFromAllBlocking(c);
-                        }
-                    } else {
-                        t.getInputController().getInputControl()
-                                .selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Battlefield));
-                    }
-                }
-            }
-        });
+        this.view.getTabletop().removeMouseListener(maCardClick);
+        this.view.getTabletop().addMouseListener(maCardClick);
 
         // Battlefield card mouseover
-        this.view.getTabletop().addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(final MouseEvent me) {
-                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-                final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
-                if (c != null) {
-                    t.getDetailController().showCard(c);
-                    t.getPictureController().showCard(c);
-                }
-            }
-        });
+        this.view.getTabletop().removeMouseMotionListener(maCardOver);
+        this.view.getTabletop().addMouseMotionListener(maCardOver);
 
         // Player select
-        this.view.getAvatarArea().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-                if (ControlField.this.player.isComputer()) {
-                    t.getInputController().getInputControl().selectPlayer(AllZone.getComputerPlayer());
-                } else {
-                    t.getInputController().getInputControl().selectPlayer(AllZone.getHumanPlayer());
-                }
-            }
-        });
+        this.view.getAvatarArea().removeMouseListener(maAvatar);
+        this.view.getAvatarArea().addMouseListener(maAvatar);
     } // End addListeners()
 
     /**
@@ -248,107 +188,30 @@ public class ControlField {
     private void addZoneListeners() {
         // Graveyard card list button
         this.view.getLblGraveyard().enableHover();
-        this.view.getLblGraveyard().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                if (ControlField.this.player.isComputer()) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
-                            NewConstants.Lang.GuiDisplay.COMPUTER_GRAVEYARD).actionPerformed(null);
-                } else {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
-                            NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD).actionPerformed(null);
-                }
-            }
-        });
+        this.view.getLblGraveyard().removeMouseListener(maGraveyard);
+        this.view.getLblGraveyard().addMouseListener(maGraveyard);
         // Exile card list button
         this.view.getLblExile().enableHover();
-        this.view.getLblExile().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                if (ControlField.this.player.isComputer()) {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
-                            NewConstants.Lang.GuiDisplay.COMPUTER_REMOVED).actionPerformed(null);
-                } else {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
-                            NewConstants.Lang.GuiDisplay.HUMAN_REMOVED).actionPerformed(null);
-                }
-            }
-        });
+        this.view.getLblExile().removeMouseListener(maExiled);
+        this.view.getLblExile().addMouseListener(maExiled);
 
         // Library card list button
         if (Constant.Runtime.DEV_MODE[0]) {
             this.view.getLblLibrary().enableHover();
-            this.view.getLblLibrary().addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(final MouseEvent e) {
-                    if (!ControlField.this.player.isComputer()) {
-                        new ZoneAction(ControlField.this.player.getZone(Zone.Library), HumanLibrary.BASE)
-                        .actionPerformed(null);
-                    } else {
-                        // TODO DeckListAction has been rewritten to accept either
-                        // human or computer
-                        // decklists. However, NewConstants.Lang.GuiDisplay does not
-                        // have a computer
-                        // decklist available. That needs to be added for the below
-                        // line to work
-                        // properly. The current solution will work in the meantime.
-                        // Doublestrike 15-11-11.
-
-                        // new
-                        // DeckListAction(NewConstants.Lang.GuiDisplay).actionPerformed(null);
-
-                        new ZoneAction(ControlField.this.player.getZone(Zone.Library), ComputerLibrary.BASE)
-                        .actionPerformed(null);
-                    }
-                }
-            });
+            this.view.getLblLibrary().removeMouseListener(maLibrary);
+            this.view.getLblLibrary().addMouseListener(maLibrary);
         }
 
         // Flashback card list button
         this.view.getLblFlashback().enableHover();
-        this.view.getLblFlashback().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                if (!ControlField.this.player.isComputer()) {
-                    new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard),
-                            NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
-
-                        private static final long serialVersionUID = 8120331222693706164L;
-
-                        @Override
-                        protected Iterable<Card> getCardsAsIterable() {
-                            return new ImmutableIterableFrom<Card>(CardFactoryUtil.getExternalZoneActivationCards(AllZone
-                                    .getHumanPlayer()));
-                        }
-
-                        @Override
-                        protected void doAction(final Card c) {
-                            AllZone.getGameAction().playCard(c);
-                        }
-                    } .actionPerformed(null);
-                } else {
-                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
-                            NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK).actionPerformed(null);
-                }
-            }
-        });
+        this.view.getLblFlashback().removeMouseListener(maFlashback);
+        this.view.getLblFlashback().addMouseListener(maFlashback);
 
         // Hand button
         if (Constant.Runtime.DEV_MODE[0]) {
             this.view.getLblHand().enableHover();
-
-            this.view.getLblHand().addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(final MouseEvent e) {
-                    if (!ControlField.this.player.isComputer()) {
-                        new ZoneAction(ControlField.this.player.getZone(Zone.Hand), HumanHand.BASE)
-                        .actionPerformed(null);
-                    } else {
-                        new ZoneAction(ControlField.this.player.getZone(Zone.Hand), ComputerHand.BASE)
-                        .actionPerformed(null);
-                    }
-                }
-            });
+            this.view.getLblHand().removeMouseListener(maHand);
+            this.view.getLblHand().addMouseListener(maHand);
         }
     }
 
@@ -451,4 +314,169 @@ public class ControlField {
         }
     } // End ZoneAction
 
-} //end class ControlField
+    /** Simple method that inits the mouse adapters for listeners,
+     * here to simplify life in the constructor.
+     */
+    private void initMouseAdapters() {
+        // Hand listener
+        maHand = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (!ControlField.this.player.isComputer()) {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Hand), HumanHand.BASE)
+                    .actionPerformed(null);
+                } else {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Hand), ComputerHand.BASE)
+                    .actionPerformed(null);
+                }
+            }
+        };
+
+        // Flashback listener
+        maFlashback = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (!ControlField.this.player.isComputer()) {
+                    new ZoneAction(AllZone.getHumanPlayer().getZone(Zone.Graveyard),
+                            NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
+
+                        private static final long serialVersionUID = 8120331222693706164L;
+
+                        @Override
+                        protected Iterable<Card> getCardsAsIterable() {
+                            return new ImmutableIterableFrom<Card>(CardFactoryUtil.getExternalZoneActivationCards(AllZone
+                                    .getHumanPlayer()));
+                        }
+
+                        @Override
+                        protected void doAction(final Card c) {
+                            AllZone.getGameAction().playCard(c);
+                        }
+                    } .actionPerformed(null);
+                } else {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
+                            NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK).actionPerformed(null);
+                }
+            }
+        };
+
+        // Library listener
+        new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (!ControlField.this.player.isComputer()) {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Library), HumanLibrary.BASE)
+                    .actionPerformed(null);
+                } else {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Library), ComputerLibrary.BASE)
+                    .actionPerformed(null);
+                }
+            }
+        };
+
+        // Exiled adapter
+        maExiled = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
+                            NewConstants.Lang.GuiDisplay.COMPUTER_REMOVED).actionPerformed(null);
+                } else {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
+                            NewConstants.Lang.GuiDisplay.HUMAN_REMOVED).actionPerformed(null);
+                }
+            }
+        };
+
+        // Graveyard adapter
+        maGraveyard = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
+                            NewConstants.Lang.GuiDisplay.COMPUTER_GRAVEYARD).actionPerformed(null);
+                } else {
+                    new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
+                            NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD).actionPerformed(null);
+                }
+            }
+        };
+
+        // Avatar
+        maAvatar = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                if (ControlField.this.player.isComputer()) {
+                    t.getInputController().getInputControl().selectPlayer(AllZone.getComputerPlayer());
+                } else {
+                    t.getInputController().getInputControl().selectPlayer(AllZone.getHumanPlayer());
+                }
+            }
+        };
+
+        // Battlefield card mouse over
+        maCardOver = new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(final MouseEvent me) {
+                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
+                if (c != null) {
+                    t.getDetailController().showCard(c);
+                    t.getPictureController().showCard(c);
+                }
+            }
+        };
+
+        // Battlefield card
+        maCardClick = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                final Card c = t.getDetailController().getCurrentCard();
+                final Input input = t.getInputController().getInputControl().getInput();
+
+                if (c != null) {
+                    if (c.isTapped()
+                            && ((input instanceof InputPayManaCost) || (input instanceof InputPayManaCostAbility))) {
+                        final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
+                                c.getUniqueNumber());
+                        for (final arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
+                            if (cp.getCard().isUntapped()) {
+                                break;
+                            }
+                        }
+                    }
+
+                    final CardList att = new CardList(AllZone.getCombat().getAttackers());
+                    if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
+                            && (input instanceof InputAttack)) {
+                        final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(
+                                c.getUniqueNumber());
+                        for (final arcane.ui.CardPanel cp : cardPanel.getAttachedPanels()) {
+                            if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
+                                break;
+                            }
+                        }
+                    }
+
+                    if (e.isMetaDown()) {
+                        if (att.contains(c) && (input instanceof InputAttack)
+                                && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
+                            c.untap();
+                            AllZone.getCombat().removeFromCombat(c);
+                        } else if (input instanceof InputBlock) {
+                            if (c.getController().isHuman()) {
+                                AllZone.getCombat().removeFromCombat(c);
+                            }
+                            ((InputBlock) input).removeFromAllBlocking(c);
+                        }
+                    } else {
+                        t.getInputController().getInputControl()
+                                .selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Battlefield));
+                    }
+                }
+            }
+        };
+    } // End initMouseAdapters()
+} // End class ControlField
