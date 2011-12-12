@@ -562,6 +562,22 @@ public class CardListUtil {
         return cmc;
 
     } // sumCMC
+    
+    // Get the average converted mana cost of a card list
+    /**
+     * <p>
+     * getAverageCMC.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.CardList} object.
+     * @return a float.
+     */
+    public static float getAverageCMC(final CardList c) {
+
+        return sumCMC(c) / c.size();
+
+    } 
 
     /**
      * 

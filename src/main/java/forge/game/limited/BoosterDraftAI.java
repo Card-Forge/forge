@@ -382,14 +382,16 @@ public class BoosterDraftAI {
         creatures.sort(this.bestCreature);
         creatures.reverse();
 
+        // 1.Add up to 15 on-color creatures
         int i = 0;
-        while ((nCreatures > 0) && (i < creatures.size())) {
+        while (nCreatures > 0 && creatures.size() > 0) {
             final Card c = creatures.get(i);
 
             outList.add(c);
             cardsNeeded--;
             nCreatures--;
             aiPlayables.remove(c);
+            creatures.remove(c);
 
             if (Constant.Runtime.DEV_MODE[0]) {
                 System.out.println("Creature[" + i + "]:" + c.getName() + " (" + c.getManaCost() + ")");
@@ -398,7 +400,7 @@ public class BoosterDraftAI {
             i++;
         }
 
-        CardList otherCreatures = aiPlayables.getType("Creature");
+        /*CardList otherCreatures = aiPlayables.getType("Creature");
         while ((nCreatures > 1) && (otherCreatures.size() > 1)) {
             final Card c = otherCreatures.get(MyRandom.getRandom().nextInt(otherCreatures.size() - 1));
             outList.add(c);
@@ -411,13 +413,14 @@ public class BoosterDraftAI {
             if (Constant.Runtime.DEV_MODE[0]) {
                 System.out.println("AddCreature: " + c.getName() + " (" + c.getManaCost() + ")");
             }
-        }
+        }*/
 
         CardList others = aiPlayables.getNotType("Creature").getNotType("Land")
                 .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
 
+        // 2.Try to fill up to 22 with on-color non-creature cards
         int ii = 0;
-        while ((cardsNeeded > 0) && (others.size() > 1)) {
+        while (cardsNeeded > 0 && others.size() > 1) {
             final Card c = others.get(MyRandom.getRandom().nextInt(others.size() - 1));
 
             // out.addMain(c.getName());
@@ -433,6 +436,34 @@ public class BoosterDraftAI {
             }
         }
 
+        // 3.Try to fill up to 22 with on-color creatures cards (if more than 15 are present)
+        while (cardsNeeded > 0 && (0 < creatures.size())) {
+            final Card c = creatures.get(i);
+
+            outList.add(c);
+            cardsNeeded--;
+            aiPlayables.remove(c);
+            creatures.remove(c);
+
+            if (Constant.Runtime.DEV_MODE[0]) {
+                System.out.println("Creature[" + i + "]:" + c.getName() + " (" + c.getManaCost() + ")");
+            }
+
+            i++;
+        }
+
+        CardList nonLands = aiPlayables.getNotType("Land")
+                .getOnly2Colors(pClrs.getColor1(), pClrs.getColor2());
+
+        // 4. If there are still on-color cards and the average cmc is low add a 23rd card.
+        if (cardsNeeded == 0 && CardListUtil.getAverageCMC(outList) < 3 && !nonLands.isEmpty()) {
+            Card c = nonLands.get(0);
+            outList.add(c);
+            aiPlayables.remove(0);
+            landsNeeded--;
+        }
+
+        // 5. If there are still less than 22 non-land cards add off-color cards.
         ii = 0;
         CardList z = aiPlayables.getNotType("Land");
         while ((cardsNeeded > 0) && (z.size() > 1)) {
@@ -454,8 +485,9 @@ public class BoosterDraftAI {
             }
         }
 
+        // 6. If it's not a mono color deck, add non-basic lands.
         CardList lands = aiPlayables.getType("Land");
-        while ((landsNeeded > 0) && (lands.size() > 0)) {
+        while (!pClrs.getColor1().equals(pClrs.getColor2()) && landsNeeded > 0 && lands.size() > 0) {
             final Card c = lands.get(0);
 
             outList.add(c);
