@@ -608,10 +608,10 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
      * Sets the label ui.
      * 
      * @param labelUI
-     *            the labelUI to set
+     *            the new label ui
      */
-    public static void setLabelUI(final LabelUI labelUI0) {
-        MultiLineLabelUI.labelUI = labelUI0;
+    public static void setLabelUI(final LabelUI labelUI) {
+        MultiLineLabelUI.labelUI = labelUI;
     }
 
     /**

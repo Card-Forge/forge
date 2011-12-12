@@ -562,7 +562,7 @@ public class CardListUtil {
         return cmc;
 
     } // sumCMC
-    
+
     // Get the average converted mana cost of a card list
     /**
      * <p>
@@ -577,7 +577,7 @@ public class CardListUtil {
 
         return sumCMC(c) / c.size();
 
-    } 
+    }
 
     /**
      * 

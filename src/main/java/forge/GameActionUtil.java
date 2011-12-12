@@ -1334,8 +1334,8 @@ public final class GameActionUtil {
             }
         }
         // is a card of a certain type/color present?
-        if (specialConditions.contains("isPresent")) { 
-                                                       
+        if (specialConditions.contains("isPresent")) {
+
             final String requirements = specialConditions.replaceAll("isPresent ", "");
             CardList cardsinPlay = AllZoneUtil.getCardsIn(Zone.Battlefield);
             final String[] conditions = requirements.split(",");

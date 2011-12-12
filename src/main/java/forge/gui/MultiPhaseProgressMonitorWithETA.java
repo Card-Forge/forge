@@ -56,8 +56,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * @see #MultiPhaseProgressMonitorWithETA(String,int,long,float,float[])
      */
     public MultiPhaseProgressMonitorWithETA(final String neoTitle, final int numPhases,
-            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec)
-    {
+            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec) {
         this(neoTitle, numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec, null);
     }
 
@@ -88,8 +87,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * @see BaseProgressMonitor#BaseProgressMonitor(int,long,float,float[])
      */
     public MultiPhaseProgressMonitorWithETA(final String neoTitle, final int numPhases,
-            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec,
-            final float[] phaseWeights) {
+            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec, final float[] phaseWeights) {
         super(numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec, phaseWeights);
 
         if (!SwingUtilities.isEventDispatchThread()) {
@@ -114,65 +112,67 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
         System.out.println("Initializing...");
 
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                final int totalUnitsFirstPhase = 5000;
+                final MultiPhaseProgressMonitorWithETA monitor = new MultiPhaseProgressMonitorWithETA(
+                        "Testing 2 phases", 2, totalUnitsFirstPhase, 1.0f, new float[] { 2, 1 });
+
+                final SwingWorker<Object, Object> worker = new SwingWorker<Object, Object>() {
                     @Override
-                    public void run() {
+                    public Object doInBackground() {
 
-                        final int totalUnitsFirstPhase = 5000;
-                        final MultiPhaseProgressMonitorWithETA monitor = new MultiPhaseProgressMonitorWithETA(
-                                "Testing 2 phases", 2, totalUnitsFirstPhase, 1.0f, new float[] { 2, 1 });
+                        System.out.println("Running...");
 
-                        final SwingWorker<Object, Object> worker = new SwingWorker<Object, Object>() {
-                            @Override
-                            public Object doInBackground() {
+                        for (int i = 0; i <= totalUnitsFirstPhase; i++) {
+                            monitor.incrementUnitsCompletedThisPhase(1);
 
-                                System.out.println("Running...");
+                            System.out.print("\ri = " + i);
 
-                                for (int i = 0; i <= totalUnitsFirstPhase; i++) {
-                                    monitor.incrementUnitsCompletedThisPhase(1);
-
-                                    System.out.print("\ri = " + i);
-
-                                    try {
-                                        Thread.sleep(1);
-                                    } catch (final InterruptedException ignored) {
-                                        // blank
-                                    }
-                                }
-                                System.out.println();
-
-                                final int totalUnitsSecondPhase = 2000;
-                                monitor.markCurrentPhaseAsComplete(totalUnitsSecondPhase);
-
-                                for (int i = 0; i <= totalUnitsSecondPhase; i++) {
-                                    monitor.incrementUnitsCompletedThisPhase(1);
-
-                                    System.out.print("\ri = " + i);
-
-                                    try {
-                                        Thread.sleep(1);
-                                    } catch (final InterruptedException ignored) {
-                                        // blank
-                                    }
-                                }
-
-                                monitor.markCurrentPhaseAsComplete(0);
-
-                                System.out.println();
-                                System.out.println("Done!");
-
-                                return null;
+                            try {
+                                Thread.sleep(1);
+                            } catch (final InterruptedException ignored) {
+                                // blank
                             }
+                        }
+                        System.out.println();
 
-                        };
+                        final int totalUnitsSecondPhase = 2000;
+                        monitor.markCurrentPhaseAsComplete(totalUnitsSecondPhase);
 
-                        worker.execute();
+                        for (int i = 0; i <= totalUnitsSecondPhase; i++) {
+                            monitor.incrementUnitsCompletedThisPhase(1);
+
+                            System.out.print("\ri = " + i);
+
+                            try {
+                                Thread.sleep(1);
+                            } catch (final InterruptedException ignored) {
+                                // blank
+                            }
+                        }
+
+                        monitor.markCurrentPhaseAsComplete(0);
+
+                        System.out.println();
+                        System.out.println("Done!");
+
+                        return null;
                     }
-                });
+
+                };
+
+                worker.execute();
+            }
+        });
     }
 
     /**
-     * @param numUnits cannot be higher than Integer.MAX_VALUE
-     *
+     * Sets the total units this phase.
+     * 
+     * @param numUnits
+     *            cannot be higher than Integer.MAX_VALUE
      * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#setTotalUnitsThisPhase(long)
      */
     @Override
@@ -186,42 +186,44 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
         if (numUnits > 0) {
             // dialog must exist before we exit this method.
             UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
-                        @Override
-                        public void run() {
-                            // (Re)create the progress bar.
-                            if (MultiPhaseProgressMonitorWithETA.this.dialog != null) {
-                                MultiPhaseProgressMonitorWithETA.this.dialog.dispose();
-                                MultiPhaseProgressMonitorWithETA.this.dialog = null;
-                            }
+                @Override
+                public void run() {
+                    // (Re)create the progress bar.
+                    if (MultiPhaseProgressMonitorWithETA.this.dialog != null) {
+                        MultiPhaseProgressMonitorWithETA.this.dialog.dispose();
+                        MultiPhaseProgressMonitorWithETA.this.dialog = null;
+                    }
 
-                            MultiPhaseProgressMonitorWithETA.this.dialog = new GuiProgressBarWindow();
-                        }
-                    });
+                    MultiPhaseProgressMonitorWithETA.this.dialog = new GuiProgressBarWindow();
+                }
+            });
         }
 
         SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        MultiPhaseProgressMonitorWithETA.this.dialog
-                                .setTitle(MultiPhaseProgressMonitorWithETA.this.title);
-                        MultiPhaseProgressMonitorWithETA.this.dialog
-                                .setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                        MultiPhaseProgressMonitorWithETA.this.dialog.setVisible(true);
-                        MultiPhaseProgressMonitorWithETA.this.dialog.setResizable(true);
-                        MultiPhaseProgressMonitorWithETA.this.dialog.getProgressBar().setIndeterminate(false);
-                        MultiPhaseProgressMonitorWithETA.this.dialog.setProgressRange(0, (int) numUnits);
-                        MultiPhaseProgressMonitorWithETA.this.dialog.reset();
+            @Override
+            public void run() {
+                MultiPhaseProgressMonitorWithETA.this.dialog.setTitle(MultiPhaseProgressMonitorWithETA.this.title);
+                MultiPhaseProgressMonitorWithETA.this.dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                MultiPhaseProgressMonitorWithETA.this.dialog.setVisible(true);
+                MultiPhaseProgressMonitorWithETA.this.dialog.setResizable(true);
+                MultiPhaseProgressMonitorWithETA.this.dialog.getProgressBar().setIndeterminate(false);
+                MultiPhaseProgressMonitorWithETA.this.dialog.setProgressRange(0, (int) numUnits);
+                MultiPhaseProgressMonitorWithETA.this.dialog.reset();
 
-                        final JProgressBar bar = MultiPhaseProgressMonitorWithETA.this.dialog.getProgressBar();
-                        bar.setString("");
-                        bar.setStringPainted(true);
-                        bar.setValue(0);
-                    }
-                });
+                final JProgressBar bar = MultiPhaseProgressMonitorWithETA.this.dialog.getProgressBar();
+                bar.setString("");
+                bar.setStringPainted(true);
+                bar.setValue(0);
+            }
+        });
 
     }
 
     /**
+     * Increment units completed this phase.
+     * 
+     * @param numUnits
+     *            the num units
      * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#incrementUnitsCompletedThisPhase(long)
      */
     @Override
@@ -229,13 +231,13 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
         super.incrementUnitsCompletedThisPhase(numUnits);
 
         SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int i = 0; i < numUnits; i++) {
-                            MultiPhaseProgressMonitorWithETA.this.dialog.increment();
-                        }
-                    }
-                });
+            @Override
+            public void run() {
+                for (int i = 0; i < numUnits; i++) {
+                    MultiPhaseProgressMonitorWithETA.this.dialog.increment();
+                }
+            }
+        });
 
         if (this.shouldUpdateUI()) {
 
@@ -300,11 +302,11 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
     @Override
     public final void dispose() {
         SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        MultiPhaseProgressMonitorWithETA.this.getDialog().dispose();
-                    }
-                });
+            @Override
+            public void run() {
+                MultiPhaseProgressMonitorWithETA.this.getDialog().dispose();
+            }
+        });
     }
 
     /**

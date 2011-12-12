@@ -125,7 +125,7 @@ public class HomeTopLevel extends FPanel {
 
         btnEditor = new FButton();
         btnEditor.setText("Deck Editor");
-        
+
         btnExit = new FButton();
         btnExit.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) { exit(); }

@@ -260,12 +260,12 @@ public class AbilityFactoryMana {
 
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
-        
+
         if (!AbilityFactory.checkConditional(sa)) {
             AbilityFactoryMana.doDrawback(af, abMana, card);
             return;
         }
-        
+
         // Spells are not undoable
         abMana.setUndoable(af.isAbility() && abMana.isUndoable());
 

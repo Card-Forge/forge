@@ -1446,7 +1446,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else {
             this.counters.put(counterName, Integer.valueOf(n));
         }
-        
+
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Card", this);
