@@ -72,7 +72,7 @@ public class ViewTopLevel extends FPanel {
     private double battleWpct = 0.68;
     private double battleHpct = 0.73;
     private double pictureHpct = 0.4;
-    private double detailHpct = 0.4;
+    private double detailHpct = 0.45;
 
     private static final int BOUNDARY_THICKNESS_PX = 6;
 
