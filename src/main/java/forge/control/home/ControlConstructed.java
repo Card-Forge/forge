@@ -411,8 +411,8 @@ public class ControlConstructed {
 
     /** Fired when start button is pressed; checks various conditions from lists and starts game. */
     public void launch() {
-        String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValues());
-        String[] aiSelected = oa2sa(currentAISelection.getSelectedValues());
+        String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValuesList().toArray());
+        String[] aiSelected = oa2sa(currentAISelection.getSelectedValuesList().toArray());
 
         // Check color-based deck selection for appropriate length
         if (currentHumanSelection.getName().equals("lstColorsHuman")) {
@@ -488,6 +488,8 @@ public class ControlConstructed {
 
     /**
      * View deck list.
+     * 
+     * @param player &emsp; String
      */
     public void viewDeckList(final String player) {
         new DeckListAction(player).actionPerformed(null);
@@ -502,24 +504,23 @@ public class ControlConstructed {
             player = playerIn;
         }
 
-        private static final long serialVersionUID = 9874492387239847L;
         private String player;
 
         public void actionPerformed(final ActionEvent e) {
-            if (player.equals("Human") && 
-                    (currentHumanSelection.getName().equals("lstColorsHuman") ||
-                    currentHumanSelection.getName().equals("lstThemesHuman"))) {
+            if (player.equals("Human")
+                    && (currentHumanSelection.getName().equals("lstColorsHuman")
+                    || currentHumanSelection.getName().equals("lstThemesHuman"))) {
                 return;
             }
-            if (player.equals("Computer") && 
-                    (currentAISelection.getName().equals("lstColorsAI") ||
-                    currentAISelection.getName().equals("lstThemesAI"))) {
+            if (player.equals("Computer")
+                    && (currentAISelection.getName().equals("lstColorsAI")
+                    || currentAISelection.getName().equals("lstThemesAI"))) {
                 return;
             }
-            
-            Deck targetDeck = (player.equals("Human")) ? 
-                    AllZone.getDeckManager().getDeck(oa2sa(currentHumanSelection.getSelectedValues())[0]) :
-                    AllZone.getDeckManager().getDeck(oa2sa(currentAISelection.getSelectedValues())[0]);
+
+            Deck targetDeck = (player.equals("Human"))
+                    ? AllZone.getDeckManager().getDeck(oa2sa(currentHumanSelection.getSelectedValuesList().toArray())[0])
+                    : AllZone.getDeckManager().getDeck(oa2sa(currentAISelection.getSelectedValuesList().toArray())[0]);
 
             final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
 
