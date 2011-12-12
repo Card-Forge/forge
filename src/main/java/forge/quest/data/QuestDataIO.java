@@ -86,6 +86,9 @@ public class QuestDataIO {
             QuestData data = null;
 
             final File xmlSaveFile = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
+            if (!xmlSaveFile.exists()) {
+                return new QuestData();
+            }
 
             final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
 
