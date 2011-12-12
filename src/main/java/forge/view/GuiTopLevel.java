@@ -24,6 +24,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.Card;
@@ -32,6 +33,7 @@ import forge.CardList;
 import forge.Constant;
 import forge.Display;
 import forge.GuiMultipleBlockers;
+import forge.ImageCache;
 import forge.MyButton;
 import forge.Player;
 import forge.Singletons;
@@ -39,6 +41,7 @@ import forge.control.ControlAllUI;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
 import forge.view.match.ViewField;
+import forge.view.swing.OldGuiNewGame;
 import forge.view.toolbox.FOverlay;
 
 /**
@@ -401,6 +404,17 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         fp.setHandView(Constant.Runtime.HANDVIEW[0]);
         fp.setLibraryView(Constant.Runtime.LIBRARYVIEW[0]);
         fp.setUILayout(control.getMatchController().getView().getLayoutParams());
+
+        try {
+            fp.save();
+        } catch (final Exception ex) {
+            final int result = JOptionPane.showConfirmDialog(this,
+                    "Preferences could not be saved. Continue to close without saving ?", "Confirm Exit",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (result != JOptionPane.OK_OPTION) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -414,7 +428,7 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         this.control.getMatchView().getDetailController().showCard(c);
         this.control.getMatchView().getPictureController().showCard(c);
     }
-    
+
     /**
      * Required by display interface. Due to be deprecated: handled by control
      * class.
