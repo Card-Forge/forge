@@ -19,8 +19,6 @@ package forge.control.match;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import forge.AllZone;
 import forge.GuiInput;
@@ -35,6 +33,8 @@ public class ControlInput {
 
     private final GuiInput inputControl;
 
+    private ActionListener alCancel = null, alOK = null;
+
     /**
      * Child controller - handles operations related to input panel.
      * 
@@ -44,19 +44,8 @@ public class ControlInput {
     public ControlInput(final ViewInput v) {
         this.view = v;
         this.inputControl = new GuiInput();
-    }
 
-    /** Adds listeners to input area. */
-    public void addListeners() {
-        this.view.getBtnCancel().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent evt) {
-                ControlInput.this.btnCancelActionPerformed(evt);
-                ControlInput.this.view.getBtnOK().requestFocusInWindow();
-            }
-        });
-        //
-        this.view.getBtnOK().addActionListener(new ActionListener() {
+        this.alOK = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent evt) {
                 ControlInput.this.btnOKActionPerformed(evt);
@@ -68,18 +57,24 @@ public class ControlInput {
                 }
                 ControlInput.this.view.getBtnOK().requestFocusInWindow();
             }
-        });
-        //
-        this.view.getBtnOK().addKeyListener(new KeyAdapter() {
+        };
+
+        this.alCancel = new ActionListener() {
             @Override
-            public void keyPressed(final KeyEvent arg0) {
-                // TODO make triggers on escape
-                final int code = arg0.getKeyCode();
-                if (code == KeyEvent.VK_ESCAPE) {
-                    ControlInput.this.view.getBtnOK().doClick();
-                }
+            public void actionPerformed(final ActionEvent evt) {
+                ControlInput.this.btnCancelActionPerformed(evt);
+                ControlInput.this.view.getBtnOK().requestFocusInWindow();
             }
-        });
+        };
+    }
+
+    /** Adds listeners to input area. */
+    public void addListeners() {
+        this.view.getBtnCancel().removeActionListener(alCancel);
+        this.view.getBtnCancel().addActionListener(alCancel);
+
+        this.view.getBtnOK().removeActionListener(alOK);
+        this.view.getBtnOK().addActionListener(alOK);
     }
 
     /**
