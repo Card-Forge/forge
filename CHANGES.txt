@@ -320,6 +320,50 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- add double click to choose a deck on the HomeScreen
+- flip order of abilities on AEther Spellbomb to match the card
+- Activate Ripple prompt now uses standard showYesNoDialog
+- add Custom Pool=true to JuzamJediCube.dck
+- Round 3 update: still largely incomplete but functionality will come quickly. This commit was made so others can help out if necessary.
+- fix the first NPE related to playing Quest Mode from current incarnation of New GUI Home Screen
+- fix type on new Utilities screen
+- Fixed input control bug.
+- In ViewConstructed:
+1) only show Constructed type decks that aren't custom pools
+2) display a sorted list of Constructed decks
+- remove Elspeth Emblem code. This was converted to AF a while ago.
+- Rudiments of Quest mode now working.
+- Updates to ViewConstructed in home screen.
+- Fixed Suffer the Past somewhat.
+- Little timing improvements in damageChoosingTargets AI.
+- Fixed the possibility to get stuck in discardUnless.
+- Constructed view in home screen finished.
+- Code fully checkstyled, commented, and now implements MVC architecture.
+- Fixed Dream Fighter.
+- Enabled conditions for mana abilities.
+- Quest mode 95% finished - MVC, checkstyle, debug.
+- Removed the unused cancelCommand.
+- The Constructed decks on the Home Screen are now (once again) sorted in alphabetical order with the Random option first and custom pools are filtered out.
+- add an Exit button to HomeTopLevel
+- Add a View DeckList option to the Home screen. A couple points:
+1) It only works for pre-constructed decks (currently)
+2) Probably can be expanded to Theme decks by generating a sample to display
+3) TODO - button should be enabled/disabled as appropriate
+4) currently doesn't obey FSkin
+- Fix preferences save bug.
+- Coupla fixes to SubButton (the button used for submenus in the home screen).
+- Fixed phase flakiness and mulligan bug.
+- fix a small alignment error (from when I was testing) with the Human Deck List button on Home Screen
+- Fixed double listener bug in tabber.
+- Added toggle to "unlimited lands" button.
+- Fixed double listener bug in hand area.
+- Fixed double listener bug in field.
+- Aesthetic changes to constructed mode view in home screen.
+- Also, a few checkstyle and compiler warning fixes.
+- Checkstyle and compiler warnings fully fixed for ControlConstructed.java.
+- Changed the default layout parameters to make the detail panel a little bit bigger.
+- Reversed changes on compiler warning fix - yikes.
+- Added the recent commit logs to changes.txt. I may try a snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -383,6 +427,12 @@ Rustmouth Ogre
 Mountain Titan
 Riku of Two Reflections
 Soldevi Golem
+Serum Powder
+Culling Scales
+River of Tears
+Cerebral Vortex
+Seedtime
+Surgespanner
 
 
 end
