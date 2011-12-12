@@ -152,7 +152,7 @@ public abstract class DeckGeneration {
      */
     private static Deck generateConstructedThemeDeck() {
         final GenerateThemeDeck gen = new GenerateThemeDeck();
-        final ArrayList<String> tNames = gen.getThemeNames();
+        final ArrayList<String> tNames = GenerateThemeDeck.getThemeNames();
         tNames.add(0, "Random");
         final Object o = GuiUtils.getChoice("Select a theme.", tNames.toArray());
 
