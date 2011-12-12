@@ -33,14 +33,18 @@ import forge.view.toolbox.FRoundedPanel;
 public class ViewHand extends FRoundedPanel {
     private ControlHand control;
     private HandArea hand;
+    private ViewTopLevel topLevel;
 
     /**
-     * VIEW - Swing components for user hand.
+     * Swing components for user hand.
+     * 
+     * @param v0 &emsp; The ViewTopLevel parent.
      */
-    public ViewHand() {
+    public ViewHand(ViewTopLevel v0) {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller, null);
         ViewHand.this.setBackground(AllZone.getSkin().getColor("theme"));
+        topLevel = v0;
 
         scroller.setViewportView(ViewHand.this.hand);
         scroller.setOpaque(false);
@@ -71,5 +75,10 @@ public class ViewHand extends FRoundedPanel {
      */
     public HandArea getHandArea() {
         return ViewHand.this.hand;
+    }
+
+    /** @return ViewTopLevel */
+    public ViewTopLevel getTopLevel() {
+        return this.topLevel;
     }
 }

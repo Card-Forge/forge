@@ -134,7 +134,7 @@ public class ViewTopLevel extends FPanel {
 
         // Declare and add various view components
         input = new ViewInput();
-        hand = new ViewHand();
+        hand = new ViewHand(this);
         dock = new ViewDock();
         battlefield = new ViewBattlefield();
         tabber = new ViewTabber();

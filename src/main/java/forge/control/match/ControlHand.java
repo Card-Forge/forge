@@ -51,6 +51,9 @@ public class ControlHand {
     private final List<Card> cardsInPanel;
     private final ViewHand view;
 
+    private MouseAdapter maCardClick;
+    private MouseMotionAdapter maCardMove;
+
     /**
      * Child controller - handles operations related to cards in user's hand and
      * their Swing components, which are assembled in ViewHand.
@@ -61,11 +64,37 @@ public class ControlHand {
     public ControlHand(final ViewHand v) {
         this.view = v;
         this.cardsInPanel = new ArrayList<Card>();
+
+        maCardClick = new MouseAdapter() {
+            // Card click
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (e.getButton() != MouseEvent.BUTTON1) {
+                    return;
+                }
+                final Card c = view.getHandArea().getCardFromMouseOverPanel();
+                if (c != null) {
+                    view.getTopLevel().getInputController().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                    view.getTopLevel().getInputController().getView().getBtnOK().requestFocusInWindow();
+                }
+            }
+        };
+
+        maCardMove = new MouseMotionAdapter() {
+            // Card mouseover
+            @Override
+            public void mouseMoved(final MouseEvent me) {
+                final Card c = view.getHandArea().getCardFromMouseOverPanel();
+                if (c != null) {
+                    ((GuiTopLevel) AllZone.getDisplay()).setCard(c);
+                }
+            }
+        };
     }
 
     /** Adds observers to hand panel. */
     public void addObservers() {
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        final ViewTopLevel t = view.getTopLevel();
 
         AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(new Observer() {
             @Override
@@ -128,33 +157,11 @@ public class ControlHand {
 
     /** Adds listeners to hand panel: clicks, mouseover, etc. */
     public void addListeners() {
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        view.getHandArea().removeMouseListener(maCardClick);
+        view.getHandArea().addMouseListener(maCardClick);
 
-        view.getHandArea().addMouseListener(new MouseAdapter() {
-            // Card click
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                if (e.getButton() != MouseEvent.BUTTON1) {
-                    return;
-                }
-                final Card c = view.getHandArea().getCardFromMouseOverPanel();
-                if (c != null) {
-                    t.getInputController().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
-                    t.getInputController().getView().getBtnOK().requestFocusInWindow();
-                }
-            }
-        });
-
-        view.getHandArea().addMouseMotionListener(new MouseMotionAdapter() {
-            // Card mouseover
-            @Override
-            public void mouseMoved(final MouseEvent me) {
-                final Card c = view.getHandArea().getCardFromMouseOverPanel();
-                if (c != null) {
-                    ((GuiTopLevel) AllZone.getDisplay()).setCard(c);
-                }
-            } // mouseMoved
-        });
+        view.getHandArea().removeMouseMotionListener(maCardMove);
+        view.getHandArea().addMouseMotionListener(maCardMove);
     }
 
     /**
