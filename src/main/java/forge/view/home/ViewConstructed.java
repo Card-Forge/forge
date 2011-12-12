@@ -33,7 +33,7 @@ public class ViewConstructed extends JPanel {
 
     private Timer timer1 = null;
     private int counter;
-    private JList<String> lstColorsHuman, lstColorsAI, lstThemesHuman,
+    private JList lstColorsHuman, lstColorsAI, lstThemesHuman,
         lstThemesAI, lstDecksHuman, lstDecksAI;
     private SubButton btnHumanDeckList, btnAIDeckList;
     private ControlConstructed control;
@@ -53,22 +53,22 @@ public class ViewConstructed extends JPanel {
         control = new ControlConstructed(this);
 
         // Assemble JLists with arrays from above.
-        lstColorsHuman = new JList<String>();
+        lstColorsHuman = new JList();
         lstColorsHuman.setListData(control.oa2sa(control.getColorNames()));
 
-        lstColorsAI = new JList<String>();
+        lstColorsAI = new JList();
         lstColorsAI.setListData(control.oa2sa(control.getColorNames()));
 
-        lstDecksHuman = new JList<String>();
+        lstDecksHuman = new JList();
         lstDecksHuman.setListData(control.oa2sa(control.getDeckNames()));
 
-        lstDecksAI = new JList<String>();
+        lstDecksAI = new JList();
         lstDecksAI.setListData(control.oa2sa(control.getDeckNames()));
 
-        lstThemesHuman = new JList<String>();
+        lstThemesHuman = new JList();
         lstThemesHuman.setListData(control.oa2sa(control.getThemeNames()));
 
-        lstThemesAI = new JList<String>();
+        lstThemesAI = new JList();
         lstThemesAI.setListData(control.oa2sa(control.getThemeNames()));
 
         // Human deck options area
@@ -194,10 +194,10 @@ public class ViewConstructed extends JPanel {
      *
      * @param lst0 &emsp; JList
      */
-    public void remind(JList<String> lst0) {
+    public void remind(JList lst0) {
         if (timer1 != null) { return; }
 
-        final JList<String> target = lst0;
+        final JList target = lst0;
         final int[] steps = {210, 215, 220, 220, 220, 215, 210};
         final Color oldBG = lst0.getBackground();
         counter = 0;
@@ -223,32 +223,32 @@ public class ViewConstructed extends JPanel {
 
     //========= RETRIEVAL FUNCTIONS
     /** @return JList */
-    public JList<String> getLstColorsHuman() {
+    public JList getLstColorsHuman() {
         return lstColorsHuman;
     }
 
     /** @return JList */
-    public JList<String> getLstThemesHuman() {
+    public JList getLstThemesHuman() {
         return lstThemesHuman;
     }
 
     /** @return JList */
-    public JList<String> getLstDecksHuman() {
+    public JList getLstDecksHuman() {
         return lstDecksHuman;
     }
 
     /** @return JList */
-    public JList<String> getLstColorsAI() {
+    public JList getLstColorsAI() {
         return lstColorsAI;
     }
 
     /** @return JList */
-    public JList<String> getLstThemesAI() {
+    public JList getLstThemesAI() {
         return lstThemesAI;
     }
 
     /** @return JList */
-    public JList<String> getLstDecksAI() {
+    public JList getLstDecksAI() {
         return lstDecksAI;
     }
 

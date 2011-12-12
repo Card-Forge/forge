@@ -38,8 +38,8 @@ import forge.view.home.ViewConstructed;
 public class ControlConstructed {
     private ViewConstructed view;
 
-    private JList<String> currentHumanSelection = null;
-    private JList<String> currentAISelection = null;
+    private JList currentHumanSelection = null;
+    private JList currentAISelection = null;
 
     private Map<String, String> colorVals;
     private List<String> themeNames;
@@ -196,7 +196,7 @@ public class ControlConstructed {
      *
      * @param lst0 &emsp; a JList that has been clicked
      */
-    public void regulateHuman(JList<String> lst0) {
+    public void regulateHuman(JList lst0) {
         if (currentHumanSelection != null && lst0 != currentHumanSelection) {
             currentHumanSelection.clearSelection();
         }
@@ -237,7 +237,7 @@ public class ControlConstructed {
      * 
      * @param lst0 &emsp; a JList that has been clicked
      */
-    public void regulateAI(JList<String> lst0) {
+    public void regulateAI(JList lst0) {
         if (currentAISelection != null && lst0 != currentAISelection) {
             currentAISelection.clearSelection();
         }
@@ -411,8 +411,8 @@ public class ControlConstructed {
 
     /** Fired when start button is pressed; checks various conditions from lists and starts game. */
     public void launch() {
-        String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValuesList().toArray());
-        String[] aiSelected = oa2sa(currentAISelection.getSelectedValuesList().toArray());
+        String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValues());
+        String[] aiSelected = oa2sa(currentAISelection.getSelectedValues());
 
         // Check color-based deck selection for appropriate length
         if (currentHumanSelection.getName().equals("lstColorsHuman")) {
@@ -519,8 +519,8 @@ public class ControlConstructed {
             }
 
             Deck targetDeck = (player.equals("Human"))
-                    ? AllZone.getDeckManager().getDeck(oa2sa(currentHumanSelection.getSelectedValuesList().toArray())[0])
-                    : AllZone.getDeckManager().getDeck(oa2sa(currentAISelection.getSelectedValuesList().toArray())[0]);
+                    ? AllZone.getDeckManager().getDeck(oa2sa(currentHumanSelection.getSelectedValues())[0])
+                    : AllZone.getDeckManager().getDeck(oa2sa(currentAISelection.getSelectedValues())[0]);
 
             final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
 
