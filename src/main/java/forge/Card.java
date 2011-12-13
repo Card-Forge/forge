@@ -2515,7 +2515,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         if (sb.length() > 0) {
-            sb.append("\r\n\r\n");
+            sb.append("\r\n");
+            if (sbLong.length() > 0) {
+                sb.append("\r\n");
+            }
         }
         if (sbLong.length() > 0) {
             sbLong.append("\r\n");
