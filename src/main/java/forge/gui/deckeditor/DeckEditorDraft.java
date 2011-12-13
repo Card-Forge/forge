@@ -39,6 +39,7 @@ import javax.swing.WindowConstants;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
 import forge.Constant;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
@@ -52,6 +53,7 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
+import forge.view.GuiTopLevel;
 import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
@@ -144,7 +146,14 @@ public class DeckEditorDraft extends DeckEditorBase {
                             new OldGuiNewGame();
                         }
                     } else {
-                        new OldGuiNewGame();
+                        if (Constant.Runtime.OLDGUI[0]) {
+                            new OldGuiNewGame();
+                        }
+                        else {
+                            ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+                            g.changeState(ControlAllUI.HOME_SCREEN);
+                            g.getHomeView().showQuestMenu();
+                        }
                     }
 
                 }

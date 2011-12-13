@@ -91,19 +91,19 @@ public class HomeTopLevel extends FPanel {
         btnConstructed.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) { showConstructedMenu(); }
         });
-        btnConstructed.setText("Constructed (Easy)");
+        btnConstructed.setText("Constructed");
 
         btnSealed = new FButton();
         btnSealed.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) { showSealedMenu(); }
         });
-        btnSealed.setText("Sealed (Medium)");
+        btnSealed.setText("Sealed");
 
         btnDraft = new FButton();
         btnDraft.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) { showDraftMenu(); }
         });
-        btnDraft.setText("Draft (Hard)");
+        btnDraft.setText("Draft");
 
         btnQuest = new FButton();
         btnQuest.setAction(new AbstractAction() {

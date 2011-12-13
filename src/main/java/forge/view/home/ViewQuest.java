@@ -57,6 +57,7 @@ public class ViewQuest extends JScrollPane {
     private JCheckBox cbStandardStart, cbPlant, cbZep;
     private JComboBox cbxPet;
     private JLabel lblPlant, lblPet, lblZep;
+    private boolean previousQuestExists = false;
 
     /**
      * Populates Swing components of Quest mode in home screen.
@@ -70,38 +71,48 @@ public class ViewQuest extends JScrollPane {
         this.setBorder(null);
         parentView = v0;
         skin = AllZone.getSkin();
-        AllZone.setQuestData(QuestDataIO.loadData());
-        questData = AllZone.getQuestData();
 
-        // Panel is dropped into scroll pane for resize safety.
+        // Title and viewport.  Panel is put into scroll pane for resize safety.
         viewport = new JPanel();
         viewport.setOpaque(false);
         viewport.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         this.getViewport().setOpaque(false);
 
-        JLabel lblContinue = new JLabel("   " + questData.getRank());
-        lblContinue.setOpaque(true);
-        lblContinue.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
-        lblContinue.setForeground(skin.getColor("text"));
-        lblContinue.setBackground(skin.getColor("theme").darker());
-        lblContinue.setFont(skin.getFont1().deriveFont(Font.BOLD, 20));
-        viewport.add(lblContinue, "w 90%!, h 50px!, gap 5% 0 2% 0, span 2");
+        JLabel lblTitle = new JLabel();
+        lblTitle.setOpaque(true);
+        lblTitle.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
+        lblTitle.setForeground(skin.getColor("text"));
+        lblTitle.setBackground(skin.getColor("theme").darker());
+        lblTitle.setFont(skin.getFont1().deriveFont(Font.BOLD, 20));
+        viewport.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 2% 0, span 2");
 
-        JLabel lblStats = new JLabel("Wins: " + questData.getWin()
-                + " / Losses: " + questData.getLost());
-        lblStats.setForeground(skin.getColor("text"));
-        lblStats.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
-        lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        viewport.add(lblStats, "h 35px!, ax center, span 2");
+        File f = new File("res/quest/questData.dat");
+        if (f.exists()) {
+            AllZone.setQuestData(QuestDataIO.loadData());
+            questData = AllZone.getQuestData();
+            previousQuestExists = true;
 
-        // Quest events
-        populateQuestEvents();
+            lblTitle.setText("   " + questData.getRank());
 
-        // Quest options
-        populateQuestOptions();
+            JLabel lblStats = new JLabel("Wins: " + questData.getWin()
+                    + " / Losses: " + questData.getLost());
+            lblStats.setForeground(skin.getColor("text"));
+            lblStats.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
+            lblStats.setHorizontalAlignment(SwingConstants.CENTER);
+            viewport.add(lblStats, "h 35px!, ax center, span 2");
 
-        // Start button
-        populateStartArea();
+            // Quest events
+            populateQuestEvents();
+
+            // Quest options
+            populateQuestOptions();
+
+            // Start button
+            populateStartArea();
+        }
+        else {
+            lblTitle.setText("    New Quest");
+        }
 
         // New Quest
         populateNewQuest();
@@ -321,21 +332,23 @@ public class ViewQuest extends JScrollPane {
     }
 
     private void populateNewQuest() {
-        JLabel lblNew = new JLabel("  Embark on a new Quest");
-        lblNew.setForeground(skin.getColor("text"));
-        lblNew.setBackground(skin.getColor("theme").darker());
-        lblNew.setOpaque(true);
-        lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
-        lblNew.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
-        viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%, span 2");
+        if (previousQuestExists) {
+            JLabel lblNew = new JLabel("  Embark on a new Quest");
+            lblNew.setForeground(skin.getColor("text"));
+            lblNew.setBackground(skin.getColor("theme").darker());
+            lblNew.setOpaque(true);
+            lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
+            lblNew.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+            viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%, span 2");
 
-        JLabel lblNotes = new JLabel("<html>"
-                + "Start a new Quest will delete your current player decks, credits and win loss record."
-                + "<br>Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle."
-                + "</html>");
-        lblNotes.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
-        lblNotes.setForeground(skin.getColor("text"));
-        viewport.add(lblNotes, "w 90%, gapleft 5%, span 2");
+            JLabel lblNotes = new JLabel("<html>"
+                    + "Start a new Quest will delete your current player decks, credits and win loss record."
+                    + "<br>Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle."
+                    + "</html>");
+            lblNotes.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+            lblNotes.setForeground(skin.getColor("text"));
+            viewport.add(lblNotes, "w 90%, gapleft 5%, span 2");
+        }
 
         radEasy = new OptionsRadio("Easy - 50 games");
         radMedium = new OptionsRadio("Medium - 100 games");
@@ -618,5 +631,10 @@ public class ViewQuest extends JScrollPane {
     /** @return QuestData instance currently in use in this view */
     public QuestData getQuestData() {
         return questData;
+    }
+
+    /** @return boolean */
+    public boolean hasPreviousQuest() {
+        return previousQuestExists;
     }
 }

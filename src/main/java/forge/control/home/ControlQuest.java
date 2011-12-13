@@ -10,6 +10,7 @@ import forge.Command;
 import forge.Constant;
 import forge.control.ControlAllUI;
 import forge.deck.Deck;
+import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.deckeditor.DeckEditorShop;
 import forge.quest.data.QuestData;
@@ -35,27 +36,30 @@ public class ControlQuest {
      */
     public ControlQuest(ViewQuest v0) {
         this.view = v0;
-        updateDeckList();
 
-        view.getPetComboBox().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent actionEvent) {
-                if (view.getPetComboBox().getSelectedIndex() > 0) {
-                    view.getQuestData().getPetManager().setSelectedPet(
-                            (String) view.getPetComboBox().getSelectedItem());
-                } else {
-                    view.getQuestData().getPetManager().setSelectedPet(null);
+        if (view.hasPreviousQuest()) {
+            updateDeckList();
+
+            view.getPetComboBox().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent actionEvent) {
+                    if (view.getPetComboBox().getSelectedIndex() > 0) {
+                        view.getQuestData().getPetManager().setSelectedPet(
+                                (String) view.getPetComboBox().getSelectedItem());
+                    } else {
+                        view.getQuestData().getPetManager().setSelectedPet(null);
+                    }
                 }
-            }
-        });
+            });
 
-        view.getPlantCheckBox().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent actionEvent) {
-                view.getQuestData().getPetManager()
-                        .setUsePlant(view.getPlantCheckBox().isSelected());
-            }
-        });
+            view.getPlantCheckBox().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent actionEvent) {
+                    view.getQuestData().getPetManager()
+                            .setUsePlant(view.getPlantCheckBox().isSelected());
+                }
+            });
+        }
     }
 
     /** @return ViewQuest */
@@ -173,6 +177,7 @@ public class ControlQuest {
 
         event = view.getSelectedOpponent().getEvent();
         AllZone.setQuestEvent(event);
+        Constant.Runtime.setGameType(GameType.Quest);
         final QuestItemZeppelin zeppelin = (QuestItemZeppelin) view.getQuestData().getInventory().getItem("Zeppelin");
         zeppelin.setZeppelinUsed(false);
         view.getQuestData().randomizeOpponents();

@@ -2,6 +2,8 @@ package forge.view.home;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -11,6 +13,7 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.control.home.ControlDraft;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -20,7 +23,9 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class ViewDraft extends JPanel {
     private FSkin skin;
+    private ControlDraft control;
     private HomeTopLevel parentView;
+    private JList lstHumanDecks, lstAIDecks;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -45,21 +50,31 @@ public class ViewDraft extends JPanel {
         lblAI.setForeground(skin.getColor("text"));
         this.add(lblAI, "w 30%!, gap 0 0 2% 2%, wrap");
 
-        String[] human = {"one", "two", "three"};
+        String[] human = {};
         String[] ai = {"1", "2", "3", "4", "5", "6", "7"};
 
-        JList humanDecks = new JList(human);
-        JList aiDecks = new JList(ai);
-        this.add(new JScrollPane(humanDecks), "w 30%!, gapleft 15%, gapright 5%, h 30%!");
-        this.add(new JScrollPane(aiDecks), "w 30%!, h 30%!, wrap");
+        lstHumanDecks = new JList(human);
+        lstAIDecks = new JList(ai);
+        this.add(new JScrollPane(lstHumanDecks), "w 30%!, gapleft 15%, gapright 5%, h 30%!");
+        this.add(new JScrollPane(lstAIDecks), "w 30%!, h 30%!, wrap");
+        lstHumanDecks.setSelectedIndex(0);
+        lstAIDecks.setSelectedIndex(0);
 
         SubButton buildHuman = new SubButton("Build New Human Deck");
+        buildHuman.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { control.setupDraft(); }
+        });
         this.add(buildHuman, "w 30%!, h 5%!, gap 15% 15% 1% 1%, wrap");
 
         //
 
         // Start button
         StartButton btnStart = new StartButton(parentView);
+        btnStart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { control.start(); }
+        });
 
         JPanel pnlButtonContainer = new JPanel();
         pnlButtonContainer.setOpaque(false);
@@ -67,10 +82,22 @@ public class ViewDraft extends JPanel {
 
         pnlButtonContainer.setLayout(new BorderLayout());
         pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
+
+        control = new ControlDraft(this);
     }
 
     /** @return HomeTopLevel */
     public HomeTopLevel getParentView() {
         return parentView;
+    }
+
+    /** @return JList */
+    public JList getLstHumanDecks() {
+       return lstHumanDecks;
+    }
+
+    /** @return JList */
+    public JList getLstAIDecks() {
+       return lstAIDecks;
     }
 }

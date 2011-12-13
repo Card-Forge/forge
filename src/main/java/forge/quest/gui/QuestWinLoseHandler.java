@@ -49,6 +49,7 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestUtil;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
+import forge.view.GuiTopLevel;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -221,7 +222,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         this.model.qData.saveData();
 
-        new QuestFrame();
+        if (Constant.Runtime.OLDGUI[0]) {
+            new QuestFrame();
+        }
+        else {
+            ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
+            ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showQuestMenu();
+        }
     }
 
     /**
