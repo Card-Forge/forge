@@ -26,6 +26,12 @@ public class ViewUtilities extends JPanel {
 
         SubButton btnDownloadPics = new SubButton("Download LQ Card Pictures");
         this.add(btnDownloadPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%, gaptop 5%");
+        
+        SubButton btnDownloadSetPics = new SubButton("Download LQ Set Pictures");
+        this.add(btnDownloadSetPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        
+        SubButton btnDownloadQuestImages = new SubButton("Download Quest Images");
+        this.add(btnDownloadQuestImages, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
         SubButton btnDownloadPrices = new SubButton("Download Card Prices");
         this.add(btnDownloadPrices, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
