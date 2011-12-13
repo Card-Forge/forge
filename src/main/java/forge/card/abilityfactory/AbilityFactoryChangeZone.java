@@ -431,7 +431,7 @@ public final class AbilityFactoryChangeZone {
 
             if ((type != null) && p.isComputer()) {
                 // AI only "knows" about his information
-                list = AbilityFactory.filterListByType(list, params.get("ChangeType"), sa);
+                list = list.getValidCards(type, source.getController(), source);
             }
 
             if (list.isEmpty()) {
