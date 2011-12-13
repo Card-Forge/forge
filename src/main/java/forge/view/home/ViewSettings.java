@@ -13,6 +13,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 
 import forge.AllZone;
+import forge.control.home.ControlSettings;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -21,8 +22,11 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewSettings extends JScrollPane {
+    private ControlSettings control;
     private FSkin skin;
     private JPanel viewport;
+    
+    SubButton btnChooseSkin;
     /**
      * 
      * TODO: Write javadoc for Constructor.
@@ -110,6 +114,9 @@ public class ViewSettings extends JScrollPane {
         lblTitleGraphics.setForeground(skin.getColor("text"));
         viewport.add(lblTitleGraphics, constraints2);
 
+        btnChooseSkin = new SubButton("Choose Skin");
+        viewport.add(btnChooseSkin, "gapleft 10%, h 25px!, w 150px!, gapbottom 2px");
+
         OptionsCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
         NoteLabel lblRandomFoil = new NoteLabel("Adds foiled effects to random cards.");
         viewport.add(cbRandomFoil, constraints);
@@ -124,6 +131,8 @@ public class ViewSettings extends JScrollPane {
         NoteLabel lblTextMana = new NoteLabel("Overlays each card with basic card-specific information.");
         viewport.add(cbTextMana, constraints);
         viewport.add(lblTextMana, constraints2);
+        
+        ViewSettings.this.control = new ControlSettings(this);
     }
 
     /** Consolidates checkbox styling in one place. */
@@ -156,5 +165,13 @@ public class ViewSettings extends JScrollPane {
             setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
             setForeground(skin.getColor("text"));
         }
+    }
+    
+    public SubButton getBtnChooseSkin() {
+        return btnChooseSkin;
+    }
+    
+    public ControlSettings getController() {
+        return ViewSettings.this.control;
     }
 }
