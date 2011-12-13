@@ -5,7 +5,11 @@ Forge Beta: ##-##-2011 ver 1.#.# rev #####
 #### cards in total.
 
 
-A new UI is being developed and it will take some time before it is finished. When you launch Forge you will notice a new checkbox under Settings that is labeled "Old Gui". We invite you to try out the new Gui but you should note that this is not yet finished. You can continue to use the Old Gui while you wait for the new Gui portion of the project to be finished.
+A new UI is being developed and it will take some time before it is finished. Forge is somewhat unstable at this time as the new user interface is a work in progress.
+
+The first step was to update the battlefield window. The second step was to update the New Game window and this section still needs a lot of work. We want to get constructed node and then quest modes working first  and will then try to get the draft and sealed modes working again afterwards.
+
+Enjoy the new work and be patient as this part of the project moves forward.
 
 The JuzamJedi cube has once again been updated with a newer list of cards.
 
