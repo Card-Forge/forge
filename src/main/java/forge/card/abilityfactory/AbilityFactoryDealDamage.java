@@ -566,7 +566,9 @@ public class AbilityFactoryDealDamage {
                 // TODO: add check here if card is about to die from something
                 // on the stack
                 // or from taking combat damage
-                final boolean freePing = mandatory || AbilityFactory.playReusable(saMe) || (tgt.getNumTargeted() > 0);
+                final boolean freePing = mandatory || (tgt.getNumTargeted() > 0
+                        || (AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && saMe.isAbility()
+                                && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer())));
 
                 if (freePing && tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
@@ -581,7 +583,8 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (tgt.canTgtPlayer() && AbilityFactory.playReusable(saMe)) {
+            else if (tgt.canTgtPlayer() && AllZone.getPhase().is(Constant.Phase.END_OF_TURN) 
+                    && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer())) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
                 }
