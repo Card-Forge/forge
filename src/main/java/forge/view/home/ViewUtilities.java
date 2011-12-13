@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import forge.AllZone;
+import forge.control.home.ControlUtilities;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -14,6 +15,9 @@ import net.miginfocom.swing.MigLayout;
  */
 @SuppressWarnings("serial")
 public class ViewUtilities extends JPanel {
+    private ControlUtilities control;
+    
+    private SubButton btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages;
     /**
      * 
      * TODO: Write javadoc for Constructor.
@@ -24,13 +28,13 @@ public class ViewUtilities extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
 
-        SubButton btnDownloadPics = new SubButton("Download LQ Card Pictures");
+        btnDownloadPics = new SubButton("Download LQ Card Pictures");
         this.add(btnDownloadPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%, gaptop 5%");
         
-        SubButton btnDownloadSetPics = new SubButton("Download LQ Set Pictures");
+        btnDownloadSetPics = new SubButton("Download LQ Set Pictures");
         this.add(btnDownloadSetPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
         
-        SubButton btnDownloadQuestImages = new SubButton("Download Quest Images");
+        btnDownloadQuestImages = new SubButton("Download Quest Images");
         this.add(btnDownloadQuestImages, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
         SubButton btnDownloadPrices = new SubButton("Download Card Prices");
@@ -51,5 +55,32 @@ public class ViewUtilities extends JPanel {
         JLabel lblAbout = new JLabel("About Forge here: Licensing, etc.");
         lblAbout.setBorder(new MatteBorder(1, 0, 0, 0, AllZone.getSkin().getColor("borders")));
         this.add(lblAbout, "w 80%, gapleft 10%, gaptop 5%");
+        
+        ViewUtilities.this.control = new ControlUtilities(this);
     }
-}
+    
+    /** @return SubButton */
+    public SubButton getBtnDownloadPics() {
+        return btnDownloadPics;
+    }
+    
+    /** @return SubButton */
+    public SubButton getBtnDownloadSetPics() {
+        return btnDownloadSetPics;
+    }
+    
+    /** @return SubButton */
+    public SubButton getBtnDownloadQuestImages() {
+        return btnDownloadQuestImages;
+    }
+    
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @return the ControlUtilities
+     */
+    public ControlUtilities getController() {
+        return ViewUtilities.this.control;
+    }
+    
+} //end class ViewUtilities

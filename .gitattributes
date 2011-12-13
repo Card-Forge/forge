@@ -10755,6 +10755,7 @@ src/main/java/forge/control/ControlWinLose.java -text
 src/main/java/forge/control/home/ControlConstructed.java -text
 src/main/java/forge/control/home/ControlQuest.java -text
 src/main/java/forge/control/home/ControlSettings.java -text
+src/main/java/forge/control/home/ControlUtilities.java -text
 src/main/java/forge/control/home/package-info.java -text svneol=native#text/plain
 src/main/java/forge/control/match/ControlDetail.java -text
 src/main/java/forge/control/match/ControlDock.java -text
