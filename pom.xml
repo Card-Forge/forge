@@ -644,6 +644,17 @@
                 </reportSets>
             </plugin>
 
+                  <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>analyze-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
         </plugins>
     </reporting>
 
