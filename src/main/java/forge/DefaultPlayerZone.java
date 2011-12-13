@@ -396,7 +396,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @return a {@link forge.CardList} object.
      */
     public final CardList getCardsAddedThisTurn(final Constant.Zone origin) {
-        System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
+        //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
         final CardList ret = new CardList();
         for (int i = 0; i < this.cardsAddedThisTurn.size(); i++) {
             if ((this.cardsAddedThisTurnSource.get(i) == origin) || (origin == null /*
@@ -409,7 +409,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
                 ret.add(this.cardsAddedThisTurn.get(i));
             }
         }
-        System.out.println(ret.size());
+        //System.out.println(ret.size());
         return ret;
     }
 
