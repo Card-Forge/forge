@@ -284,10 +284,18 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // top revealed
-        if (card.hasKeyword("Play with the top card of your library revealed.") && (card.getController() != null)
+        if ((card.hasKeyword("Play with the top card of your library revealed.") 
+                    || card.hasKeyword("Players play with the top card of their libraries revealed.")) 
+                && (card.getController() != null)
                 && card.isInZone(Constant.Zone.Battlefield) && !card.getController().getZone(Zone.Library).isEmpty()) {
-            area.append("\r\nTop card: ");
+            area.append("\r\nTop card of your library: ");
             area.append(card.getController().getCardsIn(Zone.Library, 1));
+        }
+        if (card.hasKeyword("Players play with the top card of their libraries revealed.") 
+            && (card.getController() != null) && card.isInZone(Constant.Zone.Battlefield) 
+            && !card.getController().getOpponent().getZone(Zone.Library).isEmpty()) {
+        area.append("\r\nTop card of your opponent's library: ");
+        area.append(card.getController().getOpponent().getCardsIn(Zone.Library, 1));
         }
 
         // chosen type
