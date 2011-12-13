@@ -350,7 +350,7 @@ public class AbilityFactoryDealDamage {
         if (this.abilityFactory.isAbility()) {
             final Random r = MyRandom.getRandom(); // prevent run-away
                                                    // activations
-            if (r.nextFloat() <= Math.pow(.6667, saMe.getActivationsThisTurn())) {
+            if (r.nextFloat() <= Math.pow(.9, saMe.getActivationsThisTurn())) {
                 rr = true;
             }
         }

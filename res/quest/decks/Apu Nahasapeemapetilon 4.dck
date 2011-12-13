@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Apu Nahasapeemapetilon 4
+Title=Apu Nahasapeemapetilon
+Difficulty=very hard
+Description=WG persist combo deck with Melira, Sylvok Outcast
+Icon=Apu Nahasapeemapetilon.jpg
+Deck Type=constructed
+[main]
+4 Wooded Foothills
+4 Arid Mesa
+4 Taiga
+4 Copperline Gorge
+4 Forest
+1 Mox Emerald
+1 Mox Ruby
+1 Mox Pearl
+1 Mox Jet
+4 Time of Need
+4 Melira, Sylvok Outcast
+1 Heartmender
+4 Kitchen Finks
+4 Safehold Elite
+4 Murderous Redcap
+4 Blasting Station
+4 Goblin Bombardment
+4 Bloodbraid Elf
+1 Naturalize
+2 Lightning Bolt
+[sideboard]
