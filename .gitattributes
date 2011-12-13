@@ -5345,6 +5345,7 @@ res/cardsfolder/m/mogg_hollows.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_jailer.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_maniac.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_raider.txt svneol=native#text/plain
+res/cardsfolder/m/mogg_salvage.txt -text
 res/cardsfolder/m/mogg_sentry.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_squad.txt svneol=native#text/plain
 res/cardsfolder/m/mogg_war_marshal.txt svneol=native#text/plain
