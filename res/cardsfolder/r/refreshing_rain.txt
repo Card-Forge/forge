@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Hand | AddHiddenKeyword$ 
 SVar:X:Count$Valid Swamp.YouDontCtrl
 SVar:Y:Count$Valid Forest.YouCtrl
 A:SP$ GainLife | Cost$ 3 G | LifeAmount$ 6 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 6 life.
-SVar:Rarity:Common
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/refreshing_rain.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/110.jpg
 Oracle:If an opponent controls a Swamp and you control a Forest, you may cast Refreshing Rain without paying its mana cost.\nTarget player gains 6 life.
