@@ -4,8 +4,8 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigYouDiscard | TriggerDescription$ Whenever a green creature is put into a graveyard from the battlefield,
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigOppDiscard | TriggerDescription$ its controller discards a card.
-SVar:TrigYouDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:TrigOppDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1
+SVar:TrigYouDiscard:AB$Discard | Cost$ 0 | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:TrigOppDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | Mode$ TgtChoose | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bereavement.jpg
