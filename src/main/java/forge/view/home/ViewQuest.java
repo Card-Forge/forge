@@ -1,22 +1,24 @@
 package forge.view.home;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -25,12 +27,12 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.home.ControlQuest;
 import forge.gui.GuiUtils;
-import forge.gui.MultiLineLabel;
-import forge.gui.MultiLineLabelUI;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
+import forge.quest.data.item.QuestItemZeppelin;
+import forge.quest.data.pet.QuestPetAbstract;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestEvent;
@@ -52,7 +54,9 @@ public class ViewQuest extends JScrollPane {
     private JList lstDeckChooser;
     private ControlQuest control;
     private JRadioButton radEasy, radMedium, radHard, radExpert, radFantasy, radClassic;
-    private JCheckBox cbStandardStart;
+    private JCheckBox cbStandardStart, cbPlant, cbZep;
+    private JComboBox cbxPet;
+    private JLabel lblPlant, lblPet, lblZep;
 
     /**
      * Populates Swing components of Quest mode in home screen.
@@ -62,24 +66,33 @@ public class ViewQuest extends JScrollPane {
     public ViewQuest(HomeTopLevel v0) {
         // Basic init stuff
         super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        AllZone.setQuestData(QuestDataIO.loadData());
         this.setOpaque(false);
         this.setBorder(null);
         parentView = v0;
         skin = AllZone.getSkin();
+        AllZone.setQuestData(QuestDataIO.loadData());
         questData = AllZone.getQuestData();
 
         // Panel is dropped into scroll pane for resize safety.
         viewport = new JPanel();
         viewport.setOpaque(false);
-        viewport.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        viewport.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         this.getViewport().setOpaque(false);
 
-        JLabel lblContinue = new JLabel(questData.getRank());
+        JLabel lblContinue = new JLabel("   " + questData.getRank());
+        lblContinue.setOpaque(true);
         lblContinue.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
         lblContinue.setForeground(skin.getColor("text"));
+        lblContinue.setBackground(skin.getColor("theme").darker());
         lblContinue.setFont(skin.getFont1().deriveFont(Font.BOLD, 20));
-        viewport.add(lblContinue, "w 90%!, gap 5% 0 2% 0");
+        viewport.add(lblContinue, "w 90%!, h 50px!, gap 5% 0 2% 0, span 2");
+
+        JLabel lblStats = new JLabel("Wins: " + questData.getWin()
+                + " / Losses: " + questData.getLost());
+        lblStats.setForeground(skin.getColor("text"));
+        lblStats.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
+        lblStats.setHorizontalAlignment(SwingConstants.CENTER);
+        viewport.add(lblStats, "h 35px!, ax center, span 2");
 
         // Quest events
         populateQuestEvents();
@@ -88,19 +101,7 @@ public class ViewQuest extends JScrollPane {
         populateQuestOptions();
 
         // Start button
-        StartButton btnStart = new StartButton(parentView);
-
-        JPanel pnlButtonContainer = new JPanel();
-        pnlButtonContainer.setOpaque(false);
-
-        pnlButtonContainer.setLayout(new BorderLayout());
-        pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
-        viewport.add(pnlButtonContainer, "w 100%!, gapbottom 2%, gaptop 2%");
-
-        btnStart.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { control.start(); }
-        });
+        populateStartArea();
 
         // New Quest
         populateNewQuest();
@@ -144,18 +145,29 @@ public class ViewQuest extends JScrollPane {
             challengesContainer.add(temp, "w 100%, h 70px:70px, gapbottom 5px");
         }
 
+        if (challenges.size() == 0) {
+            JLabel lblTeaser = new JLabel("(Next challenge available in "
+                    + nextChallengeInWins() + " wins.)");
+            lblTeaser.setHorizontalAlignment(SwingConstants.CENTER);
+            lblTeaser.setForeground(skin.getColor("text"));
+            lblTeaser.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+            challengesContainer.add(lblTeaser, "w 100%!, ax center, ay top");
+        }
+
         JLabel lblDuels = new JLabel("Available Duels");
         lblDuels.setForeground(skin.getColor("text"));
+        lblDuels.setHorizontalAlignment(SwingConstants.CENTER);
         lblDuels.setFont(skin.getFont1().deriveFont(Font.ITALIC, 14));
 
         JLabel lblChallenges = new JLabel("Available Challenges");
         lblChallenges.setForeground(skin.getColor("text"));
+        lblChallenges.setHorizontalAlignment(SwingConstants.CENTER);
         lblChallenges.setFont(skin.getFont1().deriveFont(Font.ITALIC, 14));
 
-        viewport.add(lblDuels, "w 90%, gapleft 5%, gapbottom 1%, gaptop 1%");
-        viewport.add(duelsContainer, " w 90%, gapleft 5%, gapbottom 2%");
-        viewport.add(lblChallenges, "w 90%, gapleft 5%, gapbottom 1%");
-        viewport.add(challengesContainer, " w 90%, gapleft 5%, gapbottom 2%");
+        viewport.add(lblDuels, "w 48%, gap 1% 1% 2% 1%");
+        viewport.add(lblChallenges, "w 48%, gap 0 0 2% 1%, wrap");
+        viewport.add(duelsContainer, " w 48%, gap 1% 1% 1% 2%, ay top");
+        viewport.add(challengesContainer, " w 48%, gap 0 0 1% 2%, wrap");
 
         // Select first event.
         selectedOpponent = (SelectablePanel) duelsContainer.getComponent(0);
@@ -167,6 +179,21 @@ public class ViewQuest extends JScrollPane {
         JPanel optionsContainer = new JPanel();
         optionsContainer.setOpaque(false);
         optionsContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        optionsContainer.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
+
+        JLabel lblCredits = new JLabel("Credits: " + Long.toString(questData.getCredits()));
+        lblCredits.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/pics/icons/CoinStack.png"), 26, 26));
+        lblCredits.setForeground(skin.getColor("text"));
+        lblCredits.setIconTextGap(5);
+        lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
+        lblCredits.setFont(skin.getFont1().deriveFont(Font.BOLD, 14));
+
+        JLabel lblLife = new JLabel("Life: " + Long.toString(questData.getLife()));
+        lblLife.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/pics/icons/Life.png"), 26, 26));
+        lblLife.setForeground(skin.getColor("text"));
+        lblLife.setIconTextGap(5);
+        lblLife.setHorizontalAlignment(SwingConstants.CENTER);
+        lblLife.setFont(skin.getFont1().deriveFont(Font.BOLD, 14));
 
         SubButton btnEditor = new SubButton("");
         btnEditor.setAction(new AbstractAction() {
@@ -195,38 +222,112 @@ public class ViewQuest extends JScrollPane {
          });
         btnBazaar.setText("Bazaar");
 
-        OptionsCheckBox cbPet = new OptionsCheckBox("Summon Pet");
-        OptionsCheckBox cbWall = new OptionsCheckBox("Summon Wall");
-        OptionsCheckBox cbZep = new OptionsCheckBox("Launch Zeppelin");
-
         lstDeckChooser = new JList();
 
-        optionsContainer.add(btnEditor, "w 30%, h 30px!, gapleft 5%, gapright 5%, gapbottom 5px");
-        optionsContainer.add(cbPet, "w 25%, h 30px!, ax center");
-        optionsContainer.add(btnCardShop, "w 25%, h 30px!, gapleft 5%, wrap");
+        optionsContainer.add(btnEditor, "w 35%, h 30px!, gap 10% 5% 10px 10px");
+        optionsContainer.add(lblCredits, "w 35%!, h 30px!, wrap");
 
-        optionsContainer.add(new JScrollPane(lstDeckChooser), "w 30%, h 60px!, gapleft 5%, gapright 5%, span 1 2");
-        optionsContainer.add(cbWall, "w 25%, h 30px!, ax center, gapbottom 5px, wrap");
+        optionsContainer.add(new JScrollPane(lstDeckChooser), "w 35%, h 110px!, gap 10% 5% 0 10px, span 1 3");
+        optionsContainer.add(lblLife, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
 
-        optionsContainer.add(cbZep, "w 25%, h 30px!");
-        optionsContainer.add(btnBazaar, "w 25%, h 30px!, gapleft 5%, wrap");
+        optionsContainer.add(btnCardShop, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
+        optionsContainer.add(btnBazaar, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
 
         if (!questData.isFantasy()) {
-            cbPet.setVisible(false);
-            cbWall.setVisible(false);
-            cbZep.setVisible(false);
+            lblLife.setVisible(false);
             btnBazaar.setVisible(false);
         }
 
-        viewport.add(optionsContainer, "w 90%, gap 5% 0 1% 1%");
+        viewport.add(optionsContainer, "w 90%, gap 5% 0 1% 1%, span 2 1");
+    }
+
+    private void populateStartArea() {
+        JPanel pnlButtonContainer = new JPanel();
+        pnlButtonContainer.setOpaque(false);
+        pnlButtonContainer.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center, hidemode 3"));
+
+        cbxPet = new JComboBox();
+        cbxPet.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+
+        cbPlant = new OptionsCheckBox("Summon Wall");
+        cbZep = new OptionsCheckBox("Launch Zeppelin");
+
+        lblPet = new JLabel(GuiUtils.getResizedIcon(
+                new ImageIcon("res/pics/icons/PetIcon.png"), 30, 30));
+        lblPlant = new JLabel(GuiUtils.getResizedIcon(
+                new ImageIcon("res/pics/icons/PlantIcon.png"), 30, 30));
+        lblZep = new JLabel(GuiUtils.getResizedIcon(
+                new ImageIcon("res/pics/icons/ZeppelinIcon.png"), 30, 30));
+
+        StartButton btnStart = new StartButton(parentView);
+        btnStart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { control.start(); }
+        });
+
+        pnlButtonContainer.add(lblPet, "w 30px!, h 30px!, gapright 10px");
+        pnlButtonContainer.add(cbxPet, "w 30%!, h 30px!, gapbottom 10px, wrap");
+
+        pnlButtonContainer.add(lblPlant, "w 30px!, h 30px!, gapright 10px");
+        pnlButtonContainer.add(cbPlant, "w 30%!, h 30px!, gapbottom 10px, wrap");
+
+        pnlButtonContainer.add(lblZep, "w 30px!, h 30px!, gapright 10px");
+        pnlButtonContainer.add(cbZep, "w 30%!, h 30px!, gapbottom 10px, wrap");
+
+        pnlButtonContainer.add(btnStart, "span 2 1");
+
+        viewport.add(pnlButtonContainer, "w 100%!, gapbottom 2%, gaptop 2%, span 2");
+
+        if (this.questData.getMode().equals(QuestData.FANTASY)) {
+            final Set<String> petList = this.questData.getPetManager().getAvailablePetNames();
+            final QuestPetAbstract pet = this.questData.getPetManager().getSelectedPet();
+
+            // Pet list visibility
+            if (petList.size() > 0) {
+                cbxPet.setEnabled(true);
+                cbxPet.addItem("Don't summon a pet");
+                for (final String aPetList : petList) {
+                    cbxPet.addItem(aPetList);
+                }
+
+                if (pet != null) { cbxPet.setSelectedItem(pet.getName()); }
+            } else {
+                cbxPet.setVisible(false);
+                lblPet.setVisible(false);
+            }
+
+            // Plant visiblity
+            if (this.questData.getPetManager().getPlant().getLevel() == 0) {
+                cbPlant.setVisible(false);
+                lblPlant.setVisible(false);
+            }
+            else {
+                cbPlant.setSelected(this.questData.getPetManager().shouldPlantBeUsed());
+            }
+
+            // Zeppelin visibility
+            final QuestItemZeppelin zeppelin = (QuestItemZeppelin) this.questData.getInventory().getItem("Zeppelin");
+            cbZep.setVisible(zeppelin.hasBeenUsed());
+            lblZep.setVisible(zeppelin.hasBeenUsed());
+        }
+        else {
+            cbxPet.setVisible(false);
+            lblPet.setVisible(false);
+            cbPlant.setVisible(false);
+            lblPlant.setVisible(false);
+            cbZep.setVisible(false);
+            lblZep.setVisible(false);
+        }
     }
 
     private void populateNewQuest() {
-        JLabel lblNew = new JLabel("Embark on a new Quest");
+        JLabel lblNew = new JLabel("  Embark on a new Quest");
         lblNew.setForeground(skin.getColor("text"));
+        lblNew.setBackground(skin.getColor("theme").darker());
+        lblNew.setOpaque(true);
         lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
         lblNew.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
-        viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%");
+        viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%, span 2");
 
         JLabel lblNotes = new JLabel("<html>"
                 + "Start a new Quest will delete your current player decks, credits and win loss record."
@@ -234,7 +335,7 @@ public class ViewQuest extends JScrollPane {
                 + "</html>");
         lblNotes.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
         lblNotes.setForeground(skin.getColor("text"));
-        viewport.add(lblNotes, "w 90%, gapleft 5%");
+        viewport.add(lblNotes, "w 90%, gapleft 5%, span 2");
 
         radEasy = new OptionsRadio("Easy - 50 games");
         radMedium = new OptionsRadio("Medium - 100 games");
@@ -283,7 +384,7 @@ public class ViewQuest extends JScrollPane {
 
         optionsContainer.add(btnEmbark, "w 40%!, h 30px!, gapleft 30%, gaptop 3%, span 3 1");
 
-        viewport.add(optionsContainer, "w 100%!, gaptop 2%");
+        viewport.add(optionsContainer, "w 100%!, gaptop 2%, span 2");
     }
 
     //========= CUSTOM CLASSES
@@ -293,7 +394,21 @@ public class ViewQuest extends JScrollPane {
         public OptionsRadio(String txt0) {
             super();
             setText(txt0);
+            setForeground(skin.getColor("text"));
+            setBackground(skin.getColor("hover"));
             setOpaque(false);
+
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    setOpaque(true);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    setOpaque(false);
+                }
+            });
         }
     }
 
@@ -302,7 +417,21 @@ public class ViewQuest extends JScrollPane {
         public OptionsCheckBox(String txt0) {
             super();
             setText(txt0);
+            setForeground(skin.getColor("text"));
+            setBackground(skin.getColor("hover"));
             setOpaque(false);
+
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    setOpaque(true);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    setOpaque(false);
+                }
+            });
         }
     }
 
@@ -316,8 +445,42 @@ public class ViewQuest extends JScrollPane {
             setBorder(new LineBorder(skin.getColor("borders"), 1));
             setBackground(skin.getColor("inactive"));
             setLayout(new MigLayout("insets 0, gap 0"));
-
             this.event = e0;
+
+            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+            File file = new File(base, event.getIcon());
+
+            if (!file.exists()) {
+                file = new File(base, "Unknown.jpg");
+            }
+
+            JLabel lblIcon = new JLabel(GuiUtils.getResizedIcon(new ImageIcon(file.toString()), 60, 60));
+            lblIcon.setForeground(skin.getColor("text"));
+            this.add(lblIcon, "h 60px!, w 60px!, gap 5px 5px 5px 5px, span 1 2");
+
+            // Name
+            JLabel lblName = new JLabel(event.getTitle() + ": " + event.getDifficulty());
+            lblName.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
+            lblName.setForeground(skin.getColor("text"));
+            this.add(lblName, "h 20px!, gap 1% 1% 5px 5px, wrap");
+
+            // Description
+            JTextArea tarDesc = new JTextArea();
+            tarDesc.setText(event.getDescription());
+            tarDesc.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+            tarDesc.setForeground(skin.getColor("text"));
+            tarDesc.setOpaque(false);
+            tarDesc.setWrapStyleWord(true);
+            tarDesc.setLineWrap(true);
+            tarDesc.setFocusable(false);
+            tarDesc.setEditable(false);
+            this.add(tarDesc, " h 35px!, w 75%!, gap 1% 0 0 5px");
+
+            this.setToolTipText("<html>" + event.getTitle()
+                    + ": " + event.getDifficulty()
+                    + "<br>" + event.getDescription()
+                    + "</html>");
+
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
@@ -345,34 +508,44 @@ public class ViewQuest extends JScrollPane {
                     }
                 }
             });
-
-            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-            File file = new File(base, event.getIcon());
-
-            if (!file.exists()) {
-                file = new File(base, "Unknown.jpg");
-            }
-
-            JLabel lblIcon = new JLabel(GuiUtils.getResizedIcon(new ImageIcon(file.toString()), 60, 60));
-            lblIcon.setForeground(skin.getColor("text"));
-            this.add(lblIcon, "h 60px!, w 60px!, gap 5px 5px 5px 5px, span 1 2");
-
-            JLabel lblName = new JLabel(event.getTitle() + ": " + event.getDifficulty());
-            lblName.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
-            lblName.setForeground(skin.getColor("text"));
-            this.add(lblName, "h 20px!, gap 1% 1% 5px 5px, wrap");
-
-            MultiLineLabel lblDesc = new MultiLineLabel(event.getDescription());
-            lblDesc.setFont(skin.getFont1().deriveFont(Font.PLAIN, 12));
-            lblDesc.setForeground(skin.getColor("text"));
-            lblDesc.setUI(MultiLineLabelUI.getLabelUI());
-            this.add(lblDesc, " h 35px!, w 80%!, gap 1% 0 0 5px");
-        }
+       }
 
         /** @return QuestEvent */
         public QuestEvent getEvent() {
             return event;
         }
+    }
+
+    /**
+     * <p>
+     * nextChallengeInWins.
+     * </p>
+     * 
+     * @return a int.
+     */
+    private int nextChallengeInWins() {
+        final QuestData questData = AllZone.getQuestData();
+
+        // Number of wins was 25, lowereing the number to 20 to help short term
+        // questers.
+        if (questData.getWin() < 20) {
+            return 20 - questData.getWin();
+        }
+
+        // The int mul has been lowered by one, should face special opps more
+        // frequently.
+        final int challengesPlayed = questData.getChallengesPlayed();
+        int mul = 5;
+
+        if (questData.getInventory().hasItem("Zeppelin")) {
+            mul = 3;
+        } else if (questData.getInventory().hasItem("Map")) {
+            mul = 4;
+        }
+
+        final int delta = (challengesPlayed * mul) - questData.getWin();
+
+        return (delta > 0) ? delta : 0;
     }
 
     //========= RETRIEVAL FUNCTIONS
@@ -430,5 +603,20 @@ public class ViewQuest extends JScrollPane {
     /** @return ControlQuest */
     public ControlQuest getController() {
         return control;
+    }
+
+    /** @return JComboBox */
+    public JComboBox getPetComboBox() {
+        return cbxPet;
+    }
+
+    /** @return JCheckBox */
+    public JCheckBox getPlantCheckBox() {
+        return cbPlant;
+    }
+
+    /** @return QuestData instance currently in use in this view */
+    public QuestData getQuestData() {
+        return questData;
     }
 }

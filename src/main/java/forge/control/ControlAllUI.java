@@ -26,6 +26,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JLayeredPane;
 
 import forge.AllZone;
+import forge.quest.gui.bazaar.QuestBazaarPanel;
 import forge.view.GuiTopLevel;
 import forge.view.editor.EditorTopLevel;
 import forge.view.home.HomeTopLevel;
@@ -45,7 +46,17 @@ public class ControlAllUI {
     private HomeTopLevel home = null;
     private ViewTopLevel match = null;
     private EditorTopLevel editor = null;
-    private WindowAdapter actConcede;
+    private WindowAdapter waConcede;
+    private QuestBazaarPanel bazaar;
+
+    /** */
+    public static final int HOME_SCREEN = 0;
+    /** */
+    public static final int MATCH_SCREEN = 1;
+    /** */
+    public static final int DEFAULT_EDITOR = 2;
+    /** */
+    public static final int QUEST_BAZAAR = 3;
 
     /**
      * <p>
@@ -62,7 +73,7 @@ public class ControlAllUI {
 
         this.display = (JLayeredPane) this.view.getContentPane();
 
-        this.actConcede = new WindowAdapter() {
+        this.waConcede = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent evt) {
                 ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
@@ -86,6 +97,7 @@ public class ControlAllUI {
         this.editor = null;
 
         this.display.removeAll();
+        this.view.removeWindowListener(waConcede);
         this.view.addOverlay();
 
         view.addComponentListener(new ComponentAdapter() {
@@ -101,19 +113,24 @@ public class ControlAllUI {
             this.home = new HomeTopLevel();
             this.display.add(this.home, JLayeredPane.DEFAULT_LAYER);
             sizeChildren();
-            view.removeWindowListener(actConcede);
             break;
 
         case 1: // Match screen
             this.match = new ViewTopLevel();
             this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
             sizeChildren();
-            view.addWindowListener(actConcede);
+            view.addWindowListener(waConcede);
             break;
 
         case 2: // Deck editor screen
             this.editor = new EditorTopLevel();
             this.display.add(this.editor);
+            break;
+
+        case 3: // Quest Bazaar screen
+            this.bazaar = new QuestBazaarPanel(null);
+            this.display.add(bazaar, JLayeredPane.DEFAULT_LAYER);
+            sizeChildren();
             break;
 
         default:
@@ -137,6 +154,20 @@ public class ControlAllUI {
      */
     public ControlMatchUI getMatchController() {
         return this.match.getController();
+    }
+
+    /** @return HomeTopLevel */
+    public HomeTopLevel getHomeView() {
+        return this.home;
+    }
+
+    /**
+     * Gets the match view.
+     * 
+     * @return ViewTopLevel
+     */
+    public QuestBazaarPanel getBazaarView() {
+        return this.bazaar;
     }
 
     /** Sizes children of JLayeredPane to fully fit their layers. */

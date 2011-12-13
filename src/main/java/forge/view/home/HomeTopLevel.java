@@ -87,39 +87,39 @@ public class HomeTopLevel extends FPanel {
         pnlContent.setBackground(skin.getColor("zebra"));
         pnlContent.setLayout(new MigLayout("insets 0, gap 0"));
 
-        btnDraft = new FButton();
-        btnDraft.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { draft(); }
-        });
-        btnDraft.setText("Draft (Hard)");
-
         btnConstructed = new FButton();
         btnConstructed.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { constructed(); }
+            public void actionPerformed(ActionEvent arg0) { showConstructedMenu(); }
         });
         btnConstructed.setText("Constructed (Easy)");
 
         btnSealed = new FButton();
         btnSealed.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { sealed(); }
+            public void actionPerformed(ActionEvent arg0) { showSealedMenu(); }
         });
         btnSealed.setText("Sealed (Medium)");
 
+        btnDraft = new FButton();
+        btnDraft.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) { showDraftMenu(); }
+        });
+        btnDraft.setText("Draft (Hard)");
+
         btnQuest = new FButton();
         btnQuest.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { quest(); }
+            public void actionPerformed(ActionEvent arg0) { showQuestMenu(); }
         });
         btnQuest.setText("Quest");
 
         btnSettings = new FButton();
         btnSettings.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { settings(); }
+            public void actionPerformed(ActionEvent arg0) { showSettingsMenu(); }
         });
         btnSettings.setText("Settings");
 
         btnUtilities = new FButton();
         btnUtilities.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { utilities(); }
+            public void actionPerformed(ActionEvent arg0) { showUtilitiesMenu(); }
         });
         btnUtilities.setText("Utilities");
 
@@ -148,11 +148,12 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnEditor, constraints);
         pnlMenu.add(btnExit, constraints);
 
-        // Open "constructed" screen on first run.
-        constructed();
+        // Open "constructed" menu on first run.
+        showConstructedMenu();
     }
 
-    private void constructed() {
+    /** Opens menu for constructed mode. */
+    public void showConstructedMenu() {
         clearToggles();
         btnConstructed.setToggled(true);
         pnlContent.removeAll();
@@ -161,7 +162,8 @@ public class HomeTopLevel extends FPanel {
         pnlContent.repaint();
     }
 
-    private void draft() {
+    /** Opens menu for draft mode. */
+    public void showDraftMenu() {
         clearToggles();
         btnDraft.setToggled(true);
         pnlContent.removeAll();
@@ -170,7 +172,8 @@ public class HomeTopLevel extends FPanel {
         pnlContent.repaint();
     }
 
-    private void sealed() {
+    /** Opens menu for sealed mode. */
+    public void showSealedMenu() {
         clearToggles();
         btnSealed.setToggled(true);
         pnlContent.removeAll();
@@ -179,7 +182,8 @@ public class HomeTopLevel extends FPanel {
         pnlContent.repaint();
     }
 
-    private void quest() {
+    /** Opens menu for quest mode. */
+    public void showQuestMenu() {
         clearToggles();
         btnQuest.setToggled(true);
         pnlContent.removeAll();
@@ -188,7 +192,8 @@ public class HomeTopLevel extends FPanel {
         pnlContent.repaint();
     }
 
-    private void settings() {
+    /** Opens menu for settings. */
+    public void showSettingsMenu() {
         clearToggles();
         btnSettings.setToggled(true);
         pnlContent.removeAll();
@@ -197,7 +202,8 @@ public class HomeTopLevel extends FPanel {
         pnlContent.repaint();
     }
 
-    private void utilities() {
+    /** Opens menu for utilities. */
+    public void showUtilitiesMenu() {
         clearToggles();
         btnUtilities.setToggled(true);
         pnlContent.removeAll();
@@ -242,6 +248,6 @@ public class HomeTopLevel extends FPanel {
     /** */
     public void resetQuest() {
         quest = new ViewQuest(this);
-        quest();
+        showQuestMenu();
     }
 }

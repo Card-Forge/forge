@@ -1,19 +1,22 @@
 package forge.control.home;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
+import forge.control.ControlAllUI;
+import forge.deck.Deck;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.deckeditor.DeckEditorShop;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestUtil;
-import forge.quest.gui.QuestFrame;
-import forge.quest.gui.bazaar.QuestBazaarPanel;
+import forge.quest.data.item.QuestItemZeppelin;
+import forge.quest.gui.main.QuestChallenge;
+import forge.quest.gui.main.QuestEvent;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewQuest;
 
@@ -23,6 +26,7 @@ import forge.view.home.ViewQuest;
  */
 public class ControlQuest {
     private ViewQuest view;
+    private QuestEvent event;
 
     /**
      * Controls logic and listeners for quest mode in home screen.
@@ -31,8 +35,27 @@ public class ControlQuest {
      */
     public ControlQuest(ViewQuest v0) {
         this.view = v0;
-
         updateDeckList();
+
+        view.getPetComboBox().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent actionEvent) {
+                if (view.getPetComboBox().getSelectedIndex() > 0) {
+                    view.getQuestData().getPetManager().setSelectedPet(
+                            (String) view.getPetComboBox().getSelectedItem());
+                } else {
+                    view.getQuestData().getPetManager().setSelectedPet(null);
+                }
+            }
+        });
+
+        view.getPlantCheckBox().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent actionEvent) {
+                view.getQuestData().getPetManager()
+                        .setUsePlant(view.getPlantCheckBox().isSelected());
+            }
+        });
     }
 
     /** @return ViewQuest */
@@ -82,20 +105,11 @@ public class ControlQuest {
     }
 
     /** */
-    // Since QuestBazaarPanel is not in a JFrame for some reason, one
-    // must be created here.  Later, this will be integrated into the
-    // top level UI.  Doublestrike 11-12-11.
     public void showBazaar() {
-        QuestFrame f = new QuestFrame();
-        f.getContentPane().add(new QuestBazaarPanel(f));
-        f.setVisible(true);
+        GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
 
-        f.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                AllZone.getQuestData().saveData();
-            }
-        });
+        g.getController().changeState(ControlAllUI.QUEST_BAZAAR);
+        g.validate();
     } // card shop button
 
     /**
@@ -103,9 +117,10 @@ public class ControlQuest {
      */
     public void newQuest() {
         int difficulty = 0;
-        QuestData questData = AllZone.getQuestData();
+        QuestData questData = new QuestData();
 
-        final String mode = view.getRadFantasy().isSelected() ? forge.quest.data.QuestData.FANTASY
+        final String mode = view.getRadFantasy().isSelected()
+                ? forge.quest.data.QuestData.FANTASY
                 : forge.quest.data.QuestData.REALISTIC;
 
         if (view.getRadEasy().isSelected()) {
@@ -118,8 +133,8 @@ public class ControlQuest {
             difficulty = 3;
         } else {
             JOptionPane.showMessageDialog(null,
-                    "Please select a difficulty.",
-                    "New Quest: Difficulty?", JOptionPane.ERROR_MESSAGE);
+                    "This should not be happening!",
+                    "New Quest: Difficulty Bug!?", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -147,21 +162,83 @@ public class ControlQuest {
 
     /** */
     public void start() {
-        QuestData questData = AllZone.getQuestData();
+        if (view.getLstDeckChooser().getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null,
+                    "A mysterious wall blocks your way."
+                    + "\n\rAn unseen sepulchral voice booms:"
+                    + "\n\r\"Entrance Forbidden Without A Deck\"",
+                    "No deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        Constant.Runtime.HUMAN_DECK[0] = questData.getDeck((String) view.getLstDeckChooser().getSelectedValue());
-        Constant.Runtime.COMPUTER_DECK[0] = view.getSelectedOpponent().getEvent().getEventDeck();
+        event = view.getSelectedOpponent().getEvent();
+        AllZone.setQuestEvent(event);
+        final QuestItemZeppelin zeppelin = (QuestItemZeppelin) view.getQuestData().getInventory().getItem("Zeppelin");
+        zeppelin.setZeppelinUsed(false);
+        view.getQuestData().randomizeOpponents();
 
-        AllZone.setQuestEvent(view.getSelectedOpponent().getEvent());
+        String deckname = (String) view.getLstDeckChooser().getSelectedValue();
+        Constant.Runtime.HUMAN_DECK[0] = view.getQuestData().getDeck(deckname);
+        Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
+        Deck humanDeck = view.getQuestData().getDeck(deckname);
+
+        Constant.Runtime.HUMAN_DECK[0] = humanDeck;
+
+        Constant.Quest.OPP_ICON_NAME[0] = event.getIcon();
 
         GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
         g.getController().changeState(1);
         g.getController().getMatchController().initMatch();
 
+        AllZone.getMatchState().reset();
+        if (event.getEventType().equals("challenge")) {
+            this.setupChallenge(humanDeck);
+        } else {
+            this.setupDuel(humanDeck);
+        }
+
+        view.getQuestData().saveData();
+    }
+
+    /**
+     * <p>
+     * setupDuel.
+     * </p>
+     * 
+     * @param humanDeck
+     *            a {@link forge.deck.Deck} object.
+     */
+    final void setupDuel(final Deck humanDeck) {
+        final Deck computer = event.getEventDeck();
+        Constant.Runtime.COMPUTER_DECK[0] = computer;
+
         AllZone.getGameAction().newGame(
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
-                QuestUtil.getHumanStartingCards(questData),
-                QuestUtil.getComputerStartingCards(questData),
-                questData.getLife(), 20, null);
+                QuestUtil.getHumanStartingCards(view.getQuestData()),
+                QuestUtil.getComputerStartingCards(view.getQuestData()),
+                view.getQuestData().getLife(), 20, null);
+    }
+
+    /**
+     * <p>
+     * setupChallenge.
+     * </p>
+     * 
+     * @param humanDeck
+     *            a {@link forge.deck.Deck} object.
+     */
+    private void setupChallenge(final Deck humanDeck) {
+        int extraLife = 0;
+
+        if (view.getQuestData().getInventory().getItemLevel("Gear") == 2) {
+            extraLife = 3;
+        }
+
+        AllZone.getGameAction().newGame(
+                Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
+                QuestUtil.getHumanStartingCards(view.getQuestData(), event),
+                QuestUtil.getHumanStartingCards(view.getQuestData(), event),
+                view.getQuestData().getLife() + extraLife, ((QuestChallenge) event).getAILife(), event);
+
     }
 }

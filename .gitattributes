@@ -10061,6 +10061,8 @@ res/pics/icons/Mage01.jpg -text
 res/pics/icons/Mage02.jpg -text
 res/pics/icons/MapIcon.png -text svneol=unset#image/png
 res/pics/icons/MapIconLarge.png -text svneol=unset#image/png
+res/pics/icons/PetIcon.png -text
+res/pics/icons/PlantIcon.png -text
 res/pics/icons/Unknown.jpg -text
 res/pics/icons/ZeppelinIcon.png -text svneol=unset#image/png
 res/pics/icons/notesIcon.png -text svneol=unset#image/png
@@ -10748,8 +10750,6 @@ src/main/java/forge/card/trigger/TriggerUnequip.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUntaps.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ControlAllUI.java -text
-src/main/java/forge/control/ControlEditorUI.java -text
-src/main/java/forge/control/ControlHomeUI.java -text
 src/main/java/forge/control/ControlMatchUI.java -text
 src/main/java/forge/control/ControlWinLose.java -text
 src/main/java/forge/control/home/ControlConstructed.java -text
