@@ -368,6 +368,25 @@ Fixes/Features:
 - Changed the default layout parameters to make the detail panel a little bit bigger.
 - Reversed changes on compiler warning fix - yikes.
 - Added the recent commit logs to changes.txt. I may try a snapshot build release.
+- fix class name in some comments and console output
+- access getThemeNames() in a static way
+- Another attempt to fix the Lotus Bloom entering tapped bug.
+- Improvements and documentation in the build draft deck AI (untested).
+- Little fix for Shimian Specter.
+- If questData.dat doesn't exist, return newQuestData. NOT NECESSARILY THE RIGHT THING TO DO, BUT FIXES THE ERROR
+- checkstyle
+- Ignore ds_store files
+- Fixed the LQ pic URL for Culling Scales.
+- Added a fluff piece to the changes.txt file.
+- More fluff.
+- Add dependency report to site build
+- add placeholder buttons for Download LQ Set Pics and Download Quest Images
+- add Choose Skin button to New Gui Home > Settings and hook it up.
+- Fixed Goblin Cohort.
+- Fixed a bug in changeHiddenOriginCanPlayAI.
+- Some fine tuning in damageChoosingTargets AI.
+- AI improvements for Melira, Sylvok Outcast.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -437,6 +456,7 @@ River of Tears
 Cerebral Vortex
 Seedtime
 Surgespanner
+Pull from Eternity
 
 
 end
