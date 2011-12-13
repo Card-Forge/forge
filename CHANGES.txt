@@ -9,7 +9,7 @@ A new UI is being developed and it will take some time before it is finished. Fo
 
 The first step was to update the battlefield window. The second step was to update the New Game window and this section still needs a lot of work. We want to get constructed node and then quest modes working first  and will then try to get the draft and sealed modes working again afterwards.
 
-Enjoy the new work and be patient as this part of the project moves forward.
+Enjoy the new work and be patient as this part of the project moves forward. For now, only "Constructed" mode is far enough along to be considered reasonably stable. We hope to have quest mode working again in the near future.
 
 The JuzamJedi cube has once again been updated with a newer list of cards.
 
