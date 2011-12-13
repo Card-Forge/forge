@@ -6,6 +6,9 @@ PT:2/2
 K:Creatures you control can't have -1/-1 counters placed on them.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't get poison counters | Description$ You can't get poison counters.
 S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | RemoveKeyword$ Infect | Description$ Creatures your opponents control lose infect.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+withPersist | AddSVar$ Sac | AddKeyword$ Sac
+SVar:Sac:SVar:SacMe:3
+SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melira_sylvok_outcast.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/115.jpg
