@@ -1,0 +1,14 @@
+Name:Mogg Toady
+ManaCost:1 R
+Types:Creature Goblin
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LEY | Description$ CARDNAME can't attack unless you control more creatures than defending player.CARDNAME can't block unless you control more creatures than attacking player.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:Y:Count$Valid Creature.YouDontCtrl
+SVar:BuffedBy:Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_toady.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/95.jpg
+Oracle:Mogg Toady can't attack unless you control more creatures than defending player.\nMogg Toady can't block unless you control more creatures than attacking player.
+End
