@@ -8221,6 +8221,7 @@ res/cardsfolder/s/sturdy_hatchling.txt svneol=native#text/plain
 res/cardsfolder/s/sturmgeist.txt -text
 res/cardsfolder/s/su_chi.txt svneol=native#text/plain
 res/cardsfolder/s/subdue.txt svneol=native#text/plain
+res/cardsfolder/s/submerge.txt -text
 res/cardsfolder/s/subterranean_hangar.txt -text
 res/cardsfolder/s/subterranean_shambler.txt svneol=native#text/plain
 res/cardsfolder/s/subterranean_spirit.txt svneol=native#text/plain
