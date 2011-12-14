@@ -361,7 +361,7 @@ public class ControlField {
         };
 
         // Library listener
-        new MouseAdapter() {
+        maLibrary = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
