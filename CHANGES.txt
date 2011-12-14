@@ -387,6 +387,30 @@ Fixes/Features:
 - Some fine tuning in damageChoosingTargets AI.
 - AI improvements for Melira, Sylvok Outcast.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Current progress on Quest submenu.
+- hook up LQ pic downloader, Quest Images downloader in New GUI home
+- Fixed Bereavement.
+- Added a very hard version of the Apu deck.
+- Commented out some debug code in getCardsAddedThisTurn.
+- Little tweak in the display of card text.
+- Added the keyword "Players play with the top card of their libraries revealed.".
+- Further development on Quest menu, started development on Draft menu.
+- add a null check in the BugzReporter. (Probably should do more checking if it can't connect to the website.) This fixes an immediate crash though.
+- Hook up the rest of the buttons on the Utilities screen of the New GUI home.
+- Final stages of development for Quest submenu.
+- Minor fix.
+- Hook up a couple things on the New GUI Home Settings screen
+- fix the Library MouseAdapter not getting set correctly
+- Quick fixes to two "out of bounds" errors in BoosterDraftAI, related to untested commit 12609. Not fully tested, could still be quirky.
+- Development work on draft mode menu.
+- Aesthetic updates to draft menu.
+- Returned functionality "enter" clicks button for FButtons.
+- Small fix to bazaar handling.
+- Fixed changes in buildDeck of BoosterDraftAI.
+- Made sure the AI will not miss an on-color card when building draft decks.
+- Deck editor enabled in home screen.
+- Also, decks can now be directly edited in constructed mode sub menu.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -457,6 +481,13 @@ Cerebral Vortex
 Seedtime
 Surgespanner
 Pull from Eternity
+Submerge
+Mogg Salvage
+Massacre
+Refreshing Rain
+Mogg Toady
+Field of Dreams
+Wizened Snitches
 
 
 end
