@@ -19,6 +19,7 @@ import javax.swing.Timer;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.home.ControlConstructed;
+import forge.deck.Deck;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -52,7 +53,6 @@ public class ViewConstructed extends JPanel {
         skin = AllZone.getSkin();
         control = new ControlConstructed(this);
 
-        // Assemble JLists with arrays from above.
         lstColorsHuman = new JList();
         lstColorsHuman.setListData(control.oa2sa(control.getColorNames()));
 
@@ -60,10 +60,7 @@ public class ViewConstructed extends JPanel {
         lstColorsAI.setListData(control.oa2sa(control.getColorNames()));
 
         lstDecksHuman = new JList();
-        lstDecksHuman.setListData(control.oa2sa(control.getDeckNames()));
-
         lstDecksAI = new JList();
-        lstDecksAI.setListData(control.oa2sa(control.getDeckNames()));
 
         lstThemesHuman = new JList();
         lstThemesHuman.setListData(control.oa2sa(control.getThemeNames()));
@@ -81,12 +78,14 @@ public class ViewConstructed extends JPanel {
         btnHumanDeckList = new SubButton();
         btnHumanDeckList.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
-                ViewConstructed.this.control.viewDeckList("Human");
+                String s = lstDecksHuman.getSelectedValue().toString();
+                Deck d = AllZone.getDeckManager().getDeck(s);
+                parentView.getController().showDeckEditor(d);
             }
         });
 
         btnHumanDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        btnHumanDeckList.setText("View selected deck");
+        btnHumanDeckList.setText("Edit selected deck");
         btnHumanDeckList.setVerticalTextPosition(SwingConstants.CENTER);
 
         // Add components
@@ -108,11 +107,13 @@ public class ViewConstructed extends JPanel {
         btnAIDeckList = new SubButton();
         btnAIDeckList.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
-                ViewConstructed.this.control.viewDeckList("Computer");
+                String s = lstDecksAI.getSelectedValue().toString();
+                Deck d = AllZone.getDeckManager().getDeck(s);
+                parentView.getController().showDeckEditor(d);
             }
         });
         btnAIDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        btnAIDeckList.setText("View selected deck");
+        btnAIDeckList.setText("Edit selected deck");
 
         // Add components
         this.add(new JScrollPane(lstColorsAI), constraints + ", gapleft 3%");
@@ -141,7 +142,7 @@ public class ViewConstructed extends JPanel {
         JButton btnStart = new JButton();
         btnStart.setAction(new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent arg0) { control.launch(); }
+            public void actionPerformed(ActionEvent arg0) { control.start(); }
         });
         btnStart.setRolloverEnabled(true);
         btnStart.setPressedIcon(parentView.getStartButtonDown());
@@ -162,6 +163,7 @@ public class ViewConstructed extends JPanel {
 
         // When all components have been added, add listeners.
         control.addListeners();
+        control.updateDeckNames();
     }
 
     // For some reason, MigLayout has sizing problems with a JLabel next to a JList.

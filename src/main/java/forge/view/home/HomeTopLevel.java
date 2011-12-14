@@ -28,6 +28,8 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.control.ControlHomeUI;
+import forge.control.home.ControlConstructed;
 import forge.control.home.ControlDraft;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
@@ -47,6 +49,7 @@ public class HomeTopLevel extends FPanel {
     private FSkin skin;
     private String constraints;
     private String imgDirAddress;
+    private ControlHomeUI control;
 
     private ViewConstructed constructed;
     private ViewSealed sealed;
@@ -126,13 +129,13 @@ public class HomeTopLevel extends FPanel {
 
         btnEditor = new FButton();
         btnEditor.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { showDeckEditor(); }
+            public void actionPerformed(ActionEvent arg0) { control.showDeckEditor(null); }
         });
         btnEditor.setText("Deck Editor");
 
         btnExit = new FButton();
         btnExit.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { exit(); }
+            public void actionPerformed(ActionEvent arg0) { control.exit(); }
         });
         btnExit.setText("Exit");
 
@@ -151,6 +154,8 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnUtilities, constraints);
         pnlMenu.add(btnEditor, constraints);
         pnlMenu.add(btnExit, constraints);
+
+        control = new ControlHomeUI(this);
 
         // Open "constructed" menu on first run.
         showConstructedMenu();
@@ -216,14 +221,6 @@ public class HomeTopLevel extends FPanel {
         pnlContent.repaint();
     }
 
-    public void showDeckEditor() {
-        
-    }
-
-    private void exit() {
-        System.exit(0);
-    }
-
     /** @return String */
     public String getImgDirAddress() {
         return imgDirAddress;
@@ -244,6 +241,11 @@ public class HomeTopLevel extends FPanel {
         return new ImageIcon(imgDirAddress + "btnStart_Up.png");
     }
 
+    /** @return ControlConstructed */
+    public ControlConstructed getConstructedController() {
+        return constructed.getController();
+    }
+
     /** @return ControlDraft */
     public ControlDraft getDraftController() {
         return draft.getController();
@@ -262,5 +264,10 @@ public class HomeTopLevel extends FPanel {
     public void resetQuest() {
         quest = new ViewQuest(this);
         showQuestMenu();
+    }
+
+    /** @return ControlHomeUI */
+    public ControlHomeUI getController() {
+        return control;
     }
 }

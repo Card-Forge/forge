@@ -55,6 +55,7 @@ public class ControlConstructed {
         this.view = v0;
 
         // Reference values for colors, needed for deck generation classes.
+        // TODO enum me or get from another enum
         colorVals = new HashMap<String, String>();
         colorVals.put("Random", "AI");
         colorVals.put("Black", "black");
@@ -410,7 +411,7 @@ public class ControlConstructed {
     }
 
     /** Fired when start button is pressed; checks various conditions from lists and starts game. */
-    public void launch() {
+    public void start() {
         String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValues());
         String[] aiSelected = oa2sa(currentAISelection.getSelectedValues());
 
@@ -466,12 +467,8 @@ public class ControlConstructed {
         return themeNames.toArray();
     }
 
-    /**
-     * Array of pre-constructed deck names, usually used in list boxes.
-     *
-     * @return Object[]
-     */
-    public Object[] getDeckNames() {
+    /** */
+    public void updateDeckNames() {
         deckNames = new ArrayList<String>();
         deckNames.add(0, "Random");
 
@@ -483,7 +480,8 @@ public class ControlConstructed {
         // No pre-constructed decks?
         if (deckNames.size() == 1) { deckNames = new ArrayList<String>(); }
 
-        return deckNames.toArray();
+        view.getLstDecksHuman().setListData(deckNames.toArray());
+        view.getLstDecksAI().setListData(deckNames.toArray());
     }
 
     /**
