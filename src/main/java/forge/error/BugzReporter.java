@@ -333,7 +333,7 @@ public class BugzReporter extends JDialog {
         this.cboSeverity.setBounds(90, 493, 160, 22);
         this.cboSeverity.setFont(new Font("Dialog", Font.BOLD, 10));
         this.cboSeverity.addItem("");
-        if (this.severities.length > 0) {
+        if (this.severities != null && this.severities.length > 0) {
             for (final IMCAttribute severitie : this.severities) {
                 this.cboSeverity.addItem(severitie.getName());
             }
