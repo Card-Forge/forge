@@ -22,6 +22,8 @@ import java.util.List;
 
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -33,7 +35,7 @@ import forge.game.GameType;
  */
 public final class Constant {
     /** Constant <code>ProgramName="Forge - http://cardforge.org"</code>. */
-    public static final String PROGRAM_NAME = "Forge - http://cardforge.org";
+    public static final String PROGRAM_NAME = "Forge - " + ForgeProps.getProperty(NewConstants.CARDFORGE_URL);
 
     // used to pass information between the GUI screens
     /**

@@ -67,7 +67,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      *            the card name
      */
     protected final void addCardToList(final ArrayList<DownloadObject> cList, final CardPrinted c, final String cardName) {
-        final String urlBase = "http://cardforge.org/fpics/";
+        final String urlBase = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/fpics/";
 
         final String setCode3 = c.getSet();
         final CardSet thisSet = SetUtils.getSetByCode(setCode3);

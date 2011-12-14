@@ -25,6 +25,8 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import forge.FileUtil;
 import forge.HttpUtil;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * Contains Maps of card ratings.
@@ -265,7 +267,9 @@ public class CardRatings {
         FileUtil.writeFile("res/draft/tempRatings.dat", CardRatings.tempRatings);
 
         final HttpUtil httpPost = new HttpUtil();
-        httpPost.upload("http://cardforge.org/draftAI/submitRatingsData.php?", "res/draft/tempRatings.dat");
+        String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/submitRatingsData.php?";
+        
+        httpPost.upload(url, "res/draft/tempRatings.dat");
 
         FileUtil.writeFile("res/draft/tempRatings.dat", new ArrayList<String>());
     }
@@ -277,16 +281,18 @@ public class CardRatings {
         final HttpUtil httpGet = new HttpUtil();
         final ArrayList<String> tmpList = new ArrayList<String>();
         String tmpData = new String();
-
-        tmpData = httpGet.getURL("http://cardforge.org/draftAI/getRatingsData.php?fmt=Full");
+        
+        String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Full";
+        tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);
         FileUtil.writeFile("res/draft/fullRatings.dat", tmpList);
         CardRatings.fullRatings.clear();
         this.loadFullRatings();
 
         tmpList.clear();
-
-        tmpData = httpGet.getURL("http://cardforge.org/draftAI/getRatingsData.php?fmt=Block");
+        
+        url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Block";
+        tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);
         FileUtil.writeFile("res/draft/blockRatings.dat", tmpList);
         CardRatings.blockRatings.clear();
@@ -294,7 +300,8 @@ public class CardRatings {
 
         tmpList.clear();
 
-        tmpData = httpGet.getURL("http://cardforge.org/draftAI/getRatingsData.php?fmt=Custom");
+        url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Custom";
+        tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);
         FileUtil.writeFile("res/draft/customRatings.dat", tmpList);
         CardRatings.customRatings.clear();

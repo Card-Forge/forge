@@ -57,6 +57,8 @@ import org.mantisbt.connect.ui.DefaultSubmitter;
 import forge.Singletons;
 import forge.model.BuildInfo;
 import forge.properties.ForgePreferences;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * The Class BugzReporter.
@@ -89,6 +91,8 @@ public class BugzReporter extends JDialog {
     private static BugzReporter dialog = null;
 
     private IMCAttribute[] severities;
+    
+    private String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/bugz/api/soap/mantisconnect.php";
 
     /**
      * Launch the application.
@@ -139,8 +143,8 @@ public class BugzReporter extends JDialog {
         MCSession mCS = null;
 
         try {
-            mCS = new MCSession(new URL("http://cardforge.org/bugz/api/soap/mantisconnect.php"), "ForgeGUI",
-                    "vi2ccTbfBUu^");
+            
+            mCS = new MCSession(new URL(url), "ForgeGUI", "vi2ccTbfBUu^");
         } catch (final MalformedURLException e1) {
             System.out.println("MalFormedURLException");
         } catch (final MCException e1) {
@@ -395,8 +399,7 @@ public class BugzReporter extends JDialog {
             MCSession rep = null;
             if (!this.chkReportAnonymously.isSelected()) {
                 try {
-                    rep = new MCSession(new URL("http://cardforge.org/bugz/api/soap/mantisconnect.php"),
-                            this.txtUserName.getText(), String.valueOf(this.txtPassword.getPassword()));
+                    rep = new MCSession(new URL(url), this.txtUserName.getText(), String.valueOf(this.txtPassword.getPassword()));
                 } catch (final MalformedURLException e) {
                     System.out.println("MalFormedURLException");
                 } catch (final MCException e) {
@@ -407,8 +410,7 @@ public class BugzReporter extends JDialog {
                 }
             } else {
                 try {
-                    rep = new MCSession(new URL("http://cardforge.org/bugz/api/soap/mantisconnect.php"), "ForgeGUI",
-                            "vi2ccTbfBUu^");
+                    rep = new MCSession(new URL(url), "ForgeGUI", "vi2ccTbfBUu^");
                 } catch (final MalformedURLException e) {
                     System.out.println("MalformedURLException");
                 } catch (final MCException e) {

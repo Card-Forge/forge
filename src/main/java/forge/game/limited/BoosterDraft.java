@@ -48,6 +48,8 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * 
@@ -368,8 +370,8 @@ public final class BoosterDraft implements IBoosterDraft {
                 FileUtil.writeFile("res/draft/tmpDraftData.txt", outDraftData);
 
                 final HttpUtil poster = new HttpUtil();
-                poster.upload("http://cardforge.org/draftAI/submitDraftData.php?fmt=" + this.draftFormat,
-                        "res/draft/tmpDraftData.txt");
+                String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/submitDraftData.php?fmt=";
+                poster.upload(url + this.draftFormat, "res/draft/tmpDraftData.txt");
             }
         }
     }

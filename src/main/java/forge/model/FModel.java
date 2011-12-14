@@ -29,6 +29,8 @@ import arcane.util.MultiplexOutputStream;
 import forge.Constant;
 import forge.HttpUtil;
 import forge.properties.ForgePreferences;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * The default Model implementation for Forge.
@@ -96,7 +98,8 @@ public class FModel {
         Constant.Runtime.RANDOM_FOIL[0] = this.preferences.isRandCFoil();
 
         final HttpUtil pinger = new HttpUtil();
-        if (pinger.getURL("http://cardforge.org/draftAI/ping.php").equals("pong")) {
+        String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
+        if (pinger.getURL(url).equals("pong")) {
             Constant.Runtime.NET_CONN[0] = true;
         } else {
             Constant.Runtime.UPLOAD_DRAFT[0] = false;
