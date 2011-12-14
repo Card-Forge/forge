@@ -17,7 +17,8 @@ import net.miginfocom.swing.MigLayout;
 public class ViewUtilities extends JPanel {
     private ControlUtilities control;
     
-    private SubButton btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages;
+    private SubButton btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages, btnReportBug;
+    private SubButton btnImportPictures, btnHowToPlay, btnDownloadPrices;
     /**
      * 
      * TODO: Write javadoc for Constructor.
@@ -37,19 +38,25 @@ public class ViewUtilities extends JPanel {
         btnDownloadQuestImages = new SubButton("Download Quest Images");
         this.add(btnDownloadQuestImages, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
-        SubButton btnDownloadPrices = new SubButton("Download Card Prices");
+        btnDownloadPrices = new SubButton("Download Card Prices");
         this.add(btnDownloadPrices, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
-        SubButton btnImportPics = new SubButton("Import Pictures");
-        this.add(btnImportPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        btnImportPictures = new SubButton("Import Pictures");
+        this.add(btnImportPictures, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
-        SubButton btnReportBug = new SubButton("Report a Bug");
+        btnReportBug = new SubButton("Report a Bug");
         this.add(btnReportBug, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
+        /*
+         * slapshot5 - I think this is useless here.  If it serves a purpose, just uncomment,
+         * and hook it up in ControlUtilities.
+         */
+        /*
         SubButton btnStackReport = new SubButton("Stack Report");
         this.add(btnStackReport, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        */
 
-        SubButton btnHowToPlay = new SubButton("How To Play");
+        btnHowToPlay = new SubButton("How To Play");
         this.add(btnHowToPlay, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
 
         JLabel lblAbout = new JLabel("About Forge here: Licensing, etc.");
@@ -72,6 +79,26 @@ public class ViewUtilities extends JPanel {
     /** @return SubButton */
     public SubButton getBtnDownloadQuestImages() {
         return btnDownloadQuestImages;
+    }
+    
+    /** @return SubButton */
+    public SubButton getBtnReportBug() {
+        return btnReportBug;
+    }
+    
+    /** @return SubButton */
+    public SubButton getBtnImportPictures() {
+        return btnImportPictures;
+    }
+    
+    /** @return SubButton */
+    public SubButton getBtnHowToPlay() {
+        return btnHowToPlay;
+    }
+    
+    /** @return SubButton */
+    public SubButton getBtnDownloadPrices() {
+        return btnDownloadPrices;
     }
     
     /**

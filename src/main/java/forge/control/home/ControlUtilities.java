@@ -3,9 +3,18 @@ package forge.control.home;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import forge.GuiDownloadPicturesLQ;
+import forge.GuiDownloadPrices;
 import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
+import forge.GuiImportPicture;
+import forge.error.BugzReporter;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.Lang;
 import forge.view.home.ViewUtilities;
 
 /** 
@@ -51,6 +60,43 @@ public class ControlUtilities {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 doDownloadQuestImages();
+            }
+        });
+
+        this.view.getBtnReportBug().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                final BugzReporter br = new BugzReporter();
+                br.setVisible(true);
+            }
+        });
+        this.view.getBtnImportPictures().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                final GuiImportPicture ip = new GuiImportPicture(null);
+                ip.setVisible(true);
+            }
+        });
+        this.view.getBtnHowToPlay().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                final String text = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
+
+                final JTextArea area = new JTextArea(text, 25, 40);
+                area.setWrapStyleWord(true);
+                area.setLineWrap(true);
+                area.setEditable(false);
+                area.setOpaque(false);
+
+                JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(Lang.HowTo.TITLE),
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        this.view.getBtnDownloadPrices().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                final GuiDownloadPrices gdp = new GuiDownloadPrices();
+                gdp.setVisible(true);
             }
         });
     }
