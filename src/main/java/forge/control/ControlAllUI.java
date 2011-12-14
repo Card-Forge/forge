@@ -88,6 +88,7 @@ public class ControlAllUI {
             public void windowClosing(final WindowEvent e) {
                 view.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 changeState(0);
+                getHomeView().showQuestMenu();
             }
         };
 
