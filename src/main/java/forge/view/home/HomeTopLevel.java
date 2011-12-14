@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.control.home.ControlDraft;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
@@ -234,6 +235,11 @@ public class HomeTopLevel extends FPanel {
     /** @return ImageIcon */
     public ImageIcon getStartButtonUp() {
         return new ImageIcon(imgDirAddress + "btnStart_Up.png");
+    }
+
+    /** @return ControlDraft */
+    public ControlDraft getDraftController() {
+        return draft.getController();
     }
 
     private void clearToggles() {

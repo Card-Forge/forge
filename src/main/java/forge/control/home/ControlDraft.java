@@ -11,6 +11,7 @@ import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorDraft;
+import forge.view.GuiTopLevel;
 import forge.view.home.ViewDraft;
 
 /** 
@@ -23,6 +24,7 @@ public class ControlDraft {
     /** @param v0 &emsp; ViewDraft */
     public ControlDraft(ViewDraft v0) {
         this.view = v0;
+        updateHumanDecks();
     }
 
     /** */
@@ -73,5 +75,16 @@ public class ControlDraft {
         if (Constant.Runtime.COMPUTER_DECK[0] == null) {
             throw new IllegalStateException("OldGuiNewGame : startButton() error - computer deck is null");
         }
+
+        GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
+        g.getController().changeState(1);
+        g.getController().getMatchController().initMatch();
+        AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+    }
+
+    /** Updates deck list in view. */
+    public void updateHumanDecks() {
+        view.getLstHumanDecks().setListData(AllZone.getDeckManager().getDraftDecks().keySet().toArray());
+        view.getLstHumanDecks().setSelectedIndex(0);
     }
 }

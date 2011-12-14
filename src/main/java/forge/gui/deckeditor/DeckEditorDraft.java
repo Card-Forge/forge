@@ -54,7 +54,6 @@ import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
 import forge.view.GuiTopLevel;
-import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
 /**
@@ -138,24 +137,13 @@ public class DeckEditorDraft extends DeckEditorBase {
                 if (n == JOptionPane.YES_OPTION) {
                     DeckEditorDraft.this.dispose();
 
-                    if (System.getenv("NG2") != null) {
-                        if (System.getenv("NG2").equalsIgnoreCase("true")) {
-                            final String[] argz = {};
-                            GuiHomeScreen.main(argz);
-                        } else {
-                            new OldGuiNewGame();
-                        }
-                    } else {
-                        if (Constant.Runtime.OLDGUI[0]) {
-                            new OldGuiNewGame();
-                        }
-                        else {
-                            ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-                            g.changeState(ControlAllUI.HOME_SCREEN);
-                            g.getHomeView().showQuestMenu();
-                        }
+                    if (Constant.Runtime.OLDGUI[0]) {
+                        new OldGuiNewGame();
                     }
-
+                    else {
+                        ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+                        g.getHomeView().getDraftController().updateHumanDecks();
+                    }
                 }
             } // windowClosing()
         });
@@ -374,15 +362,12 @@ public class DeckEditorDraft extends DeckEditorBase {
         // close and open next screen
         this.dispose();
 
-        if (System.getenv("NG2") != null) {
-            if (System.getenv("NG2").equalsIgnoreCase("true")) {
-                final String[] argz = {};
-                GuiHomeScreen.main(argz);
-            } else {
-                new OldGuiNewGame();
-            }
-        } else {
+        if (Constant.Runtime.OLDGUI[0]) {
             new OldGuiNewGame();
+        }
+        else {
+            ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+            g.getHomeView().getDraftController().updateHumanDecks();
         }
 
     } /* saveDraft() */
