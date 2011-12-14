@@ -24,8 +24,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JLayeredPane;
+import javax.swing.WindowConstants;
 
-import forge.AllZone;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
 import forge.view.GuiTopLevel;
 import forge.view.editor.EditorTopLevel;
@@ -46,7 +46,7 @@ public class ControlAllUI {
     private HomeTopLevel home = null;
     private ViewTopLevel match = null;
     private EditorTopLevel editor = null;
-    private WindowAdapter waConcede;
+    private WindowAdapter waDefault, waConcede, waLeaveBazaar;
     private QuestBazaarPanel bazaar;
 
     /** */
@@ -73,13 +73,38 @@ public class ControlAllUI {
 
         this.display = (JLayeredPane) this.view.getContentPane();
 
+        // "Close" button override during match
         this.waConcede = new WindowAdapter() {
             @Override
-            public void windowClosing(final WindowEvent evt) {
-                ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-                t.getDockController().concede();
+            public void windowClosing(final WindowEvent e) {
+                view.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                getMatchView().getDockController().concede();
             }
         };
+
+        // "Close" button override while inside bazaar (will probably be used later for other things)
+        this.waLeaveBazaar = new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent e) {
+                view.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                changeState(0);
+            }
+        };
+
+        // Default action on window close
+        this.waDefault = new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            }
+         };
+
+         // Handles resizing in null layouts of layers in JLayeredPane.
+        view.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(final ComponentEvent e) {
+                sizeChildren();
+            }
+        });
     }
 
     /**
@@ -98,14 +123,9 @@ public class ControlAllUI {
 
         this.display.removeAll();
         this.view.removeWindowListener(waConcede);
+        this.view.removeWindowListener(waLeaveBazaar);
+        this.view.addWindowListener(waDefault);
         this.view.addOverlay();
-
-        view.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(final ComponentEvent e) {
-                sizeChildren();
-            }
-        });
 
         // Fire up new state
         switch (i) {
@@ -131,6 +151,7 @@ public class ControlAllUI {
             this.bazaar = new QuestBazaarPanel(null);
             this.display.add(bazaar, JLayeredPane.DEFAULT_LAYER);
             sizeChildren();
+            view.addWindowListener(waLeaveBazaar);
             break;
 
         default:
@@ -171,7 +192,7 @@ public class ControlAllUI {
     }
 
     /** Sizes children of JLayeredPane to fully fit their layers. */
-    private void sizeChildren() {
+    private void sizeChildren() {  System.out.println("asdf55");
         Component[] children;
         children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
 

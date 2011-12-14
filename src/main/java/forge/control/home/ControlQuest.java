@@ -91,6 +91,14 @@ public class ControlQuest {
         g.setVisible(true);
     }
 
+    private void updateCredits() {
+        view.getLblCredits().setText(Long.toString(view.getQuestData().getCredits()));
+    }
+
+    private void updateLife() {
+        view.getLblLife().setText(Long.toString(view.getQuestData().getLife()));
+    }
+
     /** */
     public void showCardShop() {
         final Command exit = new Command() {
@@ -100,6 +108,8 @@ public class ControlQuest {
             public void execute() {
                 // saves all deck data
                 AllZone.getQuestData().saveData();
+                updateCredits();
+                updateLife();
             }
         };
 

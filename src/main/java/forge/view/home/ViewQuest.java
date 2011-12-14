@@ -56,7 +56,7 @@ public class ViewQuest extends JScrollPane {
     private JRadioButton radEasy, radMedium, radHard, radExpert, radFantasy, radClassic;
     private JCheckBox cbStandardStart, cbPlant, cbZep;
     private JComboBox cbxPet;
-    private JLabel lblPlant, lblPet, lblZep;
+    private JLabel lblPlant, lblPet, lblZep, lblLife, lblCredits;
     private boolean previousQuestExists = false;
 
     /**
@@ -69,6 +69,7 @@ public class ViewQuest extends JScrollPane {
         super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.setOpaque(false);
         this.setBorder(null);
+        this.getVerticalScrollBar().setUnitIncrement(16);
         parentView = v0;
         skin = AllZone.getSkin();
 
@@ -192,14 +193,14 @@ public class ViewQuest extends JScrollPane {
         optionsContainer.setLayout(new MigLayout("insets 0, gap 0"));
         optionsContainer.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
 
-        JLabel lblCredits = new JLabel("Credits: " + Long.toString(questData.getCredits()));
+        lblCredits = new JLabel("Credits: " + Long.toString(questData.getCredits()));
         lblCredits.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/pics/icons/CoinStack.png"), 26, 26));
         lblCredits.setForeground(skin.getColor("text"));
         lblCredits.setIconTextGap(5);
         lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
         lblCredits.setFont(skin.getFont1().deriveFont(Font.BOLD, 14));
 
-        JLabel lblLife = new JLabel("Life: " + Long.toString(questData.getLife()));
+        lblLife = new JLabel("Life: " + Long.toString(questData.getLife()));
         lblLife.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/pics/icons/Life.png"), 26, 26));
         lblLife.setForeground(skin.getColor("text"));
         lblLife.setIconTextGap(5);
@@ -260,8 +261,10 @@ public class ViewQuest extends JScrollPane {
         cbxPet = new JComboBox();
         cbxPet.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
 
-        cbPlant = new OptionsCheckBox("Summon Wall");
+        cbPlant = new OptionsCheckBox("Summon Plant");
+        cbPlant.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
         cbZep = new OptionsCheckBox("Launch Zeppelin");
+        cbZep.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
 
         lblPet = new JLabel(GuiUtils.getResizedIcon(
                 new ImageIcon("res/pics/icons/PetIcon.png"), 30, 30));
@@ -636,5 +639,15 @@ public class ViewQuest extends JScrollPane {
     /** @return boolean */
     public boolean hasPreviousQuest() {
         return previousQuestExists;
+    }
+
+    /** @return JLabel */
+    public JLabel getLblLife() {
+        return lblLife;
+    }
+
+    /** @return JLabel */
+    public JLabel getLblCredits() {
+        return lblCredits;
     }
 }
