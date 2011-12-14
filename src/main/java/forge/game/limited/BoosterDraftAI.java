@@ -384,7 +384,7 @@ public class BoosterDraftAI {
 
         // 1.Add up to 15 on-color creatures
         int i = 0;
-        while (nCreatures > 0 && creatures.size() > 0) {
+        while (nCreatures > 0 && creatures.size() > i) {
             final Card c = creatures.get(i);
 
             outList.add(c);
@@ -437,7 +437,8 @@ public class BoosterDraftAI {
         }
 
         // 3.Try to fill up to 22 with on-color creatures cards (if more than 15 are present)
-        while (cardsNeeded > 0 && (0 < creatures.size())) {
+        i = 0;
+        while (cardsNeeded > 0 && (i < creatures.size())) {
             final Card c = creatures.get(i);
 
             outList.add(c);
