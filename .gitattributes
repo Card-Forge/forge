@@ -9898,6 +9898,12 @@ res/images/icons/PetIcon.png -text
 res/images/icons/PlantIcon.png -text
 res/images/icons/Unknown.jpg -text
 res/images/icons/ZeppelinIcon.png -text svneol=unset#image/png
+res/images/icons/g_0_1_plant_wall_small.jpg -text
+res/images/icons/g_0_2_plant_wall_small.jpg -text
+res/images/icons/g_0_3_plant_wall_small.jpg -text
+res/images/icons/g_1_3_plant_wall_deathtouch_small.jpg -text
+res/images/icons/g_1_3_plant_wall_small.jpg -text
+res/images/icons/g_1_4_plant_wall_small.jpg -text
 res/images/icons/notesIcon.png -text svneol=unset#image/png
 res/images/skins/default/bg_match.jpg -text
 res/images/skins/default/bg_splash.jpg -text
@@ -10069,6 +10075,12 @@ res/licenses/xstream-license.txt svneol=native#text/plain
 res/main.properties svneol=native#text/plain
 res/mtg-data.txt svneol=native#text/plain
 res/oracleScript.py -text svneol=unset#text/x-python
+res/pics/tokens/g_0_1_plant_wall.jpg -text
+res/pics/tokens/g_0_2_plant_wall.jpg -text
+res/pics/tokens/g_0_3_plant_wall.jpg -text
+res/pics/tokens/g_1_3_plant_wall.jpg -text
+res/pics/tokens/g_1_3_plant_wall_deathtouch.jpg -text
+res/pics/tokens/g_1_4_plant_wall.jpg -text
 res/pics_link/card-pictures_a.txt svneol=native#text/plain
 res/pics_link/card-pictures_b.txt svneol=native#text/plain
 res/pics_link/card-pictures_c.txt svneol=native#text/plain
