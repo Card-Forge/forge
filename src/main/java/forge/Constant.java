@@ -212,7 +212,10 @@ public final class Constant {
         Command,
 
         /** The Stack. */
-        Stack;
+        Stack,
+        
+        /** Ante. */
+        Ante;
 
         /**
          * Smart value of.

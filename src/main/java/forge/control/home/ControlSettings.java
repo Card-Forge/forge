@@ -42,6 +42,32 @@ public class ControlSettings {
                 doChooseSkin();
             }
         });
+
+        //slapshot5 - work in progress, but I need to check this file in for other changes.
+        /*
+        this.view.getCbAnte().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences()
+                        .setPlayForAnte(ControlSettings.this.view.getCbAnte().isSelected());
+            }
+        });
+        */
+        this.view.getCbScaleLarger().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences()
+                        .setScaleLargerThanOriginal(ControlSettings.this.view.getCbScaleLarger().isSelected());
+            }
+        });
+
+        this.view.getCbDevMode().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences()
+                        .setDeveloperMode(ControlSettings.this.view.getCbDevMode().isSelected());
+            }
+        });
     }
     
     private void doChooseSkin() {

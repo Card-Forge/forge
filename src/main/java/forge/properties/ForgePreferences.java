@@ -39,6 +39,9 @@ public class ForgePreferences extends Preferences {
 
     /** Old gui checkbox toggle. */
     private boolean oldGui;
+    
+    /** Play for ante checkbox toggle. */
+    private boolean playForAnte;
 
     /** UI layout parameter string. */
     private String uiParams;
@@ -342,6 +345,25 @@ public class ForgePreferences extends Preferences {
      */
     public void setOldGui(final boolean b0) {
         this.oldGui = b0;
+    }
+
+    /**
+     * Checks if we are playing for ante.
+     * 
+     * @return boolean
+     */
+    public boolean isPlayForAnte() {
+        return this.playForAnte;
+    }
+
+    /**
+     * Sets if we are playing for ante.
+     * 
+     * @param b0
+     *            &emsp; boolean
+     */
+    public void setPlayForAnte(final boolean b0) {
+        this.playForAnte = b0;
     }
 
     /**

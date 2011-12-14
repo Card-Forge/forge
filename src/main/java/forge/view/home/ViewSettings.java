@@ -13,6 +13,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 
 import forge.AllZone;
+import forge.Singletons;
 import forge.control.home.ControlSettings;
 import forge.view.toolbox.FSkin;
 
@@ -27,6 +28,7 @@ public class ViewSettings extends JScrollPane {
     private JPanel viewport;
     
     SubButton btnChooseSkin;
+    OptionsCheckBox cbAnte, cbScaleLarger, cbDevMode;
     /**
      * 
      * TODO: Write javadoc for Constructor.
@@ -82,6 +84,15 @@ public class ViewSettings extends JScrollPane {
         viewport.add(cbOldUI, constraints);
         viewport.add(lblOldUI, constraints2);
 
+        //slapshot5 - this is in progress, but I need to check this in for some other changes.
+        this.cbAnte = new OptionsCheckBox("Play for Ante");
+        //this.cbAnte.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
+        //NoteLabel lblAnte = new NoteLabel("Each player antes a card and the game is for keeps.");
+        /*
+        viewport.add(cbAnte, constraints);
+        viewport.add(lblAnte, constraints2);
+        */
+
         OptionsCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Pics");
         NoteLabel lblUploadDraft = new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI.");
         viewport.add(cbUploadDraft, constraints);
@@ -92,9 +103,10 @@ public class ViewSettings extends JScrollPane {
         viewport.add(cbStackLand, constraints);
         viewport.add(lblStackLand, constraints2);
 
-        OptionsCheckBox cdDevMode = new OptionsCheckBox("Dev Mode");
+        cbDevMode = new OptionsCheckBox("Developer Mode");
+        this.cbDevMode.setSelected(Singletons.getModel().getPreferences().isDeveloperMode());
         NoteLabel lblDevMode = new NoteLabel("Enables menu with functions for testing during development.");
-        viewport.add(cdDevMode, constraints);
+        viewport.add(cbDevMode, constraints);
         viewport.add(lblDevMode, constraints2);
 
         SubButton btnStackSize = new SubButton("Stack Size: 12");
@@ -122,10 +134,11 @@ public class ViewSettings extends JScrollPane {
         viewport.add(cbRandomFoil, constraints);
         viewport.add(lblRandomFoil, constraints2);
 
-        OptionsCheckBox cbScaleImage = new OptionsCheckBox("Scale image larger");
-        NoteLabel lblScaleImage = new NoteLabel("Not sure what this does...can someone who does update this text");
-        viewport.add(cbScaleImage, constraints);
-        viewport.add(lblScaleImage, constraints2);
+        cbScaleLarger = new OptionsCheckBox("Scale image larger");
+        this.cbScaleLarger.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
+        NoteLabel lblScaleLarger = new NoteLabel("Not sure what this does...can someone who does update this text");
+        viewport.add(cbScaleLarger, constraints);
+        viewport.add(lblScaleLarger, constraints2);
 
         OptionsCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
         NoteLabel lblTextMana = new NoteLabel("Overlays each card with basic card-specific information.");
@@ -169,6 +182,18 @@ public class ViewSettings extends JScrollPane {
     
     public SubButton getBtnChooseSkin() {
         return btnChooseSkin;
+    }
+    
+    public JCheckBox getCbAnte() {
+        return cbAnte;
+    }
+    
+    public JCheckBox getCbScaleLarger() {
+        return cbScaleLarger;
+    }
+    
+    public JCheckBox getCbDevMode() {
+        return cbDevMode;
     }
     
     public ControlSettings getController() {
