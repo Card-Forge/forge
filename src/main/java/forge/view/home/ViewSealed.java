@@ -2,6 +2,8 @@ package forge.view.home;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,25 +14,29 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.control.home.ControlSealed;
 import forge.view.toolbox.FSkin;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Assembles swing components for "Sealed" mode menu.
  *
  */
 @SuppressWarnings("serial")
 public class ViewSealed extends JPanel {
     private FSkin skin;
     private HomeTopLevel parentView;
+    private ControlSealed control;
+    private JList lstHumanDecks, lstAIDecks;
 
     /**
-     * TODO: Write javadoc for Constructor.
+     * Assembles swing components for "Sealed" mode menu.
+     * 
      * @param v0 &emsp; HomeTopLevel parent view
      */
     public ViewSealed(HomeTopLevel v0) {
         super();
         this.setOpaque(false);
-        this.setLayout(new MigLayout("insets 0, gap 0"));
+        this.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         parentView = v0;
         skin = AllZone.getSkin();
 
@@ -38,26 +44,28 @@ public class ViewSealed extends JPanel {
         lblTitle.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
         lblTitle.setForeground(skin.getColor("text"));
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        this.add(lblTitle, "w 100%!, gap 0 0 2% 2%, span 3 1, wrap");
+        this.add(lblTitle, "w 100%!, gap 0 0 2% 2%, span 2 1");
 
-        String[] human = {"one", "two", "three"};
-        String[] ai = {"four", "five:", "siz"};
-
-        JList humanDecks = new JList(human);
-        JList aiDecks = new JList(ai);
+        lstHumanDecks = new JList();
+        lstAIDecks = new JList();
 
         //
-        this.add(new JScrollPane(humanDecks), "w 30%!, gapleft 15%, gapright 5%, h 30%!");
-        this.add(new JScrollPane(aiDecks), "w 30%!, h 30%!, wrap");
+        this.add(new JScrollPane(lstHumanDecks), "w 40%!, h 30%!, gap 7.5% 5% 2% 2%");
+        this.add(new JScrollPane(lstAIDecks), "w 40%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
         SubButton buildHuman = new SubButton("Build New Human Deck");
-        this.add(buildHuman, "w 30%!, h 5%!, gapleft 15%, gapright 15%, gaptop 1%");
-
-        SubButton buildAI = new SubButton("Build New AI Deck");
-        this.add(buildAI, "w 30%!, h 5%!, gaptop 1%, wrap");
+        buildHuman.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { control.setupSealed(); }
+        });
+        this.add(buildHuman, "w 40%!, h 5%!, gap 7.5% 5% 0 0, wrap");
 
         // Start button
         JButton btnStart = new JButton();
+        btnStart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { control.start(); }
+        });
         btnStart.setRolloverEnabled(true);
         btnStart.setPressedIcon(parentView.getStartButtonDown());
         btnStart.setRolloverIcon(parentView.getStartButtonOver());
@@ -74,10 +82,30 @@ public class ViewSealed extends JPanel {
 
         pnlButtonContainer.setLayout(new BorderLayout());
         pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
+
+        control = new ControlSealed(this);
+        control.updateDeckLists();
+        lstHumanDecks.setSelectedIndex(0);
+        lstAIDecks.setSelectedIndex(0);
     }
 
     /** @return HomeTopLevel */
     public HomeTopLevel getParentView() {
         return parentView;
+    }
+
+    /** @return JList */
+    public JList getLstHumanDecks() {
+        return lstHumanDecks;
+    }
+
+    /** @return JList */
+    public JList getLstAIDecks() {
+        return lstAIDecks;
+    }
+
+    /** @return ControlSealed */
+    public ControlSealed getController() {
+        return control;
     }
 }

@@ -2,17 +2,23 @@ package forge.control.home;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import forge.Command;
 import forge.GuiDownloadPicturesLQ;
 import forge.GuiDownloadPrices;
 import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
+import forge.deck.Deck;
 import forge.error.BugzReporter;
+import forge.game.GameType;
+import forge.gui.deckeditor.DeckEditorCommon;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
 import forge.view.home.ViewUtilities;
@@ -23,7 +29,7 @@ import forge.view.home.ViewUtilities;
  */
 public class ControlUtilities {
     private ViewUtilities view;
-
+    private boolean licensingExpanded = false;
     /**
      * 
      * Controls logic and listeners for Utilities panel of the home screen.
@@ -99,17 +105,89 @@ public class ControlUtilities {
                 gdp.setVisible(true);
             }
         });
+
+        this.view.getBtnDeckEditor().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                showDeckEditor(null, null);
+            }
+        });
+
+        this.view.getTarLicensing().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (licensingExpanded) {
+                    hideLicenseInfo();
+                    licensingExpanded = false;
+                }
+                else {
+                    showLicenseInfo();
+                    licensingExpanded = true;
+                }
+            }
+        });
     }
-    
+
     private void doDownloadPics() {
         new GuiDownloadPicturesLQ(null);
     }
-    
+
     private void doDownloadSetPics() {
         new GuiDownloadSetPicturesLQ(null);
     }
-    
+
     private void doDownloadQuestImages() {
         new GuiDownloadQuestImages(null);
+    }
+
+    private void showLicenseInfo() {
+        view.getTarLicensing().setText(
+                "This program is free software : you can redistribute it and/or modify "
+                + "it under the terms of the GNU General Public License as published by "
+                + "the Free Software Foundation, either version 3 of the License, or "
+                + "(at your option) any later version."
+                + "\r\n"
+                + "This program is distributed in the hope that it will be useful, "
+                + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+                + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+                + "GNU General Public License for more details."
+                + "\r\n"
+                + "You should have received a copy of the GNU General Public License "
+                + "along with this program.  If not, see <http://www.gnu.org/licenses/>."
+       );
+    }
+
+    private void hideLicenseInfo() {
+        view.getTarLicensing().setText("Click here for license information.");
+    }
+
+    /**
+     * @param gt0 &emsp; GameType
+     * @param d0 &emsp; Deck
+     */
+    public void showDeckEditor(GameType gt0, Deck d0) {
+        if (gt0 == null) {
+            gt0 = GameType.Constructed;
+        }
+
+        DeckEditorCommon editor = new DeckEditorCommon(gt0);
+
+        final Command exit = new Command() {
+            private static final long serialVersionUID = -9133358399503226853L;
+
+            @Override
+            public void execute() {
+                view.getParentView().getConstructedController().updateDeckNames();
+                view.getParentView().getSealedController().updateDeckLists();
+            }
+        };
+
+        editor.show(exit);
+
+        if (d0 != null) {
+            editor.getCustomMenu().showDeck(d0, gt0);
+        }
+
+        editor.setVisible(true);
     }
 }

@@ -20,10 +20,11 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.home.ControlConstructed;
 import forge.deck.Deck;
+import forge.game.GameType;
 import forge.view.toolbox.FSkin;
 
 /** 
- * Populates Swing components of Constructed mode in home screen.
+ * Assembles swing components for "Constructed" mode menu.
  * 
  */
 @SuppressWarnings("serial")
@@ -40,7 +41,7 @@ public class ViewConstructed extends JPanel {
     private ControlConstructed control;
 
     /**
-     * Populates Swing components of "constructed" mode in home screen.
+     * Assembles swing components for "Constructed" mode menu.
      * 
      * @param v0 &emsp; HomeTopLevel parent view
      */
@@ -80,7 +81,7 @@ public class ViewConstructed extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 String s = lstDecksHuman.getSelectedValue().toString();
                 Deck d = AllZone.getDeckManager().getDeck(s);
-                parentView.getController().showDeckEditor(d);
+                parentView.getUtilitiesController().showDeckEditor(GameType.Constructed, d);
             }
         });
 
@@ -109,7 +110,7 @@ public class ViewConstructed extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 String s = lstDecksAI.getSelectedValue().toString();
                 Deck d = AllZone.getDeckManager().getDeck(s);
-                parentView.getController().showDeckEditor(d);
+                parentView.getUtilitiesController().showDeckEditor(GameType.Constructed, d);
             }
         });
         btnAIDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));

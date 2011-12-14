@@ -31,6 +31,8 @@ import forge.AllZone;
 import forge.control.ControlHomeUI;
 import forge.control.home.ControlConstructed;
 import forge.control.home.ControlDraft;
+import forge.control.home.ControlSealed;
+import forge.control.home.ControlUtilities;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
@@ -45,7 +47,7 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class HomeTopLevel extends FPanel {
     private JPanel pnlMenu, pnlContent;
-    private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnEditor, btnExit;
+    private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnExit;
     private FSkin skin;
     private String constraints;
     private String imgDirAddress;
@@ -127,12 +129,6 @@ public class HomeTopLevel extends FPanel {
         });
         btnUtilities.setText("Utilities");
 
-        btnEditor = new FButton();
-        btnEditor.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { control.showDeckEditor(null); }
-        });
-        btnEditor.setText("Deck Editor");
-
         btnExit = new FButton();
         btnExit.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) { control.exit(); }
@@ -152,7 +148,6 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnQuest, constraints);
         pnlMenu.add(btnSettings, constraints);
         pnlMenu.add(btnUtilities, constraints);
-        pnlMenu.add(btnEditor, constraints);
         pnlMenu.add(btnExit, constraints);
 
         control = new ControlHomeUI(this);
@@ -249,6 +244,16 @@ public class HomeTopLevel extends FPanel {
     /** @return ControlDraft */
     public ControlDraft getDraftController() {
         return draft.getController();
+    }
+
+    /** @return ControlSealed */
+    public ControlSealed getSealedController() {
+        return sealed.getController();
+    }
+
+    /** @return ControlUtilities */
+    public ControlUtilities getUtilitiesController() {
+        return utilities.getController();
     }
 
     private void clearToggles() {

@@ -57,7 +57,10 @@ public class ControlConstructed {
         // Reference values for colors, needed for deck generation classes.
         // TODO enum me or get from another enum
         colorVals = new HashMap<String, String>();
-        colorVals.put("Random", "AI");
+        colorVals.put("Random 1", "AI");
+        colorVals.put("Random 2", "AI");
+        colorVals.put("Random 3", "AI");
+        colorVals.put("Random 4", "AI");
         colorVals.put("Black", "black");
         colorVals.put("Blue", "blue");
         colorVals.put("Green", "green");
