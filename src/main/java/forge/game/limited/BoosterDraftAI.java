@@ -420,8 +420,12 @@ public class BoosterDraftAI {
 
         // 2.Try to fill up to 22 with on-color non-creature cards
         int ii = 0;
-        while (cardsNeeded > 0 && others.size() > 1) {
-            final Card c = others.get(MyRandom.getRandom().nextInt(others.size() - 1));
+        while (cardsNeeded > 0 && others.size() > 0) {
+            int index = 0;
+            if (others.size() > 1) {
+                index = MyRandom.getRandom().nextInt(others.size() - 1);
+            }
+            final Card c = others.get(index);
 
             // out.addMain(c.getName());
             outList.add(c);
