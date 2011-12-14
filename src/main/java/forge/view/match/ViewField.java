@@ -94,7 +94,7 @@ public class ViewField extends FRoundedPanel {
         this.hoverBorder = new LineBorder(this.skin.getColor("borders"), 1);
         this.counter = -1;
 
-        String filename = "res/pics/icons/" + (player.isHuman() ? "Mage01.jpg" : "Mage02.jpg");
+        String filename = "res/images/icons/" + (player.isHuman() ? "Mage01.jpg" : "Mage02.jpg");
         img = new ImageIcon(filename).getImage();
 
         // Avatar and life

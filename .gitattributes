@@ -9873,6 +9873,32 @@ res/images/deckeditor/filter_sorcery_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_sorcery_y.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_y.png -text svneol=unset#image/png
+res/images/icons/BookIcon.png -text svneol=unset#image/png
+res/images/icons/BookIconSmall.png -text svneol=unset#image/png
+res/images/icons/BottlesIconSmall.png -text svneol=unset#image/png
+res/images/icons/BoxIcon.png -text svneol=unset#image/png
+res/images/icons/BoxIconSmall.png -text svneol=unset#image/png
+res/images/icons/CoinIcon.png -text svneol=unset#image/png
+res/images/icons/CoinIconSmall.png -text svneol=unset#image/png
+res/images/icons/CoinStack.png -text svneol=unset#image/png
+res/images/icons/ElixirIcon.png -text svneol=unset#image/png
+res/images/icons/FoxIconSmall.png -text svneol=unset#image/png
+res/images/icons/GearIconSmall.png -text svneol=unset#image/png
+res/images/icons/GoldIcon.png -text svneol=unset#image/png
+res/images/icons/GoldIconLarge.png -text svneol=unset#image/png
+res/images/icons/GoldIconSmall.png -text svneol=unset#image/png
+res/images/icons/HeartIcon.png -text svneol=unset#image/png
+res/images/icons/LeafIconSmall.png -text svneol=unset#image/png
+res/images/icons/Life.png -text svneol=unset#image/png
+res/images/icons/Mage01.jpg -text
+res/images/icons/Mage02.jpg -text
+res/images/icons/MapIcon.png -text svneol=unset#image/png
+res/images/icons/MapIconLarge.png -text svneol=unset#image/png
+res/images/icons/PetIcon.png -text
+res/images/icons/PlantIcon.png -text
+res/images/icons/Unknown.jpg -text
+res/images/icons/ZeppelinIcon.png -text svneol=unset#image/png
+res/images/icons/notesIcon.png -text svneol=unset#image/png
 res/images/skins/default/bg_match.jpg -text
 res/images/skins/default/bg_splash.jpg -text
 res/images/skins/default/bg_texture.jpg -text
@@ -10047,32 +10073,6 @@ res/pics/BookIcon.png -text svneol=unset#image/png
 res/pics/BoxIcon.png -text svneol=unset#image/png
 res/pics/GoldIcon.png -text svneol=unset#image/png
 res/pics/HeartIcon.png -text svneol=unset#image/png
-res/pics/icons/BookIcon.png -text svneol=unset#image/png
-res/pics/icons/BookIconSmall.png -text svneol=unset#image/png
-res/pics/icons/BottlesIconSmall.png -text svneol=unset#image/png
-res/pics/icons/BoxIcon.png -text svneol=unset#image/png
-res/pics/icons/BoxIconSmall.png -text svneol=unset#image/png
-res/pics/icons/CoinIcon.png -text svneol=unset#image/png
-res/pics/icons/CoinIconSmall.png -text svneol=unset#image/png
-res/pics/icons/CoinStack.png -text svneol=unset#image/png
-res/pics/icons/ElixirIcon.png -text svneol=unset#image/png
-res/pics/icons/FoxIconSmall.png -text svneol=unset#image/png
-res/pics/icons/GearIconSmall.png -text svneol=unset#image/png
-res/pics/icons/GoldIcon.png -text svneol=unset#image/png
-res/pics/icons/GoldIconLarge.png -text svneol=unset#image/png
-res/pics/icons/GoldIconSmall.png -text svneol=unset#image/png
-res/pics/icons/HeartIcon.png -text svneol=unset#image/png
-res/pics/icons/LeafIconSmall.png -text svneol=unset#image/png
-res/pics/icons/Life.png -text svneol=unset#image/png
-res/pics/icons/Mage01.jpg -text
-res/pics/icons/Mage02.jpg -text
-res/pics/icons/MapIcon.png -text svneol=unset#image/png
-res/pics/icons/MapIconLarge.png -text svneol=unset#image/png
-res/pics/icons/PetIcon.png -text
-res/pics/icons/PlantIcon.png -text
-res/pics/icons/Unknown.jpg -text
-res/pics/icons/ZeppelinIcon.png -text svneol=unset#image/png
-res/pics/icons/notesIcon.png -text svneol=unset#image/png
 res/pics_link/card-pictures_a.txt svneol=native#text/plain
 res/pics_link/card-pictures_b.txt svneol=native#text/plain
 res/pics_link/card-pictures_c.txt svneol=native#text/plain

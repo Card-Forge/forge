@@ -194,14 +194,14 @@ public class ViewQuest extends JScrollPane {
         optionsContainer.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
 
         lblCredits = new JLabel("Credits: " + Long.toString(questData.getCredits()));
-        lblCredits.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/pics/icons/CoinStack.png"), 26, 26));
+        lblCredits.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/images/icons/CoinStack.png"), 26, 26));
         lblCredits.setForeground(skin.getColor("text"));
         lblCredits.setIconTextGap(5);
         lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
         lblCredits.setFont(skin.getFont1().deriveFont(Font.BOLD, 14));
 
         lblLife = new JLabel("Life: " + Long.toString(questData.getLife()));
-        lblLife.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/pics/icons/Life.png"), 26, 26));
+        lblLife.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/images/icons/Life.png"), 26, 26));
         lblLife.setForeground(skin.getColor("text"));
         lblLife.setIconTextGap(5);
         lblLife.setHorizontalAlignment(SwingConstants.CENTER);
@@ -267,11 +267,11 @@ public class ViewQuest extends JScrollPane {
         cbZep.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
 
         lblPet = new JLabel(GuiUtils.getResizedIcon(
-                new ImageIcon("res/pics/icons/PetIcon.png"), 30, 30));
+                new ImageIcon("res/images/icons/PetIcon.png"), 30, 30));
         lblPlant = new JLabel(GuiUtils.getResizedIcon(
-                new ImageIcon("res/pics/icons/PlantIcon.png"), 30, 30));
+                new ImageIcon("res/images/icons/PlantIcon.png"), 30, 30));
         lblZep = new JLabel(GuiUtils.getResizedIcon(
-                new ImageIcon("res/pics/icons/ZeppelinIcon.png"), 30, 30));
+                new ImageIcon("res/images/icons/ZeppelinIcon.png"), 30, 30));
 
         StartButton btnStart = new StartButton(parentView);
         btnStart.addMouseListener(new MouseAdapter() {
