@@ -192,7 +192,7 @@ public class ControlAllUI {
     }
 
     /** Sizes children of JLayeredPane to fully fit their layers. */
-    private void sizeChildren() {  System.out.println("asdf55");
+    private void sizeChildren() {
         Component[] children;
         children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
 
