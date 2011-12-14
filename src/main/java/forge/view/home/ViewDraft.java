@@ -84,13 +84,13 @@ public class ViewDraft extends JPanel {
         lblHuman.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
         lblHuman.setForeground(skin.getColor("text"));
-        this.add(lblHuman, "w 30%!, gap 15% 15% 2% 2%");
+        this.add(lblHuman, "w 40%!, gap 7.5% 5% 2% 2%");
 
         JLabel lblAI = new JLabel("Who will you play?");
         lblAI.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
         lblAI.setForeground(skin.getColor("text"));
-        this.add(lblAI, "w 30%!, gap 0 0 2% 2%, wrap");
+        this.add(lblAI, "w 40%!, gap 0 0 2% 2%, wrap");
 
         String[] human = {};
         Random generator = new Random();
@@ -107,8 +107,8 @@ public class ViewDraft extends JPanel {
 
         lstHumanDecks = new JList(human);
         lstAIDecks = new JList(ai);
-        this.add(new JScrollPane(lstHumanDecks), "w 30%!, gapleft 15%, gapright 5%, h 30%!");
-        this.add(new JScrollPane(lstAIDecks), "w 30%!, h 30%!, wrap");
+        this.add(new JScrollPane(lstHumanDecks), "w 40%!, h 30%!, gap 7.5% 5% 2% 2%");
+        this.add(new JScrollPane(lstAIDecks), "w 40%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
         lstHumanDecks.setSelectedIndex(0);
         lstAIDecks.setSelectedIndex(0);
@@ -118,9 +118,7 @@ public class ViewDraft extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) { control.setupDraft(); }
         });
-        this.add(buildHuman, "w 30%!, h 5%!, gap 15% 15% 1% 1%, wrap");
-
-        //
+        this.add(buildHuman, "w 40%!, h 5%!, gap 7.5% 5% 0 0, wrap");
 
         // Start button
         StartButton btnStart = new StartButton(parentView);

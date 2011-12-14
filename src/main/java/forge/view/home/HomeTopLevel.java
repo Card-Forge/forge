@@ -125,6 +125,9 @@ public class HomeTopLevel extends FPanel {
         btnUtilities.setText("Utilities");
 
         btnEditor = new FButton();
+        btnEditor.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) { showDeckEditor(); }
+        });
         btnEditor.setText("Deck Editor");
 
         btnExit = new FButton();
@@ -211,6 +214,10 @@ public class HomeTopLevel extends FPanel {
         pnlContent.add(utilities, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+    }
+
+    public void showDeckEditor() {
+        
     }
 
     private void exit() {
