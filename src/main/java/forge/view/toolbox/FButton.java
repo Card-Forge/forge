@@ -27,6 +27,8 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -50,6 +52,7 @@ public class FButton extends JButton {
     private boolean toggle = false;
     private final FSkin skin;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
+    private KeyAdapter klEnter;
 
     /**
      * Instantiates a new FButton.
@@ -82,6 +85,16 @@ public class FButton extends JButton {
         if ((this.imgL != null) && (this.imgM != null) && (this.imgR != null)) {
             this.allImagesPresent = true;
         }
+
+        klEnter = new KeyAdapter() {
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                System.out.println(e.getKeyCode());
+                if (e.getKeyCode() == 10) {
+                    doClick();
+                }
+            }
+        };
 
         // Mouse events
         this.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,6 +148,8 @@ public class FButton extends JButton {
                     FButton.this.imgM = FButton.this.skin.getImage("button.focusCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.focusRIGHT");
                 }
+
+                addKeyListener(klEnter);
             }
 
             public void focusLost(FocusEvent e) {
@@ -148,6 +163,8 @@ public class FButton extends JButton {
                     FButton.this.imgM = FButton.this.skin.getImage("button.toggleCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.toggleRIGHT");
                 }
+
+                removeKeyListener(klEnter);
             }
         });
     }
