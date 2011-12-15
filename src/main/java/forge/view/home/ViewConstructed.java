@@ -21,6 +21,7 @@ import forge.AllZone;
 import forge.control.home.ControlConstructed;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.gui.GuiUtils;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -55,19 +56,19 @@ public class ViewConstructed extends JPanel {
         control = new ControlConstructed(this);
 
         lstColorsHuman = new JList();
-        lstColorsHuman.setListData(control.oa2sa(control.getColorNames()));
+        lstColorsHuman.setListData(GuiUtils.oa2sa(control.getColorNames()));
 
         lstColorsAI = new JList();
-        lstColorsAI.setListData(control.oa2sa(control.getColorNames()));
+        lstColorsAI.setListData(GuiUtils.oa2sa(control.getColorNames()));
 
         lstDecksHuman = new JList();
         lstDecksAI = new JList();
 
         lstThemesHuman = new JList();
-        lstThemesHuman.setListData(control.oa2sa(control.getThemeNames()));
+        lstThemesHuman.setListData(GuiUtils.oa2sa(control.getThemeNames()));
 
         lstThemesAI = new JList();
-        lstThemesAI.setListData(control.oa2sa(control.getThemeNames()));
+        lstThemesAI.setListData(GuiUtils.oa2sa(control.getThemeNames()));
 
         // Human deck options area
         JLabel lblHuman = new JLabel("Choose a deck for the human player:");

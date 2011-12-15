@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -19,10 +20,11 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.home.ControlSettings;
+import forge.gui.GuiUtils;
 import forge.view.toolbox.FSkin;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Assembles swing components for "Settings" mode menu.
  *
  */
 @SuppressWarnings("serial")
@@ -30,6 +32,7 @@ public class ViewSettings extends JScrollPane {
     private ControlSettings control;
     private FSkin skin;
     private JPanel viewport;
+    private HomeTopLevel parentView;
 
     private JList lstChooseSkin;
     private String spacer;
@@ -47,13 +50,14 @@ public class ViewSettings extends JScrollPane {
         radCardMedium, radCardLarge, radCardHuge;
     /**
      * 
-     * TODO: Write javadoc for Constructor.
+     * Assembles swing components for "Settings" mode menu.
      * @param v0 &emsp; HomeTopLevel
      */
     public ViewSettings(HomeTopLevel v0) {
         super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         skin = AllZone.getSkin();
+        parentView = v0;
         viewport = new JPanel();
         viewport.setOpaque(false);
 
@@ -162,6 +166,8 @@ public class ViewSettings extends JScrollPane {
         viewport.add(lblNoteSkin, constraints + ", gapbottom 2px");
 
         lstChooseSkin = new JList();
+        lstChooseSkin.setListData(GuiUtils.oa2sa(FSkin.getSkins().toArray()));
+        lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getSkin(), true);
         viewport.add(new JScrollPane(lstChooseSkin), "gapleft 10%, h 60px!, w 150px!" + spacer);
 
         JLabel lblTitleCardSize = new TitleLabel("Card Size");
@@ -208,6 +214,18 @@ public class ViewSettings extends JScrollPane {
         radStack11 = new StackSizeRadio("11");
         radStack12 = new StackSizeRadio("12");
 
+        ButtonGroup group = new ButtonGroup();
+        group.add(radStack3);
+        group.add(radStack4);
+        group.add(radStack5);
+        group.add(radStack6);
+        group.add(radStack7);
+        group.add(radStack8);
+        group.add(radStack9);
+        group.add(radStack10);
+        group.add(radStack11);
+        group.add(radStack12);
+
         String constraints = "w 50px!, h 25px!";
         radioContainer.add(radStack3, constraints);
         radioContainer.add(radStack4, constraints);
@@ -229,6 +247,12 @@ public class ViewSettings extends JScrollPane {
         radOffsetMedium = new StackOffsetRadio("Medium");
         radOffsetLarge = new StackOffsetRadio("Large");
 
+        ButtonGroup group = new ButtonGroup();
+        group.add(radOffsetTiny);
+        group.add(radOffsetSmall);
+        group.add(radOffsetMedium);
+        group.add(radOffsetLarge);
+
         String constraints = "gapleft 10%, wrap";
         viewport.add(radOffsetTiny, constraints);
         viewport.add(radOffsetSmall, constraints);
@@ -243,6 +267,14 @@ public class ViewSettings extends JScrollPane {
         radCardMedium = new CardSizeRadio("Medium");
         radCardLarge = new CardSizeRadio("Large");
         radCardHuge = new CardSizeRadio("Huge");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(radCardTiny);
+        group.add(radCardSmaller);
+        group.add(radCardSmall);
+        group.add(radCardMedium);
+        group.add(radCardLarge);
+        group.add(radCardHuge);
 
         String constraints = "gapleft 10%, wrap";
         viewport.add(radCardTiny, constraints);
@@ -305,14 +337,16 @@ public class ViewSettings extends JScrollPane {
         public StackSizeRadio(String txt0) {
             super(txt0);
 
-            if(Singletons.getModel().getPreferences().getMaxStackSize() == Integer.parseInt(txt0)) {
+            if (Singletons.getModel().getPreferences().getMaxStackSize()
+                    == Integer.parseInt(txt0)) {
                 setSelected(true);
             }
 
             this.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    control.updateStackSize(StackSizeRadio.this);
+                    try { control.updateStackSize(StackSizeRadio.this); }
+                    catch (Exception e) { e.printStackTrace(); }
                 }
             });
         }
@@ -321,14 +355,16 @@ public class ViewSettings extends JScrollPane {
     private class StackOffsetRadio extends OptionsRadio {
         public StackOffsetRadio(String txt0) {
             super(txt0);
-            if(Singletons.getModel().getPreferences().getStackOffset().toString() == txt0) {
+            if (Singletons.getModel().getPreferences().getStackOffset()
+                    .toString().equalsIgnoreCase(txt0)) {
                 setSelected(true);
             }
 
             this.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    control.updateStackOffset(StackOffsetRadio.this);
+                    try { control.updateStackOffset(StackOffsetRadio.this); }
+                    catch (Exception e) { e.printStackTrace(); }
                 }
             });
         }
@@ -337,14 +373,16 @@ public class ViewSettings extends JScrollPane {
     private class CardSizeRadio extends OptionsRadio {
         public CardSizeRadio(String txt0) {
             super(txt0);
-            if(Singletons.getModel().getPreferences().getCardSize().toString() == txt0) {
+            if (Singletons.getModel().getPreferences().getCardSize()
+                    .toString().equalsIgnoreCase(txt0)) {
                 setSelected(true);
             }
 
             this.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    control.updateCardSize(CardSizeRadio.this);
+                    try { control.updateCardSize(CardSizeRadio.this); }
+                    catch (Exception e) { e.printStackTrace(); }
                 }
             });
         }
@@ -431,5 +469,10 @@ public class ViewSettings extends JScrollPane {
     /** @return ControlSettings */
     public ControlSettings getController() {
         return ViewSettings.this.control;
+    }
+
+    /** @return HomeTopLevel */
+    public HomeTopLevel getParentView() {
+        return parentView;
     }
 }

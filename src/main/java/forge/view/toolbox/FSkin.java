@@ -46,7 +46,7 @@ public class FSkin {
     private Map<String, Image> images;
 
     private Font font1 = null;
-    private final String name = "default";
+    private String name = "default";
     private final String spriteFile = "";
     private final String font1file = "font1.ttf";
     private Font tempFont;
@@ -95,6 +95,7 @@ public class FSkin {
      *             the exception
      */
     public FSkin(final String skinName) throws Exception {
+        this.name = skinName;
         this.loadFontAndImages(skinName);
     }
 

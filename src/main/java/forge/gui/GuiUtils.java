@@ -401,4 +401,21 @@ public final class GuiUtils {
         }
         return ttf;
     }
+
+    /**
+     * Exhaustively converts object array to string array.
+     * Probably a much easier way to do this.
+     * 
+     * @param o0 &emsp; Object[]
+     * @return String[]
+     */
+    public static String[] oa2sa(Object[] o0) {
+        String[] output = new String[o0.length];
+
+        for (int i = 0; i < o0.length; i++) {
+            output[i] = o0[i].toString();
+        }
+
+        return output;
+    }
 }

@@ -84,8 +84,8 @@ public class ControlSealed {
             }
         }
 
-        view.getLstHumanDecks().setListData(oa2sa(humanNames.toArray()));
-        view.getLstAIDecks().setListData(oa2sa(aiNames.toArray()));
+        view.getLstHumanDecks().setListData(GuiUtils.oa2sa(humanNames.toArray()));
+        view.getLstAIDecks().setListData(GuiUtils.oa2sa(aiNames.toArray()));
     }
 
     /** */
@@ -154,22 +154,5 @@ public class ControlSealed {
         view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, deck);
 
         Constant.Runtime.COMPUTER_DECK[0] = aiDeck;
-    }
-
-    /**
-     * Exhaustively converts object array to string array.
-     * Probably a much easier way to do this.
-     * 
-     * @param o0 &emsp; Object[]
-     * @return String[]
-     */
-    public String[] oa2sa(Object[] o0) {
-        String[] output = new String[o0.length];
-
-        for (int i = 0; i < o0.length; i++) {
-            output[i] = o0[i].toString();
-        }
-
-        return output;
     }
 }
