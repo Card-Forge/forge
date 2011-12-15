@@ -769,6 +769,7 @@ public class ComputerUtilAttack {
                                             // wither or infect
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
+        int numberOfPossibleBlockers = 0;
 
         if (!this.isEffectiveAttacker(attacker, combat)) {
             return false;
@@ -780,7 +781,7 @@ public class ComputerUtilAttack {
         // the selected strategy
         for (final Card defender : defenders) {
             if (CombatUtil.canBlock(attacker, defender)) { // , combat )) {
-                canBeBlocked = true;
+                numberOfPossibleBlockers += 1;
                 if (CombatUtil.canDestroyAttacker(attacker, defender, combat, false)) {
                     canBeKilledByOne = true; // there is a single creature on
                                              // the battlefield that can kill
@@ -811,6 +812,12 @@ public class ComputerUtilAttack {
             System.out.println(attacker.getName()
                     + " = attacking because they can't block, expecting to kill or damage player");
             return true;
+        }
+
+        if (numberOfPossibleBlockers > 1
+                || (!attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
+                        && numberOfPossibleBlockers == 1)) {
+            canBeBlocked = true;
         }
 
         // decide if the creature should attack based on the prevailing strategy

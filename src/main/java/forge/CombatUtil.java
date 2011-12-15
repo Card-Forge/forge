@@ -332,15 +332,28 @@ public class CombatUtil {
         if (!CombatUtil.canBeBlocked(attacker)) {
             return false;
         }
-        for (final Card blocker : blockers) {
-            if (CombatUtil.canBlock(attacker, blocker)) {
-                return true;
+
+        if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+            int blocks = 0;
+            for (final Card blocker : blockers) {
+                if (CombatUtil.canBlock(attacker, blocker)) {
+                    blocks += 1;
+                    if (blocks > 1) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            for (final Card blocker : blockers) {
+                if (CombatUtil.canBlock(attacker, blocker)) {
+                    return true;
+                }
             }
         }
 
         return false;
     }
-    
+
     /**
      * <p>
      * needsMoreBlockers.
