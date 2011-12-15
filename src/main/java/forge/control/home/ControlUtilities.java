@@ -113,7 +113,7 @@ public class ControlUtilities {
             }
         });
 
-        this.view.getTarLicensing().addMouseListener(new MouseAdapter() {
+        this.view.getTpnLicensing().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (licensingExpanded) {
@@ -141,24 +141,26 @@ public class ControlUtilities {
     }
 
     private void showLicenseInfo() {
-        view.getTarLicensing().setText(
-                "This program is free software : you can redistribute it and/or modify "
+        view.getTpnLicensing().setText(
+                "Forge License Information"
+                + "\r\n\r\n"
+                + "This program is free software : you can redistribute it and/or modify "
                 + "it under the terms of the GNU General Public License as published by "
                 + "the Free Software Foundation, either version 3 of the License, or "
                 + "(at your option) any later version."
-                + "\r\n"
+                + "\r\n\r\n"
                 + "This program is distributed in the hope that it will be useful, "
                 + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
                 + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
                 + "GNU General Public License for more details."
-                + "\r\n"
+                + "\r\n\r\n"
                 + "You should have received a copy of the GNU General Public License "
                 + "along with this program.  If not, see <http://www.gnu.org/licenses/>."
        );
     }
 
     private void hideLicenseInfo() {
-        view.getTarLicensing().setText("Click here for license information.");
+        view.getTpnLicensing().setText("Click here for license information.");
     }
 
     /**

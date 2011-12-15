@@ -3,8 +3,11 @@ package forge.view.home;
 import java.awt.Font;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
@@ -20,7 +23,7 @@ public class ViewUtilities extends JPanel {
     private HomeTopLevel parentView;
     private ControlUtilities control;
     private FSkin skin;
-    private JTextArea tarLicensing;
+    private JTextPane tpnLicensing;
 
     private SubButton btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages,
         btnReportBug, btnImportPictures, btnHowToPlay, btnDownloadPrices,
@@ -73,19 +76,22 @@ public class ViewUtilities extends JPanel {
         this.add(btnStackReport, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
         */
 
-        tarLicensing = new JTextArea();
-        tarLicensing.setOpaque(false);
-        tarLicensing.setForeground(skin.getColor("text"));
-        tarLicensing.setFont(skin.getFont1().deriveFont(Font.PLAIN, 15));
-        tarLicensing.setAlignmentX(SwingConstants.CENTER);
-        tarLicensing.setLineWrap(true);
-        tarLicensing.setWrapStyleWord(true);
-        tarLicensing.setFocusable(false);
-        tarLicensing.setEditable(false);
-        tarLicensing.setBorder(null);
-        tarLicensing.setText("Click here for license information.");
+        tpnLicensing = new JTextPane();
+        tpnLicensing.setOpaque(false);
+        tpnLicensing.setForeground(skin.getColor("text"));
+        tpnLicensing.setFont(skin.getFont1().deriveFont(Font.PLAIN, 15));
+        tpnLicensing.setAlignmentX(SwingConstants.CENTER);
+        tpnLicensing.setFocusable(false);
+        tpnLicensing.setEditable(false);
+        tpnLicensing.setBorder(null);
+        tpnLicensing.setText("Click here for license information.");
 
-        this.add(tarLicensing, "w 80%!, gapleft 10%, ax center");
+        StyledDocument doc = tpnLicensing.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+        this.add(tpnLicensing, "w 80%!, gapleft 10%, ax center");
 
         ViewUtilities.this.control = new ControlUtilities(this);
     }
@@ -131,8 +137,8 @@ public class ViewUtilities extends JPanel {
     }
 
     /** @return JTextArea */
-    public JTextArea getTarLicensing() {
-        return tarLicensing;
+    public JTextPane getTpnLicensing() {
+        return tpnLicensing;
     }
 
     /** @return ControlUtilities */
