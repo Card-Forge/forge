@@ -70,25 +70,16 @@ public class InputBlock extends Input {
         ButtonUtil.enableOnlyOK();
 
         if (this.currentAttacker == null) {
-            /*
-             * //Lure CardList attackers = new
-             * CardList(AllZone.getCombat().getAttackers()); for(Card
-             * attacker:attackers) {
-             * if(attacker.hasKeyword("All creatures able to block CARDNAME do so."
-             * )) { CardList bls =
-             * AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-             * for(Card bl:bls) { if(CombatUtil.canBlock(attacker, bl,
-             * AllZone.getCombat())) { allBlocking.add(bl);
-             * AllZone.getCombat().addBlocker(attacker, bl); } } } }
-             */
 
-            AllZone.getDisplay().showMessage("To Block, click on your Opponents attacker first, then your blocker(s)");
+            AllZone.getDisplay().showMessage("To Block, click on your Opponents attacker first, then your blocker(s). " +
+            		"To cancel a block right-click on your blocker");
         } else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
             AllZone.getDisplay()
                     .showMessage(
                             "Select a creature to block " + attackerName + " ("
-                                    + this.currentAttacker.getUniqueNumber() + ") ");
+                                    + this.currentAttacker.getUniqueNumber() + "). " +
+                            "To cancel a block right-click on your blocker");
         }
 
         CombatUtil.showCombat();
