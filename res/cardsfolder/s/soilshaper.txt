@@ -7,6 +7,7 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature
 SVar:BuffedBy:Arcane,Spirit
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soilshaper.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/243.jpg
