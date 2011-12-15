@@ -100,7 +100,9 @@ public class FButton extends JButton {
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(final java.awt.event.MouseEvent evt) {
-                if (FButton.this.isEnabled() && !isToggled()) {
+                if (isToggled()) { return; }
+
+                if (FButton.this.isEnabled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.overLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.overCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.overRIGHT");
@@ -109,6 +111,8 @@ public class FButton extends JButton {
 
             @Override
             public void mouseExited(final java.awt.event.MouseEvent evt) {
+                if (isToggled()) { return; }
+
                 if (FButton.this.isEnabled() && !FButton.this.isFocusOwner()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
@@ -123,7 +127,9 @@ public class FButton extends JButton {
 
             @Override
             public void mousePressed(final java.awt.event.MouseEvent evt) {
-                if (FButton.this.isEnabled() && !isToggled()) {
+                if (isToggled()) { return; }
+
+                if (FButton.this.isEnabled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
@@ -132,7 +138,9 @@ public class FButton extends JButton {
 
             @Override
             public void mouseReleased(final java.awt.event.MouseEvent evt) {
-                if (FButton.this.isEnabled() && !isToggled()) {
+                if (isToggled()) { return; }
+
+                if (FButton.this.isEnabled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
@@ -143,7 +151,9 @@ public class FButton extends JButton {
         // Focus events
         this.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
-                if (FButton.this.isEnabled() && !isToggled()) {
+                if (isToggled()) { return; }
+
+                if (FButton.this.isEnabled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.focusLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.focusCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.focusRIGHT");
@@ -153,15 +163,12 @@ public class FButton extends JButton {
             }
 
             public void focusLost(FocusEvent e) {
-                if (FButton.this.isEnabled() && !isToggled()) {
+                if (isToggled()) { return; }
+
+                if (FButton.this.isEnabled()) {
                     FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
                     FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
                     FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
-                }
-                else if (isToggled()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.toggleLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.toggleCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.toggleRIGHT");
                 }
 
                 removeKeyListener(klEnter);
@@ -196,6 +203,23 @@ public class FButton extends JButton {
 
     /** @param b0 &emsp; boolean. */
     public void setToggled(boolean b0) {
+        if (b0) {
+            FButton.this.imgL = FButton.this.skin.getImage("button.toggleLEFT");
+            FButton.this.imgM = FButton.this.skin.getImage("button.toggleCENTER");
+            FButton.this.imgR = FButton.this.skin.getImage("button.toggleRIGHT");
+        }
+        else if (isEnabled()) {
+            FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
+            FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
+            FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+            repaint();
+        }
+        else {
+            FButton.this.imgL = FButton.this.skin.getImage("button.disabledLEFT");
+            FButton.this.imgM = FButton.this.skin.getImage("button.disabledCENTER");
+            FButton.this.imgR = FButton.this.skin.getImage("button.disabledRIGHT");
+            repaint();
+        }
         this.toggle = b0;
     }
 
