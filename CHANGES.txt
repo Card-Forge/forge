@@ -411,6 +411,23 @@ Fixes/Features:
 - Deck editor enabled in home screen.
 - Also, decks can now be directly edited in constructed mode sub menu.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Replace any direct URL references to cardforge.org to a getProperty. Enables quick transition to new or alternate URLs.
+- Attempting to move the icons folder to /res/images instead of /res/pics.
+- Deleted duplicate icons - Attempting to move the icons folder to /res/images instead of /res/pics.
+- LQ Plant Tokens and small images for bazaar. Thanks to moomarc for original artwork.
+- Sealed mode home screen menu fully working.
+- Deck editor button moved to utilities menu.
+- Fixed skin autodetect bug.
+- Centered license text.
+- Fixed FButton toggle state.
+- Latest progress on Settings submenu.
+- Settings submenu finished.
+- Multiple instances of oa2sa method consolidated into GuiUtils.
+- Little fix for main screen: If you select a random color for the constructed deck generator the string is called "Random", but "Random 1", "Random 2" etc was expected.
+- Updated some deck SVars.
+- Added the keyword "CARDNAME can't be blocked except by two or more creatures." (please test).
+- Added this text to blocker selection: "To cancel a block right-click on your blocker".
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -488,6 +505,11 @@ Refreshing Rain
 Mogg Toady
 Field of Dreams
 Wizened Snitches
+Viashino Runner
+Imposing Visage
+Wind Spirit
+Kederekt Creeper
+Stormblood Berserker
 
 
 end
