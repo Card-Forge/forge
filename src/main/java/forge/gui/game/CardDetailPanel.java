@@ -73,8 +73,14 @@ public class CardDetailPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public CardDetailPanel(final Card card) {
-        this.setLayout(new GridLayout(2, 0, 0, 5));
+        this.setLayout(new GridBagLayout());
         this.setBorder(new EtchedBorder());
+        
+        GridBagConstraints labelConstrains = new GridBagConstraints();
+        labelConstrains.fill = GridBagConstraints.BOTH;
+        labelConstrains.gridx = 0;
+        labelConstrains.gridy = 0;
+        labelConstrains.weightx = 1.0;
 
         final JPanel cdLabels = new JPanel(new GridLayout(0, 1, 0, 5));
         this.nameCostLabel = new JLabel();
@@ -105,7 +111,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
 
         cdLabels.add(idr);
 
-        this.add(cdLabels);
+        this.add(cdLabels, labelConstrains);
         this.nameCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
         this.typeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         this.powerToughnessLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -114,7 +120,13 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         this.cdArea = new JTextArea(4, 12);
-        this.add(new JScrollPane(this.cdArea));
+        GridBagConstraints areaConstrains = new GridBagConstraints();
+        areaConstrains.fill = GridBagConstraints.BOTH;
+        areaConstrains.gridx = 0;
+        areaConstrains.gridy = 1;
+        areaConstrains.weightx = 1.0;
+        areaConstrains.weighty = 1.0;
+        this.add(new JScrollPane(this.cdArea), areaConstrains);
         this.cdArea.setLineWrap(true);
         this.cdArea.setWrapStyleWord(true);
         this.cdArea.setEditable(false);
