@@ -9184,6 +9184,7 @@ res/cardsfolder/v/viashino_fangtail.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_grappler.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_heretic.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_outrider.txt svneol=native#text/plain
+res/cardsfolder/v/viashino_runner.txt -text
 res/cardsfolder/v/viashino_sandscout.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_sandstalker.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_sandswimmer.txt -text

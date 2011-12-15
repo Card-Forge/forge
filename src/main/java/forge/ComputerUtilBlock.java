@@ -317,7 +317,8 @@ public class ComputerUtilBlock {
      */
     private static Combat makeGoodBlocks(final Combat combat) {
 
-        final CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        currentAttackers = currentAttackers.getNotKeyword("CARDNAME can't be blocked except by two or more creatures.");
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
@@ -381,8 +382,7 @@ public class ComputerUtilBlock {
                 .getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
         CardList blockers;
 
-        // Try to block an attacker without first strike with a gang of first
-        // strikers
+        // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
             if (!attacker.hasKeyword("First Strike") && !attacker.hasKeyword("Double Strike")) {
                 blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
@@ -402,7 +402,8 @@ public class ComputerUtilBlock {
                         // if the total damage of the blockgang was not enough
                         // without but is enough with this blocker finish the
                         // blockgang
-                        if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) < damageNeeded) {
+                        if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) < damageNeeded 
+                                || CombatUtil.needsBlockers(attacker) > blockGang.size()) {
                             blockGang.add(blocker);
                             if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) >= damageNeeded) {
                                 currentAttackers.remove(attacker);
@@ -464,8 +465,9 @@ public class ComputerUtilBlock {
                 final int addedValue = CardFactoryUtil.evaluateCreature(blocker);
                 final int damageNeeded = attacker.getKillDamage()
                         + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
-                if ((damageNeeded > currentDamage) && !(damageNeeded > (currentDamage + additionalDamage))
-                // The attacker will be killed
+                if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size()) 
+                        && !(damageNeeded > (currentDamage + additionalDamage))
+                        // The attacker will be killed
                         && (((absorbedDamage2 + absorbedDamage) > attacker.getNetCombatDamage())
                         // only one blocker can be killed
                         || (((currentValue + addedValue) - 50) <= CardFactoryUtil.evaluateCreature(attacker)))
@@ -499,7 +501,8 @@ public class ComputerUtilBlock {
      */
     private static Combat makeTradeBlocks(final Combat combat) {
 
-        final CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        currentAttackers = currentAttackers.getNotKeyword("CARDNAME can't be blocked except by two or more creatures.");
         CardList killingBlockers;
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
@@ -529,7 +532,8 @@ public class ComputerUtilBlock {
      */
     private static Combat makeChumpBlocks(final Combat combat) {
 
-        final CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        currentAttackers = currentAttackers.getNotKeyword("CARDNAME can't be blocked except by two or more creatures.");
         CardList chumpBlockers;
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
