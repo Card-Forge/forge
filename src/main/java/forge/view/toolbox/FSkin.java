@@ -52,8 +52,6 @@ public class FSkin {
     private Font tempFont;
     private final String notfound = "FSkin.java: Can't find ";
 
-    private static final String[] SKINS = { "default", "rebel", "smith" };
-
     /**
      * Gets the skins.
      *
@@ -61,9 +59,18 @@ public class FSkin {
      */
     public static ArrayList<String> getSkins() {
         final ArrayList<String> mySkins = new ArrayList<String>();
-        for (final String element : FSkin.SKINS) {
-            mySkins.add(element);
+
+        File dir = new File("res/images/skins/");
+        String[] children = dir.list();
+        if (children == null) {
+            System.err.println("FSkin > can't find skins directory!");
+        } else {
+            for (int i = 0; i < children.length; i++) {
+                if (children[i].equalsIgnoreCase(".svn")) { continue; }
+                mySkins.add(children[i]);
+            }
         }
+
         return mySkins;
     }
 
