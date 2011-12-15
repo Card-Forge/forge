@@ -77,7 +77,6 @@ public class ControlSettings {
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
-<<<<<<< HEAD
 
         this.view.getCbRemoveSmall().addActionListener(new ActionListener() {
             @Override
@@ -132,27 +131,6 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 prefs.setRandCFoil(ControlSettings.this.view.getCbRandomFoil().isSelected());
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
-=======
-    }
-
-    private void doChooseSkin() {
-        final ListChooser<String> ch = new ListChooser<String>("Choose a skin", 0, 1, FSkin.getSkins());
-        if (ch.show()) {
-            try {
-                final String name = ch.getSelectedValue();
-                final int index = ch.getSelectedIndex();
-                if (index == -1) {
-                    return;
-                }
-                ForgePreferences preferences = Singletons.getModel().getPreferences();
-                preferences.setSkin(name);
-                final FSkin skin = new FSkin(name);
-                AllZone.setSkin(skin);
-                preferences.save();
-
-            } catch (final Exception ex) {
-                ErrorViewer.showError(ex);
->>>>>>> Fix depdendency plugin version. Checkstyle
             }
         });
 

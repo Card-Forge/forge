@@ -1,20 +1,3 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Nate
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package forge.view.home;
 
 import java.awt.Font;
@@ -49,7 +32,6 @@ public class ViewSettings extends JScrollPane {
     private ControlSettings control;
     private FSkin skin;
     private JPanel viewport;
-<<<<<<< HEAD
     private HomeTopLevel parentView;
 
     private JList lstChooseSkin;
@@ -66,16 +48,6 @@ public class ViewSettings extends JScrollPane {
 
     private JRadioButton radCardTiny, radCardSmaller, radCardSmall,
         radCardMedium, radCardLarge, radCardHuge;
-=======
-
-    /** The btn choose skin. */
-    private SubButton btnChooseSkin;
-
-    /** The cb dev mode. */
-    private OptionsCheckBox cbAnte;
-    private OptionsCheckBox cbScaleLarger;
-    private OptionsCheckBox cbDevMode;
->>>>>>> Fix depdendency plugin version. Checkstyle
     /**
      * 
      * Assembles swing components for "Settings" mode menu.
@@ -425,7 +397,6 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
-<<<<<<< HEAD
     /** Consolidates title label styling in one place. */
     private class TitleLabel extends JLabel {
         public TitleLabel(String txt0) {
@@ -481,61 +452,21 @@ public class ViewSettings extends JScrollPane {
     }
 
     /** @return JCheckBox */
-=======
-    /**
-     * Gets the btn choose skin.
-     *
-     * @return the btn choose skin
-     */
-    public SubButton getBtnChooseSkin() {
-        return btnChooseSkin;
-    }
-
-    /**
-     * Gets the cb ante.
-     *
-     * @return the cb ante
-     */
->>>>>>> Fix depdendency plugin version. Checkstyle
     public JCheckBox getCbAnte() {
         return cbAnte;
     }
 
-<<<<<<< HEAD
     /** @return JCheckBox */
-=======
-    /**
-     * Gets the cb scale larger.
-     *
-     * @return the cb scale larger
-     */
->>>>>>> Fix depdendency plugin version. Checkstyle
     public JCheckBox getCbScaleLarger() {
         return cbScaleLarger;
     }
 
-<<<<<<< HEAD
     /** @return JCheckBox */
-=======
-    /**
-     * Gets the cb dev mode.
-     *
-     * @return the cb dev mode
-     */
->>>>>>> Fix depdendency plugin version. Checkstyle
     public JCheckBox getCbDevMode() {
         return cbDevMode;
     }
 
-<<<<<<< HEAD
     /** @return ControlSettings */
-=======
-    /**
-     * Gets the controller.
-     *
-     * @return the controller
-     */
->>>>>>> Fix depdendency plugin version. Checkstyle
     public ControlSettings getController() {
         return ViewSettings.this.control;
     }

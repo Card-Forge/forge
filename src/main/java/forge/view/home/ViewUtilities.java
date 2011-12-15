@@ -22,18 +22,12 @@ import forge.view.toolbox.FSkin;
 public class ViewUtilities extends JPanel {
     private HomeTopLevel parentView;
     private ControlUtilities control;
-<<<<<<< HEAD
     private FSkin skin;
     private JTextPane tpnLicensing;
 
     private SubButton btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages,
         btnReportBug, btnImportPictures, btnHowToPlay, btnDownloadPrices,
         btnDeckEditor;
-=======
-
-    private SubButton btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages, btnReportBug;
-    private SubButton btnImportPictures, btnHowToPlay, btnDownloadPrices;
->>>>>>> Fix depdendency plugin version. Checkstyle
     /**
      * 
      * Assembles swing components for "Utilities" mode menu.
@@ -99,13 +93,6 @@ public class ViewUtilities extends JPanel {
 
         this.add(tpnLicensing, "w 80%!, gapleft 10%, ax center");
 
-<<<<<<< HEAD
-=======
-        JLabel lblAbout = new JLabel("About Forge here: Licensing, etc.");
-        lblAbout.setBorder(new MatteBorder(1, 0, 0, 0, AllZone.getSkin().getColor("borders")));
-        this.add(lblAbout, "w 80%, gapleft 10%, gaptop 5%");
-
->>>>>>> Fix depdendency plugin version. Checkstyle
         ViewUtilities.this.control = new ControlUtilities(this);
     }
 
@@ -144,7 +131,6 @@ public class ViewUtilities extends JPanel {
         return btnDownloadPrices;
     }
 
-<<<<<<< HEAD
     /** @return SubButton */
     public SubButton getBtnDeckEditor() {
         return btnDeckEditor;
@@ -156,22 +142,12 @@ public class ViewUtilities extends JPanel {
     }
 
     /** @return ControlUtilities */
-=======
-    /**
-     * 
-     * TODO: Write javadoc for this method.
-     * @return the ControlUtilities
-     */
->>>>>>> Fix depdendency plugin version. Checkstyle
     public ControlUtilities getController() {
         return ViewUtilities.this.control;
     }
 
-<<<<<<< HEAD
     /** @return HomeTopLevel */
     public HomeTopLevel getParentView() {
         return parentView;
     }
-=======
->>>>>>> Fix depdendency plugin version. Checkstyle
 } //end class ViewUtilities
