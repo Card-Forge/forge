@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Beast 1
+Title=Beast
+Difficulty=easy
+Description=RG Rampage deck
+Icon=Beast.jpg
+Deck Type=constructed
+[main]
+4 Forbidden Orchard
+4 Highland Weald
+4 Shivan Oasis
+6 Forest
+6 Mountain
+3 Spined Sliver
+3 Horrible Hordes
+3 Sparring Golem
+2 Wolverine Pack
+2 Rabid Elephant
+1 AErathi Berserker
+1 Gang of Elk
+1 Frost Giant
+1 Marhault Elsdragon
+1 Craw Giant
+4 Lure
+4 Nemesis Mask
+1 Seton's Desire
+4 Primal Rage
+1 Beastmaster's Magemark
+4 Mercy Killing
+[sideboard]
