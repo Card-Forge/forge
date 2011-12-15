@@ -42,7 +42,7 @@ public final class NewConstants {
 
     /** Constant <code>CARDFORGE_URL = "program/cardforgeURL"</code>. */
     public static final String CARDFORGE_URL = "program/cardforgeURL";
-    
+
     /** Constant <code>DECKS="decks"</code>. */
     public static final String DECKS = "decks";
     /** Constant <code>BOOSTER_DECKS="booster-decks"</code>. */

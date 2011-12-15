@@ -268,7 +268,7 @@ public class CardRatings {
 
         final HttpUtil httpPost = new HttpUtil();
         String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/submitRatingsData.php?";
-        
+
         httpPost.upload(url, "res/draft/tempRatings.dat");
 
         FileUtil.writeFile("res/draft/tempRatings.dat", new ArrayList<String>());
@@ -281,7 +281,7 @@ public class CardRatings {
         final HttpUtil httpGet = new HttpUtil();
         final ArrayList<String> tmpList = new ArrayList<String>();
         String tmpData = new String();
-        
+
         String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Full";
         tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);
@@ -290,7 +290,7 @@ public class CardRatings {
         this.loadFullRatings();
 
         tmpList.clear();
-        
+
         url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Block";
         tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);

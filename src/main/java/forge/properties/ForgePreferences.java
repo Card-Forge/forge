@@ -39,7 +39,7 @@ public class ForgePreferences extends Preferences {
 
     /** Old gui checkbox toggle. */
     private boolean oldGui;
-    
+
     /** Play for ante checkbox toggle. */
     private boolean playForAnte;
 

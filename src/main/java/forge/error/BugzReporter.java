@@ -91,7 +91,7 @@ public class BugzReporter extends JDialog {
     private static BugzReporter dialog = null;
 
     private IMCAttribute[] severities;
-    
+
     private String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/bugz/api/soap/mantisconnect.php";
 
     /**
@@ -143,7 +143,6 @@ public class BugzReporter extends JDialog {
         MCSession mCS = null;
 
         try {
-            
             mCS = new MCSession(new URL(url), "ForgeGUI", "vi2ccTbfBUu^");
         } catch (final MalformedURLException e1) {
             System.out.println("MalFormedURLException");

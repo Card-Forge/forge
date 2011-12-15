@@ -1838,7 +1838,7 @@ public class CombatUtil {
 
         if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !withoutAbilities)) && !(defender
                 .hasKeyword("Wither") || defender.hasKeyword("Infect")))
-                || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(Counters.M1M1) 
+                || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(Counters.M1M1)
                         && attacker.getCounters(Counters.M1M1) == 0)) {
             return false;
         }
@@ -1970,7 +1970,7 @@ public class CombatUtil {
 
         if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities)) && !(attacker
                 .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
-                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1)) 
+                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1))
                     && defender.getCounters(Counters.M1M1) == 0) {
             return false;
         }

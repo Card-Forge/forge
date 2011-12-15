@@ -215,7 +215,7 @@ public final class Constant {
 
         /** The Stack. */
         Stack,
-        
+
         /** Ante. */
         Ante;
 
