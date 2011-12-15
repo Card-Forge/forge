@@ -4057,6 +4057,7 @@ res/cardsfolder/i/imperiosaur.txt svneol=native#text/plain
 res/cardsfolder/i/imperious_perfect.txt svneol=native#text/plain
 res/cardsfolder/i/implements_of_sacrifice.txt svneol=native#text/plain
 res/cardsfolder/i/implode.txt svneol=native#text/plain
+res/cardsfolder/i/imposing_visage.txt -text
 res/cardsfolder/i/improvised_armor.txt svneol=native#text/plain
 res/cardsfolder/i/imps_taunt.txt -text
 res/cardsfolder/i/impulse.txt svneol=native#text/plain
@@ -9585,6 +9586,7 @@ res/cardsfolder/w/wind_dancer.txt svneol=native#text/plain
 res/cardsfolder/w/wind_drake.txt svneol=native#text/plain
 res/cardsfolder/w/wind_sail.txt svneol=native#text/plain
 res/cardsfolder/w/wind_shear.txt svneol=native#text/plain
+res/cardsfolder/w/wind_spirit.txt -text
 res/cardsfolder/w/wind_zendikon.txt svneol=native#text/plain
 res/cardsfolder/w/windborn_muse.txt svneol=native#text/plain
 res/cardsfolder/w/windborne_charge.txt svneol=native#text/plain
