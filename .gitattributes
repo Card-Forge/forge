@@ -3452,6 +3452,7 @@ res/cardsfolder/g/goblin_tunneler.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_turncoat.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_vandal.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_war_buggy.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_war_drums.txt -text
 res/cardsfolder/g/goblin_war_paint.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_war_strike.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_war_wagon.txt svneol=native#text/plain
@@ -9227,6 +9228,7 @@ res/cardsfolder/v/villainous_ogre.txt svneol=native#text/plain
 res/cardsfolder/v/vindicate.txt svneol=native#text/plain
 res/cardsfolder/v/vindictive_mob.txt svneol=native#text/plain
 res/cardsfolder/v/vine_dryad.txt svneol=native#text/plain
+res/cardsfolder/v/vine_kami.txt -text
 res/cardsfolder/v/vine_trellis.txt svneol=native#text/plain
 res/cardsfolder/v/vinelasher_kudzu.txt svneol=native#text/plain
 res/cardsfolder/v/vines_of_vastwood.txt svneol=native#text/plain
