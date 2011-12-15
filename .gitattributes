@@ -4410,6 +4410,7 @@ res/cardsfolder/k/kazandu_refuge.txt svneol=native#text/plain
 res/cardsfolder/k/kazandu_tuskcaller.txt svneol=native#text/plain
 res/cardsfolder/k/kazuul_tyrant_of_the_cliffs.txt svneol=native#text/plain
 res/cardsfolder/k/kazuul_warlord.txt svneol=native#text/plain
+res/cardsfolder/k/kederekt_creeper.txt -text
 res/cardsfolder/k/kederekt_leviathan.txt svneol=native#text/plain
 res/cardsfolder/k/kederekt_parasite.txt svneol=native#text/plain
 res/cardsfolder/k/keen_eyed_archers.txt svneol=native#text/plain
@@ -8164,6 +8165,7 @@ res/cardsfolder/s/storm_shaman.txt svneol=native#text/plain
 res/cardsfolder/s/storm_spirit.txt svneol=native#text/plain
 res/cardsfolder/s/storm_world.txt svneol=native#text/plain
 res/cardsfolder/s/stormbind.txt svneol=native#text/plain
+res/cardsfolder/s/stormblood_berserker.txt -text
 res/cardsfolder/s/stormcallers_boon.txt svneol=native#text/plain
 res/cardsfolder/s/stormcloud_djinn.txt svneol=native#text/plain
 res/cardsfolder/s/stormfront_pegasus.txt svneol=native#text/plain
