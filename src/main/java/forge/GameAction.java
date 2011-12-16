@@ -310,7 +310,8 @@ public class GameAction {
         final PlayerZone oldBattlefield = AllZone.getZoneOf(c);
         final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
 
-        if ((oldBattlefield == null) || (newBattlefield == null)) {
+        if ((oldBattlefield == null) || (newBattlefield == null)
+                || oldBattlefield.equals(newBattlefield)) {
             return;
         }
 
