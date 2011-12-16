@@ -2,7 +2,7 @@ Name:Zombie Master
 ManaCost:1 B B
 Types:Creature Zombie
 Text:no text
-PT:2/2
+PT:2/3
 S:Mode$ Continuous | Affected$ Creature.Zombie+Other | AddKeyword$ Swampwalk | Description$ Other Zombie creatures have swampwalk.
 S:Mode$ Continuous | Affected$ Card.Zombie+Other | AddAbility$ Regenerate | Description$ Other Zombies have "B: Regenerate this permanent."
 SVar:Regenerate:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate this permanent
