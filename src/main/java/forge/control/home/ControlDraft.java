@@ -1,6 +1,10 @@
 package forge.control.home;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -20,11 +24,26 @@ import forge.view.home.ViewDraft;
  */
 public class ControlDraft {
     private ViewDraft view;
+    private boolean directionsExpanded = false;
 
     /** @param v0 &emsp; ViewDraft */
     public ControlDraft(ViewDraft v0) {
         this.view = v0;
         updateHumanDecks();
+
+        this.view.getTpnDirections().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (directionsExpanded) {
+                    hideDirections();
+                    directionsExpanded = false;
+                }
+                else {
+                    showDirections();
+                    directionsExpanded = true;
+                }
+            }
+        });
     }
 
     /** */
@@ -56,21 +75,26 @@ public class ControlDraft {
 
     /** */
     public void start() {
-        String human = view.getLstHumanDecks().getSelectedValue().toString();
-        int ai = view.getLstAIDecks().getSelectedIndex();
+        Deck human = view.getLstHumanDecks().getSelectedDeck();
+        int aiIndex = view.getLstAIDecks().getSelectedIndex();
 
         if (human == null) {
             JOptionPane.showMessageDialog(null,
-                    "Draft a new deck, save, and select before starting.",
+                    "No deck selected for human!\r\n(You may need to build a new deck.)",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        else if (human.getMain().countAll() < 40) {
+            JOptionPane.showMessageDialog(null,
+                    "The selected deck doesn't have enough cards to play (minimum 40)."
+                    + "\r\nUse the deck editor to choose the cards you want before starting.",
+                    "No deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Deck[] opponentDecks = AllZone.getDeckManager().getDraftDeck(human.getName());
 
-        // load old draft
-        Deck[] deck = AllZone.getDeckManager().getDraftDeck(human);
-
-        Constant.Runtime.HUMAN_DECK[0] = deck[0];
-        Constant.Runtime.COMPUTER_DECK[0] = deck[ai];
+        Constant.Runtime.HUMAN_DECK[0] = human;
+        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks[aiIndex];
 
         if (Constant.Runtime.COMPUTER_DECK[0] == null) {
             throw new IllegalStateException("OldGuiNewGame : startButton() error - computer deck is null");
@@ -84,7 +108,35 @@ public class ControlDraft {
 
     /** Updates deck list in view. */
     public void updateHumanDecks() {
-        view.getLstHumanDecks().setListData(AllZone.getDeckManager().getDraftDecks().keySet().toArray());
-        view.getLstHumanDecks().setSelectedIndex(0);
+        Collection<Deck[]> temp = AllZone.getDeckManager().getDraftDecks().values();
+        List<Deck> human = new ArrayList<Deck>();
+        for (Deck[] d : temp) { human.add(d[0]); }
+        view.getLstHumanDecks().setDecks(human.toArray(new Deck[0]));
+       // view.getLstHumanDecks().setSelectedIndex(0);
+    }
+
+    private void showDirections() {
+        view.getTpnDirections().setText(
+                "Booster Draft Mode Instructions (Click to collapse)"
+                + "\r\n\r\n"
+                + "In a booster draft, several players (usually eight) are seated"
+                + "around a table and each player is given three booster packs."
+                + "\r\n\r\n"
+                + "Each player opens a pack, selects a card from it and passes the remaining"
+                + "cards to his or her left. Each player then selects one of the 14 remaining"
+                + "cards from the pack that was just passed to him or her, and passes the"
+                + "remaining cards to the left again. This continues until all of the cards"
+                + "are depleted. The process is repeated with the second and third packs,"
+                + "except that the cards are passed to the right in the second pack."
+                + "\r\n\r\n"
+                + "Players then build decks out of any of the cards that they selected"
+                + "during the drafting and add as many basic lands as they want."
+                + "\r\n\r\n"
+                + "(Credit: Wikipedia <http://en.wikipedia.org/wiki/Magic:_The_Gathering_formats#Booster_Draft>)"
+       );
+    }
+
+    private void hideDirections() {
+        view.getTpnDirections().setText("Click here for draft mode instructions.");
     }
 }

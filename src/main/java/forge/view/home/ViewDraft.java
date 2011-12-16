@@ -4,17 +4,27 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.home.ControlDraft;
+import forge.deck.Deck;
+import forge.game.GameType;
+import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -26,7 +36,9 @@ public class ViewDraft extends JPanel {
     private FSkin skin;
     private ControlDraft control;
     private HomeTopLevel parentView;
-    private JList lstHumanDecks, lstAIDecks;
+    private JList lstAI;
+    private DeckLister lstHumanDecks;
+    private JTextPane tpnDirections;
 
     // Just for fun...maybe a waste of space :) Doublestrike 141211
     private String[] opponentNames = new String[] {
@@ -92,7 +104,6 @@ public class ViewDraft extends JPanel {
         lblAI.setForeground(skin.getColor("text"));
         this.add(lblAI, "w 40%!, gap 0 0 2% 2%, wrap");
 
-        String[] human = {};
         Random generator = new Random();
         int i = opponentNames.length;
         String[] ai = {
@@ -105,13 +116,17 @@ public class ViewDraft extends JPanel {
                 opponentNames[generator.nextInt(i)]
         };
 
-        lstHumanDecks = new JList(human);
-        lstAIDecks = new JList(ai);
+        // Human deck list area, ai names
+        Collection<Deck[]> temp = AllZone.getDeckManager().getDraftDecks().values();
+        List<Deck> human = new ArrayList<Deck>();
+        for (Deck[] d : temp) { human.add(d[0]); }
+        lstHumanDecks = new DeckLister(GameType.Draft);
+        lstHumanDecks.setDecks(human.toArray(new Deck[0]));
+        lstAI = new JList(ai);
         this.add(new JScrollPane(lstHumanDecks), "w 40%!, h 30%!, gap 7.5% 5% 2% 2%");
-        this.add(new JScrollPane(lstAIDecks), "w 40%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
+        this.add(new JScrollPane(lstAI), "w 40%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
-        lstHumanDecks.setSelectedIndex(0);
-        lstAIDecks.setSelectedIndex(0);
+        lstAI.setSelectedIndex(0);
 
         SubButton buildHuman = new SubButton("Build New Human Deck");
         buildHuman.addMouseListener(new MouseAdapter() {
@@ -119,6 +134,24 @@ public class ViewDraft extends JPanel {
             public void mousePressed(MouseEvent e) { control.setupDraft(); }
         });
         this.add(buildHuman, "w 40%!, h 5%!, gap 7.5% 5% 0 0, wrap");
+
+        // Directions
+        tpnDirections = new JTextPane();
+        tpnDirections.setOpaque(false);
+        tpnDirections.setForeground(skin.getColor("text"));
+        tpnDirections.setFont(skin.getFont1().deriveFont(Font.PLAIN, 15));
+        tpnDirections.setAlignmentX(SwingConstants.CENTER);
+        tpnDirections.setFocusable(false);
+        tpnDirections.setEditable(false);
+        tpnDirections.setBorder(null);
+        tpnDirections.setText("Click here for draft mode instructions.");
+
+        StyledDocument doc = tpnDirections.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+        add(tpnDirections, "w 80%, gap 10% 0 5% 5%, span 2 1, wrap");
 
         // Start button
         StartButton btnStart = new StartButton(parentView);
@@ -129,7 +162,7 @@ public class ViewDraft extends JPanel {
 
         JPanel pnlButtonContainer = new JPanel();
         pnlButtonContainer.setOpaque(false);
-        this.add(pnlButtonContainer, "w 100%!, gaptop 10%, dock south");
+        this.add(pnlButtonContainer, "w 100%!, span 2 1");
 
         pnlButtonContainer.setLayout(new BorderLayout());
         pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
@@ -143,17 +176,22 @@ public class ViewDraft extends JPanel {
     }
 
     /** @return JList */
-    public JList getLstHumanDecks() {
+    public DeckLister getLstHumanDecks() {
        return lstHumanDecks;
     }
 
     /** @return JList */
     public JList getLstAIDecks() {
-       return lstAIDecks;
+       return lstAI;
     }
 
     /** @return ControlDraft */
     public ControlDraft getController() {
         return control;
+    }
+
+    /** @return JTextArea */
+    public JTextPane getTpnDirections() {
+        return tpnDirections;
     }
 }
