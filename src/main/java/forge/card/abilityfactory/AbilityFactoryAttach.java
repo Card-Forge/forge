@@ -865,16 +865,12 @@ public class AbilityFactoryAttach {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        if (AbilityFactory.isSorcerySpeed(sa)) {
-            if (AllZone.getPhase().is(Constant.Phase.MAIN1)) {
-                chance = r.nextFloat() <= .75;
-            } else {
-                // Don't Attach Sorcery Speed stuff after Main1
-                return false;
-            }
-        } else {
-            chance &= r.nextFloat() <= .75;
+        if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && !"Curse".equals(af.getMapParams().get("AILogic"))) {
+            return false;
         }
+
+        chance &= r.nextFloat() <= .75;
 
         return chance;
     }
