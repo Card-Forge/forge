@@ -8646,6 +8646,7 @@ res/cardsfolder/t/throne_of_bone.txt svneol=native#text/plain
 res/cardsfolder/t/throne_of_empires.txt -text
 res/cardsfolder/t/throne_of_geth.txt svneol=native#text/plain
 res/cardsfolder/t/thrull_champion.txt svneol=native#text/plain
+res/cardsfolder/t/thrull_retainer.txt -text
 res/cardsfolder/t/thrull_surgeon.txt svneol=native#text/plain
 res/cardsfolder/t/thrumming_stone.txt svneol=native#text/plain
 res/cardsfolder/t/thrummingbird.txt svneol=native#text/plain
