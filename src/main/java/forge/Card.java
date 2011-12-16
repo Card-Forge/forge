@@ -2706,6 +2706,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("\r\n");
             }
             if (keyword.startsWith("Storm")) {
+                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
+                    sb.insert(sb.indexOf("Storm (When you cast this spell, copy it for each spell cast before it this turn.") + 81,
+                            " You may choose new targets for the copies.");
+                }
+            }
+            /*
+            if (keyword.startsWith("Storm")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
@@ -2715,6 +2722,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append(")\r\n");
             }
+            */
             if (keyword.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
