@@ -1610,10 +1610,12 @@ public class AbilityFactory {
 
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
-        }
-
-        else if (defined.equals("FormerlyEnchanted")) {
-            c = AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").get(0).getEnchantingCard();
+            if (c == null
+                && AbilityFactory.findRootAbility(sa) != null
+                && AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed") != null
+                && !AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").isEmpty()) {
+                c = AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").get(0).getEnchantingCard();
+            }
         }
 
         else if (defined.equals("TopOfLibrary")) {
