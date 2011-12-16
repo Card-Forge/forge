@@ -2190,6 +2190,9 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean hasProwl(final String type) {
+        if (this.prowl.contains("AllCreatureTypes")) {
+            return true;
+        }
         return this.prowl.contains(type);
     }
 
