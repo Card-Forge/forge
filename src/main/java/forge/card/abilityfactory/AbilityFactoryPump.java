@@ -1117,7 +1117,7 @@ public class AbilityFactoryPump {
         human = human.getValidCards(valid, this.hostCard.getController(), this.hostCard);
 
         // only count creatures that can attack
-        human = human.filter(new CardListFilter() {
+        comp = comp.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
                 return CombatUtil.canAttack(c) && !AbilityFactoryPump.this.abilityFactory.isCurse();

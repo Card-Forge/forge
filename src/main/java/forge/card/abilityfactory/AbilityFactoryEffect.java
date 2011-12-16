@@ -24,6 +24,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListFilter;
 import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
@@ -244,6 +245,26 @@ public class AbilityFactoryEffect {
                     return false;
                 }
                 randomReturn = CombatUtil.lifeInDanger(AllZone.getCombat());
+            } else if (logic.equals("Evasion")) {
+                CardList comp = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+                CardList human = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+
+                // only count creatures that can attack or block
+                comp = comp.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return CombatUtil.canAttack(c);
+                    }
+                });
+                human = human.filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return CombatUtil.canBlock(c);
+                    }
+                });
+                if (comp.size() < 2 || human.size() < 1) {
+                    randomReturn = false;
+                }
             }
         }
 
