@@ -9888,6 +9888,10 @@ res/images/icons/BoxIconSmall.png -text svneol=unset#image/png
 res/images/icons/CoinIcon.png -text svneol=unset#image/png
 res/images/icons/CoinIconSmall.png -text svneol=unset#image/png
 res/images/icons/CoinStack.png -text svneol=unset#image/png
+res/images/icons/DeleteIcon.png -text
+res/images/icons/DeleteIconOver.png -text
+res/images/icons/EditIcon.png -text
+res/images/icons/EditIconOver.png -text
 res/images/icons/ElixirIcon.png -text svneol=unset#image/png
 res/images/icons/FoxIconSmall.png -text svneol=unset#image/png
 res/images/icons/GearIconSmall.png -text svneol=unset#image/png
