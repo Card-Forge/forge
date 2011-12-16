@@ -1,6 +1,6 @@
 Name:Goatnapper
 ManaCost:2 R
-Types:Creature Gobin Rogue
+Types:Creature Goblin Rogue
 Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGoatGrab | TriggerDescription$ When CARDNAME enters the battlefield, untap target Goat and gain control of it until end of turn. It gains haste until end of turn.
