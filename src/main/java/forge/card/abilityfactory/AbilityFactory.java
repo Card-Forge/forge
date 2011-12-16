@@ -1610,7 +1610,13 @@ public class AbilityFactory {
 
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
-        } else if (defined.equals("TopOfLibrary")) {
+        }
+
+        else if (defined.equals("FormerlyEnchanted")) {
+            c = AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").get(0).getEnchantingCard();
+        }
+
+        else if (defined.equals("TopOfLibrary")) {
             final CardList lib = hostCard.getController().getCardsIn(Constant.Zone.Library);
             if (lib.size() > 0) {
                 c = lib.get(0);

@@ -927,6 +927,7 @@ public final class CardUtil {
         res.setNewPT(new ArrayList<CardPowerToughness>(c.getNewPT()));
         res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
         res.setCreatureGotBlockedThisTurn(c.getCreatureGotBlockedThisTurn());
+        res.setEnchanting(c.getEnchanting());
         res.setHaunting(c.getHaunting());
         for (final Card haunter : c.getHauntedBy()) {
             res.addHauntedBy(haunter);
