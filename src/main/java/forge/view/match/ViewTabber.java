@@ -46,10 +46,13 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.CardList;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.GameLog;
 import forge.MagicStack;
 import forge.Player;
+import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.match.ControlTabber;
 import forge.gui.ForgeAction;
@@ -391,6 +394,18 @@ public class ViewTabber extends FRoundedPanel {
         } else {
             temp[5].setText("");
         }
+        if (Singletons.getModel().getPreferences().isPlayForAnte()) {
+            CardList list = p0.getCardsIn(Zone.Ante);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Ante'd: ");
+            for (int i = 0; i < list.size(); i++) {
+                sb.append(list.get(0));
+                if (i < (list.size() - 1)) {
+                    sb.append(", ");
+                }
+            }
+            temp[6].setText(sb.toString());
+        }
     }
 
     /**
@@ -569,10 +584,11 @@ public class ViewTabber extends FRoundedPanel {
             final InfoLabel draw = new InfoLabel();
             final InfoLabel prevention = new InfoLabel();
             final InfoLabel keywords = new InfoLabel();
-            this.detalLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords });
+            final InfoLabel antes = new InfoLabel();
+            this.detalLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes });
 
             // Set border on bottom label, and larger font on player name
-            keywords.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getColor("borders")));
+            antes.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getColor("borders")));
             name.setText(p.getName());
 
             // Add to "players" tab panel
@@ -583,6 +599,7 @@ public class ViewTabber extends FRoundedPanel {
             this.pnlPlayers.add(draw, constraints);
             this.pnlPlayers.add(prevention, constraints);
             this.pnlPlayers.add(keywords, constraints);
+            this.pnlPlayers.add(antes, constraints);
         }
     }
 
