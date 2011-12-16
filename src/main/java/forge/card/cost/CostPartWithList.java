@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.CardList;
+import forge.CardUtil;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -78,7 +79,8 @@ public abstract class CostPartWithList extends CostPart {
      */
     public final void addListToHash(final SpellAbility sa, final String hash) {
         for (final Card card : this.getList()) {
-            sa.addCostToHashList(card, hash);
+            Card copy = CardUtil.getLKICopy(card);
+            sa.addCostToHashList(copy, hash);
         }
     }
 
