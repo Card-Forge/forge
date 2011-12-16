@@ -10977,6 +10977,7 @@ src/main/java/forge/view/swing/Main.java svneol=native#text/plain
 src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
 src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
 src/main/java/forge/view/toolbox/CardViewer.java -text
+src/main/java/forge/view/toolbox/DeckLister.java -text
 src/main/java/forge/view/toolbox/FButton.java -text
 src/main/java/forge/view/toolbox/FOverlay.java -text
 src/main/java/forge/view/toolbox/FPanel.java -text
