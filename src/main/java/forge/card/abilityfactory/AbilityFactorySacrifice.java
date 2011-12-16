@@ -556,15 +556,15 @@ public class AbilityFactorySacrifice {
                 final Card c = (Card) o;
 
                 if (destroy) {
-                    if (!AllZone.getGameAction().destroy(c)) {
-                        continue;
+                    if (AllZone.getGameAction().destroy(c)) {
+                        saccedList.add(c);
                     }
                 } else {
-                    if (!AllZone.getGameAction().sacrifice(c)) {
-                        continue;
+                    if (AllZone.getGameAction().sacrifice(c)) {
+                        saccedList.add(c);
                     }
                 }
-                saccedList.add(c);
+
                 list.remove(c);
             }
         }

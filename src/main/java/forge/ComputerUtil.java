@@ -1542,7 +1542,9 @@ public class ComputerUtil {
                 if (!indestructibles.isEmpty()) {
                     c = indestructibles.get(0);
                 }
-            } else {
+            }
+
+            if (c == null) {
                 if (list.getNotType("Creature").size() == 0) {
                     c = CardFactoryUtil.getWorstCreatureAI(list);
                 } else if (list.getNotType("Land").size() == 0) {
