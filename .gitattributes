@@ -3501,6 +3501,7 @@ res/cardsfolder/g/gorilla_chieftain.txt svneol=native#text/plain
 res/cardsfolder/g/gorilla_pack.txt svneol=native#text/plain
 res/cardsfolder/g/gorilla_shaman.txt svneol=native#text/plain
 res/cardsfolder/g/gorilla_titan.txt -text
+res/cardsfolder/g/gorilla_war_cry.txt -text
 res/cardsfolder/g/gorilla_warrior.txt svneol=native#text/plain
 res/cardsfolder/g/gossamer_chains.txt svneol=native#text/plain
 res/cardsfolder/g/gossamer_phantasm.txt svneol=native#text/plain
