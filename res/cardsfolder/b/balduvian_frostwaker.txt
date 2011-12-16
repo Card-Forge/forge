@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Wizard
 Text:no text
 PT:1/1
-A:AB$ Animate | Cost$ T | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow land | Power$ 2 | Toughness$ 2 | Types$ Creature,Elemental | Keywords$ Flying | Permanent$ True | SpellDescription$ Target snow land becomes a 2/2 blue Elemental creature with flying. It's still a land.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow land | Power$ 2 | Toughness$ 2 | Types$ Creature,Elemental | Colors$ Blue | Keywords$ Flying | Permanent$ True | SpellDescription$ Target snow land becomes a 2/2 blue Elemental creature with flying. It's still a land.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_frostwaker.jpg
