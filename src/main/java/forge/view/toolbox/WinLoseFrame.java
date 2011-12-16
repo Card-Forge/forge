@@ -235,7 +235,7 @@ public class WinLoseFrame extends JFrame {
 
     /**
      * <p>
-     * continueButton_actionPerformed.
+     * btnContinueActionPerformed.
      * </p>
      * 
      * @param e
@@ -255,7 +255,7 @@ public class WinLoseFrame extends JFrame {
 
     /**
      * <p>
-     * restartButton_actionPerformed.
+     * btnRestartActionPerformed.
      * </p>
      * 
      * @param e
@@ -276,7 +276,7 @@ public class WinLoseFrame extends JFrame {
 
     /**
      * <p>
-     * btnQuit_actionPerformed.
+     * btnQuitctionPerformed.
      * </p>
      * 
      * @param e

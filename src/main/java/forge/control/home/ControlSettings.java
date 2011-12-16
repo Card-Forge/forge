@@ -53,15 +53,15 @@ public class ControlSettings {
         });
 
         //slapshot5 - work in progress, but I need to check this file in for other changes.
-        /*
         this.view.getCbAnte().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 Singletons.getModel().getPreferences()
                         .setPlayForAnte(ControlSettings.this.view.getCbAnte().isSelected());
+                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
-        */
+        
         this.view.getCbScaleLarger().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {

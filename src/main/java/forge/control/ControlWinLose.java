@@ -17,8 +17,19 @@
  */
 package forge.control;
 
+import java.util.List;
+
 import forge.AllZone;
+import forge.Card;
+import forge.CardList;
 import forge.Constant;
+import forge.Constant.Zone;
+import forge.Singletons;
+import forge.deck.Deck;
+import forge.game.GameType;
+import forge.gui.GuiUtils;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.view.GuiTopLevel;
 import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
@@ -95,6 +106,43 @@ public class ControlWinLose {
      * 
      */
     public void startNextRound() {
+        boolean isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
+        GameType gameType = Constant.Runtime.getGameType();
+        
+        //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere
+        if (isAnte && !gameType.equals(GameType.Quest)) {
+            Deck hDeck = Constant.Runtime.HUMAN_DECK[0];
+            Deck cDeck = Constant.Runtime.COMPUTER_DECK[0];
+            if (AllZone.getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
+                CardList compAntes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
+
+                //remove compy's ante cards form his deck
+                for (Card c : compAntes) {
+                    CardPrinted toRemove = CardDb.instance().getCard(c);
+                    cDeck.removeMain(toRemove, 1);
+                }
+                
+                Constant.Runtime.COMPUTER_DECK[0] = cDeck;
+                
+                List<Card> o = GuiUtils.getChoicesOptional("Select cards to add to your deck", compAntes.toArray());
+                if (null != o) {
+                    for (Card c : o) {
+                        CardPrinted toAdd = CardDb.instance().getCard(c);
+                        hDeck.addMain(toAdd, 1);
+                    }
+                }
+
+            } else { //compy won
+                CardList humanAntes = AllZone.getHumanPlayer().getCardsIn(Zone.Ante);
+
+                //remove compy's ante cards form his deck
+                for (Card c : humanAntes) {
+                    CardPrinted toRemove = CardDb.instance().getCard(c);
+                    hDeck.removeMain(toRemove, 1);
+                }
+                Constant.Runtime.HUMAN_DECK[0] = hDeck;
+            }
+        }
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
     }
 

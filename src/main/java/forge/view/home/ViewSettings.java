@@ -112,13 +112,11 @@ public class ViewSettings extends JScrollPane {
         viewport.add(lblOldUI, constraints2);
 
         //slapshot5 - this is in progress, but I need to check this in for some other changes.
-        this.cbAnte = new OptionsCheckBox("Play for Ante");
-        //this.cbAnte.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
-        //NoteLabel lblAnte = new NoteLabel("Each player antes a card and the game is for keeps.");
-        /*
+        cbAnte = new OptionsCheckBox("Play for Ante");
+        cbAnte.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
+        NoteLabel lblAnte = new NoteLabel("Each player antes a card and the game is for keeps.");
         viewport.add(cbAnte, constraints);
         viewport.add(lblAnte, constraints2);
-        */
 
         cbUploadDraft = new OptionsCheckBox("Upload Draft Pics");
         cbUploadDraft.setSelected(Singletons.getModel().getPreferences().isUploadDraftAI());

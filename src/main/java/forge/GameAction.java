@@ -638,6 +638,9 @@ public class GameAction {
             return this.moveToGraveyard(c);
         } else if (name.equals(Constant.Zone.Exile)) {
             return this.exile(c);
+        } else if (name.equals(Constant.Zone.Ante)) {
+            final PlayerZone ante = c.getOwner().getZone(Constant.Zone.Ante);
+            return this.moveTo(ante, c);
         } else {
             return this.moveToStack(c);
         }
@@ -1465,6 +1468,21 @@ public class GameAction {
         } else if (AllZone.getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             // if player won last, AI starts
             this.computerStartsGame();
+        }
+
+        //Ante restricted to Quest Mode for now
+        if (Singletons.getModel().getPreferences().isPlayForAnte()) {
+            Card humanAnte = CardUtil.getRandom(AllZone.getHumanPlayer().getCardsIn(Zone.Library).toArray());
+            moveTo(Zone.Ante, humanAnte);
+            Card aiAnte = CardUtil.getRandom(AllZone.getComputerPlayer().getCardsIn(Zone.Library).toArray());
+            moveTo(Zone.Ante, aiAnte);
+
+            final String nl = System.getProperty("line.separator");
+            final StringBuilder msg = new StringBuilder();
+            msg.append("Human ante: ").append(humanAnte).append(nl);
+            msg.append("Computer ante: ").append(aiAnte).append(nl);
+            //msg.append("Cards in human ante: ").append(AllZone.getHumanPlayer().getCardsIn(Zone.Ante).get(0));
+            JOptionPane.showConfirmDialog(null, msg, "Ante", JOptionPane.OK_CANCEL_OPTION);
         }
 
         for (int i = 0; i < 7; i++) {

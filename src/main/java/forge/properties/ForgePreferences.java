@@ -147,6 +147,7 @@ public class ForgePreferences extends Preferences {
         }
 
         this.oldGui = this.getBoolean("gui.old", true);
+        this.setPlayForAnte(this.getBoolean("play.for.ante", false));
         this.setUILayout(this.get("gui.layout", ""));
         this.setStackAiLand(this.getBoolean("AI.stack.land", false));
         this.setMillingLossCondition(this.getBoolean("loss.condition.milling", true));
@@ -221,8 +222,11 @@ public class ForgePreferences extends Preferences {
      *             the exception
      */
     public final void save() throws Exception {
-        this.set("gui.old", this.oldGui);
         this.set("gui.layout", this.getUILayout());
+        this.set("gui.old", this.oldGui);
+        this.set("gui.skin", this.getSkin());
+        
+        this.set("play.for.ante", this.isPlayForAnte());
 
         this.set("AI.stack.land", this.isStackAiLand());
         this.set("loss.condition.milling", this.isMillingLossCondition());
@@ -233,8 +237,6 @@ public class ForgePreferences extends Preferences {
         this.set("upload.Draft.AI", this.isUploadDraftAI());
 
         this.set("rand.C.Foil", this.isRandCFoil());
-
-        this.set("gui.skin", this.getSkin());
 
         this.set("card.overlay", this.isCardOverlay());
         this.set("card.images.size", this.getCardSize());

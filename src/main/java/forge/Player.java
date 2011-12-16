@@ -110,7 +110,7 @@ public abstract class Player extends GameEntity {
 
     /** The Constant ALL_ZONES. */
     public static final List<Zone> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(Zone.Battlefield,
-            Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command));
+            Zone.Library, Zone.Graveyard, Zone.Hand, Zone.Exile, Zone.Command, Zone.Ante));
 
     /**
      * <p>
