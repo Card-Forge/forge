@@ -1,0 +1,13 @@
+Name:Burning of Xinye
+ManaCost:4 R R
+Types:Sorcery
+Text:no text
+A:SP$ Sacrifice | Cost$ 4 R R | ValidTgts$ Opponent | SacValid$ Land | Amount$ 4 | SubAbility$ DBSac | Destroy$ True | SpellDescription$ Choose four lands you control and destroy those lands. Then target opponent chooses four lands he or she controls. Destroy those lands. Then Burning of Xinye deals 4 damage to each creature.
+SVar:DBSac:DB$ Sacrifice | Defined$ You | SacValid$ Land | Amount$ 4 | Destroy$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_of_xinye.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/104.jpg
+Oracle:Choose four lands you control and destroy those lands. Then target opponent chooses four lands he or she controls. Destroy those lands. Then Burning of Xinye deals 4 damage to each creature.
+End
