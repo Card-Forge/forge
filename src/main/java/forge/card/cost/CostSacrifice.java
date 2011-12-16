@@ -125,6 +125,7 @@ public class CostSacrifice extends CostPartWithList {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
+        this.addListToHash(ability, "Sacrificed");
         for (final Card c : this.getList()) {
             AllZone.getGameAction().sacrifice(c);
         }
