@@ -1636,7 +1636,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Kavu Titan")) {
+        /*else if (cardName.equals("Kavu Titan")) {
             final SpellAbility kicker = new Spell(card) {
                 private static final long serialVersionUID = -1598664196463358630L;
 
@@ -1688,7 +1688,7 @@ public class CardFactoryCreatures {
             }; // CommandComes
 
             card.addComesIntoPlayCommand(commandComes);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
