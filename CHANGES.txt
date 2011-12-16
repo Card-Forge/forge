@@ -428,6 +428,26 @@ Fixes/Features:
 - Added the keyword "CARDNAME can't be blocked except by two or more creatures." (please test).
 - Added this text to blocker selection: "To cancel a block right-click on your blocker".
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved the AI handling of the keyword "CARDNAME can't be blocked except by two or more creatures.".
+- Fix dependency version. Checkstyle
+- Fix bad commit
+- Ignore more ds_store files
+- Added the rampage deck Beast 1.
+- NewGUI: Changed the card detail panel to only enlarge the text area if enough space is present.
+- Add the ability to play for Ante in Constructed mode only.
+Notes:
+1) You win/lose the cards only for the duration of continuing or restarting a match. Once you quit a match, decks should go back to normal.
+2) There is a setting on the Settings screen to turn this on/off. Default is Off.
+3) If you want, you can put card won in ante into your deck (same durations as above apply)
+- A somewhat hackish solution to the spell description problem for cards that have Storm.
+- add ante'd cards to the Player Panel in the Tabber
+- fixed type for Goatnapper and Flying for Stenchskipper
+- Latest progress on Draft submenu.
+- Oops, forgot to commit unversioned file.
+- More unversioned files that missed the boat...
+- Added the Kavu Titan conversion by squee1968.
+- Fixed Curfew.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -510,6 +530,9 @@ Imposing Visage
 Wind Spirit
 Kederekt Creeper
 Stormblood Berserker
+Goblin War Drums
+Vine Kami
+Benalish Lancer
 
 
 end
