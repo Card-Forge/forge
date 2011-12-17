@@ -1,0 +1,15 @@
+Name:Brain Pry
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ NameCard | Cost$ B | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ RevealHand | SpellDescription$ Name a nonland card. Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card.
+SVar:RevealHand:DB$RevealHand | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose | DiscardValid$ Card.NamedCard | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_pry.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/39.jpg
+Oracle:Name a nonland card. Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card.
+End
