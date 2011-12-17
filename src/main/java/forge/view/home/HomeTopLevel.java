@@ -90,7 +90,7 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.setBackground(skin.getColor("theme"));
 
         pnlContent = new FRoundedPanel();
-        pnlContent.setBackground(skin.getColor("zebra"));
+        pnlContent.setBackground(skin.getColor("theme"));
         pnlContent.setLayout(new MigLayout("insets 0, gap 0"));
 
         btnConstructed = new FButton();

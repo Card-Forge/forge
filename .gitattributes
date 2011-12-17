@@ -10989,9 +10989,11 @@ src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
 src/main/java/forge/view/toolbox/CardViewer.java -text
 src/main/java/forge/view/toolbox/DeckLister.java -text
 src/main/java/forge/view/toolbox/FButton.java -text
+src/main/java/forge/view/toolbox/FList.java -text
 src/main/java/forge/view/toolbox/FOverlay.java -text
 src/main/java/forge/view/toolbox/FPanel.java -text
 src/main/java/forge/view/toolbox/FRoundedPanel.java -text
+src/main/java/forge/view/toolbox/FScrollPane.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
 src/main/java/forge/view/toolbox/WinLoseFrame.java -text
