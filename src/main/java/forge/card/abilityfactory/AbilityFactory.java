@@ -2278,7 +2278,12 @@ public class AbilityFactory {
             }
         }
 
-        return list.getValidCards(type.split(","), sa.getActivatingPlayer(), source);
+        String valid = type;
+        if (valid.contains("EQX")) {
+            valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
+        }
+
+        return list.getValidCards(valid.split(","), sa.getActivatingPlayer(), source);
     }
 
     /**
