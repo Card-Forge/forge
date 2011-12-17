@@ -1,0 +1,14 @@
+Name:Tatsumasa, the Dragon's Fang
+ManaCost:6
+Types:Legendary Artifact Equipment
+Text:Equipped creature gets +5/+5.
+K:eqPump 3:+5/+5
+A:AB$ Token | Cost$ 6 Exile<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Dragon Spirit | TokenTypes$ Creature,Dragon,Spirit | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 5 | TokenToughness$ 5 | RememberTokens$ True | DelayedTrigger$ DelTrigDies | TokenKeywords$ Flying | SpellDescription$ Put a 5/5 blue Dragon Spirit creature token with flying onto the battlefield. Return Tatsumasa to the battlefield under its owner's control when that token dies.
+T:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Exile | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Return CARDNAME to the battlefield under its owner's control.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Self | SubAbility$ DBCleanUp
+SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tatsumasa_the_dragons_fang.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/270.jpg
+Oracle:Equipped creature gets +5/+5.\n{6}, Exile Tatsumasa, the Dragon's Fang: Put a 5/5 blue Dragon Spirit creature token with flying onto the battlefield. Return Tatsumasa to the battlefield under its owner's control when that token dies.\nEquip {3}
+End
