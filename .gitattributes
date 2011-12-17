@@ -933,6 +933,7 @@ res/cardsfolder/b/boiling_seas.txt svneol=native#text/plain
 res/cardsfolder/b/bojuka_bog.txt svneol=native#text/plain
 res/cardsfolder/b/bojuka_brigand.txt svneol=native#text/plain
 res/cardsfolder/b/bola_warrior.txt svneol=native#text/plain
+res/cardsfolder/b/bold_defense.txt -text
 res/cardsfolder/b/boldwyr_heavyweights.txt svneol=native#text/plain
 res/cardsfolder/b/boldwyr_intimidator.txt -text
 res/cardsfolder/b/bond_of_agony.txt -text
@@ -5068,6 +5069,7 @@ res/cardsfolder/m/marrow_chomper.txt svneol=native#text/plain
 res/cardsfolder/m/marrow_gnawer.txt svneol=native#text/plain
 res/cardsfolder/m/marrow_shards.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_boa.txt svneol=native#text/plain
+res/cardsfolder/m/marsh_casualties.txt -text
 res/cardsfolder/m/marsh_crocodile.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_flats.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_flitter.txt -text

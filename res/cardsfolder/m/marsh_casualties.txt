@@ -1,0 +1,11 @@
+Name:Marsh Casualties
+ManaCost:B B
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ B B | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures target player controls get -1/-1 until end of turn. If CARDNAME was kicked, those creatures get -2/-2 until end of turn instead.
+A:SP$ PumpAll | Cost$ 3 B B | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Kicker 3 (You may pay an additional 3 as you cast this spell.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_casualties.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/101.jpg
+Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nCreatures target player controls get -1/-1 until end of turn. If Marsh Casualties was kicked, those creatures get -2/-2 until end of turn instead.
+End
