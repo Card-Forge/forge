@@ -448,6 +448,34 @@ Notes:
 - Added the Kavu Titan conversion by squee1968.
 - Fixed Curfew.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed interaction of Prowl with Changelings.
+- add Colors param to Balduvian Frostwaker
+- Fixed controllerChangeZoneCorrection for the case that nothing changes.
+- Added the new AI logic "Evasion" to AF Effect.
+- Fixed Soultether Golem.
+- Fixed Zombie Master.
+- Fixed Honden of Night's Reach.
+- The lists of cards stored in costs will now be LKI copies (this fixes cards like Greater Good and Starlit Sanctum used with pumped creatures).
+- Added "FormerlyEnchanted" to getDefinedCards.
+- Fixed Briar Shield.
+- Made a more AI friendly fix for Briar Shield (removed FormerlyEnchanted).
+- Updated some SVars.
+- Fixed the Sacrifice cost list not being set for the AI.
+- Tweaked the timing of the aura casting AI.
+- Removed script hack from Phantom Wings.
+- Fixed AI blocking creatures with "CARDNAME can't be blocked except by two or more creatures."
+- calculateAmount will look a little further now when using Remembered objects (fixes Jester's Mask).
+- Two fixes for AF Sacrifice.
+- convert Awakener Druid to script. Comment out CardFactoryUtil.activateManland and revertManland. Anything like this form now on should be using AF_Animate.
+- Draft submenu finished.
+- Friendly-ified wording in draft submenu.
+- Several minor bug fixes to Draft and Sealed submenus.
+- Initial checkin of actually paying Mana from the Player Panel.
+- Added FList and FScrollPane to UI toolbox, for further display standardization.
+- Small code streamlining. Also fixed "battlefield click plays card" bug.
+- remove some debug code in FButton
+- Missed a file last night.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -533,6 +561,11 @@ Stormblood Berserker
 Goblin War Drums
 Vine Kami
 Benalish Lancer
+Gorilla War Cry
+Carapace
+Stamina
+Thrull Retainer
+Burning of Xinye
 
 
 end
