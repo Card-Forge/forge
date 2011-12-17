@@ -1,0 +1,22 @@
+Name:Doubling Cube
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ 3 T | Produced$ W | Amount$ A | SubAbility$ ManaBlue | SpellDescription$ Double the amount of each type of mana in your mana pool.
+SVar:ManaBlue:DB$Mana | Produced$ U | Amount$ B | SubAbility$ ManaBlack
+SVar:ManaBlack:DB$Mana | Produced$ B | Amount$ C | SubAbility$ ManaRed
+SVar:ManaRed:DB$Mana | Produced$ R | Amount$ D | SubAbility$ ManaGreen
+SVar:ManaGreen:DB$Mana | Produced$ G | Amount$ E
+SVar:A:Count$ManaPool:white
+SVar:B:Count$ManaPool:blue
+SVar:C:Count$ManaPool:black
+SVar:D:Count$ManaPool:red
+SVar:E:Count$ManaPool:green
+#AI doesn't have a mana pool
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_cube.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/116.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/321.jpg
+Oracle:{3}, {T}: Double the amount of each type of mana in your mana pool.
+End
