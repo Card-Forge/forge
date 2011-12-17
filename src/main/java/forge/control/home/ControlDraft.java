@@ -112,7 +112,7 @@ public class ControlDraft {
         List<Deck> human = new ArrayList<Deck>();
         for (Deck[] d : temp) { human.add(d[0]); }
         view.getLstHumanDecks().setDecks(human.toArray(new Deck[0]));
-       // view.getLstHumanDecks().setSelectedIndex(0);
+        view.getLstHumanDecks().setSelectedIndex(0);
     }
 
     private void showDirections() {

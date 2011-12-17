@@ -21,6 +21,7 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Command;
 import forge.control.home.ControlDraft;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -28,7 +29,7 @@ import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FSkin;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Assembles swing components for "Draft" mode menu.
  *
  */
 @SuppressWarnings("serial")
@@ -82,8 +83,8 @@ public class ViewDraft extends JPanel {
             "Walter", "Wilfred", "William", "Winston"
     };
     /**
-     * TODO: Write javadoc for Constructor.
-     * @param v0 &emsp; HomeTopLevel parent view
+     * Assembles swing components for "Draft" mode menu.
+     * @param v0 (HomeTopLevel, parent view)
      */
     public ViewDraft(HomeTopLevel v0) {
         super();
@@ -96,13 +97,13 @@ public class ViewDraft extends JPanel {
         lblHuman.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
         lblHuman.setForeground(skin.getColor("text"));
-        this.add(lblHuman, "w 40%!, gap 7.5% 5% 2% 2%");
+        this.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
 
         JLabel lblAI = new JLabel("Who will you play?");
         lblAI.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
         lblAI.setForeground(skin.getColor("text"));
-        this.add(lblAI, "w 40%!, gap 0 0 2% 2%, wrap");
+        this.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
 
         Random generator = new Random();
         int i = opponentNames.length;
@@ -116,15 +117,26 @@ public class ViewDraft extends JPanel {
                 opponentNames[generator.nextInt(i)]
         };
 
+        // Define exit command for deck editor (TODO put this in controller)
+        final Command exit = new Command() {
+            private static final long serialVersionUID = -9133358399503226853L;
+
+            @Override
+            public void execute() {
+                control.updateHumanDecks();
+                lstHumanDecks.setSelectedIndex(0);
+            }
+        };
+
         // Human deck list area, ai names
         Collection<Deck[]> temp = AllZone.getDeckManager().getDraftDecks().values();
         List<Deck> human = new ArrayList<Deck>();
         for (Deck[] d : temp) { human.add(d[0]); }
-        lstHumanDecks = new DeckLister(GameType.Draft);
+        lstHumanDecks = new DeckLister(GameType.Draft, exit);
         lstHumanDecks.setDecks(human.toArray(new Deck[0]));
         lstAI = new JList(ai);
-        this.add(new JScrollPane(lstHumanDecks), "w 40%!, h 30%!, gap 7.5% 5% 2% 2%");
-        this.add(new JScrollPane(lstAI), "w 40%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
+        this.add(new JScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
+        this.add(new JScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
         lstAI.setSelectedIndex(0);
 
@@ -133,7 +145,7 @@ public class ViewDraft extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) { control.setupDraft(); }
         });
-        this.add(buildHuman, "w 40%!, h 5%!, gap 7.5% 5% 0 0, wrap");
+        this.add(buildHuman, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
 
         // Directions
         tpnDirections = new JTextPane();
