@@ -44,7 +44,9 @@ public class ManaPool extends Card {
     // current paying moved to SpellAbility
 
     private final ArrayList<Mana> floatingMana = new ArrayList<Mana>();
-    private final int[] floatingTotals = new int[7]; // WUBRGCS
+    private final int[] floatingTotals = new int[6]; // WUBRGC
+    private final int[] floatingSnowTotals = new int[6]; // WUBRGC
+
     /** Constant <code>map</code>. */
     private static final Map<String, Integer> MAP = new HashMap<String, Integer>();
 
@@ -79,7 +81,6 @@ public class ManaPool extends Card {
         ManaPool.MAP.put(Constant.Color.RED, 3);
         ManaPool.MAP.put(Constant.Color.GREEN, 4);
         ManaPool.MAP.put(Constant.Color.COLORLESS, 5);
-        ManaPool.MAP.put(Constant.Color.SNOW, 6);
     }
 
     /**
@@ -91,41 +92,27 @@ public class ManaPool extends Card {
      */
     @Deprecated
     public final String getManaList() {
-        final Mana[] pool = this.floatingMana.toArray(new Mana[this.floatingMana.size()]);
-
-        final int[] normalMana = { 0, 0, 0, 0, 0, 0 };
-        final int[] snowMana = { 0, 0, 0, 0, 0, 0 };
-        final String[] manaStrings = { Constant.Color.WHITE, Constant.Color.BLUE, Constant.Color.BLACK,
-                Constant.Color.RED, Constant.Color.GREEN, Constant.Color.COLORLESS };
-
-        for (final Mana m : pool) {
-            if (m.isSnow()) {
-                snowMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
-            } else {
-                normalMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
-            }
-        }
-
+		calculateManaTotals();
         final StringBuilder sbNormal = new StringBuilder("");
         final StringBuilder sbSnow = new StringBuilder("");
         if (!this.isEmpty()) {
             for (int i = 0; i < 6; i++) {
                 if (i == 5) {
-                    if (normalMana[i] > 0) {
-                        sbNormal.append(normalMana[i] + " ");
+                    if (floatingTotals[i] > 0) {
+                        sbNormal.append(floatingTotals[i] + " ");
                     }
-                    if (snowMana[i] > 0) {
-                        sbSnow.append(snowMana[i] + " ");
+                    if (floatingSnowTotals[i] > 0) {
+                        sbSnow.append(floatingSnowTotals[i] + " ");
                     }
                 } else {
-                    if (normalMana[i] > 0) {
-                        for (int j = 0; j < normalMana[i]; j++) {
-                            sbNormal.append(CardUtil.getShortColor(manaStrings[i])).append(" ");
+                    if (floatingTotals[i] > 0) {
+                        for (int j = 0; j < floatingTotals[i]; j++) {
+                            sbNormal.append(CardUtil.getShortColor(Constant.Color.COLORS[i])).append(" ");
                         }
                     }
-                    if (snowMana[i] > 0) {
-                        for (int j = 0; j < snowMana[i]; j++) {
-                            sbSnow.append(CardUtil.getShortColor(manaStrings[i])).append(" ");
+                    if (floatingSnowTotals[i] > 0) {
+                        for (int j = 0; j < floatingSnowTotals[i]; j++) {
+                            sbSnow.append(CardUtil.getShortColor(Constant.Color.COLORS[i])).append(" ");
                         }
                     }
                 }
@@ -141,23 +128,31 @@ public class ManaPool extends Card {
 
     }
 
+    /**
+     * <p>
+     * calculatManaTotals for the Player panel.
+     * </p>
+     * 
+     */
+    public void calculateManaTotals() {
+        for (int i = 0; i < floatingTotals.length; i++) {
+            floatingTotals[i] = 0;
+            floatingSnowTotals[i] = 0;
+        }
+
+        for (final Mana m : this.floatingMana) {
+            if (m.isSnow()) {
+                floatingSnowTotals[ManaPool.MAP.get(m.getColor())] += m.getAmount();
+            } else {
+                floatingTotals[ManaPool.MAP.get(m.getColor())] += m.getAmount();
+            }
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public final String getText() {
-        final Mana[] pool = this.floatingMana.toArray(new Mana[this.floatingMana.size()]);
-
-        final int[] normalMana = { 0, 0, 0, 0, 0, 0 };
-        final int[] snowMana = { 0, 0, 0, 0, 0, 0 };
-        final String[] manaStrings = { Constant.Color.WHITE, Constant.Color.BLUE, Constant.Color.BLACK,
-                Constant.Color.RED, Constant.Color.GREEN, Constant.Color.COLORLESS };
-
-        for (final Mana m : pool) {
-            if (m.isSnow()) {
-                snowMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
-            } else {
-                normalMana[ManaPool.MAP.get(m.getColor())] += m.getAmount();
-            }
-        }
+        calculateManaTotals();
 
         final StringBuilder sbNormal = new StringBuilder();
         final StringBuilder sbSnow = new StringBuilder();
@@ -165,20 +160,20 @@ public class ManaPool extends Card {
             for (int i = 0; i < 6; i++) {
                 if (i == 5) {
                     // Put colorless first
-                    if (normalMana[i] > 0) {
-                        sbNormal.insert(0, normalMana[i] + " ");
+                    if (floatingTotals[i] > 0) {
+                        sbNormal.insert(0, floatingTotals[i] + " ");
                     }
-                    if (snowMana[i] > 0) {
-                        sbSnow.insert(0, snowMana[i] + " ");
+                    if (floatingSnowTotals[i] > 0) {
+                        sbSnow.insert(0, floatingSnowTotals[i] + " ");
                     }
                 } else {
-                    if (normalMana[i] > 0) {
-                        sbNormal.append(CardUtil.getShortColor(manaStrings[i]));
-                        sbNormal.append("(").append(normalMana[i]).append(") ");
+                    if (floatingTotals[i] > 0) {
+                        sbNormal.append(CardUtil.getShortColor(Constant.Color.COLORS[i]));
+                        sbNormal.append("(").append(floatingTotals[i]).append(") ");
                     }
-                    if (snowMana[i] > 0) {
-                        sbSnow.append(CardUtil.getShortColor(manaStrings[i]));
-                        sbSnow.append("(").append(snowMana[i]).append(") ");
+                    if (floatingSnowTotals[i] > 0) {
+                        sbSnow.append(CardUtil.getShortColor(Constant.Color.COLORS[i]));
+                        sbSnow.append("(").append(floatingSnowTotals[i]).append(") ");
                     }
                 }
             }
@@ -200,7 +195,18 @@ public class ManaPool extends Card {
      * @return a int.
      */
     public final int getAmountOfColor(final String color) {
-        return this.floatingTotals[ManaPool.MAP.get(color)];
+        if (color.equals(Constant.Color.SNOW)) {
+            // If looking for Snow mana return total Snow
+            int total = 0;
+            for (int i : this.floatingSnowTotals) {
+                total += i;
+            }
+            return total;
+        }
+
+        // If looking for Color/Colorless total Snow and non-Snow
+        int i = ManaPool.MAP.get(color);
+        return this.floatingTotals[i] + this.floatingSnowTotals[i];
     }
 
     /**
@@ -271,9 +277,12 @@ public class ManaPool extends Card {
     public final void addManaToPool(final ArrayList<Mana> pool, final Mana mana) {
         pool.add(mana);
         if (pool.equals(this.floatingMana)) {
-            this.floatingTotals[ManaPool.MAP.get(mana.getColor())] += mana.getAmount();
+            int i = ManaPool.MAP.get(mana.getColor());
             if (mana.isSnow()) {
-                this.floatingTotals[ManaPool.MAP.get(Constant.Color.SNOW)] += mana.getAmount();
+                this.floatingSnowTotals[i] += mana.getAmount();
+            }
+            else {
+                this.floatingTotals[i] += mana.getAmount();
             }
         }
         owner.updateObservers();
@@ -352,6 +361,8 @@ public class ManaPool extends Card {
      */
     public final void clearPool() {
         if (this.floatingMana.size() == 0) {
+            this.calculateManaTotals();
+            this.owner.updateObservers();
             return;
         }
 
@@ -368,7 +379,8 @@ public class ManaPool extends Card {
         } else {
             this.floatingMana.clear();
         }
-        owner.updateObservers();
+        this.calculateManaTotals();
+        this.owner.updateObservers();
     }
 
     /**
@@ -405,18 +417,19 @@ public class ManaPool extends Card {
             } else if (wantSnow && mana.isSnow()) {
                 if (choice == null) {
                     choice = mana;
-                } else if (choice.isColor(Constant.Color.COLORLESS)) {
-                    // do nothing Snow Colorless should be used first to pay for
-                    // Snow mana
-                } else if (mana.isColor(Constant.Color.COLORLESS)) {
-                    // give preference to Colorless Snow mana over Colored snow
-                    // mana
-                    choice = mana;
-                } else if (this.floatingTotals[ManaPool.MAP.get(mana.getColor())] > this.floatingTotals[ManaPool.MAP
-                        .get(choice.getColor())]) {
-                    // give preference to Colored mana that there is more of to
-                    // pay Snow costs
-                    choice = mana;
+                }
+                else {
+                    int mCol = ManaPool.MAP.get(mana.getColor());
+                    int cCol = ManaPool.MAP.get(choice.getColor());
+                    if (choice.isColor(Constant.Color.COLORLESS)) {
+                        // do nothing Snow Colorless should be used first
+                    } else if (mana.isColor(Constant.Color.COLORLESS)) {
+                        // give preference to Colorless Snow mana over Colored
+                        choice = mana;
+                    } else if (this.floatingTotals[mCol] > this.floatingTotals[cCol]) {
+                        // give preference to Colored mana that there is more of
+                        choice = mana;
+                    }
                 }
             } else if (colors[0].equals(Constant.Color.COLORLESS)) { // colorless
                 if ((choice == null) && mana.isColor(Constant.Color.COLORLESS)) {
@@ -596,9 +609,12 @@ public class ManaPool extends Card {
                 choice.decrementAmount();
             }
             if (pool.equals(this.floatingMana)) {
-                this.floatingTotals[ManaPool.MAP.get(choice.getColor())] -= choice.getAmount();
+                int i = ManaPool.MAP.get(choice.getColor());
                 if (choice.isSnow()) {
-                    this.floatingTotals[ManaPool.MAP.get(Constant.Color.SNOW)] -= choice.getAmount();
+                    this.floatingSnowTotals[i] -= choice.getAmount();
+                }
+                else {
+                    this.floatingTotals[i] -= choice.getAmount();
                 }
             }
             owner.updateObservers();
@@ -892,6 +908,8 @@ public class ManaPool extends Card {
         }
 
         payMana.clear();
+        this.calculateManaTotals();
+        this.owner.updateObservers();
     }
 
     /**

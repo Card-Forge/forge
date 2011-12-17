@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
