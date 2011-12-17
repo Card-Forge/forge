@@ -27,7 +27,6 @@ import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameType;
-import forge.gui.GuiUtils;
 import forge.item.CardPrinted;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewConstructed;
@@ -400,8 +399,8 @@ public class ControlConstructed {
     //========= OTHER
     /** Fired when start button is pressed; checks various conditions from lists and starts game. */
     public void start() {
-        String[] humanSelected = GuiUtils.oa2sa(currentHumanSelection.getSelectedValues());
-        String[] aiSelected = GuiUtils.oa2sa(currentAISelection.getSelectedValues());
+        String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValues());
+        String[] aiSelected = oa2sa(currentAISelection.getSelectedValues());
 
         // Check color-based deck selection for appropriate length
         if (currentHumanSelection.getName().equals("lstColorsHuman")) {
@@ -505,8 +504,8 @@ public class ControlConstructed {
             }
 
             Deck targetDeck = (player.equals("Human"))
-                    ? AllZone.getDeckManager().getDeck(GuiUtils.oa2sa(currentHumanSelection.getSelectedValues())[0])
-                    : AllZone.getDeckManager().getDeck(GuiUtils.oa2sa(currentAISelection.getSelectedValues())[0]);
+                    ? AllZone.getDeckManager().getDeck(oa2sa(currentHumanSelection.getSelectedValues())[0])
+                    : AllZone.getDeckManager().getDeck(oa2sa(currentAISelection.getSelectedValues())[0]);
 
             final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
 
@@ -558,4 +557,21 @@ public class ControlConstructed {
             }
         }
     } // End DeckListAction
+
+    /**
+     * Exhaustively converts object array to string array.
+     * Probably a much easier way to do this.
+     * 
+     * @param o0 &emsp; Object[]
+     * @return String[]
+     */
+    public String[] oa2sa(Object[] o0) {
+        String[] output = new String[o0.length];
+
+        for (int i = 0; i < o0.length; i++) {
+            output[i] = o0[i].toString();
+        }
+
+        return output;
+    }
 }

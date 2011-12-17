@@ -470,7 +470,7 @@ public class ControlField {
                 final Card c = t.getDetailController().getCurrentCard();
                 final Input input = t.getInputController().getInputControl().getInput();
 
-                if (c != null) {
+                if (c != null && c.isInZone(Zone.Battlefield)) {
                     if (c.isTapped()
                             && ((input instanceof InputPayManaCost) || (input instanceof InputPayManaCostAbility))) {
                         final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(

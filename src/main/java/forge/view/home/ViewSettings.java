@@ -20,7 +20,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.home.ControlSettings;
-import forge.gui.GuiUtils;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -164,7 +163,7 @@ public class ViewSettings extends JScrollPane {
         viewport.add(lblNoteSkin, constraints + ", gapbottom 2px");
 
         lstChooseSkin = new JList();
-        lstChooseSkin.setListData(GuiUtils.oa2sa(FSkin.getSkins().toArray()));
+        lstChooseSkin.setListData(FSkin.getSkins().toArray(new String[0]));
         lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getSkin(), true);
         viewport.add(new JScrollPane(lstChooseSkin), "gapleft 10%, h 60px!, w 150px!" + spacer);
 
