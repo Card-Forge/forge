@@ -124,7 +124,6 @@ public class ViewDraft extends JPanel {
             @Override
             public void execute() {
                 control.updateHumanDecks();
-                lstHumanDecks.setSelectedIndex(0);
             }
         };
 

@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,7 +17,11 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Command;
 import forge.control.home.ControlSealed;
+import forge.deck.Deck;
+import forge.game.GameType;
+import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -26,7 +33,8 @@ public class ViewSealed extends JPanel {
     private FSkin skin;
     private HomeTopLevel parentView;
     private ControlSealed control;
-    private JList lstHumanDecks, lstAIDecks;
+    private JList lstAIDecks;
+    private DeckLister lstHumanDecks;
 
     /**
      * Assembles swing components for "Sealed" mode menu.
@@ -46,19 +54,32 @@ public class ViewSealed extends JPanel {
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(lblTitle, "w 100%!, gap 0 0 2% 2%, span 2 1");
 
-        lstHumanDecks = new JList();
         lstAIDecks = new JList();
 
+        final Command exit = new Command() {
+            private static final long serialVersionUID = -9133358399503226853L;
+
+            @Override
+            public void execute() {
+                control.updateDeckLists();
+            }
+        };
+
+        // Human deck list area, ai names
+        Collection<Deck[]> temp = AllZone.getDeckManager().getDraftDecks().values();
+        List<Deck> human = new ArrayList<Deck>();
+        for (Deck[] d : temp) { human.add(d[0]); }
+        lstHumanDecks = new DeckLister(GameType.Sealed, exit);
         //
-        this.add(new JScrollPane(lstHumanDecks), "w 40%!, h 30%!, gap 7.5% 5% 2% 2%");
-        this.add(new JScrollPane(lstAIDecks), "w 40%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
+        this.add(new JScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
+        this.add(new JScrollPane(lstAIDecks), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
         SubButton buildHuman = new SubButton("Build New Human Deck");
         buildHuman.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) { control.setupSealed(); }
         });
-        this.add(buildHuman, "w 40%!, h 5%!, gap 7.5% 5% 0 0, wrap");
+        this.add(buildHuman, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
 
         // Start button
         JButton btnStart = new JButton();
@@ -85,7 +106,6 @@ public class ViewSealed extends JPanel {
 
         control = new ControlSealed(this);
         control.updateDeckLists();
-        lstHumanDecks.setSelectedIndex(0);
         lstAIDecks.setSelectedIndex(0);
     }
 
@@ -95,7 +115,7 @@ public class ViewSealed extends JPanel {
     }
 
     /** @return JList */
-    public JList getLstHumanDecks() {
+    public DeckLister getLstHumanDecks() {
         return lstHumanDecks;
     }
 

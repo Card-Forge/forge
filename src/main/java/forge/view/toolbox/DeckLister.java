@@ -265,11 +265,6 @@ public class DeckLister extends JPanel {
         return -1;
     }
 
-    /** @param i0 {@link java.lang.Integer} */
-    public void setSelectedIndex(int i0) {
-        selectHandler(rows[i0]);
-    }
-
     private void editDeck(Deck d0) {
         DeckEditorCommon editor = new DeckEditorCommon(gametype);
         editor.show(cmdExit);

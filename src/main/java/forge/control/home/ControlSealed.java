@@ -43,7 +43,7 @@ public class ControlSealed {
 
     /** */
     public void start() {
-        String human = view.getLstHumanDecks().getSelectedValue().toString();
+        Deck human = view.getLstHumanDecks().getSelectedDeck();
         if (human == null) {
             JOptionPane.showMessageDialog(null,
                     "Please build and/or select a deck for yourself.",
@@ -51,7 +51,7 @@ public class ControlSealed {
             return;
         }
 
-        String ai = view.getLstHumanDecks().getSelectedValue().toString();
+        String ai = view.getLstAIDecks().getSelectedValue().toString();
         if (ai == null) {
             JOptionPane.showMessageDialog(null,
                     "Please build and/or select a deck for the computer.",
@@ -59,7 +59,7 @@ public class ControlSealed {
             return;
         }
 
-        Constant.Runtime.HUMAN_DECK[0] = deckManager.getDeck(human);
+        Constant.Runtime.HUMAN_DECK[0] = human;
         Constant.Runtime.COMPUTER_DECK[0] = deckManager.getDeck(ai);
 
         ControlAllUI c = ((GuiTopLevel) AllZone.getDisplay()).getController();
@@ -71,7 +71,7 @@ public class ControlSealed {
     /** */
     public void updateDeckLists() {
         List<String> aiNames = new ArrayList<String>();
-        List<String> humanNames = new ArrayList<String>();
+        List<Deck> humanDecks = new ArrayList<Deck>();
 
         for (Deck d : deckManager.getDecks()) {
             if (d.getDeckType().equals(GameType.Sealed)) {
@@ -79,13 +79,13 @@ public class ControlSealed {
                     aiNames.add(d.getName());
                 }
                 else {
-                    humanNames.add(d.getName());
+                    humanDecks.add(d);
                 }
             }
         }
 
-        view.getLstHumanDecks().setListData(GuiUtils.oa2sa(humanNames.toArray()));
-        view.getLstAIDecks().setListData(GuiUtils.oa2sa(aiNames.toArray()));
+        view.getLstHumanDecks().setDecks(humanDecks.toArray(new Deck[0]));
+        view.getLstAIDecks().setListData(aiNames.toArray(new String[0]));
     }
 
     /** */
