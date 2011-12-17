@@ -4017,6 +4017,8 @@ public class CardFactoryUtil {
      * @param timeStamp
      *            a long.
      */
+    /*
+    @Deprecated
     public static void revertManland(final Card c, final String[] removeTypes, final String[] removeKeywords,
             final String cost, final long timeStamp) {
         c.setBaseAttack(0);
@@ -4033,6 +4035,7 @@ public class CardFactoryUtil {
         c.removeColor(cost, c, false, timeStamp);
         c.unEquipAllCards();
     }
+    */
 
     /**
      * <p>
@@ -4053,6 +4056,8 @@ public class CardFactoryUtil {
      *            a {@link java.lang.String} object.
      * @return a long.
      */
+    /*
+    @Deprecated
     public static long activateManland(final Card c, final int attack, final int defense, final String[] addTypes,
             final String[] addKeywords, String cost) {
         c.setBaseAttack(attack);
@@ -4080,6 +4085,7 @@ public class CardFactoryUtil {
         final long timestamp = c.addColor(cost, c, false, true);
         return timestamp;
     }
+    */
 
     /**
      * <p>

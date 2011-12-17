@@ -52,7 +52,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.InputPayManaCost;
@@ -2568,52 +2567,6 @@ public class CardFactoryCreatures {
             final StringBuilder sbStack = new StringBuilder();
             sbStack.append(cardName).append(" put a -1/-1 counter on target creature.");
             ability.setStackDescription(sbStack.toString());
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Awakener Druid")) {
-            final long[] timeStamp = { 0 };
-
-            final StringBuilder sbTrig = new StringBuilder();
-            sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
-            sbTrig.append("ValidCard$ Card.Self | TriggerDescription$ ");
-            sbTrig.append("When CARDNAME enters the battlefield, target Forest ");
-            sbTrig.append("becomes a 4/5 green Treefolk creature for as long as CARDNAME ");
-            sbTrig.append("is on the battlefield. It's still a land.");
-
-            final Trigger myTrig = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
-            final Target myTarget = new Target(card, "Choose target forest.", "Land.Forest".split(","), "1", "1");
-            final SpellAbility awaken = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if (!AllZone.getZoneOf(card).is(Zone.Battlefield)
-                            || (this.getTarget().getTargetCards().size() == 0)) {
-                        return;
-                    }
-                    final Card c = this.getTarget().getTargetCards().get(0);
-                    final String[] types = { "Creature", "Treefolk" };
-                    final String[] keywords = {};
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 5, types, keywords, "G");
-
-                    final Command onleave = new Command() {
-                        private static final long serialVersionUID = -6004932214386L;
-                        private final long stamp = timeStamp[0];
-                        private final Card tgt = c;
-
-                        @Override
-                        public void execute() {
-                            final String[] types = { "Creature", "Treefolk" };
-                            final String[] keywords = { "" };
-                            CardFactoryUtil.revertManland(this.tgt, types, keywords, "G", this.stamp);
-                        }
-                    };
-                    card.addLeavesPlayCommand(onleave);
-                }
-            }; // SpellAbility
-            awaken.setTarget(myTarget);
-
-            myTrig.setOverridingAbility(awaken);
-            card.addTrigger(myTrig);
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
