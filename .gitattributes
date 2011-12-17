@@ -10876,6 +10876,7 @@ src/main/java/forge/gui/input/InputAttack.java svneol=native#text/plain
 src/main/java/forge/gui/input/InputBlock.java svneol=native#text/plain
 src/main/java/forge/gui/input/InputCleanup.java svneol=native#text/plain
 src/main/java/forge/gui/input/InputControl.java svneol=native#text/plain
+src/main/java/forge/gui/input/InputMana.java -text
 src/main/java/forge/gui/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/gui/input/InputPassPriority.java svneol=native#text/plain
 src/main/java/forge/gui/input/InputPayManaCost.java svneol=native#text/plain
