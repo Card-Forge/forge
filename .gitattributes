@@ -1726,6 +1726,7 @@ res/cardsfolder/c/crushing_pain.txt svneol=native#text/plain
 res/cardsfolder/c/cry_of_contrition.txt -text
 res/cardsfolder/c/cryoclasm.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_angel.txt svneol=native#text/plain
+res/cardsfolder/c/crypt_champion.txt -text
 res/cardsfolder/c/crypt_cobra.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_creeper.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_of_agadeem.txt svneol=native#text/plain
@@ -8031,6 +8032,7 @@ res/cardsfolder/s/squall_line.txt svneol=native#text/plain
 res/cardsfolder/s/squallmonger.txt svneol=native#text/plain
 res/cardsfolder/s/squandered_resources.txt svneol=native#text/plain
 res/cardsfolder/s/squeaking_pie_grubfellows.txt svneol=native#text/plain
+res/cardsfolder/s/squealing_devil.txt -text
 res/cardsfolder/s/squee_goblin_nabob.txt svneol=native#text/plain
 res/cardsfolder/s/squees_embrace.txt svneol=native#text/plain
 res/cardsfolder/s/squees_toy.txt svneol=native#text/plain
