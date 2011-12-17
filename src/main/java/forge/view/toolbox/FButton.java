@@ -89,7 +89,6 @@ public class FButton extends JButton {
         klEnter = new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
-                System.out.println(e.getKeyCode());
                 if (e.getKeyCode() == 10) {
                     doClick();
                 }
