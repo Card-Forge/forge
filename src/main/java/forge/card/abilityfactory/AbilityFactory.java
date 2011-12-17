@@ -1449,7 +1449,7 @@ public class AbilityFactory {
                 return CardFactoryUtil.doXMath(AbilityFactory.calculateAmount(card, l[0], ability), m, card)
                         * multiplier;
             } else if (calcX[0].startsWith("Remembered")) {
-             // Add whole Remembered list to handlePaid
+                // Add whole Remembered list to handlePaid
                 final CardList list = new CardList();
                 if (card.getRemembered().isEmpty()) {
                     Card newCard = AllZoneUtil.getCardState(card);
@@ -1651,6 +1651,15 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.equals("Remembered")) {
+            if (hostCard.getRemembered().isEmpty()) {
+                Card newCard = AllZoneUtil.getCardState(hostCard);
+                for (final Object o : newCard.getRemembered()) {
+                    if (o instanceof Card) {
+                        cards.add(AllZoneUtil.getCardState((Card) o));
+                    }
+                }
+            }
+
             for (final Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
                     cards.add(AllZoneUtil.getCardState((Card) o));
