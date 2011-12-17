@@ -31,6 +31,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
+import forge.gui.input.InputMana;
 import forge.gui.input.InputPayManaCostUtil;
 
 /**
@@ -253,7 +254,7 @@ public class CostMana extends CostPart {
      */
     public static Input inputPayXMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
             final int numX) {
-        final Input payX = new Input() {
+        final Input payX = new InputMana() {
             private static final long serialVersionUID = -6900234444347364050L;
             private int xPaid = 0;
             private String colorsPaid = "";
@@ -316,6 +317,22 @@ public class CostMana extends CostPart {
                 payment.getCard().setSunburstValue(this.colorsPaid.length());
             }
 
+            @Override
+            public void selectManaPool(String color) {
+                this.manaCost = InputPayManaCostUtil.activateManaAbility(color, sa, this.manaCost);
+                if (this.manaCost.isPaid()) {
+                    if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
+                        this.colorsPaid += this.manaCost.getColorsPaid();
+                    }
+                    this.manaCost = new ManaCost(Integer.toString(numX));
+                    this.xPaid++;
+                }
+
+                if (AllZone.getInputControl().getInput() == this) {
+                    this.showMessage();
+                }
+            }
+
         };
 
         return payX;
@@ -353,7 +370,7 @@ public class CostMana extends CostPart {
             manaCost = new ManaCost(sa.getManaCost());
         }
 
-        final Input payMana = new Input() {
+        final Input payMana = new InputMana() {
             private ManaCost mana = manaCost;
             private static final long serialVersionUID = 3467312982164195091L;
 
@@ -471,6 +488,17 @@ public class CostMana extends CostPart {
                 AllZone.getDisplay().showMessage(msg.toString());
                 if (this.mana.isPaid()) {
                     this.done();
+                }
+            }
+
+            @Override
+            public void selectManaPool(String color) {
+                this.mana = InputPayManaCostUtil.activateManaAbility(color, sa, this.mana);
+
+                if (this.mana.isPaid()) {
+                    this.done();
+                } else if (AllZone.getInputControl().getInput() == this) {
+                    this.showMessage();
                 }
             }
         };

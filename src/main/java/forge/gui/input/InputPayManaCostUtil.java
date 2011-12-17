@@ -24,8 +24,10 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.Player;
 import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
@@ -162,6 +164,28 @@ public class InputPayManaCostUtil {
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
         return manaCost;
 
+    }
+
+    /**
+     * <p>
+     * activateManaAbility.
+     * </p>
+     * @param color a String that represents the Color the mana is coming from
+     * @param sa a SpellAbility that is being paid for
+     * @param manaCost the amount of mana remaining to be paid
+     * 
+     * @return ManaCost the amount of mana remaining to be paid after the mana is activated
+     */
+    public static ManaCost activateManaAbility(String color, final SpellAbility sa, ManaCost manaCost) {
+        ManaPool mp = AllZone.getHumanPlayer().getManaPool();
+
+        // Convert Color to short String
+        String manaStr = "1";
+        if (!color.equalsIgnoreCase("Colorless")) {
+            manaStr = CardUtil.getShortColor(color);
+        }
+
+        return mp.subtractOne(sa, manaCost, manaStr);
     }
 
     /**

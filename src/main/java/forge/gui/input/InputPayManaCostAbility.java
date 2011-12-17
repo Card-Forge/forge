@@ -35,7 +35,7 @@ import forge.card.spellability.SpellAbility;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaCostAbility extends Input {
+public class InputPayManaCostAbility extends InputMana {
     /**
      * Constant <code>serialVersionUID=3836655722696348713L</code>.
      */
@@ -189,6 +189,23 @@ public class InputPayManaCostAbility extends Input {
             ButtonUtil.enableOnlyOK();
         }
         AllZone.getDisplay().showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.input.InputMana#selectManaPool()
+     */
+    @Override
+    public void selectManaPool(String color) {
+        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, this.fakeAbility, this.manaCost);
+
+        if (this.manaCost.isPaid()) {
+            this.resetManaCost();
+            AllZone.getHumanPlayer().getManaPool().clearPay(this.fakeAbility, false);
+            this.stop();
+            this.paidCommand.execute();
+        } else {
+            this.showMessage();
+        }
     }
 
 }

@@ -46,6 +46,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
+import forge.gui.input.InputMana;
 import forge.gui.input.InputAttack;
 import forge.gui.input.InputBlock;
 import forge.gui.input.InputPayManaCost;
@@ -58,6 +59,7 @@ import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewField;
+import forge.view.match.ViewField.DetailLabel;
 import forge.view.match.ViewTopLevel;
 
 /**
@@ -167,6 +169,7 @@ public class ControlField {
         // 29-10-11.
 
         this.addZoneListeners();
+        this.addPoolListeners();
 
         // Battlefield card clicks
         this.view.getTabletop().removeMouseListener(maCardClick);
@@ -213,6 +216,37 @@ public class ControlField {
             this.view.getLblHand().removeMouseListener(maHand);
             this.view.getLblHand().addMouseListener(maHand);
         }
+    }
+
+    /**
+     * Adds listeners to mana "pool" labels, for paying mana.
+     */
+    private void addPoolListeners() {
+        this.addPoolListener(this.view.getLblBlack(), Constant.Color.BLACK);
+        this.addPoolListener(this.view.getLblBlue(), Constant.Color.BLUE);
+        this.addPoolListener(this.view.getLblGreen(), Constant.Color.GREEN);
+        this.addPoolListener(this.view.getLblRed(), Constant.Color.RED);
+        this.addPoolListener(this.view.getLblWhite(), Constant.Color.WHITE);
+        this.addPoolListener(this.view.getLblColorless(), Constant.Color.COLORLESS);
+    }
+
+    private void addPoolListener(DetailLabel label, final String color) {
+        label.enableHover();
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    System.out.print("Stop trying to spend the AI's mana");
+                    // TODO: Mindslaver might need to add changes here
+                } else {
+                    Input in = AllZone.getInputControl().getInput();
+                    if (in instanceof InputMana) {
+                        // Do something
+                        ((InputMana) in).selectManaPool(color);
+                    }
+                }
+            }
+        });
     }
 
     /**

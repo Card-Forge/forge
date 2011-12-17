@@ -38,7 +38,7 @@ import forge.card.spellability.SpellAbility;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaCost extends Input {
+public class InputPayManaCost extends InputMana {
     // anything that uses this should be converted to Ability_Cost
     /** Constant <code>serialVersionUID=3467312982164195091L</code>. */
     private static final long serialVersionUID = 3467312982164195091L;
@@ -293,5 +293,23 @@ public class InputPayManaCost extends Input {
             this.done();
         }
 
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.input.InputMana#selectManaPool(String)
+     */
+    @Override
+    public void selectManaPool(String color) {
+        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, this.spell, this.manaCost);
+
+        // only show message if this is the active input
+        if (AllZone.getInputControl().getInput() == this) {
+            this.showMessage();
+        }
+
+        if (this.manaCost.isPaid()) {
+            this.originalCard.setSunburstValue(this.manaCost.getSunburst());
+            this.done();
+        }
     }
 }
