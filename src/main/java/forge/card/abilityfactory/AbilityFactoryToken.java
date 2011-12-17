@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
@@ -558,7 +559,7 @@ public class AbilityFactoryToken extends AbilityFactory {
                     AllZone.getCombat().addAttacker(c);
                 }
                 if (remember != null) {
-                    this.abilityFactory.getHostCard().addRemembered(c);
+                    AllZoneUtil.getCardState(sa.getSourceCard()).addRemembered(c);
                 }
             }
         }
