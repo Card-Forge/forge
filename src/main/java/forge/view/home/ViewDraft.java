@@ -93,7 +93,7 @@ public class ViewDraft extends JPanel {
         parentView = v0;
         skin = AllZone.getSkin();
 
-        JLabel lblHuman = new JLabel("Select a deck for human: ");
+        JLabel lblHuman = new JLabel("Select your deck: ");
         lblHuman.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
         lblHuman.setForeground(skin.getColor("text"));
@@ -140,7 +140,7 @@ public class ViewDraft extends JPanel {
 
         lstAI.setSelectedIndex(0);
 
-        SubButton buildHuman = new SubButton("Build New Human Deck");
+        SubButton buildHuman = new SubButton("Build A New Deck");
         buildHuman.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) { control.setupDraft(); }
