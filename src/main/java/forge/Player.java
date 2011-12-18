@@ -468,8 +468,20 @@ public abstract class Player extends GameEntity {
     @Override
     public final void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
         final int damageToDo = damage;
+        boolean infect = source.hasKeyword("Infect");
 
-        if (source.hasKeyword("Infect")) {
+        if (this.getLife() <= 0 && !infect) {
+            CardList cards = this.getCardsIn(Zone.Battlefield);
+            for (Card card : cards) {
+                if (card.hasKeyword("As long as you have 0 or less life, all damage is dealt to you as though its "
+                        + "source had infect.")) {
+                    infect = true;
+                    break;
+                }
+            }
+        }
+
+        if (infect) {
             this.addPoisonCounters(damageToDo, source);
         } else {
             // Worship does not reduce the damage dealt but changes the effect
