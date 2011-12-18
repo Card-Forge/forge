@@ -154,8 +154,8 @@ public class FSkin {
             this.setIcon("mana.colorless", image.getSubimage(280, 80, 40, 40));
 
             this.setIcon("dock.shortcuts", image.getSubimage(160, 0, 80, 80));
-            this.setIcon("dock.settings", image.getSubimage(160, 80, 80, 80));
-            this.setIcon("dock.endturn", image.getSubimage(80, 0, 80, 80));
+            this.setIcon("dock.settings", image.getSubimage(80, 0, 80, 80));
+            this.setIcon("dock.endturn", image.getSubimage(160, 80, 80, 80));
             this.setIcon("dock.concede", image.getSubimage(80, 80, 80, 80));
             this.setIcon("dock.decklist", image.getSubimage(80, 160, 80, 80));
 
