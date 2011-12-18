@@ -476,6 +476,27 @@ Notes:
 - remove some debug code in FButton
 - Missed a file last night.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added some more "Remembered" code to hopefully support Tatsumasa, the Dragon's Fang.
+- Another step to make Tatsumasa, the Dragon's Fang scriptable.
+- Improve consistency of the Player Panel Mana totals, and updating of observers.
+- Fixing Birthing Pod's Cost
+- Added ELIXIR counter to Counters.java
+- add ante to Quest Mode.
+1) if you win, the compy's cards will be available in your card pool after the current match
+2) if you lose, your ante is permanently removed from your deck (currently not available for re-purchase in the Card Shop)
+3) ante will now only be chosen from non-<basic lands> if possible
+- fix off-by-1 error in GameLog.getLogText(int)
+- add the ante'ing of cards to the GameLog
+- fix so multicolor spells show up as multi-color on the Stack
+- FSkin was reading the wrong image coordinates for End Turn and Game Settings. fixed.
+- Fixed getLKICopy copying tokens.
+- Fixed targeting AI of AF DealDamage for triggered abilities.
+- Tweaked chooseTypeCanPlayAI to let the AI handle Mistform Sliver.
+- Added an easy version of the Picard deck.
+- Fixed Mistform Ultimus not working in all zones.
+- Fixed Alpha Status not working with Changelings.
+- Improved card panel description for Imperial Edict
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -566,6 +587,18 @@ Carapace
 Stamina
 Thrull Retainer
 Burning of Xinye
+Doubling Cube
+Tatsumasa, the Dragon's Fang
+Crypt Champion
+Squealing Devil
+Bold Defence
+Marsh Casualties
+Birthing Pod
+Brain Pry
+Essence Bottle
+Entomber Exarch
+Phyrexian Unlife
+Knight of the Mists
 
 
 end
