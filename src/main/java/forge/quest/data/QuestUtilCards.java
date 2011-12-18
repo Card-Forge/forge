@@ -213,11 +213,27 @@ public final class QuestUtilCards {
      *            the price
      */
     public void sellCard(final CardPrinted card, final int price) {
+        sellCard(card, price, true);
+    }
+
+    /**
+     * Sell card.
+     * 
+     * @param card
+     *            the card
+     * @param price
+     *            the price
+     * @param addToShop
+     *            true if this card should be added to the shop, false otherwise
+     */
+    public void sellCard(final CardPrinted card, final int price, final boolean addToShop) {
         if (price > 0) {
             this.q.setCredits(this.q.getCredits() + price);
         }
         this.q.getCardPool().remove(card);
-        this.q.getShopList().add(card);
+        if (addToShop) {
+            this.q.getShopList().add(card);
+        }
 
         // remove card being sold from all decks
         final int leftInPool = this.q.getCardPool().count(card);

@@ -29,11 +29,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import forge.AllZone;
+import forge.Card;
 import forge.CardList;
 import forge.Constant;
+import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.Player;
 import forge.SetUtils;
+import forge.Singletons;
 import forge.control.ControlWinLose;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
@@ -42,6 +45,7 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestMatchState;
@@ -67,6 +71,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private JLabel lblTemp1;
     private JLabel lblTemp2;
     private FSkin skin;
+    private boolean isAnte;
 
     /** The spacer. */
     private final int spacer = 50;
@@ -90,6 +95,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qEvent = AllZone.getQuestEvent();
         this.wonMatch = this.model.qMatchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
         this.skin = AllZone.getSkin();
+        this.isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
     }
 
     /**
@@ -139,10 +145,34 @@ public class QuestWinLoseHandler extends ControlWinLose {
     public final boolean populateCustomPanel() {
         this.getView().getBtnRestart().setVisible(false);
         this.model.qData.getCards().resetNewList();
+        
+        //do per-game actions
+        if (this.model.qMatchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
+            //add the computer's ante card to your card pool
+            if (isAnte) {
+                CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
+                for (Card ante : antes) {
+                    CardPrinted antePrinted = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
+                    AllZone.getQuestData().getCardPool().add(antePrinted);
+                }
+                anteWon(antes);
+                
+            }
+        } else {
+            if (isAnte) {
+                CardList antes = AllZone.getHumanPlayer().getCardsIn(Zone.Ante);
+                for (Card ante : antes) {
+                    CardPrinted antePrinted = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
+                    //the last param here determines if this is added to the Card Shop
+                    AllZone.getQuestData().getCards().sellCard(antePrinted, 0, false);
+                }
+                anteLost(antes);
+            }
+        }
 
         if (!this.model.qMatchState.isMatchOver()) {
             this.getView().getBtnQuit().setText("Quit (15 Credits)");
-            return false;
+            return isAnte;
         } else {
             this.getView().getBtnContinue().setVisible(false);
             if (this.wonMatch) {
@@ -191,6 +221,61 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         return true;
+    }
+
+    /**
+     * <p>
+     * anteLost.
+     * </p>
+     * Displays cards lost to ante this game.
+     * 
+     */
+    private void anteLost(final CardList list) {
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(list.get(0));
+            if (i < list.size() - 1) {
+                sb.append(" ");
+            }
+        }
+        // Generate Swing components and attach.
+        this.lblTemp1 = new TitleLabel("Oh no!  You lost the following cards in Ante: " + sb.toString() + ".");
+
+        //TODO - idea
+        //final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
+
+        this.getView().getPnlCustom()
+                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
+    }
+
+    /**
+     * <p>
+     * anteWon.
+     * </p>
+     * Displays cards won in ante this game and added to your Card Pool.
+     * 
+     */
+    private void anteWon(final CardList list) {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("You have won the following cards in Ante: ");
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(list.get(0));
+            if (i < list.size() - 1) {
+                sb.append(" ");
+            }
+        }
+        sb.append(".\n");
+        sb.append("They will be available to you in your card pool after this match.");
+        // Generate Swing components and attach.
+        this.lblTemp1 = new TitleLabel(sb.toString());
+
+        //TODO - idea
+        //final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
+
+        this.getView().getPnlCustom()
+                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
     }
 
     /**

@@ -1473,16 +1473,24 @@ public class GameAction {
 
         //Ante restricted to Quest Mode for now
         if (Singletons.getModel().getPreferences().isPlayForAnte()) {
-            Card humanAnte = CardUtil.getRandom(AllZone.getHumanPlayer().getCardsIn(Zone.Library).toArray());
-            moveTo(Zone.Ante, humanAnte);
-            Card aiAnte = CardUtil.getRandom(AllZone.getComputerPlayer().getCardsIn(Zone.Library).toArray());
-            moveTo(Zone.Ante, aiAnte);
-
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
-            msg.append("Human ante: ").append(humanAnte).append(nl);
-            msg.append("Computer ante: ").append(aiAnte).append(nl);
-            //msg.append("Cards in human ante: ").append(AllZone.getHumanPlayer().getCardsIn(Zone.Ante).get(0));
+            for (Player p : AllZone.getPlayersInGame()) {
+                CardList lib = p.getCardsIn(Zone.Library);
+                Card ante;
+                if (lib.size() > 0 && lib.getNotType("Basic").size() > 1) {
+                    ante = CardUtil.getRandom(lib.toArray());
+                    while (ante.isBasicLand()) {
+                        ante = CardUtil.getRandom(lib.toArray());
+                    }
+                } else if (lib.size() > 1) {
+                    ante = lib.get(0);
+                } else {
+                    throw new RuntimeException(p + " library is empty.");
+                }
+                moveTo(Zone.Ante, ante);
+                msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
+            }
             JOptionPane.showConfirmDialog(null, msg, "Ante", JOptionPane.OK_CANCEL_OPTION);
         }
 
