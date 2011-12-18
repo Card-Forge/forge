@@ -400,7 +400,7 @@ public class ViewTabber extends FRoundedPanel {
             StringBuilder sb = new StringBuilder();
             sb.append("Ante'd: ");
             for (int i = 0; i < list.size(); i++) {
-                sb.append(list.get(0));
+                sb.append(list.get(i));
                 if (i < (list.size() - 1)) {
                     sb.append(", ");
                 }
