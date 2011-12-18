@@ -417,12 +417,13 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
-        final String type = params.get("ChangeType");
+        String type = params.get("ChangeType");
         if (type != null) {
             if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int xPay = ComputerUtil.determineLeftoverMana(sa);
                 source.setSVar("PayX", Integer.toString(xPay));
+                type = type.replace("X", Integer.toString(xPay));
             }
         }
 
