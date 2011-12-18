@@ -83,6 +83,9 @@ public enum Counters {
     /** The DOOM. */
     DOOM(),
 
+    /** The ELIXIR. */
+    ELIXIR(),
+
     /** The ENERGY. */
     ENERGY(),
 
