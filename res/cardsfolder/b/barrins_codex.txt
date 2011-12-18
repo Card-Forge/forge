@@ -6,6 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 A:AB$ Draw | Cost$ 4 T Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw X cards, where X is the number of page counters on CARDNAME.
 SVar:X:Count$CardCounters.PAGE
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Barrins_Codex.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/286.jpg

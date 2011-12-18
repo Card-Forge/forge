@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | SubAbility$ SVar=DBLoseLife
 SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Zombie.YouCtrl
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graveborn_muse.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/145.jpg
