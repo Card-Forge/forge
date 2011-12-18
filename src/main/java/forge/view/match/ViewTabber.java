@@ -47,6 +47,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.CardList;
+import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameLog;
@@ -291,7 +292,7 @@ public class ViewTabber extends FRoundedPanel {
 
     /** Returns array with [background, foreground] colors. */
     private Color[] getSpellColor(SpellAbilityStackInstance s0) {
-        if (s0.getSourceCard().getColor().size() > 1) {
+        if (CardUtil.getColors(s0.getSourceCard()).size() > 1) {
             return new Color[] {new Color(253, 175, 63), Color.black};
         }
         else if (s0.getSourceCard().isBlack()) {
