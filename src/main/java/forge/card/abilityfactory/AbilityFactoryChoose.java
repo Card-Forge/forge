@@ -227,6 +227,11 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean chooseTypeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+        if (!params.containsKey("AILogic")) {
+            return false;
+        }
+
         return AbilityFactoryChoose.chooseTypeTriggerAI(af, sa, false);
     }
 
