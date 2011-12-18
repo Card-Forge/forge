@@ -585,7 +585,7 @@ public class AbilityFactoryDealDamage {
             // because we can
             else if (tgt.canTgtPlayer() && ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN)
                     && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()))
-                    || saMe.isTrigger())) {
+                    || saMe.getPayCosts() == null)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
                 }
