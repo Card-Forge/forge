@@ -1583,19 +1583,8 @@ public final class GameActionUtil {
                 int totalbuff = 0;
 
                 for (final Card othercreat : allCreatures) {
-                    boolean sharesatype = false;
-                    if (enchanted != othercreat) {
-                        for (final String type : enchanted.getType()) {
-                            if (CardUtil.getCreatureTypes().contains(type)) {
-                                if (othercreat.getType().contains(type)) {
-                                    sharesatype = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (sharesatype) {
-                            totalbuff += 2;
-                        }
+                    if (enchanted != othercreat && othercreat.sharesCreatureTypeWith(enchanted)) {
+                        totalbuff += 2;
                     }
                 }
 

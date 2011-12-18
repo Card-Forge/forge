@@ -3,9 +3,9 @@ ManaCost:2 G
 Types:Enchantment Aura
 Text:Enchant Creature \r\nEnchanted creatures gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
 A:SP$Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_status.jpg
-SVar:RemRandomDeck:True
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/110.jpg
 End
