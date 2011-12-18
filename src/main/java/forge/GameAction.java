@@ -1488,6 +1488,7 @@ public class GameAction {
                 } else {
                     throw new RuntimeException(p + " library is empty.");
                 }
+                AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
                 moveTo(Zone.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
