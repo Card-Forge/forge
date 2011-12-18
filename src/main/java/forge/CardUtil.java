@@ -914,6 +914,9 @@ public final class CardUtil {
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card c) {
+        if (c.isToken()) {
+            return c;
+        }
         final Card res = AllZone.getCardFactory().copyCard(c);
         res.setControllerObjects(c.getControllerObjects());
         res.addTempAttackBoost(c.getTempAttackBoost());
