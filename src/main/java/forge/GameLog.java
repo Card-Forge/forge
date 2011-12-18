@@ -81,7 +81,7 @@ public class GameLog extends MyObservable {
                 continue;
             }
             sb.append(le.getType()).append(": ").append(le.getMessage());
-            if (i > 1) {
+            if (i > 0) {
                 sb.append("\r\n");
             }
         }
