@@ -583,8 +583,9 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (tgt.canTgtPlayer() && AllZone.getPhase().is(Constant.Phase.END_OF_TURN)
-                    && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer())) {
+            else if (tgt.canTgtPlayer() && ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN)
+                    && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()))
+                    || saMe.isTrigger())) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
                 }
