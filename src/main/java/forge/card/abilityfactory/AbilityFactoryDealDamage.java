@@ -553,7 +553,7 @@ public class AbilityFactoryDealDamage {
                     }
                 }
 
-                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getHumanPlayer(), mandatory);
+                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getHumanPlayer(), false);
                 if (c != null) {
                     tgt.addTarget(c);
                     continue;
