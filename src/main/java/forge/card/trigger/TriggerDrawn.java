@@ -52,10 +52,17 @@ public class TriggerDrawn extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card draw = ((Card) runParams2.get("Card"));
+        final int number = ((Integer) runParams2.get("Number"));
 
         if (this.getMapParams().containsKey("ValidCard")) {
             if (!draw.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard())) {
+                return false;
+            }
+        }
+
+        if (this.getMapParams().containsKey("Number")) {
+            if (number != Integer.parseInt(this.getMapParams().get("Number"))) {
                 return false;
             }
         }

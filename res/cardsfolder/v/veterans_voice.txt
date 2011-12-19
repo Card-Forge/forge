@@ -7,4 +7,6 @@ A:AB$ Pump | Cost$ tapXType<1/Creature.EnchantedBy/Enchanted Creature> | ValidTg
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_voice.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/123.jpg
+Oracle:Enchant creature you control\nTap enchanted creature: Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
 End

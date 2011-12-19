@@ -34,6 +34,7 @@ import forge.card.mana.ManaPool;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.GameLossReason;
+import forge.gui.GuiUtils;
 
 /**
  * <p>
@@ -1178,15 +1179,30 @@ public abstract class Player extends GameEntity {
         if (library.size() != 0) {
             Card c = library.get(0);
             c = AllZone.getGameAction().moveToHand(c);
+            drawn.add(c);
+
+            if (numDrawnThisTurn == 0 && this.isComputer()) {
+                boolean reveal = false;
+                CardList cards = this.getCardsIn(Zone.Battlefield);
+                for (Card card : cards) {
+                    if (card.hasKeyword("Reveal the first card you draw each turn")) {
+                        reveal = true;
+                        break;
+                    }
+                }
+                if (reveal) {
+                    GuiUtils.getChoice("Revealing the first card drawn", drawn.toArray());
+                }
+            }
 
             this.setLastDrawnCard(c);
             c.setDrawnThisTurn(true);
             this.numDrawnThisTurn++;
-            drawn.add(c);
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
+            runParams.put("Number", numDrawnThisTurn);
             AllZone.getTriggerHandler().runTrigger("Drawn", runParams);
         }
         // lose:

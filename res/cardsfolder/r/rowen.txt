@@ -1,0 +1,14 @@
+Name:Rowen
+ManaCost:2 G G
+Types:Enchantment
+Text:no text
+K:Reveal the first card you draw each turn
+T:Mode$ Drawn | ValidCard$ Land.Basic+YouCtrl | TriggerZones$ Battlefield | Number$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever you reveal a basic land card this way, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rowen.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/69.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/250.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/266.jpg
+Oracle:Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.
+End
