@@ -76,6 +76,7 @@ public class ControlConstructed {
 
     /** */
     public void addListeners() {
+        // Selection regulation
         view.getLstColorsHuman().getSelectionModel().addListSelectionListener(new HumanColorsListener());
         view.getLstColorsAI().getSelectionModel().addListSelectionListener(new AIColorsListener());
         view.getLstColorsHuman().setSelectedIndices(new int[] {0, 1});
@@ -87,6 +88,7 @@ public class ControlConstructed {
         view.getLstDecksHuman().getSelectionModel().addListSelectionListener(new HumanDecksListener());
         view.getLstDecksAI().getSelectionModel().addListSelectionListener(new AIDecksListener());
 
+        // Double-click deck lists
         view.getLstDecksHuman().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -105,6 +107,7 @@ public class ControlConstructed {
             }
         });
 
+        // Random actions
         view.getBtnStart().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) { start(); }
