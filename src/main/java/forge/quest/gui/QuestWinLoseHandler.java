@@ -153,7 +153,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
                 for (Card ante : antes) {
                     CardPrinted antePrinted = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
-                    AllZone.getQuestData().getCardPool().add(antePrinted);
+                    //AllZone.getQuestData().getCardPool().add(antePrinted);
+                    AllZone.getQuestData().getCards().addSingleCard(antePrinted);
                 }
                 anteWon(antes);
                 
