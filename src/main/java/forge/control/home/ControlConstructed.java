@@ -4,7 +4,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -77,26 +76,67 @@ public class ControlConstructed {
 
     /** */
     public void addListeners() {
-        view.getLstColorsAI().getSelectionModel().addListSelectionListener(new AIColorsListener());
-        view.getLstThemesAI().getSelectionModel().addListSelectionListener(new AIThemesListener());
-        view.getLstDecksAI().getSelectionModel().addListSelectionListener(new AIDecksListener());
         view.getLstColorsHuman().getSelectionModel().addListSelectionListener(new HumanColorsListener());
-        view.getLstThemesHuman().getSelectionModel().addListSelectionListener(new HumanThemesListener());
-        view.getLstDecksHuman().getSelectionModel().addListSelectionListener(new HumanDecksListener());
+        view.getLstColorsAI().getSelectionModel().addListSelectionListener(new AIColorsListener());
+        view.getLstColorsHuman().setSelectedIndices(new int[] {0, 1});
+        view.getLstColorsAI().setSelectedIndices(new int[] {0, 1});
 
-        MouseListener mouseListener = new MouseAdapter() {
+        view.getLstThemesAI().getSelectionModel().addListSelectionListener(new AIThemesListener());
+        view.getLstThemesHuman().getSelectionModel().addListSelectionListener(new HumanThemesListener());
+
+        view.getLstDecksHuman().getSelectionModel().addListSelectionListener(new HumanDecksListener());
+        view.getLstDecksAI().getSelectionModel().addListSelectionListener(new AIDecksListener());
+
+        view.getLstDecksHuman().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int index = view.getLstDecksHuman().locationToIndex(e.getPoint());
                     showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
                  }
             }
-        };
+        });
 
-        view.getLstDecksHuman().addMouseListener(mouseListener);
-        view.getLstDecksAI().addMouseListener(mouseListener);
-        view.getLstColorsHuman().setSelectedIndices(new int[] {0, 1});
-        view.getLstColorsAI().setSelectedIndices(new int[] {0, 1});
+        view.getLstDecksAI().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = view.getLstDecksAI().locationToIndex(e.getPoint());
+                    showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
+                 }
+            }
+        });
+
+        view.getBtnStart().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { start(); }
+        });
+
+        view.getBtnAIRandomDeck().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstDecksAI());
+            }
+        });
+
+        view.getBtnHumanRandomDeck().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstDecksHuman());
+            }
+        });
+
+        view.getBtnAIRandomTheme().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstThemesAI());
+            }
+        });
+
+        view.getBtnHumanRandomTheme().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstThemesHuman());
+            }
+        });
     }
 
     //========== LISTENERS

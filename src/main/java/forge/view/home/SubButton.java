@@ -54,7 +54,7 @@ public class SubButton extends JButton {
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int px =  (int) (SubButton.this.getHeight() / 2.5);
+                int px =  (int) (SubButton.this.getHeight() / 2);
                 px = (px < 10 ? 10 : px);
                 px = (px > 15 ? 15 : px);
                 SubButton.this.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, px));

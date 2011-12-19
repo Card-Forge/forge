@@ -1,13 +1,18 @@
 package forge.control.home;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 
 import forge.AllZone;
+import forge.Command;
 import forge.Constant;
 import forge.PlayerType;
 import forge.control.ControlAllUI;
@@ -30,6 +35,7 @@ import forge.view.home.ViewSealed;
 public class ControlSealed {
     private ViewSealed view;
     private DeckManager deckManager;
+    private Map<String, Deck> aiDecks;
 
     /**
      * Controls behavior of swing components in "sealed" mode menu.
@@ -39,11 +45,26 @@ public class ControlSealed {
     public ControlSealed(ViewSealed v0) {
         view = v0;
         deckManager = AllZone.getDeckManager();
+        Constant.Runtime.setGameType(GameType.Sealed);
     }
 
     /** */
+    public void addListeners() {
+        view.getBtnBuild().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { setupSealed(); }
+        });
+
+        view.getBtnStart().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { start(); }
+        });
+    }
+
+    /** Start button has been pressed. */
     public void start() {
         Deck human = view.getLstHumanDecks().getSelectedDeck();
+
         if (human == null) {
             JOptionPane.showMessageDialog(null,
                     "Please build and/or select a deck for yourself.",
@@ -51,32 +72,28 @@ public class ControlSealed {
             return;
         }
 
-        String ai = view.getLstAIDecks().getSelectedValue().toString();
-        if (ai == null) {
-            JOptionPane.showMessageDialog(null,
-                    "Please build and/or select a deck for the computer.",
-                    "No deck", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = deckManager.getDeck(ai);
+        Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get("AI_" + human.getName());
 
         ControlAllUI c = ((GuiTopLevel) AllZone.getDisplay()).getController();
         c.changeState(1);
         c.getMatchController().initMatch();
+        System.out.println(Constant.Runtime.COMPUTER_DECK[0]);
+        System.out.println(Constant.Runtime.HUMAN_DECK[0]);
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
     }
 
     /** */
     public void updateDeckLists() {
-        List<String> aiNames = new ArrayList<String>();
         List<Deck> humanDecks = new ArrayList<Deck>();
+        aiDecks = new HashMap<String, Deck>();
 
+        // Since AI decks are tied directly to the human choice,
+        // they're just mapped in a parallel map and grabbed when the game starts.
         for (Deck d : deckManager.getDecks()) {
             if (d.getDeckType().equals(GameType.Sealed)) {
                 if (d.getPlayerType() == PlayerType.COMPUTER) {
-                    aiNames.add(d.getName());
+                    aiDecks.put(d.getName(), d);
                 }
                 else {
                     humanDecks.add(d);
@@ -85,15 +102,11 @@ public class ControlSealed {
         }
 
         view.getLstHumanDecks().setDecks(humanDecks.toArray(new Deck[0]));
-        view.getLstAIDecks().setListData(aiNames.toArray(new String[0]));
     }
 
-    /** */
+    /** Build button has been pressed. */
     public void setupSealed() {
         Deck deck = new Deck(GameType.Sealed);
-
-        // ReadBoosterPack booster = new ReadBoosterPack();
-        // CardList pack = booster.getBoosterPack5();
 
         ArrayList<String> sealedTypes = new ArrayList<String>();
         sealedTypes.add("Full Cardpool");
@@ -136,23 +149,36 @@ public class ControlSealed {
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
                 JOptionPane.QUESTION_MESSAGE);
 
-        deck.setName(sDeckName);
-        deck.setPlayerType(PlayerType.HUMAN);
+        if (sDeckName != null) {
+            deck.setName(sDeckName);
+            deck.setPlayerType(PlayerType.HUMAN);
 
-        Constant.Runtime.HUMAN_DECK[0] = deck;
-        Constant.Runtime.setGameType(GameType.Sealed);
+            // Bug here: if human adds no cards to the deck, then closes the deck
+            // editor, an AI deck is still created and linked to the (now nonexistent)
+            // human deck's name.  The solution probably lies in the question,
+            // why is this code not in SealedDeck to begin with? Doublestrike 19-12-11
 
-        Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
-        //final Deck aiDeck = sd.buildAIDeck(sd.getCardpool().toForgeCardList());
-        // AI will use different cardpool
-        aiDeck.setName("AI_" + sDeckName);
-        aiDeck.setPlayerType(PlayerType.COMPUTER);
-        deckManager.addDeck(aiDeck);
-        DeckManager.writeDeck(aiDeck, DeckManager.makeFileName(aiDeck));
-        //this.updateDeckComboBoxes();
+            Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
+            aiDeck.setName("AI_" + sDeckName);
+            aiDeck.setPlayerType(PlayerType.COMPUTER);
+            deckManager.addDeck(aiDeck);
+            DeckManager.writeDeck(aiDeck, DeckManager.makeFileName(aiDeck));
 
-        view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, deck);
+            view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, deck);
+        }
+    }
 
-        Constant.Runtime.COMPUTER_DECK[0] = aiDeck;
+    /** @return {@link forge.Command} What to do when the deck editor exits. */
+    public Command getExitCommand() {
+        Command exit = new Command() {
+            private static final long serialVersionUID = -9133358399503226853L;
+
+            @Override
+            public void execute() {
+                updateDeckLists();
+            }
+        };
+
+        return exit;
     }
 }

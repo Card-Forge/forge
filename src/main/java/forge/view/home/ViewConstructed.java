@@ -2,9 +2,6 @@ package forge.view.home;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,6 +25,7 @@ public class ViewConstructed extends JPanel {
     private FSkin skin;
     private HomeTopLevel parentView;
     private JList lstDecksAI;
+    private JButton btnStart;
     private SubButton btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
     private ControlConstructed control;
     private FList lstColorsHuman, lstThemesHuman, lstDecksHuman, lstColorsAI, lstThemesAI;
@@ -51,23 +49,13 @@ public class ViewConstructed extends JPanel {
         populateAI();
 
         // Start button
-        StartButton btnStart = new StartButton(parentView);
+        btnStart = new StartButton(parentView);
 
-        btnStart.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) { control.start(); }
-        });
-
-        JPanel pnlButtonContainer = new JPanel();
-        pnlButtonContainer.setOpaque(false);
-        this.add(pnlButtonContainer, "w 100%!, gaptop 2%, span 5 1");
-
-        pnlButtonContainer.setLayout(new BorderLayout());
-        pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
+        this.add(btnStart, "gaptop 2%, span 5 1, ax center");
 
         // When all components have been added, add listeners.
-        control.addListeners();
         control.updateDeckNames();
+        control.addListeners();
     }
 
     // For some reason, MigLayout has sizing problems with a JLabel next to a JList.
@@ -115,23 +103,9 @@ public class ViewConstructed extends JPanel {
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Random theme button
-        btnHumanRandomTheme = new SubButton();
-        btnHumanRandomTheme.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) {
-                control.randomPick(lstThemesHuman);
-            }
-        });
-        btnHumanRandomTheme.setText("Random Theme Deck");
-
-        // Random deck button
-        btnHumanRandomDeck = new SubButton();
-        btnHumanRandomDeck.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) {
-                control.randomPick(lstDecksHuman);
-            }
-        });
-        btnHumanRandomDeck.setText("Random Deck");
+        // Random theme and pre-constructed buttons
+        btnHumanRandomTheme = new SubButton("Random Theme Deck");
+        btnHumanRandomDeck = new SubButton("Random Deck");
 
         // Add components to human area
         JPanel colorsContainer = new JPanel();
@@ -153,14 +127,14 @@ public class ViewConstructed extends JPanel {
         decksContainer.add(new FScrollPane(lstDecksHuman), "w 100%!, h 75%!, wrap");
         decksContainer.add(btnHumanRandomDeck, "w 100%!, h 12%!, gaptop 2.5%");
 
-        String listConstraints = "w 28%!, h 40%!";
+        String listConstraints = "w 28%!, h 30%!";
         String orConstraints = "w 5%!, h 30%!";
         this.add(lblHuman, "w 94%!, h 5%!, gap 3% 0 2% 0, wrap, span 5 1");
         this.add(colorsContainer, listConstraints + ", gapleft 3%");
         this.add(new OrPanel(), orConstraints);
         this.add(themeContainer, listConstraints);
         this.add(new OrPanel(), orConstraints);
-        this.add(decksContainer, listConstraints);
+        this.add(decksContainer, listConstraints + ", wrap");
     }
 
     /** Assembles Swing components in AI area. */
@@ -193,23 +167,9 @@ public class ViewConstructed extends JPanel {
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Random theme button
-        btnAIRandomTheme = new SubButton();
-        btnAIRandomTheme.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) {
-                control.randomPick(lstThemesAI);
-            }
-        });
-        btnAIRandomTheme.setText("Random Theme Deck");
-
-        // Random deck button
-        btnAIRandomDeck = new SubButton();
-        btnAIRandomDeck.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) {
-                control.randomPick(lstDecksAI);
-            }
-        });
-        btnAIRandomDeck.setText("Random Deck");
+        // Random theme and pre-constructed deck buttons
+        btnAIRandomTheme = new SubButton("Random Theme Deck");
+        btnAIRandomDeck = new SubButton("Random Deck");
 
         // Add components to AI area
         JPanel colorsContainer = new JPanel();
@@ -231,14 +191,15 @@ public class ViewConstructed extends JPanel {
         decksContainer.add(new FScrollPane(lstDecksAI), "w 100%!, h 75%!, wrap");
         decksContainer.add(btnAIRandomDeck, "w 100%!, h 12%!, gaptop 2.5%");
 
-        String listConstraints = "w 28%!, h 40%!";
+        String listConstraints = "w 28%!, h 30%!";
         String orConstraints = "w 5%!, h 30%!";
-        this.add(lblAI, "w 94%!, h 5%!, gap 3% 0 5% 0, wrap, span 5 1, newline");
+
+        this.add(lblAI, "w 94%!, h 5%!, gap 3% 0 5% 0, span 5 1, wrap");
         this.add(colorsContainer, listConstraints + ", gapleft 3%");
         this.add(new OrPanel(), orConstraints);
         this.add(themeContainer, listConstraints);
         this.add(new OrPanel(), orConstraints);
-        this.add(decksContainer, listConstraints);
+        this.add(decksContainer, listConstraints + ", wrap");
     }
 
     //========= RETRIEVAL FUNCTIONS
@@ -288,7 +249,22 @@ public class ViewConstructed extends JPanel {
     }
 
     /** @return {@link javax.swing.JButton} */
-    public JButton getBtn() {
+    public JButton getBtnAIRandomTheme() {
+        return btnAIRandomTheme;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnHumanRandomDeck() {
         return btnHumanRandomDeck;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnAIRandomDeck() {
+        return btnAIRandomDeck;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnStart() {
+        return btnStart;
     }
 }

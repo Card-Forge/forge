@@ -21,6 +21,5 @@ public class StartButton extends JButton {
         setContentAreaFilled(false);
         setBorder(null);
         setBorderPainted(false);
-        setBounds(10, 476, 205, 84);
     }
 }

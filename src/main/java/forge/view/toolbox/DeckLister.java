@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
-import net.miginfocom.swing.MigLayout;
 
+import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
 import forge.deck.Deck;
@@ -79,25 +80,27 @@ public class DeckLister extends JPanel {
         List<RowPanel> tempRows = new ArrayList<RowPanel>();
 
         // Title row
+        // Note: careful with the widths of the rows here;
+        // scroll panes will have difficulty dynamically resizing if 100% width is set.
         JPanel rowTitle = new JPanel();
         rowTitle.setBackground(skin.getColor("inactive"));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new TitleLabel("Delete"), "w 40px!, h 20px!, gaptop 5px");
-        rowTitle.add(new TitleLabel("Edit"), "w 40px!, h 20px!, gaptop 5px");
-        rowTitle.add(new TitleLabel("Deck Name"), "w 200px:200px, h 20px!, gaptop 5px");
-        rowTitle.add(new TitleLabel("Main"), "w 40px, h 20px!, gaptop 5px");
-        rowTitle.add(new TitleLabel("Side"), "w 40px!, h 20px!, gaptop 5px");
-        this.add(rowTitle, "w 100%!, h 30px!");
+        rowTitle.add(new TitleLabel("Delete"), "w 10%!, h 20px!, gaptop 5px");
+        rowTitle.add(new TitleLabel("Edit"), "w 10%!, h 20px!, gaptop 5px");
+        rowTitle.add(new TitleLabel("Deck Name"), "w 60%!, h 20px!, gaptop 5px");
+        rowTitle.add(new TitleLabel("Main"), "w 10%!, h 20px!, gaptop 5px");
+        rowTitle.add(new TitleLabel("Side"), "w 10%!, h 20px!, gaptop 5px");
+        this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
         for (Deck d : decks0) {
             row = new RowPanel(d);
-            row.add(new DeleteButton(row), "w 40px!, h 20px!, gaptop 5px");
-            row.add(new EditButton(row), "w 40px!, h 20px!, gaptop 5px");
-            row.add(new JLabel(d.getName()), "w 200px:200px, h 20px!, gaptop 5px");
-            row.add(new MainLabel(String.valueOf(d.getMain().countAll())), "w 40px, h 20px!, gaptop 5px");
-            row.add(new SideLabel(String.valueOf(d.getSideboard().countAll())), "w 40px!, h 20px!, gaptop 5px");
-            this.add(row, "w 100%!, h 30px!");
+            row.add(new DeleteButton(row), "w 10%!, h 20px!, gaptop 5px");
+            row.add(new EditButton(row), "w 10%!, h 20px!, gaptop 5px");
+            row.add(new GenericLabel(d.getName()), "w 60%!, h 20px!, gaptop 5px");
+            row.add(new MainLabel(String.valueOf(d.getMain().countAll())), "w 10%, h 20px!, gaptop 5px");
+            row.add(new GenericLabel(String.valueOf(d.getSideboard().countAll())), "w 10%!, h 20px!, gaptop 5px");
+            this.add(row, "w 98%!, h 30px!, gapleft 1%");
             tempRows.add(row);
         }
 
@@ -239,14 +242,28 @@ public class DeckLister extends JPanel {
                 setBackground(Color.GREEN);
             }
             setHorizontalAlignment(SwingConstants.CENTER);
+            setFont(skin.getFont1().deriveFont(Font.BOLD, 12));
+            setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
 
-    private class SideLabel extends JLabel {
-        public SideLabel(String txt0) {
+    private class GenericLabel extends JLabel {
+        public GenericLabel(String txt0) {
             super(txt0);
             setHorizontalAlignment(SwingConstants.CENTER);
+            setForeground(skin.getColor("text"));
+            setFont(skin.getFont1().deriveFont(Font.BOLD, 12));
+            setHorizontalAlignment(SwingConstants.CENTER);
         }
+    }
+
+
+    /** @return {@link java.lang.Integer} */
+    public int getSelectedIndex() {
+        for (int i = 0; i < rows.length; i++) {
+            if (rows[i].isSelected()) { return i; }
+        }
+        return -1;
     }
 
     private void selectHandler(RowPanel r0) {
@@ -255,14 +272,6 @@ public class DeckLister extends JPanel {
         }
         r0.setSelected(true);
         previousSelection = r0;
-    }
-
-    /** @return {@link java.lang.Integer} */
-    public int getSelectedIndex() {
-        for (int i = 0; i < rows.length; i++) {
-            if (rows[i].isSelected()) { return i; }
-        }
-        return -1;
     }
 
     private void editDeck(Deck d0) {
@@ -287,8 +296,32 @@ public class DeckLister extends JPanel {
 
         if (gametype.equals(GameType.Draft)) {
             deckmanager.deleteDraftDeck(d0.getName());
-        } else {
+
+            // Since draft deck files are really directories, must delete all children first.
+            File dir = DeckManager.makeFileName(d0.getName(), GameType.Draft);
+            String[] children = dir.list();
+
+            for (int i = 0; i < children.length; i++) {
+                new File(dir.getAbsolutePath() + "\\" + children[i]).delete();
+            }
+
+            dir.delete();
+        }
+        else if (gametype.equals(GameType.Sealed)) {
             deckmanager.deleteDeck(d0.getName());
+
+            File address1 = DeckManager.makeFileName(d0.getName(), GameType.Sealed);
+            File address2 = DeckManager.makeFileName("AI_" + d0.getName(), GameType.Sealed);
+
+            // not working??!!
+            address1.delete();
+            address2.delete();
+        }
+        else {
+            deckmanager.deleteDeck(d0.getName());
+
+            File address1 = DeckManager.makeFileName(d0.getName(), GameType.Constructed);
+            address1.delete();
         }
 
         this.remove(r0);

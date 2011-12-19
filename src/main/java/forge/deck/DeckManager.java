@@ -261,16 +261,6 @@ public class DeckManager {
         }
 
         this.draftMap.remove(deckName);
-
-        // Since draft deck files are really directories, must delete all children first.
-        File dir = DeckManager.makeFileName(deckName, GameType.Draft);
-        String[] children = dir.list();
-
-        for (int i = 0; i < children.length; i++) {
-            new File(dir.getAbsolutePath() + "\\" + children[i]).delete();
-        }
-
-        dir.delete();
     }
 
     /**
