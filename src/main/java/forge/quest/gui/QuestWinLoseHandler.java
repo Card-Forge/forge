@@ -233,21 +233,18 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     private void anteLost(final CardList list) {
 
-        StringBuilder sb = new StringBuilder();
+        List<CardPrinted> anteLost = new ArrayList<CardPrinted>();
         for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(0));
-            if (i < list.size() - 1) {
-                sb.append(" ");
-            }
+            anteLost.add(CardDb.instance().getCard(list.get(0)));
         }
         // Generate Swing components and attach.
-        this.lblTemp1 = new TitleLabel("Oh no!  You lost the following cards in Ante: " + sb.toString() + ".");
+        this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
 
-        //TODO - idea
-        //final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
+        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(anteLost);
 
         this.getView().getPnlCustom()
                 .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
+        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 
     /**
@@ -259,24 +256,20 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     private void anteWon(final CardList list) {
 
+        List<CardPrinted> anteWon = new ArrayList<CardPrinted>();
         StringBuilder sb = new StringBuilder();
-        sb.append("You have won the following cards in Ante: ");
+        sb.append("Ante Won: These cards will be available in your card pool after this match.");
         for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(0));
-            if (i < list.size() - 1) {
-                sb.append(" ");
-            }
+            anteWon.add(CardDb.instance().getCard(list.get(0)));
         }
-        sb.append(".\n");
-        sb.append("They will be available to you in your card pool after this match.");
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel(sb.toString());
 
-        //TODO - idea
-        //final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
+        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(anteWon);
 
         this.getView().getPnlCustom()
                 .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
+        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
     }
 
     /**
