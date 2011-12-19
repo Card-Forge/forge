@@ -1345,6 +1345,8 @@ public class GameAction {
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
         final Random generator = MyRandom.getRandom();
 
+        final ArrayList<String> hAnteRemoved = new ArrayList<String>();
+        final ArrayList<String> cAnteRemoved = new ArrayList<String>();
         for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -1365,7 +1367,12 @@ public class GameAction {
                     card.setFoil(iFoil);
                 }
 
-                AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
+                if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
+                        && !Singletons.getModel().getPreferences().isPlayForAnte()) {
+                    hAnteRemoved.add(card.getName());
+                } else {
+                    AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
+                }
 
                 if (card.hasAlternateState()) {
                     if (card.isDoubleFaced()) {
@@ -1402,7 +1409,12 @@ public class GameAction {
                     card.setFoil(iFoil);
                 }
 
-                AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
+                if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
+                        && !Singletons.getModel().getPreferences().isPlayForAnte()) {
+                    cAnteRemoved.add(card.getName());
+                } else {
+                    AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
+                }
 
                 if (card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
                     rAICards.add(card.getName());
@@ -1439,6 +1451,37 @@ public class GameAction {
             JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
 
         }
+        if (hAnteRemoved.size() > 0) {
+            final StringBuilder sb = new StringBuilder(
+                    "The following ante cards were removed from the human's deck:\n");
+            for (int i = 0; i < hAnteRemoved.size(); i++) {
+                sb.append(hAnteRemoved.get(i));
+                if (((i % 4) == 0) && (i > 0)) {
+                    sb.append("\n");
+                } else if (i != (hAnteRemoved.size() - 1)) {
+                    sb.append(", ");
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        if (cAnteRemoved.size() > 0) {
+            final StringBuilder sb = new StringBuilder(
+                    "The following ante cards were removed from the computer's deck:\n");
+            for (int i = 0; i < cAnteRemoved.size(); i++) {
+                sb.append(cAnteRemoved.get(i));
+                if (((i % 4) == 0) && (i > 0)) {
+                    sb.append("\n");
+                } else if (i != (cAnteRemoved.size() - 1)) {
+                    sb.append(", ");
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        
         for (int i = 0; i < 100; i++) {
             AllZone.getHumanPlayer().shuffle();
         }

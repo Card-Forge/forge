@@ -2753,6 +2753,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)\r\n");
             }
+            if (keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
+                }
+                sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
+            }
         }
         return sb;
     }
