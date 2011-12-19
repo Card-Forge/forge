@@ -497,6 +497,22 @@ Notes:
 - Fixed Alpha Status not working with Changelings.
 - Improved card panel description for Imperial Edict
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed targeting AI of AF DealDamage for drawbacks.
+- Made Green Sun's Zenith AI playable.
+- Updated some Deck SVars.
+- fix a bug in the Ante display in the Player Panel.
+- Another tweak for the targeting AI of AF DealDamage.
+- Fixing Flameshot's text
+- Move to forge.game.limited package, since it's rather specific to drafting.
+- Move to forge.game.limited package, since it's rather specific to drafting.
+- cards won in ante will now show up as NEW in the Card Shop under Owned Cards
+- Converted Cursed Scroll to script.
+- Final touches added to "Constructed" submenu: resizing, directions, decklist on double-click, randomize buttons for themes and pre-constructed, Forge-themed list selectors.
+- Further development on "Sealed" submenu. Fixed a bug or two in "Constructed" submenu.
+- A little documentation addition.
+- Fixed static abilities getting checked by triggers (SpellAbilityCast, etc.).
+- Converted some cards to use the "BecomesTarget" trigger.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
