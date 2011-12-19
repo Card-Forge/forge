@@ -2,8 +2,6 @@ package forge.view.toolbox;
 
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -56,23 +54,8 @@ public class FList extends JList {
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
             lblItem.setBackground(skin.getColor("active"));
             lblItem.setForeground(skin.getColor("text"));
-            lblItem.setFont(skin.getFont1().deriveFont(Font.BOLD, 13));
+            lblItem.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
             lblItem.setOpaque(isSelected);
-
-            lblItem.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    System.out.println("firing asdf");
-                    setOpaque(true);
-                    setBackground(skin.getColor("hover"));
-                }
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    setOpaque(false);
-                    setBackground(null);
-                }
-            });
-
             return lblItem;
         }
     }

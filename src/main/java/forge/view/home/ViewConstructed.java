@@ -1,10 +1,8 @@
 package forge.view.home;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListSelectionModel;
@@ -12,15 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.home.ControlConstructed;
-import forge.deck.Deck;
-import forge.game.GameType;
+import forge.view.toolbox.FList;
+import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -29,24 +25,20 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewConstructed extends JPanel {
-    private String constraints;
     private FSkin skin;
     private HomeTopLevel parentView;
-
-    private Timer timer1 = null;
-    private int counter;
-    private JList lstColorsHuman, lstColorsAI, lstThemesHuman,
-        lstThemesAI, lstDecksHuman, lstDecksAI;
-    private SubButton btnHumanDeckList, btnAIDeckList;
+    private JList lstDecksAI;
+    private SubButton btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
     private ControlConstructed control;
+    private FList lstColorsHuman, lstThemesHuman, lstDecksHuman, lstColorsAI, lstThemesAI;
 
     /**
      * Assembles swing components for "Constructed" mode menu.
      * 
-     * @param v0 &emsp; HomeTopLevel parent view
+     * @param v0 {@link forge.view.home.HomeTopLevel} parent view
      */
     public ViewConstructed(HomeTopLevel v0) {
-        // Basic init stuff
+        //========== Basic init stuff
         super();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0"));
@@ -54,106 +46,17 @@ public class ViewConstructed extends JPanel {
         skin = AllZone.getSkin();
         control = new ControlConstructed(this);
 
-        lstColorsHuman = new JList();
-        lstColorsHuman.setListData(control.oa2sa(control.getColorNames()));
+        populateHuman();
 
-        lstColorsAI = new JList();
-        lstColorsAI.setListData(control.oa2sa(control.getColorNames()));
-
-        lstDecksHuman = new JList();
-        lstDecksAI = new JList();
-
-        lstThemesHuman = new JList();
-        lstThemesHuman.setListData(control.oa2sa(control.getThemeNames()));
-
-        lstThemesAI = new JList();
-        lstThemesAI.setListData(control.oa2sa(control.getThemeNames()));
-
-        // Human deck options area
-        JLabel lblHuman = new JLabel("Choose a deck for the human player:");
-        lblHuman.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
-        lblHuman.setForeground(skin.getColor("text"));
-        this.add(lblHuman, "w 90%!, h 5%!, gap 5% 5% 2% 0, wrap, span 5 1");
-
-        // Human deck list button
-        btnHumanDeckList = new SubButton();
-        btnHumanDeckList.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) {
-                String s = lstDecksHuman.getSelectedValue().toString();
-                Deck d = AllZone.getDeckManager().getDeck(s);
-                parentView.getUtilitiesController().showDeckEditor(GameType.Constructed, d);
-            }
-        });
-
-        btnHumanDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        btnHumanDeckList.setText("Edit selected deck");
-        btnHumanDeckList.setVerticalTextPosition(SwingConstants.CENTER);
-
-        // Add components
-        constraints = "w 28%!, h 30%!, span 1 2";
-        this.add(new JScrollPane(lstColorsHuman), constraints + ", gapleft 3%");
-        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
-        this.add(new JScrollPane(lstThemesHuman), constraints);
-        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
-        this.add(new JScrollPane(lstDecksHuman), "w 28%!, h 25%!, gapbottom 1%, wrap");
-        this.add(btnHumanDeckList, "w 28%!, h 4%!, wrap");
-
-        // AI deck options area
-        JLabel lblAI = new JLabel("Choose a deck for the AI player:");
-        lblAI.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
-        lblAI.setForeground(skin.getColor("text"));
-        this.add(lblAI, "w 90%!, h 5%!, gap 5% 5% 2% 0, wrap, span 5 1");
-
-        // AI deck list button
-        btnAIDeckList = new SubButton();
-        btnAIDeckList.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) {
-                String s = lstDecksAI.getSelectedValue().toString();
-                Deck d = AllZone.getDeckManager().getDeck(s);
-                parentView.getUtilitiesController().showDeckEditor(GameType.Constructed, d);
-            }
-        });
-        btnAIDeckList.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
-        btnAIDeckList.setText("Edit selected deck");
-
-        // Add components
-        this.add(new JScrollPane(lstColorsAI), constraints + ", gapleft 3%");
-        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
-        this.add(new JScrollPane(lstThemesAI), constraints);
-        this.add(new OrPanel(), "w 5%!, h 30%!, span 1 2");
-        this.add(new JScrollPane(lstDecksAI), "w 28%!, h 25%!, gapbottom 1%, wrap");
-        this.add(btnAIDeckList, "w 28%!, h 4%!, wrap");
-
-        // List box properties
-        this.lstColorsHuman.setName("lstColorsHuman");
-        this.lstThemesHuman.setName("lstThemesHuman");
-        this.lstDecksHuman.setName("lstDecksHuman");
-
-        this.lstColorsAI.setName("lstColorsAI");
-        this.lstThemesAI.setName("lstThemesAI");
-        this.lstDecksAI.setName("lstDecksAI");
-
-        this.lstThemesHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        this.lstDecksHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-
-        this.lstThemesAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        this.lstDecksAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        populateAI();
 
         // Start button
-        JButton btnStart = new JButton();
+        StartButton btnStart = new StartButton(parentView);
+
         btnStart.setAction(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent arg0) { control.start(); }
         });
-        btnStart.setRolloverEnabled(true);
-        btnStart.setPressedIcon(parentView.getStartButtonDown());
-        btnStart.setRolloverIcon(parentView.getStartButtonOver());
-        btnStart.setIcon(parentView.getStartButtonUp());
-        btnStart.setOpaque(false);
-        btnStart.setContentAreaFilled(false);
-        btnStart.setBorder(null);
-        btnStart.setBorderPainted(false);
-        btnStart.setBounds(10, 476, 205, 84);
 
         JPanel pnlButtonContainer = new JPanel();
         pnlButtonContainer.setOpaque(false);
@@ -182,87 +85,210 @@ public class ViewConstructed extends JPanel {
         }
     }
 
-    /** @return HomeTopLevel */
+    /** Assembles Swing components in human area. */
+    private void populateHuman() {
+        lstColorsHuman = new FList();
+        lstColorsHuman.setListData(control.getColorNames());
+        lstColorsHuman.setName("lstColorsHuman");
+
+        lstThemesHuman = new FList();
+        lstThemesHuman.setListData(control.oa2sa(control.getThemeNames()));
+        lstThemesHuman.setName("lstThemesHuman");
+        lstThemesHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+
+        lstDecksHuman = new FList();
+        lstDecksHuman.setName("lstDecksHuman");
+        lstDecksHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+
+        JLabel lblHuman = new JLabel("Choose your deck:");
+        lblHuman.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+        lblHuman.setForeground(skin.getColor("text"));
+        lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel lblColorInfo = new JLabel("Multiple Colors: CTRL");
+        lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblColorInfo.setForeground(skin.getColor("text"));
+        lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel lblDecklistInfo = new JLabel("Decklist: Double Click");
+        lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblDecklistInfo.setForeground(skin.getColor("text"));
+        lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Random theme button
+        btnHumanRandomTheme = new SubButton();
+        btnHumanRandomTheme.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) {
+                control.randomPick(lstThemesHuman);
+            }
+        });
+        btnHumanRandomTheme.setText("Random Theme Deck");
+
+        // Random deck button
+        btnHumanRandomDeck = new SubButton();
+        btnHumanRandomDeck.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) {
+                control.randomPick(lstDecksHuman);
+            }
+        });
+        btnHumanRandomDeck.setText("Random Deck");
+
+        // Add components to human area
+        JPanel colorsContainer = new JPanel();
+        colorsContainer.setOpaque(false);
+        colorsContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        colorsContainer.add(lblColorInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
+        colorsContainer.add(new FScrollPane(lstColorsHuman), "w 100%!, h 89%!, wrap");
+
+        JPanel themeContainer = new JPanel();
+        themeContainer.setOpaque(false);
+        themeContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        themeContainer.add(new FScrollPane(lstThemesHuman), "w 100%!, h 75%!, gaptop 10%, wrap");
+        themeContainer.add(btnHumanRandomTheme, "w 100%!, h 12%!, gaptop 2.5%");
+
+        JPanel decksContainer = new JPanel();
+        decksContainer.setOpaque(false);
+        decksContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        decksContainer.add(lblDecklistInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
+        decksContainer.add(new FScrollPane(lstDecksHuman), "w 100%!, h 75%!, wrap");
+        decksContainer.add(btnHumanRandomDeck, "w 100%!, h 12%!, gaptop 2.5%");
+
+        String listConstraints = "w 28%!, h 40%!";
+        String orConstraints = "w 5%!, h 30%!";
+        this.add(lblHuman, "w 94%!, h 5%!, gap 3% 0 2% 0, wrap, span 5 1");
+        this.add(colorsContainer, listConstraints + ", gapleft 3%");
+        this.add(new OrPanel(), orConstraints);
+        this.add(themeContainer, listConstraints);
+        this.add(new OrPanel(), orConstraints);
+        this.add(decksContainer, listConstraints);
+    }
+
+    /** Assembles Swing components in AI area. */
+    private void populateAI() {
+        lstColorsAI = new FList();
+        lstColorsAI.setListData(control.getColorNames());
+        lstColorsAI.setName("lstColorsAI");
+
+        lstThemesAI = new FList();
+        lstThemesAI.setListData(control.oa2sa(control.getThemeNames()));
+        lstThemesAI.setName("lstThemesAI");
+        lstThemesAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+
+        lstDecksAI = new FList();
+        lstDecksAI.setName("lstDecksAI");
+        lstDecksAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+
+        JLabel lblAI = new JLabel("Choose a deck for the computer:");
+        lblAI.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+        lblAI.setForeground(skin.getColor("text"));
+        lblAI.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel lblColorInfo = new JLabel("Multiple Colors: CTRL");
+        lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblColorInfo.setForeground(skin.getColor("text"));
+        lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel lblDecklistInfo = new JLabel("Decklist: Double Click");
+        lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblDecklistInfo.setForeground(skin.getColor("text"));
+        lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Random theme button
+        btnAIRandomTheme = new SubButton();
+        btnAIRandomTheme.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) {
+                control.randomPick(lstThemesAI);
+            }
+        });
+        btnAIRandomTheme.setText("Random Theme Deck");
+
+        // Random deck button
+        btnAIRandomDeck = new SubButton();
+        btnAIRandomDeck.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) {
+                control.randomPick(lstDecksAI);
+            }
+        });
+        btnAIRandomDeck.setText("Random Deck");
+
+        // Add components to AI area
+        JPanel colorsContainer = new JPanel();
+        colorsContainer.setOpaque(false);
+        colorsContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        colorsContainer.add(lblColorInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
+        colorsContainer.add(new FScrollPane(lstColorsAI), "w 100%!, h 89%!, wrap");
+
+        JPanel themeContainer = new JPanel();
+        themeContainer.setOpaque(false);
+        themeContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        themeContainer.add(new FScrollPane(lstThemesAI), "w 100%!, h 75%!, gaptop 10%, wrap");
+        themeContainer.add(btnAIRandomTheme, "w 100%!, h 12%!, gaptop 2.5%");
+
+        JPanel decksContainer = new JPanel();
+        decksContainer.setOpaque(false);
+        decksContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        decksContainer.add(lblDecklistInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
+        decksContainer.add(new FScrollPane(lstDecksAI), "w 100%!, h 75%!, wrap");
+        decksContainer.add(btnAIRandomDeck, "w 100%!, h 12%!, gaptop 2.5%");
+
+        String listConstraints = "w 28%!, h 40%!";
+        String orConstraints = "w 5%!, h 30%!";
+        this.add(lblAI, "w 94%!, h 5%!, gap 3% 0 5% 0, wrap, span 5 1, newline");
+        this.add(colorsContainer, listConstraints + ", gapleft 3%");
+        this.add(new OrPanel(), orConstraints);
+        this.add(themeContainer, listConstraints);
+        this.add(new OrPanel(), orConstraints);
+        this.add(decksContainer, listConstraints);
+    }
+
+    //========= RETRIEVAL FUNCTIONS
+    /** @return {@link forge.view.home.HomeTopLevel} */
     public HomeTopLevel getParentView() {
         return parentView;
     }
 
-    /** @return ControlConstructed */
+    /** @return {@link forge.control.home.ControlConstructed} */
     public ControlConstructed getController() {
         return control;
     }
 
-    /**
-     * Flashes a visual reminder in a list component.
-     *
-     * @param lst0 &emsp; JList
-     */
-    public void remind(JList lst0) {
-        if (timer1 != null) { return; }
-
-        final JList target = lst0;
-        final int[] steps = {210, 215, 220, 220, 220, 215, 210};
-        final Color oldBG = lst0.getBackground();
-        counter = 0;
-
-        ActionListener fader = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent evt) {
-                counter++;
-                if (counter != (steps.length - 1)) {
-                    setBackground(new Color(255, 0, 0, steps[counter]));
-                }
-                else {
-                    target.setBackground(oldBG);
-                    timer1.stop();
-                    timer1 = null;
-                }
-            }
-        };
-
-        timer1 = new Timer(100, fader);
-        timer1.start();
-    }
-
-    //========= RETRIEVAL FUNCTIONS
-    /** @return JList */
+    /** @return {@link javax.swing.JList} */
     public JList getLstColorsHuman() {
         return lstColorsHuman;
     }
 
-    /** @return JList */
+    /** @return {@link javax.swing.JList} */
     public JList getLstThemesHuman() {
         return lstThemesHuman;
     }
 
-    /** @return JList */
+    /** @return {@link javax.swing.JList} */
     public JList getLstDecksHuman() {
         return lstDecksHuman;
     }
 
-    /** @return JList */
+    /** @return {@link javax.swing.JList} */
     public JList getLstColorsAI() {
         return lstColorsAI;
     }
 
-    /** @return JList */
+    /** @return {@link javax.swing.JList} */
     public JList getLstThemesAI() {
         return lstThemesAI;
     }
 
-    /** @return JList */
+    /** @return {@link javax.swing.JList} */
     public JList getLstDecksAI() {
         return lstDecksAI;
     }
 
-    /** @return JButton */
-    public JButton getBtnHumanDeckList() {
-        return btnHumanDeckList;
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnHumanRandomTheme() {
+        return btnHumanRandomTheme;
     }
 
-    /** @return JButton */
-    public JButton getBtnAIDeckList() {
-        return btnAIDeckList;
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtn() {
+        return btnHumanRandomDeck;
     }
-
 }
