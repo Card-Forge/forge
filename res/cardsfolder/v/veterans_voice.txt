@@ -1,0 +1,10 @@
+Name:Veteran's Voice
+ManaCost:R
+Types:Enchantment Aura
+Text:no text
+A:SP$ Attach | Cost$ R | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+A:AB$ Pump | Cost$ tapXType<1/Creature.EnchantedBy/Enchanted Creature> | ValidTgts$ Creature.NotEnchantedBy | TgtPrompt$ Select target creature other than the creature tapped | NumAtt$ 2 | NumDef$ 1 | SpellDescription$ Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_voice.jpg
+End
