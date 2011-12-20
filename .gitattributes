@@ -918,6 +918,7 @@ res/cardsfolder/b/bog_wreckage.txt svneol=native#text/plain
 res/cardsfolder/b/bogardan_firefiend.txt svneol=native#text/plain
 res/cardsfolder/b/bogardan_hellkite.txt svneol=native#text/plain
 res/cardsfolder/b/bogardan_lancer.txt svneol=native#text/plain
+res/cardsfolder/b/bogardan_phoenix.txt -text svneol=unset#text/plain
 res/cardsfolder/b/bogardan_rager.txt svneol=native#text/plain
 res/cardsfolder/b/boggart_arsonists.txt svneol=native#text/plain
 res/cardsfolder/b/boggart_birth_rite.txt svneol=native#text/plain
