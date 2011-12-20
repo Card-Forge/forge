@@ -33,6 +33,7 @@ import forge.Player;
 import forge.PlayerZone;
 import forge.StaticEffects;
 import forge.Upkeep;
+import forge.Untap;
 import forge.card.trigger.TriggerHandler;
 import forge.game.GameSummary;
 
@@ -51,6 +52,7 @@ public class FGameState {
     private Player computerPlayer = new AIPlayer(FGameState.AI_PLAYER_NAME);
     private EndOfTurn endOfTurn = new EndOfTurn();
     private EndOfCombat endOfCombat = new EndOfCombat();
+    private Untap untap = new Untap();
     private Upkeep upkeep = new Upkeep();
     private Phase phase = new Phase();
     private MagicStack stack = new MagicStack();
@@ -173,6 +175,25 @@ public class FGameState {
      */
     protected final void setUpkeep(final Upkeep upkeep0) {
         this.upkeep = upkeep0;
+    }
+
+    /**
+     * Gets the untap.
+     * 
+     * @return the upkeep
+     */
+    public final Untap getUntap() {
+        return this.untap;
+    }
+
+    /**
+     * Sets the untap.
+     * 
+     * @param untap0
+     *            the upkeep to set
+     */
+    protected final void setUntap(final Untap untap0) {
+        this.untap = untap0;
     }
 
     /**

@@ -274,6 +274,20 @@ public final class AllZone {
 
     /**
      * <p>
+     * getUpkeep.
+     * </p>
+     * 
+     * Will eventually be marked deprecated.
+     * 
+     * @return a {@link forge.Untap} object.
+     * @since 1.2.0
+     */
+    public static forge.Untap getUntap() {
+        return Singletons.getModel().getGameState().getUntap();
+    }
+
+    /**
+     * <p>
      * getPhase.
      * </p>
      * 

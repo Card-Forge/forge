@@ -96,6 +96,9 @@ public class PhaseUtil {
             AllZone.getPhase().setNeedToNextPhase(true);
             return;
         }
+        
+        AllZone.getUntap().executeUntil(turn);
+        AllZone.getUntap().executeAt();
 
         // Phasing would happen here
         PhaseUtil.doPhasing(turn);

@@ -10647,6 +10647,7 @@ src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain
 src/main/java/forge/Time.java svneol=native#text/plain
 src/main/java/forge/UndoCommand.java svneol=native#text/plain
+src/main/java/forge/Untap.java -text
 src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
