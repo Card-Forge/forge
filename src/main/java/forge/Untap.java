@@ -22,7 +22,7 @@ import java.util.HashMap;
 //handles "until next untap", "until your next untap" and "at beginning of untap" commands from cards
 /**
  * <p>
- * Upkeep class.
+ * Untap class.
  * </p>
  * 
  * @author Forge
@@ -99,4 +99,4 @@ public class Untap implements java.io.Serializable {
         AllZone.getStack().unfreezeStack();
     }
     
-} // end class Untap
+} //end class Untap
