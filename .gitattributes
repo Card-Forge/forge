@@ -9716,6 +9716,7 @@ res/cardsfolder/w/woolly_thoctar.txt svneol=native#text/plain
 res/cardsfolder/w/word_of_binding.txt svneol=native#text/plain
 res/cardsfolder/w/word_of_blasting.txt svneol=native#text/plain
 res/cardsfolder/w/word_of_seizing.txt svneol=native#text/plain
+res/cardsfolder/w/word_of_undoing.txt -text
 res/cardsfolder/w/words_of_wisdom.txt svneol=native#text/plain
 res/cardsfolder/w/workhorse.txt svneol=native#text/plain
 res/cardsfolder/w/world_queller.txt -text

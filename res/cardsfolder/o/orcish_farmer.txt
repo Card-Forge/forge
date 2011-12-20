@@ -7,4 +7,7 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Type
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_farmers.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/256.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/207.jpg
+Oracle:{T}: Target land becomes a Swamp until its controller's next untap step.
 End
