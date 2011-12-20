@@ -93,7 +93,9 @@ public class ControlConstructed {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int index = view.getLstDecksHuman().locationToIndex(e.getPoint());
-                    showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
+                    if (index > 0) {
+                        showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
+                    }
                  }
             }
         });
