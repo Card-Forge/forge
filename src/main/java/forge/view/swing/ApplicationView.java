@@ -31,6 +31,7 @@ import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
 import forge.ImageCache;
+import forge.control.ControlAllUI;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.model.FModel;
@@ -167,7 +168,7 @@ public class ApplicationView implements FView {
                                     GuiTopLevel g = new GuiTopLevel();
                                     g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                     AllZone.setDisplay(g);
-                                    g.getController().changeState(0);
+                                    g.getController().changeState(ControlAllUI.HOME_SCREEN);
                                 }
                                 else {
                                     new OldGuiNewGame();

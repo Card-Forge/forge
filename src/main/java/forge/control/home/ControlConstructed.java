@@ -23,6 +23,7 @@ import forge.CardList;
 import forge.Command;
 import forge.Constant;
 import forge.PlayerType;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
@@ -462,7 +463,7 @@ public class ControlConstructed {
 
         GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
 
-        g.getController().changeState(1);
+        g.getController().changeState(ControlAllUI.MATCH_SCREEN);
         g.getController().getMatchController().initMatch();
 
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
