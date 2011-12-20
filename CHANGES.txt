@@ -513,6 +513,13 @@ Notes:
 - Fixed static abilities getting checked by triggers (SpellAbilityCast, etc.).
 - Converted some cards to use the "BecomesTarget" trigger.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- add Keyword: Remove CARDNAME from your deck before playing if you're not playing for ante.
+- Added the keyword Reveal the first card you draw each turn.
+- Added the optional parameter "Number" to the Drawn trigger.
+- show Ante cards won/lost in Quest the same as other cards in the rewards pane (name/picture/text)
+- fix Crash when double clicking on Random in the Constructed Deck List panel
+- update changeState in a couple places for the new UI
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -615,6 +622,10 @@ Essence Bottle
 Entomber Exarch
 Phyrexian Unlife
 Knight of the Mists
+Veteran's Voice
+Rowen
+Contract from Below
+Primitive Etchings
 
 
 end
