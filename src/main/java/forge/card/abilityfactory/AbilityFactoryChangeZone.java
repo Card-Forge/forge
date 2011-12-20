@@ -199,7 +199,7 @@ public final class AbilityFactoryChangeZone {
      */
     public static boolean isKnown(final String origin) {
         return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield") || origin
-                .equals("Stack"));
+                .equals("Stack") || origin.equals("Ante"));
     }
 
     /**
@@ -605,9 +605,14 @@ public final class AbilityFactoryChangeZone {
             if (origin.equals("Library") && params.containsKey("Defined")) {
                 // for now, just handle the Exile from top of library case, but
                 // this can be expanded...
-                sb.append("Exile the top card of your library");
-                if (params.containsKey("ExileFaceDown")) {
-                    sb.append(" face down");
+                if (destination.equals("Exile")) {
+                    sb.append("Exile the top card of your library");
+                    if (params.containsKey("ExileFaceDown")) {
+                        sb.append(" face down");
+                    }
+                }
+                else if (destination.equals("Ante")) {
+                    sb.append("Add the top card of your library to the ante");
                 }
                 sb.append(".");
             } else if (origin.equals("Library")) {
