@@ -1,0 +1,12 @@
+Name:Primitive Etchings
+ManaCost:2 G G
+Types:Enchantment
+Text:no text
+K:Reveal the first card you draw each turn
+T:Mode$ Drawn | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Number$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever you reveal a creature card this way, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primitive_etchings.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/126.jpg
+Oracle:Reveal the first card you draw each turn. Whenever you reveal a creature card this way, draw a card.
+End
