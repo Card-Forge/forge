@@ -7,11 +7,11 @@ Forge Beta: ##-##-2011 ver 1.#.# rev #####
 
 A new UI is being developed and it will take some time before it is finished. Forge is somewhat unstable at this time as the new user interface is a work in progress.
 
-The first step was to update the battlefield window. The second step was to update the New Game window and this section still needs a lot of work. We want to get constructed node and then quest modes working first  and will then try to get the draft and sealed modes working again afterwards.
+The first step was to update the battlefield window. The second step was to update the New Game window and this section still needs some work. We want to get constructed node and then quest modes working first and will then try to get the draft and sealed modes working again afterwards. While most of this work has now been done there are still a few areas that are not finished and you may discover a bug or two.
 
-Enjoy the new work and be patient as this part of the project moves forward. For now, only "Constructed" mode is far enough along to be considered reasonably stable. We hope to have quest mode working again in the near future.
+Enjoy the new work and be patient as this part of the project moves forward. For now, only "Constructed" mode is far enough along to be considered reasonably stable. Quest mode, Sealed and Draft are somewhat stable and you should be able to use these three modes without too many bugs and issues being noticed. Please report all bugs and issues that you notice.
 
-The JuzamJedi cube has once again been updated with a newer list of cards.
+The JuzamJedi cube has once again been updated with a newer list of cards. All core sets and all expansions should now be at least 75% implemented. And all standard legal sets are at least 90% complete.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
