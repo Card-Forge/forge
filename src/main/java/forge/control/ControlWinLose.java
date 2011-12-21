@@ -108,7 +108,7 @@ public class ControlWinLose {
     public void startNextRound() {
         boolean isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
         GameType gameType = Constant.Runtime.getGameType();
-        
+
         //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere
         if (isAnte && !gameType.equals(GameType.Quest)) {
             Deck hDeck = Constant.Runtime.HUMAN_DECK[0];
@@ -121,9 +121,9 @@ public class ControlWinLose {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     cDeck.removeMain(toRemove, 1);
                 }
-                
+
                 Constant.Runtime.COMPUTER_DECK[0] = cDeck;
-                
+
                 List<Card> o = GuiUtils.getChoicesOptional("Select cards to add to your deck", compAntes.toArray());
                 if (null != o) {
                     for (Card c : o) {

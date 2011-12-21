@@ -75,7 +75,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
     public CardDetailPanel(final Card card) {
         this.setLayout(new GridBagLayout());
         this.setBorder(new EtchedBorder());
-        
+
         GridBagConstraints labelConstrains = new GridBagConstraints();
         labelConstrains.fill = GridBagConstraints.BOTH;
         labelConstrains.gridx = 0;

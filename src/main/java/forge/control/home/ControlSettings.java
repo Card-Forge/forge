@@ -61,7 +61,7 @@ public class ControlSettings {
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
-        
+
         this.view.getCbScaleLarger().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {

@@ -408,7 +408,7 @@ public class CombatUtil {
                         if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
                             CardList possibleBlockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
                             possibleBlockers.remove(blocker);
-                            if(!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
+                            if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
                                 must = false;
                             }
                         }
@@ -419,10 +419,10 @@ public class CombatUtil {
                 }
             }
         }
-        
+
         for (final Card attacker : attackers) {
             // don't accept one blocker for attackers with this keyword
-            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.") 
+            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
                     && combat.getBlockers(attacker).size() == 1) {
                 return false;
             }
@@ -462,7 +462,7 @@ public class CombatUtil {
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
                     CardList blockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
                     blockers.remove(blocker);
-                    if(!CombatUtil.canBeBlocked(attacker, blockers)) {
+                    if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
                     }
                 }
@@ -478,7 +478,7 @@ public class CombatUtil {
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
                     CardList blockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
                     blockers.remove(blocker);
-                    if(!CombatUtil.canBeBlocked(attacker, blockers)) {
+                    if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
                     }
                 }

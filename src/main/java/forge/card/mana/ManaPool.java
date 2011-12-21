@@ -92,7 +92,7 @@ public class ManaPool extends Card {
      */
     @Deprecated
     public final String getManaList() {
-		calculateManaTotals();
+        calculateManaTotals();
         final StringBuilder sbNormal = new StringBuilder("");
         final StringBuilder sbSnow = new StringBuilder("");
         if (!this.isEmpty()) {

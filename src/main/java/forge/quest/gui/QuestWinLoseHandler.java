@@ -145,7 +145,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     public final boolean populateCustomPanel() {
         this.getView().getBtnRestart().setVisible(false);
         this.model.qData.getCards().resetNewList();
-        
+
         //do per-game actions
         if (this.model.qMatchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             //add the computer's ante card to your card pool
@@ -157,7 +157,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
                     AllZone.getQuestData().getCards().addSingleCard(antePrinted);
                 }
                 anteWon(antes);
-                
+
             }
         } else {
             if (isAnte) {

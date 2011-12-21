@@ -1481,7 +1481,7 @@ public class GameAction {
             JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
 
         }
-        
+
         for (int i = 0; i < 100; i++) {
             AllZone.getHumanPlayer().shuffle();
         }

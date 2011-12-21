@@ -71,15 +71,17 @@ public class InputBlock extends Input {
 
         if (this.currentAttacker == null) {
 
-            AllZone.getDisplay().showMessage("To Block, click on your Opponents attacker first, then your blocker(s). " +
-            		"To cancel a block right-click on your blocker");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("To Block, click on your Opponents attacker first, then your blocker(s). ");
+            sb.append("To cancel a block right-click on your blocker");
+            AllZone.getDisplay().showMessage(sb.toString());
         } else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
-            AllZone.getDisplay()
-                    .showMessage(
-                            "Select a creature to block " + attackerName + " ("
-                                    + this.currentAttacker.getUniqueNumber() + "). " +
-                            "To cancel a block right-click on your blocker");
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Select a creature to block ").append(attackerName).append(" (");
+            sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
+            sb.append("To cancel a block right-click on your blocker");
+            AllZone.getDisplay().showMessage(sb.toString());
         }
 
         CombatUtil.showCombat();

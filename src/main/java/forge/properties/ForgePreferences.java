@@ -225,7 +225,7 @@ public class ForgePreferences extends Preferences {
         this.set("gui.layout", this.getUILayout());
         this.set("gui.old", this.oldGui);
         this.set("gui.skin", this.getSkin());
-        
+
         this.set("play.for.ante", this.isPlayForAnte());
 
         this.set("AI.stack.land", this.isStackAiLand());
