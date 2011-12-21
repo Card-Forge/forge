@@ -485,11 +485,7 @@ public final class GameActionUtil {
             answer = JOptionPane.showConfirmDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION);
         }
 
-        if (answer == JOptionPane.YES_OPTION) {
-            return true;
-        } else {
-            return false;
-        }
+        return answer == JOptionPane.YES_OPTION;
     }
 
     /**
@@ -565,11 +561,7 @@ public final class GameActionUtil {
 
         q = GuiUtils.getChoiceOptional("Use " + c + " Landfall?", choices);
 
-        if ((q == null) || q.equals("No")) {
-            return false;
-        } else {
-            return true;
-        }
+        return (q == null) || q.equals("No");
     }
 
     /**

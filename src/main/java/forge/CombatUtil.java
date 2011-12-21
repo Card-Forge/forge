@@ -361,8 +361,6 @@ public class CombatUtil {
      * 
      * @param attacker
      *            a {@link forge.Card} object.
-     * @param combat
-     *            a {@link forge.Combat} object.
      * @return a boolean.
      */
     public static int needsBlockers(final Card attacker) {
@@ -2362,12 +2360,8 @@ public class CombatUtil {
             CardList enchantments = c.getController().getCardsIn(Zone.Library);
             enchantments = enchantments.filter(new CardListFilter() {
                 @Override
-                public boolean addCard(final Card c) {
-                    if (c.isEnchantment() && (c.getCMC() <= 3)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                public boolean addCard(final Card card) {
+                    return (card.isEnchantment() && (card.getCMC() <= 3));
                 }
             });
 

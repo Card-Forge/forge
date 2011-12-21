@@ -19,10 +19,11 @@ package forge;
 
 import java.util.HashMap;
 
-//handles "until next untap", "until your next untap" and "at beginning of untap" commands from cards
 /**
  * <p>
  * Untap class.
+ * Handles "until next untap", "until your next untap" and "at beginning of untap"
+ * commands from cards.
  * </p>
  * 
  * @author Forge

@@ -340,11 +340,7 @@ public class AbilityFactoryDealDamage {
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
             // TODO(sol): this should also happen if Stuffy is going to die
-            if (AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getHumanPlayer())) {
-                return true;
-            } else {
-                return false;
-            }
+            return AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getHumanPlayer());
         }
 
         if (this.abilityFactory.isAbility()) {

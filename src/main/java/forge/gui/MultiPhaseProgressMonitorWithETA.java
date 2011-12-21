@@ -173,7 +173,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * 
      * @param numUnits
      *            cannot be higher than Integer.MAX_VALUE
-     * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#setTotalUnitsThisPhase(long)
+     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#setTotalUnitsThisPhase(long)
      */
     @Override
     public final void setTotalUnitsThisPhase(final long numUnits) {
@@ -224,7 +224,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * 
      * @param numUnits
      *            the num units
-     * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#incrementUnitsCompletedThisPhase(long)
+     * @see net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor#incrementUnitsCompletedThisPhase(long)
      */
     @Override
     public final void incrementUnitsCompletedThisPhase(final long numUnits) {

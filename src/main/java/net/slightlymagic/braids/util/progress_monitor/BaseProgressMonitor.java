@@ -407,12 +407,8 @@ public class BaseProgressMonitor implements BraidsProgressMonitor {
         doctorStartTimes();
         long nowTime = (new Date().getTime() / 1000);
 
-        if (nowTime - this.lastUIUpdateTime >= this.minUIUpdateIntervalSec
-                || (this.getUnitsCompletedSoFarThisPhase() == this.getTotalUnitsThisPhase())) {
-            return true;
-        } else {
-            return false;
-        }
+        return (nowTime - this.lastUIUpdateTime >= this.minUIUpdateIntervalSec
+                || (this.getUnitsCompletedSoFarThisPhase() == this.getTotalUnitsThisPhase()));
     }
 
     /**

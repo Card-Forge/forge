@@ -1026,11 +1026,9 @@ public class CardFactorySorceries {
                         public boolean addCard(final Card c) {
                             if (c.getName().contains("Dryad Arbor")) {
                                 return true;
-                            } else if (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
-                                    || c.isType("Island") || c.isType("Swamp"))) {
-                                return true;
                             } else {
-                                return false;
+                                return  (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
+                                    || c.isType("Island") || c.isType("Swamp")));
                             }
                         }
                     });
@@ -1116,11 +1114,9 @@ public class CardFactorySorceries {
                             public boolean addCard(final Card c) {
                                 if (c.getName().contains("Dryad Arbor")) {
                                     return true;
-                                } else if (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
-                                        || c.isType("Island") || c.isType("Swamp"))) {
-                                    return true;
                                 } else {
-                                    return false;
+                                    return (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
+                                        || c.isType("Island") || c.isType("Swamp")));
                                 }
                             }
                         });
@@ -1451,11 +1447,7 @@ public class CardFactorySorceries {
                     CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
 
                     list = list.getType("Land");
-                    if (list.size() > 0) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    return list.size() > 0;
                 }
 
                 @Override
