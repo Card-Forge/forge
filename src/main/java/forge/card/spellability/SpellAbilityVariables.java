@@ -54,7 +54,7 @@ public class SpellAbilityVariables {
 
     /** The b sorcery speed. */
     private boolean sorcerySpeed = false;
-    
+
     /** The b instant speed. */
     private boolean instantSpeed = false;
 

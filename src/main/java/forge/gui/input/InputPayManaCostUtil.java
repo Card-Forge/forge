@@ -95,8 +95,8 @@ public class InputPayManaCostUtil {
             } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
                 it.remove();
             } else if (AbilityFactory.isInstantSpeed(ma)) {
-                System.out.println("Removing ability from: "+card);
-                System.out.println("Ability: "+ma);
+                System.out.println("Removing ability from: " + card);
+                System.out.println("Ability: " + ma);
                 it.remove();
             }
 
