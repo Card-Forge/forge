@@ -8,6 +8,6 @@ SVar:Blocking:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN C
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_war_cry.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/108.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/108.jpg|2
 Oracle:Cast Gorilla War Cry only during combat before blockers are declared.\nCreatures can't be blocked this turn except by two or more creatures.\nDraw a card at the beginning of the next turn's upkeep.
 End
