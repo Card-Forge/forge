@@ -54,6 +54,9 @@ public class SpellAbilityVariables {
 
     /** The b sorcery speed. */
     private boolean sorcerySpeed = false;
+    
+    /** The b instant speed. */
+    private boolean instantSpeed = false;
 
     /** The b any player. */
     private boolean anyPlayer = false;
@@ -241,6 +244,29 @@ public class SpellAbilityVariables {
      */
     public final boolean isSorcerySpeed() {
         return this.sorcerySpeed;
+    }
+
+    /**
+     * <p>
+     * setInstantSpeed.
+     * </p>
+     * 
+     * @param bSpeed
+     *            a boolean.
+     */
+    public final void setInstantSpeed(final boolean bSpeed) {
+        this.instantSpeed = bSpeed;
+    }
+
+    /**
+     * <p>
+     * getInstantSpeed.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isInstantSpeed() {
+        return this.instantSpeed;
     }
 
     /**

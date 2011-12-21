@@ -27,6 +27,7 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
@@ -92,6 +93,10 @@ public class InputPayManaCostUtil {
             if (!ma.canPlay()) {
                 it.remove();
             } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
+                it.remove();
+            } else if (AbilityFactory.isInstantSpeed(ma)) {
+                System.out.println("Removing ability from: "+card);
+                System.out.println("Ability: "+ma);
                 it.remove();
             }
 

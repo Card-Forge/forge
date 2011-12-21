@@ -1402,6 +1402,23 @@ public class AbilityFactory {
         return false;
     }
 
+    /**
+     * <p>
+     * isInstantSpeed.  To be used for mana abilities like Lion's Eye Diamond
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public static boolean isInstantSpeed(final SpellAbility sa) {
+        if (sa.isAbility()) {
+            return sa.getRestrictions().isInstantSpeed();
+        }
+
+        return false;
+    }
+
     // Utility functions used by the AFs
     /**
      * <p>

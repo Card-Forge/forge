@@ -100,6 +100,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setSorcerySpeed(true);
         }
 
+        if (params.containsKey("InstantSpeed")) {
+            this.setInstantSpeed(true);
+        }
+
         if (params.containsKey("PlayerTurn")) {
             this.setPlayerTurn(true);
         }
