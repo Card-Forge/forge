@@ -93,12 +93,17 @@ public class ViewConstructed extends JPanel {
         lblHuman.setForeground(skin.getColor("text"));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblColorInfo = new JLabel("Multiple Colors: CTRL");
+        JLabel lblColorInfo = new JLabel("Generate deck (Multi-select: CTRL)");
         lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblColorInfo.setForeground(skin.getColor("text"));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblDecklistInfo = new JLabel("Decklist: Double Click");
+        JLabel lblThemeInfo = new JLabel("Generate deck with a theme");
+        lblThemeInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblThemeInfo.setForeground(skin.getColor("text"));
+        lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel lblDecklistInfo = new JLabel("Load deck (Decklist: Double Click)");
         lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -117,7 +122,8 @@ public class ViewConstructed extends JPanel {
         JPanel themeContainer = new JPanel();
         themeContainer.setOpaque(false);
         themeContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        themeContainer.add(new FScrollPane(lstThemesHuman), "w 100%!, h 75%!, gaptop 10%, wrap");
+        themeContainer.add(lblThemeInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
+        themeContainer.add(new FScrollPane(lstThemesHuman), "w 100%!, h 75%!, wrap");
         themeContainer.add(btnHumanRandomTheme, "w 100%!, h 12%!, gaptop 2.5%");
 
         JPanel decksContainer = new JPanel();
@@ -157,12 +163,17 @@ public class ViewConstructed extends JPanel {
         lblAI.setForeground(skin.getColor("text"));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblColorInfo = new JLabel("Multiple Colors: CTRL");
+        JLabel lblColorInfo = new JLabel("Generate deck (Multi-select: CTRL)");
         lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblColorInfo.setForeground(skin.getColor("text"));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblDecklistInfo = new JLabel("Decklist: Double Click");
+        JLabel lblThemeInfo = new JLabel("Generate deck with a theme");
+        lblThemeInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblThemeInfo.setForeground(skin.getColor("text"));
+        lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel lblDecklistInfo = new JLabel("Load deck (Decklist: Double Click)");
         lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -181,7 +192,8 @@ public class ViewConstructed extends JPanel {
         JPanel themeContainer = new JPanel();
         themeContainer.setOpaque(false);
         themeContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        themeContainer.add(new FScrollPane(lstThemesAI), "w 100%!, h 75%!, gaptop 10%, wrap");
+        themeContainer.add(lblThemeInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
+        themeContainer.add(new FScrollPane(lstThemesAI), "w 100%!, h 75%!, wrap");
         themeContainer.add(btnAIRandomTheme, "w 100%!, h 12%!, gaptop 2.5%");
 
         JPanel decksContainer = new JPanel();
