@@ -967,7 +967,12 @@ public final class AbilityFactoryReveal {
                     final Iterator<Card> itr = found.iterator();
                     while (itr.hasNext()) {
                         final Card c = itr.next();
-                        AllZone.getGameAction().moveTo(foundDest, c, foundLibPos);
+                        if (params.containsKey("GainControl") && foundDest.equals(Zone.Battlefield)) {
+                            c.addController(af.getHostCard());
+                            AllZone.getGameAction().moveTo(c.getController().getZone(foundDest), c);
+                        } else {
+                            AllZone.getGameAction().moveTo(foundDest, c, foundLibPos);
+                        }
                         revealed.remove(c);
                     }
                 }
