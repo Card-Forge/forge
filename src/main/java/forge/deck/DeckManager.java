@@ -489,11 +489,14 @@ public class DeckManager {
 
         // readDeck comments
         String comment = null;
-        while (iterator.hasNext() && ((line = iterator.next()) != null) && !line.equals("[general]")) {
-            if (comment == null) {
-                comment = line;
-            } else {
-                comment += "\n" + line;
+        while (iterator.hasNext()) {
+            line = iterator.next();
+            if ((line != null) && !line.equals("[general")) {
+                if (comment == null) {
+                    comment = line;
+                } else {
+                    comment += "\n" + line;
+                }
             }
         }
 

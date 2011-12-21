@@ -256,8 +256,12 @@ public class NameChanger {
                 String line;
 
                 // stop reading if end of file or blank line is read
-                while (((line = in.readLine()) != null) && (line.trim().length() != 0)) {
-                    this.processLine(line.trim());
+                while ((line = in.readLine()) != null) {
+                    if (line.trim().length() != 0) {
+                        this.processLine(line.trim());
+                    } else {
+                        break;
+                    }
                 } // while
             } catch (final Exception ex2) {
                 // Show orig exception
