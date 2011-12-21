@@ -8,7 +8,7 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kruin_outlaw.jpg
 AlternateMode:DoubleFaced
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/152a.jpg
-Oracle:First Strike\nAt the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
+Oracle:First Strike\nAt the beginning of each upkeep, if no spells were cast last turn, transform Kruin Outlaw.
 
 #Shared
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
@@ -26,5 +26,5 @@ S:Mode$ Continuous | Affected$ Werewolf.YouCtrl | AddHiddenKeyword$ HIDDEN CARDN
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/terror_of_kruin_pass.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/152b.jpg
-Oracle:Double Strike\nEach Werewolf you control can't be blocked except by two or more creatures.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.
+Oracle:Double Strike\nEach Werewolf you control can't be blocked except by two or more creatures.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.
 End
