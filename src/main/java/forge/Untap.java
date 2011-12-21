@@ -98,5 +98,5 @@ public class Untap implements java.io.Serializable {
 
         AllZone.getStack().unfreezeStack();
     }
-    
+
 } //end class Untap
