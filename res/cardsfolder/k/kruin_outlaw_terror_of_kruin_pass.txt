@@ -1,0 +1,30 @@
+Name:Kruin Outlaw
+ManaCost:1 R R
+Types:Creature Human Rogue Werewolf
+Text:no text
+PT:2/2
+K:First Strike
+T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kruin_outlaw.jpg
+AlternateMode:DoubleFaced
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/152a.jpg
+Oracle:First Strike\nAt the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
+
+#Shared
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+
+ALTERNATE
+
+Name:Terror of Kruin Pass
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+Text:no text
+PT:3/3
+K:Double Strike
+S:Mode$ Continuous | Affected$ Werewolf.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't be blocked except by two or more creatures. | Description$ Each Werewolf you control can't be blocked except by two or more creatures.
+T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/terror_of_kruin_pass.jpg
+SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/152b.jpg
+Oracle:Double Strike\nEach Werewolf you control can't be blocked except by two or more creatures.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.
+End
