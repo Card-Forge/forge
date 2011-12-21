@@ -1,0 +1,13 @@
+Name:Teferi's Veil
+ManaCost:1 U
+Types:Enchantment
+Text:no text
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | DelayedTrigger$ DelayedTrig | TriggerDescription$ Whenever a creature you control attacks, it phases out at end of combat. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
+SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigPhase | TriggerDescription$ Attacking creatures you control phase out at end of combat.
+SVar:TrigPhase:AB$Phases | Cost$ 0 | Defined$ TriggeredAttacker
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_veil.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/53.jpg
+Oracle:Whenever a creature you control attacks, it phases out at end of combat. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
+End
