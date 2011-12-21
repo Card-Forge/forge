@@ -10,4 +10,6 @@ A:AB$ Mana | Cost$ Sac<1/CARDNAME> Discard<0/Hand> | Produced$ G | Amount$ 3 | I
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lions_eye_diamond.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/272.jpg
+Oracle:Sacrifice Lion's Eye Diamond, Discard your hand: Add three mana of any one color to your mana pool. Activate this ability only any time you could cast an instant.
 End
