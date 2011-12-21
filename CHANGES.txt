@@ -520,6 +520,15 @@ Notes:
 - fix Crash when double clicking on Random in the Constructed Deck List panel
 - update changeState in a couple places for the new UI
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- add an Untap class with executeAt and executeUntil
+- Cardforge.org is now available again.
+- Some Checkstyle fixes and StringBuilder conversions.
+- 12/20/2011 updates to the banned list for Modern
+- Added the optional parameter "GainControl" to AF DigUntil.
+- Fixed Telemin Performance.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -626,6 +635,9 @@ Veteran's Voice
 Rowen
 Contract from Below
 Primitive Etchings
+Orcish Farmer
+Word of Undoing
+Bogardan Phoenix
 
 
 end
