@@ -529,6 +529,19 @@ Notes:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added some text to the constructed deck section of the home screen.
+- Added some multi-pic infos.
+- Fixed Oracle text for Kruin Outlawe/Terror of Kruin Pass
+- oh, I guess it would help if I committed lions_eye_diamond.txt too...
+- Little text file updates and cleanup.
+- Checkstyle.
+- Fixed the LQ pic URL for Orcish Farmer.
+- Added a fluff piece to the changes.txt file.
+- checkstyle
+- Update plugin versions. Checkstyle
+- update guava dependency. checkstyle
+- Fixed the triggered ability of Shrieking Grotesque.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -638,6 +651,12 @@ Primitive Etchings
 Orcish Farmer
 Word of Undoing
 Bogardan Phoenix
+Kruin Outlaw / Terror of Kruin Pass
+Lion's Eye Diamond
+Horde of Boggarts
+Teferi's Veil
+Two-Headed Sliver
+Reality Ripple
 
 
 end
