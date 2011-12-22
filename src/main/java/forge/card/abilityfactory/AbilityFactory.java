@@ -356,6 +356,9 @@ public class AbilityFactory {
             if (this.mapParams.containsKey("TargetUnique")) {
                 this.abTgt.setUniqueTargets(true);
             }
+            if (this.mapParams.containsKey("TargetsFromSingleZone")) {
+                this.abTgt.setSingleZone(true);
+            }
         }
 
         this.hasSubAb = this.mapParams.containsKey("SubAbility");

@@ -42,6 +42,7 @@ public class Target {
     // Target Choices (which is specific for the StackInstance)
     private Card srcCard;
     private boolean uniqueTargets = false;
+    private boolean singleZone = false;
     private TargetChoices choice = null;
 
     /**
@@ -669,5 +670,24 @@ public class Target {
      */
     public final void setUniqueTargets(final boolean unique) {
         this.uniqueTargets = unique;
+    }
+
+    /**
+     * Checks if targets must be from a single zone.
+     * 
+     * @return true, if singleZone
+     */
+    public final boolean isSingleZone() {
+        return this.singleZone;
+    }
+
+    /**
+     * Sets if targets must be from a single zone.
+     * 
+     * @param single
+     *            the new singleZone
+     */
+    public final void setSingleZone(final boolean single) {
+        this.singleZone = single;
     }
 }

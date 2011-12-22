@@ -1952,6 +1952,7 @@ res/cardsfolder/d/deception.txt svneol=native#text/plain
 res/cardsfolder/d/decimate.txt svneol=native#text/plain
 res/cardsfolder/d/decimator_web.txt svneol=native#text/plain
 res/cardsfolder/d/declaration_of_naught.txt -text
+res/cardsfolder/d/decompose.txt -text
 res/cardsfolder/d/deconstruct.txt svneol=native#text/plain
 res/cardsfolder/d/decree_of_annihilation.txt svneol=native#text/plain
 res/cardsfolder/d/decree_of_justice.txt svneol=native#text/plain
@@ -6577,6 +6578,7 @@ res/cardsfolder/r/rangers_guile.txt -text
 res/cardsfolder/r/rank_and_file.txt svneol=native#text/plain
 res/cardsfolder/r/ransack.txt svneol=native#text/plain
 res/cardsfolder/r/rapacious_one.txt svneol=native#text/plain
+res/cardsfolder/r/rapid_decay.txt -text
 res/cardsfolder/r/rappelling_scouts.txt svneol=native#text/plain
 res/cardsfolder/r/rashida_scalebane.txt svneol=native#text/plain
 res/cardsfolder/r/rashka_the_slayer.txt svneol=native#text/plain
@@ -7462,6 +7464,7 @@ res/cardsfolder/s/shoreline_salvager.txt svneol=native#text/plain
 res/cardsfolder/s/show_and_tell.txt svneol=native#text/plain
 res/cardsfolder/s/shower_of_sparks.txt svneol=native#text/plain
 res/cardsfolder/s/shrapnel_blast.txt svneol=native#text/plain
+res/cardsfolder/s/shred_memory.txt -text
 res/cardsfolder/s/shrewd_hatchling.txt svneol=native#text/plain
 res/cardsfolder/s/shriek_of_dread.txt svneol=native#text/plain
 res/cardsfolder/s/shriek_raptor.txt svneol=native#text/plain

@@ -257,7 +257,7 @@ public class TargetSelection {
             return;
         }
 
-        final CardList choices = AllZoneUtil
+        CardList choices = AllZoneUtil
                 .getCardsIn(zone)
                 .getValidCards(this.target.getValidTgts(), this.ability.getActivatingPlayer(),
                         this.ability.getSourceCard()).getTargetableCards(this.ability);
@@ -278,6 +278,11 @@ public class TargetSelection {
             if (choices.contains(c)) {
                 choices.remove(c);
             }
+        }
+
+        // If all cards must be from the same zone
+        if (tgt.isSingleZone() && !targeted.isEmpty()) {
+            choices = choices.getController(targeted.get(0).getController());
         }
 
         if (zone.contains(Constant.Zone.Battlefield)) {
