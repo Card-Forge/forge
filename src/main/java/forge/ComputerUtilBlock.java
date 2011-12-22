@@ -589,6 +589,12 @@ public class ComputerUtilBlock {
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
         for (final Card attacker : tramplingAttackers) {
+
+            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
+                    && !combat.isBlocked(attacker)) {
+                continue;
+            }
+
             chumpBlockers = ComputerUtilBlock
                     .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
             for (final Card blocker : chumpBlockers) {

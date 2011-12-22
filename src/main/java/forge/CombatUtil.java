@@ -350,7 +350,6 @@ public class CombatUtil {
                 }
             }
         }
-
         return false;
     }
 
