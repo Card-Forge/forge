@@ -242,15 +242,11 @@ public class AbilityFactoryDestroy {
                 }
 
                 Card choice = null;
+                // If the targets are only of one type, take the best
                 if (list.getNotType("Creature").size() == 0) {
-                    choice = CardFactoryUtil.getBestCreatureAI(list); // if the
-                                                                      // targets
-                                                                      // are
-                                                                      // only
-                                                                      // creatures,
-                                                                      // take
-                                                                      // the
-                                                                      // best
+                    choice = CardFactoryUtil.getBestCreatureAI(list);
+                } else if (list.getNotType("Land").isEmpty()) {
+                    choice = CardFactoryUtil.getBestLandAI(list);
                 } else {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
                 }
