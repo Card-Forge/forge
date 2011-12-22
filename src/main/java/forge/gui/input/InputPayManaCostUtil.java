@@ -37,16 +37,14 @@ import forge.gui.GuiUtils;
 
 /**
  * <p>
- * Input_PayManaCostUtil class.
+ * InputPayManaCostUtil class.
  * </p>
  * 
  * @author Forge
  * @version $Id$
  */
 public class InputPayManaCostUtil {
-    // all mana abilities start with this and typical look like "tap: add G"
-    // mana abilities are Strings and are retrieved by calling card.getKeyword()
-    // taps any card that has mana ability, not just land
+
     /**
      * <p>
      * activateManaAbility.
@@ -81,12 +79,8 @@ public class InputPayManaCostUtil {
             }
         }
 
-        final Iterator<AbilityMana> it = abilities.iterator(); // you can't
-                                                               // remove
-        // unneeded abilities
-        // inside a
-        // for(am:abilities)
-        // loop :(
+        // you can't remove unneeded abilities inside a for(am:abilities) loop :(
+        final Iterator<AbilityMana> it = abilities.iterator();
         while (it.hasNext()) {
             final AbilityMana ma = it.next();
             ma.setActivatingPlayer(AllZone.getHumanPlayer());
@@ -95,8 +89,6 @@ public class InputPayManaCostUtil {
             } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
                 it.remove();
             } else if (AbilityFactory.isInstantSpeed(ma)) {
-                System.out.println("Removing ability from: " + card);
-                System.out.println("Ability: " + ma);
                 it.remove();
             }
 
@@ -205,10 +197,9 @@ public class InputPayManaCostUtil {
         return card.getManaAbility();
     }
 
-    // color is like "G", returns "Green"
     /**
      * <p>
-     * canMake.
+     * canMake.  color is like "G", returns "Green".
      * </p>
      * 
      * @param am
