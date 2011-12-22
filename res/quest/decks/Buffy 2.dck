@@ -13,13 +13,12 @@ Deck Type=constructed
 1 Undead Warchief|TSB
 1 Cemetery Reaper|M10
 1 Smokespew Invoker|LGN
-19 Swamp|MBS
-2 Zombie Master|6ED
-2 Null Champion|ROE
+23 Swamp|MBS
+1 Zombie Master|6ED
+1 Null Champion|ROE
 1 Wretched Anurid|ONS
 1 Tendrils of Corruption|M10
 1 Grasp of Darkness|SOM
-4 Verdant Catacombs|ZEN
 1 Unholy Grotto|ONS
 1 Spined Basher|ONS
 1 Noxious Ghoul|LGN
@@ -27,7 +26,7 @@ Deck Type=constructed
 1 Dreg Reaver|ALA
 1 Dross Crocodile|10E
 1 Nefashu|SCG
-2 Festering Goblin|10E
+1 Festering Goblin|10E
 1 Anurid Murkdiver|ONS
 1 Nested Ghoul|MBS
 1 Infectious Horror|CFX
@@ -44,4 +43,7 @@ Deck Type=constructed
 1 Vengeful Dead|SCG
 1 Grave Defiler|APC
 1 Soulless One|ONS
+1 Boneknitter
+1 Endless Ranks of the Dead
+1 Cellar Door
 [sideboard]

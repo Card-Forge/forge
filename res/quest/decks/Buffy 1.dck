@@ -13,12 +13,10 @@ Deck Type=constructed
 1 Grixis Slavedriver|CFX
 1 Undead Warchief|TSB
 1 Smokespew Invoker|LGN
-19 Swamp|MBS
-1 Null Champion|ROE
+23 Swamp|MBS
 1 Grave Defiler|APC
 1 Wretched Anurid|ONS
 1 Grasp of Darkness|SOM
-4 Verdant Catacombs|ZEN
 1 Unholy Grotto|ONS
 1 Spined Basher|ONS
 1 Legions of Lim-Dul|ICE
@@ -45,4 +43,5 @@ Deck Type=constructed
 1 Bog Raiders|M11
 1 Creakwood Ghoul|EVE
 1 Cyclopean Mummy|LEG
+1 Ghoulraiser
 [sideboard]
