@@ -7,15 +7,14 @@ Description=WU Control deck
 Icon=Aquaman.jpg
 Deck Type=constructed
 [main]
-1 Accorder Paladin
+1 Riptide Crab
+1 Samite Archer
 1 Caravan Escort
 1 Cerulean Wyvern
 1 Dromad Purebred
-1 Elite Vanguard
 1 Hada Spy Patrol
 1 Ikiral Outrider
 1 Jedit's Dragoons
-1 Juggernaut
 1 Kasimir the Lone Wolf
 1 Kor Cartographer
 1 Kor Hookmaster
@@ -42,6 +41,7 @@ Deck Type=constructed
 1 Shared Discovery
 1 Unsummon
 1 Warlord's Axe
+1 Hindering Light
 1 Dread Statuary
 11 Island
 11 Plains
