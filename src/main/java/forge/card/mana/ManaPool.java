@@ -40,7 +40,7 @@ import forge.gui.input.InputPayManaCostUtil;
  * @author Forge
  * @version $Id$
  */
-public class ManaPool extends Card {
+public class ManaPool {
     // current paying moved to SpellAbility
 
     private final ArrayList<Mana> floatingMana = new ArrayList<Mana>();
@@ -65,16 +65,9 @@ public class ManaPool extends Card {
      *            a {@link forge.Player} object.
      */
     public ManaPool(final Player player) {
-        super();
-        this.updateObservers();
-        this.owner = player;
-        this.clearControllers();
-        this.addController(player);
-        this.setName("Mana Pool");
-        this.addIntrinsicKeyword("Shroud");
-        this.addIntrinsicKeyword("Indestructible");
-        this.setImmutable(true);
-        this.clearPool();
+        owner = player;
+        owner.updateObservers();
+        clearPool();
         ManaPool.MAP.put(Constant.Color.WHITE, 0);
         ManaPool.MAP.put(Constant.Color.BLUE, 1);
         ManaPool.MAP.put(Constant.Color.BLACK, 2);
@@ -147,42 +140,6 @@ public class ManaPool extends Card {
                 floatingTotals[ManaPool.MAP.get(m.getColor())] += m.getAmount();
             }
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getText() {
-        calculateManaTotals();
-
-        final StringBuilder sbNormal = new StringBuilder();
-        final StringBuilder sbSnow = new StringBuilder();
-        if (!this.isEmpty()) {
-            for (int i = 0; i < 6; i++) {
-                if (i == 5) {
-                    // Put colorless first
-                    if (floatingTotals[i] > 0) {
-                        sbNormal.insert(0, floatingTotals[i] + " ");
-                    }
-                    if (floatingSnowTotals[i] > 0) {
-                        sbSnow.insert(0, floatingSnowTotals[i] + " ");
-                    }
-                } else {
-                    if (floatingTotals[i] > 0) {
-                        sbNormal.append(CardUtil.getShortColor(Constant.Color.COLORS[i]));
-                        sbNormal.append("(").append(floatingTotals[i]).append(") ");
-                    }
-                    if (floatingSnowTotals[i] > 0) {
-                        sbSnow.append(CardUtil.getShortColor(Constant.Color.COLORS[i]));
-                        sbSnow.append("(").append(floatingSnowTotals[i]).append(") ");
-                    }
-                }
-            }
-        }
-
-        sbNormal.insert(0, "Mana Available:\n");
-        sbSnow.insert(0, "Snow Mana Available:\n");
-
-        return sbNormal.append("\n").append(sbSnow).toString();
     }
 
     /**
@@ -521,53 +478,6 @@ public class ManaPool extends Card {
         }
 
         return choice;
-    }
-
-    /**
-     * <p>
-     * removeManaFromFloating.
-     * </p>
-     * 
-     * @param mc
-     *            a {@link forge.card.mana.ManaCost} object.
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void removeManaFromFloating(final ManaCost mc, final Card c) {
-        this.removeManaFrom(this.floatingMana, mc, c);
-    }
-
-    /**
-     * <p>
-     * removeManaFrom.
-     * </p>
-     * 
-     * @param pool
-     *            a {@link java.util.ArrayList} object.
-     * @param mc
-     *            a {@link forge.card.mana.ManaCost} object.
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void removeManaFrom(final ArrayList<Mana> pool, final ManaCost mc, Card c) {
-        int i = 0;
-        Mana choice = null;
-        boolean flag = false;
-        while (i < pool.size()) {
-            final Mana mana = pool.get(i);
-            if (flag) {
-                c = this;
-            }
-            if ((c == this) && mc.isNeeded(mana)) {
-                c = mana.getSourceCard();
-                flag = true;
-            }
-            if (mana.fromSourceCard(c)) {
-                choice = mana;
-            }
-            i++;
-        }
-        this.removeManaFrom(pool, choice);
     }
 
     /**
@@ -1029,52 +939,5 @@ public class ManaPool extends Card {
 
         // move leftover pay back to floating
         this.clearPay(sa, true);
-    }
-
-    /**
-     * <p>
-     * updateKeywords.
-     * </p>
-     */
-    private void updateKeywords() {
-        this.extrinsicKeyword.clear();
-        for (final Mana m : this.floatingMana) {
-            this.extrinsicKeyword.add("ManaPool:" + m.toString());
-        }
-    }
-
-    private final ArrayList<String> extrinsicKeyword = new ArrayList<String>();
-
-    /** {@inheritDoc} */
-    @Override
-    public final ArrayList<String> getExtrinsicKeyword() {
-        return new ArrayList<String>(this.extrinsicKeyword);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void addExtrinsicKeyword(final String s) {
-        if (s.startsWith("ManaPool:")) {
-            this.extrinsicKeyword.add(s);
-            this.addManaToFloating(s.split(":")[1], this);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void removeExtrinsicKeyword(final String s) {
-        if (s.startsWith("ManaPool:")) {
-            this.updateKeywords();
-            this.extrinsicKeyword.remove(s);
-            this.subtractOne(s.split(":")[1]);
-            this.updateObservers();
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int getExtrinsicKeywordSize() {
-        this.updateKeywords();
-        return this.extrinsicKeyword.size();
     }
 }

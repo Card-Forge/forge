@@ -64,10 +64,6 @@ public class InputPayManaCostUtil {
             return manaCost;
         }
 
-        if (card instanceof ManaPool) {
-            return ((ManaPool) card).subtractMana(sa, manaCost);
-        }
-
         ArrayList<AbilityMana> abilities = InputPayManaCostUtil.getManaAbilities(card);
         final StringBuilder cneeded = new StringBuilder();
         boolean choice = true;

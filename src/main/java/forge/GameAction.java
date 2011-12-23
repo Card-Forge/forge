@@ -38,7 +38,6 @@ import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
@@ -1540,12 +1539,6 @@ public class GameAction {
             AllZone.getHumanPlayer().drawCard();
             AllZone.getComputerPlayer().drawCard();
         }
-
-        // TODO ManaPool should be moved to Player and be represented in the
-        // player panel
-        final ManaPool mp = AllZone.getHumanPlayer().getManaPool();
-        mp.setImageFilename("mana_pool");
-        AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(mp);
 
         AllZone.getInputControl().setInput(new InputMulligan());
         Phase.setGameBegins(1);

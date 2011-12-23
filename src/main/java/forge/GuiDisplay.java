@@ -568,13 +568,6 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
             }
         });
 
-        this.oppLifeLabel.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(final MouseEvent me) {
-                GuiDisplay.this.setCard(AllZone.getComputerPlayer().getManaPool());
-            } // mouseMoved
-        });
-
         // self life mouse listener
         this.playerLifeLabel.addMouseListener(new MouseAdapter() {
 

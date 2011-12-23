@@ -44,7 +44,6 @@ import arcane.ui.PlayArea;
 import arcane.ui.util.Animation;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.gui.GuiUtils;
 import forge.gui.game.CardPanel;
@@ -368,7 +367,6 @@ public final class GuiDisplayUtil {
             // add all Cards in list to the GUI, add arrows to Local
             // Enchantments
 
-            final ArrayList<Card> manaPools = GuiDisplayUtil.getManaPools(list);
             final ArrayList<Card> enchantedLands = GuiDisplayUtil.getEnchantedLands(list);
             final ArrayList<Card> basicBlues = GuiDisplayUtil.getBasics(list, Constant.Color.BLUE);
             final ArrayList<Card> basicReds = GuiDisplayUtil.getBasics(list, Constant.Color.RED);
@@ -396,7 +394,6 @@ public final class GuiDisplayUtil {
             // ArrayList<Card> moxDiamond = getMoxen(list, "Mox Diamond");
 
             list = new ArrayList<Card>();
-            list.addAll(manaPools);
             list.addAll(enchantedLands);
             list.addAll(basicBlues);
             list.addAll(basicReds);
@@ -497,11 +494,8 @@ public final class GuiDisplayUtil {
                  * true; System.out.println("startANewStack: " +
                  * startANewStack); }
                  */
-                if (c.isAura() && c.isEnchanting() && (prevCard != null) && (prevCard instanceof ManaPool)) {
+                if (c.isAura() && c.isEnchanting() && (prevCard != null)) {
                     startANewStack = true;
-                }
-                if ((c instanceof ManaPool) && (prevCard instanceof ManaPool) && prevCard.isSnow()) {
-                    startANewStack = false;
                 }
 
                 if (startANewStack) {
@@ -1037,7 +1031,7 @@ public final class GuiDisplayUtil {
         final ArrayList<Card> ret = new ArrayList<Card>();
 
         for (final Card c : cards) {
-            if (!c.isLand() && !c.getName().startsWith("Mox") && !(c instanceof ManaPool)) {
+            if (!c.isLand() && !c.getName().startsWith("Mox")) {
                 ret.add(c);
             } else {
                 final String name = c.getName();
@@ -1047,8 +1041,7 @@ public final class GuiDisplayUtil {
                         || name.equals("Underwater") || name.equals("Badlands") || name.equals("Bayou")
                         || name.equals("Plateau") || name.equals("Scrubland") || name.equals("Savannah")
                         || name.equals("Taiga") || name.equals("Tropical Island") || name.equals("Tundra")
-                        || name.equals("Underground Sea") || name.equals("Volcanic Island") || name.startsWith("Mox")
-                        || (c instanceof ManaPool)) {
+                        || name.equals("Underground Sea") || name.equals("Volcanic Island") || name.startsWith("Mox")) {
                     // do nothing.
                 } else {
                     ret.add(c);
@@ -1084,25 +1077,6 @@ public final class GuiDisplayUtil {
 
     /**
      * <p>
-     * getManaPools.
-     * </p>
-     * 
-     * @param cards
-     *            a {@link java.util.ArrayList} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<Card> getManaPools(final ArrayList<Card> cards) {
-        final ArrayList<Card> ret = new ArrayList<Card>();
-        for (final Card c : cards) {
-            if (c instanceof ManaPool) {
-                ret.add(c);
-            }
-        }
-        return ret;
-    }
-
-    /**
-     * <p>
      * isStackable.
      * </p>
      * 
@@ -1115,7 +1089,7 @@ public final class GuiDisplayUtil {
                 || (c.isLand() && c.isEnchanted()) || (c.isAura() && c.isEnchanting())
                 || (c.isToken() && CardFactoryUtil.multipleControlled(c))
                 || (c.isCreature() && (c.isEquipped() || c.isEnchanted())) || (c.isEquipment() && c.isEquipping())
-                || (c.isEnchantment()) || ((c instanceof ManaPool) && c.isSnow())) {
+                || (c.isEnchantment())) {
             return true;
         }
 

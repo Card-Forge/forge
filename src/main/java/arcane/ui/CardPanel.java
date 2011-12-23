@@ -40,7 +40,6 @@ import arcane.ui.ScaledImagePanel.MultipassType;
 import arcane.ui.ScaledImagePanel.ScalingType;
 import arcane.ui.util.GlowText;
 import arcane.ui.util.ManaSymbols;
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardContainer;
@@ -422,30 +421,6 @@ public class CardPanel extends JPanel implements CardContainer {
                 final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
                 ManaSymbols.draw(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
                         this.cardHeight - (2 * z));
-            }
-
-            if (this.getCard().getName().equals("Mana Pool") && !this.isAnimationPanel) {
-
-                if (AllZone.getHumanPlayer().getManaPool() != null) {
-                    final String s = AllZone.getHumanPlayer().getManaPool().getManaList();
-                    if (!s.equals("|||||||||||")) {
-
-                        final String[] mList = s.split("\\|", 12);
-
-                        int n = 0;
-                        for (int i = 0; i < 2; i++) {
-                            for (int j = 0; j < 6; j++) {
-                                if (!mList[n].equals("")) {
-                                    width = ManaSymbols.getWidth(mList[n]);
-                                    ManaSymbols.draw(g, mList[n], (this.cardXOffset + ((i + 1) * (this.cardWidth / 3)))
-                                            - (width / 2), this.cardYOffset + ((j + 1) * (this.cardHeight / 7)));
-                                }
-
-                                n++;
-                            }
-                        }
-                    }
-                }
             }
         }
     }

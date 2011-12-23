@@ -110,6 +110,7 @@ public class ComputerAIGeneral implements Computer {
 
         final boolean hasACardGivingHaste = this.hasACardGivingHaste();
 
+        // Why is the computer checking if their mana pool is empty?
         if (AllZone.getComputerPlayer().getManaPool().isEmpty()) {
             hand = hand.filter(new CardListFilter() {
                 @Override
