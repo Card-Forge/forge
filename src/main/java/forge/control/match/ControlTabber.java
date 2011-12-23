@@ -94,6 +94,9 @@ public class ControlTabber extends MyObservable {
             }
         };
 
+        AllZone.getStack().deleteObserver(o1);
+        AllZone.getGameLog().deleteObserver(o2);
+
         AllZone.getStack().addObserver(o1);
         AllZone.getGameLog().addObserver(o2);
     }

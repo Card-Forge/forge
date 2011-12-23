@@ -96,7 +96,7 @@ public class ControlHand {
     public void addObservers() {
         final ViewTopLevel t = view.getTopLevel();
 
-        AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(new Observer() {
+        Observer o1 = new Observer() {
             @Override
             public void update(final Observable a, final Object b) {
                 final PlayerZone pZone = (PlayerZone) a;
@@ -152,7 +152,10 @@ public class ControlHand {
                     }
                 }
             }
-        });
+        };
+
+        AllZone.getHumanPlayer().getZone(Zone.Hand).deleteObserver(o1);
+        AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(o1);
     }
 
     /** Adds listeners to hand panel: clicks, mouseover, etc. */

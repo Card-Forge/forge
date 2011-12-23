@@ -123,8 +123,6 @@ public class ControlField {
             }
         };
 
-        this.player.getZone(Zone.Hand).addObserver(o1);
-
         // Life total, poison total, and keywords, attached directly to Player.
         final Observer o2 = new Observer() {
             @Override
@@ -132,7 +130,6 @@ public class ControlField {
                 ControlField.this.view.updateDetails(ControlField.this.player);
             }
         };
-        this.player.addObserver(o2);
 
         if (AllZone.getQuestData() != null && this.player.isComputer()) {
             final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
@@ -155,6 +152,12 @@ public class ControlField {
             }
         };
 
+        this.player.getZone(Zone.Hand).deleteObserver(o1);
+        this.player.deleteObserver(o2);
+        this.player.getZone(Zone.Battlefield).deleteObserver(o3);
+
+        this.player.getZone(Zone.Hand).addObserver(o1);
+        this.player.addObserver(o2);
         this.player.getZone(Zone.Battlefield).addObserver(o3);
     }
 
