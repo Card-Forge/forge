@@ -252,7 +252,7 @@ public class ControlQuest {
         AllZone.getGameAction().newGame(
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
                 QuestUtil.getHumanStartingCards(view.getQuestData(), event),
-                QuestUtil.getHumanStartingCards(view.getQuestData(), event),
+                QuestUtil.getComputerStartingCards(view.getQuestData(), event),
                 view.getQuestData().getLife() + extraLife, ((QuestChallenge) event).getAILife(), event);
 
     }
