@@ -472,12 +472,13 @@ public abstract class Player extends GameEntity {
     public final void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
         final int damageToDo = damage;
         boolean infect = source.hasKeyword("Infect");
+        final StringBuilder sb = new StringBuilder(
+                "As long as you have 0 or less life, all damage is dealt to you as though its source had infect.");
 
         if (this.getLife() <= 0 && !infect) {
             CardList cards = this.getCardsIn(Zone.Battlefield);
             for (Card card : cards) {
-                if (card.hasKeyword("As long as you have 0 or less life, all damage is dealt to you as though its "
-                        + "source had infect.")) {
+                if (card.hasKeyword(sb.toString())) {
                     infect = true;
                     break;
                 }
@@ -1352,7 +1353,10 @@ public abstract class Player extends GameEntity {
             }
         }
 
-        throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Input_Draw : getDredgeNumber() card doesn't have dredge - ").append(c.getName());
+
+        throw new RuntimeException(sb.toString());
     } // getDredgeNumber()
 
     /**
