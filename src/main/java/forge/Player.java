@@ -1732,8 +1732,8 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canPlayLand() {
-        
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();  
+
+        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         if (t.getTabberController().getView().getLblUnlimitedLands().getEnabled()) {
             return Phase.canCastSorcery(this);
         }

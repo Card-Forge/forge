@@ -1890,8 +1890,8 @@ public class GameAction {
                         if (keyword.startsWith("Flashback")) {
                             final SpellAbility flashback = sa.copy();
                             flashback.setFlashBackAbility(true);
-                            
-                            // there is a flashback cost (and not the cards cost) 
+
+                            // there is a flashback cost (and not the cards cost)
                             if (!keyword.equals("Flashback")) {
                                 final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
                                 flashback.setPayCosts(fbCost);
