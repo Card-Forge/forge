@@ -542,6 +542,20 @@ Notes:
 - update guava dependency. checkstyle
 - Fixed the triggered ability of Shrieking Grotesque.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the optional targeting parameter "TargetsFromSingleZone" to all AF's.
+- remove some debug code from InputPayManaCostUtil class
+- Tweaked the Green Arrow decks to be a little more AI friendly.
+- Replaced some aggressive cards in the Aquaman 1 deck (which is supposed to be a control deck).
+- Updated the Buffy decks with new tribal zombie cards.
+- Improve AIs destruction of Lands.
+- Fixing Serrated Arrows rarity
+- Fixed a bug that enabled the AI to block a creature with "CARDNAME can't be blocked except by two or more creatures." and trample with a single blocker.
+- clean up some TODOs in CardPanel
+- clean up some TODOs in GameAction
+- Fixed damage abilities to allow targeting of planeswalkers
+- hook up the Play Unlimited Lands DevMode button and save state on close.
+- Memory leak hunt: observers deleted before adding fresh ones in match UI
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -657,6 +671,9 @@ Horde of Boggarts
 Teferi's Veil
 Two-Headed Sliver
 Reality Ripple
+Decompose
+Rapid Decay
+Shred Memory
 
 
 end
