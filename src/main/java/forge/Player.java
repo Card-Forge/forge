@@ -35,6 +35,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
+import forge.view.GuiTopLevel;
+import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
@@ -1730,6 +1732,11 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canPlayLand() {
+        
+        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();  
+        if (t.getTabberController().getView().getLblUnlimitedLands().getEnabled()) {
+            return Phase.canCastSorcery(this);
+        }
 
         // CantBeCast static abilities
         final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);

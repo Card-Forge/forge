@@ -40,6 +40,7 @@ import forge.control.ControlAllUI;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
 import forge.view.match.ViewField;
+import forge.view.match.ViewTabber;
 import forge.view.toolbox.FOverlay;
 
 /**
@@ -394,14 +395,16 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         fp.setHumanPhase("phase.human.eot", fieldViews.get(1).getLblEndTurn().getEnabled());
         fp.setHumanPhase("phase.human.cleanup", fieldViews.get(1).getLblCleanup().getEnabled());
 
-        Constant.Runtime.MILL[0] = this.control.getMatchController().getView().getTabberController().getView().getLblMilling().getEnabled();
-        Constant.Runtime.HANDVIEW[0] = this.control.getMatchController().getView().getTabberController().getView().getLblHandView().getEnabled();
-        Constant.Runtime.LIBRARYVIEW[0] = this.control.getMatchController().getView().getTabberController().getView().getLblLibraryView().getEnabled();
+        ViewTabber v = this.control.getMatchController().getView().getTabberController().getView();
+        Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
+        Constant.Runtime.HANDVIEW[0] = v.getLblHandView().getEnabled();
+        Constant.Runtime.LIBRARYVIEW[0] = v.getLblLibraryView().getEnabled();
 
         fp.setMillingLossCondition(Constant.Runtime.MILL[0]);
         fp.setHandView(Constant.Runtime.HANDVIEW[0]);
         fp.setLibraryView(Constant.Runtime.LIBRARYVIEW[0]);
         fp.setUILayout(control.getMatchController().getView().getLayoutParams());
+        fp.setUnlimitedLand(v.getLblUnlimitedLands().getEnabled());
 
         try {
             fp.save();
