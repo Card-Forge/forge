@@ -649,7 +649,7 @@ public class GameAction {
 
     /**
      * <p>
-     * discard_PutIntoPlayInstead.
+     * discardPutIntoPlayInstead.
      * </p>
      * 
      * @param c
@@ -665,7 +665,7 @@ public class GameAction {
 
     /**
      * <p>
-     * discard_madness.
+     * discardMadness.
      * </p>
      * 
      * @param c
@@ -733,10 +733,8 @@ public class GameAction {
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
 
-        if (human.hasWon() || computer.hasLost()) { // Winning Conditions can be
-                                                    // worth more than losing
-                                                    // conditions
-            // Human wins
+        // Winning Conditions can be worth more than losing conditions
+        if (human.hasWon() || computer.hasLost()) {
             humanWins = true;
 
             if (human.getAltWin()) {
@@ -1706,7 +1704,7 @@ public class GameAction {
 
     /**
      * <p>
-     * seeWhoPlaysFirst_CoinToss.
+     * seeWhoPlaysFirstCoinToss.
      * </p>
      */
     public final void seeWhoPlaysFirstCoinToss() {
@@ -1899,11 +1897,9 @@ public class GameAction {
                         if (keyword.startsWith("Flashback")) {
                             final SpellAbility flashback = sa.copy();
                             flashback.setFlashBackAbility(true);
-                            if (!keyword.equals("Flashback")) { // there is a
-                                                                // flashback
-                                                                // cost
-                                                                // (and not the
-                                                                // cards cost)
+                            
+                            // there is a flashback cost (and not the cards cost) 
+                            if (!keyword.equals("Flashback")) {
                                 final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
                                 flashback.setPayCosts(fbCost);
                             }
@@ -2942,16 +2938,11 @@ public class GameAction {
     /**
      * Sets the cost cutting get multi micker mana cost paid.
      * 
-     * @param costCuttingGetMultiMickerManaCostPaid
+     * @param costCuttingGetMultiMickerManaCostPaid0
      *            the costCuttingGetMultiMickerManaCostPaid to set
      */
-    public void setCostCuttingGetMultiMickerManaCostPaid(final int costCuttingGetMultiMickerManaCostPaid) {
-        this.costCuttingGetMultiMickerManaCostPaid = costCuttingGetMultiMickerManaCostPaid; // TODO:
-                                                                                            // Add
-                                                                                            // 0
-                                                                                            // to
-                                                                                            // parameter's
-                                                                                            // name.
+    public void setCostCuttingGetMultiMickerManaCostPaid(final int costCuttingGetMultiMickerManaCostPaid0) {
+        this.costCuttingGetMultiMickerManaCostPaid = costCuttingGetMultiMickerManaCostPaid0;
     }
 
     /**
@@ -2966,16 +2957,11 @@ public class GameAction {
     /**
      * Sets the cost cutting get multi micker mana cost paid colored.
      * 
-     * @param costCuttingGetMultiMickerManaCostPaidColored
+     * @param costCuttingGetMultiMickerManaCostPaidColored0
      *            the costCuttingGetMultiMickerManaCostPaidColored to set
      */
     public void setCostCuttingGetMultiMickerManaCostPaidColored(
-            final String costCuttingGetMultiMickerManaCostPaidColored) {
-        this.costCuttingGetMultiMickerManaCostPaidColored = costCuttingGetMultiMickerManaCostPaidColored; // TODO:
-                                                                                                          // Add
-                                                                                                          // 0
-                                                                                                          // to
-                                                                                                          // parameter's
-                                                                                                          // name.
+            final String costCuttingGetMultiMickerManaCostPaidColored0) {
+        this.costCuttingGetMultiMickerManaCostPaidColored = costCuttingGetMultiMickerManaCostPaidColored0;
     }
 }
