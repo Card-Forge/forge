@@ -681,11 +681,11 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * Sets the game card.
      * 
-     * @param gameCard
+     * @param gameCard0
      *            the gameCard to set
      */
-    public final void setGameCard(final Card gameCard) {
-        this.gameCard = gameCard; // TODO: Add 0 to parameter's name.
+    public final void setGameCard(final Card gameCard0) {
+        this.gameCard = gameCard0;
     }
 
     /**
@@ -700,12 +700,11 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * Sets the drag animation panel.
      * 
-     * @param dragAnimationPanel
+     * @param dragAnimationPanel0
      *            the dragAnimationPanel to set
      */
-    public static void setDragAnimationPanel(final CardPanel dragAnimationPanel) {
-        CardPanel.dragAnimationPanel = dragAnimationPanel; // TODO: Add 0 to
-                                                           // parameter's name.
+    public static void setDragAnimationPanel(final CardPanel dragAnimationPanel0) {
+        CardPanel.dragAnimationPanel = dragAnimationPanel0;
     }
 
     /**
@@ -720,12 +719,11 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * Sets the attached to panel.
      * 
-     * @param attachedToPanel
+     * @param attachedToPanel0
      *            the attachedToPanel to set
      */
-    public final void setAttachedToPanel(final CardPanel attachedToPanel) {
-        this.attachedToPanel = attachedToPanel; // TODO: Add 0 to parameter's
-                                                // name.
+    public final void setAttachedToPanel(final CardPanel attachedToPanel0) {
+        this.attachedToPanel = attachedToPanel0;
     }
 
     /**
@@ -740,12 +738,11 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * Sets the attached panels.
      * 
-     * @param attachedPanels
+     * @param attachedPanels0
      *            the attachedPanels to set
      */
-    public final void setAttachedPanels(final List<CardPanel> attachedPanels) {
-        this.attachedPanels = attachedPanels; // TODO: Add 0 to parameter's
-                                              // name.
+    public final void setAttachedPanels(final List<CardPanel> attachedPanels0) {
+        this.attachedPanels = attachedPanels0;
     }
 
     /**
@@ -760,11 +757,11 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * Sets the tapped.
      * 
-     * @param tapped
+     * @param tapped0
      *            the tapped to set
      */
-    public final void setTapped(final boolean tapped) {
-        this.tapped = tapped; // TODO: Add 0 to parameter's name.
+    public final void setTapped(final boolean tapped0) {
+        this.tapped = tapped0;
     }
 
     /**
@@ -779,10 +776,10 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * Sets the tapped angle.
      * 
-     * @param tappedAngle
+     * @param tappedAngle0
      *            the tappedAngle to set
      */
-    public final void setTappedAngle(final double tappedAngle) {
-        this.tappedAngle = tappedAngle; // TODO: Add 0 to parameter's name.
+    public final void setTappedAngle(final double tappedAngle0) {
+        this.tappedAngle = tappedAngle0;
     }
 }
