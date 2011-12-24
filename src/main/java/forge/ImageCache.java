@@ -21,15 +21,17 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import arcane.ui.util.ImageUtil;
 
-import com.google.common.base.Function;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ComputationException;
-import com.google.common.collect.MapMaker;
 import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.item.InventoryItem;
@@ -57,7 +59,7 @@ import forge.properties.NewConstants;
  */
 public class ImageCache {
     /** Constant <code>imageCache</code>. */
-    private static final Map<String, BufferedImage> IMAGE_CACHE;
+    private static final LoadingCache<String, BufferedImage> IMAGE_CACHE;
     /** Constant <code>FULL_SIZE</code>. */
     private static final Pattern FULL_SIZE = Pattern.compile("(.*)#(\\d+.\\d+)");
     /** Constant <code>TOKEN="#Token"</code> */
@@ -71,16 +73,18 @@ public class ImageCache {
     private static boolean scaleLargerThanOriginal = true;
 
     static {
-        IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+        IMAGE_CACHE = CacheBuilder.newBuilder().softValues().build(new CacheLoader<String, BufferedImage>() {
             @Override
-            public BufferedImage apply(String key) {
+            public BufferedImage load(String key) {
                 try {
                     // DEBUG
                     /*
-                     * System.out.printf("Currently %d %s in the cache%n",
-                     * imageCache.size(), imageCache.size() == 1?
-                     * "image":"images");
-                     */
+                    System.out.printf("Currently %d %s in the cache%n",
+                    IMAGE_CACHE.size(), IMAGE_CACHE.size() == 1 ?
+                     "image":"images");
+                    System.out.println("Contents: "+IMAGE_CACHE.toString());
+                    System.out.println("Stats: " + IMAGE_CACHE.stats());
+                    */
                     // DEBUG
                     // System.out.printf("New Image for key: %s%n", key);
                     if (key.endsWith(ImageCache.NORMAL)) {
@@ -114,8 +118,8 @@ public class ImageCache {
                         file = new File(path, fName);
                         if (!file.exists()) {
                             // DEBUG
-                            // System.out.println("File not found, no image created: "
-                            // + file);
+                             System.out.println("File not found, no image created: "
+                             + file);
                             return null;
                         }
                         final BufferedImage image = ImageUtil.getImage(file);
@@ -234,21 +238,24 @@ public class ImageCache {
             // if an image is still cached and it was not the expected size,
             // drop it
             if (!ImageCache.isExpectedSize(key, image)) {
-                ImageCache.IMAGE_CACHE.remove(key);
+                ImageCache.IMAGE_CACHE.invalidate(key);
                 image = ImageCache.IMAGE_CACHE.get(key);
             }
             return image;
-        } catch (final NullPointerException ex) {
-            // unfortunately NullOutputException, thrown when apply() returns
-            // null, is not public
-            // NullOutputException is a subclass of NullPointerException
-            // legitimate, happens when a card has no image
-            return null;
-        } catch (final ComputationException ex) {
+        } catch (final ExecutionException ex) {
             if (ex.getCause() instanceof NullPointerException) {
                 return null;
             }
             ex.printStackTrace();
+            return null;
+        } catch (final InvalidCacheLoadException ex) {
+        	// should be when a card legitimately has no image
+            return null;
+        } catch (final ComputationException ce) {
+        	if (ce.getCause() instanceof NullPointerException) {
+                return null;
+            }
+            ce.printStackTrace();
             return null;
         }
     }
@@ -414,7 +421,7 @@ public class ImageCache {
      * </p>
      */
     public static void clear() {
-        ImageCache.IMAGE_CACHE.clear();
+        ImageCache.IMAGE_CACHE.invalidateAll();
     }
 
     /**
@@ -429,14 +436,10 @@ public class ImageCache {
     /**
      * Sets the scale larger than original.
      * 
-     * @param scaleLargerThanOriginal
-     *            the scaleLargerThanOriginal to set
+     * @param scaleLargerThanOriginal0
+     *            the scaleLargerThanOriginal0 to set
      */
-    public static void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal) {
-        ImageCache.scaleLargerThanOriginal = scaleLargerThanOriginal; // TODO:
-                                                                      // Add 0
-                                                                      // to
-                                                                      // parameter's
-                                                                      // name.
+    public static void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal0) {
+        ImageCache.scaleLargerThanOriginal = scaleLargerThanOriginal0;
     }
 }

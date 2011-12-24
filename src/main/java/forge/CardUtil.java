@@ -1014,7 +1014,7 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(types);
 
-        ret.setImageFilename("morph.jpg");
+        ret.setImageFilename("morph");
 
         return ret;
 
