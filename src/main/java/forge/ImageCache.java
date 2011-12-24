@@ -118,8 +118,8 @@ public class ImageCache {
                         file = new File(path, fName);
                         if (!file.exists()) {
                             // DEBUG
-                             System.out.println("File not found, no image created: "
-                             + file);
+                            //System.out.println("File not found, no image created: "
+                            //+ file);
                             return null;
                         }
                         final BufferedImage image = ImageUtil.getImage(file);
