@@ -712,39 +712,6 @@ public class ManaPool {
      * subtractOne.
      * </p>
      * 
-     * @param manaStr
-     *            a {@link java.lang.String} object.
-     */
-    public final void subtractOne(final String manaStr) {
-        // Just subtract from floating, used by removeExtrinsicKeyword
-        final ManaCost manaCost = new ManaCost(manaStr);
-        if (manaStr.trim().equals("") || manaCost.isPaid()) {
-            return;
-        }
-
-        // get a mana of this type from floating, bail if none available
-        final Mana mana = this.getManaFrom(this.floatingMana, manaStr);
-        if (mana == null) {
-            return; // no matching mana in the pool
-        }
-
-        final Mana[] manaArray = mana.toSingleArray();
-
-        for (final Mana m : manaArray) {
-            if (manaCost.isNeeded(m)) {
-                manaCost.payMana(m);
-                this.findAndRemoveFrom(this.floatingMana, m);
-            } else {
-                break;
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * subtractOne.
-     * </p>
-     * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param manaCost
