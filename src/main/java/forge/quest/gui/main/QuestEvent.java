@@ -130,70 +130,70 @@ public class QuestEvent {
     /**
      * Sets the event type.
      * 
-     * @param eventType
+     * @param eventType0
      *            the eventType to set
      */
-    public void setEventType(final String eventType) {
-        this.eventType = eventType; // TODO: Add 0 to parameter's name.
+    public void setEventType(final String eventType0) {
+        this.eventType = eventType0;
     }
 
     /**
      * Sets the name.
      * 
-     * @param name
+     * @param name0
      *            the name to set
      */
-    public void setName(final String name) {
-        this.name = name; // TODO: Add 0 to parameter's name.
+    public void setName(final String name0) {
+        this.name = name0;
     }
 
     /**
      * Sets the title.
      * 
-     * @param title
+     * @param title0
      *            the title to set
      */
-    public void setTitle(final String title) {
-        this.title = title; // TODO: Add 0 to parameter's name.
+    public void setTitle(final String title0) {
+        this.title = title0;
     }
 
     /**
      * Sets the difficulty.
      * 
-     * @param difficulty
+     * @param difficulty0
      *            the difficulty to set
      */
-    public void setDifficulty(final String difficulty) {
-        this.difficulty = difficulty; // TODO: Add 0 to parameter's name.
+    public void setDifficulty(final String difficulty0) {
+        this.difficulty = difficulty0;
     }
 
     /**
      * Sets the description.
      * 
-     * @param description
+     * @param description0
      *            the description to set
      */
-    public void setDescription(final String description) {
-        this.description = description; // TODO: Add 0 to parameter's name.
+    public void setDescription(final String description0) {
+        this.description = description0;
     }
 
     /**
      * Sets the event deck.
      * 
-     * @param eventDeck
+     * @param eventDeck0
      *            the eventDeck to set
      */
-    public void setEventDeck(final Deck eventDeck) {
-        this.eventDeck = eventDeck; // TODO: Add 0 to parameter's name.
+    public void setEventDeck(final Deck eventDeck0) {
+        this.eventDeck = eventDeck0;
     }
 
     /**
      * Sets the icon.
      * 
-     * @param icon
+     * @param icon0
      *            the icon to set
      */
-    public void setIcon(final String icon) {
-        this.icon = icon; // TODO: Add 0 to parameter's name.
+    public void setIcon(final String icon0) {
+        this.icon = icon0;
     }
 }
