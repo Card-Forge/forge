@@ -43,9 +43,11 @@ Your decks can be placed in the decks folder, your pics can be placed in the pic
 
 Picture location info:
 
-The quest opponent icons jpg picture files go into your /res/pics/icons folder. The quest booster package jpg picture files go into your /res/pics/booster folder. The card token jpg picture files go into your /res/pics/tokens folder.
+The quest opponent icons jpg picture files go into your /res/images/icons folder. Please note that the /res/pics/icons/ folder was moved out of this folder and placed in the /res/images/ folder.
 
-The quest pets archive contains two subdirectories named "icons" and "tokens". Place the files located inside of the /icons/ folder into the /res/pics/icons/ folder. Place the files located inside of the /tokens/ folder into the /res/pics/tokens/ folder.
+The quest booster package jpg picture files go into your /res/pics/booster folder. The card token jpg picture files go into your /res/pics/tokens folder.
+
+The quest pets archive contains two subdirectories named "icons" and "tokens". Place the files located inside of the /icons/ folder into the /res/images/icons/ folder. Place the files located inside of the /tokens/ folder into the /res/pics/tokens/ folder.
 
 Your forge game may not come with one or more of these three folders as part of the forge archive. In this case you should use your computer's OS file system to create the proper folders with the correct names and they must be located inside of the /res/pics/ folder.
 
