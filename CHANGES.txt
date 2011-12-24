@@ -556,6 +556,17 @@ Notes:
 - hook up the Play Unlimited Lands DevMode button and save state on close.
 - Memory leak hunt: observers deleted before adding fresh ones in match UI
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- NOTE: THIS CHECKIN MAKES THE OLD UI NON-FUNCTIONAL.
+- The ManaPool will no longer inherit from Card and will remove the ManaPool from the Battlefield.
+- Checkstyle.
+- AI will now start with Challenge cards in the first game of a quest duel
+- StringBuilder.
+- Added Sol's fix to stop the AI from playing multiple lands.
+- Added Sol's fix to stop the AI from playing multiple lands.
+- Added Slapshot's fix which prevents the human from playing multiple lands when dev mode is off.
+- help text fixes in ControlDraft
+- fixed ManaCost for Doomgape
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
