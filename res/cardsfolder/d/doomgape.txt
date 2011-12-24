@@ -1,5 +1,5 @@
 Name:Doomgape
-ManaCost:5 BG BG BG
+ManaCost:4 BG BG BG
 Types:Creature Elemental
 Text:no text
 PT:10/10
