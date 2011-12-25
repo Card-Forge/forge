@@ -51,7 +51,7 @@ public class ViewConstructed extends JPanel {
         // Start button
         btnStart = new StartButton(parentView);
 
-        this.add(btnStart, "gaptop 2%, span 5 1, ax center");
+        this.add(btnStart, "gaptop 2%, span 5 1, ax center, gapleft 6%");
 
         // When all components have been added, add listeners.
         control.updateDeckNames();
