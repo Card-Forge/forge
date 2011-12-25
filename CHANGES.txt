@@ -567,6 +567,17 @@ Notes:
 - help text fixes in ControlDraft
 - fixed ManaCost for Doomgape
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- fix Puppeteer Clique to exile at only your end step, not any end step.
+- Removing unused function in ManaPool.java
+- TODO cleanups in QuestEvent
+- ImageCache now uses LoadingCache and CacheBuilder.build() instead of the deprecated (in Guava 11.0) MapMaker.makeComputingMap(). Please post to the forums if you see any exceptions/problems related to ImageCache.
+- commenting out some debug code
+- Revising README.txt
+- Revising README.txt
+- Minor adjustments to the spacing for the components in the constructed view.
+- Minor adjustments to the spacing for the components in the constructed view.
+- Let us add a "gapleft 6%" to the btnStart in ViewConstructed as this will do a better job of centering this button.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
