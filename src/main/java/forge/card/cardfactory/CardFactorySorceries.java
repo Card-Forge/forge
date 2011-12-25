@@ -1782,12 +1782,12 @@ public class CardFactorySorceries {
             spell.setBeforePayMana(input);
         } // *************** END ************ END **************************
 
-        // *************** START *********** START **************************
+        /*************** START *********** START **************************
         else if (cardName.equals("Recall")) {
             /*
              * Discard X cards, then return a card from your graveyard to your
              * hand for each card discarded this way. Exile Recall.
-             */
+             *
             final Cost cost = new Cost(card.getManaCost(), cardName, false);
             final SpellAbility spell = new Spell(card, cost, null) {
                 private static final long serialVersionUID = -3935814273439962834L;
@@ -1820,7 +1820,7 @@ public class CardFactorySorceries {
                      * CardFactoryUtil.AI_getBestCreature(grave); if(null != t1)
                      * { t1 = grave.get(0); grave.remove(t1);
                      * AllZone.getGameAction().moveToHand(t1); } } }
-                     */
+                     *
                 } // resolve()
             }; // SpellAbility
 
@@ -1830,6 +1830,7 @@ public class CardFactorySorceries {
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
+        */
 
         // *************** START *********** START **************************
         else if (cardName.equals("Windfall")) {

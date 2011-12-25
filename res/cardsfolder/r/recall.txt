@@ -1,8 +1,13 @@
 Name:Recall
 ManaCost:X X U
 Types:Sorcery
-Text:Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile CARDNAME.
+Text:no text
+A:SP$ Discard | Cost$ X X U | Defined$ You | Mode$ TgtChoose | NumCards$ X | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile CARDNAME.
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.YouOwn | ChangeNum$ Y | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBExile
+SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ Cleanup
+SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
+SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recall.jpg

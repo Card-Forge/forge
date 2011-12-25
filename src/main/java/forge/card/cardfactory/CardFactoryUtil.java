@@ -1880,6 +1880,7 @@ public class CardFactoryUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return input
      */
+    /*
     public static Input inputDiscardRecall(final int numCards, final Card recall, final SpellAbility sa) {
         final Input target = new Input() {
             private static final long serialVersionUID = 1942999595292561944L;
@@ -1929,6 +1930,7 @@ public class CardFactoryUtil {
         };
         return target;
     } // input_discardRecall()
+    */
 
     /**
      * <p>
