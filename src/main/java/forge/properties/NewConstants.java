@@ -180,7 +180,7 @@ public final class NewConstants {
         /** The PRICE. */
         public static final String PRICE = "quest/price";
 
-        /** The BOOSTE r_ price. */
+        /** The BOOSTER_PRICE. */
         public static final String BOOSTER_PRICE = "quest/boosterprice";
 
         /** The DATA. */
@@ -273,13 +273,13 @@ public final class NewConstants {
             /** The MESSAGE. */
             public static final String MESSAGE = "%s/ErrorViewer/message";
 
-            /** The BUTTO n_ save. */
+            /** The BUTTON_SAVE. */
             public static final String BUTTON_SAVE = "%s/ErrorViewer/button/save";
 
-            /** The BUTTO n_ close. */
+            /** The BUTTON_CLOSE. */
             public static final String BUTTON_CLOSE = "%s/ErrorViewer/button/close";
 
-            /** The BUTTO n_ exit. */
+            /** The BUTTON_EXIT. */
             public static final String BUTTON_EXIT = "%s/ErrorViewer/button/exit";
 
             /**
@@ -287,10 +287,10 @@ public final class NewConstants {
              */
             public static class ERRORS {
 
-                /** The SAV e_ message. */
+                /** The SAVE_MESSAGE. */
                 public static final String SAVE_MESSAGE = "%s/ErrorViewer/errors/save/message";
 
-                /** The SHO w_ message. */
+                /** The SHOW_MESSAGE. */
                 public static final String SHOW_MESSAGE = "%s/ErrorViewer/errors/show/message";
             }
         }
@@ -300,25 +300,25 @@ public final class NewConstants {
          */
         public static class GuiBoosterDraft {
 
-            /** The CLOS e_ message. */
+            /** The CLOSE_MESSAGE. */
             public static final String CLOSE_MESSAGE = "%s/BoosterDraft/close/message";
 
-            /** The SAV e_ message. */
+            /** The SAVE_MESSAGE. */
             public static final String SAVE_MESSAGE = "%s/BoosterDraft/save/message";
 
-            /** The SAV e_ title. */
+            /** The SAVE_TITLE. */
             public static final String SAVE_TITLE = "%s/BoosterDraft/save/title";
 
-            /** The RENAM e_ message. */
+            /** The RENAME_MESSAGE. */
             public static final String RENAME_MESSAGE = "%s/BoosterDraft/rename/message";
 
-            /** The RENAM e_ title. */
+            /** The RENAME_TITLE. */
             public static final String RENAME_TITLE = "%s/BoosterDraft/rename/title";
 
-            /** The SAV e_ draf t_ message. */
+            /** The SAVE_DRAFT_MESSAGE. */
             public static final String SAVE_DRAFT_MESSAGE = "%s/BoosterDraft/saveDraft/message";
 
-            /** The SAV e_ draf t_ title. */
+            /** The SAVE_DRAFT_TITLE. */
             public static final String SAVE_DRAFT_TITLE = "%s/BoosterDraft/saveDraft/title";
         }
 
@@ -360,10 +360,10 @@ public final class NewConstants {
                 }
             }
 
-            /** The HUMA n_ title. */
+            /** The HUMA_TITLE. */
             public static final String HUMAN_TITLE = "%s/Display/human/title";
 
-            /** The HUMA n_ decklist. */
+            /** The HUMAN_DECKLIST. */
             public static final String HUMAN_DECKLIST = "%s/Display/human/decklist";
 
             /**
@@ -402,7 +402,7 @@ public final class NewConstants {
                 public static final String BUTTON = "%s/Display/human/library/button";
             }
 
-            /** The HUMA n_ graveyard. */
+            /** The HUMAN_GRAVEYARD. */
             public static final String HUMAN_GRAVEYARD = "%s/Display/human/graveyard";
 
             /**
@@ -420,7 +420,7 @@ public final class NewConstants {
                 public static final String MENU = "%s/Display/human/graveyard/menu";
             }
 
-            /** The HUMA n_ removed. */
+            /** The HUMAN_REMOVED. */
             public static final String HUMAN_REMOVED = "%s/Display/human/removed";
 
             /**
@@ -441,10 +441,10 @@ public final class NewConstants {
             /** The COMBAT. */
             public static final String COMBAT = "%s/Display/combat/title";
 
-            /** The HUMA n_ flashback. */
+            /** The HUMAN_FLASHABCK. */
             public static final String HUMAN_FLASHBACK = "%s/Display/human/flashback";
 
-            /**  */
+            /** The COMPUTER_FLASHBACK */
             public static final String COMPUTER_FLASHBACK = "%s/Display/computer/flashback";
 
             /**
@@ -477,7 +477,7 @@ public final class NewConstants {
                 public static final String MENU = "%s/Display/computer/flashback/menu";
             }
 
-            /** The COMPUTE r_ title. */
+            /** The COMPUTER_TITLE. */
             public static final String COMPUTER_TITLE = "%s/Display/computer/title";
 
             /**
@@ -534,7 +534,7 @@ public final class NewConstants {
                 public static final String MENU = "%s/Display/computer/graveyard/menu";
             }
 
-            /** The COMPUTE r_ removed. */
+            /** The COMPUTER_REMOVED. */
             public static final String COMPUTER_REMOVED = "%s/Display/computer/removed";
 
             /**
@@ -711,31 +711,31 @@ public final class NewConstants {
             /** The TITLE. */
             public static final String TITLE = "%s/DownloadPictures/title";
 
-            /** The PROX y_ address. */
+            /** The PROXY_ADDRESS. */
             public static final String PROXY_ADDRESS = "%s/DownloadPictures/proxy/address";
 
-            /** The PROX y_ port. */
+            /** The PROXY_PORT. */
             public static final String PROXY_PORT = "%s/DownloadPictures/proxy/port";
 
-            /** The N o_ proxy. */
+            /** The NO_PROXY. */
             public static final String NO_PROXY = "%s/DownloadPictures/proxy/type/none";
 
-            /** The HTT p_ proxy. */
+            /** The HTTP_PROXY. */
             public static final String HTTP_PROXY = "%s/DownloadPictures/proxy/type/http";
 
-            /** The SOCK s_ proxy. */
+            /** The SOCKS_PROXY. */
             public static final String SOCKS_PROXY = "%s/DownloadPictures/proxy/type/socks";
 
-            /** The N o_ more. */
+            /** The NO_MORE. */
             public static final String NO_MORE = "%s/DownloadPictures/no-more";
 
-            /** The BA r_ befor e_ start. */
+            /** The BAR_BEFORE_START. */
             public static final String BAR_BEFORE_START = "%s/DownloadPictures/bar/before-start";
 
-            /** The BA r_ wait. */
+            /** The BAR_WAIT. */
             public static final String BAR_WAIT = "%s/DownloadPictures/bar/wait";
 
-            /** The BA r_ close. */
+            /** The BAR_CLOSE. */
             public static final String BAR_CLOSE = "%s/DownloadPictures/bar/close";
 
             /**
@@ -758,7 +758,7 @@ public final class NewConstants {
              */
             public static class Errors {
 
-                /** The PROX y_ connect. */
+                /** The PROXY_CONNECT. */
                 public static final String PROXY_CONNECT = "%s/DownloadPictures/errors/proxy/connect";
 
                 /** The OTHER. */
@@ -785,16 +785,16 @@ public final class NewConstants {
                 /** The SETTINGS. */
                 public static final String SETTINGS = "%s/NewGame/settings";
 
-                /** The NE w_ game. */
+                /** The NEW_GAME. */
                 public static final String NEW_GAME = "%s/NewGame/new_game";
 
-                /** The CONSTRUCTE d_ text. */
+                /** The CONSTRUCTED_TEXT. */
                 public static final String CONSTRUCTED_TEXT = "%s/NewGame/constructed_text";
 
-                /** The SEALE d_ text. */
+                /** The SEALED_TEXT. */
                 public static final String SEALED_TEXT = "%s/NewGame/sealed_text";
 
-                /** The BOOSTE r_ text. */
+                /** The BOOSTER_TEXT. */
                 public static final String BOOSTER_TEXT = "%s/NewGame/booster_text";
 
                 /** The YOURDECK. */
@@ -803,28 +803,28 @@ public final class NewConstants {
                 /** The OPPONENT. */
                 public static final String OPPONENT = "%s/NewGame/opponent";
 
-                /** The DEC k_ editor. */
+                /** The DECK_EDITOR. */
                 public static final String DECK_EDITOR = "%s/NewGame/deckeditor";
 
-                /** The NE w_ gui. */
+                /** The NEW_GUI. */
                 public static final String OLD_GUI = "%s/NewGame/oldgui";
 
-                /** The A i_ land. */
+                /** The AI_LAND. */
                 public static final String AI_LAND = "%s/NewGame/ailand";
 
-                /** The DE v_ mode. */
+                /** The DEV_MODE. */
                 public static final String DEV_MODE = "%s/NewGame/devmode";
 
-                /** The QUES t_ mode. */
+                /** The QUEST_MODE. */
                 public static final String QUEST_MODE = "%s/NewGame/questmode";
 
-                /** The STAR t_ game. */
+                /** The START_GAME. */
                 public static final String START_GAME = "%s/NewGame/startgame";
 
-                /** The SAV e_ seale d_ msg. */
+                /** The SAVE_SEALED_MSG. */
                 public static final String SAVE_SEALED_MSG = "%s/NewGame/savesealed_msg";
 
-                /** The SAV e_ seale d_ ttl. */
+                /** The SAVE_SEALED_TTL. */
                 public static final String SAVE_SEALED_TTL = "%s/NewGame/savesealed_ttl";
 
             }
@@ -860,13 +860,13 @@ public final class NewConstants {
                     /** The IMPORTPICTURE. */
                     public static final String IMPORTPICTURE = "%s/NewGame/menu/importPicture";
 
-                    /** The CAR d_ sizes. */
+                    /** The CARD_SIZES. */
                     public static final String CARD_SIZES = "%s/NewGame/menu/cardSizes";
 
-                    /** The CAR d_ stack. */
+                    /** The CARD_STACK. */
                     public static final String CARD_STACK = "%s/NewGame/menu/cardStack";
 
-                    /** The CAR d_ stac k_ offset. */
+                    /** The CARD_STACK_OFFSET. */
                     public static final String CARD_STACK_OFFSET = "%s/NewGame/menu/cardStackOffset";
 
                     /** The ABOUT. */
@@ -887,10 +887,10 @@ public final class NewConstants {
                     /** The FONT. */
                     public static final String FONT = "%s/NewGame/options/font";
 
-                    /** The CAR d_ overlay. */
+                    /** The CARD_OVERLAY. */
                     public static final String CARD_OVERLAY = "%s/NewGame/options/cardOverlay";
 
-                    /** The CAR d_ scale. */
+                    /** The CARD_SCALE. */
                     public static final String CARD_SCALE = "%s/NewGame/options/cardScale";
 
                     /**
@@ -904,10 +904,10 @@ public final class NewConstants {
                         /** The Constant SINGLETONS. */
                         public static final String SINGLETONS = "%s/NewGame/options/generate/singletons";
 
-                        /** The REMOV e_ small. */
+                        /** The REMOVE_SMALL. */
                         public static final String REMOVE_SMALL = "%s/NewGame/options/generate/removeSmall";
 
-                        /** The REMOV e_ artifacts. */
+                        /** The REMOVE_ARTIFACTS. */
                         public static final String REMOVE_ARTIFACTS = "%s/NewGame/options/generate/removeArtifacts";
                     }
                 }
@@ -936,7 +936,7 @@ public final class NewConstants {
         public static class WinLoseFrame {
 
             /**
-             * The Interface WINLOSETEXT.
+             * The Interface WinLoseText.
              */
             public static class WinLoseText {
 
@@ -967,12 +967,12 @@ public final class NewConstants {
 
         // Doublestrike 02-10-11 - this is soon to be deprecated.
         /**
-         * The Interface Gui_WinLose.
+         * The Interface GuiWinLose.
          */
         public static class GuiWinLose {
 
             /**
-             * The Interface WINLOSE_TEXT.
+             * The Interface WinLoseText.
              */
             public static class WinLoseText {
 
@@ -1000,19 +1000,19 @@ public final class NewConstants {
         }
 
         /**
-         * The Interface Gui_DownloadPrices.
+         * The Interface GuiDownloadPrices.
          */
         public static class GuiDownloadPrices {
 
             /**
-             * The Interface DOWNLOADPRICES.
+             * The Interface DownloadPrices.
              */
             public static class DownloadPrices {
 
                 /** The TITLE. */
                 public static final String TITLE = "%s/DownloadPrices/title";
 
-                /** The STAR t_ update. */
+                /** The START_UPDATE. */
                 public static final String START_UPDATE = "%s/DownloadPrices/startupdate";
 
                 /** The DOWNLOADING. */
@@ -1029,7 +1029,7 @@ public final class NewConstants {
         public static class GameAction {
 
             /**
-             * The Interface GAMEACTION_TEXT.
+             * The Interface GameActionText.
              */
             public static class GameActionText {
 
@@ -1039,46 +1039,46 @@ public final class NewConstants {
                 /** The TAILS. */
                 public static final String TAILS = "%s/GameAction/tails";
 
-                /** The HEAD s_ o r_ tails. */
+                /** The HEADS_OR_TAILS. */
                 public static final String HEADS_OR_TAILS = "%s/GameAction/heads_or_tails";
 
-                /** The COI n_ toss. */
+                /** The COIN_TOSS. */
                 public static final String COIN_TOSS = "%s/GameAction/coin_toss";
 
-                /** The HUMA n_ win. */
+                /** The HUMAN_WIN. */
                 public static final String HUMAN_WIN = "%s/GameAction/human_win";
 
-                /** The COMPUTE r_ win. */
+                /** The COMPUTER_WIN. */
                 public static final String COMPUTER_WIN = "%s/GameAction/computer_win";
 
-                /** The COMPUTE r_ starts. */
+                /** The COMPUTER_STARTS. */
                 public static final String COMPUTER_STARTS = "%s/GameAction/computer_starts";
 
-                /** The HUMA n_ starts. */
+                /** The HUMAN_STARTS. */
                 public static final String HUMAN_STARTS = "%s/GameAction/human_starts";
 
-                /** The HUMA n_ man a_ cost. */
+                /** The HUMAN_MANA_COST. */
                 public static final String HUMAN_MANA_COST = "%s/GameAction/human_mana_cost";
 
-                /** The COMPUTE r_ man a_ cost. */
+                /** The COMPUTER_MANA_COST. */
                 public static final String COMPUTER_MANA_COST = "%s/GameAction/computer_mana_cost";
 
-                /** The COMPUTE r_ cut. */
+                /** The COMPUTER_CUT. */
                 public static final String COMPUTER_CUT = "%s/GameAction/computer_cut";
 
-                /** The HUMA n_ cut. */
+                /** The HUMAN_CUT. */
                 public static final String HUMAN_CUT = "%s/GameAction/human_cut";
 
-                /** The CU t_ number. */
+                /** The CUT_NUMBER. */
                 public static final String CUT_NUMBER = "%s/GameAction/cut_number";
 
-                /** The RESOLV e_ starter. */
+                /** The RESOLVE_STARTER. */
                 public static final String RESOLVE_STARTER = "%s/GameAction/resolve_starter";
 
-                /** The EQUA l_ converte d_ mana. */
+                /** The EQUAL_CONVERTED_MANA. */
                 public static final String EQUAL_CONVERTED_MANA = "%s/GameAction/equal_converted_mana";
 
-                /** The CUTTIN g_ again. */
+                /** The CUTTING_AGAIN. */
                 public static final String CUTTING_AGAIN = "%s/GameAction/cutting_again";
 
                 /** The YES. */
@@ -1087,13 +1087,13 @@ public final class NewConstants {
                 /** The NO. */
                 public static final String NO = "%s/GameAction/no";
 
-                /** The WAN t_ dredge. */
+                /** The WANT_DREDGE. */
                 public static final String WANT_DREDGE = "%s/GameAction/want_dredge";
 
-                /** The SELEC t_ dredge. */
+                /** The SELECT_DREDGE. */
                 public static final String SELECT_DREDGE = "%s/GameAction/select_dredge";
 
-                /** The CHOOS e_2 n d_ land. */
+                /** The CHOOSE_2ND_LAND. */
                 public static final String CHOOSE_2ND_LAND = "%s/GameAction/choose_2nd_land";
 
             }
