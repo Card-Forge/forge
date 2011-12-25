@@ -186,25 +186,25 @@ public class ViewConstructed extends JPanel {
         JPanel colorsContainer = new JPanel();
         colorsContainer.setOpaque(false);
         colorsContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        colorsContainer.add(lblColorInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
-        colorsContainer.add(new FScrollPane(lstColorsAI), "w 100%!, h 89%!, wrap");
+        colorsContainer.add(lblColorInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
+        colorsContainer.add(new FScrollPane(lstColorsAI), "w 100%!, h 87%!, wrap");
 
         JPanel themeContainer = new JPanel();
         themeContainer.setOpaque(false);
         themeContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        themeContainer.add(lblThemeInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
-        themeContainer.add(new FScrollPane(lstThemesAI), "w 100%!, h 75%!, wrap");
+        themeContainer.add(lblThemeInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
+        themeContainer.add(new FScrollPane(lstThemesAI), "w 100%!, h 73%!, wrap");
         themeContainer.add(btnAIRandomTheme, "w 100%!, h 12%!, gaptop 2.5%");
 
         JPanel decksContainer = new JPanel();
         decksContainer.setOpaque(false);
         decksContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        decksContainer.add(lblDecklistInfo, "w 100%!, h 8%!, gapbottom 2%, wrap");
-        decksContainer.add(new FScrollPane(lstDecksAI), "w 100%!, h 75%!, wrap");
+        decksContainer.add(lblDecklistInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
+        decksContainer.add(new FScrollPane(lstDecksAI), "w 100%!, h 73%!, wrap");
         decksContainer.add(btnAIRandomDeck, "w 100%!, h 12%!, gaptop 2.5%");
 
-        String listConstraints = "w 28%!, h 30%!";
-        String orConstraints = "w 5%!, h 30%!";
+        String listConstraints = "w 28%!, h 31%!";
+        String orConstraints = "w 5%!, h 31%!";
 
         this.add(lblAI, "w 94%!, h 5%!, gap 3% 0 5% 0, span 5 1, wrap");
         this.add(colorsContainer, listConstraints + ", gapleft 3%");
