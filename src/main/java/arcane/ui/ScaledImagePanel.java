@@ -345,11 +345,11 @@ public class ScaledImagePanel extends JPanel {
     /**
      * Sets the src image.
      * 
-     * @param srcImage
+     * @param srcImage0
      *            the srcImage to set
      */
-    public void setSrcImage(final Image srcImage) {
-        this.srcImage = srcImage; // TODO: Add 0 to parameter's name.
+    public void setSrcImage(final Image srcImage0) {
+        this.srcImage = srcImage0;
     }
 
     /**
@@ -364,12 +364,11 @@ public class ScaledImagePanel extends JPanel {
     /**
      * Sets the src image blurred.
      * 
-     * @param srcImageBlurred
+     * @param srcImageBlurred0
      *            the srcImageBlurred to set
      */
-    public void setSrcImageBlurred(final Image srcImageBlurred) {
-        this.srcImageBlurred = srcImageBlurred; // TODO: Add 0 to parameter's
-                                                // name.
+    public void setSrcImageBlurred(final Image srcImageBlurred0) {
+        this.srcImageBlurred = srcImageBlurred0;
     }
 
     private static class ScalingInfo {

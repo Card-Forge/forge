@@ -600,11 +600,11 @@ public abstract class CardPanelContainer extends JPanel {
     /**
      * Sets the card panels.
      * 
-     * @param cardPanels
+     * @param cardPanels0
      *            the cardPanels to set
      */
-    public final void setCardPanels(final List<CardPanel> cardPanels) {
-        this.cardPanels = cardPanels; // TODO: Add 0 to parameter's name.
+    public final void setCardPanels(final List<CardPanel> cardPanels0) {
+        this.cardPanels = cardPanels0;
     }
 
     /**
@@ -619,11 +619,10 @@ public abstract class CardPanelContainer extends JPanel {
     /**
      * Sets the mouse drag panel.
      * 
-     * @param mouseDragPanel
+     * @param mouseDragPanel0
      *            the mouseDragPanel to set
      */
-    public void setMouseDragPanel(final CardPanel mouseDragPanel) {
-        this.mouseDragPanel = mouseDragPanel; // TODO: Add 0 to parameter's
-                                              // name.
+    public void setMouseDragPanel(final CardPanel mouseDragPanel0) {
+        this.mouseDragPanel = mouseDragPanel0;
     }
 }
