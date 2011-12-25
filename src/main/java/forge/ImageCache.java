@@ -32,6 +32,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ComputationException;
+import com.google.common.util.concurrent.UncheckedExecutionException;
 import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.item.InventoryItem;
@@ -256,6 +257,10 @@ public class ImageCache {
                 return null;
             }
             ce.printStackTrace();
+            return null;
+        } catch (final UncheckedExecutionException uee) {
+            //this is for the case where "Player" shows up as a Card in GuiMultipleBlockers
+            //when human attacker has Trample
             return null;
         }
     }
