@@ -1671,7 +1671,7 @@ public abstract class SpellAbility {
      *            the isDelve to set
      */
     public final void setIsDelve(final boolean isDelve0) {
-        this.isDelve = isDelve0; // TODO Add 0 to parameter's name.
+        this.isDelve = isDelve0;
     }
 
     /**
@@ -1704,11 +1704,11 @@ public abstract class SpellAbility {
     /**
      * Sets the chosen target.
      * 
-     * @param chosenTarget
+     * @param chosenTarget0
      *            the chosenTarget to set
      */
-    public void setChosenTarget(final Target chosenTarget) {
-        this.chosenTarget = chosenTarget; // TODO: Add 0 to parameter's name.
+    public void setChosenTarget(final Target chosenTarget0) {
+        this.chosenTarget = chosenTarget0;
     }
 
     /**

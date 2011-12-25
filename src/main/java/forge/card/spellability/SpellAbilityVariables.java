@@ -23,7 +23,7 @@ import forge.Constant;
 
 /**
  * <p>
- * SpellAbility_Variables class.
+ * SpellAbilityVariables class.
  * </p>
  * 
  * @author Forge
@@ -632,11 +632,11 @@ public class SpellAbilityVariables {
     /**
      * Sets the pw ability.
      * 
-     * @param pwAbility
+     * @param pwAbility0
      *            the new pw ability
      */
-    public final void setPwAbility(final boolean pwAbility) {
-        this.pwAbility = pwAbility; // TODO Add 0 to parameter's name.
+    public final void setPwAbility(final boolean pwAbility0) {
+        this.pwAbility = pwAbility0;
     }
 
     /**
@@ -678,11 +678,11 @@ public class SpellAbilityVariables {
     /**
      * Sets the life total.
      * 
-     * @param lifeTotal
+     * @param lifeTotal0
      *            the lifeTotal to set
      */
-    public final void setLifeTotal(final String lifeTotal) {
-        this.lifeTotal = lifeTotal; // TODO Add 0 to parameter's name.
+    public final void setLifeTotal(final String lifeTotal0) {
+        this.lifeTotal = lifeTotal0;
     }
 
     /**
@@ -697,11 +697,11 @@ public class SpellAbilityVariables {
     /**
      * Sets the life amount.
      * 
-     * @param lifeAmount
+     * @param lifeAmount0
      *            the lifeAmount to set
      */
-    public final void setLifeAmount(final String lifeAmount) {
-        this.lifeAmount = lifeAmount; // TODO Add 0 to parameter's name.
+    public final void setLifeAmount(final String lifeAmount0) {
+        this.lifeAmount = lifeAmount0;
     }
 
     /**
@@ -716,11 +716,11 @@ public class SpellAbilityVariables {
     /**
      * Sets the phases.
      * 
-     * @param phases
+     * @param phases0
      *            the new phases
      */
-    public final void setPhases(final ArrayList<String> phases) {
-        this.phases = phases; // TODO Add 0 to parameter's name.
+    public final void setPhases(final ArrayList<String> phases0) {
+        this.phases = phases0;
     }
 
     /**
@@ -762,11 +762,11 @@ public class SpellAbilityVariables {
     /**
      * Sets the s var operand.
      * 
-     * @param sVarOperand
+     * @param sVarOperand0
      *            the sVarOperand to set
      */
-    public final void setsVarOperand(final String sVarOperand) {
-        this.sVarOperand = sVarOperand; // TODO Add 0 to parameter's name.
+    public final void setsVarOperand(final String sVarOperand0) {
+        this.sVarOperand = sVarOperand0;
     }
 
     /**
@@ -800,11 +800,11 @@ public class SpellAbilityVariables {
     /**
      * Sets the s var operator.
      * 
-     * @param sVarOperator
+     * @param sVarOperator0
      *            the sVarOperator to set
      */
-    public final void setsVarOperator(final String sVarOperator) {
-        this.sVarOperator = sVarOperator; // TODO: Add 0 to parameter's name.
+    public final void setsVarOperator(final String sVarOperator0) {
+        this.sVarOperator = sVarOperator0;
     }
 
     /**
@@ -828,11 +828,11 @@ public class SpellAbilityVariables {
     /**
      * Sets the cards in hand.
      * 
-     * @param cardsInHand
+     * @param cardsInHand0
      *            the cardsInHand to set
      */
-    public final void setCardsInHand(final int cardsInHand) {
-        this.cardsInHand = cardsInHand; // TODO: Add 0 to parameter's name.
+    public final void setCardsInHand(final int cardsInHand0) {
+        this.cardsInHand = cardsInHand0;
     }
 
     /**
@@ -853,4 +853,4 @@ public class SpellAbilityVariables {
         return this.anyPlayer;
     }
 
-} // end class SpellAbility_Variables
+} // end class SpellAbilityVariables

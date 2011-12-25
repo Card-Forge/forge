@@ -294,10 +294,10 @@ public final class CardColor implements Comparable<CardColor> {
     /**
      * Sets the null color.
      * 
-     * @param nullColor
+     * @param nullColor0
      *            the nullColor to set
      */
-    public static void setNullColor(final CardColor nullColor) {
-        CardColor.nullColor = nullColor; // TODO: Add 0 to parameter's name.
+    public static void setNullColor(final CardColor nullColor0) {
+        CardColor.nullColor = nullColor0;
     }
 }

@@ -114,11 +114,11 @@ public abstract class Trigger {
     /**
      * Sets the map params.
      * 
-     * @param mapParams
+     * @param mapParams0
      *            the mapParams to set
      */
-    public final void setMapParams(final HashMap<String, String> mapParams) {
-        this.mapParams = mapParams; // TODO: Add 0 to parameter's name.
+    public final void setMapParams(final HashMap<String, String> mapParams0) {
+        this.mapParams = mapParams0;
     }
 
     /** The run params. */
@@ -704,11 +704,11 @@ public abstract class Trigger {
     /**
      * Sets the intrinsic.
      * 
-     * @param isIntrinsic
+     * @param isIntrinsic0
      *            the isIntrinsic to set
      */
-    public void setIntrinsic(final boolean isIntrinsic) {
-        this.isIntrinsic = isIntrinsic; // TODO: Add 0 to parameter's name.
+    public void setIntrinsic(final boolean isIntrinsic0) {
+        this.isIntrinsic = isIntrinsic0;
     }
 
     /**
@@ -723,11 +723,11 @@ public abstract class Trigger {
     /**
      * Sets the run params.
      * 
-     * @param runParams
+     * @param runParams0
      *            the runParams to set
      */
-    public void setRunParams(final Map<String, Object> runParams) {
-        this.runParams = runParams; // TODO: Add 0 to parameter's name.
+    public void setRunParams(final Map<String, Object> runParams0) {
+        this.runParams = runParams0;
     }
 
     /**
@@ -742,12 +742,11 @@ public abstract class Trigger {
     /**
      * Sets the overriding ability.
      * 
-     * @param overridingAbility
+     * @param overridingAbility0
      *            the overridingAbility to set
      */
-    public void setOverridingAbility(final SpellAbility overridingAbility) {
-        this.overridingAbility = overridingAbility; // TODO: Add 0 to
-                                                    // parameter's name.
+    public void setOverridingAbility(final SpellAbility overridingAbility0) {
+        this.overridingAbility = overridingAbility0;
     }
 
     /**
@@ -762,10 +761,10 @@ public abstract class Trigger {
     /**
      * Sets the id.
      * 
-     * @param id
+     * @param id0
      *            the id to set
      */
-    public void setId(final int id) {
-        this.id = id; // TODO: Add 0 to parameter's name.
+    public void setId(final int id0) {
+        this.id = id0;
     }
 }
