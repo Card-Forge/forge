@@ -578,6 +578,8 @@ Notes:
 - Minor adjustments to the spacing for the components in the constructed view.
 - Let us add a "gapleft 6%" to the btnStart in ViewConstructed as this will do a better job of centering this button.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- fixed an exception in ImageCache when a human attacker has trample and a player shows up as a Card in GuiMultipleBlockers
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
