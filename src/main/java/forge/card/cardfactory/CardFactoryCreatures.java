@@ -451,29 +451,6 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*
-         * else if (cardName.equals("Sleeper Agent")) { final SpellAbility
-         * ability = new Ability(card, "0") {
-         * 
-         * @Override public void resolve() { // TODO this need to be targeted
-         * card.addController(card.getController().getOpponent()); //
-         * AllZone.getGameAction().changeController(new // CardList(card),
-         * card.getController(), // card.getController().getOpponent()); } };
-         * 
-         * final StringBuilder sb = new StringBuilder();
-         * sb.append("When Sleeper Agent enters the battlefield, ");
-         * sb.append("target opponent gains control of it.");
-         * ability.setStackDescription(sb.toString()); final Command intoPlay =
-         * new Command() { private static final long serialVersionUID =
-         * -3934471871041458847L;
-         * 
-         * @Override public void execute() {
-         * AllZone.getStack().addSimultaneousStackEntry(ability);
-         * 
-         * } // execute() }; card.addComesIntoPlayCommand(intoPlay); }
-         */// *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Phylactery Lich")) {
 
             final Command intoPlay = new Command() {
@@ -1249,25 +1226,6 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*else if (cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
-                || cardName.equals("Feral Hydra") || cardName.equals("Krakilin") || cardName.equals("Ivy Elemental")
-                || cardName.equals("Lightning Serpent")) {
-
-            final SpellAbility spell = new SpellPermanent(card) {
-                private static final long serialVersionUID = 7708945715867177172L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return super.canPlay()
-                            && (4 <= (ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card
-                                    .getManaCost())));
-                }
-            };
-            card.clearFirstSpell();
-            card.addFirstSpellAbility(spell);
-        }*/ // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Apocalypse Hydra")) {
             final SpellAbility spell = new SpellPermanent(card) {
                 private static final long serialVersionUID = -11489323313L;
@@ -1549,20 +1507,6 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*
-         * else if (cardName.equals("Deadly Grub")) { final Command destroy =
-         * new Command() { private static final long serialVersionUID =
-         * -4352349741511065318L;
-         * 
-         * @Override public void execute() { if (card.getCounters(Counters.TIME)
-         * <= 0) { CardFactoryUtil.makeToken("Insect", "G 6 1 Insect",
-         * card.getController(), "G", new String[] { "Creature", "Insect" }, 6,
-         * 1, new String[] { "Shroud" }); } } };
-         * 
-         * card.addDestroyCommand(destroy); }
-         */// *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Kinsbaile Borderguard")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -1633,61 +1577,6 @@ public class CardFactoryCreatures {
             card.addDestroyCommand(destroy);
 
         } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        /*else if (cardName.equals("Kavu Titan")) {
-            final SpellAbility kicker = new Spell(card) {
-                private static final long serialVersionUID = -1598664196463358630L;
-
-                @Override
-                public void resolve() {
-                    card.setKicked(true);
-                    AllZone.getGameAction().moveToPlay(card);
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay() && AllZone.getPhase().getPlayerTurn().equals(card.getController())
-                            && !AllZone.getPhase().getPhase().equals("End of Turn") && !AllZoneUtil.isCardInPlay(card);
-                }
-
-            };
-            kicker.setKickerAbility(true);
-            kicker.setManaCost("3 G G");
-            kicker.setAdditionalManaCost("2 G");
-            kicker.setDescription("Kicker 2 G");
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Creature 5/5 (Kicked)");
-            kicker.setStackDescription(sb.toString());
-
-            card.addSpellAbility(kicker);
-
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.P1P1, 3);
-                    card.addIntrinsicKeyword("Trample");
-
-                    card.setKicked(false);
-                }
-            };
-
-            final Command commandComes = new Command() {
-                private static final long serialVersionUID = -2622859088591798773L;
-
-                @Override
-                public void execute() {
-                    if (card.isKicked()) {
-                        ability.setStackDescription("Kavu Titan gets 3 +1/+1 counters and gains trample.");
-                        AllZone.getStack().addSimultaneousStackEntry(ability);
-
-                    }
-                } // execute()
-            }; // CommandComes
-
-            card.addComesIntoPlayCommand(commandComes);
-        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
