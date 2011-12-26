@@ -444,7 +444,7 @@ public final class NewConstants {
             /** The HUMAN_FLASHABCK. */
             public static final String HUMAN_FLASHBACK = "%s/Display/human/flashback";
 
-            /** The COMPUTER_FLASHBACK */
+            /** The COMPUTER_FLASHBACK. */
             public static final String COMPUTER_FLASHBACK = "%s/Display/computer/flashback";
 
             /**

@@ -102,8 +102,8 @@ public final class AllZone {
 
     /** Constant <code>DECK_MGR</code>. */
     private static DeckManager deckManager;
-    
-    /** Constant <code>CARD_RATINGS</code>/ */
+
+    /** Constant <code>CARD_RATINGS</code>. */
     private static CardRatings CARD_RATINGS = new CardRatings();
 
     /**
@@ -705,14 +705,14 @@ public final class AllZone {
     public static void setOverlay(final FOverlay overlay0) {
         AllZone.overlay = overlay0;
     }
-    
+
     /**
      *  Gets the CardRatings object.
-     *  
+     * 
      * @return the CardRatings object
      */
     public static CardRatings getCardRatings() {
         return AllZone.CARD_RATINGS;
     }
-    
+
 } // AllZone

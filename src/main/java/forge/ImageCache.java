@@ -250,10 +250,10 @@ public class ImageCache {
             ex.printStackTrace();
             return null;
         } catch (final InvalidCacheLoadException ex) {
-        	// should be when a card legitimately has no image
+            // should be when a card legitimately has no image
             return null;
         } catch (final ComputationException ce) {
-        	if (ce.getCause() instanceof NullPointerException) {
+            if (ce.getCause() instanceof NullPointerException) {
                 return null;
             }
             ce.printStackTrace();
