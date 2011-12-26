@@ -208,18 +208,10 @@ public final class DeckEditorQuest extends DeckEditorBase {
         // labelSortHint.setText("Click on the column name (like name or color) to sort the cards");
         // labelSortHint.setBounds(new Rectangle(20, 27, 400, 19));
 
-        // Lower filters and make them taller since the bottom part is cut off.
-        // this.filterNameTypeSet.setBounds(new Rectangle(19, 10, 726, 25));
         this.filterNameTypeSet.setBounds(new Rectangle(19, 55, 726, 31));
-        // Need to lower the top table and lessen the total height.
-        // this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 40, 726, 316));
         this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 96, 726, 283));
-        // Raise the bottom table.
-        // this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 458, 726, 218));
         this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 444, 726, 219));
 
-        // Lower the remove button and make it not as tall.
-        // this.removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         this.removeButton.setBounds(new Rectangle(180, 408, 146, 25));
         // removeButton.setIcon(upIcon);
         this.removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
@@ -239,8 +231,6 @@ public final class DeckEditorQuest extends DeckEditorBase {
         });
         // addButton.setIcon(downIcon);
         this.addButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        // Lower the add button and make it not as tall.
-        // this.addButton.setBounds(new Rectangle(23, 403, 146, 49));
         this.addButton.setBounds(new Rectangle(23, 408, 146, 25));
 
         this.analysisButton.setText("Deck Analysis");
@@ -251,21 +241,13 @@ public final class DeckEditorQuest extends DeckEditorBase {
             }
         });
         this.analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        // Raise the analysis button and move slightly to the right.
-        // this.analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
         this.analysisButton.setBounds(new Rectangle(582, 408, 166, 25));
 
         /**
          * Type filtering
          */
         // Raise the filter boxes to top of window and move to the left.
-        // this.getFilterBoxes().getLand().setBounds(340, 400, 48, 20);
-        // this.getFilterBoxes().getCreature().setBounds(385, 400, 65, 20);
-        // this.getFilterBoxes().getSorcery().setBounds(447, 400, 62, 20);
-        // this.getFilterBoxes().getInstant().setBounds(505, 400, 60, 20);
-        // this.getFilterBoxes().getPlaneswalker().setBounds(558, 400, 85, 20);
-        // this.getFilterBoxes().getArtifact().setBounds(638, 400, 58, 20);
-        // this.getFilterBoxes().getEnchantment().setBounds(692, 400, 80, 20);
+        // Need to replace the text based filters with the graphic version
         this.getFilterBoxes().getLand().setBounds(17, 35, 62, 20);
         this.getFilterBoxes().getCreature().setBounds(88, 35, 87, 20);
         this.getFilterBoxes().getSorcery().setBounds(183, 35, 80, 20);
@@ -274,8 +256,6 @@ public final class DeckEditorQuest extends DeckEditorBase {
         this.getFilterBoxes().getArtifact().setBounds(479, 35, 80, 20);
         this.getFilterBoxes().getEnchantment().setBounds(570, 35, 115, 20);
 
-        // We can now use default font as the filters have more room.
-        // final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
             // box.setFont(f);
             box.setOpaque(false);
@@ -286,12 +266,6 @@ public final class DeckEditorQuest extends DeckEditorBase {
          * Color filtering
          */
         // Raise the color filtering boxes to top of window and move to the left.
-        // this.getFilterBoxes().getWhite().setBounds(340, 430, 40, 20);
-        // this.getFilterBoxes().getBlue().setBounds(380, 430, 40, 20);
-        // this.getFilterBoxes().getBlack().setBounds(420, 430, 40, 20);
-        // this.getFilterBoxes().getRed().setBounds(460, 430, 40, 20);
-        // this.getFilterBoxes().getGreen().setBounds(500, 430, 40, 20);
-        // this.getFilterBoxes().getColorless().setBounds(540, 430, 40, 20);
         this.getFilterBoxes().getWhite().setBounds(17, 10, 67, 20);
         this.getFilterBoxes().getBlue().setBounds(94, 10, 60, 20);
         this.getFilterBoxes().getBlack().setBounds(162, 10, 65, 20);
@@ -306,18 +280,10 @@ public final class DeckEditorQuest extends DeckEditorBase {
         /**
          * Other
          */
-        // The card view needs to be moved up and can not be as tall as it was.
-        // this.getCardView().setBounds(new Rectangle(765, 23, 239, 687));
         this.getCardView().setBounds(new Rectangle(765, 16, 239, 662));
-        // Lower the label for the top table.
-        // this.getTopTableWithCards().getLabel().setBounds(new Rectangle(19, 365, 720, 31));
         this.getTopTableWithCards().getLabel().setBounds(new Rectangle(19, 375, 720, 31));
-        // Raise the label for the bottom table.
-        // this.getBottomTableWithCards().getLabel().setBounds(new Rectangle(19, 672, 720, 31));
         this.getBottomTableWithCards().getLabel().setBounds(new Rectangle(19, 660, 720, 31));
 
-        // Do not lower statsLabel any lower, we want this to be visible at 1024
-        // x 768 screen size
         this.setTitle("Deck Editor");
 
         this.getContentPane().add(this.filterNameTypeSet, null);
