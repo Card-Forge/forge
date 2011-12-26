@@ -453,11 +453,11 @@ public class SealedDeck {
     /**
      * Sets the land set code.
      * 
-     * @param landSetCode
+     * @param landSetCode0
      *            the landSetCode to set
      */
-    public void setLandSetCode(final String[] landSetCode) {
-        this.landSetCode = landSetCode; // TODO: Add 0 to parameter's name.
+    public void setLandSetCode(final String[] landSetCode0) {
+        this.landSetCode = landSetCode0;
     }
 
     /**

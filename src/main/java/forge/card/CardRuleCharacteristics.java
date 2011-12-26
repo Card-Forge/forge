@@ -49,7 +49,7 @@ public class CardRuleCharacteristics {
      *            the cardName to set
      */
     public final void setCardName(final String cardName0) {
-        this.cardName = cardName0; // TODO: Add 0 to parameter's name.
+        this.cardName = cardName0;
     }
 
     /**
@@ -68,7 +68,7 @@ public class CardRuleCharacteristics {
      *            the cardType to set
      */
     public final void setCardType(final CardType cardType0) {
-        this.cardType = cardType0; // TODO: Add 0 to parameter's name.
+        this.cardType = cardType0;
     }
 
     /**
@@ -87,7 +87,7 @@ public class CardRuleCharacteristics {
      *            the manaCost to set
      */
     public final void setManaCost(final CardManaCost manaCost0) {
-        this.manaCost = manaCost0; // TODO: Add 0 to parameter's name.
+        this.manaCost = manaCost0;
         this.color = new CardColor(this.manaCost);
     }
 
@@ -107,7 +107,7 @@ public class CardRuleCharacteristics {
      *            the color to set
      */
     public final void setColor(final CardColor color0) {
-        this.color = color0; // TODO: Add 0 to parameter's name.
+        this.color = color0;
     }
 
     /**
@@ -126,7 +126,7 @@ public class CardRuleCharacteristics {
      *            the ptLine to set
      */
     public final void setPtLine(final String ptLine0) {
-        this.ptLine = ptLine0; // TODO: Add 0 to parameter's name.
+        this.ptLine = ptLine0;
     }
 
     /**
@@ -145,7 +145,7 @@ public class CardRuleCharacteristics {
      *            the cardRules to set
      */
     public final void setCardRules(final String[] cardRules0) {
-        this.cardRules = cardRules0; // TODO: Add 0 to parameter's name.
+        this.cardRules = cardRules0;
     }
 
     /**
@@ -164,6 +164,6 @@ public class CardRuleCharacteristics {
      *            the setsData to set
      */
     public final void setSetsData(final Map<String, CardInSet> setsData0) {
-        this.setsData = setsData0; // TODO: Add 0 to parameter's name.
+        this.setsData = setsData0;
     }
 }

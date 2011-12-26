@@ -423,11 +423,11 @@ public final class DeckEditorCommon extends DeckEditorBase {
     /**
      * Sets the custom menu.
      * 
-     * @param customMenu
+     * @param customMenu0
      *            the customMenu to set
      */
-    public void setCustomMenu(final DeckEditorCommonMenu customMenu) {
-        this.customMenu = customMenu; // TODO: Add 0 to parameter's name.
+    public void setCustomMenu(final DeckEditorCommonMenu customMenu0) {
+        this.customMenu = customMenu0;
     }
 
 }

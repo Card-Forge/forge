@@ -310,11 +310,11 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     /**
      * Sets the card view.
      * 
-     * @param cardView
+     * @param cardView0
      *            the cardView to set
      */
-    public void setCardView(final CardPanelBase cardView) {
-        this.cardView = cardView; // TODO: Add 0 to parameter's name.
+    public void setCardView(final CardPanelBase cardView0) {
+        this.cardView = cardView0;
     }
 
     /**
@@ -329,11 +329,11 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     /**
      * Sets the filter boxes.
      * 
-     * @param filterBoxes
+     * @param filterBoxes0
      *            the filterBoxes to set
      */
-    public void setFilterBoxes(final FilterCheckBoxes filterBoxes) {
-        this.filterBoxes = filterBoxes; // TODO: Add 0 to parameter's name.
+    public void setFilterBoxes(final FilterCheckBoxes filterBoxes0) {
+        this.filterBoxes = filterBoxes0;
     }
 
     /**
@@ -348,12 +348,11 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     /**
      * Sets the bottom table with cards.
      * 
-     * @param bottomTableWithCards
+     * @param bottomTableWithCards0
      *            the bottomTableWithCards to set
      */
-    public void setBottomTableWithCards(final TableWithCards bottomTableWithCards) {
-        this.bottomTableWithCards = bottomTableWithCards; // TODO: Add 0 to
-                                                          // parameter's name.
+    public void setBottomTableWithCards(final TableWithCards bottomTableWithCards0) {
+        this.bottomTableWithCards = bottomTableWithCards0;
     }
 
     /**
@@ -368,12 +367,11 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     /**
      * Sets the top table with cards.
      * 
-     * @param topTableWithCards
+     * @param topTableWithCards0
      *            the topTableWithCards to set
      */
-    public void setTopTableWithCards(final TableWithCards topTableWithCards) {
-        this.topTableWithCards = topTableWithCards; // TODO: Add 0 to
-                                                    // parameter's name.
+    public void setTopTableWithCards(final TableWithCards topTableWithCards0) {
+        this.topTableWithCards = topTableWithCards0;
     }
 
 }

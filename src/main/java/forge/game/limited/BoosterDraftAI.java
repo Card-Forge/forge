@@ -715,11 +715,11 @@ public class BoosterDraftAI {
     /**
      * Sets the bd.
      * 
-     * @param bd
+     * @param bd0
      *            the bd to set
      */
-    public void setBd(final IBoosterDraft bd) {
-        this.bd = bd; // TODO: Add 0 to parameter's name.
+    public void setBd(final IBoosterDraft bd0) {
+        this.bd = bd0;
     }
 
     private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();

@@ -99,11 +99,11 @@ class DeckColors {
     /**
      * Sets the color1.
      * 
-     * @param color1
+     * @param color1in
      *            the color1 to set
      */
-    public void setColor1(final String color1) {
-        this.color1 = color1; // TODO: Add 0 to parameter's name.
+    public void setColor1(final String color1in) {
+        this.color1 = color1in;
     }
 
     /**
@@ -118,11 +118,11 @@ class DeckColors {
     /**
      * Sets the mana1.
      * 
-     * @param mana1
+     * @param mana1in
      *            the mana1 to set
      */
-    public void setMana1(final String mana1) {
-        this.mana1 = mana1; // TODO: Add 0 to parameter's name.
+    public void setMana1(final String mana1in) {
+        this.mana1 = mana1in;
     }
 
     /**
@@ -137,11 +137,11 @@ class DeckColors {
     /**
      * Sets the mana2.
      * 
-     * @param mana2
+     * @param mana2in
      *            the mana2 to set
      */
-    public void setMana2(final String mana2) {
-        this.mana2 = mana2; // TODO: Add 0 to parameter's name.
+    public void setMana2(final String mana2in) {
+        this.mana2 = mana2in;
     }
 
     /**
@@ -156,11 +156,11 @@ class DeckColors {
     /**
      * Sets the color2.
      * 
-     * @param color2
+     * @param color2in
      *            the color2 to set
      */
-    public void setColor2(final String color2) {
-        this.color2 = color2; // TODO: Add 0 to parameter's name.
+    public void setColor2(final String color2in) {
+        this.color2 = color2in;
     }
 
 }

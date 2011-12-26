@@ -70,11 +70,11 @@ class CCnt {
     /**
      * Sets the color.
      * 
-     * @param color
+     * @param color0
      *            the color to set
      */
-    public void setColor(final String color) {
-        this.color = color; // TODO: Add 0 to parameter's name.
+    public void setColor(final String color0) {
+        this.color = color0;
     }
 
     /**
@@ -89,10 +89,10 @@ class CCnt {
     /**
      * Sets the count.
      * 
-     * @param count
+     * @param count0
      *            the count to set
      */
-    public void setCount(final int count) {
-        this.count = count; // TODO: Add 0 to parameter's name.
+    public void setCount(final int count0) {
+        this.count = count0;
     }
 }
