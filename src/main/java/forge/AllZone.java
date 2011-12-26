@@ -27,6 +27,7 @@ import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
 import forge.game.GameSummary;
+import forge.game.limited.CardRatings;
 import forge.gui.input.InputControl;
 import forge.model.FGameState;
 import forge.properties.ForgeProps;
@@ -101,6 +102,9 @@ public final class AllZone {
 
     /** Constant <code>DECK_MGR</code>. */
     private static DeckManager deckManager;
+    
+    /** Constant <code>CARD_RATINGS</code>/ */
+    private static CardRatings CARD_RATINGS = new CardRatings();
 
     /**
      * <p>
@@ -701,4 +705,14 @@ public final class AllZone {
     public static void setOverlay(final FOverlay overlay0) {
         AllZone.overlay = overlay0;
     }
+    
+    /**
+     *  Gets the CardRatings object.
+     *  
+     * @return the CardRatings object
+     */
+    public static CardRatings getCardRatings() {
+        return AllZone.CARD_RATINGS;
+    }
+    
 } // AllZone
