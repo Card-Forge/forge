@@ -158,7 +158,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         final List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
         columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE,
                 PresetColumns.FN_QTY_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Name", 180, PresetColumns.FN_NAME_COMPARE,
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 176, PresetColumns.FN_NAME_COMPARE,
                 PresetColumns.FN_NAME_GET));
         columns.add(new TableColumnInfo<InventoryItem>("Cost", 70, PresetColumns.FN_COST_COMPARE,
                 PresetColumns.FN_COST_GET));
@@ -168,20 +168,20 @@ public final class DeckEditorShop extends DeckEditorBase {
                 PresetColumns.FN_TYPE_GET));
         columns.add(new TableColumnInfo<InventoryItem>("Stats", 40, PresetColumns.FN_STATS_COMPARE,
                 PresetColumns.FN_STATS_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("R", 30, PresetColumns.FN_RARITY_COMPARE,
+        columns.add(new TableColumnInfo<InventoryItem>("R", 25, PresetColumns.FN_RARITY_COMPARE,
                 PresetColumns.FN_RARITY_GET));
         columns.add(new TableColumnInfo<InventoryItem>("Set", 35, PresetColumns.FN_SET_COMPARE,
                 PresetColumns.FN_SET_GET));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 
         final List<TableColumnInfo<InventoryItem>> columnsBelow = new ArrayList<TableColumnInfo<InventoryItem>>(columns);
-        columns.add(new TableColumnInfo<InventoryItem>("Price", 36, this.fnPriceCompare, this.fnPriceGet));
+        columns.add(new TableColumnInfo<InventoryItem>("Price", 45, this.fnPriceCompare, this.fnPriceGet));
         this.getTopTableWithCards().setup(columns, this.getCardView());
 
         columnsBelow.add(new TableColumnInfo<InventoryItem>("Dks", 30, this.fnDeckCompare, this.fnDeckGet));
         columnsBelow.add(new TableColumnInfo<InventoryItem>("New", 35, this.questData.getCards().getFnNewCompare(),
                 this.questData.getCards().getFnNewGet()));
-        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 36, this.fnPriceCompare, this.fnPriceSellGet));
+        columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 45, this.fnPriceCompare, this.fnPriceSellGet));
         this.getBottomTableWithCards().setup(columnsBelow, this.getCardView());
 
         // Window is too tall, lower height to min size used by constructed mode deck editor.
