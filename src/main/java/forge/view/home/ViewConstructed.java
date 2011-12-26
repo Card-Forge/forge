@@ -29,6 +29,9 @@ public class ViewConstructed extends JPanel {
     private SubButton btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
     private ControlConstructed control;
     private FList lstColorsHuman, lstThemesHuman, lstDecksHuman, lstColorsAI, lstThemesAI;
+    private final String colorsToolTip = "Generate deck (Multi-select: CTRL)";
+    private final String themeToolTip = "Generate deck with a theme";
+    private final String decklistToolTip = "Load deck (Decklist: Double Click)";
 
     /**
      * Assembles swing components for "Constructed" mode menu.
@@ -93,17 +96,20 @@ public class ViewConstructed extends JPanel {
         lblHuman.setForeground(skin.getColor("text"));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblColorInfo = new JLabel("Generate deck (Multi-select: CTRL)");
+        JLabel lblColorInfo = new JLabel(colorsToolTip);
+        lblColorInfo.setToolTipText(colorsToolTip);
         lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblColorInfo.setForeground(skin.getColor("text"));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblThemeInfo = new JLabel("Generate deck with a theme");
+        JLabel lblThemeInfo = new JLabel(themeToolTip);
+        lblThemeInfo.setToolTipText(themeToolTip);
         lblThemeInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblThemeInfo.setForeground(skin.getColor("text"));
         lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblDecklistInfo = new JLabel("Load deck (Decklist: Double Click)");
+        JLabel lblDecklistInfo = new JLabel(decklistToolTip);
+        lblDecklistInfo.setToolTipText(decklistToolTip);
         lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -163,17 +169,20 @@ public class ViewConstructed extends JPanel {
         lblAI.setForeground(skin.getColor("text"));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblColorInfo = new JLabel("Generate deck (Multi-select: CTRL)");
+        JLabel lblColorInfo = new JLabel(colorsToolTip);
+        lblColorInfo.setToolTipText(colorsToolTip);
         lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblColorInfo.setForeground(skin.getColor("text"));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblThemeInfo = new JLabel("Generate deck with a theme");
+        JLabel lblThemeInfo = new JLabel(themeToolTip);
+        lblThemeInfo.setToolTipText(themeToolTip);
         lblThemeInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblThemeInfo.setForeground(skin.getColor("text"));
         lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel lblDecklistInfo = new JLabel("Load deck (Decklist: Double Click)");
+        JLabel lblDecklistInfo = new JLabel(decklistToolTip);
+        lblDecklistInfo.setToolTipText(decklistToolTip);
         lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
