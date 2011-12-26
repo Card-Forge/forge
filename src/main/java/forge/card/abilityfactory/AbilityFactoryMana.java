@@ -106,8 +106,7 @@ public class AbilityFactoryMana {
             private static final long serialVersionUID = -5141246507533353605L;
 
             private final AbilityFactory af = abilityFactory;
-            // To get the mana to resolve properly, we need the spell to contain
-            // an Ability_Mana
+            // To get the mana to resolve properly, we need the spell to contain an AbilityMana
             private final Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
             private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
@@ -158,8 +157,7 @@ public class AbilityFactoryMana {
             private static final long serialVersionUID = -5141246507533353605L;
 
             private final AbilityFactory af = abilityFactory;
-            // To get the mana to resolve properly, we need the spell to contain
-            // an Ability_Mana
+            // To get the mana to resolve properly, we need the spell to contain an AbilityMana
             private final Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
             private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;
@@ -428,8 +426,7 @@ public class AbilityFactoryMana {
             private static final long serialVersionUID = -5141246507533353605L;
 
             private final AbilityFactory af = abilityFactory;
-            // To get the mana to resolve properly, we need the spell to contain
-            // an Ability_Mana
+            // To get the mana to resolve properly, we need the spell to contain an AbilityMana
             private final Cost tmp = new Cost("0", abilityFactory.getHostCard().getName(), false);
             private final AbilityMana tmpMana = new AbilityMana(abilityFactory.getHostCard(), this.tmp, produced) {
                 private static final long serialVersionUID = 1454043766057140491L;

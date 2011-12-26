@@ -61,8 +61,8 @@ public class SpellAbilityStackInstance {
 
     // Paid Mana Cost
     // private ArrayList<Mana> payingMana = new ArrayList<Mana>();
-    // private ArrayList<Ability_Mana> paidAbilities = new
-    // ArrayList<Ability_Mana>();
+    // private ArrayList<AbilityMana> paidAbilities = new
+    // ArrayList<AbilityMana>();
     private int xManaPaid = 0;
 
     // Other Paid things

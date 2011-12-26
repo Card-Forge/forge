@@ -28,7 +28,7 @@ import forge.card.mana.ManaPool;
 
 /**
  * <p>
- * Abstract Ability_Mana class.
+ * Abstract AbilityMana class.
  * </p>
  * 
  * @author Forge
@@ -52,7 +52,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
-     * Constructor for Ability_Mana.
+     * Constructor for AbilityMana.
      * </p>
      * 
      * @param sourceCard
@@ -68,7 +68,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
-     * Constructor for Ability_Mana.
+     * Constructor for AbilityMana.
      * </p>
      * 
      * @param sourceCard
@@ -86,7 +86,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
-     * Constructor for Ability_Mana.
+     * Constructor for AbilityMana.
      * </p>
      * 
      * @param sourceCard
@@ -102,7 +102,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
-     * Constructor for Ability_Mana.
+     * Constructor for AbilityMana.
      * </p>
      * 
      * @param sourceCard
@@ -196,7 +196,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
         runParams.put("Card", source);
         runParams.put("Player", player);
-        runParams.put("Ability_Mana", this);
+        runParams.put("AbilityMana", this);
         runParams.put("Produced", produced);
         AllZone.getTriggerHandler().runTrigger("TapsForMana", runParams);
 
@@ -382,5 +382,5 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
         return (41 * (41 + this.getType().hashCode()));
     }
 
-} // end class Ability_Mana
+} // end class AbilityMana
 
