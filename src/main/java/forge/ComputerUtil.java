@@ -312,8 +312,7 @@ public class ComputerUtil {
             return false;
         }
 
-        // TODO
-        // "Look" at Targeted SA and "calculate" the threshold
+        // TODO - "Look" at Targeted SA and "calculate" the threshold
         // if (bestRestriction < targetedThreshold) return false;
 
         AllZone.getStack().freezeStack();

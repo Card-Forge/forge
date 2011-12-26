@@ -162,11 +162,11 @@ public class TableColumnInfo<T> {
     /**
      * Sets the min width.
      * 
-     * @param minWidth
+     * @param minWidth0
      *            the minWidth to set
      */
-    public void setMinWidth(final int minWidth) {
-        this.minWidth = minWidth; // TODO: Add 0 to parameter's name.
+    public void setMinWidth(final int minWidth0) {
+        this.minWidth = minWidth0;
     }
 
     /**
@@ -181,11 +181,11 @@ public class TableColumnInfo<T> {
     /**
      * Sets the max width.
      * 
-     * @param maxWidth
+     * @param maxWidth0
      *            the maxWidth to set
      */
-    public void setMaxWidth(final int maxWidth) {
-        this.maxWidth = maxWidth; // TODO: Add 0 to parameter's name.
+    public void setMaxWidth(final int maxWidth0) {
+        this.maxWidth = maxWidth0;
     }
 
     /**
@@ -200,11 +200,11 @@ public class TableColumnInfo<T> {
     /**
      * Sets the nominal width.
      * 
-     * @param nominalWidth
+     * @param nominalWidth0
      *            the nominalWidth to set
      */
-    public void setNominalWidth(final int nominalWidth) {
-        this.nominalWidth = nominalWidth; // TODO: Add 0 to parameter's name.
+    public void setNominalWidth(final int nominalWidth0) {
+        this.nominalWidth = nominalWidth0;
     }
 
     /**
@@ -219,12 +219,11 @@ public class TableColumnInfo<T> {
     /**
      * Sets the min max applied.
      * 
-     * @param isMinMaxApplied
+     * @param isMinMaxApplied0
      *            the isMinMaxApplied to set
      */
-    public void setMinMaxApplied(final boolean isMinMaxApplied) {
-        this.isMinMaxApplied = isMinMaxApplied; // TODO: Add 0 to parameter's
-                                                // name.
+    public void setMinMaxApplied(final boolean isMinMaxApplied0) {
+        this.isMinMaxApplied = isMinMaxApplied0;
     }
 
     /**

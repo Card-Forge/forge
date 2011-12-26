@@ -581,7 +581,7 @@ public class CardListUtil {
 
     /**
      * 
-     * TODO Write javadoc for this method.
+     * Given a CardList c, return a CardList that contains a random amount of cards from c.
      * 
      * @param c
      *            CardList

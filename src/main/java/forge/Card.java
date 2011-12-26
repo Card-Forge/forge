@@ -271,7 +271,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setDoubleFaced(final boolean isDoubleFaced0) {
         this.isDoubleFaced = isDoubleFaced0;
-        // TODO Add 0 to parameter's name.
     }
 
     /**
@@ -291,7 +290,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setFlip(final boolean isFlip0) {
         this.isFlip = isFlip0;
-        // TODO Add 0 to parameter's name.
     }
 
     private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
@@ -465,7 +463,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * 
-     * TODO Write javadoc for this method.
+     * Resets the unique number for this Card to 1.
      */
     public static void resetUniqueNumber() {
         Card.nextUniqueNumber = 1;
@@ -1991,8 +1989,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * TODO Write javadoc for this method.
      * 
      * @param globalChanges
-     *            an ArrayList<Card_Color>
-     * @return a Card_Color
+     *            an ArrayList<CardColor>
+     * @return a CardColor
      */
     final CardColor determineColor(final ArrayList<CardColor> globalChanges) {
         final CardColor colors = new CardColor(this);
@@ -3795,7 +3793,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * TODO write a javadoc for this method.
+     * Get the controller for this card.
      * 
      * @return a {@link forge.Player} object.
      */
@@ -4410,7 +4408,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * TODO Write javadoc for this method.
      * 
      * @param types
-     *            a ArrayList<Card_Type>
+     *            a ArrayList<CardType>
      */
     public final void setChangedCardTypes(final ArrayList<CardType> types) {
         this.changedCardTypes = types;
@@ -4420,7 +4418,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * TODO Write javadoc for this method.
      * 
-     * @return ArrayList<Card_Type>
+     * @return ArrayList<CardType>
      */
     public final ArrayList<CardType> getChangedCardTypes() {
         return this.changedCardTypes;

@@ -35,14 +35,14 @@ public class CommandList implements java.io.Serializable, Command, Iterable<Comm
     private final ArrayList<Command> a = new ArrayList<Command>();
 
     /**
-     * default constructor TODO Write javadoc for Constructor.
+     * Create a new CommandList.
      */
     public CommandList() {
         // nothing to do
     }
 
     /**
-     * constructor TODO Write javadoc for Constructor.
+     * Create a new CommandList that contains a command c.
      * 
      * @param c
      *            a Command

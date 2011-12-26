@@ -131,7 +131,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     // TODO: Make this ordering permanent
     /**
-     * Constant <code>lastUsedDeck="//TODO: Make this ordering permanent"</code>
+     * Constant <code>lastUsedDeck</code>
      * .
      */
     private static String lastUsedDeck;
