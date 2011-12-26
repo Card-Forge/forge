@@ -192,10 +192,10 @@ public class QuestSelectablePanel extends JPanel {
     /**
      * Sets the root panel.
      * 
-     * @param rootPanel
+     * @param rootPanel0
      *            the rootPanel to set
      */
-    public void setRootPanel(final JPanel rootPanel) {
-        this.rootPanel = rootPanel; // TODO: Add 0 to parameter's name.
+    public void setRootPanel(final JPanel rootPanel0) {
+        this.rootPanel = rootPanel0;
     }
 }

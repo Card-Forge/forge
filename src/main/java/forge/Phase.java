@@ -1016,10 +1016,10 @@ public class Phase extends MyObservable implements java.io.Serializable {
     /**
      * Sets the phase order.
      * 
-     * @param phaseOrder
+     * @param phaseOrder0
      *            the phaseOrder to set
      */
-    public void setPhaseOrder(final String[] phaseOrder) {
-        this.phaseOrder = phaseOrder; // TODO: Add 0 to parameter's name.
+    public void setPhaseOrder(final String[] phaseOrder0) {
+        this.phaseOrder = phaseOrder0;
     }
 }

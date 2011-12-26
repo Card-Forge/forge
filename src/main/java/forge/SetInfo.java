@@ -152,11 +152,11 @@ public class SetInfo {
     /**
      * Sets the code.
      * 
-     * @param code
+     * @param code0
      *            the code to set
      */
-    public void setCode(final String code) {
-        this.code = code; // TODO: Add 0 to parameter's name.
+    public void setCode(final String code0) {
+        this.code = code0;
     }
 
     /**
@@ -171,11 +171,11 @@ public class SetInfo {
     /**
      * Sets the rarity.
      * 
-     * @param rarity
+     * @param rarity0
      *            the rarity to set
      */
-    public void setRarity(final String rarity) {
-        this.rarity = rarity; // TODO: Add 0 to parameter's name.
+    public void setRarity(final String rarity0) {
+        this.rarity = rarity0;
     }
 
     /**
@@ -190,11 +190,11 @@ public class SetInfo {
     /**
      * Sets the url.
      * 
-     * @param url
+     * @param url0
      *            the url to set
      */
-    public void setUrl(final String url) {
-        this.url = url; // TODO: Add 0 to parameter's name.
+    public void setUrl(final String url0) {
+        this.url = url0;
     }
 
     /**
@@ -209,10 +209,10 @@ public class SetInfo {
     /**
      * Sets the pic count.
      * 
-     * @param picCount
+     * @param picCount0
      *            the picCount to set
      */
-    public void setPicCount(final int picCount) {
-        this.picCount = picCount; // TODO: Add 0 to parameter's name.
+    public void setPicCount(final int picCount0) {
+        this.picCount = picCount0;
     }
 }

@@ -66,10 +66,8 @@ public class CardFilter {
 
     /**
      * <p>
-     * CardListTextFilter.
+     * cardListTextFilter.
      * </p>
-     * 
-     * TODO style: rename this method so it starts with a lowercase letter
      * 
      * @param all
      *            a {@link forge.CardList} object.
@@ -98,10 +96,8 @@ public class CardFilter {
 
     /**
      * <p>
-     * CardListColorFilter.
+     * cardListColorFilter.
      * </p>
-     * 
-     * TODO style: rename this method so it starts with a lowercase letter
      * 
      * @param all
      *            a {@link forge.CardList} object.
@@ -178,10 +174,8 @@ public class CardFilter {
 
     /**
      * <p>
-     * CardListTypeFilter.
+     * cardListTypeFilter.
      * </p>
-     * 
-     * TODO style: rename this method so it starts with a lowercase letter
      * 
      * @param all
      *            a {@link forge.CardList} object.

@@ -70,7 +70,6 @@ public class ViewUtilities extends JPanel {
          * 
          * doublestrike - too right
          */
-        // TODO make this a dock shortcut
         /*
         SubButton btnStackReport = new SubButton("Stack Report");
         this.add(btnStackReport, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");

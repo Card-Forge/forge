@@ -104,11 +104,11 @@ public final class Constant {
         /**
          * Sets the game type.
          * 
-         * @param gameType
+         * @param gameType0
          *            the gameType to set
          */
-        public static void setGameType(final GameType gameType) {
-            Runtime.gameType = gameType; // TODO: Add 0 to parameter's name.
+        public static void setGameType(final GameType gameType0) {
+            Runtime.gameType = gameType0;
         }
     }
 

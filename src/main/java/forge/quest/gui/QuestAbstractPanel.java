@@ -65,10 +65,10 @@ public abstract class QuestAbstractPanel extends JPanel {
     /**
      * Sets the main frame.
      * 
-     * @param mainFrame
+     * @param mainFrame0
      *            the mainFrame to set
      */
-    public void setMainFrame(final QuestFrame mainFrame) {
-        this.mainFrame = mainFrame; // TODO: Add 0 to parameter's name.
+    public void setMainFrame(final QuestFrame mainFrame0) {
+        this.mainFrame = mainFrame0;
     }
 }

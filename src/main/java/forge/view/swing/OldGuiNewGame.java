@@ -1810,12 +1810,11 @@ public class OldGuiNewGame extends JFrame {
     /**
      * Sets the card overlay.
      * 
-     * @param cardOverlay
+     * @param cardOverlay0
      *            the cardOverlay to set
      */
-    public static void setCardOverlay(final JCheckBoxMenuItem cardOverlay) {
-        OldGuiNewGame.cardOverlay = cardOverlay; // TODO: Add 0 to parameter's
-                                                 // name.
+    public static void setCardOverlay(final JCheckBoxMenuItem cardOverlay0) {
+        OldGuiNewGame.cardOverlay = cardOverlay0;
     }
 
     /**
@@ -1830,11 +1829,11 @@ public class OldGuiNewGame extends JFrame {
     /**
      * Sets the card scale.
      * 
-     * @param cardScale
+     * @param cardScale0
      *            the cardScale to set
      */
-    public static void setCardScale(final JCheckBoxMenuItem cardScale) {
-        OldGuiNewGame.cardScale = cardScale; // TODO: Add 0 to parameter's name.
+    public static void setCardScale(final JCheckBoxMenuItem cardScale0) {
+        OldGuiNewGame.cardScale = cardScale0;
     }
 
     /**
@@ -1849,13 +1848,11 @@ public class OldGuiNewGame extends JFrame {
     /**
      * Sets the smooth land check box.
      * 
-     * @param smoothLandCheckBox
+     * @param smoothLandCheckBox0
      *            the smoothLandCheckBox to set
      */
-    static void setSmoothLandCheckBox(final JCheckBox smoothLandCheckBox) {
-        OldGuiNewGame.smoothLandCheckBox = smoothLandCheckBox; // TODO: Add 0 to
-                                                               // parameter's
-                                                               // name.
+    static void setSmoothLandCheckBox(final JCheckBox smoothLandCheckBox0) {
+        OldGuiNewGame.smoothLandCheckBox = smoothLandCheckBox0;
     }
 
     /**
@@ -1870,12 +1867,11 @@ public class OldGuiNewGame extends JFrame {
     /**
      * Sets the dev mode check box.
      * 
-     * @param devModeCheckBox
+     * @param devModeCheckBox0
      *            the devModeCheckBox to set
      */
-    public static void setDevModeCheckBox(final JCheckBox devModeCheckBox) {
-        OldGuiNewGame.devModeCheckBox = devModeCheckBox; // TODO: Add 0 to
-                                                         // parameter's name.
+    public static void setDevModeCheckBox(final JCheckBox devModeCheckBox0) {
+        OldGuiNewGame.devModeCheckBox = devModeCheckBox0;
     }
 
     /**
@@ -1890,12 +1886,11 @@ public class OldGuiNewGame extends JFrame {
     /**
      * Sets the upld drft check box.
      * 
-     * @param upldDrftCheckBox
+     * @param upldDrftCheckBox0
      *            the upldDrftCheckBox to set
      */
-    public static void setUpldDrftCheckBox(final JCheckBox upldDrftCheckBox) {
-        OldGuiNewGame.upldDrftCheckBox = upldDrftCheckBox; // TODO: Add 0 to
-                                                           // parameter's name.
+    public static void setUpldDrftCheckBox(final JCheckBox upldDrftCheckBox0) {
+        OldGuiNewGame.upldDrftCheckBox = upldDrftCheckBox0;
     }
 
     /**
@@ -1910,13 +1905,11 @@ public class OldGuiNewGame extends JFrame {
     /**
      * Sets the foil random check box.
      * 
-     * @param foilRandomCheckBox
+     * @param foilRandomCheckBox0
      *            the foilRandomCheckBox to set
      */
-    public static void setFoilRandomCheckBox(final JCheckBox foilRandomCheckBox) {
-        OldGuiNewGame.foilRandomCheckBox = foilRandomCheckBox; // TODO: Add 0 to
-                                                               // parameter's
-                                                               // name.
+    public static void setFoilRandomCheckBox(final JCheckBox foilRandomCheckBox0) {
+        OldGuiNewGame.foilRandomCheckBox = foilRandomCheckBox0;
     }
 
     /**

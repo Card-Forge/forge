@@ -39,11 +39,11 @@ public class ConstantStringArrayList {
     /**
      * Sets the list.
      * 
-     * @param list
+     * @param list0
      *            the list to set
      */
-    public void setList(final ArrayList<String> list) {
-        this.list = list; // TODO: Add 0 to parameter's name.
+    public void setList(final ArrayList<String> list0) {
+        this.list = list0;
     }
 
 }

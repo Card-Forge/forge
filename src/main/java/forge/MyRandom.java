@@ -58,10 +58,10 @@ public class MyRandom {
     /**
      * Sets the random.
      * 
-     * @param random
+     * @param random0
      *            the random to set
      */
-    public static void setRandom(final Random random) {
-        MyRandom.random = random; // TODO: Add 0 to parameter's name.
+    public static void setRandom(final Random random0) {
+        MyRandom.random = random0;
     }
 }

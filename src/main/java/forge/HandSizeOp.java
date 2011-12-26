@@ -78,11 +78,11 @@ public class HandSizeOp {
     /**
      * Sets the amount.
      * 
-     * @param amount
+     * @param amount0
      *            the amount to set
      */
-    public void setAmount(final int amount) {
-        this.amount = amount; // TODO: Add 0 to parameter's name.
+    public void setAmount(final int amount0) {
+        this.amount = amount0;
     }
 
     /**
@@ -97,11 +97,11 @@ public class HandSizeOp {
     /**
      * Sets the mode.
      * 
-     * @param mode
+     * @param mode0
      *            the mode to set
      */
-    public void setMode(final String mode) {
-        this.mode = mode; // TODO: Add 0 to parameter's name.
+    public void setMode(final String mode0) {
+        this.mode = mode0;
     }
 
     /**
@@ -116,10 +116,10 @@ public class HandSizeOp {
     /**
      * Sets the hs time stamp.
      * 
-     * @param hsTimeStamp
+     * @param hsTimeStamp0
      *            the hsTimeStamp to set
      */
-    public void setHsTimeStamp(final int hsTimeStamp) {
-        this.hsTimeStamp = hsTimeStamp; // TODO: Add 0 to parameter's name.
+    public void setHsTimeStamp(final int hsTimeStamp0) {
+        this.hsTimeStamp = hsTimeStamp0;
     }
 }

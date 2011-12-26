@@ -399,13 +399,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
         final CardList ret = new CardList();
         for (int i = 0; i < this.cardsAddedThisTurn.size(); i++) {
-            if ((this.cardsAddedThisTurnSource.get(i) == origin) || (origin == null /*
-                                                                                     * former
-                                                                                     * :
-                                                                                     * equals
-                                                                                     * (
-                                                                                     * 'Any')
-                                                                                     */)) {
+            if ((this.cardsAddedThisTurnSource.get(i) == origin) || (origin == null)) {
                 ret.add(this.cardsAddedThisTurn.get(i));
             }
         }
@@ -436,11 +430,11 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     /**
      * Sets the card list.
      * 
-     * @param cardList
+     * @param cardList0
      *            the cardList to set
      */
-    public void setCardList(final List<Card> cardList) {
-        this.cardList = cardList; // TODO: Add 0 to parameter's name.
+    public void setCardList(final List<Card> cardList0) {
+        this.cardList = cardList0;
     }
 
 }
