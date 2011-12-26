@@ -580,6 +580,17 @@ Notes:
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 - fixed an exception in ImageCache when a human attacker has trample and a player shows up as a Card in GuiMultipleBlockers
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- convert Recall to script
+- TODO cleanup in arcane.ui package
+- cleanup in CFCreatures
+- clean up some TODOs in SpellAbility, Trigger, and CardColor classes
+- fix NewGame/savesealed_ttl property in en.properties
+- javadoc updates for NewConstants
+- Added ToolTips to the labels for the lists located in the constructed view as they tend to be truncated with some of the smaller resolutions.
+- Added method to CardColor to identify if another CardColor shares color with another.
+- Added method to CardType to identify if another CardType shares a subtype with another.
+- Added CardRatings to AllZone for singular, global access.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
