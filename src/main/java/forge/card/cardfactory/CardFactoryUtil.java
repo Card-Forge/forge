@@ -81,7 +81,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_getMostExpensivePermanent.
+     * getMostExpensivePermanentAI.
      * </p>
      * 
      * @param list
@@ -107,7 +107,7 @@ public class CardFactoryUtil {
     }
 
     /**
-     * A i_get most expensive permanent.
+     * getMostExpensivePermanentAI.
      * 
      * @param all
      *            the all
@@ -142,7 +142,7 @@ public class CardFactoryUtil {
     // for Sarkhan the Mad
     /**
      * <p>
-     * AI_getCheapestCreature.
+     * getCheapestCreatureAI.
      * </p>
      * 
      * @param list
@@ -165,7 +165,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_getCheapestPermanent.
+     * getCheapestPermanentAI.
      * </p>
      * 
      * @param list
@@ -207,7 +207,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_getBestLand.
+     * getBestLandAI.
      * </p>
      * 
      * @param list
@@ -271,7 +271,7 @@ public class CardFactoryUtil {
     // The AI doesn't really pick the best enchantment, just the most expensive.
     /**
      * <p>
-     * AI_getBestEnchantment.
+     * getBestEnchantmentAI.
      * </p>
      * 
      * @param list
@@ -318,7 +318,7 @@ public class CardFactoryUtil {
     // The AI doesn't really pick the best artifact, just the most expensive.
     /**
      * <p>
-     * AI_getBestArtifact.
+     * getBestArtifactAI.
      * </p>
      * 
      * @param list
@@ -351,7 +351,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_doesCreatureAttack.
+     * doesCreatureAttackAI.
      * </p>
      * 
      * @param card
@@ -609,7 +609,7 @@ public class CardFactoryUtil {
     // returns null if list.size() == 0
     /**
      * <p>
-     * AI_getBestCreature.
+     * getBestCreatureAI.
      * </p>
      * 
      * @param list
@@ -634,7 +634,7 @@ public class CardFactoryUtil {
     }
 
     /**
-     * A i_get best creature.
+     * getBestCreatureAI.
      * 
      * @param list
      *            the list
@@ -660,7 +660,7 @@ public class CardFactoryUtil {
     // This selection rates tokens higher
     /**
      * <p>
-     * AI_getBestCreatureToBounce.
+     * getBestCreatureToBounceAI.
      * </p>
      * 
      * @param list
@@ -698,7 +698,7 @@ public class CardFactoryUtil {
     // returns null if list.size() == 0
     /**
      * <p>
-     * AI_getWorstCreature.
+     * getWorstCreatureAI.
      * </p>
      * 
      * @param list
@@ -725,7 +725,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_getWorstPermanent.
+     * getWorstPermanentAI.
      * </p>
      * 
      * @param list
@@ -786,7 +786,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * input_Spell.
+     * inputSpell.
      * </p>
      * 
      * @param spell
@@ -838,11 +838,11 @@ public class CardFactoryUtil {
             }
         };
         return target;
-    } // input_targetSpell()
+    } // inputSpell()
 
     /**
      * <p>
-     * input_destroyNoRegeneration.
+     * inputDestroyNoRegeneration.
      * </p>
      * 
      * @param choices
@@ -870,11 +870,11 @@ public class CardFactoryUtil {
             }
         };
         return target;
-    } // input_destroyNoRegeneration()
+    } // inputDestroyNoRegeneration()
 
     /**
      * <p>
-     * ability_Unearth.
+     * abilityUnearth.
      * </p>
      * 
      * @param sourceCard
@@ -917,11 +917,11 @@ public class CardFactoryUtil {
         unearth.setStackDescription(sbStack.toString());
 
         return unearth;
-    } // ability_Unearth()
+    } // abilityUnearth()
 
     /**
      * <p>
-     * ability_Morph_Down.
+     * abilityMorphDown.
      * </p>
      * 
      * @param sourceCard
@@ -957,7 +957,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * ability_Morph_Up.
+     * abilityMorphUp.
      * </p>
      * 
      * @param sourceCard
@@ -995,7 +995,6 @@ public class CardFactoryUtil {
 
         }; // morph_up
 
-        // morph_up.setManaCost(cost);
         String costDesc = cost.toString();
         // get rid of the ": " at the end
         costDesc = costDesc.substring(0, costDesc.length() - 2);
@@ -1016,7 +1015,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * ability_cycle.
+     * abilityCycle.
      * </p>
      * 
      * @param sourceCard
@@ -1079,11 +1078,11 @@ public class CardFactoryUtil {
 
         cycle.getRestrictions().setZone(Constant.Zone.Hand);
         return cycle;
-    } // ability_cycle()
+    } // abilityCycle()
 
     /**
      * <p>
-     * ability_typecycle.
+     * abilityTypecycle.
      * </p>
      * 
      * @param sourceCard
@@ -1167,11 +1166,11 @@ public class CardFactoryUtil {
         cycle.getRestrictions().setZone(Constant.Zone.Hand);
 
         return cycle;
-    } // ability_typecycle()
+    } // abilityTypecycle()
 
     /**
      * <p>
-     * ability_transmute.
+     * abilityTransmute.
      * </p>
      * 
      * @param sourceCard
@@ -1240,11 +1239,11 @@ public class CardFactoryUtil {
 
         transmute.getRestrictions().setZone(Constant.Zone.Hand);
         return transmute;
-    } // ability_transmute()
+    } // abilityTransmute()
 
     /**
      * <p>
-     * ability_suspend.
+     * abilitySuspend.
      * </p>
      * 
      * @param sourceCard
@@ -1295,11 +1294,11 @@ public class CardFactoryUtil {
 
         suspend.getRestrictions().setZone(Constant.Zone.Hand);
         return suspend;
-    } // ability_suspend()
+    } // abilitySuspend()
 
     /**
      * <p>
-     * eqPump_Equip.
+     * eqPumpEquip.
      * </p>
      * 
      * @param sourceCard
@@ -1416,11 +1415,11 @@ public class CardFactoryUtil {
         equip.setDescription(sbDesc.toString());
 
         return equip;
-    } // eqPump_Equip() ( was vanila_equip() )
+    } // eqPumpEquip()
 
     /**
      * <p>
-     * eqPump_onEquip.
+     * eqPumpOnEquip.
      * </p>
      * 
      * @param sourceCard
@@ -1461,11 +1460,11 @@ public class CardFactoryUtil {
         }; // Command
 
         return onEquip;
-    } // eqPump_onEquip ( was vanila_onequip() )
+    } // eqPumpOnEquip
 
     /**
      * <p>
-     * eqPump_unEquip.
+     * eqPumpUnEquip.
      * </p>
      * 
      * @param sourceCard
@@ -1505,7 +1504,7 @@ public class CardFactoryUtil {
         }; // Command
 
         return onUnEquip;
-    } // eqPump_unEquip ( was vanila_unequip() )
+    } // eqPumpUnEquip
 
     /**
      * <p>
@@ -1610,7 +1609,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * ability_Soulshift.
+     * abilitySoulshift.
      * </p>
      * 
      * @param sourceCard
@@ -1631,7 +1630,7 @@ public class CardFactoryUtil {
         };
 
         return soulshift;
-    } // ability_Soulshift()
+    } // abilitySoulshift()
 
     /**
      * <p>
@@ -1701,12 +1700,12 @@ public class CardFactoryUtil {
         desc.setStackDescription(sbStack.toString());
 
         return desc;
-    } // soul_desc()
+    } // soulshiftTrigger()
 
     // CardList choices are the only cards the user can successful select
     /**
      * <p>
-     * input_targetSpecific.
+     * inputTargetSpecific.
      * </p>
      * 
      * @param spell
@@ -1729,7 +1728,7 @@ public class CardFactoryUtil {
     // CardList choices are the only cards the user can successful select
     /**
      * <p>
-     * input_targetSpecific.
+     * inputTargetSpecific.
      * </p>
      * 
      * @param spell
@@ -1781,12 +1780,12 @@ public class CardFactoryUtil {
             } // selectCard()
         };
         return target;
-    } // input_targetSpecific()
+    } // inputTargetSpecific()
 
     // CardList choices are the only cards the user can successful select
     /**
      * <p>
-     * input_targetChampionSac.
+     * inputTargetChampionSac.
      * </p>
      * 
      * @param crd
@@ -1842,11 +1841,11 @@ public class CardFactoryUtil {
             } // selectCard()
         };
         return target;
-    } // input_targetSpecific()
+    } // inputTargetSpecific()
 
     /**
      * <p>
-     * input_equipCreature.
+     * inputEquipCreature.
      * </p>
      * 
      * @param equip
@@ -1934,7 +1933,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * MasteroftheWildHunt_input_targetCreature.
+     * masterOfTheWildHuntInputTargetCreature.
      * </p>
      * 
      * @param spell
@@ -1976,7 +1975,7 @@ public class CardFactoryUtil {
             } // selectCard()
         };
         return target;
-    } // input_MasteroftheWildHunt_input_targetCreature()
+    } // masterOfTheWildHuntInputTargetCreature()
 
     /**
      * <p>
@@ -2025,7 +2024,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_getHumanCreature.
+     * getHumanCreatureAI.
      * </p>
      * 
      * @param spell
@@ -2044,7 +2043,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_getHumanCreature.
+     * getHumanCreatureAI.
      * </p>
      * 
      * @param keyword
@@ -2068,11 +2067,11 @@ public class CardFactoryUtil {
             }
         });
         return creature;
-    } // AI_getHumanCreature()
+    } // getHumanCreatureAI()
 
     /**
      * <p>
-     * AI_getHumanCreature.
+     * getHumanCreatureAI.
      * </p>
      * 
      * @param toughness
@@ -2100,7 +2099,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * AI_targetHuman.
+     * targetHumanAI.
      * </p>
      * 
      * @return a {@link forge.CommandArgs} object.
@@ -2115,7 +2114,7 @@ public class CardFactoryUtil {
                 sa.setTargetPlayer(AllZone.getHumanPlayer());
             }
         };
-    } // targetHuman()
+    } // targetHumanAI()
 
     /**
      * <p>
@@ -2316,20 +2315,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * canBeTargetedBy.
-     * </p>
-     * 
-     * @param c
-     *            the c
-     * @return a boolean.
-     */
-    /*
-     * public static boolean canBeTargetedBy(final SpellAbility ability, final
-     * Card target) { return target.canBeTargetedBy(ability); }
-     */
-
-    /**
-     * <p>
      * isColored.
      * </p>
      * 
@@ -2340,64 +2325,6 @@ public class CardFactoryUtil {
     public static boolean isColored(final Card c) {
         return c.isWhite() || c.isBlue() || c.isBlack() || c.isRed() || c.isGreen();
     }
-
-    /**
-     * <p>
-     * canBeTargetedBy.
-     * </p>
-     * 
-     * @param card
-     *            the card
-     * @param target
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    /*
-     * public static boolean canBeTargetedBy(final Card spell, final Card
-     * target) { if (target == null) { return true; }
-     * 
-     * if (target.isImmutable()) { return false; }
-     * 
-     * final PlayerZone zone = AllZone.getZoneOf(target); // if zone is null, it
-     * means its on the stack if ((zone == null) ||
-     * !zone.is(Constant.Zone.Battlefield)) { // targets not in play, can
-     * normally be targeted return true; }
-     * 
-     * if (AllZoneUtil.isCardInPlay("Spellbane Centaur", target.getController())
-     * && target.isCreature() && spell.isBlue()) { return false; }
-     * 
-     * if (target.getName().equals("Gaea's Revenge") && !spell.isGreen()) {
-     * return false; }
-     * 
-     * if (CardFactoryUtil.hasProtectionFrom(spell, target)) { return false; }
-     * 
-     * if (target.getKeyword() != null) { final ArrayList<String> list =
-     * target.getKeyword();
-     * 
-     * String kw = ""; for (int i = 0; i < list.size(); i++) { kw = list.get(i);
-     * if (kw.equals("Shroud")) { return false; }
-     * 
-     * if (kw.equals("Hexproof")) { if
-     * (!spell.getController().equals(target.getController())) { return false; }
-     * }
-     * 
-     * if (kw.equals("CARDNAME can't be the target of Aura spells.") ||
-     * kw.equals("CARDNAME can't be enchanted.")) { if (spell.isAura() &&
-     * spell.isSpell()) { return false; } }
-     * 
-     * if (kw.equals(
-     * "CARDNAME can't be the target of red spells or abilities from red sources."
-     * )) { if (spell.isRed()) { return false; } }
-     * 
-     * if (kw.equals("CARDNAME can't be the target of black spells.")) { if
-     * (spell.isBlack() && spell.isSpell()) { return false; } }
-     * 
-     * if (kw.equals("CARDNAME can't be the target of blue spells.")) { if
-     * (spell.isBlue() && spell.isSpell()) { return false; } }
-     * 
-     * if (kw.equals("CARDNAME can't be the target of spells.")) { if
-     * (spell.isSpell()) { return false; } } } } return true; }
-     */
 
     // does "target" have protection from "card"?
     /**
@@ -2458,26 +2385,25 @@ public class CardFactoryUtil {
     // returns the number of equipments named "e" card c is equipped by
     /**
      * <p>
-     * hasNumberEquipments.
+     * Gets the number of equipments with a given name that a given card is equipped by.
      * </p>
      * 
-     * @param c
+     * @param card
      *            a {@link forge.Card} object.
-     * @param e
+     * @param name
      *            a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int hasNumberEquipments(final Card c, final String e) {
-        if (!c.isEquipped()) {
+    public static int hasNumberEquipments(final Card card, final String name) {
+        if (!card.isEquipped()) {
             return 0;
         }
 
-        final String equipmentName = e;
-        CardList list = new CardList(c.getEquippedBy());
+        CardList list = new CardList(card.getEquippedBy());
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return c.getName().equals(equipmentName);
+                return c.getName().equals(name);
             }
 
         });
@@ -2594,10 +2520,9 @@ public class CardFactoryUtil {
         return m;
     }
 
-    // parser for player targeted X variables
     /**
      * <p>
-     * playerXCount.
+     * Parse player targeted X variables.
      * </p>
      * 
      * @param players
@@ -2734,10 +2659,9 @@ public class CardFactoryUtil {
         return num;
     }
 
-    // parser for non-mana X variables
     /**
      * <p>
-     * xCount.
+     * Parse non-mana X variables.
      * </p>
      * 
      * @param c
@@ -3025,21 +2949,17 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("Threshold")) {
             if (cardController.hasThreshold()) {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Have
-                                                                               // Threshold
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not
-                                                                               // Threshold
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
         }
 
         if (sq[0].contains("Landfall")) {
             if (cardController.hasLandfall()) {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Have
-                                                                               // Landfall
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not
-                                                                               // Landfall
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
         }
 
@@ -3114,9 +3034,7 @@ public class CardFactoryUtil {
                     && AllZone.getPhase().getPlayerTurn().equals(cardController)) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
-                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not
-                                                                               // Main
-                                                                               // Phase
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
         }
 
@@ -3512,7 +3430,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * input_UntapUpToNType.
+     * inputUntapUpToNType.
      * </p>
      * 
      * @param n
@@ -3646,11 +3564,10 @@ public class CardFactoryUtil {
         return maxColor;
     }
 
-    // total cost to pay for an attacker c, cards like Propaganda, Ghostly
-    // Prison, Collective Restraint, ...
     /**
      * <p>
-     * getPropagandaCost.
+     * Get the total cost to pay for an attacker c, due to cards like Propaganda,
+     * Ghostly Prison, Collective Restraint, ...
      * </p>
      * 
      * @param c
@@ -3776,9 +3693,6 @@ public class CardFactoryUtil {
         c.setBaseDefense(baseDefense);
 
         final int multiplier = AllZoneUtil.getTokenDoublersMagnitude(controller);
-        // TODO - does this need to set
-        // PlayerZone_ComesIntoPlay.SimultaneousEntry like Rite of Replication
-        // does?
         for (int i = 0; i < multiplier; i++) {
             Card temp = CardFactoryUtil.copyStats(c);
 
@@ -3919,7 +3833,7 @@ public class CardFactoryUtil {
     }
 
     /**
-     * getWorstLand(String)
+     * getWorstLand
      * <p/>
      * This function finds the worst land a player has in play based on: worst
      * 1. tapped, basic land 2. tapped, non-basic land 3. untapped, basic land
@@ -4002,92 +3916,6 @@ public class CardFactoryUtil {
         final int index = CardFactoryUtil.random.nextInt(list.size());
         return list.get(index);
     }
-
-    /**
-     * <p>
-     * revertManland.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param removeTypes
-     *            an array of {@link java.lang.String} objects.
-     * @param removeKeywords
-     *            an array of {@link java.lang.String} objects.
-     * @param cost
-     *            a {@link java.lang.String} object.
-     * @param timeStamp
-     *            a long.
-     */
-    /*
-    @Deprecated
-    public static void revertManland(final Card c, final String[] removeTypes, final String[] removeKeywords,
-            final String cost, final long timeStamp) {
-        c.setBaseAttack(0);
-        c.setBaseDefense(0);
-        for (final String r : removeTypes) {
-            c.removeType(r);
-        }
-
-        for (final String k : removeKeywords) {
-            c.removeIntrinsicKeyword(k);
-        }
-
-        // c.setManaCost(cost);
-        c.removeColor(cost, c, false, timeStamp);
-        c.unEquipAllCards();
-    }
-    */
-
-    /**
-     * <p>
-     * activateManland.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param attack
-     *            a int.
-     * @param defense
-     *            a int.
-     * @param addTypes
-     *            an array of {@link java.lang.String} objects.
-     * @param addKeywords
-     *            an array of {@link java.lang.String} objects.
-     * @param cost
-     *            a {@link java.lang.String} object.
-     * @return a long.
-     */
-    /*
-    @Deprecated
-    public static long activateManland(final Card c, final int attack, final int defense, final String[] addTypes,
-            final String[] addKeywords, String cost) {
-        c.setBaseAttack(attack);
-        c.setBaseDefense(defense);
-
-        for (final String r : addTypes) {
-            // if the card doesn't have that type, add it
-            if (!c.isType(r)) {
-                c.addType(r);
-            }
-        }
-        for (final String k : addKeywords) {
-            // if the card doesn't have that keyword, add it (careful about
-            // stackable keywords)
-            if (!c.getIntrinsicKeyword().contains(k)) {
-                c.addIntrinsicKeyword(k);
-            }
-        }
-
-        // c.setManaCost(cost);
-        if (cost.equals("")) {
-            cost = "0";
-        }
-
-        final long timestamp = c.addColor(cost, c, false, true);
-        return timestamp;
-    }
-    */
 
     /**
      * <p>
@@ -4228,10 +4056,9 @@ public class CardFactoryUtil {
      * AllZone.getStack().add(saTrigger); } } } //} }
      */
 
-    // copies stats like attack, defense, etc..
     /**
      * <p>
-     * copyStats.
+     * Copies stats like power, toughness, etc.
      * </p>
      * 
      * @param o
@@ -4314,9 +4141,8 @@ public class CardFactoryUtil {
                     final SpellAbility bbSA = sa.copy();
                     final String newCost = CardUtil.addManaCosts(card.getManaCost(), bbCost);
                     if (bbSA.getPayCosts() != null) {
-                        bbSA.setPayCosts(new Cost(newCost, sa.getSourceCard().getName(), false)); // create
-                                                                                                  // new
-                                                                                                  // abCost
+                        // create new Cost
+                        bbSA.setPayCosts(new Cost(newCost, sa.getSourceCard().getName(), false));
                     }
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
@@ -5041,14 +4867,6 @@ public class CardFactoryUtil {
      * 
      */
     public static final void parseKeywords(final Card card, final String cardName) {
-        /*
-         * if (card.hasKeyword("CARDNAME enters the battlefield tapped.")) {
-         * card.addComesIntoPlayCommand(new Command() { private static final
-         * long serialVersionUID = 203335252453049234L;
-         * 
-         * @Override public void execute() { // it enters the battlefield this
-         * way, and should not fire // triggers card.setTapped(true); } }); }
-         */// if "Comes into play tapped."
         if (card.hasKeyword("CARDNAME enters the battlefield tapped unless you control two or fewer other lands.")) {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 6436821515525468682L;
