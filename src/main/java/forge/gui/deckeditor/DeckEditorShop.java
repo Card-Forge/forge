@@ -224,15 +224,9 @@ public final class DeckEditorShop extends DeckEditorBase {
     private void jbInit() throws Exception {
 
         this.setLayout(null);
-        // Need to raise the top table and increase the total height.
-        // this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 20, 726, 346));
         this.getTopTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 17, 726, 347));
-        // Need to raise the bottom table and decrease the height.
-        // this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 458, 726, 276));
         this.getBottomTableWithCards().getTableDecorated().setBounds(new Rectangle(19, 435, 726, 267));
 
-        // Raise the sell card button.
-        // this.sellButton.setBounds(new Rectangle(180, 403, 146, 49));
         this.sellButton.setBounds(new Rectangle(180, 375, 146, 49));
         // removeButton.setIcon(upIcon);
         this.sellButton.setFont(new java.awt.Font("Dialog", 0, 13));
@@ -252,28 +246,18 @@ public final class DeckEditorShop extends DeckEditorBase {
         });
 
         this.buyButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        // Raise the buy card button.
-        // this.buyButton.setBounds(new Rectangle(23, 403, 146, 49));
         this.buyButton.setBounds(new Rectangle(23, 375, 146, 49));
 
-        // The card view needs to be moved up and can not be as tall as it was.
-        // this.getCardView().setBounds(new Rectangle(765, 23, 239, 710));
         this.getCardView().setBounds(new Rectangle(765, 16, 239, 662));
         // Do not lower statsLabel any lower, we want this to be visible at 1024
         // x 768 screen size
         this.setTitle("Card Shop");
 
-        // Move total credits label to the right and move towards the top.
-        // this.creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
         this.creditsLabel.setBounds(new Rectangle(350, 365, 714, 31));
         this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
         this.creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        // Need to raise the sell % label and move it to the right
-        // and we will decrease the point size to 13.
-        // this.sellPercentageLabel.setBounds(new Rectangle(350, 403, 450, 31));
         this.sellPercentageLabel.setBounds(new Rectangle(380, 395, 450, 31));
         this.sellPercentageLabel.setText("(Sell percentage: " + this.multiplier + ")");
-        // this.sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 13));
         // We will remove the label below as the other deck editors do not display this text.
         // this.jLabel1.setText("Click on the column name (like name or color) to sort the cards");
