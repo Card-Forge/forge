@@ -55,11 +55,9 @@ public class CardListUtil {
         return out;
     }
 
-    // the higher the defense the better
-
     /**
      * <p>
-     * sortDefense.
+     * Sorts a CardList by toughness, putting highest toughness first.
      * </p>
      * 
      * @param list
@@ -94,11 +92,10 @@ public class CardListUtil {
         list.sort(com);
     } // sortAttack()
 
-    // sort by "best" using the EvaluateCreature function
-    // the best creatures will be first in the list
     /**
      * <p>
-     * sortByEvaluateCreature.
+     * Sorts a CardList by "best" using the EvaluateCreature function.
+     * the best creatures will be first in the list.
      * </p>
      * 
      * @param list
@@ -114,11 +111,9 @@ public class CardListUtil {
         list.sort(com);
     } // sortByEvaluateCreature()
 
-    // sort by "best" using the EvaluateCreature function
-    // the best creatures will be first in the list
     /**
      * <p>
-     * sortByMostExpensive.
+     * Sorts a CardList by converted mana cost, putting highest first.
      * </p>
      * 
      * @param list
@@ -132,7 +127,7 @@ public class CardListUtil {
             }
         };
         list.sort(com);
-    } // sortByEvaluateCreature()
+    } // sortByMostExpensive()
 
     // the lower the attack the better
     /**
@@ -155,7 +150,7 @@ public class CardListUtil {
 
     /**
      * <p>
-     * sortNonFlyingFirst.
+     * Sorts a CardList, putting creatures without Flying first.
      * </p>
      * 
      * @param list
@@ -166,10 +161,9 @@ public class CardListUtil {
         list.reverse();
     } // sortNonFlyingFirst
 
-    // the creature with flying are better
     /**
      * <p>
-     * sortFlying.
+     * Sorts a CardList, putting creatures with Flying first.
      * </p>
      * 
      * @param list
@@ -193,7 +187,6 @@ public class CardListUtil {
         list.sort(com);
     } // sortFlying()
 
-    // sort by keyword
     /**
      * <p>
      * sortByKeyword.
@@ -405,10 +398,9 @@ public class CardListUtil {
         list.sort(com);
     }
 
-    // Sorts from high to low
     /**
      * <p>
-     * sortCMC.
+     * Sorts a CardList from highest converted mana cost to lowest.
      * </p>
      * 
      * @param list
@@ -544,7 +536,7 @@ public class CardListUtil {
     // Get the total converted mana cost of a card list
     /**
      * <p>
-     * sumCMC.
+     * Gets the total converted mana cost of a card list.
      * </p>
      * 
      * @param c
@@ -563,10 +555,9 @@ public class CardListUtil {
 
     } // sumCMC
 
-    // Get the average converted mana cost of a card list
     /**
      * <p>
-     * getAverageCMC.
+     * Gets the average converted mana cost of a card list.
      * </p>
      * 
      * @param c
