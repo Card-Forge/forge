@@ -27,7 +27,7 @@ import forge.card.staticability.StaticAbility;
 
 /**
  * <p>
- * PlayerZone_ComesIntoPlay class.
+ * PlayerZoneComesIntoPlay class.
  * </p>
  * 
  * @author Forge
@@ -42,7 +42,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
 
     /**
      * <p>
-     * Constructor for PlayerZone_ComesIntoPlay.
+     * Constructor for PlayerZoneComesIntoPlay.
      * </p>
      * 
      * @param zone
@@ -58,7 +58,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
     @Override
     public final void add(final Object o) {
         if (o == null) {
-            throw new RuntimeException("PlayerZone_ComesInto Play : add() object is null");
+            throw new RuntimeException("PlayerZoneComesInto Play : add() object is null");
         }
 
         super.add(o);
@@ -126,12 +126,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             if (c.isLand()) {
                 CardList list = c.getController().getCardsIn(Zone.Battlefield);
 
-                /*
-                 * CardList listValakut = list.filter(new CardListFilter() {
-                 * public boolean addCard(Card c) { return
-                 * c.getName().contains("Valakut, the Molten Pinnacle"); } });
-                 */
-
                 list = list.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
@@ -144,14 +138,6 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 for (int i = 0; i < list.size(); i++) {
                     GameActionUtil.executeLandfallEffects(list.get(i));
                 }
-                /*
-                 * // Check for a mountain if (!listValakut.isEmpty() &&
-                 * c.isType("Mountain") ) { for (int i = 0; i <
-                 * listValakut.size(); i++) { boolean b =
-                 * GameActionUtil.executeValakutEffect(listValakut.get(i),c); if
-                 * (!b) { // Not enough mountains to activate Valakut -- stop
-                 * the loop break; } } }
-                 */
 
                 // Tectonic Instability
                 final CardList tis = AllZoneUtil.getCardsIn(Zone.Battlefield, "Tectonic Instability");
@@ -306,13 +292,8 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             for (final String effect : effects) {
                 tempEffect = effect;
                 AllZone.getStaticEffects().removeStateBasedEffect(effect);
-                final Command comm = GameActionUtil.getCommands().get(tempEffect); // this
-                // is to
-                // make
-                // sure
-                // cards
-                // reset
-                // correctly
+                // this is to make sure cards reset correctly
+                final Command comm = GameActionUtil.getCommands().get(tempEffect);
                 comm.execute();
             }
 

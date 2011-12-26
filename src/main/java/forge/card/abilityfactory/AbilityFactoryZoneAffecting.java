@@ -1477,7 +1477,7 @@ public class AbilityFactoryZoneAffecting {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
-     *            TODO
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private static boolean discardTargetAI(final AbilityFactory af, final SpellAbility sa) {
