@@ -300,4 +300,24 @@ public final class CardColor implements Comparable<CardColor> {
     public static void setNullColor(final CardColor nullColor0) {
         CardColor.nullColor = nullColor0;
     }
+    
+    public boolean sharesColorWith(CardColor ccOther) {
+        
+        if (this.isWhite() && ccOther.isWhite())
+            return true;
+        
+        if (this.isBlue() && ccOther.isBlue())
+            return true;
+        
+        if (this.isBlack() && ccOther.isBlack())
+            return true;
+        
+        if (this.isRed() && ccOther.isRed())
+            return true;
+        
+        if (this.isGreen() && ccOther.isGreen())
+            return true;
+        
+        return false;
+    }
 }
