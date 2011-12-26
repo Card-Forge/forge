@@ -14,6 +14,13 @@ Enjoy the new work and be patient as this part of the project moves forward. For
 The JuzamJedi cube has once again been updated with a newer list of cards. All core sets and all expansions should now be at least 75% implemented. And all standard legal sets are at least 90% complete.
 
 
+Several people have noticed a crash report stating that "Buffers have not been created". We hope to have this fixed in the near future. It has been pointed out that:
+
+"Parts of Swing use EventQueue by themselves, this means your Swing code executes in main thread part executes in EDT and as Swing isn't thread safe this leads to elusive errors like this. One of the reasons of this error is that the frame might not be fully constructed before buffers are created -> race condition between the threads."
+
+Several people have noticed forge slowing down after playing a number of matches without quitting forge in between the matches that are played. The new UI may be involved somehow. We also hope to have this figured out and fixed in the near future. Please be patient in the meanwhile.
+
+
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
 We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
