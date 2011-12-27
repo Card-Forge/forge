@@ -617,6 +617,8 @@ Notes:
 - fix Observer leaks in ControlTabber
 - fix Observer leak in ControlField
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- fix leak with MouseListeners hooked up to mana pools.
+- Last attempt to build and release ended in another cardforge error. It now appears to be back online. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
