@@ -67,6 +67,7 @@ public class FSkin {
         } else {
             for (int i = 0; i < children.length; i++) {
                 if (children[i].equalsIgnoreCase(".svn")) { continue; }
+                if (children[i].equalsIgnoreCase(".DS_Store")) { continue; }
                 mySkins.add(children[i]);
             }
         }
