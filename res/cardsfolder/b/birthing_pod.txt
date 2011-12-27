@@ -2,7 +2,7 @@ Name:Birthing Pod
 ManaCost:3 PG
 Types:Artifact
 Text:no text
-A:AB$ ChangeZone | Cost$ 1 PG T Sac<1/Creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. |SpellDescription$ Sacrifice a creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 1 PG T Sac<1/Creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. | SpellDescription$ Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
 SVar:X:Sacrificed$CardManaCost/Plus.1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
