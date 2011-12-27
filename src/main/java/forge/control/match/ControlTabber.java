@@ -37,6 +37,8 @@ public class ControlTabber extends MyObservable {
     private final ViewTabber view;
     private MouseAdapter maMilling, maHand, maLibrary, maUnlimited,
         maMana, maSetup, maTutor, maCounter, maTap, maUntap, maLife;
+    
+    private Observer stackObserver, logObserver;
 
     /**
      * Controls the vertical tabber in sidebar used for viewing gameplay data:
@@ -74,12 +76,13 @@ public class ControlTabber extends MyObservable {
 
         // Various mouse adapters for dev buttons
         initMouseAdapters();
+        
+        initObservers();
     }
-
-    /** Adds observers to tabber. */
-    public void addObservers() {
+    
+    private void initObservers() {
         // Stack
-        final Observer o1 = new Observer() {
+        stackObserver = new Observer() {
             @Override
             public void update(final Observable a, final Object b) {
                 ControlTabber.this.view.updateStack();
@@ -87,18 +90,22 @@ public class ControlTabber extends MyObservable {
         };
 
         //Game Log
-        final Observer o2 = new Observer() {
+        logObserver = new Observer() {
             @Override
             public void update(final Observable a, final Object b) {
                 ControlTabber.this.view.updateConsole();
             }
         };
+    }
 
-        AllZone.getStack().deleteObserver(o1);
-        AllZone.getGameLog().deleteObserver(o2);
+    /** Adds observers to tabber. */
+    public void addObservers() {
 
-        AllZone.getStack().addObserver(o1);
-        AllZone.getGameLog().addObserver(o2);
+        AllZone.getStack().deleteObserver(stackObserver);
+        AllZone.getGameLog().deleteObserver(logObserver);
+
+        AllZone.getStack().addObserver(stackObserver);
+        AllZone.getGameLog().addObserver(logObserver);
     }
 
     /** Adds listeners to various components in tabber. */
