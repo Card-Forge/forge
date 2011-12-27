@@ -74,6 +74,8 @@ public class ControlField {
 
     private MouseMotionAdapter maCardOver;
     private MouseAdapter maAvatar, maLibrary, maHand, maExiled, maGraveyard, maFlashback, maCardClick;
+    
+    private Observer observerZones, observerDetails, observerPlay;
 
     /**
      * Child controller, applied to single field in battlefield. Manages player
@@ -90,6 +92,7 @@ public class ControlField {
         this.view = v;
 
         initMouseAdapters();
+        initObservers();
     }
 
     /**
@@ -115,50 +118,14 @@ public class ControlField {
      * stats, etc.
      */
     public void addObservers() {
-        // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
-        final Observer o1 = new Observer() {
-            @Override
-            public void update(final Observable a, final Object b) {
-                ControlField.this.view.updateZones(ControlField.this.player);
-            }
-        };
 
-        // Life total, poison total, and keywords, attached directly to Player.
-        final Observer o2 = new Observer() {
-            @Override
-            public void update(final Observable a, final Object b) {
-                ControlField.this.view.updateDetails(ControlField.this.player);
-            }
-        };
+        this.player.getZone(Zone.Hand).deleteObserver(observerZones);
+        this.player.deleteObserver(observerDetails);
+        this.player.getZone(Zone.Battlefield).deleteObserver(observerPlay);
 
-        if (AllZone.getQuestData() != null && this.player.isComputer()) {
-            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-            String iconName = "";
-            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
-                iconName = Constant.Quest.OPP_ICON_NAME[0];
-                final File file = new File(base, iconName);
-                this.getView().setImage(new ImageIcon(file.toString()).getImage());
-
-            }
-        }
-
-        // Card play area, attached to battlefield zone.
-        final Observer o3 = new Observer() {
-            @Override
-            public void update(final Observable a, final Object b) {
-                final PlayerZone pZone = (PlayerZone) a;
-                final Card[] c = pZone.getCards(false);
-                GuiDisplayUtil.setupPlayZone(ControlField.this.view.getTabletop(), c);
-            }
-        };
-
-        this.player.getZone(Zone.Hand).deleteObserver(o1);
-        this.player.deleteObserver(o2);
-        this.player.getZone(Zone.Battlefield).deleteObserver(o3);
-
-        this.player.getZone(Zone.Hand).addObserver(o1);
-        this.player.addObserver(o2);
-        this.player.getZone(Zone.Battlefield).addObserver(o3);
+        this.player.getZone(Zone.Hand).addObserver(observerZones);
+        this.player.addObserver(observerDetails);
+        this.player.getZone(Zone.Battlefield).addObserver(observerPlay);
     }
 
     /**
@@ -350,6 +317,45 @@ public class ControlField {
         protected void doAction(final Card c) {
         }
     } // End ZoneAction
+    
+    private void initObservers() {
+        // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
+        observerZones = new Observer() {
+            @Override
+            public void update(final Observable a, final Object b) {
+                ControlField.this.view.updateZones(ControlField.this.player);
+            }
+        };
+
+        // Life total, poison total, and keywords, attached directly to Player.
+        observerDetails = new Observer() {
+            @Override
+            public void update(final Observable a, final Object b) {
+                ControlField.this.view.updateDetails(ControlField.this.player);
+            }
+        };
+
+        if (AllZone.getQuestData() != null && this.player.isComputer()) {
+            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+            String iconName = "";
+            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
+                iconName = Constant.Quest.OPP_ICON_NAME[0];
+                final File file = new File(base, iconName);
+                this.getView().setImage(new ImageIcon(file.toString()).getImage());
+
+            }
+        }
+
+        // Card play area, attached to battlefield zone.
+        observerPlay = new Observer() {
+            @Override
+            public void update(final Observable a, final Object b) {
+                final PlayerZone pZone = (PlayerZone) a;
+                final Card[] c = pZone.getCards(false);
+                GuiDisplayUtil.setupPlayZone(ControlField.this.view.getTabletop(), c);
+            }
+        };
+    }
 
     /** Simple method that inits the mouse adapters for listeners,
      * here to simplify life in the constructor.
