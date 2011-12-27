@@ -59,7 +59,6 @@ import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewField;
-import forge.view.match.ViewField.DetailLabel;
 import forge.view.match.ViewTopLevel;
 
 /**
@@ -74,6 +73,8 @@ public class ControlField {
 
     private MouseMotionAdapter maCardOver;
     private MouseAdapter maAvatar, maLibrary, maHand, maExiled, maGraveyard, maFlashback, maCardClick;
+    
+    private MouseAdapter maBlack, maBlue, maGreen, maRed, maWhite, maColorless;
     
     private Observer observerZones, observerDetails, observerPlay;
 
@@ -192,31 +193,24 @@ public class ControlField {
      * Adds listeners to mana "pool" labels, for paying mana.
      */
     private void addPoolListeners() {
-        this.addPoolListener(this.view.getLblBlack(), Constant.Color.BLACK);
-        this.addPoolListener(this.view.getLblBlue(), Constant.Color.BLUE);
-        this.addPoolListener(this.view.getLblGreen(), Constant.Color.GREEN);
-        this.addPoolListener(this.view.getLblRed(), Constant.Color.RED);
-        this.addPoolListener(this.view.getLblWhite(), Constant.Color.WHITE);
-        this.addPoolListener(this.view.getLblColorless(), Constant.Color.COLORLESS);
-    }
-
-    private void addPoolListener(DetailLabel label, final String color) {
-        label.enableHover();
-        label.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                if (ControlField.this.player.isComputer()) {
-                    System.out.print("Stop trying to spend the AI's mana");
-                    // TODO: Mindslaver might need to add changes here
-                } else {
-                    Input in = AllZone.getInputControl().getInput();
-                    if (in instanceof InputMana) {
-                        // Do something
-                        ((InputMana) in).selectManaPool(color);
-                    }
-                }
-            }
-        });
+        this.view.getLblBlack().enableHover();
+        this.view.getLblBlack().removeMouseListener(maBlack);
+        this.view.getLblBlack().addMouseListener(maBlack);
+        this.view.getLblBlue().enableHover();
+        this.view.getLblBlue().removeMouseListener(maBlue);
+        this.view.getLblBlue().addMouseListener(maBlue);
+        this.view.getLblGreen().enableHover();
+        this.view.getLblGreen().removeMouseListener(maGreen);
+        this.view.getLblGreen().addMouseListener(maGreen);
+        this.view.getLblRed().enableHover();
+        this.view.getLblRed().removeMouseListener(maRed);
+        this.view.getLblRed().addMouseListener(maRed);
+        this.view.getLblWhite().enableHover();
+        this.view.getLblWhite().removeMouseListener(maWhite);
+        this.view.getLblWhite().addMouseListener(maWhite);
+        this.view.getLblColorless().enableHover();
+        this.view.getLblColorless().removeMouseListener(maColorless);
+        this.view.getLblColorless().addMouseListener(maColorless);
     }
 
     /**
@@ -521,5 +515,102 @@ public class ControlField {
                 }
             }
         };
+        
+        maBlack = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    System.out.println("Stop trying to spend the AI's mana");
+                    // TODO: Mindslaver might need to add changes here
+                } else {
+                    Input in = AllZone.getInputControl().getInput();
+                    if (in instanceof InputMana) {
+                        // Do something
+                        ((InputMana) in).selectManaPool(Constant.Color.BLACK);
+                    }
+                }
+            }
+        };
+        
+        maBlue = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    System.out.println("Stop trying to spend the AI's mana");
+                    // TODO: Mindslaver might need to add changes here
+                } else {
+                    Input in = AllZone.getInputControl().getInput();
+                    if (in instanceof InputMana) {
+                        // Do something
+                        ((InputMana) in).selectManaPool(Constant.Color.BLUE);
+                    }
+                }
+            }
+        };
+        
+        maGreen = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    System.out.println("Stop trying to spend the AI's mana");
+                    // TODO: Mindslaver might need to add changes here
+                } else {
+                    Input in = AllZone.getInputControl().getInput();
+                    if (in instanceof InputMana) {
+                        // Do something
+                        ((InputMana) in).selectManaPool(Constant.Color.GREEN);
+                    }
+                }
+            }
+        };
+        
+        maRed = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    System.out.println("Stop trying to spend the AI's mana");
+                    // TODO: Mindslaver might need to add changes here
+                } else {
+                    Input in = AllZone.getInputControl().getInput();
+                    if (in instanceof InputMana) {
+                        // Do something
+                        ((InputMana) in).selectManaPool(Constant.Color.RED);
+                    }
+                }
+            }
+        };
+        
+        maWhite = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    System.out.println("Stop trying to spend the AI's mana");
+                    // TODO: Mindslaver might need to add changes here
+                } else {
+                    Input in = AllZone.getInputControl().getInput();
+                    if (in instanceof InputMana) {
+                        // Do something
+                        ((InputMana) in).selectManaPool(Constant.Color.WHITE);
+                    }
+                }
+            }
+        };
+        
+        maColorless = new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                if (ControlField.this.player.isComputer()) {
+                    System.out.println("Stop trying to spend the AI's mana");
+                    // TODO: Mindslaver might need to add changes here
+                } else {
+                    Input in = AllZone.getInputControl().getInput();
+                    if (in instanceof InputMana) {
+                        // Do something
+                        ((InputMana) in).selectManaPool(Constant.Color.COLORLESS);
+                    }
+                }
+            }
+        };
     } // End initMouseAdapters()
+    
 } // End class ControlField

@@ -695,6 +695,7 @@ public class ViewField extends FRoundedPanel {
 
         /** Enable hover effects for this label. */
         public void enableHover() {
+            this.disableHover();
             this.addMouseListener(this.madHover);
         }
 
