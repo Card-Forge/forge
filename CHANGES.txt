@@ -18,7 +18,7 @@ Several people have noticed a crash report stating that "Buffers have not been c
 
 "Parts of Swing use EventQueue by themselves, this means your Swing code executes in main thread part executes in EDT and as Swing isn't thread safe this leads to elusive errors like this. One of the reasons of this error is that the frame might not be fully constructed before buffers are created -> race condition between the threads."
 
-Several people have noticed forge slowing down after playing a number of matches without quitting forge in between the matches that are played. The new UI may be involved somehow. We also hope to have this figured out and fixed in the near future. Please be patient in the meanwhile.
+Several people have noticed forge slowing down after playing a number of matches without quitting forge in between the matches that are played. The new UI may be involved somehow. We also hope to have this figured out and fixed in the near future. Please be patient in the meanwhile. A recent fix was implemented that should improve the slowdown problem somewhat.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
@@ -597,6 +597,25 @@ Notes:
 - Added method to CardColor to identify if another CardColor shares color with another.
 - Added method to CardType to identify if another CardType shares a subtype with another.
 - Added CardRatings to AllZone for singular, global access.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- cleanup TODOs in a few classes
+- clean up several TODOs all over the place
+- change some Ability_Mana -> AbilityMana in comments (to help with searching)
+- change some Ability_Mana -> AbilityMana in comments (to help with searching)
+- The quest mode card shop should now display prices that are five digits long. Tested under Mac OS X and should also work under Windows as Windows uses a font with a narrower pen stroke.
+- Cleanup comments in DeckEditorQuest.
+- Cleanup comments in DeckEditorShop.
+- some TODO cleanups in various classes.
+- various comment cleanups in PlayerZoneComesIntoPlay and AbilityFactoryZoneAffecting
+- comment and javadoc fixes in CardFactoryUtil
+- Fixing Birthing Pod description
+- comment out the Stack Size and Stack Offset settings on the Settings screen. These aren't hooked up, and we will need to decide what to do with them going forward.
+- filter out .DS_Store file name when looking for skins (created by Mac OS X Finder)
+- remove Old GUI checkbox option. It no longer works, and we will only be using/supporting the new UI.
+- fix deleting of Observers for Hand Zone (in ControlHand). It was deleting a new Object, which obviously doesn't already exist. This should be a step towards fixing performance problems after many games.
+- fix Observer leaks in ControlTabber
+- fix Observer leak in ControlField
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
