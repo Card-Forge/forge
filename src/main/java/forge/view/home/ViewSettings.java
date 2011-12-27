@@ -40,10 +40,10 @@ public class ViewSettings extends JScrollPane {
         cbOldUI, cbUploadDraft, cbStackLand, cbRandomFoil, cbTextMana,
         cbSingletons;
 
-    private JRadioButton radStack3, radStack4, radStack5, radStack6, radStack7,
-        radStack8, radStack9, radStack10, radStack11, radStack12;
+    //private JRadioButton radStack3, radStack4, radStack5, radStack6, radStack7,
+    //   radStack8, radStack9, radStack10, radStack11, radStack12;
 
-    private JRadioButton radOffsetTiny, radOffsetSmall, radOffsetMedium, radOffsetLarge;
+    //private JRadioButton radOffsetTiny, radOffsetSmall, radOffsetMedium, radOffsetLarge;
 
     private JRadioButton radCardTiny, radCardSmaller, radCardSmall,
         radCardMedium, radCardLarge, radCardHuge;
@@ -110,10 +110,9 @@ public class ViewSettings extends JScrollPane {
         viewport.add(cbOldUI, constraints);
         viewport.add(lblOldUI, constraints2);
 
-        //slapshot5 - this is in progress, but I need to check this in for some other changes.
         cbAnte = new OptionsCheckBox("Play for Ante");
         cbAnte.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
-        NoteLabel lblAnte = new NoteLabel("Each player antes a card and the game is for keeps.");
+        NoteLabel lblAnte = new NoteLabel("Determines whether or not the game is played for ante.");
         viewport.add(cbAnte, constraints);
         viewport.add(lblAnte, constraints2);
 
@@ -136,19 +135,21 @@ public class ViewSettings extends JScrollPane {
         viewport.add(cbDevMode, constraints);
         viewport.add(lblDevMode, constraints2);
 
+        /*
         JLabel lblTitleStack = new TitleLabel("Stack Size");
-        JLabel lblStackSize = new NoteLabel("Specify maximum number of spells allowed on stack.");
+        JLabel lblStackSize = new NoteLabel("Specifies the maximum number of identical cards to stack.");
         viewport.add(lblTitleStack, "gapleft 10%, h 25px!, w 150px!, gapbottom 2px");
         viewport.add(lblStackSize, constraints);
 
         populateStackRadios();
 
         JLabel lblTitleOffset = new TitleLabel("Stack Offset");
-        JLabel lblStackOffset = new NoteLabel("Not sure what this does...can someone who does update this text");
+        JLabel lblStackOffset = new NoteLabel("Specifies the number of pixels to offset stacked cards by.");
         viewport.add(lblTitleOffset, "gapleft 10%, h 25px!, w 150px!, gapbottom 2px");
         viewport.add(lblStackOffset, constraints);
 
         populateOffsetRadios();
+        */
 
         // Graphic Options
         JLabel lblTitleGraphics = new JLabel("Graphic Options");
@@ -195,6 +196,11 @@ public class ViewSettings extends JScrollPane {
         ViewSettings.this.control = new ControlSettings(this);
     }
 
+    /*
+     * These settings currently don't do anything, so we will not show them
+     * until it can be determined if we want to keep them or not.
+     */
+    /*
     private void populateStackRadios() {
         JPanel radioContainer = new JPanel();
         radioContainer.setOpaque(false);
@@ -256,6 +262,7 @@ public class ViewSettings extends JScrollPane {
         viewport.add(radOffsetMedium, constraints);
         viewport.add(radOffsetLarge, constraints + spacer);
     }
+    */
 
     private void populateCardSizeRadios() {
         radCardTiny = new CardSizeRadio("Tiny");
@@ -330,6 +337,7 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
+    /*
     private class StackSizeRadio extends OptionsRadio {
         public StackSizeRadio(String txt0) {
             super(txt0);
@@ -366,6 +374,7 @@ public class ViewSettings extends JScrollPane {
             });
         }
     }
+    */
 
     private class CardSizeRadio extends OptionsRadio {
         public CardSizeRadio(String txt0) {

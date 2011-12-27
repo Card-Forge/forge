@@ -11,7 +11,6 @@ import forge.AllZone;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
-import forge.properties.ForgePreferences.StackOffsetType;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewSettings;
 import forge.view.toolbox.FSkin;
@@ -52,7 +51,6 @@ public class ControlSettings {
             }
         });
 
-        //slapshot5 - work in progress, but I need to check this file in for other changes.
         this.view.getCbAnte().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
@@ -158,11 +156,13 @@ public class ControlSettings {
 
     /** @param rad0 &emsp; JRadioButton
      * @throws Exception */
+    /*
     public void updateStackOffset(JRadioButton rad0) throws Exception {
         StackOffsetType sot = StackOffsetType.valueOf(rad0.getText().toLowerCase());
         Singletons.getModel().getPreferences().setStackOffset(sot);
         prefs.save();
     }
+    */
 
     /** @param rad0 &emsp; JRadioButton
      * @throws Exception */
@@ -174,8 +174,10 @@ public class ControlSettings {
 
     /** @param rad0 &emsp; JRadioButton
      * @throws Exception */
+    /*
     public void updateStackSize(JRadioButton rad0) throws Exception {
         Singletons.getModel().getPreferences().setMaxStackSize(Integer.parseInt(rad0.getText()));
         prefs.save();
     }
+    */
 }
