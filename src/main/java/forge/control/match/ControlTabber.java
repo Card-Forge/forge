@@ -37,7 +37,7 @@ public class ControlTabber extends MyObservable {
     private final ViewTabber view;
     private MouseAdapter maMilling, maHand, maLibrary, maUnlimited,
         maMana, maSetup, maTutor, maCounter, maTap, maUntap, maLife;
-    
+
     private Observer stackObserver, logObserver;
 
     /**
@@ -76,10 +76,10 @@ public class ControlTabber extends MyObservable {
 
         // Various mouse adapters for dev buttons
         initMouseAdapters();
-        
+
         initObservers();
     }
-    
+
     private void initObservers() {
         // Stack
         stackObserver = new Observer() {

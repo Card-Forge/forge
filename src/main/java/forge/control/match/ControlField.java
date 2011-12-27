@@ -73,9 +73,9 @@ public class ControlField {
 
     private MouseMotionAdapter maCardOver;
     private MouseAdapter maAvatar, maLibrary, maHand, maExiled, maGraveyard, maFlashback, maCardClick;
-    
+
     private MouseAdapter maBlack, maBlue, maGreen, maRed, maWhite, maColorless;
-    
+
     private Observer observerZones, observerDetails, observerPlay;
 
     /**
@@ -311,7 +311,7 @@ public class ControlField {
         protected void doAction(final Card c) {
         }
     } // End ZoneAction
-    
+
     private void initObservers() {
         // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
         observerZones = new Observer() {
@@ -515,7 +515,7 @@ public class ControlField {
                 }
             }
         };
-        
+
         maBlack = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -531,7 +531,7 @@ public class ControlField {
                 }
             }
         };
-        
+
         maBlue = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -547,7 +547,7 @@ public class ControlField {
                 }
             }
         };
-        
+
         maGreen = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -563,7 +563,7 @@ public class ControlField {
                 }
             }
         };
-        
+
         maRed = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -579,7 +579,7 @@ public class ControlField {
                 }
             }
         };
-        
+
         maWhite = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -595,7 +595,7 @@ public class ControlField {
                 }
             }
         };
-        
+
         maColorless = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -612,5 +612,5 @@ public class ControlField {
             }
         };
     } // End initMouseAdapters()
-    
+
 } // End class ControlField

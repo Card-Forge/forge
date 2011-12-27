@@ -53,7 +53,7 @@ public class ControlHand {
 
     private MouseAdapter maCardClick;
     private MouseMotionAdapter maCardMove;
-    
+
     Observer o1;
 
     /**
@@ -94,7 +94,7 @@ public class ControlHand {
                 }
             }
         };
-        
+
         o1 = new Observer() {
             @Override
             public void update(final Observable a, final Object b) {
