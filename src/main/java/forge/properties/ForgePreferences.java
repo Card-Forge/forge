@@ -37,9 +37,6 @@ import java.util.Map;
  */
 public class ForgePreferences extends Preferences {
 
-    /** Old gui checkbox toggle. */
-    private boolean oldGui;
-
     /** Play for ante checkbox toggle. */
     private boolean playForAnte;
 
@@ -146,7 +143,6 @@ public class ForgePreferences extends Preferences {
             throw new Exception("Error reading \"" + fileName + "\".", ex);
         }
 
-        this.oldGui = this.getBoolean("gui.old", true);
         this.setPlayForAnte(this.getBoolean("play.for.ante", false));
         this.setUILayout(this.get("gui.layout", ""));
         this.setStackAiLand(this.getBoolean("AI.stack.land", false));
@@ -223,7 +219,6 @@ public class ForgePreferences extends Preferences {
      */
     public final void save() throws Exception {
         this.set("gui.layout", this.getUILayout());
-        this.set("gui.old", this.oldGui);
         this.set("gui.skin", this.getSkin());
 
         this.set("play.for.ante", this.isPlayForAnte());
@@ -328,25 +323,6 @@ public class ForgePreferences extends Preferences {
      */
     public void setStackAiLand(final boolean b0) {
         this.stackAiLand = b0;
-    }
-
-    /**
-     * Checks if old gui is to be used.
-     * 
-     * @return boolean
-     */
-    public boolean isOldGui() {
-        return this.oldGui;
-    }
-
-    /**
-     * Sets if old gui is to be used.
-     * 
-     * @param b0
-     *            &emsp; boolean
-     */
-    public void setOldGui(final boolean b0) {
-        this.oldGui = b0;
     }
 
     /**

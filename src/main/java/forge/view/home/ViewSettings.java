@@ -37,8 +37,7 @@ public class ViewSettings extends JScrollPane {
     private String spacer;
 
     private JCheckBox cbAnte, cbScaleLarger, cbDevMode, cbRemoveSmall, cbRemoveArtifacts,
-        cbOldUI, cbUploadDraft, cbStackLand, cbRandomFoil, cbTextMana,
-        cbSingletons;
+        cbUploadDraft, cbStackLand, cbRandomFoil, cbTextMana, cbSingletons;
 
     //private JRadioButton radStack3, radStack4, radStack5, radStack6, radStack7,
     //   radStack8, radStack9, radStack10, radStack11, radStack12;
@@ -103,12 +102,6 @@ public class ViewSettings extends JScrollPane {
         lblTitleUI.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
         lblTitleUI.setForeground(skin.getColor("text"));
         viewport.add(lblTitleUI, constraints2);
-
-        cbOldUI = new OptionsCheckBox("Old UI");
-        cbOldUI.setSelected(Singletons.getModel().getPreferences().isOldGui());
-        JLabel lblOldUI = new NoteLabel("Use the user interface from Beta 1.1.9.");
-        viewport.add(cbOldUI, constraints);
-        viewport.add(lblOldUI, constraints2);
 
         cbAnte = new OptionsCheckBox("Play for Ante");
         cbAnte.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
@@ -430,11 +423,6 @@ public class ViewSettings extends JScrollPane {
     /** @return JCheckBox */
     public JCheckBox getCbRemoveArtifacts() {
         return cbRemoveArtifacts;
-    }
-
-    /** @return JCheckBox */
-    public JCheckBox getCbOldUI() {
-        return cbOldUI;
     }
 
     /** @return JCheckBox */

@@ -100,14 +100,6 @@ public class ControlSettings {
             }
         });
 
-        this.view.getCbOldUI().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                prefs.setOldGui(ControlSettings.this.view.getCbOldUI().isSelected());
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
-            }
-        });
-
         this.view.getCbUploadDraft().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {

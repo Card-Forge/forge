@@ -1625,7 +1625,6 @@ public class OldGuiNewGame extends JFrame {
         try {
             final ForgePreferences preferences = Singletons.getModel().getPreferences();
             preferences.setSkin(AllZone.getSkin().getName());
-            preferences.setOldGui(OldGuiNewGame.oldGuiCheckBox.isSelected());
             preferences.setStackAiLand(OldGuiNewGame.getSmoothLandCheckBox().isSelected());
             preferences.setMillingLossCondition(Constant.Runtime.MILL[0]);
             preferences.setDeveloperMode(Constant.Runtime.DEV_MODE[0]);
