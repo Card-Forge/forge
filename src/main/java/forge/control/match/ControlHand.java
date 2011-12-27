@@ -53,6 +53,8 @@ public class ControlHand {
 
     private MouseAdapter maCardClick;
     private MouseMotionAdapter maCardMove;
+    
+    Observer o1;
 
     /**
      * Child controller - handles operations related to cards in user's hand and
@@ -64,6 +66,8 @@ public class ControlHand {
     public ControlHand(final ViewHand v) {
         this.view = v;
         this.cardsInPanel = new ArrayList<Card>();
+
+        final ViewTopLevel t = view.getTopLevel();
 
         maCardClick = new MouseAdapter() {
             // Card click
@@ -90,13 +94,8 @@ public class ControlHand {
                 }
             }
         };
-    }
-
-    /** Adds observers to hand panel. */
-    public void addObservers() {
-        final ViewTopLevel t = view.getTopLevel();
-
-        Observer o1 = new Observer() {
+        
+        o1 = new Observer() {
             @Override
             public void update(final Observable a, final Object b) {
                 final PlayerZone pZone = (PlayerZone) a;
@@ -153,7 +152,10 @@ public class ControlHand {
                 }
             }
         };
+    }
 
+    /** Adds observers to hand panel. */
+    public void addObservers() {
         AllZone.getHumanPlayer().getZone(Zone.Hand).deleteObserver(o1);
         AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(o1);
     }
