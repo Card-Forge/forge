@@ -174,9 +174,10 @@ public class ViewSettings extends JScrollPane {
         viewport.add(cbRandomFoil, constraints);
         viewport.add(lblRandomFoil, constraints2);
 
-        cbScaleLarger = new OptionsCheckBox("Scale image larger");
+        cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
         this.cbScaleLarger.setSelected(Singletons.getModel().getPreferences().isScaleLargerThanOriginal());
-        JLabel lblScaleLarger = new NoteLabel("Not sure what this does...can someone who does update this text");
+        //TODO: this needs to be verified and updated with a better description
+        JLabel lblScaleLarger = new NoteLabel("Scales card images larger than original if possible.");
         viewport.add(cbScaleLarger, constraints);
         viewport.add(lblScaleLarger, constraints2);
 
