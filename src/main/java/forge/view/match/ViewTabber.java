@@ -630,8 +630,8 @@ public class ViewTabber extends FRoundedPanel {
         lblSetLife = new DevLabel("Set Player Life");
 
         devLBLs.add(lblMilling);
-        devLBLs.add(lblHandView);
-        devLBLs.add(lblLibraryView);
+        //devLBLs.add(lblHandView);
+        //devLBLs.add(lblLibraryView);
         devLBLs.add(lblUnlimitedLands);
         devLBLs.add(lblGenerateMana);
         devLBLs.add(lblSetupGame);
@@ -643,8 +643,8 @@ public class ViewTabber extends FRoundedPanel {
 
         final String constraints = "w 95%!, gap 0 0 5px 0";
         viewport.add(this.lblMilling, constraints);
-        viewport.add(this.lblHandView, constraints);
-        viewport.add(this.lblLibraryView, constraints);
+        //viewport.add(this.lblHandView, constraints);
+        //viewport.add(this.lblLibraryView, constraints);
         viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblGenerateMana, constraints);
         viewport.add(this.lblSetupGame, constraints);
