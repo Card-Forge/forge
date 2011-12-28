@@ -67,6 +67,11 @@ If you have a low end machine you may find that the scripts above will prevent j
 In this case you can try the following. Remove the background jpg picture from /res/images/ui/ folder. You can try using low quality pictures rather than the high quality pictures. Or you can try removing all of the jpg pictures from the pics folder.
 
 
+The Card Pictures disappear when you restart Forge:
+
+if you're running Windows 7, make sure you're running the program as an admin, otherwise no changes will be made to your system (nothing is saved). In Windows 7, Forge may be happier when run from somewhere in the My Documents structure, (they call them Libraries now???) or from another partition other than C:. The user has little permission to do much on the system drive.
+
+
 Java Issues:
 
 Some people that are using an early version of Java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should de-install java 7 and install java 6 instead.
