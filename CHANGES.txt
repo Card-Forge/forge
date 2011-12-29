@@ -623,6 +623,11 @@ Notes:
 - consistency tweaks in ViewSettings
 - Added a note about Windows 7 and your downloads disappearing upon restart.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- remove the displaying of View Any Library and View Any Hand Dev Buttons. No change in functionality. They weren't hooked up anyway. We can discuss more what to do with them after the 1.2.0 release.
+- when starting a match, set the Card Picture panels to display the first card in human hand (rather than just being blank until you hover over a card)
+- get rid of the visible border around the dev buttons JScrollPane and tweak the spacing around the JScrollPane so things don't look as cut off when resizing and the scroll bar fits better when it's necessary.
+- fix text spacing a bit on WinLose dialog
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
