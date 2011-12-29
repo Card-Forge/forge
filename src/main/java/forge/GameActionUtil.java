@@ -561,7 +561,7 @@ public final class GameActionUtil {
 
         q = GuiUtils.getChoiceOptional("Use " + c + " Landfall?", choices);
 
-        return (q == null) || q.equals("No");
+        return (q != null) && q.equals("Yes");
     }
 
     /**
