@@ -1511,7 +1511,6 @@ public class GameAction {
             this.computerStartsGame();
         }
 
-        //Ante restricted to Quest Mode for now
         if (Singletons.getModel().getPreferences().isPlayForAnte()) {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
@@ -1539,6 +1538,8 @@ public class GameAction {
             AllZone.getHumanPlayer().drawCard();
             AllZone.getComputerPlayer().drawCard();
         }
+        
+        AllZone.getDisplay().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));  
 
         AllZone.getInputControl().setInput(new InputMulligan());
         Phase.setGameBegins(1);
