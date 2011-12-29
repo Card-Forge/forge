@@ -123,10 +123,10 @@ public final class NewConstants {
     /** Constant <code>BOOSTERDATA="boosterdata"</code>. */
     public static final String BOOSTERDATA = "boosterdata";
 
-    /** The MT g_ data. */
+    /** The MTG_DATA. */
     public static final String MTG_DATA = "mtg-data";
 
-    /** The SYMBOL s_ small. */
+    /** The SYMBOLS_SMALL. */
     public static final String SYMBOLS_SMALL = "symbols/small";
 
     /** Constant <code>IMAGE_BASE="image/base"</code>. */
@@ -221,7 +221,7 @@ public final class NewConstants {
             /** The LAYOUT. */
             public static final String LAYOUT = "gui/Display";
 
-            /** The LAYOU t_ new. */
+            /** The LAYOUT_NEW. */
             public static final String LAYOUT_NEW = "gui/Display/new";
         }
 
@@ -264,7 +264,7 @@ public final class NewConstants {
          */
         public static class ErrorViewer {
 
-            /** The SHO w_ error. */
+            /** The SHOW_ERROR. */
             public static final String SHOW_ERROR = "%s/ErrorViewer/show";
 
             /** The TITLE. */
@@ -296,7 +296,7 @@ public final class NewConstants {
         }
 
         /**
-         * The Interface Gui_BoosterDraft.
+         * The Interface GuiBoosterDraft.
          */
         public static class GuiBoosterDraft {
 
@@ -328,12 +328,12 @@ public final class NewConstants {
         public static class GuiDisplay {
 
             /**
-             * The Interface MENU_BAR.
+             * The Interface MenuBar.
              */
             public static class MenuBar {
 
                 /**
-                 * The Interface MENU.
+                 * The Interface Menu.
                  */
                 public static class Menu {
 
@@ -342,7 +342,7 @@ public final class NewConstants {
                 }
 
                 /**
-                 * The Interface PHASE.
+                 * The Interface Phase.
                  */
                 public static class PHASE {
 
@@ -360,14 +360,14 @@ public final class NewConstants {
                 }
             }
 
-            /** The HUMA_TITLE. */
+            /** The HUMAN_TITLE. */
             public static final String HUMAN_TITLE = "%s/Display/human/title";
 
             /** The HUMAN_DECKLIST. */
             public static final String HUMAN_DECKLIST = "%s/Display/human/decklist";
 
             /**
-             * The Interface HUMAN_HAND.
+             * The Interface HumanHand.
              */
             public static class HumanHand {
 
@@ -406,7 +406,7 @@ public final class NewConstants {
             public static final String HUMAN_GRAVEYARD = "%s/Display/human/graveyard";
 
             /**
-             * The Interface HUMAN_GRAVEYARD.
+             * The Interface HumanGraveyard.
              */
             public static class HumanGraveyard {
 
@@ -424,7 +424,7 @@ public final class NewConstants {
             public static final String HUMAN_REMOVED = "%s/Display/human/removed";
 
             /**
-             * The Interface HUMAN_REMOVED.
+             * The Interface HumanRemoved.
              */
             public static class HumanRemoved {
 
@@ -448,7 +448,7 @@ public final class NewConstants {
             public static final String COMPUTER_FLASHBACK = "%s/Display/computer/flashback";
 
             /**
-             * The Interface HUMAN_FLASHBACK.
+             * The Interface HumanFlashback.
              */
             public static class HumanFlashback {
 
@@ -463,7 +463,7 @@ public final class NewConstants {
             }
 
             /**
-             * The Interface COMPUTER_FLASHBACK.
+             * The Interface ComputerFlashback.
              */
             public static class ComputerFlashback {
 
@@ -556,7 +556,7 @@ public final class NewConstants {
             public static final String CONCEDE = "%s/Display/concede";
 
             /**
-             * The Interface CONCEDE.
+             * The Interface Concede.
              */
             public static class Concede {
 
@@ -571,7 +571,7 @@ public final class NewConstants {
             public static final String MANAGEN = "%s/Display/managen";
 
             /**
-             * The Interface MANAGEN.
+             * The Interface Managen.
              */
             public static class Managen {
 
@@ -586,7 +586,7 @@ public final class NewConstants {
             public static final String SETUPBATTLEFIELD = "%s/Display/setupbattlefield";
 
             /**
-             * The Interface SETUPBATTLEFIELD.
+             * The Interface SetupBattlefield.
              */
             public static class SetupBattlefield {
 
@@ -601,7 +601,7 @@ public final class NewConstants {
             public static final String TUTOR = "%s/Display/tutor";
 
             /**
-             * The Interface TUTOR.
+             * The Interface Tutor.
              */
             public static class Tutor {
 
@@ -616,7 +616,7 @@ public final class NewConstants {
             public static final String ADDCOUNTER = "%s/Display/addcounter";
 
             /**
-             * The Interface ADDCOUNTER.
+             * The Interface AddCounter.
              */
             public static class AddCounter {
 
@@ -631,7 +631,7 @@ public final class NewConstants {
             public static final String TAPPERM = "%s/Display/tapperm";
 
             /**
-             * The Interface TAPPERM.
+             * The Interface Tapperm.
              */
             public static class Tapperm {
 
@@ -646,7 +646,7 @@ public final class NewConstants {
             public static final String UNTAPPERM = "%s/Display/untapperm";
 
             /**
-             * The Interface UNTAPPERM.
+             * The Interface Untapperm.
              */
             public static class Untapperm {
 
@@ -661,7 +661,7 @@ public final class NewConstants {
             public static final String NOLANDLIMIT = "%s/Display/nolandlimit";
 
             /**
-             * The Interface NOLANDLIMIT.
+             * The Interface NoLandLimit.
              */
             public static class NoLandLimit {
 
@@ -676,7 +676,7 @@ public final class NewConstants {
             public static final String SETLIFE = "%s/Display/setlife";
 
             /**
-             * The Interface SETLIFE.
+             * The Interface SetLife.
              */
             public static class SetLife {
 
@@ -688,7 +688,7 @@ public final class NewConstants {
             }
 
             /**
-             * The Interface TRIGGER.
+             * The Interface Trigger.
              */
             public static class Trigger {
 
@@ -704,7 +704,7 @@ public final class NewConstants {
         }
 
         /**
-         * The Interface Gui_DownloadPictures.
+         * The Interface GuiDownloadPictures.
          */
         public static class GuiDownloadPictures {
 
@@ -739,7 +739,7 @@ public final class NewConstants {
             public static final String BAR_CLOSE = "%s/DownloadPictures/bar/close";
 
             /**
-             * The Interface BUTTONS.
+             * The Interface Buttons.
              */
             public static class Buttons {
 
@@ -754,7 +754,7 @@ public final class NewConstants {
             }
 
             /**
-             * The Interface ERRORS.
+             * The Interface Errors.
              */
             public static class Errors {
 
@@ -772,7 +772,7 @@ public final class NewConstants {
         public static class OldGuiNewGame {
 
             /**
-             * The Interface NEW_GAME_TEXT.
+             * The Interface NewGameText.
              */
             public static class NewGameText {
 
@@ -806,7 +806,7 @@ public final class NewConstants {
                 /** The DECK_EDITOR. */
                 public static final String DECK_EDITOR = "%s/NewGame/deckeditor";
 
-                /** The NEW_GUI. */
+                /** The OLD_GUI. */
                 public static final String OLD_GUI = "%s/NewGame/oldgui";
 
                 /** The AI_LAND. */
@@ -830,12 +830,12 @@ public final class NewConstants {
             }
 
             /**
-             * The Interface MENU_BAR.
+             * The Interface MenuBar.
              */
             public static class MenuBar {
 
                 /**
-                 * The Interface MENU.
+                 * The Interface Menu.
                  */
                 public static class Menu {
 
@@ -877,7 +877,7 @@ public final class NewConstants {
                 }
 
                 /**
-                 * The Interface OPTIONS.
+                 * The Interface Options.
                  */
                 public static class Options {
 
@@ -894,7 +894,7 @@ public final class NewConstants {
                     public static final String CARD_SCALE = "%s/NewGame/options/cardScale";
 
                     /**
-                     * The Interface GENERATE.
+                     * The Interface Generate.
                      */
                     public static class Generate {
 
@@ -913,7 +913,7 @@ public final class NewConstants {
                 }
 
                 /**
-                 * The Interface HELP.
+                 * The Interface Help.
                  */
                 public static class Help {
 
@@ -924,7 +924,7 @@ public final class NewConstants {
             }
 
             /**
-             * The Interface ERRORS.
+             * The Interface Errors.
              */
             public static class Errors {
             }
