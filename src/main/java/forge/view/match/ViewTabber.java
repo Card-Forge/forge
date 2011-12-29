@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -612,10 +613,11 @@ public class ViewTabber extends FRoundedPanel {
 
         final JScrollPane jsp = new JScrollPane(viewport, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jsp.setBorder(BorderFactory.createEmptyBorder());
         jsp.setOpaque(false);
         jsp.getViewport().setOpaque(false);
 
-        this.pnlDev.add(jsp, "w 100%!, h 100%!");
+        this.pnlDev.add(jsp, "w 98%!, h 98%!");
 
         lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
         lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
