@@ -154,7 +154,7 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnSealed, constraints);
         pnlMenu.add(btnDraft, constraints);
         pnlMenu.add(btnQuest, constraints);
-        pnlMenu.add(btnDeckEditor, constraints);
+        //pnlMenu.add(btnDeckEditor, constraints);
         pnlMenu.add(btnSettings, constraints);
         pnlMenu.add(btnUtilities, constraints);
         pnlMenu.add(btnExit, constraints);
