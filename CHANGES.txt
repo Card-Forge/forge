@@ -628,6 +628,14 @@ Notes:
 - get rid of the visible border around the dev buttons JScrollPane and tweak the spacing around the JScrollPane so things don't look as cut off when resizing and the scroll bar fits better when it's necessary.
 - fix text spacing a bit on WinLose dialog
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- fix Lotus Cobra Landfall. The logic was backwards.
+- fix cost description for Thelonite Monk
+- several javadoc tweaks in NewConstants
+- Fixed Rootwater Thief.
+- don't show spells on the stack in the CardPicture/DetailPanel until we can make sure you can't see Compy's Morph cards this way.
+- add Deck Editor back to main Home menu. (Left it in Utilities too, just in case.)
+- comment deck editor out from main menu for now.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
