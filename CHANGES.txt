@@ -1,8 +1,8 @@
-Forge Beta: ##-##-2011 ver 1.#.# rev #####
+Forge Beta: 12-30-2011 ver 1.2.0 rev 12887
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-#### cards in total.
+9855 cards in total.
 
 
 A new UI is being developed and it will take some time before it is finished. Forge is somewhat unstable at this time as the new user interface is a work in progress.
@@ -636,124 +636,138 @@ Notes:
 - add Deck Editor back to main Home menu. (Left it in Utilities too, just in case.)
 - comment deck editor out from main menu for now.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+Doublestrike
+Friar Sol
+Hellfish
+Jeff Wadsworth
+Marc
+Rob Cashwalker
+Slapshot5
+Sloth
+Slowe
+SoulStorm
+Squee1968
+Chris H
 
 
 Added many cards, including:
 
 Ashnod's Cylix
-Strata Scythe
-Forget
-Tourach's Gate
-Greater Werewolf
-Serra Bestiary
-Kitsune Palliator
-Samite Censer-Bearer
 Balm of Restoration
-Halls of Mist
-Sundering Titan
-Corrupted Resolve
-Kirtar's Wrath
-Rushwood Legate
-Kyren Legate
-Saprazzan Legate
-Quillmane Baku
-Nostalgic Dreams
+Benalish Lancer
+Birthing Pod
+Bloodbond March
+Bogardan Phoenix
+Bold Defence
+Brain Pry
+Brand of Ill Omen
+Burning of Xinye
+Carapace
+Cellar Door
+Cerebral Vortex
 Cho-Arrim Legate
-Twinstrike
-Steeling Stance
-Magewright's Stone
-Twisted Justice
-Doomgape
-Wei Assassins
-Simic Basilisk
+Civilized Scholar / Homicidal Brute
+Coastal Wizard
+Contract from Below
+Corrupted Resolve
+Countryside Crusher
+Crypt Champion
+Culling Scales
+Decompose
 Deep Wood
+Defiant Stand
+Doomgape
+Doubling Cube
+Dread Charge
+Entomber Exarch
+Errantry
+Essence Bottle
+Field of Dreams
+Forget
+Goblin War Drums
+Gorilla War Cry
+Greater Werewolf
+Halls of Mist
 Heavy Fog
+Horde of Boggarts
+Imposing Visage
+Kederekt Creeper
+Kirtar's Wrath
+Kitsune Palliator
+Knight of the Mists
+Kongming's Contraptions
+Kruin Outlaw / Terror of Kruin Pass
+Kyren Legate
+Life Matrix
+Lion's Eye Diamond
+Magewright's Stone
+Marsh Casualties
+Massacre
+Mogg Salvage
+Mogg Toady
+Mountain Titan
+Nostalgic Dreams
+Orcish Farmer
+Pardic Miner
+Phyrexian Unlife
+Primitive Etchings
+Pull from Eternity
+Quillmane Baku
 Rally the Troops
-Warrior's Stand
+Rapid Decay
+Reality Ripple
+Refreshing Rain
+Riku of Two Reflections
+River of Tears
+Rowen
+Rushwood Legate
+Rustmouth Ogre
+Samite Censer-Bearer
+Saprazzan Legate
+Scrib Nibblers
+Seedtime
+Serra Bestiary
+Serum Powder
+Shred Memory
 Shu Defender
+Simic Basilisk
+Soldevi Golem
+Squealing Devil
+Stamina
+Steeling Stance
+Stormblood Berserker
+Strata Scythe
+Submerge
+Sundering Titan
+Superior Numbers
+Surgespanner
+Tatsumasa, the Dragon's Fang
+Teferi's Veil
+Thrull Retainer
+Tourach's Gate
 Town Sentry
 Treetop Defense
-Dread Charge
-Coastal Wizard
-Defiant Stand
-Life Matrix
-Civilized Scholar / Homicidal Brute
-Kongming's Contraptions
-Witchbane Orb
-Cellar Door
-Errantry
 Turntimber Basilisk
-Scrib Nibblers
-Vish Kal, Blood Arbiter
-Superior Numbers
-Countryside Crusher
-Bloodbond March
-Pardic Miner
-Brand of Ill Omen
-Rustmouth Ogre
-Mountain Titan
-Riku of Two Reflections
-Soldevi Golem
-Serum Powder
-Culling Scales
-River of Tears
-Cerebral Vortex
-Seedtime
-Surgespanner
-Pull from Eternity
-Submerge
-Mogg Salvage
-Massacre
-Refreshing Rain
-Mogg Toady
-Field of Dreams
-Wizened Snitches
-Viashino Runner
-Imposing Visage
-Wind Spirit
-Kederekt Creeper
-Stormblood Berserker
-Goblin War Drums
-Vine Kami
-Benalish Lancer
-Gorilla War Cry
-Carapace
-Stamina
-Thrull Retainer
-Burning of Xinye
-Doubling Cube
-Tatsumasa, the Dragon's Fang
-Crypt Champion
-Squealing Devil
-Bold Defence
-Marsh Casualties
-Birthing Pod
-Brain Pry
-Essence Bottle
-Entomber Exarch
-Phyrexian Unlife
-Knight of the Mists
-Veteran's Voice
-Rowen
-Contract from Below
-Primitive Etchings
-Orcish Farmer
-Word of Undoing
-Bogardan Phoenix
-Kruin Outlaw / Terror of Kruin Pass
-Lion's Eye Diamond
-Horde of Boggarts
-Teferi's Veil
+Twinstrike
+Twisted Justice
 Two-Headed Sliver
-Reality Ripple
-Decompose
-Rapid Decay
-Shred Memory
+Veteran's Voice
+Viashino Runner
+Vine Kami
+Vish Kal, Blood Arbiter
+Warrior's Stand
+Wei Assassins
+Wind Spirit
+Witchbane Orb
+Wizened Snitches
+Word of Undoing
 
 
 end
