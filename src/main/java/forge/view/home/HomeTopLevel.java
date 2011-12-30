@@ -47,7 +47,7 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class HomeTopLevel extends FPanel {
     private JPanel pnlMenu, pnlContent;
-    private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnExit;
+    private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnExit, btnDeckEditor;
     private FSkin skin;
     private String constraints;
     private String imgDirAddress;
@@ -117,6 +117,14 @@ public class HomeTopLevel extends FPanel {
         });
         btnQuest.setText("Quest");
 
+        btnDeckEditor = new FButton();
+        btnDeckEditor.setAction(new AbstractAction() {
+            public void actionPerformed(ActionEvent arg0) { 
+                HomeTopLevel.this.getUtilitiesController().showDeckEditor(null, null);
+            }
+        });
+        btnDeckEditor.setText("Deck Editor");
+
         btnSettings = new FButton();
         btnSettings.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) { showSettingsMenu(); }
@@ -146,6 +154,7 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnSealed, constraints);
         pnlMenu.add(btnDraft, constraints);
         pnlMenu.add(btnQuest, constraints);
+        pnlMenu.add(btnDeckEditor, constraints);
         pnlMenu.add(btnSettings, constraints);
         pnlMenu.add(btnUtilities, constraints);
         pnlMenu.add(btnExit, constraints);
@@ -261,6 +270,7 @@ public class HomeTopLevel extends FPanel {
         btnSealed.setToggled(false);
         btnDraft.setToggled(false);
         btnQuest.setToggled(false);
+        btnDeckEditor.setToggled(false);
         btnSettings.setToggled(false);
         btnUtilities.setToggled(false);
     }
