@@ -257,6 +257,14 @@ public class ViewTabber extends FRoundedPanel {
             tar.setLineWrap(true);
             tar.setWrapStyleWord(true);
 
+            /* 
+             * TODO - we should figure out how to display cards on the stack in the Picture/Detail panel
+             * The problem not is that when a computer casts a Morph, the real card shows because
+             * Picture/Detail checks isFaceDown() which will be false on for spell.getSourceCard()
+             * on the stack.
+             */
+            
+            /*
             tar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
@@ -264,13 +272,16 @@ public class ViewTabber extends FRoundedPanel {
                     t.getPictureController().showCard(spell.getSpellAbility().getSourceCard());
                 }
             });
+            */
 
             this.pnlStack.add(tar, "w 98%!, gapright 1%, gaptop 1%");
             stackTARs.add(tar);
 
+            /* same as above - compy's Morph cards showing on Stack
             if (i == 0) {
                 AllZone.getDisplay().setCard(spell.getSourceCard());
             }
+            */
 
             if (stack.peekInstance(i).isOptionalTrigger()) {
                 tar.addMouseListener(new MouseAdapter() {
