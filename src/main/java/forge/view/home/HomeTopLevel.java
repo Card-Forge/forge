@@ -119,7 +119,7 @@ public class HomeTopLevel extends FPanel {
 
         btnDeckEditor = new FButton();
         btnDeckEditor.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { 
+            public void actionPerformed(ActionEvent arg0) {
                 HomeTopLevel.this.getUtilitiesController().showDeckEditor(null, null);
             }
         });

@@ -1538,8 +1538,8 @@ public class GameAction {
             AllZone.getHumanPlayer().drawCard();
             AllZone.getComputerPlayer().drawCard();
         }
-        
-        AllZone.getDisplay().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));  
+
+        AllZone.getDisplay().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
 
         AllZone.getInputControl().setInput(new InputMulligan());
         Phase.setGameBegins(1);

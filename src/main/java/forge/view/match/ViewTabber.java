@@ -263,7 +263,7 @@ public class ViewTabber extends FRoundedPanel {
              * Picture/Detail checks isFaceDown() which will be false on for spell.getSourceCard()
              * on the stack.
              */
-            
+
             /*
             tar.addMouseListener(new MouseAdapter() {
                 @Override
