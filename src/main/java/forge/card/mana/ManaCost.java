@@ -704,4 +704,13 @@ public class ManaCost {
     public final ArrayList<String> getManaNeededToAvoidNegativeEffect() {
         return this.manaNeededToAvoidNegativeEffect;
     }
+
+    /**
+     * Gets the mana paid so far to avoid negative effect.
+     * 
+     * @return the mana paid to avoid negative effect
+     */
+    public final ArrayList<String> getManaPaidToAvoidNegativeEffect() {
+        return this.manaPaidToAvoidNegativeEffect;
+    }
 }

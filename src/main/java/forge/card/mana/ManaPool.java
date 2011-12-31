@@ -820,7 +820,7 @@ public class ManaPool {
         if ((payMana.size() == 0) && (this.floatingMana.size() == 0)) {
           return false;
         }
-        
+
         final ArrayList<Mana> removePaying = new ArrayList<Mana>();
         final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
 
@@ -828,7 +828,7 @@ public class ManaPool {
         // loop over mana paid
         for (Mana manaPaid : payMana) {
             if (manaPaid.fromSourceCard(c)) {
-                for (int i = 0;i < mana.length;i++ ) {
+                for (int i = 0; i < mana.length; i++) {
                     if  (manaPaid.getColor().equals(InputPayManaCostUtil.getLongColorString(mana[i]))) {
                         final int amt = manaPaid.getColorlessAmount();
                         if (amt > 0) {
@@ -854,7 +854,7 @@ public class ManaPool {
         if (manaAccounted < mana.length) {
             for (Mana manaFloat : this.floatingMana) {
                 if (manaFloat.fromSourceCard(c)) {
-                    for (int i = 0;i < mana.length;i++ ) {
+                    for (int i = 0; i < mana.length; i++) {
                         if  (manaFloat.getColor().equals(InputPayManaCostUtil.getLongColorString(mana[i]))) {
                             final int amt = manaFloat.getColorlessAmount();
                             if (amt > 0) {
@@ -875,7 +875,7 @@ public class ManaPool {
                 if (manaAccounted == mana.length) {
                     break;
                 }
-            }            
+            }
         }
         // When is it legitimate for all the mana not to be accountable?
         // Does this condition really indicate an bug in Forge?
@@ -891,7 +891,7 @@ public class ManaPool {
         }
         return true;
     }
-    
+
     /**
      * <p>
      * unpaid.
