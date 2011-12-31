@@ -369,7 +369,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @return a boolean.
      */
     public final boolean isBasic() {
-        if (this.origProduced.length() != 1) {
+        if (this.origProduced.length() != 1 && !this.origProduced.contains("Any")) {
             return false;
         }
 
