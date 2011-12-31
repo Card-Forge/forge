@@ -313,7 +313,7 @@ public class AbilityFactoryMana {
                             return;
                         }
                         String choice = (String) o;
-                        abMana.setAnyChoice(choice.substring(0, 1).toUpperCase());
+                        abMana.setAnyChoice(InputPayManaCostUtil.getShortColorString(choice));
                     }
                 }
             }
@@ -735,7 +735,7 @@ public class AbilityFactoryMana {
             final ArrayList<String> colors) {
         for (final String col : Constant.Color.ONLY_COLORS) {
             final String s = InputPayManaCostUtil.getShortColorString(col);
-            if (ab.canProduce(s) && !colors.contains(col)) {
+            if ((ab.canProduce(s) || ab.isAnyMana()) && !colors.contains(col)) {
                 colors.add(col);
             }
         }

@@ -302,7 +302,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
     public String getLastProduced() {
         return this.lastProduced;
     }
-    
+
     /**
      * <p>
      * isSnow.
