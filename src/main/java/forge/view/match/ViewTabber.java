@@ -263,8 +263,8 @@ public class ViewTabber extends FRoundedPanel {
              * Picture/Detail checks isFaceDown() which will be false on for spell.getSourceCard()
              * on the stack.
              */
-
-            /*
+            
+            //this functionality was present in v 1.1.8
             tar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
@@ -272,16 +272,21 @@ public class ViewTabber extends FRoundedPanel {
                     t.getPictureController().showCard(spell.getSpellAbility().getSourceCard());
                 }
             });
-            */
 
-            this.pnlStack.add(tar, "w 98%!, gapright 1%, gaptop 1%");
-            stackTARs.add(tar);
-
-            /* same as above - compy's Morph cards showing on Stack
+            /*
+             * This updates the Card Picture/Detail when the spell is added to the stack.
+             * This funcaitonality was not present in v 1.1.8.
+             * 
+             * Problem is described in TODO right above this.
+             */
+            /*
             if (i == 0) {
                 AllZone.getDisplay().setCard(spell.getSourceCard());
             }
             */
+
+            this.pnlStack.add(tar, "w 98%!, gapright 1%, gaptop 1%");
+            stackTARs.add(tar);
 
             if (stack.peekInstance(i).isOptionalTrigger()) {
                 tar.addMouseListener(new MouseAdapter() {
