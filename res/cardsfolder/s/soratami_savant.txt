@@ -3,6 +3,7 @@ ManaCost:2 U U
 Types:Creature Moonfolk Wizard
 Text:no text
 PT:2/2
+K:Flying
 A:AB$ Counter | Cost$ 3 Return<1/Land> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays 3.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
