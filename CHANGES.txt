@@ -5,7 +5,7 @@ Forge Beta: ##-##-2012 ver 1.2.# rev #####
 #### cards in total.
 
 
-
+A new branch was created for supporting "Produced$ Any" in mana abilities (Issue 266). Some other bugs/problems with paying mana costs were uncovered and fixed. When finished this work will be merged into the main trunk.
 
 
 Several people have noticed a crash report stating that "Buffers have not been created". We hope to have this fixed in the near future. It has been pointed out that:
@@ -23,7 +23,23 @@ We have changed the archival format used for the Forge distributions from ".zip"
 Fixes/Features:
 
 - Cleared out the changes.txt file, is ready for new material.
-
+- A few CheckStyle fixes.
+- Issue 266: Creating branch for changes for supporting "Produced$ Any" in mana abilities
+- Issue 266: added to manamorphose to produce any mana branch
+- Issue 266: update isBasic method of AbilityMana to account for any mana
+- Renamed the Ore Gorger card txt file as it had an unneeded space character.
+- Issue 266: significantly reworked logic in payManaCost to account for mana sources that produce any color and several other bugs
+- Issue 266: modified City of Brass, Glimmervoid, and Mox Opal to use "Produced$ Any"
+- Issue 266: merged trunk:12895-12901 revisions into branch
+- Issue 266: modified to account for lands that use "Produced$ Any"
+- Issue 266: modified to allow reflected mana to interact with any color sources
+- Issue 266: removed getManaProduced overrides from spells and drawbacks
+- Warren Instigator was missing the Berseker type
+- use constants to show Tabber tabs instead of just using raw numbers everywhere.
+- Fixing Description of Skyrider Trainee
+- if things on the stack have a sourceCard of some kind of land, make sure the stack has a color (brownish; also used for artifacts). This would be for things like the triggered ability of City of Brass.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -33,7 +49,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Karona, False God
 
 
 end
