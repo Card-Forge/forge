@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Human Soldier
 Text:no text
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self+isEnchanted | AddKeyword$ Flying | DescriptioN$ CARDNAME has flying as long as it's enchanted.
+S:Mode$ Continuous | Affected$ Card.Self+isEnchanted | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's enchanted.
 SVar:EnchantMe:Once
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyrider_trainee.jpg
