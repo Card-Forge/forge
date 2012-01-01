@@ -1,6 +1,6 @@
 Name:Warren Instigator
 ManaCost:R R
-Types:Creature Goblin
+Types:Creature Goblin Berseker
 Text:no text
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may put a Goblin creature card from your hand onto the battlefield.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Goblin | ChangeNum$ 1
