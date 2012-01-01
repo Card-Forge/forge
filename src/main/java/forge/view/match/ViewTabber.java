@@ -228,9 +228,9 @@ public class ViewTabber extends FRoundedPanel {
         String txt, isOptional;
 
         this.pnlStack.removeAll();
-        this.vtpTabber.showTab(0);
+        this.control.showPnlStack();
 
-        this.vtpTabber.getAllVTabs().get(0).setText("Stack : " + stack.size());
+        this.vtpTabber.getAllVTabs().get(ControlTabber.STACK_PANEL).setText("Stack : " + stack.size());
 
         //final Border border = new LineBorder(this.skin.getClrBorders(), 1);
         final Border border = new EmptyBorder(5, 5, 5, 5);
@@ -342,11 +342,11 @@ public class ViewTabber extends FRoundedPanel {
     // Doublestrike 06-11-11
     public void updateCombat(final String s) {
         this.pnlCombat.removeAll();
-        this.vtpTabber.showTab(1);
+        this.control.showPnlCombat();
 
         final Border border = new MatteBorder(0, 0, 0, 0, skin.getColor("borders"));
 
-        this.vtpTabber.getAllVTabs().get(1).setText("Combat : " + AllZone.getCombat().getAttackers().length);
+        this.vtpTabber.getAllVTabs().get(ControlTabber.COMBAT_PANEL).setText("Combat : " + AllZone.getCombat().getAttackers().length);
 
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);

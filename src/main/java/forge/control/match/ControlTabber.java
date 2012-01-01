@@ -40,6 +40,17 @@ public class ControlTabber extends MyObservable {
 
     private Observer stackObserver, logObserver;
 
+    /** */
+    public static final int STACK_PANEL = 0;
+    /** */
+    public static final int COMBAT_PANEL = 1;
+    /** */
+    public static final int LOG_PANEL = 2;
+    /** */
+    public static final int PLAYERS_PANEL = 3;
+    /** */
+    public static final int DEV_PANEL = 4;
+
     /**
      * Controls the vertical tabber in sidebar used for viewing gameplay data:
      * stack, combat, etc.
@@ -168,7 +179,7 @@ public class ControlTabber extends MyObservable {
      * Programatically forces card layout of sidebar tabber to show "Dev" panel.
      */
     public void showPnlDev() {
-        this.view.getVtpTabber().showTab(4);
+        this.view.getVtpTabber().showTab(DEV_PANEL);
     }
 
     /**
@@ -176,15 +187,15 @@ public class ControlTabber extends MyObservable {
      * panel.
      */
     public void showPnlPlayers() {
-        this.view.getVtpTabber().showTab(3);
+        this.view.getVtpTabber().showTab(PLAYERS_PANEL);
     }
 
     /**
-     * Programatically forces card layout of sidebar tabber to show "Console"
+     * Programatically forces card layout of sidebar tabber to show "Log"
      * panel.
      */
-    public void showPnlConsole() {
-        this.view.getVtpTabber().showTab(2);
+    public void showPnlGameLog() {
+        this.view.getVtpTabber().showTab(LOG_PANEL);
     }
 
     /**
@@ -192,7 +203,7 @@ public class ControlTabber extends MyObservable {
      * panel.
      */
     public void showPnlCombat() {
-        this.view.getVtpTabber().showTab(1);
+        this.view.getVtpTabber().showTab(COMBAT_PANEL);
     }
 
     /**
@@ -200,7 +211,7 @@ public class ControlTabber extends MyObservable {
      * panel.
      */
     public void showPnlStack() {
-        this.view.getVtpTabber().showTab(0);
+        this.view.getVtpTabber().showTab(STACK_PANEL);
     }
 
     /** Simple method that inits the mouse adapters for listeners,

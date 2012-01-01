@@ -147,7 +147,7 @@ public class ControlMatchUI {
         final Action actShowConsole = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getTabberController().showPnlConsole();
+                ControlMatchUI.this.view.getTabberController().showPnlGameLog();
             }
         };
 
