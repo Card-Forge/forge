@@ -322,7 +322,7 @@ public class ViewTabber extends FRoundedPanel {
         else if (s0.getSourceCard().isWhite()) {
             return new Color[] {Color.white, Color.black};
         }
-        else if (s0.getSourceCard().isArtifact()) {
+        else if (s0.getSourceCard().isArtifact() || s0.getSourceCard().isLand()) {
             return new Color[] {new Color(111, 75, 43), Color.white};
         }
 
