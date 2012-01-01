@@ -611,8 +611,6 @@ public class ComputerUtil {
             return true;
         }
 
-        ArrayList<String> colors;
-
         cost = manapool.subtractMana(sa, cost);
         //ManaCost testCost = new ManaCost(cost.toString()); // temp variable for testing only
         if (card.getSVar("ManaNeededToAvoidNegativeEffect") != "") {
@@ -855,118 +853,6 @@ public class ComputerUtil {
             manapool.clearPay(sa, test);
             return true;
         }
-
-        /*
-        final CardList manaSources = ComputerUtil.getAvailableMana();
-
-        // this is to prevent errors for mana sources that have abilities that
-        // cost mana.
-        manaSources.remove(sa.getSourceCard());
-
-        for (int i = 0; i < manaSources.size(); i++) {
-            final Card sourceCard = manaSources.get(i);
-            ArrayList<AbilityMana> manaAbilities = sourceCard.getAIPlayableMana();
-
-            boolean used = false; // this is for testing paying mana only
-
-            manaAbilities = ComputerUtil.sortForNeeded(cost, manaAbilities, player);
-
-            for (final AbilityMana m : manaAbilities) {
-
-                if (used) {
-                    break; // mana source already used in the test
-                }
-                m.setActivatingPlayer(player);
-                // if the AI can't pay the additional costs skip the mana
-                // ability
-                if (m.getPayCosts() != null) {
-                    if (!ComputerUtil.canPayAdditionalCosts(m, player)) {
-                        continue;
-                    }
-                } else if (sourceCard.isTapped()) {
-                    continue;
-                }
-
-                // don't use abilities with dangerous drawbacks
-                if (m.getSubAbility() != null) {
-                    if (!m.getSubAbility().chkAIDrawback()) {
-                        continue;
-                    }
-                }
-
-                colors = ComputerUtil.getProduceableColors(m, player);
-                for (int j = 0; j < colors.size(); j++) {
-                    if (used) {
-                        break; // mana source already used in the test
-                    }
-
-                    if (cost.isNeeded(colors.get(j))) {
-                        if (!test) {
-                            // Pay additional costs
-                            if (m.getPayCosts() != null) {
-                                final CostPayment pay = new CostPayment(m.getPayCosts(), m);
-                                if (!pay.payComputerCosts()) {
-                                    continue;
-                                }
-                            } else {
-                                sourceCard.tap();
-                            }
-                        } else {
-                            used = true; // mana source is now used in the test
-                        }
-
-                        cost.payMana(colors.get(j));
-
-                        if (!test) {
-                            // resolve subabilities
-                            final AbilityFactory af = m.getAbilityFactory();
-                            if (af != null) {
-                                AbilityFactory.resolveSubAbilities(m);
-                            }
-
-                            if (sourceCard.getName().equals("Undiscovered Paradise")) {
-                                sourceCard.setBounceAtUntap(true);
-                            }
-
-                            if (sourceCard.getName().equals("Rainbow Vale")) {
-                                final StringBuilder sb = new StringBuilder();
-                                sb.append("An opponent gains control of CARDNAME ");
-                                sb.append("at the beginning of the next end step.");
-                                sourceCard.addExtrinsicKeyword(sb.toString());
-                            }
-
-                            // System.out.println("just subtracted " +
-                            // colors.get(j) + ", cost is now: " +
-                            // cost.toString());
-                            // Run triggers
-                            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-
-                            runParams.put("Card", sourceCard);
-                            runParams.put("Player", player);
-                            runParams.put("Produced", colors.get(j)); // can't
-                                                                      // tell
-                                                                      // what
-                                                                      // mana
-                                                                      // the
-                                                                      // computer
-                                                                      // just
-                                                                      // paid?
-                            AllZone.getTriggerHandler().runTrigger("TapsForMana", runParams);
-                        } // not a test
-                    }
-                    if (cost.isPaid()) {
-                        // if (sa instanceof Spell_Permanent) // should probably
-                        // add this
-                        sa.getSourceCard().setColorsPaid(cost.getColorsPaid());
-                        sa.getSourceCard().setSunburstValue(cost.getSunburst());
-                        manapool.clearPay(sa, test);
-                        return true;
-                    }
-                }
-            }
-
-        } 
-        */
 
         if (!test) {
             final StringBuilder sb = new StringBuilder();

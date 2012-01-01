@@ -18,7 +18,6 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -33,6 +32,7 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
@@ -246,7 +246,7 @@ public class AbilityFactoryMana {
 
         return sb.toString();
     }
-    
+
     /**
      * <p>manaGenerated.</p>
      *
@@ -305,6 +305,24 @@ public class AbilityFactoryMana {
                         }
                         String choice = (String) o;
                         abMana.setAnyChoice(InputPayManaCostUtil.getShortColorString(choice));
+                    }
+                    else {
+                        if (params.containsKey("AILogic")) {
+                            final String logic = params.get("AILogic");
+                            String chosen = Constant.Color.BLACK;
+                            if (logic.equals("MostProminentInComputerHand")) {
+                                chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                                        Zone.Hand));
+                            }
+                            GuiUtils.getChoice("Computer picked: ", chosen);
+                            abMana.setAnyChoice(InputPayManaCostUtil.getShortColorString(chosen));
+                        }
+                        if (abMana.getAnyChoice().isEmpty()) {
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("AbilityFactoryMana::manaResolve() - any color mana choice is empty for ");
+                            sb.append(sa.getSourceCard().getName());
+                            throw new RuntimeException(sb.toString());
+                        }
                     }
                 }
             }
