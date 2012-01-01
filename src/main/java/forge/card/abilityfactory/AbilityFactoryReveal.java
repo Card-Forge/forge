@@ -960,7 +960,9 @@ public final class AbilityFactoryReveal {
                     }
                 }
 
-                GuiUtils.getChoice(p + " revealed: ", revealed.toArray());
+                if (revealed.size() > 0) {
+                    GuiUtils.getChoice(p + " revealed: ", revealed.toArray());
+                }
 
                 // TODO Allow Human to choose the order
                 if (foundDest != null) {
