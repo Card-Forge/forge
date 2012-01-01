@@ -88,7 +88,6 @@ public class AbilityFactoryMana {
 
             @Override
             public String getManaProduced() {
-                // TODO Auto-generated method stub
                 return manaGenerated(this, this.af, this);
             }
         };
@@ -123,10 +122,6 @@ public class AbilityFactoryMana {
                     return false;
                 }
 
-                @Override
-                public String getManaProduced() {
-                    return manaGenerated(this.tmpMana, this.af, this);
-                }
             };
 
             @Override
@@ -178,10 +173,6 @@ public class AbilityFactoryMana {
                     return false;
                 }
 
-                @Override
-                public String getManaProduced() {
-                    return manaGenerated(this.tmpMana, this.af, this);
-                }
             };
 
             @Override
