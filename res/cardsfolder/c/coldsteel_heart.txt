@@ -1,6 +1,6 @@
 Name:Coldsteel Heart
 ManaCost:2
-Types:Artifact
+Types:Snow Artifact
 Text:no text
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
