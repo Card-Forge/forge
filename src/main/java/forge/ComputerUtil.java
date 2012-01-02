@@ -919,6 +919,7 @@ public class ComputerUtil {
         return ComputerUtil.getAvailableMana(AllZone.getComputerPlayer());
     } // getAvailableMana()
 
+
     // gets available mana sources and sorts them
     /**
      * <p>
@@ -946,21 +947,39 @@ public class ComputerUtil {
         }); // CardListFilter
 
         final CardList sortedManaSources = new CardList();
+        final CardList otherManaSources = new CardList();
+        final CardList colorlessManaSources = new CardList();
+        final CardList oneManaSources = new CardList();
+        final CardList twoManaSources = new CardList();
+        final CardList threeManaSources = new CardList();
+        final CardList fourManaSources = new CardList();
+        final CardList fiveManaSources = new CardList();
+        final CardList anyColorManaSources = new CardList();
 
+        // Sort mana sources
         // 1. Use lands that can only produce colorless mana without
         // drawback/cost first
+        // 2. Search for mana sources that have a certain number of abilities
+        // 3. Use lands that produce any color many
+        // 4. all other sources (creature, costs, drawback, etc.)
         for (int i = 0; i < manaSources.size(); i++) {
             final Card card = manaSources.get(i);
 
             if (card.isCreature() || card.isEnchanted()) {
+                otherManaSources.add(card);
                 continue; // don't use creatures before other permanents
             }
 
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
+            boolean producesAnyColor = false;
             final ArrayList<AbilityMana> manaAbilities = card.getAIPlayableMana();
 
             for (final AbilityMana m : manaAbilities) {
+
+                if (m.isAnyMana()) {
+                    producesAnyColor = true;
+                }
 
                 final Cost cost = m.getPayCosts();
                 needsLimitedResources |= !cost.isReusuableResource();
@@ -985,61 +1004,42 @@ public class ComputerUtil {
                 usableManaAbilities++;
             }
 
-            // use lands that can only produce colorless mana first
-            if ((usableManaAbilities == 1) && !needsLimitedResources && manaAbilities.get(0).mana().equals("1")) {
-                sortedManaSources.add(card);
+            if (needsLimitedResources) {
+                otherManaSources.add(card);
             }
-        }
-        //TODO: Check for cards that produce "Any" as base mana (ArsenalNut)
-        // 2. Search for mana sources that have a certain number of mana
-        // abilities (start with 1 and go up to 5) and no drawback/costs
-        for (int number = 1; number < 6; number++) {
-            for (int i = 0; i < manaSources.size(); i++) {
-                final Card card = manaSources.get(i);
-
-                if (card.isCreature() || card.isEnchanted()) {
-                    continue; // don't use creatures before other permanents
+            else if (producesAnyColor) {
+                anyColorManaSources.add(card);
+            }
+            else if (usableManaAbilities == 1) {
+                if (manaAbilities.get(0).mana().equals("1")) {
+                    colorlessManaSources.add(card);
                 }
-
-                int usableManaAbilities = 0;
-                boolean needsLimitedResources = false;
-                final ArrayList<AbilityMana> manaAbilities = card.getAIPlayableMana();
-
-                for (final AbilityMana m : manaAbilities) {
-
-                    final Cost cost = m.getPayCosts();
-                    needsLimitedResources |= !cost.isReusuableResource();
-                    // if the AI can't pay the additional costs skip the mana
-                    // ability
-                    if (cost != null) {
-                        if (!ComputerUtil.canPayAdditionalCosts(m, player)) {
-                            continue;
-                        }
-                    }
-
-                    // don't use abilities with dangerous drawbacks
-                    if (m.getSubAbility() != null) {
-                        if (!m.getSubAbility().chkAIDrawback()) {
-                            continue;
-                        }
-                        needsLimitedResources = true; // TODO: check for good
-                                                      // drawbacks (gainLife)
-                    }
-                    usableManaAbilities++;
-                }
-
-                if ((usableManaAbilities == number) && !needsLimitedResources && !sortedManaSources.contains(card)) {
-                    sortedManaSources.add(card);
+                else {
+                    oneManaSources.add(card);
                 }
             }
-        }
-
-        // Add the rest
-        for (int j = 0; j < manaSources.size(); j++) {
-            if (!sortedManaSources.contains(manaSources.get(j))) {
-                sortedManaSources.add(manaSources.get(j));
+            else if (usableManaAbilities == 2) {
+                twoManaSources.add(card);
             }
+            else if (usableManaAbilities == 3) {
+                threeManaSources.add(card);
+            }
+            else if (usableManaAbilities == 4) {
+                fourManaSources.add(card);
+            }
+            else {
+                fiveManaSources.add(card);
+            }
+
         }
+        sortedManaSources.addAll(colorlessManaSources);
+        sortedManaSources.addAll(oneManaSources);
+        sortedManaSources.addAll(twoManaSources);
+        sortedManaSources.addAll(threeManaSources);
+        sortedManaSources.addAll(fourManaSources);
+        sortedManaSources.addAll(fiveManaSources);
+        sortedManaSources.addAll(anyColorManaSources);
+        sortedManaSources.addAll(otherManaSources);
 
         return sortedManaSources;
     } // getAvailableMana()
