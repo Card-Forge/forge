@@ -32,6 +32,7 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
@@ -85,6 +86,10 @@ public class AbilityFactoryMana {
                 return false;
             }
 
+            @Override
+            public String getManaProduced() {
+                return manaGenerated(this, this.af, this);
+            }
         };
         return abMana;
     }
@@ -243,6 +248,18 @@ public class AbilityFactoryMana {
     }
 
     /**
+     * <p>manaGenerated.</p>
+     *
+     * @param abMana a {@link forge.card.spellability.Ability_Mana} object.
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    public static String manaGenerated(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
+        return generatedMana(abMana, af, sa);
+    }
+
+    /**
      * <p>
      * manaResolve.
      * </p>
@@ -275,6 +292,40 @@ public class AbilityFactoryMana {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        if (abMana.isAnyMana()) {
+            for (Player p : tgtPlayers) {
+                if (tgt == null || p.canBeTargetedBy(sa)) {
+                    // AI color choice is set in ComputerUtils so only human players need to make a choice
+                    if (sa.getActivatingPlayer().isHuman()) {
+                        Object o = GuiUtils.getChoice("Choose a color", Constant.Color.ONLY_COLORS);
+                        if (null == o) {
+                            return;
+                        }
+                        String choice = (String) o;
+                        abMana.setAnyChoice(InputPayManaCostUtil.getShortColorString(choice));
+                    }
+                    else {
+                        if (params.containsKey("AILogic")) {
+                            final String logic = params.get("AILogic");
+                            String chosen = Constant.Color.BLACK;
+                            if (logic.equals("MostProminentInComputerHand")) {
+                                chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                                        Zone.Hand));
+                            }
+                            GuiUtils.getChoice("Computer picked: ", chosen);
+                            abMana.setAnyChoice(InputPayManaCostUtil.getShortColorString(chosen));
+                        }
+                        if (abMana.getAnyChoice().isEmpty()) {
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append("AbilityFactoryMana::manaResolve() - any color mana choice is empty for ");
+                            sb.append(sa.getSourceCard().getName());
+                            throw new RuntimeException(sb.toString());
+                        }
+                    }
+                }
+            }
         }
 
         for (final Player player : tgtPlayers) {
@@ -319,7 +370,16 @@ public class AbilityFactoryMana {
         int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
                 params.get("Amount"), sa) : 1;
 
-        String baseMana = abMana.mana();
+        String baseMana;
+        if (abMana.isAnyMana()) {
+            baseMana = abMana.getAnyChoice();
+            if (baseMana.isEmpty()) {
+                baseMana = "Any";
+            }
+        } else {
+            baseMana = abMana.mana();
+        }
+
         if (baseMana.equals("Chosen")) {
             // this will only support 1 chosen color for now.
             baseMana = InputPayManaCostUtil.getShortColorString(card.getChosenColor().get(0));
@@ -684,7 +744,7 @@ public class AbilityFactoryMana {
             final ArrayList<String> colors) {
         for (final String col : Constant.Color.ONLY_COLORS) {
             final String s = InputPayManaCostUtil.getShortColorString(col);
-            if (ab.canProduce(s) && !colors.contains(col)) {
+            if ((ab.canProduce(s) || ab.isAnyMana()) && !colors.contains(col)) {
                 colors.add(col);
             }
         }

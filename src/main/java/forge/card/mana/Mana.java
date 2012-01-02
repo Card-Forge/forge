@@ -246,4 +246,15 @@ public class Mana {
     public final void decrementAmount() {
         this.amount--;
     }
+
+    /**
+     * <p>
+     * decrementAmount.
+     * </p>
+     * 
+     * @param amountDecrement a int.
+     */
+    public void decrementAmount(final int amountDecrement) {
+        this.amount -= amountDecrement;
+    }
 }

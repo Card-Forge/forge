@@ -498,7 +498,7 @@ public class ManaPool {
                 break;
             }
         }
-        this.removeManaFrom(pool, set);
+        this.removeManaFrom(pool, set, mana.getAmount());
     }
 
     /**
@@ -510,21 +510,23 @@ public class ManaPool {
      *            a {@link java.util.ArrayList} object.
      * @param choice
      *            a {@link forge.card.mana.Mana} object.
+     * @param amount
+     *            an int .
      */
-    public final void removeManaFrom(final ArrayList<Mana> pool, final Mana choice) {
+    public final void removeManaFrom(final ArrayList<Mana> pool, final Mana choice, final int amount) {
         if (choice != null) {
-            if (choice.getAmount() == 1) {
+            if (choice.getAmount() == amount) {
                 pool.remove(choice);
             } else {
-                choice.decrementAmount();
+                choice.decrementAmount(amount);
             }
             if (pool.equals(this.floatingMana)) {
                 int i = ManaPool.MAP.get(choice.getColor());
                 if (choice.isSnow()) {
-                    this.floatingSnowTotals[i] -= choice.getAmount();
+                    this.floatingSnowTotals[i] -= amount;
                 }
                 else {
-                    this.floatingTotals[i] -= choice.getAmount();
+                    this.floatingTotals[i] -= amount;
                 }
             }
             owner.updateObservers();
@@ -685,7 +687,7 @@ public class ManaPool {
      * @return a {@link forge.card.mana.ManaCost} object.
      */
     public final ManaCost subtractMana(final SpellAbility sa, ManaCost m, final AbilityMana... mAbilities) {
-        final ArrayList<AbilityMana> paidAbs = sa.getPayingManaAbilities();
+        final ArrayList<AbilityMana> paidAbs = sa.getPayingManaAbilities();  // why???
 
         if (mAbilities.length == 0) {
             // paying from Mana Pool
@@ -699,8 +701,17 @@ public class ManaPool {
 
         // paying via Mana Abilities
         for (final AbilityMana mability : mAbilities) {
-            paidAbs.add(mability);
-            final String[] cost = ManaPool.formatMana(mability);
+            paidAbs.add(mability); // why???
+            //TODO: Look at using new getManaProduced() method of Ability_Mana (ArsenalNut)
+            //String[] cost = formatMana(mability);
+            String[] cost = null;
+            if (mability.isAnyMana()) {
+                cost = new String[1];
+                cost[0] = mability.getAnyChoice();
+            }
+            else {
+                cost = formatMana(mability);
+            }
             m = this.subtractMultiple(sa, cost, m);
         }
 
@@ -738,7 +749,7 @@ public class ManaPool {
         for (final Mana m : manaArray) {
             if (manaCost.isNeeded(m)) {
                 manaCost.payMana(m);
-                payMana.add(m);
+                payMana.add(m);  // what is this used for? anything
                 this.findAndRemoveFrom(this.floatingMana, m);
             } else {
                 break;
@@ -806,74 +817,77 @@ public class ManaPool {
         // TODO account for unpaying mana in payMana and floatingPool
         final ArrayList<Mana> payMana = sa.getPayingMana();
 
+        if ((payMana.size() == 0) && (this.floatingMana.size() == 0)) {
+          return false;
+        }
+
         final ArrayList<Mana> removePaying = new ArrayList<Mana>();
         final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
 
-        int i = 0, j = 0;
-        boolean usePay = payMana.size() > 0;
-        final boolean flag = false;
-
-        String manaStr = mana[i];
-        String color = InputPayManaCostUtil.getLongColorString(manaStr);
-
-        if (!usePay && (this.floatingMana.size() == 0)) {
-            return false;
+        int manaAccounted = 0;
+        // loop over mana paid
+        for (Mana manaPaid : payMana) {
+            if (manaPaid.fromSourceCard(c)) {
+                for (int i = 0; i < mana.length; i++) {
+                    if  (manaPaid.getColor().equals(InputPayManaCostUtil.getLongColorString(mana[i]))) {
+                        final int amt = manaPaid.getColorlessAmount();
+                        if (amt > 0) {
+                            final int difference = Integer.parseInt(mana[i]) - amt;
+                            if (difference > 0) {
+                                mana[i] = Integer.toString(difference);
+                            } else {
+                                manaAccounted += amt;
+                            }
+                        } else {
+                            manaAccounted += manaPaid.getAmount();
+                        }
+                        removePaying.add(manaPaid);
+                        break;
+                    }
+                }
+            }
+            if (manaAccounted == mana.length) {
+                break;
+            }
         }
-
-        while (i < mana.length) {
-
-            final Mana m = usePay ? payMana.get(j) : this.floatingMana.get(j);
-
-            if (m.fromSourceCard(c) && m.getColor().equals(color)) {
-                final int amt = m.getColorlessAmount();
-                if (amt > 0) {
-                    final int difference = Integer.parseInt(manaStr) - amt;
-                    if (difference > 0) {
-                        manaStr = Integer.toString(difference);
-                    } else {
-                        i += amt;
-                        if (i < mana.length) {
-                            manaStr = mana[i];
+        // loop over mana pool if not all of the generated mana is accounted for
+        if (manaAccounted < mana.length) {
+            for (Mana manaFloat : this.floatingMana) {
+                if (manaFloat.fromSourceCard(c)) {
+                    for (int i = 0; i < mana.length; i++) {
+                        if  (manaFloat.getColor().equals(InputPayManaCostUtil.getLongColorString(mana[i]))) {
+                            final int amt = manaFloat.getColorlessAmount();
+                            if (amt > 0) {
+                                final int difference = Integer.parseInt(mana[i]) - amt;
+                                if (difference > 0) {
+                                    mana[i] = Integer.toString(difference);
+                                } else {
+                                    manaAccounted += amt;
+                                }
+                            } else {
+                                manaAccounted += manaFloat.getAmount();
+                            }
+                            removeFloating.add(manaFloat);
+                            break;
                         }
                     }
-                } else {
-                    i += m.getAmount();
-                    if (i < mana.length) {
-                        manaStr = mana[i];
-                    }
                 }
-                color = InputPayManaCostUtil.getLongColorString(manaStr);
-                if (usePay) {
-                    removePaying.add(m);
-                } else {
-                    removeFloating.add(m);
-                }
-
-                // If mana has been depleted, break from loop. All Accounted
-                // for!
-                if (i == mana.length) {
+                if (manaAccounted == mana.length) {
                     break;
                 }
             }
-
-            j++; // increase j until we reach the end of paying, then reset and
-                 // use floating.
-            if (usePay) {
-                if (payMana.size() == j) {
-                    j = 0;
-                    usePay = false;
-                }
-            }
-            if (!usePay && (this.floatingMana.size() == j) && !flag) {
-                return false;
-            }
+        }
+        // When is it legitimate for all the mana not to be accountable?
+        // Does this condition really indicate an bug in Forge?
+        if (manaAccounted < mana.length) {
+            return false;
         }
 
         for (int k = 0; k < removePaying.size(); k++) {
-            this.removeManaFrom(payMana, removePaying.get(k));
+            this.removeManaFrom(payMana, removePaying.get(k), removePaying.get(k).getAmount());
         }
         for (int k = 0; k < removeFloating.size(); k++) {
-            this.removeManaFrom(this.floatingMana, removeFloating.get(k));
+            this.removeManaFrom(this.floatingMana, removeFloating.get(k), removeFloating.get(k).getAmount());
         }
         return true;
     }
@@ -896,7 +910,16 @@ public class ManaPool {
         // go through paidAbilities if they are undoable
         for (final AbilityMana am : payAbs) {
             if (am.isUndoable()) {
-                final String[] formattedMana = ManaPool.formatMana(am);
+                //final String[] formattedMana = ManaPool.formatMana(am);
+                /*String[] formattedMana = null;
+                if (am.isAnyMana()) {
+                    formattedMana = new String[1];
+                    formattedMana[0] = am.getAnyChoice();
+                }
+                else {
+                    formattedMana = formatMana(am);
+                }*/
+                final String[] formattedMana = am.getLastProduced().split(" ");
                 if (this.accountFor(sa, formattedMana, am.getSourceCard())) {
                     am.undo();
                 }

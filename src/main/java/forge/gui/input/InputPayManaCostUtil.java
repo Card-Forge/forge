@@ -119,6 +119,8 @@ public class InputPayManaCostUtil {
                             colorMatches.add(am);
                         }
                     }
+                } else if (am.isAnyMana()) {
+                        colorMatches.add(am);
                 } else {
                     final String[] m = ManaPool.formatMana(am);
                     for (final String color : m) {
@@ -130,7 +132,8 @@ public class InputPayManaCostUtil {
                 }
             }
 
-            if ((colorMatches.size() == 0) || (colorMatches.size() == abilities.size())) {
+            // Why is choice made "false" if colorMatches and abilities have same size
+            if ((colorMatches.size() == 0)) {
                 // can only match colorless just grab the first and move on.
                 choice = false;
             } else if (colorMatches.size() < abilities.size()) {
@@ -211,7 +214,9 @@ public class InputPayManaCostUtil {
         if (mana.contains("S") && am.isSnow()) {
             return true;
         }
-
+        if (am.isAnyMana()) {
+            return true;
+        }
         if (am.isReflectedMana()) {
             final ArrayList<String> reflectableColors = AbilityFactoryMana.reflectableMana(am, am.getAbilityFactory(),
                     new ArrayList<String>(), new ArrayList<Card>());

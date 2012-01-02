@@ -2790,11 +2790,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 continue;
             }
 
-            if (am.isBasic() && !res.contains(am)) {
-                res.add(am);
-            } else if (am.isReflectedMana() && !res.contains(am)) {
+            if ((am.isBasic() || am.isReflectedMana()) && !res.contains(am)) {
                 res.add(am);
             }
+
         }
 
         return res;

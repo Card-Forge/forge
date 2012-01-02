@@ -39,6 +39,8 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
     private static final long serialVersionUID = -6816356991224950520L;
 
     private String origProduced;
+    private String lastAnyChoice = "";
+    private String lastProduced = "";
     private int amount = 1;
 
     /** The reflected. */
@@ -177,6 +179,8 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
         // this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced,
         // getSourceCard());
         manaPool.addManaToFloating(produced, source);
+        //store produced to last produced
+        this.lastProduced = produced;
 
         // TODO all of the following would be better as trigger events
         // "tapped for mana"
@@ -201,6 +205,35 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
         AllZone.getTriggerHandler().runTrigger("TapsForMana", runParams);
 
     } // end produceMana(String)
+
+    /**
+     * <p>
+     * getProducedMana.
+     * </p>
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public String getManaProduced() {
+        StringBuilder sb = new StringBuilder();
+        if (this.amount == 0) {
+            sb.append("0");
+        }
+        else {
+            try {
+                // if baseMana is an integer(colorless), just multiply amount and baseMana
+                int base = Integer.parseInt(this.origProduced);
+                sb.append(base * this.amount);
+            } catch (NumberFormatException e) {
+                for (int i = 0; i < this.amount; i++) {
+                    if (i != 0) {
+                        sb.append(" ");
+                    }
+                    sb.append(this.origProduced);
+                }
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * <p>
@@ -239,6 +272,39 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
+     * setAnyChoice.
+     * </p>
+     *
+     * @param s a {@link java.lang.String} object.
+     */
+    public void setAnyChoice(String s) {
+        this.lastAnyChoice = s;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>lastAnyChoice</code>.
+     * </p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String getAnyChoice() {
+        return this.lastAnyChoice;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>lastProduced</code>.
+     * </p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String getLastProduced() {
+        return this.lastProduced;
+    }
+
+    /**
+     * <p>
      * isSnow.
      * </p>
      * 
@@ -272,6 +338,17 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
+     * isAnyMana.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public boolean isAnyMana() {
+        return this.origProduced.contains("Any");
+    }
+
+    /**
+     * <p>
      * canProduce.
      * </p>
      * 
@@ -280,6 +357,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @return a boolean.
      */
     public final boolean canProduce(final String s) {
+      //TODO: look at where this called from and take "Any" into account
         return this.origProduced.contains(s);
     }
 
@@ -291,7 +369,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @return a boolean.
      */
     public final boolean isBasic() {
-        if (this.origProduced.length() != 1) {
+        if (this.origProduced.length() != 1 && !this.origProduced.contains("Any")) {
             return false;
         }
 
