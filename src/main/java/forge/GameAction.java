@@ -795,7 +795,7 @@ public class GameAction {
         if (AllZone.getStack().getResolving() && !force) {
             return;
         }
-        
+
         final boolean refreeze = AllZone.getStack().isFrozen();
         AllZone.getStack().setFrozen(true);
 
