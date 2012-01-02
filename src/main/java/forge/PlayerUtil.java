@@ -232,7 +232,6 @@ public final class PlayerUtil {
      */
     public static Input inputSacrificePermanents(final int nCards) {
         final CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        list.remove("Mana Pool"); // is this needed?
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } // input_sacrificePermanents()
 
@@ -250,7 +249,6 @@ public final class PlayerUtil {
      */
     public static Input inputSacrificePermanents(final int nCards, final String type) {
         CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        list.remove("Mana Pool"); // is this needed?
 
         list = list.getType(type);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");

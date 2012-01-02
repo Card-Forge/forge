@@ -1300,7 +1300,7 @@ public class CardFactorySorceries {
                     perms = perms.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            return c.isPermanent() && !c.getName().equals("Mana Pool");
+                            return c.isPermanent();
                         }
                     });
 

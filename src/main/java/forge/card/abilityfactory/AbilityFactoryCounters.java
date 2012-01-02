@@ -1285,26 +1285,8 @@ public class AbilityFactoryCounters {
      */
     private static void proliferateResolve(final AbilityFactory af, final SpellAbility sa) {
         CardList hperms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-        hperms = hperms.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card crd) {
-                return !crd.getName().equals("Mana Pool") /*
-                                                           * &&
-                                                           * crd.hasCounters()
-                                                           */;
-            }
-        });
 
         CardList cperms = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
-        cperms = cperms.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card crd) {
-                return !crd.getName().equals("Mana Pool") /*
-                                                           * &&
-                                                           * crd.hasCounters()
-                                                           */;
-            }
-        });
 
         if (af.getHostCard().getController().isHuman()) {
             cperms.addAll(hperms);

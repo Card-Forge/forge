@@ -6579,7 +6579,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
 
-        if (this.getName().equals("Mana Pool") || this.isImmutable()) {
+        if (this.isImmutable()) {
             return false;
         }
 
