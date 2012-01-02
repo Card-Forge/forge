@@ -40,6 +40,16 @@ Fixes/Features:
 - if things on the stack have a sourceCard of some kind of land, make sure the stack has a color (brownish; also used for artifacts). This would be for things like the triggered ability of City of Brass.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- fix ability cost of Flame Elemental (thanks squee1968)
+- fix missing subability of Green Sun's Zenith (thanks squee1968)
+- gave Soaratmi Savant Flying (thanks squee1968)
+- restored the functionality to show Stack cards in Card Picture/Detail when moused over. This functionality was present in 1.1.8, but was removed in 1.2.0 due to a bug. I confirmed the bug was also present in 1.1.8, so we are no worse off than we were before and there have been complaints on the forum about this in the 1.2.0 UI.
+- in DigUntil resolve, game cannot continue if revealed is empty. This is fixed.
+- add 10E SetInfo to Counsel of the Soratami
+- Issue 266: add color choice logic for future use by AI
+- fix typo in Tourach's Gate
+- Issue 266: changed sorting of mana sources to account of any color mana
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
