@@ -13,7 +13,7 @@ Oracle:Haste\nWhenever Akki Lavarunner deals damage to an opponent, flip it.
 
 ALTERNATE
 
-Name:Tok-Tok, Volcano-Born
+Name:Tok-Tok, Volcano Born
 ManaCost:3 R
 Colors:Red
 Types:Legendary Creature Goblin Shaman
