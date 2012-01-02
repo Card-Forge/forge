@@ -46,6 +46,7 @@ import com.google.code.jyield.YieldUtils;
 
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
+import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
 import forge.view.FView;
@@ -471,6 +472,9 @@ public class CardReader implements Runnable {
                 } else if (line.startsWith("S:")) {
                     final String value = line.substring(2);
                     card.addStaticAbilityString(value);
+                } else if (line.startsWith("R:")) {
+                    final String value = line.substring(2);
+                    card.addReplacementEffect(ReplacementHandler.parseReplacement(value, card));
                 } else if (line.startsWith("SetInfo:")) {
                     final String value = line.substring("SetInfo:".length());
                     card.addSet(new SetInfo(value)); // NOPMD by Braids on

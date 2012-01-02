@@ -1,0 +1,29 @@
+Name:Akki Lavarunner
+ManaCost:3 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigFlip | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, flip it.
+SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
+SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_lavarunner.jpg
+AlternateMode:Flip
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/153.jpg
+Oracle:Haste\nWhenever Akki Lavarunner deals damage to an opponent, flip it.
+
+ALTERNATE
+
+Name:Tok-Tok, Volcano-Born
+ManaCost:3 R
+Colors:Red
+Types:Legendary Creature Goblin Shaman
+Text:no text
+PT:2/2
+K:Protection from red
+R:Event$ DamageDone | ValidSource$ Card.Red | ValidTarget$ Player | ReplaceWith$ DmgPlus1 | Description$ If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
+SVar:DmgPlus1:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/tok_tok_volcano_born.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/313.jpg
+Oracle:Protection from red\nIf a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
+End

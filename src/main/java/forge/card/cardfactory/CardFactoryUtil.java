@@ -4114,6 +4114,7 @@ public class CardFactoryUtil {
         to.setImageName(from.getImageName());
         to.setImageFilename(from.getImageFilename());
         to.setTriggers(from.getTriggers());
+        to.setReplacementEffects(from.getReplacementEffects());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());
 
     }

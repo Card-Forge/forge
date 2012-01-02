@@ -139,6 +139,7 @@ res/cardsfolder/a/akki_avalanchers.txt svneol=native#text/plain
 res/cardsfolder/a/akki_blizzard_herder.txt svneol=native#text/plain
 res/cardsfolder/a/akki_coalflinger.txt svneol=native#text/plain
 res/cardsfolder/a/akki_drillmaster.txt svneol=native#text/plain
+res/cardsfolder/a/akki_lavarunner_tok_tok_the_volcano_born.txt -text
 res/cardsfolder/a/akki_raider.txt svneol=native#text/plain
 res/cardsfolder/a/akki_rockspeaker.txt svneol=native#text/plain
 res/cardsfolder/a/akki_underling.txt svneol=native#text/plain
@@ -4633,6 +4634,7 @@ res/cardsfolder/k/kyren_negotiations.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_sniper.txt svneol=native#text/plain
 res/cardsfolder/k/kyscu_drake.txt -text
 res/cardsfolder/l/lab_rats.txt svneol=native#text/plain
+res/cardsfolder/l/laboratory_maniac.txt -text
 res/cardsfolder/l/labyrinth_minotaur.txt svneol=native#text/plain
 res/cardsfolder/l/laccolith_grunt.txt svneol=native#text/plain
 res/cardsfolder/l/laccolith_titan.txt svneol=native#text/plain
@@ -5814,6 +5816,7 @@ res/cardsfolder/o/obsidian_acolyte.txt svneol=native#text/plain
 res/cardsfolder/o/obsidian_fireheart.txt svneol=native#text/plain
 res/cardsfolder/o/obsidian_giant.txt svneol=native#text/plain
 res/cardsfolder/o/obstinate_baloth.txt svneol=native#text/plain
+res/cardsfolder/o/obstinate_familiar.txt -text
 res/cardsfolder/o/ocular_halo.txt svneol=native#text/plain
 res/cardsfolder/o/oculus.txt svneol=native#text/plain
 res/cardsfolder/o/odious_trow.txt svneol=native#text/plain
@@ -6426,6 +6429,7 @@ res/cardsfolder/p/purify.txt svneol=native#text/plain
 res/cardsfolder/p/purify_the_grave.txt -text
 res/cardsfolder/p/purity.txt svneol=native#text/plain
 res/cardsfolder/p/purraj_of_urborg.txt svneol=native#text/plain
+res/cardsfolder/p/pursuit_of_knowledge.txt -text
 res/cardsfolder/p/pus_kami.txt svneol=native#text/plain
 res/cardsfolder/p/put_away.txt svneol=native#text/plain
 res/cardsfolder/p/putrefaction.txt svneol=native#text/plain
@@ -8640,6 +8644,7 @@ res/cardsfolder/t/thought_courier.txt svneol=native#text/plain
 res/cardsfolder/t/thought_devourer.txt svneol=native#text/plain
 res/cardsfolder/t/thought_eater.txt svneol=native#text/plain
 res/cardsfolder/t/thought_nibbler.txt svneol=native#text/plain
+res/cardsfolder/t/thought_reflection.txt -text
 res/cardsfolder/t/thoughtbind.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtcast.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtcutter_agent.txt svneol=native#text/plain
@@ -9004,6 +9009,7 @@ res/cardsfolder/u/unchecked_growth.txt -text
 res/cardsfolder/u/uncle_istvan.txt svneol=native#text/plain
 res/cardsfolder/u/uncontrollable_anger.txt svneol=native#text/plain
 res/cardsfolder/u/uncontrolled_infestation.txt svneol=native#text/plain
+res/cardsfolder/u/undead_alchemist.txt -text
 res/cardsfolder/u/undead_gladiator.txt svneol=native#text/plain
 res/cardsfolder/u/undead_leotau.txt svneol=native#text/plain
 res/cardsfolder/u/undead_slayer.txt svneol=native#text/plain
@@ -10758,6 +10764,11 @@ src/main/java/forge/card/mana/ManaPartSplit.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain
 src/main/java/forge/card/mana/package-info.java svneol=native#text/plain
 src/main/java/forge/card/package-info.java svneol=native#text/plain
+src/main/java/forge/card/replacement/ReplaceDamage.java -text
+src/main/java/forge/card/replacement/ReplaceDraw.java -text
+src/main/java/forge/card/replacement/ReplaceGainLife.java -text
+src/main/java/forge/card/replacement/ReplacementEffect.java -text
+src/main/java/forge/card/replacement/ReplacementHandler.java -text
 src/main/java/forge/card/spellability/Ability.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityActivated.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityMana.java svneol=native#text/plain

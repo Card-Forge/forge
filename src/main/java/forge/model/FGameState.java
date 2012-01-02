@@ -34,6 +34,7 @@ import forge.PlayerZone;
 import forge.StaticEffects;
 import forge.Upkeep;
 import forge.Untap;
+import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.game.GameSummary;
 
@@ -59,6 +60,7 @@ public class FGameState {
     private GameAction gameAction = new GameAction();
     private StaticEffects staticEffects = new StaticEffects();
     private TriggerHandler triggerHandler = new TriggerHandler();
+    private ReplacementHandler replacementHandler = new ReplacementHandler();
     private Combat combat = new Combat();
     private GameLog gameLog = new GameLog();
 
@@ -407,6 +409,13 @@ public class FGameState {
         }
 
         this.getStaticEffects().reset();
+    }
+
+    /**
+     * @return the replacementHandler
+     */
+    public ReplacementHandler getReplacementHandler() {
+        return replacementHandler;
     }
 
 }

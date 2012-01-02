@@ -291,18 +291,21 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean gainLife(final int toGain, final Card source) {
+        
+        //Run any applicable replacement effects.
+        HashMap<String,Object> repParams = new HashMap<String,Object>();
+        repParams.put("Event","GainLife");
+        repParams.put("Affected", this);
+        repParams.put("LifeGained",toGain);
+        if(AllZone.getReplacementHandler().run(repParams)) {
+            return false;
+        }
+        
         boolean newLifeSet = false;
         if (!this.canGainLife()) {
             return false;
         }
         int lifeGain = toGain;
-
-        if (AllZoneUtil.isCardInPlay("Boon Reflection", this)) {
-            final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Boon Reflection").size();
-            for (int i = 0; i < amount; i++) {
-                lifeGain += lifeGain;
-            }
-        }
 
         if (lifeGain > 0) {
             if (AllZoneUtil.isCardInPlay("Lich", this)) {
@@ -335,7 +338,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canGainLife() {
-        if (AllZoneUtil.isCardInPlay("Sulfuric Vortex") || AllZoneUtil.isCardInPlay("Leyline of Punishment")
+        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")
                 || AllZoneUtil.isCardInPlay("Platinum Emperion", this) || AllZoneUtil.isCardInPlay("Forsaken Wastes")) {
             return false;
         }
@@ -618,6 +621,7 @@ public abstract class Player extends GameEntity {
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
+    // 2012/01/02: No longer used in calculating the finalized damage, but retained for damageprediction. -Hellfish
     /**
      * <p>
      * staticReplaceDamage.
@@ -650,21 +654,21 @@ public abstract class Player extends GameEntity {
                 restDamage += 2;
             }
         }
-
+//
         if (AllZoneUtil.isCardInPlay("Furnace of Rath")) {
             final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Furnace of Rath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
-
+//
         if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()) {
             final int amount = source.getController().getCardsIn(Zone.Battlefield, "Gratuitous Violence").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
-
+//
         if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
                 && (source.isInstant() || source.isSorcery())) {
             final int amount = source.getController().getCardsIn(Zone.Battlefield, "Fire Servant").size();
@@ -673,6 +677,7 @@ public abstract class Player extends GameEntity {
             }
         }
 
+        //
         if (AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
             final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Benevolent Unicorn").size();
             for (int i = 0; i < amount; i++) {
@@ -682,11 +687,12 @@ public abstract class Player extends GameEntity {
             }
         }
 
+        //
         if (AllZoneUtil.isCardInPlay("Divine Presence") && (restDamage > 3)) {
 
             restDamage = 3;
         }
-
+//
         if (AllZoneUtil.isCardInPlay("Forethought Amulet", this) && (source.isInstant() || source.isSorcery())
                 && (restDamage > 2)) {
 
@@ -712,21 +718,20 @@ public abstract class Player extends GameEntity {
     @Override
     public final int replaceDamage(final int damage, final Card source, final boolean isCombat) {
 
-        final int restDamage = this.staticReplaceDamage(damage, source, isCombat);
-
-        if (source.getName().equals("Szadek, Lord of Secrets") && isCombat) {
-            source.addCounter(Counters.P1P1, restDamage);
-            for (int i = 0; i < restDamage; i++) {
-                final CardList lib = this.getCardsIn(Zone.Library);
-                if (lib.size() > 0) {
-                    AllZone.getGameAction().moveToGraveyard(lib.get(0));
-                }
-            }
+        //Replacement effects
+        HashMap<String, Object> repParams = new HashMap<String, Object>();
+        repParams.put("Event", "DamageDone");
+        repParams.put("Affected", this);
+        repParams.put("DamageSource",source);
+        repParams.put("DamageAmount", damage);
+        repParams.put("IsCombat", isCombat);
+        
+        if(AllZone.getReplacementHandler().run(repParams)) {
             return 0;
         }
 
         if (AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
-            for (int i = 0; i < restDamage; i++) {
+            for (int i = 0; i < damage; i++) {
                 final CardList lib = this.getCardsIn(Zone.Library);
                 if (lib.size() > 0) {
                     AllZone.getGameAction().exile(lib.get(0));
@@ -737,7 +742,7 @@ public abstract class Player extends GameEntity {
             return 0;
         }
 
-        return restDamage;
+        return damage;
     }
 
     /**
@@ -1179,7 +1184,20 @@ public abstract class Player extends GameEntity {
     private CardList doDraw() {
         final CardList drawn = new CardList();
         final PlayerZone library = this.getZone(Constant.Zone.Library);
+        
+        //Replacement effects
+        HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        repRunParams.put("Event","Draw");
+        repRunParams.put("Affected", this);
+        
+        if(AllZone.getReplacementHandler().run(repRunParams)) {
+            return drawn;
+        }
+        
         if (library.size() != 0) {
+            
+            
+            
             Card c = library.get(0);
             c = AllZone.getGameAction().moveToHand(c);
             drawn.add(c);

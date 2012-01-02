@@ -1,9 +1,11 @@
 Name:Boon Reflection
 ManaCost:4 W
 Types:Enchantment
-Text:If you would gain life, you gain twice that much life instead.
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
+Text:no text
+R:Event$ GainLife | ValidPlayer$ You | ReplaceWith$ GainDouble | Description$ If you would gain life, you gain twice that much life instead.
+SVar:GainDouble:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:ReplaceCount$LifeGained/Twice
+SVar:PlayMain1:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boon_reflection.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/5.jpg
 Oracle:If you would gain life, you gain twice that much life instead.

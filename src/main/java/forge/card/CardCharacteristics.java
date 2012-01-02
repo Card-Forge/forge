@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import forge.CardColor;
 import forge.SetInfo;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -43,6 +44,7 @@ public class CardCharacteristics {
     private ArrayList<String> intrinsicAbility = new ArrayList<String>();
     private ArrayList<AbilityMana> manaAbility = new ArrayList<AbilityMana>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
+    private ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
     private String imageFilename = "";
@@ -371,5 +373,19 @@ public class CardCharacteristics {
      */
     public void setImageName(final String imageName0) {
         this.imageName = imageName0;
+    }
+
+    /**
+     * @return the replacementEffects
+     */
+    public ArrayList<ReplacementEffect> getReplacementEffects() {
+        return replacementEffects;
+    }
+
+    /**
+     * @param replacementEffects0 the replacementEffects to set
+     */
+    public void setReplacementEffects(ArrayList<ReplacementEffect> replacementEffects0) {
+        this.replacementEffects = replacementEffects0;
     }
 }

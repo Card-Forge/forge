@@ -113,6 +113,8 @@ public abstract class SpellAbility {
     private HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
 
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
+    
+    private HashMap<String, Object> replacingObjects = new HashMap<String, Object>();
 
     private Command beforePayManaAI = Command.BLANK;
 
@@ -922,7 +924,7 @@ public abstract class SpellAbility {
     public void setTriggeringObject(final String type, final Object o) {
         this.triggeringObjects.put(type, o);
     }
-
+    
     /**
      * <p>
      * getTriggeringObject.
@@ -960,6 +962,27 @@ public abstract class SpellAbility {
      */
     public void resetTriggeringObjects() {
         this.triggeringObjects = new HashMap<String, Object>();
+    }
+    
+    public HashMap<String,Object> getReplacingObjects() {
+        return this.replacingObjects;
+    }
+    
+    public void setAllReplacingObjects(final HashMap<String, Object> replacedObjects) {
+        this.replacingObjects = replacedObjects;
+    }
+    
+    public void setReplacingObject(final String type, final Object o) {
+        this.replacingObjects.put(type, o);
+    }
+    
+    public Object getReplacingObject(final String type) {
+        Object res = this.replacingObjects.get(type);
+        return res;
+    }
+    
+    public boolean hasReplacingObject(final String type) {
+        return this.replacingObjects.containsKey(type);
     }
 
     /**

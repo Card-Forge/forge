@@ -36,6 +36,7 @@ import forge.card.CardCharacteristics;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.SpellAbility;
@@ -2566,6 +2567,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append(trig.toString() + "\r\n");
             }
         }
+        
+        //Replacement effects
+        for(final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
+            sb.append(RE.toString() + "\r\n");
+        }
 
         // static abilities
         for (final StaticAbility stAb : this.getCharacteristics().getStaticAbilities()) {
@@ -2661,6 +2667,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!trig.isSecondary()) {
                 sb.append(trig.toString() + "\r\n");
             }
+        }
+        
+        //Replacement effects
+        for(final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
+            sb.append(RE.toString() + "\r\n");
         }
 
         // static abilities
@@ -8057,36 +8068,22 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     @Override
     public final int replaceDamage(final int damageIn, final Card source, final boolean isCombat) {
-
-        int restDamage = damageIn;
+        //Replacement effects
+        HashMap<String, Object> repParams = new HashMap<String, Object>();
+        repParams.put("Event", "DamageDone");
+        repParams.put("Affected", this);
+        repParams.put("DamageSource",source);
+        repParams.put("DamageAmount", damageIn);
+        repParams.put("IsCombat", isCombat);
+        
         final CardList auras = new CardList(this.getEnchantedBy().toArray());
 
-        if (this.getName().equals("Phytohydra")) {
-            this.addCounter(Counters.P1P1, restDamage);
-            return 0;
-        }
-
         if (auras.containsName("Treacherous Link")) {
-            this.getController().addDamage(restDamage, source);
+            this.getController().addDamage(damageIn, source);
             return 0;
         }
 
-        restDamage = this.staticReplaceDamage(restDamage, source, isCombat);
-
-        if (this.getName().equals("Lichenthrope")) {
-            this.addCounter(Counters.M1M1, restDamage);
-            return 0;
-        }
-
-        if (this.getName().equals("Dralnu, Lich Lord")) {
-            final CardList choices = this.getController().getCardsIn(Zone.Battlefield);
-            for (int i = 0; i < restDamage; i++) {
-                this.getController().sacrificePermanent("Sacrifice a permanent.", choices);
-            }
-            return 0;
-        }
-
-        return restDamage;
+        return damageIn;
     }
 
     /**
@@ -8670,6 +8667,23 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return true;
+    }
+    
+    public ArrayList<ReplacementEffect> getReplacementEffects() {
+        return this.getCharacteristics().getReplacementEffects();
+    }
+    
+    public void setReplacementEffects(ArrayList<ReplacementEffect> res) {
+        this.getCharacteristics().getReplacementEffects().clear();
+        for(ReplacementEffect RE : res) {
+            addReplacementEffect(RE);
+        }
+    }
+    
+    public void addReplacementEffect(ReplacementEffect RE) {
+        ReplacementEffect RECopy = RE.getCopy();
+        RECopy.setHostCard(this);
+        this.getCharacteristics().getReplacementEffects().add(RECopy);
     }
 
 } // end Card class

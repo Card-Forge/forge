@@ -1584,6 +1584,15 @@ public class AbilityFactory {
                     final int count = (Integer) root.getTriggeringObject(l[0]);
 
                     return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+                } else if (calcX[0].startsWith("ReplaceCount")) {
+                    // ReplaceCount is similar to a regular Count, but just
+                    // pulls Integer Values from Replacement objects
+                    final SpellAbility root = ability.getRootSpellAbility();
+                    final String[] l = calcX[1].split("/");
+                    final String[] m = CardFactoryUtil.parseMath(l);
+                    final int count = (Integer) root.getReplacingObject(l[0]);
+
+                    return CardFactoryUtil.doXMath(count, m, card) * multiplier;
                 } else {
 
                     return 0;
@@ -1667,6 +1676,16 @@ public class AbilityFactory {
                 c = AllZoneUtil.getCardState((Card) crd);
             } else if (crd instanceof CardList) {
                 for (final Card cardItem : (CardList) crd) {
+                    cards.add(cardItem);
+                }
+            }
+        } else if (defined.startsWith("Replaced") && (sa != null)) {
+            final SpellAbility root = sa.getRootSpellAbility();
+            final Object crd = root.getReplacingObject(defined.substring(8));
+            if(crd instanceof Card) {
+                c = AllZoneUtil.getCardState((Card) crd);
+            } else if (crd instanceof CardList) {
+                for(final Card cardItem : (CardList) crd) {
                     cards.add(cardItem);
                 }
             }
@@ -1839,6 +1858,49 @@ public class AbilityFactory {
             } else {
                 final String triggeringType = defined.substring(9);
                 o = root.getTriggeringObject(triggeringType);
+            }
+            if (o != null) {
+                if (o instanceof Player) {
+                    final Player p = (Player) o;
+                    if (!players.contains(p)) {
+                        players.add(p);
+                    }
+                }
+            }
+        } else if (defined.startsWith("Replaced")) {
+            String bleh = defined.substring(8);
+            final SpellAbility root = sa.getRootSpellAbility();
+            Object o = null;
+            if (defined.endsWith("Controller")) {
+                String replacingType = defined.substring(8);
+                replacingType = replacingType.substring(0, replacingType.length() - 10);
+                final Object c = root.getReplacingObject(replacingType);
+                if (c instanceof Card) {
+                    o = ((Card) c).getController();
+                }
+                if (c instanceof SpellAbility) {
+                    o = ((SpellAbility) c).getSourceCard().getController();
+                }
+            } else if (defined.endsWith("Opponent")) {
+                String replacingType = defined.substring(8);
+                replacingType = replacingType.substring(0, replacingType.length() - 8);
+                final Object c = root.getReplacingObject(replacingType);
+                if (c instanceof Card) {
+                    o = ((Card) c).getController().getOpponent();
+                }
+                if (c instanceof SpellAbility) {
+                    o = ((SpellAbility) c).getSourceCard().getController().getOpponent();
+                }
+            } else if (defined.endsWith("Owner")) {
+                String replacingType = defined.substring(8);
+                replacingType = replacingType.substring(0, replacingType.length() - 5);
+                final Object c = root.getReplacingObject(replacingType);
+                if (c instanceof Card) {
+                    o = ((Card) c).getOwner();
+                }
+            } else {
+                final String replacingType = defined.substring(8);
+                o = root.getReplacingObject(replacingType);
             }
             if (o != null) {
                 if (o instanceof Player) {

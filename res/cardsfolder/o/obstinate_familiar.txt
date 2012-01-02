@@ -1,0 +1,9 @@
+Name:Obstinate Familiar
+ManaCost:R
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+R:Event$ Draw | ValidPlayer$ You | Optional$ True | Prevent$ True | Description$ If you would draw a card, you may skip that draw instead.
+Oracle:If you would draw a card, you may skip that draw instead.
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/210.jpg
+End

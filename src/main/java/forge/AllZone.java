@@ -24,6 +24,7 @@ import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.PreloadingCardFactory;
+import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
 import forge.game.GameSummary;
@@ -452,6 +453,10 @@ public final class AllZone {
      */
     public static TriggerHandler getTriggerHandler() {
         return Singletons.getModel().getGameState().getTriggerHandler();
+    }
+    
+    public static ReplacementHandler getReplacementHandler() {
+        return Singletons.getModel().getGameState().getReplacementHandler();
     }
 
     /**

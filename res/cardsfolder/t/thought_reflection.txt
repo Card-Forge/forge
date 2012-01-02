@@ -1,0 +1,9 @@
+Name:Thought Reflection
+ManaCost:4 U U U
+Types:Enchantment
+Text:no text
+R:Event$ Draw | ValidPlayer$ You | ReplaceWith$ DrawTwo | Description$ If you would draw a card, draw two cards instead.
+SVar:DrawTwo:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
+Oracle:If you would draw a card, draw two cards instead.
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/53.jpg
+End
