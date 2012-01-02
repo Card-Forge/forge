@@ -7,6 +7,8 @@ Forge Beta: ##-##-2012 ver 1.2.# rev #####
 
 A new branch was created for supporting "Produced$ Any" in mana abilities (Issue 266). Some other bugs/problems with paying mana costs were uncovered and fixed. When finished this work will be merged into the main trunk.
 
+A new Scriptable Replacement Effects system has been recently added to the SVN. The structure is very similar to Triggers (So there's currently a little code duplication), there is a Handler class, a base class for Replacement effects and subclasses for each event that can be replaced.
+
 
 Several people have noticed a crash report stating that "Buffers have not been created". We hope to have this fixed in the near future. It has been pointed out that:
 
