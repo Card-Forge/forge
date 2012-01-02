@@ -612,17 +612,25 @@ public class ComputerUtil {
         }
 
         cost = manapool.subtractMana(sa, cost);
-        //ManaCost testCost = new ManaCost(cost.toString()); // temp variable for testing only
         if (card.getSVar("ManaNeededToAvoidNegativeEffect") != "") {
             String[] negEffects = card.getSVar("ManaNeededToAvoidNegativeEffect").split(",");
+            int amountAdded = 0;
             for (int nStr = 0; nStr < negEffects.length; nStr++) {
                 // convert long color strings to short color strings
                 if (negEffects[nStr].length() > 1) {
                     negEffects[nStr] = InputPayManaCostUtil.getShortColorString(negEffects[nStr]);
                 }
+                // make mana mandatory for AI
+                if (!cost.isColor(negEffects[nStr])) {
+                  cost.combineManaCost(negEffects[nStr]);
+                  amountAdded++;
+                }
             }
             cost.setManaNeededToAvoidNegativeEffect(negEffects);
-            //testCost.setManaNeededToAvoidNegativeEffect(negEffects);
+            //TODO: should it be an error condition if amountAdded is greater than the colorless
+            //      in the original cost? (ArsenalNut - 120102)
+            // adjust colorless amount to account for added mana
+            cost.decreaseColorlessMana(amountAdded);
         }
 
         // get map of mana abilities
@@ -637,8 +645,6 @@ public class ComputerUtil {
             foundAllSources = false;
         }
         else {
-            //TODO: Sort colorless sources based on ManaNeededToAvoidNegativeEffect
-            //      (ArsenalNut - 111230)
             String[] shortColors = {"W", "U", "B" , "R", "G"};
             // loop over cost parts
             for (int nPart = 0; nPart < costParts.length; nPart++) {
