@@ -3,7 +3,8 @@ ManaCost:8 B B G G
 Types:Legendary Creature Spirit
 Text:no text
 PT:8/8
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Stack | Destination$ Battlefield | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Hand | Destination$ Stack | Static$ True | DelayedTrigger$ CastFromHand
+SVar:CastFromHand:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Stack | Destination$ Battlefield | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library.
 SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Spirit.YouCtrl | ChangeNum$ 1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidCard$ Card.Self | SubAbility$ DBReturn

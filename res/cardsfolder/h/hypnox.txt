@@ -1,0 +1,18 @@
+Name:Hypnox
+ManaCost:8 B B B
+Types:Creature Nightmare Horror
+Text:no text
+PT:8/8
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Hand | Destination$ Stack | Static$ True | DelayedTrigger$ CastFromHand | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.
+SVar:CastFromHand:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Stack | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.
+SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ValidTgts$ Opponent | ChangeType$ Card.YouDontCtrl | Origin$ Hand | Destination$ Exile | RememberChanged$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to their owner's hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnox.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/64.jpg
+Oracle:Flying\nWhen Hypnox enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.\nWhen Hypnox leaves the battlefield, return the exiled cards to their owner's hand.
+End

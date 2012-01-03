@@ -1493,6 +1493,7 @@ res/cardsfolder/c/clout_of_the_dominus.txt svneol=native#text/plain
 res/cardsfolder/c/clutch_of_the_undercity.txt svneol=native#text/plain
 res/cardsfolder/c/clutch_of_undeath.txt svneol=native#text/plain
 res/cardsfolder/c/coal_golem.txt svneol=native#text/plain
+res/cardsfolder/c/coal_stoker.txt -text
 res/cardsfolder/c/coalhauler_swine.txt -text
 res/cardsfolder/c/coalition_victory.txt -text svneol=unset#text/plain
 res/cardsfolder/c/coast_watcher.txt svneol=native#text/plain
@@ -2225,6 +2226,7 @@ res/cardsfolder/d/dramatic_entrance.txt svneol=native#text/plain
 res/cardsfolder/d/drana_kalastria_bloodchief.txt svneol=native#text/plain
 res/cardsfolder/d/drastic_revelation.txt svneol=native#text/plain
 res/cardsfolder/d/dread.txt svneol=native#text/plain
+res/cardsfolder/d/dread_cacodemon.txt -text
 res/cardsfolder/d/dread_charge.txt -text
 res/cardsfolder/d/dread_drone.txt svneol=native#text/plain
 res/cardsfolder/d/dread_of_night.txt svneol=native#text/plain
@@ -4011,6 +4013,7 @@ res/cardsfolder/h/hyperion_blacksmith.txt svneol=native#text/plain
 res/cardsfolder/h/hypervolt_grasp.txt svneol=native#text/plain
 res/cardsfolder/h/hypnotic_cloud.txt -text svneol=unset#text/plain
 res/cardsfolder/h/hypnotic_specter.txt svneol=native#text/plain
+res/cardsfolder/h/hypnox.txt -text
 res/cardsfolder/h/hypochondria.txt svneol=native#text/plain
 res/cardsfolder/h/hysterical_blindness.txt -text
 res/cardsfolder/h/hystrodon.txt svneol=native#text/plain
@@ -6708,6 +6711,7 @@ res/cardsfolder/r/reinforced_bulwark.txt svneol=native#text/plain
 res/cardsfolder/r/reinforcements.txt svneol=native#text/plain
 res/cardsfolder/r/reiterate.txt svneol=native#text/plain
 res/cardsfolder/r/reito_lantern.txt svneol=native#text/plain
+res/cardsfolder/r/reiver_demon.txt -text
 res/cardsfolder/r/rejuvenate.txt svneol=native#text/plain
 res/cardsfolder/r/rejuvenation_chamber.txt svneol=native#text/plain
 res/cardsfolder/r/reki_the_history_of_kamigawa.txt svneol=native#text/plain
