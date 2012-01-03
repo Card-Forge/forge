@@ -3,11 +3,7 @@ ManaCost:2 G
 Types:Creature Elf Druid
 Text:no text
 PT:1/2
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Elf card, reveal it, then shuffle your library and put that card on top of it.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Elf | ChangeNum$ 1
 SVar:RemRandomDeck:True

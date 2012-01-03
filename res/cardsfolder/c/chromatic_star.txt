@@ -2,11 +2,7 @@ Name:Chromatic Star
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ W | SpellDescription$ Add W to your mana pool.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ U | SpellDescription$ Add U to your mana pool.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add B to your mana pool.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add R to your mana pool.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:RemAIDeck:True
