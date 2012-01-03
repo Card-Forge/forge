@@ -24,11 +24,13 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
+
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
 import forge.PlayerZone;
+import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -41,7 +43,7 @@ import forge.card.spellability.SpellAbility;
  * @author Forge
  * @version $Id$
  */
-public abstract class Trigger {
+public abstract class Trigger extends TriggerReplacementBase {
 
     /** Constant <code>nextID=0</code>. */
     private static int nextID = 0;

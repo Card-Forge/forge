@@ -24,6 +24,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
+import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -32,7 +33,7 @@ import forge.card.spellability.SpellAbility;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class ReplacementEffect {
+public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /** The has run. */
     private boolean hasRun = false;

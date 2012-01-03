@@ -63,7 +63,7 @@ public class TriggerDamageDone extends Trigger {
         }
 
         if (this.getMapParams().containsKey("ValidTarget")) {
-            if (!AllZoneUtil.matchesValid(tgt, this.getMapParams().get("ValidTarget").split(","), this.getHostCard())) {
+            if (!matchesValid(tgt, this.getMapParams().get("ValidTarget").split(","), this.getHostCard())) {
                 return false;
             }
         }

@@ -20,7 +20,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.AllZoneUtil;
+
 import forge.Card;
 import forge.CardList;
 import forge.card.spellability.SpellAbility;
@@ -55,7 +55,7 @@ public class TriggerAttackersDeclared extends Trigger {
             }
         }
         if (this.getMapParams().containsKey("AttackingPlayer")) {
-            if (!AllZoneUtil.matchesValid(runParams2.get("AttackingPlayer"),
+            if (!matchesValid(runParams2.get("AttackingPlayer"),
                     this.getMapParams().get("AttackingPlayer").split(","), this.getHostCard())) {
                 return false;
             }

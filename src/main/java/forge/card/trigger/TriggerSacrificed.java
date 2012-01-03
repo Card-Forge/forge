@@ -19,7 +19,7 @@ package forge.card.trigger;
 
 import java.util.HashMap;
 
-import forge.AllZoneUtil;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -54,7 +54,7 @@ public class TriggerSacrificed extends Trigger {
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Card");
         if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!AllZoneUtil.matchesValid(sac.getController(), this.getMapParams().get("ValidPlayer").split(","),
+            if (!matchesValid(sac.getController(), this.getMapParams().get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }

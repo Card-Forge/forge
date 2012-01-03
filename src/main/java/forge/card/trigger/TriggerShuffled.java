@@ -19,7 +19,7 @@ package forge.card.trigger;
 
 import java.util.HashMap;
 
-import forge.AllZoneUtil;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -53,7 +53,7 @@ public class TriggerShuffled extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!AllZoneUtil.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+            if (!matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
