@@ -5,7 +5,7 @@ Forge Beta: ##-##-2012 ver 1.2.# rev #####
 #### cards in total.
 
 
-A new branch was created for supporting "Produced$ Any" in mana abilities (Issue 266). Some other bugs/problems with paying mana costs were uncovered and fixed. When finished this work will be merged into the main trunk.
+A new branch was created for supporting "Produced$ Any" in mana abilities (Issue 266). Some other bugs/problems with paying mana costs were uncovered and fixed. This work was recently merged into the main trunk.
 
 A new Scriptable Replacement Effects system has been recently added to the SVN. The structure is very similar to Triggers (So there's currently a little code duplication), there is a Handler class, a base class for Replacement effects and subclasses for each event that can be replaced.
 
@@ -52,6 +52,39 @@ Fixes/Features:
 - fix typo in Tourach's Gate
 - Issue 266: changed sorting of mana sources to account of any color mana
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Issue 266: add logic to make ManaNeededToAvoidNegativeEffect mana a mandatory part of the cost for the AI
+- Removing hardcoded references to Mana Pool as a card.
+- Checkstyle
+- merged "Produced$ Any" (Issue 266) feature branch into trunk (Issue #266)
+- Converted City of Brass, Glimmervoid, and Mox Opal to use "Any" mana keyword. Added Manamorphose
+- Added scriptable Replacement Effects. The system and syntax is very similar to the trigger system.For examples see the cards below or the forge.card.replacement package.
+- Converted to script:
+Benevolent Unicorn
+Boon Reflection
+Divine Presence
+Dralnu, Lich Lord
+Fire Servant
+Forethought Amulet
+Furnace of Rath
+Gratuitous Violence
+Lashknife Barrier
+Lichentrope
+Phytohydra
+Pyromancer's Swath
+Sulfuric Vapors
+Sulfuric Vortex
+- Corrected name of Akki Lavarunner / Tok-Tok, Volcano Born
+- Added a fluff piece to the changes.txt file.
+- Checkstyle.
+- Coldsteel Heart is now a Snow Artifact.
+- convert cards to any mana keyword (A-B)
+- convert cards to any mana keyword (C-F)
+- convert cards to any mana keyword (G-K)
+- convert cards to any mana keyword (L-M)
+- convert cards to any mana keyword (N-R)
+- Fixed Remember syntax for Wormfang Behemoth.
+- Make sure to actually run replacement effect checks for creature damage.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -62,6 +95,12 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added many cards, including:
 
 Karona, False God
+Akki Lavarunner / Tok-Tok, Volcano-born
+Laboratory Maniac
+Obstinate Familiar
+Pursuit of Knowledge
+Thought Reflection
+Undead Alchemist
 
 
 end
