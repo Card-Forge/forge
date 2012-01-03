@@ -21,15 +21,15 @@ public class ReplaceGainLife extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(HashMap<String, Object> runParams) {
-        if(!runParams.get("Event").equals("GainLife")) {
+        if (!runParams.get("Event").equals("GainLife")) {
             return false;
         }
-        if(this.getMapParams().containsKey("ValidPlayer")) {
-            if(!AllZoneUtil.matchesValid(runParams.get("Affected"),this.getMapParams().get("ValidPlayer").split(","),this.getHostCard())) {
+        if (this.getMapParams().containsKey("ValidPlayer")) {
+            if (!AllZoneUtil.matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -38,7 +38,7 @@ public class ReplaceGainLife extends ReplacementEffect {
      */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceGainLife(this.getMapParams(),hostCard);
+        return new ReplaceGainLife(this.getMapParams(), hostCard);
     }
 
     /* (non-Javadoc)

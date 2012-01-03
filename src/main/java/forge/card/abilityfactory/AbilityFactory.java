@@ -1682,10 +1682,10 @@ public class AbilityFactory {
         } else if (defined.startsWith("Replaced") && (sa != null)) {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getReplacingObject(defined.substring(8));
-            if(crd instanceof Card) {
+            if (crd instanceof Card) {
                 c = AllZoneUtil.getCardState((Card) crd);
             } else if (crd instanceof CardList) {
-                for(final Card cardItem : (CardList) crd) {
+                for (final Card cardItem : (CardList) crd) {
                     cards.add(cardItem);
                 }
             }

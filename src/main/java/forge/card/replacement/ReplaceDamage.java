@@ -27,48 +27,47 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(HashMap<String, Object> runParams) {
-        if(!runParams.get("Event").equals("DamageDone")) {
+        if (!runParams.get("Event").equals("DamageDone")) {
             return false;
         }
-        if(mapParams.containsKey("ValidSource")) {
-            if(!AllZoneUtil.matchesValid(runParams.get("DamageSource"), mapParams.get("ValidSource").split(","), hostCard)) {
+        if (mapParams.containsKey("ValidSource")) {
+            if (!AllZoneUtil.matchesValid(runParams.get("DamageSource"), mapParams.get("ValidSource").split(","), hostCard)) {
                 return false;
             }
         }
-        if(mapParams.containsKey("ValidTarget")) {
-            if(!AllZoneUtil.matchesValid(runParams.get("Affected"), mapParams.get("ValidTarget").split(","), hostCard)) {
+        if (mapParams.containsKey("ValidTarget")) {
+            if (!AllZoneUtil.matchesValid(runParams.get("Affected"), mapParams.get("ValidTarget").split(","), hostCard)) {
                 return false;
             }
         }
-        if(mapParams.containsKey("DamageAmount")) {
+        if (mapParams.containsKey("DamageAmount")) {
             String full = mapParams.get("DamageAmount");
-            String operator = full.substring(0,2);
+            String operator = full.substring(0, 2);
             String operand = full.substring(2);
             int intoperand = 0;
             try {
                 intoperand = Integer.parseInt(operand);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 intoperand = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(operand));
             }
-            
-            if(!AllZoneUtil.compare((Integer)runParams.get("DamageAmount"), operator, intoperand)) {
+
+            if (!AllZoneUtil.compare((Integer) runParams.get("DamageAmount"), operator, intoperand)) {
                 return false;
             }
         }
-        if(mapParams.containsKey("IsCombat")) {
-            if(mapParams.get("IsCombat").equals("True")) {
-                if(!((Boolean)runParams.get("IsCombat"))) {
+        if (mapParams.containsKey("IsCombat")) {
+            if (mapParams.get("IsCombat").equals("True")) {
+                if (!((Boolean) runParams.get("IsCombat"))) {
                     return false;
                 }
             }
             else {
-                if((Boolean)runParams.get("IsCombat")) {
+                if ((Boolean) runParams.get("IsCombat")) {
                     return false;
                 }
             }
         }
-        
-        
+
         return true;
     }
 
@@ -77,14 +76,14 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceDamage(this.mapParams,this.hostCard);
+        return new ReplaceDamage(this.mapParams, this.hostCard);
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(HashMap<String,Object> runParams, SpellAbility sa) {
+    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("DamageAmount", runParams.get("DamageAmount"));
         sa.setReplacingObject("Target", runParams.get("Affected"));
         sa.setReplacingObject("Source", runParams.get("DamageSource"));

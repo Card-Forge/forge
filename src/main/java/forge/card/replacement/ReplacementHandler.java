@@ -20,7 +20,7 @@ import forge.gui.GuiUtils;
  *
  */
 public class ReplacementHandler {
-    
+
     private List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
     /**
@@ -29,51 +29,51 @@ public class ReplacementHandler {
      * @param runParams the run params,same as for triggers.
      * @return true if the event was replaced.
      */
-    public boolean run(final HashMap<String,Object> runParams) {
+    public boolean run(final HashMap<String, Object> runParams) {
         Object affected = runParams.get("Affected");
         List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         Player decider = null;
-        
+
         //Figure out who decides which of multiple replacements to apply
         //as well as wether or not to apply optional replacements.
-        if(affected instanceof Player) {
-            decider = (Player)affected;
+        if (affected instanceof Player) {
+            decider = (Player) affected;
         } else {
-            decider = ((Card)affected).getController();
+            decider = ((Card) affected).getController();
         }
-        
-        //Round up Non-static replacement effects ("Until EOT," or "The next time you would..." etc) 
-        for(ReplacementEffect RE : tmpEffects) {
-            if(!RE.hasRun() && RE.canReplace(runParams)) {
+
+        //Round up Non-static replacement effects ("Until EOT," or "The next time you would..." etc)
+        for (ReplacementEffect RE : tmpEffects) {
+            if (!RE.hasRun() && RE.canReplace(runParams)) {
                 possibleReplacers.add(RE);
             }
         }
-        
+
         //Round up Static replacement effects
-        for(Player p : AllZone.getPlayersInGame()) {
-            for(Card crd : p.getCardsIn(Zone.Battlefield)) {
-                for(ReplacementEffect RE : crd.getReplacementEffects()) {
-                    if(RE.requirementsCheck()) {
-                        if(!RE.hasRun() && RE.canReplace(runParams)) {
+        for (Player p : AllZone.getPlayersInGame()) {
+            for (Card crd : p.getCardsIn(Zone.Battlefield)) {
+                for (ReplacementEffect RE : crd.getReplacementEffects()) {
+                    if (RE.requirementsCheck()) {
+                        if (!RE.hasRun() && RE.canReplace(runParams)) {
                             possibleReplacers.add(RE);
                         }
                     }
                 }
             }
         }
-        
-        if(possibleReplacers.isEmpty()) {
+
+        if (possibleReplacers.isEmpty()) {
             return false;
         }
-        
+
         ReplacementEffect chosenRE = null;
-        
-        if(possibleReplacers.size() == 1) {
+
+        if (possibleReplacers.size() == 1) {
             chosenRE = possibleReplacers.get(0);
         }
-        
-        if(possibleReplacers.size() > 1) {
-            if(decider.isHuman()) {
+
+        if (possibleReplacers.size() > 1) {
+            if (decider.isHuman()) {
                 chosenRE = (ReplacementEffect) GuiUtils.getChoice(
                         "Choose which replacement effect to apply.", possibleReplacers.toArray());
             } else {
@@ -81,42 +81,42 @@ public class ReplacementHandler {
                 chosenRE = possibleReplacers.get(0);
             }
         }
-        
-        if(chosenRE != null) {
-            if(chosenRE.getMapParams().containsKey("Optional")) {
-                if(decider.isHuman()) {
+
+        if (chosenRE != null) {
+            if (chosenRE.getMapParams().containsKey("Optional")) {
+                if (decider.isHuman()) {
                     StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
                     buildQuestion.append(chosenRE.getHostCard());
                     buildQuestion.append("?\r\n(");
                     buildQuestion.append(chosenRE.toString());
                     buildQuestion.append(")");
-                    if(!GameActionUtil.showYesNoDialog(chosenRE.getHostCard(), buildQuestion.toString())) {
+                    if (!GameActionUtil.showYesNoDialog(chosenRE.getHostCard(), buildQuestion.toString())) {
                         return false;
                     }
                 } else {
                     //AI-logic for deciding wether or not to apply the optional replacement effect happens here.
                 }
             }
-            executeReplacement(runParams,chosenRE);
+            executeReplacement(runParams, chosenRE);
             return true;
         } else {
             return false;
         }
-        
+
     }
-    
+
     /**
      * 
      * Runs a single replacement effect.
      * @param RE the replacment effect to run
      */
-    private void executeReplacement(HashMap<String,Object> runParams, ReplacementEffect RE) {
+    private void executeReplacement(HashMap<String, Object> runParams, ReplacementEffect RE) {
 
-        HashMap<String,String> mapParams = RE.getMapParams();
+        HashMap<String, String> mapParams = RE.getMapParams();
         RE.setHasRun(true);
-        
-        if(mapParams.containsKey("Prevent")) {
-            if(mapParams.get("Prevent").equals("True")) {
+
+        if (mapParams.containsKey("Prevent")) {
+            if (mapParams.get("Prevent").equals("True")) {
                 RE.setHasRun(false);
                 return; //Nothing should replace the event.
             }
@@ -124,23 +124,23 @@ public class ReplacementHandler {
 
         String effectSVar = mapParams.get("ReplaceWith");
         String effectAbString = RE.getHostCard().getSVar(effectSVar);
-        
+
         AbilityFactory AF = new AbilityFactory();
-        
+
         SpellAbility effectSA = AF.getAbility(effectAbString, RE.getHostCard());
-        
+
         RE.setReplacingObjects(runParams, effectSA);
-        
-        if(RE.getHostCard().getController().isHuman()) {
+
+        if (RE.getHostCard().getController().isHuman()) {
             AllZone.getGameAction().playSpellAbilityNoStack(effectSA, false);
         }
         else {
             ComputerUtil.playNoStack(effectSA);
         }
-        
+
         RE.setHasRun(false);
     }
-    
+
     /**
      * 
      * Creates an instance of the proper replacement effect object based on raw script.
@@ -152,7 +152,7 @@ public class ReplacementHandler {
         final HashMap<String, String> mapParams = ReplacementHandler.parseParams(repParse);
         return ReplacementHandler.parseReplacement(mapParams, host);
     }
-    
+
     /**
      * 
      * Creates an instance of the proper replacement effect object based on a parsed script.
@@ -160,21 +160,21 @@ public class ReplacementHandler {
      * @param host The card that hosts the replacement effect
      * @return The finished instance
      */
-    public static ReplacementEffect parseReplacement(final HashMap<String,String> mapParams, final Card host) {
+    public static ReplacementEffect parseReplacement(final HashMap<String, String> mapParams, final Card host) {
         ReplacementEffect ret = null;
-        
+
         final String eventToReplace = mapParams.get("Event");
-        if(eventToReplace.equals("Draw")) {
-            ret = new ReplaceDraw(mapParams,host);
-        } else if(eventToReplace.equals("GainLife")) {
-            ret = new ReplaceGainLife(mapParams,host);
-        } else if(eventToReplace.equals("DamageDone")) {
-            ret = new ReplaceDamage(mapParams,host);
+        if (eventToReplace.equals("Draw")) {
+            ret = new ReplaceDraw(mapParams, host);
+        } else if (eventToReplace.equals("GainLife")) {
+            ret = new ReplaceGainLife(mapParams, host);
+        } else if (eventToReplace.equals("DamageDone")) {
+            ret = new ReplaceDamage(mapParams, host);
         }
-        
+
         return ret;
     }
-    
+
     /**
      * <p>
      * parseParams.

@@ -32,7 +32,7 @@ public abstract class ReplacementEffect {
     public final void setHasRun(boolean hasRun0) {
         this.hasRun = hasRun0;
     }
-    
+
     /** The map params, denoting what to replace. */
     protected HashMap<String, String> mapParams = new HashMap<String, String>();
 
@@ -56,7 +56,7 @@ public abstract class ReplacementEffect {
     public final void setMapParams(final HashMap<String, String> mapParams0) {
         this.mapParams = mapParams0;
     }
-    
+
     /** The host card. */
     protected Card hostCard;
 
@@ -82,18 +82,18 @@ public abstract class ReplacementEffect {
     public final void setHostCard(final Card c) {
         this.hostCard = c;
     }
-    
+
     public abstract boolean canReplace(final HashMap<String, Object> runParams);
-    
+
     public String toString() {
-        if(mapParams.containsKey("Description")) {
+        if (mapParams.containsKey("Description")) {
             return mapParams.get("Description");
         }
         else {
             return "";
         }
     }
-    
+
     /**
      * <p>
      * requirementsCheck.
@@ -288,14 +288,14 @@ public abstract class ReplacementEffect {
 
         return true;
     }
-     
+
     public abstract ReplacementEffect getCopy();
-    
-    public void setReplacingObjects(HashMap<String,Object> runParams, SpellAbility sa) {
+
+    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility sa) {
         //Should be overriden by replacers that need it.
     }
-    
-    public ReplacementEffect(final HashMap<String,String> map, final Card host) {
+
+    public ReplacementEffect(final HashMap<String, String> map, final Card host) {
         this.mapParams = map;
         this.hostCard = host;
     }
