@@ -2567,9 +2567,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append(trig.toString() + "\r\n");
             }
         }
-        
+
         //Replacement effects
-        for(final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
+        for (final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
             sb.append(RE.toString() + "\r\n");
         }
 
@@ -2668,9 +2668,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append(trig.toString() + "\r\n");
             }
         }
-        
+
         //Replacement effects
-        for(final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
+        for (final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
             sb.append(RE.toString() + "\r\n");
         }
 
@@ -8072,14 +8072,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
-        repParams.put("DamageSource",source);
+        repParams.put("DamageSource", source);
         repParams.put("DamageAmount", damageIn);
         repParams.put("IsCombat", isCombat);
-        
-        if(AllZone.getReplacementHandler().run(repParams)) {
+
+        if (AllZone.getReplacementHandler().run(repParams)) {
             return 0;
         }
-        
+
         final CardList auras = new CardList(this.getEnchantedBy().toArray());
 
         if (auras.containsName("Treacherous Link")) {
@@ -8672,18 +8672,18 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return true;
     }
-    
+
     public ArrayList<ReplacementEffect> getReplacementEffects() {
         return this.getCharacteristics().getReplacementEffects();
     }
-    
+
     public void setReplacementEffects(ArrayList<ReplacementEffect> res) {
         this.getCharacteristics().getReplacementEffects().clear();
-        for(ReplacementEffect RE : res) {
+        for (ReplacementEffect RE : res) {
             addReplacementEffect(RE);
         }
     }
-    
+
     public void addReplacementEffect(ReplacementEffect RE) {
         ReplacementEffect RECopy = RE.getCopy();
         RECopy.setHostCard(this);

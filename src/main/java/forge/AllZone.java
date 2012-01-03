@@ -454,7 +454,7 @@ public final class AllZone {
     public static TriggerHandler getTriggerHandler() {
         return Singletons.getModel().getGameState().getTriggerHandler();
     }
-    
+
     public static ReplacementHandler getReplacementHandler() {
         return Singletons.getModel().getGameState().getReplacementHandler();
     }
