@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.replacement;
 
 import java.util.HashMap;
@@ -6,7 +23,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
-import forge.Player;
 import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -17,9 +33,13 @@ import forge.card.spellability.SpellAbility;
  *
  */
 public abstract class ReplacementEffect {
-    protected boolean hasRun = false;
+
+    /** The has run. */
+    private boolean hasRun = false;
 
     /**
+     * Checks for run.
+     *
      * @return the hasRun
      */
     public final boolean hasRun() {
@@ -27,14 +47,16 @@ public abstract class ReplacementEffect {
     }
 
     /**
-     * @param hasRun0 the hasRun to set
+     * Sets the checks for run.
+     *
+     * @param hasRun the hasRun to set
      */
-    public final void setHasRun(boolean hasRun0) {
-        this.hasRun = hasRun0;
+    public final void setHasRun(boolean hasRun) {
+        this.hasRun = hasRun;
     }
 
     /** The map params, denoting what to replace. */
-    protected HashMap<String, String> mapParams = new HashMap<String, String>();
+    private HashMap<String, String> mapParams = new HashMap<String, String>();
 
     /**
      * <p>
@@ -50,15 +72,15 @@ public abstract class ReplacementEffect {
     /**
      * Sets the map params.
      * 
-     * @param mapParams0
+     * @param mapParams
      *            the mapParams to set
      */
-    public final void setMapParams(final HashMap<String, String> mapParams0) {
-        this.mapParams = mapParams0;
+    public final void setMapParams(final HashMap<String, String> mapParams) {
+        this.mapParams = mapParams;
     }
 
     /** The host card. */
-    protected Card hostCard;
+    private Card hostCard;
 
     /**
      * <p>
@@ -83,11 +105,20 @@ public abstract class ReplacementEffect {
         this.hostCard = c;
     }
 
+    /**
+     * Can replace.
+     *
+     * @param runParams the run params
+     * @return true, if successful
+     */
     public abstract boolean canReplace(final HashMap<String, Object> runParams);
 
+    /**
+     * @return a String
+     */
     public String toString() {
-        if (mapParams.containsKey("Description")) {
-            return mapParams.get("Description");
+        if (getMapParams().containsKey("Description")) {
+            return getMapParams().get("Description");
         }
         else {
             return "";
@@ -289,14 +320,31 @@ public abstract class ReplacementEffect {
         return true;
     }
 
+    /**
+     * Gets the copy.
+     *
+     * @return the copy
+     */
     public abstract ReplacementEffect getCopy();
 
-    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility sa) {
-        //Should be overriden by replacers that need it.
+    /**
+     * Sets the replacing objects.
+     *
+     * @param runParams the run params
+     * @param spellAbility the SpellAbility
+     */
+    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility spellAbility) {
+        //Should be overridden by replacers that need it.
     }
 
+    /**
+     * Instantiates a new replacement effect.
+     *
+     * @param map the map
+     * @param host the host
+     */
     public ReplacementEffect(final HashMap<String, String> map, final Card host) {
-        this.mapParams = map;
-        this.hostCard = host;
+        this.setMapParams(map);
+        this.setHostCard(host);
     }
 }

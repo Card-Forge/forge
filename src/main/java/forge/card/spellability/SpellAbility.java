@@ -964,23 +964,51 @@ public abstract class SpellAbility {
         this.triggeringObjects = new HashMap<String, Object>();
     }
 
+    /**
+     * Gets the replacing objects.
+     *
+     * @return the replacing objects
+     */
     public HashMap<String, Object> getReplacingObjects() {
         return this.replacingObjects;
     }
 
+    /**
+     * Sets the all replacing objects.
+     *
+     * @param replacedObjects the replaced objects
+     */
     public void setAllReplacingObjects(final HashMap<String, Object> replacedObjects) {
         this.replacingObjects = replacedObjects;
     }
 
+    /**
+     * Sets the replacing object.
+     *
+     * @param type the type
+     * @param o the o
+     */
     public void setReplacingObject(final String type, final Object o) {
         this.replacingObjects.put(type, o);
     }
 
+    /**
+     * Gets the replacing object.
+     *
+     * @param type the type
+     * @return the replacing object
+     */
     public Object getReplacingObject(final String type) {
         Object res = this.replacingObjects.get(type);
         return res;
     }
 
+    /**
+     * Checks for replacing object.
+     *
+     * @param type the type
+     * @return true, if successful
+     */
     public boolean hasReplacingObject(final String type) {
         return this.replacingObjects.containsKey(type);
     }

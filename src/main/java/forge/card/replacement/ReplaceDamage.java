@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.replacement;
 
 import java.util.HashMap;
@@ -15,8 +32,9 @@ public class ReplaceDamage extends ReplacementEffect {
 
     /**
      * TODO: Write javadoc for Constructor.
-     * @param map
-     * @param host
+     *
+     * @param map the map
+     * @param host the host
      */
     public ReplaceDamage(HashMap<String, String> map, Card host) {
         super(map, host);
@@ -30,33 +48,33 @@ public class ReplaceDamage extends ReplacementEffect {
         if (!runParams.get("Event").equals("DamageDone")) {
             return false;
         }
-        if (mapParams.containsKey("ValidSource")) {
-            if (!AllZoneUtil.matchesValid(runParams.get("DamageSource"), mapParams.get("ValidSource").split(","), hostCard)) {
+        if (getMapParams().containsKey("ValidSource")) {
+            if (!AllZoneUtil.matchesValid(runParams.get("DamageSource"), getMapParams().get("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
-        if (mapParams.containsKey("ValidTarget")) {
-            if (!AllZoneUtil.matchesValid(runParams.get("Affected"), mapParams.get("ValidTarget").split(","), hostCard)) {
+        if (getMapParams().containsKey("ValidTarget")) {
+            if (!AllZoneUtil.matchesValid(runParams.get("Affected"), getMapParams().get("ValidTarget").split(","), getHostCard())) {
                 return false;
             }
         }
-        if (mapParams.containsKey("DamageAmount")) {
-            String full = mapParams.get("DamageAmount");
+        if (getMapParams().containsKey("DamageAmount")) {
+            String full = getMapParams().get("DamageAmount");
             String operator = full.substring(0, 2);
             String operand = full.substring(2);
             int intoperand = 0;
             try {
                 intoperand = Integer.parseInt(operand);
             } catch (NumberFormatException e) {
-                intoperand = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(operand));
+                intoperand = CardFactoryUtil.xCount(getHostCard(), getHostCard().getSVar(operand));
             }
 
             if (!AllZoneUtil.compare((Integer) runParams.get("DamageAmount"), operator, intoperand)) {
                 return false;
             }
         }
-        if (mapParams.containsKey("IsCombat")) {
-            if (mapParams.get("IsCombat").equals("True")) {
+        if (getMapParams().containsKey("IsCombat")) {
+            if (getMapParams().get("IsCombat").equals("True")) {
                 if (!((Boolean) runParams.get("IsCombat"))) {
                     return false;
                 }
@@ -76,7 +94,7 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceDamage(this.mapParams, this.hostCard);
+        return new ReplaceDamage(this.getMapParams(), this.getHostCard());
     }
 
     /* (non-Javadoc)

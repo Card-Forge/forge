@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.card.replacement;
 
 import java.util.HashMap;
@@ -11,6 +28,12 @@ import forge.Card;
  */
 public class ReplaceDraw extends ReplacementEffect {
 
+    /**
+     * Instantiates a new replace draw.
+     *
+     * @param params the params
+     * @param host the host
+     */
     public ReplaceDraw(final HashMap<String, String> params, final Card host) {
         super(params, host);
     }
@@ -32,9 +55,12 @@ public class ReplaceDraw extends ReplacementEffect {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.replacement.ReplacementEffect#getCopy()
+     */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceDraw(this.getMapParams(), hostCard);
+        return new ReplaceDraw(this.getMapParams(), getHostCard());
     }
 
 }

@@ -455,6 +455,11 @@ public final class AllZone {
         return Singletons.getModel().getGameState().getTriggerHandler();
     }
 
+    /**
+     * Gets the replacement handler.
+     *
+     * @return the replacement handler
+     */
     public static ReplacementHandler getReplacementHandler() {
         return Singletons.getModel().getGameState().getReplacementHandler();
     }

@@ -28,7 +28,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
 import forge.Constant.Zone;
-import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;

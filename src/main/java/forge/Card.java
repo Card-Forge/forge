@@ -453,7 +453,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // hacky code below, used to limit the number of times an ability
     // can be used per turn like Vampire Bats
-    // should be put in SpellAbility, but it is put here for conveniance
+    // should be put in SpellAbility, but it is put here for convenience
     // this is make public just to make things easy
     // this code presumes that each card only has one ability that can be
     // used a limited number of times per turn
@@ -2569,8 +2569,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         //Replacement effects
-        for (final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
-            sb.append(RE.toString() + "\r\n");
+        for (final ReplacementEffect replacementEffect : this.getCharacteristics().getReplacementEffects()) {
+            sb.append(replacementEffect.toString() + "\r\n");
         }
 
         // static abilities
@@ -2619,7 +2619,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.insert(sb.indexOf(".) ") + 3, "\r\n");
         }
 
-        // replace tripple line feeds with double line feeds
+        // replace triple line feeds with double line feeds
         int start;
         final String s = "\r\n\r\n\r\n";
         while (sb.toString().contains(s)) {
@@ -2670,8 +2670,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         //Replacement effects
-        for (final ReplacementEffect RE : this.getCharacteristics().getReplacementEffects()) {
-            sb.append(RE.toString() + "\r\n");
+        for (final ReplacementEffect replacementEffect : this.getCharacteristics().getReplacementEffects()) {
+            sb.append(replacementEffect.toString() + "\r\n");
         }
 
         // static abilities
@@ -8673,21 +8673,36 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
+    /**
+     * Gets the replacement effects.
+     *
+     * @return the replacement effects
+     */
     public ArrayList<ReplacementEffect> getReplacementEffects() {
         return this.getCharacteristics().getReplacementEffects();
     }
 
+    /**
+     * Sets the replacement effects.
+     *
+     * @param res the new replacement effects
+     */
     public void setReplacementEffects(ArrayList<ReplacementEffect> res) {
         this.getCharacteristics().getReplacementEffects().clear();
-        for (ReplacementEffect RE : res) {
-            addReplacementEffect(RE);
+        for (ReplacementEffect replacementEffect : res) {
+            addReplacementEffect(replacementEffect);
         }
     }
 
-    public void addReplacementEffect(ReplacementEffect RE) {
-        ReplacementEffect RECopy = RE.getCopy();
-        RECopy.setHostCard(this);
-        this.getCharacteristics().getReplacementEffects().add(RECopy);
+    /**
+     * Adds the replacement effect.
+     *
+     * @param replacementEffect the rE
+     */
+    public void addReplacementEffect(ReplacementEffect replacementEffect) {
+        ReplacementEffect replacementEffectCopy = replacementEffect.getCopy();
+        replacementEffectCopy.setHostCard(this);
+        this.getCharacteristics().getReplacementEffects().add(replacementEffectCopy);
     }
 
 } // end Card class
