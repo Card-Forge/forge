@@ -54,7 +54,8 @@ public class ControlHand {
     private MouseAdapter maCardClick;
     private MouseMotionAdapter maCardMove;
 
-    Observer o1;
+    /** The o1. */
+    private Observer o1;
 
     /**
      * Child controller - handles operations related to cards in user's hand and

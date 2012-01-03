@@ -296,10 +296,21 @@ public final class CardType implements Comparable<CardType> {
         return this.toString().compareTo(o.toString());
     }
 
+    /**
+     * Gets the sub types.
+     *
+     * @return the sub types
+     */
     public List<String> getSubTypes() {
         return this.subType;
     }
 
+    /**
+     * Shares sub type with.
+     *
+     * @param ctOther the ct other
+     * @return true, if successful
+     */
     public boolean sharesSubTypeWith(CardType ctOther) {
         for (String t : ctOther.getSubTypes()) {
             if (this.subTypeContains(t)) {

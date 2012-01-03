@@ -105,7 +105,7 @@ public final class AllZone {
     private static DeckManager deckManager;
 
     /** Constant <code>CARD_RATINGS</code>. */
-    private static CardRatings CARD_RATINGS = new CardRatings();
+    private static CardRatings cardRatings = new CardRatings();
 
     /**
      * <p>
@@ -717,7 +717,7 @@ public final class AllZone {
      * @return the CardRatings object
      */
     public static CardRatings getCardRatings() {
-        return AllZone.CARD_RATINGS;
+        return AllZone.cardRatings;
     }
 
 } // AllZone
