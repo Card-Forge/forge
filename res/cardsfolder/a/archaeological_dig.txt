@@ -3,11 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W | SpellDescription$ Add W to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ U | SpellDescription$ Add U to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add B to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add R to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archaeological_dig.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/320.jpg

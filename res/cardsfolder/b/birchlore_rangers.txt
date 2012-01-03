@@ -3,11 +3,7 @@ ManaCost:G
 Types:Creature Elf Druid
 Text:no text
 PT:1/1
-A:AB$ Mana | Cost$ tapXType<2/Elf> | Produced$ W | SpellDescription$ Add W to your mana pool.
-A:AB$ Mana | Cost$ tapXType<2/Elf> | Produced$ U | SpellDescription$ Add U to your mana pool.
-A:AB$ Mana | Cost$ tapXType<2/Elf> | Produced$ B | SpellDescription$ Add B to your mana pool.
-A:AB$ Mana | Cost$ tapXType<2/Elf> | Produced$ R | SpellDescription$ Add R to your mana pool.
-A:AB$ Mana | Cost$ tapXType<2/Elf> | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ tapXType<2/Elf> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 K:Morph:G
 SVar:RemAIDeck:True
 SVar:Rarity:Common

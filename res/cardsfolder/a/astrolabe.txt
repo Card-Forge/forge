@@ -2,11 +2,7 @@ Name:Astrolabe
 ManaCost:3
 Types:Artifact
 Text:no text
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ W | Amount$ 2 | SubAbility$ SVar=DBDraw | SpellDescription$ Add W W to your mana pool. Draw a card at the beginning of the next turn's upkeep.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ U | Amount$ 2 | SubAbility$ SVar=DBDraw | SpellDescription$ Add U U to your mana pool. Draw a card at the beginning of the next turn's upkeep.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SubAbility$ SVar=DBDraw | SpellDescription$ Add B B to your mana pool. Draw a card at the beginning of the next turn's upkeep.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ R | Amount$ 2 | SubAbility$ SVar=DBDraw | SpellDescription$ Add R R to your mana pool. Draw a card at the beginning of the next turn's upkeep.
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ G | Amount$ 2 | SubAbility$ SVar=DBDraw | SpellDescription$ Add G G to your mana pool. Draw a card at the beginning of the next turn's upkeep.
+A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | Amount$ 2 | SubAbility$ SVar=DBDraw | SpellDescription$ Add two mana of any one color to your mana pool. Draw a card at the beginning of the next turn's upkeep.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
