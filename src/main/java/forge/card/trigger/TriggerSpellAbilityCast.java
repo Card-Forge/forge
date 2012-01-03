@@ -20,6 +20,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.Player;
 import forge.card.cost.Cost;
@@ -78,21 +79,21 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.getMapParams().containsKey("ValidControllingPlayer")) {
-            if (!this.matchesValid(cast.getController(), this.getMapParams().get("ValidControllingPlayer").split(","),
+            if (!AllZoneUtil.matchesValid(cast.getController(), this.getMapParams().get("ValidControllingPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("ValidActivatingPlayer")) {
-            if (!this.matchesValid(si.getActivatingPlayer(), this.getMapParams().get("ValidActivatingPlayer")
+            if (!AllZoneUtil.matchesValid(si.getActivatingPlayer(), this.getMapParams().get("ValidActivatingPlayer")
                     .split(","), this.getHostCard())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!this.matchesValid(cast, this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+            if (!AllZoneUtil.matchesValid(cast, this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }
@@ -105,7 +106,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                         if (sa.getTargetPlayer() == null) {
                             return false;
                         } else {
-                            if (!this.matchesValid(sa.getTargetPlayer(),
+                            if (!AllZoneUtil.matchesValid(sa.getTargetPlayer(),
                                     this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
                                 return false;
                             }
@@ -113,7 +114,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                     } else {
                         boolean validTgtFound = false;
                         for (final Card tgt : sa.getTargetList()) {
-                            if (this.matchesValid(tgt, this.getMapParams().get("TargetsValid").split(","),
+                            if (AllZoneUtil.matchesValid(tgt, this.getMapParams().get("TargetsValid").split(","),
                                     this.getHostCard())) {
                                 validTgtFound = true;
                                 break;
@@ -124,7 +125,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                         }
                     }
                 } else {
-                    if (!this.matchesValid(sa.getTargetCard(), this.getMapParams().get("TargetsValid").split(","),
+                    if (!AllZoneUtil.matchesValid(sa.getTargetCard(), this.getMapParams().get("TargetsValid").split(","),
                             this.getHostCard())) {
                         return false;
                     }
@@ -141,7 +142,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                     }
 
                     for (final Player p : sa.getTarget().getTargetPlayers()) {
-                        if (this.matchesValid(p, this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
+                        if (AllZoneUtil.matchesValid(p, this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
                             validTgtFound = true;
                             break;
                         }

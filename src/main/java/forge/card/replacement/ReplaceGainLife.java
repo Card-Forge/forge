@@ -2,6 +2,7 @@ package forge.card.replacement;
 
 import java.util.HashMap;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -24,7 +25,7 @@ public class ReplaceGainLife extends ReplacementEffect {
             return false;
         }
         if(this.getMapParams().containsKey("ValidPlayer")) {
-            if(!matchesValid(runParams.get("Affected"),this.getMapParams().get("ValidPlayer").split(","),this.getHostCard())) {
+            if(!AllZoneUtil.matchesValid(runParams.get("Affected"),this.getMapParams().get("ValidPlayer").split(","),this.getHostCard())) {
                 return false;
             }
         }

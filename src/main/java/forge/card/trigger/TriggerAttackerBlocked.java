@@ -20,6 +20,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -53,13 +54,13 @@ public class TriggerAttackerBlocked extends Trigger {
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!this.matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("ValidBlocker")) {
-            if (!this.matchesValid(runParams2.get("Blocker"), this.getMapParams().get("ValidBlocker").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Blocker"), this.getMapParams().get("ValidBlocker").split(","),
                     this.getHostCard())) {
                 return false;
             }

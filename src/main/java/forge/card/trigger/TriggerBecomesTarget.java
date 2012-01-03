@@ -20,6 +20,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -66,13 +67,13 @@ public class TriggerBecomesTarget extends Trigger {
             }
         }
         if (this.getMapParams().containsKey("ValidSource")) {
-            if (!this.matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), this.getMapParams()
+            if (!AllZoneUtil.matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), this.getMapParams()
                     .get("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("ValidTarget")) {
-            if (!this.matchesValid(runParams2.get("Target"), this.getMapParams().get("ValidTarget").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Target"), this.getMapParams().get("ValidTarget").split(","),
                     this.getHostCard())) {
                 return false;
             }

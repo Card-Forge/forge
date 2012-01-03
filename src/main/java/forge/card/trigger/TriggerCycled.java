@@ -19,6 +19,7 @@ package forge.card.trigger;
 
 import java.util.HashMap;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -71,7 +72,7 @@ public class TriggerCycled extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!this.matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }

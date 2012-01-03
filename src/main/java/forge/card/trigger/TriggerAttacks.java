@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.card.spellability.SpellAbility;
@@ -56,7 +57,7 @@ public class TriggerAttacks extends Trigger {
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!this.matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Attacker"), this.getMapParams().get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }

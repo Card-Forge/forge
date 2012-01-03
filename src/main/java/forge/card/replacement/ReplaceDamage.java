@@ -31,12 +31,12 @@ public class ReplaceDamage extends ReplacementEffect {
             return false;
         }
         if(mapParams.containsKey("ValidSource")) {
-            if(!this.matchesValid(runParams.get("DamageSource"), mapParams.get("ValidSource").split(","), hostCard)) {
+            if(!AllZoneUtil.matchesValid(runParams.get("DamageSource"), mapParams.get("ValidSource").split(","), hostCard)) {
                 return false;
             }
         }
         if(mapParams.containsKey("ValidTarget")) {
-            if(!this.matchesValid(runParams.get("Affected"), mapParams.get("ValidTarget").split(","), hostCard)) {
+            if(!AllZoneUtil.matchesValid(runParams.get("Affected"), mapParams.get("ValidTarget").split(","), hostCard)) {
                 return false;
             }
         }

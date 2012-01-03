@@ -19,6 +19,7 @@ package forge.card.trigger;
 
 import java.util.HashMap;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -52,14 +53,14 @@ public class TriggerDiscarded extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!this.matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Card"), this.getMapParams().get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!this.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -69,7 +70,7 @@ public class TriggerDiscarded extends Trigger {
             if (runParams2.get("Cause") == null) {
                 return false;
             }
-            if (!this.matchesValid(runParams2.get("Cause"), this.getMapParams().get("ValidCause").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Cause"), this.getMapParams().get("ValidCause").split(","),
                     this.getHostCard())) {
                 return false;
             }

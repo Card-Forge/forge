@@ -1396,8 +1396,8 @@ public class CombatUtil {
                 return false; // The trigger should have triggered already
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
-                        && !(combat.isAttacking(source) && trigger.matchesValid(source, trigParams.get("ValidCard")
+                if (!AllZoneUtil.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
+                        && !(combat.isAttacking(source) && AllZoneUtil.matchesValid(source, trigParams.get("ValidCard")
                                 .split(","), source))) {
                     return false;
                 }
@@ -1408,7 +1408,7 @@ public class CombatUtil {
         if ((defender == null) && trigParams.get("Mode").equals("AttackerUnblocked")) {
             willTrigger = true;
             if (trigParams.containsKey("ValidCard")) {
-                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
+                if (!AllZoneUtil.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
                     return false;
                 }
             }
@@ -1421,24 +1421,24 @@ public class CombatUtil {
         if (trigParams.get("Mode").equals("Blocks")) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocked")) {
-                if (!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), source)) {
+                if (!AllZoneUtil.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), source)) {
                     return false;
                 }
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!trigger.matchesValid(defender, trigParams.get("ValidCard").split(","), source)) {
+                if (!AllZoneUtil.matchesValid(defender, trigParams.get("ValidCard").split(","), source)) {
                     return false;
                 }
             }
         } else if (trigParams.get("Mode").equals("AttackerBlocked")) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
-                if (!trigger.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
+                if (!AllZoneUtil.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
                     return false;
                 }
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
+                if (!AllZoneUtil.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
                     return false;
                 }
             }

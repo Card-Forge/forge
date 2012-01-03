@@ -19,6 +19,7 @@ package forge.card.trigger;
 
 import java.util.HashMap;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -71,7 +72,7 @@ public class TriggerPhase extends Trigger {
             }
         }
         if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!this.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
+            if (!AllZoneUtil.matchesValid(runParams2.get("Player"), this.getMapParams().get("ValidPlayer").split(","),
                     this.getHostCard())) {
                 return false;
             }
