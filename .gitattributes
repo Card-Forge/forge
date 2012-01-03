@@ -10774,6 +10774,7 @@ src/main/java/forge/card/replacement/ReplaceDraw.java -text
 src/main/java/forge/card/replacement/ReplaceGainLife.java -text
 src/main/java/forge/card/replacement/ReplacementEffect.java -text
 src/main/java/forge/card/replacement/ReplacementHandler.java -text
+src/main/java/forge/card/replacement/package-info.java svneol=native#text/plain
 src/main/java/forge/card/spellability/Ability.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityActivated.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityMana.java svneol=native#text/plain
