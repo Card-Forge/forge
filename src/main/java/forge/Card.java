@@ -8076,6 +8076,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("DamageAmount", damageIn);
         repParams.put("IsCombat", isCombat);
         
+        if(AllZone.getReplacementHandler().run(repParams)) {
+            return 0;
+        }
+        
         final CardList auras = new CardList(this.getEnchantedBy().toArray());
 
         if (auras.containsName("Treacherous Link")) {
