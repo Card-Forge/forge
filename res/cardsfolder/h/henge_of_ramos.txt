@@ -3,11 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ Mana | Cost$ 2 T | Produced$ W | SpellDescription$ Add W to your mana pool.
-A:AB$ Mana | Cost$ 2 T | Produced$ U | SpellDescription$ Add U to your mana pool.
-A:AB$ Mana | Cost$ 2 T | Produced$ B | SpellDescription$ Add B to your mana pool.
-A:AB$ Mana | Cost$ 2 T | Produced$ R | SpellDescription$ Add R to your mana pool.
-A:AB$ Mana | Cost$ 2 T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ 2 T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_of_ramos.jpg

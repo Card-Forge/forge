@@ -3,11 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:
 K:etbCounter:MINING:3
-A:AB$ Mana | Cost$ T SubCounter<1/MINING> | Produced$ B | Deplete$ MINING | SpellDescription$ Add B to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
-A:AB$ Mana | Cost$ T SubCounter<1/MINING> | Produced$ R | Deplete$ MINING | SpellDescription$ Add R to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
-A:AB$ Mana | Cost$ T SubCounter<1/MINING> | Produced$ G | Deplete$ MINING | SpellDescription$ Add G to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
-A:AB$ Mana | Cost$ T SubCounter<1/MINING> | Produced$ W | Deplete$ MINING | SpellDescription$ Add W to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
-A:AB$ Mana | Cost$ T SubCounter<1/MINING> | Produced$ U | Deplete$ MINING | SpellDescription$ Add U to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
+A:AB$ Mana | Cost$ T SubCounter<1/MINING> | Produced$ Any | Deplete$ MINING | SpellDescription$ Add one mana of any color to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_mine.jpg

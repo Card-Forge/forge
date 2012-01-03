@@ -3,11 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ SVar=DBPain | SpellDescription$ Add W to your mana pool. CARDNAME deals 1 damage to you.
-A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ SVar=DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
-A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ SVar=DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
-A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ SVar=DBPain | SpellDescription$ Add R to your mana pool. CARDNAME deals 1 damage to you.
-A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ SVar=DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
+A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ SVar=DBPain | SpellDescription$ Add one mana of any color to your mana pool. CARDNAME deals 1 damage to you.
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Rare
