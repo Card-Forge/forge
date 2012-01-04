@@ -5527,6 +5527,11 @@ res/cardsfolder/m/mycoloth.txt svneol=native#text/plain
 res/cardsfolder/m/mycosynth_fiend.txt svneol=native#text/plain
 res/cardsfolder/m/mycosynth_golem.txt svneol=native#text/plain
 res/cardsfolder/m/mycosynth_wellspring.txt svneol=native#text/plain
+res/cardsfolder/m/myojin_of_cleansing_fire.txt -text
+res/cardsfolder/m/myojin_of_infinite_rage.txt -text
+res/cardsfolder/m/myojin_of_lifes_web.txt -text
+res/cardsfolder/m/myojin_of_nights_reach.txt -text
+res/cardsfolder/m/myojin_of_seeing_winds.txt -text
 res/cardsfolder/m/myr_adapter.txt svneol=native#text/plain
 res/cardsfolder/m/myr_battlesphere.txt -text
 res/cardsfolder/m/myr_enforcer.txt svneol=native#text/plain

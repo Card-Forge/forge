@@ -1,0 +1,17 @@
+Name:Myojin of Life's Web
+ManaCost:6 G G G
+Types:Legendary Creature Spirit
+Text:no text
+PT:8/8
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Hand | Destination$ Stack | Static$ True | DelayedTrigger$ CastFromHand | TriggerDescription$ CARDNAME enters the battlefield with a divinity counter on it if you cast it from your hand.
+SVar:CastFromHand:Mode$ ChangesZone | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ETBCounter | Static$ True
+SVar:ETBCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME is indestructible as long as it has a divinity counter on it.
+A:AB$ ChangeZone | Cost$ SubCounter<1/DIVINITY> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ X | SpellDescription$ Put any number of creature cards from your hand onto the battlefield.
+SVar:X:Count$InYourHand.Creature
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/myojin_of_lifes_web.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/229.jpg
+Oracle:Myojin of Life's Web enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Life's Web is indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Life's Web: Put any number of creature cards from your hand onto the battlefield.
+End
