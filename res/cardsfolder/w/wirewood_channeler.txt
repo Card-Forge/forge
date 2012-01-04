@@ -3,11 +3,7 @@ ManaCost:3 G
 Types:Creature Elf Druid
 Text:no text
 PT:2/2
-A:AB$ Mana | Cost$ T | Produced$ B | Amount$ X | SpellDescription$ Add B to your mana pool for each Elf on the battlefield.
-A:AB$ Mana | Cost$ T | Produced$ W | Amount$ X | SpellDescription$ Add W to your mana pool for each Elf on the battlefield.
-A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add U to your mana pool for each Elf on the battlefield.
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add G to your mana pool for each Elf on the battlefield.
-A:AB$ Mana | Cost$ T | Produced$ R | Amount$ X | SpellDescription$ Add R to your mana pool for each Elf on the battlefield.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield.
 SVar:X:Count$Valid Elf
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
