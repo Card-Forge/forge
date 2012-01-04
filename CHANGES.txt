@@ -85,6 +85,20 @@ Sulfuric Vortex
 - Fixed Remember syntax for Wormfang Behemoth.
 - Make sure to actually run replacement effect checks for creature damage.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Consolidated ReplacementEffect.matchesValid() and Trigger.matchesValid() (Exactly the same method) into AllZoneUtil.matchesValid().
+- Fixed description for Vigor.
+- CheckStyle.
+- CheckStyle.
+- Updated Furnace Dragon and Iname as One to check for 'cast from hand' restriction.
+- Ran Oracle and set info scripts.
+- CheckStyle.
+- checkstyle
+- checkstyle
+- Add package javadoc
+- Meet George. George is a base class for Triggers and ReplacementEffects. George is content with his job.
+- convert cards to any mana keyword (S-T)
+- convert cards to any mana keyword (U-Z)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -101,6 +115,11 @@ Obstinate Familiar
 Pursuit of Knowledge
 Thought Reflection
 Undead Alchemist
+Vigor
+Coal Stoker
+Dread Cacodemon
+Hypnox
+Reiver Demon
 
 
 end
