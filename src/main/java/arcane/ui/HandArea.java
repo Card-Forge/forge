@@ -17,7 +17,6 @@
  */
 package arcane.ui;
 
-import java.awt.Frame;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JScrollPane;
@@ -44,10 +43,8 @@ public class HandArea extends CardArea {
      * 
      * @param scrollPane
      *            a {@link javax.swing.JScrollPane} object.
-     * @param frame
-     *            a {@link java.awt.Frame} object.
      */
-    public HandArea(final JScrollPane scrollPane, final Frame frame) {
+    public HandArea(final JScrollPane scrollPane) {
         super(scrollPane);
 
         this.setDragEnabled(true);

@@ -896,7 +896,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
                 }
             }
         });
-        //AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
+        // AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
         // END, self hand
 
         // self play
@@ -1359,7 +1359,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         playerLibraryLabel.setFont(this.statFont);
 
         final JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HumanHand.TITLE), SwingConstants.TRAILING);
-            playerHandLabel.setFont(this.statFont);
+        playerHandLabel.setFont(this.statFont);
 
         // JLabel playerGraveLabel = new JLabel("Grave:",
         // SwingConstants.TRAILING);
@@ -1367,13 +1367,13 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         playerGraveButton.setText((String) this.humanGraveyardAction.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
         playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-            playerGraveButton.setFont(this.statFont);
+        playerGraveButton.setFont(this.statFont);
 
         final JButton playerFlashBackButton = new JButton(this.humanFlashbackAction);
         playerFlashBackButton.setText((String) this.humanFlashbackAction.getValue("buttonText"));
         playerFlashBackButton.setMargin(new Insets(0, 0, 0, 0));
         playerFlashBackButton.setHorizontalAlignment(SwingConstants.TRAILING);
-            playerFlashBackButton.setFont(this.statFont);
+        playerFlashBackButton.setFont(this.statFont);
 
         final JPanel gravePanel = new JPanel(new BorderLayout());
         gravePanel.add(playerGraveButton, BorderLayout.EAST);
@@ -1439,7 +1439,7 @@ public class GuiDisplay extends JFrame implements CardContainer, Display {
         pane.add(new ExternalPanel(playScroll), "humanPlay");
 
         final JScrollPane handScroll = new JScrollPane();
-        this.playerHandPanel = new HandArea(handScroll, this);
+        this.playerHandPanel = new HandArea(handScroll);
         this.playerHandPanel.setBorder(BorderFactory.createEtchedBorder());
         handScroll.setViewportView(this.playerHandPanel);
         pane.add(new ExternalPanel(handScroll), "humanHand");

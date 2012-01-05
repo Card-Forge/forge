@@ -319,35 +319,31 @@ public class CardPanel extends JPanel implements CardContainer {
         // + White borders for Core sets Unlimited - 9th +
         final int cornerSize = Math.max(4, Math.round(this.cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
-        if (this.getGameCard() != null) {
-            if ((!this.getGameCard().getImageFilename().equals("none"))
-                    && (!this.getGameCard().getName().equals("Morph"))) {
-                if ((this.getGameCard().getCurSetCode().equals("2ED"))
-                        || (this.getGameCard().getCurSetCode().equals("3ED"))
-                        || (this.getGameCard().getCurSetCode().equals("4ED"))
-                        || (this.getGameCard().getCurSetCode().equals("5ED"))
-                        || (this.getGameCard().getCurSetCode().equals("6ED"))
-                        || (this.getGameCard().getCurSetCode().equals("7ED"))
-                        || (this.getGameCard().getCurSetCode().equals("8ED"))
-                        || (this.getGameCard().getCurSetCode().equals("9ED"))
-                        || (this.getGameCard().getCurSetCode().equals("CHR"))
-                        || (this.getGameCard().getCurSetCode().equals("S99"))
-                        || (this.getGameCard().getCurSetCode().equals("PTK"))
-                        || (this.getGameCard().getCurSetCode().equals("S00"))) {
-                    if (!this.isSelected) {
-                        g2d.setColor(Color.black);
-                        final int offset = this.isTapped() ? 1 : 0;
-                        for (int i = 1, n = Math.max(1, Math.round(this.cardWidth
-                                * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
-                            g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
-                                    (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize,
-                                    cornerSize);
-                        }
-                    }
-                    g2d.setColor(Color.white);
-                } else {
+        if (this.getGameCard() != null && (!this.getGameCard().getImageFilename().equals("none"))
+                && (!this.getGameCard().getName().equals("Morph"))) {
+            if ((this.getGameCard().getCurSetCode().equals("2ED"))
+                    || (this.getGameCard().getCurSetCode().equals("3ED"))
+                    || (this.getGameCard().getCurSetCode().equals("4ED"))
+                    || (this.getGameCard().getCurSetCode().equals("5ED"))
+                    || (this.getGameCard().getCurSetCode().equals("6ED"))
+                    || (this.getGameCard().getCurSetCode().equals("7ED"))
+                    || (this.getGameCard().getCurSetCode().equals("8ED"))
+                    || (this.getGameCard().getCurSetCode().equals("9ED"))
+                    || (this.getGameCard().getCurSetCode().equals("CHR"))
+                    || (this.getGameCard().getCurSetCode().equals("S99"))
+                    || (this.getGameCard().getCurSetCode().equals("PTK"))
+                    || (this.getGameCard().getCurSetCode().equals("S00"))) {
+                if (!this.isSelected) {
                     g2d.setColor(Color.black);
+                    final int offset = this.isTapped() ? 1 : 0;
+                    for (int i = 1, n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE)); i <= n; i++) {
+                        g2d.drawRoundRect(this.cardXOffset - i, (this.cardYOffset - i) + offset,
+                                (this.cardWidth + (i * 2)) - 1, (this.cardHeight + (i * 2)) - 1, cornerSize, cornerSize);
+                    }
                 }
+                g2d.setColor(Color.white);
+            } else {
+                g2d.setColor(Color.black);
             }
         }
         // - White borders for Core sets Unlimited - 9th -
@@ -415,13 +411,11 @@ public class CardPanel extends JPanel implements CardContainer {
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
-        if (this.getCard() != null) {
-            if (this.getGameCard().getFoil() > 0) {
-                final String fl = String.format("foil%02d", this.getCard().getFoil());
-                final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
-                ManaSymbols.draw(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
-                        this.cardHeight - (2 * z));
-            }
+        if (this.getCard() != null && this.getGameCard().getFoil() > 0) {
+            final String fl = String.format("foil%02d", this.getCard().getFoil());
+            final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
+            ManaSymbols.draw(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
+                    this.cardHeight - (2 * z));
         }
     }
 

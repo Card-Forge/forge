@@ -234,6 +234,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     /**
      * TODO: Write javadoc for this method.
+     * 
      * @param allLands
      * @param allTokens
      */
@@ -329,8 +330,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 if (!allowHeightOverflow && (rowWidth > this.playAreaWidth)) {
                     break;
                 }
-                if (!allowHeightOverflow && ((this.getRowsHeight(rows)
-                        + sourceRow.getHeight()) > this.playAreaHeight)) {
+                if (!allowHeightOverflow && ((this.getRowsHeight(rows) + sourceRow.getHeight()) > this.playAreaHeight)) {
                     break;
                 }
                 rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
@@ -341,11 +341,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         // Add the last row if it is not empty and it fits.
         if (!currentRow.isEmpty()) {
             final int rowWidth = currentRow.getWidth();
-            if (allowHeightOverflow || (rowWidth <= this.playAreaWidth)) {
-                if (allowHeightOverflow || ((this.getRowsHeight(rows)
-                        + sourceRow.getHeight()) <= this.playAreaHeight)) {
-                    rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
-                }
+            if (allowHeightOverflow
+                    || (rowWidth <= this.playAreaWidth)
+                    && (allowHeightOverflow || ((this.getRowsHeight(rows) + sourceRow.getHeight()) <= this.playAreaHeight))) {
+                rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
             }
         }
         // Remove the wrapped stacks from the source row.
@@ -379,10 +378,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             if (rowWidth > this.playAreaWidth) {
                 break;
             }
-            if (stack.getHeight() > row.getHeight()) {
-                if (((this.getRowsHeight(rows) - row.getHeight()) + stack.getHeight()) > this.playAreaHeight) {
-                    break;
-                }
+            if (stack.getHeight() > row.getHeight()
+                    && (((this.getRowsHeight(rows) - row.getHeight()) + stack.getHeight()) > this.playAreaHeight)) {
+                break;
             }
             row.add(sourceRow.remove(0));
         }

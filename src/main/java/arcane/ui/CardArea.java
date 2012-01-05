@@ -105,11 +105,10 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 final int panelY = panel == this.getMouseDragPanel() ? this.mouseDragStartY : panel.getCardY();
                 final int panelWidth = panel.getCardWidth();
                 final int panelHeight = panel.getCardHeight();
-                if ((x > panelX) && (x < (panelX + panelWidth))) {
-                    if ((y > panelY) && (y < (panelY + panelHeight))) {
-                        if (!panel.isDisplayEnabled()) {
-                            return null;
-                        }
+                if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
+                    if (!panel.isDisplayEnabled()) {
+                        return null;
+                    } else {
                         return panel;
                     }
                 }
@@ -121,11 +120,10 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 final int panelY = panel == this.getMouseDragPanel() ? this.mouseDragStartY : panel.getCardY();
                 final int panelWidth = panel.getCardWidth();
                 final int panelHeight = panel.getCardHeight();
-                if ((x > panelX) && (x < (panelX + panelWidth))) {
-                    if ((y > panelY) && (y < (panelY + panelHeight))) {
-                        if (!panel.isDisplayEnabled()) {
-                            return null;
-                        }
+                if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
+                    if (!panel.isDisplayEnabled()) {
+                        return null;
+                    } else {
                         return panel;
                     }
                 }
