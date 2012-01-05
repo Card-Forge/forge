@@ -103,6 +103,8 @@ Sulfuric Vortex
 - checkstyle and javadoc fixes
 - PMD fixes
 - Added CheckThirdSVar and CheckFourthSVar and accompanying parameters to StaticAbility.
+- Added the recent commit logs to changes.txt.
+- Checkstyle: Removed trailing spaces from new CheckSVars
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
