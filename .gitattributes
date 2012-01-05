@@ -1971,6 +1971,7 @@ res/cardsfolder/d/deepfire_elemental.txt -text
 res/cardsfolder/d/deeptread_merrow.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_drummer.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_ghoul.txt svneol=native#text/plain
+res/cardsfolder/d/deepwood_legate.txt -text
 res/cardsfolder/d/deepwood_tantiv.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_wolverine.txt svneol=native#text/plain
 res/cardsfolder/d/defender_of_chaos.txt svneol=native#text/plain
@@ -7593,6 +7594,7 @@ res/cardsfolder/s/sisays_ingenuity.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sisays_ring.txt svneol=native#text/plain
 res/cardsfolder/s/sisters_of_the_flame.txt svneol=native#text/plain
 res/cardsfolder/s/sivitri_scarzam.txt svneol=native#text/plain
+res/cardsfolder/s/sivvis_ruse.txt -text
 res/cardsfolder/s/sizzle.txt svneol=native#text/plain
 res/cardsfolder/s/skaab_goliath.txt -text
 res/cardsfolder/s/skaab_ruinator.txt -text
