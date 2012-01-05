@@ -468,7 +468,7 @@ public class StaticAbility {
                 return false;
             }
         }
-        
+
         if (this.mapParams.containsKey("CheckThirdSVar")) {
             final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckThirdSVar"), null);
             String comparator = "GE1";
@@ -482,7 +482,7 @@ public class StaticAbility {
                 return false;
             }
         }
-        
+
         if (this.mapParams.containsKey("CheckFourthSVar")) {
             final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckFourthSVar"), null);
             String comparator = "GE1";
