@@ -468,6 +468,34 @@ public class StaticAbility {
                 return false;
             }
         }
+        
+        if (this.mapParams.containsKey("CheckThirdSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckThirdSVar"), null);
+            String comparator = "GE1";
+            if (this.mapParams.containsKey("ThirdSVarCompare")) {
+                comparator = this.mapParams.get("ThirdSVarCompare");
+            }
+            final String svarOperator = comparator.substring(0, 2);
+            final String svarOperand = comparator.substring(2);
+            final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
+            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
+                return false;
+            }
+        }
+        
+        if (this.mapParams.containsKey("CheckFourthSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckFourthSVar"), null);
+            String comparator = "GE1";
+            if (this.mapParams.containsKey("FourthSVarCompare")) {
+                comparator = this.mapParams.get("FourthSVarCompare");
+            }
+            final String svarOperator = comparator.substring(0, 2);
+            final String svarOperand = comparator.substring(2);
+            final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
+            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
+                return false;
+            }
+        }
 
         return true;
     }
