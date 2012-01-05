@@ -99,6 +99,11 @@ Sulfuric Vortex
 - convert cards to any mana keyword (S-T)
 - convert cards to any mana keyword (U-Z)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- fix an observer leak on InputControl
+- checkstyle and javadoc fixes
+- PMD fixes
+- Added CheckThirdSVar and CheckFourthSVar and accompanying parameters to StaticAbility.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -120,6 +125,14 @@ Coal Stoker
 Dread Cacodemon
 Hypnox
 Reiver Demon
+Myojin of Cleansing Fire
+Myojin of Infinite Rage
+Myojin of Life's Web
+Myojin of Night's Reach
+Myojin of Seeing Winds
+Deepwood Legate
+Sivvi's Ruse
+Qasali Ambusher
 
 
 end
