@@ -250,8 +250,8 @@ public class AbilityFactoryMana {
     /**
      * <p>manaGenerated.</p>
      *
-     * @param abMana a {@link forge.card.spellability.Ability_Mana} object.
-     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param abMana a {@link forge.card.spellability.AbilityMana} object.
+     * @param af a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
