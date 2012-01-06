@@ -163,15 +163,10 @@ public class ApplicationView implements FView {
 
                                 ApplicationView.this.splashFrame = null;
 
-                                if (!Constant.Runtime.OLDGUI[0]) {
-                                    GuiTopLevel g = new GuiTopLevel();
-                                    g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                    AllZone.setDisplay(g);
-                                    g.getController().changeState(ControlAllUI.HOME_SCREEN);
-                                }
-                                else {
-                                    new OldGuiNewGame();
-                                }
+                                GuiTopLevel g = new GuiTopLevel();
+                                g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                AllZone.setDisplay(g);
+                                g.getController().changeState(ControlAllUI.HOME_SCREEN);
                             }
                         });
             } catch (final Exception ex) {

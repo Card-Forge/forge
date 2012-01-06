@@ -301,13 +301,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         this.model.qData.saveData();
 
-        if (Constant.Runtime.OLDGUI[0]) {
-            new QuestFrame();
-        }
-        else {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showQuestMenu();
-        }
+        ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
+        ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showQuestMenu();
     }
 
     /**

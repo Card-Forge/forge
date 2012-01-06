@@ -32,7 +32,6 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import forge.AllZone;
-import forge.Constant;
 import forge.control.ControlAllUI;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.quest.gui.QuestAbstractPanel;
@@ -146,14 +145,9 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Constant.Runtime.OLDGUI[0]) {
-                    QuestBazaarPanel.this.getMainFrame().showMainPane();
-                }
-                else {
-                    ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-                    g.changeState(ControlAllUI.HOME_SCREEN);
-                    g.getHomeView().showQuestMenu();
-                }
+                ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+                g.changeState(ControlAllUI.HOME_SCREEN);
+                g.getHomeView().showQuestMenu();
             }
         });
 

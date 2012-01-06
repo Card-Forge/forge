@@ -536,10 +536,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
             AllZone.getGameLog().add("Turn", "Turn " + turn + " (" + getPlayerTurn() + ")", 0);
         }
 
-        // Visual indicators
-        if (!Constant.Runtime.OLDGUI[0]) {
-            PhaseUtil.visuallyActivatePhase(this.getPhase());
-        }
+        PhaseUtil.visuallyActivatePhase(this.getPhase());
 
         // When consecutively skipping phases (like in combat) this section
         // pushes through that block

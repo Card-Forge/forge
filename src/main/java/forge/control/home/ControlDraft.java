@@ -97,7 +97,7 @@ public class ControlDraft {
         Constant.Runtime.COMPUTER_DECK[0] = opponentDecks[aiIndex];
 
         if (Constant.Runtime.COMPUTER_DECK[0] == null) {
-            throw new IllegalStateException("OldGuiNewGame : startButton() error - computer deck is null");
+            throw new IllegalStateException("startButton() error - computer deck is null");
         }
 
         GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();

@@ -46,7 +46,6 @@ import javax.swing.border.TitledBorder;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.GuiDisplay;
 import forge.ImageCache;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
@@ -771,16 +770,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         Constant.Quest.OPP_ICON_NAME[0] = this.getEventIconFilename();
 
-        // Dev Mode occurs before Display
-        Constant.Runtime.DEV_MODE[0] = this.devModeCheckBox.isSelected();
 
-        if (Constant.Runtime.OLDGUI[0]) {
-            AllZone.setDisplay(new GuiDisplay());
-        } else {
-            GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-            g.getController().changeState(1);
-            g.getController().getMatchController().initMatch();
-        }
+        GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
+        g.getController().changeState(1);
+        g.getController().getMatchController().initMatch();
 
         Constant.Runtime.SMOOTH[0] = this.smoothLandCheckBox.isSelected();
 

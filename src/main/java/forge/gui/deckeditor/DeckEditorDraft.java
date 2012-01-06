@@ -54,7 +54,6 @@ import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
 import forge.view.GuiTopLevel;
-import forge.view.swing.OldGuiNewGame;
 
 /**
  * <p>
@@ -136,14 +135,8 @@ public class DeckEditorDraft extends DeckEditorBase {
                         ForgeProps.getLocalized(GuiBoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     DeckEditorDraft.this.dispose();
-
-                    if (Constant.Runtime.OLDGUI[0]) {
-                        new OldGuiNewGame();
-                    }
-                    else {
-                        ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-                        g.getHomeView().getDraftController().updateHumanDecks();
-                    }
+                    ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+                    g.getHomeView().getDraftController().updateHumanDecks();
                 }
             } // windowClosing()
         });
@@ -362,13 +355,8 @@ public class DeckEditorDraft extends DeckEditorBase {
         // close and open next screen
         this.dispose();
 
-        if (Constant.Runtime.OLDGUI[0]) {
-            new OldGuiNewGame();
-        }
-        else {
-            ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-            g.getHomeView().getDraftController().updateHumanDecks();
-        }
+        ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+        g.getHomeView().getDraftController().updateHumanDecks();
 
     } /* saveDraft() */
 

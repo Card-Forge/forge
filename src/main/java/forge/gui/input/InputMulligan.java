@@ -221,7 +221,7 @@ public class InputMulligan extends Input {
                 }
                 c0.getController().drawCards(hand.size());
             }
-        } else if (!Constant.Runtime.OLDGUI[0]) {
+        } else {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
     }

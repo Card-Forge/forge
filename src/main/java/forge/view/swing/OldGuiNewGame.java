@@ -62,7 +62,6 @@ import forge.Command;
 import forge.Constant;
 import forge.ConstantStringArrayList;
 import forge.FileUtil;
-import forge.GuiDisplay;
 import forge.GuiDownloadPicturesLQ;
 import forge.GuiDownloadPrices;
 import forge.GuiDownloadQuestImages;
@@ -138,8 +137,6 @@ public class OldGuiNewGame extends JFrame {
 
     // @SuppressWarnings("unused")
     // titledBorder2
-    /** Constant <code>oldGuiCheckBox</code>. */
-    private static JCheckBox oldGuiCheckBox = new JCheckBox("", false);
     /** Constant <code>smoothLandCheckBox</code>. */
     private static JCheckBox smoothLandCheckBox = new JCheckBox("", false);
     /** Constant <code>devModeCheckBox</code>. */
@@ -563,15 +560,6 @@ public class OldGuiNewGame extends JFrame {
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SETTINGS));
         this.jPanel3.setLayout(new MigLayout("align center"));
 
-        OldGuiNewGame.oldGuiCheckBox.setText(ForgeProps
-                .getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.OLD_GUI));
-        OldGuiNewGame.oldGuiCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                Constant.Runtime.OLDGUI[0] = OldGuiNewGame.oldGuiCheckBox.isSelected();
-            }
-        });
-
         OldGuiNewGame.getSmoothLandCheckBox().setText(
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.AI_LAND));
 
@@ -654,7 +642,6 @@ public class OldGuiNewGame extends JFrame {
 
         this.getContentPane().add(this.jPanel3, "span 2, grow");
 
-        this.jPanel3.add(OldGuiNewGame.oldGuiCheckBox, "wrap");
         this.jPanel3.add(OldGuiNewGame.getSmoothLandCheckBox(), "wrap");
         this.jPanel3.add(OldGuiNewGame.getDevModeCheckBox(), "wrap");
         this.jPanel3.add(OldGuiNewGame.getUpldDrftCheckBox(), "wrap");
@@ -880,18 +867,9 @@ public class OldGuiNewGame extends JFrame {
             }
         } // else
 
-        // Update old gui checkbox for first run
-        Constant.Runtime.OLDGUI[0] = OldGuiNewGame.oldGuiCheckBox.isSelected();
-
-        if (Constant.Runtime.OLDGUI[0]) {
-            AllZone.setDisplay(new GuiDisplay());
-        } else {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
-        }
+        ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
 
         Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();
-        // Constant.Runtime.DEV_MODE[0] =
-        // OldGuiNewGame.devModeCheckBox.isSelected();
 
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         AllZone.getDisplay().setVisible(true);
@@ -1909,14 +1887,5 @@ public class OldGuiNewGame extends JFrame {
      */
     public static void setFoilRandomCheckBox(final JCheckBox foilRandomCheckBox0) {
         OldGuiNewGame.foilRandomCheckBox = foilRandomCheckBox0;
-    }
-
-    /**
-     * Gets the old gui check box.
-     * 
-     * @return JCheckBox
-     */
-    public static JCheckBox getOldGuiCheckBox() {
-        return OldGuiNewGame.oldGuiCheckBox;
     }
 }

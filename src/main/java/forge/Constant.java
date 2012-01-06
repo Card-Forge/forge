@@ -68,9 +68,6 @@ public final class Constant {
         /** The Constant LIBRARYVIEW. */
         public static final boolean[] LIBRARYVIEW = new boolean[1];
 
-        /** The Constant OLDGUI. */
-        public static final boolean[] OLDGUI = new boolean[1];
-
         /** The Constant NetConn. */
         public static final boolean[] NET_CONN = new boolean[1];
 

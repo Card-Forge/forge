@@ -20,7 +20,6 @@ package forge.gui.input;
 import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
-import forge.Constant;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
@@ -85,7 +84,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         if (AllZone.getGameAction().playCard(card)) {
             AllZone.getPhase().setPriority(AllZone.getHumanPlayer());
         }
-        else if (!Constant.Runtime.OLDGUI[0]) {
+        else {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
     } // selectCard()

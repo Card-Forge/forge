@@ -104,15 +104,9 @@ public class InputAttack extends Input {
             // return;
 
             AllZone.getCombat().addAttacker(card);
-            AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers(); // just
-                                                                                  // to
-                                                                                  // make
-                                                                                  // sure
-                                                                                  // the
-                                                                                  // attack
-                                                                                  // symbol
-                                                                                  // is
-                                                                                  // marked
+            
+            // just to make sure the attack symbol is marked
+            AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
 
             // for Castle Raptors, since it gets a bonus if untapped
             for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
@@ -122,7 +116,7 @@ public class InputAttack extends Input {
 
             CombatUtil.showCombat();
         }
-        else if (!Constant.Runtime.OLDGUI[0]) {
+        else {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
     } // selectCard()

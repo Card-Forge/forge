@@ -111,7 +111,7 @@ public class InputBlock extends Input {
                 AllZone.getCombat().addBlocker(this.currentAttacker, card);
             }
         }
-        else if (!Constant.Runtime.OLDGUI[0]) {
+        else {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
         }
         this.showMessage();

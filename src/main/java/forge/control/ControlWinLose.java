@@ -31,8 +31,6 @@ import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.view.GuiTopLevel;
-import forge.view.swing.GuiHomeScreen;
-import forge.view.swing.OldGuiNewGame;
 import forge.view.toolbox.WinLoseFrame;
 
 /**
@@ -70,20 +68,7 @@ public class ControlWinLose {
      * 
      */
     public void actionOnQuit() {
-        if (System.getenv("NG2") != null) {
-            if (System.getenv("NG2").equalsIgnoreCase("true")) {
-                final String[] argz = {};
-                GuiHomeScreen.main(argz);
-            } else {
-                new OldGuiNewGame();
-            }
-        } else {
-            if (Constant.Runtime.OLDGUI[0]) {
-                new OldGuiNewGame();
-            } else {
-                ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
-            }
-        }
+        ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
     }
 
     /**

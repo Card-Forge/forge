@@ -35,7 +35,6 @@ import javax.swing.border.AbstractBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Constant;
 import forge.Phase;
 import forge.Player;
 import forge.control.ControlWinLose;
@@ -244,10 +243,7 @@ public class WinLoseFrame extends JFrame {
     final void btnContinueActionPerformed(final ActionEvent e) {
         this.closeWinLoseFrame();
 
-        // Instantiate a new ControlAllUI if using new UI.
-        if (!Constant.Runtime.OLDGUI[0]) {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
-        }
+        ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
 
         AllZone.getDisplay().setVisible(true);
         this.modeHandler.startNextRound();
@@ -264,10 +260,7 @@ public class WinLoseFrame extends JFrame {
     final void btnRestartActionPerformed(final ActionEvent e) {
         this.closeWinLoseFrame();
 
-        // Instantiate a new ControlAllUI if using new UI.
-        if (!Constant.Runtime.OLDGUI[0]) {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
-        }
+        ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().initMatch();
 
         AllZone.getDisplay().setVisible(true);
         this.matchState.reset();
@@ -302,15 +295,6 @@ public class WinLoseFrame extends JFrame {
      * @return {@link javax.swing.JFrame} display frame
      */
     private void closeWinLoseFrame() {
-        JFrame frame;
-
-        // Issue 147 - keep battlefield up following win/loss
-        if (Constant.Runtime.OLDGUI[0]) {
-            frame = (JFrame) AllZone.getDisplay();
-            frame.dispose();
-            frame.setEnabled(true);
-        }
-
         this.dispose();
     }
 

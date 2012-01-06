@@ -31,7 +31,6 @@ import javax.swing.border.EmptyBorder;
 import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
-import forge.view.swing.GuiHomeScreen;
 import forge.view.swing.OldGuiNewGame;
 
 /**
@@ -138,17 +137,7 @@ public class QuestFrame extends JFrame {
      */
     public final void returnToMainMenu() {
         AllZone.getQuestData().saveData();
-
-        if (System.getenv("NG2") != null) {
-            if (System.getenv("NG2").equalsIgnoreCase("true")) {
-                final String[] argz = {};
-                GuiHomeScreen.main(argz);
-            } else {
-                new OldGuiNewGame();
-            }
-        } else {
-            new OldGuiNewGame();
-        }
+        new OldGuiNewGame();
 
         this.dispose();
     }
