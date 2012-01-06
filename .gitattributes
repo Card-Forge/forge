@@ -10640,7 +10640,6 @@ src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
-src/main/java/forge/GuiDisplay.java svneol=native#text/plain
 src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/GuiDownloadPicturesLQ.java svneol=native#text/plain
 src/main/java/forge/GuiDownloadPrices.java svneol=native#text/plain
