@@ -106,6 +106,15 @@ Sulfuric Vortex
 - Added the recent commit logs to changes.txt.
 - Checkstyle: Removed trailing spaces from new CheckSVars
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Minion Reflector.
+- GUI - remove anything that was checking the unused Constant.Runtime.OLDGUI
+- little javadoc fixes in DeckEditorDraft
+- delte the GuiDisplay class. It is no longer used.
+- fix the Observers leak on MagicStack
+- Stack Instance not resetting Paid Hash before setting new one
+- gut the OldGuiNewGame class. It now contains only static elements related to preferences and loading dynamic game data (which needs to be moved to a different class)
+- fix Hurkyl's Recall (looks like the Java code inadvertently got deleted)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
