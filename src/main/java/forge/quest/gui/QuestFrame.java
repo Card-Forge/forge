@@ -31,7 +31,6 @@ import javax.swing.border.EmptyBorder;
 import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
-import forge.view.swing.OldGuiNewGame;
 
 /**
  * <p>
@@ -137,7 +136,7 @@ public class QuestFrame extends JFrame {
      */
     public final void returnToMainMenu() {
         AllZone.getQuestData().saveData();
-        new OldGuiNewGame();
+        //new OldGuiNewGame();
 
         this.dispose();
     }

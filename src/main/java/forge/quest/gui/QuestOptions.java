@@ -44,7 +44,6 @@ import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestPreferences;
-import forge.view.swing.OldGuiNewGame;
 
 /**
  * <p>
@@ -116,8 +115,6 @@ public class QuestOptions extends JFrame {
             @Override
             public void windowClosing(final WindowEvent ev) {
                 QuestOptions.this.dispose();
-
-                new OldGuiNewGame();
             }
         });
 
