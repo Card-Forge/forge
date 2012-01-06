@@ -57,7 +57,7 @@ import forge.view.GuiTopLevel;
 
 /**
  * <p>
- * Gui_BoosterDraft class.
+ * DeckEditorDraft class.
  * </p>
  * 
  * @author Forge
@@ -81,10 +81,8 @@ public class DeckEditorDraft extends DeckEditorBase {
             // Pick on left-button double click
             if (((e.getModifiers() & InputEvent.BUTTON1_MASK) != 0) && (e.getClickCount() == 2)) {
                 DeckEditorDraft.this.jButtonPickClicked(null);
-            } else if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) { // pick
-                                                                            // on
-                                                                            // right
-                                                                            // click
+            } else if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) {
+                // pick on right click
                 final JTable table = DeckEditorDraft.this.getTopTableWithCards().getTable();
                 final int rowNumber = table.rowAtPoint(e.getPoint());
                 // after hittest - if it was outside of rows - discard this
