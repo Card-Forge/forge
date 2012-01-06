@@ -47,7 +47,7 @@ import forge.gui.input.InputPayManaCost;
 
 /**
  * <p>
- * CardFactory_Instants class.
+ * CardFactoryInstants class.
  * </p>
  * 
  * @author Forge
@@ -232,6 +232,48 @@ public class CardFactoryInstants {
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if (cardName.equals("Hurkyl's Recall")) {
+            /*
+             * Return all artifacts target player owns to his or her hand.
+             */
+            Target t = new Target(card, "Select target player", "Player");
+            Cost cost = new Cost("1 U", cardName, false);
+
+            SpellAbility spell = new Spell(card, cost, t) {
+                private static final long serialVersionUID = -4098702062413878046L;
+
+                @Override
+                public boolean canPlayAI() {
+                    CardList humanArts = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+                    humanArts = humanArts.getType("Artifact");
+                    return humanArts.size() > 0;
+                } //canPlayAI
+
+                @Override
+                public void chooseTargetAI() {
+                    setTargetPlayer(AllZone.getHumanPlayer());
+                } //chooseTargetAI()
+
+                @Override
+                public void resolve() {
+                    Player player = getTargetPlayer();
+                    CardList artifacts = AllZoneUtil.getCardsIn(Zone.Battlefield);
+                    artifacts = artifacts.getType("Artifact");
+
+                    for (int i = 0; i < artifacts.size(); i++) {
+                        Card thisArtifact = artifacts.get(i);
+                        if (thisArtifact.getOwner().equals(player)) {
+                            //moveToHand handles tokens
+                            AllZone.getGameAction().moveToHand(thisArtifact);
+                        }
+                    }
+                } //resolve()
+            };
+
+            card.addSpellAbility(spell);
+        } //*************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Echoing Decay")) {
