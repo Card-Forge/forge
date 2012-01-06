@@ -146,6 +146,7 @@ public class SpellAbilityStackInstance {
         }
 
         // Set Cost specific things here
+        this.ability.resetPaidHash();
         this.ability.setPaidHash(this.paidHash);
         this.ability.getSourceCard().setXManaCostPaid(this.xManaPaid);
 
