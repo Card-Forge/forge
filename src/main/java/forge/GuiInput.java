@@ -44,7 +44,9 @@ public class GuiInput extends MyObservable implements Observer {
         AllZone.getInputControl().deleteObservers();
         AllZone.getInputControl().addObserver(this);
 
+        AllZone.getStack().deleteObservers();
         AllZone.getStack().addObserver(this);
+
         AllZone.getPhase().addObserver(this);
 
         //System.out.println("Stack observers: " + AllZone.getStack().countObservers());

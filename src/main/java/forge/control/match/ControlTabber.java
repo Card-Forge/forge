@@ -113,9 +113,9 @@ public class ControlTabber extends MyObservable {
     public void addObservers() {
 
         AllZone.getStack().deleteObserver(stackObserver);
-        AllZone.getGameLog().deleteObserver(logObserver);
-
         AllZone.getStack().addObserver(stackObserver);
+
+        AllZone.getGameLog().deleteObserver(logObserver);
         AllZone.getGameLog().addObserver(logObserver);
     }
 
