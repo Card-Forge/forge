@@ -159,7 +159,7 @@ public class ControlSettings {
     /** @param rad0 &emsp; JRadioButton
      * @throws Exception */
     public void updateCardSize(JRadioButton rad0) throws Exception {
-        CardSizeType cst = CardSizeType.valueOf(rad0.getText());
+        CardSizeType cst = CardSizeType.valueOf(rad0.getText().toLowerCase());
         Singletons.getModel().getPreferences().setCardSize(cst);
         prefs.save();
     }
