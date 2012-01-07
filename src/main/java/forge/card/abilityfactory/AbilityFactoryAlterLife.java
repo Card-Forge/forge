@@ -272,19 +272,17 @@ public class AbilityFactoryAlterLife {
             return false;
         }
 
-        if (abCost != null) {
-            if (life > 5) {
-                if (!CostUtil.checkSacrificeCost(abCost, source)) {
-                    return false;
-                }
+        if (abCost != null && life > 5) {
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+                return false;
+            }
 
-                if (!CostUtil.checkLifeCost(abCost, source, 4)) {
-                    return false;
-                }
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+                return false;
+            }
 
-                if (!CostUtil.checkDiscardCost(abCost, source)) {
-                    return false;
-                }
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
+                return false;
             }
 
             if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
