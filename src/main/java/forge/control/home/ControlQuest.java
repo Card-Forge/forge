@@ -202,7 +202,7 @@ public class ControlQuest {
         Constant.Quest.OPP_ICON_NAME[0] = event.getIcon();
 
         GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-        g.getController().changeState(1);
+        g.getController().changeState(ControlAllUI.MATCH_SCREEN);
         g.getController().getMatchController().initMatch();
 
         AllZone.getMatchState().reset();

@@ -76,7 +76,7 @@ public class ControlSealed {
         Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get("AI_" + human.getName());
 
         ControlAllUI c = ((GuiTopLevel) AllZone.getDisplay()).getController();
-        c.changeState(1);
+        c.changeState(ControlAllUI.MATCH_SCREEN);
         c.getMatchController().initMatch();
         System.out.println(Constant.Runtime.COMPUTER_DECK[0]);
         System.out.println(Constant.Runtime.HUMAN_DECK[0]);

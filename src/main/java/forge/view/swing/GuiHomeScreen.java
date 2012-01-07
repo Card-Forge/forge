@@ -61,6 +61,7 @@ import forge.GuiImportPicture;
 import forge.MyRandom;
 import forge.PlayerType;
 import forge.Singletons;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.deck.DeckGeneration;
 import forge.deck.DeckManager;
@@ -1203,7 +1204,7 @@ public class GuiHomeScreen {
 
             GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
 
-            g.getController().changeState(1);
+            g.getController().changeState(ControlAllUI.MATCH_SCREEN);
             g.getController().getMatchController().initMatch();
 
             Constant.Runtime.SMOOTH[0] = OldGuiNewGame.getSmoothLandCheckBox().isSelected();
