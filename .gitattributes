@@ -1241,6 +1241,7 @@ res/cardsfolder/c/cateran_overlord.txt svneol=native#text/plain
 res/cardsfolder/c/cateran_persuader.txt svneol=native#text/plain
 res/cardsfolder/c/cateran_slaver.txt svneol=native#text/plain
 res/cardsfolder/c/cateran_summons.txt svneol=native#text/plain
+res/cardsfolder/c/caterwauling_boggart.txt -text
 res/cardsfolder/c/cathartic_adept.txt svneol=native#text/plain
 res/cardsfolder/c/cathodion.txt svneol=native#text/plain
 res/cardsfolder/c/cauldron_dance.txt -text
