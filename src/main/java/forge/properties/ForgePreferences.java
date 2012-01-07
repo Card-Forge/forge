@@ -146,10 +146,10 @@ public class ForgePreferences extends Preferences {
         this.setPlayForAnte(this.getBoolean("play.for.ante", false));
         this.setUILayout(this.get("gui.layout", ""));
         this.setStackAiLand(this.getBoolean("AI.stack.land", false));
-        this.setMillingLossCondition(this.getBoolean("loss.condition.milling", true));
+        this.setMillingLossCondition(this.getBoolean("loss.condition.milling", false));
         this.setHandView(this.getBoolean("developer.handview", true));
         this.setLibraryView(this.getBoolean("developer.libraryview", true));
-        this.setUnlimitedLand(this.getBoolean("developer.unlimitedland", true));
+        this.setUnlimitedLand(this.getBoolean("developer.unlimitedland", false));
         this.setDeveloperMode(this.getBoolean("developer.mode", false));
 
         this.setUploadDraftAI(this.getBoolean("upload.Draft.AI", true));

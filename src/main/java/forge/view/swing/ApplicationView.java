@@ -39,9 +39,6 @@ import forge.properties.ForgePreferences;
 import forge.view.FView;
 import forge.view.GuiTopLevel;
 import forge.view.home.SplashFrame;
-import forge.view.swing.OldGuiNewGame.CardSizesAction;
-import forge.view.swing.OldGuiNewGame.CardStackAction;
-import forge.view.swing.OldGuiNewGame.CardStackOffsetAction;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -116,19 +113,8 @@ public class ApplicationView implements FView {
 
             final ForgePreferences preferences = model.getPreferences();
 
-            OldGuiNewGame.getSmoothLandCheckBox().setSelected(preferences.isStackAiLand());
-            OldGuiNewGame.getDevModeCheckBox().setSelected(preferences.isDeveloperMode());
-            OldGuiNewGame.getCardOverlay().setSelected(preferences.isCardOverlay());
-
             // FindBugs doesn't like the next line.
             ImageCache.setScaleLargerThanOriginal(preferences.isScaleLargerThanOriginal());
-
-            OldGuiNewGame.getCardScale().setSelected(preferences.isScaleLargerThanOriginal());
-            CardStackOffsetAction.set(preferences.getStackOffset());
-            CardStackAction.setVal(preferences.getMaxStackSize());
-            CardSizesAction.set(preferences.getCardSize());
-            OldGuiNewGame.getUpldDrftCheckBox().setSelected(preferences.isUploadDraftAI());
-            OldGuiNewGame.getFoilRandomCheckBox().setSelected(preferences.isRandCFoil());
 
         } catch (final Exception exn) {
             Log.error("Error loading preferences: " + exn);
