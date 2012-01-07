@@ -10658,7 +10658,6 @@ src/main/java/forge/IPlayerZone.java svneol=native#text/plain
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/ImagePreviewPanel.java svneol=native#text/plain
 src/main/java/forge/MagicStack.java svneol=native#text/plain
-src/main/java/forge/MenuItemHowToPlay.java svneol=native#text/plain
 src/main/java/forge/Move.java svneol=native#text/plain
 src/main/java/forge/MyButton.java svneol=native#text/plain
 src/main/java/forge/MyObservable.java svneol=native#text/plain
