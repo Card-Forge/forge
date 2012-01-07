@@ -3,13 +3,12 @@
 Name=Da Vinci 3
 Title=Da Vinci
 Difficulty=hard
-Description=Mono B deck with Korlash, Heir to Blackblade, Badmoon and threat removal
+Description=Mono B deck with Korlash, Heir to Blackblade, Bad Moon and threat removal
 Icon=Da Vinci.jpg
 Deck Type=constructed
 [main]
-19 Swamp
+23 Swamp
 1 Mox Jet
-4 Polluted Delta
 4 Korlash, Heir to Blackblade
 1 Ascendant Evincar
 2 Bad Moon
