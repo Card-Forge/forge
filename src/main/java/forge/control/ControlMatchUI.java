@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.AllZone;
 import forge.Constant.Zone;
+import forge.Player;
 import forge.Singletons;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
@@ -75,6 +76,9 @@ public class ControlMatchUI {
      * 
      */
     public void initMatch() {
+
+        //printObservers("before");
+
         // All child components have been assembled; observers and listeners can
         // be added safely.
         this.view.getTabberController().addObservers();
@@ -100,6 +104,43 @@ public class ControlMatchUI {
         AllZone.getInputControl().updateObservers();
         this.view.getTabberController().updateObservers();
         this.mapKeyboardShortcuts();
+
+        //printObservers("after");
+    }
+
+    private void printObservers(String when) {
+        for (Player p : AllZone.getPlayersInGame()) {
+            System.out.println(p + " " + when + ": " + p.countObservers());
+            System.out.println(p + " " + "Battlefield " + when + ": " + p.getZone(Zone.Battlefield).countObservers());
+            System.out.println(p + " " + "Hand " + when + ": " + p.getZone(Zone.Hand).countObservers());
+            p.getZone(Zone.Hand).deleteObservers();
+        }
+        System.out.println("Stack " + when + ": " + AllZone.getStack().countObservers());
+        System.out.println("GameLog " + when + ": " + AllZone.getGameLog().countObservers());
+        System.out.println("InputControl " + when + ": " + AllZone.getInputControl().countObservers());
+        System.out.println("Phase " + when + ": " + AllZone.getPhase().countObservers());
+
+        System.out.println("====================================");
+    }
+
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     */
+    public void deinitMatch() {
+
+        //delete player observers
+        for (Player p : AllZone.getPlayersInGame()) {
+            p.deleteObservers();
+            p.getZone(Zone.Battlefield).deleteObservers();
+            p.getZone(Zone.Hand).deleteObservers();
+        }
+
+        AllZone.getStack().deleteObservers();
+        AllZone.getGameLog().deleteObservers();
+        AllZone.getInputControl().deleteObservers();
+        AllZone.getPhase().deleteObservers();
+
     }
 
     /**

@@ -851,7 +851,6 @@ public class Phase extends MyObservable implements java.io.Serializable {
     /** {@inheritDoc} */
     @Override
     public final void addObserver(final Observer o) {
-        super.deleteObservers();
         super.addObserver(o);
     }
 

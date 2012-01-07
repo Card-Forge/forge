@@ -37,6 +37,7 @@ import forge.MyRandom;
 import forge.Player;
 import forge.SetUtils;
 import forge.Singletons;
+import forge.control.ControlAllUI;
 import forge.control.ControlWinLose;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
@@ -301,8 +302,10 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         this.model.qData.saveData();
 
-        ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
-        ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showQuestMenu();
+        ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+        g.getMatchController().deinitMatch();
+        g.changeState(ControlAllUI.HOME_SCREEN);
+        g.getHomeView().showQuestMenu();
     }
 
     /**

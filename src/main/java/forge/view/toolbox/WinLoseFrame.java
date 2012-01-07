@@ -279,11 +279,6 @@ public class WinLoseFrame extends JFrame {
         this.closeWinLoseFrame();
         this.matchState.reset();
         this.modeHandler.actionOnQuit();
-
-        // clear Image caches, so the program doesn't get slower and slower
-        // not needed with soft values - will shrink as needed
-        // ImageUtil.rotatedCache.clear();
-        // ImageCache.cache.clear();
     }
 
     /**

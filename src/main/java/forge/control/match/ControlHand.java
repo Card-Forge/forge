@@ -157,7 +157,6 @@ public class ControlHand {
 
     /** Adds observers to hand panel. */
     public void addObservers() {
-        AllZone.getHumanPlayer().getZone(Zone.Hand).deleteObserver(o1);
         AllZone.getHumanPlayer().getZone(Zone.Hand).addObserver(o1);
     }
 

@@ -119,11 +119,6 @@ public class ControlField {
      * stats, etc.
      */
     public void addObservers() {
-
-        this.player.getZone(Zone.Hand).deleteObserver(observerZones);
-        this.player.deleteObserver(observerDetails);
-        this.player.getZone(Zone.Battlefield).deleteObserver(observerPlay);
-
         this.player.getZone(Zone.Hand).addObserver(observerZones);
         this.player.addObserver(observerDetails);
         this.player.getZone(Zone.Battlefield).addObserver(observerPlay);

@@ -104,7 +104,7 @@ public class InputAttack extends Input {
             // return;
 
             AllZone.getCombat().addAttacker(card);
-            
+
             // just to make sure the attack symbol is marked
             AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
 

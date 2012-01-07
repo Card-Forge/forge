@@ -68,7 +68,9 @@ public class ControlWinLose {
      * 
      */
     public void actionOnQuit() {
-        ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
+        ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+        g.getMatchController().deinitMatch();
+        g.changeState(ControlAllUI.HOME_SCREEN);
     }
 
     /**
