@@ -33,6 +33,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.MyRandom;
+import forge.Phase;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1688,11 +1689,33 @@ public class AbilityFactoryCounters {
             if (hList.size() >= cList.size()) {
                 return false;
             }
+
+            //Check for cards that could profit from the ability
+            Phase phase = AllZone.getPhase();
+            if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
+                    && sa.getPayCosts() != null && sa.getPayCosts().getTap()
+                    && (phase.isNextTurn(AllZone.getHumanPlayer())
+                    || phase.isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY))) {
+                boolean combatants = false;
+                for (Card c : hList) {
+                    if (!c.equals(source) && c.isUntapped()) {
+                        combatants = true;
+                        break;
+                    }
+                }
+                if (!combatants) {
+                    return false;
+                }
+            }
         }
 
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
             chance &= subAb.chkAIDrawback();
+        }
+
+        if (AbilityFactory.playReusable(sa)) {
+            return chance;
         }
 
         return ((r.nextFloat() < .6667) && chance);
