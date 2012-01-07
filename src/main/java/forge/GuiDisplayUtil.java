@@ -20,9 +20,6 @@ package forge;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -60,30 +57,6 @@ public final class GuiDisplayUtil {
 
     private GuiDisplayUtil() {
         throw new AssertionError();
-    }
-
-    /**
-     * <p>
-     * getCardDetailMouse.
-     * </p>
-     * 
-     * @param visual
-     *            a {@link forge.CardContainer} object.
-     * @return a {@link java.awt.event.MouseMotionListener} object.
-     */
-    public static MouseMotionListener getCardDetailMouse(final CardContainer visual) {
-        return new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(final MouseEvent me) {
-                final JPanel panel = (JPanel) me.getSource();
-                final Object o = panel.getComponentAt(me.getPoint());
-
-                if ((o != null) && (o instanceof CardPanel)) {
-                    final CardContainer cardPanel = (CardContainer) o;
-                    visual.setCard(cardPanel.getCard());
-                }
-            } // mouseMoved
-        };
     }
 
     /**
