@@ -115,6 +115,16 @@ Sulfuric Vortex
 - gut the OldGuiNewGame class. It now contains only static elements related to preferences and loading dynamic game data (which needs to be moved to a different class)
 - fix Hurkyl's Recall (looks like the Java code inadvertently got deleted)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- delete MenuItemHowToPlay (it is no longer used)
+- consolidate deleteObservers in a deinitMatch method. Hooked this method up in the WinLoseFrame and QuestWinLoseHandler.
+- update some Magic Numbers to constants
+- delete file GuiHomeScreen.java (it is no longer used)
+- update another Magic Number to constant
+- move loadDynamicGameData to Main
+- fix value setting when CardSize radio buttons are selected.
+- remove references to OldGuiNewGame
+- delete OldGuiNewGame
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
