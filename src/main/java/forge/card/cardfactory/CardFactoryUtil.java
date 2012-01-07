@@ -421,13 +421,8 @@ public class CardFactoryUtil {
         if (c.isToken()) {
             value = 80; // tokens should be worth less than actual cards
         }
-        int power = c.getNetAttack();
+        int power = c.getNetCombatDamage();
         final int toughness = c.getNetDefense();
-
-        // Doran
-        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
-            power = toughness;
-        }
 
         if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
                 || c.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
@@ -538,11 +533,6 @@ public class CardFactoryUtil {
         }
         value += c.getKeywordMagnitude("Absorb") * 11;
 
-        // Activated Abilities
-        if (c.hasStartOfKeyword("ab")) {
-            value += 10;
-        }
-
         // Bad keywords
         if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) {
             value -= (power * 9) + 40;
@@ -598,6 +588,12 @@ public class CardFactoryUtil {
             value -= 20; // not used atm
         }
 
+        for (SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isAbility()) {
+                value += 10;
+            }
+        }
+
         if (c.isUntapped()) {
             value += 1;
         }
@@ -609,14 +605,13 @@ public class CardFactoryUtil {
     // returns null if list.size() == 0
     /**
      * <p>
-     * getBestCreatureAI.
+     * getBestAI.
      * </p>
      * 
      * @param list
      *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-
     public static Card getBestAI(final CardList list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
         // is of that type
