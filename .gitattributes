@@ -1497,6 +1497,7 @@ res/cardsfolder/c/clutch_of_undeath.txt svneol=native#text/plain
 res/cardsfolder/c/coal_golem.txt svneol=native#text/plain
 res/cardsfolder/c/coal_stoker.txt -text
 res/cardsfolder/c/coalhauler_swine.txt -text
+res/cardsfolder/c/coalition_relic.txt -text
 res/cardsfolder/c/coalition_victory.txt -text svneol=unset#text/plain
 res/cardsfolder/c/coast_watcher.txt svneol=native#text/plain
 res/cardsfolder/c/coastal_drake.txt svneol=native#text/plain
@@ -6510,6 +6511,7 @@ res/cardsfolder/q/quirion_dryad.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_elves.txt -text
 res/cardsfolder/q/quirion_explorer.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_ranger.txt svneol=native#text/plain
+res/cardsfolder/q/quirion_sentinel.txt -text
 res/cardsfolder/q/quirion_trailblazer.txt svneol=native#text/plain
 res/cardsfolder/q/qumulox.txt svneol=native#text/plain
 res/cardsfolder/r/rabble_rouser.txt svneol=native#text/plain
@@ -8587,6 +8589,7 @@ res/cardsfolder/t/terra_stomper.txt svneol=native#text/plain
 res/cardsfolder/t/terraformer.txt -text svneol=unset#text/plain
 res/cardsfolder/t/terrain_generator.txt svneol=native#text/plain
 res/cardsfolder/t/terramorphic_expanse.txt svneol=native#text/plain
+res/cardsfolder/t/terrarion.txt -text
 res/cardsfolder/t/terravore.txt svneol=native#text/plain
 res/cardsfolder/t/territorial_baloth.txt svneol=native#text/plain
 res/cardsfolder/t/terror.txt svneol=native#text/plain
