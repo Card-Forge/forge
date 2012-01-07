@@ -130,25 +130,25 @@ public class ControlAllUI {
 
         // Fire up new state
         switch (i) {
-        case 0: // Home screen
+        case HOME_SCREEN:
             this.home = new HomeTopLevel();
             this.display.add(this.home, JLayeredPane.DEFAULT_LAYER);
             sizeChildren();
             break;
 
-        case 1: // Match screen
+        case MATCH_SCREEN:
             this.match = new ViewTopLevel();
             this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
             sizeChildren();
             view.addWindowListener(waConcede);
             break;
 
-        case 2: // Deck editor screen
+        case DEFAULT_EDITOR:
             this.editor = new EditorTopLevel();
             this.display.add(this.editor);
             break;
 
-        case 3: // Quest Bazaar screen
+        case QUEST_BAZAAR:
             this.bazaar = new QuestBazaarPanel(null);
             this.display.add(bazaar, JLayeredPane.DEFAULT_LAYER);
             sizeChildren();
