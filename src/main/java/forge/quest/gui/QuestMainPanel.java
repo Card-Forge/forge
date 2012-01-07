@@ -47,6 +47,7 @@ import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.ImageCache;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
@@ -772,7 +773,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
 
         GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-        g.getController().changeState(1);
+        g.getController().changeState(ControlAllUI.MATCH_SCREEN);
         g.getController().getMatchController().initMatch();
 
         Constant.Runtime.SMOOTH[0] = this.smoothLandCheckBox.isSelected();
