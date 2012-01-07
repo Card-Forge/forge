@@ -340,10 +340,15 @@ public class AbilityFactoryZoneAffecting {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
 
-        final int computerHandSize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Hand).size();
+        int computerHandSize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Hand).size();
         final int humanLibrarySize = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Library).size();
         final int computerLibrarySize = AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Library).size();
         final int computerMaxHandSize = AllZone.getComputerPlayer().getMaxHandSize();
+
+        //if a spell is used don't count the card
+        if (sa.isSpell() && source.isInZone(Constant.Zone.Hand)) {
+            computerHandSize -= 1;
+        }
 
         int numCards = 1;
         if (params.containsKey("NumCards")) {
