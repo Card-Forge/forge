@@ -2693,6 +2693,11 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(Integer.parseInt(number), m, c);
             }
         }
+        
+        if (l[0].startsWith("SVar$")) {
+            final String sVar = l[0].replace("SVar$", "");
+            return CardFactoryUtil.doXMath(xCount(c, c.getSVar(sVar)), m, c);
+        }
 
         // Manapool
         if (l[0].contains("ManaPool")) {
