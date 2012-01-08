@@ -76,6 +76,7 @@ import forge.view.toolbox.FVerticalTabPanel;
 public class ViewTabber extends FRoundedPanel {
     private final List<JPanel> panelList;
     private Map<Player, JLabel[]> detalLBLs;
+    private JLabel stormLabel;
     private List<JTextArea> stackTARs;
     private List<JTextArea> combatTARs;
     private List<JTextArea> consoleTARs;
@@ -424,6 +425,8 @@ public class ViewTabber extends FRoundedPanel {
             }
             temp[6].setText(sb.toString());
         }
+
+        stormLabel.setText("Storm count: " + AllZone.getStack().getCardsCastThisTurn().size());
     }
 
     /**
@@ -593,6 +596,8 @@ public class ViewTabber extends FRoundedPanel {
         final List<Player> players = AllZone.getPlayersInGame();
         this.detalLBLs = new HashMap<Player, JLabel[]>();
 
+        final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
+
         for (final Player p : players) {
             // Create and store labels detailing various non-critical player
             // info.
@@ -610,7 +615,6 @@ public class ViewTabber extends FRoundedPanel {
             name.setText(p.getName());
 
             // Add to "players" tab panel
-            final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
             this.pnlPlayers.add(name, constraints);
             this.pnlPlayers.add(life, constraints);
             this.pnlPlayers.add(hand, constraints);
@@ -619,6 +623,9 @@ public class ViewTabber extends FRoundedPanel {
             this.pnlPlayers.add(keywords, constraints);
             this.pnlPlayers.add(antes, constraints);
         }
+
+        stormLabel = new InfoLabel();
+        this.pnlPlayers.add(stormLabel, constraints);
     }
 
     /** Assembles Swing components for "dev mode" panel. */
