@@ -2693,7 +2693,7 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(Integer.parseInt(number), m, c);
             }
         }
-        
+
         if (l[0].startsWith("SVar$")) {
             final String sVar = l[0].replace("SVar$", "");
             return CardFactoryUtil.doXMath(xCount(c, c.getSVar(sVar)), m, c);
@@ -2835,46 +2835,30 @@ public class CardFactoryUtil {
 
         // Count$YourLifeTotal
         if (sq[0].contains("YourLifeTotal")) {
-            if (cardController.isComputer()) {
-                return CardFactoryUtil.doXMath(AllZone.getComputerPlayer().getLife(), m, c);
-            } else if (cardController.isHuman()) {
-                return CardFactoryUtil.doXMath(AllZone.getHumanPlayer().getLife(), m, c);
-            }
-
-            return 0;
+            return CardFactoryUtil.doXMath(cardController.getLife(), m, c);
         }
 
         // Count$OppLifeTotal
         if (sq[0].contains("OppLifeTotal")) {
-            if (oppController.isComputer()) {
-                return CardFactoryUtil.doXMath(AllZone.getComputerPlayer().getLife(), m, c);
-            } else if (oppController.isHuman()) {
-                return CardFactoryUtil.doXMath(AllZone.getHumanPlayer().getLife(), m, c);
-            }
+            return CardFactoryUtil.doXMath(oppController.getLife(), m, c);
+        }
 
-            return 0;
+        if (sq[0].contains("LifeYouLostThisTurn")) {
+            return CardFactoryUtil.doXMath(cardController.getLifeLostThisTurn(), m, c);
+        }
+
+        if (sq[0].contains("LifeOppLostThisTurn")) {
+            return CardFactoryUtil.doXMath(cardController.getOpponent().getLifeLostThisTurn(), m, c);
         }
 
         // Count$YourPoisonCounters
         if (sq[0].contains("YourPoisonCounters")) {
-            if (cardController.isComputer()) {
-                return CardFactoryUtil.doXMath(AllZone.getComputerPlayer().getPoisonCounters(), m, c);
-            } else if (cardController.isHuman()) {
-                return CardFactoryUtil.doXMath(AllZone.getHumanPlayer().getPoisonCounters(), m, c);
-            }
-
-            return 0;
+            return CardFactoryUtil.doXMath(cardController.getPoisonCounters(), m, c);
         }
 
         // Count$OppPoisonCounters
         if (sq[0].contains("OppPoisonCounters")) {
-            if (oppController.isComputer()) {
-                return CardFactoryUtil.doXMath(AllZone.getComputerPlayer().getPoisonCounters(), m, c);
-            } else if (oppController.isHuman()) {
-                return CardFactoryUtil.doXMath(AllZone.getHumanPlayer().getPoisonCounters(), m, c);
-            }
-
-            return 0;
+            return CardFactoryUtil.doXMath(oppController.getPoisonCounters(), m, c);
         }
 
         // Count$OppDamageThisTurn

@@ -562,6 +562,8 @@ public class Phase extends MyObservable implements java.io.Serializable {
         AllZone.resetZoneMoveTracking();
         AllZone.getComputerPlayer().resetProwl();
         AllZone.getHumanPlayer().resetProwl();
+        AllZone.getComputerPlayer().setLifeLostThisTurn(0);
+        AllZone.getHumanPlayer().setLifeLostThisTurn(0);
 
         return this.skipTurnTimeVault(nextTurn);
     }

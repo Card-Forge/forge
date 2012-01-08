@@ -56,6 +56,9 @@ public abstract class Player extends GameEntity {
 
     /** The assigned damage. */
     private int assignedDamage;
+    
+    /** The life lost this turn. */
+    private int lifeLostThisTurn = 0;
 
     /** The num power surge lands. */
     private int numPowerSurgeLands;
@@ -160,6 +163,7 @@ public abstract class Player extends GameEntity {
      */
     public final void reset() {
         this.life = 20;
+        lifeLostThisTurn = 0;
         this.poisonCounters = 0;
         this.assignedDamage = 0;
         this.setPreventNextDamage(0);
@@ -372,6 +376,8 @@ public abstract class Player extends GameEntity {
         } else {
             System.out.println("Player - trying to lose positive life");
         }
+
+        this.lifeLostThisTurn += toLose;
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -2509,6 +2515,29 @@ public abstract class Player extends GameEntity {
      */
     public final void setNumLandsPlayed(final int n) {
         this.numLandsPlayed = n;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>lifeLostThisTurn</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getLifeLostThisTurn() {
+        return this.lifeLostThisTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>lifeLostThisTurn</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     */
+    public final void setLifeLostThisTurn(final int n) {
+        this.lifeLostThisTurn = n;
     }
 
     // //////////////////////////////
