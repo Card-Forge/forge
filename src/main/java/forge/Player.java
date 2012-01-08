@@ -312,21 +312,15 @@ public abstract class Player extends GameEntity {
         int lifeGain = toGain;
 
         if (lifeGain > 0) {
-            if (AllZoneUtil.isCardInPlay("Lich", this)) {
-                // draw cards instead of gain life
-                this.drawCards(lifeGain);
-                newLifeSet = false;
-            } else {
-                this.addLife(lifeGain);
-                newLifeSet = true;
-                this.updateObservers();
+            this.addLife(lifeGain);
+            newLifeSet = true;
+            this.updateObservers();
 
-                // Run triggers
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                runParams.put("Player", this);
-                runParams.put("LifeAmount", lifeGain);
-                AllZone.getTriggerHandler().runTrigger("LifeGained", runParams);
-            }
+            // Run triggers
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Player", this);
+            runParams.put("LifeAmount", lifeGain);
+            AllZone.getTriggerHandler().runTrigger("LifeGained", runParams);
         } else {
             System.out.println("Player - trying to gain negative or 0 life");
         }
