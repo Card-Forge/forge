@@ -858,6 +858,7 @@ res/cardsfolder/b/blood_tyrant.txt svneol=native#text/plain
 res/cardsfolder/b/blood_vassal.txt svneol=native#text/plain
 res/cardsfolder/b/bloodbond_march.txt -text
 res/cardsfolder/b/bloodbraid_elf.txt svneol=native#text/plain
+res/cardsfolder/b/bloodchief_ascension.txt -text
 res/cardsfolder/b/bloodcrazed_goblin.txt -text
 res/cardsfolder/b/bloodcrazed_neonate.txt -text
 res/cardsfolder/b/bloodcurdling_scream.txt svneol=native#text/plain
@@ -4936,6 +4937,7 @@ res/cardsfolder/l/lumengrid_drake.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_sentinel.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_warden.txt svneol=native#text/plain
+res/cardsfolder/l/luminarch_ascension.txt -text
 res/cardsfolder/l/luminesce.txt -text
 res/cardsfolder/l/luminous_angel.txt svneol=native#text/plain
 res/cardsfolder/l/luminous_wake.txt svneol=native#text/plain
@@ -8407,6 +8409,7 @@ res/cardsfolder/s/sword_of_the_paruns.txt svneol=native#text/plain
 res/cardsfolder/s/sword_of_vengeance.txt svneol=native#text/plain
 res/cardsfolder/s/sword_of_war_and_peace.txt svneol=native#text/plain
 res/cardsfolder/s/swords_to_plowshares.txt svneol=native#text/plain
+res/cardsfolder/s/sygg_river_cutthroat.txt -text
 res/cardsfolder/s/sygg_river_guide.txt svneol=native#text/plain
 res/cardsfolder/s/sylvan_basilisk.txt svneol=native#text/plain
 res/cardsfolder/s/sylvan_bounty.txt svneol=native#text/plain
@@ -8446,6 +8449,7 @@ res/cardsfolder/t/tainted_aether.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_field.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_isle.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_peak.txt svneol=native#text/plain
+res/cardsfolder/t/tainted_sigil.txt -text
 res/cardsfolder/t/tainted_strike.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_well.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_wood.txt svneol=native#text/plain
@@ -9774,6 +9778,7 @@ res/cardsfolder/w/worn_powerstone.txt svneol=native#text/plain
 res/cardsfolder/w/worry_beads.txt svneol=native#text/plain
 res/cardsfolder/w/worship.txt svneol=native#text/plain
 res/cardsfolder/w/wort_boggart_auntie.txt svneol=native#text/plain
+res/cardsfolder/w/wound_reflection.txt -text
 res/cardsfolder/w/wrap_in_flames.txt svneol=native#text/plain
 res/cardsfolder/w/wrap_in_vigor.txt svneol=native#text/plain
 res/cardsfolder/w/wrath_of_god.txt svneol=native#text/plain
