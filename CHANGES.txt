@@ -125,6 +125,25 @@ Sulfuric Vortex
 - remove references to OldGuiNewGame
 - delete OldGuiNewGame
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- more magic number converted to constants in ControlAllUI
+- remove unused function in GuiDisplayUtil
+- Fixed the AI not playing card draw spells, even when the resulting number of cards in hand is lower than 8 cards (it was not considering losing the card used).
+- Fixed Dream Fighter.
+- Fixed Graven Dominator.
+- Little tweak in gainLifeCanPlayAI.
+- Updated evaluateCreature.
+- Little tweaks for the Da Vinci decks.
+- Fixed two scripts.
+- Added some AI checks to make better use of Steel Overseer.
+- Added RemAIDeck:True to Orzhov Pontiff.
+- ran Oracle and Setinfo scripts
+- fixed remove counter trigger on Witherscale Wurm
+- Fixed Vodalian Illusionist.
+- Fixed Predatory Urge.
+- Added the prefix "SVar$" to xCount (formerly only available in AbilityFactory.calculateAmount).
+- Fixed another issue with Conclave's Blessing.
+- Fixed the discarded list of CostDiscard containing all cards twice if the mode is Self, LastDrawn or Random (the cards are added to the list in doDiscard).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -154,6 +173,12 @@ Myojin of Seeing Winds
 Deepwood Legate
 Sivvi's Ruse
 Qasali Ambusher
+Carrion Beetles
+Rag Dealer
+Caterwauling Boggart
+Coalition Relic
+Quirion Sentinel
+Terrarion
 
 
 end
