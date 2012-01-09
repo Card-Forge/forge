@@ -25,6 +25,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 
@@ -178,10 +179,13 @@ public class StaticEffects {
                 for (final SpellAbility ab : abilities) {
                     ab.setTemporarilySuppressed(false);
                 }
-
                 final ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
                 for (final StaticAbility stA : staticAbilities) {
                     stA.setTemporarilySuppressed(false);
+                }
+                final ArrayList<ReplacementEffect> replacementEffects = affectedCard.getReplacementEffects();
+                for (final ReplacementEffect rE : replacementEffects) {
+                    rE.setTemporarilySuppressed(false);
                 }
             }
 

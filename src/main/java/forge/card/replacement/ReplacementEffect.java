@@ -118,7 +118,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @return a String
      */
     public String toString() {
-        if (getMapParams().containsKey("Description")) {
+        if (getMapParams().containsKey("Description") && !this.isSuppressed()) {
             return getMapParams().get("Description");
         }
         else {
@@ -134,6 +134,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean requirementsCheck() {
+
+        if (this.isSuppressed()) {
+            return false; // Effect removed by effect
+        }
+
         if (this.getMapParams().containsKey("Metalcraft")) {
             if (this.getMapParams().get("Metalcraft").equals("True")
                     && !this.getHostCard().getController().hasMetalcraft()) {

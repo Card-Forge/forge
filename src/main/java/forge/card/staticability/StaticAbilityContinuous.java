@@ -31,6 +31,7 @@ import forge.Player;
 import forge.StaticEffect;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -313,6 +314,10 @@ public class StaticAbilityContinuous {
                 final ArrayList<StaticAbility> staticAbilities = affectedCard.getStaticAbilities();
                 for (final StaticAbility stA : staticAbilities) {
                     stA.setTemporarilySuppressed(true);
+                }
+                final ArrayList<ReplacementEffect> replacementEffects = affectedCard.getReplacementEffects();
+                for (final ReplacementEffect rE : replacementEffects) {
+                    rE.setTemporarilySuppressed(true);
                 }
             }
         }

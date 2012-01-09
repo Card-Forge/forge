@@ -52,4 +52,39 @@ public abstract class TriggerReplacementBase {
 
         return false;
     }
+
+    /** The suppressed. */
+    private boolean suppressed = false;
+
+    /** The temporarily suppressed. */
+    private boolean temporarilySuppressed = false;
+
+    /**
+     * Sets the suppressed.
+     * 
+     * @param supp
+     *            the new suppressed
+     */
+    public final void setSuppressed(final boolean supp) {
+        this.suppressed = supp;
+    }
+
+    /**
+     * Sets the temporarily suppressed.
+     * 
+     * @param supp
+     *            the new temporarily suppressed
+     */
+    public final void setTemporarilySuppressed(final boolean supp) {
+        this.temporarilySuppressed = supp;
+    }
+
+    /**
+     * Checks if is suppressed.
+     * 
+     * @return true, if is suppressed
+     */
+    public final boolean isSuppressed() {
+        return (this.suppressed || this.temporarilySuppressed);
+    }
 }
