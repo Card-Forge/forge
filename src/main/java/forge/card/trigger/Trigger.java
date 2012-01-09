@@ -343,6 +343,13 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean requirementsCheck() {
+        if(this.getMapParams().containsKey("FatefulHour")) {
+            if(this.getMapParams().get("FatefulHour").equals("True")
+                    && !(this.getHostCard().getController().getLife() <= 5)) {
+                return false;
+            }
+        }
+        
         if (this.getMapParams().containsKey("Metalcraft")) {
             if (this.getMapParams().get("Metalcraft").equals("True")
                     && !this.getHostCard().getController().hasMetalcraft()) {
