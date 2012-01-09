@@ -1,0 +1,14 @@
+Name:Damia, Sage of Stone
+ManaCost:4 G U B
+Types:Legendary Creature Gorgon Wizard
+Text:no text
+PT:4/4
+K:Deathtouch
+K:Skip your draw step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT7 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ Difference
+SVar:X:Count$InYourHand
+SVar:Difference:Number$7/Minus.X
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/damia_sage_of_stone.jpg
+End

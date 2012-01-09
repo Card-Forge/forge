@@ -1812,6 +1812,7 @@ res/cardsfolder/d/dakmor_plague.txt svneol=native#text/plain
 res/cardsfolder/d/dakmor_salvage.txt svneol=native#text/plain
 res/cardsfolder/d/dakmor_scorpion.txt svneol=native#text/plain
 res/cardsfolder/d/dakmor_sorceress.txt svneol=native#text/plain
+res/cardsfolder/d/damia_sage_of_stone.txt -text
 res/cardsfolder/d/damnation.txt svneol=native#text/plain
 res/cardsfolder/d/damping_field.txt svneol=native#text/plain
 res/cardsfolder/d/damping_matrix.txt -text
