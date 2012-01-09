@@ -1,0 +1,17 @@
+Name:Sedge Sliver
+ManaCost:2 R
+Types:Creature Sliver
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ SedgeX | SVarCompare$ GE1 | Description$ All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ SedgePump | Description$ All Slivers have "B: Regenerate this permanent."
+SVar:SedgeX:Count$Valid Swamp.YouCtrl
+SVar:SedgePump:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:BuffedBy:Sliver,Swamp
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sedge_sliver.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/177.jpg
+Oracle:All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."\nAll Slivers have "{B}: Regenerate this permanent."
+End
