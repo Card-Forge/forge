@@ -529,7 +529,7 @@ public class PhaseUtil {
                 || list.containsName("Recycle") || list.containsName("Dragon Appeasement")
                 || list.containsName("Null Profusion") || list.containsName("Colfenor's Plans")
                 || list.containsName("Psychic Possession") || list.containsName("Solitary Confinement")
-                || list.containsName("Symbiotic Deployment")) {
+                || list.containsName("Symbiotic Deployment") || list.containsName("Damia, Sage of Stone")) {
             return true;
         }
 
