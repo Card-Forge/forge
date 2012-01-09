@@ -1,7 +1,7 @@
 Name:Gibbering Descent
 ManaCost:4 B B
 Types:Enchantment
-Text:Hellbent — Skip your upkeep step if you have no cards in hand.
+Text:Hellbent - Skip your upkeep step if you have no cards in hand.
 K:Madness:2 B B
 T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigLoseLifeDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player loses 1 life and discards a card.
 SVar:TrigLoseLifeDiscard:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBDiscard
