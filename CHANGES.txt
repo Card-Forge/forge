@@ -144,6 +144,16 @@ Sulfuric Vortex
 - Fixed another issue with Conclave's Blessing.
 - Fixed the discarded list of CostDiscard containing all cards twice if the mode is Self, LastDrawn or Random (the cards are added to the list in doDiscard).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the options "LifeYouLostThisTurn" and "LifeOppLostThisTurn" to xCount.
+- Added four missing set infos.
+- Converted the replacement ability of Lich to script.
+- add a Storm counter to the Players panel
+- Fix Furnace of Rath
+- Added Undying keyword.
+- Added Fateful Hour to Count$ (Count$FatefulHour.<Truevalue>.<Falsevalue>) and as a condition to Static Abilities (FatefulHour$ True).
+- Added Count$<Your/Opp>StartingLife.
+- Added FatefulHour trigger parameter.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -179,6 +189,14 @@ Caterwauling Boggart
 Coalition Relic
 Quirion Sentinel
 Terrarion
+Children of Korlis
+Bloodchief Ascension
+Luminarch Ascension
+Sygg, River Cutthroat
+Tainted Sigil
+Wound Reflection
+Sages of the Anima
+Tomorrow, Azami's Familiar
 
 
 end
