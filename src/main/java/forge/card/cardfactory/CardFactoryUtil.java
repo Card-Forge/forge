@@ -2930,6 +2930,15 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
         }
+        
+        // Count$FatefulHour.<numFH>.numNotFH>
+        if (sq[0].contains("FatefulHour")) {
+            if (cardController.getLife() <= 5) {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
+            } else {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
+            }
+        }
 
         if (sq[0].contains("Threshold")) {
             if (cardController.hasThreshold()) {
