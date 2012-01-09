@@ -1181,6 +1181,8 @@ public class GameAction {
 
         final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(Counters.M1M1) == 0)) && !c.isToken();
 
+        final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(Counters.P1P1) == 0)) && !c.isToken();
+
         final Card newCard = this.moveToGraveyard(c);
 
         // Destroy needs to be called with Last Known Information
@@ -1210,6 +1212,23 @@ public class GameAction {
             };
             persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
             AllZone.getStack().add(persistAb);
+        }
+
+        if (undying) {
+            final Card undyingCard = newCard;
+            final Ability undyingAb = new Ability(undyingCard, "0") {
+
+                @Override
+                public void resolve() {
+                    if (AllZone.getZoneOf(undyingCard).is(Constant.Zone.Graveyard)) {
+                        final PlayerZone ownerPlay = undyingCard.getOwner().getZone(Constant.Zone.Battlefield);
+                        final Card card = GameAction.this.moveTo(ownerPlay, undyingCard);
+                        card.addCounter(Counters.P1P1, 1);
+                    }
+                }
+            };
+            undyingAb.setStackDescription(newCard.getName() + " - Returning from Undying");
+            AllZone.getStack().add(undyingAb);
         }
         return true;
     } // sacrificeDestroy()
