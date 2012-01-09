@@ -8294,6 +8294,7 @@ res/cardsfolder/s/subversion.txt svneol=native#text/plain
 res/cardsfolder/s/sudden_death.txt svneol=native#text/plain
 res/cardsfolder/s/sudden_impact.txt svneol=native#text/plain
 res/cardsfolder/s/sudden_shock.txt svneol=native#text/plain
+res/cardsfolder/s/sudden_spoiling.txt -text
 res/cardsfolder/s/sudden_strength.txt svneol=native#text/plain
 res/cardsfolder/s/suffer_the_past.txt svneol=native#text/plain
 res/cardsfolder/s/suffocating_blast.txt svneol=native#text/plain
