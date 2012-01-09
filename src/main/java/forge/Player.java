@@ -53,6 +53,9 @@ public abstract class Player extends GameEntity {
 
     /** The life. */
     private int life;
+    
+    /** The life this player started the game with. */
+    private int startingLife;
 
     /** The assigned damage. */
     private int assignedDamage;
@@ -258,6 +261,16 @@ public abstract class Player extends GameEntity {
         this.updateObservers();
         return change;
     }
+    
+    /**
+     * Sets the starting life for a game. Should only be called from newGame()'s.
+     * 
+     * @param startLife
+     *              a int.
+     */
+    public final void setStartingLife(final int startLife) {
+        this.startingLife = this.life = startLife;
+    }
 
     /**
      * <p>
@@ -268,6 +281,17 @@ public abstract class Player extends GameEntity {
      */
     public final int getLife() {
         return this.life;
+    }
+    
+    /**
+     * <p>
+     * Getter for the field <code>startingLife</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getStartingLife() {
+        return this.startingLife;
     }
 
     /**

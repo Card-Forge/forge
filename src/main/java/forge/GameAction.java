@@ -1314,8 +1314,8 @@ public class GameAction {
             final CardList computer, final int humanLife, final int computerLife, final QuestEvent qe) {
         this.newGame(humanDeck, computerDeck);
 
-        AllZone.getComputerPlayer().setLife(computerLife, null);
-        AllZone.getHumanPlayer().setLife(humanLife, null);
+        AllZone.getComputerPlayer().setStartingLife(computerLife);
+        AllZone.getHumanPlayer().setStartingLife(humanLife);
 
         for (final Card c : human) {
 
@@ -1347,6 +1347,9 @@ public class GameAction {
         // AllZone.getComputer() = new ComputerAI_Input(new
         // ComputerAI_General());
         Constant.Quest.FANTASY_QUEST[0] = false;
+        
+        AllZone.getComputerPlayer().setStartingLife(20);
+        AllZone.getHumanPlayer().setStartingLife(20);
 
         AllZone.newGameCleanup();
         this.canShowWinLose = true;

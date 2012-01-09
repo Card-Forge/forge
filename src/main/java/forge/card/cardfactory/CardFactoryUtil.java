@@ -2832,6 +2832,16 @@ public class CardFactoryUtil {
             }
             return CardFactoryUtil.doXMath(n, m, c);
         }
+        
+        // Count$YourStartingLife
+        if (sq[0].contains("YourStartingLife")) {
+            return CardFactoryUtil.doXMath(cardController.getStartingLife(), m, c);
+        }
+        
+        // Count$OppStartingLife
+        if (sq[0].contains("OppStartingLife")) {
+            return CardFactoryUtil.doXMath(oppController.getStartingLife(), m, c);
+        }
 
         // Count$YourLifeTotal
         if (sq[0].contains("YourLifeTotal")) {
