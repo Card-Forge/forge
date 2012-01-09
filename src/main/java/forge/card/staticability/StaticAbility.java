@@ -384,7 +384,7 @@ public class StaticAbility {
         if ((effectZone != null) && (!this.hostCard.isInZone(effectZone) || this.hostCard.isPhasedOut())) {
             return false;
         }
-        
+
         if (this.mapParams.containsKey("FatefulHour") && controller.getLife() > 5) {
             return false;
         }

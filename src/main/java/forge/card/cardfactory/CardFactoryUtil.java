@@ -2832,12 +2832,12 @@ public class CardFactoryUtil {
             }
             return CardFactoryUtil.doXMath(n, m, c);
         }
-        
+
         // Count$YourStartingLife
         if (sq[0].contains("YourStartingLife")) {
             return CardFactoryUtil.doXMath(cardController.getStartingLife(), m, c);
         }
-        
+
         // Count$OppStartingLife
         if (sq[0].contains("OppStartingLife")) {
             return CardFactoryUtil.doXMath(oppController.getStartingLife(), m, c);
@@ -2940,7 +2940,7 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
         }
-        
+
         // Count$FatefulHour.<numFH>.numNotFH>
         if (sq[0].contains("FatefulHour")) {
             if (cardController.getLife() <= 5) {

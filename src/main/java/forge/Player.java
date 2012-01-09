@@ -53,13 +53,13 @@ public abstract class Player extends GameEntity {
 
     /** The life. */
     private int life;
-    
+
     /** The life this player started the game with. */
     private int startingLife;
 
     /** The assigned damage. */
     private int assignedDamage;
-    
+
     /** The life lost this turn. */
     private int lifeLostThisTurn = 0;
 
@@ -261,7 +261,7 @@ public abstract class Player extends GameEntity {
         this.updateObservers();
         return change;
     }
-    
+
     /**
      * Sets the starting life for a game. Should only be called from newGame()'s.
      * 
@@ -282,7 +282,7 @@ public abstract class Player extends GameEntity {
     public final int getLife() {
         return this.life;
     }
-    
+
     /**
      * <p>
      * Getter for the field <code>startingLife</code>.
