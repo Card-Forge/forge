@@ -29,10 +29,11 @@ import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 
-//handles "until next upkeep", "until your next upkeep" and "at beginning of upkeep" commands from cards
 /**
  * <p>
- * Upkeep class.
+ * The Upkeep class handles ending effects with "until your next upkeep" and "until next upkeep".
+ * 
+ * It also handles hardcoded triggers "At the beginning of upkeep".
  * </p>
  * 
  * @author Forge
@@ -45,7 +46,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * addUntil.
+     * Add a Command that will terminate an effect with "until <Player's> next upkeep".
      * </p>
      * 
      * @param p
@@ -67,7 +68,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * executeUntil.
+     * Executes the termination of effects that apply "until <Player's> next upkeep".
      * </p>
      * 
      * @param p
@@ -77,17 +78,6 @@ public class Upkeep implements java.io.Serializable {
         if (this.until.containsKey(p)) {
             this.execute(this.until.get(p));
         }
-    }
-
-    /**
-     * <p>
-     * sizeUntil.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int sizeUntil() {
-        return this.until.size();
     }
 
     private void execute(final CommandList c) {
@@ -100,7 +90,9 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * executeAt.
+     * Handles all the hardcoded events that happen at the beginning of each Upkeep Phase.
+     * 
+     * This will freeze the Stack at the start, and unfreeze the Stack at the end.
      * </p>
      */
     public final void executeAt() {
@@ -161,7 +153,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Braid_Of_Fire.
+     * upkeepBraidOfFire.
      * </p>
      */
     private static void upkeepBraidOfFire() {
@@ -197,11 +189,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
 
         }
-    } // upkeep_Braid_of_Fire
+    } // upkeepBraidOfFire
 
     /**
      * <p>
-     * upkeep_Echo.
+     * upkeepEcho.
      * </p>
      */
     private static void upkeepEcho() {
@@ -259,7 +251,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Slowtrips. Draw a card at the beginning of the next turn's upkeep.
+     * upkeepSlowtrips. Draw a card at the beginning of the next turn's upkeep.
      * </p>
      */
     private static void upkeepSlowtrips() {
@@ -313,7 +305,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_UpkeepCost.
+     * upkeepUpkeepCost.
      * </p>
      */
     private static void upkeepUpkeepCost() {
@@ -498,7 +490,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_The_Abyss.
+     * upkeepTheAbyss.
      * </p>
      */
     private static void upkeepTheAbyss() {
@@ -575,7 +567,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Yawgmoth_Demon.
+     * upkeepYawgmothDemon.
      * </p>
      */
     private static void upkeepYawgmothDemon() {
@@ -649,7 +641,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Lord_of_the_Pit.
+     * upkeepLordOfThePit.
      * </p>
      */
     private static void upkeepLordOfThePit() {
@@ -715,11 +707,11 @@ public class Upkeep implements java.io.Serializable {
 
             }
         } // end for
-    } // upkeep_Lord_of_the_Pit()
+    } // upkeepLordOfThePit()
 
     /**
      * <p>
-     * upkeep_Drop_of_Honey.
+     * upkeepDropOfHoney.
      * </p>
      */
     private static void upkeepDropOfHoney() {
@@ -790,11 +782,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // end for
-    } // upkeep_Drop_of_Honey()
+    } // upkeepDropOfHoney()
 
     /**
      * <p>
-     * upkeep_Demonic_Hordes.
+     * upkeepDemonicHordes.
      * </p>
      */
     private static void upkeepDemonicHordes() {
@@ -879,7 +871,7 @@ public class Upkeep implements java.io.Serializable {
 
         } // end for loop
 
-    } // upkeep_Demonic_Hordes
+    } // upkeepDemonicHordes
 
     // ///////////////////////
     // Start of Kinship cards
@@ -887,7 +879,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Ink_Dissolver.
+     * upkeepInkDissolver.
      * </p>
      */
     private static void upkeepInkDissolver() {
@@ -970,11 +962,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Ink_Dissolver()
+    } // upkeepInkDissolver()
 
     /**
      * <p>
-     * upkeep_Kithkin_Zephyrnaut.
+     * upkeepKithkinZephyrnaut.
      * </p>
      */
     private static void upkeepKithkinZephyrnaut() {
@@ -1072,11 +1064,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Kithkin_Zephyrnaut()
+    } // upkeepKithkinZephyrnaut()
 
     /**
      * <p>
-     * upkeep_Leaf_Crowned_Elder.
+     * upkeepLeafCrownedElder.
      * </p>
      */
     private static void upkeepLeafCrownedElder() {
@@ -1172,11 +1164,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Leaf_Crowned_Elder()
+    } // upkeepLeafCrownedElder()
 
     /**
      * <p>
-     * upkeep_Mudbutton_Clanger.
+     * upkeepMudbuttonClanger.
      * </p>
      */
     private static void upkeepMudbuttonClanger() {
@@ -1269,11 +1261,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Mudbutton_Clanger()
+    } // upkeepMudbuttonClanger()
 
     /**
      * <p>
-     * upkeep_Nightshade_Schemers.
+     * upkeepNightshadeSchemers.
      * </p>
      */
     private static void upkeepNightshadeSchemers() {
@@ -1354,11 +1346,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Nightshade_Schemers()
+    } // upkeepNightshadeSchemers()
 
     /**
      * <p>
-     * upkeep_Pyroclast_Consul.
+     * upkeepPyroclastConsul.
      * </p>
      */
     private static void upkeepPyroclastConsul() {
@@ -1453,11 +1445,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Pyroclast_Consul()
+    } // upkeepPyroclastConsul()
 
     /**
      * <p>
-     * upkeep_Sensation_Gorger.
+     * upkeepSensationGorger.
      * </p>
      */
     private static void upkeepSensationGorger() {
@@ -1545,11 +1537,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Sensation_Gorger()
+    } // upkeepSensationGorger()
 
     /**
      * <p>
-     * upkeep_Squeaking_Pie_Grubfellows.
+     * upkeepSqueakingPieGrubfellows.
      * </p>
      */
     private static void upkeepSqueakingPieGrubfellows() {
@@ -1631,11 +1623,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Squeaking_Pie_Grubfellows()
+    } // upkeepSqueakingPieGrubfellows()
 
     /**
      * <p>
-     * upkeep_Wandering_Graybeard.
+     * upkeepWanderingGraybeard.
      * </p>
      */
     private static void upkeepWanderingGraybeard() {
@@ -1715,11 +1707,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Wandering_Graybeard()
+    } // upkeepWanderingGraybeard()
 
     /**
      * <p>
-     * upkeep_Waterspout_Weavers.
+     * upkeepWaterspoutWeavers.
      * </p>
      */
     private static void upkeepWaterspoutWeavers() {
@@ -1820,11 +1812,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Waterspout_Weavers()
+    } // upkeepWaterspoutWeavers()
 
     /**
      * <p>
-     * upkeep_Winnower_Patrol.
+     * upkeepWinnowerPatrol.
      * </p>
      */
     private static void upkeepWinnowerPatrol() {
@@ -1904,11 +1896,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Winnower_Patrol()
+    } // upkeepWinnowerPatrol()
 
     /**
      * <p>
-     * upkeep_Wolf_Skull_Shaman.
+     * upkeepWolfSkullShaman.
      * </p>
      */
     private static void upkeepWolfSkullShaman() {
@@ -1999,43 +1991,10 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Dark_Confidant.
+     * upkeepSuspend.
      * </p>
      */
-    /*
-     * private static void upkeep_Dark_Confidant() { final Player player =
-     * AllZone.getPhase().getPlayerTurn();
-     * 
-     * CardList list = player.getCardsIn(Zone.Battlefield); list =
-     * list.filter(new CardListFilter() { public boolean addCard(final Card c) {
-     * return c.getName().equals("Dark Confidant") ||
-     * c.getName().equals("Dark Tutelage"); } });
-     * 
-     * Ability ability; for (int i = 0; i < list.size(); i++) { final Card fCard
-     * = list.get(i); ability = new Ability(fCard, "0") {
-     * 
-     * @Override public void resolve() { CardList lib =
-     * AllZoneUtil.getPlayerCardsInLibrary(player); if (lib.size() > 0) { Card
-     * toMove = lib.get(0); AllZone.getGameAction().moveToHand(toMove);
-     * player.loseLife(toMove.getCMC(), fCard); } } // resolve() }; // Ability
-     * 
-     * StringBuilder sb = new StringBuilder();
-     * sb.append(fCard).append(" - ").append( "At the beginning of your upkeep,
-     * reveal the top card of your library and put that card into your hand. You
-     * lose life equal to its converted mana cost." );
-     * ability.setStackDescription(sb.toString());
-     * 
-     * AllZone.getStack().addSimultaneousStackEntry(ability);
-     * 
-     * } // for } // upkeep_Dark_Confidant()
-     */
-
-    /**
-     * <p>
-     * upkeep_Suspend.
-     * </p>
-     */
-    public static void upkeepSuspend() {
+    private static void upkeepSuspend() {
         final Player player = AllZone.getPhase().getPlayerTurn();
 
         CardList list = player.getCardsIn(Zone.Exile);
@@ -2061,7 +2020,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Vanishing.
+     * upkeepVanishing.
      * </p>
      */
     private static void upkeepVanishing() {
@@ -2097,7 +2056,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Fading.
+     * upkeepFading.
      * </p>
      */
     private static void upkeepFading() {
@@ -2138,7 +2097,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Oath_of_Druids.
+     * upkeepOathOfDruids.
      * </p>
      */
     private static void upkeepOathOfDruids() {
@@ -2215,11 +2174,11 @@ public class Upkeep implements java.io.Serializable {
 
             }
         }
-    } // upkeep_Oath of Druids()
+    } // upkeepOathOfDruids()
 
     /**
      * <p>
-     * upkeep_Oath_of_Ghouls.
+     * upkeepOathOfGhouls.
      * </p>
      */
     private static void upkeepOathOfGhouls() {
@@ -2268,7 +2227,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Karma.
+     * upkeepKarma.
      * </p>
      */
     private static void upkeepKarma() {
@@ -2303,11 +2262,11 @@ public class Upkeep implements java.io.Serializable {
                 }
             }
         } // if
-    } // upkeep_Karma()
+    } // upkeepKarma()
 
     /**
      * <p>
-     * upkeep_Dega_Sanctuary.
+     * upkeepDegaSanctuary.
      * </p>
      */
     private static void upkeepDegaSanctuary() {
@@ -2342,11 +2301,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Dega_Sanctuary()
+    } // upkeepDegaSanctuary()
 
     /**
      * <p>
-     * upkeep_Ceta_Sanctuary.
+     * upkeepCetaSanctuary.
      * </p>
      */
     private static void upkeepCetaSanctuary() {
@@ -2387,11 +2346,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Ceta_Sanctuary()
+    } // upkeepCetaSanctuary()
 
     /**
      * <p>
-     * upkeep_Power_Surge.
+     * upkeepPowerSurge.
      * </p>
      */
     private static void upkeepPowerSurge() {
@@ -2421,11 +2380,11 @@ public class Upkeep implements java.io.Serializable {
                 AllZone.getStack().addSimultaneousStackEntry(ability);
             }
         } // for
-    } // upkeep_Power_Surge()
+    } // upkeepPowerSurge()
 
     /**
      * <p>
-     * upkeep_Vesuvan_Doppelganger_Keyword.
+     * upkeepVesuvanDoppelgangerKeyword.
      * </p>
      */
     private static void upkeepVesuvanDoppelgangerKeyword() {
@@ -2513,11 +2472,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // foreach(Card)
-    } // upkeep_Vesuvan_Doppelganger_Keyword
+    } // upkeepVesuvanDoppelgangerKeyword
 
     /**
      * <p>
-     * upkeep_Tangle_Wire.
+     * upkeepTangleWire.
      * </p>
      */
     private static void upkeepTangleWire() {
@@ -2579,11 +2538,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // foreach(wire)
-    } // upkeep_Tangle_Wire()
+    } // upkeepTangleWire()
 
     /**
      * <p>
-     * upkeep_Masticore.
+     * upkeepMasticore.
      * </p>
      */
     private static void upkeepMasticore() {
@@ -2650,11 +2609,11 @@ public class Upkeep implements java.io.Serializable {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         } // for
-    } // upkeep_Masticore
+    } // upkeepMasticore
 
     /**
      * <p>
-     * upkeep_Eldrazi_Monument.
+     * upkeepEldraziMonument.
      * </p>
      */
     private static void upkeepEldraziMonument() {
@@ -2698,11 +2657,11 @@ public class Upkeep implements java.io.Serializable {
 
         }
 
-    } // upkeep_Eldrazi_Monument
+    } // upkeepEldraziMonument
 
     /**
      * <p>
-     * upkeep_Blaze_Counters.
+     * upkeepBlazeCounters.
      * </p>
      */
     private static void upkeepBlazeCounters() {
@@ -2737,7 +2696,7 @@ public class Upkeep implements java.io.Serializable {
 
     /**
      * <p>
-     * upkeep_Carnophage.
+     * upkeepCarnophage.
      * </p>
      */
     private static void upkeepCarnophage() {
@@ -2765,11 +2724,11 @@ public class Upkeep implements java.io.Serializable {
                 }
             }
         }
-    } // upkeep_Carnophage
+    } // upkeepCarnophage
 
     /**
      * <p>
-     * upkeep_Sangrophage.
+     * upkeepSangrophage.
      * </p>
      */
     private static void upkeepSangrophage() {
@@ -2797,6 +2756,6 @@ public class Upkeep implements java.io.Serializable {
                 }
             }
         }
-    } // upkeep_Carnophage
+    } // upkeepSangrophage
 
 } // end class Upkeep
