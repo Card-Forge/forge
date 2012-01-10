@@ -1,6 +1,6 @@
 Name:Hedron-Field Purists
 ManaCost:2 W
-Types:Creature Cleric
+Types:Creature Human Cleric
 Text:no text
 PT:0/3
 K:Level up:2 W
