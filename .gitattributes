@@ -3818,6 +3818,7 @@ res/cardsfolder/h/heavy_ballista.txt svneol=native#text/plain
 res/cardsfolder/h/heavy_fog.txt -text
 res/cardsfolder/h/hedge_troll.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_crab.txt svneol=native#text/plain
+res/cardsfolder/h/hedron_field_purists.txt -text
 res/cardsfolder/h/hedron_matrix.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_rover.txt svneol=native#text/plain
 res/cardsfolder/h/hedron_scrabbler.txt svneol=native#text/plain
