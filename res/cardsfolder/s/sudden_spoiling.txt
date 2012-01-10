@@ -7,4 +7,5 @@ A:SP$ AnimateAll | Cost$ 1 B B | ValidTgts$ Player | TgtPrompt$ Select target pl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_spoiling.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/135.jpg
 End
