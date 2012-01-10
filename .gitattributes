@@ -9225,6 +9225,7 @@ res/cardsfolder/v/vensers_sliver.txt svneol=native#text/plain
 res/cardsfolder/v/vent_sentinel.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_catacombs.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_eidolon.txt svneol=native#text/plain
+res/cardsfolder/v/verdant_embrace.txt -text
 res/cardsfolder/v/verdant_field.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_force.txt svneol=native#text/plain
 res/cardsfolder/v/verdant_touch.txt svneol=native#text/plain
