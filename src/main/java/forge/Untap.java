@@ -36,7 +36,7 @@ public class Untap implements java.io.Serializable {
 
     /**
      * <p>
-     * addUntil.
+     * Add a Command that will terminate an effect with "until <Player's> next untap".
      * </p>
      * 
      * @param p
@@ -58,7 +58,7 @@ public class Untap implements java.io.Serializable {
 
     /**
      * <p>
-     * executeUntil.
+     * Executes the termination of effects that apply "until <Player's> next untap".
      * </p>
      * 
      * @param p
@@ -68,17 +68,6 @@ public class Untap implements java.io.Serializable {
         if (this.until.containsKey(p)) {
             this.execute(this.until.get(p));
         }
-    }
-
-    /**
-     * <p>
-     * sizeUntil.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int sizeUntil() {
-        return this.until.size();
     }
 
     private void execute(final CommandList c) {
@@ -91,7 +80,9 @@ public class Untap implements java.io.Serializable {
 
     /**
      * <p>
-     * executeAt.
+     * Handles all the hardcoded events that happen at the beginning of each Untap Phase.
+     * 
+     * This will freeze the Stack at the start, and unfreeze the Stack at the end.
      * </p>
      */
     public final void executeAt() {
