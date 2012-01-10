@@ -25,7 +25,6 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
@@ -284,35 +283,18 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    final CardList c = this.getCreature();
-                    if (c.isEmpty()) {
+                    final CardList cl = CardFactoryUtil.getHumanCreatureAI(2, this, true);
+                    if (cl.isEmpty()) {
                         return false;
-                    } else {
-                        this.setTargetCard(c.get(0));
-                        return true;
                     }
+                    Card best = CardFactoryUtil.getBestCreatureAI(cl);
+                    // don't target a creature that would hurt your own
+                    if (!AllZone.getComputerPlayer().getCardsIn(Constant.Zone.Battlefield, best.getName()).isEmpty()) {
+                        return false;
+                    }
+                    this.setTargetCard(best);
+                    return true;
                 } // canPlayAI()
-
-                CardList getCreature() {
-                    final CardList out = new CardList();
-                    final CardList list = CardFactoryUtil.getHumanCreatureAI("Flying", this, true);
-                    list.shuffle();
-
-                    for (int i = 0; i < list.size(); i++) {
-                        if ((list.get(i).getNetAttack() >= 2) && (list.get(i).getNetDefense() <= 2)) {
-                            out.add(list.get(i));
-                        }
-                    }
-
-                    // in case human player only has a few creatures in play,
-                    // target anything
-                    if (out.isEmpty() && (0 < CardFactoryUtil.getHumanCreatureAI(2, this, true).size())
-                            && (3 > CardFactoryUtil.getHumanCreatureAI(this, true).size())) {
-                        out.addAll(CardFactoryUtil.getHumanCreatureAI(2, this, true));
-                        CardListUtil.sortFlying(out);
-                    }
-                    return out;
-                } // getCreature()
 
                 @Override
                 public void resolve() {
