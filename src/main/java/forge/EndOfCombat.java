@@ -17,10 +17,9 @@
  */
 package forge;
 
-//handles "until end of combat" and "at end of combat" commands from cards
 /**
  * <p>
- * EndOfCombat class.
+ * Handles "until end of combat" effects and "at end of combat" hardcoded triggers.
  * </p>
  * 
  * @author Forge
@@ -36,7 +35,7 @@ public class EndOfCombat implements java.io.Serializable {
 
     /**
      * <p>
-     * addAt.
+     * Add a hardcoded trigger that will execute "at end of combat".
      * </p>
      * 
      * @param c
@@ -48,7 +47,7 @@ public class EndOfCombat implements java.io.Serializable {
 
     /**
      * <p>
-     * addUntil.
+     * Add a Command that will terminate an effect with "until end of combat".
      * </p>
      * 
      * @param c
@@ -60,43 +59,20 @@ public class EndOfCombat implements java.io.Serializable {
 
     /**
      * <p>
-     * executeAt.
+     * Executes any hardcoded triggers that happen "at end of combat".
      * </p>
      */
     public final void executeAt() {
-        // AllZone.getStateBasedEffects().rePopulateStateBasedList();
         this.execute(this.at);
-    } // executeAt()
+    }
 
     /**
      * <p>
-     * executeUntil.
+     * Executes the termination of effects that apply "until end of combat".
      * </p>
      */
     public final void executeUntil() {
         this.execute(this.until);
-    }
-
-    /**
-     * <p>
-     * sizeAt.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int sizeAt() {
-        return this.at.size();
-    }
-
-    /**
-     * <p>
-     * sizeUntil.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int sizeUntil() {
-        return this.until.size();
     }
 
     /**
