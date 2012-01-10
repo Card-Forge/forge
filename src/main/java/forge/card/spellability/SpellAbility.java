@@ -127,7 +127,7 @@ public abstract class SpellAbility {
         }
     };
 
-    private CardList tappedForConvoke = null;
+    private CardList tappedForConvoke = new CardList();
 
     /**
      * <p>
