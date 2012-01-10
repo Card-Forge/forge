@@ -109,33 +109,6 @@ public final class Constant {
         }
     }
 
-    // public interface IO {
-    // probably should read this from a file, or set from GUI
-
-    // public static final String deckFile = "all-decks2";
-    // public static final String boosterDeckFile = "booster-decks";
-
-    // public static final String imageBaseDir = "pics";
-
-    // public static final ImageIcon upIcon = new ImageIcon("up.gif");
-    // public static final ImageIcon downIcon = new ImageIcon("down.gif");
-    // public static final ImageIcon leftIcon = new ImageIcon("left.gif");
-    // public static final ImageIcon rightIcon = new ImageIcon("right.gif");
-    // }
-
-    /**
-     * The Interface Ability.
-     */
-    /*
-     * public interface Ability {
-     *//** The Triggered. */
-    /*
-     * String TRIGGERED = "Triggered";
-     *//** The Activated. */
-    /*
-     * String ACTIVATED = "Activated"; }
-     */
-
     /**
      * The Interface Phase.
      */
@@ -294,8 +267,6 @@ public final class Constant {
 
         /** The loaded. */
         public static final boolean[] LOADED = { false };
-        // public static final Constant_StringHashMap[] LandColor = new
-        // Constant_StringHashMap[1];
 
         /** The Basic lands. */
         public static final String[] BASIC_LANDS = { "Plains", "Island", "Swamp", "Mountain", "Forest" };

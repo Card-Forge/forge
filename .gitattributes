@@ -10643,7 +10643,6 @@ src/main/java/forge/ComputerUtilAttack.java svneol=native#text/plain
 src/main/java/forge/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/Constant.java svneol=native#text/plain
 src/main/java/forge/ConstantStringArrayList.java svneol=native#text/plain
-src/main/java/forge/ConstantStringHashMap.java svneol=native#text/plain
 src/main/java/forge/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/Counters.java svneol=native#text/plain
 src/main/java/forge/DefaultPlayerZone.java svneol=native#text/plain
