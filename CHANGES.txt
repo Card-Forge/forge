@@ -154,6 +154,31 @@ Sulfuric Vortex
 - Added Count$<Your/Opp>StartingLife.
 - Added FatefulHour trigger parameter.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Minor card text fix for Gibbering Descent.
+- Continuous static abilities with "RemoveAllAbilities" will now also remove replacement abilities.
+- Ran Oracle and setInfo scripts
+- Added Damia, Sage of Stone to relevant section in PhaseUtil.java. (I initially thought the draw skip was Keyworded due to Psychic Possession script)
+- Updated two SVars.
+- creating branch for Dark Ascension pre-release scripts
+- Bugfix: "ghost animation" for cards in hand after starting a new game
+- Improved the AI of Echoing Decay.
+- Updated some SVars.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+
+
+Added pre-release cards to DKA cardfolder branch:
+
+Gather the Townsfolk
+Ravenous Demon / Archdemon of Greed
+Faithless Looting
+Mondronen Shaman / Tovolar's Magehunter
+Strangleroot Geist
+Thraben Doomsayer
+Nearheath Stalker
+Zombie Apocalypse
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -197,6 +222,9 @@ Tainted Sigil
 Wound Reflection
 Sages of the Anima
 Tomorrow, Azami's Familiar
+Sudden Spoiling
+Damia, Sage of Stone
+Verdant Embrace
 
 
 end
