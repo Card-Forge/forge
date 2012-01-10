@@ -101,8 +101,14 @@ public class ControlHand {
             public void update(final Observable a, final Object b) {
                 final PlayerZone pZone = (PlayerZone) a;
                 final HandArea p = view.getHandArea();
-
+                final Rectangle rctLibraryLabel = t.getFieldControllers().get(1).getView().getLblLibrary().getBounds();
                 final Card[] c = pZone.getCards();
+
+                // Animation starts from the library label.
+                // This check prevents animation running if label hasn't been realised yet.
+                if (rctLibraryLabel.isEmpty()) {
+                    return;
+                }
 
                 List<Card> tmp, diff;
                 tmp = new ArrayList<Card>();
@@ -123,9 +129,9 @@ public class ControlHand {
 
                 JLayeredPane layeredPane = SwingUtilities.getRootPane(t.getTopLevelFrame()).getLayeredPane();
                 int fromZoneX = 0, fromZoneY = 0;
-                final Rectangle pb = t.getFieldControllers().get(1).getView().getLblLibrary().getBounds();
+
                 final Point zoneLocation = SwingUtilities.convertPoint(t.getFieldControllers().get(1).getView().getLblLibrary(),
-                        Math.round(pb.width / 2.0f), Math.round(pb.height / 2.0f), layeredPane);
+                        Math.round(rctLibraryLabel.width / 2.0f), Math.round(rctLibraryLabel.height / 2.0f), layeredPane);
                 fromZoneX = zoneLocation.x;
                 fromZoneY = zoneLocation.y;
                 int startWidth, startX, startY;
