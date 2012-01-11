@@ -302,7 +302,7 @@ public class DeckLister extends JPanel {
             String[] children = dir.list();
 
             for (int i = 0; i < children.length; i++) {
-                new File(dir.getAbsolutePath() + "\\" + children[i]).delete();
+                new File(dir.getAbsolutePath() + File.separator + children[i]).delete();
             }
 
             dir.delete();
