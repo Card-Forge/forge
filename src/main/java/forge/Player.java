@@ -2367,6 +2367,10 @@ public abstract class Player extends GameEntity {
             if (!source.getRemembered().contains(this)) {
                 return false;
             }
+        } else if (property.startsWith("EnchantedBy")) {
+            if (!this.getEnchantedBy().contains(source)) {
+                return false;
+            }
         }
 
         return true;
