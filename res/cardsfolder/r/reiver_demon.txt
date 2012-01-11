@@ -4,8 +4,7 @@ Types:Creature Demon
 Text:no text
 PT:6/6
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Hand | Destination$ Stack | Static$ True | DelayedTrigger$ CastFromHand | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.
-SVar:CastFromHand:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Stack | Destination$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.nonArtifact+nonBlack | NoRegen$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

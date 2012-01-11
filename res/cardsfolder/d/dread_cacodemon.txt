@@ -3,8 +3,7 @@ ManaCost:7 B B B
 Types:Creature Demon
 Text:no text
 PT:8/8
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Hand | Destination$ Stack | Static$ True | DelayedTrigger$ CastFromHand | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
-SVar:CastFromHand:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Stack | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.YouDontCtrl | SubAbility$ DBTapAll
 SVar:DBTapAll:DB$TapAll | ValidCards$ Creature.YouCtrl+Other
 SVar:RemAIDeck:True

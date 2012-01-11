@@ -68,6 +68,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean isDoubleFaced = false;
     private boolean isFlip = false;
+    
+    private Zone castFrom = null;
 
     /**
      * Instantiates a new card.
@@ -2767,6 +2769,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
+            }
+            if(keyword.equals("Rebound")) {
+                sb.append(keyword).append("\r\n");
             }
         }
         return sb;
@@ -7172,6 +7177,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!b) {
                 return false;
             }
+        } else if (property.startsWith("wasCastFrom")) {
+            String strZone = property.substring(11);
+            Zone realZone = Constant.Zone.smartValueOf(strZone);
+            if(realZone != this.getCastFrom()) {
+                return false;
+            }
+        } else if (property.startsWith("wasNotCastFrom")) {
+            String strZone = property.substring(14);
+            Zone realZone = Constant.Zone.smartValueOf(strZone);
+            if(realZone == this.getCastFrom()) {
+                return false;
+            }
         } else {
             if (property.equals("ChosenType")) {
                 if (!this.isType(source.getChosenType())) {
@@ -8703,6 +8720,22 @@ public class Card extends GameEntity implements Comparable<Card> {
         ReplacementEffect replacementEffectCopy = replacementEffect.getCopy();
         replacementEffectCopy.setHostCard(this);
         this.getCharacteristics().getReplacementEffects().add(replacementEffectCopy);
+    }
+
+    /**
+     * Returns what zone this card was cast from (from what zone it was moved to the stack)
+     * 
+     * @return the castFrom
+     */
+    public Zone getCastFrom() {
+        return castFrom;
+    }
+
+    /**
+     * @param castFrom0 the castFrom to set
+     */
+    public void setCastFrom(Zone castFrom0) {
+        this.castFrom = castFrom0;
     }
 
 } // end Card class

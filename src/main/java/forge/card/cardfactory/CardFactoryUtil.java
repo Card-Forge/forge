@@ -2931,13 +2931,24 @@ public class CardFactoryUtil {
             }
         }
 
-        // Count$FatefulHour.<numFH>.numNotFH>
+        // Count$FatefulHour.<numFH>.<numNotFH>
         if (sq[0].contains("FatefulHour")) {
             if (cardController.getLife() <= 5) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
             }
+        }
+        
+        // Count$wasCastFrom<Zone>.<true>.<false>
+        if (sq[0].startsWith("wasCastFrom")) {
+            String strZone = sq[0].substring(11);
+            Zone realZone = Zone.smartValueOf(strZone);
+            if(c.getCastFrom() == realZone) {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
+            } else {
+                return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
+            }            
         }
 
         if (sq[0].contains("Threshold")) {
