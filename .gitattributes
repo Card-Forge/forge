@@ -3574,6 +3574,7 @@ res/cardsfolder/g/gravespawn_sovereign.txt svneol=native#text/plain
 res/cardsfolder/g/graveyard_shovel.txt -text
 res/cardsfolder/g/gravitational_shift.txt svneol=native#text/plain
 res/cardsfolder/g/gravity_sphere.txt -text
+res/cardsfolder/g/gravity_well.txt -text
 res/cardsfolder/g/gray_ogre.txt svneol=native#text/plain
 res/cardsfolder/g/graypelt_hunter.txt svneol=native#text/plain
 res/cardsfolder/g/graypelt_refuge.txt svneol=native#text/plain
