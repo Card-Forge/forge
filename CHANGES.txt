@@ -167,6 +167,46 @@ Sulfuric Vortex
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Chancellor of the Dross.
+- Fixed Chancellor of the Forge.
+- Fixed Chancellor of the Tangle.
+- delete unused class ConstantStringHashMap
+- javadoc and comment fixes in Upkeep.java
+- flesh out javadoc in Untap.java
+- flesh out javadoc in EndCombat.java
+- Little card script updates.
+- Fixed Convoke throwing an error when no creature has been tapped.
+- Fixed icon display in player fields for quest and regular match play.
+- added EYEBALL to counters enumeration list
+- fixing Quest and regular match player avatars. Please be careful to not hard-code Windows-specific things.
+- fix some code that was OS-specific in DeckLister.java
+- move some code to EndOfTurn and flesh out javadoc in EndOfTurn.java
+- adding EnchantedBy check to Player.hasProperty method
+- added STRIFE to counters enum list
+- updated Daybreak Coronet to use the more general AttachedTo. Removed "AllAurasEnchanting" from CardFactoryUtil.xCount method.
+- DKA branch: Updated Falkenrath Aristocrat to use ConditionCheckSVar, and added rarity info to some of the scripts.
+- Improved scripts for Ebon Praetor and for Lyzolda, the Blood Witch
+- Added wasCastFrom<Zone> card property. It is set when the card is moved to the stack and cleared whenever it is moved anywhere else except from the stack to the battlefield(for Myojins,Phage,Iname, Epochrasite etc...)
+- Added wasNotCastFrom<Zone> as well, doi.
+- Added Count$wasCastFrom<Zone>.<truevalue>.<falsevalue>
+- Converted:
+Burning Vengeance
+Coal Stoker
+Dread Cacodemon
+Furnace Dragon
+Hypnox
+Iname as One
+Myojin of Cleansing Fire
+Myojin of Infinite Rage
+Myojin of Life's Web
+Myojin of Night's Reach
+Myojin of Seeing Winds
+Reiver Demon
+- Added Rebound keyword.
+- Fixed wasCastFrom's interaction with tokens.
+- Fixed visual artifacts bug on semi-transparent buttons and panels in home screen.
+- Fixed name (Nomad's Assembly -> Nomads' Assembly)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -179,6 +219,15 @@ Strangleroot Geist
 Thraben Doomsayer
 Nearheath Stalker
 Zombie Apocalypse
+Chalice of Life / Chalice of Death
+Gravecrawler
+Hunger of the Howlpack
+Jar of Eyeballs
+Ghoultree
+Drogskol Reaver
+Curse of Thirst
+Falkenrath Aristocrat
+Increasing Devotion
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -225,6 +274,19 @@ Tomorrow, Azami's Familiar
 Sudden Spoiling
 Damia, Sage of Stone
 Verdant Embrace
+Hoarding Dragon
+Hedron-Field Purists
+Crescendo of War
+Cast Through Time
+Consuming Vapors
+Distortion Strike
+Emerge Unscathed
+Nomads' Assembly
+Prey's Vengeance
+Staggershock
+Surreal Memoir
+Survival Cache
+Virulent Swipe
 
 
 end
