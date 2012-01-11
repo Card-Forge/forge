@@ -29,6 +29,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
@@ -38,6 +39,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
 import forge.card.spellability.TargetSelection;
+import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.InputPayManaCostAbility;
@@ -991,6 +993,52 @@ public class MagicStack extends MyObservable {
         } else if (sa.isFlashBackAbility()) {
             AllZone.getGameAction().exile(source);
             sa.setFlashBackAbility(false);
+        } else if (source.hasKeyword("Rebound") &&
+                source.getCastFrom() == Zone.Hand &&
+                AllZone.getZoneOf(source).is(Zone.Stack)
+                && source.getOwner().isPlayer(source.getController())) //This may look odd, but it's a provision for when we add Commandeer
+        {
+            
+            //Move rebounding card to exile
+            AllZone.getGameAction().exile(source);
+            
+            //Setup a Rebound-trigger
+            final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() + " without paying it's manacost.", source, true);
+            
+            final AbilityActivated trigAb = new AbilityActivated(source,"0") {
+                
+                private static final long serialVersionUID = 7497175394128633122L;
+
+                @Override
+                public void resolve() {
+                    
+                    //If the card can't be cast because of lack of targets, it remains in exile.
+                    //Provision for Cast Through Time
+                    boolean hasFoundPossibleSA = false;
+                    for(SpellAbility sa : source.getSpells()) {
+                        if(sa.getTarget() == null) {
+                            hasFoundPossibleSA = true;
+                            break; //Untargeted, it can definitely be cast.
+                        }
+                        else {
+                            if(sa.getTarget().hasCandidates(sa, true)) {
+                               hasFoundPossibleSA = true;
+                               break; //Targeted, and has candidates.
+                            }
+                        }
+                    }
+                    if(!hasFoundPossibleSA) {
+                        return;
+                    }
+                    
+                    AllZone.getGameAction().playCardNoCost(source);
+                    AllZone.getGameAction().moveToGraveyard(source);
+                }
+            };
+            
+            reboundTrigger.setOverridingAbility(trigAb);
+            
+            AllZone.getTriggerHandler().registerDelayedTrigger(reboundTrigger);
         }
 
         // If Spell and still on the Stack then let it goto the graveyard or

@@ -1,0 +1,10 @@
+Name:Nomad's Assembly
+ManaCost:4 W W
+Types:Sorcery
+Text:no text
+K:Rebound
+A:SP$ Token | Cost$ 4 W W | TokenAmount$ X | TokenName$ Kor Soldier | TokenTypes$ Creature,Kor,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Kor Soldier creature token onto the battlefield for each creature you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nomads_assembly.jpg
+End

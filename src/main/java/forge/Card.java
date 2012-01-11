@@ -2771,7 +2771,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
             }
             if(keyword.equals("Rebound")) {
-                sb.append(keyword).append("\r\n");
+                sb.append(keyword).append("(If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)\r\n");
             }
         }
         return sb;
