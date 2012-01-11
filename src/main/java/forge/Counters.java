@@ -275,6 +275,9 @@ public enum Counters {
     /** The STORAGE. */
     STORAGE(),
 
+    /** The STRIFE. */
+    STRIFE(),
+
     /** The STUDY. */
     STUDY(),
 
