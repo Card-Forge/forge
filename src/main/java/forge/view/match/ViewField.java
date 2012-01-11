@@ -26,6 +26,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -39,11 +40,15 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.PlayArea;
 import forge.AllZone;
+import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
+import forge.game.GameType;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 import forge.view.GuiTopLevel;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
@@ -72,7 +77,7 @@ public class ViewField extends FRoundedPanel {
 
     private JPanel avatarArea, phaseArea, poolArea;
     private JLabel lblAvatar, lblLife;
-    private Image img;
+    private final Image img;
     private final Color transparent = new Color(0, 0, 0, 0);
 
     /**
@@ -94,8 +99,42 @@ public class ViewField extends FRoundedPanel {
         this.hoverBorder = new LineBorder(this.skin.getColor("borders"), 1);
         this.counter = -1;
 
-        String filename = "res/images/icons/" + (player.isHuman() ? "Mage01.jpg" : "Mage02.jpg");
-        img = new ImageIcon(filename).getImage();
+        /*
+         * 
+        if (AllZone.getQuestData() != null && this.player.isComputer()) {
+            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+            String iconName = "";
+            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
+                iconName = Constant.Quest.OPP_ICON_NAME[0];
+                final File file = new File(base, iconName);
+            }
+        }
+         */
+
+        // Player icon logic
+        String filename;
+        if (player.isHuman()) {
+            filename =  ForgeProps.getFile(NewConstants.IMAGE_ICON) + "\\Mage01.jpg";
+        }
+        else if (Constant.Runtime.getGameType() == GameType.Quest) {
+            filename = ForgeProps.getFile(NewConstants.IMAGE_BASE) + "\\icons\\";
+            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
+                filename += Constant.Quest.OPP_ICON_NAME[0];
+            }
+        }
+        else {
+            filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + "\\Mage02.jpg";
+        }
+
+        // Icon DNE test
+        final File f = new File(filename);
+        final ImageIcon iiTemp;
+
+        iiTemp = (f.exists()
+            ? new ImageIcon(filename)
+            : new ImageIcon(ForgeProps.getFile(NewConstants.IMAGE_BASE) + "\\icons\\Unknown.jpg"));
+
+        this.img = iiTemp.getImage();
 
         // Avatar and life
         avatarArea = new JPanel();
@@ -601,16 +640,6 @@ public class ViewField extends FRoundedPanel {
      */
     public PhaseLabel getLblCleanup() {
         return this.lblCleanup;
-    }
-
-    // ========= Setter methods
-    /**
-     * Sets the image.
-     *
-     * @param i an Image
-     */
-    public void setImage(final Image i) {
-        img = i;
     }
 
     // ========== Custom classes

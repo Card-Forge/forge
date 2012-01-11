@@ -21,13 +21,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.ImageIcon;
 
 import net.slightlymagic.braids.util.ImmutableIterableFrom;
 
@@ -46,9 +43,9 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
-import forge.gui.input.InputMana;
 import forge.gui.input.InputAttack;
 import forge.gui.input.InputBlock;
+import forge.gui.input.InputMana;
 import forge.gui.input.InputPayManaCost;
 import forge.gui.input.InputPayManaCostAbility;
 import forge.properties.ForgeProps;
@@ -323,17 +320,6 @@ public class ControlField {
                 ControlField.this.view.updateDetails(ControlField.this.player);
             }
         };
-
-        if (AllZone.getQuestData() != null && this.player.isComputer()) {
-            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-            String iconName = "";
-            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
-                iconName = Constant.Quest.OPP_ICON_NAME[0];
-                final File file = new File(base, iconName);
-                this.getView().setImage(new ImageIcon(file.toString()).getImage());
-
-            }
-        }
 
         // Card play area, attached to battlefield zone.
         observerPlay = new Observer() {
