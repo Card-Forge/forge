@@ -1,6 +1,7 @@
 package forge.view.home;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -481,7 +482,7 @@ public class ViewQuest extends JScrollPane {
             this.add(lblName, "h 20px!, gap 1% 1% 5px 5px, wrap");
 
             // Description
-            JTextArea tarDesc = new JTextArea();
+            final JTextArea tarDesc = new JTextArea();
             tarDesc.setText(event.getDescription());
             tarDesc.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
             tarDesc.setForeground(skin.getColor("text"));
@@ -529,6 +530,14 @@ public class ViewQuest extends JScrollPane {
         /** @return QuestEvent */
         public QuestEvent getEvent() {
             return event;
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            g.setColor(getBackground());
+            g.clearRect(0, 0, getWidth(), getHeight());
+            g.fillRect(0, 0, getWidth(), getHeight());
+            super.paintComponent(g);
         }
     }
 

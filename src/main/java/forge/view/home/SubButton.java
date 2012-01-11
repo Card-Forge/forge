@@ -2,6 +2,7 @@ package forge.view.home;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -68,5 +69,13 @@ public class SubButton extends JButton {
 
         if (b0) { setBackground(skin.getColor("inactive")); }
         else { setBackground(new Color(220, 220, 220)); }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g.setColor(getBackground());
+        g.clearRect(0, 0, getWidth(), getHeight());
+        g.fillRect(0, 0, getWidth(), getHeight());
+        super.paintComponent(g);
     }
 }
