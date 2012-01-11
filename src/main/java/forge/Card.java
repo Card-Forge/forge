@@ -68,7 +68,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean isDoubleFaced = false;
     private boolean isFlip = false;
-    
+
     private Zone castFrom = null;
 
     /**
@@ -2770,7 +2770,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
             }
-            if(keyword.equals("Rebound")) {
+            if (keyword.equals("Rebound")) {
                 sb.append(keyword).append("(If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)\r\n");
             }
         }
@@ -7180,13 +7180,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("wasCastFrom")) {
             String strZone = property.substring(11);
             Zone realZone = Constant.Zone.smartValueOf(strZone);
-            if(realZone != this.getCastFrom()) {
+            if (realZone != this.getCastFrom()) {
                 return false;
             }
         } else if (property.startsWith("wasNotCastFrom")) {
             String strZone = property.substring(14);
             Zone realZone = Constant.Zone.smartValueOf(strZone);
-            if(realZone == this.getCastFrom()) {
+            if (realZone == this.getCastFrom()) {
                 return false;
             }
         } else {
@@ -8723,7 +8723,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * Returns what zone this card was cast from (from what zone it was moved to the stack)
+     * Returns what zone this card was cast from (from what zone it was moved to the stack).
      * 
      * @return the castFrom
      */

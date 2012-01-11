@@ -238,16 +238,16 @@ public class GameAction {
 
         c = GameAction.changeZone(prev, zone, c);
 
-        if(zone.is(Zone.Stack)) {
+        if (zone.is(Zone.Stack)) {
             c.setCastFrom(prev.getZoneType());
         }
-        else if(prev == null) {
+        else if (prev == null) {
             c.setCastFrom(null);
         }
-        else if(!(zone.is(Zone.Battlefield) && prev.is(Zone.Stack))){
+        else if (!(zone.is(Zone.Battlefield) && prev.is(Zone.Stack))) {
             c.setCastFrom(null);
         }
-        
+
         if (c.isAura() && zone.is(Constant.Zone.Battlefield) && ((prev == null) || !prev.is(Constant.Zone.Stack))) {
             // TODO Need a way to override this for Abilities that put Auras
             // into play attached to things
