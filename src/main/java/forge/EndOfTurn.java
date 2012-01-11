@@ -20,11 +20,11 @@ package forge;
 import forge.Constant.Zone;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
+import forge.gui.GuiUtils;
 
-//handles "until end of turn" and "at end of turn" commands from cards
 /**
  * <p>
- * EndOfTurn class.
+ * Handles "until end of turn" effects and "at end of turn" triggers.
  * </p>
  * 
  * @author Forge
@@ -36,11 +36,10 @@ public class EndOfTurn implements java.io.Serializable {
 
     private final CommandList at = new CommandList();
     private final CommandList until = new CommandList();
-    private final CommandList last = new CommandList();
 
     /**
      * <p>
-     * addAt.
+     * Add a Command that will act as a trigger for "at end of turn".
      * </p>
      * 
      * @param c
@@ -52,7 +51,7 @@ public class EndOfTurn implements java.io.Serializable {
 
     /**
      * <p>
-     * addUntil.
+     * Add a Command that will terminate an effect with "until end of turn".
      * </p>
      * 
      * @param c
@@ -64,33 +63,23 @@ public class EndOfTurn implements java.io.Serializable {
 
     /**
      * <p>
-     * addLast.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public final void addLast(final Command c) {
-        this.last.add(c);
-    }
-
-    /**
-     * <p>
-     * executeAt.
+     * Handles all the hardcoded events that happen "at end of turn".
      * </p>
      */
     public final void executeAt() {
 
+        // TODO - should this freeze the Stack?
+
         // Pyrohemia and Pestilence
         final CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
 
-        GameActionUtil.endOfTurnWallOfReverence();
-        GameActionUtil.endOfTurnLighthouseChronologist();
+        EndOfTurn.endOfTurnWallOfReverence();
+        EndOfTurn.endOfTurnLighthouseChronologist();
 
         // reset mustAttackEntity for me
         AllZone.getPhase().getPlayerTurn().setMustAttackEntity(null);
 
-        GameActionUtil.removeAttackedBlockedThisTurn();
+        EndOfTurn.removeAttackedBlockedThisTurn();
 
         AllZone.getStaticEffects().rePopulateStateBasedList();
 
@@ -237,50 +226,16 @@ public class EndOfTurn implements java.io.Serializable {
 
     /**
      * <p>
-     * executeUntil.
+     * Executes the termination of effects that apply "until end of turn".
      * </p>
      */
     public final void executeUntil() {
         this.execute(this.until);
-        this.execute(this.last);
     }
 
     /**
      * <p>
-     * sizeAt.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int sizeAt() {
-        return this.at.size();
-    }
-
-    /**
-     * <p>
-     * sizeUntil.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int sizeUntil() {
-        return this.until.size();
-    }
-
-    /**
-     * <p>
-     * sizeLast.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int sizeLast() {
-        return this.last.size();
-    }
-
-    /**
-     * <p>
-     * execute.
+     * Executes each Command in a CommandList.
      * </p>
      * 
      * @param c
@@ -291,6 +246,103 @@ public class EndOfTurn implements java.io.Serializable {
 
         for (int i = 0; i < length; i++) {
             c.remove(0).execute();
+        }
+    }
+
+    private static void endOfTurnWallOfReverence() {
+        final Player player = AllZone.getPhase().getPlayerTurn();
+        final CardList list = player.getCardsIn(Zone.Battlefield, "Wall of Reverence");
+
+        Ability ability;
+        for (int i = 0; i < list.size(); i++) {
+            final Card card = list.get(i);
+            ability = new Ability(list.get(i), "0") {
+                @Override
+                public void resolve() {
+                    CardList creats = AllZoneUtil.getCreaturesInPlay(player);
+                    creats = creats.getTargetableCards(this);
+                    if (creats.size() == 0) {
+                        return;
+                    }
+
+                    if (player.isHuman()) {
+                        final Object o = GuiUtils.getChoiceOptional(
+                                "Select target creature for Wall of Reverence life gain", creats.toArray());
+                        if (o != null) {
+                            final Card c = (Card) o;
+                            final int power = c.getNetAttack();
+                            player.gainLife(power, card);
+                        }
+                    } else { // computer
+                        CardListUtil.sortAttack(creats);
+                        final Card c = creats.get(0);
+                        if (c != null) {
+                            final int power = c.getNetAttack();
+                            player.gainLife(power, card);
+                        }
+                    }
+                } // resolve
+            }; // ability
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - ").append(player).append(" gains life equal to target creature's power.");
+            ability.setStackDescription(sb.toString());
+
+            AllZone.getStack().addSimultaneousStackEntry(ability);
+
+        }
+    } // endOfTurnWallOfReverence()
+
+    private static void endOfTurnLighthouseChronologist() {
+        final Player player = AllZone.getPhase().getPlayerTurn();
+        final Player opponent = player.getOpponent();
+        CardList list = opponent.getCardsIn(Zone.Battlefield);
+
+        list = list.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return c.getName().equals("Lighthouse Chronologist") && (c.getCounters(Counters.LEVEL) >= 7);
+            }
+        });
+
+        Ability ability;
+        for (int i = 0; i < list.size(); i++) {
+            final Card card = list.get(i);
+            ability = new Ability(list.get(i), "0") {
+                @Override
+                public void resolve() {
+                    AllZone.getPhase().addExtraTurn(card.getController());
+                }
+            };
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - ").append(card.getController()).append(" takes an extra turn.");
+            ability.setStackDescription(sb.toString());
+
+            AllZone.getStack().addSimultaneousStackEntry(ability);
+
+        }
+    }
+
+    private static void removeAttackedBlockedThisTurn() {
+        // resets the status of attacked/blocked this turn
+        final Player player = AllZone.getPhase().getPlayerTurn();
+        final CardList list = AllZoneUtil.getCreaturesInPlay(player);
+
+        for (int i = 0; i < list.size(); i++) {
+            final Card c = list.get(i);
+            if (c.getCreatureAttackedThisCombat()) {
+                c.setCreatureAttackedThisCombat(false);
+            }
+            if (c.getCreatureBlockedThisCombat()) {
+                c.setCreatureBlockedThisCombat(false);
+                // do not reset setCreatureAttackedThisTurn(), this appears to
+                // be combat specific
+            }
+
+            if (c.getCreatureGotBlockedThisCombat()) {
+                c.setCreatureGotBlockedThisCombat(false);
+            }
         }
     }
 
