@@ -241,6 +241,9 @@ public class GameAction {
         if(zone.is(Zone.Stack)) {
             c.setCastFrom(prev.getZoneType());
         }
+        else if(prev == null) {
+            c.setCastFrom(null);
+        }
         else if(!(zone.is(Zone.Battlefield) && prev.is(Zone.Stack))){
             c.setCastFrom(null);
         }
