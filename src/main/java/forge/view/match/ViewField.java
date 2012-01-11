@@ -114,16 +114,16 @@ public class ViewField extends FRoundedPanel {
         // Player icon logic
         String filename;
         if (player.isHuman()) {
-            filename =  ForgeProps.getFile(NewConstants.IMAGE_ICON) + "\\Mage01.jpg";
+            filename =  ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator + "Mage01.jpg";
         }
         else if (Constant.Runtime.getGameType() == GameType.Quest) {
-            filename = ForgeProps.getFile(NewConstants.IMAGE_BASE) + "\\icons\\";
+            filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
             if (Constant.Quest.OPP_ICON_NAME[0] != null) {
                 filename += Constant.Quest.OPP_ICON_NAME[0];
             }
         }
         else {
-            filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + "\\Mage02.jpg";
+            filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator + "Mage02.jpg";
         }
 
         // Icon DNE test
@@ -132,7 +132,7 @@ public class ViewField extends FRoundedPanel {
 
         iiTemp = (f.exists()
             ? new ImageIcon(filename)
-            : new ImageIcon(ForgeProps.getFile(NewConstants.IMAGE_BASE) + "\\icons\\Unknown.jpg"));
+            : new ImageIcon(ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator + "Unknown.jpg"));
 
         this.img = iiTemp.getImage();
 
