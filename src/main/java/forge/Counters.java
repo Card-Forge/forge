@@ -91,6 +91,9 @@ public enum Counters {
 
     /** The EON. */
     EON(),
+    
+    /** The EYEBALL */
+    EYEBALL(), 
 
     /** The FADE. */
     FADE(),
