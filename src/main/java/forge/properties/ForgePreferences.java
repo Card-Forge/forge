@@ -478,24 +478,4 @@ public class ForgePreferences {
         }*/
         System.out.println("ForgePreferences.setKeyboardShortcut > Still under construction");
     }
-
-    // DEPRECATED
-    public void setAIPhase(String s0, boolean b0) {
-        setShowPhase(s0, b0);
-    }
-
-    // DEPRECATED
-    public boolean isAIPhase(String s0) {
-        return isShowPhase(s0);
-    }
-
-    // DEPRECATED
-    public void setHumanPhase(String s0, boolean b0) {
-        setShowPhase(s0, b0);
-    }
-
-    // DEPRECATED
-    public boolean isHumanPhase(String s0) {
-        return isShowPhase(s0);
-    }
 }
