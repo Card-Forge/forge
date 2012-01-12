@@ -390,6 +390,10 @@ public class PhaseUtil {
         for (final Card c : list) {
             c.removeAllExtrinsicKeyword("This card doesn't untap during your next untap step.");
             c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
+            if (c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
+                c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next two untap steps.");
+                c.addHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
+            }
         }
     } // end doUntap
 
@@ -405,7 +409,8 @@ public class PhaseUtil {
     public static boolean canUntap(final Card c) {
 
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
-                || c.hasKeyword("This card doesn't untap during your next untap step.")) {
+                || c.hasKeyword("This card doesn't untap during your next untap step.")
+                || c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
             return false;
         }
 

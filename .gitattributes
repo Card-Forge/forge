@@ -8564,6 +8564,7 @@ res/cardsfolder/t/tel_jilad_justice.txt svneol=native#text/plain
 res/cardsfolder/t/tel_jilad_lifebreather.txt svneol=native#text/plain
 res/cardsfolder/t/tel_jilad_outrider.txt svneol=native#text/plain
 res/cardsfolder/t/tel_jilad_wolf.txt svneol=native#text/plain
+res/cardsfolder/t/telekinesis.txt -text
 res/cardsfolder/t/telekinetic_bonds.txt svneol=native#text/plain
 res/cardsfolder/t/telekinetic_sliver.txt svneol=native#text/plain
 res/cardsfolder/t/telemin_performance.txt -text
