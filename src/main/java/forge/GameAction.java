@@ -788,6 +788,44 @@ public class GameAction {
     public final void checkStateEffects() {
         this.checkStateEffects(false);
     }
+    
+    public final void checkStaticAbilities() {
+        // remove old effects
+        AllZone.getStaticEffects().clearStaticEffects();
+        
+        // search for cards with static abilities
+        final CardList allCards = AllZoneUtil.getCardsInGame();
+        final CardList cardsWithStAbs = new CardList();
+        for (final Card card : allCards) {
+            final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+            if (!staticAbilities.isEmpty() && !card.isFaceDown()) {
+                cardsWithStAbs.add(card);
+            }
+        }
+
+        cardsWithStAbs.reverse(); // roughly timestamp order
+        
+        // apply continuous effects
+        for (int layer = 4; layer < 11; layer++) {
+            for (final Card card : cardsWithStAbs) {
+                final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
+                for (final StaticAbility stAb : staticAbilities) {
+                    if (stAb.getLayer() == layer) {
+                        stAb.applyAbility("Continuous");
+                    }
+                }
+            }
+        }
+
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        AllZone.getTriggerHandler().runTrigger("Always", runParams);
+
+        // card state effects like Glorious Anthem
+        for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
+            final Command com = GameActionUtil.getCommands().get(effect);
+            com.execute();
+        }
+    }
 
     /**
      * <p>
@@ -845,41 +883,7 @@ public class GameAction {
 
             boolean checkAgain = false;
 
-            // remove old effects
-            AllZone.getStaticEffects().clearStaticEffects();
-
-            // search for cards with static abilities
-            final CardList allCards = AllZoneUtil.getCardsInGame();
-            final CardList cardsWithStAbs = new CardList();
-            for (final Card card : allCards) {
-                final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-                if (!staticAbilities.isEmpty() && !card.isFaceDown()) {
-                    cardsWithStAbs.add(card);
-                }
-            }
-
-            cardsWithStAbs.reverse(); // roughly timestamp order
-
-            // apply continuous effects
-            for (int layer = 4; layer < 11; layer++) {
-                for (final Card card : cardsWithStAbs) {
-                    final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-                    for (final StaticAbility stAb : staticAbilities) {
-                        if (stAb.getLayer() == layer) {
-                            stAb.applyAbility("Continuous");
-                        }
-                    }
-                }
-            }
-
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            AllZone.getTriggerHandler().runTrigger("Always", runParams);
-
-            // card state effects like Glorious Anthem
-            for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
-                final Command com = GameActionUtil.getCommands().get(effect);
-                com.execute();
-            }
+            checkStaticAbilities();
 
             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             Card c;

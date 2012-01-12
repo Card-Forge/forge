@@ -331,6 +331,9 @@ public class TriggerHandler {
          * AllZone.getGameAction().checkStateEffects(true);
          * this.clearSuppression("Always");
          */
+        this.suppressMode("Always");
+        AllZone.getGameAction().checkStaticAbilities();
+        this.clearSuppression("Always");
 
         // AP
         allCards = playerAP.getAllCards();
