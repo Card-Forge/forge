@@ -392,7 +392,11 @@ public class ViewTabber extends FRoundedPanel {
         jsp.getViewport().setOpaque(false);
 
         this.pnlConsole.add(jsp, "w 95%!, gapleft 3%, gaptop 1%");
-        consoleTARs.add(tar);
+
+        /* We do not need to keep track for now.  In the future, we may need this if
+         * we change how the log is displayed.
+         */
+        //consoleTARs.add(tar);
     }
 
     /**
