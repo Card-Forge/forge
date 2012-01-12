@@ -78,23 +78,23 @@ public class ControlDock {
 
     /** Updates and saves ForgePreferences with current shortcuts. */
     public void saveKeyboardShortcuts() {
-        /*final ForgePreferences fp = Singletons.getModel().getPreferences();
+        final ForgePreferences fp = Singletons.getModel().getPreferences();
         final Map<String, KeyboardShortcutField> shortcuts = this.view.getKeyboardShortcutFields();
 
-        fp.setKeyboardShortcut(shortcuts.get("showstack").getCodeString());
-        fp.setShowCombatShortcut(shortcuts.get("showcombat").getCodeString());
-        fp.setShowPlayersShortcut(shortcuts.get("showplayers").getCodeString());
-        fp.setShowConsoleShortcut(shortcuts.get("showconsole").getCodeString());
-        fp.setShowDevShortcut(shortcuts.get("showdev").getCodeString());
-        fp.setConcedeShortcut(shortcuts.get("concede").getCodeString());
-        fp.setShowPictureShortcut(shortcuts.get("showpicture").getCodeString());
-        fp.setShowDetailShortcut(shortcuts.get("showdetail").getCodeString());
+        fp.setKeyboardShortcut("shortcut.showstack", shortcuts.get("showstack").getCodeString());
+        fp.setKeyboardShortcut("shortcut.showcombat", shortcuts.get("showcombat").getCodeString());
+        fp.setKeyboardShortcut("shortcut.showplayers", shortcuts.get("showplayers").getCodeString());
+        fp.setKeyboardShortcut("shortcut.showconsole", shortcuts.get("showconsole").getCodeString());
+        fp.setKeyboardShortcut("shortcut.showdev", shortcuts.get("showdev").getCodeString());
+        fp.setKeyboardShortcut("shortcut.concede", shortcuts.get("concede").getCodeString());
+        fp.setKeyboardShortcut("shortcut.showpicture", shortcuts.get("showpicture").getCodeString());
+        fp.setKeyboardShortcut("shortcut.showdetail", shortcuts.get("showdetail").getCodeString());
 
         try {
             fp.save();
         } catch (final Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
         AllZone.getOverlay().hideOverlay();
     }
