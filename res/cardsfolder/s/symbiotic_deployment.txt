@@ -2,7 +2,7 @@ Name:Symbiotic Deployment
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-K:Skip your draw step.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
 A:AB$ Draw | Cost$ 1 tapXType<2/Creature> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

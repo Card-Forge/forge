@@ -528,13 +528,7 @@ public class PhaseUtil {
             return true;
         }
 
-        final CardList list = player.getCardsIn(Zone.Battlefield);
-
-        if (list.containsName("Necropotence") || list.containsName("Yawgmoth's Bargain")
-                || list.containsName("Recycle") || list.containsName("Dragon Appeasement")
-                || list.containsName("Null Profusion") || list.containsName("Colfenor's Plans")
-                || list.containsName("Psychic Possession") || list.containsName("Solitary Confinement")
-                || list.containsName("Symbiotic Deployment") || list.containsName("Damia, Sage of Stone")) {
+        if (player.hasKeyword("Skip your draw step.")) {
             return true;
         }
 

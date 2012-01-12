@@ -1,7 +1,8 @@
 Name:Yawgmoth's Bargain
 ManaCost:4 B B
 Types:Enchantment
-Text:Skip your draw step.
+Text:no text
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
 A:AB$ Draw | Cost$ PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
