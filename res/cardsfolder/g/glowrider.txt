@@ -1,9 +1,9 @@
 Name:Glowrider
 ManaCost:2 W
 Types:Creature Human Cleric
-Text:Noncreature spells cost 1 more to cast.
+Text:no text
 PT:2/1
-K:CostChange:All:More:1:Spell:All:Creature:NonType
+K:CostChange:All:More:1:Spell:All:Creature:NonType:Desc|Noncreature spells cost 1 more to cast.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glowrider.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/15.jpg
