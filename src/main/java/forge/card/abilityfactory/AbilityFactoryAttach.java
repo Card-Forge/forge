@@ -1115,6 +1115,7 @@ public class AbilityFactoryAttach {
 
         final AbilityFactory af = aura.getAbilityFactory();
         final Target tgt = aura.getTarget();
+        final boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
 
         if (source.getController().isHuman()) {
             if (tgt.canTgtPlayer()) {
@@ -1130,7 +1131,8 @@ public class AbilityFactoryAttach {
 
                 final Object o = GuiUtils.getChoice(source + " - Select a player to attach to.", players.toArray());
                 if (o instanceof Player) {
-                    source.enchantEntity((Player) o);
+                    AbilityFactoryAttach.handleAura(source, (Player) o, false);
+                    //source.enchantEntity((Player) o);
                     return true;
                 }
             } else {
@@ -1139,7 +1141,8 @@ public class AbilityFactoryAttach {
 
                 final Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());
                 if (o instanceof Card) {
-                    source.enchantEntity((Card) o);
+                    AbilityFactoryAttach.handleAura(source, (Card) o, gainControl);
+                    //source.enchantEntity((Card) o);
                     return true;
                 }
             }
@@ -1148,10 +1151,12 @@ public class AbilityFactoryAttach {
         else if (AbilityFactoryAttach.attachPreference(af, aura, af.getMapParams(), tgt, true)) {
             final Object o = aura.getTarget().getTargets().get(0);
             if (o instanceof Card) {
-                source.enchantEntity((Card) o);
+                //source.enchantEntity((Card) o);
+                AbilityFactoryAttach.handleAura(source, (Card) o, gainControl);
                 return true;
             } else if (o instanceof Player) {
-                source.enchantEntity((Player) o);
+                //source.enchantEntity((Player) o);
+                AbilityFactoryAttach.handleAura(source, (Player) o, false);
                 return true;
             }
         }

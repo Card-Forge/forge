@@ -6926,6 +6926,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                             AllZone.getComputerPlayer()))) {
                 return false;
             }
+        } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
+            if (!(source.dealtDmgToHumanThisTurn && this.getController().isPlayer(AllZone.getHumanPlayer()))
+                    && !(source.dealtDmgToComputerThisTurn && this.getController().isPlayer(
+                            AllZone.getComputerPlayer()))) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
             if ((this.getReceivedDamageFromThisTurn().keySet()).isEmpty()) {
                 return false;

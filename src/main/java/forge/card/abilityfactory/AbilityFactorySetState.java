@@ -25,6 +25,7 @@ import java.util.Map;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.spellability.AbilityActivated;
@@ -251,6 +252,9 @@ public class AbilityFactorySetState {
                 }
             } else {
                 tgt.setState(abilityFactory.getMapParams().get("NewState"));
+            }
+            if (tgt.isAura()) {
+                AbilityFactoryAttach.attachAuraOnIndirectEnterBattlefield(tgt);
             }
         }
 
