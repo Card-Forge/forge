@@ -99,18 +99,6 @@ public class ViewField extends FRoundedPanel {
         this.hoverBorder = new LineBorder(this.skin.getColor("borders"), 1);
         this.counter = -1;
 
-        /*
-         * 
-        if (AllZone.getQuestData() != null && this.player.isComputer()) {
-            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-            String iconName = "";
-            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
-                iconName = Constant.Quest.OPP_ICON_NAME[0];
-                final File file = new File(base, iconName);
-            }
-        }
-         */
-
         // Player icon logic
         String filename;
         if (player.isHuman()) {
