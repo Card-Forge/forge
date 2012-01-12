@@ -44,7 +44,7 @@ public class ViewPicture extends FRoundedPanel {
         this.setBackground(AllZone.getSkin().getColor("theme"));
         this.setLayout(new MigLayout("insets 0, gap 0, center"));
 
-        add(pnlPicture, "w 96%!, h 96%!, gapleft 2%, gapright 2%, gaptop 2%");
+        add(pnlPicture, "w 100%!, h 100%!");
         control = new ControlPicture(this);
     }
 
