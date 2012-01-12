@@ -100,13 +100,15 @@ public class CardPanelLite extends CardPanelBase {
         this.picture.setCard(c);
         if (c != null) {
             this.detail.setCard(c);
-            if (c.hasAlternateState()) {
+
+            if (c.isFlip()) {
                 this.bChangeState.setVisible(true);
-                if (c.isFlip()) {
-                    this.bChangeState.setText("Flip");
-                } else {
-                    this.bChangeState.setText("Transform");
-                }
+                this.bChangeState.setText("Flip");
+            } else if(c.isDoubleFaced()) {
+                this.bChangeState.setVisible(true);
+                this.bChangeState.setText("Transform");
+            } else {
+                this.bChangeState.setVisible(false);
             }
         }
     }

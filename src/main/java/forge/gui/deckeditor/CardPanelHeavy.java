@@ -137,13 +137,12 @@ public class CardPanelHeavy extends CardPanelBase {
         }
         this.picture.setCard(c);
 
-        if (c.hasAlternateState()) {
+        if (c.isFlip()) {
             this.changeStateButton.setVisible(true);
-            if (c.isFlip()) {
-                this.changeStateButton.setText("Flip");
-            } else {
-                this.changeStateButton.setText("Transform");
-            }
+            this.changeStateButton.setText("Flip");
+        } else if(c.isDoubleFaced()) {
+            this.changeStateButton.setVisible(true);
+            this.changeStateButton.setText("Transform");
         } else {
             this.changeStateButton.setVisible(false);
         }
