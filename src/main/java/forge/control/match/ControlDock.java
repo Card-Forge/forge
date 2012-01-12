@@ -78,10 +78,10 @@ public class ControlDock {
 
     /** Updates and saves ForgePreferences with current shortcuts. */
     public void saveKeyboardShortcuts() {
-        final ForgePreferences fp = Singletons.getModel().getPreferences();
+        /*final ForgePreferences fp = Singletons.getModel().getPreferences();
         final Map<String, KeyboardShortcutField> shortcuts = this.view.getKeyboardShortcutFields();
 
-        fp.setShowStackShortcut(shortcuts.get("showstack").getCodeString());
+        fp.setKeyboardShortcut(shortcuts.get("showstack").getCodeString());
         fp.setShowCombatShortcut(shortcuts.get("showcombat").getCodeString());
         fp.setShowPlayersShortcut(shortcuts.get("showplayers").getCodeString());
         fp.setShowConsoleShortcut(shortcuts.get("showconsole").getCodeString());
@@ -94,7 +94,7 @@ public class ControlDock {
             fp.save();
         } catch (final Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         AllZone.getOverlay().hideOverlay();
     }

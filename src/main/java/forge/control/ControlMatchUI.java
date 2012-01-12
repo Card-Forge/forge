@@ -218,42 +218,42 @@ public class ControlMatchUI {
         // Show stack
         // (Get keycode string, convert to char, convert to keystroke, put on
         // input map.)
-        str = fp.getShowStackShortcut();
+        str = fp.getKeyboardShortcut("shortcut.showstack");
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
         t.getActionMap().put(im.get(key), actShowStack);
 
         // Show combat
-        str = fp.getShowCombatShortcut();
+        str = fp.getKeyboardShortcut("shortcut.showcombat");
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
         t.getActionMap().put(im.get(key), actShowCombat);
 
         // Show console
-        str = fp.getShowConsoleShortcut();
+        str = fp.getKeyboardShortcut("shortcut.showconsole");
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
         t.getActionMap().put(im.get(key), actShowConsole);
 
         // Show players
-        str = fp.getShowPlayersShortcut();
+        str = fp.getKeyboardShortcut("shortcut.showplayers");
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
         t.getActionMap().put(im.get(key), actShowPlayers);
 
         // Show devmode
-        str = fp.getShowDevShortcut();
+        str = fp.getKeyboardShortcut("shortcut.showdev");
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);
         t.getActionMap().put(im.get(key), actShowDev);
 
         // Concede game
-        str = fp.getConcedeShortcut();
+        str = fp.getKeyboardShortcut("shortcut.concede");
         key = KeyStroke.getKeyStroke(this.codes2Chars(str));
 
         im.put(key, str);

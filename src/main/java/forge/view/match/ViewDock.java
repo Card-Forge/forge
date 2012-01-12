@@ -275,28 +275,28 @@ public class ViewDock extends FRoundedPanel {
         // saving.
         // Their actions must also be declared, using mapKeyboardShortcuts in
         // ControlMatchUI.
-        final KeyboardShortcutField showStack = new KeyboardShortcutField(fp.getShowStackShortcut());
+        final KeyboardShortcutField showStack = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showstack"));
         this.keyboardShortcutFields.put("showstack", showStack);
 
-        final KeyboardShortcutField showCombat = new KeyboardShortcutField(fp.getShowCombatShortcut());
+        final KeyboardShortcutField showCombat = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showcombat"));
         this.keyboardShortcutFields.put("showcombat", showCombat);
 
-        final KeyboardShortcutField showConsole = new KeyboardShortcutField(fp.getShowConsoleShortcut());
+        final KeyboardShortcutField showConsole = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showconsole"));
         this.keyboardShortcutFields.put("showconsole", showConsole);
 
-        final KeyboardShortcutField showPlayers = new KeyboardShortcutField(fp.getShowPlayersShortcut());
+        final KeyboardShortcutField showPlayers = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showplayers"));
         this.keyboardShortcutFields.put("showplayers", showPlayers);
 
-        final KeyboardShortcutField showDev = new KeyboardShortcutField(fp.getShowDevShortcut());
+        final KeyboardShortcutField showDev = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showdev"));
         this.keyboardShortcutFields.put("showdev", showDev);
 
-        final KeyboardShortcutField concedeGame = new KeyboardShortcutField(fp.getConcedeShortcut());
+        final KeyboardShortcutField concedeGame = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.concede"));
         this.keyboardShortcutFields.put("concede", concedeGame);
 
-        final KeyboardShortcutField showPicture = new KeyboardShortcutField(fp.getShowPictureShortcut());
+        final KeyboardShortcutField showPicture = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showpicture"));
         this.keyboardShortcutFields.put("showpicture", showPicture);
 
-        final KeyboardShortcutField showDetail = new KeyboardShortcutField(fp.getShowDetailShortcut());
+        final KeyboardShortcutField showDetail = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showdetail"));
         this.keyboardShortcutFields.put("showdetail", showDetail);
 
         //
