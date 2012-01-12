@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.AllZone;
+import forge.Constant;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
@@ -54,8 +55,8 @@ public class ControlSettings {
         this.view.getCbAnte().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Singletons.getModel().getPreferences()
-                        .setPlayForAnte(ControlSettings.this.view.getCbAnte().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbAnte().isSelected();
+                Singletons.getModel().getPreferences().setPlayForAnte(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -63,7 +64,8 @@ public class ControlSettings {
         this.view.getCbScaleLarger().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setScaleLargerThanOriginal(ControlSettings.this.view.getCbScaleLarger().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbScaleLarger().isSelected();
+                prefs.setScaleLargerThanOriginal(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -71,7 +73,9 @@ public class ControlSettings {
         this.view.getCbDevMode().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setDeveloperMode(ControlSettings.this.view.getCbDevMode().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbDevMode().isSelected();
+                prefs.setDeveloperMode(toggle);
+                Constant.Runtime.DEV_MODE[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -79,7 +83,8 @@ public class ControlSettings {
         this.view.getCbRemoveSmall().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setDeckGenRmvSmall(ControlSettings.this.view.getCbRemoveSmall().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbRemoveSmall().isSelected();
+                prefs.setDeckGenRmvSmall(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -87,7 +92,8 @@ public class ControlSettings {
         this.view.getCbRemoveArtifacts().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setDeckGenRmvArtifacts(ControlSettings.this.view.getCbRemoveArtifacts().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbRemoveArtifacts().isSelected();
+                prefs.setDeckGenRmvArtifacts(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -95,7 +101,8 @@ public class ControlSettings {
         this.view.getCbSingletons().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setDeckGenSingletons(ControlSettings.this.view.getCbSingletons().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbSingletons().isSelected();
+                prefs.setDeckGenSingletons(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -103,7 +110,9 @@ public class ControlSettings {
         this.view.getCbUploadDraft().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setUploadDraftAI(ControlSettings.this.view.getCbUploadDraft().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbUploadDraft().isSelected();
+                prefs.setUploadDraftAI(toggle);
+                Constant.Runtime.UPLOAD_DRAFT[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -111,7 +120,9 @@ public class ControlSettings {
         this.view.getCbStackLand().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setStackAiLand(ControlSettings.this.view.getCbStackLand().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbStackLand().isSelected();
+                prefs.setStackAiLand(toggle);
+                Constant.Runtime.SMOOTH[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -119,7 +130,9 @@ public class ControlSettings {
         this.view.getCbRandomFoil().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setRandCFoil(ControlSettings.this.view.getCbRandomFoil().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbRandomFoil().isSelected();
+                prefs.setRandCFoil(toggle);
+                Constant.Runtime.RANDOM_FOIL[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -127,7 +140,8 @@ public class ControlSettings {
         this.view.getCbTextMana().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                prefs.setCardOverlay(ControlSettings.this.view.getCbTextMana().isSelected());
+                final boolean toggle = ControlSettings.this.view.getCbTextMana().isSelected();
+                prefs.setCardOverlay(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
