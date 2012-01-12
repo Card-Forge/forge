@@ -55,6 +55,7 @@ public class ForgePreferences {
         File f = new File(fileName);
         if (!f.exists()) {
             setDefaults();
+            save();
         }
         else {
             load();
