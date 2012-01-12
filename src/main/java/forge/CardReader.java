@@ -483,8 +483,10 @@ public class CardReader implements Runnable {
                     String mode;
                     if (card.isFlip()) {
                         mode = "Flipped";
-                    } else {
+                    } else if (card.isDoubleFaced()) {
                         mode = "Transformed";
+                    } else {
+                        mode = card.isTransformable();
                     }
                     card.addAlternateState(mode);
                     card.setState(mode);
@@ -492,8 +494,10 @@ public class CardReader implements Runnable {
                     final String value = line.substring("AlternateMode:".length());
                     if (value.equalsIgnoreCase("Flip")) {
                         card.setFlip(true);
-                    } else {
+                    } else if (value.equalsIgnoreCase("DoubleFaced")) {
                         card.setDoubleFaced(true);
+                    } else {
+                        card.setTransformable(value);
                     }
                 } else if (line.startsWith("Colors:")) {
                     final String value = line.substring("Colors:".length());

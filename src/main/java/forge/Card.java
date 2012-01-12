@@ -68,6 +68,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean isDoubleFaced = false;
     private boolean isFlip = false;
+    private String otherTransformable = "";
 
     private Zone castFrom = null;
 
@@ -293,6 +294,24 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setFlip(final boolean isFlip0) {
         this.isFlip = isFlip0;
+    }
+    
+    /**
+     * Checks if this is transformable (i.e. Licids.)
+     * 
+     * @return a boolean
+     */
+    public final String isTransformable() {
+        return this.otherTransformable;
+    }
+    
+    /**
+     * Sets wether or not this card is transformable, but non-flip and not doublefaced.
+     * 
+     * @param isTransformable0
+     */
+    public final void setTransformable(final String otherTransformable0) {
+        this.otherTransformable = otherTransformable0;
     }
 
     private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
