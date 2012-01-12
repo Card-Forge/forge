@@ -2407,13 +2407,18 @@ public class Card extends GameEntity implements Comparable<Card> {
         final StringBuilder sbMana = new StringBuilder();
 
         for (int i = 0; i < keyword.size(); i++) {
-            if (!keyword.get(i).toString().contains("CostChange")
-                    && !keyword.get(i).toString()
+            if (!keyword.get(i).toString()
                             .contains("Permanents don't untap during their controllers' untap steps")
                     && !keyword.get(i).toString().contains("PreventAllDamageBy")
                     && !keyword.get(i).toString().contains("CantBlock")
                     && !keyword.get(i).toString().contains("CantBeBlockedBy")) {
-                if (keyword.get(i).toString().contains("StaticEffect")) {
+                if (keyword.get(i).toString().contains("CostChange")) {
+                    final String[] k = keyword.get(i).split(":");
+                    if (k[k.length - 1].toString().startsWith("Desc|")) {
+                        final String[] kk = k[k.length - 1].split("\\|");
+                        sbLong.append(kk[1]).append("\r\n");
+                    }
+                } else if (keyword.get(i).toString().contains("StaticEffect")) {
                     final String[] k = keyword.get(i).split(":");
                     sbLong.append(k[5]).append("\r\n");
                 } else if (keyword.get(i).toString().contains("Protection:")) {
