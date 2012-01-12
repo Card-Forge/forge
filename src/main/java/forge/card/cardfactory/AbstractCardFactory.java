@@ -1527,9 +1527,10 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 @Override
                 public void resolve() {
                     if (card.getController().isComputer()) {
-                        final CardList creatures = AllZoneUtil.getCreaturesInPlay();
-                        if (!creatures.isEmpty()) {
-                            copyTarget[0] = CardFactoryUtil.getBestCreatureAI(creatures);
+                        final CardList cards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)
+                                .getType("Artifact");
+                        if (!cards.isEmpty()) {
+                            copyTarget[0] = CardFactoryUtil.getBestAI(cards);
                         }
                     }
 
