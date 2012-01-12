@@ -53,16 +53,17 @@ public class ForgePreferences {
     public ForgePreferences(String s0) {
         this.fileName = s0;
         File f = new File(fileName);
-        if (!f.exists()) {
-            setDefaults();
-            save();
-        }
-        else {
-            load();
+
+        if (!f.exists()) { makeNew(); }
+        else { load(); }
+
+        // Test for existence of old file
+        if (prefs.get("ui.use.skin") == null) {
+            makeNew();
         }
     }
 
-    private void setDefaults() {
+    private void makeNew() {
         prefs = new HashMap<String, String>();
         //========== Default values for all preferences:
         // UI preferences
@@ -129,6 +130,8 @@ public class ForgePreferences {
         prefs.put("shortcut.concede", "27");
         prefs.put("shortcut.showpicture", "17 80");
         prefs.put("shortcut.showdetail", "17 68");
+
+        save();
     }
     //========== File handling
 
