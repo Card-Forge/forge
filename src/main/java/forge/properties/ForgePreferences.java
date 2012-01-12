@@ -449,7 +449,7 @@ public class ForgePreferences {
 
     /** 
      * Prints exception stack trace if shortcut is not in the list.
-     * @param s0 &emsp; String shortcut key codes
+     * @param s0 &emsp; String shortcut key code(s)
      * @return boolean
      */
     public String getKeyboardShortcut(String s0) {
@@ -465,17 +465,16 @@ public class ForgePreferences {
 
     /** 
      * Prints exception stack trace if shortcut is not in the list.
-     * @param s0 &emsp; String shortcut key codes
-     * @param b0 &emsp; boolean
+     * @param s0 &emsp; String shortcut name
+     * @param s1 &emsp; String shortcut key code(s)
      */
-    public void setKeyboardShortcut(String s0, boolean b0) {
-        /*if (prefs.get(s0) != null) {
-            prefs.put(s0, Boolean.toString(b0));
+    public void setKeyboardShortcut(String s0, String s1) {
+        if (prefs.get(s0) != null) {
+            prefs.put(s0, s1);
         }
         else {
             Exception ex = new Exception();
             ex.printStackTrace();
-        }*/
-        System.out.println("ForgePreferences.setKeyboardShortcut > Still under construction");
+        }
     }
 }
