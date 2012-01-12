@@ -4,10 +4,11 @@ Types:Creature Nightmare Fish Beast
 Text:no text
 PT:5/5
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from your hand.
-SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Hand | Destination$ Exile | RememberChanged$ True
+SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Exile | RememberChanged$ True
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to their owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ TrueSVar:RemAIDeck:True
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_behemoth.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/55.jpg
