@@ -788,11 +788,11 @@ public class GameAction {
     public final void checkStateEffects() {
         this.checkStateEffects(false);
     }
-    
+
     public final void checkStaticAbilities() {
         // remove old effects
         AllZone.getStaticEffects().clearStaticEffects();
-        
+
         // search for cards with static abilities
         final CardList allCards = AllZoneUtil.getCardsInGame();
         final CardList cardsWithStAbs = new CardList();
@@ -804,7 +804,7 @@ public class GameAction {
         }
 
         cardsWithStAbs.reverse(); // roughly timestamp order
-        
+
         // apply continuous effects
         for (int layer = 4; layer < 11; layer++) {
             for (final Card card : cardsWithStAbs) {
@@ -957,7 +957,7 @@ public class GameAction {
                 } // if isAura
 
                 if (c.isCreature()) {
-                    if(c.isEnchanting()) {
+                    if (c.isEnchanting()) {
                         c.unEnchantEntity(c.getEnchanting());
                         checkAgain = true;
                     }

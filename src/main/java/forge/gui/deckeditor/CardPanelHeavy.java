@@ -140,7 +140,7 @@ public class CardPanelHeavy extends CardPanelBase {
         if (c.isFlip()) {
             this.changeStateButton.setVisible(true);
             this.changeStateButton.setText("Flip");
-        } else if(c.isDoubleFaced()) {
+        } else if (c.isDoubleFaced()) {
             this.changeStateButton.setVisible(true);
             this.changeStateButton.setText("Transform");
         } else {

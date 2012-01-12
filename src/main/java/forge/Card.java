@@ -295,7 +295,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setFlip(final boolean isFlip0) {
         this.isFlip = isFlip0;
     }
-    
+
     /**
      * Checks if this is transformable (i.e. Licids.)
      * 
@@ -304,7 +304,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final String isTransformable() {
         return this.otherTransformable;
     }
-    
+
     /**
      * Sets wether or not this card is transformable, but non-flip and not doublefaced.
      * 

@@ -47,7 +47,7 @@ public class StaticAbilityContinuous {
      * 
      * @param stAb
      *            a StaticAbility
-     *            
+     * 
      */
     public static void applyContinuousAbility(final StaticAbility stAb) {
         final HashMap<String, String> params = stAb.getMapParams();
