@@ -711,6 +711,10 @@ public class PhaseUtil {
         }
 
         t.getController().resetAllPhaseButtons();
+            // Could be a potential recursion bug here, but I checked and hopefully there isn't.
+            // Please remove this comments if > 1 week and no problems. Doublestrike 12-01-11
+            t.repaint();
+            // End potential recursion bug
         lbl.setActive(true);
     }
 }
