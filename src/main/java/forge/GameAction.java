@@ -957,6 +957,10 @@ public class GameAction {
                 } // if isAura
 
                 if (c.isCreature()) {
+                    if(c.isEnchanting()) {
+                        c.unEnchantEntity(c.getEnchanting());
+                        checkAgain = true;
+                    }
                     if ((c.getNetDefense() <= c.getDamage()) && !c.hasKeyword("Indestructible")) {
                         this.destroy(c);
                         // this is untested with instants and abilities but
