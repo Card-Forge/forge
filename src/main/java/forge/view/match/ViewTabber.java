@@ -348,6 +348,10 @@ public class ViewTabber extends FRoundedPanel {
     // Doublestrike 06-11-11
     public void updateCombat(final String s) {
         this.pnlCombat.removeAll();
+
+        //if this is not cleared every time, we keep a history of combat strings.  Not very useful.
+        //probably will never be useful, even if we have multiple text areas to display combat...
+        this.combatTARs.clear();
         this.control.showPnlCombat();
 
         final Border border = new MatteBorder(0, 0, 0, 0, skin.getColor("borders"));
