@@ -160,6 +160,12 @@ public class FSkin {
             this.setIcon("dock.concede", image.getSubimage(80, 80, 80, 80));
             this.setIcon("dock.decklist", image.getSubimage(80, 160, 80, 80));
 
+            this.setImage("image.logo", image.getSubimage(280, 240, 200, 200));
+
+            this.setImage("button.startUP", image.getSubimage(0, 240, 160, 80));
+            this.setImage("button.startOVER", image.getSubimage(0, 320, 160, 80));
+            this.setImage("button.startDOWN", image.getSubimage(0, 400, 160, 80));
+
             this.setImage("button.upLEFT", image.getSubimage(360, 0, 40, 40));
             this.setImage("button.upCENTER", image.getSubimage(400, 0, 1, 40));
             this.setImage("button.upRIGHT", image.getSubimage(440, 0, 40, 40));

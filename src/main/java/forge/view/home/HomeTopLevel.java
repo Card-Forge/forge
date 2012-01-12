@@ -50,7 +50,6 @@ public class HomeTopLevel extends FPanel {
     private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnExit, btnDeckEditor;
     private FSkin skin;
     private String constraints;
-    private String imgDirAddress;
     private ControlHomeUI control;
 
     private ViewConstructed constructed;
@@ -66,7 +65,6 @@ public class HomeTopLevel extends FPanel {
     public HomeTopLevel() {
         super();
         skin = AllZone.getSkin();
-        imgDirAddress = "res/images/ui/HomeScreen/default_600/";
 
         constructed = new ViewConstructed(this);
         sealed = new ViewSealed(this);
@@ -146,7 +144,7 @@ public class HomeTopLevel extends FPanel {
         add(pnlMenu, "w 36%!, h 96%!, gap 2% 2% 2% 2%");
         add(pnlContent, "w 58%!, h 96%!, gap 0% 2% 2% 2%");
 
-        JLabel lblIcon = new JLabel(new ImageIcon(imgDirAddress + "Main_logo.png"));
+        JLabel lblIcon = new JLabel(new ImageIcon(skin.getImage("image.logo")));
         pnlMenu.add(lblIcon, "ax center");
 
         constraints = "w 80%!, gapleft 10%, gaptop 1%, gapbottom 1%, h 40px!";
@@ -223,26 +221,6 @@ public class HomeTopLevel extends FPanel {
         pnlContent.add(utilities, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
-    }
-
-    /** @return String */
-    public String getImgDirAddress() {
-        return imgDirAddress;
-    }
-
-    /** @return ImageIcon */
-    public ImageIcon getStartButtonDown() {
-        return new ImageIcon(imgDirAddress + "btnStart_Down.png");
-    }
-
-    /** @return ImageIcon */
-    public ImageIcon getStartButtonOver() {
-        return new ImageIcon(imgDirAddress + "btnStart_Over.png");
-    }
-
-    /** @return ImageIcon */
-    public ImageIcon getStartButtonUp() {
-        return new ImageIcon(imgDirAddress + "btnStart_Up.png");
     }
 
     /** @return ControlConstructed */
