@@ -151,6 +151,7 @@ u_2_2_elemental_flying.jpg             http://www.cardforge.org/fpics/tokens/u_2
 u_2_2_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_2_2_homunculus.jpg
 u_2_2_illusion.jpg                     http://www.cardforge.org/fpics/tokens/u_2_2_illusion.jpg
 u_3_3_weird.jpg                        http://www.cardforge.org/fpics/tokens/u_3_3_weird.jpg
+u_5_5_dragon_spirit.jpg                http://www.cardforge.org/fpics/tokens/u_5_5_dragon_spirit.jpg
 u_5_5_wall.jpg                         http://www.cardforge.org/fpics/tokens/u_5_5_wall.jpg
 ub_1_1_faerie_rogue.jpg                http://www.cardforge.org/fpics/tokens/ub_1_1_faerie_rogue.jpg
 ub_1_1_zombie_wizard.jpg               http://www.cardforge.org/fpics/tokens/ub_1_1_zombie_wizard.jpg
@@ -196,6 +197,5 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
 # //rg_4_4_giant_warrior.jpg               http://www.cardforge.org/fpics/tokens/rg_4_4_giant_warrior.jpg               [SHM] Giantbaiting
 # //u_1_1_merfolk.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_merfolk.jpg                      [ZEN] Lullmage Mentor
-# //u_5_5_dragon_spirit.jpg                http://www.cardforge.org/fpics/tokens/u_5_5_dragon_spirit.jpg                [CHK] Tatsumasa, the Dragon's Fang
 # //u_x_x_orb.jpg                          http://www.cardforge.org/fpics/tokens/u_x_x_orb.jpg                          [ALL] Phantasmal Sphere
 # //w_1_1_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_knight.jpg                       [ALL] Errand of Duty

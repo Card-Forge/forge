@@ -12,6 +12,7 @@ http://www.cardforge.org/fpics/questAvatars/Barney%20Rubble.jpg
 http://www.cardforge.org/fpics/questAvatars/Barroom%20Brawl.jpg
 http://www.cardforge.org/fpics/questAvatars/Bart%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Batman.jpg
+http://www.cardforge.org/fpics/questAvatars/Beast.jpg
 http://www.cardforge.org/fpics/questAvatars/Bela%20Lugosi.jpg
 http://www.cardforge.org/fpics/questAvatars/Betty%20Rubble.jpg
 http://www.cardforge.org/fpics/questAvatars/Blackbeard.jpg
