@@ -13,6 +13,7 @@ http://www.cardforge.org/fpics/questAvatars/Barroom%20Brawl.jpg
 http://www.cardforge.org/fpics/questAvatars/Bart%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Batman.jpg
 http://www.cardforge.org/fpics/questAvatars/Beast.jpg
+http://www.cardforge.org/fpics/questAvatars/Beast2.jpg
 http://www.cardforge.org/fpics/questAvatars/Bela%20Lugosi.jpg
 http://www.cardforge.org/fpics/questAvatars/Betty%20Rubble.jpg
 http://www.cardforge.org/fpics/questAvatars/Blackbeard.jpg
@@ -24,16 +25,19 @@ http://www.cardforge.org/fpics/questAvatars/Bridge%20Troll.jpg
 http://www.cardforge.org/fpics/questAvatars/Buffy.jpg
 http://www.cardforge.org/fpics/questAvatars/Bushwhacked.jpg
 http://www.cardforge.org/fpics/questAvatars/C3PO.jpg
+http://www.cardforge.org/fpics/questAvatars/Cable.jpg
 http://www.cardforge.org/fpics/questAvatars/Captain%20America.jpg
 http://www.cardforge.org/fpics/questAvatars/Catwoman.jpg
 http://www.cardforge.org/fpics/questAvatars/Chief_Wiggum.jpg
 http://www.cardforge.org/fpics/questAvatars/Comic%20Book%20Guy.jpg
+http://www.cardforge.org/fpics/questAvatars/Colossus.jpg
 http://www.cardforge.org/fpics/questAvatars/Conan%20the%20Barbarian.jpg
 http://www.cardforge.org/fpics/questAvatars/Cow.jpg
 http://www.cardforge.org/fpics/questAvatars/Crocodile%20Dundee.jpg
 http://www.cardforge.org/fpics/questAvatars/Crows%20in%20the%20Field.jpg
 http://www.cardforge.org/fpics/questAvatars/Cyclops.jpg
 http://www.cardforge.org/fpics/questAvatars/Da%20Vinci.jpg
+http://www.cardforge.org/fpics/questAvatars/Darkseid.jpg
 http://www.cardforge.org/fpics/questAvatars/Darrin%20Stephens.jpg
 http://www.cardforge.org/fpics/questAvatars/Darth%20Vader.jpg
 http://www.cardforge.org/fpics/questAvatars/Data.jpg
@@ -45,6 +49,7 @@ http://www.cardforge.org/fpics/questAvatars/Doc%20Holiday.jpg
 http://www.cardforge.org/fpics/questAvatars/Dogbert.jpg
 http://www.cardforge.org/fpics/questAvatars/Dont%20Play%20With%20Matches.jpg
 http://www.cardforge.org/fpics/questAvatars/Doran.jpg
+http://www.cardforge.org/fpics/questAvatars/Dr%20Fate.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20No.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20Strangelove.jpg
 http://www.cardforge.org/fpics/questAvatars/Dream.jpg
