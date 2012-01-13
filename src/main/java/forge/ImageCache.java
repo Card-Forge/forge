@@ -74,7 +74,9 @@ public class ImageCache {
     private static boolean scaleLargerThanOriginal = true;
 
     static {
-        IMAGE_CACHE = CacheBuilder.newBuilder().softValues().build(new CacheLoader<String, BufferedImage>() {
+        IMAGE_CACHE = CacheBuilder.newBuilder()
+                                  .softValues()
+                                  .build(new CacheLoader<String, BufferedImage>() {
             @Override
             public BufferedImage load(String key) {
                 try {

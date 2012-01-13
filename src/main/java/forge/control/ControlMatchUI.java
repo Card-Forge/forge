@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.AllZone;
 import forge.Constant.Zone;
+import forge.ImageCache;
 import forge.Player;
 import forge.Singletons;
 import forge.control.match.ControlField;
@@ -124,10 +125,11 @@ public class ControlMatchUI {
     }
 
     /**
-     * 
-     * TODO: Write javadoc for this method.
+     * Deletes all observers for Match UI elements and clears the ImageCache.
      */
     public void deinitMatch() {
+
+        ImageCache.clear();
 
         //delete player observers
         for (Player p : AllZone.getPlayersInGame()) {
