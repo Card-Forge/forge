@@ -759,9 +759,19 @@ public class AbilityFactoryDestroy {
 
         humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
-
-        humanlist = humanlist.getNotKeyword("Indestructible");
-        computerlist = computerlist.getNotKeyword("Indestructible");
+        
+        humanlist = humanlist.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
+            }
+        });
+        computerlist = computerlist.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
+            }
+        });
 
         if (abCost != null) {
             // AI currently disabled for some costs
