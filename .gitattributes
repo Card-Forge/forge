@@ -10871,6 +10871,7 @@ src/main/java/forge/card/trigger/TriggerShuffled.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerSpellAbilityCast.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerTaps.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerTapsForMana.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerTransformed.java -text
 src/main/java/forge/card/trigger/TriggerTurnFaceUp.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUnequip.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUntaps.java svneol=native#text/plain

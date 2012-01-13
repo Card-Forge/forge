@@ -236,6 +236,8 @@ public class TriggerHandler {
             ret = new TriggerTaps(mapParams, host, intrinsic);
         } else if (mode.equals("TapsForMana")) {
             ret = new TriggerTapsForMana(mapParams, host, intrinsic);
+        } else if (mode.equals("Transformed")) {
+            ret = new TriggerTransformed(mapParams, host, intrinsic);
         } else if (mode.equals("TurnFaceUp")) {
             ret = new TriggerTurnFaceUp(mapParams, host, intrinsic);
         } else if (mode.equals("Unequip")) {
@@ -301,6 +303,10 @@ public class TriggerHandler {
     public final void runTrigger(final String mode, final Map<String, Object> runParams) {
         if (this.suppressedModes.contains(mode)) {
             return;
+        }
+        
+        if(mode.equals("Transformed")) {
+            System.out.println("Hiyo!");
         }
 
         final Player playerAP = AllZone.getPhase().getPlayerTurn();
