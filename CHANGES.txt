@@ -259,6 +259,8 @@ Reiver Demon
 - Updated quest opponent avatar links.
 - Added a fluff piece to the changes.txt file.
 - Added the Darkseid 3 deck.
+- Added the recent commit logs to changes.txt.
+- Fixed creatures with Deathtouch destroying creatures and dealing damage afterwards.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
