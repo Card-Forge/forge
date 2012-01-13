@@ -148,8 +148,41 @@ public class AbilityFactoryAttach {
      * @return the spell ability
      */
     public static SpellAbility createDrawbackAttach(final AbilityFactory abilityFactory) {
-        // placeholder for DBs that might attach
-        return null;
+        final SpellAbility dbAttach = new AbilitySub(abilityFactory.getHostCard(), abilityFactory.getAbTgt()) {
+            private static final long serialVersionUID = 7211414518191821125L;
+
+            private final AbilityFactory af = abilityFactory;
+
+            @Override
+            public String getStackDescription() {
+                // when getStackDesc is called, just build exactly what is
+                // happening
+                return AbilityFactoryAttach.attachStackDescription(this.af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryAttach.attachCanPlayAI(this.af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryAttach.attachResolve(this.af, this);
+            }
+
+
+            @Override
+            public boolean chkAIDrawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return AbilityFactoryAttach.attachDoTriggerAI(this.af, this, mandatory);
+            }
+
+        };
+        return dbAttach;
     }
 
     /**

@@ -253,9 +253,7 @@ public class AbilityFactorySetState {
             } else {
                 tgt.setState(abilityFactory.getMapParams().get("NewState"));
             }
-            if (tgt.isAura()) {
-                AbilityFactoryAttach.attachAuraOnIndirectEnterBattlefield(tgt);
-            }
+
         }
 
     }
