@@ -237,6 +237,7 @@ public class ViewTabber extends FRoundedPanel {
         final Border border = new EmptyBorder(5, 5, 5, 5);
         Color[] scheme;
 
+        stackTARs.clear();
         for (int i = stack.size() - 1; 0 <= i; i--) {
             final SpellAbilityStackInstance spell = stack.peekInstance(i);
             final int index = i;
