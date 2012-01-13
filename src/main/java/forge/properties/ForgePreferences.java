@@ -72,7 +72,7 @@ public class ForgePreferences {
         prefs.put("ui.layout.params", "");
         prefs.put("ui.smooth.land", "false");
         prefs.put("ui.use.skin", "default");
-        prefs.put("ui.card.overlay", "false");
+        prefs.put("ui.card.overlay", "true");
         prefs.put("ui.upload.draft", "false");
         prefs.put("ui.scale.larger", "false");
         prefs.put("ui.max.stack", "3");
