@@ -609,10 +609,6 @@ public final class GameActionUtil {
             }
             AllZone.getStack().addSimultaneousStackEntry(ability);
         }
-
-        if (source.hasKeyword("Deathtouch") && affected.isCreature()) {
-            AllZone.getGameAction().destroy(affected);
-        }
     }
 
     // this is for cards like Sengir Vampire

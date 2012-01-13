@@ -8205,7 +8205,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (AllZoneUtil.isCardInPlay(this) && wither) {
             this.addCounter(Counters.M1M1, damageToAdd);
         }
-        if (AllZoneUtil.isCardInPlay(this) && !wither) {
+        if (source.hasKeyword("Deathtouch") && this.isCreature()) {
+            AllZone.getGameAction().destroy(this);
+        }
+        else if (AllZoneUtil.isCardInPlay(this) && !wither) {
             this.damage += damageToAdd;
         }
 
