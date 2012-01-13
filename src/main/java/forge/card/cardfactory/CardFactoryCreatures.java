@@ -540,9 +540,10 @@ public class CardFactoryCreatures {
 
                     CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
                     list = list.getValidCards("Card.Other+YouCtrl".split(","), card.getController(), card);
-                    card.addController(opp);
-                    // AllZone.getGameAction().changeController(list,
-                    // card.getController(), opp);
+                    
+                    for(Card c : list){
+                        c.addController(opp);
+                    }
                 } // resolve()
             }; // SpellAbility
 
