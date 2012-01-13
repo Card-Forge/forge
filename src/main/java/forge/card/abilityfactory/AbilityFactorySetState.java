@@ -25,7 +25,6 @@ import java.util.Map;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.spellability.AbilityActivated;
