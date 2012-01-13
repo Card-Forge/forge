@@ -242,6 +242,24 @@ Reiver Demon
 - Bugfix to the bugfix in ForgePreferences.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed AI of Copy Artifact and Sculpting Steel.
+- Added a check in checkStateEffects for creatures enchanting something, making them fall off properly. (Licids! *shakes fist*)
+- CheckStyle.
+- Fixed Wormfang Behemoth.
+- Added the player keyword "Skip your draw step." and converted some cards to use it.
+- Memory management debugging in ViewTabber: cleared list of JTextAreas in stack panel to prevent pileups.
+- udpate guava to 11.0.1 (it has some cache fixes that may affect ImageCache)
+- Uploaded quest opponent avatar: Beast. Added to quest-opponent-icons.txt
+- Uncommented download link for Tatsumasa, the Dragon's Fang token.
+- Updated the deck editor color filter icons.
+- try to clean up IMAGE_CACHE at the end of each match. This may help with large memory usage after many matches.
+- Fixed bug preventing full texture paint on keyboard shortcuts screen.
+- Added Attach Drawback. Removed previous changes for Auras in SetState AF.
+- updated Soul Seizer script to Attach drawback
+- Updated quest opponent avatar links.
+- Added a fluff piece to the changes.txt file.
+- Added the Darkseid 3 deck.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -272,6 +290,7 @@ Loyal Cathar // Unhallowed Cathar
 Soul Seizer // Ghastly Haunting
 Thalia, Guardian of Thraben
 Lambholt Elder // Silverpelt Werewolf
+Beguiler of Wills
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -336,6 +355,8 @@ Harmonic Sliver
 Mesmeric Sliver
 Gravity Well
 Clash of Realities
+Telekinesis
+Rapid Fire
 
 
 end
