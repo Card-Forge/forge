@@ -27,6 +27,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
@@ -155,11 +156,20 @@ public final class GameActionUtil {
                                 final ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
 
                                 for (final SpellAbility sa : choices) {
-                                    if (sa.canPlayAI() || sa.doTrigger(false)) {
-                                        ComputerUtil.playStackFree(sa);
-                                        revealed.remove(cascadedCard);
-                                        break;
+                                    //Spells
+                                    if (sa instanceof Spell) {
+                                        Spell spell = (Spell) sa;
+                                        if (!spell.canPlayFromEffectAI(false, true)) {
+                                            continue;
+                                        }
+                                    } else {
+                                        if (!sa.canPlayAI()) {
+                                            continue;
+                                        }
                                     }
+                                    ComputerUtil.playStackFree(sa);
+                                    revealed.remove(cascadedCard);
+                                    break;
                                 }
                             }
                         }

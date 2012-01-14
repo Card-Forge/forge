@@ -153,4 +153,19 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             throw new RuntimeException("Spell : clone() error, " + ex);
         }
     }
+
+    /**
+     * <p>
+     * canPlayFromEffectAI.
+     * </p>
+     *
+     * @param mandatory
+     *            can the controller chose not to play the spell
+     * @param withOutManaCost
+     *            is the spell cast without paying mana
+     * @return a boolean.
+     */
+    public boolean canPlayFromEffectAI(boolean mandatory, boolean withOutManaCost) {
+        return canPlayAI();
+    }
 }

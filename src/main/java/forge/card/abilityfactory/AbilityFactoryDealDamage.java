@@ -140,8 +140,12 @@ public class AbilityFactoryDealDamage {
             }
 
             @Override
-            public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAINoCost(
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryDealDamage.this.dealDamageDoTriggerAINoCost(
+                            AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
+                }
+                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }; // Spell
