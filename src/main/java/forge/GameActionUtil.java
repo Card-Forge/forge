@@ -155,7 +155,7 @@ public final class GameActionUtil {
                                 final ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
 
                                 for (final SpellAbility sa : choices) {
-                                    if (sa.canPlayAI()) {
+                                    if (sa.canPlayAI() || sa.doTrigger(false)) {
                                         ComputerUtil.playStackFree(sa);
                                         revealed.remove(cascadedCard);
                                         break;

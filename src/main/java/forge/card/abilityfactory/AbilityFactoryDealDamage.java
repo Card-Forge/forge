@@ -139,6 +139,11 @@ public class AbilityFactoryDealDamage {
                 AbilityFactoryDealDamage.this.dealDamageResolve(this);
             }
 
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAINoCost(
+                        AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
+            }
         }; // Spell
 
         return spDealDamage;
@@ -514,7 +519,7 @@ public class AbilityFactoryDealDamage {
             return this.damageChooseNontargeted(saMe, dmg);
         }
 
-        return this.damageChoosingTargets(saMe, tgt, dmg, false);
+        return this.damageChoosingTargets(saMe, tgt, dmg, false, false);
     }
 
     /**
@@ -533,7 +538,7 @@ public class AbilityFactoryDealDamage {
      * @return a boolean.
      */
     private boolean damageChoosingTargets(final SpellAbility saMe, final Target tgt, final int dmg,
-            final boolean mandatory) {
+            final boolean isTrigger, final boolean mandatory) {
         final boolean noPrevention = this.abilityFactory.getMapParams().containsKey("NoPrevention");
 
         // target loop
@@ -562,9 +567,9 @@ public class AbilityFactoryDealDamage {
                 // TODO: add check here if card is about to die from something
                 // on the stack
                 // or from taking combat damage
-                final boolean freePing = mandatory || (tgt.getNumTargeted() > 0
+                final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
                         || (AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && saMe.isAbility()
-                                && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer())));
+                                && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()));
 
                 if (freePing && tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
@@ -581,8 +586,9 @@ public class AbilityFactoryDealDamage {
             // because we can
             else if (tgt.canTgtPlayer() && ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN)
                     && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()))
-                    || saMe.getPayCosts() == null)) {
+                    || saMe.getPayCosts() == null || isTrigger)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
+                    System.out.println(saMe.getSourceCard() + "damageChoosingTargets");
                     continue;
                 }
             }
@@ -687,6 +693,13 @@ public class AbilityFactoryDealDamage {
         return true;
     }
 
+    private boolean dealDamageDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+            return false;
+        }
+        return dealDamageDoTriggerAINoCost(af, sa, mandatory);
+    }
+
     /**
      * <p>
      * damageDoTriggerAI.
@@ -700,10 +713,7 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean dealDamageDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
-            return false;
-        }
+    private boolean dealDamageDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final Card source = sa.getSourceCard();
         int dmg;
@@ -722,7 +732,7 @@ public class AbilityFactoryDealDamage {
                 return false;
             }
         } else {
-            if (!this.damageChoosingTargets(sa, tgt, dmg, mandatory) && !mandatory) {
+            if (!this.damageChoosingTargets(sa, tgt, dmg, true, mandatory) && !mandatory) {
                 return false;
             }
 
