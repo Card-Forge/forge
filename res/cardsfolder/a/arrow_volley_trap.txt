@@ -1,6 +1,6 @@
 Name:Arrow Volley Trap
 ManaCost:3 W W
-Types:Instant
+Types:Instant Trap
 Text:no text
 A:SP$ DealDamage | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (1) | NumDmg$ 1 | SubAbility$ SVar=DBDamage2 | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of target attacking creatures.
 A:SP$ DealDamage | Cost$ 1 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (1) | NumDmg$ 1 | SubAbility$ SVar=DBDamage2 | IsPresent$ Creature.attacking | PresentCompare$ GE4 | CostDesc$ If four or more creatures are attacking, you may pay 1 W rather than pay CARDNAME's mana cost. | SpellDescription$  
