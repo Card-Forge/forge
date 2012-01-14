@@ -79,7 +79,7 @@ public abstract class CostPartWithList extends CostPart {
      */
     public final void addListToHash(final SpellAbility sa, final String hash) {
         for (final Card card : this.getList()) {
-            Card copy = CardUtil.getLKICopy(card);
+            Card copy = CardUtil.getLKICopy(card,card.getCurState());
             sa.addCostToHashList(copy, hash);
         }
     }

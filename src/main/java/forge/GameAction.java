@@ -132,6 +132,7 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
+            String state = c.getCurState();
             if (c.isInAlternateState()) {
                 c.setState("Original");
             }
@@ -140,8 +141,8 @@ public class GameAction {
                 c.setState("Original");
             }
 
+            lastKnownInfo = CardUtil.getLKICopy(c,state);
             copied = AllZone.getCardFactory().copyCard(c);
-            lastKnownInfo = CardUtil.getLKICopy(c);
 
             copied.setUnearthed(c.isUnearthed());
 
