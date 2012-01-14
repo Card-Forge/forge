@@ -128,6 +128,16 @@ public class AbilityFactoryPump {
             public void resolve() {
                 AbilityFactoryPump.this.pumpResolve(this);
             } // resolve
+
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryPump.this.pumpTriggerAINoCost(
+                            AbilityFactoryPump.this.abilityFactory, this, mandatory);
+                }
+                return AbilityFactoryPump.this.pumpTriggerAI(
+                        AbilityFactoryPump.this.abilityFactory, this, mandatory);
+            }
         }; // SpellAbility
 
         return spPump;
@@ -694,7 +704,7 @@ public class AbilityFactoryPump {
 
         return true;
     } // pumpMandatoryTarget()
-
+    
     /**
      * <p>
      * pumpTriggerAI.
@@ -712,7 +722,23 @@ public class AbilityFactoryPump {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
+        return pumpTriggerAI(af, sa, mandatory);
+    }
 
+    /**
+     * <p>
+     * pumpTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private boolean pumpTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         int defense;

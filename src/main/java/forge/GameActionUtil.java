@@ -182,6 +182,7 @@ public final class GameActionUtil {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(c).append(" - Cascade.");
                 ability.setStackDescription(sb.toString());
+                ability.setActivatingPlayer(controller);
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
 
