@@ -759,7 +759,7 @@ public class AbilityFactoryDestroy {
 
         humanlist = humanlist.getValidCards(valid.split(","), source.getController(), source);
         computerlist = computerlist.getValidCards(valid.split(","), source.getController(), source);
-        
+
         humanlist = humanlist.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {

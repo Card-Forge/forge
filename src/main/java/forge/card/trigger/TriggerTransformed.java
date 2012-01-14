@@ -12,10 +12,10 @@ import forge.card.spellability.SpellAbility;
  */
 public class TriggerTransformed extends Trigger {
 
-    public TriggerTransformed(final HashMap<String,String> params, final Card host, final boolean intrinsic) {
-        super(params,host,intrinsic);
+    public TriggerTransformed(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+        super(params, host, intrinsic);
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
@@ -27,7 +27,7 @@ public class TriggerTransformed extends Trigger {
                 return false;
             }
         }
-        
+
         return true;
     }
 

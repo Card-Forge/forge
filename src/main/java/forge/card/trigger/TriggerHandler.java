@@ -304,8 +304,8 @@ public class TriggerHandler {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
-        
-        if(mode.equals("Transformed")) {
+
+        if (mode.equals("Transformed")) {
             System.out.println("Hiyo!");
         }
 

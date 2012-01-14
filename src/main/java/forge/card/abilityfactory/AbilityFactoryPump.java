@@ -704,7 +704,7 @@ public class AbilityFactoryPump {
 
         return true;
     } // pumpMandatoryTarget()
-    
+
     /**
      * <p>
      * pumpTriggerAI.

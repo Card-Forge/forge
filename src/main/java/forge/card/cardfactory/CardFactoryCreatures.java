@@ -540,8 +540,8 @@ public class CardFactoryCreatures {
 
                     CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
                     list = list.getValidCards("Card.Other+YouCtrl".split(","), card.getController(), card);
-                    
-                    for(Card c : list){
+
+                    for (Card c : list) {
                         c.addController(opp);
                     }
                 } // resolve()

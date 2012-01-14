@@ -911,9 +911,11 @@ public final class CardUtil {
      * 
      * @param c
      *            a Card.
+     * @param state
+     *            a String object
      * @return a copy of C with LastKnownInfo stuff retained.
      */
-    public static Card getLKICopy(final Card c,final String state) {
+    public static Card getLKICopy(final Card c, final String state) {
         if (c.isToken()) {
             return c;
         }

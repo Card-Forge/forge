@@ -141,7 +141,7 @@ public class GameAction {
                 c.setState("Original");
             }
 
-            lastKnownInfo = CardUtil.getLKICopy(c,state);
+            lastKnownInfo = CardUtil.getLKICopy(c, state);
             copied = AllZone.getCardFactory().copyCard(c);
 
             copied.setUnearthed(c.isUnearthed());
