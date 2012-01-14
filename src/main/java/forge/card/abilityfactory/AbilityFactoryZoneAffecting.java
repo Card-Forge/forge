@@ -121,6 +121,14 @@ public class AbilityFactoryZoneAffecting {
                 AbilityFactoryZoneAffecting.drawResolve(af, this);
             }
 
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryZoneAffecting.drawTriggerNoCost(af, this, mandatory);
+                }
+                return AbilityFactoryZoneAffecting.drawTrigger(af, this, mandatory);
+            }
+
         };
         return spDraw;
     }
@@ -466,6 +474,23 @@ public class AbilityFactoryZoneAffecting {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
+        return drawTriggerNoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * drawTriggerNoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean drawTriggerNoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         if (!AbilityFactoryZoneAffecting.drawTargetAI(af, sa, false, mandatory)) {
             return false;
@@ -1053,6 +1078,14 @@ public class AbilityFactoryZoneAffecting {
                 AbilityFactoryZoneAffecting.discardResolve(af, this);
             }
 
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryZoneAffecting.discardTriggerNoCost(af, this, mandatory);
+                }
+                return AbilityFactoryZoneAffecting.discardTrigger(af, this, mandatory);
+            }
+
         };
         return spDiscard;
     }
@@ -1516,6 +1549,23 @@ public class AbilityFactoryZoneAffecting {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
+        return discardTriggerNoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * discardTriggerNoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean discardTriggerNoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final Target tgt = af.getAbTgt();
         if (tgt != null) {
