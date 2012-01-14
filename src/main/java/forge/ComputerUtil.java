@@ -388,6 +388,44 @@ public class ComputerUtil {
 
     /**
      * <p>
+     * playSpellAbilityWithoutPayingManaCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
+        final SpellAbility newSA = sa.copy();
+        final Cost cost = sa.getPayCosts();
+        for (CostPart part : cost.getCostParts()) {
+            if (part instanceof CostMana) {
+                ((CostMana) part).setMana("0");
+            }
+        }
+        cost.setNoManaCostChange(true);
+        newSA.setManaCost("0");
+        final StringBuilder sb = new StringBuilder();
+        sb.append(sa.getDescription()).append(" (without paying its mana cost)");
+        newSA.setDescription(sb.toString());
+        newSA.setActivatingPlayer(AllZone.getComputerPlayer());
+
+        if (!canPayAdditionalCosts(newSA)) {
+            return;
+        }
+
+        final Card source = newSA.getSourceCard();
+        if (newSA.isSpell() && !source.isCopiedSpell()) {
+            newSA.setSourceCard(AllZone.getGameAction().moveToStack(source));
+        }
+
+        final CostPayment pay = new CostPayment(cost, newSA);
+        pay.payComputerCosts();
+
+        AllZone.getStack().add(newSA);
+    }
+
+    /**
+     * <p>
      * playNoStack.
      * </p>
      * 

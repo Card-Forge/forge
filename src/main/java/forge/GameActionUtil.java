@@ -167,7 +167,7 @@ public final class GameActionUtil {
                                             continue;
                                         }
                                     }
-                                    ComputerUtil.playStackFree(sa);
+                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(sa);
                                     revealed.remove(cascadedCard);
                                     break;
                                 }
@@ -294,7 +294,7 @@ public final class GameActionUtil {
                                                     continue;
                                                 }
                                             }
-                                            ComputerUtil.playStackFree(sa);
+                                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(sa);
                                             revealed.remove(rippledCards[i]);
                                             break;
                                         }
