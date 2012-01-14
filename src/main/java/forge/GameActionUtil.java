@@ -573,26 +573,6 @@ public final class GameActionUtil {
             return;
         }
 
-        if (affected.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
-            final Ability ability2 = new Ability(affected, "0") {
-                @Override
-                public void resolve() {
-                    affected.addCounter(Counters.P1P1, 1);
-                }
-            }; // ability2
-
-            final StringBuilder sb2 = new StringBuilder();
-            sb2.append(affected.getName()).append(" - gets a +1/+1 counter");
-            ability2.setStackDescription(sb2.toString());
-            final int amount = affected
-                    .getAmountOfKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.");
-
-            for (int i = 0; i < amount; i++) {
-                AllZone.getStack().addSimultaneousStackEntry(ability2);
-            }
-
-        }
-
         if (affected.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
             final Ability ability = new Ability(source, "0") {
                 @Override

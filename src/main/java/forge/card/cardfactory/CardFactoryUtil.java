@@ -497,9 +497,6 @@ public class CardFactoryUtil {
                 && (power > 0)) {
             value += 4;
         }
-        if (c.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
-            value += 10;
-        }
 
         // Defensive Keywords
         if (c.hasKeyword("Reach")) {
