@@ -262,6 +262,20 @@ Reiver Demon
 - Added the recent commit logs to changes.txt.
 - Fixed creatures with Deathtouch destroying creatures and dealing damage afterwards.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- clean up a Java warning in AFSetState
+- remove some debug code related to Observers
+- Improved the AI of AF DestroyAll to take permanents with SacMe SVar into account.
+- Changed the default value of "ui.card.overlay" to true.
+- Added trigger mode "Transformed".
+- Hardcoded Sky Swallower will now give away other cards, not self.
+- Fixed Undead Alchemist
+- Update SubAbility for a few of my favorite cards (SVar= is not needed and has not been needed for a long time.)
+- Started adding doTrigger functions to Spell AF's, because canPlayAI is not suited for cases like a spell revealed by a Cascade ability. First AF to test this is AF DealDamage.
+- Added the ability to get LKI copies of a certain state. Fixes Unholy Fiend triggering Village Cannibals and maybe more.
+- Cards should never be tapped outside the battlefield.
+- Added trap type to Arrow Volley Trap
+- Added canPlayFromEffectAI function.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -293,6 +307,7 @@ Soul Seizer // Ghastly Haunting
 Thalia, Guardian of Thraben
 Lambholt Elder // Silverpelt Werewolf
 Beguiler of Wills
+Huntmaster of the Fells // Ravager of the Fells
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
