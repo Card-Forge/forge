@@ -722,7 +722,7 @@ public class AbilityFactoryPump {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
-        return pumpTriggerAI(af, sa, mandatory);
+        return pumpTriggerAINoCost(af, sa, mandatory);
     }
 
     /**
