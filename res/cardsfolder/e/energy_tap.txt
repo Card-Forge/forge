@@ -2,7 +2,7 @@ Name:Energy Tap
 ManaCost:U
 Types:Sorcery
 Text:no text
-A:SP$ Tap | Cost$ U | TgtPrompt$ Select target untapped creature you control | ValidTgts$ Creature.untapped+YouCtrl | SubAbility$ SVar=DBMana | SpellDescription$ Tap target untapped creature you control. If you do, add X to your mana pool, where X is that creature's converted mana cost.
+A:SP$ Tap | Cost$ U | TgtPrompt$ Select target untapped creature you control | ValidTgts$ Creature.untapped+YouCtrl | SubAbility$ DBMana | SpellDescription$ Tap target untapped creature you control. If you do, add X to your mana pool, where X is that creature's converted mana cost.
 SVar:DBMana:DB$Mana | Produced$ X
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True

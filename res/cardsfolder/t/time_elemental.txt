@@ -7,7 +7,7 @@ A:AB$ ChangeZone | Cost$ 2 U U T | ValidTgts$ Permanent.unenchanted | TgtPrompt$
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelayedTrig | TriggerDescription$ When CARDNAME attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelayedTrig | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.
 SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigSac | TriggerDescription$ At end of combat, sacrifice CARDNAME and CARDNAME deals 5 damage to you.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ SVar=DBDamage
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBDamage
 SVar:DBDamage:DB$DealDamage | NumDmg$ 5 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
