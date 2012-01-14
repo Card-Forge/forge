@@ -98,8 +98,8 @@ public final class GameActionUtil {
                         }
                     }
                 }
-                // keyword get cleared for Bitumonous Blast
-                if (c.hasKeyword("Cascade") || c.getName().equals("Bituminous Blast")) {
+
+                if (c.hasKeyword("Cascade")) {
                     this.doCascade(c);
                 }
             } // execute()
