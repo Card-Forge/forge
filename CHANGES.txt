@@ -275,6 +275,9 @@ Reiver Demon
 - Cards should never be tapped outside the battlefield.
 - Added trap type to Arrow Volley Trap
 - Added canPlayFromEffectAI function.
+- Added the recent commit logs to changes.txt.
+- Added canPlayFromEffectAI to AF Pump.
+- Little fix for Cascade.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
