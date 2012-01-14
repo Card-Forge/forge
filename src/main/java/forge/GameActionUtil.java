@@ -283,11 +283,20 @@ public final class GameActionUtil {
                                         final ArrayList<SpellAbility> choices = rippledCards[i].getBasicSpells();
 
                                         for (final SpellAbility sa : choices) {
-                                            if (sa.canPlayAI() && !sa.getSourceCard().isType("Legendary")) {
-                                                ComputerUtil.playStackFree(sa);
-                                                revealed.remove(rippledCards[i]);
-                                                break;
+                                          //Spells
+                                            if (sa instanceof Spell) {
+                                                Spell spell = (Spell) sa;
+                                                if (!spell.canPlayFromEffectAI(false, true)) {
+                                                    continue;
+                                                }
+                                            } else {
+                                                if (!sa.canPlayAI() && !sa.getSourceCard().isType("Legendary")) {
+                                                    continue;
+                                                }
                                             }
+                                            ComputerUtil.playStackFree(sa);
+                                            revealed.remove(rippledCards[i]);
+                                            break;
                                         }
                                     }
                                 }
