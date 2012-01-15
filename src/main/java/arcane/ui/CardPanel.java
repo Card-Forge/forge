@@ -364,16 +364,16 @@ public class CardPanel extends JPanel implements CardContainer {
     protected final void paintChildren(final Graphics g) {
         super.paintChildren(g);
 
-        final boolean canDrawOverCard = this.showCastingCost && !this.isAnimationPanel;
-
-        if (!canDrawOverCard) {
+        if (this.isAnimationPanel) {
             return;
         }
 
-        int width = ManaSymbols.getWidth(this.getGameCard().getManaCost());
-        if (this.cardWidth < 200) {
-            ManaSymbols.draw(g, this.getGameCard().getManaCost(), (this.cardXOffset + (this.cardWidth / 2))
-                    - (width / 2), this.cardYOffset + (this.cardHeight / 2));
+        if (this.showCastingCost) {
+            int width = ManaSymbols.getWidth(this.getGameCard().getManaCost());
+            if (this.cardWidth < 200) {
+                ManaSymbols.draw(g, this.getGameCard().getManaCost(), (this.cardXOffset + (this.cardWidth / 2))
+                        - (width / 2), this.cardYOffset + (this.cardHeight / 2));
+            }
         }
 
         final int counters = this.getCard().getNumberOfCounters();
