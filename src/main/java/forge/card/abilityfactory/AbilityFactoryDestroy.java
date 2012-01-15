@@ -120,6 +120,14 @@ public class AbilityFactoryDestroy {
                 AbilityFactoryDestroy.destroyResolve(af, this);
             }
 
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryDestroy.destroyDoTriggerAINoCost(af, this, mandatory);
+                }
+                return AbilityFactoryDestroy.destroyDoTriggerAI(af, this, mandatory);
+            }
+
         };
         return spDestroy;
     }
@@ -276,7 +284,7 @@ public class AbilityFactoryDestroy {
 
         return ((r.nextFloat() < .6667) && chance);
     }
-
+    
     /**
      * <p>
      * destroyDoTriggerAI.
@@ -294,6 +302,23 @@ public class AbilityFactoryDestroy {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
+        return destroyDoTriggerAINoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * destroyDoTriggerAINoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean destroyDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
