@@ -400,10 +400,7 @@ public class AbilityFactorySacrifice {
 
                 // Since all of the cards have remAIDeck:True, I enabled 1 for 1
                 // (or X for X) trades for special decks
-                if (humanList.size() < amount /*
-                                               * || computerList.size() >=
-                                               * amount
-                                               */) {
+                if (humanList.size() < amount) {
                     return false;
                 }
             }

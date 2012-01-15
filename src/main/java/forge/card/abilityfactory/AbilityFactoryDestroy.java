@@ -200,8 +200,7 @@ public class AbilityFactoryDestroy {
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
             if (!noRegen) {
-                // TODO filter out things that could regenerate in response?
-                // might be tougher?
+                // TODO filter out things that might be tougher?
                 list = list.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
@@ -216,7 +215,6 @@ public class AbilityFactoryDestroy {
         }
 
         if (abCost != null) {
-            // AI currently disabled for some costs
             if (!CostUtil.checkSacrificeCost(abCost, source)) {
                 return false;
             }
@@ -284,7 +282,7 @@ public class AbilityFactoryDestroy {
 
         return ((r.nextFloat() < .6667) && chance);
     }
-    
+
     /**
      * <p>
      * destroyDoTriggerAI.
