@@ -19,7 +19,6 @@ package forge.view.toolbox;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -77,7 +76,7 @@ public class FButton extends JButton {
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
-        this.setFont(this.skin.getFont1().deriveFont(Font.BOLD, 15));
+        this.setFont(this.skin.getBoldFont(14));
         this.imgL = skin.getImage("button.upLEFT");
         this.imgM = skin.getImage("button.upCENTER");
         this.imgR = skin.getImage("button.upRIGHT");

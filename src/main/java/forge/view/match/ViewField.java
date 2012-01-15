@@ -19,7 +19,6 @@ package forge.view.match;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
@@ -175,7 +174,7 @@ public class ViewField extends FRoundedPanel {
             public void componentResized(ComponentEvent e) {
                 int side = (int) (avatarArea.getHeight() * 0.7);
                 int size = (int) (avatarArea.getHeight() * 0.24);
-                lblLife.setFont(ViewField.this.skin.getFont1().deriveFont(Font.BOLD, (size)));
+                lblLife.setFont(ViewField.this.skin.getBoldFont(size));
                 lblAvatar.setIcon(new ImageIcon(img.getScaledInstance(side, side, java.awt.Image.SCALE_SMOOTH)));
             }
         });
@@ -686,7 +685,7 @@ public class ViewField extends FRoundedPanel {
             this.addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(ComponentEvent e) {
-                    setFont(ViewField.this.skin.getFont1().deriveFont(Font.PLAIN, (getHeight() / 2)));
+                    setFont(ViewField.this.skin.getFont((int) (getHeight() / 2)));
                     setIcon(skin.getIcon(iconAddress, h - 2 * padding, h - 2 * padding));
                 }
             });

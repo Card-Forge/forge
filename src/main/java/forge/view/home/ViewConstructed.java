@@ -1,7 +1,6 @@
 package forge.view.home;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -92,25 +91,25 @@ public class ViewConstructed extends JPanel {
         lstDecksHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 
         JLabel lblHuman = new JLabel("Choose your deck:");
-        lblHuman.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+        lblHuman.setFont(skin.getBoldFont(16));
         lblHuman.setForeground(skin.getColor("text"));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblColorInfo = new JLabel(colorsToolTip);
         lblColorInfo.setToolTipText(colorsToolTip);
-        lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblColorInfo.setFont(skin.getItalicFont(12));
         lblColorInfo.setForeground(skin.getColor("text"));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblThemeInfo = new JLabel(themeToolTip);
         lblThemeInfo.setToolTipText(themeToolTip);
-        lblThemeInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblThemeInfo.setFont(skin.getItalicFont(12));
         lblThemeInfo.setForeground(skin.getColor("text"));
         lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblDecklistInfo = new JLabel(decklistToolTip);
         lblDecklistInfo.setToolTipText(decklistToolTip);
-        lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblDecklistInfo.setFont(skin.getItalicFont(12));
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -165,25 +164,25 @@ public class ViewConstructed extends JPanel {
         lstDecksAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 
         JLabel lblAI = new JLabel("Choose a deck for the computer:");
-        lblAI.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+        lblAI.setFont(skin.getBoldFont(16));
         lblAI.setForeground(skin.getColor("text"));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblColorInfo = new JLabel(colorsToolTip);
         lblColorInfo.setToolTipText(colorsToolTip);
-        lblColorInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblColorInfo.setFont(skin.getItalicFont(12));
         lblColorInfo.setForeground(skin.getColor("text"));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblThemeInfo = new JLabel(themeToolTip);
         lblThemeInfo.setToolTipText(themeToolTip);
-        lblThemeInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblThemeInfo.setFont(skin.getItalicFont(12));
         lblThemeInfo.setForeground(skin.getColor("text"));
         lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblDecklistInfo = new JLabel(decklistToolTip);
         lblDecklistInfo.setToolTipText(decklistToolTip);
-        lblDecklistInfo.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+        lblDecklistInfo.setFont(skin.getItalicFont(12));
         lblDecklistInfo.setForeground(skin.getColor("text"));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 

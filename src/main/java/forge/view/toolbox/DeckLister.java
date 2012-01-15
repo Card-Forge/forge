@@ -1,7 +1,6 @@
 package forge.view.toolbox;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -226,7 +225,7 @@ public class DeckLister extends JPanel {
         public TitleLabel(String txt0) {
             super(txt0);
             setForeground(skin.getColor("text"));
-            setFont(skin.getFont1().deriveFont(Font.PLAIN, 11));
+            setFont(skin.getFont(11));
             setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
@@ -242,7 +241,7 @@ public class DeckLister extends JPanel {
                 setBackground(Color.GREEN);
             }
             setHorizontalAlignment(SwingConstants.CENTER);
-            setFont(skin.getFont1().deriveFont(Font.BOLD, 12));
+            setFont(skin.getBoldFont(12));
             setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
@@ -252,7 +251,7 @@ public class DeckLister extends JPanel {
             super(txt0);
             setHorizontalAlignment(SwingConstants.CENTER);
             setForeground(skin.getColor("text"));
-            setFont(skin.getFont1().deriveFont(Font.BOLD, 12));
+            setFont(skin.getBoldFont(12));
             setHorizontalAlignment(SwingConstants.CENTER);
         }
     }

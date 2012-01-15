@@ -1,7 +1,6 @@
 package forge.view.toolbox;
 
 import java.awt.Component;
-import java.awt.Font;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -54,7 +53,7 @@ public class FList extends JList {
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
             lblItem.setBackground(skin.getColor("active"));
             lblItem.setForeground(skin.getColor("text"));
-            lblItem.setFont(skin.getFont1().deriveFont(Font.PLAIN, 13));
+            lblItem.setFont(skin.getFont(13));
             lblItem.setOpaque(isSelected);
             return lblItem;
         }

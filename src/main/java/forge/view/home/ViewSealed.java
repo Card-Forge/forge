@@ -1,6 +1,5 @@
 package forge.view.home;
 
-import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,7 +40,7 @@ public class ViewSealed extends JPanel {
 
         // Title
         JLabel lblTitle = new JLabel("Select a deck for yourself, or build a new one: ");
-        lblTitle.setFont(skin.getFont1().deriveFont(Font.BOLD, 15));
+        lblTitle.setFont(skin.getBoldFont(14));
         lblTitle.setForeground(skin.getColor("text"));
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 

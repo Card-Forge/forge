@@ -1,7 +1,6 @@
 package forge.view.home;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -58,7 +57,7 @@ public class SubButton extends JButton {
                 int px =  (int) (SubButton.this.getHeight() / 2);
                 px = (px < 10 ? 10 : px);
                 px = (px > 15 ? 15 : px);
-                SubButton.this.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, px));
+                SubButton.this.setFont(AllZone.getSkin().getFont(px));
             }
         });
     }

@@ -1,7 +1,5 @@
 package forge.view.home;
 
-import java.awt.Font;
-
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
@@ -78,7 +76,7 @@ public class ViewUtilities extends JPanel {
         tpnLicensing = new JTextPane();
         tpnLicensing.setOpaque(false);
         tpnLicensing.setForeground(skin.getColor("text"));
-        tpnLicensing.setFont(skin.getFont1().deriveFont(Font.PLAIN, 15));
+        tpnLicensing.setFont(skin.getFont(15));
         tpnLicensing.setAlignmentX(SwingConstants.CENTER);
         tpnLicensing.setFocusable(false);
         tpnLicensing.setEditable(false);

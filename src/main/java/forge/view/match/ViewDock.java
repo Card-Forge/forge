@@ -20,7 +20,6 @@ package forge.view.match;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -359,7 +358,7 @@ public class ViewDock extends FRoundedPanel {
             super(s0);
 
             this.setForeground(ViewDock.this.skin.getColor("text"));
-            this.setFont(ViewDock.this.skin.getFont1().deriveFont(Font.PLAIN, 16));
+            this.setFont(ViewDock.this.skin.getFont(16));
         }
     }
 
@@ -395,7 +394,7 @@ public class ViewDock extends FRoundedPanel {
         public KeyboardShortcutField() {
             super();
             this.setEditable(false);
-            this.setFont(ViewDock.this.skin.getFont1().deriveFont(Font.PLAIN, 14));
+            this.setFont(ViewDock.this.skin.getFont(14));
 
             this.addKeyListener(new KeyAdapter() {
                 @Override

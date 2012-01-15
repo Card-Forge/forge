@@ -19,7 +19,6 @@ package forge.quest.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -476,7 +475,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         this.lblTemp2 = new JLabel(sb.toString());
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+        this.lblTemp2.setFont(skin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
@@ -578,7 +577,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
-        this.lblTemp2.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+        this.lblTemp2.setFont(skin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -600,7 +599,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
         this.lblTemp2 = new JLabel("You lose! You have lost 15 credits.");
-        this.lblTemp2.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+        this.lblTemp2.setFont(skin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -689,7 +688,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private class TitleLabel extends JLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(skin.getFont1().deriveFont(Font.ITALIC, 16));
+            this.setFont(skin.getFont(16));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

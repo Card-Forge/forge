@@ -1,7 +1,6 @@
 package forge.view.home;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -94,13 +93,13 @@ public class ViewDraft extends JPanel {
         skin = AllZone.getSkin();
 
         JLabel lblHuman = new JLabel("Select your deck: ");
-        lblHuman.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+        lblHuman.setFont(skin.getBoldFont(16));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
         lblHuman.setForeground(skin.getColor("text"));
         this.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
 
         JLabel lblAI = new JLabel("Who will you play?");
-        lblAI.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+        lblAI.setFont(skin.getBoldFont(16));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
         lblAI.setForeground(skin.getColor("text"));
         this.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
@@ -150,7 +149,7 @@ public class ViewDraft extends JPanel {
         tpnDirections = new JTextPane();
         tpnDirections.setOpaque(false);
         tpnDirections.setForeground(skin.getColor("text"));
-        tpnDirections.setFont(skin.getFont1().deriveFont(Font.PLAIN, 15));
+        tpnDirections.setFont(skin.getFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);
         tpnDirections.setEditable(false);

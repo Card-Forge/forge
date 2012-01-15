@@ -44,8 +44,11 @@ public class FSkin {
     private Map<String, ImageIcon> icons;
     private Map<String, Color> colors;
     private Map<String, Image> images;
+    private Map<Integer, Font> plainFonts;
+    private Map<Integer, Font> boldFonts;
+    private Map<Integer, Font> italicFonts;
 
-    private Font font1 = null;
+    private Font font = null;
     private String name = "default";
     private final String spriteFile = "";
     private final String font1file = "font1.ttf";
@@ -113,7 +116,29 @@ public class FSkin {
         this.images = new HashMap<String, Image>();
 
         // Fonts
-        this.setFont1(this.retrieveFont(dirName + this.font1file));
+        this.setFont(this.retrieveFont(dirName + this.font1file));
+        plainFonts = new HashMap<Integer, Font>();
+        plainFonts.put(10, font.deriveFont(Font.PLAIN, 10));
+        plainFonts.put(11, font.deriveFont(Font.PLAIN, 11));
+        plainFonts.put(12, font.deriveFont(Font.PLAIN, 12));
+        plainFonts.put(13, font.deriveFont(Font.PLAIN, 13));
+        plainFonts.put(14, font.deriveFont(Font.PLAIN, 14));
+        plainFonts.put(15, font.deriveFont(Font.PLAIN, 15));
+        plainFonts.put(16, font.deriveFont(Font.PLAIN, 16));
+        plainFonts.put(18, font.deriveFont(Font.PLAIN, 18));
+        plainFonts.put(20, font.deriveFont(Font.PLAIN, 20));
+        plainFonts.put(22, font.deriveFont(Font.PLAIN, 22));
+
+        boldFonts = new HashMap<Integer, Font>();
+        boldFonts.put(12, font.deriveFont(Font.BOLD, 12));
+        boldFonts.put(14, font.deriveFont(Font.BOLD, 14));
+        boldFonts.put(16, font.deriveFont(Font.BOLD, 16));
+        boldFonts.put(18, font.deriveFont(Font.BOLD, 18));
+        boldFonts.put(20, font.deriveFont(Font.BOLD, 20));
+
+        italicFonts = new HashMap<Integer, Font>();
+        italicFonts.put(12, font.deriveFont(Font.ITALIC, 12));
+        italicFonts.put(14, font.deriveFont(Font.ITALIC, 14));
 
         // Images
         this.setImage("bg.texture", this.retrieveImage(dirName + "bg_texture.jpg"));
@@ -246,23 +271,52 @@ public class FSkin {
         return new Color(r, g, b, a);
     }
 
-    /**
-     * Primary font used in titles and buttons and most text output.
-     * 
-     * @return {@link java.awt.font} font1
-     */
-    public Font getFont1() {
-        return this.font1;
+    /** @return {@link java.awt.font} font */
+    public Font getFont() {
+        return this.font;
     }
+
 
     /**
      * Primary font used in titles and buttons and most text output.
      * 
-     * @param font10
-     *            &emsp; an image icon
+     * @param font0 - an image icon
      */
-    public void setFont1(final Font font10) {
-        this.font1 = font10;
+    public void setFont(final Font font0) {
+        this.font = font0;
+    }
+
+    /**
+     * @param size - integer, pixel size
+     * @return {@link java.awt.font} font1
+     */
+    public Font getFont(int size) {
+        if (plainFonts.get(size) == null) {
+            System.out.println("FSkin: A plain font of size " + size + " hasn't been derived yet.");
+        }
+        return plainFonts.get(size);
+    }
+
+    /**
+     * @param size - integer, pixel size
+     * @return {@link java.awt.font} font1
+     */
+    public Font getBoldFont(int size) {
+        if (boldFonts.get(size) == null) {
+            System.out.println("FSkin: A bold font of size " + size + " hasn't been derived yet.");
+        }
+        return boldFonts.get(size);
+    }
+
+    /**
+     * @param size - integer, pixel size
+     * @return {@link java.awt.font} font1
+     */
+    public Font getItalicFont(int size) {
+        if (boldFonts.get(size) == null) {
+            System.out.println("FSkin: An italic font of size " + size + " hasn't been derived yet.");
+        }
+        return italicFonts.get(size);
     }
 
     /**

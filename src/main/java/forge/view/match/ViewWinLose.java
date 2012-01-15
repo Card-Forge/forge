@@ -67,18 +67,18 @@ public class ViewWinLose {
 
         lblTitle.setForeground(Color.white);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(AllZone.getSkin().getFont1().deriveFont(Font.BOLD, 30));
+        lblTitle.setFont(AllZone.getSkin().getFont().deriveFont(Font.BOLD, 30));
 
         lblStats.setForeground(Color.white);
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 26));
+        lblStats.setFont(AllZone.getSkin().getFont().deriveFont(Font.PLAIN, 26));
 
         btnContinue.setText("Continue");
-        btnContinue.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 22));
+        btnContinue.setFont(AllZone.getSkin().getFont(22));
         btnRestart.setText("Restart");
-        btnRestart.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 22));
+        btnRestart.setFont(AllZone.getSkin().getFont(22));
         btnQuit.setText("Quit");
-        btnQuit.setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, 22));
+        btnQuit.setFont(AllZone.getSkin().getFont(22));
 
         // End game and set state of "continue" button
         Phase.setGameBegins(0);

@@ -1,6 +1,5 @@
 package forge.view.home;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -73,7 +72,7 @@ public class ViewSettings extends JScrollPane {
 
         // Deck Building Options
         JLabel lblTitleDecks = new JLabel("Deck Building Options");
-        lblTitleDecks.setFont(skin.getFont1().deriveFont(Font.PLAIN, 16));
+        lblTitleDecks.setFont(skin.getFont(16));
         lblTitleDecks.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
         lblTitleDecks.setForeground(skin.getColor("text"));
         viewport.add(lblTitleDecks, constraints2 + ", gaptop 2%");
@@ -98,7 +97,7 @@ public class ViewSettings extends JScrollPane {
 
         // Gameplay Options
         JLabel lblTitleUI = new JLabel("Gameplay Options");
-        lblTitleUI.setFont(skin.getFont1().deriveFont(Font.PLAIN, 16));
+        lblTitleUI.setFont(skin.getFont(16));
         lblTitleUI.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
         lblTitleUI.setForeground(skin.getColor("text"));
         viewport.add(lblTitleUI, constraints2);
@@ -146,7 +145,7 @@ public class ViewSettings extends JScrollPane {
 
         // Graphic Options
         JLabel lblTitleGraphics = new JLabel("Graphic Options");
-        lblTitleGraphics.setFont(skin.getFont1().deriveFont(Font.PLAIN, 16));
+        lblTitleGraphics.setFont(skin.getFont(16));
         lblTitleGraphics.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
         lblTitleGraphics.setForeground(skin.getColor("text"));
         viewport.add(lblTitleGraphics, constraints2);
@@ -288,7 +287,7 @@ public class ViewSettings extends JScrollPane {
         public OptionsCheckBox(String txt0) {
             super();
             setText(txt0);
-            setFont(skin.getFont1().deriveFont(Font.BOLD, 12));
+            setFont(skin.getBoldFont(12));
             setForeground(skin.getColor("text"));
             setBackground(skin.getColor("hover"));
             setOpaque(false);
@@ -312,7 +311,7 @@ public class ViewSettings extends JScrollPane {
         public OptionsRadio(String txt0) {
             super();
             setText(txt0);
-            setFont(skin.getFont1().deriveFont(Font.BOLD, 12));
+            setFont(skin.getBoldFont(12));
             setForeground(skin.getColor("text"));
             setBackground(skin.getColor("hover"));
             setOpaque(false);
@@ -392,7 +391,7 @@ public class ViewSettings extends JScrollPane {
     private class NoteLabel extends JLabel {
         public NoteLabel(String txt0) {
             super(txt0);
-            setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+            setFont(skin.getItalicFont(12));
             setForeground(skin.getColor("text"));
         }
     }
@@ -401,7 +400,7 @@ public class ViewSettings extends JScrollPane {
     private class TitleLabel extends JLabel {
         public TitleLabel(String txt0) {
             super(txt0);
-            setFont(skin.getFont1().deriveFont(Font.BOLD, 12));
+            setFont(skin.getBoldFont(12));
             setForeground(skin.getColor("text"));
         }
     }

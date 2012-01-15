@@ -18,7 +18,6 @@
 package forge.view.match;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -172,32 +171,32 @@ public class ViewTabber extends FRoundedPanel {
                     JLabel[] labels = (JLabel[]) it.next().getValue();
                     for (x = 0; x < labels.length; x++) {
                         if (x > 0) {
-                            labels[x].setFont(skin.getFont1().deriveFont(Font.PLAIN, regular));
+                            labels[x].setFont(skin.getFont(regular));
                         }
                         else {
-                            labels[x].setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                            labels[x].setFont(skin.getFont(big));
                         }
                     }
                 }
 
                 // Stack text areas
                 for (JTextArea tar : stackTARs) {
-                    tar.setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                    tar.setFont(skin.getFont(big));
                 }
 
                 // Combat text areas
                 for (JTextArea tar : combatTARs) {
-                    tar.setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                    tar.setFont(skin.getFont(big));
                 }
 
                 // Console text areas
                 for (JTextArea tar : consoleTARs) {
-                    tar.setFont(skin.getFont1().deriveFont(Font.PLAIN, big));
+                    tar.setFont(skin.getFont(big));
                 }
 
                 // Devmode Labels
                 for (JLabel lbl : devLBLs) {
-                    lbl.setFont(skin.getFont1().deriveFont(Font.PLAIN, regular));
+                    lbl.setFont(skin.getFont(regular));
                 }
             }
         });

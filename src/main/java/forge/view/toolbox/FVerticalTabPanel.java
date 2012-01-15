@@ -19,7 +19,6 @@ package forge.view.toolbox;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ComponentAdapter;
@@ -228,7 +227,7 @@ public class FVerticalTabPanel extends FPanel {
                     // Careful with this font scale factor; the vertical tabs will be
                     // unreadable
                     // if small window, too big if large window.
-                    setFont(FVerticalTabPanel.this.skin.getFont1().deriveFont(Font.PLAIN, (int) (h * 0.16)));
+                    setFont(FVerticalTabPanel.this.skin.getFont((int) (h * 0.16)));
                 }
             });
         }

@@ -58,7 +58,7 @@ public class ViewDetail extends FRoundedPanel {
             public void componentResized(ComponentEvent e) {
                 int px =  (int) (ViewDetail.this.getWidth() / 15);
                 px = (px < 11 ? 11 : px);
-                Font font = skin.getFont1().deriveFont(Font.PLAIN, px);
+                Font font = skin.getFont(px);
 
                 pnlDetail.getNameCostLabel().setFont(font);
                 pnlDetail.getTypeLabel().setFont(font);
@@ -68,7 +68,7 @@ public class ViewDetail extends FRoundedPanel {
                 pnlDetail.getSetInfoLabel().setFont(font);
                 pnlDetail.getCDArea().setFont(font);
 
-                setFont(AllZone.getSkin().getFont1().deriveFont(Font.PLAIN, px));
+                setFont(AllZone.getSkin().getFont(px));
             }
         });
     }

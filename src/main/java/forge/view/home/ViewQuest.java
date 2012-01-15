@@ -1,6 +1,5 @@
 package forge.view.home;
 
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -85,7 +84,7 @@ public class ViewQuest extends JScrollPane {
         lblTitle.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
         lblTitle.setForeground(skin.getColor("text"));
         lblTitle.setBackground(skin.getColor("theme").darker());
-        lblTitle.setFont(skin.getFont1().deriveFont(Font.BOLD, 20));
+        lblTitle.setFont(skin.getBoldFont(20));
         viewport.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 2% 0, span 2");
 
         File f = new File("res/quest/questData.dat");
@@ -99,7 +98,7 @@ public class ViewQuest extends JScrollPane {
             JLabel lblStats = new JLabel("Wins: " + questData.getWin()
                     + " / Losses: " + questData.getLost());
             lblStats.setForeground(skin.getColor("text"));
-            lblStats.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
+            lblStats.setFont(skin.getBoldFont(18));
             lblStats.setHorizontalAlignment(SwingConstants.CENTER);
             viewport.add(lblStats, "h 35px!, ax center, span 2");
 
@@ -163,19 +162,19 @@ public class ViewQuest extends JScrollPane {
                     + nextChallengeInWins() + " wins.)");
             lblTeaser.setHorizontalAlignment(SwingConstants.CENTER);
             lblTeaser.setForeground(skin.getColor("text"));
-            lblTeaser.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+            lblTeaser.setFont(skin.getBoldFont(16));
             challengesContainer.add(lblTeaser, "w 100%!, ax center, ay top");
         }
 
         JLabel lblDuels = new JLabel("Available Duels");
         lblDuels.setForeground(skin.getColor("text"));
         lblDuels.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDuels.setFont(skin.getFont1().deriveFont(Font.ITALIC, 14));
+        lblDuels.setFont(skin.getItalicFont(14));
 
         JLabel lblChallenges = new JLabel("Available Challenges");
         lblChallenges.setForeground(skin.getColor("text"));
         lblChallenges.setHorizontalAlignment(SwingConstants.CENTER);
-        lblChallenges.setFont(skin.getFont1().deriveFont(Font.ITALIC, 14));
+        lblChallenges.setFont(skin.getItalicFont(14));
 
         viewport.add(lblDuels, "w 48%, gap 1% 1% 2% 1%");
         viewport.add(lblChallenges, "w 48%, gap 0 0 2% 1%, wrap");
@@ -199,14 +198,14 @@ public class ViewQuest extends JScrollPane {
         lblCredits.setForeground(skin.getColor("text"));
         lblCredits.setIconTextGap(5);
         lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCredits.setFont(skin.getFont1().deriveFont(Font.BOLD, 14));
+        lblCredits.setFont(skin.getBoldFont(14));
 
         lblLife = new JLabel("Life: " + Long.toString(questData.getLife()));
         lblLife.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/images/icons/Life.png"), 26, 26));
         lblLife.setForeground(skin.getColor("text"));
         lblLife.setIconTextGap(5);
         lblLife.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLife.setFont(skin.getFont1().deriveFont(Font.BOLD, 14));
+        lblLife.setFont(skin.getBoldFont(14));
 
         SubButton btnEditor = new SubButton("");
         btnEditor.setAction(new AbstractAction() {
@@ -260,12 +259,12 @@ public class ViewQuest extends JScrollPane {
         pnlButtonContainer.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center, hidemode 3"));
 
         cbxPet = new JComboBox();
-        cbxPet.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+        cbxPet.setFont(skin.getFont(14));
 
         cbPlant = new OptionsCheckBox("Summon Plant");
-        cbPlant.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+        cbPlant.setFont(skin.getFont(14));
         cbZep = new OptionsCheckBox("Launch Zeppelin");
-        cbZep.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+        cbZep.setFont(skin.getFont(14));
 
         lblPet = new JLabel(GuiUtils.getResizedIcon(
                 new ImageIcon("res/images/icons/PetIcon.png"), 30, 30));
@@ -342,14 +341,14 @@ public class ViewQuest extends JScrollPane {
             lblNew.setBackground(skin.getColor("theme").darker());
             lblNew.setOpaque(true);
             lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
-            lblNew.setFont(skin.getFont1().deriveFont(Font.BOLD, 16));
+            lblNew.setFont(skin.getBoldFont(16));
             viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%, span 2");
 
             JLabel lblNotes = new JLabel("<html>"
                     + "Start a new Quest will delete your current player decks, credits and win loss record."
                     + "<br>Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle."
                     + "</html>");
-            lblNotes.setFont(skin.getFont1().deriveFont(Font.PLAIN, 14));
+            lblNotes.setFont(skin.getFont(14));
             lblNotes.setForeground(skin.getColor("text"));
             viewport.add(lblNotes, "w 90%, gapleft 5%, span 2");
         }
@@ -477,14 +476,14 @@ public class ViewQuest extends JScrollPane {
 
             // Name
             JLabel lblName = new JLabel(event.getTitle() + ": " + event.getDifficulty());
-            lblName.setFont(skin.getFont1().deriveFont(Font.BOLD, 17));
+            lblName.setFont(skin.getBoldFont(18));
             lblName.setForeground(skin.getColor("text"));
             this.add(lblName, "h 20px!, gap 1% 1% 5px 5px, wrap");
 
             // Description
             final JTextArea tarDesc = new JTextArea();
             tarDesc.setText(event.getDescription());
-            tarDesc.setFont(skin.getFont1().deriveFont(Font.ITALIC, 12));
+            tarDesc.setFont(skin.getItalicFont(12));
             tarDesc.setForeground(skin.getColor("text"));
             tarDesc.setOpaque(false);
             tarDesc.setWrapStyleWord(true);
