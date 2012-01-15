@@ -798,7 +798,53 @@ public class ComputerUtil {
                 // add source card to used list
                 usedSources.add(sourceCard);
 
-                // add source card to used list
+                String manaProduced;
+                // Check if paying snow mana
+                if ("S".equals(costParts[nPart])) {
+                    manaProduced = "S";
+                }
+                else {
+                    // check if ability produces any color
+                    if (m.isAnyMana()) {
+                        String colorChoice = costParts[nPart];
+                        ArrayList<String> negEffect = cost.getManaNeededToAvoidNegativeEffect();
+                        ArrayList<String> negEffectPaid = cost.getManaPaidToAvoidNegativeEffect();
+                        // Check for
+                        // 1) Colorless
+                        // 2) Split e.g. 2/G
+                        // 3) Hybrid e.g. UG
+                        if (costParts[nPart].matches("[0-9]+")) {
+                            colorChoice = "W";
+                            for (int n = 0; n < negEffect.size(); n++) {
+                                if (!negEffectPaid.contains(negEffect.get(n))) {
+                                    colorChoice = negEffect.get(n);
+                                    break;
+                                }
+                            }
+                        }
+                        else if (costParts[nPart].contains("/")) {
+                            colorChoice = costParts[nPart].replace("2/", "");
+                        }
+                        else if (costParts[nPart].length() > 1) {
+                            colorChoice = costParts[nPart].substring(0, 1);
+                            for (int n = 0; n < negEffect.size(); n++) {
+                                if (costParts[nPart].contains(negEffect.get(n))
+                                    &&  !negEffectPaid.contains(negEffect.get(n))) {
+                                    colorChoice = negEffect.get(n);
+                                    break;
+                                }
+                            }
+                        }
+                        m.setAnyChoice(colorChoice);
+                    }
+                    // get produced mana
+                    manaProduced = m.getManaProduced();
+                }
+                //TODO: Change this if AI is able use to mana abilities that
+                //      produce more than one mana (111230 - ArsenalNut)
+                String color = InputPayManaCostUtil.getLongColorString(manaProduced);
+                costPart.payMana(color);
+
                 if (!test) {
                     //Pay additional costs
                     if (m.getPayCosts() != null) {
@@ -814,66 +860,9 @@ public class ComputerUtil {
                     m.resolve();
                     // subtract mana from mana pool
                     cost = manapool.subtractMana(sa, cost, m);
-                    String manaProduced;
-                    // Check if paying snow mana
-                    if ("S".equals(costParts[nPart])) {
-                        manaProduced = "S";
-                    }
-                    else {
-                        manaProduced = m.getLastProduced();
-                    }
-                    String color = InputPayManaCostUtil.getLongColorString(manaProduced);
-                    costPart.payMana(color);
                 }
                 else {
-                    String manaProduced;
-                    // Check if paying snow mana
-                    if ("S".equals(costParts[nPart])) {
-                        manaProduced = "S";
-                    }
-                    else {
-                        // check if ability produces any color
-                        if (m.isAnyMana()) {
-                            String colorChoice = costParts[nPart];
-                            ArrayList<String> negEffect = cost.getManaNeededToAvoidNegativeEffect();
-                            ArrayList<String> negEffectPaid = cost.getManaPaidToAvoidNegativeEffect();
-                            // Check for
-                            // 1) Colorless
-                            // 2) Split e.g. 2/G
-                            // 3) Hybrid e.g. UG
-                            if (costParts[nPart].matches("[0-9]+")) {
-                                colorChoice = "W";
-                                for (int n = 0; n < negEffect.size(); n++) {
-                                    if (!negEffectPaid.contains(negEffect.get(n))) {
-                                        colorChoice = negEffect.get(n);
-                                        break;
-                                    }
-                                }
-                            }
-                            else if (costParts[nPart].contains("/")) {
-                                colorChoice = costParts[nPart].replace("2/", "");
-                            }
-                            else if (costParts[nPart].length() > 1) {
-                                colorChoice = costParts[nPart].substring(0, 1);
-                                for (int n = 0; n < negEffect.size(); n++) {
-                                    if (costParts[nPart].contains(negEffect.get(n))
-                                        &&  !negEffectPaid.contains(negEffect.get(n))) {
-                                        colorChoice = negEffect.get(n);
-                                        break;
-                                    }
-                                }
-                            }
-                            m.setAnyChoice(colorChoice);
-                        }
-                        // get produced mana
-                        //TODO: Change this if AI is able use to mana abilities that
-                        //      produce more than one mana (111230 - ArsenalNut)
-                        manaProduced = m.getManaProduced();
-                    }
-                    // pay cost
-                    String color = InputPayManaCostUtil.getLongColorString(manaProduced);
                     cost.payMana(color);
-                    costPart.payMana(color);
                 }
                 // check if cost part is paid
                 if (costPart.isPaid()) {
