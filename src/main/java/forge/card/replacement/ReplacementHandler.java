@@ -186,6 +186,8 @@ public class ReplacementHandler {
             ret = new ReplaceGainLife(mapParams, host);
         } else if (eventToReplace.equals("DamageDone")) {
             ret = new ReplaceDamage(mapParams, host);
+        } else if (eventToReplace.equals("GameLoss")) {
+            ret = new ReplaceGameLoss(mapParams, host);
         }
 
         return ret;

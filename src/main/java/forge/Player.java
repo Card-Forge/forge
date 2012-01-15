@@ -2089,6 +2089,16 @@ public abstract class Player extends GameEntity {
             System.out.println("Tried to lose, but currently can't.");
             return false;
         }
+        
+        //Replacement effects
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Affected", this);
+        runParams.put("Event", "GameLoss");
+        
+        if(AllZone.getReplacementHandler().run(runParams)) {
+            return false;
+        }
+        
         this.lossState = state;
         this.loseConditionSpell = spellName;
         return true;
@@ -2176,12 +2186,11 @@ public abstract class Player extends GameEntity {
         }
 
         if (this.lossState != GameLossReason.DidNotLoseYet) {
-            return true;
+            return this.loseConditionMet(lossState, null);
         }
 
         if (this.poisonCounters >= 10) {
-            this.loseConditionMet(GameLossReason.Poisoned, null);
-            return true;
+            return this.loseConditionMet(GameLossReason.Poisoned, null);
         }
 
         if (this.cantLoseForZeroOrLessLife()) {
@@ -2190,8 +2199,7 @@ public abstract class Player extends GameEntity {
 
         final boolean hasNoLife = this.getLife() <= 0;
         if (hasNoLife) {
-            this.loseConditionMet(GameLossReason.LifeReachedZero, null);
-            return true;
+            return this.loseConditionMet(GameLossReason.LifeReachedZero, null);
         }
 
         return false;
