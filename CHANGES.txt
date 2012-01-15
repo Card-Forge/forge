@@ -279,6 +279,26 @@ Reiver Demon
 - Added canPlayFromEffectAI to AF Pump.
 - Little fix for Cascade.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added canPlayFromEffectAI to AF Draw and Discard.
+- Removed the hardcoded cascade ability of Bituminous Blast.
+- Changed Ripple to use canPlayFromEffectAI.
+- Changed Fungus Sliver to grant a trigger instead of a keyword.
+- Removed the now unused keyword it used to grant.
+- Temporarily fixing infinite loop in AF Pump, not sure if this is what it should do though.
+- Fixed Equilibrium.
+- CheckStyle.
+- Added the function playSpellAbilityWithoutPayingManaCost to ComputerUtil.
+- Fixed the AI part of Cascade and Ripple skipping payment of non mana costs.
+- fixed problem with Any color mana abilities added through continuous effects e.g. Gemhide Sliver
+- Internalized win/lose frame into match UI using overlay.
+- Fixed icons display for mana overlay setting. Now, icons and counters will show all the time, but title, p/t, and casting cost is toggle-able.
+- Performance enhancement: fonts used in UI are now pre-derived once in skin.
+- Updated the AffectedZone of some continuous static abilities.
+- Added canPlayFromEffectAI to AF Destroy.
+- Cleanup.
+- Changed "removed" to "exiled" for consistency
+- Minor fix to comments in ControlDetail.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -377,6 +397,8 @@ Gravity Well
 Clash of Realities
 Telekinesis
 Rapid Fire
+Lantern of Insight
+Ulasht, the Hate Seed
 
 
 end
