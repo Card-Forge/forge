@@ -3,7 +3,7 @@ ManaCost:3 W U
 Types:Planeswalker Venser
 Text:no text
 Loyalty:3
-A:AB$ ChangeZone | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ SVar=DelTrig | SpellDescription$  Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
+A:AB$ ChangeZone | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DelTrig | SpellDescription$  Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return exiled card to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
