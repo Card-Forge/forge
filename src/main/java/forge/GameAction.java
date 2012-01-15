@@ -58,9 +58,8 @@ import forge.gui.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
-import forge.quest.gui.QuestWinLoseHandler;
 import forge.quest.gui.main.QuestEvent;
-import forge.view.toolbox.WinLoseFrame;
+import forge.view.match.ViewWinLose;
 
 /**
  * <p>
@@ -790,6 +789,7 @@ public class GameAction {
         this.checkStateEffects(false);
     }
 
+    /** */
     public final void checkStaticAbilities() {
         // remove old effects
         AllZone.getStaticEffects().clearStaticEffects();
@@ -855,25 +855,7 @@ public class GameAction {
 
         if (this.canShowWinLose && this.checkEndGameState()) {
             AllZone.getDisplay().savePrefs();
-            // frame.setEnabled(false);
-            // frame.dispose();
-
-            // Gui_WinLose gwl = new Gui_WinLose(AllZone.getMatchState(),
-            // AllZone.getQuestData(), AllZone.getQuestChallenge());
-
-            // New WinLoseFrame below. Old Gui_WinLose above.
-            // Old code should still work if any problems with new. Doublestrike
-            // 02-10-11
-            WinLoseFrame gwl;
-
-            if (Constant.Runtime.getGameType() == GameType.Quest) {
-                gwl = new WinLoseFrame(new QuestWinLoseHandler());
-            } else {
-                gwl = new WinLoseFrame();
-            }
-
-            // gwl.setAlwaysOnTop(true);
-            gwl.toFront();
+            new ViewWinLose();
             this.canShowWinLose = false;
             return;
         }

@@ -10879,7 +10879,6 @@ src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ControlAllUI.java -text
 src/main/java/forge/control/ControlHomeUI.java -text
 src/main/java/forge/control/ControlMatchUI.java -text
-src/main/java/forge/control/ControlWinLose.java -text
 src/main/java/forge/control/home/ControlConstructed.java -text
 src/main/java/forge/control/home/ControlDraft.java -text
 src/main/java/forge/control/home/ControlQuest.java -text
@@ -10894,6 +10893,7 @@ src/main/java/forge/control/match/ControlHand.java -text
 src/main/java/forge/control/match/ControlInput.java -text
 src/main/java/forge/control/match/ControlPicture.java -text
 src/main/java/forge/control/match/ControlTabber.java -text
+src/main/java/forge/control/match/ControlWinLose.java -text
 src/main/java/forge/control/match/package-info.java -text
 src/main/java/forge/control/package-info.java -text
 src/main/java/forge/deck/Deck.java svneol=native#text/plain
@@ -11074,6 +11074,7 @@ src/main/java/forge/view/match/ViewInput.java -text
 src/main/java/forge/view/match/ViewPicture.java -text
 src/main/java/forge/view/match/ViewTabber.java -text
 src/main/java/forge/view/match/ViewTopLevel.java -text
+src/main/java/forge/view/match/ViewWinLose.java -text
 src/main/java/forge/view/match/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
@@ -11089,7 +11090,6 @@ src/main/java/forge/view/toolbox/FRoundedPanel.java -text
 src/main/java/forge/view/toolbox/FScrollPane.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
-src/main/java/forge/view/toolbox/WinLoseFrame.java -text
 src/main/java/forge/view/toolbox/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain

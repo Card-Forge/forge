@@ -38,7 +38,7 @@ import forge.Player;
 import forge.SetUtils;
 import forge.Singletons;
 import forge.control.ControlAllUI;
-import forge.control.ControlWinLose;
+import forge.control.match.ControlWinLose;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameLossReason;
@@ -55,6 +55,7 @@ import forge.quest.data.QuestUtil;
 import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestEvent;
 import forge.view.GuiTopLevel;
+import forge.view.match.ViewWinLose;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -72,10 +73,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private JLabel lblTemp1;
     private JLabel lblTemp2;
     private FSkin skin;
+    private ViewWinLose view;
     private boolean isAnte;
 
-    /** The spacer. */
-    private final int spacer = 50;
+    /** String constraint parameters for title blocks and cardviewer blocks. */
+    private final String constraintsTitle = "w 95%!, gap 0 0 20px 10px";
+    private final String constraintsText = "w 95%!,, h 150px!, gap 0 0 0 20px";
+    private final String constraintsCards = "w 95%!, h 330px!, gap 0 0 0 20px";
 
     private class CommonObjects {
         private QuestMatchState qMatchState;
@@ -87,9 +91,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
     /**
      * Instantiates a new quest win lose handler.
+     * 
+     * @param v0 ViewWinLose object
      */
-    public QuestWinLoseHandler() {
-        super();
+    public QuestWinLoseHandler(ViewWinLose v0) {
+        super(v0);
+        this.view = v0;
         this.model = new CommonObjects();
         this.model.qMatchState = AllZone.getMatchState();
         this.model.qData = AllZone.getQuestData();
@@ -243,9 +250,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(anteLost);
 
-        this.getView().getPnlCustom()
-                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
-        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
+        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.getView().getPnlCustom().add(cv, constraintsCards);
     }
 
     /**
@@ -268,9 +274,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(anteWon);
 
-        this.getView().getPnlCustom()
-                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
-        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
+        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.getView().getPnlCustom().add(cv, constraintsCards);
     }
 
     /**
@@ -476,8 +481,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!");
-        this.getView().getPnlCustom().add(this.lblTemp2, "align center, width 95%!, gaptop 10");
+        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.getView().getPnlCustom().add(this.lblTemp2, constraintsText);
     }
 
     /**
@@ -497,9 +502,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().getPnlCustom()
-                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
-        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
+        this.view.getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.view.getPnlCustom().add(cv, constraintsCards);
     }
 
     /**
@@ -516,9 +520,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp1 = new TitleLabel("You just won 10 random rares!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().getPnlCustom()
-                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
-        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
+        this.view.getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.view.getPnlCustom().add(cv, constraintsCards);
     }
 
     /**
@@ -540,9 +543,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + selected.getName() + "\" format!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.getView().getPnlCustom()
-                .add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer + ", gapbottom 10");
-        this.getView().getPnlCustom().add(cv, "align center, width 95%!");
+        this.view.getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.view.getPnlCustom().add(cv, constraintsCards);
     }
 
     /**
@@ -582,12 +584,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!, " + "gaptop " + this.spacer);
-        this.getView().getPnlCustom().add(this.lblTemp2, "align center, width 95%!, height 80!, gapbottom 10");
+        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.getView().getPnlCustom().add(this.lblTemp2, constraintsText);
 
         if (cardsWon != null) {
             final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
-            this.getView().getPnlCustom().add(cv, "align center, width 95%!");
+            this.getView().getPnlCustom().add(cv, constraintsCards);
             this.model.qData.getCards().addAllCards(cardsWon);
         }
     }
@@ -604,8 +606,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, "align center, width 95%!");
-        this.getView().getPnlCustom().add(this.lblTemp2, "align center, width 95%!, height 80!");
+        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
+        this.getView().getPnlCustom().add(this.lblTemp2, constraintsText);
     }
 
     /**

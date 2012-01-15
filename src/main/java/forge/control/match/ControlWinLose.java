@@ -1,96 +1,87 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package forge.control;
+package forge.control.match;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.Singletons;
+import forge.Constant.Zone;
+import forge.control.ControlAllUI;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.view.GuiTopLevel;
-import forge.view.toolbox.WinLoseFrame;
+import forge.view.match.ViewWinLose;
 
-/**
- * <p>
- * ControlWinLose.
- * </p>
- * 
- * Superclass of custom mode handling for win/lose UI. Can add swing components
- * to custom center panel. Custom mode handling for quest, puzzle, etc. should
- * extend this class.
- * 
+/** 
+ * Default controller for a ViewWinLose object. This class can
+ * be extended for various game modes to populate the custom
+ * panel in the win/lose screen.
+ *
  */
 public class ControlWinLose {
+    private final ViewWinLose view;
 
-    /** The view. */
-    private WinLoseFrame view;
-
-    /**
-     * <p>
-     * actionOnQuit.
-     * </p>
-     * Action performed when "continue" button is pressed in default win/lose
-     * UI.
-     * 
-     */
-    public void actionOnContinue() {
-
+    /** @param v &emsp; ViewWinLose */
+    public ControlWinLose(final ViewWinLose v) {
+        this.view = v;
+        addListeners();
     }
 
-    /**
-     * <p>
-     * actionOnQuit.
-     * </p>
-     * Action performed when "quit" button is pressed in default win/lose UI.
-     * 
-     */
+    /** */
+    public void addListeners() {
+        view.getBtnContinue().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                actionOnContinue();
+            }
+        });
+
+        view.getBtnRestart().addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                actionOnRestart();
+            }
+        });
+
+        view.getBtnQuit().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                actionOnQuit();
+            }
+        });
+    }
+
+    /** Action performed when "continue" button is pressed in default win/lose UI. */
+    public void actionOnContinue() {
+        GuiUtils.closeOverlay();
+        startNextRound();
+    }
+
+    /** Action performed when "restart" button is pressed in default win/lose UI. */
+    public void actionOnRestart() {
+        AllZone.getMatchState().reset();
+        GuiUtils.closeOverlay();
+        startNextRound();
+    }
+
+    /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
+        AllZone.getMatchState().reset();
         ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
         g.getMatchController().deinitMatch();
         g.changeState(ControlAllUI.HOME_SCREEN);
     }
 
     /**
-     * <p>
-     * actionOnRestart.
-     * </p>
-     * Action performed when "restart" button is pressed in default win/lose UI.
-     * 
-     */
-    public void actionOnRestart() {
-
-    }
-
-    /**
-     * <p>
-     * startNextRound.
-     * </p>
      * Either continues or restarts a current game. May be overridden for use
      * with other game modes.
-     * 
      */
     public void startNextRound() {
         boolean isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
@@ -137,35 +128,17 @@ public class ControlWinLose {
      * <p>
      * populateCustomPanel.
      * </p>
-     * May be overridden as required by various mode handlers to show custom
-     * information in center panel. Default configuration is empty.
+     * May be overridden as required by controllers for various game modes
+     * to show custom information in center panel. Default configuration is empty.
      * 
-     * @return true, if successful
+     * @return boolean, panel has contents or not.
      */
     public boolean populateCustomPanel() {
         return false;
     }
 
-    /**
-     * <p>
-     * setView.
-     * </p>
-     * Links win/lose swing frame to mode handler, mostly to allow direct
-     * manipulation of custom center panel.
-     * 
-     * @param wlh
-     *            the new view
-     */
-    public final void setView(final WinLoseFrame wlh) {
-        this.view = wlh;
-    }
-
-    /**
-     * Gets the view.
-     * 
-     * @return the view
-     */
-    public WinLoseFrame getView() {
+    /** @return ViewWinLose object this controller is in charge of */
+    public ViewWinLose getView() {
         return this.view;
     }
 }

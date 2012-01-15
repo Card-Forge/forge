@@ -43,6 +43,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.view.toolbox.FOverlay;
 
 /**
  * <p>
@@ -400,5 +401,12 @@ public final class GuiUtils {
             System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
         return ttf;
+    }
+
+    /** Removes child components and closes overlay. */
+    public static void closeOverlay() {
+        final FOverlay overlay = AllZone.getOverlay();
+        overlay.removeAll();
+        overlay.hideOverlay();
     }
 }
