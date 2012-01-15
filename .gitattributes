@@ -4676,6 +4676,7 @@ res/cardsfolder/l/land_tax.txt svneol=native#text/plain
 res/cardsfolder/l/landbind_ritual.txt svneol=native#text/plain
 res/cardsfolder/l/lantern_kami.txt svneol=native#text/plain
 res/cardsfolder/l/lantern_lit_graveyard.txt svneol=native#text/plain
+res/cardsfolder/l/lantern_of_insight.txt -text
 res/cardsfolder/l/lantern_spirit.txt -text
 res/cardsfolder/l/lapis_lazuli_talisman.txt svneol=native#text/plain
 res/cardsfolder/l/lapse_of_certainty.txt svneol=native#text/plain
