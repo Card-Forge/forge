@@ -376,6 +376,10 @@ public class CardPanel extends JPanel implements CardContainer {
             }
         }
 
+        if (this.getCard() == null) {
+            return;
+        }
+
         final int counters = this.getCard().getNumberOfCounters();
 
         if (counters == 1) {
