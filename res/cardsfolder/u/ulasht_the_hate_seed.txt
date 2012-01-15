@@ -1,0 +1,16 @@
+Name:Ulasht, the Hate Seed
+ManaCost:2 R G
+Types:Legendary Creature Hellion Hydra
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:X:no Condition:Ulasht, the Hate Seed enters the battlefield with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.
+A:AB$ DealDamage | Cost$ 1 SubCounter<1/P1P1> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ Ulasht deals 1 damage to target creature.
+A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+SVar:X:Count$Valid Creature.YouCtrl+Red+Other/Plus.B
+SVar:B:Count$Valid Creature.YouCtrl+Green+Other
+SVar:NeedsToPlay:Creature.Red+YouCtrl,Creature.Green+YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ulasht_the_hate_seed.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/136.jpg
+Oracle:Ulasht, the Hate Seed enters the battlefield with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.\n{1}, Remove a +1/+1 counter from Ulasht: Choose one - Ulasht deals 1 damage to target creature; or put a 1/1 green Saproling creature token onto the battlefield.
+End
