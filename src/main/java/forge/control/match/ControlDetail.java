@@ -22,8 +22,7 @@ import forge.view.match.ViewDetail;
 
 /**
  * 
- * Controls the vertical tabber in sidebar used for viewing card details and
- * picture.
+ * Controls the card detail area in the match UI.
  * 
  */
 public class ControlDetail {
@@ -31,11 +30,9 @@ public class ControlDetail {
     private Card currentCard = null;
 
     /**
-     * Controls the vertical tabber in sidebar used for viewing card details and
-     * picture.
+     * Controls the card detail area in the match UI.
      * 
-     * @param v
-     *            &emsp; The CardViewer Swing component.
+     * @param v &emsp; The CardViewer Swing component.
      */
     public ControlDetail(final ViewDetail v) {
         this.view = v;
@@ -44,8 +41,7 @@ public class ControlDetail {
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
-     * @param c
-     *            &emsp; Card object
+     * @param c &emsp; Card object
      */
     public void showCard(final Card c) {
         this.currentCard = c;
