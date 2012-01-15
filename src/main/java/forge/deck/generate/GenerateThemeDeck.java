@@ -326,12 +326,7 @@ public class GenerateThemeDeck {
         }
     } // readLine(Card)
 
-    /**
-     * 
-     * TODO Write javadoc for this type.
-     * 
-     */
-    class CCnt {
+    private class CCnt {
 
         /** The Color. */
         private final String color;
@@ -353,12 +348,7 @@ public class GenerateThemeDeck {
         }
     }
 
-    /**
-     * 
-     * TODO Write javadoc for this type.
-     * 
-     */
-    class Grp {
+    private class Grp {
 
         /** The Cardnames. */
         private final ArrayList<String> cardnames = new ArrayList<String>();
