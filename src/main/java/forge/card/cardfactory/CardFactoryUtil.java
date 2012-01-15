@@ -2757,6 +2757,13 @@ public class CardFactoryUtil {
                 return 0;
             }
         }
+        
+        if(sq[0].equals("YouDrewThisTurn")) {
+            return CardFactoryUtil.doXMath(c.getController().getNumDrawnThisTurn(), m, c);
+        }
+        if(sq[0].equals("OppDrewThisTurn")) {
+            return CardFactoryUtil.doXMath(c.getController().getOpponent().getNumDrawnThisTurn(), m, c);
+        }
 
         if (sq[0].equals("StormCount")) {
             return CardFactoryUtil.doXMath(AllZone.getStack().getCardsCastThisTurn().size() - 1, m, c);
