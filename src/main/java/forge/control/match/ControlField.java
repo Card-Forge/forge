@@ -398,10 +398,10 @@ public class ControlField {
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
-                            NewConstants.Lang.GuiDisplay.COMPUTER_REMOVED).actionPerformed(null);
+                            NewConstants.Lang.GuiDisplay.COMPUTER_EXILED).actionPerformed(null);
                 } else {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Exile),
-                            NewConstants.Lang.GuiDisplay.HUMAN_REMOVED).actionPerformed(null);
+                            NewConstants.Lang.GuiDisplay.HUMAN_EXILED).actionPerformed(null);
                 }
             }
         };

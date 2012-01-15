@@ -420,8 +420,8 @@ public final class NewConstants {
                 public static final String MENU = "%s/Display/human/graveyard/menu";
             }
 
-            /** The HUMAN_REMOVED. */
-            public static final String HUMAN_REMOVED = "%s/Display/human/removed";
+            /** The HUMAN_EXILED. */
+            public static final String HUMAN_EXILED = "%s/Display/human/exiled";
 
             /**
              * The Interface HumanRemoved.
@@ -429,13 +429,13 @@ public final class NewConstants {
             public static class HumanRemoved {
 
                 /** The TITLE. */
-                public static final String TITLE = "%s/Display/human/removed/title";
+                public static final String TITLE = "%s/Display/human/exiled/title";
 
                 /** The BUTTON. */
-                public static final String BUTTON = "%s/Display/human/removed/button";
+                public static final String BUTTON = "%s/Display/human/exiled/button";
 
                 /** The MENU. */
-                public static final String MENU = "%s/Display/human/removed/menu";
+                public static final String MENU = "%s/Display/human/exiled/menu";
             }
 
             /** The COMBAT. */
@@ -534,8 +534,8 @@ public final class NewConstants {
                 public static final String MENU = "%s/Display/computer/graveyard/menu";
             }
 
-            /** The COMPUTER_REMOVED. */
-            public static final String COMPUTER_REMOVED = "%s/Display/computer/removed";
+            /** The COMPUTER_EXILED. */
+            public static final String COMPUTER_EXILED = "%s/Display/computer/exiled";
 
             /**
              * The Interface CopmuterRemoved.
@@ -543,13 +543,13 @@ public final class NewConstants {
             public static class ComputerRemoved {
 
                 /** The TITLE. */
-                public static final String TITLE = "%s/Display/computer/removed/title";
+                public static final String TITLE = "%s/Display/computer/exiled/title";
 
                 /** The BUTTON. */
-                public static final String BUTTON = "%s/Display/computer/removed/button";
+                public static final String BUTTON = "%s/Display/computer/exiled/button";
 
                 /** The MENU. */
-                public static final String MENU = "%s/Display/computer/removed/menu";
+                public static final String MENU = "%s/Display/computer/exiled/menu";
             }
 
             /** The CONCEDE. */
