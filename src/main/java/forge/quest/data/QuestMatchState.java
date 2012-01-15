@@ -64,13 +64,14 @@ public class QuestMatchState {
         return this.gamesPlayed.toArray(new GameSummary[this.gamesPlayed.size()]);
     }
 
-    /**
-     * Gets the games played count.
-     * 
-     * @return the games played count
-     */
-    public final int getGamesPlayedCount() {
+    /** @return {@java.lang.Integer} */
+    public final Integer getGamesPlayedCount() {
         return this.gamesPlayed.size();
+    }
+
+    /** @return {@java.lang.Integer} */
+    public final Integer getGamesPerMatch() {
+        return GAMES_PER_MATCH;
     }
 
     /**
@@ -88,7 +89,7 @@ public class QuestMatchState {
     /**
      * Checks if is match over.
      * 
-     * @return true, if is match over
+     * @return true, if match is over
      */
     public final boolean isMatchOver() {
         int totalGames = 0;
@@ -113,9 +114,8 @@ public class QuestMatchState {
     /**
      * Count games won by.
      * 
-     * @param name
-     *            the name
-     * @return the int
+     * @param name &emsp; the name
+     * @return {@java.lang.Integer}
      */
     public final int countGamesWonBy(final String name) {
         int wins = 0;
@@ -144,5 +144,4 @@ public class QuestMatchState {
     public final void reset() {
         this.gamesPlayed.clear();
     }
-
 }

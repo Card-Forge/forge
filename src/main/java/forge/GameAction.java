@@ -59,6 +59,7 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.quest.gui.main.QuestEvent;
+import forge.view.GuiTopLevel;
 import forge.view.match.ViewWinLose;
 
 /**
@@ -1563,6 +1564,7 @@ public class GameAction {
         }
 
         AllZone.getDisplay().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
+        ((GuiTopLevel) (AllZone.getDisplay())).getController().getMatchView().getInputController().updateGameCount();
 
         AllZone.getInputControl().setInput(new InputMulligan());
         Phase.setGameBegins(1);

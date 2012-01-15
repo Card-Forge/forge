@@ -24,8 +24,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
@@ -44,6 +47,7 @@ public class ViewInput extends FRoundedPanel {
     private final JButton btnOK, btnCancel;
     private final JTextArea tarMessage;
     private final FSkin skin;
+    private final JLabel lblGames;
     private Timer timer1 = null;
     private static int counter = 0;
     private boolean remindIsRunning = false;
@@ -64,6 +68,13 @@ public class ViewInput extends FRoundedPanel {
         this.btnCancel = new FButton("Cancel");
         this.btnOK = new FButton("OK");
 
+        // Game counter
+        lblGames = new JLabel();
+        lblGames.setFont(skin.getBoldFont(12));
+        lblGames.setForeground(skin.getColor("text"));
+        lblGames.setHorizontalAlignment(SwingConstants.CENTER);
+        lblGames.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("text")));
+
         this.tarMessage = new JTextArea();
         this.tarMessage.setOpaque(false);
         this.tarMessage.setFocusable(false);
@@ -72,7 +83,8 @@ public class ViewInput extends FRoundedPanel {
         this.tarMessage.setWrapStyleWord(true);
         this.tarMessage.setForeground(this.skin.getColor("text"));
         this.tarMessage.setFont(this.skin.getFont(16));
-        this.add(this.tarMessage, "span 2 1, h 80%!, w 96%!, gapleft 2%, gaptop 1%");
+        this.add(this.lblGames, "w 96%!, gapleft 2%, h 10%, wrap");
+        this.add(this.tarMessage, "span 2 1, h 70%!, w 96%!, gapleft 2%, gaptop 1%");
         this.add(this.btnOK, "w 47%!, gapright 2%, gapleft 1%");
         this.add(this.btnCancel, "w 47%!, gapright 1%");
 
@@ -116,13 +128,14 @@ public class ViewInput extends FRoundedPanel {
         return this.btnCancel;
     }
 
-    /**
-     * Gets the tar message.
-     * 
-     * @return JTextArea
-     */
+    /** @return JTextArea */
     public JTextArea getTarMessage() {
         return this.tarMessage;
+    }
+
+    /** @return JLabel */
+    public JLabel getLblGames() {
+        return this.lblGames;
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */

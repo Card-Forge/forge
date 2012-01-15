@@ -118,6 +118,13 @@ public class ControlInput {
         return view;
     }
 
+    /** Updates count label in input area. */
+    public void updateGameCount() {
+        view.getLblGames().setText("Game #"
+                + (AllZone.getMatchState().getGamesPlayedCount() + 1)
+                + " of " + AllZone.getMatchState().getGamesPerMatch());
+    }
+
     /** Flashes animation on input panel if play is currently waiting on input. */
     public void remind() {
         view.remind();
