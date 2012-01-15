@@ -5,7 +5,6 @@ Text:no text
 PT:2/2
 K:Flanking
 A:AB$ Phases | Cost$ U U | Defined$ Self | SpellDescription$ CARDNAME phases out.
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_honor_guard.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/122.jpg
