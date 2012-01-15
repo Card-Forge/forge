@@ -99,8 +99,10 @@ public final class GameActionUtil {
                     }
                 }
 
-                if (c.hasKeyword("Cascade")) {
-                    this.doCascade(c);
+                for (String keyword : c.getKeyword()) {
+                    if (keyword.equals("Cascade")) {
+                        this.doCascade(c);
+                    }
                 }
             } // execute()
 
