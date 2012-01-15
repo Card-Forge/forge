@@ -2,7 +2,7 @@ Name:Wildfire
 ManaCost:4 R R
 Types:Sorcery
 Text:no text
-A:SP$ Sacrifice | Cost$ 4 R R | Defined$ Each | SacValid$ Land | Amount$ 4 | SpellDescription$ Each player sacrifices four lands. CARDNAME deals 4 damage to each creature. | SubAbility$ SVar=DBDamage
+A:SP$ Sacrifice | Cost$ 4 R R | Defined$ Each | SacValid$ Land | Amount$ 4 | SpellDescription$ Each player sacrifices four lands. CARDNAME deals 4 damage to each creature. | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
