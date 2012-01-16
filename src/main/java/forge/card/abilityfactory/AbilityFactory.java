@@ -1324,14 +1324,9 @@ public class AbilityFactory {
 
         String sSub = this.getMapParams().get("SubAbility");
 
-        if (sSub.startsWith("SVar=")) {
-            sSub = sSub.replace("SVar=", "");
-        }
-
         sSub = this.getHostCard().getSVar(sSub);
 
         if (!sSub.equals("")) {
-            // Older style Drawback no longer supported
             final AbilityFactory afDB = new AbilityFactory();
             abSub = (AbilitySub) afDB.getAbility(sSub, this.getHostCard());
         } else {
