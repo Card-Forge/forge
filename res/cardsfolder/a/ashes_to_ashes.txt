@@ -2,7 +2,7 @@ Name:Ashes to Ashes
 ManaCost:1 B B
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ 1 B B | ValidTgts$ Creature.nonArtifact | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select 2 target nonartifact creatures | Origin$ Battlefield | Destination$ Exile | SubAbility$ SVar=DBDamage | SpellDescription$ Exile two target nonartifact creatures. CARDNAME deals 5 damage to you.
+A:SP$ ChangeZone | Cost$ 1 B B | ValidTgts$ Creature.nonArtifact | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select 2 target nonartifact creatures | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDamage | SpellDescription$ Exile two target nonartifact creatures. CARDNAME deals 5 damage to you.
 SVar:DBDamage:DB$DealDamage | Defined$ You | NumDmg$ 5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashes_to_ashes.jpg

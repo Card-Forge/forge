@@ -2,7 +2,7 @@ Name:Ancient Tomb
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SubAbility$ SVar=DBPain | SpellDescription$ Add 2 to your mana pool. CARDNAME deals 2 damage to you.
+A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SubAbility$ DBPain | SpellDescription$ Add 2 to your mana pool. CARDNAME deals 2 damage to you.
 SVar:DBPain:DB$DealDamage | NumDmg$ 2 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
