@@ -6926,6 +6926,7 @@ res/cardsfolder/r/river_bear.txt svneol=native#text/plain
 res/cardsfolder/r/river_boa.txt svneol=native#text/plain
 res/cardsfolder/r/river_delta.txt svneol=native#text/plain
 res/cardsfolder/r/river_kaijin.txt svneol=native#text/plain
+res/cardsfolder/r/river_kelpie.txt -text
 res/cardsfolder/r/river_merfolk.txt svneol=native#text/plain
 res/cardsfolder/r/river_of_tears.txt -text
 res/cardsfolder/r/riverfall_mimic.txt svneol=native#text/plain
