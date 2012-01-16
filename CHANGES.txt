@@ -299,6 +299,47 @@ Reiver Demon
 - Changed "removed" to "exiled" for consistency
 - Minor fix to comments in ControlDetail.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added counter to input area to indicate match #x out of y.
+- Null pointer fix.
+- remove SVar= from SubAbility (Z cards)
+- remove SVar= from SubAbility (Y cards)
+- remove SVar= from SubAbility (U-V cards)
+- remove SVar= from SubAbility (W cards)
+- Added a GameLoss replacement effect.
+- Added YouDrewThisTurn and OppDrewThisTurn to xCount.
+- Forgot to add Lich's Mirror script.
+- Enabled multiple copies of Cascade on a spell.
+- Updated some SVars.
+- little cleanup in GenerateThemeDeck.java
+- Little fix
+- Fixed cancel button layout bug.
+- Small fix to winlose layout.
+- Small update to FSkin font derivations.
+- fixed ManaCost.isColor() to return true when comparing any size colorless mana cost to a type of "1"
+- fix Crash with Qasali Ambusher
+- Refactored anyChoice to expressChoice. Added logic to make automatic color choices for "Any" keyword mana sources.
+- remove SVar= from SubAbility (T cards)
+- remove SVar= from SubAbility (S cards)
+- remove SVar= from SubAbility (Q-R cards)
+- remove SVar= from SubAbility (P cards)
+- remove SVar= from SubAbility (O cards)
+- remove SVar= from SubAbility (A cards)
+- remove SVar= from SubAbility (B cards)
+- remove SVar= from SubAbility (C cards)
+- remove SVar= from SubAbility (D cards)
+- remove SVar= from SubAbility (E cards)
+- remove SVar= from SubAbility (F cards)
+- remove SVar= from SubAbility (G cards)
+- remove SVar= from SubAbility (H-I cards)
+- remove SVar= from SubAbility (J-L cards)
+- remove SVar= from SubAbility (M cards)
+- remove SVar= from SubAbility (N cards)
+- Small Checkstyle fix
+- remove support for SVar= string in SubAbility. It has not been required for a long time, and now, is no longer supported. All card files have been updated.
+- Fixed font on storm label.
+- Changed QuestMatchState to MatchState (since it has no quest-specific information).
+- Renamed ManaSymbols to more accurate CardFaceSymbols.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -331,6 +372,8 @@ Thalia, Guardian of Thraben
 Lambholt Elder // Silverpelt Werewolf
 Beguiler of Wills
 Huntmaster of the Fells // Ravager of the Fells
+Vorapede
+Mikaeus, the Unhallowed
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -399,6 +442,11 @@ Telekinesis
 Rapid Fire
 Lantern of Insight
 Ulasht, the Hate Seed
+Tin Street Hooligan
+Petrified Wood-Kin
+Lich's Mirror
+Archmage Ascension
+Runeflare Trap
 
 
 end
