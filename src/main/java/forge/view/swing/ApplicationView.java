@@ -22,7 +22,6 @@ import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
-import arcane.ui.util.ManaSymbols;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -39,6 +38,7 @@ import forge.properties.ForgePreferences;
 import forge.view.FView;
 import forge.view.GuiTopLevel;
 import forge.view.home.SplashFrame;
+import forge.view.toolbox.CardFaceSymbols;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -129,7 +129,7 @@ public class ApplicationView implements FView {
 
         if (!this.splashFrame.getSplashHasBeenClosed()) {
             try {
-                ManaSymbols.loadImages();
+                CardFaceSymbols.loadImages();
 
                 Constant.Runtime.setGameType(GameType.Constructed);
                 SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids

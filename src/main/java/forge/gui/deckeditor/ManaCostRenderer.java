@@ -24,9 +24,9 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import arcane.ui.util.ManaSymbols;
 import forge.card.CardManaCost;
 import forge.card.CardManaCostShard;
+import forge.view.toolbox.CardFaceSymbols;
 
 /**
  * Displays mana cost as symbols.
@@ -78,12 +78,12 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
 
         if (hasGeneric) {
             final String sGeneric = Integer.toString(genericManaCost);
-            ManaSymbols.drawSymbol(sGeneric, g, (int) xpos, 1);
+            CardFaceSymbols.drawSymbol(sGeneric, g, (int) xpos, 1);
             xpos += offset;
         }
 
         for (final CardManaCostShard s : shards) {
-            ManaSymbols.drawSymbol(s.getImageKey(), g, (int) xpos, 1);
+            CardFaceSymbols.drawSymbol(s.getImageKey(), g, (int) xpos, 1);
             xpos += offset;
         }
     }

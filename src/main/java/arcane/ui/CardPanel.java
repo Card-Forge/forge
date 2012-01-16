@@ -39,13 +39,13 @@ import javax.swing.SwingUtilities;
 import arcane.ui.ScaledImagePanel.MultipassType;
 import arcane.ui.ScaledImagePanel.ScalingType;
 import arcane.ui.util.GlowText;
-import arcane.ui.util.ManaSymbols;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardContainer;
 import forge.Counters;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.view.toolbox.CardFaceSymbols;
 
 /**
  * <p>
@@ -369,9 +369,9 @@ public class CardPanel extends JPanel implements CardContainer {
         }
 
         if (this.showCastingCost) {
-            int width = ManaSymbols.getWidth(this.getGameCard().getManaCost());
+            int width = CardFaceSymbols.getWidth(this.getGameCard().getManaCost());
             if (this.cardWidth < 200) {
-                ManaSymbols.draw(g, this.getGameCard().getManaCost(), (this.cardXOffset + (this.cardWidth / 2))
+                CardFaceSymbols.draw(g, this.getGameCard().getManaCost(), (this.cardXOffset + (this.cardWidth / 2))
                         - (width / 2), this.cardYOffset + (this.cardHeight / 2));
             }
         }
@@ -383,42 +383,42 @@ public class CardPanel extends JPanel implements CardContainer {
         final int counters = this.getCard().getNumberOfCounters();
 
         if (counters == 1) {
-            ManaSymbols.drawSymbol("counters1", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+            CardFaceSymbols.drawSymbol("counters1", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
                     - (this.cardHeight / 3) - 40);
         } else if (counters == 2) {
-            ManaSymbols.drawSymbol("counters2", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+            CardFaceSymbols.drawSymbol("counters2", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
                     - (this.cardHeight / 3) - 40);
         } else if (counters == 3) {
-            ManaSymbols.drawSymbol("counters3", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+            CardFaceSymbols.drawSymbol("counters3", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
                     - (this.cardHeight / 3) - 40);
         } else if (counters > 3) {
-            ManaSymbols.drawSymbol("countersMulti", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
+            CardFaceSymbols.drawSymbol("countersMulti", g, this.cardXOffset - 15, (this.cardYOffset + this.cardHeight)
                     - (this.cardHeight / 3) - 40);
         }
 
         // int yOff = (cardHeight/4) + 2;
         if (this.getCard().isAttacking()) {
-            ManaSymbols.drawSymbol("attack", g, (this.cardXOffset + (this.cardWidth / 4)) - 16,
+            CardFaceSymbols.drawSymbol("attack", g, (this.cardXOffset + (this.cardWidth / 4)) - 16,
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         } else if (this.getCard().isBlocking()) {
-            ManaSymbols.drawSymbol("defend", g, (this.cardXOffset + (this.cardWidth / 4)) - 16,
+            CardFaceSymbols.drawSymbol("defend", g, (this.cardXOffset + (this.cardWidth / 4)) - 16,
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
         if (this.getCard().isCreature() && this.getCard().hasSickness() && AllZoneUtil.isCardInPlay(this.getCard())) {
-            ManaSymbols.drawSymbol("summonsick", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
+            CardFaceSymbols.drawSymbol("summonsick", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
         if (this.getCard().isPhasedOut()) {
-            ManaSymbols.drawSymbol("phasing", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
+            CardFaceSymbols.drawSymbol("phasing", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
         if (this.getCard() != null && this.getGameCard().getFoil() > 0) {
             final String fl = String.format("foil%02d", this.getCard().getFoil());
             final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
-            ManaSymbols.draw(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
+            CardFaceSymbols.draw(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
                     this.cardHeight - (2 * z));
         }
     }

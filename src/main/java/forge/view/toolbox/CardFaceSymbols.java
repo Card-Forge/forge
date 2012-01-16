@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package arcane.ui.util;
+package forge.view.toolbox;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -24,17 +24,19 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import arcane.ui.util.UI;
+
 import com.esotericsoftware.minlog.Log;
 
 /**
  * <p>
- * ManaSymbols class.
+ * CardFaceSymbols class.
  * </p>
  * 
  * @author Forge
  * @version $Id$
  */
-public class ManaSymbols {
+public class CardFaceSymbols {
     /** Constant <code>manaImages</code>. */
     private static final Map<String, Image> MANA_IMAGES = new HashMap<String, Image>();
     /** Constant <code>replaceSymbolsPattern</code>. */
