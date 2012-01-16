@@ -3,8 +3,8 @@ ManaCost:4
 Types:Artifact
 Text:no text
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigChangeAll | TriggerDescription$ At the beginning of each player's draw step, that player puts the cards in his or her hand on the bottom of his or her library in any order, then draws that many cards.
-SVar:TrigChangeAll:DB$ ChangeZoneAll | Defined$ TriggeredPlayer | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ SVar=DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ X | Defined$ TriggeredPlayer | SubAbility$ SVar=DBCleanup
+SVar:TrigChangeAll:DB$ ChangeZoneAll | Defined$ TriggeredPlayer | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ X | Defined$ TriggeredPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemRandomDeck:True
