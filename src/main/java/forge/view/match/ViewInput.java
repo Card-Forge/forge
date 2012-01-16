@@ -83,7 +83,7 @@ public class ViewInput extends FRoundedPanel {
         this.tarMessage.setWrapStyleWord(true);
         this.tarMessage.setForeground(this.skin.getColor("text"));
         this.tarMessage.setFont(this.skin.getFont(16));
-        this.add(this.lblGames, "w 96%!, gapleft 2%, h 10%, wrap");
+        this.add(this.lblGames, "span 2 1, w 96%!, gapleft 2%, h 10%, wrap");
         this.add(this.tarMessage, "span 2 1, h 70%!, w 96%!, gapleft 2%, gaptop 1%");
         this.add(this.btnOK, "w 47%!, gapright 2%, gapleft 1%");
         this.add(this.btnCancel, "w 47%!, gapright 1%");
