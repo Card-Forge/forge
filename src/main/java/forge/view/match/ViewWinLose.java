@@ -131,7 +131,7 @@ public class ViewWinLose {
         pnlButtons.add(btnContinue, constraints);
         pnlButtons.add(btnRestart, constraints);
         pnlButtons.add(btnQuit, constraints);
-        pnlLeft.add(pnlButtons, "w 50%!, gap 25% 0 0 0");
+        pnlLeft.add(pnlButtons, "w 100%!");
 
         overlay.showOverlay();
     }
