@@ -4,7 +4,7 @@ Types:Creature Illusion
 Text:no text
 PT:2/1
 K:Flying
-A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ SVar=DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common

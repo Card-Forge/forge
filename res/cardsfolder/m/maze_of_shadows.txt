@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking+withShadow | TgtPrompt$ Select target attacking creature with shadow | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SubAbility$ SVar=DBUntap | SpellDescription$ Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking+withShadow | TgtPrompt$ Select target attacking creature with shadow | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SubAbility$ DBUntap | SpellDescription$ Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
