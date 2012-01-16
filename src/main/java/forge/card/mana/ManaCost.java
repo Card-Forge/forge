@@ -183,7 +183,8 @@ public class ManaCost {
      */
     public final boolean isColor(final String color) {
         for (final Object s : this.manaPart) {
-            if (s.toString().contains(color)) {
+            if (s.toString().contains(color)
+                    || (s.toString().matches(".*[0-9].*") && "1".equals(color))) {
                 return true;
             }
         }
