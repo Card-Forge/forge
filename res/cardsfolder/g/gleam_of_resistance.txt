@@ -2,7 +2,7 @@ Name:Gleam of Resistance
 ManaCost:4 W
 Types:Instant
 Text:no text
-A:SP$ UntapAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control get +1/+2 until end of turn. Untap those creatures. | SubAbility$ SVar=DBPumpYourCreatures
+A:SP$ UntapAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control get +1/+2 until end of turn. Untap those creatures. | SubAbility$ DBPumpYourCreatures
 SVar:DBPumpYourCreatures:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +2
 K:TypeCycling:Basic:1 W
 SVar:RemAIDeck:True
