@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Scout
 Text:no text
 PT:1/1
-A:AB$ Untap | Cost$ G T | ValidTgts$ Creature.attacking+YouCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ SVar=DBPump | SpellDescription$ Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
+A:AB$ Untap | Cost$ G T | ValidTgts$ Creature.attacking+YouCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
 SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

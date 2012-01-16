@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Fish
 Text:no text
 PT:1/1
-A:AB$ Pump | Cost$ R R | NumAtt$ +2 | SubAbility$ SVar=DBDealDamage | SpellDescription$ CARDNAME gets +2/+0 until end of turn and deals 1 damage to you.
+A:AB$ Pump | Cost$ R R | NumAtt$ +2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME gets +2/+0 until end of turn and deals 1 damage to you.
 SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to you.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
