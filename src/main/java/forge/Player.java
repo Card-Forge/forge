@@ -2089,16 +2089,16 @@ public abstract class Player extends GameEntity {
             System.out.println("Tried to lose, but currently can't.");
             return false;
         }
-        
+
         //Replacement effects
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Affected", this);
         runParams.put("Event", "GameLoss");
-        
-        if(AllZone.getReplacementHandler().run(runParams)) {
+
+        if (AllZone.getReplacementHandler().run(runParams)) {
             return false;
         }
-        
+
         this.lossState = state;
         this.loseConditionSpell = spellName;
         return true;
