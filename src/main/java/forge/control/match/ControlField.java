@@ -174,11 +174,9 @@ public class ControlField {
         this.view.getLblFlashback().addMouseListener(maFlashback);
 
         // Hand button
-        if (Constant.Runtime.DEV_MODE[0]) {
-            this.view.getLblHand().enableHover();
-            this.view.getLblHand().removeMouseListener(maHand);
-            this.view.getLblHand().addMouseListener(maHand);
-        }
+        this.view.getLblHand().enableHover();
+        this.view.getLblHand().removeMouseListener(maHand);
+        this.view.getLblHand().addMouseListener(maHand);
     }
 
     /**
@@ -343,7 +341,8 @@ public class ControlField {
                 if (!ControlField.this.player.isComputer()) {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Hand), HumanHand.BASE)
                     .actionPerformed(null);
-                } else {
+                } else if (Constant.Runtime.DEV_MODE[0] 
+                        || ControlField.this.player.hasKeyword("Play with your hand revealed.")) {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Hand), ComputerHand.BASE)
                     .actionPerformed(null);
                 }

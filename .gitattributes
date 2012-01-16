@@ -6830,6 +6830,7 @@ res/cardsfolder/r/return_to_dust.txt svneol=native#text/plain
 res/cardsfolder/r/reveillark.txt svneol=native#text/plain
 res/cardsfolder/r/reveille_squad.txt svneol=native#text/plain
 res/cardsfolder/r/reveka_wizard_savant.txt svneol=native#text/plain
+res/cardsfolder/r/revelation.txt -text
 res/cardsfolder/r/revelsong_horn.txt svneol=native#text/plain
 res/cardsfolder/r/revenant.txt svneol=native#text/plain
 res/cardsfolder/r/reverberate.txt svneol=native#text/plain
@@ -8576,6 +8577,7 @@ res/cardsfolder/t/telekinetic_bonds.txt svneol=native#text/plain
 res/cardsfolder/t/telekinetic_sliver.txt svneol=native#text/plain
 res/cardsfolder/t/telemin_performance.txt -text
 res/cardsfolder/t/telepathic_spies.txt svneol=native#text/plain
+res/cardsfolder/t/telepathy.txt -text
 res/cardsfolder/t/teleport.txt svneol=native#text/plain
 res/cardsfolder/t/telethopter.txt svneol=native#text/plain
 res/cardsfolder/t/telimtor.txt svneol=native#text/plain
