@@ -169,6 +169,10 @@ public class CostUtil {
                 final double percent = type.name().equals("P1P1") ? CostUtil.p1p1Percent : CostUtil.otherPercent;
                 final int currentNum = source.getCounters(type);
 
+                Integer amount = part.convertAmount();
+                if (amount == null) {
+                    amount = currentNum;
+                }
                 final double chance = percent * (currentNum / part.convertAmount());
                 if (chance <= CostUtil.r.nextFloat()) {
                     return false;

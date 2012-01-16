@@ -1603,6 +1603,10 @@ public class AbilityFactory {
             // isn't made yet
             return 0;
         }
+        //cost hasn't been paid yet
+        if (amount.startsWith("Cost")) {
+            return 0;
+        }
 
         return Integer.parseInt(amount) * multiplier;
     }

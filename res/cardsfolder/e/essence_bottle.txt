@@ -5,6 +5,7 @@ Text:no text
 A:AB$ PutCounter | Cost$ 3 T | Defined$ Self | CounterType$ ELIXIR | CounterNum$ 1 | SpellDescription$ Put an elixir counter on CARDNAME.
 A:AB$ GainLife | Cost$ T SubCounter<All/ELIXIR> | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 2 life for each elixir counter removed this way.
 SVar:X:SVar$CostCountersRemoved/Twice
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_bottle.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/276.jpg

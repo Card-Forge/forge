@@ -141,6 +141,7 @@ public class CostRemoveCounter extends CostPart {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
         source.subtractCounter(this.getCounter(), c);
+        source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
     }
 
     /*
