@@ -2,7 +2,7 @@ Name:Flicker
 ManaCost:1 W
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.nonToken | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nontoken permanent | SubAbility$ SVar=DBReturn | RememberTargets$ True | SpellDescription$ Exile target nontoken permanent, then return it to the battlefield under its owner's control.
+A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.nonToken | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nontoken permanent | SubAbility$ DBReturn | RememberTargets$ True | SpellDescription$ Exile target nontoken permanent, then return it to the battlefield under its owner's control.
 SVar:DBReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
