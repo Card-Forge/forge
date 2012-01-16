@@ -3,7 +3,7 @@ ManaCost:4 U U
 Types:Sorcery
 Text:no text
 K:Suspend:3:2 U
-A:SP$ ChangeZone | Cost$ 4 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ SVar=DBChange | SpellDescription$ Return target permanent to its owner's hand. Exile CARDNAME with three time counters on it.
+A:SP$ ChangeZone | Cost$ 4 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChange | SpellDescription$ Return target permanent to its owner's hand. Exile CARDNAME with three time counters on it.
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ 3 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

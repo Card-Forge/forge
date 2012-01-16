@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Legendary Creature Human Soldier
 Text:no text
 PT:3/4
-A:AB$ Destroy | Cost$ T | ValidTgts$ Dragon.attacking,Dragon.blocking | NoRegen$ True | TgtPrompt$ Select target attacking or blocking Dragon | SubAbility$ SVar=DBGainLife | SpellDescription$ Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
+A:AB$ Destroy | Cost$ T | ValidTgts$ Dragon.attacking,Dragon.blocking | NoRegen$ True | TgtPrompt$ Select target attacking or blocking Dragon | SubAbility$ DBGainLife | SpellDescription$ Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardPower
 SVar:RemRandomDeck:True
