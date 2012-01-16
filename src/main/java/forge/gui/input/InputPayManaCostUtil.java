@@ -108,7 +108,8 @@ public class InputPayManaCostUtil {
         // Store some information about color costs to help with any mana choices
         String colorsNeeded = colorRequired.toString();
         if ("1".equals(colorsNeeded)) {  // only colorless left
-            if (sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect") != "") {
+            if (sa.getSourceCard() != null
+                    && sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect") != "") {
                 colorsNeeded = "";
                 String[] negEffects = sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
                 for (String negColor : negEffects) {
@@ -132,7 +133,8 @@ public class InputPayManaCostUtil {
 
         // If the card has sunburst or any other ability that tracks mana spent,
         // skip express Mana choice
-        if (sa.getSourceCard().hasKeyword("Sunburst") && sa.isSpell()) {
+        if (sa.getSourceCard() != null
+                && sa.getSourceCard().hasKeyword("Sunburst") && sa.isSpell()) {
             colorsNeeded = "WUBRG";
             skipExpress = true;
         }
