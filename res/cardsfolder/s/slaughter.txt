@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature. It can't be regenerated.
-A:SP$ Destroy | Cost$ 2 B B PayLife<4> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ SVar=DBBuyback | SpellDescription$ Buyback - Pay 4 life.
+A:SP$ Destroy | Cost$ 2 B B PayLife<4> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ DBBuyback | SpellDescription$ Buyback - Pay 4 life.
 SVar:DBBuyback:DB$ ChangeZone | Cost$ 0 | Origin$ Stack | Destination$ Hand | ValidCard$ Card.Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Homunculus
 Text:no text
 PT:1/2
-A:AB$ Token | Cost$ 1 U T | TokenImage$ U 2 2 Homunculus | TokenAmount$ 1 | TokenName$ Homunculus | TokenTypes$ Creature,Homunculus | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | SubAbility$ SVar=DBSac | SpellDescription$ Put a 2/2 blue Homunculus creature token onto the battlefield, then sacrifice a creature.
+A:AB$ Token | Cost$ 1 U T | TokenImage$ U 2 2 Homunculus | TokenAmount$ 1 | TokenName$ Homunculus | TokenTypes$ Creature,Homunculus | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | SubAbility$ DBSac | SpellDescription$ Put a 2/2 blue Homunculus creature token onto the battlefield, then sacrifice a creature.
 SVar:DBSac:DB$Sacrifice | SacValid$ Creature | Defined$ You | Amount$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
