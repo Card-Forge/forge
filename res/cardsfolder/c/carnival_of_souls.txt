@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature enters the battlefield, you lose 1 life and add B to your mana pool.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | SubAbility$ SVar=DBMana
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$Mana | Produced$ B
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
