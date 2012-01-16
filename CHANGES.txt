@@ -1,8 +1,8 @@
-Forge Beta: ##-##-2012 ver 1.2.# rev #####
+Forge Beta: 01-16-2012 ver 1.2.1 rev 13212
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-#### cards in total.
+9919 cards in total.
 
 
 A new branch was created for supporting "Produced$ Any" in mana abilities (Issue 266). Some other bugs/problems with paying mana costs were uncovered and fixed. This work was recently merged into the main trunk.
@@ -340,113 +340,129 @@ Reiver Demon
 - Changed QuestMatchState to MatchState (since it has no quest-specific information).
 - Renamed ManaSymbols to more accurate CardFaceSymbols.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Added pre-release cards to DKA cardfolder branch:
 
-Gather the Townsfolk
-Ravenous Demon // Archdemon of Greed
-Faithless Looting
-Mondronen Shaman // Tovolar's Magehunter
-Strangleroot Geist
-Thraben Doomsayer
-Nearheath Stalker
-Zombie Apocalypse
+Beguiler of Wills
 Chalice of Life // Chalice of Death
+Curse of Thirst
+Drogskol Reaver
+Faithless Looting
+Falkenrath Aristocrat
+Gather the Townsfolk
+Ghoultree
 Gravecrawler
 Hunger of the Howlpack
-Jar of Eyeballs
-Ghoultree
-Drogskol Reaver
-Curse of Thirst
-Falkenrath Aristocrat
+Huntmaster of the Fells // Ravager of the Fells
+Increasing Confusion
 Increasing Devotion
+Jar of Eyeballs
+Lambholt Elder // Silverpelt Werewolf
+Loyal Cathar // Unhallowed Cathar
+Mikaeus, the Unhallowed
+Mondronen Shaman // Tovolar's Magehunter
+Moonveil Dragon
+Nearheath Stalker
+Ravenous Demon // Archdemon of Greed
 Scorned Villager // Moonscarred Werewolf
 Secrets of the Dead
-Moonveil Dragon
 Sorin, Lord of Innistrad
-Increasing Confusion
-Loyal Cathar // Unhallowed Cathar
 Soul Seizer // Ghastly Haunting
+Strangleroot Geist
 Thalia, Guardian of Thraben
-Lambholt Elder // Silverpelt Werewolf
-Beguiler of Wills
-Huntmaster of the Fells // Ravager of the Fells
+Thraben Doomsayer
 Vorapede
-Mikaeus, the Unhallowed
+Zombie Apocalypse
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+DeadSpeak
+Doublestrike
+Friar Sol
+Hellfish
+Jeff Wadsworth
+Marc
+Mark
+Slapshot5
+Sloth
+SoulStorm
+Squee1968
+Xanbie
+ZzzzSleep
+Chris H
 
 
 Added many cards, including:
 
-Karona, False God
 Akki Lavarunner // Tok-Tok, Volcano-born
-Laboratory Maniac
-Obstinate Familiar
-Pursuit of Knowledge
-Thought Reflection
-Undead Alchemist
-Vigor
+Archmage Ascension
+Bloodchief Ascension
+Carrion Beetles
+Cast Through Time
+Caterwauling Boggart
+Children of Korlis
+Clash of Realities
 Coal Stoker
+Coalition Relic
+Consuming Vapors
+Crescendo of War
+Damia, Sage of Stone
+Deepwood Legate
+Distortion Strike
 Dread Cacodemon
+Emerge Unscathed
+Gravity Well
+Harmonic Sliver
+Hedron-Field Purists
+Hoarding Dragon
 Hypnox
-Reiver Demon
+Karona, False God
+Laboratory Maniac
+Lantern of Insight
+Lich's Mirror
+Luminarch Ascension
+Mesmeric Sliver
 Myojin of Cleansing Fire
 Myojin of Infinite Rage
 Myojin of Life's Web
 Myojin of Night's Reach
 Myojin of Seeing Winds
-Deepwood Legate
-Sivvi's Ruse
-Qasali Ambusher
-Carrion Beetles
-Rag Dealer
-Caterwauling Boggart
-Coalition Relic
-Quirion Sentinel
-Terrarion
-Children of Korlis
-Bloodchief Ascension
-Luminarch Ascension
-Sygg, River Cutthroat
-Tainted Sigil
-Wound Reflection
-Sages of the Anima
-Tomorrow, Azami's Familiar
-Sudden Spoiling
-Damia, Sage of Stone
-Verdant Embrace
-Hoarding Dragon
-Hedron-Field Purists
-Crescendo of War
-Cast Through Time
-Consuming Vapors
-Distortion Strike
-Emerge Unscathed
 Nomads' Assembly
+Obstinate Familiar
+Petrified Wood-Kin
+Phage the Untouchable
 Prey's Vengeance
+Pursuit of Knowledge
+Qasali Ambusher
+Quirion Sentinel
+Rag Dealer
+Rapid Fire
+Reiver Demon
+Runeflare Trap
+Sages of the Anima
+Sivvi's Ruse
 Staggershock
+Sudden Spoiling
 Surreal Memoir
 Survival Cache
-Virulent Swipe
-Phage the Untouchable
-Harmonic Sliver
-Mesmeric Sliver
-Gravity Well
-Clash of Realities
+Sygg, River Cutthroat
+Tainted Sigil
 Telekinesis
-Rapid Fire
-Lantern of Insight
-Ulasht, the Hate Seed
+Terrarion
+Thought Reflection
 Tin Street Hooligan
-Petrified Wood-Kin
-Lich's Mirror
-Archmage Ascension
-Runeflare Trap
+Tomorrow, Azami's Familiar
+Ulasht, the Hate Seed
+Undead Alchemist
+Verdant Embrace
+Vigor
+Virulent Swipe
+Wound Reflection
 
 
 end
