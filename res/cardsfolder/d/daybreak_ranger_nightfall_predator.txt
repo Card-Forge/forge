@@ -21,7 +21,7 @@ Colors:green
 Types:Creature Werewolf
 Text:no text
 PT:4/4
-A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ SVar=DamageThis | SpellDescription$ CARDNAME fights target creature. (Each deals damage equal to its power to the other.)
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME fights target creature. (Each deals damage equal to its power to the other.)
 SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower

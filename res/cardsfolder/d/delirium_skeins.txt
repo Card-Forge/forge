@@ -2,7 +2,7 @@ Name:Delirium Skeins
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-A:SP$ Discard | Cost$ 2 B | Mode$ TgtChoose | Defined$ You | NumCards$ 3 | SubAbility$ SVar=DBDiscardOpp | SpellDescription$ Each player discards three cards.
+A:SP$ Discard | Cost$ 2 B | Mode$ TgtChoose | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscardOpp | SpellDescription$ Each player discards three cards.
 SVar:DBDiscardOpp:DB$Discard | Mode$ TgtChoose | Defined$ Opponent | NumCards$ 3
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

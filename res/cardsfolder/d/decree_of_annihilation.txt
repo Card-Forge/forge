@@ -3,9 +3,9 @@ ManaCost:8 R R
 Types:Sorcery
 Text:no text
 K:Cycling:5 R R
-A:SP$ ChangeZoneAll | Cost$ 8 R R | ChangeType$ Artifact,Land,Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ SVar=DBExileHand | SpellDescription$ Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands.
+A:SP$ ChangeZoneAll | Cost$ 8 R R | ChangeType$ Artifact,Land,Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBExileHand | SpellDescription$ Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When you cycle CARDNAME, destroy all lands
-SVar:DBExileHand:DB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Hand | Destination$ Exile | SubAbility$ SVar=DBExileGraveyard
+SVar:DBExileHand:DB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Hand | Destination$ Exile | SubAbility$ DBExileGraveyard
 SVar:DBExileGraveyard:DB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Land | SpellDescription$ Destroy all lands.
 SVar:RemAIDeck:True
