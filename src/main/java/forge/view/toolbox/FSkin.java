@@ -292,7 +292,7 @@ public class FSkin {
      */
     public Font getFont(int size) {
         if (plainFonts.get(size) == null) {
-            System.out.println("FSkin: A plain font of size " + size + " hasn't been derived yet.");
+            plainFonts.put(size, getFont().deriveFont(Font.PLAIN, size));
         }
         return plainFonts.get(size);
     }
@@ -303,7 +303,7 @@ public class FSkin {
      */
     public Font getBoldFont(int size) {
         if (boldFonts.get(size) == null) {
-            System.out.println("FSkin: A bold font of size " + size + " hasn't been derived yet.");
+            boldFonts.put(size, getFont().deriveFont(Font.BOLD, size));
         }
         return boldFonts.get(size);
     }
@@ -314,7 +314,7 @@ public class FSkin {
      */
     public Font getItalicFont(int size) {
         if (boldFonts.get(size) == null) {
-            System.out.println("FSkin: An italic font of size " + size + " hasn't been derived yet.");
+            italicFonts.put(size, getFont().deriveFont(Font.ITALIC, size));
         }
         return italicFonts.get(size);
     }
