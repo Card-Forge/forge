@@ -31,6 +31,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
+import forge.MatchState;
 import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.Player;
@@ -48,7 +49,6 @@ import forge.gui.ListChooser;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestUtil;
 import forge.quest.gui.main.QuestChallenge;
@@ -81,7 +81,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private final String constraintsCards = "w 95%!, h 330px!, gap 0 0 0 20px";
 
     private class CommonObjects {
-        private QuestMatchState qMatchState;
+        private MatchState matchState;
         private QuestData qData;
         private QuestEvent qEvent;
     }
@@ -97,10 +97,10 @@ public class QuestWinLoseHandler extends ControlWinLose {
         super(v0);
         this.view = v0;
         this.model = new CommonObjects();
-        this.model.qMatchState = AllZone.getMatchState();
+        this.model.matchState = AllZone.getMatchState();
         this.model.qData = AllZone.getQuestData();
         this.model.qEvent = AllZone.getQuestEvent();
-        this.wonMatch = this.model.qMatchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
+        this.wonMatch = this.model.matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
         this.skin = AllZone.getSkin();
         this.isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
     }
@@ -154,7 +154,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qData.getCards().resetNewList();
 
         //do per-game actions
-        if (this.model.qMatchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
+        if (this.model.matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             //add the computer's ante card to your card pool
             if (isAnte) {
                 CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
@@ -178,7 +178,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
         }
 
-        if (!this.model.qMatchState.isMatchOver()) {
+        if (!this.model.matchState.isMatchOver()) {
             this.getView().getBtnQuit().setText("Quit (15 Credits)");
             return isAnte;
         } else {
@@ -301,7 +301,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             this.model.qData.clearAvailableChallenges();
         }
 
-        this.model.qMatchState.reset();
+        this.model.matchState.reset();
         AllZone.setQuestEvent(null);
 
         this.model.qData.saveData();
@@ -351,7 +351,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
         final Player computer = AllZone.getComputerPlayer();
-        for (final GameSummary game : this.model.qMatchState.getGamesPlayed()) {
+        for (final GameSummary game : this.model.matchState.getGamesPlayed()) {
             if (game.isWinner(computer.getName())) {
                 hasNeverLost = false;
                 continue; // no rewards for losing a game

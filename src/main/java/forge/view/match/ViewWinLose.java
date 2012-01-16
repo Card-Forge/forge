@@ -11,13 +11,13 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Constant;
+import forge.MatchState;
 import forge.Phase;
 import forge.Player;
 import forge.control.match.ControlWinLose;
 import forge.game.GameType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
-import forge.quest.data.QuestMatchState;
 import forge.quest.gui.QuestWinLoseHandler;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
@@ -33,7 +33,7 @@ public class ViewWinLose {
     /** */
     public ViewWinLose() {
         final FOverlay overlay = AllZone.getOverlay();
-        final QuestMatchState matchState = AllZone.getMatchState();
+        final MatchState matchState = AllZone.getMatchState();
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();

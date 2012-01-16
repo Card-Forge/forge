@@ -34,7 +34,6 @@ import forge.model.FGameState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestMatchState;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
 import forge.view.toolbox.FOverlay;
@@ -84,11 +83,8 @@ public final class AllZone {
     /** Constant <code>inputControl</code>. */
     private static final InputControl INPUT_CONTROL = new InputControl(Singletons.getModel());
 
-    /**
-     * Match State for challenges are stored in a <code>QuestMatchState</code>
-     * class instance.
-     */
-    private static QuestMatchState matchState = new QuestMatchState();
+    /** */
+    private static MatchState matchState = new MatchState();
 
     // initialized at Runtime since it has to be the last object constructed
 
@@ -657,7 +653,7 @@ public final class AllZone {
      * 
      * @return the matchState
      */
-    public static QuestMatchState getMatchState() {
+    public static MatchState getMatchState() {
         return AllZone.matchState;
     }
 

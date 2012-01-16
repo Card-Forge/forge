@@ -10702,6 +10702,7 @@ src/main/java/forge/IPlayerZone.java svneol=native#text/plain
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/ImagePreviewPanel.java svneol=native#text/plain
 src/main/java/forge/MagicStack.java svneol=native#text/plain
+src/main/java/forge/MatchState.java svneol=native#text/plain
 src/main/java/forge/Move.java svneol=native#text/plain
 src/main/java/forge/MyButton.java svneol=native#text/plain
 src/main/java/forge/MyObservable.java svneol=native#text/plain
@@ -11009,7 +11010,6 @@ src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/p
 src/main/java/forge/properties/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestDataIO.java svneol=native#text/plain
-src/main/java/forge/quest/data/QuestMatchState.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtilCards.java -text

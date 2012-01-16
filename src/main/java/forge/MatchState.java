@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data;
+package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,14 +26,14 @@ import forge.game.GameSummary;
 
 /**
  * <p>
- * QuestMatchState class.
+ * MatchState class.
  * </p>
  * 
  * @author Forge
  * @version $Id$
  */
 
-public class QuestMatchState {
+public class MatchState {
 
     /** The Constant GAMES_PER_MATCH. */
     public static final int GAMES_PER_MATCH = 3;
@@ -108,7 +108,7 @@ public class QuestMatchState {
             maxWins = Math.max(maxWins, win);
         }
 
-        return (maxWins >= QuestMatchState.MIN_GAMES_TO_WIN_MATCH) || (totalGames >= QuestMatchState.GAMES_PER_MATCH);
+        return (maxWins >= MatchState.MIN_GAMES_TO_WIN_MATCH) || (totalGames >= MatchState.GAMES_PER_MATCH);
     }
 
     /**
@@ -135,7 +135,7 @@ public class QuestMatchState {
      * @return true, if is match won by
      */
     public final boolean isMatchWonBy(final String name) {
-        return this.countGamesWonBy(name) >= QuestMatchState.MIN_GAMES_TO_WIN_MATCH;
+        return this.countGamesWonBy(name) >= MatchState.MIN_GAMES_TO_WIN_MATCH;
     }
 
     /**
