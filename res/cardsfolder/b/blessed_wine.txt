@@ -2,7 +2,7 @@ Name:Blessed Wine
 ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 1 | SpellDescription$ You gain 1 life. | SubAbility$ SVar=DBDraw
+A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 1 | SpellDescription$ You gain 1 life. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_wine.jpg
