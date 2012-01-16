@@ -74,7 +74,7 @@ import forge.view.toolbox.FVerticalTabPanel;
 @SuppressWarnings("serial")
 public class ViewTabber extends FRoundedPanel {
     private final List<JPanel> panelList;
-    private Map<Player, JLabel[]> detalLBLs;
+    private Map<Player, JLabel[]> infoLBLs;
     private JLabel stormLabel;
     private List<JTextArea> stackTARs;
     private List<JTextArea> combatTARs;
@@ -166,7 +166,7 @@ public class ViewTabber extends FRoundedPanel {
                 regular = big - 2;
 
                 // Player panel info
-                Iterator<Entry<Player, JLabel[]>> it = detalLBLs.entrySet().iterator();
+                Iterator<Entry<Player, JLabel[]>> it = infoLBLs.entrySet().iterator();
                 while (it.hasNext()) {
                     JLabel[] labels = (JLabel[]) it.next().getValue();
                     for (x = 0; x < labels.length; x++) {
@@ -178,6 +178,9 @@ public class ViewTabber extends FRoundedPanel {
                         }
                     }
                 }
+
+                // Storm label
+                stormLabel.setFont(skin.getFont(big));
 
                 // Stack text areas
                 for (JTextArea tar : stackTARs) {
@@ -411,7 +414,7 @@ public class ViewTabber extends FRoundedPanel {
      *            &emsp; Player obj
      */
     public void updatePlayerLabels(final Player p0) {
-        final JLabel[] temp = this.detalLBLs.get(p0);
+        final JLabel[] temp = this.infoLBLs.get(p0);
         temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: " + String.valueOf(p0.getPoisonCounters()));
         temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
         temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
@@ -590,19 +593,10 @@ public class ViewTabber extends FRoundedPanel {
         return this.lblSetLife;
     }
 
-    /**
-     * Gets the detail labels.
-     * 
-     * @return HashMap<Player, JLabel[]>
-     */
-    public Map<Player, JLabel[]> getdetalLBLs() {
-        return this.detalLBLs;
-    }
-
     /** Assembles Swing components for "players" panel. */
     private void populatePnlPlayers() {
         final List<Player> players = AllZone.getPlayersInGame();
-        this.detalLBLs = new HashMap<Player, JLabel[]>();
+        this.infoLBLs = new HashMap<Player, JLabel[]>();
 
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
 
@@ -616,7 +610,7 @@ public class ViewTabber extends FRoundedPanel {
             final InfoLabel prevention = new InfoLabel();
             final InfoLabel keywords = new InfoLabel();
             final InfoLabel antes = new InfoLabel();
-            this.detalLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes });
+            this.infoLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes });
 
             // Set border on bottom label, and larger font on player name
             antes.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getColor("borders")));
