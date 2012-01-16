@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Legendary Creature Ogre Shaman
 Text:no text
 PT:4/3
-A:AB$ DealDamage | Cost$ T | Defined$ Opponent | NumDmg$ XOpp | SubAbility$ SVar=DBDealDamage | SpellDescription$ CARDNAME deals damage to each player equal to half that player's life total, rounded down.
+A:AB$ DealDamage | Cost$ T | Defined$ Opponent | NumDmg$ XOpp | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals damage to each player equal to half that player's life total, rounded down.
 SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ XYou
 SVar:XOpp:Count$OppLifeTotal/HalfDown
 SVar:XYou:Count$YourLifeTotal/HalfDown

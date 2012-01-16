@@ -2,7 +2,7 @@ Name:Incite
 ManaCost:R
 Types:Instant
 Text:no text
-A:SP$ Animate | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Red | OverwriteColors$ True | SubAbility$ SVar=DBPump | SpellDescription$ Target creature becomes red until end of turn and attacks this turn if able.
+A:SP$ Animate | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Red | OverwriteColors$ True | SubAbility$ DBPump | SpellDescription$ Target creature becomes red until end of turn and attacks this turn if able.
 SVar:DBPump:DB$ Pump | KW$ HIDDEN CARDNAME attacks each turn if able. | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Common
