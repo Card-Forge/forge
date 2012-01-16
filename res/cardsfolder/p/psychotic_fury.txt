@@ -2,7 +2,7 @@ Name:Psychotic Fury
 ManaCost:1 R
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature.MultiColor | TgtPrompt$ Select target multicolored creature | KW$ Double Strike | SubAbility$ SVar=DBDraw | SpellDescription$ Target multicolored creature gains double strike until end of turn.
+A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature.MultiColor | TgtPrompt$ Select target multicolored creature | KW$ Double Strike | SubAbility$ DBDraw | SpellDescription$ Target multicolored creature gains double strike until end of turn.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

@@ -2,7 +2,7 @@ Name:Perilous Research
 ManaCost:1 U
 Types:Instant
 Text:no text
-A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ SVar=DBSac | SpellDescription$ Draw two cards, then sacrifice a permanent.
+A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ DBSac | SpellDescription$ Draw two cards, then sacrifice a permanent.
 SVar:DBSac:DB$Sacrifice | SacValid$ Permanent
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

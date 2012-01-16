@@ -2,7 +2,7 @@ Name:Pollen Lullaby
 ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$ Fog | Cost$ 1 W | SubAbility$ SVar=DBClash | SpellDescription$ Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
+A:SP$ Fog | Cost$ 1 W | SubAbility$ DBClash | SpellDescription$ Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
 SVar:DBClash:DB$Clash | WinSubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.YouDontCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:Rarity:Uncommon

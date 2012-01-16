@@ -2,7 +2,7 @@ Name:Portent
 ManaCost:U
 Types:Sorcery
 Text:no text
-A:SP$ RearrangeTopOfLibrary | Cost$ U | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SpellDescription$ Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library. | SubAbility$ SVar=DBDraw
+A:SP$ RearrangeTopOfLibrary | Cost$ U | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SpellDescription$ Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
