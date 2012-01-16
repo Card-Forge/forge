@@ -299,12 +299,34 @@ public class AbilityFactoryMana {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     // AI color choice is set in ComputerUtils so only human players need to make a choice
                     if (sa.getActivatingPlayer().isHuman()) {
-                        Object o = GuiUtils.getChoice("Choose a color", Constant.Color.ONLY_COLORS);
-                        if (null == o) {
-                            return;
+                        String colorsNeeded = abMana.getExpressChoice();
+                        String choice = "";
+                        if (colorsNeeded.length() == 1) {
+                            choice = colorsNeeded;
                         }
-                        String choice = (String) o;
-                        abMana.setAnyChoice(InputPayManaCostUtil.getShortColorString(choice));
+                        else {
+                            String[] colorMenu = null;
+                            if (colorsNeeded.length() > 1 && colorsNeeded.length() < 5) {
+                                colorMenu = new String[colorsNeeded.length()];
+                                //loop through colors to make menu
+                                for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
+                                    colorMenu[nChar] = InputPayManaCostUtil.getLongColorString(colorsNeeded.substring(nChar, nChar + 1));
+                                }
+                            }
+                            else {
+                                colorMenu = Constant.Color.ONLY_COLORS;
+                            }
+                            Object o = GuiUtils.getChoice("Select Mana to Produce", colorMenu);
+                            if (o == null) {
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
+                                sb.append(sa.getSourceCard().getName());
+                                throw new RuntimeException(sb.toString());
+                            } else {
+                                choice = InputPayManaCostUtil.getShortColorString((String) o);
+                            }
+                        }
+                        abMana.setExpressChoice(choice);
                     }
                     else {
                         if (params.containsKey("AILogic")) {
@@ -315,9 +337,9 @@ public class AbilityFactoryMana {
                                         Zone.Hand));
                             }
                             GuiUtils.getChoice("Computer picked: ", chosen);
-                            abMana.setAnyChoice(InputPayManaCostUtil.getShortColorString(chosen));
+                            abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
                         }
-                        if (abMana.getAnyChoice().isEmpty()) {
+                        if (abMana.getExpressChoice().isEmpty()) {
                             final StringBuilder sb = new StringBuilder();
                             sb.append("AbilityFactoryMana::manaResolve() - any color mana choice is empty for ");
                             sb.append(sa.getSourceCard().getName());
@@ -372,7 +394,7 @@ public class AbilityFactoryMana {
 
         String baseMana;
         if (abMana.isAnyMana()) {
-            baseMana = abMana.getAnyChoice();
+            baseMana = abMana.getExpressChoice();
             if (baseMana.isEmpty()) {
                 baseMana = "Any";
             }

@@ -39,7 +39,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
     private static final long serialVersionUID = -6816356991224950520L;
 
     private String origProduced;
-    private String lastAnyChoice = "";
+    private String lastExpressChoice = "";
     private String lastProduced = "";
     private int amount = 1;
 
@@ -277,8 +277,8 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void setAnyChoice(String s) {
-        this.lastAnyChoice = s;
+    public void setExpressChoice(String s) {
+        this.lastExpressChoice = s;
     }
 
     /**
@@ -288,8 +288,8 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getAnyChoice() {
-        return this.lastAnyChoice;
+    public String getExpressChoice() {
+        return this.lastExpressChoice;
     }
 
     /**

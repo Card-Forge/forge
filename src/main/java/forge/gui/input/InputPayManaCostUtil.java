@@ -66,12 +66,17 @@ public class InputPayManaCostUtil {
 
         ArrayList<AbilityMana> abilities = InputPayManaCostUtil.getManaAbilities(card);
         final StringBuilder cneeded = new StringBuilder();
+        final StringBuilder colorRequired = new StringBuilder();
         boolean choice = true;
         boolean skipExpress = false;
 
         for (final String color : Constant.Color.MANA_COLORS) {
+            String shortColor = InputPayManaCostUtil.getShortColorString(color);
             if (manaCost.isNeeded(color)) {
-                cneeded.append(InputPayManaCostUtil.getShortColorString(color));
+                cneeded.append(shortColor);
+            }
+            if (manaCost.isColor(shortColor)) {
+                colorRequired.append(shortColor);
             }
         }
 
@@ -100,10 +105,37 @@ public class InputPayManaCostUtil {
             return manaCost;
         }
 
-        // TODO when implementing sunburst
+        // Store some information about color costs to help with any mana choices
+        String colorsNeeded = colorRequired.toString();
+        if ("1".equals(colorsNeeded)) {  // only colorless left
+            if (sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect") != "") {
+                colorsNeeded = "";
+                String[] negEffects = sa.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
+                for (String negColor : negEffects) {
+                    // convert long color strings to short color strings
+                    if (negColor.length() > 1) {
+                        negColor = InputPayManaCostUtil.getShortColorString(negColor);
+                    }
+                    if (!colorsNeeded.contains(negColor)) {
+                      colorsNeeded = colorsNeeded.concat(negColor);
+                    }
+                }
+            }
+            else {
+                colorsNeeded = "W";
+            }
+        }
+        else {
+            // remove colorless from colors needed
+            colorsNeeded = colorsNeeded.replace("1", "");
+        }
+
         // If the card has sunburst or any other ability that tracks mana spent,
         // skip express Mana choice
-        // if (card.getTrackManaPaid()) skipExpress = true;
+        if (sa.getSourceCard().hasKeyword("Sunburst") && sa.isSpell()) {
+            colorsNeeded = "WUBRG";
+            skipExpress = true;
+        }
 
         if (!skipExpress) {
             // express Mana Choice
@@ -151,9 +183,15 @@ public class InputPayManaCostUtil {
             chosen = (AbilityMana) GuiUtils.getChoice("Choose mana ability", abilities.toArray());
         }
 
+        // save off color needed for use by any mana and reflected mana
+        chosen.setExpressChoice(colorsNeeded);
+
         AllZone.getGameAction().playSpellAbility(chosen);
 
         manaCost = AllZone.getHumanPlayer().getManaPool().subtractMana(sa, manaCost, chosen);
+
+        // reset choice to blank, make sure this done after subtractMana
+        chosen.setExpressChoice("");
 
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)

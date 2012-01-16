@@ -835,7 +835,7 @@ public class ComputerUtil {
                                 }
                             }
                         }
-                        m.setAnyChoice(colorChoice);
+                        m.setExpressChoice(colorChoice);
                     }
                     // get produced mana
                     manaProduced = m.getManaProduced();

@@ -707,7 +707,7 @@ public class ManaPool {
             String[] cost = null;
             if (mability.isAnyMana()) {
                 cost = new String[1];
-                cost[0] = mability.getAnyChoice();
+                cost[0] = mability.getExpressChoice();
             }
             else {
                 cost = formatMana(mability);
