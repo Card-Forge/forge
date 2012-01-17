@@ -702,7 +702,7 @@ public class CardFactorySorceries {
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-*/
+
         // *************** START *********** START **************************
         else if (cardName.equals("Maelstrom Pulse")) {
             final SpellAbility spell = new Spell(card) {
@@ -799,7 +799,7 @@ public class CardFactorySorceries {
 
             spell.setBeforePayMana(target);
         } // *************** END ************ END ***************************
-
+*/
         // *************** START *********** START **************************
         else if (cardName.equals("Erratic Explosion")) {
             final Cost cost = new Cost(card.getManaCost(), cardName, false);
