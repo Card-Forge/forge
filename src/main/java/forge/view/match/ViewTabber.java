@@ -90,12 +90,17 @@ public class ViewTabber extends FRoundedPanel {
             lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblSetLife;
 
     private final FVerticalTabPanel vtpTabber;
+    
+    private final Color activeColor, inactiveColor, hoverColor;
 
     /**
      * Assembles Swing components for tabber area in sidebar.
      */
     public ViewTabber() {
         this.skin = AllZone.getSkin();
+        this.hoverColor = this.skin.getColor("hover");
+        this.activeColor = this.skin.getColor("active");
+        this.inactiveColor = this.skin.getColor("inactive");
 
         // Assemble card pic viewer
         this.panelList = new ArrayList<JPanel>();
@@ -714,9 +719,9 @@ public class ViewTabber extends FRoundedPanel {
     public class DevLabel extends JLabel {
         private static final long serialVersionUID = 7917311680519060700L;
 
-        private Color defaultBG = Color.green;
-        private final Color hoverBG = ViewTabber.this.skin.getColor("hover");
-        private final Color pressedBG = Color.green.darker().darker();
+        private Color defaultBG = ViewTabber.this.activeColor;
+        private final Color hoverBG = ViewTabber.this.hoverColor;
+        private final Color pressedBG = ViewTabber.this.inactiveColor;
         private boolean enabled;
         private final String enabledText, disabledText;
         private int w, h; // Width, height, radius, insets (for paintComponent)
@@ -760,6 +765,7 @@ public class ViewTabber extends FRoundedPanel {
             this.r = 6; // Radius (for paintComponent)
             this.i = 2; // Insets (for paintComponent)
             this.setEnabled(true);
+            this.setForeground(skin.getColor("text"));
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
@@ -795,10 +801,10 @@ public class ViewTabber extends FRoundedPanel {
         public void setEnabled(final boolean b) {
             String s;
             if (b) {
-                this.defaultBG = Color.green;
+                this.defaultBG = ViewTabber.this.activeColor;
                 s = this.enabledText;
             } else {
-                this.defaultBG = Color.red;
+                this.defaultBG = ViewTabber.this.inactiveColor;
                 s = this.disabledText;
             }
             this.enabled = b;
