@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.AllZone;
 import forge.Constant;
+import forge.ImageCache;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
@@ -56,7 +57,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbAnte().isSelected();
-                Singletons.getModel().getPreferences().setPlayForAnte(toggle);
+                prefs.setPlayForAnte(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -66,6 +67,7 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbScaleLarger().isSelected();
                 prefs.setScaleLargerThanOriginal(toggle);
+                ImageCache.setScaleLargerThanOriginal(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -154,21 +156,11 @@ public class ControlSettings {
         prefs.setSkin(name);
         AllZone.setSkin(skin);
         ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
-        // This should work, but it doesn't. :|  Doublestrike 15-12-11
+        // TODO This should work, but it doesn't. :|  Doublestrike 15-12-11
         view.getParentView().showSettingsMenu();
 
         prefs.save();
     }
-
-    /** @param rad0 &emsp; JRadioButton
-     * @throws Exception */
-    /*
-    public void updateStackOffset(JRadioButton rad0) throws Exception {
-        StackOffsetType sot = StackOffsetType.valueOf(rad0.getText().toLowerCase());
-        Singletons.getModel().getPreferences().setStackOffset(sot);
-        prefs.save();
-    }
-    */
 
     /** @param rad0 &emsp; JRadioButton
      * @throws Exception */
@@ -177,13 +169,4 @@ public class ControlSettings {
         Singletons.getModel().getPreferences().setCardSize(cst);
         prefs.save();
     }
-
-    /** @param rad0 &emsp; JRadioButton
-     * @throws Exception */
-    /*
-    public void updateStackSize(JRadioButton rad0) throws Exception {
-        Singletons.getModel().getPreferences().setMaxStackSize(Integer.parseInt(rad0.getText()));
-        prefs.save();
-    }
-    */
 }
