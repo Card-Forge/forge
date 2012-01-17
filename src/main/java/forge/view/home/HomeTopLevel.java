@@ -27,7 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.ControlHomeUI;
 import forge.control.home.ControlConstructed;
 import forge.control.home.ControlDraft;
@@ -64,7 +64,7 @@ public class HomeTopLevel extends FPanel {
      */
     public HomeTopLevel() {
         super();
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
 
         constructed = new ViewConstructed(this);
         sealed = new ViewSealed(this);

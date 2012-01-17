@@ -21,6 +21,7 @@ import javax.swing.text.StyledDocument;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.control.home.ControlDraft;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -90,7 +91,7 @@ public class ViewDraft extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0"));
         parentView = v0;
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
 
         JLabel lblHuman = new JLabel("Select your deck: ");
         lblHuman.setFont(skin.getBoldFont(16));

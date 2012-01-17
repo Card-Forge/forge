@@ -46,14 +46,16 @@ import forge.view.toolbox.FSkin;
 public class FView {
 
     private transient SplashFrame splashFrame;
+    private FSkin skin;
 
     /**
      * The splashFrame field is guaranteed to exist when this constructor exits.
      * 
-     * @param skin
+     * @param skin0
      *            the skin
      */
-    public FView(final FSkin skin) {
+    public FView(final FSkin skin0) {
+        this.skin = skin0;
 
         // We must use invokeAndWait here to fulfill the constructor's
         // contract.
@@ -96,6 +98,16 @@ public class FView {
         }
 
         return result;
+    }
+
+    /** @return FSkin */
+    public FSkin getSkin() {
+        return skin;
+    }
+
+    /** @param skin0 &emsp; FSkin */
+    public void setSkin(FSkin skin0) {
+        this.skin = skin0;
     }
 
     /**
@@ -145,7 +157,7 @@ public class FView {
                                 // splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                                 FView.this.splashFrame = null;
-                                AllZone.getSkin().loadFontAndImages();
+                                skin.loadFontAndImages();
                                 GuiTopLevel g = new GuiTopLevel();
                                 g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                 AllZone.setDisplay(g);
@@ -156,6 +168,5 @@ public class FView {
                 ErrorViewer.showError(ex);
             }
         } // End if(splashHasBeenClosed)
-
     } // End FView()
 }

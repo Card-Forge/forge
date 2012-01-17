@@ -97,7 +97,7 @@ public class ViewTabber extends FRoundedPanel {
      * Assembles Swing components for tabber area in sidebar.
      */
     public ViewTabber() {
-        this.skin = AllZone.getSkin();
+        this.skin = Singletons.getView().getSkin();
         this.hoverColor = this.skin.getColor("hover");
         this.activeColor = this.skin.getColor("active");
         this.inactiveColor = this.skin.getColor("inactive");
@@ -157,7 +157,7 @@ public class ViewTabber extends FRoundedPanel {
         this.populatePnlConsole();
 
         this.vtpTabber = new FVerticalTabPanel(this.panelList);
-        this.setBackground(AllZone.getSkin().getColor("theme"));
+        this.setBackground(skin.getColor("theme"));
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
         this.add(vtpTabber, "w 97%!, h 100%!, gapleft 2%");

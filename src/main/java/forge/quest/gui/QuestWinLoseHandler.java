@@ -101,7 +101,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qData = AllZone.getQuestData();
         this.model.qEvent = AllZone.getQuestEvent();
         this.wonMatch = this.model.matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
-        this.skin = AllZone.getSkin();
+        this.skin = Singletons.getView().getSkin();
         this.isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
     }
 

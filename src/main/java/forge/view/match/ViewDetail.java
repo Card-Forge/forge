@@ -22,7 +22,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.match.ControlDetail;
 import forge.gui.game.CardDetailPanel;
 import forge.view.toolbox.FRoundedPanel;
@@ -43,11 +43,11 @@ public class ViewDetail extends FRoundedPanel {
      */
     public ViewDetail() {
         super();
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
         pnlDetail = new CardDetailPanel(null);
         pnlDetail.setOpaque(false);
 
-        this.setBackground(AllZone.getSkin().getColor("theme"));
+        this.setBackground(skin.getColor("theme"));
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
         add(pnlDetail, "w 100%!, h 100%!");
@@ -68,7 +68,7 @@ public class ViewDetail extends FRoundedPanel {
                 pnlDetail.getSetInfoLabel().setFont(font);
                 pnlDetail.getCDArea().setFont(font);
 
-                setFont(AllZone.getSkin().getFont(px));
+                setFont(skin.getFont(px));
             }
         });
     }

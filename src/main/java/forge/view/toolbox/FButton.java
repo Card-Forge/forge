@@ -32,7 +32,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import forge.AllZone;
+import forge.Singletons;
 
 /**
  * The core JButton used throughout the Forge project. Follows skin font and
@@ -68,7 +68,7 @@ public class FButton extends JButton {
      */
     public FButton(final String msg) {
         super(msg);
-        this.skin = AllZone.getSkin();
+        this.skin = Singletons.getView().getSkin();
         this.setOpaque(false);
         this.setForeground(this.skin.getColor("text"));
         this.setBackground(Color.red);

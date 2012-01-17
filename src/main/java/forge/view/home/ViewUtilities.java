@@ -8,7 +8,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.home.ControlUtilities;
 import forge.view.toolbox.FSkin;
 
@@ -36,7 +36,7 @@ public class ViewUtilities extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
         parentView = v0;
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
 
         btnDownloadPics = new SubButton("Download LQ Card Pictures");
         this.add(btnDownloadPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%, gaptop 5%");

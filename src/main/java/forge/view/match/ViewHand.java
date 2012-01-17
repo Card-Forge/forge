@@ -21,7 +21,7 @@ import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.HandArea;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.match.ControlHand;
 import forge.view.toolbox.FRoundedPanel;
 
@@ -43,7 +43,7 @@ public class ViewHand extends FRoundedPanel {
     public ViewHand(ViewTopLevel v0) {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller);
-        ViewHand.this.setBackground(AllZone.getSkin().getColor("theme"));
+        ViewHand.this.setBackground(Singletons.getView().getSkin().getColor("theme"));
         topLevel = v0;
 
         scroller.setViewportView(ViewHand.this.hand);

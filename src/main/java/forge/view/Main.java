@@ -19,7 +19,6 @@ package forge.view;
 
 import java.util.ArrayList;
 
-import forge.AllZone;
 import forge.Constant;
 import forge.ConstantStringArrayList;
 import forge.FileUtil;
@@ -56,7 +55,6 @@ public final class Main {
             final FSkin skin = new FSkin(Singletons.getModel().getPreferences().getSkin());
             final FView view = new FView(skin);
             Singletons.setView(view);
-            AllZone.setSkin(skin);
 
             // Need this soon after card factory is loaded
             Main.loadDynamicGamedata();

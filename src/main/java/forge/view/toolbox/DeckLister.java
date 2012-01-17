@@ -18,6 +18,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.game.GameType;
@@ -61,7 +62,7 @@ public class DeckLister extends JPanel {
      */
     public DeckLister(GameType gt0, Command cmd0, boolean deletable, boolean editable) {
         super();
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
         gametype = gt0;
         cmdExit = cmd0;
         this.setOpaque(false);

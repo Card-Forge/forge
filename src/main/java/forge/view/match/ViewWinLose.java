@@ -14,6 +14,7 @@ import forge.Constant;
 import forge.MatchState;
 import forge.PhaseHandler;
 import forge.Player;
+import forge.Singletons;
 import forge.control.match.ControlWinLose;
 import forge.game.GameType;
 import forge.properties.ForgeProps;
@@ -21,6 +22,7 @@ import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 import forge.quest.gui.QuestWinLoseHandler;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
+import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -29,6 +31,7 @@ import forge.view.toolbox.FOverlay;
 public class ViewWinLose {
     private FButton btnContinue, btnRestart, btnQuit;
     private JPanel pnlCustom;
+    private FSkin skin;
 
     /** */
     public ViewWinLose() {
@@ -46,6 +49,8 @@ public class ViewWinLose {
         btnContinue = new FButton();
         btnRestart = new FButton();
         btnQuit = new FButton();
+
+        skin = Singletons.getView().getSkin();
 
         // Control of the win/lose is handled differently for various game modes.
         ControlWinLose control;
@@ -67,18 +72,18 @@ public class ViewWinLose {
 
         lblTitle.setForeground(Color.white);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(AllZone.getSkin().getFont().deriveFont(Font.BOLD, 30));
+        lblTitle.setFont(skin.getFont().deriveFont(Font.BOLD, 30));
 
         lblStats.setForeground(Color.white);
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(AllZone.getSkin().getFont().deriveFont(Font.PLAIN, 26));
+        lblStats.setFont(skin.getFont().deriveFont(Font.PLAIN, 26));
 
         btnContinue.setText("Continue");
-        btnContinue.setFont(AllZone.getSkin().getFont(22));
+        btnContinue.setFont(skin.getFont(22));
         btnRestart.setText("Restart");
-        btnRestart.setFont(AllZone.getSkin().getFont(22));
+        btnRestart.setFont(skin.getFont(22));
         btnQuit.setText("Quit");
-        btnQuit.setFont(AllZone.getSkin().getFont(22));
+        btnQuit.setFont(skin.getFont(22));
 
         // End game and set state of "continue" button
         PhaseHandler.setGameBegins(0);

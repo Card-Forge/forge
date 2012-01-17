@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -34,7 +34,7 @@ public class SubButton extends JButton {
      */
     public SubButton(String txt0) {
         super(txt0);
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
         setBorder(new LineBorder(skin.getColor("borders"), 1));
         setBackground(skin.getColor("inactive"));
         setForeground(skin.getColor("text"));
@@ -57,7 +57,7 @@ public class SubButton extends JButton {
                 int px =  (int) (SubButton.this.getHeight() / 2);
                 px = (px < 10 ? 10 : px);
                 px = (px > 15 ? 15 : px);
-                SubButton.this.setFont(AllZone.getSkin().getFont(px));
+                SubButton.this.setFont(Singletons.getView().getSkin().getFont(px));
             }
         });
     }

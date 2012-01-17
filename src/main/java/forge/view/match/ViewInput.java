@@ -31,7 +31,7 @@ import javax.swing.Timer;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.match.ControlInput;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FRoundedPanel;
@@ -58,7 +58,7 @@ public class ViewInput extends FRoundedPanel {
      */
     public ViewInput() {
         super();
-        this.skin = AllZone.getSkin();
+        this.skin = Singletons.getView().getSkin();
         this.setToolTipText("Input Area");
         this.setBackground(this.skin.getColor("theme"));
         this.setForeground(this.skin.getColor("text"));
@@ -94,7 +94,7 @@ public class ViewInput extends FRoundedPanel {
             public void componentResized(ComponentEvent e) {
                 int px =  (int) (ViewInput.this.getWidth() / 17);
                 px = (px < 11 ? 11 : px);
-                tarMessage.setFont(AllZone.getSkin().getFont(px));
+                tarMessage.setFont(Singletons.getView().getSkin().getFont(px));
             }
         });
         // After all components are in place, instantiate controller.

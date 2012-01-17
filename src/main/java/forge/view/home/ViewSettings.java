@@ -62,7 +62,7 @@ public class ViewSettings extends JScrollPane {
     public ViewSettings(final HomeTopLevel v0) {
         super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
         parentView = v0;
         viewport = new JPanel();
         viewport.setOpaque(false);

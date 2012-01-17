@@ -154,7 +154,7 @@ public class ControlSettings {
         FSkin skin = new FSkin(name);
 
         prefs.setSkin(name);
-        AllZone.setSkin(skin);
+        Singletons.getView().setSkin(skin);
         ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
         // TODO This should work, but it doesn't. :|  Doublestrike 15-12-11
         view.getParentView().showSettingsMenu();

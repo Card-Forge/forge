@@ -42,6 +42,7 @@ import forge.AllZone;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
@@ -87,13 +88,13 @@ public class ViewField extends FRoundedPanel {
      */
     public ViewField(final Player player) {
         super();
+        this.skin = Singletons.getView().getSkin();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0"));
         this.setCornerRadius(5);
         this.setToolTipText(player.getName() + " Gameboard");
-        this.setBackground(AllZone.getSkin().getColor("theme"));
+        this.setBackground(skin.getColor("theme"));
 
-        this.skin = AllZone.getSkin();
         this.inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
         this.hoverBorder = new LineBorder(this.skin.getColor("borders"), 1);
         this.counter = -1;
@@ -746,7 +747,7 @@ public class ViewField extends FRoundedPanel {
         private boolean enabled = true;
         private boolean active = false;
         private boolean hover = false;
-        private final Color hoverBG = AllZone.getSkin().getColor("hover");
+        private final Color hoverBG = Singletons.getView().getSkin().getColor("hover");
 
         /**
          * Shows phase labels, handles repainting and on/off states. A

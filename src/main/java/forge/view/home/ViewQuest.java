@@ -25,6 +25,7 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Singletons;
 import forge.control.home.ControlQuest;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
@@ -71,7 +72,7 @@ public class ViewQuest extends JScrollPane {
         this.setBorder(null);
         this.getVerticalScrollBar().setUnitIncrement(16);
         parentView = v0;
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
 
         // Title and viewport.  Panel is put into scroll pane for resize safety.
         viewport = new JPanel();

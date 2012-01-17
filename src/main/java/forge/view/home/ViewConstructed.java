@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.home.ControlConstructed;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
@@ -43,7 +43,7 @@ public class ViewConstructed extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0"));
         parentView = v0;
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
         control = new ControlConstructed(this);
 
         populateHuman();

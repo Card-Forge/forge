@@ -18,7 +18,7 @@
 package forge.view.match;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.match.ControlPicture;
 import forge.gui.game.CardPicturePanel;
 import forge.view.toolbox.FRoundedPanel;
@@ -41,7 +41,7 @@ public class ViewPicture extends FRoundedPanel {
         pnlPicture = new CardPicturePanel(null);
         pnlPicture.setOpaque(false);
 
-        this.setBackground(AllZone.getSkin().getColor("theme"));
+        this.setBackground(Singletons.getView().getSkin().getColor("theme"));
         this.setLayout(new MigLayout("insets 0, gap 0, center"));
 
         add(pnlPicture, "w 100%!, h 100%!");

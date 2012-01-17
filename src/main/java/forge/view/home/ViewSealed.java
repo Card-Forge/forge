@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.home.ControlSealed;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
@@ -35,7 +35,7 @@ public class ViewSealed extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         parentView = v0;
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
         control = new ControlSealed(this);
 
         // Title

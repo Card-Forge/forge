@@ -34,6 +34,7 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Singletons;
 import forge.control.match.ControlDock;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
@@ -56,8 +57,9 @@ public class ViewDock extends FRoundedPanel {
      */
     public ViewDock() {
         super();
+        this.skin = Singletons.getView().getSkin();
         this.setToolTipText("Shortcut Button Dock");
-        this.setBackground(AllZone.getSkin().getColor("theme"));
+        this.setBackground(skin.getColor("theme"));
         //this.setLayout(new MigLayout("insets 0, gap 0, ay center, ax center"));
 
         // Mig layout does not support wrapping!
@@ -66,8 +68,6 @@ public class ViewDock extends FRoundedPanel {
         layFlow.setHgap(10);
         layFlow.setVgap(10);
         this.setLayout(layFlow);
-
-        this.skin = AllZone.getSkin();
 
         this.actClose = new AbstractAction() {
             @Override

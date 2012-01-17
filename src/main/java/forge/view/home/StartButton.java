@@ -3,7 +3,7 @@ package forge.view.home;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -17,7 +17,7 @@ public class StartButton extends JButton {
      */
     public StartButton(HomeTopLevel v0) {
         super();
-        final FSkin skin = AllZone.getSkin();
+        final FSkin skin = Singletons.getView().getSkin();
         setRolloverEnabled(true);
         setRolloverIcon(new ImageIcon(skin.getImage("button.startDOWN")));
         setOpaque(false);

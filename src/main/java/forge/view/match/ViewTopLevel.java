@@ -34,6 +34,7 @@ import javax.swing.JTextArea;
 import net.miginfocom.swing.MigLayout;
 
 import forge.AllZone;
+import forge.Singletons;
 import forge.control.ControlMatchUI;
 import forge.control.match.ControlDetail;
 import forge.control.match.ControlDock;
@@ -96,8 +97,8 @@ public class ViewTopLevel extends FPanel {
 
         // Set properties
         this.setOpaque(false);
-        this.setBGTexture(new ImageIcon(AllZone.getSkin().getImage("bg.texture")));
-        this.setBGImg(new ImageIcon(AllZone.getSkin().getImage("bg.match")));
+        this.setBGTexture(new ImageIcon(Singletons.getView().getSkin().getImage("bg.texture")));
+        this.setBGImg(new ImageIcon(Singletons.getView().getSkin().getImage("bg.match")));
         this.setLayout(null);
         b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 

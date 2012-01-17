@@ -5,7 +5,7 @@ import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-import forge.AllZone;
+import forge.Singletons;
 
 /** 
  * A very basic extension of JScrollPane to centralize common styling changes.
@@ -24,7 +24,7 @@ public class FScrollPane extends JScrollPane {
         //setOpaque(false);
         getViewport().setOpaque(false);
 
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
         setBorder(new LineBorder(skin.getColor("borders"), 1));
         setBackground(skin.getColor("zebra"));
     }

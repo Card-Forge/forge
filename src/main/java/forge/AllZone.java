@@ -37,7 +37,6 @@ import forge.quest.data.QuestData;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
 import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FSkin;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -57,9 +56,6 @@ public final class AllZone {
     private AllZone() {
         // blank
     }
-
-    /** Global <code>SKIN</code>. */
-    private static FSkin skin = null;
 
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
@@ -664,33 +660,6 @@ public final class AllZone {
      */
     public static ColorChanger getColorChanger() {
         return AllZone.COLOR_CHANGER;
-    }
-
-    /**
-     * <p>
-     * getSkin.
-     * </p>
-     * Gets current display skin.
-     * 
-     * @return a {@link forge.view.toolbox.FSkin} object.
-     * @since 1.0.15
-     */
-    public static FSkin getSkin() {
-        return AllZone.skin;
-    }
-
-    /**
-     * <p>
-     * setSkin.
-     * </p>
-     * Sets current display skin.
-     * 
-     * @param fs
-     *            a {@link forge.view.toolbox.FSkin} object.
-     * @since 1.0.15
-     */
-    public static void setSkin(final FSkin fs) {
-        AllZone.skin = fs;
     }
 
     /**

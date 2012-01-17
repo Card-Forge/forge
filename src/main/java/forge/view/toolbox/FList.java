@@ -8,7 +8,8 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 
-import forge.AllZone;
+import forge.Singletons;
+
 /** 
  * A JList object using Forge skin properties.
  *
@@ -33,7 +34,7 @@ public class FList extends JList {
      */
     public FList(Object[] o0) {
         super(o0);
-        skin = AllZone.getSkin();
+        skin = Singletons.getView().getSkin();
 
         setOpaque(false);
 

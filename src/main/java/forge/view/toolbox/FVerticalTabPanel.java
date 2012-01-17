@@ -33,7 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 
 /**
  * TODO: Write javadoc for this type.
@@ -81,7 +81,7 @@ public class FVerticalTabPanel extends FPanel {
         this.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         this.setOpaque(false);
         final int size = childPanels.size();
-        this.skin = AllZone.getSkin();
+        this.skin = Singletons.getView().getSkin();
         this.hoverColor = this.skin.getColor("hover");
         this.activeColor = this.skin.getColor("active");
         this.inactiveColor = this.skin.getColor("inactive");
@@ -250,12 +250,12 @@ public class FVerticalTabPanel extends FPanel {
             if (tabsOnRightSide) {
                 at.rotate(Math.toRadians(90), 0, 0);
                 g2d.setTransform(at);
-                g2d.setColor(AllZone.getSkin().getColor("text"));
+                g2d.setColor(skin.getColor("text"));
                 g2d.drawString(this.msg, 5, -4);
             } else {
                 at.rotate(Math.toRadians(-90), 0, 0);
                 g2d.setTransform(at);
-                g2d.setColor(AllZone.getSkin().getColor("text"));
+                g2d.setColor(skin.getColor("text"));
                 // Rotated, so follows: (this.msg, vertical coord, horizontal coord)
                 g2d.drawString(this.msg, 8 - h, w - 6);
             }
