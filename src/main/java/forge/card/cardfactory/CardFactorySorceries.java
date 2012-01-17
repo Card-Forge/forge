@@ -799,7 +799,7 @@ public class CardFactorySorceries {
 
             spell.setBeforePayMana(target);
         } // *************** END ************ END ***************************
-*/
+
         // *************** START *********** START **************************
         else if (cardName.equals("Erratic Explosion")) {
             final Cost cost = new Cost(card.getManaCost(), cardName, false);
@@ -892,7 +892,7 @@ public class CardFactorySorceries {
 
             card.setSVar("PlayMain1", "TRUE");
         } // *************** END ************ END **************************
-
+*/
         // *************** START *********** START **************************
         else if (cardName.equals("Martial Coup")) {
 
