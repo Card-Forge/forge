@@ -20,29 +20,20 @@ package forge.control.match;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.AllZone;
 import forge.Constant;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.ForgeAction;
 import forge.item.CardPrinted;
-import forge.properties.ForgePreferences;
 import forge.properties.NewConstants;
 import forge.view.match.ViewDock;
-import forge.view.match.ViewDock.KeyboardShortcutField;
 
 /**
  * Child controller, handles dock button operations.
@@ -74,59 +65,6 @@ public class ControlDock {
      */
     public ViewDock getView() {
         return this.view;
-    }
-
-    /** Updates and saves ForgePreferences with current shortcuts. */
-    public void saveKeyboardShortcuts() {
-        final ForgePreferences fp = Singletons.getModel().getPreferences();
-        final Map<String, KeyboardShortcutField> shortcuts = this.view.getKeyboardShortcutFields();
-
-        fp.setKeyboardShortcut("shortcut.showstack", shortcuts.get("showstack").getCodeString());
-        fp.setKeyboardShortcut("shortcut.showcombat", shortcuts.get("showcombat").getCodeString());
-        fp.setKeyboardShortcut("shortcut.showplayers", shortcuts.get("showplayers").getCodeString());
-        fp.setKeyboardShortcut("shortcut.showconsole", shortcuts.get("showconsole").getCodeString());
-        fp.setKeyboardShortcut("shortcut.showdev", shortcuts.get("showdev").getCodeString());
-        fp.setKeyboardShortcut("shortcut.concede", shortcuts.get("concede").getCodeString());
-        fp.setKeyboardShortcut("shortcut.showpicture", shortcuts.get("showpicture").getCodeString());
-        fp.setKeyboardShortcut("shortcut.showdetail", shortcuts.get("showdetail").getCodeString());
-
-        try {
-            fp.save();
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-
-        AllZone.getOverlay().hideOverlay();
-    }
-
-    /**
-     * - Adds keycode to list stored in name of a text field. - Code is not
-     * added if already in list. - Backspace removes last code in list. - Sets
-     * text of text field with character equivalent of keycodes.
-     * 
-     * @param e
-     *            &emsp; KeyEvent
-     */
-    public void addKeyCode(final KeyEvent e) {
-        final KeyboardShortcutField ksf = (KeyboardShortcutField) e.getSource();
-        final String newCode = Integer.toString(e.getKeyCode());
-        final String codestring = ksf.getCodeString();
-        List<String> existingCodes;
-
-        if (codestring != null) {
-            existingCodes = new ArrayList<String>(Arrays.asList(codestring.split(" ")));
-        } else {
-            existingCodes = new ArrayList<String>();
-        }
-
-        // Backspace (8) will remove last code from list.
-        if (e.getKeyCode() == 8) {
-            existingCodes.remove(existingCodes.size() - 1);
-        } else if (!existingCodes.contains(newCode)) {
-            existingCodes.add(newCode);
-        }
-
-        ksf.setCodeString(StringUtils.join(existingCodes, ' '));
     }
 
     /**

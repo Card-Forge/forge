@@ -10891,6 +10891,7 @@ src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ControlAllUI.java -text
 src/main/java/forge/control/ControlHomeUI.java -text
 src/main/java/forge/control/ControlMatchUI.java -text
+src/main/java/forge/control/KeyboardShortcuts.java -text
 src/main/java/forge/control/home/ControlConstructed.java -text
 src/main/java/forge/control/home/ControlDraft.java -text
 src/main/java/forge/control/home/ControlQuest.java -text

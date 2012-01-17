@@ -17,28 +17,13 @@
  */
 package forge.control;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.InputMap;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
-
-import org.apache.commons.lang3.StringUtils;
 
 import forge.AllZone;
 import forge.Constant.Zone;
 import forge.ImageCache;
 import forge.Player;
-import forge.Singletons;
 import forge.control.match.ControlField;
-import forge.properties.ForgePreferences;
-import forge.view.GuiTopLevel;
 import forge.view.match.ViewTopLevel;
 
 /**
@@ -77,7 +62,6 @@ public class ControlMatchUI {
      * 
      */
     public void initMatch() {
-
         // All child components have been assembled; observers and listeners can
         // be added safely.
         this.view.getTabberController().addObservers();
@@ -102,7 +86,6 @@ public class ControlMatchUI {
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
         AllZone.getInputControl().updateObservers();
         this.view.getTabberController().updateObservers();
-        this.mapKeyboardShortcuts();
     }
 
     /**
@@ -112,7 +95,7 @@ public class ControlMatchUI {
 
         ImageCache.clear();
 
-        //delete player observers
+        // Delete player observers
         for (Player p : AllZone.getPlayersInGame()) {
             p.deleteObservers();
             p.getZone(Zone.Battlefield).deleteObservers();
@@ -123,7 +106,6 @@ public class ControlMatchUI {
         AllZone.getGameLog().deleteObservers();
         AllZone.getInputControl().deleteObservers();
         AllZone.getPhaseHandler().deleteObservers();
-
     }
 
     /**
@@ -138,150 +120,6 @@ public class ControlMatchUI {
         for (final ControlField c : fieldControllers) {
             c.resetPhaseButtons();
         }
-    }
-
-    /**
-     * Maps actions to shortcuts, and attaches each shortcut to the InputMap of
-     * the top level view.
-     * 
-     */
-    @SuppressWarnings("serial")
-    private void mapKeyboardShortcuts() {
-        final InputMap im = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView()
-                .getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        final ForgePreferences fp = Singletons.getModel().getPreferences();
-        String str;
-        KeyStroke key;
-
-        // Actions which correspond to key presses
-        final Action actShowStack = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getTabberController().showPnlStack();
-            }
-        };
-
-        final Action actShowCombat = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getTabberController().showPnlCombat();
-            }
-        };
-
-        final Action actShowConsole = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getTabberController().showPnlGameLog();
-            }
-        };
-
-        final Action actShowPlayers = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getTabberController().showPnlPlayers();
-            }
-        };
-
-        final Action actShowDev = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getTabberController().showPnlDev();
-            }
-        };
-
-        final Action actConcede = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ControlMatchUI.this.view.getDockController().concede();
-            }
-        };
-
-        ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-
-        // Show stack
-        // (Get keycode string, convert to char, convert to keystroke, put on
-        // input map.)
-        str = fp.getKeyboardShortcut("shortcut.showstack");
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        t.getActionMap().put(im.get(key), actShowStack);
-
-        // Show combat
-        str = fp.getKeyboardShortcut("shortcut.showcombat");
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        t.getActionMap().put(im.get(key), actShowCombat);
-
-        // Show console
-        str = fp.getKeyboardShortcut("shortcut.showconsole");
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        t.getActionMap().put(im.get(key), actShowConsole);
-
-        // Show players
-        str = fp.getKeyboardShortcut("shortcut.showplayers");
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        t.getActionMap().put(im.get(key), actShowPlayers);
-
-        // Show devmode
-        str = fp.getKeyboardShortcut("shortcut.showdev");
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        t.getActionMap().put(im.get(key), actShowDev);
-
-        // Concede game
-        str = fp.getKeyboardShortcut("shortcut.concede");
-        key = KeyStroke.getKeyStroke(this.codes2Chars(str));
-
-        im.put(key, str);
-        t.getActionMap().put(im.get(key), actConcede);
-    }
-
-    /**
-     * Converts a string of key codes (space delimited) into their respective
-     * key texts. This helps juggling between input maps, display text, save
-     * values, and input data.
-     * 
-     * @param s0
-     *            &emsp; A string of keycodes
-     * @return String
-     */
-    private String codes2Chars(final String s0) {
-        final List<String> codes = new ArrayList<String>(Arrays.asList(s0.split(" ")));
-        final List<String> displayText = new ArrayList<String>();
-        String temp;
-
-        for (final String s : codes) {
-            temp = KeyEvent.getKeyText(Integer.valueOf(s));
-
-            if (!s.isEmpty()) {
-                // Probably a better way to do this; but I couldn't find it
-                // after a decent look around. The main problem is that
-                // KeyEvent.getKeyText() will return "Ctrl", but the input
-                // map expects "control". Similar case problems with Shift and
-                // Alt.
-                // Doublestrike 21-11-11
-                if (temp.equalsIgnoreCase("ctrl")) {
-                    temp = "control";
-                } else if (temp.equalsIgnoreCase("shift")) {
-                    temp = "shift";
-                } else if (temp.equalsIgnoreCase("alt")) {
-                    temp = "alt";
-                } else if (temp.equalsIgnoreCase("escape")) {
-                    temp = "escape";
-                }
-
-                displayText.add(temp);
-            }
-        }
-
-        return StringUtils.join(displayText, ' ');
     }
 
     /** @return ViewTopLevel */

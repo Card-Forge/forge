@@ -1,8 +1,16 @@
 package forge.view.home;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
@@ -12,13 +20,20 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
+
+import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
 
 import forge.AllZone;
 import forge.Singletons;
+import forge.control.KeyboardShortcuts;
+import forge.control.KeyboardShortcuts.Shortcut;
 import forge.control.home.ControlSettings;
+import forge.view.GuiTopLevel;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -33,15 +48,9 @@ public class ViewSettings extends JScrollPane {
     private HomeTopLevel parentView;
 
     private JList lstChooseSkin;
-    private String spacer;
 
     private JCheckBox cbAnte, cbScaleLarger, cbDevMode, cbRemoveSmall, cbRemoveArtifacts,
         cbUploadDraft, cbStackLand, cbRandomFoil, cbTextMana, cbSingletons;
-
-    //private JRadioButton radStack3, radStack4, radStack5, radStack6, radStack7,
-    //   radStack8, radStack9, radStack10, radStack11, radStack12;
-
-    //private JRadioButton radOffsetTiny, radOffsetSmall, radOffsetMedium, radOffsetLarge;
 
     private JRadioButton radCardTiny, radCardSmaller, radCardSmall,
         radCardMedium, radCardLarge, radCardHuge;
@@ -50,7 +59,7 @@ public class ViewSettings extends JScrollPane {
      * Assembles swing components for "Settings" mode menu.
      * @param v0 &emsp; HomeTopLevel
      */
-    public ViewSettings(HomeTopLevel v0) {
+    public ViewSettings(final HomeTopLevel v0) {
         super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         skin = AllZone.getSkin();
@@ -63,199 +72,116 @@ public class ViewSettings extends JScrollPane {
         this.setBorder(null);
         this.setViewportView(viewport);
         this.getVerticalScrollBar().setUnitIncrement(16);
-        viewport.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        viewport.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         // Spacing between components is defined here.
-        spacer = ", gapbottom 1%";
-        String constraints = "w 80%!, gapleft 10%";
-        String constraints2 = constraints + spacer;
+        String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
+        String regularConstraints = "w 80%!, gap 10% 0 0 10px, span 2 1";
 
         // Deck Building Options
-        JLabel lblTitleDecks = new JLabel("Deck Building Options");
-        lblTitleDecks.setFont(skin.getFont(16));
-        lblTitleDecks.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
-        lblTitleDecks.setForeground(skin.getColor("text"));
-        viewport.add(lblTitleDecks, constraints2 + ", gaptop 2%");
+        final JLabel lblTitleDecks = new SectionLabel("Deck Building Options");
+        viewport.add(lblTitleDecks, sectionConstraints + ", gaptop 2%");
 
+        final JLabel lblRemoveSmall = new NoteLabel("Disables 1/1 and 0/X creatures in generated decks.");
         cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
         cbRemoveSmall.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvSmall());
-        JLabel lblRemoveSmall = new NoteLabel("Disables 1/1 and 0/X creatures in generated decks.");
-        viewport.add(cbRemoveSmall, constraints);
-        viewport.add(lblRemoveSmall, constraints2);
+        viewport.add(cbRemoveSmall, regularConstraints);
+        viewport.add(lblRemoveSmall, regularConstraints);
 
+        final JLabel lblSingletons = new NoteLabel("Disables non-land duplicates in generated decks.");
         cbSingletons = new OptionsCheckBox("Singleton Mode");
         cbSingletons.setSelected(Singletons.getModel().getPreferences().isDeckGenSingletons());
-        JLabel lblSingletons = new NoteLabel("Disables non-land duplicates in generated decks.");
-        viewport.add(cbSingletons, constraints);
-        viewport.add(lblSingletons, constraints2);
+        viewport.add(cbSingletons, regularConstraints);
+        viewport.add(lblSingletons, regularConstraints);
 
+        final JLabel lblRemoveArtifacts = new NoteLabel("Disables artifact cards in generated decks.");
         cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
         cbRemoveArtifacts.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvArtifacts());
-        JLabel lblRemoveArtifacts = new NoteLabel("Disables artifact cards in generated decks.");
-        viewport.add(cbRemoveArtifacts, constraints);
-        viewport.add(lblRemoveArtifacts, constraints2);
+        viewport.add(cbRemoveArtifacts, regularConstraints);
+        viewport.add(lblRemoveArtifacts, regularConstraints);
 
         // Gameplay Options
-        JLabel lblTitleUI = new JLabel("Gameplay Options");
-        lblTitleUI.setFont(skin.getFont(16));
-        lblTitleUI.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
-        lblTitleUI.setForeground(skin.getColor("text"));
-        viewport.add(lblTitleUI, constraints2);
+        final JLabel lblTitleUI = new SectionLabel("Gameplay Options");
+        viewport.add(lblTitleUI, sectionConstraints);
 
         cbAnte = new OptionsCheckBox("Play for Ante");
         cbAnte.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
-        NoteLabel lblAnte = new NoteLabel("Determines whether or not the game is played for ante.");
-        viewport.add(cbAnte, constraints);
-        viewport.add(lblAnte, constraints2);
+        final JLabel lblAnte = new NoteLabel("Determines whether or not the game is played for ante.");
+        viewport.add(cbAnte, regularConstraints);
+        viewport.add(lblAnte, regularConstraints);
 
         cbUploadDraft = new OptionsCheckBox("Upload Draft Pics");
         cbUploadDraft.setSelected(Singletons.getModel().getPreferences().isUploadDraftAI());
-        JLabel lblUploadDraft = new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI.");
-        viewport.add(cbUploadDraft, constraints);
-        viewport.add(lblUploadDraft, constraints2);
+        final JLabel lblUploadDraft = new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI.");
+        viewport.add(cbUploadDraft, regularConstraints);
+        viewport.add(lblUploadDraft, regularConstraints);
 
         cbStackLand = new OptionsCheckBox("Stack AI Land");
         cbStackLand.setSelected(Singletons.getModel().getPreferences().isStackAiLand());
-        JLabel lblStackLand = new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer.");
-        viewport.add(cbStackLand, constraints);
-        viewport.add(lblStackLand, constraints2);
+        final JLabel lblStackLand = new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer.");
+        viewport.add(cbStackLand, regularConstraints);
+        viewport.add(lblStackLand, regularConstraints);
 
         cbDevMode = new OptionsCheckBox("Developer Mode");
         cbDevMode.setSelected(Singletons.getModel().getPreferences().isDeveloperMode());
-        this.cbDevMode.setSelected(Singletons.getModel().getPreferences().isDeveloperMode());
-        JLabel lblDevMode = new NoteLabel("Enables menu with functions for testing during development.");
-        viewport.add(cbDevMode, constraints);
-        viewport.add(lblDevMode, constraints2);
-
-        /*
-        JLabel lblTitleStack = new TitleLabel("Stack Size");
-        JLabel lblStackSize = new NoteLabel("Specifies the maximum number of identical cards to stack.");
-        viewport.add(lblTitleStack, "gapleft 10%, h 25px!, w 150px!, gapbottom 2px");
-        viewport.add(lblStackSize, constraints);
-
-        populateStackRadios();
-
-        JLabel lblTitleOffset = new TitleLabel("Stack Offset");
-        JLabel lblStackOffset = new NoteLabel("Specifies the number of pixels to offset stacked cards by.");
-        viewport.add(lblTitleOffset, "gapleft 10%, h 25px!, w 150px!, gapbottom 2px");
-        viewport.add(lblStackOffset, constraints);
-
-        populateOffsetRadios();
-        */
+        final JLabel lblDevMode = new NoteLabel("Enables menu with functions for testing during development.");
+        viewport.add(cbDevMode, regularConstraints);
+        viewport.add(lblDevMode, regularConstraints);
 
         // Graphic Options
-        JLabel lblTitleGraphics = new JLabel("Graphic Options");
-        lblTitleGraphics.setFont(skin.getFont(16));
-        lblTitleGraphics.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
-        lblTitleGraphics.setForeground(skin.getColor("text"));
-        viewport.add(lblTitleGraphics, constraints2);
+        final JLabel lblTitleGraphics = new SectionLabel("Graphic Options");
+        viewport.add(lblTitleGraphics, sectionConstraints);
 
-        JLabel lblTitleSkin = new TitleLabel("Choose Skin");
-        JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
-        viewport.add(lblTitleSkin, "gapleft 10%, h 25px!, w 150px!, gapbottom 2px");
-        viewport.add(lblNoteSkin, constraints + ", gapbottom 2px");
+        final JLabel lblTitleSkin = new TitleLabel("Choose Skin");
+        final JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
+        viewport.add(lblTitleSkin, regularConstraints);
+        viewport.add(lblNoteSkin, regularConstraints);
 
         lstChooseSkin = new JList();
         lstChooseSkin.setListData(FSkin.getSkins().toArray(new String[0]));
         lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getSkin(), true);
-        viewport.add(new JScrollPane(lstChooseSkin), "gapleft 10%, h 60px!, w 150px!" + spacer);
+        viewport.add(new JScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
 
-        JLabel lblTitleCardSize = new TitleLabel("Card Size");
-        JLabel lblCardSize = new NoteLabel("Size of cards in hand and playing field, when possible");
-        viewport.add(lblTitleCardSize, "gapleft 10%, h 25px!, w 150px!, gapbottom 2px");
-        viewport.add(lblCardSize, constraints);
+        final JLabel lblTitleCardSize = new TitleLabel("Card Size");
+        final JLabel lblCardSize = new NoteLabel("Size of cards in hand and playing field, when possible");
+        viewport.add(lblTitleCardSize, regularConstraints);
+        viewport.add(lblCardSize, regularConstraints);
 
         populateCardSizeRadios();
 
+        final JLabel lblRandomFoil = new NoteLabel("Adds foiled effects to random cards.");
         cbRandomFoil = new OptionsCheckBox("Random Foil");
         cbRandomFoil.setSelected(Singletons.getModel().getPreferences().isRandCFoil());
-        JLabel lblRandomFoil = new NoteLabel("Adds foiled effects to random cards.");
-        viewport.add(cbRandomFoil, constraints);
-        viewport.add(lblRandomFoil, constraints2);
+        viewport.add(cbRandomFoil, regularConstraints);
+        viewport.add(lblRandomFoil, regularConstraints);
 
+        final JLabel lblScaleLarger = new NoteLabel("Allows card pictures to be expanded larger than their original size.");
         cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
-        this.cbScaleLarger.setSelected(Singletons.getModel().getPreferences().isScaleLargerThanOriginal());
-        //TODO: this needs to be verified and updated with a better description
-        JLabel lblScaleLarger = new NoteLabel("Scales card images larger than original if possible.");
-        viewport.add(cbScaleLarger, constraints);
-        viewport.add(lblScaleLarger, constraints2);
+        cbScaleLarger.setSelected(Singletons.getModel().getPreferences().isScaleLargerThanOriginal());
+        viewport.add(cbScaleLarger, regularConstraints);
+        viewport.add(lblScaleLarger, regularConstraints);
 
+        final JLabel lblTextMana = new NoteLabel("Overlays each card with basic card-specific information.");
         cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
         cbTextMana.setSelected(Singletons.getModel().getPreferences().isCardOverlay());
-        JLabel lblTextMana = new NoteLabel("Overlays each card with basic card-specific information.");
-        viewport.add(cbTextMana, constraints);
-        viewport.add(lblTextMana, constraints2);
+        viewport.add(cbTextMana, regularConstraints);
+        viewport.add(lblTextMana, regularConstraints);
+
+        // Keyboard shortcuts
+        final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
+        viewport.add(lblShortcuts, sectionConstraints);
+
+        List<Shortcut> shortcuts = ((GuiTopLevel) AllZone.getDisplay()).getController().getShortcuts();
+
+        for (Shortcut s : shortcuts) {
+            ShortcutLabel lbl = new ShortcutLabel(s.getDescription());
+            KeyboardShortcutField ksf = new KeyboardShortcutField(s);
+            viewport.add(lbl, "w 40%!, gap 10%! 0 0 1%");
+            viewport.add(ksf, "w 25%!");
+        }
 
         ViewSettings.this.control = new ControlSettings(this);
     }
-
-    /*
-     * These settings currently don't do anything, so we will not show them
-     * until it can be determined if we want to keep them or not.
-     */
-    /*
-    private void populateStackRadios() {
-        JPanel radioContainer = new JPanel();
-        radioContainer.setOpaque(false);
-        radioContainer.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-
-        radStack3 = new StackSizeRadio("3");
-        radStack4 = new StackSizeRadio("4");
-        radStack5 = new StackSizeRadio("5");
-        radStack6 = new StackSizeRadio("6");
-        radStack7 = new StackSizeRadio("7");
-        radStack8 = new StackSizeRadio("8");
-        radStack9 = new StackSizeRadio("9");
-        radStack10 = new StackSizeRadio("10");
-        radStack11 = new StackSizeRadio("11");
-        radStack12 = new StackSizeRadio("12");
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(radStack3);
-        group.add(radStack4);
-        group.add(radStack5);
-        group.add(radStack6);
-        group.add(radStack7);
-        group.add(radStack8);
-        group.add(radStack9);
-        group.add(radStack10);
-        group.add(radStack11);
-        group.add(radStack12);
-
-        String constraints = "w 50px!, h 25px!";
-        radioContainer.add(radStack3, constraints);
-        radioContainer.add(radStack4, constraints);
-        radioContainer.add(radStack5, constraints);
-        radioContainer.add(radStack6, constraints);
-        radioContainer.add(radStack7, constraints);
-        radioContainer.add(radStack8, constraints);
-        radioContainer.add(radStack9, constraints);
-        radioContainer.add(radStack10, constraints);
-        radioContainer.add(radStack11, constraints);
-        radioContainer.add(radStack12, constraints);
-
-        viewport.add(radioContainer, "gapleft 10%" + spacer);
-    }
-
-    private void populateOffsetRadios() {
-        radOffsetTiny = new StackOffsetRadio("Tiny");
-        radOffsetSmall = new StackOffsetRadio("Small");
-        radOffsetMedium = new StackOffsetRadio("Medium");
-        radOffsetLarge = new StackOffsetRadio("Large");
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(radOffsetTiny);
-        group.add(radOffsetSmall);
-        group.add(radOffsetMedium);
-        group.add(radOffsetLarge);
-
-        String constraints = "gapleft 10%, wrap";
-        viewport.add(radOffsetTiny, constraints);
-        viewport.add(radOffsetSmall, constraints);
-        viewport.add(radOffsetMedium, constraints);
-        viewport.add(radOffsetLarge, constraints + spacer);
-    }
-    */
 
     private void populateCardSizeRadios() {
         radCardTiny = new CardSizeRadio("Tiny");
@@ -279,12 +205,12 @@ public class ViewSettings extends JScrollPane {
         viewport.add(radCardSmall, constraints);
         viewport.add(radCardMedium, constraints);
         viewport.add(radCardLarge, constraints);
-        viewport.add(radCardHuge, constraints + spacer);
+        viewport.add(radCardHuge, constraints + ", gapbottom 2%");
     }
 
     /** Consolidates checkbox styling in one place. */
     private class OptionsCheckBox extends JCheckBox {
-        public OptionsCheckBox(String txt0) {
+        public OptionsCheckBox(final String txt0) {
             super();
             setText(txt0);
             setFont(skin.getBoldFont(12));
@@ -308,7 +234,7 @@ public class ViewSettings extends JScrollPane {
 
     /** Consolidates checkbox styling in one place. */
     private class OptionsRadio extends JRadioButton {
-        public OptionsRadio(String txt0) {
+        public OptionsRadio(final String txt0) {
             super();
             setText(txt0);
             setFont(skin.getBoldFont(12));
@@ -330,45 +256,6 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
-    /*
-    private class StackSizeRadio extends OptionsRadio {
-        public StackSizeRadio(String txt0) {
-            super(txt0);
-
-            if (Singletons.getModel().getPreferences().getMaxStackSize()
-                    == Integer.parseInt(txt0)) {
-                setSelected(true);
-            }
-
-            this.addActionListener(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    try { control.updateStackSize(StackSizeRadio.this); }
-                    catch (Exception e) { e.printStackTrace(); }
-                }
-            });
-        }
-    }
-
-    private class StackOffsetRadio extends OptionsRadio {
-        public StackOffsetRadio(String txt0) {
-            super(txt0);
-            if (Singletons.getModel().getPreferences().getStackOffset()
-                    .toString().equalsIgnoreCase(txt0)) {
-                setSelected(true);
-            }
-
-            this.addActionListener(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    try { control.updateStackOffset(StackOffsetRadio.this); }
-                    catch (Exception e) { e.printStackTrace(); }
-                }
-            });
-        }
-    }
-    */
-
     private class CardSizeRadio extends OptionsRadio {
         public CardSizeRadio(String txt0) {
             super(txt0);
@@ -387,6 +274,17 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
+    /** Consolidates section title label styling in one place. */
+    private class SectionLabel extends JLabel {
+        public SectionLabel(String txt0) {
+            super(txt0);
+            setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
+            setHorizontalAlignment(SwingConstants.CENTER);
+            setFont(skin.getBoldFont(16));
+            setForeground(skin.getColor("text"));
+        }
+    }
+
     /** Consolidates notation label styling in one place. */
     private class NoteLabel extends JLabel {
         public NoteLabel(String txt0) {
@@ -402,6 +300,95 @@ public class ViewSettings extends JScrollPane {
             super(txt0);
             setFont(skin.getBoldFont(12));
             setForeground(skin.getColor("text"));
+        }
+    }
+
+    /** Consolidates shortcut label styling in one place. */
+    private class ShortcutLabel extends JLabel {
+        public ShortcutLabel(String txt0) {
+            super(txt0);
+            setFont(skin.getFont(14));
+            setForeground(skin.getColor("text"));
+        }
+    }
+
+    /**
+     * A JTextField plus a "codeString" property, that stores keycodes for the
+     * shortcut. Also, an action listener that handles translation of keycodes
+     * into characters and (dis)assembly of keycode stack.
+     */
+    public class KeyboardShortcutField extends JTextField {
+        private String codeString;
+
+        /**
+         * A JTextField plus a "codeString" property, that stores keycodes for
+         * the shortcut. Also, an action listener that handles translation of
+         * keycodes into characters and (dis)assembly of keycode stack.
+         * 
+         * @param s0 &emsp; Shortcut object
+         */
+        public KeyboardShortcutField(final Shortcut s0) {
+            super();
+            this.setEditable(false);
+            this.setFont(skin.getFont(14));
+            this.setCodeString(Singletons.getModel().getPreferences().getKeyboardShortcut(s0.getPrefKey()));
+
+            this.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(final KeyEvent e) {
+                    KeyboardShortcuts.addKeyCode(e);
+                }
+            });
+
+            this.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusGained(final FocusEvent e) {
+                    KeyboardShortcutField.this.setBackground(skin.getColor("active"));
+                }
+
+                @Override
+                public void focusLost(final FocusEvent e) {
+                    Singletons.getModel().getPreferences().setKeyboardShortcut(
+                            s0.getPrefKey(), getCodeString());
+                    Singletons.getModel().getPreferences().save();
+                    s0.attach();
+                    KeyboardShortcutField.this.setBackground(Color.white);
+                }
+            });
+        }
+
+        /**
+         * Gets the code string.
+         * 
+         * @return String
+         */
+        public String getCodeString() {
+            return this.codeString;
+        }
+
+        /**
+         * Sets the code string.
+         * 
+         * @param s0
+         *            &emsp; The new code string (space delimited)
+         */
+        public void setCodeString(final String s0) {
+            if (s0.equals("null")) {
+                return;
+            }
+
+            this.codeString = s0.trim();
+
+            final List<String> codes = new ArrayList<String>(Arrays.asList(this.codeString.split(" ")));
+            final List<String> displayText = new ArrayList<String>();
+
+            for (final String s : codes) {
+                if (!s.isEmpty()) {
+                    displayText.add(KeyEvent.getKeyText(Integer.valueOf(s)));
+                }
+            }
+
+            this.setText(StringUtils.join(displayText, ' '));
         }
     }
 

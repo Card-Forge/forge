@@ -23,37 +23,20 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.AllZone;
-import forge.Singletons;
 import forge.control.match.ControlDock;
-import forge.properties.ForgePreferences;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 
@@ -65,8 +48,7 @@ import forge.view.toolbox.FSkin;
 public class ViewDock extends FRoundedPanel {
     private final FSkin skin;
     private final ControlDock control;
-    private final Map<String, KeyboardShortcutField> keyboardShortcutFields;
-    private final Action actClose, actSaveKeyboardShortcuts;
+    private final Action actClose;
 
     /**
      * Swing component for button dock.
@@ -86,7 +68,6 @@ public class ViewDock extends FRoundedPanel {
         this.setLayout(layFlow);
 
         this.skin = AllZone.getSkin();
-        this.keyboardShortcutFields = new HashMap<String, KeyboardShortcutField>();
 
         this.actClose = new AbstractAction() {
             @Override
@@ -95,26 +76,11 @@ public class ViewDock extends FRoundedPanel {
             }
         };
 
-        this.actSaveKeyboardShortcuts = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                ViewDock.this.control.saveKeyboardShortcuts();
-            }
-        };
-
         final JLabel btnConcede = new DockButton(skin.getIcon("dock.concede"), "Concede Game");
         btnConcede.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 ViewDock.this.control.concede();
-            }
-        });
-
-        final JLabel btnShortcuts = new DockButton(skin.getIcon("dock.shortcuts"), "Keyboard Shortcuts");
-        btnShortcuts.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                ViewDock.this.overlayKeyboard();
             }
         });
 
@@ -143,7 +109,7 @@ public class ViewDock extends FRoundedPanel {
         });
 
         this.add(btnConcede);
-        this.add(btnShortcuts);
+        //this.add(btnShortcuts);
         this.add(btnSettings);
         this.add(btnEndTurn);
         this.add(btnViewDeckList);
@@ -225,99 +191,6 @@ public class ViewDock extends FRoundedPanel {
     }
 
     /** */
-    private void overlayKeyboard() {
-        final FOverlay overlay = AllZone.getOverlay();
-        overlay.removeAll();
-        overlay.setLayout(new MigLayout("insets 0"));
-        overlay.showOverlay();
-
-        final FPanel parent = new FPanel();
-        parent.setBGTexture(new ImageIcon(this.skin.getImage("bg.texture")));
-        parent.setBorder(new LineBorder(this.skin.getColor("borders"), 1));
-        parent.setLayout(new MigLayout("insets 0, wrap 2, ax center, ay center"));
-        overlay.add(parent, "w 80%!, h 80%!, gaptop 10%, gapleft 10%, span 2 1");
-
-        final FButton btnOK = new FButton();
-        final FButton btnCancel = new FButton();
-
-        overlay.add(btnOK, "width 30%, newline, gapright 10%, gapleft 15%, gaptop 10px");
-        overlay.add(btnCancel, "width 30%!");
-
-        btnOK.setAction(this.actSaveKeyboardShortcuts);
-        btnOK.setText("Save and Exit");
-
-        btnCancel.setAction(this.actClose);
-        btnCancel.setText("Exit Without Save");
-
-        final KeyboardShortcutLabel lblBlurb = new KeyboardShortcutLabel();
-        lblBlurb.setText("<html><center>Focus in a box and press a key.<br>"
-                + "Backspace will remove the last keypress.<br>"
-                + "Restart Forge to map any new changes.</center></html>");
-        parent.add(lblBlurb, "span 2 1, gapbottom 30px");
-
-        final ForgePreferences fp = Singletons.getModel().getPreferences();
-
-        // Keyboard shortcuts are a bit tricky to make, since they involve three
-        // different parts of the codebase: Preferences, main match control, and
-        // the customize button in the dock. To make a keyboard shortcut:
-        //
-        // 1. Go to ForgePreferences and set a variable, default value, setter,
-        // and getter
-        // 2. Go to ControlMatchUI and map an action using mapKeyboardShortcuts
-        // 3. (Optional) Come back to this file and add a new
-        // KeyboardShortcutField so
-        // the user can customize this shortcut. Update ControlDock to ensure
-        // any
-        // changes will be saved.
-
-        // Keyboard shortcuts must be created, then added to the HashMap to help
-        // saving.
-        // Their actions must also be declared, using mapKeyboardShortcuts in
-        // ControlMatchUI.
-        final KeyboardShortcutField showStack = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showstack"));
-        this.keyboardShortcutFields.put("showstack", showStack);
-
-        final KeyboardShortcutField showCombat = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showcombat"));
-        this.keyboardShortcutFields.put("showcombat", showCombat);
-
-        final KeyboardShortcutField showConsole = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showconsole"));
-        this.keyboardShortcutFields.put("showconsole", showConsole);
-
-        final KeyboardShortcutField showPlayers = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showplayers"));
-        this.keyboardShortcutFields.put("showplayers", showPlayers);
-
-        final KeyboardShortcutField showDev = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showdev"));
-        this.keyboardShortcutFields.put("showdev", showDev);
-
-        final KeyboardShortcutField concedeGame = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.concede"));
-        this.keyboardShortcutFields.put("concede", concedeGame);
-
-        final KeyboardShortcutField showPicture = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showpicture"));
-        this.keyboardShortcutFields.put("showpicture", showPicture);
-
-        final KeyboardShortcutField showDetail = new KeyboardShortcutField(fp.getKeyboardShortcut("shortcut.showdetail"));
-        this.keyboardShortcutFields.put("showdetail", showDetail);
-
-        //
-        parent.add(new KeyboardShortcutLabel("Show stack tab: "), "w 200px!");
-        parent.add(showStack, "w 100px!");
-        parent.add(new KeyboardShortcutLabel("Show combat tab: "), "w 200px!");
-        parent.add(showCombat, "w 100px!");
-        parent.add(new KeyboardShortcutLabel("Show console tab: "), "w 200px!");
-        parent.add(showConsole, "w 100px!");
-        parent.add(new KeyboardShortcutLabel("Show players tab: "), "w 200px!");
-        parent.add(showPlayers, "w 100px!");
-        parent.add(new KeyboardShortcutLabel("Show devmode tab: "), "w 200px!");
-        parent.add(showDev, "w 100px!");
-        parent.add(new KeyboardShortcutLabel("Concede game: "), "w 200px!");
-        parent.add(concedeGame, "w 100px!");
-        parent.add(new KeyboardShortcutLabel("Show card picture: "), "w 200px!");
-        parent.add(showPicture, "w 100px!");
-        parent.add(new KeyboardShortcutLabel("Show card detail: "), "w 200px!");
-        parent.add(showDetail, "w 100px!");
-    }
-
-    /** */
     private void overlaySettings() {
         final FOverlay overlay = AllZone.getOverlay();
         overlay.setLayout(new MigLayout("insets 0"));
@@ -346,117 +219,5 @@ public class ViewDock extends FRoundedPanel {
                 + "'Settings' can be removed or developed further.</center></html>");
 
         parent.add(test);
-    }
-
-    /** Small private class to centralize label styling. */
-    private class KeyboardShortcutLabel extends JLabel {
-        public KeyboardShortcutLabel() {
-            this("");
-        }
-
-        public KeyboardShortcutLabel(final String s0) {
-            super(s0);
-
-            this.setForeground(ViewDock.this.skin.getColor("text"));
-            this.setFont(ViewDock.this.skin.getFont(16));
-        }
-    }
-
-    /**
-     * A JTextField plus a "codeString" property, that stores keycodes for the
-     * shortcut. Also, an action listener that handles translation of keycodes
-     * into characters and (dis)assembly of keycode stack.
-     */
-    public class KeyboardShortcutField extends JTextField {
-        private String codeString;
-
-        /**
-         * A JTextField plus a "codeString" property, that stores keycodes for
-         * the shortcut. Also, an action listener that handles translation of
-         * keycodes into characters and (dis)assembly of keycode stack.
-         * 
-         * This constructor sets the keycode string for this shortcut.
-         * Important: this parameter is keyCODEs not keyCHARs.
-         * 
-         * @param s0
-         *            &emsp; The string of keycodes for this shortcut
-         */
-        public KeyboardShortcutField(final String s0) {
-            this();
-            this.setCodeString(s0);
-        }
-
-        /**
-         * A JTextField plus a "codeString" property, that stores keycodes for
-         * the shortcut. Also, an action listener that handles translation of
-         * keycodes into characters and (dis)assembly of keycode stack.
-         */
-        public KeyboardShortcutField() {
-            super();
-            this.setEditable(false);
-            this.setFont(ViewDock.this.skin.getFont(14));
-
-            this.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(final KeyEvent e) {
-                    ViewDock.this.control.addKeyCode(e);
-                }
-            });
-
-            this.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(final FocusEvent e) {
-                    KeyboardShortcutField.this.setBackground(ViewDock.this.skin.getColor("active"));
-                }
-
-                @Override
-                public void focusLost(final FocusEvent e) {
-                    KeyboardShortcutField.this.setBackground(Color.white);
-                }
-            });
-        }
-
-        /**
-         * Gets the code string.
-         * 
-         * @return String
-         */
-        public String getCodeString() {
-            return this.codeString;
-        }
-
-        /**
-         * Sets the code string.
-         * 
-         * @param s0
-         *            &emsp; The new code string (space delimited)
-         */
-        public void setCodeString(final String s0) {
-            if (s0.equals("null")) {
-                return;
-            }
-
-            this.codeString = s0.trim();
-
-            final List<String> codes = new ArrayList<String>(Arrays.asList(this.codeString.split(" ")));
-            final List<String> displayText = new ArrayList<String>();
-
-            for (final String s : codes) {
-                if (!s.isEmpty()) {
-                    displayText.add(KeyEvent.getKeyText(Integer.valueOf(s)));
-                }
-            }
-
-            this.setText(StringUtils.join(displayText, ' '));
-        }
-    }
-
-    /**
-     * Gets the keyboard shortcut fields.
-     * 
-     * @return Map<String, JTextField>
-     */
-    public Map<String, KeyboardShortcutField> getKeyboardShortcutFields() {
-        return this.keyboardShortcutFields;
     }
 }

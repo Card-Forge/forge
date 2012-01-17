@@ -22,10 +22,12 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 import javax.swing.JLayeredPane;
 import javax.swing.WindowConstants;
 
+import forge.control.KeyboardShortcuts.Shortcut;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
 import forge.view.GuiTopLevel;
 import forge.view.editor.EditorTopLevel;
@@ -43,6 +45,9 @@ import forge.view.match.ViewTopLevel;
 public class ControlAllUI {
     private final JLayeredPane display;
     private final GuiTopLevel view;
+    private List<Shortcut> shortcuts;
+    private int state;
+
     private HomeTopLevel home = null;
     private ViewTopLevel match = null;
     private EditorTopLevel editor = null;
@@ -72,6 +77,7 @@ public class ControlAllUI {
         this.view = v0;
 
         this.display = (JLayeredPane) this.view.getContentPane();
+        this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts(this.view);
 
         // "Close" button override during match
         this.waConcede = new WindowAdapter() {
@@ -114,13 +120,14 @@ public class ControlAllUI {
      * </p>
      * Switches between display states in top level JFrame.
      * 
-     * @param i
+     * @param i0
      *            &emsp; State index: 0 for home, 1 for match, etc.
      */
-    public void changeState(final int i) {
+    public void changeState(final int i0) {
         this.home = null;
         this.match = null;
         this.editor = null;
+        this.state = i0;
 
         this.display.removeAll();
         this.view.removeWindowListener(waConcede);
@@ -129,34 +136,34 @@ public class ControlAllUI {
         this.view.addOverlay();
 
         // Fire up new state
-        switch (i) {
-        case HOME_SCREEN:
-            this.home = new HomeTopLevel();
-            this.display.add(this.home, JLayeredPane.DEFAULT_LAYER);
-            sizeChildren();
-            break;
+        switch (i0) {
+            case HOME_SCREEN:
+                this.home = new HomeTopLevel();
+                this.display.add(this.home, JLayeredPane.DEFAULT_LAYER);
+                sizeChildren();
+                break;
 
-        case MATCH_SCREEN:
-            this.match = new ViewTopLevel();
-            this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
-            sizeChildren();
-            view.addWindowListener(waConcede);
-            break;
+            case MATCH_SCREEN:
+                this.match = new ViewTopLevel();
+                this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
+                sizeChildren();
+                view.addWindowListener(waConcede);
+                break;
 
-        case DEFAULT_EDITOR:
-            this.editor = new EditorTopLevel();
-            this.display.add(this.editor);
-            break;
+            case DEFAULT_EDITOR:
+                this.editor = new EditorTopLevel();
+                this.display.add(this.editor);
+                break;
 
-        case QUEST_BAZAAR:
-            this.bazaar = new QuestBazaarPanel(null);
-            this.display.add(bazaar, JLayeredPane.DEFAULT_LAYER);
-            sizeChildren();
-            view.addWindowListener(waLeaveBazaar);
-            break;
+            case QUEST_BAZAAR:
+                this.bazaar = new QuestBazaarPanel(null);
+                this.display.add(bazaar, JLayeredPane.DEFAULT_LAYER);
+                sizeChildren();
+                view.addWindowListener(waLeaveBazaar);
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -190,6 +197,21 @@ public class ControlAllUI {
      */
     public QuestBazaarPanel getBazaarView() {
         return this.bazaar;
+    }
+
+    /** 
+     * Returns the int reflecting the current state of the top level frame
+     * (see field definitions and class methods for details).
+     * 
+     * @return {@link java.lang.Integer}
+     * */
+    public int getState() {
+        return this.state;
+    }
+
+    /** @return List<Shortcut> A list of attached keyboard shortcut descriptions and properties. */
+    public List<Shortcut> getShortcuts() {
+        return this.shortcuts;
     }
 
     /** Sizes children of JLayeredPane to fully fit their layers. */

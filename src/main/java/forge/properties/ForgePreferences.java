@@ -127,9 +127,7 @@ public class ForgePreferences {
         prefs.put("shortcut.showconsole", "76");
         prefs.put("shortcut.showplayers", "80");
         prefs.put("shortcut.showdev", "68");
-        prefs.put("shortcut.concede", "27");
-        prefs.put("shortcut.showpicture", "17 80");
-        prefs.put("shortcut.showdetail", "17 68");
+        prefs.put("shortcut.concede", "17");
 
         save();
     }
