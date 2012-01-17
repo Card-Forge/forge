@@ -807,7 +807,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         AllZone.setQuestEvent(selectedDuel);
 
         AllZone.getGameAction().newGame(humanDeck, computer, QuestUtil.getHumanStartingCards(this.questData),
-                QuestUtil.getComputerStartingCards(this.questData), this.questData.getLife(), 20, null);
+                QuestUtil.getComputerStartingCards(this.questData), this.questData.getLife(), 20);
     }
 
     /**
@@ -835,7 +835,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         AllZone.getGameAction().newGame(humanDeck, computer,
                 QuestUtil.getHumanStartingCards(this.questData, selectedChallenge),
                 QuestUtil.getComputerStartingCards(this.questData, selectedChallenge),
-                this.questData.getLife() + extraLife, selectedChallenge.getAILife(), selectedChallenge);
+                this.questData.getLife() + extraLife, selectedChallenge.getAILife());
 
     }
 

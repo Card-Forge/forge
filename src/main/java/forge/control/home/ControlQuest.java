@@ -231,7 +231,7 @@ public class ControlQuest {
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
                 QuestUtil.getHumanStartingCards(view.getQuestData()),
                 QuestUtil.getComputerStartingCards(view.getQuestData()),
-                view.getQuestData().getLife(), 20, null);
+                view.getQuestData().getLife(), 20);
     }
 
     /**
@@ -253,7 +253,7 @@ public class ControlQuest {
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
                 QuestUtil.getHumanStartingCards(view.getQuestData(), event),
                 QuestUtil.getComputerStartingCards(view.getQuestData(), event),
-                view.getQuestData().getLife() + extraLife, ((QuestChallenge) event).getAILife(), event);
+                view.getQuestData().getLife() + extraLife, ((QuestChallenge) event).getAILife());
 
     }
 }

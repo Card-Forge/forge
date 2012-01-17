@@ -133,7 +133,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
 
             AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
-                    humanList, computerList, humanLife, computerLife, this.model.qEvent);
+                    humanList, computerList, humanLife, computerLife);
         } else {
             super.startNextRound();
         }

@@ -58,7 +58,6 @@ import forge.gui.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
-import forge.quest.gui.main.QuestEvent;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewWinLose;
 
@@ -1292,32 +1291,23 @@ public class GameAction {
     }
 
     /**
-     * <p>
-     * newGame.
-     * </p>
-     * for Quest fantasy mode
+     * Constructor for new game allowing card lists to be put
+     * into play immediately, and life totals to be adjusted,
+     * for computer and human.
      * 
-     * @param humanDeck
-     *            a {@link forge.deck.Deck} object.
-     * @param computerDeck
-     *            a {@link forge.deck.Deck} object.
-     * @param human
-     *            a {@link forge.CardList} object.
-     * @param computer
-     *            a {@link forge.CardList} object.
-     * @param humanLife
-     *            a int.
-     * @param computerLife
-     *            a int.
-     * @param qe
-     *            the qe
+     * @param humanDeck &emsp; {@link forge.deck.Deck} object.
+     * @param computerDeck &emsp; {@link forge.deck.Deck} object.
+     * @param human &emsp; {@link forge.CardList} object.
+     * @param computer &emsp; {@link forge.CardList} object.
+     * @param humanLife &emsp; int.
+     * @param computerLife &emsp; int.
      */
     public final void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
-            final CardList computer, final int humanLife, final int computerLife, final QuestEvent qe) {
-        this.newGame(humanDeck, computerDeck);
-
+            final CardList computer, final int humanLife, final int computerLife) {
+        AllZone.newGameCleanup();
         AllZone.getComputerPlayer().setStartingLife(computerLife);
         AllZone.getHumanPlayer().setStartingLife(humanLife);
+        AllZone.getHumanPlayer().updateObservers();
 
         for (final Card c : human) {
 
@@ -1331,29 +1321,37 @@ public class GameAction {
             c.setSickness(true);
         }
         Constant.Quest.FANTASY_QUEST[0] = true;
+
+        this.actuateGame(humanDeck, computerDeck);
     }
 
     private boolean startCut = false;
 
     /**
-     * <p>
-     * newGame.
-     * </p>
+     * The default constructor for a new game.
      * 
-     * @param humanDeck
-     *            a {@link forge.deck.Deck} object.
-     * @param computerDeck
-     *            a {@link forge.deck.Deck} object.
+     * @param humanDeck &emsp; {@link forge.deck.Deck} object.
+     * @param computerDeck &emsp; {@link forge.deck.Deck} object.
      */
     public final void newGame(final Deck humanDeck, final Deck computerDeck) {
         // AllZone.getComputer() = new ComputerAI_Input(new
         // ComputerAI_General());
         Constant.Quest.FANTASY_QUEST[0] = false;
 
+        AllZone.newGameCleanup();
         AllZone.getComputerPlayer().setStartingLife(20);
         AllZone.getHumanPlayer().setStartingLife(20);
+        this.actuateGame(humanDeck, computerDeck);
+    }
 
-        AllZone.newGameCleanup();
+    /** 
+     * This must be separated from the newGame method since life totals and
+     * player details could be adjusted before the game is started.
+     * 
+     *  That process (also cleanup and observer updates) should be done in
+     *  newGame, then when all is ready, call this function.
+     */
+    private void actuateGame(final Deck humanDeck, final Deck computerDeck) {
         this.canShowWinLose = true;
         forge.card.trigger.Trigger.resetIDs();
         AllZone.getTriggerHandler().clearTriggerSettings();
