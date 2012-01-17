@@ -133,6 +133,14 @@ public class AbilityFactoryAlterLife {
             public void resolve() {
                 AbilityFactoryAlterLife.gainLifeResolve(this.af, this);
             }
+            
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryAlterLife.gainLifeDoTriggerAINoCost(af, this, mandatory);
+                }
+                return AbilityFactoryAlterLife.gainLifeDoTriggerAI(af, this, mandatory);
+            }
 
         };
         return spGainLife;
@@ -328,7 +336,7 @@ public class AbilityFactoryAlterLife {
 
         return (randomReturn && chance);
     }
-
+    
     /**
      * <p>
      * gainLifeDoTriggerAI.
@@ -348,6 +356,23 @@ public class AbilityFactoryAlterLife {
             // not mandatory
             return false;
         }
+        return gainLifeDoTriggerAINoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * gainLifeDoTriggerAINoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    public static boolean gainLifeDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
@@ -497,6 +522,14 @@ public class AbilityFactoryAlterLife {
             @Override
             public void resolve() {
                 AbilityFactoryAlterLife.loseLifeResolve(this.af, this);
+            }
+            
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryAlterLife.loseLifeDoTriggerAINoCost(af, this, mandatory);
+                }
+                return AbilityFactoryAlterLife.loseLifeDoTriggerAI(af, this, mandatory);
             }
         };
         return spLoseLife;
@@ -689,7 +722,7 @@ public class AbilityFactoryAlterLife {
 
         return (randomReturn && chance);
     }
-
+    
     /**
      * <p>
      * loseLifeDoTriggerAI.
@@ -709,6 +742,23 @@ public class AbilityFactoryAlterLife {
             // not mandatory
             return false;
         }
+        return loseLifeDoTriggerAINoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * loseLifeDoTriggerAINoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    public static boolean loseLifeDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
