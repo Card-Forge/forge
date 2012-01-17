@@ -17,7 +17,29 @@ We have changed the archival format used for the Forge distributions from ".zip"
 
 Fixes/Features:
 
-
+- merged updates from trunk cardsfolder into DKA branch
+- Added the player keyword "Play with your hand revealed."
+- Converted Volrath's Dungeon to script.
+- Fixed Kjeldoran Javelineer.
+- Added some NPE checks to activateManaAbility.
+- Cleared out the changes.txt file, now ready for new material.
+- Fixed errors related to the AI controlling cards like Essence Bottle.
+- CheckStyle.
+- rename Phase.java to PhaseHandler.java (matches other TriggerHandler, etc.) and updated all calling classes. Remade the Phase class as a superclass for Untap, Upkeep, EndOfTurn, EndOfCombat to consolidate some code.
+- Modified keyboard shortcuts algorithms to be less complicated to implement.
+- Moved keyboard shortcut setting UI into home screen.
+- Implemented on-the-fly detach/reattach for modified shortcuts.
+- Put shortcuts into a top-level scope, not only for match UI.
+- Fixed "scale larger" setting to work on-the-fly (no reset required).
+- hook the Dev Mode buttons up to the Skin
+- Fixed "inaccurate life total at before mulligan" bug.
+- Added game type to counter information in Input area.
+- checkstyle
+- Optimization: lightweight splash sprite loads before rest of skin (which soon will occur in preload bar).
+- Moved the "forge.view.swing" package into "forge.view".
+- Removed FSkin access from AllZone, all FSkin access now through Singletons.getView().
+- Removed "Random" from the list of themes (it didn't work and there is the button below anyway).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -53,6 +75,8 @@ Thraben Doomsayer
 Vorapede
 Zombie Apocalypse
 
+Vault of the Archangel
+
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
@@ -61,7 +85,11 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+River Kelpie
+Revelation
+Telepathy
+Rats' Feast
+Summit Apes
 
 
 end
