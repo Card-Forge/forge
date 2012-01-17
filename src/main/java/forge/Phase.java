@@ -32,10 +32,41 @@ public abstract class Phase implements java.io.Serializable {
 
     private static final long serialVersionUID = 4665309652476851977L;
 
-    protected final CommandList at = new CommandList();
-    protected final CommandList until = new CommandList();
+    /** The at. */
+    private final CommandList at = new CommandList();
 
-    protected final HashMap<Player, CommandList> untilMap = new HashMap<Player, CommandList>();
+    /**
+     * Gets the at.
+     *
+     * @return the at
+     */
+    public CommandList getAt() {
+        return at;
+    }
+
+    /**
+     * Gets the until.
+     *
+     * @return the until
+     */
+    public CommandList getUntil() {
+        return until;
+    }
+
+    /**
+     * Gets the until map.
+     *
+     * @return the until map
+     */
+    public HashMap<Player, CommandList> getUntilMap() {
+        return untilMap;
+    }
+
+    /** The until. */
+    private final CommandList until = new CommandList();
+
+    /** The until map. */
+    private final HashMap<Player, CommandList> untilMap = new HashMap<Player, CommandList>();
 
     /**
      * <p>

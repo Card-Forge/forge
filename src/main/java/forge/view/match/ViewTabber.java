@@ -90,7 +90,7 @@ public class ViewTabber extends FRoundedPanel {
             lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblSetLife;
 
     private final FVerticalTabPanel vtpTabber;
-    
+
     private final Color activeColor, inactiveColor, hoverColor;
 
     /**
@@ -177,8 +177,7 @@ public class ViewTabber extends FRoundedPanel {
                     for (x = 0; x < labels.length; x++) {
                         if (x > 0) {
                             labels[x].setFont(skin.getFont(regular));
-                        }
-                        else {
+                        } else {
                             labels[x].setFont(skin.getFont(big));
                         }
                     }
@@ -240,7 +239,7 @@ public class ViewTabber extends FRoundedPanel {
 
         this.vtpTabber.getAllVTabs().get(ControlTabber.STACK_PANEL).setText("Stack : " + stack.size());
 
-        //final Border border = new LineBorder(this.skin.getClrBorders(), 1);
+        // final Border border = new LineBorder(this.skin.getClrBorders(), 1);
         final Border border = new EmptyBorder(5, 5, 5, 5);
         Color[] scheme;
 
@@ -266,14 +265,15 @@ public class ViewTabber extends FRoundedPanel {
             tar.setLineWrap(true);
             tar.setWrapStyleWord(true);
 
-            /* 
-             * TODO - we should figure out how to display cards on the stack in the Picture/Detail panel
-             * The problem not is that when a computer casts a Morph, the real card shows because
-             * Picture/Detail checks isFaceDown() which will be false on for spell.getSourceCard()
-             * on the stack.
+            /*
+             * TODO - we should figure out how to display cards on the stack in
+             * the Picture/Detail panel The problem not is that when a computer
+             * casts a Morph, the real card shows because Picture/Detail checks
+             * isFaceDown() which will be false on for spell.getSourceCard() on
+             * the stack.
              */
 
-            //this functionality was present in v 1.1.8
+            // this functionality was present in v 1.1.8
             tar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
@@ -283,16 +283,15 @@ public class ViewTabber extends FRoundedPanel {
             });
 
             /*
-             * This updates the Card Picture/Detail when the spell is added to the stack.
-             * This funcaitonality was not present in v 1.1.8.
+             * This updates the Card Picture/Detail when the spell is added to
+             * the stack. This funcaitonality was not present in v 1.1.8.
              * 
              * Problem is described in TODO right above this.
              */
             /*
-            if (i == 0) {
-                AllZone.getDisplay().setCard(spell.getSourceCard());
-            }
-            */
+             * if (i == 0) {
+             * AllZone.getDisplay().setCard(spell.getSourceCard()); }
+             */
 
             this.pnlStack.add(tar, "w 98%!, gapright 1%, gaptop 1%");
             stackTARs.add(tar);
@@ -319,28 +318,22 @@ public class ViewTabber extends FRoundedPanel {
     /** Returns array with [background, foreground] colors. */
     private Color[] getSpellColor(SpellAbilityStackInstance s0) {
         if (CardUtil.getColors(s0.getSourceCard()).size() > 1) {
-            return new Color[] {new Color(253, 175, 63), Color.black};
-        }
-        else if (s0.getSourceCard().isBlack()) {
-            return new Color[] {Color.black, Color.white};
-        }
-        else if (s0.getSourceCard().isBlue()) {
-            return new Color[] {new Color(71, 108, 191), Color.white};
-        }
-        else if (s0.getSourceCard().isGreen()) {
-            return new Color[] {new Color(23, 95, 30), Color.white};
-        }
-        else if (s0.getSourceCard().isRed()) {
-            return new Color[] {new Color(214, 8, 8), Color.white};
-        }
-        else if (s0.getSourceCard().isWhite()) {
-            return new Color[] {Color.white, Color.black};
-        }
-        else if (s0.getSourceCard().isArtifact() || s0.getSourceCard().isLand()) {
-            return new Color[] {new Color(111, 75, 43), Color.white};
+            return new Color[] { new Color(253, 175, 63), Color.black };
+        } else if (s0.getSourceCard().isBlack()) {
+            return new Color[] { Color.black, Color.white };
+        } else if (s0.getSourceCard().isBlue()) {
+            return new Color[] { new Color(71, 108, 191), Color.white };
+        } else if (s0.getSourceCard().isGreen()) {
+            return new Color[] { new Color(23, 95, 30), Color.white };
+        } else if (s0.getSourceCard().isRed()) {
+            return new Color[] { new Color(214, 8, 8), Color.white };
+        } else if (s0.getSourceCard().isWhite()) {
+            return new Color[] { Color.white, Color.black };
+        } else if (s0.getSourceCard().isArtifact() || s0.getSourceCard().isLand()) {
+            return new Color[] { new Color(111, 75, 43), Color.white };
         }
 
-        return new Color[] {new Color(0, 0, 0, 0), skin.getColor("text")};
+        return new Color[] { new Color(0, 0, 0, 0), skin.getColor("text") };
     }
 
     /**
@@ -357,14 +350,17 @@ public class ViewTabber extends FRoundedPanel {
     public void updateCombat(final String s) {
         this.pnlCombat.removeAll();
 
-        //if this is not cleared every time, we keep a history of combat strings.  Not very useful.
-        //probably will never be useful, even if we have multiple text areas to display combat...
+        // if this is not cleared every time, we keep a history of combat
+        // strings. Not very useful.
+        // probably will never be useful, even if we have multiple text areas to
+        // display combat...
         this.combatTARs.clear();
         this.control.showPnlCombat();
 
         final Border border = new MatteBorder(0, 0, 0, 0, skin.getColor("borders"));
 
-        this.vtpTabber.getAllVTabs().get(ControlTabber.COMBAT_PANEL).setText("Combat : " + AllZone.getCombat().getAttackers().length);
+        this.vtpTabber.getAllVTabs().get(ControlTabber.COMBAT_PANEL)
+                .setText("Combat : " + AllZone.getCombat().getAttackers().length);
 
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
@@ -378,20 +374,21 @@ public class ViewTabber extends FRoundedPanel {
 
     /**
      * Sets the text for the GameLog.
-     *
+     * 
      */
     public void updateConsole() {
         final GameLog gl = AllZone.getGameLog();
 
         this.pnlConsole.removeAll();
-        //final Border border = new MatteBorder(0, 0, 0, 0, this.skin.getClrBorders());
+        // final Border border = new MatteBorder(0, 0, 0, 0,
+        // this.skin.getClrBorders());
 
-        //by default, grab everything logging level 3 or less
-        //TODO - some option to make this configurable is probably desirable
-        //TODO - add these components to resize adapter in constructor
+        // by default, grab everything logging level 3 or less
+        // TODO - some option to make this configurable is probably desirable
+        // TODO - add these components to resize adapter in constructor
         JTextArea tar = new JTextArea(gl.getLogText(3));
         tar.setOpaque(false);
-        //tar.setBorder(border);
+        // tar.setBorder(border);
         tar.setForeground(this.skin.getColor("text"));
 
         tar.setFocusable(false);
@@ -405,10 +402,11 @@ public class ViewTabber extends FRoundedPanel {
 
         this.pnlConsole.add(jsp, "w 95%!, gapleft 3%, gaptop 1%");
 
-        /* We do not need to keep track for now.  In the future, we may need this if
-         * we change how the log is displayed.
+        /*
+         * We do not need to keep track for now. In the future, we may need this
+         * if we change how the log is displayed.
          */
-        //consoleTARs.add(tar);
+        // consoleTARs.add(tar);
     }
 
     /**
@@ -420,7 +418,8 @@ public class ViewTabber extends FRoundedPanel {
      */
     public void updatePlayerLabels(final Player p0) {
         final JLabel[] temp = this.infoLBLs.get(p0);
-        temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: " + String.valueOf(p0.getPoisonCounters()));
+        temp[1].setText("Life: " + String.valueOf(p0.getLife()) + "  |  Poison counters: "
+                + String.valueOf(p0.getPoisonCounters()));
         temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
         temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
         temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
@@ -652,7 +651,8 @@ public class ViewTabber extends FRoundedPanel {
         lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
         lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
         lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
-        lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn: Enabled", "Play Unlimited Lands This Turn: Disabled");
+        lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn: Enabled",
+                "Play Unlimited Lands This Turn: Disabled");
         lblGenerateMana = new DevLabel("Generate Mana");
         lblSetupGame = new DevLabel("Setup Game State");
         lblTutor = new DevLabel("Tutor for Card");
@@ -662,8 +662,8 @@ public class ViewTabber extends FRoundedPanel {
         lblSetLife = new DevLabel("Set Player Life");
 
         devLBLs.add(lblMilling);
-        //devLBLs.add(lblHandView);
-        //devLBLs.add(lblLibraryView);
+        // devLBLs.add(lblHandView);
+        // devLBLs.add(lblLibraryView);
         devLBLs.add(lblUnlimitedLands);
         devLBLs.add(lblGenerateMana);
         devLBLs.add(lblSetupGame);
@@ -675,8 +675,8 @@ public class ViewTabber extends FRoundedPanel {
 
         final String constraints = "w 95%!, gap 0 0 5px 0";
         viewport.add(this.lblMilling, constraints);
-        //viewport.add(this.lblHandView, constraints);
-        //viewport.add(this.lblLibraryView, constraints);
+        // viewport.add(this.lblHandView, constraints);
+        // viewport.add(this.lblLibraryView, constraints);
         viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblGenerateMana, constraints);
         viewport.add(this.lblSetupGame, constraints);

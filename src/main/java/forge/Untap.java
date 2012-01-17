@@ -44,7 +44,7 @@ public class Untap extends Phase implements java.io.Serializable {
      */
     @Override
     public void executeAt() {
-        this.execute(this.at);
+        this.execute(this.getAt());
 
         final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
         Untap.doPhasing(turn);

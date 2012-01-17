@@ -194,7 +194,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         }
 
-        this.execute(this.at);
+        this.execute(this.getAt());
 
     } // executeAt()
 

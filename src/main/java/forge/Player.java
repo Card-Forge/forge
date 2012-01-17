@@ -269,7 +269,8 @@ public abstract class Player extends GameEntity {
      *              a int.
      */
     public final void setStartingLife(final int startLife) {
-        this.startingLife = this.life = startLife;
+        this.startingLife = startLife;
+        this.life = startLife;
     }
 
     /**

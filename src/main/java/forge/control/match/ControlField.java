@@ -341,7 +341,7 @@ public class ControlField {
                 if (!ControlField.this.player.isComputer()) {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Hand), HumanHand.BASE)
                     .actionPerformed(null);
-                } else if (Constant.Runtime.DEV_MODE[0] 
+                } else if (Constant.Runtime.DEV_MODE[0]
                         || ControlField.this.player.hasKeyword("Play with your hand revealed.")) {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Hand), ComputerHand.BASE)
                     .actionPerformed(null);
