@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import forge.AllZone;
+import forge.Constant;
 import forge.GuiInput;
 import forge.view.match.ViewInput;
 
@@ -120,9 +121,10 @@ public class ControlInput {
 
     /** Updates count label in input area. */
     public void updateGameCount() {
-        view.getLblGames().setText("Game #"
+        view.getLblGames().setText("<html>Game #"
                 + (AllZone.getMatchState().getGamesPlayedCount() + 1)
-                + " of " + AllZone.getMatchState().getGamesPerMatch());
+                + " of " + AllZone.getMatchState().getGamesPerMatch()
+                + "<br>" + Constant.Runtime.getGameType().toString() + " mode</html>");
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */
