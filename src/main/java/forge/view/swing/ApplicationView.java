@@ -148,7 +148,7 @@ public class ApplicationView implements FView {
                                 // splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                                 ApplicationView.this.splashFrame = null;
-
+                                AllZone.getSkin().loadFontAndImages();
                                 GuiTopLevel g = new GuiTopLevel();
                                 g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                 AllZone.setDisplay(g);

@@ -48,12 +48,12 @@ public class FSkin {
     private Map<Integer, Font> boldFonts;
     private Map<Integer, Font> italicFonts;
 
+    private final String spriteFile = "";
+    private final String fontFile = "font1.ttf";
+    private final String notfound = "FSkin.java: Can't find ";
+    private String dirName;
     private Font font = null;
     private String name = "default";
-    private final String spriteFile = "";
-    private final String font1file = "font1.ttf";
-    private Font tempFont;
-    private final String notfound = "FSkin.java: Can't find ";
 
     /**
      * Gets the skins.
@@ -81,11 +81,8 @@ public class FSkin {
     /**
      * FSkin constructor. No arguments, will generate default skin settings,
      * fonts, and backgrounds.
-     * 
-     * @throws Exception
-     *             the exception
      */
-    public FSkin() throws Exception {
+    public FSkin() {
         this("default");
     }
 
@@ -95,28 +92,37 @@ public class FSkin {
      * 
      * @param skinName
      *            the skin name
-     * @throws Exception
-     *             the exception
      */
-    public FSkin(final String skinName) throws Exception {
+    public FSkin(final String skinName) {
         this.name = skinName;
-        this.loadFontAndImages(skinName);
-    }
-
-    /**
-     * Loads objects from skin folder, prints brief error if not found.
-     * 
-     * @param skinName
-     */
-    private void loadFontAndImages(final String skinName) {
-        final String dirName = "res/images/skins/" + skinName + "/";
-
+        this.dirName = "res/images/skins/" + skinName + "/";
         this.icons = new HashMap<String, ImageIcon>();
         this.colors = new HashMap<String, Color>();
         this.images = new HashMap<String, Image>();
 
+        final File file = new File(dirName + "bg_splash.png");
+        BufferedImage image;
+        try {
+            image = ImageIO.read(file);
+            final int h = image.getHeight();
+            final int w = image.getWidth();
+            this.setImage("bg.splash", image.getSubimage(0, 0, w, h - 100));
+
+            this.setColor("progress1", this.getColorFromPixel(image.getRGB(25, h - 75)));
+            this.setColor("progress2", this.getColorFromPixel(image.getRGB(25, h - 25)));
+            this.setColor("progress3", this.getColorFromPixel(image.getRGB(75, h - 75)));
+            this.setColor("progress4", this.getColorFromPixel(image.getRGB(75, h - 25)));
+        } catch (final IOException e) {
+            System.err.println(this.notfound + this.spriteFile);
+        }
+    }
+
+    /**
+     * Loads objects from skin folder, prints brief error if not found.
+     */
+    public void loadFontAndImages() {
         // Fonts
-        this.setFont(this.retrieveFont(dirName + this.font1file));
+        this.setFont(GuiUtils.newFont(dirName + this.fontFile));
         plainFonts = new HashMap<Integer, Font>();
         plainFonts.put(10, font.deriveFont(Font.PLAIN, 10));
         plainFonts.put(11, font.deriveFont(Font.PLAIN, 11));
@@ -143,7 +149,6 @@ public class FSkin {
         // Images
         this.setImage("bg.texture", this.retrieveImage(dirName + "bg_texture.jpg"));
         this.setImage("bg.match", this.retrieveImage(dirName + "bg_match.jpg"));
-        this.setImage("bg.splash", this.retrieveImage(dirName + "bg_splash.jpg"));
 
         // Sprite
         final File file = new File(dirName + "sprite.png");
@@ -157,10 +162,6 @@ public class FSkin {
             this.setColor("active", this.getColorFromPixel(image.getRGB(70, 90)));
             this.setColor("inactive", this.getColorFromPixel(image.getRGB(70, 110)));
             this.setColor("text", this.getColorFromPixel(image.getRGB(70, 130)));
-            this.setColor("progress1", this.getColorFromPixel(image.getRGB(65, 145)));
-            this.setColor("progress2", this.getColorFromPixel(image.getRGB(75, 145)));
-            this.setColor("progress3", this.getColorFromPixel(image.getRGB(65, 155)));
-            this.setColor("progress4", this.getColorFromPixel(image.getRGB(75, 155)));
 
             // All icons should eventually be set and retrieved using this
             // method.
@@ -237,22 +238,6 @@ public class FSkin {
         }
 
         return tempImg.getImage();
-    }
-
-    /**
-     * <p>
-     * retrieveFont.
-     * </p>
-     * Uses GuiUtils to grab a font file at an address. Error will be reported
-     * by GuiUtils if not found.
-     * 
-     * @param {@link java.lang.String} address
-     * @return a Font
-     */
-    private Font retrieveFont(final String address) {
-        this.tempFont = GuiUtils.newFont(address);
-
-        return this.tempFont;
     }
 
     /**
