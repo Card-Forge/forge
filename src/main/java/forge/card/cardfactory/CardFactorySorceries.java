@@ -625,7 +625,7 @@ public class CardFactorySorceries {
             }; // SpellAbility
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-
+/*
         // *************** START *********** START **************************
         else if (cardName.equals("Cranial Extraction")) {
             final Cost cost = new Cost("3 B", cardName, false);
@@ -702,7 +702,7 @@ public class CardFactorySorceries {
 
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-
+*/
         // *************** START *********** START **************************
         else if (cardName.equals("Maelstrom Pulse")) {
             final SpellAbility spell = new Spell(card) {
