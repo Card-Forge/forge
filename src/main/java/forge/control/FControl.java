@@ -36,13 +36,13 @@ import forge.view.match.ViewTopLevel;
 
 /**
  * <p>
- * ControlAllUI.
+ * FControl.
  * </p>
  * Controls all Forge UI functionality inside one JFrame. This class switches
  * between various display states in that JFrame. Controllers are instantiated
  * separately by each state's top level view class.
  */
-public class ControlAllUI {
+public class FControl {
     private final JLayeredPane display;
     private final GuiTopLevel view;
     private List<Shortcut> shortcuts;
@@ -65,7 +65,7 @@ public class ControlAllUI {
 
     /**
      * <p>
-     * ControlAllUI.
+     * FControl.
      * </p>
      * Controls all Forge UI functionality inside one JFrame. This class
      * switches between various display states in that JFrame. Controllers are
@@ -73,7 +73,7 @@ public class ControlAllUI {
      * 
      * @param v0 &emsp; GuiTopLevel
      */
-    public ControlAllUI(GuiTopLevel v0) {
+    public FControl(GuiTopLevel v0) {
         this.view = v0;
 
         this.display = (JLayeredPane) this.view.getContentPane();
@@ -217,13 +217,13 @@ public class ControlAllUI {
     /** Sizes children of JLayeredPane to fully fit their layers. */
     private void sizeChildren() {
         Component[] children;
-        children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
+        children = FControl.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
 
         if (children.length == 0) { return; }
 
-        children[0].setSize(ControlAllUI.this.display.getSize());
+        children[0].setSize(FControl.this.display.getSize());
 
-        children = ControlAllUI.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
-        children[0].setSize(ControlAllUI.this.display.getSize());
+        children = FControl.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
+        children[0].setSize(FControl.this.display.getSize());
     }
 }

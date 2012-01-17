@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.control.ControlAllUI;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorQuest;
@@ -122,7 +122,7 @@ public class ControlQuest {
     public void showBazaar() {
         GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
 
-        g.getController().changeState(ControlAllUI.QUEST_BAZAAR);
+        g.getController().changeState(FControl.QUEST_BAZAAR);
         g.validate();
     } // card shop button
 
@@ -202,7 +202,7 @@ public class ControlQuest {
         Constant.Quest.OPP_ICON_NAME[0] = event.getIcon();
 
         GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-        g.getController().changeState(ControlAllUI.MATCH_SCREEN);
+        g.getController().changeState(FControl.MATCH_SCREEN);
         g.getController().getMatchController().initMatch();
 
         AllZone.getMatchState().reset();

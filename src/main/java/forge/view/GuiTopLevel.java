@@ -36,7 +36,7 @@ import forge.GuiMultipleBlockers;
 import forge.MyButton;
 import forge.Player;
 import forge.Singletons;
-import forge.control.ControlAllUI;
+import forge.control.FControl;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
 import forge.view.match.ViewField;
@@ -50,7 +50,7 @@ import forge.view.toolbox.FOverlay;
 @SuppressWarnings("serial")
 public class GuiTopLevel extends JFrame implements Display, CardContainer {
     private final JLayeredPane lpnContent;
-    private final ControlAllUI control;
+    private final FControl control;
 
     /**
      * Parent JFrame for Forge UI.
@@ -70,7 +70,7 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         this.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
         // Init controller
-        this.control = new ControlAllUI(this);
+        this.control = new FControl(this);
     }
 
     /**
@@ -89,9 +89,9 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
     /**
      * Gets the controller.
      * 
-     * @return ControlAllUI
+     * @return FControl
      */
-    public ControlAllUI getController() {
+    public FControl getController() {
         return this.control;
     }
 

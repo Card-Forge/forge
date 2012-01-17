@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import forge.AllZone;
-import forge.control.ControlAllUI;
+import forge.control.FControl;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.quest.gui.QuestAbstractPanel;
 import forge.quest.gui.QuestFrame;
@@ -145,8 +145,8 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-                g.changeState(ControlAllUI.HOME_SCREEN);
+                FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+                g.changeState(FControl.HOME_SCREEN);
                 g.getHomeView().showQuestMenu();
             }
         });

@@ -10,7 +10,7 @@ import forge.CardList;
 import forge.Constant;
 import forge.Singletons;
 import forge.Constant.Zone;
-import forge.control.ControlAllUI;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
@@ -74,9 +74,9 @@ public class ControlWinLose {
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         AllZone.getMatchState().reset();
-        ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+        FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
         g.getMatchController().deinitMatch();
-        g.changeState(ControlAllUI.HOME_SCREEN);
+        g.changeState(FControl.HOME_SCREEN);
     }
 
     /**

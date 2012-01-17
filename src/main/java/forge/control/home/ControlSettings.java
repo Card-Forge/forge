@@ -20,7 +20,7 @@ import forge.view.toolbox.FSkin;
 /** 
  * Controls logic and listeners for Settings panel of the home screen.
  *
- * Saving of preferences happens at every state change in ControlAllUI.
+ * Saving of preferences happens at every state change in FControl.
  */
 public class ControlSettings {
     private ViewSettings view;

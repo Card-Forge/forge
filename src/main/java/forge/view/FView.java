@@ -26,7 +26,7 @@ import forge.AllZone;
 import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
-import forge.control.ControlAllUI;
+import forge.control.FControl;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.view.home.SplashFrame;
@@ -122,7 +122,7 @@ public class FView {
 
                         GuiTopLevel g = new GuiTopLevel();
                         AllZone.setDisplay(g);
-                        g.getController().changeState(ControlAllUI.HOME_SCREEN);
+                        g.getController().changeState(FControl.HOME_SCREEN);
                         g.pack();
                         g.setVisible(true);
 

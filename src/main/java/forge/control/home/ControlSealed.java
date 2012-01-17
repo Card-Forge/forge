@@ -15,7 +15,7 @@ import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.PlayerType;
-import forge.control.ControlAllUI;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.game.GameType;
@@ -75,8 +75,8 @@ public class ControlSealed {
         Constant.Runtime.HUMAN_DECK[0] = human;
         Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get("AI_" + human.getName());
 
-        ControlAllUI c = ((GuiTopLevel) AllZone.getDisplay()).getController();
-        c.changeState(ControlAllUI.MATCH_SCREEN);
+        FControl c = ((GuiTopLevel) AllZone.getDisplay()).getController();
+        c.changeState(FControl.MATCH_SCREEN);
         c.getMatchController().initMatch();
         System.out.println(Constant.Runtime.COMPUTER_DECK[0]);
         System.out.println(Constant.Runtime.HUMAN_DECK[0]);

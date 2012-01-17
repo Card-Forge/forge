@@ -39,7 +39,7 @@ import javax.swing.WindowConstants;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
 import forge.Constant;
-import forge.control.ControlAllUI;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
@@ -133,7 +133,7 @@ public class DeckEditorDraft extends DeckEditorBase {
                         ForgeProps.getLocalized(GuiBoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     DeckEditorDraft.this.dispose();
-                    ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+                    FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
                     g.getHomeView().getDraftController().updateHumanDecks();
                 }
             } // windowClosing()
@@ -353,7 +353,7 @@ public class DeckEditorDraft extends DeckEditorBase {
         // close and open next screen
         this.dispose();
 
-        ControlAllUI g = ((GuiTopLevel) AllZone.getDisplay()).getController();
+        FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
         g.getHomeView().getDraftController().updateHumanDecks();
 
     } /* saveDraft() */
