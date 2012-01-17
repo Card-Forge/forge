@@ -11065,6 +11065,7 @@ src/main/java/forge/quest/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/GuiTopLevel.java -text
+src/main/java/forge/view/Main.java -text
 src/main/java/forge/view/editor/EditorTopLevel.java -text
 src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
 src/main/java/forge/view/home/HomeTopLevel.java -text
@@ -11092,9 +11093,6 @@ src/main/java/forge/view/match/ViewTopLevel.java -text
 src/main/java/forge/view/match/ViewWinLose.java -text
 src/main/java/forge/view/match/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
-src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
-src/main/java/forge/view/swing/Main.java svneol=native#text/plain
-src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
 src/main/java/forge/view/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/view/toolbox/CardViewer.java -text
 src/main/java/forge/view/toolbox/DeckLister.java -text
