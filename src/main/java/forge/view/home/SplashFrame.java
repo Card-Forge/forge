@@ -20,6 +20,7 @@ package forge.view.home;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -94,6 +95,8 @@ public class SplashFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/images/symbols-13/favicon.png"));
+        this.setTitle("Loading Forge...");
 
         // Insert JPanel to hold content above background
         final JPanel contentPane = new JPanel();

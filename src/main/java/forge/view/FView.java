@@ -17,24 +17,18 @@
  */
 package forge.view;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
-import com.esotericsoftware.minlog.Log;
-
 import forge.AllZone;
 import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
-import forge.ImageCache;
 import forge.control.ControlAllUI;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.view.home.SplashFrame;
 import forge.view.toolbox.CardFaceSymbols;
 import forge.view.toolbox.FSkin;
@@ -58,29 +52,20 @@ public class FView {
         this.skin = skin0;
 
         // We must use invokeAndWait here to fulfill the constructor's
-        // contract.
-
-        UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() { // NOPMD
-                                                                          // by
-                                                                          // Braids
-                                                                          // on
-                                                                          // 8/18/11
-                                                                          // 11:37
-                                                                          // PM
-                    @Override
-                    public void run() {
-                        FView.this.splashFrame = new SplashFrame(skin);
-                    }
-                });
-
-        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on
-                                                    // 8/18/11 11:37 PM
-                    @Override
-                    public void run() {
-                        FView.this.splashFrame.setVisible(true);
-                    }
-                });
-
+        // contract. NOPMD by Braids on 8/18/11 11:37 PM
+        UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
+            @Override
+            public void run() {
+                FView.this.splashFrame = new SplashFrame(skin);
+            }
+        });
+        // NOPMD by Braids on 8/18/11 11:37 PM
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                FView.this.splashFrame.setVisible(true);
+            }
+        });
     }
 
     /**
@@ -113,22 +98,8 @@ public class FView {
     /**
      * Tell the view that the model has been bootstrapped, and its data is ready
      * for initial display.
-     * 
-     * @param model
-     *            the model that has finished bootstrapping
      */
-    public final void setModel(final FModel model) {
-        try {
-
-            final ForgePreferences preferences = model.getPreferences();
-
-            // FindBugs doesn't like the next line.
-            ImageCache.setScaleLargerThanOriginal(preferences.isScaleLargerThanOriginal());
-
-        } catch (final Exception exn) {
-            Log.error("Error loading preferences: " + exn);
-        }
-
+    public final void initialize() {
         // For the following two blocks, check if user has cancelled
         // SplashFrame.
         // Note: Error thrown sometimes because log file cannot be accessed
@@ -138,35 +109,33 @@ public class FView {
 
         if (!this.splashFrame.getSplashHasBeenClosed()) {
             try {
-                CardFaceSymbols.loadImages();
+                // NOPMD by Braids on 8/7/11 1:07
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
+                        skin.loadFontAndImages();
 
-                Constant.Runtime.setGameType(GameType.Constructed);
-                SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids
-                                                            // on 8/7/11 1:07
-                                                            // PM: this isn't a
-                                                            // web app
-                            @Override
-                            public void run() {
-                                AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
+                        CardFaceSymbols.loadImages();
 
-                                // Enable only one of the following two lines.
-                                // The second
-                                // is useful for debugging.
+                        Constant.Runtime.setGameType(GameType.Constructed);
 
-                                FView.this.splashFrame.dispose();
-                                // splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        GuiTopLevel g = new GuiTopLevel();
+                        AllZone.setDisplay(g);
+                        g.getController().changeState(ControlAllUI.HOME_SCREEN);
+                        g.pack();
+                        g.setVisible(true);
 
-                                FView.this.splashFrame = null;
-                                skin.loadFontAndImages();
-                                GuiTopLevel g = new GuiTopLevel();
-                                g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                AllZone.setDisplay(g);
-                                g.getController().changeState(ControlAllUI.HOME_SCREEN);
-                            }
-                        });
+                        FView.this.splashFrame.dispose();
+                        // Enable only one of the following two lines.
+                        // The second is useful for debugging.
+                        FView.this.splashFrame = null;
+                        // FView.this.splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    }
+                });
             } catch (final Exception ex) {
                 ErrorViewer.showError(ex);
             }
-        } // End if(splashHasBeenClosed)
+        } // End if(splashHasBeenClosed) */
     } // End FView()
 }

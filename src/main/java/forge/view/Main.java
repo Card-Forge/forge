@@ -50,10 +50,10 @@ public final class Main {
         ExceptionHandler.registerErrorHandling();
         try {
             final FModel model = new FModel(null);
-            Singletons.setModel(model);
-
-            final FSkin skin = new FSkin(Singletons.getModel().getPreferences().getSkin());
+            final FSkin skin = new FSkin(model.getPreferences().getSkin());
             final FView view = new FView(skin);
+
+            Singletons.setModel(model);
             Singletons.setView(view);
 
             // Need this soon after card factory is loaded
@@ -63,11 +63,9 @@ public final class Main {
             // game.
             // It is only here to maintain semantic equality with the current
             // code base.
-
             model.resetGameState();
 
-            view.setModel(model);
-
+            view.initialize();
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }

@@ -28,6 +28,7 @@ import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import arcane.util.MultiplexOutputStream;
 import forge.Constant;
 import forge.HttpUtil;
+import forge.ImageCache;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -64,13 +65,7 @@ public class FModel {
      *             if we could not find or write to the log file.
      */
     public FModel(final BraidsProgressMonitor theMonitor) throws FileNotFoundException {
-        /*
-         * To be implemented later. -Braids BraidsProgressMonitor monitor; if
-         * (theMonitor == null) { monitor = new
-         * BaseProgressMonitor(NUM_INIT_PHASES, 1); } else { monitor =
-         * theMonitor; }
-         */
-
+        // Fire up log file
         final File logFile = new File("forge.log");
         final boolean deleteSucceeded = logFile.delete();
 
@@ -85,18 +80,25 @@ public class FModel {
         this.oldSystemErr = System.err;
         System.setErr(new PrintStream(new MultiplexOutputStream(System.err, this.logFileStream), true));
 
+        // Instantiate preferences
         try {
             this.setPreferences(new ForgePreferences("forge.preferences"));
         } catch (final Exception exn) {
-            throw new RuntimeException(exn); // NOPMD by Braids on 8/13/11 8:21
-                                             // PM
+            // NOPMD by Braids on 8/13/11 8:21 PM
+            // Log.error("Error loading preferences: " + exn);
+            throw new RuntimeException(exn);
         }
 
+        // TODO these should be set along with others all at the same time, not here
         Constant.Runtime.MILL[0] = this.preferences.isMillingLossCondition();
         Constant.Runtime.DEV_MODE[0] = this.preferences.isDeveloperMode();
         Constant.Runtime.UPLOAD_DRAFT[0] = this.preferences.isUploadDraftAI();
         Constant.Runtime.RANDOM_FOIL[0] = this.preferences.isRandCFoil();
+        ImageCache.setScaleLargerThanOriginal(preferences.isScaleLargerThanOriginal());
+        /////////
 
+        // Instantiate pinger
+        // TODO is this in the right place?
         final HttpUtil pinger = new HttpUtil();
         String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
         if (pinger.getURL(url).equals("pong")) {

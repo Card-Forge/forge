@@ -65,10 +65,9 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         this.lpnContent.setOpaque(true);
         this.setContentPane(this.lpnContent);
         this.addOverlay();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/images/symbols-13/favicon.png"));
-        this.setTitle("Forge");
-
-        this.setVisible(true);
+        this.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
         // Init controller
         this.control = new ControlAllUI(this);
