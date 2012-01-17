@@ -232,8 +232,8 @@ public final class AbilityFactoryProtection {
 
                 // will the creature attack (only relevant for sorcery speed)?
                 if (CardFactoryUtil.doesCreatureAttackAI(c)
-                        && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
+                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     return true;
                 }
 
@@ -246,7 +246,7 @@ public final class AbilityFactoryProtection {
                 }
 
                 // is the creature in blocked and the blocker would survive
-                if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                         && CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
                     return true;
@@ -297,7 +297,7 @@ public final class AbilityFactoryProtection {
         }
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        if ((AllZone.getStack().size() == 0) && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -344,7 +344,7 @@ public final class AbilityFactoryProtection {
      * @return a boolean.
      */
     private static boolean protectTgtAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!mandatory && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!mandatory && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -371,12 +371,12 @@ public final class AbilityFactoryProtection {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
-                if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
-                if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
             }

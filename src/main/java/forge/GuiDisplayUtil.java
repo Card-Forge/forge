@@ -1293,15 +1293,15 @@ public final class GuiDisplayUtil {
 
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
             if (tChangePlayer.trim().toLowerCase().equals("human")) {
-                AllZone.getPhase().setPlayerTurn(AllZone.getHumanPlayer());
+                AllZone.getPhaseHandler().setPlayerTurn(AllZone.getHumanPlayer());
             }
             if (tChangePlayer.trim().toLowerCase().equals("ai")) {
-                AllZone.getPhase().setPlayerTurn(AllZone.getComputerPlayer());
+                AllZone.getPhaseHandler().setPlayerTurn(AllZone.getComputerPlayer());
             }
         }
 
         if (!tChangePhase.trim().toLowerCase().equals("none")) {
-            AllZone.getPhase().setDevPhaseState(tChangePhase);
+            AllZone.getPhaseHandler().setDevPhaseState(tChangePhase);
         }
 
         if (!tHumanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
@@ -1402,7 +1402,7 @@ public final class GuiDisplayUtil {
         }
 
         AllZone.getGameAction().checkStateEffects();
-        AllZone.getPhase().updateObservers();
+        AllZone.getPhaseHandler().updateObservers();
         AllZone.getHumanPlayer().getZone(Zone.Exile).updateObservers();
         AllZone.getComputerPlayer().getZone(Zone.Exile).updateObservers();
         AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();

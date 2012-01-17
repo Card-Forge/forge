@@ -321,7 +321,7 @@ public class AbilityFactoryGainControl {
         // Don't steal something if I can't Attack without, or prevent it from
         // blocking at least
         if ((this.lose != null) && this.lose.contains("EOT")
-                && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
+                && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 

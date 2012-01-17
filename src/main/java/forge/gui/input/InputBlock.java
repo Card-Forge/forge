@@ -94,7 +94,7 @@ public class InputBlock extends Input {
             // Done blocking
             ButtonUtil.reset();
 
-            AllZone.getPhase().setNeedToNextPhase(true);
+            AllZone.getPhaseHandler().setNeedToNextPhase(true);
         }
     }
 

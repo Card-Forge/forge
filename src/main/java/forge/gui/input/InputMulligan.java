@@ -28,7 +28,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.PhaseUtil;
 import forge.Player;
 import forge.PlayerZone;
@@ -206,9 +206,9 @@ public class InputMulligan extends Input {
                     AllZone.getGameAction().getComputerCut());
         }
         AllZone.getGameAction().checkStateEffects();
-        Phase.setGameBegins(1);
-        AllZone.getPhase().setNeedToNextPhase(false);
-        PhaseUtil.visuallyActivatePhase(AllZone.getPhase().getPhase());
+        PhaseHandler.setGameBegins(1);
+        AllZone.getPhaseHandler().setNeedToNextPhase(false);
+        PhaseUtil.visuallyActivatePhase(AllZone.getPhaseHandler().getPhase());
         this.stop();
     }
 

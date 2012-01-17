@@ -77,14 +77,14 @@ public class InputAttack extends Input {
     @Override
     public final void selectButtonOK() {
         if (AllZone.getCombat().getAttackers().length > 0) {
-            AllZone.getPhase().setCombat(true);
+            AllZone.getPhaseHandler().setCombat(true);
         }
 
         if (AllZone.getCombat().getRemainingDefenders() != 0) {
-            AllZone.getPhase().repeatPhase();
+            AllZone.getPhaseHandler().repeatPhase();
         }
 
-        AllZone.getPhase().setNeedToNextPhase(true);
+        AllZone.getPhaseHandler().setNeedToNextPhase(true);
         AllZone.getInputControl().resetInput();
     }
 

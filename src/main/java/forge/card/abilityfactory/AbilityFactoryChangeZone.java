@@ -441,7 +441,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         // don't use fetching to top of library/graveyard before main2
-        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
+        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
                 && !destination.equals("Battlefield") && !destination.equals("Hand")) {
             return false;
         }
@@ -1354,7 +1354,7 @@ public final class AbilityFactoryChangeZone {
                     }
                 }
                 // Save combatants
-                else if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                else if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     final CardList combatants = aiPermanents.getType("Creature");
                     CardListUtil.sortByEvaluateCreature(combatants);
 
@@ -1406,7 +1406,7 @@ public final class AbilityFactoryChangeZone {
         if (origin.equals(Zone.Battlefield)
                 && destination.equals(Zone.Exile)
                 && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
-                && !(AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa.isAbility())) {
+                && !(AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa.isAbility())) {
             return false;
         }
 
@@ -1414,8 +1414,8 @@ public final class AbilityFactoryChangeZone {
         if (destination.equals(Zone.Exile) || origin.equals(Zone.Battlefield)) {
 
             // don't rush bouncing stuff when not going to attack
-            if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2)
-                    && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
+            if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)
+                    && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                     && AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()).isEmpty()) {
                 return false;
             }
@@ -1423,7 +1423,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         // Only care about combatants during combat
-        if (AllZone.getPhase().inCombat()) {
+        if (AllZone.getPhaseHandler().inCombat()) {
             list.getValidCards("Card.attacking,Card.blocking", null, null);
         }
 
@@ -2059,7 +2059,7 @@ public final class AbilityFactoryChangeZone {
             }
 
             // Don't cast during main1?
-            if (AllZone.getPhase().is(Constant.Phase.MAIN1, AllZone.getComputerPlayer())) {
+            if (AllZone.getPhaseHandler().is(Constant.Phase.MAIN1, AllZone.getComputerPlayer())) {
                 return false;
             }
         } else if (origin.equals(Zone.Graveyard)) {

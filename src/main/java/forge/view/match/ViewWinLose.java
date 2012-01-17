@@ -12,7 +12,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Constant;
 import forge.MatchState;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.control.match.ControlWinLose;
 import forge.game.GameType;
@@ -81,7 +81,7 @@ public class ViewWinLose {
         btnQuit.setFont(AllZone.getSkin().getFont(22));
 
         // End game and set state of "continue" button
-        Phase.setGameBegins(0);
+        PhaseHandler.setGameBegins(0);
 
         if (matchState.isMatchOver()) {
             this.getBtnContinue().setEnabled(false);

@@ -1356,11 +1356,11 @@ public class AbilityFactory {
             return false;
         }
 
-        if (sa.getRestrictions().getPlaneswalker() && AllZone.getPhase().is(Constant.Phase.MAIN2)) {
+        if (sa.getRestrictions().getPlaneswalker() && AllZone.getPhaseHandler().is(Constant.Phase.MAIN2)) {
             return true;
         }
 
-        return (AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
+        return (AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) && AllZone.getPhaseHandler().isNextTurn(
                 AllZone.getComputerPlayer()));
     }
 
@@ -1376,8 +1376,8 @@ public class AbilityFactory {
      */
     public static boolean waitForBlocking(final SpellAbility sa) {
 
-        return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap() && (AllZone.getPhase().isBefore(
-                Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) || AllZone.getPhase().isNextTurn(
+        return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap() && (AllZone.getPhaseHandler().isBefore(
+                Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) || AllZone.getPhaseHandler().isNextTurn(
                 AllZone.getHumanPlayer())));
     }
 
@@ -1867,7 +1867,6 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.startsWith("Replaced")) {
-            String bleh = defined.substring(8);
             final SpellAbility root = sa.getRootSpellAbility();
             Object o = null;
             if (defined.endsWith("Controller")) {

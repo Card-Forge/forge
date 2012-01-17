@@ -43,8 +43,8 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         GuiDisplayUtil.updateGUI();
         ButtonUtil.enableOnlyOK();
 
-        final String phase = AllZone.getPhase().getPhase();
-        final Player player = AllZone.getPhase().getPriorityPlayer();
+        final String phase = AllZone.getPhaseHandler().getPhase();
+        final Player player = AllZone.getPhaseHandler().getPriorityPlayer();
 
         if (player.isComputer()) {
             System.out.println(phase + ": Computer in passpriority");
@@ -52,7 +52,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append("Turn : ").append(AllZone.getPhase().getPlayerTurn()).append("\n");
+        sb.append("Turn : ").append(AllZone.getPhaseHandler().getPlayerTurn()).append("\n");
         sb.append("Phase: ").append(phase).append("\n");
         sb.append("Stack: ");
         if (AllZone.getStack().size() != 0) {
@@ -69,7 +69,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        AllZone.getPhase().passPriority();
+        AllZone.getPhaseHandler().passPriority();
         GuiDisplayUtil.updateGUI();
         final Input in = AllZone.getInputControl().getInput();
         if ((in == this) || (in == null)) {
@@ -82,7 +82,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
         if (AllZone.getGameAction().playCard(card)) {
-            AllZone.getPhase().setPriority(AllZone.getHumanPlayer());
+            AllZone.getPhaseHandler().setPriority(AllZone.getHumanPlayer());
         }
         else {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();

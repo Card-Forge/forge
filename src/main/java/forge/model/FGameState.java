@@ -28,7 +28,7 @@ import forge.GameAction;
 import forge.GameLog;
 import forge.HumanPlayer;
 import forge.MagicStack;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.StaticEffects;
@@ -55,7 +55,7 @@ public class FGameState {
     private EndOfCombat endOfCombat = new EndOfCombat();
     private Untap untap = new Untap();
     private Upkeep upkeep = new Upkeep();
-    private Phase phase = new Phase();
+    private PhaseHandler phaseHandler = new PhaseHandler();
     private MagicStack stack = new MagicStack();
     private GameAction gameAction = new GameAction();
     private StaticEffects staticEffects = new StaticEffects();
@@ -199,22 +199,22 @@ public class FGameState {
     }
 
     /**
-     * Gets the phase.
+     * Gets the phaseHandler.
      * 
-     * @return the phase
+     * @return the phaseHandler
      */
-    public final Phase getPhase() {
-        return this.phase;
+    public final PhaseHandler getPhaseHandler() {
+        return this.phaseHandler;
     }
 
     /**
      * Sets the phase.
      * 
-     * @param phase0
-     *            the phase to set
+     * @param phaseHandlerIn
+     *            the phaseHandler to set
      */
-    protected final void setPhase(final Phase phase0) {
-        this.phase = phase0;
+    protected final void setPhaseHandler(final PhaseHandler phaseHandlerIn) {
+        this.phaseHandler = phaseHandlerIn;
     }
 
     /**
@@ -396,7 +396,7 @@ public class FGameState {
         this.getHumanPlayer().reset();
         this.getComputerPlayer().reset();
 
-        this.getPhase().reset();
+        this.getPhaseHandler().reset();
         this.getStack().reset();
         this.getCombat().reset();
 

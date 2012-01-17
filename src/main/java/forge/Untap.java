@@ -17,7 +17,11 @@
  */
 package forge;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+
+import forge.Constant.Zone;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.gui.input.Input;
 
 /**
  * <p>
@@ -29,66 +33,358 @@ import java.util.HashMap;
  * @author Forge
  * @version $Id: Untap 12482 2011-12-06 11:14:11Z Sloth $
  */
-public class Untap implements java.io.Serializable {
+public class Untap extends Phase implements java.io.Serializable {
 
     private static final long serialVersionUID = 4515266331266259123L;
-    private final HashMap<Player, CommandList> until = new HashMap<Player, CommandList>();
 
     /**
      * <p>
-     * Add a Command that will terminate an effect with "until <Player's> next untap".
+     * Executes any hardcoded triggers that happen "at end of combat".
+     * </p>
+     */
+    @Override
+    public void executeAt() {
+        this.execute(this.at);
+
+        final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
+        Untap.doPhasing(turn);
+
+        Untap.doUntap();
+    }
+
+    /**
+     * <p>
+     * canUntap.
      * </p>
      * 
-     * @param p
-     *            a {@link forge.Player} object
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.Card} object.
+     * @return a boolean.
      */
-    public final void addUntil(Player p, final Command c) {
-        if (null == p) {
-            p = AllZone.getPhase().getPlayerTurn();
+    public static boolean canUntap(final Card c) {
+
+        if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
+                || c.hasKeyword("This card doesn't untap during your next untap step.")
+                || c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
+            return false;
         }
 
-        if (this.until.containsKey(p)) {
-            this.until.get(p).add(c);
-        } else {
-            this.until.put(p, new CommandList(c));
-        }
+        final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
+        for (final Card ca : allp) {
+            if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
+                final int keywordPosition = ca
+                        .getKeywordPosition("Permanents don't untap during their controllers' untap steps");
+                final String parse = ca.getKeyword().get(keywordPosition).toString();
+                final String[] k = parse.split(":");
+                final String[] restrictions = k[1].split(",");
+                final Card card = ca;
+                if (c.isValid(restrictions, card.getController(), card)) {
+                    return false;
+                }
+            }
+        } // end of Permanents don't untap during their controllers' untap steps
+
+        return true;
     }
 
     /**
      * <p>
-     * Executes the termination of effects that apply "until <Player's> next untap".
-     * </p>
-     * 
-     * @param p
-     *            the player the execute until for
-     */
-    public final void executeUntil(final Player p) {
-        if (this.until.containsKey(p)) {
-            this.execute(this.until.get(p));
-        }
-    }
-
-    private void execute(final CommandList c) {
-        final int length = c.size();
-
-        for (int i = 0; i < length; i++) {
-            c.remove(0).execute();
-        }
-    }
-
-    /**
-     * <p>
-     * Handles all the hardcoded events that happen at the beginning of each Untap Phase.
-     * 
-     * This will freeze the Stack at the start, and unfreeze the Stack at the end.
+     * doUntap.
      * </p>
      */
-    public final void executeAt() {
-        AllZone.getStack().freezeStack();
+    private static void doUntap() {
+        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
+        CardList list = player.getCardsIn(Zone.Battlefield);
 
-        AllZone.getStack().unfreezeStack();
+        for (final Card c : list) {
+            if (c.getBounceAtUntap() && c.getName().contains("Undiscovered Paradise")) {
+                AllZone.getGameAction().moveToHand(c);
+            }
+        }
+
+        list = list.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                if (!Untap.canUntap(c)) {
+                    return false;
+                }
+                if (Untap.canOnlyUntapOneLand() && c.isLand()) {
+                    return false;
+                }
+                if ((AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue"))
+                        && c.isArtifact()) {
+                    return false;
+                }
+                if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel") || AllZoneUtil
+                        .isCardInPlay("Intruder Alarm")) && c.isCreature()) {
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        for (final Card c : list) {
+            if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.")) {
+                if (c.isTapped()) {
+                    if (c.getController().isHuman()) {
+                        String prompt = "Untap " + c.getName() + "?";
+                        boolean defaultNo = false;
+                        if (c.getGainControlTargets().size() > 0) {
+                            final ArrayList<Card> targets = c.getGainControlTargets();
+                            prompt += "\r\n" + c + " is controlling: ";
+                            for (final Card target : targets) {
+                                prompt += target;
+                                if (AllZoneUtil.isCardInPlay(target)) {
+                                    defaultNo |= true;
+                                }
+                            }
+                        }
+                        if (GameActionUtil.showYesNoDialog(c, prompt, defaultNo)) {
+                            c.untap();
+                        }
+                    } else { // computer
+                        // if it is controlling something by staying tapped,
+                        // leave it tapped
+                        // if not, untap it
+                        if (c.getGainControlTargets().size() > 0) {
+                            final ArrayList<Card> targets = c.getGainControlTargets();
+                            boolean untap = true;
+                            for (final Card target : targets) {
+                                if (AllZoneUtil.isCardInPlay(target)) {
+                                    untap |= true;
+                                }
+                            }
+                            if (untap) {
+                                c.untap();
+                            }
+                        }
+                    }
+                }
+            } else if ((c.getCounters(Counters.WIND) > 0) && AllZoneUtil.isCardInPlay("Freyalise's Winds")) {
+                // remove a WIND counter instead of untapping
+                c.subtractCounter(Counters.WIND, 1);
+            } else {
+                c.untap();
+            }
+        }
+
+        // opponent untapping during your untap phase
+        final CardList opp = player.getOpponent().getCardsIn(Zone.Battlefield);
+        for (final Card oppCard : opp) {
+            if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step.")) {
+                oppCard.untap();
+                // end opponent untapping during your untap phase
+            }
+        }
+
+        if (Untap.canOnlyUntapOneLand()) {
+            if (AllZone.getPhaseHandler().getPlayerTurn().isComputer()) {
+                // search for lands the computer has and only untap 1
+                CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
+                landList = landList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return Untap.canUntap(c);
+                    }
+                });
+                if (landList.size() > 0) {
+                    landList.get(0).untap();
+                }
+            } else {
+                final Input target = new Input() {
+                    private static final long serialVersionUID = 6653677835629939465L;
+
+                    @Override
+                    public void showMessage() {
+                        AllZone.getDisplay().showMessage("Select one tapped land to untap");
+                        ButtonUtil.enableOnlyCancel();
+                    }
+
+                    @Override
+                    public void selectButtonCancel() {
+                        this.stop();
+                    }
+
+                    @Override
+                    public void selectCard(final Card c, final PlayerZone zone) {
+                        if (c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isTapped() && Untap.canUntap(c)) {
+                            c.untap();
+                            this.stop();
+                        }
+                    } // selectCard()
+                }; // Input
+                CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
+                landList = landList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return Untap.canUntap(c);
+                    }
+                });
+                if (landList.size() > 0) {
+                    AllZone.getInputControl().setInput(target);
+                }
+            }
+        }
+        if (AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
+            if (AllZone.getPhaseHandler().getPlayerTurn().isComputer()) {
+                CardList artList = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+                artList = artList.filter(CardListFilter.ARTIFACTS);
+                artList = artList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return Untap.canUntap(c);
+                    }
+                });
+                if (artList.size() > 0) {
+                    CardFactoryUtil.getBestArtifactAI(artList).untap();
+                }
+            } else {
+                final Input target = new Input() {
+                    private static final long serialVersionUID = 5555427219659889707L;
+
+                    @Override
+                    public void showMessage() {
+                        AllZone.getDisplay().showMessage("Select one tapped artifact to untap");
+                        ButtonUtil.enableOnlyCancel();
+                    }
+
+                    @Override
+                    public void selectButtonCancel() {
+                        this.stop();
+                    }
+
+                    @Override
+                    public void selectCard(final Card c, final PlayerZone zone) {
+                        if (c.isArtifact() && zone.is(Constant.Zone.Battlefield) && c.getController().isHuman()
+                                && Untap.canUntap(c)) {
+                            c.untap();
+                            this.stop();
+                        }
+                    } // selectCard()
+                }; // Input
+                CardList artList = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+                artList = artList.filter(CardListFilter.ARTIFACTS);
+                artList = artList.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return Untap.canUntap(c);
+                    }
+                });
+                if (artList.size() > 0) {
+                    AllZone.getInputControl().setInput(target);
+                }
+            }
+        }
+        if ((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))) {
+            if (AllZone.getPhaseHandler().getPlayerTurn().isComputer()) {
+                CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+                creatures = creatures.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return Untap.canUntap(c);
+                    }
+                });
+                if (creatures.size() > 0) {
+                    creatures.get(0).untap();
+                }
+            } else {
+                final Input target = new Input() {
+                    private static final long serialVersionUID = 5555427219659889707L;
+
+                    @Override
+                    public void showMessage() {
+                        AllZone.getDisplay().showMessage("Select one creature to untap");
+                        ButtonUtil.enableOnlyCancel();
+                    }
+
+                    @Override
+                    public void selectButtonCancel() {
+                        this.stop();
+                    }
+
+                    @Override
+                    public void selectCard(final Card c, final PlayerZone zone) {
+                        if (c.isCreature() && zone.is(Constant.Zone.Battlefield) && c.getController().isHuman()
+                                && Untap.canUntap(c)) {
+                            c.untap();
+                            this.stop();
+                        }
+                    } // selectCard()
+                }; // Input
+                CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                creatures = creatures.filter(CardListFilter.TAPPED).filter(new CardListFilter() {
+                    @Override
+                    public boolean addCard(final Card c) {
+                        return Untap.canUntap(c);
+                    }
+                });
+                if (creatures.size() > 0) {
+                    AllZone.getInputControl().setInput(target);
+                }
+            }
+        }
+
+        // Remove temporary keywords
+        list = player.getCardsIn(Zone.Battlefield);
+        for (final Card c : list) {
+            c.removeAllExtrinsicKeyword("This card doesn't untap during your next untap step.");
+            c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
+            if (c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
+                c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next two untap steps.");
+                c.addHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
+            }
+        }
+    } // end doUntap
+
+    private static boolean canOnlyUntapOneLand() {
+        // Winter Orb was given errata so it no longer matters if it's tapped or
+        // not
+        if (AllZoneUtil.getCardsIn(Zone.Battlefield, "Winter Orb").size() > 0) {
+            return true;
+        }
+
+        if (AllZone.getPhaseHandler().getPlayerTurn().getCardsIn(Zone.Battlefield, "Mungha Wurm").size() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void doPhasing(final Player turn) {
+        // Needs to include phased out cards
+        final CardList list = turn.getCardsIncludePhasingIn(Constant.Zone.Battlefield).filter(new CardListFilter() {
+
+            @Override
+            public boolean addCard(final Card c) {
+                return ((c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword("Phasing"));
+            }
+        });
+
+        // If c has things attached to it, they phase out simultaneously, and
+        // will phase back in with it
+        // If c is attached to something, it will phase out on its own, and try
+        // to attach back to that thing when it comes back
+        for (final Card c : list) {
+            if (c.isPhasedOut()) {
+                c.phase();
+            } else if (c.hasKeyword("Phasing")) {
+                // 702.23g If an object would simultaneously phase out directly
+                // and indirectly, it just phases out indirectly.
+                if (c.isAura()) {
+                    final GameEntity ent = c.getEnchanting();
+
+                    if ((ent instanceof Card) && list.contains((Card) ent)) {
+                        continue;
+                    }
+                } else if (c.isEquipment() && c.isEquipping()) {
+                    if (list.contains(c.getEquippingCard())) {
+                        continue;
+                    }
+                }
+                // TODO: Fortification
+                c.phase();
+            }
+        }
     }
 
 } //end class Untap

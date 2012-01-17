@@ -30,42 +30,16 @@ import forge.gui.GuiUtils;
  * @author Forge
  * @version $Id$
  */
-public class EndOfTurn implements java.io.Serializable {
+public class EndOfTurn extends Phase implements java.io.Serializable {
     /** Constant <code>serialVersionUID=-3656715295379727275L</code>. */
     private static final long serialVersionUID = -3656715295379727275L;
-
-    private final CommandList at = new CommandList();
-    private final CommandList until = new CommandList();
-
-    /**
-     * <p>
-     * Add a Command that will act as a trigger for "at end of turn".
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public final void addAt(final Command c) {
-        this.at.add(c);
-    }
-
-    /**
-     * <p>
-     * Add a Command that will terminate an effect with "until end of turn".
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public final void addUntil(final Command c) {
-        this.until.add(c);
-    }
 
     /**
      * <p>
      * Handles all the hardcoded events that happen "at end of turn".
      * </p>
      */
+    @Override
     public final void executeAt() {
 
         // TODO - should this freeze the Stack?
@@ -77,7 +51,7 @@ public class EndOfTurn implements java.io.Serializable {
         EndOfTurn.endOfTurnLighthouseChronologist();
 
         // reset mustAttackEntity for me
-        AllZone.getPhase().getPlayerTurn().setMustAttackEntity(null);
+        AllZone.getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
 
         EndOfTurn.removeAttackedBlockedThisTurn();
 
@@ -182,7 +156,7 @@ public class EndOfTurn implements java.io.Serializable {
 
             }
             if (c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() && !c.hasSickness()
-                    && AllZone.getPhase().isPlayerTurn(c.getController())) {
+                    && AllZone.getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card raider = c;
                 final SpellAbility change = new Ability(raider, "0") {
                     @Override
@@ -200,7 +174,7 @@ public class EndOfTurn implements java.io.Serializable {
 
             }
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
-                    && AllZone.getPhase().isPlayerTurn(c.getController())) {
+                    && AllZone.getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card source = c;
                 final SpellAbility change = new Ability(source, "0") {
                     @Override
@@ -224,33 +198,8 @@ public class EndOfTurn implements java.io.Serializable {
 
     } // executeAt()
 
-    /**
-     * <p>
-     * Executes the termination of effects that apply "until end of turn".
-     * </p>
-     */
-    public final void executeUntil() {
-        this.execute(this.until);
-    }
-
-    /**
-     * <p>
-     * Executes each Command in a CommandList.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CommandList} object.
-     */
-    private void execute(final CommandList c) {
-        final int length = c.size();
-
-        for (int i = 0; i < length; i++) {
-            c.remove(0).execute();
-        }
-    }
-
     private static void endOfTurnWallOfReverence() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
+        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
         final CardList list = player.getCardsIn(Zone.Battlefield, "Wall of Reverence");
 
         Ability ability;
@@ -294,7 +243,7 @@ public class EndOfTurn implements java.io.Serializable {
     } // endOfTurnWallOfReverence()
 
     private static void endOfTurnLighthouseChronologist() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
+        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
         CardList list = opponent.getCardsIn(Zone.Battlefield);
 
@@ -311,7 +260,7 @@ public class EndOfTurn implements java.io.Serializable {
             ability = new Ability(list.get(i), "0") {
                 @Override
                 public void resolve() {
-                    AllZone.getPhase().addExtraTurn(card.getController());
+                    AllZone.getPhaseHandler().addExtraTurn(card.getController());
                 }
             };
 
@@ -326,7 +275,7 @@ public class EndOfTurn implements java.io.Serializable {
 
     private static void removeAttackedBlockedThisTurn() {
         // resets the status of attacked/blocked this turn
-        final Player player = AllZone.getPhase().getPlayerTurn();
+        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
         final CardList list = AllZoneUtil.getCreaturesInPlay(player);
 
         for (int i = 0; i < list.size(); i++) {

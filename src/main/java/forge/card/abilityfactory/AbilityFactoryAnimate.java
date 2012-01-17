@@ -320,21 +320,21 @@ public final class AbilityFactoryAnimate {
 
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
-        if (!AllZone.getPhase().is(Constant.Phase.COMBAT_BEGIN)
-                && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
+        if (!AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_BEGIN)
+                && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
                 && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
             return false;
         }
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ((!AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
-                .getAttackers().length == 0)) && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
+        if ((!AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
+                .getAttackers().length == 0)) && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (AllZone.getPhase().is(Constant.Phase.MAIN2) && !params.containsKey("Permanent")) {
+        if (AllZone.getPhaseHandler().is(Constant.Phase.MAIN2) && !params.containsKey("Permanent")) {
             return false;
         }
 
@@ -343,7 +343,7 @@ public final class AbilityFactoryAnimate {
 
             boolean bFlag = false;
             for (final Card c : defined) {
-                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == AllZone.getPhase().getTurn()));
+                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == AllZone.getPhaseHandler().getTurn()));
 
                 // for creatures that could be improved (like Figure of Destiny)
                 if (c.isCreature() && (params.containsKey("Permanent") || (!c.isTapped() && !c.isSick()))) {

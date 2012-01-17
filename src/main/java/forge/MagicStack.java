@@ -418,17 +418,17 @@ public class MagicStack extends MyObservable {
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        if (AllZone.getPhase().is(Constant.Phase.CLEANUP)) { // If something
+        if (AllZone.getPhaseHandler().is(Constant.Phase.CLEANUP)) { // If something
                                                              // triggers during
                                                              // Cleanup, need to
                                                              // repeat
-            AllZone.getPhase().repeatPhase();
+            AllZone.getPhaseHandler().repeatPhase();
         }
 
         // TODO: triggered abilities need to be fixed
         if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
             // when something is added we need to setPriority
-            AllZone.getPhase().setPriority(sp.getActivatingPlayer());
+            AllZone.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
@@ -831,7 +831,7 @@ public class MagicStack extends MyObservable {
          */
 
         if (this.getSimultaneousStackEntryList().size() > 0) {
-            AllZone.getPhase().passPriority();
+            AllZone.getPhaseHandler().passPriority();
         }
     }
 
@@ -892,7 +892,7 @@ public class MagicStack extends MyObservable {
 
         final SpellAbility sa = AllZone.getStack().pop();
 
-        AllZone.getPhase().resetPriority(); // ActivePlayer gains priority first
+        AllZone.getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
                                             // after Resolve
         final Card source = sa.getSourceCard();
 
@@ -1072,9 +1072,9 @@ public class MagicStack extends MyObservable {
 
         AllZone.getGameAction().checkStateEffects();
 
-        AllZone.getPhase().setNeedToNextPhase(false);
+        AllZone.getPhaseHandler().setNeedToNextPhase(false);
 
-        if (AllZone.getPhase().inCombat()) {
+        if (AllZone.getPhaseHandler().inCombat()) {
             CombatUtil.showCombat();
         }
 
@@ -1314,7 +1314,7 @@ public class MagicStack extends MyObservable {
      * </p>
      */
     public final void chooseOrderOfSimultaneousStackEntryAll() {
-        final Player playerTurn = AllZone.getPhase().getPlayerTurn();
+        final Player playerTurn = AllZone.getPhaseHandler().getPlayerTurn();
 
         this.chooseOrderOfSimultaneousStackEntry(playerTurn);
 

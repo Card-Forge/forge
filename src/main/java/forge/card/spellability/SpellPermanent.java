@@ -246,7 +246,7 @@ public class SpellPermanent extends Spell {
     public boolean canPlay() {
         final Card source = this.getSourceCard();
 
-        final Player turn = AllZone.getPhase().getPlayerTurn();
+        final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
 
         if (source.getName().equals("Serra Avenger")) {
             if (turn.equals(source.getController()) && (turn.getTurn() <= 3)) {

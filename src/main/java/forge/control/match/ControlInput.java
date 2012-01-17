@@ -50,10 +50,10 @@ public class ControlInput {
             public void actionPerformed(final ActionEvent evt) {
                 ControlInput.this.btnOKActionPerformed(evt);
 
-                if (AllZone.getPhase().isNeedToNextPhase()) {
+                if (AllZone.getPhaseHandler().isNeedToNextPhase()) {
                     // moves to next turn
-                    AllZone.getPhase().setNeedToNextPhase(false);
-                    AllZone.getPhase().nextPhase();
+                    AllZone.getPhaseHandler().setNeedToNextPhase(false);
+                    AllZone.getPhaseHandler().nextPhase();
                 }
                 ControlInput.this.view.getBtnOK().requestFocusInWindow();
             }

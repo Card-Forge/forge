@@ -1567,10 +1567,10 @@ public class GameAction {
         ((GuiTopLevel) (AllZone.getDisplay())).getController().getMatchView().getInputController().updateGameCount();
 
         AllZone.getInputControl().setInput(new InputMulligan());
-        Phase.setGameBegins(1);
+        PhaseHandler.setGameBegins(1);
 
-        AllZone.getGameLog().add("Turn", "Turn " + AllZone.getPhase().getTurn()
-                + " (" + AllZone.getPhase().getPlayerTurn() + ")", 0);
+        AllZone.getGameLog().add("Turn", "Turn " + AllZone.getPhaseHandler().getTurn()
+                + " (" + AllZone.getPhaseHandler().getPlayerTurn() + ")", 0);
     } // newGame()
 
     // this is where the computer cheats
@@ -1849,7 +1849,7 @@ public class GameAction {
      */
     public final void computerStartsGame() {
         final Player computer = AllZone.getComputerPlayer();
-        AllZone.getPhase().setPlayerTurn(computer);
+        AllZone.getPhaseHandler().setPlayerTurn(computer);
         // AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
     }
 
@@ -2090,13 +2090,13 @@ public class GameAction {
             originalCard.setXManaCostPaid(0);
         }
 
-        if (Phase.getGameBegins() != 1) {
+        if (PhaseHandler.getGameBegins() != 1) {
             return manaCost;
         }
 
         if (spell.isSpell()) {
             if (originalCard.getName().equals("Avatar of Woe")) {
-                final Player player = AllZone.getPhase().getPlayerTurn();
+                final Player player = AllZone.getPhaseHandler().getPlayerTurn();
                 final Player opponent = player.getOpponent();
                 CardList playerCreatureList = player.getCardsIn(Zone.Graveyard);
                 playerCreatureList = playerCreatureList.getType("Creature");
@@ -2106,19 +2106,19 @@ public class GameAction {
                     manaCost = new ManaCost("B B");
                 } // Avatar of Woe
             } else if (originalCard.getName().equals("Avatar of Will")) {
-                final Player opponent = AllZone.getPhase().getPlayerTurn().getOpponent();
+                final Player opponent = AllZone.getPhaseHandler().getPlayerTurn().getOpponent();
                 final CardList opponentHandList = opponent.getCardsIn(Zone.Hand);
                 if (opponentHandList.size() == 0) {
                     manaCost = new ManaCost("U U");
                 } // Avatar of Will
             } else if (originalCard.getName().equals("Avatar of Fury")) {
-                final Player opponent = AllZone.getPhase().getPlayerTurn().getOpponent();
+                final Player opponent = AllZone.getPhaseHandler().getPlayerTurn().getOpponent();
                 final CardList opponentLand = AllZoneUtil.getPlayerLandsInPlay(opponent);
                 if (opponentLand.size() >= 7) {
                     manaCost = new ManaCost("R R");
                 } // Avatar of Fury
             } else if (originalCard.getName().equals("Avatar of Might")) {
-                final Player player = AllZone.getPhase().getPlayerTurn();
+                final Player player = AllZone.getPhaseHandler().getPlayerTurn();
                 final Player opponent = player.getOpponent();
                 final CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
                 final CardList opponentCreature = AllZoneUtil.getCreaturesInPlay(opponent);
@@ -2418,7 +2418,7 @@ public class GameAction {
                             }
                         }
                         if (k[7].contains("OpponentTurn")) {
-                            if (AllZone.getPhase().isPlayerTurn(controller)) {
+                            if (AllZone.getPhaseHandler().isPlayerTurn(controller)) {
                                 k[3] = "0";
                             }
                         }
@@ -2605,7 +2605,7 @@ public class GameAction {
                                 }
                             }
                             if (k[7].contains("OpponentTurn")) {
-                                if (AllZone.getPhase().isPlayerTurn(controller)) {
+                                if (AllZone.getPhaseHandler().isPlayerTurn(controller)) {
                                     k[3] = "0";
                                 }
                             }
@@ -2708,7 +2708,7 @@ public class GameAction {
         }
 
         if (originalCard.getName().equals("Khalni Hydra") && spell.isSpell()) {
-            final Player player = AllZone.getPhase().getPlayerTurn();
+            final Player player = AllZone.getPhaseHandler().getPlayerTurn();
             CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
             playerCreature = playerCreature.filter(CardListFilter.GREEN);
             String manaC = manaCost + " ";

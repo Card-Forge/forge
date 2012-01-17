@@ -401,11 +401,11 @@ public class StaticAbility {
             return false;
         }
 
-        if (this.mapParams.containsKey("PlayerTurn") && !AllZone.getPhase().isPlayerTurn(controller)) {
+        if (this.mapParams.containsKey("PlayerTurn") && !AllZone.getPhaseHandler().isPlayerTurn(controller)) {
             return false;
         }
 
-        if (this.mapParams.containsKey("OpponentTurn") && !AllZone.getPhase().isPlayerTurn(controller.getOpponent())) {
+        if (this.mapParams.containsKey("OpponentTurn") && !AllZone.getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
             return false;
         }
 
@@ -419,10 +419,10 @@ public class StaticAbility {
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
                 final String[] split = phases.split("->", 2);
-                phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
+                phases = AllZone.getPhaseHandler().buildActivateString(split[0], split[1]);
             }
 
-            if (!phases.contains(AllZone.getPhase().getPhase())) {
+            if (!phases.contains(AllZone.getPhaseHandler().getPhase())) {
                 return false;
             }
         }

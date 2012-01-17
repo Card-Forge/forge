@@ -23,7 +23,7 @@ import java.util.Stack;
 import forge.ComputerAIInput;
 import forge.Constant;
 import forge.MyObservable;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.model.FModel;
 
@@ -167,9 +167,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.gui.input.Input} object.
      */
     public final Input updateInput() {
-        final String phase = this.model.getGameState().getPhase().getPhase();
-        final Player playerTurn = this.model.getGameState().getPhase().getPlayerTurn();
-        final Player priority = this.model.getGameState().getPhase().getPriorityPlayer();
+        final String phase = this.model.getGameState().getPhaseHandler().getPhase();
+        final Player playerTurn = this.model.getGameState().getPhaseHandler().getPlayerTurn();
+        final Player priority = this.model.getGameState().getPhaseHandler().getPriorityPlayer();
 
         // TODO this resolving portion needs more work, but fixes Death Cloud
         // issues
@@ -195,15 +195,15 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return this.input;
         }
 
-        if ((Phase.getGameBegins() != 0) && this.model.getGameState().getPhase().doPhaseEffects()) {
+        if ((PhaseHandler.getGameBegins() != 0) && this.model.getGameState().getPhaseHandler().doPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
-            this.model.getGameState().getPhase().handleBeginPhase();
+            this.model.getGameState().getPhaseHandler().handleBeginPhase();
             return this.updateInput();
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move
         // to next phase
-        if (this.model.getGameState().getPhase().isNeedToNextPhase()) {
+        if (this.model.getGameState().getPhaseHandler().isNeedToNextPhase()) {
             return null;
         }
 
@@ -222,7 +222,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             } else {
                 if (this.model.getGameState().getCombat().getAttackers().length == 0) {
                     // no active attackers, skip the Blocking phase
-                    this.model.getGameState().getPhase().setNeedToNextPhase(true);
+                    this.model.getGameState().getPhaseHandler().setNeedToNextPhase(true);
                     return null;
                 } else {
                     return new InputBlock();
@@ -243,11 +243,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (priority == null) {
             return null;
         } else if (priority.isHuman()) {
-            final boolean skip = this.model.getGameState().getPhase().doSkipPhase();
-            this.model.getGameState().getPhase().setSkipPhase(false);
+            final boolean skip = this.model.getGameState().getPhaseHandler().doSkipPhase();
+            this.model.getGameState().getPhaseHandler().setSkipPhase(false);
             if ((this.model.getGameState().getStack().size() == 0)
                     && !forge.AllZone.getDisplay().stopAtPhase(playerTurn, phase) && skip) {
-                this.model.getGameState().getPhase().passPriority();
+                this.model.getGameState().getPhaseHandler().passPriority();
                 return null;
             } else {
                 return new InputPassPriority();

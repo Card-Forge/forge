@@ -25,70 +25,9 @@ package forge;
  * @author Forge
  * @version $Id$
  */
-public class EndOfCombat implements java.io.Serializable {
+public class EndOfCombat extends Phase implements java.io.Serializable {
 
     /** Constant <code>serialVersionUID=3035250030566186842L</code>. */
     private static final long serialVersionUID = 3035250030566186842L;
-
-    private final CommandList at = new CommandList();
-    private final CommandList until = new CommandList();
-
-    /**
-     * <p>
-     * Add a hardcoded trigger that will execute "at end of combat".
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public final void addAt(final Command c) {
-        this.at.add(c);
-    }
-
-    /**
-     * <p>
-     * Add a Command that will terminate an effect with "until end of combat".
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public final void addUntil(final Command c) {
-        this.until.add(c);
-    }
-
-    /**
-     * <p>
-     * Executes any hardcoded triggers that happen "at end of combat".
-     * </p>
-     */
-    public final void executeAt() {
-        this.execute(this.at);
-    }
-
-    /**
-     * <p>
-     * Executes the termination of effects that apply "until end of combat".
-     * </p>
-     */
-    public final void executeUntil() {
-        this.execute(this.until);
-    }
-
-    /**
-     * <p>
-     * execute.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CommandList} object.
-     */
-    private void execute(final CommandList c) {
-        final int length = c.size();
-
-        for (int i = 0; i < length; i++) {
-            c.remove(0).execute();
-        }
-    }
 
 } // end class EndOfCombat

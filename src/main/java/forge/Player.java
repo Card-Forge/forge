@@ -1779,7 +1779,7 @@ public abstract class Player extends GameEntity {
 
         final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         if (t.getTabberController().getView().getLblUnlimitedLands().getEnabled() && this.isHuman() && Constant.Runtime.DEV_MODE[0]) {
-            return Phase.canCastSorcery(this);
+            return PhaseHandler.canCastSorcery(this);
         }
 
         // CantBeCast static abilities
@@ -1793,7 +1793,7 @@ public abstract class Player extends GameEntity {
             }
         }
 
-        return Phase.canCastSorcery(this)
+        return PhaseHandler.canCastSorcery(this)
                 && ((this.numLandsPlayed < this.maxLandsToPlay) || (this.getCardsIn(Zone.Battlefield, "Fastbond")
                         .size() > 0));
     }

@@ -1260,12 +1260,12 @@ public final class GameActionUtil {
             }
         }
         if (specialConditions.contains("isYourTurn")) {
-            if (!AllZone.getPhase().isPlayerTurn(sourceCard.getController())) {
+            if (!AllZone.getPhaseHandler().isPlayerTurn(sourceCard.getController())) {
                 return false;
             }
         }
         if (specialConditions.contains("notYourTurn")) {
-            if (!AllZone.getPhase().isPlayerTurn(sourceCard.getController().getOpponent())) {
+            if (!AllZone.getPhaseHandler().isPlayerTurn(sourceCard.getController().getOpponent())) {
                 return false;
             }
         }

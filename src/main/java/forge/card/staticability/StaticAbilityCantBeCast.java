@@ -20,7 +20,7 @@ package forge.card.staticability;
 import java.util.HashMap;
 
 import forge.Card;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
@@ -55,7 +55,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && Phase.canCastSorcery(activator)) {
+        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && PhaseHandler.canCastSorcery(activator)) {
             return false;
         }
 

@@ -31,7 +31,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.MyRandom;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -225,23 +225,23 @@ public class AbilityFactoryEffect {
 
         if (params.containsKey("AILogic")) {
             logic = params.get("AILogic");
-            final Phase phase = AllZone.getPhase();
+            final PhaseHandler phase = AllZone.getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
                 if (phase.isPlayerTurn(AllZone.getComputerPlayer()) || phase.isAfter(Constant.Phase.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
             } else if (logic.equals("Fog")) {
-                if (AllZone.getPhase().isPlayerTurn(sa.getActivatingPlayer())) {
+                if (AllZone.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;
                 }
-                if (!AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (!AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
                 if (AllZone.getStack().size() != 0) {
                     return false;
                 }
-                if (AllZone.getPhase().isPreventCombatDamageThisTurn()) {
+                if (AllZone.getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
                 randomReturn = CombatUtil.lifeInDanger(AllZone.getCombat());

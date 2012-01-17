@@ -266,7 +266,7 @@ public final class AbilityFactoryReveal {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
+        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
                 && !params.containsKey("DestinationZone")) {
             return false;
         }

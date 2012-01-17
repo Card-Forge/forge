@@ -309,7 +309,7 @@ public class TriggerHandler {
             System.out.println("Hiyo!");
         }
 
-        final Player playerAP = AllZone.getPhase().getPlayerTurn();
+        final Player playerAP = AllZone.getPhaseHandler().getPlayerTurn();
 
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
@@ -456,7 +456,7 @@ public class TriggerHandler {
         final Player[] controller = new Player[1];
 
         // Any trigger should cause the phase not to skip
-        AllZone.getPhase().setSkipPhase(false);
+        AllZone.getPhaseHandler().setSkipPhase(false);
 
         regtrig.setRunParams(runParams);
 

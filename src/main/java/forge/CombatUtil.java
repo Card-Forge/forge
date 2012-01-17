@@ -863,7 +863,7 @@ public class CombatUtil {
         }
 
         // The creature won't untap next turn
-        if (c.isTapped() && !PhaseUtil.canUntap(c)) {
+        if (c.isTapped() && !Untap.canUntap(c)) {
             return false;
         }
 
@@ -2234,7 +2234,7 @@ public class CombatUtil {
 
         final Card crd = c;
 
-        final String phase = AllZone.getPhase().getPhase();
+        final String phase = AllZone.getPhaseHandler().getPhase();
 
         if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                 || phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
@@ -2684,7 +2684,7 @@ public class CombatUtil {
         final Player phasingPlayer = c.getController();
         // Finest Hour untaps the creature on the first combat phase
         if ((phasingPlayer.getCardsIn(Zone.Battlefield, "Finest Hour").size() > 0)
-                && AllZone.getPhase().isFirstCombat()) {
+                && AllZone.getPhaseHandler().isFirstCombat()) {
             // Untap the attacking creature
             final Ability fhUntap = new Ability(c, "0") {
                 @Override
@@ -2704,7 +2704,7 @@ public class CombatUtil {
                 final Ability fhAddCombat = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        AllZone.getPhase().addExtraCombat();
+                        AllZone.getPhaseHandler().addExtraCombat();
                     }
                 };
 

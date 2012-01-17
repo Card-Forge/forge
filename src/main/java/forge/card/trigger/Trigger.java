@@ -309,25 +309,25 @@ public abstract class Trigger extends TriggerReplacementBase {
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
                 final String[] split = phases.split("->", 2);
-                phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
+                phases = AllZone.getPhaseHandler().buildActivateString(split[0], split[1]);
             }
             final ArrayList<String> triggerPhases = new ArrayList<String>();
             for (final String s : phases.split(",")) {
                 triggerPhases.add(s);
             }
-            if (!triggerPhases.contains(AllZone.getPhase().getPhase())) {
+            if (!triggerPhases.contains(AllZone.getPhaseHandler().getPhase())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("PlayerTurn")) {
-            if (!AllZone.getPhase().isPlayerTurn(this.getHostCard().getController())) {
+            if (!AllZone.getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("OpponentTurn")) {
-            if (AllZone.getPhase().isPlayerTurn(this.getHostCard().getController())) {
+            if (AllZone.getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }

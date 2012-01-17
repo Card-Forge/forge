@@ -33,7 +33,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.MyRandom;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -380,7 +380,7 @@ public class AbilityFactoryCounters {
         }
 
         // Don't use non P1P1/M1M1 counters before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
+        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;
         }
@@ -1691,7 +1691,7 @@ public class AbilityFactoryCounters {
             }
 
             //Check for cards that could profit from the ability
-            Phase phase = AllZone.getPhase();
+            PhaseHandler phase = AllZone.getPhaseHandler();
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts() != null && sa.getPayCosts().getTap()
                     && (phase.isNextTurn(AllZone.getHumanPlayer())

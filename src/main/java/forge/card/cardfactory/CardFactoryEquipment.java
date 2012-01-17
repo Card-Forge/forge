@@ -29,7 +29,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Counters;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.PlayerZone;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -218,7 +218,7 @@ class CardFactoryEquipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)
-                            && Phase.canCastSorcery(card.getController()) && super.canPlay();
+                            && PhaseHandler.canCastSorcery(card.getController()) && super.canPlay();
                 }
 
                 // not changed

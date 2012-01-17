@@ -289,23 +289,23 @@ public class AbilityFactoryPump {
                 }
 
                 // give haste to creatures that could attack with it
-                if (c.hasSickness() && kHaste && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())
+                if (c.hasSickness() && kHaste && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                         && CombatUtil.canAttackNextTurn(c) && c.isUntapped()
-                        && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
                     return true;
                 }
 
                 // give evasive keywords to creatures that can attack
-                if (evasive && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && CombatUtil.canAttack(c)
-                        && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                if (evasive && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && CombatUtil.canAttack(c)
+                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                         && (c.getNetCombatDamage() > 0)) {
                     return true;
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?
                 if (CardFactoryUtil.doesCreatureAttackAI(c)
-                        && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
+                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     return true;
                 }
 
@@ -318,13 +318,13 @@ public class AbilityFactoryPump {
                 }
 
                 // is the creature unblocked and the spell will pump its power?
-                if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isUnblocked(c) && (attack > 0)) {
                     return true;
                 }
 
                 // is the creature blocked and the blocker would survive
-                if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS) && (attack > 0)
+                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS) && (attack > 0)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                         && (AllZone.getCombat().getBlockers(c) != null)
                         && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
@@ -334,10 +334,10 @@ public class AbilityFactoryPump {
                 // if the life of the computer is in danger, try to pump
                 // potential blockers before declaring blocks
                 if (CombatUtil.lifeInDanger(AllZone.getCombat())
-                        && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhase().isBefore(Constant.Phase.MAIN2)
+                        && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)
                         && CombatUtil.canBlock(c, AllZone.getCombat())
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     return true;
                 }
 
@@ -387,10 +387,10 @@ public class AbilityFactoryPump {
 
             if (addsKeywords) {
                 if (!this.containsCombatRelevantKeyword(this.keywords)
-                        && AllZone.getPhase().isBefore(Constant.Phase.MAIN2)) {
+                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)) {
                     list.clear(); // this keyword is not combat relevenat
                 } else if (this.keywords.get(0).equals("HIDDEN CARDNAME attacks each turn if able.")
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.clear();
                 }
 
@@ -456,7 +456,7 @@ public class AbilityFactoryPump {
         final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && AllZone.getPhase().isBefore(Constant.Phase.COMBAT_BEGIN)) {
+        if ((AllZone.getStack().size() == 0) && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!this.abilityFactory.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
@@ -561,7 +561,7 @@ public class AbilityFactoryPump {
      */
     private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         if (!mandatory
-                && AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(this.abilityFactory.isCurse() && ((defense < 0) || !this
                         .containsCombatRelevantKeyword(this.keywords)))) {
             return false;
@@ -582,12 +582,12 @@ public class AbilityFactoryPump {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
-                if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
-                if (AllZone.getPhase().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
-                        && AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     list.remove(sa.getSourceCard());
                 }
             }
@@ -1182,7 +1182,7 @@ public class AbilityFactoryPump {
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN)) {
+        if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
             return false;
         }
 

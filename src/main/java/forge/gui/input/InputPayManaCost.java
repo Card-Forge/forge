@@ -21,7 +21,7 @@ import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.Constant.Zone;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.mana.ManaCost;
@@ -73,7 +73,7 @@ public class InputPayManaCost extends InputMana {
 
         this.spell = sa;
 
-        if (Phase.getGameBegins() == 1) {
+        if (PhaseHandler.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
@@ -118,7 +118,7 @@ public class InputPayManaCost extends InputMana {
 
         this.spell = sa;
 
-        if (Phase.getGameBegins() == 1) {
+        if (PhaseHandler.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());

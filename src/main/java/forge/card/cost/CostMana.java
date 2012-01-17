@@ -24,7 +24,7 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityfactory.AbilityFactory;
@@ -357,7 +357,7 @@ public class CostMana extends CostPart {
             final int manaToAdd) {
         final ManaCost manaCost;
 
-        if (Phase.getGameBegins() == 1) {
+        if (PhaseHandler.getGameBegins() == 1) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCost("0");
             } else {

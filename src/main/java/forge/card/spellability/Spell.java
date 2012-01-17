@@ -25,7 +25,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -117,7 +117,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        return (card.isInstant() || card.hasKeyword("Flash") || Phase.canCastSorcery(card.getController()));
+        return (card.isInstant() || card.hasKeyword("Flash") || PhaseHandler.canCastSorcery(card.getController()));
     } // canPlay()
 
     /** {@inheritDoc} */

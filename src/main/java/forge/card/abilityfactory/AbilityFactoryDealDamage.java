@@ -349,7 +349,7 @@ public class AbilityFactoryDealDamage {
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
             // TODO(sol): this should also happen if Stuffy is going to die
-            return AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getHumanPlayer());
+            return AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getHumanPlayer());
         }
 
         if (this.abilityFactory.isAbility()) {
@@ -425,8 +425,8 @@ public class AbilityFactoryDealDamage {
 
         if (this.abilityFactory.isSpell()) {
             // If this is a spell, cast it instead of discarding
-            if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) || AllZone.getPhase().is(Constant.Phase.MAIN2))
-                    && AllZone.getPhase().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
+            if ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) || AllZone.getPhaseHandler().is(Constant.Phase.MAIN2))
+                    && AllZone.getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
                 return true;
             }
         }
@@ -572,8 +572,8 @@ public class AbilityFactoryDealDamage {
                 // on the stack
                 // or from taking combat damage
                 final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
-                        || (AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && saMe.isAbility()
-                                && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()));
+                        || (AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) && saMe.isAbility()
+                                && AllZone.getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()));
 
                 if (freePing && tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
@@ -588,8 +588,8 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (tgt.canTgtPlayer() && ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN)
-                    && AllZone.getPhase().isNextTurn(AllZone.getComputerPlayer()))
+            else if (tgt.canTgtPlayer() && ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN)
+                    && AllZone.getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
                     || saMe.getPayCosts() == null || isTrigger)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
                     System.out.println(saMe.getSourceCard() + "damageChoosingTargets");

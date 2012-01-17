@@ -289,19 +289,19 @@ public final class AllZone {
 
     /**
      * <p>
-     * getPhase.
+     * getPhaseHandler.
      * </p>
      * 
      * Will eventually be marked deprecated.
      * 
-     * @return a {@link forge.Phase} object; may be null.
+     * @return a {@link forge.PhaseHandler} object; may be null.
      * @since 1.0.15
      */
-    public static Phase getPhase() {
+    public static PhaseHandler getPhaseHandler() {
         final FGameState gameState = Singletons.getModel().getGameState();
 
         if (gameState != null) {
-            return gameState.getPhase();
+            return gameState.getPhaseHandler();
         }
 
         return null;

@@ -64,7 +64,7 @@ public class ComputerAIInput extends Input {
         /*
          * //put this back in ButtonUtil.disableAll();
          * AllZone.getDisplay().showMessage("Phase: " +
-         * AllZone.getPhase().getPhase() + "\nAn error may have occurred. Please
+         * AllZone.getPhaseHandler().getPhase() + "\nAn error may have occurred. Please
          * send the \"Stack Report\" and the
          * \"Detailed Error Trace\" to the Forge forum.");
          */
@@ -89,7 +89,7 @@ public class ComputerAIInput extends Input {
      */
     private void think() {
         // TODO instead of setNextPhase, pass priority
-        final String phase = AllZone.getPhase().getPhase();
+        final String phase = AllZone.getPhaseHandler().getPhase();
 
         if (AllZone.getStack().size() > 0) {
             this.computer.stackNotEmpty();

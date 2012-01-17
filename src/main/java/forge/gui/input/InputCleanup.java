@@ -40,7 +40,7 @@ public class InputCleanup extends Input {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        if (AllZone.getPhase().getPlayerTurn().isComputer()) {
+        if (AllZone.getPhaseHandler().getPlayerTurn().isComputer()) {
             this.aiCleanupDiscard();
             return;
         }
@@ -59,8 +59,8 @@ public class InputCleanup extends Input {
         if ((n <= AllZone.getHumanPlayer().getMaxHandSize()) || (AllZone.getHumanPlayer().getMaxHandSize() == -1)) {
             CombatUtil.removeAllDamage();
 
-            AllZone.getPhase().setNeedToNextPhase(true);
-            AllZone.getPhase().nextPhase(); // TODO keep an eye on this code,
+            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            AllZone.getPhaseHandler().nextPhase(); // TODO keep an eye on this code,
                                             // see if we can get rid of it.
         }
     }
@@ -90,6 +90,6 @@ public class InputCleanup extends Input {
         }
         CombatUtil.removeAllDamage();
 
-        AllZone.getPhase().setNeedToNextPhase(true);
+        AllZone.getPhaseHandler().setNeedToNextPhase(true);
     }
 }

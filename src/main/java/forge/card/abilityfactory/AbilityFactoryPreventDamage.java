@@ -284,7 +284,7 @@ public class AbilityFactoryPreventDamage {
                     }
                 }
             } else {
-                if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
                     for (final Object o : objects) {
                         if (o instanceof Card) {
@@ -335,7 +335,7 @@ public class AbilityFactoryPreventDamage {
             }
 
         } // Protect combatants
-        else if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             if (tgt.canTgtPlayer() && CombatUtil.wouldLoseLife(AllZone.getCombat())
                     && (CombatUtil.lifeInDanger(AllZone.getCombat()) || sa.isAbility())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
@@ -440,7 +440,7 @@ public class AbilityFactoryPreventDamage {
         if (compTargetables.size() > 0) {
             final CardList combatants = compTargetables.getType("Creature");
             CardListUtil.sortByEvaluateCreature(combatants);
-            if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
                     if (CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
@@ -688,7 +688,7 @@ public class AbilityFactoryPreventDamage {
             // control
 
         } // Protect combatants
-        else if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             // TODO
         }
 

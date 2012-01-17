@@ -93,7 +93,7 @@ public class ComputerAIGeneral implements Computer {
         final boolean nextPhase = ComputerUtil.playSpellAbilities(sp);
 
         if (nextPhase) {
-            AllZone.getPhase().passPriority();
+            AllZone.getPhaseHandler().passPriority();
         }
     } // playCards()
 
@@ -248,7 +248,7 @@ public class ComputerAIGeneral implements Computer {
             public boolean addCard(final Card c) {
                 if (c.isPermanent()
                         && c.hasKeyword("Flash")
-                        && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase()
+                        && (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler()
                                 .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
                     return false;
                 }
@@ -299,7 +299,7 @@ public class ComputerAIGeneral implements Computer {
             public boolean addCard(final Card c) {
                 if (c.isPermanent()
                         && c.hasKeyword("Flash")
-                        && (AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase()
+                        && (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler()
                                 .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
                     return false;
                 }
@@ -442,7 +442,7 @@ public class ComputerAIGeneral implements Computer {
 
         final Card[] att = AllZone.getCombat().getAttackers();
         if (att.length > 0) {
-            AllZone.getPhase().setCombat(true);
+            AllZone.getPhaseHandler().setCombat(true);
         }
 
         for (final Card element : att) {
@@ -457,7 +457,7 @@ public class ComputerAIGeneral implements Computer {
         AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
         CombatUtil.showCombat();
 
-        AllZone.getPhase().setNeedToNextPhase(true);
+        AllZone.getPhaseHandler().setNeedToNextPhase(true);
     }
 
     /**
@@ -483,7 +483,7 @@ public class ComputerAIGeneral implements Computer {
 
         CombatUtil.showCombat();
 
-        AllZone.getPhase().setNeedToNextPhase(true);
+        AllZone.getPhaseHandler().setNeedToNextPhase(true);
     }
 
     /**
@@ -538,13 +538,13 @@ public class ComputerAIGeneral implements Computer {
         if (AllZone.getStack().size() == 0) {
 
             boolean pass = (sas.length == 0)
-                    || AllZone.getPhase().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
+                    || AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
             if (!pass) { // Each AF should check the phase individually
                 pass = ComputerUtil.playSpellAbilities(sas);
             }
 
             if (pass) {
-                AllZone.getPhase().passPriority();
+                AllZone.getPhaseHandler().passPriority();
             }
             return;
         }
@@ -553,7 +553,7 @@ public class ComputerAIGeneral implements Computer {
         if (AllZone.getStack().peekInstance().getActivatingPlayer().isComputer()) {
             // probably should let my stuff resolve to force Human to respond to
             // it
-            AllZone.getPhase().passPriority();
+            AllZone.getPhaseHandler().passPriority();
             return;
         }
 
@@ -571,7 +571,7 @@ public class ComputerAIGeneral implements Computer {
         possibleCounters = this.getPossibleETBCounters();
         if ((possibleCounters.size() > 0) && !ComputerUtil.playAbilities(possibleCounters)) {
             // Responding Permanent w/ ETB Counter is on the Stack
-            // AllZone.getPhase().passPriority();
+            // AllZone.getPhaseHandler().passPriority();
             return;
         }
 
@@ -582,6 +582,6 @@ public class ComputerAIGeneral implements Computer {
             }
         }
         // if this hasn't been covered above, just PassPriority()
-        AllZone.getPhase().passPriority();
+        AllZone.getPhaseHandler().passPriority();
     }
 }

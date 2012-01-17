@@ -31,7 +31,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.MyRandom;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -798,7 +798,7 @@ public class AbilityFactoryPermanentState {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        final Phase phase = AllZone.getPhase();
+        final PhaseHandler phase = AllZone.getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
         if (turn.isHuman()) {
@@ -1546,7 +1546,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
 
-        if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN)) {
+        if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN)) {
             return false;
         }
 

@@ -239,7 +239,7 @@ public class CardFactorySorceries {
                 @Override
                 public boolean canPlayAI() {
                     final CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    return (creatures.size() > 0) && AllZone.getPhase().getPhase().equals(Constant.Phase.MAIN1);
+                    return (creatures.size() > 0) && AllZone.getPhaseHandler().getPhase().equals(Constant.Phase.MAIN1);
                 } // canPlayAI()
 
             }; // SpellAbility
@@ -379,7 +379,7 @@ public class CardFactorySorceries {
 
                 @Override
                 public void execute() {
-                    final Player player = AllZone.getPhase().getPlayerTurn();
+                    final Player player = AllZone.getPhaseHandler().getPlayerTurn();
                     final PlayerZone play = player.getZone(Constant.Zone.Battlefield);
                     Card mindsD = card;
                     if (player.isHuman()) {
@@ -413,7 +413,7 @@ public class CardFactorySorceries {
 
                         @Override
                         public void execute() {
-                            final Player player = AllZone.getPhase().getPlayerTurn();
+                            final Player player = AllZone.getPhaseHandler().getPlayerTurn();
                             final PlayerZone play = player.getZone(Constant.Zone.Battlefield);
                             play.remove(minds);
                         }

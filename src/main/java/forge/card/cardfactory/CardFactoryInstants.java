@@ -384,7 +384,7 @@ public class CardFactoryInstants {
                 public boolean canPlayAI() {
                     CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
                     human = human.getNotType("Land");
-                    return (4 < AllZone.getPhase().getTurn()) && (0 < human.size());
+                    return (4 < AllZone.getPhaseHandler().getTurn()) && (0 < human.size());
                 }
 
                 @Override
@@ -707,7 +707,7 @@ public class CardFactoryInstants {
                 @Override
                 public boolean canPlay() {
                     return PhaseUtil.isBeforeAttackersAreDeclared()
-                            && AllZone.getPhase().isPlayerTurn(card.getController().getOpponent());
+                            && AllZone.getPhaseHandler().isPlayerTurn(card.getController().getOpponent());
                 } // canPlay
 
                 @Override

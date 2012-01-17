@@ -102,7 +102,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
         c.addObserver(this);
 
-        c.setTurnInZone(AllZone.getPhase().getTurn());
+        c.setTurnInZone(AllZone.getPhaseHandler().getTurn());
 
         if (!this.is(Zone.Battlefield) && c.isTapped()) {
             AllZone.getTriggerHandler().suppressMode("Untaps");
@@ -156,7 +156,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
         }
 
         this.getCardList().add(index, c);
-        c.setTurnInZone(AllZone.getPhase().getTurn());
+        c.setTurnInZone(AllZone.getPhaseHandler().getTurn());
         this.update();
     }
 

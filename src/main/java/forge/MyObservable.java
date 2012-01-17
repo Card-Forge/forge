@@ -37,11 +37,11 @@ public class MyObservable extends Observable {
         this.setChanged();
         this.notifyObservers();
 
-        if ((AllZone.getPhase() != null) && AllZone.getPhase().isNeedToNextPhase()) {
-            if (AllZone.getPhase().isNeedToNextPhaseInit()) {
+        if ((AllZone.getPhaseHandler() != null) && AllZone.getPhaseHandler().isNeedToNextPhase()) {
+            if (AllZone.getPhaseHandler().isNeedToNextPhaseInit()) {
                 // this is used.
-                AllZone.getPhase().setNeedToNextPhase(false);
-                AllZone.getPhase().nextPhase();
+                AllZone.getPhaseHandler().setNeedToNextPhase(false);
+                AllZone.getPhaseHandler().nextPhase();
             }
         }
     }

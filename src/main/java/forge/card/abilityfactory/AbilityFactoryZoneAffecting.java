@@ -295,7 +295,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -309,7 +309,7 @@ public class AbilityFactoryZoneAffecting {
         if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed
         }
-        if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
+        if ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) && AllZone.getPhaseHandler().isNextTurn(
                 AllZone.getComputerPlayer()))) {
             chance = .9; // 90% for end of opponents turn
         }
@@ -412,7 +412,7 @@ public class AbilityFactoryZoneAffecting {
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && AllZone.getPhase().getPlayerTurn().isComputer()) {
+                    && AllZone.getPhaseHandler().getPlayerTurn().isComputer()) {
                 if (xPaid) {
                     numCards = computerMaxHandSize - computerHandSize;
                     source.setSVar("PayX", Integer.toString(numCards));
@@ -446,7 +446,7 @@ public class AbilityFactoryZoneAffecting {
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && AllZone.getPhase().getPlayerTurn().isComputer()) {
+                    && AllZone.getPhaseHandler().getPlayerTurn().isComputer()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
                 if (!(params.containsKey("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
@@ -796,7 +796,7 @@ public class AbilityFactoryZoneAffecting {
         final Random r = MyRandom.getRandom();
 
         // Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -811,7 +811,7 @@ public class AbilityFactoryZoneAffecting {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
-        if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
+        if ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) && AllZone.getPhaseHandler().isNextTurn(
                 AllZone.getComputerPlayer()))) {
             chance = .9; // 90% for end of opponents turn
         }
@@ -1471,7 +1471,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -1486,7 +1486,7 @@ public class AbilityFactoryZoneAffecting {
             chance = .75; // 75% chance for sorcery speed
         }
 
-        if ((AllZone.getPhase().is(Constant.Phase.END_OF_TURN) && AllZone.getPhase().isNextTurn(
+        if ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) && AllZone.getPhaseHandler().isNextTurn(
                 AllZone.getComputerPlayer()))) {
             chance = .9; // 90% for end of opponents turn
         }

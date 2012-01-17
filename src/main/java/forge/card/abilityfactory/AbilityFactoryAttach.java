@@ -898,7 +898,7 @@ public class AbilityFactoryAttach {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        if (AllZone.getPhase().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+        if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !"Curse".equals(af.getMapParams().get("AILogic"))) {
             return false;
         }

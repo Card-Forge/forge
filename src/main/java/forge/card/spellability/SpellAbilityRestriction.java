@@ -25,7 +25,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Constant.Zone;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityfactory.AbilityFactory;
@@ -134,7 +134,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 // Upkeep->Combat_Begin (Before Declare Attackers)
 
                 final String[] split = phases.split("->", 2);
-                phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
+                phases = AllZone.getPhaseHandler().buildActivateString(split[0], split[1]);
             }
 
             this.setPhases(phases);
@@ -215,15 +215,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        if (this.isSorcerySpeed() && !Phase.canCastSorcery(activator)) {
+        if (this.isSorcerySpeed() && !PhaseHandler.canCastSorcery(activator)) {
             return false;
         }
 
-        if (this.isPlayerTurn() && !AllZone.getPhase().isPlayerTurn(activator)) {
+        if (this.isPlayerTurn() && !AllZone.getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (this.isOpponentTurn() && AllZone.getPhase().isPlayerTurn(activator)) {
+        if (this.isOpponentTurn() && AllZone.getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
@@ -237,7 +237,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            final String currPhase = AllZone.getPhase().getPhase();
+            final String currPhase = AllZone.getPhaseHandler().getPhase();
             for (final String s : this.getPhases()) {
                 if (s.equals(currPhase)) {
                     isPhase = true;
@@ -326,7 +326,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.isPwAbility()) {
             // Planeswalker abilities can only be activated as Sorceries
-            if (!Phase.canCastSorcery(activator)) {
+            if (!PhaseHandler.canCastSorcery(activator)) {
                 return false;
             }
 

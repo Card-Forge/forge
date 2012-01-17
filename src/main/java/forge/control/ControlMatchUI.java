@@ -122,7 +122,7 @@ public class ControlMatchUI {
         AllZone.getStack().deleteObservers();
         AllZone.getGameLog().deleteObservers();
         AllZone.getInputControl().deleteObservers();
-        AllZone.getPhase().deleteObservers();
+        AllZone.getPhaseHandler().deleteObservers();
 
     }
 

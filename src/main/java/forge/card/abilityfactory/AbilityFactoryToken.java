@@ -284,17 +284,17 @@ public class AbilityFactoryToken extends AbilityFactory {
         }
 
         // Don't generate tokens without haste before main 2 if possible
-        if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2)
-                && AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) && !haste
+        if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)
+                && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !haste
                 && !mapParams.containsKey("ActivationPhases")) {
             return false;
         }
-        if ((AllZone.getPhase().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhase().isBefore(
+        if ((AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler().isBefore(
                 Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
                 && !mapParams.containsKey("ActivationPhases") && !AbilityFactory.isSorcerySpeed(sa)) {
             return false;
         }
-        if ((AllZone.getPhase().isAfter(Constant.Phase.COMBAT_BEGIN) || AllZone.getPhase().isPlayerTurn(
+        if ((AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN) || AllZone.getPhaseHandler().isPlayerTurn(
                 AllZone.getHumanPlayer()))
                 && oneShot) {
             return false;
@@ -349,7 +349,7 @@ public class AbilityFactoryToken extends AbilityFactory {
             return chance;
         }
 
-        if (AllZone.getPhase().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             return ((r.nextFloat() < .95) && chance);
         }
         if (sa.isAbility()) {

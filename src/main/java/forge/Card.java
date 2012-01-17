@@ -306,9 +306,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * Sets wether or not this card is transformable, but non-flip and not doublefaced.
+     * Sets whether or not this card is transformable, but non-flip and not double-faced.
      * 
-     * @param isTransformable0
+     * @param otherTransformable0 a String
      */
     public final void setTransformable(final String otherTransformable0) {
         this.otherTransformable = otherTransformable0;
@@ -1598,7 +1598,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     // set activating player for base spell ability
                     c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
                     // Any trigger should cause the phase not to skip
-                    AllZone.getPhase().setSkipPhase(false);
+                    AllZone.getPhaseHandler().setSkipPhase(false);
                     AllZone.getGameAction().playCardNoCost(c);
                 }
             }
@@ -6927,11 +6927,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
-            if (!(this.getTurnInZone() == AllZone.getPhase().getTurn())) {
+            if (!(this.getTurnInZone() == AllZone.getPhaseHandler().getTurn())) {
                 return false;
             }
         } else if (property.startsWith("notEnteredBattlefieldThisTurn")) {
-            if (this.getTurnInZone() == AllZone.getPhase().getTurn()) {
+            if (this.getTurnInZone() == AllZone.getPhaseHandler().getTurn()) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {

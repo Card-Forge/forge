@@ -46,7 +46,7 @@ import forge.Counters;
 import forge.GameActionUtil;
 import forge.HandSizeOp;
 import forge.MyRandom;
-import forge.Phase;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityfactory.AbilityFactory;
@@ -892,8 +892,8 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlayAI() {
-                if (AllZone.getPhase().isAfter(Constant.Phase.MAIN1)
-                        || AllZone.getPhase().isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.MAIN1)
+                        || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
                     return false;
                 }
                 return ComputerUtil.canPayCost(this);
@@ -935,7 +935,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
-                return Phase.canCastSorcery(sourceCard.getController()) && !AllZoneUtil.isCardInPlay(sourceCard);
+                return PhaseHandler.canCastSorcery(sourceCard.getController()) && !AllZoneUtil.isCardInPlay(sourceCard);
             }
 
         };
@@ -1026,7 +1026,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlayAI() {
 
-                if (AllZone.getPhase().isBefore(Constant.Phase.MAIN2)) {
+                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)) {
                     return false;
                 }
 
@@ -1185,7 +1185,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
-                return super.canPlay() && Phase.canCastSorcery(sourceCard.getController());
+                return super.canPlay() && PhaseHandler.canCastSorcery(sourceCard.getController());
             }
 
             @Override
@@ -1259,7 +1259,7 @@ public class CardFactoryUtil {
                     return true;
                 }
 
-                return Phase.canCastSorcery(sourceCard.getOwner());
+                return PhaseHandler.canCastSorcery(sourceCard.getOwner());
             }
 
             @Override
@@ -1332,7 +1332,7 @@ public class CardFactoryUtil {
             // An animated artifact equipmemt can't equip a creature
             @Override
             public boolean canPlay() {
-                return super.canPlay() && !sourceCard.isCreature() && Phase.canCastSorcery(sourceCard.getController());
+                return super.canPlay() && !sourceCard.isCreature() && PhaseHandler.canCastSorcery(sourceCard.getController());
             }
 
             @Override
@@ -1352,7 +1352,7 @@ public class CardFactoryUtil {
                     @Override
                     public boolean addCard(final Card c) {
                         return c.isCreature()
-                                && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c) && AllZone.getPhase()
+                                && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c) && AllZone.getPhaseHandler()
                                         .is(Constant.Phase.MAIN2)))
                                 && (((c.getNetDefense() + tough) > 0) || sourceCard.getName().equals("Skullclamp"));
                     }
@@ -3037,9 +3037,9 @@ public class CardFactoryUtil {
 
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
-            final String cPhase = AllZone.getPhase().getPhase();
+            final String cPhase = AllZone.getPhaseHandler().getPhase();
             if ((cPhase.equals(Constant.Phase.MAIN1) || cPhase.equals(Constant.Phase.MAIN2))
-                    && AllZone.getPhase().getPlayerTurn().equals(cardController)) {
+                    && AllZone.getPhaseHandler().getPlayerTurn().equals(cardController)) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
