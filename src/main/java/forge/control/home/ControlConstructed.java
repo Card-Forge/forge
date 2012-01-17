@@ -490,7 +490,6 @@ public class ControlConstructed {
      */
     public Object[] getThemeNames() {
         themeNames = new ArrayList<String>();
-        themeNames.add("Random");
         for (String s : GenerateThemeDeck.getThemeNames()) {
             themeNames.add(s);
         }
