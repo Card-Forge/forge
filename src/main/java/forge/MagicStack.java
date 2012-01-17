@@ -33,6 +33,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
@@ -1001,6 +1002,7 @@ public class MagicStack extends MyObservable {
 
             //Move rebounding card to exile
             AllZone.getGameAction().exile(source);
+            System.out.println("rebound1: " + source);
 
             //Setup a Rebound-trigger
             final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() + " without paying it's manacost.", source, true);
@@ -1008,9 +1010,15 @@ public class MagicStack extends MyObservable {
             final AbilityActivated trigAb = new AbilityActivated(source, "0") {
 
                 private static final long serialVersionUID = 7497175394128633122L;
+                
+                @Override
+                public boolean doTrigger(final boolean mandatory) {
+                    return true;
+                }
 
                 @Override
                 public void resolve() {
+                    System.out.println("rebound2: " + source);
 
                     //If the card can't be cast because of lack of targets, it remains in exile.
                     //Provision for Cast Through Time
@@ -1030,8 +1038,21 @@ public class MagicStack extends MyObservable {
                     if (!hasFoundPossibleSA) {
                         return;
                     }
-
-                    AllZone.getGameAction().playCardNoCost(source);
+                    if(source.getOwner().isHuman()) {
+                        AllZone.getGameAction().playCardNoCost(source);
+                    } else {
+                        System.out.println("rebound: " + source);
+                        for (SpellAbility s : source.getSpells()) {
+                            if (s instanceof Spell) {
+                                Spell spell = (Spell) s;
+                                if (spell.canPlayFromEffectAI(false, true)) {
+                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(s);
+                                    break;
+                                }
+                            }
+                        }
+                        
+                    }
                     AllZone.getGameAction().moveToGraveyard(source);
                 }
             };
