@@ -11,7 +11,6 @@ import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
@@ -26,6 +25,7 @@ import forge.control.home.ControlDraft;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
+import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -134,8 +134,8 @@ public class ViewDraft extends JPanel {
         lstHumanDecks = new DeckLister(GameType.Draft, exit);
         lstHumanDecks.setDecks(human.toArray(new Deck[0]));
         lstAI = new JList(ai);
-        this.add(new JScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
-        this.add(new JScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
+        this.add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
+        this.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
         lstAI.setSelectedIndex(0);
 
