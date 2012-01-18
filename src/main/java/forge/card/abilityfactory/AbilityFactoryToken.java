@@ -206,6 +206,14 @@ public class AbilityFactoryToken extends AbilityFactory {
             public String getStackDescription() {
                 return AbilityFactoryToken.this.doStackDescription(this);
             }
+
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryToken.this.tokenDoTriggerAINoCost(this, mandatory);
+                }
+                return AbilityFactoryToken.this.tokenDoTriggerAI(this, mandatory);
+            }
         };
 
         return spToken;
@@ -374,6 +382,22 @@ public class AbilityFactoryToken extends AbilityFactory {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
+
+        return tokenDoTriggerAINoCost(sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * tokenDoTriggerAINoCost.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private boolean tokenDoTriggerAINoCost(final SpellAbility sa, final boolean mandatory) {
 
         return true;
     }
