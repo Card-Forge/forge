@@ -4,11 +4,11 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 K:Fading:1
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump | RememberTargets$ True
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | Description$ Enchanted creature gets +3/+2.
-# The trigger part of this will not work until an issue with Auras and LastKnownInfo is sorted out. TODO
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME leaves the battlefield, destroy enchanted creature. That creature can't be regenerated.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Enchanted | NoRegen$ True
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ Remembered | NoRegen$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_dementia.jpg
