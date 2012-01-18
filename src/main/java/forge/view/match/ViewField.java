@@ -747,7 +747,11 @@ public class ViewField extends FRoundedPanel {
         private boolean enabled = true;
         private boolean active = false;
         private boolean hover = false;
-        private final Color hoverBG = Singletons.getView().getSkin().getColor("hover");
+        private final Color defaultBG;
+        private final Color hoverBG;
+        private final Color pressedBG;
+        private final Color textColor;
+
 
         /**
          * Shows phase labels, handles repainting and on/off states. A
@@ -761,6 +765,13 @@ public class ViewField extends FRoundedPanel {
             super(txt);
             this.setHorizontalTextPosition(SwingConstants.CENTER);
             this.setHorizontalAlignment(SwingConstants.CENTER);
+            
+            defaultBG = ViewField.this.skin.getColor("active");
+            hoverBG = ViewField.this.skin.getColor("hover");
+            pressedBG = ViewField.this.skin.getColor("inactive");
+            textColor = ViewField.this.skin.getColor("text");
+            
+            this.setForeground(textColor);
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
@@ -838,11 +849,11 @@ public class ViewField extends FRoundedPanel {
 
             // Set color according to skip or active or hover state of label
             if (this.hover) {
-                c = this.hoverBG;
+                c = PhaseLabel.this.hoverBG;
             } else if (this.enabled) {
-                c = Color.green;
+                c = PhaseLabel.this.defaultBG;
             } else {
-                c = Color.red;
+                c = PhaseLabel.this.pressedBG;
             }
 
             if (!this.active && !this.hover) {
