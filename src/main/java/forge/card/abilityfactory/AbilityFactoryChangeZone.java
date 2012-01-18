@@ -2027,7 +2027,7 @@ public final class AbilityFactoryChangeZone {
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
-        if (origin.equals(Zone.Hand)) {
+        if (origin.equals(Zone.Hand) || origin.equals(Zone.Library)) {
             final Target tgt = af.getAbTgt();
             if (tgt != null) {
                 if (AllZone.getHumanPlayer().getCardsIn(Zone.Hand).isEmpty()
@@ -2037,8 +2037,6 @@ public final class AbilityFactoryChangeZone {
                 tgt.resetTargets();
                 tgt.addTarget(AllZone.getHumanPlayer());
             }
-        } else if (origin.equals(Zone.Library)) {
-
         } else if (origin.equals(Zone.Battlefield)) {
             // this statement is assuming the AI is trying to use this spell
             // offensively
