@@ -305,6 +305,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 if (ComputerUtil.canPayCost(aiPaid) && !c.hasKeyword("Indestructible")) {
                                     ComputerUtil.playNoStack(aiPaid);
                                 } else {
+                                    if (c.getName().equals("Cosmic Horror")) {
+                                        controller.addDamage(7, c);
+                                    }
                                     AllZone.getGameAction().destroy(c);
                                 }
                             }
