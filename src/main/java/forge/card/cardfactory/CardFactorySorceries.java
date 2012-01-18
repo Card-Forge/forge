@@ -1158,7 +1158,7 @@ public class CardFactorySorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         } // *************** END ************ END **************************
-
+/*
         // *************** START *********** START **************************
         else if (cardName.equals("Mind Funeral")) {
             final Cost cost = new Cost("1 U B", cardName, false);
@@ -1203,7 +1203,7 @@ public class CardFactorySorceries {
             }; // SpellAbility
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
-
+*/
         // *************** START *********** START **************************
         else if (cardName.equals("Haunting Echoes")) {
             final Cost cost = new Cost("3 B B", cardName, false);
