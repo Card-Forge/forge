@@ -108,10 +108,10 @@ public class FSkin {
             final int w = image.getWidth();
             this.setImage("bg.splash", image.getSubimage(0, 0, w, h - 100));
 
-            this.setColor("progress1", this.getColorFromPixel(image.getRGB(25, h - 75)));
-            this.setColor("progress2", this.getColorFromPixel(image.getRGB(25, h - 25)));
-            this.setColor("progress3", this.getColorFromPixel(image.getRGB(75, h - 75)));
-            this.setColor("progress4", this.getColorFromPixel(image.getRGB(75, h - 25)));
+            this.setColor("emptyBackground", this.getColorFromPixel(image.getRGB(25, h - 75)));
+            this.setColor("emptyText", this.getColorFromPixel(image.getRGB(75, h - 75)));
+            this.setColor("fullBackground", this.getColorFromPixel(image.getRGB(25, h - 25)));
+            this.setColor("fullText", this.getColorFromPixel(image.getRGB(75, h - 25)));
         } catch (final IOException e) {
             System.err.println(this.notfound + this.spriteFile);
         }
