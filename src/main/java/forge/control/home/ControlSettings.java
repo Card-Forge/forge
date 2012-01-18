@@ -152,6 +152,7 @@ public class ControlSettings {
     private void updateSkin() throws Exception {
         String name = view.getLstChooseSkin().getSelectedValue().toString();
         FSkin skin = new FSkin(name);
+        skin.loadFontAndImages();
 
         prefs.setSkin(name);
         Singletons.getView().setSkin(skin);
