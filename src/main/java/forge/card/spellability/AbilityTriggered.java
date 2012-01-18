@@ -23,6 +23,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.ZCTrigger;
+import forge.card.CardCharacteristics;
 
 /**
  * <p>
@@ -89,7 +90,13 @@ public class AbilityTriggered extends Ability implements Command {
             this.restrictions = ((AbilityTriggered) this.todo).restrictions;
         } else {
             this.setStackDescription("Triggered ability: " + sourceCard + " " + situation);
-            this.restrictions = new String[] { "named " + sourceCard.getName() };
+            if (!sourceCard.isInAlternateState()) {
+                this.restrictions = new String[] { "named " + sourceCard.getName() };
+            }
+            else {
+                CardCharacteristics origChar = sourceCard.getState("Original");
+                this.restrictions = new String[] { "named " + origChar.getName() };
+            }
         }
     }
 
