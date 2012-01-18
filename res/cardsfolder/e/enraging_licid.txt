@@ -1,0 +1,30 @@
+Name:Enraging Licid
+ManaCost:1 R
+Types:Creature Licid
+Text:no text
+PT:1/1
+A:AB$ SetState | Cost$ R T | Defined$ Self | NewState$ Alternate | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay R to end this effect.
+SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
+#If the value of AlternateMode isn't Flip or DoubleFaced, it will be the name of the state defined below, so you can switch to it with SetState+NewState$.The name of the first state defined is always "Original".
+AlternateMode:Alternate
+
+#Shared
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enraging_licid.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/171.jpg
+Oracle:{R}, {T}: Enraging Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {R} to end this effect.\nEnchanted creature has haste.
+
+ALTERNATE
+
+Name:Enraging Licid
+ManaCost:1 R
+Colors:red
+Types:Enchantment Aura
+Text:Enchanted creature has haste.
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | Description$ Enchanted creature has haste.
+A:AB$ SetState | Cost$ R | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
+
+End
