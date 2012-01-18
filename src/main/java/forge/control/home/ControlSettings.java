@@ -157,8 +157,9 @@ public class ControlSettings {
         prefs.setSkin(name);
         Singletons.getView().setSkin(skin);
         ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
-        // TODO This should work, but it doesn't. :|  Doublestrike 15-12-11
-        view.getParentView().showSettingsMenu();
+        
+        // changeState creates a new HomeTopLevel, so we can't just use the view object we already have.
+        ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showSettingsMenu();
 
         prefs.save();
     }
