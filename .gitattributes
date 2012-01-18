@@ -3041,6 +3041,7 @@ res/cardsfolder/f/forbidden_alchemy.txt -text
 res/cardsfolder/f/forbidden_lore.txt svneol=native#text/plain
 res/cardsfolder/f/forbidden_orchard.txt svneol=native#text/plain
 res/cardsfolder/f/forbidding_watchtower.txt svneol=native#text/plain
+res/cardsfolder/f/force_bubble.txt -text
 res/cardsfolder/f/force_of_nature.txt svneol=native#text/plain
 res/cardsfolder/f/force_of_savagery.txt svneol=native#text/plain
 res/cardsfolder/f/force_of_will.txt svneol=native#text/plain

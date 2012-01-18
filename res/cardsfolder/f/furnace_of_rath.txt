@@ -2,7 +2,7 @@ Name:Furnace of Rath
 ManaCost:1 R R R
 Types:Enchantment
 Text:no text
-R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Card.Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+R:Event$ DamageDone | ValidSource$ Card | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
 SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
