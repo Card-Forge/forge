@@ -40,6 +40,26 @@ Fixes/Features:
 - Removed FSkin access from AllZone, all FSkin access now through Singletons.getView().
 - Removed "Random" from the list of themes (it didn't work and there is the button below anyway).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- A few aesthetic and organizational updates around the Forge initialization process.
+- ControlAllUI renamed to FControl to match project organization.
+- Updated a few quest decks.
+- Converted Cranial Extraction to script.
+- Added AI support to Rebound.
+- Fixed Grozoth.
+- Added canPlayFromEffectAI entries to AF GainLife and LoseLife.
+- Converted Maelstrom Pulse to script.
+- Set all TapsForMana triggers that execute a mana ability to static to conform with rule 605.4a.
+- Converted Erratic Explosion to script.
+- Little fix
+- hook the PhaseLabels up to the skin
+- fix crash when changing skins from Settings
+- fix so that after picking a new skin, you are still on the Settings View instead of on the Constructed View. (Fixes the TODO Doublestrike had in there.)
+- changes to fix issues with zcTriggers for transformed cards
+- Fixed Smoldering Spires.
+- Fixed Cosmic Horror.
+- General fix: DealDamage abilities that targeted "target creature or player" can now target planeswalkers as well, either using TgtCP or implicitly added Planeswalker type.
+- Solved splash swatch switch snafu.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -76,6 +96,11 @@ Vorapede
 Zombie Apocalypse
 
 Vault of the Archangel
+Flayer of the Hatebound
+Chant of the Skifsang
+Lingering Souls
+Markov Blademaster
+Stromkirk Captain
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -90,6 +115,20 @@ Revelation
 Telepathy
 Rats' Feast
 Summit Apes
+Seer's Vision
+Reality Acid
+Calming Licid
+Convulsing Licid
+Corrupting Licid
+Dominating Licid
+Enraging Licid
+Gliding Licid
+Leeching Licid
+Nurturing Licid
+Quickening Licid
+Stinging Licid
+Tempting Licid
+Transmogrifying Licid
 
 
 end
