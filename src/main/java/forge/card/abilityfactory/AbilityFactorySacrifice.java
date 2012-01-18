@@ -844,7 +844,7 @@ public class AbilityFactorySacrifice {
             card.clearRemembered();
         }
 
-        list = list.getValidCards(valid.split(","), card.getController(), card);
+        list = AbilityFactory.filterListByType(list, valid, sa);
 
         for (int i = 0; i < list.size(); i++) {
             if (AllZone.getGameAction().sacrifice(list.get(i)) && remSacrificed) {

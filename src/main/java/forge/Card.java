@@ -6789,7 +6789,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
-            if (!this.getEnchantedBy().contains(source)) {
+            if (!this.getEnchantedBy().contains(source) && !this.equals(source.getEnchanting())) {
                 return false;
             }
         } else if (property.startsWith("NotEnchantedBy")) {
