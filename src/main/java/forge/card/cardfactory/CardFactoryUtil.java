@@ -485,6 +485,9 @@ public class CardFactoryUtil {
         if (c.hasKeyword("Wither")) {
             value += power * 10;
         }
+        if (c.hasKeyword("Infect")) {
+            value += power * 15;
+        }
         value += c.getKeywordMagnitude("Rampage");
         value += c.getKeywordMagnitude("Annihilator") * 50;
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is "
