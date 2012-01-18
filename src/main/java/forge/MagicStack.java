@@ -1010,7 +1010,7 @@ public class MagicStack extends MyObservable {
             final AbilityActivated trigAb = new AbilityActivated(source, "0") {
 
                 private static final long serialVersionUID = 7497175394128633122L;
-                
+
                 @Override
                 public boolean doTrigger(final boolean mandatory) {
                     return true;
@@ -1038,7 +1038,7 @@ public class MagicStack extends MyObservable {
                     if (!hasFoundPossibleSA) {
                         return;
                     }
-                    if(source.getOwner().isHuman()) {
+                    if (source.getOwner().isHuman()) {
                         AllZone.getGameAction().playCardNoCost(source);
                     } else {
                         System.out.println("rebound: " + source);
@@ -1051,7 +1051,7 @@ public class MagicStack extends MyObservable {
                                 }
                             }
                         }
-                        
+
                     }
                     AllZone.getGameAction().moveToGraveyard(source);
                 }

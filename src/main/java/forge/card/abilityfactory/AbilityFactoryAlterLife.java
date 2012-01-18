@@ -133,7 +133,7 @@ public class AbilityFactoryAlterLife {
             public void resolve() {
                 AbilityFactoryAlterLife.gainLifeResolve(this.af, this);
             }
-            
+
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
@@ -336,7 +336,7 @@ public class AbilityFactoryAlterLife {
 
         return (randomReturn && chance);
     }
-    
+
     /**
      * <p>
      * gainLifeDoTriggerAI.
@@ -523,7 +523,7 @@ public class AbilityFactoryAlterLife {
             public void resolve() {
                 AbilityFactoryAlterLife.loseLifeResolve(this.af, this);
             }
-            
+
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
@@ -722,7 +722,7 @@ public class AbilityFactoryAlterLife {
 
         return (randomReturn && chance);
     }
-    
+
     /**
      * <p>
      * loseLifeDoTriggerAI.

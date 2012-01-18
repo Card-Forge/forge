@@ -765,12 +765,12 @@ public class ViewField extends FRoundedPanel {
             super(txt);
             this.setHorizontalTextPosition(SwingConstants.CENTER);
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            
+
             defaultBG = ViewField.this.skin.getColor("active");
             hoverBG = ViewField.this.skin.getColor("hover");
             pressedBG = ViewField.this.skin.getColor("inactive");
             textColor = ViewField.this.skin.getColor("text");
-            
+
             this.setForeground(textColor);
 
             this.addMouseListener(new MouseAdapter() {

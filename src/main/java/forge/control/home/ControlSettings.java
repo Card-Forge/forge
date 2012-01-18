@@ -157,7 +157,7 @@ public class ControlSettings {
         prefs.setSkin(name);
         Singletons.getView().setSkin(skin);
         ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
-        
+
         // changeState creates a new HomeTopLevel, so we can't just use the view object we already have.
         ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showSettingsMenu();
 
