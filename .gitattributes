@@ -4031,6 +4031,7 @@ res/cardsfolder/h/hurricane.txt svneol=native#text/plain
 res/cardsfolder/h/hush.txt svneol=native#text/plain
 res/cardsfolder/h/hyalopterous_lemure.txt svneol=native#text/plain
 res/cardsfolder/h/hydra_omnivore.txt svneol=native#text/plain
+res/cardsfolder/h/hydroblast.txt -text
 res/cardsfolder/h/hydromorph_guardian.txt svneol=native#text/plain
 res/cardsfolder/h/hydromorph_gull.txt svneol=native#text/plain
 res/cardsfolder/h/hyena_umbra.txt svneol=native#text/plain
@@ -6495,6 +6496,7 @@ res/cardsfolder/p/pyre_zombie.txt svneol=native#text/plain
 res/cardsfolder/p/pyretic_ritual.txt svneol=native#text/plain
 res/cardsfolder/p/pyric_salamander.txt svneol=native#text/plain
 res/cardsfolder/p/pyrite_spellbomb.txt svneol=native#text/plain
+res/cardsfolder/p/pyroblast.txt -text
 res/cardsfolder/p/pyroclasm.txt svneol=native#text/plain
 res/cardsfolder/p/pyroclast_consul.txt svneol=native#text/plain
 res/cardsfolder/p/pyrohemia.txt svneol=native#text/plain
