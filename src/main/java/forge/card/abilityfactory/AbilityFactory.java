@@ -1804,7 +1804,8 @@ public class AbilityFactory {
                 }
             }
             for (final SpellAbility s : sas) {
-                final Player p = s.getSourceCard().getController();
+                final Player p = s.getActivatingPlayer();
+                //final Player p = s.getSourceCard().getController();
                 if (!players.contains(p)) {
                     players.add(p);
                 }

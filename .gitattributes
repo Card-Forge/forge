@@ -339,6 +339,7 @@ res/cardsfolder/a/arc_runner.txt svneol=native#text/plain
 res/cardsfolder/a/arc_slogger.txt svneol=native#text/plain
 res/cardsfolder/a/arc_trail.txt svneol=native#text/plain
 res/cardsfolder/a/arcades_sabboth.txt svneol=native#text/plain
+res/cardsfolder/a/arcane_denial.txt -text
 res/cardsfolder/a/arcane_laboratory.txt -text
 res/cardsfolder/a/arcane_sanctum.txt svneol=native#text/plain
 res/cardsfolder/a/arcane_spyglass.txt svneol=native#text/plain
