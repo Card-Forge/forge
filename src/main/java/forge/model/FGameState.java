@@ -39,7 +39,8 @@ import forge.card.trigger.TriggerHandler;
 import forge.game.GameSummary;
 
 /**
- * Represents the Forge Game State.
+ * Represents the state of a <i>single game</i> and is
+ * "cleaned up" at each new game.
  */
 public class FGameState {
 

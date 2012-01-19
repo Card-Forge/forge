@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,15 +25,14 @@ import java.util.Map;
 import forge.game.GameSummary;
 
 /**
- * <p>
- * MatchState class.
- * </p>
+ * Represents state of match <i>as a whole</i> - that is, not
+ * single games, but the entire set.
  * 
  * @author Forge
  * @version $Id$
  */
 
-public class MatchState {
+public class FMatchState {
 
     /** The Constant GAMES_PER_MATCH. */
     public static final int GAMES_PER_MATCH = 3;
@@ -108,7 +107,7 @@ public class MatchState {
             maxWins = Math.max(maxWins, win);
         }
 
-        return (maxWins >= MatchState.MIN_GAMES_TO_WIN_MATCH) || (totalGames >= MatchState.GAMES_PER_MATCH);
+        return (maxWins >= FMatchState.MIN_GAMES_TO_WIN_MATCH) || (totalGames >= FMatchState.GAMES_PER_MATCH);
     }
 
     /**
@@ -135,7 +134,7 @@ public class MatchState {
      * @return true, if is match won by
      */
     public final boolean isMatchWonBy(final String name) {
-        return this.countGamesWonBy(name) >= MatchState.MIN_GAMES_TO_WIN_MATCH;
+        return this.countGamesWonBy(name) >= FMatchState.MIN_GAMES_TO_WIN_MATCH;
     }
 
     /**

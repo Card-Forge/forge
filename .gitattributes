@@ -10731,7 +10731,6 @@ src/main/java/forge/IPlayerZone.java svneol=native#text/plain
 src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/ImagePreviewPanel.java svneol=native#text/plain
 src/main/java/forge/MagicStack.java svneol=native#text/plain
-src/main/java/forge/MatchState.java svneol=native#text/plain
 src/main/java/forge/Move.java svneol=native#text/plain
 src/main/java/forge/MyButton.java svneol=native#text/plain
 src/main/java/forge/MyObservable.java svneol=native#text/plain
@@ -11029,6 +11028,7 @@ src/main/java/forge/item/ItemPoolView.java -text
 src/main/java/forge/item/package-info.java -text
 src/main/java/forge/model/BuildInfo.java -text
 src/main/java/forge/model/FGameState.java -text
+src/main/java/forge/model/FMatchState.java svneol=native#text/plain
 src/main/java/forge/model/FModel.java svneol=native#text/plain
 src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 src/main/java/forge/model/package-info.java svneol=native#text/plain

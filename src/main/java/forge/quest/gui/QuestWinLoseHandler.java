@@ -31,7 +31,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.MatchState;
 import forge.Constant.Zone;
 import forge.MyRandom;
 import forge.Player;
@@ -48,6 +47,7 @@ import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.model.FMatchState;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestUtil;
@@ -81,7 +81,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private final String constraintsCards = "w 95%!, h 330px!, gap 0 0 0 20px";
 
     private class CommonObjects {
-        private MatchState matchState;
+        private FMatchState matchState;
         private QuestData qData;
         private QuestEvent qEvent;
     }

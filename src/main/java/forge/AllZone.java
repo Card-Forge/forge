@@ -31,6 +31,7 @@ import forge.game.GameSummary;
 import forge.game.limited.CardRatings;
 import forge.gui.input.InputControl;
 import forge.model.FGameState;
+import forge.model.FMatchState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
@@ -80,7 +81,7 @@ public final class AllZone {
     private static final InputControl INPUT_CONTROL = new InputControl(Singletons.getModel());
 
     /** */
-    private static MatchState matchState = new MatchState();
+    private static FMatchState matchState = new FMatchState();
 
     // initialized at Runtime since it has to be the last object constructed
 
@@ -649,7 +650,7 @@ public final class AllZone {
      * 
      * @return the matchState
      */
-    public static MatchState getMatchState() {
+    public static FMatchState getMatchState() {
         return AllZone.matchState;
     }
 
