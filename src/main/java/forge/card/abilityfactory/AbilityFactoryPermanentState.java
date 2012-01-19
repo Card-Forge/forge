@@ -1561,7 +1561,7 @@ public class AbilityFactoryPermanentState {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(AllZone.getHumanPlayer());
             validTappables = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
         }
 
@@ -1661,10 +1661,6 @@ public class AbilityFactoryPermanentState {
             return false;
         }
 
-        if (mandatory) {
-            return true;
-        }
-
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
 
@@ -1673,7 +1669,19 @@ public class AbilityFactoryPermanentState {
             valid = params.get("ValidCards");
         }
 
-        final CardList validTappables = AbilityFactoryPermanentState.getTapAllTargets(valid, source);
+        CardList validTappables = AbilityFactoryPermanentState.getTapAllTargets(valid, source);
+
+        final Target tgt = af.getAbTgt();
+
+        if (tgt != null) {
+            tgt.resetTargets();
+            tgt.addTarget(AllZone.getHumanPlayer());
+            validTappables = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+        }
+
+        if (mandatory) {
+            return true;
+        }
 
         final Random r = MyRandom.getRandom();
         boolean rr = false;
@@ -1691,7 +1699,7 @@ public class AbilityFactoryPermanentState {
             final CardList compy = validTappables.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card c) {
-                    return c.getController().isHuman();
+                    return c.getController().isComputer();
                 }
             });
             if (human.size() > compy.size()) {

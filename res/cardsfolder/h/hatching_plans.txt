@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw three cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 3
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:SacMe:5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hatching_plans.jpg
