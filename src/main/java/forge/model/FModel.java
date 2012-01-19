@@ -28,7 +28,6 @@ import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import arcane.util.MultiplexOutputStream;
 import forge.Constant;
 import forge.HttpUtil;
-import forge.ImageCache;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -94,7 +93,6 @@ public class FModel {
         Constant.Runtime.DEV_MODE[0] = this.preferences.isDeveloperMode();
         Constant.Runtime.UPLOAD_DRAFT[0] = this.preferences.isUploadDraftAI();
         Constant.Runtime.RANDOM_FOIL[0] = this.preferences.isRandCFoil();
-        ImageCache.setScaleLargerThanOriginal(preferences.isScaleLargerThanOriginal());
         /////////
 
         // Instantiate pinger

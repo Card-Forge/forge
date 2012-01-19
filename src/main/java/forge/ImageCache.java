@@ -70,9 +70,6 @@ public class ImageCache {
     /** Constant <code>TAPPED="#Tapped"</code>. */
     private static final String TOKEN = "#Token", NORMAL = "#Normal", TAPPED = "#Tapped";
 
-    /** Constant <code>scaleLargerThanOriginal=true</code>. */
-    private static boolean scaleLargerThanOriginal = true;
-
     static {
         IMAGE_CACHE = CacheBuilder.newBuilder()
                                   .softValues()
@@ -179,7 +176,7 @@ public class ImageCache {
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling, scaling option in menu
         // ?
-        if ((scale > 1) && !ImageCache.isScaleLargerThanOriginal()) {
+        if ((scale > 1) && !Singletons.getModel().getPreferences().isScaleLargerThanOriginal()) {
             scale = 1;
         }
 
@@ -205,9 +202,8 @@ public class ImageCache {
         }
 
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
-        // here would be the place to limit the scaling, scaling option in menu
-        // ?
-        if ((scale > 1) && !ImageCache.isScaleLargerThanOriginal()) {
+        // here would be the place to limit the scaling option in menu ?
+        if ((scale > 1) && !Singletons.getModel().getPreferences().isScaleLargerThanOriginal()) {
             scale = 1;
         }
 
@@ -429,24 +425,5 @@ public class ImageCache {
      */
     public static void clear() {
         ImageCache.IMAGE_CACHE.invalidateAll();
-    }
-
-    /**
-     * Checks if is scale larger than original.
-     * 
-     * @return the scaleLargerThanOriginal
-     */
-    public static boolean isScaleLargerThanOriginal() {
-        return ImageCache.scaleLargerThanOriginal;
-    }
-
-    /**
-     * Sets the scale larger than original.
-     * 
-     * @param scaleLargerThanOriginal0
-     *            the scaleLargerThanOriginal0 to set
-     */
-    public static void setScaleLargerThanOriginal(final boolean scaleLargerThanOriginal0) {
-        ImageCache.scaleLargerThanOriginal = scaleLargerThanOriginal0;
     }
 }

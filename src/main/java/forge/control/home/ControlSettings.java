@@ -9,7 +9,6 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.AllZone;
 import forge.Constant;
-import forge.ImageCache;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
@@ -67,7 +66,6 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbScaleLarger().isSelected();
                 prefs.setScaleLargerThanOriginal(toggle);
-                ImageCache.setScaleLargerThanOriginal(toggle);
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
