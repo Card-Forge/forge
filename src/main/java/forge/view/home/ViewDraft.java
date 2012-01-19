@@ -1,6 +1,7 @@
 package forge.view.home;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -8,11 +9,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -25,6 +29,9 @@ import forge.control.home.ControlDraft;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
+import forge.view.toolbox.FButton;
+import forge.view.toolbox.FOverlay;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
@@ -34,14 +41,14 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewDraft extends JPanel {
-    private FSkin skin;
-    private ControlDraft control;
-    private HomeTopLevel parentView;
-    private JList lstAI;
-    private DeckLister lstHumanDecks;
-    private JTextPane tpnDirections;
+    private final FSkin skin;
+    private final ControlDraft control;
+    private final HomeTopLevel parentView;
+    private final JList lstAI;
+    private final DeckLister lstHumanDecks;
+    private final JTextPane tpnDirections;
+    private final JLabel lblDirections;
 
-    // Just for fun...maybe a waste of space :) Doublestrike 141211
     private String[] opponentNames = new String[] {
             "Abigail", "Ada", "Adeline", "Adriana", "Agatha", "Agnes", "Aileen", "Alba", "Alcyon",
             "Alethea", "Alice", "Alicia", "Alison", "Amanda", "Amelia", "Amy", "Andrea", "Angelina",
@@ -82,6 +89,24 @@ public class ViewDraft extends JPanel {
             "Stuart", "Terence", "Thomas", "Tim", "Tom", "Tony", "Victor", "Vincent", "Wallace",
             "Walter", "Wilfred", "William", "Winston"
     };
+
+    private final String instructions = "BOOSTER DRAFT MODE INSTRUCTIONS"
+            + "\r\n\r\n"
+            + "In a booster draft, several players (usually eight) are seated "
+            + "around a table and each player is given three booster packs."
+            + "\r\n\r\n"
+            + "Each player opens a pack, selects a card from it and passes the remaining "
+            + "cards to his or her left. Each player then selects one of the 14 remaining "
+            + "cards from the pack that was just passed to him or her, and passes the "
+            + "remaining cards to the left again. This continues until all of the cards "
+            + "are depleted. The process is repeated with the second and third packs, "
+            + "except that the cards are passed to the right in the second pack."
+            + "\r\n\r\n"
+            + "Players then build decks out of any of the cards that they selected "
+            + "during the drafting and add as many basic lands as they want."
+            + "\r\n\r\n"
+            + "(Credit: Wikipedia <http://en.wikipedia.org/wiki/Magic:_The_Gathering_formats#Booster_Draft>)";
+
     /**
      * Assembles swing components for "Draft" mode menu.
      * @param v0 (HomeTopLevel, parent view)
@@ -155,14 +180,12 @@ public class ViewDraft extends JPanel {
         tpnDirections.setFocusable(false);
         tpnDirections.setEditable(false);
         tpnDirections.setBorder(null);
-        tpnDirections.setText("Click here for draft mode instructions.");
+        tpnDirections.setText(instructions);
 
         StyledDocument doc = tpnDirections.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
-
-        add(tpnDirections, "w 80%, gap 10% 0 5% 5%, span 2 1, wrap");
 
         // Start button
         StartButton btnStart = new StartButton(parentView);
@@ -171,14 +194,46 @@ public class ViewDraft extends JPanel {
             public void mousePressed(MouseEvent e) { control.start(); }
         });
 
-        JPanel pnlButtonContainer = new JPanel();
+        final JPanel pnlButtonContainer = new JPanel();
         pnlButtonContainer.setOpaque(false);
-        this.add(pnlButtonContainer, "w 100%!, span 2 1");
+        this.add(pnlButtonContainer, "w 100%!, span 2 1, wrap");
 
         pnlButtonContainer.setLayout(new BorderLayout());
         pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
 
+        lblDirections = new JLabel("Click For Directions");
+        lblDirections.setFont(skin.getFont(16));
+        lblDirections.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDirections.setForeground(skin.getColor("text"));
+        this.add(lblDirections, "alignx center, span 2 1, gaptop 5%");
+
         control = new ControlDraft(this);
+    }
+
+    /** */
+    public void showDirections() {
+        final FOverlay overlay = AllZone.getOverlay();
+        final FButton btnClose = new FButton();
+        final FPanel pnlContainer = new FPanel();
+
+        btnClose.setAction(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                overlay.hideOverlay();
+            }
+        });
+        btnClose.setText("Close");
+
+        pnlContainer.setBorder(new LineBorder(skin.getColor("border"), 1));
+        pnlContainer.setBGTexture(new ImageIcon(skin.getImage("bg.texture")));
+        pnlContainer.setLayout(new MigLayout("insets 0, wrap"));
+        pnlContainer.add(tpnDirections, "w 90%, gap 5% 0 20px 0, wrap");
+        pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");
+
+        overlay.removeAll();
+        overlay.setLayout(new MigLayout("insets 0"));
+        overlay.add(pnlContainer, "w 50%, gap 25% 0 5% 5%, wrap");
+        overlay.showOverlay();
     }
 
     /** @return HomeTopLevel */
@@ -202,7 +257,7 @@ public class ViewDraft extends JPanel {
     }
 
     /** @return JTextArea */
-    public JTextPane getTpnDirections() {
-        return tpnDirections;
+    public JLabel getLblDirections() {
+        return lblDirections;
     }
 }

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.Constant;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.limited.BoosterDraft;
@@ -24,34 +25,41 @@ import forge.view.home.ViewDraft;
  *
  */
 public class ControlDraft {
-    private ViewDraft view;
-    private boolean directionsExpanded = false;
+    private final ViewDraft view;
+    private final MouseAdapter madDirections;
 
     /** @param v0 &emsp; ViewDraft */
     public ControlDraft(ViewDraft v0) {
         this.view = v0;
         updateHumanDecks();
 
-        this.view.getTpnDirections().addMouseListener(new MouseAdapter() {
+        madDirections = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (directionsExpanded) {
-                    hideDirections();
-                    directionsExpanded = false;
-                }
-                else {
-                    showDirections();
-                    directionsExpanded = true;
-                }
+                view.showDirections();
             }
-        });
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor("hover"));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor("text"));
+            }
+        };
+
+        addListeners();
+    }
+
+    private void addListeners() {
+        view.getLblDirections().addMouseListener(madDirections);
     }
 
     /** */
     public void setupDraft() {
         final DeckEditorDraft draft = new DeckEditorDraft();
 
-        // determine what kind of booster draft to run
+        // Determine what kind of booster draft to run
         final ArrayList<String> draftTypes = new ArrayList<String>();
         draftTypes.add("Full Cardpool");
         draftTypes.add("Block / Set");
@@ -113,30 +121,5 @@ public class ControlDraft {
         List<Deck> human = new ArrayList<Deck>();
         for (Deck[] d : temp) { human.add(d[0]); }
         view.getLstHumanDecks().setDecks(human.toArray(new Deck[0]));
-    }
-
-    private void showDirections() {
-        view.getTpnDirections().setText(
-                "Booster Draft Mode Instructions (Click to collapse)"
-                + "\r\n\r\n"
-                + "In a booster draft, several players (usually eight) are seated "
-                + "around a table and each player is given three booster packs."
-                + "\r\n\r\n"
-                + "Each player opens a pack, selects a card from it and passes the remaining "
-                + "cards to his or her left. Each player then selects one of the 14 remaining "
-                + "cards from the pack that was just passed to him or her, and passes the "
-                + "remaining cards to the left again. This continues until all of the cards "
-                + "are depleted. The process is repeated with the second and third packs, "
-                + "except that the cards are passed to the right in the second pack."
-                + "\r\n\r\n"
-                + "Players then build decks out of any of the cards that they selected "
-                + "during the drafting and add as many basic lands as they want."
-                + "\r\n\r\n"
-                + "(Credit: Wikipedia <http://en.wikipedia.org/wiki/Magic:_The_Gathering_formats#Booster_Draft>)"
-       );
-    }
-
-    private void hideDirections() {
-        view.getTpnDirections().setText("Click here for draft mode instructions.");
     }
 }

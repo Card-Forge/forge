@@ -15,6 +15,7 @@ import forge.GuiDownloadPrices;
 import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.BugzReporter;
 import forge.game.GameType;
@@ -29,7 +30,10 @@ import forge.view.home.ViewUtilities;
  */
 public class ControlUtilities {
     private ViewUtilities view;
-    private boolean licensingExpanded = false;
+    private final MouseAdapter madLicensing;
+    private final ActionListener actDeckEditor, actPicDownload, actSetDownload,
+        actQuestImages, actReportBug, actImportPictures, actHowToPlay, actDownloadPrices;
+
     /**
      * 
      * Controls logic and listeners for Utilities panel of the home screen.
@@ -38,52 +42,67 @@ public class ControlUtilities {
      */
     public ControlUtilities(ViewUtilities v0) {
         this.view = v0;
-        addListeners();
-    }
 
-    /** @return ViewUtilities */
-    public ViewUtilities getView() {
-        return view;
-    }
+        madLicensing = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                view.showLicensing();
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor("hover"));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor("text"));
+            }
+        };
 
-    /** */
-    public void addListeners() {
-        this.view.getBtnDownloadPics().addActionListener(new ActionListener() {
+        actDeckEditor = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                showDeckEditor(null, null);
+            }
+        };
+
+        actPicDownload = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 doDownloadPics();
             }
-        });
+        };
 
-        this.view.getBtnDownloadSetPics().addActionListener(new ActionListener() {
+        actSetDownload = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 doDownloadSetPics();
             }
-        });
+        };
 
-        this.view.getBtnDownloadQuestImages().addActionListener(new ActionListener() {
+        actQuestImages = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 doDownloadQuestImages();
             }
-        });
+        };
 
-        this.view.getBtnReportBug().addActionListener(new ActionListener() {
+        actReportBug = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final BugzReporter br = new BugzReporter();
                 br.setVisible(true);
             }
-        });
-        this.view.getBtnImportPictures().addActionListener(new ActionListener() {
+        };
+
+        actImportPictures = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final GuiImportPicture ip = new GuiImportPicture(null);
                 ip.setVisible(true);
             }
-        });
-        this.view.getBtnHowToPlay().addActionListener(new ActionListener() {
+        };
+
+        actHowToPlay = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final String text = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
@@ -97,35 +116,44 @@ public class ControlUtilities {
                 JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(Lang.HowTo.TITLE),
                         JOptionPane.INFORMATION_MESSAGE);
             }
-        });
-        this.view.getBtnDownloadPrices().addActionListener(new ActionListener() {
+        };
+
+        actDownloadPrices = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final GuiDownloadPrices gdp = new GuiDownloadPrices();
                 gdp.setVisible(true);
             }
-        });
+        };
 
-        this.view.getBtnDeckEditor().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                showDeckEditor(null, null);
-            }
-        });
+        addListeners();
+    }
 
-        this.view.getTpnLicensing().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (licensingExpanded) {
-                    hideLicenseInfo();
-                    licensingExpanded = false;
-                }
-                else {
-                    showLicenseInfo();
-                    licensingExpanded = true;
-                }
-            }
-        });
+    /** @return ViewUtilities */
+    public ViewUtilities getView() {
+        return view;
+    }
+
+    /** */
+    public void addListeners() {
+        this.view.getBtnDownloadPics().removeActionListener(actPicDownload);
+        this.view.getBtnDownloadPics().addActionListener(actPicDownload);
+        this.view.getBtnDownloadSetPics().removeActionListener(actSetDownload);
+        this.view.getBtnDownloadSetPics().addActionListener(actSetDownload);
+        this.view.getBtnDownloadQuestImages().removeActionListener(actQuestImages);
+        this.view.getBtnDownloadQuestImages().addActionListener(actQuestImages);
+        this.view.getBtnReportBug().removeActionListener(actReportBug);
+        this.view.getBtnReportBug().addActionListener(actReportBug);
+        this.view.getBtnImportPictures().removeActionListener(actImportPictures);
+        this.view.getBtnImportPictures().addActionListener(actImportPictures);
+        this.view.getBtnHowToPlay().removeActionListener(actHowToPlay);
+        this.view.getBtnHowToPlay().addActionListener(actHowToPlay);
+        this.view.getBtnDownloadPrices().removeActionListener(actDownloadPrices);
+        this.view.getBtnDownloadPrices().addActionListener(actDownloadPrices);
+        this.view.getBtnDeckEditor().removeActionListener(actDeckEditor);
+        this.view.getBtnDeckEditor().addActionListener(actDeckEditor);
+        this.view.getLblLicensing().removeMouseListener(madLicensing);
+        this.view.getLblLicensing().addMouseListener(madLicensing);
     }
 
     private void doDownloadPics() {
@@ -138,29 +166,6 @@ public class ControlUtilities {
 
     private void doDownloadQuestImages() {
         new GuiDownloadQuestImages(null);
-    }
-
-    private void showLicenseInfo() {
-        view.getTpnLicensing().setText(
-                "Forge License Information"
-                + "\r\n\r\n"
-                + "This program is free software : you can redistribute it and/or modify "
-                + "it under the terms of the GNU General Public License as published by "
-                + "the Free Software Foundation, either version 3 of the License, or "
-                + "(at your option) any later version."
-                + "\r\n\r\n"
-                + "This program is distributed in the hope that it will be useful, "
-                + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-                + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-                + "GNU General Public License for more details."
-                + "\r\n\r\n"
-                + "You should have received a copy of the GNU General Public License "
-                + "along with this program.  If not, see <http://www.gnu.org/licenses/>."
-       );
-    }
-
-    private void hideLicenseInfo() {
-        view.getTpnLicensing().setText("Click here for license information.");
     }
 
     /**
