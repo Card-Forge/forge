@@ -326,7 +326,8 @@ public class AbilityFactoryPump {
                 // is the creature blocked and the blocker would survive
                 if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS) && (attack > 0)
                         && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
-                        && (AllZone.getCombat().getBlockers(c) != null)
+                        && AllZone.getCombat().getBlockers(c) != null
+                        && !AllZone.getCombat().getBlockers(c).isEmpty()
                         && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
                     return true;
                 }
