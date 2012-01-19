@@ -2,14 +2,9 @@ Name:Illumination
 ManaCost:W W
 Types:Instant
 Text:(NOTE: This spell is rather buggy and should not be used at this time. When cast, it would cause a NPE. As a temporary fix, this card no longer has a drawback.)
-#
-# When Targeted can handle SpellAbilities along with Cards, this can be converted to the New SubAbilities
-# May also need a check in TgtCardManaCost to convert from SA to Card
-#
-A:SP$ Counter | Cost$ W W | TargetType$ Spell | TgtPrompt$ Select target Artifact or Enchantment spell | ValidTgts$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
-# | SubAbility$ DBGainLife
-# SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X
-# SVar:X:Count$TgtCardManaCost
+A:SP$ Counter | Cost$ W W | TargetType$ Spell | TgtPrompt$ Select target Artifact or Enchantment spell | ValidTgts$ Artifact,Enchantment | SubAbility$ DBGainLife | SpellDescription$ Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
+SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X
+SVar:X:Targeted$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illumination.jpg
