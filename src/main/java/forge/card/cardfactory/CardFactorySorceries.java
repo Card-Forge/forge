@@ -1161,7 +1161,6 @@ public class CardFactorySorceries {
             card.setSVar("PlayMain1", "TRUE");
         } // *************** END ************ END **************************
 
-        
         // *************** START *********** START **************************
         else if (cardName.equals("Fireball")) {
             /*
