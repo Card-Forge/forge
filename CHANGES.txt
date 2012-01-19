@@ -60,6 +60,34 @@ Fixes/Features:
 - General fix: DealDamage abilities that targeted "target creature or player" can now target planeswalkers as well, either using TgtCP or implicitly added Planeswalker type.
 - Solved splash swatch switch snafu.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added AI targeting to AF ChangeZoneAll if origin is library to support the ultimate of Jace, the Mind Sculptor.
+- Fixed rarity for Helvault
+- Added canPlayFromEffectAI to AF Token.
+- use FScrollPane instead of JScrollPane in ViewDraft so it uses the colors of the skin.
+- CheckStyle.
+- Fixed Parallax Dementia. Used Reality Acid tech.
+- Fixed Forethought Amulet.
+- Fixed Reality Acid.
+- Fixed Parallax Dementia.
+- Converted Explosive Revelation to script.
+- Converted Mind Funeral to script. Thanks Sol.
+- Text fix
+- Fixed Helm of the Ghastlord.
+- Included Infect in evaluateCreature.
+- Little fix in the script of Distortion Strike.
+- Added a very hard version of the Jabba the Hut deck.
+- When using Defined$ TargetedController for SpellAbilities, we should use the Spell Activator, not the Spell's Source Card's Controller.
+- fix Crash when Animate Dead is put onto battlefield by things like Show and Tell.
+- Added Burnout (Hydroblast and Pyroblast can be scripted this same way)
+- Ran Oracle and SetInfo scripts
+- Removed the unnecessary code from the matchesValid function.
+- Added "HIDDEN" to some unblockable pumps.
+- Fixed an IndexOutOfBoundsException in getPumpCreatures.
+- Moved draft instructions and licensing information into overlay format.
+- Also, a few performance fixes for classes involved.
+- Redundant scaleLargerThanOriginal method removed from ImageCache, preferences setting used directly instead.
+- First small attempt at "non-sticky" combat panel (needs playtesting).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -101,6 +129,9 @@ Chant of the Skifsang
 Lingering Souls
 Markov Blademaster
 Stromkirk Captain
+Added Helvault
+Warden of the Wall
+Thought Scour
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -129,6 +160,13 @@ Quickening Licid
 Stinging Licid
 Tempting Licid
 Transmogrifying Licid
+Force Bubble
+Arcane Denial
+Burnout
+Hydroblast
+Pyroblast
+Torture Chamber
+Wood Sage
 
 
 end
