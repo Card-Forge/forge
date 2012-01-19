@@ -1095,10 +1095,6 @@ public class MagicStack extends MyObservable {
 
         AllZone.getPhaseHandler().setNeedToNextPhase(false);
 
-        if (AllZone.getPhaseHandler().inCombat()) {
-            CombatUtil.showCombat();
-        }
-
         // TODO: change to use forge.view.FView?
         GuiDisplayUtil.updateGUI();
 
