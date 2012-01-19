@@ -1986,7 +1986,11 @@ public class AbilityFactory {
             s = sa;
         } else if (defined.equals("Targeted")) {
             final SpellAbility parent = AbilityFactory.findParentsTargetedSpellAbility(sa);
-            sas.addAll(parent.getTarget().getTargetSAs());
+            if(parent != null) {
+                if(parent.getTarget() != null) {
+                    sas.addAll(parent.getTarget().getTargetSAs());
+                }
+            }  
         } else if (defined.startsWith("Triggered")) {
             final SpellAbility root = sa.getRootSpellAbility();
 
