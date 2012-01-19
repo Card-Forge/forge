@@ -2560,6 +2560,55 @@ public class CardFactoryCreatures {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
         } // *************** END ************ END **************************
+        
+     // *************** START *********** START **************************
+        
+        else if (cardName.equals("Zedruu the Greathearted")) {
+
+            final Target player = new Target(card, "Select target opponent", "Opponent".split(","));
+            final AbilitySub sub = new AbilitySub(card, player) {
+                private static final long serialVersionUID = -8926850792424944054L;
+
+                @Override
+                public boolean chkAIDrawback() {
+                    return false;
+                }
+
+                @Override
+                public void resolve() {
+                    final Card permanent = this.getParent().getTargetCard();
+                    final Player opp = this.getTargetPlayer();
+                    permanent.addController(opp);
+                }
+
+                @Override
+                public boolean doTrigger(final boolean b) {
+                    return false;
+                }
+            };
+
+            final Cost abCost = new Cost("R W U", cardName, true);
+            final Target permanent = new Target(card, "Select target permanent you control", "Permanent.YouCtrl".split(","));
+            final AbilityActivated ability = new AbilityActivated(card, abCost, permanent) {
+                private static final long serialVersionUID = 3818522482220103914L;
+
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+
+                @Override
+                public void resolve() {
+                    sub.resolve();
+                }
+            };
+            ability.setSubAbility(sub);
+            final StringBuilder sb = new StringBuilder();
+            sb.append(cardName);
+            sb.append(" Target opponent gains control of target permanent.");
+            ability.setStackDescription(sb.toString());
+            card.addSpellAbility(ability);
+        }
 
         // ***************************************************
         // end of card specific code
