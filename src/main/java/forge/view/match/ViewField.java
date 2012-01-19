@@ -79,6 +79,7 @@ public class ViewField extends FRoundedPanel {
     private JLabel lblAvatar, lblLife;
     private final Image img;
     private final Color transparent = new Color(0, 0, 0, 0);
+    private final Color hoverBG = Singletons.getView().getSkin().getColor("hover");
 
     /**
      * Assembles Swing components of player field instance.
@@ -747,10 +748,6 @@ public class ViewField extends FRoundedPanel {
         private boolean enabled = true;
         private boolean active = false;
         private boolean hover = false;
-        private final Color defaultBG;
-        private final Color hoverBG;
-        private final Color pressedBG;
-        private final Color textColor;
 
 
         /**
@@ -765,13 +762,6 @@ public class ViewField extends FRoundedPanel {
             super(txt);
             this.setHorizontalTextPosition(SwingConstants.CENTER);
             this.setHorizontalAlignment(SwingConstants.CENTER);
-
-            defaultBG = ViewField.this.skin.getColor("active");
-            hoverBG = ViewField.this.skin.getColor("hover");
-            pressedBG = ViewField.this.skin.getColor("inactive");
-            textColor = ViewField.this.skin.getColor("text");
-
-            this.setForeground(textColor);
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
@@ -849,11 +839,11 @@ public class ViewField extends FRoundedPanel {
 
             // Set color according to skip or active or hover state of label
             if (this.hover) {
-                c = PhaseLabel.this.hoverBG;
+                c = hoverBG;
             } else if (this.enabled) {
-                c = PhaseLabel.this.defaultBG;
+                c = Color.green;
             } else {
-                c = PhaseLabel.this.pressedBG;
+                c = Color.red;
             }
 
             if (!this.active && !this.hover) {
