@@ -54,25 +54,6 @@ class CardFactoryAuras {
 
     /**
      * <p>
-     * shouldCycle.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a int.
-     */
-    public static final int shouldCycle(final Card c) {
-        final ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).toString().startsWith("Cycling")) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * <p>
      * getCard.
      * </p>
      * 
@@ -528,8 +509,14 @@ class CardFactoryAuras {
 
                 @Override
                 public void execute() {
-                    AllZone.getStack().addSimultaneousStackEntry(attach);
-
+                    if (targetC[0] != null) {
+                        AllZone.getStack().addSimultaneousStackEntry(attach);
+                    } else {
+                        // note: this should be a state-based action, but it doesn't work currently.
+                        // I don't know if that because it's hard-coded or what, but this fixes
+                        // these cards being put on the battlefield not attached to anything.
+                        AllZone.getGameAction().moveToGraveyard(card);
+                    }
                 }
             };
 
