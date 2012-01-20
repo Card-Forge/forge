@@ -147,6 +147,7 @@
     <scm>
         <connection>scm:svn:http://svn.slightlymagic.net/forge/trunk</connection>
         <developerConnection>scm:svn:http://svn.slightlymagic.net/forge/trunk</developerConnection>
+        <url>http://svn.slightlymagic.net/websvn/listing.php?repname=forge</url>
     </scm>
 
     <prerequisites>
@@ -515,21 +516,6 @@
                     <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
                     <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
                 </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>index</report>
-                            <report>plugins</report>
-                            <report>summary</report>
-                            <report>dependencies</report>
-                            <report>project-team</report>
-                            <report>mailing-list</report>
-                            <report>cim</report>
-                            <report>issue-tracking</report>
-                            <report>license</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
             </plugin>
 
             <plugin>
