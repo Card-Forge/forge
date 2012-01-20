@@ -5,8 +5,8 @@ Text:no text
 PT:2/4
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.nonWall | TriggerZones$ Battlefield | DelayedTrigger$ DelayBlockTrig | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.nonWall | ValidBlocked$ Card.Self | DelayedTrigger$ DelayAttackTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
-SVar:DelayBlockTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDestroyAttacker | TriggerDescription$ Destroy attacking creature at end of combat.
-SVar:DelayAttackTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
+SVar:DelayBlockTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyAttacker | TriggerDescription$ Destroy attacking creature at end of combat.
+SVar:DelayAttackTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
 SVar:TrigDestroyAttacker:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Uncommon
