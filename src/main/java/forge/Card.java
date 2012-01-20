@@ -100,20 +100,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (state.equals(this.curCharacteristics)) {
             return false;
         }
-        
+
         String cur = this.curCharacteristics;
 
         this.curCharacteristics = state;
-        
-        if((cur.equals("Original") && state.equals("Transformed"))
-                || cur.equals("Transformed") && state.equals("Original"))
-        {
+
+        if ((cur.equals("Original") && state.equals("Transformed"))
+                || cur.equals("Transformed") && state.equals("Original")) {
+
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Mode", "Transformed");
             runParams.put("Transformer", this);
             AllZone.getTriggerHandler().runTrigger("Transformed", runParams);
         }
-        
+
         return true;
     }
 
@@ -3089,7 +3089,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final String key : this.characteristicsMap.keySet()) {
             res.addAll(this.getState(key).getSpellAbility());
         }
-        
+
         return res;
     }
 

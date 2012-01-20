@@ -1370,7 +1370,7 @@ public class GameAction {
 
         final ArrayList<String> hAnteRemoved = new ArrayList<String>();
         final ArrayList<String> cAnteRemoved = new ArrayList<String>();
-        
+
         AllZone.getTriggerHandler().suppressMode("Transformed");
         for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
