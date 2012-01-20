@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.2.# rev 13###
+Forge Beta: 01-20-2012 ver 1.2.2 rev 13318
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-#### cards in total.
+9951 cards in total.
 
 
 Several people have noticed a crash report stating that "Buffers have not been created". We hope to have this fixed in the near future. It has been pointed out that:
@@ -109,98 +109,111 @@ Fixes/Features:
 - Small fix
 - Fixed summoning sickness not being cleared on the first turn of the player going second.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Added pre-release cards to DKA cardfolder branch:
 
+Afflicted Deserter // Werewolf Ransacker
 Beguiler of Wills
 Chalice of Life // Chalice of Death
+Chant of the Skifsang
+Curse of Bloodletting
 Curse of Thirst
 Drogskol Reaver
 Faithless Looting
 Falkenrath Aristocrat
+Falkenrath Torturer
+Flayer of the Hatebound
 Gather the Townsfolk
 Ghoultree
 Gravecrawler
+Havengul Runebinder
+Headless Skaab
+Helvault
 Hunger of the Howlpack
 Huntmaster of the Fells // Ravager of the Fells
 Increasing Confusion
 Increasing Devotion
 Jar of Eyeballs
 Lambholt Elder // Silverpelt Werewolf
+Lingering Souls
 Loyal Cathar // Unhallowed Cathar
+Markov Blademaster
 Mikaeus, the Unhallowed
 Mondronen Shaman // Tovolar's Magehunter
 Moonveil Dragon
 Nearheath Stalker
+Predator Ooze
 Ravenous Demon // Archdemon of Greed
 Scorned Villager // Moonscarred Werewolf
 Secrets of the Dead
 Sorin, Lord of Innistrad
 Soul Seizer // Ghastly Haunting
 Strangleroot Geist
-Thalia, Guardian of Thraben
-Thraben Doomsayer
-Vorapede
-Zombie Apocalypse
-
-Vault of the Archangel
-Flayer of the Hatebound
-Chant of the Skifsang
-Lingering Souls
-Markov Blademaster
 Stromkirk Captain
-Helvault
-Warden of the Wall
+Thalia, Guardian of Thraben
 Thought Scour
-Predator Ooze
+Thraben Doomsayer
 Tragic Slip
-Headless Skaab
-Afflicted Deserter // Werewolf Ransacker
-Havengul Runebinder
-Falkenrath Torturer
-Curse of Bloodletting
+Vault of the Archangel
+Vorapede
+Warden of the Wall
+Zombie Apocalypse
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+DeadSpeak
+Doublestrike
+Friar Sol
+Hellfish
+Iran
+Jeff Wadsworth
+Marc
+Slapshot5
+Sloth
+SoulStorm
+ZzzzSleep
+Chris H
 
 
 Added many cards, including:
 
-River Kelpie
-Revelation
-Telepathy
-Rats' Feast
-Summit Apes
-Seer's Vision
-Reality Acid
+Ana Sanctuary
+Arcane Denial
+Burnout
 Calming Licid
 Convulsing Licid
 Corrupting Licid
 Dominating Licid
 Enraging Licid
-Gliding Licid
-Leeching Licid
-Nurturing Licid
-Quickening Licid
-Stinging Licid
-Tempting Licid
-Transmogrifying Licid
 Force Bubble
-Arcane Denial
-Burnout
+Gliding Licid
 Hydroblast
-Pyroblast
-Torture Chamber
-Wood Sage
-Trepanation Blade
 Interdict
-Zedruu the Greathearted
-Ana Sanctuary
+Leeching Licid
 Necra Sanctuary
+Nurturing Licid
+Pyroblast
+Quickening Licid
 Raka Sanctuary
+Rats' Feast
+Reality Acid
+Revelation
+River Kelpie
+Seer's Vision
+Stinging Licid
+Summit Apes
+Telepathy
+Tempting Licid
+Torture Chamber
+Transmogrifying Licid
+Trepanation Blade
+Wood Sage
+Zedruu the Greathearted
 
 
 end
