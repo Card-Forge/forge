@@ -979,9 +979,6 @@ public final class AbilityFactoryReveal {
                     }
                 }
 
-                if (params.containsKey("ForgetOtherRemembered")) {
-                    sa.getSourceCard().clearRemembered();
-                }
                 if (params.containsKey("RememberRevealed")) {
                     for (final Card c : revealed) {
                         host.addRemembered(c);
