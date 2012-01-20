@@ -1,8 +1,8 @@
-Forge Beta: 01-20-2012 ver 1.2.2 rev 13318
+Forge Beta: 0#-##-2012 ver 1.2.# rev 13###
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-9951 cards in total.
+#### cards in total.
 
 
 Several people have noticed a crash report stating that "Buffers have not been created". We hope to have this fixed in the near future. It has been pointed out that:
@@ -17,99 +17,7 @@ We have changed the archival format used for the Forge distributions from ".zip"
 
 Fixes/Features:
 
-- merged updates from trunk cardsfolder into DKA branch
-- Added the player keyword "Play with your hand revealed."
-- Converted Volrath's Dungeon to script.
-- Fixed Kjeldoran Javelineer.
-- Added some NPE checks to activateManaAbility.
-- Cleared out the changes.txt file, now ready for new material.
-- Fixed errors related to the AI controlling cards like Essence Bottle.
-- CheckStyle.
-- rename Phase.java to PhaseHandler.java (matches other TriggerHandler, etc.) and updated all calling classes. Remade the Phase class as a superclass for Untap, Upkeep, EndOfTurn, EndOfCombat to consolidate some code.
-- Modified keyboard shortcuts algorithms to be less complicated to implement.
-- Moved keyboard shortcut setting UI into home screen.
-- Implemented on-the-fly detach/reattach for modified shortcuts.
-- Put shortcuts into a top-level scope, not only for match UI.
-- Fixed "scale larger" setting to work on-the-fly (no reset required).
-- hook the Dev Mode buttons up to the Skin
-- Fixed "inaccurate life total at before mulligan" bug.
-- Added game type to counter information in Input area.
-- checkstyle
-- Optimization: lightweight splash sprite loads before rest of skin (which soon will occur in preload bar).
-- Moved the "forge.view.swing" package into "forge.view".
-- Removed FSkin access from AllZone, all FSkin access now through Singletons.getView().
-- Removed "Random" from the list of themes (it didn't work and there is the button below anyway).
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- A few aesthetic and organizational updates around the Forge initialization process.
-- ControlAllUI renamed to FControl to match project organization.
-- Updated a few quest decks.
-- Converted Cranial Extraction to script.
-- Added AI support to Rebound.
-- Fixed Grozoth.
-- Added canPlayFromEffectAI entries to AF GainLife and LoseLife.
-- Converted Maelstrom Pulse to script.
-- Set all TapsForMana triggers that execute a mana ability to static to conform with rule 605.4a.
-- Converted Erratic Explosion to script.
-- Little fix
-- hook the PhaseLabels up to the skin
-- fix crash when changing skins from Settings
-- fix so that after picking a new skin, you are still on the Settings View instead of on the Constructed View. (Fixes the TODO Doublestrike had in there.)
-- changes to fix issues with zcTriggers for transformed cards
-- Fixed Smoldering Spires.
-- Fixed Cosmic Horror.
-- General fix: DealDamage abilities that targeted "target creature or player" can now target planeswalkers as well, either using TgtCP or implicitly added Planeswalker type.
-- Solved splash swatch switch snafu.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added AI targeting to AF ChangeZoneAll if origin is library to support the ultimate of Jace, the Mind Sculptor.
-- Fixed rarity for Helvault
-- Added canPlayFromEffectAI to AF Token.
-- use FScrollPane instead of JScrollPane in ViewDraft so it uses the colors of the skin.
-- CheckStyle.
-- Fixed Parallax Dementia. Used Reality Acid tech.
-- Fixed Forethought Amulet.
-- Fixed Reality Acid.
-- Fixed Parallax Dementia.
-- Converted Explosive Revelation to script.
-- Converted Mind Funeral to script. Thanks Sol.
-- Text fix
-- Fixed Helm of the Ghastlord.
-- Included Infect in evaluateCreature.
-- Little fix in the script of Distortion Strike.
-- Added a very hard version of the Jabba the Hut deck.
-- When using Defined$ TargetedController for SpellAbilities, we should use the Spell Activator, not the Spell's Source Card's Controller.
-- fix Crash when Animate Dead is put onto battlefield by things like Show and Tell.
-- Added Burnout (Hydroblast and Pyroblast can be scripted this same way)
-- Ran Oracle and SetInfo scripts
-- Removed the unnecessary code from the matchesValid function.
-- Added "HIDDEN" to some unblockable pumps.
-- Fixed an IndexOutOfBoundsException in getPumpCreatures.
-- Moved draft instructions and licensing information into overlay format.
-- Also, a few performance fixes for classes involved.
-- Redundant scaleLargerThanOriginal method removed from ImageCache, preferences setting used directly instead.
-- First small attempt at "non-sticky" combat panel (needs playtesting).
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Reverted green/red theme on phase labels.
-- Added targeting support to tapAllTrigger AI.
-- Updated some SVars.
-- Codebase organization: 
-1) Moved MatchState from forge package into model package, renamed to FMatchState.
-2) Documented the difference between FMatchState and FGameState.
-- Added Trepanation Blade (and supporting RememberRevealed code to AbilityFactoryReveal)
-- Fixed possible NPE in AbilityFactory.getDefinedSpellAbilities()
-- Cleanup in CardFactorySorceries.java
-- Fixed Illumination.
-- Updated some SVars.
-- Fixed Gravity Well.
-- CheckStyle.
-- Fixed Soul Seizer // Ghastly Haunting script.
-- Fixed Curse of Thirst and Curse of the Pierced Heart after EnchantedPlayer removed from Valid.
-- merged updates (r13217-r13308) from trunk cardsfolder into DKA branch.
-- Converted to script: Ceta Sanctuary and Dega Sanctuary
-- Ran SetInfo and Oracle scripts
-- Small fix
-- Fixed summoning sickness not being cleared on the first turn of the player going second.
-- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
-- Preparing the changes.txt file for the next beta build and release.
+
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -164,56 +72,12 @@ Zombie Apocalypse
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-ArsenalNut
-Dave
-DeadSpeak
-Doublestrike
-Friar Sol
-Hellfish
-Iran
-Jeff Wadsworth
-Marc
-Slapshot5
-Sloth
-SoulStorm
-ZzzzSleep
-Chris H
+
 
 
 Added many cards, including:
 
-Ana Sanctuary
-Arcane Denial
-Burnout
-Calming Licid
-Convulsing Licid
-Corrupting Licid
-Dominating Licid
-Enraging Licid
-Force Bubble
-Gliding Licid
-Hydroblast
-Interdict
-Leeching Licid
-Necra Sanctuary
-Nurturing Licid
-Pyroblast
-Quickening Licid
-Raka Sanctuary
-Rats' Feast
-Reality Acid
-Revelation
-River Kelpie
-Seer's Vision
-Stinging Licid
-Summit Apes
-Telepathy
-Tempting Licid
-Torture Chamber
-Transmogrifying Licid
-Trepanation Blade
-Wood Sage
-Zedruu the Greathearted
+
 
 
 end
