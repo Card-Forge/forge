@@ -377,7 +377,6 @@
                     <version>2.2.2</version>
                 </plugin>
 
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
@@ -520,8 +519,45 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.11</version>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <configLocation>${basedir}/src/main/config/forge_checks.xml</configLocation>
+                    <propertyExpansion>
+                        cacheFile=${project.build.directory}/checkstyle-cachefile
+                    </propertyExpansion>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.1</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.4</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>analyze-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>2.3.3</version>
             </plugin>
 
             <plugin>
@@ -544,21 +580,40 @@
                         </configuration>
                         <reports>
                             <report>javadoc</report>
+                            <report>test-javadoc</report>
                         </reports>
                     </reportSet>
                 </reportSets>
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.7</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>l10n-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
                 <configuration>
-                    <configLocation>${basedir}/src/main/config/forge_checks.xml</configLocation>
-                    <propertyExpansion>
-                        cacheFile=${project.build.directory}/checkstyle-cachefile
-                    </propertyExpansion>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <locales>
+                        <locale>cs</locale>
+                        <locale>de</locale>
+                        <locale>es</locale>
+                        <locale>fr</locale>
+                        <locale>gl</locale>
+                        <locale>hu</locale>
+                        <locale>it</locale>
+                        <locale>ja</locale>
+                        <locale>ko</locale>
+                        <locale>lt</locale>
+                        <locale>nl</locale>
+                        <locale>no</locale>
+                        <locale>pl</locale>
+                        <locale>pt</locale>
+                        <locale>pt_BR</locale>
+                        <locale>ru</locale>
+                        <locale>sk</locale>
+                        <locale>sv</locale>
+                        <locale>tr</locale>
+                        <locale>zh_CN</locale>
+                        <locale>zh_TW</locale>
+                    </locales>
                 </configuration>
             </plugin>
 
@@ -584,21 +639,9 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.3.3</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.5.1</version>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changelog-plugin</artifactId>
-                <version>2.2</version>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.11</version>
             </plugin>
 
             <plugin>
@@ -639,18 +682,6 @@
                             <report>dependency-updates-report</report>
                             <report>plugin-updates-report</report>
                             <report>property-updates-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.4</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>analyze-report</report>
                         </reports>
                     </reportSet>
                 </reportSets>
@@ -697,19 +728,19 @@
             <artifactId>minlog</artifactId>
             <version>1.2</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.mantisbt</groupId>
             <artifactId>mantisconnect-client-api</artifactId>
             <version>1.1.1</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
