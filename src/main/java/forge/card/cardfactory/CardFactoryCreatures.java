@@ -541,7 +541,7 @@ public class CardFactoryCreatures {
                     CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
                     list = list.getValidCards("Card.Other+YouCtrl".split(","), card.getController(), card);
 
-                    for (Card c : list) {
+                    for (final Card c : list) {
                         c.addController(opp);
                     }
                 } // resolve()
@@ -1231,10 +1231,10 @@ public class CardFactoryCreatures {
             final SpellAbility spell = new SpellPermanent(card) {
                 private static final long serialVersionUID = -11489323313L;
 
-                /*@Override
-                public boolean canPlayAI() {
-                    return super.canPlay() && (5 <= (ComputerUtil.getAvailableMana().size() - 2));
-                }*/
+                /*
+                 * @Override public boolean canPlayAI() { return super.canPlay()
+                 * && (5 <= (ComputerUtil.getAvailableMana().size() - 2)); }
+                 */
 
                 @Override
                 public void resolve() {
@@ -2140,7 +2140,7 @@ public class CardFactoryCreatures {
 
                     if (copyTarget[0] != null) {
                         Card cloned;
-                        
+
                         AllZone.getTriggerHandler().suppressMode("Transformed");
 
                         cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
@@ -2179,7 +2179,7 @@ public class CardFactoryCreatures {
                         } else {
                             card.setFlip(false);
                         }
-                        
+
                         AllZone.getTriggerHandler().clearSuppression("Transformed");
 
                     }
@@ -2592,7 +2592,8 @@ public class CardFactoryCreatures {
             };
 
             final Cost abCost = new Cost("R W U", cardName, true);
-            final Target permanent = new Target(card, "Select target permanent you control", "Permanent.YouCtrl".split(","));
+            final Target permanent = new Target(card, "Select target permanent you control",
+                    "Permanent.YouCtrl".split(","));
             final AbilityActivated ability = new AbilityActivated(card, abCost, permanent) {
                 private static final long serialVersionUID = 3818522482220103914L;
 
@@ -2613,11 +2614,11 @@ public class CardFactoryCreatures {
             ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);
         }
-        
-     // *************** START *********** START **************************
-        
+
+        // *************** START *********** START **************************
+
         else if (cardName.equals("Bazaar Trader")) {
-            
+
             final Target player = new Target(card, "Select target player", "Player".split(","));
             final AbilitySub sub = new AbilitySub(card, player) {
                 private static final long serialVersionUID = -8926222902424944054L;
@@ -2641,7 +2642,8 @@ public class CardFactoryCreatures {
             };
 
             final Cost abCost = new Cost("T", cardName, true);
-            final Target permanent = new Target(card, "Select target artifact, creature, or land you control", "Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl".split(","));
+            final Target permanent = new Target(card, "Select target artifact, creature, or land you control",
+                    "Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl".split(","));
             final AbilityActivated ability = new AbilityActivated(card, abCost, permanent) {
                 private static final long serialVersionUID = 3818522482440103914L;
 

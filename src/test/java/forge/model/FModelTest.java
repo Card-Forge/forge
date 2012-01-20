@@ -51,17 +51,17 @@ public class FModelTest {
      *             if something is really wrong
      */
     @Test
-    public final void test_ctor_close_ctor() throws FileNotFoundException { // NOPMD
-                                                                            // by
-                                                                            // Braids
-                                                                            // on
-                                                                            // 8/12/11
-                                                                            // 10:36
-                                                                            // AM
+    public final void test_ctor_close_ctor() throws FileNotFoundException {
+        // by
+        // Braids
+        // on
+        // 8/12/11
+        // 10:36
+        // AM
         Assert.assertNotNull(this.model, "model is not null");
         this.model.close();
 
-        System.err.println("log test"); // NOPMD by Braids on 8/12/11 10:36 AM
+        System.err.println("log test");
 
         this.model = new FModel(null);
         Assert.assertNotNull(this.model, "model is not null");
@@ -87,13 +87,13 @@ public class FModelTest {
      *             if something is really wrong
      */
     @Test
-    public final void test_getBuildID() throws FileNotFoundException { // NOPMD
-                                                                       // by
-                                                                       // Braids
-                                                                       // on
-                                                                       // 8/12/11
-                                                                       // 10:36
-                                                                       // AM
+    public final void test_getBuildID() throws FileNotFoundException {
+        // by
+        // Braids
+        // on
+        // 8/12/11
+        // 10:36
+        // AM
         // Just test for an unexpected exception.
         this.model.getBuildInfo().getBuildID();
     }

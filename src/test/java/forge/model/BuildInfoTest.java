@@ -20,21 +20,22 @@ public class BuildInfoTest {
     /** System property name for the class path. */
     private static final String JAVA_CLASS_PATH = "java.class.path";
     /** Manifest attribute name for the Build ID. */
-    private static final String MF_ATTR_NAME_BUILD = "Implementation-Build"; // NOPMD
-                                                                             // by
-                                                                             // Braids
-                                                                             // on
-                                                                             // 8/12/11
-                                                                             // 10:29
-                                                                             // AM
+    private static final String MF_ATTR_NAME_BUILD = "Implementation-Build";
+    // by
+    // Braids
+    // on
+    // 8/12/11
+    // 10:29
+    // AM
     /** Manifest attribute name for the version string. */
-    private static final String MF_ATTR_NAME_VERSION = "Implementation-Version"; // NOPMD
-                                                                                 // by
-                                                                                 // Braids
-                                                                                 // on
-                                                                                 // 8/12/11
-                                                                                 // 10:29
-                                                                                 // AM
+    private static final String MF_ATTR_NAME_VERSION = "Implementation-Version";
+
+    // by
+    // Braids
+    // on
+    // 8/12/11
+    // 10:29
+    // AM
 
     /**
      * Test BuildInfo using a mock jar file.
@@ -43,10 +44,10 @@ public class BuildInfoTest {
      *             rarely
      */
     @Test(enabled = false)
-    public final void test_BuildInfo_mockJar() throws IOException { // NOPMD by
-                                                                    // Braids on
-                                                                    // 8/12/11
-                                                                    // 10:26 AM
+    public final void test_BuildInfo_mockJar() throws IOException {
+        // Braids on
+        // 8/12/11
+        // 10:26 AM
         File jarAsFile = null;
         try {
             jarAsFile = this.makeTmpJarWithManifest("BuildInfoTest-", ".jar", new String[] {
@@ -72,13 +73,13 @@ public class BuildInfoTest {
      *             indirectly
      */
     @Test(enabled = false)
-    public final void test_BuildInfo_oneJarInCP() throws IOException { // NOPMD
-                                                                       // by
-                                                                       // Braids
-                                                                       // on
-                                                                       // 8/12/11
-                                                                       // 10:26
-                                                                       // AM
+    public final void test_BuildInfo_oneJarInCP() throws IOException {
+        // by
+        // Braids
+        // on
+        // 8/12/11
+        // 10:26
+        // AM
         final String origClassPath = System.getProperty(BuildInfoTest.JAVA_CLASS_PATH);
         File jarAsFile = null;
 
@@ -111,13 +112,13 @@ public class BuildInfoTest {
      *             indirectly
      */
     @Test(enabled = false)
-    public final void test_BuildInfo_twoJarsInCP() throws IOException { // NOPMD
-                                                                        // by
-                                                                        // Braids
-                                                                        // on
-                                                                        // 8/12/11
-                                                                        // 10:26
-                                                                        // AM
+    public final void test_BuildInfo_twoJarsInCP() throws IOException {
+        // by
+        // Braids
+        // on
+        // 8/12/11
+        // 10:26
+        // AM
         final String origClassPath = System.getProperty(BuildInfoTest.JAVA_CLASS_PATH);
         File jarAsFile1 = null;
         File jarAsFile2 = null;
@@ -138,8 +139,8 @@ public class BuildInfoTest {
 
             BraidsAssertFunctions.assertThrowsException(MultipleForgeJarsFoundError.class, new ClumsyRunnable() {
                 @Override
-                public void run() throws Exception { // NOPMD by Braids on
-                                                     // 8/12/11 10:29 AM
+                public void run() throws Exception {
+                    // 8/12/11 10:29 AM
                     info.getBuildID();
                 }
             });

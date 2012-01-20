@@ -55,22 +55,22 @@ public final class UtilFunctions {
         NullPointerException exn = null;
 
         if (paramName == null) {
-            exn = new NullPointerException(); // NOPMD by Braids on 8/18/11
-                                              // 11:19 PM
+            exn = new NullPointerException();
+            // 11:19 PM
         } else {
-            exn = new NullPointerException(paramName + " must not be null"); // NOPMD
-                                                                             // by
-                                                                             // Braids
-                                                                             // on
-                                                                             // 8/18/11
-                                                                             // 11:19
-                                                                             // PM
+            exn = new NullPointerException(paramName + " must not be null");
+            // by
+            // Braids
+            // on
+            // 8/18/11
+            // 11:19
+            // PM
         }
 
         // Doctor the exception to appear to come from the caller.
         final StackTraceElement[] trace = exn.getStackTrace();
-        final int len = getSliceLength(trace, 1);
-        exn.setStackTrace(slice(new StackTraceElement[len], trace, 1));
+        final int len = UtilFunctions.getSliceLength(trace, 1);
+        exn.setStackTrace(UtilFunctions.slice(new StackTraceElement[len], trace, 1));
         throw exn;
     }
 
@@ -86,25 +86,25 @@ public final class UtilFunctions {
      *            the Runnable to run
      * @see javax.swing.SwingUtilities#invokeLater(Runnable)
      */
-    public static void invokeInEventDispatchThreadAndWait(final Runnable proc) { // NOPMD
-                                                                                 // by
-                                                                                 // Braids
-                                                                                 // on
-                                                                                 // 8/18/11
-                                                                                 // 11:19
-                                                                                 // PM
+    public static void invokeInEventDispatchThreadAndWait(final Runnable proc) {
+        // by
+        // Braids
+        // on
+        // 8/18/11
+        // 11:19
+        // PM
         if (SwingUtilities.isEventDispatchThread()) {
             // Just run in the current thread.
             proc.run();
         } else {
             try {
                 SwingUtilities.invokeAndWait(proc);
-            } catch (InterruptedException exn) {
-                throw new RuntimeException(exn); // NOPMD by Braids on 8/18/11
-                                                 // 11:19 PM
-            } catch (InvocationTargetException exn) {
-                throw new RuntimeException(exn); // NOPMD by Braids on 8/18/11
-                                                 // 11:19 PM
+            } catch (final InterruptedException exn) {
+                throw new RuntimeException(exn);
+                // 11:19 PM
+            } catch (final InvocationTargetException exn) {
+                throw new RuntimeException(exn);
+                // 11:19 PM
             }
         }
     }
@@ -168,16 +168,16 @@ public final class UtilFunctions {
         }
 
         if (dstArray == null) {
-            throw new NullPointerException(); // NOPMD by Braids on 8/18/11
-                                              // 11:19 PM
+            throw new NullPointerException();
+            // 11:19 PM
         }
 
         if (srcArray == null) {
-            throw new NullPointerException(); // NOPMD by Braids on 8/18/11
-                                              // 11:19 PM
+            throw new NullPointerException();
+            // 11:19 PM
         }
 
-        final int resultLength = getSliceLength(srcArray, startIndex);
+        final int resultLength = UtilFunctions.getSliceLength(srcArray, startIndex);
 
         if (dstArray.length != resultLength) {
             throw new ArrayIndexOutOfBoundsException("First parameter must have length " + resultLength
@@ -186,7 +186,7 @@ public final class UtilFunctions {
 
         int srcIx = startIndex;
 
-        for (int dstIx = 0; dstIx < resultLength && srcIx < srcArray.length; dstIx++, srcIx++) {
+        for (int dstIx = 0; (dstIx < resultLength) && (srcIx < srcArray.length); dstIx++, srcIx++) {
             dstArray[dstIx] = srcArray[srcIx];
         }
 
@@ -258,13 +258,13 @@ public final class UtilFunctions {
      */
     public static <T> T checkNullOrNotInstance(final T goodInstance, final Object obj) {
         if (goodInstance == null) {
-            throw new NullPointerException("first parameter must not be null"); // NOPMD
-                                                                                // by
-                                                                                // Braids
-                                                                                // on
-                                                                                // 8/18/11
-                                                                                // 11:19
-                                                                                // PM
+            throw new NullPointerException("first parameter must not be null");
+            // by
+            // Braids
+            // on
+            // 8/18/11
+            // 11:19
+            // PM
         }
 
         @SuppressWarnings("unchecked")
@@ -330,13 +330,13 @@ public final class UtilFunctions {
      */
     public static <T> void smartRemoveDuplicatesAndNulls(final List<T> list) {
         // Get rid of pesky leading nulls.
-        smartRemoveDuplicatesAndNullsHelper(list, 0, null);
+        UtilFunctions.smartRemoveDuplicatesAndNullsHelper(list, 0, null);
 
         for (int earlierIx = 0; earlierIx < list.size(); earlierIx++) {
             for (int laterIx = earlierIx + 1; laterIx < list.size(); laterIx++) {
                 final T itemAtEarlierIx = list.get(earlierIx);
 
-                smartRemoveDuplicatesAndNullsHelper(list, laterIx, itemAtEarlierIx);
+                UtilFunctions.smartRemoveDuplicatesAndNullsHelper(list, laterIx, itemAtEarlierIx);
             }
 
         }
@@ -360,9 +360,9 @@ public final class UtilFunctions {
      */
     public static <T> void smartRemoveDuplicatesAndNullsHelper(final List<T> list, final int startIx,
             final T objSeenPreviously) {
-        while (startIx < list.size()
-                && (list.get(startIx) == null || list.get(startIx) == objSeenPreviously || list.get(startIx).equals(
-                        objSeenPreviously))) {
+        while ((startIx < list.size())
+                && ((list.get(startIx) == null) || (list.get(startIx) == objSeenPreviously) || list.get(startIx)
+                        .equals(objSeenPreviously))) {
             final int lastItemIx = list.size() - 1;
 
             // Overwrite the item at laterIx with the one at the end,

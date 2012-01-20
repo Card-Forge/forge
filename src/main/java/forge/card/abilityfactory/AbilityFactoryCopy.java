@@ -435,7 +435,7 @@ public final class AbilityFactoryCopy {
                     copy.setCloneOrigin(hostCard);
                     sa.getSourceCard().addClone(copy);
                     crds[i] = copy;
-                    
+
                     AllZone.getTriggerHandler().clearSuppression("Transformed");
                 }
 

@@ -23,7 +23,6 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-
 import forge.Card;
 import forge.CardList;
 import forge.Command;
@@ -306,10 +305,10 @@ public class TriggerHandler {
         }
 
         final Player playerAP = AllZone.getPhaseHandler().getPlayerTurn();
-        
-        if(playerAP == null)
-        {
-            //This should only happen outside of games, so it's safe to just abort.
+
+        if (playerAP == null) {
+            // This should only happen outside of games, so it's safe to just
+            // abort.
             return;
         }
 
@@ -1009,7 +1008,8 @@ public class TriggerHandler {
                                     regtrig.getHostCard().getName()));
                             buildQuestion.append(")\r\n");
                             if (sa[0].getTriggeringObjects().containsKey("Attacker")) {
-                                buildQuestion.append("[Attacker: " + sa[0].getTriggeringObjects().get("Attacker") + "]");
+                                buildQuestion
+                                        .append("[Attacker: " + sa[0].getTriggeringObjects().get("Attacker") + "]");
                             }
                             if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
                                 return;

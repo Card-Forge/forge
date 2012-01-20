@@ -136,7 +136,7 @@ public class CardReaderTest {
     /**
      * Test_ read card_run_nonzip.
      */
-    @Test(groups = { "slow" })
+    @Test(groups = { "slow" }, enabled = false)
     public final void test_ReadCard_run_nonzip() {
         final Map<String, Card> map = new HashMap<String, Card>(2 * CardReaderTest.ESTIMATED_CARDS_IN_FOLDER);
         final File cardsfolder = ForgeProps.getFile(NewConstants.CARDSFOLDER);
@@ -149,7 +149,7 @@ public class CardReaderTest {
     /**
      * Test_ read card_run_zip.
      */
-    @Test(groups = { "slow" })
+    @Test(groups = { "slow" }, enabled = false)
     public final void test_ReadCard_run_zip() {
         final Map<String, Card> map = new HashMap<String, Card>(2 * CardReaderTest.ESTIMATED_CARDS_IN_FOLDER);
         final File cardsfolder = ForgeProps.getFile(NewConstants.CARDSFOLDER);

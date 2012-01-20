@@ -131,7 +131,7 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
-            String state = c.getCurState();
+            final String state = c.getCurState();
             AllZone.getTriggerHandler().suppressMode("Transformed");
             if (c.isInAlternateState()) {
                 c.setState("Original");
@@ -242,11 +242,9 @@ public class GameAction {
 
         if (zone.is(Zone.Stack)) {
             c.setCastFrom(prev.getZoneType());
-        }
-        else if (prev == null) {
+        } else if (prev == null) {
             c.setCastFrom(null);
-        }
-        else if (!(zone.is(Zone.Battlefield) && prev.is(Zone.Stack))) {
+        } else if (!(zone.is(Zone.Battlefield) && prev.is(Zone.Stack))) {
             c.setCastFrom(null);
         }
 
@@ -321,8 +319,7 @@ public class GameAction {
         final PlayerZone oldBattlefield = AllZone.getZoneOf(c);
         final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
 
-        if ((oldBattlefield == null) || (newBattlefield == null)
-                || oldBattlefield.equals(newBattlefield)) {
+        if ((oldBattlefield == null) || (newBattlefield == null) || oldBattlefield.equals(newBattlefield)) {
             return;
         }
 
@@ -870,7 +867,7 @@ public class GameAction {
 
             boolean checkAgain = false;
 
-            checkStaticAbilities();
+            this.checkStaticAbilities();
 
             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             Card c;
@@ -1295,16 +1292,21 @@ public class GameAction {
     }
 
     /**
-     * Constructor for new game allowing card lists to be put
-     * into play immediately, and life totals to be adjusted,
-     * for computer and human.
+     * Constructor for new game allowing card lists to be put into play
+     * immediately, and life totals to be adjusted, for computer and human.
      * 
-     * @param humanDeck &emsp; {@link forge.deck.Deck} object.
-     * @param computerDeck &emsp; {@link forge.deck.Deck} object.
-     * @param human &emsp; {@link forge.CardList} object.
-     * @param computer &emsp; {@link forge.CardList} object.
-     * @param humanLife &emsp; int.
-     * @param computerLife &emsp; int.
+     * @param humanDeck
+     *            &emsp; {@link forge.deck.Deck} object.
+     * @param computerDeck
+     *            &emsp; {@link forge.deck.Deck} object.
+     * @param human
+     *            &emsp; {@link forge.CardList} object.
+     * @param computer
+     *            &emsp; {@link forge.CardList} object.
+     * @param humanLife
+     *            &emsp; int.
+     * @param computerLife
+     *            &emsp; int.
      */
     public final void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
             final CardList computer, final int humanLife, final int computerLife) {
@@ -1334,8 +1336,10 @@ public class GameAction {
     /**
      * The default constructor for a new game.
      * 
-     * @param humanDeck &emsp; {@link forge.deck.Deck} object.
-     * @param computerDeck &emsp; {@link forge.deck.Deck} object.
+     * @param humanDeck
+     *            &emsp; {@link forge.deck.Deck} object.
+     * @param computerDeck
+     *            &emsp; {@link forge.deck.Deck} object.
      */
     public final void newGame(final Deck humanDeck, final Deck computerDeck) {
         // AllZone.getComputer() = new ComputerAI_Input(new
@@ -1348,12 +1352,12 @@ public class GameAction {
         this.actuateGame(humanDeck, computerDeck);
     }
 
-    /** 
+    /**
      * This must be separated from the newGame method since life totals and
      * player details could be adjusted before the game is started.
      * 
-     *  That process (also cleanup and observer updates) should be done in
-     *  newGame, then when all is ready, call this function.
+     * That process (also cleanup and observer updates) should be done in
+     * newGame, then when all is ready, call this function.
      */
     private void actuateGame(final Deck humanDeck, final Deck computerDeck) {
         this.canShowWinLose = true;
@@ -1478,8 +1482,7 @@ public class GameAction {
 
         }
         if (hAnteRemoved.size() > 0) {
-            final StringBuilder sb = new StringBuilder(
-                    "The following ante cards were removed from the human's deck:\n");
+            final StringBuilder sb = new StringBuilder("The following ante cards were removed from the human's deck:\n");
             for (int i = 0; i < hAnteRemoved.size(); i++) {
                 sb.append(hAnteRemoved.get(i));
                 if (((i % 4) == 0) && (i > 0)) {
@@ -1543,10 +1546,10 @@ public class GameAction {
         if (Singletons.getModel().getPreferences().isPlayForAnte()) {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
-            for (Player p : AllZone.getPlayersInGame()) {
-                CardList lib = p.getCardsIn(Zone.Library);
+            for (final Player p : AllZone.getPlayersInGame()) {
+                final CardList lib = p.getCardsIn(Zone.Library);
                 Card ante;
-                if (lib.size() > 0 && lib.getNotType("Basic").size() > 1) {
+                if ((lib.size() > 0) && (lib.getNotType("Basic").size() > 1)) {
                     ante = CardUtil.getRandom(lib.toArray());
                     while (ante.isBasicLand()) {
                         ante = CardUtil.getRandom(lib.toArray());
@@ -1557,7 +1560,7 @@ public class GameAction {
                     throw new RuntimeException(p + " library is empty.");
                 }
                 AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
-                moveTo(Zone.Ante, ante);
+                this.moveTo(Zone.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
             JOptionPane.showConfirmDialog(null, msg, "Ante", JOptionPane.OK_CANCEL_OPTION);
@@ -1574,8 +1577,9 @@ public class GameAction {
         AllZone.getInputControl().setInput(new InputMulligan());
         PhaseHandler.setGameBegins(1);
 
-        AllZone.getGameLog().add("Turn", "Turn " + AllZone.getPhaseHandler().getTurn()
-                + " (" + AllZone.getPhaseHandler().getPlayerTurn() + ")", 0);
+        AllZone.getGameLog().add("Turn",
+                "Turn " + AllZone.getPhaseHandler().getTurn() + " (" + AllZone.getPhaseHandler().getPlayerTurn() + ")",
+                0);
     } // newGame()
 
     // this is where the computer cheats
@@ -1922,7 +1926,8 @@ public class GameAction {
                             final SpellAbility flashback = sa.copy();
                             flashback.setFlashBackAbility(true);
 
-                            // there is a flashback cost (and not the cards cost)
+                            // there is a flashback cost (and not the cards
+                            // cost)
                             if (!keyword.equals("Flashback")) {
                                 final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
                                 flashback.setPayCosts(fbCost);
@@ -1936,7 +1941,7 @@ public class GameAction {
                 if (c.hasStartOfKeyword("May be played without paying its mana cost")) {
                     final SpellAbility newSA = sa.copy();
                     final Cost cost = new Cost("", c.getName(), false);
-                    for (CostPart part : newSA.getPayCosts().getCostParts()) {
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
                         if (!(part instanceof CostMana)) {
                             cost.getCostParts().add(part);
                         }

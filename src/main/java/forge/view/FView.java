@@ -21,7 +21,6 @@ import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
-
 import forge.AllZone;
 import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
@@ -56,10 +55,10 @@ public class FView {
         UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
             @Override
             public void run() {
-                FView.this.splashFrame = new SplashFrame(skin);
+                FView.this.splashFrame = new SplashFrame(FView.this.skin);
             }
         });
-        // NOPMD by Braids on 8/18/11 11:37 PM
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -87,11 +86,14 @@ public class FView {
 
     /** @return FSkin */
     public FSkin getSkin() {
-        return skin;
+        return this.skin;
     }
 
-    /** @param skin0 &emsp; FSkin */
-    public void setSkin(FSkin skin0) {
+    /**
+     * @param skin0
+     *            &emsp; FSkin
+     */
+    public void setSkin(final FSkin skin0) {
         this.skin = skin0;
     }
 
@@ -109,18 +111,18 @@ public class FView {
 
         if (!this.splashFrame.getSplashHasBeenClosed()) {
             try {
-                // NOPMD by Braids on 8/7/11 1:07
+
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
-                        skin.loadFontAndImages();
+                        FView.this.skin.loadFontAndImages();
 
                         CardFaceSymbols.loadImages();
 
                         Constant.Runtime.setGameType(GameType.Constructed);
 
-                        GuiTopLevel g = new GuiTopLevel();
+                        final GuiTopLevel g = new GuiTopLevel();
                         AllZone.setDisplay(g);
                         g.getController().changeState(FControl.HOME_SCREEN);
                         g.pack();

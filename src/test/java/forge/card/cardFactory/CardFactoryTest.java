@@ -33,9 +33,9 @@ import forge.view.Main;
 public class CardFactoryTest {
 
     /** The default time to allow a test to run before TestNG ignores it. */
-    public static final int DEFAULT_TEST_TIMEOUT_MS = 5000; // NOPMD by Braids
-                                                            // on 8/18/11 11:43
-                                                            // PM
+    public static final int DEFAULT_TEST_TIMEOUT_MS = 5000;
+    // on 8/18/11 11:43
+    // PM
 
     private transient CardFactoryInterface factory;
 
@@ -53,7 +53,7 @@ public class CardFactoryTest {
      * the correct owner.
      */
     @Test(enabled = false, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
-    public final void test_getCard_1() { // NOPMD by Braids on 8/18/11 11:39 PM
+    public final void test_getCard_1() {
         final Card card = this.factory.getCard("Arc-Slogger", null);
         Assert.assertNotNull(card, "card is not null");
         Assert.assertNull(card.getOwner(), "card has correct owner");
@@ -63,27 +63,27 @@ public class CardFactoryTest {
      * Make sure the method throws an exception when it's supposed to.
      */
     @Test(enabled = false, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
-    public final void test_getRandomCombinationWithoutRepetition_tooLarge() { // NOPMD
-                                                                              // by
-                                                                              // Braids
-                                                                              // on
-                                                                              // 8/18/11
-                                                                              // 11:39
-                                                                              // PM
+    public final void test_getRandomCombinationWithoutRepetition_tooLarge() {
+        // by
+        // Braids
+        // on
+        // 8/18/11
+        // 11:39
+        // PM
         BraidsAssertFunctions.assertThrowsException(IllegalArgumentException.class, new ClumsyRunnable() {
             @Override
-            public void run() throws Exception { // NOPMD by Braids on 8/18/11
-                                                 // 11:40 PM
+            public void run() throws Exception {
+                // 11:40 PM
                 CardFactoryTest.this.factory.getRandomCombinationWithoutRepetition(CardFactoryTest.this.factory.size());
             }
         });
 
         BraidsAssertFunctions.assertThrowsException(IllegalArgumentException.class, new ClumsyRunnable() {
             @Override
-            public void run() throws Exception { // NOPMD by Braids on 8/18/11
-                                                 // 11:40 PM
-                final int largeDivisorForRandomCombo = 4; // NOPMD by Braids on
-                                                          // 8/18/11 11:41 PM
+            public void run() throws Exception {
+                // 11:40 PM
+                final int largeDivisorForRandomCombo = 4;
+                // 8/18/11 11:41 PM
                 CardFactoryTest.this.factory.getRandomCombinationWithoutRepetition(CardFactoryTest.this.factory.size()
                         / largeDivisorForRandomCombo);
             }
@@ -97,15 +97,15 @@ public class CardFactoryTest {
      * default.
      */
     @Test(enabled = false, timeOut = CardFactoryTest.DEFAULT_TEST_TIMEOUT_MS)
-    public final void test_getRandomCombinationWithoutRepetition_oneTenth() { // NOPMD
-                                                                              // by
-                                                                              // Braids
-                                                                              // on
-                                                                              // 8/18/11
-                                                                              // 11:39
-                                                                              // PM
+    public final void test_getRandomCombinationWithoutRepetition_oneTenth() {
+        // by
+        // Braids
+        // on
+        // 8/18/11
+        // 11:39
+        // PM
         this.factory = new PreloadingCardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER));
-        final int divisor = 10; // NOPMD by Braids on 8/18/11 11:41 PM
+        final int divisor = 10;
         final CardList actual = this.factory.getRandomCombinationWithoutRepetition(this.factory.size() / divisor);
 
         final Set<String> cardNames = new TreeSet<String>();

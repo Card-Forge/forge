@@ -331,8 +331,7 @@ public class SealedDeck {
                 public boolean addCard(final Card c) {
                     final ArrayList<AbilityMana> maList = c.getManaAbility();
                     for (int j = 0; j < maList.size(); j++) {
-                        if (maList.get(j).canProduce(aiDC.mana1)
-                                || maList.get(j).canProduce(aiDC.mana2)
+                        if (maList.get(j).canProduce(aiDC.mana1) || maList.get(j).canProduce(aiDC.mana2)
                                 || maList.get(j).isAnyMana()) {
                             return true;
                         }
@@ -433,7 +432,9 @@ public class SealedDeck {
         final Deck aiDeck = new Deck(GameType.Sealed);
 
         for (i = 0; i < deck.size(); i++) {
-            if(deck.get(i).getName().equals("Plains") || deck.get(i).getName().equals("Island") || deck.get(i).getName().equals("Swamp") || deck.get(i).getName().equals("Mountain") || deck.get(i).getName().equals("Forest")) {
+            if (deck.get(i).getName().equals("Plains") || deck.get(i).getName().equals("Island")
+                    || deck.get(i).getName().equals("Swamp") || deck.get(i).getName().equals("Mountain")
+                    || deck.get(i).getName().equals("Forest")) {
                 System.out.println("Heyo!");
             }
             aiDeck.addMain(deck.get(i).getName() + "|" + deck.get(i).getCurSetCode());

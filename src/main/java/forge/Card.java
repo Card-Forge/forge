@@ -106,8 +106,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.curCharacteristics = state;
 
         if ((cur.equals("Original") && state.equals("Transformed"))
-                || cur.equals("Transformed") && state.equals("Original")) {
-
+                || (cur.equals("Transformed") && state.equals("Original"))) {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Mode", "Transformed");
             runParams.put("Transformer", this);
@@ -318,9 +317,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * Sets whether or not this card is transformable, but non-flip and not double-faced.
+     * Sets whether or not this card is transformable, but non-flip and not
+     * double-faced.
      * 
-     * @param otherTransformable0 a String
+     * @param otherTransformable0
+     *            a String
      */
     public final void setTransformable(final String otherTransformable0) {
         this.otherTransformable = otherTransformable0;
@@ -2438,8 +2439,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final StringBuilder sbMana = new StringBuilder();
 
         for (int i = 0; i < keyword.size(); i++) {
-            if (!keyword.get(i).toString()
-                            .contains("Permanents don't untap during their controllers' untap steps")
+            if (!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps")
                     && !keyword.get(i).toString().contains("PreventAllDamageBy")
                     && !keyword.get(i).toString().contains("CantBlock")
                     && !keyword.get(i).toString().contains("CantBeBlockedBy")) {
@@ -2606,7 +2606,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        //Replacement effects
+        // Replacement effects
         for (final ReplacementEffect replacementEffect : this.getCharacteristics().getReplacementEffects()) {
             sb.append(replacementEffect.toString() + "\r\n");
         }
@@ -2707,7 +2707,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        //Replacement effects
+        // Replacement effects
         for (final ReplacementEffect replacementEffect : this.getCharacteristics().getReplacementEffects()) {
             sb.append(replacementEffect.toString() + "\r\n");
         }
@@ -2754,22 +2754,22 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             if (keyword.startsWith("Storm")) {
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
-                    sb.insert(sb.indexOf("Storm (When you cast this spell, copy it for each spell cast before it this turn.") + 81,
+                    sb.insert(
+                            sb.indexOf("Storm (When you cast this spell, copy it for each spell cast before it this turn.") + 81,
                             " You may choose new targets for the copies.");
                 }
             }
             /*
-            if (keyword.startsWith("Storm")) {
-                if (sb.toString().endsWith("\r\n\r\n")) {
-                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
-                }
-                sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
-                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
-                    sb.append(" You may choose new targets for the copies.");
-                }
-                sb.append(")\r\n");
-            }
-            */
+             * if (keyword.startsWith("Storm")) { if
+             * (sb.toString().endsWith("\r\n\r\n")) {
+             * sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3); }
+             * sb.append(
+             * "Storm (When you cast this spell, copy it for each spell cast before it this turn."
+             * ); if (sb.toString().contains("Target") ||
+             * sb.toString().contains("target")) {
+             * sb.append(" You may choose new targets for the copies."); }
+             * sb.append(")\r\n"); }
+             */
             if (keyword.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
@@ -2807,7 +2807,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
             }
             if (keyword.equals("Rebound")) {
-                sb.append(keyword).append("(If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)\r\n");
+                sb.append(keyword)
+                        .append("(If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)\r\n");
             }
         }
         return sb;
@@ -3085,7 +3086,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final ArrayList<SpellAbility> getAllSpellAbilities() {
         final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
 
-        final String curState = this.curCharacteristics;
         for (final String key : this.characteristicsMap.keySet()) {
             res.addAll(this.getState(key).getSpellAbility());
         }
@@ -5624,8 +5624,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Removes the all extrinsic keyword.
-     *
-     * @param s the s
+     * 
+     * @param s
+     *            the s
      */
     public void removeAllExtrinsicKeyword(final String s) {
         final ArrayList<String> strings = new ArrayList<String>();
@@ -6956,8 +6957,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
             if (!(source.dealtDmgToHumanThisTurn && this.getController().isPlayer(AllZone.getHumanPlayer()))
-                    && !(source.dealtDmgToComputerThisTurn && this.getController().isPlayer(
-                            AllZone.getComputerPlayer()))) {
+                    && !(source.dealtDmgToComputerThisTurn && this.getController()
+                            .isPlayer(AllZone.getComputerPlayer()))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
@@ -7022,7 +7023,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("lowestCMC")) {
             final CardList list = AllZoneUtil.getCreaturesInPlay();
             for (final Card crd : list) {
-                if (!crd.isLand() && !crd.isImmutable() && crd.getCMC() < this.getCMC()) {
+                if (!crd.isLand() && !crd.isImmutable() && (crd.getCMC() < this.getCMC())) {
                     return false;
                 }
             }
@@ -7194,8 +7195,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             boolean hasIt = false;
-            for (SpellAbility sa : this.getSpellAbilities()) {
-                if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
+            for (final SpellAbility sa : this.getSpellAbilities()) {
+                if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
                     hasIt = true;
                 }
             }
@@ -7217,14 +7218,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("wasCastFrom")) {
-            String strZone = property.substring(11);
-            Zone realZone = Constant.Zone.smartValueOf(strZone);
+            final String strZone = property.substring(11);
+            final Zone realZone = Constant.Zone.smartValueOf(strZone);
             if (realZone != this.getCastFrom()) {
                 return false;
             }
         } else if (property.startsWith("wasNotCastFrom")) {
-            String strZone = property.substring(14);
-            Zone realZone = Constant.Zone.smartValueOf(strZone);
+            final String strZone = property.substring(14);
+            final Zone realZone = Constant.Zone.smartValueOf(strZone);
             if (realZone == this.getCastFrom()) {
                 return false;
             }
@@ -7379,7 +7380,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean sharesCreatureTypeWith(final Card c1) {
 
-        for (String type : this.getType()) {
+        for (final String type : this.getType()) {
             if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
                 return true;
             }
@@ -7401,7 +7402,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean sharesTypeWith(final Card c1) {
 
-        for (String type : this.getType()) {
+        for (final String type : this.getType()) {
             if (c1.isType(type)) {
                 return true;
             }
@@ -7417,7 +7418,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasACreatureType() {
-        for (String type : this.getType()) {
+        for (final String type : this.getType()) {
             if (CardUtil.isACreatureType(type)) {
                 return true;
             }
@@ -8124,8 +8125,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     @Override
     public final int replaceDamage(final int damageIn, final Card source, final boolean isCombat) {
-        //Replacement effects
-        HashMap<String, Object> repParams = new HashMap<String, Object>();
+        // Replacement effects
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
@@ -8216,8 +8217,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         if (source.hasKeyword("Deathtouch") && this.isCreature()) {
             AllZone.getGameAction().destroy(this);
-        }
-        else if (AllZoneUtil.isCardInPlay(this) && !wither) {
+        } else if (AllZoneUtil.isCardInPlay(this) && !wither) {
             this.damage += damageToAdd;
         }
 
@@ -8734,7 +8734,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Gets the replacement effects.
-     *
+     * 
      * @return the replacement effects
      */
     public ArrayList<ReplacementEffect> getReplacementEffects() {
@@ -8743,40 +8743,44 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * Sets the replacement effects.
-     *
-     * @param res the new replacement effects
+     * 
+     * @param res
+     *            the new replacement effects
      */
-    public void setReplacementEffects(ArrayList<ReplacementEffect> res) {
+    public void setReplacementEffects(final ArrayList<ReplacementEffect> res) {
         this.getCharacteristics().getReplacementEffects().clear();
-        for (ReplacementEffect replacementEffect : res) {
-            addReplacementEffect(replacementEffect);
+        for (final ReplacementEffect replacementEffect : res) {
+            this.addReplacementEffect(replacementEffect);
         }
     }
 
     /**
      * Adds the replacement effect.
-     *
-     * @param replacementEffect the rE
+     * 
+     * @param replacementEffect
+     *            the rE
      */
-    public void addReplacementEffect(ReplacementEffect replacementEffect) {
-        ReplacementEffect replacementEffectCopy = replacementEffect.getCopy();
+    public void addReplacementEffect(final ReplacementEffect replacementEffect) {
+        final ReplacementEffect replacementEffectCopy = replacementEffect.getCopy();
         replacementEffectCopy.setHostCard(this);
         this.getCharacteristics().getReplacementEffects().add(replacementEffectCopy);
     }
 
     /**
-     * Returns what zone this card was cast from (from what zone it was moved to the stack).
+     * Returns what zone this card was cast from (from what zone it was moved to
+     * the stack).
      * 
      * @return the castFrom
      */
     public Zone getCastFrom() {
-        return castFrom;
+        return this.castFrom;
     }
 
     /**
-     * @param castFrom0 the castFrom to set
+     * @param castFrom0
+     *            the castFrom to set
      */
-    public void setCastFrom(Zone castFrom0) {
+    public void setCastFrom(final Zone castFrom0) {
         this.castFrom = castFrom0;
     }
 

@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
@@ -207,7 +206,6 @@ public class AbilityFactorySetState {
 
         final boolean remChanged = abilityFactory.getMapParams().containsKey("RememberChanged");
 
-        
         for (final Card tgt : tgtCards) {
             if (abilityFactory.getAbTgt() != null) {
                 if (!tgt.canBeTargetedBy(sa)) {

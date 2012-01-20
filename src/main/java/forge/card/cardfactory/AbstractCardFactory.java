@@ -196,7 +196,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             }
             in.setState(curState);
             out.setState(curState);
-            
+
             AllZone.getTriggerHandler().clearSuppression("Transformed");
         }
 
@@ -714,141 +714,121 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*else if (cardName.equals("Aluren")) {
-            final Ability ability1 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    final PlayerZone hand = AllZone.getHumanPlayer().getZone(Constant.Zone.Hand);
-
-                    if (hand.size() == 0) {
-                        return;
-                    }
-
-                    final CardList creatures = new CardList();
-
-                    for (int i = 0; i < hand.size(); i++) {
-                        if (hand.get(i).isCreature() && (CardUtil.getConvertedManaCost(hand.get(i).getManaCost()) <= 3)) {
-                            creatures.add(hand.get(i));
-                        }
-                    }
-
-                    if (creatures.size() == 0) {
-                        return;
-                    }
-
-                    final Object o = GuiUtils.getChoiceOptional("Select target creature to play", creatures.toArray());
-                    if (o != null) {
-                        final Card c = (Card) o;
-                        AllZone.getStack().add(c.getSpellPermanent());
-                    }
-
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield));
-                } // canPlay()
-            }; // SpellAbility ability1
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Any player may play creature cards with converted mana cost 3 or less without ");
-            sb.append("paying their mana cost any time he or she could play an instant.");
-            ability1.setDescription(sb.toString());
-
-            ability1.setStackDescription("Aluren - Play creature with converted manacost 3 or less for free.");
-            ability1.getRestrictions().setAnyPlayer(true);
-            card.addSpellAbility(ability1);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Volrath's Dungeon")) {
-
-            final Cost dungeonCost = new Cost("Discard<1/Card>", cardName, true);
-            final Target dungeonTgt = new Target(card, card + " - Select target player", "Player".split(","));
-
-            final SpellAbility dungeon = new AbilityActivated(card, dungeonCost, dungeonTgt) {
-                private static final long serialVersionUID = 334033015590321821L;
-
-                @Override
-                public void chooseTargetAI() {
-                    this.setTargetPlayer(AllZone.getHumanPlayer());
-                }
-
-                @Override
-                public void resolve() {
-                    final Player target = this.getTargetPlayer();
-                    final CardList targetHand = target.getCardsIn(Zone.Hand);
-
-                    if (targetHand.size() == 0) {
-                        return;
-                    }
-
-                    if (target.isHuman()) {
-                        final Object discard = GuiUtils.getChoice("Select Card to place on top of library.",
-                                targetHand.toArray());
-
-                        final Card card = (Card) discard;
-                        AllZone.getGameAction().moveToLibrary(card);
-                    } else if (target.isComputer()) {
-                        AllZone.getComputerPlayer().handToLibrary(1, "Top");
-                    }
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return !AllZone.getComputerPlayer().getZone(Zone.Hand).isEmpty()
-                            && !AllZone.getHumanPlayer().getZone(Zone.Hand).isEmpty() && super.canPlay();
-                }
-
-            }; // SpellAbility dungeon
-
-            final Cost bailCost = new Cost("PayLife<5>", cardName, true);
-            final SpellAbility bail = new AbilityActivated(card, bailCost, null) {
-                private static final long serialVersionUID = -8990402917139817175L;
-
-                @Override
-                public void resolve() {
-                    AllZone.getGameAction().destroy(card);
-                }
-
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay();
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return card.getController().isHuman() && (AllZone.getComputerPlayer().getLife() >= 9)
-                            && super.canPlay() && !AllZone.getComputerPlayer().getZone(Zone.Hand).isEmpty();
-                }
-
-            }; // SpellAbility pay bail
-
-            final StringBuilder sbd = new StringBuilder();
-            sbd.append("Discard a card: ");
-            sbd.append("Target player puts a card from his or her hand on top of his or her library. ");
-            sbd.append("Activate this ability only any time you could cast a sorcery.");
-            dungeon.setDescription(sbd.toString());
-            dungeon.setStackDescription("CARDNAME - Target player chooses a card in hand and puts on top of library.");
-            dungeon.getRestrictions().setSorcerySpeed(true);
-
-            bail.getRestrictions().setAnyPlayer(true);
-            bail.getRestrictions().setPlayerTurn(true);
-            final StringBuilder sbb = new StringBuilder();
-            sbb.append("Pay 5 Life: Destroy Volrath's Dungeon. ");
-            sbb.append("Any player may activate this ability but only during his or her turn.");
-            bail.setDescription(sbb.toString());
-            bail.setStackDescription("Destroy CARDNAME.");
-
-            card.addSpellAbility(dungeon);
-            card.addSpellAbility(bail);
-        } */ // *************** END ************ END **************************
+        /*
+         * else if (cardName.equals("Aluren")) { final Ability ability1 = new
+         * Ability(card, "0") {
+         * 
+         * @Override public void resolve() { final PlayerZone hand =
+         * AllZone.getHumanPlayer().getZone(Constant.Zone.Hand);
+         * 
+         * if (hand.size() == 0) { return; }
+         * 
+         * final CardList creatures = new CardList();
+         * 
+         * for (int i = 0; i < hand.size(); i++) { if (hand.get(i).isCreature()
+         * && (CardUtil.getConvertedManaCost(hand.get(i).getManaCost()) <= 3)) {
+         * creatures.add(hand.get(i)); } }
+         * 
+         * if (creatures.size() == 0) { return; }
+         * 
+         * final Object o =
+         * GuiUtils.getChoiceOptional("Select target creature to play",
+         * creatures.toArray()); if (o != null) { final Card c = (Card) o;
+         * AllZone.getStack().add(c.getSpellPermanent()); }
+         * 
+         * }
+         * 
+         * @Override public boolean canPlayAI() { return false;
+         * 
+         * }
+         * 
+         * @Override public boolean canPlay() { return
+         * (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)); } //
+         * canPlay() }; // SpellAbility ability1
+         * 
+         * final StringBuilder sb = new StringBuilder(); sb.append(
+         * "Any player may play creature cards with converted mana cost 3 or less without "
+         * ); sb.append(
+         * "paying their mana cost any time he or she could play an instant.");
+         * ability1.setDescription(sb.toString());
+         * 
+         * ability1.setStackDescription(
+         * "Aluren - Play creature with converted manacost 3 or less for free."
+         * ); ability1.getRestrictions().setAnyPlayer(true);
+         * card.addSpellAbility(ability1); } // *************** END ************
+         * END **************************
+         * 
+         * // *************** START *********** START **************************
+         * else if (cardName.equals("Volrath's Dungeon")) {
+         * 
+         * final Cost dungeonCost = new Cost("Discard<1/Card>", cardName, true);
+         * final Target dungeonTgt = new Target(card, card +
+         * " - Select target player", "Player".split(","));
+         * 
+         * final SpellAbility dungeon = new AbilityActivated(card, dungeonCost,
+         * dungeonTgt) { private static final long serialVersionUID =
+         * 334033015590321821L;
+         * 
+         * @Override public void chooseTargetAI() {
+         * this.setTargetPlayer(AllZone.getHumanPlayer()); }
+         * 
+         * @Override public void resolve() { final Player target =
+         * this.getTargetPlayer(); final CardList targetHand =
+         * target.getCardsIn(Zone.Hand);
+         * 
+         * if (targetHand.size() == 0) { return; }
+         * 
+         * if (target.isHuman()) { final Object discard =
+         * GuiUtils.getChoice("Select Card to place on top of library.",
+         * targetHand.toArray());
+         * 
+         * final Card card = (Card) discard;
+         * AllZone.getGameAction().moveToLibrary(card); } else if
+         * (target.isComputer()) { AllZone.getComputerPlayer().handToLibrary(1,
+         * "Top"); } }
+         * 
+         * @Override public boolean canPlayAI() { return
+         * !AllZone.getComputerPlayer().getZone(Zone.Hand).isEmpty() &&
+         * !AllZone.getHumanPlayer().getZone(Zone.Hand).isEmpty() &&
+         * super.canPlay(); }
+         * 
+         * }; // SpellAbility dungeon
+         * 
+         * final Cost bailCost = new Cost("PayLife<5>", cardName, true); final
+         * SpellAbility bail = new AbilityActivated(card, bailCost, null) {
+         * private static final long serialVersionUID = -8990402917139817175L;
+         * 
+         * @Override public void resolve() {
+         * AllZone.getGameAction().destroy(card); }
+         * 
+         * @Override public boolean canPlay() { return super.canPlay(); }
+         * 
+         * @Override public boolean canPlayAI() { return
+         * card.getController().isHuman() &&
+         * (AllZone.getComputerPlayer().getLife() >= 9) && super.canPlay() &&
+         * !AllZone.getComputerPlayer().getZone(Zone.Hand).isEmpty(); }
+         * 
+         * }; // SpellAbility pay bail
+         * 
+         * final StringBuilder sbd = new StringBuilder();
+         * sbd.append("Discard a card: "); sbd.append(
+         * "Target player puts a card from his or her hand on top of his or her library. "
+         * ); sbd.append(
+         * "Activate this ability only any time you could cast a sorcery.");
+         * dungeon.setDescription(sbd.toString()); dungeon.setStackDescription(
+         * "CARDNAME - Target player chooses a card in hand and puts on top of library."
+         * ); dungeon.getRestrictions().setSorcerySpeed(true);
+         * 
+         * bail.getRestrictions().setAnyPlayer(true);
+         * bail.getRestrictions().setPlayerTurn(true); final StringBuilder sbb =
+         * new StringBuilder();
+         * sbb.append("Pay 5 Life: Destroy Volrath's Dungeon. "); sbb.append(
+         * "Any player may activate this ability but only during his or her turn."
+         * ); bail.setDescription(sbb.toString());
+         * bail.setStackDescription("Destroy CARDNAME.");
+         * 
+         * card.addSpellAbility(dungeon); card.addSpellAbility(bail); }
+         */// *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Mox Diamond")) {
@@ -1300,7 +1280,6 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
-
         // *************** START *********** START **************************
         else if (cardName.equals("Temporal Aperture")) {
             /*
@@ -1530,8 +1509,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 @Override
                 public void resolve() {
                     if (card.getController().isComputer()) {
-                        final CardList cards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)
-                                .getType("Artifact");
+                        final CardList cards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield).getType("Artifact");
                         if (!cards.isEmpty()) {
                             copyTarget[0] = CardFactoryUtil.getBestAI(cards);
                         }
@@ -1539,9 +1517,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                     if (copyTarget[0] != null) {
                         Card cloned;
-                        
+
                         AllZone.getTriggerHandler().suppressMode("Transformed");
-                        
+
                         cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
                         card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");

@@ -183,15 +183,15 @@ public class BuildInfo {
         } finally {
             try {
                 manifestStream.close();
-            } catch (final Throwable ignored) { // NOPMD by Braids on 8/12/11
-                                                // 10:21 AM
+            } catch (final Throwable ignored) {
+                // 10:21 AM
                 // ignored
             }
 
             try {
                 jar.close();
-            } catch (final Throwable ignored) { // NOPMD by Braids on 8/12/11
-                                                // 10:21 AM
+            } catch (final Throwable ignored) {
+                // 10:21 AM
                 // ignored
             }
         }

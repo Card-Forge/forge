@@ -83,22 +83,23 @@ public class FModel {
         try {
             this.setPreferences(new ForgePreferences("forge.preferences"));
         } catch (final Exception exn) {
-            // NOPMD by Braids on 8/13/11 8:21 PM
+
             // Log.error("Error loading preferences: " + exn);
             throw new RuntimeException(exn);
         }
 
-        // TODO these should be set along with others all at the same time, not here
+        // TODO these should be set along with others all at the same time, not
+        // here
         Constant.Runtime.MILL[0] = this.preferences.isMillingLossCondition();
         Constant.Runtime.DEV_MODE[0] = this.preferences.isDeveloperMode();
         Constant.Runtime.UPLOAD_DRAFT[0] = this.preferences.isUploadDraftAI();
         Constant.Runtime.RANDOM_FOIL[0] = this.preferences.isRandCFoil();
-        /////////
+        // ///////
 
         // Instantiate pinger
         // TODO is this in the right place?
         final HttpUtil pinger = new HttpUtil();
-        String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
+        final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
         if (pinger.getURL(url).equals("pong")) {
             Constant.Runtime.NET_CONN[0] = true;
         } else {
@@ -129,7 +130,7 @@ public class FModel {
         System.setErr(this.oldSystemErr);
         try {
             this.logFileStream.close();
-        } catch (final IOException e) { // NOPMD by Braids on 8/12/11 10:25 AM
+        } catch (final IOException e) {
             // ignored
         }
     }
