@@ -2609,6 +2609,55 @@ public class CardFactoryCreatures {
             ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);
         }
+        
+     // *************** START *********** START **************************
+        
+        else if (cardName.equals("Bazaar Trader")) {
+            
+            final Target player = new Target(card, "Select target player", "Player".split(","));
+            final AbilitySub sub = new AbilitySub(card, player) {
+                private static final long serialVersionUID = -8926222902424944054L;
+
+                @Override
+                public boolean chkAIDrawback() {
+                    return false;
+                }
+
+                @Override
+                public void resolve() {
+                    final Card permanent = this.getParent().getTargetCard();
+                    final Player player = this.getTargetPlayer();
+                    permanent.addController(player);
+                }
+
+                @Override
+                public boolean doTrigger(final boolean b) {
+                    return false;
+                }
+            };
+
+            final Cost abCost = new Cost("T", cardName, true);
+            final Target permanent = new Target(card, "Select target artifact, creature, or land you control", "Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl".split(","));
+            final AbilityActivated ability = new AbilityActivated(card, abCost, permanent) {
+                private static final long serialVersionUID = 3818522482440103914L;
+
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+
+                @Override
+                public void resolve() {
+                    sub.resolve();
+                }
+            };
+            ability.setSubAbility(sub);
+            final StringBuilder sb = new StringBuilder();
+            sb.append(cardName);
+            sb.append(" Target player gains control of target artifact, creature, or land you control.");
+            ability.setStackDescription(sb.toString());
+            card.addSpellAbility(ability);
+        }
 
         // ***************************************************
         // end of card specific code

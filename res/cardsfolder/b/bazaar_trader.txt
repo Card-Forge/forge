@@ -1,0 +1,9 @@
+Name:Bazaar Trader
+ManaCost:1 R
+Types:Creature Goblin
+Text:T:Target player gains control of target artifact, creature, or land you control.
+PT:1/1
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_trader.jpg
+End

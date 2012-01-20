@@ -682,6 +682,7 @@ res/cardsfolder/b/bayou.txt svneol=native#text/plain
 res/cardsfolder/b/bayou_dragonfly.txt svneol=native#text/plain
 res/cardsfolder/b/bazaar_of_baghdad.txt svneol=native#text/plain
 res/cardsfolder/b/bazaar_of_wonders.txt svneol=native#text/plain
+res/cardsfolder/b/bazaar_trader.txt -text svneol=unset#text/plain
 res/cardsfolder/b/beacon_behemoth.txt svneol=native#text/plain
 res/cardsfolder/b/beacon_hawk.txt svneol=native#text/plain
 res/cardsfolder/b/beacon_of_creation.txt svneol=native#text/plain
