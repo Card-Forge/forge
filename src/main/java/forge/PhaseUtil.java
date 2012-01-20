@@ -73,7 +73,7 @@ public class PhaseUtil {
 
         // For tokens a player starts the game with they don't recover from Sum.
         // Sickness on first turn
-        if (turn.getTurn() > 0) {
+        if (AllZone.getPhaseHandler().getTurn() > 0) {
             final CardList list = turn.getCardsIncludePhasingIn(Zone.Battlefield);
             for (final Card c : list) {
                 c.setSickness(false);
