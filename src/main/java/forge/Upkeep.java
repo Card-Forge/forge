@@ -65,8 +65,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepDemonicHordes();
         Upkeep.upkeepCarnophage();
         Upkeep.upkeepSangrophage();
-        Upkeep.upkeepDegaSanctuary();
-        Upkeep.upkeepCetaSanctuary();
         Upkeep.upkeepTangleWire();
 
         Upkeep.upkeepVesuvanDoppelgangerKeyword();
@@ -2220,90 +2218,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
             }
         } // if
     } // upkeepKarma()
-
-    /**
-     * <p>
-     * upkeepDegaSanctuary.
-     * </p>
-     */
-    private static void upkeepDegaSanctuary() {
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
-
-        final CardList list = player.getCardsIn(Zone.Battlefield, "Dega Sanctuary");
-
-        for (final Card sanc : list) {
-            final Card source = sanc;
-            final Ability ability = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    int gain = 0;
-                    final CardList play = player.getCardsIn(Zone.Battlefield);
-                    final CardList black = play.filter(CardListFilter.BLACK);
-                    final CardList red = play.filter(CardListFilter.RED);
-                    if ((black.size() > 0) && (red.size() > 0)) {
-                        gain = 4;
-                    } else if ((black.size() > 0) || (red.size() > 0)) {
-                        gain = 2;
-                    }
-                    player.gainLife(gain, source);
-                }
-            }; // Ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(source.getName()).append(" - ");
-            sb.append("if you control a black or red permanent, you gain 2 life. "
-                    + "If you control a black permanent and a red permanent, you gain 4 life instead.");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // for
-    } // upkeepDegaSanctuary()
-
-    /**
-     * <p>
-     * upkeepCetaSanctuary.
-     * </p>
-     */
-    private static void upkeepCetaSanctuary() {
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
-
-        final CardList list = player.getCardsIn(Zone.Battlefield, "Ceta Sanctuary");
-
-        for (final Card sanc : list) {
-            final Card source = sanc;
-            final Ability ability = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    int draw = 0;
-                    final CardList play = player.getCardsIn(Zone.Battlefield);
-                    final CardList green = play.filter(CardListFilter.GREEN);
-                    final CardList red = play.filter(CardListFilter.RED);
-
-                    if ((green.size() > 0) && (red.size() > 0)) {
-                        draw = 2;
-                    } else if ((green.size() > 0) || (red.size() > 0)) {
-                        draw = 1;
-                    }
-
-                    if (draw > 0) {
-                        player.drawCards(draw);
-                        player.discard(1, this, true);
-                    }
-                }
-            }; // Ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(source).append(" - ");
-            sb.append("At the beginning of your upkeep, if you control a red or green permanent, "
-                    + "draw a card, then discard a card. If you control a red permanent and a green permanent, "
-                    + "instead draw two cards, then discard a card.");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // for
-    } // upkeepCetaSanctuary()
 
     /**
      * <p>

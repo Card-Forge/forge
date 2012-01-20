@@ -1,0 +1,15 @@
+Name:Ana Sanctuary
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ1 | Execute$ TrigPumpA | TriggerDescription$ At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigPumpB | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
+SVar:TrigPumpA:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +1/+1 | NumAtt$ +1 | NumDef$ +1
+SVar:TrigPumpB:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +5/+5 | NumAtt$ +5 | NumDef$ +5
+SVar:Y:Count$Valid Permanent.Blue+YouCtrl/LimitMax.1
+SVar:Z:Count$Valid Permanent.Black+YouCtrl/LimitMax.1
+SVar:X:SVar$Y/Plus.Z
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ana_sanctuary.jpg
+End
