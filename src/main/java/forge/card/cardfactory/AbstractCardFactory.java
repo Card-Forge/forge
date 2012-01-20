@@ -187,6 +187,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
+            AllZone.getTriggerHandler().suppressMode("Transformed");
             final String curState = in.getCurState();
             for (final String state : in.getStates()) {
                 in.setState(state);
@@ -195,6 +196,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             }
             in.setState(curState);
             out.setState(curState);
+            
+            AllZone.getTriggerHandler().clearSuppression("Transformed");
         }
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
@@ -1536,7 +1539,9 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                     if (copyTarget[0] != null) {
                         Card cloned;
-
+                        
+                        AllZone.getTriggerHandler().suppressMode("Transformed");
+                        
                         cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
                         card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");
@@ -1566,6 +1571,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             card.setFlip(false);
                         }
 
+                        AllZone.getTriggerHandler().clearSuppression("Transformed");
                     }
 
                     AllZone.getGameAction().moveToPlay(card);

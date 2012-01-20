@@ -2295,7 +2295,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 newCopy.setCurSetCode(newTarget[0].getCurSetCode());
                                 newCopy.setImageFilename(newTarget[0].getImageFilename());
 
+                                AllZone.getTriggerHandler().suppressMode("Transformed");
                                 newCopy.setState(newTarget[0].getCurState());
+                                AllZone.getTriggerHandler().clearSuppression("Transformed");
 
                                 CardFactoryUtil.copyCharacteristics(newCopy, c);
                                 c.addColor("U");

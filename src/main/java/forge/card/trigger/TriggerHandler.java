@@ -305,11 +305,13 @@ public class TriggerHandler {
             return;
         }
 
-        if (mode.equals("Transformed")) {
-            System.out.println("Hiyo!");
-        }
-
         final Player playerAP = AllZone.getPhaseHandler().getPlayerTurn();
+        
+        if(playerAP == null)
+        {
+            //This should only happen outside of games, so it's safe to just abort.
+            return;
+        }
 
         // This is done to allow the list of triggers to be modified while
         // triggers are running.

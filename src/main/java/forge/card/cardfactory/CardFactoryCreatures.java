@@ -2140,6 +2140,8 @@ public class CardFactoryCreatures {
 
                     if (copyTarget[0] != null) {
                         Card cloned;
+                        
+                        AllZone.getTriggerHandler().suppressMode("Transformed");
 
                         cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
                         card.addAlternateState("Cloner");
@@ -2177,6 +2179,8 @@ public class CardFactoryCreatures {
                         } else {
                             card.setFlip(false);
                         }
+                        
+                        AllZone.getTriggerHandler().clearSuppression("Transformed");
 
                     }
 

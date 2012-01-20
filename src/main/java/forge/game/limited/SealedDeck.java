@@ -433,6 +433,9 @@ public class SealedDeck {
         final Deck aiDeck = new Deck(GameType.Sealed);
 
         for (i = 0; i < deck.size(); i++) {
+            if(deck.get(i).getName().equals("Plains") || deck.get(i).getName().equals("Island") || deck.get(i).getName().equals("Swamp") || deck.get(i).getName().equals("Mountain") || deck.get(i).getName().equals("Forest")) {
+                System.out.println("Heyo!");
+            }
             aiDeck.addMain(deck.get(i).getName() + "|" + deck.get(i).getCurSetCode());
         }
 

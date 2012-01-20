@@ -361,6 +361,7 @@ public final class AbilityFactoryCopy {
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
 
+                AllZone.getTriggerHandler().suppressMode("Transformed");
                 boolean wasInAlt = false;
                 if (c.isInAlternateState()) {
                     wasInAlt = true;
@@ -434,6 +435,8 @@ public final class AbilityFactoryCopy {
                     copy.setCloneOrigin(hostCard);
                     sa.getSourceCard().addClone(copy);
                     crds[i] = copy;
+                    
+                    AllZone.getTriggerHandler().clearSuppression("Transformed");
                 }
 
                 // have to do this since getTargetCard() might change

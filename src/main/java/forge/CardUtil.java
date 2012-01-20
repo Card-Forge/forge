@@ -920,7 +920,9 @@ public final class CardUtil {
             return c;
         }
         final Card res = AllZone.getCardFactory().copyCard(c);
+        AllZone.getTriggerHandler().suppressMode("Transformed");
         res.setState(state);
+        AllZone.getTriggerHandler().clearSuppression("Transformed");
         res.setControllerObjects(c.getControllerObjects());
         res.addTempAttackBoost(c.getTempAttackBoost());
         res.addSemiPermanentAttackBoost(c.getSemiPermanentAttackBoost());

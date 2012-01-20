@@ -132,6 +132,7 @@ public class GameAction {
             copied = c;
         } else {
             String state = c.getCurState();
+            AllZone.getTriggerHandler().suppressMode("Transformed");
             if (c.isInAlternateState()) {
                 c.setState("Original");
             }
@@ -139,6 +140,7 @@ public class GameAction {
                 c.switchStates("Cloner", "Original");
                 c.setState("Original");
             }
+            AllZone.getTriggerHandler().clearSuppression("Transformed");
 
             lastKnownInfo = CardUtil.getLKICopy(c, state);
             copied = AllZone.getCardFactory().copyCard(c);
@@ -574,7 +576,9 @@ public class GameAction {
         }
 
         if (c.isInAlternateState()) {
+            AllZone.getTriggerHandler().suppressMode("Transformed");
             c.setState("Original");
+            AllZone.getTriggerHandler().clearSuppression("Transformed");
         }
 
         if ((p != null) && p.is(Constant.Zone.Battlefield)) {
@@ -1366,6 +1370,8 @@ public class GameAction {
 
         final ArrayList<String> hAnteRemoved = new ArrayList<String>();
         final ArrayList<String> cAnteRemoved = new ArrayList<String>();
+        
+        AllZone.getTriggerHandler().suppressMode("Transformed");
         for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -1455,6 +1461,7 @@ public class GameAction {
                 }
             }
         }
+        AllZone.getTriggerHandler().clearSuppression("Transformed");
         if (rAICards.size() > 0) {
             final StringBuilder sb = new StringBuilder(
                     "AI deck contains the following cards that it can't play or may be buggy:\n");

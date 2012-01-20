@@ -207,7 +207,7 @@ public class AbilityFactorySetState {
 
         final boolean remChanged = abilityFactory.getMapParams().containsKey("RememberChanged");
 
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        
         for (final Card tgt : tgtCards) {
             if (abilityFactory.getAbTgt() != null) {
                 if (!tgt.canBeTargetedBy(sa)) {
@@ -219,14 +219,11 @@ public class AbilityFactorySetState {
             if (mode != null) {
                 if (mode.equals("Transform")) {
                     if (tgt.isDoubleFaced()) {
-                        runParams.put("Transformer", tgt);
                         if (tgt.getCurState().equals("Original")) {
                             if (tgt.setState("Transformed")) {
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(tgt);
                                 }
-
-                                AllZone.getTriggerHandler().runTrigger("Transformed", runParams);
                             }
                         } else if (tgt.getCurState().equals("Transformed")) {
                             if (tgt.setState("Original")) {
@@ -234,7 +231,6 @@ public class AbilityFactorySetState {
                                     abilityFactory.getHostCard().addRemembered(tgt);
                                 }
 
-                                AllZone.getTriggerHandler().runTrigger("Transformed", runParams);
                             }
                         }
                     }
@@ -408,20 +404,17 @@ public class AbilityFactorySetState {
             card.clearRemembered();
         }
 
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
         for (int i = 0; i < list.size(); i++) {
             final String mode = abilityFactory.getMapParams().get("Mode");
             if (mode != null) {
                 if (mode.equals("Transform")) {
                     if (list.get(i).isDoubleFaced()) {
-                        runParams.put("Transformer", list.get(i));
                         if (list.get(i).getCurState().equals("Original")) {
                             if (list.get(i).setState("Transformed") && remChanged) {
                                 if (remChanged) {
                                     abilityFactory.getHostCard().addRemembered(list.get(i));
                                 }
 
-                                AllZone.getTriggerHandler().runTrigger("Transformed", runParams);
                             }
                         } else if (list.get(i).getCurState().equals("Transformed")) {
                             if (list.get(i).setState("Original")) {
@@ -429,7 +422,6 @@ public class AbilityFactorySetState {
                                     abilityFactory.getHostCard().addRemembered(list.get(i));
                                 }
 
-                                AllZone.getTriggerHandler().runTrigger("Transformed", runParams);
                             }
                         }
                     }
