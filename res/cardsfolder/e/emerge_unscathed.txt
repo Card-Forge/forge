@@ -2,7 +2,8 @@ Name:Emerge Unscathed
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$ Protection | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of your choice until end of turn.
+K:Rebound
+A:SP$ Protection | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn.
 #Computer isn't very good at picking a color to get protection from yet
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerge_unscathed.jpg
