@@ -2560,9 +2560,9 @@ public class CardFactoryCreatures {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
         } // *************** END ************ END **************************
-        
-     // *************** START *********** START **************************
-        
+
+        // *************** START *********** START **************************
+
         else if (cardName.equals("Zedruu the Greathearted")) {
 
             final Target player = new Target(card, "Select target opponent", "Opponent".split(","));
