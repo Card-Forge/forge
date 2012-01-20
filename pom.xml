@@ -73,6 +73,20 @@
             </roles>
         </developer>
         <developer>
+            <id>moomarc</id>
+            <name>moomarc</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>ArsenalNut</id>
+            <name>ArsenalNut</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
             <id>friarsol</id>
             <name>zenchristo</name>
             <roles>

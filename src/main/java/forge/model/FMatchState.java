@@ -63,12 +63,12 @@ public class FMatchState {
         return this.gamesPlayed.toArray(new GameSummary[this.gamesPlayed.size()]);
     }
 
-    /** @return {@java.lang.Integer} */
+    /** @return java.lang.Integer */
     public final Integer getGamesPlayedCount() {
         return this.gamesPlayed.size();
     }
 
-    /** @return {@java.lang.Integer} */
+    /** @return java.lang.Integer */
     public final Integer getGamesPerMatch() {
         return GAMES_PER_MATCH;
     }
@@ -114,7 +114,7 @@ public class FMatchState {
      * Count games won by.
      * 
      * @param name &emsp; the name
-     * @return {@java.lang.Integer}
+     * @return java.lang.Integer
      */
     public final int countGamesWonBy(final String name) {
         int wins = 0;
