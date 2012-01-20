@@ -88,6 +88,27 @@ Fixes/Features:
 - Redundant scaleLargerThanOriginal method removed from ImageCache, preferences setting used directly instead.
 - First small attempt at "non-sticky" combat panel (needs playtesting).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Reverted green/red theme on phase labels.
+- Added targeting support to tapAllTrigger AI.
+- Updated some SVars.
+- Codebase organization: 
+1) Moved MatchState from forge package into model package, renamed to FMatchState.
+2) Documented the difference between FMatchState and FGameState.
+- Added Trepanation Blade (and supporting RememberRevealed code to AbilityFactoryReveal)
+- Fixed possible NPE in AbilityFactory.getDefinedSpellAbilities()
+- Cleanup in CardFactorySorceries.java
+- Fixed Illumination.
+- Updated some SVars.
+- Fixed Gravity Well.
+- CheckStyle.
+- Fixed Soul Seizer // Ghastly Haunting script.
+- Fixed Curse of Thirst and Curse of the Pierced Heart after EnchantedPlayer removed from Valid.
+- merged updates (r13217-r13308) from trunk cardsfolder into DKA branch.
+- Converted to script: Ceta Sanctuary and Dega Sanctuary
+- Ran SetInfo and Oracle scripts
+- Small fix
+- Fixed summoning sickness not being cleared on the first turn of the player going second.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -132,6 +153,13 @@ Stromkirk Captain
 Helvault
 Warden of the Wall
 Thought Scour
+Predator Ooze
+Tragic Slip
+Headless Skaab
+Afflicted Deserter // Werewolf Ransacker
+Havengul Runebinder
+Falkenrath Torturer
+Curse of Bloodletting
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -167,6 +195,12 @@ Hydroblast
 Pyroblast
 Torture Chamber
 Wood Sage
+Trepanation Blade
+Interdict
+Zedruu the Greathearted
+Ana Sanctuary
+Necra Sanctuary
+Raka Sanctuary
 
 
 end
