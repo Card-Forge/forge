@@ -4,7 +4,7 @@ Types:Legendary Creature Avatar
 Text:no text
 PT:5/5
 K:Haste
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Each | TriggerZones$ Battlefield | Execute$ TrigControl | TriggerDescription$ At the beginning of each player's upkeep, that player untaps CARDNAME and gains control of it.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigControl | TriggerDescription$ At the beginning of each player's upkeep, that player untaps CARDNAME and gains control of it.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoosePump | TriggerDescription$ Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.
 SVar:TrigControl:AB$GainControl | Cost$ 0 | Defined$ Self | NewController$ TriggeredPlayer | Untap$ True | SpellDescription$ Untap CARDNAME and gain control of it.
 SVar:TrigChoosePump:AB$ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get +3/+3 until end of turn.

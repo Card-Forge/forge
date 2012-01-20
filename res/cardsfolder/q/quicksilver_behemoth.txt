@@ -6,7 +6,7 @@ PT:4/5
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelayedTrig | TriggerDescription$ When CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelayedTrig | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
-SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_behemoth.jpg

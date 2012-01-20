@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks, destroy it at end of combat.
-SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigDestroy | TriggerDescription$ Destroy CARDNAME at end of combat.
+SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy CARDNAME at end of combat.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Common
