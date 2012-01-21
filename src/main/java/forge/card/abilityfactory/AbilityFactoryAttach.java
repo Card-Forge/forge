@@ -990,6 +990,11 @@ public class AbilityFactoryAttach {
                 final boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
                 AbilityFactoryAttach.handleAura(card, c, gainControl);
             } else if (card.isEquipment()) {
+                System.out.println("equip: " + o);
+                if (card.isEquipping()) {
+                    card.unEquipCard(card.getEquipping().get(0));
+                }
+
                 card.equipCard(c);
                 // else if (card.isFortification())
                 // card.fortifyCard(c);

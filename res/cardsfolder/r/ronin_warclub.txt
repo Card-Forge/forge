@@ -1,0 +1,12 @@
+Name:Ronin Warclub
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature gets +2/+1.
+K:eqPump 5:+2/+1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever a creature enters the battlefield under your control, attach CARDNAME to that creature.
+SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_warclub.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/158.jpg
+Oracle:Equipped creature gets +2/+1.\nWhenever a creature enters the battlefield under your control, attach Ronin Warclub to that creature.\nEquip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
+End
