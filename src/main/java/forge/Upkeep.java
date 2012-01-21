@@ -193,6 +193,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
                 };
                 sacAbility.setStackDescription(sb.toString());
+                sacAbility.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(sacAbility);
 
