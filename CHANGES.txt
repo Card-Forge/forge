@@ -17,7 +17,42 @@ We have changed the archival format used for the Forge distributions from ".zip"
 
 Fixes/Features:
 
-
+- Fixed Ghastlord of Fugue.
+- Updated the Kang decks.
+- Fixed description of Storm Entity.
+- CheckStyle.
+- Cleared out the changes.txt file, now ready for new material.
+- Moved trigger call for Transformed triggers. Fixes Huntmaster of the Fells // Ravager of the Fells & Afflicted Deserter // Werewolf Ransacker.
+- Mantis pom now has proper deps. Forge does not need to track them.
+- CheckStyle.
+- Fixed Sanctuary cycle of cards from Apocalypse.
+- Fixed Thawing Glaciers.
+- Fixed some "Basilisk" cards.
+- Tweaked Trepanation Blade script. Now uses Cleanup AF instead of ForgetOtherRemembered (removed that from AbilityFactoryReveal)
+- Little cleanup.
+- Fixed 41 more cards with "ValidPlayer$ Each" (Oops).
+- Dependencies and checkstyle is now clean
+- Fixed multiple errors in the script of Emerge Unscathed.
+- Add developers to pom file. Fix some javadoc
+- More reports
+- More reports
+- Fixed Puppeteer Clique.
+- Updated the Rebel skin a bit. Still needs a bit more love.
+- Committed the DarkAscension skin.
+- fixed Gruesome Discovery
+- Refactored FSkin to use enums for access to its various elements.
+- Small fix to CanDestroyBlocker in CombatUtil.
+- Big changes to skin:
+1) All symbols now included in sprite (but not accessible yet)
+2) Default symbols will load if preferred skin does not have that symbol
+3) Phase color swatch added (also not accessed yet)
+4) All skins updated to reflect this
+- Fixed Dragon Mask.
+- Fixed a problem with Echo.
+- Ran set info script.
+- Ran oracle script.
+- Fixed the description of the echo ability.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -69,6 +104,34 @@ Vorapede
 Warden of the Wall
 Zombie Apocalypse
 
+Heavy Mattock
+Sudden Disappearance
+Gruesome Discovery
+Talons of Falkenrath
+Briarpack Alpha
+Diregraf Captain
+Executioner's Hood
+Feed the Pack
+Forge Devil
+Geralf's Messenger
+Gravetiller Wurm
+Grim Backwoods
+Havengul Fengraf
+Heckling Fiends
+Hellrider
+Increasing Ambition
+Increasing Savagery
+Pyreheart Wolf
+Skirsdag Flayer
+Wolfbitten Captive // Krallenhorde Killer
+Bone to Ash
+Farborg Boneflinger
+Griptide
+Hollowhenge Beast
+Markov Warlord
+Skillful Lunge
+Torch Fiend
+
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
@@ -77,7 +140,13 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Bazaar Trader
+Famished Ghoul
+Gravegouger
+Divining Witch
+Predict
+Shelter
+Makeshift Mannequin
 
 
 end
