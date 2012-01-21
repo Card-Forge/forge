@@ -81,6 +81,7 @@ public class FSkin {
         ICON_DOCK_DECKLIST, /** */
 
         IMG_LOGO, /** */
+        IMG_FAVICON, /** */
 
         IMG_BTN_START_UP, /** */
         IMG_BTN_START_OVER, /** */
@@ -127,32 +128,13 @@ public class FSkin {
         FILE_TEXTURE_BG = "bg_texture.jpg";
 
     private final String notfound = "FSkin.java: Can't find ";
-    private final String dirName;
+    private final String preferredDir;
+    private final String defaultDir;
+    private final String preferredName;
     private Font font;
-    private String name = "default";
-
-    /**
-     * Gets the skins.
-     *
-     * @return the skins
-     */
-    public static ArrayList<String> getSkins() {
-        final ArrayList<String> mySkins = new ArrayList<String>();
-
-        File dir = new File(FILE_SKINS_DIR);
-        String[] children = dir.list();
-        if (children == null) {
-            System.err.println("FSkin > can't find skins directory!");
-        } else {
-            for (int i = 0; i < children.length; i++) {
-                if (children[i].equalsIgnoreCase(".svn")) { continue; }
-                if (children[i].equalsIgnoreCase(".DS_Store")) { continue; }
-                mySkins.add(children[i]);
-            }
-        }
-
-        return mySkins;
-    }
+    private BufferedImage bimDefaultSprite;
+    private BufferedImage bimPreferredSprite;
+    private int preferredH, preferredW;
 
     /**
      * FSkin constructor. No arguments, will generate default skin settings,
@@ -169,38 +151,74 @@ public class FSkin {
      * 
      * @param skinName
      *            the skin name
-     * @throws IOException for splash image file
      */
-    public FSkin(final String skinName) throws IOException {
-        this.name = skinName;
-        this.dirName = FILE_SKINS_DIR + skinName + "/";
+    public FSkin(final String skinName) {
+        this.preferredName = skinName;
+        this.preferredDir = FILE_SKINS_DIR + preferredName + "/";
+        this.defaultDir = FILE_SKINS_DIR + "default/";
         this.icons = new HashMap<SkinProp, ImageIcon>();
         this.colors = new HashMap<SkinProp, Color>();
 
-        final File file = new File(dirName + FILE_SPLASH);
-        BufferedImage image;
+        final File f = new File(preferredDir + FILE_SPLASH);
+        final BufferedImage img;
         try {
-            image = ImageIO.read(file);
-            final int h = image.getHeight();
-            final int w = image.getWidth();
-            this.setIcon(SkinProp.BG_SPLASH, image.getSubimage(0, 0, w, h - 100));
+            img = ImageIO.read(f);
 
-            this.setColor(SkinProp.PRELOAD_EMPTY_BG, this.getColorFromPixel(image.getRGB(25, h - 75)));
-            this.setColor(SkinProp.PRELOAD_EMPTY_TXT, this.getColorFromPixel(image.getRGB(75, h - 75)));
-            this.setColor(SkinProp.PRELOAD_FULL_BG, this.getColorFromPixel(image.getRGB(25, h - 25)));
-            this.setColor(SkinProp.PRELOAD_FULL_TXT, this.getColorFromPixel(image.getRGB(75, h - 25)));
+            final int h = img.getHeight();
+            final int w = img.getWidth();
+
+            this.setIcon(SkinProp.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
+
+            this.setColor(SkinProp.PRELOAD_EMPTY_BG, this.getColorFromPixel(img.getRGB(25, h - 75)));
+            this.setColor(SkinProp.PRELOAD_EMPTY_TXT, this.getColorFromPixel(img.getRGB(75, h - 75)));
+            this.setColor(SkinProp.PRELOAD_FULL_BG, this.getColorFromPixel(img.getRGB(25, h - 25)));
+            this.setColor(SkinProp.PRELOAD_FULL_TXT, this.getColorFromPixel(img.getRGB(75, h - 25)));
+
         } catch (final IOException e) {
-            throw new IOException(this.notfound + dirName + FILE_SPLASH, e);
+            System.err.println(this.notfound + preferredDir + FILE_SPLASH);
+            e.printStackTrace();
         }
     }
 
     /**
-     * Loads objects from skin folder, prints brief error if not found.
-     * @throws IOException for sprite image filec
+     * Loads two sprites: the default (which should be a complete
+     * collection of all symbols) and the preferred (which may be
+     * incomplete).
+     * 
+     * Color swatches must be present in the preferred
+     * sprite, and will not be replaced by default.
+     * 
+     * Background images must be present in skin folder,
+     * and will not be replaced by default.
+     * 
+     * Font must be present in the skin folder, and will not
+     * be replaced by default.  The fonts are pre-derived
+     * in this method and saved in a HashMap for future access.
+     * 
+     * Icons, however, will be pulled from the two sprites. Obviously,
+     * preferred takes precedence over default, but if something is
+     * missing, the default picture is retrieved.
      */
-    public void loadFontAndImages() throws IOException {
-        // Fonts
-        this.font = GuiUtils.newFont(dirName + FILE_FONT);
+    public void loadFontAndImages() {
+        // Grab and test the two sprite files.
+        final File f1 = new File(defaultDir + FILE_SPRITE);
+        final File f2 = new File(preferredDir + FILE_SPRITE);
+
+        try {
+            bimDefaultSprite = ImageIO.read(f1);
+            bimPreferredSprite = ImageIO.read(f2);
+
+            preferredH = bimPreferredSprite.getHeight();
+            preferredW = bimPreferredSprite.getWidth();
+        }
+        catch (Exception e) {
+            System.err.println(this.notfound + " a sprite.");
+            e.printStackTrace();
+        }
+
+        // Pre-derive most fonts (plain, bold, and italic).
+        // Exceptions handled inside method.
+        this.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
         plainFonts = new HashMap<Integer, Font>();
         plainFonts.put(10, font.deriveFont(Font.PLAIN, 10));
         plainFonts.put(11, font.deriveFont(Font.PLAIN, 11));
@@ -224,15 +242,17 @@ public class FSkin {
         italicFonts.put(12, font.deriveFont(Font.ITALIC, 12));
         italicFonts.put(14, font.deriveFont(Font.ITALIC, 14));
 
-        // Images
-        this.setIcon(SkinProp.BG_TEXTURE, dirName + FILE_TEXTURE_BG);
-        this.setIcon(SkinProp.BG_MATCH, dirName + FILE_MATCH_BG);
+        // Put various images into map (except sprite and splash).
+        // Exceptions handled inside method.
+        this.setIcon(SkinProp.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
+        this.setIcon(SkinProp.BG_MATCH, preferredDir + FILE_MATCH_BG);
 
         // Sprite
-        final File file = new File(dirName + FILE_SPRITE);
+        final File file = new File(preferredDir + FILE_SPRITE);
         BufferedImage image;
         try {
             image = ImageIO.read(file);
+
             this.setColor(SkinProp.CLR_THEME, this.getColorFromPixel(image.getRGB(70, 10)));
             this.setColor(SkinProp.CLR_BORDERS, this.getColorFromPixel(image.getRGB(70, 30)));
             this.setColor(SkinProp.CLR_ZEBRA, this.getColorFromPixel(image.getRGB(70, 50)));
@@ -241,59 +261,59 @@ public class FSkin {
             this.setColor(SkinProp.CLR_INACTIVE, this.getColorFromPixel(image.getRGB(70, 110)));
             this.setColor(SkinProp.CLR_TEXT, this.getColorFromPixel(image.getRGB(70, 130)));
 
-            // All icons should eventually be set and retrieved using this
-            // method. Doublestrike 6-12-11
-            this.setIcon(SkinProp.ICON_ZONE_HAND, image.getSubimage(280, 40, 40, 40));
-            this.setIcon(SkinProp.ICON_ZONE_LIBRARY, image.getSubimage(280, 0, 40, 40));
-            this.setIcon(SkinProp.ICON_ZONE_GRAVEYARD, image.getSubimage(320, 0, 40, 40));
-            this.setIcon(SkinProp.ICON_ZONE_EXILE, image.getSubimage(320, 40, 40, 40));
-            this.setIcon(SkinProp.ICON_ZONE_FLASHBACK, image.getSubimage(320, 120, 40, 40));
-            this.setIcon(SkinProp.ICON_ZONE_POISON, image.getSubimage(320, 80, 40, 40));
+            this.setIcon(SkinProp.ICON_ZONE_HAND, 280, 40, 40, 40);
+            this.setIcon(SkinProp.ICON_ZONE_LIBRARY, 280, 0, 40, 40);
+            this.setIcon(SkinProp.ICON_ZONE_GRAVEYARD, 320, 0, 40, 40);
+            this.setIcon(SkinProp.ICON_ZONE_EXILE, 320, 40, 40, 40);
+            this.setIcon(SkinProp.ICON_ZONE_FLASHBACK, 280, 80, 40, 40);
+            this.setIcon(SkinProp.ICON_ZONE_POISON, 320, 80, 40, 40);
 
-            this.setIcon(SkinProp.ICON_MANA_BLACK, image.getSubimage(240, 0, 40, 40));
-            this.setIcon(SkinProp.ICON_MANA_BLUE, image.getSubimage(240, 40, 40, 40));
-            this.setIcon(SkinProp.ICON_MANA_GREEN, image.getSubimage(240, 120, 40, 40));
-            this.setIcon(SkinProp.ICON_MANA_RED, image.getSubimage(240, 80, 40, 40));
-            this.setIcon(SkinProp.ICON_MANA_WHITE, image.getSubimage(280, 120, 40, 40));
-            this.setIcon(SkinProp.ICON_MANA_COLORLESS, image.getSubimage(280, 80, 40, 40));
+            this.setIcon(SkinProp.ICON_MANA_BLACK, 360, 160, 40, 40);
+            this.setIcon(SkinProp.ICON_MANA_BLUE, 360, 160, 40, 40);
+            this.setIcon(SkinProp.ICON_MANA_RED, 400, 160, 40, 40);
+            this.setIcon(SkinProp.ICON_MANA_GREEN, 400, 200, 40, 40);
+            this.setIcon(SkinProp.ICON_MANA_COLORLESS, 440, 200, 40, 40);
+            this.setIcon(SkinProp.ICON_MANA_WHITE, 440, 240, 40, 40);
 
-            this.setIcon(SkinProp.ICON_DOCK_SHORTCUTS, image.getSubimage(160, 0, 80, 80));
-            this.setIcon(SkinProp.ICON_DOCK_SETTINGS, image.getSubimage(80, 0, 80, 80));
-            this.setIcon(SkinProp.ICON_DOCK_ENDTURN, image.getSubimage(160, 80, 80, 80));
-            this.setIcon(SkinProp.ICON_DOCK_CONCEDE, image.getSubimage(80, 80, 80, 80));
-            this.setIcon(SkinProp.ICON_DOCK_DECKLIST, image.getSubimage(80, 160, 80, 80));
+            this.setIcon(SkinProp.ICON_DOCK_SETTINGS, 80, 640, 80, 80);
+            this.setIcon(SkinProp.ICON_DOCK_SHORTCUTS, 160, 640, 80, 80);
+            this.setIcon(SkinProp.ICON_DOCK_CONCEDE, 240, 640, 80, 80);
+            this.setIcon(SkinProp.ICON_DOCK_ENDTURN, 320, 640, 80, 80);
+            this.setIcon(SkinProp.ICON_DOCK_DECKLIST, 400, 640, 80, 80);
 
-            this.setIcon(SkinProp.IMG_LOGO, image.getSubimage(280, 240, 200, 200));
+            this.setIcon(SkinProp.IMG_LOGO, 480, 0, 200, 200);
+            this.setIcon(SkinProp.IMG_FAVICON, 0, 720, 80, 80);
 
-            this.setIcon(SkinProp.IMG_BTN_START_UP, image.getSubimage(0, 240, 160, 80));
-            this.setIcon(SkinProp.IMG_BTN_START_OVER, image.getSubimage(0, 320, 160, 80));
-            this.setIcon(SkinProp.IMG_BTN_START_DOWN, image.getSubimage(0, 400, 160, 80));
+            this.setIcon(SkinProp.IMG_BTN_START_UP, 480, 200, 160, 80);
+            this.setIcon(SkinProp.IMG_BTN_START_OVER, 480, 280, 160, 80);
+            this.setIcon(SkinProp.IMG_BTN_START_DOWN, 480, 360, 160, 80);
 
-            this.setIcon(SkinProp.IMG_BTN_UP_LEFT, image.getSubimage(360, 0, 40, 40));
-            this.setIcon(SkinProp.IMG_BTN_UP_CENTER, image.getSubimage(400, 0, 1, 40));
-            this.setIcon(SkinProp.IMG_BTN_UP_RIGHT, image.getSubimage(440, 0, 40, 40));
+            this.setIcon(SkinProp.IMG_BTN_UP_LEFT, 80, 0, 40, 40);
+            this.setIcon(SkinProp.IMG_BTN_UP_CENTER, 120, 0, 1, 40);
+            this.setIcon(SkinProp.IMG_BTN_UP_RIGHT, 160, 0, 40, 40);
 
-            this.setIcon(SkinProp.IMG_BTN_OVER_LEFT, image.getSubimage(360, 40, 40, 40));
-            this.setIcon(SkinProp.IMG_BTN_OVER_CENTER, image.getSubimage(400, 40, 1, 40));
-            this.setIcon(SkinProp.IMG_BTN_OVER_RIGHT, image.getSubimage(440, 40, 40, 40));
+            this.setIcon(SkinProp.IMG_BTN_OVER_LEFT, 80, 40, 40, 40);
+            this.setIcon(SkinProp.IMG_BTN_OVER_CENTER, 120, 40, 1, 40);
+            this.setIcon(SkinProp.IMG_BTN_OVER_RIGHT, 160, 40, 40, 40);
 
-            this.setIcon(SkinProp.IMG_BTN_DOWN_LEFT, image.getSubimage(360, 80, 40, 40));
-            this.setIcon(SkinProp.IMG_BTN_DOWN_CENTER, image.getSubimage(400, 80, 1, 40));
-            this.setIcon(SkinProp.IMG_BTN_DOWN_RIGHT, image.getSubimage(440, 80, 40, 40));
+            this.setIcon(SkinProp.IMG_BTN_DOWN_LEFT, 80, 80, 40, 40);
+            this.setIcon(SkinProp.IMG_BTN_DOWN_CENTER, 120, 80, 1, 40);
+            this.setIcon(SkinProp.IMG_BTN_DOWN_RIGHT, 160, 80, 40, 40);
 
-            this.setIcon(SkinProp.IMG_BTN_FOCUS_LEFT, image.getSubimage(360, 120, 40, 40));
-            this.setIcon(SkinProp.IMG_BTN_FOCUS_CENTER, image.getSubimage(400, 120, 1, 40));
-            this.setIcon(SkinProp.IMG_BTN_FOCUS_RIGHT, image.getSubimage(440, 120, 40, 40));
+            this.setIcon(SkinProp.IMG_BTN_FOCUS_LEFT, 80, 120, 40, 40);
+            this.setIcon(SkinProp.IMG_BTN_FOCUS_CENTER, 120, 120, 1, 40);
+            this.setIcon(SkinProp.IMG_BTN_FOCUS_RIGHT, 160, 120, 40, 40);
 
-            this.setIcon(SkinProp.IMG_BTN_TOGGLE_LEFT, image.getSubimage(360, 160, 40, 40));
-            this.setIcon(SkinProp.IMG_BTN_TOGGLE_CENTER, image.getSubimage(400, 160, 1, 40));
-            this.setIcon(SkinProp.IMG_BTN_TOGGLE_RIGHT, image.getSubimage(440, 160, 40, 40));
+            this.setIcon(SkinProp.IMG_BTN_TOGGLE_LEFT, 80, 160, 40, 40);
+            this.setIcon(SkinProp.IMG_BTN_TOGGLE_CENTER, 120, 160, 1, 40);
+            this.setIcon(SkinProp.IMG_BTN_TOGGLE_RIGHT, 160, 160, 40, 40);
 
-            this.setIcon(SkinProp.IMG_BTN_DISABLED_LEFT, image.getSubimage(360, 200, 40, 40));
-            this.setIcon(SkinProp.IMG_BTN_DISABLED_CENTER, image.getSubimage(400, 200, 1, 40));
-            this.setIcon(SkinProp.IMG_BTN_DISABLED_RIGHT, image.getSubimage(440, 200, 40, 40));
+            this.setIcon(SkinProp.IMG_BTN_DISABLED_LEFT, 80, 200, 40, 40);
+            this.setIcon(SkinProp.IMG_BTN_DISABLED_CENTER, 120, 200, 1, 40);
+            this.setIcon(SkinProp.IMG_BTN_DISABLED_RIGHT, 160, 200, 40, 40);
         } catch (final IOException e) {
-            throw new IOException(this.notfound + FILE_SPRITE, e);
+            System.err.println(this.notfound + preferredDir + FILE_SPRITE);
+            e.printStackTrace();
         }
     }
 
@@ -354,10 +374,10 @@ public class FSkin {
     /**
      * Gets the name.
      * 
-     * @return Name of skin.
+     * @return Name of the current skin.
      */
     public String getName() {
-        return this.name;
+        return this.preferredName;
     }
 
     /**
@@ -398,44 +418,102 @@ public class FSkin {
 
     /**
      * Sets an icon in this skin's icon map from a file address.
+     * Throws IO exception for debugging if needed.
      * 
      * @param s0
      *            &emsp; Skin property (from enum)
      * @param s1
      *            &emsp; File address
      */
-    public void setIcon(final SkinProp s0, final String s1) {
+    private void setIcon(final SkinProp s0, final String s1) {
+        try {
+            final File file = new File(s1);
+            ImageIO.read(file);
+        } catch (IOException e) {
+            System.err.println(this.notfound + preferredDir + FILE_SPLASH);
+            e.printStackTrace();
+        }
         this.icons.put(s0, new ImageIcon(s1));
     }
+
     /**
-     * Sets an icon in this skin's icon map from a BufferedImage.
+     * Checks the preferred sprite for existence of a sub-image
+     * defined by X, Y, W, H.
      * 
-     * @param s0
-     *            &emsp; Skin property (from enum)
-     * @param bi0
-     *            &emsp; BufferedImage
+     * If an image is not present at those coordinates, default
+     * icon is substituted.
+     * 
+     * The result is saved in a HashMap.
+     * 
+     * @param s0 &emsp; An address in the hashmap, derived from SkinProp enum
+     * @param x0 &emsp; X-coord of sub-image
+     * @param y0 &emsp; Y-coord of sub-image
+     * @param w0 &emsp; Width of sub-image
+     * @param h0 &emsp; Height of sub-image
+     */
+    public void setIcon(final SkinProp s0,
+            final int x0, final int y0, final int w0, final int h0) {
+        // Test if requested sub-image in inside bounds of preferred sprite.
+        // (Height and width of preferred sprite were set in loadFontAndImages.)
+        Boolean exists = false;
+
+        if (x0 <= preferredW
+                && x0 + w0 <= preferredW
+                && y0 <= preferredH
+                && y0 + h0 <= preferredH) {
+            exists = true;
+        }
+
+        // Test if various points of requested sub-image are transparent.
+        // If any return true, image exists.
+        if (exists) {
+            int x, y;
+            Color c;
+            exists = false;
+
+            // Center
+            x = (int) (x0 + w0 / 2);
+            y = (int) (y0 + h0 / 2);
+            c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            if (c.getAlpha() != 0) { exists = true; }
+
+            x += 2;
+            y += 2;
+            c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            if (c.getAlpha() != 0) { exists = true; }
+
+            x -= 4;
+            c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            if (c.getAlpha() != 0) { exists = true; }
+
+            y -= 4;
+            c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            if (c.getAlpha() != 0) { exists = true; }
+
+            x += 4;
+            c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            if (c.getAlpha() != 0) { exists = true; }
+        }
+
+        BufferedImage img = (exists ? bimPreferredSprite : bimDefaultSprite);
+        BufferedImage bi0 = img.getSubimage(x0, y0, w0, h0);
+        this.icons.put(s0, new ImageIcon(bi0));
+    }
+
+    /**
+     * Sets an icon in this skin's icon map from a buffered image.
+     * 
+     * @param s0 &emsp; Skin property (from enum)
+     * @param bi0 &emsp; BufferedImage
      */
     public void setIcon(final SkinProp s0, final BufferedImage bi0) {
         this.icons.put(s0, new ImageIcon(bi0));
     }
 
     /**
-     * Sets an icon in this skin's icon map from an ImageIcon.
-     * 
-     * @param s0
-     *            &emsp; Skin property (from enum)
-     * @param i0
-     *            &emsp; ImageIcon
-     */
-    public void setIcon(final SkinProp s0, final ImageIcon i0) {
-        this.icons.put(s0, i0);
-    }
-
-    /**
      * Retrieves a color from this skin's color map.
      * 
-     * @param s0
-     *            &emsp; Skin property (from enum)
+     * @param s0 &emsp; Skin property (from enum)
      * @return Color
      */
     public Color getColor(final SkinProp s0) {
@@ -452,5 +530,28 @@ public class FSkin {
      */
     public void setColor(final SkinProp s0, final Color c0) {
         this.colors.put(s0, c0);
+    }
+
+    /**
+     * Gets the skins.
+     *
+     * @return the skins
+     */
+    public static ArrayList<String> getSkins() {
+        final ArrayList<String> mySkins = new ArrayList<String>();
+
+        File dir = new File(FILE_SKINS_DIR);
+        String[] children = dir.list();
+        if (children == null) {
+            System.err.println("FSkin > can't find skins directory!");
+        } else {
+            for (int i = 0; i < children.length; i++) {
+                if (children[i].equalsIgnoreCase(".svn")) { continue; }
+                if (children[i].equalsIgnoreCase(".DS_Store")) { continue; }
+                mySkins.add(children[i]);
+            }
+        }
+
+        return mySkins;
     }
 }

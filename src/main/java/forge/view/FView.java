@@ -17,8 +17,6 @@
  */
 package forge.view;
 
-import java.io.IOException;
-
 import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
@@ -118,11 +116,7 @@ public class FView {
                     @Override
                     public void run() {
                         AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
-                        try {
-                            FView.this.skin.loadFontAndImages();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        FView.this.skin.loadFontAndImages();
 
                         CardFaceSymbols.loadImages();
 
