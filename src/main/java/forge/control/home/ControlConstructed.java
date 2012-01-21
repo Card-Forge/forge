@@ -461,6 +461,8 @@ public class ControlConstructed {
         generateHumanDecks(humanSelected);
         generateAIDecks(aiSelected);
 
+        Constant.Runtime.setGameType(GameType.Constructed);
+
         GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
 
         g.getController().changeState(FControl.MATCH_SCREEN);
