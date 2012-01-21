@@ -33,6 +33,8 @@ import forge.Singletons;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.control.home.ControlSettings;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 import forge.view.GuiTopLevel;
 import forge.view.toolbox.FSkin;
 
@@ -122,7 +124,7 @@ public class ViewSettings extends JScrollPane {
         viewport.add(cbStackLand, regularConstraints);
         viewport.add(lblStackLand, regularConstraints);
 
-        cbDevMode = new OptionsCheckBox("Developer Mode");
+        cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
         cbDevMode.setSelected(Singletons.getModel().getPreferences().isDeveloperMode());
         final JLabel lblDevMode = new NoteLabel("Enables menu with functions for testing during development.");
         viewport.add(cbDevMode, regularConstraints);
