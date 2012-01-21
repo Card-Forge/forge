@@ -99,8 +99,8 @@ public class ReplacementHandler {
         }
 
         if (chosenRE != null) {
-            Player optDecider = decider;
-            optDecider = AbilityFactory.getDefinedPlayers(chosenRE.getHostCard(), chosenRE.getMapParams().get("OptionalDecider"), null).get(0);
+            //Player optDecider = decider;
+            //optDecider = AbilityFactory.getDefinedPlayers(chosenRE.getHostCard(), chosenRE.getMapParams().get("OptionalDecider"), null).get(0);
             if (chosenRE.getMapParams().containsKey("Optional")) {
                 if (decider.isHuman()) {
                     StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
