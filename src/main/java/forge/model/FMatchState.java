@@ -22,7 +22,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardList;
 import forge.game.GameSummary;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 
 /**
  * Represents state of match <i>as a whole</i> - that is, not
@@ -41,6 +46,9 @@ public class FMatchState {
     public static final int MIN_GAMES_TO_WIN_MATCH = 2;
 
     private final List<GameSummary> gamesPlayed = new ArrayList<GameSummary>();
+    
+    private final List<CardPrinted> antesWon = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> antesLost = new ArrayList<CardPrinted>();
 
     // ArrayList<GameSpecialConditions>
 
@@ -136,11 +144,65 @@ public class FMatchState {
     public final boolean isMatchWonBy(final String name) {
         return this.countGamesWonBy(name) >= FMatchState.MIN_GAMES_TO_WIN_MATCH;
     }
+    
+    /**
+     * Adds a CardList to the antes that have already been won this match.
+     * 
+     * @param antes cards won in ante
+     * 
+     * @since 1.2.3
+     */
+    public final List<CardPrinted> addAnteWon(final CardList antes) {
+        List<CardPrinted> antesPrinted = new ArrayList<CardPrinted>();
+        for (Card ante : antes) {
+            CardPrinted cp = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
+            antesWon.add(cp);
+            antesPrinted.add(cp);
+        }
+        return antesPrinted;
+    }
+    
+    /**
+     * Gets a list of all cards won in ante during this match.
+     * 
+     * @return a list of cards won in ante this match
+     */
+    public final List<CardPrinted> getAnteWon() {
+        return antesWon;
+    }
+    
+    /**
+     * Adds the ante cards won this match to the CardPool (and they get marker as NEW).
+     * 
+     * @since 1.2.3
+     */
+    public final void addAnteWonToCardPool() {
+        AllZone.getQuestData().getCards().addAllCards(antesWon);
+    }
+    
+    /**
+     * Adds a CardList to the antes that have already been lost this match.
+     * 
+     * @param antes cards lost in ante
+     * 
+     * @since 1.2.3
+     */
+    public final List<CardPrinted> addAnteLost(final CardList antes) {
+        List<CardPrinted> antesPrinted = new ArrayList<CardPrinted>();
+        for (Card ante : antes) {
+            CardPrinted cp = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
+            antesLost.add(cp);
+            antesPrinted.add(cp);
+        }
+        return antesPrinted;
+    }
 
     /**
      * Reset.
      */
     public final void reset() {
         this.gamesPlayed.clear();
+        this.antesWon.clear();
+        this.antesLost.clear();
     }
 }

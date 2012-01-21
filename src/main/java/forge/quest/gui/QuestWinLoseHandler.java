@@ -28,7 +28,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import forge.AllZone;
-import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
@@ -45,7 +44,6 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
-import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.model.FMatchState;
 import forge.quest.data.QuestData;
@@ -155,26 +153,21 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         //do per-game actions
         if (this.model.matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
-            //add the computer's ante card to your card pool
             if (isAnte) {
                 CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
-                for (Card ante : antes) {
-                    CardPrinted antePrinted = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
-                    //AllZone.getQuestData().getCardPool().add(antePrinted);
-                    AllZone.getQuestData().getCards().addSingleCard(antePrinted);
-                }
-                anteWon(antes);
+                List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteWon(antes);
+                this.anteWon(antesPrinted);
 
             }
         } else {
             if (isAnte) {
                 CardList antes = AllZone.getHumanPlayer().getCardsIn(Zone.Ante);
-                for (Card ante : antes) {
-                    CardPrinted antePrinted = CardDb.instance().getCard(ante.getName(), ante.getCurSetCode());
-                    //the last param here determines if this is added to the Card Shop
-                    AllZone.getQuestData().getCards().sellCard(antePrinted, 0, false);
+                List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteLost(antes);
+                for (CardPrinted ante : antesPrinted) {
+                    //the last param here (should) determine if this is added to the Card Shop
+                    AllZone.getQuestData().getCards().sellCard(ante, 0, false);
                 }
-                anteLost(antes);
+                this.anteLost(antesPrinted);
             }
         }
 
@@ -227,6 +220,10 @@ public class QuestWinLoseHandler extends ControlWinLose {
         if ((outcome % QuestPreferences.getWinsForBooster(this.model.qData.getDifficultyIndex())) == 0) {
             this.awardBooster();
         }
+        
+        // Add any antes won this match (regardless of Match Win/Lose to Card Pool
+        // Note: Antes lost have already been remove from decks.
+        AllZone.getMatchState().addAnteWonToCardPool();
 
         return true;
     }
@@ -238,16 +235,11 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * Displays cards lost to ante this game.
      * 
      */
-    private void anteLost(final CardList list) {
-
-        List<CardPrinted> anteLost = new ArrayList<CardPrinted>();
-        for (int i = 0; i < list.size(); i++) {
-            anteLost.add(CardDb.instance().getCard(list.get(0)));
-        }
+    private void anteLost(final List<CardPrinted> antesLost) {
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
 
-        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(anteLost);
+        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(antesLost);
 
         this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
         this.getView().getPnlCustom().add(cv, constraintsCards);
@@ -257,21 +249,16 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * <p>
      * anteWon.
      * </p>
-     * Displays cards won in ante this game and added to your Card Pool.
+     * Displays cards won in ante this game (which will be added to your Card Pool).
      * 
      */
-    private void anteWon(final CardList list) {
-
-        List<CardPrinted> anteWon = new ArrayList<CardPrinted>();
+    private void anteWon(final List<CardPrinted> antesWon) {
         StringBuilder sb = new StringBuilder();
         sb.append("Ante Won: These cards will be available in your card pool after this match.");
-        for (int i = 0; i < list.size(); i++) {
-            anteWon.add(CardDb.instance().getCard(list.get(0)));
-        }
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel(sb.toString());
 
-        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(anteWon);
+        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(antesWon);
 
         this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
         this.getView().getPnlCustom().add(cv, constraintsCards);
