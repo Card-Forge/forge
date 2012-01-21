@@ -9,4 +9,5 @@ SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.NamedCard | FoundDestination$ Hand | 
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:Picture:http://www.wizards.com/global/images/magic/general/diving_witch.jpg
+SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/57.jpg
 End
