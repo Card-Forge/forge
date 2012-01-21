@@ -7021,7 +7021,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("lowestCMC")) {
-            final CardList list = AllZoneUtil.getCreaturesInPlay();
+            final CardList list = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
             for (final Card crd : list) {
                 if (!crd.isLand() && !crd.isImmutable() && (crd.getCMC() < this.getCMC())) {
                     return false;
