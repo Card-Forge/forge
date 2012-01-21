@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_trader.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/72.jpg
+Oracle:{T}: Target player gains control of target artifact, creature, or land you control.
 End
