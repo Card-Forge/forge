@@ -78,11 +78,11 @@ public class ViewWinLose {
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
         lblStats.setFont(skin.getFont().deriveFont(Font.PLAIN, 26));
 
-        btnContinue.setText("Continue");
+        btnContinue.setText(ForgeProps.getLocalized(WinLoseText.CONTINUE));
         btnContinue.setFont(skin.getFont(22));
-        btnRestart.setText("Restart");
+        btnRestart.setText(ForgeProps.getLocalized(WinLoseText.RESTART));
         btnRestart.setFont(skin.getFont(22));
-        btnQuit.setText("Quit");
+        btnQuit.setText(ForgeProps.getLocalized(WinLoseText.QUIT));
         btnQuit.setFont(skin.getFont(22));
 
         // End game and set state of "continue" button
