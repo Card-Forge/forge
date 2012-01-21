@@ -164,7 +164,10 @@ public class CostSacrifice extends CostPartWithList {
                     c = AbilityFactory.calculateAmount(source, amount, ability);
                 }
             }
-
+            if (c != null && 0 == c.intValue()) {
+                payment.setPaidManaPart(this, true);
+                return true;
+            }
             CostUtil.setInput(CostSacrifice.sacrificeFromList(ability, payment, this, list, c));
         }
 
