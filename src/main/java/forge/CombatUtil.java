@@ -1970,10 +1970,10 @@ public class CombatUtil {
 
         if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities)) && !(attacker
                 .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
-                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1))
-                    && defender.getCounters(Counters.M1M1) == 0
-                || (defender.hasKeyword("Undying") && !defender.canHaveCountersPlacedOnIt(Counters.P1P1))
-                    && defender.getCounters(Counters.P1P1) == 0) {
+                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1)
+                    && defender.getCounters(Counters.M1M1) == 0)
+                || (defender.hasKeyword("Undying") && !defender.canHaveCountersPlacedOnIt(Counters.P1P1)
+                    && defender.getCounters(Counters.P1P1) == 0)) {
             return false;
         }
 
