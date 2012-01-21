@@ -4364,7 +4364,7 @@ public class CardFactoryUtil {
 
                     @Override
                     public void execute() {
-                        card.addIntrinsicKeyword("(Echo unpaid)");
+                        card.addExtrinsicKeyword("(Echo unpaid)");
                     }
                 };
                 card.addComesIntoPlayCommand(intoPlay);

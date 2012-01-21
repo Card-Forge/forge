@@ -153,13 +153,13 @@ public class Upkeep extends Phase implements java.io.Serializable {
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                return c.hasKeyword("(Echo unpaid)");
+                return c.hasStartOfKeyword("(Echo unpaid)");
             }
         });
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
-            if (c.getIntrinsicKeyword().contains("(Echo unpaid)")) {
+            if (c.hasStartOfKeyword("(Echo unpaid)")) {
 
                 final Command paidCommand = Command.BLANK;
 
@@ -196,7 +196,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 AllZone.getStack().addSimultaneousStackEntry(sacAbility);
 
-                c.removeIntrinsicKeyword("(Echo unpaid)");
+                c.removeAllExtrinsicKeyword("(Echo unpaid)");
             }
         }
     } // echo

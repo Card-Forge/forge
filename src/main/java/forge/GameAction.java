@@ -333,7 +333,7 @@ public class GameAction {
         newBattlefield.add(c);
         c.setSickness(true);
         if (c.hasStartOfKeyword("Echo")) {
-            c.addIntrinsicKeyword("(Echo unpaid)");
+            c.addExtrinsicKeyword("(Echo unpaid)");
         }
         AllZone.getCombat().removeFromCombat(c);
 
