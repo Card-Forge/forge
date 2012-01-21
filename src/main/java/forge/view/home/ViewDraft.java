@@ -29,6 +29,7 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FButton;
+import forge.view.toolbox.FList;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FScrollPane;
@@ -157,7 +158,7 @@ public class ViewDraft extends JPanel {
         for (Deck[] d : temp) { human.add(d[0]); }
         lstHumanDecks = new DeckLister(GameType.Draft, exit);
         lstHumanDecks.setDecks(human.toArray(new Deck[0]));
-        lstAI = new JList(ai);
+        lstAI = new FList(ai);
         this.add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
         this.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
@@ -195,7 +196,7 @@ public class ViewDraft extends JPanel {
 
         final JPanel pnlButtonContainer = new JPanel();
         pnlButtonContainer.setOpaque(false);
-        this.add(pnlButtonContainer, "w 100%!, span 2 1, wrap");
+        this.add(pnlButtonContainer, "ax center, span 2 1, wrap, gaptop 5%");
 
         pnlButtonContainer.setLayout(new BorderLayout());
         pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
