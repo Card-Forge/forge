@@ -340,6 +340,11 @@ public class SpellPermanent extends Spell {
      * @return a boolean.
      */
     public static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api) {
+        
+        if(card.isCreature() && AllZoneUtil.isCardInPlay("Torpor Orb")) {
+            return true;
+        }
+        
         // Trigger play improvements
         final ArrayList<Trigger> triggers = card.getTriggers();
         for (final Trigger tr : triggers) {
