@@ -82,9 +82,9 @@ public class ViewQuest extends JScrollPane {
 
         JLabel lblTitle = new JLabel();
         lblTitle.setOpaque(true);
-        lblTitle.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
-        lblTitle.setForeground(skin.getColor("text"));
-        lblTitle.setBackground(skin.getColor("theme").darker());
+        lblTitle.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
+        lblTitle.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        lblTitle.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME).darker());
         lblTitle.setFont(skin.getBoldFont(20));
         viewport.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 2% 0, span 2");
 
@@ -98,7 +98,7 @@ public class ViewQuest extends JScrollPane {
 
             JLabel lblStats = new JLabel("Wins: " + questData.getWin()
                     + " / Losses: " + questData.getLost());
-            lblStats.setForeground(skin.getColor("text"));
+            lblStats.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             lblStats.setFont(skin.getBoldFont(18));
             lblStats.setHorizontalAlignment(SwingConstants.CENTER);
             viewport.add(lblStats, "h 35px!, ax center, span 2");
@@ -162,18 +162,18 @@ public class ViewQuest extends JScrollPane {
             JLabel lblTeaser = new JLabel("(Next challenge available in "
                     + nextChallengeInWins() + " wins.)");
             lblTeaser.setHorizontalAlignment(SwingConstants.CENTER);
-            lblTeaser.setForeground(skin.getColor("text"));
+            lblTeaser.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             lblTeaser.setFont(skin.getBoldFont(16));
             challengesContainer.add(lblTeaser, "w 100%!, ax center, ay top");
         }
 
         JLabel lblDuels = new JLabel("Available Duels");
-        lblDuels.setForeground(skin.getColor("text"));
+        lblDuels.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         lblDuels.setHorizontalAlignment(SwingConstants.CENTER);
         lblDuels.setFont(skin.getItalicFont(14));
 
         JLabel lblChallenges = new JLabel("Available Challenges");
-        lblChallenges.setForeground(skin.getColor("text"));
+        lblChallenges.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         lblChallenges.setHorizontalAlignment(SwingConstants.CENTER);
         lblChallenges.setFont(skin.getItalicFont(14));
 
@@ -184,7 +184,7 @@ public class ViewQuest extends JScrollPane {
 
         // Select first event.
         selectedOpponent = (SelectablePanel) duelsContainer.getComponent(0);
-        selectedOpponent.setBackground(skin.getColor("active"));
+        selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
     }
 
     /** */
@@ -192,18 +192,18 @@ public class ViewQuest extends JScrollPane {
         JPanel optionsContainer = new JPanel();
         optionsContainer.setOpaque(false);
         optionsContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        optionsContainer.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
+        optionsContainer.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
 
         lblCredits = new JLabel("Credits: " + Long.toString(questData.getCredits()));
         lblCredits.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/images/icons/CoinStack.png"), 26, 26));
-        lblCredits.setForeground(skin.getColor("text"));
+        lblCredits.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         lblCredits.setIconTextGap(5);
         lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
         lblCredits.setFont(skin.getBoldFont(14));
 
         lblLife = new JLabel("Life: " + Long.toString(questData.getLife()));
         lblLife.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/images/icons/Life.png"), 26, 26));
-        lblLife.setForeground(skin.getColor("text"));
+        lblLife.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         lblLife.setIconTextGap(5);
         lblLife.setHorizontalAlignment(SwingConstants.CENTER);
         lblLife.setFont(skin.getBoldFont(14));
@@ -338,10 +338,10 @@ public class ViewQuest extends JScrollPane {
     private void populateNewQuest() {
         if (previousQuestExists) {
             JLabel lblNew = new JLabel("  Embark on a new Quest");
-            lblNew.setForeground(skin.getColor("text"));
-            lblNew.setBackground(skin.getColor("theme").darker());
+            lblNew.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            lblNew.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME).darker());
             lblNew.setOpaque(true);
-            lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor("borders")));
+            lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
             lblNew.setFont(skin.getBoldFont(16));
             viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%, span 2");
 
@@ -350,7 +350,7 @@ public class ViewQuest extends JScrollPane {
                     + "<br>Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle."
                     + "</html>");
             lblNotes.setFont(skin.getFont(14));
-            lblNotes.setForeground(skin.getColor("text"));
+            lblNotes.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             viewport.add(lblNotes, "w 90%, gapleft 5%, span 2");
         }
 
@@ -411,8 +411,8 @@ public class ViewQuest extends JScrollPane {
         public OptionsRadio(String txt0) {
             super();
             setText(txt0);
-            setForeground(skin.getColor("text"));
-            setBackground(skin.getColor("hover"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
             setOpaque(false);
 
             this.addMouseListener(new MouseAdapter() {
@@ -434,8 +434,8 @@ public class ViewQuest extends JScrollPane {
         public OptionsCheckBox(String txt0) {
             super();
             setText(txt0);
-            setForeground(skin.getColor("text"));
-            setBackground(skin.getColor("hover"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
             setOpaque(false);
 
             this.addMouseListener(new MouseAdapter() {
@@ -459,8 +459,8 @@ public class ViewQuest extends JScrollPane {
         /** @param e0 &emsp; QuestEvent */
         public SelectablePanel(QuestEvent e0) {
             super();
-            setBorder(new LineBorder(skin.getColor("borders"), 1));
-            setBackground(skin.getColor("inactive"));
+            setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
+            setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
             setLayout(new MigLayout("insets 0, gap 0"));
             this.event = e0;
 
@@ -472,20 +472,20 @@ public class ViewQuest extends JScrollPane {
             }
 
             JLabel lblIcon = new JLabel(GuiUtils.getResizedIcon(new ImageIcon(file.toString()), 60, 60));
-            lblIcon.setForeground(skin.getColor("text"));
+            lblIcon.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             this.add(lblIcon, "h 60px!, w 60px!, gap 5px 5px 5px 5px, span 1 2");
 
             // Name
             JLabel lblName = new JLabel(event.getTitle() + ": " + event.getDifficulty());
             lblName.setFont(skin.getBoldFont(18));
-            lblName.setForeground(skin.getColor("text"));
+            lblName.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             this.add(lblName, "h 20px!, gap 1% 1% 5px 5px, wrap");
 
             // Description
             final JTextArea tarDesc = new JTextArea();
             tarDesc.setText(event.getDescription());
             tarDesc.setFont(skin.getItalicFont(12));
-            tarDesc.setForeground(skin.getColor("text"));
+            tarDesc.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             tarDesc.setOpaque(false);
             tarDesc.setWrapStyleWord(true);
             tarDesc.setLineWrap(true);
@@ -504,24 +504,24 @@ public class ViewQuest extends JScrollPane {
                     SelectablePanel src = (SelectablePanel) e.getSource();
 
                     if (selectedOpponent != null) {
-                        selectedOpponent.setBackground(skin.getColor("inactive"));
+                        selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
                     }
 
                     selectedOpponent = src;
-                    src.setBackground(skin.getColor("active"));
+                    src.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (selectedOpponent != e.getSource()) {
-                        setBackground(skin.getColor("hover"));
+                        setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
                     }
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if (selectedOpponent != e.getSource()) {
-                        setBackground(skin.getColor("inactive"));
+                        setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
                     }
                 }
             });

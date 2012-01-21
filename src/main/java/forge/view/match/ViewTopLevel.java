@@ -26,7 +26,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -44,6 +43,7 @@ import forge.control.match.ControlInput;
 import forge.control.match.ControlPicture;
 import forge.control.match.ControlTabber;
 import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FSkin;
 
 /**
  * - Lays out containers and borders for resizeable layout.<br>
@@ -97,8 +97,8 @@ public class ViewTopLevel extends FPanel {
 
         // Set properties
         this.setOpaque(false);
-        this.setBGTexture(new ImageIcon(Singletons.getView().getSkin().getImage("bg.texture")));
-        this.setBGImg(new ImageIcon(Singletons.getView().getSkin().getImage("bg.match")));
+        this.setBGTexture(Singletons.getView().getSkin().getIcon(FSkin.SkinProp.BG_TEXTURE));
+        this.setBGImg(Singletons.getView().getSkin().getIcon(FSkin.SkinProp.BG_MATCH));
         this.setLayout(null);
         b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 

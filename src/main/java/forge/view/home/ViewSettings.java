@@ -214,8 +214,8 @@ public class ViewSettings extends JScrollPane {
             super();
             setText(txt0);
             setFont(skin.getBoldFont(12));
-            setForeground(skin.getColor("text"));
-            setBackground(skin.getColor("hover"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
             setOpaque(false);
 
             this.addMouseListener(new MouseAdapter() {
@@ -238,8 +238,8 @@ public class ViewSettings extends JScrollPane {
             super();
             setText(txt0);
             setFont(skin.getBoldFont(12));
-            setForeground(skin.getColor("text"));
-            setBackground(skin.getColor("hover"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
             setOpaque(false);
 
             this.addMouseListener(new MouseAdapter() {
@@ -278,10 +278,10 @@ public class ViewSettings extends JScrollPane {
     private class SectionLabel extends JLabel {
         public SectionLabel(String txt0) {
             super(txt0);
-            setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
+            setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
             setHorizontalAlignment(SwingConstants.CENTER);
             setFont(skin.getBoldFont(16));
-            setForeground(skin.getColor("text"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         }
     }
 
@@ -290,7 +290,7 @@ public class ViewSettings extends JScrollPane {
         public NoteLabel(String txt0) {
             super(txt0);
             setFont(skin.getItalicFont(12));
-            setForeground(skin.getColor("text"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         }
     }
 
@@ -299,7 +299,7 @@ public class ViewSettings extends JScrollPane {
         public TitleLabel(String txt0) {
             super(txt0);
             setFont(skin.getBoldFont(12));
-            setForeground(skin.getColor("text"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         }
     }
 
@@ -308,7 +308,7 @@ public class ViewSettings extends JScrollPane {
         public ShortcutLabel(String txt0) {
             super(txt0);
             setFont(skin.getFont(14));
-            setForeground(skin.getColor("text"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         }
     }
 
@@ -343,7 +343,7 @@ public class ViewSettings extends JScrollPane {
             this.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(final FocusEvent e) {
-                    KeyboardShortcutField.this.setBackground(skin.getColor("active"));
+                    KeyboardShortcutField.this.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
                 }
 
                 @Override

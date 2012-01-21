@@ -23,6 +23,7 @@ import forge.gui.deckeditor.DeckEditorCommon;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
 import forge.view.home.ViewUtilities;
+import forge.view.toolbox.FSkin;
 
 /** 
  * Controls logic and listeners for Utilities panel of the home screen.
@@ -50,11 +51,11 @@ public class ControlUtilities {
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor("hover"));
+                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_HOVER));
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor("text"));
+                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_TEXT));
             }
         };
 

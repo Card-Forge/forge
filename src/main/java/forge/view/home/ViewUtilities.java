@@ -3,7 +3,6 @@ package forge.view.home;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -89,7 +88,7 @@ public class ViewUtilities extends JPanel {
 
         tpnLicensing = new JTextPane();
         tpnLicensing.setOpaque(false);
-        tpnLicensing.setForeground(skin.getColor("text"));
+        tpnLicensing.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         tpnLicensing.setFont(skin.getFont(15));
         tpnLicensing.setAlignmentX(SwingConstants.CENTER);
         tpnLicensing.setFocusable(false);
@@ -105,7 +104,7 @@ public class ViewUtilities extends JPanel {
         lblLicensing = new JLabel("Click For License Information");
         lblLicensing.setFont(skin.getFont(16));
         lblLicensing.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLicensing.setForeground(skin.getColor("text"));
+        lblLicensing.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         this.add(lblLicensing, "alignx center, span 2 1, gap 25% 0 5% 0");
 
         control = new ControlUtilities(this);
@@ -125,8 +124,8 @@ public class ViewUtilities extends JPanel {
         });
         btnClose.setText("Close");
 
-        pnlContainer.setBorder(new LineBorder(skin.getColor("border"), 1));
-        pnlContainer.setBGTexture(new ImageIcon(skin.getImage("bg.texture")));
+        pnlContainer.setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
+        pnlContainer.setBGTexture(skin.getIcon(FSkin.SkinProp.BG_TEXTURE));
         pnlContainer.setLayout(new MigLayout("insets 0, wrap"));
         pnlContainer.add(tpnLicensing, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");

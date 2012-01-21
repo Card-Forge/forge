@@ -83,7 +83,7 @@ public class DeckLister extends JPanel {
         // Note: careful with the widths of the rows here;
         // scroll panes will have difficulty dynamically resizing if 100% width is set.
         JPanel rowTitle = new JPanel();
-        rowTitle.setBackground(skin.getColor("inactive"));
+        rowTitle.setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new TitleLabel("Delete"), "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new TitleLabel("Edit"), "w 10%!, h 20px!, gaptop 5px");
@@ -136,7 +136,7 @@ public class DeckLister extends JPanel {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (r0.selected) { return; }
-                    r0.setBackground(skin.getColor("hover"));
+                    r0.setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
                     r0.setOpaque(true);
                 }
                 @Override
@@ -164,7 +164,7 @@ public class DeckLister extends JPanel {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (r0.selected) { return; }
-                    r0.setBackground(skin.getColor("hover"));
+                    r0.setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
                     r0.setOpaque(true);
                 }
                 @Override
@@ -184,14 +184,14 @@ public class DeckLister extends JPanel {
             super();
             setOpaque(false);
             setLayout(new MigLayout("insets 0, gap 0"));
-            setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor("borders")));
+            setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
             deck = d0;
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (selected) { return; }
-                    setBackground(skin.getColor("hover"));
+                    setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
                     setOpaque(true);
                 }
                 @Override
@@ -208,7 +208,7 @@ public class DeckLister extends JPanel {
         }
 
         public void setSelected(boolean b0) {
-            bgDefault = (b0 ? skin.getColor("active") : null);
+            bgDefault = (b0 ? skin.getColor(FSkin.SkinProp.CLR_ACTIVE) : null);
             selected = b0;
             setBackground(bgDefault);
         }
@@ -225,7 +225,7 @@ public class DeckLister extends JPanel {
     private class TitleLabel extends JLabel {
         public TitleLabel(String txt0) {
             super(txt0);
-            setForeground(skin.getColor("text"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             setFont(skin.getFont(11));
             setHorizontalAlignment(SwingConstants.CENTER);
         }
@@ -251,7 +251,7 @@ public class DeckLister extends JPanel {
         public GenericLabel(String txt0) {
             super(txt0);
             setHorizontalAlignment(SwingConstants.CENTER);
-            setForeground(skin.getColor("text"));
+            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
             setFont(skin.getBoldFont(12));
             setHorizontalAlignment(SwingConstants.CENTER);
         }

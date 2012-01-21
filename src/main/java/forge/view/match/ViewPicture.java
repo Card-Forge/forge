@@ -22,6 +22,7 @@ import forge.Singletons;
 import forge.control.match.ControlPicture;
 import forge.gui.game.CardPicturePanel;
 import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -41,7 +42,7 @@ public class ViewPicture extends FRoundedPanel {
         pnlPicture = new CardPicturePanel(null);
         pnlPicture.setOpaque(false);
 
-        this.setBackground(Singletons.getView().getSkin().getColor("theme"));
+        this.setBackground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_THEME));
         this.setLayout(new MigLayout("insets 0, gap 0, center"));
 
         add(pnlPicture, "w 100%!, h 100%!");

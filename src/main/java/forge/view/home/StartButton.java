@@ -1,6 +1,5 @@
 package forge.view.home;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import forge.Singletons;
@@ -19,9 +18,9 @@ public class StartButton extends JButton {
         super();
         final FSkin skin = Singletons.getView().getSkin();
         setRolloverEnabled(true);
-        setRolloverIcon(new ImageIcon(skin.getImage("button.startDOWN")));
+        setRolloverIcon(skin.getIcon(FSkin.SkinProp.IMG_BTN_START_DOWN));
         setOpaque(false);
-        setIcon(new ImageIcon(skin.getImage("button.startUP")));
+        setIcon(skin.getIcon(FSkin.SkinProp.IMG_BTN_START_UP));
         setContentAreaFilled(false);
         setBorder(null);
         setBorderPainted(false);

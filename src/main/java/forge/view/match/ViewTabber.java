@@ -98,9 +98,9 @@ public class ViewTabber extends FRoundedPanel {
      */
     public ViewTabber() {
         this.skin = Singletons.getView().getSkin();
-        this.hoverColor = this.skin.getColor("hover");
-        this.activeColor = this.skin.getColor("active");
-        this.inactiveColor = this.skin.getColor("inactive");
+        this.hoverColor = this.skin.getColor(FSkin.SkinProp.CLR_HOVER);
+        this.activeColor = this.skin.getColor(FSkin.SkinProp.CLR_ACTIVE);
+        this.inactiveColor = this.skin.getColor(FSkin.SkinProp.CLR_INACTIVE);
 
         // Assemble card pic viewer
         this.panelList = new ArrayList<JPanel>();
@@ -157,7 +157,7 @@ public class ViewTabber extends FRoundedPanel {
         this.populatePnlConsole();
 
         this.vtpTabber = new FVerticalTabPanel(this.panelList);
-        this.setBackground(skin.getColor("theme"));
+        this.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
         this.add(vtpTabber, "w 97%!, h 100%!, gapleft 2%");
@@ -333,7 +333,7 @@ public class ViewTabber extends FRoundedPanel {
             return new Color[] { new Color(111, 75, 43), Color.white };
         }
 
-        return new Color[] { new Color(0, 0, 0, 0), skin.getColor("text") };
+        return new Color[] { new Color(0, 0, 0, 0), skin.getColor(FSkin.SkinProp.CLR_TEXT) };
     }
 
     /**
@@ -357,7 +357,7 @@ public class ViewTabber extends FRoundedPanel {
         this.combatTARs.clear();
         this.control.showPnlCombat();
 
-        final Border border = new MatteBorder(0, 0, 0, 0, skin.getColor("borders"));
+        final Border border = new MatteBorder(0, 0, 0, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS));
 
         this.vtpTabber.getAllVTabs().get(ControlTabber.COMBAT_PANEL)
                 .setText("Combat : " + AllZone.getCombat().getAttackers().length);
@@ -365,7 +365,7 @@ public class ViewTabber extends FRoundedPanel {
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);
         tar.setBorder(border);
-        tar.setForeground(skin.getColor("text"));
+        tar.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         tar.setFocusable(false);
         tar.setLineWrap(true);
         this.pnlCombat.add(tar, "w 95%!, gapleft 3%, gaptop 1%, h 95%");
@@ -389,7 +389,7 @@ public class ViewTabber extends FRoundedPanel {
         JTextArea tar = new JTextArea(gl.getLogText(3));
         tar.setOpaque(false);
         // tar.setBorder(border);
-        tar.setForeground(this.skin.getColor("text"));
+        tar.setForeground(this.skin.getColor(FSkin.SkinProp.CLR_TEXT));
 
         tar.setFocusable(false);
         tar.setEditable(false);
@@ -617,7 +617,7 @@ public class ViewTabber extends FRoundedPanel {
             this.infoLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes });
 
             // Set border on bottom label, and larger font on player name
-            antes.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getColor("borders")));
+            antes.setBorder(new MatteBorder(0, 0, 1, 0, this.skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
             name.setText(p.getName());
 
             // Add to "players" tab panel
@@ -699,8 +699,8 @@ public class ViewTabber extends FRoundedPanel {
         log.setWrapStyleWord(true);
         log.setEditable(false);
         log.setFocusable(false);
-        log.setForeground(this.skin.getColor("text"));
-        log.setBorder(new MatteBorder(1, 0, 0, 0, this.skin.getColor("borders")));
+        log.setForeground(this.skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        log.setBorder(new MatteBorder(1, 0, 0, 0, this.skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
 
         log.setText("No log information yet. Input codes entered above. " + "Output data recorded below.");
 
@@ -765,7 +765,7 @@ public class ViewTabber extends FRoundedPanel {
             this.r = 6; // Radius (for paintComponent)
             this.i = 2; // Insets (for paintComponent)
             this.setEnabled(true);
-            this.setForeground(skin.getColor("text"));
+            this.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
@@ -855,7 +855,7 @@ public class ViewTabber extends FRoundedPanel {
     private class InfoLabel extends JLabel {
         public InfoLabel() {
             super();
-            this.setForeground(ViewTabber.this.skin.getColor("text"));
+            this.setForeground(ViewTabber.this.skin.getColor(FSkin.SkinProp.CLR_TEXT));
         }
     }
 

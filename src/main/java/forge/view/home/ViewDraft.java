@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -121,13 +120,13 @@ public class ViewDraft extends JPanel {
         JLabel lblHuman = new JLabel("Select your deck: ");
         lblHuman.setFont(skin.getBoldFont(16));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
-        lblHuman.setForeground(skin.getColor("text"));
+        lblHuman.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         this.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
 
         JLabel lblAI = new JLabel("Who will you play?");
         lblAI.setFont(skin.getBoldFont(16));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAI.setForeground(skin.getColor("text"));
+        lblAI.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         this.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
 
         Random generator = new Random();
@@ -174,7 +173,7 @@ public class ViewDraft extends JPanel {
         // Directions
         tpnDirections = new JTextPane();
         tpnDirections.setOpaque(false);
-        tpnDirections.setForeground(skin.getColor("text"));
+        tpnDirections.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         tpnDirections.setFont(skin.getFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);
@@ -204,7 +203,7 @@ public class ViewDraft extends JPanel {
         lblDirections = new JLabel("Click For Directions");
         lblDirections.setFont(skin.getFont(16));
         lblDirections.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDirections.setForeground(skin.getColor("text"));
+        lblDirections.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
         this.add(lblDirections, "alignx center, span 2 1, gaptop 5%");
 
         control = new ControlDraft(this);
@@ -224,8 +223,8 @@ public class ViewDraft extends JPanel {
         });
         btnClose.setText("Close");
 
-        pnlContainer.setBorder(new LineBorder(skin.getColor("border"), 1));
-        pnlContainer.setBGTexture(new ImageIcon(skin.getImage("bg.texture")));
+        pnlContainer.setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
+        pnlContainer.setBGTexture(skin.getIcon(FSkin.SkinProp.BG_TEXTURE));
         pnlContainer.setLayout(new MigLayout("insets 0, wrap"));
         pnlContainer.add(tpnDirections, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");

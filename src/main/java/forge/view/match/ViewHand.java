@@ -24,6 +24,7 @@ import arcane.ui.HandArea;
 import forge.Singletons;
 import forge.control.match.ControlHand;
 import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FSkin;
 
 /**
  * VIEW - Swing components for user hand.
@@ -43,7 +44,7 @@ public class ViewHand extends FRoundedPanel {
     public ViewHand(ViewTopLevel v0) {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller);
-        ViewHand.this.setBackground(Singletons.getView().getSkin().getColor("theme"));
+        ViewHand.this.setBackground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_THEME));
         topLevel = v0;
 
         scroller.setViewportView(ViewHand.this.hand);

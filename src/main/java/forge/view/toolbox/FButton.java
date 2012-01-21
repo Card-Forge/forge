@@ -70,16 +70,16 @@ public class FButton extends JButton {
         super(msg);
         this.skin = Singletons.getView().getSkin();
         this.setOpaque(false);
-        this.setForeground(this.skin.getColor("text"));
+        this.setForeground(this.skin.getColor(FSkin.SkinProp.CLR_TEXT));
         this.setBackground(Color.red);
         this.setFocusPainted(false);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
         this.setFont(this.skin.getBoldFont(14));
-        this.imgL = skin.getImage("button.upLEFT");
-        this.imgM = skin.getImage("button.upCENTER");
-        this.imgR = skin.getImage("button.upRIGHT");
+        this.imgL = skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_LEFT).getImage();
+        this.imgM = skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_CENTER).getImage();
+        this.imgR = skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_RIGHT).getImage();
 
         if ((this.imgL != null) && (this.imgM != null) && (this.imgR != null)) {
             this.allImagesPresent = true;
@@ -101,9 +101,9 @@ public class FButton extends JButton {
                 if (isToggled()) { return; }
 
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.overLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.overCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.overRIGHT");
+                    FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_OVER_LEFT).getImage();
+                    FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_OVER_CENTER).getImage();
+                    FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_OVER_RIGHT).getImage();
                 }
             }
 
@@ -112,14 +112,14 @@ public class FButton extends JButton {
                 if (isToggled()) { return; }
 
                 if (FButton.this.isEnabled() && !FButton.this.isFocusOwner()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+                    FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_LEFT).getImage();
+                    FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_CENTER).getImage();
+                    FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_RIGHT).getImage();
                 }
                 else if (FButton.this.isEnabled() && FButton.this.isFocusOwner()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.focusLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.focusCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.focusRIGHT");
+                    FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_FOCUS_LEFT).getImage();
+                    FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_FOCUS_CENTER).getImage();
+                    FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_FOCUS_RIGHT).getImage();
                 }
             }
 
@@ -128,9 +128,9 @@ public class FButton extends JButton {
                 if (isToggled()) { return; }
 
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
+                    FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DOWN_LEFT).getImage();
+                    FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DOWN_CENTER).getImage();
+                    FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DOWN_RIGHT).getImage();
                 }
             }
 
@@ -139,9 +139,9 @@ public class FButton extends JButton {
                 if (isToggled()) { return; }
 
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.downLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.downCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.downRIGHT");
+                    FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DOWN_LEFT).getImage();
+                    FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DOWN_CENTER).getImage();
+                    FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DOWN_RIGHT).getImage();
                 }
             }
         });
@@ -152,9 +152,9 @@ public class FButton extends JButton {
                 if (isToggled()) { return; }
 
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.focusLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.focusCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.focusRIGHT");
+                    FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_FOCUS_LEFT).getImage();
+                    FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_FOCUS_CENTER).getImage();
+                    FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_FOCUS_RIGHT).getImage();
                 }
 
                 addKeyListener(klEnter);
@@ -164,9 +164,9 @@ public class FButton extends JButton {
                 if (isToggled()) { return; }
 
                 if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
-                    FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
-                    FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+                    FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_LEFT).getImage();
+                    FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_CENTER).getImage();
+                    FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_RIGHT).getImage();
                 }
 
                 removeKeyListener(klEnter);
@@ -177,14 +177,14 @@ public class FButton extends JButton {
     @Override
     public void setEnabled(boolean b0) {
         if (!b0) {
-            FButton.this.imgL = FButton.this.skin.getImage("button.disabledLEFT");
-            FButton.this.imgM = FButton.this.skin.getImage("button.disabledCENTER");
-            FButton.this.imgR = FButton.this.skin.getImage("button.disabledRIGHT");
+            FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DISABLED_LEFT).getImage();
+            FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DISABLED_CENTER).getImage();
+            FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DISABLED_RIGHT).getImage();
         }
         else {
-            FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
-            FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
-            FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+            FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_LEFT).getImage();
+            FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_CENTER).getImage();
+            FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_RIGHT).getImage();
         }
 
         super.setEnabled(b0);
@@ -202,20 +202,20 @@ public class FButton extends JButton {
     /** @param b0 &emsp; boolean. */
     public void setToggled(boolean b0) {
         if (b0) {
-            FButton.this.imgL = FButton.this.skin.getImage("button.toggleLEFT");
-            FButton.this.imgM = FButton.this.skin.getImage("button.toggleCENTER");
-            FButton.this.imgR = FButton.this.skin.getImage("button.toggleRIGHT");
+            FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_TOGGLE_LEFT).getImage();
+            FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_TOGGLE_CENTER).getImage();
+            FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_TOGGLE_RIGHT).getImage();
         }
         else if (isEnabled()) {
-            FButton.this.imgL = FButton.this.skin.getImage("button.upLEFT");
-            FButton.this.imgM = FButton.this.skin.getImage("button.upCENTER");
-            FButton.this.imgR = FButton.this.skin.getImage("button.upRIGHT");
+            FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_LEFT).getImage();
+            FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_CENTER).getImage();
+            FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_UP_RIGHT).getImage();
             repaint();
         }
         else {
-            FButton.this.imgL = FButton.this.skin.getImage("button.disabledLEFT");
-            FButton.this.imgM = FButton.this.skin.getImage("button.disabledCENTER");
-            FButton.this.imgR = FButton.this.skin.getImage("button.disabledRIGHT");
+            FButton.this.imgL = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DISABLED_LEFT).getImage();
+            FButton.this.imgM = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DISABLED_CENTER).getImage();
+            FButton.this.imgR = FButton.this.skin.getIcon(FSkin.SkinProp.IMG_BTN_DISABLED_RIGHT).getImage();
             repaint();
         }
         this.toggle = b0;

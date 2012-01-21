@@ -19,6 +19,7 @@ import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorDraft;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewDraft;
+import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -40,11 +41,11 @@ public class ControlDraft {
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor("hover"));
+                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_HOVER));
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor("text"));
+                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_TEXT));
             }
         };
 

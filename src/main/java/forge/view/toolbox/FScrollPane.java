@@ -21,11 +21,10 @@ public class FScrollPane extends JScrollPane {
      */
     public FScrollPane(Component c0) {
         super(c0);
-        //setOpaque(false);
         getViewport().setOpaque(false);
 
         skin = Singletons.getView().getSkin();
-        setBorder(new LineBorder(skin.getColor("borders"), 1));
-        setBackground(skin.getColor("zebra"));
+        setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
+        setBackground(skin.getColor(FSkin.SkinProp.CLR_ZEBRA));
     }
 }
