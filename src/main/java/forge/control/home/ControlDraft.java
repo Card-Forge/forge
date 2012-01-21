@@ -13,6 +13,7 @@ import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
+import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
@@ -109,6 +110,8 @@ public class ControlDraft {
         if (Constant.Runtime.COMPUTER_DECK[0] == null) {
             throw new IllegalStateException("startButton() error - computer deck is null");
         }
+
+        Constant.Runtime.setGameType(GameType.Draft);
 
         GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
         g.getController().changeState(FControl.MATCH_SCREEN);
