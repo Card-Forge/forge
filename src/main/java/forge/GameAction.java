@@ -111,7 +111,7 @@ public class GameAction {
             zone.add(c);
             return c;
         }
-
+        
         boolean suppress;
         if ((prev == null) && !c.isToken()) {
             suppress = true;
@@ -120,6 +120,22 @@ public class GameAction {
         } else {
             suppress = prev.equals(zone);
         }
+        
+        if(!suppress) {
+            HashMap<String,Object> repParams = new HashMap<String,Object>();
+            repParams.put("Event", "Moved");
+            repParams.put("Affected", c);
+            repParams.put("Origin", prev != null ? prev.getZoneType() : null);
+            repParams.put("Destination",zone.getZoneType());
+            
+            if(AllZone.getReplacementHandler().run(repParams)) {
+                if(AllZone.getStack().isResolving(c)) {
+                    return AllZone.getGameAction().moveToGraveyard(c);
+                }
+                return c;
+            }
+        }
+        
 
         Card copied = null;
         Card lastKnownInfo = null;
@@ -127,7 +143,7 @@ public class GameAction {
         // Don't copy Tokens, Cards staying in same zone, or cards entering
         // Battlefield
         if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Stack)
-                || prev.is(Constant.Zone.Stack)) {
+                || (prev.is(Constant.Zone.Stack) && zone.is(Constant.Zone.Battlefield))) {
             lastKnownInfo = c;
             copied = c;
         } else {

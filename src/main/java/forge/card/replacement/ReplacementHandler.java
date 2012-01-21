@@ -190,6 +190,8 @@ public class ReplacementHandler {
             ret = new ReplaceDamage(mapParams, host);
         } else if (eventToReplace.equals("GameLoss")) {
             ret = new ReplaceGameLoss(mapParams, host);
+        } else if (eventToReplace.equals("Moved")) {
+            ret = new ReplaceMoved(mapParams, host);
         }
 
         return ret;

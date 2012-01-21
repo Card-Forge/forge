@@ -65,6 +65,7 @@ public class MagicStack extends MyObservable {
 
     private final CardList thisTurnCast = new CardList();
     private CardList lastTurnCast = new CardList();
+    private Card curResolvingCard = null;
 
     /**
      * <p>
@@ -896,6 +897,7 @@ public class MagicStack extends MyObservable {
         AllZone.getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
                                             // after Resolve
         final Card source = sa.getSourceCard();
+        curResolvingCard = source;
 
         if (this.hasFizzled(sa, source)) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
@@ -1094,6 +1096,8 @@ public class MagicStack extends MyObservable {
         AllZone.getGameAction().checkStateEffects();
 
         AllZone.getPhaseHandler().setNeedToNextPhase(false);
+        
+        this.curResolvingCard = null;
 
         // TODO: change to use forge.view.FView?
         GuiDisplayUtil.updateGUI();
@@ -1483,5 +1487,13 @@ public class MagicStack extends MyObservable {
      */
     public final CardList getCardsCastLastTurn() {
         return this.lastTurnCast;
+    }
+    
+    public final boolean isResolving(Card c) {
+        if(!this.getResolving() || this.curResolvingCard == null) {
+            return false;
+        }
+        
+        return c.equals(this.curResolvingCard);
     }
 }

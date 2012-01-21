@@ -19,9 +19,11 @@ package forge.card.staticability;
 
 import java.util.HashMap;
 
+import forge.AllZone;
 import forge.Card;
 import forge.PhaseHandler;
 import forge.Player;
+import forge.Constant.Zone;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 
@@ -57,6 +59,13 @@ public class StaticAbilityCantBeCast {
 
         if (params.containsKey("OnlySorcerySpeed") && (activator != null) && PhaseHandler.canCastSorcery(activator)) {
             return false;
+        }
+        
+        if(params.containsKey("Origin")) {
+            Zone src = Zone.smartValueOf(params.get("Origin"));
+            if(src != AllZone.getZoneOf(card).getZoneType()) {
+                return false;
+            }
         }
 
         return true;
