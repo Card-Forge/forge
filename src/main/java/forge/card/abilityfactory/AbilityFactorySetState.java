@@ -212,10 +212,14 @@ public class AbilityFactorySetState {
                     continue;
                 }
             }
+
             final String mode = abilityFactory.getMapParams().get("Mode");
 
             if (mode != null) {
                 if (mode.equals("Transform")) {
+                    if (tgt.hasKeyword("CARDNAME can't transform")) {
+                        continue;
+                    }
                     if (tgt.isDoubleFaced()) {
                         if (tgt.getCurState().equals("Original")) {
                             if (tgt.setState("Transformed")) {
@@ -406,6 +410,9 @@ public class AbilityFactorySetState {
             final String mode = abilityFactory.getMapParams().get("Mode");
             if (mode != null) {
                 if (mode.equals("Transform")) {
+                    if (list.get(i).hasKeyword("CARDNAME can't transform")) {
+                        continue;
+                    }
                     if (list.get(i).isDoubleFaced()) {
                         if (list.get(i).getCurState().equals("Original")) {
                             if (list.get(i).setState("Transformed") && remChanged) {
