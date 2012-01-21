@@ -294,6 +294,16 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
 
     /**
      * <p>
+     * clearExpressChoice.
+     * </p>
+     *
+     */
+    public void clearExpressChoice() {
+        this.lastExpressChoice = "";
+    }
+
+    /**
+     * <p>
      * Getter for the field <code>lastProduced</code>.
      * </p>
      *

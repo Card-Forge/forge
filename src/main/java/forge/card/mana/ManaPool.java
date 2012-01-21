@@ -702,12 +702,12 @@ public class ManaPool {
         // paying via Mana Abilities
         for (final AbilityMana mability : mAbilities) {
             paidAbs.add(mability); // why???
-            //TODO: Look at using new getManaProduced() method of Ability_Mana (ArsenalNut)
             //String[] cost = formatMana(mability);
             String[] cost = null;
             if (mability.isAnyMana()) {
-                cost = new String[1];
-                cost[0] = mability.getExpressChoice();
+               //TODO: (ArsenalNut) Look at using new getManaProduced() method of Ability_Mana
+               //      for all mana sources not just "any" mana sources
+                cost = mability.getManaProduced().split(" ");
             }
             else {
                 cost = formatMana(mability);

@@ -354,6 +354,9 @@ public class AbilityFactoryMana {
             abMana.produceMana(AbilityFactoryMana.generatedMana(abMana, af, sa), player);
         }
 
+        // Only clear express choice after mana has been produced
+        abMana.clearExpressChoice();
+
         // convert these to SubAbilities when appropriate
         if (params.containsKey("Stuck")) {
             abMana.setUndoable(false);

@@ -192,9 +192,6 @@ public class InputPayManaCostUtil {
 
         manaCost = AllZone.getHumanPlayer().getManaPool().subtractMana(sa, manaCost, chosen);
 
-        // reset choice to blank, make sure this done after subtractMana
-        chosen.setExpressChoice("");
-
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
         return manaCost;
