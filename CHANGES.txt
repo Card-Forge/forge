@@ -5,9 +5,7 @@ Forge Beta: 0#-##-2012 ver 1.2.# rev 13###
 #### cards in total.
 
 
-Several people have noticed a crash report stating that "Buffers have not been created". We hope to have this fixed in the near future. It has been pointed out that:
-
-"Parts of Swing use EventQueue by themselves, this means your Swing code executes in main thread part executes in EDT and as Swing isn't thread safe this leads to elusive errors like this. One of the reasons of this error is that the frame might not be fully constructed before buffers are created -> race condition between the threads."
+The thread safety issue should now be fixed. This should prevent the crash reports that were stating that "Buffers have not been created".
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
