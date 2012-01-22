@@ -4700,6 +4700,7 @@ res/cardsfolder/l/lantern_spirit.txt -text
 res/cardsfolder/l/lapis_lazuli_talisman.txt svneol=native#text/plain
 res/cardsfolder/l/lapse_of_certainty.txt svneol=native#text/plain
 res/cardsfolder/l/laquatuss_champion.txt svneol=native#text/plain
+res/cardsfolder/l/laquatuss_disdain.txt -text
 res/cardsfolder/l/larceny.txt svneol=native#text/plain
 res/cardsfolder/l/lash_out.txt svneol=native#text/plain
 res/cardsfolder/l/lashknife.txt -text

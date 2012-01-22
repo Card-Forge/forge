@@ -1480,7 +1480,6 @@ public class CombatUtil {
 
         power += defender.getKeywordMagnitude("Bushido");
 
-
         //look out for continuous static abilities that only care for blocking creatures
         CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
         for (Card card : cardList) {
