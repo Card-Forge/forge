@@ -65,7 +65,7 @@ public class PhaseUtil {
         final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
 
         AllZone.getPhaseHandler().turnReset();
-        AllZone.getGameInfo().notifyNextTurn();
+        Singletons.getModel().getGameSummary().notifyNextTurn();
 
         AllZone.getCombat().reset();
         AllZone.getCombat().setAttackingPlayer(turn);

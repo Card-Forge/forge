@@ -27,7 +27,6 @@ import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
-import forge.game.GameSummary;
 import forge.game.limited.CardRatings;
 import forge.gui.input.InputControl;
 import forge.model.FGameState;
@@ -425,18 +424,6 @@ public final class AllZone {
         }
 
         return null;
-    }
-
-    /**
-     * <p>
-     * getGameInfo.
-     * </p>
-     * 
-     * @return a {@link forge.game.GameSummary} object.
-     * @since 1.0.15
-     */
-    public static GameSummary getGameInfo() {
-        return Singletons.getModel().getGameState().getGameInfo();
     }
 
     /**

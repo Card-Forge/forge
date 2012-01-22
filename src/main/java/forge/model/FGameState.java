@@ -68,7 +68,7 @@ public class FGameState {
     private PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
 
     private long timestamp = 0;
-    private GameSummary gameInfo;
+    private GameSummary gameSummary;
 
     /**
      * Constructor.
@@ -384,15 +384,15 @@ public class FGameState {
      * 
      * @return the game info
      */
-    public final GameSummary getGameInfo() {
-        return this.gameInfo;
+    public final GameSummary getGameSummary() {
+        return this.gameSummary;
     }
 
     /**
      * Call this each time you start a new game, ok?.
      */
     public final void newGameCleanup() {
-        this.gameInfo = new GameSummary(this.humanPlayer.getName(), this.computerPlayer.getName());
+        this.gameSummary = new GameSummary(this.humanPlayer.getName(), this.computerPlayer.getName());
 
         this.getHumanPlayer().reset();
         this.getComputerPlayer().reset();

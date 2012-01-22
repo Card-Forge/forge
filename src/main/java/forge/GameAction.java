@@ -753,7 +753,7 @@ public class GameAction {
      */
     public final boolean checkEndGameState() {
         // Win / Lose
-        final GameSummary game = AllZone.getGameInfo();
+        final GameSummary game = Singletons.getModel().getGameSummary();
         boolean humanWins = false;
         boolean computerWins = false;
         final Player computer = AllZone.getComputerPlayer();

@@ -34,6 +34,7 @@ import forge.Constant;
 import forge.ConstantStringArrayList;
 import forge.FileUtil;
 import forge.HttpUtil;
+import forge.game.GameSummary;
 import forge.gui.input.InputControl;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
@@ -295,6 +296,11 @@ public class FModel {
     /** @return {@link forge.model.FGameState} */
     public final FGameState getGameState() {
         return this.gameState;
+    }
+
+    /** @return {@link forge.game.GameSummary} */
+    public final GameSummary getGameSummary() {
+        return this.gameState.getGameSummary();
     }
 
     /**

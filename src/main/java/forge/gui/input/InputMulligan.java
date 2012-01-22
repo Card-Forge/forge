@@ -32,6 +32,7 @@ import forge.PhaseHandler;
 import forge.PhaseUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
@@ -99,7 +100,7 @@ public class InputMulligan extends Input {
     @Override
     public final void selectButtonCancel() {
         final Player humanPlayer = AllZone.getHumanPlayer();
-        final GamePlayerRating humanRating = AllZone.getGameInfo().getPlayerRating(humanPlayer.getName());
+        final GamePlayerRating humanRating = Singletons.getModel().getGameSummary().getPlayerRating(humanPlayer.getName());
 
         final int newHand = this.doMulligan(humanPlayer, humanRating);
 
@@ -122,7 +123,7 @@ public class InputMulligan extends Input {
     final void end() {
         // Computer mulligan
         final Player aiPlayer = AllZone.getComputerPlayer();
-        final GamePlayerRating aiRating = AllZone.getGameInfo().getPlayerRating(aiPlayer.getName());
+        final GamePlayerRating aiRating = Singletons.getModel().getGameSummary().getPlayerRating(aiPlayer.getName());
         boolean aiTakesMulligan = true;
 
         // Computer mulligans if there are no cards with converted mana cost of
