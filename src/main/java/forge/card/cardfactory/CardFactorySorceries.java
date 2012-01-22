@@ -44,6 +44,7 @@ import forge.PlayerUtil;
 import forge.PlayerZone;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -942,69 +943,51 @@ public class CardFactorySorceries {
 
         // *************** START *********** START **************************
         else if (cardName.equals("Donate")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 782912579034503349L;
+            final Target t2 = new Target(card, "Select target Player", "Player".split(","));
+            final AbilitySub sub = new AbilitySub(card, t2) {
+                private static final long serialVersionUID = 4618047889933691050L;
 
                 @Override
-                public void resolve() {
-                    final Card c = this.getTargetCard();
-
-                    if ((c != null) && AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
-                        // Donate should target both the player and the creature
-                        c.addController(card.getController().getOpponent());
-                        /*
-                         * if (!c.isAura()) {
-                         * 
-                         * //AllZone.getGameAction().changeController(new
-                         * CardList(c), c.getController(),
-                         * c.getController().getOpponent());
-                         * 
-                         * } else //Aura {
-                         * c.setController(card.getController().getOpponent());
-                         * }
-                         */
-                    }
+                public boolean chkAIDrawback() {
+                    return false;
                 }
 
                 @Override
-                public boolean canPlayAI() {
-                    final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield,
-                            "Illusions of Grandeur");
+                public void resolve() {
+                    final Card permanent = this.getParent().getTargetCard();
+                    final Player player = this.getTargetPlayer();
+                    permanent.addController(player);
+                }
 
-                    if (list.size() > 0) {
-                        this.setTargetCard(list.get(0));
-                        return true;
-                    }
+                @Override
+                public boolean doTrigger(final boolean b) {
                     return false;
                 }
             };
 
-            final Input runtime = new Input() {
-                private static final long serialVersionUID = -7823269301012427007L;
+            final Cost abCost = new Cost("2 U", cardName, false);
+            final Target t1 = new Target(card, "Select target permanent", "Permanent".split(","));
+            final SpellAbility spell = new Spell(card, abCost, t1) {
+                private static final long serialVersionUID = 8964235802256739219L;
 
                 @Override
-                public void showMessage() {
-                    CardList perms = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
-                    perms = perms.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return c.isPermanent();
-                        }
-                    });
+                public boolean canPlayAI() {
+                    return false;
+                }
 
-                    boolean free = false;
-                    if (this.isFree()) {
-                        free = true;
-                    }
+                @Override
+                public void resolve() {
+                    sub.resolve();
+                }
+            };
+            
+            spell.setSubAbility(sub);
 
-                    this.stopSetNext(CardFactoryUtil.inputTargetSpecific(spell, perms,
-                            "Select a permanent you control", true, free));
-
-                } // showMessage()
-            }; // Input
-
-            spell.setBeforePayMana(runtime);
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Target player gains control of target permanent");
+            spell.setDescription(sbDesc.toString());
             card.addSpellAbility(spell);
+
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
