@@ -8929,6 +8929,7 @@ res/cardsfolder/t/toxic_iguanar.txt svneol=native#text/plain
 res/cardsfolder/t/toxic_nim.txt svneol=native#text/plain
 res/cardsfolder/t/toxin_sliver.txt svneol=native#text/plain
 res/cardsfolder/t/toymaker.txt svneol=native#text/plain
+res/cardsfolder/t/trace_of_abundance.txt -text
 res/cardsfolder/t/tracker.txt svneol=native#text/plain
 res/cardsfolder/t/trade_caravan.txt svneol=native#text/plain
 res/cardsfolder/t/trade_routes.txt svneol=native#text/plain
