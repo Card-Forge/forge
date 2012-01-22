@@ -276,33 +276,6 @@ public class CardFactoryInstants {
 
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Hidetsugu's Second Rite")) {
-            final Target t = new Target(card, "Select target player", "Player");
-            final Cost cost = new Cost("3 R", cardName, false);
-            final SpellAbility spell = new Spell(card, cost, t) {
-                private static final long serialVersionUID = 176857775451818523L;
-
-                @Override
-                public void resolve() {
-                    if (this.getTargetPlayer().getLife() == 10) {
-                        this.getTargetPlayer().addDamage(10, card);
-                    }
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.getHumanPlayer().getLife() == 10;
-                }
-
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
-
-            card.addSpellAbility(spell);
-
-            card.setSVar("PlayMain1", "TRUE");
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Echoing Truth")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 563933533543239220L;

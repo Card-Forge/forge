@@ -1,7 +1,10 @@
 Name:Hidetsugu's Second Rite
 ManaCost:3 R
 Types:Instant
-Text:If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player.
+Text:no text
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | TgtPrompt$ Select target player | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ10 | NumDmg$ 10 | SpellDescription$ If target player has exactly 10 life, CARDNAME deals 10 damage to that player.
+SVar:X:TargetedPlayer$LifeTotal
+SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card88818.jpg
