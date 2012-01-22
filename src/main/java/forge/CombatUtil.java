@@ -29,6 +29,7 @@ import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
+import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 import forge.gui.input.InputPayManaCostAbility;
@@ -1479,6 +1480,34 @@ public class CombatUtil {
 
         power += defender.getKeywordMagnitude("Bushido");
 
+
+        //look out for continuous static abilities that only care for blocking creatures
+        CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+        for (Card card : cardList) {
+            for (StaticAbility stAb : card.getStaticAbilities()) {
+                final HashMap<String, String> params = stAb.getMapParams();
+                if (!params.get("Mode").equals("Continuous")) {
+                    continue;
+                }
+                if (!params.containsKey("Affected") || !params.get("Affected").contains("blocking")) {
+                    continue;
+                }
+                String valid = params.get("Affected").replace("blocking", "Creature");
+                if (!defender.isValid(valid, card.getController(), card)) {
+                    continue;
+                }
+                if (params.containsKey("AddPower")) {
+                    if (params.get("AddPower").equals("X")) {
+                        power += CardFactoryUtil.xCount(card, card.getSVar("X"));
+                    } else if (params.get("AddPower").equals("Y")) {
+                        power += CardFactoryUtil.xCount(card, card.getSVar("Y"));
+                    } else {
+                        power += Integer.valueOf(params.get("AddPower"));
+                    }
+                }
+            }
+        }
+
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(defender.getTriggers());
         theTriggers.addAll(attacker.getTriggers());
         for (final Trigger trigger : theTriggers) {
@@ -1634,6 +1663,33 @@ public class CombatUtil {
             theTriggers.addAll(defender.getTriggers());
         }
 
+        //look out for continuous static abilities that only care for attacking creatures
+        CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+        for (Card card : cardList) {
+            for (StaticAbility stAb : card.getStaticAbilities()) {
+                final HashMap<String, String> params = stAb.getMapParams();
+                if (!params.get("Mode").equals("Continuous")) {
+                    continue;
+                }
+                if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
+                    continue;
+                }
+                String valid = params.get("Affected").replace("attacking", "Creature");
+                if (!attacker.isValid(valid, card.getController(), card)) {
+                    continue;
+                }
+                if (params.containsKey("AddPower")) {
+                    if (params.get("AddPower").equals("X")) {
+                        power += CardFactoryUtil.xCount(card, card.getSVar("X"));
+                    } else if (params.get("AddPower").equals("Y")) {
+                        power += CardFactoryUtil.xCount(card, card.getSVar("Y"));
+                    } else {
+                        power += Integer.valueOf(params.get("AddPower"));
+                    }
+                }
+            }
+        }
+
         for (final Trigger trigger : theTriggers) {
             final HashMap<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
@@ -1716,6 +1772,33 @@ public class CombatUtil {
         if (defender != null) {
             toughness += attacker.getKeywordMagnitude("Bushido");
             theTriggers.addAll(defender.getTriggers());
+        }
+
+        //look out for continuous static abilities that only care for attacking creatures
+        CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+        for (Card card : cardList) {
+            for (StaticAbility stAb : card.getStaticAbilities()) {
+                final HashMap<String, String> params = stAb.getMapParams();
+                if (!params.get("Mode").equals("Continuous")) {
+                    continue;
+                }
+                if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
+                    continue;
+                }
+                String valid = params.get("Affected").replace("attacking", "Creature");
+                if (!attacker.isValid(valid, card.getController(), card)) {
+                    continue;
+                }
+                if (params.containsKey("AddToughness")) {
+                    if (params.get("AddToughness").equals("X")) {
+                        toughness += CardFactoryUtil.xCount(card, card.getSVar("X"));
+                    } else if (params.get("AddToughness").equals("Y")) {
+                        toughness += CardFactoryUtil.xCount(card, card.getSVar("Y"));
+                    } else {
+                        toughness += Integer.valueOf(params.get("AddToughness"));
+                    }
+                }
+            }
         }
 
         for (final Trigger trigger : theTriggers) {
