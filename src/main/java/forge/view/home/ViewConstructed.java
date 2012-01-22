@@ -12,6 +12,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.control.home.ControlConstructed;
 import forge.view.toolbox.FList;
+import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
@@ -21,13 +22,16 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewConstructed extends JPanel {
-    private FSkin skin;
-    private HomeTopLevel parentView;
-    private JList lstDecksAI;
-    private JButton btnStart;
+    private final FSkin skin;
+    private final HomeTopLevel parentView;
+    private final ControlConstructed control;
+    private final JButton btnStart;
+    private final FProgressBar barProgress;
+
     private SubButton btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
-    private ControlConstructed control;
+    private JList lstDecksAI;
     private FList lstColorsHuman, lstThemesHuman, lstDecksHuman, lstColorsAI, lstThemesAI;
+
     private final String colorsToolTip = "Generate deck (Multi-select: CTRL)";
     private final String themeToolTip = "Generate deck with a theme";
     private final String decklistToolTip = "Load deck (Decklist: Double Click)";
@@ -41,10 +45,9 @@ public class ViewConstructed extends JPanel {
         //========== Basic init stuff
         super();
         this.setOpaque(false);
-        this.setLayout(new MigLayout("insets 0, gap 0"));
+        this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
         parentView = v0;
         skin = Singletons.getView().getSkin();
-        control = new ControlConstructed(this);
 
         populateHuman();
 
@@ -52,37 +55,24 @@ public class ViewConstructed extends JPanel {
 
         // Start button
         btnStart = new StartButton(parentView);
+        this.add(btnStart, "gap 6% 0 2% 0, span 5 1, ax center, wrap");
 
-        this.add(btnStart, "gaptop 2%, span 5 1, ax center, gapleft 6%");
+        barProgress = new FProgressBar();
+        barProgress.setVisible(false);
+        this.add(barProgress, "w 150px!, h 30px!, gap 6% 0 2% 0, span 5 1, align center");
 
         // When all components have been added, add listeners.
+        control = new ControlConstructed(this);
         control.updateDeckNames();
         control.addListeners();
-    }
-
-    // For some reason, MigLayout has sizing problems with a JLabel next to a JList.
-    // So, the "or" label must be nested in a panel.
-    private class OrPanel extends JPanel {
-        public OrPanel() {
-            super();
-            setOpaque(false);
-            setLayout(new BorderLayout());
-
-            JLabel lblOr = new JLabel("OR");
-            lblOr.setHorizontalAlignment(SwingConstants.CENTER);
-            lblOr.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            add(lblOr, BorderLayout.CENTER);
-        }
     }
 
     /** Assembles Swing components in human area. */
     private void populateHuman() {
         lstColorsHuman = new FList();
-        lstColorsHuman.setListData(control.getColorNames());
         lstColorsHuman.setName("lstColorsHuman");
 
         lstThemesHuman = new FList();
-        lstThemesHuman.setListData(control.oa2sa(control.getThemeNames()));
         lstThemesHuman.setName("lstThemesHuman");
         lstThemesHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 
@@ -151,11 +141,11 @@ public class ViewConstructed extends JPanel {
     /** Assembles Swing components in AI area. */
     private void populateAI() {
         lstColorsAI = new FList();
-        lstColorsAI.setListData(control.getColorNames());
+        //
         lstColorsAI.setName("lstColorsAI");
 
         lstThemesAI = new FList();
-        lstThemesAI.setListData(control.oa2sa(control.getThemeNames()));
+        //
         lstThemesAI.setName("lstThemesAI");
         lstThemesAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 
@@ -286,5 +276,25 @@ public class ViewConstructed extends JPanel {
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnStart() {
         return btnStart;
+    }
+
+    /** @return {@link forge.view.toolbox.FProgressBar} */
+    public FProgressBar getBarProgress() {
+        return barProgress;
+    }
+
+    // For some reason, MigLayout has sizing problems with a JLabel next to a JList.
+    // So, the "or" label must be nested in a panel.
+    private class OrPanel extends JPanel {
+        public OrPanel() {
+            super();
+            setOpaque(false);
+            setLayout(new BorderLayout());
+
+            JLabel lblOr = new JLabel("OR");
+            lblOr.setHorizontalAlignment(SwingConstants.CENTER);
+            lblOr.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            add(lblOr, BorderLayout.CENTER);
+        }
     }
 }

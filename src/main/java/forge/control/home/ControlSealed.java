@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 
@@ -36,6 +37,7 @@ public class ControlSealed {
     private ViewSealed view;
     private DeckManager deckManager;
     private Map<String, Deck> aiDecks;
+    private final MouseAdapter madBuildDeck, madStartGame;
 
     /**
      * Controls behavior of swing components in "sealed" mode menu.
@@ -46,23 +48,43 @@ public class ControlSealed {
         view = v0;
         deckManager = AllZone.getDeckManager();
         Constant.Runtime.setGameType(GameType.Sealed);
+
+        madBuildDeck = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { setupSealed(); }
+        };
+
+        // Game start logic must happen outside of the EDT.
+        madStartGame = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                final Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        startGame();
+                    }
+                };
+                t.start();
+            }
+        };
     }
 
     /** */
     public void addListeners() {
-        view.getBtnBuild().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { setupSealed(); }
-        });
+        view.getBtnBuild().removeMouseListener(madBuildDeck);
+        view.getBtnBuild().addMouseListener(madBuildDeck);
 
-        view.getBtnStart().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { start(); }
-        });
+        view.getBtnStart().removeMouseListener(madStartGame);
+        view.getBtnStart().addMouseListener(madStartGame);
     }
 
     /** Start button has been pressed. */
-    public void start() {
+    public void startGame() {
+        if (SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException(
+                    "ControlSealed() > startGame() must be accessed from outside the event dispatch thread.");
+        }
+
         Deck human = view.getLstHumanDecks().getSelectedDeck();
 
         if (human == null) {
@@ -72,15 +94,40 @@ public class ControlSealed {
             return;
         }
 
+        // If everything is OK, show progress bar and start inits.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().setMaximum(2);
+                view.getBarProgress().reset();
+                view.getBarProgress().setShowETA(false);
+                view.getBarProgress().setShowCount(false);
+                view.getBarProgress().setDescription("Starting New Game");
+                view.getBarProgress().setVisible(true);
+                view.getBtnStart().setVisible(false);
+            }
+        });
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().increment();
+            }
+         });
+
         Constant.Runtime.HUMAN_DECK[0] = human;
         Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get("AI_" + human.getName());
 
-        FControl c = ((GuiTopLevel) AllZone.getDisplay()).getController();
-        c.changeState(FControl.MATCH_SCREEN);
-        c.getMatchController().initMatch();
-        System.out.println(Constant.Runtime.COMPUTER_DECK[0]);
-        System.out.println(Constant.Runtime.HUMAN_DECK[0]);
-        AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
+                g.getController().changeState(FControl.MATCH_SCREEN);
+                g.getController().getMatchController().initMatch();
+
+                AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+            }
+        });
     }
 
     /** */

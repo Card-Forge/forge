@@ -1,15 +1,10 @@
 package forge.view.home;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 
 import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -25,13 +20,13 @@ import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.control.home.ControlDraft;
-import forge.deck.Deck;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
@@ -45,9 +40,11 @@ public class ViewDraft extends JPanel {
     private final ControlDraft control;
     private final HomeTopLevel parentView;
     private final JList lstAI;
+    private final FProgressBar barProgress;
     private final DeckLister lstHumanDecks;
     private final JTextPane tpnDirections;
     private final JLabel lblDirections;
+    private final JButton btnBuildDeck, btnStart;
 
     private String[] opponentNames = new String[] {
             "Abigail", "Ada", "Adeline", "Adriana", "Agatha", "Agnes", "Aileen", "Alba", "Alcyon",
@@ -113,23 +110,12 @@ public class ViewDraft extends JPanel {
      */
     public ViewDraft(HomeTopLevel v0) {
         super();
+        this.parentView = v0;
+        this.skin = Singletons.getView().getSkin();
         this.setOpaque(false);
-        this.setLayout(new MigLayout("insets 0, gap 0"));
-        parentView = v0;
-        skin = Singletons.getView().getSkin();
+        this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
 
-        JLabel lblHuman = new JLabel("Select your deck: ");
-        lblHuman.setFont(skin.getBoldFont(16));
-        lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
-        lblHuman.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        this.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
-
-        JLabel lblAI = new JLabel("Who will you play?");
-        lblAI.setFont(skin.getBoldFont(16));
-        lblAI.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAI.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        this.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
-
+        // Generate random selection of names for display
         Random generator = new Random();
         int i = opponentNames.length;
         String[] ai = {
@@ -142,36 +128,7 @@ public class ViewDraft extends JPanel {
                 opponentNames[generator.nextInt(i)]
         };
 
-        // Define exit command for deck editor (TODO put this in controller)
-        final Command exit = new Command() {
-            private static final long serialVersionUID = -9133358399503226853L;
-
-            @Override
-            public void execute() {
-                control.updateHumanDecks();
-            }
-        };
-
-        // Human deck list area, ai names
-        Collection<Deck[]> temp = AllZone.getDeckManager().getDraftDecks().values();
-        List<Deck> human = new ArrayList<Deck>();
-        for (Deck[] d : temp) { human.add(d[0]); }
-        lstHumanDecks = new DeckLister(GameType.Draft, exit);
-        lstHumanDecks.setDecks(human.toArray(new Deck[0]));
-        lstAI = new FList(ai);
-        this.add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
-        this.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
-
-        lstAI.setSelectedIndex(0);
-
-        SubButton buildHuman = new SubButton("Build A New Deck");
-        buildHuman.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { control.setupDraft(); }
-        });
-        this.add(buildHuman, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
-
-        // Directions
+        // Init directions text pane
         tpnDirections = new JTextPane();
         tpnDirections.setOpaque(false);
         tpnDirections.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
@@ -187,25 +144,50 @@ public class ViewDraft extends JPanel {
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        // Start button
-        StartButton btnStart = new StartButton(parentView);
-        btnStart.addMouseListener(new MouseAdapter() {
+        // Define exit command for deck editor (TODO put this in controller)
+        final Command exit = new Command() {
+            private static final long serialVersionUID = -9133358399503226853L;
+
             @Override
-            public void mousePressed(MouseEvent e) { control.start(); }
-        });
+            public void execute() {
+                control.updateHumanDecks();
+            }
+        };
 
-        final JPanel pnlButtonContainer = new JPanel();
-        pnlButtonContainer.setOpaque(false);
-        this.add(pnlButtonContainer, "ax center, span 2 1, wrap, gaptop 5%");
+        // Layout
+        final JLabel lblHuman = new JLabel("Select your deck: ");
+        lblHuman.setFont(skin.getBoldFont(16));
+        lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
+        lblHuman.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        this.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
 
-        pnlButtonContainer.setLayout(new BorderLayout());
-        pnlButtonContainer.add(btnStart, SwingConstants.CENTER);
+        final JLabel lblAI = new JLabel("Who will you play?");
+        lblAI.setFont(skin.getBoldFont(16));
+        lblAI.setHorizontalAlignment(SwingConstants.CENTER);
+        lblAI.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        this.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
+
+        lstHumanDecks = new DeckLister(GameType.Draft, exit);
+        this.add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
+
+        lstAI = new FList(ai);
+        this.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
+
+        btnBuildDeck = new SubButton("Build A New Deck");
+        this.add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
 
         lblDirections = new JLabel("Click For Directions");
         lblDirections.setFont(skin.getFont(16));
         lblDirections.setHorizontalAlignment(SwingConstants.CENTER);
         lblDirections.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        this.add(lblDirections, "alignx center, span 2 1, gaptop 5%");
+        this.add(lblDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
+
+        btnStart = new StartButton(parentView);
+        this.add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1, wrap");
+
+        barProgress = new FProgressBar();
+        barProgress.setVisible(false);
+        this.add(barProgress, "w 150px!, h 30px!, gap 5% 5% 0 0, span 2 1, align center");
 
         control = new ControlDraft(this);
     }
@@ -259,5 +241,20 @@ public class ViewDraft extends JPanel {
     /** @return JTextArea */
     public JLabel getLblDirections() {
         return lblDirections;
+    }
+
+    /** @return JButton */
+    public JButton getBtnBuildDeck() {
+        return btnBuildDeck;
+    }
+
+    /** @return JButton */
+    public JButton getBtnStart() {
+        return btnStart;
+    }
+
+    /** @return FProgressBar */
+    public FProgressBar getBarProgress() {
+        return barProgress;
     }
 }

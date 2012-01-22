@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -38,6 +39,7 @@ import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
+import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -46,19 +48,21 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewQuest extends JScrollPane {
-    private FSkin skin;
-    private HomeTopLevel parentView;
+    private final FSkin skin;
+    private final HomeTopLevel parentView;
     private QuestEventManager qem;
     private QuestData questData;
     private JPanel viewport;
     private SelectablePanel selectedOpponent;
     private JList lstDeckChooser;
     private ControlQuest control;
+    private FProgressBar barProgress;
     private JRadioButton radEasy, radMedium, radHard, radExpert, radFantasy, radClassic;
     private JCheckBox cbStandardStart, cbPlant, cbZep;
     private JComboBox cbxPet;
     private JLabel lblPlant, lblPet, lblZep, lblLife, lblCredits;
     private boolean previousQuestExists = false;
+    private JButton btnStart;
 
     /**
      * Populates Swing components of Quest mode in home screen.
@@ -274,11 +278,10 @@ public class ViewQuest extends JScrollPane {
         lblZep = new JLabel(GuiUtils.getResizedIcon(
                 new ImageIcon("res/images/icons/ZeppelinIcon.png"), 30, 30));
 
-        StartButton btnStart = new StartButton(parentView);
-        btnStart.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { control.start(); }
-        });
+        btnStart = new StartButton(parentView);
+
+        barProgress = new FProgressBar();
+        barProgress.setVisible(false);
 
         pnlButtonContainer.add(lblPet, "w 30px!, h 30px!, gapright 10px");
         pnlButtonContainer.add(cbxPet, "w 30%!, h 30px!, gapbottom 10px, wrap");
@@ -290,6 +293,7 @@ public class ViewQuest extends JScrollPane {
         pnlButtonContainer.add(cbZep, "w 30%!, h 30px!, gapbottom 10px, wrap");
 
         pnlButtonContainer.add(btnStart, "span 2 1");
+        pnlButtonContainer.add(barProgress, "w 150px!, h 30px!, span 2 1");
 
         viewport.add(pnlButtonContainer, "w 100%!, gapbottom 2%, gaptop 2%, span 2");
 
@@ -658,5 +662,15 @@ public class ViewQuest extends JScrollPane {
     /** @return JLabel */
     public JLabel getLblCredits() {
         return lblCredits;
+    }
+
+    /** @return JButton */
+    public JButton getBtnStart() {
+        return btnStart;
+    }
+
+    /** @return FProgressBar */
+    public FProgressBar getBarProgress() {
+        return barProgress;
     }
 }

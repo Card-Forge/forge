@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import forge.AllZone;
 import forge.Constant;
@@ -28,13 +29,15 @@ import forge.view.toolbox.FSkin;
  */
 public class ControlDraft {
     private final ViewDraft view;
-    private final MouseAdapter madDirections;
+    private final MouseAdapter madBuildDeck, madDirections, madStartGame;
 
     /** @param v0 &emsp; ViewDraft */
     public ControlDraft(ViewDraft v0) {
         this.view = v0;
         updateHumanDecks();
+        view.getLstAIDecks().setSelectedIndex(0);
 
+        // Action listeners
         madDirections = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -50,11 +53,103 @@ public class ControlDraft {
             }
         };
 
+        madBuildDeck = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { setupDraft(); }
+        };
+
+        madStartGame = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                final Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        startGame();
+                    }
+                };
+                t.start();
+            }
+        };
+
         addListeners();
     }
 
     private void addListeners() {
+        view.getBtnBuildDeck().removeMouseListener(madBuildDeck);
+        view.getBtnBuildDeck().addMouseListener(madBuildDeck);
+
+        view.getLblDirections().removeMouseListener(madDirections);
         view.getLblDirections().addMouseListener(madDirections);
+
+        view.getBtnStart().removeMouseListener(madStartGame);
+        view.getBtnStart().addMouseListener(madStartGame);
+    }
+
+    /** */
+    private void startGame() {
+        if (SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException(
+                    "ControlDraft() > startGame() must be accessed from outside the event dispatch thread.");
+        }
+
+        Deck human = view.getLstHumanDecks().getSelectedDeck();
+        int aiIndex = view.getLstAIDecks().getSelectedIndex();
+
+        if (human == null) {
+            JOptionPane.showMessageDialog(null,
+                    "No deck selected for human!\r\n(You may need to build a new deck.)",
+                    "No deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if (human.getMain().countAll() < 40) {
+            JOptionPane.showMessageDialog(null,
+                    "The selected deck doesn't have enough cards to play (minimum 40)."
+                    + "\r\nUse the deck editor to choose the cards you want before starting.",
+                    "No deck", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // If everything is OK, show progress bar and start inits.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().setMaximum(2);
+                view.getBarProgress().reset();
+                view.getBarProgress().setShowETA(false);
+                view.getBarProgress().setShowCount(false);
+                view.getBarProgress().setDescription("Starting New Game");
+                view.getBarProgress().setVisible(true);
+                view.getBtnStart().setVisible(false);
+            }
+        });
+
+        Deck[] opponentDecks = AllZone.getDeckManager().getDraftDeck(human.getName());
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().increment();
+            }
+         });
+
+        Constant.Runtime.HUMAN_DECK[0] = human;
+        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks[aiIndex];
+
+        if (Constant.Runtime.COMPUTER_DECK[0] == null) {
+            throw new IllegalStateException("startButton() error - computer deck is null");
+        }
+
+        Constant.Runtime.setGameType(GameType.Draft);
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
+                g.getController().changeState(FControl.MATCH_SCREEN);
+                g.getController().getMatchController().initMatch();
+                AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+            }
+        });
     }
 
     /** */
@@ -82,41 +177,6 @@ public class ControlDraft {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Custom));
         }
 
-    }
-
-    /** */
-    public void start() {
-        Deck human = view.getLstHumanDecks().getSelectedDeck();
-        int aiIndex = view.getLstAIDecks().getSelectedIndex();
-
-        if (human == null) {
-            JOptionPane.showMessageDialog(null,
-                    "No deck selected for human!\r\n(You may need to build a new deck.)",
-                    "No deck", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        else if (human.getMain().countAll() < 40) {
-            JOptionPane.showMessageDialog(null,
-                    "The selected deck doesn't have enough cards to play (minimum 40)."
-                    + "\r\nUse the deck editor to choose the cards you want before starting.",
-                    "No deck", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Deck[] opponentDecks = AllZone.getDeckManager().getDraftDeck(human.getName());
-
-        Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks[aiIndex];
-
-        if (Constant.Runtime.COMPUTER_DECK[0] == null) {
-            throw new IllegalStateException("startButton() error - computer deck is null");
-        }
-
-        Constant.Runtime.setGameType(GameType.Draft);
-
-        GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-        g.getController().changeState(FControl.MATCH_SCREEN);
-        g.getController().getMatchController().initMatch();
-        AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
     }
 
     /** Updates deck list in view. */

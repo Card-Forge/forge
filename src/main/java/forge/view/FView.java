@@ -23,9 +23,7 @@ import net.slightlymagic.braids.util.UtilFunctions;
 import forge.AllZone;
 import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
-import forge.Constant;
 import forge.control.FControl;
-import forge.game.GameType;
 import forge.view.home.SplashFrame;
 import forge.view.toolbox.CardFaceSymbols;
 import forge.view.toolbox.FProgressBar;
@@ -122,7 +120,6 @@ public class FView {
             public void run() {
 
                 // TODO there must be a better place for this. ////////////
-                Constant.Runtime.setGameType(GameType.Constructed);
                 AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
                 /////////////////////////////////////
 

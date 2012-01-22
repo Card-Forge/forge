@@ -2,8 +2,11 @@ package forge.control.home;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import forge.AllZone;
 import forge.Command;
@@ -28,6 +31,8 @@ import forge.view.home.ViewQuest;
 public class ControlQuest {
     private ViewQuest view;
     private QuestEvent event;
+    private final ActionListener actPetSelect, actPlantSelect;
+    private final MouseAdapter madStartGame;
 
     /**
      * Controls logic and listeners for quest mode in home screen.
@@ -39,27 +44,55 @@ public class ControlQuest {
 
         if (view.hasPreviousQuest()) {
             updateDeckList();
-
-            view.getPetComboBox().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent actionEvent) {
-                    if (view.getPetComboBox().getSelectedIndex() > 0) {
-                        view.getQuestData().getPetManager().setSelectedPet(
-                                (String) view.getPetComboBox().getSelectedItem());
-                    } else {
-                        view.getQuestData().getPetManager().setSelectedPet(null);
-                    }
-                }
-            });
-
-            view.getPlantCheckBox().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent actionEvent) {
-                    view.getQuestData().getPetManager()
-                            .setUsePlant(view.getPlantCheckBox().isSelected());
-                }
-            });
         }
+
+        // Game start logic must happen outside of the EDT.
+        madStartGame = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                final Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        startGame();
+                    }
+                };
+                t.start();
+            }
+        };
+
+        actPetSelect = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent actionEvent) {
+                if (view.getPetComboBox().getSelectedIndex() > 0) {
+                    view.getQuestData().getPetManager().setSelectedPet(
+                            (String) view.getPetComboBox().getSelectedItem());
+                } else {
+                    view.getQuestData().getPetManager().setSelectedPet(null);
+                }
+            }
+        };
+
+        actPlantSelect = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent actionEvent) {
+                view.getQuestData().getPetManager()
+                        .setUsePlant(view.getPlantCheckBox().isSelected());
+            }
+        };
+
+        addListeners();
+    }
+
+    private void addListeners() {
+        view.getBtnStart().removeMouseListener(madStartGame);
+        view.getBtnStart().addMouseListener(madStartGame);
+
+        view.getPetComboBox().removeActionListener(actPetSelect);
+        view.getPetComboBox().addActionListener(actPetSelect);
+
+        view.getPlantCheckBox().removeActionListener(actPlantSelect);
+        view.getPlantCheckBox().addActionListener(actPlantSelect);
+
     }
 
     /** @return ViewQuest */
@@ -175,7 +208,12 @@ public class ControlQuest {
     }
 
     /** */
-    public void start() {
+    private void startGame() {
+        if (SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException(
+                    "ControlQuest() > startGame() must be accessed from outside the event dispatch thread.");
+        }
+
         if (view.getLstDeckChooser().getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null,
                     "A mysterious wall blocks your way."
@@ -185,6 +223,20 @@ public class ControlQuest {
             return;
         }
 
+        // If everything is OK, show progress bar and start inits.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().setMaximum(2);
+                view.getBarProgress().reset();
+                view.getBarProgress().setShowETA(false);
+                view.getBarProgress().setShowCount(false);
+                view.getBarProgress().setDescription("Starting New Game");
+                view.getBarProgress().setVisible(true);
+                view.getBtnStart().setVisible(false);
+            }
+        });
+
         event = view.getSelectedOpponent().getEvent();
         AllZone.setQuestEvent(event);
         Constant.Runtime.setGameType(GameType.Quest);
@@ -192,27 +244,45 @@ public class ControlQuest {
         zeppelin.setZeppelinUsed(false);
         view.getQuestData().randomizeOpponents();
 
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().increment();
+            }
+         });
+
         String deckname = (String) view.getLstDeckChooser().getSelectedValue();
         Constant.Runtime.HUMAN_DECK[0] = view.getQuestData().getDeck(deckname);
         Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
-        Deck humanDeck = view.getQuestData().getDeck(deckname);
+        final Deck humanDeck = view.getQuestData().getDeck(deckname);
 
         Constant.Runtime.HUMAN_DECK[0] = humanDeck;
 
         Constant.Quest.OPP_ICON_NAME[0] = event.getIcon();
 
-        GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-        g.getController().changeState(FControl.MATCH_SCREEN);
-        g.getController().getMatchController().initMatch();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().increment();
+            }
+         });
 
-        AllZone.getMatchState().reset();
-        if (event.getEventType().equals("challenge")) {
-            this.setupChallenge(humanDeck);
-        } else {
-            this.setupDuel(humanDeck);
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
+                g.getController().changeState(FControl.MATCH_SCREEN);
+                g.getController().getMatchController().initMatch();
 
-        view.getQuestData().saveData();
+                AllZone.getMatchState().reset();
+                if (event.getEventType().equals("challenge")) {
+                    setupChallenge(humanDeck);
+                } else {
+                    setupDuel(humanDeck);
+                }
+                view.getQuestData().saveData();
+            }
+        });
     }
 
     /**

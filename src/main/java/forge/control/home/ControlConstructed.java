@@ -15,6 +15,7 @@ import java.util.Random;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -44,9 +45,11 @@ public class ControlConstructed {
     private JList currentHumanSelection = null;
     private JList currentAISelection = null;
 
-    private Map<String, String> colorVals;
+    private final Map<String, String> colorVals;
     private List<String> themeNames;
     private List<String> deckNames;
+    private final MouseAdapter madStartGame, madDecksAI, madDecksHuman,
+        madHumanRandomDeck, madAIRandomDeck, madHumanRandomTheme, madAIRandomTheme;
 
     /**
      * 
@@ -68,6 +71,75 @@ public class ControlConstructed {
         colorVals.put("Green", "green");
         colorVals.put("Red", "red");
         colorVals.put("White", "white");
+
+        // Update list data
+        view.getLstColorsHuman().setListData(getColorNames());
+        view.getLstThemesHuman().setListData(oa2sa(getThemeNames()));
+        view.getLstColorsAI().setListData(getColorNames());
+        view.getLstThemesAI().setListData(oa2sa(getThemeNames()));
+
+        // Set action listeners
+        madHumanRandomTheme = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstThemesHuman());
+            }
+        };
+
+        madAIRandomTheme = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstThemesAI());
+            }
+        };
+
+        madHumanRandomDeck = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstDecksHuman());
+            }
+        };
+
+        madAIRandomDeck = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                randomPick(view.getLstDecksAI());
+            }
+        };
+
+        // Game start logic must happen outside of the EDT.
+        madStartGame = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                final Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        startGame();
+                    }
+                };
+                t.start();
+            }
+        };
+
+        madDecksAI = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = view.getLstDecksAI().locationToIndex(e.getPoint());
+                    showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
+                 }
+            }
+        };
+
+        madDecksHuman = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = view.getLstDecksHuman().locationToIndex(e.getPoint());
+                    if (index > 0) {
+                        showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
+                    }
+                 }
+            }
+        };
     }
 
     /** @return ViewConstructed */
@@ -89,60 +161,26 @@ public class ControlConstructed {
         view.getLstDecksHuman().getSelectionModel().addListSelectionListener(new HumanDecksListener());
         view.getLstDecksAI().getSelectionModel().addListSelectionListener(new AIDecksListener());
 
-        // Double-click deck lists
-        view.getLstDecksHuman().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int index = view.getLstDecksHuman().locationToIndex(e.getPoint());
-                    if (index > 0) {
-                        showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
-                    }
-                 }
-            }
-        });
+        view.getLstDecksHuman().removeMouseListener(madDecksHuman);
+        view.getLstDecksHuman().addMouseListener(madDecksHuman);
 
-        view.getLstDecksAI().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int index = view.getLstDecksAI().locationToIndex(e.getPoint());
-                    showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
-                 }
-            }
-        });
+        view.getLstDecksAI().removeMouseListener(madDecksAI);
+        view.getLstDecksAI().addMouseListener(madDecksAI);
 
-        // Random actions
-        view.getBtnStart().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { start(); }
-        });
+        view.getBtnStart().removeMouseListener(madStartGame);
+        view.getBtnStart().addMouseListener(madStartGame);
 
-        view.getBtnAIRandomDeck().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                randomPick(view.getLstDecksAI());
-            }
-        });
+        view.getBtnAIRandomDeck().removeMouseListener(madAIRandomDeck);
+        view.getBtnAIRandomDeck().addMouseListener(madAIRandomDeck);
 
-        view.getBtnHumanRandomDeck().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                randomPick(view.getLstDecksHuman());
-            }
-        });
+        view.getBtnHumanRandomDeck().removeMouseListener(madHumanRandomDeck);
+        view.getBtnHumanRandomDeck().addMouseListener(madHumanRandomDeck);
 
-        view.getBtnAIRandomTheme().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                randomPick(view.getLstThemesAI());
-            }
-        });
+        view.getBtnAIRandomTheme().removeMouseListener(madAIRandomTheme);
+        view.getBtnAIRandomTheme().addMouseListener(madAIRandomTheme);
 
-        view.getBtnHumanRandomTheme().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                randomPick(view.getLstThemesHuman());
-            }
-        });
+        view.getBtnHumanRandomTheme().removeMouseListener(madHumanRandomTheme);
+        view.getBtnHumanRandomTheme().addMouseListener(madHumanRandomTheme);
     }
 
     //========== LISTENERS
@@ -444,9 +482,29 @@ public class ControlConstructed {
 
     //========= OTHER
     /** Fired when start button is pressed; checks various conditions from lists and starts game. */
-    public void start() {
-        String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValues());
-        String[] aiSelected = oa2sa(currentAISelection.getSelectedValues());
+    private void startGame() {
+        if (SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException(
+                    "ControlConstructed() > startGame() must be accessed from outside the event dispatch thread.");
+        }
+
+        // If everything is OK, show progress bar and start inits.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().setMaximum(2);
+                view.getBarProgress().reset();
+                view.getBarProgress().setShowETA(false);
+                view.getBarProgress().setShowCount(false);
+                view.getBarProgress().setDescription("Starting New Game");
+                view.getBarProgress().setVisible(true);
+                view.getBtnStart().setVisible(false);
+            }
+        });
+
+        final String[] humanSelected = oa2sa(currentHumanSelection.getSelectedValues());
+        final String[] aiSelected = oa2sa(currentAISelection.getSelectedValues());
+        Constant.Runtime.setGameType(GameType.Constructed);
 
         // Check color-based deck selection for appropriate length
         if (currentHumanSelection.getName().equals("lstColorsHuman")) {
@@ -457,50 +515,55 @@ public class ControlConstructed {
             if (!checkValidityOfAISelectedColors(aiSelected)) { return; }
         }
 
-        // If deck selection is acceptable, start a new game.
-        generateHumanDecks(humanSelected);
         generateAIDecks(aiSelected);
 
-        Constant.Runtime.setGameType(GameType.Constructed);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().increment();
+            }
+         });
 
-        GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
+        generateHumanDecks(humanSelected);
 
-        g.getController().changeState(FControl.MATCH_SCREEN);
-        g.getController().getMatchController().initMatch();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.getBarProgress().increment();
+            }
+         });
 
-        AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
+                g.getController().changeState(FControl.MATCH_SCREEN);
+                g.getController().getMatchController().initMatch();
+
+                AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+            }
+        });
+    }
+
+    /**
+     * What to do after exiting the deck editor in the deck lister.
+     * 
+     * @return Command
+     */
+    public Command getEditorExitCommand() {
+        Command exit = new Command() {
+            private static final long serialVersionUID = -9133358399503226853L;
+
+            @Override
+            public void execute() {
+
+            }
+        };
+
+        return exit;
     }
 
     //========= LIST BOX VALUES
-    /**
-     * 
-     * Array of color selections present in list boxes. Values
-     * correspond to colorVals hash map.
-     * 
-     * @return Object[]
-     */
-    // Four randoms are included which should cover all possibilities.
-    public String[] getColorNames() {
-        return new String[] {"Random 1", "Random 2", "Random 3",
-                "Random 4", "Black", "Blue", "Green", "Red", "White"};
-    }
-
-    /**
-     * Array of theme names, usually used in list boxes.
-     * 
-     * @return Object[]
-     */
-    public Object[] getThemeNames() {
-        themeNames = new ArrayList<String>();
-        for (String s : GenerateThemeDeck.getThemeNames()) {
-            themeNames.add(s);
-        }
-        // No theme decks?
-        if (themeNames.size() == 1) { themeNames = new ArrayList<String>(); }
-
-        return themeNames.toArray();
-    }
-
     /** */
     public void updateDeckNames() {
         deckNames = new ArrayList<String>();
@@ -514,6 +577,35 @@ public class ControlConstructed {
 
         view.getLstDecksHuman().setListData(deckNames.toArray());
         view.getLstDecksAI().setListData(deckNames.toArray());
+    }
+
+    /**
+     * 
+     * Array of color selections present in list boxes. Values
+     * correspond to colorVals hash map.
+     * 
+     * @return Object[]
+     */
+    // Four randoms are included which should cover all possibilities.
+    private String[] getColorNames() {
+        return new String[] {"Random 1", "Random 2", "Random 3",
+                "Random 4", "Black", "Blue", "Green", "Red", "White"};
+    }
+
+    /**
+     * Array of theme names, usually used in list boxes.
+     * 
+     * @return Object[]
+     */
+    private Object[] getThemeNames() {
+        themeNames = new ArrayList<String>();
+        for (String s : GenerateThemeDeck.getThemeNames()) {
+            themeNames.add(s);
+        }
+        // No theme decks?
+        if (themeNames.size() == 1) { themeNames = new ArrayList<String>(); }
+
+        return themeNames.toArray();
     }
 
     /**
@@ -562,31 +654,13 @@ public class ControlConstructed {
     } // End showDecklist
 
     /**
-     * What to do after exiting the deck editor in the deck lister.
-     * 
-     * @return Command
-     */
-    public Command getEditorExitCommand() {
-        Command exit = new Command() {
-            private static final long serialVersionUID = -9133358399503226853L;
-
-            @Override
-            public void execute() {
-
-            }
-        };
-
-        return exit;
-    }
-
-    /**
      * Exhaustively converts object array to string array.
      * Probably a much easier way to do this.
      * 
      * @param o0 &emsp; Object[]
      * @return String[]
      */
-    public String[] oa2sa(Object[] o0) {
+    private String[] oa2sa(Object[] o0) {
         String[] output = new String[o0.length];
 
         for (int i = 0; i < o0.length; i++) {
