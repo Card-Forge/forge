@@ -6,7 +6,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
-import forge.PlayerZone;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -14,10 +13,16 @@ import forge.PlayerZone;
  */
 public class ReplaceMoved extends ReplacementEffect {
 
-    public ReplaceMoved(final HashMap<String,String> mapParams,final Card host) {
-        super(mapParams,host);
+    /**
+     * 
+     * TODO: Write javadoc for Constructor.
+     * @param mapParams &emsp; HashMap<String, String>
+     * @param host &emsp; Card
+     */
+    public ReplaceMoved(final HashMap<String, String> mapParams, final Card host) {
+        super(mapParams, host);
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
@@ -33,17 +38,17 @@ public class ReplaceMoved extends ReplacementEffect {
         }
         if (this.getMapParams().containsKey("Origin")) {
             Zone z = Zone.smartValueOf(this.getMapParams().get("Origin"));
-            if(z != (Zone)runParams.get("Origin")) {
+            if (z != (Zone) runParams.get("Origin")) {
                 return false;
             }
         }
         if (this.getMapParams().containsKey("Destination")) {
             Zone z = Zone.smartValueOf(this.getMapParams().get("Destination"));
-            if(z != (Zone)runParams.get("Destination")) {
+            if (z != (Zone) runParams.get("Destination")) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -52,9 +57,9 @@ public class ReplaceMoved extends ReplacementEffect {
      */
     @Override
     public ReplacementEffect getCopy() {
-        return new ReplaceMoved(this.getMapParams(),this.getHostCard());
+        return new ReplaceMoved(this.getMapParams(), this.getHostCard());
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
