@@ -199,7 +199,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             }
         }
 
-        final CardList meek = player.getCardsIn(Zone.Graveyard, "Sword of the Meek");
+        /*final CardList meek = player.getCardsIn(Zone.Graveyard, "Sword of the Meek");
 
         if ((meek.size() > 0) && c.isCreature() && (c.getNetAttack() == 1) && (c.getNetDefense() == 1)) {
             for (int i = 0; i < meek.size(); i++) {
@@ -239,7 +239,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 AllZone.getStack().addSimultaneousStackEntry(ability);
 
             }
-        }
+        }*/
 
     } // end add()
 
