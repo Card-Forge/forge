@@ -442,59 +442,6 @@ public class CardFactoryInstants {
             card.addSpellAbility(spell);
         } // *************** END ************ END **************************
 
-        // *************** START *********** START **************************
-        else if (cardName.equals("Demonic Consultation")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 1481101852928051519L;
-
-                @Override
-                public void resolve() {
-                    final Player player = card.getController();
-                    final CardList libList = player.getCardsIn(Zone.Library);
-                    final String[] input = new String[1];
-                    input[0] = JOptionPane.showInputDialog(null, "Which card?", "Pick card",
-                            JOptionPane.QUESTION_MESSAGE);
-
-                    for (int i = 0; i < 7; i++) {
-                        final Card c = libList.get(i);
-                        AllZone.getGameAction().exile(c);
-                    }
-
-                    final int max = libList.size();
-                    int stop = 0;
-                    for (int i = 0; i < max; i++) {
-                        final Card c = libList.get(i);
-                        if (c.getName().equals(input[0])) {
-                            if (stop == 0) {
-                                AllZone.getGameAction().moveToHand(c);
-                                stop = 1;
-                            }
-
-                        } else if (stop == 0) {
-                            AllZone.getGameAction().exile(c);
-                        }
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    final CardList libList = card.getController().getCardsIn(Zone.Library);
-                    return (libList.size() > 6) && super.canPlay();
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            }; // SpellAbility
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Name a card. Exile the top six cards of your library, ");
-            sb.append("then reveal cards from the top of your library until you reveal the named card. ");
-            sb.append("Put that card into your hand and exile all other cards revealed this way");
-            spell.setStackDescription(sb.toString());
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Siren's Call")) {

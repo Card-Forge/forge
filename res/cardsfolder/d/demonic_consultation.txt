@@ -1,7 +1,10 @@
 Name:Demonic Consultation
 ManaCost:B
 Types:Instant
-Text:Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way.
+Text:no text
+A:SP$ NameCard | Cost$ B | Defined$ You | SubAbility$ DBMill | SpellDescription$ Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way.
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 6 | Destination$ Exile | SubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.NamedCard | FoundDestination$ Hand | RevealedDestination$ Exile | ValidDescription$ named card
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_consultation.jpg
