@@ -935,13 +935,19 @@ public class AbilityFactoryAttach {
             targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (!mandatory && card.isEquipment() && card.isEquipping() && !targets.isEmpty()) {
-            Card oldTarget = card.getEquipping().get(0);
+        if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
             Card newTarget = (Card) targets.get(0);
-
-            if (newTarget.getController().isPlayer(AllZone.getHumanPlayer())
-                    || CardFactoryUtil.evaluateCreature(oldTarget) > CardFactoryUtil.evaluateCreature(newTarget)) {
+            //don't equip human creatures
+            if (newTarget.getController().isPlayer(AllZone.getHumanPlayer())) {
                 return false;
+            }
+
+            //don't equip a worse creature
+            if (card.isEquipping()) {
+                Card oldTarget = card.getEquipping().get(0);
+                if (CardFactoryUtil.evaluateCreature(oldTarget) > CardFactoryUtil.evaluateCreature(newTarget)) {
+                    return false;
+                }
             }
         }
 
