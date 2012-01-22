@@ -125,7 +125,7 @@ public class ViewUtilities extends JPanel {
         btnClose.setText("Close");
 
         pnlContainer.setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
-        pnlContainer.setBGTexture(skin.getIcon(FSkin.SkinProp.BG_TEXTURE));
+        pnlContainer.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
         pnlContainer.setLayout(new MigLayout("insets 0, wrap"));
         pnlContainer.add(tpnLicensing, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");
