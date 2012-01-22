@@ -1,0 +1,15 @@
+Name:Angelic Arbiter
+ManaCost:5 W W
+Types:Creature Angel
+Text:no text
+PT:5/6
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigEffect1 | TriggerDescription$ Each opponent who cast a spell this turn can't attack with creatures.
+SVar:TrigEffect1:AB$ Effect | Cost$ 0 | Name$ Angel Arbiter Effect (Opponent can't attack) | StaticAbilities$ CantAttack
+SVar:CantAttack:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Each opponent who cast a spell this turn can't attack with creatures.
+T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect2 | TriggerDescription$ Each opponent who attacked with a creature this turn can't cast spells.
+SVar:TrigEffect2:AB$ Effect | Cost$ 0 | Name$ Angel Arbiter Effect (Opponent can't cast spells) | StaticAbilities$ CantBeCast
+SVar:CantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | Description$ Opponent can't cast spells this turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_arbiter.jpg
+End
