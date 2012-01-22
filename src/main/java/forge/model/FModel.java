@@ -26,8 +26,12 @@ import java.io.PrintStream;
 
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import arcane.util.MultiplexOutputStream;
+import forge.AllZone;
+import forge.ComputerAIGeneral;
+import forge.ComputerAIInput;
 import forge.Constant;
 import forge.HttpUtil;
+import forge.gui.input.InputControl;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -87,6 +91,10 @@ public class FModel {
             // Log.error("Error loading preferences: " + exn);
             throw new RuntimeException(exn);
         }
+
+        // Instantiate AI
+        AllZone.setInputControl(new InputControl(FModel.this));
+        AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
 
         // TODO these should be set along with others all at the same time, not
         // here

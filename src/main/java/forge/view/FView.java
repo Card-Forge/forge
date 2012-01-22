@@ -21,8 +21,6 @@ import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.AllZone;
-import forge.ComputerAIGeneral;
-import forge.ComputerAIInput;
 import forge.control.FControl;
 import forge.view.home.SplashFrame;
 import forge.view.toolbox.CardFaceSymbols;
@@ -42,8 +40,7 @@ public class FView {
     /**
      * The splashFrame field is guaranteed to exist when this constructor exits.
      * 
-     * @param skin0
-     *            the skin
+     * @param skin0 &emsp; {@link forge.view.toolbox.FSkin}
      */
     public FView(final FSkin skin0) {
         this.skin = skin0;
@@ -72,7 +69,7 @@ public class FView {
     /**
      * Allows singleton (global) access to a progress bar (which must be set first).
      * 
-     * @return a progress monitor having only one phase; may be null
+     * @return {@link forge.view.toolbox.FProgressBar}
      */
     public final FProgressBar getProgressBar() {
         return this.barProgress;
@@ -81,18 +78,18 @@ public class FView {
     /** 
      * Sets a progress bar so it can be accessed via singletons.
      * 
-     * @param bar0 &emsp; An FProgressBar object
+     * @param bar0 &emsp; {@link forge.view.toolbox.FProgressBar}
      */
     public final void setProgressBar(FProgressBar bar0) {
         this.barProgress = bar0;
     }
 
-    /** @return FSkin */
+    /** @return {@link forge.view.toolbox.FSkin} */
     public FSkin getSkin() {
         return this.skin;
     }
 
-    /** @param skin0 &emsp; FSkin */
+    /** @param skin0 &emsp; {@link forge.view.toolbox.FSkin} */
     public void setSkin(final FSkin skin0) {
         this.skin = skin0;
     }
@@ -118,11 +115,6 @@ public class FView {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-
-                // TODO there must be a better place for this. ////////////
-                AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
-                /////////////////////////////////////
-
                 final GuiTopLevel g = new GuiTopLevel();
                 AllZone.setDisplay(g);
                 g.getController().changeState(FControl.HOME_SCREEN);

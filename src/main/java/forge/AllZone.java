@@ -78,7 +78,7 @@ public final class AllZone {
     private static CardFactoryInterface cardFactory = null;
 
     /** Constant <code>inputControl</code>. */
-    private static final InputControl INPUT_CONTROL = new InputControl(Singletons.getModel());
+    private static InputControl inputControl = null;
 
     /** */
     private static FMatchState matchState = new FMatchState();
@@ -379,7 +379,12 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static InputControl getInputControl() {
-        return AllZone.INPUT_CONTROL;
+        return AllZone.inputControl;
+    }
+
+    /** @param i0 &emsp; {@link forge.gui.input.InputControl} */
+    public static void setInputControl(InputControl i0) {
+        AllZone.inputControl = i0;
     }
 
     /**
