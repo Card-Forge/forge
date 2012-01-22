@@ -3,9 +3,9 @@ ManaCost:5
 Types:Artifact
 Text:no text
 R:Event$ GameLoss | ValidPlayer$ You | ReplaceWith$ ShuffleDrawSetLife | Description$ If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.
-SVar:ShuffleDrawSetLife:AB$ ChangeZoneAll | Cost$ 0 | ValidCards$ Card.YouOwn | Origin$ Battlefield | Destination$ Library | SubAbility$ Shuffle2
-SVar:Shuffle2:DB$ ChangeZoneAll | ValidCards$ Card.YouOwn | Origin$ Hand | Destination$ Library | SubAbility$ Shuffle3
-SVar:Shuffle3:DB$ ChangeZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | SubAbility$ Draw
+SVar:ShuffleDrawSetLife:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.YouOwn | Origin$ Battlefield | Destination$ Library | SubAbility$ Shuffle2
+SVar:Shuffle2:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Hand | Destination$ Library | SubAbility$ Shuffle3
+SVar:Shuffle3:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | SubAbility$ Draw
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ SetLife
 SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ 20
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lichs_mirror.jpg
