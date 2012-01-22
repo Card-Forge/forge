@@ -2,7 +2,7 @@ Name:Forethought Amulet
 ManaCost:5
 Types:Artifact
 Text:no text
-R:Event$ DamageDone | ValidTarget$ You | DamageAmount$ GE3 | ReplaceWith$ Dmg2 | Description$ If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
+R:Event$ DamageDone | ValidSource$ Instant,Sorcery | ValidTarget$ You | DamageAmount$ GE3 | ReplaceWith$ Dmg2 | Description$ If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
 SVar:Dmg2:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ 2
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 3
 SVar:RemRandomDeck:True
