@@ -51,6 +51,64 @@ Fixes/Features:
 - Ran oracle script.
 - Fixed the description of the echo ability.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Sac<X> costs with X=0.
+- Fixed the LQ pic URL for Divining Witch.
+- CheckStyle.
+- fix the Blue and White mana symbols in the Mana Pool area (Colorless changed, but I don't know if it was intended or not, so I left it.)
+- add some Localized text to ViewWinLose.
+- add some Localized text in ViewSettings (not finished, just a change I had locally)
+- fix so that all cards won in Ante during a Quest match are marked as NEW in the Card Pool after that match.
+- properly set the Game Type when starting Constructed
+- Added a check for Torpor Orb to checkETBEffects.
+- Fixed three cards with "ValidActivatingPlayer$ Each".
+- Fixed Culling Scales.
+- Fixed Tibor and Lumia.
+- Commented out an unused line in ReplacementHandler that causes Lichenthrope to throw NPE's.
+- fixed "any" mana bug with choice not getting reset
+- Correctly set the Game Type for Draft
+- ViewDraft - 1) fix spacing around Start button, 2) fix skinning of opponent list
+- Added Origin parameter to CantBeCast (Can't cast spells from <zone>)
+- Added "Moved" as a replacable event. Will look further towards replacing the "exile instead of graveyard" type keywords.
+- Made AF Attach ready to handle attaching equipment as a drawback.
+- Fixed Fungus Elemental.
+- CheckStyle.
+- added "CARDNAME can't transform" keyword
+- Converted Echoing Decay to script.
+- Added RemAI to Echoing Decay.
+- Converted Hidetsugus Second Rite to script.
+- Converted Echoing Truth to script. Note: There is a warning about an import forge.PlayerZone never being used. I did not want to remove it until it is confirmed to be unused.
+- FProgressBar created and applied to splash frame.
+- Various parts of preload process detailed in progress bar.
+- Further organization of FView to remove this-shouldn't-be-here stuff.
+- Fixed Lich's Mirror.
+- Fixed Rag Dealer.
+- Fixed Shrine of Limitless Power.
+- Fixed Exclusion Ritual.
+- Progress bars added to all Start buttons.
+- Thread safety issues addressed for all Start buttons.
+- Further optimizations made to listeners and architecture in constructed, sealed, draft, and quest.
+- Fixed alignment problem inside sprite with start button in default skin.
+- MVC organization: Moved instantiation of AI from FView to FModel.
+- Fixed another bug in the script of Forethought Amulet.
+- Further semantic organization of FModel.
+- Main is now free of any non-essential calls and methods.
+- FView now free of all non-view-related calls and methods.
+- Fixed off-center logo in home screen.
+- Checkstyle.
+- Renamed ViewTopLevel to more accurate MatchTopLevel.
+- Further semantic organization: Moved getGameInfo out of AllZone, into FModel.
+- getGameInfo returns a GameSummary object, so it has been renamed to getGameSummary.
+- For licensing info and draft instructions, theme color used instead of texture for better contrast with text.
+- Fixed Carrion Beetles, Famished Ghoul and Rag Dealer.
+- Lonely preference settings moved out of FModel into loadPreferences with the rest of the preference settings.
+- Fixed Angelic Arbiter.
+- Bugfix: Hover effect on computer hand button disabled outside of devmode.
+- Cleanup: Hand view and library view toggles fully removed from codebase.
+- Fixed Archmage Ascension.
+- Improved attachDoTriggerAI.
+- Hover on hand label bug fix.
+- Changed the thread safety issue fluff piece in the changes.txt file and it now states that this problem is likely to be fixed.
+- Added the recent commit logs to changes.txt. I am not able to release a snapshot build at this time.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -129,6 +187,10 @@ Hollowhenge Beast
 Markov Warlord
 Skillful Lunge
 Torch Fiend
+Grafdigger's Cage
+Immerwolf
+Lost in the Woods
+Seance
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -145,6 +207,11 @@ Divining Witch
 Predict
 Shelter
 Makeshift Mannequin
+Ronin Warclub
+Angelic Arbiter
+Cloak and Dagger
+Obsidian Battle-Axe
+Nim Deathmantle
 
 
 end
