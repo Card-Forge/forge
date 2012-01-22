@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -41,8 +40,6 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
-import forge.gui.input.InputPayManaCost;
 
 /**
  * <p>
@@ -274,98 +271,6 @@ public class CardFactoryInstants {
             card.addSpellAbility(spell);
         } //*************** END ************ END **************************
 
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Echoing Truth")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 563933533543239220L;
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
-                    human = human.getNotType("Land");
-                    return (4 < AllZone.getPhaseHandler().getTurn()) && (0 < human.size());
-                }
-
-                @Override
-                public void chooseTargetAI() {
-                    CardList human = CardFactoryUtil.getHumanCreatureAI(this, true);
-                    human = human.getNotType("Land");
-                    this.setTargetCard(CardFactoryUtil.getBestCreatureAI(human));
-                }
-
-                @Override
-                public void resolve() {
-                    // if target card is not in play, just quit
-                    if (!AllZoneUtil.isCardInPlay(this.getTargetCard()) || !this.getTargetCard().canBeTargetedBy(this)) {
-                        return;
-                    }
-
-                    // get all permanents
-                    final CardList all = AllZoneUtil.getCardsIn(Zone.Battlefield);
-
-                    CardList sameName = all.getName(this.getTargetCard().getName());
-                    sameName = sameName.filter(new CardListFilter() {
-                        @Override
-                        public boolean addCard(final Card c) {
-                            return !c.isFaceDown();
-                        }
-                    });
-
-                    if (!this.getTargetCard().isFaceDown()) {
-                        // bounce all permanents with the same name
-                        for (int i = 0; i < sameName.size(); i++) {
-                            if (sameName.get(i).isToken()) {
-                                AllZone.getGameAction().exile(sameName.get(i));
-                            } else {
-                                final PlayerZone hand = sameName.get(i).getOwner().getZone(Constant.Zone.Hand);
-                                AllZone.getGameAction().moveTo(hand, sameName.get(i));
-                            }
-                        } // for
-                    } // if (!isFaceDown())
-                    else {
-                        final PlayerZone hand = this.getTargetCard().getOwner().getZone(Constant.Zone.Hand);
-                        AllZone.getGameAction().moveTo(hand, this.getTargetCard());
-                    }
-                } // resolve()
-            }; // SpellAbility
-            final Input target = new Input() {
-                private static final long serialVersionUID = -3978705328511825933L;
-
-                @Override
-                public void showMessage() {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Select target nonland permanent for ").append(spell.getSourceCard());
-                    AllZone.getDisplay().showMessage(sb.toString());
-                    ButtonUtil.enableOnlyCancel();
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    this.stop();
-                }
-
-                @Override
-                public void selectCard(final Card card, final PlayerZone zone) {
-                    if (!card.isLand() && zone.is(Constant.Zone.Battlefield) && card.canBeTargetedBy(spell)) {
-                        spell.setTargetCard(card);
-                        if (this.isFree()) {
-                            this.setFree(false);
-                            AllZone.getStack().add(spell);
-                            this.stop();
-                        } else {
-                            this.stopSetNext(new InputPayManaCost(spell));
-                        }
-                    }
-                }
-            }; // Input
-
-            card.setSVar("PlayMain1", "TRUE");
-
-            spell.setBeforePayMana(target);
-
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Intuition")) {
