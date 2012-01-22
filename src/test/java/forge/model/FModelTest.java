@@ -25,7 +25,7 @@ public class FModelTest {
      */
     @BeforeTest
     public final void setUp() throws FileNotFoundException {
-        this.model = new FModel(null);
+        this.model = new FModel();
     }
 
     /**
@@ -63,7 +63,7 @@ public class FModelTest {
 
         System.err.println("log test");
 
-        this.model = new FModel(null);
+        this.model = new FModel();
         Assert.assertNotNull(this.model, "model is not null");
     }
 

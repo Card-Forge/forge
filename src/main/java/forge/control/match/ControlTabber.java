@@ -67,19 +67,19 @@ public class ControlTabber extends MyObservable {
             this.view.getLblMilling().setEnabled(false);
         }
 
-        if (Singletons.getModel().getPreferences().getHandView()) {
+        if (Singletons.getModel().getPreferences().isHandView()) {
             this.view.getLblHandView().setEnabled(true);
         } else {
             this.view.getLblHandView().setEnabled(false);
         }
 
-        if (Singletons.getModel().getPreferences().getLibraryView()) {
+        if (Singletons.getModel().getPreferences().isLibraryView()) {
             this.view.getLblLibraryView().setEnabled(true);
         } else {
             this.view.getLblLibraryView().setEnabled(false);
         }
 
-        if (Singletons.getModel().getPreferences().getUnlimitedLand()) {
+        if (Singletons.getModel().getPreferences().isUnlimitedLand()) {
             this.view.getLblUnlimitedLands().setEnabled(true);
         } else {
             this.view.getLblUnlimitedLands().setEnabled(false);

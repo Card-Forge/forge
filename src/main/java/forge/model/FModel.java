@@ -25,7 +25,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import arcane.util.MultiplexOutputStream;
 import forge.AllZone;
 import forge.ComputerAIGeneral;
@@ -60,19 +59,14 @@ public class FModel {
     /** The preferences. */
     private ForgePreferences preferences;
     private FGameState gameState;
-    private final boolean http;
 
     /**
      * Constructor.
      * 
-     * @param theMonitor
-     *            a progress monitor (from the View) that shows the progress of
-     *            the model's initialization.
-     * 
      * @throws FileNotFoundException
      *             if we could not find or write to the log file.
      */
-    public FModel(final BraidsProgressMonitor theMonitor) throws FileNotFoundException {
+    public FModel() throws FileNotFoundException {
         // Fire up log file
         final File logFile = new File("forge.log");
         final boolean deleteSucceeded = logFile.delete();
@@ -92,7 +86,6 @@ public class FModel {
         try {
             this.setPreferences(new ForgePreferences("forge.preferences"));
         } catch (final Exception exn) {
-
             // Log.error("Error loading preferences: " + exn);
             throw new RuntimeException(exn);
         }
@@ -101,25 +94,11 @@ public class FModel {
         AllZone.setInputControl(new InputControl(FModel.this));
         AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
 
-        // TODO these should be set along with others all at the same time, not
-        // here
-        Constant.Runtime.MILL[0] = this.preferences.isMillingLossCondition();
-        Constant.Runtime.DEV_MODE[0] = this.preferences.isDeveloperMode();
-        Constant.Runtime.UPLOAD_DRAFT[0] = this.preferences.isUploadDraftAI();
-        Constant.Runtime.RANDOM_FOIL[0] = this.preferences.isRandCFoil();
-        // ///////
 
-        // Instantiate pinger
-        // TODO is this in the right place?
+        // Set gameplay preferences and constants
         final HttpUtil pinger = new HttpUtil();
         final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
-        if (pinger.getURL(url).equals("pong")) {
-            http = true;
-            Constant.Runtime.NET_CONN[0] = true;
-        } else {
-            http = false;
-            Constant.Runtime.UPLOAD_DRAFT[0] = false;
-        }
+        Constant.Runtime.NET_CONN[0] = (pinger.getURL(url).equals("pong") ? true : false);
 
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();
@@ -266,11 +245,6 @@ public class FModel {
         } catch (final IOException e) {
             // ignored
         }
-    }
-
-    /** @return boolean */
-    public final boolean isHTTP() {
-        return http;
     }
 
     /** @return {@link forge.model.BuildInfo} */

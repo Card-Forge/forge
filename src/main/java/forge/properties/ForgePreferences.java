@@ -300,7 +300,7 @@ public class ForgePreferences {
     }
 
     /** @return boolean */
-    public boolean getHandView() {
+    public boolean isHandView() {
         return Boolean.parseBoolean(prefs.get("dev.hand.view"));
     }
 
@@ -310,7 +310,7 @@ public class ForgePreferences {
     }
 
     /** @return boolean */
-    public boolean getLibraryView() {
+    public boolean isLibraryView() {
         return Boolean.parseBoolean(prefs.get("dev.library.view"));
     }
 
@@ -320,7 +320,7 @@ public class ForgePreferences {
     }
 
     /** @return boolean */
-    public boolean getUnlimitedLand() {
+    public boolean isUnlimitedLand() {
         return Boolean.parseBoolean(prefs.get("dev.unlimited.land"));
     }
 

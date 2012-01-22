@@ -317,6 +317,14 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
         final List<ViewField> fieldViews = this.control.getMatchController().getView().getFieldViews();
 
+        Constant.Runtime.MILL[0] = fp.isMillingLossCondition();
+        Constant.Runtime.DEV_MODE[0] = fp.isDeveloperMode();
+        Constant.Runtime.UPLOAD_DRAFT[0] = fp.isUploadDraftAI();
+        Constant.Runtime.RANDOM_FOIL[0] = fp.isRandCFoil();
+        Constant.Runtime.HANDVIEW[0] = fp.isHandView();
+        Constant.Runtime.LIBRARYVIEW[0] = fp.isLibraryView();
+        Constant.Runtime.UPLOAD_DRAFT[0] = (Constant.Runtime.NET_CONN[0] ? fp.isUploadDraftAI() : false);
+
         // AI field is at index [0]
         fieldViews.get(0).getLblUpkeep().setEnabled(fp.isShowPhase("phase.ai.upkeep"));
         fieldViews.get(0).getLblDraw().setEnabled(fp.isShowPhase("phase.ai.draw"));
@@ -353,11 +361,9 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
      * <p>
      * savePrefs.
      * </p>
-     * Required by Display interface. Due to be deprecated: will be handled by
-     * ControlMatchUI. Also, this functionality is already performed elsewhere
-     * in the code base. Furthermore, there's a strong possibility this will
-     * need bo be broken down and can't be in one place - e.g. keyboard
-     * shortcuts are saved after they're edited.
+     * Required by Display interface. Due to be deprecated: should be in FModel.
+     * Also, this functionality is already performed elsewhere
+     * in the code base.
      * 
      * @return a boolean.
      */

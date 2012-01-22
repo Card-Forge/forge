@@ -44,7 +44,7 @@ public final class Main {
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
         try {
-            final FModel model = new FModel(null);
+            final FModel model = new FModel();
             final FSkin skin = new FSkin(model.getPreferences().getSkin());
             final FView view = new FView(skin);
 
