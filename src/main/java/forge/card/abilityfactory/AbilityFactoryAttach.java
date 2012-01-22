@@ -935,7 +935,7 @@ public class AbilityFactoryAttach {
             targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (card.isEquipment() && card.isEquipping() && !targets.isEmpty()) {
+        if (!mandatory && card.isEquipment() && card.isEquipping() && !targets.isEmpty()) {
             Card oldTarget = card.getEquipping().get(0);
             Card newTarget = (Card) targets.get(0);
 
