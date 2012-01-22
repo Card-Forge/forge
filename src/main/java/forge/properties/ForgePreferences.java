@@ -84,8 +84,6 @@ public class ForgePreferences {
 
         // Devmode preferences
         prefs.put("dev.mode", "false");
-        prefs.put("dev.hand.view", "false");
-        prefs.put("dev.library.view", "false");
         prefs.put("dev.milling.loss", "true");
         prefs.put("dev.unlimited.land", "false");
 
@@ -297,26 +295,6 @@ public class ForgePreferences {
     /** @param b0 &emsp; boolean */
     public void setMillingLossCondition(boolean b0) {
         prefs.put("dev.milling.loss", Boolean.toString(b0));
-    }
-
-    /** @return boolean */
-    public boolean isHandView() {
-        return Boolean.parseBoolean(prefs.get("dev.hand.view"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setHandView(boolean b0) {
-        prefs.put("dev.hand.view", Boolean.toString(b0));
-    }
-
-    /** @return boolean */
-    public boolean isLibraryView() {
-        return Boolean.parseBoolean(prefs.get("dev.library.view"));
-    }
-
-    /**  @param b0 &emsp; boolean */
-    public void setLibraryView(boolean b0) {
-        prefs.put("dev.library.view", Boolean.toString(b0));
     }
 
     /** @return boolean */

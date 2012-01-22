@@ -321,8 +321,6 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         Constant.Runtime.DEV_MODE[0] = fp.isDeveloperMode();
         Constant.Runtime.UPLOAD_DRAFT[0] = fp.isUploadDraftAI();
         Constant.Runtime.RANDOM_FOIL[0] = fp.isRandCFoil();
-        Constant.Runtime.HANDVIEW[0] = fp.isHandView();
-        Constant.Runtime.LIBRARYVIEW[0] = fp.isLibraryView();
         Constant.Runtime.UPLOAD_DRAFT[0] = (Constant.Runtime.NET_CONN[0] ? fp.isUploadDraftAI() : false);
 
         // AI field is at index [0]
@@ -402,12 +400,8 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
 
         ViewTabber v = this.control.getMatchController().getView().getTabberController().getView();
         Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
-        Constant.Runtime.HANDVIEW[0] = v.getLblHandView().getEnabled();
-        Constant.Runtime.LIBRARYVIEW[0] = v.getLblLibraryView().getEnabled();
 
         fp.setMillingLossCondition(Constant.Runtime.MILL[0]);
-        fp.setHandView(Constant.Runtime.HANDVIEW[0]);
-        fp.setLibraryView(Constant.Runtime.LIBRARYVIEW[0]);
         fp.setUILayout(control.getMatchController().getView().getLayoutParams());
         fp.setUnlimitedLand(v.getLblUnlimitedLands().getEnabled());
 

@@ -35,7 +35,7 @@ import forge.view.match.ViewTabber;
  */
 public class ControlTabber extends MyObservable {
     private final ViewTabber view;
-    private MouseAdapter maMilling, maHand, maLibrary, maUnlimited,
+    private MouseAdapter maMilling, maUnlimited,
         maMana, maSetup, maTutor, maCounter, maTap, maUntap, maLife;
 
     private Observer stackObserver, logObserver;
@@ -65,18 +65,6 @@ public class ControlTabber extends MyObservable {
             this.view.getLblMilling().setEnabled(true);
         } else {
             this.view.getLblMilling().setEnabled(false);
-        }
-
-        if (Singletons.getModel().getPreferences().isHandView()) {
-            this.view.getLblHandView().setEnabled(true);
-        } else {
-            this.view.getLblHandView().setEnabled(false);
-        }
-
-        if (Singletons.getModel().getPreferences().isLibraryView()) {
-            this.view.getLblLibraryView().setEnabled(true);
-        } else {
-            this.view.getLblLibraryView().setEnabled(false);
         }
 
         if (Singletons.getModel().getPreferences().isUnlimitedLand()) {
@@ -120,14 +108,6 @@ public class ControlTabber extends MyObservable {
         // Milling enable toggle
         this.view.getLblMilling().removeMouseListener(maMilling);
         this.view.getLblMilling().addMouseListener(maMilling);
-
-        // View any hand toggle
-        this.view.getLblHandView().removeMouseListener(maHand);
-        this.view.getLblHandView().addMouseListener(maHand);
-
-        // DevMode: View any library toggle
-        this.view.getLblLibraryView().removeMouseListener(maLibrary);
-        this.view.getLblLibraryView().addMouseListener(maLibrary);
 
         // DevMode: Play unlimited land this turn toggle
         this.view.getLblUnlimitedLands().removeMouseListener(maUnlimited);
@@ -218,20 +198,6 @@ public class ControlTabber extends MyObservable {
             @Override
             public void mousePressed(final MouseEvent e) {
                 ControlTabber.this.view.getLblMilling().toggleEnabled();
-            }
-        };
-
-        maHand = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                ControlTabber.this.view.getLblHandView().toggleEnabled();
-            }
-        };
-
-        maLibrary = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                ControlTabber.this.view.getLblLibraryView().toggleEnabled();
             }
         };
 

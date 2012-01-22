@@ -62,12 +62,6 @@ public final class Constant {
         // one for normal mode, one for quest mode
         public static final boolean[] DEV_MODE = new boolean[1];
 
-        /** The Constant HANDVIEW. */
-        public static final boolean[] HANDVIEW = new boolean[1];
-
-        /** The Constant LIBRARYVIEW. */
-        public static final boolean[] LIBRARYVIEW = new boolean[1];
-
         /** The Constant NetConn. */
         public static final boolean[] NET_CONN = new boolean[1];
 

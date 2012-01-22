@@ -86,7 +86,7 @@ public class ViewTabber extends FRoundedPanel {
     private TriggerReactionMenu triggerMenu;
     private final FPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
 
-    private DevLabel lblMilling, lblHandView, lblLibraryView, lblGenerateMana, lblSetupGame, lblTutor,
+    private DevLabel lblMilling, lblGenerateMana, lblSetupGame, lblTutor,
             lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblSetLife;
 
     private final FVerticalTabPanel vtpTabber;
@@ -508,24 +508,6 @@ public class ViewTabber extends FRoundedPanel {
     }
 
     /**
-     * Gets the lbl hand view.
-     * 
-     * @return DevLabel
-     */
-    public DevLabel getLblHandView() {
-        return this.lblHandView;
-    }
-
-    /**
-     * Gets the lbl library view.
-     * 
-     * @return DevLabel
-     */
-    public DevLabel getLblLibraryView() {
-        return this.lblLibraryView;
-    }
-
-    /**
      * Gets the lbl generate mana.
      * 
      * @return DevLabel
@@ -649,8 +631,6 @@ public class ViewTabber extends FRoundedPanel {
         this.pnlDev.add(jsp, "w 98%!, h 98%!");
 
         lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
-        lblHandView = new DevLabel("View Any Hand: Enabled", "View Any Hand: Disabled");
-        lblLibraryView = new DevLabel("View Any Library: Enabled", "View Any Library: Disabled");
         lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn: Enabled",
                 "Play Unlimited Lands This Turn: Disabled");
         lblGenerateMana = new DevLabel("Generate Mana");
