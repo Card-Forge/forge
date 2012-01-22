@@ -38,8 +38,6 @@ import java.util.zip.ZipFile;
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
-import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
@@ -49,7 +47,7 @@ import forge.card.CardRulesReader;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
-import forge.view.FView;
+import forge.view.toolbox.FProgressBar;
 
 /**
  * <p>
@@ -262,18 +260,7 @@ public class CardReader implements Runnable {
      */
     protected final Card loadCardsUntilYouFind(final String cardName) {
         Card result = null;
-
-        // Try to retrieve card loading progress monitor model.
-        // If no progress monitor present, output results to console.
-        BraidsProgressMonitor monitor = null;
-        final FView view = Singletons.getView();
-        if (view != null) {
-            monitor = view.getCardLoadingProgressMonitor();
-        }
-
-        if (monitor == null) {
-            monitor = new StderrProgressMonitor(1, 0L);
-        }
+        final FProgressBar barProgress = Singletons.getView().getProgressBar();
 
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
@@ -285,18 +272,19 @@ public class CardReader implements Runnable {
                 this.findNonDirsIterable = YieldUtils.toIterable(findNonDirsGen);
             }
 
-            if (monitor != null) {
-                monitor.setTotalUnitsThisPhase(this.estimatedFilesRemaining);
+            if (barProgress != null) {
+                barProgress.setMaximum((int) this.estimatedFilesRemaining);
+                barProgress.setDescription("Preloading card images: ");
             }
 
             for (final File cardTxtFile : this.findNonDirsIterable) {
                 if (!cardTxtFile.getName().endsWith(CardReader.CARD_FILE_DOT_EXTENSION)) {
-                    monitor.incrementUnitsCompletedThisPhase(1L);
+                    barProgress.increment();
                     continue;
                 }
 
                 result = this.loadCard(cardTxtFile);
-                monitor.incrementUnitsCompletedThisPhase(1L);
+                barProgress.increment();
 
                 if ((cardName != null) && cardName.equals(result.getName())) {
                     break; // no thread leak here if entire card DB is loaded,
@@ -304,9 +292,8 @@ public class CardReader implements Runnable {
                 }
 
             } // endfor
-
         } else {
-            monitor.setTotalUnitsThisPhase(this.estimatedFilesRemaining);
+            barProgress.setMaximum((int) this.estimatedFilesRemaining);
             ZipEntry entry;
 
             // zipEnum was initialized in the constructor.
@@ -314,18 +301,17 @@ public class CardReader implements Runnable {
                 entry = this.zipEnum.nextElement();
 
                 if (entry.isDirectory() || !entry.getName().endsWith(CardReader.CARD_FILE_DOT_EXTENSION)) {
-                    monitor.incrementUnitsCompletedThisPhase(1L);
+                    barProgress.increment();
                     continue;
                 }
 
                 result = this.loadCard(entry);
-                monitor.incrementUnitsCompletedThisPhase(1L);
+                barProgress.increment();
 
                 if ((cardName != null) && cardName.equals(result.getName())) {
                     break;
                 }
             }
-
         } // endif
 
         return result;

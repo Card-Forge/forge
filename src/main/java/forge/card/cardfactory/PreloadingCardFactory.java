@@ -22,14 +22,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import forge.AllZone;
 import forge.Card;
 import forge.CardReader;
+import forge.Singletons;
 import forge.card.CardRules;
 import forge.error.ErrorViewer;
 import forge.item.CardDb;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.view.toolbox.FProgressBar;
 
 /**
  * <p>
@@ -76,12 +80,25 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         try {
             this.readCards(file);
 
+            final FProgressBar barProgress = Singletons.getView().getProgressBar();
+            if (barProgress != null) {
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        barProgress.reset();
+                        barProgress.setDescription("Creating card objects: ");
+                    }
+                });
+            }
+
             // initialize CardList allCards
             final Iterator<String> it = this.getMap().keySet().iterator();
+            if (barProgress != null) { barProgress.setMaximum(this.getMap().size()); }
             Card c;
             while (it.hasNext()) {
                 c = this.getCard(it.next().toString(), AllZone.getHumanPlayer());
                 this.getAllCards().add(c);
+                if (barProgress != null) { barProgress.increment(); }
             }
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);

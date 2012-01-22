@@ -30,7 +30,11 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
+import forge.Singletons;
 import forge.gui.GuiUtils;
 
 /**
@@ -46,11 +50,6 @@ public class FSkin {
         BG_SPLASH, /** */
         BG_TEXTURE, /** */
         BG_MATCH,  /** */
-
-        PRELOAD_EMPTY_BG, /** */
-        PRELOAD_EMPTY_TXT, /** */
-        PRELOAD_FULL_BG, /** */
-        PRELOAD_FULL_TXT, /** */
 
         CLR_THEME, /** */
         CLR_BORDERS, /** */
@@ -135,13 +134,13 @@ public class FSkin {
     private BufferedImage bimDefaultSprite;
     private BufferedImage bimPreferredSprite;
     private int preferredH, preferredW;
+    private FProgressBar barProgress;
 
     /**
      * FSkin constructor. No arguments, will generate default skin settings,
      * fonts, and backgrounds.
-     * @throws IOException for splash image file
      */
-    public FSkin() throws IOException {
+    public FSkin() {
         this("default");
     }
 
@@ -169,11 +168,11 @@ public class FSkin {
 
             this.setIcon(SkinProp.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
 
-            this.setColor(SkinProp.PRELOAD_EMPTY_BG, this.getColorFromPixel(img.getRGB(25, h - 75)));
-            this.setColor(SkinProp.PRELOAD_EMPTY_TXT, this.getColorFromPixel(img.getRGB(75, h - 75)));
-            this.setColor(SkinProp.PRELOAD_FULL_BG, this.getColorFromPixel(img.getRGB(25, h - 25)));
-            this.setColor(SkinProp.PRELOAD_FULL_TXT, this.getColorFromPixel(img.getRGB(75, h - 25)));
-
+            UIManager.put("ProgressBar.background", this.getColorFromPixel(img.getRGB(25, h - 75)));
+            UIManager.put("ProgressBar.selectionBackground", this.getColorFromPixel(img.getRGB(75, h - 75)));
+            UIManager.put("ProgressBar.foreground", this.getColorFromPixel(img.getRGB(25, h - 25)));
+            UIManager.put("ProgressBar.selectionForeground", this.getColorFromPixel(img.getRGB(75, h - 25)));
+            UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
         } catch (final IOException e) {
             System.err.println(this.notfound + preferredDir + FILE_SPLASH);
             e.printStackTrace();
@@ -185,21 +184,34 @@ public class FSkin {
      * collection of all symbols) and the preferred (which may be
      * incomplete).
      * 
+     * Font must be present in the skin folder, and will not
+     * be replaced by default.  The fonts are pre-derived
+     * in this method and saved in a HashMap for future access.
+     * 
      * Color swatches must be present in the preferred
      * sprite, and will not be replaced by default.
      * 
      * Background images must be present in skin folder,
      * and will not be replaced by default.
      * 
-     * Font must be present in the skin folder, and will not
-     * be replaced by default.  The fonts are pre-derived
-     * in this method and saved in a HashMap for future access.
-     * 
      * Icons, however, will be pulled from the two sprites. Obviously,
      * preferred takes precedence over default, but if something is
      * missing, the default picture is retrieved.
      */
-    public void loadFontAndImages() {
+    public void loadFontsAndImages() {
+        barProgress = Singletons.getView().getProgressBar();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                barProgress.reset();
+                barProgress.setShowETA(false);
+                barProgress.setDescription("Processing fonts and image sprites: ");
+            }
+        });
+
+        barProgress.setMaximum(57);
+
         // Grab and test the two sprite files.
         final File f1 = new File(defaultDir + FILE_SPRITE);
         final File f2 = new File(preferredDir + FILE_SPRITE);
@@ -220,27 +232,27 @@ public class FSkin {
         // Exceptions handled inside method.
         this.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
         plainFonts = new HashMap<Integer, Font>();
-        plainFonts.put(10, font.deriveFont(Font.PLAIN, 10));
-        plainFonts.put(11, font.deriveFont(Font.PLAIN, 11));
-        plainFonts.put(12, font.deriveFont(Font.PLAIN, 12));
-        plainFonts.put(13, font.deriveFont(Font.PLAIN, 13));
-        plainFonts.put(14, font.deriveFont(Font.PLAIN, 14));
-        plainFonts.put(15, font.deriveFont(Font.PLAIN, 15));
-        plainFonts.put(16, font.deriveFont(Font.PLAIN, 16));
-        plainFonts.put(18, font.deriveFont(Font.PLAIN, 18));
-        plainFonts.put(20, font.deriveFont(Font.PLAIN, 20));
-        plainFonts.put(22, font.deriveFont(Font.PLAIN, 22));
+        setFontAndIncrement(10);
+        setFontAndIncrement(11);
+        setFontAndIncrement(12);
+        setFontAndIncrement(13);
+        setFontAndIncrement(14);
+        setFontAndIncrement(15);
+        setFontAndIncrement(16);
+        setFontAndIncrement(18);
+        setFontAndIncrement(20);
+        setFontAndIncrement(22);
 
         boldFonts = new HashMap<Integer, Font>();
-        boldFonts.put(12, font.deriveFont(Font.BOLD, 12));
-        boldFonts.put(14, font.deriveFont(Font.BOLD, 14));
-        boldFonts.put(16, font.deriveFont(Font.BOLD, 16));
-        boldFonts.put(18, font.deriveFont(Font.BOLD, 18));
-        boldFonts.put(20, font.deriveFont(Font.BOLD, 20));
+        setBoldFontAndIncrement(12);
+        setBoldFontAndIncrement(14);
+        setBoldFontAndIncrement(16);
+        setBoldFontAndIncrement(18);
+        setBoldFontAndIncrement(20);
 
         italicFonts = new HashMap<Integer, Font>();
-        italicFonts.put(12, font.deriveFont(Font.ITALIC, 12));
-        italicFonts.put(14, font.deriveFont(Font.ITALIC, 14));
+        setItalicFontAndIncrement(12);
+        setItalicFontAndIncrement(14);
 
         // Put various images into map (except sprite and splash).
         // Exceptions handled inside method.
@@ -250,6 +262,7 @@ public class FSkin {
         // Sprite
         final File file = new File(preferredDir + FILE_SPRITE);
         BufferedImage image;
+
         try {
             image = ImageIO.read(file);
 
@@ -260,61 +273,61 @@ public class FSkin {
             this.setColor(SkinProp.CLR_ACTIVE, this.getColorFromPixel(image.getRGB(70, 90)));
             this.setColor(SkinProp.CLR_INACTIVE, this.getColorFromPixel(image.getRGB(70, 110)));
             this.setColor(SkinProp.CLR_TEXT, this.getColorFromPixel(image.getRGB(70, 130)));
-
-            this.setIcon(SkinProp.ICON_ZONE_HAND, 280, 40, 40, 40);
-            this.setIcon(SkinProp.ICON_ZONE_LIBRARY, 280, 0, 40, 40);
-            this.setIcon(SkinProp.ICON_ZONE_GRAVEYARD, 320, 0, 40, 40);
-            this.setIcon(SkinProp.ICON_ZONE_EXILE, 320, 40, 40, 40);
-            this.setIcon(SkinProp.ICON_ZONE_FLASHBACK, 280, 80, 40, 40);
-            this.setIcon(SkinProp.ICON_ZONE_POISON, 320, 80, 40, 40);
-
-            this.setIcon(SkinProp.ICON_MANA_BLACK, 360, 160, 40, 40);
-            this.setIcon(SkinProp.ICON_MANA_BLUE, 360, 200, 40, 40);
-            this.setIcon(SkinProp.ICON_MANA_RED, 400, 160, 40, 40);
-            this.setIcon(SkinProp.ICON_MANA_GREEN, 400, 200, 40, 40);
-            this.setIcon(SkinProp.ICON_MANA_WHITE, 440, 200, 40, 40);
-            this.setIcon(SkinProp.ICON_MANA_COLORLESS, 440, 240, 40, 40);
-
-            this.setIcon(SkinProp.ICON_DOCK_SETTINGS, 80, 640, 80, 80);
-            this.setIcon(SkinProp.ICON_DOCK_SHORTCUTS, 160, 640, 80, 80);
-            this.setIcon(SkinProp.ICON_DOCK_CONCEDE, 240, 640, 80, 80);
-            this.setIcon(SkinProp.ICON_DOCK_ENDTURN, 320, 640, 80, 80);
-            this.setIcon(SkinProp.ICON_DOCK_DECKLIST, 400, 640, 80, 80);
-
-            this.setIcon(SkinProp.IMG_LOGO, 480, 0, 200, 200);
-            this.setIcon(SkinProp.IMG_FAVICON, 0, 720, 80, 80);
-
-            this.setIcon(SkinProp.IMG_BTN_START_UP, 480, 200, 160, 80);
-            this.setIcon(SkinProp.IMG_BTN_START_OVER, 480, 280, 160, 80);
-            this.setIcon(SkinProp.IMG_BTN_START_DOWN, 480, 360, 160, 80);
-
-            this.setIcon(SkinProp.IMG_BTN_UP_LEFT, 80, 0, 40, 40);
-            this.setIcon(SkinProp.IMG_BTN_UP_CENTER, 120, 0, 1, 40);
-            this.setIcon(SkinProp.IMG_BTN_UP_RIGHT, 160, 0, 40, 40);
-
-            this.setIcon(SkinProp.IMG_BTN_OVER_LEFT, 80, 40, 40, 40);
-            this.setIcon(SkinProp.IMG_BTN_OVER_CENTER, 120, 40, 1, 40);
-            this.setIcon(SkinProp.IMG_BTN_OVER_RIGHT, 160, 40, 40, 40);
-
-            this.setIcon(SkinProp.IMG_BTN_DOWN_LEFT, 80, 80, 40, 40);
-            this.setIcon(SkinProp.IMG_BTN_DOWN_CENTER, 120, 80, 1, 40);
-            this.setIcon(SkinProp.IMG_BTN_DOWN_RIGHT, 160, 80, 40, 40);
-
-            this.setIcon(SkinProp.IMG_BTN_FOCUS_LEFT, 80, 120, 40, 40);
-            this.setIcon(SkinProp.IMG_BTN_FOCUS_CENTER, 120, 120, 1, 40);
-            this.setIcon(SkinProp.IMG_BTN_FOCUS_RIGHT, 160, 120, 40, 40);
-
-            this.setIcon(SkinProp.IMG_BTN_TOGGLE_LEFT, 80, 160, 40, 40);
-            this.setIcon(SkinProp.IMG_BTN_TOGGLE_CENTER, 120, 160, 1, 40);
-            this.setIcon(SkinProp.IMG_BTN_TOGGLE_RIGHT, 160, 160, 40, 40);
-
-            this.setIcon(SkinProp.IMG_BTN_DISABLED_LEFT, 80, 200, 40, 40);
-            this.setIcon(SkinProp.IMG_BTN_DISABLED_CENTER, 120, 200, 1, 40);
-            this.setIcon(SkinProp.IMG_BTN_DISABLED_RIGHT, 160, 200, 40, 40);
         } catch (final IOException e) {
             System.err.println(this.notfound + preferredDir + FILE_SPRITE);
             e.printStackTrace();
         }
+
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_HAND, 280, 40, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_LIBRARY, 280, 0, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_GRAVEYARD, 320, 0, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_EXILE, 320, 40, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_FLASHBACK, 280, 80, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_POISON, 320, 80, 40, 40);
+
+        this.setIconAndIncrement(SkinProp.ICON_MANA_BLACK, 360, 160, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_MANA_BLUE, 360, 200, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_MANA_RED, 400, 160, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_MANA_GREEN, 400, 200, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_MANA_WHITE, 440, 200, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_MANA_COLORLESS, 440, 240, 40, 40);
+
+        this.setIconAndIncrement(SkinProp.ICON_DOCK_SETTINGS, 80, 640, 80, 80);
+        this.setIconAndIncrement(SkinProp.ICON_DOCK_SHORTCUTS, 160, 640, 80, 80);
+        this.setIconAndIncrement(SkinProp.ICON_DOCK_CONCEDE, 240, 640, 80, 80);
+        this.setIconAndIncrement(SkinProp.ICON_DOCK_ENDTURN, 320, 640, 80, 80);
+        this.setIconAndIncrement(SkinProp.ICON_DOCK_DECKLIST, 400, 640, 80, 80);
+
+        this.setIconAndIncrement(SkinProp.IMG_LOGO, 480, 0, 200, 200);
+        this.setIconAndIncrement(SkinProp.IMG_FAVICON, 0, 720, 80, 80);
+
+        this.setIconAndIncrement(SkinProp.IMG_BTN_START_UP, 480, 200, 160, 80);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_START_OVER, 480, 280, 160, 80);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_START_DOWN, 480, 360, 160, 80);
+
+        this.setIconAndIncrement(SkinProp.IMG_BTN_UP_LEFT, 80, 0, 40, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_UP_CENTER, 120, 0, 1, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_UP_RIGHT, 160, 0, 40, 40);
+
+        this.setIconAndIncrement(SkinProp.IMG_BTN_OVER_LEFT, 80, 40, 40, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_OVER_CENTER, 120, 40, 1, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_OVER_RIGHT, 160, 40, 40, 40);
+
+        this.setIconAndIncrement(SkinProp.IMG_BTN_DOWN_LEFT, 80, 80, 40, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_DOWN_CENTER, 120, 80, 1, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_DOWN_RIGHT, 160, 80, 40, 40);
+
+        this.setIconAndIncrement(SkinProp.IMG_BTN_FOCUS_LEFT, 80, 120, 40, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_FOCUS_CENTER, 120, 120, 1, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_FOCUS_RIGHT, 160, 120, 40, 40);
+
+        this.setIconAndIncrement(SkinProp.IMG_BTN_TOGGLE_LEFT, 80, 160, 40, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_TOGGLE_CENTER, 120, 160, 1, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_TOGGLE_RIGHT, 160, 160, 40, 40);
+
+        this.setIconAndIncrement(SkinProp.IMG_BTN_DISABLED_LEFT, 80, 200, 40, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_DISABLED_CENTER, 120, 200, 1, 40);
+        this.setIconAndIncrement(SkinProp.IMG_BTN_DISABLED_RIGHT, 160, 200, 40, 40);
     }
 
     /**
@@ -349,6 +362,20 @@ public class FSkin {
         return plainFonts.get(size);
     }
 
+    private void setFontAndIncrement(int size) {
+        plainFonts.put(size, font.deriveFont(Font.PLAIN, size));
+        if (barProgress != null) { barProgress.increment(); }
+    }
+
+    private void setBoldFontAndIncrement(int size) {
+        boldFonts.put(size, font.deriveFont(Font.BOLD, size));
+        if (barProgress != null) { barProgress.increment(); }
+    }
+
+    private void setItalicFontAndIncrement(int size) {
+        italicFonts.put(size, font.deriveFont(Font.ITALIC, size));
+        if (barProgress != null) { barProgress.increment(); }
+    }
     /**
      * @param size - integer, pixel size
      * @return {@link java.awt.font} font1
@@ -451,7 +478,7 @@ public class FSkin {
      * @param w0 &emsp; Width of sub-image
      * @param h0 &emsp; Height of sub-image
      */
-    public void setIcon(final SkinProp s0,
+    private void setIconAndIncrement(final SkinProp s0,
             final int x0, final int y0, final int w0, final int h0) {
         // Test if requested sub-image in inside bounds of preferred sprite.
         // (Height and width of preferred sprite were set in loadFontAndImages.)
@@ -498,6 +525,7 @@ public class FSkin {
         BufferedImage img = (exists ? bimPreferredSprite : bimDefaultSprite);
         BufferedImage bi0 = img.getSubimage(x0, y0, w0, h0);
         this.icons.put(s0, new ImageIcon(bi0));
+        if (barProgress != null) { barProgress.increment(); }
     }
 
     /**

@@ -11113,8 +11113,6 @@ src/main/java/forge/view/editor/EditorTopLevel.java -text
 src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
 src/main/java/forge/view/home/HomeTopLevel.java -text
 src/main/java/forge/view/home/SplashFrame.java -text
-src/main/java/forge/view/home/SplashProgressComponent.java -text
-src/main/java/forge/view/home/SplashProgressModel.java -text
 src/main/java/forge/view/home/StartButton.java -text
 src/main/java/forge/view/home/SubButton.java -text
 src/main/java/forge/view/home/ViewConstructed.java -text
@@ -11143,6 +11141,7 @@ src/main/java/forge/view/toolbox/FButton.java -text
 src/main/java/forge/view/toolbox/FList.java -text
 src/main/java/forge/view/toolbox/FOverlay.java -text
 src/main/java/forge/view/toolbox/FPanel.java -text
+src/main/java/forge/view/toolbox/FProgressBar.java -text
 src/main/java/forge/view/toolbox/FRoundedPanel.java -text
 src/main/java/forge/view/toolbox/FScrollPane.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text

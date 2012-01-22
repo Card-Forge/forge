@@ -20,16 +20,15 @@ package forge.view;
 import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import forge.AllZone;
 import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
 import forge.control.FControl;
-import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.view.home.SplashFrame;
 import forge.view.toolbox.CardFaceSymbols;
+import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -39,6 +38,7 @@ import forge.view.toolbox.FSkin;
 public class FView {
 
     private transient SplashFrame splashFrame;
+    private FProgressBar barProgress = null;
     private FSkin skin;
 
     /**
@@ -55,7 +55,11 @@ public class FView {
         UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
             @Override
             public void run() {
-                FView.this.splashFrame = new SplashFrame(FView.this.skin);
+                try {
+                    FView.this.splashFrame = new SplashFrame(FView.this.skin);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -68,20 +72,21 @@ public class FView {
     }
 
     /**
-     * Get the progress monitor for loading all cards at once.
+     * Allows singleton (global) access to a progress bar (which must be set first).
      * 
      * @return a progress monitor having only one phase; may be null
      */
-    public final BraidsProgressMonitor getCardLoadingProgressMonitor() {
-        BraidsProgressMonitor result;
+    public final FProgressBar getProgressBar() {
+        return this.barProgress;
+    }
 
-        if (this.splashFrame == null) {
-            result = null;
-        } else {
-            result = this.splashFrame.getMonitorModel();
-        }
-
-        return result;
+    /** 
+     * Sets a progress bar so it can be accessed via singletons.
+     * 
+     * @param bar0 &emsp; An FProgressBar object
+     */
+    public final void setProgressBar(FProgressBar bar0) {
+        this.barProgress = bar0;
     }
 
     /** @return FSkin */
@@ -89,10 +94,7 @@ public class FView {
         return this.skin;
     }
 
-    /**
-     * @param skin0
-     *            &emsp; FSkin
-     */
+    /** @param skin0 &emsp; FSkin */
     public void setSkin(final FSkin skin0) {
         this.skin = skin0;
     }
@@ -102,42 +104,39 @@ public class FView {
      * for initial display.
      */
     public final void initialize() {
-        // For the following two blocks, check if user has cancelled
-        // SplashFrame.
-        // Note: Error thrown sometimes because log file cannot be accessed
-        if (!this.splashFrame.getSplashHasBeenClosed()) {
-            AllZone.getCardFactory(); // forces preloading of all cards
-        }
+        this.setProgressBar(splashFrame.getProgressBar());
 
-        if (!this.splashFrame.getSplashHasBeenClosed()) {
-            try {
+        // Preloads all cards (using progress bar).
+        AllZone.getCardFactory();
 
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
-                        FView.this.skin.loadFontAndImages();
+        // Preloads skin components (using progress bar).
+        FView.this.skin.loadFontsAndImages();
 
-                        CardFaceSymbols.loadImages();
+        // Does not use progress bar, due to be deprecated in favor of skin.
+        CardFaceSymbols.loadImages();
 
-                        Constant.Runtime.setGameType(GameType.Constructed);
+        barProgress.setDescription("Creating display components.");
 
-                        final GuiTopLevel g = new GuiTopLevel();
-                        AllZone.setDisplay(g);
-                        g.getController().changeState(FControl.HOME_SCREEN);
-                        g.pack();
-                        g.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
 
-                        FView.this.splashFrame.dispose();
-                        // Enable only one of the following two lines.
-                        // The second is useful for debugging.
-                        FView.this.splashFrame = null;
-                        // FView.this.splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    }
-                });
-            } catch (final Exception ex) {
-                ErrorViewer.showError(ex);
+                // TODO there must be a better place for this. ////////////
+                Constant.Runtime.setGameType(GameType.Constructed);
+                AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
+                /////////////////////////////////////
+
+                final GuiTopLevel g = new GuiTopLevel();
+                AllZone.setDisplay(g);
+                g.getController().changeState(FControl.HOME_SCREEN);
+                g.pack();
+
+                FView.this.splashFrame.dispose();
+                FView.this.splashFrame = null;
+
+                barProgress.setDescription("Forge is ready to launch.");
+                g.setVisible(true);
             }
-        } // End if(splashHasBeenClosed) */
+        });
     } // End FView()
 }
