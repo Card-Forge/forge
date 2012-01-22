@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import arcane.util.MultiplexOutputStream;
@@ -30,6 +31,8 @@ import forge.AllZone;
 import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
+import forge.ConstantStringArrayList;
+import forge.FileUtil;
 import forge.HttpUtil;
 import forge.gui.input.InputControl;
 import forge.properties.ForgePreferences;
@@ -56,6 +59,7 @@ public class FModel {
     /** The preferences. */
     private ForgePreferences preferences;
     private FGameState gameState;
+    private final boolean http;
 
     /**
      * Constructor.
@@ -109,12 +113,132 @@ public class FModel {
         final HttpUtil pinger = new HttpUtil();
         final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
         if (pinger.getURL(url).equals("pong")) {
+            http = true;
             Constant.Runtime.NET_CONN[0] = true;
         } else {
+            http = false;
             Constant.Runtime.UPLOAD_DRAFT[0] = false;
         }
 
         this.setBuildInfo(new BuildInfo());
+        FModel.loadDynamicGamedata();
+    }
+
+    /**
+     * Load dynamic gamedata.
+     */
+    public static void loadDynamicGamedata() {
+        if (!Constant.CardTypes.LOADED[0]) {
+            final ArrayList<String> typeListFile = FileUtil.readFile("res/gamedata/TypeLists.txt");
+
+            ArrayList<String> tList = null;
+
+            Constant.CardTypes.CARD_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.SUPER_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.BASIC_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.LAND_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.CREATURE_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.INSTANT_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.SORCERY_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.ENCHANTMENT_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.ARTIFACT_TYPES[0] = new ConstantStringArrayList();
+            Constant.CardTypes.WALKER_TYPES[0] = new ConstantStringArrayList();
+
+            if (typeListFile.size() > 0) {
+                for (int i = 0; i < typeListFile.size(); i++) {
+                    final String s = typeListFile.get(i);
+
+                    if (s.equals("[CardTypes]")) {
+                        tList = Constant.CardTypes.CARD_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[SuperTypes]")) {
+                        tList = Constant.CardTypes.SUPER_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[BasicTypes]")) {
+                        tList = Constant.CardTypes.BASIC_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[LandTypes]")) {
+                        tList = Constant.CardTypes.LAND_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[CreatureTypes]")) {
+                        tList = Constant.CardTypes.CREATURE_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[InstantTypes]")) {
+                        tList = Constant.CardTypes.INSTANT_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[SorceryTypes]")) {
+                        tList = Constant.CardTypes.SORCERY_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[EnchantmentTypes]")) {
+                        tList = Constant.CardTypes.ENCHANTMENT_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[ArtifactTypes]")) {
+                        tList = Constant.CardTypes.ARTIFACT_TYPES[0].getList();
+                    }
+
+                    else if (s.equals("[WalkerTypes]")) {
+                        tList = Constant.CardTypes.WALKER_TYPES[0].getList();
+                    }
+
+                    else if (s.length() > 1) {
+                        tList.add(s);
+                    }
+                }
+            }
+            Constant.CardTypes.LOADED[0] = true;
+            /*
+             * if (Constant.Runtime.DevMode[0]) {
+             * System.out.println(Constant.CardTypes.cardTypes[0].list);
+             * System.out.println(Constant.CardTypes.superTypes[0].list);
+             * System.out.println(Constant.CardTypes.basicTypes[0].list);
+             * System.out.println(Constant.CardTypes.landTypes[0].list);
+             * System.out.println(Constant.CardTypes.creatureTypes[0].list);
+             * System.out.println(Constant.CardTypes.instantTypes[0].list);
+             * System.out.println(Constant.CardTypes.sorceryTypes[0].list);
+             * System.out.println(Constant.CardTypes.enchantmentTypes[0].list);
+             * System.out.println(Constant.CardTypes.artifactTypes[0].list);
+             * System.out.println(Constant.CardTypes.walkerTypes[0].list); }
+             */
+        }
+
+        if (!Constant.Keywords.LOADED[0]) {
+            final ArrayList<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
+
+            Constant.Keywords.NON_STACKING_LIST[0] = new ConstantStringArrayList();
+
+            if (nskwListFile.size() > 1) {
+                for (int i = 0; i < nskwListFile.size(); i++) {
+                    final String s = nskwListFile.get(i);
+                    if (s.length() > 1) {
+                        Constant.Keywords.NON_STACKING_LIST[0].getList().add(s);
+                    }
+                }
+            }
+            Constant.Keywords.LOADED[0] = true;
+            /*
+             * if (Constant.Runtime.DevMode[0]) {
+             * System.out.println(Constant.Keywords.NonStackingList[0].list); }
+             */
+        }
+
+        /*
+         * if (!Constant.Color.loaded[0]) { ArrayList<String> lcListFile =
+         * FileUtil.readFile("res/gamedata/LandColorList");
+         * 
+         * if (lcListFile.size() > 1) { for (int i=0; i<lcListFile.size(); i++)
+         * { String s = lcListFile.get(i); if (s.length() > 1)
+         * Constant.Color.LandColor[0].map.add(s); } }
+         * Constant.Keywords.loaded[0] = true; if (Constant.Runtime.DevMode[0])
+         * { System.out.println(Constant.Keywords.NonStackingList[0].list); } }
+         */
     }
 
     /**
@@ -143,49 +267,32 @@ public class FModel {
         }
     }
 
-    /**
-     * Getter for buildInfo.
-     * 
-     * @return the buildInfo
-     */
+    /** @return boolean */
+    public final boolean isHTTP() {
+        return http;
+    }
+
+    /** @return {@link forge.model.BuildInfo} */
     public final BuildInfo getBuildInfo() {
         return this.buildInfo;
     }
 
-    /**
-     * Setter for buildInfo.
-     * 
-     * @param neoBuildInfo
-     *            the buildInfo to set
-     */
-    protected final void setBuildInfo(final BuildInfo neoBuildInfo) {
-        this.buildInfo = neoBuildInfo;
+    /** @param bi0 &emsp; {@link forge.model.BuildInfo} */
+    protected final void setBuildInfo(final BuildInfo bi0) {
+        this.buildInfo = bi0;
     }
 
-    /**
-     * Gets the preferences.
-     * 
-     * @return the preferences
-     */
+    /** @return {@link forge.properties.ForgePreferences} */
     public final ForgePreferences getPreferences() {
         return this.preferences;
     }
 
-    /**
-     * Sets the preferences.
-     * 
-     * @param neoPreferences
-     *            the preferences to set
-     */
-    public final void setPreferences(final ForgePreferences neoPreferences) {
-        this.preferences = neoPreferences;
+    /** @param fp0 {@link forge.properties.ForgePreferences} */
+    public final void setPreferences(final ForgePreferences fp0) {
+        this.preferences = fp0;
     }
 
-    /**
-     * Getter for gameState.
-     * 
-     * @return the game state
-     */
+    /** @return {@link forge.model.FGameState} */
     public final FGameState getGameState() {
         return this.gameState;
     }
@@ -193,7 +300,7 @@ public class FModel {
     /**
      * Create and return a new game state.
      * 
-     * @return a fresh game state
+     * @return a fresh {@link forge.model.FGameState}
      */
     public final FGameState resetGameState() {
         this.gameState = new FGameState();

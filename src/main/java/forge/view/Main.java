@@ -17,11 +17,6 @@
  */
 package forge.view;
 
-import java.util.ArrayList;
-
-import forge.Constant;
-import forge.ConstantStringArrayList;
-import forge.FileUtil;
 import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
@@ -41,7 +36,7 @@ public final class Main {
     }
 
     /**
-     * main method for Forge's swing application view.
+     * Main method for Forge.
      * 
      * @param args
      *            an array of {@link java.lang.String} objects.
@@ -56,135 +51,13 @@ public final class Main {
             Singletons.setModel(model);
             Singletons.setView(view);
 
-            // Need this soon after card factory is loaded
-            Main.loadDynamicGamedata();
-
-            // TODO this code should go elsewhere, like wherever we start a new
-            // game.
-            // It is only here to maintain semantic equality with the current
-            // code base.
+            // Instantiate FGameState for TriggerHandler on card objects created in preloader.
             model.resetGameState();
 
+            // Start splash frame.
             view.initialize();
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }
-    }
-
-    /**
-     * Load dynamic gamedata.
-     */
-    public static void loadDynamicGamedata() {
-        if (!Constant.CardTypes.LOADED[0]) {
-            final ArrayList<String> typeListFile = FileUtil.readFile("res/gamedata/TypeLists.txt");
-
-            ArrayList<String> tList = null;
-
-            Constant.CardTypes.CARD_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.SUPER_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.BASIC_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.LAND_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.CREATURE_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.INSTANT_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.SORCERY_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.ENCHANTMENT_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.ARTIFACT_TYPES[0] = new ConstantStringArrayList();
-            Constant.CardTypes.WALKER_TYPES[0] = new ConstantStringArrayList();
-
-            if (typeListFile.size() > 0) {
-                for (int i = 0; i < typeListFile.size(); i++) {
-                    final String s = typeListFile.get(i);
-
-                    if (s.equals("[CardTypes]")) {
-                        tList = Constant.CardTypes.CARD_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[SuperTypes]")) {
-                        tList = Constant.CardTypes.SUPER_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[BasicTypes]")) {
-                        tList = Constant.CardTypes.BASIC_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[LandTypes]")) {
-                        tList = Constant.CardTypes.LAND_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[CreatureTypes]")) {
-                        tList = Constant.CardTypes.CREATURE_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[InstantTypes]")) {
-                        tList = Constant.CardTypes.INSTANT_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[SorceryTypes]")) {
-                        tList = Constant.CardTypes.SORCERY_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[EnchantmentTypes]")) {
-                        tList = Constant.CardTypes.ENCHANTMENT_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[ArtifactTypes]")) {
-                        tList = Constant.CardTypes.ARTIFACT_TYPES[0].getList();
-                    }
-
-                    else if (s.equals("[WalkerTypes]")) {
-                        tList = Constant.CardTypes.WALKER_TYPES[0].getList();
-                    }
-
-                    else if (s.length() > 1) {
-                        tList.add(s);
-                    }
-                }
-            }
-            Constant.CardTypes.LOADED[0] = true;
-            /*
-             * if (Constant.Runtime.DevMode[0]) {
-             * System.out.println(Constant.CardTypes.cardTypes[0].list);
-             * System.out.println(Constant.CardTypes.superTypes[0].list);
-             * System.out.println(Constant.CardTypes.basicTypes[0].list);
-             * System.out.println(Constant.CardTypes.landTypes[0].list);
-             * System.out.println(Constant.CardTypes.creatureTypes[0].list);
-             * System.out.println(Constant.CardTypes.instantTypes[0].list);
-             * System.out.println(Constant.CardTypes.sorceryTypes[0].list);
-             * System.out.println(Constant.CardTypes.enchantmentTypes[0].list);
-             * System.out.println(Constant.CardTypes.artifactTypes[0].list);
-             * System.out.println(Constant.CardTypes.walkerTypes[0].list); }
-             */
-        }
-
-        if (!Constant.Keywords.LOADED[0]) {
-            final ArrayList<String> nskwListFile = FileUtil.readFile("res/gamedata/NonStackingKWList.txt");
-
-            Constant.Keywords.NON_STACKING_LIST[0] = new ConstantStringArrayList();
-
-            if (nskwListFile.size() > 1) {
-                for (int i = 0; i < nskwListFile.size(); i++) {
-                    final String s = nskwListFile.get(i);
-                    if (s.length() > 1) {
-                        Constant.Keywords.NON_STACKING_LIST[0].getList().add(s);
-                    }
-                }
-            }
-            Constant.Keywords.LOADED[0] = true;
-            /*
-             * if (Constant.Runtime.DevMode[0]) {
-             * System.out.println(Constant.Keywords.NonStackingList[0].list); }
-             */
-        }
-
-        /*
-         * if (!Constant.Color.loaded[0]) { ArrayList<String> lcListFile =
-         * FileUtil.readFile("res/gamedata/LandColorList");
-         * 
-         * if (lcListFile.size() > 1) { for (int i=0; i<lcListFile.size(); i++)
-         * { String s = lcListFile.get(i); if (s.length() > 1)
-         * Constant.Color.LandColor[0].map.add(s); } }
-         * Constant.Keywords.loaded[0] = true; if (Constant.Runtime.DevMode[0])
-         * { System.out.println(Constant.Keywords.NonStackingList[0].list); } }
-         */
     }
 }

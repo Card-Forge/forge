@@ -15,9 +15,9 @@ import forge.CardList;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.LazyCardFactory;
 import forge.card.cardfactory.PreloadingCardFactory;
+import forge.model.FModel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.view.Main;
 
 //import net.slightlymagic.braids.testng.BraidsAssertFunctions;
 
@@ -44,7 +44,7 @@ public class CardFactoryTest {
      */
     @BeforeMethod
     public final void setUp() {
-        Main.loadDynamicGamedata();
+        FModel.loadDynamicGamedata();
         this.factory = new LazyCardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER));
     }
 
