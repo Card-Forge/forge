@@ -11123,6 +11123,7 @@ src/main/java/forge/view/home/ViewSealed.java -text
 src/main/java/forge/view/home/ViewSettings.java -text
 src/main/java/forge/view/home/ViewUtilities.java -text
 src/main/java/forge/view/home/package-info.java svneol=native#text/plain
+src/main/java/forge/view/match/MatchTopLevel.java -text
 src/main/java/forge/view/match/ViewBattlefield.java -text
 src/main/java/forge/view/match/ViewDetail.java -text
 src/main/java/forge/view/match/ViewDock.java -text
@@ -11131,7 +11132,6 @@ src/main/java/forge/view/match/ViewHand.java -text
 src/main/java/forge/view/match/ViewInput.java -text
 src/main/java/forge/view/match/ViewPicture.java -text
 src/main/java/forge/view/match/ViewTabber.java -text
-src/main/java/forge/view/match/ViewTopLevel.java -text
 src/main/java/forge/view/match/ViewWinLose.java -text
 src/main/java/forge/view/match/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain

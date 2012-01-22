@@ -34,14 +34,14 @@ import forge.view.toolbox.FSkin;
 public class ViewHand extends FRoundedPanel {
     private ControlHand control;
     private HandArea hand;
-    private ViewTopLevel topLevel;
+    private MatchTopLevel topLevel;
 
     /**
      * Swing components for user hand.
      * 
-     * @param v0 &emsp; The ViewTopLevel parent.
+     * @param v0 &emsp; The MatchTopLevel parent.
      */
-    public ViewHand(ViewTopLevel v0) {
+    public ViewHand(MatchTopLevel v0) {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller);
         ViewHand.this.setBackground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_THEME));
@@ -78,8 +78,8 @@ public class ViewHand extends FRoundedPanel {
         return ViewHand.this.hand;
     }
 
-    /** @return ViewTopLevel */
-    public ViewTopLevel getTopLevel() {
+    /** @return MatchTopLevel */
+    public MatchTopLevel getTopLevel() {
         return this.topLevel;
     }
 }

@@ -228,7 +228,7 @@ public class ViewTabber extends FRoundedPanel {
      */
     public void updateStack() {
         final MagicStack stack = AllZone.getStack();
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         int count = 1;
         JTextArea tar;

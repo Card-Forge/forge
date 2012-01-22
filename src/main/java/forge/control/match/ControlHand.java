@@ -40,7 +40,7 @@ import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewHand;
-import forge.view.match.ViewTopLevel;
+import forge.view.match.MatchTopLevel;
 
 /**
  * Child controller - handles operations related to cards in user's hand and
@@ -68,7 +68,7 @@ public class ControlHand {
         this.view = v;
         this.cardsInPanel = new ArrayList<Card>();
 
-        final ViewTopLevel t = view.getTopLevel();
+        final MatchTopLevel t = view.getTopLevel();
 
         maCardClick = new MouseAdapter() {
             // Card click
@@ -184,7 +184,7 @@ public class ControlHand {
      */
     public void addCardPanelListeners(final CardPanel c) {
         // Grab top level controller to facilitate interaction between children
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         final Card cardobj = c.getCard();
 
         // Sidebar pic/detail on card hover

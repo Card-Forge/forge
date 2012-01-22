@@ -56,7 +56,7 @@ import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewField;
-import forge.view.match.ViewTopLevel;
+import forge.view.match.MatchTopLevel;
 
 /**
  * Child controller, applied to single field in battlefield. Manages player view
@@ -423,7 +423,7 @@ public class ControlField {
         maAvatar = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 if (ControlField.this.player.isComputer()) {
                     t.getInputController().getInputControl().selectPlayer(AllZone.getComputerPlayer());
                 } else {
@@ -436,7 +436,7 @@ public class ControlField {
         maCardOver = new MouseMotionAdapter() {
             @Override
             public void mouseMoved(final MouseEvent me) {
-                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
                 if (c != null) {
                     t.getDetailController().showCard(c);
@@ -449,7 +449,7 @@ public class ControlField {
         maCardClick = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+                final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 final Card c = t.getDetailController().getCurrentCard();
                 final Input input = t.getInputController().getInputControl().getInput();
 

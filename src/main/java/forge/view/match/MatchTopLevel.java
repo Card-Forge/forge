@@ -54,7 +54,7 @@ import forge.view.toolbox.FSkin;
  */
 
 @SuppressWarnings("serial")
-public class ViewTopLevel extends FPanel {
+public class MatchTopLevel extends FPanel {
     private ViewBattlefield battlefield;
     private ViewDetail detail;
     private ViewDock dock;
@@ -92,7 +92,7 @@ public class ViewTopLevel extends FPanel {
      * - Implements Display interface used in singleton pattern
      * 
      */
-    public ViewTopLevel() {
+    public MatchTopLevel() {
         super();
 
         // Set properties
@@ -375,7 +375,7 @@ public class ViewTopLevel extends FPanel {
      * @return ControlDetail
      */
     public ControlDetail getDetailController() {
-        return ViewTopLevel.this.detail.getController();
+        return MatchTopLevel.this.detail.getController();
     }
 
     /**
@@ -384,7 +384,7 @@ public class ViewTopLevel extends FPanel {
      * @return ControlPicture
      */
     public ControlPicture getPictureController() {
-        return ViewTopLevel.this.picture.getController();
+        return MatchTopLevel.this.picture.getController();
     }
 
     /**
@@ -393,7 +393,7 @@ public class ViewTopLevel extends FPanel {
      * @return ControlTabber
      */
     public ControlTabber getTabberController() {
-        return ViewTopLevel.this.tabber.getController();
+        return MatchTopLevel.this.tabber.getController();
     }
 
     /**
@@ -402,7 +402,7 @@ public class ViewTopLevel extends FPanel {
      * @return ControlInput
      */
     public ControlInput getInputController() {
-        return ViewTopLevel.this.input.getController();
+        return MatchTopLevel.this.input.getController();
     }
 
     /**
@@ -411,7 +411,7 @@ public class ViewTopLevel extends FPanel {
      * @return ControlHand
      */
     public ControlHand getHandController() {
-        return ViewTopLevel.this.hand.getController();
+        return MatchTopLevel.this.hand.getController();
     }
 
     /**
@@ -420,7 +420,7 @@ public class ViewTopLevel extends FPanel {
      * @return ControlDock
      */
     public ControlDock getDockController() {
-        return ViewTopLevel.this.dock.getController();
+        return MatchTopLevel.this.dock.getController();
     }
 
     /**
@@ -445,7 +445,7 @@ public class ViewTopLevel extends FPanel {
      * @return List<ViewField>
      */
     public List<ViewField> getFieldViews() {
-        return ViewTopLevel.this.battlefield.getFields();
+        return MatchTopLevel.this.battlefield.getFields();
     }
 
     // ========== Input panel and human hand retrieval functions
@@ -458,7 +458,7 @@ public class ViewTopLevel extends FPanel {
      * @return <b>JTextArea</b> Message area of input panel.
      */
     public JTextArea getPnlMessage() {
-        return ViewTopLevel.this.input.getTarMessage();
+        return MatchTopLevel.this.input.getTarMessage();
     }
 
     /**
@@ -467,7 +467,7 @@ public class ViewTopLevel extends FPanel {
      * @return <b>ViewHand</b> Retrieves player hand panel.
      */
     public ViewHand getPnlHand() {
-        return ViewTopLevel.this.hand;
+        return MatchTopLevel.this.hand;
     }
     /**
      * Gets the top level frame.

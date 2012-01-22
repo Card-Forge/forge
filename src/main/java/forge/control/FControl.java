@@ -32,7 +32,7 @@ import forge.quest.gui.bazaar.QuestBazaarPanel;
 import forge.view.GuiTopLevel;
 import forge.view.editor.EditorTopLevel;
 import forge.view.home.HomeTopLevel;
-import forge.view.match.ViewTopLevel;
+import forge.view.match.MatchTopLevel;
 
 /**
  * <p>
@@ -49,7 +49,7 @@ public class FControl {
     private int state;
 
     private HomeTopLevel home = null;
-    private ViewTopLevel match = null;
+    private MatchTopLevel match = null;
     private EditorTopLevel editor = null;
     private WindowAdapter waDefault, waConcede, waLeaveBazaar;
     private QuestBazaarPanel bazaar;
@@ -144,7 +144,7 @@ public class FControl {
                 break;
 
             case MATCH_SCREEN:
-                this.match = new ViewTopLevel();
+                this.match = new MatchTopLevel();
                 this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
                 view.addWindowListener(waConcede);
@@ -170,9 +170,9 @@ public class FControl {
     /**
      * Gets the match view.
      * 
-     * @return ViewTopLevel
+     * @return MatchTopLevel
      */
-    public ViewTopLevel getMatchView() {
+    public MatchTopLevel getMatchView() {
         return this.match;
     }
 
@@ -193,7 +193,7 @@ public class FControl {
     /**
      * Gets the match view.
      * 
-     * @return ViewTopLevel
+     * @return MatchTopLevel
      */
     public QuestBazaarPanel getBazaarView() {
         return this.bazaar;

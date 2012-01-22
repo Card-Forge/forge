@@ -22,7 +22,7 @@ import java.util.HashMap;
 import forge.Constant.Zone;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewField.PhaseLabel;
-import forge.view.match.ViewTopLevel;
+import forge.view.match.MatchTopLevel;
 
 /**
  * <p>
@@ -322,7 +322,7 @@ public class PhaseUtil {
     public static void visuallyActivatePhase(final String s) {
         PhaseLabel lbl = null;
         final Player p = AllZone.getPhaseHandler().getPlayerTurn();
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         int i; // Index of field; computer is 0, human is 1
         if (p.isComputer()) {

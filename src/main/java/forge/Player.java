@@ -36,7 +36,7 @@ import forge.card.staticability.StaticAbility;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.view.GuiTopLevel;
-import forge.view.match.ViewTopLevel;
+import forge.view.match.MatchTopLevel;
 
 /**
  * <p>
@@ -1778,7 +1778,7 @@ public abstract class Player extends GameEntity {
      */
     public final boolean canPlayLand() {
 
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         if (t.getTabberController().getView().getLblUnlimitedLands().getEnabled() && this.isHuman() && Constant.Runtime.DEV_MODE[0]) {
             return PhaseHandler.canCastSorcery(this);
         }

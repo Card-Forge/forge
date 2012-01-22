@@ -24,7 +24,7 @@ import forge.Constant.Zone;
 import forge.ImageCache;
 import forge.Player;
 import forge.control.match.ControlField;
-import forge.view.match.ViewTopLevel;
+import forge.view.match.MatchTopLevel;
 
 /**
  * <p>
@@ -34,7 +34,7 @@ import forge.view.match.ViewTopLevel;
  * 
  */
 public class ControlMatchUI {
-    private final ViewTopLevel view;
+    private final MatchTopLevel view;
 
     /**
      * <p>
@@ -51,9 +51,9 @@ public class ControlMatchUI {
      * So, this class must be called after everything is already in place.
      * 
      * @param v
-     *            &emsp; A ViewTopLevel object
+     *            &emsp; A MatchTopLevel object
      */
-    public ControlMatchUI(final ViewTopLevel v) {
+    public ControlMatchUI(final MatchTopLevel v) {
         this.view = v;
     }
 
@@ -122,8 +122,8 @@ public class ControlMatchUI {
         }
     }
 
-    /** @return ViewTopLevel */
-    public ViewTopLevel getView() {
+    /** @return MatchTopLevel */
+    public MatchTopLevel getView() {
         return view;
     }
 }

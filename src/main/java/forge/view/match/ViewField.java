@@ -346,7 +346,7 @@ public class ViewField extends FRoundedPanel {
      */
     public void updateDetails(final Player p0) {
         // "Players" panel update
-        final ViewTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         t.getTabberController().getView().updatePlayerLabels(p0);
 
         // Poison/life
