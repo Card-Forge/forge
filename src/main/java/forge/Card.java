@@ -888,6 +888,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.creatureAttackedThisCombat = b;
         if (b) {
             this.setCreatureAttackedThisTurn(true);
+            this.getController().setAttackedWithCreatureThisTurn(true);
         }
     }
 

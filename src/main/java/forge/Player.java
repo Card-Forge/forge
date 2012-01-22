@@ -114,6 +114,9 @@ public abstract class Player extends GameEntity {
     /** The must attack entity. */
     private Object mustAttackEntity = null;
 
+    /** The attackedWithCreatureThisTurn. */
+    private boolean attackedWithCreatureThisTurn = false;
+
     /** The zones. */
     private final Map<Constant.Zone, PlayerZone> zones = new EnumMap<Constant.Zone, PlayerZone>(Constant.Zone.class);
 
@@ -1976,6 +1979,29 @@ public abstract class Player extends GameEntity {
      */
     public final void incrementTurn() {
         this.nTurns++;
+    }
+
+    /**
+     * <p>
+     * getAttackedWithCreatureThisTurn.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getAttackedWithCreatureThisTurn() {
+        return this.attackedWithCreatureThisTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>attackedWithCreatureThisTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setAttackedWithCreatureThisTurn(final boolean b) {
+        this.attackedWithCreatureThisTurn = b;
     }
 
     // //////////////////////////////

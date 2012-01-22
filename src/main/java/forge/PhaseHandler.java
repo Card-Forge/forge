@@ -425,6 +425,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
             AllZone.getHumanPlayer().resetNumDrawnThisTurn();
             AllZone.getComputerPlayer().resetNumDrawnThisTurn();
+            AllZone.getHumanPlayer().setAttackedWithCreatureThisTurn(false);
+            AllZone.getComputerPlayer().setAttackedWithCreatureThisTurn(false);
         }
 
         if (!AllZone.getPhaseHandler().isNeedToNextPhase()) {

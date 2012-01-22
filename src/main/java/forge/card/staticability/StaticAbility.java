@@ -409,6 +409,11 @@ public class StaticAbility {
             return false;
         }
 
+        if (this.mapParams.containsKey("OpponentAttackedWithCreatureThisTurn")
+                && !controller.getOpponent().getAttackedWithCreatureThisTurn()) {
+            return false;
+        }
+
         if (this.mapParams.containsKey("Phases")) {
             String phases = this.mapParams.get("Phases");
 
