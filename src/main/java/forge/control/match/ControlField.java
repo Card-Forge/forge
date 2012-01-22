@@ -166,17 +166,17 @@ public class ControlField {
             this.view.getLblLibrary().enableHover();
             this.view.getLblLibrary().removeMouseListener(maLibrary);
             this.view.getLblLibrary().addMouseListener(maLibrary);
+
+            // Hand button
+            this.view.getLblHand().enableHover();
+            this.view.getLblHand().removeMouseListener(maHand);
+            this.view.getLblHand().addMouseListener(maHand);
         }
 
         // Flashback card list button
         this.view.getLblFlashback().enableHover();
         this.view.getLblFlashback().removeMouseListener(maFlashback);
         this.view.getLblFlashback().addMouseListener(maFlashback);
-
-        // Hand button
-        this.view.getLblHand().enableHover();
-        this.view.getLblHand().removeMouseListener(maHand);
-        this.view.getLblHand().addMouseListener(maHand);
     }
 
     /**
