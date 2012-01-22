@@ -920,14 +920,30 @@ public class AbilityFactoryAttach {
      * @return true, if successful
      */
     public static boolean attachDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        final Map<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
+
         if (!ComputerUtil.canPayCost(sa)) {
             // usually not mandatory
             return false;
         }
 
         // Check if there are any valid targets
+        ArrayList<Object> targets = new ArrayList<Object>();
+        final Target tgt = af.getAbTgt();
+        if (tgt == null) {
+            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+        }
 
-        // Now are Valid Targets better than my targets?
+        if (card.isEquipment() && card.isEquipping() && !targets.isEmpty()) {
+            Card oldTarget = card.getEquipping().get(0);
+            Card newTarget = (Card) targets.get(0);
+
+            if (newTarget.getController().isPlayer(AllZone.getHumanPlayer())
+                    || CardFactoryUtil.evaluateCreature(oldTarget) > CardFactoryUtil.evaluateCreature(newTarget)) {
+                return false;
+            }
+        }
 
         // check SubAbilities DoTrigger?
         final AbilitySub abSub = sa.getSubAbility();
@@ -990,7 +1006,6 @@ public class AbilityFactoryAttach {
                 final boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
                 AbilityFactoryAttach.handleAura(card, c, gainControl);
             } else if (card.isEquipment()) {
-                System.out.println("equip: " + o);
                 if (card.isEquipping()) {
                     card.unEquipCard(card.getEquipping().get(0));
                 }
