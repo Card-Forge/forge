@@ -169,9 +169,10 @@ public class ControlField {
 
             // Hand button
             this.view.getLblHand().enableHover();
-            this.view.getLblHand().removeMouseListener(maHand);
-            this.view.getLblHand().addMouseListener(maHand);
         }
+
+        this.view.getLblHand().removeMouseListener(maHand);
+        this.view.getLblHand().addMouseListener(maHand);
 
         // Flashback card list button
         this.view.getLblFlashback().enableHover();
