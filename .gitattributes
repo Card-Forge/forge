@@ -9622,6 +9622,7 @@ res/cardsfolder/w/waxmane_baku.txt -text
 res/cardsfolder/w/wayfarers_bauble.txt svneol=native#text/plain
 res/cardsfolder/w/wayfaring_giant.txt svneol=native#text/plain
 res/cardsfolder/w/waylay.txt svneol=native#text/plain
+res/cardsfolder/w/wayward_angel.txt -text svneol=unset#text/plain
 res/cardsfolder/w/wayward_soul.txt svneol=native#text/plain
 res/cardsfolder/w/weakness.txt svneol=native#text/plain
 res/cardsfolder/w/weakstone.txt svneol=native#text/plain
