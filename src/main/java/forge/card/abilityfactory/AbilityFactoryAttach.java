@@ -39,6 +39,7 @@ import forge.MyRandom;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -135,8 +136,33 @@ public class AbilityFactoryAttach {
      * @return the spell ability
      */
     public static SpellAbility createAbilityAttach(final AbilityFactory abilityFactory) {
-        // placeholder for Equip and other similar cards
-        return null;
+        final SpellAbility abAttach = new AbilityActivated(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
+                abilityFactory.getAbTgt()) {
+            private static final long serialVersionUID = 2116313811316915141L;
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryAttach.attachCanPlayAI(abilityFactory, this);
+            }
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryAttach.attachStackDescription(abilityFactory, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryAttach.attachResolve(abilityFactory, this);
+            } // resolve()
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return AbilityFactoryAttach.attachDoTriggerAI(abilityFactory, this, mandatory);
+            }
+
+        }; // SpellAbility
+
+        return abAttach;
     }
 
     // Attach Drawback
