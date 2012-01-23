@@ -2399,7 +2399,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (this.characteristicsMap.get("Cloner") != null) {
-            sb.append("\r\nCloned by:").append(this.characteristicsMap.get("Cloner").getName()).append(" (")
+            sb.append("\r\nCloned by: ").append(this.characteristicsMap.get("Cloner").getName()).append(" (")
                     .append(this.getUniqueNumber()).append(")");
         }
 
