@@ -39,7 +39,9 @@ import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestEvent;
 import forge.quest.gui.main.QuestEventManager;
+import forge.view.toolbox.FList;
 import forge.view.toolbox.FProgressBar;
+import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -239,12 +241,12 @@ public class ViewQuest extends JScrollPane {
          });
         btnBazaar.setText("Bazaar");
 
-        lstDeckChooser = new JList();
+        lstDeckChooser = new FList();
 
         optionsContainer.add(btnEditor, "w 35%, h 30px!, gap 10% 5% 10px 10px");
         optionsContainer.add(lblCredits, "w 35%!, h 30px!, wrap");
 
-        optionsContainer.add(new JScrollPane(lstDeckChooser), "w 35%, h 110px!, gap 10% 5% 0 10px, span 1 3");
+        optionsContainer.add(new FScrollPane(lstDeckChooser), "w 35%, h 110px!, gap 10% 5% 0 10px, span 1 3");
         optionsContainer.add(lblLife, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
 
         optionsContainer.add(btnCardShop, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
