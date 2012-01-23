@@ -7546,6 +7546,7 @@ res/cardsfolder/s/shoreline_raider.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_ranger.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_salvager.txt svneol=native#text/plain
 res/cardsfolder/s/show_and_tell.txt svneol=native#text/plain
+res/cardsfolder/s/shower_of_coals.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shower_of_sparks.txt svneol=native#text/plain
 res/cardsfolder/s/shrapnel_blast.txt svneol=native#text/plain
 res/cardsfolder/s/shred_memory.txt -text
