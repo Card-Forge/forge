@@ -1,0 +1,11 @@
+Name:Painbringer
+ManaCost:2 B B
+Types:Creature Human Minion
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ T ExileFromGrave<X/Creature.YouCtrl> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -ChosenX | NumDef$ -ChosenX | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of cards exiled this way.
+SVar:X:XChoice
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/painbringer.jpg
+End

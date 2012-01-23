@@ -6042,6 +6042,7 @@ res/cardsfolder/p/pact_of_negation.txt svneol=native#text/plain
 res/cardsfolder/p/pact_of_the_titan.txt svneol=native#text/plain
 res/cardsfolder/p/pain_kami.txt svneol=native#text/plain
 res/cardsfolder/p/pain_magnification.txt svneol=native#text/plain
+res/cardsfolder/p/painbringer.txt -text svneol=unset#text/plain
 res/cardsfolder/p/painful_memories.txt svneol=native#text/plain
 res/cardsfolder/p/painsmith.txt svneol=native#text/plain
 res/cardsfolder/p/painters_servant.txt svneol=native#text/plain
