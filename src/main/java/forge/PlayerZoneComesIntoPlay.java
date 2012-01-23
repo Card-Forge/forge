@@ -115,7 +115,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
                 AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
                 AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
             } else {
-                c.getController().addMaxLandsToPlay(addMax);
+                player.addMaxLandsToPlay(addMax);
             }
         }
 
@@ -124,7 +124,7 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
             c.comesIntoPlay();
 
             if (c.isLand()) {
-                CardList list = c.getController().getCardsIn(Zone.Battlefield);
+                CardList list = player.getCardsIn(Zone.Battlefield);
 
                 list = list.filter(new CardListFilter() {
                     @Override
