@@ -36,6 +36,8 @@ import forge.control.home.ControlSettings;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 import forge.view.GuiTopLevel;
+import forge.view.toolbox.FList;
+import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -139,10 +141,11 @@ public class ViewSettings extends JScrollPane {
         viewport.add(lblTitleSkin, regularConstraints);
         viewport.add(lblNoteSkin, regularConstraints);
 
-        lstChooseSkin = new JList();
+        lstChooseSkin = new FList();
         lstChooseSkin.setListData(FSkin.getSkins().toArray(new String[0]));
         lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getSkin(), true);
-        viewport.add(new JScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
+        lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
+        viewport.add(new FScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
 
         final JLabel lblTitleCardSize = new TitleLabel("Card Size");
         final JLabel lblCardSize = new NoteLabel("Size of cards in hand and playing field, when possible");
