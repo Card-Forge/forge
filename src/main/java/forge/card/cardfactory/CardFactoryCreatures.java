@@ -2132,7 +2132,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void resolve() {
                     String imageFileName = card.getImageFilename();
-                    
+
                     if (card.getController().isComputer()) {
                         final CardList creatures = AllZoneUtil.getCreaturesInPlay();
                         if (!creatures.isEmpty()) {

@@ -1096,7 +1096,7 @@ public class MagicStack extends MyObservable {
         AllZone.getGameAction().checkStateEffects();
 
         AllZone.getPhaseHandler().setNeedToNextPhase(false);
-        
+
         this.curResolvingCard = null;
 
         // TODO: change to use forge.view.FView?
@@ -1488,12 +1488,12 @@ public class MagicStack extends MyObservable {
     public final CardList getCardsCastLastTurn() {
         return this.lastTurnCast;
     }
-    
+
     public final boolean isResolving(Card c) {
-        if(!this.getResolving() || this.curResolvingCard == null) {
+        if (!this.getResolving() || this.curResolvingCard == null) {
             return false;
         }
-        
+
         return c.equals(this.curResolvingCard);
     }
 }

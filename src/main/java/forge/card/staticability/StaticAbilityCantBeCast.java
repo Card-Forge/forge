@@ -60,10 +60,10 @@ public class StaticAbilityCantBeCast {
         if (params.containsKey("OnlySorcerySpeed") && (activator != null) && PhaseHandler.canCastSorcery(activator)) {
             return false;
         }
-        
-        if(params.containsKey("Origin")) {
+
+        if (params.containsKey("Origin")) {
             Zone src = Zone.smartValueOf(params.get("Origin"));
-            if(src != AllZone.getZoneOf(card).getZoneType()) {
+            if (src != AllZone.getZoneOf(card).getZoneType()) {
                 return false;
             }
         }

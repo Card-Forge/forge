@@ -46,7 +46,7 @@ public class FMatchState {
     public static final int MIN_GAMES_TO_WIN_MATCH = 2;
 
     private final List<GameSummary> gamesPlayed = new ArrayList<GameSummary>();
-    
+
     private final List<CardPrinted> antesWon = new ArrayList<CardPrinted>();
     private final List<CardPrinted> antesLost = new ArrayList<CardPrinted>();
 
@@ -144,7 +144,7 @@ public class FMatchState {
     public final boolean isMatchWonBy(final String name) {
         return this.countGamesWonBy(name) >= FMatchState.MIN_GAMES_TO_WIN_MATCH;
     }
-    
+
     /**
      * Adds a CardList to the antes that have already been won this match.
      * 
@@ -161,7 +161,7 @@ public class FMatchState {
         }
         return antesPrinted;
     }
-    
+
     /**
      * Gets a list of all cards won in ante during this match.
      * 
@@ -170,7 +170,7 @@ public class FMatchState {
     public final List<CardPrinted> getAnteWon() {
         return antesWon;
     }
-    
+
     /**
      * Adds the ante cards won this match to the CardPool (and they get marker as NEW).
      * 
@@ -179,7 +179,7 @@ public class FMatchState {
     public final void addAnteWonToCardPool() {
         AllZone.getQuestData().getCards().addAllCards(antesWon);
     }
-    
+
     /**
      * Adds a CardList to the antes that have already been lost this match.
      * 

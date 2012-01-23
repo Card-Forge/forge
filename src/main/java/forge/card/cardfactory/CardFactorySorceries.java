@@ -980,7 +980,7 @@ public class CardFactorySorceries {
                     sub.resolve();
                 }
             };
-            
+
             spell.setSubAbility(sub);
 
             final StringBuilder sbDesc = new StringBuilder();

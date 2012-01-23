@@ -220,7 +220,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         if ((outcome % QuestPreferences.getWinsForBooster(this.model.qData.getDifficultyIndex())) == 0) {
             this.awardBooster();
         }
-        
+
         // Add any antes won this match (regardless of Match Win/Lose to Card Pool
         // Note: Antes lost have already been remove from decks.
         AllZone.getMatchState().addAnteWonToCardPool();
