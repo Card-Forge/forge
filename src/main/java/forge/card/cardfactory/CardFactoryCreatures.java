@@ -2131,6 +2131,8 @@ public class CardFactoryCreatures {
 
                 @Override
                 public void resolve() {
+                    String imageFileName = card.getImageFilename();
+                    
                     if (card.getController().isComputer()) {
                         final CardList creatures = AllZoneUtil.getCreaturesInPlay();
                         if (!creatures.isEmpty()) {
@@ -2184,6 +2186,8 @@ public class CardFactoryCreatures {
 
                     }
 
+                    //keep the Clone card image for the cloned card
+                    card.setImageFilename(imageFileName);
                     AllZone.getGameAction().moveToPlay(card);
                 }
 
