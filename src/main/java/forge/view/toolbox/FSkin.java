@@ -278,11 +278,11 @@ public class FSkin {
             e.printStackTrace();
         }
 
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_HAND, 280, 40, 40, 40);
         this.setIconAndIncrement(SkinProp.ICON_ZONE_LIBRARY, 280, 0, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_HAND, 280, 40, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_ZONE_FLASHBACK, 280, 80, 40, 40);
         this.setIconAndIncrement(SkinProp.ICON_ZONE_GRAVEYARD, 320, 0, 40, 40);
         this.setIconAndIncrement(SkinProp.ICON_ZONE_EXILE, 320, 40, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_FLASHBACK, 280, 80, 40, 40);
         this.setIconAndIncrement(SkinProp.ICON_ZONE_POISON, 320, 80, 40, 40);
 
         this.setIconAndIncrement(SkinProp.ICON_MANA_BLACK, 360, 160, 40, 40);

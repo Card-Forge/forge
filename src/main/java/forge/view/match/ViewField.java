@@ -288,7 +288,7 @@ public class ViewField extends FRoundedPanel {
         ViewField.this.lblExile.setToolTipText("Exiled cards");
         poolArea.add(ViewField.this.lblExile, constraintsR);
 
-        ViewField.this.lblFlashback = new DetailLabel(FSkin.SkinProp.ICON_ZONE_EXILE, "99");
+        ViewField.this.lblFlashback = new DetailLabel(FSkin.SkinProp.ICON_ZONE_FLASHBACK, "99");
         ViewField.this.lblFlashback.setToolTipText("Flashback cards");
         poolArea.add(ViewField.this.lblFlashback, constraintsL);
 
