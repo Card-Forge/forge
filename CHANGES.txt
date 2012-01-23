@@ -109,6 +109,27 @@ Fixes/Features:
 - Hover on hand label bug fix.
 - Changed the thread safety issue fluff piece in the changes.txt file and it now states that this problem is likely to be fixed.
 - Added the recent commit logs to changes.txt. I am not able to release a snapshot build at this time.
+- Converted Sword of the Meek to script.
+- fixed Flayer of the Hatebound trigger so it only triggers on battlefield
+- Fixed Trace of Abundance.
+- Improved the attacking/blocking AI to predict P/T boni by static continuous effects that only affect attacking/blocking creatures (Crescendo of War, Instigator Gang, Weakstone, etc.).
+- Converted Demonic Consultation to script.
+- Converted Burn the Impure to script.
+- Added text to Burn the Impure.
+- Fixed Donate. Now it actually targets a player instead of defining the opponent.
+- Burnout can only target Instants.
+- clean up a Java warning in PlayerZoneComesIntoPlay
+- Hook the Skin choosing list on Settings up the the Skin.
+- Hook the Quest deck chooser up to the Skin.
+- fix Flashback displaying the incorrect icon.
+- Added code to createAbilityAttach to enable it.
+- change the Colorless mana label back to the X thing it was before the Skin Enum changes (instead of the current U/B)
+- for cards like Clone and friends, the picture on the battlefield will now be the original Clone images (but the overlay and info in CardDetailPanel will be for the cloned target). I think this is a fairly intuitive way to handle it, and it mimics what you would see during an in-person match.
+- fixed a spacing issue in Card.getText()
+- fixed a text spacing issue in SplashFrame
+- add a little spacing between the avatar icon and the life total.
+- Moved Forge Devil to correct folder.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -191,6 +212,16 @@ Grafdigger's Cage
 Immerwolf
 Lost in the Woods
 Seance
+Drogskol Captain
+Elbrus, the Binding Blade // Withengar Unbound
+Bar the Door
+Break of Day
+Gravepurge
+Sanctuary Cat
+Curse of Exhaustion
+Burden of Guilt
+Dawntreader Elk
+Kessig Recluse
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -212,6 +243,10 @@ Angelic Arbiter
 Cloak and Dagger
 Obsidian Battle-Axe
 Nim Deathmantle
+Trace of Abundance
+Laquatus's Disdain
+Cranial Plating
+Archangel's Light
 
 
 end
