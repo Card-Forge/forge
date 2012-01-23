@@ -60,6 +60,15 @@ public class AbilityFactorySetState {
             public void resolve() {
                 AbilityFactorySetState.setStateResolve(abilityFactory, this);
             }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                if (!mandatory && abilityFactory.getHostCard().isInAlternateState()) {
+                    return false;
+                }
+
+                return true;
+            }
         };
 
         return ret;
