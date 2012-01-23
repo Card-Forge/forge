@@ -289,8 +289,8 @@ public class FSkin {
         this.setIconAndIncrement(SkinProp.ICON_MANA_BLUE, 360, 200, 40, 40);
         this.setIconAndIncrement(SkinProp.ICON_MANA_RED, 400, 160, 40, 40);
         this.setIconAndIncrement(SkinProp.ICON_MANA_GREEN, 400, 200, 40, 40);
+        this.setIconAndIncrement(SkinProp.ICON_MANA_COLORLESS, 440, 160, 40, 40);
         this.setIconAndIncrement(SkinProp.ICON_MANA_WHITE, 440, 200, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_MANA_COLORLESS, 440, 240, 40, 40);
 
         this.setIconAndIncrement(SkinProp.ICON_DOCK_SETTINGS, 80, 640, 80, 80);
         this.setIconAndIncrement(SkinProp.ICON_DOCK_SHORTCUTS, 160, 640, 80, 80);
