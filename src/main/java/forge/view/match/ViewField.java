@@ -134,12 +134,12 @@ public class ViewField extends FRoundedPanel {
 
         lblAvatar = new JLabel();
         lblAvatar.setHorizontalAlignment(SwingConstants.CENTER);
-        avatarArea.add(lblAvatar, "w 100%!, wrap, gaptop 2px");
+        avatarArea.add(lblAvatar, "w 100%!, wrap, gaptop 4%");
 
         lblLife = new JLabel();
         lblLife.setHorizontalAlignment(SwingConstants.CENTER);
         lblLife.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        avatarArea.add(lblLife, "w 100%!, h 30%!");
+        avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
 
         this.add(avatarArea, "w 10%!, h 30%!");
 
