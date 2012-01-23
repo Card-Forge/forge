@@ -7965,6 +7965,7 @@ res/cardsfolder/s/sower_of_temptation.txt svneol=native#text/plain
 res/cardsfolder/s/sowing_salt.txt svneol=native#text/plain
 res/cardsfolder/s/spare_from_evil.txt -text
 res/cardsfolder/s/spark_elemental.txt svneol=native#text/plain
+res/cardsfolder/s/spark_mage.txt -text svneol=unset#text/plain
 res/cardsfolder/s/spark_spray.txt svneol=native#text/plain
 res/cardsfolder/s/sparkcaster.txt svneol=native#text/plain
 res/cardsfolder/s/sparkmage_apprentice.txt svneol=native#text/plain
