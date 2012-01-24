@@ -34,6 +34,7 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Player;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -1138,6 +1139,40 @@ public final class AbilityFactoryProtection {
                 }
             }
         }
+
+        // Deal with Players
+        String players = "";
+        if (params.containsKey("ValidPlayers")) {
+            players = params.get("ValidPlayers");
+        }
+        if (!players.equals("")) {
+            final ArrayList<Player> playerList = AbilityFactory.getDefinedPlayers(host, players, sa);
+            for (final Player player : playerList) {
+                for (final String gain : gains) {
+                    player.addKeyword("Protection from " + gain);
+                }
+
+                if (!params.containsKey("Permanent")) {
+                    // If not Permanent, remove protection at EOT
+                    final Command untilEOT = new Command() {
+                        private static final long serialVersionUID = -6573962672873853565L;
+
+                        @Override
+                        public void execute() {
+                            for (final String gain : gains) {
+                                player.removeKeyword("Protection from " + gain);
+                            }
+                        }
+                    };
+                    if (params.containsKey("UntilEndOfCombat")) {
+                        AllZone.getEndOfCombat().addUntil(untilEOT);
+                    } else {
+                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                    }
+                }
+            }
+        }
+
     } // protectAllResolve()
 
 } // end class AbilityFactory_Protection
