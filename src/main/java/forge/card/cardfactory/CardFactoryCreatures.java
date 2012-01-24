@@ -464,7 +464,7 @@ public class CardFactoryCreatures {
 
                         @Override
                         public void showMessage() {
-                            AllZone.getDisplay().showMessage("Select target artifact you control");
+                            AllZone.getDisplay().showMessage("Select an artifact you control");
                             ButtonUtil.disableAll();
                         }
 
@@ -635,10 +635,6 @@ public class CardFactoryCreatures {
                         final Player p1 = crd1.getController();
                         crd0.addController(p1);
                         crd1.addController(p0);
-                        // AllZone.getGameAction().changeController(new
-                        // CardList(crd0), p0, p1);
-                        // AllZone.getGameAction().changeController(new
-                        // CardList(crd1), p1, p0);
                     }
 
                 } // resolve()
@@ -711,82 +707,6 @@ public class CardFactoryCreatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         } // *************** END ************ END **************************
 
-        // *************** START *********** START **************************
-        else if (cardName.equals("Adarkar Valkyrie")) {
-            // tap ability - no cost - target creature - EOT
-
-            final Card[] target = new Card[1];
-
-            final Command destroy = new Command() {
-                private static final long serialVersionUID = -2433442359225521472L;
-
-                @Override
-                public void execute() {
-
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Adarkar Valkyrie - Return ").append(target[0]);
-                    sb.append(" from graveyard to the battlefield");
-                    AllZone.getStack().addSimultaneousStackEntry(new Ability(card, "0", sb.toString()) {
-                        @Override
-                        public void resolve() {
-                            final PlayerZone grave = AllZone.getZoneOf(target[0]);
-                            // checks to see if card is still in the
-                            // graveyard
-
-                            if ((grave != null) && grave.contains(target[0])) {
-                                final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
-                                target[0].addController(card.getController());
-                                AllZone.getGameAction().moveTo(play, target[0]);
-                            }
-                        }
-                    });
-                } // execute()
-            };
-
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = 2777978927867867610L;
-
-                @Override
-                public void execute() {
-                    // resets the Card destroy Command
-                    target[0].removeDestroyCommand(destroy);
-                }
-            };
-
-            final Cost abCost = new Cost("T", cardName, true);
-            final StringBuilder sbTgt = new StringBuilder();
-            sbTgt.append("Target creature other than ").append(cardName);
-            final Target tgt = new Target(card, sbTgt.toString(), "Creature.Other".split(","));
-            final AbilityActivated ability = new AbilityActivated(card, abCost, tgt) {
-                private static final long serialVersionUID = -8454685126878522607L;
-
-                @Override
-                public void resolve() {
-                    if (AllZoneUtil.isCardInPlay(this.getTargetCard())) {
-                        target[0] = this.getTargetCard();
-
-                        if (!target[0].isToken()) { // not necessary, but will
-                                                    // help speed up stack
-                                                    // resolution
-                            AllZone.getEndOfTurn().addUntil(untilEOT);
-                            target[0].addDestroyCommand(destroy);
-                        }
-                    } // if
-                } // resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            }; // SpellAbility
-
-            card.addSpellAbility(ability);
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("tap: When target creature other than Adarkar Valkyrie is put into a ");
-            sb.append("graveyard this turn, return that card to the battlefield under your control.");
-            ability.setDescription(sb.toString());
-        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Painter's Servant")) {
