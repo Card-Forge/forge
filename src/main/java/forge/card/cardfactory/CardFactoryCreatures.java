@@ -2344,49 +2344,7 @@ public class CardFactoryCreatures {
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
-        // *************** START *********** START **************************
-        else if (cardName.equals("Gore Vassal")) {
-            final Cost abCost = new Cost("Sac<1/CARDNAME>", cardName, true);
-            final AbilityActivated ability = new AbilityActivated(card, abCost, new Target(card, "TgtC")) {
-                private static final long serialVersionUID = 3689290210743241201L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    final Card target = this.getTargetCard();
-
-                    if (AllZoneUtil.isCardInPlay(target) && target.canBeTargetedBy(this)) {
-                        target.addCounter(Counters.M1M1, 1);
-                        if (target.getNetDefense() >= 1) {
-                            target.addShield();
-                            AllZone.getEndOfTurn().addUntil(new Command() {
-                                private static final long serialVersionUID = -3332692040606224591L;
-
-                                @Override
-                                public void execute() {
-                                    target.resetShield();
-                                }
-                            });
-                        }
-                    }
-                } // resolve()
-            }; // SpellAbility
-
-            card.addSpellAbility(ability);
-            final StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append(abCost).append("Put a -1/-1 counter on target creature. ");
-            sbDesc.append("Then if that creature's toughness is 1 or greater, regenerate it.");
-            ability.setDescription(sbDesc.toString());
-
-            final StringBuilder sbStack = new StringBuilder();
-            sbStack.append(cardName).append(" put a -1/-1 counter on target creature.");
-            ability.setStackDescription(sbStack.toString());
-        } // *************** END ************ END **************************
-
+        
         // *************** START *********** START **************************
         else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
                 || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
