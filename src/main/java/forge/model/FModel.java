@@ -90,6 +90,13 @@ public class FModel {
             throw new RuntimeException(exn);
         }
 
+        // TODO this single setting from preferences should not be here, or,
+        // it should be here with all the other settings at the same time.
+        // Unfortunately, they're tied up in legacy code in the Display interface,
+        // currently in GuiTopLevel.  When that code is updated, this TODO should be resolved.
+        // Doublestrike 24-01-12
+        Constant.Runtime.DEV_MODE[0] = preferences.isDeveloperMode();
+
         // Instantiate AI
         AllZone.setInputControl(new InputControl(FModel.this));
         AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
