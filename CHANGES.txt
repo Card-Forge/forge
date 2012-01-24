@@ -130,6 +130,25 @@ Fixes/Features:
 - add a little spacing between the avatar icon and the life total.
 - Moved Forge Devil to correct folder.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed P/T of Somberwald Dryad.
+- Fixed text of Slave of Bolas.
+- Update findbugs plugin
+- Added a doTrigger function to getSetStateAbility.
+- Fixed shuffling of Lich's Mirror.
+- Updated some SVars.
+- Added special quest 27 The Torpor Orb.
+- fix multi-select tip text for Mac OS X (should be no change for Windows and *nix). Not sure this is the best solution, but it works.
+- Converted Adarkar Valkyrie to script.
+- Enhanced ProtectionAll to allow adding protection to players
+- for Vesuvan Doppelganger keyword:
+1) preserve original card picture on battlefield
+2) verified basic auras behave as expected when changeing creatures
+3) little fix in stack description (was printing "null")
+- Bugfix: no quest data at startup = can't find start button = can't add listeners.
+- Little cleanup of txt and dck files.
+- Fixed dev mode bug.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release. Removed now un-needed questData.dat file from my local copy.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -222,6 +241,35 @@ Curse of Exhaustion
 Burden of Guilt
 Dawntreader Elk
 Kessig Recluse
+Nephalia Seakite
+Russet Wolves
+Somberwald Dryad
+Wild Hunger
+Young Wolf
+Elguad Inquisitor
+Erdwal Ripper
+Midnight Guard
+Niblis of the Mist
+Artful Dodge
+Silverclaw Griffin
+Saving Grasp
+Screeching Skaab
+Shriekgeist
+Stormbound Geist
+Burning Oil
+Fires of Undeath
+Scorch the Fields
+Avacyn's Collar
+Chosen of Markov
+Faith's Shield
+Gavony Ironwright
+Hollowhenge Spirit
+Niblis of the Urn
+Requiem Angel
+Thraben Heretic
+Vengeful Vampire
+Wolfhunter's Quiver
+Chill of Foreboding
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -247,6 +295,17 @@ Trace of Abundance
 Laquatus's Disdain
 Cranial Plating
 Archangel's Light
+Wayward Angel
+Verdant Succession
+Spiritualize
+Spark Mage
+Shower of Coals
+Pedantic Learning
+Painbringer
+Phyrexian Splicer
+Horned Helm
+Neurok Stealthsuit
+Sparring Collar
 
 
 end
