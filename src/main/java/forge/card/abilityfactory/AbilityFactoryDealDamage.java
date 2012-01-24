@@ -777,6 +777,7 @@ public class AbilityFactoryDealDamage {
         final int dmg = this.getNumDamage(saMe);
 
         final boolean noPrevention = params.containsKey("NoPrevention");
+        final boolean combatDmg = params.containsKey("CombatDamage");
 
         ArrayList<Object> tgts;
         if (saMe.getTarget() == null) {
@@ -814,6 +815,10 @@ public class AbilityFactoryDealDamage {
                 if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(saMe))) {
                     if (noPrevention) {
                         c.addDamageWithoutPrevention(dmg, source);
+                    } else if(combatDmg) {
+                        HashMap<Card,Integer> combatmap = new HashMap<Card,Integer>();
+                        combatmap.put(source, dmg);
+                        c.addCombatDamage(combatmap);
                     } else {
                         c.addDamage(dmg, source);
                     }
@@ -824,6 +829,8 @@ public class AbilityFactoryDealDamage {
                 if (!targeted || p.canBeTargetedBy(saMe)) {
                     if (noPrevention) {
                         p.addDamageWithoutPrevention(dmg, source);
+                    } else if(combatDmg) {
+                        p.addCombatDamage(dmg, source);
                     } else {
                         p.addDamage(dmg, source);
                     }
