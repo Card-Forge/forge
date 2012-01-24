@@ -1,0 +1,12 @@
+Name:Horned Helm
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature gets +1/+1 and has trample.
+K:eqPump 1:+1/+1/Trample
+A:AB$ Attach | Cost$ G G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targe creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_helm.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/132.jpg
+Oracle:Equipped creature gets +1/+1 and has trample.\n{G}{G}: Attach Horned Helm to target creature you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+End

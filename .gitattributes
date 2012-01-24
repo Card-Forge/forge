@@ -3973,6 +3973,7 @@ res/cardsfolder/h/horn_of_deafening.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_greed.txt svneol=native#text/plain
 res/cardsfolder/h/horn_of_ramos.txt svneol=native#text/plain
 res/cardsfolder/h/horned_cheetah.txt svneol=native#text/plain
+res/cardsfolder/h/horned_helm.txt -text
 res/cardsfolder/h/horned_kavu.txt svneol=native#text/plain
 res/cardsfolder/h/horned_sliver.txt svneol=native#text/plain
 res/cardsfolder/h/horned_troll.txt svneol=native#text/plain
@@ -5721,6 +5722,7 @@ res/cardsfolder/n/neurok_invisimancer.txt svneol=native#text/plain
 res/cardsfolder/n/neurok_prodigy.txt svneol=native#text/plain
 res/cardsfolder/n/neurok_replica.txt svneol=native#text/plain
 res/cardsfolder/n/neurok_spy.txt svneol=native#text/plain
+res/cardsfolder/n/neurok_stealthsuit.txt -text
 res/cardsfolder/n/neverending_torment.txt -text
 res/cardsfolder/n/nevermaker.txt svneol=native#text/plain
 res/cardsfolder/n/nevermore.txt -text
