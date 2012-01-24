@@ -31,10 +31,10 @@ public class ViewConstructed extends JPanel {
     private SubButton btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
     private JList lstDecksAI;
     private FList lstColorsHuman, lstThemesHuman, lstDecksHuman, lstColorsAI, lstThemesAI;
-    
+
     private final String multi = System.getProperty("os.name").equals("Mac OS X") ? "CMD" : "CTRL";
 
-    private final String colorsToolTip = "Generate deck (Multi-select: "+ multi +")";
+    private final String colorsToolTip = "Generate deck (Multi-select: " + multi + ")";
     private final String themeToolTip = "Generate deck with a theme";
     private final String decklistToolTip = "Load deck (Decklist: Double Click)";
 
