@@ -2260,8 +2260,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepVesuvanDoppelgangerKeyword() {
-        // TODO - what about enchantments? i dont know how great this solution
-        // is
         final Player player = AllZone.getPhaseHandler().getPlayerTurn();
         final String keyword = "At the beginning of your upkeep, you may have this "
                 + "creature become a copy of target creature except it doesn't copy that "
@@ -2294,7 +2292,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 final Card newCopy = AllZone.getCardFactory().getCard(
                                         newTarget[0].getState("Original").getName(), player);
                                 newCopy.setCurSetCode(newTarget[0].getCurSetCode());
-                                newCopy.setImageFilename(newTarget[0].getImageFilename());
+                                //preserve the image of the Vesuvan Doppelganger/whatever the source is
+                                newCopy.setImageFilename(c.getImageFilename());
 
                                 AllZone.getTriggerHandler().suppressMode("Transformed");
                                 newCopy.setState(newTarget[0].getCurState());
@@ -2329,8 +2328,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     && selectedCard.canBeTargetedBy(switchTargets)) {
                                 newTarget[0] = selectedCard;
                                 final StringBuilder sb = new StringBuilder();
-                                sb.append(c.getCloneOrigin()).append(
-                                        " - switching to copy " + selectedCard.getName() + ".");
+                                sb.append(c).append(" - switching to copy " + selectedCard.getName() + ".");
                                 switchTargets.setStackDescription(sb.toString());
                                 AllZone.getStack().add(switchTargets);
                                 this.stop();
