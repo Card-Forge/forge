@@ -84,15 +84,16 @@ public class ControlQuest {
     }
 
     private void addListeners() {
-        view.getBtnStart().removeMouseListener(madStartGame);
-        view.getBtnStart().addMouseListener(madStartGame);
+        if (view.hasPreviousQuest()) {
+            view.getBtnStart().removeMouseListener(madStartGame);
+            view.getBtnStart().addMouseListener(madStartGame);
 
-        view.getPetComboBox().removeActionListener(actPetSelect);
-        view.getPetComboBox().addActionListener(actPetSelect);
+            view.getPetComboBox().removeActionListener(actPetSelect);
+            view.getPetComboBox().addActionListener(actPetSelect);
 
-        view.getPlantCheckBox().removeActionListener(actPlantSelect);
-        view.getPlantCheckBox().addActionListener(actPlantSelect);
-
+            view.getPlantCheckBox().removeActionListener(actPlantSelect);
+            view.getPlantCheckBox().addActionListener(actPlantSelect);
+        }
     }
 
     /** @return ViewQuest */
