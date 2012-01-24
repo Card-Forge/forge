@@ -2077,6 +2077,7 @@ res/cardsfolder/d/devastating_dreams.txt -text
 res/cardsfolder/d/devastating_summons.txt svneol=native#text/plain
 res/cardsfolder/d/devastation.txt svneol=native#text/plain
 res/cardsfolder/d/devils_play.txt -text
+res/cardsfolder/d/devoted_caretaker.txt -text svneol=unset#text/plain
 res/cardsfolder/d/devoted_druid.txt svneol=native#text/plain
 res/cardsfolder/d/devoted_hero.txt svneol=native#text/plain
 res/cardsfolder/d/devoted_retainer.txt svneol=native#text/plain
