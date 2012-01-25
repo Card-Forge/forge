@@ -5813,6 +5813,7 @@ res/cardsfolder/n/noggle_bandit.txt svneol=native#text/plain
 res/cardsfolder/n/noggle_bridgebreaker.txt svneol=native#text/plain
 res/cardsfolder/n/noggle_hedge_mage.txt svneol=native#text/plain
 res/cardsfolder/n/noggle_ransacker.txt svneol=native#text/plain
+res/cardsfolder/n/nomad_decoy.txt -text svneol=unset#text/plain
 res/cardsfolder/n/nomad_stadium.txt svneol=native#text/plain
 res/cardsfolder/n/nomadic_elf.txt svneol=native#text/plain
 res/cardsfolder/n/nomads_assembly.txt -text
