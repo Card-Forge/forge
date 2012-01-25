@@ -618,7 +618,7 @@ public final class AbilityFactoryChangeZone {
             } else if (origin.equals("Library")) {
                 sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
 
-                if (params.get("ChangeNum").equals("1")) {
+                if (num == 1) {
                     sb.append("put that card ");
                 } else {
                     sb.append("put those cards ");
