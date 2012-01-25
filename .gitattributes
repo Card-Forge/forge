@@ -5012,6 +5012,7 @@ res/cardsfolder/m/macabre_waltz.txt svneol=native#text/plain
 res/cardsfolder/m/macetail_hystrodon.txt svneol=native#text/plain
 res/cardsfolder/m/machinate.txt svneol=native#text/plain
 res/cardsfolder/m/mad_auntie.txt svneol=native#text/plain
+res/cardsfolder/m/mad_dog.txt -text svneol=unset#text/plain
 res/cardsfolder/m/madblind_mountain.txt -text
 res/cardsfolder/m/maddening_wind.txt svneol=native#text/plain
 res/cardsfolder/m/madrush_cyclops.txt svneol=native#text/plain
