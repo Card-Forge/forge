@@ -1,0 +1,15 @@
+Name:Kalitas, Bloodchief of Ghet
+ManaCost:5 B B
+Types:Legendary Creature Vampire Warrior
+Text:no text
+PT:5/5
+A:AB$ Destroy | Cost$ B B B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberDestroyed$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenImage$ X X Vampire | TokenName$ Vampire | TokenTypes$ Creature,Vampire | TokenColors$ Black | TokenOwner$ You | TokenPower$ dX | TokenToughness$ dY | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Remembered$Amount
+SVar:dX:Targeted$CardPower
+SVar:dY:Targeted$CardToughness
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kalitas_bloodchief_of_ghet.jpg
+SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/99.jpg
+Oracle:{B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
+End

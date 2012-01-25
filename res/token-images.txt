@@ -28,6 +28,7 @@ b_6_6_wurm.jpg                         http://www.cardforge.org/fpics/tokens/b_6
 b_dx_dy_spirit.jpg                     http://www.cardforge.org/fpics/tokens/b_dx_dy_spirit.jpg
 b_x_x_demon.jpg                        http://www.cardforge.org/fpics/tokens/b_x_x_demon.jpg
 b_x_x_minion.jpg                       http://www.cardforge.org/fpics/tokens/b_x_x_minion.jpg
+b_x_x_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_x_x_vampire.jpg
 bg_1_1_worm.jpg                        http://www.cardforge.org/fpics/tokens/bg_1_1_worm.jpg
 br_1_1_minor_demon.jpg                 http://www.cardforge.org/fpics/tokens/br_1_1_minor_demon.jpg
 br_3_1_graveborn.jpg                   http://www.cardforge.org/fpics/tokens/br_3_1_graveborn.jpg
@@ -189,7 +190,6 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
-# //b_x_x_vampire.jpg                      http://www.cardforge.org/fpics/tokens/b_x_x_vampire.jpg                      [ZEN] Kalitas, Bloodchief of Ghet
 # //c_1_1_tetravite.jpg                    http://www.cardforge.org/fpics/tokens/c_1_1_tetravite.jpg                    [ATQ/4ED] Tetravus
 # //c_4_4_kaldra.jpg                       http://www.cardforge.org/fpics/tokens/c_4_4_kaldra.jpg                       [5DN] Helm of Kaldra
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt

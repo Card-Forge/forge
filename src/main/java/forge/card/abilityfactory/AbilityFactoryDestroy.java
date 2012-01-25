@@ -512,6 +512,12 @@ public class AbilityFactoryDestroy {
      */
     private static void destroyResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
+
+        final boolean remDestroyed = params.containsKey("RememberDestroyed");
+        if (remDestroyed) {
+            card.clearRemembered();
+        }
 
         final boolean noRegen = params.containsKey("NoRegen");
         final boolean sac = params.containsKey("Sacrifice");
@@ -541,6 +547,8 @@ public class AbilityFactoryDestroy {
                     AllZone.getGameAction().destroyNoRegeneration(tgtC);
                 } else {
                     AllZone.getGameAction().destroy(tgtC);
+                } if (remDestroyed) {
+                    card.addRemembered(tgtC);
                 }
             }
         }
@@ -553,6 +561,8 @@ public class AbilityFactoryDestroy {
                     AllZone.getGameAction().destroyNoRegeneration(unTgtC);
                 } else {
                     AllZone.getGameAction().destroy(unTgtC);
+                } if (remDestroyed) {
+                    card.addRemembered(unTgtC);
                 }
             }
         }

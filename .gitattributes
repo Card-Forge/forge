@@ -4401,12 +4401,14 @@ res/cardsfolder/k/kabira_vindicator.txt svneol=native#text/plain
 res/cardsfolder/k/kabuto_moth.txt svneol=native#text/plain
 res/cardsfolder/k/kaervek_the_merciless.txt svneol=native#text/plain
 res/cardsfolder/k/kaerveks_hex.txt svneol=native#text/plain
+res/cardsfolder/k/kaerveks_purge.txt -text
 res/cardsfolder/k/kaerveks_spite.txt svneol=native#text/plain
 res/cardsfolder/k/kagemaro_first_to_suffer.txt svneol=native#text/plain
 res/cardsfolder/k/kagemaros_clutch.txt -text
 res/cardsfolder/k/kaijin_of_the_vanishing_touch.txt svneol=native#text/plain
 res/cardsfolder/k/kalastria_highborn.txt svneol=native#text/plain
 res/cardsfolder/k/kaleidostone.txt svneol=native#text/plain
+res/cardsfolder/k/kalitas_bloodchief_of_ghet.txt -text
 res/cardsfolder/k/kalonian_behemoth.txt svneol=native#text/plain
 res/cardsfolder/k/kamahl_fist_of_krosa.txt svneol=native#text/plain
 res/cardsfolder/k/kamahl_pit_fighter.txt svneol=native#text/plain
