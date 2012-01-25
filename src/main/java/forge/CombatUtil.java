@@ -1130,6 +1130,20 @@ public class CombatUtil {
             return false;
         }
 
+        //check for creatures that must be blocked
+        final CardList attackers = combat.sortAttackerByDefender()[0];
+
+        for (final Card attacker : attackers) {
+
+            final CardList blockers = combat.getBlockers(attacker);
+
+            if (blockers.size() == 0) {
+                if (attacker.getSVar("MustBeBlocked") != null) {
+                    return true;
+                }
+            }
+        }
+
         if ((CombatUtil.lifeThatWouldRemain(combat) < Math.min(4, AllZone.getComputerPlayer().getLife()))
                 && !AllZone.getComputerPlayer().cantLoseForZeroOrLessLife()) {
             return true;
@@ -1168,6 +1182,20 @@ public class CombatUtil {
         // Planeswalkers life
         if (AllZone.getComputerPlayer().cantLose()) {
             return false;
+        }
+
+        //check for creatures that must be blocked
+        final CardList attackers = combat.sortAttackerByDefender()[0];
+
+        for (final Card attacker : attackers) {
+
+            final CardList blockers = combat.getBlockers(attacker);
+
+            if (blockers.size() == 0) {
+                if (attacker.getSVar("MustBeBlocked") != null) {
+                    return true;
+                }
+            }
         }
 
         if ((CombatUtil.lifeThatWouldRemain(combat) < 1) && !AllZone.getComputerPlayer().cantLoseForZeroOrLessLife()) {

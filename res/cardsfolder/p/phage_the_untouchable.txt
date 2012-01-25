@@ -9,6 +9,8 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDama
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget | NoRegen$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTheyLose | TriggerDescription$ Whenever Phage deals combat damage to a player, that player loses the game.
 SVar:TrigTheyLose:AB$LosesGame | Cost$ 0 | Defined$ TriggeredTarget
+SVar:MustBeBlocked:True
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phage_the_untouchable.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/78.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/166.jpg
