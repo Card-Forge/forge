@@ -149,6 +149,29 @@ Fixes/Features:
 - Little cleanup of txt and dck files.
 - Fixed dev mode bug.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release. Removed now un-needed questData.dat file from my local copy.
+- Updated two decks with copies of Cranial Plating.
+- Added CombatDamage parameter to AF_DealDamage.
+- Corrected cards that replace damage dealt with the same damage in a different amount. (Fixes Divine Presence + Sword of X and Y)
+Akki Lavarunner // Tok-Tok Volcano Born
+Curse of Bloodletting
+Divine Presence
+Furnace of Rath
+Gratuitous Violence
+Lashknife Barrier
+- delete the org/eclipse/wb/swing package. It is no longer used, and there is no intention of using it again.
+- Text fix
+- Fixed 2nd ability of WolfHunter's Quiver.
+- fixed Requiem Angel
+- CheckStyle.
+- update findbugs dep
+- Converted Gore Vassal to script.
+- Update javadoc plugin
+- Added a new AI SVar: MustBeBlocked.
+- Added the AI SVar MustBeBlocked to Phage the Untouchable.
+- RememberDestroyed parameter added to Destroy AF (was only available to DestroyAll previously)
+- Added Kalitas, Bloodchief of Ghet and uncommented the relevant token image download link.
+- Ran Oracle and SetInfo scripts
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -270,6 +293,30 @@ Thraben Heretic
 Vengeful Vampire
 Wolfhunter's Quiver
 Chill of Foreboding
+Black Cat
+Death's Caress
+Harrowing Journey
+Highborn Ghoul
+Reap the Seagraf
+Sightless Ghoul
+Spiteful Shadows
+Undying Evil
+Wakedancer
+Shattered Perception
+Wrack with Madness
+Clinging Mists
+Crushing Vines
+Deranged Outcast
+Favor of the Woods
+Grim Flowering
+Tracker's Instincts
+Ulvenwald Bear
+Village Survivors
+Geralf's Mindcrusher
+Mystic Retrieval
+Niblis of the Breath
+Relentless Skaabs
+Tower Geist
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -306,6 +353,10 @@ Phyrexian Splicer
 Horned Helm
 Neurok Stealthsuit
 Sparring Collar
+Devoted Caretaker
+Kaervek's Purge
+Kalitas, Bloodchief of Ghet
+Ageless Sentinels
 
 
 end
