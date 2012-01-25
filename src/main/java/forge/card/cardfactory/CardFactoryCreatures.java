@@ -2344,7 +2344,6 @@ public class CardFactoryCreatures {
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
-        
         // *************** START *********** START **************************
         else if (cardName.equals("Duct Crawler") || cardName.equals("Shrewd Hatchling")
                 || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
@@ -2495,10 +2494,9 @@ public class CardFactoryCreatures {
             sb.append(" Target opponent gains control of target permanent.");
             ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);
-        }
+        } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-
         else if (cardName.equals("Bazaar Trader")) {
 
             final Target player = new Target(card, "Select target player", "Player".split(","));
@@ -2545,7 +2543,7 @@ public class CardFactoryCreatures {
             sb.append(" Target player gains control of target artifact, creature, or land you control.");
             ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);
-        }
+        } // *************** END ************ END **************************
 
         // ***************************************************
         // end of card specific code
