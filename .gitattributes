@@ -5636,6 +5636,7 @@ res/cardsfolder/n/nantuko_calmer.txt svneol=native#text/plain
 res/cardsfolder/n/nantuko_disciple.txt svneol=native#text/plain
 res/cardsfolder/n/nantuko_elder.txt svneol=native#text/plain
 res/cardsfolder/n/nantuko_husk.txt svneol=native#text/plain
+res/cardsfolder/n/nantuko_mentor.txt -text svneol=unset#text/plain
 res/cardsfolder/n/nantuko_monastery.txt svneol=native#text/plain
 res/cardsfolder/n/nantuko_shade.txt svneol=native#text/plain
 res/cardsfolder/n/nantuko_shaman.txt svneol=native#text/plain
