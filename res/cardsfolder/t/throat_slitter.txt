@@ -7,6 +7,7 @@ A:AB$ ChangeZone | Cost$ 2 B Return<1/Creature.attacking+unblocked> | CostDesc$ 
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target nonblack creature that player controls.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack+YouDontCtrl | TgtPrompt$ Select target nonblack creature defending player controls
 SVar:RemAIDeck:True
+SVar:MustBeBlocked:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throat_slitter.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/88.jpg

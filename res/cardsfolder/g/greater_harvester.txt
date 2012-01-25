@@ -7,6 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacYou | Trigger
 SVar:TrigSacYou:AB$Sacrifice | Cost$ 0 | SacValid$ Permanent | Defined$ You
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigSacOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices two permanents.
 SVar:TrigSacOpp:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent | Amount$ 2 | Defined$ Opponent
+SVar:MustBeBlocked:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_harvester.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/44.jpg
