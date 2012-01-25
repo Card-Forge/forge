@@ -1359,7 +1359,26 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean nameCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return AbilityFactoryChoose.choosePlayerTriggerAI(af, sa, false);
+        final HashMap<String, String> params = af.getMapParams();
+
+        if (params.containsKey("AILogic")) {
+            // Don't tap creatures that may be able to block
+            if (AbilityFactory.waitForBlocking(sa)) {
+                return false;
+            }
+
+            final Target tgt = sa.getTarget();
+            if (tgt != null) {
+                tgt.resetTargets();
+                if (tgt.canOnlyTgtOpponent()) {
+                    tgt.addTarget(AllZone.getHumanPlayer());
+                } else {
+                    tgt.addTarget(AllZone.getComputerPlayer());
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
