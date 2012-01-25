@@ -3487,6 +3487,47 @@ public class CardFactoryUtil {
 
     /**
      * <p>
+     * getMostProminentCardName.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a {@link java.lang.String} object.
+     */
+    public static String getMostProminentCardName(final CardList list) {
+
+        if (list.size() == 0) {
+            return "";
+        }
+
+        final Map<String, Integer> map = new HashMap<String, Integer>();
+
+        for (final Card c : list) {
+            final String name = c.getName();
+            if (!map.containsKey(name)) {
+                map.put(name, 1);
+            } else {
+                map.put(name, map.get(name) + 1);
+            }
+        } // for
+
+        int max = 0;
+        String maxName = "";
+
+        for (final Entry<String, Integer> entry : map.entrySet()) {
+            final String type = entry.getKey();
+            // Log.debug(type + " - " + entry.getValue());
+
+            if (max < entry.getValue()) {
+                max = entry.getValue();
+                maxName = type;
+            }
+        }
+        return maxName;
+    }
+
+    /**
+     * <p>
      * getMostProminentCreatureType.
      * </p>
      * 

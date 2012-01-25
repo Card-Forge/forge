@@ -668,10 +668,10 @@ public final class AbilityFactoryChoose {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame().getController(
                                     AllZone.getHumanPlayer()));
                         }
-                        if (logic.equals("MostProminentInGame")) {
+                        else if (logic.equals("MostProminentInGame")) {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());
                         }
-                        if (logic.equals("MostProminentHumanCreatures")) {
+                        else if (logic.equals("MostProminentHumanCreatures")) {
                             CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
                             if (list.isEmpty()) {
                                 list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer())
@@ -679,15 +679,15 @@ public final class AbilityFactoryChoose {
                             }
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
-                        if (logic.equals("MostProminentComputerControls")) {
+                        else if (logic.equals("MostProminentComputerControls")) {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
                                     Zone.Battlefield));
                         }
-                        if (logic.equals("MostProminentPermanent")) {
+                        else if (logic.equals("MostProminentPermanent")) {
                             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
-                        if (logic.equals("MostProminentAttackers")) {
+                        else if (logic.equals("MostProminentAttackers")) {
                             chosen = CardFactoryUtil.getMostProminentColor(new CardList(AllZone.getCombat()
                                     .getAttackers()));
                         }
@@ -1415,7 +1415,7 @@ public final class AbilityFactoryChoose {
                 boolean ok = false;
                 String name = null;
                 while (!ok) {
-                    if (sa.getActivatingPlayer().isHuman()) {
+                    if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc
                                 + " card. (Case sensitive)";
                         /*
@@ -1446,17 +1446,31 @@ public final class AbilityFactoryChoose {
                             ok = true;
                         }
                     } else {
-                        CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
-                        list = list.filter(new CardListFilter() {
-                            @Override
-                            public boolean addCard(final Card c) {
-                                return !c.isLand();
+                        String chosen = "";
+                        if (params.containsKey("AILogic")) {
+                            final String logic = params.get("AILogic");
+                            if (logic.equals("MostProminentInComputerDeck")) {
+                                chosen = CardFactoryUtil.getMostProminentCardName(AllZone.getComputerPlayer()
+                                        .getCardsIn(Constant.Zone.Library));
                             }
-                        });
-                        if (!list.isEmpty()) {
-                            host.setNamedCard(list.get(0).getName());
-                            ok = true;
+                        } else {
+                            CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
+                            list = list.filter(new CardListFilter() {
+                                @Override
+                                public boolean addCard(final Card c) {
+                                    return !c.isLand();
+                                }
+                            });
+                            if (!list.isEmpty()) {
+                                chosen = list.get(0).getName();
+                            }
                         }
+                        if (chosen == "") {
+                            chosen = "Forest";
+                        }
+                        GuiUtils.getChoice("Computer picked: ", chosen);
+                        host.setNamedCard(chosen);
+                        ok = true;
                     }
                 }
             }
