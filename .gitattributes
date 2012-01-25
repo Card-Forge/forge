@@ -1927,6 +1927,7 @@ res/cardsfolder/d/daybreak_coronet.txt -text
 res/cardsfolder/d/daybreak_ranger_nightfall_predator.txt -text
 res/cardsfolder/d/daze.txt svneol=native#text/plain
 res/cardsfolder/d/dead_iron_sledge.txt svneol=native#text/plain
+res/cardsfolder/d/dead_reckoning.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dead_weight.txt -text
 res/cardsfolder/d/deadapult.txt svneol=native#text/plain
 res/cardsfolder/d/deadfall.txt svneol=native#text/plain
