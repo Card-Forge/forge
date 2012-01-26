@@ -2065,7 +2065,7 @@ public class CardFactoryCreatures {
 
                         AllZone.getTriggerHandler().suppressMode("Transformed");
 
-                        if(copyTarget[0].isToken()) {
+                        if (copyTarget[0].isToken()) {
                             cloned = CardFactoryUtil.copyStats(copyTarget[0]);
 
                             cloned.setName(copyTarget[0].getName());
