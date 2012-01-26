@@ -397,6 +397,9 @@ public class AbilityFactoryEffect {
         eff.setImageName(card.getImageName());
         eff.setColor(card.getColor());
         eff.setImmutable(true);
+        //eff.setImageFilename(ForgeProps.getFile(NewConstants.IMAGE_TOKEN) + File.separator + "sorin_lord_of_innistrad_emblem.jpg");
+        eff.setImageName(params.get("Image"));
+        System.out.println("Image filename: " + eff.getImageName());
 
         // Effects should be Orange or something probably
 
