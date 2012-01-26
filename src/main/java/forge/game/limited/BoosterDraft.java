@@ -35,8 +35,6 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.FileUtil;
-import forge.HttpUtil;
 import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
@@ -50,6 +48,8 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
+import forge.util.HttpUtil;
 
 /**
  * 

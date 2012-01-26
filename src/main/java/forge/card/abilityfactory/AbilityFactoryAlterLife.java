@@ -28,7 +28,6 @@ import forge.Card;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
-import forge.MyRandom;
 import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -37,6 +36,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.util.MyRandom;
 
 /**
  * <p>

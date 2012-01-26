@@ -38,6 +38,7 @@ import forge.gui.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.MyRandom;
 
 /**
  * <p>

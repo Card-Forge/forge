@@ -27,6 +27,7 @@ import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
 
 import forge.card.spellability.SpellAbility;
+import forge.util.MyRandom;
 
 /**
  * <p>

@@ -31,10 +31,10 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
-import forge.MyRandom;
 import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.util.MyRandom;
 
 /**
  * <p>

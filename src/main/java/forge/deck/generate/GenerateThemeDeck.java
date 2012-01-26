@@ -29,8 +29,8 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.MyRandom;
 import forge.error.ErrorViewer;
+import forge.util.MyRandom;
 
 /**
  * <p>

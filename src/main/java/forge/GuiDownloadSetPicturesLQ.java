@@ -29,6 +29,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.Base64Coder;
 
 /**
  * <p>

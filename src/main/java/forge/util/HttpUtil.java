@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.util;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -26,6 +26,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import forge.Constant;
 
 /**
  * <p>

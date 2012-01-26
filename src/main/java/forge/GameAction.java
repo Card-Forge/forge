@@ -58,6 +58,7 @@ import forge.gui.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
+import forge.util.MyRandom;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewWinLose;
 

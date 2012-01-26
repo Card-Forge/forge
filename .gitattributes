@@ -10722,7 +10722,6 @@ src/main/java/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/AIPlayer.java svneol=native#text/plain
 src/main/java/forge/AllZone.java svneol=native#text/plain
 src/main/java/forge/AllZoneUtil.java svneol=native#text/plain
-src/main/java/forge/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardColor.java svneol=native#text/plain
@@ -10752,7 +10751,6 @@ src/main/java/forge/ComputerUtilAttack.java svneol=native#text/plain
 src/main/java/forge/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/Constant.java svneol=native#text/plain
 src/main/java/forge/ConstantStringArrayList.java svneol=native#text/plain
-src/main/java/forge/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/Counters.java svneol=native#text/plain
 src/main/java/forge/DefaultPlayerZone.java svneol=native#text/plain
 src/main/java/forge/Display.java svneol=native#text/plain
@@ -10760,7 +10758,6 @@ src/main/java/forge/EndOfCombat.java svneol=native#text/plain
 src/main/java/forge/EndOfTurn.java svneol=native#text/plain
 src/main/java/forge/ExternalPanel.java svneol=native#text/plain
 src/main/java/forge/FileFinder.java svneol=native#text/plain
-src/main/java/forge/FileUtil.java svneol=native#text/plain
 src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
@@ -10777,7 +10774,6 @@ src/main/java/forge/GuiMigrateLocalMWSSetPicturesHQ.java svneol=native#text/plai
 src/main/java/forge/GuiMultipleBlockers.java svneol=native#text/plain
 src/main/java/forge/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/HandSizeOp.java svneol=native#text/plain
-src/main/java/forge/HttpUtil.java svneol=native#text/plain
 src/main/java/forge/HumanPlayer.java svneol=native#text/plain
 src/main/java/forge/IPlayerZone.java svneol=native#text/plain
 src/main/java/forge/ImageCache.java svneol=native#text/plain
@@ -10786,7 +10782,6 @@ src/main/java/forge/MagicStack.java svneol=native#text/plain
 src/main/java/forge/Move.java svneol=native#text/plain
 src/main/java/forge/MyButton.java svneol=native#text/plain
 src/main/java/forge/MyObservable.java svneol=native#text/plain
-src/main/java/forge/MyRandom.java svneol=native#text/plain
 src/main/java/forge/NameChanger.java svneol=native#text/plain
 src/main/java/forge/Phase.java svneol=native#text/plain
 src/main/java/forge/PhaseHandler.java -text
@@ -10802,7 +10797,6 @@ src/main/java/forge/SimpleCombat.java svneol=native#text/plain
 src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain
-src/main/java/forge/Time.java svneol=native#text/plain
 src/main/java/forge/UndoCommand.java svneol=native#text/plain
 src/main/java/forge/Untap.java -text
 src/main/java/forge/Upkeep.java svneol=native#text/plain
@@ -11140,6 +11134,12 @@ src/main/java/forge/quest/gui/main/QuestSelectablePanel.java -text
 src/main/java/forge/quest/gui/main/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
+src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
+src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
+src/main/java/forge/util/FileUtil.java svneol=native#text/plain
+src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
+src/main/java/forge/util/MyRandom.java svneol=native#text/plain
+src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/GuiTopLevel.java -text
 src/main/java/forge/view/Main.java -text

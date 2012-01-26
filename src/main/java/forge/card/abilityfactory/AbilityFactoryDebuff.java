@@ -33,7 +33,6 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.MyRandom;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -43,6 +42,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.util.MyRandom;
 
 /**
  * <p>

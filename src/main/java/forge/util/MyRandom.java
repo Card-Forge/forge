@@ -15,58 +15,53 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.util;
+
+import java.util.Random;
 
 /**
  * <p>
- * Time class.
+ * MyRandom class.<br>
+ * Preferably all Random numbers should be retrieved using this wrapper class
  * </p>
  * 
  * @author Forge
  * @version $Id$
  */
-public class Time {
-    private long startTime;
-    private long stopTime;
+public class MyRandom {
+    /** Constant <code>random</code>. */
+    private static Random random = new Random();
 
     /**
      * <p>
-     * Constructor for Time.
-     * </p>
-     */
-    public Time() {
-        this.start();
-    }
-
-    /**
-     * <p>
-     * start.
-     * </p>
-     */
-    public final void start() {
-        this.startTime = System.currentTimeMillis();
-    }
-
-    /**
-     * <p>
-     * stop.
+     * percentTrue.<br>
+     * If percent is like 30, then 30% of the time it will be true.
      * </p>
      * 
-     * @return a double.
+     * @param percent
+     *            a int.
+     * @return a boolean.
      */
-    public final double stop() {
-        this.stopTime = System.currentTimeMillis();
-        return this.getTime();
+    public static boolean percentTrue(final int percent) {
+        return percent > MyRandom.getRandom().nextInt(100);
     }
 
     /**
-     * <p>
-     * getTime.
-     * </p>
+     * Gets the random.
      * 
-     * @return a double.
+     * @return the random
      */
-    public final double getTime() {
-        return (this.stopTime - this.startTime) / 1000.0;
+    public static Random getRandom() {
+        return MyRandom.random;
+    }
+
+    /**
+     * Sets the random.
+     * 
+     * @param random0
+     *            the random to set
+     */
+    public static void setRandom(final Random random0) {
+        MyRandom.random = random0;
     }
 }

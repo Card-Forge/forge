@@ -25,10 +25,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.FileUtil;
 import forge.card.CardManaCost.ManaParser;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
 
 /** This class can read CardRules from Arch's mtg-data.txt file. */
 public final class MtgDataParser implements Iterator<CardRules> {

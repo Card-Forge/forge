@@ -29,7 +29,7 @@
 // Please contact the author if you need another license.
 // This module is provided "as is", without warranties of any kind.
 
-package forge;
+package forge.util;
 
 /**
  * A Base64 encoder/decoder.

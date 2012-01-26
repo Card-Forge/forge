@@ -23,10 +23,10 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.FileUtil;
-import forge.HttpUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
+import forge.util.HttpUtil;
 
 /**
  * Contains Maps of card ratings.

@@ -33,6 +33,7 @@ import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.gui.input.InputPayManaCostAbility;
 import forge.gui.input.InputPayManaCostUtil;
+import forge.util.MyRandom;
 
 /**
  * <p>

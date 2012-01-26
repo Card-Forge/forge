@@ -23,7 +23,6 @@ import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.MyRandom;
 import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.BoosterUtils;
@@ -36,6 +35,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.util.MyRandom;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been

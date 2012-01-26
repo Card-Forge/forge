@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
+import forge.GuiDisplayUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

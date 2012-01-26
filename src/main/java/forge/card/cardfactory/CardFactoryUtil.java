@@ -45,7 +45,6 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.GameActionUtil;
 import forge.HandSizeOp;
-import forge.MyRandom;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
@@ -67,6 +66,7 @@ import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.InputPayManaCost;
 import forge.gui.input.InputPayManaCostUtil;
+import forge.util.MyRandom;
 
 /**
  * <p>

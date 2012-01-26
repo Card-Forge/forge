@@ -28,11 +28,11 @@ import forge.CardFilter;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.Constant;
-import forge.MyRandom;
 import forge.PlayerType;
 import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
+import forge.util.MyRandom;
 
 /**
  * <p>

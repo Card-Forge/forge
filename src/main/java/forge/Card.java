@@ -44,6 +44,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.item.CardDb;
+import forge.util.MyRandom;
 
 /**
  * <p>

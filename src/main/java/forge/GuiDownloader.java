@@ -58,6 +58,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.MyRandom;
 
 /**
  * <p>

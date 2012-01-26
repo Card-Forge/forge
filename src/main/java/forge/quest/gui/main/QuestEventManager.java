@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
-import forge.FileUtil;
 import forge.deck.DeckManager;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestUtil;
+import forge.util.FileUtil;
 
 /**
  * <p>

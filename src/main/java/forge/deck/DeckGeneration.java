@@ -22,7 +22,6 @@ import java.util.Random;
 
 import forge.CardList;
 import forge.Constant;
-import forge.MyRandom;
 import forge.PlayerType;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
@@ -32,6 +31,7 @@ import forge.deck.generate.GenerateConstructedMultiColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.util.MyRandom;
 
 /**
  * Utility class to hold add deck generation routines, methods moved from

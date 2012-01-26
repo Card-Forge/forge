@@ -30,7 +30,6 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.MyRandom;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.card.spellability.AbilityActivated;
@@ -40,6 +39,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.util.MyRandom;
 
 /**
  * <p>

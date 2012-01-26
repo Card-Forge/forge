@@ -24,6 +24,7 @@ import java.util.Random;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
+import forge.util.MyRandom;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
 /**

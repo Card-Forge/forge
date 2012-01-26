@@ -34,7 +34,6 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
-import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -47,6 +46,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
+import forge.util.MyRandom;
 
 /**
  * <p>

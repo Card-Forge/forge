@@ -41,7 +41,6 @@ import javax.swing.filechooser.FileFilter;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.FileUtil;
 import forge.PlayerType;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -50,6 +49,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;

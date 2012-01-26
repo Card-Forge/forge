@@ -46,11 +46,11 @@ import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.MyRandom;
 import forge.card.CardRules;
 import forge.card.CardType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.util.MyRandom;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI

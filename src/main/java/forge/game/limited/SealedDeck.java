@@ -31,8 +31,6 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
-import forge.FileUtil;
-import forge.MyRandom;
 import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
@@ -45,6 +43,8 @@ import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
+import forge.util.FileUtil;
+import forge.util.MyRandom;
 
 /**
  * <p>

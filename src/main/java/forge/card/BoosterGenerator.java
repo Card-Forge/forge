@@ -26,10 +26,10 @@ import java.util.Map.Entry;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Closure1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.MyRandom;
 import forge.deck.Deck;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.util.MyRandom;
 
 /**
  * <p>

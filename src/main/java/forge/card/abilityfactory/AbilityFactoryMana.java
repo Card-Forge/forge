@@ -30,7 +30,6 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
-import forge.MyRandom;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -42,6 +41,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 import forge.gui.input.InputPayManaCostUtil;
+import forge.util.MyRandom;
 
 /**
  * <p>

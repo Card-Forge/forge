@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.CardBlock;
 import forge.card.CardSet;
 import forge.game.GameFormat;
+import forge.util.FileUtil;
 
 /**
  * <p>

@@ -31,13 +31,13 @@ import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
 import forge.ConstantStringArrayList;
-import forge.FileUtil;
-import forge.HttpUtil;
 import forge.game.GameSummary;
 import forge.gui.input.InputControl;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
+import forge.util.HttpUtil;
 
 /**
  * The default Model implementation for Forge.

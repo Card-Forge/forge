@@ -40,7 +40,6 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
-import forge.FileUtil;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
@@ -59,6 +58,7 @@ import forge.gui.input.Input;
 import forge.gui.input.InputPayManaCost;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
 
 /**
  * <p>

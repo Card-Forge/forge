@@ -22,6 +22,7 @@ import java.util.Random;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.util.MyRandom;
 
 /**
  * <p>

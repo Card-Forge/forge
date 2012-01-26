@@ -26,9 +26,9 @@ import net.slightlymagic.maxmtg.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Constant;
-import forge.MyRandom;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.util.MyRandom;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 /**

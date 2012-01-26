@@ -35,7 +35,6 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameEntity;
-import forge.MyRandom;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -47,6 +46,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.gui.GuiUtils;
+import forge.util.MyRandom;
 
 /**
  * The Class AbilityFactory_Attach.

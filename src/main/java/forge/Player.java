@@ -35,6 +35,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
+import forge.util.MyRandom;
 import forge.view.GuiTopLevel;
 import forge.view.match.MatchTopLevel;
 

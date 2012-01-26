@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.slightlymagic.maxmtg.Predicate;
-import forge.MyRandom;
 import forge.SetUtils;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
@@ -34,6 +33,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
+import forge.util.MyRandom;
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
 //you have to call one of these two methods below

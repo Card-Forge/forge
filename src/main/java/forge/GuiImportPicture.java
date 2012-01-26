@@ -43,6 +43,7 @@ import javax.swing.event.MouseInputAdapter;
 
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.CopyFiles;
 
 /**
  * <p>
