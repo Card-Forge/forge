@@ -681,6 +681,7 @@ res/cardsfolder/b/battleground_geist.txt -text
 res/cardsfolder/b/battlegrowth.txt svneol=native#text/plain
 res/cardsfolder/b/battlewand_oak.txt svneol=native#text/plain
 res/cardsfolder/b/battlewise_aven.txt svneol=native#text/plain
+res/cardsfolder/b/batwing_brume.txt -text svneol=unset#text/plain
 res/cardsfolder/b/bay_falcon.txt svneol=native#text/plain
 res/cardsfolder/b/bayou.txt svneol=native#text/plain
 res/cardsfolder/b/bayou_dragonfly.txt svneol=native#text/plain
