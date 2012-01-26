@@ -6889,8 +6889,28 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("sharesCreatureTypeWith")) {
-            if (!this.sharesCreatureTypeWith(source)) {
-                return false;
+            if (property.equals("sharesCreatureTypeWith")) {
+                if (!this.sharesCreatureTypeWith(source)) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("sharesCreatureTypeWith ")[1];
+                if (restriction.equals("TopCardOfLibrary")) {
+                    final CardList list = sourceController.getCardsIn(Zone.Library);
+                    if (list.isEmpty() || !this.sharesCreatureTypeWith(list.get(0))) {
+                        return false;
+                    }
+                } else {
+                    boolean shares = false;
+                    for (final Card card : sourceController.getCardsIn(Constant.Zone.Battlefield)) {
+                        if (card.isValid(restriction, sourceController, source) && this.sharesCreatureTypeWith(card)) {
+                            shares = true;
+                        }
+                    }
+                    if (!shares) {
+                        return false;
+                    }
+                }
             }
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
