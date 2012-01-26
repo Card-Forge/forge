@@ -600,18 +600,10 @@ public class DeckManager {
      *            a Deck[]
      */
     public static void writeDraftDecks(final Deck[] drafts) {
-        try {
-            final File f = DeckManager.makeFileName(drafts[0]);
-            f.mkdir();
-            for (int i = 0; i < drafts.length; i++) {
-                final BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".dck")));
-                DeckManager.writeDeck(drafts[i], out);
-                out.close();
-            }
-
-        } catch (final IOException ex) {
-            ErrorViewer.showError(ex);
-            throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
+        final File f = DeckManager.makeFileName(drafts[0]);
+        f.mkdir();
+        for (int i = 0; i < drafts.length; i++) {
+            FileUtil.writeFile(new File(f, i + ".dck"), DeckManager.serializeDeck(drafts[i]));
         }
     }
 
@@ -627,28 +619,30 @@ public class DeckManager {
      * @throws java.io.IOException
      *             if any.
      */
-    private static void writeDeck(final Deck d, final BufferedWriter out) throws IOException {
-        out.write(String.format("[metadata]%n"));
+    private static List<String> serializeDeck(final Deck d)  {
+        List<String> out = new ArrayList<String>();
+        out.add(String.format("[metadata]%n"));
 
-        out.write(String.format("%s=%s%n", DeckManager.NAME, d.getName().replaceAll("\n", "")));
-        out.write(String.format("%s=%s%n", DeckManager.DECK_TYPE, d.getDeckType()));
+        out.add(String.format("%s=%s%n", DeckManager.NAME, d.getName().replaceAll("\n", "")));
+        out.add(String.format("%s=%s%n", DeckManager.DECK_TYPE, d.getDeckType()));
         // these are optional
         if (d.getComment() != null) {
-            out.write(String.format("%s=%s%n", DeckManager.COMMENT, d.getComment().replaceAll("\n", "")));
+            out.add(String.format("%s=%s%n", DeckManager.COMMENT, d.getComment().replaceAll("\n", "")));
         }
         if (d.getPlayerType() != null) {
-            out.write(String.format("%s=%s%n", DeckManager.PLAYER, d.getPlayerType()));
+            out.add(String.format("%s=%s%n", DeckManager.PLAYER, d.getPlayerType()));
         }
 
         if (d.isCustomPool()) {
-            out.write(String.format("%s=%s%n", DeckManager.CSTM_POOL, "true"));
+            out.add(String.format("%s=%s%n", DeckManager.CSTM_POOL, "true"));
         }
 
-        out.write(String.format("%s%n", "[main]"));
-        DeckManager.writeCardPool(d.getMain(), out);
+        out.add(String.format("%s%n", "[main]"));
+        out.addAll(DeckManager.writeCardPool( d.getMain()));
 
-        out.write(String.format("%s%n", "[sideboard]"));
-        DeckManager.writeCardPool(d.getSideboard(), out);
+        out.add(String.format("%s%n", "[sideboard]"));
+        out.addAll(DeckManager.writeCardPool(d.getSideboard()));
+        return out;
     }
 
     /**
@@ -729,19 +723,20 @@ public class DeckManager {
         }
     }
 
-    private static void writeCardPool(final ItemPoolView<CardPrinted> pool, final BufferedWriter out)
-            throws IOException {
+    private static  List<String> writeCardPool(final ItemPoolView<CardPrinted> pool) {
         final List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
+        List<String> out = new ArrayList<String>();
         for (final Entry<CardPrinted, Integer> e : main2sort) {
             final CardPrinted card = e.getKey();
             final boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());
             if (hasBadSetInfo) {
-                out.write(String.format("%d %s%n", e.getValue(), card.getName()));
+                out.add(String.format("%d %s%n", e.getValue(), card.getName()));
             } else {
-                out.write(String.format("%d %s|%s%n", e.getValue(), card.getName(), card.getSet()));
+                out.add(String.format("%d %s|%s%n", e.getValue(), card.getName(), card.getSet()));
             }
         }
+        return out;
     }
 
     /**
@@ -755,14 +750,7 @@ public class DeckManager {
      *            a {@link java.io.File} object.
      */
     public static void writeDeck(final Deck d, final File f) {
-        try {
-            final BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-            DeckManager.writeDeck(d, writer);
-            writer.close();
-        } catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        FileUtil.writeFile(f, DeckManager.serializeDeck(d));
     }
 
     /**
