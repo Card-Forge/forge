@@ -1,7 +1,8 @@
 Name:Curse of Death's Hold
 ManaCost:3 B B
 Types:Enchantment Aura Curse
-Text:Enchant player
+Text:no text
+K:Enchant player
 A:SP$ Attach | Cost$ 3 B B | ValidTgts$ Player | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedPlayerCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Creatures enchanted player controls gets -1/-1.
 SVar:Rarity:Rare

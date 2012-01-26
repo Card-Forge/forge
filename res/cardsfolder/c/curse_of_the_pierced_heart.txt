@@ -1,7 +1,8 @@
 Name:Curse of the Pierced Heart
 ManaCost:1 R
 Types:Enchantment Aura Curse
-Text:Enchant player
+Text:no text
+K:Enchant player
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of enchanted player's upkeep, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ Player.EnchantedBy | NumDmg$ 1
