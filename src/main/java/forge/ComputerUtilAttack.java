@@ -443,6 +443,7 @@ public class ComputerUtilAttack {
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
             if ((attacker.hasKeyword("CARDNAME attacks each turn if able.")
+                    || !attacker.getSVar("MustAttack").equals("")
                     || attacker.hasKeyword("At the beginning of the end step, destroy CARDNAME.")
                     || attacker.hasKeyword("At the beginning of the end step, exile CARDNAME.")
                     || attacker.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
