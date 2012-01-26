@@ -172,6 +172,20 @@ Lashknife Barrier
 - Added Kalitas, Bloodchief of Ghet and uncommented the relevant token image download link.
 - Ran Oracle and SetInfo scripts
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added "SVar:MustBeBlocked:True" to some creatures.
+- Updated some token lines so that the token images will be displayed.
+- fixed stack description crash when ChangeNum is not present
+- CheckStyle.
+- Added an AILogic parameter to AF NameCard.
+- Tiny text addition.
+- add an Image parameter to AF_Effect (Image$ file_name_without_extension)
+- add Emblem image for Sorin, Lord of Innistrad
+- Removing debug code from AF Effect.
+- Added MustBeBlocked:True to Phage the Untouchable.
+- Added provisions for cloning tokens, based on AF_Copy.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -357,6 +371,17 @@ Devoted Caretaker
 Kaervek's Purge
 Kalitas, Bloodchief of Ghet
 Ageless Sentinels
+Electryte
+Ashling, the Extinguisher
+Arachnus Spinner
+Wall of Deceit
+Dead Reckoning
+Vexing Arcanix
+Petra Sphinx
+Nomad Decoy
+Nantuko Mentor
+Mad Dog
+Batwing Brume
 
 
 end
