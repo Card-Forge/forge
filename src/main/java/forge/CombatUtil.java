@@ -1138,7 +1138,7 @@ public class CombatUtil {
             final CardList blockers = combat.getBlockers(attacker);
 
             if (blockers.size() == 0) {
-                if (attacker.getSVar("MustBeBlocked") != null) {
+                if (!attacker.getSVar("MustBeBlocked").equals("")) {
                     return true;
                 }
             }
@@ -1192,7 +1192,7 @@ public class CombatUtil {
             final CardList blockers = combat.getBlockers(attacker);
 
             if (blockers.size() == 0) {
-                if (attacker.getSVar("MustBeBlocked") != null) {
+                if (!attacker.getSVar("MustBeBlocked").equals("")) {
                     return true;
                 }
             }
