@@ -90,7 +90,7 @@ public class InputBlock extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (CombatUtil.finishedMandatotyBlocks(AllZone.getCombat())) {
+        if (CombatUtil.finishedMandatoryBlocks(AllZone.getCombat())) {
             // Done blocking
             ButtonUtil.reset();
 

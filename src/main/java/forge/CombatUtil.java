@@ -387,7 +387,7 @@ public class CombatUtil {
      *            a {@link forge.Combat} object.
      * @return a boolean.
      */
-    public static boolean finishedMandatotyBlocks(final Combat combat) {
+    public static boolean finishedMandatoryBlocks(final Combat combat) {
 
         final CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
         final CardList attackers = new CardList(combat.getAttackers());
