@@ -2065,7 +2065,27 @@ public class CardFactoryCreatures {
 
                         AllZone.getTriggerHandler().suppressMode("Transformed");
 
-                        cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
+                        if(copyTarget[0].isToken()) {
+                            cloned = CardFactoryUtil.copyStats(copyTarget[0]);
+
+                            cloned.setName(copyTarget[0].getName());
+                            cloned.setImageName(copyTarget[0].getImageName());
+
+                            cloned.setOwner(this.getActivatingPlayer());
+                            cloned.addController(this.getActivatingPlayer());
+
+                            cloned.setManaCost(copyTarget[0].getManaCost());
+                            cloned.setColor(copyTarget[0].getColor());
+                            cloned.setToken(true);
+
+                            cloned.setType(copyTarget[0].getType());
+
+                            cloned.setBaseAttack(copyTarget[0].getBaseAttack());
+                            cloned.setBaseDefense(copyTarget[0].getBaseDefense());
+                        }
+                        else {
+                            cloned = cfact.getCard(copyTarget[0].getState("Original").getName(), card.getOwner());
+                        }
                         card.addAlternateState("Cloner");
                         card.switchStates("Original", "Cloner");
                         card.setState("Original");
