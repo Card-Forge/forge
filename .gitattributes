@@ -4271,6 +4271,7 @@ res/cardsfolder/i/isleback_spawn.txt svneol=native#text/plain
 res/cardsfolder/i/isochron_scepter.txt svneol=native#text/plain
 res/cardsfolder/i/isolated_chapel.txt -text
 res/cardsfolder/i/isolation_cell.txt svneol=native#text/plain
+res/cardsfolder/i/isperia_the_inscrutable.txt -text svneol=unset#text/plain
 res/cardsfolder/i/it_that_betrays.txt svneol=native#text/plain
 res/cardsfolder/i/ith_high_arcanist.txt svneol=native#text/plain
 res/cardsfolder/i/ivory_charm.txt -text
