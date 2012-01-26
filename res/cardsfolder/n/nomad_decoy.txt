@@ -8,4 +8,5 @@ A:AB$ Tap | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:X:Count$InYourYard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_decoy.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/37.jpg
 End

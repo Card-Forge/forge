@@ -10,4 +10,5 @@ SVar:Z:Count$Valid Card.Self+attackedThisTurn
 SVar:X:SVar$Y/Plus.Z
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_dog.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/202.jpg
 End
