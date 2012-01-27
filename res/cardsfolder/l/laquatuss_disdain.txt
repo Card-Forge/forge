@@ -4,6 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell cast from a graveyard | ValidTgts$ Card.wasCastFromGraveyard | SubAbility$ DBDraw | SpellDescription$ Counter target spell cast from a graveyard. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_disdain.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/44.jpg
