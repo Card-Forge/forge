@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import forge.error.ErrorViewer;

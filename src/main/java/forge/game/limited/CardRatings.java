@@ -18,10 +18,10 @@
 package forge.game.limited;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -106,41 +106,32 @@ public class CardRatings {
      */
     public final void saveRatings() {
         if (CardRatings.fullRatings.size() > 1) {
-            final String[] keys = CardRatings.fullRatings.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-            final ArrayList<String> ratings = new ArrayList<String>();
-
-            for (final String k : keys) {
-                ratings.add(k + ":" + CardRatings.fullRatings.get(k));
-            }
-
-            FileUtil.writeFile("res/draft/fullRatings.dat", ratings);
+            saveSingleRating(fullRatings, "res/draft/fullRatings.dat");
         }
 
         if (CardRatings.blockRatings.size() > 1) {
-            final String[] keys = CardRatings.blockRatings.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-            final ArrayList<String> ratings = new ArrayList<String>();
-
-            for (final String k : keys) {
-                ratings.add(k + ":" + CardRatings.blockRatings.get(k));
-            }
-
-            FileUtil.writeFile("res/draft/blockRatings.dat", ratings);
+            saveSingleRating(blockRatings, "res/draft/blockRatings.dat");
         }
 
         if (CardRatings.customRatings.size() > 1) {
-            final String[] keys = CardRatings.customRatings.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-            final ArrayList<String> ratings = new ArrayList<String>();
-
-            for (final String k : keys) {
-                ratings.add(k + ":" + CardRatings.customRatings.get(k));
-            }
-
-            FileUtil.writeFile("res/draft/customRatings.dat", ratings);
+            saveSingleRating(customRatings, "res/draft/customRatings.dat");
         }
 
         if (CardRatings.tempRatings.size() > 1) {
+            Collections.sort( CardRatings.tempRatings );
             FileUtil.writeFile("res/draft/tempRatings.dat", CardRatings.tempRatings);
         }
+    }
+    
+    private final void saveSingleRating(Map<String,Integer> ratingData, String filename) {
+        final ArrayList<String> ratings = new ArrayList<String>();
+
+        for (final Entry<String,Integer> k : ratingData.entrySet()) {
+            ratings.add(k.getKey() + ":" + k.getValue());
+        }
+        
+        Collections.sort(ratings);
+        FileUtil.writeFile(filename, ratings);
     }
 
     /**
@@ -264,6 +255,7 @@ public class CardRatings {
      * Upload ratings.
      */
     public final void uploadRatings() {
+        Collections.sort(CardRatings.tempRatings);
         FileUtil.writeFile("res/draft/tempRatings.dat", CardRatings.tempRatings);
 
         final HttpUtil httpPost = new HttpUtil();
@@ -285,6 +277,7 @@ public class CardRatings {
         String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Full";
         tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);
+        Collections.sort(tmpList);
         FileUtil.writeFile("res/draft/fullRatings.dat", tmpList);
         CardRatings.fullRatings.clear();
         this.loadFullRatings();
@@ -294,6 +287,7 @@ public class CardRatings {
         url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Block";
         tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);
+        Collections.sort(tmpList);
         FileUtil.writeFile("res/draft/blockRatings.dat", tmpList);
         CardRatings.blockRatings.clear();
         this.loadBlockRatings();
@@ -303,6 +297,7 @@ public class CardRatings {
         url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/getRatingsData.php?fmt=Custom";
         tmpData = httpGet.getURL(url);
         tmpList.add(tmpData);
+        Collections.sort(tmpList);
         FileUtil.writeFile("res/draft/customRatings.dat", tmpList);
         CardRatings.customRatings.clear();
         this.loadCustomRatings();
