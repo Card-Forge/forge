@@ -229,6 +229,23 @@ Lashknife Barrier
 - Added the optional parameter "AttachedTo" to AF ChangeZone.
 - Improved the AI for Isperia the Inscrutable.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- add Dark Ascension to setInfoScript.py script
+- fixed name of Farbog Boneflinger
+- fixed name of Haunted Fengraf
+- fixed name of Elgaud Inquisitor
+- Fixed the description of Slowtrips.
+- final merge with trunk before branch is reintegrated (r13538-r13559)
+- adding cards from Dark Ascension branch into trunk
+- added some fixes that were made on DKA branch
+- Updated DKA reprints setinfo
+- Updated some SVars.
+- Added DKA to setdata.txt.
+- Added setinfo line to first face of DFC's.
+- Ran set info script.
+- Added a fluff piece to the changes.txt file.
+- Added another fluff piece to the changes.txt file.
+- Merged the two new card lists found in the changes.txt file into one list.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
