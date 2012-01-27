@@ -2212,6 +2212,7 @@ res/cardsfolder/d/divine_retribution.txt svneol=native#text/plain
 res/cardsfolder/d/divine_sacrament.txt svneol=native#text/plain
 res/cardsfolder/d/divine_transformation.txt svneol=native#text/plain
 res/cardsfolder/d/divine_verdict.txt svneol=native#text/plain
+res/cardsfolder/d/diviners_wand.txt -text
 res/cardsfolder/d/diving_griffin.txt svneol=native#text/plain
 res/cardsfolder/d/divining_witch.txt -text svneol=unset#text/plain
 res/cardsfolder/d/divinity_of_pride.txt svneol=native#text/plain
