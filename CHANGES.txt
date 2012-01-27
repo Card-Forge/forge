@@ -8,6 +8,22 @@ Forge Beta: 0#-##-2012 ver 1.2.# rev 13###
 The thread safety issue should now be fixed. This should prevent the crash reports that were stating that "Buffers have not been created".
 
 
+An Anouncement from the Forge dev team:
+---------------------------------------
+
+The Forge team is very proud to announce that more than 10,000 cards are now available for play! This is an impressive amount, particularly considering that as of October 2011, the official game has produced 12,246 unique cards.
+
+Rares, the creator of Forge, generously shared his work as an open source project about five years ago. Since then, dozens of people have contributed their talents to evolve the codebase to the point it's reached today: a game engine that can successfully juggle 10^5 unique cards, available for free.
+
+The honor of writing the 10,000th card has gone to an unnamed hero, which is suitable since it's these brave code warriors that make the game what it is. A well-deserved thanks to anyone who has volunteered their time to script, test, maintain, report, code, suggest, debug, design, or in any way contribute to this project.
+
+A special thanks in particular to the CCGH web site and its administrators for providing us with the Forge forum, and to the unsung team of people who quietly maintain the servers which assist this project in one fashion or another.
+
+With this in mind, we move onward and upward. Enjoy your next game of Forge!
+
+---------------------------------------
+
+
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
 We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
