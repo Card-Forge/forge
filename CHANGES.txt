@@ -231,8 +231,66 @@ Lashknife Barrier
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
-Added pre-release cards to DKA cardfolder branch:
+Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
+
+
+
+Added many cards, including:
+
+Bazaar Trader
+Famished Ghoul
+Gravegouger
+Divining Witch
+Predict
+Shelter
+Makeshift Mannequin
+Ronin Warclub
+Angelic Arbiter
+Cloak and Dagger
+Obsidian Battle-Axe
+Nim Deathmantle
+Trace of Abundance
+Laquatus's Disdain
+Cranial Plating
+Archangel's Light
+Wayward Angel
+Verdant Succession
+Spiritualize
+Spark Mage
+Shower of Coals
+Pedantic Learning
+Painbringer
+Phyrexian Splicer
+Horned Helm
+Neurok Stealthsuit
+Sparring Collar
+Devoted Caretaker
+Kaervek's Purge
+Kalitas, Bloodchief of Ghet
+Ageless Sentinels
+Electryte
+Ashling, the Extinguisher
+Arachnus Spinner
+Wall of Deceit
+Dead Reckoning
+Vexing Arcanix
+Petra Sphinx
+Nomad Decoy
+Nantuko Mentor
+Mad Dog
+Batwing Brume
+Gravestorm
+Isperia the Inscrutable
+Inescapable Brute
+Iridescent Drake
+Academy Researchers
+Dragon Breath
+Dragon Fangs
+Dragon Scales
+Thornbite Staff
+Deadly Allure
+Hinterland Hermit // Hinterland Scourge
 Afflicted Deserter // Werewolf Ransacker
 Beguiler of Wills
 Chalice of Life // Chalice of Death
@@ -279,7 +337,6 @@ Vault of the Archangel
 Vorapede
 Warden of the Wall
 Zombie Apocalypse
-
 Heavy Mattock
 Sudden Disappearance
 Gruesome Discovery
@@ -376,62 +433,6 @@ Relentless Skaabs
 Tower Geist
 Curse of Misfortunes
 Call to the Kindred
-
-
-Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
-
-
-
-
-Added many cards, including:
-
-Bazaar Trader
-Famished Ghoul
-Gravegouger
-Divining Witch
-Predict
-Shelter
-Makeshift Mannequin
-Ronin Warclub
-Angelic Arbiter
-Cloak and Dagger
-Obsidian Battle-Axe
-Nim Deathmantle
-Trace of Abundance
-Laquatus's Disdain
-Cranial Plating
-Archangel's Light
-Wayward Angel
-Verdant Succession
-Spiritualize
-Spark Mage
-Shower of Coals
-Pedantic Learning
-Painbringer
-Phyrexian Splicer
-Horned Helm
-Neurok Stealthsuit
-Sparring Collar
-Devoted Caretaker
-Kaervek's Purge
-Kalitas, Bloodchief of Ghet
-Ageless Sentinels
-Electryte
-Ashling, the Extinguisher
-Arachnus Spinner
-Wall of Deceit
-Dead Reckoning
-Vexing Arcanix
-Petra Sphinx
-Nomad Decoy
-Nantuko Mentor
-Mad Dog
-Batwing Brume
-Gravestorm
-Isperia the Inscrutable
-Inescapable Brute
-Iridescent Drake
-Academy Researchers
 
 
 end
