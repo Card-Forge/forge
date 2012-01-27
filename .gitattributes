@@ -3493,6 +3493,7 @@ res/cardsfolder/g/goblin_digging_team.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_dirigible.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_dynamo.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_elite_infantry.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_fire_fiend.txt -text
 res/cardsfolder/g/goblin_firebug.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_fireslinger.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_firestarter.txt svneol=native#text/plain
@@ -4343,6 +4344,7 @@ res/cardsfolder/i/ironhoof_ox.txt svneol=native#text/plain
 res/cardsfolder/i/ironroot_treefolk.txt svneol=native#text/plain
 res/cardsfolder/i/ironshell_beetle.txt svneol=native#text/plain
 res/cardsfolder/i/irradiate.txt svneol=native#text/plain
+res/cardsfolder/i/irresistible_prey.txt -text
 res/cardsfolder/i/irrigation_ditch.txt svneol=native#text/plain
 res/cardsfolder/i/isamaru_hound_of_konda.txt svneol=native#text/plain
 res/cardsfolder/i/isao_enlightened_bushi.txt svneol=native#text/plain
