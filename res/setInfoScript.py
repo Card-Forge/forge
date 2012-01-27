@@ -148,6 +148,7 @@ def initSets():
 
 	# Innistrad
 	allSets['Innistrad']='ISD'
+	allSets['Dark Ascension']='DKA'
 
 def addSets(card):
 	html = getURL('http://magiccards.info/query?q=!'+card.name)
