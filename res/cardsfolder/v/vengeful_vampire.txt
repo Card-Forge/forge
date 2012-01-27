@@ -1,0 +1,10 @@
+Name:Vengeful Vampire
+ManaCost:4 B B
+Types:Creature Vampire
+Text:no text
+PT:3/2
+K:Flying
+K:Undying
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_vampire.jpg
+SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/78.jpg
+End

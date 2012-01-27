@@ -1,0 +1,9 @@
+Name:Increasing Devotion
+ManaCost:3 W W
+Types:Sorcery
+Text:no text
+K:Flashback 7 W W
+A:SP$Token | Cost$ 3 W W | TokenAmount$ X | TokenName$ Human | TokenTypes$ Creature,Human | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | SpellDescription$ Put five 1/1 white Human creature tokens onto the battlefield. If CARDNAME was cast from a graveyard, put ten of those tokens onto the battlefield instead.
+SVar:X:Count$wasCastFromGraveyard.10.5
+SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/11.jpg
+End

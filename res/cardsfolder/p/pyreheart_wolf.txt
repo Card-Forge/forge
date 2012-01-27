@@ -1,0 +1,11 @@
+Name:Pyreheart Wolf
+ManaCost:2 R
+Types:Creature Wolf
+Text:no text
+PT:1/1
+K:Undying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each creature you control can't be blocked this turn except by two or more creatures.
+SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ CARDNAME can't be blocked except by two or more creatures.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyreheart_wolf.jpg
+SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/101.jpg
+End

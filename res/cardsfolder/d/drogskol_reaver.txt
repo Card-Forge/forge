@@ -1,0 +1,14 @@
+Name:Drogskol Reaver
+ManaCost:5 W U
+Types:Creature Spirit
+Text:no text
+PT:3/5
+K:Flying
+K:Double Strike
+K:Lifelink
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield  |Execute$ TrigDraw | TriggerDescription$ Whenever you gain life, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drogskol_reaver.jpg
+SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/137.jpg
+End

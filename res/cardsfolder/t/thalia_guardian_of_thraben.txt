@@ -1,0 +1,12 @@
+Name:Thalia, Guardian of Thraben
+ManaCost:1 W
+Types:Legendary Creature Human Soldier
+Text:no text
+PT:2/1
+K:First Strike
+K:CostChange:All:More:1:Spell:All:Creature:NonType:Desc|Noncreature spells cost 1 more to cast.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thalia_guardian_of_thraben.jpg
+Oracle:First Strike\nNoncreature spells cost {1} more to cast.
+SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/24.jpg
+End

@@ -1,0 +1,23 @@
+Name:Loyal Cathar
+ManaCost:W W
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDelay | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control at the beginning of the next end step.
+SVar:TrigDelay:AB$ DelayedTrigger | Cost$ 0 | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ return CARDNAME to the battlefield transformed
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ TrigTransform
+SVar:TrigTransform:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_cathar.jpg
+AlternateMode:DoubleFaced
+ALTERNATE
+Name:Unhallowed Cathar
+ManaCost:no cost
+Colors:black
+Types:Creature Zombie Soldier
+Text:no text
+PT:2/1
+K:CARDNAME can't block.
+SVar:Picture1:http://www.wizards.com/global/images/magic/general/unhallowed_cathar.jpg
+SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/13a.jpg
+End

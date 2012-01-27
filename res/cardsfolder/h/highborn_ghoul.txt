@@ -1,0 +1,9 @@
+Name:Highborn Ghoul
+ManaCost:B B
+Types:Creature Zombie
+Text:no text
+PT:2/1
+K:Intimidate
+SVar:Picture:http://www.wizards.com/global/images/magic/general/highborn_ghoul.jpg
+SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/68.jpg
+End

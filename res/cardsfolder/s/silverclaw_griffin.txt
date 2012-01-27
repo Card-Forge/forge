@@ -1,0 +1,11 @@
+Name:Silverclaw Griffin
+ManaCost:3 W W
+Types:Creature Griffin
+Text:no text
+PT:3/2
+K:Flying
+K:First Strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silverclaw_griffin.jpg
+SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/21.jpg
+End

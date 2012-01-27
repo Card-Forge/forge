@@ -1,0 +1,27 @@
+Name:Huntmaster of the Fells
+ManaCost:2 R G
+Types:Creature Human Werewolf
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TokenAndLife | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TokenAndLife | Secondary$ True | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.
+SVar:TokenAndLife:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenPower$ 2 | TokenToughness$ 2 | TokenAmount$ 1 | SubAbility$ Life
+SVar:Life:DB$ GainLife | Defined$ You | LifeAmount$ 2
+T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
+AlternateMode:DoubleFaced
+#Shared
+SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+ALTERNATE
+Name:Ravager of the Fells
+ManaCost:no cost
+Colors:green,red
+Types:Creature Werewolf
+Text:no text
+PT:4/4
+K:Trample
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ DamageAndMoreDamage | TriggerDescription$ Whenever this creature transforms into CARDNAME, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
+SVar:DamageAndMoreDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ 2 | SubAbility$ MoreDamage
+SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | NumDmg$ 2 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature opponent controls
+T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/140a.jpg
+End

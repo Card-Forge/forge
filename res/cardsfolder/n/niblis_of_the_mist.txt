@@ -1,0 +1,13 @@
+Name:Niblis of the Mist
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap target creature.
+SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/niblis_of_the_mist.jpg
+SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/15.jpg
+End

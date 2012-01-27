@@ -1,0 +1,11 @@
+Name:Geralf's Mindcrusher
+ManaCost:4 U U
+Types:Creature Zombie Horror
+Text:no text
+PT:5/5
+K:Undying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player puts the top 5 cards of his or her library into his or her graveyard.
+SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player
+SVar:Picture:http://www.wizards.com/global/images/magic/general/geralfs_mindcrusher.jpg
+SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/37.jpg
+End

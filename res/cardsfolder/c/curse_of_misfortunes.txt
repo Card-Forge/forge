@@ -1,0 +1,9 @@
+Name:Curse of Misfortunes
+ManaCost:4 B
+Types:Enchantment Aura Curse
+Text:At the beginning of your upkeep, you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle you library.
+K:Enchant player
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Player | AILogic$ Curse
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_misfortunes.jpg
+SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/56.jpg
+End
