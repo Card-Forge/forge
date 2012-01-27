@@ -1471,6 +1471,9 @@ public final class AbilityFactoryChoose {
                             if (logic.equals("MostProminentInComputerDeck")) {
                                 chosen = CardFactoryUtil.getMostProminentCardName(AllZone.getComputerPlayer()
                                         .getCardsIn(Constant.Zone.Library));
+                            } else if (logic.equals("MostProminentInHumanDeck")) {
+                                chosen = CardFactoryUtil.getMostProminentCardName(AllZone.getHumanPlayer()
+                                        .getCardsIn(Constant.Zone.Library));
                             }
                         } else {
                             CardList list = AllZoneUtil.getCardsInGame().getController(AllZone.getHumanPlayer());
@@ -1485,7 +1488,7 @@ public final class AbilityFactoryChoose {
                             }
                         }
                         if (chosen == "") {
-                            chosen = "Forest";
+                            chosen = "Morphling";
                         }
                         GuiUtils.getChoice("Computer picked: ", chosen);
                         host.setNamedCard(chosen);
