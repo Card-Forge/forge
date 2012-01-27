@@ -2232,6 +2232,7 @@ res/cardsfolder/d/drag_down.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_appeasement.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_arch.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_blood.txt svneol=native#text/plain
+res/cardsfolder/d/dragon_breath.txt -text
 res/cardsfolder/d/dragon_broodmother.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_engine.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_fodder.txt svneol=native#text/plain
