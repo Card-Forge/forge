@@ -19,8 +19,10 @@ package forge.game.limited;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
@@ -28,8 +30,6 @@ import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Closure1;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import forge.AllZone;
 import forge.Card;
@@ -361,12 +361,10 @@ public final class BoosterDraft implements IBoosterDraft {
             if (this.draftPicks.size() > 1) {
                 final ArrayList<String> outDraftData = new ArrayList<String>();
 
-                final String[] keys = this.draftPicks.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-
-                for (final String key : keys) {
-                    outDraftData.add(key + "|" + this.draftPicks.get(key));
+                for (final Entry<String, Float> key : this.draftPicks.entrySet()) {
+                    outDraftData.add(key.getValue() + "|" + key.getKey());
                 }
-
+                Collections.sort(outDraftData);
                 FileUtil.writeFile("res/draft/tmpDraftData.txt", outDraftData);
 
                 final HttpUtil poster = new HttpUtil();

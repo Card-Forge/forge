@@ -20,6 +20,7 @@ import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckIO;
 import forge.deck.DeckManager;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorCommon;
@@ -298,7 +299,7 @@ public class DeckLister extends JPanel {
             deckmanager.deleteDraftDeck(d0.getName());
 
             // Since draft deck files are really directories, must delete all children first.
-            File dir = DeckManager.makeFileName(d0.getName(), GameType.Draft);
+            File dir = DeckIO.makeFileName(d0.getName(), GameType.Draft);
             String[] children = dir.list();
 
             for (int i = 0; i < children.length; i++) {
@@ -310,8 +311,8 @@ public class DeckLister extends JPanel {
         else if (gametype.equals(GameType.Sealed)) {
             deckmanager.deleteDeck(d0.getName());
 
-            File address1 = DeckManager.makeFileName(d0.getName(), GameType.Sealed);
-            File address2 = DeckManager.makeFileName("AI_" + d0.getName(), GameType.Sealed);
+            File address1 = DeckIO.makeFileName(d0.getName(), GameType.Sealed);
+            File address2 = DeckIO.makeFileName("AI_" + d0.getName(), GameType.Sealed);
 
             // not working??!!
             address1.delete();
@@ -320,7 +321,7 @@ public class DeckLister extends JPanel {
         else {
             deckmanager.deleteDeck(d0.getName());
 
-            File address1 = DeckManager.makeFileName(d0.getName(), GameType.Constructed);
+            File address1 = DeckIO.makeFileName(d0.getName(), GameType.Constructed);
             address1.delete();
         }
 

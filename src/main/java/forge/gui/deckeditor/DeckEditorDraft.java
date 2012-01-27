@@ -41,6 +41,7 @@ import forge.AllZone;
 import forge.Constant;
 import forge.control.FControl;
 import forge.deck.Deck;
+import forge.deck.DeckIO;
 import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -348,7 +349,7 @@ public class DeckEditorDraft extends DeckEditorBase {
         deckManager.addDraftDeck(all);
 
         // write file
-        DeckManager.writeDraftDecks(all);
+        DeckIO.writeDraftDecks(all);
 
         // close and open next screen
         this.dispose();

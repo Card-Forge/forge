@@ -39,6 +39,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.deck.Deck;
+import forge.deck.DeckIO;
 import forge.deck.DeckManager;
 import forge.deck.generate.GenerateConstructedDeck;
 import forge.error.ErrorViewer;
@@ -231,7 +232,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
     private File getImportFilename() {
         final JFileChooser chooser = new JFileChooser(DeckEditorCommonMenu.previousDirectory);
 
-        chooser.addChoosableFileFilter(DeckManager.DCK_FILTER);
+        chooser.addChoosableFileFilter(DeckIO.DCK_FILTER);
         final int returnVal = chooser.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -260,7 +261,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
                 srcChannel.close();
                 dstChannel.close();
 
-                final Deck newDeck = DeckManager.readDeck(file);
+                final Deck newDeck = DeckIO.readDeck(file);
                 this.deckManager.addDeck(newDeck);
                 this.showDeck(newDeck, newDeck.getDeckType());
 
@@ -285,7 +286,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
 
         final Deck deck = this.getDeck();
         try {
-            DeckManager.writeDeck(deck, filename);
+            DeckIO.writeDeck(deck, filename);
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : exportDeck() error, " + ex);
@@ -296,7 +297,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
         final JFileChooser save = new JFileChooser(DeckEditorCommonMenu.previousDirectory);
         save.setDialogTitle("Export Deck Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
-        save.setFileFilter(DeckManager.DCK_FILTER);
+        save.setFileFilter(DeckIO.DCK_FILTER);
 
         if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = save.getSelectedFile();
@@ -322,7 +323,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
 
         final Deck deck = this.getDeck();
         try {
-            DeckManager.writeDeckHtml(deck, filename);
+            DeckIO.writeDeckHtml(deck, filename);
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : printProxies() error, " + ex);
@@ -333,7 +334,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
         final JFileChooser save = new JFileChooser(DeckEditorCommonMenu.previousDirectory);
         save.setDialogTitle("Proxy HTML Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
-        save.setFileFilter(DeckManager.HTML_FILTER);
+        save.setFileFilter(DeckIO.HTML_FILTER);
 
         if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = save.getSelectedFile();
@@ -394,11 +395,11 @@ public final class DeckEditorCommonMenu extends JMenuBar {
             final Deck[] all = this.deckManager.getDraftDeck(this.currentDeckName);
             all[0] = deck;
             this.deckManager.addDraftDeck(all);
-            DeckManager.writeDraftDecks(all);
+            DeckIO.writeDraftDecks(all);
         } else { // constructed or sealed
             this.setDeckData(this.currentDeckName, true);
             this.deckManager.addDeck(deck);
-            DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
+            DeckIO.writeDeck(deck, DeckIO.makeFileName(deck));
         }
         this.isDeckSaved = true;
     }
@@ -421,10 +422,10 @@ public final class DeckEditorCommonMenu extends JMenuBar {
 
             all[0] = deck;
             this.deckManager.addDraftDeck(all);
-            DeckManager.writeDraftDecks(all);
+            DeckIO.writeDraftDecks(all);
         } else { // constructed and sealed
             this.deckManager.addDeck(deck);
-            DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
+            DeckIO.writeDeck(deck, DeckIO.makeFileName(deck));
         }
         this.isDeckSaved = true;
     }
@@ -480,7 +481,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
 
         final Deck deck = this.getDeck();
         deck.setName(this.currentDeckName);
-        DeckManager.writeDeck(deck, DeckManager.makeFileName(deck));
+        DeckIO.writeDeck(deck, DeckIO.makeFileName(deck));
         return true;
     }
 
@@ -531,7 +532,7 @@ public final class DeckEditorCommonMenu extends JMenuBar {
             return "";
         }
 
-        final String deckName = DeckManager.cleanDeckName(o.toString());
+        final String deckName = DeckIO.cleanDeckName(o.toString());
         final boolean isDraft = this.deckDisplay.getGameType() == GameType.Draft;
         final boolean isUniqueName = isDraft ? this.deckManager.isUniqueDraft(deckName) : this.deckManager
                 .isUnique(deckName);

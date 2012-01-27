@@ -11145,6 +11145,7 @@ src/main/java/forge/control/match/package-info.java -text
 src/main/java/forge/control/package-info.java -text
 src/main/java/forge/deck/Deck.java svneol=native#text/plain
 src/main/java/forge/deck/DeckGeneration.java -text
+src/main/java/forge/deck/DeckIO.java -text
 src/main/java/forge/deck/DeckManager.java svneol=native#text/plain
 src/main/java/forge/deck/DeckRecognizer.java -text
 src/main/java/forge/deck/generate/Generate2ColorDeck.java svneol=native#text/plain

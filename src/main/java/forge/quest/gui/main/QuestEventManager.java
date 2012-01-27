@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
+import forge.deck.DeckIO;
 import forge.deck.DeckManager;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -78,7 +79,7 @@ public class QuestEventManager {
 
         final DeckManager manager = new DeckManager(file);
 
-        final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckManager.DCK_FILE_FILTER);
+        final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckIO.DCK_FILE_FILTER);
 
         for (final File f : allFiles) {
             contents = FileUtil.readFile(f);

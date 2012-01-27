@@ -42,7 +42,7 @@ import forge.Command;
 import forge.Constant;
 import forge.card.CardRules;
 import forge.deck.Deck;
-import forge.deck.DeckManager;
+import forge.deck.DeckIO;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
@@ -317,7 +317,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
         if (file == null) {
         } else if (file.getName().endsWith(".dck")) {
             try {
-                final Deck newDeck = DeckManager.readDeck(file);
+                final Deck newDeck = DeckIO.readDeck(file);
                 this.questData.addDeck(newDeck);
 
                 final ItemPool<CardPrinted> cardpool = ItemPool.createFrom(this.questData.getCards().getCardpool(),

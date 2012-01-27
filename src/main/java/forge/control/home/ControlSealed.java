@@ -18,6 +18,7 @@ import forge.Constant;
 import forge.PlayerType;
 import forge.control.FControl;
 import forge.deck.Deck;
+import forge.deck.DeckIO;
 import forge.deck.DeckManager;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
@@ -209,7 +210,7 @@ public class ControlSealed {
             aiDeck.setName("AI_" + sDeckName);
             aiDeck.setPlayerType(PlayerType.COMPUTER);
             deckManager.addDeck(aiDeck);
-            DeckManager.writeDeck(aiDeck, DeckManager.makeFileName(aiDeck));
+            DeckIO.writeDeck(aiDeck, DeckIO.makeFileName(aiDeck));
 
             view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, deck);
         }
