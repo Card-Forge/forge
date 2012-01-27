@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ T
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | Sacrifice$ True | TgtPrompt$ Select target creature defending player controls
 SVar:MustBeBlocked:True
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ashling_the_extinguisher.jpg
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Eventide/ashling_the_extinguisher.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/33.jpg
 Oracle:Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.
 End
