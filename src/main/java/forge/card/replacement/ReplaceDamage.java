@@ -85,6 +85,9 @@ public class ReplaceDamage extends ReplacementEffect {
                 }
             }
         }
+        if (getMapParams().containsKey("IsEquipping") && !getHostCard().isEquipping()) {
+            return false;
+        }
 
         return true;
     }
