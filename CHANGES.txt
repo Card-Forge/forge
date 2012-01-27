@@ -7,6 +7,8 @@ Forge Beta: 0#-##-2012 ver 1.2.# rev 13###
 
 The thread safety issue should now be fixed. This should prevent the crash reports that were stating that "Buffers have not been created".
 
+We have merged the new cards from the new Dark Ascension set into the main trunk of the forge project. Our testers are asked to test these new cards out and to report any problems with these new cards. There may be a few areas in the game where we have not added the needed set info so please be patient as we try to add in the missing pieces before the next beta release.
+
 
 An Anouncement from the Forge dev team:
 ---------------------------------------
