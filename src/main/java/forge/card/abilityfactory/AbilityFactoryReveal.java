@@ -393,9 +393,11 @@ public final class AbilityFactoryReveal {
                 if (top.size() > 0) {
                     final Card dummy = new Card();
                     dummy.setName("[No valid cards]");
+                    boolean cardsRevealed = false;
 
                     if (params.containsKey("Reveal")) {
                         GuiUtils.getChoice("Revealing cards from library", top.toArray());
+                        cardsRevealed = true;
                         // AllZone.getGameAction().revealToCopmuter(top.toArray());
                         // - for when it exists
                     } else if (params.containsKey("RevealOptional")) {
@@ -406,23 +408,31 @@ public final class AbilityFactoryReveal {
                         if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
                             GuiUtils.getChoice("Revealing cards from library", top.toArray());
                             // AllZone.getGameAction().revealToCopmuter(top.toArray());
-                            if (params.containsKey("RememberRevealed")) {
-                                for (final Card one : top) {
-                                    host.addRemembered(one);
-                                }
-                            }
+                            cardsRevealed = true;
                         }
                     } else if (params.containsKey("RevealValid")) {
                         final String revealValid = params.get("RevealValid");
                         final CardList toReveal = top.getValidCards(revealValid, host.getController(), host);
                         if (!toReveal.isEmpty()) {
                             GuiUtils.getChoice("Revealing cards from library", toReveal.toArray());
+                            if (params.containsKey("RememberRevealed")) {
+                                for (final Card one : toReveal) {
+                                    host.addRemembered(one);
+                                }
+                            }
                         }
                         // AllZone.getGameAction().revealToCopmuter(top.toArray());
                         // - for when it exists
                     } else if (choser.isHuman()) {
                         // show the user the revealed cards
                         GuiUtils.getChoice("Looking at cards from library", top.toArray());
+                        cardsRevealed = true;
+                    }
+
+                    if ((params.containsKey("RememberRevealed")) && cardsRevealed) {
+                        for (final Card one : top) {
+                            host.addRemembered(one);
+                        }
                     }
 
                     if (!noMove) {
