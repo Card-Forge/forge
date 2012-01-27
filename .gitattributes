@@ -2235,10 +2235,12 @@ res/cardsfolder/d/dragon_blood.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_breath.txt -text
 res/cardsfolder/d/dragon_broodmother.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_engine.txt svneol=native#text/plain
+res/cardsfolder/d/dragon_fangs.txt -text
 res/cardsfolder/d/dragon_fodder.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_mage.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_mask.txt -text
 res/cardsfolder/d/dragon_roost.txt svneol=native#text/plain
+res/cardsfolder/d/dragon_scales.txt -text
 res/cardsfolder/d/dragon_tyrant.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_whelp.txt svneol=native#text/plain
 res/cardsfolder/d/dragonmaster_outcast.txt svneol=native#text/plain
