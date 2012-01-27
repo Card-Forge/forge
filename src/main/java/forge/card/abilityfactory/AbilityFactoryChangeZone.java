@@ -32,6 +32,7 @@ import forge.CardUtil;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.GameEntity;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
@@ -1800,6 +1801,21 @@ public final class AbilityFactoryChangeZone {
                         }
                         if (params.containsKey("GainControl")) {
                             tgtC.addController(af.getHostCard());
+                        }
+                        if (params.containsKey("AttachedTo")) {
+                            ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                            if (!list.isEmpty()) {
+                                Card attachedTo = list.get(0);
+                                if (tgtC.isEnchanting()) {
+                                    // If this Card is already Enchanting something
+                                    // Need to unenchant it, then clear out the commands
+                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
+                                    tgtC.removeEnchanting(oldEnchanted);
+                                    tgtC.clearEnchantCommand();
+                                    tgtC.clearUnEnchantCommand();
+                                }
+                                tgtC.enchantEntity(attachedTo);
+                            }
                         }
                         // Auras without Candidates stay in their current
                         // location

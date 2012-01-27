@@ -265,7 +265,8 @@ public class GameAction {
             c.setCastFrom(null);
         }
 
-        if (c.isAura() && zone.is(Constant.Zone.Battlefield) && ((prev == null) || !prev.is(Constant.Zone.Stack))) {
+        if (c.isAura() && zone.is(Constant.Zone.Battlefield) && ((prev == null) || !prev.is(Constant.Zone.Stack))
+                && !c.isEnchanting()) {
             // TODO Need a way to override this for Abilities that put Auras
             // into play attached to things
             AbilityFactoryAttach.attachAuraOnIndirectEnterBattlefield(c);
