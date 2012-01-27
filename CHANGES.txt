@@ -186,6 +186,31 @@ Lashknife Barrier
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a bug with the MustBeBlocked SVar.
+- CheckStyle.
+- Added a new AI SVar: MustAttack.
+- Added it to Mad Dog.
+- Rollback Mantis transitive depedencies removal
+- added intimidate to Immerwolf
+- added Enchant Player keyword to DKA curses
+- added Enchant player keyword to Aura Curses
+- added hard coded Curse of Misfortunes until attach AF is updated
+- extended sharesCreatureTypeWith capability
+- merged updates (r13309-r13538) from trunk cardsfolder into DKA branch.
+- Fixed a misnamed function.
+- minor refactoring - moved some auxiliary classes to forge.util package
+- FileFinder is also better looking at utils package
+- DeckManager now uses fileUtil to save decks
+- extended RememberReveal to work with all the possible reveal conditions. Fixed Brutal/Callous/Feral Deceiver scripts.
+- Converted Lord of the Pit and Liege of the Pit to scripts.
+- removed sort from FileUtil.writeFile
+- reading deck in sections
+- moved collections.sort into callers of FileUtil.writeFile that relied on named functionality
+- Checkstyle
+- Added the keyword "CARDNAME must be blocked if able.".
+- Added the optional parameter "AttachedTo" to AF ChangeZone.
+- Improved the AI for Isperia the Inscrutable.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Added pre-release cards to DKA cardfolder branch:
@@ -331,6 +356,8 @@ Mystic Retrieval
 Niblis of the Breath
 Relentless Skaabs
 Tower Geist
+Curse of Misfortunes
+Call to the Kindred
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -382,6 +409,11 @@ Nomad Decoy
 Nantuko Mentor
 Mad Dog
 Batwing Brume
+Gravestorm
+Isperia the Inscrutable
+Inescapable Brute
+Iridescent Drake
+Academy Researchers
 
 
 end
