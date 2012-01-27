@@ -1957,6 +1957,7 @@ res/cardsfolder/d/dead_reckoning.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dead_weight.txt -text
 res/cardsfolder/d/deadapult.txt svneol=native#text/plain
 res/cardsfolder/d/deadfall.txt svneol=native#text/plain
+res/cardsfolder/d/deadly_allure.txt -text
 res/cardsfolder/d/deadly_grub.txt svneol=native#text/plain
 res/cardsfolder/d/deadly_insect.txt svneol=native#text/plain
 res/cardsfolder/d/deadly_recluse.txt svneol=native#text/plain
@@ -3994,6 +3995,7 @@ res/cardsfolder/h/hillcomber_giant.txt svneol=native#text/plain
 res/cardsfolder/h/hindering_light.txt svneol=native#text/plain
 res/cardsfolder/h/hindering_touch.txt svneol=native#text/plain
 res/cardsfolder/h/hinterland_harbor.txt -text
+res/cardsfolder/h/hinterland_hermit_hinterland_scourge.txt -text
 res/cardsfolder/h/hired_giant.txt svneol=native#text/plain
 res/cardsfolder/h/hired_muscle_scarmaker.txt -text
 res/cardsfolder/h/hisokas_defiance.txt svneol=native#text/plain
