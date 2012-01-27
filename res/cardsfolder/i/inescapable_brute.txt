@@ -1,0 +1,12 @@
+Name:Inescapable Brute
+ManaCost:5 R
+Types:Creature Giant Warrior
+Text:no text
+PT:3/3
+K:Wither
+K:CARDNAME must be blocked if able.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inescapable_brute.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/95.jpg
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nInescapable Brute must be blocked if able.
+End

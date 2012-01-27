@@ -892,7 +892,9 @@ public class ComputerUtilBlock {
             for (final Card attacker : ComputerUtilBlock.getAttackers()) {
                 blockers = ComputerUtilBlock.getPossibleBlockers(attacker, chumpBlockers, combat);
                 for (final Card blocker : blockers) {
-                    if (CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilBlock.getBlockersLeft().contains(blocker)) {
+                    if (CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilBlock.getBlockersLeft().contains(blocker)
+                            && (CombatUtil.mustBlockAnAttacker(blocker, combat) 
+                                    || blocker.hasKeyword("CARDNAME blocks each turn if able."))) {
                         combat.addBlocker(attacker, blocker);
                         ComputerUtilBlock.getBlockersLeft().removeAll(blocker);
                     }

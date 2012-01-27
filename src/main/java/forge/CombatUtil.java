@@ -452,8 +452,14 @@ public class CombatUtil {
             return false;
         }
 
-        CardList attackersWithLure = new CardList(combat.getAttackers());
-        attackersWithLure = attackersWithLure.getKeyword("All creatures able to block CARDNAME do so.");
+        CardList attackers = new CardList(combat.getAttackers());
+        CardList attackersWithLure = new CardList();
+        for (Card attacker : attackers) {
+            if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
+                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.") 
+                            && combat.getBlockers(attacker).isEmpty()))
+            attackersWithLure.add(attacker);
+        }
 
         for (final Card attacker : attackersWithLure) {
             if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
@@ -520,6 +526,7 @@ public class CombatUtil {
         // if the attacker has no lure effect, but the blocker can block another
         // attacker with lure, the blocker can't block the former
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
+                && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
                 && !blocker.getMustBlockCards().contains(attacker) && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
             return false;
         }

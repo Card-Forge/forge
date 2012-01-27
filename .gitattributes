@@ -4154,6 +4154,7 @@ res/cardsfolder/i/indrik_stomphowler.txt svneol=native#text/plain
 res/cardsfolder/i/induce_despair.txt -text
 res/cardsfolder/i/induce_paranoia.txt -text svneol=unset#text/plain
 res/cardsfolder/i/inertia_bubble.txt svneol=native#text/plain
+res/cardsfolder/i/inescapable_brute.txt -text
 res/cardsfolder/i/inexorable_tide.txt svneol=native#text/plain
 res/cardsfolder/i/infantry_veteran.txt svneol=native#text/plain
 res/cardsfolder/i/infected_vermin.txt svneol=native#text/plain
