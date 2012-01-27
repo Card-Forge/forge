@@ -229,6 +229,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 }
             };
             slowtrip.setStackDescription(card + " - Draw a card.");
+            slowtrip.setDescription(card + " - Draw a card.");
 
             AllZone.getStack().addSimultaneousStackEntry(slowtrip);
 
@@ -253,6 +254,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 }
             };
             slowtrip.setStackDescription(card.getName() + " - Draw a card");
+            slowtrip.setDescription(card + " - Draw a card.");
 
             AllZone.getStack().addSimultaneousStackEntry(slowtrip);
 
