@@ -858,6 +858,22 @@ public final class AbilityFactoryChangeZone {
                     if (params.containsKey("GainControl")) {
                         c.addController(af.getHostCard());
                     }
+                    
+                    if (params.containsKey("AttachedTo")) {
+                        ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                        if (!list.isEmpty()) {
+                            Card attachedTo = list.get(0);
+                            if (c.isEnchanting()) {
+                                // If this Card is already Enchanting something
+                                // Need to unenchant it, then clear out the commands
+                                final GameEntity oldEnchanted = c.getEnchanting();
+                                c.removeEnchanting(oldEnchanted);
+                                c.clearEnchantCommand();
+                                c.clearUnEnchantCommand();
+                            }
+                            c.enchantEntity(attachedTo);
+                        }
+                    }
 
                     if (params.containsKey("Attacking")) {
                         AllZone.getCombat().addAttacker(c);
@@ -1016,6 +1032,22 @@ public final class AbilityFactoryChangeZone {
                     c.addController(af.getHostCard());
                 }
 
+                if (params.containsKey("AttachedTo")) {
+                    ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                    if (!list.isEmpty()) {
+                        Card attachedTo = list.get(0);
+                        if (c.isEnchanting()) {
+                            // If this Card is already Enchanting something
+                            // Need to unenchant it, then clear out the commands
+                            final GameEntity oldEnchanted = c.getEnchanting();
+                            c.removeEnchanting(oldEnchanted);
+                            c.clearEnchantCommand();
+                            c.clearUnEnchantCommand();
+                        }
+                        c.enchantEntity(attachedTo);
+                    }
+                }
+                
                 if (params.containsKey("Attacking")) {
                     AllZone.getCombat().addAttacker(c);
                 }
