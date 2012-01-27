@@ -101,6 +101,24 @@ public class TriggerHandler {
     public final void clearDelayedTrigger() {
         this.delayedTriggers.clear();
     }
+    
+    /**
+     * <p>
+     * clearDelayedTrigger.
+     * </p>
+     * @param card
+     *            a card object.
+     */
+    public final void clearDelayedTrigger(Card card) {
+        ArrayList<Trigger> deltrigs = new ArrayList<Trigger>(this.delayedTriggers);
+        
+        for (Trigger trigger : deltrigs) {
+            if (trigger.getHostCard().equals(card)) {
+                this.delayedTriggers.remove(trigger);
+            }
+        }
+    }
+
 
     /**
      * <p>

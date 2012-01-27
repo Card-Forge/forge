@@ -19,6 +19,7 @@ package forge.card.abilityfactory;
 
 import java.util.HashMap;
 
+import forge.AllZone;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 
@@ -93,6 +94,9 @@ public final class AbilityFactoryCleanup {
         }
         if (params.containsKey("ClearChosenX")) {
             sa.getSourceCard().setSVar("ChosenX", "");
+        }
+        if (params.containsKey("ClearTriggered")) {
+            AllZone.getTriggerHandler().clearDelayedTrigger(sa.getSourceCard());
         }
     }
 
