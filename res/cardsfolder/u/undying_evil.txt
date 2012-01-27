@@ -3,6 +3,7 @@ ManaCost:B
 Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Undying | SpellDescription$ Target creature gains undying until end of turn.
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undying_evil.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/77.jpg
 End

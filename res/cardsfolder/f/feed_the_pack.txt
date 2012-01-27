@@ -8,6 +8,7 @@ SVar:DBToken:DB$ Token | Cost$ 0 | TokenAmount$ Y | TokenName$ Wolf | TokenColor
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Y:Remembered$CardToughness
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feed_the_pack.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/114.jpg
 End
