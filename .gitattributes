@@ -11141,6 +11141,7 @@ src/main/java/forge/util/FileFinder.java svneol=native#text/plain
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
 src/main/java/forge/util/MyRandom.java svneol=native#text/plain
+src/main/java/forge/util/SectionUtil.java -text
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/GuiTopLevel.java -text

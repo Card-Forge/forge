@@ -50,6 +50,7 @@ import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
+import forge.util.SectionUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -404,7 +405,8 @@ public class DeckManager {
     public static Deck readDeck(final File deckFile) {
 
         final List<String> lines = FileUtil.readFile(deckFile);
-        if (lines.isEmpty()) {
+        final Map<String,List<String>> sections = SectionUtil.parseSections(lines);
+        if (sections.isEmpty()) {
             return null;
         }
 
@@ -414,32 +416,19 @@ public class DeckManager {
         if (!firstLine.startsWith("[") || firstLine.equalsIgnoreCase("[general]")) {
             DeckManager.readDeckOldMetadata(lines.iterator(), d);
         } else {
-            DeckManager.readDeckMetadata(DeckManager.findSection(lines, "metadata"), d);
+            DeckManager.readDeckMetadata(sections.get("metadata"), d);
         }
-        d.setMain(DeckManager.readCardList(DeckManager.findSection(lines, "main")));
-        d.setSideboard(DeckManager.readCardList(DeckManager.findSection(lines, "sideboard")));
+        d.setMain(DeckManager.readCardList(sections.get("main")));
+        d.setSideboard(DeckManager.readCardList(sections.get("sideboard")));
 
         return d;
     }
 
-    private static Iterator<String> findSection(final Iterable<String> lines, final String sectionName) {
-        final Iterator<String> lineIterator = lines.iterator();
-        final String toSearch = String.format("[%s]", sectionName);
-        while (lineIterator.hasNext()) {
-            if (toSearch.equalsIgnoreCase(lineIterator.next())) {
-                break;
-            }
-        }
-
-        return lineIterator;
-    }
-
-    private static void readDeckMetadata(final Iterator<String> lineIterator, final Deck d) {
+    private static void readDeckMetadata(final Iterable<String> lines, final Deck d) {
+        if( lines == null) return;
+        Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
-            if (line.startsWith("[")) {
-                break;
-            }
 
             final String[] linedata = line.split("=", 2);
             final String field = linedata[0].toLowerCase();
@@ -510,10 +499,14 @@ public class DeckManager {
     }
 
     // Precondition: iterator should point at the first line of cards list
-    private static List<String> readCardList(final Iterator<String> lineIterator) {
+    private static List<String> readCardList(final Iterable<String> lines) {
         final List<String> result = new ArrayList<String>();
         final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
 
+        if ( lines == null ) 
+            return result;
+        
+        Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
             if (line.startsWith("[")) {
@@ -621,26 +614,26 @@ public class DeckManager {
      */
     private static List<String> serializeDeck(final Deck d)  {
         List<String> out = new ArrayList<String>();
-        out.add(String.format("[metadata]%n"));
+        out.add(String.format("[metadata]"));
 
-        out.add(String.format("%s=%s%n", DeckManager.NAME, d.getName().replaceAll("\n", "")));
-        out.add(String.format("%s=%s%n", DeckManager.DECK_TYPE, d.getDeckType()));
+        out.add(String.format("%s=%s", DeckManager.NAME, d.getName().replaceAll("\n", "")));
+        out.add(String.format("%s=%s", DeckManager.DECK_TYPE, d.getDeckType()));
         // these are optional
         if (d.getComment() != null) {
-            out.add(String.format("%s=%s%n", DeckManager.COMMENT, d.getComment().replaceAll("\n", "")));
+            out.add(String.format("%s=%s", DeckManager.COMMENT, d.getComment().replaceAll("\n", "")));
         }
         if (d.getPlayerType() != null) {
-            out.add(String.format("%s=%s%n", DeckManager.PLAYER, d.getPlayerType()));
+            out.add(String.format("%s=%s", DeckManager.PLAYER, d.getPlayerType()));
         }
 
         if (d.isCustomPool()) {
-            out.add(String.format("%s=%s%n", DeckManager.CSTM_POOL, "true"));
+            out.add(String.format("%s=%s", DeckManager.CSTM_POOL, "true"));
         }
 
-        out.add(String.format("%s%n", "[main]"));
+        out.add(String.format("%s", "[main]"));
         out.addAll(DeckManager.writeCardPool( d.getMain()));
 
-        out.add(String.format("%s%n", "[sideboard]"));
+        out.add(String.format("%s", "[sideboard]"));
         out.addAll(DeckManager.writeCardPool(d.getSideboard()));
         return out;
     }
@@ -731,9 +724,9 @@ public class DeckManager {
             final CardPrinted card = e.getKey();
             final boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());
             if (hasBadSetInfo) {
-                out.add(String.format("%d %s%n", e.getValue(), card.getName()));
+                out.add(String.format("%d %s", e.getValue(), card.getName()));
             } else {
-                out.add(String.format("%d %s|%s%n", e.getValue(), card.getName(), card.getSet()));
+                out.add(String.format("%d %s|%s", e.getValue(), card.getName(), card.getSet()));
             }
         }
         return out;

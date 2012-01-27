@@ -94,11 +94,10 @@ public final class FileUtil {
      */
     public static void writeFile(final File file, final List<String> data) {
         try {
-            Collections.sort(data);
-
             final BufferedWriter io = new BufferedWriter(new FileWriter(file));
             for (int i = 0; i < data.size(); i++) {
-                io.write(data.get(i) + "\r\n");
+                io.write(data.get(i));
+                io.write("\r\n");
             }
 
             io.flush();
