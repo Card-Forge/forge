@@ -106,30 +106,30 @@ public class CardRatings {
      */
     public final void saveRatings() {
         if (CardRatings.fullRatings.size() > 1) {
-            saveSingleRating(fullRatings, "res/draft/fullRatings.dat");
+            this.saveSingleRating(CardRatings.fullRatings, "res/draft/fullRatings.dat");
         }
 
         if (CardRatings.blockRatings.size() > 1) {
-            saveSingleRating(blockRatings, "res/draft/blockRatings.dat");
+            this.saveSingleRating(CardRatings.blockRatings, "res/draft/blockRatings.dat");
         }
 
         if (CardRatings.customRatings.size() > 1) {
-            saveSingleRating(customRatings, "res/draft/customRatings.dat");
+            this.saveSingleRating(CardRatings.customRatings, "res/draft/customRatings.dat");
         }
 
         if (CardRatings.tempRatings.size() > 1) {
-            Collections.sort( CardRatings.tempRatings );
+            Collections.sort(CardRatings.tempRatings);
             FileUtil.writeFile("res/draft/tempRatings.dat", CardRatings.tempRatings);
         }
     }
-    
-    private final void saveSingleRating(Map<String,Integer> ratingData, String filename) {
+
+    private void saveSingleRating(Map<String, Integer> ratingData, String filename) {
         final ArrayList<String> ratings = new ArrayList<String>();
 
-        for (final Entry<String,Integer> k : ratingData.entrySet()) {
+        for (final Entry<String, Integer> k : ratingData.entrySet()) {
             ratings.add(k.getKey() + ":" + k.getValue());
         }
-        
+
         Collections.sort(ratings);
         FileUtil.writeFile(filename, ratings);
     }
@@ -259,7 +259,7 @@ public class CardRatings {
         FileUtil.writeFile("res/draft/tempRatings.dat", CardRatings.tempRatings);
 
         final HttpUtil httpPost = new HttpUtil();
-        String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/submitRatingsData.php?";
+        final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/submitRatingsData.php?";
 
         httpPost.upload(url, "res/draft/tempRatings.dat");
 

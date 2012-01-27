@@ -296,8 +296,8 @@ public class DeckManager {
      * @return a Collection<Deck>
      */
     public final Collection<Deck> getConstructedDecks() {
-        ArrayList<Deck> list = new ArrayList<Deck>();
-        for (Deck l : this.deckMap.values()) {
+        final ArrayList<Deck> list = new ArrayList<Deck>();
+        for (final Deck l : this.deckMap.values()) {
             if (l.getDeckType().equals(GameType.Constructed) && !l.isCustomPool()) {
                 list.add(l);
             }
@@ -405,7 +405,7 @@ public class DeckManager {
     public static Deck readDeck(final File deckFile) {
 
         final List<String> lines = FileUtil.readFile(deckFile);
-        final Map<String,List<String>> sections = SectionUtil.parseSections(lines);
+        final Map<String, List<String>> sections = SectionUtil.parseSections(lines);
         if (sections.isEmpty()) {
             return null;
         }
@@ -425,8 +425,10 @@ public class DeckManager {
     }
 
     private static void readDeckMetadata(final Iterable<String> lines, final Deck d) {
-        if( lines == null) return;
-        Iterator<String> lineIterator = lines.iterator();
+        if (lines == null) {
+            return;
+        }
+        final Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
 
@@ -503,10 +505,11 @@ public class DeckManager {
         final List<String> result = new ArrayList<String>();
         final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
 
-        if ( lines == null ) 
+        if (lines == null) {
             return result;
-        
-        Iterator<String> lineIterator = lines.iterator();
+        }
+
+        final Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
             if (line.startsWith("[")) {
@@ -612,8 +615,8 @@ public class DeckManager {
      * @throws java.io.IOException
      *             if any.
      */
-    private static List<String> serializeDeck(final Deck d)  {
-        List<String> out = new ArrayList<String>();
+    private static List<String> serializeDeck(final Deck d) {
+        final List<String> out = new ArrayList<String>();
         out.add(String.format("[metadata]"));
 
         out.add(String.format("%s=%s", DeckManager.NAME, d.getName().replaceAll("\n", "")));
@@ -631,7 +634,7 @@ public class DeckManager {
         }
 
         out.add(String.format("%s", "[main]"));
-        out.addAll(DeckManager.writeCardPool( d.getMain()));
+        out.addAll(DeckManager.writeCardPool(d.getMain()));
 
         out.add(String.format("%s", "[sideboard]"));
         out.addAll(DeckManager.writeCardPool(d.getSideboard()));
@@ -716,10 +719,10 @@ public class DeckManager {
         }
     }
 
-    private static  List<String> writeCardPool(final ItemPoolView<CardPrinted> pool) {
+    private static List<String> writeCardPool(final ItemPoolView<CardPrinted> pool) {
         final List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
-        List<String> out = new ArrayList<String>();
+        final List<String> out = new ArrayList<String>();
         for (final Entry<CardPrinted, Integer> e : main2sort) {
             final CardPrinted card = e.getKey();
             final boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());

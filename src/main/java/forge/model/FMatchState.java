@@ -71,12 +71,20 @@ public class FMatchState {
         return this.gamesPlayed.toArray(new GameSummary[this.gamesPlayed.size()]);
     }
 
-    /** @return java.lang.Integer */
+    /**
+     * Gets the games played count.
+     *
+     * @return java.lang.Integer
+     */
     public final Integer getGamesPlayedCount() {
         return this.gamesPlayed.size();
     }
 
-    /** @return java.lang.Integer */
+    /**
+     * Gets the games per match.
+     *
+     * @return java.lang.Integer
+     */
     public final Integer getGamesPerMatch() {
         return GAMES_PER_MATCH;
     }
@@ -147,9 +155,9 @@ public class FMatchState {
 
     /**
      * Adds a CardList to the antes that have already been won this match.
-     * 
+     *
      * @param antes cards won in ante
-     * 
+     * @return the list
      * @since 1.2.3
      */
     public final List<CardPrinted> addAnteWon(final CardList antes) {
@@ -182,9 +190,9 @@ public class FMatchState {
 
     /**
      * Adds a CardList to the antes that have already been lost this match.
-     * 
+     *
      * @param antes cards lost in ante
-     * 
+     * @return the list
      * @since 1.2.3
      */
     public final List<CardPrinted> addAnteLost(final CardList antes) {

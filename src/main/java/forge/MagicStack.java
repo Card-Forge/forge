@@ -1489,6 +1489,12 @@ public class MagicStack extends MyObservable {
         return this.lastTurnCast;
     }
 
+    /**
+     * Checks if is resolving.
+     *
+     * @param c the c
+     * @return true, if is resolving
+     */
     public final boolean isResolving(Card c) {
         if (!this.getResolving() || this.curResolvingCard == null) {
             return false;

@@ -30,7 +30,8 @@ import forge.gui.input.Input;
 
 /**
  * <p>
- * The Upkeep class handles ending effects with "until your next upkeep" and "until next upkeep".
+ * The Upkeep class handles ending effects with "until your next upkeep" and
+ * "until next upkeep".
  * 
  * It also handles hardcoded triggers "At the beginning of upkeep".
  * </p>
@@ -43,9 +44,11 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
     /**
      * <p>
-     * Handles all the hardcoded events that happen at the beginning of each Upkeep Phase.
+     * Handles all the hardcoded events that happen at the beginning of each
+     * Upkeep Phase.
      * 
-     * This will freeze the Stack at the start, and unfreeze the Stack at the end.
+     * This will freeze the Stack at the start, and unfreeze the Stack at the
+     * end.
      * </p>
      */
     @Override
@@ -60,7 +63,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         Upkeep.upkeepTheAbyss();
         Upkeep.upkeepYawgmothDemon();
-        //Upkeep.upkeepLordOfThePit();
+        // Upkeep.upkeepLordOfThePit();
         Upkeep.upkeepDropOfHoney();
         Upkeep.upkeepDemonicHordes();
         Upkeep.upkeepCarnophage();
@@ -596,78 +599,60 @@ public class Upkeep extends Phase implements java.io.Serializable {
         } // end for
     }
 
-        
     /**
      * <p>
      * upkeepLordOfThePit.
      * </p>
      */
     /*
-    private static void upkeepLordOfThePit() {
-        
-         * At the beginning of your upkeep, sacrifice a creature other than Lord
-         * of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
-         
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
-        final CardList lords = player.getCardsIn(Zone.Battlefield, "Lord of the Pit");
-        lords.addAll(player.getCardsIn(Zone.Battlefield, "Liege of the Pit"));
-        final CardList cards = lords;
-
-        for (int i = 0; i < cards.size(); i++) {
-            final Card c = cards.get(i);
-            if (c.isFaceDown()) {
-                continue;
-            }
-
-            final Ability sacrificeCreature = new Ability(c, "") {
-                @Override
-                public void resolve() {
-                    // TODO - this should handle the case where you sacrifice 2
-                    // LOTPs to each other
-                    final CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
-                    creatures.remove(c);
-                    if (player.isHuman()) {
-                        AllZone.getInputControl().setInput(
-                                PlayerUtil.inputSacrificePermanent(creatures, c.getName()
-                                        + " - Select a creature to sacrifice."));
-                    } else { // computer
-                        final Card target = CardFactoryUtil.getWorstCreatureAI(creatures);
-                        AllZone.getGameAction().sacrifice(target);
-                    }
-                } // resolve
-            };
-
-            final Ability sevenDamage = new Ability(c, "") {
-                @Override
-                public void resolve() {
-                    player.addDamage(7, c);
-                }
-            };
-
-            final CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
-            creatures.remove(c);
-            if (creatures.size() == 0) {
-                // there are no creatures to sacrifice, so we must do the 7
-                // damage
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append(c.getName()).append(" - deals 7 damage to controller");
-                sevenDamage.setStackDescription(sb.toString());
-
-                AllZone.getStack().addSimultaneousStackEntry(sevenDamage);
-
-            } else {
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append(c.getName()).append(" - sacrifice a creature.");
-                sacrificeCreature.setStackDescription(sb.toString());
-
-                AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
-
-            }
-        } // end for
-    } // upkeepLordOfThePit()
-*/
+     * private static void upkeepLordOfThePit() {
+     * 
+     * At the beginning of your upkeep, sacrifice a creature other than Lord of
+     * the Pit. If you can't, Lord of the Pit deals 7 damage to you.
+     * 
+     * final Player player = AllZone.getPhaseHandler().getPlayerTurn(); final
+     * CardList lords = player.getCardsIn(Zone.Battlefield, "Lord of the Pit");
+     * lords.addAll(player.getCardsIn(Zone.Battlefield, "Liege of the Pit"));
+     * final CardList cards = lords;
+     * 
+     * for (int i = 0; i < cards.size(); i++) { final Card c = cards.get(i); if
+     * (c.isFaceDown()) { continue; }
+     * 
+     * final Ability sacrificeCreature = new Ability(c, "") {
+     * 
+     * @Override public void resolve() { // TODO - this should handle the case
+     * where you sacrifice 2 // LOTPs to each other final CardList creatures =
+     * AllZoneUtil.getCreaturesInPlay(player); creatures.remove(c); if
+     * (player.isHuman()) { AllZone.getInputControl().setInput(
+     * PlayerUtil.inputSacrificePermanent(creatures, c.getName() +
+     * " - Select a creature to sacrifice.")); } else { // computer final Card
+     * target = CardFactoryUtil.getWorstCreatureAI(creatures);
+     * AllZone.getGameAction().sacrifice(target); } } // resolve };
+     * 
+     * final Ability sevenDamage = new Ability(c, "") {
+     * 
+     * @Override public void resolve() { player.addDamage(7, c); } };
+     * 
+     * final CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
+     * creatures.remove(c); if (creatures.size() == 0) { // there are no
+     * creatures to sacrifice, so we must do the 7 // damage
+     * 
+     * final StringBuilder sb = new StringBuilder();
+     * sb.append(c.getName()).append(" - deals 7 damage to controller");
+     * sevenDamage.setStackDescription(sb.toString());
+     * 
+     * AllZone.getStack().addSimultaneousStackEntry(sevenDamage);
+     * 
+     * } else {
+     * 
+     * final StringBuilder sb = new StringBuilder();
+     * sb.append(c.getName()).append(" - sacrifice a creature.");
+     * sacrificeCreature.setStackDescription(sb.toString());
+     * 
+     * AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
+     * 
+     * } } // end for } // upkeepLordOfThePit()
+     */
     /**
      * <p>
      * upkeepDropOfHoney.
@@ -2295,7 +2280,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 final Card newCopy = AllZone.getCardFactory().getCard(
                                         newTarget[0].getState("Original").getName(), player);
                                 newCopy.setCurSetCode(newTarget[0].getCurSetCode());
-                                //preserve the image of the Vesuvan Doppelganger/whatever the source is
+                                // preserve the image of the Vesuvan
+                                // Doppelganger/whatever the source is
                                 newCopy.setImageFilename(c.getImageFilename());
 
                                 AllZone.getTriggerHandler().suppressMode("Transformed");
@@ -2650,13 +2636,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     CardList enchantmentsInLibrary = source.getController().getCardsIn(Zone.Library);
-                    final CardList enchantmentsAttached = new CardList(source.getEnchantingPlayer().getEnchantedBy().toArray());
+                    final CardList enchantmentsAttached = new CardList(source.getEnchantingPlayer().getEnchantedBy()
+                            .toArray());
                     enchantmentsInLibrary = enchantmentsInLibrary.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
                             return (c.isEnchantment() && c.hasKeyword("Enchant player")
-                                    && !source.getEnchantingPlayer().hasProtectionFrom(c)
-                                    && !enchantmentsAttached.containsName(c));
+                                    && !source.getEnchantingPlayer().hasProtectionFrom(c) && !enchantmentsAttached
+                                    .containsName(c));
                         }
                     });
                     final Player player = source.getController();
@@ -2667,8 +2654,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             final Card crd = enchantmentsInLibrary.get(j);
                             target[j] = crd;
                         }
-                        final Object check = GuiUtils.getChoiceOptional(
-                                "Select Curse to attach", target);
+                        final Object check = GuiUtils.getChoiceOptional("Select Curse to attach", target);
                         if (check != null) {
                             enchantment = ((Card) check);
                         }
@@ -2687,8 +2673,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(source).append(
                     " At the beginning of your upkeep, you may search your library for a Curse card that doesn't have"
-                  + " the same name as a Curse attached to enchanted player, "
-                  + "put it onto the battlefield attached to that player, then shuffle you library.");
+                            + " the same name as a Curse attached to enchanted player, "
+                            + "put it onto the battlefield attached to that player, then shuffle you library.");
             ability.setStackDescription(sb.toString());
             AllZone.getStack().addSimultaneousStackEntry(ability);
         }
