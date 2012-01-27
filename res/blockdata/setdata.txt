@@ -84,3 +84,4 @@ Index:75|Code2:NPH|Code3:NPH|Name:New Phyrexia
 Index:76|Code2:COM|Code3:COM|Name:Commander
 Index:77|Code2:M12|Code3:M12|Name:Magic 2012
 Index:78|Code2:ISD|Code3:ISD|Name:Innistrad
+Index:79|Code2:DKA|Code3:DKA|Name:Dark Ascension
