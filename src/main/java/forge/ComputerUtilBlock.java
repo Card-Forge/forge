@@ -411,8 +411,10 @@ public class ComputerUtilBlock {
                             if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) >= damageNeeded) {
                                 currentAttackers.remove(attacker);
                                 for (final Card b : blockGang) {
-                                    ComputerUtilBlock.getBlockersLeft().remove(b);
-                                    combat.addBlocker(attacker, b);
+                                    if (CombatUtil.canBlock(attacker, blocker, combat)) {
+                                        ComputerUtilBlock.getBlockersLeft().remove(b);
+                                        combat.addBlocker(attacker, b);
+                                    }
                                 }
                             }
                         }
@@ -480,9 +482,11 @@ public class ComputerUtilBlock {
                     // more than 1
                     currentAttackers.remove(attacker);
                     combat.addBlocker(attacker, blocker);
-                    combat.addBlocker(attacker, leader);
                     ComputerUtilBlock.getBlockersLeft().remove(blocker);
-                    ComputerUtilBlock.getBlockersLeft().remove(leader);
+                    if (CombatUtil.canBlock(attacker, leader, combat)) {
+                        combat.addBlocker(attacker, leader);
+                        ComputerUtilBlock.getBlockersLeft().remove(leader);
+                    }
                     break;
                 }
             }
