@@ -9,6 +9,7 @@ SVar:TokenAndLife:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenName$ Wolf | Toke
 SVar:Life:DB$ GainLife | Defined$ You | LifeAmount$ 2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 AlternateMode:DoubleFaced
+SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/140a.jpg
 #Shared
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 ALTERNATE
@@ -23,5 +24,5 @@ T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ DamageAndMoreDamage | Trig
 SVar:DamageAndMoreDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ 2 | SubAbility$ MoreDamage
 SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | NumDmg$ 2 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature opponent controls
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/140a.jpg
+SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/140b.jpg
 End

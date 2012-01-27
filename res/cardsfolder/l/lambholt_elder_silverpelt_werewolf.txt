@@ -6,6 +6,7 @@ PT:1/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 AlternateMode:DoubleFaced
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Elder.
+SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/122a.jpg
 #Shared
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 ALTERNATE
@@ -19,5 +20,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 Oracle:Whenever Silverpelt Werewolf deals combat damage to a player, draw a card.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Silverpelt Werewolf.
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/122a.jpg
+SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/122b.jpg
 End

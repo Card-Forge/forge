@@ -6,6 +6,7 @@ PT:4/4
 A:AB$SetState | Cost$ Sac<1/Human> | Defined$ Self | SorcerySpeed$ True | Mode$ Transform | SpellDescription$ Transform CARDNAME. Activate this only any time you could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_demon.jpg
 AlternateMode:DoubleFaced
+SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/71a.jpg
 ALTERNATE
 Name:Archdemon of Greed
 ManaCost:no cost
@@ -22,5 +23,5 @@ SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 9 | ConditionChe
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/archdemon_of_greed.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/71a.jpg
+SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/71b.jpg
 End
