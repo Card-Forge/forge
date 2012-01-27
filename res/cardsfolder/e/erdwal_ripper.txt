@@ -9,4 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erdwal_ripper.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/86.jpg
+Oracle:Haste\nWhenever Erdwal Ripper deals combat damage to a player, put a +1/+1 counter on it.
 End

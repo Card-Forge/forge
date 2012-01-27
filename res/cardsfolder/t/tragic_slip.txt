@@ -7,4 +7,5 @@ SVar:X:Count$Morbid.13.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tragic_slip.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/76.jpg
+Oracle:Target creature gets -1/-1 until end of turn.\nMorbid - That creature gets -13/-13 until end of turn instead if a creature died this turn.
 End

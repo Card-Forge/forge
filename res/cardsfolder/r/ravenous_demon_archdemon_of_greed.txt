@@ -24,4 +24,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/archdemon_of_greed.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/71b.jpg
+Oracle:Sacrifice a Human: Transform Ravenous Demon. Activate this ability only any time you could cast a sorcery.\n----\nArchdemon of Greed\n(Black)\nCreature - Demon\n9/9\nFlying, trample\nAt the beginning of your upkeep, sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.
 End

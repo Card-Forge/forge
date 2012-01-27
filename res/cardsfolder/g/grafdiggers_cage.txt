@@ -7,4 +7,5 @@ R:Event$Moved | Origin$ Library | Destination$ Battlefield | ValidCard$ Creature
 S:Mode$ CantBeCast | Origin$ Graveyard | Description$ Players can't cast cards in graveyards or libraries.
 S:Mode$ CantBeCast | Origin$ Library
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/149.jpg
+Oracle:Creature cards can't enter the battlefield from graveyards or libraries.\nPlayers can't cast cards in graveyards or libraries.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravepurge.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/65.jpg
+Oracle:Put any number of target creature cards from your graveyard on top of your library.\nDraw a card.
 End

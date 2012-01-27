@@ -8,4 +8,5 @@ SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruesome_discovery.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/66.jpg
+Oracle:Target player discards two cards.\nMorbid - If a creature died this turn, instead that player reveals his or her hand, you choose two cards from it, then that player discards those cards.
 End

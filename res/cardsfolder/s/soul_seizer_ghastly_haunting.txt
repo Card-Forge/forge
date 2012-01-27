@@ -21,4 +21,5 @@ A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
 SVar:RemAIDeck:True
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/50b.jpg
+Oracle:Flying\nWhen Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.\n----\nGhastly Haunting\n(Blue)\nEnchantment - Aura\nEnchant creature\nYou control enchanted creature.
 End

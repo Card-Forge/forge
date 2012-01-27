@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ 2 W | TokenImage$ W 1 1 Spirit | TokenAmount$ 2 | TokenName$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lingering_souls.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/12.jpg
+Oracle:Put two 1/1 white Spirit creature tokens with flying onto the battlefield.\nFlashback {1}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

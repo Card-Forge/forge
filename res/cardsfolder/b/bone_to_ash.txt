@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_to_ash.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/29.jpg
+Oracle:Counter target creature spell.\nDraw a card.
 End

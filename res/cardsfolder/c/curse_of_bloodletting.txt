@@ -11,4 +11,5 @@ SVar:DmgTimes2Combat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Enc
 SVar:X:ReplaceCount$DamageAmount/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_bloodletting.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/85.jpg
+Oracle:Enchant player\nIf a source would deal damage to enchanted player, it deals double that damage to that player instead.
 End

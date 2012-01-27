@@ -12,4 +12,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_lord_of_innistrad.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/142.jpg
+Oracle:[+1] Put a 1/1 black Vampire creature token with lifelink onto the battlefield.\n[-2] You get an emblem with "Creatures you control get +1/+0."\n[-6] Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
 End

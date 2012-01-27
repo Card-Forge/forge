@@ -7,4 +7,5 @@ SVar:DBDamageAll:DB$DamageAll | NumDmg$ 1 | ValidCards$Creature.Human | ValidDes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorch_the_fields.txt
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/103.jpg
+Oracle:Destroy target land. Scorch the Fields deals 1 damage to each Human creature.
 End
