@@ -858,7 +858,7 @@ public final class AbilityFactoryChangeZone {
                     if (params.containsKey("GainControl")) {
                         c.addController(af.getHostCard());
                     }
-                    
+
                     if (params.containsKey("AttachedTo")) {
                         ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
                         if (!list.isEmpty()) {
@@ -1047,7 +1047,7 @@ public final class AbilityFactoryChangeZone {
                         c.enchantEntity(attachedTo);
                     }
                 }
-                
+
                 if (params.containsKey("Attacking")) {
                     AllZone.getCombat().addAttacker(c);
                 }

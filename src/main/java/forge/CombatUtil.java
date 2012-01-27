@@ -456,9 +456,10 @@ public class CombatUtil {
         CardList attackersWithLure = new CardList();
         for (Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
-                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.") 
-                            && combat.getBlockers(attacker).isEmpty()))
-            attackersWithLure.add(attacker);
+                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
+                            && combat.getBlockers(attacker).isEmpty())) {
+                attackersWithLure.add(attacker);
+            }
         }
 
         for (final Card attacker : attackersWithLure) {
