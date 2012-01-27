@@ -2576,6 +2576,7 @@ res/cardsfolder/e/empress_galina.txt svneol=native#text/plain
 res/cardsfolder/e/empty_shrine_kannushi.txt svneol=native#text/plain
 res/cardsfolder/e/empty_the_catacombs.txt svneol=native#text/plain
 res/cardsfolder/e/empty_the_warrens.txt svneol=native#text/plain
+res/cardsfolder/e/empyrial_archangel.txt -text
 res/cardsfolder/e/empyrial_armor.txt svneol=native#text/plain
 res/cardsfolder/e/empyrial_plate.txt svneol=native#text/plain
 res/cardsfolder/e/emrakul_the_aeons_torn.txt svneol=native#text/plain
@@ -6208,6 +6209,7 @@ res/cardsfolder/p/pardic_firecat.txt svneol=native#text/plain
 res/cardsfolder/p/pardic_lancer.txt svneol=native#text/plain
 res/cardsfolder/p/pardic_miner.txt -text
 res/cardsfolder/p/pardic_swordsmith.txt svneol=native#text/plain
+res/cardsfolder/p/pariah.txt -text
 res/cardsfolder/p/part_the_veil.txt svneol=native#text/plain
 res/cardsfolder/p/part_water.txt svneol=native#text/plain
 res/cardsfolder/p/past_in_flames.txt -text
