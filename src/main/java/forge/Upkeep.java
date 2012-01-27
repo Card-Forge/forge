@@ -60,7 +60,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         Upkeep.upkeepTheAbyss();
         Upkeep.upkeepYawgmothDemon();
-        Upkeep.upkeepLordOfThePit();
+        //Upkeep.upkeepLordOfThePit();
         Upkeep.upkeepDropOfHoney();
         Upkeep.upkeepDemonicHordes();
         Upkeep.upkeepCarnophage();
@@ -596,16 +596,18 @@ public class Upkeep extends Phase implements java.io.Serializable {
         } // end for
     }
 
+        
     /**
      * <p>
      * upkeepLordOfThePit.
      * </p>
      */
+    /*
     private static void upkeepLordOfThePit() {
-        /*
+        
          * At the beginning of your upkeep, sacrifice a creature other than Lord
          * of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
-         */
+         
         final Player player = AllZone.getPhaseHandler().getPlayerTurn();
         final CardList lords = player.getCardsIn(Zone.Battlefield, "Lord of the Pit");
         lords.addAll(player.getCardsIn(Zone.Battlefield, "Liege of the Pit"));
@@ -665,7 +667,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             }
         } // end for
     } // upkeepLordOfThePit()
-
+*/
     /**
      * <p>
      * upkeepDropOfHoney.
