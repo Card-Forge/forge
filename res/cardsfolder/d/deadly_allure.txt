@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_allure.jpg
+SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/58.jpg
 End
