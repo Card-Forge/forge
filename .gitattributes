@@ -10430,6 +10430,7 @@ res/oracleScript.py -text svneol=unset#text/x-python
 res/pics/precons/blood-and-fire.jpg -text
 res/pics/precons/carnival_of_blood.jpg -text
 res/pics/precons/grab-for-power.jpg -text
+res/pics/precons/myr_of_mirrodin.jpg -text
 res/pics/precons/path_of_blight.jpg -text
 res/pics/precons/relic_breaker.jpg -text
 res/pics/precons/spectral_legions.jpg -text
@@ -10786,6 +10787,7 @@ res/quest/decks/quest7.dck -text
 res/quest/decks/quest8.dck -text
 res/quest/decks/quest9.dck -text
 res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
+res/quest/precons/Myr[!!-~]of[!!-~]Mirrodin.dck -text
 res/quest/precons/Path[!!-~]of[!!-~]Blight.dck -text
 res/quest/precons/Relic[!!-~]Breaker.dck -text
 res/quest/precons/Spectral[!!-~]Legions.dck -text
