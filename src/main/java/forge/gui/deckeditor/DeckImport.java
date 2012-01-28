@@ -276,8 +276,8 @@ public class DeckImport extends JDialog {
     private String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
         switch (token.getType()) {
         case KnownCard:
-            return String.format("<div class='knowncard'>%s * %s [%s]</div>", token.getNumber(), token.getCard()
-                    .getName(), token.getCard().getSet());
+            return String.format("<div class='knowncard'>%s * %s [%s] %s</div>", token.getNumber(), token.getCard()
+                    .getName(), token.getCard().getSet(), token.getCard().isFoil() ? "<i>foil</i>" : "");
         case UnknownCard:
             return String.format("<div class='unknowncard'>%s * %s</div>", token.getNumber(), token.getText());
         case SectionName:
