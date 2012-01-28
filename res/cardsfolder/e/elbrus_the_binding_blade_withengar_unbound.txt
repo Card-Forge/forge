@@ -8,7 +8,10 @@ SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elbrus_the_binding_blade.jpg
 AlternateMode:DoubleFaced
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/147a.jpg
+Oracle:Equipped creature gets +1/+0.\nWhen equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.\nEquip {1}
+
 ALTERNATE
+
 Name:Withengar Unbound
 ManaCost:no cost
 Colors:black
@@ -21,5 +24,5 @@ K:Intimidate
 # Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound. (not implemented)
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/withengar_unbound.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/147b.jpg
-Oracle:Equipped creature gets +1/+0.\nWhen equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.\nEquip {1}\n----\nWithengar Unbound\n(Black)\nLegendary Creature - Demon\n13/13\nFlying, intimidate, trample\nWhenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.
+Oracle:Flying, intimidate, trample\nWhenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.
 End
