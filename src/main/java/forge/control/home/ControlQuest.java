@@ -142,8 +142,9 @@ public class ControlQuest {
             public void execute() {
                 // saves all deck data
                 AllZone.getQuestData().saveData();
+                updateDeckList();
                 updateCredits();
-                updateLife();
+                //updateLife();
             }
         };
 
