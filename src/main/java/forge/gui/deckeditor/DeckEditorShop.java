@@ -297,7 +297,7 @@ public final class DeckEditorShop extends DeckEditorBase {
         } else if (card instanceof BoosterPack) {
             return 395;
         } else if (card instanceof PreconDeck) {
-            return ((PreconDeck)card).getRecommendedDeals().getCost();
+            return ((PreconDeck) card).getRecommendedDeals().getCost();
         }
         return 1337;
     }
@@ -314,14 +314,14 @@ public final class DeckEditorShop extends DeckEditorBase {
 
             if (item instanceof CardPrinted) {
                 this.getTopTableWithCards().removeCard(item);
-                
+
                 final CardPrinted card = (CardPrinted) item;
                 this.getBottomTableWithCards().addCard(card);
                 this.questData.getCards().buyCard(card, value);
-                
+
             } else if (item instanceof BoosterPack) {
                 this.getTopTableWithCards().removeCard(item);
-                
+
                 final BoosterPack booster = (BoosterPack) ((BoosterPack) item).clone();
                 this.questData.getCards().buyBooster(booster, value);
                 final List<CardPrinted> newCards = booster.getCards();
@@ -331,18 +331,18 @@ public final class DeckEditorShop extends DeckEditorBase {
                 final CardListViewer c = new CardListViewer(booster.getName(),
                         "You have found the following cards inside:", newCards);
                 c.show();
-            } else if ( item instanceof PreconDeck ) {
+            } else if (item instanceof PreconDeck) {
                 this.getTopTableWithCards().removeCard(item);
-                final PreconDeck deck = (PreconDeck)item;
+                final PreconDeck deck = (PreconDeck) item;
                 this.questData.getCards().buyPreconDeck(deck, value);
-                
+
                 for (final CardPrinted card : deck.getDeck().getMain().toFlatList()) {
                     this.getBottomTableWithCards().addCard(card);
                 }
                 JOptionPane.showMessageDialog(null, String.format("Deck '%s' was added to youd decklist.%n%nCards from it were also added to your pool.", deck.getName()), "Thanks for purchase!", JOptionPane.INFORMATION_MESSAGE);
-                
+
             }
-            
+
 
             this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
         } else {
