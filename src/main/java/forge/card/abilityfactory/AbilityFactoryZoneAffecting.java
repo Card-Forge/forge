@@ -199,7 +199,7 @@ public class AbilityFactoryZoneAffecting {
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = af.getAbTgt();
-        if (tgt != null) {
+        if (!params.containsKey("Defined") && tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
@@ -527,7 +527,7 @@ public class AbilityFactoryZoneAffecting {
         ArrayList<Player> tgtPlayers;
 
         final Target tgt = af.getAbTgt();
-        if (tgt != null) {
+        if (!params.containsKey("Defined") && tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
