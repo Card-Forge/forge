@@ -9485,6 +9485,7 @@ res/cardsfolder/v/vesper_ghoul.txt svneol=native#text/plain
 res/cardsfolder/v/vesuvan_doppelganger.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_armorer.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_armorsmith.txt svneol=native#text/plain
+res/cardsfolder/v/veteran_bodyguard.txt -text
 res/cardsfolder/v/veteran_brawlers.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_cavalier.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_explorer.txt svneol=native#text/plain
