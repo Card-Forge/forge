@@ -1490,33 +1490,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             AllZone.getTriggerHandler().runTrigger("CounterAdded", runParams);
         }
 
-        if (counterName.equals(Counters.P1P1) || counterName.equals(Counters.M1M1)) {
-            // +1/+1 counters should erase -1/-1 counters
-            int plusOneCounters = 0;
-            int minusOneCounters = 0;
-
-            final Counters p1Counter = Counters.P1P1;
-            final Counters m1Counter = Counters.M1M1;
-            if (this.counters.containsKey(p1Counter)) {
-                plusOneCounters = this.counters.get(p1Counter);
-            }
-            if (this.counters.containsKey(m1Counter)) {
-                minusOneCounters = this.counters.get(m1Counter);
-            }
-
-            if (plusOneCounters == minusOneCounters) {
-                this.counters.remove(m1Counter);
-                this.counters.remove(p1Counter);
-            }
-            if (plusOneCounters > minusOneCounters) {
-                this.counters.remove(m1Counter);
-                this.counters.put(p1Counter, (plusOneCounters - minusOneCounters));
-            } else {
-                this.counters.put(m1Counter, (minusOneCounters - plusOneCounters));
-                this.counters.remove(p1Counter);
-            }
-        }
-
         this.updateObservers();
     }
 
@@ -1548,33 +1521,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("CounterType", counterName);
         for (int i = 0; i < (multiplier * n); i++) {
             AllZone.getTriggerHandler().runTrigger("CounterAdded", runParams);
-        }
-
-        if (counterName.equals(Counters.P1P1) || counterName.equals(Counters.M1M1)) {
-            // +1/+1 counters should erase -1/-1 counters
-            int plusOneCounters = 0;
-            int minusOneCounters = 0;
-
-            final Counters p1Counter = Counters.P1P1;
-            final Counters m1Counter = Counters.M1M1;
-            if (this.counters.containsKey(p1Counter)) {
-                plusOneCounters = this.counters.get(p1Counter);
-            }
-            if (this.counters.containsKey(m1Counter)) {
-                minusOneCounters = this.counters.get(m1Counter);
-            }
-
-            if (plusOneCounters == minusOneCounters) {
-                this.counters.remove(m1Counter);
-                this.counters.remove(p1Counter);
-            }
-            if (plusOneCounters > minusOneCounters) {
-                this.counters.remove(m1Counter);
-                this.counters.put(p1Counter, (plusOneCounters - minusOneCounters));
-            } else {
-                this.counters.put(m1Counter, (minusOneCounters - plusOneCounters));
-                this.counters.remove(p1Counter);
-            }
         }
 
         AllZone.getGameAction().checkStateEffects();

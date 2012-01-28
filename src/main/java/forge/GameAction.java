@@ -978,6 +978,28 @@ public class GameAction {
                     }
                 }
 
+                // +1/+1 counters should erase -1/-1 counters
+                if (c.getCounters(Counters.P1P1) > 0 && c.getCounters(Counters.M1M1) > 0) {
+
+                    final Counters p1Counter = Counters.P1P1;
+                    final Counters m1Counter = Counters.M1M1;
+                    int plusOneCounters = c.getCounters(Counters.P1P1);
+                    int minusOneCounters = c.getCounters(Counters.M1M1);
+
+                    if (plusOneCounters == minusOneCounters) {
+                        c.getCounters().remove(m1Counter);
+                        c.getCounters().remove(p1Counter);
+                    }
+                    if (plusOneCounters > minusOneCounters) {
+                        c.getCounters().remove(m1Counter);
+                        c.getCounters().put(p1Counter, (plusOneCounters - minusOneCounters));
+                    } else {
+                        c.getCounters().put(m1Counter, (minusOneCounters - plusOneCounters));
+                        c.getCounters().remove(p1Counter);
+                    }
+                    checkAgain = true;
+                }
+
             } // while it.hasNext()
 
             if (!checkAgain) {
