@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=20
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Grab for Power
+Description=The ultimate goal of the deck is to have three specific artifacts—Crown of Empires, Scepter of Empires, and Throne of Empires—on the battlefield at the same time.
+Deck Type=constructed
+Set=M12
+Image=Grab-for-Power.jpg
+[main]
+2 Azure Mage|M12
+2 Belltower Sphinx|RAV
+1 Brink of Disaster|WWK
+1 Buried Ruin|M12
+2 Child of Night|M12
+2 Crown of Empires|M12
+1 Devouring Swarm|M12
+1 Diabolic Tutor|ODY
+1 Disentomb|M12
+2 Divination|M12
+3 Doom Blade|M12
+1 Drifting Shade|M12
+1 Frost Breath|M12
+1 Gravedigger|TMP
+10 Island|ZEN
+2 Merfolk Looter|M12
+1 Ponder|M12
+2 Reassembling Skeleton|M12
+1 Rune-Scarred Demon|M12
+2 Scepter of Empires|M12
+1 Sorin's Thirst|M12
+14 Swamp|ZEN
+1 Throne of Empires|M12
+3 Warpath Ghoul|M12
+2 Zombie Goliath|M12
+[sideboard]
