@@ -13,14 +13,14 @@ import forge.deck.DeckIO;
 import forge.item.PreconDeck;
 
 /** 
- * Very simple function - store all precons
+ * Very simple function - store all precons.
  *
  */
 public class QuestPreconManager {
 
     final List<PreconDeck> decks = new ArrayList<PreconDeck>();
-    
-    
+
+
     public QuestPreconManager(File deckDir) {
         final List<String> decksThatFailedToLoad = new ArrayList<String>();
         File[] files = deckDir.listFiles(DeckIO.DCK_FILE_FILTER);
@@ -32,7 +32,7 @@ public class QuestPreconManager {
                 decksThatFailedToLoad.add(message);
             }
         }
-        
+
         if (!decksThatFailedToLoad.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     StringUtils.join(decksThatFailedToLoad, System.getProperty("line.separator")),
@@ -48,10 +48,10 @@ public class QuestPreconManager {
      */
     public List<PreconDeck> getDecksForCurrent(QuestData q) {
         List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
-        for(PreconDeck deck : decks)
-        {
-            if( deck.getRecommendedDeals().meetsRequiremnts(q))
+        for (PreconDeck deck : decks) {
+            if (deck.getRecommendedDeals().meetsRequiremnts(q)) {
                 meetRequirements.add(deck);
+            }
         }
         return meetRequirements;
     }
