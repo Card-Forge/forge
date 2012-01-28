@@ -10426,6 +10426,8 @@ res/licenses/xstream-license.txt svneol=native#text/plain
 res/main.properties svneol=native#text/plain
 res/mtg-data.txt svneol=native#text/plain
 res/oracleScript.py -text svneol=unset#text/x-python
+res/pics/precons/blood-and-fire.jpg -text
+res/pics/precons/grab-for-power.jpg -text
 res/pics/tokens/g_0_1_plant_wall.jpg -text
 res/pics/tokens/g_0_2_plant_wall.jpg -text
 res/pics/tokens/g_0_3_plant_wall.jpg -text
