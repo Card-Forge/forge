@@ -326,7 +326,8 @@ public class QuestDataIO {
                     result.add(this.readBooster(reader), cnt);
                 } else if ("precon".equals(nodename)) {
                     PreconDeck toAdd = this.readPreconDeck(reader); 
-                    result.add(toAdd, cnt);
+                    if ( null != toAdd )
+                        result.add(toAdd, cnt);
                 }
                 reader.moveUp();
             }
@@ -334,7 +335,7 @@ public class QuestDataIO {
         }
 
         private PreconDeck readPreconDeck(final HierarchicalStreamReader reader) {
-            final String name = reader.getAttribute("n");
+            final String name = reader.getAttribute("s");
             for( PreconDeck d : QuestData.getPreconManager().getDecks() )
                 if ( name.equalsIgnoreCase( d.getName() ) )
                     return d;
