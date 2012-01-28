@@ -9,6 +9,8 @@ The thread safety issue should now be fixed. This should prevent the crash repor
 
 We have merged the new cards from the new Dark Ascension set into the main trunk of the forge project. Our testers are asked to test these new cards out and to report any problems with these new cards. There may be a few areas in the game where we have not added the needed set info so please be patient as we try to add in the missing pieces before the next beta release.
 
+The LQ pictures for the new Dark Ascension cards are not yet available. The "Download LQ Card Pictures" and the "Download LQ Set Pictures" buttons will not download the new Dark Ascension cards at this time. Be patient as it takes time for these pictures to come online.
+
 
 An Anouncement from the Forge dev team:
 ---------------------------------------
