@@ -246,6 +246,32 @@ Lashknife Barrier
 - Added another fluff piece to the changes.txt file.
 - Merged the two new card lists found in the changes.txt file into one list.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated some SVars on new DKA cards.
+- Fixed two possible cases where the AI did not block as much attackers with "CARDNAME must be blocked if able." as it could.
+- Ran Oracle and SetInfo scripts.
+- Updating Draft info for DKA
+- Adding DKA to the Format list
+- Minor cosmetic fixes to DeadShot Minotaur and Glimmerpoint Stag.
+- CheckStyle.
+- Added IsEqippng check to ReplaceDamage.
+- Changed the LQ pic URL for Ashling, the Extinguisher as the standard version of the URL was not working.
+- Updated mtgData
+- Ran OracleScript
+- Added "ClearTriggered" parameter to AF CleanUp.
+- Decks save/load operations moved to DeckIO class, references updated
+- Preconstructed Decks added to quest mode shop.
+- Sample Decks for quest mode shop.
+- precons images samples
+- Split the oracle text on DKA double-faced cards between their two faces.
+- Fixed Curse of Misfortunes cost.
+- correction for ISD block. DKA was never a block itself (ROE was because there were almost 250 cards)
+- Precon sell rules now are being checked.
+- Fixed the ultimate of Sorin, Lord of Innistrad.
+- fixed precons deserialization in questshop
+- Fixed all effects without the "Image" parameter throwing errors.
+- Added the precon Carnival of Blood.
+- Added the precon Spectral Legions.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -450,6 +476,14 @@ Relentless Skaabs
 Tower Geist
 Curse of Misfortunes
 Call to the Kindred
+Goblin Fire Fiend
+Irresistible Prey
+Worthy Cause
+Pariah
+Empyrial Archangel
+Pariah's Shield
+Diviner's Wand
+Shirei, Shizo's Caretaker
 
 
 end
