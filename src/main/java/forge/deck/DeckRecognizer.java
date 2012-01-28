@@ -186,7 +186,7 @@ public class DeckRecognizer {
            */
         else {
             if (CardDb.instance().isCardSupported(line)) {
-                return Token.knownCard(CardDb.instance().getCard(line), 1);
+                return Token.knownCard(CardDb.instance().getCardFromLatestSet(line), 1);
             }
             result = DeckRecognizer.recognizeNonCard(line, 1);
         }
@@ -195,7 +195,7 @@ public class DeckRecognizer {
 
     private static Token recognizePossibleNameAndNumber(final String name, final int n) {
         if (CardDb.instance().isCardSupported(name)) {
-            return Token.knownCard(CardDb.instance().getCard(name), n);
+            return Token.knownCard(CardDb.instance().getCardFromLatestSet(name), n);
         }
 
         final Token known = DeckRecognizer.recognizeNonCard(name, n);

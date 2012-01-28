@@ -26,11 +26,13 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
+import net.slightlymagic.maxmtg.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
+import forge.SetUtils;
 import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.card.MtgDataParser;
@@ -334,6 +336,40 @@ public final class CardDb {
      */
     public Iterable<CardPrinted> getAllCards() {
         return this.allCardsFlat;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param name
+     * @return
+     */
+    public CardPrinted getCardFromLatestSet(String name) {
+        // Sometimes they read from decks things like "CardName|Set" - but we
+        // can handle it
+        final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(name);
+        if (nameWithSet.right != null) {
+            return this.getCard(nameWithSet.left, nameWithSet.right);
+        }
+        
+        // OK, plain name here
+        Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
+        List<CardPrinted> namedCards = predicate.select(this.allCardsFlat);
+        if ( namedCards.isEmpty() )
+            throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
+        
+        // Find card with maximal set index
+        CardPrinted result = namedCards.get(0);
+        int resIndex = SetUtils.getSetByCode((result).getSet()).getIndex();
+        for(CardPrinted card : namedCards)
+        {
+            int thisIndex = SetUtils.getSetByCode((card).getSet()).getIndex();
+            if ( thisIndex > resIndex ) {
+                result = card;
+                resIndex = thisIndex;
+            }
+        }
+        
+        return result;
     }
 
 }
