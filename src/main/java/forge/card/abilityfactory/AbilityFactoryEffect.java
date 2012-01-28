@@ -397,7 +397,9 @@ public class AbilityFactoryEffect {
         eff.setImageName(card.getImageName());
         eff.setColor(card.getColor());
         eff.setImmutable(true);
-        eff.setImageName(params.get("Image"));
+        if (params.containsKey("Image")) {
+            eff.setImageName(params.get("Image"));
+        }
 
         // Effects should be Orange or something probably
 
