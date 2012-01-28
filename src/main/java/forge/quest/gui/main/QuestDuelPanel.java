@@ -17,6 +17,8 @@
  */
 package forge.quest.gui.main;
 
+import forge.quest.data.QuestDuel;
+
 /**
  * <p>
  * QuestDuelPanel.

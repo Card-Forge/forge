@@ -34,6 +34,7 @@ import javax.swing.border.LineBorder;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestEvent;
 
 /**
  * <p>

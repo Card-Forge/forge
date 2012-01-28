@@ -34,8 +34,8 @@ import forge.model.FMatchState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
-import forge.quest.gui.main.QuestEvent;
-import forge.quest.gui.main.QuestEventManager;
+import forge.quest.data.QuestEvent;
+import forge.quest.data.QuestEventManager;
 import forge.view.toolbox.FOverlay;
 
 /**
@@ -172,7 +172,7 @@ public final class AllZone {
      * getQuestEvent.
      * </p>
      * 
-     * @return a {@link forge.quest.gui.main.QuestEvent} object.
+     * @return a {@link forge.quest.data.QuestEvent} object.
      * @since 1.0.15
      */
     public static QuestEvent getQuestEvent() {
@@ -185,7 +185,7 @@ public final class AllZone {
      * </p>
      * 
      * @param q
-     *            a {@link forge.quest.gui.main.QuestEvent} object.
+     *            a {@link forge.quest.data.QuestEvent} object.
      */
     public static void setQuestEvent(final QuestEvent q) {
         AllZone.questEvent = q;
@@ -196,7 +196,7 @@ public final class AllZone {
      * getQuestEventManager.
      * </p>
      * 
-     * @return {@link forge.quest.gui.main.QuestEventManager} object.
+     * @return {@link forge.quest.data.QuestEventManager} object.
      * @since 1.0.15
      */
     public static QuestEventManager getQuestEventManager() {
@@ -209,7 +209,7 @@ public final class AllZone {
      * </p>
      * 
      * @param qem
-     *            a {@link forge.quest.gui.main.QuestEventManager} object
+     *            a {@link forge.quest.data.QuestEventManager} object
      */
     public static void setQuestEventManager(final QuestEventManager qem) {
         AllZone.questEventManager = qem;

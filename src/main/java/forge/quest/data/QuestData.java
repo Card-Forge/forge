@@ -155,6 +155,9 @@ public final class QuestData {
     // complex
     private transient QuestUtilCards myCards;
 
+    // This is used by shop. Had no idea where else to place this
+    private static transient QuestPreconManager preconManager = new QuestPreconManager(ForgeProps.getFile(NewConstants.Quest.PRECONS));
+
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
             "Level 2 - Death by Megrim", "Level 3 - Shattered the Competition", "Level 4 - Black Knighted",
@@ -679,6 +682,10 @@ public final class QuestData {
      */
     public void setMyDecks(final Map<String, Deck> myDecks0) {
         this.myDecks = myDecks0;
+    }
+
+    public static final QuestPreconManager getPreconManager() {
+        return preconManager;
     }
 
     /**

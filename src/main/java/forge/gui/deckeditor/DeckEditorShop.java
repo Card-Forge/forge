@@ -45,8 +45,9 @@ import forge.item.BoosterPack;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
+import forge.item.PreconDeck;
+import forge.quest.ReadPriceList;
 import forge.quest.data.QuestData;
-import forge.quest.data.ReadPriceList;
 
 /**
  * <p>
@@ -295,6 +296,8 @@ public final class DeckEditorShop extends DeckEditorBase {
             }
         } else if (card instanceof BoosterPack) {
             return 395;
+        } else if (card instanceof PreconDeck) {
+            return ((PreconDeck)card).getRecommendedDeals().getCost();
         }
         return 1337;
     }
@@ -308,14 +311,17 @@ public final class DeckEditorShop extends DeckEditorBase {
         final int value = this.getCardValue(item);
 
         if (value <= this.questData.getCredits()) {
+
             if (item instanceof CardPrinted) {
+                this.getTopTableWithCards().removeCard(item);
+                
                 final CardPrinted card = (CardPrinted) item;
                 this.getBottomTableWithCards().addCard(card);
-                this.getTopTableWithCards().removeCard(card);
-
                 this.questData.getCards().buyCard(card, value);
+                
             } else if (item instanceof BoosterPack) {
                 this.getTopTableWithCards().removeCard(item);
+                
                 final BoosterPack booster = (BoosterPack) ((BoosterPack) item).clone();
                 this.questData.getCards().buyBooster(booster, value);
                 final List<CardPrinted> newCards = booster.getCards();
@@ -325,7 +331,18 @@ public final class DeckEditorShop extends DeckEditorBase {
                 final CardListViewer c = new CardListViewer(booster.getName(),
                         "You have found the following cards inside:", newCards);
                 c.show();
+            } else if ( item instanceof PreconDeck ) {
+                this.getTopTableWithCards().removeCard(item);
+                final PreconDeck deck = (PreconDeck)item;
+                this.questData.getCards().buyPreconDeck(deck, value);
+                
+                for (final CardPrinted card : deck.getDeck().getMain().toFlatList()) {
+                    this.getBottomTableWithCards().addCard(card);
+                }
+                JOptionPane.showMessageDialog(null, String.format("Deck '%s' was added to youd decklist.%n%nCards from it were also added to your pool.", deck.getName()), "Thanks for purchase!", JOptionPane.INFORMATION_MESSAGE);
+                
             }
+            
 
             this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
         } else {

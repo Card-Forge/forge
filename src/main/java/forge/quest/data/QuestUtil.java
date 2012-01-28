@@ -28,8 +28,6 @@ import forge.Player;
 import forge.card.BoosterUtils;
 import forge.card.CardRarity;
 import forge.item.CardPrinted;
-import forge.quest.gui.main.QuestChallenge;
-import forge.quest.gui.main.QuestEvent;
 
 /**
  * <p>
@@ -63,7 +61,7 @@ public class QuestUtil {
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      * @param qe
-     *            a {@link forge.quest.gui.main.QuestEvent} object.
+     *            a {@link forge.quest.data.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList getComputerStartingCards(final QuestData qd, final QuestEvent qe) {
@@ -114,7 +112,7 @@ public class QuestUtil {
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      * @param qe
-     *            a {@link forge.quest.gui.main.QuestEvent} object.
+     *            a {@link forge.quest.data.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
     public static CardList getHumanStartingCards(final QuestData qd, final QuestEvent qe) {

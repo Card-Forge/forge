@@ -16,11 +16,11 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.deckeditor.DeckEditorShop;
+import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
+import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
-import forge.quest.gui.main.QuestChallenge;
-import forge.quest.gui.main.QuestEvent;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewQuest;
 

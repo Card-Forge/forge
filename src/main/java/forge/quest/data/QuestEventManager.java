@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.gui.main;
+package forge.quest.data;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,11 +25,8 @@ import java.util.Random;
 
 import forge.AllZone;
 import forge.deck.DeckIO;
-import forge.deck.DeckManager;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestUtil;
 import forge.util.FileUtil;
 
 /**
@@ -75,10 +72,6 @@ public class QuestEventManager {
         List<String> contents;
         QuestEvent tempEvent;
 
-        final File file = ForgeProps.getFile(NewConstants.Quest.DECKS);
-
-        final DeckManager manager = new DeckManager(file);
-
         final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckIO.DCK_FILE_FILTER);
 
         for (final File f : allFiles) {
@@ -97,7 +90,7 @@ public class QuestEventManager {
 
             // Assemble metadata (may not be necessary later) and deck object.
             this.assembleEventMetadata(contents, tempEvent);
-            tempEvent.setEventDeck(manager.getDeck(tempEvent.getName()));
+            tempEvent.setEventDeck(DeckIO.readDeck(contents));
         } // End for(allFiles)
 
         this.assembleDuelDifficultyLists();

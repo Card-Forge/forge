@@ -52,6 +52,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
+import forge.item.PreconDeck;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
@@ -283,6 +284,13 @@ public class QuestDataIO {
             writer.endNode();
         }
 
+        private void write(final PreconDeck deck, final Integer count, final HierarchicalStreamWriter writer) {
+            writer.startNode("precon");
+            writer.addAttribute("s", deck.getName());
+            writer.addAttribute("n", count.toString());
+            writer.endNode();
+        }        
+        
         @Override
         public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
             @SuppressWarnings("unchecked")
@@ -294,6 +302,8 @@ public class QuestDataIO {
                     this.write((CardPrinted) item, count, writer);
                 } else if (item instanceof BoosterPack) {
                     this.write((BoosterPack) item, count, writer);
+                } else if (item instanceof PreconDeck) {
+                    this.write((PreconDeck) item, count, writer);
                 }
             }
 
@@ -314,12 +324,24 @@ public class QuestDataIO {
                     result.add(this.readCardPrinted(reader), cnt);
                 } else if ("booster".equals(nodename)) {
                     result.add(this.readBooster(reader), cnt);
+                } else if ("precon".equals(nodename)) {
+                    PreconDeck toAdd = this.readPreconDeck(reader); 
+                    result.add(toAdd, cnt);
                 }
                 reader.moveUp();
             }
             return result;
         }
 
+        private PreconDeck readPreconDeck(final HierarchicalStreamReader reader) {
+            final String name = reader.getAttribute("n");
+            for( PreconDeck d : QuestData.getPreconManager().getDecks() )
+                if ( name.equalsIgnoreCase( d.getName() ) )
+                    return d;
+
+            return null;
+        }        
+        
         private BoosterPack readBooster(final HierarchicalStreamReader reader) {
             final String set = reader.getAttribute("s");
             return new BoosterPack(set);

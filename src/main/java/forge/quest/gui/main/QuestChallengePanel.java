@@ -20,6 +20,7 @@ package forge.quest.gui.main;
 import javax.swing.JLabel;
 
 import forge.gui.GuiUtils;
+import forge.quest.data.QuestChallenge;
 
 /**
  * <p>

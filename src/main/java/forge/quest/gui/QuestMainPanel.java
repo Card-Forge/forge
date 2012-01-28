@@ -52,14 +52,14 @@ import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.deckeditor.DeckEditorShop;
+import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
+import forge.quest.data.QuestDuel;
+import forge.quest.data.QuestEventManager;
 import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
-import forge.quest.gui.main.QuestChallenge;
 import forge.quest.gui.main.QuestChallengePanel;
-import forge.quest.gui.main.QuestDuel;
 import forge.quest.gui.main.QuestDuelPanel;
-import forge.quest.gui.main.QuestEventManager;
 import forge.quest.gui.main.QuestSelectablePanel;
 import forge.view.GuiTopLevel;
 
@@ -77,7 +77,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     private static final long serialVersionUID = 6142934729724012402L;
 
     private final forge.quest.data.QuestData questData;
-    private forge.quest.gui.main.QuestEventManager qem;
+    private forge.quest.data.QuestEventManager qem;
 
     /** The credits label. */
     private final JLabel creditsLabel = new JLabel();

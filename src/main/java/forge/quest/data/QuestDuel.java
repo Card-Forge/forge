@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.gui.main;
+package forge.quest.data;
 
 /**
  * <p>

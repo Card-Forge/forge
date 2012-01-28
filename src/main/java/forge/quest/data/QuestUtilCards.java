@@ -35,6 +35,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.item.PreconDeck;
 import forge.util.MyRandom;
 
 /**
@@ -204,6 +205,15 @@ public final class QuestUtilCards {
         }
     }
 
+    public void buyPreconDeck(final PreconDeck precon, final int value) {
+        if (this.q.getCredits() >= value) {
+            this.q.setCredits(this.q.getCredits() - value);
+            this.q.getShopList().remove(precon);
+            this.q.addDeck(precon.getDeck());
+            this.addAllCards(precon.getDeck().getMain().toFlatList());
+        }
+    }    
+    
     /**
      * Sell card.
      * 
@@ -293,6 +303,30 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
+    final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.SETS_IN_EXT;
+    final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+            CardSet.Predicates.Presets.SETS_IN_STANDARD);
+    final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+            Predicate.and(filterExt, Predicate.not(CardSet.Predicates.Presets.SETS_IN_STANDARD)));
+    final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+            Predicate.not(filterExt));
+    
+    public void generateBoostersInShop(int count) 
+    {
+        for (int i = 0; i < count; i++) {
+            final int rollD100 = MyRandom.getRandom().nextInt(100);
+            final Predicate<CardSet> filter = rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2
+                    : filterNotExt);
+            this.q.getShopList().addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.FN_FROM_SET));
+        }
+    }
+    
+    public void generatePreconsInShop(int count)
+    {
+        List<PreconDeck> validDecks = QuestData.getPreconManager().getDecksForCurrent(q);
+        this.q.getShopList().addAllCards(Predicate.getTrue(PreconDeck.class).random(validDecks, count));
+    }
+    
     public void generateCardsInShop() {
         final BoosterGenerator pack = new BoosterGenerator(CardDb.instance().getAllCards());
 
@@ -300,24 +334,14 @@ public final class QuestUtilCards {
         final int winPacks = this.q.getWin() / 10;
         final int totalPacks = Math.min(levelPacks + winPacks, 6);
 
-        final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.SETS_IN_EXT;
-        final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
-                CardSet.Predicates.Presets.SETS_IN_STANDARD);
-        final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
-                Predicate.and(filterExt, Predicate.not(CardSet.Predicates.Presets.SETS_IN_STANDARD)));
-        final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
-                Predicate.not(filterExt));
 
         this.q.getShopList().clear();
         for (int i = 0; i < totalPacks; i++) {
             this.q.getShopList().addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0, 0, 0));
-
-            // add some boosters
-            final int rollD100 = MyRandom.getRandom().nextInt(100);
-            final Predicate<CardSet> filter = rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2
-                    : filterNotExt);
-            this.q.getShopList().addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.FN_FROM_SET));
         }
+        
+        generateBoostersInShop(totalPacks);
+        generatePreconsInShop(totalPacks);
 
         this.addBasicLands(this.q.getShopList(), 10, 5);
     }

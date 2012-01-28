@@ -95,19 +95,22 @@ public class DeckIO {
      *            a {@link java.io.File} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    public static Deck readDeck(final File deckFile) {
     
-        final List<String> lines = FileUtil.readFile(deckFile);
-        final Map<String, List<String>> sections = SectionUtil.parseSections(lines);
+    public static Deck readDeck(final File deckFile) {
+        return readDeck(FileUtil.readFile(deckFile)); 
+    }
+    
+    public static Deck readDeck(final List<String> deckFileLines) {
+        final Map<String, List<String>> sections = SectionUtil.parseSections(deckFileLines);
         if (sections.isEmpty()) {
             return null;
         }
     
         final Deck d = new Deck();
     
-        final String firstLine = lines.get(0);
+        final String firstLine = deckFileLines.get(0);
         if (!firstLine.startsWith("[") || firstLine.equalsIgnoreCase("[general]")) {
-            readDeckOldMetadata(lines.iterator(), d);
+            readDeckOldMetadata(deckFileLines.iterator(), d);
         } else {
             readDeckMetadata(sections.get("metadata"), d);
         }

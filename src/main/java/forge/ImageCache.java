@@ -114,7 +114,7 @@ public class ImageCache {
                         }
 
                         File file = null;
-                        final String fName = key.endsWith(".png") ? key : key + ".jpg";
+                        final String fName = key.endsWith(".png") || key.endsWith(".jpg") ? key : key + ".jpg";
                         file = new File(path, fName);
                         if (!file.exists()) {
                             // DEBUG
