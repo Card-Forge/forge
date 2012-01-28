@@ -47,8 +47,13 @@ public class QuestPreconManager {
      * @return
      */
     public List<PreconDeck> getDecksForCurrent(QuestData q) {
-        
-        return decks;
+        List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
+        for(PreconDeck deck : decks)
+        {
+            if( deck.getRecommendedDeals().meetsRequiremnts(q))
+                meetRequirements.add(deck);
+        }
+        return meetRequirements;
     }
 
 
