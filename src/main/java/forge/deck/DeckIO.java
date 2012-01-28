@@ -68,7 +68,7 @@ public class DeckIO {
         public boolean accept(final File f) {
             return f.getName().endsWith(".dck") || f.isDirectory();
         }
-    
+
         @Override
         public String getDescription() {
             return "Simple Deck File .dck";
@@ -80,7 +80,7 @@ public class DeckIO {
         public boolean accept(final File f) {
             return f.getName().endsWith(".html") || f.isDirectory();
         }
-    
+
         @Override
         public String getDescription() {
             return "Simple Deck File .html";
@@ -95,19 +95,19 @@ public class DeckIO {
      *            a {@link java.io.File} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    
+
     public static Deck readDeck(final File deckFile) {
-        return readDeck(FileUtil.readFile(deckFile)); 
+        return readDeck(FileUtil.readFile(deckFile));
     }
-    
+
     public static Deck readDeck(final List<String> deckFileLines) {
         final Map<String, List<String>> sections = SectionUtil.parseSections(deckFileLines);
         if (sections.isEmpty()) {
             return null;
         }
-    
+
         final Deck d = new Deck();
-    
+
         final String firstLine = deckFileLines.get(0);
         if (!firstLine.startsWith("[") || firstLine.equalsIgnoreCase("[general]")) {
             readDeckOldMetadata(deckFileLines.iterator(), d);
@@ -116,7 +116,7 @@ public class DeckIO {
         }
         d.setMain(readCardList(sections.get("main")));
         d.setSideboard(readCardList(sections.get("sideboard")));
-    
+
         return d;
     }
 
@@ -127,31 +127,31 @@ public class DeckIO {
         final Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
-    
+
             final String[] linedata = line.split("=", 2);
             final String field = linedata[0].toLowerCase();
             String value = "";
-    
+
             if (linedata.length > 1) {
                 value = linedata[1];
             }
-    
+
             if (NAME.equalsIgnoreCase(field)) {
                 d.setName(value);
-    
+
             } else if (COMMENT.equalsIgnoreCase(field)) {
                 d.setComment(value);
-    
+
             } else if (DECK_TYPE.equalsIgnoreCase(field)) {
                 d.setDeckType(GameType.smartValueOf(value));
-    
+
             } else if (CSTM_POOL.equalsIgnoreCase(field)) {
                 d.setCustomPool(value.equalsIgnoreCase("true"));
-    
+
             } else if (PLAYER.equalsIgnoreCase(field)) {
                 if ("human".equalsIgnoreCase(value)) {
                     d.setPlayerType(PlayerType.HUMAN);
-    
+
                 } else {
                     d.setPlayerType(PlayerType.COMPUTER);
                 }
@@ -169,11 +169,11 @@ public class DeckIO {
      * @return a {@link forge.deck.Deck} object.
      */
     private static void readDeckOldMetadata(final Iterator<String> iterator, final Deck d) {
-    
+
         String line;
         // readDeck name
         final String name = iterator.next();
-    
+
         // readDeck comments
         String comment = null;
         while (iterator.hasNext()) {
@@ -186,11 +186,11 @@ public class DeckIO {
                 }
             }
         }
-    
+
         // readDeck deck type
-    
+
         final GameType deckType = iterator.hasNext() ? GameType.smartValueOf(iterator.next()) : GameType.Constructed;
-    
+
         d.setName(name);
         d.setComment(comment);
         d.setDeckType(deckType);
@@ -200,18 +200,18 @@ public class DeckIO {
     private static List<String> readCardList(final Iterable<String> lines) {
         final List<String> result = new ArrayList<String>();
         final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
-    
+
         if (lines == null) {
             return result;
         }
-    
+
         final Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
             if (line.startsWith("[")) {
                 break;
             } // there comes another section
-    
+
             final Matcher m = p.matcher(line.trim());
             m.matches();
             final String sCnt = m.group(2);
@@ -219,7 +219,7 @@ public class DeckIO {
             if (StringUtils.isBlank(cardName)) {
                 continue;
             }
-    
+
             final int count = sCnt == null ? 1 : Integer.parseInt(sCnt);
             for (int i = 0; i < count; i++) {
                 result.add(cardName);
@@ -314,7 +314,7 @@ public class DeckIO {
     private static List<String> serializeDeck(final Deck d) {
         final List<String> out = new ArrayList<String>();
         out.add(String.format("[metadata]"));
-    
+
         out.add(String.format("%s=%s", NAME, d.getName().replaceAll("\n", "")));
         out.add(String.format("%s=%s", DECK_TYPE, d.getDeckType()));
         // these are optional
@@ -324,14 +324,14 @@ public class DeckIO {
         if (d.getPlayerType() != null) {
             out.add(String.format("%s=%s", PLAYER, d.getPlayerType()));
         }
-    
+
         if (d.isCustomPool()) {
             out.add(String.format("%s=%s", CSTM_POOL, "true"));
         }
-    
+
         out.add(String.format("%s", "[main]"));
         out.addAll(writeCardPool(d.getMain()));
-    
+
         out.add(String.format("%s", "[sideboard]"));
         out.addAll(writeCardPool(d.getSideboard()));
         return out;
@@ -354,13 +354,13 @@ public class DeckIO {
         final int cardBorder = 0;
         final int height = 319;
         final int width = 222;
-    
+
         /* Create and adjust the configuration */
         final Configuration cfg = new Configuration();
         try {
             cfg.setClassForTemplateLoading(d.getClass(), "/");
             cfg.setObjectWrapper(new DefaultObjectWrapper());
-    
+
             /*
              * ------------------------------------------------------------------
              * -
@@ -369,10 +369,10 @@ public class DeckIO {
              * You usually do these for many times in the application
              * life-cycle:
              */
-    
+
             /* Get or create a template */
             temp = cfg.getTemplate("proxy-template.ftl");
-    
+
             /* Create a data-model */
             final Map<String, Object> root = new HashMap<String, Object>();
             root.put("title", d.getName());
@@ -388,14 +388,14 @@ public class DeckIO {
              * //System.out.println(card.getSets().get(card.getSets().size() -
              * 1).URL); nameList.add(card.getName()); }
              */
-    
+
             final TreeMap<String, Integer> map = new TreeMap<String, Integer>();
             for (final Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
                 map.put(entry.getKey().getName(), entry.getValue());
                 // System.out.println(entry.getValue() + " " +
                 // entry.getKey().getName());
             }
-    
+
             root.put("urls", list);
             root.put("cardBorder", cardBorder);
             root.put("height", height);
@@ -403,7 +403,7 @@ public class DeckIO {
             root.put("cardlistWidth", width - 11);
             // root.put("nameList", nameList);
             root.put("cardList", map);
-    
+
             /* Merge data-model with template */
             // StringWriter sw = new StringWriter();
             temp.process(root, out);
@@ -469,9 +469,9 @@ public class DeckIO {
      * <p>
      * readAllDecks.
      * </p>
-     * @return 
+     * @return
      */
-    public final static Map<String, Deck> readAllDecks(File deckDir) {
+    public static final Map<String, Deck> readAllDecks(File deckDir) {
         Map<String, Deck> result = new HashMap<String, Deck>();
         final List<String> decksThatFailedToLoad = new ArrayList<String>();
         File[] files = deckDir.listFiles(DeckIO.DCK_FILE_FILTER);
@@ -485,23 +485,22 @@ public class DeckIO {
                 decksThatFailedToLoad.add(message);
             }
         }
-    
+
         if (!decksThatFailedToLoad.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     StringUtils.join(decksThatFailedToLoad, System.getProperty("line.separator")),
                     "Some of your decks were not loaded.", JOptionPane.WARNING_MESSAGE);
         }
-        
+
         return result;
     }
 
-    public final static Map<String, Deck[]> readAllDraftDecks(File deckDir)
-    {
+    public static final Map<String, Deck[]> readAllDraftDecks(File deckDir) {
         Map<String, Deck[]> result = new HashMap<String, Deck[]>();
         File[] files = deckDir.listFiles(DeckIO.bdkFileFilter);
         for (final File file : files) {
             final Deck[] d = new Deck[8];
-    
+
             boolean gotError = false;
             for (int i = 0; i < d.length; i++) {
                 d[i] = DeckIO.readDeck(new File(file, i + ".dck"));
@@ -510,7 +509,7 @@ public class DeckIO {
                     break;
                 }
             }
-    
+
             if (!gotError) {
                 result.put(d[0].getName(), d);
             }
