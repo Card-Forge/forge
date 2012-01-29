@@ -16,6 +16,7 @@ import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewWinLose;
 
@@ -84,7 +85,7 @@ public class ControlWinLose {
      * with other game modes.
      */
     public void startNextRound() {
-        boolean isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
+        boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
         GameType gameType = Constant.Runtime.getGameType();
 
         //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere

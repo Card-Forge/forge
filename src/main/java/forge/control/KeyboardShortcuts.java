@@ -16,6 +16,7 @@ import javax.swing.KeyStroke;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewSettings.KeyboardShortcutField;
 
@@ -100,12 +101,12 @@ public class KeyboardShortcuts {
         };
 
         //========== Instantiate shortcut objects and add to list.
-        list.add(new Shortcut("shortcut.showstack", "Match: show stack panel", actShowStack, am, im));
-        list.add(new Shortcut("shortcut.showcombat", "Match: show combat panel", actShowCombat, am, im));
-        list.add(new Shortcut("shortcut.showconsole", "Match: show console panel", actShowConsole, am, im));
-        list.add(new Shortcut("shortcut.showplayers", "Match: show players panel", actShowPlayers, am, im));
-        list.add(new Shortcut("shortcut.showdev", "Match: show dev panel", actShowDev, am, im));
-        list.add(new Shortcut("shortcut.concede", "Match: concede game", actConcede, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, "Match: show combat panel", actShowCombat, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWCONSOLE, "Match: show console panel", actShowConsole, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWPLAYERS, "Match: show players panel", actShowPlayers, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_SHOWDEV, "Match: show dev panel", actShowDev, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, "Match: concede game", actConcede, am, im));
         return list;
     } // End initMatchShortcuts()
 
@@ -158,7 +159,7 @@ public class KeyboardShortcuts {
      */
     public static class Shortcut {
         /** */
-        private String prefkey;
+        private FPref prefkey;
         /** */
         private String description;
         /** */
@@ -183,7 +184,7 @@ public class KeyboardShortcuts {
          * @param am0 ActionMap, of container targeted by shortcut
          * @param im0 InputMap, of container targeted by shortcut
          */
-        public Shortcut(final String prefkey0, final String description0,
+        public Shortcut(final FPref prefkey0, final String description0,
                 final Action handler0, final ActionMap am0, final InputMap im0) {
 
             prefkey = prefkey0;
@@ -203,14 +204,14 @@ public class KeyboardShortcuts {
          * String ident key in forge.preferences.
          * @return {@link java.lang.String}
          */
-        public String getPrefKey() {
+        public FPref getPrefKey() {
             return prefkey;
         }
 
         /** */
         public void attach() {
             detach();
-            str = Singletons.getModel().getPreferences().getKeyboardShortcut(prefkey);
+            str = Singletons.getModel().getPreferences().getPref(prefkey);
             key = KeyStroke.getKeyStroke(KeyboardShortcuts.codes2Chars(str));
             inputMap.put(key, str);
             actionMap.put(str, handler);

@@ -32,6 +32,7 @@ import forge.PlayerType;
 import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
 /**
@@ -110,7 +111,7 @@ public class Generate5ColorDeck {
         this.notColors.remove(this.color4);
         this.notColors.remove(this.color5);
 
-        if (Singletons.getModel().getPreferences().isDeckGenSingletons()) {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS)) {
             this.maxDuplicates = 1;
         }
 
@@ -155,7 +156,7 @@ public class Generate5ColorDeck {
 
         // reduce to cards that match the colors
         CardList cL1 = allCards.getColor(this.color1);
-        if (!Singletons.getModel().getPreferences().isDeckGenRmvArtifacts()) {
+        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
             cL1.addAll(allCards.getColor(Constant.Color.COLORLESS));
         }
         CardList cL2 = allCards.getColor(this.color2);

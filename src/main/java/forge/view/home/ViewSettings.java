@@ -33,6 +33,7 @@ import forge.Singletons;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.control.home.ControlSettings;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 import forge.view.GuiTopLevel;
@@ -88,19 +89,19 @@ public class ViewSettings extends JScrollPane {
 
         final JLabel lblRemoveSmall = new NoteLabel("Disables 1/1 and 0/X creatures in generated decks.");
         cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
-        cbRemoveSmall.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvSmall());
+        cbRemoveSmall.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_NOSMALL));
         viewport.add(cbRemoveSmall, regularConstraints);
         viewport.add(lblRemoveSmall, regularConstraints);
 
         final JLabel lblSingletons = new NoteLabel("Disables non-land duplicates in generated decks.");
         cbSingletons = new OptionsCheckBox("Singleton Mode");
-        cbSingletons.setSelected(Singletons.getModel().getPreferences().isDeckGenSingletons());
+        cbSingletons.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
         viewport.add(cbSingletons, regularConstraints);
         viewport.add(lblSingletons, regularConstraints);
 
         final JLabel lblRemoveArtifacts = new NoteLabel("Disables artifact cards in generated decks.");
         cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
-        cbRemoveArtifacts.setSelected(Singletons.getModel().getPreferences().isDeckGenRmvArtifacts());
+        cbRemoveArtifacts.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         viewport.add(cbRemoveArtifacts, regularConstraints);
         viewport.add(lblRemoveArtifacts, regularConstraints);
 
@@ -109,25 +110,25 @@ public class ViewSettings extends JScrollPane {
         viewport.add(lblTitleUI, sectionConstraints);
 
         cbAnte = new OptionsCheckBox("Play for Ante");
-        cbAnte.setSelected(Singletons.getModel().getPreferences().isPlayForAnte());
+        cbAnte.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
         final JLabel lblAnte = new NoteLabel("Determines whether or not the game is played for ante.");
         viewport.add(cbAnte, regularConstraints);
         viewport.add(lblAnte, regularConstraints);
 
         cbUploadDraft = new OptionsCheckBox("Upload Draft Pics");
-        cbUploadDraft.setSelected(Singletons.getModel().getPreferences().isUploadDraftAI());
+        cbUploadDraft.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_UPLOAD_DRAFT));
         final JLabel lblUploadDraft = new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI.");
         viewport.add(cbUploadDraft, regularConstraints);
         viewport.add(lblUploadDraft, regularConstraints);
 
         cbStackLand = new OptionsCheckBox("Stack AI Land");
-        cbStackLand.setSelected(Singletons.getModel().getPreferences().isStackAiLand());
+        cbStackLand.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND));
         final JLabel lblStackLand = new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer.");
         viewport.add(cbStackLand, regularConstraints);
         viewport.add(lblStackLand, regularConstraints);
 
         cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
-        cbDevMode.setSelected(Singletons.getModel().getPreferences().isDeveloperMode());
+        cbDevMode.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED));
         final JLabel lblDevMode = new NoteLabel("Enables menu with functions for testing during development.");
         viewport.add(cbDevMode, regularConstraints);
         viewport.add(lblDevMode, regularConstraints);
@@ -143,7 +144,7 @@ public class ViewSettings extends JScrollPane {
 
         lstChooseSkin = new FList();
         lstChooseSkin.setListData(FSkin.getSkins().toArray(new String[0]));
-        lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getSkin(), true);
+        lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getPref(FPref.UI_SKIN), true);
         lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
         viewport.add(new FScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
 
@@ -156,19 +157,19 @@ public class ViewSettings extends JScrollPane {
 
         final JLabel lblRandomFoil = new NoteLabel("Adds foiled effects to random cards.");
         cbRandomFoil = new OptionsCheckBox("Random Foil");
-        cbRandomFoil.setSelected(Singletons.getModel().getPreferences().isRandCFoil());
+        cbRandomFoil.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL));
         viewport.add(cbRandomFoil, regularConstraints);
         viewport.add(lblRandomFoil, regularConstraints);
 
         final JLabel lblScaleLarger = new NoteLabel("Allows card pictures to be expanded larger than their original size.");
         cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
-        cbScaleLarger.setSelected(Singletons.getModel().getPreferences().isScaleLargerThanOriginal());
+        cbScaleLarger.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER));
         viewport.add(cbScaleLarger, regularConstraints);
         viewport.add(lblScaleLarger, regularConstraints);
 
         final JLabel lblTextMana = new NoteLabel("Overlays each card with basic card-specific information.");
         cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
-        cbTextMana.setSelected(Singletons.getModel().getPreferences().isCardOverlay());
+        cbTextMana.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY));
         viewport.add(cbTextMana, regularConstraints);
         viewport.add(lblTextMana, regularConstraints);
 
@@ -264,8 +265,8 @@ public class ViewSettings extends JScrollPane {
     private class CardSizeRadio extends OptionsRadio {
         public CardSizeRadio(String txt0) {
             super(txt0);
-            if (Singletons.getModel().getPreferences().getCardSize()
-                    .toString().equalsIgnoreCase(txt0)) {
+            if (Singletons.getModel().getPreferences().getPref(FPref.UI_CARD_SIZE)
+                    .equalsIgnoreCase(txt0)) {
                 setSelected(true);
             }
 
@@ -336,7 +337,7 @@ public class ViewSettings extends JScrollPane {
             super();
             this.setEditable(false);
             this.setFont(skin.getFont(14));
-            this.setCodeString(Singletons.getModel().getPreferences().getKeyboardShortcut(s0.getPrefKey()));
+            this.setCodeString(Singletons.getModel().getPreferences().getPref(s0.getPrefKey()));
 
             this.addKeyListener(new KeyAdapter() {
                 @Override
@@ -353,7 +354,7 @@ public class ViewSettings extends JScrollPane {
 
                 @Override
                 public void focusLost(final FocusEvent e) {
-                    Singletons.getModel().getPreferences().setKeyboardShortcut(
+                    Singletons.getModel().getPreferences().setPref(
                             s0.getPrefKey(), getCodeString());
                     Singletons.getModel().getPreferences().save();
                     s0.attach();

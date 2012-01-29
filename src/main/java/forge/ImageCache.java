@@ -36,6 +36,7 @@ import com.google.common.util.concurrent.UncheckedExecutionException;
 import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.item.InventoryItem;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -176,7 +177,7 @@ public class ImageCache {
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling, scaling option in menu
         // ?
-        if ((scale > 1) && !Singletons.getModel().getPreferences().isScaleLargerThanOriginal()) {
+        if ((scale > 1) && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER)) {
             scale = 1;
         }
 
@@ -203,7 +204,7 @@ public class ImageCache {
 
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling option in menu ?
-        if ((scale > 1) && !Singletons.getModel().getPreferences().isScaleLargerThanOriginal()) {
+        if ((scale > 1) && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER)) {
             scale = 1;
         }
 

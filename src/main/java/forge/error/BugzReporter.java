@@ -57,6 +57,7 @@ import org.mantisbt.connect.ui.DefaultSubmitter;
 import forge.Singletons;
 import forge.model.BuildInfo;
 import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -188,10 +189,10 @@ public class BugzReporter extends JDialog {
         this.contentPanel.add(this.txtUserName);
         this.txtUserName.setColumns(4);
         try {
-            this.prefs = new ForgePreferences("forge.preferences");
-            if (!this.prefs.getBugzName().equals("")) {
-                this.txtUserName.setText(this.prefs.getBugzName());
-                this.txtPassword.setText(this.prefs.getBugzPwd());
+            this.prefs = new ForgePreferences();
+            if (!this.prefs.getPref(FPref.UI_BUGZ_NAME).equals("")) {
+                this.txtUserName.setText(this.prefs.getPref(FPref.UI_BUGZ_NAME));
+                this.txtPassword.setText(this.prefs.getPref(FPref.UI_BUGZ_PWD));
                 this.chkReportAnonymously.setSelected(false);
             } else {
                 this.chkReportAnonymously.setSelected(true);
@@ -209,9 +210,9 @@ public class BugzReporter extends JDialog {
                     BugzReporter.this.txtUserName.setText("ForgeGUI");
                     BugzReporter.this.txtPassword.setText("vi2ccTbfBUu^");
                 } else {
-                    if (!BugzReporter.this.prefs.getBugzName().equals("")) {
-                        BugzReporter.this.txtUserName.setText(BugzReporter.this.prefs.getBugzName());
-                        BugzReporter.this.txtPassword.setText(BugzReporter.this.prefs.getBugzPwd());
+                    if (!BugzReporter.this.prefs.getPref(FPref.UI_BUGZ_NAME).equals("")) {
+                        BugzReporter.this.txtUserName.setText(BugzReporter.this.prefs.getPref(FPref.UI_BUGZ_NAME));
+                        BugzReporter.this.txtPassword.setText(BugzReporter.this.prefs.getPref(FPref.UI_BUGZ_PWD));
                     }
                 }
             }
@@ -458,8 +459,8 @@ public class BugzReporter extends JDialog {
                 break Report;
             }
 
-            this.prefs.setBugzName(this.txtUserName.getText());
-            this.prefs.setBugzPwd(String.valueOf(this.txtPassword.getPassword()));
+            this.prefs.setPref(FPref.UI_BUGZ_NAME, this.txtUserName.getText());
+            this.prefs.setPref(FPref.UI_BUGZ_PWD, String.valueOf(this.txtPassword.getPassword()));
             try {
                 this.prefs.save();
             } catch (final Exception e) {

@@ -12,6 +12,7 @@ import forge.Constant;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.CardSizeType;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewSettings;
 import forge.view.toolbox.FSkin;
@@ -56,7 +57,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbAnte().isSelected();
-                prefs.setPlayForAnte(toggle);
+                prefs.setPref(FPref.UI_ANTE, String.valueOf(toggle));
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -65,7 +66,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbScaleLarger().isSelected();
-                prefs.setScaleLargerThanOriginal(toggle);
+                prefs.setPref(FPref.UI_SCALE_LARGER, String.valueOf(toggle));
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -74,7 +75,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbDevMode().isSelected();
-                prefs.setDeveloperMode(toggle);
+                prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
                 Constant.Runtime.DEV_MODE[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
@@ -84,7 +85,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbRemoveSmall().isSelected();
-                prefs.setDeckGenRmvSmall(toggle);
+                prefs.setPref(FPref.DECKGEN_NOSMALL, String.valueOf(toggle));
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -93,7 +94,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbRemoveArtifacts().isSelected();
-                prefs.setDeckGenRmvArtifacts(toggle);
+                prefs.setPref(FPref.DECKGEN_ARTIFACTS, String.valueOf(toggle));
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -102,7 +103,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbSingletons().isSelected();
-                prefs.setDeckGenSingletons(toggle);
+                prefs.setPref(FPref.DECKGEN_SINGLETONS, String.valueOf(toggle));
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -111,7 +112,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbUploadDraft().isSelected();
-                prefs.setUploadDraftAI(toggle);
+                prefs.setPref(FPref.UI_UPLOAD_DRAFT , String.valueOf(toggle));
                 Constant.Runtime.UPLOAD_DRAFT[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
@@ -121,7 +122,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbStackLand().isSelected();
-                prefs.setStackAiLand(toggle);
+                prefs.setPref(FPref.UI_SMOOTH_LAND, String.valueOf(toggle));
                 Constant.Runtime.SMOOTH[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
@@ -131,7 +132,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbRandomFoil().isSelected();
-                prefs.setRandCFoil(toggle);
+                prefs.setPref(FPref.UI_RANDOM_FOIL, String.valueOf(toggle));
                 Constant.Runtime.RANDOM_FOIL[0] = toggle;
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
@@ -141,7 +142,7 @@ public class ControlSettings {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbTextMana().isSelected();
-                prefs.setCardOverlay(toggle);
+                prefs.setPref(FPref.UI_CARD_OVERLAY, String.valueOf(toggle));
                 try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
             }
         });
@@ -153,7 +154,7 @@ public class ControlSettings {
 
         skin.loadFontsAndImages();
 
-        prefs.setSkin(name);
+        prefs.setPref(FPref.UI_SKIN, name);
         Singletons.getView().setSkin(skin);
         ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
 
@@ -167,7 +168,7 @@ public class ControlSettings {
      * @throws Exception */
     public void updateCardSize(JRadioButton rad0) throws Exception {
         CardSizeType cst = CardSizeType.valueOf(rad0.getText().toLowerCase());
-        Singletons.getModel().getPreferences().setCardSize(cst);
+        Singletons.getModel().getPreferences().setPref(FPref.UI_CARD_SIZE, cst.toString());
         prefs.save();
     }
 }

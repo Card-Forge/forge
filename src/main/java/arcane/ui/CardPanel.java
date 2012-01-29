@@ -45,6 +45,7 @@ import forge.CardContainer;
 import forge.Counters;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.toolbox.CardFaceSymbols;
 
 /**
@@ -585,7 +586,7 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public final void setText(final Card card) {
-        if ((card == null) || !Singletons.getModel().getPreferences().isCardOverlay()) {
+        if ((card == null) || !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY)) {
             return;
         }
 
@@ -635,7 +636,7 @@ public class CardPanel extends JPanel implements CardContainer {
         final Insets i = this.getInsets();
         final Image image = card == null ? null : ImageCache.getImage(card, this.getWidth() - i.left - i.right,
                 this.getHeight() - i.top - i.bottom);
-        if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().isCardOverlay()) {
+        if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY)) {
             this.setText(this.getGameCard());
         }
 

@@ -58,6 +58,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.match.ControlTabber;
 import forge.gui.ForgeAction;
 import forge.gui.MultiLineLabelUI;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.view.GuiTopLevel;
 import forge.view.toolbox.FPanel;
@@ -428,7 +429,7 @@ public class ViewTabber extends FRoundedPanel {
         } else {
             temp[5].setText("");
         }
-        if (Singletons.getModel().getPreferences().isPlayForAnte()) {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
             CardList list = p0.getCardsIn(Zone.Ante);
             StringBuilder sb = new StringBuilder();
             sb.append("Ante'd: ");

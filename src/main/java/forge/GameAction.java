@@ -56,6 +56,7 @@ import forge.gui.input.InputPayManaCost;
 import forge.gui.input.InputPayManaCostAbility;
 import forge.gui.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.util.MyRandom;
@@ -873,7 +874,6 @@ public class GameAction {
         }
 
         if (this.canShowWinLose && this.checkEndGameState()) {
-            AllZone.getDisplay().savePrefs();
             new ViewWinLose();
             this.canShowWinLose = false;
             return;
@@ -1437,7 +1437,7 @@ public class GameAction {
                 }
 
                 if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
-                        && !Singletons.getModel().getPreferences().isPlayForAnte()) {
+                        && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
                     hAnteRemoved.add(card.getName());
                 } else {
                     AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
@@ -1479,7 +1479,7 @@ public class GameAction {
                 }
 
                 if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
-                        && !Singletons.getModel().getPreferences().isPlayForAnte()) {
+                        && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
                     cAnteRemoved.add(card.getName());
                 } else {
                     AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
@@ -1583,7 +1583,7 @@ public class GameAction {
             this.computerStartsGame();
         }
 
-        if (Singletons.getModel().getPreferences().isPlayForAnte()) {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
             for (final Player p : AllZone.getPlayersInGame()) {

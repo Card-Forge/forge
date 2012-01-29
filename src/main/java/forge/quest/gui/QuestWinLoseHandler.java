@@ -45,6 +45,7 @@ import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
 import forge.item.CardPrinted;
 import forge.model.FMatchState;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestEvent;
@@ -103,7 +104,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qPrefs = Singletons.getModel().getQuestPreferences();
         this.wonMatch = this.model.matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
         this.skin = Singletons.getView().getSkin();
-        this.isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
+        this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
     /**

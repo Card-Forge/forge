@@ -19,14 +19,12 @@ package forge.properties;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeSet;
 
 /**
  * <p>
@@ -40,117 +38,118 @@ import java.util.TreeSet;
  * @version $Id$
  */
 public class ForgePreferences {
-    private String fileName = "forge.preferences";
-    private Map<String, String> prefs;
+    private Map<FPref, String> preferenceValues;
 
-    /**
-     * Initializes default values for preferences and sets a file address.
-     * 
-     * Note: preferences must be loaded separately.
-     * 
-     * @param s0 &emsp; File address string
+    /** 
+     * Preference identifiers, and their default values.
+     * When this class is instantiated, these enum values are used
+     * in a map that is populated with the current preferences
+     * from the text file.
      */
-    public ForgePreferences(String s0) {
-        this.fileName = s0;
-        File f = new File(fileName);
+    public enum FPref { /** */
+        UI_USE_OLD ("false"), /** */
+        UI_RANDOM_FOIL ("false"), /** */
+        UI_LAYOUT_PARAMS ("0.15,0.55,0.68,0.73,0.44,0.40"), /** */
+        UI_SMOOTH_LAND ("false"), /** */
+        UI_USE_SKIN ("default"), /** */
+        UI_CARD_OVERLAY ("true"), /** */
+        UI_UPLOAD_DRAFT ("false"), /** */
+        UI_SCALE_LARGER ("false"), /** */
+        UI_MAX_STACK ("3"), /** */
+        UI_STACK_OFFSET ("tiny"), /** */
+        UI_CARD_SIZE ("small"), /** */
+        UI_BUGZ_NAME (""), /** */
+        UI_BUGZ_PWD (""), /** */
+        UI_ANTE ("false"), /** */
+        UI_SKIN ("default"), /** */
 
-        if (!f.exists()) { makeNew(); }
-        else { load(); }
+        DEV_MODE_ENABLED ("false"), /** */
+        DEV_MILLING_LOSS ("true"), /** */
+        DEV_UNLIMITED_LAND ("false"), /** */
 
-        // Test for existence of old file
-        if (prefs.get("ui.use.skin") == null) {
-            makeNew();
+        DECKGEN_SINGLETONS ("false"), /** */
+        DECKGEN_ARTIFACTS ("false"), /** */
+        DECKGEN_NOSMALL ("false"), /** */
+
+        PHASE_AI_UPKEEP ("true"), /** */
+        PHASE_AI_DRAW ("true"), /** */
+        PHASE_AI_MAIN1 ("true"), /** */
+        PHASE_AI_BEGINCOMBAT ("true"), /** */
+        PHASE_AI_DECLAREATTACKERS ("true"), /** */
+        PHASE_AI_DECLAREBLOCKERS ("true"), /** */
+        PHASE_AI_FIRSTSTRIKE ("true"), /** */
+        PHASE_AI_COMBATDAMAGE ("true"), /** */
+        PHASE_AI_ENDCOMBAT ("true"), /** */
+        PHASE_AI_MAIN2 ("true"), /** */
+        PHASE_AI_EOT ("true"), /** */
+        PHASE_AI_CLEANUP ("true"), /** */
+
+        PHASE_HUMAN_UPKEEP ("true"), /** */
+        PHASE_HUMAN_DRAW ("true"), /** */
+        PHASE_HUMAN_MAIN1 ("true"), /** */
+        PHASE_HUMAN_BEGINCOMBAT ("true"), /** */
+        PHASE_HUMAN_DECLAREATTACKERS ("true"), /** */
+        PHASE_HUMAN_DECLAREBLOCKERS ("true"), /** */
+        PHASE_HUMAN_FIRSTSTRIKE ("true"), /** */
+        PHASE_HUMAN_COMBATDAMAGE ("true"), /** */
+        PHASE_HUMAN_ENDCOMBAT ("true"), /** */
+        PHASE_HUMAN_MAIN2 ("true"), /** */
+        PHASE_HUMAN_EOT ("true"), /** */
+        PHASE_HUMAN_CLEANUP ("true"), /** */
+
+        SHORTCUT_SHOWSTACK ("83"), /** */
+        SHORTCUT_SHOWCOMBAT ("67"), /** */
+        SHORTCUT_SHOWCONSOLE ("76"), /** */
+        SHORTCUT_SHOWPLAYERS ("80"), /** */
+        SHORTCUT_SHOWDEV ("68"), /** */
+        SHORTCUT_CONCEDE ("17");
+
+        private final String strDefaultVal;
+
+        /** @param s0 &emsp; {@link java.lang.String} */
+        FPref(String s0) {
+            this.strDefaultVal = s0;
+        }
+
+        /** @return {@link java.lang.String} */
+        public String getDefault() {
+            return strDefaultVal;
         }
     }
 
-    private void makeNew() {
-        prefs = new HashMap<String, String>();
-        //========== Default values for all preferences:
-        // UI preferences
-        prefs.put("ui.use.old", "false");
-        prefs.put("ui.random.foil", "false");
-        prefs.put("ui.layout.params", "");
-        prefs.put("ui.smooth.land", "false");
-        prefs.put("ui.use.skin", "default");
-        prefs.put("ui.card.overlay", "true");
-        prefs.put("ui.upload.draft", "false");
-        prefs.put("ui.scale.larger", "false");
-        prefs.put("ui.max.stack", "3");
-        prefs.put("ui.stack.offset", "tiny");
-        prefs.put("ui.card.size", "small");
-        prefs.put("ui.bugz.name", "");
-        prefs.put("ui.bugz.pwd", "");
-        prefs.put("ui.ante", "false");
-
-        // Devmode preferences
-        prefs.put("dev.mode", "false");
-        prefs.put("dev.milling.loss", "true");
-        prefs.put("dev.unlimited.land", "false");
-
-        //Deck generation preferences
-        prefs.put("deckgen.singletons", "false");
-        prefs.put("deckgen.artifacts", "false");
-        prefs.put("deckgen.nosmall", "false");
-
-        // Phase toggle preferences
-        prefs.put("phase.ai.upkeep", "true");
-        prefs.put("phase.ai.draw", "true");
-        prefs.put("phase.ai.main1", "true");
-        prefs.put("phase.ai.beginCombat", "true");
-        prefs.put("phase.ai.declareAttackers", "true");
-        prefs.put("phase.ai.declareBlockers", "true");
-        prefs.put("phase.ai.firstStrike", "true");
-        prefs.put("phase.ai.combatDamage", "true");
-        prefs.put("phase.ai.endCombat", "true");
-        prefs.put("phase.ai.main2", "true");
-        prefs.put("phase.ai.eot", "true");
-        prefs.put("phase.ai.cleanup", "true");
-
-        prefs.put("phase.human.upkeep", "true");
-        prefs.put("phase.human.draw", "true");
-        prefs.put("phase.human.main1", "true");
-        prefs.put("phase.human.beginCombat", "true");
-        prefs.put("phase.human.declareAttackers", "true");
-        prefs.put("phase.human.declareBlockers", "true");
-        prefs.put("phase.human.firstStrike", "true");
-        prefs.put("phase.human.combatDamage", "true");
-        prefs.put("phase.human.endCombat", "true");
-        prefs.put("phase.human.main2", "true");
-        prefs.put("phase.human.eot", "true");
-        prefs.put("phase.human.cleanup", "true");
-
-        // Keyboard shortcuts
-        prefs.put("shortcut.showstack", "83");
-        prefs.put("shortcut.showcombat", "67");
-        prefs.put("shortcut.showconsole", "76");
-        prefs.put("shortcut.showplayers", "80");
-        prefs.put("shortcut.showdev", "68");
-        prefs.put("shortcut.concede", "17");
-
-        save();
+    /** */
+    public enum CardSizeType {
+        /** */
+        tiny, smaller, small, medium, large, huge
     }
-    //========== File handling
 
-    /** Loads preferences from file into prefs map. */
-    public void load() {
-        BufferedReader reader = null;
+    /** */
+    public enum StackOffsetType {
+        /** */
+        tiny, small, medium, large
+    }
 
+    /** Instantiates a ForgePreferences object. */
+    public ForgePreferences() {
+        preferenceValues = new HashMap<FPref, String>();
         try {
+            final BufferedReader input = new BufferedReader(new FileReader(NewConstants.PREFERENCE_FILE));
             String line = null;
-            reader = new BufferedReader(new FileReader(fileName));
-            prefs = new HashMap<String, String>();
-            while ((line = reader.readLine()) != null) {
-                String[] pair = line.split("=");
-                if (pair.length != 2) {
+            while ((line = input.readLine()) != null) {
+                if (line.startsWith("#") || (line.length() == 0)) {
                     continue;
                 }
-                prefs.put(pair[0], pair[1]);
+
+                final String[] split = line.split("=");
+
+                if (split.length == 2) {
+                    this.setPref(split[0], split[1]);
+                }
             }
-            reader.close();
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
     }
 
@@ -159,10 +158,9 @@ public class ForgePreferences {
         BufferedWriter writer = null;
 
         try {
-            writer = new BufferedWriter(new FileWriter(fileName));
-            TreeSet<String> keys = new TreeSet<String>(prefs.keySet());
-            for (String key : keys) {
-                writer.write(key + "=" + prefs.get(key));
+            writer = new BufferedWriter(new FileWriter(NewConstants.PREFERENCE_FILE));
+            for (FPref key : FPref.values()) {
+                writer.write(key + "=" + getPref(key));
                 writer.newLine();
             }
 
@@ -175,286 +173,62 @@ public class ForgePreferences {
         }
     }
 
-    //========== Enums
-    /** */
-    public static enum CardSizeType {
-        /** */
-        tiny, smaller, small, medium, large, huge
+    /**
+     * DUE TO BE DEPRECATED:
+     * Transition code between preference manager for v1.2.2 and v1.2.3.
+     * (string-based vs. enum-based)
+     * 
+     * @param s0 &emsp; {@link java.lang.String} identifier of preference
+     * @param s1 &emsp; {@link java.lang.String} value
+     */
+    public void setPref(String s0, String s1) {
+        try {
+            preferenceValues.put(FPref.valueOf(s0), s1);
+        }
+        catch (Exception e) {
+        }
     }
 
-    /** */
-    public static enum StackOffsetType {
-        /** */
-        tiny, small, medium, large
+    /**
+     * @param q0 &emsp; {@link forge.properties.ForgePreferences.FPref}
+     * @param s0 &emsp; {@link java.lang.String} value
+     */
+    public void setPref(FPref q0, String s0) {
+        preferenceValues.put(q0, s0);
     }
 
-    //========== Setters / getters: UI prefs
+    /**
+     * Returns a non-difficulty-indexed preference value.
+     * 
+     * @param fp0 &emsp; {@link forge.quest.data.ForgePreferences.FPref}
+     * @return String
+     */
+    public String getPref(FPref fp0) {
+        String val;
 
-    /** @return boolean */
-    public boolean isStackAiLand() {
-        return Boolean.parseBoolean(prefs.get("ui.smooth.land"));
+        val = preferenceValues.get(fp0);
+        if (val == null) { val = fp0.getDefault(); }
+
+        return val;
     }
 
-    /** @param b0 &emsp; boolean */
-    public void setStackAiLand(boolean b0) {
-        prefs.put("ui.smooth.land", Boolean.toString(b0));
+    /**
+     * Returns a non-difficulty-indexed preference value, as an int.
+     * 
+     * @param fp0 &emsp; {@link forge.quest.data.ForgePreferences.FPref}
+     * @return int
+     */
+    public int getPrefInt(FPref fp0) {
+        return Integer.parseInt(getPref(fp0));
     }
 
-    /** @return boolean */
-    public boolean isOldGui() {
-        return Boolean.parseBoolean(prefs.get("ui.use.old"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setOldGui(boolean b0) {
-        prefs.put("ui.use.old", Boolean.toString(b0));
-    }
-
-    /** @return String of six values, comma delimited */
-    public String getUILayout() {
-        return prefs.get("ui.layout.params");
-    }
-
-    /** @param s0 &emsp; String of six values, comma delimited */
-    public void setUILayout(String s0) {
-        prefs.put("ui.layout.params", s0);
-    }
-
-    /** @return boolean */
-    public boolean isUploadDraftAI() {
-        return Boolean.parseBoolean(prefs.get("ui.upload.draft"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setUploadDraftAI(boolean b0) {
-        prefs.put("ui.upload.draft", Boolean.toString(b0));
-    }
-
-    /** @return the randCFoil */
-    public boolean isRandCFoil() {
-        return Boolean.parseBoolean(prefs.get("ui.random.foil"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setRandCFoil(boolean b0) {
-        prefs.put("ui.random.foil", Boolean.toString(b0));
-    }
-
-    /** @param skin0 &emsp; String skin name*/
-    public void setSkin(String skin0) {
-        prefs.put("ui.use.skin", skin0);
-    }
-
-    /** @return boolean*/
-    public boolean isCardOverlay() {
-        return Boolean.parseBoolean(prefs.get("ui.card.overlay"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setCardOverlay(boolean b0) {
-        prefs.put("ui.card.overlay", Boolean.toString(b0));
-    }
-
-    /** @return int */
-    public int getMaxStackSize() {
-        return Integer.parseInt(prefs.get("ui.max.stack"));
-    }
-
-    /** @param i0 &emsp; int, max stack size */
-    public void setMaxStackSize(int i0) {
-        prefs.put("ui.max.stack", Integer.toString(i0));
-    }
-
-    /** @return boolean */
-    public boolean isScaleLargerThanOriginal() {
-        return Boolean.parseBoolean(prefs.get("ui.scale.larger"));
-    }
-
-    /** @param b0 boolean */
-    public void setScaleLargerThanOriginal(boolean b0) {
-        prefs.put("ui.scale.larger", Boolean.toString(b0));
-    }
-
-    /** @return boolean */
-    public boolean isPlayForAnte() {
-        return Boolean.parseBoolean(prefs.get("ui.ante"));
-    }
-
-    /** @param b0 boolean */
-    public void setPlayForAnte(boolean b0) {
-        prefs.put("ui.ante", Boolean.toString(b0));
-    }
-
-    //========== Setters / getters: Dev mode prefs
-
-    /** @return boolean */
-    public boolean isMillingLossCondition() {
-        return Boolean.parseBoolean(prefs.get("dev.milling.loss"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setMillingLossCondition(boolean b0) {
-        prefs.put("dev.milling.loss", Boolean.toString(b0));
-    }
-
-    /** @return boolean */
-    public boolean isUnlimitedLand() {
-        return Boolean.parseBoolean(prefs.get("dev.unlimited.land"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setUnlimitedLand(boolean b0) {
-        prefs.put("dev.unlimited.land", Boolean.toString(b0));
-    }
-
-    /** @return boolean */
-    public boolean isDeveloperMode() {
-        return Boolean.parseBoolean(prefs.get("dev.mode"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setDeveloperMode(boolean b0) {
-        prefs.put("dev.mode", Boolean.toString(b0));
-    }
-
-    /** @return CardSizeType */
-    public CardSizeType getCardSize() {
-        return CardSizeType.valueOf(prefs.get("ui.card.size"));
-    }
-
-    /** @param cst0 &emsp; CardSizeType */
-    public void setCardSize(CardSizeType cst0) {
-        prefs.put("ui.card.size", cst0.toString());
-    }
-
-    /** @return StackOffsetType */
-    public StackOffsetType getStackOffset() {
-        return StackOffsetType.valueOf(prefs.get("ui.stack.offset"));
-    }
-
-    /** @param sot0 &emsp; StackOffsetType */
-    public void setStackOffset(StackOffsetType sot0) {
-        prefs.put("ui.stack.offset", sot0.toString());
-    }
-
-    /** @return String skin name */
-    public String getSkin() {
-        return prefs.get("ui.use.skin");
-    }
-
-    /** @return String */
-    public String getBugzName() {
-        return prefs.get("ui.bugz.name");
-    }
-
-    /** @param s0 &emsp; String bugzName */
-    public void setBugzName(String s0) {
-        prefs.put("ui.bugz.name", s0);
-    }
-
-    /** @return String */
-    public String getBugzPwd() {
-        return prefs.get("ui.bugz.pwd");
-    }
-
-    /**  @param s0 &emsp; String password */
-    public void setBugzPwd(String s0) {
-        prefs.put("ui.bugz.pwd", s0);
-    }
-
-    //========== Setters / getters: Deck generation prefs
-
-    /** @return boolean */
-    public boolean isDeckGenSingletons() {
-        return Boolean.parseBoolean(prefs.get("deckgen.singletons"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setDeckGenSingletons(boolean b0) {
-        prefs.put("deckgen.singletons", Boolean.toString(b0));
-    }
-
-    /** @return boolean */
-    public boolean isDeckGenRmvArtifacts() {
-        return Boolean.parseBoolean(prefs.get("deckgen.artifacts"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setDeckGenRmvArtifacts(boolean b0) {
-        prefs.put("deckgen.artifacts", Boolean.toString(b0));
-    }
-
-    /** @return boolean */
-    public boolean isDeckGenRmvSmall() {
-        return Boolean.parseBoolean(prefs.get("deckgen.nosmall"));
-    }
-
-    /** @param b0 &emsp; boolean */
-    public void setDeckGenRmvSmall(boolean b0) {
-        prefs.put("deckgen.nosmall", Boolean.toString(b0));
-    }
-
-    //========== Phase and shortcut setter/getter
-
-    /** 
-     * Prints exception stack trace if phase name is not in the list.
-     * @param s0 &emsp; String phase name
+    /**
+     * Returns a non-difficulty-indexed preference value, as a boolean.
+     * 
+     * @param fp0 &emsp; {@link forge.quest.data.ForgePreferences.FPref}
      * @return boolean
      */
-    public boolean isShowPhase(String s0) {
-        if (prefs.get(s0) != null) {
-            return Boolean.parseBoolean(prefs.get(s0));
-        }
-        else {
-            Exception ex = new Exception();
-            ex.printStackTrace();
-            return true;
-        }
-    }
-
-    /** 
-     * Prints exception stack trace if phase name is not in the list.
-     * @param s0 &emsp; String phase name
-     * @param b0 &emsp; boolean
-     */
-    public void setShowPhase(String s0, boolean b0) {
-        if (prefs.get(s0) != null) {
-            prefs.put(s0, Boolean.toString(b0));
-        }
-        else {
-            Exception ex = new Exception();
-            ex.printStackTrace();
-        }
-    }
-
-    /** 
-     * Prints exception stack trace if shortcut is not in the list.
-     * @param s0 &emsp; String shortcut key code(s)
-     * @return boolean
-     */
-    public String getKeyboardShortcut(String s0) {
-        if (prefs.get(s0) != null) {
-            return prefs.get(s0);
-        }
-        else {
-            Exception ex = new Exception();
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    /** 
-     * Prints exception stack trace if shortcut is not in the list.
-     * @param s0 &emsp; String shortcut name
-     * @param s1 &emsp; String shortcut key code(s)
-     */
-    public void setKeyboardShortcut(String s0, String s1) {
-        if (prefs.get(s0) != null) {
-            prefs.put(s0, s1);
-        }
-        else {
-            Exception ex = new Exception();
-            ex.printStackTrace();
-        }
+    public boolean getPrefBoolean(FPref fp0) {
+        return Boolean.parseBoolean(getPref(fp0));
     }
 }

@@ -24,7 +24,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.Card;
@@ -39,8 +38,8 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.match.ViewField;
-import forge.view.match.ViewTabber;
 import forge.view.toolbox.FOverlay;
 
 /**
@@ -317,41 +316,42 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
         final List<ViewField> fieldViews = this.control.getMatchController().getView().getFieldViews();
 
-        Constant.Runtime.MILL[0] = fp.isMillingLossCondition();
-        Constant.Runtime.DEV_MODE[0] = fp.isDeveloperMode();
-        Constant.Runtime.UPLOAD_DRAFT[0] = fp.isUploadDraftAI();
-        Constant.Runtime.RANDOM_FOIL[0] = fp.isRandCFoil();
-        Constant.Runtime.UPLOAD_DRAFT[0] = (Constant.Runtime.NET_CONN[0] ? fp.isUploadDraftAI() : false);
+        Constant.Runtime.MILL[0] = fp.getPrefBoolean(FPref.DEV_MILLING_LOSS);
+        Constant.Runtime.DEV_MODE[0] = fp.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        Constant.Runtime.UPLOAD_DRAFT[0] = fp.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
+        Constant.Runtime.RANDOM_FOIL[0] = fp.getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        Constant.Runtime.UPLOAD_DRAFT[0] =
+                (Constant.Runtime.NET_CONN[0] ? fp.getPrefBoolean(FPref.UI_UPLOAD_DRAFT) : false);
 
         // AI field is at index [0]
-        fieldViews.get(0).getLblUpkeep().setEnabled(fp.isShowPhase("phase.ai.upkeep"));
-        fieldViews.get(0).getLblDraw().setEnabled(fp.isShowPhase("phase.ai.draw"));
-        fieldViews.get(0).getLblMain1().setEnabled(fp.isShowPhase("phase.ai.main1"));
-        fieldViews.get(0).getLblBeginCombat().setEnabled(fp.isShowPhase("phase.ai.beginCombat"));
-        fieldViews.get(0).getLblDeclareAttackers().setEnabled(fp.isShowPhase("phase.ai.declareAttackers"));
-        fieldViews.get(0).getLblDeclareBlockers().setEnabled(fp.isShowPhase("phase.ai.declareBlockers"));
-        fieldViews.get(0).getLblFirstStrike().setEnabled(fp.isShowPhase("phase.ai.firstStrike"));
-        fieldViews.get(0).getLblCombatDamage().setEnabled(fp.isShowPhase("phase.ai.combatDamage"));
-        fieldViews.get(0).getLblEndCombat().setEnabled(fp.isShowPhase("phase.ai.endCombat"));
-        fieldViews.get(0).getLblMain2().setEnabled(fp.isShowPhase("phase.ai.main2"));
-        fieldViews.get(0).getLblEndTurn().setEnabled(fp.isShowPhase("phase.ai.eot"));
-        fieldViews.get(0).getLblCleanup().setEnabled(fp.isShowPhase("phase.ai.cleanup"));
+        fieldViews.get(0).getLblUpkeep().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
+        fieldViews.get(0).getLblDraw().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_DRAW));
+        fieldViews.get(0).getLblMain1().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_MAIN1));
+        fieldViews.get(0).getLblBeginCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
+        fieldViews.get(0).getLblDeclareAttackers().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
+        fieldViews.get(0).getLblDeclareBlockers().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
+        fieldViews.get(0).getLblFirstStrike().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
+        fieldViews.get(0).getLblCombatDamage().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
+        fieldViews.get(0).getLblEndCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
+        fieldViews.get(0).getLblMain2().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_MAIN2));
+        fieldViews.get(0).getLblEndTurn().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_EOT));
+        fieldViews.get(0).getLblCleanup().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
 
         // Human field is at index [1]
-        fieldViews.get(1).getLblUpkeep().setEnabled(fp.isShowPhase("phase.human.upkeep"));
-        fieldViews.get(1).getLblDraw().setEnabled(fp.isShowPhase("phase.human.draw"));
-        fieldViews.get(1).getLblMain1().setEnabled(fp.isShowPhase("phase.human.main1"));
-        fieldViews.get(1).getLblBeginCombat().setEnabled(fp.isShowPhase("phase.human.beginCombat"));
-        fieldViews.get(1).getLblDeclareAttackers().setEnabled(fp.isShowPhase("phase.human.declareAttackers"));
-        fieldViews.get(1).getLblDeclareBlockers().setEnabled(fp.isShowPhase("phase.human.declareBlockers"));
-        fieldViews.get(1).getLblFirstStrike().setEnabled(fp.isShowPhase("phase.human.firstStrike"));
-        fieldViews.get(1).getLblCombatDamage().setEnabled(fp.isShowPhase("phase.human.combatDamage"));
-        fieldViews.get(1).getLblEndCombat().setEnabled(fp.isShowPhase("phase.human.endCombat"));
-        fieldViews.get(1).getLblMain2().setEnabled(fp.isShowPhase("phase.human.main2"));
-        fieldViews.get(1).getLblEndTurn().setEnabled(fp.isShowPhase("phase.human.eot"));
-        fieldViews.get(1).getLblCleanup().setEnabled(fp.isShowPhase("phase.human.cleanup"));
+        fieldViews.get(1).getLblUpkeep().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
+        fieldViews.get(1).getLblDraw().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
+        fieldViews.get(1).getLblMain1().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
+        fieldViews.get(1).getLblBeginCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
+        fieldViews.get(1).getLblDeclareAttackers().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
+        fieldViews.get(1).getLblDeclareBlockers().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
+        fieldViews.get(1).getLblFirstStrike().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
+        fieldViews.get(1).getLblCombatDamage().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
+        fieldViews.get(1).getLblEndCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
+        fieldViews.get(1).getLblMain2().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
+        fieldViews.get(1).getLblEndTurn().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
+        fieldViews.get(1).getLblCleanup().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
 
-        this.control.getMatchController().getView().setLayoutParams(fp.getUILayout());
+        this.control.getMatchController().getView().setLayoutParams(fp.getPref(FPref.UI_LAYOUT_PARAMS));
         return true;
     }
 
@@ -367,54 +367,6 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
      */
     @Override
     public final boolean savePrefs() {
-        final ForgePreferences fp = Singletons.getModel().getPreferences();
-        final List<ViewField> fieldViews = this.control.getMatchController().getView().getFieldViews();
-
-        // AI field is at index [0]
-        fp.setShowPhase("phase.ai.upkeep", fieldViews.get(0).getLblUpkeep().getEnabled());
-        fp.setShowPhase("phase.ai.draw", fieldViews.get(0).getLblDraw().getEnabled());
-        fp.setShowPhase("phase.ai.main1", fieldViews.get(0).getLblMain1().getEnabled());
-        fp.setShowPhase("phase.ai.beginCombat", fieldViews.get(0).getLblBeginCombat().getEnabled());
-        fp.setShowPhase("phase.ai.declareAttackers", fieldViews.get(0).getLblDeclareAttackers().getEnabled());
-        fp.setShowPhase("phase.ai.declareBlockers", fieldViews.get(0).getLblDeclareBlockers().getEnabled());
-        fp.setShowPhase("phase.ai.firstStrike", fieldViews.get(0).getLblFirstStrike().getEnabled());
-        fp.setShowPhase("phase.ai.combatDamage", fieldViews.get(0).getLblCombatDamage().getEnabled());
-        fp.setShowPhase("phase.ai.endCombat", fieldViews.get(0).getLblEndCombat().getEnabled());
-        fp.setShowPhase("phase.ai.main2", fieldViews.get(0).getLblMain2().getEnabled());
-        fp.setShowPhase("phase.ai.eot", fieldViews.get(0).getLblEndTurn().getEnabled());
-        fp.setShowPhase("phase.ai.cleanup", fieldViews.get(0).getLblCleanup().getEnabled());
-
-        // Human field is at index [1]
-        fp.setShowPhase("phase.human.upkeep", fieldViews.get(1).getLblUpkeep().getEnabled());
-        fp.setShowPhase("phase.human.draw", fieldViews.get(1).getLblDraw().getEnabled());
-        fp.setShowPhase("phase.human.main1", fieldViews.get(1).getLblMain1().getEnabled());
-        fp.setShowPhase("phase.human.beginCombat", fieldViews.get(1).getLblBeginCombat().getEnabled());
-        fp.setShowPhase("phase.human.declareAttackers", fieldViews.get(1).getLblDeclareAttackers().getEnabled());
-        fp.setShowPhase("phase.human.declareBlockers", fieldViews.get(1).getLblDeclareBlockers().getEnabled());
-        fp.setShowPhase("phase.human.firstStrike", fieldViews.get(1).getLblFirstStrike().getEnabled());
-        fp.setShowPhase("phase.human.combatDamage", fieldViews.get(1).getLblCombatDamage().getEnabled());
-        fp.setShowPhase("phase.human.endCombat", fieldViews.get(1).getLblEndCombat().getEnabled());
-        fp.setShowPhase("phase.human.main2", fieldViews.get(1).getLblMain2().getEnabled());
-        fp.setShowPhase("phase.human.eot", fieldViews.get(1).getLblEndTurn().getEnabled());
-        fp.setShowPhase("phase.human.cleanup", fieldViews.get(1).getLblCleanup().getEnabled());
-
-        ViewTabber v = this.control.getMatchController().getView().getTabberController().getView();
-        Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
-
-        fp.setMillingLossCondition(Constant.Runtime.MILL[0]);
-        fp.setUILayout(control.getMatchController().getView().getLayoutParams());
-        fp.setUnlimitedLand(v.getLblUnlimitedLands().getEnabled());
-
-        try {
-            fp.save();
-        } catch (final Exception ex) {
-            final int result = JOptionPane.showConfirmDialog(this,
-                    "Preferences could not be saved. Continue to close without saving ?", "Confirm Exit",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (result != JOptionPane.OK_OPTION) {
-                return false;
-            }
-        }
         return true;
     }
 

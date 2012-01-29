@@ -26,6 +26,7 @@ import forge.AllZone;
 import forge.GuiDisplayUtil;
 import forge.MyObservable;
 import forge.Singletons;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.match.ViewTabber;
 
 /**
@@ -61,13 +62,13 @@ public class ControlTabber extends MyObservable {
     public ControlTabber(final ViewTabber v) {
         this.view = v;
 
-        if (Singletons.getModel().getPreferences().isMillingLossCondition()) {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS)) {
             this.view.getLblMilling().setEnabled(true);
         } else {
             this.view.getLblMilling().setEnabled(false);
         }
 
-        if (Singletons.getModel().getPreferences().isUnlimitedLand()) {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
             this.view.getLblUnlimitedLands().setEnabled(true);
         } else {
             this.view.getLblUnlimitedLands().setEnabled(false);

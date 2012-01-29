@@ -36,6 +36,7 @@ import forge.gui.input.InputControl;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
@@ -86,7 +87,7 @@ public class FModel {
 
         // Instantiate preferences
         try {
-            this.preferences = new ForgePreferences("forge.preferences");
+            this.preferences = new ForgePreferences();
         } catch (final Exception exn) {
             throw new RuntimeException(exn);
         }
@@ -99,7 +100,7 @@ public class FModel {
         // Unfortunately, they're tied up in legacy code in the Display interface,
         // currently in GuiTopLevel.  When that code is updated, this TODO should be resolved.
         // Doublestrike 24-01-12
-        Constant.Runtime.DEV_MODE[0] = preferences.isDeveloperMode();
+        Constant.Runtime.DEV_MODE[0] = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
         // Instantiate AI
         AllZone.setInputControl(new InputControl(FModel.this));

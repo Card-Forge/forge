@@ -43,13 +43,15 @@ public final class NewConstants {
     /** Constant <code>CARDFORGE_URL = "program/cardforgeURL"</code>. */
     public static final String CARDFORGE_URL = "program/cardforgeURL";
 
+    /** Constant <code>CARDFORGE_URL = "program/cardforgeURL"</code>. */
+    public static final String PREFERENCE_FILE = "forge.preferences";
+
     /** Constant <code>DECKS="decks"</code>. */
     public static final String DECKS = "decks";
     /** Constant <code>BOOSTER_DECKS="booster-decks"</code>. */
     public static final String BOOSTER_DECKS = "booster-decks";
     /** Constant <code>NEW_DECKS="decks-dir"</code>. */
     public static final String NEW_DECKS = "decks-dir";
-    
 
     /** Constant <code>TOKENS="tokens"</code>. */
     public static final String TOKENS = "tokens";
@@ -209,7 +211,8 @@ public final class NewConstants {
 
         /** The PET_TOKEN_IMAGES. */
         public static final String PET_TOKEN_IMAGES = "quest/pet/tokens";
-        
+
+        /** */
         public static final String PRECONS = "quest/precons-dir";
     }
 

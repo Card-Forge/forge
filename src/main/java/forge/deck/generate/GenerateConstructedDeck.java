@@ -30,6 +30,7 @@ import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * <p>
@@ -182,7 +183,7 @@ public class GenerateConstructedDeck {
                 // is this really a colorless artifact and not something
                 // weird like Sarcomite Myr which is a colored artifact
                 return c.isArtifact() && CardUtil.getColors(c).contains(Constant.Color.COLORLESS)
-                        && !Singletons.getModel().getPreferences().isDeckGenRmvArtifacts();
+                        && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS);
             }
         });
         out.addAll(artifact);
@@ -191,7 +192,7 @@ public class GenerateConstructedDeck {
             @Override
             public boolean addCard(final Card c) {
                 if (c.isCreature() && (c.getNetAttack() <= 1)
-                        && Singletons.getModel().getPreferences().isDeckGenRmvSmall()) {
+                        && Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_NOSMALL)) {
                     return false;
                 }
 

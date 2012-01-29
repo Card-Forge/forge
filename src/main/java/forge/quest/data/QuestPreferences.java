@@ -40,7 +40,6 @@ import forge.properties.NewConstants.Quest;
  */
 @SuppressWarnings("serial")
 public class QuestPreferences implements Serializable {
-
     private Map<QPref, String> preferenceValues;
 
     /** 
@@ -151,12 +150,15 @@ public class QuestPreferences implements Serializable {
                 }
 
                 final String[] split = line.split("=");
-                this.setPreference(split[0], split[1]);
+
+                if (split.length == 2) {
+                    this.setPreference(split[0], split[1]);
+                }
             }
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
     }
 
@@ -187,8 +189,7 @@ public class QuestPreferences implements Serializable {
     /**
      * DUE TO BE DEPRECATED:
      * Transition code between preference manager for v1.2.2 and v1.2.3.
-     * Should be able to delete very neatly after release of 1.2.3,
-     * perhaps sooner.
+     * (string-based vs. enum-based)
      * 
      * @param s0 &emsp; {@link java.lang.String} identifier of preference
      * @param s1 &emsp; {@link java.lang.String} value
@@ -202,7 +203,7 @@ public class QuestPreferences implements Serializable {
     }
 
     /**
-     * @param q0 &emsp; {@link forge.quest.data.CopyOfQuestPreferences.QPref}
+     * @param q0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
      * @param s0 &emsp; {@link java.lang.String} value
      */
     public void setPreference(QPref q0, String s0) {
@@ -212,7 +213,7 @@ public class QuestPreferences implements Serializable {
     /**
      * Returns a non-difficulty-indexed preference value.
      * 
-     * @param qp0 &emsp; {@link forge.quest.data.CopyOfQuestPreferences.QPref}
+     * @param qp0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
      * @return String
      */
     public String getPreference(QPref qp0) {
@@ -237,7 +238,7 @@ public class QuestPreferences implements Serializable {
     /**
      * Returns a preference value according to a difficulty index.
      * 
-     * @param qp0 &emsp; {@link forge.quest.data.CopyOfQuestPreferences.QPref}
+     * @param qp0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
      * @param i0 &emsp; int difficulty index
      * @return String
      */
@@ -269,7 +270,7 @@ public class QuestPreferences implements Serializable {
     /**
      * Returns a non-difficulty-indexed preference value, as an int.
      * 
-     * @param qp0 &emsp; {@link forge.quest.data.CopyOfQuestPreferences.QPref}
+     * @param qp0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
      * @return int
      */
     public int getPreferenceInt(QPref qp0) {
@@ -279,7 +280,7 @@ public class QuestPreferences implements Serializable {
     /**
      * Returns a difficulty-indexed preference value, as an int.
      * 
-     * @param qp0 &emsp; {@link forge.quest.data.CopyOfQuestPreferences.QPref}
+     * @param qp0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
      * @param i0 &emsp; int difficulty index
      * @return int
      */
