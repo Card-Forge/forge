@@ -123,6 +123,8 @@ public final class NewConstants {
     public static final String NAME_MUTATOR = "name-mutator";
     /** Constant <code>BOOSTERDATA="boosterdata"</code>. */
     public static final String BOOSTERDATA = "boosterdata";
+    /** The file name of the image for face down cards on the battlefield. */
+    public static final String MORPH_IMAGE_FILE_NAME = "morph";
 
     /** The MTG_DATA. */
     public static final String MTG_DATA = "mtg-data";

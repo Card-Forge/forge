@@ -294,7 +294,7 @@ public class ImageCache {
      */
     private static String getKey(final Card card) {
 
-        if (card.isToken() && !card.isCopiedToken()) {
+        if ((card.isToken() && !card.isCopiedToken()) || card.isFaceDown()) {
             return GuiDisplayUtil.cleanString(card.getImageName()) + ImageCache.TOKEN;
         }
 

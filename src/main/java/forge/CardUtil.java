@@ -1020,7 +1020,7 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(types);
 
-        ret.setImageFilename("morph");
+        ret.setImageName(NewConstants.MORPH_IMAGE_FILE_NAME);
 
         return ret;
 
