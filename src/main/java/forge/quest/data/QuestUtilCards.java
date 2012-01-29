@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.SetUtils;
+import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.BoosterUtils;
 import forge.card.CardRarity;
@@ -36,6 +37,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.item.PreconDeck;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 
 /**
@@ -44,6 +46,7 @@ import forge.util.MyRandom;
  */
 public final class QuestUtilCards {
     private final QuestData q;
+    private final QuestPreferences qpref;
 
     /**
      * Instantiates a new quest util cards.
@@ -53,6 +56,7 @@ public final class QuestUtilCards {
      */
     public QuestUtilCards(final QuestData qd) {
         this.q = qd;
+        this.qpref = Singletons.getModel().getQuestPreferences();
     }
 
     /**
@@ -93,9 +97,9 @@ public final class QuestUtilCards {
      * @return the array list
      */
     public ArrayList<CardPrinted> addCards(final Predicate<CardPrinted> fSets) {
-        final int nCommon = QuestPreferences.getNumCommon();
-        final int nUncommon = QuestPreferences.getNumUncommon();
-        final int nRare = QuestPreferences.getNumRare();
+        final int nCommon = qpref.getPreferenceInt(QPref.BOOSTER_COMMONS);
+        final int nUncommon = qpref.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
+        final int nRare = qpref.getPreferenceInt(QPref.BOOSTER_RARES);
 
         final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
         newCards.addAll(BoosterUtils.generateCards(fSets, nCommon, CardRarity.Common, null));
@@ -166,9 +170,9 @@ public final class QuestUtilCards {
      *            the idx difficulty
      */
     public void setupNewGameCardPool(final Predicate<CardPrinted> filter, final int idxDifficulty) {
-        final int nC = QuestPreferences.getStartingCommons(idxDifficulty);
-        final int nU = QuestPreferences.getStartingUncommons(idxDifficulty);
-        final int nR = QuestPreferences.getStartingRares(idxDifficulty);
+        final int nC = qpref.getPreferenceInt(QPref.STARTING_COMMONS, idxDifficulty);
+        final int nU = qpref.getPreferenceInt(QPref.STARTING_UNCOMMONS, idxDifficulty);
+        final int nR = qpref.getPreferenceInt(QPref.STARTING_RARES, idxDifficulty);
 
         this.addAllCards(BoosterUtils.getQuestStarterDeck(filter, nC, nU, nR));
     }

@@ -4,23 +4,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
+import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.deckeditor.DeckEditorShop;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
+import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestEvent;
+import forge.quest.data.QuestEventManager;
+import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
+import forge.quest.data.pet.QuestPetAbstract;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewQuest;
 
@@ -31,20 +43,34 @@ import forge.view.home.ViewQuest;
 public class ControlQuest {
     private ViewQuest view;
     private QuestEvent event;
-    private final ActionListener actPetSelect, actPlantSelect;
-    private final MouseAdapter madStartGame;
+    private QuestData qData;
+    private QuestPreferences qPrefs;
+    private QuestEventManager qem;
+    private JPanel selectedTab;
+
+    private final MouseAdapter madStartGame, madDuels, madChallenges,
+        madQuests, madDecks, madPreferences;
+    private final ActionListener actPetSelect, actPlantSelect,
+        actSpellShop, actBazaar, actEmbark, actNewDeck, actCurrentDeck;
+    private final Command cmdDeckExit, cmdDeckDelete, cmdDeckSelect,
+        cmdQuestSelect, cmdQuestDelete;
+    private Deck currentDeck;
+    private Map<String, QuestData> arrQuests;
 
     /**
      * Controls logic and listeners for quest mode in home screen.
      * 
      * @param v0 &emsp; ViewQuest
      */
+    @SuppressWarnings("serial")
     public ControlQuest(ViewQuest v0) {
+        // Inits
         this.view = v0;
+        this.qem = new QuestEventManager();
+        this.qPrefs = Singletons.getModel().getQuestPreferences();
+        AllZone.setQuestEventManager(this.qem);
 
-        if (view.hasPreviousQuest()) {
-            updateDeckList();
-        }
+        //========= Listener inits
 
         // Game start logic must happen outside of the EDT.
         madStartGame = new MouseAdapter() {
@@ -60,14 +86,33 @@ public class ControlQuest {
             }
         };
 
+        madDuels = new MouseAdapter() { @Override
+            public void mouseClicked(MouseEvent e) { view.showDuelsTab(); } };
+
+        madChallenges = new MouseAdapter() { @Override
+            public void mouseClicked(MouseEvent e) { view.showChallengesTab(); } };
+
+        madQuests = new MouseAdapter() { @Override
+            public void mouseClicked(MouseEvent e) { view.showQuestsTab(); } };
+
+        madDecks = new MouseAdapter() { @Override
+            public void mouseClicked(MouseEvent e) {
+                view.showDecksTab();
+                if (ControlQuest.this.qem != null) { refreshDecks(); }
+            }
+        };
+
+        madPreferences = new MouseAdapter() { @Override
+            public void mouseClicked(MouseEvent e) { view.showPrefsTab(); } };
+
         actPetSelect = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
-                if (view.getPetComboBox().getSelectedIndex() > 0) {
-                    view.getQuestData().getPetManager().setSelectedPet(
-                            (String) view.getPetComboBox().getSelectedItem());
+                if (view.getCbxPet().getSelectedIndex() > 0) {
+                    qData.getPetManager().setSelectedPet(
+                            (String) view.getCbxPet().getSelectedItem());
                 } else {
-                    view.getQuestData().getPetManager().setSelectedPet(null);
+                    qData.getPetManager().setSelectedPet(null);
                 }
             }
         };
@@ -75,25 +120,59 @@ public class ControlQuest {
         actPlantSelect = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent actionEvent) {
-                view.getQuestData().getPetManager()
-                        .setUsePlant(view.getPlantCheckBox().isSelected());
+                qData.getPetManager()
+                        .setUsePlant(view.getCbPlant().isSelected());
             }
         };
 
+        actSpellShop = new ActionListener() { @Override
+            public void actionPerformed(ActionEvent e) { showSpellShop(); } };
+
+        actBazaar = new ActionListener() { @Override
+            public void actionPerformed(ActionEvent e) { showBazaar(); } };
+
+        actEmbark = new ActionListener() { @Override
+            public void actionPerformed(ActionEvent e) { newQuest(); } };
+
+        actCurrentDeck = new ActionListener() { @Override
+            public void actionPerformed(ActionEvent e) { view.showDecksTab(); } };
+
+        actNewDeck = new ActionListener() { @Override
+            public void actionPerformed(ActionEvent e) {
+                final DeckEditorQuest editor = new DeckEditorQuest(qData);
+                editor.show(cmdDeckExit);
+                editor.setVisible(true);
+            }
+        };
+
+        cmdDeckExit = new Command() {
+            @Override
+            public void execute() {
+                AllZone.getQuestData().saveData();
+                refreshDecks();
+                GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
+                g.getController().getHomeView().getBtnQuest().grabFocus();
+            }
+        };
+
+        cmdDeckSelect = new Command() {
+            @Override
+            public void execute() {
+                currentDeck = view.getLstDecks().getSelectedDeck();
+                view.setCurrentDeckStatus();
+            }
+        };
+
+        cmdDeckDelete = new Command() { @Override
+            public void execute() { refreshDecks(); } };
+
+        cmdQuestSelect = new Command() { @Override
+            public void execute() { changeQuest(); } };
+
+        cmdQuestDelete = new Command() { @Override
+            public void execute() { refreshQuests(); } };
+
         addListeners();
-    }
-
-    private void addListeners() {
-        if (view.hasPreviousQuest()) {
-            view.getBtnStart().removeMouseListener(madStartGame);
-            view.getBtnStart().addMouseListener(madStartGame);
-
-            view.getPetComboBox().removeActionListener(actPetSelect);
-            view.getPetComboBox().addActionListener(actPetSelect);
-
-            view.getPlantCheckBox().removeActionListener(actPlantSelect);
-            view.getPlantCheckBox().addActionListener(actPlantSelect);
-        }
     }
 
     /** @return ViewQuest */
@@ -101,72 +180,102 @@ public class ControlQuest {
         return view;
     }
 
-    /** */
-    private void updateDeckList() {
-        view.getLstDeckChooser().setListData(AllZone.getQuestData().getDeckNames().toArray());
-        view.getLstDeckChooser().setSelectedIndex(0);
+    /** @return {@link forge.quest.gui.main.QuestEventManager} */
+    public QuestEventManager getQEM() {
+        return this.qem;
     }
 
-    /** */
-    public void showDeckEditor() {
-        final Command exit = new Command() {
-            private static final long serialVersionUID = -5110231879431074581L;
-
-            @Override
-            public void execute() {
-                // saves all deck data
-                AllZone.getQuestData().saveData();
-                updateDeckList();
-            }
-        };
-
-        DeckEditorQuest g = new DeckEditorQuest(AllZone.getQuestData());
-        g.show(exit);
-        g.setVisible(true);
+    /** @return {@link forge.Command} What to do when the deck editor exits. */
+    public Command getExitCommand() {
+        return cmdDeckExit;
     }
 
-    private void updateCredits() {
-        view.getLblCredits().setText(Long.toString(view.getQuestData().getCredits()));
+    /** @return String &emsp; indicates the rank of this current quest */
+    public String getRankString() {
+        return qData.getRank();
     }
 
-    private void updateLife() {
-        view.getLblLife().setText(Long.toString(view.getQuestData().getLife()));
+    /** @return forge.deck.Deck */
+    public Deck getCurrentDeck() {
+        return this.currentDeck;
     }
 
-    /** */
-    public void showCardShop() {
-        final Command exit = new Command() {
-            private static final long serialVersionUID = 8567193482568076362L;
-
-            @Override
-            public void execute() {
-                // saves all deck data
-                AllZone.getQuestData().saveData();
-                updateDeckList();
-                updateCredits();
-                //updateLife();
-            }
-        };
-
-        DeckEditorShop g = new DeckEditorShop(AllZone.getQuestData());
-        g.show(exit);
-        g.setVisible(true);
+    /** @return  */
+    public Map<String, QuestData> getAllQuests() {
+        return arrQuests;
     }
 
-    /** */
-    public void showBazaar() {
-        GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
+    /**
+     * Updates visual state of tabber.
+     * @param tab0 &emsp; JPanel tab object (can pass SubTab too).
+     */
+    public void updateTabber(JPanel tab0) {
+        if (selectedTab != null) {
+            selectedTab.setEnabled(false);
+        }
 
-        g.getController().changeState(FControl.QUEST_BAZAAR);
-        g.validate();
-    } // card shop button
+        tab0.setEnabled(true);
+        selectedTab = tab0;
+    }
+
+    private void addListeners() {
+        view.getTabDuels().removeMouseListener(madDuels);
+        view.getTabDuels().addMouseListener(madDuels);
+
+        view.getTabChallenges().removeMouseListener(madChallenges);
+        view.getTabChallenges().addMouseListener(madChallenges);
+
+        view.getTabDecks().removeMouseListener(madDecks);
+        view.getTabDecks().addMouseListener(madDecks);
+
+        view.getTabQuests().removeMouseListener(madQuests);
+        view.getTabQuests().addMouseListener(madQuests);
+
+        view.getTabPreferences().removeMouseListener(madPreferences);
+        view.getTabPreferences().addMouseListener(madPreferences);
+
+        view.getBtnEmbark().removeActionListener(actEmbark);
+        view.getBtnEmbark().addActionListener(actEmbark);
+
+        view.getLstQuests().setSelectCommand(cmdQuestSelect);
+        view.getLstQuests().setEditCommand(cmdQuestDelete);
+        view.getLstQuests().setDeleteCommand(cmdQuestDelete);
+
+        if (this.qem != null) {
+            view.getBtnStart().removeMouseListener(madStartGame);
+            view.getBtnStart().addMouseListener(madStartGame);
+
+            view.getBtnBazaar().removeActionListener(actBazaar);
+            view.getBtnBazaar().addActionListener(actBazaar);
+
+            view.getBtnNewDeck().removeActionListener(actNewDeck);
+            view.getBtnNewDeck().addActionListener(actNewDeck);
+
+            view.getBtnCurrentDeck().removeActionListener(actCurrentDeck);
+            view.getBtnCurrentDeck().addActionListener(actCurrentDeck);
+
+            view.getBtnSpellShop().removeActionListener(actSpellShop);
+            view.getBtnSpellShop().addActionListener(actSpellShop);
+
+            view.getCbxPet().removeActionListener(actPetSelect);
+            view.getCbxPet().addActionListener(actPetSelect);
+
+            view.getCbPlant().removeActionListener(actPlantSelect);
+            view.getCbPlant().addActionListener(actPlantSelect);
+
+            view.getLstDecks().setSelectCommand(cmdDeckSelect);
+            view.getLstDecks().setDeleteCommand(cmdDeckDelete);
+
+            view.getLstDecks().setExitCommand(cmdDeckExit);
+        }
+    }
 
     /**
      * The actuator for new quests.
      */
-    public void newQuest() {
+    private void newQuest() {
         int difficulty = 0;
-        QuestData questData = new QuestData();
+        QuestData newdata = new QuestData();
 
         final String mode = view.getRadFantasy().isSelected()
                 ? forge.quest.data.QuestData.FANTASY
@@ -181,32 +290,197 @@ public class ControlQuest {
         } else if (view.getRadExpert().isSelected()) {
             difficulty = 3;
         } else {
-            JOptionPane.showMessageDialog(null,
-                    "This should not be happening!",
-                    "New Quest: Difficulty Bug!?", JOptionPane.ERROR_MESSAGE);
+            throw new IllegalStateException(
+                    "ControlQuest() > newQuest(): Error starting new quest!");
+        }
+
+        final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
+
+        if (o == null) { return; }
+
+        final String questName = GuiUtils.cleanString(o.toString());
+
+        if (getAllQuests().get(questName) != null || questName.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please pick another quest name, a quest already has that name.");
             return;
         }
 
-        if (questData.hasSaveFile()) {
-            // this will overwrite your save file!
-            final Object[] possibleValues = { "Yes", "No" };
-            final Object choice = JOptionPane.showOptionDialog(null,
-                    "Starting a new quest will overwrite your current quest. Continue?", "Start New Quest?",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, possibleValues, possibleValues[1]);
+        // Give the user a few cards to build a deck
+        newdata.newGame(difficulty, mode, view.getCbStandardStart().isSelected());
+        newdata.setName(questName);
+        newdata.saveData();
 
-            if (!choice.equals(0)) {
-                return;
+        view.getParentView().resetQuest();
+    }   // New Quest
+
+    private void changeQuest() {
+        AllZone.setQuestData(view.getLstQuests().getSelectedQuest());
+        this.qData = AllZone.getQuestData();
+        this.qem = new QuestEventManager();
+        this.qem.assembleAllEvents();
+        AllZone.setQuestEventManager(this.qem);
+
+        refreshDecks();
+        refreshStats();
+    }
+
+    /** Resets quests, then retrieves and sets current quest. */
+    public void refreshQuests() {
+        File dirQuests = new File("res/quest/data/");
+
+        // Temporary transition code between v1.2.2 and v1.2.3.
+        // Can be safely deleted after release of 1.2.3.
+        if (!dirQuests.exists()) {
+            dirQuests.mkdirs();
+        }
+        File olddata = new File("res/quest/questData.dat");
+        File newpath = new File(dirQuests.getPath() + "questData.dat");
+
+        if (olddata.exists()) { olddata.renameTo(newpath); }
+        // end block which can be deleted
+
+        // Iterate over files and load quest datas for each.
+        File[] arrFiles = dirQuests.listFiles();
+        arrQuests = new HashMap<String, QuestData>();
+        for (File f : arrFiles) {
+            arrQuests.put(f.getName(), QuestDataIO.loadData(f));
+        }
+
+        // Populate list with available quest datas.
+        view.getLstQuests().setQuests(arrQuests.values().toArray(new QuestData[0]));
+
+        // If there are quests available, force select.
+        if (arrQuests.size() > 0) {
+            final String questname = qPrefs.getPreference(QPref.CURRENT_QUEST);
+
+            // Attempt to select previous quest.
+            if (arrQuests.get(questname) != null) {
+                view.getLstQuests().setSelectedQuestData(arrQuests.get(questname));
+            }
+            else {
+                view.getLstQuests().setSelectedIndex(0);
+            }
+
+            // Save in preferences.
+            qPrefs.setPreference(QPref.CURRENT_QUEST,
+                    view.getLstQuests().getSelectedQuest().getName());
+
+            // Drop into AllZone.
+            AllZone.setQuestData(view.getLstQuests().getSelectedQuest());
+        }
+        else {
+            AllZone.setQuestData(null);
+        }
+
+        this.qData = AllZone.getQuestData();
+
+        if (qem.getAllDuels() == null) {
+            qem.assembleAllEvents();
+        }
+    }
+
+    /** Resets decks, then retrieves and sets current deck. */
+    public void refreshDecks() {
+        Deck[] temp = (qData == null ? new Deck[] {} : qData.getDecks().toArray(new Deck[0]));
+
+        view.getLstDecks().setDecks(temp);
+
+        if (!view.getLstDecks().setSelectedDeck(currentDeck)) {
+            if (!view.getLstDecks().setSelectedIndex(0)) {
+                currentDeck = null;
+            }
+            else {
+                currentDeck = view.getLstDecks().getSelectedDeck();
             }
         }
 
-        // give the user a few cards to build a deck
-        questData.newGame(difficulty, mode, view.getCbStandardStart().isSelected());
+        view.setCurrentDeckStatus();
+    }
 
-        questData.saveData();
+    /** Updates all statistics in several panels. */
+    public void refreshStats() {
+        if (qData == null) { return; }
 
-        // set global variable
-        AllZone.setQuestData(questData);
-        view.getParentView().resetQuest();
+        // Stats panel
+        view.getLblCredits().setText("Credits: " + qData.getCredits());
+        view.getLblLife().setText("Life: " + qData.getLife());
+        view.getLblWins().setText("Wins: " + qData.getWin());
+        view.getLblLosses().setText("Losses: " + qData.getLost());
+        view.getBarProgress().setVisible(false);
+        view.setCurrentDeckStatus();
+
+        final int num = nextChallengeInWins();
+        if (num == 0) {
+            view.getLblNextChallengeInWins().setText("Next challenge available now.");
+        }
+        else {
+            view.getLblNextChallengeInWins().setText("Next challenge available in " + num + " wins.");
+        }
+
+        view.getLblWinStreak().setText(
+                "Win streak: " + qData.getWinStreakCurrent()
+                + " (Best:" + qData.getWinStreakBest() + ")");
+
+        // Start panel: pet, plant, zep.
+        if (this.qData.getMode().equals(QuestData.FANTASY)) {
+            final Set<String> petList = this.qData.getPetManager().getAvailablePetNames();
+            final QuestPetAbstract currentPet = this.qData.getPetManager().getSelectedPet();
+
+            // Pet list visibility
+            if (petList.size() > 0) {
+                view.getCbxPet().setEnabled(true);
+                view.getCbxPet().addItem("Don't summon a pet");
+                for (final String pet : petList) {
+                    view.getCbxPet().addItem("Summon " + pet);
+                }
+
+                if (currentPet != null) { view.getCbxPet().setSelectedItem(currentPet.getName()); }
+            } else {
+                view.getCbxPet().setVisible(false);
+            }
+
+            // Plant visiblity
+            if (this.qData.getPetManager().getPlant().getLevel() == 0) {
+                view.getCbPlant().setVisible(false);
+            }
+            else {
+                view.getCbPlant().setVisible(true);
+                view.getCbPlant().setSelected(this.qData.getPetManager().shouldPlantBeUsed());
+            }
+
+            // Zeppelin visibility
+            final QuestItemZeppelin zeppelin = (QuestItemZeppelin) this.qData.getInventory().getItem("Zeppelin");
+            view.getCbZep().setVisible(zeppelin.hasBeenUsed());
+        }
+        else {
+            view.getCbxPet().setVisible(false);
+            view.getCbPlant().setVisible(false);
+            view.getCbZep().setVisible(false);
+        }
+    }
+
+    /** */
+    @SuppressWarnings("serial")
+    private void showSpellShop() {
+        final Command exit = new Command() {
+            @Override
+            public void execute() {
+                AllZone.getQuestData().saveData();
+                refreshStats();
+            }
+        };
+
+        DeckEditorShop g = new DeckEditorShop(AllZone.getQuestData());
+        g.show(exit);
+        g.setVisible(true);
+    }
+
+    /** */
+    private void showBazaar() {
+        GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
+
+        g.getController().changeState(FControl.QUEST_BAZAAR);
+        g.validate();
     }
 
     /** */
@@ -216,7 +490,7 @@ public class ControlQuest {
                     "ControlQuest() > startGame() must be accessed from outside the event dispatch thread.");
         }
 
-        if (view.getLstDeckChooser().getSelectedIndex() == -1) {
+        if (currentDeck == null) {
             JOptionPane.showMessageDialog(null,
                     "A mysterious wall blocks your way."
                     + "\n\rAn unseen sepulchral voice booms:"
@@ -224,6 +498,8 @@ public class ControlQuest {
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        view.getBarProgress().setVisible(true);
 
         // If everything is OK, show progress bar and start inits.
         SwingUtilities.invokeLater(new Runnable() {
@@ -242,9 +518,9 @@ public class ControlQuest {
         event = view.getSelectedOpponent().getEvent();
         AllZone.setQuestEvent(event);
         Constant.Runtime.setGameType(GameType.Quest);
-        final QuestItemZeppelin zeppelin = (QuestItemZeppelin) view.getQuestData().getInventory().getItem("Zeppelin");
+        final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
         zeppelin.setZeppelinUsed(false);
-        view.getQuestData().randomizeOpponents();
+        qData.randomizeOpponents();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -253,13 +529,8 @@ public class ControlQuest {
             }
          });
 
-        String deckname = (String) view.getLstDeckChooser().getSelectedValue();
-        Constant.Runtime.HUMAN_DECK[0] = view.getQuestData().getDeck(deckname);
+        Constant.Runtime.HUMAN_DECK[0] = currentDeck;
         Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
-        final Deck humanDeck = view.getQuestData().getDeck(deckname);
-
-        Constant.Runtime.HUMAN_DECK[0] = humanDeck;
-
         Constant.Quest.OPP_ICON_NAME[0] = event.getIcon();
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -278,11 +549,11 @@ public class ControlQuest {
 
                 AllZone.getMatchState().reset();
                 if (event.getEventType().equals("challenge")) {
-                    setupChallenge(humanDeck);
+                    setupChallenge(currentDeck);
                 } else {
-                    setupDuel(humanDeck);
+                    setupDuel(currentDeck);
                 }
-                view.getQuestData().saveData();
+                qData.saveData();
             }
         });
     }
@@ -295,15 +566,15 @@ public class ControlQuest {
      * @param humanDeck
      *            a {@link forge.deck.Deck} object.
      */
-    final void setupDuel(final Deck humanDeck) {
+    private void setupDuel(final Deck humanDeck) {
         final Deck computer = event.getEventDeck();
         Constant.Runtime.COMPUTER_DECK[0] = computer;
 
         AllZone.getGameAction().newGame(
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
-                QuestUtil.getHumanStartingCards(view.getQuestData()),
-                QuestUtil.getComputerStartingCards(view.getQuestData()),
-                view.getQuestData().getLife(), 20);
+                QuestUtil.getHumanStartingCards(qData),
+                QuestUtil.getComputerStartingCards(qData),
+                qData.getLife(), 20);
     }
 
     /**
@@ -317,15 +588,45 @@ public class ControlQuest {
     private void setupChallenge(final Deck humanDeck) {
         int extraLife = 0;
 
-        if (view.getQuestData().getInventory().getItemLevel("Gear") == 2) {
+        if (qData.getInventory().getItemLevel("Gear") == 2) {
             extraLife = 3;
         }
 
         AllZone.getGameAction().newGame(
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
-                QuestUtil.getHumanStartingCards(view.getQuestData(), event),
-                QuestUtil.getComputerStartingCards(view.getQuestData(), event),
-                view.getQuestData().getLife() + extraLife, ((QuestChallenge) event).getAILife());
+                QuestUtil.getHumanStartingCards(qData, event),
+                QuestUtil.getComputerStartingCards(qData, event),
+                qData.getLife() + extraLife, ((QuestChallenge) event).getAILife());
 
+    }
+
+    /**
+     * <p>
+     * nextChallengeInWins.
+     * </p>
+     * 
+     * @return a int.
+     */
+    private int nextChallengeInWins() {
+        // Number of wins was 25, lowering the number to 20 to help short term
+        // questers.
+        if (qData.getWin() < 20) {
+            return 20 - qData.getWin();
+        }
+
+        // The int mul has been lowered by one, should face special opps more
+        // frequently.
+        final int challengesPlayed = qData.getChallengesPlayed();
+        int mul = 5;
+
+        if (qData.getInventory().hasItem("Zeppelin")) {
+            mul = 3;
+        } else if (qData.getInventory().hasItem("Map")) {
+            mul = 4;
+        }
+
+        final int delta = (challengesPlayed * mul) - qData.getWin();
+
+        return (delta > 0) ? delta : 0;
     }
 }

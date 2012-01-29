@@ -25,6 +25,6 @@ public class FScrollPane extends JScrollPane {
 
         skin = Singletons.getView().getSkin();
         setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
-        setBackground(skin.getColor(FSkin.SkinProp.CLR_ZEBRA));
+        setOpaque(false);
     }
 }

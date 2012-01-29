@@ -74,21 +74,27 @@ public class QuestDataIO {
     public QuestDataIO() {
     }
 
+    /** @return {@link forge.quest.data.QuestData} */
+    public static QuestData loadData() {
+        return QuestDataIO.loadData(ForgeProps.getFile(NewConstants.Quest.XMLDATA));
+    }
+
     /**
      * <p>
      * loadData.
      * </p>
      * 
-     * @return a {@link forge.quest.data.QuestData} object.
+     * @param xmlSaveFile &emsp; {@link java.io.File}
+     * @return {@link forge.quest.data.QuestData}
      */
-    public static QuestData loadData() {
+    public static QuestData loadData(final File xmlSaveFile) {
         try {
-            // read file "questData"
             QuestData data = null;
+            String name = xmlSaveFile.getName()
+                    .substring(0, xmlSaveFile.getName().length() - 4);
 
-            final File xmlSaveFile = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
             if (!xmlSaveFile.exists()) {
-                return new QuestData();
+                return new QuestData(name);
             }
 
             final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
@@ -109,6 +115,7 @@ public class QuestDataIO {
             xStream.registerConverter(new GameTypeToXml());
             xStream.alias("CardPool", ItemPool.class);
             data = (QuestData) xStream.fromXML(xml.toString());
+            data.setName(name);
 
             if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
                 QuestDataIO.updateSaveFile(data, xml.toString());
@@ -193,7 +200,7 @@ public class QuestDataIO {
             xStream.registerConverter(new CardPoolToXml());
             xStream.alias("CardPool", ItemPool.class);
 
-            final File f = ForgeProps.getFile(NewConstants.Quest.XMLDATA);
+            final File f = new File("res/quest/data/" + qd.getName() + ".dat");
             final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
             final GZIPOutputStream zout = new GZIPOutputStream(bout);
             xStream.toXML(qd, zout);

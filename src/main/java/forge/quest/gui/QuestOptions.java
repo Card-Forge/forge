@@ -43,7 +43,6 @@ import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
-import forge.quest.data.QuestPreferences;
 
 /**
  * <p>
@@ -131,7 +130,7 @@ public class QuestOptions extends JFrame {
      * </p>
      */
     private void setupRadioButtonText() {
-        final String[] diff = QuestPreferences.getDifficulty();
+        /*final String[] diff = QuestPreferences.getDifficulty();
         final JRadioButton[] b = { this.easyRadio, this.mediumRadio, this.hardRadio, this.veryHardRadio };
 
         for (int i = 0; i < diff.length; i++) {
@@ -140,7 +139,7 @@ public class QuestOptions extends JFrame {
             final int numGames = numberLevels * QuestPreferences.getWinsForRankIncrease(i);
 
             b[i].setText(String.format("%s - %d", diff[i], numGames));
-        }
+        }*/
 
     } // setupRadioButtonText()
 

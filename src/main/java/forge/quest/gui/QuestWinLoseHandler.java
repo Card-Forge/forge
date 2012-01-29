@@ -49,6 +49,7 @@ import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.util.MyRandom;
 import forge.view.GuiTopLevel;
@@ -75,13 +76,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
     /** String constraint parameters for title blocks and cardviewer blocks. */
     private final String constraintsTitle = "w 95%!, gap 0 0 20px 10px";
-    private final String constraintsText = "w 95%!,, h 150px!, gap 0 0 0 20px";
+    private final String constraintsText = "w 95%!,, h 180px!, gap 0 0 0 20px";
     private final String constraintsCards = "w 95%!, h 330px!, gap 0 0 0 20px";
 
     private class CommonObjects {
         private FMatchState matchState;
         private QuestData qData;
         private QuestEvent qEvent;
+        private QuestPreferences qPrefs;
     }
 
     private final CommonObjects model;
@@ -98,6 +100,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.matchState = AllZone.getMatchState();
         this.model.qData = AllZone.getQuestData();
         this.model.qEvent = AllZone.getQuestEvent();
+        this.model.qPrefs = Singletons.getModel().getQuestPreferences();
         this.wonMatch = this.model.matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
         this.skin = Singletons.getView().getSkin();
         this.isAnte = Singletons.getModel().getPreferences().isPlayForAnte();
@@ -217,7 +220,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // Win or lose, still a chance to win a booster, frequency set in
         // preferences
         final int outcome = this.wonMatch ? this.model.qData.getWin() : this.model.qData.getLost();
-        if ((outcome % QuestPreferences.getWinsForBooster(this.model.qData.getDifficultyIndex())) == 0) {
+        if ((outcome % this.model.qPrefs.getPreferenceInt(QPref.WINS_BOOSTER, this.model.qData.getDifficultyIndex())) == 0) {
             this.awardBooster();
         }
 
@@ -274,12 +277,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     @Override
     public final void actionOnQuit() {
+        int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
+
         // Record win/loss in quest data
         if (this.wonMatch) {
             this.model.qData.addWin();
         } else {
             this.model.qData.addLost();
-            this.model.qData.subtractCredits(15);
+            this.model.qData.subtractCredits(x);
         }
 
         this.model.qData.getCards().clearShopList();
@@ -317,7 +322,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         int credEstates = 0;
 
         // Basic win bonus
-        final int base = QuestPreferences.getMatchRewardBase();
+        final int base = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_BASE);
         double multiplier = 1;
 
         String diff = AllZone.getQuestEvent().getDifficulty();
@@ -332,8 +337,11 @@ public class QuestWinLoseHandler extends ControlWinLose {
         } else if (diff.equalsIgnoreCase("expert")) {
             multiplier = 3;
         }
-        credBase += (int) ((base * multiplier) + (QuestPreferences.getMatchRewardTotalWins() * this.model.qData
-                .getWin()));
+
+        credBase += (int) ((base * multiplier)
+                + (Double.parseDouble(this.model.qPrefs.getPreference(QPref.REWARDS_WINS_MULTIPLIER))
+                        * this.model.qData.getWin()));
+
         sb.append(diff + " opponent: " + credBase + " credits.<br>");
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
@@ -375,7 +383,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
             // Mulligan to zero
             final int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
-            final int mulliganReward = QuestPreferences.getMatchMullToZero();
+            final int mulliganReward = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_MULLIGAN0);
 
             if (0 == cntCardsHumanStartedWith) {
                 credGameplay += mulliganReward;
@@ -407,8 +415,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Undefeated bonus
         if (hasNeverLost) {
-            credUndefeated += QuestPreferences.getMatchRewardNoLosses();
-            final int reward = QuestPreferences.getMatchRewardNoLosses();
+            credUndefeated += this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            final int reward = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
             sb.append(String.format("You have not lost once! " + "Bonus: %d credits.<br>", reward));
         }
 
@@ -581,11 +589,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
     }
 
     private void penalizeLoss() {
+        int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
         this.icoTemp = GuiUtils.getResizedIcon("HeartIcon.png", 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
-        this.lblTemp2 = new JLabel("You lose! You have lost 15 credits.");
+        this.lblTemp2 = new JLabel("You lose! You have lost " + x + " credits.");
         this.lblTemp2.setFont(skin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -625,18 +634,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
         case LifeReachedZero:
             return 0; // nothing special here, ordinary kill
         case Milled:
-            return QuestPreferences.getMatchRewardMilledWinBonus();
+            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_MILLED);
         case Poisoned:
-            return QuestPreferences.getMatchRewardPoisonWinBonus();
-        case DidNotLoseYet:
-            return QuestPreferences.getMatchRewardAltWinBonus(); // Felidar,
-                                                                 // Helix
-                                                                 // Pinnacle,
-                                                                 // etc.
-        case SpellEffect:
-            return QuestPreferences.getMatchRewardAltWinBonus(); // Door to
-                                                                 // Nothingness,
-                                                                 // etc.
+            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_POISON);
+        case DidNotLoseYet: // Felidar, Helix Pinnacle, etc.
+            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+        case SpellEffect: // Door to Nothingness, etc.
+            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         default:
             return 0;
         }
@@ -655,13 +659,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
         int credits = 0;
 
         if (iTurn == 1) {
-            credits = QuestPreferences.getMatchRewardWinFirst();
+            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN1);
         } else if (iTurn <= 5) {
-            credits = QuestPreferences.getMatchRewardWinByFifth();
+            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN5);
         } else if (iTurn <= 10) {
-            credits = QuestPreferences.getMatchRewardWinByTen();
+            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN10);
         } else if (iTurn <= 15) {
-            credits = QuestPreferences.getMatchRewardWinByFifteen();
+            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN15);
         }
 
         return credits;

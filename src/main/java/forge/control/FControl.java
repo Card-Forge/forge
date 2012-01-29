@@ -190,6 +190,11 @@ public class FControl {
         return this.home;
     }
 
+    /** @return HomeTopLevel */
+    public ControlHomeUI getHomeController() {
+        return this.home.getController();
+    }
+
     /**
      * Gets the match view.
      * 

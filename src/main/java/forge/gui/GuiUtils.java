@@ -409,4 +409,23 @@ public final class GuiUtils {
         overlay.removeAll();
         overlay.hideOverlay();
     }
+
+    /** Duplicate in DeckEditorQuestMenu and
+     * probably elsewhere...can streamline at some point.
+     * 
+     * @param in &emsp; {@link java.lang.String}
+     * @return {@link java.lang.String}
+     */
+    public static String cleanString(final String in) {
+        final StringBuffer out = new StringBuffer();
+        final char[] c = in.toCharArray();
+
+        for (int i = 0; (i < c.length) && (i < 20); i++) {
+            if (Character.isLetterOrDigit(c[i]) || (c[i] == '-') || (c[i] == '_') || (c[i] == ' ')) {
+                out.append(c[i]);
+            }
+        }
+
+        return out.toString();
+    }
 }

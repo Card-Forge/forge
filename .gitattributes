@@ -10235,6 +10235,8 @@ res/images/icons/GoldIcon.png -text svneol=unset#image/png
 res/images/icons/GoldIconLarge.png -text svneol=unset#image/png
 res/images/icons/GoldIconSmall.png -text svneol=unset#image/png
 res/images/icons/HeartIcon.png -text svneol=unset#image/png
+res/images/icons/IconMinus.png -text
+res/images/icons/IconPlus.png -text
 res/images/icons/LeafIconSmall.png -text svneol=unset#image/png
 res/images/icons/Life.png -text svneol=unset#image/png
 res/images/icons/Mage01.jpg -text
@@ -11330,12 +11332,15 @@ src/main/java/forge/view/Main.java -text
 src/main/java/forge/view/editor/EditorTopLevel.java -text
 src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
 src/main/java/forge/view/home/HomeTopLevel.java -text
+src/main/java/forge/view/home/QuestFileLister.java -text
 src/main/java/forge/view/home/SplashFrame.java -text
 src/main/java/forge/view/home/StartButton.java -text
 src/main/java/forge/view/home/SubButton.java -text
+src/main/java/forge/view/home/SubTab.java -text
 src/main/java/forge/view/home/ViewConstructed.java -text
 src/main/java/forge/view/home/ViewDraft.java -text
 src/main/java/forge/view/home/ViewQuest.java -text
+src/main/java/forge/view/home/ViewQuestPreferences.java -text
 src/main/java/forge/view/home/ViewSealed.java -text
 src/main/java/forge/view/home/ViewSettings.java -text
 src/main/java/forge/view/home/ViewUtilities.java -text
@@ -11356,13 +11361,17 @@ src/main/java/forge/view/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/view/toolbox/CardViewer.java -text
 src/main/java/forge/view/toolbox/DeckLister.java -text
 src/main/java/forge/view/toolbox/FButton.java -text
+src/main/java/forge/view/toolbox/FCheckBox.java -text
+src/main/java/forge/view/toolbox/FLabel.java -text
 src/main/java/forge/view/toolbox/FList.java -text
 src/main/java/forge/view/toolbox/FOverlay.java -text
 src/main/java/forge/view/toolbox/FPanel.java -text
 src/main/java/forge/view/toolbox/FProgressBar.java -text
+src/main/java/forge/view/toolbox/FRadioButton.java -text
 src/main/java/forge/view/toolbox/FRoundedPanel.java -text
 src/main/java/forge/view/toolbox/FScrollPane.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text
+src/main/java/forge/view/toolbox/FTextArea.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
 src/main/java/forge/view/toolbox/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain

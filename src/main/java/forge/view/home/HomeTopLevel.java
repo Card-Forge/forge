@@ -22,6 +22,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -261,5 +262,25 @@ public class HomeTopLevel extends FPanel {
     /** @return ControlHomeUI */
     public ControlHomeUI getController() {
         return control;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnConstructed() {
+        return this.btnConstructed;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnSealed() {
+        return this.btnSealed;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnDraft() {
+        return this.btnDraft;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnQuest() {
+        return this.btnQuest;
     }
 }

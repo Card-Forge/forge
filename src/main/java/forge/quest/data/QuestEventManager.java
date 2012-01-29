@@ -24,9 +24,11 @@ import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
+import forge.Singletons;
 import forge.deck.DeckIO;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.util.FileUtil;
 
 /**
@@ -58,6 +60,12 @@ public class QuestEventManager {
     /** The all challenges. */
     private List<QuestChallenge> allChallenges = null;
 
+    private final QuestPreferences qpref;
+
+    /** */
+    public QuestEventManager() {
+        this.qpref = Singletons.getModel().getQuestPreferences();
+    }
     /**
      * <p>
      * assembleAllEvents.
@@ -354,31 +362,32 @@ public class QuestEventManager {
      * @return an array of {@link java.lang.String} objects.
      */
     public final List<QuestDuel> generateDuels() {
+        if (AllZone.getQuestData() == null) { return null; }
 
         final int index = AllZone.getQuestData().getDifficultyIndex();
         final List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
 
-        if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForMediumAI(index)) {
+        if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 0));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 1));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 2));
-        } else if (AllZone.getQuestData().getWin() == QuestPreferences.getWinsForMediumAI(index)) {
+        } else if (AllZone.getQuestData().getWin() == qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 0));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 1));
-        } else if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForHardAI(index)) {
+        } else if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 1));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 2));
         }
 
-        else if (AllZone.getQuestData().getWin() == QuestPreferences.getWinsForHardAI(index)) {
+        else if (AllZone.getQuestData().getWin() == qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
         }
 
-        else if (AllZone.getQuestData().getWin() < QuestPreferences.getWinsForVeryHardAI(index)) {
+        else if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_EXPERTAI, index)) {
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
             duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 2));
@@ -401,6 +410,8 @@ public class QuestEventManager {
      * @return a {@link java.util.List} object.
      */
     public final List<QuestChallenge> generateChallenges() {
+        if (AllZone.getQuestData() == null) { return null; }
+
         final forge.quest.data.QuestData questData = AllZone.getQuestData();
 
         final List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();

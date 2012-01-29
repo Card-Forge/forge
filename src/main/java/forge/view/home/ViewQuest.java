@@ -1,48 +1,42 @@
 package forge.view.home;
 
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
-import java.util.Set;
 
-import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.home.ControlQuest;
-import forge.gui.GuiUtils;
+import forge.game.GameType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestChallenge;
-import forge.quest.data.QuestData;
-import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestDuel;
 import forge.quest.data.QuestEvent;
-import forge.quest.data.QuestEventManager;
-import forge.quest.data.item.QuestItemZeppelin;
-import forge.quest.data.pet.QuestPetAbstract;
-import forge.view.toolbox.FList;
+import forge.view.toolbox.DeckLister;
+import forge.view.toolbox.FCheckBox;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FProgressBar;
+import forge.view.toolbox.FRadioButton;
+import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
+import forge.view.toolbox.FTextArea;
 
 /** 
  * Populates Swing components of Quest mode in home screen.
@@ -52,423 +46,472 @@ import forge.view.toolbox.FSkin;
 public class ViewQuest extends JScrollPane {
     private final FSkin skin;
     private final HomeTopLevel parentView;
-    private QuestEventManager qem;
-    private QuestData questData;
-    private JPanel viewport;
+    private final ControlQuest control;
+    private final String eventPanelConstraints;
+    private final Color clrBorders;
+    private final JPanel pnlViewport, pnlTabber, pnlStats,
+        pnlDuels, pnlChallenges, pnlStart, pnlTitle, pnlNewQuest,
+        pnlDecks, pnlLoadQuest, pnlPrefs,
+        tabDuels, tabChallenges, tabDecks, tabQuests, tabPreferences;
+    private final JLabel lblTitle, lblLife, lblCredits,
+        lblWins, lblLosses, lblNextChallengeInWins, lblWinStreak;
+
+    private final JButton btnBazaar, btnSpellShop, btnStart, btnEmbark, btnNewDeck, btnCurrentDeck;
+
+    private final JCheckBox cbPlant, cbZep, cbStandardStart;
+    private final JComboBox cbxPet;
+    private final JRadioButton radEasy, radMedium, radHard, radExpert, radFantasy, radClassic;
+
     private SelectablePanel selectedOpponent;
-    private JList lstDeckChooser;
-    private ControlQuest control;
-    private FProgressBar barProgress;
-    private JRadioButton radEasy, radMedium, radHard, radExpert, radFantasy, radClassic;
-    private JCheckBox cbStandardStart, cbPlant, cbZep;
-    private JComboBox cbxPet;
-    private JLabel lblPlant, lblPet, lblZep, lblLife, lblCredits;
-    private boolean previousQuestExists = false;
-    private JButton btnStart;
+    private DeckLister lstDecks;
+    private QuestFileLister lstQuests;
+    private final FProgressBar barProgress;
 
     /**
      * Populates Swing components of Quest mode in home screen.
      *
-     * @param v0 &emsp; HomeTopLevel parent view
+     * @param v0 &emsp; {@link forge.view.home.HomeTopLevel} parent view
      */
-    public ViewQuest(HomeTopLevel v0) {
-        // Basic init stuff
-        super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        this.setOpaque(false);
+    public ViewQuest(final HomeTopLevel v0) {
+        // Display
+        super(VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.setBorder(null);
-        this.getVerticalScrollBar().setUnitIncrement(16);
-        parentView = v0;
-        skin = Singletons.getView().getSkin();
-
-        // Title and viewport.  Panel is put into scroll pane for resize safety.
-        viewport = new JPanel();
-        viewport.setOpaque(false);
-        viewport.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        this.setOpaque(false);
         this.getViewport().setOpaque(false);
+        this.getVerticalScrollBar().setUnitIncrement(16);
 
-        JLabel lblTitle = new JLabel();
-        lblTitle.setOpaque(true);
-        lblTitle.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
-        lblTitle.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        lblTitle.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME).darker());
-        lblTitle.setFont(skin.getBoldFont(20));
-        viewport.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 2% 0, span 2");
+        // Non-final inits
+        this.parentView = v0;
+        this.skin = Singletons.getView().getSkin();
+        this.clrBorders = skin.getColor(FSkin.SkinProp.CLR_THEME).darker().darker();
+        this.eventPanelConstraints = "w 100%!, h 80px!, gap 0 0 5px 5px";
 
-        File f = new File("res/quest/questData.dat");
-        if (f.exists()) {
-            AllZone.setQuestData(QuestDataIO.loadData());
-            questData = AllZone.getQuestData();
-            previousQuestExists = true;
+        // Final component inits
+        tabDuels = new SubTab("Duels");
+        tabChallenges = new SubTab("Challenges");
+        tabDecks = new SubTab("Decks");
+        tabQuests = new SubTab("Quests");
+        tabPreferences = new SubTab("Preferences");
 
-            lblTitle.setText("   " + questData.getRank());
+        pnlTabber = new JPanel();
+        pnlTitle = new FRoundedPanel();
+        pnlStats = new JPanel();
+        pnlDuels = new JPanel();
+        pnlChallenges = new JPanel();
+        pnlStart = new JPanel();
+        pnlDecks = new JPanel();
+        pnlNewQuest = new JPanel();
+        pnlLoadQuest = new JPanel();
+        pnlPrefs = new JPanel();
 
-            JLabel lblStats = new JLabel("Wins: " + questData.getWin()
-                    + " / Losses: " + questData.getLost());
-            lblStats.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            lblStats.setFont(skin.getBoldFont(18));
-            lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-            viewport.add(lblStats, "h 35px!, ax center, span 2");
+        lblTitle = new FLabel("New Quest");
+        lblLife = new FLabel();
+        lblCredits = new FLabel();
+        lblWins = new FLabel();
+        lblLosses = new FLabel();
+        lblNextChallengeInWins = new FLabel();
+        lblWinStreak = new FLabel();
 
-            // Quest events
-            populateQuestEvents();
+        radEasy = new FRadioButton("Easy");
+        radMedium = new FRadioButton("Medium");
+        radHard = new FRadioButton("Hard");
+        radExpert = new FRadioButton("Expert");
+        radFantasy = new FRadioButton("Fantasy");
+        radClassic = new FRadioButton("Classic");
 
-            // Quest options
-            populateQuestOptions();
+        btnCurrentDeck = new SubButton();
+        btnBazaar = new SubButton("Bazaar");
+        btnSpellShop = new SubButton("Spell Shop");
+        btnStart = new StartButton(parentView);
+        btnEmbark = new SubButton("Embark!");
+        btnNewDeck = new SubButton("Build a New Deck");
+        cbxPet = new JComboBox();
+        cbStandardStart = new FCheckBox("Standard (Type 2) Starting Pool");
+        cbPlant = new FCheckBox("Summon Plant");
+        cbZep = new FCheckBox("Launch Zeppelin");
+        barProgress = new FProgressBar();
 
-            // Start button
-            populateStartArea();
-        }
-        else {
-            lblTitle.setText("    New Quest");
-        }
+        lstDecks = new DeckLister(GameType.Quest);
+        lstQuests = new QuestFileLister();
 
-        // New Quest
+        // Final layout of parent panel
+        pnlViewport = new JPanel();
+        pnlViewport.setOpaque(false);
+        pnlViewport.setLayout(new MigLayout("insets 0, gap 0, wrap, alignx center, hidemode 3"));
+
+        final String constraints = "w 90%!, gap 0 0 0 20px, alignx center";
+        pnlViewport.add(pnlTabber, constraints + ", h 20px!");
+        pnlViewport.add(pnlTitle, constraints + ", h 60px!");
+        pnlViewport.add(pnlStats, constraints);
+        pnlViewport.add(pnlDuels, constraints);
+        pnlViewport.add(pnlChallenges, constraints);
+        pnlViewport.add(pnlStart, constraints);
+        pnlViewport.add(pnlLoadQuest, constraints);
+        pnlViewport.add(pnlNewQuest, constraints);
+        pnlViewport.add(pnlDecks, constraints);
+        pnlViewport.add(pnlPrefs, constraints);
+
+        // Drop into scroll pane, init values from controller.
+        this.setViewportView(pnlViewport);
+
+        // Lay out each child panel, starting with previous quests.
+        populateLoadQuest();
+        populateTabber();
+        populateTitle();
+        populateStats();
+        populateDuels();
+        populateChallenges();
+        populateStart();
+        populateDecks();
         populateNewQuest();
+        populatePrefs();
 
-        // Drop into scroll pane, init controller.
-        this.setViewportView(viewport);
-        control = new ControlQuest(this);
+        // Init controller, select quest and deck, then start in duels tab.
+        this.control = new ControlQuest(this);
+        control.refreshQuests();
+        control.refreshDecks();
+        this.showDuelsTab();
     }
 
     //========= POPULATION METHODS
-    //...mainly here to avoid one big lump of a constructor.
+    /** Layout and details for Swing components in title panel. */
+    private void populateTabber() {
+        tabDuels.setToolTipText("Available Duels");
+        tabChallenges.setToolTipText("Available Challenges");
+        tabDecks.setToolTipText("Edit or create decks");
+        tabQuests.setToolTipText("Load a Quest, or start a new Quest");
+        tabPreferences.setToolTipText("Change Preference Settings");
 
-    private void populateQuestEvents() {
-        // Retrieve quest events, or generate (on first run)
-        this.qem = AllZone.getQuestEventManager();
+        final String constraints = "w 20%!, h 20px!";
+        pnlTabber.setOpaque(false);
+        pnlTabber.setLayout(new MigLayout("insets 0, gap 0, align center"));
 
-        if (this.qem == null) {
-            this.qem = new QuestEventManager();
-            this.qem.assembleAllEvents();
-            AllZone.setQuestEventManager(this.qem);
-        }
-
-        JPanel duelsContainer = new JPanel();
-        duelsContainer.setOpaque(false);
-        duelsContainer.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-
-        JPanel challengesContainer = new JPanel();
-        challengesContainer.setOpaque(false);
-        challengesContainer.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-
-        List<QuestDuel> duels = qem.generateDuels();
-        List<QuestChallenge> challenges = qem.generateChallenges();
-
-        for (QuestDuel d : duels) {
-            SelectablePanel temp = new SelectablePanel(d);
-            duelsContainer.add(temp, "w 100%, h 70px:70px, gapbottom 5px");
-        }
-
-        for (QuestChallenge c : challenges) {
-            SelectablePanel temp = new SelectablePanel(c);
-            challengesContainer.add(temp, "w 100%, h 70px:70px, gapbottom 5px");
-        }
-
-        if (challenges.size() == 0) {
-            JLabel lblTeaser = new JLabel("(Next challenge available in "
-                    + nextChallengeInWins() + " wins.)");
-            lblTeaser.setHorizontalAlignment(SwingConstants.CENTER);
-            lblTeaser.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            lblTeaser.setFont(skin.getBoldFont(16));
-            challengesContainer.add(lblTeaser, "w 100%!, ax center, ay top");
-        }
-
-        JLabel lblDuels = new JLabel("Available Duels");
-        lblDuels.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        lblDuels.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDuels.setFont(skin.getItalicFont(14));
-
-        JLabel lblChallenges = new JLabel("Available Challenges");
-        lblChallenges.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        lblChallenges.setHorizontalAlignment(SwingConstants.CENTER);
-        lblChallenges.setFont(skin.getItalicFont(14));
-
-        viewport.add(lblDuels, "w 48%, gap 1% 1% 2% 1%");
-        viewport.add(lblChallenges, "w 48%, gap 0 0 2% 1%, wrap");
-        viewport.add(duelsContainer, " w 48%, gap 1% 1% 1% 2%, ay top");
-        viewport.add(challengesContainer, " w 48%, gap 0 0 1% 2%, wrap");
-
-        // Select first event.
-        selectedOpponent = (SelectablePanel) duelsContainer.getComponent(0);
-        selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
+        pnlTabber.add(tabDuels, constraints);
+        pnlTabber.add(tabChallenges, constraints);
+        pnlTabber.add(tabDecks, constraints);
+        pnlTabber.add(tabQuests, constraints);
+        pnlTabber.add(tabPreferences, constraints);
     }
 
-    /** */
-    private void populateQuestOptions() {
-        JPanel optionsContainer = new JPanel();
-        optionsContainer.setOpaque(false);
-        optionsContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        optionsContainer.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
-
-        lblCredits = new JLabel("Credits: " + Long.toString(questData.getCredits()));
-        lblCredits.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/images/icons/CoinStack.png"), 26, 26));
-        lblCredits.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        lblCredits.setIconTextGap(5);
-        lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCredits.setFont(skin.getBoldFont(14));
-
-        lblLife = new JLabel("Life: " + Long.toString(questData.getLife()));
-        lblLife.setIcon(GuiUtils.getResizedIcon(new ImageIcon("res/images/icons/Life.png"), 26, 26));
-        lblLife.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-        lblLife.setIconTextGap(5);
-        lblLife.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLife.setFont(skin.getBoldFont(14));
-
-        SubButton btnEditor = new SubButton("");
-        btnEditor.setAction(new AbstractAction() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               control.showDeckEditor();
-           }
-        });
-        btnEditor.setText("Deck Editor");
-
-        SubButton btnCardShop = new SubButton("");
-        btnCardShop.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                control.showCardShop();
-            }
-         });
-        btnCardShop.setText("Card Shop");
-
-        SubButton btnBazaar = new SubButton("");
-        btnBazaar.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                control.showBazaar();
-            }
-         });
-        btnBazaar.setText("Bazaar");
-
-        lstDeckChooser = new FList();
-
-        optionsContainer.add(btnEditor, "w 35%, h 30px!, gap 10% 5% 10px 10px");
-        optionsContainer.add(lblCredits, "w 35%!, h 30px!, wrap");
-
-        optionsContainer.add(new FScrollPane(lstDeckChooser), "w 35%, h 110px!, gap 10% 5% 0 10px, span 1 3");
-        optionsContainer.add(lblLife, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
-
-        optionsContainer.add(btnCardShop, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
-        optionsContainer.add(btnBazaar, "w 35%, h 30px!, gap 0 0 0 10px, wrap");
-
-        if (!questData.isFantasy()) {
-            lblLife.setVisible(false);
-            btnBazaar.setVisible(false);
-        }
-
-        viewport.add(optionsContainer, "w 90%, gap 5% 0 1% 1%, span 2 1");
+    /** Layout and details for Swing components in title panel. */
+    private void populateTitle() {
+        pnlTitle.setLayout(new MigLayout("insets 0, gap 0, align center"));
+        pnlTitle.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME).darker());
+        ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
+        pnlTitle.add(lblTitle, "h 70%!, gap 0 0 0 10%!");
     }
 
-    private void populateStartArea() {
-        JPanel pnlButtonContainer = new JPanel();
-        pnlButtonContainer.setOpaque(false);
-        pnlButtonContainer.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center, hidemode 3"));
+    /** Layout permanent parts of stats panel. */
+    private void populateStats() {
+        pnlStats.setOpaque(false);
+        pnlStats.setBorder(new MatteBorder(1, 0, 1, 0, clrBorders));
 
-        cbxPet = new JComboBox();
-        cbxPet.setFont(skin.getFont(14));
-
-        cbPlant = new OptionsCheckBox("Summon Plant");
-        cbPlant.setFont(skin.getFont(14));
-        cbZep = new OptionsCheckBox("Launch Zeppelin");
-        cbZep.setFont(skin.getFont(14));
-
-        lblPet = new JLabel(GuiUtils.getResizedIcon(
-                new ImageIcon("res/images/icons/PetIcon.png"), 30, 30));
-        lblPlant = new JLabel(GuiUtils.getResizedIcon(
-                new ImageIcon("res/images/icons/PlantIcon.png"), 30, 30));
-        lblZep = new JLabel(GuiUtils.getResizedIcon(
-                new ImageIcon("res/images/icons/ZeppelinIcon.png"), 30, 30));
-
-        btnStart = new StartButton(parentView);
-
-        barProgress = new FProgressBar();
-        barProgress.setVisible(false);
-
-        pnlButtonContainer.add(lblPet, "w 30px!, h 30px!, gapright 10px");
-        pnlButtonContainer.add(cbxPet, "w 30%!, h 30px!, gapbottom 10px, wrap");
-
-        pnlButtonContainer.add(lblPlant, "w 30px!, h 30px!, gapright 10px");
-        pnlButtonContainer.add(cbPlant, "w 30%!, h 30px!, gapbottom 10px, wrap");
-
-        pnlButtonContainer.add(lblZep, "w 30px!, h 30px!, gapright 10px");
-        pnlButtonContainer.add(cbZep, "w 30%!, h 30px!, gapbottom 10px, wrap");
-
-        pnlButtonContainer.add(btnStart, "span 2 1");
-        pnlButtonContainer.add(barProgress, "w 150px!, h 30px!, span 2 1");
-
-        viewport.add(pnlButtonContainer, "w 100%!, gapbottom 2%, gaptop 2%, span 2");
-
-        if (this.questData.getMode().equals(QuestData.FANTASY)) {
-            final Set<String> petList = this.questData.getPetManager().getAvailablePetNames();
-            final QuestPetAbstract pet = this.questData.getPetManager().getSelectedPet();
-
-            // Pet list visibility
-            if (petList.size() > 0) {
-                cbxPet.setEnabled(true);
-                cbxPet.addItem("Don't summon a pet");
-                for (final String aPetList : petList) {
-                    cbxPet.addItem(aPetList);
-                }
-
-                if (pet != null) { cbxPet.setSelectedItem(pet.getName()); }
-            } else {
-                cbxPet.setVisible(false);
-                lblPet.setVisible(false);
-            }
-
-            // Plant visiblity
-            if (this.questData.getPetManager().getPlant().getLevel() == 0) {
-                cbPlant.setVisible(false);
-                lblPlant.setVisible(false);
-            }
-            else {
-                cbPlant.setSelected(this.questData.getPetManager().shouldPlantBeUsed());
-            }
-
-            // Zeppelin visibility
-            final QuestItemZeppelin zeppelin = (QuestItemZeppelin) this.questData.getInventory().getItem("Zeppelin");
-            cbZep.setVisible(zeppelin.hasBeenUsed());
-            lblZep.setVisible(zeppelin.hasBeenUsed());
-        }
-        else {
-            cbxPet.setVisible(false);
-            lblPet.setVisible(false);
-            cbPlant.setVisible(false);
-            lblPlant.setVisible(false);
-            cbZep.setVisible(false);
-            lblZep.setVisible(false);
-        }
+        lblLife.setIcon(new ImageIcon("res/images/icons/Life.png"));
+        lblCredits.setIcon(new ImageIcon("res/images/icons/CoinStack.png"));
+        lblWins.setIcon(new ImageIcon("res/images/icons/IconPlus.png"));
+        lblLosses.setIcon(new ImageIcon("res/images/icons/IconMinus.png"));
+        lblNextChallengeInWins.setText("No challenges available.");
+        btnBazaar.setToolTipText("Peruse the Bazaar");
+        btnSpellShop.setToolTipText("Travel to the Spell Shop");
     }
 
+    /** Layout permanent parts of duels panel. */
+    private void populateDuels() {
+        pnlDuels.setOpaque(false);
+        pnlDuels.setLayout(new MigLayout("insets 0, wrap"));
+    }
+
+    /** Layout permanent parts of challenges panel. */
+    private void populateChallenges() {
+        pnlChallenges.setOpaque(false);
+        pnlChallenges.setLayout(new MigLayout("insets 0, wrap"));
+    }
+
+    /** Layout permanent parts of start panel. */
+    private void populateStart() {
+        pnlStart.setOpaque(false);
+        pnlStart.setLayout(new MigLayout("insets 0, wrap, align center, hidemode 3"));
+        pnlStart.add(cbxPet, "gap 0 0 0 5px, align center");
+        pnlStart.add(cbPlant, "gap 0 0 5px 5px, align center");
+        pnlStart.add(cbZep, "gap 0 0 5px 5px, align center");
+        pnlStart.add(btnStart, "");
+    }
+
+    /** Layout permanent parts of decks panel. */
+    private void populateDecks() {
+        final FScrollPane scr = new FScrollPane(lstDecks);
+        scr.setBorder(null);
+        scr.getViewport().setBorder(null);
+
+        pnlDecks.setOpaque(false);
+        pnlDecks.setLayout(new MigLayout("insets 0, wrap, alignx center, wrap"));
+
+        pnlDecks.add(btnNewDeck, "w 40%!, h 35px!, gap 25%! 0 0 20px");
+        pnlDecks.add(scr, "w 90%!, h 350px!");
+    }
+
+    /** Layout permanent parts of quest load panel. */
+    private void populateLoadQuest() {
+        // New quest notes
+        final FRoundedPanel pnl = new FRoundedPanel();
+        pnl.setLayout(new MigLayout("insets 0, align center"));
+        pnl.setBorderColor(clrBorders);
+        pnl.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        pnl.add(new FLabel("Load a previous Quest"), "h 24px!, gap 2px 2px 2px 2px");
+
+        final FLabel lbl = new FLabel("To use quest files "
+                + "from previous versions, put them into "
+                + "the res/quest/data directory, and restart Forge.", SwingConstants.CENTER);
+        lbl.setFontScaleFactor(0.8);
+
+        final FScrollPane scr = new FScrollPane(lstQuests);
+        scr.setBorder(null);
+        scr.getViewport().setBorder(null);
+
+        pnlLoadQuest.setOpaque(false);
+        pnlLoadQuest.setLayout(new MigLayout("insets 0, gap 0, alignx center, wrap"));
+        pnlLoadQuest.add(pnl, "w 99%, gap 0 0 0 10px");
+        pnlLoadQuest.add(lbl, "w 99%!, h 18px!, gap 2px 2px 0 4px");
+        pnlLoadQuest.add(scr, "w 99%!, h 200px!, gap 0 0 0 30px");
+    }
+
+    /** Layout permanent parts of new quests panel. */
     private void populateNewQuest() {
-        if (previousQuestExists) {
-            JLabel lblNew = new JLabel("  Embark on a new Quest");
-            lblNew.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            lblNew.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME).darker());
-            lblNew.setOpaque(true);
-            lblNew.setBorder(new MatteBorder(1, 0, 1, 0, skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
-            lblNew.setFont(skin.getBoldFont(16));
-            viewport.add(lblNew, "w 90%!, h 50px!, gap 5% 5% 2%, span 2");
+        // New quest notes
+        final FRoundedPanel pnl1 = new FRoundedPanel();
+        pnl1.setLayout(new MigLayout("insets 0, align center"));
+        pnl1.setBorderColor(clrBorders);
+        pnl1.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        pnl1.add(new FLabel("Start a new quest"), "h 24px!, gap 2px 2px 2px 2px");
 
-            JLabel lblNotes = new JLabel("<html>"
-                    + "Start a new Quest will delete your current player decks, credits and win loss record."
-                    + "<br>Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle."
-                    + "</html>");
-            lblNotes.setFont(skin.getFont(14));
-            lblNotes.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            viewport.add(lblNotes, "w 90%, gapleft 5%, span 2");
-        }
-
-        radEasy = new OptionsRadio("Easy - 50 games");
-        radMedium = new OptionsRadio("Medium - 100 games");
-        radHard = new OptionsRadio("Hard - 150 games");
-        radExpert = new OptionsRadio("Expert - 200 games");
-
-        ButtonGroup group1 = new ButtonGroup();
+        final ButtonGroup group1 = new ButtonGroup();
         group1.add(radEasy);
         group1.add(radMedium);
         group1.add(radHard);
         group1.add(radExpert);
 
-        radFantasy = new OptionsRadio("Fantasy");
-        radClassic = new OptionsRadio("Classic");
-
         radEasy.setSelected(true);
         radClassic.setSelected(true);
 
-        ButtonGroup group2 = new ButtonGroup();
+        final ButtonGroup group2 = new ButtonGroup();
         group2.add(radFantasy);
         group2.add(radClassic);
 
-        cbStandardStart = new OptionsCheckBox("Standard (Type 2) Starting Pool");
+        final JPanel pnl2 = new JPanel();
+        pnl2.setOpaque(false);
+        pnl2.setLayout(new MigLayout("insets 0, gap 0"));
 
-        SubButton btnEmbark = new SubButton("");
-        btnEmbark.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                control.newQuest();
-            }
-         });
-        btnEmbark.setText("Embark!");
+        final String constraints = "w 30%!, h 40px!";
+        pnl2.add(radEasy, constraints + ", gap 15% 5% 0 0");
+        pnl2.add(radFantasy, constraints + ", wrap");
+        pnl2.add(radMedium, constraints + ", gap 15% 5% 0 0");
+        pnl2.add(radClassic, constraints + ", wrap");
+        pnl2.add(radHard, constraints + ", gap 15% 5% 0 0");
+        pnl2.add(cbStandardStart, constraints + ", wrap");
+        pnl2.add(radExpert, constraints + ", gap 15% 5% 0 0, wrap");
 
-        JPanel optionsContainer = new JPanel();
-        optionsContainer.setOpaque(false);
-        optionsContainer.setLayout(new MigLayout("insets 0, gap 0"));
+        pnl2.add(btnEmbark, "w 40%!, h 30px!, gapleft 30%, gaptop 3%, span 3 1");
 
-        String constraints = "w 30%!, h 40px!";
-        optionsContainer.add(radEasy, constraints + ", gap 15% 5% 0 0");
-        optionsContainer.add(radFantasy, constraints + ", wrap");
-        optionsContainer.add(radMedium, constraints + ", gap 15% 5% 0 0");
-        optionsContainer.add(radClassic, constraints + ", wrap");
-        optionsContainer.add(radHard, constraints + ", gap 15% 5% 0 0");
-        optionsContainer.add(cbStandardStart, constraints + ", wrap");
-        optionsContainer.add(radExpert, constraints + ", gap 15% 5% 0 0, wrap");
-
-        optionsContainer.add(btnEmbark, "w 40%!, h 30px!, gapleft 30%, gaptop 3%, span 3 1");
-
-        viewport.add(optionsContainer, "w 100%!, gaptop 2%, span 2");
+        pnlNewQuest.setLayout(new MigLayout("insets 0, gap 0, align center, wrap"));
+        pnlNewQuest.setOpaque(false);
+        pnlNewQuest.add(pnl1, "w 99%, gap 0 0 0 10px");
+        pnlNewQuest.add(pnl2, "w 99%!");
     }
 
-    //========= CUSTOM CLASSES
+    /** Layout permanent parts of prefs panel. */
+    private void populatePrefs() {
+        pnlPrefs.setOpaque(false);
+        pnlPrefs.setLayout(new MigLayout("insets 0, gap 0"));
+        pnlPrefs.add(new ViewQuestPreferences(), "w 100%!");
+    }
 
-    /** Consolidates radio button styling in one place. */
-    private class OptionsRadio extends JRadioButton {
-        public OptionsRadio(String txt0) {
-            super();
-            setText(txt0);
-            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
-            setOpaque(false);
+    private void hideAllPanels() {
+        pnlTitle.setVisible(false);
+        pnlStats.setVisible(false);
+        pnlDuels.setVisible(false);
+        pnlChallenges.setVisible(false);
+        pnlStart.setVisible(false);
+        pnlDecks.setVisible(false);
+        pnlNewQuest.setVisible(false);
+        pnlLoadQuest.setVisible(false);
+        pnlPrefs.setVisible(false);
+    }
 
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    setOpaque(true);
-                }
+    //========= UPDATE METHODS
+    /** Update transitory parts of duels panel. */
+    public void updateDuels() {
+        if (AllZone.getQuestData() == null) { return; }
 
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    setOpaque(false);
-                }
-            });
+        pnlDuels.removeAll();
+        final List<QuestDuel> duels = control.getQEM().generateDuels();
+
+        for (QuestDuel d : duels) {
+            SelectablePanel temp = new SelectablePanel(d);
+            pnlDuels.add(temp, this.eventPanelConstraints);
         }
     }
 
-    /** Consolidates checkbox styling in one place. */
-    private class OptionsCheckBox extends JCheckBox {
-        public OptionsCheckBox(String txt0) {
-            super();
-            setText(txt0);
-            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
-            setOpaque(false);
+    /** Update transitory parts of challenges panel. */
+    public void updateChallenges() {
+        if (AllZone.getQuestData() == null) { return; }
 
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    setOpaque(true);
-                }
+        pnlChallenges.removeAll();
+        final List<QuestChallenge> challenges = control.getQEM().generateChallenges();
 
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    setOpaque(false);
-                }
-            });
+        for (QuestChallenge c : challenges) {
+            SelectablePanel temp = new SelectablePanel(c);
+            pnlChallenges.add(temp, this.eventPanelConstraints);
+        }
+    }
+
+    /** Update transitory parts of stats panel. */
+    public void updateStats() {
+        pnlStats.removeAll();
+
+        if (AllZone.getQuestData().isFantasy()) {
+            pnlStats.setLayout(new MigLayout("insets 0, gap 0"));
+
+            pnlStats.add(btnBazaar,     "w 15%!, h 70px!, gap 0 4% 10px 10px, span 1 2");
+            pnlStats.add(lblWins,       "w 30%!, h 25px!, gap 0 2% 12px 0");
+            pnlStats.add(lblLosses,     "w 30%!, h 25px!, gap 0 4% 12px 0");
+            pnlStats.add(btnSpellShop,   "w 14.5%!, h 70px!, gap 0 0 10px 10px, span 1 2, wrap");
+            pnlStats.add(lblCredits,    "w 30%!, h 25px!, gap 0 2% 0 0");
+            pnlStats.add(lblLife,       "w 30%!, h 25px!, gap 0 4% 0 0 0, wrap");
+            pnlStats.add(lblWinStreak, "h 20px!, align center, span 4 1, wrap");
+            pnlStats.add(lblNextChallengeInWins, "h 20px!, align center, span 4 1, wrap");
+            pnlStats.add(btnCurrentDeck, "w 40%!, h 26px!, align center, span 4 1, gap 0 0 0 5px");
+        }
+        else {
+            pnlStats.setLayout(new MigLayout("insets 0, gap 0, align center"));
+            lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
+
+            pnlStats.add(lblWins,       "w 150px!, h 25px!, gap 0 50px 5px 5px, align center");
+            pnlStats.add(lblCredits,    "w 150px!, h 25px!, gap 0 0 5px 5px, align center, wrap");
+            pnlStats.add(lblLosses,     "w 150px!, h 25px!, gap 0 50px 0 5px, align center");
+            pnlStats.add(btnSpellShop,  "w 150px!, h 25px!, gap 0 0 0 5px, align center, wrap");
+            pnlStats.add(lblWinStreak, "h 20px!, align center, span 4 1, wrap");
+            pnlStats.add(lblNextChallengeInWins, "h 20px!, align center, span 4 1, gap 0 0 10px 5px, wrap");
+            pnlStats.add(btnCurrentDeck, "w 40%!, h 26px!, align center, span 4 1, gap 0 0 0 5px");
+        }
+    }
+
+    //========= TAB SHOW METHODS
+    /** Display handler for duel tab click. */
+    public void showDuelsTab() {
+        control.updateTabber(tabDuels);
+        this.hideAllPanels();
+        pnlTitle.setVisible(true);
+
+        if (AllZone.getQuestData() == null) {
+            lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
+            return;
+        }
+
+        setCurrentDeckStatus();
+        updateDuels();
+        updateStats();
+        lblTitle.setText("Duels: " + control.getRankString());
+        pnlStats.setVisible(true);
+        pnlDuels.setVisible(true);
+
+        if (control.getCurrentDeck() != null) {
+            pnlStart.setVisible(true);
+
+            // Select first event.
+            selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
+            selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
+        }
+    }
+
+    /** Display handler for duel tab click. */
+    public void showChallengesTab() {
+        control.updateTabber(tabChallenges);
+        this.hideAllPanels();
+        pnlTitle.setVisible(true);
+
+        if (AllZone.getQuestData() == null) {
+            lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
+            return;
+        }
+
+        setCurrentDeckStatus();
+        updateChallenges();
+        updateStats();
+        lblTitle.setText("Challenges: " + control.getRankString());
+        pnlStats.setVisible(true);
+        pnlChallenges.setVisible(true);
+
+        // Select first event.
+        if (pnlChallenges.getComponentCount() > 0) {
+            pnlStart.setVisible(true);
+            selectedOpponent = (SelectablePanel) pnlChallenges.getComponent(0);
+            selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
+        }
+    }
+
+    /** Display handler for decks tab click. */
+    public void showDecksTab() {
+        control.updateTabber(tabDecks);
+        this.hideAllPanels();
+        pnlTitle.setVisible(true);
+
+        if (AllZone.getQuestData() == null) {
+            lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
+            return;
+        }
+        else {
+            lblTitle.setText("Quest Deck Manager");
+            pnlDecks.setVisible(true);
+        }
+    }
+
+    /** Display handler for quests tab click. */
+    public void showQuestsTab() {
+        control.updateTabber(tabQuests);
+        this.hideAllPanels();
+
+        pnlNewQuest.setVisible(true);
+        pnlLoadQuest.setVisible(true);
+    }
+
+    /** Display handler for quests tab click. */
+    public void showPrefsTab() {
+        control.updateTabber(tabPreferences);
+
+        this.hideAllPanels();
+
+        lblTitle.setText("Quest Preferences");
+        pnlTitle.setVisible(true);
+        pnlPrefs.setVisible(true);
+    }
+
+    /** Toggles red, bold font if no current deck. */
+    public void setCurrentDeckStatus() {
+        if (control.getCurrentDeck() == null) {
+            btnCurrentDeck.setBackground(Color.red.darker());
+            btnCurrentDeck.setText("  Build, then select a deck in the \"Decks\" tab.  ");
+        }
+        else {
+            btnCurrentDeck.setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
+            btnCurrentDeck.setText("Current deck: " + control.getCurrentDeck().getName());
         }
     }
 
     /** Selectable panels for duels and challenges. */
-    public class SelectablePanel extends JPanel {
+    public class SelectablePanel extends FRoundedPanel {
         private QuestEvent event;
+        private Color clrDefault, clrHover, clrSelected;
 
         /** @param e0 &emsp; QuestEvent */
         public SelectablePanel(QuestEvent e0) {
             super();
-            setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
-            setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
-            setLayout(new MigLayout("insets 0, gap 0"));
+            this.clrSelected = skin.getColor(FSkin.SkinProp.CLR_ACTIVE);
+            this.clrDefault = skin.getColor(FSkin.SkinProp.CLR_INACTIVE);
+            this.clrHover = skin.getColor(FSkin.SkinProp.CLR_HOVER);
             this.event = e0;
+
+            this.setBackground(clrDefault);
+            this.setLayout(new MigLayout("insets 0, gap 0"));
 
             final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
             File file = new File(base, event.getIcon());
@@ -477,27 +520,21 @@ public class ViewQuest extends JScrollPane {
                 file = new File(base, "Unknown.jpg");
             }
 
-            JLabel lblIcon = new JLabel(GuiUtils.getResizedIcon(new ImageIcon(file.toString()), 60, 60));
+            FLabel lblIcon = new FLabel(new ImageIcon(file.toString()));
+            lblIcon.setIconScaleFactor(1);
             lblIcon.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            this.add(lblIcon, "h 60px!, w 60px!, gap 5px 5px 5px 5px, span 1 2");
+            this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
 
             // Name
-            JLabel lblName = new JLabel(event.getTitle() + ": " + event.getDifficulty());
-            lblName.setFont(skin.getBoldFont(18));
-            lblName.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            this.add(lblName, "h 20px!, gap 1% 1% 5px 5px, wrap");
+            final FLabel lblName = new FLabel(event.getTitle() + ": " + event.getDifficulty());
+            lblName.setFontScaleFactor(1);
+            this.add(lblName, "h 20px!, gap 0 0 10px 5px, wrap");
 
             // Description
-            final JTextArea tarDesc = new JTextArea();
+            final FTextArea tarDesc = new FTextArea();
             tarDesc.setText(event.getDescription());
             tarDesc.setFont(skin.getItalicFont(12));
-            tarDesc.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
-            tarDesc.setOpaque(false);
-            tarDesc.setWrapStyleWord(true);
-            tarDesc.setLineWrap(true);
-            tarDesc.setFocusable(false);
-            tarDesc.setEditable(false);
-            this.add(tarDesc, " h 35px!, w 75%!, gap 1% 0 0 5px");
+            this.add(tarDesc, "w 80%!, h 30px!");
 
             this.setToolTipText("<html>" + event.getTitle()
                     + ": " + event.getDifficulty()
@@ -510,24 +547,24 @@ public class ViewQuest extends JScrollPane {
                     SelectablePanel src = (SelectablePanel) e.getSource();
 
                     if (selectedOpponent != null) {
-                        selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
+                        selectedOpponent.setBackground(clrDefault);
                     }
 
                     selectedOpponent = src;
-                    src.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
+                    src.setBackground(clrSelected);
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (selectedOpponent != e.getSource()) {
-                        setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
+                        setBackground(clrHover);
                     }
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if (selectedOpponent != e.getSource()) {
-                        setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
+                        setBackground(clrDefault);
                     }
                 }
             });
@@ -537,142 +574,213 @@ public class ViewQuest extends JScrollPane {
         public QuestEvent getEvent() {
             return event;
         }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            g.setColor(getBackground());
-            g.clearRect(0, 0, getWidth(), getHeight());
-            g.fillRect(0, 0, getWidth(), getHeight());
-            super.paintComponent(g);
-        }
-    }
-
-    /**
-     * <p>
-     * nextChallengeInWins.
-     * </p>
-     * 
-     * @return a int.
-     */
-    private int nextChallengeInWins() {
-        final QuestData questData = AllZone.getQuestData();
-
-        // Number of wins was 25, lowereing the number to 20 to help short term
-        // questers.
-        if (questData.getWin() < 20) {
-            return 20 - questData.getWin();
-        }
-
-        // The int mul has been lowered by one, should face special opps more
-        // frequently.
-        final int challengesPlayed = questData.getChallengesPlayed();
-        int mul = 5;
-
-        if (questData.getInventory().hasItem("Zeppelin")) {
-            mul = 3;
-        } else if (questData.getInventory().hasItem("Map")) {
-            mul = 4;
-        }
-
-        final int delta = (challengesPlayed * mul) - questData.getWin();
-
-        return (delta > 0) ? delta : 0;
     }
 
     //========= RETRIEVAL FUNCTIONS
-
-    /** @return JList */
-    public JList getLstDeckChooser() {
-        return lstDeckChooser;
-    }
-
-    /** @return JRadioButton */
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadEasy() {
         return radEasy;
     }
 
-    /** @return JRadioButton */
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadMedium() {
         return radMedium;
     }
 
-    /** @return JRadioButton */
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadHard() {
         return radHard;
     }
 
-    /** @return JRadioButton */
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadExpert() {
         return radExpert;
     }
 
-    /** @return JRadioButton */
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadFantasy() {
         return radFantasy;
     }
 
-    /** @return JRadioButton */
+    /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadClassic() {
         return radClassic;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbStandardStart() {
         return cbStandardStart;
     }
 
-    /** @return SelectablePanel */
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbPlant() {
+        return cbPlant;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbZep() {
+        return cbZep;
+    }
+
+    /** @return {@link javax.swing.JComboBox} */
+    public JComboBox getCbxPet() {
+        return cbxPet;
+    }
+
+    /** @return {@link forge.view.home.ViewQuest.SelectablePanel} */
     public SelectablePanel getSelectedOpponent() {
         return selectedOpponent;
     }
 
-    /** @return HomeTopLevel */
+    /** @return {@link forge.view.home.HomeTopLevel} */
     public HomeTopLevel getParentView() {
         return parentView;
     }
 
-    /** @return ControlQuest */
+    /** @return {@link forge.control.home.ControlQuest} */
     public ControlQuest getController() {
         return control;
     }
 
-    /** @return JComboBox */
-    public JComboBox getPetComboBox() {
-        return cbxPet;
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblTitle() {
+        return lblTitle;
     }
 
-    /** @return JCheckBox */
-    public JCheckBox getPlantCheckBox() {
-        return cbPlant;
-    }
-
-    /** @return QuestData instance currently in use in this view */
-    public QuestData getQuestData() {
-        return questData;
-    }
-
-    /** @return boolean */
-    public boolean hasPreviousQuest() {
-        return previousQuestExists;
-    }
-
-    /** @return JLabel */
+    /** @return {@link javax.swing.JLabel} */
     public JLabel getLblLife() {
         return lblLife;
     }
 
-    /** @return JLabel */
+    /** @return {@link javax.swing.JLabel} */
     public JLabel getLblCredits() {
         return lblCredits;
     }
 
-    /** @return JButton */
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblWins() {
+        return lblWins;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblLosses() {
+        return lblLosses;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblNextChallengeInWins() {
+        return lblNextChallengeInWins;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblWinStreak() {
+        return lblWinStreak;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnCurrentDeck() {
+        return btnCurrentDeck;
+    }
+
+    /** @return {@link javax.swing.JButton} */
     public JButton getBtnStart() {
         return btnStart;
     }
 
-    /** @return FProgressBar */
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnBazaar() {
+        return btnBazaar;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnSpellShop() {
+        return btnSpellShop;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnEmbark() {
+        return btnEmbark;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnNewDeck() {
+        return btnNewDeck;
+    }
+
+    /** @return {@link forge.view.toolbox.FProgressBar} */
     public FProgressBar getBarProgress() {
         return barProgress;
+    }
+
+    //========== CONTAINER RETRIEVAL
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlStats() {
+        return this.pnlStats;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlTitle() {
+        return this.pnlTitle;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlDuels() {
+        return this.pnlDuels;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlChallenges() {
+        return this.pnlChallenges;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlStart() {
+        return this.pnlStart;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlLoadQuest() {
+        return pnlLoadQuest;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getpnlPrefs() {
+        return pnlPrefs;
+    }
+
+    /** @return {@link forge.view.toolbox.DeckLister} */
+    public DeckLister getLstDecks() {
+        return this.lstDecks;
+    }
+
+    /** @return {@link forge.view.home.QuestFileLister} */
+    public QuestFileLister getLstQuests() {
+        return this.lstQuests;
+    }
+
+    //========== TAB RETRIEVAL
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabDuels() {
+        return tabDuels;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabChallenges() {
+        return tabChallenges;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabDecks() {
+        return tabDecks;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabQuests() {
+        return tabQuests;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabPreferences() {
+        return tabPreferences;
     }
 }

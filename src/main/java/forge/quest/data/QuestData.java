@@ -24,6 +24,7 @@ import java.util.Map;
 
 import net.slightlymagic.maxmtg.Predicate;
 import forge.SetUtils;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.item.CardPrinted;
@@ -31,6 +32,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
 import forge.util.MyRandom;
@@ -68,6 +70,10 @@ public final class QuestData {
     /** The lost. */
     private int lost;
 
+    private int winstreakBest = 0;
+
+    private int winstreakCurrent = 0;
+
     /** The credits. */
     private long credits; // this money is good for all modes
 
@@ -92,6 +98,9 @@ public final class QuestData {
 
     /** The difficulty. */
     private String difficulty;
+
+    /** */
+    private String name = "";
 
     // Quest mode - there should be an enum :(
     /** The mode. */
@@ -170,15 +179,25 @@ public final class QuestData {
             "What Do You Do With The Other Hand?", "Freelance Sorcerer, Works Weekends",
             "Should We Hire Commentators?", "Saltblasted For Your Talent", "Serra Angel Is Your Girlfriend", };
 
+    /** */
+    public QuestData() {
+        this("An Unknown Quest");
+    }
+
     /**
      * <p>
      * Constructor for QuestData.
      * </p>
+     * 
+     * @param s0 &emsp; String name
      */
-    public QuestData() {
+    public QuestData(String s0) {
         this.initTransients();
-        this.myCards.addBasicLands(this.getCardPool(), QuestPreferences.getStartingBasic(),
-                QuestPreferences.getStartingSnowBasic());
+        this.setName(s0);
+
+        this.myCards.addBasicLands(this.getCardPool(),
+                Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_BASIC_LANDS),
+                Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_BASIC_LANDS));
         this.randomizeOpponents();
     }
 
@@ -213,7 +232,7 @@ public final class QuestData {
                 : CardPrinted.Predicates.Presets.IS_TRUE;
 
         this.myCards.setupNewGameCardPool(filter, diff);
-        this.setCredits(QuestPreferences.getStartingCredits());
+        this.setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
 
         this.mode = m0de;
         this.life = this.mode.equals(QuestData.FANTASY) ? 15 : 20;
@@ -356,6 +375,12 @@ public final class QuestData {
      */
     public void addLost() {
         this.lost++;
+
+        if (winstreakCurrent > winstreakBest) {
+            winstreakBest = winstreakCurrent;
+        }
+
+        winstreakCurrent = 0;
     }
 
     /**
@@ -372,8 +397,13 @@ public final class QuestData {
      */
     public void addWin() { // changes getRank()
         this.win++;
+        this.winstreakCurrent++;
 
-        final int winsToLvlUp = QuestPreferences.getWinsForRankIncrease(this.diffIndex);
+        if (winstreakCurrent > winstreakBest) {
+            winstreakBest = winstreakCurrent;
+        }
+
+        final int winsToLvlUp = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_RANKUP, this.diffIndex);
         if ((this.win % winsToLvlUp) == 0) {
             this.rankIndex++;
         }
@@ -480,14 +510,15 @@ public final class QuestData {
 
     /**
      * Guess difficulty index.
+     * NOTE: Used in old UI only, soon to be deprecated.
      */
     public void guessDifficultyIndex() {
-        final String[] diffStr = QuestPreferences.getDifficulty();
+        /*final String[] diffStr = QuestPreferences.getDifficulty();
         for (int i = 0; i < diffStr.length; i++) {
             if (this.difficulty.equals(diffStr[i])) {
                 this.diffIndex = i;
             }
-        }
+        }*/
     }
 
     // Level, read-only ( note: it increments in addWin() )
@@ -512,6 +543,15 @@ public final class QuestData {
         return QuestData.RANK_TITLES[this.rankIndex];
     }
 
+    /** @return int */
+    public int getWinStreakBest() {
+        return this.winstreakBest;
+    }
+
+    /** @return int */
+    public int getWinStreakCurrent() {
+        return this.winstreakCurrent;
+    }
     // decks management
     /**
      * Gets the deck names.
@@ -520,6 +560,11 @@ public final class QuestData {
      */
     public List<String> getDeckNames() {
         return new ArrayList<String>(this.getMyDecks().keySet());
+    }
+
+    /** @return List<Deck> */
+    public List<Deck> getDecks() {
+        return new ArrayList<Deck>(this.getMyDecks().values());
     }
 
     /**
@@ -684,7 +729,8 @@ public final class QuestData {
         this.myDecks = myDecks0;
     }
 
-    public static final QuestPreconManager getPreconManager() {
+    /** @return QuestPreconManager */
+    public static QuestPreconManager getPreconManager() {
         return preconManager;
     }
 
@@ -725,5 +771,15 @@ public final class QuestData {
      */
     public void setVersionNumber(final int versionNumber0) {
         this.versionNumber = versionNumber0;
+    }
+
+    /** @param s0 &emsp; {@link java.lang.String} */
+    public void setName(String s0) {
+        this.name = s0;
+    }
+
+    /** @return {@link java.lang.String} */
+    public String getName() {
+        return this.name;
     }
 }

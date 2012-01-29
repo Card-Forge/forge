@@ -36,6 +36,7 @@ import forge.gui.input.InputControl;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 
@@ -57,7 +58,8 @@ public class FModel {
     private BuildInfo buildInfo;
 
     /** The preferences. */
-    private ForgePreferences preferences;
+    private final QuestPreferences questPreferences;
+    private final ForgePreferences preferences;
     private FGameState gameState;
 
     /**
@@ -84,11 +86,13 @@ public class FModel {
 
         // Instantiate preferences
         try {
-            this.setPreferences(new ForgePreferences("forge.preferences"));
+            this.preferences = new ForgePreferences("forge.preferences");
         } catch (final Exception exn) {
-            // Log.error("Error loading preferences: " + exn);
             throw new RuntimeException(exn);
         }
+
+        // Instantiate quest preferences
+        this.questPreferences = new QuestPreferences();
 
         // TODO this single setting from preferences should not be here, or,
         // it should be here with all the other settings at the same time.
@@ -269,9 +273,9 @@ public class FModel {
         return this.preferences;
     }
 
-    /** @param fp0 {@link forge.properties.ForgePreferences} */
-    public final void setPreferences(final ForgePreferences fp0) {
-        this.preferences = fp0;
+    /** @return {@link forge.quest.data.QuestPreferences} */
+    public final QuestPreferences getQuestPreferences() {
+        return this.questPreferences;
     }
 
     /** @return {@link forge.model.FGameState} */
