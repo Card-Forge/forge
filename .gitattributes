@@ -9809,6 +9809,7 @@ res/cardsfolder/w/wayward_angel.txt -text svneol=unset#text/plain
 res/cardsfolder/w/wayward_soul.txt svneol=native#text/plain
 res/cardsfolder/w/weakness.txt svneol=native#text/plain
 res/cardsfolder/w/weakstone.txt svneol=native#text/plain
+res/cardsfolder/w/weathered_bodyguards.txt -text
 res/cardsfolder/w/weathered_wayfarer.txt svneol=native#text/plain
 res/cardsfolder/w/weatherseed_elf.txt svneol=native#text/plain
 res/cardsfolder/w/weatherseed_faeries.txt svneol=native#text/plain
