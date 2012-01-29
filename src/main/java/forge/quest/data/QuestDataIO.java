@@ -296,8 +296,8 @@ public class QuestDataIO {
             writer.addAttribute("s", deck.getName());
             writer.addAttribute("n", count.toString());
             writer.endNode();
-        }        
-        
+        }
+
         @Override
         public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
             @SuppressWarnings("unchecked")
@@ -332,9 +332,10 @@ public class QuestDataIO {
                 } else if ("booster".equals(nodename)) {
                     result.add(this.readBooster(reader), cnt);
                 } else if ("precon".equals(nodename)) {
-                    PreconDeck toAdd = this.readPreconDeck(reader); 
-                    if ( null != toAdd )
+                    PreconDeck toAdd = this.readPreconDeck(reader);
+                    if (null != toAdd) {
                         result.add(toAdd, cnt);
+                    }
                 }
                 reader.moveUp();
             }
@@ -343,13 +344,14 @@ public class QuestDataIO {
 
         private PreconDeck readPreconDeck(final HierarchicalStreamReader reader) {
             final String name = reader.getAttribute("s");
-            for( PreconDeck d : QuestData.getPreconManager().getDecks() )
-                if ( name.equalsIgnoreCase( d.getName() ) )
+            for (PreconDeck d : QuestData.getPreconManager().getDecks()) {
+                if (name.equalsIgnoreCase(d.getName())) {
                     return d;
-
+                }
+            }
             return null;
-        }        
-        
+        }
+
         private BoosterPack readBooster(final HierarchicalStreamReader reader) {
             final String set = reader.getAttribute("s");
             return new BoosterPack(set);
