@@ -917,41 +917,18 @@ public final class GameActionUtil {
      *            a {@link forge.Card} object.
      */
     private static void playerCombatDamageLoseHalfLifeUp(final Card c) {
-        final Player player = c.getController();
-        final Player opponent = player.getOpponent();
-        final Card fCard = c;
+        final Player player = c.getController().getOpponent();
         if (c.getNetAttack() > 0) {
             final Ability ability2 = new Ability(c, "0") {
                 @Override
                 public void resolve() {
-                    int x = 0;
-                    int y = 0;
-                    if (player.isHuman()) {
-                        y = (AllZone.getComputerPlayer().getLife() % 2);
-                        if (!(y == 0)) {
-                            y = 1;
-                        } else {
-                            y = 0;
-                        }
-
-                        x = (AllZone.getComputerPlayer().getLife() / 2) + y;
-                    } else {
-                        y = (AllZone.getHumanPlayer().getLife() % 2);
-                        if (!(y == 0)) {
-                            y = 1;
-                        } else {
-                            y = 0;
-                        }
-
-                        x = (AllZone.getHumanPlayer().getLife() / 2) + y;
-                    }
-                    opponent.loseLife(x, fCard);
-
+                    int x = (int) Math.ceil(player.getLife() / 2.0);
+                    player.loseLife(x, c);
                 }
             }; // ability2
 
             final StringBuilder sb = new StringBuilder();
-            sb.append(c.getName()).append(" - ").append(opponent);
+            sb.append(c.getName()).append(" - ").append(player);
             sb.append(" loses half his or her life, rounded up.");
             ability2.setStackDescription(sb.toString());
 
