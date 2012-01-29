@@ -4,7 +4,7 @@ Types:Creature Devil
 Text:no text
 PT:4/2
 K:Undying
-T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZone$ Battlefield | ValidCard$ Creature.YouOwn | Execute$ ReanimateDmg | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouOwn | Execute$ ReanimateDmg | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
 SVar:ReanimateDmg:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | DamageSource$ TriggeredCard  | NumDmg$ Damage
 SVar:Damage:TriggeredCard$CardPower
 SVar:Rarity:Rare
