@@ -592,7 +592,7 @@ public class AbilityFactoryDealDamage {
                     && AllZone.getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
                     || saMe.getPayCosts() == null || isTrigger)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
-                    System.out.println(saMe.getSourceCard() + "damageChoosingTargets");
+                    System.out.println(saMe.getSourceCard() + " - damageChoosingTargets");
                     continue;
                 }
             }
