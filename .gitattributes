@@ -5183,6 +5183,7 @@ res/cardsfolder/m/mana_chains.txt -text
 res/cardsfolder/m/mana_crypt.txt svneol=native#text/plain
 res/cardsfolder/m/mana_cylix.txt svneol=native#text/plain
 res/cardsfolder/m/mana_drain.txt svneol=native#text/plain
+res/cardsfolder/m/mana_flare.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mana_geyser.txt svneol=native#text/plain
 res/cardsfolder/m/mana_leak.txt svneol=native#text/plain
 res/cardsfolder/m/mana_leech.txt svneol=native#text/plain
