@@ -17,6 +17,7 @@
  */
 package forge.view.home;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -59,6 +60,9 @@ public class HomeTopLevel extends FPanel {
     private ViewSettings settings;
     private ViewUtilities utilities;
 
+    private final int insets = 10;
+    private final int menuWidthPx = 350;
+
     /**
      * Instantiates a new home top level.
      */
@@ -75,10 +79,19 @@ public class HomeTopLevel extends FPanel {
 
         this.setOpaque(false);
         this.setBGTexture(skin.getIcon(FSkin.SkinProp.BG_TEXTURE));
-        this.setLayout(new MigLayout("insets 0, gap 0"));
+        this.setLayout(null);
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
+                int w = getWidth();
+                int h = getHeight();
+                pnlContent.setBounds(new Rectangle(
+                        2 * insets + menuWidthPx, insets,
+                        w - menuWidthPx - 3 * insets, h - 2 * insets));
+                pnlMenu.setBounds(new Rectangle(
+                        insets, insets,
+                        menuWidthPx, h - 2 * insets
+                        ));
                 revalidate();
             }
         });
