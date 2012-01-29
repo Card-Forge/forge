@@ -1,0 +1,10 @@
+Name:Demonic Attorney
+ManaCost:1 B B
+Types:Sorcery
+Text:no text
+K:Remove CARDNAME from your deck before playing if you're not playing for ante.  
+A:SP$ Mill | Cost$ 1 B B | Defined$ Each | NumCards$ 1 | Destination$ Ante | SpellDescription$ Each player antes the top card of his or her library.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_attorney.jpg
+End

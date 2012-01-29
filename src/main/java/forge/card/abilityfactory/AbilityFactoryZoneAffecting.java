@@ -736,6 +736,8 @@ public class AbilityFactoryZoneAffecting {
             sb.append("mills ");
         } else if (dest.equals(Zone.Exile)) {
             sb.append("exiles ");
+        } else if (dest.equals(Zone.Ante)) {
+            sb.append("antes ");
         }
         sb.append(numCards);
         sb.append(" card");
