@@ -276,6 +276,31 @@ Lashknife Barrier
 - Added the precon Carnival of Blood.
 - Added the precon Spectral Legions.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the precon Path of Blight.
+- Moved +1/+1 vs -1/-1 counters erasing to checkGameState (fixing the undying issue).
+- CheckStyle.
+- Added the download links for the morph image as well as the Dark Ascension tokens.
+- CheckStyle.
+- Update decklist after closing shop (to see newly bought decks right now)
+- Added the precon Relic Breaker.
+- Added the precon Myr of Mirrodin.
+- DeckRecognizer will try to get the latest edition for cards typed
+- Added a fluff piece to the changes.txt file.
+- Added Extraplanar Lens. Note that "Static$ True" in the second trigger simply wouldn't work for me. Card works fine AFAICT.
+- Text fix
+- foil keyword in decklists - partial support
+- CheckStyle.
+- hook up the downloaded morph image to display on the battlefield
+- update the README file with morph image location
+- Releasing the beast: fully refactored quest submenu, featuring multiple quest support, preference editor, submenu tabs, and a host of other tools (and updates).
+- Converted home screen root layout to null; allowing static sizing of button panel, creating more submenu space on big screens.
+- ForgePreferences fully converted to enum architecture. All preference-style files are now standardized using enums.
+- Checkstyle.
+- FSkin enums reorganized to smaller groups, implementing the SkinProp interface. This will facilitate the change to fully-skinnable symbols and icons in the near future.
+- Fixed Flayer of the Hatebound.
+- Small fix to extended banlist. Storeforge->Stoneforge
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -488,6 +513,8 @@ Empyrial Archangel
 Pariah's Shield
 Diviner's Wand
 Shirei, Shizo's Caretaker
+Veteran Bodyguard
+Balance of Power
 
 
 end
