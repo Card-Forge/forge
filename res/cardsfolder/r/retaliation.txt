@@ -1,0 +1,10 @@
+Name:Retaliation
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTrigger$ TrigBlocked | AddSVar$ TrigPump | Description$ Creatures you control have "Whenever this creature becomes blocked by a creature, this creature gets +1/+1 until end of turn."
+SVar:TrigBlocked:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | NumAtt$ 1 | NumDef$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/retaliation.jpg
+End

@@ -6987,6 +6987,7 @@ res/cardsfolder/r/restrain.txt -text
 res/cardsfolder/r/resurrection.txt svneol=native#text/plain
 res/cardsfolder/r/resuscitate.txt svneol=native#text/plain
 res/cardsfolder/r/retaliate.txt svneol=native#text/plain
+res/cardsfolder/r/retaliation.txt -text svneol=unset#text/plain
 res/cardsfolder/r/retaliator_griffin.txt -text
 res/cardsfolder/r/rethink.txt -text
 res/cardsfolder/r/retract.txt svneol=native#text/plain
