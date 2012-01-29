@@ -32,6 +32,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -637,6 +638,26 @@ public final class AbilityFactoryAnimate {
                 }
             }
 
+            // suppress static abilities from the animated card
+            final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
+            if (params.containsKey("OverwriteStatics") || params.containsKey("RemoveAllAbilities")) {
+                final ArrayList<StaticAbility> staticsToRemove = c.getStaticAbilities();
+                for (final StaticAbility stAb : staticsToRemove) {
+                    stAb.setTemporarilySuppressed(true);
+                    removedStatics.add(stAb);
+                }
+            }
+
+            // suppress static abilities from the animated card
+            final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
+            if (params.containsKey("OverwriteReplacements") || params.containsKey("RemoveAllAbilities")) {
+                final ArrayList<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
+                for (final ReplacementEffect re : replacementsToRemove) {
+                    re.setTemporarilySuppressed(true);
+                    removedReplacements.add(re);
+                }
+            }
+
             final boolean givesStAbs = (stAbs.size() > 0);
 
             final Command unanimate = new Command() {
@@ -650,6 +671,16 @@ public final class AbilityFactoryAnimate {
                     // give back suppressed triggers
                     for (final Trigger t : removedTriggers) {
                         t.setSuppressed(false);
+                    }
+
+                    // give back suppressed static abilities
+                    for (final StaticAbility s : removedStatics) {
+                        s.setTemporarilySuppressed(false);
+                    }
+
+                    // give back suppressed replacement effects
+                    for (final ReplacementEffect re : removedReplacements) {
+                        re.setTemporarilySuppressed(false);
                     }
                 }
             };
@@ -1178,7 +1209,7 @@ public final class AbilityFactoryAnimate {
 
             // remove abilities
             final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
-            if (params.containsKey("OverwriteAbilities")) {
+            if (params.containsKey("OverwriteAbilities") || params.containsKey("RemoveAllAbilities")) {
                 for (final SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.isAbility()) {
                         c.removeSpellAbility(ab);
@@ -1197,6 +1228,36 @@ public final class AbilityFactoryAnimate {
                 }
             }
 
+            // suppress triggers from the animated card
+            final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
+            if (params.containsKey("OverwriteTriggers") || params.containsKey("RemoveAllAbilities")) {
+                final ArrayList<Trigger> triggersToRemove = c.getTriggers();
+                for (final Trigger trigger : triggersToRemove) {
+                    trigger.setSuppressed(true);
+                    removedTriggers.add(trigger);
+                }
+            }
+
+            // suppress static abilities from the animated card
+            final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
+            if (params.containsKey("OverwriteStatics") || params.containsKey("RemoveAllAbilities")) {
+                final ArrayList<StaticAbility> staticsToRemove = c.getStaticAbilities();
+                for (final StaticAbility stAb : staticsToRemove) {
+                    stAb.setTemporarilySuppressed(true);
+                    removedStatics.add(stAb);
+                }
+            }
+
+            // suppress static abilities from the animated card
+            final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
+            if (params.containsKey("OverwriteReplacements") || params.containsKey("RemoveAllAbilities")) {
+                final ArrayList<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
+                for (final ReplacementEffect re : replacementsToRemove) {
+                    re.setTemporarilySuppressed(true);
+                    removedReplacements.add(re);
+                }
+            }
+
             // give sVars
             if (sVars.size() > 0) {
                 for (final String s : sVars) {
@@ -1212,6 +1273,21 @@ public final class AbilityFactoryAnimate {
                 public void execute() {
                     AbilityFactoryAnimate.doUnanimate(c, af, finalDesc, hiddenKeywords, addedAbilities, addedTriggers,
                             colorTimestamp, false, removedAbilities, timestamp);
+
+                    // give back suppressed triggers
+                    for (final Trigger t : removedTriggers) {
+                        t.setSuppressed(false);
+                    }
+
+                    // give back suppressed static abilities
+                    for (final StaticAbility s : removedStatics) {
+                        s.setTemporarilySuppressed(false);
+                    }
+
+                    // give back suppressed replacement effects
+                    for (final ReplacementEffect re : removedReplacements) {
+                        re.setTemporarilySuppressed(false);
+                    }
                 }
             };
 
