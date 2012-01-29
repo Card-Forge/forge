@@ -31,9 +31,9 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Quest;
 
 /**
- * <p>
- * QuestPreferences class.
- * </p>
+ * Holds default preference values in an enum.
+ * Loads preferred values when instantiated.
+ * If a requested value is not present, default is returned.
  * 
  * @author Forge
  * @version $Id$

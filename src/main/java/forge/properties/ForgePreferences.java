@@ -27,12 +27,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>
- * ForgePreferences class.
- * </p>
- * 
- * All preferences saved in a hash map.  To make a new preference,
- * simply define a default, a setter and a getter.
+ * Holds default preference values in an enum.
+ * Loads preferred values when instantiated.
+ * If a requested value is not present, default is returned.
  * 
  * @author Forge
  * @version $Id$
