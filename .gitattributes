@@ -10798,12 +10798,14 @@ res/quest/decks/quest8.dck -text
 res/quest/decks/quest9.dck -text
 res/quest/precons/Blood[!!-~]And[!!-~]Fire.dck -text
 res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
+res/quest/precons/Eldritch[!!-~]Onslaught.dck -text
 res/quest/precons/Grab[!!-~]for[!!-~]Power.dck -text
 res/quest/precons/Grave[!!-~]Power.dck -text
 res/quest/precons/Myr[!!-~]of[!!-~]Mirrodin.dck -text
 res/quest/precons/Path[!!-~]of[!!-~]Blight.dck -text
 res/quest/precons/Relentless[!!-~]Dead.dck -text
 res/quest/precons/Relic[!!-~]Breaker.dck -text
+res/quest/precons/Repel[!!-~]the[!!-~]Dark.dck -text
 res/quest/precons/Spectral[!!-~]Legions.dck -text
 res/quest/precons/Swift[!!-~]Justice.dck -text
 res/quest/price.txt svneol=native#text/plain
