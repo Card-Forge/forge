@@ -51,6 +51,8 @@ The quest pets archive contains two subdirectories named "icons" and "tokens". P
 
 Your forge game may not come with one or more of these three folders as part of the forge archive. In this case you should use your computer's OS file system to create the proper folders with the correct names and they must be located inside of the /res/pics/ folder.
 
+The in-game downloaders will grab an image for face-down (Morph) cards on the battlefield.  To use a custom image, place a "morph.jpg" file in your res/pics/tokens directory.
+
 
 Launching Forge and Memory Issues:
 
