@@ -16,7 +16,7 @@ import forge.util.SectionUtil;
  *
  */
 public class PreconDeck implements InventoryItemFromSet {
-    
+
     private final Deck deck;
     private final String imageFilename;
     private final String set;
@@ -39,25 +39,26 @@ public class PreconDeck implements InventoryItemFromSet {
         return "Prebuilt Deck";
     }
 
-    public PreconDeck(final File f)
-    {
+    public PreconDeck(final File f) {
         List<String> deckLines = FileUtil.readFile(f);
         Map<String, List<String>> sections = SectionUtil.parseSections(deckLines);
         deck = DeckIO.readDeck(deckLines);
-        
+
         String filenameProxy = null;
         String setProxy = "n/a";
         List<String> metadata = sections.get("metadata");
-        if ( null != metadata && !metadata.isEmpty() ) for(String s : metadata) {
+        if (null != metadata && !metadata.isEmpty()) for (String s : metadata) {
             String[] kv = s.split("=");
-            if( "Image".equalsIgnoreCase(kv[0]))
+            if ("Image".equalsIgnoreCase(kv[0])) {
                 filenameProxy = kv[1];
-            if( "set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null )
+            }
+            if ("set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
                 setProxy = kv[1];
+            }
         }
         imageFilename = filenameProxy;
         set = setProxy;
-        recommendedDeals = new SellRules(sections.get("shop"));  
+        recommendedDeals = new SellRules(sections.get("shop"));
     }
 
 
