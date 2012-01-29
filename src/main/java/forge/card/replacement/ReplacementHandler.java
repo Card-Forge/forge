@@ -39,6 +39,16 @@ public class ReplacementHandler {
 
     private List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
+    private List<Card> suppressedCards = new ArrayList<Card>();
+    
+    public void suppressCard(Card c) {
+        suppressedCards.add(c);
+    }
+    
+    public void clearCardSuppression(Card c) {
+        suppressedCards.remove(c);
+    }
+    
     /**
      * 
      * Runs any applicable replacement effects.
@@ -68,6 +78,9 @@ public class ReplacementHandler {
         //Round up Static replacement effects
         for (Player p : AllZone.getPlayersInGame()) {
             for (Card crd : p.getCardsIn(Zone.Battlefield)) {
+                if(suppressedCards.contains(crd)) {
+                    continue;
+                }
                 for (ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck()) {
                         if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams)) {
