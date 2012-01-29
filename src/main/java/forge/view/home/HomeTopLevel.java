@@ -78,7 +78,7 @@ public class HomeTopLevel extends FPanel {
         utilities = new ViewUtilities(this);
 
         this.setOpaque(false);
-        this.setBGTexture(skin.getIcon(FSkin.SkinProp.BG_TEXTURE));
+        this.setBGTexture(skin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         this.setLayout(null);
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -98,10 +98,10 @@ public class HomeTopLevel extends FPanel {
 
         pnlMenu = new FRoundedPanel();
         pnlMenu.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlMenu.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        pnlMenu.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
 
         pnlContent = new FRoundedPanel();
-        pnlContent.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        pnlContent.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
         pnlContent.setLayout(new MigLayout("insets 0, gap 0"));
 
         btnConstructed = new FButton();
@@ -157,7 +157,7 @@ public class HomeTopLevel extends FPanel {
         add(pnlMenu, "w 36%!, h 96%!, gap 2% 2% 2% 2%");
         add(pnlContent, "w 58%!, h 96%!, gap 0% 2% 2% 2%");
 
-        JLabel lblIcon = new JLabel(skin.getIcon(FSkin.SkinProp.IMG_LOGO));
+        JLabel lblIcon = new JLabel(skin.getIcon(FSkin.ForgeIcons.IMG_LOGO));
         pnlMenu.add(lblIcon, "gapleft 10%, ax center");
 
         constraints = "w 80%!, gapleft 10%, gaptop 1%, gapbottom 1%, h 40px!";

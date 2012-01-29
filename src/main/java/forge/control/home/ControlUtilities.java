@@ -51,11 +51,11 @@ public class ControlUtilities {
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_HOVER));
+                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER));
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_TEXT));
+                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_TEXT));
             }
         };
 

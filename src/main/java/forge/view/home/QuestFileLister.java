@@ -52,9 +52,9 @@ public class QuestFileLister extends JPanel {
         this.skin = Singletons.getView().getSkin();
 
         this.clrDefault = new Color(0, 0, 0, 0);
-        this.clrHover = skin.getColor(FSkin.SkinProp.CLR_HOVER);
-        this.clrActive = skin.getColor(FSkin.SkinProp.CLR_ACTIVE);
-        this.clrBorders = skin.getColor(FSkin.SkinProp.CLR_BORDERS);
+        this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
+        this.clrActive = skin.getColor(FSkin.Colors.CLR_ACTIVE);
+        this.clrBorders = skin.getColor(FSkin.Colors.CLR_BORDERS);
 
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
@@ -74,7 +74,7 @@ public class QuestFileLister extends JPanel {
         // Note: careful with the widths of the rows here;
         // scroll panes will have difficulty dynamically resizing if 100% width is set.
         final JPanel rowTitle = new JPanel();
-        rowTitle.setBackground(skin.getColor(FSkin.SkinProp.CLR_ZEBRA));
+        rowTitle.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new FLabel("Delete", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
         rowTitle.add(new FLabel("Edit", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");

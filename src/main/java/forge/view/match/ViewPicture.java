@@ -42,7 +42,7 @@ public class ViewPicture extends FRoundedPanel {
         pnlPicture = new CardPicturePanel(null);
         pnlPicture.setOpaque(false);
 
-        this.setBackground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_THEME));
+        this.setBackground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_THEME));
         this.setLayout(new MigLayout("insets 0, gap 0, center"));
 
         add(pnlPicture, "w 100%!, h 100%!");

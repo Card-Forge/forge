@@ -70,9 +70,9 @@ public class DeckLister extends JPanel {
         this.cmdEditorExit = cmd0;
 
         this.clrDefault = new Color(0, 0, 0, 0);
-        this.clrHover = skin.getColor(FSkin.SkinProp.CLR_HOVER);
-        this.clrActive = skin.getColor(FSkin.SkinProp.CLR_ACTIVE);
-        this.clrBorders = skin.getColor(FSkin.SkinProp.CLR_BORDERS);
+        this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
+        this.clrActive = skin.getColor(FSkin.Colors.CLR_ACTIVE);
+        this.clrBorders = skin.getColor(FSkin.Colors.CLR_BORDERS);
 
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
@@ -92,7 +92,7 @@ public class DeckLister extends JPanel {
         // Note: careful with the widths of the rows here;
         // scroll panes will have difficulty dynamically resizing if 100% width is set.
         JPanel rowTitle = new TitlePanel();
-        rowTitle.setBackground(skin.getColor(FSkin.SkinProp.CLR_ZEBRA));
+        rowTitle.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new FLabel("Delete", SwingConstants.CENTER), "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel("Edit", SwingConstants.CENTER), "w 10%!, h 20px!, gaptop 5px");
@@ -282,7 +282,7 @@ public class DeckLister extends JPanel {
         public GenericLabel(String txt0) {
             super(txt0);
             setHorizontalAlignment(SwingConstants.CENTER);
-            setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
             setFont(skin.getBoldFont(12));
         }
     }

@@ -45,12 +45,17 @@ import forge.gui.GuiUtils;
 
 public class FSkin {
     /** Properties of various components that make up the skin. */
-    public enum SkinProp {
-        /** These correspond to objects stored HashMaps. */
+    public interface SkinProp { }
+
+    /** */
+    public enum Backgrounds implements SkinProp { /** */
         BG_SPLASH, /** */
         BG_TEXTURE, /** */
         BG_MATCH,  /** */
+    }
 
+    /** */
+    public enum Colors implements SkinProp { /** */
         CLR_THEME, /** */
         CLR_BORDERS, /** */
         CLR_ZEBRA, /** */
@@ -58,30 +63,45 @@ public class FSkin {
         CLR_ACTIVE, /** */
         CLR_INACTIVE, /** */
         CLR_TEXT, /** */
+    }
 
-        ICON_ZONE_HAND, /** */
-        ICON_ZONE_LIBRARY, /** */
-        ICON_ZONE_EXILE, /** */
-        ICON_ZONE_FLASHBACK, /** */
-        ICON_ZONE_GRAVEYARD, /** */
-        ICON_ZONE_POISON, /** */
+    /** */
+    public enum ZoneIcons implements SkinProp { /** */
+        ICO_HAND, /** */
+        ICO_LIBRARY, /** */
+        ICO_EXILE, /** */
+        ICO_FLASHBACK, /** */
+        ICO_GRAVEYARD, /** */
+        ICO_POISON, /** */
+    }
 
-        ICON_MANA_BLACK, /** */
-        ICON_MANA_BLUE, /** */
-        ICON_MANA_GREEN, /** */
-        ICON_MANA_RED, /** */
-        ICON_MANA_WHITE, /** */
-        ICON_MANA_COLORLESS, /** */
+     /** */
+    public enum ManaIcons implements SkinProp { /** */
+        ICO_BLACK, /** */
+        ICO_BLUE, /** */
+        ICO_GREEN, /** */
+        ICO_RED, /** */
+        ICO_WHITE, /** */
+        ICO_COLORLESS, /** */
+    }
 
-        ICON_DOCK_SHORTCUTS, /** */
-        ICON_DOCK_SETTINGS, /** */
-        ICON_DOCK_ENDTURN, /** */
-        ICON_DOCK_CONCEDE, /** */
-        ICON_DOCK_DECKLIST, /** */
+    /** */
+    public enum DockIcons implements SkinProp { /** */
+        ICO_SHORTCUTS, /** */
+        ICO_SETTINGS, /** */
+        ICO_ENDTURN, /** */
+        ICO_CONCEDE, /** */
+        ICO_DECKLIST, /** */
+    }
 
+    /** */
+    public enum ForgeIcons implements SkinProp { /** */
         IMG_LOGO, /** */
         IMG_FAVICON, /** */
+    }
 
+    /** */
+    public enum ButtonImages implements SkinProp { /** */
         IMG_BTN_START_UP, /** */
         IMG_BTN_START_OVER, /** */
         IMG_BTN_START_DOWN, /** */
@@ -166,7 +186,7 @@ public class FSkin {
             final int h = img.getHeight();
             final int w = img.getWidth();
 
-            this.setIcon(SkinProp.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
+            this.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
 
             UIManager.put("ProgressBar.background", this.getColorFromPixel(img.getRGB(25, h - 75)));
             UIManager.put("ProgressBar.selectionBackground", this.getColorFromPixel(img.getRGB(75, h - 75)));
@@ -256,8 +276,8 @@ public class FSkin {
 
         // Put various images into map (except sprite and splash).
         // Exceptions handled inside method.
-        this.setIcon(SkinProp.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
-        this.setIcon(SkinProp.BG_MATCH, preferredDir + FILE_MATCH_BG);
+        this.setIcon(Backgrounds.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
+        this.setIcon(Backgrounds.BG_MATCH, preferredDir + FILE_MATCH_BG);
 
         // Sprite
         final File file = new File(preferredDir + FILE_SPRITE);
@@ -266,68 +286,68 @@ public class FSkin {
         try {
             image = ImageIO.read(file);
 
-            this.setColor(SkinProp.CLR_THEME, this.getColorFromPixel(image.getRGB(70, 10)));
-            this.setColor(SkinProp.CLR_BORDERS, this.getColorFromPixel(image.getRGB(70, 30)));
-            this.setColor(SkinProp.CLR_ZEBRA, this.getColorFromPixel(image.getRGB(70, 50)));
-            this.setColor(SkinProp.CLR_HOVER, this.getColorFromPixel(image.getRGB(70, 70)));
-            this.setColor(SkinProp.CLR_ACTIVE, this.getColorFromPixel(image.getRGB(70, 90)));
-            this.setColor(SkinProp.CLR_INACTIVE, this.getColorFromPixel(image.getRGB(70, 110)));
-            this.setColor(SkinProp.CLR_TEXT, this.getColorFromPixel(image.getRGB(70, 130)));
+            this.setColor(Colors.CLR_THEME, this.getColorFromPixel(image.getRGB(70, 10)));
+            this.setColor(Colors.CLR_BORDERS, this.getColorFromPixel(image.getRGB(70, 30)));
+            this.setColor(Colors.CLR_ZEBRA, this.getColorFromPixel(image.getRGB(70, 50)));
+            this.setColor(Colors.CLR_HOVER, this.getColorFromPixel(image.getRGB(70, 70)));
+            this.setColor(Colors.CLR_ACTIVE, this.getColorFromPixel(image.getRGB(70, 90)));
+            this.setColor(Colors.CLR_INACTIVE, this.getColorFromPixel(image.getRGB(70, 110)));
+            this.setColor(Colors.CLR_TEXT, this.getColorFromPixel(image.getRGB(70, 130)));
         } catch (final IOException e) {
             System.err.println(this.notfound + preferredDir + FILE_SPRITE);
             e.printStackTrace();
         }
 
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_LIBRARY, 280, 0, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_HAND, 280, 40, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_FLASHBACK, 280, 80, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_GRAVEYARD, 320, 0, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_EXILE, 320, 40, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_ZONE_POISON, 320, 80, 40, 40);
+        this.setIconAndIncrement(ZoneIcons.ICO_LIBRARY, 280, 0, 40, 40);
+        this.setIconAndIncrement(ZoneIcons.ICO_HAND, 280, 40, 40, 40);
+        this.setIconAndIncrement(ZoneIcons.ICO_FLASHBACK, 280, 80, 40, 40);
+        this.setIconAndIncrement(ZoneIcons.ICO_GRAVEYARD, 320, 0, 40, 40);
+        this.setIconAndIncrement(ZoneIcons.ICO_EXILE, 320, 40, 40, 40);
+        this.setIconAndIncrement(ZoneIcons.ICO_POISON, 320, 80, 40, 40);
 
-        this.setIconAndIncrement(SkinProp.ICON_MANA_BLACK, 360, 160, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_MANA_BLUE, 360, 200, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_MANA_RED, 400, 160, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_MANA_GREEN, 400, 200, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_MANA_COLORLESS, 440, 160, 40, 40);
-        this.setIconAndIncrement(SkinProp.ICON_MANA_WHITE, 440, 200, 40, 40);
+        this.setIconAndIncrement(ManaIcons.ICO_BLACK, 360, 160, 40, 40);
+        this.setIconAndIncrement(ManaIcons.ICO_BLUE, 360, 200, 40, 40);
+        this.setIconAndIncrement(ManaIcons.ICO_RED, 400, 160, 40, 40);
+        this.setIconAndIncrement(ManaIcons.ICO_GREEN, 400, 200, 40, 40);
+        this.setIconAndIncrement(ManaIcons.ICO_COLORLESS, 440, 160, 40, 40);
+        this.setIconAndIncrement(ManaIcons.ICO_WHITE, 440, 200, 40, 40);
 
-        this.setIconAndIncrement(SkinProp.ICON_DOCK_SETTINGS, 80, 640, 80, 80);
-        this.setIconAndIncrement(SkinProp.ICON_DOCK_SHORTCUTS, 160, 640, 80, 80);
-        this.setIconAndIncrement(SkinProp.ICON_DOCK_CONCEDE, 240, 640, 80, 80);
-        this.setIconAndIncrement(SkinProp.ICON_DOCK_ENDTURN, 320, 640, 80, 80);
-        this.setIconAndIncrement(SkinProp.ICON_DOCK_DECKLIST, 400, 640, 80, 80);
+        this.setIconAndIncrement(DockIcons.ICO_SETTINGS, 80, 640, 80, 80);
+        this.setIconAndIncrement(DockIcons.ICO_SHORTCUTS, 160, 640, 80, 80);
+        this.setIconAndIncrement(DockIcons.ICO_CONCEDE, 240, 640, 80, 80);
+        this.setIconAndIncrement(DockIcons.ICO_ENDTURN, 320, 640, 80, 80);
+        this.setIconAndIncrement(DockIcons.ICO_DECKLIST, 400, 640, 80, 80);
 
-        this.setIconAndIncrement(SkinProp.IMG_LOGO, 480, 0, 200, 200);
-        this.setIconAndIncrement(SkinProp.IMG_FAVICON, 0, 720, 80, 80);
+        this.setIconAndIncrement(ForgeIcons.IMG_LOGO, 480, 0, 200, 200);
+        this.setIconAndIncrement(ForgeIcons.IMG_FAVICON, 0, 720, 80, 80);
 
-        this.setIconAndIncrement(SkinProp.IMG_BTN_START_UP, 480, 200, 160, 80);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_START_OVER, 480, 280, 160, 80);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_START_DOWN, 480, 360, 160, 80);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_START_UP, 480, 200, 160, 80);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_START_OVER, 480, 280, 160, 80);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_START_DOWN, 480, 360, 160, 80);
 
-        this.setIconAndIncrement(SkinProp.IMG_BTN_UP_LEFT, 80, 0, 40, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_UP_CENTER, 120, 0, 1, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_UP_RIGHT, 160, 0, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_UP_LEFT, 80, 0, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_UP_CENTER, 120, 0, 1, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_UP_RIGHT, 160, 0, 40, 40);
 
-        this.setIconAndIncrement(SkinProp.IMG_BTN_OVER_LEFT, 80, 40, 40, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_OVER_CENTER, 120, 40, 1, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_OVER_RIGHT, 160, 40, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_OVER_LEFT, 80, 40, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_OVER_CENTER, 120, 40, 1, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_OVER_RIGHT, 160, 40, 40, 40);
 
-        this.setIconAndIncrement(SkinProp.IMG_BTN_DOWN_LEFT, 80, 80, 40, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_DOWN_CENTER, 120, 80, 1, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_DOWN_RIGHT, 160, 80, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_DOWN_LEFT, 80, 80, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_DOWN_CENTER, 120, 80, 1, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_DOWN_RIGHT, 160, 80, 40, 40);
 
-        this.setIconAndIncrement(SkinProp.IMG_BTN_FOCUS_LEFT, 80, 120, 40, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_FOCUS_CENTER, 120, 120, 1, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_FOCUS_RIGHT, 160, 120, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_FOCUS_LEFT, 80, 120, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_FOCUS_CENTER, 120, 120, 1, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_FOCUS_RIGHT, 160, 120, 40, 40);
 
-        this.setIconAndIncrement(SkinProp.IMG_BTN_TOGGLE_LEFT, 80, 160, 40, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_TOGGLE_CENTER, 120, 160, 1, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_TOGGLE_RIGHT, 160, 160, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_TOGGLE_LEFT, 80, 160, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_TOGGLE_CENTER, 120, 160, 1, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_TOGGLE_RIGHT, 160, 160, 40, 40);
 
-        this.setIconAndIncrement(SkinProp.IMG_BTN_DISABLED_LEFT, 80, 200, 40, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_DISABLED_CENTER, 120, 200, 1, 40);
-        this.setIconAndIncrement(SkinProp.IMG_BTN_DISABLED_RIGHT, 160, 200, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_DISABLED_LEFT, 80, 200, 40, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_DISABLED_CENTER, 120, 200, 1, 40);
+        this.setIconAndIncrement(ButtonImages.IMG_BTN_DISABLED_RIGHT, 160, 200, 40, 40);
     }
 
     /**

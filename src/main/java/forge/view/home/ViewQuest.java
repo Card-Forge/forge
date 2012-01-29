@@ -83,7 +83,7 @@ public class ViewQuest extends JScrollPane {
         // Non-final inits
         this.parentView = v0;
         this.skin = Singletons.getView().getSkin();
-        this.clrBorders = skin.getColor(FSkin.SkinProp.CLR_THEME).darker().darker();
+        this.clrBorders = skin.getColor(FSkin.Colors.CLR_THEME).darker().darker();
         this.eventPanelConstraints = "w 100%!, h 80px!, gap 0 0 5px 5px";
 
         // Final component inits
@@ -196,7 +196,7 @@ public class ViewQuest extends JScrollPane {
     /** Layout and details for Swing components in title panel. */
     private void populateTitle() {
         pnlTitle.setLayout(new MigLayout("insets 0, gap 0, align center"));
-        pnlTitle.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME).darker());
+        pnlTitle.setBackground(skin.getColor(FSkin.Colors.CLR_THEME).darker());
         ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
         pnlTitle.add(lblTitle, "h 70%!, gap 0 0 0 10%!");
     }
@@ -256,7 +256,7 @@ public class ViewQuest extends JScrollPane {
         final FRoundedPanel pnl = new FRoundedPanel();
         pnl.setLayout(new MigLayout("insets 0, align center"));
         pnl.setBorderColor(clrBorders);
-        pnl.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        pnl.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
         pnl.add(new FLabel("Load a previous Quest"), "h 24px!, gap 2px 2px 2px 2px");
 
         final FLabel lbl = new FLabel("To use quest files "
@@ -281,7 +281,7 @@ public class ViewQuest extends JScrollPane {
         final FRoundedPanel pnl1 = new FRoundedPanel();
         pnl1.setLayout(new MigLayout("insets 0, align center"));
         pnl1.setBorderColor(clrBorders);
-        pnl1.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        pnl1.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
         pnl1.add(new FLabel("Start a new quest"), "h 24px!, gap 2px 2px 2px 2px");
 
         final ButtonGroup group1 = new ButtonGroup();
@@ -419,7 +419,7 @@ public class ViewQuest extends JScrollPane {
 
             // Select first event.
             selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
-            selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
+            selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
         }
     }
 
@@ -445,7 +445,7 @@ public class ViewQuest extends JScrollPane {
         if (pnlChallenges.getComponentCount() > 0) {
             pnlStart.setVisible(true);
             selectedOpponent = (SelectablePanel) pnlChallenges.getComponent(0);
-            selectedOpponent.setBackground(skin.getColor(FSkin.SkinProp.CLR_ACTIVE));
+            selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
         }
     }
 
@@ -492,7 +492,7 @@ public class ViewQuest extends JScrollPane {
             btnCurrentDeck.setText("  Build, then select a deck in the \"Decks\" tab.  ");
         }
         else {
-            btnCurrentDeck.setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
+            btnCurrentDeck.setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE));
             btnCurrentDeck.setText("Current deck: " + control.getCurrentDeck().getName());
         }
     }
@@ -505,9 +505,9 @@ public class ViewQuest extends JScrollPane {
         /** @param e0 &emsp; QuestEvent */
         public SelectablePanel(QuestEvent e0) {
             super();
-            this.clrSelected = skin.getColor(FSkin.SkinProp.CLR_ACTIVE);
-            this.clrDefault = skin.getColor(FSkin.SkinProp.CLR_INACTIVE);
-            this.clrHover = skin.getColor(FSkin.SkinProp.CLR_HOVER);
+            this.clrSelected = skin.getColor(FSkin.Colors.CLR_ACTIVE);
+            this.clrDefault = skin.getColor(FSkin.Colors.CLR_INACTIVE);
+            this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
             this.event = e0;
 
             this.setBackground(clrDefault);
@@ -522,7 +522,7 @@ public class ViewQuest extends JScrollPane {
 
             FLabel lblIcon = new FLabel(new ImageIcon(file.toString()));
             lblIcon.setIconScaleFactor(1);
-            lblIcon.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            lblIcon.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
             this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
 
             // Name

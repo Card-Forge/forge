@@ -44,7 +44,7 @@ public class ViewHand extends FRoundedPanel {
     public ViewHand(MatchTopLevel v0) {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller);
-        ViewHand.this.setBackground(Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_THEME));
+        ViewHand.this.setBackground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_THEME));
         topLevel = v0;
 
         scroller.setViewportView(ViewHand.this.hand);

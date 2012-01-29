@@ -75,7 +75,7 @@ public class SplashFrame extends JFrame {
                     "SplashFrame() must be called from an event dispatch thread.");
         }
 
-        final ImageIcon bgIcon = skin.getIcon(FSkin.SkinProp.BG_SPLASH);
+        final ImageIcon bgIcon = skin.getIcon(FSkin.Backgrounds.BG_SPLASH);
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
 

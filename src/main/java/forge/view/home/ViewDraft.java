@@ -131,7 +131,7 @@ public class ViewDraft extends JPanel {
         // Init directions text pane
         tpnDirections = new JTextPane();
         tpnDirections.setOpaque(false);
-        tpnDirections.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        tpnDirections.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         tpnDirections.setFont(skin.getFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);
@@ -158,13 +158,13 @@ public class ViewDraft extends JPanel {
         final JLabel lblHuman = new JLabel("Select your deck: ");
         lblHuman.setFont(skin.getBoldFont(16));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
-        lblHuman.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        lblHuman.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
 
         final JLabel lblAI = new JLabel("Who will you play?");
         lblAI.setFont(skin.getBoldFont(16));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAI.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        lblAI.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
 
         lstHumanDecks = new DeckLister(GameType.Draft, exit);
@@ -179,7 +179,7 @@ public class ViewDraft extends JPanel {
         lblDirections = new JLabel("Click For Directions");
         lblDirections.setFont(skin.getFont(16));
         lblDirections.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDirections.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        lblDirections.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
 
         btnStart = new StartButton(parentView);
@@ -206,8 +206,8 @@ public class ViewDraft extends JPanel {
         });
         btnClose.setText("Close");
 
-        pnlContainer.setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
-        pnlContainer.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        pnlContainer.setBorder(new LineBorder(skin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+        pnlContainer.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
         pnlContainer.setLayout(new MigLayout("insets 0, wrap"));
         pnlContainer.add(tpnDirections, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");

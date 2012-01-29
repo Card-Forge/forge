@@ -15,7 +15,7 @@ public class FTextArea extends JTextArea {
     public FTextArea() {
         super();
         this.skin = Singletons.getView().getSkin();
-        this.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        this.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         this.setOpaque(false);
         this.setWrapStyleWord(true);
         this.setLineWrap(true);

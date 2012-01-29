@@ -43,7 +43,7 @@ public class ViewSealed extends JPanel {
         // Title
         JLabel lblTitle = new JLabel("Select a deck for yourself, or build a new one: ");
         lblTitle.setFont(skin.getBoldFont(14));
-        lblTitle.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        lblTitle.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Deck lister

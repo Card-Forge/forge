@@ -9,7 +9,6 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 
 import forge.Singletons;
-import forge.view.toolbox.FSkin.SkinProp;
 
 /** 
  * A JList object using Forge skin properties.
@@ -53,8 +52,8 @@ public class FList extends JList {
                     lst0, val0, i0, isSelected, cellHasFocus);
 
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
-            lblItem.setBackground(skin.getColor(SkinProp.CLR_ACTIVE));
-            lblItem.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            lblItem.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
+            lblItem.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
             lblItem.setFont(skin.getFont(13));
             lblItem.setOpaque(isSelected);
             return lblItem;

@@ -35,19 +35,19 @@ public class SubButton extends JButton {
     public SubButton(String txt0) {
         super(txt0);
         skin = Singletons.getView().getSkin();
-        setBorder(new LineBorder(skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1));
-        setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE));
-        setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        setBorder(new LineBorder(skin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+        setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE));
+        setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         setVerticalTextPosition(SwingConstants.CENTER);
         setFocusPainted(false);
 
         this.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                if (isEnabled()) { setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER)); }
+                if (isEnabled()) { setBackground(skin.getColor(FSkin.Colors.CLR_HOVER)); }
             }
 
             public void mouseExited(MouseEvent e) {
-                if (isEnabled()) { setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE)); }
+                if (isEnabled()) { setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE)); }
             }
         });
 
@@ -66,7 +66,7 @@ public class SubButton extends JButton {
     public void setEnabled(boolean b0) {
         super.setEnabled(b0);
 
-        if (b0) { setBackground(skin.getColor(FSkin.SkinProp.CLR_INACTIVE)); }
+        if (b0) { setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE)); }
         else { setBackground(new Color(220, 220, 220)); }
     }
 

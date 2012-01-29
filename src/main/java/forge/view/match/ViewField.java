@@ -80,7 +80,7 @@ public class ViewField extends FRoundedPanel {
     private JLabel lblAvatar, lblLife;
     private final Image img;
     private final Color transparent = new Color(0, 0, 0, 0);
-    private final Color hoverBG = Singletons.getView().getSkin().getColor(FSkin.SkinProp.CLR_HOVER);
+    private final Color hoverBG = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER);
 
     /**
      * Assembles Swing components of player field instance.
@@ -95,10 +95,10 @@ public class ViewField extends FRoundedPanel {
         this.setLayout(new MigLayout("insets 0, gap 0"));
         this.setCornerRadius(5);
         this.setToolTipText(player.getName() + " Gameboard");
-        this.setBackground(skin.getColor(FSkin.SkinProp.CLR_THEME));
+        this.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
 
         this.inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
-        this.hoverBorder = new LineBorder(this.skin.getColor(FSkin.SkinProp.CLR_BORDERS), 1);
+        this.hoverBorder = new LineBorder(this.skin.getColor(FSkin.Colors.CLR_BORDERS), 1);
         this.counter = -1;
 
         // Player icon logic
@@ -129,7 +129,7 @@ public class ViewField extends FRoundedPanel {
         // Avatar and life
         avatarArea = new JPanel();
         avatarArea.setOpaque(false);
-        avatarArea.setBackground(skin.getColor(FSkin.SkinProp.CLR_HOVER));
+        avatarArea.setBackground(skin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
 
         lblAvatar = new JLabel();
@@ -138,7 +138,7 @@ public class ViewField extends FRoundedPanel {
 
         lblLife = new JLabel();
         lblLife.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLife.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        lblLife.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
 
         this.add(avatarArea, "w 10%!, h 30%!");
@@ -154,7 +154,7 @@ public class ViewField extends FRoundedPanel {
         final JScrollPane scroller = new JScrollPane();
 
         this.tabletop = new PlayArea(scroller, player.equals(AllZone.getComputerPlayer()) ? true : false);
-        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getColor(FSkin.SkinProp.CLR_BORDERS)));
+        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getColor(FSkin.Colors.CLR_BORDERS)));
         this.tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
@@ -272,52 +272,52 @@ public class ViewField extends FRoundedPanel {
         final String constraintsR = "w 47%!, h 12.5%!, growy, gapright 3%";
 
         // Hand, library, graveyard, exile, flashback, poison labels
-        ViewField.this.lblHand = new DetailLabel(FSkin.SkinProp.ICON_ZONE_HAND, "99");
+        ViewField.this.lblHand = new DetailLabel(FSkin.ZoneIcons.ICO_HAND, "99");
         ViewField.this.lblHand.setToolTipText("Cards in hand");
         poolArea.add(ViewField.this.lblHand, constraintsL);
 
-        ViewField.this.lblLibrary = new DetailLabel(FSkin.SkinProp.ICON_ZONE_LIBRARY, "99");
+        ViewField.this.lblLibrary = new DetailLabel(FSkin.ZoneIcons.ICO_LIBRARY, "99");
         ViewField.this.lblLibrary.setToolTipText("Cards in library");
         poolArea.add(ViewField.this.lblLibrary, constraintsR);
 
-        ViewField.this.lblGraveyard = new DetailLabel(FSkin.SkinProp.ICON_ZONE_GRAVEYARD, "99");
+        ViewField.this.lblGraveyard = new DetailLabel(FSkin.ZoneIcons.ICO_GRAVEYARD, "99");
         ViewField.this.lblGraveyard.setToolTipText("Cards in graveyard");
         poolArea.add(ViewField.this.lblGraveyard, constraintsL);
 
-        ViewField.this.lblExile = new DetailLabel(FSkin.SkinProp.ICON_ZONE_EXILE, "99");
+        ViewField.this.lblExile = new DetailLabel(FSkin.ZoneIcons.ICO_EXILE, "99");
         ViewField.this.lblExile.setToolTipText("Exiled cards");
         poolArea.add(ViewField.this.lblExile, constraintsR);
 
-        ViewField.this.lblFlashback = new DetailLabel(FSkin.SkinProp.ICON_ZONE_FLASHBACK, "99");
+        ViewField.this.lblFlashback = new DetailLabel(FSkin.ZoneIcons.ICO_FLASHBACK, "99");
         ViewField.this.lblFlashback.setToolTipText("Flashback cards");
         poolArea.add(ViewField.this.lblFlashback, constraintsL);
 
-        ViewField.this.lblPoison = new DetailLabel(FSkin.SkinProp.ICON_ZONE_POISON, "99");
+        ViewField.this.lblPoison = new DetailLabel(FSkin.ZoneIcons.ICO_POISON, "99");
         ViewField.this.lblPoison.setToolTipText("Poison counters");
         poolArea.add(ViewField.this.lblPoison, constraintsR);
 
         // Black, Blue, Colorless, Green, Red, White mana labels
-        ViewField.this.lblBlack = new DetailLabel(FSkin.SkinProp.ICON_MANA_BLACK, "99");
+        ViewField.this.lblBlack = new DetailLabel(FSkin.ManaIcons.ICO_BLACK, "99");
         ViewField.this.lblBlack.setToolTipText("Black mana");
         poolArea.add(ViewField.this.lblBlack, constraintsL);
 
-        ViewField.this.lblBlue = new DetailLabel(FSkin.SkinProp.ICON_MANA_BLUE, "99");
+        ViewField.this.lblBlue = new DetailLabel(FSkin.ManaIcons.ICO_BLUE, "99");
         ViewField.this.lblBlue.setToolTipText("Blue mana");
         poolArea.add(ViewField.this.lblBlue, constraintsR);
 
-        ViewField.this.lblGreen = new DetailLabel(FSkin.SkinProp.ICON_MANA_GREEN, "99");
+        ViewField.this.lblGreen = new DetailLabel(FSkin.ManaIcons.ICO_GREEN, "99");
         ViewField.this.lblGreen.setToolTipText("Green mana");
         poolArea.add(ViewField.this.lblGreen, constraintsL);
 
-        ViewField.this.lblRed = new DetailLabel(FSkin.SkinProp.ICON_MANA_RED, "99");
+        ViewField.this.lblRed = new DetailLabel(FSkin.ManaIcons.ICO_RED, "99");
         ViewField.this.lblRed.setToolTipText("Red mana");
         poolArea.add(ViewField.this.lblRed, constraintsR);
 
-        ViewField.this.lblWhite = new DetailLabel(FSkin.SkinProp.ICON_MANA_WHITE, "99");
+        ViewField.this.lblWhite = new DetailLabel(FSkin.ManaIcons.ICO_WHITE, "99");
         ViewField.this.lblWhite.setToolTipText("White mana");
         poolArea.add(ViewField.this.lblWhite, constraintsL);
 
-        ViewField.this.lblColorless = new DetailLabel(FSkin.SkinProp.ICON_MANA_COLORLESS, "99");
+        ViewField.this.lblColorless = new DetailLabel(FSkin.ManaIcons.ICO_COLORLESS, "99");
         ViewField.this.lblColorless.setToolTipText("Colorless mana");
         poolArea.add(ViewField.this.lblColorless, constraintsR);
     }
@@ -357,14 +357,14 @@ public class ViewField extends FRoundedPanel {
             this.getLblLife().setForeground(Color.red);
         }
         else {
-            this.getLblLife().setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            this.getLblLife().setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         }
 
         if (p0.getPoisonCounters() >= 8) {
             this.getLblPoison().setForeground(Color.red);
         }
         else {
-            this.getLblPoison().setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            this.getLblPoison().setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         }
 
         //mana pool
@@ -664,7 +664,7 @@ public class ViewField extends FRoundedPanel {
 
             this.setText(txt0);
             this.setOpaque(false);
-            this.setForeground(ViewField.this.skin.getColor(FSkin.SkinProp.CLR_TEXT));
+            this.setForeground(ViewField.this.skin.getColor(FSkin.Colors.CLR_TEXT));
             this.setPreferredSize(this.labelSize);
             this.setMaximumSize(this.labelSize);
             this.setMinimumSize(this.labelSize);
@@ -676,9 +676,9 @@ public class ViewField extends FRoundedPanel {
             ViewField.this.counter++;
 
             if (((ViewField.this.counter % 4) == 2) || ((ViewField.this.counter % 4) == 3)) {
-                this.defaultBG = ViewField.this.skin.getColor(FSkin.SkinProp.CLR_ZEBRA);
+                this.defaultBG = ViewField.this.skin.getColor(FSkin.Colors.CLR_ZEBRA);
             } else {
-                this.defaultBG = ViewField.this.skin.getColor(FSkin.SkinProp.CLR_THEME);
+                this.defaultBG = ViewField.this.skin.getColor(FSkin.Colors.CLR_THEME);
             }
             this.setBackground(this.defaultBG);
 
@@ -696,7 +696,7 @@ public class ViewField extends FRoundedPanel {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     DetailLabel.this.setBackground(DetailLabel.this.hoverBG);
-                    DetailLabel.this.clrBorders = ViewField.this.skin.getColor(FSkin.SkinProp.CLR_BORDERS);
+                    DetailLabel.this.clrBorders = ViewField.this.skin.getColor(FSkin.Colors.CLR_BORDERS);
                 }
 
                 @Override
@@ -706,7 +706,7 @@ public class ViewField extends FRoundedPanel {
                 }
             };
 
-            this.hoverBG = ViewField.this.skin.getColor(FSkin.SkinProp.CLR_HOVER);
+            this.hoverBG = ViewField.this.skin.getColor(FSkin.Colors.CLR_HOVER);
             this.clrBorders = ViewField.this.transparent;
         }
 

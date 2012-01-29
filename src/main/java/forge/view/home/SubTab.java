@@ -28,8 +28,8 @@ public class SubTab extends JPanel {
         super();
         this.setOpaque(false);
         this.skin = Singletons.getView().getSkin();
-        this.clrBorders = skin.getColor(FSkin.SkinProp.CLR_BORDERS);
-        this.clrHover = skin.getColor(FSkin.SkinProp.CLR_HOVER);
+        this.clrBorders = skin.getColor(FSkin.Colors.CLR_BORDERS);
+        this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         this.madHover = new MouseAdapter() {
@@ -48,7 +48,7 @@ public class SubTab extends JPanel {
         this.addMouseListener(madHover);
 
         final JLabel lbl = new JLabel(s0);
-        lbl.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        lbl.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         lbl.setFont(skin.getFont(12));
         this.add(lbl);
     }

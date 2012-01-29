@@ -222,9 +222,9 @@ public class ViewQuestPreferences extends JPanel {
 
             this.qpref = qp0;
             this.err = e0;
-            this.clrHover = skin.getColor(FSkin.SkinProp.CLR_HOVER);
-            this.clrActive = skin.getColor(FSkin.SkinProp.CLR_ACTIVE);
-            this.clrText = skin.getColor(FSkin.SkinProp.CLR_TEXT);
+            this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
+            this.clrActive = skin.getColor(FSkin.Colors.CLR_ACTIVE);
+            this.clrText = skin.getColor(FSkin.Colors.CLR_TEXT);
 
             this.setOpaque(false);
             this.setBorder(null);

@@ -18,12 +18,12 @@ public class StartButton extends JButton {
         super();
         final FSkin skin = Singletons.getView().getSkin();
         setRolloverEnabled(true);
-        setRolloverIcon(skin.getIcon(FSkin.SkinProp.IMG_BTN_START_OVER));
+        setRolloverIcon(skin.getIcon(FSkin.ButtonImages.IMG_BTN_START_OVER));
         setOpaque(false);
-        setIcon(skin.getIcon(FSkin.SkinProp.IMG_BTN_START_UP));
+        setIcon(skin.getIcon(FSkin.ButtonImages.IMG_BTN_START_UP));
         setContentAreaFilled(false);
         setBorder(null);
         setBorderPainted(false);
-        setPressedIcon(skin.getIcon(FSkin.SkinProp.IMG_BTN_START_DOWN));
+        setPressedIcon(skin.getIcon(FSkin.ButtonImages.IMG_BTN_START_DOWN));
     }
 }

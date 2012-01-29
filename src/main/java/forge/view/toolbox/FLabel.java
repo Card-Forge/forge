@@ -63,7 +63,7 @@ public class FLabel extends JLabel {
     public FLabel(final String s0) {
         super(s0);
         this.skin = Singletons.getView().getSkin();
-        this.setForeground(skin.getColor(FSkin.SkinProp.CLR_TEXT));
+        this.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.cadResize = new ComponentAdapter() {
             @Override

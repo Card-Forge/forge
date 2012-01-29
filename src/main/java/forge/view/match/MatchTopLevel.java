@@ -97,8 +97,8 @@ public class MatchTopLevel extends FPanel {
 
         // Set properties
         this.setOpaque(false);
-        this.setBGTexture(Singletons.getView().getSkin().getIcon(FSkin.SkinProp.BG_TEXTURE));
-        this.setBGImg(Singletons.getView().getSkin().getIcon(FSkin.SkinProp.BG_MATCH));
+        this.setBGTexture(Singletons.getView().getSkin().getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        this.setBGImg(Singletons.getView().getSkin().getIcon(FSkin.Backgrounds.BG_MATCH));
         this.setLayout(null);
         b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 
