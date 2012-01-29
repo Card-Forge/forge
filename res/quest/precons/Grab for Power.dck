@@ -8,7 +8,7 @@ Name=Grab for Power
 Description=The ultimate goal of the deck is to have three specific artifacts—Crown of Empires, Scepter of Empires, and Throne of Empires—on the battlefield at the same time.
 Deck Type=constructed
 Set=M12
-Image=Grab-for-Power.jpg
+Image=grab_for_power.jpg
 [main]
 2 Azure Mage|M12
 2 Belltower Sphinx|RAV
