@@ -2878,6 +2878,18 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(c.getController().getAssignedDamage(), m, c);
         }
 
+        // Count$YourTypeDamageThisTurn Type
+        if (sq[0].contains("OppTypeDamageThisTurn")) {
+            String[] type = sq[0].split(" ");
+            return CardFactoryUtil.doXMath(c.getController().getOpponent().getAssignedDamage(type[1]), m, c);
+        }
+
+        // Count$YourTypeDamageThisTurn Type
+        if (sq[0].contains("YourTypeDamageThisTurn")) {
+            String[] type = sq[0].split(" ");
+            return CardFactoryUtil.doXMath(c.getController().getAssignedDamage(type[1]), m, c);
+        }
+
         if (sq[0].contains("YourLandsPlayed")) {
             return CardFactoryUtil.doXMath(c.getController().getNumLandsPlayed(), m, c);
         }

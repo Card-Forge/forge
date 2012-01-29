@@ -387,7 +387,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         } else if (phase.equals(Constant.Phase.END_OF_TURN)) {
             AllZone.getEndOfTurn().executeAt();
         } else if (phase.equals(Constant.Phase.CLEANUP)) {
-            AllZone.getPhaseHandler().getPlayerTurn().setAssignedDamage(0);
+            AllZone.getPhaseHandler().getPlayerTurn().clearAssignedDamage();
 
             // Reset Damage received map
             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);

@@ -59,7 +59,7 @@ public abstract class Player extends GameEntity {
     private int startingLife;
 
     /** The assigned damage. */
-    private int assignedDamage;
+    private Map<Card,Integer> assignedDamage = new HashMap<Card, Integer>();
 
     /** The life lost this turn. */
     private int lifeLostThisTurn = 0;
@@ -172,7 +172,7 @@ public abstract class Player extends GameEntity {
         this.life = 20;
         lifeLostThisTurn = 0;
         this.poisonCounters = 0;
-        this.assignedDamage = 0;
+        this.assignedDamage.clear();
         this.setPreventNextDamage(0);
         this.lastDrawnCard = null;
         this.numDrawnThisTurn = 0;
@@ -531,7 +531,7 @@ public abstract class Player extends GameEntity {
             }
         }
         if (damageToDo > 0) {
-            this.addAssignedDamage(damageToDo);
+            this.addAssignedDamage(damageToDo, source);
             GameActionUtil.executeDamageDealingEffects(source, damageToDo);
             GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 
@@ -823,8 +823,8 @@ public abstract class Player extends GameEntity {
      * @param n
      *            a int.
      */
-    public final void setAssignedDamage(final int n) {
-        this.assignedDamage = n;
+    public final void clearAssignedDamage() {
+        this.assignedDamage.clear();
     }
 
     /**
@@ -835,8 +835,8 @@ public abstract class Player extends GameEntity {
      * @param n
      *            a int.
      */
-    public final void addAssignedDamage(final int n) {
-        this.assignedDamage += n;
+    public final void addAssignedDamage(final int n, final Card source) {
+        this.assignedDamage.put(source, n);
     }
 
     /**
@@ -847,7 +847,32 @@ public abstract class Player extends GameEntity {
      * @return a int.
      */
     public final int getAssignedDamage() {
-        return this.assignedDamage;
+        int num = 0;
+        for (Integer value : assignedDamage.values()) {
+            num += value;
+        }
+        return num;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>assignedDamage</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getAssignedDamage(String type) {
+        Map<Card,Integer> valueMap = new HashMap<Card, Integer>();
+        for (Card c : assignedDamage.keySet()) {
+            if (c.isType(type)) {
+                valueMap.put(c, assignedDamage.get(c));
+            }
+        }
+        int num = 0;
+        for (Integer value : valueMap.values()) {
+            num += value;
+        }
+        return num;
     }
 
     /**
