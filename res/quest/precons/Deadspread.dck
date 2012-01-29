@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Deadspread
+Description=With this deck, you'll reap a lot of rewards for a little bit of work. Your aim is to control your opponent's creatures by giving them -1/-1 counters. Then you'll proliferate. Oh yeah. 
+Deck Type=constructed
+Set=SOM
+Image=deadspread.jpg
+[main]
+2 Fume Spitter
+1 Trigon of Corruption
+13 Island
+1 Twisted Image
+2 Maritime Guard
+2 Sky-Eel School
+1 Sorcerer's Strongbox
+2 Necrogen Censer
+1 Doom Blade
+1 Culling Dais
+2 Thrummingbird
+1 Contagion Engine
+13 Swamp
+2 Silver Myr
+1 Skinrender
+2 Steady Progress
+2 Moriok Reaver
+2 Instill Infection
+1 Darkslick Drake
+2 Contagion Clasp
+1 Harbor Serpent
+1 Trigon of Thought
+1 Throne of Geth
+1 Carnifex Demon
+2 Leaden Myr
+[sideboard]

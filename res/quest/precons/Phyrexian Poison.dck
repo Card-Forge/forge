@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Phyrexian Poison
+Description=This deck returns to an age-old victory path for defeating your opponents: poison! 
+Deck Type=constructed
+Set=SOM
+Image=phyrexian_poison.jpg
+[main]
+2 Bladed Pinions
+1 Heavy Arbalest
+1 Strider Harness
+2 Corpse Cur
+3 Ichorclaw Myr
+2 Necropede
+13 Forest
+13 Swamp
+1 Blackcleave Goblin
+1 Contagious Nim
+2 Cystbearer
+1 Hand of the Praetors
+2 Ichor Rats
+3 Plague Stinger
+1 Putrefax
+2 Tangle Angler
+1 Relic Putrescence
+2 Carrion Call
+2 Giant Growth
+2 Slice in Twain
+2 Assassinate
+1 Rise from the Grave
+[sideboard]
