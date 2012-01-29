@@ -7008,6 +7008,7 @@ res/cardsfolder/r/revered_elder.txt svneol=native#text/plain
 res/cardsfolder/r/revered_unicorn.txt -text svneol=unset#text/plain
 res/cardsfolder/r/reverence.txt svneol=native#text/plain
 res/cardsfolder/r/reverent_silence.txt -text
+res/cardsfolder/r/reverse_polarity.txt -text
 res/cardsfolder/r/revive.txt svneol=native#text/plain
 res/cardsfolder/r/revive_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/r/reviving_dose.txt svneol=native#text/plain
