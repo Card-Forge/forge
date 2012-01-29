@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -30,19 +29,16 @@ import forge.Command;
 import forge.Constant;
 import forge.Counters;
 import forge.PhaseHandler;
-import forge.PlayerZone;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.gui.input.Input;
 
 /**
  * <p>
- * CardFactory_Equipment class.
+ * CardFactoryEquipment class.
  * </p>
  * 
  * @author Forge
@@ -323,67 +319,6 @@ class CardFactoryEquipment {
             myTrigger.setOverridingAbility(triggeredAbility);
 
             card.addTrigger(myTrigger);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Piston Sledge")) {
-
-            final CardList targets = new CardList();
-
-            final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if (!targets.isEmpty()) {
-                        card.equipCard(targets.get(0));
-                    }
-                } // resolve()
-            }; // comesIntoPlayAbility
-
-            final Input in = new Input() {
-                private static final long serialVersionUID = 1782826197612459365L;
-
-                @Override
-                public void showMessage() {
-                    final CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(card).append(" - Select target creature you control to attach");
-                    AllZone.getDisplay().showMessage(sb.toString());
-                    ButtonUtil.disableAll();
-                    if (list.size() == 0) {
-                        this.stop();
-                    }
-                }
-
-                @Override
-                public void selectCard(final Card c, final PlayerZone z) {
-                    if (z.is(Constant.Zone.Battlefield, card.getController()) && c.isCreature()
-                            && c.canBeTargetedBy(comesIntoPlayAbility)) {
-                        targets.add(c);
-                        this.stop();
-                    }
-                }
-
-            };
-
-            final Command intoPlay = new Command() {
-                private static final long serialVersionUID = 2985015252466920757L;
-
-                @Override
-                public void execute() {
-
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("When Piston Sledge enters the battlefield, ");
-                    sb.append("attach it to target creature you control.");
-                    comesIntoPlayAbility.setStackDescription(sb.toString());
-
-                    AllZone.getInputControl().setInput(in);
-
-                    AllZone.getStack().addSimultaneousStackEntry(comesIntoPlayAbility);
-
-                }
-            };
-
-            card.addComesIntoPlayCommand(intoPlay);
         } // *************** END ************ END **************************
 
         if (CardFactoryEquipment.shouldEquip(card) != -1) {
