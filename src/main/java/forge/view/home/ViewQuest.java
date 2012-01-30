@@ -1,6 +1,7 @@
 package forge.view.home;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -447,6 +448,8 @@ public class ViewQuest extends JScrollPane {
             selectedOpponent = (SelectablePanel) pnlChallenges.getComponent(0);
             selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
         }
+
+        this.getViewport().setViewPosition(new Point(0, 0));
     }
 
     /** Display handler for decks tab click. */

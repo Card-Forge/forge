@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -69,6 +71,14 @@ public class QuestFileLister extends JPanel {
     public void setQuests(QuestData[] qd0) {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<RowPanel>();
+        List<QuestData> sorted = new ArrayList<QuestData>();
+        for (QuestData qd : qd0) { sorted.add(qd); }
+        Collections.sort(sorted, new Comparator<QuestData>() {
+            @Override
+            public int compare(final QuestData x, final QuestData y) {
+                return ((QuestData) x).getName().compareTo(((QuestData) y).getName());
+            }
+        });
 
         // Title row
         // Note: careful with the widths of the rows here;
@@ -84,7 +94,7 @@ public class QuestFileLister extends JPanel {
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
-        for (QuestData qd : qd0) {
+        for (QuestData qd : sorted) {
             row = new RowPanel(qd);
             row.add(new DeleteButton(row), "w 15%!, h 20px!, gap 0 0 5px 0");
             row.add(new EditButton(row), "w 15%!, h 20px!, gaptop 5px");

@@ -97,6 +97,7 @@ res/pics/booster
 res/pics/icons
 res/pics/tokens
 res/quest/data
+res/quest/quest.preferences
 res/quest/questData.dat
 res/quest/questData.dat.xml
 res/reprintSetInfo.log
