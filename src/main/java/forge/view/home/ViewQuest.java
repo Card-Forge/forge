@@ -322,7 +322,7 @@ public class ViewQuest extends JScrollPane {
     private void populatePrefs() {
         pnlPrefs.setOpaque(false);
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0"));
-        pnlPrefs.add(new ViewQuestPreferences(), "w 100%!");
+        pnlPrefs.add(new QuestPreferencesHandler(), "w 100%!");
     }
 
     private void hideAllPanels() {

@@ -24,7 +24,7 @@ import forge.view.toolbox.FSkin;
  *
  */
 @SuppressWarnings("serial")
-public class ViewQuestPreferences extends JPanel {
+public class QuestPreferencesHandler extends JPanel {
     private final FSkin skin;
     private final QuestPreferences prefs;
     private final JPanel pnlDifficulty, pnlBooster, pnlRewards;
@@ -38,7 +38,7 @@ public class ViewQuestPreferences extends JPanel {
     }
 
     /** */
-    public ViewQuestPreferences() {
+    public QuestPreferencesHandler() {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         this.skin = Singletons.getView().getSkin();
