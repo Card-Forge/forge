@@ -110,7 +110,7 @@ public class ControlQuest {
             public void actionPerformed(final ActionEvent actionEvent) {
                 if (view.getCbxPet().getSelectedIndex() > 0) {
                     qData.getPetManager().setSelectedPet(
-                            (String) view.getCbxPet().getSelectedItem());
+                            view.getCbxPet().getSelectedItem().toString().substring(7));
                 } else {
                     qData.getPetManager().setSelectedPet(null);
                 }
