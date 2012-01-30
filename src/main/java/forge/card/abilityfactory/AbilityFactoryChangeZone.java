@@ -1744,6 +1744,11 @@ public final class AbilityFactoryChangeZone {
             sb.append(".");
         }
 
+        if (destination.equals(Zone.Ante)) {
+            sb.append("Ante").append(targetname);
+            sb.append(".");
+        }
+
         if (destination.equals(Zone.Graveyard)) {
             sb.append("Put").append(targetname);
             sb.append(" from ").append(origin);
@@ -1944,7 +1949,7 @@ public final class AbilityFactoryChangeZone {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeZone.changeZoneAllDescription(af, this);
+                return AbilityFactoryChangeZone.changeZoneAllStackDescription(af, this);
             }
 
             @Override
@@ -1982,7 +1987,7 @@ public final class AbilityFactoryChangeZone {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeZone.changeZoneAllDescription(af, this);
+                return AbilityFactoryChangeZone.changeZoneAllStackDescription(af, this);
             }
         };
         AbilityFactoryChangeZone.setMiscellaneous(af, spChangeZone);
@@ -2014,7 +2019,7 @@ public final class AbilityFactoryChangeZone {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryChangeZone.changeZoneAllDescription(af, this);
+                return AbilityFactoryChangeZone.changeZoneAllStackDescription(af, this);
             }
 
             @Override
@@ -2186,7 +2191,7 @@ public final class AbilityFactoryChangeZone {
 
     /**
      * <p>
-     * changeZoneAllDescription.
+     * changeZoneAllStackDescription.
      * </p>
      * 
      * @param af
@@ -2195,7 +2200,7 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String changeZoneAllDescription(final AbilityFactory af, final SpellAbility sa) {
+    private static String changeZoneAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are
         // added
         final StringBuilder sb = new StringBuilder();
