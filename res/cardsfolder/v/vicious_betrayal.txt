@@ -1,0 +1,12 @@
+Name:Vicious Betrayal
+ManaCost:3 B B
+Types:Sorcery
+Text:no text
+A:SP$ Pump | Cost$ 3 B B Sac<X/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ Z | NumDef$ Z | SpellDescription$ Target creature gets +2/+2 until end of turn for each creature sacrificed this way.
+SVar:Y:Sacrificed$Amount
+SVar:Z:SVar$Y/Times.2
+SVar:X:XChoice
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_betrayal.jpg
+End

@@ -9529,6 +9529,7 @@ res/cardsfolder/v/viashino_warrior.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_weaponsmith.txt svneol=native#text/plain
 res/cardsfolder/v/viashivan_dragon.txt svneol=native#text/plain
 res/cardsfolder/v/vibrating_sphere.txt svneol=native#text/plain
+res/cardsfolder/v/vicious_betrayal.txt -text svneol=unset#text/plain
 res/cardsfolder/v/vicious_hunger.txt svneol=native#text/plain
 res/cardsfolder/v/vicious_kavu.txt svneol=native#text/plain
 res/cardsfolder/v/vicious_shadows.txt -text
