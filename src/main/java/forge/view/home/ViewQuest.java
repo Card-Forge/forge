@@ -447,6 +447,8 @@ public class ViewQuest extends JScrollPane {
             selectedOpponent = (SelectablePanel) pnlChallenges.getComponent(0);
             selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
         }
+
+        System.out.println(verticalScrollBar.getValue() + " challenges asdf");
     }
 
     /** Display handler for decks tab click. */

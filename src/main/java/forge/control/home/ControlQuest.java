@@ -310,6 +310,10 @@ public class ControlQuest {
         newdata.setName(questName);
         newdata.saveData();
 
+        // Save in preferences.
+        qPrefs.setPreference(QPref.CURRENT_QUEST, questName + ".dat");
+        Singletons.getModel().getQuestPreferences().save();
+
         view.getParentView().resetQuest();
     }   // New Quest
 
@@ -319,6 +323,10 @@ public class ControlQuest {
         this.qem = new QuestEventManager();
         this.qem.assembleAllEvents();
         AllZone.setQuestEventManager(this.qem);
+
+        // Save in preferences.
+        qPrefs.setPreference(QPref.CURRENT_QUEST, qData.getName() + ".dat");
+        Singletons.getModel().getQuestPreferences().save();
 
         refreshDecks();
         refreshStats();
@@ -360,10 +368,6 @@ public class ControlQuest {
             else {
                 view.getLstQuests().setSelectedIndex(0);
             }
-
-            // Save in preferences.
-            qPrefs.setPreference(QPref.CURRENT_QUEST,
-                    view.getLstQuests().getSelectedQuest().getName());
 
             // Drop into AllZone.
             AllZone.setQuestData(view.getLstQuests().getSelectedQuest());
