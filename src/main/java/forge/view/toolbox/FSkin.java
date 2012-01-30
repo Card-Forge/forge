@@ -510,6 +510,17 @@ public class FSkin {
         // Foils and creatures have a separate sprite, so use specific methods.
         for (Foils e : Foils.values()) { this.setFoil(e); }
         for (CreatureIcons e : CreatureIcons.values()) { this.setCreature(e); }
+
+        // Clear references to buffered images
+        this.bimCreatures.flush();
+        this.bimDefaultSprite.flush();
+        this.bimFoils.flush();
+        this.bimPreferredSprite.flush();
+
+        this.bimCreatures = null;
+        this.bimDefaultSprite = null;
+        this.bimFoils = null;
+        this.bimPreferredSprite = null;
     }
 
     /** (Should) clear memory resources for this skin object. */
@@ -521,16 +532,6 @@ public class FSkin {
         this.plainFonts.clear();
         this.boldFonts.clear();
         this.italicFonts.clear();
-
-        this.bimCreatures.flush();
-        this.bimDefaultSprite.flush();
-        this.bimFoils.flush();
-        this.bimPreferredSprite.flush();
-
-        this.bimCreatures = null;
-        this.bimDefaultSprite = null;
-        this.bimFoils = null;
-        this.bimPreferredSprite = null;
     }
 
     /** @return {@link java.awt.font} font */
