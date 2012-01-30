@@ -14,6 +14,7 @@ res/gui/display_new_layout.xml
 res/images/themes
 res/oracleScript.log
 res/pics
+res/pics/*.jpg
 res/pics/10E
 res/pics/2ED
 res/pics/3ED
@@ -53,6 +54,7 @@ res/pics/LEA
 res/pics/LEB
 res/pics/LEG
 res/pics/LGN
+res/pics/LOR
 res/pics/LRW
 res/pics/M10
 res/pics/M11
@@ -95,7 +97,6 @@ res/pics/WWK
 res/pics/ZEN
 res/pics/booster
 res/pics/icons
-res/pics/tokens
 res/quest/data
 res/quest/quest.preferences
 res/quest/questData.dat

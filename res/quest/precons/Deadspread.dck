@@ -10,29 +10,29 @@ Deck Type=constructed
 Set=SOM
 Image=deadspread.jpg
 [main]
-2 Fume Spitter
-1 Trigon of Corruption
-13 Island
-1 Twisted Image
-2 Maritime Guard
-2 Sky-Eel School
-1 Sorcerer's Strongbox
-2 Necrogen Censer
-1 Doom Blade
-1 Culling Dais
-2 Thrummingbird
-1 Contagion Engine
-13 Swamp
-2 Silver Myr
-1 Skinrender
-2 Steady Progress
-2 Moriok Reaver
-2 Instill Infection
-1 Darkslick Drake
-2 Contagion Clasp
-1 Harbor Serpent
-1 Trigon of Thought
-1 Throne of Geth
-1 Carnifex Demon
-2 Leaden Myr
+2 Fume Spitter|SOM
+1 Trigon of Corruption|SOM
+13 Island|SOM
+1 Twisted Image|SOM
+2 Maritime Guard|M11
+2 Sky-Eel School|SOM
+1 Sorcerer's Strongbox|M11
+2 Necrogen Censer|SOM
+1 Doom Blade|M11
+1 Culling Dais|SOM
+2 Thrummingbird|SOM
+1 Contagion Engine|SOM
+13 Swamp|SOM
+2 Silver Myr|SOM
+1 Skinrender|SOM
+2 Steady Progress|SOM
+2 Moriok Reaver|SOM
+2 Instill Infection|SOM
+1 Darkslick Drake|SOM
+2 Contagion Clasp|SOM
+1 Harbor Serpent|M11
+1 Trigon of Thought|SOM
+1 Throne of Geth|SOM
+1 Carnifex Demon|SOM
+2 Leaden Myr|SOM
 [sideboard]
