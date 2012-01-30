@@ -157,7 +157,7 @@ public class HomeTopLevel extends FPanel {
         add(pnlMenu, "w 36%!, h 96%!, gap 2% 2% 2% 2%");
         add(pnlContent, "w 58%!, h 96%!, gap 0% 2% 2% 2%");
 
-        JLabel lblIcon = new JLabel(skin.getIcon(FSkin.ForgeIcons.IMG_LOGO));
+        JLabel lblIcon = new JLabel(skin.getIcon(FSkin.ForgeIcons.ICO_LOGO));
         pnlMenu.add(lblIcon, "gapleft 10%, ax center");
 
         constraints = "w 80%!, gapleft 10%, gaptop 1%, gapbottom 1%, h 40px!";

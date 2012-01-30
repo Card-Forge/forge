@@ -17,6 +17,8 @@
  */
 package forge.quest.data.bazaar;
 
+import javax.swing.ImageIcon;
+
 /**
  * This interface defines a thing that can be sold at the Bazaar.
  * 
@@ -49,7 +51,7 @@ public interface QuestStallPurchasable extends Comparable<Object> {
      * 
      * @return the name of the image that is displayed in the bazaar
      */
-    String getImageName();
+    ImageIcon getIcon();
 
     /**
      * <p>

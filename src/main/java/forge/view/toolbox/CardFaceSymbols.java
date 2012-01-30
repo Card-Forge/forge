@@ -22,11 +22,12 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 
 import arcane.ui.util.UI;
 
 import com.esotericsoftware.minlog.Log;
+
+import forge.Singletons;
 
 /**
  * <p>
@@ -39,8 +40,6 @@ import com.esotericsoftware.minlog.Log;
 public class CardFaceSymbols {
     /** Constant <code>manaImages</code>. */
     private static final Map<String, Image> MANA_IMAGES = new HashMap<String, Image>();
-    /** Constant <code>replaceSymbolsPattern</code>. */
-    private static Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
     /**
      * <p>
@@ -48,14 +47,75 @@ public class CardFaceSymbols {
      * </p>
      */
     public static void loadImages() {
-        String[] symbols = new String[] {"0", "1", "10", "11", "12", "15", "16", "2", "20", "2W", "2U", "2R", "2G",
-                "2B", "3", "4", "5", "6", "7", "8", "9", "B", "BG", "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T",
-                "U", "UB", "UR", "W", "WB", "WU", "PW", "PU", "PB", "PR", "PG", "X", "Y", "Z", "slash", "attack",
-                "defend", "summonsick", "phasing", "counters1", "counters2", "counters3", "countersMulti", "foil01",
-                "foil02", "foil03", "foil04", "foil05", "foil06", "foil07", "foil08", "foil09", "foil10" };
-        for (String symbol : symbols) {
-            MANA_IMAGES.put(symbol, UI.getImageIcon("res/images/symbols-13/" + symbol + ".png").getImage());
-        }
+        final FSkin skin = Singletons.getView().getSkin();
+        MANA_IMAGES.put("0", skin.getImage(FSkin.ColorlessManaIcons.ICO_0));
+        MANA_IMAGES.put("1", skin.getImage(FSkin.ColorlessManaIcons.ICO_1));
+        MANA_IMAGES.put("2", skin.getImage(FSkin.ColorlessManaIcons.ICO_2));
+        MANA_IMAGES.put("3", skin.getImage(FSkin.ColorlessManaIcons.ICO_3));
+        MANA_IMAGES.put("4", skin.getImage(FSkin.ColorlessManaIcons.ICO_4));
+        MANA_IMAGES.put("5", skin.getImage(FSkin.ColorlessManaIcons.ICO_5));
+        MANA_IMAGES.put("6", skin.getImage(FSkin.ColorlessManaIcons.ICO_6));
+        MANA_IMAGES.put("7", skin.getImage(FSkin.ColorlessManaIcons.ICO_7));
+        MANA_IMAGES.put("8", skin.getImage(FSkin.ColorlessManaIcons.ICO_8));
+        MANA_IMAGES.put("9", skin.getImage(FSkin.ColorlessManaIcons.ICO_9));
+        MANA_IMAGES.put("10", skin.getImage(FSkin.ColorlessManaIcons.ICO_10));
+        MANA_IMAGES.put("11", skin.getImage(FSkin.ColorlessManaIcons.ICO_11));
+        MANA_IMAGES.put("12", skin.getImage(FSkin.ColorlessManaIcons.ICO_12));
+        MANA_IMAGES.put("15", skin.getImage(FSkin.ColorlessManaIcons.ICO_15));
+        MANA_IMAGES.put("16", skin.getImage(FSkin.ColorlessManaIcons.ICO_16));
+        MANA_IMAGES.put("20", skin.getImage(FSkin.ColorlessManaIcons.ICO_20));
+        MANA_IMAGES.put("X", skin.getImage(FSkin.ColorlessManaIcons.ICO_X));
+        MANA_IMAGES.put("Y", skin.getImage(FSkin.ColorlessManaIcons.ICO_Y));
+        MANA_IMAGES.put("Z", skin.getImage(FSkin.ColorlessManaIcons.ICO_Z));
+
+        MANA_IMAGES.put("B", skin.getImage(FSkin.ManaIcons.ICO_BLACK));
+        MANA_IMAGES.put("BG", skin.getImage(FSkin.ManaIcons.ICO_BLACK_GREEN));
+        MANA_IMAGES.put("BR", skin.getImage(FSkin.ManaIcons.ICO_BLACK_RED));
+        MANA_IMAGES.put("G", skin.getImage(FSkin.ManaIcons.ICO_GREEN));
+        MANA_IMAGES.put("GU", skin.getImage(FSkin.ManaIcons.ICO_GREEN_BLUE));
+        MANA_IMAGES.put("GW", skin.getImage(FSkin.ManaIcons.ICO_GREEN_WHITE));
+        MANA_IMAGES.put("R", skin.getImage(FSkin.ManaIcons.ICO_RED));
+        MANA_IMAGES.put("RG", skin.getImage(FSkin.ManaIcons.ICO_RED_GREEN));
+        MANA_IMAGES.put("RW", skin.getImage(FSkin.ManaIcons.ICO_RED_WHITE));
+        MANA_IMAGES.put("U", skin.getImage(FSkin.ManaIcons.ICO_BLUE));
+        MANA_IMAGES.put("UB", skin.getImage(FSkin.ManaIcons.ICO_BLUE_BLACK));
+        MANA_IMAGES.put("UR", skin.getImage(FSkin.ManaIcons.ICO_BLUE_RED));
+        MANA_IMAGES.put("W", skin.getImage(FSkin.ManaIcons.ICO_WHITE));
+        MANA_IMAGES.put("WB", skin.getImage(FSkin.ManaIcons.ICO_WHITE_BLACK));
+        MANA_IMAGES.put("WU", skin.getImage(FSkin.ManaIcons.ICO_WHITE_BLUE));
+        MANA_IMAGES.put("PW", skin.getImage(FSkin.ManaIcons.ICO_PHRYX_WHITE));
+        MANA_IMAGES.put("PR", skin.getImage(FSkin.ManaIcons.ICO_PHRYX_RED));
+        MANA_IMAGES.put("PU", skin.getImage(FSkin.ManaIcons.ICO_PHRYX_BLUE));
+        MANA_IMAGES.put("PB", skin.getImage(FSkin.ManaIcons.ICO_PHRYX_BLACK));
+        MANA_IMAGES.put("PG", skin.getImage(FSkin.ManaIcons.ICO_PHRYX_GREEN));
+        MANA_IMAGES.put("2W", skin.getImage(FSkin.ManaIcons.ICO_2W));
+        MANA_IMAGES.put("2U", skin.getImage(FSkin.ManaIcons.ICO_2U));
+        MANA_IMAGES.put("2R", skin.getImage(FSkin.ManaIcons.ICO_2R));
+        MANA_IMAGES.put("2G", skin.getImage(FSkin.ManaIcons.ICO_2G));
+        MANA_IMAGES.put("2B", skin.getImage(FSkin.ManaIcons.ICO_2B));
+
+        MANA_IMAGES.put("S", skin.getImage(FSkin.GameplayIcons.ICO_SNOW));
+        MANA_IMAGES.put("T", skin.getImage(FSkin.GameplayIcons.ICO_TAP));
+        MANA_IMAGES.put("slash", skin.getImage(FSkin.GameplayIcons.ICO_SLASH));
+        MANA_IMAGES.put("attack", skin.getImage(FSkin.GameplayIcons.ICO_ATTACK));
+        MANA_IMAGES.put("defend", skin.getImage(FSkin.GameplayIcons.ICO_DEFEND));
+        MANA_IMAGES.put("summonsick", skin.getImage(FSkin.GameplayIcons.ICO_SUMMONSICK));
+        MANA_IMAGES.put("phasing", skin.getImage(FSkin.GameplayIcons.ICO_PHASING));
+        MANA_IMAGES.put("counters1", skin.getImage(FSkin.GameplayIcons.ICO_COUNTERS1));
+        MANA_IMAGES.put("counters2", skin.getImage(FSkin.GameplayIcons.ICO_COUNTERS2));
+        MANA_IMAGES.put("counters3", skin.getImage(FSkin.GameplayIcons.ICO_COUNTERS3));
+        MANA_IMAGES.put("countersMulti", skin.getImage(FSkin.GameplayIcons.ICO_COUNTERS_MULTI));
+
+        MANA_IMAGES.put("foil01", skin.getImage(FSkin.Foils.FOIL_01));
+        MANA_IMAGES.put("foil02", skin.getImage(FSkin.Foils.FOIL_02));
+        MANA_IMAGES.put("foil03", skin.getImage(FSkin.Foils.FOIL_03));
+        MANA_IMAGES.put("foil04", skin.getImage(FSkin.Foils.FOIL_04));
+        MANA_IMAGES.put("foil05", skin.getImage(FSkin.Foils.FOIL_05));
+        MANA_IMAGES.put("foil06", skin.getImage(FSkin.Foils.FOIL_06));
+        MANA_IMAGES.put("foil07", skin.getImage(FSkin.Foils.FOIL_07));
+        MANA_IMAGES.put("foil08", skin.getImage(FSkin.Foils.FOIL_08));
+        MANA_IMAGES.put("foil09", skin.getImage(FSkin.Foils.FOIL_09));
+        MANA_IMAGES.put("foil10", skin.getImage(FSkin.Foils.FOIL_10));
     }
 
     /**
@@ -175,29 +235,5 @@ public class CardFaceSymbols {
                                                     // pixels wide.
         }
         return width;
-    }
-
-    /**
-     * <p>
-     * replaceSymbolsWithHTML.
-     * </p>
-     * 
-     * @param value
-     *            a {@link java.lang.String} object.
-     * @param small
-     *            a boolean.
-     * @return a {@link java.lang.String} object.
-     */
-    public static synchronized String replaceSymbolsWithHTML(String value, final boolean small) {
-        if (small) {
-            value = value.replace("{C}", "<img src='file:res/images/symbols-11/C.png' width=13 height=11>");
-            return replaceSymbolsPattern.matcher(value).replaceAll(
-                    "<img src='file:res/images/symbols-11/$1$2.png' width=11 height=11>");
-        } else {
-            value = value.replace("{slash}", "<img src='file:res/images/symbols-13/slash.png' width=10 height=13>");
-            value = value.replace("{C}", "<img src='file:res/images/symbols-13/C.png' width=16 height=13>");
-            return replaceSymbolsPattern.matcher(value).replaceAll(
-                    "<img src='file:res/images/symbols-13/$1$2.png' width=13 height=13>");
-        }
     }
 }

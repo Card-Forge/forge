@@ -257,7 +257,7 @@ public class QuestEventManager {
             } else if (key.equalsIgnoreCase("Description")) {
                 qe.setDescription(value);
             } else if (key.equalsIgnoreCase("Icon")) {
-                qe.setIcon(value);
+                qe.setIconFilename(value);
             }
         }
     }

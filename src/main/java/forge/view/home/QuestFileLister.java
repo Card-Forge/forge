@@ -59,10 +59,10 @@ public class QuestFileLister extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        icoDelete = new ImageIcon("res/images/icons/DeleteIcon.png");
-        icoDeleteOver = new ImageIcon("res/images/icons/DeleteIconOver.png");
-        icoEdit = new ImageIcon("res/images/icons/EditIcon.png");
-        icoEditOver = new ImageIcon("res/images/icons/EditIconOver.png");
+        icoDelete = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
+        icoDeleteOver = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
+        icoEdit = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
+        icoEditOver = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
     }
 
     /** @param qd0 &emsp; {@link forge.quest.data.QuestData}[] */
@@ -77,7 +77,7 @@ public class QuestFileLister extends JPanel {
         rowTitle.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new FLabel("Delete", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel("Edit", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel("Rename", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
         rowTitle.add(new FLabel("Name", SwingConstants.CENTER), "w 40%!, h 20px!, gap 0 0 5px 0");
         rowTitle.add(new FLabel("Mode", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
         rowTitle.add(new FLabel("Record", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");

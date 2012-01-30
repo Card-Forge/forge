@@ -17,13 +17,17 @@
  */
 package forge.quest.data.pet;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
 import forge.Card;
 import forge.Constant;
+import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.quest.data.bazaar.QuestStallManager;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -149,10 +153,17 @@ public class QuestPetPlant extends QuestPetAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final String[] getAllImageNames() {
-        return new String[] { "", "g_0_1_plant_wall_small.jpg", "g_0_2_plant_wall_small.jpg",
-                "g_0_3_plant_wall_small.jpg", "g_1_3_plant_wall_small.jpg", "g_1_3_plant_wall_deathtouch_small",
-                "g_1_4_plant_wall_small.jpg" };
+    public final ImageIcon[] getAllIcons() {
+        final FSkin skin = Singletons.getView().getSkin();
+
+        return new ImageIcon[] {
+                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT1),
+                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT2),
+                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT3),
+                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT4),
+                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT5),
+                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT6)
+        };
     }
 
     /** {@inheritDoc} */

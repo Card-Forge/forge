@@ -41,8 +41,8 @@ public class QuestEvent {
     /** The difficulty. */
     private String difficulty = "Medium";
 
-    /** The icon. */
-    private String icon = "Unknown.jpg";
+    /** Filename of the icon for this event.*/
+    private String iconFilename = "unknown";
 
     /** The name. */
     private String name = "Noname";
@@ -107,13 +107,13 @@ public class QuestEvent {
 
     /**
      * <p>
-     * getIcon.
+     * getIconFilename.
      * </p>
      * 
      * @return a {@link java.lang.String}.
      */
-    public final String getIcon() {
-        return this.icon;
+    public final String getIconFilename() {
+        return this.iconFilename;
     }
 
     /**
@@ -188,12 +188,12 @@ public class QuestEvent {
     }
 
     /**
-     * Sets the icon.
+     * Sets the icon filename.
      * 
-     * @param icon0
-     *            the icon to set
+     * @param s0
+     *           filename of the icon to set
      */
-    public void setIcon(final String icon0) {
-        this.icon = icon0;
+    public void setIconFilename(final String s0) {
+        this.iconFilename = s0;
     }
 }

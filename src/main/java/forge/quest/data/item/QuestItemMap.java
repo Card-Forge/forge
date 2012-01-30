@@ -17,7 +17,11 @@
  */
 package forge.quest.data.item;
 
+import javax.swing.ImageIcon;
+
+import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallManager;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -52,8 +56,8 @@ public class QuestItemMap extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final String getImageName() {
-        return "MapIconLarge.png";
+    public final ImageIcon getIcon() {
+        return Singletons.getView().getSkin().getIcon(FSkin.QuestIcons.ICO_MAP);
     }
 
     /** {@inheritDoc} */

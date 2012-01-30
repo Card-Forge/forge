@@ -19,7 +19,6 @@ package forge.view;
 
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Toolkit;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -41,6 +40,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.match.ViewField;
 import forge.view.toolbox.FOverlay;
+import forge.view.toolbox.FSkin;
 
 /**
  * Parent JFrame for Forge UI.
@@ -50,6 +50,7 @@ import forge.view.toolbox.FOverlay;
 public class GuiTopLevel extends JFrame implements Display, CardContainer {
     private final JLayeredPane lpnContent;
     private final FControl control;
+    private final FSkin skin;
 
     /**
      * Parent JFrame for Forge UI.
@@ -62,10 +63,11 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
 
         this.lpnContent = new JLayeredPane();
         this.lpnContent.setOpaque(true);
+        this.skin = Singletons.getView().getSkin();
         this.setContentPane(this.lpnContent);
         this.addOverlay();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("res/images/symbols-13/favicon.png"));
+        this.setIconImage(skin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
         this.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
         // Init controller

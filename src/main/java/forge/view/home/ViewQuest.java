@@ -206,10 +206,10 @@ public class ViewQuest extends JScrollPane {
         pnlStats.setOpaque(false);
         pnlStats.setBorder(new MatteBorder(1, 0, 1, 0, clrBorders));
 
-        lblLife.setIcon(new ImageIcon("res/images/icons/Life.png"));
-        lblCredits.setIcon(new ImageIcon("res/images/icons/CoinStack.png"));
-        lblWins.setIcon(new ImageIcon("res/images/icons/IconPlus.png"));
-        lblLosses.setIcon(new ImageIcon("res/images/icons/IconMinus.png"));
+        lblLife.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_LIFE));
+        lblCredits.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_COINSTACK));
+        lblWins.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_PLUS));
+        lblLosses.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_MINUS));
         lblNextChallengeInWins.setText("No challenges available.");
         btnBazaar.setToolTipText("Peruse the Bazaar");
         btnSpellShop.setToolTipText("Travel to the Spell Shop");
@@ -514,15 +514,17 @@ public class ViewQuest extends JScrollPane {
             this.setLayout(new MigLayout("insets 0, gap 0"));
 
             final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-            File file = new File(base, event.getIcon());
+            File file = new File(base, event.getIconFilename());
 
-            if (!file.exists()) {
-                file = new File(base, "Unknown.jpg");
-            }
-
-            FLabel lblIcon = new FLabel(new ImageIcon(file.toString()));
+            FLabel lblIcon = new FLabel();
             lblIcon.setIconScaleFactor(1);
             lblIcon.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+            if (!file.exists()) {
+                lblIcon.setIcon(skin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
+            }
+            else {
+                lblIcon.setIcon(new ImageIcon(file.toString()));
+            }
             this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
 
             // Name

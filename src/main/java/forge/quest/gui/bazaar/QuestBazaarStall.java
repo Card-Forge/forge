@@ -35,7 +35,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import forge.AllZone;
-import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
 import forge.quest.data.bazaar.QuestStallDefinition;
 import forge.quest.data.bazaar.QuestStallManager;
@@ -76,38 +75,12 @@ public class QuestBazaarStall extends JPanel {
      * Constructor for QuestBazaarStall.
      * </p>
      * 
-     * @wbp.parser.constructor
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param stallName
-     *            a {@link java.lang.String} object.
-     * @param iconName
-     *            a {@link java.lang.String} object.
-     * @param fluff
-     *            a {@link java.lang.String} object.
-     */
-    protected QuestBazaarStall(final String name, final String stallName, final String iconName, final String fluff) {
-        this.name = name;
-        this.fluff = fluff;
-        this.icon = GuiUtils.getIconFromFile(iconName);
-        this.stallName = stallName;
-
-        this.initUI();
-
-    }
-
-    /**
-     * <p>
-     * Constructor for QuestBazaarStall.
-     * </p>
-     * 
      * @param definition
      *            a {@link forge.quest.data.bazaar.QuestStallDefinition} object.
      */
     protected QuestBazaarStall(final QuestStallDefinition definition) {
         this.fluff = definition.getFluff();
-        this.icon = GuiUtils.getIconFromFile(definition.getIconName());
+        this.icon = definition.getIcon();
         this.stallName = definition.getDisplayName();
         this.name = definition.getName();
         this.initUI();

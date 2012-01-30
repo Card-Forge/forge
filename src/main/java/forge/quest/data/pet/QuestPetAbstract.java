@@ -17,6 +17,8 @@
  */
 package forge.quest.data.pet;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
 import forge.Card;
 import forge.quest.data.bazaar.QuestStallManager;
@@ -96,7 +98,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * 
      * @return an array of {@link java.lang.String} objects.
      */
-    public abstract String[] getAllImageNames();
+    public abstract ImageIcon[] getAllIcons();
 
     /**
      * <p>
@@ -106,8 +108,8 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final String getImageName() {
-        return this.getAllImageNames()[this.level];
+    public final ImageIcon getIcon() {
+        return this.getAllIcons()[this.level];
     }
 
     /**

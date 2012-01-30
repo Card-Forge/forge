@@ -17,8 +17,12 @@
  */
 package forge.quest.data.pet;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -98,8 +102,13 @@ public class QuestPetWolf extends QuestPetAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final String[] getAllImageNames() {
-        return new String[] { "", "g_1_1_wolf_pet_small.jpg", "g_1_2_wolf_pet_small.jpg", "g_2_2_wolf_pet_small.jpg",
-                "g_2_2_wolf_pet_flanking_small.jpg" };
+    public final ImageIcon[] getAllIcons() {
+        final FSkin skin = Singletons.getView().getSkin();
+        return new ImageIcon[] {
+                skin.getIcon(FSkin.CreatureIcons.ICO_WOLF1),
+                skin.getIcon(FSkin.CreatureIcons.ICO_WOLF2),
+                skin.getIcon(FSkin.CreatureIcons.ICO_WOLF3),
+                skin.getIcon(FSkin.CreatureIcons.ICO_WOLF4)
+        };
     }
 }

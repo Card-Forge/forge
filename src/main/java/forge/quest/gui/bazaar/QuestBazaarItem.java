@@ -82,7 +82,7 @@ public class QuestBazaarItem {
      * @return a {@link javax.swing.JPanel} object.
      */
     protected final JPanel getItemPanel() {
-        ImageIcon icon = GuiUtils.getIconFromFile(this.item.getImageName());
+        ImageIcon icon = this.item.getIcon();
         if (icon == null) {
             // The original size was only 40 x 40 pixels.
             // Increased the size to give added pixels for more detail.

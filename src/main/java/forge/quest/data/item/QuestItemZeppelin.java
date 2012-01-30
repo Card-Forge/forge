@@ -17,8 +17,12 @@
  */
 package forge.quest.data.item;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
+import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallManager;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -59,8 +63,8 @@ public class QuestItemZeppelin extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final String getImageName() {
-        return "ZeppelinIcon.png";
+    public final ImageIcon getIcon() {
+        return Singletons.getView().getSkin().getIcon(FSkin.QuestIcons.ICO_ZEP);
     }
 
     /** {@inheritDoc} */

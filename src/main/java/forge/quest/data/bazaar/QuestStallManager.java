@@ -25,6 +25,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import forge.AllZone;
+import forge.Singletons;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -47,24 +49,29 @@ public class QuestStallManager {
      * </p>
      */
     public static void buildStalls() {
+        final FSkin skin = Singletons.getView().getSkin();
+
         QuestStallManager.stalls = new HashMap<String, QuestStallDefinition>();
         QuestStallManager.stalls.put(QuestStallManager.ALCHEMIST, new QuestStallDefinition(QuestStallManager.ALCHEMIST,
                 "Alchemist", "The walls of this alchemist's stall are covered with shelves with potions, oils, "
-                        + "powders, poultices and elixirs, each meticulously labeled.", "BottlesIconSmall.png"));
+                        + "powders, poultices and elixirs, each meticulously labeled.",
+                        skin.getIcon(FSkin.QuestIcons.ICO_BOTTLES)));
         QuestStallManager.stalls.put(QuestStallManager.BANKER, new QuestStallDefinition(QuestStallManager.BANKER,
                 "Banker", "A large book large enough to be seen from the outside rests on the Banker's desk.",
-                "CoinIconSmall.png"));
+                skin.getIcon(FSkin.QuestIcons.ICO_COIN)));
         QuestStallManager.stalls.put(QuestStallManager.BOOKSTORE, new QuestStallDefinition(QuestStallManager.BOOKSTORE,
-                "Bookstore", "Tomes of different sizes are stacked in man-high towers.", "BookIconSmall.png"));
+                "Bookstore", "Tomes of different sizes are stacked in man-high towers.",
+                skin.getIcon(FSkin.QuestIcons.ICO_BOOK)));
         QuestStallManager.stalls.put(QuestStallManager.GEAR, new QuestStallDefinition(QuestStallManager.GEAR,
                 "Adventuring Gear",
                 "This adventurer's market has a tool for every need ... or so the plaque on the wall claims.",
-                "GearIconSmall.png"));
+                skin.getIcon(FSkin.QuestIcons.ICO_GEAR)));
         QuestStallManager.stalls.put(QuestStallManager.NURSERY, new QuestStallDefinition(QuestStallManager.NURSERY,
                 "Nursery", "The smells of the one hundred and one different plants forms a unique fragrance.",
-                "LeafIconSmall.png"));
+                skin.getIcon(FSkin.QuestIcons.ICO_LEAF)));
         QuestStallManager.stalls.put(QuestStallManager.PET_SHOP, new QuestStallDefinition(QuestStallManager.PET_SHOP,
-                "Pet Shop", "This large stall echoes with a multitude of animal noises.", "FoxIconSmall.png"));
+                "Pet Shop", "This large stall echoes with a multitude of animal noises.",
+                skin.getIcon(FSkin.QuestIcons.ICO_FOX)));
     }
 
     /**

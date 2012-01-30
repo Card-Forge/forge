@@ -10228,208 +10228,30 @@ res/images/deckeditor/filter_sorcery_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_sorcery_y.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_y.png -text svneol=unset#image/png
-res/images/icons/BookIcon.png -text svneol=unset#image/png
-res/images/icons/BookIconSmall.png -text svneol=unset#image/png
-res/images/icons/BottlesIconSmall.png -text svneol=unset#image/png
-res/images/icons/BoxIcon.png -text svneol=unset#image/png
-res/images/icons/BoxIconSmall.png -text svneol=unset#image/png
-res/images/icons/CoinIcon.png -text svneol=unset#image/png
-res/images/icons/CoinIconSmall.png -text svneol=unset#image/png
-res/images/icons/CoinStack.png -text svneol=unset#image/png
-res/images/icons/DeleteIcon.png -text
-res/images/icons/DeleteIconOver.png -text
-res/images/icons/EditIcon.png -text
-res/images/icons/EditIconOver.png -text
-res/images/icons/ElixirIcon.png -text svneol=unset#image/png
-res/images/icons/FoxIconSmall.png -text svneol=unset#image/png
-res/images/icons/GearIconSmall.png -text svneol=unset#image/png
-res/images/icons/GoldIcon.png -text svneol=unset#image/png
-res/images/icons/GoldIconLarge.png -text svneol=unset#image/png
-res/images/icons/GoldIconSmall.png -text svneol=unset#image/png
-res/images/icons/HeartIcon.png -text svneol=unset#image/png
-res/images/icons/IconMinus.png -text
-res/images/icons/IconPlus.png -text
-res/images/icons/LeafIconSmall.png -text svneol=unset#image/png
-res/images/icons/Life.png -text svneol=unset#image/png
-res/images/icons/Mage01.jpg -text
-res/images/icons/Mage02.jpg -text
-res/images/icons/MapIcon.png -text svneol=unset#image/png
-res/images/icons/MapIconLarge.png -text svneol=unset#image/png
-res/images/icons/PetIcon.png -text
-res/images/icons/PlantIcon.png -text
-res/images/icons/Unknown.jpg -text
-res/images/icons/ZeppelinIcon.png -text svneol=unset#image/png
-res/images/icons/g_0_1_plant_wall_small.jpg -text
-res/images/icons/g_0_2_plant_wall_small.jpg -text
-res/images/icons/g_0_3_plant_wall_small.jpg -text
-res/images/icons/g_1_3_plant_wall_deathtouch_small.jpg -text
-res/images/icons/g_1_3_plant_wall_small.jpg -text
-res/images/icons/g_1_4_plant_wall_small.jpg -text
-res/images/icons/notesIcon.png -text svneol=unset#image/png
 res/images/skins/darkascension/bg_match.jpg -text
 res/images/skins/darkascension/bg_splash.jpg -text
 res/images/skins/darkascension/bg_splash.png -text
 res/images/skins/darkascension/bg_texture.jpg -text
 res/images/skins/darkascension/font1.ttf -text
-res/images/skins/darkascension/sprite.png -text
+res/images/skins/darkascension/sprite_icons.png -text
 res/images/skins/default/bg_match.jpg -text
 res/images/skins/default/bg_splash.png -text
 res/images/skins/default/bg_texture.jpg -text
 res/images/skins/default/font1.ttf -text
-res/images/skins/default/sprite.png -text
-res/images/skins/default/sprite_grid.png -text
+res/images/skins/default/grid_icons.png -text
+res/images/skins/default/sprite_creatures.jpg -text
+res/images/skins/default/sprite_foils.png -text
+res/images/skins/default/sprite_icons.png -text
 res/images/skins/rebel/bg_match.jpg -text
 res/images/skins/rebel/bg_splash.png -text
 res/images/skins/rebel/bg_texture.jpg -text
 res/images/skins/rebel/font1.ttf -text
-res/images/skins/rebel/sprite.png -text
+res/images/skins/rebel/sprite_icons.png -text
 res/images/skins/smith/bg_match.jpg -text
 res/images/skins/smith/bg_splash.png -text
 res/images/skins/smith/bg_texture.jpg -text
 res/images/skins/smith/font1.ttf -text
-res/images/skins/smith/sprite.png -text
-res/images/symbols-13/0.png -text svneol=unset#image/png
-res/images/symbols-13/1.png -text svneol=unset#image/png
-res/images/symbols-13/10.png -text svneol=unset#image/png
-res/images/symbols-13/11.png -text svneol=unset#image/png
-res/images/symbols-13/12.png -text svneol=unset#image/png
-res/images/symbols-13/15.png -text svneol=unset#image/png
-res/images/symbols-13/16.png -text svneol=unset#image/png
-res/images/symbols-13/2.png -text svneol=unset#image/png
-res/images/symbols-13/20.png -text svneol=unset#image/png
-res/images/symbols-13/2B.png -text svneol=unset#image/png
-res/images/symbols-13/2G.png -text svneol=unset#image/png
-res/images/symbols-13/2R.png -text svneol=unset#image/png
-res/images/symbols-13/2U.png -text svneol=unset#image/png
-res/images/symbols-13/2W.png -text svneol=unset#image/png
-res/images/symbols-13/3.png -text svneol=unset#image/png
-res/images/symbols-13/4.png -text svneol=unset#image/png
-res/images/symbols-13/5.png -text svneol=unset#image/png
-res/images/symbols-13/6.png -text svneol=unset#image/png
-res/images/symbols-13/7.png -text svneol=unset#image/png
-res/images/symbols-13/8.png -text svneol=unset#image/png
-res/images/symbols-13/9.png -text svneol=unset#image/png
-res/images/symbols-13/B.png -text svneol=unset#image/png
-res/images/symbols-13/BG.png -text svneol=unset#image/png
-res/images/symbols-13/BR.png -text svneol=unset#image/png
-res/images/symbols-13/C.png -text svneol=unset#image/png
-res/images/symbols-13/G.png -text svneol=unset#image/png
-res/images/symbols-13/GU.png -text svneol=unset#image/png
-res/images/symbols-13/GW.png -text svneol=unset#image/png
-res/images/symbols-13/PB.png -text svneol=unset#image/png
-res/images/symbols-13/PG.png -text svneol=unset#image/png
-res/images/symbols-13/PR.png -text svneol=unset#image/png
-res/images/symbols-13/PU.png -text svneol=unset#image/png
-res/images/symbols-13/PW.png -text svneol=unset#image/png
-res/images/symbols-13/Q.png -text svneol=unset#image/png
-res/images/symbols-13/R.png -text svneol=unset#image/png
-res/images/symbols-13/RG.png -text svneol=unset#image/png
-res/images/symbols-13/RW.png -text svneol=unset#image/png
-res/images/symbols-13/S.png -text svneol=unset#image/png
-res/images/symbols-13/T.png -text svneol=unset#image/png
-res/images/symbols-13/U.png -text svneol=unset#image/png
-res/images/symbols-13/UB.png -text svneol=unset#image/png
-res/images/symbols-13/UR.png -text svneol=unset#image/png
-res/images/symbols-13/W.png -text svneol=unset#image/png
-res/images/symbols-13/WB.png -text svneol=unset#image/png
-res/images/symbols-13/WU.png -text svneol=unset#image/png
-res/images/symbols-13/X.png -text svneol=unset#image/png
-res/images/symbols-13/Y.png -text svneol=unset#image/png
-res/images/symbols-13/Z.png -text svneol=unset#image/png
-res/images/symbols-13/attack.png -text svneol=unset#image/png
-res/images/symbols-13/counters1.png -text
-res/images/symbols-13/counters2.png -text
-res/images/symbols-13/counters3.png -text
-res/images/symbols-13/countersMulti.png -text
-res/images/symbols-13/defend.png -text svneol=unset#image/png
-res/images/symbols-13/detail_exile.png -text
-res/images/symbols-13/detail_flashback.png -text
-res/images/symbols-13/detail_grave.png -text
-res/images/symbols-13/detail_hand.png -text
-res/images/symbols-13/detail_library.png -text
-res/images/symbols-13/detail_poison.png -text
-res/images/symbols-13/favicon.png -text
-res/images/symbols-13/foil01.png -text svneol=unset#image/png
-res/images/symbols-13/foil02.png -text svneol=unset#image/png
-res/images/symbols-13/foil03.png -text svneol=unset#image/png
-res/images/symbols-13/foil04.png -text svneol=unset#image/png
-res/images/symbols-13/foil05.png -text svneol=unset#image/png
-res/images/symbols-13/foil06.png -text svneol=unset#image/png
-res/images/symbols-13/foil07.png -text svneol=unset#image/png
-res/images/symbols-13/foil08.png -text svneol=unset#image/png
-res/images/symbols-13/foil09.png -text svneol=unset#image/png
-res/images/symbols-13/foil10.png -text svneol=unset#image/png
-res/images/symbols-13/phasing.png -text
-res/images/symbols-13/slash.png -text svneol=unset#image/png
-res/images/symbols-13/summonsick.png -text svneol=unset#image/png
-res/images/ui/HomeScreen/default_600/Main.jpg -text
-res/images/ui/HomeScreen/default_600/Main_logo.png -text
-res/images/ui/HomeScreen/default_600/btnDeck_editorDown.png -text
-res/images/ui/HomeScreen/default_600/btnDeck_editorOver.png -text
-res/images/ui/HomeScreen/default_600/btnDeck_editorUp.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_aiDown.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_aiOver.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_aiToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_aiToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_aiUp.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_dckedtDown.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_dckedtOver.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_dckedtToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_dckedtToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_dckedtUp.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_humanDown.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_humanOver.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_humanToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_humanToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_humanUp.png -text
-res/images/ui/HomeScreen/default_600/btnLibr_title.png -text
-res/images/ui/HomeScreen/default_600/btnMode_constrDown.png -text
-res/images/ui/HomeScreen/default_600/btnMode_constrOver.png -text
-res/images/ui/HomeScreen/default_600/btnMode_constrToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnMode_constrToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnMode_constrUp.png -text
-res/images/ui/HomeScreen/default_600/btnMode_draftDown.png -text
-res/images/ui/HomeScreen/default_600/btnMode_draftOver.png -text
-res/images/ui/HomeScreen/default_600/btnMode_draftToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnMode_draftToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnMode_draftUp.png -text
-res/images/ui/HomeScreen/default_600/btnMode_gauntletDown.png -text
-res/images/ui/HomeScreen/default_600/btnMode_gauntletOver.png -text
-res/images/ui/HomeScreen/default_600/btnMode_gauntletToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnMode_gauntletToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnMode_gauntletUp.png -text
-res/images/ui/HomeScreen/default_600/btnMode_puzzleDown.png -text
-res/images/ui/HomeScreen/default_600/btnMode_puzzleOver.png -text
-res/images/ui/HomeScreen/default_600/btnMode_puzzleToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnMode_puzzleToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnMode_puzzleUp.png -text
-res/images/ui/HomeScreen/default_600/btnMode_questDown.png -text
-res/images/ui/HomeScreen/default_600/btnMode_questOver.png -text
-res/images/ui/HomeScreen/default_600/btnMode_questToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnMode_questToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnMode_questUp.png -text
-res/images/ui/HomeScreen/default_600/btnMode_sealedDown.png -text
-res/images/ui/HomeScreen/default_600/btnMode_sealedOver.png -text
-res/images/ui/HomeScreen/default_600/btnMode_sealedToggle1.png -text
-res/images/ui/HomeScreen/default_600/btnMode_sealedToggle2.png -text
-res/images/ui/HomeScreen/default_600/btnMode_sealedUp.png -text
-res/images/ui/HomeScreen/default_600/btnMode_title.png -text
-res/images/ui/HomeScreen/default_600/btnSettings_hover.png -text
-res/images/ui/HomeScreen/default_600/btnSettings_selected.png -text
-res/images/ui/HomeScreen/default_600/btnSettings_titleDown.png -text
-res/images/ui/HomeScreen/default_600/btnSettings_titleOver.png -text
-res/images/ui/HomeScreen/default_600/btnSettings_titleUp.png -text
-res/images/ui/HomeScreen/default_600/btnSettings_unselected.png -text
-res/images/ui/HomeScreen/default_600/btnStart_Down.png -text
-res/images/ui/HomeScreen/default_600/btnStart_Over.png -text
-res/images/ui/HomeScreen/default_600/btnStart_Up.png -text
-res/images/ui/HomeScreen/default_600/btnToggle.png -text
-res/images/ui/HomeScreen/default_600/btnUtils_hover.png -text
-res/images/ui/HomeScreen/default_600/btnUtils_selected.png -text
-res/images/ui/HomeScreen/default_600/btnUtils_unselected.png -text
-res/images/ui/favicon.png -text
-res/images/ui/forgeSplash.jpg -text
-res/images/ui/newgame_background.jpg -text svneol=unset#image/jpeg
+res/images/skins/smith/sprite_icons.png -text
 res/lang/de.properties svneol=native#text/plain
 res/lang/en.properties svneol=native#text/plain
 res/lang/howTo/de.properties svneol=native#text/plain

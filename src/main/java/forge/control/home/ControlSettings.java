@@ -150,6 +150,9 @@ public class ControlSettings {
 
     private void updateSkin() {
         String name = view.getLstChooseSkin().getSelectedValue().toString();
+        Singletons.getView().getSkin().unloadSkin();
+        Singletons.getView().setSkin(null);
+
         FSkin skin = new FSkin(name);
 
         skin.loadFontsAndImages();

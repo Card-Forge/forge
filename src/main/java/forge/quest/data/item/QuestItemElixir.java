@@ -17,8 +17,12 @@
  */
 package forge.quest.data.item;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
+import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallManager;
+import forge.view.toolbox.FSkin;
 
 /**
  * This item has special coding.
@@ -45,8 +49,8 @@ public class QuestItemElixir extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final String getImageName() {
-        return "ElixirIcon.png";
+    public final ImageIcon getIcon() {
+        return Singletons.getView().getSkin().getIcon(FSkin.QuestIcons.ICO_BOTTLES);
     }
 
     /** {@inheritDoc} */

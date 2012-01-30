@@ -17,6 +17,8 @@
  */
 package forge.quest.data.bazaar;
 
+import javax.swing.ImageIcon;
+
 /**
  * <p>
  * QuestStallDefinition class.
@@ -33,8 +35,8 @@ public class QuestStallDefinition {
     /** The display name. */
     private String displayName;
 
-    /** The icon name. */
-    private String iconName;
+    /** The icon.. */
+    private ImageIcon icon;
 
     /** The fluff. */
     private String fluff;
@@ -50,14 +52,14 @@ public class QuestStallDefinition {
      *            a {@link java.lang.String} object.
      * @param fluff
      *            a {@link java.lang.String} object.
-     * @param iconName
-     *            a {@link java.lang.String} object.
+     * @param i0
+     *            a {@link javax.swing.ImageIcon} object.
      */
-    public QuestStallDefinition(final String name, final String displayName, final String fluff, final String iconName) {
+    public QuestStallDefinition(final String name, final String displayName, final String fluff, final ImageIcon i0) {
         this.setName(name);
         this.setDisplayName(displayName);
         this.setFluff(fluff);
-        this.setIconName(iconName);
+        this.setIcon(i0);
     }
 
     /**
@@ -84,18 +86,18 @@ public class QuestStallDefinition {
      * 
      * @return the iconName
      */
-    public String getIconName() {
-        return this.iconName;
+    public ImageIcon getIcon() {
+        return this.icon;
     }
 
     /**
      * Sets the icon name.
      * 
-     * @param iconName0
+     * @param i0
      *            the iconName to set
      */
-    public void setIconName(final String iconName0) {
-        this.iconName = iconName0;
+    public void setIcon(final ImageIcon i0) {
+        this.icon = i0;
     }
 
     /**

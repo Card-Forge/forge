@@ -77,10 +77,10 @@ public class DeckLister extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        icoDelete = new ImageIcon("res/images/icons/DeleteIcon.png");
-        icoDeleteOver = new ImageIcon("res/images/icons/DeleteIconOver.png");
-        icoEdit = new ImageIcon("res/images/icons/EditIcon.png");
-        icoEditOver = new ImageIcon("res/images/icons/EditIconOver.png");
+        icoDelete = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
+        icoDeleteOver = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
+        icoEdit = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
+        icoEditOver = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
     }
 
     /** @param decks0 {@link forge.deck.Deck}[] */

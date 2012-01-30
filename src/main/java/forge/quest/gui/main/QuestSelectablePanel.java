@@ -31,10 +31,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import forge.Singletons;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestEvent;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -69,16 +71,17 @@ public class QuestSelectablePanel extends JPanel {
      */
     public QuestSelectablePanel(final QuestEvent qe) {
         this.event = qe;
-        this.iconfilename = qe.getIcon();
+        this.iconfilename = qe.getIconFilename();
         final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
         File file = new File(base, this.iconfilename);
 
+        final ImageIcon icon;
         if (!file.exists()) {
-            file = new File(base, "Unknown.jpg");
-            this.iconfilename = "Unknown.jpg";
+            icon = Singletons.getView().getSkin().getIcon(FSkin.ForgeIcons.ICO_UNKNOWN);
         }
-
-        final ImageIcon icon = new ImageIcon(file.toString());
+        else {
+            icon = new ImageIcon(file.toString());
+        }
 
         this.backgroundColor = this.getBackground();
         this.setLayout(new BorderLayout(5, 5));

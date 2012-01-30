@@ -122,7 +122,7 @@ public class ViewField extends FRoundedPanel {
 
         iiTemp = (f.exists()
             ? new ImageIcon(filename)
-            : new ImageIcon(ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator + "Unknown.jpg"));
+            : skin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
 
         this.img = iiTemp.getImage();
 

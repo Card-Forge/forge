@@ -531,7 +531,7 @@ public class ControlQuest {
 
         Constant.Runtime.HUMAN_DECK[0] = currentDeck;
         Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
-        Constant.Quest.OPP_ICON_NAME[0] = event.getIcon();
+        Constant.Quest.OPP_ICON_NAME[0] = event.getIconFilename();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

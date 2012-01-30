@@ -17,8 +17,12 @@
  */
 package forge.quest.data.pet;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -101,8 +105,14 @@ public class QuestPetBird extends QuestPetAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final String[] getAllImageNames() {
-        return new String[] { "", "w_0_1_bird_pet_small.jpg", "w_1_1_bird_pet_small.jpg", "w_2_1_bird_pet_small.jpg",
-                "w_2_1_bird_pet_first_strike_small.jpg" };
+    public final ImageIcon[] getAllIcons() {
+        final FSkin skin = Singletons.getView().getSkin();
+
+        return new ImageIcon[] {
+                skin.getIcon(FSkin.CreatureIcons.ICO_BIRD1),
+                skin.getIcon(FSkin.CreatureIcons.ICO_BIRD2),
+                skin.getIcon(FSkin.CreatureIcons.ICO_BIRD3),
+                skin.getIcon(FSkin.CreatureIcons.ICO_BIRD4)
+        };
     }
 }

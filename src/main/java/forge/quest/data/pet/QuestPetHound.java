@@ -17,11 +17,15 @@
  */
 package forge.quest.data.pet;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -113,8 +117,14 @@ public class QuestPetHound extends QuestPetAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final String[] getAllImageNames() {
-        return new String[] { "", "r_1_1_hound_pet_small.jpg", "r_1_1_hound_pet_haste_small.jpg",
-                "r_2_1_hound_pet_small.jpg", "r_2_1_hound_pet_alone_small.jpg" };
+    public final ImageIcon[] getAllIcons() {
+        final FSkin skin = Singletons.getView().getSkin();
+
+        return new ImageIcon[] {
+                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND1),
+                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND2),
+                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND3),
+                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND4)
+        };
     }
 }

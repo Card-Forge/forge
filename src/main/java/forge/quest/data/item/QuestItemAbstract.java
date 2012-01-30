@@ -17,6 +17,8 @@
  */
 package forge.quest.data.item;
 
+import javax.swing.ImageIcon;
+
 import forge.AllZone;
 import forge.quest.data.bazaar.QuestStallPurchasable;
 
@@ -182,7 +184,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public abstract String getImageName();
+    public abstract ImageIcon getIcon();
 
     /**
      * <p>
