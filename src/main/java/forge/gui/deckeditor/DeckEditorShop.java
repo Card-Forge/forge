@@ -339,7 +339,7 @@ public final class DeckEditorShop extends DeckEditorBase {
                 for (final CardPrinted card : deck.getDeck().getMain().toFlatList()) {
                     this.getBottomTableWithCards().addCard(card);
                 }
-                JOptionPane.showMessageDialog(null, String.format("Deck '%s' was added to youd decklist.%n%nCards from it were also added to your pool.", deck.getName()), "Thanks for purchase!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, String.format("Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.", deck.getName()), "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
 
             }
 
