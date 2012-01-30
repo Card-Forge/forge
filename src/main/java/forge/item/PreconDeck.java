@@ -47,13 +47,15 @@ public class PreconDeck implements InventoryItemFromSet {
         String filenameProxy = null;
         String setProxy = "n/a";
         List<String> metadata = sections.get("metadata");
-        if (null != metadata && !metadata.isEmpty()) for (String s : metadata) {
-            String[] kv = s.split("=");
-            if ("Image".equalsIgnoreCase(kv[0])) {
-                filenameProxy = kv[1];
-            }
-            if ("set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
-                setProxy = kv[1];
+        if (null != metadata && !metadata.isEmpty()) {
+            for (String s : metadata) {
+                String[] kv = s.split("=");
+                if ("Image".equalsIgnoreCase(kv[0])) {
+                    filenameProxy = kv[1];
+                }
+                if ("set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
+                    setProxy = kv[1];
+                }
             }
         }
         imageFilename = filenameProxy;
