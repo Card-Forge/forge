@@ -2069,6 +2069,7 @@ res/cardsfolder/d/demonic_dread.txt svneol=native#text/plain
 res/cardsfolder/d/demonic_hordes.txt svneol=native#text/plain
 res/cardsfolder/d/demonic_torment.txt svneol=native#text/plain
 res/cardsfolder/d/demonic_tutor.txt svneol=native#text/plain
+res/cardsfolder/d/demonmail_hauberk.txt -text
 res/cardsfolder/d/demons_herald.txt -text
 res/cardsfolder/d/demons_horn.txt svneol=native#text/plain
 res/cardsfolder/d/demons_jester.txt svneol=native#text/plain
