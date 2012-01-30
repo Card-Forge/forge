@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | IsPresent$ Card.Self+nonCreatur
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ensouled_scimitar.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/119.jpg
+Oracle:{3}: Ensouled Scimitar becomes a 1/5 Spirit artifact creature with flying until end of turn. (Equipment that's a creature can't equip a creature.)\nEquipped creature gets +1/+5.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 End
