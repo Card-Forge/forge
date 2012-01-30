@@ -7197,7 +7197,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (realZone == this.getCastFrom()) {
                 return false;
             }
-        } else {
+        } else if (property.startsWith("set")) {
+            final String setCode = property.substring(3, 6);
+            if (!this.getCurSetCode().equals(setCode)) {
+                return false;
+            }
+        }
+        else {
             if (property.equals("ChosenType")) {
                 if (!this.isType(source.getChosenType())) {
                     return false;
