@@ -407,6 +407,8 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         fp.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
         fp.setPref(FPref.UI_LAYOUT_PARAMS, String.valueOf(control.getMatchController().getView().getLayoutParams()));
         fp.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
+
+        fp.save();
         return true;
     }
 

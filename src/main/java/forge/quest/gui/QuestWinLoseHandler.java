@@ -465,7 +465,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qData.addCredits(credTotal);
 
         // Generate Swing components and attach.
-        this.icoTemp = GuiUtils.getResizedIcon("GoldIcon.png", 0.5);
+        this.icoTemp = GuiUtils.getResizedIcon(skin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
@@ -568,7 +568,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qData.addCredits(questRewardCredits);
 
         // Generate Swing components and attach.
-        this.icoTemp = GuiUtils.getResizedIcon("BoxIcon.png", 0.5);
+        this.icoTemp = GuiUtils.getResizedIcon(skin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
         this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestChallenge) this.model.qEvent).getTitle()
                 + "\"");
 
@@ -591,7 +591,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
     private void penalizeLoss() {
         int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
-        this.icoTemp = GuiUtils.getResizedIcon("HeartIcon.png", 0.5);
+        this.icoTemp = GuiUtils.getResizedIcon(skin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
