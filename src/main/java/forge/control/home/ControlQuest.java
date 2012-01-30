@@ -334,7 +334,7 @@ public class ControlQuest {
             dirQuests.mkdirs();
         }
         File olddata = new File("res/quest/questData.dat");
-        File newpath = new File(dirQuests.getPath() + "questData.dat");
+        File newpath = new File(dirQuests.getPath() + "/questData.dat");
 
         if (olddata.exists()) { olddata.renameTo(newpath); }
         // end block which can be deleted
