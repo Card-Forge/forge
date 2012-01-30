@@ -2324,6 +2324,7 @@ res/cardsfolder/d/dreams_of_the_dead.txt -text
 res/cardsfolder/d/dreamscape_artist.txt svneol=native#text/plain
 res/cardsfolder/d/dreamspoiler_witches.txt svneol=native#text/plain
 res/cardsfolder/d/dreamstone_hedron.txt svneol=native#text/plain
+res/cardsfolder/d/dreamwinder.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dredge.txt svneol=native#text/plain
 res/cardsfolder/d/dreg_reaver.txt svneol=native#text/plain
 res/cardsfolder/d/dregs_of_sorrow.txt svneol=native#text/plain
@@ -7879,6 +7880,7 @@ res/cardsfolder/s/skull_fracture.txt svneol=native#text/plain
 res/cardsfolder/s/skull_of_orm.txt svneol=native#text/plain
 res/cardsfolder/s/skull_of_ramos.txt svneol=native#text/plain
 res/cardsfolder/s/skullbriar_the_walking_grave.txt -text
+res/cardsfolder/s/skullcage.txt -text svneol=unset#text/plain
 res/cardsfolder/s/skullclamp.txt svneol=native#text/plain
 res/cardsfolder/s/skullmane_baku.txt -text
 res/cardsfolder/s/skullmead_cauldron.txt svneol=native#text/plain
