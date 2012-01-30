@@ -18,12 +18,14 @@
 package forge.gui.deckeditor;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -52,8 +54,8 @@ public class CardPanelLite extends CardPanelBase {
     private final CardDetailPanel detail = new CardDetailPanel(null);
     private final CardPicturePanel picture = new CardPicturePanel(null);
     private final JButton bChangeState = new JButton();
-    private final JLabel descLabel = new JLabel();
-    private final JScrollPane description;
+    private final JTextPane description = new JTextPane();
+    private final JScrollPane descrScroll;
 
     /**
      * 
@@ -68,15 +70,19 @@ public class CardPanelLite extends CardPanelBase {
             }
         });
         this.bChangeState.setFont(new java.awt.Font("Dialog", 0, 10));
-
-        description = new JScrollPane( descLabel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER );
-        descLabel.setSize(descLabel.getWidth() - description.getVerticalScrollBar().getWidth(), descLabel.getHeight());
+        
+        descrScroll = new JScrollPane(description);
         
         this.setLayout(new MigLayout("fill, ins 0"));
         this.add(this.detail, "w 239, h 303, grow, flowy, wrap");
-        this.add(this.description, "w 239, h 303, grow, flowy, wrap");
+        this.add(this.descrScroll, "w 239, h 303, grow, flowy, wrap");
         this.add(this.bChangeState, "align 50% 0%, wrap");
         this.add(this.picture, "wmin 239, hmin 323, grow");
+        
+        description.setEditable(false);  
+        description.setCursor(null);  
+        description.setOpaque(false);  
+        description.setFocusable(false);  
     }
 
     private static Dimension shrinkedComponent = new Dimension(239, 0);
@@ -95,7 +101,7 @@ public class CardPanelLite extends CardPanelBase {
         final boolean isCard = (card != null) && (card instanceof CardPrinted);
         this.detail.setVisible(isCard);
         this.description.setVisible(!isCard);
-        description.setMaximumSize(isCard ? shrinkedComponent : expandedComponent);
+        descrScroll.setMaximumSize(isCard ? shrinkedComponent : expandedComponent);
         detail.setMaximumSize(!isCard ? shrinkedComponent : expandedComponent);
         if (isCard) {
             final Card toSet = ((CardPrinted) card).toForgeCard();
@@ -114,15 +120,17 @@ public class CardPanelLite extends CardPanelBase {
             {
                 BoosterPack booster = (BoosterPack) card;
                 CardSet set = SetUtils.getSetByCodeOrThrow(booster.getSet());
-                String tpl = "<html><b>%s booster pack.</b><br>Contains %d cards.<br><br>Buy it to reveal the cards and add them to your inventory.</html>";
-                descLabel.setText(String.format(tpl, set.getName(), set.getBoosterData().getTotal()));
+                String tpl = "%s booster pack.%n%nContains %d cards.%n%nBuy it to reveal the cards and add them to your inventory.";
+                description.setText(String.format(tpl, set.getName(), set.getBoosterData().getTotal()));
             } else if ( card instanceof PreconDeck )
             {
                 PreconDeck deck = (PreconDeck) card;
                 String desc = deck.getDescription();
-                String tpl = "<html><center>%s</center>%s<br><br>This deck contains the following cards:<br>%s</html>";
-                String decklist = StringUtils.join( deck.getDeck().getMain().toItemListString(), "<br>");
-                descLabel.setText(String.format(tpl,  deck.getName(), desc, decklist ));
+                String tpl = "%s%n%n%s%n%nThis deck contains the following cards:%n%s";
+                String decklist = StringUtils.join( deck.getDeck().getMain().toItemListString(), "\n");
+                description.setText(String.format(tpl,  deck.getName(), desc, decklist ));
+                description.setCaretPosition(0);
+
             }
         }
     }

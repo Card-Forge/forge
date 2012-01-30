@@ -90,7 +90,7 @@ public class PreconDeck implements InventoryItemFromSet {
                 else if ("set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
                     setProxy = kv[1];
                 }
-                else if ("description".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
+                else if ("Description".equalsIgnoreCase(kv[0])) {
                     descriptionProxy = kv[1];
                 }                
             }
