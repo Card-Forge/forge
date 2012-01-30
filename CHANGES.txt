@@ -301,6 +301,44 @@ Lashknife Barrier
 - Small fix to extended banlist. Storeforge->Stoneforge
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- debug output fix (AF DealDamage)
+- Changed some quest precon filenames and image paths for consistency.
+- Added Grave Power, Relentless Dead and Swift Justice precons from DKA.
+- Added a way to suppress all Replacement Effects of a card.
+- Reverted the unnecessary r13634
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- make sure Trigger, StaticAbility and ReplacementEffect obey RemoveAllAbilities in AF Animate/AnimateAll
+- CheckStyle.
+- Fixed Wanderwine Prophets. No doubt, there are many like this in there.
+- Keep track of the source of damage assigned to a Player this turn.
+- Add counting based on this: Count$OppTypeDamageThisTurn <Type>
+- convert Piston Sledge to script
+- simplified the damage code of Quietus Spike
+- Added Eldritch Onslaught and Repel the Dark precons from ISD.
+- Prevented Retaliation from possibly overwriting existing SVars.
+- Added Battle Cries, Deadspread, Devouring Skies, Doom Inevitable, Feast of Flesh and Phyrexian Poison precons from Scars block.
+- added DKA to list of sets in cardTemplateScript.py
+- Ran SetInfo and Oracle scripts.
+- spelling and grammar fix in DeckEditorShop.java
+- add access to the current set code in Card.hasProperty() in the form setXXX. So a valid expression for all Arabian Nights permanents is: Permanent.setARN
+- Sprites/skins: Everything except deck editor icons now in a sprite, and fully accessed using skin enums. This includes foils, creatures, and all icons in game.
+- Skin enums sub-categorized to allow clearer access. 
+- Default coordinates added to skin enums, so declaration and positioning happen simultaneously (in one place).
+- Removed old icons.
+- Renamed ViewQuestPreferences to QuestPreferencesHandler.
+- Bugfix: Phase toggle save
+- Bugfix: Quest pet summon
+- Bugfix: Quest data folder added to version control
+- Minor experiment.
+- Bugfix: questData.dat rename.
+- Experiment failed; quest/data folder removed from version control.
+- Bugfix to bugfix: Phase toggle prefs fixed
+- Bugfix: Quest winlose crash fixed
+- Improved auto quest data selection between matches and restarts.
+- Minor oversight fixed.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -515,6 +553,20 @@ Diviner's Wand
 Shirei, Shizo's Caretaker
 Veteran Bodyguard
 Balance of Power
+Weathered Bodyguards
+Sudden Spoiling
+Rain of Filth
+Retaliation
+Mana Flare
+Reverse Polarity
+Demonic Attorney
+Demonmail Hauberk
+Golgothian Sylex
+City in a Bottle
+Jeweled Bird
+Ensouled Scimitar
+Ouphe Vandals
+Vicious Betrayal
 
 
 end
