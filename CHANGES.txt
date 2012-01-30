@@ -338,6 +338,9 @@ Lashknife Barrier
 - Bugfix: Quest winlose crash fixed
 - Improved auto quest data selection between matches and restarts.
 - Minor oversight fixed.
+- Added the recent commit logs to changes.txt.
+- Ran set info script.
+- Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
