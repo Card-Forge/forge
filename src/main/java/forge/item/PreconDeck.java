@@ -37,6 +37,8 @@ public class PreconDeck implements InventoryItemFromSet {
     private final Deck deck;
     private final String imageFilename;
     private final String set;
+    private final String description;
+
     private final SellRules recommendedDeals;
 
     /* (non-Javadoc)
@@ -77,6 +79,7 @@ public class PreconDeck implements InventoryItemFromSet {
 
         String filenameProxy = null;
         String setProxy = "n/a";
+        String descriptionProxy = "";
         List<String> metadata = sections.get("metadata");
         if (null != metadata && !metadata.isEmpty()) {
             for (String s : metadata) {
@@ -84,14 +87,18 @@ public class PreconDeck implements InventoryItemFromSet {
                 if ("Image".equalsIgnoreCase(kv[0])) {
                     filenameProxy = kv[1];
                 }
-                if ("set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
+                else if ("set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
                     setProxy = kv[1];
                 }
+                else if ("description".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
+                    descriptionProxy = kv[1];
+                }                
             }
         }
         imageFilename = filenameProxy;
         set = setProxy;
         recommendedDeals = new SellRules(sections.get("shop"));
+        description = descriptionProxy;
     }
 
 
@@ -121,4 +128,9 @@ public class PreconDeck implements InventoryItemFromSet {
     public String getSet() {
         return set;
     }
+    
+    public final String getDescription() {
+        return description;
+    }
+    
 }

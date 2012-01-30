@@ -17,17 +17,27 @@
  */
 package forge.gui.deckeditor;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
+import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
+import forge.SetUtils;
+import forge.card.CardSet;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
+import forge.item.BoosterPack;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.item.PreconDeck;
 
 /**
  * This panel is to be placed in the right part of a deck editor.
@@ -42,6 +52,8 @@ public class CardPanelLite extends CardPanelBase {
     private final CardDetailPanel detail = new CardDetailPanel(null);
     private final CardPicturePanel picture = new CardPicturePanel(null);
     private final JButton bChangeState = new JButton();
+    private final JLabel descLabel = new JLabel();
+    private final JScrollPane description;
 
     /**
      * 
@@ -57,12 +69,19 @@ public class CardPanelLite extends CardPanelBase {
         });
         this.bChangeState.setFont(new java.awt.Font("Dialog", 0, 10));
 
+        description = new JScrollPane( descLabel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER );
+        descLabel.setSize(descLabel.getWidth() - description.getVerticalScrollBar().getWidth(), descLabel.getHeight());
+        
         this.setLayout(new MigLayout("fill, ins 0"));
         this.add(this.detail, "w 239, h 303, grow, flowy, wrap");
+        this.add(this.description, "w 239, h 303, grow, flowy, wrap");
         this.add(this.bChangeState, "align 50% 0%, wrap");
         this.add(this.picture, "wmin 239, hmin 323, grow");
     }
 
+    private static Dimension shrinkedComponent = new Dimension(239, 0);
+    private static Dimension expandedComponent = new Dimension(239, 303);
+    
     /**
      * 
      * ShowCard.
@@ -75,6 +94,9 @@ public class CardPanelLite extends CardPanelBase {
         this.picture.setCard(card);
         final boolean isCard = (card != null) && (card instanceof CardPrinted);
         this.detail.setVisible(isCard);
+        this.description.setVisible(!isCard);
+        description.setMaximumSize(isCard ? shrinkedComponent : expandedComponent);
+        detail.setMaximumSize(!isCard ? shrinkedComponent : expandedComponent);
         if (isCard) {
             final Card toSet = ((CardPrinted) card).toForgeCard();
 
@@ -86,6 +108,21 @@ public class CardPanelLite extends CardPanelBase {
                 } else {
                     this.bChangeState.setText("Transform");
                 }
+            }
+        } else {
+            if( card instanceof BoosterPack )
+            {
+                BoosterPack booster = (BoosterPack) card;
+                CardSet set = SetUtils.getSetByCodeOrThrow(booster.getSet());
+                String tpl = "<html><b>%s booster pack.</b><br>Contains %d cards.<br><br>Buy it to reveal the cards and add them to your inventory.</html>";
+                descLabel.setText(String.format(tpl, set.getName(), set.getBoosterData().getTotal()));
+            } else if ( card instanceof PreconDeck )
+            {
+                PreconDeck deck = (PreconDeck) card;
+                String desc = deck.getDescription();
+                String tpl = "<html><center>%s</center>%s<br><br>This deck contains the following cards:<br>%s</html>";
+                String decklist = StringUtils.join( deck.getDeck().getMain().toItemListString(), "<br>");
+                descLabel.setText(String.format(tpl,  deck.getName(), desc, decklist ));
             }
         }
     }
