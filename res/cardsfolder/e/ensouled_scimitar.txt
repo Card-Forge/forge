@@ -7,4 +7,5 @@ A:AB$ Attach | Cost$ 2 | ValidTgts$ Creature.YouCtrl | IsPresent$ Card.Self+nonC
 S:Mode$ Continuous | Affected$ Card.EquippedBy | IsPresent$ Card.Self+nonCreature | AddPower$ 1 | AddToughness$ 5 | Description$ Equipped creature gets +1/+5.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ensouled_scimitar.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/119.jpg
 End

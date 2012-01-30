@@ -8,4 +8,5 @@ SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ouphe_vandals.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/90.jpg
 End
