@@ -9243,6 +9243,7 @@ res/cardsfolder/t/turf_wound.txt -text
 res/cardsfolder/t/turn_aside.txt svneol=native#text/plain
 res/cardsfolder/t/turn_the_tide.txt svneol=native#text/plain
 res/cardsfolder/t/turn_to_dust.txt svneol=native#text/plain
+res/cardsfolder/t/turn_to_frog.txt -text
 res/cardsfolder/t/turn_to_mist.txt svneol=native#text/plain
 res/cardsfolder/t/turn_to_slag.txt svneol=native#text/plain
 res/cardsfolder/t/turnabout.txt svneol=native#text/plain
