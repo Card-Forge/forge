@@ -190,6 +190,7 @@ public class HomeTopLevel extends FPanel {
     public void showDraftMenu() {
         clearToggles();
         btnDraft.setToggled(true);
+        btnDraft.grabFocus();
         pnlContent.removeAll();
         pnlContent.add(draft, "w 100%!, h 100%!");
         pnlContent.revalidate();
@@ -200,6 +201,7 @@ public class HomeTopLevel extends FPanel {
     public void showSealedMenu() {
         clearToggles();
         btnSealed.setToggled(true);
+        btnSealed.grabFocus();
         pnlContent.removeAll();
         pnlContent.add(sealed, "w 100%!, h 100%!");
         pnlContent.revalidate();
@@ -210,6 +212,7 @@ public class HomeTopLevel extends FPanel {
     public void showQuestMenu() {
         clearToggles();
         btnQuest.setToggled(true);
+        btnQuest.grabFocus();
         pnlContent.removeAll();
         pnlContent.add(quest, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
         pnlContent.revalidate();
@@ -220,6 +223,7 @@ public class HomeTopLevel extends FPanel {
     public void showSettingsMenu() {
         clearToggles();
         btnSettings.setToggled(true);
+        btnSettings.grabFocus();
         pnlContent.removeAll();
         pnlContent.add(settings, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
         pnlContent.revalidate();
@@ -230,6 +234,7 @@ public class HomeTopLevel extends FPanel {
     public void showUtilitiesMenu() {
         clearToggles();
         btnUtilities.setToggled(true);
+        btnUtilities.grabFocus();
         pnlContent.removeAll();
         pnlContent.add(utilities, "w 100%!, h 100%!");
         pnlContent.revalidate();
