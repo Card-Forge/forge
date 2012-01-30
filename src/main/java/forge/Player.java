@@ -59,7 +59,7 @@ public abstract class Player extends GameEntity {
     private int startingLife;
 
     /** The assigned damage. */
-    private Map<Card,Integer> assignedDamage = new HashMap<Card, Integer>();
+    private Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
 
     /** The life lost this turn. */
     private int lifeLostThisTurn = 0;
@@ -819,9 +819,6 @@ public abstract class Player extends GameEntity {
      * <p>
      * Setter for the field <code>assignedDamage</code>.
      * </p>
-     * 
-     * @param n
-     *            a int.
      */
     public final void clearAssignedDamage() {
         this.assignedDamage.clear();
@@ -834,6 +831,8 @@ public abstract class Player extends GameEntity {
      * 
      * @param n
      *            a int.
+     * @param source
+     *            a {@link forge.Card} object.
      */
     public final void addAssignedDamage(final int n, final Card source) {
         this.assignedDamage.put(source, n);
@@ -859,10 +858,13 @@ public abstract class Player extends GameEntity {
      * Getter for the field <code>assignedDamage</code>.
      * </p>
      * 
+     * @param type
+     *            a string.
+     * 
      * @return a int.
      */
     public final int getAssignedDamage(String type) {
-        Map<Card,Integer> valueMap = new HashMap<Card, Integer>();
+        Map<Card, Integer> valueMap = new HashMap<Card, Integer>();
         for (Card c : assignedDamage.keySet()) {
             if (c.isType(type)) {
                 valueMap.put(c, assignedDamage.get(c));
