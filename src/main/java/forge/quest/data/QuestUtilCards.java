@@ -97,9 +97,9 @@ public final class QuestUtilCards {
      * @return the array list
      */
     public ArrayList<CardPrinted> addCards(final Predicate<CardPrinted> fSets) {
-        final int nCommon = qpref.getPreferenceInt(QPref.BOOSTER_COMMONS);
-        final int nUncommon = qpref.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
-        final int nRare = qpref.getPreferenceInt(QPref.BOOSTER_RARES);
+        final int nCommon = this.qpref.getPreferenceInt(QPref.BOOSTER_COMMONS);
+        final int nUncommon = this.qpref.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
+        final int nRare = this.qpref.getPreferenceInt(QPref.BOOSTER_RARES);
 
         final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
         newCards.addAll(BoosterUtils.generateCards(fSets, nCommon, CardRarity.Common, null));
@@ -170,9 +170,9 @@ public final class QuestUtilCards {
      *            the idx difficulty
      */
     public void setupNewGameCardPool(final Predicate<CardPrinted> filter, final int idxDifficulty) {
-        final int nC = qpref.getPreferenceInt(QPref.STARTING_COMMONS, idxDifficulty);
-        final int nU = qpref.getPreferenceInt(QPref.STARTING_UNCOMMONS, idxDifficulty);
-        final int nR = qpref.getPreferenceInt(QPref.STARTING_RARES, idxDifficulty);
+        final int nC = this.qpref.getPreferenceInt(QPref.STARTING_COMMONS, idxDifficulty);
+        final int nU = this.qpref.getPreferenceInt(QPref.STARTING_UNCOMMONS, idxDifficulty);
+        final int nR = this.qpref.getPreferenceInt(QPref.STARTING_RARES, idxDifficulty);
 
         this.addAllCards(BoosterUtils.getQuestStarterDeck(filter, nC, nU, nR));
     }
@@ -209,6 +209,12 @@ public final class QuestUtilCards {
         }
     }
 
+    /**
+     * Buy precon deck.
+     *
+     * @param precon the precon
+     * @param value the value
+     */
     public void buyPreconDeck(final PreconDeck precon, final int value) {
         if (this.q.getCredits() >= value) {
             this.q.setCredits(this.q.getCredits() - value);
@@ -227,7 +233,7 @@ public final class QuestUtilCards {
      *            the price
      */
     public void sellCard(final CardPrinted card, final int price) {
-        sellCard(card, price, true);
+        this.sellCard(card, price, true);
     }
 
     /**
@@ -308,27 +314,46 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.SETS_IN_EXT;
+    
+    /** The filter t2booster. */
     final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
             CardSet.Predicates.Presets.SETS_IN_STANDARD);
+    
+    /** The filter ext but t2. */
     final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
-            Predicate.and(filterExt, Predicate.not(CardSet.Predicates.Presets.SETS_IN_STANDARD)));
+            Predicate.and(this.filterExt, Predicate.not(CardSet.Predicates.Presets.SETS_IN_STANDARD)));
+    
+    /** The filter not ext. */
     final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
-            Predicate.not(filterExt));
+            Predicate.not(this.filterExt));
 
-    public void generateBoostersInShop(int count) {
+    /**
+     * Generate boosters in shop.
+     *
+     * @param count the count
+     */
+    public void generateBoostersInShop(final int count) {
         for (int i = 0; i < count; i++) {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
-            final Predicate<CardSet> filter = rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2
-                    : filterNotExt);
+            final Predicate<CardSet> filter = rollD100 < 40 ? this.filterT2booster
+                    : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
             this.q.getShopList().addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.FN_FROM_SET));
         }
     }
 
-    public void generatePreconsInShop(int count) {
-        List<PreconDeck> validDecks = QuestData.getPreconManager().getDecksForCurrent(q);
+    /**
+     * Generate precons in shop.
+     *
+     * @param count the count
+     */
+    public void generatePreconsInShop(final int count) {
+        final List<PreconDeck> validDecks = QuestData.getPreconManager().getDecksForCurrent(this.q);
         this.q.getShopList().addAllCards(Predicate.getTrue(PreconDeck.class).random(validDecks, count));
     }
 
+    /**
+     * Generate cards in shop.
+     */
     public void generateCardsInShop() {
         final BoosterGenerator pack = new BoosterGenerator(CardDb.instance().getAllCards());
 
@@ -336,14 +361,13 @@ public final class QuestUtilCards {
         final int winPacks = this.q.getWin() / 10;
         final int totalPacks = Math.min(levelPacks + winPacks, 6);
 
-
         this.q.getShopList().clear();
         for (int i = 0; i < totalPacks; i++) {
             this.q.getShopList().addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0, 0, 0));
         }
 
-        generateBoostersInShop(totalPacks);
-        generatePreconsInShop(totalPacks);
+        this.generateBoostersInShop(totalPacks);
+        this.generatePreconsInShop(totalPacks);
 
         this.addBasicLands(this.q.getShopList(), 10, 5);
     }

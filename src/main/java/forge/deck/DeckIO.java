@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.deck;
 
 import java.io.BufferedWriter;
@@ -37,9 +54,9 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class DeckIO {
 
@@ -49,7 +66,7 @@ public class DeckIO {
     private static final String PLAYER = "Player";
     private static final String CSTM_POOL = "Custom Pool";
     /** Constant <code>BDKFileFilter</code>. */
-    static FilenameFilter bdkFileFilter = new FilenameFilter() {
+    private static FilenameFilter bdkFileFilter = new FilenameFilter() {
         @Override
         public boolean accept(final File dir, final String name) {
             return name.endsWith(".bdk");
@@ -86,6 +103,7 @@ public class DeckIO {
             return "Simple Deck File .html";
         }
     };
+
     /**
      * <p>
      * readDeck.
@@ -97,9 +115,15 @@ public class DeckIO {
      */
 
     public static Deck readDeck(final File deckFile) {
-        return readDeck(FileUtil.readFile(deckFile));
+        return DeckIO.readDeck(FileUtil.readFile(deckFile));
     }
 
+    /**
+     * Read deck.
+     *
+     * @param deckFileLines the deck file lines
+     * @return the deck
+     */
     public static Deck readDeck(final List<String> deckFileLines) {
         final Map<String, List<String>> sections = SectionUtil.parseSections(deckFileLines);
         if (sections.isEmpty()) {
@@ -110,12 +134,12 @@ public class DeckIO {
 
         final String firstLine = deckFileLines.get(0);
         if (!firstLine.startsWith("[") || firstLine.equalsIgnoreCase("[general]")) {
-            readDeckOldMetadata(deckFileLines.iterator(), d);
+            DeckIO.readDeckOldMetadata(deckFileLines.iterator(), d);
         } else {
-            readDeckMetadata(sections.get("metadata"), d);
+            DeckIO.readDeckMetadata(sections.get("metadata"), d);
         }
-        d.setMain(readCardList(sections.get("main")));
-        d.setSideboard(readCardList(sections.get("sideboard")));
+        d.setMain(DeckIO.readCardList(sections.get("main")));
+        d.setSideboard(DeckIO.readCardList(sections.get("sideboard")));
 
         return d;
     }
@@ -136,19 +160,19 @@ public class DeckIO {
                 value = linedata[1];
             }
 
-            if (NAME.equalsIgnoreCase(field)) {
+            if (DeckIO.NAME.equalsIgnoreCase(field)) {
                 d.setName(value);
 
-            } else if (COMMENT.equalsIgnoreCase(field)) {
+            } else if (DeckIO.COMMENT.equalsIgnoreCase(field)) {
                 d.setComment(value);
 
-            } else if (DECK_TYPE.equalsIgnoreCase(field)) {
+            } else if (DeckIO.DECK_TYPE.equalsIgnoreCase(field)) {
                 d.setDeckType(GameType.smartValueOf(value));
 
-            } else if (CSTM_POOL.equalsIgnoreCase(field)) {
+            } else if (DeckIO.CSTM_POOL.equalsIgnoreCase(field)) {
                 d.setCustomPool(value.equalsIgnoreCase("true"));
 
-            } else if (PLAYER.equalsIgnoreCase(field)) {
+            } else if (DeckIO.PLAYER.equalsIgnoreCase(field)) {
                 if ("human".equalsIgnoreCase(value)) {
                     d.setPlayerType(PlayerType.HUMAN);
 
@@ -266,9 +290,9 @@ public class DeckIO {
     public static File makeFileName(final String deckName, final GameType deckType) {
         final File path = ForgeProps.getFile(NewConstants.NEW_DECKS);
         if (deckType == GameType.Draft) {
-            return new File(path, deriveFileName(deckName) + ".bdk");
+            return new File(path, DeckIO.deriveFileName(deckName) + ".bdk");
         } else {
-            return new File(path, deriveFileName(deckName) + ".dck");
+            return new File(path, DeckIO.deriveFileName(deckName) + ".dck");
         }
     }
 
@@ -281,7 +305,7 @@ public class DeckIO {
      * @return a File
      */
     public static File makeFileName(final Deck deck) {
-        return makeFileName(deck.getName(), deck.getDeckType());
+        return DeckIO.makeFileName(deck.getName(), deck.getDeckType());
     }
 
     /**
@@ -292,10 +316,10 @@ public class DeckIO {
      *            a Deck[]
      */
     public static void writeDraftDecks(final Deck[] drafts) {
-        final File f = makeFileName(drafts[0]);
+        final File f = DeckIO.makeFileName(drafts[0]);
         f.mkdir();
         for (int i = 0; i < drafts.length; i++) {
-            FileUtil.writeFile(new File(f, i + ".dck"), serializeDeck(drafts[i]));
+            FileUtil.writeFile(new File(f, i + ".dck"), DeckIO.serializeDeck(drafts[i]));
         }
     }
 
@@ -315,25 +339,25 @@ public class DeckIO {
         final List<String> out = new ArrayList<String>();
         out.add(String.format("[metadata]"));
 
-        out.add(String.format("%s=%s", NAME, d.getName().replaceAll("\n", "")));
-        out.add(String.format("%s=%s", DECK_TYPE, d.getDeckType()));
+        out.add(String.format("%s=%s", DeckIO.NAME, d.getName().replaceAll("\n", "")));
+        out.add(String.format("%s=%s", DeckIO.DECK_TYPE, d.getDeckType()));
         // these are optional
         if (d.getComment() != null) {
-            out.add(String.format("%s=%s", COMMENT, d.getComment().replaceAll("\n", "")));
+            out.add(String.format("%s=%s", DeckIO.COMMENT, d.getComment().replaceAll("\n", "")));
         }
         if (d.getPlayerType() != null) {
-            out.add(String.format("%s=%s", PLAYER, d.getPlayerType()));
+            out.add(String.format("%s=%s", DeckIO.PLAYER, d.getPlayerType()));
         }
 
         if (d.isCustomPool()) {
-            out.add(String.format("%s=%s", CSTM_POOL, "true"));
+            out.add(String.format("%s=%s", DeckIO.CSTM_POOL, "true"));
         }
 
         out.add(String.format("%s", "[main]"));
-        out.addAll(writeCardPool(d.getMain()));
+        out.addAll(DeckIO.writeCardPool(d.getMain()));
 
         out.add(String.format("%s", "[sideboard]"));
-        out.addAll(writeCardPool(d.getSideboard()));
+        out.addAll(DeckIO.writeCardPool(d.getSideboard()));
         return out;
     }
 
@@ -442,7 +466,7 @@ public class DeckIO {
      *            a {@link java.io.File} object.
      */
     public static void writeDeck(final Deck d, final File f) {
-        FileUtil.writeFile(f, serializeDeck(d));
+        FileUtil.writeFile(f, DeckIO.serializeDeck(d));
     }
 
     /**
@@ -458,7 +482,7 @@ public class DeckIO {
     public static void writeDeckHtml(final Deck d, final File f) {
         try {
             final BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-            writeDeckHtml(d, writer);
+            DeckIO.writeDeckHtml(d, writer);
             writer.close();
         } catch (final IOException e) {
             throw new RuntimeException(e);
@@ -469,12 +493,14 @@ public class DeckIO {
      * <p>
      * readAllDecks.
      * </p>
-     * @return
+     *
+     * @param deckDir the deck dir
+     * @return the map
      */
-    public static final Map<String, Deck> readAllDecks(File deckDir) {
-        Map<String, Deck> result = new HashMap<String, Deck>();
+    public static final Map<String, Deck> readAllDecks(final File deckDir) {
+        final Map<String, Deck> result = new HashMap<String, Deck>();
         final List<String> decksThatFailedToLoad = new ArrayList<String>();
-        File[] files = deckDir.listFiles(DeckIO.DCK_FILE_FILTER);
+        final File[] files = deckDir.listFiles(DeckIO.DCK_FILE_FILTER);
         for (final File file : files) {
             try {
                 final Deck newDeck = DeckIO.readDeck(file);
@@ -495,9 +521,15 @@ public class DeckIO {
         return result;
     }
 
-    public static final Map<String, Deck[]> readAllDraftDecks(File deckDir) {
-        Map<String, Deck[]> result = new HashMap<String, Deck[]>();
-        File[] files = deckDir.listFiles(DeckIO.bdkFileFilter);
+    /**
+     * Read all draft decks.
+     *
+     * @param deckDir the deck dir
+     * @return the map
+     */
+    public static final Map<String, Deck[]> readAllDraftDecks(final File deckDir) {
+        final Map<String, Deck[]> result = new HashMap<String, Deck[]>();
+        final File[] files = deckDir.listFiles(DeckIO.bdkFileFilter);
         for (final File file : files) {
             final Deck[] d = new Deck[8];
 

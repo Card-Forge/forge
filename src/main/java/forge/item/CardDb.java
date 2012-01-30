@@ -48,7 +48,7 @@ import forge.card.MtgDataParser;
 public final class CardDb {
     private static volatile CardDb onlyInstance = null; // 'volatile' keyword
                                                         // makes this working
-    private final String FOIL_SUFFIX = " foil";
+    private final String foilSuffix = " foil";
 
     /**
      * Instance.
@@ -190,11 +190,17 @@ public final class CardDb {
         return new ImmutablePair<String, String>(cardName, null);
     }
 
-    private boolean isFoil(String cardName) {
-        return cardName.toLowerCase().endsWith(FOIL_SUFFIX) && cardName.length() > 5;
+    private boolean isFoil(final String cardName) {
+        return cardName.toLowerCase().endsWith(this.foilSuffix) && (cardName.length() > 5);
     }
 
-    public String removeFoilSuffix(String cardName) {
+    /**
+     * Removes the foil suffix.
+     *
+     * @param cardName the card name
+     * @return the string
+     */
+    public String removeFoilSuffix(final String cardName) {
         return cardName.substring(0, cardName.length() - 5);
     }
 
@@ -206,8 +212,8 @@ public final class CardDb {
      * @return true, if is card supported
      */
     public boolean isCardSupported(final String cardName0) {
-        boolean isFoil = isFoil(cardName0);
-        String cardName = isFoil ? removeFoilSuffix(cardName0) : cardName0;
+        final boolean isFoil = this.isFoil(cardName0);
+        final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
         if (nameWithSet.right == null) {
             return this.uniqueCards.containsKey(nameWithSet.left.toLowerCase());
@@ -231,7 +237,7 @@ public final class CardDb {
      * @return the card
      */
     public CardPrinted getCard(final String name) {
-        return getCard(name, false);
+        return this.getCard(name, false);
     }
 
     // Advanced fetch by name+set
@@ -317,6 +323,12 @@ public final class CardDb {
         return result;
     }
 
+    /**
+     * Gets the cards from latest sets.
+     *
+     * @param names the names
+     * @return the cards from latest sets
+     */
     public List<CardPrinted> getCardsFromLatestSets(final Iterable<String> names) {
         final List<CardPrinted> result = new ArrayList<CardPrinted>();
         for (final String name : names) {
@@ -346,13 +358,19 @@ public final class CardDb {
         return this.allCardsFlat;
     }
 
-
-    public CardPrinted getCard(String name0, boolean fromLatestSet) {
+    /**
+     * Gets the card.
+     *
+     * @param name0 the name0
+     * @param fromLatestSet the from latest set
+     * @return the card
+     */
+    public CardPrinted getCard(final String name0, final boolean fromLatestSet) {
         // Sometimes they read from decks things like "CardName|Set" - but we
         // can handle it
 
-        boolean isFoil = isFoil(name0);
-        String name = isFoil ? removeFoilSuffix(name0) : name0;
+        final boolean isFoil = this.isFoil(name0);
+        final String name = isFoil ? this.removeFoilSuffix(name0) : name0;
         CardPrinted result = null;
 
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(name);
@@ -366,8 +384,8 @@ public final class CardDb {
                 }
             } else {
                 // OK, plain name here
-                Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
-                List<CardPrinted> namedCards = predicate.select(this.allCardsFlat);
+                final Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
+                final List<CardPrinted> namedCards = predicate.select(this.allCardsFlat);
                 if (namedCards.isEmpty()) {
                     throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
                 }
@@ -375,9 +393,9 @@ public final class CardDb {
                 // Find card with maximal set index
                 result = namedCards.get(0);
                 int resIndex = SetUtils.getSetByCode((result).getSet()).getIndex();
-                for (CardPrinted card : namedCards) {
+                for (final CardPrinted card : namedCards) {
 
-                    int thisIndex = SetUtils.getSetByCode((card).getSet()).getIndex();
+                    final int thisIndex = SetUtils.getSetByCode((card).getSet()).getIndex();
                     if (thisIndex > resIndex) {
                         result = card;
                         resIndex = thisIndex;
