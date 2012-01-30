@@ -1460,6 +1460,7 @@ res/cardsfolder/c/citanul_druid.txt svneol=native#text/plain
 res/cardsfolder/c/citanul_flute.txt svneol=native#text/plain
 res/cardsfolder/c/citanul_hierophants.txt svneol=native#text/plain
 res/cardsfolder/c/citanul_woodreaders.txt svneol=native#text/plain
+res/cardsfolder/c/city_in_a_bottle.txt -text
 res/cardsfolder/c/city_of_brass.txt svneol=native#text/plain
 res/cardsfolder/c/city_of_shadows.txt svneol=native#text/plain
 res/cardsfolder/c/city_of_solitude.txt -text
