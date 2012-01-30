@@ -7995,6 +7995,7 @@ res/cardsfolder/s/snake_basket.txt svneol=native#text/plain
 res/cardsfolder/s/snake_cult_initiation.txt svneol=native#text/plain
 res/cardsfolder/s/snake_pit.txt svneol=native#text/plain
 res/cardsfolder/s/snake_umbra.txt svneol=native#text/plain
+res/cardsfolder/s/snakeform.txt -text
 res/cardsfolder/s/snap.txt svneol=native#text/plain
 res/cardsfolder/s/snapback.txt svneol=native#text/plain
 res/cardsfolder/s/snapcaster_mage.txt -text
