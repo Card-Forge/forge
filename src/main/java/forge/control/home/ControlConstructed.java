@@ -395,9 +395,8 @@ public class ControlConstructed {
             // After generating card lists, convert to deck and save.
             final Deck deck = new Deck(GameType.Constructed);
 
-            for (int i = 0; i < cards.size(); i++) {
-                deck.addMain(cards.get(i).getName());
-            }
+            deck.getMain().add(cards);
+
 
             Constant.Runtime.HUMAN_DECK[0] = deck;
         }
@@ -409,10 +408,7 @@ public class ControlConstructed {
 
             // After generating card lists, convert to deck and save.
             final Deck deck = new Deck(GameType.Constructed);
-
-            for (int i = 0; i < cards.size(); i++) {
-                deck.addMain(cards.get(i).getName());
-            }
+            deck.getMain().add(cards);
 
             Constant.Runtime.HUMAN_DECK[0] = deck;
         }
@@ -451,10 +447,7 @@ public class ControlConstructed {
 
             // After generating card lists, convert to deck and save.
             final Deck deck = new Deck(GameType.Constructed);
-
-            for (int i = 0; i < cards.size(); i++) {
-                deck.addMain(cards.get(i).getName());
-            }
+            deck.getMain().add(cards);
 
             Constant.Runtime.COMPUTER_DECK[0] = deck;
         }
@@ -462,14 +455,10 @@ public class ControlConstructed {
         // AI: theme deck generation
         else if (currentAISelection.getName().equals("lstThemesAI")) {
             GenerateThemeDeck gen = new GenerateThemeDeck();
-            cards = gen.getThemeDeck(ai0[0], 60);
 
             // After generating card lists, convert to deck and save.
             final Deck deck = new Deck(GameType.Constructed);
-
-            for (int i = 0; i < cards.size(); i++) {
-                deck.addMain(cards.get(i).getName());
-            }
+            deck.getMain().add(gen.getThemeDeck(ai0[0], 60));
 
             Constant.Runtime.COMPUTER_DECK[0] = deck;
         }

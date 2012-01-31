@@ -243,11 +243,11 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
     @Override
     public final Deck getDeck() {
         final Deck deck = new Deck(this.gameType);
-        deck.addMain(ItemPool.createFrom(this.getBottom(), CardPrinted.class));
+        deck.getMain().addAll(this.getBottom());
 
         // if sealed or draft, move "top" to sideboard
         if (this.gameType.isLimited() && (this.gameType != GameType.Quest)) {
-            deck.addSideboard(ItemPool.createFrom(this.getTop(), CardPrinted.class));
+            deck.getSideboard().addAll(this.getTop());
         }
         return deck;
     } // getDeck()

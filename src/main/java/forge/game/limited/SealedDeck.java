@@ -437,13 +437,10 @@ public class SealedDeck {
                     || deck.get(i).getName().equals("Forest")) {
                 System.out.println("Heyo!");
             }
-            aiDeck.addMain(deck.get(i).getName() + "|" + deck.get(i).getCurSetCode());
+            aiDeck.getMain().add(deck.get(i));
         }
 
-        for (i = 0; i < aiCardpool.size(); i++) {
-            aiDeck.addSideboard(aiCardpool.get(i).getName() + "|" + aiCardpool.get(i).getCurSetCode());
-        }
-
+        aiDeck.getSideboard().add(aiCardpool);
         return aiDeck;
     }
 

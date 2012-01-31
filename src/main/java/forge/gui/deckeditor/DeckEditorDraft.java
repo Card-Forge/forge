@@ -50,7 +50,6 @@ import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
@@ -300,17 +299,15 @@ public class DeckEditorDraft extends DeckEditorBase {
         Constant.Runtime.HUMAN_DECK[0] = deck;
 
         // add sideboard to deck
-        final ItemPoolView<CardPrinted> list = ItemPool.createFrom(this.getBottomTableWithCards().getCards(),
-                CardPrinted.class);
-        deck.addSideboard(list);
+        deck.getSideboard().addAll(this.getBottomTableWithCards().getCards());
 
         final String landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
-        deck.addSideboard(CardDb.instance().getCard("Forest", landSet), landsCount);
-        deck.addSideboard(CardDb.instance().getCard("Mountain", landSet), landsCount);
-        deck.addSideboard(CardDb.instance().getCard("Swamp", landSet), landsCount);
-        deck.addSideboard(CardDb.instance().getCard("Island", landSet), landsCount);
-        deck.addSideboard(CardDb.instance().getCard("Plains", landSet), landsCount);
+        deck.getSideboard().add(CardDb.instance().getCard("Forest", landSet), landsCount);
+        deck.getSideboard().add(CardDb.instance().getCard("Mountain", landSet), landsCount);
+        deck.getSideboard().add(CardDb.instance().getCard("Swamp", landSet), landsCount);
+        deck.getSideboard().add(CardDb.instance().getCard("Island", landSet), landsCount);
+        deck.getSideboard().add(CardDb.instance().getCard("Plains", landSet), landsCount);
 
         return deck;
     } // getPlayersDeck()

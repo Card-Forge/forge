@@ -261,7 +261,7 @@ public final class QuestUtilCards {
         final int leftInPool = this.q.getCardPool().count(card);
         // remove sold cards from all decks:
         for (final Deck deck : this.q.getMyDecks().values()) {
-            deck.removeMain(card, deck.getMain().count(card) - leftInPool);
+            deck.getMain().remove(card, deck.getMain().count(card) - leftInPool);
         }
     }
 

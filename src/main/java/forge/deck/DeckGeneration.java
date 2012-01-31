@@ -20,7 +20,6 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.Random;
 
-import forge.CardList;
 import forge.Constant;
 import forge.PlayerType;
 import forge.deck.generate.Generate2ColorDeck;
@@ -98,12 +97,8 @@ public abstract class DeckGeneration {
      */
     private static Deck generateConstructedDeck() {
         final GenerateConstructedDeck gen = new GenerateConstructedDeck();
-        final CardList name = gen.generateDeck();
         final Deck deck = new Deck(GameType.Constructed);
-
-        for (int i = 0; i < 60; i++) {
-            deck.addMain(name.get(i).getName());
-        }
+        deck.getMain().add(gen.generateDeck());
         return deck;
     }
 
@@ -116,12 +111,8 @@ public abstract class DeckGeneration {
      */
     private static Deck generateConstructed3ColorDeck() {
         final GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
-        final CardList name = gen.generate3ColorDeck();
         final Deck deck = new Deck(GameType.Constructed);
-
-        for (int i = 0; i < 60; i++) {
-            deck.addMain(name.get(i).getName());
-        }
+        deck.getMain().add(gen.generate3ColorDeck());
         return deck;
     }
 
@@ -134,12 +125,8 @@ public abstract class DeckGeneration {
      */
     private static Deck generateConstructed5ColorDeck() {
         final GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
-        final CardList name = gen.generate5ColorDeck();
         final Deck deck = new Deck(GameType.Constructed);
-
-        for (int i = 0; i < 60; i++) {
-            deck.addMain(name.get(i).getName());
-        }
+        deck.getMain().add(gen.generate5ColorDeck());
         return deck;
     }
 
@@ -164,12 +151,8 @@ public abstract class DeckGeneration {
             stDeck = o.toString();
         }
 
-        final CardList td = gen.getThemeDeck(stDeck, 60);
         final Deck deck = new Deck(GameType.Constructed);
-
-        for (int i = 0; i < td.size(); i++) {
-            deck.addMain(td.get(i).getName());
-        }
+        deck.getMain().add(gen.getThemeDeck(stDeck, 60));
 
         return deck;
     }
@@ -217,14 +200,9 @@ public abstract class DeckGeneration {
             c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
         }
         final Generate2ColorDeck gen = new Generate2ColorDeck(c1, c2);
-        final CardList d = gen.get2ColorDeck(60, p);
 
         final Deck deck = new Deck(GameType.Constructed);
-
-        for (int i = 0; i < d.size(); i++) {
-            deck.addMain(d.get(i).getName());
-        }
-
+        deck.getMain().add(gen.get2ColorDeck(60, p));
         return deck;
     }
 
@@ -282,16 +260,9 @@ public abstract class DeckGeneration {
             c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
         }
         final Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
-        final CardList d = gen.get3ColorDeck(60, p);
-
         final Deck deck = new Deck(GameType.Constructed);
-
-        for (int i = 0; i < d.size(); i++) {
-            deck.addMain(d.get(i).getName());
-        }
-
+        deck.getMain().add(gen.get3ColorDeck(60, p));
         return deck;
-
     }
 
     /**
@@ -315,14 +286,8 @@ public abstract class DeckGeneration {
         // colors.add("green");
 
         final Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
-        final CardList d = gen.get5ColorDeck(60, p);
-
         final Deck deck = new Deck(GameType.Constructed);
-
-        for (int i = 0; i < d.size(); i++) {
-            deck.addMain(d.get(i).getName());
-        }
-
+        deck.getMain().add(gen.get5ColorDeck(60, p));
         return deck;
 
     }

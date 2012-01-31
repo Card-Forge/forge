@@ -98,7 +98,7 @@ public class ControlWinLose {
                 //remove compy's ante cards form his deck
                 for (Card c : compAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
-                    cDeck.removeMain(toRemove, 1);
+                    cDeck.getMain().remove(toRemove);
                 }
 
                 Constant.Runtime.COMPUTER_DECK[0] = cDeck;
@@ -106,8 +106,7 @@ public class ControlWinLose {
                 List<Card> o = GuiUtils.getChoicesOptional("Select cards to add to your deck", compAntes.toArray());
                 if (null != o) {
                     for (Card c : o) {
-                        CardPrinted toAdd = CardDb.instance().getCard(c);
-                        hDeck.addMain(toAdd, 1);
+                        hDeck.getMain().add(c);
                     }
                 }
 
@@ -117,7 +116,7 @@ public class ControlWinLose {
                 //remove compy's ante cards form his deck
                 for (Card c : humanAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
-                    hDeck.removeMain(toRemove, 1);
+                    hDeck.getMain().remove(toRemove);
                 }
                 Constant.Runtime.HUMAN_DECK[0] = hDeck;
             }

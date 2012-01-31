@@ -184,11 +184,11 @@ public class ControlSealed {
 
         final ItemPool<CardPrinted> sDeck = sd.getCardpool();
 
-        deck.addSideboard(sDeck);
+        deck.getSideboard().addAll(sDeck);
 
         for (final String element : Constant.Color.BASIC_LANDS) {
             for (int j = 0; j < 18; j++) {
-                deck.addSideboard(element + "|" + sd.getLandSetCode()[0]);
+                deck.getSideboard().add(element, sd.getLandSetCode()[0]);
             }
         }
 

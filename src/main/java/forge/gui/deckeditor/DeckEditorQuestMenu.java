@@ -579,7 +579,7 @@ public class DeckEditorQuestMenu extends JMenuBar {
     private Deck cardPoolToDeck(final ItemPoolView<InventoryItem> list) {
         // put CardPool into Deck main
         final Deck deck = new Deck(GameType.Sealed);
-        deck.addMain(ItemPool.createFrom(list, CardPrinted.class));
+        deck.getMain().addAll(list);
         return deck;
     }
 

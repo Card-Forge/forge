@@ -21,10 +21,6 @@ import java.io.Serializable;
 
 import forge.PlayerType;
 import forge.game.GameType;
-import forge.item.CardDb;
-import forge.item.CardPrinted;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 
 /**
  * <p>
@@ -33,8 +29,7 @@ import forge.item.ItemPoolView;
  * 
  * The set of MTG legal cards that become player's library when the game starts.
  * Any other data is not part of a deck and should be stored elsewhere. Current
- * fields allowed for deck metadata are Name, Title, Description, Difficulty,
- * Icon, Deck Type.
+ * fields allowed for deck metadata are Name, Title, Description and Deck Type.
  * 
  * @author Forge
  * @version $Id$
@@ -54,8 +49,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
 
     private boolean customPool = false;
 
-    private ItemPool<CardPrinted> main;
-    private ItemPool<CardPrinted> sideboard;
+    private final DeckSection main;
+    private final DeckSection sideboard;
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -64,8 +59,8 @@ public final class Deck implements Comparable<Deck>, Serializable {
      * </p>
      */
     public Deck() {
-        this.main = new ItemPool<CardPrinted>(CardPrinted.class);
-        this.sideboard = new ItemPool<CardPrinted>(CardPrinted.class);
+        this.main = new DeckSection();
+        this.sideboard = new DeckSection();
     }
 
     /**
@@ -79,28 +74,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
     public Deck(final GameType type) {
         this();
         this.setDeckType(type);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>main</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.List} object.
-     */
-    public ItemPoolView<CardPrinted> getMain() {
-        return this.main.getView();
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>sideboard</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.List} object.
-     */
-    public ItemPoolView<CardPrinted> getSideboard() {
-        return this.sideboard.getView();
     }
 
     /**
@@ -179,169 +152,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
 
     /**
      * <p>
-     * addMain.
-     * </p>
-     * 
-     * @param cardName
-     *            a {@link java.lang.String} object.
-     */
-    public void addMain(final String cardName) {
-        this.addMain(CardDb.instance().getCard(cardName));
-    }
-
-    /**
-     * Adds the main.
-     * 
-     * @param card
-     *            the card
-     */
-    public void addMain(final CardPrinted card) {
-        this.main.add(card);
-    }
-
-    /**
-     * Adds the main.
-     * 
-     * @param card
-     *            the card
-     * @param amount
-     *            the amount
-     */
-    public void addMain(final CardPrinted card, final int amount) {
-        this.main.add(card, amount);
-    }
-
-    /**
-     * Adds the main.
-     * 
-     * @param list
-     *            the list
-     */
-    public void addMain(final ItemPoolView<CardPrinted> list) {
-        this.main.addAll(list);
-    }
-
-    /**
-     * Sets the main.
-     * 
-     * @param cards
-     *            the new main
-     */
-    public void setMain(final Iterable<String> cards) {
-        this.main = new ItemPool<CardPrinted>(cards, CardPrinted.class);
-    }
-
-    /**
-     * Removes the main.
-     * 
-     * @param card
-     *            the card
-     */
-    public void removeMain(final CardPrinted card) {
-        this.main.remove(card);
-    }
-
-    /**
-     * Removes the main.
-     * 
-     * @param card
-     *            the card
-     * @param amount
-     *            the amount
-     */
-    public void removeMain(final CardPrinted card, final int amount) {
-        this.main.remove(card, amount);
-    }
-
-    /**
-     * Count main.
-     * 
-     * @return the int
-     */
-    public int countMain() {
-        return this.main.countAll();
-    }
-
-    /**
-     * <p>
-     * addSideboard.
-     * </p>
-     * 
-     * @param cardName
-     *            a {@link java.lang.String} object.
-     */
-    public void addSideboard(final String cardName) {
-        this.addSideboard(CardDb.instance().getCard(cardName));
-    }
-
-    /**
-     * Adds the sideboard.
-     * 
-     * @param card
-     *            the card
-     */
-    public void addSideboard(final CardPrinted card) {
-        this.sideboard.add(card);
-    }
-
-    /**
-     * Adds the sideboard.
-     * 
-     * @param card
-     *            the card
-     * @param amount
-     *            the amount
-     */
-    public void addSideboard(final CardPrinted card, final int amount) {
-        this.sideboard.add(card, amount);
-    }
-
-    /**
-     * Adds the sideboard.
-     * 
-     * @param cards
-     *            the cards
-     */
-    public void addSideboard(final ItemPoolView<CardPrinted> cards) {
-        this.sideboard.addAll(cards);
-    }
-
-    /**
-     * Sets the sideboard.
-     * 
-     * @param cards
-     *            the new sideboard
-     */
-    public void setSideboard(final Iterable<String> cards) {
-        this.sideboard = new ItemPool<CardPrinted>(cards, CardPrinted.class);
-    }
-
-    /**
-     * <p>
-     * countSideboard.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public int countSideboard() {
-        return this.sideboard.countAll();
-    }
-
-    /**
-     * <p>
-     * removeSideboard.
-     * </p>
-     * 
-     * @param card
-     *            the card
-     * 
-     */
-    public void removeFromSideboard(final CardPrinted card) {
-        this.sideboard.remove(card);
-    }
-
-    /**
-     * <p>
      * isDraft.
      * </p>
      * 
@@ -416,21 +226,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
     }
 
     /**
-     * Clear sideboard.
-     */
-    public void clearSideboard() {
-        this.sideboard.clear();
-    }
-
-    /**
-     * Clear main.
-     */
-    public void clearMain() {
-        this.main.clear();
-
-    }
-
-    /**
      * Gets the player type.
      * 
      * @return the player type
@@ -466,5 +261,27 @@ public final class Deck implements Comparable<Deck>, Serializable {
      */
     public void setCustomPool(final boolean cp) {
         this.customPool = cp;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>main</code>.
+     * </p>
+     * 
+     * @return a {@link java.util.List} object.
+     */
+    public DeckSection getMain() {
+        return this.main;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>sideboard</code>.
+     * </p>
+     * 
+     * @return a {@link java.util.List} object.
+     */
+    public DeckSection getSideboard() {
+        return this.sideboard;
     }
 }

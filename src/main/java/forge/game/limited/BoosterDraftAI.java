@@ -601,17 +601,10 @@ public class BoosterDraftAI {
             aiPlayables.remove(c);
         }
         if (outList.size() == 40) {
-            for (i = 0; i < outList.size(); i++) {
-                out.addMain(outList.get(i).getName() + "|" + outList.get(i).getCurSetCode());
-            }
+            out.getMain().add(outList);
+            out.getSideboard().add(aiPlayables);
+            out.getSideboard().add(dList);
 
-            for (i = 0; i < aiPlayables.size(); i++) {
-                out.addSideboard(aiPlayables.get(i).getName() + "|" + aiPlayables.get(i).getCurSetCode());
-            }
-
-            for (i = 0; i < dList.size(); i++) {
-                out.addSideboard(dList.get(i).getName() + "|" + dList.get(i).getCurSetCode());
-            }
         } else {
             throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
         }

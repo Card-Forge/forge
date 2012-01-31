@@ -102,9 +102,9 @@ public class ControlDock {
         public void actionPerformed(final ActionEvent e) {
             Deck targetDeck;
 
-            if (Constant.Runtime.HUMAN_DECK[0].countMain() > 1) {
+            if (!Constant.Runtime.HUMAN_DECK[0].getMain().isEmpty()) {
                 targetDeck = Constant.Runtime.HUMAN_DECK[0];
-            } else if (Constant.Runtime.COMPUTER_DECK[0].countMain() > 1) {
+            } else if (!Constant.Runtime.COMPUTER_DECK[0].getMain().isEmpty()) {
                 targetDeck = Constant.Runtime.COMPUTER_DECK[0];
             } else {
                 return;

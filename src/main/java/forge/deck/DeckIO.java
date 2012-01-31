@@ -138,8 +138,8 @@ public class DeckIO {
         } else {
             DeckIO.readDeckMetadata(sections.get("metadata"), d);
         }
-        d.setMain(DeckIO.readCardList(sections.get("main")));
-        d.setSideboard(DeckIO.readCardList(sections.get("sideboard")));
+        d.getMain().set(DeckIO.readCardList(sections.get("main")));
+        d.getSideboard().set(DeckIO.readCardList(sections.get("sideboard")));
 
         return d;
     }

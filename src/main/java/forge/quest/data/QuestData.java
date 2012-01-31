@@ -589,7 +589,7 @@ public final class QuestData {
                     "QuestData : getDeckFromMap(String deckName) error, deck name not found - %s", deckName);
         }
         final Deck d = this.getMyDecks().get(deckName);
-        d.clearSideboard();
+        d.getSideboard().clear();
         return d;
     }
 

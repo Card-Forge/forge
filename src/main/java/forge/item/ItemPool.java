@@ -29,7 +29,7 @@ import java.util.Map.Entry;
  * @param <T>
  *            an Object
  */
-public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
+public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
 
     // Constructors here
     /**
@@ -41,22 +41,6 @@ public final class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      */
     public ItemPool(final Class<T> cls) {
         super(cls);
-    }
-
-    /**
-     * 
-     * ItemPool Constructor.
-     * 
-     * @param names
-     *            a String
-     * @param cls
-     *            a T
-     */
-    @SuppressWarnings("unchecked")
-    // conversion here must be safe
-    public ItemPool(final Iterable<String> names, final Class<T> cls) {
-        super(cls);
-        this.addAllCards((Iterable<T>) CardDb.instance().getCards(names));
     }
 
     /**
