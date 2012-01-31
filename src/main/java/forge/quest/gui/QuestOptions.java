@@ -70,7 +70,7 @@ public class QuestOptions extends JFrame {
     private final JRadioButton veryHardRadio = new JRadioButton();
 
     private final JRadioButton fantasyRadio = new JRadioButton();
-    private final JRadioButton realisticRadio = new JRadioButton();
+    private final JRadioButton classicRadio = new JRadioButton();
 
     private final JCheckBox cbStandardStart = new JCheckBox();
 
@@ -185,11 +185,11 @@ public class QuestOptions extends JFrame {
         this.mediumRadio.setText("Medium - 100 games");
         this.hardRadio.setText("Hard - 200 games");
         this.veryHardRadio.setText("Very Hard - 300 games");
-        this.realisticRadio.setText("Realistic");
+        this.classicRadio.setText("Classic");
         this.fantasyRadio.setText("Fantasy");
 
         this.easyRadio.setSelected(true);
-        this.realisticRadio.setSelected(true);
+        this.classicRadio.setSelected(true);
 
         this.cbStandardStart.setText("Standard (Type 2) Starting Pool");
 
@@ -208,7 +208,6 @@ public class QuestOptions extends JFrame {
         sb.append("Continue Quest will allow you to continue a quest that you started at an earlier time.");
         sb.append("\r\n");
         sb.append("\r\n");
-        sb.append("Realistic is the original quest mode with a new feature, the Card Shop. ");
         sb.append("Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle.");
 
         this.jTextArea1.setBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)));
@@ -227,7 +226,7 @@ public class QuestOptions extends JFrame {
         this.jPanel3.setLayout(null);
 
         this.jPanel2.add(this.easyRadio, null);
-        this.jPanel2.add(this.realisticRadio, null);
+        this.jPanel2.add(this.classicRadio, null);
         this.jPanel2.add(this.mediumRadio, null);
         this.jPanel2.add(this.fantasyRadio, null);
         this.jPanel2.add(this.hardRadio, null);
@@ -247,7 +246,7 @@ public class QuestOptions extends JFrame {
         this.buttonGroup1.add(this.hardRadio);
         this.buttonGroup1.add(this.veryHardRadio);
 
-        this.buttonGroup2.add(this.realisticRadio);
+        this.buttonGroup2.add(this.classicRadio);
         this.buttonGroup2.add(this.fantasyRadio);
 
     }
@@ -282,7 +281,7 @@ public class QuestOptions extends JFrame {
         int difficulty = 0;
 
         final String mode = this.fantasyRadio.isSelected() ? forge.quest.data.QuestData.FANTASY
-                : forge.quest.data.QuestData.REALISTIC;
+                : forge.quest.data.QuestData.CLASSIC;
 
         if (this.easyRadio.isSelected()) {
             difficulty = 0;

@@ -142,7 +142,6 @@ public class ViewSettings extends JScrollPane {
         viewport.add(lblTitleGraphics, sectionConstraints);
 
         lblTitleSkin = new FLabel("Choose Skin");
-        lblTitleSkin.setScaleIcon(false);
         lblTitleSkin.setFontStyle(Font.BOLD);
         final JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
         viewport.add(lblTitleSkin, regularConstraints);

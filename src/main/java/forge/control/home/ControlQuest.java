@@ -279,7 +279,7 @@ public class ControlQuest {
 
         final String mode = view.getRadFantasy().isSelected()
                 ? forge.quest.data.QuestData.FANTASY
-                : forge.quest.data.QuestData.REALISTIC;
+                : forge.quest.data.QuestData.CLASSIC;
 
         if (view.getRadEasy().isSelected()) {
             difficulty = 0;

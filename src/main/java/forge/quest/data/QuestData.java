@@ -109,8 +109,8 @@ public final class QuestData {
     /** The Constant FANTASY. */
     public static final String FANTASY = "Fantasy";
 
-    /** The Constant REALISTIC. */
-    public static final String REALISTIC = "Realistic";
+    /** The Constant CLASSIC. */
+    public static final String CLASSIC = "Classic";
 
     // Decks collected by player
     /** The my decks. */
