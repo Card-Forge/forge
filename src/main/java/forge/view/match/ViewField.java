@@ -858,7 +858,6 @@ public class ViewField extends FRoundedPanel {
             // Center vertically and horizontally. Show border if active.
             g.setColor(c);
             g.fillRoundRect(1, 1, w - 2, h - 2, 5, 5);
-            g.setColor(Color.black);
             super.paintComponent(g);
         }
     }
