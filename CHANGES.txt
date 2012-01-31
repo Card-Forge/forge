@@ -372,6 +372,8 @@ Lashknife Barrier
 - Fixed Savage Offensive.
 - Changed isSorcerySpeed to return true for planeswalker abilities.
 - Little tweak in AF Token.
+- Added the recent commit logs to changes.txt.
+- Moved Owlman 2 deck from the /res/decks/ folder to the /res/quest/decks/ folder.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
