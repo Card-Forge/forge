@@ -406,8 +406,11 @@ public final class AbilityFactoryReveal {
                             question += c + " ";
                         }
                         if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
-                            GuiUtils.getChoice("Revealing cards from library", top.toArray());
+                            GuiUtils.getChoice(host + "Revealing cards from library", top.toArray());
                             // AllZone.getGameAction().revealToCopmuter(top.toArray());
+                            cardsRevealed = true;
+                        } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
+                            GuiUtils.getChoice(host + "Revealing cards from library", top.toArray());
                             cardsRevealed = true;
                         }
                     } else if (params.containsKey("RevealValid")) {
