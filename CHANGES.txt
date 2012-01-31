@@ -342,6 +342,37 @@ Lashknife Barrier
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Sorted quest files in Quests tab.
+- Performance tweak: Cleared buffers on skin source images, unreferenced skin source images.
+- Added forced focus on menu buttons when their "show" method is called.
+- Added pics and set info to some precons.
+- CheckStyle.
+- CheckStyle.
+- Checkstyle
+- Added some descriptions for non-card items in the quest shop
+- will scroll and read deck description properly this time
+- Thread safety: Tightened up conditions in FProgressBar, made a few changes to skin loading as appropriate.
+- Updated resolution on mana icons in default skin (thanks @WompWomp).
+- Second attempt at fixing focus issues on home screen.
+- Home screen now persists current submenu selection over restart.
+- Re-hooked up phase labels to skin color palette.
+- Set card scaling larger default to true.
+- Organization: variable renaming for clarity in FSkin and related.
+- Phase label colors from skin palette now used in field views.
+- Added game log to win/lose screen.
+- Added preloader graphic to skin changer in settings menu.
+- Pulled skin loading off EDT in settings menu.
+- Bugfix: Scaling icon problem reverted
+- Minor preloader on skin changer update.
+- Checkstyle
+- Moved res/quests/data references into constants.
+- Deck now contains 2 sections, all methods to modify main/side are incapsulated in DeckSection.java.
+- checkstyle
+- Added the Owlman 2 deck.
+- Fixed Savage Offensive.
+- Changed isSorcerySpeed to return true for planeswalker abilities.
+- Little tweak in AF Token.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -570,6 +601,13 @@ Jeweled Bird
 Ensouled Scimitar
 Ouphe Vandals
 Vicious Betrayal
+Humble
+Turn to Frog
+Snakeform
+Dismantling Blow
+Skullcage
+Dreamwinder
+Firefright Mage
 
 
 end
