@@ -10199,7 +10199,6 @@ res/cardsfolder/z/zuran_enchanter.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_orb.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_spellcaster.txt svneol=native#text/plain
 res/decks/JuzamjediCube.dck -text
-res/decks/Owlman[!!-~]2.dck -text
 res/decks/SkieraCube-cards_not_supported_yet.txt -text
 res/decks/SkieraCube.dck -text
 res/draft/common.txt svneol=native#text/plain
@@ -10533,6 +10532,7 @@ res/quest/decks/Odin[!!-~]1.dck -text
 res/quest/decks/Odin[!!-~]2.dck -text
 res/quest/decks/Odin[!!-~]3.dck -text
 res/quest/decks/Optimus[!!-~]Prime[!!-~]3.dck -text
+res/quest/decks/Owlman[!!-~]2.dck -text
 res/quest/decks/Pebbles[!!-~]Flintstone[!!-~]2.dck -text
 res/quest/decks/Pebbles[!!-~]Flintstone[!!-~]3.dck -text
 res/quest/decks/Picard[!!-~]1.dck -text
