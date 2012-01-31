@@ -23,6 +23,8 @@ import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
 import forge.gui.deckeditor.DeckEditorShop;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
@@ -334,7 +336,7 @@ public class ControlQuest {
 
     /** Resets quests, then retrieves and sets current quest. */
     public void refreshQuests() {
-        File dirQuests = new File("res/quest/data/");
+        File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
 
         // Temporary transition code between v1.2.2 and v1.2.3.
         // Can be safely deleted after release of 1.2.3.

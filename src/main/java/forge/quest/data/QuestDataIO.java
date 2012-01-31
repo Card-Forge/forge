@@ -74,11 +74,6 @@ public class QuestDataIO {
     public QuestDataIO() {
     }
 
-    /** @return {@link forge.quest.data.QuestData} */
-    public static QuestData loadData() {
-        return QuestDataIO.loadData(ForgeProps.getFile(NewConstants.Quest.XMLDATA));
-    }
-
     /**
      * <p>
      * loadData.
@@ -200,7 +195,7 @@ public class QuestDataIO {
             xStream.registerConverter(new CardPoolToXml());
             xStream.alias("CardPool", ItemPool.class);
 
-            final File f = new File("res/quest/data/" + qd.getName() + ".dat");
+            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + "\\" + qd.getName() + ".dat");
             final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
             final GZIPOutputStream zout = new GZIPOutputStream(bout);
             xStream.toXML(qd, zout);

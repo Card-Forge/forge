@@ -30,7 +30,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -42,7 +41,6 @@ import forge.AllZone;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestDataIO;
 
 /**
  * <p>
@@ -118,9 +116,9 @@ public class QuestOptions extends JFrame {
         });
 
         // is there any saved data?
-        if (!this.questData.hasSaveFile()) {
-            this.continueQuestButton.setEnabled(false);
-        }
+        //if (!this.questData.hasSaveFile()) {
+          //  this.continueQuestButton.setEnabled(false);
+        //}
     } // setup()
 
     // show total number of games for each difficulty
@@ -261,12 +259,12 @@ public class QuestOptions extends JFrame {
      */
     final void continueQuestButtonActionPerformed(final ActionEvent e) {
         // set global variable
-        AllZone.setQuestData(QuestDataIO.loadData());
+        /*AllZone.setQuestData(QuestDataIO.loadData());
         AllZone.getQuestData().guessDifficultyIndex();
         this.dispose();
 
         new QuestFrame();
-
+*/
     }
 
     /**
@@ -296,7 +294,7 @@ public class QuestOptions extends JFrame {
             return;
         }
 
-        if (this.questData.hasSaveFile()) {
+       /* if (this.questData.hasSaveFile()) {
             // this will overwrite your save file!
             final Object[] possibleValues = { "Yes", "No" };
             final Object choice = JOptionPane.showOptionDialog(null,
@@ -306,7 +304,7 @@ public class QuestOptions extends JFrame {
             if (!choice.equals(0)) {
                 return;
             }
-        }
+        }*/
 
         // give the user a few cards to build a deck
         this.questData.newGame(difficulty, mode, this.cbStandardStart.isSelected());

@@ -200,6 +200,9 @@ public final class NewConstants {
         /** The XMLDATA. */
         public static final String XMLDATA = "quest/data-xml";
 
+        /** The XMLDATA. */
+        public static final String DATA_DIR = "quest/data-dir";
+
         /** The OPPONENT_ICONS. */
         public static final String OPPONENT_ICONS = "quest/opponent/icons";
 

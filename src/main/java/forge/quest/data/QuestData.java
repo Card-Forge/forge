@@ -508,19 +508,6 @@ public final class QuestData {
         this.difficulty = QuestPreferences.getDifficulty(i);
     }
 
-    /**
-     * Guess difficulty index.
-     * NOTE: Used in old UI only, soon to be deprecated.
-     */
-    public void guessDifficultyIndex() {
-        /*final String[] diffStr = QuestPreferences.getDifficulty();
-        for (int i = 0; i < diffStr.length; i++) {
-            if (this.difficulty.equals(diffStr[i])) {
-                this.diffIndex = i;
-            }
-        }*/
-    }
-
     // Level, read-only ( note: it increments in addWin() )
     /**
      * Gets the level.
@@ -634,16 +621,6 @@ public final class QuestData {
     public Object readResolve() {
         this.initTransients();
         return this;
-    }
-
-    /**
-     * Checks for save file.
-     * 
-     * @return true, if successful
-     */
-    public boolean hasSaveFile() {
-        return ForgeProps.getFile(NewConstants.Quest.DATA).exists()
-                || ForgeProps.getFile(NewConstants.Quest.XMLDATA).exists();
     }
 
     /**

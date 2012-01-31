@@ -20,6 +20,8 @@ import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.GuiUtils;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FSkin;
@@ -316,8 +318,8 @@ public class QuestFileLister extends JPanel {
             return;
         }
         else {
-            File newpath = new File("res/quest/data/" + questName + ".dat");
-            File oldpath = new File("res/quest/data/" + s0 + ".dat");
+            File newpath = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + "\\" + questName + ".dat");
+            File oldpath = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + "\\" + s0 + ".dat");
 
             oldpath.renameTo(newpath);
         }
@@ -336,7 +338,7 @@ public class QuestFileLister extends JPanel {
             return;
         }
 
-        new File("res/quest/data/" + r0.getQuestData().getName() + ".dat").delete();
+        new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + "\\" + r0.getQuestData().getName() + ".dat").delete();
 
         if (cmdRowDelete != null) { cmdRowDelete.execute(); }
 
