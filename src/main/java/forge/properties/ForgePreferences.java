@@ -51,7 +51,7 @@ public class ForgePreferences {
         UI_USE_SKIN ("default"), /** */
         UI_CARD_OVERLAY ("true"), /** */
         UI_UPLOAD_DRAFT ("false"), /** */
-        UI_SCALE_LARGER ("false"), /** */
+        UI_SCALE_LARGER ("true"), /** */
         UI_MAX_STACK ("3"), /** */
         UI_STACK_OFFSET ("tiny"), /** */
         UI_CARD_SIZE ("small"), /** */
