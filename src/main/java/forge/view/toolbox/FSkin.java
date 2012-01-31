@@ -53,14 +53,24 @@ public class FSkin {
     }
 
     /** */
-    public enum Colors implements SkinProp { /** */
-        CLR_THEME, /** */
-        CLR_BORDERS, /** */
-        CLR_ZEBRA, /** */
-        CLR_HOVER, /** */
-        CLR_ACTIVE, /** */
-        CLR_INACTIVE, /** */
-        CLR_TEXT, /** */
+    public enum Colors implements SkinProp, Coords { /** */
+        CLR_THEME                   (new int[] {70, 10}), /** */
+        CLR_BORDERS                 (new int[] {70, 30}), /** */
+        CLR_ZEBRA                   (new int[] {70, 50}), /** */
+        CLR_HOVER                   (new int[] {70, 70}), /** */
+        CLR_ACTIVE                  (new int[] {70, 90}), /** */
+        CLR_INACTIVE                (new int[] {70, 110}), /** */
+        CLR_TEXT                    (new int[] {70, 130}), /** */
+        CLR_PHASE_INACTIVE_ENABLED  (new int[] {70, 150}), /** */
+        CLR_PHASE_INACTIVE_DISABLED (new int[] {70, 170}), /** */
+        CLR_PHASE_ACTIVE_ENABLED    (new int[] {70, 190}), /** */
+        CLR_PHASE_ACTIVE_DISABLED   (new int[] {70, 210});
+
+        private int[] coords;
+        /** @param xy &emsp; int[] coordinates */
+        Colors(int[] xy) { this.coords = xy; }
+        /** @return int[] */
+        public int[] getCoords() { return coords; }
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
@@ -504,15 +514,8 @@ public class FSkin {
         this.setIcon(Backgrounds.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
         this.setIcon(Backgrounds.BG_MATCH, preferredDir + FILE_MATCH_BG);
 
-        this.setColor(Colors.CLR_THEME, this.getColorFromPixel(bimPreferredSprite.getRGB(70, 10)));
-        this.setColor(Colors.CLR_BORDERS, this.getColorFromPixel(bimPreferredSprite.getRGB(70, 30)));
-        this.setColor(Colors.CLR_ZEBRA, this.getColorFromPixel(bimPreferredSprite.getRGB(70, 50)));
-        this.setColor(Colors.CLR_HOVER, this.getColorFromPixel(bimPreferredSprite.getRGB(70, 70)));
-        this.setColor(Colors.CLR_ACTIVE, this.getColorFromPixel(bimPreferredSprite.getRGB(70, 90)));
-        this.setColor(Colors.CLR_INACTIVE, this.getColorFromPixel(bimPreferredSprite.getRGB(70, 110)));
-        this.setColor(Colors.CLR_TEXT, this.getColorFromPixel(bimPreferredSprite.getRGB(70, 130)));
-
         // Run through enums and load their coords.
+        for (Colors e : Colors.values()) { this.setColor(e); }
         for (ZoneIcons e : ZoneIcons.values()) { this.setIcon(e); }
         for (ManaIcons e : ManaIcons.values()) { this.setImage(e); }
         for (ColorlessManaIcons e : ColorlessManaIcons.values()) { this.setImage(e); }
@@ -760,8 +763,12 @@ public class FSkin {
         this.icons.put(s0, new ImageIcon(bimCreatures.getSubimage(x0, y0, w0, h0)));
     }
 
-    private void setColor(final SkinProp s0, final Color c0) {
-        this.colors.put(s0, c0);
+    private void setColor(final SkinProp s0) {
+        int[] coords = ((Coords) s0).getCoords();
+        int x0 = coords[0];
+        int y0 = coords[1];
+
+        this.colors.put(s0, getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)));
     }
 
     private void setFont(int size) {

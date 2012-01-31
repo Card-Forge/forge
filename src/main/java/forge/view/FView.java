@@ -135,11 +135,12 @@ public class FView {
                         ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
 
                 switch(lastMenu) {
-                    case draft: g.getHomeView().showDraftMenu(); break;
-                    case sealed: g.getHomeView().showSealedMenu(); break;
-                    case quest: g.getHomeView().showQuestMenu(); break;
-                    case settings: g.getHomeView().showSettingsMenu(); break;
-                    case utilities: g.getHomeView().showUtilitiesMenu(); break;
+                    case constructed: g.getHomeView().getBtnConstructed().grabFocus(); break;
+                    case draft: g.getHomeView().getBtnDraft().grabFocus(); break;
+                    case sealed: g.getHomeView().getBtnSealed(); break;
+                    case quest: g.getHomeView().getBtnQuest(); break;
+                    case settings: g.getHomeView().getBtnSettings(); break;
+                    case utilities: g.getHomeView().getBtnUtilities(); break;
                     default: g.getHomeView().showConstructedMenu();
                 }
             }

@@ -80,8 +80,8 @@ public class ViewField extends FRoundedPanel {
     private JLabel lblAvatar, lblLife;
     private final Image img;
     private final Color transparent = new Color(0, 0, 0, 0);
-    private final Color hoverBG = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER);
-
+    private final Color clrHover, clrPhaseActiveEnabled, clrPhaseActiveDisabled,
+        clrPhaseInactiveEnabled, clrPhaseInactiveDisabled;
     /**
      * Assembles Swing components of player field instance.
      * 
@@ -100,6 +100,12 @@ public class ViewField extends FRoundedPanel {
         this.inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
         this.hoverBorder = new LineBorder(this.skin.getColor(FSkin.Colors.CLR_BORDERS), 1);
         this.counter = -1;
+
+        this.clrHover = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER);
+        this.clrPhaseActiveEnabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_ACTIVE_ENABLED);
+        this.clrPhaseInactiveEnabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_INACTIVE_ENABLED);
+        this.clrPhaseActiveDisabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
+        this.clrPhaseInactiveDisabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
 
         // Player icon logic
         String filename;
@@ -644,7 +650,7 @@ public class ViewField extends FRoundedPanel {
     public class DetailLabel extends JLabel {
         private final Dimension labelSize = new Dimension(40, 25);
         private Color defaultBG;
-        private final Color hoverBG;
+        private final Color clrHover;
         private Color clrBorders;
         private final MouseAdapter madHover;
         private int w, h, padding;
@@ -695,7 +701,7 @@ public class ViewField extends FRoundedPanel {
             this.madHover = new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    DetailLabel.this.setBackground(DetailLabel.this.hoverBG);
+                    DetailLabel.this.setBackground(DetailLabel.this.clrHover);
                     DetailLabel.this.clrBorders = ViewField.this.skin.getColor(FSkin.Colors.CLR_BORDERS);
                 }
 
@@ -706,7 +712,7 @@ public class ViewField extends FRoundedPanel {
                 }
             };
 
-            this.hoverBG = ViewField.this.skin.getColor(FSkin.Colors.CLR_HOVER);
+            this.clrHover = ViewField.this.skin.getColor(FSkin.Colors.CLR_HOVER);
             this.clrBorders = ViewField.this.transparent;
         }
 
@@ -838,15 +844,15 @@ public class ViewField extends FRoundedPanel {
 
             // Set color according to skip or active or hover state of label
             if (this.hover) {
-                c = hoverBG;
-            } else if (this.enabled) {
-                c = Color.green;
+                c = clrHover;
+            } else if (this.active && this.enabled) {
+                c = clrPhaseActiveEnabled;
+            } else if (!this.active && this.enabled) {
+                c = clrPhaseInactiveEnabled;
+            } else if (this.active && !this.enabled) {
+                c = clrPhaseActiveDisabled;
             } else {
-                c = Color.red;
-            }
-
-            if (!this.active && !this.hover) {
-                c = c.darker().darker();
+                c = clrPhaseInactiveDisabled;
             }
 
             // Center vertically and horizontally. Show border if active.

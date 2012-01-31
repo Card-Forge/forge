@@ -173,6 +173,17 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnExit, constraints);
 
         control = new ControlHomeUI(this);
+        final ForgePreferences.HomeMenus lastMenu =
+                ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
+
+        switch(lastMenu) {
+            case draft: showDraftMenu(); break;
+            case sealed: showSealedMenu(); break;
+            case quest: showQuestMenu(); break;
+            case settings: showSettingsMenu(); break;
+            case utilities: showUtilitiesMenu(); break;
+            default: showConstructedMenu();
+        }
     }
 
     /** Opens menu for constructed mode. */
@@ -329,5 +340,15 @@ public class HomeTopLevel extends FPanel {
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnQuest() {
         return this.btnQuest;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnSettings() {
+        return this.btnSettings;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnUtilities() {
+        return this.btnUtilities;
     }
 }
