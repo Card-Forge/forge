@@ -94,12 +94,14 @@ public class QuestFileLister extends JPanel {
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
+        String mode;
         for (QuestData qd : sorted) {
+            mode = qd.getMode().equals("Realistic") ? "Classic" : qd.getMode();
             row = new RowPanel(qd);
             row.add(new DeleteButton(row), "w 15%!, h 20px!, gap 0 0 5px 0");
             row.add(new EditButton(row), "w 15%!, h 20px!, gaptop 5px");
             row.add(new FLabel(qd.getName()), "w 40%!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel(qd.getMode(), SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
+            row.add(new FLabel(mode, SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
             row.add(new FLabel(qd.getWin() + "/" + qd.getLost(), SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
             this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");
             tempRows.add(row);

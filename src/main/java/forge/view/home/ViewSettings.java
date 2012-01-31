@@ -62,7 +62,7 @@ public class ViewSettings extends JScrollPane {
     private JRadioButton radCardTiny, radCardSmaller, radCardSmall,
         radCardMedium, radCardLarge, radCardHuge;
 
-    private final FLabel lblTitleSkin;
+    private final JLabel lblTitleSkin;
     /**
      * 
      * Assembles swing components for "Settings" mode menu.
@@ -141,8 +141,9 @@ public class ViewSettings extends JScrollPane {
         final JLabel lblTitleGraphics = new SectionLabel("Graphic Options");
         viewport.add(lblTitleGraphics, sectionConstraints);
 
-        lblTitleSkin = new FLabel("Choose Skin");
-        lblTitleSkin.setFontStyle(Font.BOLD);
+        lblTitleSkin = new JLabel("Choose Skin");
+        lblTitleSkin.setFont(skin.getBoldFont(14));
+        lblTitleSkin.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         final JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
         viewport.add(lblTitleSkin, regularConstraints);
         viewport.add(lblNoteSkin, regularConstraints);
