@@ -137,11 +137,11 @@ public class FView {
                 switch(lastMenu) {
                     case constructed: g.getHomeView().getBtnConstructed().grabFocus(); break;
                     case draft: g.getHomeView().getBtnDraft().grabFocus(); break;
-                    case sealed: g.getHomeView().getBtnSealed(); break;
-                    case quest: g.getHomeView().getBtnQuest(); break;
-                    case settings: g.getHomeView().getBtnSettings(); break;
-                    case utilities: g.getHomeView().getBtnUtilities(); break;
-                    default: g.getHomeView().showConstructedMenu();
+                    case sealed: g.getHomeView().getBtnSealed().grabFocus(); break;
+                    case quest: g.getHomeView().getBtnQuest().grabFocus(); break;
+                    case settings: g.getHomeView().getBtnSettings().grabFocus(); break;
+                    case utilities: g.getHomeView().getBtnUtilities().grabFocus(); break;
+                    default:
                 }
             }
         });

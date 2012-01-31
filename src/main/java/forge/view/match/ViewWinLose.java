@@ -21,17 +21,21 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 import forge.quest.gui.QuestWinLoseHandler;
 import forge.view.toolbox.FButton;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FOverlay;
+import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
+import forge.view.toolbox.FTextArea;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
 public class ViewWinLose {
-    private FButton btnContinue, btnRestart, btnQuit;
-    private JPanel pnlCustom;
-    private FSkin skin;
+    private final FButton btnContinue, btnRestart, btnQuit;
+    private final JPanel pnlCustom;
+    private final FTextArea txtLog;
+    private final FSkin skin;
 
     /** */
     public ViewWinLose() {
@@ -108,6 +112,11 @@ public class ViewWinLose {
             lblTitle.setText(ForgeProps.getLocalized(WinLoseText.LOSE));
         }
 
+        // Assemble game log scroller.
+        txtLog = new FTextArea();
+        txtLog.setText(AllZone.getGameLog().getLogText());
+        txtLog.setFont(skin.getFont(14));
+
         // Add all components accordingly.
         overlay.removeAll();
         overlay.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
@@ -125,18 +134,27 @@ public class ViewWinLose {
             overlay.add(pnlLeft, "w 100%!, h 100%!");
         }
 
-        pnlLeft.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 2% 0");
-        pnlLeft.add(lblStats, "w 90%!, h 50px!, gap 5% 0 2% 0");
+        pnlLeft.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 20px 0");
+        pnlLeft.add(lblStats, "w 90%!, h 50px!, gap 5% 0 20px 0");
 
         // A container must be made to ensure proper centering.
         final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, wrap, ax center"));
         pnlButtons.setOpaque(false);
 
-        final String constraints = "w 300px!, h 50px!, gaptop 20px";
+        final String constraints = "w 300px!, h 50px!, gap 0 0 20px 0";
         pnlButtons.add(btnContinue, constraints);
         pnlButtons.add(btnRestart, constraints);
         pnlButtons.add(btnQuit, constraints);
         pnlLeft.add(pnlButtons, "w 100%!");
+
+        final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
+        pnlLog.setOpaque(false);
+        final FLabel lblLog = new FLabel("Game Log", SwingConstants.CENTER);
+        lblLog.setFontScaleFactor(0.9);
+        lblLog.setFontStyle(Font.BOLD);
+        pnlLog.add(lblLog, "w 300px!, h 22px!, gap 0 0 20px 0");
+        pnlLog.add(new FScrollPane(txtLog), "w 300px!, h 100px!, gap 0 0 10px 0");
+        pnlLeft.add(pnlLog, "w 100%!");
 
         overlay.showOverlay();
     }
