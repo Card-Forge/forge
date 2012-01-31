@@ -35,6 +35,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -411,7 +412,8 @@ public final class GuiUtils {
     }
 
     /** Duplicate in DeckEditorQuestMenu and
-     * probably elsewhere...can streamline at some point.
+     * probably elsewhere...can streamline at some point
+     * (probably shouldn't be here).
      * 
      * @param in &emsp; {@link java.lang.String}
      * @return {@link java.lang.String}
@@ -427,5 +429,25 @@ public final class GuiUtils {
         }
 
         return out.toString();
+    }
+
+    /** Checks if calling method uses event dispatch thread.
+     * Exception thrown if method is on "wrong" thread.
+     * A boolean is passed to indicate if the method must be EDT or not.
+     * 
+     * @param methodName &emsp; String, part of the custom exception message.
+     * @param mustBeEDT &emsp; boolean: true = exception if not EDT, false = exception if EDT
+     */
+    public static void checkEDT(String methodName, boolean mustBeEDT) {
+        boolean isEDT = SwingUtilities.isEventDispatchThread();
+
+        if (!isEDT && mustBeEDT) {
+            throw new IllegalStateException(
+                    methodName + " must be accessed from the event dispatch thread.");
+        }
+        else if (isEDT && !mustBeEDT) {
+            throw new IllegalStateException(
+                    methodName + " may not be accessed from the event dispatch thread.");
+        }
     }
 }

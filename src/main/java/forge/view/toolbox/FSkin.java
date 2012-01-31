@@ -45,16 +45,6 @@ import forge.gui.GuiUtils;
  */
 
 public class FSkin {
-    /** Properties of various components that make up the skin. */
-    public interface SkinProp { }
-    /** Add this interface for sub-sprite components, storing their coords. */
-    public interface Coords {
-        /** */
-        int[] COORDS = null;
-        /** @return int[] */
-        int[] getCoords();
-    }
-
     /** */
     public enum Backgrounds implements SkinProp { /** */
         BG_SPLASH, /** */
@@ -331,6 +321,16 @@ public class FSkin {
         public int[] getCoords() { return coords; }
     }
 
+    /** Properties of various components that make up the skin. */
+    public interface SkinProp { }
+    /** Add this interface for sub-sprite components, storing their coords. */
+    public interface Coords {
+        /** */
+        int[] COORDS = null;
+        /** @return int[] */
+        int[] getCoords();
+    }
+
     private Map<SkinProp, ImageIcon> icons;
     private Map<SkinProp, Image> images;
     private Map<SkinProp, Color> colors;
@@ -375,6 +375,8 @@ public class FSkin {
      *            the skin name
      */
     public FSkin(final String skinName) {
+        GuiUtils.checkEDT("FSkin$constructor", false);
+
         this.preferredName = skinName;
         this.preferredDir = FILE_SKINS_DIR + preferredName + "/";
         this.defaultDir = FILE_SKINS_DIR + "default/";
@@ -423,7 +425,8 @@ public class FSkin {
      * preferred takes precedence over default, but if something is
      * missing, the default picture is retrieved.
      */
-    public void loadFontsAndImages() {
+    public void load() {
+        GuiUtils.checkEDT("FSkin$load", false);
         barProgress = Singletons.getView().getProgressBar();
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -431,13 +434,12 @@ public class FSkin {
             public void run() {
                 barProgress.reset();
                 barProgress.setShowETA(false);
-                barProgress.setDescription("Processing fonts and image sprites: ");
+                barProgress.setDescription("Processing image sprites: ");
             }
         });
 
-        barProgress.setMaximum(57);
-
         // Grab and test various sprite files.
+        barProgress.setMaximum(4);
         final File f1 = new File(defaultDir + FILE_ICON_SPRITE);
         final File f2 = new File(preferredDir + FILE_ICON_SPRITE);
         final File f3 = new File(defaultDir + FILE_CREATURE_SPRITE);
@@ -445,10 +447,13 @@ public class FSkin {
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
+            barProgress.increment();
             bimPreferredSprite = ImageIO.read(f2);
-
+            barProgress.increment();
             bimCreatures = ImageIO.read(f3);
+            barProgress.increment();
             bimFoils = ImageIO.read(f4);
+            barProgress.increment();
 
             preferredH = bimPreferredSprite.getHeight();
             preferredW = bimPreferredSprite.getWidth();
@@ -458,31 +463,41 @@ public class FSkin {
             e.printStackTrace();
         }
 
+        // Images loaded; can start UI init.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                barProgress.setShowETA(false);
+                barProgress.setShowCount(false);
+                barProgress.setDescription("Creating display components.");
+            }
+        });
+
         // Pre-derive most fonts (plain, bold, and italic).
         // Exceptions handled inside method.
         this.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
         plainFonts = new HashMap<Integer, Font>();
-        setFontAndIncrement(10);
-        setFontAndIncrement(11);
-        setFontAndIncrement(12);
-        setFontAndIncrement(13);
-        setFontAndIncrement(14);
-        setFontAndIncrement(15);
-        setFontAndIncrement(16);
-        setFontAndIncrement(18);
-        setFontAndIncrement(20);
-        setFontAndIncrement(22);
+        setFont(10);
+        setFont(11);
+        setFont(12);
+        setFont(13);
+        setFont(14);
+        setFont(15);
+        setFont(16);
+        setFont(18);
+        setFont(20);
+        setFont(22);
 
         boldFonts = new HashMap<Integer, Font>();
-        setBoldFontAndIncrement(12);
-        setBoldFontAndIncrement(14);
-        setBoldFontAndIncrement(16);
-        setBoldFontAndIncrement(18);
-        setBoldFontAndIncrement(20);
+        setBoldFont(12);
+        setBoldFont(14);
+        setBoldFont(16);
+        setBoldFont(18);
+        setBoldFont(20);
 
         italicFonts = new HashMap<Integer, Font>();
-        setItalicFontAndIncrement(12);
-        setItalicFontAndIncrement(14);
+        setItalicFont(12);
+        setItalicFont(14);
 
         // Put various images into map (except sprite and splash).
         // Exceptions handled inside method.
@@ -749,19 +764,16 @@ public class FSkin {
         this.colors.put(s0, c0);
     }
 
-    private void setFontAndIncrement(int size) {
+    private void setFont(int size) {
         plainFonts.put(size, font.deriveFont(Font.PLAIN, size));
-        if (barProgress != null) { barProgress.increment(); }
     }
 
-    private void setBoldFontAndIncrement(int size) {
+    private void setBoldFont(int size) {
         boldFonts.put(size, font.deriveFont(Font.BOLD, size));
-        if (barProgress != null) { barProgress.increment(); }
     }
 
-    private void setItalicFontAndIncrement(int size) {
+    private void setItalicFont(int size) {
         italicFonts.put(size, font.deriveFont(Font.ITALIC, size));
-        if (barProgress != null) { barProgress.increment(); }
     }
 
     private void setIcon(final SkinProp s0) {

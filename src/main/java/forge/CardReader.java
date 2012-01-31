@@ -35,6 +35,8 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import javax.swing.SwingUtilities;
+
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
@@ -273,8 +275,11 @@ public class CardReader implements Runnable {
             }
 
             if (barProgress != null) {
-                barProgress.setMaximum((int) this.estimatedFilesRemaining);
-                barProgress.setDescription("Preloading card images: ");
+                barProgress.setMaximum((int) estimatedFilesRemaining);
+                SwingUtilities.invokeLater(new Runnable() { @Override
+                    public void run() {
+                        barProgress.setDescription("Preloading card images: ");
+                } });
             }
 
             for (final File cardTxtFile : this.findNonDirsIterable) {

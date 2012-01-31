@@ -155,7 +155,7 @@ public class ControlSettings {
 
         FSkin skin = new FSkin(name);
 
-        skin.loadFontsAndImages();
+        skin.load();
 
         prefs.setPref(FPref.UI_SKIN, name);
         Singletons.getView().setSkin(skin);

@@ -30,6 +30,7 @@ import forge.CardReader;
 import forge.Singletons;
 import forge.card.CardRules;
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -76,6 +77,7 @@ public class PreloadingCardFactory extends AbstractCardFactory {
      */
     public PreloadingCardFactory(final File file) {
         super(file);
+        GuiUtils.checkEDT("PreloadingCardFactory$constructor", false);
 
         try {
             this.readCards(file);

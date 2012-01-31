@@ -105,16 +105,15 @@ public class FView {
         AllZone.getCardFactory();
 
         // Preloads skin components (using progress bar).
-        FView.this.skin.loadFontsAndImages();
+        FView.this.skin.load();
 
-        // Does not use progress bar, due to be deprecated in favor of skin.
+        // Does not use progress bar, due to be deprecated with battlefield refactoring.
         CardFaceSymbols.loadImages();
-
-        barProgress.setDescription("Creating display components.");
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                barProgress.setDescription("Creating display components.");
                 final GuiTopLevel g = new GuiTopLevel();
                 AllZone.setDisplay(g);
                 g.getController().changeState(FControl.HOME_SCREEN);
