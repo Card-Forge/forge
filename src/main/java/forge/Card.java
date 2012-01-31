@@ -39,6 +39,7 @@ import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityTriggered;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.staticability.StaticAbility;
@@ -1560,7 +1561,27 @@ public class Card extends GameEntity implements Comparable<Card> {
                     c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
                     // Any trigger should cause the phase not to skip
                     AllZone.getPhaseHandler().setSkipPhase(false);
-                    AllZone.getGameAction().playCardNoCost(c);
+                    if(c.getOwner().isHuman()) {
+                        AllZone.getGameAction().playCardNoCost(c);
+                    } else {
+                        final ArrayList<SpellAbility> choices = this.getBasicSpells();
+
+                        for (final SpellAbility sa : choices) {
+                            //Spells
+                            if (sa instanceof Spell) {
+                                Spell spell = (Spell) sa;
+                                if (!spell.canPlayFromEffectAI(false, true)) {
+                                    continue;
+                                }
+                            } else {
+                                if (!sa.canPlayAI()) {
+                                    continue;
+                                }
+                            }
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(sa);
+                            break;
+                        }
+                    }
                 }
             }
 

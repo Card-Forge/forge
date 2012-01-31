@@ -33,6 +33,7 @@ import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.error.ErrorViewer;
@@ -51,7 +52,7 @@ public class ComputerUtil {
     // if return true, go to next phase
     /**
      * <p>
-     * playCards.
+     * playSpellAbilities.
      * </p>
      * 
      * @param all
@@ -123,7 +124,9 @@ public class ComputerUtil {
             if ((!flashb || source.hasStartOfKeyword("May be played")) && ComputerUtil.canBePlayedAndPayedByAI(sa)) {
                 ComputerUtil.handlePlayingSpellAbility(sa);
 
-                return false;
+                if (!(sa instanceof AbilityStatic)) {
+                    return false;
+                }
             }
         }
         return true;
@@ -131,7 +134,7 @@ public class ComputerUtil {
 
     /**
      * <p>
-     * playCards.
+     * playAbilities.
      * </p>
      * 
      * @param all
@@ -155,6 +158,14 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static void handlePlayingSpellAbility(final SpellAbility sa) {
+
+        if (sa instanceof AbilityStatic) {
+            if (ComputerUtil.payManaCost(sa, AllZone.getComputerPlayer(), false, 0)) {
+                sa.resolve();
+            }
+            return;
+        }
+
         AllZone.getStack().freezeStack();
         final Card source = sa.getSourceCard();
 
