@@ -211,9 +211,11 @@ public final class QuestUtilCards {
 
     /**
      * Buy precon deck.
-     *
-     * @param precon the precon
-     * @param value the value
+     * 
+     * @param precon
+     *            the precon
+     * @param value
+     *            the value
      */
     public void buyPreconDeck(final PreconDeck precon, final int value) {
         if (this.q.getCredits() >= value) {
@@ -313,24 +315,25 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.SETS_IN_EXT;
-    
+    private final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.SETS_IN_EXT;
+
     /** The filter t2booster. */
-    final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+    private final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
             CardSet.Predicates.Presets.SETS_IN_STANDARD);
-    
+
     /** The filter ext but t2. */
-    final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+    private final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
             Predicate.and(this.filterExt, Predicate.not(CardSet.Predicates.Presets.SETS_IN_STANDARD)));
-    
+
     /** The filter not ext. */
-    final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+    private final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
             Predicate.not(this.filterExt));
 
     /**
      * Generate boosters in shop.
-     *
-     * @param count the count
+     * 
+     * @param count
+     *            the count
      */
     public void generateBoostersInShop(final int count) {
         for (int i = 0; i < count; i++) {
@@ -343,8 +346,9 @@ public final class QuestUtilCards {
 
     /**
      * Generate precons in shop.
-     *
-     * @param count the count
+     * 
+     * @param count
+     *            the count
      */
     public void generatePreconsInShop(final int count) {
         final List<PreconDeck> validDecks = QuestData.getPreconManager().getDecksForCurrent(this.q);

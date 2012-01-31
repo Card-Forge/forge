@@ -28,9 +28,9 @@ import forge.quest.SellRules;
 import forge.util.FileUtil;
 import forge.util.SectionUtil;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class PreconDeck implements InventoryItemFromSet {
 
@@ -41,16 +41,19 @@ public class PreconDeck implements InventoryItemFromSet {
 
     private final SellRules recommendedDeals;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItemFromSet#getName()
      */
     @Override
     public String getName() {
-        return deck.getName();
+        return this.deck.getName();
     }
 
-
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItemFromSet#getImageFilename()
      */
     @Override
@@ -58,8 +61,9 @@ public class PreconDeck implements InventoryItemFromSet {
         return "precons/" + this.imageFilename;
     }
 
-
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItem#getType()
      */
     @Override
@@ -69,68 +73,72 @@ public class PreconDeck implements InventoryItemFromSet {
 
     /**
      * Instantiates a new precon deck.
-     *
-     * @param f the f
+     * 
+     * @param f
+     *            the f
      */
     public PreconDeck(final File f) {
-        List<String> deckLines = FileUtil.readFile(f);
-        Map<String, List<String>> sections = SectionUtil.parseSections(deckLines);
-        deck = DeckIO.readDeck(deckLines);
+        final List<String> deckLines = FileUtil.readFile(f);
+        final Map<String, List<String>> sections = SectionUtil.parseSections(deckLines);
+        this.deck = DeckIO.readDeck(deckLines);
 
         String filenameProxy = null;
         String setProxy = "n/a";
         String descriptionProxy = "";
-        List<String> metadata = sections.get("metadata");
-        if (null != metadata && !metadata.isEmpty()) {
-            for (String s : metadata) {
-                String[] kv = s.split("=");
+        final List<String> metadata = sections.get("metadata");
+        if ((null != metadata) && !metadata.isEmpty()) {
+            for (final String s : metadata) {
+                final String[] kv = s.split("=");
                 if ("Image".equalsIgnoreCase(kv[0])) {
                     filenameProxy = kv[1];
-                }
-                else if ("set".equalsIgnoreCase(kv[0]) && SetUtils.getSetByCode(kv[1].toUpperCase()) != null) {
+                } else if ("set".equalsIgnoreCase(kv[0]) && (SetUtils.getSetByCode(kv[1].toUpperCase()) != null)) {
                     setProxy = kv[1];
-                }
-                else if ("Description".equalsIgnoreCase(kv[0])) {
+                } else if ("Description".equalsIgnoreCase(kv[0])) {
                     descriptionProxy = kv[1];
-                }                
+                }
             }
         }
-        imageFilename = filenameProxy;
-        set = setProxy;
-        recommendedDeals = new SellRules(sections.get("shop"));
-        description = descriptionProxy;
+        this.imageFilename = filenameProxy;
+        this.set = setProxy;
+        this.recommendedDeals = new SellRules(sections.get("shop"));
+        this.description = descriptionProxy;
     }
-
 
     /**
      * Gets the deck.
-     *
+     * 
      * @return the deck
      */
     public final Deck getDeck() {
-        return deck;
+        return this.deck;
     }
-
 
     /**
      * Gets the recommended deals.
-     *
+     * 
      * @return the recommended deals
      */
     public final SellRules getRecommendedDeals() {
-        return recommendedDeals;
+        return this.recommendedDeals;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.InventoryItemFromSet#getSet()
      */
     @Override
     public String getSet() {
-        return set;
+        return this.set;
     }
-    
+
+    /**
+     * Gets the description.
+     *
+     * @return the description
+     */
     public final String getDescription() {
-        return description;
+        return this.description;
     }
-    
+
 }

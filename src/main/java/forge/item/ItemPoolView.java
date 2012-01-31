@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
-
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.CardList;
 import forge.card.CardRules;
@@ -337,10 +335,14 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         return this.fnToPrinted;
     }
 
-    
+    /**
+     * To item list string.
+     *
+     * @return the iterable
+     */
     public Iterable<String> toItemListString() {
-        List<String> list = new ArrayList<String>();
-        for(Entry<T, Integer> e : cards.entrySet()) {
+        final List<String> list = new ArrayList<String>();
+        for (final Entry<T, Integer> e : this.cards.entrySet()) {
             list.add(String.format("%d x %s", e.getValue(), e.getKey().getName()));
         }
         return list;

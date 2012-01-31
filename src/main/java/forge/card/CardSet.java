@@ -320,10 +320,15 @@ public final class CardSet implements Comparable<CardSet> { // immutable
             return this.nLand;
         }
 
-        public final int getTotal() { 
-            return nCommon + nUncommon + nRare + nSpecial + nDoubleFaced + nLand; 
+        /**
+         * Gets the total.
+         *
+         * @return the total
+         */
+        public final int getTotal() {
+            return this.nCommon + this.nUncommon + this.nRare + this.nSpecial + this.nDoubleFaced + this.nLand;
         }
-        
+
         /**
          * Gets the foil chance.
          * 

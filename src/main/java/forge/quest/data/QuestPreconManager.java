@@ -36,7 +36,7 @@ import forge.item.PreconDeck;
 public class QuestPreconManager {
 
     /** The decks. */
-    final List<PreconDeck> decks = new ArrayList<PreconDeck>();
+    private final List<PreconDeck> decks = new ArrayList<PreconDeck>();
 
     /**
      * Instantiates a new quest precon manager.
