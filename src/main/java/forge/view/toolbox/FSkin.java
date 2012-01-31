@@ -90,88 +90,88 @@ public class FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ManaIcons implements SkinProp, Coords { /** */
-        ICO_BLACK       (new int[] {360, 160, 40, 40, 13, 13}), /** */
-        ICO_RED         (new int[] {400, 160, 40, 40, 13, 13}), /** */
-        ICO_COLORLESS   (new int[] {440, 160, 40, 40, 13, 13}), /** */
-        ICO_BLUE        (new int[] {360, 200, 40, 40, 13, 13}), /** */
-        ICO_GREEN       (new int[] {400, 200, 40, 40, 13, 13}), /** */
-        ICO_WHITE       (new int[] {440, 200, 40, 40, 13, 13}), /** */
-        ICO_2B          (new int[] {360, 400, 40, 40, 13, 13}), /** */
-        ICO_2G          (new int[] {400, 400, 40, 40, 13, 13}), /** */
-        ICO_2R          (new int[] {440, 360, 40, 40, 13, 13}), /** */
-        ICO_2U          (new int[] {440, 360, 40, 40, 13, 13}), /** */
-        ICO_2W          (new int[] {400, 360, 40, 40, 13, 13}), /** */
-        ICO_BLACK_GREEN (new int[] {360, 240, 40, 40, 13, 13}), /** */
-        ICO_BLACK_RED   (new int[] {400, 240, 40, 40, 13, 13}), /** */
-        ICO_GREEN_BLUE  (new int[] {360, 280, 40, 40, 13, 13}), /** */
-        ICO_GREEN_WHITE (new int[] {440, 280, 40, 40, 13, 13}), /** */
-        ICO_RED_GREEN   (new int[] {360, 320, 40, 40, 13, 13}), /** */
-        ICO_RED_WHITE   (new int[] {400, 320, 40, 40, 13, 13}), /** */
-        ICO_BLUE_BLACK  (new int[] {440, 240, 40, 40, 13, 13}), /** */
-        ICO_BLUE_RED    (new int[] {440, 320, 40, 40, 13, 13}), /** */
-        ICO_WHITE_BLACK (new int[] {400, 280, 40, 40, 13, 13}), /** */
-        ICO_WHITE_BLUE  (new int[] {360, 360, 40, 40, 13, 13}), /** */
-        ICO_PHRYX_BLUE  (new int[] {320, 200, 40, 40, 13, 13}), /** */
-        ICO_PHRYX_WHITE (new int[] {320, 240, 40, 40, 13, 13}), /** */
-        ICO_PHRYX_RED   (new int[] {320, 280, 40, 40, 13, 13}), /** */
-        ICO_PHRYX_GREEN (new int[] {320, 320, 40, 40, 13, 13}), /** */
-        ICO_PHRYX_BLACK (new int[] {320, 360, 40, 40, 13, 13});
+    public enum ManaImages implements SkinProp, Coords { /** */
+        IMG_BLACK       (new int[] {360, 160, 40, 40, 13, 13}), /** */
+        IMG_RED         (new int[] {400, 160, 40, 40, 13, 13}), /** */
+        IMG_COLORLESS   (new int[] {440, 160, 40, 40, 13, 13}), /** */
+        IMG_BLUE        (new int[] {360, 200, 40, 40, 13, 13}), /** */
+        IMG_GREEN       (new int[] {400, 200, 40, 40, 13, 13}), /** */
+        IMG_WHITE       (new int[] {440, 200, 40, 40, 13, 13}), /** */
+        IMG_2B          (new int[] {360, 400, 40, 40, 13, 13}), /** */
+        IMG_2G          (new int[] {400, 400, 40, 40, 13, 13}), /** */
+        IMG_2R          (new int[] {440, 360, 40, 40, 13, 13}), /** */
+        IMG_2U          (new int[] {440, 360, 40, 40, 13, 13}), /** */
+        IMG_2W          (new int[] {400, 360, 40, 40, 13, 13}), /** */
+        IMG_BLACK_GREEN (new int[] {360, 240, 40, 40, 13, 13}), /** */
+        IMG_BLACK_RED   (new int[] {400, 240, 40, 40, 13, 13}), /** */
+        IMG_GREEN_BLUE  (new int[] {360, 280, 40, 40, 13, 13}), /** */
+        IMG_GREEN_WHITE (new int[] {440, 280, 40, 40, 13, 13}), /** */
+        IMG_RED_GREEN   (new int[] {360, 320, 40, 40, 13, 13}), /** */
+        IMG_RED_WHITE   (new int[] {400, 320, 40, 40, 13, 13}), /** */
+        IMG_BLUE_BLACK  (new int[] {440, 240, 40, 40, 13, 13}), /** */
+        IMG_BLUE_RED    (new int[] {440, 320, 40, 40, 13, 13}), /** */
+        IMG_WHITE_BLACK (new int[] {400, 280, 40, 40, 13, 13}), /** */
+        IMG_WHITE_BLUE  (new int[] {360, 360, 40, 40, 13, 13}), /** */
+        IMG_PHRYX_BLUE  (new int[] {320, 200, 40, 40, 13, 13}), /** */
+        IMG_PHRYX_WHITE (new int[] {320, 240, 40, 40, 13, 13}), /** */
+        IMG_PHRYX_RED   (new int[] {320, 280, 40, 40, 13, 13}), /** */
+        IMG_PHRYX_GREEN (new int[] {320, 320, 40, 40, 13, 13}), /** */
+        IMG_PHRYX_BLACK (new int[] {320, 360, 40, 40, 13, 13});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
-        ManaIcons(int[] xy) { this.coords = xy; }
+        ManaImages(int[] xy) { this.coords = xy; }
         /** @return int[] */
         public int[] getCoords() { return coords; }
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ColorlessManaIcons implements SkinProp, Coords { /** */
-        ICO_0   (new int[] {640, 200, 20, 20, 13, 13}), /** */
-        ICO_1   (new int[] {660, 200, 20, 20, 13, 13}), /** */
-        ICO_2   (new int[] {640, 220, 20, 20, 13, 13}), /** */
-        ICO_3   (new int[] {660, 220, 20, 20, 13, 13}), /** */
-        ICO_4   (new int[] {640, 240, 20, 20, 13, 13}), /** */
-        ICO_5   (new int[] {660, 240, 20, 20, 13, 13}), /** */
-        ICO_6   (new int[] {640, 260, 20, 20, 13, 13}), /** */
-        ICO_7   (new int[] {660, 260, 20, 20, 13, 13}), /** */
-        ICO_8   (new int[] {640, 280, 20, 20, 13, 13}), /** */
-        ICO_9   (new int[] {660, 280, 20, 20, 13, 13}), /** */
-        ICO_10  (new int[] {640, 300, 20, 20, 13, 13}), /** */
-        ICO_11  (new int[] {660, 300, 20, 20, 13, 13}), /** */
-        ICO_12  (new int[] {640, 320, 20, 20, 13, 13}), /** */
-        ICO_15  (new int[] {660, 340, 20, 20, 13, 13}), /** */
-        ICO_16  (new int[] {640, 360, 20, 20, 13, 13}), /** */
-        ICO_20  (new int[] {640, 400, 20, 20, 13, 13}), /** */
-        ICO_X   (new int[] {640, 420, 20, 20, 13, 13}), /** */
-        ICO_Y   (new int[] {660, 420, 20, 20, 13, 13}), /** */
-        ICO_Z   (new int[] {640, 440, 20, 20, 13, 13});
+    public enum ColorlessManaImages implements SkinProp, Coords { /** */
+        IMG_0   (new int[] {640, 200, 20, 20, 13, 13}), /** */
+        IMG_1   (new int[] {660, 200, 20, 20, 13, 13}), /** */
+        IMG_2   (new int[] {640, 220, 20, 20, 13, 13}), /** */
+        IMG_3   (new int[] {660, 220, 20, 20, 13, 13}), /** */
+        IMG_4   (new int[] {640, 240, 20, 20, 13, 13}), /** */
+        IMG_5   (new int[] {660, 240, 20, 20, 13, 13}), /** */
+        IMG_6   (new int[] {640, 260, 20, 20, 13, 13}), /** */
+        IMG_7   (new int[] {660, 260, 20, 20, 13, 13}), /** */
+        IMG_8   (new int[] {640, 280, 20, 20, 13, 13}), /** */
+        IMG_9   (new int[] {660, 280, 20, 20, 13, 13}), /** */
+        IMG_10  (new int[] {640, 300, 20, 20, 13, 13}), /** */
+        IMG_11  (new int[] {660, 300, 20, 20, 13, 13}), /** */
+        IMG_12  (new int[] {640, 320, 20, 20, 13, 13}), /** */
+        IMG_15  (new int[] {660, 340, 20, 20, 13, 13}), /** */
+        IMG_16  (new int[] {640, 360, 20, 20, 13, 13}), /** */
+        IMG_20  (new int[] {640, 400, 20, 20, 13, 13}), /** */
+        IMG_X   (new int[] {640, 420, 20, 20, 13, 13}), /** */
+        IMG_Y   (new int[] {660, 420, 20, 20, 13, 13}), /** */
+        IMG_Z   (new int[] {640, 440, 20, 20, 13, 13});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
-        ColorlessManaIcons(int[] xy) { this.coords = xy; }
+        ColorlessManaImages(int[] xy) { this.coords = xy; }
         /** @return int[] */
         public int[] getCoords() { return coords; }
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum GameplayIcons implements SkinProp, Coords { /** */
-        ICO_SNOW            (new int[] {320, 160, 40, 40}), /** */
-        ICO_TAP             (new int[] {660, 440, 20, 20}), /** */
-        ICO_UNTAP           (new int[] {640, 460, 20, 20}), /** */
-        ICO_SLASH           (new int[] {660, 400, 10, 13}), /** */
-        ICO_ATTACK          (new int[] {160, 320, 80, 80, 32, 32}), /** */
-        ICO_DEFEND          (new int[] {160, 400, 80, 80, 32, 32}), /** */
-        ICO_SUMMONSICK      (new int[] {240, 400, 80, 80, 32, 32}), /** */
-        ICO_PHASING         (new int[] {240, 320, 80, 80, 32, 32}), /** */
-        ICO_COUNTERS1       (new int[] {0, 320, 80, 80}), /** */
-        ICO_COUNTERS2       (new int[] {0, 400, 80, 80}), /** */
-        ICO_COUNTERS3       (new int[] {80, 320, 80, 80}), /** */
-        ICO_COUNTERS_MULTI  (new int[] {80, 400, 80, 80});
+    public enum GameplayImages implements SkinProp, Coords { /** */
+        IMG_SNOW            (new int[] {320, 160, 40, 40}), /** */
+        IMG_TAP             (new int[] {660, 440, 20, 20}), /** */
+        IMG_UNTAP           (new int[] {640, 460, 20, 20}), /** */
+        IMG_SLASH           (new int[] {660, 400, 10, 13}), /** */
+        IMG_ATTACK          (new int[] {160, 320, 80, 80, 32, 32}), /** */
+        IMG_DEFEND          (new int[] {160, 400, 80, 80, 32, 32}), /** */
+        IMG_SUMMONSICK      (new int[] {240, 400, 80, 80, 32, 32}), /** */
+        IMG_PHASING         (new int[] {240, 320, 80, 80, 32, 32}), /** */
+        IMG_COUNTERS1       (new int[] {0, 320, 80, 80}), /** */
+        IMG_COUNTERS2       (new int[] {0, 400, 80, 80}), /** */
+        IMG_COUNTERS3       (new int[] {80, 320, 80, 80}), /** */
+        IMG_COUNTERS_MULTI  (new int[] {80, 400, 80, 80});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
-        GameplayIcons(int[] xy) { this.coords = xy; }
+        GameplayImages(int[] xy) { this.coords = xy; }
         /** @return int[] */
         public int[] getCoords() { return coords; }
     }
@@ -516,14 +516,15 @@ public class FSkin {
 
         // Run through enums and load their coords.
         for (Colors e : Colors.values()) { this.setColor(e); }
-        for (ZoneIcons e : ZoneIcons.values()) { this.setIcon(e); }
-        for (ManaIcons e : ManaIcons.values()) { this.setImage(e); }
-        for (ColorlessManaIcons e : ColorlessManaIcons.values()) { this.setImage(e); }
-        for (GameplayIcons e : GameplayIcons.values()) { this.setImage(e); }
-        for (DockIcons e : DockIcons.values()) { this.setIcon(e); }
-        for (ForgeIcons e : ForgeIcons.values()) { this.setIcon(e); }
-        for (ButtonImages e : ButtonImages.values()) { this.setIcon(e); }
-        for (QuestIcons e : QuestIcons.values()) { this.setIcon(e); }
+        for (ZoneIcons e : ZoneIcons.values())                      { this.setIcon(e); }
+        for (DockIcons e : DockIcons.values())                      { this.setIcon(e); }
+        for (ForgeIcons e : ForgeIcons.values())                    { this.setIcon(e); }
+        for (ButtonImages e : ButtonImages.values())                { this.setIcon(e); }
+        for (QuestIcons e : QuestIcons.values())                    { this.setIcon(e); }
+
+        for (ManaImages e : ManaImages.values())                    { this.setImage(e); }
+        for (ColorlessManaImages e : ColorlessManaImages.values())  { this.setImage(e); }
+        for (GameplayImages e : GameplayImages.values())            { this.setImage(e); }
 
         // Foils and creatures have a separate sprite, so use specific methods.
         for (Foils e : Foils.values()) { this.setFoil(e); }

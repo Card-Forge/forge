@@ -303,27 +303,27 @@ public class ViewField extends FRoundedPanel {
         poolArea.add(ViewField.this.lblPoison, constraintsR);
 
         // Black, Blue, Colorless, Green, Red, White mana labels
-        ViewField.this.lblBlack = new DetailLabel(FSkin.ManaIcons.ICO_BLACK, "99");
+        ViewField.this.lblBlack = new DetailLabel(FSkin.ManaImages.IMG_BLACK, "99");
         ViewField.this.lblBlack.setToolTipText("Black mana");
         poolArea.add(ViewField.this.lblBlack, constraintsL);
 
-        ViewField.this.lblBlue = new DetailLabel(FSkin.ManaIcons.ICO_BLUE, "99");
+        ViewField.this.lblBlue = new DetailLabel(FSkin.ManaImages.IMG_BLUE, "99");
         ViewField.this.lblBlue.setToolTipText("Blue mana");
         poolArea.add(ViewField.this.lblBlue, constraintsR);
 
-        ViewField.this.lblGreen = new DetailLabel(FSkin.ManaIcons.ICO_GREEN, "99");
+        ViewField.this.lblGreen = new DetailLabel(FSkin.ManaImages.IMG_GREEN, "99");
         ViewField.this.lblGreen.setToolTipText("Green mana");
         poolArea.add(ViewField.this.lblGreen, constraintsL);
 
-        ViewField.this.lblRed = new DetailLabel(FSkin.ManaIcons.ICO_RED, "99");
+        ViewField.this.lblRed = new DetailLabel(FSkin.ManaImages.IMG_RED, "99");
         ViewField.this.lblRed.setToolTipText("Red mana");
         poolArea.add(ViewField.this.lblRed, constraintsR);
 
-        ViewField.this.lblWhite = new DetailLabel(FSkin.ManaIcons.ICO_WHITE, "99");
+        ViewField.this.lblWhite = new DetailLabel(FSkin.ManaImages.IMG_WHITE, "99");
         ViewField.this.lblWhite.setToolTipText("White mana");
         poolArea.add(ViewField.this.lblWhite, constraintsL);
 
-        ViewField.this.lblColorless = new DetailLabel(FSkin.ManaIcons.ICO_COLORLESS, "99");
+        ViewField.this.lblColorless = new DetailLabel(FSkin.ManaImages.IMG_COLORLESS, "99");
         ViewField.this.lblColorless.setToolTipText("Colorless mana");
         poolArea.add(ViewField.this.lblColorless, constraintsR);
     }
