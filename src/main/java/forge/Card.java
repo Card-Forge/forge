@@ -1570,7 +1570,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                             //Spells
                             if (sa instanceof Spell) {
                                 Spell spell = (Spell) sa;
-                                if (!spell.canPlayFromEffectAI(false, true)) {
+                                if (!spell.canPlayFromEffectAI(true, true)) {
                                     continue;
                                 }
                             } else {
