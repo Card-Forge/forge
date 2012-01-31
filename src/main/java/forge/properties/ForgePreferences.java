@@ -59,6 +59,7 @@ public class ForgePreferences {
         UI_BUGZ_PWD (""), /** */
         UI_ANTE ("false"), /** */
         UI_SKIN ("default"), /** */
+        UI_HOMEMENU (HomeMenus.constructed.toString()), /** */
 
         DEV_MODE_ENABLED ("false"), /** */
         DEV_MILLING_LOSS ("true"), /** */
@@ -124,6 +125,12 @@ public class ForgePreferences {
     public enum StackOffsetType {
         /** */
         tiny, small, medium, large
+    }
+
+    /** */
+    public enum HomeMenus {
+        /** */
+        constructed, draft, sealed, quest, settings, utilities
     }
 
     /** Instantiates a ForgePreferences object. */

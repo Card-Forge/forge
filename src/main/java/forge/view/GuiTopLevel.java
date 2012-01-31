@@ -38,6 +38,7 @@ import forge.control.FControl;
 import forge.control.match.ControlField;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.view.home.HomeTopLevel;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTabber;
 import forge.view.toolbox.FOverlay;
@@ -95,6 +96,11 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
      */
     public FControl getController() {
         return this.control;
+    }
+
+    /** @return {@link forge.view.home.HomeTopLevel} */
+    public HomeTopLevel getHomeView() {
+        return control.getHomeController().getView();
     }
 
     /*

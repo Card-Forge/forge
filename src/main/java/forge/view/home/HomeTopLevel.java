@@ -34,6 +34,8 @@ import forge.control.home.ControlConstructed;
 import forge.control.home.ControlDraft;
 import forge.control.home.ControlSealed;
 import forge.control.home.ControlUtilities;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FRoundedPanel;
@@ -171,19 +173,21 @@ public class HomeTopLevel extends FPanel {
         pnlMenu.add(btnExit, constraints);
 
         control = new ControlHomeUI(this);
-
-        // Open "constructed" menu on first run.
-        showConstructedMenu();
     }
 
     /** Opens menu for constructed mode. */
     public void showConstructedMenu() {
         clearToggles();
         btnConstructed.setToggled(true);
+        btnConstructed.grabFocus();
         pnlContent.removeAll();
         pnlContent.add(constructed, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
+                ForgePreferences.HomeMenus.constructed.toString());
+        Singletons.getModel().getPreferences().save();
     }
 
     /** Opens menu for draft mode. */
@@ -191,10 +195,15 @@ public class HomeTopLevel extends FPanel {
         clearToggles();
         btnDraft.setToggled(true);
         btnDraft.grabFocus();
+
         pnlContent.removeAll();
         pnlContent.add(draft, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
+                ForgePreferences.HomeMenus.draft.toString());
+        Singletons.getModel().getPreferences().save();
     }
 
     /** Opens menu for sealed mode. */
@@ -202,10 +211,15 @@ public class HomeTopLevel extends FPanel {
         clearToggles();
         btnSealed.setToggled(true);
         btnSealed.grabFocus();
+
         pnlContent.removeAll();
         pnlContent.add(sealed, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
+                ForgePreferences.HomeMenus.sealed.toString());
+        Singletons.getModel().getPreferences().save();
     }
 
     /** Opens menu for quest mode. */
@@ -213,10 +227,15 @@ public class HomeTopLevel extends FPanel {
         clearToggles();
         btnQuest.setToggled(true);
         btnQuest.grabFocus();
+
         pnlContent.removeAll();
         pnlContent.add(quest, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
+                ForgePreferences.HomeMenus.quest.toString());
+        Singletons.getModel().getPreferences().save();
     }
 
     /** Opens menu for settings. */
@@ -224,10 +243,15 @@ public class HomeTopLevel extends FPanel {
         clearToggles();
         btnSettings.setToggled(true);
         btnSettings.grabFocus();
+
         pnlContent.removeAll();
         pnlContent.add(settings, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
+                ForgePreferences.HomeMenus.settings.toString());
+        Singletons.getModel().getPreferences().save();
     }
 
     /** Opens menu for utilities. */
@@ -235,10 +259,15 @@ public class HomeTopLevel extends FPanel {
         clearToggles();
         btnUtilities.setToggled(true);
         btnUtilities.grabFocus();
+
         pnlContent.removeAll();
         pnlContent.add(utilities, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
+                ForgePreferences.HomeMenus.utilities.toString());
+        Singletons.getModel().getPreferences().save();
     }
 
     /** @return ControlConstructed */

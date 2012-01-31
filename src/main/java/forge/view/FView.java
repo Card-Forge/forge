@@ -21,7 +21,10 @@ import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.AllZone;
+import forge.Singletons;
 import forge.control.FControl;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.home.SplashFrame;
 import forge.view.toolbox.CardFaceSymbols;
 import forge.view.toolbox.FProgressBar;
@@ -124,6 +127,21 @@ public class FView {
 
                 barProgress.setDescription("Forge is ready to launch.");
                 g.setVisible(true);
+
+                // Open previous menu on first run, or constructed.
+                // Focus is reset when the frame becomes visible,
+                // so the call to show the menu must happen here.
+                final ForgePreferences.HomeMenus lastMenu =
+                        ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
+
+                switch(lastMenu) {
+                    case draft: g.getHomeView().showDraftMenu(); break;
+                    case sealed: g.getHomeView().showSealedMenu(); break;
+                    case quest: g.getHomeView().showQuestMenu(); break;
+                    case settings: g.getHomeView().showSettingsMenu(); break;
+                    case utilities: g.getHomeView().showUtilitiesMenu(); break;
+                    default: g.getHomeView().showConstructedMenu();
+                }
             }
         });
     } // End FView()
