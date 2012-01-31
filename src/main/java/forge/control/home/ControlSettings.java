@@ -3,7 +3,9 @@ package forge.control.home;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
+import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -149,22 +151,37 @@ public class ControlSettings {
     }
 
     private void updateSkin() {
-        String name = view.getLstChooseSkin().getSelectedValue().toString();
+        view.getLblTitleSkin().setText(" Loading...");
+        view.getLblTitleSkin().setIcon(new ImageIcon("res/images/skins/default/loader.gif"));
+
+        final String name = view.getLstChooseSkin().getSelectedValue().toString();
         Singletons.getView().getSkin().unloadSkin();
         Singletons.getView().setSkin(null);
 
-        FSkin skin = new FSkin(name);
+        final SwingWorker<Object, Object> w = new SwingWorker<Object, Object>() {
+            @Override
+            public String doInBackground() {
+                FSkin skin = new FSkin(name);
+                skin.load();
+                Singletons.getView().setSkin(skin);
 
-        skin.load();
+                prefs.setPref(FPref.UI_SKIN, name);
+                prefs.save();
+                return null;
+            }
 
-        prefs.setPref(FPref.UI_SKIN, name);
-        Singletons.getView().setSkin(skin);
-        ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
+            @Override
+            protected void done() {
+                view.getLblTitleSkin().setIcon(null);
+                view.getLblTitleSkin().setText("Choose Skin");
 
-        // changeState creates a new HomeTopLevel, so we can't just use the view object we already have.
-        ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showSettingsMenu();
-
-        prefs.save();
+                // Must create a new HomeTopLevel to reset all color/image/icon
+                // values in components.
+                ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
+                ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showSettingsMenu();
+            }
+        };
+        w.execute();
     }
 
     /** @param rad0 &emsp; JRadioButton

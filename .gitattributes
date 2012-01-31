@@ -10247,6 +10247,7 @@ res/images/skins/default/bg_splash.png -text
 res/images/skins/default/bg_texture.jpg -text
 res/images/skins/default/font1.ttf -text
 res/images/skins/default/grid_icons.png -text
+res/images/skins/default/loader.gif -text
 res/images/skins/default/sprite_creatures.jpg -text
 res/images/skins/default/sprite_foils.png -text
 res/images/skins/default/sprite_icons.png -text

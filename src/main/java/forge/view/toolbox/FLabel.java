@@ -22,7 +22,7 @@ import forge.Singletons;
 public class FLabel extends JLabel {
     private final FSkin skin;
     private final ComponentAdapter cadResize;
-    private boolean scaleAuto;
+    private boolean scaleAuto, scaleIcon;
     private double fontScaleFactor = 0.6;
     private double iconScaleFactor = 0.8;
     private double aspectRatio;
@@ -85,14 +85,16 @@ public class FLabel extends JLabel {
                 w = (int) (h * aspectRatio * iconScaleFactor);
                 if (w == 0 || h == 0) { return; }
 
-                FLabel.super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));
+                if (scaleIcon) {
+                    FLabel.super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));
+                }
             }
         };
 
         this.setScaleAuto(true);
     }
 
-    /** @param b0 &emsp; {@link java.lang.boolean} */
+    /** @param b0 &emsp; {@link java.lang.boolean} Toggle all scaling. */
     public void setScaleAuto(final boolean b0) {
         this.scaleAuto = b0;
         if (scaleAuto) {
@@ -101,6 +103,11 @@ public class FLabel extends JLabel {
         else {
             this.removeComponentListener(cadResize);
         }
+    }
+
+    /** @param b0 &emsp; {@link java.lang.boolean} Toggle icon scaling. */
+    public void setScaleIcon(final boolean b0) {
+        this.scaleIcon = b0;
     }
 
     /** 
@@ -129,7 +136,7 @@ public class FLabel extends JLabel {
 
     @Override
     public void setIcon(final Icon i0) {
-        if (scaleAuto) {
+        if (scaleAuto && scaleIcon) {
             // Setting the icon in the usual way leads to scaling problems.
             // So, only the image is saved, and scaled along with the font
             // in the resize adapter.

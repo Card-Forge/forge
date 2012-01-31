@@ -1,6 +1,7 @@
 package forge.view.home;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -37,6 +38,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 import forge.view.GuiTopLevel;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
@@ -47,9 +49,9 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewSettings extends JScrollPane {
-    private ControlSettings control;
-    private FSkin skin;
-    private JPanel viewport;
+    private final ControlSettings control;
+    private final FSkin skin;
+    private final JPanel viewport;
     private HomeTopLevel parentView;
 
     private JList lstChooseSkin;
@@ -59,6 +61,8 @@ public class ViewSettings extends JScrollPane {
 
     private JRadioButton radCardTiny, radCardSmaller, radCardSmall,
         radCardMedium, radCardLarge, radCardHuge;
+
+    private final FLabel lblTitleSkin;
     /**
      * 
      * Assembles swing components for "Settings" mode menu.
@@ -81,7 +85,7 @@ public class ViewSettings extends JScrollPane {
 
         // Spacing between components is defined here.
         String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
-        String regularConstraints = "w 80%!, gap 10% 0 0 10px, span 2 1";
+        String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
 
         // Deck Building Options
         final JLabel lblTitleDecks = new SectionLabel("Deck Building Options");
@@ -137,7 +141,9 @@ public class ViewSettings extends JScrollPane {
         final JLabel lblTitleGraphics = new SectionLabel("Graphic Options");
         viewport.add(lblTitleGraphics, sectionConstraints);
 
-        final JLabel lblTitleSkin = new TitleLabel("Choose Skin");
+        lblTitleSkin = new FLabel("Choose Skin");
+        lblTitleSkin.setScaleIcon(false);
+        lblTitleSkin.setFontStyle(Font.BOLD);
         final JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
         viewport.add(lblTitleSkin, regularConstraints);
         viewport.add(lblNoteSkin, regularConstraints);
@@ -148,7 +154,8 @@ public class ViewSettings extends JScrollPane {
         lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
         viewport.add(new FScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
 
-        final JLabel lblTitleCardSize = new TitleLabel("Card Size");
+        final FLabel lblTitleCardSize = new FLabel("Card Size");
+        lblTitleCardSize.setFontStyle(Font.BOLD);
         final JLabel lblCardSize = new NoteLabel("Size of cards in hand and playing field, when possible");
         viewport.add(lblTitleCardSize, regularConstraints);
         viewport.add(lblCardSize, regularConstraints);
@@ -179,14 +186,15 @@ public class ViewSettings extends JScrollPane {
 
         List<Shortcut> shortcuts = ((GuiTopLevel) AllZone.getDisplay()).getController().getShortcuts();
 
+        FLabel lblTemp;
         for (Shortcut s : shortcuts) {
-            ShortcutLabel lbl = new ShortcutLabel(s.getDescription());
+            lblTemp = new FLabel(s.getDescription());
             KeyboardShortcutField ksf = new KeyboardShortcutField(s);
-            viewport.add(lbl, "w 40%!, gap 10%! 0 0 1%");
+            viewport.add(lblTemp, "w 40%!, gap 10%! 0 0 1%");
             viewport.add(ksf, "w 25%!");
         }
 
-        ViewSettings.this.control = new ControlSettings(this);
+        this.control = new ControlSettings(this);
     }
 
     private void populateCardSizeRadios() {
@@ -300,24 +308,6 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
-    /** Consolidates title label styling in one place. */
-    private class TitleLabel extends JLabel {
-        public TitleLabel(String txt0) {
-            super(txt0);
-            setFont(skin.getBoldFont(12));
-            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        }
-    }
-
-    /** Consolidates shortcut label styling in one place. */
-    private class ShortcutLabel extends JLabel {
-        public ShortcutLabel(String txt0) {
-            super(txt0);
-            setFont(skin.getFont(14));
-            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        }
-    }
-
     /**
      * A JTextField plus a "codeString" property, that stores keycodes for the
      * shortcut. Also, an action listener that handles translation of keycodes
@@ -398,59 +388,64 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
-    /** @return JList */
+    /** @return {@link javax.swing.JList} */
     public JList getLstChooseSkin() {
         return lstChooseSkin;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRemoveSmall() {
         return cbRemoveSmall;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbSingletons() {
         return cbSingletons;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRemoveArtifacts() {
         return cbRemoveArtifacts;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbUploadDraft() {
         return cbUploadDraft;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbStackLand() {
         return cbStackLand;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbTextMana() {
         return cbTextMana;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRandomFoil() {
         return cbRandomFoil;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAnte() {
         return cbAnte;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbScaleLarger() {
         return cbScaleLarger;
     }
 
-    /** @return JCheckBox */
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblTitleSkin() {
+        return lblTitleSkin;
     }
 
     /** @return ControlSettings */
@@ -458,7 +453,7 @@ public class ViewSettings extends JScrollPane {
         return ViewSettings.this.control;
     }
 
-    /** @return HomeTopLevel */
+    /** @return {@link forge.view.home.HomeTopLevel} */
     public HomeTopLevel getParentView() {
         return parentView;
     }
