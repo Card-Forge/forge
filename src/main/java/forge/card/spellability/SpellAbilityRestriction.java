@@ -146,6 +146,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (params.containsKey("Planeswalker")) {
             this.setPlaneswalker(true);
+            this.setSorcerySpeed(true);
         }
 
         if (params.containsKey("IsPresent")) {
@@ -325,10 +326,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.isPwAbility()) {
-            // Planeswalker abilities can only be activated as Sorceries
-            if (!PhaseHandler.canCastSorcery(activator)) {
-                return false;
-            }
 
             for (final SpellAbility pwAbs : c.getAllSpellAbilities()) {
                 // check all abilities on card that have their planeswalker

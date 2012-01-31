@@ -299,7 +299,8 @@ public class AbilityFactoryToken extends AbilityFactory {
         }
         if ((AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler().isBefore(
                 Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
-                && !mapParams.containsKey("ActivationPhases") && !AbilityFactory.isSorcerySpeed(sa)) {
+                && !mapParams.containsKey("ActivationPhases") && !AbilityFactory.isSorcerySpeed(sa)
+                && !haste) {
             return false;
         }
         if ((AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_BEGIN) || AllZone.getPhaseHandler().isPlayerTurn(
