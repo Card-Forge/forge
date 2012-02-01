@@ -86,7 +86,7 @@ public class ViewQuest extends JScrollPane {
         this.parentView = v0;
         this.skin = Singletons.getView().getSkin();
         this.clrBorders = skin.getColor(FSkin.Colors.CLR_THEME).darker().darker();
-        this.eventPanelConstraints = "w 100%!, h 80px!, gap 0 0 5px 5px";
+        this.eventPanelConstraints = "w 100%!, h 86px!, gap 0 0 5px 5px";
 
         // Final component inits
         tabDuels = new SubTab("Duels");
@@ -558,8 +558,8 @@ public class ViewQuest extends JScrollPane {
 
             // Name
             final FLabel lblName = new FLabel(event.getTitle() + ": " + event.getDifficulty());
-            lblName.setFontScaleFactor(1);
-            this.add(lblName, "h 20px!, gap 0 0 10px 5px, wrap");
+            lblName.setFontScaleFactor(0.6);
+            this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
 
             // Description
             final FTextArea tarDesc = new FTextArea();
