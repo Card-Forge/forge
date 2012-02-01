@@ -42,7 +42,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
 
     // Field Accessors for select/aggregate operations with filters.
     /** The fn to card. */
-    private final Lambda1<CardRules, Entry<T, Integer>> fnToCard = new Lambda1<CardRules, Entry<T, Integer>>() {
+    private final transient Lambda1<CardRules, Entry<T, Integer>> fnToCard = new Lambda1<CardRules, Entry<T, Integer>>() {
         @Override
         public CardRules apply(final Entry<T, Integer> from) {
             final T item = from.getKey();
@@ -51,7 +51,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to printed. */
-    private final Lambda1<T, Entry<T, Integer>> fnToPrinted = new Lambda1<T, Entry<T, Integer>>() {
+    private final transient Lambda1<T, Entry<T, Integer>> fnToPrinted = new Lambda1<T, Entry<T, Integer>>() {
         @Override
         public T apply(final Entry<T, Integer> from) {
             return from.getKey();
@@ -59,7 +59,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to card name. */
-    private final Lambda1<String, Entry<T, Integer>> fnToCardName = new Lambda1<String, Entry<T, Integer>>() {
+    private final transient Lambda1<String, Entry<T, Integer>> fnToCardName = new Lambda1<String, Entry<T, Integer>>() {
         @Override
         public String apply(final Entry<T, Integer> from) {
             return from.getKey().getName();
@@ -67,7 +67,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to count. */
-    private final Lambda1<Integer, Entry<T, Integer>> fnToCount = new Lambda1<Integer, Entry<T, Integer>>() {
+    private final transient Lambda1<Integer, Entry<T, Integer>> fnToCount = new Lambda1<Integer, Entry<T, Integer>>() {
         @Override
         public Integer apply(final Entry<T, Integer> from) {
             return from.getValue();
@@ -112,10 +112,10 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     // same thing as above, it was copied to provide sorting (needed by table
     // views in deck editors)
     /** The cards list ordered. */
-    private final List<Entry<T, Integer>> cardsListOrdered = new ArrayList<Map.Entry<T, Integer>>();
+    private final transient List<Entry<T, Integer>> cardsListOrdered = new ArrayList<Map.Entry<T, Integer>>();
 
     /** The is list in sync. */
-    private boolean isListInSync = false;
+    private transient boolean isListInSync = false;
 
     /**
      * iterator.
