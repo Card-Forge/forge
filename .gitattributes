@@ -763,6 +763,7 @@ res/cardsfolder/b/bind.txt svneol=native#text/plain
 res/cardsfolder/b/binding_agony.txt svneol=native#text/plain
 res/cardsfolder/b/binding_grasp.txt svneol=native#text/plain
 res/cardsfolder/b/biomantic_mastery.txt svneol=native#text/plain
+res/cardsfolder/b/bioplasm.txt -text svneol=unset#text/plain
 res/cardsfolder/b/biorhythm.txt svneol=native#text/plain
 res/cardsfolder/b/birchlore_rangers.txt svneol=native#text/plain
 res/cardsfolder/b/bird_maiden.txt svneol=native#text/plain
