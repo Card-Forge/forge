@@ -3057,6 +3057,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         for (final String key : this.characteristicsMap.keySet()) {
             res.addAll(this.getState(key).getSpellAbility());
+            res.addAll(this.getState(key).getManaAbility());
         }
 
         return res;
