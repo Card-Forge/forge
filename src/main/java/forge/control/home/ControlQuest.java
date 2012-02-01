@@ -53,7 +53,7 @@ public class ControlQuest {
     private final MouseAdapter madStartGame, madDuels, madChallenges,
         madQuests, madDecks, madPreferences;
     private final ActionListener actPetSelect, actPlantSelect,
-        actSpellShop, actBazaar, actEmbark, actNewDeck, actCurrentDeck;
+        actSpellShop, actBazaar, actEmbark, actNewDeck, actCurrentDeck, actResetPrefs;
     private final Command cmdDeckExit, cmdDeckDelete, cmdDeckSelect,
         cmdQuestSelect, cmdQuestDelete;
     private Deck currentDeck;
@@ -144,6 +144,15 @@ public class ControlQuest {
                 final DeckEditorQuest editor = new DeckEditorQuest(qData);
                 editor.show(cmdDeckExit);
                 editor.setVisible(true);
+            }
+        };
+
+        actResetPrefs = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                qPrefs.reset();
+                qPrefs.save();
+                view.resetPrefs();
             }
         };
 
@@ -242,6 +251,9 @@ public class ControlQuest {
         view.getLstQuests().setSelectCommand(cmdQuestSelect);
         view.getLstQuests().setEditCommand(cmdQuestDelete);
         view.getLstQuests().setDeleteCommand(cmdQuestDelete);
+
+        view.getBtnResetPrefs().removeActionListener(actResetPrefs);
+        view.getBtnResetPrefs().addActionListener(actResetPrefs);
 
         if (this.qem != null) {
             view.getBtnStart().removeMouseListener(madStartGame);

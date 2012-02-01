@@ -51,7 +51,7 @@ public class ControlSettings {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) { return; }
-                try { updateSkin(); } catch (Exception e1) { e1.printStackTrace(); }
+                updateSkin();
             }
         });
 
@@ -60,7 +60,7 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbAnte().isSelected();
                 prefs.setPref(FPref.UI_ANTE, String.valueOf(toggle));
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -69,7 +69,7 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbScaleLarger().isSelected();
                 prefs.setPref(FPref.UI_SCALE_LARGER, String.valueOf(toggle));
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -79,7 +79,7 @@ public class ControlSettings {
                 final boolean toggle = ControlSettings.this.view.getCbDevMode().isSelected();
                 prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
                 Constant.Runtime.DEV_MODE[0] = toggle;
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -88,7 +88,7 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbRemoveSmall().isSelected();
                 prefs.setPref(FPref.DECKGEN_NOSMALL, String.valueOf(toggle));
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -97,7 +97,7 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbRemoveArtifacts().isSelected();
                 prefs.setPref(FPref.DECKGEN_ARTIFACTS, String.valueOf(toggle));
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -106,7 +106,7 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbSingletons().isSelected();
                 prefs.setPref(FPref.DECKGEN_SINGLETONS, String.valueOf(toggle));
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -116,7 +116,7 @@ public class ControlSettings {
                 final boolean toggle = ControlSettings.this.view.getCbUploadDraft().isSelected();
                 prefs.setPref(FPref.UI_UPLOAD_DRAFT , String.valueOf(toggle));
                 Constant.Runtime.UPLOAD_DRAFT[0] = toggle;
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -126,7 +126,7 @@ public class ControlSettings {
                 final boolean toggle = ControlSettings.this.view.getCbStackLand().isSelected();
                 prefs.setPref(FPref.UI_SMOOTH_LAND, String.valueOf(toggle));
                 Constant.Runtime.SMOOTH[0] = toggle;
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -136,7 +136,7 @@ public class ControlSettings {
                 final boolean toggle = ControlSettings.this.view.getCbRandomFoil().isSelected();
                 prefs.setPref(FPref.UI_RANDOM_FOIL, String.valueOf(toggle));
                 Constant.Runtime.RANDOM_FOIL[0] = toggle;
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
             }
         });
 
@@ -145,7 +145,15 @@ public class ControlSettings {
             public void actionPerformed(final ActionEvent arg0) {
                 final boolean toggle = ControlSettings.this.view.getCbTextMana().isSelected();
                 prefs.setPref(FPref.UI_CARD_OVERLAY, String.valueOf(toggle));
-                try { prefs.save(); } catch (Exception e) { e.printStackTrace(); }
+                prefs.save();
+            }
+        });
+
+        this.view.getBtnReset().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                Singletons.getModel().getPreferences().reset();
+                view.getParentView().resetSettings();
             }
         });
     }

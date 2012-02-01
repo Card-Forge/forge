@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -52,6 +53,7 @@ public class ViewSettings extends JScrollPane {
     private final ControlSettings control;
     private final FSkin skin;
     private final JPanel viewport;
+    private final JButton btnReset;
     private HomeTopLevel parentView;
 
     private JList lstChooseSkin;
@@ -190,9 +192,16 @@ public class ViewSettings extends JScrollPane {
         for (Shortcut s : shortcuts) {
             lblTemp = new FLabel(s.getDescription());
             KeyboardShortcutField ksf = new KeyboardShortcutField(s);
-            viewport.add(lblTemp, "w 40%!, gap 10%! 0 0 1%");
+            viewport.add(lblTemp, "w 40%!, h 22px!, gap 10%! 0 0 1%");
             viewport.add(ksf, "w 25%!");
         }
+
+        // Reset button
+        final JLabel lblReset = new SectionLabel(" ");
+        viewport.add(lblReset, sectionConstraints);
+
+        btnReset = new SubButton("Reset to defaults");
+        viewport.add(btnReset, sectionConstraints);
 
         this.control = new ControlSettings(this);
     }
@@ -456,5 +465,10 @@ public class ViewSettings extends JScrollPane {
     /** @return {@link forge.view.home.HomeTopLevel} */
     public HomeTopLevel getParentView() {
         return parentView;
+    }
+
+    /** @return {@link forge.view.home.HomeTopLevel} */
+    public JButton getBtnReset() {
+        return btnReset;
     }
 }

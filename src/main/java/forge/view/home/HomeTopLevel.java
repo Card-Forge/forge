@@ -26,6 +26,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
@@ -236,9 +237,6 @@ public class HomeTopLevel extends FPanel {
     /** Opens menu for quest mode. */
     public void showQuestMenu() {
         clearToggles();
-        btnQuest.setToggled(true);
-        btnQuest.grabFocus();
-
         pnlContent.removeAll();
         pnlContent.add(quest, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
         pnlContent.revalidate();
@@ -247,13 +245,18 @@ public class HomeTopLevel extends FPanel {
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.quest.toString());
         Singletons.getModel().getPreferences().save();
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() {
+                btnQuest.setToggled(true);
+                btnQuest.grabFocus();
+            }
+        });
     }
 
     /** Opens menu for settings. */
     public void showSettingsMenu() {
         clearToggles();
-        btnSettings.setToggled(true);
-        btnSettings.grabFocus();
 
         pnlContent.removeAll();
         pnlContent.add(settings, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
@@ -263,6 +266,13 @@ public class HomeTopLevel extends FPanel {
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.settings.toString());
         Singletons.getModel().getPreferences().save();
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() {
+                btnSettings.setToggled(true);
+                btnSettings.grabFocus();
+            }
+        });
     }
 
     /** Opens menu for utilities. */
@@ -315,6 +325,12 @@ public class HomeTopLevel extends FPanel {
     public void resetQuest() {
         quest = new ViewQuest(this);
         showQuestMenu();
+    }
+
+    /** */
+    public void resetSettings() {
+        settings = new ViewSettings(this);
+        showSettingsMenu();
     }
 
     /** @return ControlHomeUI */

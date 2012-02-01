@@ -177,6 +177,11 @@ public class ForgePreferences {
         }
     }
 
+    /** */
+    public void reset() {
+        this.preferenceValues.clear();
+    }
+
     /**
      * DUE TO BE DEPRECATED:
      * Transition code between preference manager for v1.2.2 and v1.2.3.

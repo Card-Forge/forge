@@ -1,7 +1,6 @@
 package forge.view.home;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -17,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -57,7 +57,8 @@ public class ViewQuest extends JScrollPane {
     private final JLabel lblTitle, lblLife, lblCredits,
         lblWins, lblLosses, lblNextChallengeInWins, lblWinStreak;
 
-    private final JButton btnBazaar, btnSpellShop, btnStart, btnEmbark, btnNewDeck, btnCurrentDeck;
+    private final JButton btnBazaar, btnSpellShop, btnStart, btnEmbark,
+        btnResetPrefs, btnNewDeck, btnCurrentDeck;
 
     private final JCheckBox cbPlant, cbZep, cbStandardStart;
     private final JComboBox cbxPet;
@@ -126,6 +127,7 @@ public class ViewQuest extends JScrollPane {
         btnStart = new StartButton(parentView);
         btnEmbark = new SubButton("Embark!");
         btnNewDeck = new SubButton("Build a New Deck");
+        btnResetPrefs = new SubButton("Reset to Defaults");
         cbxPet = new JComboBox();
         cbStandardStart = new FCheckBox("Standard (Type 2) Starting Pool");
         cbPlant = new FCheckBox("Summon Plant");
@@ -167,7 +169,11 @@ public class ViewQuest extends JScrollPane {
         populateNewQuest();
         populatePrefs();
 
-        // Init controller, select quest and deck, then start in duels tab.
+        // If start when quest submenu is shown,
+        // it will need a few cycles to read the quest datas.
+        hideAllPanels();
+
+        // Init controller, select quest and deck.
         this.control = new ControlQuest(this);
         control.refreshQuests();
         control.refreshDecks();
@@ -322,8 +328,10 @@ public class ViewQuest extends JScrollPane {
     /** Layout permanent parts of prefs panel. */
     private void populatePrefs() {
         pnlPrefs.setOpaque(false);
-        pnlPrefs.setLayout(new MigLayout("insets 0, gap 0"));
+        pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+
         pnlPrefs.add(new QuestPreferencesHandler(), "w 100%!");
+        pnlPrefs.add(btnResetPrefs, " w 60%!, h 30px!, gap 20% 0 20px 20px");
     }
 
     private void hideAllPanels() {
@@ -396,6 +404,14 @@ public class ViewQuest extends JScrollPane {
         }
     }
 
+    /** */
+    public void resetPrefs() {
+        pnlPrefs.removeAll();
+        populatePrefs();
+        pnlPrefs.revalidate();
+        this.getParentView().getBtnQuest().grabFocus();
+    }
+
     //========= TAB SHOW METHODS
     /** Display handler for duel tab click. */
     public void showDuelsTab() {
@@ -412,8 +428,6 @@ public class ViewQuest extends JScrollPane {
         updateDuels();
         updateStats();
         lblTitle.setText("Duels: " + control.getRankString());
-        pnlStats.setVisible(true);
-        pnlDuels.setVisible(true);
 
         if (control.getCurrentDeck() != null) {
             pnlStart.setVisible(true);
@@ -422,6 +436,14 @@ public class ViewQuest extends JScrollPane {
             selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
             selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
         }
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                pnlStats.setVisible(true);
+                pnlDuels.setVisible(true);
+            }
+        });
     }
 
     /** Display handler for duel tab click. */
@@ -439,8 +461,6 @@ public class ViewQuest extends JScrollPane {
         updateChallenges();
         updateStats();
         lblTitle.setText("Challenges: " + control.getRankString());
-        pnlStats.setVisible(true);
-        pnlChallenges.setVisible(true);
 
         // Select first event.
         if (pnlChallenges.getComponentCount() > 0) {
@@ -449,7 +469,13 @@ public class ViewQuest extends JScrollPane {
             selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
         }
 
-        this.getViewport().setViewPosition(new Point(0, 0));
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                pnlStats.setVisible(true);
+                pnlChallenges.setVisible(true);
+            }
+        });
     }
 
     /** Display handler for decks tab click. */
@@ -705,6 +731,11 @@ public class ViewQuest extends JScrollPane {
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnEmbark() {
         return btnEmbark;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnResetPrefs() {
+        return btnResetPrefs;
     }
 
     /** @return {@link javax.swing.JButton} */

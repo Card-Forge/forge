@@ -114,6 +114,7 @@ public class ViewWinLose {
 
         // Assemble game log scroller.
         txtLog = new FTextArea();
+        txtLog.setBorder(null);
         txtLog.setText(AllZone.getGameLog().getLogText());
         txtLog.setFont(skin.getFont(14));
 
