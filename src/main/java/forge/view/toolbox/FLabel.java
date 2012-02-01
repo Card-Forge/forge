@@ -8,6 +8,7 @@ import java.awt.event.ComponentEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import forge.Singletons;
 
@@ -64,6 +65,8 @@ public class FLabel extends JLabel {
         super(s0);
         this.skin = Singletons.getView().getSkin();
         this.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setVerticalTextPosition(SwingConstants.CENTER);
+        this.setVerticalAlignment(SwingConstants.CENTER);
 
         this.cadResize = new ComponentAdapter() {
             @Override

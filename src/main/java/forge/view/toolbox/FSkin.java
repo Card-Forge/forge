@@ -74,7 +74,7 @@ public class FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ZoneIcons implements SkinProp, Coords { /** */
+    public enum ZoneImages implements SkinProp, Coords { /** */
         ICO_HAND        (new int[] {280, 40, 40, 40}), /** */
         ICO_LIBRARY     (new int[] {280, 0, 40, 40}), /** */
         ICO_EXILE       (new int[] {320, 40, 40, 40}), /** */
@@ -84,39 +84,39 @@ public class FSkin {
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
-        ZoneIcons(int[] xy) { this.coords = xy; }
+        ZoneImages(int[] xy) { this.coords = xy; }
         /** @return int[] */
         public int[] getCoords() { return coords; }
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
     public enum ManaImages implements SkinProp, Coords { /** */
-        IMG_BLACK       (new int[] {360, 160, 40, 40, 13, 13}), /** */
-        IMG_RED         (new int[] {400, 160, 40, 40, 13, 13}), /** */
-        IMG_COLORLESS   (new int[] {440, 160, 40, 40, 13, 13}), /** */
-        IMG_BLUE        (new int[] {360, 200, 40, 40, 13, 13}), /** */
-        IMG_GREEN       (new int[] {400, 200, 40, 40, 13, 13}), /** */
-        IMG_WHITE       (new int[] {440, 200, 40, 40, 13, 13}), /** */
-        IMG_2B          (new int[] {360, 400, 40, 40, 13, 13}), /** */
-        IMG_2G          (new int[] {400, 400, 40, 40, 13, 13}), /** */
-        IMG_2R          (new int[] {440, 360, 40, 40, 13, 13}), /** */
-        IMG_2U          (new int[] {440, 360, 40, 40, 13, 13}), /** */
-        IMG_2W          (new int[] {400, 360, 40, 40, 13, 13}), /** */
-        IMG_BLACK_GREEN (new int[] {360, 240, 40, 40, 13, 13}), /** */
-        IMG_BLACK_RED   (new int[] {400, 240, 40, 40, 13, 13}), /** */
-        IMG_GREEN_BLUE  (new int[] {360, 280, 40, 40, 13, 13}), /** */
-        IMG_GREEN_WHITE (new int[] {440, 280, 40, 40, 13, 13}), /** */
-        IMG_RED_GREEN   (new int[] {360, 320, 40, 40, 13, 13}), /** */
-        IMG_RED_WHITE   (new int[] {400, 320, 40, 40, 13, 13}), /** */
-        IMG_BLUE_BLACK  (new int[] {440, 240, 40, 40, 13, 13}), /** */
-        IMG_BLUE_RED    (new int[] {440, 320, 40, 40, 13, 13}), /** */
-        IMG_WHITE_BLACK (new int[] {400, 280, 40, 40, 13, 13}), /** */
-        IMG_WHITE_BLUE  (new int[] {360, 360, 40, 40, 13, 13}), /** */
-        IMG_PHRYX_BLUE  (new int[] {320, 200, 40, 40, 13, 13}), /** */
-        IMG_PHRYX_WHITE (new int[] {320, 240, 40, 40, 13, 13}), /** */
-        IMG_PHRYX_RED   (new int[] {320, 280, 40, 40, 13, 13}), /** */
-        IMG_PHRYX_GREEN (new int[] {320, 320, 40, 40, 13, 13}), /** */
-        IMG_PHRYX_BLACK (new int[] {320, 360, 40, 40, 13, 13});
+        IMG_BLACK       (new int[] {360, 160, 40, 40}), /** */
+        IMG_RED         (new int[] {400, 160, 40, 40}), /** */
+        IMG_COLORLESS   (new int[] {440, 160, 40, 40}), /** */
+        IMG_BLUE        (new int[] {360, 200, 40, 40}), /** */
+        IMG_GREEN       (new int[] {400, 200, 40, 40}), /** */
+        IMG_WHITE       (new int[] {440, 200, 40, 40}), /** */
+        IMG_2B          (new int[] {360, 400, 40, 40}), /** */
+        IMG_2G          (new int[] {400, 400, 40, 40}), /** */
+        IMG_2R          (new int[] {440, 360, 40, 40}), /** */
+        IMG_2U          (new int[] {440, 360, 40, 40}), /** */
+        IMG_2W          (new int[] {400, 360, 40, 40}), /** */
+        IMG_BLACK_GREEN (new int[] {360, 240, 40, 40}), /** */
+        IMG_BLACK_RED   (new int[] {400, 240, 40, 40}), /** */
+        IMG_GREEN_BLUE  (new int[] {360, 280, 40, 40}), /** */
+        IMG_GREEN_WHITE (new int[] {440, 280, 40, 40}), /** */
+        IMG_RED_GREEN   (new int[] {360, 320, 40, 40}), /** */
+        IMG_RED_WHITE   (new int[] {400, 320, 40, 40}), /** */
+        IMG_BLUE_BLACK  (new int[] {440, 240, 40, 40}), /** */
+        IMG_BLUE_RED    (new int[] {440, 320, 40, 40}), /** */
+        IMG_WHITE_BLACK (new int[] {400, 280, 40, 40}), /** */
+        IMG_WHITE_BLUE  (new int[] {360, 360, 40, 40}), /** */
+        IMG_PHRYX_BLUE  (new int[] {320, 200, 40, 40}), /** */
+        IMG_PHRYX_WHITE (new int[] {320, 240, 40, 40}), /** */
+        IMG_PHRYX_RED   (new int[] {320, 280, 40, 40}), /** */
+        IMG_PHRYX_GREEN (new int[] {320, 320, 40, 40}), /** */
+        IMG_PHRYX_BLACK (new int[] {320, 360, 40, 40});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -127,25 +127,25 @@ public class FSkin {
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
     public enum ColorlessManaImages implements SkinProp, Coords { /** */
-        IMG_0   (new int[] {640, 200, 20, 20, 13, 13}), /** */
-        IMG_1   (new int[] {660, 200, 20, 20, 13, 13}), /** */
-        IMG_2   (new int[] {640, 220, 20, 20, 13, 13}), /** */
-        IMG_3   (new int[] {660, 220, 20, 20, 13, 13}), /** */
-        IMG_4   (new int[] {640, 240, 20, 20, 13, 13}), /** */
-        IMG_5   (new int[] {660, 240, 20, 20, 13, 13}), /** */
-        IMG_6   (new int[] {640, 260, 20, 20, 13, 13}), /** */
-        IMG_7   (new int[] {660, 260, 20, 20, 13, 13}), /** */
-        IMG_8   (new int[] {640, 280, 20, 20, 13, 13}), /** */
-        IMG_9   (new int[] {660, 280, 20, 20, 13, 13}), /** */
-        IMG_10  (new int[] {640, 300, 20, 20, 13, 13}), /** */
-        IMG_11  (new int[] {660, 300, 20, 20, 13, 13}), /** */
-        IMG_12  (new int[] {640, 320, 20, 20, 13, 13}), /** */
-        IMG_15  (new int[] {660, 340, 20, 20, 13, 13}), /** */
-        IMG_16  (new int[] {640, 360, 20, 20, 13, 13}), /** */
-        IMG_20  (new int[] {640, 400, 20, 20, 13, 13}), /** */
-        IMG_X   (new int[] {640, 420, 20, 20, 13, 13}), /** */
-        IMG_Y   (new int[] {660, 420, 20, 20, 13, 13}), /** */
-        IMG_Z   (new int[] {640, 440, 20, 20, 13, 13});
+        IMG_0   (new int[] {640, 200, 20, 20}), /** */
+        IMG_1   (new int[] {660, 200, 20, 20}), /** */
+        IMG_2   (new int[] {640, 220, 20, 20}), /** */
+        IMG_3   (new int[] {660, 220, 20, 20}), /** */
+        IMG_4   (new int[] {640, 240, 20, 20}), /** */
+        IMG_5   (new int[] {660, 240, 20, 20}), /** */
+        IMG_6   (new int[] {640, 260, 20, 20}), /** */
+        IMG_7   (new int[] {660, 260, 20, 20}), /** */
+        IMG_8   (new int[] {640, 280, 20, 20}), /** */
+        IMG_9   (new int[] {660, 280, 20, 20}), /** */
+        IMG_10  (new int[] {640, 300, 20, 20}), /** */
+        IMG_11  (new int[] {660, 300, 20, 20}), /** */
+        IMG_12  (new int[] {640, 320, 20, 20}), /** */
+        IMG_15  (new int[] {660, 340, 20, 20}), /** */
+        IMG_16  (new int[] {640, 360, 20, 20}), /** */
+        IMG_20  (new int[] {640, 400, 20, 20}), /** */
+        IMG_X   (new int[] {640, 420, 20, 20}), /** */
+        IMG_Y   (new int[] {660, 420, 20, 20}), /** */
+        IMG_Z   (new int[] {640, 440, 20, 20});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -514,7 +514,7 @@ public class FSkin {
 
         // Run through enums and load their coords.
         for (Colors e : Colors.values()) { this.setColor(e); }
-        for (ZoneIcons e : ZoneIcons.values())                      { this.setIcon(e); }
+        for (ZoneImages e : ZoneImages.values())                    { this.setImage(e); }
         for (DockIcons e : DockIcons.values())                      { this.setIcon(e); }
         for (ForgeIcons e : ForgeIcons.values())                    { this.setIcon(e); }
         for (ButtonImages e : ButtonImages.values())                { this.setIcon(e); }
@@ -618,24 +618,21 @@ public class FSkin {
     }
 
     /**
-     * Gets a scaled version of an icon from this skin's icon map.
+     * Gets a scaled version of an image from this skin's image map.
      * 
      * @param s0
-     *            String icon address
+     *            String image enum
      * @param w0
      *            int new width
      * @param h0
      *            int new height
-     * @return ImageIcon
+     * @return Image
      */
-    public ImageIcon getIcon(final SkinProp s0, int w0, int h0) {
+    public Image getImage(final SkinProp s0, int w0, int h0) {
         w0 = (w0 < 1) ? 1 : w0;
         h0 = (h0 < 1) ? 1 : h0;
 
-        final Image original =
-         (this.icons.get(s0) == null
-             ? this.images.get(s0)
-             : this.icons.get(s0).getImage());
+        final Image original = this.images.get(s0);
 
         final BufferedImage scaled = new BufferedImage(w0, h0, BufferedImage.TYPE_INT_ARGB);
 
@@ -644,7 +641,7 @@ public class FSkin {
         g2d.drawImage(original, 0, 0, w0, h0, 0, 0, original.getWidth(null), original.getHeight(null), null);
         g2d.dispose();
 
-        return new ImageIcon(scaled);
+        return scaled;
     }
 
     /**
