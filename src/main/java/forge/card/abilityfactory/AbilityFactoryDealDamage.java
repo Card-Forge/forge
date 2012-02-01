@@ -39,6 +39,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.spellability.TargetSelection;
 import forge.util.MyRandom;
 
 /**
@@ -459,10 +460,14 @@ public class AbilityFactoryDealDamage {
             final Player pl, final boolean mandatory) {
         final Target tgt = this.abilityFactory.getAbTgt();
         final Card source = this.abilityFactory.getHostCard();
+        final HashMap<String, String> params = this.abilityFactory.getMapParams();
         CardList hPlay = pl.getCardsIn(Zone.Battlefield);
         hPlay = hPlay.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
 
         final ArrayList<Object> objects = tgt.getTargets();
+        if (params.containsKey("TargetUnique")) {
+            objects.addAll(TargetSelection.getUniqueTargets(saMe));
+        }
         for (final Object o : objects) {
             if (o instanceof Card) {
                 final Card c = (Card) o;

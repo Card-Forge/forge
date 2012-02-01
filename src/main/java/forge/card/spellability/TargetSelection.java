@@ -225,7 +225,7 @@ public class TargetSelection {
      *            the ability
      * @return the unique targets
      */
-    public final ArrayList<Object> getUniqueTargets(final SpellAbility ability) {
+    public static final ArrayList<Object> getUniqueTargets(final SpellAbility ability) {
         final ArrayList<Object> targets = new ArrayList<Object>();
         SpellAbility child = ability;
         while (child instanceof AbilitySub) {
@@ -264,7 +264,7 @@ public class TargetSelection {
 
         ArrayList<Object> objects = new ArrayList<Object>();
         if (tgt.isUniqueTargets()) {
-            objects = this.getUniqueTargets(this.ability);
+            objects = getUniqueTargets(this.ability);
             for (final Object o : objects) {
                 if ((o instanceof Card) && objects.contains(o)) {
                     choices.remove((Card) o);
