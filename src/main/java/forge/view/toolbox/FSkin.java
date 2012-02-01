@@ -230,8 +230,8 @@ public class FSkin {
         ICO_NOTES       (new int[] {400, 560, 80, 80}), /** */
         ICO_HEART       (new int[] {480, 560, 80, 80}), /** */
 
-        ICO_MINUS       (new int[] {480, 640, 80, 80}), /** */
-        ICO_PLUS        (new int[] {560, 640, 80, 80});
+        ICO_MINUS       (new int[] {560, 640, 80, 80}), /** */
+        ICO_PLUS        (new int[] {480, 640, 80, 80});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
