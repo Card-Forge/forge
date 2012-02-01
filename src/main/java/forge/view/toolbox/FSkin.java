@@ -344,7 +344,6 @@ public class FSkin {
     private Map<SkinProp, ImageIcon> icons;
     private Map<SkinProp, Image> images;
     private Map<SkinProp, Color> colors;
-    private Map<SkinProp, Image> foils;
 
     private Map<Integer, Font> plainFonts;
     private Map<Integer, Font> boldFonts;
@@ -393,7 +392,6 @@ public class FSkin {
         this.icons = new HashMap<SkinProp, ImageIcon>();
         this.images = new HashMap<SkinProp, Image>();
         this.colors = new HashMap<SkinProp, Color>();
-        this.foils = new HashMap<SkinProp, Image>();
 
         final File f = new File(preferredDir + FILE_SPLASH);
         final BufferedImage img;
@@ -547,7 +545,6 @@ public class FSkin {
         this.icons.clear();
         this.images.clear();
         this.colors.clear();
-        this.foils.clear();
         this.plainFonts.clear();
         this.boldFonts.clear();
         this.italicFonts.clear();
@@ -751,7 +748,7 @@ public class FSkin {
         int w0 = coords[2];
         int h0 = coords[3];
 
-        this.foils.put(s0, bimFoils.getSubimage(x0, y0, w0, h0));
+        this.images.put(s0, bimFoils.getSubimage(x0, y0, w0, h0));
     }
 
     private void setCreature(final SkinProp s0) {
