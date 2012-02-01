@@ -375,14 +375,20 @@ public class StaticAbility {
     public final boolean checkConditions() {
         final Player controller = this.hostCard.getController();
 
-        Zone effectZone = Zone.Battlefield; // default
-
-        if (this.mapParams.containsKey("EffectZone")) {
-            effectZone = Zone.smartValueOf(this.mapParams.get("EffectZone"));
+        if (this.hostCard.isPhasedOut()) {
+            return false;
         }
 
-        if ((effectZone != null) && (!this.hostCard.isInZone(effectZone) || this.hostCard.isPhasedOut())) {
-            return false;
+        if (this.mapParams.containsKey("EffectZone")) {
+            if (!this.mapParams.get("EffectZone").equals("All")
+                    && !Zone.listValueOf(this.mapParams.get("EffectZone"))
+                        .contains(AllZone.getZoneOf(this.hostCard).getZoneType())) {
+                return false;
+            }
+        } else {
+            if (!this.hostCard.isInZone(Zone.Battlefield)) { // default
+                return false;
+            }
         }
 
         if (this.mapParams.containsKey("FatefulHour") && controller.getLife() > 5) {

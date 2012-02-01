@@ -18,6 +18,7 @@
 package forge.card.staticability;
 
 import java.util.HashMap;
+import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
@@ -62,8 +63,8 @@ public class StaticAbilityCantBeCast {
         }
 
         if (params.containsKey("Origin")) {
-            Zone src = Zone.smartValueOf(params.get("Origin"));
-            if (src != AllZone.getZoneOf(card).getZoneType()) {
+            List<Zone> src = Zone.listValueOf(params.get("Origin"));
+            if (!src.contains(AllZone.getZoneOf(card).getZoneType())) {
                 return false;
             }
         }
