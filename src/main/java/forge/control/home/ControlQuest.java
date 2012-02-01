@@ -334,7 +334,6 @@ public class ControlQuest {
     private void changeQuest() {
         AllZone.setQuestData(view.getLstQuests().getSelectedQuest());
         this.qData = AllZone.getQuestData();
-        this.qem = new QuestEventManager();
         this.qem.assembleAllEvents();
         AllZone.setQuestEventManager(this.qem);
 
@@ -444,6 +443,7 @@ public class ControlQuest {
             final Set<String> petList = this.qData.getPetManager().getAvailablePetNames();
             final QuestPetAbstract currentPet = this.qData.getPetManager().getSelectedPet();
 
+            view.getCbxPet().removeAllItems();
             // Pet list visibility
             if (petList.size() > 0) {
                 view.getCbxPet().setEnabled(true);
@@ -452,7 +452,7 @@ public class ControlQuest {
                     view.getCbxPet().addItem("Summon " + pet);
                 }
 
-                if (currentPet != null) { view.getCbxPet().setSelectedItem(currentPet.getName()); }
+                if (currentPet != null) { view.getCbxPet().setSelectedItem("Summon " + currentPet.getName()); }
             } else {
                 view.getCbxPet().setVisible(false);
             }
