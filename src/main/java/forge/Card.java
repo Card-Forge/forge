@@ -1561,7 +1561,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
                     // Any trigger should cause the phase not to skip
                     AllZone.getPhaseHandler().setSkipPhase(false);
-                    if(c.getOwner().isHuman()) {
+                    if (c.getOwner().isHuman()) {
                         AllZone.getGameAction().playCardNoCost(c);
                     } else {
                         final ArrayList<SpellAbility> choices = this.getBasicSpells();
