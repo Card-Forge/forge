@@ -3763,6 +3763,7 @@ res/cardsfolder/g/gruesome_deformity.txt -text
 res/cardsfolder/g/gruesome_discovery.txt -text
 res/cardsfolder/g/gruesome_encore.txt svneol=native#text/plain
 res/cardsfolder/g/gruul_guildmage.txt svneol=native#text/plain
+res/cardsfolder/g/gruul_nodorog.txt -text svneol=unset#text/plain
 res/cardsfolder/g/gruul_scrapper.txt -text
 res/cardsfolder/g/gruul_signet.txt svneol=native#text/plain
 res/cardsfolder/g/gruul_turf.txt svneol=native#text/plain
