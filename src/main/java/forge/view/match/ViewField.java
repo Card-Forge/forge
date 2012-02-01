@@ -173,7 +173,7 @@ public class ViewField extends FRoundedPanel {
         pnlDetails.setOpaque(false);
         pnlDetails.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         populateDetails();
-        this.add(pnlDetails, "w 10%!, h 70%!, gapleft 1px");
+        this.add(pnlDetails, "w 10%!, h 69%!, gapleft 1px");
 
         // Resize adapter
         this.addComponentListener(new ComponentAdapter() {
