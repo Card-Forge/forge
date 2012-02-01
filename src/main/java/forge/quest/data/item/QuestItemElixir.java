@@ -50,7 +50,7 @@ public class QuestItemElixir extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon getIcon() {
-        return Singletons.getView().getSkin().getIcon(FSkin.QuestIcons.ICO_BOTTLES);
+        return Singletons.getView().getSkin().getIcon(FSkin.QuestIcons.ICO_ELIXER);
     }
 
     /** {@inheritDoc} */
