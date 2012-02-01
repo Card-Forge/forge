@@ -45,6 +45,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 
+import forge.deck.DeckSection;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
 import forge.item.BoosterPack;
@@ -107,8 +108,10 @@ public class QuestDataIO {
 
             final IgnoringXStream xStream = new IgnoringXStream();
             xStream.registerConverter(new CardPoolToXml());
+            xStream.registerConverter(new DeckSectionToXml());
             xStream.registerConverter(new GameTypeToXml());
             xStream.alias("CardPool", ItemPool.class);
+            xStream.alias("DeckSection", DeckSection.class);
             data = (QuestData) xStream.fromXML(xml.toString());
             data.setName(name);
 
@@ -193,7 +196,9 @@ public class QuestDataIO {
         try {
             final XStream xStream = new XStream();
             xStream.registerConverter(new CardPoolToXml());
+            xStream.registerConverter(new DeckSectionToXml());
             xStream.alias("CardPool", ItemPool.class);
+            xStream.alias("DeckSection", DeckSection.class);
 
             final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + "/" + qd.getName() + ".dat");
             final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
@@ -202,11 +207,11 @@ public class QuestDataIO {
             zout.flush();
             zout.close();
 
-            // BufferedOutputStream boutUnp = new BufferedOutputStream(new
-            // FileOutputStream(f + ".xml"));
-            // xStream.toXML(qd, boutUnp);
-            // boutUnp.flush();
-            // boutUnp.close();
+            //BufferedOutputStream boutUnp = new BufferedOutputStream(new
+            //FileOutputStream(f + ".xml"));
+            //xStream.toXML(qd, boutUnp);
+            //boutUnp.flush();
+            //boutUnp.close();
 
         } catch (final Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
@@ -265,7 +270,7 @@ public class QuestDataIO {
             return clasz.equals(ItemPool.class);
         }
 
-        private void write(final CardPrinted cref, final Integer count, final HierarchicalStreamWriter writer) {
+        protected void write(final CardPrinted cref, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("card");
             writer.addAttribute("c", cref.getName());
             writer.addAttribute("s", cref.getSet());
@@ -279,16 +284,16 @@ public class QuestDataIO {
             writer.endNode();
         }
 
-        private void write(final BoosterPack booster, final Integer count, final HierarchicalStreamWriter writer) {
+        protected void write(final BoosterPack booster, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("booster");
             writer.addAttribute("s", booster.getSet());
             writer.addAttribute("n", count.toString());
             writer.endNode();
         }
 
-        private void write(final PreconDeck deck, final Integer count, final HierarchicalStreamWriter writer) {
+        protected void write(final PreconDeck deck, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("precon");
-            writer.addAttribute("s", deck.getName());
+            writer.addAttribute("name", deck.getName());
             writer.addAttribute("n", count.toString());
             writer.endNode();
         }
@@ -337,8 +342,9 @@ public class QuestDataIO {
             return result;
         }
 
-        private PreconDeck readPreconDeck(final HierarchicalStreamReader reader) {
-            final String name = reader.getAttribute("s");
+        protected PreconDeck readPreconDeck(final HierarchicalStreamReader reader) {
+            String name = reader.getAttribute("name");
+            if (name == null) { name = reader.getAttribute("s"); }
             for (PreconDeck d : QuestData.getPreconManager().getDecks()) {
                 if (name.equalsIgnoreCase(d.getName())) {
                     return d;
@@ -347,12 +353,12 @@ public class QuestDataIO {
             return null;
         }
 
-        private BoosterPack readBooster(final HierarchicalStreamReader reader) {
+        protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
             final String set = reader.getAttribute("s");
             return new BoosterPack(set);
         }
 
-        private CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
+        protected CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
             final String name = reader.getAttribute("c");
             final String set = reader.getAttribute("s");
             final String sIndex = reader.getAttribute("i");
@@ -361,5 +367,41 @@ public class QuestDataIO {
             final CardPrinted card = CardDb.instance().getCard(name, set, index);
             return foil ? CardPrinted.makeFoiled(card) : card;
         }
+    }
+
+    private static class DeckSectionToXml extends CardPoolToXml {
+
+        @SuppressWarnings("rawtypes")
+        @Override
+        public boolean canConvert(final Class clasz) {
+            return clasz.equals(DeckSection.class);
+        }
+        @Override
+        public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
+            for (final Entry<CardPrinted, Integer> e : (DeckSection) source) {
+                this.write(e.getKey(), e.getValue(), writer);
+            }
+
+        }
+
+        @Override
+        public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
+            final DeckSection result = new DeckSection();
+            while (reader.hasMoreChildren()) {
+                reader.moveDown();
+                final String sCnt = reader.getAttribute("n");
+                final int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
+                final String nodename = reader.getNodeName();
+
+                if ("string".equals(nodename)) {
+                    result.add(CardDb.instance().getCard(reader.getValue()));
+                } else if ("card".equals(nodename)) { // new format
+                    result.add(this.readCardPrinted(reader), cnt);
+                }
+                reader.moveUp();
+            }
+            return result;
+        }
+
     }
 }

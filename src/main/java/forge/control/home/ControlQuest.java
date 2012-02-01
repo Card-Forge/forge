@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -361,7 +362,13 @@ public class ControlQuest {
         // end block which can be deleted
 
         // Iterate over files and load quest datas for each.
-        File[] arrFiles = dirQuests.listFiles();
+        FilenameFilter takeDatFiles = new FilenameFilter() {
+            @Override
+            public boolean accept(final File dir, final String name) {
+                return name.endsWith(".dat");
+            }
+        };
+        File[] arrFiles = dirQuests.listFiles(takeDatFiles);
         arrQuests = new HashMap<String, QuestData>();
         for (File f : arrFiles) {
             arrQuests.put(f.getName(), QuestDataIO.loadData(f));
