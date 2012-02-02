@@ -19,7 +19,6 @@ package forge.view.match;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -672,12 +671,6 @@ public class ViewField extends FRoundedPanel {
     // difficulties in displaying the desired "flat" background and
     // also strange icon/action behavior.
     public class DetailLabel extends FLabel {
-        private boolean hover = false;
-        private final MouseAdapter madHover;
-        private int w, h, iw, ih;
-        private final Image img;
-        private Graphics2D g2d;
-
         /**
          * Instance of JLabel detailing info about field: has icon and optional
          * hover effect.
@@ -692,53 +685,11 @@ public class ViewField extends FRoundedPanel {
 
             this.setOpaque(false);
             this.setFontScaleFactor(0.5);
-            this.setBackground(clrHover);
-            img = skin.getImage(s0);
-            iw = img.getWidth(null);
-            ih = img.getHeight(null);
+            this.setIconScaleFactor(0.8);
+            this.setIconInBackground(true);
+            this.setIcon(new ImageIcon(skin.getImage(s0)));
 
-            // Hover effect
-            this.madHover = new MouseAdapter() {
-                @Override
-                public void mouseEntered(final MouseEvent e) { hover = true; repaint(); }
-
-                @Override
-                public void mouseExited(final MouseEvent e) { hover = false; repaint(); }
-            };
-
-            this.enableHover();
-            //this.clrBorders = ViewField.this.transparent;
-        }
-
-        /** Enable hover effects for this label. */
-        public void enableHover() {
-            this.disableHover();
-            this.addMouseListener(this.madHover);
-        }
-
-        /** Disable hover effects for this label. */
-        public void disableHover() {
-            this.removeMouseListener(this.madHover);
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-         */
-        @Override
-        protected void paintComponent(final Graphics g) {
-            this.h = this.getHeight();
-            this.w = this.getWidth();
-            this.g2d = (Graphics2D) g.create();
-
-            if (hover) {
-                g2d.setColor(clrHover);
-                g2d.fillRect(0, 0, w, h);
-            }
-
-            g2d.drawImage(img, 3, 5, h - 12, h - 10, 0, 0, iw, ih, null);
-            super.paintComponent(g);
+            this.setHoverable(true);
         }
     }
 

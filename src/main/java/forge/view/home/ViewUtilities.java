@@ -20,6 +20,7 @@ import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
+import forge.view.toolbox.SubButton;
 
 /**
  * Assembles swing components for "Utilities" mode menu.

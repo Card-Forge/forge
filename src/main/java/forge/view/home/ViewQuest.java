@@ -38,6 +38,8 @@ import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FTextArea;
+import forge.view.toolbox.SubButton;
+import forge.view.toolbox.SubTab;
 
 /** 
  * Populates Swing components of Quest mode in home screen.
@@ -106,7 +108,7 @@ public class ViewQuest extends JScrollPane {
         pnlLoadQuest = new JPanel();
         pnlPrefs = new JPanel();
 
-        lblTitle = new FLabel("New Quest");
+        lblTitle = new FLabel("New Quest", SwingConstants.CENTER);
         lblLife = new FLabel();
         lblCredits = new FLabel();
         lblWins = new FLabel();
@@ -144,7 +146,7 @@ public class ViewQuest extends JScrollPane {
 
         final String constraints = "w 90%!, gap 0 0 0 20px, alignx center";
         pnlViewport.add(pnlTabber, constraints + ", h 20px!");
-        pnlViewport.add(pnlTitle, constraints + ", h 60px!");
+        pnlViewport.add(pnlTitle, constraints + ", h 7%:7%:60px");
         pnlViewport.add(pnlStats, constraints);
         pnlViewport.add(pnlDuels, constraints);
         pnlViewport.add(pnlChallenges, constraints);
@@ -205,7 +207,10 @@ public class ViewQuest extends JScrollPane {
         pnlTitle.setLayout(new MigLayout("insets 0, gap 0, align center"));
         pnlTitle.setBackground(skin.getColor(FSkin.Colors.CLR_THEME).darker());
         ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
-        pnlTitle.add(lblTitle, "h 70%!, gap 0 0 0 10%!");
+
+        ((FLabel) lblTitle).setFontScaleBy(SwingConstants.HORIZONTAL);
+        ((FLabel) lblTitle).setFontScaleFactor(0.035);
+        pnlTitle.add(lblTitle, "w 98%!, h 70%!, gap 0 0 15%! 15%!");
     }
 
     /** Layout permanent parts of stats panel. */
@@ -415,31 +420,31 @@ public class ViewQuest extends JScrollPane {
     //========= TAB SHOW METHODS
     /** Display handler for duel tab click. */
     public void showDuelsTab() {
-        control.updateTabber(tabDuels);
-        this.hideAllPanels();
-        pnlTitle.setVisible(true);
-
-        if (AllZone.getQuestData() == null) {
-            lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
-            return;
-        }
-
-        setCurrentDeckStatus();
-        updateDuels();
-        updateStats();
-        lblTitle.setText("Duels: " + control.getRankString());
-
-        if (control.getCurrentDeck() != null) {
-            pnlStart.setVisible(true);
-
-            // Select first event.
-            selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
-            selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
-        }
-
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                control.updateTabber(tabDuels);
+                hideAllPanels();
+                pnlTitle.setVisible(true);
+
+                if (AllZone.getQuestData() == null) {
+                    lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
+                    return;
+                }
+
+                setCurrentDeckStatus();
+                updateDuels();
+                updateStats();
+                lblTitle.setText("Duels: " + control.getRankString());
+
+                if (control.getCurrentDeck() != null) {
+                    pnlStart.setVisible(true);
+
+                    // Select first event.
+                    selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
+                    selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
+                }
+
                 pnlStats.setVisible(true);
                 pnlDuels.setVisible(true);
             }
@@ -449,7 +454,7 @@ public class ViewQuest extends JScrollPane {
     /** Display handler for duel tab click. */
     public void showChallengesTab() {
         control.updateTabber(tabChallenges);
-        this.hideAllPanels();
+        hideAllPanels();
         pnlTitle.setVisible(true);
 
         if (AllZone.getQuestData() == null) {
@@ -547,7 +552,6 @@ public class ViewQuest extends JScrollPane {
 
             FLabel lblIcon = new FLabel();
             lblIcon.setIconScaleFactor(1);
-            lblIcon.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
             if (!file.exists()) {
                 lblIcon.setIcon(skin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
             }
@@ -555,22 +559,6 @@ public class ViewQuest extends JScrollPane {
                 lblIcon.setIcon(new ImageIcon(file.toString()));
             }
             this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
-
-            // Name
-            final FLabel lblName = new FLabel(event.getTitle() + ": " + event.getDifficulty());
-            lblName.setFontScaleFactor(0.6);
-            this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
-
-            // Description
-            final FTextArea tarDesc = new FTextArea();
-            tarDesc.setText(event.getDescription());
-            tarDesc.setFont(skin.getItalicFont(12));
-            this.add(tarDesc, "w 80%!, h 30px!");
-
-            this.setToolTipText("<html>" + event.getTitle()
-                    + ": " + event.getDifficulty()
-                    + "<br>" + event.getDescription()
-                    + "</html>");
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
@@ -599,6 +587,18 @@ public class ViewQuest extends JScrollPane {
                     }
                 }
             });
+
+            // Name
+            final FLabel lblName = new FLabel(event.getTitle() + ": " + event.getDifficulty());
+            lblName.setFontScaleFactor(0.6);
+            lblName.setHoverable(false);
+            this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
+
+            // Description
+            final FTextArea tarDesc = new FTextArea();
+            tarDesc.setText(event.getDescription());
+            tarDesc.setFont(skin.getItalicFont(12));
+            this.add(tarDesc, "w 80%!, h 30px!");
        }
 
         /** @return QuestEvent */

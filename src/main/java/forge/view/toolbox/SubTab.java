@@ -1,4 +1,4 @@
-package forge.view.home;
+package forge.view.toolbox;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import forge.Singletons;
-import forge.view.toolbox.FSkin;
 
 /** Standardized tab for submenus in home screen. */
 public class SubTab extends JPanel {

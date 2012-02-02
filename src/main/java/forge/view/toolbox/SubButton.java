@@ -1,4 +1,4 @@
-package forge.view.home;
+package forge.view.toolbox;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,7 +12,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import forge.Singletons;
-import forge.view.toolbox.FSkin;
 
 /** 
  * Standard button used for for submenus on the home screen.
@@ -21,6 +20,8 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class SubButton extends JButton {
     private FSkin skin;
+    private final Color clrHover, clrInactive;
+
     /** */
     public SubButton() {
         this("");
@@ -34,20 +35,23 @@ public class SubButton extends JButton {
      */
     public SubButton(String txt0) {
         super(txt0);
-        skin = Singletons.getView().getSkin();
+        this.skin = Singletons.getView().getSkin();
+        this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
+        this.clrInactive = skin.getColor(FSkin.Colors.CLR_INACTIVE);
+
         setBorder(new LineBorder(skin.getColor(FSkin.Colors.CLR_BORDERS), 1));
-        setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE));
+        setBackground(clrInactive);
         setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         setVerticalTextPosition(SwingConstants.CENTER);
         setFocusPainted(false);
 
         this.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                if (isEnabled()) { setBackground(skin.getColor(FSkin.Colors.CLR_HOVER)); }
+                if (isEnabled() && !isSelected()) { setBackground(clrHover); }
             }
 
             public void mouseExited(MouseEvent e) {
-                if (isEnabled()) { setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE)); }
+                if (isEnabled() && !isSelected()) { setBackground(clrInactive); }
             }
         });
 
@@ -68,6 +72,11 @@ public class SubButton extends JButton {
 
         if (b0) { setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE)); }
         else { setBackground(new Color(220, 220, 220)); }
+    }
+
+    @Override
+    public void setSelected(boolean b0) {
+        super.setSelected(b0);
     }
 
     @Override

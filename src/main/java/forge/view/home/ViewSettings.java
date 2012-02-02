@@ -43,6 +43,7 @@ import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
+import forge.view.toolbox.SubButton;
 
 /** 
  * Assembles swing components for "Settings" mode menu.

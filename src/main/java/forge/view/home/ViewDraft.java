@@ -29,6 +29,7 @@ import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
+import forge.view.toolbox.SubButton;
 
 /** 
  * Assembles swing components for "Draft" mode menu.
