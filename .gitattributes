@@ -9914,6 +9914,7 @@ res/cardsfolder/w/wielding_the_green_dragon.txt svneol=native#text/plain
 res/cardsfolder/w/wild_aesthir.txt svneol=native#text/plain
 res/cardsfolder/w/wild_cantor.txt svneol=native#text/plain
 res/cardsfolder/w/wild_colos.txt svneol=native#text/plain
+res/cardsfolder/w/wild_dogs.txt -text svneol=unset#text/plain
 res/cardsfolder/w/wild_elephant.txt svneol=native#text/plain
 res/cardsfolder/w/wild_griffin.txt svneol=native#text/plain
 res/cardsfolder/w/wild_growth.txt svneol=native#text/plain
