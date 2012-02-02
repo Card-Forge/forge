@@ -407,6 +407,14 @@ Lashknife Barrier
 - Fixed bug when once a turn mana abilities were not reset properly at the end of turn. (Wall Of Roots)
 - Ran set info script and oracle scripts.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed "creatures" sprite from default skin (since they're included with tokens from CardForge).
+- Reverted bazaar creatures accordingly.
+- Shrunk a few pixels off field detail labels.
+- Improved AI for Martial Coup card so it pays for X 5 instead of 0. Not perfect but better than before.
+- CheckStyle.
+- Fixed: Sealed from cube (singleton) set - shouldn't have more than one cards each
+- Big update to FLabel, allowing auto icon resize, font resizing per axis, resize toggling, hover toggle, select toggle, and command execution ability.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -646,6 +654,7 @@ Murderous Betrayal
 Haakon, Stromgald Scourge
 Bioplasm
 Gruul Nodorog
+Pulse of the Grid
 
 
 end
