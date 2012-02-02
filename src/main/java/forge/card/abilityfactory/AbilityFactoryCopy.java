@@ -190,7 +190,7 @@ public final class AbilityFactoryCopy {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -349,7 +349,7 @@ public final class AbilityFactoryCopy {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -617,7 +617,7 @@ public final class AbilityFactoryCopy {
 
         ArrayList<SpellAbility> tgtSpells;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtSpells = tgt.getTargetSAs();
         } else {
@@ -713,7 +713,7 @@ public final class AbilityFactoryCopy {
 
         ArrayList<SpellAbility> tgtSpells;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtSpells = tgt.getTargetSAs();
         } else {

@@ -55,6 +55,37 @@ public class AbilityFactory {
 
     /**
      * <p>
+     * Constructor for AbilityFactory.
+     * </p>
+     */
+    public AbilityFactory() {
+    }
+
+    /**
+     * <p>
+     * Constructor for AbilityFactory.
+     * </p>
+     * 
+     * @param af
+     *           a AbilityFactory object.
+     */
+    public AbilityFactory(final AbilityFactory af) {
+        this.abCost = af.getAbCost();
+        this.abTgt = af.getAbTgt();
+        this.api = af.getAPI();
+        this.hasSpDesc = af.hasSpDescription();
+        this.hasSubAb = af.hasSubAbility();
+        this.hasValid = af.hasValid();
+        this.hostC = af.getHostCard();
+        this.isAb = af.isAbility();
+        this.isDb = af.isDrawback();
+        this.isSp = af.isSpell();
+        this.isTargeted = af.isTargeted();
+        this.mapParams = af.getMapParams();
+    }
+
+    /**
+     * <p>
      * getHostCard.
      * </p>
      * 
@@ -62,6 +93,16 @@ public class AbilityFactory {
      */
     public final Card getHostCard() {
         return this.hostC;
+    }
+
+    /**
+     * <p>
+     * setHostCard.
+     * </p>
+     * 
+     */
+    public final void setHostCard(Card host) {
+        this.hostC = host;
     }
 
     private HashMap<String, String> mapParams = new HashMap<String, String>();
@@ -162,6 +203,17 @@ public class AbilityFactory {
      */
     public final Target getAbTgt() {
         return this.abTgt;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>abTgt</code>.
+     * </p>
+     * @param target
+     *            a target object.
+     */
+    public final void setAbTgt(Target target) {
+        this.abTgt = target;
     }
 
     /**
@@ -2290,10 +2342,12 @@ public class AbilityFactory {
      * handleRemembering.
      * </p>
      * 
+     * @param sa
+     *            a SpellAbility object.
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    public static void handleRemembering(final AbilityFactory af) {
+    public static void handleRemembering(final SpellAbility sa, final AbilityFactory af) {
         final HashMap<String, String> params = af.getMapParams();
         Card host;
 
@@ -2307,7 +2361,7 @@ public class AbilityFactory {
             host.clearRemembered();
         }
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         if (params.containsKey("RememberTargets")) {
             final ArrayList<Object> tgts = (tgt == null) ? new ArrayList<Object>() : tgt.getTargets();

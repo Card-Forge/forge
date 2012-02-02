@@ -239,7 +239,7 @@ public class AbilityFactoryAttach {
         ArrayList<Object> targets;
 
         // Should never allow more than one Attachment per card
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             targets = tgt.getTargets();
         } else {
@@ -956,7 +956,7 @@ public class AbilityFactoryAttach {
 
         // Check if there are any valid targets
         ArrayList<Object> targets = new ArrayList<Object>();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt == null) {
             targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
         }
@@ -1000,7 +1000,7 @@ public class AbilityFactoryAttach {
 
         ArrayList<Object> targets;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             targets = tgt.getTargets();
             // TODO Remove invalid targets (although more likely this will just

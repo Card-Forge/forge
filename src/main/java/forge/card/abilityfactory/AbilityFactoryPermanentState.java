@@ -193,7 +193,7 @@ public class AbilityFactoryPermanentState {
             sb.append(params.get("UntapType")).append("s");
         } else {
             ArrayList<Card> tgtCards;
-            final Target tgt = af.getAbTgt();
+            final Target tgt = sa.getTarget();
             if (tgt != null) {
                 tgtCards = tgt.getTargetCards();
             } else {
@@ -321,7 +321,7 @@ public class AbilityFactoryPermanentState {
      */
     private static boolean untapPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         boolean randomReturn = true;
 
@@ -555,7 +555,7 @@ public class AbilityFactoryPermanentState {
     private static void untapResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         ArrayList<Card> tgtCards = null;
 
         if (params.containsKey("UntapUpTo")) {
@@ -752,7 +752,7 @@ public class AbilityFactoryPermanentState {
         sb.append("Tap ");
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -792,7 +792,7 @@ public class AbilityFactoryPermanentState {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
@@ -891,7 +891,7 @@ public class AbilityFactoryPermanentState {
      */
     private static boolean tapPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
         boolean randomReturn = true;
@@ -1125,7 +1125,7 @@ public class AbilityFactoryPermanentState {
         final Card card = sa.getSourceCard();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -1286,7 +1286,7 @@ public class AbilityFactoryPermanentState {
             valid = params.get("ValidCards");
         }
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else if (params.containsKey("Defined")) {
@@ -1506,7 +1506,7 @@ public class AbilityFactoryPermanentState {
 
         ArrayList<Player> tgtPlayers = null;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else if (params.containsKey("Defined")) {
@@ -1671,7 +1671,7 @@ public class AbilityFactoryPermanentState {
 
         CardList validTappables = AbilityFactoryPermanentState.getTapAllTargets(valid, source);
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         if (tgt != null) {
             tgt.resetTargets();
@@ -1861,7 +1861,7 @@ public class AbilityFactoryPermanentState {
         sb.append("Tap or untap ");
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -1901,7 +1901,7 @@ public class AbilityFactoryPermanentState {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
@@ -1990,7 +1990,7 @@ public class AbilityFactoryPermanentState {
      */
     private static boolean tapOrUntapPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
         boolean randomReturn = true;
@@ -2194,7 +2194,7 @@ public class AbilityFactoryPermanentState {
         }
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -2311,7 +2311,7 @@ public class AbilityFactoryPermanentState {
      */
     private static boolean phasesPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         boolean randomReturn = true;
 

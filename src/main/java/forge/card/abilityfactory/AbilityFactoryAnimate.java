@@ -218,7 +218,7 @@ public final class AbilityFactoryAnimate {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         ArrayList<Card> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetCards();
@@ -309,7 +309,7 @@ public final class AbilityFactoryAnimate {
     private static boolean animateCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
 
         final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
         boolean useAbility = true;
@@ -565,7 +565,7 @@ public final class AbilityFactoryAnimate {
             sVars.addAll(Arrays.asList(params.get("sVars").split(",")));
         }
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         ArrayList<Card> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetCards();
@@ -1174,7 +1174,7 @@ public final class AbilityFactoryAnimate {
         CardList list;
         ArrayList<Player> tgtPlayers = null;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else if (params.containsKey("Defined")) {

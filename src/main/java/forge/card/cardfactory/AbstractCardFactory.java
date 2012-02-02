@@ -43,6 +43,7 @@ import forge.Counters;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -264,6 +265,17 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         c.setCopiedSpell(true);
 
         final SpellAbility copySA = sa.copy();
+        if (sa.getTarget() != null) {
+            Target target = new Target(sa.getTarget());
+            target.setSourceCard(c);
+            copySA.setTarget(target);
+            /*if (copySA.getAbilityFactory() != null) {
+                AbilityFactory af = new AbilityFactory(sa.getAbilityFactory());
+                af.setAbTgt(target);
+                af.setHostCard(source);
+                copySA.setAbilityFactory(af);
+            }*/
+        }
         copySA.setSourceCard(c);
 
         if (bCopyDetails) {

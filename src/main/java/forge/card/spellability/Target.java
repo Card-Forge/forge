@@ -44,6 +44,29 @@ public class Target {
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
     private TargetChoices choice = null;
+    
+    /**
+     * <p>
+     * getSourceCard.
+     * </p>
+     * 
+     * @return a Card object.
+     */
+    public final Card getSourceCard() {
+        return this.srcCard;
+    }
+
+    /**
+     * <p>
+     * setSourceCard.
+     * </p>
+     * 
+     * @param source
+     *            a Card object.
+     */
+    public final void setSourceCard(final Card source) {
+        this.srcCard = source;
+    }
 
     /**
      * <p>
@@ -132,6 +155,14 @@ public class Target {
 
     private String minTargets;
     private String maxTargets;
+    
+    public final String getMinTargets() {
+        return this.minTargets;
+    }
+    
+    public final String getMaxTargets() {
+        return this.maxTargets;
+    }
 
     /**
      * <p>
@@ -395,6 +426,25 @@ public class Target {
      */
     public final void resetTargets() {
         this.choice = null;
+    }
+    
+    /**
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param target
+     */
+    public Target(final Target target) {
+
+        this.tgtValid = true;
+        this.srcCard = target.getSourceCard();
+        this.vtSelection = target.getVTSelection();
+        this.validTgts = target.getValidTgts();
+        this.minTargets = target.getMinTargets();
+        this.maxTargets = target.getMaxTargets();
+        this.tgtZone = target.getZone();
+        this.targetSpellAbilityType = target.getTargetSpellAbilityType();
     }
 
     /**
@@ -689,5 +739,22 @@ public class Target {
      */
     public final void setSingleZone(final boolean single) {
         this.singleZone = single;
+    }
+    
+    /**
+     * <p>
+     * copy.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.Target} object.
+     */
+    public Target copy() {
+        Target clone = null;
+        try {
+            clone = (Target) this.clone();
+        } catch (final CloneNotSupportedException e) {
+            System.err.println(e);
+        }
+        return clone;
     }
 }

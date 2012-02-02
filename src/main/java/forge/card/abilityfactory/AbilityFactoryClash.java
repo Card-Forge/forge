@@ -171,8 +171,7 @@ public final class AbilityFactoryClash {
     }
 
     private static boolean clashCanPlayAI(final SpellAbility sa) {
-        final AbilityFactory af = sa.getAbilityFactory();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
                 return false;
@@ -578,7 +577,7 @@ public final class AbilityFactoryClash {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -624,7 +623,7 @@ public final class AbilityFactoryClash {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {

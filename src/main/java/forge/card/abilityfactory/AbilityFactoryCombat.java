@@ -435,7 +435,7 @@ public final class AbilityFactoryCombat {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -508,7 +508,7 @@ public final class AbilityFactoryCombat {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if ((tgt != null) && !params.containsKey("Defined")) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -651,7 +651,7 @@ public final class AbilityFactoryCombat {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -721,7 +721,7 @@ public final class AbilityFactoryCombat {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if ((tgt != null) && !params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -866,7 +866,7 @@ public final class AbilityFactoryCombat {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -998,7 +998,7 @@ public final class AbilityFactoryCombat {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
