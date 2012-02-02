@@ -7332,6 +7332,7 @@ res/cardsfolder/s/saprazzan_bailiff.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_cove.txt -text
 res/cardsfolder/s/saprazzan_heir.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_legate.txt -text
+res/cardsfolder/s/saprazzan_outrigger.txt -text
 res/cardsfolder/s/saprazzan_raider.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_skerry.txt svneol=native#text/plain
 res/cardsfolder/s/saproling_burst.txt -text
