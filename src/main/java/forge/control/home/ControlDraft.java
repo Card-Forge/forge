@@ -133,7 +133,7 @@ public class ControlDraft {
          });
 
         Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks[aiIndex+1]; //zero is human deck, so it must be +1
+        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks[aiIndex + 1]; //zero is human deck, so it must be +1
 
         if (Constant.Runtime.COMPUTER_DECK[0] == null) {
             throw new IllegalStateException("startButton() error - computer deck is null");
