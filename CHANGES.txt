@@ -375,6 +375,38 @@ Lashknife Barrier
 - Added the recent commit logs to changes.txt.
 - Moved Owlman 2 deck from the /res/decks/ folder to the /res/quest/decks/ folder.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The AI can now play static abilities in general.
+- The AI can now activate Suspend abilities. It's experimental, so please check each card before removing SVar:RemAIDeck:True.
+- Little update for the suspend AI.
+- Improved the AI of Delver of Secrets.
+- Fixed minor bug causing mirror match in limited draft mode
+- Updates SkieraCube to most recent version
+- Added "reset to default" on prefs settings
+- Fixed coords on win/loss icons.
+- CheckStyle.
+- Adjusted the SelectablePanel method and it now looks OK on Mac OS X. Thank you Doublestrike.
+- The FLabel lblLog in ViewWinLose class was cutting off the top of the "Game Log" text, this now looks OK on Mac OS X.
+- Bugfix: Pet select cleared before new quest loaded
+- Bugfix: Pet select remembers previous pet
+- Changed backslashes to forwardslashes for OSX file handling of quest datas. Tested working on r13702, NPE on r13703++ prevents decisive testing.
+- Fixed Wintermoon Mesa.
+- Bugfix: Random foil
+- Minor edit.
+- Corrected some quest items pointing to the wrong icon.
+- Made some small fixes to the rebel skin's sprite that might have caused mana symbol problems.
+- Replaced the low resolution card state icons in the default sprite_icons with higher res ones.
+- Further fix to the Rebel skin icon sprite (stray partially transparent pixels).
+- Various updates to detail labels in player field.
+- A few more minor visual tweaks.
+- Fixed the cost description of Murderous Betrayal.
+- Fixed DeckSection serialization for quest mode.
+- marked some fields as non-serializable
+- Removed Droning Bureaucrats. Yikes, not quite right. Fixing.
+- Removed card due to incorrect name.
+- Started adding support for the "TargetUnique" parameter to the AI part of AF DealDamage.
+- Fixed bug when once a turn mana abilities were not reset properly at the end of turn. (Wall Of Roots)
+- Ran set info script and oracle scripts.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -610,6 +642,10 @@ Dismantling Blow
 Skullcage
 Dreamwinder
 Firefright Mage
+Murderous Betrayal
+Haakon, Stromgald Scourge
+Bioplasm
+Gruul Nodorog
 
 
 end
