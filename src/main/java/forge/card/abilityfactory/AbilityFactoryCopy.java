@@ -32,6 +32,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -553,6 +554,14 @@ public final class AbilityFactoryCopy {
                 AbilityFactoryCopy.copySpellResolve(af, this);
             }
 
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return true;
+                }
+                return AbilityFactoryCopy.copySpellTriggerAI(af, this, mandatory);
+            }
+
         };
         return spCopySpell;
     }
@@ -705,10 +714,15 @@ public final class AbilityFactoryCopy {
     private static void copySpellResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
+        Player controller = sa.getActivatingPlayer();
 
         int amount = 1;
         if (params.containsKey("Amount")) {
             amount = AbilityFactory.calculateAmount(card, params.get("Amount"), sa);
+        }
+
+        if (params.containsKey("Controller")) {
+            controller = AbilityFactory.getDefinedPlayers(card, params.get("Controller"), sa).get(0);
         }
 
         ArrayList<SpellAbility> tgtSpells;
@@ -733,7 +747,7 @@ public final class AbilityFactoryCopy {
             chosenSA = tgtSpells.get(0);
         }
 
-        chosenSA.setActivatingPlayer(sa.getActivatingPlayer());
+        chosenSA.setActivatingPlayer(controller);
         if ((tgt == null)) {
             for (int i = 0; i < amount; i++) {
                 AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);

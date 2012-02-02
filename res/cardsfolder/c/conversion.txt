@@ -5,7 +5,7 @@ Text:no text
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W
 S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ All Mountains are Plains.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conversion.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/199.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/201.jpg

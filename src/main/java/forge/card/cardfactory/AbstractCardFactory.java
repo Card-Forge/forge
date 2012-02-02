@@ -43,7 +43,6 @@ import forge.Counters;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -256,12 +255,13 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
     @Override
     public final void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
             final boolean bCopyDetails) {
+        Player controller = sa.getActivatingPlayer();
         if (sa.getPayCosts() == null) {
             this.copySpellontoStack(source, source, bCopyDetails);
             return;
         }
         final Card c = AllZone.getCardFactory().copyCard(original);
-        c.addController(source.getController());
+        c.addController(controller);
         c.setCopiedSpell(true);
 
         final SpellAbility copySA = sa.copy();
@@ -290,7 +290,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             }
         }
 
-        if (source.getController().isHuman()) {
+        if (controller.isHuman()) {
             AllZone.getGameAction().playSpellAbilityForFree(copySA);
         } else if (copySA.canPlayAI()) {
             ComputerUtil.playStackFree(copySA);
