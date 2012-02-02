@@ -165,7 +165,11 @@ public class SealedDeck {
                     @Override
                     public List<CardPrinted> apply(final BoosterGenerator pack) {
                         if (draft.getIgnoreRarity()) {
-                            return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.getNumCards(), 0);
+                            if (!draft.getSingleton()) {
+                                return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.getNumCards(), 0);
+                            } else {
+                                return pack.getSingletonBoosterPack(draft.getNumCards());
+                            }
                         }
                         return pack.getBoosterPack(draft.getNumCommons(), draft.getNumUncommons(), 0,
                                 draft.getNumRares(), draft.getNumMythics(), draft.getNumSpecials(),
