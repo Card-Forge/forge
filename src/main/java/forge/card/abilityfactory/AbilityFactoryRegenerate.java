@@ -185,7 +185,7 @@ public class AbilityFactoryRegenerate {
         final Card host = af.getHostCard();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -460,7 +460,7 @@ public class AbilityFactoryRegenerate {
         final HashMap<String, String> params = af.getMapParams();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {

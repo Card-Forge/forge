@@ -196,7 +196,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -361,7 +361,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -779,7 +779,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -938,7 +938,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1146,7 +1146,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1245,7 +1245,7 @@ public final class AbilityFactoryReveal {
      */
     private static boolean revealHandTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
             final boolean mandatory) {
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         final int humanHandSize = AllZone.getHumanPlayer().getCardsIn(Zone.Hand).size();
 
@@ -1314,7 +1314,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1478,7 +1478,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1504,7 +1504,7 @@ public final class AbilityFactoryReveal {
      * @return a boolean.
      */
     private static boolean scryTargetAI(final AbilityFactory af, final SpellAbility sa) {
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         if (tgt != null) { // It doesn't appear that Scry ever targets
             // ability is targeted
@@ -1558,7 +1558,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1756,7 +1756,7 @@ public final class AbilityFactoryReveal {
         ArrayList<Player> tgtPlayers;
         boolean shuffle = false;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if ((tgt != null) && !params.containsKey("Defined")) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1813,7 +1813,7 @@ public final class AbilityFactoryReveal {
     private static boolean rearrangeTopOfLibraryTrigger(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         if (tgt != null) {
             // ability is targeted
@@ -1855,7 +1855,7 @@ public final class AbilityFactoryReveal {
         boolean shuffle = false;
 
         if (sa.getActivatingPlayer().isHuman()) {
-            final Target tgt = af.getAbTgt();
+            final Target tgt = sa.getTarget();
             if ((tgt != null) && !params.containsKey("Defined")) {
                 tgtPlayers = tgt.getTargetPlayers();
             } else {
@@ -2066,7 +2066,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -2200,7 +2200,7 @@ public final class AbilityFactoryReveal {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {

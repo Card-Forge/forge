@@ -268,7 +268,7 @@ public class AbilityFactoryPreventDamage {
             return false;
         }
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
@@ -498,7 +498,7 @@ public class AbilityFactoryPreventDamage {
             }
         }
 
-        final boolean targeted = (af.getAbTgt() != null);
+        final boolean targeted = (sa.getTarget() != null);
 
         for (final Object o : tgts) {
             if (o instanceof Card) {

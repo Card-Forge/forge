@@ -438,7 +438,7 @@ public class AbilityFactoryDestroy {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -525,7 +525,7 @@ public class AbilityFactoryDestroy {
         ArrayList<Card> tgtCards;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -724,7 +724,7 @@ public class AbilityFactoryDestroy {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -862,7 +862,7 @@ public class AbilityFactoryDestroy {
 
         final Card card = sa.getSourceCard();
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         Player targetPlayer = null;
         if (tgt != null) {
             targetPlayer = tgt.getTargetPlayers().get(0);

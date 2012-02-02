@@ -160,7 +160,7 @@ public class AbilityFactorySetState {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = abilityFactory.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -206,8 +206,8 @@ public class AbilityFactorySetState {
 
         ArrayList<Card> tgtCards;
 
-        if (abilityFactory.getAbTgt() != null) {
-            tgtCards = abilityFactory.getAbTgt().getTargetCards();
+        if (sa.getTarget() != null) {
+            tgtCards = sa.getTarget().getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(abilityFactory.getHostCard(),
                     abilityFactory.getMapParams().get("Defined"), sa);
@@ -216,7 +216,7 @@ public class AbilityFactorySetState {
         final boolean remChanged = abilityFactory.getMapParams().containsKey("RememberChanged");
 
         for (final Card tgt : tgtCards) {
-            if (abilityFactory.getAbTgt() != null) {
+            if (sa.getTarget() != null) {
                 if (!tgt.canBeTargetedBy(sa)) {
                     continue;
                 }
@@ -383,7 +383,7 @@ public class AbilityFactorySetState {
 
         final Card card = sa.getSourceCard();
 
-        final Target tgt = abilityFactory.getAbTgt();
+        final Target tgt = sa.getTarget();
         Player targetPlayer = null;
         if (tgt != null) {
             targetPlayer = tgt.getTargetPlayers().get(0);

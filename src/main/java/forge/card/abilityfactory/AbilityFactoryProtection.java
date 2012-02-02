@@ -274,7 +274,7 @@ public final class AbilityFactoryProtection {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = af.getHostCard();
         // if there is no target and host card isn't in play, don't activate
-        if ((af.getAbTgt() == null) && !AllZoneUtil.isCardInPlay(hostCard)) {
+        if ((sa.getTarget() == null) && !AllZoneUtil.isCardInPlay(hostCard)) {
             return false;
         }
 
@@ -310,7 +310,7 @@ public final class AbilityFactoryProtection {
             return false;
         }
 
-        if ((af.getAbTgt() == null) || !af.getAbTgt().doesTarget()) {
+        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 
             if (cards.size() == 0) {
@@ -351,7 +351,7 @@ public final class AbilityFactoryProtection {
 
         final Card source = sa.getSourceCard();
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         tgt.resetTargets();
         CardList list = AbilityFactoryProtection.getProtectCreatures(af, sa);
 
@@ -566,7 +566,7 @@ public final class AbilityFactoryProtection {
     private static boolean protectDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         final Card host = af.getHostCard();
 
-        if ((af.getAbTgt() == null) || !af.getAbTgt().doesTarget()) {
+        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (host.isCreature()) {
                 // TODO
             }
@@ -599,7 +599,7 @@ public final class AbilityFactoryProtection {
         final StringBuilder sb = new StringBuilder();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -713,7 +713,7 @@ public final class AbilityFactoryProtection {
 
         ArrayList<Card> tgtCards;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -951,7 +951,7 @@ public final class AbilityFactoryProtection {
     private static boolean protectAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         final Card hostCard = af.getHostCard();
         // if there is no target and host card isn't in play, don't activate
-        if ((af.getAbTgt() == null) && !AllZoneUtil.isCardInPlay(hostCard)) {
+        if ((sa.getTarget() == null) && !AllZoneUtil.isCardInPlay(hostCard)) {
             return false;
         }
 
@@ -1031,7 +1031,7 @@ public final class AbilityFactoryProtection {
         final StringBuilder sb = new StringBuilder();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {

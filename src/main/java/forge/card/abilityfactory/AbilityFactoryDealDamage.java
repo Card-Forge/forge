@@ -458,8 +458,8 @@ public class AbilityFactoryDealDamage {
      */
     private Card dealDamageChooseTgtC(final SpellAbility saMe, final int d, final boolean noPrevention,
             final Player pl, final boolean mandatory) {
-        final Target tgt = this.abilityFactory.getAbTgt();
-        final Card source = this.abilityFactory.getHostCard();
+        final Target tgt = saMe.getTarget();
+        final Card source = saMe.getSourceCard();
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
         CardList hPlay = pl.getCardsIn(Zone.Battlefield);
         hPlay = hPlay.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
@@ -522,7 +522,7 @@ public class AbilityFactoryDealDamage {
      * @return a boolean.
      */
     private boolean damageTargetAI(final SpellAbility saMe, final int dmg) {
-        final Target tgt = this.abilityFactory.getAbTgt();
+        final Target tgt = saMe.getTarget();
 
         if (tgt == null) {
             return this.damageChooseNontargeted(saMe, dmg);
@@ -791,7 +791,7 @@ public class AbilityFactoryDealDamage {
             tgts = saMe.getTarget().getTargets();
         }
 
-        final boolean targeted = (this.abilityFactory.getAbTgt() != null);
+        final boolean targeted = (saMe.getTarget() != null);
 
         if (params.containsKey("Radiance") && targeted) {
             Card origin = null;
@@ -1031,7 +1031,7 @@ public class AbilityFactoryDealDamage {
         final CardList humanList = this.getKillableCreatures(af, sa, AllZone.getHumanPlayer(), dmg);
         CardList computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
@@ -1218,7 +1218,7 @@ public class AbilityFactoryDealDamage {
 
         final int dmg = this.getNumDamage(sa);
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         Player targetPlayer = null;
         if (tgt != null) {
             targetPlayer = tgt.getTargetPlayers().get(0);
@@ -1395,7 +1395,7 @@ public class AbilityFactoryDealDamage {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1473,7 +1473,7 @@ public class AbilityFactoryDealDamage {
             tgts = sa.getTarget().getTargets();
         }
 
-        final boolean targeted = (this.abilityFactory.getAbTgt() != null);
+        final boolean targeted = (sa.getTarget() != null);
 
         for (final Object o : tgts) {
             for (final Card source : sources) {

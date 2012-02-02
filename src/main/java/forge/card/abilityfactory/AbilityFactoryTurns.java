@@ -173,7 +173,7 @@ public class AbilityFactoryTurns {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -271,7 +271,7 @@ public class AbilityFactoryTurns {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {

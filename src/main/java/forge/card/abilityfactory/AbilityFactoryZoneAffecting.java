@@ -198,7 +198,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (!params.containsKey("Defined") && tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -344,7 +344,7 @@ public class AbilityFactoryZoneAffecting {
      */
     private static boolean drawTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
             final boolean mandatory) {
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
 
@@ -526,7 +526,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (!params.containsKey("Defined") && tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -709,7 +709,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -854,7 +854,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a boolean.
      */
     private static boolean millTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final HashMap<String, String> params = af.getMapParams();
 
         if (tgt != null) {
@@ -967,7 +967,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1147,7 +1147,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1322,7 +1322,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1521,7 +1521,7 @@ public class AbilityFactoryZoneAffecting {
      * @return a boolean.
      */
     private static boolean discardTargetAI(final AbilityFactory af, final SpellAbility sa) {
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() < 1) {
             return false;
         }
@@ -1569,7 +1569,7 @@ public class AbilityFactoryZoneAffecting {
      */
     private static boolean discardTriggerNoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             if (!AbilityFactoryZoneAffecting.discardTargetAI(af, sa)) {
                 if (mandatory && AllZone.getComputerPlayer().canBeTargetedBy(sa)) {
@@ -1743,7 +1743,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1876,7 +1876,7 @@ public class AbilityFactoryZoneAffecting {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {

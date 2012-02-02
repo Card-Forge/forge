@@ -568,7 +568,7 @@ public class AbilityFactoryPump {
             return false;
         }
 
-        final Target tgt = this.abilityFactory.getAbTgt();
+        final Target tgt = sa.getTarget();
         tgt.resetTargets();
         CardList list;
         if (this.abilityFactory.isCurse()) {
@@ -839,7 +839,7 @@ public class AbilityFactoryPump {
         final String name = af.getHostCard().getName();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = this.abilityFactory.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -915,7 +915,7 @@ public class AbilityFactoryPump {
     private void pumpResolve(final SpellAbility sa) {
         ArrayList<Card> tgtCards;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
-        final Target tgt = this.abilityFactory.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -1203,12 +1203,11 @@ public class AbilityFactoryPump {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void pumpAllResolve(final SpellAbility sa) {
-        final AbilityFactory af = sa.getAbilityFactory();
         CardList list;
         ArrayList<Player> tgtPlayers = null;
         final ArrayList<Zone> affectedZones = new ArrayList<Zone>();
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else if (this.params.containsKey("Defined")) {

@@ -287,7 +287,7 @@ public class AbilityFactoryMana {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -578,7 +578,7 @@ public class AbilityFactoryMana {
 
         ArrayList<Player> tgtPlayers;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = abMana.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1022,7 +1022,7 @@ public class AbilityFactoryMana {
         }
 
         ArrayList<Player> tgtPlayers;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -1062,7 +1062,7 @@ public class AbilityFactoryMana {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
@@ -1146,7 +1146,7 @@ public class AbilityFactoryMana {
     private static boolean drainManaPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
         boolean randomReturn = true;
@@ -1185,7 +1185,7 @@ public class AbilityFactoryMana {
         final Card card = sa.getSourceCard();
 
         ArrayList<Player> tgtPlayers;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {

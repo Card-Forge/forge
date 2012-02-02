@@ -239,7 +239,7 @@ public class AbilityFactoryGainControl {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = this.af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -290,7 +290,7 @@ public class AbilityFactoryGainControl {
         boolean hasEnchantment = false;
         boolean hasLand = false;
 
-        final Target tgt = this.af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         // if Defined, then don't worry about targeting
         if (tgt == null) {
@@ -389,7 +389,7 @@ public class AbilityFactoryGainControl {
         ArrayList<Card> tgtCards;
         final boolean self = this.params.containsKey("Defined") && this.params.get("Defined").equals("Self");
 
-        final Target tgt = this.af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -514,7 +514,7 @@ public class AbilityFactoryGainControl {
      * @return a boolean.
      */
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
-        if ((this.af.getAbTgt() == null) || !this.af.getAbTgt().doesTarget()) {
+        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             // all is good
         } else {
             return this.gainControlTgtAI(sa);

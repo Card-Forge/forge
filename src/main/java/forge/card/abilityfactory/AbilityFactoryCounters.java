@@ -211,7 +211,7 @@ public class AbilityFactoryCounters {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -682,7 +682,7 @@ public class AbilityFactoryCounters {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -859,7 +859,7 @@ public class AbilityFactoryCounters {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -1054,7 +1054,7 @@ public class AbilityFactoryCounters {
 
         ArrayList<Card> tgtCards;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -2133,7 +2133,7 @@ public class AbilityFactoryCounters {
         }
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -2241,7 +2241,7 @@ public class AbilityFactoryCounters {
             final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = af.getHostCard();
-        final Target abTgt = af.getAbTgt();
+        final Target abTgt = sa.getTarget();
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
         final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
@@ -2353,7 +2353,7 @@ public class AbilityFactoryCounters {
         }
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {

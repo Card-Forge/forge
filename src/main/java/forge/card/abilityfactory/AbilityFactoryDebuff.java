@@ -203,7 +203,7 @@ public final class AbilityFactoryDebuff {
         final StringBuilder sb = new StringBuilder();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -303,7 +303,7 @@ public final class AbilityFactoryDebuff {
             return false;
         }
 
-        if ((af.getAbTgt() == null) || !af.getAbTgt().doesTarget()) {
+        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
             if (cards.size() == 0) {
                 return false;
@@ -328,7 +328,7 @@ public final class AbilityFactoryDebuff {
      */
     private static boolean debuffDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        if ((af.getAbTgt() == null) || !af.getAbTgt().doesTarget()) {
+        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
             // here?
         } else {
@@ -360,7 +360,7 @@ public final class AbilityFactoryDebuff {
             return false;
         }
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         tgt.resetTargets();
         CardList list = AbilityFactoryDebuff.getCurseCreatures(af, sa, kws);
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -559,7 +559,7 @@ public final class AbilityFactoryDebuff {
         final ArrayList<String> kws = AbilityFactoryDebuff.getKeywords(params);
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {

@@ -2028,7 +2028,7 @@ public class AbilityFactoryPermanentState {
         final Card card = sa.getSourceCard();
 
         ArrayList<Card> tgtCards;
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {

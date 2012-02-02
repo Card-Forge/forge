@@ -182,7 +182,7 @@ public class AbilityFactorySacrifice {
             sb.append(conditionDesc).append(" ");
         }
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         ArrayList<Player> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetPlayers();
@@ -248,7 +248,7 @@ public class AbilityFactorySacrifice {
 
         // Some additional checks based on what is being sacrificed, and who is
         // sacrificing
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             final String valid = params.get("SacValid");
             String num = params.get("Amount");
@@ -363,7 +363,7 @@ public class AbilityFactorySacrifice {
 
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
 
         if (tgt != null) {
             tgt.resetTargets();
@@ -427,7 +427,7 @@ public class AbilityFactorySacrifice {
         final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
         final int amount = AbilityFactory.calculateAmount(card, num, sa);
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         ArrayList<Player> tgts;
         if (tgt != null) {
             tgts = tgt.getTargetPlayers();

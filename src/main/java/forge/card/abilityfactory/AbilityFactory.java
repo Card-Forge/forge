@@ -99,6 +99,8 @@ public class AbilityFactory {
      * <p>
      * setHostCard.
      * </p>
+     * @param host
+     *            a Card object.
      * 
      */
     public final void setHostCard(Card host) {
