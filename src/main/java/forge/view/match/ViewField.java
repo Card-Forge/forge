@@ -737,7 +737,7 @@ public class ViewField extends FRoundedPanel {
                 g2d.fillRect(0, 0, w, h);
             }
 
-            g2d.drawImage(img, 3, 3, h - 6, h - 6, 0, 0, iw, ih, null);
+            g2d.drawImage(img, 3, 5, h - 12, h - 10, 0, 0, iw, ih, null);
             super.paintComponent(g);
         }
     }
