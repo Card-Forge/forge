@@ -389,7 +389,7 @@ public class AbilityFactoryCounterMagic {
         // still on the stack
         ArrayList<SpellAbility> sas;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
@@ -452,7 +452,7 @@ public class AbilityFactoryCounterMagic {
 
         ArrayList<SpellAbility> sas;
 
-        final Target tgt = af.getAbTgt();
+        final Target tgt = sa.getTarget();
         if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
