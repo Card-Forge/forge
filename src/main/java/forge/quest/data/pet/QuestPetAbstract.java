@@ -102,7 +102,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
 
     /**
      * <p>
-     * getImageName.
+     * getIcon.
      * </p>
      * 
      * @return a {@link java.lang.String} object.

@@ -241,42 +241,6 @@ public class FSkin {
     }
 
     /** */
-    public enum CreatureIcons implements SkinProp, Coords { /** */
-        ICO_BIRD1         (new int[] {0, 2280, 400, 570}), /** */
-        ICO_BIRD2         (new int[] {400, 2280, 400, 570}), /** */
-        ICO_BIRD3         (new int[] {800, 2280, 400, 570}), /** */
-        ICO_BIRD4         (new int[] {1200, 2280, 400, 570}), /** */
-
-        ICO_PLANT1         (new int[] {0, 0, 400, 570}), /** */
-        ICO_PLANT2         (new int[] {400, 0, 400, 570}), /** */
-        ICO_PLANT3         (new int[] {800, 0, 400, 570}), /** */
-        ICO_PLANT4         (new int[] {1200, 0, 400, 570}), /** */
-        ICO_PLANT5         (new int[] {0, 570, 400, 570}), /** */
-        ICO_PLANT6         (new int[] {400, 570, 400, 570}), /** */
-
-        ICO_HOUND1         (new int[] {0, 1710, 400, 570}), /** */
-        ICO_HOUND2         (new int[] {400, 1710, 400, 570}), /** */
-        ICO_HOUND3         (new int[] {800, 1710, 400, 570}), /** */
-        ICO_HOUND4         (new int[] {1200, 1710, 400, 570}), /** */
-
-        ICO_CROC1         (new int[] {0, 2850, 400, 570}), /** */
-        ICO_CROC2         (new int[] {400, 2850, 400, 570}), /** */
-        ICO_CROC3         (new int[] {800, 2850, 400, 570}), /** */
-        ICO_CROC4         (new int[] {1200, 2850, 400, 570}), /** */
-
-        ICO_WOLF1         (new int[] {0, 1140, 400, 570}), /** */
-        ICO_WOLF2         (new int[] {400, 1140, 400, 570}), /** */
-        ICO_WOLF3         (new int[] {800, 1140, 400, 570}), /** */
-        ICO_WOLF4         (new int[] {1200, 1140, 400, 570});
-
-        private int[] coords;
-        /** @param xy &emsp; int[] coordinates */
-        CreatureIcons(int[] xy) { this.coords = xy; }
-        /** @return int[] */
-        public int[] getCoords() { return coords; }
-    }
-
-    /** */
     public enum ForgeIcons implements SkinProp, Coords { /** */
         ICO_EDIT            (new int[] {640, 500, 20, 20}), /** */
         ICO_EDIT_OVER       (new int[] {660, 500, 20, 20}), /** */
@@ -353,7 +317,6 @@ public class FSkin {
         FILE_SKINS_DIR = "res/images/skins/",
         FILE_ICON_SPRITE = "sprite_icons.png",
         FILE_FOIL_SPRITE = "sprite_foils.png",
-        FILE_CREATURE_SPRITE = "sprite_creatures.jpg",
         FILE_FONT = "font1.ttf",
         FILE_SPLASH = "bg_splash.png",
         FILE_MATCH_BG = "bg_match.jpg",
@@ -364,7 +327,7 @@ public class FSkin {
     private final String defaultDir;
     private final String preferredName;
     private Font font;
-    private BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils, bimCreatures;
+    private BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils;
     private int preferredH, preferredW;
     private FProgressBar barProgress;
 
@@ -447,20 +410,17 @@ public class FSkin {
         });
 
         // Grab and test various sprite files.
-        barProgress.setMaximum(4);
+        barProgress.setMaximum(3);
         final File f1 = new File(defaultDir + FILE_ICON_SPRITE);
         final File f2 = new File(preferredDir + FILE_ICON_SPRITE);
-        final File f3 = new File(defaultDir + FILE_CREATURE_SPRITE);
-        final File f4 = new File(defaultDir + FILE_FOIL_SPRITE);
+        final File f3 = new File(defaultDir + FILE_FOIL_SPRITE);
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
             barProgress.increment();
             bimPreferredSprite = ImageIO.read(f2);
             barProgress.increment();
-            bimCreatures = ImageIO.read(f3);
-            barProgress.increment();
-            bimFoils = ImageIO.read(f4);
+            bimFoils = ImageIO.read(f3);
             barProgress.increment();
 
             preferredH = bimPreferredSprite.getHeight();
@@ -485,27 +445,11 @@ public class FSkin {
         // Exceptions handled inside method.
         this.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
         plainFonts = new HashMap<Integer, Font>();
-        setFont(10);
-        setFont(11);
-        setFont(12);
-        setFont(13);
-        setFont(14);
-        setFont(15);
-        setFont(16);
-        setFont(18);
-        setFont(20);
-        setFont(22);
-
         boldFonts = new HashMap<Integer, Font>();
-        setBoldFont(12);
-        setBoldFont(14);
-        setBoldFont(16);
-        setBoldFont(18);
-        setBoldFont(20);
-
         italicFonts = new HashMap<Integer, Font>();
-        setItalicFont(12);
-        setItalicFont(14);
+        for (int i = 10; i <= 22; i++) { setFont(i); }
+        for (int i = 10; i <= 20; i += 2) { setBoldFont(i); }
+        for (int i = 12; i <= 14; i += 2) { setItalicFont(i); }
 
         // Put various images into map (except sprite and splash).
         // Exceptions handled inside method.
@@ -524,17 +468,14 @@ public class FSkin {
         for (ColorlessManaImages e : ColorlessManaImages.values())  { this.setImage(e); }
         for (GameplayImages e : GameplayImages.values())            { this.setImage(e); }
 
-        // Foils and creatures have a separate sprite, so use specific methods.
+        // Foils have a separate sprite, so uses a specific method.
         for (Foils e : Foils.values()) { this.setFoil(e); }
-        for (CreatureIcons e : CreatureIcons.values()) { this.setCreature(e); }
 
         // Clear references to buffered images
-        this.bimCreatures.flush();
         this.bimDefaultSprite.flush();
         this.bimFoils.flush();
         this.bimPreferredSprite.flush();
 
-        this.bimCreatures = null;
         this.bimDefaultSprite = null;
         this.bimFoils = null;
         this.bimPreferredSprite = null;
@@ -746,16 +687,6 @@ public class FSkin {
         int h0 = coords[3];
 
         this.images.put(s0, bimFoils.getSubimage(x0, y0, w0, h0));
-    }
-
-    private void setCreature(final SkinProp s0) {
-        int[] coords = ((Coords) s0).getCoords();
-        int x0 = coords[0];
-        int y0 = coords[1];
-        int w0 = coords[2];
-        int h0 = coords[3];
-
-        this.icons.put(s0, new ImageIcon(bimCreatures.getSubimage(x0, y0, w0, h0)));
     }
 
     private void setColor(final SkinProp s0) {

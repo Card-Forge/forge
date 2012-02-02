@@ -22,12 +22,12 @@ import javax.swing.ImageIcon;
 import forge.AllZone;
 import forge.Card;
 import forge.Constant;
-import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 import forge.quest.data.bazaar.QuestStallManager;
-import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -122,10 +122,8 @@ public class QuestPetPlant extends QuestPetAbstract {
      * </p>
      */
     public QuestPetPlant() {
-        super(
-                "Plant",
-                "Start each of your battles with this lush, verdant plant on your side. Excellent at blocking the nastiest of critters!",
-                6);
+        super("Plant", "Start each of your battles with this lush, verdant plant on your side."
+                + "Excellent at blocking the nastiest of critters!", 6);
     }
 
     /** {@inheritDoc} */
@@ -154,16 +152,15 @@ public class QuestPetPlant extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon[] getAllIcons() {
-        final FSkin skin = Singletons.getView().getSkin();
+        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath();
 
-        return new ImageIcon[] {
-                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT1),
-                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT2),
-                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT3),
-                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT4),
-                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT5),
-                skin.getIcon(FSkin.CreatureIcons.ICO_PLANT6)
-        };
+        return new ImageIcon[] { null,
+                new ImageIcon(address + "g_0_1_plant_wall_small.jpg"),
+                new ImageIcon(address + "g_0_2_plant_wall_small.jpg"),
+                new ImageIcon(address + "g_0_3_plant_wall_small.jpg"),
+                new ImageIcon(address + "g_1_3_plant_wall_small.jpg"),
+                new ImageIcon(address + "g_1_3_plant_wall_deathtouch_small.jpg"),
+                new ImageIcon(address + "g_1_4_plant_wall_small.jpg") };
     }
 
     /** {@inheritDoc} */

@@ -21,8 +21,8 @@ import javax.swing.ImageIcon;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Singletons;
-import forge.view.toolbox.FSkin;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -102,12 +102,12 @@ public class QuestPetCrocodile extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon[] getAllIcons() {
-        final FSkin skin = Singletons.getView().getSkin();
-        return new ImageIcon[] {
-                skin.getIcon(FSkin.CreatureIcons.ICO_CROC1),
-                skin.getIcon(FSkin.CreatureIcons.ICO_CROC2),
-                skin.getIcon(FSkin.CreatureIcons.ICO_CROC3),
-                skin.getIcon(FSkin.CreatureIcons.ICO_CROC4)
-        };
+        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath();
+
+        return new ImageIcon[] { null,
+                new ImageIcon(address + "b_1_1_crocodile_pet_small.jpg"),
+                new ImageIcon(address + "b_2_1_crocodile_pet_small.jpg"),
+                new ImageIcon(address + "b_3_1_crocodile_pet_small.jpg"),
+                new ImageIcon(address + "b_3_1_crocodile_pet_swampwalk_small.jpg") };
     }
 }

@@ -21,11 +21,11 @@ import javax.swing.ImageIcon;
 
 import forge.AllZone;
 import forge.Card;
-import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.view.toolbox.FSkin;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -118,13 +118,12 @@ public class QuestPetHound extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon[] getAllIcons() {
-        final FSkin skin = Singletons.getView().getSkin();
+        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath();
 
-        return new ImageIcon[] {
-                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND1),
-                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND2),
-                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND3),
-                skin.getIcon(FSkin.CreatureIcons.ICO_HOUND4)
-        };
+        return new ImageIcon[] { null,
+                new ImageIcon(address + "r_1_1_hound_pet_small.jpg"),
+                new ImageIcon(address + "r_1_1_hound_pet_haste_small.jpg"),
+                new ImageIcon(address + "r_2_1_hound_pet_small.jpg"),
+                new ImageIcon(address + "r_2_1_hound_pet_alone_small.jpg") };
     }
 }
