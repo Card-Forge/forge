@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards two cards.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose
 K:Evoke:3 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
