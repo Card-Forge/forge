@@ -1614,13 +1614,23 @@ public final class AbilityFactoryChangeZone {
      */
     private static boolean changeKnownOriginTriggerAI(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
+        final HashMap<String, String> params = af.getMapParams();
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
 
         if (sa.getTarget() == null) {
             // Just in case of Defined cases
-            // do nothing
+            if (!mandatory && params.containsKey("AttachedTo")) {
+                ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                if (!list.isEmpty()) {
+                    Card attachedTo = list.get(0);
+                    // This code is for the Dragon auras
+                    if (attachedTo.getController().isHuman()) {
+                        return false;
+                    }
+                }
+            }
         } else if (AbilityFactoryChangeZone.changeKnownPreferredTarget(af, sa, mandatory)) {
             // do nothing
         } else if (!AbilityFactoryChangeZone.changeKnownUnpreferredTarget(af, sa, mandatory)) {
@@ -1778,7 +1788,7 @@ public final class AbilityFactoryChangeZone {
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         final Player player = sa.getActivatingPlayer();
-        final Card hostCard = af.getHostCard();
+        final Card hostCard = sa.getSourceCard();
 
         final Zone destination = Zone.valueOf(params.get("Destination"));
         final Zone origin = Zone.valueOf(params.get("Origin"));

@@ -2277,6 +2277,7 @@ res/cardsfolder/d/dragon_mage.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_mask.txt -text
 res/cardsfolder/d/dragon_roost.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_scales.txt -text
+res/cardsfolder/d/dragon_shadow.txt -text
 res/cardsfolder/d/dragon_tyrant.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_whelp.txt svneol=native#text/plain
 res/cardsfolder/d/dragon_wings.txt -text
