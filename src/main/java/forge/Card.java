@@ -1552,7 +1552,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (int i = 0; i < n; i++) {
                 AllZone.getTriggerHandler().runTrigger("CounterRemoved", runParams);
             }
-            
+
             if (counterName.equals(Counters.TIME) && (aux == 0)) {
                 final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
 
