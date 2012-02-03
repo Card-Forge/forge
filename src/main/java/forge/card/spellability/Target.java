@@ -156,10 +156,20 @@ public class Target {
     private String minTargets;
     private String maxTargets;
 
+    /**
+     * Gets the min targets.
+     *
+     * @return the min targets
+     */
     public final String getMinTargets() {
         return this.minTargets;
     }
 
+    /**
+     * Gets the max targets.
+     *
+     * @return the max targets
+     */
     public final String getMaxTargets() {
         return this.maxTargets;
     }
