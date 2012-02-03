@@ -1088,8 +1088,8 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean sacrifice(final Card c) {
-        if (c.getName().equals("Mana Pool")) {
-            System.out.println("Trying to sacrifice mana pool...");
+        if (c.isImmutable()) {
+            System.out.println("Trying to sacrifice immutables");
             return false;
         }
         this.sacrificeDestroy(c);

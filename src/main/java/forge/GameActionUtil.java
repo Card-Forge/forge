@@ -1382,7 +1382,7 @@ public final class GameActionUtil {
                     type = type.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card card) {
-                            return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
+                            return !card.equals(crd) && card.isCreature();
                         }
                     });
                     final CardList alreadyAdded = new CardList();
