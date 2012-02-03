@@ -613,6 +613,7 @@ public class MagicStack extends MyObservable {
                 // X and multi and replicate are not supported yet
 
                 final SpellAbility sa = sp;
+                MagicStack.this.push(sa);
                 final Ability ability = new Ability(sp.getSourceCard(), sp.getReplicateManaCost()) {
                     @Override
                     public void resolve() {
@@ -625,7 +626,6 @@ public class MagicStack extends MyObservable {
 
                     @Override
                     public void execute() {
-                        MagicStack.this.push(sa);
                         for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
                             AllZone.getCardFactory().copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), false);
                         }
