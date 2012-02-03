@@ -1646,16 +1646,12 @@ public class GameAction {
             }
         }
 
-        // non-basic lands are removed, because the computer doesn't seem to
-        // effectively use them very well
-        land = this.threadLand(land);
-
         try {
             // mana weave, total of 7 land
             // The Following have all been reduced by 1, to account for the
             // computer starting first.
-            library.add(6, land.get(0));
-            library.add(7, land.get(1));
+            library.add(5, land.get(0));
+            library.add(6, land.get(1));
             library.add(8, land.get(2));
             library.add(9, land.get(3));
             library.add(10, land.get(4));
@@ -1682,94 +1678,7 @@ public class GameAction {
         return library.toArray();
     } // smoothComputerManaCurve()
 
-    // non-basic lands are removed, because the computer doesn't seem to
-    // effectively used them very well
-
-    /**
-     * <p>
-     * threadLand.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final CardList threadLand(final CardList in) {
-        // String[] basicLand = {"Forest", "Swamp", "Mountain", "Island",
-        // "Plains"}; //unused
-
-        // Thread stuff with as large a spread of colors as possible:
-        final String[] allLand = { "Bayou", "Volcanic Island", "Savannah", "Badlands", "Tundra", "Taiga",
-                "Underground Sea", "Plateau", "Tropical Island", "Scrubland", "Overgrown Tomb", "Steam Vents",
-                "Temple Garden", "Blood Crypt", "Hallowed Fountain", "Stomping Ground", "Watery Grave",
-                "Sacred Foundry", "Breeding Pool", "Godless Shrine", "Pendelhaven", "Flagstones of Trokair", "Forest",
-                "Swamp", "Mountain", "Island", "Plains", "Tree of Tales", "Vault of Whispers", "Great Furnace",
-                "Seat of the Synod", "Ancient Den", "Treetop Village", "Ghitu Encampment", "Faerie Conclave",
-                "Forbidding Watchtower", "Savage Lands", "Arcane Sanctum", "Jungle Shrine", "Crumbling Necropolis",
-                "Seaside Citadel", "Elfhame Palace", "Coastal Tower", "Salt Marsh", "Kher Keep",
-                "Library of Alexandria", "Dryad Arbor" };
-
-        final ArrayList<CardList> land = new ArrayList<CardList>();
-
-        // get different CardList of all Forest, Swamps, etc...
-        CardList check;
-        for (final String element : allLand) {
-            check = in.getName(element);
-
-            if (!check.isEmpty()) {
-                land.add(check);
-            }
-        }
-        /*
-         * //get non-basic land CardList check = in.filter(new CardListFilter()
-         * { public boolean addCard(Card c) { return c.isLand() &&
-         * !c.isBasicLand(); } }); if(! check.isEmpty()) land.add(check);
-         */
-
-        // thread all separate CardList's of land together to get something like
-        // Mountain, Plains, Island, Mountain, Plains, Island
-        final CardList out = new CardList();
-
-        int i = 0;
-        while (!land.isEmpty()) {
-            i = (i + 1) % land.size();
-
-            check = land.get(i);
-            if (check.isEmpty()) {
-                // System.out.println("removed");
-                land.remove(i);
-                i--;
-                continue;
-            }
-
-            out.add(check.get(0));
-            check.remove(0);
-        } // while
-
-        return out;
-    } // threadLand()
-
-    /**
-     * <p>
-     * getDifferentLand.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param land
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    @SuppressWarnings("unused")
-    // getDifferentLand
-    private int getDifferentLand(final CardList list, final String land) {
-        final int out = 0;
-
-        return out;
-    }
-
     // decides who goes first when starting another game, used by newGame()
-
     /**
      * <p>
      * seeWhoPlaysFirstCoinToss.
