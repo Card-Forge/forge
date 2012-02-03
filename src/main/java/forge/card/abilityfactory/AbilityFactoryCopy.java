@@ -748,10 +748,8 @@ public final class AbilityFactoryCopy {
         }
 
         chosenSA.setActivatingPlayer(controller);
-        if ((tgt == null)) {
-            for (int i = 0; i < amount; i++) {
-                AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
-            }
+        for (int i = 0; i < amount; i++) {
+            AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
         }
     } // end resolve
 
