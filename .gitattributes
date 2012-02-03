@@ -9470,6 +9470,7 @@ res/cardsfolder/v/veil_of_birds.txt svneol=native#text/plain
 res/cardsfolder/v/veiled_apparition.txt svneol=native#text/plain
 res/cardsfolder/v/veiled_sentry.txt -text svneol=unset#text/plain
 res/cardsfolder/v/veiled_serpent.txt svneol=native#text/plain
+res/cardsfolder/v/veiling_oddity.txt -text
 res/cardsfolder/v/veilstone_amulet.txt -text
 res/cardsfolder/v/vein_drinker.txt svneol=native#text/plain
 res/cardsfolder/v/veinfire_borderpost.txt svneol=native#text/plain
