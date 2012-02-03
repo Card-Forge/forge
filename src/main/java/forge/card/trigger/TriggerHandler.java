@@ -225,6 +225,8 @@ public class TriggerHandler {
             ret = new TriggerClashed(mapParams, host, intrinsic);
         } else if (mode.equals("CounterAdded")) {
             ret = new TriggerCounterAdded(mapParams, host, intrinsic);
+        } else if (mode.equals("CounterRemoved")) {
+            ret = new TriggerCounterRemoved(mapParams, host, intrinsic);
         } else if (mode.equals("Cycled")) {
             ret = new TriggerCycled(mapParams, host, intrinsic);
         } else if (mode.equals("DamageDone")) {

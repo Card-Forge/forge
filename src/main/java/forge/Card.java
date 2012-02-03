@@ -1524,8 +1524,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             AllZone.getTriggerHandler().runTrigger("CounterAdded", runParams);
         }
 
-        AllZone.getGameAction().checkStateEffects();
-
         this.updateObservers();
     }
 
@@ -1546,6 +1544,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                 aux = 0;
             }
             this.counters.put(counterName, aux);
+
+            // Run triggers
+            final Map<String, Object> runParams = new TreeMap<String, Object>();
+            runParams.put("Card", this);
+            runParams.put("CounterType", counterName);
+            for (int i = 0; i < n; i++) {
+                AllZone.getTriggerHandler().runTrigger("CounterRemoved", runParams);
+            }
+            
             if (counterName.equals(Counters.TIME) && (aux == 0)) {
                 final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
 
@@ -1584,9 +1591,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
-
-            AllZone.getGameAction().checkStateEffects();
-
             this.updateObservers();
         }
     }

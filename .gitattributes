@@ -7058,6 +7058,7 @@ res/cardsfolder/r/ridgetop_raptor.txt svneol=native#text/plain
 res/cardsfolder/r/riding_red_hare.txt svneol=native#text/plain
 res/cardsfolder/r/riding_the_dilu_horse.txt svneol=native#text/plain
 res/cardsfolder/r/rift_bolt.txt svneol=native#text/plain
+res/cardsfolder/r/riftmarked_knight.txt -text
 res/cardsfolder/r/riftstone_portal.txt svneol=native#text/plain
 res/cardsfolder/r/riftwing_cloudskate.txt svneol=native#text/plain
 res/cardsfolder/r/righteous_avengers.txt svneol=native#text/plain
@@ -10991,6 +10992,7 @@ src/main/java/forge/card/trigger/TriggerChampioned.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerChangesZone.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerClashed.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerCounterAdded.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerCounterRemoved.java -text
 src/main/java/forge/card/trigger/TriggerCycled.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDamageDone.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerDiscarded.java svneol=native#text/plain
