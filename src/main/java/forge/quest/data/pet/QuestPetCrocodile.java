@@ -17,6 +17,8 @@
  */
 package forge.quest.data.pet;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 import forge.AllZone;
@@ -102,12 +104,12 @@ public class QuestPetCrocodile extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon[] getAllIcons() {
-        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath();
+        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
 
         return new ImageIcon[] { null,
-                new ImageIcon(address + "b_1_1_crocodile_pet_small.jpg"),
-                new ImageIcon(address + "b_2_1_crocodile_pet_small.jpg"),
-                new ImageIcon(address + "b_3_1_crocodile_pet_small.jpg"),
-                new ImageIcon(address + "b_3_1_crocodile_pet_swampwalk_small.jpg") };
+                new ImageIcon(address + "b_1_1_crocodile_pet.jpg"),
+                new ImageIcon(address + "b_2_1_crocodile_pet.jpg"),
+                new ImageIcon(address + "b_3_1_crocodile_pet.jpg"),
+                new ImageIcon(address + "b_3_1_crocodile_pet_swampwalk.jpg") };
     }
 }

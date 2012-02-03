@@ -17,6 +17,8 @@
  */
 package forge.quest.data.pet;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 import forge.AllZone;
@@ -152,15 +154,15 @@ public class QuestPetPlant extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon[] getAllIcons() {
-        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath();
+        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
 
         return new ImageIcon[] { null,
-                new ImageIcon(address + "g_0_1_plant_wall_small.jpg"),
-                new ImageIcon(address + "g_0_2_plant_wall_small.jpg"),
-                new ImageIcon(address + "g_0_3_plant_wall_small.jpg"),
-                new ImageIcon(address + "g_1_3_plant_wall_small.jpg"),
-                new ImageIcon(address + "g_1_3_plant_wall_deathtouch_small.jpg"),
-                new ImageIcon(address + "g_1_4_plant_wall_small.jpg") };
+                new ImageIcon(address + "g_0_1_plant_wall.jpg"),
+                new ImageIcon(address + "g_0_2_plant_wall.jpg"),
+                new ImageIcon(address + "g_0_3_plant_wall.jpg"),
+                new ImageIcon(address + "g_1_3_plant_wall.jpg"),
+                new ImageIcon(address + "g_1_3_plant_wall_deathtouch.jpg"),
+                new ImageIcon(address + "g_1_4_plant_wall.jpg") };
     }
 
     /** {@inheritDoc} */

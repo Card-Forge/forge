@@ -17,6 +17,8 @@
  */
 package forge.quest.data.pet;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 import forge.AllZone;
@@ -106,12 +108,12 @@ public class QuestPetBird extends QuestPetAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon[] getAllIcons() {
-        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath();
+        final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
 
         return new ImageIcon[] { null,
-                new ImageIcon(address + "w_0_1_bird_pet_small.jpg"),
-                new ImageIcon(address + "w_1_1_bird_pet_small.jpg"),
-                new ImageIcon(address + "w_2_1_bird_pet_small.jpg"),
-                new ImageIcon(address + "w_2_1_bird_pet_first_strike_small.jpg") };
+                new ImageIcon(address + "w_0_1_bird_pet.jpg"),
+                new ImageIcon(address + "w_1_1_bird_pet.jpg"),
+                new ImageIcon(address + "w_2_1_bird_pet.jpg"),
+                new ImageIcon(address + "w_2_1_bird_pet_first_strike.jpg") };
     }
 }
