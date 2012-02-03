@@ -2,7 +2,6 @@ package forge.card.replacement;
 
 import java.util.HashMap;
 
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
@@ -32,7 +31,7 @@ public class ReplaceMoved extends ReplacementEffect {
             return false;
         }
         if (this.getMapParams().containsKey("ValidCard")) {
-            if (!AllZoneUtil.matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
                 return false;
             }
         }

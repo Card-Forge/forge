@@ -178,7 +178,12 @@ public abstract class AllZoneUtil {
      * @return true is the card is in play, false otherwise
      */
     public static boolean isCardInPlay(final String cardName) {
-        return AllZoneUtil.getCardsIn(Zone.Battlefield, cardName).size() > 0;
+        for (Card card : AllZoneUtil.getCardsIn(Zone.Battlefield)) {
+            if (card.getName() == cardName) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -191,7 +196,12 @@ public abstract class AllZoneUtil {
      * @return true if that player has that card in play, false otherwise
      */
     public static boolean isCardInPlay(final String cardName, final Player player) {
-        return player.getCardsIn(Zone.Battlefield, cardName).size() > 0;
+        for (Card card : player.getCardsIn(Zone.Battlefield)) {
+            if (card.getName() == cardName) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // ////////////// getting all cards of a given color
@@ -300,15 +310,9 @@ public abstract class AllZoneUtil {
         for (final Player player : AllZone.getPlayersInGame()) {
             all.addAll(player.getZone(Zone.Graveyard).getCards());
             all.addAll(player.getZone(Zone.Hand).getCards());
-            all.addAll(player.getZone(Zone.Library).getCards()); // not sure if
-                                                                 // library
-                                                                 // should be
-                                                                 // included.
+            all.addAll(player.getZone(Zone.Library).getCards());
             all.addAll(player.getZone(Zone.Battlefield).getCards(false));
-            all.addAll(player.getZone(Zone.Exile).getCards()); // Spawnsire of
-                                                               // Ulamog plays
-                                                               // spells from
-                                                               // here?
+            all.addAll(player.getZone(Zone.Exile).getCards());
         }
         all.addAll(AllZone.getStackZone().getCards());
         return all;
@@ -411,13 +415,13 @@ public abstract class AllZoneUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
+    /*public static boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
         if (o instanceof GameEntity) {
             final GameEntity c = (GameEntity) o;
             return c.isValid(valids, srcCard.getController(), srcCard);
         }
 
         return false;
-    }
+    }*/
 
 } // end class AllZoneUtil
