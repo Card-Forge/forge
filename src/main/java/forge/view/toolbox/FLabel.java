@@ -163,6 +163,7 @@ public class FLabel extends JLabel {
 
     /** @param b0 &emsp; boolean */
     public void setHoverable(boolean b0) {
+        this.hoverable = b0;
         if (!b0) { this.removeMouseListener(madEvents); }
         else { this.addMouseListener(madEvents); }
     }
