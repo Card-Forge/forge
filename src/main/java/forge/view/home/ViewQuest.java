@@ -151,8 +151,8 @@ public class ViewQuest extends JScrollPane {
         pnlViewport.add(pnlDuels, constraints);
         pnlViewport.add(pnlChallenges, constraints);
         pnlViewport.add(pnlStart, constraints);
-        pnlViewport.add(pnlLoadQuest, constraints);
-        pnlViewport.add(pnlNewQuest, constraints);
+        pnlViewport.add(pnlLoadQuest, constraints + ", h 40%!");
+        pnlViewport.add(pnlNewQuest, constraints + ", h 40%!");
         pnlViewport.add(pnlDecks, constraints);
         pnlViewport.add(pnlPrefs, constraints);
 
@@ -269,7 +269,7 @@ public class ViewQuest extends JScrollPane {
         pnl.setLayout(new MigLayout("insets 0, align center"));
         pnl.setBorderColor(clrBorders);
         pnl.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
-        pnl.add(new FLabel("Load a previous Quest"), "h 24px!, gap 2px 2px 2px 2px");
+        pnl.add(new FLabel("Load a previous Quest"), "h 95%!, gap 0 0 2.5% 0");
 
         final FLabel lbl = new FLabel("To use quest files "
                 + "from previous versions, put them into "
@@ -282,9 +282,9 @@ public class ViewQuest extends JScrollPane {
 
         pnlLoadQuest.setOpaque(false);
         pnlLoadQuest.setLayout(new MigLayout("insets 0, gap 0, alignx center, wrap"));
-        pnlLoadQuest.add(pnl, "w 99%, gap 0 0 0 10px");
-        pnlLoadQuest.add(lbl, "w 99%!, h 18px!, gap 2px 2px 0 4px");
-        pnlLoadQuest.add(scr, "w 99%!, h 200px!, gap 0 0 0 30px");
+        pnlLoadQuest.add(pnl, "w 99%, h 8%!, gap 0 0 0 10px");
+        pnlLoadQuest.add(lbl, "w 99%!, h 5%!, gap 2px 2px 0 4px");
+        pnlLoadQuest.add(scr, "w 99%!, h 85%!, gap 0 0 0 30px");
     }
 
     /** Layout permanent parts of new quests panel. */
@@ -294,7 +294,7 @@ public class ViewQuest extends JScrollPane {
         pnl1.setLayout(new MigLayout("insets 0, align center"));
         pnl1.setBorderColor(clrBorders);
         pnl1.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
-        pnl1.add(new FLabel("Start a new quest"), "h 24px!, gap 2px 2px 2px 2px");
+        pnl1.add(new FLabel("Start a new quest"), "h 95%!, gap 0 0 2.5% 0");
 
         final ButtonGroup group1 = new ButtonGroup();
         group1.add(radEasy);
@@ -326,8 +326,8 @@ public class ViewQuest extends JScrollPane {
 
         pnlNewQuest.setLayout(new MigLayout("insets 0, gap 0, align center, wrap"));
         pnlNewQuest.setOpaque(false);
-        pnlNewQuest.add(pnl1, "w 99%, gap 0 0 0 10px");
-        pnlNewQuest.add(pnl2, "w 99%!");
+        pnlNewQuest.add(pnl1, "w 99%, h 8%!, gap 0 0 0 2%");
+        pnlNewQuest.add(pnl2, "w 99%!, h 89%!");
     }
 
     /** Layout permanent parts of prefs panel. */
