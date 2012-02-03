@@ -120,7 +120,6 @@ public class FView {
                 final GuiTopLevel g = new GuiTopLevel();
                 AllZone.setDisplay(g);
                 g.getController().changeState(FControl.HOME_SCREEN);
-                g.pack();
 
                 FView.this.splashFrame.dispose();
                 FView.this.splashFrame = null;
