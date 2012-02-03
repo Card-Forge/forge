@@ -415,6 +415,19 @@ Lashknife Barrier
 - Fixed: Sealed from cube (singleton) set - shouldn't have more than one cards each
 - Big update to FLabel, allowing auto icon resize, font resizing per axis, resize toggling, hover toggle, select toggle, and command execution ability.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed targeting issue with copySpellontoStack (part 1).
+- Fixed targeting issue with copySpellontoStack (part 2).
+- Fixed targeting issue with copySpellontoStack (part 3 - AF CounterMagic).
+- Bugfix: hover ability for FLabel restored
+- Removed "pack" from frame creation to (hopefully) avoid resizing problem in OSX.
+- Removing Matopi Golem. The subability doesn't happen until the creature regenerates using that specific shield, which isn't supported.
+- Implemented scaling for "quests" tab panels.
+- Fixed card icons in bazaar pet stall.
+- Changed instances of "/" to File.separator for quest data IO (thanks Chris H)
+- Added OptionalDecider$ to Jugan, the Rising Star.
+- Added the Trigger "CounterRemoved".
+- Added some SVars.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -655,6 +668,11 @@ Haakon, Stromgald Scourge
 Bioplasm
 Gruul Nodorog
 Pulse of the Grid
+Cloven Casting
+Saprazzan Outrigger
+Wild Dogs
+Veiled Sentry
+Riftmarked Knight
 
 
 end
