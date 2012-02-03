@@ -1,17 +1,17 @@
-Forge Beta: 0#-##-2012 ver 1.2.# rev 13###
+Forge Beta: 02-03-2012 ver 1.2.3 rev 13774
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-#### cards in total.
+10188 cards in total.
 
 
 The thread safety issue should now be fixed. This should prevent the crash reports that were stating that "Buffers have not been created".
 
 We now have a tab system for sub-menus in the home screen. Quest mode refactored to fit this tab system. It's now considerably easier to use - less cramped, less clicks, more functionality. Multiple quest files are now supported. QuestPreferences has been refactored to use an enum structure, with data validation as well. Win streaks implemented for quest mode. PreCon decks can now be purchased in quest mode. There are a few precon decks available with more decks to follow.
 
-We have merged the new cards from the new Dark Ascension set into the main trunk of the forge project. Our testers are asked to test these new cards out and to report any problems with these new cards. There may be a few areas in the game where we have not added the needed set info so please be patient as we try to add in the missing pieces before the next beta release.
+We have merged the new cards from the new Dark Ascension set into the main trunk of the forge project. We were able to add 149 of the new Dark Ascension cards.
 
-The LQ pictures for the new Dark Ascension cards are not yet available. The "Download LQ Card Pictures" and the "Download LQ Set Pictures" buttons will not download the new Dark Ascension cards at this time. Be patient as it takes time for these pictures to come online.
+Some of the LQ pictures for the new Dark Ascension cards are available. The "Download LQ Card Pictures" button will download the pictures but the "Download LQ Set Pictures" buttons will not download the new Dark Ascension cards at this time. Be patient as it takes time for these pictures to come online.
 
 
 An Anouncement from the Forge dev team:
@@ -430,251 +430,267 @@ Lashknife Barrier
 - Added the recent commit logs to changes.txt.
 - CheckStyle.
 - Added the recent commit logs to changes.txt.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Dave
+DeadSpeak
+Doublestrike
+Friar Sol
+Hellfish
+Jeff Wadsworth
+Marc
+Max mtg
+Skiera
+Slapshot5
+Sloth
+SoulStorm
+Squee1968
+ZzzzSleep
+Chris H
 
 
 Added many cards, including:
 
-Bazaar Trader
-Famished Ghoul
-Gravegouger
-Divining Witch
-Predict
-Shelter
-Makeshift Mannequin
-Ronin Warclub
-Angelic Arbiter
-Cloak and Dagger
-Obsidian Battle-Axe
-Nim Deathmantle
-Trace of Abundance
-Laquatus's Disdain
-Cranial Plating
-Archangel's Light
-Wayward Angel
-Verdant Succession
-Spiritualize
-Spark Mage
-Shower of Coals
-Pedantic Learning
-Painbringer
-Phyrexian Splicer
-Horned Helm
-Neurok Stealthsuit
-Sparring Collar
-Devoted Caretaker
-Kaervek's Purge
-Kalitas, Bloodchief of Ghet
-Ageless Sentinels
-Electryte
-Ashling, the Extinguisher
-Arachnus Spinner
-Wall of Deceit
-Dead Reckoning
-Vexing Arcanix
-Petra Sphinx
-Nomad Decoy
-Nantuko Mentor
-Mad Dog
-Batwing Brume
-Gravestorm
-Isperia the Inscrutable
-Inescapable Brute
-Iridescent Drake
 Academy Researchers
+Afflicted Deserter // Werewolf Ransacker
+Ageless Sentinels
+Angelic Arbiter
+Arachnus Spinner
+Archangel's Light
+Artful Dodge
+Ashling, the Extinguisher
+Avacyn's Collar
+Balance of Power
+Bar the Door
+Batwing Brume
+Bazaar Trader
+Beguiler of Wills
+Bioplasm
+Black Cat
+Bone to Ash
+Break of Day
+Briarpack Alpha
+Burden of Guilt
+Burning Oil
+Call to the Kindred
+Chalice of Life // Chalice of Death
+Chant of the Skifsang
+Chill of Foreboding
+Chosen of Markov
+City in a Bottle
+Clinging Mists
+Cloak and Dagger
+Cloven Casting
+Cranial Plating
+Crushing Vines
+Curse of Bloodletting
+Curse of Exhaustion
+Curse of Misfortunes
+Curse of Thirst
+Dawntreader Elk
+Dead Reckoning
+Deadly Allure
+Death's Caress
+Demonic Attorney
+Demonmail Hauberk
+Deranged Outcast
+Devoted Caretaker
+Diregraf Captain
+Dismantling Blow
+Diviner's Wand
+Divining Witch
 Dragon Breath
 Dragon Fangs
 Dragon Scales
-Thornbite Staff
-Deadly Allure
-Hinterland Hermit // Hinterland Scourge
-Afflicted Deserter // Werewolf Ransacker
-Beguiler of Wills
-Chalice of Life // Chalice of Death
-Chant of the Skifsang
-Curse of Bloodletting
-Curse of Thirst
+Dreamwinder
+Drogskol Captain
 Drogskol Reaver
+Elbrus, the Binding Blade // Withengar Unbound
+Electryte
+Elguad Inquisitor
+Empyrial Archangel
+Ensouled Scimitar
+Erdwal Ripper
+Executioner's Hood
+Faith's Shield
 Faithless Looting
 Falkenrath Aristocrat
 Falkenrath Torturer
+Famished Ghoul
+Farborg Boneflinger
+Favor of the Woods
+Feed the Pack
+Firefright Mage
+Fires of Undeath
 Flayer of the Hatebound
+Forge Devil
 Gather the Townsfolk
+Gavony Ironwright
+Geralf's Messenger
+Geralf's Mindcrusher
 Ghoultree
+Goblin Fire Fiend
+Golgothian Sylex
+Grafdigger's Cage
 Gravecrawler
+Gravegouger
+Gravepurge
+Gravestorm
+Gravetiller Wurm
+Grim Backwoods
+Grim Flowering
+Griptide
+Gruesome Discovery
+Gruul Nodorog
+Haakon, Stromgald Scourge
+Harrowing Journey
+Havengul Fengraf
 Havengul Runebinder
 Headless Skaab
+Heavy Mattock
+Heckling Fiends
+Hellrider
 Helvault
+Highborn Ghoul
+Hinterland Hermit // Hinterland Scourge
+Hollowhenge Beast
+Hollowhenge Spirit
+Horned Helm
+Humble
 Hunger of the Howlpack
 Huntmaster of the Fells // Ravager of the Fells
+Immerwolf
+Increasing Ambition
 Increasing Confusion
 Increasing Devotion
+Increasing Savagery
+Inescapable Brute
+Iridescent Drake
+Irresistible Prey
+Isperia the Inscrutable
 Jar of Eyeballs
+Jeweled Bird
+Kaervek's Purge
+Kalitas, Bloodchief of Ghet
+Kessig Recluse
 Lambholt Elder // Silverpelt Werewolf
+Laquatus's Disdain
 Lingering Souls
+Lost in the Woods
 Loyal Cathar // Unhallowed Cathar
+Mad Dog
+Makeshift Mannequin
+Mana Flare
 Markov Blademaster
+Markov Warlord
+Midnight Guard
 Mikaeus, the Unhallowed
 Mondronen Shaman // Tovolar's Magehunter
 Moonveil Dragon
+Murderous Betrayal
+Mystic Retrieval
+Nantuko Mentor
 Nearheath Stalker
+Nephalia Seakite
+Neurok Stealthsuit
+Niblis of the Breath
+Niblis of the Mist
+Niblis of the Urn
+Nim Deathmantle
+Nomad Decoy
+Obsidian Battle-Axe
+Ouphe Vandals
+Painbringer
+Pariah
+Pariah's Shield
+Pedantic Learning
+Petra Sphinx
+Phyrexian Splicer
 Predator Ooze
+Predict
+Pulse of the Grid
+Pyreheart Wolf
+Rain of Filth
 Ravenous Demon // Archdemon of Greed
+Reap the Seagraf
+Relentless Skaabs
+Requiem Angel
+Retaliation
+Reverse Polarity
+Riftmarked Knight
+Ronin Warclub
+Russet Wolves
+Sanctuary Cat
+Saprazzan Outrigger
+Saving Grasp
+Scorch the Fields
 Scorned Villager // Moonscarred Werewolf
+Screeching Skaab
+Seance
 Secrets of the Dead
+Shattered Perception
+Shelter
+Shirei, Shizo's Caretaker
+Shower of Coals
+Shriekgeist
+Sightless Ghoul
+Silverclaw Griffin
+Skillful Lunge
+Skirsdag Flayer
+Skullcage
+Snakeform
+Somberwald Dryad
 Sorin, Lord of Innistrad
 Soul Seizer // Ghastly Haunting
+Spark Mage
+Sparring Collar
+Spiritualize
+Spiteful Shadows
+Stormbound Geist
 Strangleroot Geist
 Stromkirk Captain
+Sudden Disappearance
+Sudden Spoiling
+Talons of Falkenrath
 Thalia, Guardian of Thraben
+Thornbite Staff
 Thought Scour
 Thraben Doomsayer
-Tragic Slip
-Vault of the Archangel
-Vorapede
-Warden of the Wall
-Zombie Apocalypse
-Heavy Mattock
-Sudden Disappearance
-Gruesome Discovery
-Talons of Falkenrath
-Briarpack Alpha
-Diregraf Captain
-Executioner's Hood
-Feed the Pack
-Forge Devil
-Geralf's Messenger
-Gravetiller Wurm
-Grim Backwoods
-Havengul Fengraf
-Heckling Fiends
-Hellrider
-Increasing Ambition
-Increasing Savagery
-Pyreheart Wolf
-Skirsdag Flayer
-Wolfbitten Captive // Krallenhorde Killer
-Bone to Ash
-Farborg Boneflinger
-Griptide
-Hollowhenge Beast
-Markov Warlord
-Skillful Lunge
-Torch Fiend
-Grafdigger's Cage
-Immerwolf
-Lost in the Woods
-Seance
-Drogskol Captain
-Elbrus, the Binding Blade // Withengar Unbound
-Bar the Door
-Break of Day
-Gravepurge
-Sanctuary Cat
-Curse of Exhaustion
-Burden of Guilt
-Dawntreader Elk
-Kessig Recluse
-Nephalia Seakite
-Russet Wolves
-Somberwald Dryad
-Wild Hunger
-Young Wolf
-Elguad Inquisitor
-Erdwal Ripper
-Midnight Guard
-Niblis of the Mist
-Artful Dodge
-Silverclaw Griffin
-Saving Grasp
-Screeching Skaab
-Shriekgeist
-Stormbound Geist
-Burning Oil
-Fires of Undeath
-Scorch the Fields
-Avacyn's Collar
-Chosen of Markov
-Faith's Shield
-Gavony Ironwright
-Hollowhenge Spirit
-Niblis of the Urn
-Requiem Angel
 Thraben Heretic
-Vengeful Vampire
-Wolfhunter's Quiver
-Chill of Foreboding
-Black Cat
-Death's Caress
-Harrowing Journey
-Highborn Ghoul
-Reap the Seagraf
-Sightless Ghoul
-Spiteful Shadows
-Undying Evil
-Wakedancer
-Shattered Perception
-Wrack with Madness
-Clinging Mists
-Crushing Vines
-Deranged Outcast
-Favor of the Woods
-Grim Flowering
-Tracker's Instincts
-Ulvenwald Bear
-Village Survivors
-Geralf's Mindcrusher
-Mystic Retrieval
-Niblis of the Breath
-Relentless Skaabs
+Torch Fiend
 Tower Geist
-Curse of Misfortunes
-Call to the Kindred
-Goblin Fire Fiend
-Irresistible Prey
-Worthy Cause
-Pariah
-Empyrial Archangel
-Pariah's Shield
-Diviner's Wand
-Shirei, Shizo's Caretaker
-Veteran Bodyguard
-Balance of Power
-Weathered Bodyguards
-Sudden Spoiling
-Rain of Filth
-Retaliation
-Mana Flare
-Reverse Polarity
-Demonic Attorney
-Demonmail Hauberk
-Golgothian Sylex
-City in a Bottle
-Jeweled Bird
-Ensouled Scimitar
-Ouphe Vandals
-Vicious Betrayal
-Humble
+Trace of Abundance
+Tracker's Instincts
+Tragic Slip
 Turn to Frog
-Snakeform
-Dismantling Blow
-Skullcage
-Dreamwinder
-Firefright Mage
-Murderous Betrayal
-Haakon, Stromgald Scourge
-Bioplasm
-Gruul Nodorog
-Pulse of the Grid
-Cloven Casting
-Saprazzan Outrigger
-Wild Dogs
+Ulvenwald Bear
+Undying Evil
+Vault of the Archangel
 Veiled Sentry
-Riftmarked Knight
+Vengeful Vampire
+Verdant Succession
+Veteran Bodyguard
+Vexing Arcanix
+Vicious Betrayal
+Village Survivors
+Vorapede
+Wakedancer
+Wall of Deceit
+Warden of the Wall
+Wayward Angel
+Weathered Bodyguards
+Wild Dogs
+Wild Hunger
+Wolfbitten Captive // Krallenhorde Killer
+Wolfhunter's Quiver
+Worthy Cause
+Wrack with Madness
+Young Wolf
+Zombie Apocalypse
 
 
 end
