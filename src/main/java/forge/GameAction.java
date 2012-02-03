@@ -608,6 +608,17 @@ public class GameAction {
         }
 
         library.add(c, libPosition);
+        
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Card", c);
+        if (p != null) {
+            runParams.put("Origin", p.getZoneType().name());
+        } else {
+            runParams.put("Origin", null);
+        }
+        runParams.put("Destination", Constant.Zone.Library);
+        AllZone.getTriggerHandler().runTrigger("ChangesZone", runParams);
+        
         return c;
     }
 
