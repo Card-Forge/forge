@@ -44,7 +44,7 @@ public class Target {
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
     private TargetChoices choice = null;
-    
+
     /**
      * <p>
      * getSourceCard.
@@ -155,11 +155,11 @@ public class Target {
 
     private String minTargets;
     private String maxTargets;
-    
+
     public final String getMinTargets() {
         return this.minTargets;
     }
-    
+
     public final String getMaxTargets() {
         return this.maxTargets;
     }
@@ -427,13 +427,14 @@ public class Target {
     public final void resetTargets() {
         this.choice = null;
     }
-    
+
     /**
      * <p>
      * Constructor for Target.
      * </p>
      * 
      * @param target
+     *            a {@link forge.card.spellability.Target} object.
      */
     public Target(final Target target) {
 
@@ -740,7 +741,7 @@ public class Target {
     public final void setSingleZone(final boolean single) {
         this.singleZone = single;
     }
-    
+
     /**
      * <p>
      * copy.
