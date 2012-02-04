@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.SetUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Quest;
 
@@ -52,6 +53,7 @@ public class QuestPreferences implements Serializable {
         BOOSTER_COMMONS ("11"), /** */
         BOOSTER_UNCOMMONS ("3"), /** */
         BOOSTER_RARES ("1"), /** */
+        BOOSTER_FORMAT ("Standard"), /** */
 
         PENALTY_LOSS ("15"), /** */
         CURRENT_QUEST ("DEFAULT"), /** */

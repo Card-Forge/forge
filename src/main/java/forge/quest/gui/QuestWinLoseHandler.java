@@ -531,10 +531,23 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardBooster() {
+        final List<GameFormat> formats = SetUtils.getFormats();
         final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1,
-                SetUtils.getFormats());
-        ch.show();
+                formats);
+
+        int index = 0;
+        for (int i = 0; i < formats.size(); i++) {
+            if (formats.get(i).toString().equals(this.model.qPrefs.getPreference(QPref.BOOSTER_FORMAT))) {
+                index = i;
+                break;
+            }
+        }
+
+        ch.show(index);
+
         final GameFormat selected = ch.getSelectedValue();
+        this.model.qPrefs.setPreference(QPref.BOOSTER_FORMAT, selected.toString());
+        this.model.qPrefs.save();
 
         final List<CardPrinted> cardsWon = this.model.qData.getCards().addCards(selected.getFilterPrinted());
 

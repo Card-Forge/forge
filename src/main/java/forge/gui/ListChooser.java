@@ -331,12 +331,18 @@ public class ListChooser<T> {
         return this.jList;
     }
 
+    /** @return boolean */
+    public synchronized boolean show() {
+        return this.show(0);
+    }
+
     /**
      * Shows the dialog and returns after the dialog was closed.
      * 
+     * @param index0 index to select when shown
      * @return a boolean.
      */
-    public synchronized boolean show() {
+    public synchronized boolean show(int index0) {
         if (this.called) {
             throw new IllegalStateException("Already shown");
         }
@@ -346,7 +352,9 @@ public class ListChooser<T> {
             if (this.minChoices != 0) {
                 this.d.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             }
-            this.jList.setSelectedIndex(0);
+
+            this.jList.setSelectedIndex(index0);
+
             this.d.addWindowFocusListener(new WindowFocusListener() {
                 @Override
                 public void windowGainedFocus(final WindowEvent e) {
