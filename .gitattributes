@@ -4689,6 +4689,7 @@ res/cardsfolder/k/kjeldoran_javelineer.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_outpost.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_outrider.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_war_cry.txt svneol=native#text/plain
+res/cardsfolder/k/knacksaw_clique.txt -text
 res/cardsfolder/k/knight_captain_of_eos.txt svneol=native#text/plain
 res/cardsfolder/k/knight_errant.txt svneol=native#text/plain
 res/cardsfolder/k/knight_exemplar.txt svneol=native#text/plain
@@ -6130,6 +6131,7 @@ res/cardsfolder/o/orim_samite_healer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_prayer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_thunder.txt svneol=native#text/plain
 res/cardsfolder/o/orims_touch.txt -text svneol=unset#text/plain
+res/cardsfolder/o/ornate_kanzashi.txt -text
 res/cardsfolder/o/ornithopter.txt svneol=native#text/plain
 res/cardsfolder/o/orochi_eggwatcher_shidako_broodmistress.txt -text
 res/cardsfolder/o/orochi_hatchery.txt svneol=native#text/plain
