@@ -2409,7 +2409,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * getGraveyardActivationCards.
+     * getExternalZoneActivationCards.
      * </p>
      * 
      * @param player
@@ -2417,62 +2417,60 @@ public class CardFactoryUtil {
      * @return a {@link forge.CardList} object.
      */
     public static CardList getExternalZoneActivationCards(final Player player) {
+        CardList cl = new CardList();
 
-        final List<Zone> sb = new ArrayList<Constant.Zone>(3);
-        sb.add(Constant.Zone.Graveyard);
-        sb.add(Constant.Zone.Exile);
-        sb.add(Constant.Zone.Library);
-        sb.add(Constant.Zone.Command);
-        CardList cl = player.getCardsIn(sb);
-        cl.addAll(AllZone.getStackZone().getCards());
-        cl = cl.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                return CardFactoryUtil.activateFromExternalZones(c, player);
-            }
-        });
+        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Graveyard), player));
+        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Exile), player));
+        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Library), player));
+        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Command), player));
+
         return cl;
     }
 
     /**
      * <p>
-     * activateFromGrave.
+     * getActivateablesFromZone.
      * </p>
      * 
-     * @param c
-     *            a {@link forge.Card} object.
+     * @param zone
+     *            a PlayerZone object.
      * @param player
      *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    public static boolean activateFromExternalZones(final Card c, final Player player) {
-        final PlayerZone zone = AllZone.getZoneOf(c);
-        if (zone.is(Constant.Zone.Graveyard)) {
-            if (c.hasUnearth()) {
-                return true;
+    public static CardList getActivateablesFromZone(final PlayerZone zone, final Player player) {
+
+        CardList cl = new CardList(zone.getCards());
+
+        cl = cl.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(final Card c) {
+                if (zone.is(Constant.Zone.Graveyard)) {
+                    if (c.hasUnearth()) {
+                        return true;
+                    }
+                }
+
+                if (c.isLand() && c.hasKeyword("May be played")) {
+                    return true;
+                }
+
+                for (final SpellAbility sa : c.getSpellAbility()) {
+                    final Zone restrictZone = sa.getRestrictions().getZone();
+                    if (zone.is(restrictZone)) {
+                        return true;
+                    }
+
+                    if (sa.isSpell()
+                            && (c.hasKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
+                                    .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
+                        return true;
+                    }
+                }
+                return false;
             }
-
-        }
-
-        if (c.isLand() && !zone.is(Constant.Zone.Battlefield) && c.hasKeyword("May be played")) {
-            return true;
-        }
-
-        for (final SpellAbility sa : c.getSpellAbility()) {
-            final Zone restrictZone = sa.getRestrictions().getZone();
-            if (zone.is(restrictZone)) {
-                return true;
-            }
-
-            if (sa.isSpell()
-                    && !zone.is(Zone.Battlefield)
-                    && (c.hasKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
-                            .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
-                return true;
-            }
-        }
-
-        return false;
+        });
+        return cl;
     }
 
     /**
