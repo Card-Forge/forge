@@ -608,7 +608,7 @@ public class GameAction {
         }
 
         library.add(c, libPosition);
-        
+
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
         if (p != null) {
@@ -618,7 +618,7 @@ public class GameAction {
         }
         runParams.put("Destination", Constant.Zone.Library);
         AllZone.getTriggerHandler().runTrigger("ChangesZone", runParams);
-        
+
         return c;
     }
 
