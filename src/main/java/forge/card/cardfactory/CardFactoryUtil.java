@@ -2454,7 +2454,8 @@ public class CardFactoryUtil {
                         }
                     }
 
-                    if (c.isLand() && c.hasKeyword("May be played")) {
+                    if (c.isLand() && (c.hasKeyword("May be played")
+                            || c.hasKeyword("May be played without paying its mana cost"))) {
                         return true;
                     }
 
@@ -2465,7 +2466,9 @@ public class CardFactoryUtil {
                         }
 
                         if (sa.isSpell()
-                                && (c.hasKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
+                                && (c.hasStartOfKeyword("May be played")
+                                        || c.hasKeyword("May be played without paying its mana cost")
+                                        || (c.hasStartOfKeyword("Flashback") && zone
                                         .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
                             return true;
                         }

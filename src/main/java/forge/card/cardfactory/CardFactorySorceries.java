@@ -43,11 +43,9 @@ import forge.Player;
 import forge.PlayerUtil;
 import forge.PlayerZone;
 import forge.card.cost.Cost;
-import forge.card.spellability.Ability;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -249,7 +247,7 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Mind's Desire")) {
+        /*else if (cardName.equals("Mind's Desire")) {
             final Spell playCreature = new Spell(card) {
                 private static final long serialVersionUID = 53838791023456795L;
 
@@ -437,7 +435,7 @@ public class CardFactorySorceries {
             card.addSpellAbility(spell);
             card.addSpellAbility(freeCast);
             spell.setDescription("");
-        }
+        }*/
         // *************** END ************ END **************************
 
         // *************** START *********** START **************************

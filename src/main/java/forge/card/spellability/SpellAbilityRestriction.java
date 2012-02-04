@@ -228,7 +228,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (!this.isAnyPlayer() && !activator.equals(c.getController()) 
+        if (!this.isAnyPlayer() && !activator.equals(c.getController())
                 && !c.hasKeyword("May be played by your Opponent")) {
             return false;
         }
