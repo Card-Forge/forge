@@ -3630,6 +3630,7 @@ res/cardsfolder/g/gossamer_chains.txt svneol=native#text/plain
 res/cardsfolder/g/gossamer_phantasm.txt svneol=native#text/plain
 res/cardsfolder/g/gosta_dirk.txt svneol=native#text/plain
 res/cardsfolder/g/graceful_adept.txt svneol=native#text/plain
+res/cardsfolder/g/graceful_antelope.txt -text svneol=unset#text/plain
 res/cardsfolder/g/grafdiggers_cage.txt -text
 res/cardsfolder/g/grafted_exoskeleton.txt svneol=native#text/plain
 res/cardsfolder/g/grafted_skullcap.txt svneol=native#text/plain
