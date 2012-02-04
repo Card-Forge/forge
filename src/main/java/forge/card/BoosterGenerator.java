@@ -190,7 +190,7 @@ public class BoosterGenerator {
             final int rollD8 = MyRandom.getRandom().nextInt(8);
             final boolean takeMythic = (mythicsSize > 0) && (rollD8 < 1);
             if (takeMythic) {
-                if (indexRares >= raresSize) {
+                if (indexMythics >= mythicsSize) {
                     Collections.shuffle(mythics, MyRandom.getRandom());
                     indexMythics = 0;
                 }
