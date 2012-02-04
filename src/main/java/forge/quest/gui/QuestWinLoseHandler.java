@@ -116,6 +116,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     @Override
     public final void startNextRound() {
+        AllZone.getDisplay().savePrefs();
+
         if (Constant.Quest.FANTASY_QUEST[0]) {
             int extraLife = 0;
 
@@ -298,6 +300,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         AllZone.setQuestEvent(null);
 
         this.model.qData.saveData();
+
+        AllZone.getDisplay().savePrefs();
 
         FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
         g.getMatchController().deinitMatch();

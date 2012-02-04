@@ -54,7 +54,6 @@ public class ControlDock {
 
     /** Concede game, bring up WinLose UI. */
     public void concede() {
-        AllZone.getDisplay().savePrefs();
         AllZone.getHumanPlayer().concede();
         AllZone.getGameAction().checkStateEffects();
     }
