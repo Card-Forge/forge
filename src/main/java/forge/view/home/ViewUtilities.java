@@ -1,5 +1,6 @@
 package forge.view.home;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -17,6 +18,7 @@ import forge.AllZone;
 import forge.Singletons;
 import forge.control.home.ControlUtilities;
 import forge.view.toolbox.FButton;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
@@ -62,30 +64,65 @@ public class ViewUtilities extends JPanel {
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
         parentView = v0;
         skin = Singletons.getView().getSkin();
+        final String constraintsLBL = "w 90%!, h 20px!, gap 5% 0 3px 8px";
+        final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
 
         btnDownloadPics = new SubButton("Download LQ Card Pictures");
-        this.add(btnDownloadPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%, gaptop 5%");
+        final FLabel lblPics = new FLabel("", SwingConstants.CENTER);
+        lblPics.setText("Download default card picture for each card.");
+        lblPics.setFontStyle(Font.ITALIC);
+
+        this.add(btnDownloadPics, constraintsBTN);
+        this.add(lblPics, constraintsLBL);
 
         btnDownloadSetPics = new SubButton("Download LQ Set Pictures");
-        this.add(btnDownloadSetPics, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        final FLabel lblSets = new FLabel("", SwingConstants.CENTER);
+        lblSets.setText("Download full card picture sets for all cards from legacy releases of MTG.");
+        lblSets.setFontStyle(Font.ITALIC);
+
+        this.add(btnDownloadSetPics, constraintsBTN);
+        this.add(lblSets, constraintsLBL);
 
         btnDownloadQuestImages = new SubButton("Download Quest Images");
-        this.add(btnDownloadQuestImages, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        final FLabel lblQuest = new FLabel("", SwingConstants.CENTER);
+        lblQuest.setText("Download tokens and icons used in Quest mode.");
+        lblQuest.setFontStyle(Font.ITALIC);
+
+        this.add(btnDownloadQuestImages, constraintsBTN);
+        this.add(lblQuest, constraintsLBL);
 
         btnDownloadPrices = new SubButton("Download Card Prices");
-        this.add(btnDownloadPrices, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        final FLabel lblPrices = new FLabel("", SwingConstants.CENTER);
+        lblPrices.setText("Download up-to-date price list for in-game card shops.");
+        lblPrices.setFontStyle(Font.ITALIC);
+
+        this.add(btnDownloadPrices, constraintsBTN);
+        this.add(lblPrices, constraintsLBL);
 
         btnImportPictures = new SubButton("Import Pictures");
-        this.add(btnImportPictures, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        final FLabel lblImport = new FLabel("", SwingConstants.CENTER);
+        lblImport.setText("Import card pictures from a local version of Forge.");
+        lblImport.setFontStyle(Font.ITALIC);
+        this.add(btnImportPictures, constraintsBTN);
+        this.add(lblImport, constraintsLBL);
 
         btnReportBug = new SubButton("Report a Bug");
-        this.add(btnReportBug, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        final FLabel lblReport = new FLabel("", SwingConstants.CENTER);
+        lblReport.setText("Something broken?");
+        lblReport.setFontStyle(Font.ITALIC);
+
+        this.add(btnReportBug, constraintsBTN);
+        this.add(lblReport, constraintsLBL);
 
         btnDeckEditor = new SubButton("Deck Editor");
-        this.add(btnDeckEditor, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        final FLabel lblEditor = new FLabel("", SwingConstants.CENTER);
+        lblEditor.setText("Build or edit a deck using all cards available in Forge.");
+        lblEditor.setFontStyle(Font.ITALIC);
+        this.add(btnDeckEditor, constraintsBTN);
+        this.add(lblEditor, constraintsLBL);
 
         btnHowToPlay = new SubButton("How To Play");
-        this.add(btnHowToPlay, "h 30px!, w 50%!, gapleft 25%, gapbottom 2%");
+        this.add(btnHowToPlay, constraintsBTN);
 
         tpnLicensing = new JTextPane();
         tpnLicensing.setOpaque(false);
@@ -106,7 +143,7 @@ public class ViewUtilities extends JPanel {
         lblLicensing.setFont(skin.getFont(16));
         lblLicensing.setHorizontalAlignment(SwingConstants.CENTER);
         lblLicensing.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        this.add(lblLicensing, "alignx center, span 2 1, gap 25% 0 5% 0");
+        this.add(lblLicensing, "alignx center, gap 5% 0 5% 0");
 
         control = new ControlUtilities(this);
     }
