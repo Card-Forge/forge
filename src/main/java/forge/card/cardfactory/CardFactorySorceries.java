@@ -984,7 +984,7 @@ public class CardFactorySorceries {
             spell.setSubAbility(sub);
 
             final StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("Target player gains control of target permanent");
+            sbDesc.append("Target player gains control of target permanent you control.");
             spell.setDescription(sbDesc.toString());
             card.addSpellAbility(spell);
 
