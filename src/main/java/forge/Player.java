@@ -1780,7 +1780,8 @@ public abstract class Player extends GameEntity {
      */
     public final void playLand(final Card land) {
         if (this.canPlayLand()) {
-            AllZone.getGameAction().moveToPlay(land);
+            land.addController(this);
+            AllZone.getGameAction().moveTo(this.getZone(Constant.Zone.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
             this.numLandsPlayed++;
 

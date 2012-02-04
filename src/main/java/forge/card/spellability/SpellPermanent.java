@@ -412,6 +412,7 @@ public class SpellPermanent extends Spell {
     @Override
     public void resolve() {
         final Card c = this.getSourceCard();
-        AllZone.getGameAction().moveToPlay(c);
+        c.addController(this.getActivatingPlayer());
+        AllZone.getGameAction().moveTo(this.getActivatingPlayer().getZone(Constant.Zone.Battlefield), c);
     }
 }

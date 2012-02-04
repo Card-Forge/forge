@@ -225,6 +225,11 @@ public class GameAction {
         }
 
         copied.setTimestamp(AllZone.getNextTimestamp());
+        for (String s : copied.getKeyword()) {
+            if (s.startsWith("May be played")) {
+                copied.removeAllExtrinsicKeyword(s);
+            }
+        }
 
         return copied;
     }
@@ -1876,7 +1881,6 @@ public class GameAction {
             // for uncastables like lotus bloom, check if manaCost is blank
             sa.setActivatingPlayer(human);
             if (sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
-
                 boolean flashb = false;
 
                 // check for flashback keywords
@@ -1913,7 +1917,7 @@ public class GameAction {
                     choices.add(newSA.toString());
                     map.put(newSA.toString(), newSA);
                 }
-                if (!flashb || c.hasKeyword("May be played")) {
+                if (!flashb || c.hasKeyword("May be played") || c.hasKeyword("May be played by your Opponent")) {
                     choices.add(sa.toString());
                     map.put(sa.toString(), sa);
                 }

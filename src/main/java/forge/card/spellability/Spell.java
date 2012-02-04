@@ -117,7 +117,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        return (card.isInstant() || card.hasKeyword("Flash") || PhaseHandler.canCastSorcery(card.getController()));
+        return (card.isInstant() || card.hasKeyword("Flash") || PhaseHandler.canCastSorcery(activator));
     } // canPlay()
 
     /** {@inheritDoc} */

@@ -2412,17 +2412,19 @@ public class CardFactoryUtil {
      * getExternalZoneActivationCards.
      * </p>
      * 
-     * @param player
+     * @param activator
      *            a {@link forge.Player} object.
      * @return a {@link forge.CardList} object.
      */
-    public static CardList getExternalZoneActivationCards(final Player player) {
+    public static CardList getExternalZoneActivationCards(final Player activator) {
         CardList cl = new CardList();
+        Player opponent = activator.getOpponent();
 
-        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Graveyard), player));
-        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Exile), player));
-        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Library), player));
-        cl.addAll(getActivateablesFromZone(player.getZone(Constant.Zone.Command), player));
+        cl.addAll(getActivateablesFromZone(activator.getZone(Constant.Zone.Graveyard), activator));
+        cl.addAll(getActivateablesFromZone(activator.getZone(Constant.Zone.Exile), activator));
+        cl.addAll(getActivateablesFromZone(activator.getZone(Constant.Zone.Library), activator));
+        cl.addAll(getActivateablesFromZone(activator.getZone(Constant.Zone.Command), activator));
+        cl.addAll(getActivateablesFromZone(opponent.getZone(Constant.Zone.Exile), activator));
 
         return cl;
     }
@@ -2434,42 +2436,56 @@ public class CardFactoryUtil {
      * 
      * @param zone
      *            a PlayerZone object.
-     * @param player
+     * @param activator
      *            a {@link forge.Player} object.
      * @return a boolean.
      */
-    public static CardList getActivateablesFromZone(final PlayerZone zone, final Player player) {
+    public static CardList getActivateablesFromZone(final PlayerZone zone, final Player activator) {
 
         CardList cl = new CardList(zone.getCards());
 
-        cl = cl.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                if (zone.is(Constant.Zone.Graveyard)) {
-                    if (c.hasUnearth()) {
-                        return true;
+        if (activator.isPlayer(zone.getPlayer())) {
+            cl = cl.filter(new CardListFilter() {
+                @Override
+                public boolean addCard(final Card c) {
+                    if (zone.is(Constant.Zone.Graveyard)) {
+                        if (c.hasUnearth()) {
+                            return true;
+                        }
                     }
-                }
 
-                if (c.isLand() && c.hasKeyword("May be played")) {
-                    return true;
-                }
-
-                for (final SpellAbility sa : c.getSpellAbility()) {
-                    final Zone restrictZone = sa.getRestrictions().getZone();
-                    if (zone.is(restrictZone)) {
+                    if (c.isLand() && c.hasKeyword("May be played")) {
                         return true;
                     }
 
-                    if (sa.isSpell()
-                            && (c.hasKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
-                                    .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
+                    for (final SpellAbility sa : c.getSpellAbility()) {
+                        final Zone restrictZone = sa.getRestrictions().getZone();
+                        if (zone.is(restrictZone)) {
+                            return true;
+                        }
+
+                        if (sa.isSpell()
+                                && (c.hasKeyword("May be played") || (c.hasStartOfKeyword("Flashback") && zone
+                                        .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+        } else {
+            // the activator is not the owner of the card
+            cl = cl.filter(new CardListFilter() {
+                @Override
+                public boolean addCard(final Card c) {
+
+                    if (c.hasKeyword("May be played by your Opponent")) {
                         return true;
                     }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
         return cl;
     }
 
