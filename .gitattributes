@@ -6247,6 +6247,7 @@ res/cardsfolder/p/path_of_angers_flame.txt svneol=native#text/plain
 res/cardsfolder/p/path_of_peace.txt svneol=native#text/plain
 res/cardsfolder/p/path_to_exile.txt svneol=native#text/plain
 res/cardsfolder/p/patriarchs_bidding.txt svneol=native#text/plain
+res/cardsfolder/p/patriarchs_desire.txt -text svneol=unset#text/plain
 res/cardsfolder/p/patricians_scorn.txt -text svneol=unset#text/plain
 res/cardsfolder/p/patrol_hound.txt -text
 res/cardsfolder/p/patrol_signaler.txt svneol=native#text/plain
