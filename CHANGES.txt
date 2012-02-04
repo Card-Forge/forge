@@ -15,7 +15,27 @@ We have changed the archival format used for the Forge distributions from ".zip"
 
 Fixes/Features:
 
-
+- Fixed and improved the AI of the Dragon Auras.
+- Corrected the second ability of Venser, the Sojourner.
+- Added the precon Invading Spawn.
+- Added the precon Levelers' Glory.
+- Fixed Replicate.
+- Fixed targeting of AF CopySpell (Twincast and friends).
+- Cleared out the changes.txt file, now ready for new material.
+- CheckStyle.
+- Update several Maven plugins
+- checkstyle
+- Changed some ETB triggers of Evoke cards from AB to DB.
+- Made stack AI land compatible with mulligan decisions. Deleted the unused functions threadLand and getDifferentLand.
+- Cleanup of old references to the mana pool as a card.
+- Cleanup and performance updates in AllZoneUtil.
+- Fixed leaves the battlefield triggers not working when the destination is the library.
+- CheckStyle.
+- Bugfix: Phase toggle saving fixed.
+- Quest mode: Booster format choice saved in preferences.
+- Added descriptions to utility buttons.
+- Restructured and improved performance of getExternalZoneActivationCards.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -25,7 +45,10 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Dragon Wings
+Dragon Shadow
+Veiling Oddity
+Izzet Guildmage
 
 
 end
