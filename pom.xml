@@ -135,6 +135,13 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>maxmtg</id>
+            <name>Max mtg</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <licenses>
