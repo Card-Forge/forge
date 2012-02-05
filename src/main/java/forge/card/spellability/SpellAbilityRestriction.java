@@ -180,6 +180,33 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setSvarOperand(params.get("SVarCompare").substring(2));
         }
     } // end setRestrictions()
+    
+    /**
+     * <p>
+     * checkZoneRestrictions.
+     * </p>
+     * 
+     * @param cardZone
+     *            a PlayerZone object.
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public final boolean checkZoneRestrictions(final PlayerZone cardZone, final Card c, final SpellAbility sa) {
+        if (!cardZone.is(this.getZone())) {
+            // If Card is not in the default activating zone, do some additional checks
+            // Not a Spell, or on Battlefield, return false
+            if (!sa.isSpell() || cardZone.is(Zone.Battlefield) || !this.getZone().equals(Zone.Hand)) {
+                return false;
+            } else if (!c.hasKeyword("May be played") && !c.hasKeyword("May be played by your opponent")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /**
      * <p>
@@ -198,10 +225,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         final PlayerZone cardZone = AllZone.getZoneOf(c);
-        if (!cardZone.is(this.getZone())) {
-            // If Card is not in the default activating zone, do some additional
-            // checks
-            // Not a Spell, or on Battlefield, return false
+        if (!checkZoneRestrictions(cardZone, c, sa)) {
             if (!sa.isSpell() || cardZone.is(Zone.Battlefield) || !this.getZone().equals(Zone.Hand)) {
                 return false;
             } else if (!c.hasStartOfKeyword("May be played")
@@ -229,7 +253,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (!this.isAnyPlayer() && !activator.equals(c.getController())
-                && !c.hasKeyword("May be played by your Opponent")) {
+                && !c.hasKeyword("May be played by your opponent")) {
             return false;
         }
 

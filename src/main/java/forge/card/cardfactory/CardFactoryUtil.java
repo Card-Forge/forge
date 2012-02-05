@@ -2471,7 +2471,7 @@ public class CardFactoryUtil {
                         }
 
                         if (sa.isSpell()
-                                && (c.hasStartOfKeyword("May be played")
+                                && (c.hasKeyword("May be played")
                                         || c.hasKeyword("May be played without paying its mana cost")
                                         || (c.hasStartOfKeyword("Flashback") && zone
                                         .is(Zone.Graveyard))) && restrictZone.equals(Zone.Hand)) {
@@ -2487,7 +2487,7 @@ public class CardFactoryUtil {
                 @Override
                 public boolean addCard(final Card c) {
 
-                    if (c.hasKeyword("May be played by your Opponent")) {
+                    if (c.hasKeyword("May be played by your opponent")) {
                         return true;
                     }
                     return false;

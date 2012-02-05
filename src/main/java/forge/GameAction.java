@@ -42,6 +42,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
+import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
@@ -1868,10 +1869,9 @@ public class GameAction {
         final SpellAbility[] abilities = this.canPlaySpellAbility(c.getSpellAbility());
         final ArrayList<String> choices = new ArrayList<String>();
         final Player human = AllZone.getHumanPlayer();
+        final PlayerZone zone = AllZone.getZoneOf(c);
 
         if (c.isLand() && human.canPlayLand()) {
-            final PlayerZone zone = AllZone.getZoneOf(c);
-
             if (zone.is(Zone.Hand) || ((!zone.is(Zone.Battlefield)) && c.hasStartOfKeyword("May be played"))) {
                 choices.add("Play land");
             }
@@ -1917,7 +1917,8 @@ public class GameAction {
                     choices.add(newSA.toString());
                     map.put(newSA.toString(), newSA);
                 }
-                if (!flashb || c.hasKeyword("May be played") || c.hasKeyword("May be played by your Opponent")) {
+                SpellAbilityRestriction restrictions = sa.getRestrictions();
+                if (restrictions != null && restrictions.checkZoneRestrictions(zone, c, sa)) {
                     choices.add(sa.toString());
                     map.put(sa.toString(), sa);
                 }

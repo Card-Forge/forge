@@ -94,6 +94,20 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         final Card card = this.getSourceCard();
 
         final Player activator = this.getActivatingPlayer();
+        
+        if (!(card.isInstant() || card.hasKeyword("Flash") || PhaseHandler.canCastSorcery(activator))) {
+            return false;
+        }
+
+        if (!this.getRestrictions().canPlay(card, this)) {
+            return false;
+        }
+
+        if (this.getPayCosts() != null) {
+            if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
+                return false;
+            }
+        }
 
         // CantBeCast static abilities
         final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
@@ -107,17 +121,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
         }
 
-        if (this.getPayCosts() != null) {
-            if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
-                return false;
-            }
-        }
-
-        if (!this.getRestrictions().canPlay(card, this)) {
-            return false;
-        }
-
-        return (card.isInstant() || card.hasKeyword("Flash") || PhaseHandler.canCastSorcery(activator));
+        return true;
     } // canPlay()
 
     /** {@inheritDoc} */
