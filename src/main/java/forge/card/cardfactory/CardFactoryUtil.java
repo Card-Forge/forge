@@ -2444,6 +2444,11 @@ public class CardFactoryUtil {
 
         CardList cl = new CardList(zone.getCards());
 
+        //Only check the top card of the library
+        if (zone.is(Constant.Zone.Library) && !cl.isEmpty()) {
+            cl = new CardList(cl.get(0));
+        }
+
         if (activator.isPlayer(zone.getPlayer())) {
             cl = cl.filter(new CardListFilter() {
                 @Override
