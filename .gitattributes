@@ -4599,6 +4599,7 @@ res/cardsfolder/k/keening_banshee.txt svneol=native#text/plain
 res/cardsfolder/k/keening_stone.txt svneol=native#text/plain
 res/cardsfolder/k/keep_watch.txt svneol=native#text/plain
 res/cardsfolder/k/keeper_of_kookus.txt svneol=native#text/plain
+res/cardsfolder/k/keeper_of_progenitus.txt -text svneol=unset#text/plain
 res/cardsfolder/k/keeper_of_the_beasts.txt -text
 res/cardsfolder/k/keeper_of_the_flame.txt -text
 res/cardsfolder/k/keeper_of_the_light.txt -text
