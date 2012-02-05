@@ -154,10 +154,10 @@ public class InputPayManaCostAbility extends InputMana {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(this.fakeAbility, card, this.manaCost);
 
         if (this.manaCost.isPaid()) {
+            this.paidCommand.execute();
             this.resetManaCost();
             AllZone.getHumanPlayer().getManaPool().clearPay(this.fakeAbility, false);
             this.stop();
-            this.paidCommand.execute();
         } else {
             this.showMessage();
         }
@@ -166,10 +166,10 @@ public class InputPayManaCostAbility extends InputMana {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
+        this.unpaidCommand.execute();
         this.resetManaCost();
         AllZone.getHumanPlayer().getManaPool().unpaid(this.fakeAbility, true);
         this.stop();
-        this.unpaidCommand.execute();
     }
 
     /** {@inheritDoc} */
