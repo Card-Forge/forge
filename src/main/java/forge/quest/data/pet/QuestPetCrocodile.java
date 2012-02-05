@@ -106,7 +106,7 @@ public class QuestPetCrocodile extends QuestPetAbstract {
     public final ImageIcon[] getAllIcons() {
         final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
 
-        return new ImageIcon[] { null,
+        return new ImageIcon[] {
                 new ImageIcon(address + "b_1_1_crocodile_pet.jpg"),
                 new ImageIcon(address + "b_2_1_crocodile_pet.jpg"),
                 new ImageIcon(address + "b_3_1_crocodile_pet.jpg"),

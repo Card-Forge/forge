@@ -186,15 +186,13 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable {
     @Override
     public abstract ImageIcon getIcon();
 
-    /**
-     * <p>
-     * getPrice.
-     * </p>
-     * 
-     * @return a int.
-     */
+    /** @return a int. */
     @Override
-    public abstract int getPrice();
+    public abstract int getBuyingPrice();
+
+    /** @return a int. */
+    @Override
+    public abstract int getSellingPrice();
 
     /** {@inheritDoc} */
     @Override

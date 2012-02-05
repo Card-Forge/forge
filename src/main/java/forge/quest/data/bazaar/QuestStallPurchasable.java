@@ -58,9 +58,18 @@ public interface QuestStallPurchasable extends Comparable<Object> {
      * getPrice.
      * </p>
      * 
-     * @return the cost of the item in credits
+     * @return the buying cost of the item in credits
      */
-    int getPrice();
+    int getBuyingPrice();
+
+    /**
+     * <p>
+     * getPrice.
+     * </p>
+     * 
+     * @return the selling cost of the item in credits
+     */
+    int getSellingPrice();
 
     /**
      * Returns if the item is available for purchase;.

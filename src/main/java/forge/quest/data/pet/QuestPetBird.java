@@ -110,7 +110,7 @@ public class QuestPetBird extends QuestPetAbstract {
     public final ImageIcon[] getAllIcons() {
         final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
 
-        return new ImageIcon[] { null,
+        return new ImageIcon[] {
                 new ImageIcon(address + "w_0_1_bird_pet.jpg"),
                 new ImageIcon(address + "w_1_1_bird_pet.jpg"),
                 new ImageIcon(address + "w_2_1_bird_pet.jpg"),

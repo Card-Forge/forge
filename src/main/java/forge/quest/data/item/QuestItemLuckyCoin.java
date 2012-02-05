@@ -44,8 +44,8 @@ public class QuestItemLuckyCoin extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final String getPurchaseDescription() {
-        return "This coin is believed to give good luck to its owner.<br>"
-                + "Improves the chance of getting a random <br>rare after each match by <b>15%</b>.";
+        return "This coin is believed to give good luck to its owner.\n"
+                + "\nEffect: Improves the chance of getting a random rare after each match by 15%.";
     }
 
     /** {@inheritDoc} */
@@ -56,8 +56,13 @@ public class QuestItemLuckyCoin extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getPrice() {
+    public final int getBuyingPrice() {
         return 2000;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final int getSellingPrice() {
+        return 0;
+    }
 }

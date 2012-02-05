@@ -67,8 +67,14 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      * @return a int.
      */
     @Override
-    public final int getPrice() {
+    public final int getBuyingPrice() {
         return this.getAllUpgradePrices()[this.level];
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final int getSellingPrice() {
+        return 0;
     }
 
     /**
@@ -215,8 +221,8 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable {
      */
     @Override
     public final String getPurchaseDescription() {
-        return "<em>" + this.getDescription() + "</em><br>" + this.getUpgradeDescription()
-                + "<br><br><u>Current stats:</u> " + this.getStats() + "<br><u>Upgraded stats:</u> "
+        return this.getDescription()
+                + "\n\nCurrent stats: " + this.getStats() + "\nUpgraded stats: "
                 + this.getUpgradedStats();
 
     }

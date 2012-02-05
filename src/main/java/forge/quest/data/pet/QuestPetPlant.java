@@ -125,7 +125,7 @@ public class QuestPetPlant extends QuestPetAbstract {
      */
     public QuestPetPlant() {
         super("Plant", "Start each of your battles with this lush, verdant plant on your side."
-                + "Excellent at blocking the nastiest of critters!", 6);
+                + "\nExcellent at blocking the nastiest of critters!", 6);
     }
 
     /** {@inheritDoc} */
@@ -155,8 +155,7 @@ public class QuestPetPlant extends QuestPetAbstract {
     @Override
     public final ImageIcon[] getAllIcons() {
         final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
-
-        return new ImageIcon[] { null,
+        return new ImageIcon[] {
                 new ImageIcon(address + "g_0_1_plant_wall.jpg"),
                 new ImageIcon(address + "g_0_2_plant_wall.jpg"),
                 new ImageIcon(address + "g_0_3_plant_wall.jpg"),

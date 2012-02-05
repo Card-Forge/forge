@@ -420,13 +420,19 @@ public final class QuestData {
     }
 
     /**
-     * Adds the life.
-     * 
-     * @param n
-     *            the n
+     * Adds n life to maximum.
+     * @param n &emsp; int
      */
     public void addLife(final int n) {
         this.life += n;
+    }
+
+    /**
+     * Removes n life from maximum.
+     * @param n &emsp; int
+     */
+    public void removeLife(final int n) {
+        this.life -= n;
     }
 
     // Credits

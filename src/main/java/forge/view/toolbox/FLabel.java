@@ -155,7 +155,8 @@ public class FLabel extends JLabel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (!selectable) { return; }
-                selected = (selected ? false : true); repaint();
+                if (selected) { setSelected(false); }
+                else { setSelected(true); }
                 cmdClick.execute();
             }
         };
@@ -171,6 +172,12 @@ public class FLabel extends JLabel {
     /** @param b0 &emsp; boolean */
     public void setSelectable(boolean b0) {
         this.selectable = b0;
+    }
+
+    /** @param b0 &emsp; boolean */
+    public void setSelected(boolean b0) {
+        this.selected = b0;
+        repaint();
     }
 
     /** @param d0 &emsp; Scale factor for font size relative to label height, percent.
@@ -225,7 +232,7 @@ public class FLabel extends JLabel {
 
     @Override
     public void setIcon(final Icon i0) {
-        if (i0 == null) { return; }
+        if (i0 == null) { this.img = null; return; }
         // Will need image (not icon) for scaled and non-scaled.
         if (iconInBackground) { this.img = ((ImageIcon) i0).getImage(); }
         // Will need image if not in background, but scaled.
@@ -243,6 +250,11 @@ public class FLabel extends JLabel {
     /** @param c0 &emsp; {@link forge.Command} on click */
     public void setCommand(Command c0) {
         this.cmdClick = c0;
+    }
+
+    /** @return {@link forge.Command} on click */
+    public Command getCommand() {
+        return this.cmdClick;
     }
 
     @Override
@@ -267,6 +279,7 @@ public class FLabel extends JLabel {
             g2d.setColor(clrActive);
             g2d.fillRect(0, 0, w, h);
         }
+
         // Hover
         if (hoverable && hovered && !selected) {
             g2d.setColor(clrHover);

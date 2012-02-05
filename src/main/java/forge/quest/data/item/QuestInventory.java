@@ -115,6 +115,7 @@ public class QuestInventory {
     private static Set<QuestItemAbstract> getAllItems() {
         final SortedSet<QuestItemAbstract> set = new TreeSet<QuestItemAbstract>();
 
+        set.add(new QuestItemPoundFlesh());
         set.add(new QuestItemElixir());
         set.add(new QuestItemEstates());
         set.add(new QuestItemLuckyCoin());

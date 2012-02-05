@@ -28,8 +28,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.WindowConstants;
 
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.quest.gui.bazaar.QuestBazaarPanel;
 import forge.view.GuiTopLevel;
+import forge.view.bazaar.BazaarTopLevel;
 import forge.view.editor.EditorTopLevel;
 import forge.view.home.HomeTopLevel;
 import forge.view.match.MatchTopLevel;
@@ -52,7 +52,7 @@ public class FControl {
     private MatchTopLevel match = null;
     private EditorTopLevel editor = null;
     private WindowAdapter waDefault, waConcede, waLeaveBazaar;
-    private QuestBazaarPanel bazaar;
+    private BazaarTopLevel bazaar;
 
     /** */
     public static final int HOME_SCREEN = 0;
@@ -156,7 +156,7 @@ public class FControl {
                 break;
 
             case QUEST_BAZAAR:
-                this.bazaar = new QuestBazaarPanel(null);
+                this.bazaar = new BazaarTopLevel();
                 this.display.add(bazaar, JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
                 view.addWindowListener(waLeaveBazaar);
@@ -200,7 +200,7 @@ public class FControl {
      * 
      * @return MatchTopLevel
      */
-    public QuestBazaarPanel getBazaarView() {
+    public BazaarTopLevel getBazaarView() {
         return this.bazaar;
     }
 

@@ -44,8 +44,10 @@ public class QuestItemEstates extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final String getPurchaseDescription() {
-        return String.format("Gives a bonus of <b>%d%%</b> to match winnings.<br>"
-                + "Improves sell percentage by <b>%.2f%%</b>.", (10 + (this.getLevel() * 5)),
+        return String.format("Land owners have a strong voice in community matters.\n"
+                + "\nEffect: Gives a bonus of %d%% to match winnings."
+                + "\nEffect: Improves sell percentage by %.2f%%.",
+                (10 + (this.getLevel() * 5)),
                 (1 + (this.getLevel() * 0.75)));
     }
 
@@ -57,7 +59,7 @@ public class QuestItemEstates extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getPrice() {
+    public final int getBuyingPrice() {
         if (this.getLevel() == 0) {
             return 500;
         } else if (this.getLevel() == 1) {
@@ -67,4 +69,9 @@ public class QuestItemEstates extends QuestItemAbstract {
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final int getSellingPrice() {
+        return 0;
+    }
 }

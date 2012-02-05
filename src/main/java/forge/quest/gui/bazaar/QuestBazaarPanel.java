@@ -1,3 +1,8 @@
+package forge.quest.gui.bazaar;
+
+import forge.quest.gui.QuestAbstractPanel;
+import forge.quest.gui.QuestFrame;
+
 /*
  * Forge: Play Magic: the Gathering.
  * Copyright (C) 2011  Forge Team
@@ -14,7 +19,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ *
 package forge.quest.gui.bazaar;
 
 import java.awt.BorderLayout;
@@ -47,35 +52,44 @@ import forge.view.GuiTopLevel;
  * @version $Id$
  */
 public class QuestBazaarPanel extends QuestAbstractPanel {
-    /** Constant <code>serialVersionUID=1418913010051869222L</code>. */
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param mainFrame
+     */
+    protected QuestBazaarPanel(QuestFrame mainFrame) {
+        super(mainFrame);
+        // TODO Auto-generated constructor stub
+        throw new net.slightlymagic.braids.util.NotImplementedError();
+    }
+
+    @Override
+    public void refreshState() {
+        // TODO Auto-generated method stub
+        throw new net.slightlymagic.braids.util.NotImplementedError();
+    }
+/*
+    /** Constant <code>serialVersionUID=1418913010051869222L</code>. *
     private static final long serialVersionUID = 1418913010051869222L;
 
-    /** Constant <code>stallList</code>. */
+    /** Constant <code>stallList</code>. *
     private static List<QuestBazaarStall> stallList = new ArrayList<QuestBazaarStall>();
 
-    /** The button panel. */
+    /** The button panel. *
     private final JPanel buttonPanel = new JPanel(new BorderLayout());
 
-    /** The button panel main. */
+    /** The button panel main. *
     private final JPanel buttonPanelMain = new JPanel();
 
-    /** The stall panel. */
+    /** The stall panel. *
     private final JPanel stallPanel = new JPanel();
 
-    /** The selected stall. */
+    /** The selected stall. *
     private JToggleButton selectedStall = null;
 
-    /** The stall layout. */
+    /** The stall layout. *
     private final CardLayout stallLayout = new CardLayout();
 
-    /**
-     * <p>
-     * Constructor for QuestBazaarPanel.
-     * </p>
-     * 
-     * @param mainFrame
-     *            a {@link forge.quest.gui.QuestFrame} object.
-     */
+    
     public QuestBazaarPanel(final QuestFrame mainFrame) {
         super(mainFrame);
         this.setLayout(new BorderLayout());
@@ -165,23 +179,27 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
      * 
      * @param source
      *            a {@link java.lang.String} object.
-     */
+     *
     private void showStall(final String source) {
         this.stallLayout.show(this.stallPanel, source);
     }
 
     /**
      * Slightly hackish, but should work.
-     */
+     *
     static void refreshLastInstance() {
         for (final QuestBazaarStall stall : QuestBazaarPanel.stallList) {
             stall.updateItems();
         }
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc} *
     @Override
     public final void refreshState() {
         QuestBazaarPanel.refreshLastInstance();
-    }
+    } */
+
+    /* (non-Javadoc)
+     * @see forge.quest.gui.QuestAbstractPanel#refreshState()
+     */
 }

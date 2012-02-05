@@ -107,7 +107,7 @@ public class QuestPetWolf extends QuestPetAbstract {
     public final ImageIcon[] getAllIcons() {
         final String address = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
 
-        return new ImageIcon[] { null,
+        return new ImageIcon[] {
                 new ImageIcon(address + "g_1_1_wolf_pet.jpg"),
                 new ImageIcon(address + "g_1_2_wolf_pet.jpg"),
                 new ImageIcon(address + "g_2_2_wolf_pet.jpg"),

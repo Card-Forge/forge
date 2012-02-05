@@ -44,7 +44,9 @@ public class QuestItemElixir extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final String getPurchaseDescription() {
-        return "Gives +1 to maximum life<br>Current Life: " + AllZone.getQuestData().getLife();
+        return "A salty sweet smell rises from the vials bubbling behind the counter.\n"
+                + "\nEffect: Gives +1 to maximum life."
+                + "\nFine Print: Loses effectiveness after 15 uses.";
     }
 
     /** {@inheritDoc} */
@@ -55,20 +57,32 @@ public class QuestItemElixir extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getPrice() {
+    public final int getBuyingPrice() {
         if (this.getLevel() < 5) {
             return 250;
         } else if (this.getLevel() < 10) {
             return 500;
-        } else {
+        } else if (this.getLevel() <= this.getMaxLevel()) {
             return 750;
+        } else {
+            return 0;
         }
     }
 
     /** {@inheritDoc} */
     @Override
+    public final int getSellingPrice() {
+        return 0;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void onPurchase() {
-        AllZone.getQuestData().addLife(1);
+        super.onPurchase();
+
+        if (this.getLevel() <= this.getMaxLevel()) {
+            AllZone.getQuestData().addLife(1);
+        }
     }
 
 }

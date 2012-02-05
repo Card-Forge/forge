@@ -44,33 +44,31 @@ public class QuestStallManager {
     private static Map<String, SortedSet<QuestStallPurchasable>> items;
 
     /**
-     * <p>
-     * buildStalls.
-     * </p>
+     * Master method for assembling stall data: merchant...
      */
     public static void buildStalls() {
         final FSkin skin = Singletons.getView().getSkin();
 
         QuestStallManager.stalls = new HashMap<String, QuestStallDefinition>();
         QuestStallManager.stalls.put(QuestStallManager.ALCHEMIST, new QuestStallDefinition(QuestStallManager.ALCHEMIST,
-                "Alchemist", "The walls of this alchemist's stall are covered with shelves with potions, oils, "
+                "Orim, Samite Healer", "The walls of this alchemist's stall are covered with shelves with potions, oils, "
                         + "powders, poultices and elixirs, each meticulously labeled.",
                         skin.getIcon(FSkin.QuestIcons.ICO_BOTTLES)));
         QuestStallManager.stalls.put(QuestStallManager.BANKER, new QuestStallDefinition(QuestStallManager.BANKER,
-                "Banker", "A large book large enough to be seen from the outside rests on the Banker's desk.",
+                "Bank of Sarpadia", "A large book large enough to be seen from the outside rests on the Banker's desk.",
                 skin.getIcon(FSkin.QuestIcons.ICO_COIN)));
         QuestStallManager.stalls.put(QuestStallManager.BOOKSTORE, new QuestStallDefinition(QuestStallManager.BOOKSTORE,
-                "Bookstore", "Tomes of different sizes are stacked in man-high towers.",
+                "Beleren's Books", "Tomes of different sizes are stacked in man-high towers.",
                 skin.getIcon(FSkin.QuestIcons.ICO_BOOK)));
         QuestStallManager.stalls.put(QuestStallManager.GEAR, new QuestStallDefinition(QuestStallManager.GEAR,
-                "Adventuring Gear",
+                "The Rope and Axe",
                 "This adventurer's market has a tool for every need ... or so the plaque on the wall claims.",
                 skin.getIcon(FSkin.QuestIcons.ICO_GEAR)));
         QuestStallManager.stalls.put(QuestStallManager.NURSERY, new QuestStallDefinition(QuestStallManager.NURSERY,
-                "Nursery", "The smells of the one hundred and one different plants forms a unique fragrance.",
+                "Force of Nature Nursery", "The smells of the one hundred and one different plants forms a unique fragrance.",
                 skin.getIcon(FSkin.QuestIcons.ICO_LEAF)));
         QuestStallManager.stalls.put(QuestStallManager.PET_SHOP, new QuestStallDefinition(QuestStallManager.PET_SHOP,
-                "Pet Shop", "This large stall echoes with a multitude of animal noises.",
+                "The Hive", "This large menagerie echoes with a multitude of animal noises.",
                 skin.getIcon(FSkin.QuestIcons.ICO_FOX)));
     }
 
@@ -110,9 +108,8 @@ public class QuestStallManager {
     }
 
     /**
-     * <p>
-     * buildItems.
-     * </p>
+     * Retrieves all creatures and items, iterates through them,
+     * and maps to appropriate merchant.
      */
     public static void buildItems() {
         final SortedSet<QuestStallPurchasable> itemSet = new TreeSet<QuestStallPurchasable>();
@@ -133,18 +130,13 @@ public class QuestStallManager {
     }
 
     /**
-     * <p>
-     * Getter for the field <code>items</code>.
-     * </p>
+     * Returns <i>purchasable</i> items available for a particular stall.
      * 
-     * @param stallName
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.util.List} object.
+     * @param stallName &emsp; {@link java.lang.String}
+     * @return {@link java.util.List}.
      */
     public static List<QuestStallPurchasable> getItems(final String stallName) {
-        if (QuestStallManager.items == null) {
-            QuestStallManager.buildItems();
-        }
+        QuestStallManager.buildItems();
 
         final List<QuestStallPurchasable> ret = new ArrayList<QuestStallPurchasable>();
 

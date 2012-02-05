@@ -30,7 +30,6 @@ import javax.swing.border.EmptyBorder;
 
 import forge.AllZone;
 import forge.gui.GuiUtils;
-import forge.quest.gui.bazaar.QuestBazaarPanel;
 
 /**
  * <p>
@@ -79,7 +78,7 @@ public class QuestFrame extends JFrame {
         this.visiblePanel.add(newPanel, QuestFrame.MAIN_PANEL);
         this.subPanelMap.put(QuestFrame.MAIN_PANEL, newPanel);
 
-        newPanel = new QuestBazaarPanel(this);
+        newPanel = null; //new QuestBazaarPanel(this);
         this.visiblePanel.add(newPanel, QuestFrame.BAZAAR_PANEL);
         this.subPanelMap.put(QuestFrame.BAZAAR_PANEL, newPanel);
 

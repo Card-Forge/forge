@@ -50,8 +50,14 @@ public class QuestItemSleight extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getPrice() {
+    public final int getBuyingPrice() {
         return 2000;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final int getSellingPrice() {
+        return 0;
     }
 
     /** {@inheritDoc} */
@@ -63,7 +69,7 @@ public class QuestItemSleight extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final String getPurchaseDescription() {
-        return "These volumes explain how to perform the most difficult of sleights.<br>"
-                + "<em>Effect: </em>Your first mulligan is <b>free</b>";
+        return "These volumes explain how to perform the most difficult of sleights.\n"
+                + "\nEffect: Your first mulligan is free.";
     }
 }

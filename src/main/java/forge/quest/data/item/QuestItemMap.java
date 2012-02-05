@@ -50,8 +50,8 @@ public class QuestItemMap extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final String getPurchaseDescription() {
-        return "These ancient charts should facilitate navigation during your travels significantly.<br>"
-                + "<em>Effect: </em>Quest assignments become available more frequently.";
+        return "These ancient charts should facilitate navigation during your travels significantly.\n"
+                + "\nEffect: Quest assignments become available more frequently.";
     }
 
     /** {@inheritDoc} */
@@ -62,7 +62,13 @@ public class QuestItemMap extends QuestItemAbstract {
 
     /** {@inheritDoc} */
     @Override
-    public final int getPrice() {
+    public final int getBuyingPrice() {
         return 2000;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final int getSellingPrice() {
+        return 0;
     }
 }
