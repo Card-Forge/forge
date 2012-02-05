@@ -65,7 +65,7 @@ public class ViewSettings extends JScrollPane {
     private JRadioButton radCardTiny, radCardSmaller, radCardSmall,
         radCardMedium, radCardLarge, radCardHuge;
 
-    private final JLabel lblTitleSkin;
+    private final FLabel lblTitleSkin;
     /**
      * 
      * Assembles swing components for "Settings" mode menu.
@@ -144,7 +144,7 @@ public class ViewSettings extends JScrollPane {
         final JLabel lblTitleGraphics = new SectionLabel("Graphic Options");
         viewport.add(lblTitleGraphics, sectionConstraints);
 
-        lblTitleSkin = new JLabel("Choose Skin");
+        lblTitleSkin = new FLabel.Builder().text("Choose Skin").build();
         lblTitleSkin.setFont(skin.getBoldFont(14));
         lblTitleSkin.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
         final JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
@@ -157,8 +157,7 @@ public class ViewSettings extends JScrollPane {
         lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
         viewport.add(new FScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
 
-        final FLabel lblTitleCardSize = new FLabel("Card Size");
-        lblTitleCardSize.setFontStyle(Font.BOLD);
+        final FLabel lblTitleCardSize = new FLabel.Builder().text("Card Size").fontStyle(Font.BOLD).build();
         final JLabel lblCardSize = new NoteLabel("Size of cards in hand and playing field, when possible");
         viewport.add(lblTitleCardSize, regularConstraints);
         viewport.add(lblCardSize, regularConstraints);
@@ -191,7 +190,7 @@ public class ViewSettings extends JScrollPane {
 
         FLabel lblTemp;
         for (Shortcut s : shortcuts) {
-            lblTemp = new FLabel(s.getDescription());
+            lblTemp = new FLabel.Builder().text(s.getDescription()).build();
             KeyboardShortcutField ksf = new KeyboardShortcutField(s);
             viewport.add(lblTemp, "w 40%!, h 22px!, gap 10%! 0 0 1%");
             viewport.add(ksf, "w 25%!");
@@ -453,8 +452,8 @@ public class ViewSettings extends JScrollPane {
         return cbDevMode;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblTitleSkin() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblTitleSkin() {
         return lblTitleSkin;
     }
 

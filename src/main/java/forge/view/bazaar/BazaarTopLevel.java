@@ -51,7 +51,7 @@ public class BazaarTopLevel extends FPanel {
 
     private void populateStalls() {
         for (final String s : QuestStallManager.getStallNames()) {
-            final FLabel lbl = new FLabel(s + "  ", SwingConstants.RIGHT);
+            final FLabel lbl = new FLabel.Builder().text(s + "  ").fontAlign(SwingConstants.RIGHT).build();
 
             lbl.setIcon(QuestStallManager.getStall(s).getIcon());
             lbl.setIconInBackground(true);

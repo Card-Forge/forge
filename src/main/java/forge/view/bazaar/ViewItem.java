@@ -28,9 +28,9 @@ public class ViewItem extends FRoundedPanel {
     /** An update-able panel instance representing a single item. */
     public ViewItem() {
         // Final inits
-        lblIcon = new FLabel();
-        lblName = new FLabel();
-        lblPrice = new FLabel();
+        lblIcon = new FLabel.Builder().build();
+        lblName = new FLabel.Builder().build();
+        lblPrice = new FLabel.Builder().build();
         tarDesc = new FTextArea();
         btnPurchase = new SubButton("Buy");
 

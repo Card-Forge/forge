@@ -57,6 +57,7 @@ import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 import forge.view.GuiTopLevel;
 import forge.view.match.ViewField;
 import forge.view.match.MatchTopLevel;
+import forge.view.toolbox.FLabel;
 
 /**
  * Child controller, applied to single field in battlefield. Manages player view
@@ -153,11 +154,11 @@ public class ControlField {
      */
     private void addZoneListeners() {
         // Graveyard card list button
-        this.view.getLblGraveyard().setHoverable(true);
+        ((FLabel) this.view.getLblGraveyard()).setHoverable(true);
         this.view.getLblGraveyard().removeMouseListener(maGraveyard);
         this.view.getLblGraveyard().addMouseListener(maGraveyard);
         // Exile card list button
-        this.view.getLblExile().setHoverable(true);
+        ((FLabel) this.view.getLblExile()).setHoverable(true);
         this.view.getLblExile().removeMouseListener(maExiled);
         this.view.getLblExile().addMouseListener(maExiled);
 
@@ -167,17 +168,17 @@ public class ControlField {
             this.view.getLblLibrary().addMouseListener(maLibrary);
 
             // Hand button
-            this.view.getLblHand().setHoverable(true);
+            ((FLabel) this.view.getLblHand()).setHoverable(true);
         }
         else {
-            this.view.getLblLibrary().setHoverable(false);
+            ((FLabel) this.view.getLblLibrary()).setHoverable(false);
         }
 
         this.view.getLblHand().removeMouseListener(maHand);
         this.view.getLblHand().addMouseListener(maHand);
 
         // Flashback card list button
-        this.view.getLblFlashback().setHoverable(true);
+        ((FLabel) this.view.getLblFlashback()).setHoverable(true);
         this.view.getLblFlashback().removeMouseListener(maFlashback);
         this.view.getLblFlashback().addMouseListener(maFlashback);
     }
@@ -186,22 +187,22 @@ public class ControlField {
      * Adds listeners to mana "pool" labels, for paying mana.
      */
     private void addPoolListeners() {
-        this.view.getLblBlack().setHoverable(true);
+        ((FLabel) this.view.getLblBlack()).setHoverable(true);
         this.view.getLblBlack().removeMouseListener(maBlack);
         this.view.getLblBlack().addMouseListener(maBlack);
-        this.view.getLblBlue().setHoverable(true);
+        ((FLabel) this.view.getLblBlue()).setHoverable(true);
         this.view.getLblBlue().removeMouseListener(maBlue);
         this.view.getLblBlue().addMouseListener(maBlue);
-        this.view.getLblGreen().setHoverable(true);
+        ((FLabel) this.view.getLblGreen()).setHoverable(true);
         this.view.getLblGreen().removeMouseListener(maGreen);
         this.view.getLblGreen().addMouseListener(maGreen);
-        this.view.getLblRed().setHoverable(true);
+        ((FLabel) this.view.getLblRed()).setHoverable(true);
         this.view.getLblRed().removeMouseListener(maRed);
         this.view.getLblRed().addMouseListener(maRed);
-        this.view.getLblWhite().setHoverable(true);
+        ((FLabel) this.view.getLblWhite()).setHoverable(true);
         this.view.getLblWhite().removeMouseListener(maWhite);
         this.view.getLblWhite().addMouseListener(maWhite);
-        this.view.getLblColorless().setHoverable(true);
+        ((FLabel) this.view.getLblColorless()).setHoverable(true);
         this.view.getLblColorless().removeMouseListener(maColorless);
         this.view.getLblColorless().addMouseListener(maColorless);
     }

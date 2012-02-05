@@ -88,11 +88,11 @@ public class QuestFileLister extends JPanel {
         final JPanel rowTitle = new JPanel();
         rowTitle.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel("Delete", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel("Rename", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel("Name", SwingConstants.CENTER), "w 40%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel("Mode", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel("Record", SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Rename").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.CENTER).build(), "w 40%!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Mode").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Record").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
@@ -102,9 +102,10 @@ public class QuestFileLister extends JPanel {
             row = new RowPanel(qd);
             row.add(new DeleteButton(row), "w 15%!, h 20px!, gap 0 0 5px 0");
             row.add(new EditButton(row), "w 15%!, h 20px!, gaptop 5px");
-            row.add(new FLabel(qd.getName()), "w 40%!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel(mode, SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel(qd.getWin() + "/" + qd.getLost(), SwingConstants.CENTER), "w 15%!, h 20px!, gap 0 0 5px 0");
+            row.add(new FLabel.Builder().text(qd.getName()).build(), "w 40%!, h 20px!, gap 0 0 5px 0");
+            row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
+            row.add(new FLabel.Builder().text(qd.getWin() + "/" + qd.getLost())
+                    .fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
             this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");
             tempRows.add(row);
         }

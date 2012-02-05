@@ -150,10 +150,11 @@ public class ViewWinLose {
         final FScrollPane scrLog = new FScrollPane(txtLog);
         scrLog.setBorder(null);
         pnlLog.setOpaque(false);
-        final FLabel lblLog = new FLabel("Game Log", SwingConstants.CENTER);
-        lblLog.setFontScaleFactor(0.8);
-        lblLog.setFontStyle(Font.BOLD);
-        pnlLog.add(lblLog, "w 300px!, h 28px!, gap 0 0 20px 0");
+
+        pnlLog.add(new FLabel.Builder().text("Game Log").fontAlign(SwingConstants.CENTER)
+                .fontScaleFactor(0.8).fontStyle(Font.BOLD).build(),
+                "w 300px!, h 28px!, gap 0 0 20px 0");
+
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10px 0");
         pnlLeft.add(pnlLog, "w 100%!");
 

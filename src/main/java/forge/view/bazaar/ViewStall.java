@@ -64,9 +64,11 @@ public class ViewStall extends JPanel {
     protected ViewStall(final BazaarTopLevel v0) {
         // Final/component inits
         this.skin = Singletons.getView().getSkin();
-        this.lblStallName = new FLabel("", SwingConstants.CENTER);
-        this.lblEmpty = new FLabel("The merchant does not have anything useful for sale.", SwingConstants.CENTER);
-        this.lblStats = new FLabel();
+        this.lblStallName = new FLabel.Builder().text("").fontAlign(SwingConstants.CENTER).build();
+        this.lblEmpty = new FLabel.Builder()
+            .text("The merchant does not have anything useful for sale.")
+            .fontAlign(SwingConstants.CENTER).build();
+        this.lblStats = new FLabel.Builder().build();
         this.tpnFluff = new JTextPane();
         this.pnlInventory = new JPanel();
         this.scrInventory = new FScrollPane(pnlInventory);

@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -56,7 +55,7 @@ public class ViewQuest extends JScrollPane {
         pnlDuels, pnlChallenges, pnlStart, pnlTitle, pnlNewQuest,
         pnlDecks, pnlLoadQuest, pnlPrefs,
         tabDuels, tabChallenges, tabDecks, tabQuests, tabPreferences;
-    private final JLabel lblTitle, lblLife, lblCredits,
+    private final FLabel lblTitle, lblLife, lblCredits,
         lblWins, lblLosses, lblNextChallengeInWins, lblWinStreak;
 
     private final JButton btnBazaar, btnSpellShop, btnStart, btnEmbark,
@@ -108,13 +107,13 @@ public class ViewQuest extends JScrollPane {
         pnlLoadQuest = new JPanel();
         pnlPrefs = new JPanel();
 
-        lblTitle = new FLabel("New Quest", SwingConstants.CENTER);
-        lblLife = new FLabel();
-        lblCredits = new FLabel();
-        lblWins = new FLabel();
-        lblLosses = new FLabel();
-        lblNextChallengeInWins = new FLabel();
-        lblWinStreak = new FLabel();
+        lblTitle = new FLabel.Builder().text("New Quest").fontAlign(SwingConstants.CENTER).build();
+        lblLife = new FLabel.Builder().build();
+        lblCredits = new FLabel.Builder().build();
+        lblWins = new FLabel.Builder().build();
+        lblLosses = new FLabel.Builder().build();
+        lblNextChallengeInWins = new FLabel.Builder().build();
+        lblWinStreak = new FLabel.Builder().build();
 
         radEasy = new FRadioButton("Easy");
         radMedium = new FRadioButton("Medium");
@@ -269,12 +268,12 @@ public class ViewQuest extends JScrollPane {
         pnl.setLayout(new MigLayout("insets 0, align center"));
         pnl.setBorderColor(clrBorders);
         pnl.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
-        pnl.add(new FLabel("Load a previous Quest"), "h 95%!, gap 0 0 2.5% 0");
+        pnl.add(new FLabel.Builder().text("Load a previous Quest").build(), "h 95%!, gap 0 0 2.5% 0");
 
-        final FLabel lbl = new FLabel("To use quest files "
+        final FLabel lbl = new FLabel.Builder().text("To use quest files "
                 + "from previous versions, put them into "
-                + "the res/quest/data directory, and restart Forge.", SwingConstants.CENTER);
-        lbl.setFontScaleFactor(0.8);
+                + "the res/quest/data directory, and restart Forge.")
+                .fontAlign(SwingConstants.CENTER).fontScaleFactor(0.8).build();
 
         final FScrollPane scr = new FScrollPane(lstQuests);
         scr.setBorder(null);
@@ -294,7 +293,7 @@ public class ViewQuest extends JScrollPane {
         pnl1.setLayout(new MigLayout("insets 0, align center"));
         pnl1.setBorderColor(clrBorders);
         pnl1.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
-        pnl1.add(new FLabel("Start a new quest"), "h 95%!, gap 0 0 2.5% 0");
+        pnl1.add(new FLabel.Builder().text("Start a new quest").build(), "h 95%!, gap 0 0 2.5% 0");
 
         final ButtonGroup group1 = new ButtonGroup();
         group1.add(radEasy);
@@ -550,8 +549,7 @@ public class ViewQuest extends JScrollPane {
             final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
             File file = new File(base, event.getIconFilename());
 
-            FLabel lblIcon = new FLabel();
-            lblIcon.setIconScaleFactor(1);
+            final FLabel lblIcon = new FLabel.Builder().iconScaleFactor(1).build();
             if (!file.exists()) {
                 lblIcon.setIcon(skin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
             }
@@ -589,9 +587,8 @@ public class ViewQuest extends JScrollPane {
             });
 
             // Name
-            final FLabel lblName = new FLabel(event.getTitle() + ": " + event.getDifficulty());
-            lblName.setFontScaleFactor(0.6);
-            lblName.setHoverable(false);
+            final FLabel lblName = new FLabel.Builder()
+                    .text(event.getTitle() + ": " + event.getDifficulty()).hoverable(false).build();
             this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
 
             // Description
@@ -673,38 +670,38 @@ public class ViewQuest extends JScrollPane {
         return control;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblTitle() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblTitle() {
         return lblTitle;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblLife() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblLife() {
         return lblLife;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCredits() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblCredits() {
         return lblCredits;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblWins() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblWins() {
         return lblWins;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblLosses() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblLosses() {
         return lblLosses;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblNextChallengeInWins() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblNextChallengeInWins() {
         return lblNextChallengeInWins;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblWinStreak() {
+    /** @return {@link javax.swing.FLabel} */
+    public FLabel getLblWinStreak() {
         return lblWinStreak;
     }
 

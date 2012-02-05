@@ -67,7 +67,7 @@ public class ViewField extends FRoundedPanel {
 
     private final Border hoverBorder, inactiveBorder;
 
-    private DetailLabel lblHand, lblGraveyard, lblLibrary, lblExile,
+    private FLabel lblHand, lblGraveyard, lblLibrary, lblExile,
         lblFlashback, lblPoison, lblBlack, lblBlue,
         lblGreen, lblRed, lblWhite, lblColorless;
 
@@ -288,57 +288,39 @@ public class ViewField extends FRoundedPanel {
         // Hand, library, graveyard, exile, flashback, poison labels
         final String constraintsCell = "w 45%!, h 100%!, gap 0 5% 2px 2px";
 
-        lblHand = new DetailLabel(FSkin.ZoneImages.ICO_HAND, "99");
-        lblHand.setToolTipText("Cards in hand");
-
-        lblLibrary = new DetailLabel(FSkin.ZoneImages.ICO_LIBRARY, "99");
-        lblLibrary.setToolTipText("Cards in library");
+        lblHand = getBuiltFLabel(FSkin.ZoneImages.ICO_HAND, "99", "Cards in hand");
+        lblLibrary = getBuiltFLabel(FSkin.ZoneImages.ICO_LIBRARY, "99", "Cards in library");
 
         row1.add(lblHand, constraintsCell);
         row1.add(lblLibrary, constraintsCell);
 
-        lblGraveyard = new DetailLabel(FSkin.ZoneImages.ICO_GRAVEYARD, "99");
-        lblGraveyard.setToolTipText("Cards in graveyard");
-
-        lblExile = new DetailLabel(FSkin.ZoneImages.ICO_EXILE, "99");
-        lblExile.setToolTipText("Exiled cards");
+        lblGraveyard = getBuiltFLabel(FSkin.ZoneImages.ICO_GRAVEYARD, "99", "Cards in graveyard");
+        lblExile = getBuiltFLabel(FSkin.ZoneImages.ICO_EXILE, "99", "Exiled cards");
 
         row2.add(lblGraveyard, constraintsCell);
         row2.add(lblExile, constraintsCell);
 
-        lblFlashback = new DetailLabel(FSkin.ZoneImages.ICO_FLASHBACK, "99");
-        lblFlashback.setToolTipText("Flashback cards");
-
-        lblPoison = new DetailLabel(FSkin.ZoneImages.ICO_POISON, "99");
-        lblPoison.setToolTipText("Poison counters");
+        lblFlashback = getBuiltFLabel(FSkin.ZoneImages.ICO_FLASHBACK, "99", "Flashback cards");
+        lblPoison = getBuiltFLabel(FSkin.ZoneImages.ICO_POISON, "99", "Poison counters");
 
         row3.add(lblFlashback, constraintsCell);
         row3.add(lblPoison, constraintsCell);
 
         // Black, Blue, Colorless, Green, Red, White mana labels
-        lblBlack = new DetailLabel(FSkin.ManaImages.IMG_BLACK, "99");
-        lblBlack.setToolTipText("Black mana");
-
-        lblBlue = new DetailLabel(FSkin.ManaImages.IMG_BLUE, "99");
-        lblBlue.setToolTipText("Blue mana");
+        lblBlack = getBuiltFLabel(FSkin.ManaImages.IMG_BLACK, "99", "Black mana");
+        lblBlue = getBuiltFLabel(FSkin.ManaImages.IMG_BLUE, "99", "Blue mana");
 
         row4.add(lblBlack, constraintsCell);
         row4.add(lblBlue, constraintsCell);
 
-        lblGreen = new DetailLabel(FSkin.ManaImages.IMG_GREEN, "99");
-        lblGreen.setToolTipText("Green mana");
-
-        lblRed = new DetailLabel(FSkin.ManaImages.IMG_RED, "99");
-        lblRed.setToolTipText("Red mana");
+        lblGreen = getBuiltFLabel(FSkin.ManaImages.IMG_GREEN, "99", "Green mana");
+        lblRed = getBuiltFLabel(FSkin.ManaImages.IMG_RED, "99", "Red mana");
 
         row5.add(lblGreen, constraintsCell);
         row5.add(lblRed, constraintsCell);
 
-        lblWhite = new DetailLabel(FSkin.ManaImages.IMG_WHITE, "99");
-        lblWhite.setToolTipText("White mana");
-
-        lblColorless = new DetailLabel(FSkin.ManaImages.IMG_COLORLESS, "99");
-        lblColorless.setToolTipText("Colorless mana");
+        lblWhite = getBuiltFLabel(FSkin.ManaImages.IMG_WHITE, "99", "White mana");
+        lblColorless = getBuiltFLabel(FSkin.ManaImages.IMG_COLORLESS, "99", "Colorless mana");
 
         row6.add(lblWhite, constraintsCell);
         row6.add(lblColorless, constraintsCell);
@@ -436,262 +418,138 @@ public class ViewField extends FRoundedPanel {
         return this.avatarArea;
     }
 
-    /**
-     * Gets the lbl life.
-     *
-     * @return DetailLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public JLabel getLblLife() {
         return this.lblLife;
     }
 
-    /**
-     * Gets the lbl hand.
-     *
-     * @return DetailLabel for hand cards
-     */
-    public DetailLabel getLblHand() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblHand() {
         return this.lblHand;
     }
 
-    /**
-     * Gets the lbl library.
-     *
-     * @return DetailLabel for library cards
-     */
-    public DetailLabel getLblLibrary() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblLibrary() {
         return this.lblLibrary;
     }
 
-    /**
-     * Gets the lbl graveyard.
-     *
-     * @return DetailLabel for graveyard cards
-     */
-    public DetailLabel getLblGraveyard() {
+    /** @return  {@link javax.swing.JLabel} */
+    public JLabel getLblGraveyard() {
         return this.lblGraveyard;
     }
 
-    /**
-     * Gets the lbl exile.
-     *
-     * @return DetailLabel for exiled cards
-     */
-    public DetailLabel getLblExile() {
+    /** @return  {@link javax.swing.JLabel} */
+    public JLabel getLblExile() {
         return this.lblExile;
     }
 
-    /**
-     * Gets the lbl flashback.
-     *
-     * @return DetailLabel for flashback cards
-     */
-    public DetailLabel getLblFlashback() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblFlashback() {
         return this.lblFlashback;
     }
 
-    /**
-     * Gets the lbl poison.
-     *
-     * @return DetailLabel for poison counters
-     */
-    public DetailLabel getLblPoison() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblPoison() {
         return this.lblPoison;
     }
 
-    /**
-     * Gets the lbl colorless.
-     *
-     * @return DetailLabel for colorless mana count
-     */
-    public DetailLabel getLblColorless() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblColorless() {
         return this.lblColorless;
     }
 
-    /**
-     * Gets the lbl black.
-     *
-     * @return DetailLabel for black mana count
-     */
-    public DetailLabel getLblBlack() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblBlack() {
         return this.lblBlack;
     }
 
-    /**
-     * Gets the lbl blue.
-     *
-     * @return DetailLabel for blue mana count
-     */
-    public DetailLabel getLblBlue() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblBlue() {
         return this.lblBlue;
     }
 
-    /**
-     * Gets the lbl green.
-     *
-     * @return DetailLabel for green mana count
-     */
-    public DetailLabel getLblGreen() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblGreen() {
         return this.lblGreen;
     }
 
-    /**
-     * Gets the lbl red.
-     *
-     * @return DetailLabel for red mana count
-     */
-    public DetailLabel getLblRed() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblRed() {
         return this.lblRed;
     }
 
-    /**
-     * Gets the lbl white.
-     *
-     * @return DetailLabel for white mana count
-     */
-    public DetailLabel getLblWhite() {
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblWhite() {
         return this.lblWhite;
     }
 
     // Phases
-    /**
-     * Gets the lbl upkeep.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblUpkeep() {
         return this.lblUpkeep;
     }
 
-    /**
-     * Gets the lbl draw.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblDraw() {
         return this.lblDraw;
     }
 
-    /**
-     * Gets the lbl main1.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblMain1() {
         return this.lblMain1;
     }
 
-    /**
-     * Gets the lbl begin combat.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblBeginCombat() {
         return this.lblBeginCombat;
     }
 
-    /**
-     * Gets the lbl declare attackers.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblDeclareAttackers() {
         return this.lblDeclareAttackers;
     }
 
-    /**
-     * Gets the lbl declare blockers.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblDeclareBlockers() {
         return this.lblDeclareBlockers;
     }
 
-    /**
-     * Gets the lbl combat damage.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblCombatDamage() {
         return this.lblCombatDamage;
     }
 
-    /**
-     * Gets the lbl first strike.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblFirstStrike() {
         return this.lblFirstStrike;
     }
 
-    /**
-     * Gets the lbl end combat.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblEndCombat() {
         return this.lblEndCombat;
     }
 
-    /**
-     * Gets the lbl main2.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblMain2() {
         return this.lblMain2;
     }
 
-    /**
-     * Gets the lbl end turn.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblEndTurn() {
         return this.lblEndTurn;
     }
 
-    /**
-     * Gets the lbl cleanup.
-     *
-     * @return PhaseLabel
-     */
+    /** @return {@link javax.swing.JLabel} */
     public PhaseLabel getLblCleanup() {
         return this.lblCleanup;
     }
 
-    // ========== Custom classes
+    // ========== Custom class handling
 
-    /**
-     * Used to show various values in "details" panel.
-     */
-    // Design note: Labels are used here since buttons have various
-    // difficulties in displaying the desired "flat" background and
-    // also strange icon/action behavior.
-    public class DetailLabel extends FLabel {
-        /**
-         * Instance of JLabel detailing info about field: has icon and optional
-         * hover effect.
-         * 
-         * @param s0
-         *            &emsp; Label's icon address
-         * @param txt0
-         *            &emsp; Label's text
-         */
-        public DetailLabel(final SkinProp s0, final String txt0) {
-            super(txt0, SwingConstants.RIGHT);
-
-            this.setOpaque(false);
-            this.setFontScaleFactor(0.5);
-            this.setIconScaleFactor(0.8);
-            this.setIconBackgroundAlpha(0.6f);
-            this.setIconInBackground(true);
-            this.setIcon(new ImageIcon(skin.getImage(s0)));
-
-            this.setHoverable(true);
-        }
+    private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {
+        return new FLabel.Builder().icon(new ImageIcon(skin.getImage(p0)))
+            .opaque(false).fontScaleFactor(0.5).iconAlpha(0.6f).iconInBackground(true)
+            .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
     }
 
     /**

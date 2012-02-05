@@ -50,17 +50,14 @@ public class QuestPreferencesHandler extends JPanel {
         pnlBooster = new JPanel();
         pnlShop = new JPanel();
 
-        lblErrRewards = new FLabel("Rewards Error");
-        lblErrDifficulty = new FLabel("Difficulty Error");
-        lblErrBooster = new FLabel("Booster Error");
-        lblErrShop = new FLabel("Shop Error");
+        lblErrRewards = new FLabel.Builder().text("Rewards Error").fontStyle(Font.BOLD).build();
+        lblErrDifficulty = new FLabel.Builder().text("Difficulty Error").fontStyle(Font.BOLD).build();
+        lblErrBooster = new FLabel.Builder().text("Booster Error").fontStyle(Font.BOLD).build();
+        lblErrShop = new FLabel.Builder().text("Shop Error").fontStyle(Font.BOLD).build();
 
         lblErrRewards.setForeground(Color.red);
-        lblErrRewards.setFontStyle(Font.BOLD);
         lblErrDifficulty.setForeground(Color.red);
-        lblErrDifficulty.setFontStyle(Font.BOLD);
         lblErrBooster.setForeground(Color.red);
-        lblErrBooster.setFontStyle(Font.BOLD);
         lblErrShop.setForeground(Color.red);
         lblErrShop.setFontStyle(Font.BOLD);
 
@@ -68,168 +65,172 @@ public class QuestPreferencesHandler extends JPanel {
         pnlRewards.setOpaque(false);
         pnlRewards.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        pnlRewards.add(new FLabel("Rewards", new ImageIcon("res/images/icons/CoinIcon.png")), "w 100%!, h 30px!, span 2 1");
+        pnlRewards.add(new FLabel.Builder().text("Rewards")
+                .icon(new ImageIcon("res/images/icons/CoinIcon.png")).build(),
+                "w 100%!, h 30px!, span 2 1");
         pnlRewards.add(lblErrRewards, "w 100%!, h 30px!, span 2 1");
 
         constraints1 = "w 60px, h 26px!";
         constraints2 = "w 150px!, h 26px!";
 
-        pnlRewards.add(new FLabel("Base winnings"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Base winnings").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_BASE, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("No losses"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("No losses").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_UNDEFEATED, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("Poison win"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Poison win").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_POISON, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("Milling win"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Milling win").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_MILLED, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("Mulligan 0 win"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Mulligan 0 win").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_MULLIGAN0, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("Alternative win"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Alternative win").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_ALTERNATIVE, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("Win by turn 15"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Win by turn 15").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN15, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("Win by turn 10"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Win by turn 10").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN10, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("Win by turn 5"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Win by turn 5").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN5, ErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel("First turn win"), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("First turn win").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN1, ErrType.REWARDS), constraints1);
 
         // Difficulty table panel
         pnlDifficulty.setOpaque(false);
         pnlDifficulty.setLayout(new MigLayout("insets 0, gap 0, wrap 5"));
 
-        pnlDifficulty.add(new FLabel("Difficulty Adjustments", new ImageIcon("res/images/icons/NotesIcon.png")), "w 100%!, h 30px!, span 5 1");
+        pnlDifficulty.add(new FLabel.Builder().text("Difficulty Adjustments").icon(new ImageIcon("res/images/icons/NotesIcon.png")), "w 100%!, h 30px!, span 5 1");
         pnlDifficulty.add(lblErrDifficulty, "w 100%!, h 30px!, span 5 1");
 
         constraints1 = "w 60px!, h 26px!";
         constraints2 = "w 150px!, h 26px!";
 
-        pnlDifficulty.add(new FLabel(""), constraints2);
-        pnlDifficulty.add(new FLabel("Easy"), constraints1);
-        pnlDifficulty.add(new FLabel("Medium"), constraints1);
-        pnlDifficulty.add(new FLabel("Hard"), constraints1);
-        pnlDifficulty.add(new FLabel("Expert"), constraints1);
+        pnlDifficulty.add(new FLabel.Builder().text("").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Easy").build(), constraints1);
+        pnlDifficulty.add(new FLabel.Builder().text("Medium").build(), constraints1);
+        pnlDifficulty.add(new FLabel.Builder().text("Hard").build(), constraints1);
+        pnlDifficulty.add(new FLabel.Builder().text("Expert").build(), constraints1);
 
-        pnlDifficulty.add(new FLabel("Wins For Booster"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins For Booster").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Wins For Rank Increase"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins For Rank Increase").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Wins For Medium AI"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins For Medium AI").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Wins For Hard AI"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins For Hard AI").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Wins For Expert AI"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins For Expert AI").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Starting commons"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting commons").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Starting uncommons"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting uncommons").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Starting rares"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting rares").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Starting credits"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting credits").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_EASY, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_MEDIUM, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_HARD, ErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_EXPERT, ErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel("Starting basic lands"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting basic lands").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_BASIC_LANDS, ErrType.DIFFICULTY), constraints1 + ", wrap");
 
-        pnlDifficulty.add(new FLabel("Starting snow lands"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting snow lands").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_SNOW_LANDS, ErrType.DIFFICULTY), constraints1 + ", wrap");
 
-        pnlDifficulty.add(new FLabel("Penalty for loss"), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Penalty for loss").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.PENALTY_LOSS, ErrType.DIFFICULTY), constraints1 + ", wrap");
 
         // Booster breakdown panel
         pnlBooster.setOpaque(false);
         pnlBooster.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        pnlBooster.add(new FLabel("Booster Pack Ratios", new ImageIcon("res/images/icons/BookIcon.png")), "w 100%!, h 30px!, span 2 1");
+        pnlBooster.add(new FLabel.Builder().text("Booster Pack Ratios")
+                .icon(new ImageIcon("res/images/icons/BookIcon.png")).build(),
+                "w 100%!, h 30px!, span 2 1");
         pnlBooster.add(lblErrBooster, "w 100%!, h 30px!, span 2 1");
 
         constraints1 = "w 60px!, h 26px!";
         constraints2 = "w 150px!, h 26px!";
-        pnlBooster.add(new FLabel("Common"), constraints2);
+        pnlBooster.add(new FLabel.Builder().text("Common").build(), constraints2);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_COMMONS, ErrType.BOOSTER), constraints1);
 
-        pnlBooster.add(new FLabel("Uncommon"), constraints2);
+        pnlBooster.add(new FLabel.Builder().text("Uncommon").build(), constraints2);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_UNCOMMONS, ErrType.BOOSTER), constraints1);
 
-        pnlBooster.add(new FLabel("Rare"), constraints2);
+        pnlBooster.add(new FLabel.Builder().text("Rare").build(), constraints2);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_RARES, ErrType.BOOSTER), constraints1);
 
         // Shop panel
         pnlShop.setOpaque(false);
         pnlShop.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        pnlShop.add(new FLabel("Shop Preferences", new ImageIcon("res/images/icons/CoinIcon.png")), "w 100%!, h 30px!, span 2 1");
+        pnlShop.add(new FLabel.Builder().text("Shop Preferences")
+                .icon(new ImageIcon("res/images/icons/CoinIcon.png")).build(), "w 100%!, h 30px!, span 2 1");
         pnlShop.add(lblErrShop, "w 100%!, h 30px!, span 2 1");
 
         constraints1 = "w 60px, h 26px!";
         constraints2 = "w 150px!, h 26px!";
 
-        pnlShop.add(new FLabel("Maximum Packs"), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Maximum Packs").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_MAX_PACKS, ErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel("Starting Packs"), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Starting Packs").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_STARTING_PACKS, ErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel("Wins for Pack"), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Wins for Pack").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK, ErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel("Common Singles"), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Common Singles").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_COMMON, ErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel("Uncommon Singles"), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Uncommon Singles").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_UNCOMMON, ErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel("Rare Singles"), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Rare Singles").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_RARE, ErrType.SHOP), constraints1);
 
-        
         constraints1 = "w 100%!, gap 0 0 20px 0";
         this.add(pnlRewards, constraints1);
         this.add(pnlDifficulty, constraints1);

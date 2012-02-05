@@ -68,56 +68,53 @@ public class ViewUtilities extends JPanel {
         final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
 
         btnDownloadPics = new SubButton("Download LQ Card Pictures");
-        final FLabel lblPics = new FLabel("", SwingConstants.CENTER);
-        lblPics.setText("Download default card picture for each card.");
-        lblPics.setFontStyle(Font.ITALIC);
+        final FLabel lblPics = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .text("Download default card picture for each card.").fontStyle(Font.ITALIC).build();
 
         this.add(btnDownloadPics, constraintsBTN);
         this.add(lblPics, constraintsLBL);
 
         btnDownloadSetPics = new SubButton("Download LQ Set Pictures");
-        final FLabel lblSets = new FLabel("", SwingConstants.CENTER);
-        lblSets.setText("Download full card picture sets for all cards from legacy releases of MTG.");
-        lblSets.setFontStyle(Font.ITALIC);
+        final FLabel lblSets = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .text("Download full card picture sets for all cards from legacy releases of MTG.")
+                .fontStyle(Font.ITALIC).build();
 
         this.add(btnDownloadSetPics, constraintsBTN);
         this.add(lblSets, constraintsLBL);
 
         btnDownloadQuestImages = new SubButton("Download Quest Images");
-        final FLabel lblQuest = new FLabel("", SwingConstants.CENTER);
-        lblQuest.setText("Download tokens and icons used in Quest mode.");
-        lblQuest.setFontStyle(Font.ITALIC);
+        final FLabel lblQuest = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+            .text("Download tokens and icons used in Quest mode.").fontStyle(Font.ITALIC).build();
 
         this.add(btnDownloadQuestImages, constraintsBTN);
         this.add(lblQuest, constraintsLBL);
 
         btnDownloadPrices = new SubButton("Download Card Prices");
-        final FLabel lblPrices = new FLabel("", SwingConstants.CENTER);
-        lblPrices.setText("Download up-to-date price list for in-game card shops.");
-        lblPrices.setFontStyle(Font.ITALIC);
+        final FLabel lblPrices = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .text("Download up-to-date price list for in-game card shops.")
+                .fontStyle(Font.ITALIC).build();
 
         this.add(btnDownloadPrices, constraintsBTN);
         this.add(lblPrices, constraintsLBL);
 
         btnImportPictures = new SubButton("Import Pictures");
-        final FLabel lblImport = new FLabel("", SwingConstants.CENTER);
-        lblImport.setText("Import card pictures from a local version of Forge.");
-        lblImport.setFontStyle(Font.ITALIC);
+        final FLabel lblImport = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .text("Import card pictures from a local version of Forge.")
+                .fontStyle(Font.ITALIC).build();
         this.add(btnImportPictures, constraintsBTN);
         this.add(lblImport, constraintsLBL);
 
         btnReportBug = new SubButton("Report a Bug");
-        final FLabel lblReport = new FLabel("", SwingConstants.CENTER);
-        lblReport.setText("Something broken?");
-        lblReport.setFontStyle(Font.ITALIC);
+        final FLabel lblReport = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .text("Something broken?").fontStyle(Font.ITALIC).build();
 
         this.add(btnReportBug, constraintsBTN);
         this.add(lblReport, constraintsLBL);
 
         btnDeckEditor = new SubButton("Deck Editor");
-        final FLabel lblEditor = new FLabel("", SwingConstants.CENTER);
-        lblEditor.setText("Build or edit a deck using all cards available in Forge.");
-        lblEditor.setFontStyle(Font.ITALIC);
+        final FLabel lblEditor = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+            .text("Build or edit a deck using all cards available in Forge.")
+            .fontStyle(Font.ITALIC).build();
         this.add(btnDeckEditor, constraintsBTN);
         this.add(lblEditor, constraintsLBL);
 
