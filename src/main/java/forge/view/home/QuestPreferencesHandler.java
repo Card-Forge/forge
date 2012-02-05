@@ -27,14 +27,15 @@ import forge.view.toolbox.FSkin;
 public class QuestPreferencesHandler extends JPanel {
     private final FSkin skin;
     private final QuestPreferences prefs;
-    private final JPanel pnlDifficulty, pnlBooster, pnlRewards;
-    private final FLabel lblErrRewards, lblErrBooster, lblErrDifficulty;
+    private final JPanel pnlDifficulty, pnlBooster, pnlRewards, pnlShop;
+    private final FLabel lblErrRewards, lblErrBooster, lblErrDifficulty, lblErrShop;
     private String constraints1, constraints2;
 
     private enum ErrType {
         REWARDS,
         DIFFICULTY,
-        BOOSTER
+        BOOSTER,
+        SHOP
     }
 
     /** */
@@ -47,10 +48,12 @@ public class QuestPreferencesHandler extends JPanel {
         pnlRewards = new JPanel();
         pnlDifficulty = new JPanel();
         pnlBooster = new JPanel();
+        pnlShop = new JPanel();
 
         lblErrRewards = new FLabel("Rewards Error");
         lblErrDifficulty = new FLabel("Difficulty Error");
         lblErrBooster = new FLabel("Booster Error");
+        lblErrShop = new FLabel("Shop Error");
 
         lblErrRewards.setForeground(Color.red);
         lblErrRewards.setFontStyle(Font.BOLD);
@@ -58,6 +61,8 @@ public class QuestPreferencesHandler extends JPanel {
         lblErrDifficulty.setFontStyle(Font.BOLD);
         lblErrBooster.setForeground(Color.red);
         lblErrBooster.setFontStyle(Font.BOLD);
+        lblErrShop.setForeground(Color.red);
+        lblErrShop.setFontStyle(Font.BOLD);
 
         // Rewards panel
         pnlRewards.setOpaque(false);
@@ -196,10 +201,40 @@ public class QuestPreferencesHandler extends JPanel {
         pnlBooster.add(new FLabel("Rare"), constraints2);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_RARES, ErrType.BOOSTER), constraints1);
 
+        // Shop panel
+        pnlShop.setOpaque(false);
+        pnlShop.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+
+        pnlShop.add(new FLabel("Shop Preferences", new ImageIcon("res/images/icons/CoinIcon.png")), "w 100%!, h 30px!, span 2 1");
+        pnlShop.add(lblErrShop, "w 100%!, h 30px!, span 2 1");
+
+        constraints1 = "w 60px, h 26px!";
+        constraints2 = "w 150px!, h 26px!";
+
+        pnlShop.add(new FLabel("Maximum Packs"), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_MAX_PACKS, ErrType.SHOP), constraints1);
+
+        pnlShop.add(new FLabel("Starting Packs"), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_STARTING_PACKS, ErrType.SHOP), constraints1);
+
+        pnlShop.add(new FLabel("Wins for Pack"), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK, ErrType.SHOP), constraints1);
+
+        pnlShop.add(new FLabel("Common Singles"), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_COMMON, ErrType.SHOP), constraints1);
+
+        pnlShop.add(new FLabel("Uncommon Singles"), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_UNCOMMON, ErrType.SHOP), constraints1);
+
+        pnlShop.add(new FLabel("Rare Singles"), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_RARE, ErrType.SHOP), constraints1);
+
+        
         constraints1 = "w 100%!, gap 0 0 20px 0";
         this.add(pnlRewards, constraints1);
         this.add(pnlDifficulty, constraints1);
         this.add(pnlBooster, constraints1);
+        this.add(pnlShop, constraints1);
 
         resetErrors();
     }
@@ -344,6 +379,25 @@ public class QuestPreferencesHandler extends JPanel {
                     return;
                 }
                 break;
+            case SHOP_STARTING_PACKS:
+            case SHOP_SINGLES_COMMON: case SHOP_SINGLES_UNCOMMON: case SHOP_SINGLES_RARE:
+                if (val < 0) {
+                    showError(i0, "Value too small (minimum 0).");
+                    return;
+                } else if (val > 15) {
+                    showError(i0, "Value too large (maximum 15).");
+                    return;
+                }
+                break;
+            case SHOP_WINS_FOR_ADDITIONAL_PACK: case SHOP_MAX_PACKS:
+                if (val < 1) {
+                    showError(i0, "Value too small (minimum 1).");
+                    return;
+                } else if (val > 25) {
+                    showError(i0, "Value too large (maximum 25).");
+                    return;
+                }
+                break;
             default:
                 if (val > 100) {
                     showError(i0, "Value too large (maximum 100).");
@@ -372,6 +426,10 @@ public class QuestPreferencesHandler extends JPanel {
                 lblErrRewards.setVisible(true);
                 lblErrRewards.setText(s);
                 break;
+            case SHOP:
+                lblErrShop.setVisible(true);
+                lblErrShop.setText(s);
+                break;
             default:
         }
 
@@ -382,5 +440,6 @@ public class QuestPreferencesHandler extends JPanel {
         lblErrBooster.setVisible(false);
         lblErrDifficulty.setVisible(false);
         lblErrRewards.setVisible(false);
+        lblErrShop.setVisible(false);
     }
 }

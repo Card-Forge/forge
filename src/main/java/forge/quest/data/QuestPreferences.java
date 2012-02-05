@@ -124,7 +124,14 @@ public class QuestPreferences implements Serializable {
         WINS_EXPERTAI_EASY ("40"), /** */
         WINS_EXPERTAI_MEDIUM ("36"), /** */
         WINS_EXPERTAI_HARD ("32"), /** */
-        WINS_EXPERTAI_EXPERT ("28"); /** */
+        WINS_EXPERTAI_EXPERT ("28"), /** */
+
+        SHOP_MAX_PACKS ("6"), /** */
+        SHOP_SINGLES_COMMON ("7"), /** */
+        SHOP_SINGLES_UNCOMMON ("3"), /** */
+        SHOP_SINGLES_RARE ("1"), /** */
+        SHOP_WINS_FOR_ADDITIONAL_PACK ("10"), /** */
+        SHOP_STARTING_PACKS ("4"); /** */
 
         private final String strDefaultVal;
 

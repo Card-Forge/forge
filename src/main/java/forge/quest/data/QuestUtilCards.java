@@ -361,13 +361,22 @@ public final class QuestUtilCards {
     public void generateCardsInShop() {
         final BoosterGenerator pack = new BoosterGenerator(CardDb.instance().getAllCards());
 
-        final int levelPacks = this.q.getLevel() > 0 ? 4 / this.q.getLevel() : 4;
-        final int winPacks = this.q.getWin() / 10;
-        final int totalPacks = Math.min(levelPacks + winPacks, 6);
+        // Preferences
+        final int startPacks = this.qpref.getPreferenceInt(QPref.SHOP_STARTING_PACKS);
+        final int winsForPack = this.qpref.getPreferenceInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
+        final int maxPacks = this.qpref.getPreferenceInt(QPref.SHOP_MAX_PACKS);
+        final int common = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_COMMON);
+        final int uncommon = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_UNCOMMON);
+        final int rare = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_RARE);
+
+        final int levelPacks = this.q.getLevel() > 0 ? startPacks / this.q.getLevel() : startPacks;
+        final int winPacks = this.q.getWin() / winsForPack;
+        final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
+
 
         this.q.getShopList().clear();
         for (int i = 0; i < totalPacks; i++) {
-            this.q.getShopList().addAllCards(pack.getBoosterPack(7, 3, 1, 0, 0, 0, 0, 0, 0));
+            this.q.getShopList().addAllCards(pack.getBoosterPack(common, uncommon, rare, 0, 0, 0, 0, 0, 0));
         }
 
         this.generateBoostersInShop(totalPacks);
