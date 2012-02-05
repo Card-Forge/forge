@@ -36,6 +36,26 @@ Fixes/Features:
 - Added descriptions to utility buttons.
 - Restructured and improved performance of getExternalZoneActivationCards.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the keyword "May be played by your Opponent".
+- fixed card text of Donate
+- Fixed bug in BoosterGenerator reported by Roujin.
+- forgot the NumDmg for Serendib Djinn
+- Converted Mind's Desire to script.
+- New UI for bazaar.
+- Selling price added to interface and abstract for quest bazaar items.
+- Can now sell life back to the Alchemist.
+- Update developer list
+- Checkstyle.
+- Changed opacity on field detail labels to combat contrast problems across various skins.
+- Quest UI is now fully updated. Deprecated classes and packages removed from codebase.
+- Stubborn package, didn't want to be deleted.
+- Added "theme2" to skin palette.
+- Performance update for getExternalZoneActivationCards.
+- Applied quest shop preferences patch by Roujin.
+- Spells with "May be played without paying its mana cost" are no longer automatically playable by also paying their mana cost.
+- Converted FLabel to Builder pattern, so inline calls can now be chained together, setting all preferences at the time of instantiation. Also, makes FLabel fairly immutable.
+- Fix for Aluren. Cleanup.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -49,6 +69,14 @@ Dragon Wings
 Dragon Shadow
 Veiling Oddity
 Izzet Guildmage
+Fiend of the Shadows
+Serendib Djinn
+Thada Adel, Acquisitor
+Knacksaw Clique
+Ornate Kanzashi
+Patriarch's Desire
+Graceful Antelope
+Sins of the Past
 
 
 end
