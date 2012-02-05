@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact
 Text:no text
 A:AB$ Mill | Cost$ 2 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBPump | SpellDescription$ Target opponent exiles the top card of his or her library. You may play that card this turn.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your Opponent | PumpZone$ Exile | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

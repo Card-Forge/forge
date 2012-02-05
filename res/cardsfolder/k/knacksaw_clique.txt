@@ -5,7 +5,7 @@ Text:no text
 PT:1/4
 K:Flying
 A:AB$ Mill | Cost$ 1 U Q | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBPump | SpellDescription$ Target opponent exiles the top card of his or her library. Until end of turn, you may play that card.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your Opponent | PumpZone$ Exile | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
