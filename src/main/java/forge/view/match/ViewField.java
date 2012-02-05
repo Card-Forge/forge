@@ -686,6 +686,7 @@ public class ViewField extends FRoundedPanel {
             this.setOpaque(false);
             this.setFontScaleFactor(0.5);
             this.setIconScaleFactor(0.8);
+            this.setIconBackgroundAlpha(0.6f);
             this.setIconInBackground(true);
             this.setIcon(new ImageIcon(skin.getImage(s0)));
 

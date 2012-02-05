@@ -1,5 +1,6 @@
 package forge.view.toolbox;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -53,6 +54,7 @@ public class FLabel extends JLabel {
     private Command cmdClick;
     private int x, y, w, h, iw, ih, sw, sh, ref;
     private double iar;
+    private AlphaComposite alphaDim, alphaStrong;
 
     private int fontStyle;
 
@@ -114,6 +116,7 @@ public class FLabel extends JLabel {
         this.setBackground(clrInactive);
         this.setVerticalTextPosition(SwingConstants.CENTER);
         this.setVerticalAlignment(SwingConstants.CENTER);
+        this.setIconBackgroundAlpha(1.0f);
 
         // Resize adapter
         this.cadResize = new ComponentAdapter() {
@@ -210,6 +213,13 @@ public class FLabel extends JLabel {
         if (!b0 && img != null) { setIcon(new ImageIcon(img)); }
     }
 
+    /** Sets alpha if icon is in background.
+     * @param f0 &emsp; float */
+    public void setIconBackgroundAlpha(float f0) {
+        this.alphaDim = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f0);
+        this.alphaStrong = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
+    }
+
     /** @param i0 &emsp; int, must be SwingConstants.HORIZONTAL or VERTICAL */
     public void setFontScaleBy(int i0) {
         if (i0 != SwingConstants.HORIZONTAL && i0 != SwingConstants.VERTICAL) {
@@ -295,6 +305,12 @@ public class FLabel extends JLabel {
             sw = (int) (sh * iar);
             y = (int) ((h - sh) / 2);
 
+            if (hoverable && hovered && !selected) {
+                g2d.setComposite(alphaStrong);
+            }
+            else {
+                g2d.setComposite(alphaDim);
+            }
             g2d.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
         }
 
