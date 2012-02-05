@@ -180,7 +180,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setSvarOperand(params.get("SVarCompare").substring(2));
         }
     } // end setRestrictions()
-    
+
     /**
      * <p>
      * checkZoneRestrictions.
@@ -228,7 +228,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (!checkZoneRestrictions(cardZone, c, sa)) {
             if (!sa.isSpell() || cardZone.is(Zone.Battlefield) || !this.getZone().equals(Zone.Hand)) {
                 return false;
-            } else if (!c.hasStartOfKeyword("May be played")
+            } else if (!c.hasKeyword("May be played without paying its mana cost")
                     && !(c.hasStartOfKeyword("Flashback") && cardZone.is(Zone.Graveyard))) {
                 return false;
             }

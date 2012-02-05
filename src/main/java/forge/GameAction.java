@@ -1881,10 +1881,10 @@ public class GameAction {
             // for uncastables like lotus bloom, check if manaCost is blank
             sa.setActivatingPlayer(human);
             if (sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
-                boolean flashb = false;
+                boolean extraMode = false;
 
                 // check for flashback keywords
-                if (c.isInZone(Constant.Zone.Graveyard) && sa.isSpell() && (c.isInstant() || c.isSorcery())) {
+                if (zone.is(Constant.Zone.Graveyard) && sa.isSpell() && (c.isInstant() || c.isSorcery())) {
                     for (final String keyword : c.getKeyword()) {
                         if (keyword.startsWith("Flashback")) {
                             final SpellAbility flashback = sa.copy();
@@ -1898,7 +1898,7 @@ public class GameAction {
                             }
                             choices.add(flashback.toString());
                             map.put(flashback.toString(), flashback);
-                            flashb = true;
+                            extraMode = true;
                         }
                     }
                 }
@@ -1916,9 +1916,10 @@ public class GameAction {
                     newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                     choices.add(newSA.toString());
                     map.put(newSA.toString(), newSA);
+                    extraMode = true;
                 }
                 SpellAbilityRestriction restrictions = sa.getRestrictions();
-                if (restrictions != null && restrictions.checkZoneRestrictions(zone, c, sa)) {
+                if (!extraMode || (restrictions != null && restrictions.checkZoneRestrictions(zone, c, sa))) {
                     choices.add(sa.toString());
                     map.put(sa.toString(), sa);
                 }
