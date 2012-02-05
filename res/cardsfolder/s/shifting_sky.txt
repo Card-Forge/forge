@@ -1,0 +1,15 @@
+Name:Shifting Sky
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You
+S:Mode$ Continuous| Affected$ Permanent.nonLand | SetColor$ ChosenColor | Description$ All nonland permanents are the chosen color.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sky.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/100.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/32.jpg
+Oracle:As Shifting Sky enters the battlefield, choose a color.\nAll nonland permanents are the chosen color.
+End

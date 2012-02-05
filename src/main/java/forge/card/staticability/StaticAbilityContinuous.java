@@ -188,8 +188,13 @@ public class StaticAbilityContinuous {
         }
 
         if (params.containsKey("SetColor")) {
-            addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("SetColor").split(
-                    " & "))));
+            final String colors = params.get("SetColor");
+            if (colors.equals("ChosenColor")) {
+                addColors = CardUtil.getShortColorsString(hostCard.getChosenColor());
+            } else {
+                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(
+                        colors.split(" & "))));
+            }
             se.setOverwriteColors(true);
         }
 
