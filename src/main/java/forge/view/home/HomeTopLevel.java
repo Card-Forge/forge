@@ -43,8 +43,9 @@ import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 
 /**
- * Lays out battle, sidebar, user areas in locked % vals and repaints as
- * necessary.
+ * - Lays out containers and borders for main menu and submenus<br>
+ * - Instantiates top-level controller for submenus.<br>
+ * - Has access methods for all child controllers<br>
  * 
  */
 
