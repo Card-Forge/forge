@@ -64,7 +64,8 @@ public class FSkin {
         CLR_PHASE_INACTIVE_ENABLED  (new int[] {70, 150}), /** */
         CLR_PHASE_INACTIVE_DISABLED (new int[] {70, 170}), /** */
         CLR_PHASE_ACTIVE_ENABLED    (new int[] {70, 190}), /** */
-        CLR_PHASE_ACTIVE_DISABLED   (new int[] {70, 210});
+        CLR_PHASE_ACTIVE_DISABLED   (new int[] {70, 210}), /** */
+        CLR_THEME2                  (new int[] {70, 230});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */

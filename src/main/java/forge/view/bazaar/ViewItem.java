@@ -35,7 +35,7 @@ public class ViewItem extends FRoundedPanel {
         btnPurchase = new SubButton("Buy");
 
         // Component styling
-        this.setBackground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_THEME).darker().darker());
+        this.setBackground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_THEME2));
         this.lblName.setFontStyle(Font.BOLD);
         this.lblPrice.setFontStyle(Font.BOLD);
         this.lblPrice.setFontScaleFactor(0.8);

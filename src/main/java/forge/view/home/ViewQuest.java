@@ -87,7 +87,7 @@ public class ViewQuest extends JScrollPane {
         // Non-final inits
         this.parentView = v0;
         this.skin = Singletons.getView().getSkin();
-        this.clrBorders = skin.getColor(FSkin.Colors.CLR_THEME).darker().darker();
+        this.clrBorders = skin.getColor(FSkin.Colors.CLR_THEME2);
         this.eventPanelConstraints = "w 100%!, h 86px!, gap 0 0 5px 5px";
 
         // Final component inits
@@ -205,7 +205,7 @@ public class ViewQuest extends JScrollPane {
     /** Layout and details for Swing components in title panel. */
     private void populateTitle() {
         pnlTitle.setLayout(new MigLayout("insets 0, gap 0, align center"));
-        pnlTitle.setBackground(skin.getColor(FSkin.Colors.CLR_THEME).darker());
+        pnlTitle.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
         ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
 
         ((FLabel) lblTitle).setFontScaleBy(SwingConstants.HORIZONTAL);
@@ -268,7 +268,7 @@ public class ViewQuest extends JScrollPane {
         final FRoundedPanel pnl = new FRoundedPanel();
         pnl.setLayout(new MigLayout("insets 0, align center"));
         pnl.setBorderColor(clrBorders);
-        pnl.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        pnl.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
         pnl.add(new FLabel("Load a previous Quest"), "h 95%!, gap 0 0 2.5% 0");
 
         final FLabel lbl = new FLabel("To use quest files "
@@ -293,7 +293,7 @@ public class ViewQuest extends JScrollPane {
         final FRoundedPanel pnl1 = new FRoundedPanel();
         pnl1.setLayout(new MigLayout("insets 0, align center"));
         pnl1.setBorderColor(clrBorders);
-        pnl1.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        pnl1.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
         pnl1.add(new FLabel("Start a new quest"), "h 95%!, gap 0 0 2.5% 0");
 
         final ButtonGroup group1 = new ButtonGroup();
