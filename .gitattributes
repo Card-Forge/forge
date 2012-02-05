@@ -11192,19 +11192,6 @@ src/main/java/forge/quest/data/pet/QuestPetManager.java svneol=native#text/plain
 src/main/java/forge/quest/data/pet/QuestPetPlant.java svneol=native#text/plain
 src/main/java/forge/quest/data/pet/QuestPetWolf.java svneol=native#text/plain
 src/main/java/forge/quest/data/pet/package-info.java svneol=native#text/plain
-src/main/java/forge/quest/gui/QuestAbstractPanel.java svneol=native#text/plain
-src/main/java/forge/quest/gui/QuestFrame.java svneol=native#text/plain
-src/main/java/forge/quest/gui/QuestMainPanel.java -text
-src/main/java/forge/quest/gui/QuestOptions.java svneol=native#text/plain
-src/main/java/forge/quest/gui/QuestWinLoseCardViewer.java -text
-src/main/java/forge/quest/gui/QuestWinLoseHandler.java -text
-src/main/java/forge/quest/gui/bazaar/QuestBazaarPanel.java svneol=native#text/plain
-src/main/java/forge/quest/gui/bazaar/package-info.java svneol=native#text/plain
-src/main/java/forge/quest/gui/main/QuestChallengePanel.java -text
-src/main/java/forge/quest/gui/main/QuestDuelPanel.java -text
-src/main/java/forge/quest/gui/main/QuestSelectablePanel.java -text
-src/main/java/forge/quest/gui/main/package-info.java svneol=native#text/plain
-src/main/java/forge/quest/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
@@ -11235,6 +11222,8 @@ src/main/java/forge/view/home/ViewSettings.java -text
 src/main/java/forge/view/home/ViewUtilities.java -text
 src/main/java/forge/view/home/package-info.java svneol=native#text/plain
 src/main/java/forge/view/match/MatchTopLevel.java -text
+src/main/java/forge/view/match/QuestWinLoseCardViewer.java -text
+src/main/java/forge/view/match/QuestWinLoseHandler.java -text
 src/main/java/forge/view/match/ViewBattlefield.java -text
 src/main/java/forge/view/match/ViewDetail.java -text
 src/main/java/forge/view/match/ViewDock.java -text
@@ -11309,7 +11298,6 @@ src/test/java/forge/GuiDownloadSetPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/plain
 src/test/java/forge/GuiMultipleBlockers4Test.java svneol=native#text/plain
 src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
-src/test/java/forge/GuiQuestOptionsTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/PhaseHandlerTest.java -text
 src/test/java/forge/RunTest.java svneol=native#text/plain

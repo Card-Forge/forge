@@ -27,7 +27,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.SetUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Quest;
 

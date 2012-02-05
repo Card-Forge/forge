@@ -19,7 +19,6 @@ import forge.game.GameType;
 import forge.model.FMatchState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
-import forge.quest.gui.QuestWinLoseHandler;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FOverlay;
