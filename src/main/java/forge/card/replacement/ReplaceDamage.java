@@ -48,6 +48,9 @@ public class ReplaceDamage extends ReplacementEffect {
         if (!runParams.get("Event").equals("DamageDone")) {
             return false;
         }
+        if (!(runParams.containsKey("Prevention") == getMapParams().containsKey("PreventionEffect"))) {
+            return false;
+        }
         if (getMapParams().containsKey("ValidSource")) {
             if (!matchesValid(runParams.get("DamageSource"), getMapParams().get("ValidSource").split(","), getHostCard())) {
                 return false;

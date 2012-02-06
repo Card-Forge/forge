@@ -7994,6 +7994,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        repParams.put("Event", "DamageDone");
+        repParams.put("Affected", this);
+        repParams.put("DamageSource", source);
+        repParams.put("DamageAmount", damage);
+        repParams.put("IsCombat", isCombat);
+        repParams.put("Prevention", false);
+
+        if (AllZone.getReplacementHandler().run(repParams)) {
+            return 0;
+        }
+
         restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
 
         if (restDamage == 0) {
