@@ -44,6 +44,12 @@ public class PhaseUtil {
      * @return a boolean.
      */
     private static boolean skipUntap(final Player p) {
+
+        if (p.hasKeyword("Skip your next untap step.")) {
+            p.removeKeyword("Skip your next untap step.");
+            return true;
+        }
+
         if (AllZoneUtil.isCardInPlay("Sands of Time") || AllZoneUtil.isCardInPlay("Stasis")) {
             return true;
         }
