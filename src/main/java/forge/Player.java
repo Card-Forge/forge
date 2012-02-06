@@ -618,10 +618,7 @@ public abstract class Player extends GameEntity {
         if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) {
             return 0;
         }
-        if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) {
-            return 0;
-        }
-
+        
         // Prevent Damage static abilities
         final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (final Card ca : allp) {
@@ -796,9 +793,15 @@ public abstract class Player extends GameEntity {
 
         int restDamage = damage;
 
-        // Purity has to stay here because it changes the game state
-        if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) {
-            this.gainLife(restDamage, null);
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        repParams.put("Event", "DamageDone");
+        repParams.put("Affected", this);
+        repParams.put("DamageSource", source);
+        repParams.put("DamageAmount", damage);
+        repParams.put("IsCombat", isCombat);
+        repParams.put("Prevention", false);
+
+        if (AllZone.getReplacementHandler().run(repParams)) {
             return 0;
         }
 
