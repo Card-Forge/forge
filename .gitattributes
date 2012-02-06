@@ -2375,6 +2375,7 @@ res/cardsfolder/d/drudge_skeletons.txt svneol=native#text/plain
 res/cardsfolder/d/drudge_spell.txt svneol=native#text/plain
 res/cardsfolder/d/druid_lyrist.txt svneol=native#text/plain
 res/cardsfolder/d/druid_of_the_anima.txt svneol=native#text/plain
+res/cardsfolder/d/druidic_satchel.txt -text
 res/cardsfolder/d/druids_call.txt svneol=native#text/plain
 res/cardsfolder/d/drumhunter.txt svneol=native#text/plain
 res/cardsfolder/d/dry_spell.txt svneol=native#text/plain
@@ -4305,6 +4306,7 @@ res/cardsfolder/i/innocent_blood.txt svneol=native#text/plain
 res/cardsfolder/i/inquisition.txt -text
 res/cardsfolder/i/inquisition_of_kozilek.txt svneol=native#text/plain
 res/cardsfolder/i/inquisitor_exarch.txt -text
+res/cardsfolder/i/inquisitors_flail.txt -text
 res/cardsfolder/i/inquisitors_snare.txt -text svneol=unset#text/plain
 res/cardsfolder/i/insatiable_souleater.txt svneol=native#text/plain
 res/cardsfolder/i/inside_out.txt svneol=native#text/plain
@@ -6643,6 +6645,7 @@ res/cardsfolder/p/puppeteer_clique.txt svneol=native#text/plain
 res/cardsfolder/p/puppets_verdict.txt -text
 res/cardsfolder/p/pure_reflection.txt -text
 res/cardsfolder/p/puresight_merrow.txt svneol=native#text/plain
+res/cardsfolder/p/puresteel_palandin.txt -text
 res/cardsfolder/p/purge.txt svneol=native#text/plain
 res/cardsfolder/p/purify.txt svneol=native#text/plain
 res/cardsfolder/p/purify_the_grave.txt -text
