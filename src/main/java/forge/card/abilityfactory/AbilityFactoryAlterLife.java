@@ -219,25 +219,30 @@ public class AbilityFactoryAlterLife {
             sb.append(" ");
         }
 
-        final String conditionDesc = params.get("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription"));
         }
+        else {
+            final String conditionDesc = params.get("ConditionDescription");
+            if (conditionDesc != null) {
+                sb.append(conditionDesc).append(" ");
+            }
 
-        ArrayList<Player> tgtPlayers;
+            ArrayList<Player> tgtPlayers;
 
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            final Target tgt = sa.getTarget();
+            if (tgt != null) {
+                tgtPlayers = tgt.getTargetPlayers();
+            } else {
+                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            }
+
+            for (final Player player : tgtPlayers) {
+                sb.append(player).append(" ");
+            }
+
+            sb.append("gains ").append(amount).append(" life.");
         }
-
-        for (final Player player : tgtPlayers) {
-            sb.append(player).append(" ");
-        }
-
-        sb.append("gains ").append(amount).append(" life.");
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {

@@ -413,16 +413,10 @@ public class AbilityFactoryToken extends AbilityFactory {
      * @return a {@link java.lang.String} object.
      */
     private String doStackDescription(final SpellAbility sa) {
-        final Card host = this.abilityFactory.getHostCard();
 
-        final int finalPower = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenPower, sa);
-        final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(),
-                this.tokenToughness, sa);
-        final int finalAmount = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
-
-        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
-
+        final HashMap<String, String> params = this.abilityFactory.getMapParams();
         final StringBuilder sb = new StringBuilder();
+        final Card host = this.abilityFactory.getHostCard();
 
         if (sa instanceof AbilitySub) {
             sb.append(" ");
@@ -430,17 +424,30 @@ public class AbilityFactoryToken extends AbilityFactory {
             sb.append(host.getName()).append(" - ");
         }
 
-        sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
-        sb.append(" ").append(substitutedName).append(" token");
-        if (finalAmount != 1) {
-            sb.append("s");
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription"));
         }
-        sb.append(" onto the battlefield");
+        else {
 
-        if (this.tokenOwner.equals("Opponent")) {
-            sb.append(" under your opponent's control.");
-        } else {
-            sb.append(".");
+            final int finalPower = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenPower, sa);
+            final int finalToughness = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(),
+                    this.tokenToughness, sa);
+            final int finalAmount = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
+
+            final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
+
+            sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
+            sb.append(" ").append(substitutedName).append(" token");
+            if (finalAmount != 1) {
+                sb.append("s");
+            }
+            sb.append(" onto the battlefield");
+
+            if (this.tokenOwner.equals("Opponent")) {
+                sb.append(" under your opponent's control.");
+            } else {
+                sb.append(".");
+            }
         }
 
         if (sa.getSubAbility() != null) {
