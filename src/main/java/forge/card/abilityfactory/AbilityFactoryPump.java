@@ -32,6 +32,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.GameEntity;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -837,16 +838,18 @@ public class AbilityFactoryPump {
         // happening
         final StringBuilder sb = new StringBuilder();
         final String name = af.getHostCard().getName();
+        ArrayList<GameEntity> tgts = new ArrayList<GameEntity>();
 
-        ArrayList<Card> tgtCards;
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
+            tgts.addAll(tgt.getTargetCards());
+            tgts.addAll(tgt.getTargetPlayers());
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), this.params.get("Defined"), sa);
+            tgts.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa));
+            tgts.addAll(AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa));
         }
 
-        if (tgtCards.size() > 0) {
+        if (tgts.size() > 0) {
 
             if (sa instanceof AbilitySub) {
                 sb.append(" ");
@@ -854,14 +857,14 @@ public class AbilityFactoryPump {
                 sb.append(name).append(" - ");
             }
 
-            for (final Card c : tgtCards) {
+            for (final GameEntity c : tgts) {
                 sb.append(c.getName()).append(" ");
             }
 
             if (af.getMapParams().containsKey("Radiance")) {
                 sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
                         .append(" that shares a color with ");
-                if (tgtCards.size() > 1) {
+                if (tgts.size() > 1) {
                     sb.append("them ");
                 } else {
                     sb.append("it ");
@@ -916,10 +919,13 @@ public class AbilityFactoryPump {
         ArrayList<Card> tgtCards;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
+        ArrayList<Player> tgtPlayers = new ArrayList<Player>();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
+            tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
+            tgtPlayers = AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa);
         }
 
         if (this.params.containsKey("Radiance")) {
@@ -958,6 +964,14 @@ public class AbilityFactoryPump {
 
             this.applyPump(sa, tgtC);
         }
+
+        for (Player p : tgtPlayers) {
+            if (!p.canBeTargetedBy(sa)) {
+                continue;
+            }
+
+            this.applyPump(sa, p);
+        }
     } // pumpResolve()
 
     private void applyPump(final SpellAbility sa, final Card applyTo) {
@@ -987,6 +1001,41 @@ public class AbilityFactoryPump {
                         for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
                             if (!AbilityFactoryPump.this.keywords.get(i).equals("none")) {
                                 applyTo.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
+                            }
+                        }
+                    }
+                }
+            };
+            if (this.params.containsKey("UntilEndOfCombat")) {
+                AllZone.getEndOfCombat().addUntil(untilEOT);
+            } else if (this.params.containsKey("UntilYourNextUpkeep")) {
+                AllZone.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+            } else {
+                AllZone.getEndOfTurn().addUntil(untilEOT);
+            }
+        }
+    }
+
+    private void applyPump(final SpellAbility sa, final Player p) {
+
+        for (int i = 0; i < this.keywords.size(); i++) {
+            if (!this.keywords.get(i).equals("none")) {
+                p.addKeyword(this.keywords.get(i));
+            }
+        }
+
+        if (!this.params.containsKey("Permanent")) {
+            // If not Permanent, remove Pumped at EOT
+            final Command untilEOT = new Command() {
+                private static final long serialVersionUID = -32453460L;
+
+                @Override
+                public void execute() {
+
+                    if (AbilityFactoryPump.this.keywords.size() > 0) {
+                        for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
+                            if (!AbilityFactoryPump.this.keywords.get(i).equals("none")) {
+                                p.removeKeyword(AbilityFactoryPump.this.keywords.get(i));
                             }
                         }
                     }

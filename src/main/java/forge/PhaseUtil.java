@@ -178,6 +178,11 @@ public class PhaseUtil {
             return true;
         }
 
+        if (player.hasKeyword("Skip your next draw step.")) {
+            player.removeKeyword("Skip your next draw step.");
+            return true;
+        }
+
         if (player.hasKeyword("Skip your draw step.")) {
             return true;
         }
