@@ -175,7 +175,7 @@ public class ViewDraft extends JPanel {
         lstAI = new FList(ai);
         this.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
-        btnBuildDeck = new FLabel.Builder().opaque(true).hoverable(true).text("Build A New Deck").build();
+        btnBuildDeck = new FLabel.Builder().opaque(true).hoverable(true).text("Start A New Draft").build();
         this.add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
 
         lblDirections = new JLabel("Click For Directions");
