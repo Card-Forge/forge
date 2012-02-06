@@ -8026,11 +8026,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             restDamage = 0;
         }
 
-        if (this.getName().equals("Phyrexian Hydra")) {
-            this.addCounter(Counters.M1M1, restDamage);
-            return 0;
-        }
-
         return restDamage;
     }
 
