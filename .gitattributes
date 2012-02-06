@@ -9716,6 +9716,7 @@ res/cardsfolder/v/vow_of_lightning.txt svneol=native#text/plain
 res/cardsfolder/v/vow_of_malice.txt svneol=native#text/plain
 res/cardsfolder/v/vow_of_wildness.txt svneol=native#text/plain
 res/cardsfolder/v/voyager_drake.txt svneol=native#text/plain
+res/cardsfolder/v/voyager_staff.txt -text
 res/cardsfolder/v/vug_lizard.txt svneol=native#text/plain
 res/cardsfolder/v/vulshok_battlegear.txt svneol=native#text/plain
 res/cardsfolder/v/vulshok_berserker.txt svneol=native#text/plain
