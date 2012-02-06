@@ -56,6 +56,22 @@ Fixes/Features:
 - Converted FLabel to Builder pattern, so inline calls can now be chained together, setting all preferences at the time of instantiation. Also, makes FLabel fairly immutable.
 - Fix for Aluren. Cleanup.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed unless cost sometimes prompting the human to pay twice.
+- Made Necromancer's Covenant more AI friendly.
+- Made Exclusion Ritual more AI friendly.
+- ContinuousAbility now supports "ChosenColor" as SetColor.
+- Fixed the keyword "May be played by your opponent".
+- Fixed isCardInPlay.
+- Ran SetInfo and Oracle scripts.
+- added support for StackDescription to Token and AlterLife AFs
+- AF Pump can now pump players.
+- Added the player keyword "Skip your next draw step.".
+- Added the keyword "Skip your next untap step.", fixed Brine Elemental.
+- Deprecated SubButton in favor of FLabel builder.
+- Fixed display bug in title bar of sealed/draft.
+- Updated quest deck lister to recall previous deck if exists.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -77,6 +93,17 @@ Ornate Kanzashi
 Patriarch's Desire
 Graceful Antelope
 Sins of the Past
+Shifting Sky
+Alloy Golem
+Keeper of Progenitus
+Banewasp Affliction
+Druidic Satchel
+Inquisitors Flail
+Puresteel Paladin
+Fatigue
+Brine Elemental
+Gilded Light
+Shisato, Whispering Hunter
 
 
 end
