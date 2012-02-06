@@ -27,8 +27,6 @@ import arcane.ui.util.UI;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Singletons;
-
 /**
  * <p>
  * CardFaceSymbols class.
@@ -47,75 +45,74 @@ public class CardFaceSymbols {
      * </p>
      */
     public static void loadImages() {
-        final FSkin skin = Singletons.getView().getSkin();
-        MANA_IMAGES.put("0", skin.getImage(FSkin.ColorlessManaImages.IMG_0, 13, 13));
-        MANA_IMAGES.put("1", skin.getImage(FSkin.ColorlessManaImages.IMG_1, 13, 13));
-        MANA_IMAGES.put("2", skin.getImage(FSkin.ColorlessManaImages.IMG_2, 13, 13));
-        MANA_IMAGES.put("3", skin.getImage(FSkin.ColorlessManaImages.IMG_3, 13, 13));
-        MANA_IMAGES.put("4", skin.getImage(FSkin.ColorlessManaImages.IMG_4, 13, 13));
-        MANA_IMAGES.put("5", skin.getImage(FSkin.ColorlessManaImages.IMG_5, 13, 13));
-        MANA_IMAGES.put("6", skin.getImage(FSkin.ColorlessManaImages.IMG_6, 13, 13));
-        MANA_IMAGES.put("7", skin.getImage(FSkin.ColorlessManaImages.IMG_7, 13, 13));
-        MANA_IMAGES.put("8", skin.getImage(FSkin.ColorlessManaImages.IMG_8, 13, 13));
-        MANA_IMAGES.put("9", skin.getImage(FSkin.ColorlessManaImages.IMG_9, 13, 13));
-        MANA_IMAGES.put("10", skin.getImage(FSkin.ColorlessManaImages.IMG_10, 13, 13));
-        MANA_IMAGES.put("11", skin.getImage(FSkin.ColorlessManaImages.IMG_11, 13, 13));
-        MANA_IMAGES.put("12", skin.getImage(FSkin.ColorlessManaImages.IMG_12, 13, 13));
-        MANA_IMAGES.put("15", skin.getImage(FSkin.ColorlessManaImages.IMG_15, 13, 13));
-        MANA_IMAGES.put("16", skin.getImage(FSkin.ColorlessManaImages.IMG_16, 13, 13));
-        MANA_IMAGES.put("20", skin.getImage(FSkin.ColorlessManaImages.IMG_20, 13, 13));
-        MANA_IMAGES.put("X", skin.getImage(FSkin.ColorlessManaImages.IMG_X, 13, 13));
-        MANA_IMAGES.put("Y", skin.getImage(FSkin.ColorlessManaImages.IMG_Y, 13, 13));
-        MANA_IMAGES.put("Z", skin.getImage(FSkin.ColorlessManaImages.IMG_Z, 13, 13));
+        MANA_IMAGES.put("0", FSkin.getImage(FSkin.ColorlessManaImages.IMG_0, 13, 13));
+        MANA_IMAGES.put("1", FSkin.getImage(FSkin.ColorlessManaImages.IMG_1, 13, 13));
+        MANA_IMAGES.put("2", FSkin.getImage(FSkin.ColorlessManaImages.IMG_2, 13, 13));
+        MANA_IMAGES.put("3", FSkin.getImage(FSkin.ColorlessManaImages.IMG_3, 13, 13));
+        MANA_IMAGES.put("4", FSkin.getImage(FSkin.ColorlessManaImages.IMG_4, 13, 13));
+        MANA_IMAGES.put("5", FSkin.getImage(FSkin.ColorlessManaImages.IMG_5, 13, 13));
+        MANA_IMAGES.put("6", FSkin.getImage(FSkin.ColorlessManaImages.IMG_6, 13, 13));
+        MANA_IMAGES.put("7", FSkin.getImage(FSkin.ColorlessManaImages.IMG_7, 13, 13));
+        MANA_IMAGES.put("8", FSkin.getImage(FSkin.ColorlessManaImages.IMG_8, 13, 13));
+        MANA_IMAGES.put("9", FSkin.getImage(FSkin.ColorlessManaImages.IMG_9, 13, 13));
+        MANA_IMAGES.put("10", FSkin.getImage(FSkin.ColorlessManaImages.IMG_10, 13, 13));
+        MANA_IMAGES.put("11", FSkin.getImage(FSkin.ColorlessManaImages.IMG_11, 13, 13));
+        MANA_IMAGES.put("12", FSkin.getImage(FSkin.ColorlessManaImages.IMG_12, 13, 13));
+        MANA_IMAGES.put("15", FSkin.getImage(FSkin.ColorlessManaImages.IMG_15, 13, 13));
+        MANA_IMAGES.put("16", FSkin.getImage(FSkin.ColorlessManaImages.IMG_16, 13, 13));
+        MANA_IMAGES.put("20", FSkin.getImage(FSkin.ColorlessManaImages.IMG_20, 13, 13));
+        MANA_IMAGES.put("X", FSkin.getImage(FSkin.ColorlessManaImages.IMG_X, 13, 13));
+        MANA_IMAGES.put("Y", FSkin.getImage(FSkin.ColorlessManaImages.IMG_Y, 13, 13));
+        MANA_IMAGES.put("Z", FSkin.getImage(FSkin.ColorlessManaImages.IMG_Z, 13, 13));
 
-        MANA_IMAGES.put("B", skin.getImage(FSkin.ManaImages.IMG_BLACK, 13, 13));
-        MANA_IMAGES.put("BG", skin.getImage(FSkin.ManaImages.IMG_BLACK_GREEN, 13, 13));
-        MANA_IMAGES.put("BR", skin.getImage(FSkin.ManaImages.IMG_BLACK_RED, 13, 13));
-        MANA_IMAGES.put("G", skin.getImage(FSkin.ManaImages.IMG_GREEN, 13, 13));
-        MANA_IMAGES.put("GU", skin.getImage(FSkin.ManaImages.IMG_GREEN_BLUE, 13, 13));
-        MANA_IMAGES.put("GW", skin.getImage(FSkin.ManaImages.IMG_GREEN_WHITE, 13, 13));
-        MANA_IMAGES.put("R", skin.getImage(FSkin.ManaImages.IMG_RED, 13, 13));
-        MANA_IMAGES.put("RG", skin.getImage(FSkin.ManaImages.IMG_RED_GREEN, 13, 13));
-        MANA_IMAGES.put("RW", skin.getImage(FSkin.ManaImages.IMG_RED_WHITE, 13, 13));
-        MANA_IMAGES.put("U", skin.getImage(FSkin.ManaImages.IMG_BLUE, 13, 13));
-        MANA_IMAGES.put("UB", skin.getImage(FSkin.ManaImages.IMG_BLUE_BLACK, 13, 13));
-        MANA_IMAGES.put("UR", skin.getImage(FSkin.ManaImages.IMG_BLUE_RED, 13, 13));
-        MANA_IMAGES.put("W", skin.getImage(FSkin.ManaImages.IMG_WHITE, 13, 13));
-        MANA_IMAGES.put("WB", skin.getImage(FSkin.ManaImages.IMG_WHITE_BLACK, 13, 13));
-        MANA_IMAGES.put("WU", skin.getImage(FSkin.ManaImages.IMG_WHITE_BLUE, 13, 13));
-        MANA_IMAGES.put("PW", skin.getImage(FSkin.ManaImages.IMG_PHRYX_WHITE, 13, 13));
-        MANA_IMAGES.put("PR", skin.getImage(FSkin.ManaImages.IMG_PHRYX_RED, 13, 13));
-        MANA_IMAGES.put("PU", skin.getImage(FSkin.ManaImages.IMG_PHRYX_BLUE, 13, 13));
-        MANA_IMAGES.put("PB", skin.getImage(FSkin.ManaImages.IMG_PHRYX_BLACK, 13, 13));
-        MANA_IMAGES.put("PG", skin.getImage(FSkin.ManaImages.IMG_PHRYX_GREEN, 13, 13));
-        MANA_IMAGES.put("2W", skin.getImage(FSkin.ManaImages.IMG_2W, 13, 13));
-        MANA_IMAGES.put("2U", skin.getImage(FSkin.ManaImages.IMG_2U, 13, 13));
-        MANA_IMAGES.put("2R", skin.getImage(FSkin.ManaImages.IMG_2R, 13, 13));
-        MANA_IMAGES.put("2G", skin.getImage(FSkin.ManaImages.IMG_2G, 13, 13));
-        MANA_IMAGES.put("2B", skin.getImage(FSkin.ManaImages.IMG_2B, 13, 13));
+        MANA_IMAGES.put("B", FSkin.getImage(FSkin.ManaImages.IMG_BLACK, 13, 13));
+        MANA_IMAGES.put("BG", FSkin.getImage(FSkin.ManaImages.IMG_BLACK_GREEN, 13, 13));
+        MANA_IMAGES.put("BR", FSkin.getImage(FSkin.ManaImages.IMG_BLACK_RED, 13, 13));
+        MANA_IMAGES.put("G", FSkin.getImage(FSkin.ManaImages.IMG_GREEN, 13, 13));
+        MANA_IMAGES.put("GU", FSkin.getImage(FSkin.ManaImages.IMG_GREEN_BLUE, 13, 13));
+        MANA_IMAGES.put("GW", FSkin.getImage(FSkin.ManaImages.IMG_GREEN_WHITE, 13, 13));
+        MANA_IMAGES.put("R", FSkin.getImage(FSkin.ManaImages.IMG_RED, 13, 13));
+        MANA_IMAGES.put("RG", FSkin.getImage(FSkin.ManaImages.IMG_RED_GREEN, 13, 13));
+        MANA_IMAGES.put("RW", FSkin.getImage(FSkin.ManaImages.IMG_RED_WHITE, 13, 13));
+        MANA_IMAGES.put("U", FSkin.getImage(FSkin.ManaImages.IMG_BLUE, 13, 13));
+        MANA_IMAGES.put("UB", FSkin.getImage(FSkin.ManaImages.IMG_BLUE_BLACK, 13, 13));
+        MANA_IMAGES.put("UR", FSkin.getImage(FSkin.ManaImages.IMG_BLUE_RED, 13, 13));
+        MANA_IMAGES.put("W", FSkin.getImage(FSkin.ManaImages.IMG_WHITE, 13, 13));
+        MANA_IMAGES.put("WB", FSkin.getImage(FSkin.ManaImages.IMG_WHITE_BLACK, 13, 13));
+        MANA_IMAGES.put("WU", FSkin.getImage(FSkin.ManaImages.IMG_WHITE_BLUE, 13, 13));
+        MANA_IMAGES.put("PW", FSkin.getImage(FSkin.ManaImages.IMG_PHRYX_WHITE, 13, 13));
+        MANA_IMAGES.put("PR", FSkin.getImage(FSkin.ManaImages.IMG_PHRYX_RED, 13, 13));
+        MANA_IMAGES.put("PU", FSkin.getImage(FSkin.ManaImages.IMG_PHRYX_BLUE, 13, 13));
+        MANA_IMAGES.put("PB", FSkin.getImage(FSkin.ManaImages.IMG_PHRYX_BLACK, 13, 13));
+        MANA_IMAGES.put("PG", FSkin.getImage(FSkin.ManaImages.IMG_PHRYX_GREEN, 13, 13));
+        MANA_IMAGES.put("2W", FSkin.getImage(FSkin.ManaImages.IMG_2W, 13, 13));
+        MANA_IMAGES.put("2U", FSkin.getImage(FSkin.ManaImages.IMG_2U, 13, 13));
+        MANA_IMAGES.put("2R", FSkin.getImage(FSkin.ManaImages.IMG_2R, 13, 13));
+        MANA_IMAGES.put("2G", FSkin.getImage(FSkin.ManaImages.IMG_2G, 13, 13));
+        MANA_IMAGES.put("2B", FSkin.getImage(FSkin.ManaImages.IMG_2B, 13, 13));
 
-        MANA_IMAGES.put("S", skin.getImage(FSkin.GameplayImages.IMG_SNOW, 13, 13));
-        MANA_IMAGES.put("T", skin.getImage(FSkin.GameplayImages.IMG_TAP, 13, 13));
-        MANA_IMAGES.put("slash", skin.getImage(FSkin.GameplayImages.IMG_SLASH, 13, 13));
-        MANA_IMAGES.put("attack", skin.getImage(FSkin.GameplayImages.IMG_ATTACK, 32, 32));
-        MANA_IMAGES.put("defend", skin.getImage(FSkin.GameplayImages.IMG_DEFEND, 32, 32));
-        MANA_IMAGES.put("summonsick", skin.getImage(FSkin.GameplayImages.IMG_SUMMONSICK, 32, 32));
-        MANA_IMAGES.put("phasing", skin.getImage(FSkin.GameplayImages.IMG_PHASING, 32, 32));
-        MANA_IMAGES.put("counters1", skin.getImage(FSkin.GameplayImages.IMG_COUNTERS1));
-        MANA_IMAGES.put("counters2", skin.getImage(FSkin.GameplayImages.IMG_COUNTERS2));
-        MANA_IMAGES.put("counters3", skin.getImage(FSkin.GameplayImages.IMG_COUNTERS3));
-        MANA_IMAGES.put("countersMulti", skin.getImage(FSkin.GameplayImages.IMG_COUNTERS_MULTI));
+        MANA_IMAGES.put("S", FSkin.getImage(FSkin.GameplayImages.IMG_SNOW, 13, 13));
+        MANA_IMAGES.put("T", FSkin.getImage(FSkin.GameplayImages.IMG_TAP, 13, 13));
+        MANA_IMAGES.put("slash", FSkin.getImage(FSkin.GameplayImages.IMG_SLASH, 13, 13));
+        MANA_IMAGES.put("attack", FSkin.getImage(FSkin.GameplayImages.IMG_ATTACK, 32, 32));
+        MANA_IMAGES.put("defend", FSkin.getImage(FSkin.GameplayImages.IMG_DEFEND, 32, 32));
+        MANA_IMAGES.put("summonsick", FSkin.getImage(FSkin.GameplayImages.IMG_SUMMONSICK, 32, 32));
+        MANA_IMAGES.put("phasing", FSkin.getImage(FSkin.GameplayImages.IMG_PHASING, 32, 32));
+        MANA_IMAGES.put("counters1", FSkin.getImage(FSkin.GameplayImages.IMG_COUNTERS1));
+        MANA_IMAGES.put("counters2", FSkin.getImage(FSkin.GameplayImages.IMG_COUNTERS2));
+        MANA_IMAGES.put("counters3", FSkin.getImage(FSkin.GameplayImages.IMG_COUNTERS3));
+        MANA_IMAGES.put("countersMulti", FSkin.getImage(FSkin.GameplayImages.IMG_COUNTERS_MULTI));
 
-        MANA_IMAGES.put("foil01", skin.getImage(FSkin.Foils.FOIL_01));
-        MANA_IMAGES.put("foil02", skin.getImage(FSkin.Foils.FOIL_02));
-        MANA_IMAGES.put("foil03", skin.getImage(FSkin.Foils.FOIL_03));
-        MANA_IMAGES.put("foil04", skin.getImage(FSkin.Foils.FOIL_04));
-        MANA_IMAGES.put("foil05", skin.getImage(FSkin.Foils.FOIL_05));
-        MANA_IMAGES.put("foil06", skin.getImage(FSkin.Foils.FOIL_06));
-        MANA_IMAGES.put("foil07", skin.getImage(FSkin.Foils.FOIL_07));
-        MANA_IMAGES.put("foil08", skin.getImage(FSkin.Foils.FOIL_08));
-        MANA_IMAGES.put("foil09", skin.getImage(FSkin.Foils.FOIL_09));
-        MANA_IMAGES.put("foil10", skin.getImage(FSkin.Foils.FOIL_10));
+        MANA_IMAGES.put("foil01", FSkin.getImage(FSkin.Foils.FOIL_01));
+        MANA_IMAGES.put("foil02", FSkin.getImage(FSkin.Foils.FOIL_02));
+        MANA_IMAGES.put("foil03", FSkin.getImage(FSkin.Foils.FOIL_03));
+        MANA_IMAGES.put("foil04", FSkin.getImage(FSkin.Foils.FOIL_04));
+        MANA_IMAGES.put("foil05", FSkin.getImage(FSkin.Foils.FOIL_05));
+        MANA_IMAGES.put("foil06", FSkin.getImage(FSkin.Foils.FOIL_06));
+        MANA_IMAGES.put("foil07", FSkin.getImage(FSkin.Foils.FOIL_07));
+        MANA_IMAGES.put("foil08", FSkin.getImage(FSkin.Foils.FOIL_08));
+        MANA_IMAGES.put("foil09", FSkin.getImage(FSkin.Foils.FOIL_09));
+        MANA_IMAGES.put("foil10", FSkin.getImage(FSkin.Foils.FOIL_10));
     }
 
     /**

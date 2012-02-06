@@ -15,7 +15,6 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Singletons;
 import forge.control.home.ControlUtilities;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
@@ -31,7 +30,6 @@ import forge.view.toolbox.FSkin;
 public class ViewUtilities extends JPanel {
     private final HomeTopLevel parentView;
     private final ControlUtilities control;
-    private final FSkin skin;
     private final JTextPane tpnLicensing;
     private final JLabel lblLicensing;
 
@@ -62,7 +60,6 @@ public class ViewUtilities extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
         parentView = v0;
-        skin = Singletons.getView().getSkin();
         final String constraintsLBL = "w 90%!, h 20px!, gap 5% 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
 
@@ -129,8 +126,8 @@ public class ViewUtilities extends JPanel {
 
         tpnLicensing = new JTextPane();
         tpnLicensing.setOpaque(false);
-        tpnLicensing.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnLicensing.setFont(skin.getFont(15));
+        tpnLicensing.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tpnLicensing.setFont(FSkin.getFont(15));
         tpnLicensing.setAlignmentX(SwingConstants.CENTER);
         tpnLicensing.setFocusable(false);
         tpnLicensing.setEditable(false);
@@ -143,9 +140,9 @@ public class ViewUtilities extends JPanel {
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
         lblLicensing = new JLabel("Click For License Information");
-        lblLicensing.setFont(skin.getFont(16));
+        lblLicensing.setFont(FSkin.getFont(16));
         lblLicensing.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLicensing.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblLicensing.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblLicensing, "alignx center, gap 5% 0 5% 0");
 
         control = new ControlUtilities(this);
@@ -165,8 +162,8 @@ public class ViewUtilities extends JPanel {
         });
         btnClose.setText("Close");
 
-        pnlContainer.setBorder(new LineBorder(skin.getColor(FSkin.Colors.CLR_BORDERS), 1));
-        pnlContainer.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        pnlContainer.setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+        pnlContainer.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
         pnlContainer.setLayout(new MigLayout("insets 0, wrap"));
         pnlContainer.add(tpnLicensing, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");

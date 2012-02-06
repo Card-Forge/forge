@@ -50,7 +50,6 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class ViewSettings extends JScrollPane {
     private final ControlSettings control;
-    private final FSkin skin;
     private final JPanel viewport;
     private final FLabel btnReset;
     private HomeTopLevel parentView;
@@ -72,7 +71,6 @@ public class ViewSettings extends JScrollPane {
     public ViewSettings(final HomeTopLevel v0) {
         super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        skin = Singletons.getView().getSkin();
         parentView = v0;
         viewport = new JPanel();
         viewport.setOpaque(false);
@@ -143,8 +141,8 @@ public class ViewSettings extends JScrollPane {
         viewport.add(lblTitleGraphics, sectionConstraints);
 
         lblTitleSkin = new FLabel.Builder().text("Choose Skin").build();
-        lblTitleSkin.setFont(skin.getBoldFont(14));
-        lblTitleSkin.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblTitleSkin.setFont(FSkin.getBoldFont(14));
+        lblTitleSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         final JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
         viewport.add(lblTitleSkin, regularConstraints);
         viewport.add(lblNoteSkin, regularConstraints);
@@ -234,9 +232,9 @@ public class ViewSettings extends JScrollPane {
         public OptionsCheckBox(final String txt0) {
             super();
             setText(txt0);
-            setFont(skin.getBoldFont(12));
-            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-            setBackground(skin.getColor(FSkin.Colors.CLR_HOVER));
+            setFont(FSkin.getBoldFont(12));
+            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
             setOpaque(false);
 
             this.addMouseListener(new MouseAdapter() {
@@ -258,9 +256,9 @@ public class ViewSettings extends JScrollPane {
         public OptionsRadio(final String txt0) {
             super();
             setText(txt0);
-            setFont(skin.getBoldFont(12));
-            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-            setBackground(skin.getColor(FSkin.Colors.CLR_HOVER));
+            setFont(FSkin.getBoldFont(12));
+            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
             setOpaque(false);
 
             this.addMouseListener(new MouseAdapter() {
@@ -299,10 +297,10 @@ public class ViewSettings extends JScrollPane {
     private class SectionLabel extends JLabel {
         public SectionLabel(String txt0) {
             super(txt0);
-            setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.Colors.CLR_BORDERS)));
+            setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             setHorizontalAlignment(SwingConstants.CENTER);
-            setFont(skin.getBoldFont(16));
-            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+            setFont(FSkin.getBoldFont(16));
+            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
 
@@ -310,8 +308,8 @@ public class ViewSettings extends JScrollPane {
     private class NoteLabel extends JLabel {
         public NoteLabel(String txt0) {
             super(txt0);
-            setFont(skin.getItalicFont(12));
-            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+            setFont(FSkin.getItalicFont(12));
+            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
 
@@ -333,7 +331,7 @@ public class ViewSettings extends JScrollPane {
         public KeyboardShortcutField(final Shortcut s0) {
             super();
             this.setEditable(false);
-            this.setFont(skin.getFont(14));
+            this.setFont(FSkin.getFont(14));
             this.setCodeString(Singletons.getModel().getPreferences().getPref(s0.getPrefKey()));
 
             this.addKeyListener(new KeyAdapter() {
@@ -346,7 +344,7 @@ public class ViewSettings extends JScrollPane {
             this.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(final FocusEvent e) {
-                    KeyboardShortcutField.this.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
+                    KeyboardShortcutField.this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
                 }
 
                 @Override

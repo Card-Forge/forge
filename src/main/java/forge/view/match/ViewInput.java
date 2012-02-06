@@ -31,7 +31,6 @@ import javax.swing.Timer;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.control.match.ControlInput;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FRoundedPanel;
@@ -46,7 +45,6 @@ public class ViewInput extends FRoundedPanel {
     private final ControlInput control;
     private final JButton btnOK, btnCancel;
     private final JTextArea tarMessage;
-    private final FSkin skin;
     private final JLabel lblGames;
     private Timer timer1 = null;
     private static int counter = 0;
@@ -58,10 +56,9 @@ public class ViewInput extends FRoundedPanel {
      */
     public ViewInput() {
         super();
-        this.skin = Singletons.getView().getSkin();
         this.setToolTipText("Input Area");
-        this.setBackground(this.skin.getColor(FSkin.Colors.CLR_THEME));
-        this.setForeground(this.skin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
 
         // Cancel button
@@ -70,10 +67,10 @@ public class ViewInput extends FRoundedPanel {
 
         // Game counter
         lblGames = new JLabel();
-        lblGames.setFont(skin.getBoldFont(12));
-        lblGames.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblGames.setFont(FSkin.getBoldFont(12));
+        lblGames.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblGames.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGames.setBorder(new MatteBorder(0, 0, 1, 0, skin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblGames.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
         this.tarMessage = new JTextArea();
         this.tarMessage.setOpaque(false);
@@ -81,8 +78,8 @@ public class ViewInput extends FRoundedPanel {
         this.tarMessage.setEditable(false);
         this.tarMessage.setLineWrap(true);
         this.tarMessage.setWrapStyleWord(true);
-        this.tarMessage.setForeground(this.skin.getColor(FSkin.Colors.CLR_TEXT));
-        this.tarMessage.setFont(this.skin.getFont(16));
+        this.tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.tarMessage.setFont(FSkin.getFont(16));
         this.add(this.lblGames, "span 2 1, w 96%!, gapleft 2%, h 10%, wrap");
         this.add(this.tarMessage, "span 2 1, h 70%!, w 96%!, gapleft 2%, gaptop 1%");
         this.add(this.btnOK, "w 47%!, gapright 2%, gapleft 1%");
@@ -94,7 +91,7 @@ public class ViewInput extends FRoundedPanel {
             public void componentResized(ComponentEvent e) {
                 int px =  (int) (ViewInput.this.getWidth() / 17);
                 px = (px < 11 ? 11 : px);
-                tarMessage.setFont(Singletons.getView().getSkin().getFont(px));
+                tarMessage.setFont(FSkin.getFont(px));
             }
         });
         // After all components are in place, instantiate controller.

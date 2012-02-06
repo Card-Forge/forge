@@ -49,6 +49,9 @@ public final class Constant {
         /** The Constant ComputerDeck. */
         public static final Deck[] COMPUTER_DECK = new Deck[1];
 
+        /** The skin name. */
+        public static String SKIN_NAME = "default";
+
         /** The game type. */
         private static GameType gameType = GameType.Constructed;
 

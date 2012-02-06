@@ -38,23 +38,19 @@ public class FView {
 
     private transient SplashFrame splashFrame;
     private FProgressBar barProgress = null;
-    private FSkin skin;
 
     /**
      * The splashFrame field is guaranteed to exist when this constructor exits.
      * 
-     * @param skin0 &emsp; {@link forge.view.toolbox.FSkin}
      */
-    public FView(final FSkin skin0) {
-        this.skin = skin0;
-
+    public FView() {
         // We must use invokeAndWait here to fulfill the constructor's
         // contract. NOPMD by Braids on 8/18/11 11:37 PM
         UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
             @Override
             public void run() {
                 try {
-                    FView.this.splashFrame = new SplashFrame(FView.this.skin);
+                    FView.this.splashFrame = new SplashFrame();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -87,19 +83,9 @@ public class FView {
         this.barProgress = bar0;
     }
 
-    /** @return {@link forge.view.toolbox.FSkin} */
-    public FSkin getSkin() {
-        return this.skin;
-    }
-
-    /** @param skin0 &emsp; {@link forge.view.toolbox.FSkin} */
-    public void setSkin(final FSkin skin0) {
-        this.skin = skin0;
-    }
-
     /**
-     * Tell the view that the model has been bootstrapped, and its data is ready
-     * for initial display.
+     * Tell the view that the model has been bootstrapped, the initial stuff
+     * for the skin is in place, and data is ready for initial display.
      */
     public final void initialize() {
         this.setProgressBar(splashFrame.getProgressBar());
@@ -108,7 +94,7 @@ public class FView {
         AllZone.getCardFactory();
 
         // Preloads skin components (using progress bar).
-        FView.this.skin.load();
+        FSkin.loadFull();
 
         // Does not use progress bar, due to be deprecated with battlefield refactoring.
         CardFaceSymbols.loadImages();

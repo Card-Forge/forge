@@ -25,8 +25,6 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
-import forge.Singletons;
-
 /**
  * <p>
  * FRoundedPanel.
@@ -42,7 +40,7 @@ public class FRoundedPanel extends JPanel {
     private boolean[] borders = { true, true, true, true };
     private boolean[] corners = { true, true, true, true }; // NW, SW, SE, NE
     private Color shadowColor = new Color(150, 150, 150, 150);
-    private Color borderColor = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_BORDERS);
+    private Color borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private int shadowOffset = 5;
     private int cornerRadius = 10;
     private boolean showShadow = false;

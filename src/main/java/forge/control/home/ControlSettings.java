@@ -165,15 +165,12 @@ public class ControlSettings {
         view.getLblTitleSkin().setIcon(new ImageIcon("res/images/skins/default/loader.gif"));
 
         final String name = view.getLstChooseSkin().getSelectedValue().toString();
-        Singletons.getView().getSkin().unloadSkin();
-        Singletons.getView().setSkin(null);
 
         final SwingWorker<Object, Object> w = new SwingWorker<Object, Object>() {
             @Override
             public String doInBackground() {
-                FSkin skin = new FSkin(name);
-                skin.load();
-                Singletons.getView().setSkin(skin);
+                FSkin.loadLight(name);
+                FSkin.loadFull();
 
                 prefs.setPref(FPref.UI_SKIN, name);
                 prefs.save();

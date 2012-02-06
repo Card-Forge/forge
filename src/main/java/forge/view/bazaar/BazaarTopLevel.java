@@ -6,7 +6,6 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
-import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
@@ -17,7 +16,6 @@ import forge.view.toolbox.FSkin;
  *  instantiates top-level controller for bazaar UI. */
 @SuppressWarnings("serial")
 public class BazaarTopLevel extends FPanel {
-    private final FSkin skin;
     private final JPanel pnlAllStalls;
     private final ViewStall pnlSingleStall;
     private FLabel previousSelected;
@@ -28,12 +26,11 @@ public class BazaarTopLevel extends FPanel {
         super();
 
         // Final inits
-        this.skin = Singletons.getView().getSkin();
         this.pnlAllStalls = new JPanel();
         this.pnlSingleStall = new ViewStall(this);
 
         // Component styling
-        this.setBGTexture(skin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        this.setBGTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         this.setLayout(new MigLayout("insets 0, gap 0"));
         pnlAllStalls.setOpaque(false);
         pnlAllStalls.setLayout(new MigLayout("insets 0, gap 0, wrap, align center"));

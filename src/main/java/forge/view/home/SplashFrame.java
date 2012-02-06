@@ -62,12 +62,10 @@ public class SplashFrame extends JFrame {
      * Create the frame; this <strong>must</strong> be called from an event
      * dispatch thread.
      * 
-     * @param skin &emsp; An FSkin object, must be passed here since it hasn't
-     *          been set in the view yet.
      * @throws Exception {@link IllegalStateException} if not called from an
      *          event dispatch thread.
      */
-    public SplashFrame(final FSkin skin) throws Exception {
+    public SplashFrame() throws Exception {
         super();
 
         if (!SwingUtilities.isEventDispatchThread()) {
@@ -75,7 +73,7 @@ public class SplashFrame extends JFrame {
                     "SplashFrame() must be called from an event dispatch thread.");
         }
 
-        final ImageIcon bgIcon = skin.getIcon(FSkin.Backgrounds.BG_SPLASH);
+        final ImageIcon bgIcon = FSkin.getIcon(FSkin.Backgrounds.BG_SPLASH);
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
 

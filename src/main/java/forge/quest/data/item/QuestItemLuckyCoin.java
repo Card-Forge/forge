@@ -19,7 +19,6 @@ package forge.quest.data.item;
 
 import javax.swing.ImageIcon;
 
-import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.view.toolbox.FSkin;
 
@@ -51,7 +50,7 @@ public class QuestItemLuckyCoin extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon getIcon() {
-        return Singletons.getView().getSkin().getIcon(FSkin.QuestIcons.ICO_COIN);
+        return FSkin.getIcon(FSkin.QuestIcons.ICO_COIN);
     }
 
     /** {@inheritDoc} */

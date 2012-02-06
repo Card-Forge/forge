@@ -70,7 +70,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private ImageIcon icoTemp;
     private JLabel lblTemp1;
     private JLabel lblTemp2;
-    private FSkin skin;
     private ViewWinLose view;
     private boolean isAnte;
 
@@ -102,7 +101,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qEvent = AllZone.getQuestEvent();
         this.model.qPrefs = Singletons.getModel().getQuestPreferences();
         this.wonMatch = this.model.matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
-        this.skin = Singletons.getView().getSkin();
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
@@ -469,13 +467,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qData.addCredits(credTotal);
 
         // Generate Swing components and attach.
-        this.icoTemp = GuiUtils.getResizedIcon(skin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
+        this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
         this.lblTemp2 = new JLabel(sb.toString());
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(skin.getFont(14));
+        this.lblTemp2.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
@@ -584,12 +582,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.model.qData.addCredits(questRewardCredits);
 
         // Generate Swing components and attach.
-        this.icoTemp = GuiUtils.getResizedIcon(skin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
+        this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
         this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestChallenge) this.model.qEvent).getTitle()
                 + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
-        this.lblTemp2.setFont(skin.getFont(14));
+        this.lblTemp2.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -607,12 +605,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
     private void penalizeLoss() {
         int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
-        this.icoTemp = GuiUtils.getResizedIcon(skin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
+        this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
         this.lblTemp2 = new JLabel("You lose! You have lost " + x + " credits.");
-        this.lblTemp2.setFont(skin.getFont(14));
+        this.lblTemp2.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -696,7 +694,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private class TitleLabel extends JLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(skin.getFont(16));
+            this.setFont(FSkin.getFont(16));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

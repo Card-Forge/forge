@@ -19,7 +19,6 @@ package forge.quest.data.item;
 
 import javax.swing.ImageIcon;
 
-import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.view.toolbox.FSkin;
 
@@ -54,7 +53,7 @@ public class QuestItemEstates extends QuestItemAbstract {
     /** {@inheritDoc} */
     @Override
     public final ImageIcon getIcon() {
-        return Singletons.getView().getSkin().getIcon(FSkin.QuestIcons.ICO_GOLD);
+        return FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD);
     }
 
     /** {@inheritDoc} */

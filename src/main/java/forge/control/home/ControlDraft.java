@@ -11,7 +11,6 @@ import javax.swing.SwingUtilities;
 
 import forge.AllZone;
 import forge.Constant;
-import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -45,11 +44,11 @@ public class ControlDraft {
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER));
+                view.getLblDirections().setForeground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                view.getLblDirections().setForeground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_TEXT));
+                view.getLblDirections().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
         };
 

@@ -21,8 +21,6 @@ import forge.Singletons;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-import forge.view.toolbox.FSkin;
 
 /**
  * Main class for Forge's swing application view.
@@ -46,8 +44,7 @@ public final class Main {
         ExceptionHandler.registerErrorHandling();
         try {
             final FModel model = new FModel();
-            final FSkin skin = new FSkin(model.getPreferences().getPref(FPref.UI_SKIN));
-            final FView view = new FView(skin);
+            final FView view = new FView();
 
             Singletons.setModel(model);
             Singletons.setView(view);

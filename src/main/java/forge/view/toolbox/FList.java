@@ -8,15 +8,12 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 
-import forge.Singletons;
-
 /** 
  * A JList object using Forge skin properties.
  *
  */
 @SuppressWarnings("serial")
 public class FList extends JList {
-    private FSkin skin;
     /** 
      * A JList object using Forge skin properties.
      * This constructor assumes list contents are null and will be set later.
@@ -34,8 +31,6 @@ public class FList extends JList {
      */
     public FList(Object[] o0) {
         super(o0);
-        skin = Singletons.getView().getSkin();
-
         setOpaque(false);
 
         ListCellRenderer renderer = new ComplexCellRenderer();
@@ -52,9 +47,9 @@ public class FList extends JList {
                     lst0, val0, i0, isSelected, cellHasFocus);
 
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
-            lblItem.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
-            lblItem.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-            lblItem.setFont(skin.getFont(13));
+            lblItem.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+            lblItem.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            lblItem.setFont(FSkin.getFont(13));
             lblItem.setOpaque(isSelected);
             return lblItem;
         }

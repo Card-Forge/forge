@@ -20,7 +20,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckIO;
 import forge.deck.DeckManager;
@@ -39,7 +38,6 @@ public class DeckLister extends JPanel {
     private ImageIcon icoDeleteOver;
     private ImageIcon icoEdit;
     private ImageIcon icoEditOver;
-    private FSkin skin;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private GameType gametype;
@@ -65,22 +63,21 @@ public class DeckLister extends JPanel {
      */
     public DeckLister(GameType gt0, Command cmd0) {
         super();
-        this.skin = Singletons.getView().getSkin();
         this.gametype = gt0;
         this.cmdEditorExit = cmd0;
 
         this.clrDefault = new Color(0, 0, 0, 0);
-        this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
-        this.clrActive = skin.getColor(FSkin.Colors.CLR_ACTIVE);
-        this.clrBorders = skin.getColor(FSkin.Colors.CLR_BORDERS);
+        this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        this.clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+        this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
 
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        icoDelete = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
-        icoDeleteOver = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
-        icoEdit = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
-        icoEditOver = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
+        icoDelete = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
+        icoDeleteOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
+        icoEdit = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
+        icoEditOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
     }
 
     /** @param decks0 {@link forge.deck.Deck}[] */
@@ -92,7 +89,7 @@ public class DeckLister extends JPanel {
         // Note: careful with the widths of the rows here;
         // scroll panes will have difficulty dynamically resizing if 100% width is set.
         JPanel rowTitle = new TitlePanel();
-        rowTitle.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
+        rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
 
         rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(),
@@ -278,7 +275,7 @@ public class DeckLister extends JPanel {
                 setBackground(Color.GREEN);
             }
             setHorizontalAlignment(SwingConstants.CENTER);
-            setFont(skin.getBoldFont(12));
+            setFont(FSkin.getBoldFont(12));
             setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
@@ -287,8 +284,8 @@ public class DeckLister extends JPanel {
         public GenericLabel(String txt0) {
             super(txt0);
             setHorizontalAlignment(SwingConstants.CENTER);
-            setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-            setFont(skin.getBoldFont(12));
+            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            setFont(FSkin.getBoldFont(12));
         }
     }
 

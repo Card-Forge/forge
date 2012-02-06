@@ -5,15 +5,12 @@ import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-import forge.Singletons;
-
 /** 
  * A very basic extension of JScrollPane to centralize common styling changes.
  *
  */
 @SuppressWarnings("serial")
 public class FScrollPane extends JScrollPane {
-    private FSkin skin;
     /**
      * A very basic extension of JScrollPane to centralize common styling changes.
      * 
@@ -22,9 +19,7 @@ public class FScrollPane extends JScrollPane {
     public FScrollPane(Component c0) {
         super(c0);
         getViewport().setOpaque(false);
-
-        skin = Singletons.getView().getSkin();
-        setBorder(new LineBorder(skin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+        setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1));
         setOpaque(false);
     }
 }

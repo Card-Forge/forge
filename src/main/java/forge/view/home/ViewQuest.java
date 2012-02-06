@@ -20,7 +20,6 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Singletons;
 import forge.control.home.ControlQuest;
 import forge.game.GameType;
 import forge.properties.ForgeProps;
@@ -45,7 +44,6 @@ import forge.view.toolbox.SubTab;
  */
 @SuppressWarnings("serial")
 public class ViewQuest extends JScrollPane {
-    private final FSkin skin;
     private final HomeTopLevel parentView;
     private final ControlQuest control;
     private final String eventPanelConstraints;
@@ -84,8 +82,7 @@ public class ViewQuest extends JScrollPane {
 
         // Non-final inits
         this.parentView = v0;
-        this.skin = Singletons.getView().getSkin();
-        this.clrBorders = skin.getColor(FSkin.Colors.CLR_THEME2);
+        this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_THEME2);
         this.eventPanelConstraints = "w 100%!, h 86px!, gap 0 0 5px 5px";
 
         // Final component inits
@@ -125,10 +122,10 @@ public class ViewQuest extends JScrollPane {
         btnCurrentDeck = new FLabel.Builder().opaque(true).hoverable(true).build();
         btnBazaar = new FLabel.Builder().selectable(true).opaque(true).hoverable(true).text("Bazaar")
                 .fontScaleAuto(false).tooltip("Peruse the Bazaar").build();
-        btnBazaar.setFont(Singletons.getView().getSkin().getFont(14));
+        btnBazaar.setFont(FSkin.getFont(14));
         btnSpellShop = new FLabel.Builder().opaque(true).hoverable(true).text("Spell Shop")
                 .fontScaleAuto(false).tooltip("Travel to the Spell Shop").build();
-        btnSpellShop.setFont(Singletons.getView().getSkin().getFont(14));
+        btnSpellShop.setFont(FSkin.getFont(14));
         btnStart = new StartButton(parentView);
         btnEmbark = new FLabel.Builder().opaque(true).hoverable(true).text("Embark!").build();
         btnNewDeck = new FLabel.Builder().opaque(true).hoverable(true).text("Build a New Deck").build();
@@ -208,7 +205,7 @@ public class ViewQuest extends JScrollPane {
     /** Layout and details for Swing components in title panel. */
     private void populateTitle() {
         pnlTitle.setLayout(new MigLayout("insets 0, gap 0, align center"));
-        pnlTitle.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
+        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
 
         pnlTitle.add(lblTitle, "w 98%!, h 70%!, gap 0 0 15%! 15%!");
@@ -219,10 +216,10 @@ public class ViewQuest extends JScrollPane {
         pnlStats.setOpaque(false);
         pnlStats.setBorder(new MatteBorder(1, 0, 1, 0, clrBorders));
 
-        lblLife.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_LIFE));
-        lblCredits.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_COINSTACK));
-        lblWins.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_PLUS));
-        lblLosses.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_MINUS));
+        lblLife.setIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE));
+        lblCredits.setIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK));
+        lblWins.setIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUS));
+        lblLosses.setIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_MINUS));
         lblNextChallengeInWins.setText("No challenges available.");
     }
 
@@ -267,7 +264,7 @@ public class ViewQuest extends JScrollPane {
         final FRoundedPanel pnl = new FRoundedPanel();
         pnl.setLayout(new MigLayout("insets 0, align center"));
         pnl.setBorderColor(clrBorders);
-        pnl.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnl.add(new FLabel.Builder().text("Load a previous Quest").build(), "h 95%!, gap 0 0 2.5% 0");
 
         final FLabel lbl = new FLabel.Builder().text("To use quest files "
@@ -292,7 +289,7 @@ public class ViewQuest extends JScrollPane {
         final FRoundedPanel pnl1 = new FRoundedPanel();
         pnl1.setLayout(new MigLayout("insets 0, align center"));
         pnl1.setBorderColor(clrBorders);
-        pnl1.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
+        pnl1.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnl1.add(new FLabel.Builder().text("Start a new quest").build(), "h 95%!, gap 0 0 2.5% 0");
 
         final ButtonGroup group1 = new ButtonGroup();
@@ -441,7 +438,7 @@ public class ViewQuest extends JScrollPane {
 
                     // Select first event.
                     selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
-                    selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
+                    selectedOpponent.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
                 }
 
                 pnlStats.setVisible(true);
@@ -470,7 +467,7 @@ public class ViewQuest extends JScrollPane {
         if (pnlChallenges.getComponentCount() > 0) {
             pnlStart.setVisible(true);
             selectedOpponent = (SelectablePanel) pnlChallenges.getComponent(0);
-            selectedOpponent.setBackground(skin.getColor(FSkin.Colors.CLR_ACTIVE));
+            selectedOpponent.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         }
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -525,7 +522,7 @@ public class ViewQuest extends JScrollPane {
             btnCurrentDeck.setText("  Build, then select a deck in the \"Decks\" tab.  ");
         }
         else {
-            btnCurrentDeck.setBackground(skin.getColor(FSkin.Colors.CLR_INACTIVE));
+            btnCurrentDeck.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
             btnCurrentDeck.setText("Current deck: " + control.getCurrentDeck().getName());
         }
     }
@@ -538,9 +535,9 @@ public class ViewQuest extends JScrollPane {
         /** @param e0 &emsp; QuestEvent */
         public SelectablePanel(QuestEvent e0) {
             super();
-            this.clrSelected = skin.getColor(FSkin.Colors.CLR_ACTIVE);
-            this.clrDefault = skin.getColor(FSkin.Colors.CLR_INACTIVE);
-            this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
+            this.clrSelected = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+            this.clrDefault = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+            this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
             this.event = e0;
 
             this.setBackground(clrDefault);
@@ -551,7 +548,7 @@ public class ViewQuest extends JScrollPane {
 
             final FLabel lblIcon = new FLabel.Builder().iconScaleFactor(1).build();
             if (!file.exists()) {
-                lblIcon.setIcon(skin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
+                lblIcon.setIcon(FSkin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
             }
             else {
                 lblIcon.setIcon(new ImageIcon(file.toString()));
@@ -594,7 +591,7 @@ public class ViewQuest extends JScrollPane {
             // Description
             final FTextArea tarDesc = new FTextArea();
             tarDesc.setText(event.getDescription());
-            tarDesc.setFont(skin.getItalicFont(12));
+            tarDesc.setFont(FSkin.getItalicFont(12));
             this.add(tarDesc, "w 80%!, h 30px!");
        }
 

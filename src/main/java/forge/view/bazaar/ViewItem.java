@@ -7,7 +7,6 @@ import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
-import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallPurchasable;
 import forge.view.GuiTopLevel;
 import forge.view.toolbox.FLabel;
@@ -31,7 +30,7 @@ public class ViewItem extends FRoundedPanel {
         tarDesc = new FTextArea();
         btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontScaleFactor(0.2).hoverable(true).build();
 
-        this.setBackground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_THEME2));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Layout
         this.setLayout(new MigLayout("insets 0, gap 0"));

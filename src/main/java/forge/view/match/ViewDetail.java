@@ -22,7 +22,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.control.match.ControlDetail;
 import forge.gui.game.CardDetailPanel;
 import forge.view.toolbox.FRoundedPanel;
@@ -35,7 +34,6 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class ViewDetail extends FRoundedPanel {
     private ControlDetail control;
-    private FSkin skin;
     private CardDetailPanel pnlDetail;
 
     /**
@@ -43,11 +41,10 @@ public class ViewDetail extends FRoundedPanel {
      */
     public ViewDetail() {
         super();
-        skin = Singletons.getView().getSkin();
         pnlDetail = new CardDetailPanel(null);
         pnlDetail.setOpaque(false);
 
-        this.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
         this.setLayout(new MigLayout("insets 0, gap 0"));
 
         add(pnlDetail, "w 100%!, h 100%!");
@@ -58,7 +55,7 @@ public class ViewDetail extends FRoundedPanel {
             public void componentResized(ComponentEvent e) {
                 int px =  (int) (ViewDetail.this.getWidth() / 15);
                 px = (px < 11 ? 11 : px);
-                Font font = skin.getFont(px);
+                Font font = FSkin.getFont(px);
 
                 pnlDetail.getNameCostLabel().setFont(font);
                 pnlDetail.getTypeLabel().setFont(font);
@@ -68,7 +65,7 @@ public class ViewDetail extends FRoundedPanel {
                 pnlDetail.getSetInfoLabel().setFont(font);
                 pnlDetail.getCDArea().setFont(font);
 
-                setFont(skin.getFont(px));
+                setFont(FSkin.getFont(px));
             }
         });
     }

@@ -13,7 +13,6 @@ import forge.AllZone;
 import forge.Constant;
 import forge.PhaseHandler;
 import forge.Player;
-import forge.Singletons;
 import forge.control.match.ControlWinLose;
 import forge.game.GameType;
 import forge.model.FMatchState;
@@ -34,7 +33,6 @@ public class ViewWinLose {
     private final FButton btnContinue, btnRestart, btnQuit;
     private final JPanel pnlCustom;
     private final FTextArea txtLog;
-    private final FSkin skin;
 
     /** */
     public ViewWinLose() {
@@ -52,8 +50,6 @@ public class ViewWinLose {
         btnContinue = new FButton();
         btnRestart = new FButton();
         btnQuit = new FButton();
-
-        skin = Singletons.getView().getSkin();
 
         // Control of the win/lose is handled differently for various game modes.
         ControlWinLose control;
@@ -75,18 +71,18 @@ public class ViewWinLose {
 
         lblTitle.setForeground(Color.white);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(skin.getFont().deriveFont(Font.BOLD, 30));
+        lblTitle.setFont(FSkin.getFont().deriveFont(Font.BOLD, 30));
 
         lblStats.setForeground(Color.white);
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(skin.getFont().deriveFont(Font.PLAIN, 26));
+        lblStats.setFont(FSkin.getFont().deriveFont(Font.PLAIN, 26));
 
         btnContinue.setText(ForgeProps.getLocalized(WinLoseText.CONTINUE));
-        btnContinue.setFont(skin.getFont(22));
+        btnContinue.setFont(FSkin.getFont(22));
         btnRestart.setText(ForgeProps.getLocalized(WinLoseText.RESTART));
-        btnRestart.setFont(skin.getFont(22));
+        btnRestart.setFont(FSkin.getFont(22));
         btnQuit.setText(ForgeProps.getLocalized(WinLoseText.QUIT));
-        btnQuit.setFont(skin.getFont(22));
+        btnQuit.setFont(FSkin.getFont(22));
 
         // End game and set state of "continue" button
         PhaseHandler.setGameBegins(0);
@@ -114,7 +110,7 @@ public class ViewWinLose {
         // Assemble game log scroller.
         txtLog = new FTextArea();
         txtLog.setText(AllZone.getGameLog().getLogText());
-        txtLog.setFont(skin.getFont(14));
+        txtLog.setFont(FSkin.getFont(14));
 
         // Add all components accordingly.
         overlay.removeAll();

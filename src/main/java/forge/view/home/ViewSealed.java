@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.control.home.ControlSealed;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
@@ -21,7 +20,6 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewSealed extends JPanel {
-    private final FSkin skin;
     private final HomeTopLevel parentView;
     private final ControlSealed control;
     private DeckLister lstHumanDecks;
@@ -39,13 +37,12 @@ public class ViewSealed extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
         parentView = v0;
-        skin = Singletons.getView().getSkin();
         control = new ControlSealed(this);
 
         // Title
         JLabel lblTitle = new JLabel("Select a deck for yourself, or build a new one: ");
-        lblTitle.setFont(skin.getBoldFont(14));
-        lblTitle.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblTitle.setFont(FSkin.getBoldFont(14));
+        lblTitle.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Deck lister

@@ -13,7 +13,6 @@ import forge.GuiDownloadPrices;
 import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.BugzReporter;
 import forge.game.GameType;
@@ -50,11 +49,11 @@ public class ControlUtilities {
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER));
+                view.getLblLicensing().setForeground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                view.getLblLicensing().setForeground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_TEXT));
+                view.getLblLicensing().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
         };
 

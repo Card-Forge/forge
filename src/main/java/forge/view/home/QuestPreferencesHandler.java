@@ -25,7 +25,6 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class QuestPreferencesHandler extends JPanel {
-    private final FSkin skin;
     private final QuestPreferences prefs;
     private final JPanel pnlDifficulty, pnlBooster, pnlRewards, pnlShop;
     private final FLabel lblErrRewards, lblErrBooster, lblErrDifficulty, lblErrShop;
@@ -42,7 +41,6 @@ public class QuestPreferencesHandler extends JPanel {
     public QuestPreferencesHandler() {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        this.skin = Singletons.getView().getSkin();
         this.prefs = Singletons.getModel().getQuestPreferences();
 
         pnlRewards = new JPanel();
@@ -257,13 +255,13 @@ public class QuestPreferencesHandler extends JPanel {
 
             this.qpref = qp0;
             this.err = e0;
-            this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
-            this.clrActive = skin.getColor(FSkin.Colors.CLR_ACTIVE);
-            this.clrText = skin.getColor(FSkin.Colors.CLR_TEXT);
+            this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+            this.clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+            this.clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
 
             this.setOpaque(false);
             this.setBorder(null);
-            this.setFont(skin.getFont(13));
+            this.setFont(FSkin.getFont(13));
             this.setForeground(clrText);
             this.setCaretColor(clrText);
             this.setBackground(clrHover);

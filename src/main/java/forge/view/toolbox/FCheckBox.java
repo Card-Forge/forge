@@ -5,15 +5,11 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JCheckBox;
 
-import forge.Singletons;
-
 /** 
  * A custom instance of JCheckBox using Forge skin properties.
  */
+@SuppressWarnings("serial")
 public class FCheckBox extends JCheckBox {
-    private static final long serialVersionUID = -8633657166511001814L;
-    private final FSkin skin;
-
     /** */
     public FCheckBox() {
         this("");
@@ -22,10 +18,9 @@ public class FCheckBox extends JCheckBox {
     /** @param s0 &emsp; {@link java.lang.String} */
     public FCheckBox(final String s0) {
         super(s0);
-        this.skin = Singletons.getView().getSkin();
-        this.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setBackground(skin.getColor(FSkin.Colors.CLR_HOVER));
-        this.setFont(skin.getFont(14));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
+        this.setFont(FSkin.getFont(14));
         this.setOpaque(false);
 
         this.addMouseListener(new MouseAdapter() {

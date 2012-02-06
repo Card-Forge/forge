@@ -33,7 +33,6 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 
 /**
  * TODO: Write javadoc for this type.
@@ -44,10 +43,7 @@ public class FVerticalTabPanel extends FPanel {
     private final CardLayout cards;
     private final JPanel pnlContent;
     private final List<VTab> allVTabs;
-    private int w, h;
-
-    private final FSkin skin;
-    private int active;
+    private int w, h, active;
     private final Color activeColor, inactiveColor, hoverColor;
 
     private boolean tabsOnRightSide;
@@ -81,10 +77,9 @@ public class FVerticalTabPanel extends FPanel {
         this.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         this.setOpaque(false);
         final int size = childPanels.size();
-        this.skin = Singletons.getView().getSkin();
-        this.hoverColor = this.skin.getColor(FSkin.Colors.CLR_HOVER);
-        this.activeColor = this.skin.getColor(FSkin.Colors.CLR_ACTIVE);
-        this.inactiveColor = this.skin.getColor(FSkin.Colors.CLR_INACTIVE);
+        this.hoverColor = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        this.activeColor = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+        this.inactiveColor = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
 
         final int pctTabH = ((100 - 2 - 2) / size);
         final int pctTabW = 11;
@@ -101,7 +96,7 @@ public class FVerticalTabPanel extends FPanel {
         // immediately to define grid.
         if (tabsOnRightSide) {
             this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
-            this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, this.skin.getColor(FSkin.Colors.CLR_BORDERS)));
+            this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         }
 
         // Add top spacer in any case.
@@ -113,7 +108,7 @@ public class FVerticalTabPanel extends FPanel {
         // must be added after spacer, which then defines the grid.
         if (!tabsOnRightSide) {
             this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
-            this.pnlContent.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getColor(FSkin.Colors.CLR_BORDERS)));
+            this.pnlContent.setBorder(new MatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         }
 
         // Add all tabs
@@ -227,7 +222,7 @@ public class FVerticalTabPanel extends FPanel {
                     // Careful with this font scale factor; the vertical tabs will be
                     // unreadable
                     // if small window, too big if large window.
-                    setFont(FVerticalTabPanel.this.skin.getFont((int) (h * 0.16)));
+                    setFont(FSkin.getFont((int) (h * 0.16)));
                 }
             });
         }
@@ -250,12 +245,12 @@ public class FVerticalTabPanel extends FPanel {
             if (tabsOnRightSide) {
                 at.rotate(Math.toRadians(90), 0, 0);
                 g2d.setTransform(at);
-                g2d.setColor(skin.getColor(FSkin.Colors.CLR_TEXT));
+                g2d.setColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
                 g2d.drawString(this.msg, 5, -4);
             } else {
                 at.rotate(Math.toRadians(-90), 0, 0);
                 g2d.setTransform(at);
-                g2d.setColor(skin.getColor(FSkin.Colors.CLR_TEXT));
+                g2d.setColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
                 // Rotated, so follows: (this.msg, vertical coord, horizontal coord)
                 g2d.drawString(this.msg, 8 - h, w - 6);
             }

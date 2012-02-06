@@ -44,16 +44,25 @@ import forge.gui.GuiUtils;
  * 
  */
 
-public class FSkin {
+public enum FSkin {
+    /** Singleton instance of skin. */
+    SINGLETON_INSTANCE;
+
     /** */
     public enum Backgrounds implements SkinProp { /** */
-        BG_SPLASH, /** */
-        BG_TEXTURE, /** */
-        BG_MATCH,  /** */
+        BG_SPLASH (null), /** */
+        BG_TEXTURE (null), /** */
+        BG_MATCH (null);  /** */
+
+        private int[] coords;
+        /** @param xy &emsp; int[] coordinates */
+        Backgrounds(int[] xy) { this.coords = xy; }
+        /** @return int[] */
+        public int[] getCoords() { return coords; }
     }
 
     /** */
-    public enum Colors implements SkinProp, Coords { /** */
+    public enum Colors implements SkinProp { /** */
         CLR_THEME                   (new int[] {70, 10}), /** */
         CLR_BORDERS                 (new int[] {70, 30}), /** */
         CLR_ZEBRA                   (new int[] {70, 50}), /** */
@@ -75,7 +84,7 @@ public class FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ZoneImages implements SkinProp, Coords { /** */
+    public enum ZoneImages implements SkinProp { /** */
         ICO_HAND        (new int[] {280, 40, 40, 40}), /** */
         ICO_LIBRARY     (new int[] {280, 0, 40, 40}), /** */
         ICO_EXILE       (new int[] {320, 40, 40, 40}), /** */
@@ -91,7 +100,7 @@ public class FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ManaImages implements SkinProp, Coords { /** */
+    public enum ManaImages implements SkinProp { /** */
         IMG_BLACK       (new int[] {360, 160, 40, 40}), /** */
         IMG_RED         (new int[] {400, 160, 40, 40}), /** */
         IMG_COLORLESS   (new int[] {440, 160, 40, 40}), /** */
@@ -127,7 +136,7 @@ public class FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ColorlessManaImages implements SkinProp, Coords { /** */
+    public enum ColorlessManaImages implements SkinProp { /** */
         IMG_0   (new int[] {640, 200, 20, 20}), /** */
         IMG_1   (new int[] {660, 200, 20, 20}), /** */
         IMG_2   (new int[] {640, 220, 20, 20}), /** */
@@ -156,7 +165,7 @@ public class FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum GameplayImages implements SkinProp, Coords { /** */
+    public enum GameplayImages implements SkinProp { /** */
         IMG_SNOW            (new int[] {320, 160, 40, 40}), /** */
         IMG_TAP             (new int[] {660, 440, 20, 20}), /** */
         IMG_UNTAP           (new int[] {640, 460, 20, 20}), /** */
@@ -178,7 +187,7 @@ public class FSkin {
     }
 
     /** */
-    public enum Foils implements SkinProp, Coords { /** */
+    public enum Foils implements SkinProp { /** */
         FOIL_01     (new int[] {0, 0, 400, 570}), /** */
         FOIL_02     (new int[] {400, 0, 400, 570}), /** */
         FOIL_03     (new int[] {0, 570, 400, 570}), /** */
@@ -198,7 +207,7 @@ public class FSkin {
     }
 
     /** */
-    public enum DockIcons implements SkinProp, Coords { /** */
+    public enum DockIcons implements SkinProp { /** */
         ICO_SHORTCUTS   (new int[] {160, 640, 80, 80}), /** */
         ICO_SETTINGS    (new int[] {80, 640, 80, 80}), /** */
         ICO_ENDTURN     (new int[] {320, 640, 80, 80}), /** */
@@ -213,7 +222,7 @@ public class FSkin {
     }
 
     /** */
-    public enum QuestIcons implements SkinProp, Coords { /** */
+    public enum QuestIcons implements SkinProp { /** */
         ICO_ZEP         (new int[] {0, 480, 80, 80}), /** */
         ICO_GEAR        (new int[] {80, 480, 80, 80}), /** */
         ICO_GOLD        (new int[] {160, 480, 80, 80}), /** */
@@ -243,7 +252,7 @@ public class FSkin {
     }
 
     /** */
-    public enum ForgeIcons implements SkinProp, Coords { /** */
+    public enum ForgeIcons implements SkinProp { /** */
         ICO_EDIT            (new int[] {640, 500, 20, 20}), /** */
         ICO_EDIT_OVER       (new int[] {660, 500, 20, 20}), /** */
         ICO_DELETE          (new int[] {640, 480, 20, 20}), /** */
@@ -261,7 +270,7 @@ public class FSkin {
     }
 
     /** */
-    public enum ButtonImages implements SkinProp, Coords { /** */
+    public enum ButtonImages implements SkinProp { /** */
         IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}), /** */
         IMG_BTN_START_OVER      (new int[] {480, 280, 160, 80}), /** */
         IMG_BTN_START_DOWN      (new int[] {480, 360, 160, 80}), /** */
@@ -297,23 +306,21 @@ public class FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** Properties of various components that make up the skin. */
-    public interface SkinProp { }
-    /** Add this interface for sub-sprite components, storing their coords. */
-    public interface Coords {
-        /** */
-        int[] COORDS = null;
+    /** Properties of various components that make up the skin.
+     * This interface allows all enums to be under the same roof.
+     * It also enforces a getter for coordinate locations in sprites. */
+    public interface SkinProp {
         /** @return int[] */
         int[] getCoords();
     }
 
-    private Map<SkinProp, ImageIcon> icons;
-    private Map<SkinProp, Image> images;
-    private Map<SkinProp, Color> colors;
+    private static Map<SkinProp, ImageIcon> icons;
+    private static Map<SkinProp, Image> images;
+    private static Map<SkinProp, Color> colors;
 
-    private Map<Integer, Font> plainFonts;
-    private Map<Integer, Font> boldFonts;
-    private Map<Integer, Font> italicFonts;
+    private static Map<Integer, Font> plainFonts;
+    private static Map<Integer, Font> boldFonts;
+    private static Map<Integer, Font> italicFonts;
 
     private static final String
         FILE_SKINS_DIR = "res/images/skins/",
@@ -322,24 +329,15 @@ public class FSkin {
         FILE_FONT = "font1.ttf",
         FILE_SPLASH = "bg_splash.png",
         FILE_MATCH_BG = "bg_match.jpg",
-        FILE_TEXTURE_BG = "bg_texture.jpg";
+        FILE_TEXTURE_BG = "bg_texture.jpg",
+        DEFAULT_DIR = FILE_SKINS_DIR + "default/";
 
-    private final String notfound = "FSkin.java: Can't find ";
-    private final String preferredDir;
-    private final String defaultDir;
-    private final String preferredName;
-    private Font font;
-    private BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils;
-    private int preferredH, preferredW;
-    private FProgressBar barProgress;
-
-    /**
-     * FSkin constructor. No arguments, will generate default skin settings,
-     * fonts, and backgrounds.
-     */
-    public FSkin() {
-        this("default");
-    }
+    private static String preferredDir;
+    private static String preferredName;
+    private static Font font;
+    private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils;
+    private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
+    private static int[] tempCoords;
 
     /**
      * FSkin constructor, using skin name. Generates custom skin settings,
@@ -348,15 +346,21 @@ public class FSkin {
      * @param skinName
      *            the skin name
      */
-    public FSkin(final String skinName) {
+    public static void loadLight(final String skinName) {
+        // No need for this method to be loaded while on the EDT.
         GuiUtils.checkEDT("FSkin$constructor", false);
 
-        this.preferredName = skinName;
-        this.preferredDir = FILE_SKINS_DIR + preferredName + "/";
-        this.defaultDir = FILE_SKINS_DIR + "default/";
-        this.icons = new HashMap<SkinProp, ImageIcon>();
-        this.images = new HashMap<SkinProp, Image>();
-        this.colors = new HashMap<SkinProp, Color>();
+        // Non-default (preferred) skin name and dir.
+        FSkin.preferredName = skinName;
+        FSkin.preferredDir = FILE_SKINS_DIR + preferredName + "/";
+
+        if (FSkin.icons != null) { FSkin.icons.clear(); }
+        if (FSkin.images != null) { FSkin.images.clear(); }
+        if (FSkin.colors != null) { FSkin.colors.clear(); }
+
+        FSkin.icons = new HashMap<SkinProp, ImageIcon>();
+        FSkin.images = new HashMap<SkinProp, Image>();
+        FSkin.colors = new HashMap<SkinProp, Color>();
 
         final File f = new File(preferredDir + FILE_SPLASH);
         final BufferedImage img;
@@ -366,15 +370,14 @@ public class FSkin {
             final int h = img.getHeight();
             final int w = img.getWidth();
 
-            this.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
+            FSkin.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
 
-            UIManager.put("ProgressBar.background", this.getColorFromPixel(img.getRGB(25, h - 75)));
-            UIManager.put("ProgressBar.selectionBackground", this.getColorFromPixel(img.getRGB(75, h - 75)));
-            UIManager.put("ProgressBar.foreground", this.getColorFromPixel(img.getRGB(25, h - 25)));
-            UIManager.put("ProgressBar.selectionForeground", this.getColorFromPixel(img.getRGB(75, h - 25)));
+            UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
+            UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
+            UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
+            UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
             UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
         } catch (final IOException e) {
-            System.err.println(this.notfound + preferredDir + FILE_SPLASH);
             e.printStackTrace();
         }
     }
@@ -398,9 +401,16 @@ public class FSkin {
      * preferred takes precedence over default, but if something is
      * missing, the default picture is retrieved.
      */
-    public void load() {
+    public static void loadFull() {
+        // No need for this method to be loaded while on the EDT.
         GuiUtils.checkEDT("FSkin$load", false);
-        barProgress = Singletons.getView().getProgressBar();
+
+        // Preferred skin name must be called via loadLight() method,
+        // which does some cleanup and init work.
+        if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default"); }
+
+        // Everything OK?
+        final FProgressBar barProgress = Singletons.getView().getProgressBar();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -413,9 +423,9 @@ public class FSkin {
 
         // Grab and test various sprite files.
         barProgress.setMaximum(3);
-        final File f1 = new File(defaultDir + FILE_ICON_SPRITE);
+        final File f1 = new File(DEFAULT_DIR + FILE_ICON_SPRITE);
         final File f2 = new File(preferredDir + FILE_ICON_SPRITE);
-        final File f3 = new File(defaultDir + FILE_FOIL_SPRITE);
+        final File f3 = new File(DEFAULT_DIR + FILE_FOIL_SPRITE);
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
@@ -429,7 +439,8 @@ public class FSkin {
             preferredW = bimPreferredSprite.getWidth();
         }
         catch (Exception e) {
-            System.err.println(this.notfound + " a sprite.");
+            System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
+                    + "preferred icons, or foils.");
             e.printStackTrace();
         }
 
@@ -445,7 +456,7 @@ public class FSkin {
 
         // Pre-derive most fonts (plain, bold, and italic).
         // Exceptions handled inside method.
-        this.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
+        FSkin.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
         plainFonts = new HashMap<Integer, Font>();
         boldFonts = new HashMap<Integer, Font>();
         italicFonts = new HashMap<Integer, Font>();
@@ -455,54 +466,44 @@ public class FSkin {
 
         // Put various images into map (except sprite and splash).
         // Exceptions handled inside method.
-        this.setIcon(Backgrounds.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
-        this.setIcon(Backgrounds.BG_MATCH, preferredDir + FILE_MATCH_BG);
+        FSkin.setIcon(Backgrounds.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
+        FSkin.setIcon(Backgrounds.BG_MATCH, preferredDir + FILE_MATCH_BG);
 
         // Run through enums and load their coords.
-        for (Colors e : Colors.values()) { this.setColor(e); }
-        for (ZoneImages e : ZoneImages.values())                    { this.setImage(e); }
-        for (DockIcons e : DockIcons.values())                      { this.setIcon(e); }
-        for (ForgeIcons e : ForgeIcons.values())                    { this.setIcon(e); }
-        for (ButtonImages e : ButtonImages.values())                { this.setIcon(e); }
-        for (QuestIcons e : QuestIcons.values())                    { this.setIcon(e); }
+        for (Colors e : Colors.values()) { FSkin.setColor(e); }
+        for (ZoneImages e : ZoneImages.values())                    { FSkin.setImage(e); }
+        for (DockIcons e : DockIcons.values())                      { FSkin.setIcon(e); }
+        for (ForgeIcons e : ForgeIcons.values())                    { FSkin.setIcon(e); }
+        for (ButtonImages e : ButtonImages.values())                { FSkin.setIcon(e); }
+        for (QuestIcons e : QuestIcons.values())                    { FSkin.setIcon(e); }
 
-        for (ManaImages e : ManaImages.values())                    { this.setImage(e); }
-        for (ColorlessManaImages e : ColorlessManaImages.values())  { this.setImage(e); }
-        for (GameplayImages e : GameplayImages.values())            { this.setImage(e); }
+        for (ManaImages e : ManaImages.values())                    { FSkin.setImage(e); }
+        for (ColorlessManaImages e : ColorlessManaImages.values())  { FSkin.setImage(e); }
+        for (GameplayImages e : GameplayImages.values())            { FSkin.setImage(e); }
 
         // Foils have a separate sprite, so uses a specific method.
-        for (Foils e : Foils.values()) { this.setFoil(e); }
+        for (Foils e : Foils.values()) { FSkin.setFoil(e); }
 
         // Clear references to buffered images
-        this.bimDefaultSprite.flush();
-        this.bimFoils.flush();
-        this.bimPreferredSprite.flush();
+        FSkin.bimDefaultSprite.flush();
+        FSkin.bimFoils.flush();
+        FSkin.bimPreferredSprite.flush();
 
-        this.bimDefaultSprite = null;
-        this.bimFoils = null;
-        this.bimPreferredSprite = null;
-    }
-
-    /** (Should) clear memory resources for this skin object. */
-    public void unloadSkin() {
-        this.icons.clear();
-        this.images.clear();
-        this.colors.clear();
-        this.plainFonts.clear();
-        this.boldFonts.clear();
-        this.italicFonts.clear();
+        FSkin.bimDefaultSprite = null;
+        FSkin.bimFoils = null;
+        FSkin.bimPreferredSprite = null;
     }
 
     /** @return {@link java.awt.font} font */
-    public Font getFont() {
-        return this.font;
+    public static Font getFont() {
+        return FSkin.font;
     }
 
     /**
      * @param size - integer, pixel size
      * @return {@link java.awt.font} font1
      */
-    public Font getFont(int size) {
+    public static Font getFont(int size) {
         if (plainFonts.get(size) == null) {
             plainFonts.put(size, getFont().deriveFont(Font.PLAIN, size));
         }
@@ -513,7 +514,7 @@ public class FSkin {
      * @param size - integer, pixel size
      * @return {@link java.awt.font} font1
      */
-    public Font getBoldFont(int size) {
+    public static Font getBoldFont(int size) {
         if (boldFonts.get(size) == null) {
             boldFonts.put(size, getFont().deriveFont(Font.BOLD, size));
         }
@@ -524,7 +525,7 @@ public class FSkin {
      * @param size - integer, pixel size
      * @return {@link java.awt.font} font1
      */
-    public Font getItalicFont(int size) {
+    public static Font getItalicFont(int size) {
         if (boldFonts.get(size) == null) {
             italicFonts.put(size, getFont().deriveFont(Font.ITALIC, size));
         }
@@ -536,8 +537,8 @@ public class FSkin {
      * 
      * @return Name of the current skin.
      */
-    public String getName() {
-        return this.preferredName;
+    public static String getName() {
+        return FSkin.preferredName;
     }
 
     /**
@@ -546,8 +547,8 @@ public class FSkin {
      * @param s0 &emsp; SkinProp enum
      * @return Image
      */
-    public Image getImage(final SkinProp s0) {
-        return this.images.get(s0);
+    public static Image getImage(final SkinProp s0) {
+        return FSkin.images.get(s0);
     }
 
     /**
@@ -556,8 +557,8 @@ public class FSkin {
      * @param s0 &emsp; SkinProp enum
      * @return ImageIcon
      */
-    public ImageIcon getIcon(final SkinProp s0) {
-        return this.icons.get(s0);
+    public static ImageIcon getIcon(final SkinProp s0) {
+        return FSkin.icons.get(s0);
     }
 
     /**
@@ -571,11 +572,11 @@ public class FSkin {
      *            int new height
      * @return Image
      */
-    public Image getImage(final SkinProp s0, int w0, int h0) {
+    public static Image getImage(final SkinProp s0, int w0, int h0) {
         w0 = (w0 < 1) ? 1 : w0;
         h0 = (h0 < 1) ? 1 : h0;
 
-        final Image original = this.images.get(s0);
+        final Image original = FSkin.images.get(s0);
 
         final BufferedImage scaled = new BufferedImage(w0, h0, BufferedImage.TYPE_INT_ARGB);
 
@@ -593,8 +594,8 @@ public class FSkin {
      * @param s0 &emsp; Skin property (from enum)
      * @return Color
      */
-    public Color getColor(final SkinProp s0) {
-        return this.colors.get(s0);
+    public static Color getColor(final SkinProp s0) {
+        return colors.get(s0);
     }
 
     /**
@@ -627,7 +628,7 @@ public class FSkin {
      * 
      * @param {@link java.lang.Integer} pixel information
      */
-    private Color getColorFromPixel(final int pixel) {
+    private static Color getColorFromPixel(final int pixel) {
         int r, g, b, a;
         a = (pixel >> 24) & 0x000000ff;
         r = (pixel >> 16) & 0x000000ff;
@@ -636,12 +637,12 @@ public class FSkin {
         return new Color(r, g, b, a);
     }
 
-    private BufferedImage testPreferredSprite(SkinProp s0) {
-        int[] coords = ((Coords) s0).getCoords();
-        int x0 = coords[0];
-        int y0 = coords[1];
-        int w0 = coords[2];
-        int h0 = coords[3];
+    private static BufferedImage testPreferredSprite(SkinProp s0) {
+        tempCoords = s0.getCoords();
+        x0 = tempCoords[0];
+        y0 = tempCoords[1];
+        w0 = tempCoords[2];
+        h0 = tempCoords[3];
 
         // Test if requested sub-image in inside bounds of preferred sprite.
         // (Height and width of preferred sprite were set in loadFontAndImages.)
@@ -658,68 +659,68 @@ public class FSkin {
         // Center
         x = (int) (x0 + w0 / 2);
         y = (int) (y0 + h0 / 2);
-        c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         x += 2;
         y += 2;
-        c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         x -= 4;
-        c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         y -= 4;
-        c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         x += 4;
-        c = this.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+        c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         return bimDefaultSprite;
     }
 
-    private void setFoil(final SkinProp s0) {
-        int[] coords = ((Coords) s0).getCoords();
-        int x0 = coords[0];
-        int y0 = coords[1];
-        int w0 = coords[2];
-        int h0 = coords[3];
+    private static void setFoil(final SkinProp s0) {
+        tempCoords = s0.getCoords();
+        x0 = tempCoords[0];
+        y0 = tempCoords[1];
+        w0 = tempCoords[2];
+        h0 = tempCoords[3];
 
-        this.images.put(s0, bimFoils.getSubimage(x0, y0, w0, h0));
+        FSkin.images.put(s0, bimFoils.getSubimage(x0, y0, w0, h0));
     }
 
-    private void setColor(final SkinProp s0) {
-        int[] coords = ((Coords) s0).getCoords();
-        int x0 = coords[0];
-        int y0 = coords[1];
+    private static void setColor(final SkinProp s0) {
+        tempCoords = s0.getCoords();
+        x0 = tempCoords[0];
+        y0 = tempCoords[1];
 
-        this.colors.put(s0, getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)));
+        FSkin.colors.put(s0, FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)));
     }
 
-    private void setFont(int size) {
+    private static void setFont(int size) {
         plainFonts.put(size, font.deriveFont(Font.PLAIN, size));
     }
 
-    private void setBoldFont(int size) {
+    private static void setBoldFont(int size) {
         boldFonts.put(size, font.deriveFont(Font.BOLD, size));
     }
 
-    private void setItalicFont(int size) {
-        italicFonts.put(size, font.deriveFont(Font.ITALIC, size));
+    private static void setItalicFont(int size) {
+        italicFonts.put(size, FSkin.font.deriveFont(Font.ITALIC, size));
     }
 
-    private void setIcon(final SkinProp s0) {
-        int[] coords = ((Coords) s0).getCoords();
-        int x0 = coords[0];
-        int y0 = coords[1];
-        int w0 = coords[2];
-        int h0 = coords[3];
+    private static void setIcon(final SkinProp s0) {
+        tempCoords = s0.getCoords();
+        x0 = tempCoords[0];
+        y0 = tempCoords[1];
+        w0 = tempCoords[2];
+        h0 = tempCoords[3];
 
         BufferedImage img = testPreferredSprite(s0);
-        this.icons.put(s0, new ImageIcon(img.getSubimage(x0, y0, w0, h0)));
+        FSkin.icons.put(s0, new ImageIcon(img.getSubimage(x0, y0, w0, h0)));
     }
 
     /**
@@ -731,15 +732,14 @@ public class FSkin {
      * @param s1
      *            &emsp; File address
      */
-    private void setIcon(final SkinProp s0, final String s1) {
+    private static void setIcon(final SkinProp s0, final String s1) {
         try {
             final File file = new File(s1);
             ImageIO.read(file);
         } catch (IOException e) {
-            System.err.println(this.notfound + preferredDir + FILE_SPLASH);
             e.printStackTrace();
         }
-        this.icons.put(s0, new ImageIcon(s1));
+        FSkin.icons.put(s0, new ImageIcon(s1));
     }
 
     /**
@@ -748,8 +748,8 @@ public class FSkin {
      * @param s0 &emsp; Skin property (from enum)
      * @param bi0 &emsp; BufferedImage
      */
-    private void setIcon(final SkinProp s0, final BufferedImage bi0) {
-        this.icons.put(s0, new ImageIcon(bi0));
+    private static void setIcon(final SkinProp s0, final BufferedImage bi0) {
+        FSkin.icons.put(s0, new ImageIcon(bi0));
     }
 
     /**
@@ -757,8 +757,8 @@ public class FSkin {
      * 
      * @param s0
      */
-    private void setImage(final SkinProp s0) {
-        setImage(s0, true);
+    private static void setImage(final SkinProp s0) {
+        FSkin.setImage(s0, true);
     }
 
     /**
@@ -772,23 +772,23 @@ public class FSkin {
      * 
      * @param s0 &emsp; An address in the hashmap, derived from SkinProp enum
      */
-    private void setImage(final SkinProp s0, boolean scale) {
-        int[] coords = ((Coords) s0).getCoords();
-        int x0 = coords[0];
-        int y0 = coords[1];
-        int w0 = coords[2];
-        int h0 = coords[3];
-        int newW = (coords.length == 6 ? coords[4] : 0);
-        int newH = (coords.length == 6 ? coords[5] : 0);
+    private static void setImage(final SkinProp s0, boolean scale) {
+        tempCoords = s0.getCoords();
+        x0 = tempCoords[0];
+        y0 = tempCoords[1];
+        w0 = tempCoords[2];
+        h0 = tempCoords[3];
+        newW = (tempCoords.length == 6 ? tempCoords[4] : 0);
+        newH = (tempCoords.length == 6 ? tempCoords[5] : 0);
 
-        BufferedImage img = testPreferredSprite(s0);
+        BufferedImage img = FSkin.testPreferredSprite(s0);
         BufferedImage bi0 = img.getSubimage(x0, y0, w0, h0);
 
         if (scale && newW != 0) {
-            this.images.put(s0, bi0.getScaledInstance(newW, newH, Image.SCALE_AREA_AVERAGING));
+            FSkin.images.put(s0, bi0.getScaledInstance(newW, newH, Image.SCALE_AREA_AVERAGING));
         }
         else {
-            this.images.put(s0, bi0);
+            FSkin.images.put(s0, bi0);
         }
     }
 }

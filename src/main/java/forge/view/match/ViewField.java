@@ -41,7 +41,6 @@ import forge.AllZone;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
-import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
@@ -60,8 +59,6 @@ import forge.view.toolbox.FSkin.SkinProp;
  */
 @SuppressWarnings("serial")
 public class ViewField extends FRoundedPanel {
-    private final FSkin skin;
-
     private final ControlField control;
     private final PlayArea tabletop;
 
@@ -88,21 +85,20 @@ public class ViewField extends FRoundedPanel {
      */
     public ViewField(final Player player) {
         super();
-        this.skin = Singletons.getView().getSkin();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0"));
         this.setCornerRadius(5);
         this.setToolTipText(player.getName() + " Gameboard");
-        this.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
 
         this.inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
-        this.hoverBorder = new LineBorder(this.skin.getColor(FSkin.Colors.CLR_BORDERS), 1);
+        this.hoverBorder = new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1);
 
-        this.clrHover = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER);
-        this.clrPhaseActiveEnabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_ACTIVE_ENABLED);
-        this.clrPhaseInactiveEnabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_INACTIVE_ENABLED);
-        this.clrPhaseActiveDisabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
-        this.clrPhaseInactiveDisabled = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
+        this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        this.clrPhaseActiveEnabled = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_ENABLED);
+        this.clrPhaseInactiveEnabled = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_ENABLED);
+        this.clrPhaseActiveDisabled = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
+        this.clrPhaseInactiveDisabled = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
 
         // Player icon logic
         String filename;
@@ -125,14 +121,14 @@ public class ViewField extends FRoundedPanel {
 
         iiTemp = (f.exists()
             ? new ImageIcon(filename)
-            : skin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
+            : FSkin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
 
         this.img = iiTemp.getImage();
 
         // Avatar and life
         avatarArea = new JPanel();
         avatarArea.setOpaque(false);
-        avatarArea.setBackground(skin.getColor(FSkin.Colors.CLR_HOVER));
+        avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
 
         lblAvatar = new JLabel();
@@ -141,7 +137,7 @@ public class ViewField extends FRoundedPanel {
 
         lblLife = new JLabel();
         lblLife.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLife.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblLife.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
 
         this.add(avatarArea, "w 10%!, h 30%!");
@@ -157,7 +153,7 @@ public class ViewField extends FRoundedPanel {
         final JScrollPane scroller = new JScrollPane();
 
         this.tabletop = new PlayArea(scroller, player.equals(AllZone.getComputerPlayer()) ? true : false);
-        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, this.skin.getColor(FSkin.Colors.CLR_BORDERS)));
+        this.tabletop.setBorder(new MatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         this.tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
@@ -180,7 +176,7 @@ public class ViewField extends FRoundedPanel {
             public void componentResized(ComponentEvent e) {
                 int side = (int) (avatarArea.getHeight() * 0.7);
                 int size = (int) (avatarArea.getHeight() * 0.24);
-                lblLife.setFont(ViewField.this.skin.getBoldFont(size));
+                lblLife.setFont(FSkin.getBoldFont(size));
                 lblAvatar.setIcon(new ImageIcon(img.getScaledInstance(side, side, java.awt.Image.SCALE_SMOOTH)));
             }
         });
@@ -278,11 +274,11 @@ public class ViewField extends FRoundedPanel {
         final JPanel row5 = new JPanel(new MigLayout("insets 0, gap 0"));
         final JPanel row6 = new JPanel(new MigLayout("insets 0, gap 0"));
 
-        row1.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
+        row1.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row2.setOpaque(false);
-        row3.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
+        row3.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row4.setOpaque(false);
-        row5.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
+        row5.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row6.setOpaque(false);
 
         // Hand, library, graveyard, exile, flashback, poison labels
@@ -369,14 +365,14 @@ public class ViewField extends FRoundedPanel {
             this.getLblLife().setForeground(Color.red);
         }
         else {
-            this.getLblLife().setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+            this.getLblLife().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
 
         if (p0.getPoisonCounters() >= 8) {
             this.getLblPoison().setForeground(Color.red);
         }
         else {
-            this.getLblPoison().setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+            this.getLblPoison().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
 
         //mana pool
@@ -547,7 +543,7 @@ public class ViewField extends FRoundedPanel {
     // ========== Custom class handling
 
     private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {
-        return new FLabel.Builder().icon(new ImageIcon(skin.getImage(p0)))
+        return new FLabel.Builder().icon(new ImageIcon(FSkin.getImage(p0)))
             .opaque(false).fontScaleFactor(0.5).iconAlpha(0.6f).iconInBackground(true)
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
     }

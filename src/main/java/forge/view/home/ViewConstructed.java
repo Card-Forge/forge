@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.control.home.ControlConstructed;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
@@ -23,7 +22,6 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewConstructed extends JPanel {
-    private final FSkin skin;
     private final HomeTopLevel parentView;
     private final ControlConstructed control;
     private final JButton btnStart;
@@ -50,7 +48,6 @@ public class ViewConstructed extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
         parentView = v0;
-        skin = Singletons.getView().getSkin();
 
         populateHuman();
 
@@ -84,26 +81,26 @@ public class ViewConstructed extends JPanel {
         lstDecksHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 
         JLabel lblHuman = new JLabel("Choose your deck:");
-        lblHuman.setFont(skin.getBoldFont(16));
-        lblHuman.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblHuman.setFont(FSkin.getBoldFont(16));
+        lblHuman.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblColorInfo = new JLabel(colorsToolTip);
         lblColorInfo.setToolTipText(colorsToolTip);
-        lblColorInfo.setFont(skin.getItalicFont(12));
-        lblColorInfo.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblColorInfo.setFont(FSkin.getItalicFont(12));
+        lblColorInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblThemeInfo = new JLabel(themeToolTip);
         lblThemeInfo.setToolTipText(themeToolTip);
-        lblThemeInfo.setFont(skin.getItalicFont(12));
-        lblThemeInfo.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblThemeInfo.setFont(FSkin.getItalicFont(12));
+        lblThemeInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblDecklistInfo = new JLabel(decklistToolTip);
         lblDecklistInfo.setToolTipText(decklistToolTip);
-        lblDecklistInfo.setFont(skin.getItalicFont(12));
-        lblDecklistInfo.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblDecklistInfo.setFont(FSkin.getItalicFont(12));
+        lblDecklistInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Random theme and pre-constructed buttons
@@ -159,26 +156,26 @@ public class ViewConstructed extends JPanel {
         lstDecksAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 
         JLabel lblAI = new JLabel("Choose a deck for the computer:");
-        lblAI.setFont(skin.getBoldFont(16));
-        lblAI.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblAI.setFont(FSkin.getBoldFont(16));
+        lblAI.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblColorInfo = new JLabel(colorsToolTip);
         lblColorInfo.setToolTipText(colorsToolTip);
-        lblColorInfo.setFont(skin.getItalicFont(12));
-        lblColorInfo.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblColorInfo.setFont(FSkin.getItalicFont(12));
+        lblColorInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblThemeInfo = new JLabel(themeToolTip);
         lblThemeInfo.setToolTipText(themeToolTip);
-        lblThemeInfo.setFont(skin.getItalicFont(12));
-        lblThemeInfo.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblThemeInfo.setFont(FSkin.getItalicFont(12));
+        lblThemeInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel lblDecklistInfo = new JLabel(decklistToolTip);
         lblDecklistInfo.setToolTipText(decklistToolTip);
-        lblDecklistInfo.setFont(skin.getItalicFont(12));
-        lblDecklistInfo.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblDecklistInfo.setFont(FSkin.getItalicFont(12));
+        lblDecklistInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Random theme and pre-constructed deck buttons
@@ -300,7 +297,7 @@ public class ViewConstructed extends JPanel {
 
             JLabel lblOr = new JLabel("OR");
             lblOr.setHorizontalAlignment(SwingConstants.CENTER);
-            lblOr.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+            lblOr.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             add(lblOr, BorderLayout.CENTER);
         }
     }

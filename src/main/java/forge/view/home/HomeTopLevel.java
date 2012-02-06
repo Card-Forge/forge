@@ -53,7 +53,6 @@ import forge.view.toolbox.FSkin;
 public class HomeTopLevel extends FPanel {
     private JPanel pnlMenu, pnlContent;
     private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnExit, btnDeckEditor;
-    private FSkin skin;
     private String constraints;
     private ControlHomeUI control;
 
@@ -72,7 +71,6 @@ public class HomeTopLevel extends FPanel {
      */
     public HomeTopLevel() {
         super();
-        skin = Singletons.getView().getSkin();
 
         constructed = new ViewConstructed(this);
         sealed = new ViewSealed(this);
@@ -82,7 +80,7 @@ public class HomeTopLevel extends FPanel {
         utilities = new ViewUtilities(this);
 
         this.setOpaque(false);
-        this.setBGTexture(skin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        this.setBGTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         this.setLayout(null);
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -102,10 +100,10 @@ public class HomeTopLevel extends FPanel {
 
         pnlMenu = new FRoundedPanel();
         pnlMenu.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlMenu.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        pnlMenu.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
 
         pnlContent = new FRoundedPanel();
-        pnlContent.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        pnlContent.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
         pnlContent.setLayout(new MigLayout("insets 0, gap 0"));
 
         btnConstructed = new FButton();
@@ -161,7 +159,7 @@ public class HomeTopLevel extends FPanel {
         add(pnlMenu, "w 36%!, h 96%!, gap 2% 2% 2% 2%");
         add(pnlContent, "w 58%!, h 96%!, gap 0% 2% 2% 2%");
 
-        JLabel lblIcon = new JLabel(skin.getIcon(FSkin.ForgeIcons.ICO_LOGO));
+        JLabel lblIcon = new JLabel(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO));
         pnlMenu.add(lblIcon, "gapleft 10%, ax center");
 
         constraints = "w 80%!, gapleft 10%, gaptop 1%, gapbottom 1%, h 40px!";

@@ -40,6 +40,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
+import forge.view.toolbox.FSkin;
 
 /**
  * The default Model implementation for Forge.
@@ -100,12 +101,18 @@ public class FModel {
         // Unfortunately, they're tied up in legacy code in the Display interface,
         // currently in GuiTopLevel.  When that code is updated, this TODO should be resolved.
         // Doublestrike 24-01-12
+        // ==
+        // It's looking like all the settings at the same time, here only.
+        // Doublestrike 06-02-12
         Constant.Runtime.DEV_MODE[0] = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        Constant.Runtime.SKIN_NAME = preferences.getPref(FPref.UI_SKIN);
+
+        // Load splash image and preloader swatches for skin
+        FSkin.loadLight(Constant.Runtime.SKIN_NAME);
 
         // Instantiate AI
         AllZone.setInputControl(new InputControl(FModel.this));
         AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
-
 
         // Set gameplay preferences and constants
         final HttpUtil pinger = new HttpUtil();

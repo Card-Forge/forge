@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import forge.Command;
-import forge.Singletons;
 
 /** 
  * Uses the Builder pattern to facilitate/encourage inline styling.
@@ -175,11 +174,11 @@ public class FLabel extends JLabel {
     }
 
     // Final inits
-    private final Color clrText = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_TEXT);
-    private final Color clrBorders = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_BORDERS);
-    private final Color clrHover = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_HOVER);
-    private final Color clrInactive = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_INACTIVE);
-    private final Color clrActive = Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_ACTIVE);
+    private final Color clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private final Color clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
+    private final Color clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+    private final Color clrInactive = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+    private final Color clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
 
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
@@ -205,14 +204,14 @@ public class FLabel extends JLabel {
                 ref = (fontScaleBy == SwingConstants.VERTICAL ? getHeight() : getWidth());
                 switch (fontStyle) {
                     case Font.BOLD:
-                        setFont(Singletons.getView().getSkin().getBoldFont((int) (ref * fontScaleFactor)));
+                        setFont(FSkin.getBoldFont((int) (ref * fontScaleFactor)));
                         repaint();
                         break;
                     case Font.ITALIC:
-                        setFont(Singletons.getView().getSkin().getItalicFont((int) (ref * fontScaleFactor)));
+                        setFont(FSkin.getItalicFont((int) (ref * fontScaleFactor)));
                         break;
                     default:
-                        setFont(Singletons.getView().getSkin().getFont((int) (ref * fontScaleFactor)));
+                        setFont(FSkin.getFont((int) (ref * fontScaleFactor)));
                 }
             }
 

@@ -18,7 +18,6 @@ import javax.swing.text.StyledDocument;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
-import forge.Singletons;
 import forge.control.home.ControlDraft;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
@@ -37,7 +36,6 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewDraft extends JPanel {
-    private final FSkin skin;
     private final ControlDraft control;
     private final HomeTopLevel parentView;
     private final JList lstAI;
@@ -113,7 +111,6 @@ public class ViewDraft extends JPanel {
     public ViewDraft(HomeTopLevel v0) {
         super();
         this.parentView = v0;
-        this.skin = Singletons.getView().getSkin();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
 
@@ -133,8 +130,8 @@ public class ViewDraft extends JPanel {
         // Init directions text pane
         tpnDirections = new JTextPane();
         tpnDirections.setOpaque(false);
-        tpnDirections.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnDirections.setFont(skin.getFont(15));
+        tpnDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tpnDirections.setFont(FSkin.getFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);
         tpnDirections.setEditable(false);
@@ -158,15 +155,15 @@ public class ViewDraft extends JPanel {
 
         // Layout
         final JLabel lblHuman = new JLabel("Select your deck: ");
-        lblHuman.setFont(skin.getBoldFont(16));
+        lblHuman.setFont(FSkin.getBoldFont(16));
         lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
-        lblHuman.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblHuman.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
 
         final JLabel lblAI = new JLabel("Who will you play?");
-        lblAI.setFont(skin.getBoldFont(16));
+        lblAI.setFont(FSkin.getBoldFont(16));
         lblAI.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAI.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblAI.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
 
         lstHumanDecks = new DeckLister(GameType.Draft, exit);
@@ -179,9 +176,9 @@ public class ViewDraft extends JPanel {
         this.add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
 
         lblDirections = new JLabel("Click For Directions");
-        lblDirections.setFont(skin.getFont(16));
+        lblDirections.setFont(FSkin.getFont(16));
         lblDirections.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDirections.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
+        lblDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
 
         btnStart = new StartButton(parentView);
@@ -208,8 +205,8 @@ public class ViewDraft extends JPanel {
         });
         btnClose.setText("Close");
 
-        pnlContainer.setBorder(new LineBorder(skin.getColor(FSkin.Colors.CLR_BORDERS), 1));
-        pnlContainer.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        pnlContainer.setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+        pnlContainer.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
         pnlContainer.setLayout(new MigLayout("insets 0, wrap"));
         pnlContainer.add(tpnDirections, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");

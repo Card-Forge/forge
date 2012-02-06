@@ -18,7 +18,6 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
-import forge.Singletons;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -33,7 +32,6 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class QuestFileLister extends JPanel {
     private ImageIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
-    private FSkin skin;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private Command cmdRowSelect, cmdRowDelete, cmdRowEdit;
@@ -53,20 +51,19 @@ public class QuestFileLister extends JPanel {
      */
     public QuestFileLister(final boolean deletable, final boolean editable) {
         super();
-        this.skin = Singletons.getView().getSkin();
 
         this.clrDefault = new Color(0, 0, 0, 0);
-        this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
-        this.clrActive = skin.getColor(FSkin.Colors.CLR_ACTIVE);
-        this.clrBorders = skin.getColor(FSkin.Colors.CLR_BORDERS);
+        this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        this.clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+        this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
 
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        icoDelete = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
-        icoDeleteOver = skin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
-        icoEdit = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
-        icoEditOver = skin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
+        icoDelete = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
+        icoDeleteOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
+        icoEdit = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
+        icoEditOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
     }
 
     /** @param qd0 &emsp; {@link forge.quest.data.QuestData}[] */
@@ -86,7 +83,7 @@ public class QuestFileLister extends JPanel {
         // Note: careful with the widths of the rows here;
         // scroll panes will have difficulty dynamically resizing if 100% width is set.
         final JPanel rowTitle = new JPanel();
-        rowTitle.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
+        rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
         rowTitle.add(new FLabel.Builder().text("Rename").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");

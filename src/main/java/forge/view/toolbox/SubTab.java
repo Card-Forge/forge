@@ -9,14 +9,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import forge.Singletons;
-
 /** Standardized tab for submenus in home screen. */
 public class SubTab extends JPanel {
     private static final long serialVersionUID = -2193833603356739321L;
     private final Color clrBorders, clrHover;
     private final MouseAdapter madHover;
-    private final FSkin skin;
 
     private boolean enabled = false;
     private boolean hovering = false;
@@ -26,9 +23,8 @@ public class SubTab extends JPanel {
     public SubTab(String s0) {
         super();
         this.setOpaque(false);
-        this.skin = Singletons.getView().getSkin();
-        this.clrBorders = skin.getColor(FSkin.Colors.CLR_BORDERS);
-        this.clrHover = skin.getColor(FSkin.Colors.CLR_HOVER);
+        this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
+        this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         this.madHover = new MouseAdapter() {
@@ -47,8 +43,8 @@ public class SubTab extends JPanel {
         this.addMouseListener(madHover);
 
         final JLabel lbl = new JLabel(s0);
-        lbl.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        lbl.setFont(skin.getFont(12));
+        lbl.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        lbl.setFont(FSkin.getFont(12));
         this.add(lbl);
     }
 

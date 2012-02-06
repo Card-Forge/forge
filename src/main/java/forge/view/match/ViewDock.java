@@ -34,7 +34,6 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Singletons;
 import forge.control.match.ControlDock;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
@@ -47,7 +46,6 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewDock extends FRoundedPanel {
-    private final FSkin skin;
     private final ControlDock control;
     private final Action actClose;
 
@@ -57,9 +55,8 @@ public class ViewDock extends FRoundedPanel {
      */
     public ViewDock() {
         super();
-        this.skin = Singletons.getView().getSkin();
         this.setToolTipText("Shortcut Button Dock");
-        this.setBackground(skin.getColor(FSkin.Colors.CLR_THEME));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
         //this.setLayout(new MigLayout("insets 0, gap 0, ay center, ax center"));
 
         // Mig layout does not support wrapping!
@@ -76,7 +73,7 @@ public class ViewDock extends FRoundedPanel {
             }
         };
 
-        final JLabel btnConcede = new DockButton(skin.getIcon(FSkin.DockIcons.ICO_CONCEDE), "Concede Game");
+        final JLabel btnConcede = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_CONCEDE), "Concede Game");
         btnConcede.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -84,7 +81,7 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        final JLabel btnSettings = new DockButton(skin.getIcon(FSkin.DockIcons.ICO_SETTINGS), "Game Settings");
+        final JLabel btnSettings = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_SETTINGS), "Game Settings");
         btnSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -92,7 +89,7 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        final JLabel btnEndTurn = new DockButton(skin.getIcon(FSkin.DockIcons.ICO_ENDTURN), "End Turn");
+        final JLabel btnEndTurn = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_ENDTURN), "End Turn");
         btnEndTurn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -100,7 +97,7 @@ public class ViewDock extends FRoundedPanel {
             }
         });
 
-        final JLabel btnViewDeckList = new DockButton(skin.getIcon(FSkin.DockIcons.ICO_DECKLIST), "View Deck List");
+        final JLabel btnViewDeckList = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_DECKLIST), "View Deck List");
         btnViewDeckList.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -132,7 +129,7 @@ public class ViewDock extends FRoundedPanel {
      */
     public class DockButton extends JLabel {
         private final Image img;
-        private final Color hoverBG = ViewDock.this.skin.getColor(FSkin.Colors.CLR_HOVER);
+        private final Color hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final Color defaultBG = new Color(0, 0, 0, 0);
         private Color clrBorders = new Color(0, 0, 0, 0);
         private int w, h;
@@ -160,7 +157,7 @@ public class ViewDock extends FRoundedPanel {
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    DockButton.this.clrBorders = ViewDock.this.skin.getColor(FSkin.Colors.CLR_BORDERS);
+                    DockButton.this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
                     DockButton.this.setBackground(DockButton.this.hoverBG);
                 }
 

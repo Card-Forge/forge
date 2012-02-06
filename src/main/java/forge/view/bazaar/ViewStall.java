@@ -31,7 +31,6 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.Singletons;
 import forge.control.bazaar.ControlStall;
 import forge.quest.data.bazaar.QuestStallDefinition;
 import forge.quest.data.bazaar.QuestStallManager;
@@ -50,7 +49,6 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewStall extends JPanel {
-    private final FSkin skin;
     private final FLabel lblStallName, lblEmpty, lblStats;
     private final JTextPane tpnFluff;
     private final JPanel pnlInventory;
@@ -63,7 +61,6 @@ public class ViewStall extends JPanel {
     /** @param v0 {@link forge.view.bazaar.BazaarTopLevel} */
     protected ViewStall(final BazaarTopLevel v0) {
         // Final/component inits
-        this.skin = Singletons.getView().getSkin();
         this.lblStallName = new FLabel.Builder().text("").fontAlign(SwingConstants.CENTER).build();
         this.lblEmpty = new FLabel.Builder()
             .text("The merchant does not have anything useful for sale.")
@@ -82,8 +79,8 @@ public class ViewStall extends JPanel {
         this.setOpaque(false);
 
         tpnFluff.setOpaque(false);
-        tpnFluff.setForeground(skin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnFluff.setFont(skin.getItalicFont(15));
+        tpnFluff.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tpnFluff.setFont(FSkin.getItalicFont(15));
         tpnFluff.setFocusable(false);
         tpnFluff.setEditable(false);
         tpnFluff.setBorder(null);
