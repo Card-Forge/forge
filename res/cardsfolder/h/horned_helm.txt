@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 Text:Equipped creature gets +1/+1 and has trample.
 K:eqPump 1:+1/+1/Trample
-A:AB$ Attach | Cost$ G G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targe creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
+A:AB$ Attach | Cost$ G G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_helm.jpg
