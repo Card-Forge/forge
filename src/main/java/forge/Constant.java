@@ -50,7 +50,7 @@ public final class Constant {
         public static final Deck[] COMPUTER_DECK = new Deck[1];
 
         /** The skin name. */
-        public static String SKIN_NAME = "default";
+        private static String skinName = "default";
 
         /** The game type. */
         private static GameType gameType = GameType.Constructed;
@@ -103,6 +103,24 @@ public final class Constant {
          */
         public static void setGameType(final GameType gameType0) {
             Runtime.gameType = gameType0;
+        }
+
+        /**
+         * Gets the skin name.
+         *
+         * @return the skin name
+         */
+        public static String getSkinName() {
+            return Runtime.skinName;
+        }
+
+        /**
+         * Sets the skin name.
+         *
+         * @param skinName the new skin name
+         */
+        public static void setSkinName(final String skinName) {
+            Runtime.skinName = skinName;
         }
     }
 

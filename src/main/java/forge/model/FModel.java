@@ -105,10 +105,10 @@ public class FModel {
         // It's looking like all the settings at the same time, here only.
         // Doublestrike 06-02-12
         Constant.Runtime.DEV_MODE[0] = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        Constant.Runtime.SKIN_NAME = preferences.getPref(FPref.UI_SKIN);
+        Constant.Runtime.setSkinName(preferences.getPref(FPref.UI_SKIN));
 
         // Load splash image and preloader swatches for skin
-        FSkin.loadLight(Constant.Runtime.SKIN_NAME);
+        FSkin.loadLight(Constant.Runtime.getSkinName());
 
         // Instantiate AI
         AllZone.setInputControl(new InputControl(FModel.this));

@@ -11044,6 +11044,7 @@ src/main/java/forge/control/ControlMatchUI.java -text
 src/main/java/forge/control/FControl.java -text
 src/main/java/forge/control/KeyboardShortcuts.java -text
 src/main/java/forge/control/bazaar/ControlStall.java -text
+src/main/java/forge/control/bazaar/package-info.java -text svneol=native#text/plain
 src/main/java/forge/control/home/ControlConstructed.java -text
 src/main/java/forge/control/home/ControlDraft.java -text
 src/main/java/forge/control/home/ControlQuest.java -text
@@ -11218,6 +11219,7 @@ src/main/java/forge/view/Main.java -text
 src/main/java/forge/view/bazaar/BazaarTopLevel.java -text
 src/main/java/forge/view/bazaar/ViewItem.java -text
 src/main/java/forge/view/bazaar/ViewStall.java svneol=native#text/plain
+src/main/java/forge/view/bazaar/package-info.java svneol=native#text/plain
 src/main/java/forge/view/editor/EditorTopLevel.java -text
 src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
 src/main/java/forge/view/home/HomeTopLevel.java -text
