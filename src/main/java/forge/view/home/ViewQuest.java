@@ -37,7 +37,6 @@ import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FTextArea;
-import forge.view.toolbox.SubButton;
 import forge.view.toolbox.SubTab;
 
 /** 
@@ -56,10 +55,10 @@ public class ViewQuest extends JScrollPane {
         pnlDecks, pnlLoadQuest, pnlPrefs,
         tabDuels, tabChallenges, tabDecks, tabQuests, tabPreferences;
     private final FLabel lblTitle, lblLife, lblCredits,
-        lblWins, lblLosses, lblNextChallengeInWins, lblWinStreak;
-
-    private final JButton btnBazaar, btnSpellShop, btnStart, btnEmbark,
+        lblWins, lblLosses, lblNextChallengeInWins, lblWinStreak, btnBazaar, btnSpellShop, btnEmbark,
         btnResetPrefs, btnNewDeck, btnCurrentDeck;
+
+    private final StartButton btnStart;
 
     private final JCheckBox cbPlant, cbZep, cbStandardStart;
     private final JComboBox cbxPet;
@@ -107,7 +106,8 @@ public class ViewQuest extends JScrollPane {
         pnlLoadQuest = new JPanel();
         pnlPrefs = new JPanel();
 
-        lblTitle = new FLabel.Builder().text("New Quest").fontAlign(SwingConstants.CENTER).build();
+        lblTitle = new FLabel.Builder().text("New Quest").fontAlign(SwingConstants.CENTER)
+                .fontScaleBy(SwingConstants.HORIZONTAL).fontScaleFactor(0.035).build();
         lblLife = new FLabel.Builder().build();
         lblCredits = new FLabel.Builder().build();
         lblWins = new FLabel.Builder().build();
@@ -122,13 +122,17 @@ public class ViewQuest extends JScrollPane {
         radFantasy = new FRadioButton("Fantasy");
         radClassic = new FRadioButton("Classic");
 
-        btnCurrentDeck = new SubButton();
-        btnBazaar = new SubButton("Bazaar");
-        btnSpellShop = new SubButton("Spell Shop");
+        btnCurrentDeck = new FLabel.Builder().opaque(true).hoverable(true).build();
+        btnBazaar = new FLabel.Builder().selectable(true).opaque(true).hoverable(true).text("Bazaar")
+                .fontScaleAuto(false).tooltip("Peruse the Bazaar").build();
+        btnBazaar.setFont(Singletons.getView().getSkin().getFont(14));
+        btnSpellShop = new FLabel.Builder().opaque(true).hoverable(true).text("Spell Shop")
+                .fontScaleAuto(false).tooltip("Travel to the Spell Shop").build();
+        btnSpellShop.setFont(Singletons.getView().getSkin().getFont(14));
         btnStart = new StartButton(parentView);
-        btnEmbark = new SubButton("Embark!");
-        btnNewDeck = new SubButton("Build a New Deck");
-        btnResetPrefs = new SubButton("Reset to Defaults");
+        btnEmbark = new FLabel.Builder().opaque(true).hoverable(true).text("Embark!").build();
+        btnNewDeck = new FLabel.Builder().opaque(true).hoverable(true).text("Build a New Deck").build();
+        btnResetPrefs = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Defaults").build();
         cbxPet = new JComboBox();
         cbStandardStart = new FCheckBox("Standard (Type 2) Starting Pool");
         cbPlant = new FCheckBox("Summon Plant");
@@ -207,8 +211,6 @@ public class ViewQuest extends JScrollPane {
         pnlTitle.setBackground(skin.getColor(FSkin.Colors.CLR_THEME2));
         ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
 
-        ((FLabel) lblTitle).setFontScaleBy(SwingConstants.HORIZONTAL);
-        ((FLabel) lblTitle).setFontScaleFactor(0.035);
         pnlTitle.add(lblTitle, "w 98%!, h 70%!, gap 0 0 15%! 15%!");
     }
 
@@ -222,8 +224,6 @@ public class ViewQuest extends JScrollPane {
         lblWins.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_PLUS));
         lblLosses.setIcon(skin.getIcon(FSkin.QuestIcons.ICO_MINUS));
         lblNextChallengeInWins.setText("No challenges available.");
-        btnBazaar.setToolTipText("Peruse the Bazaar");
-        btnSpellShop.setToolTipText("Travel to the Spell Shop");
     }
 
     /** Layout permanent parts of duels panel. */
@@ -705,8 +705,8 @@ public class ViewQuest extends JScrollPane {
         return lblWinStreak;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnCurrentDeck() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnCurrentDeck() {
         return btnCurrentDeck;
     }
 
@@ -715,28 +715,28 @@ public class ViewQuest extends JScrollPane {
         return btnStart;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnBazaar() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnBazaar() {
         return btnBazaar;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnSpellShop() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnSpellShop() {
         return btnSpellShop;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnEmbark() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnEmbark() {
         return btnEmbark;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnResetPrefs() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnResetPrefs() {
         return btnResetPrefs;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnNewDeck() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnNewDeck() {
         return btnNewDeck;
     }
 

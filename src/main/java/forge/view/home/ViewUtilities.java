@@ -22,7 +22,6 @@ import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
-import forge.view.toolbox.SubButton;
 
 /**
  * Assembles swing components for "Utilities" mode menu.
@@ -36,7 +35,7 @@ public class ViewUtilities extends JPanel {
     private final JTextPane tpnLicensing;
     private final JLabel lblLicensing;
 
-    private SubButton btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages, btnReportBug, btnImportPictures,
+    private FLabel btnDownloadSetPics, btnDownloadPics, btnDownloadQuestImages, btnReportBug, btnImportPictures,
             btnHowToPlay, btnDownloadPrices, btnDeckEditor;
 
     private final String license = "Forge License Information" + "\r\n\r\n"
@@ -67,14 +66,16 @@ public class ViewUtilities extends JPanel {
         final String constraintsLBL = "w 90%!, h 20px!, gap 5% 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
 
-        btnDownloadPics = new SubButton("Download LQ Card Pictures");
+        btnDownloadPics = new FLabel.Builder().opaque(true).hoverable(true)
+                .text("Download LQ Card Pictures").fontScaleFactor(0.5).build();
         final FLabel lblPics = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
                 .text("Download default card picture for each card.").fontStyle(Font.ITALIC).build();
 
         this.add(btnDownloadPics, constraintsBTN);
         this.add(lblPics, constraintsLBL);
 
-        btnDownloadSetPics = new SubButton("Download LQ Set Pictures");
+        btnDownloadSetPics = new FLabel.Builder().opaque(true).hoverable(true)
+                .text("Download LQ Set Pictures").fontScaleFactor(0.5).build();
         final FLabel lblSets = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
                 .text("Download full card picture sets for all cards from legacy releases of MTG.")
                 .fontStyle(Font.ITALIC).build();
@@ -82,14 +83,16 @@ public class ViewUtilities extends JPanel {
         this.add(btnDownloadSetPics, constraintsBTN);
         this.add(lblSets, constraintsLBL);
 
-        btnDownloadQuestImages = new SubButton("Download Quest Images");
+        btnDownloadQuestImages = new FLabel.Builder().opaque(true).hoverable(true)
+                .text("Download Quest Images").fontScaleFactor(0.5).build();
         final FLabel lblQuest = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
             .text("Download tokens and icons used in Quest mode.").fontStyle(Font.ITALIC).build();
 
         this.add(btnDownloadQuestImages, constraintsBTN);
         this.add(lblQuest, constraintsLBL);
 
-        btnDownloadPrices = new SubButton("Download Card Prices");
+        btnDownloadPrices = new FLabel.Builder().opaque(true).hoverable(true)
+                .text("Download Card Prices").fontScaleFactor(0.5).build();
         final FLabel lblPrices = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
                 .text("Download up-to-date price list for in-game card shops.")
                 .fontStyle(Font.ITALIC).build();
@@ -97,28 +100,31 @@ public class ViewUtilities extends JPanel {
         this.add(btnDownloadPrices, constraintsBTN);
         this.add(lblPrices, constraintsLBL);
 
-        btnImportPictures = new SubButton("Import Pictures");
+        btnImportPictures = new FLabel.Builder().opaque(true).hoverable(true)
+                .text("Import Pictures").fontScaleFactor(0.5).build();
         final FLabel lblImport = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
                 .text("Import card pictures from a local version of Forge.")
                 .fontStyle(Font.ITALIC).build();
         this.add(btnImportPictures, constraintsBTN);
         this.add(lblImport, constraintsLBL);
 
-        btnReportBug = new SubButton("Report a Bug");
+        btnReportBug = new FLabel.Builder().opaque(true).hoverable(true)
+                .text("Report a Bug").fontScaleFactor(0.5).build();
         final FLabel lblReport = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
                 .text("Something broken?").fontStyle(Font.ITALIC).build();
 
         this.add(btnReportBug, constraintsBTN);
         this.add(lblReport, constraintsLBL);
 
-        btnDeckEditor = new SubButton("Deck Editor");
+        btnDeckEditor = new FLabel.Builder().opaque(true).hoverable(true)
+                .text("Deck Editor").fontScaleFactor(0.5).build();
         final FLabel lblEditor = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
             .text("Build or edit a deck using all cards available in Forge.")
             .fontStyle(Font.ITALIC).build();
         this.add(btnDeckEditor, constraintsBTN);
         this.add(lblEditor, constraintsLBL);
 
-        btnHowToPlay = new SubButton("How To Play");
+        btnHowToPlay = new FLabel.Builder().opaque(true).hoverable(true).text("How To Play");
         this.add(btnHowToPlay, constraintsBTN);
 
         tpnLicensing = new JTextPane();
@@ -171,43 +177,43 @@ public class ViewUtilities extends JPanel {
         overlay.showOverlay();
     }
 
-    /** @return SubButton */
-    public SubButton getBtnDownloadPics() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnDownloadPics() {
         return btnDownloadPics;
     }
 
-    /** @return SubButton */
-    public SubButton getBtnDownloadSetPics() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnDownloadSetPics() {
         return btnDownloadSetPics;
     }
 
-    /** @return SubButton */
-    public SubButton getBtnDownloadQuestImages() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnDownloadQuestImages() {
         return btnDownloadQuestImages;
     }
 
-    /** @return SubButton */
-    public SubButton getBtnReportBug() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnReportBug() {
         return btnReportBug;
     }
 
-    /** @return SubButton */
-    public SubButton getBtnImportPictures() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnImportPictures() {
         return btnImportPictures;
     }
 
-    /** @return SubButton */
-    public SubButton getBtnHowToPlay() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnHowToPlay() {
         return btnHowToPlay;
     }
 
-    /** @return SubButton */
-    public SubButton getBtnDownloadPrices() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnDownloadPrices() {
         return btnDownloadPrices;
     }
 
-    /** @return SubButton */
-    public SubButton getBtnDeckEditor() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnDeckEditor() {
         return btnDeckEditor;
     }
 

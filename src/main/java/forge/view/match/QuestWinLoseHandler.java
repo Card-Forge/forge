@@ -116,6 +116,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     @Override
     public final void startNextRound() {
         AllZone.getDisplay().savePrefs();
+        this.model.qPrefs.save();
 
         if (Constant.Quest.FANTASY_QUEST[0]) {
             int extraLife = 0;
@@ -299,7 +300,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         AllZone.setQuestEvent(null);
 
         this.model.qData.saveData();
-
+        this.model.qPrefs.save();
         AllZone.getDisplay().savePrefs();
 
         FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
@@ -546,7 +547,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         final GameFormat selected = ch.getSelectedValue();
         this.model.qPrefs.setPreference(QPref.BOOSTER_FORMAT, selected.toString());
-        this.model.qPrefs.save();
 
         final List<CardPrinted> cardsWon = this.model.qData.getCards().addCards(selected.getFilterPrinted());
 

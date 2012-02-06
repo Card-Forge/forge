@@ -11,11 +11,11 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.control.home.ControlConstructed;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
-import forge.view.toolbox.SubButton;
 
 /** 
  * Assembles swing components for "Constructed" mode menu.
@@ -29,7 +29,7 @@ public class ViewConstructed extends JPanel {
     private final JButton btnStart;
     private final FProgressBar barProgress;
 
-    private SubButton btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
+    private FLabel btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
     private JList lstDecksAI;
     private FList lstColorsHuman, lstThemesHuman, lstDecksHuman, lstColorsAI, lstThemesAI;
 
@@ -107,8 +107,10 @@ public class ViewConstructed extends JPanel {
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Random theme and pre-constructed buttons
-        btnHumanRandomTheme = new SubButton("Random Theme Deck");
-        btnHumanRandomDeck = new SubButton("Random Deck");
+        btnHumanRandomTheme = new FLabel.Builder().opaque(true)
+                .hoverable(true).text("Random Theme Deck").build();
+        btnHumanRandomDeck = new FLabel.Builder().opaque(true)
+                .hoverable(true).text("Random Deck").build();
 
         // Add components to human area
         JPanel colorsContainer = new JPanel();
@@ -180,8 +182,10 @@ public class ViewConstructed extends JPanel {
         lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Random theme and pre-constructed deck buttons
-        btnAIRandomTheme = new SubButton("Random Theme Deck");
-        btnAIRandomDeck = new SubButton("Random Deck");
+        btnAIRandomTheme = new FLabel.Builder().opaque(true)
+                .hoverable(true).text("Random Theme Deck").build();
+        btnAIRandomDeck = new FLabel.Builder().opaque(true)
+                .hoverable(true).text("Random Deck").build();
 
         // Add components to AI area
         JPanel colorsContainer = new JPanel();
@@ -256,23 +260,23 @@ public class ViewConstructed extends JPanel {
         return lstDecksAI;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnHumanRandomTheme() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnHumanRandomTheme() {
         return btnHumanRandomTheme;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnAIRandomTheme() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnAIRandomTheme() {
         return btnAIRandomTheme;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnHumanRandomDeck() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnHumanRandomDeck() {
         return btnHumanRandomDeck;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnAIRandomDeck() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnAIRandomDeck() {
         return btnAIRandomDeck;
     }
 

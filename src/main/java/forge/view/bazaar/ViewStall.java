@@ -68,7 +68,9 @@ public class ViewStall extends JPanel {
         this.lblEmpty = new FLabel.Builder()
             .text("The merchant does not have anything useful for sale.")
             .fontAlign(SwingConstants.CENTER).build();
-        this.lblStats = new FLabel.Builder().build();
+        this.lblStats = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .fontScaleFactor(0.9).build();
+
         this.tpnFluff = new JTextPane();
         this.pnlInventory = new JPanel();
         this.scrInventory = new FScrollPane(pnlInventory);
@@ -96,9 +98,6 @@ public class ViewStall extends JPanel {
         scrInventory.setBorder(null);
         scrInventory.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrInventory.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFontScaleFactor(0.9);
 
         // Layout
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));

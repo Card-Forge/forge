@@ -95,11 +95,15 @@ public class DeckLister extends JPanel {
         rowTitle.setBackground(skin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
 
-        rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER), "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Edit").fontAlign(SwingConstants.CENTER), "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Deck Name").fontAlign(SwingConstants.CENTER), "w 60%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Main").fontAlign(SwingConstants.CENTER), "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Side").fontAlign(SwingConstants.CENTER), "w 10%!, h 20px!, gaptop 5px");
+        rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(),
+                "w 10%!, h 20px!, gaptop 5px");
+        rowTitle.add(new FLabel.Builder().text("Edit").fontAlign(SwingConstants.CENTER).build(),
+                "w 10%!, h 20px!, gaptop 5px");
+        rowTitle.add(new FLabel.Builder().text("Deck Name").fontAlign(SwingConstants.CENTER).build(), "w 60%!, h 20px!, gaptop 5px");
+        rowTitle.add(new FLabel.Builder().text("Main").fontAlign(SwingConstants.CENTER).build(),
+                "w 10%!, h 20px!, gaptop 5px");
+        rowTitle.add(new FLabel.Builder().text("Side").fontAlign(SwingConstants.CENTER).build(),
+                "w 10%!, h 20px!, gaptop 5px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;

@@ -1,13 +1,12 @@
 package forge.view.bazaar;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Command;
 import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallPurchasable;
 import forge.view.GuiTopLevel;
@@ -15,32 +14,24 @@ import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FTextArea;
-import forge.view.toolbox.SubButton;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")
 public class ViewItem extends FRoundedPanel {
-    private final FLabel lblIcon, lblName, lblPrice;
+    private final FLabel lblIcon, lblName, lblPrice, btnPurchase;
     private final FTextArea tarDesc;
-    private final SubButton btnPurchase;
     private QuestStallPurchasable item;
 
     /** An update-able panel instance representing a single item. */
     public ViewItem() {
         // Final inits
-        lblIcon = new FLabel.Builder().build();
-        lblName = new FLabel.Builder().build();
-        lblPrice = new FLabel.Builder().build();
+        lblIcon = new FLabel.Builder().iconScaleFactor(1).iconInBackground(true).build();
+        lblName = new FLabel.Builder().fontStyle(Font.BOLD).build();
+        lblPrice = new FLabel.Builder().fontStyle(Font.BOLD).fontScaleFactor(0.8).build();
         tarDesc = new FTextArea();
-        btnPurchase = new SubButton("Buy");
+        btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontScaleFactor(0.2).hoverable(true).build();
 
-        // Component styling
         this.setBackground(Singletons.getView().getSkin().getColor(FSkin.Colors.CLR_THEME2));
-        this.lblName.setFontStyle(Font.BOLD);
-        this.lblPrice.setFontStyle(Font.BOLD);
-        this.lblPrice.setFontScaleFactor(0.8);
-        this.lblIcon.setIconInBackground(true);
-        this.lblIcon.setIconScaleFactor(1);
 
         // Layout
         this.setLayout(new MigLayout("insets 0, gap 0"));
@@ -52,9 +43,9 @@ public class ViewItem extends FRoundedPanel {
         this.add(tarDesc, "w 60%!, gap 0 0 0 10px, wrap");
         this.add(lblPrice, "w 60%!, h 20px!, gap 0 0 0 5px");
 
-        btnPurchase.addActionListener(new ActionListener() {
+        btnPurchase.setCommand(new Command() {
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public void execute() {
                 AllZone.getQuestData().subtractCredits(getItem().getBuyingPrice());
                 AllZone.getQuestData().addCredits(getItem().getSellingPrice());
                 getItem().onPurchase();

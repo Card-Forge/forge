@@ -56,6 +56,7 @@ public class QuestPreferences implements Serializable {
 
         PENALTY_LOSS ("15"), /** */
         CURRENT_QUEST ("DEFAULT"), /** */
+        CURRENT_DECK ("DEFAULT"), /** */
 
         REWARDS_BASE ("25"), /** */
         REWARDS_UNDEFEATED ("25"), /** */

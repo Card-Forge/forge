@@ -1,7 +1,5 @@
 package forge.control.home;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -32,8 +30,8 @@ import forge.view.toolbox.FSkin;
 public class ControlUtilities {
     private ViewUtilities view;
     private final MouseAdapter madLicensing;
-    private final ActionListener actDeckEditor, actPicDownload, actSetDownload,
-        actQuestImages, actReportBug, actImportPictures, actHowToPlay, actDownloadPrices;
+    private final Command cmdDeckEditor, cmdPicDownload, cmdSetDownload,
+        cmdQuestImages, cmdReportBug, cmdImportPictures, cmdHowToPlay, cmdDownloadPrices;
 
     /**
      * 
@@ -41,6 +39,7 @@ public class ControlUtilities {
      * 
      * @param v0 &emsp; ViewUtilities
      */
+    @SuppressWarnings("serial")
     public ControlUtilities(ViewUtilities v0) {
         this.view = v0;
 
@@ -59,53 +58,37 @@ public class ControlUtilities {
             }
         };
 
-        actDeckEditor = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                showDeckEditor(null, null);
-            }
-        };
+        cmdDeckEditor = new Command() { @Override
+            public void execute() { showDeckEditor(null, null); } };
 
-        actPicDownload = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                doDownloadPics();
-            }
-        };
+        cmdPicDownload = new Command() { @Override
+            public void execute() { doDownloadPics(); } };
 
-        actSetDownload = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                doDownloadSetPics();
-            }
-        };
+        cmdSetDownload = new Command() { @Override
+            public void execute() { doDownloadSetPics(); } };
 
-        actQuestImages = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                doDownloadQuestImages();
-            }
-        };
+        cmdQuestImages = new Command() { @Override
+            public void execute() { doDownloadQuestImages(); } };
 
-        actReportBug = new ActionListener() {
+        cmdReportBug = new Command() {
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void execute() {
                 final BugzReporter br = new BugzReporter();
                 br.setVisible(true);
             }
         };
 
-        actImportPictures = new ActionListener() {
+        cmdImportPictures = new Command() {
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void execute() {
                 final GuiImportPicture ip = new GuiImportPicture(null);
                 ip.setVisible(true);
             }
         };
 
-        actHowToPlay = new ActionListener() {
+        cmdHowToPlay = new Command() {
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void execute() {
                 final String text = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
 
                 final JTextArea area = new JTextArea(text, 25, 40);
@@ -119,9 +102,9 @@ public class ControlUtilities {
             }
         };
 
-        actDownloadPrices = new ActionListener() {
+        cmdDownloadPrices = new Command() {
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void execute() {
                 final GuiDownloadPrices gdp = new GuiDownloadPrices();
                 gdp.setVisible(true);
             }
@@ -137,22 +120,15 @@ public class ControlUtilities {
 
     /** */
     public void addListeners() {
-        this.view.getBtnDownloadPics().removeActionListener(actPicDownload);
-        this.view.getBtnDownloadPics().addActionListener(actPicDownload);
-        this.view.getBtnDownloadSetPics().removeActionListener(actSetDownload);
-        this.view.getBtnDownloadSetPics().addActionListener(actSetDownload);
-        this.view.getBtnDownloadQuestImages().removeActionListener(actQuestImages);
-        this.view.getBtnDownloadQuestImages().addActionListener(actQuestImages);
-        this.view.getBtnReportBug().removeActionListener(actReportBug);
-        this.view.getBtnReportBug().addActionListener(actReportBug);
-        this.view.getBtnImportPictures().removeActionListener(actImportPictures);
-        this.view.getBtnImportPictures().addActionListener(actImportPictures);
-        this.view.getBtnHowToPlay().removeActionListener(actHowToPlay);
-        this.view.getBtnHowToPlay().addActionListener(actHowToPlay);
-        this.view.getBtnDownloadPrices().removeActionListener(actDownloadPrices);
-        this.view.getBtnDownloadPrices().addActionListener(actDownloadPrices);
-        this.view.getBtnDeckEditor().removeActionListener(actDeckEditor);
-        this.view.getBtnDeckEditor().addActionListener(actDeckEditor);
+        this.view.getBtnDownloadPics().setCommand(cmdPicDownload);
+        this.view.getBtnDownloadSetPics().setCommand(cmdSetDownload);
+        this.view.getBtnDownloadQuestImages().setCommand(cmdQuestImages);
+        this.view.getBtnReportBug().setCommand(cmdReportBug);
+        this.view.getBtnImportPictures().setCommand(cmdImportPictures);
+        this.view.getBtnHowToPlay().setCommand(cmdHowToPlay);
+        this.view.getBtnDownloadPrices().setCommand(cmdDownloadPrices);
+        this.view.getBtnDeckEditor().setCommand(cmdDeckEditor);
+
         this.view.getLblLicensing().removeMouseListener(madLicensing);
         this.view.getLblLicensing().addMouseListener(madLicensing);
     }

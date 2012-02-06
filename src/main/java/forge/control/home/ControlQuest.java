@@ -53,10 +53,10 @@ public class ControlQuest {
 
     private final MouseAdapter madStartGame, madDuels, madChallenges,
         madQuests, madDecks, madPreferences;
-    private final ActionListener actPetSelect, actPlantSelect,
-        actSpellShop, actBazaar, actEmbark, actNewDeck, actCurrentDeck, actResetPrefs;
-    private final Command cmdDeckExit, cmdDeckDelete, cmdDeckSelect,
-        cmdQuestSelect, cmdQuestDelete;
+    private final ActionListener actPetSelect, actPlantSelect;
+    private final Command cmdSpellShop, cmdBazaar,
+        cmdEmbark, cmdNewDeck, cmdCurrentDeck, cmdResetPrefs, cmdDeckExit,
+        cmdDeckDelete, cmdDeckSelect, cmdQuestSelect, cmdQuestDelete;
     private Deck currentDeck;
     private Map<String, QuestData> arrQuests;
 
@@ -128,29 +128,29 @@ public class ControlQuest {
             }
         };
 
-        actSpellShop = new ActionListener() { @Override
-            public void actionPerformed(ActionEvent e) { showSpellShop(); } };
+        cmdSpellShop = new Command() { @Override
+            public void execute() { showSpellShop(); } };
 
-        actBazaar = new ActionListener() { @Override
-            public void actionPerformed(ActionEvent e) { showBazaar(); } };
+        cmdBazaar = new Command() { @Override
+            public void execute() { showBazaar(); } };
 
-        actEmbark = new ActionListener() { @Override
-            public void actionPerformed(ActionEvent e) { newQuest(); } };
+        cmdEmbark = new Command() { @Override
+            public void execute() { newQuest(); } };
 
-        actCurrentDeck = new ActionListener() { @Override
-            public void actionPerformed(ActionEvent e) { view.showDecksTab(); } };
+        cmdCurrentDeck = new Command() { @Override
+            public void execute() { view.showDecksTab(); } };
 
-        actNewDeck = new ActionListener() { @Override
-            public void actionPerformed(ActionEvent e) {
+        cmdNewDeck = new Command() { @Override
+            public void execute() {
                 final DeckEditorQuest editor = new DeckEditorQuest(qData);
                 editor.show(cmdDeckExit);
                 editor.setVisible(true);
             }
         };
 
-        actResetPrefs = new ActionListener() {
+        cmdResetPrefs = new Command() {
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void execute() {
                 qPrefs.reset();
                 qPrefs.save();
                 view.resetPrefs();
@@ -171,6 +171,7 @@ public class ControlQuest {
             @Override
             public void execute() {
                 currentDeck = view.getLstDecks().getSelectedDeck();
+                qPrefs.setPreference(QPref.CURRENT_DECK, currentDeck.toString());
                 view.setCurrentDeckStatus();
             }
         };
@@ -246,36 +247,27 @@ public class ControlQuest {
         view.getTabPreferences().removeMouseListener(madPreferences);
         view.getTabPreferences().addMouseListener(madPreferences);
 
-        view.getBtnEmbark().removeActionListener(actEmbark);
-        view.getBtnEmbark().addActionListener(actEmbark);
-
         view.getLstQuests().setSelectCommand(cmdQuestSelect);
         view.getLstQuests().setEditCommand(cmdQuestDelete);
         view.getLstQuests().setDeleteCommand(cmdQuestDelete);
 
-        view.getBtnResetPrefs().removeActionListener(actResetPrefs);
-        view.getBtnResetPrefs().addActionListener(actResetPrefs);
+        view.getBtnEmbark().setCommand(cmdEmbark);
+        view.getBtnResetPrefs().setCommand(cmdResetPrefs);
 
         if (this.qem != null) {
             view.getBtnStart().removeMouseListener(madStartGame);
             view.getBtnStart().addMouseListener(madStartGame);
 
-            view.getBtnBazaar().removeActionListener(actBazaar);
-            view.getBtnBazaar().addActionListener(actBazaar);
+            view.getBtnBazaar().setCommand(cmdBazaar);
 
-            view.getBtnNewDeck().removeActionListener(actNewDeck);
-            view.getBtnNewDeck().addActionListener(actNewDeck);
+            view.getBtnNewDeck().setCommand(cmdNewDeck);
 
-            view.getBtnCurrentDeck().removeActionListener(actCurrentDeck);
-            view.getBtnCurrentDeck().addActionListener(actCurrentDeck);
+            view.getBtnCurrentDeck().setCommand(cmdCurrentDeck);
 
-            view.getBtnSpellShop().removeActionListener(actSpellShop);
-            view.getBtnSpellShop().addActionListener(actSpellShop);
+            view.getBtnSpellShop().setCommand(cmdSpellShop);
 
-            view.getCbxPet().removeActionListener(actPetSelect);
             view.getCbxPet().addActionListener(actPetSelect);
 
-            view.getCbPlant().removeActionListener(actPlantSelect);
             view.getCbPlant().addActionListener(actPlantSelect);
 
             view.getLstDecks().setSelectCommand(cmdDeckSelect);
@@ -405,19 +397,23 @@ public class ControlQuest {
 
     /** Resets decks, then retrieves and sets current deck. */
     public void refreshDecks() {
+        // Retrieve and set all decks
         Deck[] temp = (qData == null ? new Deck[] {} : qData.getDecks().toArray(new Deck[0]));
-
         view.getLstDecks().setDecks(temp);
 
-        if (!view.getLstDecks().setSelectedDeck(currentDeck)) {
-            if (!view.getLstDecks().setSelectedIndex(0)) {
-                currentDeck = null;
-            }
-            else {
-                currentDeck = view.getLstDecks().getSelectedDeck();
+        // Look through list for preferred deck from prefs
+        currentDeck = null;
+        final String cd = qPrefs.getPreference(QPref.CURRENT_DECK);
+        for (Deck d : temp) {
+            if (d.getName().equals(cd)) {
+                currentDeck = d;
+                view.getLstDecks().setSelectedDeck(d);
+                break;
             }
         }
 
+        // Not found? Set first one. Still not found? OK, throw to setCurrentDeckStatus().
+        if (currentDeck == null) { view.getLstDecks().setSelectedIndex(0); }
         view.setCurrentDeckStatus();
     }
 

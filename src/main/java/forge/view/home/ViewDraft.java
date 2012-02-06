@@ -23,13 +23,13 @@ import forge.control.home.ControlDraft;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FButton;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
-import forge.view.toolbox.SubButton;
 
 /** 
  * Assembles swing components for "Draft" mode menu.
@@ -45,7 +45,8 @@ public class ViewDraft extends JPanel {
     private final DeckLister lstHumanDecks;
     private final JTextPane tpnDirections;
     private final JLabel lblDirections;
-    private final JButton btnBuildDeck, btnStart;
+    private final JButton btnStart;
+    private final FLabel btnBuildDeck;
 
     private String[] opponentNames = new String[] {
             "Abigail", "Ada", "Adeline", "Adriana", "Agatha", "Agnes", "Aileen", "Alba", "Alcyon",
@@ -174,7 +175,7 @@ public class ViewDraft extends JPanel {
         lstAI = new FList(ai);
         this.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
 
-        btnBuildDeck = new SubButton("Build A New Deck");
+        btnBuildDeck = new FLabel.Builder().opaque(true).hoverable(true).text("Build A New Deck").build();
         this.add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
 
         lblDirections = new JLabel("Click For Directions");
@@ -244,8 +245,8 @@ public class ViewDraft extends JPanel {
         return lblDirections;
     }
 
-    /** @return JButton */
-    public JButton getBtnBuildDeck() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnBuildDeck() {
         return btnBuildDeck;
     }
 

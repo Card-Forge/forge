@@ -15,7 +15,6 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -43,7 +42,6 @@ import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
-import forge.view.toolbox.SubButton;
 
 /** 
  * Assembles swing components for "Settings" mode menu.
@@ -54,7 +52,7 @@ public class ViewSettings extends JScrollPane {
     private final ControlSettings control;
     private final FSkin skin;
     private final JPanel viewport;
-    private final JButton btnReset;
+    private final FLabel btnReset;
     private HomeTopLevel parentView;
 
     private JList lstChooseSkin;
@@ -200,7 +198,7 @@ public class ViewSettings extends JScrollPane {
         final JLabel lblReset = new SectionLabel(" ");
         viewport.add(lblReset, sectionConstraints);
 
-        btnReset = new SubButton("Reset to defaults");
+        btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to defaults").build();
         viewport.add(btnReset, sectionConstraints);
 
         this.control = new ControlSettings(this);
@@ -467,8 +465,8 @@ public class ViewSettings extends JScrollPane {
         return parentView;
     }
 
-    /** @return {@link forge.view.home.HomeTopLevel} */
-    public JButton getBtnReset() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnReset() {
         return btnReset;
     }
 }

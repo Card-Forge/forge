@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.AllZone;
+import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
@@ -46,6 +47,7 @@ public class ControlSettings {
     }
 
     /** */
+    @SuppressWarnings("serial")
     public void addListeners() {
         this.view.getLstChooseSkin().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -149,9 +151,9 @@ public class ControlSettings {
             }
         });
 
-        this.view.getBtnReset().addActionListener(new ActionListener() {
+        this.view.getBtnReset().setCommand(new Command() {
             @Override
-            public void actionPerformed(final ActionEvent arg0) {
+            public void execute() {
                 Singletons.getModel().getPreferences().reset();
                 view.getParentView().resetSettings();
             }

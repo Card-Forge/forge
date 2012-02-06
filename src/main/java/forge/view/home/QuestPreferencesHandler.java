@@ -59,7 +59,6 @@ public class QuestPreferencesHandler extends JPanel {
         lblErrDifficulty.setForeground(Color.red);
         lblErrBooster.setForeground(Color.red);
         lblErrShop.setForeground(Color.red);
-        lblErrShop.setFontStyle(Font.BOLD);
 
         // Rewards panel
         pnlRewards.setOpaque(false);

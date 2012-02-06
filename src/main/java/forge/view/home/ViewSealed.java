@@ -10,10 +10,10 @@ import forge.Singletons;
 import forge.control.home.ControlSealed;
 import forge.game.GameType;
 import forge.view.toolbox.DeckLister;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
-import forge.view.toolbox.SubButton;
 
 /** 
  * Assembles swing components for "Sealed" mode menu.
@@ -25,7 +25,8 @@ public class ViewSealed extends JPanel {
     private final HomeTopLevel parentView;
     private final ControlSealed control;
     private DeckLister lstHumanDecks;
-    private final JButton btnBuild, btnStart;
+    private final JButton btnStart;
+    private final FLabel btnBuild;
     private final FProgressBar barProgress;
 
     /**
@@ -51,7 +52,7 @@ public class ViewSealed extends JPanel {
         lstHumanDecks = new DeckLister(GameType.Sealed, control.getExitCommand());
 
         // Build button
-        btnBuild = new SubButton("Build A New Deck");
+        btnBuild = new FLabel.Builder().opaque(true).hoverable(true).text("Build A New Deck").build();
 
         // Start button
         btnStart = new StartButton(parentView);
@@ -84,8 +85,8 @@ public class ViewSealed extends JPanel {
         return control;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnBuild() {
+    /** @return {@link forge.view.toolbox.FLabel} */
+    public FLabel getBtnBuild() {
         return btnBuild;
     }
 

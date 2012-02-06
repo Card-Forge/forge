@@ -11262,7 +11262,6 @@ src/main/java/forge/view/toolbox/FScrollPane.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FTextArea.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
-src/main/java/forge/view/toolbox/SubButton.java -text
 src/main/java/forge/view/toolbox/SubTab.java -text
 src/main/java/forge/view/toolbox/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
