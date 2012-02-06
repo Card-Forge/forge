@@ -179,7 +179,7 @@ public abstract class AllZoneUtil {
      */
     public static boolean isCardInPlay(final String cardName) {
         for (Card card : AllZoneUtil.getCardsIn(Zone.Battlefield)) {
-            if (card.getName() == cardName) {
+            if (card.getName().equals(cardName)) {
                 return true;
             }
         }
@@ -197,7 +197,7 @@ public abstract class AllZoneUtil {
      */
     public static boolean isCardInPlay(final String cardName, final Player player) {
         for (Card card : player.getCardsIn(Zone.Battlefield)) {
-            if (card.getName() == cardName) {
+            if (card.getName().equals(cardName)) {
                 return true;
             }
         }
