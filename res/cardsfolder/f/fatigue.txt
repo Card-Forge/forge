@@ -1,6 +1,6 @@
 Name:Fatigue
 ManaCost:1 U
-Types:Instant
+Types:Sorcery
 Text:no text
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip your next draw step. | Permanent$ True | SpellDescription$ Target player skips his or her next draw step.
 SVar:RemAIDeck:True

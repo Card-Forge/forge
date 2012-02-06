@@ -3414,6 +3414,7 @@ res/cardsfolder/g/gift_of_the_woods.txt svneol=native#text/plain
 res/cardsfolder/g/gigadrowse.txt svneol=native#text/plain
 res/cardsfolder/g/gigantomancer.txt svneol=native#text/plain
 res/cardsfolder/g/gigapede.txt svneol=native#text/plain
+res/cardsfolder/g/gilded_light.txt -text
 res/cardsfolder/g/gilded_lotus.txt svneol=native#text/plain
 res/cardsfolder/g/gilder_bairn.txt svneol=native#text/plain
 res/cardsfolder/g/gilt_leaf_ambush.txt -text
@@ -7707,6 +7708,7 @@ res/cardsfolder/s/shinewend.txt svneol=native#text/plain
 res/cardsfolder/s/shinka_gatekeeper.txt svneol=native#text/plain
 res/cardsfolder/s/shinka_the_bloodsoaked_keep.txt svneol=native#text/plain
 res/cardsfolder/s/shirei_shizos_caretaker.txt -text
+res/cardsfolder/s/shisato_whispering_hunter.txt -text
 res/cardsfolder/s/shivan_dragon.txt svneol=native#text/plain
 res/cardsfolder/s/shivan_emissary.txt svneol=native#text/plain
 res/cardsfolder/s/shivan_gorge.txt svneol=native#text/plain
