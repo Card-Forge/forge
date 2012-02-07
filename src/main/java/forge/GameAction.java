@@ -131,7 +131,7 @@ public class GameAction {
             repParams.put("Destination", zone.getZoneType());
 
             if (AllZone.getReplacementHandler().run(repParams)) {
-                if (AllZone.getStack().isResolving(c)) {
+                if (AllZone.getStack().isResolving(c) && !zone.is(Constant.Zone.Graveyard)) {
                     return AllZone.getGameAction().moveToGraveyard(c);
                 }
                 return c;

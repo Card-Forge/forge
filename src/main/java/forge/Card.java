@@ -6687,6 +6687,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (this.getOwner().isPlayer(sourceController)) {
                 return false;
             }
+        } else if (property.startsWith("OwnedBy")) {
+            final String valid = property.substring(8);
+            if (!this.getOwner().isValid(valid, sourceController, source)) {
+                return false;
+            }
         } else if (property.startsWith("OwnerDoesntControl")) {
             if (this.getOwner().isPlayer(this.getController())) {
                 return false;
