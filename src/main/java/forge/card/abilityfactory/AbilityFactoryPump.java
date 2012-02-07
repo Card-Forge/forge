@@ -975,6 +975,12 @@ public class AbilityFactoryPump {
     } // pumpResolve()
 
     private void applyPump(final SpellAbility sa, final Card applyTo) {
+
+        //if host is not on the battlefield don't apply
+        if (this.params.containsKey("UntilLoseControlOfHost")
+                && !AllZoneUtil.isCardInPlay(sa.getSourceCard())) {
+            return;
+        }
         final int a = this.getNumAttack(sa);
         final int d = this.getNumDefense(sa);
 
