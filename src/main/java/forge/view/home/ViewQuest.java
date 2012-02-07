@@ -208,7 +208,7 @@ public class ViewQuest extends JScrollPane {
         pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
 
-        pnlTitle.add(lblTitle, "w 98%!, h 70%!, gap 0 0 15%! 15%!");
+        pnlTitle.add(lblTitle, "w 78%!, h 80%!, gap 0 0 15%! 15%!");
     }
 
     /** Layout permanent parts of stats panel. */
