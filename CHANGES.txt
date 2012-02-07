@@ -72,6 +72,30 @@ Fixes/Features:
 - Fixed display bug in title bar of sealed/draft.
 - Updated quest deck lister to recall previous deck if exists.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Renamed the button "Build A New Deck" to "Start A New Draft" in draft mode.
+- Updated and added some SVars.
+- Enforced singleton pattern in FSkin.
+- Converted FSkin to static factory.
+- Updated all uses of FSkin as appropriate.
+- Removed all extra references/storages to FSkin.
+- Puresteel Paladin filename fix
+- Small spelling fix
+- "DamageDone" replacement effects can now have the parameter "PreventionEffect$ True" to mark them as damage prevention effects.
+- Fixed Vigor.
+- Converted Phyrexian Hydra to script.
+- Converted Purity to script.
+- Update Maven plugins, checkstyle, Add namespace javadocs
+- Fixed mana pool bug.
+- Removed old splash image from DA skin.
+- Removing all references to Mind's Desire
+- Adjusted the settings in ViewQuest.PopulateTitle(). The title label is no longer cut off on Mac OS X.
+- Added support for "Any" counter and RememberRemoved in RemoveCounter.
+- convert Glint Hawk ETB to scripted trigger
+- Added and updated some SVars.
+- Added "Optional" parameter to AF Sacrifice.
+- Fixed Rathi Dragon.
+- Converted Samurai of the Pale Curtain to use the Replacement system.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -104,6 +128,23 @@ Fatigue
 Brine Elemental
 Gilded Light
 Shisato, Whispering Hunter
+Curse of Echoes
+Voyager Staff
+Dungeon Geists
+Rathi Dragon
+Ferropede
+Hex Parasite
+Medicine Runner
+Spinal Parasite
+Jace's Archivist
+Increasing Vengeance
+Mold Demon
+Primeval Force
+Plant Elemental
+Rogue Elephant
+Scythe Tiger
+Vulshok War Boar
+Drake Familiar
 
 
 end
