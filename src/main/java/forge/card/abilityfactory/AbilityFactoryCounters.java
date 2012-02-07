@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 import forge.AllZone;
@@ -844,14 +845,25 @@ public class AbilityFactoryCounters {
             sb.append(" ");
         }
 
-        final Counters cType = Counters.valueOf(params.get("CounterType"));
+        final String counterName = params.get("CounterType");
+
         final int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
         sb.append("Remove ");
         if (params.containsKey("UpTo")) {
             sb.append("up to ");
         }
-        sb.append(amount).append(" ").append(cType.getName()).append(" counter");
+        if ("Any".matches(counterName)) {
+            if (amount == 1) {
+                sb.append("a counter");
+            }
+            else {
+                sb.append(amount).append(" ").append(" counter");
+            }
+        }
+        else {
+            sb.append(amount).append(" ").append(Counters.valueOf(counterName).getName()).append(" counter");
+        }
         if (amount != 1) {
             sb.append("s");
         }
@@ -937,12 +949,14 @@ public class AbilityFactoryCounters {
 
         // currently, not targeted
 
-        // Placeholder: No targeting necessary
-        final int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
-        // each counter on the card is a 10% chance of not activating this
-        // ability.
-        if (r.nextFloat() < (.1 * currCounters)) {
-            return false;
+        if (!type.matches("Any")) {
+            // Placeholder: No targeting necessary
+            final int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
+            // each counter on the card is a 10% chance of not activating this
+            // ability.
+            if (r.nextFloat() < (.1 * currCounters)) {
+                return false;
+            }
         }
 
         final AbilitySub subAb = sa.getSubAbility();
@@ -1061,22 +1075,94 @@ public class AbilityFactoryCounters {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
 
+        boolean rememberRemoved = false;
+        if (params.containsKey("RememberRemoved")) {
+            rememberRemoved = true;
+        }
         for (final Card tgtCard : tgtCards) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final PlayerZone zone = AllZone.getZoneOf(tgtCard);
 
-                if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile)) {
-                    if (params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
-                        final ArrayList<String> choices = new ArrayList<String>();
-                        for (int i = 0; i <= counterAmount; i++) {
-                            choices.add("" + i);
+                if (type.matches("Any")) {
+                    while (counterAmount > 0 && tgtCard.getNumberOfCounters() > 0) {
+                        final Map<Counters, Integer> tgtCounters = tgtCard.getCounters();
+                        Counters chosenType = null;
+                        int chosenAmount;
+                        if (sa.getActivatingPlayer().isHuman()) {
+                            final ArrayList<String> choices = new ArrayList<String>();
+                            final ArrayList<Object> typeChoices = new ArrayList<Object>();
+                            // get types of counters
+                            Object o;
+                            for (Object key : tgtCounters.keySet().toArray()) {
+                                if (tgtCounters.get(key) > 0) {
+                                    typeChoices.add(key);
+                                }
+                            }
+                            if (typeChoices.size() > 1) {
+                                String prompt = "Select type counters to remove";
+                                o = GuiUtils.getChoice(prompt, typeChoices.toArray());
+                            }
+                            else {
+                                o = typeChoices.get(0);
+                            }
+                            chosenType = (Counters) o;
+                            chosenAmount = tgtCounters.get(chosenType);
+                            if (chosenAmount > counterAmount) {
+                                chosenAmount = counterAmount;
+                            }
+                            // make list of amount choices
+                            if (chosenAmount > 1) {
+                                for (int i = 1; i <= chosenAmount; i++) {
+                                    choices.add("" + i);
+                                }
+                                String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
+                                o = GuiUtils.getChoice(prompt, choices.toArray());
+                                chosenAmount = Integer.parseInt((String) o);
+                            }
                         }
-                        final String prompt = "Select the number of " + type + " counters to remove";
-                        final Object o = GuiUtils.getChoice(prompt, choices.toArray());
-                        counterAmount = Integer.parseInt((String) o);
+                        else {
+                            // TODO: ArsenalNut (06 Feb 12) - computer needs better logic to pick a counter type and probably an initial target
+                            // find first nonzero counter on target
+                            for (Object key : tgtCounters.keySet().toArray()) {
+                                if (tgtCounters.get(key) > 0) {
+                                    chosenType = (Counters) key;
+                                    break;
+                                }
+                            }
+                            // subtract all of selected type
+                            chosenAmount = tgtCounters.get((Object) chosenType);
+                            if (chosenAmount > counterAmount) {
+                                chosenAmount = counterAmount;
+                            }
+                        }
+                        tgtCard.subtractCounter(chosenType, chosenAmount);
+                        if (rememberRemoved) {
+                            for (int i = 0; i < chosenAmount; i++) {
+                                card.addRemembered(chosenType);
+                            }
+                        }
+                        counterAmount -= chosenAmount;
                     }
                 }
-                tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
+                else {
+                    if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile)) {
+                        if (params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
+                            final ArrayList<String> choices = new ArrayList<String>();
+                            for (int i = 0; i <= counterAmount; i++) {
+                                choices.add("" + i);
+                            }
+                            final String prompt = "Select the number of " + type + " counters to remove";
+                            final Object o = GuiUtils.getChoice(prompt, choices.toArray());
+                            counterAmount = Integer.parseInt((String) o);
+                        }
+                    }
+                    tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
+                    if (rememberRemoved) {
+                        for (int i = 0; i < counterAmount; i++) {
+                            card.addRemembered(Counters.valueOf(type));
+                        }
+                    }
+                }
             }
         }
     }

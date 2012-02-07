@@ -2764,6 +2764,10 @@ public class CardFactoryUtil {
             return list.getTotalCreaturePower();
         }
 
+        if (l[0].contains("RememberedSize")) {
+            return c.getRemembered().size();
+        }
+
         final String[] sq;
         sq = l[0].split("\\.");
 
