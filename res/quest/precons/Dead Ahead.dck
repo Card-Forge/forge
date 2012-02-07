@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dead Ahead
+Description=When the seething rage of Jund and the necromancy of Grixis come together, the result is a fearless, fiery assault. Hurl both fire and minions directly at your enemies' eyeballs as you cut down creatures and life totals with your death magic.
+Deck Type=constructed
+Set=ARB
+Image=dead_ahead.jpg
+[main]
+2 Igneous Pouncer|ARB
+2 Terminate|ARB
+1 Leonin Scimitar|10E
+1 Bituminous Blast|ARB
+1 Dreg Reaver|ALA
+2 Sanity Gnawers|ARB
+1 Cruel Edict|10E
+1 Breath of Malfegor|ARB
+1 Viashino Skeleton|ALA
+1 Lightning Reaver|ARB
+1 Blightning|ALA
+1 Monstrous Carabid|ARB
+1 Deathbringer Thoctar|ARB
+1 Singe-Mind Ogre|ARB
+1 Bog Wraith|10E
+1 Blister Beetle|ALA
+1 Blood Cultist|ALA
+2 Dregscape Zombie|ALA
+1 Viscera Dragger|ALA
+8 Mountain|ALA
+8 Swamp|ALA
+2 Terramorphic Expanse|10E
+[sideboard]
