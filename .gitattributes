@@ -2082,6 +2082,7 @@ res/cardsfolder/d/demons_herald.txt -text
 res/cardsfolder/d/demons_horn.txt svneol=native#text/plain
 res/cardsfolder/d/demons_jester.txt svneol=native#text/plain
 res/cardsfolder/d/demonspine_whip.txt svneol=native#text/plain
+res/cardsfolder/d/demoralize.txt -text svneol=unset#text/plain
 res/cardsfolder/d/demystify.txt svneol=native#text/plain
 res/cardsfolder/d/denizen_of_the_deep.txt svneol=native#text/plain
 res/cardsfolder/d/dense_canopy.txt svneol=native#text/plain
