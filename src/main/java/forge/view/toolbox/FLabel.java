@@ -234,7 +234,7 @@ public class FLabel extends JLabel {
         public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
         @Override
         public void mouseClicked(MouseEvent e) {
-            cmdClick.execute();
+            if (cmdClick != null) { cmdClick.execute(); }
             if (!selectable) { return; }
             if (selected) { setSelected(false); }
             else { setSelected(true); }
