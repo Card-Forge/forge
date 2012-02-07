@@ -206,20 +206,19 @@ public class GameAction {
             AllZone.getTriggerHandler().clearSuppression("ChangesZone");
         }
 
-        /*
-         * if (!(c.isToken() || suppress || zone.is(Constant.Zone.Battlefield))
-         * && !zone.is(Constant.Zone.Battlefield)) copied =
-         * AllZone.getCardFactory().copyCard(copied);
-         */
         // remove all counters from the card if destination is not the
         // battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
         if (!zone.is(Constant.Zone.Battlefield)) {
+            // remove all counters from the card if destination is not the battlefield
+            // UNLESS we're dealing with Skullbriar, the Walking Grave
             if (!(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone
                     .is(Constant.Zone.Library))) {
                 copied.clearCounters();
             }
+            AllZone.getTriggerHandler().suppressMode("Transformed");
             copied.setState("Original");
+            AllZone.getTriggerHandler().clearSuppression("Transformed");
         }
 
         copied.setTimestamp(AllZone.getNextTimestamp());
