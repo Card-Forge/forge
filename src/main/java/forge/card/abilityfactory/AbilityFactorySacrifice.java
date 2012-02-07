@@ -484,7 +484,8 @@ public class AbilityFactorySacrifice {
                 if (p.isComputer()) {
                     sacList = AbilityFactorySacrifice.sacrificeAI(p, amount, valid, sa, destroy);
                 } else {
-                    sacList = AbilityFactorySacrifice.sacrificeHuman(p, amount, valid, sa, destroy);
+                    sacList = AbilityFactorySacrifice.sacrificeHuman(p, amount, valid, sa, destroy,
+                            params.containsKey("Optional"));
                 }
                 if (remSacrificed) {
                     for (int i = 0; i < sacList.size(); i++) {
@@ -538,7 +539,7 @@ public class AbilityFactorySacrifice {
      *            a {@link java.lang.String} object.
      */
     private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
-            final boolean destroy) {
+            final boolean destroy, final boolean optional) {
         CardList saccedList = new CardList();
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -548,7 +549,11 @@ public class AbilityFactorySacrifice {
                 break;
             }
             Object o;
-            o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
+            if (optional) {
+                o = GuiUtils.getChoiceOptional("Select a card to sacrifice", list.toArray());
+            } else {
+                o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
+            }
             if (o != null) {
                 final Card c = (Card) o;
 
@@ -563,6 +568,8 @@ public class AbilityFactorySacrifice {
                 }
 
                 list.remove(c);
+            } else {
+                return saccedList;
             }
         }
         return saccedList;
