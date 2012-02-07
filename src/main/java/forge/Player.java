@@ -618,7 +618,7 @@ public abstract class Player extends GameEntity {
         if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) {
             return 0;
         }
-        
+
         // Prevent Damage static abilities
         final CardList allp = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (final Card ca : allp) {
