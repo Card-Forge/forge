@@ -1,10 +1,14 @@
 Name:Glint Hawk
 ManaCost:W
 Types:Creature Bird
-Text:When CARDNAME enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
+Text:no text
 PT:2/2
 K:Flying
-#TODO - ETB trigger is hard-coded
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Artifact.YouCtrl | RememberChanged$ True | SubAbility$ DBSac 
+SVar:DBSac:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk.jpg

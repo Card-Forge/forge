@@ -2410,6 +2410,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
+        /*
         else if (cardName.equals("Glint Hawk")) {
 
             final SpellAbility sacOrNo = new Ability(card, "") {
@@ -2465,6 +2466,7 @@ public class CardFactoryCreatures {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
         } // *************** END ************ END **************************
+        */
 
         // *************** START *********** START **************************
 
