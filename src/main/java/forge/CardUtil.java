@@ -912,16 +912,19 @@ public final class CardUtil {
      * 
      * @param c
      *            a Card.
-     * @param state
-     *            a String object
      * @return a copy of C with LastKnownInfo stuff retained.
      */
-    public static Card getLKICopy(final Card c, final String state) {
+    public static Card getLKICopy(final Card c) {
         if (c.isToken()) {
             return c;
         }
-        final Card res = AllZone.getCardFactory().copyCard(c);
+        final String state = c.getCurState();
         AllZone.getTriggerHandler().suppressMode("Transformed");
+        if (c.isInAlternateState()) {
+            c.setState("Original");
+        }
+        final Card res = AllZone.getCardFactory().copyCard(c);
+        c.setState(state);
         res.setState(state);
         AllZone.getTriggerHandler().clearSuppression("Transformed");
         res.setControllerObjects(c.getControllerObjects());

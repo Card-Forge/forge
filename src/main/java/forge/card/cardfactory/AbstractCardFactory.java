@@ -181,14 +181,17 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
      */
     @Override
     public final Card copyCard(final Card in) {
+        final String curState = in.getCurState();
+        AllZone.getTriggerHandler().suppressMode("Transformed");
+        if (in.isInAlternateState()) {
+            in.setState("Original");
+        }
         final Card out = this.getCard(in.getName(), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
         out.setCurSetCode(in.getCurSetCode());
 
         CardFactoryUtil.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
-            AllZone.getTriggerHandler().suppressMode("Transformed");
-            final String curState = in.getCurState();
             for (final String state : in.getStates()) {
                 in.setState(state);
                 out.setState(state);
@@ -196,9 +199,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             }
             in.setState(curState);
             out.setState(curState);
-
-            AllZone.getTriggerHandler().clearSuppression("Transformed");
         }
+        AllZone.getTriggerHandler().clearSuppression("Transformed");
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());

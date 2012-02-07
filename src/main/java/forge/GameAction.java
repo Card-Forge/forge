@@ -149,18 +149,14 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
-            final String state = c.getCurState();
             AllZone.getTriggerHandler().suppressMode("Transformed");
-            if (c.isInAlternateState()) {
-                c.setState("Original");
-            }
             if (c.isCloned()) {
                 c.switchStates("Cloner", "Original");
                 c.setState("Original");
             }
             AllZone.getTriggerHandler().clearSuppression("Transformed");
 
-            lastKnownInfo = CardUtil.getLKICopy(c, state);
+            lastKnownInfo = CardUtil.getLKICopy(c);
             copied = AllZone.getCardFactory().copyCard(c);
 
             copied.setUnearthed(c.isUnearthed());
@@ -218,10 +214,12 @@ public class GameAction {
         // remove all counters from the card if destination is not the
         // battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (!zone.is(Constant.Zone.Battlefield)
-                && !(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone
-                        .is(Constant.Zone.Library))) {
-            copied.clearCounters();
+        if (!zone.is(Constant.Zone.Battlefield)) {
+            if (!(c.getName().equals("Skullbriar, the Walking Grave") && !zone.is(Constant.Zone.Hand) && !zone
+                    .is(Constant.Zone.Library))) {
+                copied.clearCounters();
+            }
+            copied.setState("Original");
         }
 
         copied.setTimestamp(AllZone.getNextTimestamp());
