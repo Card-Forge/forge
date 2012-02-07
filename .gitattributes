@@ -6893,6 +6893,7 @@ res/cardsfolder/r/reality_anchor.txt svneol=native#text/plain
 res/cardsfolder/r/reality_ripple.txt -text
 res/cardsfolder/r/reality_spasm.txt svneol=native#text/plain
 res/cardsfolder/r/reality_strobe.txt svneol=native#text/plain
+res/cardsfolder/r/realm_razer.txt -text svneol=unset#text/plain
 res/cardsfolder/r/reanimate.txt svneol=native#text/plain
 res/cardsfolder/r/reap_and_sow.txt svneol=native#text/plain
 res/cardsfolder/r/reap_the_seagraf.txt -text
