@@ -10,7 +10,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Forest.YouCtrl
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plant_elemental.jpg
+SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/plant_elemental.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/107.jpg
 Oracle:When Plant Elemental enters the battlefield, sacrifice it unless you sacrifice a Forest.
 End
