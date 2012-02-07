@@ -5574,6 +5574,7 @@ res/cardsfolder/m/mogg_toady.txt -text
 res/cardsfolder/m/mogg_war_marshal.txt svneol=native#text/plain
 res/cardsfolder/m/moggcatcher.txt svneol=native#text/plain
 res/cardsfolder/m/mold_adder.txt svneol=native#text/plain
+res/cardsfolder/m/mold_demon.txt -text
 res/cardsfolder/m/mold_shambler.txt svneol=native#text/plain
 res/cardsfolder/m/molder.txt svneol=native#text/plain
 res/cardsfolder/m/molder_beast.txt svneol=native#text/plain
@@ -6572,6 +6573,7 @@ res/cardsfolder/p/primal_plasma.txt svneol=native#text/plain
 res/cardsfolder/p/primal_rage.txt svneol=native#text/plain
 res/cardsfolder/p/primal_whisperer.txt svneol=native#text/plain
 res/cardsfolder/p/primalcrux.txt svneol=native#text/plain
+res/cardsfolder/p/primeval_force.txt -text
 res/cardsfolder/p/primeval_light.txt -text
 res/cardsfolder/p/primeval_shambler.txt svneol=native#text/plain
 res/cardsfolder/p/primeval_titan.txt svneol=native#text/plain
