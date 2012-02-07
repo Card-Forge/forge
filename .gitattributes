@@ -2294,6 +2294,7 @@ res/cardsfolder/d/dragonspeaker_shaman.txt svneol=native#text/plain
 res/cardsfolder/d/dragonstalker.txt svneol=native#text/plain
 res/cardsfolder/d/dragonstorm.txt svneol=native#text/plain
 res/cardsfolder/d/drain_the_well.txt svneol=native#text/plain
+res/cardsfolder/d/drake_familiar.txt -text
 res/cardsfolder/d/drake_hatchling.txt svneol=native#text/plain
 res/cardsfolder/d/drake_skull_cameo.txt svneol=native#text/plain
 res/cardsfolder/d/drake_umbra.txt svneol=native#text/plain
