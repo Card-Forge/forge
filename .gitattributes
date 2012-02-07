@@ -4413,6 +4413,7 @@ res/cardsfolder/j/jabaris_influence.txt -text
 res/cardsfolder/j/jace_beleren.txt svneol=native#text/plain
 res/cardsfolder/j/jace_memory_adept.txt svneol=native#text/plain
 res/cardsfolder/j/jace_the_mind_sculptor.txt svneol=native#text/plain
+res/cardsfolder/j/jaces_archivist.txt -text
 res/cardsfolder/j/jaces_erasure.txt svneol=native#text/plain
 res/cardsfolder/j/jaces_ingenuity.txt svneol=native#text/plain
 res/cardsfolder/j/jackal_pup.txt svneol=native#text/plain
