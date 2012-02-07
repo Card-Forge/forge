@@ -11034,6 +11034,7 @@ src/main/java/forge/card/trigger/TriggerAttacks.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerBecomesTarget.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerBlocks.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerChampioned.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerChangesController.java -text
 src/main/java/forge/card/trigger/TriggerChangesZone.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerClashed.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerCounterAdded.java svneol=native#text/plain

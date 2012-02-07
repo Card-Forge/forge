@@ -219,6 +219,8 @@ public class TriggerHandler {
             ret = new TriggerBlocks(mapParams, host, intrinsic);
         } else if (mode.equals("Championed")) {
             ret = new TriggerChampioned(mapParams, host, intrinsic);
+        } else if (mode.equals("ChangesController")) {
+            ret = new TriggerChangesController(mapParams, host, intrinsic);
         } else if (mode.equals("ChangesZone")) {
             ret = new TriggerChangesZone(mapParams, host, intrinsic);
         } else if (mode.equals("Clashed")) {

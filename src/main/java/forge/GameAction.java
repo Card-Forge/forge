@@ -363,6 +363,10 @@ public class GameAction {
 
         c.setTurnInZone(tiz);
 
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Card", c);
+        AllZone.getTriggerHandler().runTrigger("ChangesController", runParams);
+
         AllZone.getTriggerHandler().clearSuppression("ChangesZone");
         ((PlayerZoneComesIntoPlay) AllZone.getHumanPlayer().getZone(Zone.Battlefield)).setTriggers(true);
         ((PlayerZoneComesIntoPlay) AllZone.getComputerPlayer().getZone(Zone.Battlefield)).setTriggers(true);
