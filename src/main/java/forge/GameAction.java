@@ -18,7 +18,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -1832,27 +1831,6 @@ public class GameAction {
     // local enchantments are always attached to something
     // if Card is "Equipment", returns true if attached to something
 
-    /**
-     * <p>
-     * isAttachee.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean isAttacheeByMindsDesire(final Card c) {
-        final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
-
-        for (int i = 0; i < list.size(); i++) {
-            final Card[] cc = list.getCard(i).getAttachedCardsByMindsDesire();
-            if (Arrays.binarySearch(cc, c) >= 0) {
-                return true;
-            }
-        }
-
-        return false;
-    } // isAttached(Card c)
 
     /**
      * <p>

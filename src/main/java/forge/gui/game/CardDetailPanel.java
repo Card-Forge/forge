@@ -452,19 +452,6 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             area.append("Must block an attacker");
         }
 
-        if (card.hasAttachedCardsByMindsDesire()) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            final Card[] cards = card.getAttachedCardsByMindsDesire();
-            area.append("=Attached: ");
-            for (final Card c : cards) {
-                area.append(c.getName());
-                area.append(" ");
-            }
-            area.append("=");
-        }
-
         this.cdArea.setText(area.toString());
     }
 

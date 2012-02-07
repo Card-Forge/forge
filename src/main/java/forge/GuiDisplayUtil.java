@@ -287,8 +287,7 @@ public final class GuiDisplayUtil {
         final ArrayList<Card> a = new ArrayList<Card>();
         for (int i = 0; i < c.length; i++) {
             if (((!(c[i].isCreature() || c[i].isEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker()) || (c[i]
-                    .isLand() && c[i].isArtifact() && !c[i].isCreature() && !c[i].isEnchantment())) && !AllZone
-                    .getGameAction().isAttacheeByMindsDesire(c[i]))
+                    .isLand() && c[i].isArtifact() && !c[i].isCreature() && !c[i].isEnchantment())))
                     || (c[i].getName().startsWith("Mox") && !c[i].getName().equals("Mox Diamond"))) {
                 a.add(c[i]);
             }

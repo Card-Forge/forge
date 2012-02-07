@@ -335,7 +335,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Hidden keywords won't be displayed on the card
     private final ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
     private ArrayList<String> prevIntrinsicKeyword = new ArrayList<String>();
-    private final ArrayList<Card> attachedByMindsDesire = new ArrayList<Card>();
+
     // which equipment cards are equipping this card?
     private ArrayList<Card> equippedBy = new ArrayList<Card>();
     // equipping size will always be 0 or 1
@@ -4285,58 +4285,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             gameEntity.removeEnchantedBy(this);
         }
     }
-
-    // array size might equal 0, will NEVER be null
-    /**
-     * <p>
-     * getAttachedCards.
-     * </p>
-     * 
-     * @return an array of {@link forge.Card} objects.
-     */
-    public final Card[] getAttachedCardsByMindsDesire() {
-        final Card[] c = new Card[this.attachedByMindsDesire.size()];
-        this.attachedByMindsDesire.toArray(c);
-        return c;
-    }
-
-    /**
-     * <p>
-     * hasAttachedCards.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasAttachedCardsByMindsDesire() {
-        return this.getAttachedCardsByMindsDesire().length != 0;
-    }
-
-    /**
-     * <p>
-     * attachCard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void attachCardByMindsDesire(final Card c) {
-        this.attachedByMindsDesire.add(c);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * unattachCard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void unattachCardByMindDesire(final Card c) {
-        this.attachedByMindsDesire.remove(c);
-        this.updateObservers();
-    }
-
     /**
      * <p>
      * Setter for the field <code>type</code>.
