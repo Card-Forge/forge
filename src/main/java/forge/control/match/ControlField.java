@@ -376,7 +376,21 @@ public class ControlField {
                     } .actionPerformed(null);
                 } else {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Graveyard),
-                            NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK).actionPerformed(null);
+                            NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK) {
+
+                        private static final long serialVersionUID = 8120331222693706164L;
+
+                        @Override
+                        protected Iterable<Card> getCardsAsIterable() {
+                            return new ImmutableIterableFrom<Card>(CardFactoryUtil.getExternalZoneActivationCards(AllZone
+                                    .getComputerPlayer()));
+                        }
+
+                        @Override
+                        protected void doAction(final Card c) {
+                            AllZone.getGameAction().playCard(c);
+                        }
+                    } .actionPerformed(null);
                 }
             }
         };
