@@ -6913,7 +6913,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("wasDealtDamageByHostThisTurn")) {
-            if(!this.getReceivedDamageFromThisTurn().keySet().contains(source)) {
+            if (!this.getReceivedDamageFromThisTurn().keySet().contains(source)) {
                 return false;
             }
         } else if (property.startsWith("attackedThisTurn")) {
