@@ -96,6 +96,21 @@ Fixes/Features:
 - Fixed Rathi Dragon.
 - Converted Samurai of the Pale Curtain to use the Replacement system.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a new trigger: "ChangesController".
+- CheckStyle.
+- Added the precon Dead Ahead.
+- Fixed token image references.
+- Fixed double faced cards changing zones getting transformed before triggers are called (fixed Loyal Cathar).
+- Changed and corrected the LQ pic URL for Puresteel Paladin and Plant Elemental.
+- Converted Feed the Pack to a script that uses LKI copies.
+- Fix for Dungeon Geists being removed from the battlefield while the trigger is on the stack.
+- Updated zone action listener for computer's flashback area.
+- Adding DKA Human token to thraben_doomsayer.txt
+- Added resetTargets() to gainControlTgtAI.
+- Fixed Veiled Sentry.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -145,6 +160,12 @@ Rogue Elephant
 Scythe Tiger
 Vulshok War Boar
 Drake Familiar
+Wheel of Sun and Moon
+Aegis Angel
+Immortal Coil
+Demoralize
+Heartbeat of Spring
+Realm Razer
 
 
 end
