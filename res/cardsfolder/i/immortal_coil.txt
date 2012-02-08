@@ -8,6 +8,7 @@ SVar:ChangeZone:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Mandatory$ True | Chan
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.YouCtrl | PresentZone$ Graveyard | PresentCompare$ EQ0 | Execute$ TrigLoseGame | TriggerDescription$ When there are no cards in your graveyard, you lose the game.
 SVar:TrigLoseGame:AB$ LosesGame | Cost$ 0 | Defined$ You
 SVar:X:ReplaceCount$DamageAmount
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immortal_coil.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/79.jpg

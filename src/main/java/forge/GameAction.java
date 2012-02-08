@@ -863,6 +863,8 @@ public class GameAction {
             final Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
+
+        GameActionUtil.getStLandManaAbilities().execute();
     }
 
     /**
@@ -1027,8 +1029,6 @@ public class GameAction {
 
         this.destroyLegendaryCreatures();
         this.destroyPlaneswalkers();
-
-        GameActionUtil.getStLandManaAbilities().execute();
 
         if (!refreeze) {
             AllZone.getStack().unfreezeStack();
