@@ -4400,6 +4400,7 @@ res/cardsfolder/i/ith_high_arcanist.txt svneol=native#text/plain
 res/cardsfolder/i/ivory_charm.txt -text
 res/cardsfolder/i/ivory_crane_netsuke.txt svneol=native#text/plain
 res/cardsfolder/i/ivory_cup.txt svneol=native#text/plain
+res/cardsfolder/i/ivory_gargoyle.txt -text svneol=unset#text/plain
 res/cardsfolder/i/ivory_giant.txt svneol=native#text/plain
 res/cardsfolder/i/ivory_guardians.txt svneol=native#text/plain
 res/cardsfolder/i/ivory_mask.txt -text
