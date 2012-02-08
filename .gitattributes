@@ -3262,6 +3262,7 @@ res/cardsfolder/f/fyndhorn_pollen.txt svneol=native#text/plain
 res/cardsfolder/g/gaddock_teeg.txt svneol=native#text/plain
 res/cardsfolder/g/gaeas_anthem.txt svneol=native#text/plain
 res/cardsfolder/g/gaeas_avenger.txt svneol=native#text/plain
+res/cardsfolder/g/gaeas_balance.txt -text svneol=unset#text/plain
 res/cardsfolder/g/gaeas_bounty.txt svneol=native#text/plain
 res/cardsfolder/g/gaeas_cradle.txt svneol=native#text/plain
 res/cardsfolder/g/gaeas_embrace.txt svneol=native#text/plain
