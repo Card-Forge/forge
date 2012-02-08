@@ -8,4 +8,6 @@ SVar:KWPump2:Mode$ Continuous | Affected$ Creature | AddKeyword$ CARDNAME can't 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demoralize.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/184.jpg
+Oracle:Each creature can't be blocked this turn except by two or more creatures.\nThreshold - If seven or more cards are in your graveyard, creatures can't block this turn.
 End
