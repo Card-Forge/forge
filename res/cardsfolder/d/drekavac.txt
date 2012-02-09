@@ -1,8 +1,13 @@
 Name:Drekavac
 ManaCost:1 B
 Types:Creature Beast
-Text:When CARDNAME enters the battlefield, sacrifice it unless you discard a noncreature card.
+Text:
 PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a noncreature card.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | DiscardValid$ Card.nonCreature | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacSelf
+SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111258.jpg
