@@ -12,4 +12,4 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_discord.jpg
-ard.End
+End
