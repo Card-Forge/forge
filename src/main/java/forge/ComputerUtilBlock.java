@@ -339,7 +339,7 @@ public class ComputerUtilBlock {
                 killingBlockers = ComputerUtilBlock.getKillingBlockers(attacker, safeBlockers, combat);
                 if (killingBlockers.size() > 0) {
                     blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
-                } else {
+                } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                     blocker = CardFactoryUtil.getWorstCreatureAI(safeBlockers);
                     ComputerUtilBlock.getBlockedButUnkilled().add(attacker);
                 }
@@ -548,7 +548,8 @@ public class ComputerUtilBlock {
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
-            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
+            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
+                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                 continue;
             }
 
@@ -594,8 +595,9 @@ public class ComputerUtilBlock {
 
         for (final Card attacker : tramplingAttackers) {
 
-            if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
-                    && !combat.isBlocked(attacker)) {
+            if ((attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
+                    && !combat.isBlocked(attacker))
+                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                 continue;
             }
 

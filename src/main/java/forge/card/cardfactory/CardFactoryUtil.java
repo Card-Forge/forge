@@ -445,6 +445,9 @@ public class CardFactoryUtil {
         if (c.hasKeyword("Unblockable")) {
             value += power * 10;
         }
+        if (c.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+            value += power * 6;
+        }
         if (c.hasKeyword("Fear")) {
             value += power * 6;
         }
