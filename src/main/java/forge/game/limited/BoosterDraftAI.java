@@ -507,36 +507,36 @@ public class BoosterDraftAI {
             }
         }
 
-        if (landsNeeded > 0) {
-            // attempt to optimize basic land counts according
-            // to color representation
+        // attempt to optimize basic land counts according
+        // to color representation
 
-            final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
-                    new CCnt("Mountain", 0), new CCnt("Forest", 0) };
+        final CCnt[] clrCnts = { new CCnt("Plains", 0), new CCnt("Island", 0), new CCnt("Swamp", 0),
+                new CCnt("Mountain", 0), new CCnt("Forest", 0) };
 
-            // count each card color using mana costs
-            // TODO: count hybrid mana differently?
-            for (i = 0; i < outList.size(); i++) {
-                final String mc = outList.get(i).getManaCost();
+        // count each card color using mana costs
+        // TODO: count hybrid mana differently?
+        for (i = 0; i < outList.size(); i++) {
+            final String mc = outList.get(i).getManaCost();
 
-                // count each mana symbol in the mana cost
-                for (int j = 0; j < mc.length(); j++) {
-                    final char c = mc.charAt(j);
+            // count each mana symbol in the mana cost
+            for (int j = 0; j < mc.length(); j++) {
+                final char c = mc.charAt(j);
 
-                    if (c == 'W') {
-                        clrCnts[0].setCount(clrCnts[0].getCount() + 1);
-                    } else if (c == 'U') {
-                        clrCnts[1].setCount(clrCnts[1].getCount() + 1);
-                    } else if (c == 'B') {
-                        clrCnts[2].setCount(clrCnts[2].getCount() + 1);
-                    } else if (c == 'R') {
-                        clrCnts[3].setCount(clrCnts[3].getCount() + 1);
-                    } else if (c == 'G') {
-                        clrCnts[4].setCount(clrCnts[4].getCount() + 1);
-                    }
+                if (c == 'W') {
+                    clrCnts[0].setCount(clrCnts[0].getCount() + 1);
+                } else if (c == 'U') {
+                    clrCnts[1].setCount(clrCnts[1].getCount() + 1);
+                } else if (c == 'B') {
+                    clrCnts[2].setCount(clrCnts[2].getCount() + 1);
+                } else if (c == 'R') {
+                    clrCnts[3].setCount(clrCnts[3].getCount() + 1);
+                } else if (c == 'G') {
+                    clrCnts[4].setCount(clrCnts[4].getCount() + 1);
                 }
             }
-
+        }
+        
+        if (landsNeeded > 0) {
             // total of all ClrCnts
             int totalColor = 0;
             for (i = 0; i < 5; i++) {
@@ -596,9 +596,26 @@ public class BoosterDraftAI {
         }
 
         while (outList.size() < 40) {
-            final Card c = aiPlayables.get(MyRandom.getRandom().nextInt(aiPlayables.size() - 1));
-            outList.add(c);
-            aiPlayables.remove(c);
+            if (aiPlayables.size() > 1) {
+                final Card c = aiPlayables.get(MyRandom.getRandom().nextInt(aiPlayables.size() - 1));
+                outList.add(c);
+                aiPlayables.remove(c);
+            } else if (aiPlayables.size() == 1) {
+                final Card c = aiPlayables.get(0);
+                outList.add(c);
+                aiPlayables.remove(c);
+            } else {           
+                //if no playable cards remain fill up with basic lands
+                for (i = 0; i < 5; i++) {
+                    if (clrCnts[i].getCount() > 0) {
+                        final Card c = AllZone.getCardFactory().getCard(clrCnts[i].getColor(),
+                                AllZone.getComputerPlayer());
+                        c.setCurSetCode(IBoosterDraft.LAND_SET_CODE[0]);
+                        outList.add(c);
+                        break;
+                    }
+                }
+            }
         }
         if (outList.size() == 40) {
             out.getMain().add(outList);
