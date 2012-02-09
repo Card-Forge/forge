@@ -1,0 +1,15 @@
+Name:Avatar of Discord
+ManaCost:BR BR BR
+Types:Creature Avatar
+Text:no text
+PT:5/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard two cards.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 2 | DiscardValid$ Card | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacSelf
+SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_discord.jpg
+ard.End
