@@ -210,6 +210,57 @@ public class PhaseUtil {
 
     /**
      * <p>
+     * handleCombatBegin.
+     * </p>
+     */
+    public static void handleCombatBegin() {
+        final Player playerTurn = AllZone.getPhaseHandler().getPlayerTurn();
+
+        if (PhaseUtil.skipCombat(playerTurn)) {
+            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            return;
+        }
+    }
+
+    /**
+     * <p>
+     * handleCombatDeclareAttackers.
+     * </p>
+     */
+    public static void handleCombatDeclareAttackers() {
+        final Player playerTurn = AllZone.getPhaseHandler().getPlayerTurn();
+
+        if (PhaseUtil.skipCombat(playerTurn)) {
+            AllZone.getPhaseHandler().setNeedToNextPhase(true);
+            playerTurn.removeKeyword("Skip your next combat phase.");
+            return;
+        }
+    }
+
+    /**
+     * <p>
+     * skipCombat.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.Player} object.
+     * @return a boolean.
+     */
+    private static boolean skipCombat(final Player player) {
+
+        if (player.hasKeyword("Skip your next combat phase.")) {
+            return true;
+        }
+
+        if (player.hasKeyword("Skip your combat phase.")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * <p>
      * handleDeclareAttackers.
      * </p>
      */

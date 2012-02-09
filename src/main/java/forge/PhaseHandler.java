@@ -324,6 +324,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             PhaseUtil.handleDraw();
         } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
             PhaseUtil.verifyCombat();
+            PhaseUtil.handleCombatBegin();
+        }  else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+            PhaseUtil.handleCombatDeclareAttackers();
         } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             if (this.inCombat()) {
                 PhaseUtil.handleDeclareAttackers();
