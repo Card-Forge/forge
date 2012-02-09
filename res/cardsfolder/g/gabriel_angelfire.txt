@@ -1,0 +1,14 @@
+Name:Gabriel Angelfire
+ManaCost:3 G G W W
+Types:Legendary Creature Angel
+Text:no text
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. CARDNAME gains that ability until your next upkeep.
+SVar:TrigChoice:AB$ GenericChoice | Cost$ 0 | Defined$ You | Choices$ SVar1,SVar2,SVar3,SVar4
+SVar:SVar1:DB$ Pump | Defined$ Self | KW$ Flying | UntilYourNextUpkeep$ True | ChoiceDescription$ Flying
+SVar:SVar2:DB$ Pump | Defined$ Self | KW$ First Strike | UntilYourNextUpkeep$ True | ChoiceDescription$ First strike
+SVar:SVar3:DB$ Pump | Defined$ Self | KW$ Trample | UntilYourNextUpkeep$ True | ChoiceDescription$ Trample
+SVar:SVar4:DB$ Pump | Defined$ Self | KW$ Rampage 3 | UntilYourNextUpkeep$ True | ChoiceDescription$ Rampage 3
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gabriel_angelfire.jpg
+End
