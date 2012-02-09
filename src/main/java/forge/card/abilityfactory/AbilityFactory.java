@@ -813,6 +813,16 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("GenericChoice")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryChoose.createAbilityChooseGeneric(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryChoose.createSpellChooseGeneric(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryChoose.createDrawbackChooseGeneric(this);
+            }
+        }
+
         else if (this.api.equals("LoseLife")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryAlterLife.createAbilityLoseLife(this);

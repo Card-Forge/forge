@@ -26,6 +26,9 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -1735,6 +1738,216 @@ public final class AbilityFactoryChoose {
                     // TODO - not implemented
                 }
                 host.setChosenCard(chosen);
+            }
+        }
+    }
+
+    // *************************************************************************
+    // ************************* ChooseGeneric *********************************
+    // *************************************************************************
+
+    /**
+     * <p>
+     * createAbilityChooseGeneric.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * 
+     * @since 1.2.4
+     */
+    public static SpellAbility createAbilityChooseGeneric(final AbilityFactory af) {
+
+        final SpellAbility abChooseGeneric = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = -459173435583208151L;
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryChoose.chooseGenericStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryChoose.chooseGenericCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryChoose.chooseGenericResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return AbilityFactoryChoose.chooseGenericTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abChooseGeneric;
+    }
+
+    /**
+     * <p>
+     * createSpellChooseGeneric.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * 
+     * @since 1.2.4
+     */
+    public static SpellAbility createSpellChooseGeneric(final AbilityFactory af) {
+        final SpellAbility spChooseGeneric = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 4187094641157371974L;
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryChoose.chooseGenericStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryChoose.chooseGenericCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryChoose.chooseGenericResolve(af, this);
+            }
+
+        };
+        return spChooseGeneric;
+    }
+
+    /**
+     * <p>
+     * createDrawbackChooseGeneric.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * 
+     * @since 1.2.4
+     */
+    public static SpellAbility createDrawbackChooseGeneric(final AbilityFactory af) {
+        final SpellAbility dbChooseGeneric = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = 1586980855969921641L;
+
+            @Override
+            public String getStackDescription() {
+                return AbilityFactoryChoose.chooseGenericStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                AbilityFactoryChoose.chooseGenericResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAIDrawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(final boolean mandatory) {
+                return AbilityFactoryChoose.chooseGenericTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbChooseGeneric;
+    }
+
+    private static String chooseGenericStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+        final StringBuilder sb = new StringBuilder();
+
+        if (!(sa instanceof AbilitySub)) {
+            sb.append(sa.getSourceCard()).append(" - ");
+        } else {
+            sb.append(" ");
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        for (final Player p : tgtPlayers) {
+            sb.append(p).append(" ");
+        }
+        sb.append("chooses from a list.");
+
+        final AbilitySub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    private static boolean chooseGenericCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+        if (!params.containsKey("AILogic")) {
+            return false;
+        }
+
+        return AbilityFactoryChoose.chooseGenericTriggerAI(af, sa, false);
+    }
+
+    /**
+     * <p>
+     * chooseTypeTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean chooseGenericTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa)) {
+            return false;
+        }
+
+        return false;
+    }
+
+    private static void chooseGenericResolve(final AbilityFactory af, final SpellAbility sa) {
+        final HashMap<String, String> params = af.getMapParams();
+        final Card host = af.getHostCard();
+        final BiMap<String, String> choices = HashBiMap.create();
+        for (String s : Arrays.asList(params.get("Choices").split(","))) {
+            final HashMap<String, String> theseParams = af.getMapParams(host.getSVar(s), host);
+            choices.put(s, theseParams.get("ChoiceDescription"));
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                String choice = (String) GuiUtils.getChoice("Choose one", choices.values().toArray());
+                AbilityFactory afChoice = new AbilityFactory();
+                final SpellAbility chosenSA = afChoice.getAbility(host.getSVar(choices.inverse().get(choice)), host);
+
+                chosenSA.setActivatingPlayer(af.getHostCard().getController());
+                ((AbilitySub) chosenSA).setParent(sa);
+                AbilityFactory.resolve(chosenSA, false);
             }
         }
     }
