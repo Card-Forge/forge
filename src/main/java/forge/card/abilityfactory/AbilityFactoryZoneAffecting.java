@@ -1279,7 +1279,7 @@ public class AbilityFactoryZoneAffecting {
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
                                     Card dC = null;
-                                    if(params.containsKey("Optional")) {
+                                    if (params.containsKey("Optional")) {
                                         dC = GuiUtils.getChoiceOptional("Choose a card to be discarded",
                                                 dPChHand.toArray());
                                     } else {

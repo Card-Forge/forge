@@ -535,7 +535,7 @@ public class BoosterDraftAI {
                 }
             }
         }
-        
+
         if (landsNeeded > 0) {
             // total of all ClrCnts
             int totalColor = 0;
@@ -604,7 +604,7 @@ public class BoosterDraftAI {
                 final Card c = aiPlayables.get(0);
                 outList.add(c);
                 aiPlayables.remove(c);
-            } else {           
+            } else {
                 //if no playable cards remain fill up with basic lands
                 for (i = 0; i < 5; i++) {
                     if (clrCnts[i].getCount() > 0) {
