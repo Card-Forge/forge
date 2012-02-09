@@ -4014,6 +4014,7 @@ res/cardsfolder/h/hidden_ancients.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_gibbons.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_guerrillas.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_herd.txt svneol=native#text/plain
+res/cardsfolder/h/hidden_horror.txt -text
 res/cardsfolder/h/hidden_path.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_spider.txt svneol=native#text/plain
 res/cardsfolder/h/hideous_end.txt svneol=native#text/plain
@@ -5376,6 +5377,7 @@ res/cardsfolder/m/mentor_of_the_meek.txt -text
 res/cardsfolder/m/mephidross_vampire.txt svneol=native#text/plain
 res/cardsfolder/m/mephitic_ooze.txt svneol=native#text/plain
 res/cardsfolder/m/mercenary_informer.txt svneol=native#text/plain
+res/cardsfolder/m/mercenary_knight.txt -text
 res/cardsfolder/m/merchant_of_secrets.txt svneol=native#text/plain
 res/cardsfolder/m/merchant_scroll.txt svneol=native#text/plain
 res/cardsfolder/m/merchant_ship.txt svneol=native#text/plain
