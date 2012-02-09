@@ -6574,6 +6574,7 @@ res/cardsfolder/p/preys_vengeance.txt -text
 res/cardsfolder/p/price_of_progress.txt svneol=native#text/plain
 res/cardsfolder/p/prickly_boggart.txt svneol=native#text/plain
 res/cardsfolder/p/pride_guardian.txt svneol=native#text/plain
+res/cardsfolder/p/pride_of_lions.txt -text
 res/cardsfolder/p/pride_of_the_clouds.txt svneol=native#text/plain
 res/cardsfolder/p/priest_of_gix.txt svneol=native#text/plain
 res/cardsfolder/p/priest_of_titania.txt svneol=native#text/plain
@@ -7081,6 +7082,7 @@ res/cardsfolder/r/reward_the_faithful.txt svneol=native#text/plain
 res/cardsfolder/r/rewards_of_diversity.txt -text
 res/cardsfolder/r/rewind.txt svneol=native#text/plain
 res/cardsfolder/r/reya_dawnbringer.txt svneol=native#text/plain
+res/cardsfolder/r/rhox.txt -text
 res/cardsfolder/r/rhox_bodyguard.txt svneol=native#text/plain
 res/cardsfolder/r/rhox_brute.txt svneol=native#text/plain
 res/cardsfolder/r/rhox_charger.txt svneol=native#text/plain
@@ -8283,6 +8285,7 @@ res/cardsfolder/s/spinal_villain.txt svneol=native#text/plain
 res/cardsfolder/s/spincrusher.txt svneol=native#text/plain
 res/cardsfolder/s/spindrift_drake.txt svneol=native#text/plain
 res/cardsfolder/s/spine_of_ish_sah.txt svneol=native#text/plain
+res/cardsfolder/s/spinebiter.txt -text
 res/cardsfolder/s/spined_basher.txt svneol=native#text/plain
 res/cardsfolder/s/spined_fluke.txt svneol=native#text/plain
 res/cardsfolder/s/spined_sliver.txt svneol=native#text/plain
