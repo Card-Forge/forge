@@ -1267,27 +1267,29 @@ public class AbilityFactoryZoneAffecting {
                                         GuiUtils.getChoiceOptional("Computer has chosen", dCs.toArray());
                                     }
                                     discarded.add(dC);
-                                    AllZone.getComputerPlayer().discard(dC, sa); // is
-                                                                                 // this
-                                                                                 // right?
+                                    p.discard(dC, sa);
                                 }
                             }
                         } else {
                             // human
                             if (mode.startsWith("Reveal")) {
-                                GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+                                GuiUtils.getChoiceOptional("Revealed " + p + "  hand", dPHand.toArray());
                             }
 
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
-                                    final Card dC = GuiUtils.getChoice("Choose a card to be discarded",
+                                    Card dC = null;
+                                    if(params.containsKey("Optional")) {
+                                        dC = GuiUtils.getChoiceOptional("Choose a card to be discarded",
+                                                dPChHand.toArray());
+                                    } else {
+                                    dC = GuiUtils.getChoice("Choose a card to be discarded",
                                             dPChHand.toArray());
-
-                                    dPChHand.remove(dC);
-                                    discarded.add(dC);
-                                    AllZone.getHumanPlayer().discard(dC, sa); // is
-                                                                              // this
-                                                                              // right?
+                                    } if (dC != null) {
+                                        dPChHand.remove(dC);
+                                        discarded.add(dC);
+                                        p.discard(dC, sa);
+                                    }
                                 }
                             }
                         }
