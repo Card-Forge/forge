@@ -2818,6 +2818,7 @@ res/cardsfolder/f/fallen_ferromancer.txt svneol=native#text/plain
 res/cardsfolder/f/fallen_ideal.txt svneol=native#text/plain
 res/cardsfolder/f/falling_timber.txt -text
 res/cardsfolder/f/fallow_earth.txt svneol=native#text/plain
+res/cardsfolder/f/fallow_wurm.txt -text
 res/cardsfolder/f/fallowsage.txt svneol=native#text/plain
 res/cardsfolder/f/false_cure.txt svneol=native#text/plain
 res/cardsfolder/f/false_defeat.txt svneol=native#text/plain
@@ -9035,6 +9036,7 @@ res/cardsfolder/t/thundercloud_shaman.txt svneol=native#text/plain
 res/cardsfolder/t/thunderheads.txt svneol=native#text/plain
 res/cardsfolder/t/thundering_giant.txt svneol=native#text/plain
 res/cardsfolder/t/thundering_tanadon.txt svneol=native#text/plain
+res/cardsfolder/t/thundering_wurm.txt -text
 res/cardsfolder/t/thundermare.txt svneol=native#text/plain
 res/cardsfolder/t/thunderscape_apprentice.txt svneol=native#text/plain
 res/cardsfolder/t/thunderscape_familiar.txt svneol=native#text/plain
