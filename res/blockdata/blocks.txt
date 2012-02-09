@@ -2,7 +2,7 @@ Index:0|Set0:LEA|Name:Alpha|DraftPacks:3|LandSetCode:LEA|SealedPacks:6
 Index:1|Set0:LEB|Name:Beta|DraftPacks:3|LandSetCode:LEB|SealedPacks:6
 Index:2|Set0:2ED|Name:Unlimited|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
 Index:3|Set0:ARN|Name:Arabian Nights|DraftPacks:5|LandSetCode:2ED|SealedPacks:9
-Index:4|Set0:ATQ|Name:Antiquities|DraftPacks:5|LandSetCode:ATQ|SealedPacks:9
+Index:4|Set0:ATQ|Name:Antiquities|DraftPacks:5|LandSetCode:2ED|SealedPacks:9
 Index:5|Set0:3ED|Name:Revised|DraftPacks:3|LandSetCode:3ED|SealedPacks:6
 Index:6|Set0:LEG|Name:Legends|DraftPacks:3|LandSetCode:3ED|SealedPacks:6
 Index:7|Set0:DRK|Name:The Dark|DraftPacks:5|LandSetCode:3ED|SealedPacks:9
