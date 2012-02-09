@@ -3345,6 +3345,7 @@ res/cardsfolder/g/geothermal_crevice.txt svneol=native#text/plain
 res/cardsfolder/g/geralfs_messenger.txt -text
 res/cardsfolder/g/geralfs_mindcrusher.txt -text
 res/cardsfolder/g/gerrard__capashen.txt -text svneol=unset#text/plain
+res/cardsfolder/g/gerrard_capashen.txt -text
 res/cardsfolder/g/gerrards_battle_cry.txt svneol=native#text/plain
 res/cardsfolder/g/gerrards_command.txt svneol=native#text/plain
 res/cardsfolder/g/gerrards_irregulars.txt svneol=native#text/plain
