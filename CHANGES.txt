@@ -111,6 +111,20 @@ Fixes/Features:
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Wrap in Vigor was unplayable - changed AB$ to SP$
+- Updated the all-prices.txt file.
+- Moved the execution of getStLandManaAbilities() to checkStaticAbilities() (fixes Evil Presence).
+- Fixed the ability cost for Dwarven Bloodboiler.
+- Added wasDealtDamageByHostThisTurn property.
+- CheckStyle.
+- Fixed Chief Wiggum's tag.
+- Added Chief Wiggum's icon.
+- add an AF GenericChoice. Lets any choice be made during resolution and resolves the SVar for that choice. Add Gabriel Angelfire (from Legends) using AF GenericChoice.
+- Fixed Heidar, Rimewind Master.
+- Fixed land set code for Antiquities "block".
+- Fixed draft AI when there are not enough playable cards (the deck will be filled with basic lands).
+- Added the "Optional" parameter to AF Discard.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -166,6 +180,17 @@ Immortal Coil
 Demoralize
 Heartbeat of Spring
 Realm Razer
+Sigil of Distinction
+Ivory Gargoyle
+Trophy Hunter
+Gaea's Balance
+Gerrard Capashen
+Darigaaz the Igniter
+Gabriel Angelfire
+Molten Firebird
+Lim-Dul's Paladin
+Hidden Horror
+Mercenary Knight
 
 
 end
