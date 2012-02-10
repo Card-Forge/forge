@@ -1731,7 +1731,11 @@ public class AbilityFactory {
 
         else if (defined.equals("Targeted")) {
             final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
-            cards.addAll(parent.getTarget().getTargetCards());
+            if (parent != null) {
+                if (parent.getTarget() != null) {
+                    cards.addAll(parent.getTarget().getTargetCards());
+                }
+            }
         } else if (defined.startsWith("Triggered") && (sa != null)) {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getTriggeringObject(defined.substring(9));
@@ -1844,7 +1848,11 @@ public class AbilityFactory {
 
         if (defined.equals("Targeted")) {
             final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
-            players.addAll(parent.getTarget().getTargetPlayers());
+            if (parent != null) {
+                if (parent.getTarget() != null) {
+                    players.addAll(parent.getTarget().getTargetPlayers());
+                }
+            }
             /*
              * Target tgt = sa.getTarget(); SpellAbility parent = sa;
              * 
