@@ -27,6 +27,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.PhaseHandler;
 import forge.Player;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
@@ -135,6 +136,28 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
             list = list.getValidCards(needsToPlay.split(","), card.getController(), card);
             if (list.isEmpty()) {
+                return false;
+            }
+        }
+        if (card.getSVar("NeedsToPlayVar").length() > 0) {
+            final String needsToPlay = card.getSVar("NeedsToPlayVar");
+            int x = 0;
+            int y = 0;
+            String sVar = needsToPlay.split(" ")[0];
+            String comparator = needsToPlay.split(" ")[1];
+            String compareTo = comparator.substring(2);
+            try {
+                x = Integer.parseInt(sVar);
+            } catch (final NumberFormatException e) {
+                x = CardFactoryUtil.xCount(card, card.getSVar(sVar));
+            }
+            try {
+                y = Integer.parseInt(compareTo);
+            } catch (final NumberFormatException e) {
+                y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
+            }
+            System.out.println("NeedsToPlayVar: " + sVar + "(" + x + ")" + comparator + "(" + y + ")");
+            if (!AllZoneUtil.compare(x, comparator, y)) {
                 return false;
             }
         }
