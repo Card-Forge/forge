@@ -151,7 +151,7 @@ public class CostSacrifice extends CostPartWithList {
         } else if (amount.equals("All")) {
             this.setList(list);
             CostSacrifice.sacrificeAll(ability, payment, this, list);
-            this.addListToHash(ability, "Sacrificed");
+            //this.addListToHash(ability, "Sacrificed");
             return true;
         } else {
             Integer c = this.convertAmount();
