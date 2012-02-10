@@ -8,16 +8,16 @@ Icon=Ned Flanders.jpg
 Deck Type=constructed
 [main]
 1 Hellkite Overlord
-21 Swamp
+22 Swamp
 4 Hymn to Tourach
 1 Terror
 1 Sinkhole
 1 Eyeblight's Ending
 1 It That Betrays
-1 Reanimate
 2 Zombify
+1 Dance of the Dead
 4 Buried Alive
-4 Night's Whisper
+3 Night's Whisper
 4 Exhume
 1 Pestilence Demon
 4 Animate Dead
@@ -25,6 +25,6 @@ Deck Type=constructed
 1 Smother
 1 Inkwell Leviathan
 1 Doom Blade
-1 Mox Jet
 2 Infest
+1 Hidden Horror
 [sideboard]
