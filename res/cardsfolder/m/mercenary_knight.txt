@@ -11,7 +11,7 @@ SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mercenary_knight.jpg
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4228&type=card
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/22.jpg
 Oracle:When Mercenary Knight enters the battlefield, sacrifice it unless you discard a creature card.
 End
