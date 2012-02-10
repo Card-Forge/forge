@@ -806,10 +806,7 @@ public class ComputerUtil {
                     continue;
                 }
 
-                // add source card to used list
-                usedSources.add(sourceCard);
-
-                String manaProduced;
+                 String manaProduced;
                 // Check if paying snow mana
                 if ("S".equals(costParts[nPart])) {
                     manaProduced = "S";
@@ -850,7 +847,14 @@ public class ComputerUtil {
                     }
                     // get produced mana
                     manaProduced = m.getManaProduced();
+                    if (manaProduced.matches("0")) {
+                        continue;
+                    }
                 }
+
+                // add source card to used list
+                usedSources.add(sourceCard);
+
                 //TODO: Change this if AI is able use to mana abilities that
                 //      produce more than one mana (111230 - ArsenalNut)
                 String color = InputPayManaCostUtil.getLongColorString(manaProduced);
