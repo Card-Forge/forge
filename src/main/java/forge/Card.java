@@ -7337,6 +7337,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean sharesCreatureTypeWith(final Card c1) {
 
+        if (c1 == null) {
+            return false;
+        }
+
         for (final String type : this.getType()) {
             if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
                 return true;
