@@ -125,6 +125,25 @@ Fixes/Features:
 - Fixed draft AI when there are not enough playable cards (the deck will be filled with basic lands).
 - Added the "Optional" parameter to AF Discard.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed filename of Gerrard Capashen.
+- Converted Drekavac to script.
+- Fixed issue with End line in Avatar of Discord script
+- CheckStyle.
+- Converted two cards to use the keyword "CARDNAME assigns no combat damage".
+- Added the keyword "You may have CARDNAME assign its combat damage as though it weren't blocked.".
+- AF ChangeZone Hidden is a little more flexible now.
+- Improved AI handling of "You may have CARDNAME assign its combat damage as though it weren't blocked.".
+- Added the player keyword "Skip your next combat phase.".
+- fixed issue with AI using a mana source that produces 0 mana
+- added null pointer checks to getDefinedCards and getDefinedPlayers
+- Added a new AI SVar: "NeedsToPlayVar".
+- Added a sample to Hidden Horror.
+- Fixed ultimate of Garruk, the Veil-Cursed.
+- Added NeedsToPlayVar to four more cards.
+- Updated the Ned Flanders deck.
+- Updated Fin Fang Foom 2 and Gambit 2 with new cards.
+- Updated the Captain America decks.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -191,6 +210,22 @@ Molten Firebird
 Lim-Dul's Paladin
 Hidden Horror
 Mercenary Knight
+Fallow Wurm
+Thundering Wurm
+Avatar of Discord
+Deathcoil Wurm
+Lone Wolf
+Thorn Elemental
+Wolf Pack
+Pride of Lions
+Rhox
+Spinebiter
+Entrails Feaster
+Blinding Angel
+Moment of Silence
+Guided Passage
+Notorious Throng
+Harvest Wurm
 
 
 end
