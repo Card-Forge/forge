@@ -8,7 +8,8 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | DiscardValid$ Land | Mode
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Y GE1
+SVar:Y:Count$TypeInYourHand.Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_wurm.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/115.jpg
