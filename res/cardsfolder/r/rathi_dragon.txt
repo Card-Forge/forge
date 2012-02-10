@@ -9,7 +9,9 @@ SVar:TrigSacMtn:AB$ Sacrifice | Cost$ 0 | Amount$ 2 | SacValid$ Mountain | Remem
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Y GE2
+SVar:Y:Count$Valid Mountain.YouCtrl
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_dragon.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/196.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/210.jpg

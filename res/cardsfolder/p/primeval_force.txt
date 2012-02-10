@@ -8,8 +8,9 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 3 | SacValid$ Forest | RememberSa
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
+SVar:NeedsToPlayVar:Y GE3
+SVar:Y:Count$Valid Forest.YouCtrl
 SVar:Rarity:Rare
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_force.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/273.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/108.jpg

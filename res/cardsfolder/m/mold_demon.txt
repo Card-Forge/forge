@@ -8,7 +8,9 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 2 | SacValid$ Swamp | RememberSac
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Y GE2
+SVar:Y:Count$Valid Swamp.YouCtrl
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mold_demon.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/26.jpg
 Oracle:When Mold Demon enters the battlefield, sacrifice it unless you sacrifice two Swamps.

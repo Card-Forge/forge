@@ -5035,6 +5035,7 @@ res/cardsfolder/l/living_hive.txt svneol=native#text/plain
 res/cardsfolder/l/living_lands.txt svneol=native#text/plain
 res/cardsfolder/l/living_plane.txt svneol=native#text/plain
 res/cardsfolder/l/living_terrain.txt -text
+res/cardsfolder/l/living_tsunami.txt -text
 res/cardsfolder/l/living_wall.txt svneol=native#text/plain
 res/cardsfolder/l/livonya_silone.txt svneol=native#text/plain
 res/cardsfolder/l/lizard_warrior.txt svneol=native#text/plain
@@ -9892,6 +9893,7 @@ res/cardsfolder/w/water_elemental.txt svneol=native#text/plain
 res/cardsfolder/w/water_servant.txt svneol=native#text/plain
 res/cardsfolder/w/water_wurm.txt svneol=native#text/plain
 res/cardsfolder/w/waterfront_bouncer.txt svneol=native#text/plain
+res/cardsfolder/w/waterspout_djinn.txt -text
 res/cardsfolder/w/waterspout_elemental.txt svneol=native#text/plain
 res/cardsfolder/w/waterspout_weavers.txt svneol=native#text/plain
 res/cardsfolder/w/waterveil_cavern.txt svneol=native#text/plain
