@@ -7,7 +7,7 @@ Description=URG Bounce deck with Taurean Mauler and Forgotten Ancient
 Icon=Gambit.jpg
 Deck Type=constructed
 [main]
-3 Predatory Hunger
+1 Predatory Hunger
 4 Vapor Snag
 3 Veil of Birds
 4 Snap
@@ -21,14 +21,18 @@ Deck Type=constructed
 4 Forgotten Ancient
 1 AEther Sting
 1 Isolation Cell
+1 Guided Passage
 4 Island
 3 Forest
 2 Mountain
-2 Taiga
-2 Tropical Island
-2 Volcanic Island
-2 Breeding Pool
-2 Steam Vents
-2 Stomping Ground
+1 Taiga
+1 Tropical Island
+1 Volcanic Island
+1 Wooded Foothills
+1 Scalding Tarn
+1 Misty Rainforest
+2 Hinterland Harbor
+2 Sulfur Falls
+2 Copperline Gorge
 2 Rupture Spire
 [sideboard]
