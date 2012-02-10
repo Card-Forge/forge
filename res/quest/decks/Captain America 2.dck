@@ -3,7 +3,7 @@
 Name=Captain America 2
 Title=Captain America
 Difficulty=medium
-Description=Bant Exalted deck
+Description=WUG Exalted deck
 Icon=Captain America.jpg
 Deck Type=constructed
 [main]
@@ -14,7 +14,8 @@ Deck Type=constructed
 1 Hindering Light|ALA
 1 Rafiq of the Many|ALA
 1 Plains|4ED
-2 Hallowed Fountain|DIS
+1 Treva's Ruins
+1 Sejiri Refuge|ZEN
 2 Tundra|3ED
 1 Island|LRW
 1 Forest|2ED
@@ -22,7 +23,7 @@ Deck Type=constructed
 2 Savannah|3ED
 2 Akrasan Squire|ALA
 1 Plains|POR
-1 Arcane Sanctum|ALA
+1 Graypelt Refuge|ZEN
 4 Sigil Blessing|ALA
 3 Knight of the Skyward Eye|ALA
 1 Plains|MBS
@@ -31,7 +32,7 @@ Deck Type=constructed
 1 Battlegrace Angel|ALA
 2 Sigiled Paladin|ALA
 4 Bant Panorama|ALA
-1 Swords to Plowshares|LEA
+1 Exile
 3 Deft Duelist|ALA
 1 Excommunicate|M11
 2 Excommunicate|M10
