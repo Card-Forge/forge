@@ -9,4 +9,6 @@ SVar:DBNonCreatureNonLand:DB$ ChangeZone | ChangeType$ Card.nonCreature+nonLand+
 SVar:X:Count$InYourLibrary
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guided_passage.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/105.jpg
+Oracle:Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle your library.
 End
