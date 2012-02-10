@@ -3809,6 +3809,7 @@ res/cardsfolder/g/guardians_magemark.txt svneol=native#text/plain
 res/cardsfolder/g/guardians_of_akrasa.txt svneol=native#text/plain
 res/cardsfolder/g/guardians_pledge.txt svneol=native#text/plain
 res/cardsfolder/g/guerrilla_tactics.txt svneol=native#text/plain
+res/cardsfolder/g/guided_passage.txt -text svneol=unset#text/plain
 res/cardsfolder/g/guided_strike.txt svneol=native#text/plain
 res/cardsfolder/g/guiding_spirit.txt -text
 res/cardsfolder/g/guiltfeeder.txt svneol=native#text/plain
