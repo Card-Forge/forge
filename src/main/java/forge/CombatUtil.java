@@ -1063,8 +1063,8 @@ public class CombatUtil {
 
             final CardList blockers = combat.getBlockers(attacker);
 
-            if (blockers.size() == 0 || attacker.hasKeyword("You may have CARDNAME assign its combat damage " +
-            		"as though it weren't blocked.")) {
+            if (blockers.size() == 0 || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
+                    + "as though it weren't blocked.")) {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword("Trample")
                     && (CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker, blockers))) {
@@ -1104,8 +1104,8 @@ public class CombatUtil {
 
             final CardList blockers = combat.getBlockers(attacker);
 
-            if (blockers.size() == 0 || attacker.hasKeyword("You may have CARDNAME assign its combat damage" +
-            		" as though it weren't blocked.")) {
+            if (blockers.size() == 0 || attacker.hasKeyword("You may have CARDNAME assign its combat damage"
+                    + " as though it weren't blocked.")) {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword("Trample")
                     && (CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker, blockers))) {

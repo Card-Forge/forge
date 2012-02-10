@@ -713,8 +713,8 @@ public class Combat {
                 needFirstStrike = true;
                 if (this.getAttackingPlayer().isHuman()) { // human attacks
                     if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                            && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as" +
-                                    " though it weren't blocked?")) {
+                            && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as"
+                                    + " though it weren't blocked?")) {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
                         if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
@@ -765,8 +765,8 @@ public class Combat {
                 if (this.getAttackingPlayer().isHuman()) { // human attacks
 
                     if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                        && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as" +
-                        		" though it weren't blocked?")) {
+                        && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as"
+                                + " though it weren't blocked?")) {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
                         if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
@@ -799,7 +799,7 @@ public class Combat {
      */
     private void distributeAIDamage(final Card attacker, final CardList block, int damage) {
         final Card c = attacker;
-        
+
         if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
             this.addDefendingDamage(damage, attacker);
         }

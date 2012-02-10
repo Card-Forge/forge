@@ -819,7 +819,7 @@ public final class AbilityFactoryChangeZone {
         CardList fetchList;
         if (defined) {
             fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
-        } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)){
+        } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)) {
             fetchList = AllZoneUtil.getCardsIn(origin);
         } else {
             fetchList = player.getCardsIn(origin);
@@ -914,7 +914,7 @@ public final class AbilityFactoryChangeZone {
                     }
 
                     movedCard = AllZone.getGameAction().moveTo(c.getController().getZone(destination), c);
-                } else if(destination.equals(Zone.Exile)) {
+                } else if (destination.equals(Zone.Exile)) {
                     movedCard = AllZone.getGameAction().exile(c);
                     if (params.containsKey("ExileFaceDown")) {
                         movedCard.setState("FaceDown");
@@ -988,7 +988,7 @@ public final class AbilityFactoryChangeZone {
         CardList fetchList;
         if (defined) {
             fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
-        } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)){
+        } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)) {
             fetchList = AllZoneUtil.getCardsIn(origin);
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
         } else {
@@ -1102,7 +1102,7 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 newCard = AllZone.getGameAction().moveTo(c.getController().getZone(destination), c);
-            } else if(destination.equals(Zone.Exile)) {
+            } else if (destination.equals(Zone.Exile)) {
                 newCard = AllZone.getGameAction().exile(c);
                 if (params.containsKey("ExileFaceDown")) {
                     newCard.setState("FaceDown");
