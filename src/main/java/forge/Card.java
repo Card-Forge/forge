@@ -6838,6 +6838,23 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
+        } else if (property.startsWith("sharesNameWith")) {
+            final String restriction = property.split("sharesNameWith ")[1];
+            if (restriction.equals("YourGraveyard")) {
+                final CardList list = sourceController.getCardsIn(Zone.Graveyard);
+                if (list.isEmpty())  {
+                    return false;
+                }
+                boolean shares = false;
+                for (final Card card : sourceController.getCardsIn(Constant.Zone.Graveyard)) {
+                    if (this.getName().equals(card.getName())) {
+                        shares = true;
+                    }
+                }
+                if (!shares) {
+                    return false;
+               }
+            }
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
                 return false;
