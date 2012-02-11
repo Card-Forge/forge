@@ -8,4 +8,6 @@ SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidation_bolt.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/99.jpg
+Oracle:Intimidation Bolt deals 3 damage to target creature. Other creatures can't attack this turn.
 End
