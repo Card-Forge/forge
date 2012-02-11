@@ -9426,6 +9426,7 @@ res/cardsfolder/u/unnatural_speed.txt svneol=native#text/plain
 res/cardsfolder/u/unnerve.txt svneol=native#text/plain
 res/cardsfolder/u/unquestioned_authority.txt svneol=native#text/plain
 res/cardsfolder/u/unruly_mob.txt -text
+res/cardsfolder/u/unscythe_killer_of_kings.txt -text svneol=unset#text/plain
 res/cardsfolder/u/unseen_walker.txt svneol=native#text/plain
 res/cardsfolder/u/unspeakable_symbol.txt svneol=native#text/plain
 res/cardsfolder/u/unstable_frontier.txt -text
