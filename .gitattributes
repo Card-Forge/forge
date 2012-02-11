@@ -6703,6 +6703,7 @@ res/cardsfolder/p/putrid_cyclops.txt svneol=native#text/plain
 res/cardsfolder/p/putrid_imp.txt svneol=native#text/plain
 res/cardsfolder/p/putrid_leech.txt svneol=native#text/plain
 res/cardsfolder/p/putrid_raptor.txt svneol=native#text/plain
+res/cardsfolder/p/putrid_warrior.txt -text svneol=unset#text/plain
 res/cardsfolder/p/pygmy_allosaurus.txt svneol=native#text/plain
 res/cardsfolder/p/pygmy_kavu.txt svneol=native#text/plain
 res/cardsfolder/p/pygmy_pyrosaur.txt svneol=native#text/plain
