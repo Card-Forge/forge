@@ -8669,6 +8669,7 @@ res/cardsfolder/s/suntail_hawk.txt svneol=native#text/plain
 res/cardsfolder/s/suntouched_myr.txt svneol=native#text/plain
 res/cardsfolder/s/sunweb.txt svneol=native#text/plain
 res/cardsfolder/s/superior_numbers.txt -text svneol=unset#text/plain
+res/cardsfolder/s/suppress.txt -text svneol=unset#text/plain
 res/cardsfolder/s/supreme_exemplar.txt svneol=native#text/plain
 res/cardsfolder/s/supreme_inquisitor.txt svneol=native#text/plain
 res/cardsfolder/s/suqata_assassin.txt svneol=native#text/plain
