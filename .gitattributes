@@ -2725,6 +2725,7 @@ res/cardsfolder/e/etherium_sculptor.txt svneol=native#text/plain
 res/cardsfolder/e/ethersworn_adjudicator.txt svneol=native#text/plain
 res/cardsfolder/e/ethersworn_canonist.txt -text
 res/cardsfolder/e/ethersworn_shieldmage.txt -text
+res/cardsfolder/e/etherwrought_page.txt -text svneol=unset#text/plain
 res/cardsfolder/e/evacuation.txt svneol=native#text/plain
 res/cardsfolder/e/evaporate.txt svneol=native#text/plain
 res/cardsfolder/e/evasive_action.txt svneol=native#text/plain
