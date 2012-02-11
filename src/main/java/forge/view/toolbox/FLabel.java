@@ -36,7 +36,7 @@ import forge.Command;
 @SuppressWarnings("serial")
 public class FLabel extends JLabel {
     /** 
-     * Uses the amazing Builder pattern to facilitate/encourage inline styling.
+     * Uses the Builder pattern to facilitate/encourage inline styling.
      * Credit to Effective Java 2 (Joshua Bloch), a fantastic book.
      * Methods in builder can be chained. To declare:
      * <code>new FLabel.Builder().method1(foo).method2(bar).method3(baz)...</code>
@@ -133,7 +133,7 @@ public class FLabel extends JLabel {
     }
 
     //========== Constructors
-    /** Must have protected constructor to allow subclassing. */
+    /** Must have protected constructor to allow Builder to subclass. */
     protected FLabel() { }
 
     // Call this using FLabel.Builder()...
@@ -173,6 +173,7 @@ public class FLabel extends JLabel {
         this.addComponentListener(cadResize);
     }
 
+    //========== Variable initialization
     // Final inits
     private final Color clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private final Color clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
@@ -241,6 +242,7 @@ public class FLabel extends JLabel {
         }
     };
 
+    //========== Methods
     /** @param b0 &emsp; boolean */
     // Must be public.
     public void setHoverable(boolean b0) {
@@ -328,7 +330,7 @@ public class FLabel extends JLabel {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
         g2d = (Graphics2D) g.create();
         w = getWidth();
         h = getHeight();

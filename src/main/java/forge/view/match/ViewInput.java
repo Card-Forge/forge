@@ -33,7 +33,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.control.match.ControlInput;
 import forge.view.toolbox.FButton;
-import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -41,7 +41,7 @@ import forge.view.toolbox.FSkin;
  * 
  */
 @SuppressWarnings("serial")
-public class ViewInput extends FRoundedPanel {
+public class ViewInput extends FPanel {
     private final ControlInput control;
     private final JButton btnOK, btnCancel;
     private final JTextArea tarMessage;
@@ -57,8 +57,6 @@ public class ViewInput extends FRoundedPanel {
     public ViewInput() {
         super();
         this.setToolTipText("Input Area");
-        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
 
         // Cancel button
@@ -156,6 +154,7 @@ public class ViewInput extends FRoundedPanel {
                     remindIsRunning = false;
                     timer1.stop();
                 }
+                repaint();
             }
         };
 

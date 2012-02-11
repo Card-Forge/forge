@@ -61,8 +61,6 @@ import forge.gui.MultiLineLabelUI;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.view.GuiTopLevel;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FVerticalTabPanel;
 
@@ -73,7 +71,7 @@ import forge.view.toolbox.FVerticalTabPanel;
  * 
  */
 @SuppressWarnings("serial")
-public class ViewTabber extends FRoundedPanel {
+public class ViewTabber extends JPanel {
     private final List<JPanel> panelList;
     private Map<Player, JLabel[]> infoLBLs;
     private JLabel stormLabel;
@@ -84,7 +82,7 @@ public class ViewTabber extends FRoundedPanel {
 
     private final ControlTabber control;
     private TriggerReactionMenu triggerMenu;
-    private final FPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
+    private final JPanel pnlStack, pnlCombat, pnlConsole, pnlPlayers, pnlDev;
 
     private DevLabel lblMilling, lblGenerateMana, lblSetupGame, lblTutor,
             lblCounterPermanent, lblTapPermanent, lblUntapPermanent, lblUnlimitedLands, lblSetLife;
@@ -100,6 +98,7 @@ public class ViewTabber extends FRoundedPanel {
         this.hoverColor = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         this.activeColor = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
         this.inactiveColor = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+        this.setOpaque(false);
 
         // Assemble card pic viewer
         this.panelList = new ArrayList<JPanel>();
@@ -112,35 +111,35 @@ public class ViewTabber extends FRoundedPanel {
         // Trigger Context Menu creation
         this.triggerMenu = new TriggerReactionMenu();
 
-        this.pnlStack = new FPanel();
+        this.pnlStack = new JPanel();
         this.pnlStack.setName("Stack");
         this.pnlStack.setOpaque(false);
         this.pnlStack.setLayout(new MigLayout(constraints));
         this.pnlStack.setToolTipText("View Stack");
         this.panelList.add(this.pnlStack);
 
-        this.pnlCombat = new FPanel();
+        this.pnlCombat = new JPanel();
         this.pnlCombat.setName("Combat");
         this.pnlCombat.setOpaque(false);
         this.pnlCombat.setLayout(new MigLayout(constraints));
         this.pnlCombat.setToolTipText("View Combat");
         this.panelList.add(this.pnlCombat);
 
-        this.pnlConsole = new FPanel();
+        this.pnlConsole = new JPanel();
         this.pnlConsole.setName("Log");
         this.pnlConsole.setOpaque(false);
         this.pnlConsole.setLayout(new MigLayout(constraints));
         this.pnlConsole.setToolTipText("View Console");
         this.panelList.add(this.pnlConsole);
 
-        this.pnlPlayers = new FPanel();
+        this.pnlPlayers = new JPanel();
         this.pnlPlayers.setName("Players");
         this.pnlPlayers.setOpaque(false);
         this.pnlPlayers.setLayout(new MigLayout(constraints));
         this.pnlPlayers.setToolTipText("Player List");
         this.panelList.add(this.pnlPlayers);
 
-        this.pnlDev = new FPanel();
+        this.pnlDev = new JPanel();
         this.pnlDev.setName("Dev");
         this.pnlDev.setOpaque(false);
         this.pnlDev.setLayout(new MigLayout(constraints));
@@ -455,45 +454,45 @@ public class ViewTabber extends FRoundedPanel {
     /**
      * Gets the pnl stack.
      * 
-     * @return FPanel
+     * @return {@link javax.swing.JPanel}
      */
-    public FPanel getPnlStack() {
+    public JPanel getPnlStack() {
         return this.pnlStack;
     }
 
     /**
      * Gets the pnl combat.
      * 
-     * @return FPanel
+     * @return {@link javax.swing.JPanel}
      */
-    public FPanel getPnlCombat() {
+    public JPanel getPnlCombat() {
         return this.pnlCombat;
     }
 
     /**
      * Gets the pnl console.
      * 
-     * @return FPanel
+     * @return {@link javax.swing.JPanel}
      */
-    public FPanel getPnlConsole() {
+    public JPanel getPnlConsole() {
         return this.pnlConsole;
     }
 
     /**
      * Gets the pnl players.
      * 
-     * @return FPanel
+     * @return {@link javax.swing.JPanel}
      */
-    public FPanel getPnlPlayers() {
+    public JPanel getPnlPlayers() {
         return this.pnlPlayers;
     }
 
     /**
      * Gets the pnl dev.
      * 
-     * @return FPanel
+     * @return {@link javax.swing.JPanel}
      */
-    public FPanel getPnlDev() {
+    public JPanel getPnlDev() {
         return this.pnlDev;
     }
 

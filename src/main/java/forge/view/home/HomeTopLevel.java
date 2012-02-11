@@ -39,7 +39,6 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -79,8 +78,9 @@ public class HomeTopLevel extends FPanel {
         settings = new ViewSettings(this);
         utilities = new ViewUtilities(this);
 
-        this.setOpaque(false);
-        this.setBGTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        this.setCornerDiameter(0);
+        this.setBorderToggle(false);
+        this.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         this.setLayout(null);
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -98,12 +98,10 @@ public class HomeTopLevel extends FPanel {
             }
         });
 
-        pnlMenu = new FRoundedPanel();
+        pnlMenu = new FPanel();
         pnlMenu.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlMenu.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
 
-        pnlContent = new FRoundedPanel();
-        pnlContent.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        pnlContent = new FPanel();
         pnlContent.setLayout(new MigLayout("insets 0, gap 0"));
 
         btnConstructed = new FButton();

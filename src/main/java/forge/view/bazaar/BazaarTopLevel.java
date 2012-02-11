@@ -30,7 +30,9 @@ public class BazaarTopLevel extends FPanel {
         this.pnlSingleStall = new ViewStall(this);
 
         // Component styling
-        this.setBGTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        this.setCornerDiameter(0);
+        this.setBorderToggle(false);
+        this.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         this.setLayout(new MigLayout("insets 0, gap 0"));
         pnlAllStalls.setOpaque(false);
         pnlAllStalls.setLayout(new MigLayout("insets 0, gap 0, wrap, align center"));

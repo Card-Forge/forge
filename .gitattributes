@@ -11325,7 +11325,6 @@ src/main/java/forge/view/toolbox/FOverlay.java -text
 src/main/java/forge/view/toolbox/FPanel.java -text
 src/main/java/forge/view/toolbox/FProgressBar.java -text
 src/main/java/forge/view/toolbox/FRadioButton.java -text
-src/main/java/forge/view/toolbox/FRoundedPanel.java -text
 src/main/java/forge/view/toolbox/FScrollPane.java -text
 src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FTextArea.java -text

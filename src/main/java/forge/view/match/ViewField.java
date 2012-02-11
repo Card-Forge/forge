@@ -49,7 +49,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.GuiTopLevel;
 import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FSkin.SkinProp;
 
@@ -58,7 +58,7 @@ import forge.view.toolbox.FSkin.SkinProp;
  * 
  */
 @SuppressWarnings("serial")
-public class ViewField extends FRoundedPanel {
+public class ViewField extends FPanel {
     private final ControlField control;
     private final PlayArea tabletop;
 
@@ -85,11 +85,8 @@ public class ViewField extends FRoundedPanel {
      */
     public ViewField(final Player player) {
         super();
-        this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0"));
-        this.setCornerRadius(5);
         this.setToolTipText(player.getName() + " Gameboard");
-        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
 
         this.inactiveBorder = new LineBorder(new Color(0, 0, 0, 0), 1);
         this.hoverBorder = new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1);

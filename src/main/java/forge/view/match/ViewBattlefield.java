@@ -20,9 +20,10 @@ package forge.view.match;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
-import forge.view.toolbox.FPanel;
 
 /**
  * Battlefield, assembles and contains instances of MatchPlayer. SHOULD PROBABLY
@@ -30,7 +31,7 @@ import forge.view.toolbox.FPanel;
  * 
  */
 @SuppressWarnings("serial")
-public class ViewBattlefield extends FPanel {
+public class ViewBattlefield extends JPanel {
     private final List<ViewField> fields;
 
     /**

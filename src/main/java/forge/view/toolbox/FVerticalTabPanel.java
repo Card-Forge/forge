@@ -39,7 +39,7 @@ import net.miginfocom.swing.MigLayout;
  * 
  */
 @SuppressWarnings("serial")
-public class FVerticalTabPanel extends FPanel {
+public class FVerticalTabPanel extends JPanel {
     private final CardLayout cards;
     private final JPanel pnlContent;
     private final List<VTab> allVTabs;
@@ -81,33 +81,32 @@ public class FVerticalTabPanel extends FPanel {
         this.activeColor = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
         this.inactiveColor = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
 
-        final int pctTabH = ((100 - 2 - 2) / size);
+        // Width of tabs, in percent width of container
         final int pctTabW = 11;
-        final int pctInsetH = 3;
-        final int pctSpacing = 1;
+        // Spacing above and below each tab
+        final double pctSpacing = 0.5;
+        //
+        final int pctTabH = (int) ((100 - size * pctSpacing * 2) / size);
 
         // Content panel and card layout inits
         this.cards = new CardLayout();
-        this.pnlContent = new JPanel();
-        this.pnlContent.setOpaque(false);
+        this.pnlContent = new FPanel();
+        ((FPanel) pnlContent).setCornerDiameter(0);
         this.pnlContent.setLayout(this.cards);
 
         // If tabs are on the left side, content panel is added
         // immediately to define grid.
         if (tabsOnRightSide) {
-            this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
+            this.add(this.pnlContent, "span 1 " + (size + 1) + ", w " + (100 - pctTabW) + "%!, h 100%!");
             this.pnlContent.setBorder(new MatteBorder(0, 0, 0, 1, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         }
 
-        // Add top spacer in any case.
-        final JPanel topSpacer = new JPanel();
-        topSpacer.setOpaque(false);
-        this.add(topSpacer, "w " + pctTabW + "%!, h " + pctInsetH + "%!");
+        this.add(new JPanel(), "w 0, h 0!");
 
         // If tabs are on right side, content panel
         // must be added after spacer, which then defines the grid.
         if (!tabsOnRightSide) {
-            this.add(this.pnlContent, "span 1 " + (size + 2) + ", w " + (100 - pctTabW) + "%!, h 100%!");
+            this.add(this.pnlContent, "span 1 " + (size + 1) + ", w " + (100 - pctTabW) + "%!, h 100%!");
             this.pnlContent.setBorder(new MatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         }
 
@@ -126,16 +125,13 @@ public class FVerticalTabPanel extends FPanel {
                 tab.setBackground(this.inactiveColor);
             }
 
-            this.add(tab, "w " + pctTabW + "%!, h " + (pctTabH - pctSpacing) + "%!, gapbottom " + pctSpacing + "%!");
+            this.add(tab, "w " + pctTabW + "%!, h " + pctTabH + "%!,"
+                    + " gap 0 0 " + pctSpacing + " " + pctSpacing + "%!");
             this.allVTabs.add(tab);
 
             // Add card to content panel
             this.pnlContent.add(childPanels.get(i), "CARD" + i);
         }
-
-        final JPanel bottomSpacer = new JPanel();
-        bottomSpacer.setOpaque(false);
-        this.add(bottomSpacer, "w 10%!, h " + (pctInsetH + pctSpacing) + "%!");
     }
 
     /**

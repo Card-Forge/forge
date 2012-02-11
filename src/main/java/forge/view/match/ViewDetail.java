@@ -24,7 +24,7 @@ import java.awt.event.ComponentEvent;
 import net.miginfocom.swing.MigLayout;
 import forge.control.match.ControlDetail;
 import forge.gui.game.CardDetailPanel;
-import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -32,7 +32,7 @@ import forge.view.toolbox.FSkin;
  *
  */
 @SuppressWarnings("serial")
-public class ViewDetail extends FRoundedPanel {
+public class ViewDetail extends FPanel {
     private ControlDetail control;
     private CardDetailPanel pnlDetail;
 

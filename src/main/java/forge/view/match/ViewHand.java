@@ -22,15 +22,14 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.HandArea;
 import forge.control.match.ControlHand;
-import forge.view.toolbox.FRoundedPanel;
-import forge.view.toolbox.FSkin;
+import forge.view.toolbox.FPanel;
 
 /**
  * VIEW - Swing components for user hand.
  * 
  */
 @SuppressWarnings("serial")
-public class ViewHand extends FRoundedPanel {
+public class ViewHand extends FPanel {
     private ControlHand control;
     private HandArea hand;
     private MatchTopLevel topLevel;
@@ -43,7 +42,6 @@ public class ViewHand extends FRoundedPanel {
     public ViewHand(MatchTopLevel v0) {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller);
-        ViewHand.this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
         topLevel = v0;
 
         scroller.setViewportView(ViewHand.this.hand);

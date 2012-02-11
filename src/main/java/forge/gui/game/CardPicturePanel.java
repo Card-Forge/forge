@@ -131,8 +131,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
                     - i.top - i.bottom);
         }
         if ((this.card != null) && (image == null)) {
-            image = ImageCache.getImage(this.card, this.getWidth() - i.left - i.right, this.getHeight() - i.top
-                    - i.bottom);
+            image = ImageCache.getImage(this.card, this.getWidth() - i.left - i.right - 2, this.getHeight() - i.top
+                    - i.bottom - 2);
         }
 
         if (image != this.currentImange) {

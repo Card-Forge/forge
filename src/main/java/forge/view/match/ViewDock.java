@@ -37,7 +37,7 @@ import forge.AllZone;
 import forge.control.match.ControlDock;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -45,7 +45,7 @@ import forge.view.toolbox.FSkin;
  * 
  */
 @SuppressWarnings("serial")
-public class ViewDock extends FRoundedPanel {
+public class ViewDock extends FPanel {
     private final ControlDock control;
     private final Action actClose;
 
@@ -56,7 +56,6 @@ public class ViewDock extends FRoundedPanel {
     public ViewDock() {
         super();
         this.setToolTipText("Shortcut Button Dock");
-        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
         //this.setLayout(new MigLayout("insets 0, gap 0, ay center, ax center"));
 
         // Mig layout does not support wrapping!

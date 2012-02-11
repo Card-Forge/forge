@@ -31,7 +31,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
-
 import forge.AllZone;
 import forge.control.ControlMatchUI;
 import forge.control.match.ControlDetail;
@@ -96,8 +95,10 @@ public class MatchTopLevel extends FPanel {
 
         // Set properties
         this.setOpaque(false);
-        this.setBGTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
-        this.setBGImg(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+        this.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        this.setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+        this.setCornerDiameter(0);
+        this.setBorderToggle(false);
         this.setLayout(null);
         b = (int) Math.ceil(BOUNDARY_THICKNESS_PX / 2);
 

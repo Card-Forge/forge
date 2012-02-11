@@ -10,13 +10,13 @@ import forge.Command;
 import forge.quest.data.bazaar.QuestStallPurchasable;
 import forge.view.GuiTopLevel;
 import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FRoundedPanel;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FTextArea;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")
-public class ViewItem extends FRoundedPanel {
+public class ViewItem extends FPanel {
     private final FLabel lblIcon, lblName, lblPrice, btnPurchase;
     private final FTextArea tarDesc;
     private QuestStallPurchasable item;

@@ -1,8 +1,6 @@
 package forge.view.home;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
 
@@ -20,6 +18,7 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
+import forge.Command;
 import forge.control.home.ControlQuest;
 import forge.game.GameType;
 import forge.properties.ForgeProps;
@@ -30,9 +29,9 @@ import forge.quest.data.QuestEvent;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FCheckBox;
 import forge.view.toolbox.FLabel;
+import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FRadioButton;
-import forge.view.toolbox.FRoundedPanel;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FTextArea;
@@ -93,7 +92,7 @@ public class ViewQuest extends JScrollPane {
         tabPreferences = new SubTab("Preferences");
 
         pnlTabber = new JPanel();
-        pnlTitle = new FRoundedPanel();
+        pnlTitle = new FPanel();
         pnlStats = new JPanel();
         pnlDuels = new JPanel();
         pnlChallenges = new JPanel();
@@ -206,7 +205,6 @@ public class ViewQuest extends JScrollPane {
     private void populateTitle() {
         pnlTitle.setLayout(new MigLayout("insets 0, gap 0, align center"));
         pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        ((FRoundedPanel) pnlTitle).setBorderColor(clrBorders);
 
         pnlTitle.add(lblTitle, "w 78%!, h 80%!, gap 0 0 15%! 15%!");
     }
@@ -261,9 +259,8 @@ public class ViewQuest extends JScrollPane {
     /** Layout permanent parts of quest load panel. */
     private void populateLoadQuest() {
         // New quest notes
-        final FRoundedPanel pnl = new FRoundedPanel();
+        final FPanel pnl = new FPanel();
         pnl.setLayout(new MigLayout("insets 0, align center"));
-        pnl.setBorderColor(clrBorders);
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnl.add(new FLabel.Builder().text("Load a previous Quest").build(), "h 95%!, gap 0 0 2.5% 0");
 
@@ -286,9 +283,8 @@ public class ViewQuest extends JScrollPane {
     /** Layout permanent parts of new quests panel. */
     private void populateNewQuest() {
         // New quest notes
-        final FRoundedPanel pnl1 = new FRoundedPanel();
+        final FPanel pnl1 = new FPanel();
         pnl1.setLayout(new MigLayout("insets 0, align center"));
-        pnl1.setBorderColor(clrBorders);
         pnl1.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnl1.add(new FLabel.Builder().text("Start a new quest").build(), "h 95%!, gap 0 0 2.5% 0");
 
@@ -438,7 +434,7 @@ public class ViewQuest extends JScrollPane {
 
                     // Select first event.
                     selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
-                    selectedOpponent.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+                    selectedOpponent.setSelected(true);
                 }
 
                 pnlStats.setVisible(true);
@@ -467,7 +463,7 @@ public class ViewQuest extends JScrollPane {
         if (pnlChallenges.getComponentCount() > 0) {
             pnlStart.setVisible(true);
             selectedOpponent = (SelectablePanel) pnlChallenges.getComponent(0);
-            selectedOpponent.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+            selectedOpponent.setSelected(true);
         }
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -528,21 +524,26 @@ public class ViewQuest extends JScrollPane {
     }
 
     /** Selectable panels for duels and challenges. */
-    public class SelectablePanel extends FRoundedPanel {
+    public class SelectablePanel extends FPanel {
         private QuestEvent event;
-        private Color clrDefault, clrHover, clrSelected;
 
         /** @param e0 &emsp; QuestEvent */
         public SelectablePanel(QuestEvent e0) {
             super();
-            this.clrSelected = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
-            this.clrDefault = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-            this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
             this.event = e0;
-
-            this.setBackground(clrDefault);
+            this.setSelectable(true);
+            this.setHoverable(true);
             this.setLayout(new MigLayout("insets 0, gap 0"));
 
+            this.setCommand(new Command() {
+                @Override
+                public void execute() {
+                    if (selectedOpponent != null) { selectedOpponent.setSelected(false); }
+                    selectedOpponent = ViewQuest.SelectablePanel.this;
+                }
+            });
+
+            // Icon
             final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
             File file = new File(base, event.getIconFilename());
 
@@ -554,34 +555,6 @@ public class ViewQuest extends JScrollPane {
                 lblIcon.setIcon(new ImageIcon(file.toString()));
             }
             this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
-
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    SelectablePanel src = (SelectablePanel) e.getSource();
-
-                    if (selectedOpponent != null) {
-                        selectedOpponent.setBackground(clrDefault);
-                    }
-
-                    selectedOpponent = src;
-                    src.setBackground(clrSelected);
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    if (selectedOpponent != e.getSource()) {
-                        setBackground(clrHover);
-                    }
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    if (selectedOpponent != e.getSource()) {
-                        setBackground(clrDefault);
-                    }
-                }
-            });
 
             // Name
             final FLabel lblName = new FLabel.Builder()

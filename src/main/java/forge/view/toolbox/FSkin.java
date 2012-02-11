@@ -545,7 +545,7 @@ public enum FSkin {
      * Gets an image.
      *
      * @param s0 &emsp; SkinProp enum
-     * @return Image
+     * @return {@link java.awt.Image}
      */
     public static Image getImage(final SkinProp s0) {
         return FSkin.images.get(s0);
@@ -555,7 +555,7 @@ public enum FSkin {
      * Gets an icon.
      *
      * @param s0 &emsp; SkinProp enum
-     * @return ImageIcon
+     * @return {@link javax.swing.ImageIcon}
      */
     public static ImageIcon getIcon(final SkinProp s0) {
         return FSkin.icons.get(s0);
@@ -570,7 +570,7 @@ public enum FSkin {
      *            int new width
      * @param h0
      *            int new height
-     * @return Image
+     * @return {@link java.awt.Image}
      */
     public static Image getImage(final SkinProp s0, int w0, int h0) {
         w0 = (w0 < 1) ? 1 : w0;
