@@ -212,6 +212,11 @@ public class GuiTopLevel extends JFrame implements Display, CardContainer {
         control.getMatchController().getView().getTabberController().getView().updateCombat(s0);
     }
 
+    /** */
+    public void showStack() {
+        control.getMatchController().getView().getTabberController().showPnlStack();
+    }
+
     /*
      * (non-Javadoc)
      * 

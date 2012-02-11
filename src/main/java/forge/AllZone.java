@@ -36,6 +36,7 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestEventManager;
+import forge.view.GuiTopLevel;
 import forge.view.toolbox.FOverlay;
 
 /**
@@ -631,10 +632,9 @@ public final class AllZone {
 
         AllZone.getDisplay().showCombat("");
         AllZone.getDisplay().loadPrefs();
-
         AllZone.getInputControl().clearInput();
-
         AllZone.getColorChanger().reset();
+        ((GuiTopLevel) AllZone.getDisplay()).showStack();
     }
 
     /**

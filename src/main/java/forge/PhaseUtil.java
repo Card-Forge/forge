@@ -21,8 +21,8 @@ import java.util.HashMap;
 
 import forge.Constant.Zone;
 import forge.view.GuiTopLevel;
-import forge.view.match.ViewField.PhaseLabel;
 import forge.view.match.MatchTopLevel;
+import forge.view.match.ViewField.PhaseLabel;
 
 /**
  * <p>
@@ -205,7 +205,6 @@ public class PhaseUtil {
      */
     public static void verifyCombat() {
         AllZone.getCombat().verifyCreaturesInPlay();
-        CombatUtil.showCombat();
     }
 
     /**
@@ -354,7 +353,6 @@ public class PhaseUtil {
         AllZone.getStack().unfreezeStack();
 
         AllZone.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
-        CombatUtil.showCombat();
     }
 
     // ***** Combat Utility **********

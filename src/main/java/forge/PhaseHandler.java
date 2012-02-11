@@ -24,6 +24,7 @@ import java.util.Stack;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
+import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -316,41 +317,59 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         AllZone.getPhaseHandler().setSkipPhase(true);
         AllZone.getGameAction().checkStateEffects();
 
+        // UNTAP
         if (phase.equals(Constant.Phase.UNTAP)) {
+            ((GuiTopLevel) AllZone.getDisplay()).showStack();
             PhaseUtil.handleUntap();
-        } else if (phase.equals(Constant.Phase.UPKEEP)) {
+        }
+        // UPKEEP
+        else if (phase.equals(Constant.Phase.UPKEEP)) {
             PhaseUtil.handleUpkeep();
-        } else if (phase.equals(Constant.Phase.DRAW)) {
+        }
+        // DRAW
+        else if (phase.equals(Constant.Phase.DRAW)) {
             PhaseUtil.handleDraw();
-        } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
+        }
+        // COMBAT_BEGIN
+        else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
             PhaseUtil.verifyCombat();
             PhaseUtil.handleCombatBegin();
-        }  else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+        }
+        // COMBAT_DECLARE_ATTACKERS
+        else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
             PhaseUtil.handleCombatDeclareAttackers();
-        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        }
+        // COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY
+        else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
             if (this.inCombat()) {
                 PhaseUtil.handleDeclareAttackers();
+                CombatUtil.showCombat();
             } else {
                 AllZone.getPhaseHandler().setNeedToNextPhase(true);
             }
         }
-
-        // we can skip AfterBlockers and AfterAttackers if necessary
+        // COMBAT_DECLARE_BLOCKERS: we can skip AfterBlockers and AfterAttackers if necessary
         else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             if (this.inCombat()) {
                 PhaseUtil.verifyCombat();
+                CombatUtil.showCombat();
             } else {
                 AllZone.getPhaseHandler().setNeedToNextPhase(true);
             }
-        } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        }
+        // COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY
+        else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             // After declare blockers are finished being declared mark them
             // blocked and trigger blocking things
-            if (!this.inCombat()) {
-                AllZone.getPhaseHandler().setNeedToNextPhase(true);
-            } else {
+            if (this.inCombat()) {
                 PhaseUtil.handleDeclareBlockers();
+                CombatUtil.showCombat();
+            } else {
+                AllZone.getPhaseHandler().setNeedToNextPhase(true);
             }
-        } else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        }
+        // COMBAT_FIRST_STRIKE_DAMAGE
+        else if (phase.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
             if (!this.inCombat()) {
                 AllZone.getPhaseHandler().setNeedToNextPhase(true);
             } else {
@@ -368,7 +387,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     CombatUtil.showCombat();
                 }
             }
-        } else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
+        }
+        // COMBAT_DAMAGE
+        else if (phase.equals(Constant.Phase.COMBAT_DAMAGE)) {
             if (!this.inCombat()) {
                 AllZone.getPhaseHandler().setNeedToNextPhase(true);
             } else {
@@ -383,13 +404,25 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 AllZone.getGameAction().checkStateEffects();
                 CombatUtil.showCombat();
             }
-        } else if (phase.equals(Constant.Phase.COMBAT_END)) {
+        }
+        // COMBAT_END
+        else if (phase.equals(Constant.Phase.COMBAT_END)) {
             // End Combat always happens
             AllZone.getEndOfCombat().executeUntil();
             AllZone.getEndOfCombat().executeAt();
-        } else if (phase.equals(Constant.Phase.END_OF_TURN)) {
+            CombatUtil.showCombat();
+            ((GuiTopLevel) AllZone.getDisplay()).showStack();
+        }
+        else if (phase.equals(Constant.Phase.MAIN2)) {
+            CombatUtil.showCombat();
+            ((GuiTopLevel) AllZone.getDisplay()).showStack();
+        }
+        // END_OF_TURN
+        else if (phase.equals(Constant.Phase.END_OF_TURN)) {
             AllZone.getEndOfTurn().executeAt();
-        } else if (phase.equals(Constant.Phase.CLEANUP)) {
+        }
+        // CLEANUP
+        else if (phase.equals(Constant.Phase.CLEANUP)) {
             AllZone.getPhaseHandler().getPlayerTurn().clearAssignedDamage();
 
             // Reset Damage received map
@@ -444,6 +477,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // This line fixes Combat Damage triggers not going off when they should
         AllZone.getStack().unfreezeStack();
 
+        // UNTAP
         if (!phase.equals(Constant.Phase.UNTAP)) {
             // during untap
             this.resetPriority();
@@ -492,8 +526,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
 
         if (this.getPhase().equals(Constant.Phase.COMBAT_END)) {
+            ((GuiTopLevel) (AllZone.getDisplay())).showStack();
             AllZone.getCombat().reset();
-            AllZone.getDisplay().showCombat("");
             this.resetAttackedThisCombat(this.getPlayerTurn());
             this.bCombat = false;
         }

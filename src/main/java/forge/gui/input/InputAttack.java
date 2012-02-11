@@ -25,9 +25,9 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Constant.Zone;
-import forge.view.GuiTopLevel;
 import forge.GameActionUtil;
 import forge.PlayerZone;
+import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -114,7 +114,6 @@ public class InputAttack extends Input {
                 com.execute();
             }
 
-            CombatUtil.showCombat();
         }
         else {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();

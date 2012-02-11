@@ -83,8 +83,6 @@ public class InputBlock extends Input {
             sb.append("To cancel a block right-click on your blocker");
             AllZone.getDisplay().showMessage(sb.toString());
         }
-
-        CombatUtil.showCombat();
     }
 
     /** {@inheritDoc} */

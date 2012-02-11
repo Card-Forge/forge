@@ -455,7 +455,6 @@ public class ComputerAIGeneral implements Computer {
         }
 
         AllZone.getComputerPlayer().getZone(Zone.Battlefield).updateObservers();
-        CombatUtil.showCombat();
 
         AllZone.getPhaseHandler().setNeedToNextPhase(true);
     }
@@ -480,8 +479,6 @@ public class ComputerAIGeneral implements Computer {
         final CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
 
         AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
-
-        CombatUtil.showCombat();
 
         AllZone.getPhaseHandler().setNeedToNextPhase(true);
     }

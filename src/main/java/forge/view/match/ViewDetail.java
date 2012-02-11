@@ -17,10 +17,6 @@
  */
 package forge.view.match;
 
-import java.awt.Font;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
 import net.miginfocom.swing.MigLayout;
 import forge.control.match.ControlDetail;
 import forge.gui.game.CardDetailPanel;
@@ -50,24 +46,7 @@ public class ViewDetail extends FPanel {
         add(pnlDetail, "w 100%!, h 100%!");
         control = new ControlDetail(this);
 
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                int px =  (int) (ViewDetail.this.getWidth() / 15);
-                px = (px < 11 ? 11 : px);
-                Font font = FSkin.getFont(px);
-
-                pnlDetail.getNameCostLabel().setFont(font);
-                pnlDetail.getTypeLabel().setFont(font);
-                pnlDetail.getPowerToughnessLabel().setFont(font);
-                pnlDetail.getDamageLabel().setFont(font);
-                pnlDetail.getIDLabel().setFont(font);
-                pnlDetail.getSetInfoLabel().setFont(font);
-                pnlDetail.getCDArea().setFont(font);
-
-                setFont(FSkin.getFont(px));
-            }
-        });
+        setFont(FSkin.getFont(12));
     }
 
     /**

@@ -628,8 +628,6 @@ public class Combat {
                 }
             }
         }
-        // update combat
-        CombatUtil.showCombat();
     } // removeFromCombat()
 
     /**
