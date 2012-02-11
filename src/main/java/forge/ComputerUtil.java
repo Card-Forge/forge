@@ -656,11 +656,7 @@ public class ComputerUtil {
             }
         }
 
-        if (cost.isPaid()) {
-            return true;
-        }
-
-        cost = manapool.subtractMana(sa, cost);
+        // Make mana needed to avoid negative effect a mandatory cost for the AI
         if (card.getSVar("ManaNeededToAvoidNegativeEffect") != "") {
             String[] negEffects = card.getSVar("ManaNeededToAvoidNegativeEffect").split(",");
             int amountAdded = 0;
@@ -680,6 +676,14 @@ public class ComputerUtil {
             //      in the original cost? (ArsenalNut - 120102)
             // adjust colorless amount to account for added mana
             cost.decreaseColorlessMana(amountAdded);
+        }
+
+        cost = manapool.subtractMana(sa, cost);
+
+        if (cost.isPaid()) {
+            // refund any mana taken from mana pool when test
+            manapool.clearPay(sa, test); 
+            return true;
         }
 
         // get map of mana abilities
@@ -756,7 +760,7 @@ public class ComputerUtil {
                 if (srcFound.size() > 0) {
                     int i;
                     for (i = 0; i < partPriority.size(); i++) {
-                        if (srcFound.size() < partSources.get(i).size()) {
+                        if (srcFound.size() <= partSources.get(i).size()) {
                             break;
                         }
                     }
@@ -773,6 +777,7 @@ public class ComputerUtil {
                 // real payment should not arrive here
                 throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
             }
+            manapool.clearPay(sa, test); // refund any mana taken from mana pool
             return false;
         }
 
@@ -893,12 +898,12 @@ public class ComputerUtil {
 
         } // end of cost parts loop
 
+        manapool.clearPay(sa, test);
         // check if paid
         if (cost.isPaid()) {
             //if (sa instanceof Spell_Permanent) // should probably add this
             sa.getSourceCard().setColorsPaid(cost.getColorsPaid());
             sa.getSourceCard().setSunburstValue(cost.getSunburst());
-            manapool.clearPay(sa, test);
             return true;
         }
 
