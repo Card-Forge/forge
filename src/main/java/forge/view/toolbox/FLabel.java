@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -15,6 +17,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 import forge.Command;
 
@@ -197,34 +200,17 @@ public class FLabel extends JLabel {
 
     private AlphaComposite alphaDim, alphaStrong;
 
-    // Resize adapter
+    private final ActionListener fireResize = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) { resize(); resizeTimer.stop(); }
+    };
+
+    private Timer resizeTimer = new Timer(10, fireResize);
+
+    // Resize adapter; on a timer to prevent resizing while "sliding" between sizes
     private final ComponentAdapter cadResize = new ComponentAdapter() {
         @Override
-        public void componentResized(ComponentEvent e) {
-            if (fontScaleAuto) {
-                ref = (fontScaleBy == SwingConstants.VERTICAL ? getHeight() : getWidth());
-                switch (fontStyle) {
-                    case Font.BOLD:
-                        setFont(FSkin.getBoldFont((int) (ref * fontScaleFactor)));
-                        repaint();
-                        break;
-                    case Font.ITALIC:
-                        setFont(FSkin.getItalicFont((int) (ref * fontScaleFactor)));
-                        break;
-                    default:
-                        setFont(FSkin.getFont((int) (ref * fontScaleFactor)));
-                }
-            }
-
-            // Non-background icon
-            if (img != null && iconScaleAuto  && !iconInBackground) {
-                h = (int) (getHeight() * iconScaleFactor);
-                w = (int) (h * iar * iconScaleFactor);
-                if (w == 0 || h == 0) { return; }
-
-                FLabel.super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));
-            }
-        }
+        public void componentResized(ComponentEvent e) { resizeTimer.restart(); }
     };
 
     // Mouse event handler
@@ -370,5 +356,31 @@ public class FLabel extends JLabel {
         }
 
         super.paintComponent(g);
+    }
+
+    private void resize() {
+        if (fontScaleAuto) {
+            ref = (fontScaleBy == SwingConstants.VERTICAL ? getHeight() : getWidth());
+            switch (fontStyle) {
+                case Font.BOLD:
+                    setFont(FSkin.getBoldFont((int) (ref * fontScaleFactor)));
+                    repaint();
+                    break;
+                case Font.ITALIC:
+                    setFont(FSkin.getItalicFont((int) (ref * fontScaleFactor)));
+                    break;
+                default:
+                    setFont(FSkin.getFont((int) (ref * fontScaleFactor)));
+            }
+        }
+
+        // Non-background icon
+        if (img != null && iconScaleAuto  && !iconInBackground) {
+            h = (int) (getHeight() * iconScaleFactor);
+            w = (int) (h * iar * iconScaleFactor);
+            if (w == 0 || h == 0) { return; }
+
+            FLabel.super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));
+        }
     }
 }
