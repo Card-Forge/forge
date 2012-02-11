@@ -2620,6 +2620,7 @@ res/cardsfolder/e/endless_cockroaches.txt svneol=native#text/plain
 res/cardsfolder/e/endless_ranks_of_the_dead.txt -text
 res/cardsfolder/e/endless_scream.txt -text
 res/cardsfolder/e/endless_swarm.txt -text
+res/cardsfolder/e/endless_wurm.txt -text
 res/cardsfolder/e/endoskeleton.txt svneol=native#text/plain
 res/cardsfolder/e/endrek_sahr_master_breeder.txt -text
 res/cardsfolder/e/endure.txt -text
@@ -5025,6 +5026,7 @@ res/cardsfolder/l/lions_eye_diamond.txt -text
 res/cardsfolder/l/liquify.txt svneol=native#text/plain
 res/cardsfolder/l/liquimetal_coating.txt svneol=native#text/plain
 res/cardsfolder/l/lithatog.txt svneol=native#text/plain
+res/cardsfolder/l/lithophage.txt -text
 res/cardsfolder/l/liu_bei_lord_of_shu.txt svneol=native#text/plain
 res/cardsfolder/l/livewire_lash.txt svneol=native#text/plain
 res/cardsfolder/l/living_airship.txt svneol=native#text/plain
