@@ -338,12 +338,13 @@ public class TriggerHandler {
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
         CardList allCards = AllZoneUtil.getCardsInGame();
+        boolean checkStatics = false;
 
         // Static triggers
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
                 if (t.getMapParams().containsKey("Static")) {
-                    this.runSingleTrigger(t, mode, runParams);
+                    checkStatics |= this.runSingleTrigger(t, mode, runParams);
                 }
             }
         }
@@ -360,9 +361,11 @@ public class TriggerHandler {
          * AllZone.getGameAction().checkStateEffects(true);
          * this.clearSuppression("Always");
          */
-        this.suppressMode("Always");
-        AllZone.getGameAction().checkStaticAbilities();
-        this.clearSuppression("Always");
+        if (checkStatics) {
+            this.suppressMode("Always");
+            AllZone.getGameAction().checkStaticAbilities();
+            this.clearSuppression("Always");
+        }
 
         // AP
         allCards = playerAP.getAllCards();
