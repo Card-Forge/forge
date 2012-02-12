@@ -112,7 +112,7 @@ public class GameAction {
         if ((prev == null) && !c.isToken()) {
             zone.add(c);
             Player p = zone.getPlayer();
-            if (p != null){
+            if (p != null) {
                 p.updateLabelObservers();
             }
             return c;
@@ -194,9 +194,9 @@ public class GameAction {
 
             prev.remove(c);
         }
-        
+
         Player p = zone.getPlayer();
-        if (p != null){
+        if (p != null) {
             p.updateLabelObservers();
         }
 
