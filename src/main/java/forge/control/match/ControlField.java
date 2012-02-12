@@ -468,7 +468,12 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-                final Card c = t.getDetailController().getCurrentCard();
+
+                // original version:
+                // final Card c = t.getDetailController().getCurrentCard();
+                // Roujin's bug fix version dated 2-12-2012
+                final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
+
                 final Input input = t.getInputController().getInputControl().getInput();
 
                 if (c != null && c.isInZone(Zone.Battlefield)) {
