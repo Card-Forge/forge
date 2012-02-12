@@ -477,6 +477,12 @@ public final class AbilityFactoryAnimate {
         final Map<String, String> svars = host.getSVars();
         long timest = -1;
 
+        //if host is not on the battlefield don't apply
+        if (params.containsKey("UntilHostLeavesPlay")
+                && !AllZoneUtil.isCardInPlay(sa.getSourceCard())) {
+            return;
+        }
+
         // AF specific params
         int power = -1;
         if (params.containsKey("Power")) {
