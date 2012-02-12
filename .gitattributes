@@ -5321,6 +5321,7 @@ res/cardsfolder/m/martyr_of_sands.txt -text
 res/cardsfolder/m/martyr_of_spores.txt -text
 res/cardsfolder/m/martyred_rusalka.txt svneol=native#text/plain
 res/cardsfolder/m/martyrs_cry.txt -text
+res/cardsfolder/m/martyrs_of_korlis.txt -text svneol=unset#text/plain
 res/cardsfolder/m/martyrs_tomb.txt svneol=native#text/plain
 res/cardsfolder/m/masako_the_humorless.txt svneol=native#text/plain
 res/cardsfolder/m/mask_of_avacyn.txt -text
@@ -9573,6 +9574,7 @@ res/cardsfolder/v/vengeful_dead.txt svneol=native#text/plain
 res/cardsfolder/v/vengeful_dreams.txt svneol=native#text/plain
 res/cardsfolder/v/vengeful_firebrand.txt svneol=native#text/plain
 res/cardsfolder/v/vengeful_pharaoh.txt svneol=native#text/plain
+res/cardsfolder/v/vengeful_rebirth.txt -text svneol=unset#text/plain
 res/cardsfolder/v/vengeful_vampire.txt -text
 res/cardsfolder/v/vengevine.txt svneol=native#text/plain
 res/cardsfolder/v/venom.txt -text
