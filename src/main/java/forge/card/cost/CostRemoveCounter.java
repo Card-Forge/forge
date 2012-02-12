@@ -136,9 +136,15 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
+        final String amount = this.getAmount();
         Integer c = this.convertAmount();
+        final Counters type = this.getCounter();
         if (c == null) {
-            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+            if (amount.equals("All")) {
+                c = source.getCounters(type);
+            } else {
+                c = AbilityFactory.calculateAmount(source, amount, ability);
+            }
         }
         source.subtractCounter(this.getCounter(), c);
         source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
@@ -194,17 +200,22 @@ public class CostRemoveCounter extends CostPart {
      */
     @Override
     public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+        final String amount = this.getAmount();
         Integer c = this.convertAmount();
+        final Counters type = this.getCounter();
         if (c == null) {
-            final String sVar = source.getSVar(this.getAmount());
+            final String sVar = source.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 return false;
             }
-
-            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+            if (amount.equals("All")) {
+                c = source.getCounters(type);
+            } else {
+                c = AbilityFactory.calculateAmount(source, amount, ability);
+            }
         }
         if (c > source.getCounters(this.getCounter())) {
-            System.out.println("Not enough " + this.getCounter() + " on " + source.getName());
+            System.out.println("Not enough " + type + " on " + source.getName());
             return false;
         }
         return true;
