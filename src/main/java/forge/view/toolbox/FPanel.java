@@ -194,6 +194,7 @@ public class FPanel extends JPanel {
      */
     @Override
     protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
         pw = this.getWidth();
         ph = this.getHeight();
         g2d = (Graphics2D) g.create();
