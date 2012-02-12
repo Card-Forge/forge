@@ -7,7 +7,7 @@ Description=Mono W deck with Crovax, Ascendant Hero, Honor of the Pure and small
 Icon=Wyatt Earp.jpg
 Deck Type=constructed
 [main]
-21 Plains
+21 Plains|M12
 1 Karakas
 1 Mox Pearl
 4 Honor of the Pure

@@ -15,7 +15,7 @@ Description=Untold treasure awaits you, should you successfully dodge the lightn
 Icon=Dungeon Crawling Red.jpg
 Deck Type=constructed
 [main]
-49 Mountain
+49 Mountain|ISD
 1 Fury Sliver
 1 Hearthfire Hobgoblin
 1 Ridgetop Raptor

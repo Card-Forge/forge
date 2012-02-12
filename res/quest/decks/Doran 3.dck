@@ -7,9 +7,9 @@ Description=WBG Doran, the Siege Tower deck with high toughness creatures
 Icon=Doran.jpg
 Deck Type=constructed
 [main]
-1 Swamp
-1 Forest
-1 Plains
+1 Swamp|M11
+1 Forest|M11
+1 Plains|M11
 3 Bayou
 3 Scrubland
 3 Savannah

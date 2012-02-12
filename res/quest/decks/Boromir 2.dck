@@ -7,7 +7,7 @@ Description=Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures
 Icon=Boromir.jpg
 Deck Type=constructed
 [main]
-22 Forest
+22 Forest|ISD
 4 Elvish Piper
 4 Quicksilver Amulet
 4 Harmonize

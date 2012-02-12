@@ -7,10 +7,10 @@ Description=WBRG Landfall deck
 Icon=Aragorn.jpg
 Deck Type=constructed
 [main]
-3 Forest
-2 Plains
-2 Swamp
-2 Mountain
+3 Forest|M12
+2 Plains|M12
+2 Swamp|M12
+2 Mountain|M12
 4 Undiscovered Paradise
 1 Thawing Glaciers
 2 Mountain Valley

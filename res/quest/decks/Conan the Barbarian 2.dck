@@ -34,9 +34,9 @@ Deck Type=constructed
 1 Bladed Pinions
 1 Grafted Wargear
 1 Warlord's Axe
-3 Forest
-6 Mountain
-3 Swamp
+3 Forest|SOM
+6 Mountain|SOM
+3 Swamp|SOM
 2 Badlands
 2 Bayou
 2 Taiga

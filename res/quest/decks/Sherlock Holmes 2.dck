@@ -7,7 +7,7 @@ Description=Mono G deck with Baru, Fist of Krosa and lots of good green creature
 Icon=Sherlock Holmes.jpg
 Deck Type=constructed
 [main]
-22 Forest
+22 Forest|M12
 1 Emerald Medallion
 1 Three Visits
 1 An-Havva Inn

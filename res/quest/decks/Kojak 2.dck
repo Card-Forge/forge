@@ -7,7 +7,7 @@ Description=Mono U deck with Sunken City, Inundate, counterspells and bounce
 Icon=Kojak.jpg
 Deck Type=constructed
 [main]
-22 Island
+22 Island|M12
 1 Sapphire Medallion
 4 Briarberry Cohort
 2 Deepchannel Mentor

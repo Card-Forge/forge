@@ -15,7 +15,7 @@ Description=The dead cannot be silenced, and want you to join their ranks.
 Icon=Dungeon Crawling Black.jpg
 Deck Type=constructed
 [main]
-20 Swamp
+20 Swamp|M11
 4 Charcoal Diamond
 1 Armillary Sphere
 1 Pilgrim's Eye

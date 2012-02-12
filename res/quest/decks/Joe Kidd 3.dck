@@ -8,8 +8,8 @@ Icon=Joe Kidd.jpg
 Deck Type=constructed
 [main]
 3 Mourning Thrull
-5 Swamp
-5 Plains
+5 Swamp|ISD
+5 Plains|ISD
 1 Stillmoon Cavalier
 4 Nightsky Mimic
 4 Scrubland

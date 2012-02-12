@@ -7,8 +7,8 @@ Description=WU Battle of Wits deck
 Icon=Darth Vader.jpg
 Deck Type=constructed
 [main]
-31 Island
-31 Plains
+31 Island|M12
+31 Plains|M12
 4 Tundra
 4 Arcane Sanctum
 4 Coastal Tower

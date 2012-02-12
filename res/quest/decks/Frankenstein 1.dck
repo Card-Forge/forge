@@ -7,8 +7,8 @@ Description=WG Golem deck with several Splicers
 Icon=Frankenstein.jpg
 Deck Type=constructed
 [main]
-12 Plains
-8 Forest
+12 Plains|NPH
+8 Forest|NPH
 4 Elfhame Palace
 1 Master Splicer
 4 Sensor Splicer

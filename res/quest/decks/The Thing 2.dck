@@ -7,7 +7,7 @@ Description=Mono W creatureless deck with Urza's Armor, Sphere of Purity, Copper
 Icon=The Thing.jpg
 Deck Type=constructed
 [main]
-10 Plains
+10 Plains|M12
 4 Mystifying Maze
 4 Kabira Crossroads
 1 Desert

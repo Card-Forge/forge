@@ -7,9 +7,9 @@ Description=WU Painter's Servant - Grindstone combo
 Icon=Samantha Stephens.jpg
 Deck Type=constructed
 [main]
-2 Plains
+2 Plains|SOM
 1 Karakas
-3 Island
+3 Island|SOM
 4 Tundra
 4 Flooded Strand
 4 Seachrome Coast

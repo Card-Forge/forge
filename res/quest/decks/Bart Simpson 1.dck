@@ -7,9 +7,9 @@ Description=UBG deck with Rathi Trapper and Paralyzing Grasp
 Icon=Bart Simpson.jpg
 Deck Type=constructed
 [main]
-4 Forest
-4 Island
-4 Swamp
+4 Forest|ISD
+4 Island|ISD
+4 Swamp|ISD
 4 Verdant Catacombs
 4 Misty Rainforest
 4 Drowned Catacomb

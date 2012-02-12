@@ -18,9 +18,9 @@ Deck Type=constructed
 2 Trygon Predator
 4 Crystallization
 4 Temporal Spring
-4 Forest
-4 Island
-4 Plains
+4 Forest|SOM
+4 Island|SOM
+4 Plains|SOM
 4 Razorverge Thicket
 4 Seachrome Coast
 4 Seaside Citadel

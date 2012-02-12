@@ -12,11 +12,11 @@ Deck Type=constructed
 2 Elite Cat Warrior
 4 Kjeldoran War Cry
 4 Lightning Helix
-3 Plains
+3 Plains|ALA
 3 Savannah Lions
 3 Commune with Nature
 4 Penumbra Bobcat
-3 Forest
+3 Forest|ALA
 2 Canyon Wildcat
 4 Horned Cheetah
 2 Obelisk of Naya
@@ -29,5 +29,5 @@ Deck Type=constructed
 4 Savannah
 1 Moss Diamond
 3 Wild Nacatl
-2 Mountain
+2 Mountain|ALA
 [sideboard]

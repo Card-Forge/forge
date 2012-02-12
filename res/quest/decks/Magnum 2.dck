@@ -8,9 +8,9 @@ Icon=Magnum.jpg
 Deck Type=constructed
 [main]
 4 Tropical Island
-8 Island
+8 Island|ISD
 2 Yavimaya Coast
-5 Forest
+5 Forest|ISD
 2 Temporal Spring
 2 Hinterland Harbor
 2 Cold-Eyed Selkie

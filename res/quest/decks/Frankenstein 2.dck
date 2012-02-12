@@ -7,8 +7,8 @@ Description=WU Golem deck with several Splicers
 Icon=Frankenstein.jpg
 Deck Type=constructed
 [main]
-10 Plains
-10 Island
+10 Plains|M12
+10 Island|M12
 4 Glacial Fortress
 3 Blade Splicer
 4 Master Splicer

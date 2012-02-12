@@ -7,8 +7,8 @@ Description=BR deck with Emberstrike Duo
 Icon=Deadpool.jpg
 Deck Type=constructed
 [main]
-9 Mountain
-9 Swamp
+9 Mountain|ISD
+9 Swamp|ISD
 1 Tresserhorn Sinks
 1 Cinder Marsh
 1 Lantern-Lit Graveyard

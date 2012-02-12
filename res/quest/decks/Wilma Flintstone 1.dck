@@ -7,8 +7,8 @@ Description=BG deck with Noxious Hatchling and Woodlurker Mimic
 Icon=Wilma Flintstone.jpg
 Deck Type=constructed
 [main]
-7 Forest
-7 Swamp
+7 Forest|M11
+7 Swamp|M11
 3 Gilt-Leaf Palace
 2 Llanowar Wastes
 2 Pine Barrens

@@ -11,7 +11,7 @@ Deck Type=constructed
 4 Jungle Shrine
 4 Plateau
 3 Kor Duelist
-4 Plains
+4 Plains|ISD
 4 Glorious Anthem
 4 Skyhunter Skirmisher
 4 Bonesplitter
@@ -25,5 +25,5 @@ Deck Type=constructed
 1 Ogre's Cleaver
 1 Rakdos Pit Dragon
 4 Hearthfire Hobgoblin
-4 Mountain
+4 Mountain|ISD
 [sideboard]

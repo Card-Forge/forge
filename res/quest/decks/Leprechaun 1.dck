@@ -7,7 +7,7 @@ Description=WBG anti green deck with Aisling Leprechaun, Beast Within and Waitin
 Icon=Leprechaun.jpg
 Deck Type=constructed
 [main]
-8 Forest
+8 Forest|M12
 4 Murmuring Bosk
 3 Gilt-Leaf Palace
 2 Savage Lands

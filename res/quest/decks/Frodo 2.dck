@@ -15,11 +15,11 @@ Deck Type=constructed
 3 Kird Ape
 4 Striped Bears
 2 Lightning Helix
-2 Plains
+2 Plains|M11
 4 Savannah Lions
 1 Glorious Anthem
 3 Plated Geopede
-1 Forest
+1 Forest|M11
 3 Path to Exile
 2 Lightning Bolt
 3 Loam Lion
@@ -28,5 +28,5 @@ Deck Type=constructed
 2 Steppe Lynx
 4 Savannah
 3 Wild Nacatl
-4 Mountain
+4 Mountain|M11
 [sideboard]

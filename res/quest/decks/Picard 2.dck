@@ -9,9 +9,9 @@ Deck Type=constructed
 [main]
 4 Seaside Citadel
 1 Treva's Ruins
-5 Forest
-1 Plains
-1 Island
+5 Forest|ISD
+1 Plains|ISD
+1 Island|ISD
 1 Elfhame Palace
 1 Graypelt Refuge
 1 Razorverge Thicket

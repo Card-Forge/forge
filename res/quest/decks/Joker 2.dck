@@ -7,7 +7,7 @@ Description=Mono G Survival of the Fittest deck with Squee, Goblin Nabob and Bas
 Icon=Joker.jpg
 Deck Type=constructed
 [main]
-25 Forest
+25 Forest|M12
 4 Survival of the Fittest
 4 Fauna Shaman
 1 Llanowar Mentor

@@ -7,8 +7,8 @@ Description=WU Merfolk deck with Merrow Reejerey, Lord of Atlantis and Stonybroo
 Icon=Mr Slate.jpg
 Deck Type=constructed
 [main]
-1 Plains
-8 Island
+1 Plains|M11
+8 Island|M11
 4 Tundra
 4 Flooded Strand
 4 Wanderwine Hub

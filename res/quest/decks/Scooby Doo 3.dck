@@ -11,8 +11,8 @@ Deck Type=constructed
 4 Sacred Foundry
 4 Plateau
 4 Arid Mesa
-4 Plains
-4 Mountain
+4 Plains|M12
+4 Mountain|M12
 1 Mox Ruby
 1 Mox Pearl
 2 Darksteel Ingot
@@ -29,4 +29,5 @@ Deck Type=constructed
 1 Thundercloud Shaman
 1 Sunhome Enforcer
 [sideboard]
+
 

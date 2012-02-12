@@ -9,8 +9,8 @@ Deck Type=constructed
 [main]
 4 Misty Rainforest
 4 Tropical Island
-7 Island
-5 Forest
+7 Island|M12
+5 Forest|M12
 4 Dryad Arbor
 4 Intruder Alarm
 4 Seedborn Muse

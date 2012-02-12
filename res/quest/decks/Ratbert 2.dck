@@ -7,7 +7,7 @@ Description=Mono B Fear deck with Thran Lens
 Icon=Ratbert.jpg
 Deck Type=constructed
 [main]
-23 Swamp
+23 Swamp|M11
 4 Thran Lens
 1 Dread
 1 Gluttonous Zombie

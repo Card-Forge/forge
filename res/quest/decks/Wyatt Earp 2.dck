@@ -7,7 +7,7 @@ Description=Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium
 Icon=Wyatt Earp.jpg
 Deck Type=constructed
 [main]
-22 Plains
+22 Plains|MBS
 1 Pearl Medallion
 3 Ballynock Cohort
 1 Ballynock Trapper

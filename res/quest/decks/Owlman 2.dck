@@ -7,8 +7,8 @@ Description=UB Rogue deck
 Icon=Owlman.jpg
 Deck Type=constructed
 [main]
-10 Swamp
-2 Island
+10 Swamp|ISD
+2 Island|ISD
 4 Darkslick Shores
 4 Drowned Catacomb
 4 Secluded Glen

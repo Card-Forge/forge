@@ -7,8 +7,8 @@ Description=BR Goblin deck with Goblin Ringleader, Mad Auntie and Frogtosser Ban
 Icon=C3PO.jpg
 Deck Type=constructed
 [main]
-8 Mountain
-4 Swamp
+8 Mountain|M12
+4 Swamp|M12
 2 Badlands
 4 Auntie's Hovel
 2 Dragonskull Summit

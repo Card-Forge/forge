@@ -10,7 +10,7 @@ Deck Type=constructed
 4 Sacred Foundry
 4 Plateau
 3 Lightning Helix
-7 Plains
+7 Plains|M12
 4 Rukh Egg
 4 Flamebreak
 3 Auriok Champion
@@ -23,5 +23,5 @@ Deck Type=constructed
 2 Earthquake
 4 Skyknight Legionnaire
 3 Kor Firewalker
-7 Mountain
+7 Mountain|M12
 [sideboard]

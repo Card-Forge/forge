@@ -7,9 +7,9 @@ Description=UBG deck with spirits and arcane spells
 Icon=Totoro.jpg
 Deck Type=constructed
 [main]
-6 Forest
-4 Swamp
-4 Island
+6 Forest|M12
+4 Swamp|M12
+4 Island|M12
 4 Terramorphic Expanse
 4 Evolving Wilds
 2 Waterveil Cavern

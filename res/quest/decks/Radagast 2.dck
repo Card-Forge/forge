@@ -7,7 +7,7 @@ Description=Mono G Muraganda Petroglyphs deck with vanilla creatures and a few t
 Icon=Radagast.jpg
 Deck Type=constructed
 [main]
-23 Forest
+23 Forest|M11
 4 Muraganda Petroglyphs
 2 Hornet Sting
 2 Hurricane

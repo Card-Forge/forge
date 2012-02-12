@@ -7,10 +7,10 @@ Description=WUBRG Landfall deck
 Icon=Aragorn.jpg
 Deck Type=constructed
 [main]
-1 Forest
-2 Plains
-1 Swamp
-1 Mountain
+1 Forest|M11
+2 Plains|M11
+1 Swamp|M11
+1 Mountain|M11
 3 Taiga
 4 Bayou
 4 Savannah

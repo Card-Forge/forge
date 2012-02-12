@@ -7,9 +7,9 @@ Description=WBG Squirrel deck with tokens, changelings, Deranged Hermit and curs
 Icon=King Kong.jpg
 Deck Type=constructed
 [main]
-8 Forest
-2 Plains
-2 Swamp
+8 Forest|M11
+2 Plains|M11
+2 Swamp|M11
 4 Bayou
 4 Savannah
 2 Scrubland

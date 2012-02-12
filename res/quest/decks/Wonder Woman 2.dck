@@ -7,7 +7,7 @@ Description=Mono W Equipment deck
 Icon=Wonder Woman.jpg
 Deck Type=constructed
 [main]
-24 Plains
+24 Plains|MBS
 2 Auriok Glaivemaster
 2 Kitesail Apprentice
 2 Kor Duelist

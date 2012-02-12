@@ -7,7 +7,7 @@ Description=Mono B deck with Ashenmoor Cohort, Bad Moon and Crowd of Cinders
 Icon=Da Vinci.jpg
 Deck Type=constructed
 [main]
-22 Swamp
+22 Swamp|M12
 4 Ashenmoor Cohort
 1 Bad Moon
 3 Corrosive Mentor

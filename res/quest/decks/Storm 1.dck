@@ -7,9 +7,9 @@ Description=WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant
 Icon=Storm.jpg
 Deck Type=constructed
 [main]
-4 Plains
-2 Forest
-2 Swamp
+4 Plains|M12
+2 Forest|M12
+2 Swamp|M12
 4 Razorverge Thicket
 4 Arcane Sanctum
 4 Graypelt Refuge

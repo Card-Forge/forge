@@ -19,13 +19,13 @@ Deck Type=constructed
 4 Taiga
 2 Dragonskull Summit
 1 Mox Emerald
-1 Swamp
+1 Swamp|M12
 4 Putrid Leech
 2 Bituminous Blast
 2 Siege-Gang Commander
 1 Garruk Wildspeaker
 3 Savage Lands
-1 Forest
+1 Forest|M12
 4 Badlands
 4 Blightning
 4 Lightning Bolt
@@ -37,5 +37,5 @@ Deck Type=constructed
 2 Sarkhan the Mad
 1 Mox Jet
 4 Sprouting Thrinax
-1 Mountain
+1 Mountain|M12
 [sideboard]

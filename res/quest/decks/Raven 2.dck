@@ -7,8 +7,8 @@ Description=WU Spirit deck
 Icon=Raven.jpg
 Deck Type=constructed
 [main]
-6 Plains
-5 Island
+6 Plains|M12
+5 Island|M12
 4 Sejiri Refuge
 4 Glacial Fortress
 4 Seachrome Coast

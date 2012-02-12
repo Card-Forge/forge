@@ -15,8 +15,8 @@ Description=The inhabitants of this plane tread with a light step.
 Icon=Dungeon Crawling Colorless.jpg
 Deck Type=constructed
 [main]
-20 Island
-20 Swamp
+20 Island|SOM
+20 Swamp|SOM
 1 Complex Automaton
 1 Eldrazi Monument
 1 Esperzoa

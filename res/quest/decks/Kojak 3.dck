@@ -7,7 +7,7 @@ Description=Mono U deck with Sunken City, Inundate, counterspells and bounce
 Icon=Kojak.jpg
 Deck Type=constructed
 [main]
-21 Island
+21 Island|M10
 1 Mox Sapphire
 1 Sapphire Medallion
 1 Ancestral Recall

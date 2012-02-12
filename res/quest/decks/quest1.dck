@@ -15,7 +15,7 @@ Description=This realm is guarded by a divine entity laying his protecting hand 
 Icon=Dungeon Crawling White.jpg
 Deck Type=constructed
 [main]
-24 Plains
+24 Plains|M12
 1 Abbey Gargoyles
 1 Archon of Redemption
 1 Border Guard

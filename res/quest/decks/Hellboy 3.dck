@@ -7,7 +7,7 @@ Description=BR direct damage deck
 Icon=Hellboy.jpg
 Deck Type=constructed
 [main]
-5 Swamp
+5 Swamp|ISD
 7 Mountain 
 4 Badlands
 4 Bloodstained Mire

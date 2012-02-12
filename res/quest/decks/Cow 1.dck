@@ -7,7 +7,7 @@ Description=Mono R Minotaur deck
 Icon=Cow.jpg
 Deck Type=constructed
 [main]
-24 Mountain
+24 Mountain|NPH
 4 Anaba Ancestor
 4 Anaba Spirit Crafter
 4 Didgeridoo

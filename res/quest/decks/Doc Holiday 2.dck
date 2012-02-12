@@ -28,9 +28,9 @@ Deck Type=constructed
 1 Hindering Light
 1 AEther Mutation
 1 Captured Sunlight
-5 Forest
-5 Island
-5 Plains
+5 Forest|SOM
+5 Island|SOM
+5 Plains|SOM
 2 Razorverge Thicket
 3 Seachrome Coast
 4 Seaside Citadel

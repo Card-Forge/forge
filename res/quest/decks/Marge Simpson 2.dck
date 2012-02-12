@@ -7,8 +7,8 @@ Description=RG deck with tokens which are devoured by creatures with devour
 Icon=Marge Simpson.jpg
 Deck Type=constructed
 [main]
-8 Mountain
-8 Forest
+8 Mountain|M11
+8 Forest|M11
 4 Stomping Ground
 4 Wooded Foothills
 1 Dragon Broodmother

@@ -12,11 +12,11 @@ Deck Type=constructed
 4 Wooded Foothills
 1 Dragonmaster Outcast
 1 Mox Emerald
-1 Swamp
+1 Swamp|M10
 4 Jund Hackblade
 4 Bituminous Blast
 4 Savage Lands
-1 Forest
+1 Forest|M10
 3 Badlands
 4 Bloodstained Mire
 4 Blightning
@@ -32,5 +32,5 @@ Deck Type=constructed
 2 Madrush Cyclops
 4 Sprouting Thrinax
 1 Woodlurker Mimic
-1 Mountain
+1 Mountain|M10
 [sideboard]

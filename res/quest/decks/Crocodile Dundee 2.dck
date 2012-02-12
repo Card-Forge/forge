@@ -7,7 +7,7 @@ Description=Mono R deck with Mudbrawler Cohort and Bloodmark Mentor
 Icon=Crocodile Dundee.jpg
 Deck Type=constructed
 [main]
-22 Mountain
+22 Mountain|M10
 1 Ruby Medallion
 3 Bloodmark Mentor
 3 Cinder Pyromancer

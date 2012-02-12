@@ -8,8 +8,8 @@ Icon=Joe Kidd.jpg
 Deck Type=constructed
 [main]
 4 Arcane Sanctum
-8 Swamp
-8 Plains
+8 Swamp|M11
+8 Plains|M11
 2 Godless Shrine
 2 Caves of Koilos
 1 Orzhova, the Church of Deals

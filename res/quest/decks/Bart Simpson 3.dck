@@ -7,9 +7,9 @@ Description=WUG deck with Harrier Griffin and Entangling Vines
 Icon=Bart Simpson.jpg
 Deck Type=constructed
 [main]
-2 Island
-3 Plains
-2 Forest
+2 Island|M10
+3 Plains|M10
+2 Forest|M10
 4 Tropical Island
 4 Savannah
 4 Tundra

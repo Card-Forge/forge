@@ -15,7 +15,7 @@ Description=Summoning creatures feels different here.
 Icon=Repressed Magic.jpg
 Deck Type=constructed
 [main]
-24 Swamp
+24 Swamp|SOM
 1 Demonic Tutor
 4 Accursed Centaur
 3 Kjeldoran Dead

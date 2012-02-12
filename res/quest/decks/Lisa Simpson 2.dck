@@ -7,8 +7,8 @@ Description=WG Devour deck with tokens, Skullmulcher and Mycoloth
 Icon=Lisa Simpson.jpg
 Deck Type=constructed
 [main]
-7 Forest
-7 Plains
+7 Forest|M11
+7 Plains|M11
 4 Savannah
 4 Graypelt Refuge
 3 Kjeldoran Outpost

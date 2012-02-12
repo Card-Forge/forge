@@ -8,9 +8,9 @@ Icon=Homer Simpson.jpg
 Deck Type=constructed
 [main]
 4 Crumbling Necropolis
-6 Mountain
-4 Island
-10 Swamp
+6 Mountain|M12
+4 Island|M12
+10 Swamp|M12
 4 Mortician Beetle
 2 Deathgreeter
 1 Hissing Iguanar

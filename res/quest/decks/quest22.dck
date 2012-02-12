@@ -15,7 +15,7 @@ Description=A mysterious man threatens to flood the land with a relentless strea
 Icon=The Pied Piper.jpg
 Deck Type=constructed
 [main]
-6 Swamp
+6 Swamp|M11
 4 Underground Sea
 4 Jwar Isle Refuge
 4 Frost Marsh

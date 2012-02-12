@@ -7,8 +7,8 @@ Description=WU flying creature deck with Radiant, Archangel, Gravitational Shift
 Icon=Radiant.jpg
 Deck Type=constructed
 [main]
-2 Plains
-2 Island
+2 Plains|M12
+2 Island|M12
 4 Tundra
 4 Sejiri Refuge
 4 Glacial Fortress

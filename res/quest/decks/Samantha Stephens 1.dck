@@ -7,8 +7,8 @@ Description=WU Painter's Servant anti-red deck
 Icon=Samantha Stephens.jpg
 Deck Type=constructed
 [main]
-5 Plains
-5 Island
+5 Plains|M12
+5 Island|M12
 4 Cloudcrest Lake
 4 Coastal Tower
 4 Boreal Shelf

@@ -8,8 +8,8 @@ Icon=Galahad.jpg
 Deck Type=constructed
 [main]
 2 Armageddon
-6 Swamp
-6 Plains
+6 Swamp|M12
+6 Plains|M12
 4 Scrubland
 4 Godless Shrine
 1 Day of Judgment

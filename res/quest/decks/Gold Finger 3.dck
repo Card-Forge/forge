@@ -7,7 +7,7 @@ Description=Mono U control deck with various counter spells, Serra Sphinx and Me
 Icon=Gold Finger.jpg
 Deck Type=constructed
 [main]
-24 Island
+24 Island|M11
 1 Mox Sapphire
 4 Counterspell
 1 Remove Soul

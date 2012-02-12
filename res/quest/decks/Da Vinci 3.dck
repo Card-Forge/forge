@@ -7,7 +7,7 @@ Description=Mono B deck with Korlash, Heir to Blackblade, Bad Moon and threat re
 Icon=Da Vinci.jpg
 Deck Type=constructed
 [main]
-23 Swamp
+23 Swamp|NPH
 1 Mox Jet
 4 Korlash, Heir to Blackblade
 1 Ascendant Evincar

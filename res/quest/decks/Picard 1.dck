@@ -7,8 +7,8 @@ Description=WG tribal Elf deck
 Icon=Picard.jpg
 Deck Type=constructed
 [main]
-10 Forest
-5 Plains
+10 Forest|M11
+5 Plains|M11
 3 Elfhame Palace
 1 Arctic Flats
 1 Tranquil Garden

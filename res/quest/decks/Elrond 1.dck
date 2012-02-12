@@ -7,8 +7,8 @@ Description=WG Aura deck with Rabid Wombat
 Icon=Elrond.jpg
 Deck Type=constructed
 [main]
-2 Plains
-2 Forest
+2 Plains|M12
+2 Forest|M12
 4 Elfhame Palace
 4 Graypelt Refuge
 4 Arctic Flats

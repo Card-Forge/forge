@@ -7,7 +7,7 @@ Description=Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium
 Icon=Wyatt Earp.jpg
 Deck Type=constructed
 [main]
-22 Plains
+22 Plains|M12
 1 Angel's Feather
 1 Angelic Voices
 1 Apothecary Initiate

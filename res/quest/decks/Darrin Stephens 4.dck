@@ -7,7 +7,7 @@ Description=Mono U Affinity deck
 Icon=Darrin Stephens.jpg
 Deck Type=constructed
 [main]
-5 Island
+5 Island|MBS
 4 Seat of the Synod
 4 Darksteel Citadel
 1 Mox Pearl

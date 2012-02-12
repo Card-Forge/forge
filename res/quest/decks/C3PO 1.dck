@@ -7,8 +7,8 @@ Description=BR Goblin deck with Goblin Ringleader, Mad Auntie and Sensation Gorg
 Icon=C3PO.jpg
 Deck Type=constructed
 [main]
-10 Mountain
-6 Swamp
+10 Mountain|M12
+6 Swamp|M12
 4 Tresserhorn Sinks
 1 Mad Auntie
 1 Frogtosser Banneret

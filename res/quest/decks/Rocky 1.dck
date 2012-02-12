@@ -10,9 +10,9 @@ Deck Type=constructed
 4 Jungle Shrine
 2 Beasts of Bogardan
 1 Air Elemental
-3 Plains
+3 Plains|M11
 2 Darksteel Ingot
-3 Island
+3 Island|M11
 1 Threaten
 2 Oraxid
 3 Repentant Blacksmith
@@ -25,7 +25,7 @@ Deck Type=constructed
 4 Coastal Tower
 4 Crumbling Necropolis
 1 Vulshok Refugee
-4 Mountain
+4 Mountain|M11
 2 Vedalken Outlander
 2 Hazerider Drake
 1 Defender of Law

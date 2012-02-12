@@ -19,7 +19,7 @@ Deck Type=constructed
 2 Glorious Anthem
 2 Gaddock Teeg
 4 Plated Geopede
-1 Forest
+1 Forest|M11
 4 Path to Exile
 4 Lightning Bolt
 1 Mox Ruby
@@ -28,5 +28,5 @@ Deck Type=constructed
 4 Steppe Lynx
 2 Savannah
 4 Wild Nacatl
-1 Mountain
+1 Mountain|M11
 [sideboard]

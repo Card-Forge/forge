@@ -7,9 +7,9 @@ Description=WU Painter's Servant anti-red deck with Grindstone combo
 Icon=Samantha Stephens.jpg
 Deck Type=constructed
 [main]
-2 Plains
+2 Plains|M12
 1 Karakas
-3 Island
+3 Island|M12
 4 Tundra
 4 Flooded Strand
 4 Coastal Tower

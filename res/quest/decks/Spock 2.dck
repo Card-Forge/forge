@@ -7,8 +7,8 @@ Description=Mono G Elf Kinship deck with Winnower Patrol and Wolf-Skull Shaman
 Icon=Spock.jpg
 Deck Type=constructed
 [main]
-11 Forest
-1 Swamp
+11 Forest|ISD
+1 Swamp|ISD
 4 Gilt-Leaf Palace
 4 Woodland Cemetery
 1 Bayou

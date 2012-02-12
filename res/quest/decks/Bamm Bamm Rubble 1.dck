@@ -7,11 +7,11 @@ Description=WUBRG Domain deck
 Icon=Bamm Bamm Rubble.jpg
 Deck Type=constructed
 [main]
-3 Forest
-2 Island
-2 Mountain
-2 Plains
-2 Swamp
+3 Forest|M10
+2 Island|M10
+2 Mountain|M10
+2 Plains|M10
+2 Swamp|M10
 2 Bad River
 2 Flood Plain
 3 Grasslands

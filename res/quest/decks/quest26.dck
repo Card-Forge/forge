@@ -15,7 +15,7 @@ Description=Fight the terrors of the deep.
 Icon=
 Deck Type=constructed
 [main]
-24 Island
+24 Island|M12
 3 Quest for Ula's Temple
 4 Counterspell
 4 Turn Aside

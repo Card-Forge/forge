@@ -9,8 +9,8 @@ Deck Type=constructed
 [main]
 4 Coastal Tower
 4 Boreal Shelf
-7 Island
-7 Plains
+7 Island|M12
+7 Plains|M12
 1 Mnemonic Wall
 1 Oona's Gatewarden
 1 Wall of Air

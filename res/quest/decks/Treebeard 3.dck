@@ -7,7 +7,7 @@ Description=WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Pro
 Icon=Treebeard.jpg
 Deck Type=constructed
 [main]
-13 Forest
+13 Forest|10E
 4 Bayou
 4 Savannah
 1 Mox Emerald

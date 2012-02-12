@@ -15,7 +15,7 @@ Description=This realm holds knowledge so vast it can overburden the unwary.
 Icon=Dungeon Crawling Blue.jpg
 Deck Type=constructed
 [main]
-20 Island
+20 Island|M12
 4 Wasteland
 1 Cognivore
 4 Visions of Beyond

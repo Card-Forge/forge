@@ -8,7 +8,7 @@ Icon=White Knight.jpg
 Deck Type=constructed
 [main]
 4 Saltblast
-24 Plains
+24 Plains|M10
 4 Caravan Escort
 3 Skyhunter Prowler
 3 Veteran Cavalier

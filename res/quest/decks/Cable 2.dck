@@ -7,8 +7,8 @@ Description=UR Instant and Sorcery deck with Kiln Fiend and Wee Dragonauts
 Icon=Cable.jpg
 Deck Type=constructed
 [main]
-8 Mountain
-8 Island
+8 Mountain|ISD
+8 Island|ISD
 4 Scalding Tarn
 4 Sulfur Falls
 1 Capsize

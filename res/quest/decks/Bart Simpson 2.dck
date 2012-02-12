@@ -7,9 +7,9 @@ Description=WUG deck with Minister of Impediments and Paralyzing Grasp
 Icon=Bart Simpson.jpg
 Deck Type=constructed
 [main]
-4 Plains
-4 Forest
-3 Island
+4 Plains|M12
+4 Forest|M12
+3 Island|M12
 4 Tropical Island
 4 Tundra
 4 Savannah

@@ -7,7 +7,7 @@ Description=Mono W Soldiers deck with Preeminent Captain, Captain of the Watch a
 Icon=Blackbeard.jpg
 Deck Type=constructed
 [main]
-18 Plains
+18 Plains|M11
 1 Daru Encampment
 1 Mox Pearl
 2 Tithe
