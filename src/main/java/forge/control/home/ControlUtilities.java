@@ -2,6 +2,7 @@ package forge.control.home;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -28,7 +29,7 @@ import forge.view.toolbox.FSkin;
  */
 public class ControlUtilities {
     private ViewUtilities view;
-    private final MouseAdapter madLicensing;
+    private final MouseListener madLicensing;
     private final Command cmdDeckEditor, cmdPicDownload, cmdSetDownload,
         cmdQuestImages, cmdReportBug, cmdImportPictures, cmdHowToPlay, cmdDownloadPrices;
 

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.HashMap;
@@ -51,7 +52,7 @@ public class ControlQuest {
     private QuestEventManager qem;
     private JPanel selectedTab;
 
-    private final MouseAdapter madStartGame, madDuels, madChallenges,
+    private final MouseListener madStartGame, madDuels, madChallenges,
         madQuests, madDecks, madPreferences;
     private final ActionListener actPetSelect, actPlantSelect;
     private final Command cmdSpellShop, cmdBazaar,

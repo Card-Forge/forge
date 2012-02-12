@@ -20,7 +20,9 @@ package forge.control.match;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
@@ -69,8 +71,8 @@ public class ControlField {
     private final Player player;
     private final ViewField view;
 
-    private MouseMotionAdapter maCardOver;
-    private MouseAdapter maAvatar, maLibrary, maHand, maExiled, maGraveyard, maFlashback, maCardClick;
+    private MouseMotionListener maCardOver;
+    private MouseListener maAvatar, maLibrary, maHand, maExiled, maGraveyard, maFlashback, maCardClick;
 
     private MouseAdapter maBlack, maBlue, maGreen, maRed, maWhite, maColorless;
 

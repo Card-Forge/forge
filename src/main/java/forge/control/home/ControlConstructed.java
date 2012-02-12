@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,7 +49,7 @@ public class ControlConstructed {
     private final Map<String, String> colorVals;
     private List<String> themeNames;
     private List<String> deckNames;
-    private final MouseAdapter madStartGame, madDecksAI, madDecksHuman,
+    private final MouseListener madStartGame, madDecksAI, madDecksHuman,
         madHumanRandomDeck, madAIRandomDeck, madHumanRandomTheme, madAIRandomTheme;
 
     /**

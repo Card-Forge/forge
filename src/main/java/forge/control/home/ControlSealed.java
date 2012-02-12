@@ -2,6 +2,7 @@ package forge.control.home;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
@@ -38,7 +38,7 @@ public class ControlSealed {
     private ViewSealed view;
     private DeckManager deckManager;
     private Map<String, Deck> aiDecks;
-    private final MouseAdapter madBuildDeck, madStartGame;
+    private final MouseListener madBuildDeck, madStartGame;
 
     /**
      * Controls behavior of swing components in "sealed" mode menu.

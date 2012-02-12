@@ -19,6 +19,7 @@ package forge.control.match;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -36,7 +37,7 @@ import forge.view.match.ViewTabber;
  */
 public class ControlTabber extends MyObservable {
     private final ViewTabber view;
-    private MouseAdapter maMilling, maUnlimited,
+    private MouseListener maMilling, maUnlimited,
         maMana, maSetup, maTutor, maCounter, maTap, maUntap, maLife;
 
     private Observer stackObserver, logObserver;

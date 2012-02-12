@@ -21,7 +21,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,8 +41,8 @@ import forge.Card;
 import forge.Constant.Zone;
 import forge.PlayerZone;
 import forge.view.GuiTopLevel;
-import forge.view.match.ViewHand;
 import forge.view.match.MatchTopLevel;
+import forge.view.match.ViewHand;
 
 /**
  * Child controller - handles operations related to cards in user's hand and
@@ -51,8 +53,8 @@ public class ControlHand {
     private final List<Card> cardsInPanel;
     private final ViewHand view;
 
-    private MouseAdapter maCardClick;
-    private MouseMotionAdapter maCardMove;
+    private MouseListener maCardClick;
+    private MouseMotionListener maCardMove;
 
     /** The o1. */
     private Observer o1;

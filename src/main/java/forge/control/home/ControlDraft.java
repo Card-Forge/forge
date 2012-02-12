@@ -2,6 +2,7 @@ package forge.control.home;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +29,7 @@ import forge.view.toolbox.FSkin;
  */
 public class ControlDraft {
     private final ViewDraft view;
-    private final MouseAdapter madBuildDeck, madDirections, madStartGame;
+    private final MouseListener madBuildDeck, madDirections, madStartGame;
 
     /** @param v0 &emsp; ViewDraft */
     public ControlDraft(ViewDraft v0) {
