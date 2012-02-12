@@ -2,9 +2,12 @@ package forge.control.home;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JRadioButton;
+import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -14,7 +17,6 @@ import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.GuiTopLevel;
 import forge.view.home.ViewSettings;
@@ -28,6 +30,8 @@ import forge.view.toolbox.FSkin;
 public class ControlSettings {
     private ViewSettings view;
     private ForgePreferences prefs;
+    private JPanel selectedTab;
+    private final MouseListener madPreferences, madAvatars;
 
     /**
      * 
@@ -39,6 +43,29 @@ public class ControlSettings {
         this.view = v0;
         addListeners();
         prefs = Singletons.getModel().getPreferences();
+
+        view.getCbRemoveSmall().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
+        view.getCbSingletons().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
+        view.getCbRemoveArtifacts().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+        view.getCbAnte().setSelected(prefs.getPrefBoolean(FPref.UI_ANTE));
+        view.getCbUploadDraft().setSelected(prefs.getPrefBoolean(FPref.UI_UPLOAD_DRAFT));
+        view.getCbStackLand().setSelected(prefs.getPrefBoolean(FPref.UI_SMOOTH_LAND));
+        view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
+        view.getCbRandomFoil().setSelected(prefs.getPrefBoolean(FPref.UI_RANDOM_FOIL));
+        view.getCbScaleLarger().setSelected(prefs.getPrefBoolean(FPref.UI_SCALE_LARGER));
+        view.getCbTextMana().setSelected(prefs.getPrefBoolean(FPref.UI_CARD_OVERLAY));
+
+        madPreferences = new MouseAdapter() { @Override
+            public void mouseClicked(MouseEvent e) { view.showPrefsTab(); } };
+
+        madAvatars = new MouseAdapter() { @Override
+            public void mouseClicked(MouseEvent e) { view.showAvatarsTab(); } };
+
+        view.getTabPrefs().removeMouseListener(madPreferences);
+        view.getTabPrefs().addMouseListener(madPreferences);
+
+        view.getTabAvatars().removeMouseListener(madAvatars);
+        view.getTabAvatars().addMouseListener(madAvatars);
     }
 
     /** @return ViewSettings */
@@ -160,6 +187,19 @@ public class ControlSettings {
         });
     }
 
+    /**
+     * Updates visual state of tabber.
+     * @param tab0 &emsp; JPanel tab object (can pass SubTab too).
+     */
+    public void updateTabber(JPanel tab0) {
+        if (selectedTab != null) {
+            selectedTab.setEnabled(false);
+        }
+
+        tab0.setEnabled(true);
+        selectedTab = tab0;
+    }
+
     private void updateSkin() {
         view.getLblTitleSkin().setText(" Loading...");
         view.getLblTitleSkin().setIcon(new ImageIcon("res/images/skins/default/loader.gif"));
@@ -193,9 +233,9 @@ public class ControlSettings {
 
     /** @param rad0 &emsp; JRadioButton
      * @throws Exception */
-    public void updateCardSize(JRadioButton rad0) throws Exception {
+    /*public void updateCardSize(JRadioButton rad0) throws Exception {
         CardSizeType cst = CardSizeType.valueOf(rad0.getText().toLowerCase());
         Singletons.getModel().getPreferences().setPref(FPref.UI_CARD_SIZE, cst.toString());
         prefs.save();
-    }
+    }*/
 }

@@ -321,11 +321,13 @@ public enum FSkin {
     private static Map<Integer, Font> plainFonts;
     private static Map<Integer, Font> boldFonts;
     private static Map<Integer, Font> italicFonts;
+    private static Map<Integer, Image> avatars;
 
     private static final String
         FILE_SKINS_DIR = "res/images/skins/",
         FILE_ICON_SPRITE = "sprite_icons.png",
         FILE_FOIL_SPRITE = "sprite_foils.png",
+        FILE_AVATAR_SPRITE = "sprite_avatars.png",
         FILE_FONT = "font1.ttf",
         FILE_SPLASH = "bg_splash.png",
         FILE_MATCH_BG = "bg_match.jpg",
@@ -335,7 +337,7 @@ public enum FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static Font font;
-    private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils;
+    private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils, bimAvatars;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
 
@@ -422,10 +424,11 @@ public enum FSkin {
         });
 
         // Grab and test various sprite files.
-        barProgress.setMaximum(3);
+        barProgress.setMaximum(4);
         final File f1 = new File(DEFAULT_DIR + FILE_ICON_SPRITE);
         final File f2 = new File(preferredDir + FILE_ICON_SPRITE);
         final File f3 = new File(DEFAULT_DIR + FILE_FOIL_SPRITE);
+        final File f4 = new File(DEFAULT_DIR + FILE_AVATAR_SPRITE);
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
@@ -433,6 +436,8 @@ public enum FSkin {
             bimPreferredSprite = ImageIO.read(f2);
             barProgress.increment();
             bimFoils = ImageIO.read(f3);
+            barProgress.increment();
+            bimAvatars = ImageIO.read(f4);
             barProgress.increment();
 
             preferredH = bimPreferredSprite.getHeight();
@@ -443,16 +448,6 @@ public enum FSkin {
                     + "preferred icons, or foils.");
             e.printStackTrace();
         }
-
-        // Images loaded; can start UI init.
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                barProgress.setShowETA(false);
-                barProgress.setShowCount(false);
-                barProgress.setDescription("Creating display components.");
-            }
-        });
 
         // Pre-derive most fonts (plain, bold, and italic).
         // Exceptions handled inside method.
@@ -484,14 +479,29 @@ public enum FSkin {
         // Foils have a separate sprite, so uses a specific method.
         for (Foils e : Foils.values()) { FSkin.setFoil(e); }
 
+        // Assemble avatar images
+        FSkin.assembleAvatars();
+
+        // Images loaded; can start UI init.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                barProgress.setShowETA(false);
+                barProgress.setShowCount(false);
+                barProgress.setDescription("Creating display components.");
+            }
+        });
+
         // Clear references to buffered images
         FSkin.bimDefaultSprite.flush();
         FSkin.bimFoils.flush();
         FSkin.bimPreferredSprite.flush();
+        FSkin.bimAvatars.flush();
 
         FSkin.bimDefaultSprite = null;
         FSkin.bimFoils = null;
         FSkin.bimPreferredSprite = null;
+        FSkin.bimAvatars = null;
     }
 
     /** @return {@link java.awt.font} font */
@@ -621,6 +631,11 @@ public enum FSkin {
         return mySkins;
     }
 
+    /** @return Map<Integer, Image> */
+    public static Map<Integer, Image> getAvatars() {
+        return avatars;
+    }
+
     /**
      * <p>
      * getColorFromPixel.
@@ -680,6 +695,23 @@ public enum FSkin {
         if (c.getAlpha() != 0) { return bimPreferredSprite; }
 
         return bimDefaultSprite;
+    }
+
+    private static void assembleAvatars() {
+        FSkin.avatars = new HashMap<Integer, Image>();
+        int counter = 0;
+        Color pxTest;
+        final int aw = bimAvatars.getWidth();
+        final int ah = bimAvatars.getHeight();
+
+        for (int j = 0; j < aw; j += 100) {
+            for (int i = 0; i < ah; i += 100) {
+                if (i == 0 && j == 0) { continue; }
+                pxTest = FSkin.getColorFromPixel(bimAvatars.getRGB(i + 50, j + 50));
+                if (pxTest.getAlpha() == 0) { continue; }
+                FSkin.avatars.put(counter++, bimAvatars.getSubimage(i, j, 100, 100));
+            }
+        }
     }
 
     private static void setFoil(final SkinProp s0) {

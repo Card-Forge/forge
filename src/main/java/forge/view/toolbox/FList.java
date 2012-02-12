@@ -20,7 +20,7 @@ public class FList extends JList {
      *
      */
     public FList() {
-        this(null);
+        this(new Object[] {});
     }
 
     /**

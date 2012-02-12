@@ -1,8 +1,11 @@
 package forge.view.home;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -13,23 +16,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.AbstractAction;
-import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
-import org.apache.commons.lang3.StringUtils;
-
 import net.miginfocom.swing.MigLayout;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.AllZone;
+import forge.PlayerType;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
@@ -42,175 +43,175 @@ import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
+import forge.view.toolbox.SubTab;
 
 /** 
  * Assembles swing components for "Settings" mode menu.
  *
  */
 @SuppressWarnings("serial")
-public class ViewSettings extends JScrollPane {
+public class ViewSettings extends JPanel {
     private final ControlSettings control;
-    private final JPanel viewport;
-    private final FLabel btnReset;
-    private HomeTopLevel parentView;
+    private final FLabel btnReset, lblTitleSkin;
+    private final HomeTopLevel parentView;
 
-    private JList lstChooseSkin;
+    private final JList lstChooseSkin;
 
-    private JCheckBox cbAnte, cbScaleLarger, cbDevMode, cbRemoveSmall, cbRemoveArtifacts,
+    private final JCheckBox cbAnte, cbScaleLarger, cbDevMode, cbRemoveSmall, cbRemoveArtifacts,
         cbUploadDraft, cbStackLand, cbRandomFoil, cbTextMana, cbSingletons;
 
-    private JRadioButton radCardTiny, radCardSmaller, radCardSmall,
-        radCardMedium, radCardLarge, radCardHuge;
+    //private final JRadioButton radCardTiny, radCardSmaller, radCardSmall,
+    //    radCardMedium, radCardLarge, radCardHuge;
 
-    private final FLabel lblTitleSkin;
+    private final JPanel pnlTabber, pnlPrefs, pnlAvatars, tabPrefs, tabAvatars;
+    private final JScrollPane scrContent;
+
+    private AvatarLabel avatarHuman, avatarAI;
+    private List<AvatarLabel> lstAvatars;
     /**
      * 
      * Assembles swing components for "Settings" mode menu.
      * @param v0 &emsp; HomeTopLevel
      */
     public ViewSettings(final HomeTopLevel v0) {
-        super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-        parentView = v0;
-        viewport = new JPanel();
-        viewport.setOpaque(false);
-
+        // Display
+        super();
         this.setOpaque(false);
-        this.getViewport().setOpaque(false);
-        this.setBorder(null);
-        this.setViewportView(viewport);
-        this.getVerticalScrollBar().setUnitIncrement(16);
-        viewport.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        this.parentView = v0;
 
-        // Spacing between components is defined here.
-        String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
-        String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
+        // Final component inits: JPanels
+        pnlTabber = new JPanel();
+        pnlTabber.setOpaque(false);
 
-        // Deck Building Options
-        final JLabel lblTitleDecks = new SectionLabel("Deck Building Options");
-        viewport.add(lblTitleDecks, sectionConstraints + ", gaptop 2%");
+        pnlPrefs = new JPanel();
+        pnlPrefs.setOpaque(false);
 
-        final JLabel lblRemoveSmall = new NoteLabel("Disables 1/1 and 0/X creatures in generated decks.");
-        cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
-        cbRemoveSmall.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_NOSMALL));
-        viewport.add(cbRemoveSmall, regularConstraints);
-        viewport.add(lblRemoveSmall, regularConstraints);
+        pnlAvatars = new JPanel();
+        pnlAvatars.setOpaque(false);
 
-        final JLabel lblSingletons = new NoteLabel("Disables non-land duplicates in generated decks.");
-        cbSingletons = new OptionsCheckBox("Singleton Mode");
-        cbSingletons.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-        viewport.add(cbSingletons, regularConstraints);
-        viewport.add(lblSingletons, regularConstraints);
+        tabPrefs = new SubTab("Preferences");
+        tabAvatars = new SubTab("Avatars");
 
-        final JLabel lblRemoveArtifacts = new NoteLabel("Disables artifact cards in generated decks.");
-        cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
-        cbRemoveArtifacts.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        viewport.add(cbRemoveArtifacts, regularConstraints);
-        viewport.add(lblRemoveArtifacts, regularConstraints);
-
-        // Gameplay Options
-        final JLabel lblTitleUI = new SectionLabel("Gameplay Options");
-        viewport.add(lblTitleUI, sectionConstraints);
-
-        cbAnte = new OptionsCheckBox("Play for Ante");
-        cbAnte.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
-        final JLabel lblAnte = new NoteLabel("Determines whether or not the game is played for ante.");
-        viewport.add(cbAnte, regularConstraints);
-        viewport.add(lblAnte, regularConstraints);
-
-        cbUploadDraft = new OptionsCheckBox("Upload Draft Pics");
-        cbUploadDraft.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_UPLOAD_DRAFT));
-        final JLabel lblUploadDraft = new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI.");
-        viewport.add(cbUploadDraft, regularConstraints);
-        viewport.add(lblUploadDraft, regularConstraints);
-
-        cbStackLand = new OptionsCheckBox("Stack AI Land");
-        cbStackLand.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND));
-        final JLabel lblStackLand = new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer.");
-        viewport.add(cbStackLand, regularConstraints);
-        viewport.add(lblStackLand, regularConstraints);
-
-        cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
-        cbDevMode.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED));
-        final JLabel lblDevMode = new NoteLabel("Enables menu with functions for testing during development.");
-        viewport.add(cbDevMode, regularConstraints);
-        viewport.add(lblDevMode, regularConstraints);
-
-        // Graphic Options
-        final JLabel lblTitleGraphics = new SectionLabel("Graphic Options");
-        viewport.add(lblTitleGraphics, sectionConstraints);
-
-        lblTitleSkin = new FLabel.Builder().text("Choose Skin").build();
-        lblTitleSkin.setFont(FSkin.getBoldFont(14));
-        lblTitleSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        final JLabel lblNoteSkin = new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors.");
-        viewport.add(lblTitleSkin, regularConstraints);
-        viewport.add(lblNoteSkin, regularConstraints);
-
-        lstChooseSkin = new FList();
-        lstChooseSkin.setListData(FSkin.getSkins().toArray(new String[0]));
-        lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getPref(FPref.UI_SKIN), true);
-        lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
-        viewport.add(new FScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
-
-        final FLabel lblTitleCardSize = new FLabel.Builder().text("Card Size").fontStyle(Font.BOLD).build();
-        final JLabel lblCardSize = new NoteLabel("Size of cards in hand and playing field, when possible");
-        viewport.add(lblTitleCardSize, regularConstraints);
-        viewport.add(lblCardSize, regularConstraints);
-
-        populateCardSizeRadios();
-
-        final JLabel lblRandomFoil = new NoteLabel("Adds foiled effects to random cards.");
-        cbRandomFoil = new OptionsCheckBox("Random Foil");
-        cbRandomFoil.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL));
-        viewport.add(cbRandomFoil, regularConstraints);
-        viewport.add(lblRandomFoil, regularConstraints);
-
-        final JLabel lblScaleLarger = new NoteLabel("Allows card pictures to be expanded larger than their original size.");
-        cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
-        cbScaleLarger.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER));
-        viewport.add(cbScaleLarger, regularConstraints);
-        viewport.add(lblScaleLarger, regularConstraints);
-
-        final JLabel lblTextMana = new NoteLabel("Overlays each card with basic card-specific information.");
-        cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
-        cbTextMana.setSelected(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY));
-        viewport.add(cbTextMana, regularConstraints);
-        viewport.add(lblTextMana, regularConstraints);
-
-        // Keyboard shortcuts
-        final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
-        viewport.add(lblShortcuts, sectionConstraints);
-
-        List<Shortcut> shortcuts = ((GuiTopLevel) AllZone.getDisplay()).getController().getShortcuts();
-
-        FLabel lblTemp;
-        for (Shortcut s : shortcuts) {
-            lblTemp = new FLabel.Builder().text(s.getDescription()).build();
-            KeyboardShortcutField ksf = new KeyboardShortcutField(s);
-            viewport.add(lblTemp, "w 40%!, h 22px!, gap 10%! 0 0 1%");
-            viewport.add(ksf, "w 25%!");
-        }
-
-        // Reset button
-        final JLabel lblReset = new SectionLabel(" ");
-        viewport.add(lblReset, sectionConstraints);
-
-        btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to defaults").build();
-        viewport.add(btnReset, sectionConstraints);
-
-        this.control = new ControlSettings(this);
-    }
-
-    private void populateCardSizeRadios() {
-        radCardTiny = new CardSizeRadio("Tiny");
+        // Final component inits: Radio buttons and check boxes
+        /*radCardTiny = new CardSizeRadio("Tiny");
         radCardSmaller = new CardSizeRadio("Smaller");
         radCardSmall = new CardSizeRadio("Small");
         radCardMedium = new CardSizeRadio("Medium");
         radCardLarge = new CardSizeRadio("Large");
-        radCardHuge = new CardSizeRadio("Huge");
+        radCardHuge = new CardSizeRadio("Huge");*/
 
-        ButtonGroup group = new ButtonGroup();
+        cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
+        cbSingletons = new OptionsCheckBox("Singleton Mode");
+        cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
+        cbAnte = new OptionsCheckBox("Play for Ante");
+        cbUploadDraft = new OptionsCheckBox("Upload Draft Pics");
+        cbStackLand = new OptionsCheckBox("Stack AI Land");
+        cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
+        cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
+        cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
+        cbRandomFoil = new OptionsCheckBox("Random Foil");
+
+        // Final component inits: Various
+        scrContent = new JScrollPane(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrContent.getViewport().setOpaque(false);
+        scrContent.setBorder(null);
+        scrContent.setOpaque(false);
+        scrContent.getVerticalScrollBar().setUnitIncrement(16);
+
+        lstChooseSkin = new FList();
+
+        btnReset = new FLabel.Builder().opaque(true)
+                .hoverable(true).text("Reset to defaults").build();
+
+        lblTitleSkin = new FLabel.Builder().text("Choose Skin").fontScaleAuto(false).build();
+        lblTitleSkin.setFont(FSkin.getBoldFont(14));
+
+        populateTabber();
+        populatePrefs();
+        populateAvatars();
+
+        this.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
+        this.add(pnlTabber, "w 95%!, h 20px!, gap 2.5% 0 0 0");
+        this.add(pnlAvatars, "w 95%!, h 92%!, gap 2.5% 0 20px 0");
+        this.add(scrContent, "w 95%!, h 92%!, gap 2.5% 0 20px 0");
+
+        // After all components are instantiated, fire up control.
+        this.control = new ControlSettings(this);
+        showAvatarsTab();
+    }
+
+    private void populateTabber() {
+        tabPrefs.setToolTipText("Global preference options");
+        tabAvatars.setToolTipText("Human and AI avatar select");
+
+        final String constraints = "w 50%!, h 20px!";
+        pnlTabber.setOpaque(false);
+        pnlTabber.setLayout(new MigLayout("insets 0, gap 0, align center"));
+
+        pnlTabber.add(tabPrefs, constraints);
+        pnlTabber.add(tabAvatars, constraints);
+    }
+
+    private void populatePrefs() {
+        pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+
+        // Spacing between components is defined here.
+        final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
+        final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
+
+        // Deck building options
+        pnlPrefs.add(new SectionLabel("Deck Building Options"), sectionConstraints + ", gaptop 2%");
+
+        pnlPrefs.add(cbRemoveSmall, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Disables 1/1 and 0/X creatures in generated decks."), regularConstraints);
+
+        pnlPrefs.add(cbSingletons, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Disables non-land duplicates in generated decks."), regularConstraints);
+
+        pnlPrefs.add(cbRemoveArtifacts, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), regularConstraints);
+
+        // Gameplay Options
+        pnlPrefs.add(new SectionLabel("Gameplay Options"), sectionConstraints);
+
+        pnlPrefs.add(cbAnte, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Determines whether or not the game is played for ante."), regularConstraints);
+
+        pnlPrefs.add(cbUploadDraft, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI."), regularConstraints);
+
+        pnlPrefs.add(cbStackLand, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer."), regularConstraints);
+
+        pnlPrefs.add(cbDevMode, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
+
+        // Graphic Options
+        pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints);
+
+        pnlPrefs.add(lblTitleSkin, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors."), regularConstraints);
+        pnlPrefs.add(new FScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
+        lstChooseSkin.setListData(FSkin.getSkins().toArray(new String[0]));
+        lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getPref(FPref.UI_SKIN), true);
+        lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
+
+        pnlPrefs.add(new FLabel.Builder().text("Card Size").fontStyle(Font.BOLD).build(), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Size of cards in hand and playing field, when possible"), regularConstraints);
+
+        pnlPrefs.add(cbRandomFoil, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Adds foiled effects to random cards."), regularConstraints);
+
+        pnlPrefs.add(cbScaleLarger, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
+
+        pnlPrefs.add(cbTextMana, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Overlays each card with basic card-specific information."), regularConstraints);
+
+        // Card size radio buttons
+        /*ButtonGroup group = new ButtonGroup();
         group.add(radCardTiny);
         group.add(radCardSmaller);
         group.add(radCardSmall);
@@ -219,12 +220,145 @@ public class ViewSettings extends JScrollPane {
         group.add(radCardHuge);
 
         String constraints = "gapleft 10%, wrap";
-        viewport.add(radCardTiny, constraints);
-        viewport.add(radCardSmaller, constraints);
-        viewport.add(radCardSmall, constraints);
-        viewport.add(radCardMedium, constraints);
-        viewport.add(radCardLarge, constraints);
-        viewport.add(radCardHuge, constraints + ", gapbottom 2%");
+        pnlPrefs.add(radCardTiny, constraints);
+        pnlPrefs.add(radCardSmaller, constraints);
+        pnlPrefs.add(radCardSmall, constraints);
+        pnlPrefs.add(radCardMedium, constraints);
+        pnlPrefs.add(radCardLarge, constraints);
+        pnlPrefs.add(radCardHuge, constraints + ", gapbottom 2%");*/
+
+        // Keyboard shortcuts
+        final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
+        pnlPrefs.add(lblShortcuts, sectionConstraints);
+
+        List<Shortcut> shortcuts = ((GuiTopLevel) AllZone.getDisplay()).getController().getShortcuts();
+
+        FLabel lblTemp;
+        for (Shortcut s : shortcuts) {
+            lblTemp = new FLabel.Builder().text(s.getDescription()).build();
+            KeyboardShortcutField ksf = new KeyboardShortcutField(s);
+            pnlPrefs.add(lblTemp, "w 40%!, h 22px!, gap 10%! 0 0 1%");
+            pnlPrefs.add(ksf, "w 25%!");
+        }
+
+        // Reset button
+        pnlPrefs.add(new SectionLabel(" "), sectionConstraints);
+        pnlPrefs.add(btnReset, sectionConstraints);
+    } // End populatePrefs()
+
+    private void populateAvatars() {
+        final JPanel pnlTitle = new JPanel(new MigLayout("insets 0, gap 0 0 20px 20px, wrap, alignx center"));
+        final JLabel lblTitle = new SectionLabel("Avatar Selection");
+        final JLabel lblNote1 = new NoteLabel("Click on an image to set that avatar for a player or AI.");
+        final JLabel lblNote2 = new NoteLabel("Click multiple times to cycle through available players or AI.");
+
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNote1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNote2.setHorizontalAlignment(SwingConstants.CENTER);
+
+        pnlTitle.setOpaque(false);
+        pnlTitle.add(lblTitle, "w 50%!");
+        pnlTitle.add(lblNote1, "w 50%!");
+        pnlTitle.add(lblNote2, "w 50%!");
+
+        final JPanel pnlPics = new JPanel(new FlowLayout(1, 30, 30));
+        pnlPics.setOpaque(false);
+
+        lstAvatars = new ArrayList<AvatarLabel>();
+        int counter = 0;
+        for (Image i : FSkin.getAvatars().values()) {
+            lstAvatars.add(new AvatarLabel(i, counter++));
+            pnlPics.add(lstAvatars.get(lstAvatars.size() - 1));
+        }
+
+        pnlAvatars.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        pnlAvatars.add(pnlTitle, "w 90%!");
+        pnlAvatars.add(pnlPics, "w 90%!, h 80%!");
+
+        final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        int humanIndex = Integer.parseInt(indexes[0]);
+        int aiIndex = Integer.parseInt(indexes[1]);
+
+        // Set human avatar from preferences
+        if (humanIndex >= lstAvatars.size()) {
+            humanIndex = (int) (Math.random() * (lstAvatars.size() - 1));
+        }
+
+        avatarHuman = lstAvatars.get(humanIndex);
+        avatarHuman.setOwner(PlayerType.HUMAN);
+        avatarHuman.repaint();
+
+        if (humanIndex == aiIndex || aiIndex >= lstAvatars.size()) {
+            aiIndex = humanIndex;
+            while (aiIndex == humanIndex) {
+                aiIndex = (int) (Math.random() * (lstAvatars.size() - 1));
+            }
+        }
+
+        avatarAI = lstAvatars.get(aiIndex);
+        avatarAI.setOwner(PlayerType.COMPUTER);
+        avatarAI.repaint();
+    }
+
+    /** Surprisingly complicated - be careful when modifying! */
+    private void cycleOwner(final AvatarLabel a0) {
+        if (a0.getOwner() == null) {
+            a0.setOwner(PlayerType.HUMAN);
+            a0.repaint();
+
+            if (avatarHuman != null) {
+                avatarHuman.setOwner(null);
+                avatarHuman.repaint();
+            }
+
+            avatarHuman = a0;
+        }
+        else if (a0.getOwner() == PlayerType.HUMAN) {
+            // Re-assign avatar to human
+            avatarHuman.setOwner(null);
+            avatarHuman.repaint();
+
+            for (int i = 0; i < lstAvatars.size(); i++) {
+                if (lstAvatars.get(i) != a0) {
+                    avatarHuman = lstAvatars.get(i);
+                    avatarHuman.setOwner(PlayerType.HUMAN);
+                    avatarHuman.repaint();
+                    break;
+                }
+            }
+
+            // Assign computer
+            a0.setOwner(PlayerType.COMPUTER);
+            a0.repaint();
+
+            if (avatarAI != null) {
+                avatarAI.setOwner(null);
+                avatarAI.repaint();
+            }
+
+            avatarAI = a0;
+        }
+        else {
+            a0.setOwner(null);
+            a0.repaint();
+
+            // Re-assign avatar to computer
+            avatarAI.setOwner(null);
+            avatarAI.repaint();
+
+            for (int i = 0; i < lstAvatars.size(); i++) {
+                if (lstAvatars.get(i) != avatarHuman) {
+                    avatarAI = lstAvatars.get(i);
+                    avatarAI.setOwner(PlayerType.COMPUTER);
+                    avatarAI.repaint();
+                    break;
+                }
+            }
+        }
+
+        Singletons.getModel().getPreferences().setPref(
+                FPref.UI_AVATARS, avatarHuman.getIndex() + "," + avatarAI.getIndex());
+        Singletons.getModel().getPreferences().save();
     }
 
     /** Consolidates checkbox styling in one place. */
@@ -252,7 +386,7 @@ public class ViewSettings extends JScrollPane {
     }
 
     /** Consolidates checkbox styling in one place. */
-    private class OptionsRadio extends JRadioButton {
+   /* private class OptionsRadio extends JRadioButton {
         public OptionsRadio(final String txt0) {
             super();
             setText(txt0);
@@ -275,7 +409,7 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
-    private class CardSizeRadio extends OptionsRadio {
+    /*private class CardSizeRadio extends OptionsRadio {
         public CardSizeRadio(String txt0) {
             super(txt0);
             if (Singletons.getModel().getPreferences().getPref(FPref.UI_CARD_SIZE)
@@ -291,7 +425,7 @@ public class ViewSettings extends JScrollPane {
                 }
             });
         }
-    }
+    }*/
 
     /** Consolidates section title label styling in one place. */
     private class SectionLabel extends JLabel {
@@ -310,6 +444,59 @@ public class ViewSettings extends JScrollPane {
             super(txt0);
             setFont(FSkin.getItalicFont(12));
             setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
+    }
+
+    private class AvatarLabel extends JLabel {
+        private final Image img;
+        private final int index;
+        private PlayerType owner;
+        private boolean hovered = false;
+
+        public AvatarLabel(Image i0, int index0) {
+            img = i0;
+            index = index0;
+            setMaximumSize(new Dimension(100, 120));
+            setMinimumSize(new Dimension(100, 120));
+            setPreferredSize(new Dimension(100, 120));
+
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) { hovered = true; repaint(); }
+
+                @Override
+                public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
+
+                @Override
+                public void mouseClicked(MouseEvent e) { cycleOwner(AvatarLabel.this); repaint(); }
+            });
+        }
+
+        public void setOwner(PlayerType p0) {
+            this.owner = p0;
+        }
+
+        public PlayerType getOwner() {
+            return this.owner;
+        }
+
+        public int getIndex() {
+            return this.index;
+        }
+
+        protected void paintComponent(Graphics g) {
+            if (hovered) {
+                g.setColor(FSkin.getColor(FSkin.Colors.CLR_HOVER));
+                g.fillRect(0, 0, 100, 120);
+            }
+
+            g.drawImage(img, 0, 20, null);
+            if (owner == null) { return; }
+
+            g.setColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            g.drawRect(0, 0, 99, 119);
+            g.setFont(FSkin.getBoldFont(14));
+            g.drawString(owner.toString(), 5, 15);
         }
     }
 
@@ -393,6 +580,16 @@ public class ViewSettings extends JScrollPane {
         }
     }
 
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlPrefs() {
+        return this.pnlPrefs;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlAvatars() {
+        return this.pnlAvatars;
+    }
+
     /** @return {@link javax.swing.JList} */
     public JList getLstChooseSkin() {
         return lstChooseSkin;
@@ -466,5 +663,27 @@ public class ViewSettings extends JScrollPane {
     /** @return {@link forge.view.toolbox.FLabel} */
     public FLabel getBtnReset() {
         return btnReset;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabPrefs() {
+        return this.tabPrefs;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabAvatars() {
+        return this.tabAvatars;
+    }
+
+    /** */
+    public void showPrefsTab() {
+        this.scrContent.getViewport().setView(pnlPrefs);
+        control.updateTabber(tabPrefs);
+    }
+
+    /** */
+    public void showAvatarsTab() {
+        this.scrContent.getViewport().setView(pnlAvatars);
+        control.updateTabber(tabAvatars);
     }
 }

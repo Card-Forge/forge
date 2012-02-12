@@ -39,12 +39,14 @@ import net.miginfocom.swing.MigLayout;
 import arcane.ui.PlayArea;
 import forge.AllZone;
 import forge.Constant;
+import forge.Singletons;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
 import forge.game.GameType;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.GuiTopLevel;
@@ -98,29 +100,27 @@ public class ViewField extends FPanel {
         this.clrPhaseInactiveDisabled = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
 
         // Player icon logic
-        String filename;
+        final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
         if (player.isHuman()) {
-            filename =  ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator + "Mage01.jpg";
+            img = FSkin.getAvatars().get(Integer.parseInt(indexes[0]));
         }
         else if (Constant.Runtime.getGameType() == GameType.Quest) {
-            filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
+            String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
+
             if (Constant.Quest.OPP_ICON_NAME[0] != null) {
                 filename += Constant.Quest.OPP_ICON_NAME[0];
+                final File f = new File(filename);
+                img = (f.exists()
+                        ? new ImageIcon(filename).getImage()
+                        : FSkin.getAvatars().get(Integer.parseInt(indexes[1])));
+            }
+            else {
+                img = FSkin.getAvatars().get(Integer.parseInt(indexes[1]));
             }
         }
         else {
-            filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator + "Mage02.jpg";
+            img = FSkin.getAvatars().get(Integer.parseInt(indexes[1]));
         }
-
-        // Icon DNE test
-        final File f = new File(filename);
-        final ImageIcon iiTemp;
-
-        iiTemp = (f.exists()
-            ? new ImageIcon(filename)
-            : FSkin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
-
-        this.img = iiTemp.getImage();
 
         // Avatar and life
         avatarArea = new JPanel();
