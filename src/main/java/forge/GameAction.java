@@ -111,6 +111,10 @@ public class GameAction {
     public static Card changeZone(final PlayerZone prev, final PlayerZone zone, final Card c) {
         if ((prev == null) && !c.isToken()) {
             zone.add(c);
+            Player p = zone.getPlayer();
+            if (p != null){
+                p.updateLabelObservers();
+            }
             return c;
         }
 
@@ -189,6 +193,11 @@ public class GameAction {
             }
 
             prev.remove(c);
+        }
+        
+        Player p = zone.getPlayer();
+        if (p != null){
+            p.updateLabelObservers();
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
