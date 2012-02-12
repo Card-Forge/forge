@@ -3,12 +3,12 @@ ManaCost:U B B R
 Types:Legendary Artifact Equipment
 Text:no text
 A:AB$ Attach | Cost$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip - | SpellDescription$ Attach CARDNAME to target creature you control.
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First strike | AddTrigger$ TrigDies | AddSVar$ TrigExile & DBToken & DBCleanup & X | Description$ Equipped creature gets +3/+3 and has first strike. Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.
-SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.wasDealtDamageByHostThisTurn | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First Strike | AddTrigger$ TrigDies | AddSVar$ UnscytheTrigExile & UnscytheDBToken & UnscytheDBCleanup & UnscytheX | Description$ Equipped creature gets +3/+3 and has first strike. Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.wasDealtDamageByHostThisTurn | Execute$ UnscytheTrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+SVar:UnscytheTrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ UnscytheDBToken
+SVar:UnscytheDBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | ConditionCheckSVar$ UnscytheX | ConditionSVarCompare$ GE1 | SubAbility$ UnscytheDBCleanup
+SVar:UnscytheDBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:UnscytheX:Remembered$Amount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unscythe_killer_of_kings.jpg
 End
