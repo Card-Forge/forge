@@ -760,6 +760,16 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryEffect.createDrawbackEffect(this);
             }
         }
+        
+        else if (this.api.equals("EndTurn")) {
+            if(this.isAb) {
+                spellAbility = AbilityFactoryTurns.createAbilityEndTurn(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryTurns.createSpellEndTurn(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryTurns.createDrawbackEndTurn(this);
+            }
+        }
 
         else if (this.api.equals("ExchangeLife")) {
             if (this.isAb) {

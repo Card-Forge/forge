@@ -8651,6 +8651,7 @@ res/cardsfolder/s/sunder.txt svneol=native#text/plain
 res/cardsfolder/s/sunder_from_within.txt svneol=native#text/plain
 res/cardsfolder/s/sundering_titan.txt -text
 res/cardsfolder/s/sundering_vitae.txt -text
+res/cardsfolder/s/sundial_of_the_infinite.txt -text
 res/cardsfolder/s/sunfire_balm.txt svneol=native#text/plain
 res/cardsfolder/s/sunflare_shaman.txt svneol=native#text/plain
 res/cardsfolder/s/sunglasses_of_urza.txt svneol=native#text/plain
@@ -9109,6 +9110,7 @@ res/cardsfolder/t/time_of_need.txt svneol=native#text/plain
 res/cardsfolder/t/time_reversal.txt svneol=native#text/plain
 res/cardsfolder/t/time_sieve.txt svneol=native#text/plain
 res/cardsfolder/t/time_spiral.txt svneol=native#text/plain
+res/cardsfolder/t/time_stop.txt -text
 res/cardsfolder/t/time_stretch.txt svneol=native#text/plain
 res/cardsfolder/t/time_vault.txt svneol=native#text/plain
 res/cardsfolder/t/time_walk.txt svneol=native#text/plain
