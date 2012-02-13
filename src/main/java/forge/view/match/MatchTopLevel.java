@@ -96,7 +96,7 @@ public class MatchTopLevel extends FPanel {
         // Set properties
         this.setOpaque(false);
         this.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
-        this.setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+        this.setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH).getImage());
         this.setCornerDiameter(0);
         this.setBorderToggle(false);
         this.setLayout(null);
