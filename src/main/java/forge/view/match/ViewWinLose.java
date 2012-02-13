@@ -2,6 +2,7 @@ package forge.view.match;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -145,6 +146,7 @@ public class ViewWinLose {
 
         final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
         final FScrollPane scrLog = new FScrollPane(txtLog);
+        scrLog.getViewport().setViewPosition(new Point(0, 0));
         scrLog.setBorder(null);
         pnlLog.setOpaque(false);
 
