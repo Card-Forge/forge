@@ -149,6 +149,8 @@ public final class FControl {
 
             default:
         }
+
+        Singletons.getView().validate();
     }
 
     /** Gets the match controller.
