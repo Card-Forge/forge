@@ -346,7 +346,7 @@ public class ViewMatchUI extends FPanel {
      *            Graphics object
      */
     @Override
-    protected void paintComponent(final Graphics g) {
+    public void paintComponent(final Graphics g) {
         h = getHeight();
         w = getWidth();
 

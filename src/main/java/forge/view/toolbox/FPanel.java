@@ -188,7 +188,7 @@ public class FPanel extends JPanel {
      * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
      */
     @Override
-    protected void paintComponent(final Graphics graphics0) {
+    public void paintComponent(final Graphics graphics0) {
         super.paintComponent(graphics0);
 
         pnlW = this.getWidth();
