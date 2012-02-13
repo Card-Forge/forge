@@ -128,7 +128,7 @@ public class ViewSettings extends JPanel {
 
         // After all components are instantiated, fire up control.
         this.control = new ControlSettings(this);
-        showAvatarsTab();
+        showPrefsTab();
     }
 
     private void populateTabber() {
