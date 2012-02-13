@@ -857,45 +857,50 @@ public class AbilityFactoryPump {
                 sb.append(name).append(" - ");
             }
 
-            for (final GameEntity c : tgts) {
-                sb.append(c.getName()).append(" ");
+            if (params.containsKey("StackDescription")) {
+                sb.append(params.get("StackDescription"));
             }
-
-            if (af.getMapParams().containsKey("Radiance")) {
-                sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
-                        .append(" that shares a color with ");
-                if (tgts.size() > 1) {
-                    sb.append("them ");
-                } else {
-                    sb.append("it ");
+            else {
+                for (final GameEntity c : tgts) {
+                    sb.append(c.getName()).append(" ");
                 }
-            }
 
-            final int atk = this.getNumAttack(sa);
-            final int def = this.getNumDefense(sa);
-
-            sb.append("gains ");
-            if ((atk != 0) || (def != 0)) {
-                if (atk >= 0) {
-                    sb.append("+");
+                if (af.getMapParams().containsKey("Radiance")) {
+                    sb.append(" and each other ").append(af.getMapParams().get("ValidTgts"))
+                            .append(" that shares a color with ");
+                    if (tgts.size() > 1) {
+                        sb.append("them ");
+                    } else {
+                        sb.append("it ");
+                    }
                 }
-                sb.append(atk);
-                sb.append("/");
-                if (def >= 0) {
-                    sb.append("+");
-                }
-                sb.append(def);
-                sb.append(" ");
-            }
 
-            for (int i = 0; i < this.keywords.size(); i++) {
-                if (!this.keywords.get(i).equals("none")) {
-                    sb.append(this.keywords.get(i)).append(" ");
-                }
-            }
+                final int atk = this.getNumAttack(sa);
+                final int def = this.getNumDefense(sa);
 
-            if (!this.params.containsKey("Permanent")) {
-                sb.append("until end of turn.");
+                sb.append("gains ");
+                if ((atk != 0) || (def != 0)) {
+                    if (atk >= 0) {
+                        sb.append("+");
+                    }
+                    sb.append(atk);
+                    sb.append("/");
+                    if (def >= 0) {
+                       sb.append("+");
+                    }
+                    sb.append(def);
+                    sb.append(" ");
+                }
+
+                for (int i = 0; i < this.keywords.size(); i++) {
+                    if (!this.keywords.get(i).equals("none")) {
+                        sb.append(this.keywords.get(i)).append(" ");
+                    }
+                }
+
+                if (!this.params.containsKey("Permanent")) {
+                    sb.append("until end of turn.");
+                }
             }
         }
 

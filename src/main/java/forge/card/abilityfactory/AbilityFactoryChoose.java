@@ -1869,19 +1869,24 @@ public final class AbilityFactoryChoose {
             sb.append(" ");
         }
 
-        ArrayList<Player> tgtPlayers;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        if (params.containsKey("StackDescription")) {
+            sb.append(params.get("StackDescription"));
         }
+        else {
+            ArrayList<Player> tgtPlayers;
 
-        for (final Player p : tgtPlayers) {
-            sb.append(p).append(" ");
+            final Target tgt = sa.getTarget();
+            if (tgt != null) {
+                tgtPlayers = tgt.getTargetPlayers();
+            } else {
+                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            }
+
+            for (final Player p : tgtPlayers) {
+                sb.append(p).append(" ");
+            }
+            sb.append("chooses from a list.");
         }
-        sb.append("chooses from a list.");
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
