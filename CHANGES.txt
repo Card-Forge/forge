@@ -144,6 +144,64 @@ Fixes/Features:
 - Updated Fin Fang Foom 2 and Gambit 2 with new cards.
 - Updated the Captain America decks.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Added SVar:RemAIDeck:True to Obstinate Familiar.
+- Added the decks Raven 2 and Raven 3.
+- Fixed the LQ pic URL for Deathcoil Wurm and Mercenary Knight.
+- Fixed sac All costs storing the cards twice.
+- Added a NPE check to sharesCreatureTypeWith.
+- Added the precon Unnatural Schemes.
+- Inserted rarity in Putrid Warrior.
+- fixed some issues with AI using its mana pool
+- Big performance improvement: checkStatics is now only called in TriggerHandler when a static trigger was run.
+- FRoundedPanel consolidated into FPanel. FPanels now support background textures and foreground images. FPanels now have a stretch foreground image option. FPanels now have optional hover and select behavior. Slight performance improvement over previous FPanel versions (paintComponent trimmed down).
+- Adjustment: combat panel less "sticky", stack panel more "sticky".
+- Performance: Resizing bottleneck in FLabel eliminated.
+- Updated some SVars and ran scripts.
+- Text fix.
+- fixed subability name
+- Added Roujin's bug fix for the battlefield UI where Mouse Clicks will Click "on" the last thing selected, even if you are no longer selecting them.
+- Avatar selection enabled in settings submenu.
+- Redraw bugfix attempt #1.
+- Cleanup: Converted typed MouseAdapter instances to MouseListener interface instances.
+- Fixed Unscythe, Killer of Kings.
+- Fixed the AI producing errors when faced with RemoveCounter All costs.
+- Updated some SVars, ran scripts.
+- Added Hulk 2 deck.
+- Added Agetians basic land set infos to quest decks.
+- Updating Label observers after a ChangeZone
+- CheckStyle.
+- Fixed a possible bug with "UntilHostLeavesPlay" in AF Animate.
+- Vanguard avatar sprite added for avatar selection (thanks WompWomp)
+- Changed Gelis Shackles from SVar:RemAIDeck:True to SVar:RemRandomDeck:True.
+- Changed Boreal Griffin; Chilling Shade; Diamond Faerie; Phyrexian Ironfoot; Phyrexian Snowcrusher; Phyrexian Snowcrusher; Rimebound Dead; Zombie Musher from SVar:RemAIDeck:True to SVar:RemRandomDeck:True.
+- PMD and bugfix #2 on FPanel.
+- Experimental modified flow layout applied to fix avatar scrolling bug.
+- Fixed visual artifacts bug in FPanel. Also, added rendering hints to allow better border drawing.
+- Fixed attack/block combat updating.
+- Permanent scrolling fix on ViewSettings, plus a little PMD.
+- Added StackDescription to Pump and GenericChoice to allow correct stack description.
+- Fixed "preload bar stuck on 4-color case" in constructed submenu.
+- Added AF_EndTurn. canPlayAI always returns false because I couldn't think of a good, general way to decide it's usefulness.
+- Returned BG image to match UI.
+- Massive removal of old UI code:
+Easy accessors added FView and FControl to various components throughout UI.
+Mishmash of methods in "Display" interface attached as appropriate to singletons.
+AllZone updated to remove display and one or two others in favor of singletons, for future deprecation.
+Some renaming for consistency.
+Skins folder moved out of "images", which will be deprecated soon.
+FControl refactored to reuse single instance of each UI state.
+- Checkstyle.
+- Fixed start button persist bug.
+- Scrolled game log to top in win/lose screen.
+- FPanel bugfix #4 - validation?
+- Removed some of my own legacy commenting.
+- Minor update to settings submenu.
+- Attempt #5: repaint frame on UI state change.
+- Added Tetravus (to enable it I had to add a YChoice svar and ChosenY value. Only added to CostExile, not the other cost types)
+- Previous commit left out the actual script for Tetravus and the change to AbilityFactoryCleanup.java
+- Removed superfluous method override.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -226,6 +284,35 @@ Moment of Silence
 Guided Passage
 Notorious Throng
 Harvest Wurm
+Living Tsunami
+Waterspout Djinn
+Anurid Scavenger
+Barrow Ghoul
+Mindblaze
+Pyromancer Ascension
+Putrid Warrior
+Suppress
+Endless Wurm
+Lithophage
+Vapor Snare
+Sacred Mesa
+Soulblast
+Aven Mimeomancer
+Etherwrought Page
+Intimidation Bolt
+Spellbound Dragon
+Thought Hemorrhage
+Unscythe, Killer of Kings
+Soul Nova
+Martyrs of Korlis
+Vengeful Rebirth
+Tundra Kavu
+Sundial of the Infinite
+Time Stop
+Ovinomancer
+Tundra Kavu
+Tetravus
+Stonehorn Dignitary
 
 
 end
