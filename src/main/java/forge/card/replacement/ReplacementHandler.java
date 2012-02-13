@@ -99,7 +99,13 @@ public class ReplacementHandler {
         }
 
         if (chosenRE != null) {           
-            return executeReplacement(runParams, chosenRE, decider);
+            if(executeReplacement(runParams, chosenRE, decider)) {
+                AllZone.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
+                return true;
+            }
+            else {
+                return false;
+            }
         } else {
             return false;
         }
