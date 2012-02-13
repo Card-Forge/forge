@@ -5,7 +5,7 @@ Text:no text
 PT:2/3
 K:Snow landwalk
 A:AB$ Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
-SVar:RemAIDeck:True
+# AI can now use snow mana to pay for activated abilities.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_musher.jpg
