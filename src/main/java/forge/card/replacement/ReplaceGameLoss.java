@@ -1,4 +1,4 @@
-package forge.card.replacement;
+    package forge.card.replacement;
 
 import java.util.HashMap;
 
@@ -44,13 +44,6 @@ public class ReplaceGameLoss extends ReplacementEffect {
     @Override
     public ReplacementEffect getCopy() {
         return new ReplaceGameLoss(this.getMapParams(), getHostCard());
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
-     */
-    @Override
-    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility sa) {
     }
 
 }
