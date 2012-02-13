@@ -144,6 +144,9 @@ public class ControlDraft {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                view.getBtnStart().setVisible(true);
+                view.getBarProgress().setVisible(false);
+
                 Singletons.getControl().changeState(FControl.MATCH_SCREEN);
                 Singletons.getControl().getMatchControl().initMatch();
                 AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);

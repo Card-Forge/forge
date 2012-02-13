@@ -561,8 +561,8 @@ public class ControlQuest {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                view.getBarProgress().setVisible(false);
                 view.getBtnStart().setVisible(true);
+                view.getBarProgress().setVisible(false);
 
                 Singletons.getControl().changeState(FControl.MATCH_SCREEN);
                 Singletons.getControl().getMatchControl().initMatch();
