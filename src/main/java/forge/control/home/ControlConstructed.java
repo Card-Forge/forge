@@ -498,11 +498,19 @@ public class ControlConstructed {
 
         // Check color-based deck selection for appropriate length
         if (currentHumanSelection.getName().equals("lstColorsHuman")) {
-            if (!checkValidityOfHumanSelectedColors(humanSelected)) { return; }
+            if (!checkValidityOfHumanSelectedColors(humanSelected)) {
+                view.getBarProgress().setVisible(false);
+                view.getBtnStart().setVisible(true);
+                return;
+            }
         }
 
         if (currentAISelection.getName().equals("lstColorsAI")) {
-            if (!checkValidityOfAISelectedColors(aiSelected)) { return; }
+            if (!checkValidityOfAISelectedColors(aiSelected)) {
+                view.getBarProgress().setVisible(false);
+                view.getBtnStart().setVisible(true);
+                return;
+            }
         }
 
         generateAIDecks(aiSelected);
