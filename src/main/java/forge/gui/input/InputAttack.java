@@ -114,6 +114,7 @@ public class InputAttack extends Input {
                 com.execute();
             }
 
+            CombatUtil.showCombat();
         }
         else {
             ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
