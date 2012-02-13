@@ -49,7 +49,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestEvent;
-import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.util.MyRandom;
@@ -84,7 +83,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     /**
      * Instantiates a new quest win lose handler.
      * 
-     * @param v0 ViewWinLose object
+     * @param view0 ViewWinLose object
      */
     public QuestWinLoseHandler(final ViewWinLose view0) {
         super(view0);
@@ -168,7 +167,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
         }
 
-        if (matchState.isMatchOver() == false) {
+        if (!matchState.isMatchOver()) {
             this.getView().getBtnQuit().setText("Quit (15 Credits)");
             return isAnte;
         } else {
@@ -672,7 +671,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN10);
         } else if (iTurn <= 15) {
             credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN15);
-        } else { 
+        } else {
             credits = 0;
         }
 
