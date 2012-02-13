@@ -1,0 +1,14 @@
+Name:Ogre Marauder
+ManaCost:1 B B
+Types:Creature Ogre Warrior
+Text:no text
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigOgreMarauderSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it gains "Ogre Marauder is unblockable" until end of turn unless defending player sacrifices a creature.
+SVar:TrigOgreMarauderSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ Opponent | Optional$ True | RememberSacrificed$ True | SubAbility$ DBOgreMarauderPump
+SVar:DBOgreMarauderPump:DB$ Pump | Defined$ Self | KW$ CARDNAME is unblockable | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBOgreMarauderCleanup
+SVar:DBOgreMarauderCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_marauder.jpg
+End
