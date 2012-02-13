@@ -150,6 +150,7 @@ public final class FControl {
         }
 
         Singletons.getView().validate();
+        Singletons.getView().repaint();
     }
 
     /** Gets the match controller.
