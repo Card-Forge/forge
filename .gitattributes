@@ -9337,6 +9337,7 @@ res/cardsfolder/t/tuktuk_grunts.txt svneol=native#text/plain
 res/cardsfolder/t/tuktuk_the_explorer.txt svneol=native#text/plain
 res/cardsfolder/t/tumble_magnet.txt svneol=native#text/plain
 res/cardsfolder/t/tundra.txt svneol=native#text/plain
+res/cardsfolder/t/tundra_kavu.txt -text
 res/cardsfolder/t/tundra_wolves.txt svneol=native#text/plain
 res/cardsfolder/t/tunnel.txt svneol=native#text/plain
 res/cardsfolder/t/tunneler_wurm.txt svneol=native#text/plain
