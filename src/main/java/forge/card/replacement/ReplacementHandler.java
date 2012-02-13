@@ -98,25 +98,8 @@ public class ReplacementHandler {
             }
         }
 
-        if (chosenRE != null) {
-            //Player optDecider = decider;
-            //optDecider = AbilityFactory.getDefinedPlayers(chosenRE.getHostCard(), chosenRE.getMapParams().get("OptionalDecider"), null).get(0);
-            if (chosenRE.getMapParams().containsKey("Optional")) {
-                if (decider.isHuman()) {
-                    StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
-                    buildQuestion.append(chosenRE.getHostCard());
-                    buildQuestion.append("?\r\n(");
-                    buildQuestion.append(chosenRE.toString());
-                    buildQuestion.append(")");
-                    if (!GameActionUtil.showYesNoDialog(chosenRE.getHostCard(), buildQuestion.toString())) {
-                        return false;
-                    }
-                } else {
-                    //AI-logic for deciding whether or not to apply the optional replacement effect happens here.
-                }
-            }
-            executeReplacement(runParams, chosenRE);
-            return true;
+        if (chosenRE != null) {           
+            return executeReplacement(runParams, chosenRE, decider);
         } else {
             return false;
         }
@@ -128,26 +111,54 @@ public class ReplacementHandler {
      * Runs a single replacement effect.
      * @param replacementEffect the replacement effect to run
      */
-    private void executeReplacement(HashMap<String, Object> runParams, ReplacementEffect replacementEffect) {
+    private boolean executeReplacement(HashMap<String, Object> runParams, ReplacementEffect replacementEffect, Player decider) {
 
         HashMap<String, String> mapParams = replacementEffect.getMapParams();
         replacementEffect.setHasRun(true);
+        
+        SpellAbility effectSA = null;
+        
+        if(mapParams.containsKey("ReplaceWith")) {
+            String effectSVar = mapParams.get("ReplaceWith");
+            String effectAbString = replacementEffect.getHostCard().getSVar(effectSVar);
+
+            AbilityFactory abilityFactory = new AbilityFactory();
+
+            effectSA = abilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
+
+            replacementEffect.setReplacingObjects(runParams, effectSA);
+        }
+        
+        //Decider gets to choose wether or not to apply the replacement.
+        if (replacementEffect.getMapParams().containsKey("Optional")) {
+            Player optDecider = decider;
+            if(mapParams.containsKey("OptionalDecider") && effectSA != null) {
+                optDecider = AbilityFactory.getDefinedPlayers(replacementEffect.getHostCard(), mapParams.get("OptionalDecider"), effectSA).get(0);
+            }
+            
+            if (optDecider.isHuman()) {
+                StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
+                buildQuestion.append(replacementEffect.getHostCard());
+                buildQuestion.append("?\r\n(");
+                buildQuestion.append(replacementEffect.toString());
+                buildQuestion.append(")");
+                if (!GameActionUtil.showYesNoDialog(replacementEffect.getHostCard(), buildQuestion.toString())) {
+                    return false;
+                }
+            } else {
+                //AI-logic
+                if(!replacementEffect.aiShouldRun(effectSA)) {
+                    return false;
+                }
+            }
+        }
 
         if (mapParams.containsKey("Prevent")) {
             if (mapParams.get("Prevent").equals("True")) {
                 replacementEffect.setHasRun(false);
-                return; //Nothing should replace the event.
+                return true; //Nothing should replace the event.
             }
-        }
-
-        String effectSVar = mapParams.get("ReplaceWith");
-        String effectAbString = replacementEffect.getHostCard().getSVar(effectSVar);
-
-        AbilityFactory abilityFactory = new AbilityFactory();
-
-        SpellAbility effectSA = abilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
-
-        replacementEffect.setReplacingObjects(runParams, effectSA);
+        }       
 
         if (replacementEffect.getHostCard().getController().isHuman()) {
             AllZone.getGameAction().playSpellAbilityNoStack(effectSA, false);
@@ -157,6 +168,8 @@ public class ReplacementHandler {
         }
 
         replacementEffect.setHasRun(false);
+        
+        return true;
     }
 
     /**

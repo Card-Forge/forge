@@ -1653,6 +1653,10 @@ public class AbilityFactory {
                     final int count = (Integer) root.getTriggeringObject(l[0]);
 
                     return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+                } else if (calcX[0].startsWith("Replaced")) {
+                    final SpellAbility root = ability.getRootSpellAbility();
+                    list = new CardList();
+                    list.add((Card) root.getReplacingObject(calcX[0].substring(8)));
                 } else if (calcX[0].startsWith("ReplaceCount")) {
                     // ReplaceCount is similar to a regular Count, but just
                     // pulls Integer Values from Replacement objects

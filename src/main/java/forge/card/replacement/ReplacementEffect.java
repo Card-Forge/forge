@@ -46,6 +46,49 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public final boolean hasRun() {
         return hasRun;
     }
+    
+    public final boolean isSecondary() {
+        return mapParams.containsKey("Secondary");
+    }
+    
+    public final boolean aiShouldRun(final SpellAbility sa) {
+        if(mapParams.containsKey("AICheckSVar")) {
+            String svarToCheck = mapParams.get("AICheckSVar");
+            String comparator = "GE";
+            int compareTo = 1;
+            
+            if(mapParams.containsKey("AISVarCompare")) {
+                String fullCmp = mapParams.get("AISVarCompare");
+                comparator = fullCmp.substring(0,2);
+                String strCmpTo = fullCmp.substring(2);
+                try {
+                    compareTo = Integer.parseInt(strCmpTo);
+                }
+                catch(Exception ignored) {
+                    if(sa == null) {
+                        compareTo = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(strCmpTo));
+                    } else {
+                        compareTo = AbilityFactory.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), sa);
+                    }
+                }
+            }
+            
+            int left = 0;
+            
+            if(sa == null) {
+                left = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(svarToCheck));
+            } else {
+                left = AbilityFactory.calculateAmount(hostCard, hostCard.getSVar(svarToCheck), sa);
+            }
+            
+            if(AllZoneUtil.compare(left, comparator, compareTo)) {
+                return true;
+            }
+            
+        }
+        
+        return false;
+    }
 
     /**
      * Sets the checks for run.

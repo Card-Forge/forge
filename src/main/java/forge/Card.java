@@ -2581,7 +2581,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Replacement effects
         for (final ReplacementEffect replacementEffect : this.getCharacteristics().getReplacementEffects()) {
-            sb.append(replacementEffect.toString() + "\r\n");
+            if(!replacementEffect.isSecondary()) {
+                sb.append(replacementEffect.toString() + "\r\n");
+            }
         }
 
         // static abilities
