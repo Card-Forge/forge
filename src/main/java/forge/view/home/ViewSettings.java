@@ -1,14 +1,10 @@
 package forge.view.home;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -63,24 +59,23 @@ public class ViewSettings extends JPanel {
     private final JCheckBox cbAnte, cbScaleLarger, cbDevMode, cbRemoveSmall, cbRemoveArtifacts,
         cbUploadDraft, cbStackLand, cbRandomFoil, cbTextMana, cbSingletons;
 
-    //private final JRadioButton radCardTiny, radCardSmaller, radCardSmall,
-    //    radCardMedium, radCardLarge, radCardHuge;
-
     private final JPanel pnlTabber, pnlPrefs, pnlAvatars, tabPrefs, tabAvatars;
     private final JScrollPane scrContent;
+
+    private String sectionConstraints, regularConstraints, tabberConstraints;
 
     private AvatarLabel avatarHuman, avatarAI;
     private List<AvatarLabel> lstAvatars;
     /**
      * 
      * Assembles swing components for "Settings" mode menu.
-     * @param v0 &emsp; HomeTopLevel
+     * @param view0 &emsp; HomeTopLevel
      */
-    public ViewSettings(final HomeTopLevel v0) {
+    public ViewSettings(final HomeTopLevel view0) {
         // Display
         super();
         this.setOpaque(false);
-        this.parentView = v0;
+        this.parentView = view0;
 
         // Final component inits: JPanels
         pnlTabber = new JPanel();
@@ -94,14 +89,6 @@ public class ViewSettings extends JPanel {
 
         tabPrefs = new SubTab("Preferences");
         tabAvatars = new SubTab("Avatars");
-
-        // Final component inits: Radio buttons and check boxes
-        /*radCardTiny = new CardSizeRadio("Tiny");
-        radCardSmaller = new CardSizeRadio("Smaller");
-        radCardSmall = new CardSizeRadio("Small");
-        radCardMedium = new CardSizeRadio("Medium");
-        radCardLarge = new CardSizeRadio("Large");
-        radCardHuge = new CardSizeRadio("Huge");*/
 
         cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
         cbSingletons = new OptionsCheckBox("Singleton Mode");
@@ -117,7 +104,7 @@ public class ViewSettings extends JPanel {
         // Final component inits: Various
         scrContent = new JScrollPane(
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrContent.getViewport().setOpaque(false);
         scrContent.setBorder(null);
         scrContent.setOpaque(false);
@@ -149,20 +136,20 @@ public class ViewSettings extends JPanel {
         tabPrefs.setToolTipText("Global preference options");
         tabAvatars.setToolTipText("Human and AI avatar select");
 
-        final String constraints = "w 50%!, h 20px!";
+        tabberConstraints = "w 50%!, h 20px!";
         pnlTabber.setOpaque(false);
         pnlTabber.setLayout(new MigLayout("insets 0, gap 0, align center"));
 
-        pnlTabber.add(tabPrefs, constraints);
-        pnlTabber.add(tabAvatars, constraints);
+        pnlTabber.add(tabPrefs, tabberConstraints);
+        pnlTabber.add(tabAvatars, tabberConstraints);
     }
 
     private void populatePrefs() {
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         // Spacing between components is defined here.
-        final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
-        final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
+        sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
+        regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Deck Building Options"), sectionConstraints + ", gaptop 2%");
@@ -213,33 +200,17 @@ public class ViewSettings extends JPanel {
         pnlPrefs.add(cbTextMana, regularConstraints);
         pnlPrefs.add(new NoteLabel("Overlays each card with basic card-specific information."), regularConstraints);
 
-        // Card size radio buttons
-        /*ButtonGroup group = new ButtonGroup();
-        group.add(radCardTiny);
-        group.add(radCardSmaller);
-        group.add(radCardSmall);
-        group.add(radCardMedium);
-        group.add(radCardLarge);
-        group.add(radCardHuge);
-
-        String constraints = "gapleft 10%, wrap";
-        pnlPrefs.add(radCardTiny, constraints);
-        pnlPrefs.add(radCardSmaller, constraints);
-        pnlPrefs.add(radCardSmall, constraints);
-        pnlPrefs.add(radCardMedium, constraints);
-        pnlPrefs.add(radCardLarge, constraints);
-        pnlPrefs.add(radCardHuge, constraints + ", gapbottom 2%");*/
-
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints);
 
-        List<Shortcut> shortcuts = ((GuiTopLevel) AllZone.getDisplay()).getController().getShortcuts();
+        final List<Shortcut> shortcuts = ((GuiTopLevel) AllZone.getDisplay()).getController().getShortcuts();
 
         FLabel lblTemp;
-        for (Shortcut s : shortcuts) {
+        KeyboardShortcutField ksf;
+        for (final Shortcut s : shortcuts) {
             lblTemp = new FLabel.Builder().text(s.getDescription()).build();
-            KeyboardShortcutField ksf = new KeyboardShortcutField(s);
+            ksf  = new KeyboardShortcutField(s);
             pnlPrefs.add(lblTemp, "w 40%!, h 22px!, gap 10%! 0 0 1%");
             pnlPrefs.add(ksf, "w 25%!");
         }
@@ -250,33 +221,25 @@ public class ViewSettings extends JPanel {
     } // End populatePrefs()
 
     private void populateAvatars() {
-        final JPanel pnlTitle = new JPanel(new MigLayout("insets 0, gap 0 0 20px 20px, wrap, alignx center"));
         final JLabel lblTitle = new SectionLabel("Avatar Selection");
         final JLabel lblNote1 = new NoteLabel("Click on an image to set that avatar for a player or AI.");
-        final JLabel lblNote2 = new NoteLabel("Click multiple times to cycle through available players or AI.");
+        final JLabel lblNote2 = new NoteLabel("Click multiple times to cycle.");
 
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblNote1.setHorizontalAlignment(SwingConstants.CENTER);
         lblNote2.setHorizontalAlignment(SwingConstants.CENTER);
 
-        pnlTitle.setOpaque(false);
-        pnlTitle.add(lblTitle, "w 50%!");
-        pnlTitle.add(lblNote1, "w 50%!");
-        pnlTitle.add(lblNote2, "w 50%!");
-
-        final JPanel pnlPics = new JPanel(new ModifiedFlowLayout(1, 30, 30));
-        pnlPics.setOpaque(false);
-
-        pnlAvatars.setLayout(new ModifiedFlowLayout(1, 30, 30));
+        pnlAvatars.setLayout(new MigLayout("insets 0, gap 0, align center, wrap 3"));
+        pnlAvatars.add(lblTitle, "w 330px!, span 3 1");
+        pnlAvatars.add(lblNote1, "w 330px!, span 3 1");
+        pnlAvatars.add(lblNote2, "w 330px!, span 3 1");
 
         lstAvatars = new ArrayList<AvatarLabel>();
         int counter = 0;
-        for (Image i : FSkin.getAvatars().values()) {
+        for (final Image i : FSkin.getAvatars().values()) {
             lstAvatars.add(new AvatarLabel(i, counter++));
-            pnlAvatars.add(lstAvatars.get(lstAvatars.size() - 1));
+            pnlAvatars.add(lstAvatars.get(lstAvatars.size() - 1), "gap 5px 5px 5px 5px");
         }
-
-
 
         final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
         int humanIndex = Integer.parseInt(indexes[0]);
@@ -304,25 +267,25 @@ public class ViewSettings extends JPanel {
     }
 
     /** Surprisingly complicated - be careful when modifying! */
-    private void cycleOwner(final AvatarLabel a0) {
-        if (a0.getOwner() == null) {
-            a0.setOwner(PlayerType.HUMAN);
-            a0.repaint();
+    private void cycleOwner(final AvatarLabel lbl0) {
+        if (lbl0.getOwner() == null) {
+            lbl0.setOwner(PlayerType.HUMAN);
+            lbl0.repaint();
 
             if (avatarHuman != null) {
                 avatarHuman.setOwner(null);
                 avatarHuman.repaint();
             }
 
-            avatarHuman = a0;
+            avatarHuman = lbl0;
         }
-        else if (a0.getOwner() == PlayerType.HUMAN) {
+        else if (lbl0.getOwner() == PlayerType.HUMAN) {
             // Re-assign avatar to human
             avatarHuman.setOwner(null);
             avatarHuman.repaint();
 
             for (int i = 0; i < lstAvatars.size(); i++) {
-                if (lstAvatars.get(i) != a0) {
+                if (lstAvatars.get(i) != lbl0) {
                     avatarHuman = lstAvatars.get(i);
                     avatarHuman.setOwner(PlayerType.HUMAN);
                     avatarHuman.repaint();
@@ -331,19 +294,19 @@ public class ViewSettings extends JPanel {
             }
 
             // Assign computer
-            a0.setOwner(PlayerType.COMPUTER);
-            a0.repaint();
+            lbl0.setOwner(PlayerType.COMPUTER);
+            lbl0.repaint();
 
             if (avatarAI != null) {
                 avatarAI.setOwner(null);
                 avatarAI.repaint();
             }
 
-            avatarAI = a0;
+            avatarAI = lbl0;
         }
         else {
-            a0.setOwner(null);
-            a0.repaint();
+            lbl0.setOwner(null);
+            lbl0.repaint();
 
             // Re-assign avatar to computer
             avatarAI.setOwner(null);
@@ -376,63 +339,21 @@ public class ViewSettings extends JPanel {
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered(final MouseEvent evt) {
                     setOpaque(true);
                 }
 
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited(final MouseEvent evt) {
                     setOpaque(false);
                 }
             });
         }
     }
-
-    /** Consolidates checkbox styling in one place. */
-   /* private class OptionsRadio extends JRadioButton {
-        public OptionsRadio(final String txt0) {
-            super();
-            setText(txt0);
-            setFont(FSkin.getBoldFont(12));
-            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
-            setOpaque(false);
-
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    setOpaque(true);
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    setOpaque(false);
-                }
-            });
-        }
-    }
-
-    /*private class CardSizeRadio extends OptionsRadio {
-        public CardSizeRadio(String txt0) {
-            super(txt0);
-            if (Singletons.getModel().getPreferences().getPref(FPref.UI_CARD_SIZE)
-                    .equalsIgnoreCase(txt0)) {
-                setSelected(true);
-            }
-
-            this.addActionListener(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    try { control.updateCardSize(CardSizeRadio.this); }
-                    catch (Exception e) { e.printStackTrace(); }
-                }
-            });
-        }
-    }*/
 
     /** Consolidates section title label styling in one place. */
     private class SectionLabel extends JLabel {
-        public SectionLabel(String txt0) {
+        public SectionLabel(final String txt0) {
             super(txt0);
             setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             setHorizontalAlignment(SwingConstants.CENTER);
@@ -443,7 +364,7 @@ public class ViewSettings extends JPanel {
 
     /** Consolidates notation label styling in one place. */
     private class NoteLabel extends JLabel {
-        public NoteLabel(String txt0) {
+        public NoteLabel(final String txt0) {
             super(txt0);
             setFont(FSkin.getItalicFont(12));
             setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
@@ -456,8 +377,9 @@ public class ViewSettings extends JPanel {
         private PlayerType owner;
         private boolean hovered = false;
 
-        public AvatarLabel(Image i0, int index0) {
-            img = i0;
+        public AvatarLabel(final Image img0, final int index0) {
+            super();
+            img = img0;
             index = index0;
             setMaximumSize(new Dimension(100, 120));
             setMinimumSize(new Dimension(100, 120));
@@ -465,18 +387,18 @@ public class ViewSettings extends JPanel {
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) { hovered = true; repaint(); }
+                public void mouseEntered(final MouseEvent evt) { hovered = true; repaint(); }
 
                 @Override
-                public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
+                public void mouseExited(final MouseEvent evt) { hovered = false; repaint(); }
 
                 @Override
-                public void mouseClicked(MouseEvent e) { cycleOwner(AvatarLabel.this); repaint(); }
+                public void mouseClicked(final MouseEvent evt) { cycleOwner(AvatarLabel.this); repaint(); }
             });
         }
 
-        public void setOwner(PlayerType p0) {
-            this.owner = p0;
+        public void setOwner(final PlayerType player0) {
+            this.owner = player0;
         }
 
         public PlayerType getOwner() {
@@ -487,19 +409,19 @@ public class ViewSettings extends JPanel {
             return this.index;
         }
 
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics graphics0) {
             if (hovered) {
-                g.setColor(FSkin.getColor(FSkin.Colors.CLR_HOVER));
-                g.fillRect(0, 0, 100, 120);
+                graphics0.setColor(FSkin.getColor(FSkin.Colors.CLR_HOVER));
+                graphics0.fillRect(0, 0, 100, 120);
             }
 
-            g.drawImage(img, 0, 20, null);
+            graphics0.drawImage(img, 0, 20, null);
             if (owner == null) { return; }
 
-            g.setColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            g.drawRect(0, 0, 99, 119);
-            g.setFont(FSkin.getBoldFont(14));
-            g.drawString(owner.toString(), 5, 15);
+            graphics0.setColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            graphics0.drawRect(0, 0, 99, 119);
+            graphics0.setFont(FSkin.getBoldFont(14));
+            graphics0.drawString(owner.toString(), 5, 15);
         }
     }
 
@@ -516,33 +438,33 @@ public class ViewSettings extends JPanel {
          * the shortcut. Also, an action listener that handles translation of
          * keycodes into characters and (dis)assembly of keycode stack.
          * 
-         * @param s0 &emsp; Shortcut object
+         * @param shortcut0 &emsp; Shortcut object
          */
-        public KeyboardShortcutField(final Shortcut s0) {
+        public KeyboardShortcutField(final Shortcut shortcut0) {
             super();
             this.setEditable(false);
             this.setFont(FSkin.getFont(14));
-            this.setCodeString(Singletons.getModel().getPreferences().getPref(s0.getPrefKey()));
+            this.setCodeString(Singletons.getModel().getPreferences().getPref(shortcut0.getPrefKey()));
 
             this.addKeyListener(new KeyAdapter() {
                 @Override
-                public void keyPressed(final KeyEvent e) {
-                    KeyboardShortcuts.addKeyCode(e);
+                public void keyPressed(final KeyEvent evt) {
+                    KeyboardShortcuts.addKeyCode(evt);
                 }
             });
 
             this.addFocusListener(new FocusAdapter() {
                 @Override
-                public void focusGained(final FocusEvent e) {
+                public void focusGained(final FocusEvent evt) {
                     KeyboardShortcutField.this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
                 }
 
                 @Override
-                public void focusLost(final FocusEvent e) {
+                public void focusLost(final FocusEvent evt) {
                     Singletons.getModel().getPreferences().setPref(
-                            s0.getPrefKey(), getCodeString());
+                            shortcut0.getPrefKey(), getCodeString());
                     Singletons.getModel().getPreferences().save();
-                    s0.attach();
+                    shortcut0.attach();
                     KeyboardShortcutField.this.setBackground(Color.white);
                 }
             });
@@ -553,22 +475,22 @@ public class ViewSettings extends JPanel {
          * 
          * @return String
          */
-        public String getCodeString() {
+        public final String getCodeString() {
             return this.codeString;
         }
 
         /**
          * Sets the code string.
          * 
-         * @param s0
+         * @param str0
          *            &emsp; The new code string (space delimited)
          */
-        public void setCodeString(final String s0) {
-            if (s0.equals("null")) {
+        public final void setCodeString(final String str0) {
+            if ("null".equals(str0)) {
                 return;
             }
 
-            this.codeString = s0.trim();
+            this.codeString = str0.trim();
 
             final List<String> codes = new ArrayList<String>(Arrays.asList(this.codeString.split(" ")));
             final List<String> displayText = new ArrayList<String>();
@@ -584,27 +506,27 @@ public class ViewSettings extends JPanel {
     }
 
     /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlPrefs() {
+    public final JPanel getPnlPrefs() {
         return this.pnlPrefs;
     }
 
     /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlAvatars() {
+    public final JPanel getPnlAvatars() {
         return this.pnlAvatars;
     }
 
     /** @return {@link javax.swing.JList} */
-    public JList getLstChooseSkin() {
+    public final JList getLstChooseSkin() {
         return lstChooseSkin;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbRemoveSmall() {
+    public final JCheckBox getCbRemoveSmall() {
         return cbRemoveSmall;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbSingletons() {
+    public final JCheckBox getCbSingletons() {
         return cbSingletons;
     }
 
@@ -679,121 +601,14 @@ public class ViewSettings extends JPanel {
     }
 
     /** */
-    public void showPrefsTab() {
+    public final void showPrefsTab() {
         this.scrContent.getViewport().setView(pnlPrefs);
         control.updateTabber(tabPrefs);
     }
 
     /** */
-    public void showAvatarsTab() {
+    public final void showAvatarsTab() {
         this.scrContent.getViewport().setView(pnlAvatars);
         control.updateTabber(tabAvatars);
     }
-
-    //============= HIGHLY EXPERIMENTAL Doublestrike 13-02-12
-    /**
-      * A modified version of FlowLayout that allows containers using this
-      * Layout to behave in a reasonable manner when placed inside a
-      * JScrollPane
-      * @author Babu Kalakrishnan
-      * Modifications by greearb and jzd
-      */
-
-     public class ModifiedFlowLayout extends FlowLayout {
-           public ModifiedFlowLayout() {
-              super();
-           }
-
-           public ModifiedFlowLayout(int align) {
-              super(align);
-           }
-
-           public ModifiedFlowLayout(int align, int hgap, int vgap) {
-              super(align, hgap, vgap);
-           }
-    
-           public Dimension minimumLayoutSize(Container target) {
-              // Size of largest component, so we can resize it in
-              // either direction with something like a split-pane.
-              return computeMinSize(target);
-           }
-    
-           public Dimension preferredLayoutSize(Container target) {
-              return computeSize(target);
-           }
-    
-           private Dimension computeSize(Container target) {
-              synchronized (target.getTreeLock()) {
-                 int hgap = getHgap();
-                 int vgap = getVgap();
-                 int w = target.getWidth();
-    
-                 // Let this behave like a regular FlowLayout (single row)
-                 // if the container hasn't been assigned any size yet
-                 if (w == 0) {
-                    w = Integer.MAX_VALUE;
-                 }
-    
-                 Insets insets = target.getInsets();
-                 if (insets == null){
-                    insets = new Insets(0, 0, 0, 0);
-                 }
-                 int reqdWidth = 0;
-    
-                 int maxwidth = w - (insets.left + insets.right + hgap * 2);
-                 int n = target.getComponentCount();
-                 int x = 0;
-                 int y = insets.top + vgap; // FlowLayout starts by adding vgap, so do that here too.
-                 int rowHeight = 0;
-    
-                 for (int i = 0; i < n; i++) {
-                    Component c = target.getComponent(i);
-                    if (c.isVisible()) {
-                       Dimension d = c.getPreferredSize();
-                       if ((x == 0) || ((x + d.width) <= maxwidth)) {
-                          // fits in current row.
-                          if (x > 0) {
-                             x += hgap;
-                          }
-                          x += d.width;
-                          rowHeight = Math.max(rowHeight, d.height);
-                       }
-                       else {
-                          // Start of new row
-                          x = d.width;
-                          y += vgap + rowHeight;
-                          rowHeight = d.height;
-                       }
-                       reqdWidth = Math.max(reqdWidth, x);
-                    }
-                 }
-                 y += rowHeight;
-                 y += insets.bottom;
-                 return new Dimension(reqdWidth+insets.left+insets.right, y);
-              }
-           }
-
-           private Dimension computeMinSize(Container target) {
-              synchronized (target.getTreeLock()) {
-                 int minx = Integer.MAX_VALUE;
-                 int miny = Integer.MIN_VALUE;
-                 boolean found_one = false;
-                 int n = target.getComponentCount();
-
-                 for (int i = 0; i < n; i++) {
-                    Component c = target.getComponent(i);
-                    if (c.isVisible()) {
-                       found_one = true;
-                       Dimension d = c.getPreferredSize();
-                       minx = Math.min(minx, d.width);
-                       miny = Math.min(miny, d.height);
-                    }
-                 }
-                 if (found_one) {
-                    return new Dimension(minx, miny);
-                 }
-                 return new Dimension(0, 0);
-              }
-           }
-     }
 }
