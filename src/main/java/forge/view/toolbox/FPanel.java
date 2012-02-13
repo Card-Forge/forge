@@ -17,7 +17,6 @@
  */
 package forge.view.toolbox;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -30,7 +29,6 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.RepaintManager;
 import javax.swing.border.Border;
 
 import forge.Command;
@@ -68,7 +66,6 @@ public class FPanel extends JPanel {
     private double iar;
     // Clip rounded corner shape
     private Area clip;
-    private final BasicStroke borderStroke = new BasicStroke(2.0f);
 
     /** Core panel used in UI. See class javadoc for more details. */
     public FPanel() {
@@ -192,17 +189,12 @@ public class FPanel extends JPanel {
      */
     @Override
     protected void paintComponent(final Graphics graphics0) {
+        super.paintComponent(graphics0);
+
         pnlW = this.getWidth();
         pnlH = this.getHeight();
-        final Graphics2D g2d = (Graphics2D) graphics0;
+        final Graphics2D g2d = (Graphics2D) graphics0.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        RepaintManager.currentManager(this).markCompletelyDirty(this);
-
-        // Set clip for rounded area
-        if (cornerDiameter > 0) {
-            clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
-            g2d.setClip(clip);
-        }
 
         // Draw background as required
         if (foregroundStretch && foregroundImage != null) {
@@ -225,8 +217,8 @@ public class FPanel extends JPanel {
         }
 
         // Clear memory
-        //if (clip != null) { clip.reset(); }
-        //g2d.dispose();
+        if (clip != null) { clip.reset(); }
+        g2d.dispose();
     }
 
     //========== Special draw methods
@@ -238,10 +230,13 @@ public class FPanel extends JPanel {
         else                    { g2d0.setColor(getBackground()); }
 
         // Parent must be drawn onto clipped object.
-        g2d0.fillRect(0, 0, pnlW, pnlH);
+        g2d0.fillRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
     }
 
     private void drawBackgroundTexture(final Graphics2D g2d0) {
+        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
+        g2d0.setClip(clip);
+
         this.tempX = 0;
         this.tempY = 0;
 
@@ -257,6 +252,9 @@ public class FPanel extends JPanel {
     }
 
     private void drawForegroundScaled(final Graphics2D g2d0) {
+        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
+        g2d0.setClip(clip);
+
         // Scaling 1: First dimension larger than panel
         if (imgW >= pnlW) { // Image is wider than panel? Shrink to width.
             scaledW = pnlW;
@@ -288,13 +286,14 @@ public class FPanel extends JPanel {
     }
 
     private void drawForegroundStretched(final Graphics2D g2d0) {
+        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
+        g2d0.setClip(clip);
         g2d0.drawImage(foregroundImage, 0, 0, pnlW, pnlH, 0, 0, imgW, imgH, null);
     }
 
     private void drawBorder(final Graphics2D g2d0) {
         g2d0.setColor(borderColor);
-        g2d0.setStroke(borderStroke);
-        g2d0.drawRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
+        g2d0.drawRoundRect(0, 0, pnlW - 1, pnlH - 1, cornerDiameter, cornerDiameter);
     }
 
     /** Improves performance by checking to see if any graphics will cancel
