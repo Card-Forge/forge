@@ -760,9 +760,9 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryEffect.createDrawbackEffect(this);
             }
         }
-        
+
         else if (this.api.equals("EndTurn")) {
-            if(this.isAb) {
+            if (this.isAb) {
                 spellAbility = AbilityFactoryTurns.createAbilityEndTurn(this);
             } else if (this.isSp) {
                 spellAbility = AbilityFactoryTurns.createSpellEndTurn(this);
@@ -1673,7 +1673,7 @@ public class AbilityFactory {
                 return 0;
             }
         }
-        if (amount.equals("ChosenX")) {
+        if (amount.equals("ChosenX") || amount.equals("ChosenY")) {
             // isn't made yet
             return 0;
         }

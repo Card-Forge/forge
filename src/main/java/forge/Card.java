@@ -470,7 +470,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final ArrayList<Command> untapCommandList = new ArrayList<Command>();
     private final ArrayList<Command> changeControllerCommandList = new ArrayList<Command>();
 
-    private static String[] storableSVars = { "ChosenX" };
+    private static String[] storableSVars = { "ChosenX", "ChosenY" };
 
     private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;

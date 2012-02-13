@@ -248,6 +248,8 @@ public class CostUtil {
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, maxChoice);
+            } if (sVar.equals("YChoice")) {
+                c = CostUtil.chooseYValue(source, maxChoice);
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
@@ -279,6 +281,32 @@ public class CostUtil {
         card.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
 
         return chosenX;
+    }
+
+    /**
+     * Choose x value (for ChosenY).
+     * 
+     * @param card
+     *            the card
+     * @param maxValue
+     *            the max value
+     * @return the int
+     */
+    public static int chooseYValue(final Card card, final int maxValue) {
+        final String chosen = card.getSVar("ChosenY");
+        if (chosen.length() > 0) {
+            return AbilityFactory.calculateAmount(card, "ChosenY", null);
+        }
+
+        final Integer[] choiceArray = new Integer[maxValue + 1];
+        for (int i = 0; i < choiceArray.length; i++) {
+            choiceArray[i] = i;
+        }
+        final Object o = GuiUtils.getChoice(card.toString() + " - Choose a Value for Y", choiceArray);
+        final int chosenY = (Integer) o;
+        card.setSVar("ChosenY", "Number$" + Integer.toString(chosenY));
+
+        return chosenY;
     }
 
     /**
