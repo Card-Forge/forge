@@ -1,11 +1,14 @@
 package forge.view.home;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -261,19 +264,19 @@ public class ViewSettings extends JPanel {
         pnlTitle.add(lblNote1, "w 50%!");
         pnlTitle.add(lblNote2, "w 50%!");
 
-        final JPanel pnlPics = new JPanel(new FlowLayout(1, 30, 30));
+        final JPanel pnlPics = new JPanel(new ModifiedFlowLayout(1, 30, 30));
         pnlPics.setOpaque(false);
+
+        pnlAvatars.setLayout(new ModifiedFlowLayout(1, 30, 30));
 
         lstAvatars = new ArrayList<AvatarLabel>();
         int counter = 0;
         for (Image i : FSkin.getAvatars().values()) {
             lstAvatars.add(new AvatarLabel(i, counter++));
-            pnlPics.add(lstAvatars.get(lstAvatars.size() - 1));
+            pnlAvatars.add(lstAvatars.get(lstAvatars.size() - 1));
         }
 
-        pnlAvatars.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlAvatars.add(pnlTitle, "w 90%!");
-        pnlAvatars.add(pnlPics, "w 90%!, h 80%!");
+
 
         final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
         int humanIndex = Integer.parseInt(indexes[0]);
@@ -686,4 +689,111 @@ public class ViewSettings extends JPanel {
         this.scrContent.getViewport().setView(pnlAvatars);
         control.updateTabber(tabAvatars);
     }
+
+    //============= HIGHLY EXPERIMENTAL Doublestrike 13-02-12
+    /**
+      * A modified version of FlowLayout that allows containers using this
+      * Layout to behave in a reasonable manner when placed inside a
+      * JScrollPane
+      * @author Babu Kalakrishnan
+      * Modifications by greearb and jzd
+      */
+
+     public class ModifiedFlowLayout extends FlowLayout {
+           public ModifiedFlowLayout() {
+              super();
+           }
+
+           public ModifiedFlowLayout(int align) {
+              super(align);
+           }
+
+           public ModifiedFlowLayout(int align, int hgap, int vgap) {
+              super(align, hgap, vgap);
+           }
+    
+           public Dimension minimumLayoutSize(Container target) {
+              // Size of largest component, so we can resize it in
+              // either direction with something like a split-pane.
+              return computeMinSize(target);
+           }
+    
+           public Dimension preferredLayoutSize(Container target) {
+              return computeSize(target);
+           }
+    
+           private Dimension computeSize(Container target) {
+              synchronized (target.getTreeLock()) {
+                 int hgap = getHgap();
+                 int vgap = getVgap();
+                 int w = target.getWidth();
+    
+                 // Let this behave like a regular FlowLayout (single row)
+                 // if the container hasn't been assigned any size yet
+                 if (w == 0) {
+                    w = Integer.MAX_VALUE;
+                 }
+    
+                 Insets insets = target.getInsets();
+                 if (insets == null){
+                    insets = new Insets(0, 0, 0, 0);
+                 }
+                 int reqdWidth = 0;
+    
+                 int maxwidth = w - (insets.left + insets.right + hgap * 2);
+                 int n = target.getComponentCount();
+                 int x = 0;
+                 int y = insets.top + vgap; // FlowLayout starts by adding vgap, so do that here too.
+                 int rowHeight = 0;
+    
+                 for (int i = 0; i < n; i++) {
+                    Component c = target.getComponent(i);
+                    if (c.isVisible()) {
+                       Dimension d = c.getPreferredSize();
+                       if ((x == 0) || ((x + d.width) <= maxwidth)) {
+                          // fits in current row.
+                          if (x > 0) {
+                             x += hgap;
+                          }
+                          x += d.width;
+                          rowHeight = Math.max(rowHeight, d.height);
+                       }
+                       else {
+                          // Start of new row
+                          x = d.width;
+                          y += vgap + rowHeight;
+                          rowHeight = d.height;
+                       }
+                       reqdWidth = Math.max(reqdWidth, x);
+                    }
+                 }
+                 y += rowHeight;
+                 y += insets.bottom;
+                 return new Dimension(reqdWidth+insets.left+insets.right, y);
+              }
+           }
+
+           private Dimension computeMinSize(Container target) {
+              synchronized (target.getTreeLock()) {
+                 int minx = Integer.MAX_VALUE;
+                 int miny = Integer.MIN_VALUE;
+                 boolean found_one = false;
+                 int n = target.getComponentCount();
+
+                 for (int i = 0; i < n; i++) {
+                    Component c = target.getComponent(i);
+                    if (c.isVisible()) {
+                       found_one = true;
+                       Dimension d = c.getPreferredSize();
+                       minx = Math.min(minx, d.width);
+                       miny = Math.min(miny, d.height);
+                    }
+                 }
+                 if (found_one) {
+                    return new Dimension(minx, miny);
+                 }
+                 return new Dimension(0, 0);
+              }
+           }
+     }
 }
