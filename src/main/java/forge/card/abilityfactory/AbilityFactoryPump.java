@@ -574,8 +574,16 @@ public class AbilityFactoryPump {
         CardList list;
         if (this.abilityFactory.isCurse()) {
             list = this.getCurseCreatures(sa, defense, attack);
+            if (tgt.canTgtPlayer()) {
+                tgt.addTarget(AllZone.getHumanPlayer());
+                return true;
+            }
         } else {
             list = this.getPumpCreatures(defense, attack, sa);
+            if (tgt.canTgtPlayer() && !tgt.canOnlyTgtOpponent()) {
+                tgt.addTarget(AllZone.getComputerPlayer());
+                return true;
+            }
         }
 
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
