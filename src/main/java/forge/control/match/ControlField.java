@@ -41,6 +41,7 @@ import forge.Constant.Zone;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
@@ -56,9 +57,7 @@ import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerLibrary;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
-import forge.view.GuiTopLevel;
 import forge.view.match.ViewField;
-import forge.view.match.MatchTopLevel;
 import forge.view.toolbox.FLabel;
 
 /**
@@ -443,11 +442,12 @@ public class ControlField {
         maAvatar = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 if (ControlField.this.player.isComputer()) {
-                    t.getInputController().getInputControl().selectPlayer(AllZone.getComputerPlayer());
+                    Singletons.getControl().getMatchControl().getMessageControl()
+                        .getInputControl().selectPlayer(AllZone.getComputerPlayer());
                 } else {
-                    t.getInputController().getInputControl().selectPlayer(AllZone.getHumanPlayer());
+                    Singletons.getControl().getMatchControl().getMessageControl()
+                        .getInputControl().selectPlayer(AllZone.getHumanPlayer());
                 }
             }
         };
@@ -456,11 +456,9 @@ public class ControlField {
         maCardOver = new MouseMotionAdapter() {
             @Override
             public void mouseMoved(final MouseEvent me) {
-                final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
                 if (c != null) {
-                    t.getDetailController().showCard(c);
-                    t.getPictureController().showCard(c);
+                    Singletons.getControl().getMatchControl().setCard(c);
                 }
             }
         };
@@ -469,14 +467,13 @@ public class ControlField {
         maCardClick = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
                 // original version:
                 // final Card c = t.getDetailController().getCurrentCard();
                 // Roujin's bug fix version dated 2-12-2012
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
 
-                final Input input = t.getInputController().getInputControl().getInput();
+                final Input input = Singletons.getControl().getMatchControl().getMessageControl().getInputControl().getInput();
 
                 if (c != null && c.isInZone(Zone.Battlefield)) {
                     if (c.isTapped()
@@ -514,8 +511,9 @@ public class ControlField {
                             ((InputBlock) input).removeFromAllBlocking(c);
                         }
                     } else {
-                        t.getInputController().getInputControl()
-                                .selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Battlefield));
+                        Singletons.getControl().getMatchControl().getMessageControl()
+                            .getInputControl().selectCard(c,
+                                    AllZone.getHumanPlayer().getZone(Zone.Battlefield));
                     }
                 }
             }

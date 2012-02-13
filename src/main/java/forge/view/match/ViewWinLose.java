@@ -13,6 +13,7 @@ import forge.AllZone;
 import forge.Constant;
 import forge.PhaseHandler;
 import forge.Player;
+import forge.Singletons;
 import forge.control.match.ControlWinLose;
 import forge.game.GameType;
 import forge.model.FMatchState;
@@ -36,7 +37,7 @@ public class ViewWinLose {
 
     /** */
     public ViewWinLose() {
-        final FOverlay overlay = AllZone.getOverlay();
+        final FOverlay overlay = Singletons.getView().getOverlay();
         final FMatchState matchState = AllZone.getMatchState();
 
         final JPanel pnlLeft = new JPanel();

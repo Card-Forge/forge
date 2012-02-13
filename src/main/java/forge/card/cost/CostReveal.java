@@ -26,6 +26,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
@@ -256,7 +257,7 @@ public class CostReveal extends CostPartWithList {
                     sb.append(nNeeded - this.nReveal);
                     sb.append(" remaining.");
                 }
-                AllZone.getDisplay().showMessage(sb.toString());
+                Singletons.getControl().getMatchControl().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

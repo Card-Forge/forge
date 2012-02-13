@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 
 import forge.AllZone;
 import forge.Constant;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -19,7 +20,6 @@ import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorDraft;
-import forge.view.GuiTopLevel;
 import forge.view.home.ViewDraft;
 import forge.view.toolbox.FSkin;
 
@@ -144,9 +144,8 @@ public class ControlDraft {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-                g.getController().changeState(FControl.MATCH_SCREEN);
-                g.getController().getMatchController().initMatch();
+                Singletons.getControl().changeState(FControl.MATCH_SCREEN);
+                Singletons.getControl().getMatchControl().initMatch();
                 AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             }
         });

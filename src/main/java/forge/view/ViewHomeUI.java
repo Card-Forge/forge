@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.view.home;
+package forge.view;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -37,6 +37,12 @@ import forge.control.home.ControlSealed;
 import forge.control.home.ControlUtilities;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.view.home.ViewConstructed;
+import forge.view.home.ViewDraft;
+import forge.view.home.ViewQuest;
+import forge.view.home.ViewSealed;
+import forge.view.home.ViewSettings;
+import forge.view.home.ViewUtilities;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
@@ -49,7 +55,7 @@ import forge.view.toolbox.FSkin;
  */
 
 @SuppressWarnings("serial")
-public class HomeTopLevel extends FPanel {
+public class ViewHomeUI extends FPanel {
     private JPanel pnlMenu, pnlContent;
     private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnExit, btnDeckEditor;
     private String constraints;
@@ -68,7 +74,7 @@ public class HomeTopLevel extends FPanel {
     /**
      * Instantiates a new home top level.
      */
-    public HomeTopLevel() {
+    public ViewHomeUI() {
         super();
 
         constructed = new ViewConstructed(this);
@@ -131,7 +137,7 @@ public class HomeTopLevel extends FPanel {
         btnDeckEditor = new FButton();
         btnDeckEditor.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
-                HomeTopLevel.this.getUtilitiesController().showDeckEditor(null, null);
+                ViewHomeUI.this.getUtilitiesController().showDeckEditor(null, null);
             }
         });
         btnDeckEditor.setText("Deck Editor");
@@ -331,7 +337,7 @@ public class HomeTopLevel extends FPanel {
     }
 
     /** @return ControlHomeUI */
-    public ControlHomeUI getController() {
+    public ControlHomeUI getControl() {
         return control;
     }
 

@@ -24,6 +24,7 @@ import forge.CombatUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.PlayerZone;
+import forge.Singletons;
 
 /**
  * <p>
@@ -53,7 +54,7 @@ public class InputCleanup extends Input {
         final StringBuffer sb = new StringBuffer();
         sb.append("Cleanup Phase: You can only have a maximum of ").append(AllZone.getHumanPlayer().getMaxHandSize());
         sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
-        AllZone.getDisplay().showMessage(sb.toString());
+        Singletons.getControl().getMatchControl().showMessage(sb.toString());
 
         // goes to the next phase
         if ((n <= AllZone.getHumanPlayer().getMaxHandSize()) || (AllZone.getHumanPlayer().getMaxHandSize() == -1)) {

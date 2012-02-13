@@ -35,6 +35,7 @@ import forge.control.bazaar.ControlStall;
 import forge.quest.data.bazaar.QuestStallDefinition;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.quest.data.bazaar.QuestStallPurchasable;
+import forge.view.ViewBazaarUI;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
@@ -54,12 +55,12 @@ public class ViewStall extends JPanel {
     private final JPanel pnlInventory;
     private final FScrollPane scrInventory;
     private final ControlStall control;
-    private final BazaarTopLevel parentView;
+    private final ViewBazaarUI parentView;
     private List<ViewItem> lstItemPanels;
     private QuestStallDefinition stall;
 
-    /** @param v0 {@link forge.view.bazaar.BazaarTopLevel} */
-    protected ViewStall(final BazaarTopLevel v0) {
+    /** @param v0 {@link forge.view.ViewBazaarUI} */
+    public ViewStall(final ViewBazaarUI v0) {
         // Final/component inits
         this.lblStallName = new FLabel.Builder().text("").fontAlign(SwingConstants.CENTER).build();
         this.lblEmpty = new FLabel.Builder()
@@ -171,8 +172,8 @@ public class ViewStall extends JPanel {
         }
     }
 
-    /** @return {@link forge.view.bazaar.BazaarTopLevel} */
-    public BazaarTopLevel getParentView() {
+    /** @return {@link forge.view.ViewBazaarUI} */
+    public ViewBazaarUI getParentView() {
         return this.parentView;
     }
 }

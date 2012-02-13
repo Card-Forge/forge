@@ -17,6 +17,7 @@
  */
 package forge;
 
+import forge.control.FControl;
 import forge.model.FModel;
 import forge.view.FView;
 
@@ -28,6 +29,8 @@ public final class Singletons {
     private static FModel model = null;
 
     private static FView view = null;
+
+    private static FControl control = null;
 
     /**
      * Do not instantiate.
@@ -74,4 +77,22 @@ public final class Singletons {
         Singletons.view = theView;
     }
 
+    /**
+     * Gets the control.
+     * 
+     * @return the view
+     */
+    public static FControl getControl() {
+        return Singletons.control;
+    }
+
+    /**
+     * Sets the control.
+     * 
+     * @param theControl
+     *            the view to set
+     */
+    public static void setControl(final FControl theControl) {
+        Singletons.control = theControl;
+    }
 }

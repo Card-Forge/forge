@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.view.home;
+package forge.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -56,7 +56,8 @@ public class SplashFrame extends JFrame {
     private static final int CLOSEBTN_SIDELENGTH = 15;
     private static final Color CLOSEBTN_COLOR = new Color(215, 208, 188);
 
-    private final FProgressBar barLoader;
+    /** Preload bar, static accessible. */
+    public static final FProgressBar PROGRESS_BAR = new FProgressBar();
 
     /**
      * Create the frame; this <strong>must</strong> be called from an event
@@ -140,21 +141,16 @@ public class SplashFrame extends JFrame {
         pnlContent.getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"), "escAction");
         pnlContent.getActionMap().put("escAction", actClose);
 
-        barLoader = new FProgressBar();
-        barLoader.setString("Welcome to Forge.");
-        barLoader.setBounds(SplashFrame.BAR_PADDING_X, splashHeightPx - SplashFrame.BAR_PADDING_Y
+        PROGRESS_BAR.setString("Welcome to Forge.");
+        PROGRESS_BAR.setBounds(SplashFrame.BAR_PADDING_X, splashHeightPx - SplashFrame.BAR_PADDING_Y
                 - SplashFrame.BAR_HEIGHT, splashWidthPx - (2 * SplashFrame.BAR_PADDING_X), SplashFrame.BAR_HEIGHT);
-        pnlContent.add(barLoader);
+        pnlContent.add(PROGRESS_BAR);
 
         final JLabel bgLabel = new JLabel(bgIcon);
         bgLabel.setBounds(0, 0, splashWidthPx, splashHeightPx);
         pnlContent.add(bgLabel);
 
         this.pack();
-    }
-
-    /** @return FProgressBar &emsp; The preloader. */
-    public final FProgressBar getProgressBar() {
-        return this.barLoader;
+        this.setVisible(true);
     }
 }

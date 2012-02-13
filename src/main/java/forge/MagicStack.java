@@ -746,7 +746,7 @@ public class MagicStack extends MyObservable {
 
                         @Override
                         public void showMessage() {
-                            AllZone.getDisplay().showMessage("Mana Vortex - select a land to sacrifice");
+                            Singletons.getControl().getMatchControl().showMessage("Mana Vortex - select a land to sacrifice");
                             ButtonUtil.enableOnlyCancel();
                         }
 
@@ -938,7 +938,7 @@ public class MagicStack extends MyObservable {
 
                     @Override
                     public void showMessage() {
-                        AllZone.getDisplay().showMessage("Choose target creature to haunt.");
+                        Singletons.getControl().getMatchControl().showMessage("Choose target creature to haunt.");
                         ButtonUtil.disableAll();
                     }
 
@@ -952,7 +952,7 @@ public class MagicStack extends MyObservable {
                             MagicStack.this.add(haunterDiesWork);
                             this.stop();
                         } else {
-                            AllZone.getDisplay().showMessage("Cannot target this card (Shroud? Protection?).");
+                            Singletons.getControl().getMatchControl().showMessage("Cannot target this card (Shroud? Protection?).");
                         }
                     }
                 };

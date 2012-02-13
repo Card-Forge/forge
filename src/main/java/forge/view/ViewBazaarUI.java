@@ -1,4 +1,4 @@
-package forge.view.bazaar;
+package forge.view;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.quest.data.bazaar.QuestStallManager;
+import forge.view.bazaar.ViewStall;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
@@ -15,14 +16,14 @@ import forge.view.toolbox.FSkin;
 /** Lays out containers and borders for resizeable layout and
  *  instantiates top-level controller for bazaar UI. */
 @SuppressWarnings("serial")
-public class BazaarTopLevel extends FPanel {
+public class ViewBazaarUI extends FPanel {
     private final JPanel pnlAllStalls;
     private final ViewStall pnlSingleStall;
     private FLabel previousSelected;
 
     /** Lays out containers and borders for resizeable layout and
      *  instantiates top-level controller for bazaar UI. */
-    public BazaarTopLevel() {
+    public ViewBazaarUI() {
         super();
 
         // Final inits

@@ -17,6 +17,8 @@
  */
 package forge;
 
+import javax.swing.JButton;
+
 /**
  * <p>
  * ButtonUtil class.
@@ -35,8 +37,8 @@ public class ButtonUtil {
         ButtonUtil.getOK().setText("OK");
         ButtonUtil.getCancel().setText("Cancel");
 
-        ButtonUtil.getOK().setSelectable(false);
-        ButtonUtil.getCancel().setSelectable(false);
+        ButtonUtil.getOK().setEnabled(false);
+        ButtonUtil.getCancel().setEnabled(false);
     }
 
     /**
@@ -45,8 +47,8 @@ public class ButtonUtil {
      * </p>
      */
     public static void enableOnlyOK() {
-        ButtonUtil.getOK().setSelectable(true);
-        ButtonUtil.getCancel().setSelectable(false);
+        ButtonUtil.getOK().setEnabled(true);
+        ButtonUtil.getCancel().setEnabled(false);
     }
 
     /**
@@ -55,8 +57,8 @@ public class ButtonUtil {
      * </p>
      */
     public static void enableOnlyCancel() {
-        ButtonUtil.getOK().setSelectable(false);
-        ButtonUtil.getCancel().setSelectable(true);
+        ButtonUtil.getOK().setEnabled(false);
+        ButtonUtil.getCancel().setEnabled(true);
     }
 
     /**
@@ -65,8 +67,8 @@ public class ButtonUtil {
      * </p>
      */
     public static void disableAll() {
-        ButtonUtil.getOK().setSelectable(false);
-        ButtonUtil.getCancel().setSelectable(false);
+        ButtonUtil.getOK().setEnabled(false);
+        ButtonUtil.getCancel().setEnabled(false);
     }
 
     /**
@@ -75,8 +77,8 @@ public class ButtonUtil {
      * </p>
      */
     public static void enableAll() {
-        ButtonUtil.getOK().setSelectable(true);
-        ButtonUtil.getCancel().setSelectable(true);
+        ButtonUtil.getOK().setEnabled(true);
+        ButtonUtil.getCancel().setEnabled(true);
     }
 
     /**
@@ -85,7 +87,7 @@ public class ButtonUtil {
      * </p>
      */
     public static void disableOK() {
-        ButtonUtil.getOK().setSelectable(false);
+        ButtonUtil.getOK().setEnabled(false);
     }
 
     /**
@@ -94,7 +96,7 @@ public class ButtonUtil {
      * </p>
      */
     public static void disableCancel() {
-        ButtonUtil.getCancel().setSelectable(false);
+        ButtonUtil.getCancel().setEnabled(false);
     }
 
     /**
@@ -104,8 +106,8 @@ public class ButtonUtil {
      * 
      * @return a {@link forge.MyButton} object.
      */
-    private static MyButton getOK() {
-        return AllZone.getDisplay().getButtonOK();
+    private static JButton getOK() {
+        return Singletons.getView().getMatchView().getBtnOK();
     }
 
     /**
@@ -115,7 +117,7 @@ public class ButtonUtil {
      * 
      * @return a {@link forge.MyButton} object.
      */
-    private static MyButton getCancel() {
-        return AllZone.getDisplay().getButtonCancel();
+    private static JButton getCancel() {
+        return Singletons.getView().getMatchView().getBtnCancel();
     }
 }

@@ -14,11 +14,11 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.home.ControlUtilities;
+import forge.view.ViewHomeUI;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 
@@ -28,7 +28,7 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewUtilities extends JPanel {
-    private final HomeTopLevel parentView;
+    private final ViewHomeUI parentView;
     private final ControlUtilities control;
     private final JTextPane tpnLicensing;
     private final JLabel lblLicensing;
@@ -53,9 +53,9 @@ public class ViewUtilities extends JPanel {
      * Assembles swing components for "Utilities" mode menu.
      * 
      * @param v0
-     *            &emsp; HomeTopLevel
+     *            &emsp; ViewHomeUI
      */
-    public ViewUtilities(HomeTopLevel v0) {
+    public ViewUtilities(ViewHomeUI v0) {
         super();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
@@ -150,14 +150,13 @@ public class ViewUtilities extends JPanel {
 
     /** */
     public void showLicensing() {
-        final FOverlay overlay = AllZone.getOverlay();
         final FButton btnClose = new FButton();
         final FPanel pnlContainer = new FPanel();
 
         btnClose.setAction(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                overlay.hideOverlay();
+                Singletons.getView().getOverlay().hideOverlay();
             }
         });
         btnClose.setText("Close");
@@ -168,10 +167,10 @@ public class ViewUtilities extends JPanel {
         pnlContainer.add(tpnLicensing, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");
 
-        overlay.removeAll();
-        overlay.setLayout(new MigLayout("insets 0"));
-        overlay.add(pnlContainer, "w 50%, gap 25% 0 5% 5%, wrap");
-        overlay.showOverlay();
+        Singletons.getView().getOverlay().removeAll();
+        Singletons.getView().getOverlay().setLayout(new MigLayout("insets 0"));
+        Singletons.getView().getOverlay().add(pnlContainer, "w 50%, gap 25% 0 5% 5%, wrap");
+        Singletons.getView().getOverlay().showOverlay();
     }
 
     /** @return {@link forge.view.toolbox.FLabel} */
@@ -224,8 +223,8 @@ public class ViewUtilities extends JPanel {
         return ViewUtilities.this.control;
     }
 
-    /** @return HomeTopLevel */
-    public HomeTopLevel getParentView() {
+    /** @return ViewHomeUI */
+    public ViewHomeUI getParentView() {
         return parentView;
     }
 } // end class ViewUtilities

@@ -22,17 +22,14 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
 import javax.swing.WindowConstants;
 
+import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.view.GuiTopLevel;
-import forge.view.bazaar.BazaarTopLevel;
-import forge.view.editor.EditorTopLevel;
-import forge.view.home.HomeTopLevel;
-import forge.view.match.MatchTopLevel;
 
 /**
  * <p>
@@ -42,17 +39,12 @@ import forge.view.match.MatchTopLevel;
  * between various display states in that JFrame. Controllers are instantiated
  * separately by each state's top level view class.
  */
-public class FControl {
-    private final JLayeredPane display;
-    private final GuiTopLevel view;
+public final class FControl {
     private List<Shortcut> shortcuts;
+    private JLayeredPane display;
     private int state;
 
-    private HomeTopLevel home = null;
-    private MatchTopLevel match = null;
-    private EditorTopLevel editor = null;
-    private WindowAdapter waDefault, waConcede, waLeaveBazaar;
-    private BazaarTopLevel bazaar;
+    private WindowListener waDefault, waConcede, waLeaveBazaar;
 
     /** */
     public static final int HOME_SCREEN = 0;
@@ -70,21 +62,14 @@ public class FControl {
      * Controls all Forge UI functionality inside one JFrame. This class
      * switches between various display states in that JFrame. Controllers are
      * instantiated separately by each state's top level view class.
-     * 
-     * @param v0 &emsp; GuiTopLevel
      */
-    public FControl(GuiTopLevel v0) {
-        this.view = v0;
-
-        this.display = (JLayeredPane) this.view.getContentPane();
-        this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts(this.view);
-
+    public FControl() {
         // "Close" button override during match
         this.waConcede = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                view.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                getMatchView().getDockController().concede();
+                Singletons.getView().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                Singletons.getControl().getMatchControl().getDockControl().concede();
             }
         };
 
@@ -92,25 +77,31 @@ public class FControl {
         this.waLeaveBazaar = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                view.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                Singletons.getView().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 changeState(0);
-                getHomeView().showQuestMenu();
+                Singletons.getView().getHomeView().showQuestMenu();
             }
         };
 
         // Default action on window close
         this.waDefault = new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                Singletons.getView().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             }
          };
+    }
 
-         // Handles resizing in null layouts of layers in JLayeredPane.
-        view.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(final ComponentEvent e) {
-                sizeChildren();
-            }
+    /** After view and model have been initialized, control can start. */
+    public void initialize() {
+        this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
+        this.display = Singletons.getView().getLayeredContentPane();
+
+        // Handles resizing in null layouts of layers in JLayeredPane.
+        Singletons.getView().addComponentListener(new ComponentAdapter() {
+           @Override
+           public void componentResized(final ComponentEvent e) {
+               sizeChildren();
+           }
         });
     }
 
@@ -124,84 +115,61 @@ public class FControl {
      *            &emsp; State index: 0 for home, 1 for match, etc.
      */
     public void changeState(final int i0) {
-        this.home = null;
-        this.match = null;
-        this.editor = null;
+        clearChildren(JLayeredPane.DEFAULT_LAYER);
         this.state = i0;
 
-        this.display.removeAll();
-        this.view.removeWindowListener(waConcede);
-        this.view.removeWindowListener(waLeaveBazaar);
-        this.view.addWindowListener(waDefault);
-        this.view.addOverlay();
+        /// out out out ghandi asdf
+        Singletons.getView().removeWindowListener(waConcede);
+        Singletons.getView().removeWindowListener(waLeaveBazaar);
+        Singletons.getView().addWindowListener(waDefault);
+        ////////////////
 
         // Fire up new state
         switch (i0) {
             case HOME_SCREEN:
-                this.home = new HomeTopLevel();
-                this.display.add(this.home, JLayeredPane.DEFAULT_LAYER);
+                display.add(Singletons.getView().getHomeView(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
                 break;
 
             case MATCH_SCREEN:
-                this.match = new MatchTopLevel();
-                this.display.add(this.match, JLayeredPane.DEFAULT_LAYER);
+                display.add(Singletons.getView().getMatchView(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
-                view.addWindowListener(waConcede);
+                Singletons.getView().addWindowListener(waConcede);
                 break;
 
             case DEFAULT_EDITOR:
-                this.editor = new EditorTopLevel();
-                this.display.add(this.editor);
+                display.add(Singletons.getView().getEditorView(), JLayeredPane.DEFAULT_LAYER);
                 break;
 
             case QUEST_BAZAAR:
-                this.bazaar = new BazaarTopLevel();
-                this.display.add(bazaar, JLayeredPane.DEFAULT_LAYER);
+                display.add(Singletons.getView().getBazaarView(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
-                view.addWindowListener(waLeaveBazaar);
+                Singletons.getView().addWindowListener(waLeaveBazaar);
                 break;
 
             default:
-                break;
         }
     }
 
-    /**
-     * Gets the match view.
-     * 
-     * @return MatchTopLevel
+    /** Gets the match controller.
+     * @return {@link forge.control.match.ControlMatchUI}
      */
-    public MatchTopLevel getMatchView() {
-        return this.match;
+    public ControlMatchUI getMatchControl() {
+        if (getState() != FControl.MATCH_SCREEN) {
+            throw new IllegalArgumentException("FControl$getMatchControl\n"
+                    + "may only be called while the match UI is showing.");
+        }
+        return Singletons.getView().getMatchView().getControl();
     }
 
-    /**
-     * Gets the match controller.
-     * 
-     * @return ControlMatchUI
-     */
-    public ControlMatchUI getMatchController() {
-        return this.match.getController();
-    }
-
-    /** @return HomeTopLevel */
-    public HomeTopLevel getHomeView() {
-        return this.home;
-    }
-
-    /** @return HomeTopLevel */
-    public ControlHomeUI getHomeController() {
-        return this.home.getController();
-    }
-
-    /**
-     * Gets the match view.
-     * 
-     * @return MatchTopLevel
-     */
-    public BazaarTopLevel getBazaarView() {
-        return this.bazaar;
+    /** Gets the home controller.
+     * @return {@link forge.control.home.ControlHomeUI} */
+    public ControlHomeUI getHomeControl() {
+        if (getState() != FControl.HOME_SCREEN) {
+            throw new IllegalArgumentException("FControl$getHomeControl\n"
+                    + "may only be called while the home UI is showing.");
+        }
+        return Singletons.getView().getHomeView().getControl();
     }
 
     /** 
@@ -219,16 +187,24 @@ public class FControl {
         return this.shortcuts;
     }
 
+    /** Remove all children from a specified layer. */
+    private void clearChildren(final int layer0) {
+        final Component[] children = Singletons.getView()
+                .getLayeredContentPane().getComponentsInLayer(layer0);
+
+        for (Component c : children) {
+            display.remove(c);
+        }
+    }
+
     /** Sizes children of JLayeredPane to fully fit their layers. */
     private void sizeChildren() {
-        Component[] children;
-        children = FControl.this.display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-
+        Component[] children = display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
         if (children.length == 0) { return; }
+        children[0].setSize(display.getSize());
 
-        children[0].setSize(FControl.this.display.getSize());
-
-        children = FControl.this.display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
-        children[0].setSize(FControl.this.display.getSize());
+        children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
+        if (children.length == 0) { return; }
+        children[0].setSize(display.getSize());
     }
 }

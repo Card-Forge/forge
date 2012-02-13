@@ -49,7 +49,6 @@ import forge.game.GameType;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.view.GuiTopLevel;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
@@ -204,7 +203,7 @@ public class ViewField extends FPanel {
      * 
      * @return ControlField
      */
-    public ControlField getController() {
+    public ControlField getControl() {
         return this.control;
     }
 
@@ -351,8 +350,8 @@ public class ViewField extends FPanel {
      */
     public void updateDetails(final Player p0) {
         // "Players" panel update
-        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-        t.getTabberController().getView().updatePlayerLabels(p0);
+        Singletons.getControl().getMatchControl()
+            .getTabberControl().getView().updatePlayerLabels(p0);
 
         // Poison/life
         this.getLblLife().setText("" + p0.getLife());

@@ -27,6 +27,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
@@ -325,7 +326,7 @@ public class CostDiscard extends CostPartWithList {
                     sb.append(nNeeded - this.nDiscard);
                     sb.append(" remaining.");
                 }
-                AllZone.getDisplay().showMessage(sb.toString());
+                Singletons.getControl().getMatchControl().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

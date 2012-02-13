@@ -51,7 +51,7 @@ public class ViewPicture extends FPanel {
      *
      * @return ControlPicture
      */
-    public ControlPicture getController() {
+    public ControlPicture getControl() {
         return control;
     }
 

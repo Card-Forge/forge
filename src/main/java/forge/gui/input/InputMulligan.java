@@ -37,16 +37,14 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GamePlayerRating;
 import forge.quest.data.QuestData;
-import forge.view.GuiTopLevel;
-
-/**
- * <p>
- * Input_Mulligan class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
+ /**
+  * <p>
+  * InputMulligan class.
+  * </p>
+  * 
+  * @author Forge
+  * @version $Id$
+  */
 public class InputMulligan extends Input {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
@@ -58,9 +56,9 @@ public class InputMulligan extends Input {
     @Override
     public final void showMessage() {
         ButtonUtil.enableAll();
-        AllZone.getDisplay().getButtonOK().setText("No");
-        AllZone.getDisplay().getButtonCancel().setText("Yes");
-        AllZone.getDisplay().showMessage("Do you want to Mulligan?");
+        Singletons.getView().getMatchView().getBtnOK().setText("No");
+        Singletons.getView().getMatchView().getBtnCancel().setText("Yes");
+        Singletons.getControl().getMatchControl().showMessage("Do you want to Mulligan?");
     }
 
     /** {@inheritDoc} */
@@ -225,7 +223,7 @@ public class InputMulligan extends Input {
                 c0.getController().drawCards(hand.size());
             }
         } else {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
+            Singletons.getControl().getMatchControl().getMessageControl().remind();
         }
     }
 }

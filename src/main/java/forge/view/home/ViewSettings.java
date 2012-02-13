@@ -28,7 +28,6 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AllZone;
 import forge.PlayerType;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts;
@@ -37,7 +36,7 @@ import forge.control.home.ControlSettings;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
-import forge.view.GuiTopLevel;
+import forge.view.ViewHomeUI;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
@@ -52,7 +51,7 @@ import forge.view.toolbox.SubTab;
 public class ViewSettings extends JPanel {
     private final ControlSettings control;
     private final FLabel btnReset, lblTitleSkin;
-    private final HomeTopLevel parentView;
+    private final ViewHomeUI parentView;
 
     private final JList lstChooseSkin;
 
@@ -71,7 +70,7 @@ public class ViewSettings extends JPanel {
      * Assembles swing components for "Settings" mode menu.
      * @param view0 &emsp; HomeTopLevel
      */
-    public ViewSettings(final HomeTopLevel view0) {
+    public ViewSettings(final ViewHomeUI view0) {
         // Display
         super();
         this.setOpaque(false);
@@ -204,7 +203,7 @@ public class ViewSettings extends JPanel {
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints);
 
-        final List<Shortcut> shortcuts = ((GuiTopLevel) AllZone.getDisplay()).getController().getShortcuts();
+        final List<Shortcut> shortcuts = Singletons.getControl().getShortcuts();
 
         FLabel lblTemp;
         KeyboardShortcutField ksf;
@@ -581,7 +580,7 @@ public class ViewSettings extends JPanel {
     }
 
     /** @return {@link forge.view.home.HomeTopLevel} */
-    public HomeTopLevel getParentView() {
+    public ViewHomeUI getParentView() {
         return parentView;
     }
 

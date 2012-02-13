@@ -28,6 +28,7 @@ import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
@@ -231,7 +232,7 @@ public class CostReturn extends CostPartWithList {
                 this.typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
                 this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
                         sa.getSourceCard());
-                AllZone.getDisplay().showMessage(msg.toString());
+                Singletons.getControl().getMatchControl().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

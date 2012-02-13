@@ -22,6 +22,7 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.Command;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 
@@ -188,7 +189,7 @@ public class InputPayManaCostAbility extends InputMana {
         if (this.showOnlyOKButton) {
             ButtonUtil.enableOnlyOK();
         }
-        AllZone.getDisplay().showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
+        Singletons.getControl().getMatchControl().showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
     }
 
     /* (non-Javadoc)

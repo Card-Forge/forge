@@ -12,13 +12,11 @@ import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.GuiTopLevel;
 import forge.view.home.ViewSettings;
 import forge.view.toolbox.FSkin;
 
@@ -222,10 +220,8 @@ public class ControlSettings {
                 view.getLblTitleSkin().setIcon(null);
                 view.getLblTitleSkin().setText("Choose Skin");
 
-                // Must create a new HomeTopLevel to reset all color/image/icon
-                // values in components.
-                ((GuiTopLevel) AllZone.getDisplay()).getController().changeState(0);
-                ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().showSettingsMenu();
+                Singletons.getControl().changeState(0);
+                Singletons.getView().getHomeView().showSettingsMenu();
             }
         };
         w.execute();

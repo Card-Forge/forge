@@ -18,6 +18,7 @@
 package forge.view;
 
 import forge.Singletons;
+import forge.control.FControl;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
@@ -45,15 +46,20 @@ public final class Main {
         try {
             final FModel model = new FModel();
             final FView view = new FView();
+            final FControl control = new FControl();
 
             Singletons.setModel(model);
             Singletons.setView(view);
+            Singletons.setControl(control);
 
             // Instantiate FGameState for TriggerHandler on card objects created in preloader.
             model.resetGameState();
 
             // Start splash frame.
             view.initialize();
+
+            // Start control on FView.
+            control.initialize();
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }

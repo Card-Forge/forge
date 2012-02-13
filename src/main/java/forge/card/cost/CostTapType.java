@@ -17,7 +17,6 @@
  */
 package forge.card.cost;
 
-import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
@@ -27,6 +26,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
@@ -243,7 +243,7 @@ public class CostTapType extends CostPartWithList {
                 }
 
                 final int left = nCards - this.nTapped;
-                AllZone.getDisplay()
+                Singletons.getControl().getMatchControl()
                         .showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
                 ButtonUtil.enableOnlyCancel();
             }

@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.HandArea;
 import forge.control.match.ControlHand;
+import forge.view.ViewMatchUI;
 import forge.view.toolbox.FPanel;
 
 /**
@@ -32,14 +33,14 @@ import forge.view.toolbox.FPanel;
 public class ViewHand extends FPanel {
     private ControlHand control;
     private HandArea hand;
-    private MatchTopLevel topLevel;
+    private ViewMatchUI topLevel;
 
     /**
      * Swing components for user hand.
      * 
-     * @param v0 &emsp; The MatchTopLevel parent.
+     * @param v0 &emsp; The ViewMatchUI parent.
      */
-    public ViewHand(MatchTopLevel v0) {
+    public ViewHand(ViewMatchUI v0) {
         final JScrollPane scroller = new JScrollPane();
         ViewHand.this.hand = new HandArea(scroller);
         topLevel = v0;
@@ -62,7 +63,7 @@ public class ViewHand extends FPanel {
      * 
      * @return ControlHand
      */
-    public ControlHand getController() {
+    public ControlHand getControl() {
         return ViewHand.this.control;
     }
 
@@ -75,8 +76,8 @@ public class ViewHand extends FPanel {
         return ViewHand.this.hand;
     }
 
-    /** @return MatchTopLevel */
-    public MatchTopLevel getTopLevel() {
+    /** @return ViewMatchUI */
+    public ViewMatchUI getTopLevel() {
         return this.topLevel;
     }
 }

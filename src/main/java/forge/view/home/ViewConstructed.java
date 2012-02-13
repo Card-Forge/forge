@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.control.home.ControlConstructed;
+import forge.view.ViewHomeUI;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FProgressBar;
@@ -22,7 +23,7 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewConstructed extends JPanel {
-    private final HomeTopLevel parentView;
+    private final ViewHomeUI parentView;
     private final ControlConstructed control;
     private final JButton btnStart;
     private final FProgressBar barProgress;
@@ -40,9 +41,9 @@ public class ViewConstructed extends JPanel {
     /**
      * Assembles swing components for "Constructed" mode menu.
      * 
-     * @param v0 {@link forge.view.home.HomeTopLevel} parent view
+     * @param v0 {@link forge.view.ViewHomeUI} parent view
      */
-    public ViewConstructed(HomeTopLevel v0) {
+    public ViewConstructed(ViewHomeUI v0) {
         //========== Basic init stuff
         super();
         this.setOpaque(false);
@@ -217,8 +218,8 @@ public class ViewConstructed extends JPanel {
     }
 
     //========= RETRIEVAL FUNCTIONS
-    /** @return {@link forge.view.home.HomeTopLevel} */
-    public HomeTopLevel getParentView() {
+    /** @return {@link forge.view.ViewHomeUI} */
+    public ViewHomeUI getParentView() {
         return parentView;
     }
 

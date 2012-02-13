@@ -54,7 +54,7 @@ public class ViewDetail extends FPanel {
      *
      * @return ControlDetail
      */
-    public ControlDetail getController() {
+    public ControlDetail getControl() {
         return control;
     }
 

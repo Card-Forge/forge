@@ -17,7 +17,6 @@
  */
 package forge.card.cost;
 
-import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
@@ -25,6 +24,7 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -271,7 +271,7 @@ public class CostPutCounter extends CostPartWithList {
                 this.typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
                 this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
                         sa.getSourceCard());
-                AllZone.getDisplay().showMessage(msg.toString());
+                Singletons.getControl().getMatchControl().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

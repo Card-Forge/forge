@@ -8,8 +8,8 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.Singletons;
 import forge.Constant.Zone;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -17,7 +17,6 @@ import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.GuiTopLevel;
 import forge.view.match.ViewWinLose;
 
 /** 
@@ -75,10 +74,10 @@ public class ControlWinLose {
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
         AllZone.getMatchState().reset();
-        AllZone.getDisplay().savePrefs();
-        FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-        g.getMatchController().deinitMatch();
-        g.changeState(FControl.HOME_SCREEN);
+        Singletons.getModel().savePrefs();
+        Singletons.getControl().getMatchControl().deinitMatch();
+        Singletons.getControl().changeState(FControl.HOME_SCREEN);
+        GuiUtils.closeOverlay();
     }
 
     /**
@@ -122,7 +121,7 @@ public class ControlWinLose {
                 Constant.Runtime.HUMAN_DECK[0] = hDeck;
             }
         }
-        AllZone.getDisplay().savePrefs();
+        Singletons.getModel().savePrefs();
         AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
     }
 

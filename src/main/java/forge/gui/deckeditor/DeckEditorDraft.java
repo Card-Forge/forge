@@ -39,7 +39,7 @@ import javax.swing.WindowConstants;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.AllZone;
 import forge.Constant;
-import forge.control.FControl;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckIO;
 import forge.deck.DeckManager;
@@ -53,7 +53,6 @@ import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
-import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -133,8 +132,8 @@ public class DeckEditorDraft extends DeckEditorBase {
                         ForgeProps.getLocalized(GuiBoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     DeckEditorDraft.this.dispose();
-                    FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-                    g.getHomeView().getDraftController().updateHumanDecks();
+// ghandi why is draft controller in a view
+                    Singletons.getView().getHomeView().getDraftController().updateHumanDecks();
                 }
             } // windowClosing()
         });
@@ -351,8 +350,8 @@ public class DeckEditorDraft extends DeckEditorBase {
         // close and open next screen
         this.dispose();
 
-        FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-        g.getHomeView().getDraftController().updateHumanDecks();
+// ghandi here is is again
+        Singletons.getView().getHomeView().getDraftController().updateHumanDecks();
 
     } /* saveDraft() */
 

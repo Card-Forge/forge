@@ -24,7 +24,6 @@ import java.util.Stack;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
-import forge.view.GuiTopLevel;
 
 /**
  * <p>
@@ -319,7 +318,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         // UNTAP
         if (phase.equals(Constant.Phase.UNTAP)) {
-            ((GuiTopLevel) AllZone.getDisplay()).showStack();
+            Singletons.getControl().getMatchControl().showStack();
             PhaseUtil.handleUntap();
         }
         // UPKEEP
@@ -411,11 +410,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             AllZone.getEndOfCombat().executeUntil();
             AllZone.getEndOfCombat().executeAt();
             CombatUtil.showCombat();
-            ((GuiTopLevel) AllZone.getDisplay()).showStack();
+            Singletons.getControl().getMatchControl().showStack();
         }
         else if (phase.equals(Constant.Phase.MAIN2)) {
             CombatUtil.showCombat();
-            ((GuiTopLevel) AllZone.getDisplay()).showStack();
+            Singletons.getControl().getMatchControl().showStack();
         }
         // END_OF_TURN
         else if (phase.equals(Constant.Phase.END_OF_TURN)) {
@@ -526,7 +525,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
 
         if (this.getPhase().equals(Constant.Phase.COMBAT_END)) {
-            ((GuiTopLevel) (AllZone.getDisplay())).showStack();
+            Singletons.getControl().getMatchControl().showStack();
             AllZone.getCombat().reset();
             this.resetAttackedThisCombat(this.getPlayerTurn());
             this.bCombat = false;

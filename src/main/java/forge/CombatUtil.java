@@ -2264,7 +2264,7 @@ public class CombatUtil {
      * </p>
      */
     public static void showCombat() {
-        AllZone.getDisplay().showCombat("");
+        Singletons.getControl().getMatchControl().showCombat("");
 
         Card[] defend = null;
         final StringBuilder display = new StringBuilder();
@@ -2304,7 +2304,7 @@ public class CombatUtil {
                 }
             } // loop through attackers
         }
-        AllZone.getDisplay().showCombat(display.toString().trim());
+        Singletons.getControl().getMatchControl().showCombat(display.toString().trim());
 
     } // showBlockers()
 

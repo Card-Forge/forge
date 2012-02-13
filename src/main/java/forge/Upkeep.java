@@ -486,7 +486,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                                 @Override
                                 public void showMessage() {
-                                    AllZone.getDisplay().showMessage(
+                                    Singletons.getControl().getMatchControl().showMessage(
                                             abyss.getName() + " - Select one nonartifact creature to destroy");
                                     ButtonUtil.disableAll();
                                 }
@@ -554,7 +554,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage(
+                                Singletons.getControl().getMatchControl().showMessage(
                                         "Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
                                 ButtonUtil.enableOnlyCancel();
                             }
@@ -2303,7 +2303,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         @Override
                         public void showMessage() {
-                            AllZone.getDisplay().showMessage(
+                            Singletons.getControl().getMatchControl().showMessage(
                                     c.getName() + " - Select new target creature.  (Click Cancel to remain as is.)");
                             ButtonUtil.enableOnlyCancel();
                         }
@@ -2375,7 +2375,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                         this.stop();
                                         return;
                                     }
-                                    AllZone.getDisplay().showMessage(
+                                    Singletons.getControl().getMatchControl().showMessage(
                                             source.getName() + " - Select " + num
                                                     + " untapped artifact(s), creature(s), or land(s) you control");
                                     ButtonUtil.disableAll();
@@ -2424,7 +2424,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 @Override
                 public void showMessage() {
-                    AllZone.getDisplay().showMessage(crd + " - Discard a card from your hand");
+                    Singletons.getControl().getMatchControl().showMessage(crd + " - Discard a card from your hand");
                     ButtonUtil.enableOnlyCancel();
                 }
 

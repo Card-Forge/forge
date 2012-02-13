@@ -24,6 +24,7 @@ import forge.Constant.Zone;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 
@@ -287,7 +288,7 @@ public class InputPayManaCost extends InputMana {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        AllZone.getDisplay().showMessage(msg.toString());
+        Singletons.getControl().getMatchControl().showMessage(msg.toString());
         if (this.manaCost.isPaid() && !new ManaCost(this.originalManaCost).isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
             this.done();

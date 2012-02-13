@@ -20,13 +20,13 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckIO;
 import forge.deck.DeckManager;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorCommon;
 import forge.gui.deckeditor.DeckEditorQuest;
-import forge.view.GuiTopLevel;
 
 /** 
  * Creates deck list for selected decks for quick deleting, editing, and basic info.
@@ -401,7 +401,7 @@ public class DeckLister extends JPanel {
         else if (gametype.equals(GameType.Quest)) {
             AllZone.getQuestData().removeDeck(d0.getName());
             AllZone.getQuestData().saveData();
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getHomeView().getBtnQuest().grabFocus();
+            Singletons.getView().getHomeView().getBtnQuest().grabFocus();
         }
         else {
             deckmanager.deleteDeck(d0.getName());

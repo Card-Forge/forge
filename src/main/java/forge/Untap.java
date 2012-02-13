@@ -196,7 +196,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
                     @Override
                     public void showMessage() {
-                        AllZone.getDisplay().showMessage("Select one tapped land to untap");
+                        Singletons.getControl().getMatchControl().showMessage("Select one tapped land to untap");
                         ButtonUtil.enableOnlyCancel();
                     }
 
@@ -244,7 +244,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
                     @Override
                     public void showMessage() {
-                        AllZone.getDisplay().showMessage("Select one tapped artifact to untap");
+                        Singletons.getControl().getMatchControl().showMessage("Select one tapped artifact to untap");
                         ButtonUtil.enableOnlyCancel();
                     }
 
@@ -293,7 +293,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
                     @Override
                     public void showMessage() {
-                        AllZone.getDisplay().showMessage("Select one creature to untap");
+                        Singletons.getControl().getMatchControl().showMessage("Select one creature to untap");
                         ButtonUtil.enableOnlyCancel();
                     }
 

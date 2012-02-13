@@ -42,6 +42,8 @@ public class FOverlay extends JPanel {
      */
     public FOverlay() {
         super();
+        this.setOpaque(false);
+        this.setVisible(false);
         this.btnClose = new JButton("X");
         this.btnClose.setForeground(Color.white);
         this.btnClose.setBorder(BorderFactory.createLineBorder(Color.white));

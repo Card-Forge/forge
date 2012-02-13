@@ -33,7 +33,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.match.ControlDock;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FOverlay;
@@ -68,7 +68,7 @@ public class ViewDock extends FPanel {
         this.actClose = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                AllZone.getOverlay().hideOverlay();
+                Singletons.getView().getOverlay().hideOverlay();
             }
         };
 
@@ -119,7 +119,7 @@ public class ViewDock extends FPanel {
      * 
      * @return ControlDock
      */
-    public ControlDock getController() {
+    public ControlDock getControl() {
         return this.control;
     }
 
@@ -188,7 +188,7 @@ public class ViewDock extends FPanel {
 
     /** */
     private void overlaySettings() {
-        final FOverlay overlay = AllZone.getOverlay();
+        final FOverlay overlay = Singletons.getView().getOverlay();
         overlay.setLayout(new MigLayout("insets 0"));
         overlay.showOverlay();
 

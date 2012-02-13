@@ -23,7 +23,7 @@ import forge.Card;
 import forge.GuiDisplayUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.view.GuiTopLevel;
+import forge.Singletons;
 
 /**
  * <p>
@@ -63,7 +63,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         sb.append("\n");
         sb.append("Priority: ").append(player);
 
-        AllZone.getDisplay().showMessage(sb.toString());
+        Singletons.getControl().getMatchControl().showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */
@@ -85,7 +85,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
             AllZone.getPhaseHandler().setPriority(AllZone.getHumanPlayer());
         }
         else {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
+            Singletons.getControl().getMatchControl().getMessageControl().remind();
         }
     } // selectCard()
 }

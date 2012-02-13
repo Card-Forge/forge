@@ -31,7 +31,7 @@ import javax.swing.Timer;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.control.match.ControlInput;
+import forge.control.match.ControlMessage;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
@@ -41,8 +41,8 @@ import forge.view.toolbox.FSkin;
  * 
  */
 @SuppressWarnings("serial")
-public class ViewInput extends FPanel {
-    private final ControlInput control;
+public class ViewMessage extends FPanel {
+    private final ControlMessage control;
     private final JButton btnOK, btnCancel;
     private final JTextArea tarMessage;
     private final JLabel lblGames;
@@ -54,7 +54,7 @@ public class ViewInput extends FPanel {
      * Assembles UI for input area (buttons and message panel).
      * 
      */
-    public ViewInput() {
+    public ViewMessage() {
         super();
         this.setToolTipText("Input Area");
         this.setLayout(new MigLayout("wrap 2, fill, insets 0, gap 0"));
@@ -87,21 +87,21 @@ public class ViewInput extends FPanel {
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int px =  (int) (ViewInput.this.getWidth() / 17);
+                int px =  (int) (ViewMessage.this.getWidth() / 17);
                 px = (px < 11 ? 11 : px);
                 tarMessage.setFont(FSkin.getFont(px));
             }
         });
         // After all components are in place, instantiate controller.
-        this.control = new ControlInput(this);
+        this.control = new ControlMessage(this);
     }
 
     /**
      * Gets the controller.
      * 
-     * @return ControlInput
+     * @return ControlMessage
      */
-    public ControlInput getController() {
+    public ControlMessage getControl() {
         return this.control;
     }
 

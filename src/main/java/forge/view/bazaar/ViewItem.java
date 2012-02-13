@@ -7,8 +7,8 @@ import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.quest.data.bazaar.QuestStallPurchasable;
-import forge.view.GuiTopLevel;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
@@ -49,7 +49,7 @@ public class ViewItem extends FPanel {
                 AllZone.getQuestData().addCredits(getItem().getSellingPrice());
                 getItem().onPurchase();
                 AllZone.getQuestData().saveData();
-                ((GuiTopLevel) AllZone.getDisplay()).getController().getBazaarView().refreshLastInstance();
+                Singletons.getView().getBazaarView().refreshLastInstance();
             }
         });
     }

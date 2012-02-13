@@ -53,7 +53,6 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.util.MyRandom;
-import forge.view.GuiTopLevel;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -66,41 +65,34 @@ import forge.view.toolbox.FSkin;
  * 
  */
 public class QuestWinLoseHandler extends ControlWinLose {
-    private final boolean wonMatch;
-    private ImageIcon icoTemp;
-    private JLabel lblTemp1;
-    private JLabel lblTemp2;
-    private ViewWinLose view;
-    private boolean isAnte;
+    private final transient boolean wonMatch;
+    private final transient ViewWinLose view;
+    private transient ImageIcon icoTemp;
+    private transient JLabel lblTemp1;
+    private transient JLabel lblTemp2;
+    private final transient boolean isAnte;
 
     /** String constraint parameters for title blocks and cardviewer blocks. */
-    private final String constraintsTitle = "w 95%!, gap 0 0 20px 10px";
-    private final String constraintsText = "w 95%!,, h 180px!, gap 0 0 0 20px";
-    private final String constraintsCards = "w 95%!, h 330px!, gap 0 0 0 20px";
+    private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
+    private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
+    private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
 
-    private class CommonObjects {
-        private FMatchState matchState;
-        private QuestData qData;
-        private QuestEvent qEvent;
-        private QuestPreferences qPrefs;
-    }
-
-    private final CommonObjects model;
+    private final transient FMatchState matchState;
+    private final transient QuestData qData;
+    private final transient QuestEvent qEvent;
 
     /**
      * Instantiates a new quest win lose handler.
      * 
      * @param v0 ViewWinLose object
      */
-    public QuestWinLoseHandler(ViewWinLose v0) {
-        super(v0);
-        this.view = v0;
-        this.model = new CommonObjects();
-        this.model.matchState = AllZone.getMatchState();
-        this.model.qData = AllZone.getQuestData();
-        this.model.qEvent = AllZone.getQuestEvent();
-        this.model.qPrefs = Singletons.getModel().getQuestPreferences();
-        this.wonMatch = this.model.matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
+    public QuestWinLoseHandler(final ViewWinLose view0) {
+        super(view0);
+        this.view = view0;
+        matchState = AllZone.getMatchState();
+        qData = AllZone.getQuestData();
+        qEvent = AllZone.getQuestEvent();
+        this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
@@ -113,25 +105,26 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     @Override
     public final void startNextRound() {
-        AllZone.getDisplay().savePrefs();
-        this.model.qPrefs.save();
+        Singletons.getModel().savePrefs();
+        GuiUtils.closeOverlay();
+        Singletons.getModel().getQuestPreferences().save();
 
         if (Constant.Quest.FANTASY_QUEST[0]) {
             int extraLife = 0;
 
-            if (this.model.qEvent.getEventType().equals("challenge")) {
-                if (this.model.qData.getInventory().hasItem("Zeppelin")) {
+            if (qEvent.getEventType().equals("challenge")) {
+                if (qData.getInventory().hasItem("Zeppelin")) {
                     extraLife = 3;
                 }
             }
 
-            final CardList humanList = QuestUtil.getHumanStartingCards(this.model.qData, this.model.qEvent);
-            final CardList computerList = QuestUtil.getComputerStartingCards(this.model.qData, this.model.qEvent);
+            final CardList humanList = QuestUtil.getHumanStartingCards(qData, qEvent);
+            final CardList computerList = QuestUtil.getComputerStartingCards(qData, qEvent);
 
-            final int humanLife = this.model.qData.getLife() + extraLife;
+            final int humanLife = qData.getLife() + extraLife;
             int computerLife = 20;
-            if (this.model.qEvent.getEventType().equals("challenge")) {
-                computerLife = ((QuestChallenge) this.model.qEvent).getAILife();
+            if (qEvent.getEventType().equals("challenge")) {
+                computerLife = ((QuestChallenge) qEvent).getAILife();
             }
 
             AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
@@ -153,21 +146,21 @@ public class QuestWinLoseHandler extends ControlWinLose {
     @Override
     public final boolean populateCustomPanel() {
         this.getView().getBtnRestart().setVisible(false);
-        this.model.qData.getCards().resetNewList();
+        qData.getCards().resetNewList();
 
         //do per-game actions
-        if (this.model.matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
+        if (matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             if (isAnte) {
-                CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
-                List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteWon(antes);
+                final CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
+                final List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteWon(antes);
                 this.anteWon(antesPrinted);
 
             }
         } else {
             if (isAnte) {
-                CardList antes = AllZone.getHumanPlayer().getCardsIn(Zone.Ante);
-                List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteLost(antes);
-                for (CardPrinted ante : antesPrinted) {
+                final CardList antes = AllZone.getHumanPlayer().getCardsIn(Zone.Ante);
+                final List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteLost(antes);
+                for (final CardPrinted ante : antesPrinted) {
                     //the last param here (should) determine if this is added to the Card Shop
                     AllZone.getQuestData().getCards().sellCard(ante, 0, false);
                 }
@@ -175,7 +168,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
         }
 
-        if (!this.model.matchState.isMatchOver()) {
+        if (matchState.isMatchOver() == false) {
             this.getView().getBtnQuit().setText("Quit (15 Credits)");
             return isAnte;
         } else {
@@ -193,7 +186,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             this.awardEventCredits();
 
             // Challenge reward credits
-            if (this.model.qEvent.getEventType().equals("challenge")) {
+            if (qEvent.getEventType().equals("challenge")) {
                 this.awardChallengeWin();
             }
 
@@ -203,12 +196,12 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
 
             // Random rare for winning against a very hard deck
-            if (this.model.qData.getDifficultyIndex() == 4) {
+            if (qData.getDifficultyIndex() == 4) {
                 this.awardRandomRare("You've won a random rare for winning against a very hard deck.");
             }
 
             // Award jackpot every 80 games won (currently 10 rares)
-            final int wins = this.model.qData.getWin();
+            final int wins = qData.getWin();
             if ((wins > 0) && ((wins % 80) == 0)) {
                 this.awardJackpot();
             }
@@ -220,8 +213,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Win or lose, still a chance to win a booster, frequency set in
         // preferences
-        final int outcome = this.wonMatch ? this.model.qData.getWin() : this.model.qData.getLost();
-        if ((outcome % this.model.qPrefs.getPreferenceInt(QPref.WINS_BOOSTER, this.model.qData.getDifficultyIndex())) == 0) {
+        final int outcome = this.wonMatch ? qData.getWin() : qData.getLost();
+        if ((outcome % Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_BOOSTER, qData.getDifficultyIndex())) == 0) {
             this.awardBooster();
         }
 
@@ -243,10 +236,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
 
-        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(antesLost);
-
-        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.getView().getPnlCustom().add(cv, constraintsCards);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(
+                new QuestWinLoseCardViewer(antesLost), QuestWinLoseHandler.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -257,15 +249,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void anteWon(final List<CardPrinted> antesWon) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Ante Won: These cards will be available in your card pool after this match.");
+        final StringBuilder str = new StringBuilder();
+        str.append("Ante Won: These cards will be available in your card pool after this match.");
         // Generate Swing components and attach.
-        this.lblTemp1 = new TitleLabel(sb.toString());
+        this.lblTemp1 = new TitleLabel(str.toString());
 
-        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(antesWon);
-
-        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.getView().getPnlCustom().add(cv, constraintsCards);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(
+                new QuestWinLoseCardViewer(antesWon), QuestWinLoseHandler.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -278,33 +269,33 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     @Override
     public final void actionOnQuit() {
-        int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
+        final int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
 
         // Record win/loss in quest data
         if (this.wonMatch) {
-            this.model.qData.addWin();
+            qData.addWin();
         } else {
-            this.model.qData.addLost();
-            this.model.qData.subtractCredits(x);
+            qData.addLost();
+            qData.subtractCredits(x);
         }
 
-        this.model.qData.getCards().clearShopList();
+        qData.getCards().clearShopList();
 
-        if (this.model.qData.getAvailableChallenges() != null) {
-            this.model.qData.clearAvailableChallenges();
+        if (qData.getAvailableChallenges() != null) {
+            qData.clearAvailableChallenges();
         }
 
-        this.model.matchState.reset();
+        matchState.reset();
         AllZone.setQuestEvent(null);
 
-        this.model.qData.saveData();
-        this.model.qPrefs.save();
-        AllZone.getDisplay().savePrefs();
+        qData.saveData();
+        Singletons.getModel().getQuestPreferences().save();
+        Singletons.getModel().savePrefs();
 
-        FControl g = ((GuiTopLevel) AllZone.getDisplay()).getController();
-        g.getMatchController().deinitMatch();
-        g.changeState(FControl.HOME_SCREEN);
-        g.getHomeView().showQuestMenu();
+        Singletons.getControl().getMatchControl().deinitMatch();
+        Singletons.getControl().changeState(FControl.HOME_SCREEN);
+        Singletons.getView().getHomeView().showQuestMenu();
+        GuiUtils.closeOverlay();
     }
 
     /**
@@ -325,7 +316,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         int credEstates = 0;
 
         // Basic win bonus
-        final int base = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_BASE);
+        final int base = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_BASE);
         double multiplier = 1;
 
         String diff = AllZone.getQuestEvent().getDifficulty();
@@ -342,14 +333,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         credBase += (int) ((base * multiplier)
-                + (Double.parseDouble(this.model.qPrefs.getPreference(QPref.REWARDS_WINS_MULTIPLIER))
-                        * this.model.qData.getWin()));
+                + (Double.parseDouble(Singletons.getModel().getQuestPreferences().getPreference(QPref.REWARDS_WINS_MULTIPLIER))
+                        * qData.getWin()));
 
         sb.append(diff + " opponent: " + credBase + " credits.<br>");
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
         final Player computer = AllZone.getComputerPlayer();
-        for (final GameSummary game : this.model.matchState.getGamesPlayed()) {
+        for (final GameSummary game : matchState.getGamesPlayed()) {
             if (game.isWinner(computer.getName())) {
                 hasNeverLost = false;
                 continue; // no rewards for losing a game
@@ -386,7 +377,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
             // Mulligan to zero
             final int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
-            final int mulliganReward = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_MULLIGAN0);
+            final int mulliganReward = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_MULLIGAN0);
 
             if (0 == cntCardsHumanStartedWith) {
                 credGameplay += mulliganReward;
@@ -399,7 +390,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             final int turnCredits = this.getCreditsRewardForWinByTurn(winTurn);
 
             if (winTurn == 0) {
-                System.err.println("QuestWinLoseHandler > " + "turn calculation error: Zero turn win");
+                throw new UnsupportedOperationException("QuestWinLoseHandler > " + "turn calculation error: Zero turn win");
             } else if (winTurn == 1) {
                 sb.append("Won in one turn!");
             } else if (winTurn <= 5) {
@@ -418,15 +409,15 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Undefeated bonus
         if (hasNeverLost) {
-            credUndefeated += this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
-            final int reward = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            credUndefeated += Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            final int reward = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
             sb.append(String.format("You have not lost once! " + "Bonus: %d credits.<br>", reward));
         }
 
         // Estates bonus
         credTotal = credBase + credGameplay + credUndefeated;
         double estateValue = 0;
-        switch (this.model.qData.getInventory().getItemLevel("Estates")) {
+        switch (qData.getInventory().getItemLevel("Estates")) {
         case 1:
             estateValue = .1;
             break;
@@ -464,7 +455,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         sb.append(String.format("%s <b>%d credits</b> in total.</h3>", congrats, credTotal));
         sb.append("</body></html>");
-        this.model.qData.addCredits(credTotal);
+        qData.addCredits(credTotal);
 
         // Generate Swing components and attach.
         this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
@@ -478,8 +469,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.getView().getPnlCustom().add(this.lblTemp2, constraintsText);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLoseHandler.CONSTRAINTS_TEXT);
     }
 
     /**
@@ -490,7 +481,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardRandomRare(final String message) {
-        final CardPrinted c = this.model.qData.getCards().addRandomRare();
+        final CardPrinted c = qData.getCards().addRandomRare();
         final List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
         cardsWon.add(c);
 
@@ -499,8 +490,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.view.getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.view.getPnlCustom().add(cv, constraintsCards);
+        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -511,14 +502,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardJackpot() {
-        final List<CardPrinted> cardsWon = this.model.qData.getCards().addRandomRare(10);
+        final List<CardPrinted> cardsWon = qData.getCards().addRandomRare(10);
 
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("You just won 10 random rares!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.view.getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.view.getPnlCustom().add(cv, constraintsCards);
+        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -535,7 +526,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         int index = 0;
         for (int i = 0; i < formats.size(); i++) {
-            if (formats.get(i).toString().equals(this.model.qPrefs.getPreference(QPref.BOOSTER_FORMAT))) {
+            if (formats.get(i).toString().equals(Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT))) {
                 index = i;
                 break;
             }
@@ -544,16 +535,16 @@ public class QuestWinLoseHandler extends ControlWinLose {
         ch.show(index);
 
         final GameFormat selected = ch.getSelectedValue();
-        this.model.qPrefs.setPreference(QPref.BOOSTER_FORMAT, selected.toString());
+        Singletons.getModel().getQuestPreferences().setPreference(QPref.BOOSTER_FORMAT, selected.toString());
 
-        final List<CardPrinted> cardsWon = this.model.qData.getCards().addCards(selected.getFilterPrinted());
+        final List<CardPrinted> cardsWon = qData.getCards().addCards(selected.getFilterPrinted());
 
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + selected.getName() + "\" format!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.view.getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.view.getPnlCustom().add(cv, constraintsCards);
+        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -564,26 +555,26 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardChallengeWin() {
-        if (!((QuestChallenge) this.model.qEvent).getRepeatable()) {
-            this.model.qData.addCompletedChallenge(((QuestChallenge) this.model.qEvent).getId());
+        if (!((QuestChallenge) qEvent).getRepeatable()) {
+            qData.addCompletedChallenge(((QuestChallenge) qEvent).getId());
         }
 
         // Note: challenge only registers as "played" if it's won.
         // This doesn't seem right, but it's easy to fix. Doublestrike 01-10-11
-        this.model.qData.addChallengesPlayed();
+        qData.addChallengesPlayed();
 
-        final List<CardPrinted> cardsWon = ((QuestChallenge) this.model.qEvent).getCardRewardList();
-        final long questRewardCredits = ((QuestChallenge) this.model.qEvent).getCreditsReward();
+        final List<CardPrinted> cardsWon = ((QuestChallenge) qEvent).getCardRewardList();
+        final long questRewardCredits = ((QuestChallenge) qEvent).getCreditsReward();
 
         final StringBuilder sb = new StringBuilder();
         sb.append("<html>Challenge completed.<br><br>");
         sb.append("Challenge bounty: <b>" + questRewardCredits + " credits.</b></html>");
 
-        this.model.qData.addCredits(questRewardCredits);
+        qData.addCredits(questRewardCredits);
 
         // Generate Swing components and attach.
         this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
-        this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestChallenge) this.model.qEvent).getTitle()
+        this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestChallenge) qEvent).getTitle()
                 + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
@@ -593,18 +584,18 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.getView().getPnlCustom().add(this.lblTemp2, constraintsText);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLoseHandler.CONSTRAINTS_TEXT);
 
         if (cardsWon != null) {
             final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
-            this.getView().getPnlCustom().add(cv, constraintsCards);
-            this.model.qData.getCards().addAllCards(cardsWon);
+            this.getView().getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+            qData.getCards().addAllCards(cardsWon);
         }
     }
 
     private void penalizeLoss() {
-        int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
+        final int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
         this.icoTemp = GuiUtils.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
@@ -616,8 +607,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, constraintsTitle);
-        this.getView().getPnlCustom().add(this.lblTemp2, constraintsText);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLoseHandler.CONSTRAINTS_TEXT);
     }
 
     /**
@@ -629,7 +620,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * @return boolean
      */
     private boolean getLuckyCoinResult() {
-        final boolean hasCoin = this.model.qData.getInventory().getItemLevel("Lucky Coin") >= 1;
+        final boolean hasCoin = qData.getInventory().getItemLevel("Lucky Coin") >= 1;
 
         return MyRandom.getRandom().nextFloat() <= (hasCoin ? 0.65f : 0.5f);
     }
@@ -649,13 +640,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
         case LifeReachedZero:
             return 0; // nothing special here, ordinary kill
         case Milled:
-            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_MILLED);
+            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_MILLED);
         case Poisoned:
-            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_POISON);
+            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_POISON);
         case DidNotLoseYet: // Felidar, Helix Pinnacle, etc.
-            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         case SpellEffect: // Door to Nothingness, etc.
-            return this.model.qPrefs.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         default:
             return 0;
         }
@@ -671,16 +662,18 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * @return int credits won
      */
     private int getCreditsRewardForWinByTurn(final int iTurn) {
-        int credits = 0;
+        int credits;
 
         if (iTurn == 1) {
-            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN1);
+            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN1);
         } else if (iTurn <= 5) {
-            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN5);
+            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN5);
         } else if (iTurn <= 10) {
-            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN10);
+            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN10);
         } else if (iTurn <= 15) {
-            credits = this.model.qPrefs.getPreferenceInt(QPref.REWARDS_TURN15);
+            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN15);
+        } else { 
+            credits = 0;
         }
 
         return credits;

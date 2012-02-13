@@ -36,6 +36,7 @@ import forge.Counters;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -1384,7 +1385,7 @@ public class AbilityFactoryCounters {
                 @Override
                 public void showMessage() {
                     ButtonUtil.enableOnlyCancel();
-                    AllZone.getDisplay().showMessage("Proliferate: Choose permanents and/or players");
+                    Singletons.getControl().getMatchControl().showMessage("Proliferate: Choose permanents and/or players");
                 }
 
                 @Override

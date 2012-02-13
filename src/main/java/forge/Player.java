@@ -36,8 +36,6 @@ import forge.card.staticability.StaticAbility;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
-import forge.view.GuiTopLevel;
-import forge.view.match.MatchTopLevel;
 
 /**
  * <p>
@@ -1284,7 +1282,7 @@ public abstract class Player extends GameEntity {
             AllZone.getTriggerHandler().runTrigger("Drawn", runParams);
         }
         // lose:
-        else if (!Constant.Runtime.DEV_MODE[0] || AllZone.getDisplay().canLoseByDecking()) {
+        else if (!Constant.Runtime.DEV_MODE[0] || Constant.Runtime.MILL[0]) {
             // if devMode is off, or canLoseByDecking is Enabled, run Lose
             // Condition
             if (!this.cantLose()) {
@@ -1812,9 +1810,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canPlayLand() {
-
-        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
-        if (t.getTabberController().getView().getLblUnlimitedLands().getEnabled() && this.isHuman() && Constant.Runtime.DEV_MODE[0]) {
+        if (Singletons.getView().getMatchView().getViewTabber().getLblUnlimitedLands().getEnabled() && this.isHuman() && Constant.Runtime.DEV_MODE[0]) {
             return PhaseHandler.canCastSorcery(this);
         }
 

@@ -28,7 +28,7 @@ import forge.Command;
 import forge.Constant;
 import forge.GameActionUtil;
 import forge.PlayerZone;
-import forge.view.GuiTopLevel;
+import forge.Singletons;
 
 /**
  * <p>
@@ -74,14 +74,14 @@ public class InputBlock extends Input {
             final StringBuilder sb = new StringBuilder();
             sb.append("To Block, click on your Opponents attacker first, then your blocker(s). ");
             sb.append("To cancel a block right-click on your blocker");
-            AllZone.getDisplay().showMessage(sb.toString());
+            Singletons.getControl().getMatchControl().showMessage(sb.toString());
         } else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
             final StringBuilder sb = new StringBuilder();
             sb.append("Select a creature to block ").append(attackerName).append(" (");
             sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
             sb.append("To cancel a block right-click on your blocker");
-            AllZone.getDisplay().showMessage(sb.toString());
+            Singletons.getControl().getMatchControl().showMessage(sb.toString());
         }
         
         CombatUtil.showCombat();
@@ -112,7 +112,7 @@ public class InputBlock extends Input {
             }
         }
         else {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
+            Singletons.getControl().getMatchControl().getMessageControl().remind();
         }
         this.showMessage();
     } // selectCard()

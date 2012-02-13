@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.GuiTopLevel;
 import forge.view.home.ViewSettings.KeyboardShortcutField;
 
 /** 
@@ -32,12 +31,11 @@ public class KeyboardShortcuts {
      * Attaches all keyboard shortcuts for match UI,
      * and returns a list of shortcuts with necessary properties for later access.
      *
-     * @param frame GuiTopLevel (must be passed here since AllZone hasn't been set yet).
      * @return List<Shortcut> Shortcut objects
      */
     @SuppressWarnings("serial")
-    public static List<Shortcut> attachKeyboardShortcuts(final GuiTopLevel frame) {
-        final JComponent c = (JComponent) frame.getContentPane();
+    public static List<Shortcut> attachKeyboardShortcuts() {
+        final JComponent c = (JComponent) Singletons.getView().getContentPane();
         final InputMap im = c.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         final ActionMap am = c.getActionMap();
 
@@ -50,8 +48,8 @@ public class KeyboardShortcuts {
         final Action actShowStack = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (frame.getController().getState() != 1) { return; }
-                frame.getController().getMatchController().getView().getTabberController().showPnlStack();
+                if (Singletons.getControl().getState() != 1) { return; }
+                Singletons.getControl().getMatchControl().getTabberControl().showPnlStack();
             }
         };
 
@@ -59,8 +57,8 @@ public class KeyboardShortcuts {
         final Action actShowCombat = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (frame.getController().getState() != 1) { return; }
-                frame.getController().getMatchController().getView().getTabberController().showPnlCombat();
+                if (Singletons.getControl().getState() != 1) { return; }
+                Singletons.getControl().getMatchControl().getTabberControl().showPnlCombat();
             }
         };
 
@@ -68,8 +66,8 @@ public class KeyboardShortcuts {
         final Action actShowConsole = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (frame.getController().getState() != 1) { return; }
-                frame.getController().getMatchController().getView().getTabberController().showPnlGameLog();
+                if (Singletons.getControl().getState() != 1) { return; }
+                Singletons.getControl().getMatchControl().getTabberControl().showPnlGameLog();
             }
         };
 
@@ -77,8 +75,8 @@ public class KeyboardShortcuts {
         final Action actShowPlayers = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (frame.getController().getState() != 1) { return; }
-                frame.getController().getMatchController().getView().getTabberController().showPnlPlayers();
+                if (Singletons.getControl().getState() != 1) { return; }
+                Singletons.getControl().getMatchControl().getTabberControl().showPnlPlayers();
             }
         };
 
@@ -86,8 +84,8 @@ public class KeyboardShortcuts {
         final Action actShowDev = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (frame.getController().getState() != 1) { return; }
-                frame.getController().getMatchController().getView().getTabberController().showPnlDev();
+                if (Singletons.getControl().getState() != 1) { return; }
+                Singletons.getControl().getMatchControl().getTabberControl().showPnlDev();
             }
         };
 
@@ -95,8 +93,8 @@ public class KeyboardShortcuts {
         final Action actConcede = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (frame.getController().getState() != 1) { return; }
-                frame.getController().getMatchController().getView().getDockController().concede();
+                if (Singletons.getControl().getState() != 1) { return; }
+                Singletons.getControl().getMatchControl().getDockControl().concede();
             }
         };
 

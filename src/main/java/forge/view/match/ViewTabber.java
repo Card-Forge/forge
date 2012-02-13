@@ -60,7 +60,6 @@ import forge.gui.ForgeAction;
 import forge.gui.MultiLineLabelUI;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
-import forge.view.GuiTopLevel;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.FVerticalTabPanel;
 
@@ -215,7 +214,7 @@ public class ViewTabber extends JPanel {
      * 
      * @return ControlTabber
      */
-    public ControlTabber getController() {
+    public ControlTabber getControl() {
         return this.control;
     }
 
@@ -226,7 +225,6 @@ public class ViewTabber extends JPanel {
      */
     public void updateStack() {
         final MagicStack stack = AllZone.getStack();
-        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
 
         int count = 1;
         JTextArea tar;
@@ -275,8 +273,8 @@ public class ViewTabber extends JPanel {
             tar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    t.getDetailController().showCard(spell.getSpellAbility().getSourceCard());
-                    t.getPictureController().showCard(spell.getSpellAbility().getSourceCard());
+                    Singletons.getControl().getMatchControl().setCard(spell.getSpellAbility().getSourceCard());
+                    // ghandi does this work?
                 }
             });
 
@@ -310,7 +308,7 @@ public class ViewTabber extends JPanel {
             }
         }
 
-        t.getInputController().getView().getBtnOK().requestFocusInWindow();
+        Singletons.getView().getMatchView().getBtnOK().requestFocusInWindow();
     }
 
     /** Returns array with [background, foreground] colors. */

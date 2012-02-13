@@ -40,11 +40,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.view.toolbox.FOverlay;
 
 /**
  * <p>
@@ -357,8 +356,8 @@ public final class GuiUtils {
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(final ListSelectionEvent ev) {
-                if ((list.getSelectedValue() instanceof Card) && (AllZone.getDisplay() != null)) {
-                    AllZone.getDisplay().setCard((Card) list.getSelectedValue());
+                if (list.getSelectedValue() instanceof Card) {
+                    Singletons.getControl().getMatchControl().setCard((Card) list.getSelectedValue());
                 }
             }
         });
@@ -406,9 +405,8 @@ public final class GuiUtils {
 
     /** Removes child components and closes overlay. */
     public static void closeOverlay() {
-        final FOverlay overlay = AllZone.getOverlay();
-        overlay.removeAll();
-        overlay.hideOverlay();
+        Singletons.getView().getOverlay().removeAll();
+        Singletons.getView().getOverlay().hideOverlay();
     }
 
     /** Duplicate in DeckEditorQuestMenu and

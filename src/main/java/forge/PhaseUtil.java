@@ -20,8 +20,7 @@ package forge;
 import java.util.HashMap;
 
 import forge.Constant.Zone;
-import forge.view.GuiTopLevel;
-import forge.view.match.MatchTopLevel;
+import forge.control.ControlMatchUI;
 import forge.view.match.ViewField.PhaseLabel;
 
 /**
@@ -382,7 +381,7 @@ public class PhaseUtil {
     public static void visuallyActivatePhase(final String s) {
         PhaseLabel lbl = null;
         final Player p = AllZone.getPhaseHandler().getPlayerTurn();
-        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
+        final ControlMatchUI t = Singletons.getControl().getMatchControl();
 
         int i; // Index of field; computer is 0, human is 1
         if (p.isComputer()) {
@@ -392,38 +391,35 @@ public class PhaseUtil {
         }
 
         if (s.equals(Constant.Phase.UPKEEP)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblUpkeep();
+            lbl = t.getFieldControls().get(i).getView().getLblUpkeep();
         } else if (s.equals(Constant.Phase.DRAW)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblDraw();
+            lbl = t.getFieldControls().get(i).getView().getLblDraw();
         } else if (s.equals(Constant.Phase.MAIN1)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblMain1();
+            lbl = t.getFieldControls().get(i).getView().getLblMain1();
         } else if (s.equals(Constant.Phase.COMBAT_BEGIN)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblBeginCombat();
+            lbl = t.getFieldControls().get(i).getView().getLblBeginCombat();
         } else if (s.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblDeclareAttackers();
+            lbl = t.getFieldControls().get(i).getView().getLblDeclareAttackers();
         } else if (s.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblDeclareBlockers();
+            lbl = t.getFieldControls().get(i).getView().getLblDeclareBlockers();
         } else if (s.equals(Constant.Phase.COMBAT_DAMAGE)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblCombatDamage();
+            lbl = t.getFieldControls().get(i).getView().getLblCombatDamage();
         } else if (s.equals(Constant.Phase.COMBAT_FIRST_STRIKE_DAMAGE)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblFirstStrike();
+            lbl = t.getFieldControls().get(i).getView().getLblFirstStrike();
         } else if (s.equals(Constant.Phase.COMBAT_END)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblEndCombat();
+            lbl = t.getFieldControls().get(i).getView().getLblEndCombat();
         } else if (s.equals(Constant.Phase.MAIN2)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblMain2();
+            lbl = t.getFieldControls().get(i).getView().getLblMain2();
         } else if (s.equals(Constant.Phase.END_OF_TURN)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblEndTurn();
+            lbl = t.getFieldControls().get(i).getView().getLblEndTurn();
         } else if (s.equals(Constant.Phase.CLEANUP)) {
-            lbl = t.getFieldControllers().get(i).getView().getLblCleanup();
+            lbl = t.getFieldControls().get(i).getView().getLblCleanup();
         } else {
             return;
         }
 
-        t.getController().resetAllPhaseButtons();
-            // Could be a potential recursion bug here, but I checked and hopefully there isn't.
-            // Please remove this comments if > 1 week and no problems. Doublestrike 12-01-11
-            t.repaint();
-            // End potential recursion bug
+        t.resetAllPhaseButtons();
+        Singletons.getView().getMatchView().repaint();
         lbl.setActive(true);
     }
 }

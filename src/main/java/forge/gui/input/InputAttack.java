@@ -27,11 +27,11 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.PlayerZone;
-import forge.view.GuiTopLevel;
+import forge.Singletons;
 
 /**
  * <p>
- * Input_Attack class.
+ * InputAttack class.
  * </p>
  * 
  * @author Forge
@@ -57,7 +57,7 @@ public class InputAttack extends Input {
         sb.append("Declare Attackers: Select Creatures to Attack ");
         sb.append(o.toString());
 
-        AllZone.getDisplay().showMessage(sb.toString());
+        Singletons.getControl().getMatchControl().showMessage(sb.toString());
 
         if (AllZone.getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
@@ -117,7 +117,7 @@ public class InputAttack extends Input {
             CombatUtil.showCombat();
         }
         else {
-            ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView().getInputController().remind();
+            Singletons.getControl().getMatchControl().getMessageControl().remind();
         }
     } // selectCard()
 

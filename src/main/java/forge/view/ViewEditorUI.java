@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.view.editor;
+package forge.view;
 
 import forge.view.toolbox.FPanel;
 
@@ -26,12 +26,12 @@ import forge.view.toolbox.FPanel;
  */
 
 @SuppressWarnings("serial")
-public class EditorTopLevel extends FPanel {
+public class ViewEditorUI extends FPanel {
 
     /**
      * Instantiates a new editor top level.
      */
-    public EditorTopLevel() {
+    public ViewEditorUI() {
         super();
     }
 }

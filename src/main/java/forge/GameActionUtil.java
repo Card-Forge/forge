@@ -375,7 +375,7 @@ public final class GameActionUtil {
      * @return a boolean.
      */
     public static boolean showYesNoDialog(final Card c, String question, final boolean defaultNo) {
-        AllZone.getDisplay().setCard(c);
+        Singletons.getControl().getMatchControl().setCard(c);
         final StringBuilder title = new StringBuilder();
         title.append(c.getName()).append(" - Ability");
 
@@ -461,7 +461,7 @@ public final class GameActionUtil {
      * @return a boolean.
      */
     private static boolean showLandfallDialog(final Card c) {
-        AllZone.getDisplay().setCard(c);
+        Singletons.getControl().getMatchControl().setCard(c);
         final String[] choices = { "Yes", "No" };
 
         Object q = null;

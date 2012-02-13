@@ -10317,8 +10317,6 @@ res/draft/rare.txt svneol=native#text/plain
 res/draft/uncommon.txt svneol=native#text/plain
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
 res/gamedata/TypeLists.txt svneol=native#text/plain
-res/gui/display_layout.xml svneol=native#text/xml
-res/gui/gui.properties svneol=native#text/plain
 res/images/deckeditor/filter_artifact_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_artifact_y.png -text svneol=unset#image/png
 res/images/deckeditor/filter_black_n.png -text svneol=unset#image/png
@@ -10345,30 +10343,6 @@ res/images/deckeditor/filter_sorcery_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_sorcery_y.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_white_y.png -text svneol=unset#image/png
-res/images/skins/darkascension/bg_match.jpg -text
-res/images/skins/darkascension/bg_splash.png -text
-res/images/skins/darkascension/bg_texture.jpg -text
-res/images/skins/darkascension/font1.ttf -text
-res/images/skins/darkascension/sprite_icons.png -text
-res/images/skins/default/bg_match.jpg -text
-res/images/skins/default/bg_splash.png -text
-res/images/skins/default/bg_texture.jpg -text
-res/images/skins/default/font1.ttf -text
-res/images/skins/default/grid_icons.png -text
-res/images/skins/default/loader.gif -text
-res/images/skins/default/sprite_avatars.png -text
-res/images/skins/default/sprite_foils.png -text
-res/images/skins/default/sprite_icons.png -text
-res/images/skins/rebel/bg_match.jpg -text
-res/images/skins/rebel/bg_splash.png -text
-res/images/skins/rebel/bg_texture.jpg -text
-res/images/skins/rebel/font1.ttf -text
-res/images/skins/rebel/sprite_icons.png -text
-res/images/skins/smith/bg_match.jpg -text
-res/images/skins/smith/bg_splash.png -text
-res/images/skins/smith/bg_texture.jpg -text
-res/images/skins/smith/font1.ttf -text
-res/images/skins/smith/sprite_icons.png -text
 res/lang/de.properties svneol=native#text/plain
 res/lang/en.properties svneol=native#text/plain
 res/lang/howTo/de.properties svneol=native#text/plain
@@ -10853,6 +10827,30 @@ res/quest/themes/Zombies[!!-~]B.thm -text
 res/reprintSetInfo.py svneol=native#text/x-python
 res/sealed/juzamjedi.zsealed -text
 res/setInfoScript.py svneol=native#text/x-python
+res/skins/darkascension/bg_match.jpg -text
+res/skins/darkascension/bg_splash.png -text
+res/skins/darkascension/bg_texture.jpg -text
+res/skins/darkascension/font1.ttf -text
+res/skins/darkascension/sprite_icons.png -text
+res/skins/default/bg_match.jpg -text
+res/skins/default/bg_splash.png -text
+res/skins/default/bg_texture.jpg -text
+res/skins/default/font1.ttf -text
+res/skins/default/grid_icons.png -text
+res/skins/default/loader.gif -text
+res/skins/default/sprite_avatars.png -text
+res/skins/default/sprite_foils.png -text
+res/skins/default/sprite_icons.png -text
+res/skins/rebel/bg_match.jpg -text
+res/skins/rebel/bg_splash.png -text
+res/skins/rebel/bg_texture.jpg -text
+res/skins/rebel/font1.ttf -text
+res/skins/rebel/sprite_icons.png -text
+res/skins/smith/bg_match.jpg -text
+res/skins/smith/bg_splash.png -text
+res/skins/smith/bg_texture.jpg -text
+res/skins/smith/font1.ttf -text
+res/skins/smith/sprite_icons.png -text
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
 res/token-images.txt -text
 src/main/config/Forge.icns -text
@@ -10913,7 +10911,6 @@ src/main/java/forge/Constant.java svneol=native#text/plain
 src/main/java/forge/ConstantStringArrayList.java svneol=native#text/plain
 src/main/java/forge/Counters.java svneol=native#text/plain
 src/main/java/forge/DefaultPlayerZone.java svneol=native#text/plain
-src/main/java/forge/Display.java svneol=native#text/plain
 src/main/java/forge/EndOfCombat.java svneol=native#text/plain
 src/main/java/forge/EndOfTurn.java svneol=native#text/plain
 src/main/java/forge/ExternalPanel.java svneol=native#text/plain
@@ -11139,7 +11136,7 @@ src/main/java/forge/control/match/ControlDetail.java -text
 src/main/java/forge/control/match/ControlDock.java -text
 src/main/java/forge/control/match/ControlField.java -text
 src/main/java/forge/control/match/ControlHand.java -text
-src/main/java/forge/control/match/ControlInput.java -text
+src/main/java/forge/control/match/ControlMessage.java -text
 src/main/java/forge/control/match/ControlPicture.java -text
 src/main/java/forge/control/match/ControlTabber.java -text
 src/main/java/forge/control/match/ControlWinLose.java -text
@@ -11297,18 +11294,18 @@ src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 src/main/java/forge/util/SectionUtil.java -text
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/FView.java svneol=native#text/plain
-src/main/java/forge/view/GuiTopLevel.java -text
 src/main/java/forge/view/Main.java -text
-src/main/java/forge/view/bazaar/BazaarTopLevel.java -text
+src/main/java/forge/view/SplashFrame.java -text
+src/main/java/forge/view/ViewBazaarUI.java -text
+src/main/java/forge/view/ViewEditorUI.java -text
+src/main/java/forge/view/ViewHomeUI.java -text
+src/main/java/forge/view/ViewMatchUI.java -text
 src/main/java/forge/view/bazaar/ViewItem.java -text
 src/main/java/forge/view/bazaar/ViewStall.java svneol=native#text/plain
 src/main/java/forge/view/bazaar/package-info.java svneol=native#text/plain
-src/main/java/forge/view/editor/EditorTopLevel.java -text
 src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
-src/main/java/forge/view/home/HomeTopLevel.java -text
 src/main/java/forge/view/home/QuestFileLister.java -text
 src/main/java/forge/view/home/QuestPreferencesHandler.java -text
-src/main/java/forge/view/home/SplashFrame.java -text
 src/main/java/forge/view/home/StartButton.java -text
 src/main/java/forge/view/home/ViewConstructed.java -text
 src/main/java/forge/view/home/ViewDraft.java -text
@@ -11317,7 +11314,6 @@ src/main/java/forge/view/home/ViewSealed.java -text
 src/main/java/forge/view/home/ViewSettings.java -text
 src/main/java/forge/view/home/ViewUtilities.java -text
 src/main/java/forge/view/home/package-info.java svneol=native#text/plain
-src/main/java/forge/view/match/MatchTopLevel.java -text
 src/main/java/forge/view/match/QuestWinLoseCardViewer.java -text
 src/main/java/forge/view/match/QuestWinLoseHandler.java -text
 src/main/java/forge/view/match/ViewBattlefield.java -text
@@ -11325,7 +11321,7 @@ src/main/java/forge/view/match/ViewDetail.java -text
 src/main/java/forge/view/match/ViewDock.java -text
 src/main/java/forge/view/match/ViewField.java -text
 src/main/java/forge/view/match/ViewHand.java -text
-src/main/java/forge/view/match/ViewInput.java -text
+src/main/java/forge/view/match/ViewMessage.java -text
 src/main/java/forge/view/match/ViewPicture.java -text
 src/main/java/forge/view/match/ViewTabber.java -text
 src/main/java/forge/view/match/ViewWinLose.java -text

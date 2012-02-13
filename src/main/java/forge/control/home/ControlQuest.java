@@ -37,7 +37,6 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
 import forge.quest.data.pet.QuestPetAbstract;
-import forge.view.GuiTopLevel;
 import forge.view.home.ViewQuest;
 
 /** 
@@ -163,8 +162,7 @@ public class ControlQuest {
             public void execute() {
                 AllZone.getQuestData().saveData();
                 refreshDecks();
-                GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
-                g.getController().getHomeView().getBtnQuest().grabFocus();
+                Singletons.getView().getHomeView().getBtnQuest().grabFocus();
             }
         };
 
@@ -499,10 +497,8 @@ public class ControlQuest {
 
     /** */
     private void showBazaar() {
-        GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
-
-        g.getController().changeState(FControl.QUEST_BAZAAR);
-        g.validate();
+        Singletons.getControl().changeState(FControl.QUEST_BAZAAR);
+        Singletons.getView().validate();
     }
 
     /** */
@@ -565,9 +561,11 @@ public class ControlQuest {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GuiTopLevel g = (GuiTopLevel) AllZone.getDisplay();
-                g.getController().changeState(FControl.MATCH_SCREEN);
-                g.getController().getMatchController().initMatch();
+                view.getBarProgress().setVisible(false);
+                view.getBtnStart().setVisible(true);
+
+                Singletons.getControl().changeState(FControl.MATCH_SCREEN);
+                Singletons.getControl().getMatchControl().initMatch();
 
                 AllZone.getMatchState().reset();
                 if (event.getEventType().equals("challenge")) {

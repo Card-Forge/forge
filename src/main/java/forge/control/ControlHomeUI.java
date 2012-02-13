@@ -1,16 +1,16 @@
 package forge.control;
 
-import forge.view.home.HomeTopLevel;
+import forge.view.ViewHomeUI;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
 public class ControlHomeUI {
-    private HomeTopLevel view;
+    private ViewHomeUI view;
 
-    /** @param v0 &emsp; HomeTopLevel */
-    public ControlHomeUI(HomeTopLevel v0) {
+    /** @param v0 &emsp; ViewHomeUI */
+    public ControlHomeUI(ViewHomeUI v0) {
         view = v0;
     }
 
@@ -19,8 +19,8 @@ public class ControlHomeUI {
         System.exit(0);
     }
 
-    /** @return HomeTopLevel */
-    public HomeTopLevel getView() {
+    /** @return ViewHomeUI */
+    public ViewHomeUI getView() {
         return view;
     }
 }

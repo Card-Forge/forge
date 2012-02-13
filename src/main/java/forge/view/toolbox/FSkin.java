@@ -35,8 +35,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
-import forge.Singletons;
 import forge.gui.GuiUtils;
+import forge.view.SplashFrame;
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
@@ -324,7 +324,7 @@ public enum FSkin {
     private static Map<Integer, Image> avatars;
 
     private static final String
-        FILE_SKINS_DIR = "res/images/skins/",
+        FILE_SKINS_DIR = "res/skins/",
         FILE_ICON_SPRITE = "sprite_icons.png",
         FILE_FOIL_SPRITE = "sprite_foils.png",
         FILE_AVATAR_SPRITE = "sprite_avatars.png",
@@ -412,7 +412,7 @@ public enum FSkin {
         if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default"); }
 
         // Everything OK?
-        final FProgressBar barProgress = Singletons.getView().getProgressBar();
+        final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

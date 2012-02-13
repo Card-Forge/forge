@@ -17,78 +17,58 @@
  */
 package forge.view;
 
+import java.awt.Dimension;
+import java.awt.Frame;
+
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
-import net.slightlymagic.braids.util.UtilFunctions;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.home.SplashFrame;
 import forge.view.toolbox.CardFaceSymbols;
-import forge.view.toolbox.FProgressBar;
+import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FSkin;
 
 /**
  * The main view for Forge: a java swing application. All view class instances
  * should be accessible from here.
  */
-public class FView {
+@SuppressWarnings("serial")
+public final class FView extends JFrame {
+    private final JLayeredPane lpnContent = new JLayeredPane();
+    private final FOverlay overlay = new FOverlay();
 
-    private transient SplashFrame splashFrame;
-    private FProgressBar barProgress = null;
+    private SplashFrame splash;
+    private ViewHomeUI home = null;
+    private ViewMatchUI match = null;
+    private ViewEditorUI editor = null;
+    private ViewBazaarUI bazaar = null;
 
-    /**
-     * The splashFrame field is guaranteed to exist when this constructor exits.
-     * 
-     */
+  //private static final JLayeredPane lpnContent;
+    //private static final FControl control;
+
+    /** The splash frame is guaranteed to exist when this constructor exits. */
     public FView() {
-        // We must use invokeAndWait here to fulfill the constructor's
-        // contract. NOPMD by Braids on 8/18/11 11:37 PM
-        UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    FView.this.splashFrame = new SplashFrame();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        super();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                FView.this.splashFrame.setVisible(true);
+                try { splash = new SplashFrame(); }
+                catch (Exception e) { e.printStackTrace(); }
             }
         });
-    }
-
-    /**
-     * Allows singleton (global) access to a progress bar (which must be set first).
-     * 
-     * @return {@link forge.view.toolbox.FProgressBar}
-     */
-    public final FProgressBar getProgressBar() {
-        return this.barProgress;
-    }
-
-    /** 
-     * Sets a progress bar so it can be accessed via singletons.
-     * 
-     * @param bar0 &emsp; {@link forge.view.toolbox.FProgressBar}
-     */
-    public final void setProgressBar(FProgressBar bar0) {
-        this.barProgress = bar0;
     }
 
     /**
      * Tell the view that the model has been bootstrapped, the initial stuff
      * for the skin is in place, and data is ready for initial display.
      */
-    public final void initialize() {
-        this.setProgressBar(splashFrame.getProgressBar());
+    public void initialize() {
 
         // Preloads all cards (using progress bar).
         AllZone.getCardFactory();
@@ -102,16 +82,37 @@ public class FView {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                barProgress.setDescription("Creating display components.");
-                final GuiTopLevel g = new GuiTopLevel();
-                AllZone.setDisplay(g);
-                g.getController().changeState(FControl.HOME_SCREEN);
+                SplashFrame.PROGRESS_BAR.setDescription("Creating display components.");
 
-                FView.this.splashFrame.dispose();
-                FView.this.splashFrame = null;
+                // Frame styling
+                FView.this.setMinimumSize(new Dimension(800, 600));
+                FView.this.setLocationRelativeTo(null);
+                FView.this.setExtendedState(FView.this.getExtendedState() | Frame.MAXIMIZED_BOTH);
+                FView.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                FView.this.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
+                FView.this.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
-                barProgress.setDescription("Forge is ready to launch.");
-                g.setVisible(true);
+                // Content pane
+                FView.this.lpnContent.setOpaque(true);
+                FView.this.setContentPane(FView.this.lpnContent);
+
+                // Overlay
+                overlay.setBounds(0, 0, FView.this.getWidth(), FView.this.getHeight());
+                FView.this.lpnContent.add(overlay, JLayeredPane.MODAL_LAYER);
+
+                // Instantiate all different state screens
+                FView.this.home = new ViewHomeUI();
+                FView.this.match = new ViewMatchUI();
+                FView.this.editor = new ViewEditorUI();
+                FView.this.bazaar = new ViewBazaarUI();
+
+                // All is ready to go - fire up home screen and discard splash frame.
+                Singletons.getControl().changeState(FControl.HOME_SCREEN);
+
+                FView.this.splash.dispose();
+                FView.this.splash = null;
+
+                FView.this.setVisible(true);
 
                 // Open previous menu on first run, or constructed.
                 // Focus is reset when the frame becomes visible,
@@ -120,15 +121,61 @@ public class FView {
                         ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
 
                 switch(lastMenu) {
-                    case constructed: g.getHomeView().getBtnConstructed().grabFocus(); break;
-                    case draft: g.getHomeView().getBtnDraft().grabFocus(); break;
-                    case sealed: g.getHomeView().getBtnSealed().grabFocus(); break;
-                    case quest: g.getHomeView().getBtnQuest().grabFocus(); break;
-                    case settings: g.getHomeView().getBtnSettings().grabFocus(); break;
-                    case utilities: g.getHomeView().getBtnUtilities().grabFocus(); break;
+                    case constructed: FView.this.getHomeView().getBtnConstructed().grabFocus(); break;
+                    case draft: FView.this.getHomeView().getBtnDraft().grabFocus(); break;
+                    case sealed: FView.this.getHomeView().getBtnSealed().grabFocus(); break;
+                    case quest: FView.this.getHomeView().getBtnQuest().grabFocus(); break;
+                    case settings: FView.this.getHomeView().getBtnSettings().grabFocus(); break;
+                    case utilities: FView.this.getHomeView().getBtnUtilities().grabFocus(); break;
                     default:
                 }
             }
         });
     } // End FView()
+
+    /** @return {@link javax.swing.JLayeredPane} */
+    public JLayeredPane getLayeredContentPane() {
+        return FView.this.lpnContent;
+    }
+
+    /** @return {@link forge.view.toolbox.FOverlay} */
+    public FOverlay getOverlay() {
+        return FView.this.overlay;
+    }
+
+    /** @return {@link forge.view.ViewHomeUI} */
+    public ViewHomeUI getHomeView() {
+        if (Singletons.getControl().getState() != FControl.HOME_SCREEN) {
+            throw new IllegalArgumentException("FView$getHomeView\n"
+                    + "may only be called while the home UI is showing.");
+        }
+        return FView.this.home;
+    }
+
+    /** @return {@link forge.view.ViewMatchUI} */
+    public ViewMatchUI getMatchView() {
+        if (Singletons.getControl().getState() != FControl.MATCH_SCREEN) {
+            throw new IllegalArgumentException("FView$getMatchView\n"
+                    + "may only be called while the match UI is showing.");
+        }
+        return FView.this.match;
+    }
+
+    /** @return {@link forge.view.ViewEditorUI} */
+    public ViewEditorUI getEditorView() {
+        if (Singletons.getControl().getState() != FControl.DEFAULT_EDITOR) {
+            throw new IllegalArgumentException("FView$getEditorView\n"
+                    + "may only be called while the editor UI is showing.");
+        }
+        return FView.this.editor;
+    }
+
+    /** @return {@link forge.view.ViewBazaarUI} */
+    public ViewBazaarUI getBazaarView() {
+        if (Singletons.getControl().getState() != FControl.QUEST_BAZAAR) {
+            throw new IllegalArgumentException("FView$getBazaarView\n"
+                    + "may only be called while the bazaar UI is showing.");
+        }
+        return FView.this.bazaar;
+    }
 }

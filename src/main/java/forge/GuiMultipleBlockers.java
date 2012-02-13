@@ -71,14 +71,11 @@ public class GuiMultipleBlockers extends JFrame {
      *            a {@link forge.CardList} object.
      * @param damage
      *            a int.
-     * @param display
-     *            a {@link forge.CardContainer} object.
      */
-    public GuiMultipleBlockers(final Card attacker, final CardList creatureList, final int damage, final CardContainer display) {
+    public GuiMultipleBlockers(final Card attacker, final CardList creatureList, final int damage) {
         this();
         this.assignDamage = damage;
         this.updateDamageLabel(); // update user message about assigning damage
-        this.guiDisplay = display;
         this.att = attacker;
         this.blockers = creatureList;
 
@@ -241,9 +238,7 @@ public class GuiMultipleBlockers extends JFrame {
             final CardContainer cardPanel = (CardContainer) o;
             final Card c = cardPanel.getCard();
 
-            if (this.guiDisplay != null) {
-                this.guiDisplay.setCard(c);
-            }
+            Singletons.getControl().getMatchControl().setCard(c);
         }
     }
 }

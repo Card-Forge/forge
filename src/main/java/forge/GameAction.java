@@ -60,7 +60,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.util.MyRandom;
-import forge.view.GuiTopLevel;
 import forge.view.match.ViewWinLose;
 
 /**
@@ -896,7 +895,7 @@ public class GameAction {
         final boolean refreeze = AllZone.getStack().isFrozen();
         AllZone.getStack().setFrozen(true);
 
-        final JFrame frame = (JFrame) AllZone.getDisplay();
+        final JFrame frame = Singletons.getView();
         if (!frame.isDisplayable()) {
             return;
         }
@@ -1637,8 +1636,8 @@ public class GameAction {
             AllZone.getComputerPlayer().drawCard();
         }
 
-        AllZone.getDisplay().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
-        ((GuiTopLevel) (AllZone.getDisplay())).getController().getMatchView().getInputController().updateGameCount();
+        Singletons.getControl().getMatchControl().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
+        Singletons.getControl().getMatchControl().getMessageControl().updateGameCount();
 
         AllZone.getInputControl().setInput(new InputMulligan());
         PhaseHandler.setGameBegins(1);

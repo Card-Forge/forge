@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import arcane.util.MultiplexOutputStream;
 import forge.AllZone;
@@ -31,15 +32,18 @@ import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
 import forge.ConstantStringArrayList;
+import forge.Singletons;
 import forge.game.GameSummary;
 import forge.gui.input.InputControl;
 import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
+import forge.view.match.ViewField;
+import forge.view.match.ViewTabber;
 import forge.view.toolbox.FSkin;
 
 /**
@@ -306,4 +310,91 @@ public class FModel {
         return this.gameState;
     }
 
+    /** TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase. */
+    public final boolean savePrefs() {
+        final ForgePreferences fp = preferences;
+        final List<ViewField> fieldViews = Singletons.getView().getMatchView().getFieldViews();
+
+        // AI field is at index [0]
+        fp.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fieldViews.get(0).getLblUpkeep().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fieldViews.get(0).getLblDraw().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fieldViews.get(0).getLblMain1().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fieldViews.get(0).getLblBeginCombat().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fieldViews.get(0).getLblDeclareAttackers().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fieldViews.get(0).getLblDeclareBlockers().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fieldViews.get(0).getLblFirstStrike().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fieldViews.get(0).getLblCombatDamage().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fieldViews.get(0).getLblEndCombat().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fieldViews.get(0).getLblMain2().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_EOT, String.valueOf(fieldViews.get(0).getLblEndTurn().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fieldViews.get(0).getLblCleanup().getEnabled()));
+
+        // Human field is at index [1]
+        fp.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fieldViews.get(1).getLblUpkeep().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fieldViews.get(1).getLblDraw().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fieldViews.get(1).getLblMain1().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fieldViews.get(1).getLblBeginCombat().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fieldViews.get(1).getLblDeclareAttackers().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fieldViews.get(1).getLblDeclareBlockers().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fieldViews.get(1).getLblFirstStrike().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fieldViews.get(1).getLblCombatDamage().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fieldViews.get(1).getLblEndCombat().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fieldViews.get(1).getLblMain2().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_EOT, String.valueOf(fieldViews.get(1).getLblEndTurn().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
+
+        ViewTabber v = Singletons.getView().getMatchView().getViewTabber();
+        Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
+
+        fp.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
+        fp.setPref(FPref.UI_LAYOUT_PARAMS, String.valueOf(Singletons.getView().getMatchView().getLayoutParams()));
+        fp.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
+
+        fp.save();
+        return true;
+    }
+
+    /** TODO: Needs to be reworked for efficiency with rest of prefs loads in codebase. */
+    public final boolean loadPrefs() {
+        final ForgePreferences fp = Singletons.getModel().getPreferences();
+        final List<ViewField> fieldViews = Singletons.getView().getMatchView().getFieldViews();
+
+        Constant.Runtime.MILL[0] = fp.getPrefBoolean(FPref.DEV_MILLING_LOSS);
+        Constant.Runtime.DEV_MODE[0] = fp.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        Constant.Runtime.UPLOAD_DRAFT[0] = fp.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
+        Constant.Runtime.RANDOM_FOIL[0] = fp.getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        Constant.Runtime.UPLOAD_DRAFT[0] =
+                (Constant.Runtime.NET_CONN[0] ? fp.getPrefBoolean(FPref.UI_UPLOAD_DRAFT) : false);
+
+        // AI field is at index [0]
+        fieldViews.get(0).getLblUpkeep().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
+        fieldViews.get(0).getLblDraw().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_DRAW));
+        fieldViews.get(0).getLblMain1().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_MAIN1));
+        fieldViews.get(0).getLblBeginCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
+        fieldViews.get(0).getLblDeclareAttackers().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
+        fieldViews.get(0).getLblDeclareBlockers().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
+        fieldViews.get(0).getLblFirstStrike().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
+        fieldViews.get(0).getLblCombatDamage().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
+        fieldViews.get(0).getLblEndCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
+        fieldViews.get(0).getLblMain2().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_MAIN2));
+        fieldViews.get(0).getLblEndTurn().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_EOT));
+        fieldViews.get(0).getLblCleanup().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
+
+        // Human field is at index [1]
+        fieldViews.get(1).getLblUpkeep().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
+        fieldViews.get(1).getLblDraw().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
+        fieldViews.get(1).getLblMain1().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
+        fieldViews.get(1).getLblBeginCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
+        fieldViews.get(1).getLblDeclareAttackers().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
+        fieldViews.get(1).getLblDeclareBlockers().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
+        fieldViews.get(1).getLblFirstStrike().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
+        fieldViews.get(1).getLblCombatDamage().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
+        fieldViews.get(1).getLblEndCombat().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
+        fieldViews.get(1).getLblMain2().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
+        fieldViews.get(1).getLblEndTurn().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
+        fieldViews.get(1).getLblCleanup().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
+
+        Singletons.getView().getMatchView().setLayoutParams(fp.getPref(FPref.UI_LAYOUT_PARAMS));
+        return true;
+    }
 }

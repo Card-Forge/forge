@@ -21,6 +21,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 
 /**
  * <p>
@@ -43,7 +44,7 @@ public abstract class Input implements java.io.Serializable {
      * </p>
      */
     public void showMessage() {
-        AllZone.getDisplay().showMessage("Blank Input");
+        Singletons.getControl().getMatchControl().showMessage("Blank Input");
     }
 
     /**

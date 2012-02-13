@@ -16,15 +16,15 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.control.home.ControlDraft;
 import forge.game.GameType;
+import forge.view.ViewHomeUI;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
-import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
@@ -37,7 +37,7 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class ViewDraft extends JPanel {
     private final ControlDraft control;
-    private final HomeTopLevel parentView;
+    private final ViewHomeUI parentView;
     private final JList lstAI;
     private final FProgressBar barProgress;
     private final DeckLister lstHumanDecks;
@@ -106,9 +106,9 @@ public class ViewDraft extends JPanel {
 
     /**
      * Assembles swing components for "Draft" mode menu.
-     * @param v0 (HomeTopLevel, parent view)
+     * @param v0 (ViewHomeUI, parent view)
      */
-    public ViewDraft(HomeTopLevel v0) {
+    public ViewDraft(ViewHomeUI v0) {
         super();
         this.parentView = v0;
         this.setOpaque(false);
@@ -193,14 +193,13 @@ public class ViewDraft extends JPanel {
 
     /** */
     public void showDirections() {
-        final FOverlay overlay = AllZone.getOverlay();
         final FButton btnClose = new FButton();
         final FPanel pnlContainer = new FPanel();
 
         btnClose.setAction(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                overlay.hideOverlay();
+                Singletons.getView().getOverlay().hideOverlay();
             }
         });
         btnClose.setText("Close");
@@ -211,14 +210,14 @@ public class ViewDraft extends JPanel {
         pnlContainer.add(tpnDirections, "w 90%, gap 5% 0 20px 0, wrap");
         pnlContainer.add(btnClose, "w 300px!, h 40px!, gap 0 0 20px 20px, alignx center");
 
-        overlay.removeAll();
-        overlay.setLayout(new MigLayout("insets 0"));
-        overlay.add(pnlContainer, "w 50%, gap 25% 0 5% 5%, wrap");
-        overlay.showOverlay();
+        Singletons.getView().getOverlay().removeAll();
+        Singletons.getView().getOverlay().setLayout(new MigLayout("insets 0"));
+        Singletons.getView().getOverlay().add(pnlContainer, "w 50%, gap 25% 0 5% 5%, wrap");
+        Singletons.getView().getOverlay().showOverlay();
     }
 
-    /** @return HomeTopLevel */
-    public HomeTopLevel getParentView() {
+    /** @return ViewHomeUI */
+    public ViewHomeUI getParentView() {
         return parentView;
     }
 

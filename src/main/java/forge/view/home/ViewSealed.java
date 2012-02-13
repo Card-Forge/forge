@@ -8,6 +8,7 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.control.home.ControlSealed;
 import forge.game.GameType;
+import forge.view.ViewHomeUI;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FProgressBar;
@@ -20,7 +21,7 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewSealed extends JPanel {
-    private final HomeTopLevel parentView;
+    private final ViewHomeUI parentView;
     private final ControlSealed control;
     private DeckLister lstHumanDecks;
     private final JButton btnStart;
@@ -30,9 +31,9 @@ public class ViewSealed extends JPanel {
     /**
      * Assembles swing components for "Sealed" mode menu.
      * 
-     * @param v0 {@link forge.view.home.HomeTopLevel} parent view
+     * @param v0 {@link forge.view.ViewHomeUI} parent view
      */
-    public ViewSealed(HomeTopLevel v0) {
+    public ViewSealed(ViewHomeUI v0) {
         super();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
@@ -67,8 +68,8 @@ public class ViewSealed extends JPanel {
         control.addListeners();
     }
 
-    /** @return {@link forge.view.home.HomeTopLevel} */
-    public HomeTopLevel getParentView() {
+    /** @return {@link forge.view.ViewHomeUI} */
+    public ViewHomeUI getParentView() {
         return parentView;
     }
 

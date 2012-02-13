@@ -36,8 +36,6 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestEventManager;
-import forge.view.GuiTopLevel;
-import forge.view.toolbox.FOverlay;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -87,12 +85,6 @@ public final class AllZone {
 
     // shared between Input_Attack, Input_Block, Input_CombatDamage ,
     // InputState_Computer
-
-    /** Global <code>display</code>. */
-    private static Display display;
-
-    /** Global <code>overlay</code>. */
-    private static FOverlay overlay;
 
     /** Constant <code>DECK_MGR</code>. */
     private static DeckManager deckManager;
@@ -495,31 +487,6 @@ public final class AllZone {
 
     /**
      * <p>
-     * getDisplay.
-     * </p>
-     * 
-     * @return a {@link forge.Display} object.
-     * @since 1.0.15
-     */
-    public static Display getDisplay() {
-        return AllZone.display;
-    }
-
-    /**
-     * <p>
-     * setDisplay.
-     * </p>
-     * 
-     * @param display0
-     *            a {@link forge.Display} object.
-     * @since 1.0.15
-     */
-    public static void setDisplay(final Display display0) {
-        AllZone.display = display0;
-    }
-
-    /**
-     * <p>
      * getZone.
      * </p>
      * 
@@ -630,11 +597,11 @@ public final class AllZone {
     public static void newGameCleanup() {
         Singletons.getModel().getGameState().newGameCleanup();
 
-        AllZone.getDisplay().showCombat("");
-        AllZone.getDisplay().loadPrefs();
+        Singletons.getControl().getMatchControl().showCombat("");
+        Singletons.getModel().loadPrefs();
         AllZone.getInputControl().clearInput();
         AllZone.getColorChanger().reset();
-        ((GuiTopLevel) AllZone.getDisplay()).showStack();
+        Singletons.getControl().getMatchControl().showStack();
     }
 
     /**
@@ -653,25 +620,6 @@ public final class AllZone {
      */
     public static ColorChanger getColorChanger() {
         return AllZone.COLOR_CHANGER;
-    }
-
-    /**
-     * Gets the overlay.
-     * 
-     * @return overlay
-     */
-    public static FOverlay getOverlay() {
-        return AllZone.overlay;
-    }
-
-    /**
-     * Sets the overlay.
-     * 
-     * @param overlay0
-     *            &emsp; Overlay panel
-     */
-    public static void setOverlay(final FOverlay overlay0) {
-        AllZone.overlay = overlay0;
     }
 
     /**

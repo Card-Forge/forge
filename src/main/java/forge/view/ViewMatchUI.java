@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.view.match;
+package forge.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -23,23 +23,21 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.control.ControlMatchUI;
-import forge.control.match.ControlDetail;
-import forge.control.match.ControlDock;
-import forge.control.match.ControlField;
-import forge.control.match.ControlHand;
-import forge.control.match.ControlInput;
-import forge.control.match.ControlPicture;
-import forge.control.match.ControlTabber;
+import forge.view.match.ViewBattlefield;
+import forge.view.match.ViewDetail;
+import forge.view.match.ViewDock;
+import forge.view.match.ViewField;
+import forge.view.match.ViewHand;
+import forge.view.match.ViewMessage;
+import forge.view.match.ViewPicture;
+import forge.view.match.ViewTabber;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
 
@@ -52,16 +50,15 @@ import forge.view.toolbox.FSkin;
  */
 
 @SuppressWarnings("serial")
-public class MatchTopLevel extends FPanel {
-    private ViewBattlefield battlefield;
-    private ViewDetail detail;
-    private ViewDock dock;
-    private ViewHand hand;
-    private ViewInput input;
-    private ViewPicture picture;
-    private ViewTabber tabber;
-
-    private ControlMatchUI control;
+public class ViewMatchUI extends FPanel {
+    private final ControlMatchUI control;
+    private final ViewBattlefield battlefield;
+    private final ViewDetail detail;
+    private final ViewDock dock;
+    private final ViewHand hand;
+    private final ViewMessage message;
+    private final ViewPicture picture;
+    private final ViewTabber tabber;
     private int w, h, b;
     private double delta;
 
@@ -90,7 +87,7 @@ public class MatchTopLevel extends FPanel {
      * - Implements Display interface used in singleton pattern
      * 
      */
-    public MatchTopLevel() {
+    public ViewMatchUI() {
         super();
 
         // Set properties
@@ -134,7 +131,7 @@ public class MatchTopLevel extends FPanel {
         add(pnlB6);
 
         // Declare and add various view components
-        input = new ViewInput();
+        message = new ViewMessage();
         hand = new ViewHand(this);
         dock = new ViewDock();
         battlefield = new ViewBattlefield();
@@ -143,7 +140,7 @@ public class MatchTopLevel extends FPanel {
         picture = new ViewPicture();
 
         String constraints = "w 100%!, h 100%!";
-        pnlInput.add(input, constraints);
+        pnlInput.add(message, constraints);
         pnlHand.add(hand, constraints);
         pnlBattlefield.add(battlefield, constraints);
         pnlDock.add(dock, constraints);
@@ -153,7 +150,7 @@ public class MatchTopLevel extends FPanel {
 
         // After all components are in place, instantiate controller.
         addDragListeners();
-        this.control = new ControlMatchUI(this);
+        control = new ControlMatchUI(this);
     }
 
     /**
@@ -357,86 +354,11 @@ public class MatchTopLevel extends FPanel {
         super.paintComponent(g);
     }
 
-    // ========== Retrieval functions for easier interaction with children
-    // panels.
+    //========== Retrieval methods
 
-    /**
-     * Retrieves top level controller (actions, observers, etc.) for this UI.
-     * 
-     * @return ControlMatchUI
-     */
-    public ControlMatchUI getController() {
+    /** @return {@link forge.control.ControlMatchUI} */
+    public ControlMatchUI getControl() {
         return this.control;
-    }
-
-    /**
-     * Gets the detail controller.
-     * 
-     * @return ControlDetail
-     */
-    public ControlDetail getDetailController() {
-        return MatchTopLevel.this.detail.getController();
-    }
-
-    /**
-     * Gets the picture controller.
-     * 
-     * @return ControlPicture
-     */
-    public ControlPicture getPictureController() {
-        return MatchTopLevel.this.picture.getController();
-    }
-
-    /**
-     * Gets the tabber controller.
-     * 
-     * @return ControlTabber
-     */
-    public ControlTabber getTabberController() {
-        return MatchTopLevel.this.tabber.getController();
-    }
-
-    /**
-     * Gets the input controller.
-     * 
-     * @return ControlInput
-     */
-    public ControlInput getInputController() {
-        return MatchTopLevel.this.input.getController();
-    }
-
-    /**
-     * Gets the hand controller.
-     * 
-     * @return ControlHand
-     */
-    public ControlHand getHandController() {
-        return MatchTopLevel.this.hand.getController();
-    }
-
-    /**
-     * Gets the dock controller.
-     * 
-     * @return ControlDock
-     */
-    public ControlDock getDockController() {
-        return MatchTopLevel.this.dock.getController();
-    }
-
-    /**
-     * Gets the field controllers.
-     * 
-     * @return List<ControlField>
-     */
-    public List<ControlField> getFieldControllers() {
-        final List<ViewField> fields = this.battlefield.getFields();
-        final List<ControlField> controllers = new ArrayList<ControlField>();
-
-        for (final ViewField f : fields) {
-            controllers.add(f.getController());
-        }
-
-        return controllers;
     }
 
     /**
@@ -445,36 +367,51 @@ public class MatchTopLevel extends FPanel {
      * @return List<ViewField>
      */
     public List<ViewField> getFieldViews() {
-        return MatchTopLevel.this.battlefield.getFields();
+        return ViewMatchUI.this.battlefield.getFields();
     }
 
-    // ========== Input panel and human hand retrieval functions
-    // Also due to be deprecated. Access should be handled by child component
-    // view and/or controller.
-
-    /**
-     * Gets the pnl message.
-     * 
-     * @return <b>JTextArea</b> Message area of input panel.
-     */
-    public JTextArea getPnlMessage() {
-        return MatchTopLevel.this.input.getTarMessage();
+    /** @return {@link forge.view.match.ViewDock} */
+    public ViewDock getDockView() {
+        return this.dock;
     }
 
-    /**
-     * Gets the pnl hand.
-     * 
-     * @return <b>ViewHand</b> Retrieves player hand panel.
-     */
-    public ViewHand getPnlHand() {
-        return MatchTopLevel.this.hand;
+    /** @return {@link forge.view.match.ViewTabber} */
+    public ViewTabber getViewTabber() {
+        return this.tabber;
     }
-    /**
-     * Gets the top level frame.
-     * 
-     * @return JFrame
-     */
-    public JFrame getTopLevelFrame() {
-        return (JFrame) AllZone.getDisplay();
+
+    /** @return {@link forge.view.match.ViewDetail} */
+    public ViewDetail getViewDetail() {
+        return this.detail;
+    }
+
+    /** @return {@link forge.view.match.ViewPicture} */
+    public ViewPicture getViewPicture() {
+        return this.picture;
+    }
+
+    /** @return {@link forge.view.match.ViewHand} */
+    public ViewHand getViewHand() {
+        return this.hand;
+    }
+
+    /** @return {@link forge.view.match.ViewMessage} */
+    public ViewMessage getViewMessage() {
+        return this.message;
+    }
+
+    /** @return {@link forge.view.match.ViewBattlefield} */
+    public ViewBattlefield getViewBattlefield() {
+        return this.battlefield;
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnCancel() {
+        return this.message.getBtnCancel();
+    }
+
+    /** @return {@link javax.swing.JButton} */
+    public JButton getBtnOK() {
+        return this.message.getBtnOK();
     }
 }

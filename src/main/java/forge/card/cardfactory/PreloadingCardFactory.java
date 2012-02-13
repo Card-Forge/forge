@@ -27,13 +27,13 @@ import javax.swing.SwingUtilities;
 import forge.AllZone;
 import forge.Card;
 import forge.CardReader;
-import forge.Singletons;
 import forge.card.CardRules;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.view.SplashFrame;
 import forge.view.toolbox.FProgressBar;
 
 /**
@@ -82,7 +82,7 @@ public class PreloadingCardFactory extends AbstractCardFactory {
         try {
             this.readCards(file);
 
-            final FProgressBar barProgress = Singletons.getView().getProgressBar();
+            final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
             if (barProgress != null) {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     @Override

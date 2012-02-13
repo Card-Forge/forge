@@ -27,6 +27,7 @@ import forge.Constant.Zone;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
@@ -275,7 +276,7 @@ public class CostMana extends CostPart {
                     ButtonUtil.enableOnlyCancel();
                 }
 
-                AllZone.getDisplay().showMessage(
+                Singletons.getControl().getMatchControl().showMessage(
                         "Pay X Mana Cost for " + sa.getSourceCard().getName() + "\n" + this.xPaid + " Paid so far.");
             }
 
@@ -472,7 +473,7 @@ public class CostMana extends CostPart {
             public void showMessage() {
                 ButtonUtil.enableOnlyCancel();
                 final String displayMana = this.mana.toString().replace("X", "").trim();
-                AllZone.getDisplay().showMessage("Pay Mana Cost: " + displayMana);
+                Singletons.getControl().getMatchControl().showMessage("Pay Mana Cost: " + displayMana);
 
                 final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
                 if (this.phyLifeToLose > 0) {
@@ -485,7 +486,7 @@ public class CostMana extends CostPart {
                     msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
                 }
 
-                AllZone.getDisplay().showMessage(msg.toString());
+                Singletons.getControl().getMatchControl().showMessage(msg.toString());
                 if (this.mana.isPaid()) {
                     this.done();
                 }

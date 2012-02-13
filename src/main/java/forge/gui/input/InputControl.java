@@ -25,6 +25,7 @@ import forge.Constant;
 import forge.MyObservable;
 import forge.PhaseHandler;
 import forge.Player;
+import forge.Singletons;
 import forge.model.FModel;
 
 /**
@@ -246,7 +247,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             final boolean skip = this.model.getGameState().getPhaseHandler().doSkipPhase();
             this.model.getGameState().getPhaseHandler().setSkipPhase(false);
             if ((this.model.getGameState().getStack().size() == 0)
-                    && !forge.AllZone.getDisplay().stopAtPhase(playerTurn, phase) && skip) {
+                    && !Singletons.getControl().getMatchControl().stopAtPhase(playerTurn, phase) && skip) {
                 this.model.getGameState().getPhaseHandler().passPriority();
                 return null;
             } else {

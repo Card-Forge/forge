@@ -39,6 +39,7 @@ import forge.Counters;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -372,7 +373,7 @@ public class CardFactoryCreatures {
 
                         @Override
                         public void showMessage() {
-                            AllZone.getDisplay().showMessage("Select an artifact you control");
+                            Singletons.getControl().getMatchControl().showMessage("Select an artifact you control");
                             ButtonUtil.disableAll();
                         }
 
@@ -502,7 +503,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void showMessage() {
                     ButtonUtil.disableAll();
-                    AllZone.getDisplay().showMessage("Exile a nonland card from your hand.");
+                    Singletons.getControl().getMatchControl().showMessage("Exile a nonland card from your hand.");
                 }
 
                 @Override
@@ -555,9 +556,9 @@ public class CardFactoryCreatures {
                 @Override
                 public void showMessage() {
                     if (index[0] == 0) {
-                        AllZone.getDisplay().showMessage("Select target land you control.");
+                        Singletons.getControl().getMatchControl().showMessage("Select target land you control.");
                     } else {
-                        AllZone.getDisplay().showMessage("Select target land opponent controls.");
+                        Singletons.getControl().getMatchControl().showMessage("Select target land opponent controls.");
                     }
 
                     ButtonUtil.enableOnlyCancel();
@@ -1249,7 +1250,7 @@ public class CardFactoryCreatures {
 
                                                 @Override
                                                 public void showMessage() {
-                                                    AllZone.getDisplay().showMessage(msg);
+                                                    Singletons.getControl().getMatchControl().showMessage(msg);
                                                     ButtonUtil.enableOnlyOK();
                                                 }
 
@@ -1665,7 +1666,7 @@ public class CardFactoryCreatures {
                             final StringBuilder sb = new StringBuilder();
                             sb.append(card.getName()).append(" - Reveal an artifact.  Revealed ");
                             sb.append(this.revealed.size()).append(" so far.  Click OK when done.");
-                            AllZone.getDisplay().showMessage(sb.toString());
+                            Singletons.getControl().getMatchControl().showMessage(sb.toString());
                             ButtonUtil.enableOnlyOK();
                         }
 
@@ -1780,7 +1781,7 @@ public class CardFactoryCreatures {
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Select up to 5 target permanents.  Selected (");
                     sb.append(targetPerms.size()).append(") so far.  Click OK when done.");
-                    AllZone.getDisplay().showMessage(sb.toString());
+                    Singletons.getControl().getMatchControl().showMessage(sb.toString());
                     ButtonUtil.enableOnlyOK();
                 }
 
@@ -1819,7 +1820,7 @@ public class CardFactoryCreatures {
                 public void showMessage() {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - Select target player");
-                    AllZone.getDisplay().showMessage(sb.toString());
+                    Singletons.getControl().getMatchControl().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -1877,7 +1878,7 @@ public class CardFactoryCreatures {
                                 toDisplay += "Currently, (" + toSac.size() + ") selected with a total power of: "
                                         + getTotalPower();
                                 toDisplay += "  Click OK when Done.";
-                                AllZone.getDisplay().showMessage(toDisplay);
+                                Singletons.getControl().getMatchControl().showMessage(toDisplay);
                                 ButtonUtil.enableAll();
                             }
 
@@ -2095,7 +2096,7 @@ public class CardFactoryCreatures {
                         message += "or artifact ";
                     }
                     message += "on the battlefield";
-                    AllZone.getDisplay().showMessage(cardName + " - " + message);
+                    Singletons.getControl().getMatchControl().showMessage(cardName + " - " + message);
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -2335,7 +2336,7 @@ public class CardFactoryCreatures {
 
                             @Override
                             public void showMessage() {
-                                AllZone.getDisplay().showMessage(card + " - Select an artifact you control");
+                                Singletons.getControl().getMatchControl().showMessage(card + " - Select an artifact you control");
                                 ButtonUtil.enableOnlyCancel();
                             }
 

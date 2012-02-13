@@ -40,8 +40,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Constant.Zone;
 import forge.PlayerZone;
-import forge.view.GuiTopLevel;
-import forge.view.match.MatchTopLevel;
+import forge.Singletons;
 import forge.view.match.ViewHand;
 
 /**
@@ -70,8 +69,6 @@ public class ControlHand {
         this.view = v;
         this.cardsInPanel = new ArrayList<Card>();
 
-        final MatchTopLevel t = view.getTopLevel();
-
         maCardClick = new MouseAdapter() {
             // Card click
             @Override
@@ -81,8 +78,8 @@ public class ControlHand {
                 }
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
-                    view.getTopLevel().getInputController().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
-                    view.getTopLevel().getInputController().getView().getBtnOK().requestFocusInWindow();
+                    Singletons.getControl().getMatchControl().getMessageControl().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                    Singletons.getView().getMatchView().getBtnOK().requestFocusInWindow();
                 }
             }
         };
@@ -93,7 +90,7 @@ public class ControlHand {
             public void mouseMoved(final MouseEvent me) {
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
-                    ((GuiTopLevel) AllZone.getDisplay()).setCard(c);
+                    Singletons.getControl().getMatchControl().setCard(c);
                 }
             }
         };
@@ -103,7 +100,9 @@ public class ControlHand {
             public void update(final Observable a, final Object b) {
                 final PlayerZone pZone = (PlayerZone) a;
                 final HandArea p = view.getHandArea();
-                final Rectangle rctLibraryLabel = t.getFieldControllers().get(1).getView().getLblLibrary().getBounds();
+                final Rectangle rctLibraryLabel = Singletons.getControl()
+                        .getMatchControl().getFieldControls().get(1)
+                        .getView().getLblLibrary().getBounds();
                 final Card[] c = pZone.getCards();
 
                 // Animation starts from the library label.
@@ -129,10 +128,12 @@ public class ControlHand {
                 diff = new ArrayList<Card>(Arrays.asList(c));
                 diff.removeAll(tmp);
 
-                JLayeredPane layeredPane = SwingUtilities.getRootPane(t.getTopLevelFrame()).getLayeredPane();
+                JLayeredPane layeredPane = Singletons.getView().getLayeredPane();
                 int fromZoneX = 0, fromZoneY = 0;
 
-                final Point zoneLocation = SwingUtilities.convertPoint(t.getFieldControllers().get(1).getView().getLblLibrary(),
+                final Point zoneLocation = SwingUtilities.convertPoint(Singletons
+                        .getControl().getMatchControl().getFieldControls()
+                        .get(1).getView().getLblLibrary(),
                         Math.round(rctLibraryLabel.width / 2.0f), Math.round(rctLibraryLabel.height / 2.0f), layeredPane);
                 fromZoneX = zoneLocation.x;
                 fromZoneY = zoneLocation.y;
@@ -152,7 +153,7 @@ public class ControlHand {
                     endX = toPos.x;
                     endY = toPos.y;
                     final arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
-                    if (t.getTopLevelFrame().isShowing()) {
+                    if (Singletons.getView().isShowing()) {
                         Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel,
                                 layeredPane, 500);
                     } else {
@@ -186,15 +187,14 @@ public class ControlHand {
      */
     public void addCardPanelListeners(final CardPanel c) {
         // Grab top level controller to facilitate interaction between children
-        final MatchTopLevel t = ((GuiTopLevel) AllZone.getDisplay()).getController().getMatchController().getView();
         final Card cardobj = c.getCard();
 
         // Sidebar pic/detail on card hover
         c.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(final MouseEvent e) {
-                t.getDetailController().showCard(cardobj);
-                t.getPictureController().showCard(cardobj);
+                Singletons.getControl().getMatchControl().getDetailControl().showCard(cardobj);
+                Singletons.getControl().getMatchControl().getPictureControl().showCard(cardobj);
             }
         });
 
@@ -207,7 +207,7 @@ public class ControlHand {
                     return;
                 }
 
-                t.getInputController().getInputControl()
+                Singletons.getControl().getMatchControl().getMessageControl().getInputControl()
                         .selectCard(cardobj, AllZone.getHumanPlayer().getZone(Zone.Hand));
             }
         });

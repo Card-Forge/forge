@@ -26,6 +26,7 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestDuel;
 import forge.quest.data.QuestEvent;
+import forge.view.ViewHomeUI;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FCheckBox;
 import forge.view.toolbox.FLabel;
@@ -43,7 +44,7 @@ import forge.view.toolbox.SubTab;
  */
 @SuppressWarnings("serial")
 public class ViewQuest extends JScrollPane {
-    private final HomeTopLevel parentView;
+    private final ViewHomeUI parentView;
     private final ControlQuest control;
     private final String eventPanelConstraints;
     private final Color clrBorders;
@@ -69,9 +70,9 @@ public class ViewQuest extends JScrollPane {
     /**
      * Populates Swing components of Quest mode in home screen.
      *
-     * @param v0 &emsp; {@link forge.view.home.HomeTopLevel} parent view
+     * @param v0 &emsp; {@link forge.view.ViewHomeUI} parent view
      */
-    public ViewQuest(final HomeTopLevel v0) {
+    public ViewQuest(final ViewHomeUI v0) {
         // Display
         super(VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.setBorder(null);
@@ -630,8 +631,8 @@ public class ViewQuest extends JScrollPane {
         return selectedOpponent;
     }
 
-    /** @return {@link forge.view.home.HomeTopLevel} */
-    public HomeTopLevel getParentView() {
+    /** @return {@link forge.view.ViewHomeUI} */
+    public ViewHomeUI getParentView() {
         return parentView;
     }
 

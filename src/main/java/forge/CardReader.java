@@ -49,6 +49,7 @@ import forge.card.CardRulesReader;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
+import forge.view.SplashFrame;
 import forge.view.toolbox.FProgressBar;
 
 /**
@@ -262,7 +263,7 @@ public class CardReader implements Runnable {
      */
     protected final Card loadCardsUntilYouFind(final String cardName) {
         Card result = null;
-        final FProgressBar barProgress = Singletons.getView().getProgressBar();
+        final FProgressBar barProgress = SplashFrame.PROGRESS_BAR;
 
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.

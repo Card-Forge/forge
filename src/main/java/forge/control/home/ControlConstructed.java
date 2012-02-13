@@ -25,6 +25,7 @@ import forge.CardList;
 import forge.Command;
 import forge.Constant;
 import forge.PlayerType;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
@@ -33,7 +34,6 @@ import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameType;
 import forge.item.CardPrinted;
-import forge.view.GuiTopLevel;
 import forge.view.home.ViewConstructed;
 
 /** 
@@ -534,9 +534,8 @@ public class ControlConstructed {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GuiTopLevel g = ((GuiTopLevel) AllZone.getDisplay());
-                g.getController().changeState(FControl.MATCH_SCREEN);
-                g.getController().getMatchController().initMatch();
+                Singletons.getControl().changeState(FControl.MATCH_SCREEN);
+                Singletons.getControl().getMatchControl().initMatch();
 
                 AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             }

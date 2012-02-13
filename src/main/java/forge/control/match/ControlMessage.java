@@ -23,14 +23,14 @@ import java.awt.event.ActionListener;
 import forge.AllZone;
 import forge.Constant;
 import forge.GuiInput;
-import forge.view.match.ViewInput;
+import forge.view.match.ViewMessage;
 
 /**
- * Child controller - handles operations related to input panel.
+ * Child controller - handles operations related to message panel.
  * 
  */
-public class ControlInput {
-    private final ViewInput view;
+public class ControlMessage {
+    private final ViewMessage view;
 
     private final GuiInput inputControl;
 
@@ -42,29 +42,29 @@ public class ControlInput {
      * @param v
      *            &emsp; The Swing component for the input area
      */
-    public ControlInput(final ViewInput v) {
+    public ControlMessage(final ViewMessage v) {
         this.view = v;
         this.inputControl = new GuiInput();
 
         this.alOK = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent evt) {
-                ControlInput.this.btnOKActionPerformed(evt);
+                ControlMessage.this.btnOKActionPerformed(evt);
 
                 if (AllZone.getPhaseHandler().isNeedToNextPhase()) {
                     // moves to next turn
                     AllZone.getPhaseHandler().setNeedToNextPhase(false);
                     AllZone.getPhaseHandler().nextPhase();
                 }
-                ControlInput.this.view.getBtnOK().requestFocusInWindow();
+                ControlMessage.this.view.getBtnOK().requestFocusInWindow();
             }
         };
 
         this.alCancel = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent evt) {
-                ControlInput.this.btnCancelActionPerformed(evt);
-                ControlInput.this.view.getBtnOK().requestFocusInWindow();
+                ControlMessage.this.btnCancelActionPerformed(evt);
+                ControlMessage.this.view.getBtnOK().requestFocusInWindow();
             }
         };
     }
@@ -114,9 +114,9 @@ public class ControlInput {
         return this.inputControl;
     }
 
-    /** @return ViewInput */
-    public ViewInput getView() {
-        return view;
+    /** @param s0 &emsp; {@link java.lang.String} */
+    public void setMessage(String s0) {
+        view.getTarMessage().setText(s0);
     }
 
     /** Updates count label in input area. */

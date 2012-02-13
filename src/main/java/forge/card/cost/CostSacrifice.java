@@ -28,6 +28,7 @@ import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.input.Input;
@@ -273,7 +274,7 @@ public class CostSacrifice extends CostPartWithList {
                     msg.append("s");
                 }
 
-                AllZone.getDisplay().showMessage(msg.toString());
+                Singletons.getControl().getMatchControl().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
