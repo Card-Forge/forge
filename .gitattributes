@@ -1845,6 +1845,7 @@ res/cardsfolder/c/cursed_rack.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_ronin.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_scroll.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_totem.txt svneol=native#text/plain
+res/cardsfolder/c/custody_battle.txt -text svneol=unset#text/plain
 res/cardsfolder/c/customs_depot.txt svneol=native#text/plain
 res/cardsfolder/c/cut_the_earthly_bond.txt svneol=native#text/plain
 res/cardsfolder/c/cutthroat_il_dal.txt svneol=native#text/plain
