@@ -558,6 +558,9 @@ public enum FSkin {
      * @return {@link java.awt.Image}
      */
     public static Image getImage(final SkinProp s0) {
+        if (FSkin.images.get(s0) == null) {
+            throw new NullPointerException("Can't find an image for SkinProp " + s0);
+         }
         return FSkin.images.get(s0);
     }
 
@@ -568,6 +571,9 @@ public enum FSkin {
      * @return {@link javax.swing.ImageIcon}
      */
     public static ImageIcon getIcon(final SkinProp s0) {
+        if (FSkin.icons.get(s0) == null) {
+           throw new NullPointerException("Can't find an icon for SkinProp " + s0);
+        }
         return FSkin.icons.get(s0);
     }
 
