@@ -22,6 +22,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
@@ -29,6 +30,7 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.RepaintManager;
 import javax.swing.border.Border;
 
 import forge.Command;
@@ -61,14 +63,12 @@ public class FPanel extends JPanel {
     private boolean selected, hovered;
     private Command cmdClick;
     // Width/height of panel, bg img, scaled bg img, texture img. Coords.
-    private int pw, ph, iw, ih, sw, sh, tw, th, x, y;
+    private int pnlW, pnlH, imgW, imgH, scaledW, scaledH, textureW, textureH, tempX, tempY;
     // Image aspect ratio (width / height)
     private double iar;
-    // Graphics clone to avoid clobbering original
-    private Graphics2D g2d;
     // Clip rounded corner shape
     private Area clip;
-    private BasicStroke borderStroke = new BasicStroke(2.0f);
+    private final BasicStroke borderStroke = new BasicStroke(2.0f);
 
     /** Core panel used in UI. See class javadoc for more details. */
     public FPanel() {
@@ -84,12 +84,12 @@ public class FPanel extends JPanel {
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
-        public void mouseEntered(MouseEvent e) { hovered = true; repaint(); }
+        public void mouseEntered(final MouseEvent evt) { hovered = true; repaint(); }
         @Override
-        public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
+        public void mouseExited(final MouseEvent evt) { hovered = false; repaint(); }
 
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(final MouseEvent evt) {
             if (cmdClick != null) { cmdClick.execute(); }
             if (!selectable) { return; }
 
@@ -99,15 +99,14 @@ public class FPanel extends JPanel {
     };
 
     //========== Mutators
-    /**@param i0 &emsp; int */
-    public void setCornerDiameter(int i0) {
-        if (i0 < 0) { i0 = 0; }
-        this.cornerDiameter = i0;
+    /**@param int0 &emsp; int */
+    public void setCornerDiameter(final int int0) {
+        this.cornerDiameter = (int0 <= 0 ? 0 : int0);
     }
 
-    /** @param c0 &emsp; {@link forge.Command} on click */
-    public void setCommand(Command c0) {
-        this.cmdClick = c0;
+    /** @param cmd0 &emsp; {@link forge.Command} on click */
+    public void setCommand(final Command cmd0) {
+        this.cmdClick = cmd0;
     }
 
     /** @return {@link forge.Command} */
@@ -115,77 +114,76 @@ public class FPanel extends JPanel {
         return this.cmdClick;
     }
 
-    /** @param b0 &emsp; boolean */
-    public void setHoverable(boolean b0) {
-        hoverable = b0;
+    /** @param bool0 &emsp; boolean */
+    public void setHoverable(final boolean bool0) {
+        hoverable = bool0;
         this.confirmDrawEfficiency();
-        if (!b0) { this.removeMouseListener(madEvents); }
-        else { this.addMouseListener(madEvents); }
+        if (bool0) { this.addMouseListener(madEvents); }
+        else { this.removeMouseListener(madEvents); }
     }
 
-    /** @param b0 &emsp; boolean */
-    public void setSelectable(boolean b0) {
-        this.selectable = b0;
+    /** @param bool0 &emsp; boolean */
+    public void setSelectable(final boolean bool0) {
+        this.selectable = bool0;
         this.confirmDrawEfficiency();
     }
 
-    /** @param b0 &emsp; boolean */
-    public void setSelected(boolean b0) {
-        selected = b0;
-        if (b0) { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
+    /** @param bool0 &emsp; boolean */
+    public void setSelected(final boolean bool0) {
+        selected = bool0;
+        if (bool0) { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
         else    { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
         repaint();
     }
 
-    /** @param i0 &emsp; {@link java.awt.Image} */
-    public void setForegroundImage(Image i0) {
-        if (i0 == null) { return; }
+    /** @param img0 &emsp; {@link java.awt.Image} */
+    public void setForegroundImage(final Image img0) {
+        if (img0 == null) { return; }
 
-        this.foregroundImage = i0;
-        this.iw = i0.getWidth(null);
-        this.ih = i0.getHeight(null);
-        this.iar = (double) iw / (double) ih;
+        this.foregroundImage = img0;
+        this.imgW = img0.getWidth(null);
+        this.imgH = img0.getHeight(null);
+        this.iar = (double) imgW / (double) imgH;
     }
 
-    /** @param i0 &emsp; {@link javax.swing.ImageIcon} */
-    public void setForegroundImage(ImageIcon i0) {
-        setForegroundImage(i0.getImage());
+    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
+    public void setForegroundImage(final ImageIcon ii0) {
+        this.foregroundImage = ii0.getImage();
     }
 
-    /** @param b0 &emsp; boolean, stretch the foreground to fit */
-    public void setForegroundStretch(final boolean b0) {
-        this.foregroundStretch = b0;
+    /** @param bool0 &emsp; boolean, stretch the foreground to fit */
+    public void setForegroundStretch(final boolean bool0) {
+        this.foregroundStretch = bool0;
     }
 
-    /** @param i0 &emsp; {@link java.awt.Image} */
-    public void setBackgroundTexture(Image i0) {
-        if (i0 == null) { return; }
+    /** @param img0 &emsp; {@link java.awt.Image} */
+    public void setBackgroundTexture(final Image img0) {
+        if (img0 == null) { return; }
 
-        this.backgroundTexture = i0;
-        this.tw = i0.getWidth(null);
-        this.th = i0.getHeight(null);
+        this.backgroundTexture = img0;
+        this.textureW = img0.getWidth(null);
+        this.textureH = img0.getHeight(null);
     }
 
-    /** @param i0 &emsp; {@link javax.swing.ImageIcon} */
-    public void setBackgroundTexture(ImageIcon i0) {
-        setBackgroundTexture(i0.getImage());
+    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
+    public void setBackgroundTexture(final ImageIcon ii0) {
+        setBackgroundTexture(ii0.getImage());
     }
 
-    /** @param b0 &emsp; boolean */
-    public void setBorderToggle(final boolean b0) {
-        this.borderToggle = b0;
+    /** @param bool0 &emsp; boolean */
+    public void setBorderToggle(final boolean bool0) {
+        this.borderToggle = bool0;
     }
 
-    /** @param c0 &emsp; {@link java.awt.Color} */
-    public void setBorderColor(final Color c0) {
-        this.borderColor = c0;
+    /** @param clr0 &emsp; {@link java.awt.Color} */
+    public void setBorderColor(final Color clr0) {
+        this.borderColor = clr0;
     }
 
     @Override
-    public void setBorder(Border b0) { }
-
-    @Override
-    public void setOpaque(boolean b0) { super.setOpaque(false); }
+    public void setBorder(final Border bord0) {
+        // Intentionally empty
+    }
 
     /*
      * (non-Javadoc)
@@ -193,15 +191,16 @@ public class FPanel extends JPanel {
      * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
      */
     @Override
-    protected void paintComponent(final Graphics g) {
-        super.paintComponent(g);
-        pw = this.getWidth();
-        ph = this.getHeight();
-        g2d = (Graphics2D) g.create();
+    protected void paintComponent(final Graphics graphics0) {
+        pnlW = this.getWidth();
+        pnlH = this.getHeight();
+        final Graphics2D g2d = (Graphics2D) graphics0;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        RepaintManager.currentManager(this).markCompletelyDirty(this);
 
         // Set clip for rounded area
         if (cornerDiameter > 0) {
-            clip = new Area(new RoundRectangle2D.Float(0, 0, pw, ph, cornerDiameter, cornerDiameter));
+            clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
             g2d.setClip(clip);
         }
 
@@ -209,11 +208,11 @@ public class FPanel extends JPanel {
         if (foregroundStretch && foregroundImage != null) {
             drawForegroundStretched(g2d);
         }
-        else if (this.backgroundTexture != null) {
-            drawBackgroundTexture(g2d);
+        else if (this.backgroundTexture == null) {
+            drawBackgroundColor(g2d);
         }
         else {
-            drawBackgroundColor(g2d);
+            drawBackgroundTexture(g2d);
         }
 
         // Draw foreground as required
@@ -226,103 +225,98 @@ public class FPanel extends JPanel {
         }
 
         // Clear memory
-        if (clip != null) { clip.reset(); }
-        g2d.dispose();
+        //if (clip != null) { clip.reset(); }
+        //g2d.dispose();
     }
 
     //========== Special draw methods
-    private void drawBackgroundColor(final Graphics g0) {
+    private void drawBackgroundColor(final Graphics2D g2d0) {
         // Color background as appropriate
-        if (selected)           { g0.setColor(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
-        else if (hovered)       { g0.setColor(FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
-        else if (selectable)    { g0.setColor(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
-        else                    { g0.setColor(getBackground()); }
+        if (selected)           { g2d0.setColor(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
+        else if (hovered)       { g2d0.setColor(FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
+        else if (selectable)    { g2d0.setColor(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
+        else                    { g2d0.setColor(getBackground()); }
 
         // Parent must be drawn onto clipped object.
-        g0.fillRoundRect(0, 0, pw, ph, cornerDiameter, cornerDiameter);
+        g2d0.fillRect(0, 0, pnlW, pnlH);
     }
 
-    private void drawBackgroundTexture(final Graphics g0) {
-        this.x = 0;
-        this.y = 0;
+    private void drawBackgroundTexture(final Graphics2D g2d0) {
+        this.tempX = 0;
+        this.tempY = 0;
 
-        while (this.x < this.pw) {
-            while (this.y < this.ph) {
-                g0.drawImage(this.backgroundTexture, (int) this.x, (int) this.y, null);
-                this.y += this.th;
+        while (this.tempX < this.pnlW) {
+            while (this.tempY < this.pnlH) {
+                g2d0.drawImage(this.backgroundTexture, (int) this.tempX, (int) this.tempY, null);
+                this.tempY += this.textureH;
             }
-            this.x += this.tw;
-            this.y = 0;
+            this.tempX += this.textureW;
+            this.tempY = 0;
         }
-        this.x = 0;
+        this.tempX = 0;
     }
 
-    private void drawForegroundScaled(final Graphics g0) {
+    private void drawForegroundScaled(final Graphics2D g2d0) {
         // Scaling 1: First dimension larger than panel
-        if (iw >= pw) { // Image is wider than panel? Shrink to width.
-            sw = pw;
-            sh = (int) (sw / iar);
+        if (imgW >= pnlW) { // Image is wider than panel? Shrink to width.
+            scaledW = pnlW;
+            scaledH = (int) (scaledW / iar);
         }
-        else if (ih >= ph) { // Image is taller than panel? Shrink to height.
-            sh = ph;
-            sw = (int) (sh * iar);
+        else if (imgH >= pnlH) { // Image is taller than panel? Shrink to height.
+            scaledH = pnlH;
+            scaledW = (int) (scaledH * iar);
         }
         else {  // Image is smaller than panel? No scaling.
-            sw = iw;
-            sh = ih;
+            scaledW = imgW;
+            scaledH = imgH;
         }
 
         // Scaling step 2: Second dimension larger than panel
-        if (sh > ph) { // Scaled image still taller than panel?
-            sh = ph;
-            sw = (int) (sh * iar);
+        if (scaledH > pnlH) { // Scaled image still taller than panel?
+            scaledH = pnlH;
+            scaledW = (int) (scaledH * iar);
         }
-        else if (sw > pw) { // Scaled image still wider than panel?
-            sw = pw;
-            sh = (int) (sw / iar);
+        else if (scaledW > pnlW) { // Scaled image still wider than panel?
+            scaledW = pnlW;
+            scaledH = (int) (scaledW / iar);
         }
 
         // Scaling step 3: Center image in panel
-        x = (int) ((pw - sw) / 2);
-        y = (int) ((ph - sh) / 2);
-        g0.drawImage(foregroundImage, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
+        tempX = (int) ((pnlW - scaledW) / 2);
+        tempY = (int) ((pnlH - scaledH) / 2);
+        g2d0.drawImage(foregroundImage, tempX, tempY, scaledW + tempX, scaledH + tempY, 0, 0, imgW, imgH, null);
     }
 
-    private void drawForegroundStretched(final Graphics g0) {
-        g0.drawImage(foregroundImage, 0, 0, pw, ph, 0, 0, iw, ih, null);
+    private void drawForegroundStretched(final Graphics2D g2d0) {
+        g2d0.drawImage(foregroundImage, 0, 0, pnlW, pnlH, 0, 0, imgW, imgH, null);
     }
 
-    private void drawBorder(final Graphics2D g0) {
-        g0.setColor(borderColor);
-        g0.setStroke(borderStroke);
-        g0.drawRoundRect(0, 0, pw, ph, cornerDiameter, cornerDiameter);
+    private void drawBorder(final Graphics2D g2d0) {
+        g2d0.setColor(borderColor);
+        g2d0.setStroke(borderStroke);
+        g2d0.drawRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
     }
 
     /** Improves performance by checking to see if any graphics will cancel
      * each other out, so unnecessary out-of-sight graphics will not stack up. */
     private void confirmDrawEfficiency() {
+        final String str = "\nAn FPanel may not be simultaneously "
+                + "%s and have a %s.\nPlease adjust the panel's declaration to use one or the other.";
+
         if (hoverable && foregroundStretch) {
-            throw new IllegalArgumentException("\nAn FPanel may not be simultaneously "
-                    + "hoverable and have a stretched foreground image.\n"
-                    + "Please adjust the panel's declaration to use one or the other.");
+            throw new IllegalArgumentException(String.format(str, "hoverable", "stretched foreground image"));
         }
 
         if (hoverable && backgroundTexture != null) {
-            throw new IllegalArgumentException("\nAn FPanel may not be simultaneously "
-                    + "hoverable and have a background texture.\n"
-                    + "Please adjust the panel's declaration to use one or the other.");
+            throw new IllegalArgumentException(String.format(str, "hoverable", "background texture"));
         }
 
         if (selectable && foregroundStretch) {
-            throw new IllegalArgumentException("\nAn FPanel may not be simultaneously "
-                    + "selectable and have a stretched foreground image.\n"
-                    + "Please adjust the panel's declaration to use one or the other.");
+            throw new IllegalArgumentException(String.format(str, "selectable", "stretched foreground image"));
         }
 
         if (selectable && backgroundTexture != null) {
-            throw new IllegalArgumentException("\nAn FPanel may not be simultaneously "
-                    + "selectable and have a background texture.\n"
-                    + "Please adjust the panel's declaration to use one or the other.");
+            throw new IllegalArgumentException(String.format(str, "selectable", "background texture"));
         }
     }
 }
