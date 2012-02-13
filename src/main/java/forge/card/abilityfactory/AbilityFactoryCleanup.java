@@ -95,6 +95,9 @@ public final class AbilityFactoryCleanup {
         if (params.containsKey("ClearChosenX")) {
             sa.getSourceCard().setSVar("ChosenX", "");
         }
+        if (params.containsKey("ClearChosenY")) {
+            sa.getSourceCard().setSVar("ChosenY", "");
+        }
         if (params.containsKey("ClearTriggered")) {
             AllZone.getTriggerHandler().clearDelayedTrigger(sa.getSourceCard());
         }

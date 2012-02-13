@@ -8940,6 +8940,7 @@ res/cardsfolder/t/test_of_endurance.txt svneol=native#text/plain
 res/cardsfolder/t/testament_of_faith.txt svneol=native#text/plain
 res/cardsfolder/t/tethered_griffin.txt svneol=native#text/plain
 res/cardsfolder/t/tethered_skirge.txt svneol=native#text/plain
+res/cardsfolder/t/tetravus.txt -text
 res/cardsfolder/t/tetsuo_umezawa.txt svneol=native#text/plain
 res/cardsfolder/t/teysa_orzhov_scion.txt svneol=native#text/plain
 res/cardsfolder/t/tezzeret_agent_of_bolas.txt svneol=native#text/plain
