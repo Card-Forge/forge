@@ -132,7 +132,6 @@ public class DeckEditorDraft extends DeckEditorBase {
                         ForgeProps.getLocalized(GuiBoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     DeckEditorDraft.this.dispose();
-// ghandi why is draft controller in a view
                     Singletons.getView().getHomeView().getDraftController().updateHumanDecks();
                 }
             } // windowClosing()
@@ -350,7 +349,6 @@ public class DeckEditorDraft extends DeckEditorBase {
         // close and open next screen
         this.dispose();
 
-// ghandi here is is again
         Singletons.getView().getHomeView().getDraftController().updateHumanDecks();
 
     } /* saveDraft() */

@@ -118,11 +118,10 @@ public final class FControl {
         clearChildren(JLayeredPane.DEFAULT_LAYER);
         this.state = i0;
 
-        /// out out out ghandi asdf
+        /// TODO should these be here?
         Singletons.getView().removeWindowListener(waConcede);
         Singletons.getView().removeWindowListener(waLeaveBazaar);
         Singletons.getView().addWindowListener(waDefault);
-        ////////////////
 
         // Fire up new state
         switch (i0) {

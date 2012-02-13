@@ -274,7 +274,6 @@ public class ViewTabber extends JPanel {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     Singletons.getControl().getMatchControl().setCard(spell.getSpellAbility().getSourceCard());
-                    // ghandi does this work?
                 }
             });
 
