@@ -1099,7 +1099,6 @@ res/cardsfolder/b/broken_fall.txt svneol=native#text/plain
 res/cardsfolder/b/broken_visage.txt svneol=native#text/plain
 res/cardsfolder/b/brontotherium.txt -text
 res/cardsfolder/b/bronze_bombshell.txt -text
-res/cardsfolder/b/bronze_horse.txt -text svneol=unset#text/plain
 res/cardsfolder/b/brood_birthing.txt svneol=native#text/plain
 res/cardsfolder/b/brood_of_cockroaches.txt svneol=native#text/plain
 res/cardsfolder/b/brood_sliver.txt svneol=native#text/plain
