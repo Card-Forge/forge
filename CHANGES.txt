@@ -202,6 +202,34 @@ FControl refactored to reuse single instance of each UI state.
 - Previous commit left out the actual script for Tetravus and the change to AbilityFactoryCleanup.java
 - Removed superfluous method override.
 - Added the recent commit logs to changes.txt.
+- Added HIDDEN to ability of Neko-Te.
+- Added AICheckSVar and AISVarCompare parameters to replacement effects to help the AI in deciding wether or not to apply a replacement effect.
+- Added AICheckSVar hints to Obstinate Familiar.
+- Added the ability to get at Replaced-variables the same way as triggered-variables.
+- Let ReplacementEffects be secondary (same as for triggers).
+- CheckStyle.
+- Added a LQ pic URL and rarity to Obstinate Familiar.
+- Added Description parameters to replacement effects that lacked them. Also added Secondary parameter to those.
+- When an replacement effect is applied, a log message is now posted.
+- Added text.
+- Bugfix attempt #6: improved visibility of paintComponent from protected to public
+- Experimental FPanel debugging: only BG color algorithm enabled.
+- Experimental FPanel debugging: BG color, BG texture enabled.
+- Updated quest opponent icon download list.
+- Bugfix attempt #7 on FPanel: setClip restored.
+- Got too excited. Here's the correct version.
+- Small fix.
+- Return to working state, temporarily.
+- Lost count of bugfixes, but here's the next iteration.
+- Bugfix: bazaar crash if no quest data
+- FLabel: Performance update.
+- Performance changes will have to wait until UI issues are cleared up. Reverted.
+- Background-only version of FPanel for working purposes only.
+- Small fix for Energy Tap script
+- Added RememberTapped parameter to AF Tap.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -313,6 +341,14 @@ Ovinomancer
 Tundra Kavu
 Tetravus
 Stonehorn Dignitary
+Neko Te
+Custody Battle
+Ogre Marauder
+Toshiro Umezawa
+Spirit Flare
+Pitchstone Wall
+Transcendence
+Violent Eruption
 
 
 end
