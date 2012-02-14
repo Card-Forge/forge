@@ -1123,6 +1123,10 @@ public class AbilityFactoryPermanentState {
     private static void tapResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
+        final boolean remTapped = params.containsKey("RememberTapped");
+        if (remTapped) {
+            card.clearRemembered();
+        }
 
         ArrayList<Card> tgtCards;
         final Target tgt = sa.getTarget();
@@ -1134,6 +1138,9 @@ public class AbilityFactoryPermanentState {
 
         for (final Card tgtC : tgtCards) {
             if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+                if (tgtC.isUntapped() && (remTapped)) {
+                    card.addRemembered(tgtC);
+                }
                 tgtC.tap();
             }
         }
