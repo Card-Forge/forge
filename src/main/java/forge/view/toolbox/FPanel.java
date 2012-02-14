@@ -196,6 +196,11 @@ public class FPanel extends JPanel {
         final Graphics2D g2d = (Graphics2D) graphics0.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        //EXPERIMENTAL DEBUGGING
+        drawBackgroundColor(g2d);
+        ////////////////////////
+
+        /*
         // Draw background as required
         if (foregroundStretch && foregroundImage != null) {
             drawForegroundStretched(g2d);
@@ -218,7 +223,7 @@ public class FPanel extends JPanel {
 
         // Clear memory
         if (clip != null) { clip.reset(); }
-        g2d.dispose();
+        g2d.dispose();*/
     }
 
     //========== Special draw methods
