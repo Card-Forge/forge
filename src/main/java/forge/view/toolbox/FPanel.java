@@ -197,14 +197,6 @@ public class FPanel extends JPanel {
         final Graphics2D g2d = (Graphics2D) graphics0.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // TEMPORARY DEBUGGING
-        drawBackgroundColor(g2d);
-        //////////////////////
-
-        /*final Rectangle oldClipBounds = g2d.getClipBounds();
-        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
-        g2d.setClip(clip);
-
         // Draw background as required
         if (foregroundStretch && foregroundImage != null) {
             drawForegroundStretched(g2d);
@@ -226,8 +218,8 @@ public class FPanel extends JPanel {
         }
 
         // Clear memory
-        g2d.setClip(oldClipBounds);
-        g2d.dispose();*/
+        if (clip != null) { clip.reset(); }
+        g2d.dispose();
     }
 
     //========== Special draw methods
@@ -243,6 +235,10 @@ public class FPanel extends JPanel {
     }
 
     private void drawBackgroundTexture(final Graphics2D g2d0) {
+        Rectangle oldClipBounds = g2d0.getClipBounds();
+        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
+        g2d0.setClip(clip);
+
         this.tempX = 0;
         this.tempY = 0;
 
@@ -255,9 +251,14 @@ public class FPanel extends JPanel {
             this.tempY = 0;
         }
         this.tempX = 0;
+        g2d0.setClip(oldClipBounds);
     }
 
     private void drawForegroundScaled(final Graphics2D g2d0) {
+        Rectangle oldClipBounds = g2d0.getClipBounds();
+        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
+        g2d0.setClip(clip);
+
         // Scaling 1: First dimension larger than panel
         if (imgW >= pnlW) { // Image is wider than panel? Shrink to width.
             scaledW = pnlW;
@@ -286,10 +287,15 @@ public class FPanel extends JPanel {
         tempX = (int) ((pnlW - scaledW) / 2);
         tempY = (int) ((pnlH - scaledH) / 2);
         g2d0.drawImage(foregroundImage, tempX, tempY, scaledW + tempX, scaledH + tempY, 0, 0, imgW, imgH, null);
+        g2d0.setClip(oldClipBounds);
     }
 
     private void drawForegroundStretched(final Graphics2D g2d0) {
+        Rectangle oldClipBounds = g2d0.getClipBounds();
+        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
+        g2d0.setClip(clip);
         g2d0.drawImage(foregroundImage, 0, 0, pnlW, pnlH, 0, 0, imgW, imgH, null);
+        g2d0.setClip(oldClipBounds);
     }
 
     private void drawBorder(final Graphics2D g2d0) {
