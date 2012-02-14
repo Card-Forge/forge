@@ -156,6 +156,7 @@ http://www.cardforge.org/fpics/questAvatars/Sherlock%20Holmes.jpg
 http://www.cardforge.org/fpics/questAvatars/Shrek.jpg
 http://www.cardforge.org/fpics/questAvatars/Silver%20Samurai.jpg
 http://www.cardforge.org/fpics/questAvatars/Silver%20Surfer.jpg
+http://www.cardforge.org/fpics/questAvatars/Snow%20White.jpg
 http://www.cardforge.org/fpics/questAvatars/Spiderman.jpg
 http://www.cardforge.org/fpics/questAvatars/Spock.jpg
 http://www.cardforge.org/fpics/questAvatars/Starfire.jpg
