@@ -143,6 +143,8 @@ public class ViewStall extends JPanel {
      * and creates new panels if necessary.
      */
     public void updateStall() {
+        if (AllZone.getQuestData() == null) { return; }
+
         this.lblStats.setText(
                 "Credits: " + AllZone.getQuestData().getCredits()
                 + "         Life: " + AllZone.getQuestData().getLife());

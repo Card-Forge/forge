@@ -230,7 +230,6 @@ public class FPanel extends JPanel {
         else if (selectable)    { g2d0.setColor(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
         else                    { g2d0.setColor(getBackground()); }
 
-        // Parent must be drawn onto clipped object.
         g2d0.fillRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
     }
 
