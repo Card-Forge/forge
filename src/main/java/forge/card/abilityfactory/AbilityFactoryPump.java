@@ -517,24 +517,49 @@ public class AbilityFactoryPump {
             if (cards.size() == 0) {
                 return false;
             }
+            
+            final boolean givesKws = !this.keywords.get(0).equals("none");
+            String[] kwPump = { "none" };
+            if (givesKws) {
+                kwPump = this.keywords.toArray(new String[this.keywords.size()]);
+            }
+            final String[] keywords = kwPump;
 
             // when this happens we need to expand AI to consider if its ok for
             // everything?
             for (final Card card : cards) {
-                // TODO: if AI doesn't control Card and Pump is a Curse, than
-                // maybe use?
+                final Random r = MyRandom.getRandom();
+
+                // Don't add duplicate keywords
+                final boolean hKW = card.hasAnyKeyword(keywords);
+                if (givesKws && hKW) {
+                    return false;
+                }
+
+                if (this.abilityFactory.isCurse()) {
+                    if (card.getController().isComputer()) {
+                        return false;
+                    }
+                    if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                            && this.keywords.contains("Defender")) {
+                        return false;
+                    }
+                    if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
+                            && this.keywords.contains("HIDDEN CARDNAME can't block.")) {
+                        return false;
+                    }
+                    return (r.nextFloat() <= Math.pow(.6667, activations));
+                }
                 if (((card.getNetDefense() + defense) > 0) && (!card.hasAnyKeyword(this.keywords))) {
                     if (card.hasSickness() && this.keywords.contains("Haste")) {
                         return true;
                     } else if (card.hasSickness() ^ this.keywords.contains("Haste")) {
                         return false;
                     } else if (this.hostCard.equals(card)) {
-                        final Random r = MyRandom.getRandom();
                         if (r.nextFloat() <= Math.pow(.6667, activations)) {
                             return CardFactoryUtil.doesCreatureAttackAI(card) && !sa.getPayCosts().getTap();
                         }
                     } else {
-                        final Random r = MyRandom.getRandom();
                         return (r.nextFloat() <= Math.pow(.6667, activations));
                     }
                 }

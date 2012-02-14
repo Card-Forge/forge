@@ -929,7 +929,7 @@ public class AbilityFactoryAttach {
             return false;
         }
 
-        chance &= r.nextFloat() <= .75;
+        chance &= r.nextFloat() <= .9;
 
         return chance;
     }
