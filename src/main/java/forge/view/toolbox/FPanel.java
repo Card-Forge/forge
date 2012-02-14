@@ -240,9 +240,6 @@ public class FPanel extends JPanel {
     }
 
     private void drawBackgroundTexture(final Graphics2D g2d0) {
-        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
-        g2d0.setClip(clip);
-
         this.tempX = 0;
         this.tempY = 0;
 
@@ -289,8 +286,6 @@ public class FPanel extends JPanel {
     }
 
     private void drawForegroundStretched(final Graphics2D g2d0) {
-        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
-        g2d0.setClip(clip);
         g2d0.drawImage(foregroundImage, 0, 0, pnlW, pnlH, 0, 0, imgW, imgH, null);
     }
 
