@@ -482,6 +482,9 @@ public class AbilityFactorySacrifice {
             CardList sacList = null;
             for (final Player p : tgts) {
                 if (p.isComputer()) {
+                    if (params.containsKey("Optional") && sa.getActivatingPlayer().isHuman()) {
+                        continue;
+                    }
                     sacList = AbilityFactorySacrifice.sacrificeAI(p, amount, valid, sa, destroy);
                 } else {
                     sacList = AbilityFactorySacrifice.sacrificeHuman(p, amount, valid, sa, destroy,
