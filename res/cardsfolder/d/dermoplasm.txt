@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Flying
 K:Morph:2 U U
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDermoplasmChangeZone | TriggerZones$ Battlefield | TriggerDescription$ When Dermoplasm is turned face up, you may put a creature card with morph from your hand onto the battlefield face up. If you do, return CARDNAME to its owner's hand.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDermoplasmChangeZone | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may put a creature card with morph from your hand onto the battlefield face up. If you do, return CARDNAME to its owner's hand.
 SVar:TrigDermoplasmChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.withMorph | RememberChanged$ True | SubAbility$ DBDermoplasmBounce
 SVar:DBDermoplasmBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Creature.withMorph | ConditionCompare$ GE1 | SubAbility$ DBDermoplasmCleanup
 SVar:DBDermoplasmCleanup:DB$ Cleanup | ClearRemembered$ True
