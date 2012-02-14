@@ -216,9 +216,9 @@ public class FLabel extends JLabel {
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
-        public void mouseEntered(MouseEvent e) { hovered = true; repaint(FLabel.this.getX(), FLabel.this.getY(), FLabel.this.getWidth(), FLabel.this.getHeight()); }
+        public void mouseEntered(MouseEvent e) { hovered = true; repaint(); }
         @Override
-        public void mouseExited(MouseEvent e) { hovered = false; repaint(FLabel.this.getX(), FLabel.this.getY(), FLabel.this.getWidth(), FLabel.this.getHeight()); }
+        public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
         @Override
         public void mouseClicked(MouseEvent e) {
             if (cmdClick != null) { cmdClick.execute(); }
@@ -241,7 +241,7 @@ public class FLabel extends JLabel {
     // Must be public.
     public void setSelected(boolean b0) {
         this.selected = b0;
-        repaint(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        repaint();
     }
 
     /** Sets alpha if icon is in background.
@@ -364,7 +364,7 @@ public class FLabel extends JLabel {
             switch (fontStyle) {
                 case Font.BOLD:
                     setFont(FSkin.getBoldFont((int) (ref * fontScaleFactor)));
-                    repaint(FLabel.this.getX(), FLabel.this.getY(), FLabel.this.getWidth(), FLabel.this.getHeight());
+                    repaint();
                     break;
                 case Font.ITALIC:
                     setFont(FSkin.getItalicFont((int) (ref * fontScaleFactor)));
