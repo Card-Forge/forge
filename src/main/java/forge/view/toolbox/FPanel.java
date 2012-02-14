@@ -197,7 +197,11 @@ public class FPanel extends JPanel {
         final Graphics2D g2d = (Graphics2D) graphics0.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        final Rectangle oldClipBounds = g2d.getClipBounds();
+        // TEMPORARY DEBUGGING
+        drawBackgroundColor(g2d);
+        //////////////////////
+
+        /*final Rectangle oldClipBounds = g2d.getClipBounds();
         clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
         g2d.setClip(clip);
 
@@ -223,7 +227,7 @@ public class FPanel extends JPanel {
 
         // Clear memory
         g2d.setClip(oldClipBounds);
-        g2d.dispose();
+        g2d.dispose();*/
     }
 
     //========== Special draw methods
