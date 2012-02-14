@@ -197,7 +197,12 @@ public class FPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         //EXPERIMENTAL DEBUGGING
-        drawBackgroundColor(g2d);
+        if (this.backgroundTexture == null) {
+            drawBackgroundColor(g2d);
+        }
+        else {
+            drawBackgroundTexture(g2d);
+        }
         ////////////////////////
 
         /*
