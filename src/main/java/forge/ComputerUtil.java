@@ -1962,6 +1962,9 @@ public class ComputerUtil {
     }
 
     public static boolean isUsefulKeyword(final String keyword, Card card) {
+        if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
+            return false;
+        }
         if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
             if (card.getController().isComputer()
                     || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
@@ -1984,6 +1987,13 @@ public class ComputerUtil {
             if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
                     || !CombatUtil.canAttack(card)
                     || !CombatUtil.canBeBlocked(card)) {
+                return false;
+            }
+        } else if (keyword.endsWith("Haste")) {
+            if (!card.hasSickness() || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
+                    || !CombatUtil.canAttackNextTurn(card) || card.isTapped()
+                    || card.hasKeyword("CARDNAME can attack as though it had haste.")
+                    || AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         }

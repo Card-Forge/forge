@@ -260,16 +260,10 @@ public class AbilityFactoryPump {
      */
     private CardList getPumpCreatures(final int defense, final int attack, final SpellAbility sa) {
 
-        final boolean kHaste = this.keywords.contains("Haste");
         final boolean evasive = (this.keywords.contains("Flying") || this.keywords.contains("Horsemanship")
                 || this.keywords.contains("HIDDEN Unblockable") || this.keywords.contains("Fear") || this.keywords
                 .contains("Intimidate"));
-        final boolean kSize = !this.keywords.get(0).equals("none");
-        String[] kwPump = { "none" };
-        if (!this.keywords.get(0).equals("none")) {
-            kwPump = this.keywords.toArray(new String[this.keywords.size()]);
-        }
-        final String[] keywords = kwPump;
+        final ArrayList<String> keywords = this.keywords;
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         list = list.filter(new CardListFilter() {
@@ -283,17 +277,8 @@ public class AbilityFactoryPump {
                     return false;
                 }
 
-                // Don't add duplicate keywords
-                final boolean hKW = c.hasAnyKeyword(keywords);
-                if (kSize && hKW) {
+                if (!ComputerUtil.containsUsefulKeyword(keywords, c)) {
                     return false;
-                }
-
-                // give haste to creatures that could attack with it
-                if (c.hasSickness() && kHaste && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
-                        && CombatUtil.canAttackNextTurn(c) && c.isUntapped()
-                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
-                    return true;
                 }
 
                 // give evasive keywords to creatures that can attack

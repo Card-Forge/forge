@@ -7,7 +7,7 @@ Description=Mono G deck with Rogue Elephant and Harvest Wurm
 Icon=Hulk.jpg
 Deck Type=constructed
 [main]
-24 Forest
+24 Forest|M12
 4 Fallow Wurm
 4 Harvest Wurm
 4 Plant Elemental
