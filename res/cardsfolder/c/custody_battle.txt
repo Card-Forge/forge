@@ -13,4 +13,6 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/custody_battle.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/197.jpg
+Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, target opponent gains control of this creature unless you sacrifice a land."
 End
