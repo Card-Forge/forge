@@ -6132,6 +6132,7 @@ res/cardsfolder/o/opal_caryatid.txt svneol=native#text/plain
 res/cardsfolder/o/opal_champion.txt svneol=native#text/plain
 res/cardsfolder/o/opal_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/o/opal_guardian.txt svneol=native#text/plain
+res/cardsfolder/o/opal_titan.txt -text svneol=unset#text/plain
 res/cardsfolder/o/opalescence.txt svneol=native#text/plain
 res/cardsfolder/o/opaline_bracers.txt svneol=native#text/plain
 res/cardsfolder/o/open_the_vaults.txt svneol=native#text/plain
