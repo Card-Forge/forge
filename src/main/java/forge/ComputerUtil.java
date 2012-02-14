@@ -1951,4 +1951,42 @@ public class ComputerUtil {
         }
         return prevented;
     }
+
+    public static boolean containsUsefulKeyword(final ArrayList<String> keywords, Card card) {
+        for (final String keyword : keywords) {
+            if (isUsefulKeyword(keyword, card)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isUsefulKeyword(final String keyword, Card card) {
+        if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
+            if (card.getController().isComputer()
+                    || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                    || !CombatUtil.canAttack(card)
+                    || card.getNetCombatDamage() <= 0) {
+                return false;
+            }
+        } else if (keyword.contains("CARDNAME can't block.")) {
+            if (card.getController().isComputer()
+                    || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
+                    || !CombatUtil.canBlock(card)) {
+                return false;
+            }
+        } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
+            if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)
+                    || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
+            if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                    || !CombatUtil.canAttack(card)
+                    || !CombatUtil.canBeBlocked(card)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

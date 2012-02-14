@@ -380,28 +380,14 @@ public class AbilityFactoryPump {
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
         else if (!list.isEmpty()) {
-            String[] kwPump = { "none" };
-            if (!this.keywords.get(0).equals("none")) {
-                kwPump = this.keywords.toArray(new String[this.keywords.size()]);
-            }
-            final String[] keywords = kwPump;
+            final ArrayList<String> keywords = this.keywords;
             final boolean addsKeywords = this.keywords.size() > 0;
 
             if (addsKeywords) {
-                if (!this.containsCombatRelevantKeyword(this.keywords)
-                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)) {
-                    list.clear(); // this keyword is not combat relevenat
-                } else if (this.keywords.get(0).equals("HIDDEN CARDNAME attacks each turn if able.")
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
-                    list.clear();
-                }
-
                 list = list.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
-                        return !c.hasAnyKeyword(keywords); // don't add
-                                                           // duplicate
-                        // negative keywords
+                        return ComputerUtil.containsUsefulKeyword(keywords, c);
                     }
                 });
             }
@@ -517,7 +503,7 @@ public class AbilityFactoryPump {
             if (cards.size() == 0) {
                 return false;
             }
-            
+
             final boolean givesKws = !this.keywords.get(0).equals("none");
             String[] kwPump = { "none" };
             if (givesKws) {
@@ -540,14 +526,10 @@ public class AbilityFactoryPump {
                     if (card.getController().isComputer()) {
                         return false;
                     }
-                    if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
-                            && this.keywords.contains("Defender")) {
+                    if (!ComputerUtil.containsUsefulKeyword(this.keywords, card)) {
                         return false;
                     }
-                    if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
-                            && this.keywords.contains("HIDDEN CARDNAME can't block.")) {
-                        return false;
-                    }
+
                     return (r.nextFloat() <= Math.pow(.6667, activations));
                 }
                 if (((card.getNetDefense() + defense) > 0) && (!card.hasAnyKeyword(this.keywords))) {

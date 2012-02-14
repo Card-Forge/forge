@@ -713,12 +713,12 @@ public class AbilityFactoryAttach {
         if (!keywords.isEmpty()) {
             // Don't give Can't Attack or Defender to cards that can't do these
             // things to begin with
-            if (keywords.contains("CARDNAME can't attack") || keywords.contains("Defender")
+            if (keywords.contains("CARDNAME can't attack.") || keywords.contains("Defender")
                     || keywords.contains("CARDNAME attacks each turn if able.")) {
                 prefList = prefList.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
-                        return !(c.hasKeyword("CARDNAME can't attack") || c.hasKeyword("Defender"));
+                        return !(c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("Defender"));
                     }
                 });
             }
@@ -897,11 +897,10 @@ public class AbilityFactoryAttach {
 
         if (abCost != null) {
             // No Aura spells have Additional Costs
-
         }
 
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= .6667;
+        boolean chance = r.nextFloat() <= .9;
 
         // Attach spells always have a target
         final Target tgt = sa.getTarget();
@@ -928,8 +927,6 @@ public class AbilityFactoryAttach {
                 && !"Curse".equals(af.getMapParams().get("AILogic"))) {
             return false;
         }
-
-        chance &= r.nextFloat() <= .9;
 
         return chance;
     }
