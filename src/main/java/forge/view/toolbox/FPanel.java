@@ -222,7 +222,6 @@ public class FPanel extends JPanel {
         }
 
         // Clear memory
-        if (clip != null) { clip.reset(); }
         g2d.setClip(oldClipBounds);
         g2d.dispose();
     }
