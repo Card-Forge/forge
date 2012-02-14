@@ -6483,6 +6483,7 @@ res/cardsfolder/p/pit_scorpion.txt svneol=native#text/plain
 res/cardsfolder/p/pit_spawn.txt svneol=native#text/plain
 res/cardsfolder/p/pit_trap.txt svneol=native#text/plain
 res/cardsfolder/p/pitchburn_devils.txt -text
+res/cardsfolder/p/pitchstone_wall.txt -text
 res/cardsfolder/p/pitfall_trap.txt svneol=native#text/plain
 res/cardsfolder/p/pith_driller.txt svneol=native#text/plain
 res/cardsfolder/p/pithing_needle.txt svneol=native#text/plain
@@ -9248,6 +9249,7 @@ res/cardsfolder/t/tranquil_grove.txt svneol=native#text/plain
 res/cardsfolder/t/tranquil_path.txt svneol=native#text/plain
 res/cardsfolder/t/tranquil_thicket.txt svneol=native#text/plain
 res/cardsfolder/t/tranquility.txt svneol=native#text/plain
+res/cardsfolder/t/transcendence.txt -text
 res/cardsfolder/t/transcendent_master.txt svneol=native#text/plain
 res/cardsfolder/t/transguild_courier.txt svneol=native#text/plain
 res/cardsfolder/t/transluminant.txt svneol=native#text/plain
@@ -9682,6 +9684,7 @@ res/cardsfolder/v/vine_trellis.txt svneol=native#text/plain
 res/cardsfolder/v/vinelasher_kudzu.txt svneol=native#text/plain
 res/cardsfolder/v/vines_of_vastwood.txt svneol=native#text/plain
 res/cardsfolder/v/vintara_snapper.txt svneol=native#text/plain
+res/cardsfolder/v/violent_eruption.txt -text
 res/cardsfolder/v/violent_outburst.txt svneol=native#text/plain
 res/cardsfolder/v/violent_ultimatum.txt svneol=native#text/plain
 res/cardsfolder/v/violet_pall.txt svneol=native#text/plain
