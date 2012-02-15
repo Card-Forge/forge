@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
+import forge.control.FControl;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.home.ViewSettings;
@@ -217,10 +218,8 @@ public class ControlSettings {
 
             @Override
             protected void done() {
-                view.getLblTitleSkin().setIcon(null);
-                view.getLblTitleSkin().setText("Choose Skin");
-
-                Singletons.getControl().changeState(0);
+                Singletons.getView().instantiateCachedUIStates();
+                Singletons.getControl().changeState(FControl.HOME_SCREEN);
                 Singletons.getView().getHomeView().showSettingsMenu();
             }
         };

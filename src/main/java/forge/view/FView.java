@@ -101,10 +101,7 @@ public final class FView extends JFrame {
                 FView.this.lpnContent.add(overlay, JLayeredPane.MODAL_LAYER);
 
                 // Instantiate all different state screens
-                FView.this.home = new ViewHomeUI();
-                FView.this.match = new ViewMatchUI();
-                FView.this.editor = new ViewEditorUI();
-                FView.this.bazaar = new ViewBazaarUI();
+                instantiateCachedUIStates();
 
                 // All is ready to go - fire up home screen and discard splash frame.
                 Singletons.getControl().changeState(FControl.HOME_SCREEN);
@@ -177,5 +174,13 @@ public final class FView extends JFrame {
                     + "may only be called while the bazaar UI is showing.");
         }
         return FView.this.bazaar;
+    }
+
+    /** Like it says. */
+    public void instantiateCachedUIStates() {
+        FView.this.home = new ViewHomeUI();
+        FView.this.match = new ViewMatchUI();
+        FView.this.editor = new ViewEditorUI();
+        FView.this.bazaar = new ViewBazaarUI();
     }
 }
