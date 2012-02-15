@@ -241,6 +241,13 @@ public class ComputerUtilAttack {
             }
         }
 
+        // re-add creatures with vigilance
+        for (final Card c : attackers) {
+            if (c.hasKeyword("Vigilance")) {
+                notNeededAsBlockers.add(c);
+            }
+        }
+
         if (blockersNeeded == list.size()) {
             // Human will win unless everything is kept back to block
             return notNeededAsBlockers;
@@ -284,14 +291,6 @@ public class ComputerUtilAttack {
                 }
             }
         }
-
-        // re-add creatures with vigilance
-        for (final Card c : attackers) {
-            if (c.hasKeyword("Vigilance")) {
-                notNeededAsBlockers.add(c);
-            }
-        }
-
         return notNeededAsBlockers;
     }
 
