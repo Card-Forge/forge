@@ -19,6 +19,7 @@ package forge.view.toolbox;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -206,15 +207,21 @@ public class FButton extends JButton {
             FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
             FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
             FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
-            repaint();
+            repaintOnlyThisButton();
         }
         else {
             FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
             FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
             FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
-            repaint();
+            repaintOnlyThisButton();
         }
         this.toggle = b0;
+    }
+
+    /** Prevent button from repainting the whole screen. */
+    public void repaintOnlyThisButton() {
+        final Dimension d = FButton.this.getSize();
+        repaint(0, 0, d.width, d.height);
     }
 
     /*
