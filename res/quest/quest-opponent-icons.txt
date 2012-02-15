@@ -80,6 +80,7 @@ http://www.cardforge.org/fpics/questAvatars/Gold%20Finger.jpg
 http://www.cardforge.org/fpics/questAvatars/Grampa%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Green%20Arrow.jpg
 http://www.cardforge.org/fpics/questAvatars/Green%20Lantern.jpg
+http://www.cardforge.org/fpics/questAvatars/Grumpy.jpg
 http://www.cardforge.org/fpics/questAvatars/Hagrid.jpg
 http://www.cardforge.org/fpics/questAvatars/Han%20Solo.jpg
 http://www.cardforge.org/fpics/questAvatars/Hans.jpg
@@ -91,6 +92,7 @@ http://www.cardforge.org/fpics/questAvatars/Higgins.jpg
 http://www.cardforge.org/fpics/questAvatars/Hobbes.jpg
 http://www.cardforge.org/fpics/questAvatars/Homer%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/House%20Party.jpg
+http://www.cardforge.org/fpics/questAvatars/Hulk.jpg
 http://www.cardforge.org/fpics/questAvatars/Iceman.jpg
 http://www.cardforge.org/fpics/questAvatars/Indiana%20Jones.jpg
 http://www.cardforge.org/fpics/questAvatars/Jabba%20the%20Hut.jpg
@@ -98,6 +100,7 @@ http://www.cardforge.org/fpics/questAvatars/Jack%20Sparrow.jpg
 http://www.cardforge.org/fpics/questAvatars/James%20Bond.jpg
 http://www.cardforge.org/fpics/questAvatars/James%20T%20Kirk.jpg
 http://www.cardforge.org/fpics/questAvatars/Joe%20Kidd.jpg
+http://www.cardforge.org/fpics/questAvatars/Joker.jpg
 http://www.cardforge.org/fpics/questAvatars/Kang.jpg
 http://www.cardforge.org/fpics/questAvatars/King%20Arthur.jpg
 http://www.cardforge.org/fpics/questAvatars/King%20Edward.jpg
@@ -123,6 +126,7 @@ http://www.cardforge.org/fpics/questAvatars/Newton.jpg
 http://www.cardforge.org/fpics/questAvatars/Oberon.jpg
 http://www.cardforge.org/fpics/questAvatars/Odin.jpg
 http://www.cardforge.org/fpics/questAvatars/Optimus%20Prime.jpg
+http://www.cardforge.org/fpics/questAvatars/Owlman.jpg
 http://www.cardforge.org/fpics/questAvatars/Pebbles%20Flintstone.jpg
 http://www.cardforge.org/fpics/questAvatars/Picard.jpg
 http://www.cardforge.org/fpics/questAvatars/Pinky%20and%20the%20Brain.jpg
@@ -135,7 +139,9 @@ http://www.cardforge.org/fpics/questAvatars/R2-D2.jpg
 http://www.cardforge.org/fpics/questAvatars/Radagast.jpg
 http://www.cardforge.org/fpics/questAvatars/Radiant.jpg
 http://www.cardforge.org/fpics/questAvatars/Radioactive%20Man.jpg
+http://www.cardforge.org/fpics/questAvatars/Raven.jpg
 http://www.cardforge.org/fpics/questAvatars/Ratbert.jpg
+http://www.cardforge.org/fpics/questAvatars/Ras%20AL%20Ghul.jpg
 http://www.cardforge.org/fpics/questAvatars/Reactor%20Meltdown.jpg
 http://www.cardforge.org/fpics/questAvatars/Redwall.jpg
 http://www.cardforge.org/fpics/questAvatars/Repressed%20Magic.jpg
