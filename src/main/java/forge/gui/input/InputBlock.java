@@ -83,7 +83,7 @@ public class InputBlock extends Input {
             sb.append("To cancel a block right-click on your blocker");
             Singletons.getControl().getMatchControl().showMessage(sb.toString());
         }
-        
+
         CombatUtil.showCombat();
     }
 
@@ -105,13 +105,12 @@ public class InputBlock extends Input {
         if (CardUtil.toList(AllZone.getCombat().getAttackers()).contains(card)) {
             this.currentAttacker = card;
         } else if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer()) && card.isCreature()
-                && CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())) {
-            if ((this.currentAttacker != null) && (!this.allBlocking.contains(card))) {
+                && CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())
+                && this.currentAttacker != null && !this.allBlocking.contains(card)
+                && card.getController().isHuman()) {
                 this.allBlocking.add(card);
                 AllZone.getCombat().addBlocker(this.currentAttacker, card);
-            }
-        }
-        else {
+        } else {
             Singletons.getControl().getMatchControl().getMessageControl().remind();
         }
         this.showMessage();
