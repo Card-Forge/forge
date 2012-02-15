@@ -184,37 +184,39 @@ public class ControlSealed {
                     + ">> does not equal any of the sealedTypes.");
         }
 
-        final ItemPool<CardPrinted> sDeck = sd.getCardpool();
+        if (!sd.getCardpool().isEmpty()) {
+            final ItemPool<CardPrinted> sDeck = sd.getCardpool();
 
-        deck.getSideboard().addAll(sDeck);
+            deck.getSideboard().addAll(sDeck);
 
-        for (final String element : Constant.Color.BASIC_LANDS) {
-            for (int j = 0; j < 18; j++) {
-                deck.getSideboard().add(element, sd.getLandSetCode()[0]);
+            for (final String element : Constant.Color.BASIC_LANDS) {
+                for (int j = 0; j < 18; j++) {
+                    deck.getSideboard().add(element, sd.getLandSetCode()[0]);
+                }
             }
-        }
 
-        final String sDeckName = JOptionPane.showInputDialog(null,
-                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
-                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
-                JOptionPane.QUESTION_MESSAGE);
+            final String sDeckName = JOptionPane.showInputDialog(null,
+                    ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
+                    ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
+                    JOptionPane.QUESTION_MESSAGE);
 
-        if (sDeckName != null) {
-            deck.setName(sDeckName);
-            deck.setPlayerType(PlayerType.HUMAN);
+            if (sDeckName != null) {
+                deck.setName(sDeckName);
+                deck.setPlayerType(PlayerType.HUMAN);
 
-            // Bug here: if human adds no cards to the deck, then closes the deck
-            // editor, an AI deck is still created and linked to the (now nonexistent)
-            // human deck's name.  The solution probably lies in the question,
-            // why is this code not in SealedDeck to begin with? Doublestrike 19-12-11
+                // Bug here: if human adds no cards to the deck, then closes the deck
+                // editor, an AI deck is still created and linked to the (now nonexistent)
+                // human deck's name.  The solution probably lies in the question,
+                // why is this code not in SealedDeck to begin with? Doublestrike 19-12-11
 
-            Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
-            aiDeck.setName("AI_" + sDeckName);
-            aiDeck.setPlayerType(PlayerType.COMPUTER);
-            deckManager.addDeck(aiDeck);
-            DeckIO.writeDeck(aiDeck, DeckIO.makeFileName(aiDeck));
+                Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
+                aiDeck.setName("AI_" + sDeckName);
+                aiDeck.setPlayerType(PlayerType.COMPUTER);
+                deckManager.addDeck(aiDeck);
+                DeckIO.writeDeck(aiDeck, DeckIO.makeFileName(aiDeck));
 
-            view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, deck);
+                view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, deck);
+            }
         }
     }
 
