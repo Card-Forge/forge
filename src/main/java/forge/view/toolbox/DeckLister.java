@@ -1,6 +1,7 @@
 package forge.view.toolbox;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -130,6 +131,12 @@ public class DeckLister extends JPanel {
             }
         }
         return selectedDeck;
+    }
+
+    /** Prevent panel from repainting the whole screen. */
+    public void repaintOnlyThisPanel() {
+        final Dimension d = DeckLister.this.getSize();
+        repaint(0, 0, d.width, d.height);
     }
 
     private class DeleteButton extends JButton {
@@ -411,7 +418,7 @@ public class DeckLister extends JPanel {
         }
 
         this.remove(r0);
-        this.repaint();
+        this.repaintOnlyThisPanel();
         this.revalidate();
 
         if (cmdDelete != null) { cmdDelete.execute(); }

@@ -2,6 +2,7 @@ package forge.view.toolbox;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -31,12 +32,12 @@ public class SubTab extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 hovering = true;
-                repaint();
+                repaintOnlyThisPanel();
             }
             @Override
             public void mouseExited(MouseEvent e) {
                 hovering = false;
-                repaint();
+                repaintOnlyThisPanel();
             }
         };
         this.removeMouseListener(madHover);
@@ -51,12 +52,18 @@ public class SubTab extends JPanel {
     /** @param b0 &emsp; {@link java.lang.Boolean} */
     public void setEnabled(boolean b0) {
         this.enabled = b0;
-        this.repaint();
+        this.repaintOnlyThisPanel();
     }
 
     /** @return {@link java.lang.Boolean} */
     public boolean isEnabled() {
         return this.enabled;
+    }
+
+    /** Prevent panel from repainting the whole screen. */
+    public void repaintOnlyThisPanel() {
+        final Dimension d = SubTab.this.getSize();
+        repaint(0, 0, d.width, d.height);
     }
 
     @Override
