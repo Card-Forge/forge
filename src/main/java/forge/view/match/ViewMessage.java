@@ -154,7 +154,7 @@ public class ViewMessage extends FPanel {
                     remindIsRunning = false;
                     timer1.stop();
                 }
-                repaintOnlyThisPanel();
+                repaint();
             }
         };
 
