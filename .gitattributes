@@ -4981,6 +4981,7 @@ res/cardsfolder/l/life_matrix.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lifeblood.txt svneol=native#text/plain
 res/cardsfolder/l/lifeforce.txt svneol=native#text/plain
 res/cardsfolder/l/lifegift.txt svneol=native#text/plain
+res/cardsfolder/l/lifeline.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lifelink.txt svneol=native#text/plain
 res/cardsfolder/l/lifes_finale.txt svneol=native#text/plain
 res/cardsfolder/l/lifesmith.txt svneol=native#text/plain
