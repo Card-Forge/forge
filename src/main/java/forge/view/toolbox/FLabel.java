@@ -2,6 +2,7 @@ package forge.view.toolbox;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -216,9 +217,14 @@ public class FLabel extends JLabel {
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
-        public void mouseEntered(MouseEvent e) { hovered = true; repaint(); }
+        public void mouseEntered(MouseEvent e) {
+            hovered = true; repaintOnlyThisLabel();
+        }
+
         @Override
-        public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
+        public void mouseExited(MouseEvent e) {
+            hovered = false; repaintOnlyThisLabel();
+        }
         @Override
         public void mouseClicked(MouseEvent e) {
             if (cmdClick != null) { cmdClick.execute(); }
@@ -241,7 +247,7 @@ public class FLabel extends JLabel {
     // Must be public.
     public void setSelected(boolean b0) {
         this.selected = b0;
-        repaint();
+        repaintOnlyThisLabel();
     }
 
     /** Sets alpha if icon is in background.
@@ -315,8 +321,14 @@ public class FLabel extends JLabel {
         super.setOpaque(false);
     }
 
+    /** Major performance kicker - won't repaint whole screen! */
+    public void repaintOnlyThisLabel() {
+        final Dimension d = FLabel.this.getSize();
+        repaint(0, 0, d.width, d.height);
+    }
+
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         g2d = (Graphics2D) g.create();
         w = getWidth();
         h = getHeight();
@@ -364,7 +376,6 @@ public class FLabel extends JLabel {
             switch (fontStyle) {
                 case Font.BOLD:
                     setFont(FSkin.getBoldFont((int) (ref * fontScaleFactor)));
-                    repaint();
                     break;
                 case Font.ITALIC:
                     setFont(FSkin.getItalicFont((int) (ref * fontScaleFactor)));
