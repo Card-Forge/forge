@@ -2202,6 +2202,7 @@ res/cardsfolder/d/dismal_failure.txt svneol=native#text/plain
 res/cardsfolder/d/dismantling_blow.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dismember.txt svneol=native#text/plain
 res/cardsfolder/d/dismiss.txt svneol=native#text/plain
+res/cardsfolder/d/disorder.txt -text svneol=unset#text/plain
 res/cardsfolder/d/disorient.txt svneol=native#text/plain
 res/cardsfolder/d/dispatch.txt svneol=native#text/plain
 res/cardsfolder/d/dispel.txt svneol=native#text/plain
