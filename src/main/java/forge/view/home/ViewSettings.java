@@ -250,7 +250,7 @@ public class ViewSettings extends JPanel {
 
         avatarHuman = lstAvatars.get(humanIndex);
         avatarHuman.setOwner(PlayerType.HUMAN);
-        avatarHuman.repaint();
+        avatarHuman.repaintOnlyThisLabel();
 
         if (humanIndex == aiIndex || aiIndex >= lstAvatars.size()) {
             aiIndex = humanIndex;
@@ -261,18 +261,18 @@ public class ViewSettings extends JPanel {
 
         avatarAI = lstAvatars.get(aiIndex);
         avatarAI.setOwner(PlayerType.COMPUTER);
-        avatarAI.repaint();
+        avatarAI.repaintOnlyThisLabel();
     }
 
     /** Surprisingly complicated - be careful when modifying! */
     private void cycleOwner(final AvatarLabel lbl0) {
         if (lbl0.getOwner() == null) {
             lbl0.setOwner(PlayerType.HUMAN);
-            lbl0.repaint();
+            lbl0.repaintOnlyThisLabel();
 
             if (avatarHuman != null) {
                 avatarHuman.setOwner(null);
-                avatarHuman.repaint();
+                avatarHuman.repaintOnlyThisLabel();
             }
 
             avatarHuman = lbl0;
@@ -280,41 +280,41 @@ public class ViewSettings extends JPanel {
         else if (lbl0.getOwner() == PlayerType.HUMAN) {
             // Re-assign avatar to human
             avatarHuman.setOwner(null);
-            avatarHuman.repaint();
+            avatarHuman.repaintOnlyThisLabel();
 
             for (int i = 0; i < lstAvatars.size(); i++) {
                 if (lstAvatars.get(i) != lbl0) {
                     avatarHuman = lstAvatars.get(i);
                     avatarHuman.setOwner(PlayerType.HUMAN);
-                    avatarHuman.repaint();
+                    avatarHuman.repaintOnlyThisLabel();
                     break;
                 }
             }
 
             // Assign computer
             lbl0.setOwner(PlayerType.COMPUTER);
-            lbl0.repaint();
+            lbl0.repaintOnlyThisLabel();
 
             if (avatarAI != null) {
                 avatarAI.setOwner(null);
-                avatarAI.repaint();
+                avatarAI.repaintOnlyThisLabel();
             }
 
             avatarAI = lbl0;
         }
         else {
             lbl0.setOwner(null);
-            lbl0.repaint();
+            lbl0.repaintOnlyThisLabel();
 
             // Re-assign avatar to computer
             avatarAI.setOwner(null);
-            avatarAI.repaint();
+            avatarAI.repaintOnlyThisLabel();
 
             for (int i = 0; i < lstAvatars.size(); i++) {
                 if (lstAvatars.get(i) != avatarHuman) {
                     avatarAI = lstAvatars.get(i);
                     avatarAI.setOwner(PlayerType.COMPUTER);
-                    avatarAI.repaint();
+                    avatarAI.repaintOnlyThisLabel();
                     break;
                 }
             }
@@ -385,13 +385,13 @@ public class ViewSettings extends JPanel {
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(final MouseEvent evt) { hovered = true; repaint(); }
+                public void mouseEntered(final MouseEvent evt) { hovered = true; repaintOnlyThisLabel(); }
 
                 @Override
-                public void mouseExited(final MouseEvent evt) { hovered = false; repaint(); }
+                public void mouseExited(final MouseEvent evt) { hovered = false; repaintOnlyThisLabel(); }
 
                 @Override
-                public void mouseClicked(final MouseEvent evt) { cycleOwner(AvatarLabel.this); repaint(); }
+                public void mouseClicked(final MouseEvent evt) { cycleOwner(AvatarLabel.this); repaintOnlyThisLabel(); }
             });
         }
 
@@ -405,6 +405,11 @@ public class ViewSettings extends JPanel {
 
         public int getIndex() {
             return this.index;
+        }
+
+        public void repaintOnlyThisLabel() {
+            final Dimension d = AvatarLabel.this.getSize();
+            repaint(0, 0, d.width, d.height);
         }
 
         protected void paintComponent(final Graphics graphics0) {
