@@ -18,6 +18,7 @@
 package forge.view.match;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
@@ -39,9 +40,9 @@ import net.miginfocom.swing.MigLayout;
 import arcane.ui.PlayArea;
 import forge.AllZone;
 import forge.Constant;
-import forge.Singletons;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
@@ -581,13 +582,13 @@ public class ViewField extends FPanel {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     PhaseLabel.this.hover = true;
-                    PhaseLabel.this.repaint();
+                    PhaseLabel.this.repaintOnlyThisLabel();
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
                     PhaseLabel.this.hover = false;
-                    PhaseLabel.this.repaint();
+                    PhaseLabel.this.repaintOnlyThisLabel();
                 }
             });
         }
@@ -629,6 +630,12 @@ public class ViewField extends FPanel {
          */
         public boolean getActive() {
             return this.active;
+        }
+
+        /** Prevent label from repainting the whole screen. */
+        public void repaintOnlyThisLabel() {
+            final Dimension d = PhaseLabel.this.getSize();
+            repaint(0, 0, d.width, d.height);
         }
 
         /*
