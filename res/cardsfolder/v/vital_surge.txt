@@ -1,7 +1,7 @@
 Name:Vital Surge
 ManaCost:1 G
 Types:Instant Arcane
-Text:(Note: Splice into Arcane is not functional)
+Text:(Note: Splice into Arcane is not functional)\r\n
 A:SP$ GainLife | Cost$ 1 G | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vital_surge.jpg
