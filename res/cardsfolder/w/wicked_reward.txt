@@ -1,6 +1,6 @@
 Name:Wicked Reward
 ManaCost:1 B
-Types:Sorcery
+Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ 1 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature. | NumAtt$ +4 | NumDef$ +2 | SpellDescription$ Target creature gets +4/+2 until end of turn.
 SVar:RemAIDeck:True
