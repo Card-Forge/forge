@@ -2720,7 +2720,16 @@ public class CardFactoryUtil {
         // Manapool
         if (l[0].contains("ManaPool")) {
             final String color = l[0].split(":")[1];
+            if (color.equals("All")) {
+                return (AllZone.getHumanPlayer().getManaPool().getAmountOfColor(Constant.Color.WHITE)
+                + AllZone.getHumanPlayer().getManaPool().getAmountOfColor(Constant.Color.BLUE)
+                + AllZone.getHumanPlayer().getManaPool().getAmountOfColor(Constant.Color.BLACK)
+                + AllZone.getHumanPlayer().getManaPool().getAmountOfColor(Constant.Color.RED)
+                + AllZone.getHumanPlayer().getManaPool().getAmountOfColor(Constant.Color.GREEN)
+                + AllZone.getHumanPlayer().getManaPool().getAmountOfColor(Constant.Color.COLORLESS));
+            } else {
             return AllZone.getHumanPlayer().getManaPool().getAmountOfColor(color);
+            }
         }
 
         // count valid cards on the battlefield
