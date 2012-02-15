@@ -4347,6 +4347,7 @@ res/cardsfolder/i/inside_out.txt svneol=native#text/plain
 res/cardsfolder/i/insidious_bookworms.txt svneol=native#text/plain
 res/cardsfolder/i/insidious_dreams.txt -text
 res/cardsfolder/i/insight.txt svneol=native#text/plain
+res/cardsfolder/i/insist.txt -text
 res/cardsfolder/i/insolence.txt svneol=native#text/plain
 res/cardsfolder/i/inspiration.txt svneol=native#text/plain
 res/cardsfolder/i/inspired_charge.txt svneol=native#text/plain
@@ -6222,6 +6223,7 @@ res/cardsfolder/o/overgrown_estate.txt svneol=native#text/plain
 res/cardsfolder/o/overgrown_tomb.txt svneol=native#text/plain
 res/cardsfolder/o/overgrowth.txt svneol=native#text/plain
 res/cardsfolder/o/overload.txt -text svneol=unset#text/plain
+res/cardsfolder/o/overmaster.txt -text
 res/cardsfolder/o/override.txt svneol=native#text/plain
 res/cardsfolder/o/overrule.txt svneol=native#text/plain
 res/cardsfolder/o/overrun.txt svneol=native#text/plain
