@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul 2
+Title=Ras Al Ghul
+Difficulty=medium
+Description=BR Curse deck
+Icon=Ras Al Ghul.jpg
+Deck Type=constructed
+[main]
+10 Swamp|ISD
+3 Mountain|ISD
+2 Akoum Refuge
+2 Blackcleave Cliffs
+2 Dragonskull Summit
+2 Bloodstained Mire
+1 Tainted Peak
+1 Urborg, Tomb of Yawgmoth
+2 Bloodstone Cameo
+4 Curse of Thirst
+3 Curse of Misfortunes
+4 Curse of Bloodletting
+4 Curse of Death's Hold
+4 Curse of the Pierced Heart
+1 Curse of Oblivion
+1 Curse of the Nightly Hunt
+3 Bitterheart Witch
+1 Murderous Redcap
+1 Ogre Sentry
+1 Wall of Bone
+1 Wall of Diffusion
+1 Wall of Earth
+1 Wall of Putrid Flesh
+1 Wall of Razors
+1 Terminate
+1 Eyeblight's Ending
+1 Ghostly Visit
+1 Hand of Death
+[sideboard]
