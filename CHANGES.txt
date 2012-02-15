@@ -230,6 +230,33 @@ FControl refactored to reuse single instance of each UI state.
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt.
+- The AI will now play auras more often.
+- Improved the AI of AF Pump with Defined parameter.
+- Added two new AI functions containsUsefulKeyword and isUsefulKeyword, to be used by AF Pump and Attach. WIP.
+- Limited the failing of the AI when faced with Ogre Marauder.
+- Removed Toshiro Umezawa. It can not be scripted right now.
+- Removed Bronze Horse. The Target$ parameter does not require it to be specifically targeted.
+- Fixed Cloven Casting.
+- More work on isUsefulKeyword.
+- Added the precon Bant on the March.
+- Text fix.
+- Updated quest avatar download list
+- Performance update restored on FLabel.
+- Added support for Count$ManaPool:Any
+- Fixed setting submenu scroll bug.
+- Fixed game count reset bug.
+- Fixed Insist and Overmaster.
+- Fixed Apocalypse Hydra.
+- Inline skin selector repaired.
+- Performance upgrade on avatar labels.
+- Performance update to ViewField.
+- Performance update to FButton.
+- Fixed "no custom seals -> crash" bug.
+- More performance.
+- Added the deck: Ras Al Ghul 2.
+- Fixed being able to block with your opponents creatures.
+- Quick fix for compile error in r14071.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -344,11 +371,18 @@ Stonehorn Dignitary
 Neko Te
 Custody Battle
 Ogre Marauder
-Toshiro Umezawa
 Spirit Flare
 Pitchstone Wall
 Transcendence
 Violent Eruption
+Elder Spawn
+Dark Supplicant
+Weaver of Lies
+Dermoplasm
+Opal Titan
+Insist
+Overmaster
+Glissa Sunseeker
 
 
 end
