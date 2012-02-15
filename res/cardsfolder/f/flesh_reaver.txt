@@ -1,0 +1,12 @@
+Name:Flesh Reaver
+ManaCost:1 B
+Types:Creature Horror
+Text:no text
+PT:4/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature,Opponent | Execute$ TrigFleshReaverDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a creature or opponent, CARDNAME deals that much damage to you.
+SVar:TrigFleshReaverDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ FleshReaverX | Defined$ You
+SVar:FleshReaverX:TriggerCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_reaver.jpg
+End

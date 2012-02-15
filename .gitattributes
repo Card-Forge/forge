@@ -3069,6 +3069,7 @@ res/cardsfolder/f/fleeting_image.txt svneol=native#text/plain
 res/cardsfolder/f/flensermite.txt svneol=native#text/plain
 res/cardsfolder/f/flesh_allergy.txt svneol=native#text/plain
 res/cardsfolder/f/flesh_eater_imp.txt svneol=native#text/plain
+res/cardsfolder/f/flesh_reaver.txt -text svneol=unset#text/plain
 res/cardsfolder/f/fleshbag_marauder.txt svneol=native#text/plain
 res/cardsfolder/f/fleshformer.txt svneol=native#text/plain
 res/cardsfolder/f/fleshgrafter.txt svneol=native#text/plain
