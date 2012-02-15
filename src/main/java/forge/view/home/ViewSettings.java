@@ -123,7 +123,6 @@ public class ViewSettings extends JPanel {
 
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
         this.add(pnlTabber, "w 95%!, h 20px!, gap 2.5% 0 0 0");
-        this.add(pnlAvatars, "w 95%!, h 92%!, gap 2.5% 0 20px 0");
         this.add(scrContent, "w 95%!, h 92%!, gap 2.5% 0 20px 0");
 
         // After all components are instantiated, fire up control.
@@ -601,13 +600,13 @@ public class ViewSettings extends JPanel {
 
     /** */
     public final void showPrefsTab() {
-        this.scrContent.getViewport().setView(pnlPrefs);
+        this.scrContent.setViewportView(pnlPrefs);
         control.updateTabber(tabPrefs);
     }
 
     /** */
     public final void showAvatarsTab() {
-        this.scrContent.getViewport().setView(pnlAvatars);
+        this.scrContent.setViewportView(pnlAvatars);
         control.updateTabber(tabAvatars);
     }
 }
