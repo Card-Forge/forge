@@ -40,6 +40,8 @@ public class ControlSettings {
      */
     public ControlSettings(ViewSettings v0) {
         this.view = v0;
+        view.updateSkinNames();
+
         addListeners();
         prefs = Singletons.getModel().getPreferences();
 

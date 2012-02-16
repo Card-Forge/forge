@@ -353,7 +353,7 @@ public enum FSkin {
         GuiUtils.checkEDT("FSkin$constructor", false);
 
         // Non-default (preferred) skin name and dir.
-        FSkin.preferredName = skinName;
+        FSkin.preferredName = skinName.toLowerCase().replace(' ', '_');
         FSkin.preferredDir = FILE_SKINS_DIR + preferredName + "/";
 
         if (FSkin.icons != null) { FSkin.icons.clear(); }
@@ -763,6 +763,8 @@ public enum FSkin {
         h0 = tempCoords[3];
 
         BufferedImage img = testPreferredSprite(s0);
+
+        if (s0 == Backgrounds.BG_TEXTURE) { System.out.println("asdf found it"); }
         FSkin.icons.put(s0, new ImageIcon(img.getSubimage(x0, y0, w0, h0)));
     }
 

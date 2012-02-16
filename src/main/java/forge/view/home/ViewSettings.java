@@ -27,6 +27,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import forge.PlayerType;
 import forge.Singletons;
@@ -130,6 +131,20 @@ public class ViewSettings extends JPanel {
         showPrefsTab();
     }
 
+    /** */
+    public void updateSkinNames() {
+        String[] uglyNames = FSkin.getSkins().toArray(new String[0]);
+        String[] prettyNames = new String[uglyNames.length];
+
+        for (int i = 0; i < uglyNames.length; i++) {
+            prettyNames[i] = WordUtils.capitalize(uglyNames[i].replace('_', ' '));
+        }
+
+        lstChooseSkin.setListData(prettyNames);
+        lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getPref(FPref.UI_SKIN), true);
+        lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
+    }
+
     private void populateTabber() {
         tabPrefs.setToolTipText("Global preference options");
         tabAvatars.setToolTipText("Human and AI avatar select");
@@ -181,10 +196,7 @@ public class ViewSettings extends JPanel {
 
         pnlPrefs.add(lblTitleSkin, regularConstraints);
         pnlPrefs.add(new NoteLabel("Various user-created themes for Forge backgrounds, fonts, and colors."), regularConstraints);
-        pnlPrefs.add(new FScrollPane(lstChooseSkin), "h 60px!, w 150px!, gap 10% 0 0 2%, wrap");
-        lstChooseSkin.setListData(FSkin.getSkins().toArray(new String[0]));
-        lstChooseSkin.setSelectedValue(Singletons.getModel().getPreferences().getPref(FPref.UI_SKIN), true);
-        lstChooseSkin.ensureIndexIsVisible(lstChooseSkin.getSelectedIndex());
+        pnlPrefs.add(new FScrollPane(lstChooseSkin), "h 120px!, w 150px!, gap 10% 0 0 2%, wrap");
 
         pnlPrefs.add(new FLabel.Builder().text("Card Size").fontStyle(Font.BOLD).build(), regularConstraints);
         pnlPrefs.add(new NoteLabel("Size of cards in hand and playing field, when possible"), regularConstraints);
