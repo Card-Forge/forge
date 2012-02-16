@@ -26,9 +26,7 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
-import forge.CardUtil;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -607,7 +605,42 @@ public final class AbilityFactoryClash {
     }
 
     private static boolean twoPilesCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return AbilityFactoryClash.twoPilesTriggerAI(af, sa, false);
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = af.getHostCard();
+        Constant.Zone zone = null;
+
+        if (params.containsKey("Zone")) {
+            zone = Constant.Zone.smartValueOf(params.get("Zone"));
+        }
+
+        String valid = "";
+        if (params.containsKey("ValidCards")) {
+            valid = params.get("ValidCards");
+        }
+
+        ArrayList<Player> tgtPlayers;
+
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgt.resetTargets();
+            if (tgt.canTgtPlayer()) {
+                tgt.addTarget(AllZone.getHumanPlayer());
+            }
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+
+        final Player p = tgtPlayers.get(0);
+        CardList pool = new CardList();
+        if (params.containsKey("DefinedCards")) {
+            pool = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
+        } else {
+            pool = p.getCardsIn(zone);
+        }
+        pool = pool.getValidCards(valid, card.getController(), card);
+        int size = pool.size();
+        return size > 2;
     }
 
     private static boolean twoPilesTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
