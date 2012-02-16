@@ -242,7 +242,7 @@ FControl refactored to reuse single instance of each UI state.
 - Text fix.
 - Updated quest avatar download list
 - Performance update restored on FLabel.
-- Added support for Count$ManaPool:Any
+- Added support for Count$ManaPool:All
 - Fixed setting submenu scroll bug.
 - Fixed game count reset bug.
 - Fixed Insist and Overmaster.
@@ -361,7 +361,6 @@ Unscythe, Killer of Kings
 Soul Nova
 Martyrs of Korlis
 Vengeful Rebirth
-Tundra Kavu
 Sundial of the Infinite
 Time Stop
 Ovinomancer
