@@ -190,17 +190,24 @@ public class FPanel extends JPanel {
      */
     @Override
     public void paintComponent(final Graphics graphics0) {
-        super.paintComponent(graphics0);
+        //super.paintComponent(graphics0);
 
         pnlW = this.getWidth();
         pnlH = this.getHeight();
         final Graphics2D g2d = (Graphics2D) graphics0.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        drawBackgroundColor(g2d);
+        if (this.backgroundTexture == null) {
+            drawBackgroundColor(g2d);
+        }
+        else {
+            drawBackgroundTexture(g2d);
+        }
 
-        /*// Draw background as required
-        if (foregroundStretch && foregroundImage != null) {
+        super.paintComponent(g2d);
+
+        // Draw background as required
+       /* if (foregroundStretch && foregroundImage != null) {
             drawForegroundStretched(g2d);
         }
         else if (this.backgroundTexture == null) {
