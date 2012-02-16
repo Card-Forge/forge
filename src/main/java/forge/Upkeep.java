@@ -2252,8 +2252,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepVesuvanDoppelgangerKeyword() {
         final Player player = AllZone.getPhaseHandler().getPlayerTurn();
         final String keyword = "At the beginning of your upkeep, you may have this "
-                + "creature become a copy of target creature except it doesn't copy that "
-                + "creature's color. If you do, this creature gains this ability.";
+            + "creature become a copy of target creature except it doesn't copy that "
+            + "creature's color. If you do, this creature gains this ability.";
         CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.getKeyword(keyword);
 
@@ -2261,76 +2261,82 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final SpellAbility ability = new Ability(c, "0") {
                 @Override
                 public void resolve() {
-                    final Card[] newTarget = new Card[1];
-                    newTarget[0] = null;
+                    StringBuilder question = new StringBuilder();
+                    question.append("Use triggered ability of ").append(c).append("?");
+                    question.append("\r\n").append("(").append(keyword).append(")").append("\r\n");
+                    if (GameActionUtil.showYesNoDialog(c, question.toString(), true)) {
+                        final Card[] newTarget = new Card[1];
+                        newTarget[0] = null;
 
-                    final Ability switchTargets = new Ability(c, "0") {
-                        @Override
-                        public void resolve() {
-                            if (newTarget[0] != null) {
-                                /*
-                                 * 1. need to select new card - DONE 1a. need to
-                                 * create the newly copied card with pic and
-                                 * setinfo 2. need to add the leaves play
-                                 * command 3. need to transfer the keyword 4.
-                                 * need to update the clone origin of new card
-                                 * and old card 5. remove clone leaves play
-                                 * commands from old 5a. remove old from play 6.
-                                 * add new to play
-                                 */
+                        final Ability switchTargets = new Ability(c, "0") {
+                            @Override
+                            public void resolve() {
 
-                                final Card newCopy = AllZone.getCardFactory().getCard(
-                                        newTarget[0].getState("Original").getName(), player);
-                                newCopy.setCurSetCode(newTarget[0].getCurSetCode());
-                                // preserve the image of the Vesuvan
-                                // Doppelganger/whatever the source is
-                                newCopy.setImageFilename(c.getImageFilename());
+                                if (newTarget[0] != null) {
+                                    /*
+                                     * 1. need to select new card - DONE 1a. need to
+                                     * create the newly copied card with pic and
+                                     * setinfo 2. need to add the leaves play
+                                     * command 3. need to transfer the keyword 4.
+                                     * need to update the clone origin of new card
+                                     * and old card 5. remove clone leaves play
+                                     * commands from old 5a. remove old from play 6.
+                                     * add new to play
+                                     */
 
-                                AllZone.getTriggerHandler().suppressMode("Transformed");
-                                newCopy.setState(newTarget[0].getCurState());
-                                AllZone.getTriggerHandler().clearSuppression("Transformed");
+                                    final Card newCopy = AllZone.getCardFactory().getCard(
+                                            newTarget[0].getState("Original").getName(), player);
+                                    newCopy.setCurSetCode(newTarget[0].getCurSetCode());
+                                    // preserve the image of the Vesuvan
+                                    // Doppelganger/whatever the source is
+                                    newCopy.setImageFilename(c.getImageFilename());
 
-                                CardFactoryUtil.copyCharacteristics(newCopy, c);
-                                c.addColor("U");
+                                    AllZone.getTriggerHandler().suppressMode("Transformed");
+                                    newCopy.setState(newTarget[0].getCurState());
+                                    AllZone.getTriggerHandler().clearSuppression("Transformed");
 
-                                c.addExtrinsicKeyword(keyword);
+                                    CardFactoryUtil.copyCharacteristics(newCopy, c);
+                                    c.addColor("U");
+
+                                    c.addExtrinsicKeyword(keyword);
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    AllZone.getInputControl().setInput(new Input() {
-                        private static final long serialVersionUID = 5662272658873063221L;
+                        AllZone.getInputControl().setInput(new Input() {
+                            private static final long serialVersionUID = 5662272658873063221L;
 
-                        @Override
-                        public void showMessage() {
-                            Singletons.getControl().getMatchControl().showMessage(
-                                    c.getName() + " - Select new target creature.  (Click Cancel to remain as is.)");
-                            ButtonUtil.enableOnlyCancel();
-                        }
+                            @Override
+                            public void showMessage() {
+                                Singletons.getControl().getMatchControl().showMessage(
+                                        c.getName() + " - Select target creature.");
+                                ButtonUtil.enableOnlyCancel();
+                            }
 
-                        @Override
-                        public void selectButtonCancel() {
-                            this.stop();
-                        }
-
-                        @Override
-                        public void selectCard(final Card selectedCard, final PlayerZone z) {
-                            if (z.is(Constant.Zone.Battlefield) && selectedCard.isCreature()
-                                    && selectedCard.canBeTargetedBy(switchTargets)) {
-                                newTarget[0] = selectedCard;
-                                final StringBuilder sb = new StringBuilder();
-                                sb.append(c).append(" - switching to copy " + selectedCard.getName() + ".");
-                                switchTargets.setStackDescription(sb.toString());
-                                AllZone.getStack().add(switchTargets);
+                            @Override
+                            public void selectButtonCancel() {
                                 this.stop();
                             }
-                        }
-                    });
+
+                            @Override
+                            public void selectCard(final Card selectedCard, final PlayerZone z) {
+                                if (z.is(Constant.Zone.Battlefield) && selectedCard.isCreature()
+                                        && selectedCard.canBeTargetedBy(switchTargets)) {
+                                    newTarget[0] = selectedCard;
+                                    final StringBuilder sb = new StringBuilder();
+                                    sb.append(c).append(" - switching to copy " + selectedCard.getName() + ".");
+                                    switchTargets.setStackDescription(sb.toString());
+                                    AllZone.getStack().add(switchTargets);
+                                    this.stop();
+                                }
+                            }
+                        });
+                    }
                 }
             };
-            ability.setDescription("At the beginning of your upkeep, you may have this creature become "
-                    + "a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
-            ability.setStackDescription(c.getName() + " - you may have this creature become a copy of target creature.");
+            
+            ability.setDescription(keyword);
+            ability.setStackDescription("(OPTIONAL) " + keyword);
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
