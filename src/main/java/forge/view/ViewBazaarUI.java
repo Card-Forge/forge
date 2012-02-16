@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
+import forge.control.ControlBazaarUI;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.view.bazaar.ViewStall;
 import forge.view.toolbox.FLabel;
@@ -19,6 +20,7 @@ import forge.view.toolbox.FSkin;
 public class ViewBazaarUI extends FPanel {
     private final JPanel pnlAllStalls;
     private final ViewStall pnlSingleStall;
+    private final ControlBazaarUI control;
     private FLabel previousSelected;
 
     /** Lays out containers and borders for resizeable layout and
@@ -42,14 +44,14 @@ public class ViewBazaarUI extends FPanel {
         this.add(pnlAllStalls, "w 25%!, h 100%!");
         this.add(pnlSingleStall, "w 75%!, h 100%!");
 
-        // Populate all stalls, and select first one.
-        populateStalls();
-        ((FLabel) pnlAllStalls.getComponent(0)).setSelected(true);
+        // Instantiate control
+        control = new ControlBazaarUI(this);
+        control.initBazaar();
         previousSelected = ((FLabel) pnlAllStalls.getComponent(0));
-        showStall(QuestStallManager.getStallNames().get(0));
     }
 
-    private void populateStalls() {
+    /** */
+    public void populateStalls() {
         for (final String s : QuestStallManager.getStallNames()) {
             final FLabel lbl = new FLabel.Builder().text(s + "  ")
                     .fontAlign(SwingConstants.RIGHT).iconInBackground(true)
@@ -63,20 +65,10 @@ public class ViewBazaarUI extends FPanel {
                 public void execute() {
                     if (previousSelected != null) { previousSelected.setSelected(false); }
                     previousSelected = lbl;
-                    showStall(s);
+                    control.showStall(s);
                 }
             });
         }
-    }
-
-    private void showStall(final String s0) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                pnlSingleStall.setStall(QuestStallManager.getStall(s0));
-                pnlSingleStall.updateStall();
-            }
-        });
     }
 
     /** */
@@ -87,5 +79,21 @@ public class ViewBazaarUI extends FPanel {
                 pnlSingleStall.updateStall();
             }
         });
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return {@link javax.swing.JPanel}
+     */
+    public JPanel getPnlAllStalls() {
+        return this.pnlAllStalls;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return {@link forge.view.bazaar.ViewStall}
+     */
+    public ViewStall getPnlSingleStall() {
+        return this.pnlSingleStall;
     }
 }

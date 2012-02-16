@@ -11147,6 +11147,7 @@ src/main/java/forge/card/trigger/TriggerTurnFaceUp.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUnequip.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUntaps.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
+src/main/java/forge/control/ControlBazaarUI.java -text
 src/main/java/forge/control/ControlHomeUI.java -text
 src/main/java/forge/control/ControlMatchUI.java -text
 src/main/java/forge/control/FControl.java -text
