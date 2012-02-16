@@ -1,0 +1,20 @@
+Name:Diabolic Servitude
+ManaCost:3 B
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturnFromGraveyard | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to the battlefield.
+SVar:TrigReturnFromGraveyard:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield | RememberTargets$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExileAndBounce | TriggerZones$ Battlefield | TriggerDescription$ When the creature put onto the battlefield with CARDNAME dies, exile it and return CARDNAME to its owner's hand.
+SVar:TrigExileAndBounce:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBCleanupAndBounce
+SVar:DBCleanupAndBounce:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBBounceMe
+SVar:DBBounceMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | Hidden$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExileCreature | TriggerDescription$ When CARDNAME leaves the battlefield, exile the creature put onto the battlefield with CARDNAME.
+SVar:TrigExileCreature:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | IsPresent$ Card.IsRemembered | SubAbility$ DBCleanup2
+SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Exile | Execute$ TrigDBCleanup3 | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Exile.
+SVar:TrigDBCleanup3:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Hand | Execute$ TrigDBCleanup4 | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Hand.
+SVar:TrigDBCleanup4:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_servitude.jpg
+End

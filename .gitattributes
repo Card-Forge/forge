@@ -2153,6 +2153,7 @@ res/cardsfolder/d/dewdrop_spy.txt svneol=native#text/plain
 res/cardsfolder/d/diabolic_edict.txt svneol=native#text/plain
 res/cardsfolder/d/diabolic_intent.txt svneol=native#text/plain
 res/cardsfolder/d/diabolic_machine.txt svneol=native#text/plain
+res/cardsfolder/d/diabolic_servitude.txt -text svneol=unset#text/plain
 res/cardsfolder/d/diabolic_tutor.txt svneol=native#text/plain
 res/cardsfolder/d/diabolic_vision.txt svneol=native#text/plain
 res/cardsfolder/d/diamond_faerie.txt svneol=native#text/plain
