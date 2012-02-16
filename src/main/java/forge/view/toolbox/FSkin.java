@@ -764,7 +764,6 @@ public enum FSkin {
 
         BufferedImage img = testPreferredSprite(s0);
 
-        if (s0 == Backgrounds.BG_TEXTURE) { System.out.println("asdf found it"); }
         FSkin.icons.put(s0, new ImageIcon(img.getSubimage(x0, y0, w0, h0)));
     }
 
