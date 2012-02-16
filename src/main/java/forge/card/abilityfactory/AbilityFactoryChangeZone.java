@@ -816,9 +816,15 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
+        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card,
+                params.get("ChangeNum"), sa) : 1;
+
         CardList fetchList;
         if (defined) {
             fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
+            if (!params.containsKey("ChangeNum")) {
+                changeNum =  fetchList.size();
+            }
         } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)) {
             fetchList = AllZoneUtil.getCardsIn(origin);
         } else {
@@ -844,9 +850,6 @@ public final class AbilityFactoryChangeZone {
 
         final PlayerZone destZone = player.getZone(destination);
 
-        final int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card,
-                params.get("ChangeNum"), sa) : 1;
-
         final String remember = params.get("RememberChanged");
         final String imprint = params.get("Imprint");
 
@@ -865,7 +868,7 @@ public final class AbilityFactoryChangeZone {
             } else if (params.containsKey("Mandatory")) {
                 o = GuiUtils.getChoice("Select a card", fetchList.toArray());
             } else if (params.containsKey("Defined")) {
-                o = fetchList.get(i);
+                o = fetchList.get(0);
             } else {
                 o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
             }
@@ -985,9 +988,15 @@ public final class AbilityFactoryChangeZone {
             type = "Card";
         }
 
+        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card,
+                params.get("ChangeNum"), sa) : 1;
+
         CardList fetchList;
         if (defined) {
             fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
+            if (!params.containsKey("ChangeNum")) {
+                changeNum =  fetchList.size();
+            }
         } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)) {
             fetchList = AllZoneUtil.getCardsIn(origin);
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
@@ -1002,15 +1011,13 @@ public final class AbilityFactoryChangeZone {
 
         final CardList fetched = new CardList();
 
-        final int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card,
-                params.get("ChangeNum"), sa) : 1;
-
         final String remember = params.get("RememberChanged");
         final String imprint = params.get("Imprint");
 
         if (params.containsKey("Unimprint")) {
             card.clearImprinted();
         }
+        System.out.println("change fetchList:" + fetchList);
 
         for (int i = 0; i < changeNum; i++) {
             if ((fetchList.size() == 0) || (destination == null)) {
@@ -1053,7 +1060,9 @@ public final class AbilityFactoryChangeZone {
             }
 
             fetched.add(c);
-            fetchList.remove(c);
+            if (!defined) {
+                fetchList.remove(c);
+            }
         }
 
         if (origin.contains(Zone.Library) && !defined) {

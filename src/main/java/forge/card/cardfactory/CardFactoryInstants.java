@@ -65,7 +65,7 @@ public class CardFactoryInstants {
     public static Card getCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
-        if (cardName.equals("Fact or Fiction")) {
+        /*if (cardName.equals("Fact or Fiction")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1481112451519L;
 
@@ -227,10 +227,10 @@ public class CardFactoryInstants {
             }; // SpellAbility
 
             card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         //*************** START *********** START **************************
-        else if (cardName.equals("Hurkyl's Recall")) {
+        if (cardName.equals("Hurkyl's Recall")) {
             /*
              * Return all artifacts target player owns to his or her hand.
              */

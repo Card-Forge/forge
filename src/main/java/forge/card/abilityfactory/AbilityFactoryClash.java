@@ -26,6 +26,8 @@ import javax.swing.JOptionPane;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.CardUtil;
+import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
@@ -615,6 +617,12 @@ public final class AbilityFactoryClash {
     private static void twoPilesResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
+        Constant.Zone zone = null;
+        boolean pile1WasChosen = true;
+
+        if (params.containsKey("Origin")) {
+            zone = Constant.Zone.smartValueOf(params.get("Zone"));
+        }
 
         String valid = "";
         if (params.containsKey("ValidCards")) {
@@ -644,8 +652,14 @@ public final class AbilityFactoryClash {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final ArrayList<Card> pile1 = new ArrayList<Card>();
                 final ArrayList<Card> pile2 = new ArrayList<Card>();
-                CardList pool = p.getCardsIn(Zone.Battlefield);
+                CardList pool = new CardList();
+                if (params.containsKey("DefinedCards")) {
+                    pool = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
+                } else {
+                    pool = p.getCardsIn(zone);
+                }
                 pool = pool.getValidCards(valid, card.getController(), card);
+                int size = pool.size();
 
                 // first, separate the cards into piles
                 if (separator.isHuman()) {
@@ -657,12 +671,36 @@ public final class AbilityFactoryClash {
                     for (final Card c : pool) {
                         pile2.add(c);
                     }
-                } else {
-                    // TODO - not implemented
+                } else if (size > 0) {
+                    //computer separates
+                    Card biggest = null;
+                    Card smallest = null;
+                    biggest = pool.get(0);
+                    smallest = pool.get(0);
+
+                    for (Card c : pool) {
+                        if (c.getCMC() >= biggest.getCMC()) {
+                            biggest = c;
+                        }
+                        if (c.getCMC() <= smallest.getCMC()) {
+                            smallest = c;
+                        }
+                    }
+                    pile1.add(biggest);
+
+                    if (size > 3) {
+                        pile1.add(smallest);
+                    }
+                    for (Card c : pool) {
+                        if (!pile1.contains(c)) {
+                            pile2.add(c);
+                        }
+                    }
                 }
 
                 System.out.println("Pile 1:" + pile1);
                 System.out.println("Pile 2:" + pile2);
+                card.clearRemembered();
 
                 // then, the chooser picks a pile
                 if (chooser.isHuman()) {
@@ -693,6 +731,7 @@ public final class AbilityFactoryClash {
                             for (final Card z : pile2) {
                                 card.addRemembered(z);
                             }
+                            pile1WasChosen = false;
                         }
 
                     }
@@ -715,6 +754,7 @@ public final class AbilityFactoryClash {
                         for (final Card c : pile2) {
                             card.addRemembered(c);
                         }
+                        pile1WasChosen = false;
                     }
                 }
 
@@ -722,6 +762,27 @@ public final class AbilityFactoryClash {
                 if (params.containsKey("ChosenPile")) {
                     final AbilityFactory afPile = new AbilityFactory();
                     final SpellAbility action = afPile.getAbility(card.getSVar(params.get("ChosenPile")), card);
+                    action.setActivatingPlayer(sa.getActivatingPlayer());
+                    ((AbilitySub) action).setParent(sa);
+
+                    AbilityFactory.resolve(action, false);
+                }
+
+                // take action on the chosen pile
+                if (params.containsKey("UnchosenPile")) {
+                    //switch the remembered cards
+                    card.clearRemembered();
+                    if (pile1WasChosen) {
+                        for (final Card c : pile2) {
+                            card.addRemembered(c);
+                        }
+                    } else {
+                        for (final Card c : pile1) {
+                            card.addRemembered(c);
+                        }
+                    }
+                    final AbilityFactory afPile = new AbilityFactory();
+                    final SpellAbility action = afPile.getAbility(card.getSVar(params.get("UnchosenPile")), card);
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
