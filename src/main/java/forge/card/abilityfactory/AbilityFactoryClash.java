@@ -620,7 +620,7 @@ public final class AbilityFactoryClash {
         Constant.Zone zone = null;
         boolean pile1WasChosen = true;
 
-        if (params.containsKey("Origin")) {
+        if (params.containsKey("Zone")) {
             zone = Constant.Zone.smartValueOf(params.get("Zone"));
         }
 
@@ -666,10 +666,11 @@ public final class AbilityFactoryClash {
                     final List<Card> l = GuiUtils.getChoicesOptional("Put into pile 1 (multi-select)", pool.toArray());
                     for (final Card c : l) {
                         pile1.add(c);
-                        pool.remove(c);
                     }
                     for (final Card c : pool) {
-                        pile2.add(c);
+                        if (!pile1.contains(c)) {
+                            pile2.add(c);
+                        }
                     }
                 } else if (size > 0) {
                     //computer separates
@@ -736,8 +737,13 @@ public final class AbilityFactoryClash {
 
                     }
                 } else {
-                    final int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
-                    final int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
+                    int cmc1 = CardFactoryUtil.evaluatePermanentList(new CardList(pile1));
+                    int cmc2 = CardFactoryUtil.evaluatePermanentList(new CardList(pile2));
+                    if (pool.getNotType("Creature").isEmpty()) {
+                        cmc1 = CardFactoryUtil.evaluateCreatureList(new CardList(pile1));
+                        cmc2 = CardFactoryUtil.evaluateCreatureList(new CardList(pile2));
+                        System.out.println("value:" + cmc1 + " " + cmc2);
+                    }
 
                     // for now, this assumes that the outcome will be bad
                     // TODO: This should really have a ChooseLogic param to

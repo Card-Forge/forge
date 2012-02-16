@@ -1029,7 +1029,7 @@ public final class AbilityFactoryChangeZone {
             if (params.containsKey("AtRandom")) {
                 c = CardUtil.getRandom(fetchList.toArray());
             } else if (defined) {
-                c = fetchList.get(i);
+                c = fetchList.get(0);
             } else if (type.contains("Basic")) {
                 c = AbilityFactoryChangeZone.basicManaFixing(fetchList);
             } else if (AbilityFactoryChangeZone.areAllBasics(type)) {
@@ -1060,9 +1060,7 @@ public final class AbilityFactoryChangeZone {
             }
 
             fetched.add(c);
-            if (!defined) {
-                fetchList.remove(c);
-            }
+            fetchList.remove(c);
         }
 
         if (origin.contains(Zone.Library) && !defined) {
