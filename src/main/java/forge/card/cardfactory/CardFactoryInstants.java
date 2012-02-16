@@ -17,14 +17,11 @@
  */
 package forge.card.cardfactory;
 
-import javax.swing.JOptionPane;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;

@@ -3,7 +3,6 @@
 import java.util.HashMap;
 
 import forge.Card;
-import forge.card.spellability.SpellAbility;
 
 /** 
  * TODO: Write javadoc for this type.
