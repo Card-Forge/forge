@@ -1056,6 +1056,7 @@ res/cardsfolder/b/breach.txt svneol=native#text/plain
 res/cardsfolder/b/break_asunder.txt svneol=native#text/plain
 res/cardsfolder/b/break_of_day.txt -text
 res/cardsfolder/b/break_open.txt -text
+res/cardsfolder/b/breakthrough.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_darigaaz.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_dreams.txt svneol=native#text/plain
 res/cardsfolder/b/breath_of_life.txt svneol=native#text/plain
