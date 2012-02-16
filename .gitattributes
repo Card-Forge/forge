@@ -11387,8 +11387,8 @@ src/main/java/net/slightlymagic/braids/util/generator/FindNonDirectoriesSkipDotD
 src/main/java/net/slightlymagic/braids/util/generator/GeneratorFromArray.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/generator/GeneratorFunctions.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/generator/package-info.java svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/util/lambda/FrozenCall.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/lambda/Lambda.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/Lambda0.java -text
 src/main/java/net/slightlymagic/braids/util/lambda/Lambda1.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/lambda/Lambda2.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/lambda/Lambda3.java svneol=native#text/plain
