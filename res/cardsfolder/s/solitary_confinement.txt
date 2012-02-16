@@ -1,0 +1,18 @@
+Name:Solitary Confinement
+ManaCost:2 W
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
+S:Mode$ PreventDamage | Target$ You | Description$ Prevent all damage that would be dealt to you.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/solitary_confinement.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/24.jpg
+Oracle:At the beginning of your upkeep, sacrifice Solitary Confinement unless you discard a card.\nSkip your draw step.\nYou have shroud. (You can't be the target of spells or abilities.)\nPrevent all damage that would be dealt to you.
+End
