@@ -365,22 +365,27 @@ public enum FSkin {
         FSkin.colors = new HashMap<SkinProp, Color>();
 
         final File f = new File(preferredDir + FILE_SPLASH);
-        final BufferedImage img;
-        try {
-            img = ImageIO.read(f);
+        if (!f.exists()) {
+            FSkin.loadLight("default");
+        }
+        else {
+            final BufferedImage img;
+            try {
+                img = ImageIO.read(f);
 
-            final int h = img.getHeight();
-            final int w = img.getWidth();
+                final int h = img.getHeight();
+                final int w = img.getWidth();
 
-            FSkin.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
+                FSkin.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
 
-            UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
-            UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
-            UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
-            UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
-            UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
-        } catch (final IOException e) {
-            e.printStackTrace();
+                UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
+                UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
+                UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
+                UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
+                UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

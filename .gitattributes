@@ -10854,11 +10854,11 @@ res/quest/themes/Zombies[!!-~]B.thm -text
 res/reprintSetInfo.py svneol=native#text/x-python
 res/sealed/juzamjedi.zsealed -text
 res/setInfoScript.py svneol=native#text/x-python
-res/skins/darkascension/bg_match.jpg -text
-res/skins/darkascension/bg_splash.png -text
-res/skins/darkascension/bg_texture.jpg -text
-res/skins/darkascension/font1.ttf -text
-res/skins/darkascension/sprite_icons.png -text
+res/skins/dark_ascension/bg_match.jpg -text
+res/skins/dark_ascension/bg_splash.png -text
+res/skins/dark_ascension/bg_texture.jpg -text
+res/skins/dark_ascension/font1.ttf -text
+res/skins/dark_ascension/sprite_icons.png -text
 res/skins/default/bg_match.jpg -text
 res/skins/default/bg_splash.png -text
 res/skins/default/bg_texture.jpg -text
