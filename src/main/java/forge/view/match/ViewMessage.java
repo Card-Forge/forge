@@ -18,16 +18,16 @@
 package forge.view.match;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
+import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -48,6 +48,7 @@ public class ViewMessage extends FPanel {
     private final JLabel lblGames;
     private Timer timer1 = null;
     private static int counter = 0;
+    private int[] newA = null, newR = null, newG = null, newB = null;
     private boolean remindIsRunning = false;
 
     /**
@@ -135,30 +136,52 @@ public class ViewMessage extends FPanel {
 
     /** Flashes animation on input panel if play is currently waiting on input. */
     public void remind() {
+        // To adjust, only touch these two values.
+        final int steps = 5;    // Number of delays
+        final int delay = 80;  // Milliseconds between steps
+
         if (remindIsRunning) { return; }
 
         remindIsRunning = true;
-        final int[] steps = {210, 215, 220, 220, 220, 215, 210};
-        final Color oldBG = getBackground();
+        final int oldR = getBackground().getRed();
+        final int oldG = getBackground().getGreen();
+        final int oldB = getBackground().getBlue();
+        final int oldA = getBackground().getAlpha();
         counter = 0;
+        newR = new int[steps];
+        newG = new int[steps];
+        newB = new int[steps];
+        newA = new int[steps];
 
-        ActionListener fader = new ActionListener() {
+        for (int i = 0; i < steps; i++) {
+            newR[i] = (int) ((255 - oldR) / steps * i);
+            newG[i] = (int) (oldG / steps * i);
+            newB[i] = (int) (oldB / steps * i);
+            newA[i] = (int) ((255 - oldA) / steps * i);
+        }
+
+        final TimerTask tt = new TimerTask() {
             @Override
-            public void actionPerformed(final ActionEvent evt) {
+            public void run() {
                 counter++;
-                if (counter != (steps.length - 1)) {
-                    setBackground(new Color(255, 0, 0, steps[counter]));
+                if (counter != (steps - 1)) {
+                    SwingUtilities.invokeLater(new Runnable() { @Override
+                        public void run() { setBackground(new Color(newR[counter], oldG, oldB, newA[counter])); } });
                 }
                 else {
-                    setBackground(oldBG);
+                    SwingUtilities.invokeLater(new Runnable() { @Override
+                        public void run() { setBackground(new Color(oldR, oldG, oldB, oldA)); } });
                     remindIsRunning = false;
-                    timer1.stop();
+                    timer1.cancel();
+                    newR = null;
+                    newG = null;
+                    newB = null;
+                    newA = null;
                 }
-                repaint();
             }
         };
 
-        timer1 = new Timer(100, fader);
-        timer1.start();
+        timer1 = new Timer();
+        timer1.scheduleAtFixedRate(tt, 0, delay);
     }
 }
