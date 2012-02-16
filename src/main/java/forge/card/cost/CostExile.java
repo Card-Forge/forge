@@ -34,8 +34,8 @@ import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 
 /**
  * The Class CostExile.
@@ -379,7 +379,7 @@ public class CostExile extends CostPartWithList {
      *            a {@link forge.card.cost.CostPayment} object.
      * @param nNeeded
      *            the n needed
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input exileType(final SpellAbility sa, final CostExile part, final String type,
             final CostPayment payment, final int nNeeded) {
@@ -463,7 +463,7 @@ public class CostExile extends CostPartWithList {
      *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            the part
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input exileThis(final SpellAbility sa, final CostPayment payment, final CostExile part) {
         final Input target = new Input() {

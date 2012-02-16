@@ -27,8 +27,8 @@ import forge.Constant.Zone;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 
 /**
  * The Class CostUtil.
@@ -315,7 +315,7 @@ public class CostUtil {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      */
     public static void setInput(final Input in) {
         // Just a shortcut..

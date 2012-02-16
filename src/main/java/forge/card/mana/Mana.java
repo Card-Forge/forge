@@ -19,7 +19,7 @@ package forge.card.mana;
 
 import forge.Card;
 import forge.Constant;
-import forge.gui.input.InputPayManaCostUtil;
+import forge.control.input.InputPayManaCostUtil;
 
 /**
  * <p>

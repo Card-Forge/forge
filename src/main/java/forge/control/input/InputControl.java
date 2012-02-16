@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.input;
+package forge.control.input;
 
 import java.util.LinkedList;
 import java.util.Stack;
@@ -66,7 +66,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      */
     public final void setInput(final Input in) {
         if (this.model.getGameState().getStack().getResolving()
@@ -84,7 +84,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      * @param bAddToResolving
      *            a boolean.
      */
@@ -106,7 +106,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      */
     private void changeInput(final Input in) {
         this.input = in;
@@ -118,7 +118,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * Getter for the field <code>input</code>.
      * </p>
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public final Input getInput() {
         return this.input;
@@ -165,7 +165,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * updateInput.
      * </p>
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public final Input updateInput() {
         final String phase = this.model.getGameState().getPhaseHandler().getPhase();

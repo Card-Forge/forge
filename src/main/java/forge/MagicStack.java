@@ -41,9 +41,9 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetChoices;
 import forge.card.spellability.TargetSelection;
 import forge.card.trigger.Trigger;
+import forge.control.input.Input;
+import forge.control.input.InputPayManaCostAbility;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
-import forge.gui.input.InputPayManaCostAbility;
 
 /**
  * <p>

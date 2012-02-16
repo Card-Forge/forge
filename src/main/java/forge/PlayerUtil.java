@@ -19,7 +19,7 @@ package forge;
 
 import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * <p>
@@ -69,7 +69,7 @@ public final class PlayerUtil {
      *            a {@link java.lang.String} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
     public static Input inputDiscardNumUnless(final int nCards, final String uType, final SpellAbility sa) {
@@ -125,7 +125,7 @@ public final class PlayerUtil {
      *            a int.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
     public static Input inputDiscard(final int nCards, final SpellAbility sa) {
@@ -171,7 +171,7 @@ public final class PlayerUtil {
      * input_chainsDiscard.
      * </p>
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputChainsDiscard() {
         final Input target = new Input() {
@@ -213,7 +213,7 @@ public final class PlayerUtil {
      *            a {@link forge.CardList} object.
      * @param message
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
     public static Input inputSacrificePermanent(final CardList choices, final String message) {
@@ -227,7 +227,7 @@ public final class PlayerUtil {
      * 
      * @param nCards
      *            a int.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards) {
@@ -244,7 +244,7 @@ public final class PlayerUtil {
      *            a int.
      * @param type
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards, final String type) {
@@ -265,7 +265,7 @@ public final class PlayerUtil {
      *            a {@link forge.CardList} object.
      * @param message
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
     public static Input inputSacrificePermanentsFromList(final int nCards, final CardList list, final String message) {
@@ -314,7 +314,7 @@ public final class PlayerUtil {
      *            a {@link java.lang.String} object.
      * @param num
      *            a int.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      * @since 1.0.15
      */
     public static Input inputPutFromHandToLibrary(final String topOrBottom, final int num) {

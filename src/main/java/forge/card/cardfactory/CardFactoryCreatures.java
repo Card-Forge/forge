@@ -52,9 +52,9 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
+import forge.control.input.Input;
+import forge.control.input.InputPayManaCost;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
-import forge.gui.input.InputPayManaCost;
 import forge.util.MyRandom;
 
 /**

@@ -25,8 +25,8 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 
 /**
  * <p>

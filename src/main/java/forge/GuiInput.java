@@ -20,7 +20,7 @@ package forge;
 import java.util.Observable;
 import java.util.Observer;
 
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * <p>
@@ -61,7 +61,7 @@ public class GuiInput extends MyObservable implements Observer {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      */
     private void setInput(final Input in) {
         this.input = in;

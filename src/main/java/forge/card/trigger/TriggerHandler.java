@@ -41,7 +41,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * <p>

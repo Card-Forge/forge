@@ -11161,6 +11161,18 @@ src/main/java/forge/control/home/ControlSealed.java -text
 src/main/java/forge/control/home/ControlSettings.java -text
 src/main/java/forge/control/home/ControlUtilities.java -text
 src/main/java/forge/control/home/package-info.java -text svneol=native#text/plain
+src/main/java/forge/control/input/Input.java svneol=native#text/plain
+src/main/java/forge/control/input/InputAttack.java svneol=native#text/plain
+src/main/java/forge/control/input/InputBlock.java svneol=native#text/plain
+src/main/java/forge/control/input/InputCleanup.java svneol=native#text/plain
+src/main/java/forge/control/input/InputControl.java svneol=native#text/plain
+src/main/java/forge/control/input/InputMana.java -text
+src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPayManaCost.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPayManaCostAbility.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPayManaCostUtil.java svneol=native#text/plain
+src/main/java/forge/control/input/package-info.java svneol=native#text/plain
 src/main/java/forge/control/match/ControlDetail.java -text
 src/main/java/forge/control/match/ControlDock.java -text
 src/main/java/forge/control/match/ControlField.java -text
@@ -11242,18 +11254,6 @@ src/main/java/forge/gui/game/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/CardPanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/CardPicturePanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/input/Input.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputAttack.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputBlock.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputCleanup.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputControl.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputMana.java -text
-src/main/java/forge/gui/input/InputMulligan.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputPassPriority.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputPayManaCost.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputPayManaCostAbility.java svneol=native#text/plain
-src/main/java/forge/gui/input/InputPayManaCostUtil.java svneol=native#text/plain
-src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text

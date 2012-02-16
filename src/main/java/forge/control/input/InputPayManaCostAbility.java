@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.input;
+package forge.control.input;
 
 import forge.AllZone;
 import forge.ButtonUtil;
@@ -193,7 +193,7 @@ public class InputPayManaCostAbility extends InputMana {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.input.InputMana#selectManaPool()
+     * @see forge.control.input.InputMana#selectManaPool()
      */
     @Override
     public void selectManaPool(String color) {

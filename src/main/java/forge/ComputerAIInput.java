@@ -19,7 +19,7 @@ package forge;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * <p>

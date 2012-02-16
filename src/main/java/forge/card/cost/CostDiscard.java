@@ -30,7 +30,7 @@ import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * The Class CostDiscard.
@@ -294,7 +294,7 @@ public class CostDiscard extends CostPartWithList {
      * @param nNeeded
      *            a int.
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputDiscardCost(final String discType, final CardList handList, final SpellAbility sa,
             final CostPayment payment, final CostDiscard part, final int nNeeded) {

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.mana.ManaCost;
-import forge.gui.input.InputPayManaCostUtil;
+import forge.control.input.InputPayManaCostUtil;
 
 /**
  * <p>

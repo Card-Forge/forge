@@ -63,10 +63,10 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.control.input.Input;
+import forge.control.input.InputPayManaCost;
+import forge.control.input.InputPayManaCostUtil;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
-import forge.gui.input.InputPayManaCost;
-import forge.gui.input.InputPayManaCostUtil;
 import forge.util.MyRandom;
 
 /**
@@ -794,7 +794,7 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @param free
      *            a boolean.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputSpell(final SpellAbility spell, final CardList choices, final boolean free) {
         final Input target = new Input() {
@@ -848,7 +848,7 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @param message
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputDestroyNoRegeneration(final CardList choices, final String message) {
         final Input target = new Input() {
@@ -1717,7 +1717,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @param free
      *            a boolean.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputTargetSpecific(final SpellAbility spell, final CardList choices, final String message,
             final boolean targeted, final boolean free) {
@@ -1742,7 +1742,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @param free
      *            a boolean.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputTargetSpecific(final SpellAbility spell, final CardList choices, final String message,
             final Command paid, final boolean targeted, final boolean free) {
@@ -1799,7 +1799,7 @@ public class CardFactoryUtil {
      *            a boolean.
      * @param free
      *            a boolean.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputTargetChampionSac(final Card crd, final SpellAbility spell, final CardList choices,
             final String message, final boolean targeted, final boolean free) {
@@ -1849,7 +1849,7 @@ public class CardFactoryUtil {
      * 
      * @param equip
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputEquipCreature(final SpellAbility equip) {
         final Input runtime = new Input() {
@@ -1941,7 +1941,7 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @param paid
      *            a {@link forge.Command} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input masterOfTheWildHuntInputTargetCreature(final SpellAbility spell, final CardList choices,
             final Command paid) {
@@ -1985,7 +1985,7 @@ public class CardFactoryUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param card
      *            a {@link forge.Card} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input modularInput(final SpellAbility ability, final Card card) {
         final Input modularInput = new Input() {
@@ -3496,7 +3496,7 @@ public class CardFactoryUtil {
      *            a int.
      * @param type
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputUntapUpToNType(final int n, final String type) {
         final Input untap = new Input() {

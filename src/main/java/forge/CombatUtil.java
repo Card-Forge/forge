@@ -31,8 +31,8 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
+import forge.control.input.InputPayManaCostAbility;
 import forge.gui.GuiUtils;
-import forge.gui.input.InputPayManaCostAbility;
 
 /**
  * <p>

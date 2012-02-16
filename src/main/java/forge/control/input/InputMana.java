@@ -1,4 +1,4 @@
-package forge.gui.input;
+package forge.control.input;
 
 /** 
  * TODO: Write javadoc for this type.

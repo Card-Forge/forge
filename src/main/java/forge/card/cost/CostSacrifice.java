@@ -31,7 +31,7 @@ import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * The Class CostSacrifice.
@@ -252,7 +252,7 @@ public class CostSacrifice extends CostPartWithList {
      *            TODO
      * @param nNeeded
      *            the n needed
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input sacrificeFromList(final SpellAbility sa, final CostPayment payment, final CostSacrifice part,
             final CardList typeList, final int nNeeded) {
@@ -329,7 +329,7 @@ public class CostSacrifice extends CostPartWithList {
      *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input sacrificeThis(final SpellAbility sa, final CostPayment payment, final CostSacrifice part) {
         final Input target = new Input() {

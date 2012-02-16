@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * <p>

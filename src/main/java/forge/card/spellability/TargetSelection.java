@@ -31,8 +31,8 @@ import forge.Constant.Zone;
 import forge.Player;
 import forge.PlayerZone;
 import forge.Singletons;
+import forge.control.input.Input;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 
 /**
  * <p>
@@ -307,7 +307,7 @@ public class TargetSelection {
      *            a boolean.
      * @param alreadyTargeted
      *            the already targeted
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public final Input inputTargetSpecific(final CardList choices, final boolean targeted, final boolean mandatory,
             final ArrayList<Object> alreadyTargeted) {

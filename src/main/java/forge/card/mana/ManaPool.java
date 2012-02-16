@@ -29,8 +29,8 @@ import forge.Constant;
 import forge.Player;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayManaCostUtil;
 import forge.gui.GuiUtils;
-import forge.gui.input.InputPayManaCostUtil;
 
 /**
  * <p>

@@ -45,8 +45,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.control.input.Input;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 import forge.util.MyRandom;
 
 /**

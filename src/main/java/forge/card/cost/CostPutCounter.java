@@ -28,7 +28,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * The Class CostPutCounter.
@@ -243,7 +243,7 @@ public class CostPutCounter extends CostPartWithList {
      *            TODO
      * @param nNeeded
      *            the n needed
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input putCounterType(final SpellAbility sa, final String type, final CostPayment payment,
             final CostPutCounter costPutCounter, final int nNeeded) {

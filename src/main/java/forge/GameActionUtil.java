@@ -29,10 +29,10 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayManaCostAbility;
+import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
-import forge.gui.input.InputPayManaCostAbility;
-import forge.gui.input.InputPayManaCostUtil;
 import forge.util.MyRandom;
 
 /**

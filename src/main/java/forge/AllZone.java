@@ -26,9 +26,9 @@ import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
+import forge.control.input.InputControl;
 import forge.deck.DeckManager;
 import forge.game.limited.CardRatings;
-import forge.gui.input.InputControl;
 import forge.model.FGameState;
 import forge.model.FMatchState;
 import forge.properties.ForgeProps;
@@ -367,14 +367,14 @@ public final class AllZone {
      * getInputControl.
      * </p>
      * 
-     * @return a {@link forge.gui.input.InputControl} object.
+     * @return a {@link forge.control.input.InputControl} object.
      * @since 1.0.15
      */
     public static InputControl getInputControl() {
         return AllZone.inputControl;
     }
 
-    /** @param i0 &emsp; {@link forge.gui.input.InputControl} */
+    /** @param i0 &emsp; {@link forge.control.input.InputControl} */
     public static void setInputControl(InputControl i0) {
         AllZone.inputControl = i0;
     }

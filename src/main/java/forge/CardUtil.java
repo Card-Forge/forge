@@ -34,7 +34,7 @@ import forge.card.CardCharacteristics;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
-import forge.gui.input.InputPayManaCostUtil;
+import forge.control.input.InputPayManaCostUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;

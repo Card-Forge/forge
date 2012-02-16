@@ -19,8 +19,8 @@ package forge;
 
 import forge.Constant.Zone;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 
 /**
  * <p>

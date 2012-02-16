@@ -17,7 +17,7 @@
  */
 package forge.card.mana;
 
-import forge.gui.input.InputPayManaCostUtil;
+import forge.control.input.InputPayManaCostUtil;
 
 //handles mana costs like 2/R or 2/B
 //for cards like Flame Javelin (Shadowmoor)

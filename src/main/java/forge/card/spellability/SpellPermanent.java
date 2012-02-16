@@ -35,7 +35,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.trigger.Trigger;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * <p>

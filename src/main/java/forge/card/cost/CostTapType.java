@@ -29,7 +29,7 @@ import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * The Class CostTapType.
@@ -223,7 +223,7 @@ public class CostTapType extends CostPartWithList {
      *            a {@link forge.card.cost.CostPayment} object.
      * @param nCards
      *            a int.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputTapXCost(final CostTapType tapType, final CardList cardList, final SpellAbility sa,
             final CostPayment payment, final int nCards) {

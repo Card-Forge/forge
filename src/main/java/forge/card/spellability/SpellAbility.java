@@ -29,7 +29,7 @@ import forge.Player;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 //only SpellAbility can go on the stack
 //override any methods as needed
@@ -613,7 +613,7 @@ public abstract class SpellAbility {
      * Getter for the field <code>beforePayMana</code>.
      * </p>
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public Input getBeforePayMana() {
         return this.beforePayMana;
@@ -625,7 +625,7 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      */
     public void setBeforePayMana(final Input in) {
         this.beforePayMana = in;
@@ -636,7 +636,7 @@ public abstract class SpellAbility {
      * Getter for the field <code>afterPayMana</code>.
      * </p>
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public Input getAfterPayMana() {
         return this.afterPayMana;
@@ -648,7 +648,7 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      */
     public void setAfterPayMana(final Input in) {
         this.afterPayMana = in;
@@ -1041,7 +1041,7 @@ public abstract class SpellAbility {
      * Getter for the field <code>afterResolve</code>.
      * </p>
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public Input getAfterResolve() {
         return this.afterResolve;
@@ -1053,7 +1053,7 @@ public abstract class SpellAbility {
      * </p>
      * 
      * @param in
-     *            a {@link forge.gui.input.Input} object.
+     *            a {@link forge.control.input.Input} object.
      */
     public void setAfterResolve(final Input in) {
         this.afterResolve = in;

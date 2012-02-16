@@ -31,9 +31,9 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
-import forge.gui.input.Input;
-import forge.gui.input.InputMana;
-import forge.gui.input.InputPayManaCostUtil;
+import forge.control.input.Input;
+import forge.control.input.InputMana;
+import forge.control.input.InputPayManaCostUtil;
 
 /**
  * The Class CostMana.
@@ -251,7 +251,7 @@ public class CostMana extends CostPart {
      * @param numX
      *            a int.
      * 
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputPayXMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
             final int numX) {
@@ -352,7 +352,7 @@ public class CostMana extends CostPart {
      *            the cost mana
      * @param manaToAdd
      *            a int.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputPayMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
             final int manaToAdd) {

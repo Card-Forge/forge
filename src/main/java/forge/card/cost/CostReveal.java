@@ -29,8 +29,8 @@ import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.gui.GuiUtils;
-import forge.gui.input.Input;
 
 /**
  * The Class CostReveal.
@@ -226,7 +226,7 @@ public class CostReveal extends CostPartWithList {
      *            TODO
      * @param nNeeded
      *            a int.
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input inputRevealCost(final String discType, final CardList handList, final CostPayment payment,
             final CostReveal part, final SpellAbility sa, final int nNeeded) {

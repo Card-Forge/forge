@@ -36,8 +36,8 @@ import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.control.input.InputPayManaCostUtil;
 import forge.error.ErrorViewer;
-import forge.gui.input.InputPayManaCostUtil;
 
 /**
  * <p>

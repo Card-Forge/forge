@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import forge.Constant;
-import forge.gui.input.InputPayManaCostUtil;
+import forge.control.input.InputPayManaCostUtil;
 
 /**
  * <p>

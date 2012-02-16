@@ -31,7 +31,7 @@ import forge.PlayerZone;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
-import forge.gui.input.Input;
+import forge.control.input.Input;
 
 /**
  * The Class CostReturn.
@@ -206,7 +206,7 @@ public class CostReturn extends CostPartWithList {
      *            TODO
      * @param nNeeded
      *            the n needed
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input returnType(final SpellAbility sa, final String type, final CostPayment payment,
             final CostReturn part, final int nNeeded) {
@@ -286,7 +286,7 @@ public class CostReturn extends CostPartWithList {
      *            a {@link forge.card.cost.CostPayment} object.
      * @param part
      *            TODO
-     * @return a {@link forge.gui.input.Input} object.
+     * @return a {@link forge.control.input.Input} object.
      */
     public static Input returnThis(final SpellAbility sa, final CostPayment payment, final CostReturn part) {
         final Input target = new Input() {
