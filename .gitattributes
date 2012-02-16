@@ -17,6 +17,7 @@ res/blockdata/blocks.txt svneol=native#text/plain
 res/blockdata/boosters.txt -text
 res/blockdata/formats.txt -text
 res/blockdata/setdata.txt svneol=native#text/plain
+res/blockdata/starters.txt -text
 res/booster-decks -text
 res/cardTemplateScript.py -text svneol=unset#text/x-python
 res/cardsfolder/a/abandon_hope.txt -text
