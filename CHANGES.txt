@@ -257,6 +257,34 @@ FControl refactored to reuse single instance of each UI state.
 - Fixed being able to block with your opponents creatures.
 - Quick fix for compile error in r14071.
 - Added the recent commit logs to changes.txt.
+- Updated some SVars and ran scripts.
+- Fixed AI sometimes holding back creatures with vigilance.
+- Fixes to Count:ManaPool:All
+- Tweaked doAssault AI.
+- Fixed the description for Vital Surge.
+- Fixed Dream's Grip Entwine cost description.
+- Fixed Rain of Dust and Rude Awakening Entwine cost descriptions.
+- Fixed Betrayal of Flesh Entwine cost description.
+- Added SVar:RemAIDeck:True to Bramblesnap.
+- Removed Hidden Stag. Plays land is not the same as Comes into play. Added a corrected Hidden Stag.
+- Changed Wicked Reward to an Instant.
+- Changed Academy Researchers to a Human Wizard and removed Flying.
+- Animated "remind" feature in ViewMessage.
+- make the behavior of Vesuvan Doppelganger granted trigger more consistent with other optional triggers.
+- Experimental clipping on FPanel.
+- Renamed darkascension skin to dark_ascension (will be prettifying file names in settings soon).
+- Added better DNE degredation in FSkin.
+- "Pretty names" for skin names in settings submenu.
+- Small edit.
+- Minor fix.
+- Updated wrapping of avatars in settings submenu.
+- Bazaar resizing fixed.
+- Renamed "forge.gui.input" package to "forge.control.input" for consistency and clarity.
+- Checkstyle.
+- Created emblem images for Venser, Elspeth (Knight-Errant) and Koth. Also created an effect image for Chandra the Firebrand's effect.
+- Added the links to token download list.
+- Added the red mage to avatar selection sprite
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -382,6 +410,13 @@ Opal Titan
 Insist
 Overmaster
 Glissa Sunseeker
+Lurking Evil
+Lifeline
+Hunter's Insight
+Hidden Stag
+Flesh Reaver
+Disorder
+Solitary Confinement
 
 
 end
