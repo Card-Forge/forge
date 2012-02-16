@@ -43,6 +43,7 @@ import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 import forge.view.toolbox.SubTab;
+import forge.view.toolbox.WrapLayout;
 
 /** 
  * Assembles swing components for "Settings" mode menu.
@@ -231,24 +232,13 @@ public class ViewSettings extends JPanel {
     } // End populatePrefs()
 
     private void populateAvatars() {
-        final JLabel lblTitle = new SectionLabel("Avatar Selection");
-        final JLabel lblNote1 = new NoteLabel("Click on an image to set that avatar for a player or AI.");
-        final JLabel lblNote2 = new NoteLabel("Click multiple times to cycle.");
-
-        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNote1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNote2.setHorizontalAlignment(SwingConstants.CENTER);
-
-        pnlAvatars.setLayout(new MigLayout("insets 0, gap 0, align center, wrap 3"));
-        pnlAvatars.add(lblTitle, "w 330px!, span 3 1");
-        pnlAvatars.add(lblNote1, "w 330px!, span 3 1");
-        pnlAvatars.add(lblNote2, "w 330px!, span 3 1");
+        pnlAvatars.setLayout(new WrapLayout());
 
         lstAvatars = new ArrayList<AvatarLabel>();
         int counter = 0;
         for (final Image i : FSkin.getAvatars().values()) {
             lstAvatars.add(new AvatarLabel(i, counter++));
-            pnlAvatars.add(lstAvatars.get(lstAvatars.size() - 1), "gap 5px 5px 5px 5px");
+            pnlAvatars.add(lstAvatars.get(lstAvatars.size() - 1));
         }
 
         final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");

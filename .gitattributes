@@ -11371,6 +11371,7 @@ src/main/java/forge/view/toolbox/FSkin.java -text
 src/main/java/forge/view/toolbox/FTextArea.java -text
 src/main/java/forge/view/toolbox/FVerticalTabPanel.java -text
 src/main/java/forge/view/toolbox/SubTab.java -text
+src/main/java/forge/view/toolbox/WrapLayout.java -text
 src/main/java/forge/view/toolbox/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain
