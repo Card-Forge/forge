@@ -7,7 +7,6 @@ Description=UG Winter Orb deck with Kalonian Behemoth and mana Elves/Slivers
 Icon=Fat Albert.jpg
 Deck Type=constructed
 [main]
-1 Scepter of Insight
 3 Birds of Paradise
 4 Tropical Island
 4 Misty Rainforest
@@ -36,4 +35,5 @@ Deck Type=constructed
 1 Propaganda
 1 Overrun
 4 Murkfiend Liege
+1 Sea Drake
 [sideboard]
