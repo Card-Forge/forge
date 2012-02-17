@@ -783,7 +783,8 @@ public class ComputerUtilAttack {
         for (final Card defender : defenders) {
             if (CombatUtil.canBlock(attacker, defender)) { // , combat )) {
                 numberOfPossibleBlockers += 1;
-                if (CombatUtil.canDestroyAttacker(attacker, defender, combat, false)) {
+                if (CombatUtil.canDestroyAttacker(attacker, defender, combat, false)
+                        && !(attacker.hasKeyword("Undying") && attacker.getCounters(Counters.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on
                                              // the battlefield that can kill
                                              // the creature

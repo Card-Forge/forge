@@ -352,7 +352,8 @@ public class ComputerUtilBlock {
                     final Card worst = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
 
                     if ((CardFactoryUtil.evaluateCreature(worst) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
-                            .evaluateCreature(attacker)) {
+                            .evaluateCreature(attacker)
+                            || (worst.hasKeyword("Undying") && worst.getCounters(Counters.P1P1) == 0)) {
                         blocker = worst;
                     }
                 }
