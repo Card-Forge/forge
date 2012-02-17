@@ -555,7 +555,7 @@ public class AbilityFactoryPump {
      */
     private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         if (!mandatory
-                && sa.getPayCosts() != null
+                && !sa.isTrigger()
                 && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(this.abilityFactory.isCurse() && ((defense < 0) || !this
                         .containsCombatRelevantKeyword(this.keywords)))) {

@@ -242,16 +242,8 @@ public final class AbilityFactoryPlay {
      * @return a boolean.
      */
     private static boolean PlayTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        final boolean randomReturn = false;
 
-        // comment out the af.hasSubAbility() until it's used. randomReturn is
-        // always false.
-        /*
-         * if (af.hasSubAbility()) { final AbilitySub abSub =
-         * sa.getSubAbility(); if (abSub != null) { return randomReturn &&
-         * abSub.chkAIDrawback(); } }
-         */
-        return randomReturn;
+        return false;
     }
 
     /**
@@ -307,10 +299,11 @@ public final class AbilityFactoryPlay {
                 newSA.setManaCost("");
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                 AllZone.getGameAction().playSpellAbility(newSA);
-            } else if (tgtSA.canPlayAI()) {
-                if (sa instanceof Spell) {
-                    Spell spell = (Spell) sa;
+            } else {
+                if (tgtSA instanceof Spell) {
+                    Spell spell = (Spell) tgtSA;
                     if (spell.canPlayFromEffectAI(false, true)) {
+                        //System.out.println("canPlayFromEffectAI: " + this.getHostCard());
                         ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
                     }
                 }
