@@ -27,6 +27,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
+import forge.GameActionUtil;
 import forge.Player;
 import forge.Constant.Zone;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -336,6 +337,11 @@ public final class AbilityFactoryPlay {
         }
 
         Card tgtCard = tgtCards.get(0);
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Do you want to play " + tgtCard + "?");
+        if (controller.isHuman() && params.containsKey("Optional") && !GameActionUtil.showYesNoDialog(card, sb.toString())) {
+            return;
+        }
         if (tgtCard.isLand()) {
             controller.playLand(tgtCard);
             return;

@@ -3304,6 +3304,7 @@ res/cardsfolder/g/galvanic_arc.txt svneol=native#text/plain
 res/cardsfolder/g/galvanic_blast.txt svneol=native#text/plain
 res/cardsfolder/g/galvanic_juggernaut.txt -text
 res/cardsfolder/g/galvanic_key.txt svneol=native#text/plain
+res/cardsfolder/g/galvanoth.txt -text
 res/cardsfolder/g/gamble.txt svneol=native#text/plain
 res/cardsfolder/g/game_trail_changeling.txt svneol=native#text/plain
 res/cardsfolder/g/gamekeeper.txt -text
