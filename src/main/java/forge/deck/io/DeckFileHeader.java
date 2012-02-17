@@ -11,9 +11,9 @@ import forge.game.GameType;
  */
 public class DeckFileHeader {
     
-    private static final String NAME = "Name";
+    public static final String NAME = "Name";
     private static final String DECK_TYPE = "Deck Type";
-    private static final String COMMENT = "Comment";
+    public static final String COMMENT = "Comment";
     private static final String PLAYER = "Player";
     private static final String CSTM_POOL = "Custom Pool";
     private static final String PLAYER_TYPE = "PlayerType";

@@ -25,7 +25,7 @@ import java.util.Random;
 
 import forge.AllZone;
 import forge.Singletons;
-import forge.deck.io.DeckIOCore;
+import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -99,7 +99,7 @@ public class QuestEventManager {
 
             // Assemble metadata (may not be necessary later) and deck object.
             this.assembleEventMetadata(contents, tempEvent);
-            tempEvent.setEventDeck(DeckIOCore.readDeck(contents));
+            tempEvent.setEventDeck(Deck.fromLines(contents));
         } // End for(allFiles)
 
         this.assembleDuelDifficultyLists();

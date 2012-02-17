@@ -2,8 +2,8 @@ package forge.deck;
 
 import java.io.Serializable;
 import forge.item.CardPrinted;
-import forge.item.IHasName;
 import forge.item.ItemPoolView;
+import forge.util.IHasName;
 
 /** 
  * TODO: Write javadoc for this type.

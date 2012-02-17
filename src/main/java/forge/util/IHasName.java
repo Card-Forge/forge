@@ -1,4 +1,4 @@
-package forge.item;
+package forge.util;
 
 /** 
  * TODO: Write javadoc for this type.

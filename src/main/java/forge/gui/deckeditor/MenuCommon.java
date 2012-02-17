@@ -30,7 +30,6 @@ import forge.CardList;
 import forge.Command;
 import forge.deck.Deck;
 import forge.deck.generate.GenerateConstructedDeck;
-import forge.deck.io.DeckIOCore;
 import forge.deck.io.DeckSerializer;
 import forge.error.ErrorViewer;
 
@@ -120,7 +119,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         if (file == null) {
         } else if (file.getName().endsWith(".dck")) {
             try {
-                getController().setModel(DeckIOCore.readDeck(file));
+                getController().setModel(Deck.fromFile(file));
 
             } catch (final Exception ex) {
                 ErrorViewer.showError(ex);

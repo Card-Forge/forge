@@ -17,6 +17,8 @@
  */
 package forge.item;
 
+import forge.util.IHasName;
+
 /**
  * Interface to define a player's inventory may hold. Should include
  * CardPrinted, Booster, Pets, Plants... etc

@@ -15,9 +15,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.PlayerType;
 import forge.deck.io.DeckFileHeader;
-import forge.deck.io.DeckIOCore;
+import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckSetSerializer;
 import forge.util.FileUtil;
+import forge.util.IFolderMap;
 import forge.util.SectionUtil;
 
 /** 
@@ -85,13 +86,13 @@ public class OldDeckParser {
         for( File f : deckDir.listFiles(bdkFileFilter)) 
         {
             boolean gotError = false;
-            Deck human = DeckIOCore.readDeck(new File(f, "0.dck"));
+            Deck human = Deck.fromFile(new File(f, "0.dck"));
             final DeckSet d = new DeckSet(human.getName());
             d.setHumanDeck(human);
     
             
             for (int i = 1; i < DeckSetSerializer.MAX_DRAFT_PLAYERS; i++) {
-                Deck nextAi = DeckIOCore.readDeck(new File(f, i + ".dck"));
+                Deck nextAi = Deck.fromFile(new File(f, i + ".dck"));
                 if (nextAi == null) {
                     gotError = true;
                     break;
@@ -121,20 +122,20 @@ public class OldDeckParser {
        boolean allowDeleteUnsupportedConstructed = false;
        Map<String, Pair<DeckSet, MutablePair<File,File>>> sealedDecks = new TreeMap<String, Pair<DeckSet, MutablePair<File,File>>>(String.CASE_INSENSITIVE_ORDER);
        
-       for( File f : deckDir.listFiles(DeckIOCore.DCK_FILE_FILTER))
+       for( File f : deckDir.listFiles(DeckSerializer.DCK_FILE_FILTER))
        {
            boolean importedOk = false;
            
            List<String> fileLines = FileUtil.readFile(f);
            Map<String, List<String>> sections = SectionUtil.parseSections(fileLines);
-           DeckFileHeader dh = DeckIOCore.readDeckMetadata(sections);
+           DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
            String name = dh.getName();
            if ( dh.isCustomPool() ) { continue; }
            
            switch(dh.getDeckType()) {
            case Constructed:
                try {
-                   constructed.add(DeckIOCore.readDeck(fileLines));
+                   constructed.add(Deck.fromLines(fileLines));
                    importedOk = true;
                } catch( NoSuchElementException ex) {
                    if( !allowDeleteUnsupportedConstructed ) {
@@ -154,7 +155,7 @@ public class OldDeckParser {
                if( null == stored )
                    stored = ImmutablePair.of(new DeckSet(name), MutablePair.of((File)null, (File)null));
                
-               Deck deck = DeckIOCore.readDeck(fileLines);
+               Deck deck = Deck.fromLines(fileLines);
                if( isAi ) {
                    stored.getLeft().addAiDeck(deck);
                    stored.getRight().setRight(f);

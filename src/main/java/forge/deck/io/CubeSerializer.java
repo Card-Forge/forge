@@ -61,7 +61,7 @@ public class CubeSerializer extends DeckSerializerBase<CustomLimited> {
      * @return a File
      */
     public File makeFileFor(final CustomLimited deck) {
-        return new File(getDirectory(), DeckIOCore.deriveFileName(cleanDeckName(deck.getName())) + ".cub");
+        return new File(getDirectory(), deriveFileName(cleanDeckName(deck.getName())) + ".cub");
     }
 
     /* (non-Javadoc)

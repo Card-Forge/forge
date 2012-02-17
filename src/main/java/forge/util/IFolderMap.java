@@ -1,6 +1,5 @@
-package forge.deck;
+package forge.util;
 
-import forge.item.IHasName;
 
 /** 
  * TODO: Write javadoc for this type.

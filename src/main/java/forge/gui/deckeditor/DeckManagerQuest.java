@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
-import forge.item.CardPrinted;
 import forge.quest.data.QuestData;
 
 /** 

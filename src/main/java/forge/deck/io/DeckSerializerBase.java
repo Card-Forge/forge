@@ -31,13 +31,14 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.error.ErrorViewer;
-import forge.item.IHasName;
+import forge.util.IHasName;
+import forge.util.IItemSerializer;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class DeckSerializerBase<T extends IHasName> implements IDeckSerializer<T> {
+public abstract class DeckSerializerBase<T extends IHasName> implements IItemSerializer<T> {
 
     private final File directory;
     
@@ -68,6 +69,10 @@ public abstract class DeckSerializerBase<T extends IHasName> implements IDeckSer
         }
     }
     
+    public String deriveFileName(final String deckName) {
+        // skips all but the listed characters
+        return deckName.replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
+    }    
     
     // only accepts numbers, letters or dashes up to 20 characters in length
     /**

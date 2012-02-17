@@ -15,15 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck;
+package forge.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
-import forge.deck.io.IDeckReader;
-import forge.item.IHasName;
 
 //reads and writeDeck Deck objects
 /**
@@ -45,7 +43,7 @@ public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMa
      * @param deckDir
      *            a {@link java.io.File} object.
      */
-    public FolderMapView(IDeckReader<T> io ) {
+    public FolderMapView(IItemReader<T> io ) {
         this.map = io.readAll();
     }
 

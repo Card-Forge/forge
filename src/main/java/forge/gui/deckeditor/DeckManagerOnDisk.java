@@ -7,8 +7,7 @@ import net.slightlymagic.braids.util.lambda.Lambda0;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.DeckBase;
-import forge.deck.FolderMap;
-import forge.deck.IFolderMap;
+import forge.util.IFolderMap;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.item.CardPrinted;
-import forge.item.IHasName;
 import forge.item.ItemPoolView;
+import forge.util.IHasName;
 
 
 /** 

@@ -35,6 +35,7 @@ import forge.Card;
 import forge.deck.Deck;
 import forge.item.CardPrinted;
 import forge.util.FileUtil;
+import forge.util.SectionUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -174,7 +175,7 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
      *            a {@link java.io.File} object.
      */
     public static void writeDeck(final Deck d, final File f) {
-        FileUtil.writeFile(f, DeckIOCore.saveDeck(d));
+        FileUtil.writeFile(f, d.save());
     }
 
     /**
@@ -203,7 +204,7 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
      */
     @Override
     public void save(Deck unit) {
-        FileUtil.writeFile(makeFileFor(unit), DeckIOCore.saveDeck(unit));
+        FileUtil.writeFile(makeFileFor(unit), unit.save());
     }
 
     /* (non-Javadoc)
@@ -211,10 +212,9 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
      */
     @Override
     public void erase(Deck unit) {
+        makeFileFor(unit).delete();
     }
-
-
-
+    
     /**
      * 
      * Make file name.
@@ -226,7 +226,7 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
      * @return a File
      */
     public File makeFileFor(final Deck deck) {
-        return new File(getDirectory(), DeckIOCore.deriveFileName(cleanDeckName(deck.getName())) + ".dck");
+        return new File(getDirectory(), deriveFileName(cleanDeckName(deck.getName())) + ".dck");
     }
 
     /* (non-Javadoc)
@@ -234,7 +234,7 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
      */
     @Override
     protected Deck read(File file) {
-        return DeckIOCore.readDeck(file);
+        return Deck.fromFile(file);
     }
 
     /* (non-Javadoc)
@@ -243,6 +243,17 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
     @Override
     protected FilenameFilter getFileFilter() {
         return DCK_FILE_FILTER;
+    }
+
+    public static DeckFileHeader readDeckMetadata(final Map<String,List<String>> map) {
+        List<String> lines = map.get("metadata");
+        if (lines == null) {
+            return null;
+        }
+        DeckFileHeader d = new DeckFileHeader(SectionUtil.parseKvPairs(lines, "="));
+        
+    
+        return d;
     }
 
 }

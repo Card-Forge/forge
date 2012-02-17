@@ -31,7 +31,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.deck.DeckBase;
-import forge.deck.io.DeckIOCore;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 
@@ -201,7 +200,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
             return "";
         }
 
-        final String deckName = DeckIOCore.cleanDeckName(o.toString());
+        final String deckName = o.toString();
         final boolean isGoodName = controller.isGoodName(deckName);
 
         if (isGoodName) {

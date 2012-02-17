@@ -50,16 +50,16 @@ public class DeckSetSerializer extends DeckSerializerBase<DeckSet> {
     public void save(DeckSet unit) {
         final File f = makeFileFor(unit);
         f.mkdir();
-        FileUtil.writeFile(new File(f, "human.dck"), DeckIOCore.saveDeck(unit.getHumanDeck()));
+        FileUtil.writeFile(new File(f, "human.dck"), unit.getHumanDeck().save());
         List<Deck> aiDecks = unit.getAiDecks();
         for (int i = 1; i <= aiDecks.size(); i++) {
-            FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), DeckIOCore.saveDeck(aiDecks.get(i-1)));
+            FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), aiDecks.get(i-1).save());
         }
     }
 
     protected final DeckSet read(File file)
     {
-        Deck human = DeckIOCore.readDeck(new File(file, "human.dck"));
+        Deck human = Deck.fromFile(new File(file, "human.dck"));
         final DeckSet d = new DeckSet(human.getName());
         d.setHumanDeck(human);
         for (int i = 1; i < MAX_DRAFT_PLAYERS; i++) {
@@ -67,7 +67,7 @@ public class DeckSetSerializer extends DeckSerializerBase<DeckSet> {
             if( !theFile.exists() ) 
                 break;
             
-            d.addAiDeck(DeckIOCore.readDeck(theFile));
+            d.addAiDeck(Deck.fromFile(theFile));
         }
         return d;
     }
@@ -87,7 +87,7 @@ public class DeckSetSerializer extends DeckSerializerBase<DeckSet> {
     }
 
     public File makeFileFor(final DeckSet decks) {
-        return new File(getDirectory(), DeckIOCore.deriveFileName(decks.getName()));
+        return new File(getDirectory(), deriveFileName(cleanDeckName(decks.getName())));
     }
 
     /* (non-Javadoc)

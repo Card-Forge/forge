@@ -15,10 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck;
+package forge.util;
 
-import forge.deck.io.IDeckSerializer;
-import forge.item.IHasName;
 
 //reads and writeDeck Deck objects
 /**
@@ -31,7 +29,7 @@ import forge.item.IHasName;
  */
 public class FolderMap<T extends IHasName> extends FolderMapView<T> implements IFolderMap<T> {
 
-    private IDeckSerializer<T> serializer;
+    private IItemSerializer<T> serializer;
     /**
      * <p>
      * Constructor for DeckManager.
@@ -40,7 +38,7 @@ public class FolderMap<T extends IHasName> extends FolderMapView<T> implements I
      * @param deckDir
      *            a {@link java.io.File} object.
      */
-    public FolderMap(IDeckSerializer<T> io ) {
+    public FolderMap(IItemSerializer<T> io ) {
         super(io);
         serializer = io;
     }

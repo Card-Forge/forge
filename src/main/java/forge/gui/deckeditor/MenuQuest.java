@@ -31,7 +31,6 @@ import javax.swing.JMenuItem;
 import forge.Command;
 import forge.Constant;
 import forge.deck.Deck;
-import forge.deck.io.DeckIOCore;
 import forge.deck.io.DeckSerializer;
 import forge.error.ErrorViewer;
 import forge.gui.ListChooser;
@@ -85,7 +84,7 @@ public class MenuQuest extends MenuBase<Deck> {
 
         if (file != null && file.getName().endsWith(".dck")) {
             try {
-                final Deck newDeck = DeckIOCore.readDeck(file);
+                final Deck newDeck = Deck.fromFile(file);
                 getController().importDeck(newDeck);
 
             } catch (final Exception ex) {
@@ -106,7 +105,7 @@ public class MenuQuest extends MenuBase<Deck> {
     private final File getImportFilename() {
         final JFileChooser chooser = new JFileChooser(MenuQuest.previousDirectory);
 
-        chooser.addChoosableFileFilter(DeckIOCore.DCK_FILTER);
+        chooser.addChoosableFileFilter(DeckSerializer.DCK_FILTER);
         final int returnVal = chooser.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {

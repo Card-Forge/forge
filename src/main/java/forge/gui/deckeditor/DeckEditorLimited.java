@@ -40,7 +40,6 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.deck.Deck;
 import forge.deck.DeckSet;
-import forge.deck.IFolderMap;
 import forge.error.ErrorViewer;
 import forge.gui.deckeditor.elements.CardPanelHeavy;
 import forge.gui.deckeditor.elements.FilterCheckBoxes;
@@ -50,6 +49,7 @@ import forge.gui.deckeditor.elements.TableColumnInfo;
 import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.util.IFolderMap;
 
 /**
  * <p>
