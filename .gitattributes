@@ -9828,6 +9828,7 @@ res/cardsfolder/v/vulshok_war_boar.txt -text
 res/cardsfolder/v/vulturous_zombie.txt svneol=native#text/plain
 res/cardsfolder/w/wail_of_the_nim.txt svneol=native#text/plain
 res/cardsfolder/w/waiting_in_the_weeds.txt svneol=native#text/plain
+res/cardsfolder/w/wake_of_destruction.txt -text svneol=unset#text/plain
 res/cardsfolder/w/wake_of_vultures.txt svneol=native#text/plain
 res/cardsfolder/w/wake_thrasher.txt svneol=native#text/plain
 res/cardsfolder/w/wakedancer.txt -text
