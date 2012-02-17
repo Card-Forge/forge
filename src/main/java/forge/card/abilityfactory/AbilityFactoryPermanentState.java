@@ -1508,6 +1508,11 @@ public class AbilityFactoryPermanentState {
      */
     private static void tapAllResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
+        final Card card = sa.getSourceCard();
+        final boolean remTapped = params.containsKey("RememberTapped");
+        if (remTapped) {
+            card.clearRemembered();
+        }
 
         CardList cards = null;
 
@@ -1530,6 +1535,9 @@ public class AbilityFactoryPermanentState {
         cards = AbilityFactory.filterListByType(cards, params.get("ValidCards"), sa);
 
         for (final Card c : cards) {
+            if (remTapped) {
+            card.addRemembered(c);
+            }
             c.tap();
         }
     }

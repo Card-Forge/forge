@@ -290,6 +290,7 @@ res/cardsfolder/a/angels_feather.txt svneol=native#text/plain
 res/cardsfolder/a/angels_grace.txt svneol=native#text/plain
 res/cardsfolder/a/angels_herald.txt -text
 res/cardsfolder/a/angels_mercy.txt svneol=native#text/plain
+res/cardsfolder/a/angels_trumpet.txt -text svneol=unset#text/plain
 res/cardsfolder/a/angelsong.txt svneol=native#text/plain
 res/cardsfolder/a/anger.txt svneol=native#text/plain
 res/cardsfolder/a/angry_mob.txt svneol=native#text/plain
