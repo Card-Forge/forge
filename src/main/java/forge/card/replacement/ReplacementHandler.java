@@ -98,8 +98,8 @@ public class ReplacementHandler {
             }
         }
 
-        if (chosenRE != null) {           
-            if(executeReplacement(runParams, chosenRE, decider)) {
+        if (chosenRE != null) {
+            if (executeReplacement(runParams, chosenRE, decider)) {
                 AllZone.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
                 return true;
             }
@@ -121,10 +121,10 @@ public class ReplacementHandler {
 
         HashMap<String, String> mapParams = replacementEffect.getMapParams();
         replacementEffect.setHasRun(true);
-        
+
         SpellAbility effectSA = null;
-        
-        if(mapParams.containsKey("ReplaceWith")) {
+
+        if (mapParams.containsKey("ReplaceWith")) {
             String effectSVar = mapParams.get("ReplaceWith");
             String effectAbString = replacementEffect.getHostCard().getSVar(effectSVar);
 
@@ -134,14 +134,14 @@ public class ReplacementHandler {
 
             replacementEffect.setReplacingObjects(runParams, effectSA);
         }
-        
+
         //Decider gets to choose wether or not to apply the replacement.
         if (replacementEffect.getMapParams().containsKey("Optional")) {
             Player optDecider = decider;
-            if(mapParams.containsKey("OptionalDecider") && effectSA != null) {
+            if (mapParams.containsKey("OptionalDecider") && effectSA != null) {
                 optDecider = AbilityFactory.getDefinedPlayers(replacementEffect.getHostCard(), mapParams.get("OptionalDecider"), effectSA).get(0);
             }
-            
+
             if (optDecider.isHuman()) {
                 StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
                 buildQuestion.append(replacementEffect.getHostCard());
@@ -153,7 +153,7 @@ public class ReplacementHandler {
                 }
             } else {
                 //AI-logic
-                if(!replacementEffect.aiShouldRun(effectSA)) {
+                if (!replacementEffect.aiShouldRun(effectSA)) {
                     return false;
                 }
             }
@@ -164,7 +164,7 @@ public class ReplacementHandler {
                 replacementEffect.setHasRun(false);
                 return true; //Nothing should replace the event.
             }
-        }       
+        }
 
         if (replacementEffect.getHostCard().getController().isHuman()) {
             AllZone.getGameAction().playSpellAbilityNoStack(effectSA, false);
@@ -174,7 +174,7 @@ public class ReplacementHandler {
         }
 
         replacementEffect.setHasRun(false);
-        
+
         return true;
     }
 

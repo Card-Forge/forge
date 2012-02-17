@@ -310,7 +310,11 @@ public class FModel {
         return this.gameState;
     }
 
-    /** TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase. */
+    /**
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
+     * 
+     * @return a boolean.
+     */
     public final boolean savePrefs() {
         final ForgePreferences fp = preferences;
         final List<ViewField> fieldViews = Singletons.getView().getMatchView().getFieldViews();
@@ -354,7 +358,11 @@ public class FModel {
         return true;
     }
 
-    /** TODO: Needs to be reworked for efficiency with rest of prefs loads in codebase. */
+    /**
+     * TODO: Needs to be reworked for efficiency with rest of prefs loads in codebase.
+     * 
+     * @return a boolean.
+     */
     public final boolean loadPrefs() {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
         final List<ViewField> fieldViews = Singletons.getView().getMatchView().getFieldViews();
