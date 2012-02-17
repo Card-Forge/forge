@@ -244,8 +244,8 @@ public class FPanel extends JPanel {
 
     private void drawBackgroundTexture(final Graphics2D g2d0) {
         Rectangle oldClipBounds = g2d0.getClipBounds();
-        clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
-        g2d0.setClip(clip);
+        //clip = new Area(new RoundRectangle2D.Float(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter));
+        //g2d0.setClip(clip);
 
         this.tempX = 0;
         this.tempY = 0;
