@@ -8,7 +8,8 @@ SVar:X:Count$xPaid
 SVar:BreakthroughY:Count$InYourHand
 SVar:BreakthroughZ:SVar$BreakthroughY/Minus.X
 SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breakthrough.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/26.jpg
+Oracle:Draw four cards, then choose X cards in your hand and discard the rest.
 End
