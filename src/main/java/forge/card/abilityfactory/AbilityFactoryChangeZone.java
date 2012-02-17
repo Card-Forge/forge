@@ -1017,7 +1017,6 @@ public final class AbilityFactoryChangeZone {
         if (params.containsKey("Unimprint")) {
             card.clearImprinted();
         }
-        System.out.println("change fetchList:" + fetchList);
 
         for (int i = 0; i < changeNum; i++) {
             if ((fetchList.size() == 0) || (destination == null)) {

@@ -308,7 +308,12 @@ public final class AbilityFactoryPlay {
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                 AllZone.getGameAction().playSpellAbility(newSA);
             } else if (tgtSA.canPlayAI()) {
-                ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
+                if (sa instanceof Spell) {
+                    Spell spell = (Spell) sa;
+                    if (spell.canPlayFromEffectAI(false, true)) {
+                        ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
+                    }
+                }
             }
         } else {
             if (controller.isHuman()) {

@@ -555,6 +555,7 @@ public class AbilityFactoryPump {
      */
     private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         if (!mandatory
+                && sa.getPayCosts() != null
                 && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(this.abilityFactory.isCurse() && ((defense < 0) || !this
                         .containsCombatRelevantKeyword(this.keywords)))) {
@@ -571,7 +572,12 @@ public class AbilityFactoryPump {
                 return true;
             }
         } else {
-            list = this.getPumpCreatures(defense, attack, sa);
+            if (!tgt.canTgtCreature()) {
+                Zone zone = tgt.getZone().get(0);
+                list = AllZoneUtil.getCardsIn(zone);
+            } else {
+                list = this.getPumpCreatures(defense, attack, sa);
+            }
             if (tgt.canTgtPlayer() && !tgt.canOnlyTgtOpponent()) {
                 tgt.addTarget(AllZone.getComputerPlayer());
                 return true;
@@ -617,7 +623,7 @@ public class AbilityFactoryPump {
                 }
             }
 
-            t = CardFactoryUtil.getBestCreatureAI(list);
+            t = CardFactoryUtil.getBestAI(list);
             tgt.addTarget(t);
             list.remove(t);
         }
