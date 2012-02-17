@@ -5401,6 +5401,7 @@ res/cardsfolder/m/memnite.txt svneol=native#text/plain
 res/cardsfolder/m/memory_erosion.txt svneol=native#text/plain
 res/cardsfolder/m/memory_jar.txt -text
 res/cardsfolder/m/memory_lapse.txt svneol=native#text/plain
+res/cardsfolder/m/memory_plunder.txt -text
 res/cardsfolder/m/mending_hands.txt svneol=native#text/plain
 res/cardsfolder/m/meng_huo_barbarian_king.txt svneol=native#text/plain
 res/cardsfolder/m/meng_huos_horde.txt svneol=native#text/plain
@@ -11032,6 +11033,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryEndGameCondition.java svne
 src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPermanentState.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/AbilityFactoryPlay.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryPreventDamage.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryProtection.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain

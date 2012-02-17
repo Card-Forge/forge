@@ -935,6 +935,16 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryPermanentState.createDrawbackPhases(this);
             }
         }
+        
+        else if (this.api.equals("Play")) {
+            if (this.isAb) {
+                spellAbility = AbilityFactoryPlay.createAbilityPlay(this);
+            } else if (this.isSp) {
+                spellAbility = AbilityFactoryPlay.createSpellPlay(this);
+            } else if (this.isDb) {
+                spellAbility = AbilityFactoryPlay.createDrawbackPlay(this);
+            }
+        }
 
         else if (this.api.equals("Poison")) {
             if (this.isAb) {
