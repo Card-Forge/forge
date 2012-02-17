@@ -337,16 +337,10 @@ public class FModel {
     }
 
     /**
-<<<<<<< HEAD
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
-     * 
-     * @return a boolean.
-=======
      * TODO: Needs to be reworked for efficiency with rest of prefs saves in
      * codebase.
      *
      * @return true, if successful
->>>>>>> Update Maven plugins. Checkstyle
      */
     public final boolean savePrefs() {
         final ForgePreferences fp = this.preferences;
@@ -396,16 +390,10 @@ public class FModel {
     }
 
     /**
-<<<<<<< HEAD
-     * TODO: Needs to be reworked for efficiency with rest of prefs loads in codebase.
-     * 
-     * @return a boolean.
-=======
      * TODO: Needs to be reworked for efficiency with rest of prefs loads in
      * codebase.
      *
      * @return true, if successful
->>>>>>> Update Maven plugins. Checkstyle
      */
     public final boolean loadPrefs() {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
