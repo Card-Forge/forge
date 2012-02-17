@@ -288,13 +288,13 @@ public class AbilityFactoryTurns {
             }
         }
     }
-    
+
     // *************************************************************************
     // ************************* END TURN **************************************
     // *************************************************************************
-    
+
     public static SpellAbility createAbilityEndTurn(final AbilityFactory af) {
-        SpellAbility ret = new AbilityActivated(af.getHostCard(),af.getAbCost(),af.getAbTgt()) {
+        SpellAbility ret = new AbilityActivated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 
             private static final long serialVersionUID = 72570867940224012L;
 
@@ -302,41 +302,41 @@ public class AbilityFactoryTurns {
             public String getStackDescription() {
                 return "End the turn.";
             }
-            
+
             @Override
             public boolean canPlayAI() {
                 return false;
             }
-            
+
             @Override
             public boolean doTrigger(boolean mandatory) {
-                if(mandatory) {
+                if (mandatory) {
                     return true;
                 }
-                
+
                 return false;
             }
-            
+
             @Override
             public void resolve() {
-                endTurnResolve(af,this);
+                endTurnResolve(af, this);
             }
-            
+
         };
-        
+
         return ret;
     }
-    
+
     public static SpellAbility createSpellEndTurn(final AbilityFactory af) {
-        SpellAbility ret = new Spell(af.getHostCard(),af.getAbCost(),af.getAbTgt()) {
+        SpellAbility ret = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 
             private static final long serialVersionUID = -2553413143747617709L;
-            
+
             @Override
             public String getStackDescription() {
                 return "End the turn.";
             }
-            
+
             @Override
             public boolean canPlayAI() {
                 return false;
@@ -344,14 +344,14 @@ public class AbilityFactoryTurns {
 
             @Override
             public void resolve() {
-                endTurnResolve(af,this);
+                endTurnResolve(af, this);
             }
-        
+
         };
-        
+
         return ret;
     }
-    
+
     public static SpellAbility createDrawbackEndTurn(final AbilityFactory af) {
         final SpellAbility dbEndTurn = new AbilitySub(af.getHostCard(), af.getAbTgt()) {
             private static final long serialVersionUID = -562517287448810951L;
@@ -373,36 +373,36 @@ public class AbilityFactoryTurns {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                if(mandatory) {
+                if (mandatory) {
                     return true;
                 }
-                
+
                 return false;
             }
 
         };
         return dbEndTurn;
     }
-    
+
     private static void endTurnResolve(final AbilityFactory af, final SpellAbility sa) {
-        
+
         //Steps taken from gatherer's rulings on Time Stop.
         //1) All spells and abilities on the stack are exiled. This includes Time Stop, though it will continue to resolve. It also includes spells and abilities that can't be countered.
-        for(Card c : AllZone.getStackZone().getCards()) {
+        for (Card c : AllZone.getStackZone().getCards()) {
             AllZone.getGameAction().exile(c);
         }
         AllZone.getStack().getStack().clear();
-        
+
         //2) All attacking and blocking creatures are removed from combat.
         AllZone.getCombat().resetAttackers();
         AllZone.getCombat().resetBlockers();
-        
+
         //3) State-based actions are checked. No player gets priority, and no triggered abilities are put onto the stack.
         AllZone.getGameAction().checkStateEffects();
-        
+
         //4) The current phase and/or step ends. The game skips straight to the cleanup step. The cleanup step happens in its entirety.
         AllZone.getPhaseHandler().setPhaseState(Constant.Phase.CLEANUP);
-        
+
         //Update observers
         AllZone.getStack().updateObservers();
         AllZone.getComputerPlayer().updateObservers();
