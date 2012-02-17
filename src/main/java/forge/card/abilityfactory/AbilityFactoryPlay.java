@@ -20,19 +20,26 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardList;
 import forge.ComputerUtil;
 import forge.Player;
+import forge.Constant.Zone;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.util.MyRandom;
 /**
  * <p>
  * AbilityFactory_Copy class.
@@ -225,7 +232,57 @@ public final class AbilityFactoryPlay {
      * @return a boolean.
      */
     private static boolean PlayCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return false;
+        final Cost abCost = af.getAbCost();
+        final Card source = af.getHostCard();
+        final HashMap<String, String> params = af.getMapParams();
+        final Random r = MyRandom.getRandom();
+
+        if (abCost != null) {
+            // AI currently disabled for these costs
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+                return false;
+            }
+
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
+                return false;
+            }
+
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
+                return false;
+            }
+
+            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+                return false;
+            }
+        }
+        
+        // don't use this as a response
+        if (AllZone.getStack().size() != 0) {
+            return false;
+        }
+        
+        // prevent run-away activations - first time will always return true
+        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getRestrictions().getNumberTurnActivations());
+
+        CardList cards;
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            Zone zone = tgt.getZone().get(0);
+            cards = AllZoneUtil.getCardsIn(zone);
+            cards = cards.getValidCards(tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+            if (cards.isEmpty()) {
+                return false;
+            }
+            tgt.addTarget(CardFactoryUtil.getBestAI(cards));
+        } else {
+            cards = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
+            if (cards.isEmpty()) {
+                return false;
+            }
+        }
+        
+
+        return chance;
     }
 
     /**
@@ -277,14 +334,19 @@ public final class AbilityFactoryPlay {
         if (tgtCards.isEmpty()) {
             return;
         }
+
         Card tgtCard = tgtCards.get(0);
+        if (tgtCard.isLand()) {
+            controller.playLand(tgtCard);
+            return;
+        }
 
         ArrayList<SpellAbility> sas = tgtCard.getBasicSpells();
         if (sas.isEmpty()) {
             return;
         }
         SpellAbility tgtSA = sas.get(0);
-
+        
         if (params.containsKey("WithoutManaCost")) {
             if (controller.isHuman()) {
                 final SpellAbility newSA = tgtSA.copy();

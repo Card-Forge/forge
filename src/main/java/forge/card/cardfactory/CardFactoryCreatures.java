@@ -729,7 +729,7 @@ public class CardFactoryCreatures {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Horde of Notions")) {
+        /*else if (cardName.equals("Horde of Notions")) {
             final Ability ability = new Ability(card, "W U B R G") {
                 @Override
                 public void resolve() {
@@ -782,7 +782,7 @@ public class CardFactoryCreatures {
             sbStack.append("graveyard without paying its mana cost.");
             ability.setStackDescription(sbStack.toString());
             ability.setBeforePayMana(new InputPayManaCost(ability));
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Rhys the Redeemed")) {
