@@ -682,7 +682,7 @@ public class ComputerUtil {
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            manapool.clearPay(sa, test); 
+            manapool.clearPay(sa, test);
             return true;
         }
 

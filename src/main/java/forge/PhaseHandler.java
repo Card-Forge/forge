@@ -1028,7 +1028,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public final void setDevPhaseState(final String phaseID) {
         this.phaseIndex = this.findIndex(phaseID);
     }
-    
+
     public final void setPhaseState(final String phaseID) {
         this.phaseIndex = this.findIndex(phaseID);
         this.handleBeginPhase();

@@ -2324,7 +2324,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                         && selectedCard.canBeTargetedBy(switchTargets)) {
                                     newTarget[0] = selectedCard;
                                     final StringBuilder sb = new StringBuilder();
-                                    sb.append(c).append(" - switching to copy " + selectedCard.getName() + ".");
+                                    sb.append(c).append(" - switching to copy ");
+                                    sb.append(selectedCard.getName()).append(".");
                                     switchTargets.setStackDescription(sb.toString());
                                     AllZone.getStack().add(switchTargets);
                                     this.stop();
@@ -2334,7 +2335,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
                 }
             };
-            
+
             ability.setDescription(keyword);
             ability.setStackDescription("(OPTIONAL) " + keyword);
 

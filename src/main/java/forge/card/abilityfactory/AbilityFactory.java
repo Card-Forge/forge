@@ -935,7 +935,7 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryPermanentState.createDrawbackPhases(this);
             }
         }
-        
+
         else if (this.api.equals("Play")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryPlay.createAbilityPlay(this);

@@ -2729,7 +2729,7 @@ public abstract class Player extends GameEntity {
     public final Object getMustAttackEntity() {
         return this.mustAttackEntity;
     }
-    
+
     public final void updateLabelObservers() {
         this.getZone(Zone.Hand).updateObservers();
     }
