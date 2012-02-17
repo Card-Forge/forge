@@ -71,22 +71,22 @@ public final class AbilityFactoryPlay {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryPlay.PlayStackDescription(af, this);
+                return AbilityFactoryPlay.playStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPlay.PlayCanPlayAI(af, this);
+                return AbilityFactoryPlay.playCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                AbilityFactoryPlay.PlayResolve(af, this);
+                AbilityFactoryPlay.playResolve(af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPlay.PlayTriggerAI(af, this, mandatory);
+                return AbilityFactoryPlay.playTriggerAI(af, this, mandatory);
             }
 
         };
@@ -108,17 +108,17 @@ public final class AbilityFactoryPlay {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryPlay.PlayStackDescription(af, this);
+                return AbilityFactoryPlay.playStackDescription(af, this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPlay.PlayCanPlayAI(af, this);
+                return AbilityFactoryPlay.playCanPlayAI(af, this);
             }
 
             @Override
             public void resolve() {
-                AbilityFactoryPlay.PlayResolve(af, this);
+                AbilityFactoryPlay.playResolve(af, this);
             }
 
             @Override
@@ -126,7 +126,7 @@ public final class AbilityFactoryPlay {
                 if (withOutManaCost) {
                     return true;
                 }
-                return AbilityFactoryPlay.PlayTriggerAI(af, this, mandatory);
+                return AbilityFactoryPlay.playTriggerAI(af, this, mandatory);
             }
 
         };
@@ -148,12 +148,12 @@ public final class AbilityFactoryPlay {
 
             @Override
             public String getStackDescription() {
-                return AbilityFactoryPlay.PlayStackDescription(af, this);
+                return AbilityFactoryPlay.playStackDescription(af, this);
             }
 
             @Override
             public void resolve() {
-                AbilityFactoryPlay.PlayResolve(af, this);
+                AbilityFactoryPlay.playResolve(af, this);
             }
 
             @Override
@@ -163,7 +163,7 @@ public final class AbilityFactoryPlay {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPlay.PlayTriggerAI(af, this, mandatory);
+                return AbilityFactoryPlay.playTriggerAI(af, this, mandatory);
             }
 
         };
@@ -172,7 +172,7 @@ public final class AbilityFactoryPlay {
 
     /**
      * <p>
-     * PlayStackDescription.
+     * playStackDescription.
      * </p>
      * 
      * @param af
@@ -181,7 +181,7 @@ public final class AbilityFactoryPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String PlayStackDescription(final AbilityFactory af, final SpellAbility sa) {
+    private static String playStackDescription(final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final HashMap<String, String> params = af.getMapParams();
 
@@ -223,7 +223,7 @@ public final class AbilityFactoryPlay {
 
     /**
      * <p>
-     * PlayCanPlayAI.
+     * playCanPlayAI.
      * </p>
      * 
      * @param af
@@ -232,7 +232,7 @@ public final class AbilityFactoryPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean PlayCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean playCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         final Cost abCost = af.getAbCost();
         final Card source = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
@@ -256,12 +256,12 @@ public final class AbilityFactoryPlay {
                 return false;
             }
         }
-        
+
         // don't use this as a response
         if (AllZone.getStack().size() != 0) {
             return false;
         }
-        
+
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getRestrictions().getNumberTurnActivations());
 
@@ -281,14 +281,12 @@ public final class AbilityFactoryPlay {
                 return false;
             }
         }
-        
-
         return chance;
     }
 
     /**
      * <p>
-     * PlayTriggerAI.
+     * playTriggerAI.
      * </p>
      * 
      * @param af
@@ -299,14 +297,14 @@ public final class AbilityFactoryPlay {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean PlayTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean playTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         return false;
     }
 
     /**
      * <p>
-     * PlayResolve.
+     * playResolve.
      * </p>
      * 
      * @param af
@@ -314,7 +312,7 @@ public final class AbilityFactoryPlay {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void PlayResolve(final AbilityFactory af, final SpellAbility sa) {
+    private static void playResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
         Player controller = sa.getActivatingPlayer();
@@ -352,7 +350,7 @@ public final class AbilityFactoryPlay {
             return;
         }
         SpellAbility tgtSA = sas.get(0);
-        
+
         if (params.containsKey("WithoutManaCost")) {
             if (controller.isHuman()) {
                 final SpellAbility newSA = tgtSA.copy();
