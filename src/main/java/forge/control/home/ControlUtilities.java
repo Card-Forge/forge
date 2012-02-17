@@ -8,16 +8,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import forge.AllZone;
 import forge.Command;
 import forge.GuiDownloadPicturesLQ;
 import forge.GuiDownloadPrices;
 import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
-import forge.deck.Deck;
 import forge.error.BugzReporter;
 import forge.game.GameType;
-import forge.gui.deckeditor.DeckEditorCommon;
+import forge.gui.deckeditor.DeckEditorBase;
+import forge.gui.deckeditor.DeckEditorConstructed;
+import forge.gui.deckeditor.DeckEditorLimited;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
 import forge.view.home.ViewUtilities;
@@ -59,7 +61,7 @@ public class ControlUtilities {
         };
 
         cmdDeckEditor = new Command() { @Override
-            public void execute() { showDeckEditor(null, null); } };
+            public void execute() { showDeckEditor(GameType.Constructed, null); } };
 
         cmdPicDownload = new Command() { @Override
             public void execute() { doDownloadPics(); } };
@@ -149,27 +151,32 @@ public class ControlUtilities {
      * @param gt0 &emsp; GameType
      * @param d0 &emsp; Deck
      */
-    public void showDeckEditor(GameType gt0, Deck d0) {
-        if (gt0 == null) {
-            gt0 = GameType.Constructed;
-        }
+    @SuppressWarnings("unchecked")
+    public <T> void showDeckEditor(GameType gt0, T d0) {
+        
+        DeckEditorBase<?, T> editor = null;
+        if ( gt0 == GameType.Constructed)
+            editor = (DeckEditorBase<?, T>) new DeckEditorConstructed();
+        if ( gt0 == GameType.Draft)
+            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getDraft());
+        if ( gt0 == GameType.Sealed)
+            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getSealed());
 
-        DeckEditorCommon editor = new DeckEditorCommon(gt0);
-
+        
         final Command exit = new Command() {
             private static final long serialVersionUID = -9133358399503226853L;
 
             @Override
             public void execute() {
                 view.getParentView().getConstructedController().updateDeckNames();
-                view.getParentView().getSealedController().updateDeckLists();
+                //view.getParentView().getSealedController().updateDeckLists();
             }
         };
 
         editor.show(exit);
 
         if (d0 != null) {
-            editor.getCustomMenu().showDeck(d0, gt0);
+            editor.getController().setModel(d0);
         }
 
         editor.setVisible(true);

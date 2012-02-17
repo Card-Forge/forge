@@ -152,7 +152,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      *            a Iterable<U>
      */
     @SuppressWarnings("unchecked")
-    public <U extends InventoryItem> void addAllCards(final Iterable<U> cards) {
+    public <U extends InventoryItem> void addAllFlat(final Iterable<U> cards) {
         for (final U cr : cards) {
             if (this.getMyClass().isInstance(cr)) {
                 this.add((T) cr);
@@ -171,8 +171,9 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      */
     @SuppressWarnings("unchecked")
     public <U extends InventoryItem> void addAll(final Iterable<Entry<U, Integer>> map) {
+        Class<T> myClass = this.getMyClass();
         for (final Entry<U, Integer> e : map) {
-            if (this.getMyClass().isInstance(e.getKey())) {
+            if (myClass.isInstance(e.getKey())) {
                 this.add((T) e.getKey(), e.getValue());
             }
         }

@@ -33,7 +33,6 @@ import forge.CardListUtil;
 import forge.Constant;
 import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
-import forge.game.GameType;
 import forge.util.MyRandom;
 
 /**
@@ -361,7 +360,7 @@ public class BoosterDraftAI {
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck buildDeck(final CardList dList, final DeckColors pClrs) {
-        final Deck out = new Deck(GameType.Draft);
+        
         final CardList outList = new CardList();
         int cardsNeeded = 22;
         int landsNeeded = 18;
@@ -618,15 +617,13 @@ public class BoosterDraftAI {
             }
         }
         if (outList.size() == 40) {
+            final Deck out = new Deck();
             out.getMain().add(outList);
             out.getSideboard().add(aiPlayables);
             out.getSideboard().add(dList);
-
-        } else {
-            throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
-        }
-
-        return out;
+            return out;
+        } 
+        throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
     }
 
     /*

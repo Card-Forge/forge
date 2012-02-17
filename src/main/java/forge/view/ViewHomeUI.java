@@ -35,6 +35,7 @@ import forge.control.home.ControlConstructed;
 import forge.control.home.ControlDraft;
 import forge.control.home.ControlSealed;
 import forge.control.home.ControlUtilities;
+import forge.game.GameType;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.home.ViewConstructed;
@@ -137,7 +138,7 @@ public class ViewHomeUI extends FPanel {
         btnDeckEditor = new FButton();
         btnDeckEditor.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
-                ViewHomeUI.this.getUtilitiesController().showDeckEditor(null, null);
+                ViewHomeUI.this.getUtilitiesController().showDeckEditor(GameType.Constructed, null);
             }
         });
         btnDeckEditor.setText("Deck Editor");

@@ -85,11 +85,11 @@ public class SectionUtil {
      * @param lines the lines
      * @return the map
      */
-    public static Map<String, String> parseKvPairs(final List<String> lines) {
+    public static Map<String, String> parseKvPairs(final List<String> lines, String separator ) {
         final Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         for (final String dd : lines) {
-            final String[] v = dd.split(":", 2);
+            final String[] v = dd.split(separator, 2);
             result.put(v[0], v.length > 1 ? v[1].trim() : "");
         }
 

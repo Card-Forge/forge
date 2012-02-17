@@ -43,7 +43,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.deck.Deck;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
-import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.item.CardPrinted;
 
@@ -85,7 +84,7 @@ public class DeckImport extends JDialog {
     /** The tokens. */
     private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
 
-    private final DeckEditorBase host;
+    private final DeckEditorConstructed host;
 
     /**
      * Instantiates a new deck import.
@@ -93,7 +92,7 @@ public class DeckImport extends JDialog {
      * @param g
      *            the g
      */
-    public DeckImport(final DeckEditorBase g) {
+    public DeckImport(final DeckEditorConstructed g) {
         this.host = g;
 
         final int wWidth = 600;
@@ -147,7 +146,7 @@ public class DeckImport extends JDialog {
                     return;
                 }
                 final Deck toSet = DeckImport.this.buildDeck();
-                DeckImport.this.host.setDeck(null, toSet.getMain(), toSet.getDeckType());
+                DeckImport.this.host.getController().setModel(toSet);
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
@@ -207,7 +206,7 @@ public class DeckImport extends JDialog {
     }
 
     private Deck buildDeck() {
-        final Deck result = new Deck(GameType.Constructed);
+        final Deck result = new Deck();
         boolean isMain = true;
         for (final DeckRecognizer.Token t : this.tokens) {
             final DeckRecognizer.TokenType type = t.getType();

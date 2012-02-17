@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.deck.DeckIO;
+import forge.deck.io.DeckSerializer;
 import forge.item.PreconDeck;
 
 /**
@@ -45,7 +45,7 @@ public class QuestPreconManager {
      */
     public QuestPreconManager(final File deckDir) {
         final List<String> decksThatFailedToLoad = new ArrayList<String>();
-        final File[] files = deckDir.listFiles(DeckIO.DCK_FILE_FILTER);
+        final File[] files = deckDir.listFiles(DeckSerializer.DCK_FILE_FILTER);
         for (final File file : files) {
             try {
                 this.decks.add(new PreconDeck(file));

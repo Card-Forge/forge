@@ -26,9 +26,9 @@ import java.util.Map.Entry;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Closure1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.deck.Deck;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -109,8 +109,8 @@ public class BoosterGenerator {
      * @param dPool
      *            the d pool
      */
-    public BoosterGenerator(final Deck dPool) {
-        for (final Entry<CardPrinted, Integer> e : dPool.getMain()) {
+    public BoosterGenerator(final ItemPoolView<CardPrinted> dPool) {
+        for (final Entry<CardPrinted, Integer> e : dPool) {
             this.addToRarity(e.getKey());
         }
     }

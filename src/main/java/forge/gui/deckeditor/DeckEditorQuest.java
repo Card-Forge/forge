@@ -27,6 +27,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -36,12 +37,16 @@ import forge.Command;
 import forge.Constant;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
-import forge.game.GameType;
 import forge.gui.GuiUtils;
+import forge.gui.deckeditor.elements.CardPanelHeavy;
+import forge.gui.deckeditor.elements.FilterCheckBoxes;
+import forge.gui.deckeditor.elements.FilterNameTypeSetPanel;
+import forge.gui.deckeditor.elements.ManaCostRenderer;
+import forge.gui.deckeditor.elements.TableColumnInfo;
+import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 import forge.quest.data.QuestData;
 
 //import forge.quest.data.QuestBoosterPack;
@@ -54,13 +59,11 @@ import forge.quest.data.QuestData;
  * @author Forge
  * @version $Id$
  */
-public final class DeckEditorQuest extends DeckEditorBase {
+public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
     /** Constant <code>serialVersionUID=152061168634545L</code>. */
     private static final long serialVersionUID = 152061168634545L;
 
     /** The custom menu. */
-    private DeckEditorQuestMenu customMenu;
-
     // private ImageIcon upIcon = Constant.IO.upIcon;
     // private ImageIcon downIcon = Constant.IO.downIcon;
 
@@ -72,7 +75,8 @@ public final class DeckEditorQuest extends DeckEditorBase {
     private FilterNameTypeSetPanel filterNameTypeSet;
 
     private final QuestData questData;
-
+    private final DeckManagerQuest controller;
+    
     /**
      * Show.
      * 
@@ -90,47 +94,29 @@ public final class DeckEditorQuest extends DeckEditorBase {
             }
         };
 
+        this.setup();
+
+        final MenuQuest menu = new MenuQuest(this.getController(), exit);
+        this.setJMenuBar(menu);
+
         // do not change this!!!!
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(final WindowEvent ev) {
-                DeckEditorQuest.this.customMenu.close();
-            }
-        });
+            public void windowClosing(final WindowEvent ev) { menu.close(); }
+        });        
+        
+        Deck deck = Constant.Runtime.HUMAN_DECK[0] == null ? null : this.questData.getMyDecks().get(Constant.Runtime.HUMAN_DECK[0].getName());
 
-        this.setup();
-
-        this.customMenu = new DeckEditorQuestMenu(this.questData, this, exit);
-        this.setJMenuBar(this.customMenu);
-
-        Deck deck = null;
-
-        // open deck that the player used if QuestData has it
-        if ((Constant.Runtime.HUMAN_DECK[0] != null)
-                && this.questData.getDeckNames().contains(Constant.Runtime.HUMAN_DECK[0].getName())) {
-            deck = this.questData.getDeck(Constant.Runtime.HUMAN_DECK[0].getName());
-        } else {
-            deck = new Deck(GameType.Sealed);
-            deck.setName("");
-        }
+        if ( deck == null ) deck = new Deck();
 
         // tell Gui_Quest_DeckEditor the name of the deck
-        this.customMenu.setPlayerDeckName(deck.getName());
 
-        final ItemPoolView<CardPrinted> bottomPool = deck.getMain();
-        final ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>(CardPrinted.class);
-        cardpool.addAll(this.questData.getCards().getCardpool());
-
-        // remove bottom cards that are in the deck from the card pool
-        cardpool.removeAll(bottomPool);
-
-        // show cards, makes this user friendly
-        this.setDeck(cardpool, bottomPool, GameType.Quest);
+       
+        this.getController().setModel(deck);
 
         // this affects the card pool
         this.getTopTableWithCards().sort(4, true); // sort by type
         this.getTopTableWithCards().sort(3, true); // then sort by color
-
         this.getBottomTableWithCards().sort(1, true);
     } // show(Command)
 
@@ -188,18 +174,20 @@ public final class DeckEditorQuest extends DeckEditorBase {
      *            the quest data2
      */
     public DeckEditorQuest(final QuestData questData2) {
-        super(GameType.Quest);
+
         this.questData = questData2;
         try {
             this.setFilterBoxes(new FilterCheckBoxes(false));
-            this.setTopTableWithCards(new TableWithCards("All Cards", true));
-            this.setBottomTableWithCards(new TableWithCards("Your deck", true));
+            this.setTopTableWithCards(new TableView<CardPrinted>("All Cards", true, CardPrinted.class));
+            this.setBottomTableWithCards(new TableView<CardPrinted>("Your deck", true, CardPrinted.class));
             this.setCardView(new CardPanelHeavy());
             this.filterNameTypeSet = new FilterNameTypeSetPanel();
             this.jbInit();
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
+        
+        controller = new DeckManagerQuest(questData2, this);
     }
 
     private void jbInit() throws Exception {
@@ -321,7 +309,7 @@ public final class DeckEditorQuest extends DeckEditorBase {
      * @see forge.gui.deckeditor.DeckEditorBase#buildFilter()
      */
     @Override
-    protected Predicate<InventoryItem> buildFilter() {
+    protected Predicate<CardPrinted> buildFilter() {
         final Predicate<CardPrinted> cardFilter = Predicate.and(this.getFilterBoxes().buildFilter(),
                 this.filterNameTypeSet.buildFilter());
         return Predicate.instanceOf(cardFilter, CardPrinted.class);
@@ -334,9 +322,6 @@ public final class DeckEditorQuest extends DeckEditorBase {
         }
 
         final CardPrinted card = (CardPrinted) item;
-
-        this.setTitle("Deck Editor : " + this.customMenu.getDeckName() + " : unsaved");
-
         this.getTopTableWithCards().removeCard(card);
         this.getBottomTableWithCards().addCard(card);
     }
@@ -348,9 +333,6 @@ public final class DeckEditorQuest extends DeckEditorBase {
         }
 
         final CardPrinted card = (CardPrinted) item;
-
-        this.setTitle("Deck Editor : " + this.customMenu.getDeckName() + " : unsaved");
-
         this.getTopTableWithCards().addCard(card);
         this.getBottomTableWithCards().removeCard(card);
     }
@@ -364,6 +346,30 @@ public final class DeckEditorQuest extends DeckEditorBase {
     public void addCheatCard(final CardPrinted card) {
         this.getTopTableWithCards().addCard(card);
         this.questData.getCards().getCardpool().add(card);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.DeckEditorBase#getController()
+     */
+    @Override
+    public IDeckManager<Deck> getController() {
+        return controller;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.DeckEditorBase#updateView()
+     */
+    @Override
+    public void updateView() {
+        Deck deck = controller.getModel(); 
+
+        final ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>(CardPrinted.class);
+        cardpool.addAll(this.questData.getCards().getCardpool());
+        // remove bottom cards that are in the deck from the card pool
+        cardpool.removeAll(deck.getMain());
+        // show cards, makes this user friendly
+        getTopTableWithCards().setDeck(cardpool);
+        getBottomTableWithCards().setDeck(deck.getMain());        
     }
 
 }

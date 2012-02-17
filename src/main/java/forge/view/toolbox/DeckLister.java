@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +22,9 @@ import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.deck.DeckIO;
-import forge.deck.DeckManager;
 import forge.game.GameType;
-import forge.gui.deckeditor.DeckEditorCommon;
+import forge.gui.deckeditor.DeckEditorConstructed;
+import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.deckeditor.DeckEditorQuest;
 
 /** 
@@ -82,7 +80,7 @@ public class DeckLister extends JPanel {
     }
 
     /** @param decks0 {@link forge.deck.Deck}[] */
-    public void setDecks(Deck[] decks0) {
+    public void setDecks(Iterable<Deck> decks0) {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<RowPanel>();
 
@@ -355,17 +353,31 @@ public class DeckLister extends JPanel {
     }
 
     private void editDeck(Deck d0) {
-        if (gametype == GameType.Quest) {
+        switch(gametype) {
+        case Quest:
             Constant.Runtime.HUMAN_DECK[0] = d0;
             final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
             editor.show(cmdEditorExit);
             editor.setVisible(true);
-        }
-        else {
-            final DeckEditorCommon editor = new DeckEditorCommon(gametype);
-            editor.show(cmdEditorExit);
-            editor.getCustomMenu().showDeck(d0, gametype);
-            editor.setVisible(true);
+            break;
+        case Constructed:
+            final DeckEditorConstructed cEditor = new DeckEditorConstructed();
+            cEditor.show(cmdEditorExit);
+            cEditor.getController().load(d0.getName());
+            cEditor.setVisible(true);
+            break;
+        case Sealed:
+            final DeckEditorLimited sEditor = new DeckEditorLimited(AllZone.getDecks().getSealed());
+            sEditor.show(cmdEditorExit);
+            sEditor.getController().load(d0.getName());
+            sEditor.setVisible(true);
+            break;
+        case Draft:
+            final DeckEditorLimited dEditor = new DeckEditorLimited(AllZone.getDecks().getDraft());
+            dEditor.show(cmdEditorExit);
+            dEditor.getController().load(d0.getName());
+            dEditor.setVisible(true);
+            break;
         }
     }
 
@@ -380,30 +392,11 @@ public class DeckLister extends JPanel {
             return;
         }
 
-        DeckManager deckmanager = AllZone.getDeckManager();
-
         if (gametype.equals(GameType.Draft)) {
-            deckmanager.deleteDraftDeck(d0.getName());
-
-            // Since draft deck files are really directories, must delete all children first.
-            File dir = DeckIO.makeFileName(d0.getName(), GameType.Draft);
-            String[] children = dir.list();
-
-            for (int i = 0; i < children.length; i++) {
-                new File(dir.getAbsolutePath() + File.separator + children[i]).delete();
-            }
-
-            dir.delete();
+            AllZone.getDecks().getDraft().delete(d0.getName());
         }
         else if (gametype.equals(GameType.Sealed)) {
-            deckmanager.deleteDeck(d0.getName());
-
-            File address1 = DeckIO.makeFileName(d0.getName(), GameType.Sealed);
-            File address2 = DeckIO.makeFileName("AI_" + d0.getName(), GameType.Sealed);
-
-            // not working??!!
-            address1.delete();
-            address2.delete();
+            AllZone.getDecks().getSealed().delete(d0.getName());
         }
         else if (gametype.equals(GameType.Quest)) {
             AllZone.getQuestData().removeDeck(d0.getName());
@@ -411,10 +404,7 @@ public class DeckLister extends JPanel {
             Singletons.getView().getHomeView().getBtnQuest().grabFocus();
         }
         else {
-            deckmanager.deleteDeck(d0.getName());
-
-            File address1 = DeckIO.makeFileName(d0.getName(), GameType.Constructed);
-            address1.delete();
+            AllZone.getDecks().getConstructed().delete(d0.getName());
         }
 
         this.remove(r0);

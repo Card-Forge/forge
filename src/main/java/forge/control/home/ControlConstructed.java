@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -126,7 +125,7 @@ public class ControlConstructed {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int index = view.getLstDecksAI().locationToIndex(e.getPoint());
-                    showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
+                    showDecklist(AllZone.getDecks().getConstructed().get(deckNames.get(index)));
                  }
             }
         };
@@ -136,7 +135,7 @@ public class ControlConstructed {
                 if (e.getClickCount() == 2) {
                     int index = view.getLstDecksHuman().locationToIndex(e.getPoint());
                     if (index > 0) {
-                        showDecklist(AllZone.getDeckManager().getDeck(deckNames.get(index)));
+                        showDecklist(AllZone.getDecks().getConstructed().get(deckNames.get(index)));
                     }
                  }
             }
@@ -366,35 +365,35 @@ public class ControlConstructed {
     //========= DECK GENERATION
 
     /** Generates human deck from current list selection(s). */
-    private void generateHumanDecks(String[] human0) {
+    private void generateHumanDecks(String[] selectedLines) {
         CardList cards = null;
 
         // Human: Color-based deck generation
         if (currentHumanSelection.getName().equals("lstColorsHuman")) {
             // Replace "random" with "AI" for deck generation code
-            for (int i = 0; i < human0.length; i++) {
-                human0[i] = colorVals.get(human0[i]);
+            for (int i = 0; i < selectedLines.length; i++) {
+                selectedLines[i] = colorVals.get(selectedLines[i]);
             }
 
             // 2, 3, and 5 colors.
-            if (human0.length == 2) {
+            if (selectedLines.length == 2) {
                 Generate2ColorDeck gen = new Generate2ColorDeck(
-                        human0[0], human0[1]);
+                        selectedLines[0], selectedLines[1]);
                 cards = gen.get2ColorDeck(60, PlayerType.HUMAN);
             }
-            else if (human0.length == 3) {
+            else if (selectedLines.length == 3) {
                 Generate3ColorDeck gen = new Generate3ColorDeck(
-                        human0[0], human0[1], human0[2]);
+                        selectedLines[0], selectedLines[1], selectedLines[2]);
                 cards = gen.get3ColorDeck(60, PlayerType.HUMAN);
             }
             else {
                 Generate5ColorDeck gen = new Generate5ColorDeck(
-                        human0[0], human0[1], human0[2], human0[3], human0[4]);
+                        selectedLines[0], selectedLines[1], selectedLines[2], selectedLines[3], selectedLines[4]);
                 cards = gen.get5ColorDeck(60, PlayerType.HUMAN);
             }
 
             // After generating card lists, convert to deck and save.
-            final Deck deck = new Deck(GameType.Constructed);
+            final Deck deck = new Deck();
 
             deck.getMain().add(cards);
 
@@ -405,10 +404,10 @@ public class ControlConstructed {
         // Human: theme deck generation
         else if (currentHumanSelection.getName().equals("lstThemesHuman")) {
             GenerateThemeDeck gen = new GenerateThemeDeck();
-            cards = gen.getThemeDeck(human0[0], 60);
+            cards = gen.getThemeDeck(selectedLines[0], 60);
 
             // After generating card lists, convert to deck and save.
-            final Deck deck = new Deck(GameType.Constructed);
+            final Deck deck = new Deck();
             deck.getMain().add(cards);
 
             Constant.Runtime.HUMAN_DECK[0] = deck;
@@ -416,7 +415,7 @@ public class ControlConstructed {
 
         // Human: deck file
         else {
-            Constant.Runtime.HUMAN_DECK[0] = AllZone.getDeckManager().getDeck(human0[0]);
+            Constant.Runtime.HUMAN_DECK[0] = AllZone.getDecks().getConstructed().get(selectedLines[0]);
         }
     }
 
@@ -447,7 +446,7 @@ public class ControlConstructed {
             }
 
             // After generating card lists, convert to deck and save.
-            final Deck deck = new Deck(GameType.Constructed);
+            final Deck deck = new Deck();
             deck.getMain().add(cards);
 
             Constant.Runtime.COMPUTER_DECK[0] = deck;
@@ -458,7 +457,7 @@ public class ControlConstructed {
             GenerateThemeDeck gen = new GenerateThemeDeck();
 
             // After generating card lists, convert to deck and save.
-            final Deck deck = new Deck(GameType.Constructed);
+            final Deck deck = new Deck();
             deck.getMain().add(gen.getThemeDeck(ai0[0], 60));
 
             Constant.Runtime.COMPUTER_DECK[0] = deck;
@@ -466,7 +465,7 @@ public class ControlConstructed {
 
         // AI: deck file
         else {
-            Constant.Runtime.COMPUTER_DECK[0] = AllZone.getDeckManager().getDeck(ai0[0]);
+            Constant.Runtime.COMPUTER_DECK[0] = AllZone.getDecks().getConstructed().get(ai0[0]);
         }
     }
 
@@ -569,8 +568,8 @@ public class ControlConstructed {
         deckNames = new ArrayList<String>();
         deckNames.add(0, "Random");
 
-        Collection<Deck> allDecks = AllZone.getDeckManager().getConstructedDecks();
-        for (Deck d : allDecks) { deckNames.add(d.getName()); }
+        
+        deckNames.addAll(AllZone.getDecks().getConstructed().getNames());
 
         // No pre-constructed decks?
         if (deckNames.size() == 1) { deckNames = new ArrayList<String>(); }

@@ -7,7 +7,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +26,7 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
-import forge.gui.deckeditor.DeckEditorShop;
+import forge.gui.deckeditor.QuestCardShop;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestChallenge;
@@ -397,7 +399,9 @@ public class ControlQuest {
     /** Resets decks, then retrieves and sets current deck. */
     public void refreshDecks() {
         // Retrieve and set all decks
-        Deck[] temp = (qData == null ? new Deck[] {} : qData.getDecks().toArray(new Deck[0]));
+        
+        List<Deck> temp = new ArrayList<Deck>();
+        if (qData != null ) temp.addAll(qData.getMyDecks().values());
         view.getLstDecks().setDecks(temp);
 
         // Look through list for preferred deck from prefs
@@ -490,7 +494,7 @@ public class ControlQuest {
             }
         };
 
-        DeckEditorShop g = new DeckEditorShop(AllZone.getQuestData());
+        QuestCardShop g = new QuestCardShop(AllZone.getQuestData());
         g.show(exit);
         g.setVisible(true);
     }

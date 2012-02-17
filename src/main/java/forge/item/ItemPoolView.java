@@ -83,7 +83,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      *            a Class<T>
      */
     public ItemPoolView(final Class<T> cls) {
-        this.setCards(new Hashtable<T, Integer>());
+        this.cards = new Hashtable<T, Integer>();
         this.myClass = cls;
     }
 
@@ -97,13 +97,13 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      *            a Class<T>
      */
     public ItemPoolView(final Map<T, Integer> inMap, final Class<T> cls) {
-        this.setCards(inMap);
+        this.cards = inMap;
         this.myClass = cls;
     }
 
     // Data members
     /** The cards. */
-    private Map<T, Integer> cards;
+    private final Map<T, Integer> cards;
 
     /** The my class. */
     private final Class<T> myClass; // class does not keep this in runtime by
@@ -257,18 +257,8 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * 
      * @return the cards
      */
-    public Map<T, Integer> getCards() {
+    protected Map<T, Integer> getCards() {
         return this.cards;
-    }
-
-    /**
-     * Sets the cards.
-     * 
-     * @param cards0
-     *            the cards to set
-     */
-    public void setCards(final Map<T, Integer> cards0) {
-        this.cards = cards0;
     }
 
     /**
@@ -295,7 +285,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * @param isListInSync0
      *            the isListInSync to set
      */
-    public void setListInSync(final boolean isListInSync0) {
+    protected void setListInSync(final boolean isListInSync0) {
         this.isListInSync = isListInSync0;
     }
 

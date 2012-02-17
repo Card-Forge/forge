@@ -147,11 +147,12 @@ public final class FileUtil {
             while ((line = in.readLine()) != null) {
                 list.add(line);
             }
+            in.close();
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
-
+        
         return list;
     } // readFile()
 

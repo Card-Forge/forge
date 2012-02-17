@@ -4,7 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -15,11 +14,12 @@ import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
+import forge.deck.DeckSet;
 import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
-import forge.gui.deckeditor.DeckEditorDraft;
+import forge.gui.deckeditor.DraftingProcess;
 import forge.view.home.ViewDraft;
 import forge.view.toolbox.FSkin;
 
@@ -123,7 +123,7 @@ public class ControlDraft {
             }
         });
 
-        Deck[] opponentDecks = AllZone.getDeckManager().getDraftDeck(human.getName());
+        DeckSet opponentDecks = AllZone.getDecks().getDraft().get(human.getName());
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -133,7 +133,7 @@ public class ControlDraft {
          });
 
         Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks[aiIndex + 1]; //zero is human deck, so it must be +1
+        Constant.Runtime.COMPUTER_DECK[0] = opponentDecks.getAiDecks().get(aiIndex); //zero is human deck, so it must be +1
 
         if (Constant.Runtime.COMPUTER_DECK[0] == null) {
             throw new IllegalStateException("startButton() error - computer deck is null");
@@ -156,7 +156,7 @@ public class ControlDraft {
 
     /** */
     public void setupDraft() {
-        final DeckEditorDraft draft = new DeckEditorDraft();
+        final DraftingProcess draft = new DraftingProcess();
 
         // Determine what kind of booster draft to run
         final ArrayList<String> draftTypes = new ArrayList<String>();
@@ -183,9 +183,11 @@ public class ControlDraft {
 
     /** Updates deck list in view. */
     public void updateHumanDecks() {
-        Collection<Deck[]> temp = AllZone.getDeckManager().getDraftDecks().values();
+        
         List<Deck> human = new ArrayList<Deck>();
-        for (Deck[] d : temp) { human.add(d[0]); }
-        view.getLstHumanDecks().setDecks(human.toArray(new Deck[0]));
+        for(DeckSet d : AllZone.getDecks().getDraft()) {
+            human.add(d.getHumanDeck());
+        }
+        view.getLstHumanDecks().setDecks(human);
     }
 }

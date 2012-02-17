@@ -258,7 +258,7 @@ public class QuestDataIO {
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
             final String value = reader.getValue();
-            return GameType.smartValueOf(value);
+            return GameType.smartValueOf(value, GameType.Quest); // does not matter - this field is deprecated anyway
         }
 
     }

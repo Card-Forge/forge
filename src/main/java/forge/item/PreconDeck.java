@@ -23,7 +23,7 @@ import java.util.Map;
 
 import forge.SetUtils;
 import forge.deck.Deck;
-import forge.deck.DeckIO;
+import forge.deck.io.DeckIOCore;
 import forge.quest.SellRules;
 import forge.util.FileUtil;
 import forge.util.SectionUtil;
@@ -80,7 +80,7 @@ public class PreconDeck implements InventoryItemFromSet {
     public PreconDeck(final File f) {
         final List<String> deckLines = FileUtil.readFile(f);
         final Map<String, List<String>> sections = SectionUtil.parseSections(deckLines);
-        this.deck = DeckIO.readDeck(deckLines);
+        this.deck = DeckIOCore.readDeck(deckLines);
 
         String filenameProxy = null;
         String setProxy = "n/a";

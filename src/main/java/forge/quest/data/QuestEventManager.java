@@ -25,7 +25,8 @@ import java.util.Random;
 
 import forge.AllZone;
 import forge.Singletons;
-import forge.deck.DeckIO;
+import forge.deck.io.DeckIOCore;
+import forge.deck.io.DeckSerializer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
@@ -80,7 +81,7 @@ public class QuestEventManager {
         List<String> contents;
         QuestEvent tempEvent;
 
-        final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckIO.DCK_FILE_FILTER);
+        final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckSerializer.DCK_FILE_FILTER);
 
         for (final File f : allFiles) {
             contents = FileUtil.readFile(f);
@@ -98,7 +99,7 @@ public class QuestEventManager {
 
             // Assemble metadata (may not be necessary later) and deck object.
             this.assembleEventMetadata(contents, tempEvent);
-            tempEvent.setEventDeck(DeckIO.readDeck(contents));
+            tempEvent.setEventDeck(DeckIOCore.readDeck(contents));
         } // End for(allFiles)
 
         this.assembleDuelDifficultyLists();

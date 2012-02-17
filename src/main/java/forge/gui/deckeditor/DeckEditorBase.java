@@ -27,8 +27,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import net.slightlymagic.maxmtg.Predicate;
-import forge.deck.Deck;
-import forge.game.GameType;
+import forge.Command;
+import forge.gui.deckeditor.elements.CardPanelBase;
+import forge.gui.deckeditor.elements.DeckAnalysis;
+import forge.gui.deckeditor.elements.FilterCheckBoxes;
+import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -37,7 +40,7 @@ import forge.item.ItemPoolView;
 /**
  * The Class DeckEditorBase.
  */
-public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
+public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JFrame {
     private static final long serialVersionUID = -401223933343539977L;
 
     /** The filter boxes. */
@@ -52,22 +55,10 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
 
     // CardPools and Table data for top and bottom lists
     /** The top. */
-    private TableWithCards topTableWithCards;
+    private TableView<T> topTableWithCards;
 
     /** The bottom. */
-    private TableWithCards bottomTableWithCards;
-
-    private GameType gameType;
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.DeckDisplay#getGameType()
-     */
-    @Override
-    public final GameType getGameType() {
-        return this.gameType;
-    }
+    private TableView<T> bottomTableWithCards;
 
     // top shows available card pool
     // if constructed, top shows all cards
@@ -78,7 +69,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @return the top table model
      */
-    public final TableWithCards getTopTableModel() {
+    public final TableView<T> getTopTableModel() {
         return this.getTopTableWithCards();
     }
 
@@ -87,8 +78,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getTop()
      */
-    @Override
-    public final ItemPoolView<InventoryItem> getTop() {
+    public final ItemPoolView<T> getTop() {
         return this.getTopTableWithCards().getCards();
     }
 
@@ -98,11 +88,13 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getBottom()
      */
-    @Override
-    public final ItemPoolView<InventoryItem> getBottom() {
+    public final ItemPoolView<T> getBottom() {
         return this.getBottomTableWithCards().getCards();
     }
 
+    
+    public abstract IDeckManager<TModel> getController();
+    
     // THIS IS HERE FOR OVERLOADING!!!1
     // or may be return abstract getFilter from derived class + this filter ...
     // virtual protected member, but later
@@ -111,8 +103,9 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @return the predicate
      */
-    protected abstract Predicate<InventoryItem> buildFilter();
+    protected abstract Predicate<T> buildFilter();
 
+    public abstract void show(final Command exitCommand);
     /**
      * Analysis button_action performed.
      * 
@@ -126,36 +119,13 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
             JOptionPane.showMessageDialog(null, "Cards in deck not found.", "Analysis Deck",
                     JOptionPane.INFORMATION_MESSAGE);
         } else {
-            final DeckEditorBase g = DeckEditorBase.this;
+            final DeckEditorBase<T, TModel> g = DeckEditorBase.this;
             final DeckAnalysis dAnalysis = new DeckAnalysis(g, deck);
             dAnalysis.setVisible(true);
             g.setEnabled(false);
         }
     }
 
-    /**
-     * Instantiates a new deck editor base.
-     * 
-     * @param gametype
-     *            the gametype
-     */
-    public DeckEditorBase(final GameType gametype) {
-        this.gameType = gametype;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.DeckDisplay#setDeck(forge.item.ItemPoolView,
-     * forge.item.ItemPoolView, forge.game.GameType)
-     */
-    @Override
-    public void setDeck(final ItemPoolView<CardPrinted> topParam, final ItemPoolView<CardPrinted> bottomParam,
-            final GameType gt) {
-        this.gameType = gt;
-        this.getTopTableWithCards().setDeck(topParam);
-        this.getBottomTableWithCards().setDeck(bottomParam);
-    }
 
     /*
      * (non-Javadoc)
@@ -163,13 +133,9 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @see forge.gui.deckeditor.DeckDisplay#setItems(forge.item.ItemPoolView,
      * forge.item.ItemPoolView, forge.game.GameType)
      */
-    @Override
-    public final <T extends InventoryItem> void setItems(final ItemPoolView<T> topParam,
-            final ItemPoolView<T> bottomParam, final GameType gt) {
-        this.gameType = gt;
-        this.getTopTableWithCards().setDeck(topParam);
-        this.getBottomTableWithCards().setDeck(bottomParam);
-    }
+    public abstract void updateView();
+    
+    
 
     /**
      * Update display.
@@ -235,23 +201,6 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
         } // Happend only on ENTER pressed
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.DeckDisplay#getDeck()
-     */
-    @Override
-    public final Deck getDeck() {
-        final Deck deck = new Deck(this.gameType);
-        deck.getMain().addAll(this.getBottom());
-
-        // if sealed or draft, move "top" to sideboard
-        if (this.gameType.isLimited() && (this.gameType != GameType.Quest)) {
-            deck.getSideboard().addAll(this.getTop());
-        }
-        return deck;
-    } // getDeck()
-
     /**
      * Gets the item listener updates display.
      * 
@@ -313,7 +262,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @param cardView0
      *            the cardView to set
      */
-    public void setCardView(final CardPanelBase cardView0) {
+    protected void setCardView(final CardPanelBase cardView0) {
         this.cardView = cardView0;
     }
 
@@ -341,7 +290,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @return the bottomTableWithCards
      */
-    public TableWithCards getBottomTableWithCards() {
+    public TableView<T> getBottomTableWithCards() {
         return this.bottomTableWithCards;
     }
 
@@ -351,7 +300,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @param bottomTableWithCards0
      *            the bottomTableWithCards to set
      */
-    public void setBottomTableWithCards(final TableWithCards bottomTableWithCards0) {
+    public void setBottomTableWithCards(final TableView<T> bottomTableWithCards0) {
         this.bottomTableWithCards = bottomTableWithCards0;
     }
 
@@ -360,7 +309,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * 
      * @return the topTableWithCards
      */
-    public TableWithCards getTopTableWithCards() {
+    public TableView<T> getTopTableWithCards() {
         return this.topTableWithCards;
     }
 
@@ -370,7 +319,7 @@ public abstract class DeckEditorBase extends JFrame implements DeckDisplay {
      * @param topTableWithCards0
      *            the topTableWithCards to set
      */
-    public void setTopTableWithCards(final TableWithCards topTableWithCards0) {
+    public void setTopTableWithCards(final TableView<T> topTableWithCards0) {
         this.topTableWithCards = topTableWithCards0;
     }
 

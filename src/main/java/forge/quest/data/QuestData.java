@@ -30,6 +30,7 @@ import forge.error.ErrorViewer;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
@@ -114,11 +115,11 @@ public final class QuestData {
 
     // Decks collected by player
     /** The my decks. */
-    private Map<String, Deck> myDecks = new HashMap<String, Deck>();
+    private final Map<String, Deck> myDecks = new HashMap<String, Deck>();
 
     // Cards associated with quest
     /** The card pool. */
-    private ItemPool<InventoryItem> cardPool = new ItemPool<InventoryItem>(InventoryItem.class); // player's
+    private ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class); // player's
     // belonging
     /** The shop list. */
     private ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
@@ -195,9 +196,9 @@ public final class QuestData {
         this.initTransients();
         this.setName(s0);
 
-        this.myCards.addBasicLands(this.getCardPool(),
-                Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_BASIC_LANDS),
-                Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_BASIC_LANDS));
+        QuestPreferences prefs = Singletons.getModel().getQuestPreferences(); 
+        ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands( prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS) );
+        this.getCardPool().addAll(lands);
         this.randomizeOpponents();
     }
 
@@ -546,14 +547,7 @@ public final class QuestData {
         return this.winstreakCurrent;
     }
     // decks management
-    /**
-     * Gets the deck names.
-     * 
-     * @return the deck names
-     */
-    public List<String> getDeckNames() {
-        return new ArrayList<String>(this.getMyDecks().keySet());
-    }
+
 
     /** @return List<Deck> */
     public List<Deck> getDecks() {
@@ -571,16 +565,6 @@ public final class QuestData {
     }
 
     /**
-     * Adds the deck.
-     * 
-     * @param d
-     *            the d
-     */
-    public void addDeck(final Deck d) {
-        this.getMyDecks().put(d.getName(), d);
-    }
-
-    /**
      * <p>
      * getDeck.
      * </p>
@@ -593,6 +577,7 @@ public final class QuestData {
         if (!this.getMyDecks().containsKey(deckName)) {
             ErrorViewer.showError(new Exception(),
                     "QuestData : getDeckFromMap(String deckName) error, deck name not found - %s", deckName);
+            return null;
         }
         final Deck d = this.getMyDecks().get(deckName);
         d.getSideboard().clear();
@@ -641,19 +626,10 @@ public final class QuestData {
      * 
      * @return the cardPool
      */
-    public ItemPool<InventoryItem> getCardPool() {
+    public ItemPool<CardPrinted> getCardPool() {
         return this.cardPool;
     }
 
-    /**
-     * Sets the card pool.
-     * 
-     * @param cardPool0
-     *            the cardPool to set
-     */
-    public void setCardPool(final ItemPool<InventoryItem> cardPool0) {
-        this.cardPool = cardPool0;
-    }
 
     /**
      * Gets the shop list.
@@ -702,15 +678,6 @@ public final class QuestData {
         return this.myDecks;
     }
 
-    /**
-     * Sets the my decks.
-     * 
-     * @param myDecks0
-     *            the myDecks to set
-     */
-    public void setMyDecks(final Map<String, Deck> myDecks0) {
-        this.myDecks = myDecks0;
-    }
 
     /** @return QuestPreconManager */
     public static QuestPreconManager getPreconManager() {

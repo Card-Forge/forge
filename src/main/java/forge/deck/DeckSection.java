@@ -17,6 +17,8 @@
  */
 package forge.deck;
 
+import java.util.Map.Entry;
+
 import forge.Card;
 import forge.CardList;
 import forge.item.CardDb;
@@ -24,7 +26,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 
 /**
- * TODO: Write javadoc for this type.
+ * Deck section
  * 
  */
 public class DeckSection extends ItemPool<CardPrinted> {
@@ -35,13 +37,10 @@ public class DeckSection extends ItemPool<CardPrinted> {
     public DeckSection() {
         super(CardPrinted.class);
     }
-
-    /**
-     * Clear main.
-     */
-    public void clearMain() {
-        this.clear();
-
+    
+    public DeckSection(Iterable<Entry<CardPrinted, Integer>> cards) {
+        this();
+        addAll(cards);
     }
 
     /**
@@ -51,7 +50,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
      */
     public void set(final Iterable<String> cardNames) {
         this.clear();
-        this.addAllCards(CardDb.instance().getCards(cardNames));
+        this.addAllFlat(CardDb.instance().getCards(cardNames));
     }
 
     /**
@@ -76,12 +75,30 @@ public class DeckSection extends ItemPool<CardPrinted> {
     /**
      * Adds the.
      *
+     * @param cardName the card name
+     * @param setCode the set code
+     */
+    public void add(final String cardName, final String setCode, int amount) {
+        this.add(CardDb.instance().getCard(cardName, setCode), amount);
+    }    
+    
+    /**
+     * Adds the.
+     *
      * @param cardList the card list
      */
     public void add(final CardList cardList) {
         for (final Card c : cardList) {
             this.add(c);
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param string
+     */
+    public void add(String cardName) {
+        this.add(CardDb.instance().getCard(cardName));
     }
 
 }

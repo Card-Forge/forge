@@ -11,16 +11,16 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
-import forge.PlayerType;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
-import forge.deck.DeckIO;
-import forge.deck.DeckManager;
+import forge.deck.DeckSet;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
@@ -36,7 +36,6 @@ import forge.view.home.ViewSealed;
  */
 public class ControlSealed {
     private ViewSealed view;
-    private DeckManager deckManager;
     private Map<String, Deck> aiDecks;
     private final MouseListener madBuildDeck, madStartGame;
 
@@ -47,7 +46,6 @@ public class ControlSealed {
      */
     public ControlSealed(ViewSealed v0) {
         view = v0;
-        deckManager = AllZone.getDeckManager();
         Constant.Runtime.setGameType(GameType.Sealed);
 
         madBuildDeck = new MouseAdapter() {
@@ -117,7 +115,7 @@ public class ControlSealed {
          });
 
         Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = aiDecks.get("AI_" + human.getName());
+        Constant.Runtime.COMPUTER_DECK[0] = AllZone.getDecks().getSealed().get(human.getName()).getAiDecks().get(0);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -140,24 +138,16 @@ public class ControlSealed {
 
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
-        for (Deck d : deckManager.getDecks()) {
-            if (d.getDeckType().equals(GameType.Sealed)) {
-                if (d.getPlayerType() == PlayerType.COMPUTER) {
-                    aiDecks.put(d.getName(), d);
-                }
-                else {
-                    humanDecks.add(d);
-                }
-            }
+        for (DeckSet d : AllZone.getDecks().getSealed()) {
+            aiDecks.put(d.getName(), d.getAiDecks().get(0));
+            humanDecks.add(d.getHumanDeck());
         }
 
-        view.getLstHumanDecks().setDecks(humanDecks.toArray(new Deck[0]));
+        view.getLstHumanDecks().setDecks(humanDecks);
     }
 
     /** Build button has been pressed. */
     public void setupSealed() {
-        Deck deck = new Deck(GameType.Sealed);
-
         ArrayList<String> sealedTypes = new ArrayList<String>();
         sealedTypes.add("Full Cardpool");
         sealedTypes.add("Block / Set");
@@ -184,40 +174,37 @@ public class ControlSealed {
                     + ">> does not equal any of the sealedTypes.");
         }
 
-        if (!sd.getCardpool().isEmpty()) {
-            final ItemPool<CardPrinted> sDeck = sd.getCardpool();
+        if (sd.getCardpool().isEmpty()) 
+            return;
+            
+        final String sDeckName = JOptionPane.showInputDialog(null,
+                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
+                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
+                JOptionPane.QUESTION_MESSAGE);  
+        
+        if ( StringUtils.isBlank(sDeckName) )
+            return;
+        
+        // May check for name uniqueness here
 
-            deck.getSideboard().addAll(sDeck);
+        final ItemPool<CardPrinted> sDeck = sd.getCardpool();
+        
+        Deck deck = new Deck(sDeckName);
+        deck.getSideboard().addAll(sDeck);
 
-            for (final String element : Constant.Color.BASIC_LANDS) {
-                for (int j = 0; j < 18; j++) {
-                    deck.getSideboard().add(element, sd.getLandSetCode()[0]);
-                }
-            }
-
-            final String sDeckName = JOptionPane.showInputDialog(null,
-                    ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
-                    ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
-                    JOptionPane.QUESTION_MESSAGE);
-
-            if (sDeckName != null) {
-                deck.setName(sDeckName);
-                deck.setPlayerType(PlayerType.HUMAN);
-
-                // Bug here: if human adds no cards to the deck, then closes the deck
-                // editor, an AI deck is still created and linked to the (now nonexistent)
-                // human deck's name.  The solution probably lies in the question,
-                // why is this code not in SealedDeck to begin with? Doublestrike 19-12-11
-
-                Deck aiDeck = sd.buildAIDeck(sDeck.toForgeCardList());
-                aiDeck.setName("AI_" + sDeckName);
-                aiDeck.setPlayerType(PlayerType.COMPUTER);
-                deckManager.addDeck(aiDeck);
-                DeckIO.writeDeck(aiDeck, DeckIO.makeFileName(aiDeck));
-
-                view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, deck);
-            }
+        for (final String element : Constant.Color.BASIC_LANDS) {
+            deck.getSideboard().add(element, sd.getLandSetCode()[0], 18);
         }
+
+        DeckSet sealed = new DeckSet(sDeckName);
+        sealed.setHumanDeck(deck);
+        sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
+        AllZone.getDecks().getSealed().add(sealed);
+        
+
+        view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, sealed);
+
+        
     }
 
     /** @return {@link forge.Command} What to do when the deck editor exits. */

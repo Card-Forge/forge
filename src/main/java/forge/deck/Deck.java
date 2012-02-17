@@ -19,8 +19,9 @@ package forge.deck;
 
 import java.io.Serializable;
 
-import forge.PlayerType;
-import forge.game.GameType;
+import forge.item.CardPrinted;
+import forge.item.IHasName;
+import forge.item.ItemPoolView;
 
 /**
  * <p>
@@ -34,20 +35,11 @@ import forge.game.GameType;
  * @author Forge
  * @version $Id$
  */
-public final class Deck implements Comparable<Deck>, Serializable {
+public class Deck extends DeckBase implements Serializable, IHasName {
     /**
      *
      */
     private static final long serialVersionUID = -7478025567887481994L;
-
-    // gameType is from Constant.GameType, like GameType.Regular
-
-    private String name;
-    private GameType deckType;
-    private String comment = null;
-    private PlayerType playerType = null;
-
-    private boolean customPool = false;
 
     private final DeckSection main;
     private final DeckSection sideboard;
@@ -55,132 +47,15 @@ public final class Deck implements Comparable<Deck>, Serializable {
     // gameType is from Constant.GameType, like GameType.Regular
     /**
      * <p>
-     * Constructor for Deck.
+     * Decks have their named finalled 
      * </p>
      */
-    public Deck() {
+    public Deck() { this(""); }
+    
+    public Deck(String name0) {
+        super(name0);
         this.main = new DeckSection();
         this.sideboard = new DeckSection();
-    }
-
-    /**
-     * <p>
-     * Constructor for Deck.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     */
-    public Deck(final GameType type) {
-        this();
-        this.setDeckType(type);
-    }
-
-    /**
-     * <p>
-     * getDeckType.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public GameType getDeckType() {
-        return this.deckType;
-    }
-
-    // can only call this method ONCE
-    /**
-     * <p>
-     * setDeckType.
-     * </p>
-     * 
-     * @param deckType
-     *            a {@link java.lang.String} object.
-     */
-    public void setDeckType(final GameType deckType) {
-        if (this.getDeckType() != null) {
-            throw new IllegalStateException("Deck : setDeckType() error, deck type has already been set");
-        }
-
-        this.deckType = deckType;
-    }
-
-    /**
-     * <p>
-     * setName.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public void setName(final String s) {
-        this.name = s;
-    }
-
-    /**
-     * <p>
-     * getName.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * <p>
-     * setComment.
-     * </p>
-     * 
-     * @param comment
-     *            a {@link java.lang.String} object.
-     */
-    public void setComment(final String comment) {
-        this.comment = comment;
-    }
-
-    /**
-     * <p>
-     * getComment.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public String getComment() {
-        return this.comment;
-    }
-
-    /**
-     * <p>
-     * isDraft.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isDraft() {
-        return this.getDeckType().equals(GameType.Draft);
-    }
-
-    /**
-     * <p>
-     * isSealed.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isSealed() {
-        return this.getDeckType().equals(GameType.Sealed);
-    }
-
-    /**
-     * <p>
-     * isRegular.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isRegular() {
-        return this.getDeckType().equals(GameType.Constructed);
     }
 
     /**
@@ -201,67 +76,6 @@ public final class Deck implements Comparable<Deck>, Serializable {
         return this.getName();
     }
 
-    /**
-     * <p>
-     * compareTo.
-     * </p>
-     * 
-     * @param d
-     *            a {@link forge.deck.Deck} object.
-     * @return a int.
-     */
-    @Override
-    public int compareTo(final Deck d) {
-        return this.getName().compareTo(d.getName());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean equals(final Object o) {
-        if (o instanceof Deck) {
-            final Deck d = (Deck) o;
-            return this.getName().equals(d.getName());
-        }
-        return false;
-    }
-
-    /**
-     * Gets the player type.
-     * 
-     * @return the player type
-     */
-    public PlayerType getPlayerType() {
-        return this.playerType;
-    }
-
-    /**
-     * Sets the player type.
-     * 
-     * @param recommendedPlayer0
-     *            the new player type
-     */
-    public void setPlayerType(final PlayerType recommendedPlayer0) {
-        this.playerType = recommendedPlayer0;
-    }
-
-    /**
-     * Checks if is custom pool.
-     * 
-     * @return true, if is custom pool
-     */
-    public boolean isCustomPool() {
-        return this.customPool;
-    }
-
-    /**
-     * Sets the custom pool.
-     * 
-     * @param cp
-     *            the new custom pool
-     */
-    public void setCustomPool(final boolean cp) {
-        this.customPool = cp;
-    }
 
     /**
      * <p>
@@ -283,5 +97,28 @@ public final class Deck implements Comparable<Deck>, Serializable {
      */
     public DeckSection getSideboard() {
         return this.sideboard;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.item.CardCollectionBase#getCardPool()
+     */
+    @Override
+    public ItemPoolView<CardPrinted> getCardPool() {
+        return main;
+    }
+
+    protected void cloneFieldsTo(DeckBase clone) {
+        super.cloneFieldsTo(clone);
+        Deck result = (Deck)clone;
+        result.main.addAll(this.main);
+        result.sideboard.addAll(this.sideboard);        
+    }
+
+    /* (non-Javadoc)
+     * @see forge.deck.DeckBase#newInstance(java.lang.String)
+     */
+    @Override
+    protected DeckBase newInstance(String name0) {
+        return new Deck(name0);
     }
 }

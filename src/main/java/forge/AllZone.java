@@ -26,8 +26,8 @@ import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
+import forge.deck.CardCollections;
 import forge.control.input.InputControl;
-import forge.deck.DeckManager;
 import forge.game.limited.CardRatings;
 import forge.model.FGameState;
 import forge.model.FMatchState;
@@ -86,11 +86,19 @@ public final class AllZone {
     // shared between Input_Attack, Input_Block, Input_CombatDamage ,
     // InputState_Computer
 
-    /** Constant <code>DECK_MGR</code>. */
-    private static DeckManager deckManager;
-
     /** Constant <code>CARD_RATINGS</code>. */
     private static CardRatings cardRatings = new CardRatings();
+
+    
+    private static CardCollections collections;
+    
+    public static final CardCollections getDecks() {
+        if ( null == collections )
+        {
+            collections = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
+        }
+        return collections;
+    }
 
     /**
      * <p>
@@ -562,20 +570,6 @@ public final class AllZone {
                 p.getZone(z).resetCardsAddedThisTurn();
             }
         }
-    }
-
-    /**
-     * <p>
-     * getDeckManager.
-     * </p>
-     * 
-     * @return dMgr
-     */
-    public static DeckManager getDeckManager() {
-        if (AllZone.deckManager == null) {
-            AllZone.deckManager = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
-        }
-        return AllZone.deckManager;
     }
 
     /**

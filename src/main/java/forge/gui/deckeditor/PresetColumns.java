@@ -98,7 +98,8 @@ public abstract class PresetColumns {
     public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_NAME_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return from.getKey().getName();
+            String name = from.getKey().getName();
+            return name.contains("AE") ? name.replace("AE", "Æ") : name;
         }
     };
 

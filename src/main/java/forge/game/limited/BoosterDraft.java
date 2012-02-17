@@ -31,7 +31,6 @@ import javax.swing.JOptionPane;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Closure1;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
@@ -39,8 +38,8 @@ import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardSet;
+import forge.deck.CustomLimited;
 import forge.deck.Deck;
-import forge.deck.DeckManager;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -161,8 +160,7 @@ public final class BoosterDraft implements IBoosterDraft {
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
-        final DeckManager dio = AllZone.getDeckManager();
-        final Deck dPool = dio.getDeck(draft.getDeckFile());
+        final ItemPoolView<CardPrinted> dPool = draft.getCardPool();
         if (dPool == null) {
             throw new RuntimeException("BoosterGenerator : deck not found - " + draft.getDeckFile());
         }

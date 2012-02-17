@@ -69,8 +69,9 @@ public final class QuestUtilCards {
      * @param nSnow
      *            the n snow
      */
-    public void addBasicLands(final ItemPool<InventoryItem> pool, final int nBasic, final int nSnow) {
+    public static ItemPoolView<CardPrinted> generateBasicLands(final int nBasic, final int nSnow) {
         final CardDb db = CardDb.instance();
+        ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
         pool.add(db.getCard("Forest", "M10"), nBasic);
         pool.add(db.getCard("Mountain", "M10"), nBasic);
         pool.add(db.getCard("Swamp", "M10"), nBasic);
@@ -82,6 +83,7 @@ public final class QuestUtilCards {
         pool.add(db.getCard("Snow-Covered Swamp", "ICE"), nSnow);
         pool.add(db.getCard("Snow-Covered Island", "ICE"), nSnow);
         pool.add(db.getCard("Snow-Covered Plains", "ICE"), nSnow);
+        return pool;
     }
 
     // adds 11 cards, to the current card pool
@@ -221,7 +223,7 @@ public final class QuestUtilCards {
         if (this.q.getCredits() >= value) {
             this.q.setCredits(this.q.getCredits() - value);
             this.q.getShopList().remove(precon);
-            this.q.addDeck(precon.getDeck());
+            this.q.getMyDecks().put(precon.getDeck().getName(), precon.getDeck());
             this.addAllCards(precon.getDeck().getMain().toFlatList());
         }
     }
@@ -340,7 +342,7 @@ public final class QuestUtilCards {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
             final Predicate<CardSet> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
-            this.q.getShopList().addAllCards(filter.random(SetUtils.getAllSets(), 1, BoosterPack.FN_FROM_SET));
+            this.q.getShopList().addAllFlat(filter.random(SetUtils.getAllSets(), 1, BoosterPack.FN_FROM_SET));
         }
     }
 
@@ -352,7 +354,7 @@ public final class QuestUtilCards {
      */
     public void generatePreconsInShop(final int count) {
         final List<PreconDeck> validDecks = QuestData.getPreconManager().getDecksForCurrent(this.q);
-        this.q.getShopList().addAllCards(Predicate.getTrue(PreconDeck.class).random(validDecks, count));
+        this.q.getShopList().addAllFlat(Predicate.getTrue(PreconDeck.class).random(validDecks, count));
     }
 
     /**
@@ -376,13 +378,12 @@ public final class QuestUtilCards {
 
         this.q.getShopList().clear();
         for (int i = 0; i < totalPacks; i++) {
-            this.q.getShopList().addAllCards(pack.getBoosterPack(common, uncommon, rare, 0, 0, 0, 0, 0, 0));
+            this.q.getShopList().addAllFlat(pack.getBoosterPack(common, uncommon, rare, 0, 0, 0, 0, 0, 0));
         }
 
         this.generateBoostersInShop(totalPacks);
         this.generatePreconsInShop(totalPacks);
-
-        this.addBasicLands(this.q.getShopList(), 10, 5);
+        this.q.getShopList().addAll(QuestUtilCards.generateBasicLands(10, 5));
     }
 
     /**
@@ -390,7 +391,7 @@ public final class QuestUtilCards {
      * 
      * @return the cardpool
      */
-    public ItemPool<InventoryItem> getCardpool() {
+    public ItemPool<CardPrinted> getCardpool() {
         return this.q.getCardPool();
     }
 

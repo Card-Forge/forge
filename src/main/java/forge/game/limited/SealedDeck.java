@@ -36,9 +36,8 @@ import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardSet;
 import forge.card.spellability.AbilityMana;
+import forge.deck.CustomLimited;
 import forge.deck.Deck;
-import forge.deck.DeckManager;
-import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -154,13 +153,7 @@ public class SealedDeck {
                 final CustomLimited draft = (CustomLimited) GuiUtils.getChoice("Choose Custom Sealed Pool",
                         customs.toArray());
 
-                final DeckManager dio = AllZone.getDeckManager();
-                final Deck dPool = dio.getDeck(draft.getDeckFile());
-                if (dPool == null) {
-                    throw new RuntimeException("BoosterGenerator : deck not found - " + draft.getDeckFile());
-                }
-
-                final BoosterGenerator bpCustom = new BoosterGenerator(dPool);
+                final BoosterGenerator bpCustom = new BoosterGenerator(draft.getCardPool());
                 final Lambda1<List<CardPrinted>, BoosterGenerator> fnPick = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
                     @Override
                     public List<CardPrinted> apply(final BoosterGenerator pack) {
@@ -200,7 +193,7 @@ public class SealedDeck {
         final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
 
         for (int i = 0; i < this.packs.size(); i++) {
-            pool.addAllCards(this.packs.get(i).apply());
+            pool.addAllFlat(this.packs.get(i).apply());
         }
 
         return pool;
@@ -433,7 +426,7 @@ public class SealedDeck {
             }
         }
 
-        final Deck aiDeck = new Deck(GameType.Sealed);
+        final Deck aiDeck = new Deck();
 
         for (i = 0; i < deck.size(); i++) {
             if (deck.get(i).getName().equals("Plains") || deck.get(i).getName().equals("Island")

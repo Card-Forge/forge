@@ -61,7 +61,9 @@ public enum GameType {
      *            the value
      * @return the game type
      */
-    public static GameType smartValueOf(final String value) {
+    public static GameType smartValueOf(final String value, GameType defaultValue) {
+        if ( null == value ) return defaultValue;
+        
         final String valToCompate = value.trim();
         for (final GameType v : GameType.values()) {
             if (v.name().compareToIgnoreCase(valToCompate) == 0) {
