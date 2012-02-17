@@ -347,7 +347,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 AllZone.getPhaseHandler().setNeedToNextPhase(true);
             }
         }
-        // COMBAT_DECLARE_BLOCKERS: we can skip AfterBlockers and AfterAttackers if necessary
+        // COMBAT_DECLARE_BLOCKERS: we can skip AfterBlockers and AfterAttackers
+        // if necessary
         else if (phase.equals(Constant.Phase.COMBAT_DECLARE_BLOCKERS)) {
             if (this.inCombat()) {
                 PhaseUtil.verifyCombat();
@@ -411,8 +412,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             AllZone.getEndOfCombat().executeAt();
             CombatUtil.showCombat();
             Singletons.getControl().getMatchControl().showStack();
-        }
-        else if (phase.equals(Constant.Phase.MAIN2)) {
+        } else if (phase.equals(Constant.Phase.MAIN2)) {
             CombatUtil.showCombat();
             Singletons.getControl().getMatchControl().showStack();
         }
@@ -565,13 +565,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
         }
 
-        AllZone.getGameLog().add("Phase", getPlayerTurn() + " " + getPhase(), 6);
+        AllZone.getGameLog().add("Phase", this.getPlayerTurn() + " " + this.getPhase(), 6);
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
         if (this.getPhase().equals(Constant.Phase.UNTAP)) {
             this.turn++;
-            AllZone.getGameLog().add("Turn", "Turn " + turn + " (" + getPlayerTurn() + ")", 0);
+            AllZone.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", 0);
         }
 
         PhaseUtil.visuallyActivatePhase(this.getPhase());
@@ -951,8 +951,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public static boolean canCastSorcery(final Player player) {
         return AllZone.getPhaseHandler().isPlayerTurn(player)
-                && (AllZone.getPhaseHandler().getPhase().equals(Constant.Phase.MAIN2) || AllZone.getPhaseHandler().getPhase()
-                        .equals(Constant.Phase.MAIN1)) && (AllZone.getStack().size() == 0);
+                && (AllZone.getPhaseHandler().getPhase().equals(Constant.Phase.MAIN2) || AllZone.getPhaseHandler()
+                        .getPhase().equals(Constant.Phase.MAIN1)) && (AllZone.getStack().size() == 0);
     }
 
     /**
@@ -1029,6 +1029,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.phaseIndex = this.findIndex(phaseID);
     }
 
+    /**
+     * Sets the phase state.
+     *
+     * @param phaseID the new phase state
+     */
     public final void setPhaseState(final String phaseID) {
         this.phaseIndex = this.findIndex(phaseID);
         this.handleBeginPhase();

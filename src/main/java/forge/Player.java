@@ -57,7 +57,7 @@ public abstract class Player extends GameEntity {
     private int startingLife;
 
     /** The assigned damage. */
-    private Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
+    private final Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
 
     /** The life lost this turn. */
     private int lifeLostThisTurn = 0;
@@ -168,7 +168,7 @@ public abstract class Player extends GameEntity {
      */
     public final void reset() {
         this.life = 20;
-        lifeLostThisTurn = 0;
+        this.lifeLostThisTurn = 0;
         this.poisonCounters = 0;
         this.assignedDamage.clear();
         this.setPreventNextDamage(0);
@@ -265,10 +265,11 @@ public abstract class Player extends GameEntity {
     }
 
     /**
-     * Sets the starting life for a game. Should only be called from newGame()'s.
+     * Sets the starting life for a game. Should only be called from
+     * newGame()'s.
      * 
      * @param startLife
-     *              a int.
+     *            a int.
      */
     public final void setStartingLife(final int startLife) {
         this.startingLife = startLife;
@@ -323,8 +324,8 @@ public abstract class Player extends GameEntity {
      */
     public final boolean gainLife(final int toGain, final Card source) {
 
-        //Run any applicable replacement effects.
-        HashMap<String, Object> repParams = new HashMap<String, Object>();
+        // Run any applicable replacement effects.
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "GainLife");
         repParams.put("Affected", this);
         repParams.put("LifeGained", toGain);
@@ -336,7 +337,7 @@ public abstract class Player extends GameEntity {
         if (!this.canGainLife()) {
             return false;
         }
-        int lifeGain = toGain;
+        final int lifeGain = toGain;
 
         if (lifeGain > 0) {
             this.addLife(lifeGain);
@@ -363,8 +364,8 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canGainLife() {
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")
-                || AllZoneUtil.isCardInPlay("Platinum Emperion", this) || AllZoneUtil.isCardInPlay("Forsaken Wastes")) {
+        if (AllZoneUtil.isCardInPlay("Leyline of Punishment") || AllZoneUtil.isCardInPlay("Platinum Emperion", this)
+                || AllZoneUtil.isCardInPlay("Forsaken Wastes")) {
             return false;
         }
         return true;
@@ -505,9 +506,9 @@ public abstract class Player extends GameEntity {
         final StringBuilder sb = new StringBuilder(
                 "As long as you have 0 or less life, all damage is dealt to you as though its source had infect.");
 
-        if (this.getLife() <= 0 && !infect) {
-            CardList cards = this.getCardsIn(Zone.Battlefield);
-            for (Card card : cards) {
+        if ((this.getLife() <= 0) && !infect) {
+            final CardList cards = this.getCardsIn(Zone.Battlefield);
+            for (final Card card : cards) {
                 if (card.hasKeyword(sb.toString())) {
                     infect = true;
                     break;
@@ -645,7 +646,8 @@ public abstract class Player extends GameEntity {
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
-    // 2012/01/02: No longer used in calculating the finalized damage, but retained for damageprediction. -Hellfish
+    // 2012/01/02: No longer used in calculating the finalized damage, but
+    // retained for damageprediction. -Hellfish
     /**
      * <p>
      * staticReplaceDamage.
@@ -678,21 +680,21 @@ public abstract class Player extends GameEntity {
                 restDamage += 2;
             }
         }
-//
+        //
         if (AllZoneUtil.isCardInPlay("Furnace of Rath")) {
             final int amount = AllZoneUtil.getCardsIn(Zone.Battlefield, "Furnace of Rath").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
-//
+        //
         if (AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature()) {
             final int amount = source.getController().getCardsIn(Zone.Battlefield, "Gratuitous Violence").size();
             for (int i = 0; i < amount; i++) {
                 restDamage += restDamage;
             }
         }
-//
+        //
         if (AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed()
                 && (source.isInstant() || source.isSorcery())) {
             final int amount = source.getController().getCardsIn(Zone.Battlefield, "Fire Servant").size();
@@ -716,7 +718,7 @@ public abstract class Player extends GameEntity {
 
             restDamage = 3;
         }
-//
+        //
         if (AllZoneUtil.isCardInPlay("Forethought Amulet", this) && (source.isInstant() || source.isSorcery())
                 && (restDamage > 2)) {
 
@@ -742,8 +744,8 @@ public abstract class Player extends GameEntity {
     @Override
     public final int replaceDamage(final int damage, final Card source, final boolean isCombat) {
 
-        //Replacement effects
-        HashMap<String, Object> repParams = new HashMap<String, Object>();
+        // Replacement effects
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "DamageDone");
         repParams.put("Affected", this);
         repParams.put("DamageSource", source);
@@ -848,7 +850,7 @@ public abstract class Player extends GameEntity {
      */
     public final int getAssignedDamage() {
         int num = 0;
-        for (Integer value : assignedDamage.values()) {
+        for (final Integer value : this.assignedDamage.values()) {
             num += value;
         }
         return num;
@@ -864,15 +866,15 @@ public abstract class Player extends GameEntity {
      * 
      * @return a int.
      */
-    public final int getAssignedDamage(String type) {
-        Map<Card, Integer> valueMap = new HashMap<Card, Integer>();
-        for (Card c : assignedDamage.keySet()) {
+    public final int getAssignedDamage(final String type) {
+        final Map<Card, Integer> valueMap = new HashMap<Card, Integer>();
+        for (final Card c : this.assignedDamage.keySet()) {
             if (c.isType(type)) {
-                valueMap.put(c, assignedDamage.get(c));
+                valueMap.put(c, this.assignedDamage.get(c));
             }
         }
         int num = 0;
-        for (Integer value : valueMap.values()) {
+        for (final Integer value : valueMap.values()) {
             num += value;
         }
         return num;
@@ -915,9 +917,11 @@ public abstract class Player extends GameEntity {
      * <p>
      * addPoisonCounters.
      * </p>
-     *
-     * @param num a int.
-     * @param source the source
+     * 
+     * @param num
+     *            a int.
+     * @param source
+     *            the source
      */
     public final void addPoisonCounters(final int num, final Card source) {
         if (!this.hasKeyword("You can't get poison counters")) {
@@ -1242,8 +1246,8 @@ public abstract class Player extends GameEntity {
         final CardList drawn = new CardList();
         final PlayerZone library = this.getZone(Constant.Zone.Library);
 
-        //Replacement effects
-        HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        // Replacement effects
+        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
         repRunParams.put("Event", "Draw");
         repRunParams.put("Affected", this);
 
@@ -1257,10 +1261,10 @@ public abstract class Player extends GameEntity {
             c = AllZone.getGameAction().moveToHand(c);
             drawn.add(c);
 
-            if (numDrawnThisTurn == 0 && this.isComputer()) {
+            if ((this.numDrawnThisTurn == 0) && this.isComputer()) {
                 boolean reveal = false;
-                CardList cards = this.getCardsIn(Zone.Battlefield);
-                for (Card card : cards) {
+                final CardList cards = this.getCardsIn(Zone.Battlefield);
+                for (final Card card : cards) {
                     if (card.hasKeyword("Reveal the first card you draw each turn")) {
                         reveal = true;
                         break;
@@ -1278,7 +1282,7 @@ public abstract class Player extends GameEntity {
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
-            runParams.put("Number", numDrawnThisTurn);
+            runParams.put("Number", this.numDrawnThisTurn);
             AllZone.getTriggerHandler().runTrigger("Drawn", runParams);
         }
         // lose:
@@ -1790,7 +1794,7 @@ public abstract class Player extends GameEntity {
             // etc...)
             AllZone.getGameAction().checkStateEffects();
 
-            //add to log
+            // add to log
             AllZone.getGameLog().add("Land", this + " played " + land, 2);
 
             // Run triggers
@@ -1810,7 +1814,8 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canPlayLand() {
-        if (Singletons.getView().getMatchView().getViewTabber().getLblUnlimitedLands().getEnabled() && this.isHuman() && Constant.Runtime.DEV_MODE[0]) {
+        if (Singletons.getView().getMatchView().getViewTabber().getLblUnlimitedLands().getEnabled() && this.isHuman()
+                && Constant.Runtime.DEV_MODE[0]) {
             return PhaseHandler.canCastSorcery(this);
         }
 
@@ -2145,8 +2150,8 @@ public abstract class Player extends GameEntity {
             return false;
         }
 
-        //Replacement effects
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        // Replacement effects
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Affected", this);
         runParams.put("Event", "GameLoss");
 
@@ -2241,7 +2246,7 @@ public abstract class Player extends GameEntity {
         }
 
         if (this.lossState != GameLossReason.DidNotLoseYet) {
-            return this.loseConditionMet(lossState, null);
+            return this.loseConditionMet(this.lossState, null);
         }
 
         if (this.poisonCounters >= 10) {
@@ -2374,11 +2379,11 @@ public abstract class Player extends GameEntity {
                 return false;
             }
         } else if (incR[0].equals("EnchantedController")) {
-            GameEntity enchanted = source.getEnchanting();
-            if (enchanted == null || !(enchanted instanceof Card)) {
+            final GameEntity enchanted = source.getEnchanting();
+            if ((enchanted == null) || !(enchanted instanceof Card)) {
                 return false;
             }
-            Card enchantedCard = (Card) enchanted;
+            final Card enchantedCard = (Card) enchanted;
             if (!this.equals(enchantedCard.getController())) {
                 return false;
             }
@@ -2730,6 +2735,9 @@ public abstract class Player extends GameEntity {
         return this.mustAttackEntity;
     }
 
+    /**
+     * Update label observers.
+     */
     public final void updateLabelObservers() {
         this.getZone(Zone.Hand).updateObservers();
     }

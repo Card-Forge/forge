@@ -2122,6 +2122,7 @@ res/cardsfolder/d/desolation_angel.txt svneol=native#text/plain
 res/cardsfolder/d/desolation_giant.txt svneol=native#text/plain
 res/cardsfolder/d/desperate_charge.txt svneol=native#text/plain
 res/cardsfolder/d/desperate_ravings.txt -text
+res/cardsfolder/d/desperate_ritual.txt svneol=native#text/plain
 res/cardsfolder/d/despise.txt svneol=native#text/plain
 res/cardsfolder/d/despoil.txt svneol=native#text/plain
 res/cardsfolder/d/despondency.txt svneol=native#text/plain
@@ -9076,6 +9077,7 @@ res/cardsfolder/t/throat_slitter.txt svneol=native#text/plain
 res/cardsfolder/t/throne_of_bone.txt svneol=native#text/plain
 res/cardsfolder/t/throne_of_empires.txt -text
 res/cardsfolder/t/throne_of_geth.txt svneol=native#text/plain
+res/cardsfolder/t/through_the_breach.txt svneol=native#text/plain
 res/cardsfolder/t/thrull_champion.txt svneol=native#text/plain
 res/cardsfolder/t/thrull_retainer.txt -text
 res/cardsfolder/t/thrull_surgeon.txt svneol=native#text/plain
@@ -11046,6 +11048,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryRegenerate.java svneol=nat
 src/main/java/forge/card/abilityfactory/AbilityFactoryReveal.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySacrifice.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySetState.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/AbilityFactorySplice.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryToken.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryTurns.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryZoneAffecting.java svneol=native#text/plain

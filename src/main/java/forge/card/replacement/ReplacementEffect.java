@@ -29,9 +29,9 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public abstract class ReplacementEffect extends TriggerReplacementBase {
 
@@ -40,35 +40,45 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Checks for run.
-     *
+     * 
      * @return the hasRun
      */
     public final boolean hasRun() {
-        return hasRun;
+        return this.hasRun;
     }
 
+    /**
+     * Checks if is secondary.
+     *
+     * @return true, if is secondary
+     */
     public final boolean isSecondary() {
-        return mapParams.containsKey("Secondary");
+        return this.mapParams.containsKey("Secondary");
     }
 
+    /**
+     * Ai should run.
+     *
+     * @param sa the sa
+     * @return true, if successful
+     */
     public final boolean aiShouldRun(final SpellAbility sa) {
-        if (mapParams.containsKey("AICheckSVar")) {
-            String svarToCheck = mapParams.get("AICheckSVar");
+        if (this.mapParams.containsKey("AICheckSVar")) {
+            final String svarToCheck = this.mapParams.get("AICheckSVar");
             String comparator = "GE";
             int compareTo = 1;
 
-            if (mapParams.containsKey("AISVarCompare")) {
-                String fullCmp = mapParams.get("AISVarCompare");
+            if (this.mapParams.containsKey("AISVarCompare")) {
+                final String fullCmp = this.mapParams.get("AISVarCompare");
                 comparator = fullCmp.substring(0, 2);
-                String strCmpTo = fullCmp.substring(2);
+                final String strCmpTo = fullCmp.substring(2);
                 try {
                     compareTo = Integer.parseInt(strCmpTo);
-                }
-                catch (Exception ignored) {
+                } catch (final Exception ignored) {
                     if (sa == null) {
-                        compareTo = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(strCmpTo));
+                        compareTo = CardFactoryUtil.xCount(this.hostCard, this.hostCard.getSVar(strCmpTo));
                     } else {
-                        compareTo = AbilityFactory.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), sa);
+                        compareTo = AbilityFactory.calculateAmount(this.hostCard, this.hostCard.getSVar(strCmpTo), sa);
                     }
                 }
             }
@@ -76,9 +86,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             int left = 0;
 
             if (sa == null) {
-                left = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(svarToCheck));
+                left = CardFactoryUtil.xCount(this.hostCard, this.hostCard.getSVar(svarToCheck));
             } else {
-                left = AbilityFactory.calculateAmount(hostCard, hostCard.getSVar(svarToCheck), sa);
+                left = AbilityFactory.calculateAmount(this.hostCard, this.hostCard.getSVar(svarToCheck), sa);
             }
 
             if (AllZoneUtil.compare(left, comparator, compareTo)) {
@@ -92,10 +102,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Sets the checks for run.
-     *
-     * @param hasRun the hasRun to set
+     * 
+     * @param hasRun
+     *            the hasRun to set
      */
-    public final void setHasRun(boolean hasRun) {
+    public final void setHasRun(final boolean hasRun) {
         this.hasRun = hasRun;
     }
 
@@ -151,20 +162,23 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Can replace.
-     *
-     * @param runParams the run params
+     * 
+     * @param runParams
+     *            the run params
      * @return true, if successful
      */
     public abstract boolean canReplace(final HashMap<String, Object> runParams);
 
     /**
+     * To string.
+     *
      * @return a String
      */
+    @Override
     public String toString() {
-        if (getMapParams().containsKey("Description") && !this.isSuppressed()) {
-            return getMapParams().get("Description");
-        }
-        else {
+        if (this.getMapParams().containsKey("Description") && !this.isSuppressed()) {
+            return this.getMapParams().get("Description");
+        } else {
             return "";
         }
     }
@@ -371,26 +385,30 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     /**
      * Gets the copy.
-     *
+     * 
      * @return the copy
      */
     public abstract ReplacementEffect getCopy();
 
     /**
      * Sets the replacing objects.
-     *
-     * @param runParams the run params
-     * @param spellAbility the SpellAbility
+     * 
+     * @param runParams
+     *            the run params
+     * @param spellAbility
+     *            the SpellAbility
      */
-    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility spellAbility) {
-        //Should be overridden by replacers that need it.
+    public void setReplacingObjects(final HashMap<String, Object> runParams, final SpellAbility spellAbility) {
+        // Should be overridden by replacers that need it.
     }
 
     /**
      * Instantiates a new replacement effect.
-     *
-     * @param map the map
-     * @param host the host
+     * 
+     * @param map
+     *            the map
+     * @param host
+     *            the host
      */
     public ReplacementEffect(final HashMap<String, String> map, final Card host) {
         this.setMapParams(map);

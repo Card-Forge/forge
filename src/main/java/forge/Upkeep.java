@@ -486,8 +486,11 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                                 @Override
                                 public void showMessage() {
-                                    Singletons.getControl().getMatchControl().showMessage(
-                                            abyss.getName() + " - Select one nonartifact creature to destroy");
+                                    Singletons
+                                            .getControl()
+                                            .getMatchControl()
+                                            .showMessage(
+                                                    abyss.getName() + " - Select one nonartifact creature to destroy");
                                     ButtonUtil.disableAll();
                                 }
 
@@ -554,8 +557,11 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void showMessage() {
-                                Singletons.getControl().getMatchControl().showMessage(
-                                        "Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
+                                Singletons
+                                        .getControl()
+                                        .getMatchControl()
+                                        .showMessage(
+                                                "Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -2252,8 +2258,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
     private static void upkeepVesuvanDoppelgangerKeyword() {
         final Player player = AllZone.getPhaseHandler().getPlayerTurn();
         final String keyword = "At the beginning of your upkeep, you may have this "
-            + "creature become a copy of target creature except it doesn't copy that "
-            + "creature's color. If you do, this creature gains this ability.";
+                + "creature become a copy of target creature except it doesn't copy that "
+                + "creature's color. If you do, this creature gains this ability.";
         CardList list = player.getCardsIn(Zone.Battlefield);
         list = list.getKeyword(keyword);
 
@@ -2261,7 +2267,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final SpellAbility ability = new Ability(c, "0") {
                 @Override
                 public void resolve() {
-                    StringBuilder question = new StringBuilder();
+                    final StringBuilder question = new StringBuilder();
                     question.append("Use triggered ability of ").append(c).append("?");
                     question.append("\r\n").append("(").append(keyword).append(")").append("\r\n");
                     if (GameActionUtil.showYesNoDialog(c, question.toString(), true)) {
@@ -2274,14 +2280,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                                 if (newTarget[0] != null) {
                                     /*
-                                     * 1. need to select new card - DONE 1a. need to
-                                     * create the newly copied card with pic and
-                                     * setinfo 2. need to add the leaves play
-                                     * command 3. need to transfer the keyword 4.
-                                     * need to update the clone origin of new card
-                                     * and old card 5. remove clone leaves play
-                                     * commands from old 5a. remove old from play 6.
-                                     * add new to play
+                                     * 1. need to select new card - DONE 1a.
+                                     * need to create the newly copied card with
+                                     * pic and setinfo 2. need to add the leaves
+                                     * play command 3. need to transfer the
+                                     * keyword 4. need to update the clone
+                                     * origin of new card and old card 5. remove
+                                     * clone leaves play commands from old 5a.
+                                     * remove old from play 6. add new to play
                                      */
 
                                     final Card newCopy = AllZone.getCardFactory().getCard(
@@ -2308,8 +2314,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void showMessage() {
-                                Singletons.getControl().getMatchControl().showMessage(
-                                        c.getName() + " - Select target creature.");
+                                Singletons.getControl().getMatchControl()
+                                        .showMessage(c.getName() + " - Select target creature.");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
@@ -2382,9 +2388,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                         this.stop();
                                         return;
                                     }
-                                    Singletons.getControl().getMatchControl().showMessage(
-                                            source.getName() + " - Select " + num
-                                                    + " untapped artifact(s), creature(s), or land(s) you control");
+                                    Singletons
+                                            .getControl()
+                                            .getMatchControl()
+                                            .showMessage(
+                                                    source.getName()
+                                                            + " - Select "
+                                                            + num
+                                                            + " untapped artifact(s), creature(s), or land(s) you control");
                                     ButtonUtil.disableAll();
                                 }
 

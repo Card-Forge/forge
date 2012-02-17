@@ -24,51 +24,54 @@ import java.util.List;
 import forge.AllZone;
 import forge.Card;
 import forge.ComputerUtil;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
-import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class ReplacementHandler {
 
-    private List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
+    private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
     /**
      * 
      * Runs any applicable replacement effects.
-     * @param runParams the run params,same as for triggers.
+     * 
+     * @param runParams
+     *            the run params,same as for triggers.
      * @return true if the event was replaced.
      */
     public boolean run(final HashMap<String, Object> runParams) {
-        Object affected = runParams.get("Affected");
-        List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
+        final Object affected = runParams.get("Affected");
+        final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         Player decider = null;
 
-        //Figure out who decides which of multiple replacements to apply
-        //as well as whether or not to apply optional replacements.
+        // Figure out who decides which of multiple replacements to apply
+        // as well as whether or not to apply optional replacements.
         if (affected instanceof Player) {
             decider = (Player) affected;
         } else {
             decider = ((Card) affected).getController();
         }
 
-        //Round up Non-static replacement effects ("Until EOT," or "The next time you would..." etc)
-        for (ReplacementEffect replacementEffect : tmpEffects) {
+        // Round up Non-static replacement effects ("Until EOT," or
+        // "The next time you would..." etc)
+        for (final ReplacementEffect replacementEffect : this.tmpEffects) {
             if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams)) {
                 possibleReplacers.add(replacementEffect);
             }
         }
 
-        //Round up Static replacement effects
-        for (Player p : AllZone.getPlayersInGame()) {
-            for (Card crd : p.getCardsIn(Zone.Battlefield)) {
-                for (ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
+        // Round up Static replacement effects
+        for (final Player p : AllZone.getPlayersInGame()) {
+            for (final Card crd : p.getCardsIn(Zone.Battlefield)) {
+                for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck()) {
                         if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams)) {
                             possibleReplacers.add(replacementEffect);
@@ -90,20 +93,20 @@ public class ReplacementHandler {
 
         if (possibleReplacers.size() > 1) {
             if (decider.isHuman()) {
-                chosenRE = (ReplacementEffect) GuiUtils.getChoice(
-                        "Choose which replacement effect to apply.", possibleReplacers.toArray());
+                chosenRE = (ReplacementEffect) GuiUtils.getChoice("Choose which replacement effect to apply.",
+                        possibleReplacers.toArray());
             } else {
-                //AI logic for choosing which replacement effect to apply happens here.
+                // AI logic for choosing which replacement effect to apply
+                // happens here.
                 chosenRE = possibleReplacers.get(0);
             }
         }
 
         if (chosenRE != null) {
-            if (executeReplacement(runParams, chosenRE, decider)) {
+            if (this.executeReplacement(runParams, chosenRE, decider)) {
                 AllZone.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         } else {
@@ -115,35 +118,39 @@ public class ReplacementHandler {
     /**
      * 
      * Runs a single replacement effect.
-     * @param replacementEffect the replacement effect to run
+     * 
+     * @param replacementEffect
+     *            the replacement effect to run
      */
-    private boolean executeReplacement(HashMap<String, Object> runParams, ReplacementEffect replacementEffect, Player decider) {
+    private boolean executeReplacement(final HashMap<String, Object> runParams,
+            final ReplacementEffect replacementEffect, final Player decider) {
 
-        HashMap<String, String> mapParams = replacementEffect.getMapParams();
+        final HashMap<String, String> mapParams = replacementEffect.getMapParams();
         replacementEffect.setHasRun(true);
 
         SpellAbility effectSA = null;
 
         if (mapParams.containsKey("ReplaceWith")) {
-            String effectSVar = mapParams.get("ReplaceWith");
-            String effectAbString = replacementEffect.getHostCard().getSVar(effectSVar);
+            final String effectSVar = mapParams.get("ReplaceWith");
+            final String effectAbString = replacementEffect.getHostCard().getSVar(effectSVar);
 
-            AbilityFactory abilityFactory = new AbilityFactory();
+            final AbilityFactory abilityFactory = new AbilityFactory();
 
             effectSA = abilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
 
             replacementEffect.setReplacingObjects(runParams, effectSA);
         }
 
-        //Decider gets to choose wether or not to apply the replacement.
+        // Decider gets to choose wether or not to apply the replacement.
         if (replacementEffect.getMapParams().containsKey("Optional")) {
             Player optDecider = decider;
-            if (mapParams.containsKey("OptionalDecider") && effectSA != null) {
-                optDecider = AbilityFactory.getDefinedPlayers(replacementEffect.getHostCard(), mapParams.get("OptionalDecider"), effectSA).get(0);
+            if (mapParams.containsKey("OptionalDecider") && (effectSA != null)) {
+                optDecider = AbilityFactory.getDefinedPlayers(replacementEffect.getHostCard(),
+                        mapParams.get("OptionalDecider"), effectSA).get(0);
             }
 
             if (optDecider.isHuman()) {
-                StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
+                final StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
                 buildQuestion.append(replacementEffect.getHostCard());
                 buildQuestion.append("?\r\n(");
                 buildQuestion.append(replacementEffect.toString());
@@ -152,7 +159,7 @@ public class ReplacementHandler {
                     return false;
                 }
             } else {
-                //AI-logic
+                // AI-logic
                 if (!replacementEffect.aiShouldRun(effectSA)) {
                     return false;
                 }
@@ -162,14 +169,13 @@ public class ReplacementHandler {
         if (mapParams.containsKey("Prevent")) {
             if (mapParams.get("Prevent").equals("True")) {
                 replacementEffect.setHasRun(false);
-                return true; //Nothing should replace the event.
+                return true; // Nothing should replace the event.
             }
         }
 
         if (replacementEffect.getHostCard().getController().isHuman()) {
             AllZone.getGameAction().playSpellAbilityNoStack(effectSA, false);
-        }
-        else {
+        } else {
             ComputerUtil.playNoStack(effectSA);
         }
 
@@ -180,9 +186,13 @@ public class ReplacementHandler {
 
     /**
      * 
-     * Creates an instance of the proper replacement effect object based on raw script.
-     * @param repParse A raw line of script
-     * @param host The cards that hosts the replacement effect.
+     * Creates an instance of the proper replacement effect object based on raw
+     * script.
+     * 
+     * @param repParse
+     *            A raw line of script
+     * @param host
+     *            The cards that hosts the replacement effect.
      * @return A finished instance
      */
     public static ReplacementEffect parseReplacement(final String repParse, final Card host) {
@@ -192,9 +202,13 @@ public class ReplacementHandler {
 
     /**
      * 
-     * Creates an instance of the proper replacement effect object based on a parsed script.
-     * @param mapParams The parsed script
-     * @param host The card that hosts the replacement effect
+     * Creates an instance of the proper replacement effect object based on a
+     * parsed script.
+     * 
+     * @param mapParams
+     *            The parsed script
+     * @param host
+     *            The card that hosts the replacement effect
      * @return The finished instance
      */
     public static ReplacementEffect parseReplacement(final HashMap<String, String> mapParams, final Card host) {

@@ -1,0 +1,13 @@
+Name:Desperate Ritual
+ManaCost:1 R
+Types:Instant Arcane
+Text:no text
+A:SP$ Mana | Cost$ R | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R to your mana pool.
+S:Mode$ Continuous | Affected$ Arcane.YouCtrl | EffectZone$ Stack | AffectedZone$ Stack| AddAbility$ Mana | Description$ Splice onto Arcane {1}{R}
+SVar:Mana:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_ritual.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/163.jpg
+Oracle:Add {R}{R}{R} to your mana pool.
+End

@@ -102,14 +102,16 @@ public class FModel {
 
         // TODO this single setting from preferences should not be here, or,
         // it should be here with all the other settings at the same time.
-        // Unfortunately, they're tied up in legacy code in the Display interface,
-        // currently in GuiTopLevel.  When that code is updated, this TODO should be resolved.
+        // Unfortunately, they're tied up in legacy code in the Display
+        // interface,
+        // currently in GuiTopLevel. When that code is updated, this TODO should
+        // be resolved.
         // Doublestrike 24-01-12
         // ==
         // It's looking like all the settings at the same time, here only.
         // Doublestrike 06-02-12
-        Constant.Runtime.DEV_MODE[0] = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        Constant.Runtime.setSkinName(preferences.getPref(FPref.UI_SKIN));
+        Constant.Runtime.DEV_MODE[0] = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        Constant.Runtime.setSkinName(this.preferences.getPref(FPref.UI_SKIN));
 
         // Load splash image and preloader swatches for skin
         FSkin.loadLight(Constant.Runtime.getSkinName());
@@ -270,32 +272,56 @@ public class FModel {
         }
     }
 
-    /** @return {@link forge.model.BuildInfo} */
+    /**
+     * Gets the builds the info.
+     *
+     * @return {@link forge.model.BuildInfo}
+     */
     public final BuildInfo getBuildInfo() {
         return this.buildInfo;
     }
 
-    /** @param bi0 &emsp; {@link forge.model.BuildInfo} */
+    /**
+     * Sets the builds the info.
+     *
+     * @param bi0 &emsp; {@link forge.model.BuildInfo}
+     */
     protected final void setBuildInfo(final BuildInfo bi0) {
         this.buildInfo = bi0;
     }
 
-    /** @return {@link forge.properties.ForgePreferences} */
+    /**
+     * Gets the preferences.
+     *
+     * @return {@link forge.properties.ForgePreferences}
+     */
     public final ForgePreferences getPreferences() {
         return this.preferences;
     }
 
-    /** @return {@link forge.quest.data.QuestPreferences} */
+    /**
+     * Gets the quest preferences.
+     *
+     * @return {@link forge.quest.data.QuestPreferences}
+     */
     public final QuestPreferences getQuestPreferences() {
         return this.questPreferences;
     }
 
-    /** @return {@link forge.model.FGameState} */
+    /**
+     * Gets the game state.
+     *
+     * @return {@link forge.model.FGameState}
+     */
     public final FGameState getGameState() {
         return this.gameState;
     }
 
-    /** @return {@link forge.game.GameSummary} */
+    /**
+     * Gets the game summary.
+     *
+     * @return {@link forge.game.GameSummary}
+     */
     public final GameSummary getGameSummary() {
         return this.gameState.getGameSummary();
     }
@@ -311,12 +337,19 @@ public class FModel {
     }
 
     /**
+<<<<<<< HEAD
      * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
      * 
      * @return a boolean.
+=======
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
+     * codebase.
+     *
+     * @return true, if successful
+>>>>>>> Update Maven plugins. Checkstyle
      */
     public final boolean savePrefs() {
-        final ForgePreferences fp = preferences;
+        final ForgePreferences fp = this.preferences;
         final List<ViewField> fieldViews = Singletons.getView().getMatchView().getFieldViews();
 
         // AI field is at index [0]
@@ -324,8 +357,10 @@ public class FModel {
         fp.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fieldViews.get(0).getLblDraw().getEnabled()));
         fp.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fieldViews.get(0).getLblMain1().getEnabled()));
         fp.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fieldViews.get(0).getLblBeginCombat().getEnabled()));
-        fp.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fieldViews.get(0).getLblDeclareAttackers().getEnabled()));
-        fp.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fieldViews.get(0).getLblDeclareBlockers().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_DECLAREATTACKERS,
+                String.valueOf(fieldViews.get(0).getLblDeclareAttackers().getEnabled()));
+        fp.setPref(FPref.PHASE_AI_DECLAREBLOCKERS,
+                String.valueOf(fieldViews.get(0).getLblDeclareBlockers().getEnabled()));
         fp.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fieldViews.get(0).getLblFirstStrike().getEnabled()));
         fp.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fieldViews.get(0).getLblCombatDamage().getEnabled()));
         fp.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fieldViews.get(0).getLblEndCombat().getEnabled()));
@@ -338,8 +373,10 @@ public class FModel {
         fp.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fieldViews.get(1).getLblDraw().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fieldViews.get(1).getLblMain1().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fieldViews.get(1).getLblBeginCombat().getEnabled()));
-        fp.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fieldViews.get(1).getLblDeclareAttackers().getEnabled()));
-        fp.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fieldViews.get(1).getLblDeclareBlockers().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS,
+                String.valueOf(fieldViews.get(1).getLblDeclareAttackers().getEnabled()));
+        fp.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS,
+                String.valueOf(fieldViews.get(1).getLblDeclareBlockers().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fieldViews.get(1).getLblFirstStrike().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fieldViews.get(1).getLblCombatDamage().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fieldViews.get(1).getLblEndCombat().getEnabled()));
@@ -347,7 +384,7 @@ public class FModel {
         fp.setPref(FPref.PHASE_HUMAN_EOT, String.valueOf(fieldViews.get(1).getLblEndTurn().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
 
-        ViewTabber v = Singletons.getView().getMatchView().getViewTabber();
+        final ViewTabber v = Singletons.getView().getMatchView().getViewTabber();
         Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
 
         fp.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
@@ -359,9 +396,16 @@ public class FModel {
     }
 
     /**
+<<<<<<< HEAD
      * TODO: Needs to be reworked for efficiency with rest of prefs loads in codebase.
      * 
      * @return a boolean.
+=======
+     * TODO: Needs to be reworked for efficiency with rest of prefs loads in
+     * codebase.
+     *
+     * @return true, if successful
+>>>>>>> Update Maven plugins. Checkstyle
      */
     public final boolean loadPrefs() {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
@@ -371,8 +415,8 @@ public class FModel {
         Constant.Runtime.DEV_MODE[0] = fp.getPrefBoolean(FPref.DEV_MODE_ENABLED);
         Constant.Runtime.UPLOAD_DRAFT[0] = fp.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
         Constant.Runtime.RANDOM_FOIL[0] = fp.getPrefBoolean(FPref.UI_RANDOM_FOIL);
-        Constant.Runtime.UPLOAD_DRAFT[0] =
-                (Constant.Runtime.NET_CONN[0] ? fp.getPrefBoolean(FPref.UI_UPLOAD_DRAFT) : false);
+        Constant.Runtime.UPLOAD_DRAFT[0] = (Constant.Runtime.NET_CONN[0] ? fp.getPrefBoolean(FPref.UI_UPLOAD_DRAFT)
+                : false);
 
         // AI field is at index [0]
         fieldViews.get(0).getLblUpkeep().setEnabled(fp.getPrefBoolean(FPref.PHASE_AI_UPKEEP));

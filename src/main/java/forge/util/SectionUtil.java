@@ -31,8 +31,9 @@ public class SectionUtil {
 
     /**
      * Parses the sections.
-     *
-     * @param source the source
+     * 
+     * @param source
+     *            the source
      * @return the map
      */
     @SuppressWarnings("unchecked")
@@ -78,8 +79,14 @@ public class SectionUtil {
         return result;
     }
 
-    public static Map<String, String> parseKvPairs(List<String> lines) {
-        Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+    /**
+     * Parses the kv pairs.
+     *
+     * @param lines the lines
+     * @return the map
+     */
+    public static Map<String, String> parseKvPairs(final List<String> lines) {
+        final Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         for (final String dd : lines) {
             final String[] v = dd.split(":", 2);

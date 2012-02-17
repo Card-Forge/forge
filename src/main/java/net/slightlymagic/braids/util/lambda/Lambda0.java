@@ -22,19 +22,14 @@ package net.slightlymagic.braids.util.lambda;
 
 /**
  * The Class Lambda1.
- * 
- * @param <R>
- *            the generic type
- * @param <A1>
- *            the generic type
+ *
+ * @param <R> the generic type
  */
 public abstract class Lambda0<R> implements Lambda<R> {
 
     /**
      * Apply.
-     * 
-     * @param arg1
-     *            the arg1
+     *
      * @return the r
      */
     public abstract R apply();
@@ -49,12 +44,14 @@ public abstract class Lambda0<R> implements Lambda<R> {
     // TODO @Override
     /**
      * Apply.
-     *
-     * @param args Object[]
+     * 
+     * @param args
+     *            Object[]
      * @return R
      */
+    @Override
     public final R apply(final Object[] args) {
-        return apply();
+        return this.apply();
     }
 
 }
