@@ -285,6 +285,17 @@ FControl refactored to reuse single instance of each UI state.
 - Added the links to token download list.
 - Added the red mage to avatar selection sprite
 - Added the recent commit logs to changes.txt.
+- Converted Fact or Fiction to script.
+- Improved the AI of AF TwoPiles.
+- commiting tournament packs' data. will add code to parse it after I'm done with decks
+- FrozenCall.java unused, Lambda0 needed for code currently in development
+- removed unused imports
+- Added RememberTapped to AB TapAll.
+- Added AF Play.
+- Updated some SVars and ran scripts.
+- Commented out the part in drawBackgroundTexture that causes the background artifacts.
+- AI improvements of AF Play.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -417,6 +428,14 @@ Hidden Stag
 Flesh Reaver
 Disorder
 Solitary Confinement
+Sphinx of Uthuun
+Death or Glory
+Diabolic Servitude
+Breakthrough
+Wake of Destruction
+Angel's Trumpet
+Memory Plunder
+Wrexial, the Risen Deep
 
 
 end
