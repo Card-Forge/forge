@@ -26,7 +26,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 
 /**
- * Deck section
+ * Deck section.
  * 
  */
 public class DeckSection extends ItemPool<CardPrinted> {
@@ -37,7 +37,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
     public DeckSection() {
         super(CardPrinted.class);
     }
-    
+
     public DeckSection(Iterable<Entry<CardPrinted, Integer>> cards) {
         this();
         addAll(cards);
@@ -80,8 +80,8 @@ public class DeckSection extends ItemPool<CardPrinted> {
      */
     public void add(final String cardName, final String setCode, int amount) {
         this.add(CardDb.instance().getCard(cardName, setCode), amount);
-    }    
-    
+    }
+
     /**
      * Adds the.
      *
