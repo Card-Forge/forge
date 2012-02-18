@@ -28,18 +28,17 @@ import forge.deck.CustomLimited;
  */
 public class CubeSerializer extends DeckSerializerBase<CustomLimited> {
 
-    public CubeSerializer(File deckDir0)
-    {
+    public CubeSerializer(File deckDir0) {
         super(deckDir0);
     }
-    
+
 
     /* (non-Javadoc)
      * @see forge.deck.IDeckSerializer#save(forge.item.CardCollectionBase, java.io.File)
      */
     @Override
     public void save(CustomLimited unit) {
-       
+
     }
 
     /* (non-Javadoc)
@@ -78,7 +77,7 @@ public class CubeSerializer extends DeckSerializerBase<CustomLimited> {
     @Override
     protected FilenameFilter getFileFilter() {
         return new FilenameFilter() {
-            
+
             @Override
             public boolean accept(File dir, String name) {
                 return dir.getPath().endsWith(".cub");

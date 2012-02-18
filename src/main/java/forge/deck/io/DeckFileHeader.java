@@ -10,21 +10,21 @@ import forge.game.GameType;
  *
  */
 public class DeckFileHeader {
-    
+
     public static final String NAME = "Name";
     private static final String DECK_TYPE = "Deck Type";
     public static final String COMMENT = "Comment";
     private static final String PLAYER = "Player";
     private static final String CSTM_POOL = "Custom Pool";
     private static final String PLAYER_TYPE = "PlayerType";
-    
+
     private final GameType deckType;
     private final PlayerType playerType;
     private final boolean customPool;
-    
+
     private final String name;
     private final String comment;
-    
+
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -37,8 +37,8 @@ public class DeckFileHeader {
         customPool = "true".equalsIgnoreCase(kvPairs.get(CSTM_POOL));
         playerType = "computer".equalsIgnoreCase(kvPairs.get(PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(PLAYER_TYPE)) ? PlayerType.COMPUTER : PlayerType.HUMAN;
     }
-    
-    
+
+
     public  final PlayerType getPlayerType() {
         return playerType;
     }
@@ -52,11 +52,11 @@ public class DeckFileHeader {
         return comment;
     }
 
-    
+
     public  final GameType getDeckType() {
         return deckType;
     }
-    
-    
+
+
 
 }

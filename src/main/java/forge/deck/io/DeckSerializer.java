@@ -47,12 +47,11 @@ import freemarker.template.TemplateException;
  */
 public class DeckSerializer extends DeckSerializerBase<Deck> {
 
-    public DeckSerializer(File deckDir0)
-    {
+    public DeckSerializer(File deckDir0) {
         super(deckDir0);
     }
-    
-    
+
+
     /** Constant <code>DCKFileFilter</code>. */
     public static final FilenameFilter DCK_FILE_FILTER = new FilenameFilter() {
         @Override
@@ -214,7 +213,7 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
     public void erase(Deck unit) {
         makeFileFor(unit).delete();
     }
-    
+
     /**
      * 
      * Make file name.
@@ -245,14 +244,14 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
         return DCK_FILE_FILTER;
     }
 
-    public static DeckFileHeader readDeckMetadata(final Map<String,List<String>> map) {
+    public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map) {
         List<String> lines = map.get("metadata");
         if (lines == null) {
             return null;
         }
         DeckFileHeader d = new DeckFileHeader(SectionUtil.parseKvPairs(lines, "="));
-        
-    
+
+
         return d;
     }
 
