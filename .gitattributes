@@ -5516,6 +5516,7 @@ res/cardsfolder/m/mindblaze.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mindcrank.txt svneol=native#text/plain
 res/cardsfolder/m/mindculling.txt svneol=native#text/plain
 res/cardsfolder/m/mindlash_sliver.txt svneol=native#text/plain
+res/cardsfolder/m/mindleech_mass.txt -text
 res/cardsfolder/m/mindless_automaton.txt svneol=native#text/plain
 res/cardsfolder/m/mindless_null.txt -text
 res/cardsfolder/m/mindmoil.txt -text

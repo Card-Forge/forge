@@ -26,6 +26,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardListFilter;
 import forge.ComputerUtil;
 import forge.GameActionUtil;
 import forge.Player;
@@ -125,9 +126,6 @@ public final class AbilityFactoryPlay {
 
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
-                if (withOutManaCost) {
-                    return true;
-                }
                 return AbilityFactoryPlay.playTriggerAI(af, this, mandatory);
             }
 
@@ -321,16 +319,17 @@ public final class AbilityFactoryPlay {
     private static void playResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
-        Player controller = sa.getActivatingPlayer();
+        Player activator = sa.getActivatingPlayer();
         int amount = 1;
         if (params.containsKey("Amount")) {
             amount = AbilityFactory.calculateAmount(source, params.get("Amount"), sa);
         }
 
         if (params.containsKey("Controller")) {
-            controller = AbilityFactory.getDefinedPlayers(source, params.get("Controller"), sa).get(0);
+            activator = AbilityFactory.getDefinedPlayers(source, params.get("Controller"), sa).get(0);
         }
 
+        final Player controller = activator;
         CardList tgtCards = new CardList();
 
         final Target tgt = sa.getTarget();
@@ -357,6 +356,27 @@ public final class AbilityFactoryPlay {
                 if (controller.isHuman()) {
                     tgtCard = (Card) GuiUtils.getChoice("Select a card to play", tgtCards.toArray());
                 } else {
+                    // AI
+                    tgtCards = tgtCards.filter(new CardListFilter() {
+                        @Override
+                        public boolean addCard(final Card c) {
+                            ArrayList<SpellAbility> SpellAbilities = c.getBasicSpells();
+                            ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
+                            for (SpellAbility s : SpellAbilities) {
+                                Spell spell = (Spell) s;
+                                s.setActivatingPlayer(controller);
+                                SpellAbilityRestriction res = s.getRestrictions();
+                                // timing restrictions still apply
+                                if (res.checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(false, true)) {
+                                    sas.add(s);
+                                }
+                            }
+                            if (sas.isEmpty()) {
+                                return false;
+                            }
+                            return true;
+                        }
+                    });
                     tgtCard = CardFactoryUtil.getBestAI(tgtCards);
                 }
             }
