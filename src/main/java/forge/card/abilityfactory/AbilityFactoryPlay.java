@@ -40,6 +40,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.gui.GuiUtils;
 import forge.util.MyRandom;
 /**
  * <p>
@@ -275,7 +276,7 @@ public final class AbilityFactoryPlay {
                 return false;
             }
             tgt.addTarget(CardFactoryUtil.getBestAI(cards));
-        } else {
+        } else if (!params.containsKey("Valid")) {
             cards = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
             if (cards.isEmpty()) {
                 return false;
@@ -299,7 +300,11 @@ public final class AbilityFactoryPlay {
      */
     private static boolean playTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
-        return false;
+        if (mandatory) {
+            return true;
+        }
+
+        return playCanPlayAI(af, sa);
     }
 
     /**
@@ -314,71 +319,92 @@ public final class AbilityFactoryPlay {
      */
     private static void playResolve(final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
+        final Card source = sa.getSourceCard();
         Player controller = sa.getActivatingPlayer();
-
-        if (params.containsKey("Controller")) {
-            controller = AbilityFactory.getDefinedPlayers(card, params.get("Controller"), sa).get(0);
+        int amount = 1;
+        if (params.containsKey("Amount")) {
+            amount = AbilityFactory.calculateAmount(source, params.get("Amount"), sa);
         }
 
-        ArrayList<Card> tgtCards;
+        if (params.containsKey("Controller")) {
+            controller = AbilityFactory.getDefinedPlayers(source, params.get("Controller"), sa).get(0);
+        }
+
+        CardList tgtCards = new CardList();
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        if (params.containsKey("Valid")) {
+            Zone zone = Zone.Hand;
+            if (params.containsKey("ValidZone")) {
+                zone = Zone.smartValueOf(params.get("ValidZone"));
+            }
+            tgtCards = AllZoneUtil.getCardsIn(zone);
+            tgtCards = tgtCards.getValidCards(params.get("Valid"), controller, source);
+        } else if (params.containsKey("Defined")) {
+            tgtCards = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
+        } else if (tgt != null) {
+            tgtCards = new CardList(tgt.getTargetCards());
         }
 
         if (tgtCards.isEmpty()) {
             return;
         }
 
-        Card tgtCard = tgtCards.get(0);
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Do you want to play " + tgtCard + "?");
-        if (controller.isHuman() && params.containsKey("Optional") && !GameActionUtil.showYesNoDialog(card, sb.toString())) {
-            return;
-        }
-        if (tgtCard.isLand()) {
-            controller.playLand(tgtCard);
-            return;
-        }
-
-        ArrayList<SpellAbility> sas = tgtCard.getBasicSpells();
-        if (sas.isEmpty()) {
-            return;
-        }
-        SpellAbility tgtSA = sas.get(0);
-
-        if (params.containsKey("WithoutManaCost")) {
-            if (controller.isHuman()) {
-                final SpellAbility newSA = tgtSA.copy();
-                final Cost cost = new Cost("", tgtCard.getName(), false);
-                for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                    if (!(part instanceof CostMana)) {
-                        cost.getCostParts().add(part);
-                    }
-                }
-                cost.setNoManaCostChange(true);
-                newSA.setPayCosts(cost);
-                newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                AllZone.getGameAction().playSpellAbility(newSA);
-            } else {
-                if (tgtSA instanceof Spell) {
-                    Spell spell = (Spell) tgtSA;
-                    if (spell.canPlayFromEffectAI(false, true)) {
-                        //System.out.println("canPlayFromEffectAI: " + this.getHostCard());
-                        ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
-                    }
+        for (int i = 0; i < amount; i++) {
+            Card tgtCard = tgtCards.get(0);
+            if (tgtCards.size() > 1) {
+                if (controller.isHuman()) {
+                    tgtCard = (Card) GuiUtils.getChoice("Select a card to play", tgtCards.toArray());
+                } else {
+                    tgtCard = CardFactoryUtil.getBestAI(tgtCards);
                 }
             }
-        } else {
-            if (controller.isHuman()) {
-                AllZone.getGameAction().playSpellAbility(tgtSA);
-            } else if (tgtSA.canPlayAI()) {
-                ComputerUtil.playStack(tgtSA);
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Do you want to play " + tgtCard + "?");
+            if (controller.isHuman() && params.containsKey("Optional")
+                    && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
+                return;
+            }
+            if (tgtCard.isLand()) {
+                controller.playLand(tgtCard);
+                return;
+            }
+
+            ArrayList<SpellAbility> sas = tgtCard.getBasicSpells();
+            if (sas.isEmpty()) {
+                return;
+            }
+            SpellAbility tgtSA = sas.get(0);
+
+            if (params.containsKey("WithoutManaCost")) {
+                if (controller.isHuman()) {
+                    final SpellAbility newSA = tgtSA.copy();
+                    final Cost cost = new Cost("", tgtCard.getName(), false);
+                    for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                        if (!(part instanceof CostMana)) {
+                            cost.getCostParts().add(part);
+                        }
+                    }
+                    cost.setNoManaCostChange(true);
+                    newSA.setPayCosts(cost);
+                    newSA.setManaCost("");
+                    newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
+                    AllZone.getGameAction().playSpellAbility(newSA);
+                } else {
+                    if (tgtSA instanceof Spell) {
+                        Spell spell = (Spell) tgtSA;
+                        if (spell.canPlayFromEffectAI(false, true)) {
+                            //System.out.println("canPlayFromEffectAI: " + this.getHostCard());
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
+                        }
+                    }
+                }
+            } else {
+                if (controller.isHuman()) {
+                    AllZone.getGameAction().playSpellAbility(tgtSA);
+                } else if (tgtSA.canPlayAI()) {
+                    ComputerUtil.playStack(tgtSA);
+                }
             }
         }
     } // end resolve
