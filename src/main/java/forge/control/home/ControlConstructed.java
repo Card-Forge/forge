@@ -568,7 +568,7 @@ public class ControlConstructed {
         deckNames = new ArrayList<String>();
         deckNames.add(0, "Random");
 
-        
+
         deckNames.addAll(AllZone.getDecks().getConstructed().getNames());
 
         // No pre-constructed decks?

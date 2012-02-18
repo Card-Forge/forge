@@ -207,7 +207,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         return true;
     }
-    
+
     /**
      * <p>
      * checkZoneRestrictions.
@@ -283,7 +283,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.isSorcerySpeed() && !PhaseHandler.canCastSorcery(activator)) {
             return false;
         }
-        
+
         if (!checkTimingRestrictions(c, sa)) {
             return false;
         }

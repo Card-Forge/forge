@@ -89,12 +89,11 @@ public final class AllZone {
     /** Constant <code>CARD_RATINGS</code>. */
     private static CardRatings cardRatings = new CardRatings();
 
-    
+
     private static CardCollections collections;
-    
+
     public static final CardCollections getDecks() {
-        if ( null == collections )
-        {
+        if (null == collections) {
             collections = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
         }
         return collections;
