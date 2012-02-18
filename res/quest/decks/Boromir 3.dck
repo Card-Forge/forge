@@ -7,27 +7,29 @@ Description=Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures
 Icon=Boromir.jpg
 Deck Type=constructed
 [main]
-21 Forest|ISD
-1 Mox Emerald
+19 Snow-Covered Forest
+4 Bayou
 4 Elvish Piper
-4 Quicksilver Amulet
-4 Harmonize
-4 Rampant Growth
+3 Quicksilver Amulet
+1 Harmonize
+3 Rampant Growth
+2 Into the North
 4 Wall of Blossoms
-3 Elvish Visionary
-1 Dramatic Entrance
+1 Elvish Visionary
+3 Dramatic Entrance
+2 Lure of Prey
 1 Naturalize
 1 Nourish
 1 Defense of the Heart
-1 Natural Order
-1 It That Betrays
-1 Ulamog, the Infinite Gyre
-1 Kozilek, Butcher of Truth
-1 Progenitus
-1 Darksteel Colossus
-1 Angel of Despair
+1 Autochthon Wurm
+1 Empyrial Archangel
+1 Godsire
 1 Hellkite Overlord
-1 Inkwell Leviathan
-1 Akroma, Angel of Wrath
-1 Sphinx of the Steel Wind
+1 Khalni Hydra
+1 Liege of the Tangle
+1 Pelakka Wurm
+1 Progenitus
+1 Verdant Force
+1 Vorinclex, Voice of Hunger
+1 Woodfall Primus
 [sideboard]
