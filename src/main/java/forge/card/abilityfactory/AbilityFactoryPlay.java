@@ -39,6 +39,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 import forge.util.MyRandom;
@@ -365,16 +366,35 @@ public final class AbilityFactoryPlay {
                     && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
                 return;
             }
+            // lands will be played
             if (tgtCard.isLand()) {
                 controller.playLand(tgtCard);
                 return;
             }
 
-            ArrayList<SpellAbility> sas = tgtCard.getBasicSpells();
+            // get basic spells (no flashback, etc.)
+            ArrayList<SpellAbility> SpellAbilities = tgtCard.getBasicSpells();
+            ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
+            for (SpellAbility s : SpellAbilities) {
+                s.setActivatingPlayer(controller);
+                SpellAbilityRestriction res = s.getRestrictions();
+                // timing restrictions still apply
+                if (res.checkTimingRestrictions(tgtCard, s)) {
+                    sas.add(s);
+                }
+            }
             if (sas.isEmpty()) {
                 return;
             }
-            SpellAbility tgtSA = sas.get(0);
+            SpellAbility tgtSA = null;
+            // only one mode can be used
+            if (sas.size() == 1) {
+                tgtSA = sas.get(0);
+            } else if (sa.getActivatingPlayer().isHuman()) {
+                tgtSA = (SpellAbility) GuiUtils.getChoice("Select a spell to cast", sas.toArray());
+            } else {
+                tgtSA = sas.get(0);
+            }
 
             if (params.containsKey("WithoutManaCost")) {
                 if (controller.isHuman()) {

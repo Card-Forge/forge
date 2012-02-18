@@ -207,6 +207,46 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         return true;
     }
+    
+    /**
+     * <p>
+     * checkZoneRestrictions.
+     * </p>
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public final boolean checkTimingRestrictions(final Card c, final SpellAbility sa) {
+        Player activator = sa.getActivatingPlayer();
+
+        if (this.isPlayerTurn() && !AllZone.getPhaseHandler().isPlayerTurn(activator)) {
+            return false;
+        }
+
+        if (this.isOpponentTurn() && AllZone.getPhaseHandler().isPlayerTurn(activator)) {
+            return false;
+        }
+
+        if (this.getPhases().size() > 0) {
+            boolean isPhase = false;
+            final String currPhase = AllZone.getPhaseHandler().getPhase();
+            for (final String s : this.getPhases()) {
+                if (s.equals(currPhase)) {
+                    isPhase = true;
+                    break;
+                }
+            }
+
+            if (!isPhase) {
+                return false;
+            }
+        }
+
+
+        return true;
+    }
 
     /**
      * <p>
@@ -243,12 +283,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.isSorcerySpeed() && !PhaseHandler.canCastSorcery(activator)) {
             return false;
         }
-
-        if (this.isPlayerTurn() && !AllZone.getPhaseHandler().isPlayerTurn(activator)) {
-            return false;
-        }
-
-        if (this.isOpponentTurn() && AllZone.getPhaseHandler().isPlayerTurn(activator)) {
+        
+        if (!checkTimingRestrictions(c, sa)) {
             return false;
         }
 
@@ -259,21 +295,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
             return false;
-        }
-
-        if (this.getPhases().size() > 0) {
-            boolean isPhase = false;
-            final String currPhase = AllZone.getPhaseHandler().getPhase();
-            for (final String s : this.getPhases()) {
-                if (s.equals(currPhase)) {
-                    isPhase = true;
-                    break;
-                }
-            }
-
-            if (!isPhase) {
-                return false;
-            }
         }
 
         if (this.getCardsInHand() != -1) {
