@@ -82,7 +82,7 @@ public class CustomLimited extends DeckBase {
     private int numPacks = 3;
 
     private DeckSection cardPool;
-    
+
     /** The Land set code. */
     private String landSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer())
             .getMostRecentSet();
@@ -105,9 +105,9 @@ public class CustomLimited extends DeckBase {
      * @return the custom limited
      */
     public static CustomLimited parse(final List<String> dfData) {
-        
+
         Map<String, String> data = SectionUtil.parseKvPairs(dfData, ":");
-        
+
         final CustomLimited cd = new CustomLimited(data.get("Name"));
 
         for (final String dd : dfData) {

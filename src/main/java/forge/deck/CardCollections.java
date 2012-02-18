@@ -18,7 +18,7 @@ public class CardCollections {
     private final IFolderMap<DeckSet> draft;
     private final IFolderMap<DeckSet> sealed;
     private final IFolderMap<CustomLimited> cube;
-    
+
     /**
      * TODO: Write javadoc for Constructor.
      * @param file
@@ -51,5 +51,5 @@ public class CardCollections {
     }
 
 
-    
+
 }

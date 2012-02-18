@@ -63,11 +63,11 @@ public class Deck extends DeckBase implements Serializable, IHasName {
     // gameType is from Constant.GameType, like GameType.Regular
     /**
      * <p>
-     * Decks have their named finalled 
+     * Decks have their named finalled.
      * </p>
      */
     public Deck() { this(""); }
-    
+
     public Deck(String name0) {
         super(name0);
         this.main = new DeckSection();
@@ -125,9 +125,9 @@ public class Deck extends DeckBase implements Serializable, IHasName {
 
     protected void cloneFieldsTo(DeckBase clone) {
         super.cloneFieldsTo(clone);
-        Deck result = (Deck)clone;
+        Deck result = (Deck) clone;
         result.main.addAll(this.main);
-        result.sideboard.addAll(this.sideboard);        
+        result.sideboard.addAll(this.sideboard);
     }
 
     /* (non-Javadoc)
@@ -137,32 +137,32 @@ public class Deck extends DeckBase implements Serializable, IHasName {
     protected DeckBase newInstance(String name0) {
         return new Deck(name0);
     }
-    
-    
+
+
     public static Deck fromFile(final File deckFile) {
         return fromLines(FileUtil.readFile(deckFile));
     }
 
     public static Deck fromLines(final List<String> deckFileLines) {
         return Deck.fromSections(SectionUtil.parseSections(deckFileLines));
-    }    
-    
+    }
+
     public static Deck fromSections(Map<String, List<String>> sections) {
         if (sections.isEmpty()) {
             return null;
         }
-        
+
         DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
-        
+
         final Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());
-        
+
         d.getMain().set(readCardList(sections.get("main")));
         d.getSideboard().set(readCardList(sections.get("sideboard")));
-    
+
         return d;
     }
-    
+
     private static List<String> readCardList(final List<String> lines) {
         final List<String> result = new ArrayList<String>();
         final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
@@ -192,8 +192,8 @@ public class Deck extends DeckBase implements Serializable, IHasName {
             }
         }
         return result;
-    }    
-    
+    }
+
     private static List<String> writeCardPool(final ItemPoolView<CardPrinted> pool) {
         final List<Entry<CardPrinted, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
@@ -225,22 +225,22 @@ public class Deck extends DeckBase implements Serializable, IHasName {
      *             if any.
      */
     public List<String> save() {
- 
-        
+
+
         final List<String> out = new ArrayList<String>();
         out.add(String.format("[metadata]"));
-    
+
         out.add(String.format("%s=%s", DeckFileHeader.NAME, getName().replaceAll("\n", "")));
         // these are optional
         if (getComment() != null) {
             out.add(String.format("%s=%s", DeckFileHeader.COMMENT, getComment().replaceAll("\n", "")));
         }
-    
+
         out.add(String.format("%s", "[main]"));
         out.addAll(writeCardPool(getMain()));
-    
+
         out.add(String.format("%s", "[sideboard]"));
         out.addAll(writeCardPool(getSideboard()));
         return out;
-    }    
+    }
 }
