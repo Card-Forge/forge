@@ -8543,6 +8543,7 @@ res/cardsfolder/s/stolen_grain.txt svneol=native#text/plain
 res/cardsfolder/s/stomp_and_howl.txt svneol=native#text/plain
 res/cardsfolder/s/stomper_cub.txt svneol=native#text/plain
 res/cardsfolder/s/stomping_ground.txt svneol=native#text/plain
+res/cardsfolder/s/stomping_slabs.txt -text svneol=unset#text/plain
 res/cardsfolder/s/stone_calendar.txt svneol=native#text/plain
 res/cardsfolder/s/stone_catapult.txt svneol=native#text/plain
 res/cardsfolder/s/stone_giant.txt svneol=native#text/plain
