@@ -7553,6 +7553,7 @@ res/cardsfolder/s/scroll_thief.txt svneol=native#text/plain
 res/cardsfolder/s/scrubland.txt svneol=native#text/plain
 res/cardsfolder/s/scryb_ranger.txt svneol=native#text/plain
 res/cardsfolder/s/scryb_sprites.txt svneol=native#text/plain
+res/cardsfolder/s/scrying_glass.txt -text svneol=unset#text/plain
 res/cardsfolder/s/scrying_sheets.txt svneol=native#text/plain
 res/cardsfolder/s/sculpting_steel.txt svneol=native#text/plain
 res/cardsfolder/s/scute_mob.txt svneol=native#text/plain
