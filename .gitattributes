@@ -11212,7 +11212,6 @@ src/main/java/forge/deck/DeckBase.java -text
 src/main/java/forge/deck/DeckRecognizer.java -text
 src/main/java/forge/deck/DeckSection.java -text
 src/main/java/forge/deck/DeckSet.java -text
-src/main/java/forge/deck/OldDeckParser.java -text
 src/main/java/forge/deck/generate/DeckGenerator.java -text
 src/main/java/forge/deck/generate/Generate2ColorDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/Generate3ColorDeck.java svneol=native#text/plain
@@ -11227,6 +11226,7 @@ src/main/java/forge/deck/io/DeckFileHeader.java -text
 src/main/java/forge/deck/io/DeckSerializer.java -text
 src/main/java/forge/deck/io/DeckSerializerBase.java -text
 src/main/java/forge/deck/io/DeckSetSerializer.java -text
+src/main/java/forge/deck/io/OldDeckParser.java -text
 src/main/java/forge/deck/package-info.java svneol=native#text/plain
 src/main/java/forge/error/BugzReporter.java svneol=native#text/plain
 src/main/java/forge/error/ErrorViewer.java svneol=native#text/plain

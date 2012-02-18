@@ -48,14 +48,6 @@ public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMa
     }
 
     /* (non-Javadoc)
-     * @see forge.deck.IFolderMapView#isUnique(java.lang.String)
-     */
-    @Override
-    public final boolean isUnique(final String name) {
-        return !this.map.containsKey(name);
-    }
-
-    /* (non-Javadoc)
      * @see forge.deck.IFolderMapView#get(java.lang.String)
      */
     @Override

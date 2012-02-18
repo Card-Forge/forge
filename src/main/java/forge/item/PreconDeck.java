@@ -79,28 +79,20 @@ public class PreconDeck implements InventoryItemFromSet {
     public PreconDeck(final File f) {
         final List<String> deckLines = FileUtil.readFile(f);
         final Map<String, List<String>> sections = SectionUtil.parseSections(deckLines);
-        this.deck = Deck.fromLines(deckLines);
+        this.deck = Deck.fromSections(sections);
 
-        String filenameProxy = null;
         String setProxy = "n/a";
-        String descriptionProxy = "";
-        final List<String> metadata = sections.get("metadata");
-        if ((null != metadata) && !metadata.isEmpty()) {
-            for (final String s : metadata) {
-                final String[] kv = s.split("=");
-                if ("Image".equalsIgnoreCase(kv[0])) {
-                    filenameProxy = kv[1];
-                } else if ("set".equalsIgnoreCase(kv[0]) && (SetUtils.getSetByCode(kv[1].toUpperCase()) != null)) {
-                    setProxy = kv[1];
-                } else if ("Description".equalsIgnoreCase(kv[0])) {
-                    descriptionProxy = kv[1];
-                }
-            }
-        }
-        this.imageFilename = filenameProxy;
+
+        Map<String,String> kv = SectionUtil.parseKvPairs(sections.get("metadata"), "=");
+        
+        imageFilename = kv.get("Image");
+        description = kv.get("Description");
+        if( SetUtils.getSetByCode(kv.get("set").toUpperCase()) != null )
+        { setProxy = kv.get("set"); }
+
         this.set = setProxy;
         this.recommendedDeals = new SellRules(sections.get("shop"));
-        this.description = descriptionProxy;
+
     }
 
     /**

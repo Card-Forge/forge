@@ -86,6 +86,9 @@ public class SectionUtil {
      * @return the map
      */
     public static Map<String, String> parseKvPairs(final List<String> lines, String separator ) {
+        if ( null == lines )
+            return null;
+        
         final Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         for (final String dd : lines) {

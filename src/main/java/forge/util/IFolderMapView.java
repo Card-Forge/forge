@@ -12,17 +12,6 @@ public interface IFolderMapView<T extends IHasName> extends Iterable<T> {
 
     /**
      * <p>
-     * isUnique.
-     * </p>
-     * 
-     * @param deckName
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public abstract boolean isUnique(final String name);
-
-    /**
-     * <p>
      * getDeck.
      * </p>
      * 

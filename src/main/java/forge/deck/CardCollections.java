@@ -5,6 +5,7 @@ import java.io.File;
 import forge.deck.io.CubeSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckSetSerializer;
+import forge.deck.io.OldDeckParser;
 import forge.util.FolderMap;
 import forge.util.IFolderMap;
 

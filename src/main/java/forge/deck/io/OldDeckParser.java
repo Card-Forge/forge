@@ -1,4 +1,4 @@
-package forge.deck;
+package forge.deck.io;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -14,9 +14,9 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.PlayerType;
-import forge.deck.io.DeckFileHeader;
-import forge.deck.io.DeckSerializer;
-import forge.deck.io.DeckSetSerializer;
+import forge.deck.CustomLimited;
+import forge.deck.Deck;
+import forge.deck.DeckSet;
 import forge.util.FileUtil;
 import forge.util.IFolderMap;
 import forge.util.SectionUtil;

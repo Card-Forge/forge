@@ -61,6 +61,16 @@ public class FolderMap<T extends IHasName> extends FolderMapView<T> implements I
     public final void delete(final String deckName) {
         serializer.erase(this.getMap().remove(deckName));
     }
+
+
+
+    /* (non-Javadoc)
+     * @see forge.deck.IFolderMapView#isUnique(java.lang.String)
+     */
+    @Override
+    public final boolean isUnique(final String name) {
+        return !this.getMap().containsKey(name);
+    }
     
     
 
