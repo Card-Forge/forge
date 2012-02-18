@@ -153,16 +153,19 @@ public class ControlUtilities {
      */
     @SuppressWarnings("unchecked")
     public <T> void showDeckEditor(GameType gt0, T d0) {
-        
-        DeckEditorBase<?, T> editor = null;
-        if ( gt0 == GameType.Constructed)
-            editor = (DeckEditorBase<?, T>) new DeckEditorConstructed();
-        if ( gt0 == GameType.Draft)
-            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getDraft());
-        if ( gt0 == GameType.Sealed)
-            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getSealed());
 
-        
+        DeckEditorBase<?, T> editor = null;
+        if (gt0 == GameType.Constructed) {
+            editor = (DeckEditorBase<?, T>) new DeckEditorConstructed();
+        }
+        if (gt0 == GameType.Draft) {
+            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getDraft());
+        }
+        if (gt0 == GameType.Sealed) {
+            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getSealed());
+        }
+
+
         final Command exit = new Command() {
             private static final long serialVersionUID = -9133358399503226853L;
 

@@ -183,9 +183,9 @@ public class ControlDraft {
 
     /** Updates deck list in view. */
     public void updateHumanDecks() {
-        
+
         List<Deck> human = new ArrayList<Deck>();
-        for(DeckSet d : AllZone.getDecks().getDraft()) {
+        for (DeckSet d : AllZone.getDecks().getDraft()) {
             human.add(d.getHumanDeck());
         }
         view.getLstHumanDecks().setDecks(human);

@@ -174,21 +174,23 @@ public class ControlSealed {
                     + ">> does not equal any of the sealedTypes.");
         }
 
-        if (sd.getCardpool().isEmpty()) 
+        if (sd.getCardpool().isEmpty()) {
             return;
-            
+        }
+
         final String sDeckName = JOptionPane.showInputDialog(null,
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
                 ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
-                JOptionPane.QUESTION_MESSAGE);  
-        
-        if ( StringUtils.isBlank(sDeckName) )
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (StringUtils.isBlank(sDeckName)) {
             return;
-        
+        }
+
         // May check for name uniqueness here
 
         final ItemPool<CardPrinted> sDeck = sd.getCardpool();
-        
+
         Deck deck = new Deck(sDeckName);
         deck.getSideboard().addAll(sDeck);
 
@@ -200,11 +202,9 @@ public class ControlSealed {
         sealed.setHumanDeck(deck);
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         AllZone.getDecks().getSealed().add(sealed);
-        
 
         view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, sealed);
 
-        
     }
 
     /** @return {@link forge.Command} What to do when the deck editor exits. */
