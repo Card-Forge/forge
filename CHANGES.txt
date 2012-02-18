@@ -296,6 +296,28 @@ FControl refactored to reuse single instance of each UI state.
 - Commented out the part in drawBackgroundTexture that causes the background artifacts.
 - AI improvements of AF Play.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Converted Horde of Notions to script.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- Added the Grumpy 1 and the Snow White 1 decks to quest mode.
+- Cleanup.
+- Updated the Indiana Jones decks.
+- The AI will now trade creatures with Undying more willingly.
+- Update Maven plugins. Checkstyle
+- Remove accidentally added files
+- small fix for javadoc
+- Fixed difficulty of Aragorn 1.dck.
+- Updated Fat Albert 2 and 3 (all medium decks are now free of power).
+- Updated the Tarzan 1 deck (all easy decks are now free of original dual lands).
+- Added Nico's deck as Mortivore 3.
+- Removed DeckManager, refactored deck editors, unified deck serialization, new deck storage model (convertor included). limited cubes may be broken for now
+- DeckIOCore.java removed, moved non-game related classes to util
+- Added some text.
+- AF Play now works with modal spells and spells with timing restrictions (like "Cast CARDNAME only during combat.").
+- Fixed Gravestorm.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -436,6 +458,12 @@ Wake of Destruction
 Angel's Trumpet
 Memory Plunder
 Wrexial, the Risen Deep
+Galvanoth
+Toshiro Umezawa
+Sisters of Stone Death
+Jaddi Lifestrider
+Maelstrom Archangel
+Mindleech Mass
 
 
 end
