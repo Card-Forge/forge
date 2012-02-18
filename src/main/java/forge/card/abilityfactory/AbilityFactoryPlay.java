@@ -190,6 +190,7 @@ public final class AbilityFactoryPlay {
         } else {
             sb.append(" ");
         }
+        sb.append("Play ");
         ArrayList<Card> tgtCards;
 
         final Target tgt = sa.getTarget();
@@ -199,17 +200,19 @@ public final class AbilityFactoryPlay {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        sb.append("Cast ");
-        // TODO Someone fix this Description when Copying Charms
-        final Iterator<Card> it = tgtCards.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next());
-            if (it.hasNext()) {
-                sb.append(", ");
+        if (params.containsKey("Valid")) {
+            sb.append("cards");
+        } else {
+            final Iterator<Card> it = tgtCards.iterator();
+            while (it.hasNext()) {
+                sb.append(it.next());
+                if (it.hasNext()) {
+                    sb.append(", ");
+                }
             }
         }
         if (params.containsKey("WithoutManaCost")) {
-            sb.append(" without paying its mana cost");
+            sb.append(" without paying the mana cost");
         }
         sb.append(".");
 
@@ -339,7 +342,7 @@ public final class AbilityFactoryPlay {
                 zone = Zone.smartValueOf(params.get("ValidZone"));
             }
             tgtCards = AllZoneUtil.getCardsIn(zone);
-            tgtCards = tgtCards.getValidCards(params.get("Valid"), controller, source);
+            tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("Valid"), sa);
         } else if (params.containsKey("Defined")) {
             tgtCards = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
         } else if (tgt != null) {

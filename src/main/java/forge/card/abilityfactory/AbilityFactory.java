@@ -2445,6 +2445,22 @@ public class AbilityFactory {
 
             source = (Card) (o);
             type = type.replace("Triggered", "Card");
+        } else if (type.contains("Targeted")) {
+            source = null;
+            final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
+            if (parent != null) {
+                if (parent.getTarget() != null) {
+                    if (!parent.getTarget().getTargetCards().isEmpty()) {
+                        source = parent.getTarget().getTargetCards().get(0);
+                    } else if (!parent.getTarget().getTargetSAs().isEmpty()) {
+                        source = parent.getTarget().getTargetSAs().get(0).getSourceCard();
+                    }
+                }
+            }
+            if (source == null) {
+                return new CardList();
+            }
+            type = type.replace("Targeted", "Card");
         } else if (type.startsWith("Remembered")) {
             boolean hasRememberedCard = false;
             for (final Object o : source.getRemembered()) {
