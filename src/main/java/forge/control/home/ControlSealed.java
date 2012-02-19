@@ -204,7 +204,7 @@ public class ControlSealed {
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         AllZone.getDecks().getSealed().add(sealed);
 
-        view.getParentView().getUtilitiesControl().showDeckEditor(GameType.Sealed, sealed);
+        Singletons.getControl().getHomeControl().getControlUtilities().showDeckEditor(GameType.Sealed, sealed);
 
     }
 

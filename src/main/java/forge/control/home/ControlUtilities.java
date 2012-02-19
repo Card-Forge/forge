@@ -15,6 +15,7 @@ import forge.GuiDownloadPrices;
 import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
+import forge.Singletons;
 import forge.error.BugzReporter;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorBase;
@@ -171,8 +172,8 @@ public class ControlUtilities {
 
             @Override
             public void execute() {
-                view.getParentView().getConstructedControl().updateDeckLists();
-                //view.getParentView().getSealedController().updateDeckLists();
+                Singletons.getControl().getHomeControl().getControlConstructed().updateDeckLists();
+                //view.getParentView().getControlSealed().updateDeckLists();
             }
         };
 

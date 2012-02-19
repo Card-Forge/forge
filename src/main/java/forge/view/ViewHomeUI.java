@@ -31,10 +31,6 @@ import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.control.ControlHomeUI;
-import forge.control.home.ControlConstructed;
-import forge.control.home.ControlDraft;
-import forge.control.home.ControlSealed;
-import forge.control.home.ControlUtilities;
 import forge.game.GameType;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -138,7 +134,7 @@ public class ViewHomeUI extends FPanel {
         btnDeckEditor = new FButton();
         btnDeckEditor.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
-                ViewHomeUI.this.getUtilitiesControl().showDeckEditor(GameType.Constructed, null);
+                Singletons.getControl().getHomeControl().getControlUtilities().showDeckEditor(GameType.Constructed, null);
             }
         });
         btnDeckEditor.setText("Deck Editor");
@@ -201,7 +197,7 @@ public class ViewHomeUI extends FPanel {
         pnlContent.revalidate();
         pnlContent.repaint();
 
-        this.getConstructedControl().updateDeckSelectionCheckboxes();
+        Singletons.getControl().getHomeControl().getControlConstructed().updateDeckSelectionCheckboxes();
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.constructed.toString());
@@ -297,26 +293,6 @@ public class ViewHomeUI extends FPanel {
         Singletons.getModel().getPreferences().save();
     }
 
-    /** @return ControlConstructed */
-    public ControlConstructed getConstructedControl() {
-        return constructed.getControl();
-    }
-
-    /** @return ControlDraft */
-    public ControlDraft getDraftControl() {
-        return draft.getControl();
-    }
-
-    /** @return ControlSealed */
-    public ControlSealed getSealedControl() {
-        return sealed.getControl();
-    }
-
-    /** @return ControlUtilities */
-    public ControlUtilities getUtilitiesControl() {
-        return utilities.getControl();
-    }
-
     private void clearToggles() {
         btnConstructed.setToggled(false);
         btnSealed.setToggled(false);
@@ -325,6 +301,26 @@ public class ViewHomeUI extends FPanel {
         btnDeckEditor.setToggled(false);
         btnSettings.setToggled(false);
         btnUtilities.setToggled(false);
+    }
+
+    /** @return {@link forge.view.home.ViewConstructed} */
+    public ViewConstructed getViewConstructed() {
+        return constructed;
+    }
+
+    /** @return {@link forge.view.home.ViewDraft} */
+    public ViewDraft getViewDraft() {
+        return draft;
+    }
+
+    /** @return {@link forge.view.home.ViewSealed} */
+    public ViewSealed getViewSealed() {
+        return sealed;
+    }
+
+    /** @return {@link forge.view.home.ViewUtilities} */
+    public ViewUtilities getViewUtilities() {
+        return utilities;
     }
 
     /** */
