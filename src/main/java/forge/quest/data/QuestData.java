@@ -20,8 +20,6 @@ package forge.quest.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import net.slightlymagic.maxmtg.Predicate;
 import forge.SetUtils;
 import forge.Singletons;

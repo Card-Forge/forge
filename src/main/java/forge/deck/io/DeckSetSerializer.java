@@ -99,7 +99,7 @@ public class DeckSetSerializer extends DeckSerializerBase<DeckSet> {
             
             @Override
             public boolean accept(File dir, String name) {
-                return dir.isDirectory();
+                return dir.isDirectory() && !dir.isHidden();
             }
         };
     }

@@ -245,10 +245,9 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
     }
 
     public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map) {
+        if ( map == null ) { return null; }
         List<String> lines = map.get("metadata");
-        if (lines == null) {
-            return null;
-        }
+        if (lines == null) { return null; }
         DeckFileHeader d = new DeckFileHeader(SectionUtil.parseKvPairs(lines, "="));
 
 
