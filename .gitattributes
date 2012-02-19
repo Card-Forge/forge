@@ -6702,6 +6702,7 @@ res/cardsfolder/p/psychic_trance.txt -text svneol=unset#text/plain
 res/cardsfolder/p/psychic_transfer.txt -text
 res/cardsfolder/p/psychic_venom.txt svneol=native#text/plain
 res/cardsfolder/p/psychosis_crawler.txt svneol=native#text/plain
+res/cardsfolder/p/psychotic_episode.txt -text svneol=unset#text/plain
 res/cardsfolder/p/psychotic_fury.txt svneol=native#text/plain
 res/cardsfolder/p/psychotic_haze.txt svneol=native#text/plain
 res/cardsfolder/p/psychotrope_thallid.txt svneol=native#text/plain
