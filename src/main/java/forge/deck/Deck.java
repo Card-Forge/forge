@@ -148,7 +148,7 @@ public class Deck extends DeckBase implements Serializable, IHasName {
     }
 
     public static Deck fromSections(Map<String, List<String>> sections) {
-        if (sections.isEmpty()) {
+        if (sections == null || sections.isEmpty()) {
             return null;
         }
 

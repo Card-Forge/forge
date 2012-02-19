@@ -231,7 +231,7 @@ public class CustomLimited extends DeckBase {
      * TODO: Write javadoc for this method.
      * @return
      */
-    public Map<CardRarity, Integer> getNumRarity() {
+    public Map<CardRarity, Integer> getNumbersByRarity() {
         return numRarity;
     }
 

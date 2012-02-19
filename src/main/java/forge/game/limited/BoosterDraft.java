@@ -176,7 +176,7 @@ public final class BoosterDraft implements IBoosterDraft {
                         return pack.getSingletonBoosterPack(draft.getNumCards());
                     }
                 }
-                return pack.getBoosterPack(draft.getNumRarity(), 0, 0, 0);
+                return pack.getBoosterPack(draft.getNumbersByRarity(), 0, 0, 0);
             }
         };
 
