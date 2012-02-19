@@ -17,6 +17,7 @@
  */
 package forge.quest.data;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +29,15 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.item.PreconDeck;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
+import forge.util.FolderMapView;
 import forge.util.IFolderMap;
+import forge.util.IFolderMapView;
 import forge.util.MyRandom;
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
@@ -166,7 +170,7 @@ public final class QuestData {
     private transient QuestUtilCards myCards;
 
     // This is used by shop. Had no idea where else to place this
-    private static transient QuestPreconManager preconManager = new QuestPreconManager(ForgeProps.getFile(NewConstants.Quest.PRECONS));
+    private static transient IFolderMapView<PreconDeck> preconManager = new FolderMapView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -207,6 +211,8 @@ public final class QuestData {
         this.decks = new QuestDeckMap(myDecks);
         this.myCards = new QuestUtilCards(this);
 
+        
+        
         // to avoid NPE some pools will be created here if they are null
         if (null == this.getNewCardList()) {
             this.setNewCardList(new ItemPool<InventoryItem>(InventoryItem.class));
@@ -646,7 +652,7 @@ public final class QuestData {
 
 
     /** @return QuestPreconManager */
-    public static QuestPreconManager getPreconManager() {
+    public static IFolderMapView<PreconDeck> getPrecons() {
         return preconManager;
     }
 

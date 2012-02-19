@@ -23,12 +23,13 @@ import java.util.List;
 import forge.deck.Deck;
 import forge.deck.DeckSet;
 import forge.util.FileUtil;
+import forge.util.IItemSerializer;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public class DeckSetSerializer extends DeckSerializerBase<DeckSet> {
+public class DeckSetSerializer extends DeckReaderBase<DeckSet> implements IItemSerializer<DeckSet> {
     /**
      * TODO: Write javadoc for Constructor.
      * @param deckDir0

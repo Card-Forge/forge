@@ -32,13 +32,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.error.ErrorViewer;
 import forge.util.IHasName;
-import forge.util.IItemSerializer;
+import forge.util.IItemReader;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class DeckSerializerBase<T extends IHasName> implements IItemSerializer<T> {
+public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<T> {
 
     private final File directory;
     
@@ -47,7 +47,7 @@ public abstract class DeckSerializerBase<T extends IHasName> implements IItemSer
     }
 
 
-    public DeckSerializerBase(File deckDir0)
+    public DeckReaderBase(File deckDir0)
     {
         directory = deckDir0;
         

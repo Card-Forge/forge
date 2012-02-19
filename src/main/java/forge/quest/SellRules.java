@@ -20,6 +20,7 @@ package forge.quest;
 import java.util.List;
 
 import forge.quest.data.QuestData;
+import forge.util.FileSection;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -41,22 +42,12 @@ public class SellRules {
         if (null == questShop || questShop.isEmpty()) {
             return;
         }
-
-        for (String s : questShop) {
-            String[] kv = s.split("=");
-            if ("WinsToUnlock".equalsIgnoreCase(kv[0])) {
-                minWins = Integer.parseInt(kv[1]);
-            }
-            else if ("Credits".equalsIgnoreCase(kv[0])) {
-                cost = Integer.parseInt(kv[1]);
-            }
-            else if ("MaxDifficulty".equalsIgnoreCase(kv[0])) {
-                maxDifficulty = Integer.parseInt(kv[1]);
-            }
-            else if ("MinDifficulty".equalsIgnoreCase(kv[0])) {
-                minDifficulty = Integer.parseInt(kv[1]);
-            }
-        }
+        
+        FileSection section = FileSection.parse(questShop, "=");
+        minWins = section.getInt("WinsToUnlock");
+        cost = section.getInt("Credits", 250);
+        maxDifficulty = section.getInt("MaxDifficulty", 5);
+        minDifficulty = section.getInt("MinDifficulty", 0);
     }
 
     /**

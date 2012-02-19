@@ -11229,8 +11229,8 @@ src/main/java/forge/deck/generate/GenerateDeckUtil.java -text
 src/main/java/forge/deck/generate/GenerateThemeDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/package-info.java svneol=native#text/plain
 src/main/java/forge/deck/io/DeckFileHeader.java -text
+src/main/java/forge/deck/io/DeckReaderBase.java -text
 src/main/java/forge/deck/io/DeckSerializer.java -text
-src/main/java/forge/deck/io/DeckSerializerBase.java -text
 src/main/java/forge/deck/io/DeckSetSerializer.java -text
 src/main/java/forge/deck/io/OldDeckParser.java -text
 src/main/java/forge/deck/package-info.java svneol=native#text/plain
@@ -11321,6 +11321,7 @@ src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/p
 src/main/java/forge/properties/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/SellRules.java -text
+src/main/java/forge/quest/data/PreconReader.java -text
 src/main/java/forge/quest/data/QuestChallenge.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestDataIO.java svneol=native#text/plain
@@ -11328,7 +11329,6 @@ src/main/java/forge/quest/data/QuestDeckMap.java -text
 src/main/java/forge/quest/data/QuestDuel.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestEvent.java -text
 src/main/java/forge/quest/data/QuestEventManager.java svneol=native#text/plain
-src/main/java/forge/quest/data/QuestPreconManager.java -text
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtilCards.java -text

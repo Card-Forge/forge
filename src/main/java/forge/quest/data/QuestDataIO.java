@@ -345,12 +345,7 @@ public class QuestDataIO {
         protected PreconDeck readPreconDeck(final HierarchicalStreamReader reader) {
             String name = reader.getAttribute("name");
             if (name == null) { name = reader.getAttribute("s"); }
-            for (PreconDeck d : QuestData.getPreconManager().getDecks()) {
-                if (name.equalsIgnoreCase(d.getName())) {
-                    return d;
-                }
-            }
-            return null;
+            return QuestData.getPrecons().get(name);
         }
 
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {

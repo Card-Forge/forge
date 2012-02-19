@@ -353,8 +353,13 @@ public final class QuestUtilCards {
      *            the count
      */
     public void generatePreconsInShop(final int count) {
-        final List<PreconDeck> validDecks = QuestData.getPreconManager().getDecksForCurrent(this.q);
-        this.q.getShopList().addAllFlat(Predicate.getTrue(PreconDeck.class).random(validDecks, count));
+        final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
+        for (final PreconDeck deck : QuestData.getPrecons()) {
+            if (deck.getRecommendedDeals().meetsRequiremnts(q)) {
+                meetRequirements.add(deck);
+            }
+        }
+        this.q.getShopList().addAllFlat(Predicate.getTrue(PreconDeck.class).random(meetRequirements, count));
     }
 
     /**
