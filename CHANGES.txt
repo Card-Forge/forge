@@ -318,6 +318,37 @@ FControl refactored to reuse single instance of each UI state.
 - AF Play now works with modal spells and spells with timing restrictions (like "Cast CARDNAME only during combat.").
 - Fixed Gravestorm.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Made the Boromir decks more green centric to better support Dramatic Entrance and Lure of Prey.
+- CheckStyle.
+- Updated SVars and ran scripts.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- smallest refactoring - move classes to siutable folders
+- Fixing Expendable Troops activation cost
+- Enforced singleton pattern in FControl.
+- Aesthetic upgrade to Quest card viewer in win/lose.
+- Quest submenu: users w/o new quest data are now shown new quest tab directly, cannot access duels or challenge tabs.
+- Added "overlay" swatch to palettes in skin sprites.
+- Avatar icons now update in the player field without restarting Forge.
+- Aesthetic upgrade: Constructed submenu. Also made deck generation options available, and added quest event decks available to play.
+Note: waiting deck restructure work to complete for testing decklist double-click.
+Note: waiting pre-game management debugging for quest event deck availability.
+- getFooController() methods changed to getFooControl() for consistency.
+- Moved control accessors from ViewHome to ControlHome, added view accessors to ViewHome.
+- NPE adjustment.
+- Renamed "getFooControl()" to "getControlFoo()" for consistency.
+- Renamed "getFooView()" to "getViewFoo()" for consistency.
+- Removed parent view accessors in home UI in favor of singleton access.
+- Converted Metalworker to script.
+- Removed some extra spaces.
+- Fixed the AI not using ETB counters.
+- Added NeedsToPlayVar SVars to some cards.
+- Fixed a bug in AF Pump.
+- Added the four new folders to the decks folder.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -464,6 +495,19 @@ Sisters of Stone Death
 Jaddi Lifestrider
 Maelstrom Archangel
 Mindleech Mass
+Counterlash
+Stomping Slabs
+Scrying Glass
+Opal Avenger
+Private Research
+Lurking Jackals
+Private Research
+Lurking Jackals
+Impatience
+Scent of Nightshade
+Body Snatcher
+Jokulmorder
+Tornado Elemental
 
 
 end
