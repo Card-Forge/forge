@@ -13,5 +13,3 @@ SVar:DBBodySnatcherReturnCreature:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl |
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_snatcher.jpg
 End
-
-
