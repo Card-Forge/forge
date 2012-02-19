@@ -87,7 +87,6 @@ public class OldDeckParser {
             final DeckGroup d = new DeckGroup(human.getName());
             d.setHumanDeck(human);
 
-
             for (int i = 1; i < DeckGroupSerializer.MAX_DRAFT_PLAYERS; i++) {
                 Deck nextAi = Deck.fromFile(new File(f, i + ".dck"));
                 if (nextAi == null) {

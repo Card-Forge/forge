@@ -104,6 +104,11 @@ public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<
         for (final File file : files) {
             try {
                 final T newDeck = read(file);
+                if ( null == newDeck )
+                {
+                    String msg =  "A deck or similiar object at " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
+                    JOptionPane.showMessageDialog(null, msg);
+                }
                 result.put(newDeck.getName(), newDeck);
             } catch (final NoSuchElementException ex) {
                 final String message = String.format("%s failed to load because ---- %s", file.getName(),

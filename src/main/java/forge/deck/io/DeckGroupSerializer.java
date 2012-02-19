@@ -61,6 +61,8 @@ public class DeckGroupSerializer extends DeckReaderBase<DeckGroup> implements II
     protected final DeckGroup read(File file)
     {
         Deck human = Deck.fromFile(new File(file, "human.dck"));
+        if ( null == human ) return null;
+        
         final DeckGroup d = new DeckGroup(human.getName());
         d.setHumanDeck(human);
         for (int i = 1; i < MAX_DRAFT_PLAYERS; i++) {
