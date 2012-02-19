@@ -27,6 +27,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
+import forge.card.trigger.Trigger;
 
 /**
  * <p>
@@ -110,7 +111,7 @@ public class ComputerAIGeneral implements Computer {
 
         final boolean hasACardGivingHaste = this.hasACardGivingHaste();
 
-        // Why is the computer checking if their mana pool is empty?
+        // If mana pool is not empty try to play anything
         if (AllZone.getComputerPlayer().getManaPool().isEmpty()) {
             hand = hand.filter(new CardListFilter() {
                 @Override
@@ -299,6 +300,7 @@ public class ComputerAIGeneral implements Computer {
             public boolean addCard(final Card c) {
                 if (c.isPermanent()
                         && c.hasKeyword("Flash")
+                        && !hasETBTrigger(c)
                         && (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler()
                                 .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
                     return false;
@@ -318,6 +320,35 @@ public class ComputerAIGeneral implements Computer {
         });
         all.addAll(humanPlayable);
         return all;
+    }
+
+    /**
+     * <p>
+     * hasETBTrigger.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public boolean hasETBTrigger(final Card card) {
+        final ArrayList<Trigger> triggers = card.getTriggers();
+        for (final Trigger tr : triggers) {
+            final HashMap<String, String> params = tr.getMapParams();
+            if (!params.get("Mode").equals("ChangesZone")) {
+                continue;
+            }
+
+            if (!params.get("Destination").equals("Battlefield")) {
+                continue;
+            }
+
+            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
+                continue;
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
