@@ -11,4 +11,7 @@ SVar:OppCast:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impatience.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/88.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/197.jpg
+Oracle:At the beginning of each player's end step, if that player didn't cast a spell this turn, Impatience deals 2 damage to him or her.
 End

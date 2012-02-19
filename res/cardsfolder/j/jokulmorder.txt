@@ -1,0 +1,22 @@
+Name:Jokulmorder
+ManaCost:4 U U U
+Types:Creature Leviathan
+Text:no text
+PT:12/12
+K:Trample
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice five lands.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 5 | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSacSelf
+SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT5
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ LandPlayed | ValidCard$ Island.YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you play an Island, you may untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+SVar:X:Remembered$Amount
+SVar:NeedsToPlayVar:Y GE5
+SVar:Y:Count$Valid Land.YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jokulmorder.jpg
+SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/37.jpg
+Oracle:Trample\nJokulmorder enters the battlefield tapped.\nWhen Jokulmorder enters the battlefield, sacrifice it unless you sacrifice five lands.\nJokulmorder doesn't untap during your untap step.\nWhenever you play an Island, you may untap Jokulmorder.
+End
