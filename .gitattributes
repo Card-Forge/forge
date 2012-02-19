@@ -11263,15 +11263,14 @@ src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/DeckController.java -text
 src/main/java/forge/gui/deckeditor/DeckEditorBase.java -text
 src/main/java/forge/gui/deckeditor/DeckEditorConstructed.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckEditorLimited.java -text
 src/main/java/forge/gui/deckeditor/DeckEditorQuest.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
-src/main/java/forge/gui/deckeditor/DeckManagerOnDisk.java -text
-src/main/java/forge/gui/deckeditor/DeckManagerQuest.java -text
 src/main/java/forge/gui/deckeditor/DraftingProcess.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/IDeckManager.java -text
+src/main/java/forge/gui/deckeditor/IDeckController.java -text
 src/main/java/forge/gui/deckeditor/MenuBase.java -text
 src/main/java/forge/gui/deckeditor/MenuCommon.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/MenuLimited.java -text
@@ -11326,6 +11325,7 @@ src/main/java/forge/quest/SellRules.java -text
 src/main/java/forge/quest/data/QuestChallenge.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestDataIO.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestDeckMap.java -text
 src/main/java/forge/quest/data/QuestDuel.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestEvent.java -text
 src/main/java/forge/quest/data/QuestEventManager.java svneol=native#text/plain

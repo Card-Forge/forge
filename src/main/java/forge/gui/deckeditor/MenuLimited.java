@@ -44,7 +44,7 @@ public final class MenuLimited extends MenuBase<DeckSet> {
      * @param exit
      *            a Command
      */
-    public MenuLimited(final IDeckManager<DeckSet> ctrl, final Command exit) {
+    public MenuLimited(final IDeckController<DeckSet> ctrl, final Command exit) {
         super( ctrl, exit );
     }
 

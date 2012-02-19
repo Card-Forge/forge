@@ -72,7 +72,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
     private final JLabel jLabelAnalysisGap = new JLabel("");
     private FilterNameTypeSetPanel filterNameTypeSet;
 
-    private final DeckManagerOnDisk<DeckSet> controller;
+    private final DeckController<DeckSet> controller;
 
     /**
      * Show.
@@ -153,7 +153,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
         }
         
         Lambda0<DeckSet> newCreator = new Lambda0<DeckSet>(){ @Override public DeckSet apply() { return new DeckSet(""); } };
-        controller = new DeckManagerOnDisk<DeckSet>(deckMap, this, newCreator);        
+        controller = new DeckController<DeckSet>(deckMap, this, newCreator);        
     }
 
     private void jbInit() {
@@ -379,7 +379,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckManager<DeckSet> getController() {
+    public IDeckController<DeckSet> getController() {
         return controller;
     }
 

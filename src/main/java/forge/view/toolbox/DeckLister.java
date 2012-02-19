@@ -399,7 +399,7 @@ public class DeckLister extends JPanel {
             AllZone.getDecks().getSealed().delete(d0.getName());
         }
         else if (gametype.equals(GameType.Quest)) {
-            AllZone.getQuestData().removeDeck(d0.getName());
+            AllZone.getQuestData().getMyDecks().delete(d0.getName());
             AllZone.getQuestData().saveData();
             Singletons.getView().getViewHome().getBtnQuest().grabFocus();
         }

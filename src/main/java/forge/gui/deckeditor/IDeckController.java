@@ -7,7 +7,7 @@ import java.util.List;
  * TODO: Write javadoc for this type.
  *
  */
-public interface IDeckManager<T> {
+public interface IDeckController<T> {
 
     void newModel();
     void setModel(T model);

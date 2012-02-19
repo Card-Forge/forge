@@ -223,7 +223,7 @@ public final class QuestUtilCards {
         if (this.q.getCredits() >= value) {
             this.q.setCredits(this.q.getCredits() - value);
             this.q.getShopList().remove(precon);
-            this.q.getMyDecks().put(precon.getDeck().getName(), precon.getDeck());
+            this.q.getMyDecks().add(precon.getDeck());
             this.addAllCards(precon.getDeck().getMain().toFlatList());
         }
     }
@@ -262,7 +262,7 @@ public final class QuestUtilCards {
         // remove card being sold from all decks
         final int leftInPool = this.q.getCardPool().count(card);
         // remove sold cards from all decks:
-        for (final Deck deck : this.q.getMyDecks().values()) {
+        for (final Deck deck : this.q.getMyDecks()) {
             deck.getMain().remove(card, deck.getMain().count(card) - leftInPool);
         }
     }

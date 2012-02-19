@@ -26,7 +26,6 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.SetUtils;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.error.ErrorViewer;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -36,6 +35,7 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
+import forge.util.IFolderMap;
 import forge.util.MyRandom;
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
@@ -115,7 +115,9 @@ public final class QuestData {
 
     // Decks collected by player
     /** The my decks. */
-    private final Map<String, Deck> myDecks = new HashMap<String, Deck>();
+    private final HashMap<String, Deck> myDecks = new HashMap<String, Deck>();
+    
+    private transient IFolderMap<Deck> decks;
 
     // Cards associated with quest
     /** The card pool. */
@@ -204,6 +206,7 @@ public final class QuestData {
 
     private void initTransients() {
         // These are helper classes that hold no data.
+        this.decks = new QuestDeckMap(myDecks);
         this.myCards = new QuestUtilCards(this);
 
         // to avoid NPE some pools will be created here if they are null
@@ -549,41 +552,6 @@ public final class QuestData {
     // decks management
 
 
-    /** @return List<Deck> */
-    public List<Deck> getDecks() {
-        return new ArrayList<Deck>(this.getMyDecks().values());
-    }
-
-    /**
-     * Removes the deck.
-     * 
-     * @param deckName
-     *            the deck name
-     */
-    public void removeDeck(final String deckName) {
-        this.getMyDecks().remove(deckName);
-    }
-
-    /**
-     * <p>
-     * getDeck.
-     * </p>
-     * 
-     * @param deckName
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.deck.Deck} object.
-     */
-    public Deck getDeck(final String deckName) {
-        if (!this.getMyDecks().containsKey(deckName)) {
-            ErrorViewer.showError(new Exception(),
-                    "QuestData : getDeckFromMap(String deckName) error, deck name not found - %s", deckName);
-            return null;
-        }
-        final Deck d = this.getMyDecks().get(deckName);
-        d.getSideboard().clear();
-        return d;
-    }
-
     // randomizer - related
     /**
      * Gets the random seed.
@@ -674,8 +642,8 @@ public final class QuestData {
      * 
      * @return the myDecks
      */
-    public Map<String, Deck> getMyDecks() {
-        return this.myDecks;
+    public IFolderMap<Deck> getMyDecks() {
+        return this.decks;
     }
 
 

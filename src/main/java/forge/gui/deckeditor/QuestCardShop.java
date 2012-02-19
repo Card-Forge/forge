@@ -144,7 +144,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
     // fills number of decks using each card
     private Map<CardPrinted, Integer> countDecksForEachCard() {
         final Map<CardPrinted, Integer> result = new HashMap<CardPrinted, Integer>();
-        for (final Deck deck : this.questData.getMyDecks().values()) {
+        for (final Deck deck : this.questData.getMyDecks()) {
             for (final Entry<CardPrinted, Integer> e : deck.getMain()) {
                 final CardPrinted card = e.getKey();
                 final Integer amount = result.get(card);
@@ -420,7 +420,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckManager<Object> getController() {
+    public IDeckController<Object> getController() {
         return null;
     }
 

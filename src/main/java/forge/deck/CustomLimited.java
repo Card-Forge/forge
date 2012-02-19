@@ -109,21 +109,16 @@ public class CustomLimited extends DeckBase {
         Map<String, String> data = SectionUtil.parseKvPairs(dfData, ":");
 
         final CustomLimited cd = new CustomLimited(data.get("Name"));
+        cd.setIgnoreRarity("True".equalsIgnoreCase(data.get("IgnoreRarity")));
+        cd.setSingleton("True".equalsIgnoreCase(data.get("Singleton")));
+        
 
         for (final String dd : dfData) {
             final String[] v = dd.split(":", 2);
             final String key = v[0];
             final String value = v.length > 1 ? v[1].trim() : "";
 
-            if (key.equalsIgnoreCase("DeckFile")) {
-                cd.setDeckFile(value);
-            }
-            if (key.equalsIgnoreCase("IgnoreRarity")) {
-                cd.setIgnoreRarity(value.equals("True"));
-            }
-            if (key.equalsIgnoreCase("Singleton")) {
-                cd.setSingleton(value.equals("True"));
-            }
+
             if (key.equalsIgnoreCase("LandSetCode")) {
                 cd.setLandSetCode(value);
             }

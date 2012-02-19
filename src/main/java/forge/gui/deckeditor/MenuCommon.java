@@ -59,7 +59,7 @@ public final class MenuCommon extends MenuBase<Deck> {
      * @param exit
      *            a Command
      */
-    public MenuCommon(final IDeckManager<Deck> ctrl, final Command exit) {
+    public MenuCommon(final IDeckController<Deck> ctrl, final Command exit) {
         super(ctrl, exit);
 
         // this is added just to make save() and saveAs() work ok

@@ -66,7 +66,7 @@ public class MenuQuest extends MenuBase<Deck> {
      * @param exit
      *            a {@link forge.Command} object.
      */
-    public MenuQuest(final IDeckManager<Deck> d, final Command exit) {
+    public MenuQuest(final IDeckController<Deck> d, final Command exit) {
 
         super(d, exit);
 

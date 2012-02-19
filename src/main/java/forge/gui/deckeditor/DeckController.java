@@ -13,7 +13,7 @@ import forge.util.IFolderMap;
  * TODO: Write javadoc for this type.
  *
  */
-public class DeckManagerOnDisk<T extends DeckBase> implements IDeckManager<T> {
+public class DeckController<T extends DeckBase> implements IDeckController<T> {
     
     private T model;
     private boolean saved;
@@ -22,7 +22,7 @@ public class DeckManagerOnDisk<T extends DeckBase> implements IDeckManager<T> {
     private final DeckEditorBase<?, T> view;
     private final Lambda0<T> newModelCreator;
     
-    public DeckManagerOnDisk(IFolderMap<T> folder0, DeckEditorBase<?, T> view0, Lambda0<T> newModelCreator0)
+    public DeckController(IFolderMap<T> folder0, DeckEditorBase<?, T> view0, Lambda0<T> newModelCreator0)
     {
         folder = folder0;
         view = view0;

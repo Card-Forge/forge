@@ -93,7 +93,7 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
     }
 
     
-    public abstract IDeckManager<TModel> getController();
+    public abstract IDeckController<TModel> getController();
     
     // THIS IS HERE FOR OVERLOADING!!!1
     // or may be return abstract getFilter from derived class + this filter ...

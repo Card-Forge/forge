@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -399,21 +398,20 @@ public class ControlQuest {
     /** Resets decks, then retrieves and sets current deck. */
     public void refreshDecks() {
         // Retrieve and set all decks
-
-        List<Deck> temp = new ArrayList<Deck>();
-        if (qData != null) {
-            temp.addAll(qData.getMyDecks().values());
-        }
-        view.getLstDecks().setDecks(temp);
+        view.getLstDecks().setDecks(qData != null ? qData.getMyDecks() : new ArrayList<Deck>() );
 
         // Look through list for preferred deck from prefs
         currentDeck = null;
-        final String cd = qPrefs.getPreference(QPref.CURRENT_DECK);
-        for (Deck d : temp) {
-            if (d.getName().equals(cd)) {
-                currentDeck = d;
-                view.getLstDecks().setSelectedDeck(d);
-                break;
+        
+        if( qData != null) 
+        {
+            final String cd = qPrefs.getPreference(QPref.CURRENT_DECK);
+            for (Deck d : qData.getMyDecks()) {
+                if (d.getName().equals(cd)) {
+                    currentDeck = d;
+                    view.getLstDecks().setSelectedDeck(d);
+                    break;
+                }
             }
         }
 

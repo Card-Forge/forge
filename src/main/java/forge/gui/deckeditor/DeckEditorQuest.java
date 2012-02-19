@@ -30,6 +30,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 
+import net.slightlymagic.braids.util.lambda.Lambda0;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.Constant;
@@ -73,7 +74,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
     private FilterNameTypeSetPanel filterNameTypeSet;
 
     private final QuestData questData;
-    private final DeckManagerQuest controller;
+    private final DeckController<Deck> controller ;
     
     /**
      * Show.
@@ -185,7 +186,8 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
             ErrorViewer.showError(ex);
         }
         
-        controller = new DeckManagerQuest(questData2, this);
+        Lambda0<Deck> newCreator = new Lambda0<Deck>(){ @Override public Deck apply() { return new Deck(); } };
+        controller = new DeckController<Deck>(questData2.getMyDecks(), this, newCreator);
     }
 
     private void jbInit() throws Exception {
@@ -350,7 +352,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckManager<Deck> getController() {
+    public IDeckController<Deck> getController() {
         return controller;
     }
 
