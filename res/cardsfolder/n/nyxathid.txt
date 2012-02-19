@@ -5,6 +5,8 @@ Text:As CARDNAME enters the battlefield, choose an opponent.
 PT:7/7
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets -1/-1 for each card in the chosen player's hand.
 SVar:X:Count$InOppHand/Negative
+SVar:NeedsToPlayVar:Y LE5
+SVar:Y:Count$CardsInOppHand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/49.jpg

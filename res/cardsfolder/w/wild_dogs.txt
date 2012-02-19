@@ -8,6 +8,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | Tr
 SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY | NewController$ Opponent
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$OppLifeTotal
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_dogs.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/284.jpg

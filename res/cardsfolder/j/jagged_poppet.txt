@@ -8,6 +8,8 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Hellbent$ 
 SVar:TrigYouDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ X | Mode$ TgtChoose
 SVar:TrigOppDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ X | Mode$ TgtChoose
 SVar:X:TriggerCount$DamageAmount
+SVar:NeedsToPlayVar:Y LE2
+SVar:Y:Count$CardsInYourHand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jagged_poppet.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/115.jpg
