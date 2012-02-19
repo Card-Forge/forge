@@ -2221,6 +2221,7 @@ public final class AbilityFactoryReveal {
                             valid = valid.getValidCards(params.get("RevealValid"), p, host);
                         }
                         revealed.addAll(AbilityFactoryReveal.getRevealedList(host, sa, valid));
+                        GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
                     }
 
                     if (params.containsKey("RememberRevealed")) {
@@ -2235,16 +2236,25 @@ public final class AbilityFactoryReveal {
     }
 
     private static CardList getRevealedList(final Card card, final SpellAbility sa, final CardList valid) {
-        final CardList revealed = new CardList();
+        final CardList chosen = new CardList();
+        final int validamount = valid.size();
+
+        for (int i = 0; i < validamount; i++) {
+            final Object o = GuiUtils.getChoiceOptional("Choose card(s) to reveal", valid.toArray());
+                if (o != null) {
+                    chosen.add((Card) o);
+                    valid.remove((Card) o);
+                } else {
+                    break;
+                }
+        }
         if (sa.getActivatingPlayer().isComputer()) {
             // not really implemented for computer
             // would need GuiUtils.getChoice("Revealed card(s)",
             // revealed.toArray());
         } else {
-
         }
-
-        return revealed;
+        return chosen;
     }
 
     /*

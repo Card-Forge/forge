@@ -7499,6 +7499,7 @@ res/cardsfolder/s/scavenger_folk.txt svneol=native#text/plain
 res/cardsfolder/s/scavenging_ghoul.txt svneol=native#text/plain
 res/cardsfolder/s/scavenging_ooze.txt -text
 res/cardsfolder/s/scavenging_scarab.txt svneol=native#text/plain
+res/cardsfolder/s/scent_of_nightshade.txt -text svneol=unset#text/plain
 res/cardsfolder/s/scepter_of_dominance.txt svneol=native#text/plain
 res/cardsfolder/s/scepter_of_empires.txt -text
 res/cardsfolder/s/scepter_of_fugue.txt svneol=native#text/plain
