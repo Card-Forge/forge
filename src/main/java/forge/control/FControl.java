@@ -82,7 +82,7 @@ public enum FControl {
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 changeState(0);
-                Singletons.getView().getHomeView().showQuestMenu();
+                Singletons.getView().getViewHome().showQuestMenu();
             }
         };
 
@@ -129,22 +129,22 @@ public enum FControl {
         // Fire up new state
         switch (i0) {
             case HOME_SCREEN:
-                display.add(Singletons.getView().getHomeView(), JLayeredPane.DEFAULT_LAYER);
+                display.add(Singletons.getView().getViewHome(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
                 break;
 
             case MATCH_SCREEN:
-                display.add(Singletons.getView().getMatchView(), JLayeredPane.DEFAULT_LAYER);
+                display.add(Singletons.getView().getViewMatch(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
                 Singletons.getView().addWindowListener(waConcede);
                 break;
 
             case DEFAULT_EDITOR:
-                display.add(Singletons.getView().getEditorView(), JLayeredPane.DEFAULT_LAYER);
+                display.add(Singletons.getView().getViewEditor(), JLayeredPane.DEFAULT_LAYER);
                 break;
 
             case QUEST_BAZAAR:
-                display.add(Singletons.getView().getBazaarView(), JLayeredPane.DEFAULT_LAYER);
+                display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
                 Singletons.getView().addWindowListener(waLeaveBazaar);
                 break;
@@ -161,7 +161,7 @@ public enum FControl {
             throw new IllegalArgumentException("FControl$getMatchControl\n"
                     + "may only be called while the match UI is showing.");
         }
-        return Singletons.getView().getMatchView().getControl();
+        return Singletons.getView().getViewMatch().getControl();
     }
 
     /** Gets the home controller.
@@ -172,7 +172,7 @@ public enum FControl {
                     + "may only be called while the home UI is showing.");
         }
 
-        return Singletons.getView().getHomeView().getControl();
+        return Singletons.getView().getViewHome().getControl();
     }
 
     /** 

@@ -49,7 +49,7 @@ public class ViewItem extends FPanel {
                 AllZone.getQuestData().addCredits(getItem().getSellingPrice());
                 getItem().onPurchase();
                 AllZone.getQuestData().saveData();
-                Singletons.getView().getBazaarView().refreshLastInstance();
+                Singletons.getView().getViewBazaar().refreshLastInstance();
             }
         });
     }

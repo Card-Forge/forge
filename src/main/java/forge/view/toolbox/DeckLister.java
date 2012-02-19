@@ -401,7 +401,7 @@ public class DeckLister extends JPanel {
         else if (gametype.equals(GameType.Quest)) {
             AllZone.getQuestData().removeDeck(d0.getName());
             AllZone.getQuestData().saveData();
-            Singletons.getView().getHomeView().getBtnQuest().grabFocus();
+            Singletons.getView().getViewHome().getBtnQuest().grabFocus();
         }
         else {
             AllZone.getDecks().getConstructed().delete(d0.getName());

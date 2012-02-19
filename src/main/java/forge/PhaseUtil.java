@@ -419,7 +419,7 @@ public class PhaseUtil {
         }
 
         t.resetAllPhaseButtons();
-        Singletons.getView().getMatchView().repaint();
+        Singletons.getView().getViewMatch().repaint();
         lbl.setActive(true);
     }
 }

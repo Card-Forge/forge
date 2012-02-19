@@ -124,36 +124,36 @@ public final class FView extends JFrame {
     }
 
     /** @return {@link forge.view.ViewHomeUI} */
-    public ViewHomeUI getHomeView() {
+    public ViewHomeUI getViewHome() {
         if (Singletons.getControl().getState() != FControl.HOME_SCREEN) {
-            throw new IllegalArgumentException("FView$getHomeView\n"
+            throw new IllegalArgumentException("FView$getViewHome\n"
                     + "may only be called while the home UI is showing.");
         }
         return FView.this.home;
     }
 
     /** @return {@link forge.view.ViewMatchUI} */
-    public ViewMatchUI getMatchView() {
+    public ViewMatchUI getViewMatch() {
         if (Singletons.getControl().getState() != FControl.MATCH_SCREEN) {
-            throw new IllegalArgumentException("FView$getMatchView\n"
+            throw new IllegalArgumentException("FView$getVIewMatch\n"
                     + "may only be called while the match UI is showing.");
         }
         return FView.this.match;
     }
 
     /** @return {@link forge.view.ViewEditorUI} */
-    public ViewEditorUI getEditorView() {
+    public ViewEditorUI getViewEditor() {
         if (Singletons.getControl().getState() != FControl.DEFAULT_EDITOR) {
-            throw new IllegalArgumentException("FView$getEditorView\n"
+            throw new IllegalArgumentException("FView$getViewEditor\n"
                     + "may only be called while the editor UI is showing.");
         }
         return FView.this.editor;
     }
 
     /** @return {@link forge.view.ViewBazaarUI} */
-    public ViewBazaarUI getBazaarView() {
+    public ViewBazaarUI getViewBazaar() {
         if (Singletons.getControl().getState() != FControl.QUEST_BAZAAR) {
-            throw new IllegalArgumentException("FView$getBazaarView\n"
+            throw new IllegalArgumentException("FView$getViewBazaar\n"
                     + "may only be called while the bazaar UI is showing.");
         }
         return FView.this.bazaar;

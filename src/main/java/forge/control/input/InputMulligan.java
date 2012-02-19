@@ -56,8 +56,8 @@ public class InputMulligan extends Input {
     @Override
     public final void showMessage() {
         ButtonUtil.enableAll();
-        Singletons.getView().getMatchView().getBtnOK().setText("No");
-        Singletons.getView().getMatchView().getBtnCancel().setText("Yes");
+        Singletons.getView().getViewMatch().getBtnOK().setText("No");
+        Singletons.getView().getViewMatch().getBtnCancel().setText("Yes");
         Singletons.getControl().getControlMatch().showMessage("Do you want to Mulligan?");
     }
 

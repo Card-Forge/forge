@@ -222,7 +222,7 @@ public class ControlSettings {
             protected void done() {
                 Singletons.getView().instantiateCachedUIStates();
                 Singletons.getControl().changeState(FControl.HOME_SCREEN);
-                Singletons.getView().getHomeView().showSettingsMenu();
+                Singletons.getView().getViewHome().showSettingsMenu();
             }
         };
         w.execute();

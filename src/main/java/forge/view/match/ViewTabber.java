@@ -307,7 +307,7 @@ public class ViewTabber extends JPanel {
             }
         }
 
-        Singletons.getView().getMatchView().getBtnOK().requestFocusInWindow();
+        Singletons.getView().getViewMatch().getBtnOK().requestFocusInWindow();
     }
 
     /** Returns array with [background, foreground] colors. */

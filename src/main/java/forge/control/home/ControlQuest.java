@@ -164,7 +164,7 @@ public class ControlQuest {
             public void execute() {
                 AllZone.getQuestData().saveData();
                 refreshDecks();
-                Singletons.getView().getHomeView().getBtnQuest().grabFocus();
+                Singletons.getView().getViewHome().getBtnQuest().grabFocus();
             }
         };
 

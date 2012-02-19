@@ -79,7 +79,7 @@ public class ControlHand {
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
                     Singletons.getControl().getControlMatch().getMessageControl().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
-                    Singletons.getView().getMatchView().getBtnOK().requestFocusInWindow();
+                    Singletons.getView().getViewMatch().getBtnOK().requestFocusInWindow();
                 }
             }
         };

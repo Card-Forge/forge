@@ -76,28 +76,28 @@ public final class Main {
 
                     switch(lastMenu) {
                         case draft:
-                            Singletons.getView().getHomeView().getBtnDraft().grabFocus();
-                            Singletons.getView().getHomeView().showDraftMenu();
+                            Singletons.getView().getViewHome().getBtnDraft().grabFocus();
+                            Singletons.getView().getViewHome().showDraftMenu();
                             break;
                         case sealed:
-                            Singletons.getView().getHomeView().getBtnSealed().grabFocus();
-                            Singletons.getView().getHomeView().showSealedMenu();
+                            Singletons.getView().getViewHome().getBtnSealed().grabFocus();
+                            Singletons.getView().getViewHome().showSealedMenu();
                             break;
                         case quest:
-                            Singletons.getView().getHomeView().getBtnQuest().grabFocus();
-                            Singletons.getView().getHomeView().showQuestMenu();
+                            Singletons.getView().getViewHome().getBtnQuest().grabFocus();
+                            Singletons.getView().getViewHome().showQuestMenu();
                             break;
                         case settings:
-                            Singletons.getView().getHomeView().getBtnSettings().grabFocus();
-                            Singletons.getView().getHomeView().showSettingsMenu();
+                            Singletons.getView().getViewHome().getBtnSettings().grabFocus();
+                            Singletons.getView().getViewHome().showSettingsMenu();
                             break;
                         case utilities:
-                            Singletons.getView().getHomeView().getBtnUtilities().grabFocus();
-                            Singletons.getView().getHomeView().showUtilitiesMenu();
+                            Singletons.getView().getViewHome().getBtnUtilities().grabFocus();
+                            Singletons.getView().getViewHome().showUtilitiesMenu();
                             break;
                         default:
-                            Singletons.getView().getHomeView().getBtnConstructed().grabFocus();
-                            Singletons.getView().getHomeView().showConstructedMenu();
+                            Singletons.getView().getViewHome().getBtnConstructed().grabFocus();
+                            Singletons.getView().getViewHome().showConstructedMenu();
                     }
                 }
             });

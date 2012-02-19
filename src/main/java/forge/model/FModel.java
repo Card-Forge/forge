@@ -344,7 +344,7 @@ public class FModel {
      */
     public final boolean savePrefs() {
         final ForgePreferences fp = this.preferences;
-        final List<ViewField> fieldViews = Singletons.getView().getMatchView().getFieldViews();
+        final List<ViewField> fieldViews = Singletons.getView().getViewMatch().getFieldViews();
 
         // AI field is at index [0]
         fp.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fieldViews.get(0).getLblUpkeep().getEnabled()));
@@ -378,11 +378,11 @@ public class FModel {
         fp.setPref(FPref.PHASE_HUMAN_EOT, String.valueOf(fieldViews.get(1).getLblEndTurn().getEnabled()));
         fp.setPref(FPref.PHASE_HUMAN_CLEANUP, String.valueOf(fieldViews.get(1).getLblCleanup().getEnabled()));
 
-        final ViewTabber v = Singletons.getView().getMatchView().getViewTabber();
+        final ViewTabber v = Singletons.getView().getViewMatch().getViewTabber();
         Constant.Runtime.MILL[0] = v.getLblMilling().getEnabled();
 
         fp.setPref(FPref.DEV_MILLING_LOSS, String.valueOf(Constant.Runtime.MILL[0]));
-        fp.setPref(FPref.UI_LAYOUT_PARAMS, String.valueOf(Singletons.getView().getMatchView().getLayoutParams()));
+        fp.setPref(FPref.UI_LAYOUT_PARAMS, String.valueOf(Singletons.getView().getViewMatch().getLayoutParams()));
         fp.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(v.getLblUnlimitedLands().getEnabled()));
 
         fp.save();
@@ -397,7 +397,7 @@ public class FModel {
      */
     public final boolean loadPrefs() {
         final ForgePreferences fp = Singletons.getModel().getPreferences();
-        final List<ViewField> fieldViews = Singletons.getView().getMatchView().getFieldViews();
+        final List<ViewField> fieldViews = Singletons.getView().getViewMatch().getFieldViews();
 
         Constant.Runtime.MILL[0] = fp.getPrefBoolean(FPref.DEV_MILLING_LOSS);
         Constant.Runtime.DEV_MODE[0] = fp.getPrefBoolean(FPref.DEV_MODE_ENABLED);
@@ -434,7 +434,7 @@ public class FModel {
         fieldViews.get(1).getLblEndTurn().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
         fieldViews.get(1).getLblCleanup().setEnabled(fp.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
 
-        Singletons.getView().getMatchView().setLayoutParams(fp.getPref(FPref.UI_LAYOUT_PARAMS));
+        Singletons.getView().getViewMatch().setLayoutParams(fp.getPref(FPref.UI_LAYOUT_PARAMS));
         return true;
     }
 }

@@ -1814,7 +1814,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean canPlayLand() {
-        if (Singletons.getView().getMatchView().getViewTabber().getLblUnlimitedLands().getEnabled() && this.isHuman()
+        if (Singletons.getView().getViewMatch().getViewTabber().getLblUnlimitedLands().getEnabled() && this.isHuman()
                 && Constant.Runtime.DEV_MODE[0]) {
             return PhaseHandler.canCastSorcery(this);
         }

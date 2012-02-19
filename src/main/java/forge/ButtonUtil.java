@@ -107,7 +107,7 @@ public class ButtonUtil {
      * @return a {@link forge.MyButton} object.
      */
     private static JButton getOK() {
-        return Singletons.getView().getMatchView().getBtnOK();
+        return Singletons.getView().getViewMatch().getBtnOK();
     }
 
     /**
@@ -118,6 +118,6 @@ public class ButtonUtil {
      * @return a {@link forge.MyButton} object.
      */
     private static JButton getCancel() {
-        return Singletons.getView().getMatchView().getBtnCancel();
+        return Singletons.getView().getViewMatch().getBtnCancel();
     }
 }

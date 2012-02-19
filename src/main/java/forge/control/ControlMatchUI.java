@@ -105,7 +105,7 @@ public class ControlMatchUI implements CardContainer {
 
         // Update avatars
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        final Object[] views = Singletons.getView().getMatchView().getFieldViews().toArray();
+        final Object[] views = Singletons.getView().getViewMatch().getFieldViews().toArray();
         for (int i = 0; i < views.length; i++) {
             final Image img;
             // Update AI quest icon

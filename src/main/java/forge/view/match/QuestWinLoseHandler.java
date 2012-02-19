@@ -293,7 +293,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         Singletons.getControl().getControlMatch().deinitMatch();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
-        Singletons.getView().getHomeView().showQuestMenu();
+        Singletons.getView().getViewHome().showQuestMenu();
         GuiUtils.closeOverlay();
     }
 
