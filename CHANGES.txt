@@ -348,6 +348,10 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Added NeedsToPlayVar SVars to some cards.
 - Fixed a bug in AF Pump.
 - Added the four new folders to the decks folder.
+- Added the recent commit logs to changes.txt.
+- DeckManager is known as DeckController
+- Quest decks are accessed from a class that implements IFolderMap (made a transient field for saves compatibility)
+- Removed the four subdirectories from the decks folder for the time being.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
