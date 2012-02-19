@@ -201,6 +201,8 @@ public class ViewHomeUI extends FPanel {
         pnlContent.revalidate();
         pnlContent.repaint();
 
+        this.getConstructedController().updateDeckSelectionCheckboxes();
+
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.constructed.toString());
         Singletons.getModel().getPreferences().save();
@@ -297,7 +299,7 @@ public class ViewHomeUI extends FPanel {
 
     /** @return ControlConstructed */
     public ControlConstructed getConstructedController() {
-        return constructed.getController();
+        return constructed.getControl();
     }
 
     /** @return ControlDraft */

@@ -6,6 +6,7 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
 
 /** 
@@ -17,10 +18,31 @@ public class FList extends JList {
     /** 
      * A JList object using Forge skin properties.
      * This constructor assumes list contents are null and will be set later.
-     *
      */
     public FList() {
         this(new Object[] {});
+    }
+
+    /** 
+     * A JList object using Forge skin properties.
+     * This constructor assumes list contents are null and will be set later.
+     * This constructor is used for naming a list at instantiation.
+     * @param name0 &emsp; {@link java.lang.String}
+     */
+    public FList(final String name0) {
+        this(new Object[] {});
+        this.setName(name0);
+    }
+
+    /** 
+     * A JList object using Forge skin properties.
+     * This constructor assumes list contents are null and will be set later.
+     * This constructor is used for applying a list model at instantiation.
+     * @param model0 &emsp; {@link javax.swing.ListModel}
+     */
+    public FList(final ListModel model0) {
+        this(new Object[] {});
+        this.setModel(model0);
     }
 
     /**
@@ -31,7 +53,7 @@ public class FList extends JList {
      */
     public FList(Object[] o0) {
         super(o0);
-        setOpaque(false);
+        setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         ListCellRenderer renderer = new ComplexCellRenderer();
         setCellRenderer(renderer);

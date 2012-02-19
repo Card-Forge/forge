@@ -1,305 +1,181 @@
 package forge.view.home;
 
-import java.awt.BorderLayout;
-import javax.swing.DefaultListSelectionModel;
+import java.awt.Font;
+
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 import forge.control.home.ControlConstructed;
 import forge.view.ViewHomeUI;
+import forge.view.toolbox.FCheckBox;
 import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FList;
 import forge.view.toolbox.FProgressBar;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
+import forge.view.toolbox.SubTab;
 
 /** 
- * Assembles swing components for "Constructed" mode menu.
- * 
+ * TODO: Write javadoc for this type.
+ *
  */
 @SuppressWarnings("serial")
 public class ViewConstructed extends JPanel {
-    private final ViewHomeUI parentView;
-    private final ControlConstructed control;
+    private final JPanel pnlTabber, tabHuman, tabAI, pnlStart;
+    private final ConstructedDeckSelectPanel pnlHuman, pnlAI;
+    private final JCheckBox cbSingletons, cbArtifacts, cbRemoveSmall;
+    private final JScrollPane scrContent;
     private final JButton btnStart;
     private final FProgressBar barProgress;
-
-    private FLabel btnHumanRandomTheme, btnHumanRandomDeck, btnAIRandomTheme, btnAIRandomDeck;
-    private JList lstDecksAI;
-    private FList lstColorsHuman, lstThemesHuman, lstDecksHuman, lstColorsAI, lstThemesAI;
-
-    private final String multi = System.getProperty("os.name").equals("Mac OS X") ? "CMD" : "CTRL";
-
-    private final String colorsToolTip = "Generate deck (Multi-select: " + multi + ")";
-    private final String themeToolTip = "Generate deck with a theme";
-    private final String decklistToolTip = "Load deck (Decklist: Double Click)";
+    private  ControlConstructed control;
 
     /**
-     * Assembles swing components for "Constructed" mode menu.
      * 
-     * @param v0 {@link forge.view.ViewHomeUI} parent view
+     * TODO: Write javadoc for Constructor.
+     * @param v0 &emsp; {@link forge.view.ViewHomeUI}
      */
     public ViewConstructed(ViewHomeUI v0) {
-        //========== Basic init stuff
-        super();
-        this.setOpaque(false);
-        this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
-        parentView = v0;
+        // Instantiation
+        pnlTabber = new JPanel();
+        pnlStart = new JPanel();
+        pnlHuman = new ConstructedDeckSelectPanel();
+        pnlAI = new ConstructedDeckSelectPanel();
 
-        populateHuman();
+        tabHuman = new SubTab("Human Deck Select");
+        tabAI = new SubTab("AI Deck Select");
 
-        populateAI();
+        scrContent = new FScrollPane(null);
+        scrContent.setBorder(null);
+        scrContent.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrContent.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        // Start button
-        btnStart = new StartButton(parentView);
-        this.add(btnStart, "gap 6% 0 2% 0, span 5 1, ax center, wrap");
-
+        cbSingletons = new FCheckBox("Singleton Mode");
+        cbArtifacts = new FCheckBox("Remove Artifacts");
+        cbRemoveSmall = new FCheckBox("Remove Small Creatures");
+        btnStart = new StartButton(v0);
         barProgress = new FProgressBar();
+
+        // Population
+        populateTabber();
+        populateStart();
+
+        // Styling and layout
+        this.setOpaque(false);
+        this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        this.add(pnlTabber, "w 98%!, gap 1% 0 20px 10px");
+        this.add(scrContent, "w 98%!, h 48%!, gap 1% 0 0 10px");
+        this.add(pnlStart, "w 98%!, gap 1% 0 0 20px");
+
+        // After all components are instantiated, fire up control.
+        this.control = new ControlConstructed(this);
+        showHumanTab();
+    }
+
+    private void populateTabber() {
+        final String tabberConstraints = "w 50%!, h 20px!";
+
+        tabHuman.setToolTipText("Global preference options");
+        tabAI.setToolTipText("Human and AI avatar select");
+
+        pnlTabber.setOpaque(false);
+        pnlTabber.setLayout(new MigLayout("insets 0, gap 0, align center"));
+
+        pnlTabber.add(tabHuman, tabberConstraints);
+        pnlTabber.add(tabAI, tabberConstraints + ", wrap");
+    }
+
+    private void populateStart() {
+        final String rowConstraints = "ax center, gap 0 0 0 5px";
+
+        final JLabel lblBlurb1 = new FLabel.Builder()
+                .text("Mouse over a list above for more information.")
+                .fontScaleAuto(false).build();
+        JLabel lblBlurb2 = new FLabel.Builder().fontStyle(Font.PLAIN)
+                .text("Deck generation options:")
+                    .fontScaleAuto(false).build();
+
         barProgress.setVisible(false);
-        this.add(barProgress, "w 150px!, h 30px!, gap 6% 0 2% 0, span 5 1, align center");
+        pnlStart.setOpaque(false);
+        lblBlurb1.setFont(FSkin.getFont(12));
+        lblBlurb2.setFont(FSkin.getFont(12));
 
-        // When all components have been added, add listeners.
-        control = new ControlConstructed(this);
-        control.updateDeckNames();
-        control.addListeners();
+        pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap, align center, hidemode 3"));
+
+        pnlStart.add(lblBlurb1, rowConstraints + ", h 12px!");
+        pnlStart.add(lblBlurb2, rowConstraints + ", h 12px!");
+        pnlStart.add(cbSingletons, rowConstraints);
+        pnlStart.add(cbArtifacts, rowConstraints);
+        pnlStart.add(cbRemoveSmall, rowConstraints);
+        pnlStart.add(btnStart, rowConstraints + ", gap 0 0 0 0");
+        pnlStart.add(barProgress, rowConstraints + ", w 150px!, h 30px!");
     }
 
-    /** Assembles Swing components in human area. */
-    private void populateHuman() {
-        lstColorsHuman = new FList();
-        lstColorsHuman.setName("lstColorsHuman");
-
-        lstThemesHuman = new FList();
-        lstThemesHuman.setName("lstThemesHuman");
-        lstThemesHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-
-        lstDecksHuman = new FList();
-        lstDecksHuman.setName("lstDecksHuman");
-        lstDecksHuman.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-
-        JLabel lblHuman = new JLabel("Choose your deck:");
-        lblHuman.setFont(FSkin.getBoldFont(16));
-        lblHuman.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JLabel lblColorInfo = new JLabel(colorsToolTip);
-        lblColorInfo.setToolTipText(colorsToolTip);
-        lblColorInfo.setFont(FSkin.getItalicFont(12));
-        lblColorInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JLabel lblThemeInfo = new JLabel(themeToolTip);
-        lblThemeInfo.setToolTipText(themeToolTip);
-        lblThemeInfo.setFont(FSkin.getItalicFont(12));
-        lblThemeInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JLabel lblDecklistInfo = new JLabel(decklistToolTip);
-        lblDecklistInfo.setToolTipText(decklistToolTip);
-        lblDecklistInfo.setFont(FSkin.getItalicFont(12));
-        lblDecklistInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Random theme and pre-constructed buttons
-        btnHumanRandomTheme = new FLabel.Builder().opaque(true)
-                .hoverable(true).text("Random Theme Deck").build();
-        btnHumanRandomDeck = new FLabel.Builder().opaque(true)
-                .hoverable(true).text("Random Deck").build();
-
-        // Add components to human area
-        JPanel colorsContainer = new JPanel();
-        colorsContainer.setOpaque(false);
-        colorsContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        colorsContainer.add(lblColorInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
-        colorsContainer.add(new FScrollPane(lstColorsHuman), "w 100%!, h 87%!, wrap");
-
-        JPanel themeContainer = new JPanel();
-        themeContainer.setOpaque(false);
-        themeContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        themeContainer.add(lblThemeInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
-        themeContainer.add(new FScrollPane(lstThemesHuman), "w 100%!, h 73%!, wrap");
-        themeContainer.add(btnHumanRandomTheme, "w 100%!, h 12%!, gaptop 2.5%");
-
-        JPanel decksContainer = new JPanel();
-        decksContainer.setOpaque(false);
-        decksContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        decksContainer.add(lblDecklistInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
-        decksContainer.add(new FScrollPane(lstDecksHuman), "w 100%!, h 73%!, wrap");
-        decksContainer.add(btnHumanRandomDeck, "w 100%!, h 12%!, gaptop 2.5%");
-
-        String listConstraints = "w 28%!, h 31%!";
-        String orConstraints = "w 5%!, h 31%!";
-        this.add(lblHuman, "w 94%!, h 5%!, gap 3% 0 2% 0, wrap, span 5 1");
-        this.add(colorsContainer, listConstraints + ", gapleft 3%");
-        this.add(new OrPanel(), orConstraints);
-        this.add(themeContainer, listConstraints);
-        this.add(new OrPanel(), orConstraints);
-        this.add(decksContainer, listConstraints + ", wrap");
+    /** */
+    public final void showHumanTab() {
+        this.scrContent.setViewportView(pnlHuman);
+        control.updateTabber(tabHuman);
     }
 
-    /** Assembles Swing components in AI area. */
-    private void populateAI() {
-        lstColorsAI = new FList();
-        //
-        lstColorsAI.setName("lstColorsAI");
-
-        lstThemesAI = new FList();
-        //
-        lstThemesAI.setName("lstThemesAI");
-        lstThemesAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-
-        lstDecksAI = new FList();
-        lstDecksAI.setName("lstDecksAI");
-        lstDecksAI.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-
-        JLabel lblAI = new JLabel("Choose a deck for the computer:");
-        lblAI.setFont(FSkin.getBoldFont(16));
-        lblAI.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblAI.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JLabel lblColorInfo = new JLabel(colorsToolTip);
-        lblColorInfo.setToolTipText(colorsToolTip);
-        lblColorInfo.setFont(FSkin.getItalicFont(12));
-        lblColorInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblColorInfo.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JLabel lblThemeInfo = new JLabel(themeToolTip);
-        lblThemeInfo.setToolTipText(themeToolTip);
-        lblThemeInfo.setFont(FSkin.getItalicFont(12));
-        lblThemeInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblThemeInfo.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JLabel lblDecklistInfo = new JLabel(decklistToolTip);
-        lblDecklistInfo.setToolTipText(decklistToolTip);
-        lblDecklistInfo.setFont(FSkin.getItalicFont(12));
-        lblDecklistInfo.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        lblDecklistInfo.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Random theme and pre-constructed deck buttons
-        btnAIRandomTheme = new FLabel.Builder().opaque(true)
-                .hoverable(true).text("Random Theme Deck").build();
-        btnAIRandomDeck = new FLabel.Builder().opaque(true)
-                .hoverable(true).text("Random Deck").build();
-
-        // Add components to AI area
-        JPanel colorsContainer = new JPanel();
-        colorsContainer.setOpaque(false);
-        colorsContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        colorsContainer.add(lblColorInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
-        colorsContainer.add(new FScrollPane(lstColorsAI), "w 100%!, h 87%!, wrap");
-
-        JPanel themeContainer = new JPanel();
-        themeContainer.setOpaque(false);
-        themeContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        themeContainer.add(lblThemeInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
-        themeContainer.add(new FScrollPane(lstThemesAI), "w 100%!, h 73%!, wrap");
-        themeContainer.add(btnAIRandomTheme, "w 100%!, h 12%!, gaptop 2.5%");
-
-        JPanel decksContainer = new JPanel();
-        decksContainer.setOpaque(false);
-        decksContainer.setLayout(new MigLayout("insets 0, gap 0"));
-        decksContainer.add(lblDecklistInfo, "w 100%!, h 10%!, gapbottom 2%, wrap");
-        decksContainer.add(new FScrollPane(lstDecksAI), "w 100%!, h 73%!, wrap");
-        decksContainer.add(btnAIRandomDeck, "w 100%!, h 12%!, gaptop 2.5%");
-
-        String listConstraints = "w 28%!, h 31%!";
-        String orConstraints = "w 5%!, h 31%!";
-
-        this.add(lblAI, "w 94%!, h 5%!, gap 3% 0 5% 0, span 5 1, wrap");
-        this.add(colorsContainer, listConstraints + ", gapleft 3%");
-        this.add(new OrPanel(), orConstraints);
-        this.add(themeContainer, listConstraints);
-        this.add(new OrPanel(), orConstraints);
-        this.add(decksContainer, listConstraints + ", wrap");
-    }
-
-    //========= RETRIEVAL FUNCTIONS
-    /** @return {@link forge.view.ViewHomeUI} */
-    public ViewHomeUI getParentView() {
-        return parentView;
-    }
-
-    /** @return {@link forge.control.home.ControlConstructed} */
-    public ControlConstructed getController() {
-        return control;
-    }
-
-    /** @return {@link javax.swing.JList} */
-    public JList getLstColorsHuman() {
-        return lstColorsHuman;
-    }
-
-    /** @return {@link javax.swing.JList} */
-    public JList getLstThemesHuman() {
-        return lstThemesHuman;
-    }
-
-    /** @return {@link javax.swing.JList} */
-    public JList getLstDecksHuman() {
-        return lstDecksHuman;
-    }
-
-    /** @return {@link javax.swing.JList} */
-    public JList getLstColorsAI() {
-        return lstColorsAI;
-    }
-
-    /** @return {@link javax.swing.JList} */
-    public JList getLstThemesAI() {
-        return lstThemesAI;
-    }
-
-    /** @return {@link javax.swing.JList} */
-    public JList getLstDecksAI() {
-        return lstDecksAI;
-    }
-
-    /** @return {@link forge.view.toolbox.FLabel} */
-    public FLabel getBtnHumanRandomTheme() {
-        return btnHumanRandomTheme;
-    }
-
-    /** @return {@link forge.view.toolbox.FLabel} */
-    public FLabel getBtnAIRandomTheme() {
-        return btnAIRandomTheme;
-    }
-
-    /** @return {@link forge.view.toolbox.FLabel} */
-    public FLabel getBtnHumanRandomDeck() {
-        return btnHumanRandomDeck;
-    }
-
-    /** @return {@link forge.view.toolbox.FLabel} */
-    public FLabel getBtnAIRandomDeck() {
-        return btnAIRandomDeck;
+    /** */
+    public final void showAITab() {
+        this.scrContent.setViewportView(pnlAI);
+        control.updateTabber(tabAI);
     }
 
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnStart() {
-        return btnStart;
+        return this.btnStart;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabHuman() {
+        return this.tabHuman;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getTabAI() {
+        return this.tabAI;
     }
 
     /** @return {@link forge.view.toolbox.FProgressBar} */
     public FProgressBar getBarProgress() {
-        return barProgress;
+        return this.barProgress;
     }
 
-    // For some reason, MigLayout has sizing problems with a JLabel next to a JList.
-    // So, the "or" label must be nested in a panel.
-    private class OrPanel extends JPanel {
-        public OrPanel() {
-            super();
-            setOpaque(false);
-            setLayout(new BorderLayout());
+    /** @return {@link javax.swing.JPanel} */
+    public ConstructedDeckSelectPanel getPnlHuman() {
+        return this.pnlHuman;
+    }
 
-            JLabel lblOr = new JLabel("OR");
-            lblOr.setHorizontalAlignment(SwingConstants.CENTER);
-            lblOr.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            add(lblOr, BorderLayout.CENTER);
-        }
+    /** @return {@link javax.swing.JPanel} */
+    public ConstructedDeckSelectPanel getPnlAI() {
+        return this.pnlAI;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbSingletons() {
+        return this.cbSingletons;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbRemoveSmall() {
+        return this.cbRemoveSmall;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbArtifacts() {
+        return this.cbArtifacts;
+    }
+
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @return {@link forge.control.home.ControlConstructed}
+     */
+    public ControlConstructed getControl() {
+        return this.control;
     }
 }

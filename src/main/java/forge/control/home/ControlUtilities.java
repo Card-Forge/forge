@@ -171,7 +171,7 @@ public class ControlUtilities {
 
             @Override
             public void execute() {
-                view.getParentView().getConstructedController().updateDeckNames();
+                view.getParentView().getConstructedController().updateDeckLists();
                 //view.getParentView().getSealedController().updateDeckLists();
             }
         };

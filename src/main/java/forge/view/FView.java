@@ -98,6 +98,7 @@ public final class FView extends JFrame {
 
                 // Overlay
                 overlay.setBounds(0, 0, FView.this.getWidth(), FView.this.getHeight());
+                overlay.setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
                 FView.this.lpnContent.add(overlay, JLayeredPane.MODAL_LAYER);
 
                 // Instantiate all different state screens

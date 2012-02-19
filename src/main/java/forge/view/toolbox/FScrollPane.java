@@ -18,6 +18,7 @@ public class FScrollPane extends JScrollPane {
      */
     public FScrollPane(Component c0) {
         super(c0);
+        getVerticalScrollBar().setUnitIncrement(16);
         getViewport().setOpaque(false);
         setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1));
         setOpaque(false);
