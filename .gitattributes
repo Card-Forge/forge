@@ -10357,9 +10357,9 @@ res/cardsfolder/z/zur_the_enchanter.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_enchanter.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_orb.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_spellcaster.txt svneol=native#text/plain
-res/decks/JuzamjediCube.dck -text
 res/decks/SkieraCube-cards_not_supported_yet.txt -text
-res/decks/SkieraCube.dck -text
+res/decks/cube/JuzamjediCube.dck -text
+res/decks/cube/SkieraCube.dck -text
 res/draft/common.txt svneol=native#text/plain
 res/draft/cube_juzamjedi.draft -text
 res/draft/cube_skiera.draft -text
