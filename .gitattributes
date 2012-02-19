@@ -4258,6 +4258,7 @@ res/cardsfolder/i/immolating_souleater.txt svneol=native#text/plain
 res/cardsfolder/i/immolation.txt svneol=native#text/plain
 res/cardsfolder/i/immortal_coil.txt -text svneol=unset#text/plain
 res/cardsfolder/i/impaler_shrike.txt svneol=native#text/plain
+res/cardsfolder/i/impatience.txt -text svneol=unset#text/plain
 res/cardsfolder/i/impending_disaster.txt svneol=native#text/plain
 res/cardsfolder/i/imperial_edict.txt svneol=native#text/plain
 res/cardsfolder/i/imperial_hellkite.txt svneol=native#text/plain
