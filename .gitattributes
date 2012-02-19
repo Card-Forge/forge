@@ -9223,6 +9223,7 @@ res/cardsfolder/t/tormented_soul.txt svneol=native#text/plain
 res/cardsfolder/t/tormentor_exarch.txt -text
 res/cardsfolder/t/tormods_crypt.txt svneol=native#text/plain
 res/cardsfolder/t/tornado.txt -text
+res/cardsfolder/t/tornado_elemental.txt -text
 res/cardsfolder/t/torpid_moloch.txt -text svneol=unset#text/plain
 res/cardsfolder/t/torpor_dust.txt svneol=native#text/plain
 res/cardsfolder/t/torpor_orb.txt -text
