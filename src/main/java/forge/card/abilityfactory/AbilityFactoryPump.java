@@ -851,8 +851,12 @@ public class AbilityFactoryPump {
             tgts.addAll(tgt.getTargetCards());
             tgts.addAll(tgt.getTargetPlayers());
         } else {
-            tgts.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa));
-            tgts.addAll(AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa));
+            if (params.containsKey("Defined")) {
+                tgts.addAll(AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa));
+            }
+            if (tgts.isEmpty()) {
+                tgts.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa));
+            }
         }
 
         if (tgts.size() > 0) {
@@ -927,7 +931,7 @@ public class AbilityFactoryPump {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void pumpResolve(final SpellAbility sa) {
-        ArrayList<Card> tgtCards;
+        ArrayList<Card> tgtCards = new ArrayList<Card>();
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
         ArrayList<Player> tgtPlayers = new ArrayList<Player>();
@@ -935,8 +939,12 @@ public class AbilityFactoryPump {
             tgtCards = tgt.getTargetCards();
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
-            tgtPlayers = AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa);
+            if (params.containsKey("Defined")) {
+                tgtPlayers = AbilityFactory.getDefinedPlayers(this.hostCard, this.params.get("Defined"), sa);
+            }
+            if (tgtPlayers.isEmpty()) {
+                tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
+            }
         }
 
         if (this.params.containsKey("Radiance")) {
