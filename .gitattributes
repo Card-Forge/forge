@@ -5174,6 +5174,7 @@ res/cardsfolder/l/lurker.txt -text
 res/cardsfolder/l/lurking_crocodile.txt svneol=native#text/plain
 res/cardsfolder/l/lurking_evil.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lurking_informant.txt svneol=native#text/plain
+res/cardsfolder/l/lurking_jackals.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lurking_nightstalker.txt svneol=native#text/plain
 res/cardsfolder/l/lurking_predators.txt svneol=native#text/plain
 res/cardsfolder/l/lurking_skirge.txt svneol=native#text/plain
