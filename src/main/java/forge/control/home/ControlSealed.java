@@ -11,9 +11,10 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import net.slightlymagic.braids.util.UtilFunctions;
+
 import org.apache.commons.lang3.StringUtils;
 
-import net.slightlymagic.braids.util.UtilFunctions;
 import forge.AllZone;
 import forge.Command;
 import forge.Constant;
@@ -203,7 +204,7 @@ public class ControlSealed {
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         AllZone.getDecks().getSealed().add(sealed);
 
-        view.getParentView().getUtilitiesController().showDeckEditor(GameType.Sealed, sealed);
+        view.getParentView().getUtilitiesControl().showDeckEditor(GameType.Sealed, sealed);
 
     }
 

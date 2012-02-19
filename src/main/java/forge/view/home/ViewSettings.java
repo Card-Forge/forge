@@ -581,7 +581,7 @@ public class ViewSettings extends JPanel {
     }
 
     /** @return ControlSettings */
-    public ControlSettings getController() {
+    public ControlSettings getControl() {
         return ViewSettings.this.control;
     }
 

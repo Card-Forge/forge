@@ -232,7 +232,7 @@ public class ViewDraft extends JPanel {
     }
 
     /** @return ControlDraft */
-    public ControlDraft getController() {
+    public ControlDraft getControl() {
         return control;
     }
 

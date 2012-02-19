@@ -128,7 +128,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckSet> {
                         ForgeProps.getLocalized(GuiBoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     DraftingProcess.this.dispose();
-                    Singletons.getView().getHomeView().getDraftController().updateHumanDecks();
+                    Singletons.getView().getHomeView().getDraftControl().updateHumanDecks();
                 }
             } // windowClosing()
         });
@@ -337,7 +337,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckSet> {
         // close and open next screen
         this.dispose();
 
-        Singletons.getView().getHomeView().getDraftController().updateHumanDecks();
+        Singletons.getView().getHomeView().getDraftControl().updateHumanDecks();
 
     } /* saveDraft() */
 

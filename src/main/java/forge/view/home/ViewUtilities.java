@@ -219,7 +219,7 @@ public class ViewUtilities extends JPanel {
     }
 
     /** @return ControlUtilities */
-    public ControlUtilities getController() {
+    public ControlUtilities getControl() {
         return ViewUtilities.this.control;
     }
 

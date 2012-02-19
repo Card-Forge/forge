@@ -138,7 +138,7 @@ public class ViewHomeUI extends FPanel {
         btnDeckEditor = new FButton();
         btnDeckEditor.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
-                ViewHomeUI.this.getUtilitiesController().showDeckEditor(GameType.Constructed, null);
+                ViewHomeUI.this.getUtilitiesControl().showDeckEditor(GameType.Constructed, null);
             }
         });
         btnDeckEditor.setText("Deck Editor");
@@ -201,7 +201,7 @@ public class ViewHomeUI extends FPanel {
         pnlContent.revalidate();
         pnlContent.repaint();
 
-        this.getConstructedController().updateDeckSelectionCheckboxes();
+        this.getConstructedControl().updateDeckSelectionCheckboxes();
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.constructed.toString());
@@ -298,23 +298,23 @@ public class ViewHomeUI extends FPanel {
     }
 
     /** @return ControlConstructed */
-    public ControlConstructed getConstructedController() {
+    public ControlConstructed getConstructedControl() {
         return constructed.getControl();
     }
 
     /** @return ControlDraft */
-    public ControlDraft getDraftController() {
-        return draft.getController();
+    public ControlDraft getDraftControl() {
+        return draft.getControl();
     }
 
     /** @return ControlSealed */
-    public ControlSealed getSealedController() {
-        return sealed.getController();
+    public ControlSealed getSealedControl() {
+        return sealed.getControl();
     }
 
     /** @return ControlUtilities */
-    public ControlUtilities getUtilitiesController() {
-        return utilities.getController();
+    public ControlUtilities getUtilitiesControl() {
+        return utilities.getControl();
     }
 
     private void clearToggles() {

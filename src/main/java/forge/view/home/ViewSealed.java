@@ -79,7 +79,7 @@ public class ViewSealed extends JPanel {
     }
 
     /** @return {@link forge.control.home.ControlSealed} */
-    public ControlSealed getController() {
+    public ControlSealed getControl() {
         return control;
     }
 

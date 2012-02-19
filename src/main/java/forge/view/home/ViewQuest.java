@@ -634,7 +634,7 @@ public class ViewQuest extends JScrollPane {
     }
 
     /** @return {@link forge.control.home.ControlQuest} */
-    public ControlQuest getController() {
+    public ControlQuest getControl() {
         return control;
     }
 
