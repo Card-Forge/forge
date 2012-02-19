@@ -22,17 +22,20 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.item.CardPrinted;
+import forge.view.toolbox.FList;
+import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FScrollPane;
+import forge.view.toolbox.FSkin;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -41,7 +44,7 @@ import forge.item.CardPrinted;
  * @version $Id: ListChooser.java 9708 2011-08-09 19:34:12Z jendave $
  */
 @SuppressWarnings("serial")
-public class QuestWinLoseCardViewer extends JPanel {
+public class QuestWinLoseCardViewer extends FPanel {
 
     // Data and number of choices for the list
     private final List<CardPrinted> list;
@@ -50,6 +53,7 @@ public class QuestWinLoseCardViewer extends JPanel {
     private final JList jList;
     private final CardDetailPanel detail;
     private final CardPicturePanel picture;
+    private final FScrollPane scroller;
 
     /**
      * Instantiates a new quest win lose card viewer.
@@ -59,14 +63,21 @@ public class QuestWinLoseCardViewer extends JPanel {
      */
     public QuestWinLoseCardViewer(final List<CardPrinted> list) {
         this.list = Collections.unmodifiableList(list);
-        this.jList = new JList(new ChooserListModel());
+        this.jList = new FList(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
         this.picture = new CardPicturePanel(null);
+        this.scroller = new FScrollPane(this.jList);
 
-        this.add(new JScrollPane(this.jList));
-        this.add(this.picture);
-        this.add(this.detail);
-        this.setLayout(new java.awt.GridLayout(1, 3, 6, 0));
+        this.setCornerDiameter(20);
+        this.setBorderToggle(false);
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        picture.setOpaque(false);
+        scroller.setBorder(null);
+
+        this.setLayout(new MigLayout("insets 0, gap 0"));
+        this.add(scroller, "w 32%!, h 98%!, gap 1% 1% 1% 1%");
+        this.add(this.picture, "w 32%!, h 98%!, gap 0 0 1% 1%");
+        this.add(this.detail, "w 32%!, h 98%!, gap 1% 1% 1% 1%");
 
         // selection is here
         this.jList.getSelectionModel().addListSelectionListener(new SelListener());
