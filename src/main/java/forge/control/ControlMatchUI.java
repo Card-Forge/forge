@@ -17,8 +17,12 @@
  */
 package forge.control;
 
+import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.ImageIcon;
 
 import forge.AllZone;
 import forge.Card;
@@ -37,8 +41,14 @@ import forge.control.match.ControlHand;
 import forge.control.match.ControlMessage;
 import forge.control.match.ControlPicture;
 import forge.control.match.ControlTabber;
+import forge.game.GameType;
+import forge.properties.ForgePreferences.FPref;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 import forge.view.ViewMatchUI;
 import forge.view.match.ViewField;
+import forge.view.toolbox.FLabel;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -91,6 +101,34 @@ public class ControlMatchUI implements CardContainer {
             f.addObservers();
             f.addListeners();
             f.getPlayer().updateObservers();
+        }
+
+        // Update avatars
+        final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        final Object[] views = Singletons.getView().getMatchView().getFieldViews().toArray();
+        for (int i = 0; i < views.length; i++) {
+            final Image img;
+            // Update AI quest icon
+            if (i > 0 && Constant.Runtime.getGameType() == GameType.Quest) {
+                    String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
+
+                    if (Constant.Quest.OPP_ICON_NAME[0] != null) {
+                        filename += Constant.Quest.OPP_ICON_NAME[0];
+                        final File f = new File(filename);
+                        img = (f.exists()
+                                ? new ImageIcon(filename).getImage()
+                                : FSkin.getAvatars().get(Integer.parseInt(indices[i])));
+                    }
+                    else {
+                        img = FSkin.getAvatars().get(Integer.parseInt(indices[i]));
+                    }
+            }
+            else {
+                img = FSkin.getAvatars().get(Integer.parseInt(indices[i]));
+            }
+
+            ((ViewField) views[i]).getLblAvatar().setIcon(new ImageIcon(img));
+            ((FLabel) ((ViewField) views[i]).getLblAvatar()).getResizeTimer().start();
         }
 
         AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();

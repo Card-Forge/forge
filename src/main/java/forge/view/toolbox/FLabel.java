@@ -291,6 +291,17 @@ public class FLabel extends JLabel {
         this.setHorizontalAlignment(i0);
     }
 
+    /** Resizing in MigLayout "slides" between the original and destination sizes.
+     * To prevent this label from recalculating on each increment, a timer
+     * is run to check that the the "sliding" is finished.  To resize this label
+     * explicitly, retrieve this timer and start it.  It will stop automatically.
+     * 
+     * @return {@link javax.swing.Timer}
+     */
+    public Timer getResizeTimer() {
+        return this.resizeTimer;
+    }
+
     @Override
     // Must be public.
     public void setIcon(final Icon i0) {
@@ -335,7 +346,7 @@ public class FLabel extends JLabel {
 
         // Opacity, select
         if (this.opaque && !selected) {
-            g2d.setColor(clrInactive);
+            g2d.setColor(getBackground());
             g2d.fillRect(0, 0, w, h);
         }
         else if (selectable && selected) {

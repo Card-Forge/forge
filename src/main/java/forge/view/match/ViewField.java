@@ -19,13 +19,10 @@ package forge.view.match;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -39,17 +36,12 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.PlayArea;
 import forge.AllZone;
-import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
-import forge.game.GameType;
-import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FSkin;
@@ -75,8 +67,7 @@ public class ViewField extends FPanel {
         lblEndCombat, lblMain2, lblEndTurn, lblCleanup;
 
     private final JPanel avatarArea, phaseArea, pnlDetails;
-    private JLabel lblAvatar, lblLife;
-    private final Image img;
+    private final JLabel lblAvatar, lblLife;
     private final Color clrHover, clrPhaseActiveEnabled, clrPhaseActiveDisabled,
         clrPhaseInactiveEnabled, clrPhaseInactiveDisabled;
     /**
@@ -99,42 +90,18 @@ public class ViewField extends FPanel {
         this.clrPhaseActiveDisabled = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
         this.clrPhaseInactiveDisabled = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
 
-        // Player icon logic
-        final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        if (player.isHuman()) {
-            img = FSkin.getAvatars().get(Integer.parseInt(indexes[0]));
-        }
-        else if (Constant.Runtime.getGameType() == GameType.Quest) {
-            String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
-
-            if (Constant.Quest.OPP_ICON_NAME[0] != null) {
-                filename += Constant.Quest.OPP_ICON_NAME[0];
-                final File f = new File(filename);
-                img = (f.exists()
-                        ? new ImageIcon(filename).getImage()
-                        : FSkin.getAvatars().get(Integer.parseInt(indexes[1])));
-            }
-            else {
-                img = FSkin.getAvatars().get(Integer.parseInt(indexes[1]));
-            }
-        }
-        else {
-            img = FSkin.getAvatars().get(Integer.parseInt(indexes[1]));
-        }
-
         // Avatar and life
         avatarArea = new JPanel();
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
 
-        lblAvatar = new JLabel();
-        lblAvatar.setHorizontalAlignment(SwingConstants.CENTER);
-        avatarArea.add(lblAvatar, "w 100%!, wrap, gaptop 4%");
+        lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .iconScaleFactor(1.0f).build();
+        avatarArea.add(lblAvatar, "w 100%!, h 70%!, wrap, gaptop 4%");
 
-        lblLife = new JLabel();
-        lblLife.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLife.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .fontStyle(Font.BOLD).build();
         avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
 
         this.add(avatarArea, "w 10%!, h 30%!");
@@ -166,17 +133,6 @@ public class ViewField extends FPanel {
         pnlDetails.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         populateDetails();
         this.add(pnlDetails, "w 10%!, h 69%!, gapleft 1px");
-
-        // Resize adapter
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                int side = (int) (avatarArea.getHeight() * 0.7);
-                int size = (int) (avatarArea.getHeight() * 0.24);
-                lblLife.setFont(FSkin.getBoldFont(size));
-                lblAvatar.setIcon(new ImageIcon(img.getScaledInstance(side, side, java.awt.Image.SCALE_SMOOTH)));
-            }
-        });
 
         // Player hover effect
         avatarArea.addMouseListener(new MouseAdapter() {
@@ -409,6 +365,11 @@ public class ViewField extends FPanel {
      */
     public JPanel getAvatarArea() {
         return this.avatarArea;
+    }
+
+    /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblAvatar() {
+        return this.lblAvatar;
     }
 
     /** @return {@link javax.swing.JLabel} */
