@@ -1,0 +1,48 @@
+package forge.util;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+/** 
+ * TODO: Write javadoc for this type.
+ *
+ */
+public class FileSection {
+
+    private final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+            
+    private FileSection() {}
+    
+    public static FileSection parse(Iterable<String> lines, String kvSeparator) {
+        FileSection result = new FileSection();
+        
+        for (final String dd : lines) {
+            final String[] v = dd.split(kvSeparator, 2);
+            result.lines.put(v[0], v.length > 1 ? v[1].trim() : "");
+        }
+
+        return result;
+    }
+    
+    public String get(String fieldName) {
+        return lines.get(fieldName);
+    }
+
+    public int getInt(String fieldName) { return getInt(fieldName, 0); }
+    public int getInt(String fieldName, int defaultValue) {
+        try{ 
+            return Integer.parseInt(get(fieldName));
+        } catch( NumberFormatException ex ) {
+            return defaultValue;
+        }
+    }
+    
+    public boolean getBoolean(String fieldName) { return getBoolean(fieldName, false); }
+    public boolean getBoolean(String fieldName, boolean defaultValue) {
+        String s = get(fieldName);
+        if ( s == null ) return defaultValue;
+        return "true".equalsIgnoreCase(s);
+    }
+    
+    
+}

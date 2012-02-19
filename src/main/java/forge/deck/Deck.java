@@ -153,6 +153,8 @@ public class Deck extends DeckBase implements Serializable, IHasName {
         }
 
         DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
+        if ( dh == null )
+           return null;
 
         final Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());

@@ -24,6 +24,7 @@ import java.util.Map;
 import forge.SetUtils;
 import forge.deck.Deck;
 import forge.quest.SellRules;
+import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.SectionUtil;
 
@@ -83,7 +84,7 @@ public class PreconDeck implements InventoryItemFromSet {
 
         String setProxy = "n/a";
 
-        Map<String,String> kv = SectionUtil.parseKvPairs(sections.get("metadata"), "=");
+        FileSection kv = FileSection.parse(sections.get("metadata"), "=");
         
         imageFilename = kv.get("Image");
         description = kv.get("Description");

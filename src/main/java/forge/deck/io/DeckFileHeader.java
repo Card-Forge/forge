@@ -1,9 +1,8 @@
 package forge.deck.io;
 
-import java.util.Map;
-
 import forge.PlayerType;
 import forge.game.GameType;
+import forge.util.FileSection;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -30,11 +29,11 @@ public class DeckFileHeader {
      * TODO: Write javadoc for Constructor.
      * @param parseKvPairs
      */
-    public DeckFileHeader(Map<String, String> kvPairs) {
+    public DeckFileHeader(FileSection kvPairs) {
         name = kvPairs.get(NAME);
         comment = kvPairs.get(COMMENT);
         deckType = GameType.smartValueOf(kvPairs.get(DECK_TYPE), GameType.Constructed);
-        customPool = "true".equalsIgnoreCase(kvPairs.get(CSTM_POOL));
+        customPool = kvPairs.getBoolean(CSTM_POOL);
         playerType = "computer".equalsIgnoreCase(kvPairs.get(PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(PLAYER_TYPE)) ? PlayerType.COMPUTER : PlayerType.HUMAN;
     }
 

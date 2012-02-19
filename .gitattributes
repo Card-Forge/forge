@@ -11214,7 +11214,6 @@ src/main/java/forge/control/match/ControlWinLose.java -text
 src/main/java/forge/control/match/package-info.java -text
 src/main/java/forge/control/package-info.java -text
 src/main/java/forge/deck/CardCollections.java -text
-src/main/java/forge/deck/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/deck/Deck.java svneol=native#text/plain
 src/main/java/forge/deck/DeckBase.java -text
 src/main/java/forge/deck/DeckRecognizer.java -text
@@ -11229,7 +11228,6 @@ src/main/java/forge/deck/generate/GenerateConstructedMultiColorDeck.java svneol=
 src/main/java/forge/deck/generate/GenerateDeckUtil.java -text
 src/main/java/forge/deck/generate/GenerateThemeDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/package-info.java svneol=native#text/plain
-src/main/java/forge/deck/io/CubeSerializer.java -text
 src/main/java/forge/deck/io/DeckFileHeader.java -text
 src/main/java/forge/deck/io/DeckSerializer.java -text
 src/main/java/forge/deck/io/DeckSerializerBase.java -text
@@ -11251,6 +11249,7 @@ src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
 src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
 src/main/java/forge/game/limited/CardPoolLimitation.java -text
 src/main/java/forge/game/limited/CardRatings.java -text
+src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
 src/main/java/forge/game/limited/IBoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/SealedDeck.java svneol=native#text/plain
@@ -11360,6 +11359,7 @@ src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/util/FileFinder.java svneol=native#text/plain
+src/main/java/forge/util/FileSection.java -text
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 src/main/java/forge/util/FolderMap.java svneol=native#text/plain
 src/main/java/forge/util/FolderMapView.java -text

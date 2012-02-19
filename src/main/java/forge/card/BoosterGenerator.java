@@ -21,6 +21,7 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
@@ -233,6 +234,14 @@ public class BoosterGenerator {
         return temp;
     }
 
+    public final List<CardPrinted> getBoosterPack(final Map<CardRarity, Integer> numbers, 
+            final int nRareSlots, final int nDoubls, final int nAnyCard) {
+        return getBoosterPack( numbers.get(CardRarity.Common), numbers.get(CardRarity.Uncommon), nRareSlots, 
+                numbers.get(CardRarity.Rare), numbers.get(CardRarity.MythicRare), numbers.get(CardRarity.Special), 
+                nDoubls, nAnyCard, numbers.get(CardRarity.BasicLand) );
+    }
+    
+    
     /**
      * So many parameters are needed for custom limited cardpools,.
      * 

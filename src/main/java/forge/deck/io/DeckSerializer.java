@@ -34,8 +34,8 @@ import javax.swing.filechooser.FileFilter;
 import forge.Card;
 import forge.deck.Deck;
 import forge.item.CardPrinted;
+import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.SectionUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -248,7 +248,7 @@ public class DeckSerializer extends DeckSerializerBase<Deck> {
         if ( map == null ) { return null; }
         List<String> lines = map.get("metadata");
         if (lines == null) { return null; }
-        DeckFileHeader d = new DeckFileHeader(SectionUtil.parseKvPairs(lines, "="));
+        DeckFileHeader d = new DeckFileHeader(FileSection.parse(lines, "="));
 
 
         return d;

@@ -14,7 +14,6 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.PlayerType;
-import forge.deck.CustomLimited;
 import forge.deck.Deck;
 import forge.deck.DeckSet;
 import forge.util.FileUtil;
@@ -44,7 +43,7 @@ public class OldDeckParser {
      * @param cube2
      */
     public OldDeckParser(File file, IFolderMap<Deck> constructed2, IFolderMap<DeckSet> draft2,
-            IFolderMap<DeckSet> sealed2, IFolderMap<CustomLimited> cube2) {
+            IFolderMap<DeckSet> sealed2, IFolderMap<Deck> cube2) {
         deckDir = file;
         sealed = sealed2;
         constructed = constructed2;
@@ -61,7 +60,7 @@ public class OldDeckParser {
     protected final IFolderMap<DeckSet> getDraft() {
         return draft;
     }
-    protected final IFolderMap<CustomLimited> getCube() {
+    protected final IFolderMap<Deck> getCube() {
         return cube;
     }
     protected final File getDeckDir() {
@@ -71,7 +70,7 @@ public class OldDeckParser {
     private final IFolderMap<DeckSet> sealed;
     private final IFolderMap<Deck> constructed;
     private final IFolderMap<DeckSet> draft;
-    private final IFolderMap<CustomLimited> cube;
+    private final IFolderMap<Deck> cube;
     private final File deckDir;
     /**
      * TODO: Write javadoc for this method.
@@ -127,9 +126,22 @@ public class OldDeckParser {
            Map<String, List<String>> sections = SectionUtil.parseSections(fileLines);
            DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
            String name = dh.getName();
+           
            if (dh.isCustomPool()) {
-               continue;
+               try {
+                   cube.add(Deck.fromLines(fileLines));
+                   importedOk = true;
+               } catch (NoSuchElementException ex) {
+                   if (!allowDeleteUnsupportedConstructed) {
+                       String msg = String.format("Can not convert deck '%s' for some unsupported cards it contains. %n%s%n%nMay Forge delete all such decks?", name, ex.getMessage());
+                       allowDeleteUnsupportedConstructed = JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, msg, "Problem converting decks", JOptionPane.YES_NO_OPTION);
+                   }
                }
+               if (importedOk || allowDeleteUnsupportedConstructed) {
+                   f.delete();
+               }
+               continue;
+           }
 
            switch(dh.getDeckType()) {
            case Constructed:

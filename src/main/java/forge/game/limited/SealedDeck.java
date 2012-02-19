@@ -36,7 +36,6 @@ import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardSet;
 import forge.card.spellability.AbilityMana;
-import forge.deck.CustomLimited;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -140,7 +139,7 @@ public class SealedDeck {
             for (final String element : dList) {
                 if (element.endsWith(".sealed")) {
                     final ArrayList<String> dfData = FileUtil.readFile("res/sealed/" + element);
-                    final CustomLimited cs = CustomLimited.parse(dfData);
+                    final CustomLimited cs = CustomLimited.parse(dfData, AllZone.getDecks().getCubes());
                     customs.add(cs);
                 }
             }
@@ -164,9 +163,7 @@ public class SealedDeck {
                                 return pack.getSingletonBoosterPack(draft.getNumCards());
                             }
                         }
-                        return pack.getBoosterPack(draft.getNumCommons(), draft.getNumUncommons(), 0,
-                                draft.getNumRares(), draft.getNumMythics(), draft.getNumSpecials(),
-                                draft.getNumDoubleFaced(), 0, 0);
+                        return pack.getBoosterPack(draft.getNumRarity(), 0, 0, 0);
                     }
                 };
 

@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Closure1;
 
+import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
@@ -38,7 +39,6 @@ import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardSet;
-import forge.deck.CustomLimited;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -143,7 +143,7 @@ public final class BoosterDraft implements IBoosterDraft {
         case Custom:
             final List<CustomLimited> myDrafts = this.loadCustomDrafts("res/draft/", ".draft");
 
-            if (myDrafts.size() < 1) {
+            if (myDrafts.isEmpty()) {
                 JOptionPane
                         .showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -162,7 +162,7 @@ public final class BoosterDraft implements IBoosterDraft {
     private void setupCustomDraft(final CustomLimited draft) {
         final ItemPoolView<CardPrinted> dPool = draft.getCardPool();
         if (dPool == null) {
-            throw new RuntimeException("BoosterGenerator : deck not found - " + draft.getDeckFile());
+            throw new RuntimeException("BoosterGenerator : deck not found");
         }
 
         final BoosterGenerator bpCustom = new BoosterGenerator(dPool);
@@ -176,8 +176,7 @@ public final class BoosterDraft implements IBoosterDraft {
                         return pack.getSingletonBoosterPack(draft.getNumCards());
                     }
                 }
-                return pack.getBoosterPack(draft.getNumCommons(), draft.getNumUncommons(), 0, draft.getNumRares(),
-                        draft.getNumMythics(), draft.getNumSpecials(), 0, 0, 0);
+                return pack.getBoosterPack(draft.getNumRarity(), 0, 0, 0);
             }
         };
 
@@ -210,7 +209,7 @@ public final class BoosterDraft implements IBoosterDraft {
         for (final String element : dList) {
             if (element.endsWith(fileExtension)) {
                 final List<String> dfData = FileUtil.readFile(lookupFolder + element);
-                customs.add(CustomLimited.parse(dfData));
+                customs.add(CustomLimited.parse(dfData, AllZone.getDecks().getCubes()));
             }
         }
         return customs;

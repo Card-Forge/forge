@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Divides file into sections and joins them back to stringlist to save.
@@ -79,23 +78,4 @@ public class SectionUtil {
         return result;
     }
 
-    /**
-     * Parses the kv pairs.
-     *
-     * @param lines the lines
-     * @return the map
-     */
-    public static Map<String, String> parseKvPairs(final List<String> lines, String separator ) {
-        if ( null == lines )
-            return null;
-        
-        final Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-
-        for (final String dd : lines) {
-            final String[] v = dd.split(separator, 2);
-            result.put(v[0], v.length > 1 ? v[1].trim() : "");
-        }
-
-        return result;
-    }
 }
