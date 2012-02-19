@@ -74,7 +74,8 @@ public enum FSkin {
         CLR_PHASE_INACTIVE_DISABLED (new int[] {70, 170}), /** */
         CLR_PHASE_ACTIVE_ENABLED    (new int[] {70, 190}), /** */
         CLR_PHASE_ACTIVE_DISABLED   (new int[] {70, 210}), /** */
-        CLR_THEME2                  (new int[] {70, 230});
+        CLR_THEME2                  (new int[] {70, 230}), /** */
+        CLR_OVERLAY                 (new int[] {70, 250});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */

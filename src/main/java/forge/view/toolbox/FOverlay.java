@@ -95,7 +95,7 @@ public class FOverlay extends JPanel {
     @Override
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        g.setColor(new Color(0, 0, 0, 200));
+        g.setColor(this.getBackground());
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
     }
 }
