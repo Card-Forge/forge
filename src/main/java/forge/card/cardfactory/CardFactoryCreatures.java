@@ -44,7 +44,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.AbilityMana;
+//import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -1636,7 +1636,7 @@ public class CardFactoryCreatures {
 
             card.addComesIntoPlayCommand(intoPlay);
         } // *************** END ************ END **************************
-
+/*
         // *************** START *********** START **************************
         else if (cardName.equals("Metalworker")) {
             final Cost abCost = new Cost("T", card.getName(), true);
@@ -1720,7 +1720,7 @@ public class CardFactoryCreatures {
             ability.setStackDescription(sbStack.toString());
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
-
+*/
         // *************** START *********** START **************************
         else if (cardName.equals("Phyrexian Scuta")) {
             final Cost abCost = new Cost("3 B PayLife<3>", cardName, false);
