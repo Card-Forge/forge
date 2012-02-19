@@ -413,31 +413,30 @@ public class ViewQuest extends JScrollPane {
     //========= TAB SHOW METHODS
     /** Display handler for duel tab click. */
     public void showDuelsTab() {
+        if (AllZone.getQuestData() == null) {
+            showQuestsTab();
+            return;
+        }
+
+        control.updateTabber(tabDuels);
+        hideAllPanels();
+        pnlTitle.setVisible(true);
+
+        setCurrentDeckStatus();
+        updateDuels();
+        updateStats();
+        lblTitle.setText("Duels: " + control.getRankString());
+
+        // Select first event.
+        if (control.getCurrentDeck() != null) {
+            pnlStart.setVisible(true);
+            selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
+            selectedOpponent.setSelected(true);
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                control.updateTabber(tabDuels);
-                hideAllPanels();
-                pnlTitle.setVisible(true);
-
-                if (AllZone.getQuestData() == null) {
-                    lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
-                    return;
-                }
-
-                setCurrentDeckStatus();
-                updateDuels();
-                updateStats();
-                lblTitle.setText("Duels: " + control.getRankString());
-
-                if (control.getCurrentDeck() != null) {
-                    pnlStart.setVisible(true);
-
-                    // Select first event.
-                    selectedOpponent = (SelectablePanel) pnlDuels.getComponent(0);
-                    selectedOpponent.setSelected(true);
-                }
-
                 pnlStats.setVisible(true);
                 pnlDuels.setVisible(true);
             }
@@ -446,14 +445,14 @@ public class ViewQuest extends JScrollPane {
 
     /** Display handler for duel tab click. */
     public void showChallengesTab() {
+        if (AllZone.getQuestData() == null) {
+            showQuestsTab();
+            return;
+        }
+
         control.updateTabber(tabChallenges);
         hideAllPanels();
         pnlTitle.setVisible(true);
-
-        if (AllZone.getQuestData() == null) {
-            lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
-            return;
-        }
 
         setCurrentDeckStatus();
         updateChallenges();
@@ -478,18 +477,16 @@ public class ViewQuest extends JScrollPane {
 
     /** Display handler for decks tab click. */
     public void showDecksTab() {
+        if (AllZone.getQuestData() == null) {
+            showQuestsTab();
+            return;
+        }
+
         control.updateTabber(tabDecks);
         this.hideAllPanels();
         pnlTitle.setVisible(true);
-
-        if (AllZone.getQuestData() == null) {
-            lblTitle.setText("Start a new Quest in the \"Quests\" tab.");
-            return;
-        }
-        else {
-            lblTitle.setText("Quest Deck Manager");
-            pnlDecks.setVisible(true);
-        }
+        lblTitle.setText("Quest Deck Manager");
+        pnlDecks.setVisible(true);
     }
 
     /** Display handler for quests tab click. */
