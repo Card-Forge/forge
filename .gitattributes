@@ -932,6 +932,7 @@ res/cardsfolder/b/boar_umbra.txt svneol=native#text/plain
 res/cardsfolder/b/boartusk_liege.txt svneol=native#text/plain
 res/cardsfolder/b/body_double.txt -text
 res/cardsfolder/b/body_of_jukai.txt svneol=native#text/plain
+res/cardsfolder/b/body_snatcher.txt -text svneol=unset#text/plain
 res/cardsfolder/b/bog_glider.txt svneol=native#text/plain
 res/cardsfolder/b/bog_gnarr.txt svneol=native#text/plain
 res/cardsfolder/b/bog_hoodlums.txt svneol=native#text/plain
