@@ -326,7 +326,7 @@ public class CostDiscard extends CostPartWithList {
                     sb.append(nNeeded - this.nDiscard);
                     sb.append(" remaining.");
                 }
-                Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                Singletons.getControl().getControlMatch().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

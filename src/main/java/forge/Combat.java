@@ -716,7 +716,7 @@ public class Combat {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
                         if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
-                            Singletons.getControl().getMatchControl().assignDamage(attacker, block, damageDealt);
+                            Singletons.getControl().getControlMatch().assignDamage(attacker, block, damageDealt);
                         } else {
                             block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
                         }
@@ -768,7 +768,7 @@ public class Combat {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
                         if (attacker.hasKeyword("Trample") || (block.size() > 1)) {
-                            Singletons.getControl().getMatchControl().assignDamage(attacker, block, damageDealt);
+                            Singletons.getControl().getControlMatch().assignDamage(attacker, block, damageDealt);
                         } else {
                             block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
                         }

@@ -125,7 +125,7 @@ public class ControlSealed {
                 view.getBarProgress().setVisible(false);
 
                 Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-                Singletons.getControl().getMatchControl().initMatch();
+                Singletons.getControl().getControlMatch().initMatch();
 
                 AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             }
@@ -204,7 +204,7 @@ public class ControlSealed {
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         AllZone.getDecks().getSealed().add(sealed);
 
-        Singletons.getControl().getHomeControl().getControlUtilities().showDeckEditor(GameType.Sealed, sealed);
+        Singletons.getControl().getControlHome().getControlUtilities().showDeckEditor(GameType.Sealed, sealed);
 
     }
 

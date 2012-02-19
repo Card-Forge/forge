@@ -75,7 +75,7 @@ public class ControlWinLose {
     public void actionOnQuit() {
         AllZone.getMatchState().reset();
         Singletons.getModel().savePrefs();
-        Singletons.getControl().getMatchControl().deinitMatch();
+        Singletons.getControl().getControlMatch().deinitMatch();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
         GuiUtils.closeOverlay();
     }

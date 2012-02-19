@@ -78,7 +78,7 @@ public class ControlHand {
                 }
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
-                    Singletons.getControl().getMatchControl().getMessageControl().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
+                    Singletons.getControl().getControlMatch().getMessageControl().getInputControl().selectCard(c, AllZone.getHumanPlayer().getZone(Zone.Hand));
                     Singletons.getView().getMatchView().getBtnOK().requestFocusInWindow();
                 }
             }
@@ -90,7 +90,7 @@ public class ControlHand {
             public void mouseMoved(final MouseEvent me) {
                 final Card c = view.getHandArea().getCardFromMouseOverPanel();
                 if (c != null) {
-                    Singletons.getControl().getMatchControl().setCard(c);
+                    Singletons.getControl().getControlMatch().setCard(c);
                 }
             }
         };
@@ -101,7 +101,7 @@ public class ControlHand {
                 final PlayerZone pZone = (PlayerZone) a;
                 final HandArea p = view.getHandArea();
                 final Rectangle rctLibraryLabel = Singletons.getControl()
-                        .getMatchControl().getFieldControls().get(1)
+                        .getControlMatch().getFieldControls().get(1)
                         .getView().getLblLibrary().getBounds();
                 final Card[] c = pZone.getCards();
 
@@ -132,7 +132,7 @@ public class ControlHand {
                 int fromZoneX = 0, fromZoneY = 0;
 
                 final Point zoneLocation = SwingUtilities.convertPoint(Singletons
-                        .getControl().getMatchControl().getFieldControls()
+                        .getControl().getControlMatch().getFieldControls()
                         .get(1).getView().getLblLibrary(),
                         Math.round(rctLibraryLabel.width / 2.0f), Math.round(rctLibraryLabel.height / 2.0f), layeredPane);
                 fromZoneX = zoneLocation.x;
@@ -193,8 +193,8 @@ public class ControlHand {
         c.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(final MouseEvent e) {
-                Singletons.getControl().getMatchControl().getDetailControl().showCard(cardobj);
-                Singletons.getControl().getMatchControl().getPictureControl().showCard(cardobj);
+                Singletons.getControl().getControlMatch().getDetailControl().showCard(cardobj);
+                Singletons.getControl().getControlMatch().getPictureControl().showCard(cardobj);
             }
         });
 
@@ -207,7 +207,7 @@ public class ControlHand {
                     return;
                 }
 
-                Singletons.getControl().getMatchControl().getMessageControl().getInputControl()
+                Singletons.getControl().getControlMatch().getMessageControl().getInputControl()
                         .selectCard(cardobj, AllZone.getHumanPlayer().getZone(Zone.Hand));
             }
         });

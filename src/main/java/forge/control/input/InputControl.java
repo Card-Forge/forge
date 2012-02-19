@@ -247,7 +247,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             final boolean skip = this.model.getGameState().getPhaseHandler().doSkipPhase();
             this.model.getGameState().getPhaseHandler().setSkipPhase(false);
             if ((this.model.getGameState().getStack().size() == 0)
-                    && !Singletons.getControl().getMatchControl().stopAtPhase(playerTurn, phase) && skip) {
+                    && !Singletons.getControl().getControlMatch().stopAtPhase(playerTurn, phase) && skip) {
                 this.model.getGameState().getPhaseHandler().passPriority();
                 return null;
             } else {

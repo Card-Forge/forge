@@ -245,7 +245,7 @@ public class HumanPlayer extends Player {
     protected final void clashMoveToTopOrBottom(final Card c) {
         String choice = "";
         final String[] choices = { "top", "bottom" };
-        Singletons.getControl().getMatchControl().setCard(c);
+        Singletons.getControl().getControlMatch().setCard(c);
         choice = GuiUtils.getChoice(c.getName() + " - Top or bottom of Library", choices);
 
         if (choice.equals("bottom")) {

@@ -357,7 +357,7 @@ public final class GuiUtils {
             @Override
             public void valueChanged(final ListSelectionEvent ev) {
                 if (list.getSelectedValue() instanceof Card) {
-                    Singletons.getControl().getMatchControl().setCard((Card) list.getSelectedValue());
+                    Singletons.getControl().getControlMatch().setCard((Card) list.getSelectedValue());
                 }
             }
         });

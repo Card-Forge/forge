@@ -271,7 +271,7 @@ public class CostPutCounter extends CostPartWithList {
                 this.typeList = sa.getActivatingPlayer().getCardsIn(Zone.Battlefield);
                 this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
                         sa.getSourceCard());
-                Singletons.getControl().getMatchControl().showMessage(msg.toString());
+                Singletons.getControl().getControlMatch().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

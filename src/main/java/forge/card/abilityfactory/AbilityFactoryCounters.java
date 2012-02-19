@@ -1385,7 +1385,7 @@ public class AbilityFactoryCounters {
                 @Override
                 public void showMessage() {
                     ButtonUtil.enableOnlyCancel();
-                    Singletons.getControl().getMatchControl().showMessage("Proliferate: Choose permanents and/or players");
+                    Singletons.getControl().getControlMatch().showMessage("Proliferate: Choose permanents and/or players");
                 }
 
                 @Override

@@ -274,7 +274,7 @@ public class CostSacrifice extends CostPartWithList {
                     msg.append("s");
                 }
 
-                Singletons.getControl().getMatchControl().showMessage(msg.toString());
+                Singletons.getControl().getControlMatch().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

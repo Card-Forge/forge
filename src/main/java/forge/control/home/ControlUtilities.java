@@ -172,7 +172,7 @@ public class ControlUtilities {
 
             @Override
             public void execute() {
-                Singletons.getControl().getHomeControl().getControlConstructed().updateDeckLists();
+                Singletons.getControl().getControlHome().getControlConstructed().updateDeckLists();
                 //view.getParentView().getControlSealed().updateDeckLists();
             }
         };

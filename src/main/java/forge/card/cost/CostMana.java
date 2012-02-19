@@ -276,7 +276,7 @@ public class CostMana extends CostPart {
                     ButtonUtil.enableOnlyCancel();
                 }
 
-                Singletons.getControl().getMatchControl().showMessage(
+                Singletons.getControl().getControlMatch().showMessage(
                         "Pay X Mana Cost for " + sa.getSourceCard().getName() + "\n" + this.xPaid + " Paid so far.");
             }
 
@@ -473,7 +473,7 @@ public class CostMana extends CostPart {
             public void showMessage() {
                 ButtonUtil.enableOnlyCancel();
                 final String displayMana = this.mana.toString().replace("X", "").trim();
-                Singletons.getControl().getMatchControl().showMessage("Pay Mana Cost: " + displayMana);
+                Singletons.getControl().getControlMatch().showMessage("Pay Mana Cost: " + displayMana);
 
                 final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
                 if (this.phyLifeToLose > 0) {
@@ -486,7 +486,7 @@ public class CostMana extends CostPart {
                     msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
                 }
 
-                Singletons.getControl().getMatchControl().showMessage(msg.toString());
+                Singletons.getControl().getControlMatch().showMessage(msg.toString());
                 if (this.mana.isPaid()) {
                     this.done();
                 }

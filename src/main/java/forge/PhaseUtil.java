@@ -381,7 +381,7 @@ public class PhaseUtil {
     public static void visuallyActivatePhase(final String s) {
         PhaseLabel lbl = null;
         final Player p = AllZone.getPhaseHandler().getPlayerTurn();
-        final ControlMatchUI t = Singletons.getControl().getMatchControl();
+        final ControlMatchUI t = Singletons.getControl().getControlMatch();
 
         int i; // Index of field; computer is 0, human is 1
         if (p.isComputer()) {

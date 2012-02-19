@@ -288,7 +288,7 @@ public class InputPayManaCost extends InputMana {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        Singletons.getControl().getMatchControl().showMessage(msg.toString());
+        Singletons.getControl().getControlMatch().showMessage(msg.toString());
         if (this.manaCost.isPaid() && !new ManaCost(this.originalManaCost).isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
             this.done();

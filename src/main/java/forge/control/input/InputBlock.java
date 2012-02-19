@@ -74,14 +74,14 @@ public class InputBlock extends Input {
             final StringBuilder sb = new StringBuilder();
             sb.append("To Block, click on your Opponents attacker first, then your blocker(s). ");
             sb.append("To cancel a block right-click on your blocker");
-            Singletons.getControl().getMatchControl().showMessage(sb.toString());
+            Singletons.getControl().getControlMatch().showMessage(sb.toString());
         } else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
             final StringBuilder sb = new StringBuilder();
             sb.append("Select a creature to block ").append(attackerName).append(" (");
             sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
             sb.append("To cancel a block right-click on your blocker");
-            Singletons.getControl().getMatchControl().showMessage(sb.toString());
+            Singletons.getControl().getControlMatch().showMessage(sb.toString());
         }
 
         CombatUtil.showCombat();
@@ -111,7 +111,7 @@ public class InputBlock extends Input {
                 this.allBlocking.add(card);
                 AllZone.getCombat().addBlocker(this.currentAttacker, card);
         } else {
-            Singletons.getControl().getMatchControl().getMessageControl().remind();
+            Singletons.getControl().getControlMatch().getMessageControl().remind();
         }
         this.showMessage();
     } // selectCard()

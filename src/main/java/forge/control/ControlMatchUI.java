@@ -344,12 +344,12 @@ public class ControlMatchUI implements CardContainer {
 
     @Override
     public void setCard(final Card c) {
-        Singletons.getControl().getMatchControl().getDetailControl().showCard(c);
-        Singletons.getControl().getMatchControl().getPictureControl().showCard(c);
+        Singletons.getControl().getControlMatch().getDetailControl().showCard(c);
+        Singletons.getControl().getControlMatch().getPictureControl().showCard(c);
     }
 
     @Override
     public Card getCard() {
-        return Singletons.getControl().getMatchControl().getDetailControl().getCurrentCard();
+        return Singletons.getControl().getControlMatch().getDetailControl().getCurrentCard();
     }
 }

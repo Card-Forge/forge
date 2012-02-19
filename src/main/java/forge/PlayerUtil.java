@@ -84,7 +84,7 @@ public final class PlayerUtil {
                 if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
                     this.stop();
                 }
-                Singletons.getControl().getMatchControl().showMessage(
+                Singletons.getControl().getControlMatch().showMessage(
                         "Select " + (nCards - this.n) + " cards to discard, unless you discard a " + uType + ".");
                 ButtonUtil.disableAll();
             }
@@ -144,7 +144,7 @@ public final class PlayerUtil {
                     this.stop();
                 }
 
-                Singletons.getControl().getMatchControl().showMessage("Select a card to discard");
+                Singletons.getControl().getControlMatch().showMessage("Select a card to discard");
                 ButtonUtil.disableAll();
             }
 
@@ -183,7 +183,7 @@ public final class PlayerUtil {
                     this.stop();
                 }
 
-                Singletons.getControl().getMatchControl().showMessage("Chains of Mephistopheles:\n" + "Select a card to discard");
+                Singletons.getControl().getControlMatch().showMessage("Chains of Mephistopheles:\n" + "Select a card to discard");
                 ButtonUtil.disableAll();
             }
 
@@ -281,7 +281,7 @@ public final class PlayerUtil {
                     return;
                 }
 
-                Singletons.getControl().getMatchControl().showMessage(message + " (" + (nCards - this.n) + " left)");
+                Singletons.getControl().getControlMatch().showMessage(message + " (" + (nCards - this.n) + " left)");
                 ButtonUtil.disableAll();
             }
 
@@ -324,7 +324,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getMatchControl().showMessage("Select a card to put on the " + topOrBottom + " of your library.");
+                Singletons.getControl().getControlMatch().showMessage("Select a card to put on the " + topOrBottom + " of your library.");
                 ButtonUtil.disableAll();
 
                 if ((this.n == num) || (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0)) {

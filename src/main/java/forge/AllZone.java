@@ -590,11 +590,11 @@ public final class AllZone {
     public static void newGameCleanup() {
         Singletons.getModel().getGameState().newGameCleanup();
 
-        Singletons.getControl().getMatchControl().showCombat("");
+        Singletons.getControl().getControlMatch().showCombat("");
         Singletons.getModel().loadPrefs();
         AllZone.getInputControl().clearInput();
         AllZone.getColorChanger().reset();
-        Singletons.getControl().getMatchControl().showStack();
+        Singletons.getControl().getControlMatch().showStack();
     }
 
     /**

@@ -57,7 +57,7 @@ public class InputAttack extends Input {
         sb.append("Declare Attackers: Select Creatures to Attack ");
         sb.append(o.toString());
 
-        Singletons.getControl().getMatchControl().showMessage(sb.toString());
+        Singletons.getControl().getControlMatch().showMessage(sb.toString());
 
         if (AllZone.getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
@@ -117,7 +117,7 @@ public class InputAttack extends Input {
             CombatUtil.showCombat();
         }
         else {
-            Singletons.getControl().getMatchControl().getMessageControl().remind();
+            Singletons.getControl().getControlMatch().getMessageControl().remind();
         }
     } // selectCard()
 

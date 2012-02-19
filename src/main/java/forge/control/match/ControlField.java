@@ -443,10 +443,10 @@ public class ControlField {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
-                    Singletons.getControl().getMatchControl().getMessageControl()
+                    Singletons.getControl().getControlMatch().getMessageControl()
                         .getInputControl().selectPlayer(AllZone.getComputerPlayer());
                 } else {
-                    Singletons.getControl().getMatchControl().getMessageControl()
+                    Singletons.getControl().getControlMatch().getMessageControl()
                         .getInputControl().selectPlayer(AllZone.getHumanPlayer());
                 }
             }
@@ -458,7 +458,7 @@ public class ControlField {
             public void mouseMoved(final MouseEvent me) {
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
                 if (c != null) {
-                    Singletons.getControl().getMatchControl().setCard(c);
+                    Singletons.getControl().getControlMatch().setCard(c);
                 }
             }
         };
@@ -473,7 +473,7 @@ public class ControlField {
                 // Roujin's bug fix version dated 2-12-2012
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
 
-                final Input input = Singletons.getControl().getMatchControl().getMessageControl().getInputControl().getInput();
+                final Input input = Singletons.getControl().getControlMatch().getMessageControl().getInputControl().getInput();
 
                 if (c != null && c.isInZone(Zone.Battlefield)) {
                     if (c.isTapped()
@@ -511,7 +511,7 @@ public class ControlField {
                             ((InputBlock) input).removeFromAllBlocking(c);
                         }
                     } else {
-                        Singletons.getControl().getMatchControl().getMessageControl()
+                        Singletons.getControl().getControlMatch().getMessageControl()
                             .getInputControl().selectCard(c,
                                     AllZone.getHumanPlayer().getZone(Zone.Battlefield));
                     }

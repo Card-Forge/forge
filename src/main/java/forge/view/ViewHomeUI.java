@@ -134,7 +134,7 @@ public class ViewHomeUI extends FPanel {
         btnDeckEditor = new FButton();
         btnDeckEditor.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent arg0) {
-                Singletons.getControl().getHomeControl().getControlUtilities().showDeckEditor(GameType.Constructed, null);
+                Singletons.getControl().getControlHome().getControlUtilities().showDeckEditor(GameType.Constructed, null);
             }
         });
         btnDeckEditor.setText("Deck Editor");
@@ -186,7 +186,7 @@ public class ViewHomeUI extends FPanel {
         pnlContent.revalidate();
         pnlContent.repaint();
 
-        Singletons.getControl().getHomeControl().getControlConstructed().updateDeckSelectionCheckboxes();
+        Singletons.getControl().getControlHome().getControlConstructed().updateDeckSelectionCheckboxes();
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.constructed.toString());

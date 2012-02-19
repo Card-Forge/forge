@@ -63,7 +63,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         sb.append("\n");
         sb.append("Priority: ").append(player);
 
-        Singletons.getControl().getMatchControl().showMessage(sb.toString());
+        Singletons.getControl().getControlMatch().showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */
@@ -85,7 +85,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
             AllZone.getPhaseHandler().setPriority(AllZone.getHumanPlayer());
         }
         else {
-            Singletons.getControl().getMatchControl().getMessageControl().remind();
+            Singletons.getControl().getControlMatch().getMessageControl().remind();
         }
     } // selectCard()
 }

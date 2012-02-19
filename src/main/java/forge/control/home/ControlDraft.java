@@ -148,7 +148,7 @@ public class ControlDraft {
                 view.getBarProgress().setVisible(false);
 
                 Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-                Singletons.getControl().getMatchControl().initMatch();
+                Singletons.getControl().getControlMatch().initMatch();
                 AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             }
         });

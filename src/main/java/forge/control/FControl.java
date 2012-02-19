@@ -72,7 +72,7 @@ public enum FControl {
             @Override
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                Singletons.getControl().getMatchControl().getDockControl().concede();
+                Singletons.getControl().getControlMatch().getDockControl().concede();
             }
         };
 
@@ -156,7 +156,7 @@ public enum FControl {
     /** Gets the match controller.
      * @return {@link forge.control.match.ControlMatchUI}
      */
-    public ControlMatchUI getMatchControl() {
+    public ControlMatchUI getControlMatch() {
         if (getState() != FControl.MATCH_SCREEN) {
             throw new IllegalArgumentException("FControl$getMatchControl\n"
                     + "may only be called while the match UI is showing.");
@@ -166,7 +166,7 @@ public enum FControl {
 
     /** Gets the home controller.
      * @return {@link forge.control.home.ControlHomeUI} */
-    public ControlHomeUI getHomeControl() {
+    public ControlHomeUI getControlHome() {
         if (getState() != FControl.HOME_SCREEN) {
             throw new IllegalArgumentException("FControl$getHomeControl\n"
                     + "may only be called while the home UI is showing.");

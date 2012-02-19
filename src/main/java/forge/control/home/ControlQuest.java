@@ -571,7 +571,7 @@ public class ControlQuest {
                 view.getBarProgress().setVisible(false);
 
                 Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-                Singletons.getControl().getMatchControl().initMatch();
+                Singletons.getControl().getControlMatch().initMatch();
 
                 AllZone.getMatchState().reset();
                 if (event.getEventType().equals("challenge")) {

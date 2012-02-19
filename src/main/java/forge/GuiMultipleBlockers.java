@@ -238,7 +238,7 @@ public class GuiMultipleBlockers extends JFrame {
             final CardContainer cardPanel = (CardContainer) o;
             final Card c = cardPanel.getCard();
 
-            Singletons.getControl().getMatchControl().setCard(c);
+            Singletons.getControl().getControlMatch().setCard(c);
         }
     }
 }

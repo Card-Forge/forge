@@ -318,7 +318,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         // UNTAP
         if (phase.equals(Constant.Phase.UNTAP)) {
-            Singletons.getControl().getMatchControl().showStack();
+            Singletons.getControl().getControlMatch().showStack();
             PhaseUtil.handleUntap();
         }
         // UPKEEP
@@ -411,10 +411,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             AllZone.getEndOfCombat().executeUntil();
             AllZone.getEndOfCombat().executeAt();
             CombatUtil.showCombat();
-            Singletons.getControl().getMatchControl().showStack();
+            Singletons.getControl().getControlMatch().showStack();
         } else if (phase.equals(Constant.Phase.MAIN2)) {
             CombatUtil.showCombat();
-            Singletons.getControl().getMatchControl().showStack();
+            Singletons.getControl().getControlMatch().showStack();
         }
         // END_OF_TURN
         else if (phase.equals(Constant.Phase.END_OF_TURN)) {
@@ -525,7 +525,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
 
         if (this.getPhase().equals(Constant.Phase.COMBAT_END)) {
-            Singletons.getControl().getMatchControl().showStack();
+            Singletons.getControl().getControlMatch().showStack();
             AllZone.getCombat().reset();
             this.resetAttackedThisCombat(this.getPlayerTurn());
             this.bCombat = false;

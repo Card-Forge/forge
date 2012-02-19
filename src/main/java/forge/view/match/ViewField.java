@@ -307,7 +307,7 @@ public class ViewField extends FPanel {
      */
     public void updateDetails(final Player p0) {
         // "Players" panel update
-        Singletons.getControl().getMatchControl()
+        Singletons.getControl().getControlMatch()
             .getTabberControl().getView().updatePlayerLabels(p0);
 
         // Poison/life

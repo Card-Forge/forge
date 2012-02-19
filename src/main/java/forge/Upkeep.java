@@ -488,7 +488,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 public void showMessage() {
                                     Singletons
                                             .getControl()
-                                            .getMatchControl()
+                                            .getControlMatch()
                                             .showMessage(
                                                     abyss.getName() + " - Select one nonartifact creature to destroy");
                                     ButtonUtil.disableAll();
@@ -559,7 +559,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             public void showMessage() {
                                 Singletons
                                         .getControl()
-                                        .getMatchControl()
+                                        .getControlMatch()
                                         .showMessage(
                                                 "Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
                                 ButtonUtil.enableOnlyCancel();
@@ -2314,7 +2314,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void showMessage() {
-                                Singletons.getControl().getMatchControl()
+                                Singletons.getControl().getControlMatch()
                                         .showMessage(c.getName() + " - Select target creature.");
                                 ButtonUtil.enableOnlyCancel();
                             }
@@ -2390,7 +2390,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     }
                                     Singletons
                                             .getControl()
-                                            .getMatchControl()
+                                            .getControlMatch()
                                             .showMessage(
                                                     source.getName()
                                                             + " - Select "
@@ -2442,7 +2442,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 @Override
                 public void showMessage() {
-                    Singletons.getControl().getMatchControl().showMessage(crd + " - Discard a card from your hand");
+                    Singletons.getControl().getControlMatch().showMessage(crd + " - Discard a card from your hand");
                     ButtonUtil.enableOnlyCancel();
                 }
 

@@ -257,7 +257,7 @@ public class CostReveal extends CostPartWithList {
                     sb.append(nNeeded - this.nReveal);
                     sb.append(" remaining.");
                 }
-                Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                Singletons.getControl().getControlMatch().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 

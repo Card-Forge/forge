@@ -808,7 +808,7 @@ public class CardFactoryUtil {
                 if (spell.getTargetCard() != null) {
                     this.stop();
                 }
-                Singletons.getControl().getMatchControl().showMessage("Select target Spell: ");
+                Singletons.getControl().getControlMatch().showMessage("Select target Spell: ");
                 final Card choice = GuiUtils.getChoiceOptional("Choose a Spell", choices.toArray());
                 if (choice != null) {
                     spell.setTargetCard(choice);
@@ -856,7 +856,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getMatchControl().showMessage(message);
+                Singletons.getControl().getControlMatch().showMessage(message);
                 ButtonUtil.disableAll();
             }
 
@@ -1751,7 +1751,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getMatchControl().showMessage(message);
+                Singletons.getControl().getControlMatch().showMessage(message);
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -1763,7 +1763,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (targeted && !card.canBeTargetedBy(spell)) {
-                    Singletons.getControl().getMatchControl().showMessage("Cannot target this card (Shroud? Protection?).");
+                    Singletons.getControl().getControlMatch().showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if (choices.contains(card)) {
                     spell.setTargetCard(card);
                     if (spell.getManaCost().equals("0") || free) {
@@ -1808,7 +1808,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getMatchControl().showMessage(message);
+                Singletons.getControl().getControlMatch().showMessage(message);
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -1952,7 +1952,7 @@ public class CardFactoryUtil {
             public void showMessage() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Select target wolf to damage for ").append(spell.getSourceCard());
-                Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                Singletons.getControl().getControlMatch().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -1994,7 +1994,7 @@ public class CardFactoryUtil {
 
             @Override
             public void showMessage() {
-                Singletons.getControl().getMatchControl().showMessage("Select target artifact creature");
+                Singletons.getControl().getControlMatch().showMessage("Select target artifact creature");
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -3509,7 +3509,7 @@ public class CardFactoryUtil {
             public void showMessage() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Select a ").append(type).append(" to untap");
-                Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                Singletons.getControl().getControlMatch().showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
@@ -4729,7 +4729,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void showMessage() {
-                    Singletons.getControl().getMatchControl().showMessage("Choose target creature to haunt.");
+                    Singletons.getControl().getControlMatch().showMessage("Choose target creature to haunt.");
                     ButtonUtil.disableAll();
                 }
 
@@ -4743,7 +4743,7 @@ public class CardFactoryUtil {
                         AllZone.getStack().add(haunterDiesWork);
                         this.stop();
                     } else {
-                        Singletons.getControl().getMatchControl().showMessage("Cannot target this card (Shroud? Protection?).");
+                        Singletons.getControl().getControlMatch().showMessage("Cannot target this card (Shroud? Protection?).");
                     }
                 }
             };

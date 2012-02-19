@@ -189,7 +189,7 @@ public class InputPayManaCostAbility extends InputMana {
         if (this.showOnlyOKButton) {
             ButtonUtil.enableOnlyOK();
         }
-        Singletons.getControl().getMatchControl().showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
+        Singletons.getControl().getControlMatch().showMessage(this.message + "Pay Mana Cost: \r\n" + this.manaCost.toString());
     }
 
     /* (non-Javadoc)

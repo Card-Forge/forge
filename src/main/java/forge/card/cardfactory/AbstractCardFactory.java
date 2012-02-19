@@ -852,7 +852,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                 @Override
                 public void showMessage() {
-                    Singletons.getControl().getMatchControl().showMessage("Discard a land card (or select Mox Diamond to sacrifice it)");
+                    Singletons.getControl().getControlMatch().showMessage("Discard a land card (or select Mox Diamond to sacrifice it)");
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -1224,7 +1224,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(card.getName()).append(" - Exile cards from hand.  Currently, ");
                                 sb.append(this.exiled.size()).append(" selected.  (Press OK when done.)");
-                                Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                                Singletons.getControl().getControlMatch().showMessage(sb.toString());
                                 ButtonUtil.enableOnlyOK();
                             }
 
@@ -1259,7 +1259,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
 
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append(card.getName()).append(" - Returning cards to top of library.");
-                                Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                                Singletons.getControl().getControlMatch().showMessage(sb.toString());
 
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
@@ -1586,7 +1586,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 public void showMessage() {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cardName).append(" - Select an artifact on the battlefield");
-                    Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                    Singletons.getControl().getControlMatch().showMessage(sb.toString());
                     ButtonUtil.enableOnlyCancel();
                 }
 
@@ -1638,7 +1638,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                     if (AllZone.getHumanPlayer().getZone(Constant.Zone.Hand).size() == 0) {
                                         this.stop();
                                     }
-                                    Singletons.getControl().getMatchControl().showMessage(prompt);
+                                    Singletons.getControl().getControlMatch().showMessage(prompt);
                                     ButtonUtil.disableAll();
                                 }
 

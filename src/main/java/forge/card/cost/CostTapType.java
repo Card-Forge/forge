@@ -243,7 +243,7 @@ public class CostTapType extends CostPartWithList {
                 }
 
                 final int left = nCards - this.nTapped;
-                Singletons.getControl().getMatchControl()
+                Singletons.getControl().getControlMatch()
                         .showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
                 ButtonUtil.enableOnlyCancel();
             }

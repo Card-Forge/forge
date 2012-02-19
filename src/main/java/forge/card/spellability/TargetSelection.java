@@ -330,7 +330,7 @@ public class TargetSelection {
                 sb.append("\n");
                 sb.append(tgt.getVTSelection());
 
-                Singletons.getControl().getMatchControl().showMessage(sb.toString());
+                Singletons.getControl().getControlMatch().showMessage(sb.toString());
 
                 // If reached Minimum targets, enable OK button
                 if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa)) {
@@ -362,7 +362,7 @@ public class TargetSelection {
                 // leave this in temporarily, there some seriously wrong things
                 // going on here
                 if (targeted && !card.canBeTargetedBy(sa)) {
-                    Singletons.getControl().getMatchControl().showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
+                    Singletons.getControl().getControlMatch().showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } else if (choices.contains(card)) {
                     tgt.addTarget(card);
                     this.done();

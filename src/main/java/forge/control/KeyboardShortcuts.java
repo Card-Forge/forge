@@ -49,7 +49,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getMatchControl().getTabberControl().showPnlStack();
+                Singletons.getControl().getControlMatch().getTabberControl().showPnlStack();
             }
         };
 
@@ -58,7 +58,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getMatchControl().getTabberControl().showPnlCombat();
+                Singletons.getControl().getControlMatch().getTabberControl().showPnlCombat();
             }
         };
 
@@ -67,7 +67,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getMatchControl().getTabberControl().showPnlGameLog();
+                Singletons.getControl().getControlMatch().getTabberControl().showPnlGameLog();
             }
         };
 
@@ -76,7 +76,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getMatchControl().getTabberControl().showPnlPlayers();
+                Singletons.getControl().getControlMatch().getTabberControl().showPnlPlayers();
             }
         };
 
@@ -85,7 +85,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getMatchControl().getTabberControl().showPnlDev();
+                Singletons.getControl().getControlMatch().getTabberControl().showPnlDev();
             }
         };
 
@@ -94,7 +94,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getState() != 1) { return; }
-                Singletons.getControl().getMatchControl().getDockControl().concede();
+                Singletons.getControl().getControlMatch().getDockControl().concede();
             }
         };
 

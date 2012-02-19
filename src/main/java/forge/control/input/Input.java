@@ -44,7 +44,7 @@ public abstract class Input implements java.io.Serializable {
      * </p>
      */
     public void showMessage() {
-        Singletons.getControl().getMatchControl().showMessage("Blank Input");
+        Singletons.getControl().getControlMatch().showMessage("Blank Input");
     }
 
     /**

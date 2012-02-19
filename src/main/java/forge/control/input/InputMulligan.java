@@ -58,7 +58,7 @@ public class InputMulligan extends Input {
         ButtonUtil.enableAll();
         Singletons.getView().getMatchView().getBtnOK().setText("No");
         Singletons.getView().getMatchView().getBtnCancel().setText("Yes");
-        Singletons.getControl().getMatchControl().showMessage("Do you want to Mulligan?");
+        Singletons.getControl().getControlMatch().showMessage("Do you want to Mulligan?");
     }
 
     /** {@inheritDoc} */
@@ -223,7 +223,7 @@ public class InputMulligan extends Input {
                 c0.getController().drawCards(hand.size());
             }
         } else {
-            Singletons.getControl().getMatchControl().getMessageControl().remind();
+            Singletons.getControl().getControlMatch().getMessageControl().remind();
         }
     }
 }

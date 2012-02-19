@@ -1429,7 +1429,7 @@ public class GameAction {
         forge.card.trigger.Trigger.resetIDs();
         AllZone.getTriggerHandler().clearTriggerSettings();
         AllZone.getTriggerHandler().clearDelayedTrigger();
-        Singletons.getControl().getMatchControl().getMessageControl().updateGameCount();
+        Singletons.getControl().getControlMatch().getMessageControl().updateGameCount();
 
         // friendliness
         final CardFactoryInterface c = AllZone.getCardFactory();
@@ -1637,7 +1637,7 @@ public class GameAction {
             AllZone.getComputerPlayer().drawCard();
         }
 
-        Singletons.getControl().getMatchControl().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
+        Singletons.getControl().getControlMatch().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
 
         AllZone.getInputControl().setInput(new InputMulligan());
         PhaseHandler.setGameBegins(1);

@@ -273,7 +273,7 @@ public class ViewTabber extends JPanel {
             tar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    Singletons.getControl().getMatchControl().setCard(spell.getSpellAbility().getSourceCard());
+                    Singletons.getControl().getControlMatch().setCard(spell.getSpellAbility().getSourceCard());
                 }
             });
 

@@ -409,7 +409,7 @@ public class CostExile extends CostPartWithList {
                 this.typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
                 this.typeList = this.typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(),
                         sa.getSourceCard());
-                Singletons.getControl().getMatchControl().showMessage(msg.toString());
+                Singletons.getControl().getControlMatch().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
 
