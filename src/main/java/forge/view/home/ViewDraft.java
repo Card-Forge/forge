@@ -20,7 +20,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.control.home.ControlDraft;
 import forge.game.GameType;
-import forge.view.ViewHomeUI;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
@@ -37,7 +36,6 @@ import forge.view.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class ViewDraft extends JPanel {
     private final ControlDraft control;
-    private final ViewHomeUI parentView;
     private final JList lstAI;
     private final FProgressBar barProgress;
     private final DeckLister lstHumanDecks;
@@ -104,13 +102,9 @@ public class ViewDraft extends JPanel {
             + "\r\n\r\n"
             + "(Credit: Wikipedia <http://en.wikipedia.org/wiki/Magic:_The_Gathering_formats#Booster_Draft>)";
 
-    /**
-     * Assembles swing components for "Draft" mode menu.
-     * @param v0 (ViewHomeUI, parent view)
-     */
-    public ViewDraft(ViewHomeUI v0) {
+    /** Assembles swing components for "Draft" mode menu. */
+    public ViewDraft() {
         super();
-        this.parentView = v0;
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
 
@@ -181,7 +175,7 @@ public class ViewDraft extends JPanel {
         lblDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.add(lblDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
 
-        btnStart = new StartButton(parentView);
+        btnStart = new StartButton();
         this.add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1, wrap");
 
         barProgress = new FProgressBar();
@@ -214,11 +208,6 @@ public class ViewDraft extends JPanel {
         Singletons.getView().getOverlay().setLayout(new MigLayout("insets 0"));
         Singletons.getView().getOverlay().add(pnlContainer, "w 50%, gap 25% 0 5% 5%, wrap");
         Singletons.getView().getOverlay().showOverlay();
-    }
-
-    /** @return ViewHomeUI */
-    public ViewHomeUI getParentView() {
-        return parentView;
     }
 
     /** @return JList */

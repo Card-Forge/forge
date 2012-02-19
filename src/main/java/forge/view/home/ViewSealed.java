@@ -8,7 +8,6 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.control.home.ControlSealed;
 import forge.game.GameType;
-import forge.view.ViewHomeUI;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FProgressBar;
@@ -21,23 +20,17 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewSealed extends JPanel {
-    private final ViewHomeUI parentView;
     private final ControlSealed control;
     private DeckLister lstHumanDecks;
     private final JButton btnStart;
     private final FLabel btnBuild;
     private final FProgressBar barProgress;
 
-    /**
-     * Assembles swing components for "Sealed" mode menu.
-     * 
-     * @param v0 {@link forge.view.ViewHomeUI} parent view
-     */
-    public ViewSealed(ViewHomeUI v0) {
+    /** Assembles swing components for "Sealed" mode menu. */
+    public ViewSealed() {
         super();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
-        parentView = v0;
         control = new ControlSealed(this);
 
         // Title
@@ -53,7 +46,7 @@ public class ViewSealed extends JPanel {
         btnBuild = new FLabel.Builder().opaque(true).hoverable(true).text("Build A New Deck").build();
 
         // Start button
-        btnStart = new StartButton(parentView);
+        btnStart = new StartButton();
         barProgress = new FProgressBar();
         barProgress.setVisible(false);
 
@@ -66,11 +59,6 @@ public class ViewSealed extends JPanel {
 
         control.updateDeckLists();
         control.addListeners();
-    }
-
-    /** @return {@link forge.view.ViewHomeUI} */
-    public ViewHomeUI getParentView() {
-        return parentView;
     }
 
     /** @return {@link javax.swing.JList} */

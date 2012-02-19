@@ -16,7 +16,6 @@ import javax.swing.text.StyledDocument;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.control.home.ControlUtilities;
-import forge.view.ViewHomeUI;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
@@ -28,7 +27,6 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class ViewUtilities extends JPanel {
-    private final ViewHomeUI parentView;
     private final ControlUtilities control;
     private final JTextPane tpnLicensing;
     private final JLabel lblLicensing;
@@ -48,18 +46,11 @@ public class ViewUtilities extends JPanel {
             + "You should have received a copy of the GNU General Public License "
             + "along with this program.  If not, see <http://www.gnu.org/licenses/>.";
 
-    /**
-     * 
-     * Assembles swing components for "Utilities" mode menu.
-     * 
-     * @param v0
-     *            &emsp; ViewHomeUI
-     */
-    public ViewUtilities(ViewHomeUI v0) {
+    /** Assembles swing components for "Utilities" mode menu. */
+    public ViewUtilities() {
         super();
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
-        parentView = v0;
         final String constraintsLBL = "w 90%!, h 20px!, gap 5% 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
 
@@ -221,10 +212,5 @@ public class ViewUtilities extends JPanel {
     /** @return ControlUtilities */
     public ControlUtilities getControl() {
         return ViewUtilities.this.control;
-    }
-
-    /** @return ViewHomeUI */
-    public ViewHomeUI getParentView() {
-        return parentView;
     }
 } // end class ViewUtilities

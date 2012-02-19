@@ -10,7 +10,6 @@ import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 import forge.control.home.ControlConstructed;
-import forge.view.ViewHomeUI;
 import forge.view.toolbox.FCheckBox;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FProgressBar;
@@ -19,8 +18,7 @@ import forge.view.toolbox.FSkin;
 import forge.view.toolbox.SubTab;
 
 /** 
- * TODO: Write javadoc for this type.
- *
+ * Assembles swing components for "Draft" mode menu.
  */
 @SuppressWarnings("serial")
 public class ViewConstructed extends JPanel {
@@ -32,12 +30,8 @@ public class ViewConstructed extends JPanel {
     private final FProgressBar barProgress;
     private  ControlConstructed control;
 
-    /**
-     * 
-     * TODO: Write javadoc for Constructor.
-     * @param v0 &emsp; {@link forge.view.ViewHomeUI}
-     */
-    public ViewConstructed(ViewHomeUI v0) {
+    /** Assembles swing components for "Constructed" mode menu. */
+    public ViewConstructed() {
         // Instantiation
         pnlTabber = new JPanel();
         pnlStart = new JPanel();
@@ -55,7 +49,7 @@ public class ViewConstructed extends JPanel {
         cbSingletons = new FCheckBox("Singleton Mode");
         cbArtifacts = new FCheckBox("Remove Artifacts");
         cbRemoveSmall = new FCheckBox("Remove Small Creatures");
-        btnStart = new StartButton(v0);
+        btnStart = new StartButton();
         barProgress = new FProgressBar();
 
         // Population

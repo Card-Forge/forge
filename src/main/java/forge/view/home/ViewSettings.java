@@ -37,7 +37,6 @@ import forge.control.home.ControlSettings;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
-import forge.view.ViewHomeUI;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FList;
 import forge.view.toolbox.FScrollPane;
@@ -53,7 +52,6 @@ import forge.view.toolbox.WrapLayout;
 public class ViewSettings extends JPanel {
     private final ControlSettings control;
     private final FLabel btnReset, lblTitleSkin;
-    private final ViewHomeUI parentView;
 
     private final JList lstChooseSkin;
 
@@ -67,16 +65,12 @@ public class ViewSettings extends JPanel {
 
     private AvatarLabel avatarHuman, avatarAI;
     private List<AvatarLabel> lstAvatars;
-    /**
-     * 
-     * Assembles swing components for "Settings" mode menu.
-     * @param view0 &emsp; HomeTopLevel
-     */
-    public ViewSettings(final ViewHomeUI view0) {
+
+    /** Assembles swing components for "Settings" mode menu. */
+    public ViewSettings() {
         // Display
         super();
         this.setOpaque(false);
-        this.parentView = view0;
 
         // Final component inits: JPanels
         pnlTabber = new JPanel();
@@ -583,11 +577,6 @@ public class ViewSettings extends JPanel {
     /** @return ControlSettings */
     public ControlSettings getControl() {
         return ViewSettings.this.control;
-    }
-
-    /** @return {@link forge.view.home.HomeTopLevel} */
-    public ViewHomeUI getParentView() {
-        return parentView;
     }
 
     /** @return {@link forge.view.toolbox.FLabel} */

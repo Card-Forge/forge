@@ -2,7 +2,6 @@ package forge.view.home;
 
 import javax.swing.JButton;
 
-import forge.view.ViewHomeUI;
 import forge.view.toolbox.FSkin;
 
 /** 
@@ -11,10 +10,8 @@ import forge.view.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class StartButton extends JButton {
-    /**
-     * @param v0 &emsp; ViewHomeUI
-     */
-    public StartButton(ViewHomeUI v0) {
+    /** */
+    public StartButton() {
         super();
         setRolloverEnabled(true);
         setRolloverIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_OVER));

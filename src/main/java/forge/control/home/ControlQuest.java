@@ -322,7 +322,7 @@ public class ControlQuest {
         qPrefs.setPreference(QPref.CURRENT_QUEST, questName + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 
-        view.getParentView().resetQuest();
+        Singletons.getView().getViewHome().resetQuest();
     }   // New Quest
 
     private void changeQuest() {

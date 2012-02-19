@@ -74,12 +74,12 @@ public class ViewHomeUI extends FPanel {
     public ViewHomeUI() {
         super();
 
-        constructed = new ViewConstructed(this);
-        sealed = new ViewSealed(this);
-        draft = new ViewDraft(this);
-        quest = new ViewQuest(this);
-        settings = new ViewSettings(this);
-        utilities = new ViewUtilities(this);
+        constructed = new ViewConstructed();
+        sealed = new ViewSealed();
+        draft = new ViewDraft();
+        quest = new ViewQuest();
+        settings = new ViewSettings();
+        utilities = new ViewUtilities();
 
         this.setCornerDiameter(0);
         this.setBorderToggle(false);
@@ -294,33 +294,38 @@ public class ViewHomeUI extends FPanel {
 
     /** @return {@link forge.view.home.ViewConstructed} */
     public ViewConstructed getViewConstructed() {
-        return constructed;
+        return this.constructed;
     }
 
     /** @return {@link forge.view.home.ViewDraft} */
     public ViewDraft getViewDraft() {
-        return draft;
+        return this.draft;
     }
 
     /** @return {@link forge.view.home.ViewSealed} */
     public ViewSealed getViewSealed() {
-        return sealed;
+        return this.sealed;
+    }
+
+    /** @return {@link forge.view.home.ViewSettings} */
+    public ViewSettings getViewSettings() {
+        return this.settings;
     }
 
     /** @return {@link forge.view.home.ViewUtilities} */
     public ViewUtilities getViewUtilities() {
-        return utilities;
+        return this.utilities;
     }
 
     /** */
     public void resetQuest() {
-        quest = new ViewQuest(this);
+        quest = new ViewQuest();
         showQuestMenu();
     }
 
     /** */
     public void resetSettings() {
-        settings = new ViewSettings(this);
+        settings = new ViewSettings();
         showSettingsMenu();
     }
 

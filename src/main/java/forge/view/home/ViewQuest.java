@@ -19,6 +19,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.control.home.ControlQuest;
 import forge.game.GameType;
 import forge.properties.ForgeProps;
@@ -26,7 +27,6 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestDuel;
 import forge.quest.data.QuestEvent;
-import forge.view.ViewHomeUI;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FCheckBox;
 import forge.view.toolbox.FLabel;
@@ -44,7 +44,6 @@ import forge.view.toolbox.SubTab;
  */
 @SuppressWarnings("serial")
 public class ViewQuest extends JScrollPane {
-    private final ViewHomeUI parentView;
     private final ControlQuest control;
     private final String eventPanelConstraints;
     private final Color clrBorders;
@@ -67,12 +66,8 @@ public class ViewQuest extends JScrollPane {
     private QuestFileLister lstQuests;
     private final FProgressBar barProgress;
 
-    /**
-     * Populates Swing components of Quest mode in home screen.
-     *
-     * @param v0 &emsp; {@link forge.view.ViewHomeUI} parent view
-     */
-    public ViewQuest(final ViewHomeUI v0) {
+    /** Assembles swing components for "Quest" mode menu. */
+    public ViewQuest() {
         // Display
         super(VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.setBorder(null);
@@ -81,7 +76,6 @@ public class ViewQuest extends JScrollPane {
         this.getVerticalScrollBar().setUnitIncrement(16);
 
         // Non-final inits
-        this.parentView = v0;
         this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_THEME2);
         this.eventPanelConstraints = "w 100%!, h 86px!, gap 0 0 5px 5px";
 
@@ -126,7 +120,7 @@ public class ViewQuest extends JScrollPane {
         btnSpellShop = new FLabel.Builder().opaque(true).hoverable(true).text("Spell Shop")
                 .fontScaleAuto(false).tooltip("Travel to the Spell Shop").build();
         btnSpellShop.setFont(FSkin.getFont(14));
-        btnStart = new StartButton(parentView);
+        btnStart = new StartButton();
         btnEmbark = new FLabel.Builder().opaque(true).hoverable(true).text("Embark!").build();
         btnNewDeck = new FLabel.Builder().opaque(true).hoverable(true).text("Build a New Deck").build();
         btnResetPrefs = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Defaults").build();
@@ -407,7 +401,7 @@ public class ViewQuest extends JScrollPane {
         pnlPrefs.removeAll();
         populatePrefs();
         pnlPrefs.revalidate();
-        this.getParentView().getBtnQuest().grabFocus();
+        Singletons.getView().getViewHome().getBtnQuest().grabFocus();
     }
 
     //========= TAB SHOW METHODS
@@ -626,11 +620,6 @@ public class ViewQuest extends JScrollPane {
     /** @return {@link forge.view.home.ViewQuest.SelectablePanel} */
     public SelectablePanel getSelectedOpponent() {
         return selectedOpponent;
-    }
-
-    /** @return {@link forge.view.ViewHomeUI} */
-    public ViewHomeUI getParentView() {
-        return parentView;
     }
 
     /** @return {@link forge.control.home.ControlQuest} */

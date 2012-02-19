@@ -183,7 +183,7 @@ public class ControlSettings {
             @Override
             public void execute() {
                 Singletons.getModel().getPreferences().reset();
-                view.getParentView().resetSettings();
+                Singletons.getView().getViewHome().resetSettings();
             }
         });
     }
