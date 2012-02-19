@@ -39,7 +39,10 @@ import forge.control.KeyboardShortcuts.Shortcut;
  * between various display states in that JFrame. Controllers are instantiated
  * separately by each state's top level view class.
  */
-public final class FControl {
+public enum FControl {
+    /** */
+    SINGLETON_INSTANCE;
+
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
     private int state;
@@ -63,7 +66,7 @@ public final class FControl {
      * switches between various display states in that JFrame. Controllers are
      * instantiated separately by each state's top level view class.
      */
-    public FControl() {
+    private FControl() {
         // "Close" button override during match
         this.waConcede = new WindowAdapter() {
             @Override

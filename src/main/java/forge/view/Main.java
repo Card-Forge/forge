@@ -46,7 +46,7 @@ public final class Main {
         try {
             final FModel model = new FModel();
             final FView view = new FView();
-            final FControl control = new FControl();
+            final FControl control = FControl.SINGLETON_INSTANCE;
 
             Singletons.setModel(model);
             Singletons.setView(view);
