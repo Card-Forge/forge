@@ -171,6 +171,7 @@ public enum FControl {
             throw new IllegalArgumentException("FControl$getHomeControl\n"
                     + "may only be called while the home UI is showing.");
         }
+
         return Singletons.getView().getHomeView().getControl();
     }
 

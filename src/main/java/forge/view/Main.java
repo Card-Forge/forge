@@ -17,11 +17,15 @@
  */
 package forge.view;
 
+import javax.swing.SwingUtilities;
+
 import forge.Singletons;
 import forge.control.FControl;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * Main class for Forge's swing application view.
@@ -60,6 +64,43 @@ public final class Main {
 
             // Start control on FView.
             control.initialize();
+
+            // Open previous menu on first run, or constructed.
+            // Focus is reset when the frame becomes visible,
+            // so the call to show the menu must happen here.
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    final ForgePreferences.HomeMenus lastMenu =
+                            ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
+
+                    switch(lastMenu) {
+                        case draft:
+                            Singletons.getView().getHomeView().getBtnDraft().grabFocus();
+                            Singletons.getView().getHomeView().showDraftMenu();
+                            break;
+                        case sealed:
+                            Singletons.getView().getHomeView().getBtnSealed().grabFocus();
+                            Singletons.getView().getHomeView().showSealedMenu();
+                            break;
+                        case quest:
+                            Singletons.getView().getHomeView().getBtnQuest().grabFocus();
+                            Singletons.getView().getHomeView().showQuestMenu();
+                            break;
+                        case settings:
+                            Singletons.getView().getHomeView().getBtnSettings().grabFocus();
+                            Singletons.getView().getHomeView().showSettingsMenu();
+                            break;
+                        case utilities:
+                            Singletons.getView().getHomeView().getBtnUtilities().grabFocus();
+                            Singletons.getView().getHomeView().showUtilitiesMenu();
+                            break;
+                        default:
+                            Singletons.getView().getHomeView().getBtnConstructed().grabFocus();
+                            Singletons.getView().getHomeView().showConstructedMenu();
+                    }
+                }
+            });
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }

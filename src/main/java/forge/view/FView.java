@@ -27,8 +27,6 @@ import javax.swing.SwingUtilities;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.view.toolbox.CardFaceSymbols;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FSkin;
@@ -111,22 +109,6 @@ public final class FView extends JFrame {
                 FView.this.splash = null;
 
                 FView.this.setVisible(true);
-
-                // Open previous menu on first run, or constructed.
-                // Focus is reset when the frame becomes visible,
-                // so the call to show the menu must happen here.
-                final ForgePreferences.HomeMenus lastMenu =
-                        ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
-
-                switch(lastMenu) {
-                    case constructed: FView.this.getHomeView().getBtnConstructed().grabFocus(); break;
-                    case draft: FView.this.getHomeView().getBtnDraft().grabFocus(); break;
-                    case sealed: FView.this.getHomeView().getBtnSealed().grabFocus(); break;
-                    case quest: FView.this.getHomeView().getBtnQuest().grabFocus(); break;
-                    case settings: FView.this.getHomeView().getBtnSettings().grabFocus(); break;
-                    case utilities: FView.this.getHomeView().getBtnUtilities().grabFocus(); break;
-                    default:
-                }
             }
         });
     } // End FView()
