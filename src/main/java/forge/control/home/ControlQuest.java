@@ -398,13 +398,12 @@ public class ControlQuest {
     /** Resets decks, then retrieves and sets current deck. */
     public void refreshDecks() {
         // Retrieve and set all decks
-        view.getLstDecks().setDecks(qData != null ? qData.getMyDecks() : new ArrayList<Deck>() );
+        view.getLstDecks().setDecks(qData != null ? qData.getMyDecks() : new ArrayList<Deck>());
 
         // Look through list for preferred deck from prefs
         currentDeck = null;
-        
-        if( qData != null) 
-        {
+
+        if (qData != null) {
             final String cd = qPrefs.getPreference(QPref.CURRENT_DECK);
             for (Deck d : qData.getMyDecks()) {
                 if (d.getName().equals(cd)) {

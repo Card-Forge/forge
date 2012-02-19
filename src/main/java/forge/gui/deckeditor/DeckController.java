@@ -14,14 +14,14 @@ import forge.util.IFolderMap;
  *
  */
 public class DeckController<T extends DeckBase> implements IDeckController<T> {
-    
+
     private T model;
     private boolean saved;
     private boolean modelInStore;
     private final IFolderMap<T> folder;
     private final DeckEditorBase<?, T> view;
     private final Lambda0<T> newModelCreator;
-    
+
     public DeckController(IFolderMap<T> folder0, DeckEditorBase<?, T> view0, Lambda0<T> newModelCreator0)
     {
         folder = folder0;
@@ -31,7 +31,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
         modelInStore = false;
         newModelCreator = newModelCreator0;
     }
-    
+
     /**
      * @return the document
      */
@@ -43,16 +43,16 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
     /**
      * @param document0 the document to set
      */
-    public void setModel(T document) { 
-        setModel( document, false );
+    public void setModel(T document) {
+        setModel(document, false);
     }
-    
+
     public void setModel(T document, boolean isStored) {
-        modelInStore = isStored; 
+        modelInStore = isStored;
         this.model = document;
         view.updateView();
         saved = true; // unless set to false in notify
-        if ( !isModelInSyncWithFolder() ) {
+        if (!isModelInSyncWithFolder()) {
             notifyModelChanged();
         }
     }
@@ -60,12 +60,16 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
     private boolean isModelInSyncWithFolder() {
         T modelStored = folder.get(model.getName());
         // checks presence in dictionary only.
-        if (modelStored == model) return true;
-        if (null == modelStored) return false;
-        
+        if (modelStored == model) {
+            return true;
+        }
+        if (null == modelStored) {
+            return false;
+        }
+
         return modelStored.equals(model);
     }
-    
+
 
     /**
      * @return the view
@@ -78,7 +82,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * @see forge.gui.deckeditor.IDeckController#notifyModelChanged()
      */
     @Override
-    public void notifyModelChanged() { 
+    public void notifyModelChanged() {
         saved = false;
         //view.setTitle();
     }
@@ -128,7 +132,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
     @SuppressWarnings("unchecked")
     @Override
     public void saveAs(String name0) {
-        setModel((T)model.copyTo(name0), false);
+        setModel((T) model.copyTo(name0), false);
         save();
     }
 
@@ -147,7 +151,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      */
     @Override
     public void delete() {
-        if ( StringUtils.isNotBlank(model.getName())) {
+        if (StringUtils.isNotBlank(model.getName())) {
             folder.delete(model.getName());
         }
         modelInStore = false;
@@ -158,13 +162,13 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.IDeckController#isGoodName(java.lang.String)
      */
-    
+
     @Override
     public boolean fileExists(String deckName) {
         return !folder.isUnique(deckName);
     }
-    
-    
+
+
     @Override
     public boolean isGoodName(String deckName) {
         return StringUtils.isNotBlank(deckName) && folder.isUnique(deckName);

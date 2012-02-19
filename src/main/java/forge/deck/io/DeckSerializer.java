@@ -246,7 +246,7 @@ public class DeckSerializer extends DeckReaderBase<Deck> implements IItemSeriali
     }
 
     public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map) {
-        if ( map == null ) { return null; }
+        if (map == null) { return null; }
         List<String> lines = map.get("metadata");
         if (lines == null) { return null; }
         DeckFileHeader d = new DeckFileHeader(FileSection.parse(lines, "="));

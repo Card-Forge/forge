@@ -2238,7 +2238,7 @@ public final class AbilityFactoryReveal {
     private static CardList getRevealedList(final Card card, final SpellAbility sa, final CardList valid) {
         final CardList chosen = new CardList();
         final int validamount = valid.size();
-        
+
         if (sa.getActivatingPlayer().isHuman()) {
             for (int i = 0; i < validamount; i++) {
                 final Object o = GuiUtils.getChoiceOptional("Choose card(s) to reveal", valid.toArray());
@@ -2252,7 +2252,7 @@ public final class AbilityFactoryReveal {
         }
         if (sa.getActivatingPlayer().isComputer()) {
             return valid;
-            
+
         } else {
         }
         return chosen;

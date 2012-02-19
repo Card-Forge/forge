@@ -125,7 +125,7 @@ public class OldDeckParser {
            Map<String, List<String>> sections = SectionUtil.parseSections(fileLines);
            DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
            String name = dh.getName();
-           
+
            if (dh.isCustomPool()) {
                try {
                    cube.add(Deck.fromLines(fileLines));

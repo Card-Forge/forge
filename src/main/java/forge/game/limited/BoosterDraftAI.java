@@ -360,7 +360,7 @@ public class BoosterDraftAI {
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck buildDeck(final CardList dList, final DeckColors pClrs) {
-        
+
         final CardList outList = new CardList();
         int cardsNeeded = 22;
         int landsNeeded = 18;
@@ -622,7 +622,7 @@ public class BoosterDraftAI {
             out.getSideboard().add(aiPlayables);
             out.getSideboard().add(dList);
             return out;
-        } 
+        }
         throw new RuntimeException("BoosterDraftAI : buildDeck() error, decksize not 40");
     }
 

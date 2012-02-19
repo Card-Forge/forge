@@ -92,9 +92,9 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
         return this.getBottomTableWithCards().getCards();
     }
 
-    
+
     public abstract IDeckController<TModel> getController();
-    
+
     // THIS IS HERE FOR OVERLOADING!!!1
     // or may be return abstract getFilter from derived class + this filter ...
     // virtual protected member, but later
@@ -134,8 +134,8 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
      * forge.item.ItemPoolView, forge.game.GameType)
      */
     public abstract void updateView();
-    
-    
+
+
 
     /**
      * Update display.
