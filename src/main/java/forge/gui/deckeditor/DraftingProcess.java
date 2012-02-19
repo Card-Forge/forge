@@ -42,7 +42,7 @@ import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.deck.DeckSet;
+import forge.deck.DeckGroup;
 import forge.error.ErrorViewer;
 import forge.game.limited.IBoosterDraft;
 import forge.gui.GuiUtils;
@@ -65,7 +65,7 @@ import forge.properties.NewConstants.Lang.GuiBoosterDraft;
  * @author Forge
  * @version $Id$
  */
-public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckSet> {
+public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
     /**
      * Constant <code>serialVersionUID=-6055633915602448260L</code>.
      */
@@ -326,7 +326,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckSet> {
 
         final Deck human = this.getPlayersDeck();
 
-        final DeckSet all = new DeckSet("Draft " + s);
+        final DeckGroup all = new DeckGroup("Draft " + s);
         all.setHumanDeck(human);
         all.addAiDecks(computer);
 
@@ -355,7 +355,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckSet> {
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckController<DeckSet> getController() {
+    public IDeckController<DeckGroup> getController() {
         return null;
     }
 

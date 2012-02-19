@@ -21,7 +21,7 @@ import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
-import forge.deck.DeckSet;
+import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
@@ -139,7 +139,7 @@ public class ControlSealed {
 
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
-        for (DeckSet d : AllZone.getDecks().getSealed()) {
+        for (DeckGroup d : AllZone.getDecks().getSealed()) {
             aiDecks.put(d.getName(), d.getAiDecks().get(0));
             humanDecks.add(d.getHumanDeck());
         }
@@ -199,7 +199,7 @@ public class ControlSealed {
             deck.getSideboard().add(element, sd.getLandSetCode()[0], 18);
         }
 
-        DeckSet sealed = new DeckSet(sDeckName);
+        DeckGroup sealed = new DeckGroup(sDeckName);
         sealed.setHumanDeck(deck);
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         AllZone.getDecks().getSealed().add(sealed);

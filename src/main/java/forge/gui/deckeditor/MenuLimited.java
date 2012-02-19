@@ -18,7 +18,7 @@
 package forge.gui.deckeditor;
 
 import forge.Command;
-import forge.deck.DeckSet;
+import forge.deck.DeckGroup;
 
 /**
  * <p>
@@ -28,7 +28,7 @@ import forge.deck.DeckSet;
  * @author Forge
  * @version $Id: DeckEditorCommonMenu.java 13590 2012-01-27 20:46:27Z Max mtg $
  */
-public final class MenuLimited extends MenuBase<DeckSet> {
+public final class MenuLimited extends MenuBase<DeckGroup> {
 
     /** Constant <code>serialVersionUID=-4037993759604768755L</code>. */
     private static final long serialVersionUID = -4037993759604768755L;
@@ -44,7 +44,7 @@ public final class MenuLimited extends MenuBase<DeckSet> {
      * @param exit
      *            a Command
      */
-    public MenuLimited(final IDeckController<DeckSet> ctrl, final Command exit) {
+    public MenuLimited(final IDeckController<DeckGroup> ctrl, final Command exit) {
         super( ctrl, exit );
     }
 

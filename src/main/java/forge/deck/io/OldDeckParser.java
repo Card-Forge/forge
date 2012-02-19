@@ -15,7 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.PlayerType;
 import forge.deck.Deck;
-import forge.deck.DeckSet;
+import forge.deck.DeckGroup;
 import forge.util.FileUtil;
 import forge.util.IFolderMap;
 import forge.util.SectionUtil;
@@ -42,8 +42,8 @@ public class OldDeckParser {
      * @param sealed2
      * @param cube2
      */
-    public OldDeckParser(File file, IFolderMap<Deck> constructed2, IFolderMap<DeckSet> draft2,
-            IFolderMap<DeckSet> sealed2, IFolderMap<Deck> cube2) {
+    public OldDeckParser(File file, IFolderMap<Deck> constructed2, IFolderMap<DeckGroup> draft2,
+            IFolderMap<DeckGroup> sealed2, IFolderMap<Deck> cube2) {
         deckDir = file;
         sealed = sealed2;
         constructed = constructed2;
@@ -51,13 +51,13 @@ public class OldDeckParser {
         draft = draft2;
     }
 
-    protected final IFolderMap<DeckSet> getSealed() {
+    protected final IFolderMap<DeckGroup> getSealed() {
         return sealed;
     }
     protected final IFolderMap<Deck> getConstructed() {
         return constructed;
     }
-    protected final IFolderMap<DeckSet> getDraft() {
+    protected final IFolderMap<DeckGroup> getDraft() {
         return draft;
     }
     protected final IFolderMap<Deck> getCube() {
@@ -67,9 +67,9 @@ public class OldDeckParser {
         return deckDir;
     }
 
-    private final IFolderMap<DeckSet> sealed;
+    private final IFolderMap<DeckGroup> sealed;
     private final IFolderMap<Deck> constructed;
-    private final IFolderMap<DeckSet> draft;
+    private final IFolderMap<DeckGroup> draft;
     private final IFolderMap<Deck> cube;
     private final File deckDir;
     /**
@@ -84,11 +84,11 @@ public class OldDeckParser {
         for (File f : deckDir.listFiles(bdkFileFilter)) {
             boolean gotError = false;
             Deck human = Deck.fromFile(new File(f, "0.dck"));
-            final DeckSet d = new DeckSet(human.getName());
+            final DeckGroup d = new DeckGroup(human.getName());
             d.setHumanDeck(human);
 
 
-            for (int i = 1; i < DeckSetSerializer.MAX_DRAFT_PLAYERS; i++) {
+            for (int i = 1; i < DeckGroupSerializer.MAX_DRAFT_PLAYERS; i++) {
                 Deck nextAi = Deck.fromFile(new File(f, i + ".dck"));
                 if (nextAi == null) {
                     gotError = true;
@@ -117,7 +117,7 @@ public class OldDeckParser {
 
     private void convertConstructedAndSealed() {
        boolean allowDeleteUnsupportedConstructed = false;
-       Map<String, Pair<DeckSet, MutablePair<File, File>>> sealedDecks = new TreeMap<String, Pair<DeckSet, MutablePair<File, File>>>(String.CASE_INSENSITIVE_ORDER);
+       Map<String, Pair<DeckGroup, MutablePair<File, File>>> sealedDecks = new TreeMap<String, Pair<DeckGroup, MutablePair<File, File>>>(String.CASE_INSENSITIVE_ORDER);
 
        for (File f : deckDir.listFiles(DeckSerializer.DCK_FILE_FILTER)) {
            boolean importedOk = false;
@@ -163,9 +163,9 @@ public class OldDeckParser {
                boolean isAi = dh.getPlayerType() == PlayerType.COMPUTER;
                name = name.startsWith("AI_") ? name.replace("AI_", "") : name;
 
-               Pair<DeckSet, MutablePair<File, File>> stored = sealedDecks.get(name);
+               Pair<DeckGroup, MutablePair<File, File>> stored = sealedDecks.get(name);
                if (null == stored) {
-                   stored = ImmutablePair.of(new DeckSet(name), MutablePair.of((File) null, (File) null));
+                   stored = ImmutablePair.of(new DeckGroup(name), MutablePair.of((File) null, (File) null));
                }
 
                Deck deck = Deck.fromLines(fileLines);
@@ -195,7 +195,7 @@ public class OldDeckParser {
        // advise to kill orphaned decks
        if (!sealedDecks.isEmpty()) {
            StringBuilder sb = new StringBuilder();
-           for (Pair<DeckSet, MutablePair<File, File>> s : sealedDecks.values()) {
+           for (Pair<DeckGroup, MutablePair<File, File>> s : sealedDecks.values()) {
                String missingPart = s.getRight().getLeft() == null ? "human" : "computer";
                sb.append(String.format("Sealed deck '%s' has no matching '%s' deck.%n", s.getKey().getName(), missingPart));
            }
@@ -203,7 +203,7 @@ public class OldDeckParser {
            sb.append("May Forge delete these decks?");
            int response = JOptionPane.showConfirmDialog(null, sb.toString(), "Some of your sealed decks are orphaned", JOptionPane.YES_NO_OPTION);
            if (response == JOptionPane.YES_OPTION) {
-               for (Pair<DeckSet, MutablePair<File, File>> s : sealedDecks.values()) {
+               for (Pair<DeckGroup, MutablePair<File, File>> s : sealedDecks.values()) {
                    if (s.getRight().getLeft() != null) { s.getRight().getLeft().delete(); }
                    if (s.getRight().getRight() != null) { s.getRight().getRight().delete(); }
                }

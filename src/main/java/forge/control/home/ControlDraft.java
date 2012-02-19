@@ -14,7 +14,7 @@ import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
-import forge.deck.DeckSet;
+import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
@@ -123,7 +123,7 @@ public class ControlDraft {
             }
         });
 
-        DeckSet opponentDecks = AllZone.getDecks().getDraft().get(human.getName());
+        DeckGroup opponentDecks = AllZone.getDecks().getDraft().get(human.getName());
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -185,7 +185,7 @@ public class ControlDraft {
     public void updateHumanDecks() {
 
         List<Deck> human = new ArrayList<Deck>();
-        for (DeckSet d : AllZone.getDecks().getDraft()) {
+        for (DeckGroup d : AllZone.getDecks().getDraft()) {
             human.add(d.getHumanDeck());
         }
         view.getLstHumanDecks().setDecks(human);

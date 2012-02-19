@@ -39,7 +39,7 @@ import net.slightlymagic.braids.util.lambda.Lambda0;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.deck.Deck;
-import forge.deck.DeckSet;
+import forge.deck.DeckGroup;
 import forge.error.ErrorViewer;
 import forge.gui.deckeditor.elements.CardPanelHeavy;
 import forge.gui.deckeditor.elements.FilterCheckBoxes;
@@ -59,7 +59,7 @@ import forge.util.IFolderMap;
  * @author Forge
  * @version $Id: DeckEditorCommon.java 12850 2011-12-26 14:55:09Z slapshot5 $
  */
-public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet> {
+public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGroup> {
     /** Constant <code>serialVersionUID=130339644136746796L</code>. */
     private static final long serialVersionUID = 130339644136746796L;
 
@@ -72,7 +72,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
     private final JLabel jLabelAnalysisGap = new JLabel("");
     private FilterNameTypeSetPanel filterNameTypeSet;
 
-    private final DeckController<DeckSet> controller;
+    private final DeckController<DeckGroup> controller;
 
     /**
      * Show.
@@ -139,7 +139,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
      * @param gameType
      *            the game type
      */
-    public DeckEditorLimited(IFolderMap<DeckSet> deckMap) {
+    public DeckEditorLimited(IFolderMap<DeckGroup> deckMap) {
         try {
             this.setFilterBoxes(new FilterCheckBoxes(true));
             this.setTopTableWithCards(new TableView<CardPrinted>("Avaliable Cards", true, true, CardPrinted.class));
@@ -152,8 +152,8 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
             ErrorViewer.showError(ex);
         }
         
-        Lambda0<DeckSet> newCreator = new Lambda0<DeckSet>(){ @Override public DeckSet apply() { return new DeckSet(""); } };
-        controller = new DeckController<DeckSet>(deckMap, this, newCreator);        
+        Lambda0<DeckGroup> newCreator = new Lambda0<DeckGroup>(){ @Override public DeckGroup apply() { return new DeckGroup(""); } };
+        controller = new DeckController<DeckGroup>(deckMap, this, newCreator);        
     }
 
     private void jbInit() {
@@ -346,7 +346,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
      * @param model
      * @return
      */
-    private Deck getSelectedDeck(DeckSet model) {
+    private Deck getSelectedDeck(DeckGroup model) {
         return model.getHumanDeck();
     }
 
@@ -379,7 +379,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckSet
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckController<DeckSet> getController() {
+    public IDeckController<DeckGroup> getController() {
         return controller;
     }
 

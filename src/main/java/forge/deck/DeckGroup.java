@@ -12,9 +12,9 @@ import forge.util.IHasName;
  * TODO: Write javadoc for this type.
  *
  */
-public class DeckSet extends DeckBase implements IHasName {
+public class DeckGroup extends DeckBase implements IHasName {
 
-    public DeckSet(String name0) {
+    public DeckGroup(String name0) {
         super(name0);
     }
 
@@ -51,7 +51,7 @@ public class DeckSet extends DeckBase implements IHasName {
      */
     @Override
     protected DeckBase newInstance(String name0) {
-        return new DeckSet(name0);
+        return new DeckGroup(name0);
     }
 
 }

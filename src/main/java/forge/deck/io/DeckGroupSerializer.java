@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
 import forge.deck.Deck;
-import forge.deck.DeckSet;
+import forge.deck.DeckGroup;
 import forge.util.FileUtil;
 import forge.util.IItemSerializer;
 
@@ -29,12 +29,12 @@ import forge.util.IItemSerializer;
  * TODO: Write javadoc for this type.
  * 
  */
-public class DeckSetSerializer extends DeckReaderBase<DeckSet> implements IItemSerializer<DeckSet> {
+public class DeckGroupSerializer extends DeckReaderBase<DeckGroup> implements IItemSerializer<DeckGroup> {
     /**
      * TODO: Write javadoc for Constructor.
      * @param deckDir0
      */
-    public DeckSetSerializer(File deckDir0) {
+    public DeckGroupSerializer(File deckDir0) {
         super(deckDir0);
     }
 
@@ -48,7 +48,7 @@ public class DeckSetSerializer extends DeckReaderBase<DeckSet> implements IItemS
      *            a Deck[]
      */
     @Override
-    public void save(DeckSet unit) {
+    public void save(DeckGroup unit) {
         final File f = makeFileFor(unit);
         f.mkdir();
         FileUtil.writeFile(new File(f, "human.dck"), unit.getHumanDeck().save());
@@ -58,10 +58,10 @@ public class DeckSetSerializer extends DeckReaderBase<DeckSet> implements IItemS
         }
     }
 
-    protected final DeckSet read(File file)
+    protected final DeckGroup read(File file)
     {
         Deck human = Deck.fromFile(new File(file, "human.dck"));
-        final DeckSet d = new DeckSet(human.getName());
+        final DeckGroup d = new DeckGroup(human.getName());
         d.setHumanDeck(human);
         for (int i = 1; i < MAX_DRAFT_PLAYERS; i++) {
             File theFile = new File(file, "ai-" + i + ".dck");
@@ -78,7 +78,7 @@ public class DeckSetSerializer extends DeckReaderBase<DeckSet> implements IItemS
      * @see forge.deck.IDeckSerializer#erase(forge.item.CardCollectionBase, java.io.File)
      */
     @Override
-    public void erase(DeckSet unit) {
+    public void erase(DeckGroup unit) {
         File dir = makeFileFor(unit);
         final File[] files = dir.listFiles();
         for(File f : files) {
@@ -87,7 +87,7 @@ public class DeckSetSerializer extends DeckReaderBase<DeckSet> implements IItemS
         dir.delete();
     }
 
-    public File makeFileFor(final DeckSet decks) {
+    public File makeFileFor(final DeckGroup decks) {
         return new File(getDirectory(), deriveFileName(cleanDeckName(decks.getName())));
     }
 

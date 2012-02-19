@@ -3,7 +3,7 @@ package forge.deck;
 import java.io.File;
 
 import forge.deck.io.DeckSerializer;
-import forge.deck.io.DeckSetSerializer;
+import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.OldDeckParser;
 import forge.util.FolderMap;
 import forge.util.IFolderMap;
@@ -15,8 +15,8 @@ import forge.util.IFolderMap;
  */
 public class CardCollections {
     private final IFolderMap<Deck> constructed;
-    private final IFolderMap<DeckSet> draft;
-    private final IFolderMap<DeckSet> sealed;
+    private final IFolderMap<DeckGroup> draft;
+    private final IFolderMap<DeckGroup> sealed;
     private final IFolderMap<Deck> cube;
 
     /**
@@ -25,8 +25,8 @@ public class CardCollections {
      */
     public CardCollections(File file) {
         constructed = new FolderMap<Deck>(new DeckSerializer(new File(file, "constructed")));
-        draft = new FolderMap<DeckSet>(new DeckSetSerializer(new File(file, "draft")));
-        sealed = new FolderMap<DeckSet>(new DeckSetSerializer(new File(file, "sealed")));
+        draft = new FolderMap<DeckGroup>(new DeckGroupSerializer(new File(file, "draft")));
+        sealed = new FolderMap<DeckGroup>(new DeckGroupSerializer(new File(file, "sealed")));
         cube = new FolderMap<Deck>(new DeckSerializer(new File(file, "cube")));
 
         // remove this after most people have been switched to new layout
@@ -38,7 +38,7 @@ public class CardCollections {
         return constructed;
     }
 
-    public final IFolderMap<DeckSet> getDraft() {
+    public final IFolderMap<DeckGroup> getDraft() {
         return draft;
     }
 
@@ -46,7 +46,7 @@ public class CardCollections {
         return cube;
     }
 
-    public IFolderMap<DeckSet> getSealed() {
+    public IFolderMap<DeckGroup> getSealed() {
         return sealed;
     }
 
