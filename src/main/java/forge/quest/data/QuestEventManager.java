@@ -21,7 +21,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.AllZone;
 import forge.Singletons;
@@ -31,6 +34,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.FileUtil;
+import forge.util.SectionUtil;
 
 /**
  * <p>
@@ -72,28 +76,25 @@ public class QuestEventManager {
         this.allDuels = new ArrayList<QuestDuel>();
         this.allChallenges = new ArrayList<QuestChallenge>();
 
-        List<String> contents;
         QuestEvent tempEvent;
 
         final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckSerializer.DCK_FILE_FILTER);
 
         for (final File f : allFiles) {
-            contents = FileUtil.readFile(f);
-
-            if (contents.get(0).trim().equals("[quest]")) {
-                tempEvent = new QuestChallenge();
-                this.assembleChallengeUniquedata(contents, (QuestChallenge) tempEvent);
+            Map<String, List<String>> contents = SectionUtil.parseSections(FileUtil.readFile(f));
+            
+            if (contents.containsKey("quest")) {
+                tempEvent = readChallenge(contents.get("quest"));
                 this.allChallenges.add((QuestChallenge) tempEvent);
             } // End if([quest])
             else {
-                tempEvent = new QuestDuel();
-                this.assembleDuelUniquedata(contents, (QuestDuel) tempEvent);
+                tempEvent = readDuel(contents.get("metadata"));
                 this.allDuels.add((QuestDuel) tempEvent);
             }
 
             // Assemble metadata (may not be necessary later) and deck object.
-            this.assembleEventMetadata(contents, tempEvent);
-            tempEvent.setEventDeck(Deck.fromLines(contents));
+            this.readMetadata(contents.get("metadata"), tempEvent);
+            tempEvent.setEventDeck(Deck.fromSections(contents));
         } // End for(allFiles)
 
         this.assembleDuelDifficultyLists();
@@ -125,18 +126,13 @@ public class QuestEventManager {
      * @param contents
      * @param qd
      */
-    private void assembleDuelUniquedata(final List<String> contents, final QuestDuel qd) {
+    private QuestDuel readDuel(final List<String> contents) {
+        final QuestDuel qd = new QuestDuel();
         int eqpos;
         String key, value;
 
         for (final String s : contents) {
-            if (s.equals("[metadata]")) {
-                break;
-            }
-            if (s.equals("[duel]")) {
-                continue;
-            }
-            if (s.equals("")) {
+             if (s.equals("")) {
                 continue;
             }
 
@@ -151,6 +147,7 @@ public class QuestEventManager {
                 qd.setName(value);
             }
         }
+        return qd;
     }
 
     /**
@@ -162,19 +159,14 @@ public class QuestEventManager {
      * @param contents
      * @param qc
      */
-    private void assembleChallengeUniquedata(final List<String> contents, final QuestChallenge qc) {
+    private QuestChallenge readChallenge(final List<String> contents) {
         int eqpos;
         String key, value;
 
+        final QuestChallenge qc = new QuestChallenge(); 
         // Unique properties
         for (final String s : contents) {
-            if (s.equals("[metadata]")) {
-                break;
-            }
-            if (s.equals("[quest]")) {
-                continue;
-            }
-            if (s.equals("")) {
+            if (StringUtils.isBlank(s)) {
                 continue;
             }
 
@@ -224,6 +216,7 @@ public class QuestEventManager {
                 qc.setCardRewardList(QuestUtil.generateCardRewardList(value));
             }
         }
+        return qc;
     }
 
     /**
@@ -235,7 +228,7 @@ public class QuestEventManager {
      * @param contents
      * @param qe
      */
-    private void assembleEventMetadata(final List<String> contents, final QuestEvent qe) {
+    private void readMetadata(final List<String> contents, final QuestEvent qe) {
         int eqpos;
         String key, value;
 

@@ -44,5 +44,5 @@ public interface InventoryItemFromSet extends InventoryItem {
      * 
      * @return the sets the
      */
-    String getSet();
+    String getEdition();
 }

@@ -218,7 +218,7 @@ public class CardListViewer {
             }
             if (null == this.cache[row]) {
                 final Card card = AllZone.getCardFactory().getCard(cp.getName(), null);
-                card.setCurSetCode(cp.getSet());
+                card.setCurSetCode(cp.getEdition());
                 card.setImageFilename(CardUtil.buildFilename(card));
                 this.cache[row] = card;
             }

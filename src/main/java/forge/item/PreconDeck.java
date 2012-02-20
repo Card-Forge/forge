@@ -120,7 +120,7 @@ public class PreconDeck implements InventoryItemFromSet {
      * @see forge.item.InventoryItemFromSet#getSet()
      */
     @Override
-    public String getSet() {
+    public String getEdition() {
         return this.set;
     }
 

@@ -2,6 +2,7 @@ package forge.util;
 
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -13,11 +14,24 @@ public class FileSection {
             
     private FileSection() {}
     
-    public static FileSection parse(Iterable<String> lines, String kvSeparator) {
+    public static FileSection parse(String line, String kvSeparator, String pairSeparator) {
+        String[] pairs = line.split(Pattern.quote(pairSeparator));
+        Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
         FileSection result = new FileSection();
         
+        for (final String dd : pairs) {
+            final String[] v = splitter.split(dd, 2);
+            result.lines.put(v[0], v.length > 1 ? v[1].trim() : "");
+        }
+
+        return result;
+    }
+    
+    public static FileSection parse(Iterable<String> lines, String kvSeparator) {
+        FileSection result = new FileSection();
+        Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
         for (final String dd : lines) {
-            final String[] v = dd.split(kvSeparator, 2);
+            final String[] v = splitter.split(dd, 2);
             result.lines.put(v[0], v.length > 1 ? v[1].trim() : "");
         }
 

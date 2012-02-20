@@ -89,7 +89,7 @@ public final class BoosterDraft implements IBoosterDraft {
                 this.packs.add(picker);
             }
 
-            IBoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getSet();
+            IBoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getEdition();
             break;
 
         case Block: // Draft from cards by block or set
@@ -326,7 +326,7 @@ public final class BoosterDraft implements IBoosterDraft {
         if (Constant.Runtime.UPLOAD_DRAFT[0]) {
             for (int i = 0; i < thisBooster.size(); i++) {
                 final CardPrinted cc = thisBooster.get(i);
-                final String cnBk = cc.getName() + "|" + cc.getSet();
+                final String cnBk = cc.getName() + "|" + cc.getEdition();
 
                 float pickValue = 0;
                 if (cc.equals(c)) {

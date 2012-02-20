@@ -126,9 +126,9 @@ public class GameNew {
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
                 final Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
-                card.setCurSetCode(cardPrinted.getSet());
+                card.setCurSetCode(cardPrinted.getEdition());
 
-                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
+                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getEdition()).getCopiesCount();
                 if (cntVariants > 1) {
                     card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
                 }
@@ -168,9 +168,9 @@ public class GameNew {
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
                 final Card card = c.getCard(cardPrinted.getName(), AllZone.getComputerPlayer());
-                card.setCurSetCode(cardPrinted.getSet());
+                card.setCurSetCode(cardPrinted.getEdition());
 
-                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
+                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getEdition()).getCopiesCount();
                 if (cntVariants > 1) {
                     card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
                 }

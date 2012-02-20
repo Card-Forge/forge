@@ -77,7 +77,7 @@ public class BoosterPack implements InventoryItemFromSet {
      * @return String
      */
     @Override
-    public final String getSet() {
+    public final String getEdition() {
         return this.cardSet.getCode();
     }
 

@@ -75,7 +75,7 @@ public class SealedDeck {
                 this.packs.add(picker);
             }
 
-            this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getSet();
+            this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getEdition();
         } else if (sealedType.equals("Block")) {
 
             final Object o = GuiUtils.getChoice("Choose Block", AllZone.getEditions().getBlocks().toArray());

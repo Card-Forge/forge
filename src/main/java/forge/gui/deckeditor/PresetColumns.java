@@ -55,12 +55,12 @@ public abstract class PresetColumns {
     }
 
     private static CardEdition toSetCmp(final InventoryItem i) {
-        return i instanceof InventoryItemFromSet ? AllZone.getEditions().getEditionByCode(((InventoryItemFromSet) i).getSet())
+        return i instanceof InventoryItemFromSet ? AllZone.getEditions().getEditionByCode(((InventoryItemFromSet) i).getEdition())
                 : CardEdition.UNKNOWN;
     }
 
     private static String toSetStr(final InventoryItem i) {
-        return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getSet() : "n/a";
+        return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getEdition() : "n/a";
     }
 
     private static Integer toAiCmp(final InventoryItem i) {

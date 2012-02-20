@@ -276,7 +276,7 @@ public class DeckImport extends JDialog {
         switch (token.getType()) {
         case KnownCard:
             return String.format("<div class='knowncard'>%s * %s [%s] %s</div>", token.getNumber(), token.getCard()
-                    .getName(), token.getCard().getSet(), token.getCard().isFoil() ? "<i>foil</i>" : "");
+                    .getName(), token.getCard().getEdition(), token.getCard().isFoil() ? "<i>foil</i>" : "");
         case UnknownCard:
             return String.format("<div class='unknowncard'>%s * %s</div>", token.getNumber(), token.getText());
         case SectionName:

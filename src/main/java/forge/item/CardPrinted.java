@@ -46,7 +46,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
 
     // These fields are kinda PK for PrintedCard
     private final String name;
-    private final String cardSet;
+    private final String edition;
     private final int artIndex;
     private final boolean foiled;
 
@@ -88,8 +88,8 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @return String
      */
     @Override
-    public String getSet() {
-        return this.cardSet;
+    public String getEdition() {
+        return this.edition;
     }
 
     /**
@@ -171,10 +171,10 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     };
 
     // Constructor is private. All non-foiled instances are stored in CardDb
-    private CardPrinted(final CardRules c, final String set, final CardRarity rare, final int index, final boolean foil) {
+    private CardPrinted(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
         this.card = c;
         this.name = c.getName();
-        this.cardSet = set;
+        this.edition = edition0;
         this.artIndex = index;
         this.foiled = foil;
         this.rarity = rare;
@@ -187,7 +187,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @param c
      *            the c
-     * @param set
+     * @param edition
      *            the set
      * @param rare
      *            the rare
@@ -195,8 +195,8 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      *            the index
      * @return the card printed
      */
-    static CardPrinted build(final CardRules c, final String set, final CardRarity rare, final int index) {
-        return new CardPrinted(c, set, rare, index, false);
+    static CardPrinted build(final CardRules c, final String edition, final CardRarity rare, final int index) {
+        return new CardPrinted(c, edition, rare, index, false);
     }
 
     /* foiled don't need to stay in CardDb's structures, so u'r free to create */
@@ -208,7 +208,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @return the card printed
      */
     public static CardPrinted makeFoiled(final CardPrinted c) {
-        return new CardPrinted(c.card, c.cardSet, c.rarity, c.artIndex, true);
+        return new CardPrinted(c.card, c.edition, c.rarity, c.artIndex, true);
     }
 
     // Want this class to be a key for HashTable
@@ -233,7 +233,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         if (!this.name.equals(other.name)) {
             return false;
         }
-        if (!this.cardSet.equals(other.cardSet)) {
+        if (!this.edition.equals(other.edition)) {
             return false;
         }
         if ((other.foiled != this.foiled) || (other.artIndex != this.artIndex)) {
@@ -250,7 +250,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      */
     @Override
     public int hashCode() {
-        final int code = (this.nameLcase.hashCode() * 11) + (this.cardSet.hashCode() * 59) + (this.artIndex * 2);
+        final int code = (this.nameLcase.hashCode() * 11) + (this.edition.hashCode() * 59) + (this.artIndex * 2);
         if (this.foiled) {
             return code + 1;
         }
@@ -277,7 +277,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     public Card toForgeCard() {
         final Card c = AllZone.getCardFactory().getCard(this.name, null);
         if (c != null) {
-            c.setCurSetCode(this.getSet());
+            c.setCurSetCode(this.getEdition());
             c.setRandomPicture(this.artIndex + 1);
             c.setImageFilename(this.getImageFilename());
             if (c.isFlip()) {
@@ -307,7 +307,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             return nameCmp;
         }
         // TODO compare sets properly
-        return this.cardSet.compareTo(o.cardSet);
+        return this.edition.compareTo(o.edition);
     }
 
     /**
@@ -414,7 +414,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
 
             @Override
             public boolean isTrue(final CardPrinted card) {
-                return this.sets.contains(card.cardSet) == this.mustContain;
+                return this.sets.contains(card.edition) == this.mustContain;
             }
 
             public PredicateSets(final List<String> wantSets, final boolean shouldContain) {

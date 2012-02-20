@@ -273,7 +273,7 @@ public class QuestDataIO {
         protected void write(final CardPrinted cref, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("card");
             writer.addAttribute("c", cref.getName());
-            writer.addAttribute("s", cref.getSet());
+            writer.addAttribute("s", cref.getEdition());
             if (cref.isFoil()) {
                 writer.addAttribute("foil", "1");
             }
@@ -286,7 +286,7 @@ public class QuestDataIO {
 
         protected void write(final BoosterPack booster, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("booster");
-            writer.addAttribute("s", booster.getSet());
+            writer.addAttribute("s", booster.getEdition());
             writer.addAttribute("n", count.toString());
             writer.endNode();
         }

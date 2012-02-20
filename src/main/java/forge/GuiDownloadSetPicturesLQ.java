@@ -70,7 +70,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
     protected final void addCardToList(final ArrayList<DownloadObject> cList, final CardPrinted c, final String cardName) {
         final String urlBase = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/fpics/";
 
-        final String setCode3 = c.getSet();
+        final String setCode3 = c.getEdition();
         final CardEdition thisSet = AllZone.getEditions().getEditionByCode(setCode3);
         final String setCode2 = thisSet.getCode2();
 
@@ -107,7 +107,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
         for (final CardPrinted c : CardDb.instance().getAllCards()) {
-            final String setCode3 = c.getSet();
+            final String setCode3 = c.getEdition();
             if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
                 continue; // we don't want cards from unknown sets
             }

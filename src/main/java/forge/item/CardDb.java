@@ -392,10 +392,10 @@ public final class CardDb {
 
                 // Find card with maximal set index
                 result = namedCards.get(0);
-                int resIndex = AllZone.getEditions().getEditionByCode((result).getSet()).getIndex();
+                int resIndex = AllZone.getEditions().getEditionByCode((result).getEdition()).getIndex();
                 for (final CardPrinted card : namedCards) {
 
-                    final int thisIndex = AllZone.getEditions().getEditionByCode((card).getSet()).getIndex();
+                    final int thisIndex = AllZone.getEditions().getEditionByCode((card).getEdition()).getIndex();
                     if (thisIndex > resIndex) {
                         result = card;
                         resIndex = thisIndex;

@@ -203,11 +203,11 @@ public class Deck extends DeckBase implements Serializable, IHasName {
         final List<String> out = new ArrayList<String>();
         for (final Entry<CardPrinted, Integer> e : main2sort) {
             final CardPrinted card = e.getKey();
-            final boolean hasBadSetInfo = "???".equals(card.getSet()) || StringUtils.isBlank(card.getSet());
+            final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
             if (hasBadSetInfo) {
                 out.add(String.format("%d %s", e.getValue(), card.getName()));
             } else {
-                out.add(String.format("%d %s|%s", e.getValue(), card.getName(), card.getSet()));
+                out.add(String.format("%d %s|%s", e.getValue(), card.getName(), card.getEdition()));
             }
         }
         return out;

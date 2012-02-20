@@ -8354,7 +8354,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getMostRecentSet() {
-        return CardDb.instance().getCard(this.getName()).getSet();
+        return CardDb.instance().getCard(this.getName()).getEdition();
     }
 
     /**
