@@ -18,6 +18,7 @@
 package forge.gui.deckeditor;
 
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.AllZone;
@@ -35,6 +36,8 @@ import forge.item.InventoryItemFromSet;
  */
 public abstract class PresetColumns {
 
+    private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
+    
     private static CardManaCost toManaCost(final InventoryItem i) {
         return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : CardManaCost.EMPTY;
     }
@@ -99,7 +102,7 @@ public abstract class PresetColumns {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             String name = from.getKey().getName();
-            return name.contains("AE") ? name.replace("AE", "Æ") : name;
+            return name.contains("AE") ? AE_FINDER.matcher(name).replaceAll("\u00C6") : name;
         }
     };
 
