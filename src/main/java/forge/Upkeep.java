@@ -95,8 +95,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepSuspend();
         Upkeep.upkeepVanishing();
         Upkeep.upkeepFading();
-        Upkeep.upkeepMasticore();
-        Upkeep.upkeepEldraziMonument();
         Upkeep.upkeepBlazeCounters();
         Upkeep.upkeepCurseOfMisfortunes();
         // upkeep_Dark_Confidant(); // keep this one semi-last
@@ -2420,125 +2418,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
         } // foreach(wire)
     } // upkeepTangleWire()
-
-    /**
-     * <p>
-     * upkeepMasticore.
-     * </p>
-     */
-    private static void upkeepMasticore() {
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
-
-        final CardList list = player.getCardsIn(Zone.Battlefield, "Masticore");
-        list.addAll(player.getCardsIn(Zone.Battlefield, "Molten-Tail Masticore"));
-        list.addAll(player.getCardsIn(Zone.Battlefield, "Razormane Masticore"));
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card crd = list.get(i);
-
-            final Input discard = new Input() {
-                private static final long serialVersionUID = 2252076866782738069L;
-
-                @Override
-                public void showMessage() {
-                    Singletons.getControl().getControlMatch().showMessage(crd + " - Discard a card from your hand");
-                    ButtonUtil.enableOnlyCancel();
-                }
-
-                @Override
-                public void selectCard(final Card c, final PlayerZone zone) {
-                    if (zone.is(Constant.Zone.Hand)) {
-                        c.getController().discard(c, null);
-                        this.stop();
-                    }
-                }
-
-                @Override
-                public void selectButtonCancel() {
-                    Singletons.getModel().getGameAction().sacrifice(crd);
-                    this.stop();
-                }
-            }; // Input
-
-            ability = new Ability(crd, "0") {
-                @Override
-                public void resolve() {
-                    if (crd.getController().isHuman()) {
-                        if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                            Singletons.getModel().getGameAction().sacrifice(crd);
-                        } else {
-                            AllZone.getInputControl().setInput(discard);
-                        }
-                    } else { // comp
-                        final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
-
-                        if (list.size() != 0) {
-                            list.get(0).getController().discard(list.get(0), this);
-                        } else {
-                            Singletons.getModel().getGameAction().sacrifice(crd);
-                        }
-                    } // else
-                } // resolve()
-            }; // Ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(crd).append(" - sacrifice ").append(crd).append(" unless you discard a card.");
-            ability.setStackDescription(sb.toString());
-            ability.setDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        } // for
-    } // upkeepMasticore
-
-    /**
-     * <p>
-     * upkeepEldraziMonument.
-     * </p>
-     */
-    private static void upkeepEldraziMonument() {
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
-
-        final CardList list = player.getCardsIn(Zone.Battlefield, "Eldrazi Monument");
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card card = list.get(i);
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    final CardList creats = AllZoneUtil.getCreaturesInPlay(player);
-
-                    if (creats.size() < 1) {
-                        Singletons.getModel().getGameAction().sacrifice(card);
-                        return;
-                    }
-
-                    if (player.isHuman()) {
-                        final Object o = GuiUtils.getChoiceOptional("Select creature to sacrifice", creats.toArray());
-                        Card sac = (Card) o;
-                        if (sac == null) {
-                            creats.shuffle();
-                            sac = creats.get(0);
-                        }
-                        Singletons.getModel().getGameAction().sacrifice(sac);
-                    } else { // computer
-                        CardListUtil.sortAttackLowFirst(creats);
-                        Singletons.getModel().getGameAction().sacrifice(creats.get(0));
-                    }
-                }
-            }; // ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Eldrazi Monument - ").append(player).append(" sacrifices a creature.");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.getStack().addSimultaneousStackEntry(ability);
-
-        }
-
-    } // upkeepEldraziMonument
 
     /**
      * <p>
