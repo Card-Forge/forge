@@ -3673,6 +3673,7 @@ res/cardsfolder/g/gorilla_warrior.txt svneol=native#text/plain
 res/cardsfolder/g/gossamer_chains.txt svneol=native#text/plain
 res/cardsfolder/g/gossamer_phantasm.txt svneol=native#text/plain
 res/cardsfolder/g/gosta_dirk.txt svneol=native#text/plain
+res/cardsfolder/g/govern_the_guildless.txt -text
 res/cardsfolder/g/graceful_adept.txt svneol=native#text/plain
 res/cardsfolder/g/graceful_antelope.txt -text svneol=unset#text/plain
 res/cardsfolder/g/grafdiggers_cage.txt -text
