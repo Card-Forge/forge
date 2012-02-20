@@ -2112,6 +2112,7 @@ res/cardsfolder/d/deranged_outcast.txt -text
 res/cardsfolder/d/derelor.txt svneol=native#text/plain
 res/cardsfolder/d/dermoplasm.txt -text svneol=unset#text/plain
 res/cardsfolder/d/descendant_of_kiyomaro.txt -text
+res/cardsfolder/d/descendant_of_masumaro.txt -text
 res/cardsfolder/d/descendant_of_soramaro.txt svneol=native#text/plain
 res/cardsfolder/d/desecrated_earth.txt svneol=native#text/plain
 res/cardsfolder/d/desecration_elemental.txt svneol=native#text/plain
