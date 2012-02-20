@@ -36,6 +36,7 @@ import forge.deck.Deck;
 import forge.item.CardPrinted;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.FolderStorageReader;
 import forge.util.IItemSerializer;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -46,7 +47,7 @@ import freemarker.template.TemplateException;
  * TODO: Write javadoc for this type.
  * 
  */
-public class DeckSerializer extends DeckReaderBase<Deck> implements IItemSerializer<Deck> {
+public class DeckSerializer extends FolderStorageReader<Deck> implements IItemSerializer<Deck> {
 
     public DeckSerializer(File deckDir0) {
         super(deckDir0);
@@ -226,7 +227,7 @@ public class DeckSerializer extends DeckReaderBase<Deck> implements IItemSeriali
      * @return a File
      */
     public File makeFileFor(final Deck deck) {
-        return new File(getDirectory(), deriveFileName(cleanDeckName(deck.getName())) + ".dck");
+        return new File(getDirectory(), deck.getBestFileName() + ".dck");
     }
 
     /* (non-Javadoc)

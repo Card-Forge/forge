@@ -22,6 +22,8 @@ import java.util.List;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Constant.Zone;
+import forge.card.FormatUtils;
+import forge.card.SetUtils;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
@@ -568,6 +570,20 @@ public final class AllZone {
      */
     public static CardRatings getCardRatings() {
         return AllZone.cardRatings;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    private static SetUtils setUtils = null;
+    public static SetUtils getEditions() {
+        return setUtils != null ? setUtils : (setUtils = new SetUtils());
+    }
+    
+    private static FormatUtils formats = null;
+    public static FormatUtils getFormats() {
+        return formats != null ? formats : ( formats = new FormatUtils());  
     }
 
 } // AllZone

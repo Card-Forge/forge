@@ -31,10 +31,9 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
-import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
-import forge.card.CardSet;
+import forge.card.CardEdition;
 import forge.card.spellability.AbilityMana;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
@@ -79,10 +78,10 @@ public class SealedDeck {
             this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getSet();
         } else if (sealedType.equals("Block")) {
 
-            final Object o = GuiUtils.getChoice("Choose Block", SetUtils.getBlocks().toArray());
+            final Object o = GuiUtils.getChoice("Choose Block", AllZone.getEditions().getBlocks().toArray());
             final CardBlock block = (CardBlock) o;
 
-            final CardSet[] cardSets = block.getSets();
+            final CardEdition[] cardSets = block.getSets();
             final String[] sets = new String[cardSets.length];
             for (int k = cardSets.length - 1; k >= 0; --k) {
                 sets[k] = cardSets[k].getCode();
@@ -106,11 +105,11 @@ public class SealedDeck {
 
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    final BoosterGenerator bpMulti = new BoosterGenerator(SetUtils.getSetByCode(pp[i]));
+                    final BoosterGenerator bpMulti = new BoosterGenerator(AllZone.getEditions().getEditionByCode(pp[i]));
                     this.packs.add(BoosterGenerator.getSimplePicker(bpMulti));
                 }
             } else {
-                final BoosterGenerator bpOne = new BoosterGenerator(SetUtils.getSetByCode(sets[0]));
+                final BoosterGenerator bpOne = new BoosterGenerator(AllZone.getEditions().getEditionByCode(sets[0]));
                 final Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpOne);
                 for (int i = 0; i < nPacks; i++) {
                     this.packs.add(picker);

@@ -20,11 +20,11 @@ package forge.gui.deckeditor;
 import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import forge.SetUtils;
+import forge.AllZone;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRarity;
-import forge.card.CardSet;
+import forge.card.CardEdition;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
@@ -51,9 +51,9 @@ public abstract class PresetColumns {
         return i instanceof CardPrinted ? ((CardPrinted) i).getRarity() : CardRarity.Unknown;
     }
 
-    private static CardSet toSetCmp(final InventoryItem i) {
-        return i instanceof InventoryItemFromSet ? SetUtils.getSetByCode(((InventoryItemFromSet) i).getSet())
-                : CardSet.UNKNOWN;
+    private static CardEdition toSetCmp(final InventoryItem i) {
+        return i instanceof InventoryItemFromSet ? AllZone.getEditions().getEditionByCode(((InventoryItemFromSet) i).getSet())
+                : CardEdition.UNKNOWN;
     }
 
     private static String toSetStr(final InventoryItem i) {

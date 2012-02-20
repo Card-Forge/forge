@@ -25,6 +25,8 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import com.google.code.jyield.Generator;
 
+import forge.card.SetInfo;
+
 /**
  * <p>
  * CardFilter class.

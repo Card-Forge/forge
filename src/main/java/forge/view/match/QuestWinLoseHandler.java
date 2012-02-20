@@ -32,7 +32,6 @@ import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
-import forge.SetUtils;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.match.ControlWinLose;
@@ -519,13 +518,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardBooster() {
-        final List<GameFormat> formats = SetUtils.getFormats();
-        final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1,
-                formats);
+        final GameFormat[] emptyFormatArray = {};
+        final GameFormat[] formats = AllZone.getFormats().getFormats().toArray(emptyFormatArray) ;
+        final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
 
+        String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
         int index = 0;
-        for (int i = 0; i < formats.size(); i++) {
-            if (formats.get(i).toString().equals(Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT))) {
+        for (int i = 0; i < formats.length; i++) {
+            if (formats[i].toString().equals(prefferedFormat)) {
                 index = i;
                 break;
             }

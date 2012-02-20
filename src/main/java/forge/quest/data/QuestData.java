@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.SetUtils;
+import forge.AllZone;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.item.CardPrinted;
@@ -235,7 +235,7 @@ public final class QuestData {
     public void newGame(final int diff, final String m0de, final boolean standardStart) {
         this.setDifficulty(diff);
 
-        final Predicate<CardPrinted> filter = standardStart ? SetUtils.getStandard().getFilterPrinted()
+        final Predicate<CardPrinted> filter = standardStart ? AllZone.getFormats().getStandard().getFilterPrinted()
                 : CardPrinted.Predicates.Presets.IS_TRUE;
 
         this.myCards.setupNewGameCardPool(filter, diff);

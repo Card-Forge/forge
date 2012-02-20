@@ -35,10 +35,9 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
-import forge.SetUtils;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
-import forge.card.CardSet;
+import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -94,12 +93,12 @@ public final class BoosterDraft implements IBoosterDraft {
             break;
 
         case Block: // Draft from cards by block or set
-            final List<CardBlock> blocks = SetUtils.getBlocks();
+            final List<CardBlock> blocks = AllZone.getEditions().getBlocks();
 
             final Object o = GuiUtils.getChoice("Choose Block", blocks.toArray());
             final CardBlock block = (CardBlock) o;
 
-            final CardSet[] cardSets = block.getSets();
+            final CardEdition[] cardSets = block.getSets();
             final String[] sets = new String[cardSets.length];
             for (int k = cardSets.length - 1; k >= 0; --k) {
                 sets[k] = cardSets[k].getCode();
@@ -125,12 +124,12 @@ public final class BoosterDraft implements IBoosterDraft {
                 final Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    final BoosterGenerator bpMulti = new BoosterGenerator(SetUtils.getSetByCode(pp[i]));
+                    final BoosterGenerator bpMulti = new BoosterGenerator(AllZone.getEditions().getEditionByCode(pp[i]));
                     this.packs.add(BoosterGenerator.getSimplePicker(bpMulti));
                 }
 
             } else {
-                final BoosterGenerator bpOne = new BoosterGenerator(SetUtils.getSetByCode(sets[0]));
+                final BoosterGenerator bpOne = new BoosterGenerator(AllZone.getEditions().getEditionByCode(sets[0]));
                 final Closure1<List<CardPrinted>, BoosterGenerator> pick1 = BoosterGenerator.getSimplePicker(bpOne);
                 for (int i = 0; i < nPacks; i++) {
                     this.packs.add(pick1);

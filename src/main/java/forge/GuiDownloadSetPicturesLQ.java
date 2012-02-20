@@ -24,7 +24,7 @@ import javax.swing.JFrame;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardSet;
+import forge.card.CardEdition;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
@@ -71,7 +71,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         final String urlBase = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/fpics/";
 
         final String setCode3 = c.getSet();
-        final CardSet thisSet = SetUtils.getSetByCode(setCode3);
+        final CardEdition thisSet = AllZone.getEditions().getEditionByCode(setCode3);
         final String setCode2 = thisSet.getCode2();
 
         final String imgFN = CardUtil.buildFilename(c, cardName);

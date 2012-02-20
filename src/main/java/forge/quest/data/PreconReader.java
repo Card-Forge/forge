@@ -3,14 +3,14 @@ package forge.quest.data;
 import java.io.File;
 import java.io.FilenameFilter;
 import forge.deck.io.DeckSerializer;
-import forge.deck.io.DeckReaderBase;
 import forge.item.PreconDeck;
+import forge.util.FolderStorageReader;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class PreconReader extends DeckReaderBase<PreconDeck> {
+public class PreconReader extends FolderStorageReader<PreconDeck> {
 
     /**
      * TODO: Write javadoc for Constructor.

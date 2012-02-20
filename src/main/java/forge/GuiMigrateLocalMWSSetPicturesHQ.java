@@ -51,6 +51,7 @@ import javax.swing.event.ChangeListener;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.SetInfo;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -497,7 +498,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
                 for (int j = 0; j < cSetInfo.size(); j++) {
                     c.setCurSetCode(cSetInfo.get(j).getCode());
                     final String setCode3 = c.getCurSetCode();
-                    final String setCode2 = SetUtils.getCode2ByCode(c.getCurSetCode());
+                    final String setCode2 = AllZone.getEditions().getCode2ByCode(c.getCurSetCode());
 
                     int n = 0;
                     if (cSetInfo.get(j).getPicCount() > 0) {

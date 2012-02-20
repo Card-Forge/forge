@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck.io;
+package forge.util;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -31,14 +31,12 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.error.ErrorViewer;
-import forge.util.IHasName;
-import forge.util.IItemReader;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<T> {
+public abstract class FolderStorageReader<T extends IHasName> implements IItemReader<T> {
 
     private final File directory;
 
@@ -47,7 +45,7 @@ public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<
     }
 
 
-    public DeckReaderBase(File deckDir0) {
+    public FolderStorageReader(File deckDir0) {
 
         directory = deckDir0;
 
@@ -69,11 +67,6 @@ public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<
         }
     }
 
-    public String deriveFileName(final String deckName) {
-        // skips all but the listed characters
-        return deckName.replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
-    }
-
     // only accepts numbers, letters or dashes up to 20 characters in length
     /**
      * 
@@ -83,16 +76,6 @@ public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<
      *            a String
      * @return a String
      */
-    protected String cleanDeckName(final String in) {
-        final char[] c = in.toCharArray();
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; (i < c.length) && (i < 20); i++) {
-            if (Character.isLetterOrDigit(c[i]) || (c[i] == '-')) {
-                sb.append(c[i]);
-            }
-        }
-        return sb.toString();
-    }
 
 
 
@@ -106,7 +89,7 @@ public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<
                 final T newDeck = read(file);
                 if (null == newDeck) {
 
-                    String msg =  "A deck or similiar object at " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
+                    String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
                     // JOptionPane.showMessageDialog(null, msg); -- This becomes bugged if uncommented, but i need these messages to debug other peoples decks // Max Mtg
                     continue;
                 }

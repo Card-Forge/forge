@@ -31,6 +31,7 @@ import net.slightlymagic.maxmtg.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
+import forge.card.SetInfo;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
@@ -731,7 +732,7 @@ public final class CardUtil {
             }
 
             // Second, try 2 letter set code with MWS filename format
-            final String mwsSet2 = String.format("%s/%s%s.full", SetUtils.getCode2ByCode(setName), mwsCardName, nn);
+            final String mwsSet2 = String.format("%s/%s%s.full", AllZone.getEditions().getCode2ByCode(setName), mwsCardName, nn);
             f = new File(path, mwsSet2 + ".jpg");
             if (f.exists()) {
                 return mwsSet2;

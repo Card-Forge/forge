@@ -19,8 +19,6 @@ package forge.card;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.SetUtils;
-import forge.game.GameFormat;
 
 /**
  * <p>
@@ -30,7 +28,7 @@ import forge.game.GameFormat;
  * @author Forge
  * @version $Id: CardSet.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public final class CardSet implements Comparable<CardSet> { // immutable
+public final class CardEdition implements Comparable<CardEdition> { // immutable
     private final int index;
     private final String code;
     private final String code2;
@@ -49,7 +47,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @param code2
      *            the code2
      */
-    public CardSet(final int index, final String name, final String code, final String code2) {
+    public CardEdition(final int index, final String name, final String code, final String code2) {
         this(index, name, code, code2, null);
     }
 
@@ -67,7 +65,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @param booster
      *            the booster
      */
-    public CardSet(final int index, final String name, final String code, final String code2, final BoosterData booster) {
+    public CardEdition(final int index, final String name, final String code, final String code2, final BoosterData booster) {
         this.code = code;
         this.code2 = code2;
         this.index = index;
@@ -76,7 +74,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     }
 
     /** The Constant unknown. */
-    public static final CardSet UNKNOWN = new CardSet(-1, "Undefined", "???", "??");
+    public static final CardEdition UNKNOWN = new CardEdition(-1, "Undefined", "???", "??");
 
     /**
      * Gets the name.
@@ -133,17 +131,17 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     }
 
     /** The Constant fnGetName. */
-    public static final Lambda1<String, CardSet> FN_GET_NAME = new Lambda1<String, CardSet>() {
+    public static final Lambda1<String, CardEdition> FN_GET_NAME = new Lambda1<String, CardEdition>() {
         @Override
-        public String apply(final CardSet arg1) {
+        public String apply(final CardEdition arg1) {
             return arg1.name;
         }
     };
 
     /** The Constant fn1. */
-    public static final Lambda1<CardSet, CardSet> FN1 = new Lambda1<CardSet, CardSet>() {
+    public static final Lambda1<CardEdition, CardEdition> FN1 = new Lambda1<CardEdition, CardEdition>() {
         @Override
-        public CardSet apply(final CardSet arg1) {
+        public CardEdition apply(final CardEdition arg1) {
             return arg1;
         }
     };
@@ -154,7 +152,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(final CardSet o) {
+    public int compareTo(final CardEdition o) {
         if (o == null) {
             return 1;
         }
@@ -188,7 +186,7 @@ public final class CardSet implements Comparable<CardSet> { // immutable
             return false;
         }
 
-        final CardSet other = (CardSet) obj;
+        final CardEdition other = (CardEdition) obj;
         return other.name.equals(this.name) && this.code.equals(other.code);
     }
 
@@ -345,53 +343,15 @@ public final class CardSet implements Comparable<CardSet> { // immutable
     public abstract static class Predicates {
 
         /** The Constant canMakeBooster. */
-        public static final Predicate<CardSet> CAN_MAKE_BOOSTER = new CanMakeBooster();
+        public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
 
-        /**
-         * Checks if is legal in format.
-         * 
-         * @param format
-         *            the format
-         * @return the predicate
-         */
-        public static final Predicate<CardSet> isLegalInFormat(final GameFormat format) {
-            return new LegalInFormat(format);
-        }
 
-        private static class CanMakeBooster extends Predicate<CardSet> {
+        private static class CanMakeBooster extends Predicate<CardEdition> {
             @Override
-            public boolean isTrue(final CardSet subject) {
+            public boolean isTrue(final CardEdition subject) {
                 return subject.canGenerateBooster();
             }
         }
 
-        private static class LegalInFormat extends Predicate<CardSet> {
-            private final GameFormat format;
-
-            public LegalInFormat(final GameFormat fmt) {
-                this.format = fmt;
-            }
-
-            @Override
-            public boolean isTrue(final CardSet subject) {
-                return this.format.isSetLegal(subject.getCode());
-            }
-        }
-
-        /**
-         * The Class Presets.
-         */
-        public abstract static class Presets {
-
-            /** The Constant setsInT2. */
-            public static final Predicate<CardSet> SETS_IN_STANDARD = Predicates
-                    .isLegalInFormat(SetUtils.getStandard());
-
-            /** The Constant setsInExt. */
-            public static final Predicate<CardSet> SETS_IN_EXT = Predicates.isLegalInFormat(SetUtils.getExtended());
-
-            /** The Constant setsInModern. */
-            public static final Predicate<CardSet> SET_IN_MODERN = Predicates.isLegalInFormat(SetUtils.getModern());
-        }
     }
 }

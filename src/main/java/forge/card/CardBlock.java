@@ -27,12 +27,12 @@ import forge.item.CardPrinted;
  * This is a CardBlock class.
  */
 public final class CardBlock implements Comparable<CardBlock> {
-    private static final CardSet[] EMPTY_SET_ARRAY = new CardSet[] {};
+    private static final CardEdition[] EMPTY_SET_ARRAY = new CardEdition[] {};
 
     private final int orderNum;
     private final String name;
-    private final CardSet[] sets;
-    private final CardSet landSet;
+    private final CardEdition[] sets;
+    private final CardEdition landSet;
     private final int cntBoostersDraft;
     private final int cntBoostersSealed;
     private Predicate<CardPrinted> filter = null;
@@ -53,7 +53,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * @param cntBoostersSealed
      *            the cnt boosters sealed
      */
-    public CardBlock(final int index, final String name, final List<CardSet> sets, final CardSet landSet,
+    public CardBlock(final int index, final String name, final List<CardEdition> sets, final CardEdition landSet,
             final int cntBoostersDraft, final int cntBoostersSealed) {
         this.orderNum = index;
         this.name = name;
@@ -77,7 +77,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * 
      * @return the sets
      */
-    public CardSet[] getSets() {
+    public CardEdition[] getSets() {
         return this.sets;
     }
 
@@ -86,7 +86,7 @@ public final class CardBlock implements Comparable<CardBlock> {
      * 
      * @return the land set
      */
-    public CardSet getLandSet() {
+    public CardEdition getLandSet() {
         return this.landSet;
     }
 
@@ -122,7 +122,7 @@ public final class CardBlock implements Comparable<CardBlock> {
 
     private Predicate<CardPrinted> buildFilter() {
         final List<String> setCodes = new ArrayList<String>();
-        for (final CardSet set : this.sets) {
+        for (final CardEdition set : this.sets) {
             setCodes.add(set.getCode());
         }
         return CardPrinted.Predicates.printedInSets(setCodes, true);

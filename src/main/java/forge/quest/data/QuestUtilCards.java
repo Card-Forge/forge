@@ -23,12 +23,13 @@ import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.SetUtils;
+import forge.AllZone;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.BoosterUtils;
 import forge.card.CardRarity;
-import forge.card.CardSet;
+import forge.card.CardEdition;
+import forge.card.FormatUtils;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
@@ -317,18 +318,18 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    private final Predicate<CardSet> filterExt = CardSet.Predicates.Presets.SETS_IN_EXT;
+    private final Predicate<CardEdition> filterExt = FormatUtils.Predicates.SETS_IN_EXT;
 
     /** The filter t2booster. */
-    private final Predicate<CardSet> filterT2booster = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
-            CardSet.Predicates.Presets.SETS_IN_STANDARD);
+    private final Predicate<CardEdition> filterT2booster = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            FormatUtils.Predicates.SETS_IN_STANDARD);
 
     /** The filter ext but t2. */
-    private final Predicate<CardSet> filterExtButT2 = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
-            Predicate.and(this.filterExt, Predicate.not(CardSet.Predicates.Presets.SETS_IN_STANDARD)));
+    private final Predicate<CardEdition> filterExtButT2 = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicate.and(this.filterExt, Predicate.not(FormatUtils.Predicates.SETS_IN_STANDARD)));
 
     /** The filter not ext. */
-    private final Predicate<CardSet> filterNotExt = Predicate.and(CardSet.Predicates.CAN_MAKE_BOOSTER,
+    private final Predicate<CardEdition> filterNotExt = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
             Predicate.not(this.filterExt));
 
     /**
@@ -340,9 +341,9 @@ public final class QuestUtilCards {
     public void generateBoostersInShop(final int count) {
         for (int i = 0; i < count; i++) {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
-            final Predicate<CardSet> filter = rollD100 < 40 ? this.filterT2booster
+            final Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
-            this.q.getShopList().addAllFlat(filter.random(SetUtils.getAllSets(), 1, BoosterPack.FN_FROM_SET));
+            this.q.getShopList().addAllFlat(filter.random(AllZone.getEditions().getAllSets(), 1, BoosterPack.FN_FROM_SET));
         }
     }
 

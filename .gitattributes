@@ -11017,8 +11017,6 @@ src/main/java/forge/PlayerType.java svneol=native#text/plain
 src/main/java/forge/PlayerUtil.java svneol=native#text/plain
 src/main/java/forge/PlayerZone.java svneol=native#text/plain
 src/main/java/forge/PlayerZoneComesIntoPlay.java svneol=native#text/plain
-src/main/java/forge/SetInfo.java svneol=native#text/plain
-src/main/java/forge/SetUtils.java svneol=native#text/plain
 src/main/java/forge/SimpleCombat.java svneol=native#text/plain
 src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
@@ -11033,6 +11031,7 @@ src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardCharacteristics.java -text
 src/main/java/forge/card/CardColor.java -text
 src/main/java/forge/card/CardCoreType.java -text
+src/main/java/forge/card/CardEdition.java -text
 src/main/java/forge/card/CardInSet.java -text
 src/main/java/forge/card/CardManaCost.java -text
 src/main/java/forge/card/CardManaCostShard.java -text
@@ -11040,10 +11039,12 @@ src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRuleCharacteristics.java -text
 src/main/java/forge/card/CardRules.java -text
 src/main/java/forge/card/CardRulesReader.java svneol=native#text/plain
-src/main/java/forge/card/CardSet.java -text
 src/main/java/forge/card/CardSuperType.java -text
 src/main/java/forge/card/CardType.java -text
+src/main/java/forge/card/FormatUtils.java -text
 src/main/java/forge/card/MtgDataParser.java -text
+src/main/java/forge/card/SetInfo.java svneol=native#text/plain
+src/main/java/forge/card/SetUtils.java svneol=native#text/plain
 src/main/java/forge/card/TriggerReplacementBase.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAlterLife.java svneol=native#text/plain
@@ -11243,7 +11244,6 @@ src/main/java/forge/deck/generate/GenerateThemeDeck.java svneol=native#text/plai
 src/main/java/forge/deck/generate/package-info.java svneol=native#text/plain
 src/main/java/forge/deck/io/DeckFileHeader.java -text
 src/main/java/forge/deck/io/DeckGroupSerializer.java -text
-src/main/java/forge/deck/io/DeckReaderBase.java -text
 src/main/java/forge/deck/io/DeckSerializer.java -text
 src/main/java/forge/deck/io/OldDeckParser.java -text
 src/main/java/forge/deck/package-info.java svneol=native#text/plain
@@ -11377,6 +11377,7 @@ src/main/java/forge/util/FileSection.java -text
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 src/main/java/forge/util/FolderMap.java svneol=native#text/plain
 src/main/java/forge/util/FolderMapView.java -text
+src/main/java/forge/util/FolderStorageReader.java -text
 src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
 src/main/java/forge/util/IFolderMap.java -text
 src/main/java/forge/util/IFolderMapView.java -text

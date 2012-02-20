@@ -29,9 +29,9 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.AllZone;
 import forge.Card;
-import forge.SetUtils;
-import forge.card.CardSet;
+import forge.card.CardEdition;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.item.BoosterPack;
@@ -116,7 +116,7 @@ public class CardPanelLite extends CardPanelBase {
         } else {
             if (card instanceof BoosterPack) {
                 final BoosterPack booster = (BoosterPack) card;
-                final CardSet set = SetUtils.getSetByCodeOrThrow(booster.getSet());
+                final CardEdition set = AllZone.getEditions().getEditionByCodeOrThrow(booster.getSet());
                 final String tpl = "%s booster pack.%n%nContains %d cards.%n%nBuy it to reveal the cards and add them to your inventory.";
                 this.description.setText(String.format(tpl, set.getName(), set.getBoosterData().getTotal()));
             } else if (card instanceof PreconDeck) {

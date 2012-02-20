@@ -23,13 +23,14 @@ import java.util.List;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.FileUtil;
+import forge.util.FolderStorageReader;
 import forge.util.IItemSerializer;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public class DeckGroupSerializer extends DeckReaderBase<DeckGroup> implements IItemSerializer<DeckGroup> {
+public class DeckGroupSerializer extends FolderStorageReader<DeckGroup> implements IItemSerializer<DeckGroup> {
     /**
      * TODO: Write javadoc for Constructor.
      * @param deckDir0
@@ -93,7 +94,7 @@ public class DeckGroupSerializer extends DeckReaderBase<DeckGroup> implements II
     }
 
     public File makeFileFor(final DeckGroup decks) {
-        return new File(getDirectory(), deriveFileName(cleanDeckName(decks.getName())));
+        return new File(getDirectory(), decks.getBestFileName());
     }
 
     /* (non-Javadoc)

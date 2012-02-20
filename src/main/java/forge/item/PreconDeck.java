@@ -21,7 +21,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import forge.SetUtils;
+import forge.AllZone;
 import forge.deck.Deck;
 import forge.quest.SellRules;
 import forge.util.FileSection;
@@ -88,7 +88,7 @@ public class PreconDeck implements InventoryItemFromSet {
         
         imageFilename = kv.get("Image");
         description = kv.get("Description");
-        if( SetUtils.getSetByCode(kv.get("set").toUpperCase()) != null )
+        if( AllZone.getEditions().getEditionByCode(kv.get("set").toUpperCase()) != null )
         { setProxy = kv.get("set"); }
 
         this.set = setProxy;

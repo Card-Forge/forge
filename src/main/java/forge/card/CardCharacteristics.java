@@ -20,7 +20,6 @@ package forge.card;
 import java.util.ArrayList;
 
 import forge.CardColor;
-import forge.SetInfo;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;

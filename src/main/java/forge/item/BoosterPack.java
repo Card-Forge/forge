@@ -21,10 +21,10 @@ import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.SetUtils;
+import forge.AllZone;
 import forge.card.BoosterGenerator;
 import forge.card.CardRules;
-import forge.card.CardSet;
+import forge.card.CardEdition;
 
 /**
  * TODO Write javadoc for this type.
@@ -33,14 +33,14 @@ import forge.card.CardSet;
 public class BoosterPack implements InventoryItemFromSet {
 
     /** The Constant fnFromSet. */
-    public static final Lambda1<BoosterPack, CardSet> FN_FROM_SET = new Lambda1<BoosterPack, CardSet>() {
+    public static final Lambda1<BoosterPack, CardEdition> FN_FROM_SET = new Lambda1<BoosterPack, CardEdition>() {
         @Override
-        public BoosterPack apply(final CardSet arg1) {
+        public BoosterPack apply(final CardEdition arg1) {
             return new BoosterPack(arg1);
         }
     };
 
-    private final CardSet cardSet;
+    private final CardEdition cardSet;
     private final String name;
 
     private List<CardPrinted> cards = null;
@@ -52,7 +52,7 @@ public class BoosterPack implements InventoryItemFromSet {
      *            the set
      */
     public BoosterPack(final String set) {
-        this(SetUtils.getSetByCodeOrThrow(set));
+        this(AllZone.getEditions().getEditionByCodeOrThrow(set));
     }
 
     /**
@@ -61,7 +61,7 @@ public class BoosterPack implements InventoryItemFromSet {
      * @param set
      *            the set
      */
-    public BoosterPack(final CardSet set) {
+    public BoosterPack(final CardEdition set) {
         this.cardSet = set;
         this.name = this.cardSet.getName() + " Booster Pack";
     }
@@ -111,14 +111,14 @@ public class BoosterPack implements InventoryItemFromSet {
         return "booster/" + this.cardSet.getCode() + ".png";
     }
 
-    private CardPrinted getRandomBasicLand(final CardSet set) {
+    private CardPrinted getRandomBasicLand(final CardEdition set) {
         return Predicate.and(CardPrinted.Predicates.printedInSets(set.getCode()),
                 CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES).random(
                 CardDb.instance().getAllCards());
     }
 
     private CardPrinted getLandFromNearestSet() {
-        final List<CardSet> sets = SetUtils.getAllSets();
+        final List<CardEdition> sets = AllZone.getEditions().getAllSets();
         final int iThisSet = sets.indexOf(this.cardSet);
         for (int iSet = iThisSet; iSet < sets.size(); iSet++) {
             final CardPrinted land = this.getRandomBasicLand(sets.get(iSet));
@@ -127,7 +127,7 @@ public class BoosterPack implements InventoryItemFromSet {
             }
         }
         // if not found (though that's impossible)
-        return this.getRandomBasicLand(SetUtils.getSetByCode("M12"));
+        return this.getRandomBasicLand(AllZone.getEditions().getEditionByCode("M12"));
     }
 
     private void generate() {

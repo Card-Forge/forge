@@ -33,6 +33,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
 import forge.card.CardCharacteristics;
+import forge.card.SetInfo;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -8218,7 +8219,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param sInfo
-     *            a {@link forge.SetInfo} object.
+     *            a {@link forge.card.SetInfo} object.
      */
     public final void addSet(final SetInfo sInfo) {
         this.getCharacteristics().getSets().add(sInfo);

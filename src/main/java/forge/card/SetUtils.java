@@ -15,20 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.card;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardBlock;
-import forge.card.CardSet;
-import forge.game.GameFormat;
 import forge.util.FileUtil;
 
 /**
@@ -41,80 +38,28 @@ import forge.util.FileUtil;
  */
 public final class SetUtils {
 
-    private SetUtils() {
-        throw new AssertionError();
+    private final List<CardEdition> allSets;
+
+    public final List<CardEdition> getAllSets() {
+        return allSets;
+    }
+
+    public SetUtils() {
+        allSets = loadSetData(loadBoosterData());
+        allBlocks = loadBlockData();
     }
 
     /** Constant <code>setData</code>. */
-    private static Map<String, CardSet> setsByCode = new HashMap<String, CardSet>();
-    private static List<CardSet> allSets = new ArrayList<CardSet>();
-    private static List<CardBlock> allBlocks = new ArrayList<CardBlock>();
-
-    private static List<GameFormat> formats = new ArrayList<GameFormat>();
-    private static GameFormat fmtStandard = null;
-    private static GameFormat fmtExtended = null;
-    private static GameFormat fmtModern = null;
-
-    /**
-     * Gets the standard.
-     * 
-     * @return the standard
-     */
-    public static GameFormat getStandard() {
-        return SetUtils.fmtStandard;
-    }
-
-    /**
-     * Gets the extended.
-     * 
-     * @return the extended
-     */
-    public static GameFormat getExtended() {
-        return SetUtils.fmtExtended;
-    }
-
-    /**
-     * Gets the modern.
-     * 
-     * @return the modern
-     */
-    public static GameFormat getModern() {
-        return SetUtils.fmtModern;
-    }
-
-    // list are immutable, no worries
-    /**
-     * Gets the formats.
-     * 
-     * @return the formats
-     */
-    public static List<GameFormat> getFormats() {
-        return SetUtils.formats;
-    }
+    private final Map<String, CardEdition> setsByCode = new TreeMap<String, CardEdition>(String.CASE_INSENSITIVE_ORDER);
+    private final List<CardBlock> allBlocks;
 
     /**
      * Gets the blocks.
      * 
      * @return the blocks
      */
-    public static List<CardBlock> getBlocks() {
-        return SetUtils.allBlocks;
-    }
-
-    /**
-     * Gets the all sets.
-     * 
-     * @return the all sets
-     */
-    public static List<CardSet> getAllSets() {
-        return SetUtils.allSets;
-    }
-
-    // Perform that first of all
-    static {
-        SetUtils.loadSetData(SetUtils.loadBoosterData());
-        SetUtils.loadBlockData();
-        SetUtils.loadFormatData();
+    public List<CardBlock> getBlocks() {
+        return allBlocks;
     }
 
     /**
@@ -124,8 +69,8 @@ public final class SetUtils {
      *            the code
      * @return the sets the by code
      */
-    public static CardSet getSetByCode(final String code) {
-        return SetUtils.setsByCode.get(code);
+    public CardEdition getEditionByCode(final String code) {
+        return setsByCode.get(code);
     }
 
     /**
@@ -135,10 +80,10 @@ public final class SetUtils {
      *            the code
      * @return the sets the by code or throw
      */
-    public static CardSet getSetByCodeOrThrow(final String code) {
-        final CardSet set = SetUtils.setsByCode.get(code);
+    public CardEdition getEditionByCodeOrThrow(final String code) {
+        final CardEdition set = setsByCode.get(code);
         if (null == set) {
-            throw new RuntimeException(String.format("Set with code '%s' not found", code));
+            throw new RuntimeException(String.format("Edition with code '%s' not found", code));
         }
         return set;
     }
@@ -151,14 +96,14 @@ public final class SetUtils {
      *            the code
      * @return the code2 by code
      */
-    public static String getCode2ByCode(final String code) {
-        final CardSet set = SetUtils.setsByCode.get(code);
+    public String getCode2ByCode(final String code) {
+        final CardEdition set = setsByCode.get(code);
         return set == null ? "" : set.getCode2();
     }
 
-    private static Map<String, CardSet.BoosterData> loadBoosterData() {
+    private Map<String, CardEdition.BoosterData> loadBoosterData() {
         final ArrayList<String> fData = FileUtil.readFile("res/blockdata/boosters.txt");
-        final Map<String, CardSet.BoosterData> result = new HashMap<String, CardSet.BoosterData>();
+        final Map<String, CardEdition.BoosterData> result = new HashMap<String, CardEdition.BoosterData>();
 
         for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
@@ -191,15 +136,16 @@ public final class SetUtils {
                     nDF = Integer.parseInt(kv[1]);
                 }
             }
-            result.put(code, new CardSet.BoosterData(nC, nU, nR, nS, nDF));
+            result.put(code, new CardEdition.BoosterData(nC, nU, nR, nS, nDF));
         }
         return result;
     }
 
     // parser code - quite boring.
-    private static void loadSetData(final Map<String, CardSet.BoosterData> boosters) {
+    private List<CardEdition> loadSetData(final Map<String, CardEdition.BoosterData> boosters) {
         final ArrayList<String> fData = FileUtil.readFile("res/blockdata/setdata.txt");
 
+        final List<CardEdition> allSets = new ArrayList<CardEdition>();
         for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
@@ -225,22 +171,22 @@ public final class SetUtils {
                     alias = kv[1];
                 }
             }
-            final CardSet set = new CardSet(index, name, code, code2, boosters.get(code));
+            final CardEdition set = new CardEdition(index, name, code, code2, boosters.get(code));
             boosters.remove(code);
-            SetUtils.setsByCode.put(code, set);
+            setsByCode.put(code, set);
             if (alias != null) {
-                SetUtils.setsByCode.put(alias, set);
+                setsByCode.put(alias, set);
             }
-            SetUtils.allSets.add(set);
+            allSets.add(set);
         }
         assert boosters.isEmpty();
-        Collections.sort(SetUtils.allSets);
-        SetUtils.allSets = Collections.unmodifiableList(SetUtils.allSets);
+        return allSets;
     }
 
-    private static void loadBlockData() {
+    private List<CardBlock> loadBlockData() {
         final ArrayList<String> fData = FileUtil.readFile("res/blockdata/blocks.txt");
-
+        final List<CardBlock> theBlocks = new ArrayList<CardBlock>();
+        
         for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
@@ -250,8 +196,8 @@ public final class SetUtils {
 
             String name = null;
             int index = -1;
-            final List<CardSet> sets = new ArrayList<CardSet>(4);
-            CardSet landSet = null;
+            final List<CardEdition> sets = new ArrayList<CardEdition>(4);
+            CardEdition landSet = null;
             int draftBoosters = 3;
             int sealedBoosters = 6;
 
@@ -263,9 +209,9 @@ public final class SetUtils {
                 } else if ("index".equals(key)) {
                     index = Integer.parseInt(kv[1]);
                 } else if ("set0".equals(key) || "set1".equals(key) || "set2".equals(key)) {
-                    sets.add(SetUtils.getSetByCodeOrThrow(kv[1]));
+                    sets.add(getEditionByCodeOrThrow(kv[1]));
                 } else if ("landsetcode".equals(key)) {
-                    landSet = SetUtils.getSetByCodeOrThrow(kv[1]);
+                    landSet = getEditionByCodeOrThrow(kv[1]);
                 } else if ("draftpacks".equals(key)) {
                     draftBoosters = Integer.parseInt(kv[1]);
                 } else if ("sealedpacks".equals(key)) {
@@ -273,56 +219,10 @@ public final class SetUtils {
                 }
 
             }
-            SetUtils.allBlocks.add(new CardBlock(index, name, sets, landSet, draftBoosters, sealedBoosters));
+            theBlocks.add(new CardBlock(index, name, sets, landSet, draftBoosters, sealedBoosters));
         }
-        Collections.reverse(SetUtils.allBlocks);
-        SetUtils.allBlocks = Collections.unmodifiableList(SetUtils.allBlocks);
-    }
-
-    private static void loadFormatData() {
-        final ArrayList<String> fData = FileUtil.readFile("res/blockdata/formats.txt");
-
-        for (final String s : fData) {
-            if (StringUtils.isBlank(s)) {
-                continue;
-            }
-
-            String name = null;
-            final List<String> sets = new ArrayList<String>(); // default: all
-                                                               // sets
-            // allowed
-            final List<String> bannedCards = new ArrayList<String>(); // default:
-            // nothing
-            // banned
-
-            final String[] sParts = s.trim().split("\\|");
-            for (final String sPart : sParts) {
-                final String[] kv = sPart.split(":", 2);
-                final String key = kv[0].toLowerCase();
-                if ("name".equals(key)) {
-                    name = kv[1];
-                } else if ("sets".equals(key)) {
-                    sets.addAll(Arrays.asList(kv[1].split(", ")));
-                } else if ("banned".equals(key)) {
-                    bannedCards.addAll(Arrays.asList(kv[1].split("; ")));
-                }
-            }
-            if (name == null) {
-                throw new RuntimeException("Format must have a name! Check formats.txt file");
-            }
-            final GameFormat thisFormat = new GameFormat(name, sets, bannedCards);
-            if (name.equalsIgnoreCase("Standard")) {
-                SetUtils.fmtStandard = thisFormat;
-            }
-            if (name.equalsIgnoreCase("Modern")) {
-                SetUtils.fmtModern = thisFormat;
-            }
-            if (name.equalsIgnoreCase("Extended")) {
-                SetUtils.fmtExtended = thisFormat;
-            }
-            SetUtils.formats.add(thisFormat);
-        }
-        SetUtils.formats = Collections.unmodifiableList(SetUtils.formats);
+        Collections.reverse(theBlocks);
+        return Collections.unmodifiableList(theBlocks);
     }
 
 }

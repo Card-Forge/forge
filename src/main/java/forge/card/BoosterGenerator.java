@@ -20,6 +20,7 @@ package forge.card;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -42,6 +43,8 @@ import forge.util.MyRandom;
  */
 public class BoosterGenerator {
 
+    private static final int BOOSTERS_TO_FIND_MYTHIC = 8;
+    
     // Function to open a booster as it is.
     /** The Constant IDENTITY_PICK. */
     public static final Lambda1<List<CardPrinted>, BoosterGenerator> IDENTITY_PICK = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
@@ -65,18 +68,12 @@ public class BoosterGenerator {
     }
 
     // These lists are to hold cards grouped by rarity in advance.
-    private final List<CardPrinted> basicLands = new ArrayList<CardPrinted>();
+    
     private final List<CardPrinted> allButLands = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> commons = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> uncommons = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> rares = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> mythics = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> specials = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> doubleFacedCommons = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> doubleFacedUncommons = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> doubleFacedRares = new ArrayList<CardPrinted>();
-    private final List<CardPrinted> doubleFacedMythics = new ArrayList<CardPrinted>();
-
+    
+    private final Map<CardRarity, List<CardPrinted>> cardsByRarity = new EnumMap<CardRarity, List<CardPrinted>>(CardRarity.class);
+    private final Map<CardRarity, List<CardPrinted>> twoFacedByRarity = new EnumMap<CardRarity, List<CardPrinted>>(CardRarity.class);
+    
     // private List<CardPrinted> commonCreatures;
     // private List<CardPrinted> commonNonCreatures;
 
@@ -90,6 +87,16 @@ public class BoosterGenerator {
     private int numDoubleFaced = 0;
     private int numSpecials = 0;
 
+    private BoosterGenerator()
+    {
+        for( CardRarity v : CardRarity.values() )
+        {
+            cardsByRarity.put(v, new ArrayList<CardPrinted>());
+            twoFacedByRarity.put(v, new ArrayList<CardPrinted>());
+        }
+    }
+    
+    
     /**
      * <p>
      * Constructor for BoosterGenerator.
@@ -99,6 +106,7 @@ public class BoosterGenerator {
      *            the cards
      */
     public BoosterGenerator(final Iterable<CardPrinted> cards) {
+        this();
         for (final CardPrinted c : cards) {
             this.addToRarity(c);
         }
@@ -111,6 +119,7 @@ public class BoosterGenerator {
      *            the d pool
      */
     public BoosterGenerator(final ItemPoolView<CardPrinted> dPool) {
+        this();
         for (final Entry<CardPrinted, Integer> e : dPool) {
             this.addToRarity(e.getKey());
         }
@@ -124,11 +133,12 @@ public class BoosterGenerator {
      * @param cardSet
      *            the card set
      */
-    public BoosterGenerator(final CardSet cardSet) {
+    public BoosterGenerator(final CardEdition cardSet) {
+        this();
         if (!cardSet.canGenerateBooster()) {
             throw new InvalidParameterException("BoosterGenerator: Set " + cardSet + " cannot generate boosters!");
         }
-        final CardSet.BoosterData bs = cardSet.getBoosterData();
+        final CardEdition.BoosterData bs = cardSet.getBoosterData();
 
         this.numCommons = bs.getCommon();
         this.numUncommons = bs.getUncommon();
@@ -188,7 +198,7 @@ public class BoosterGenerator {
         int indexRares = Integer.MAX_VALUE;
         int indexMythics = Integer.MAX_VALUE;
         for (int iCard = 0; iCard < count; iCard++) {
-            final int rollD8 = MyRandom.getRandom().nextInt(8);
+            final int rollD8 = MyRandom.getRandom().nextInt(BOOSTERS_TO_FIND_MYTHIC);
             final boolean takeMythic = (mythicsSize > 0) && (rollD8 < 1);
             if (takeMythic) {
                 if (indexMythics >= mythicsSize) {
@@ -271,47 +281,35 @@ public class BoosterGenerator {
 
         final List<CardPrinted> temp = new ArrayList<CardPrinted>();
 
-        temp.addAll(this.pickRandomCards(this.commons, nCom));
-        /*
-         * if( nComCreat > 0 || nComNonCr > 0) { if
-         * (commonNonCreatures.isEmpty()) {
-         * CardRules.Predicates.Presets.isCreature.split(commons,
-         * CardPrinted.fnGetRules, commonCreatures, commonNonCreatures); }
-         * temp.addAll(pickRandomCards(commonCreatures, nComCreat));
-         * temp.addAll(pickRandomCards(commonNonCreatures, nComNonCr)); }
-         */
-
-        temp.addAll(this.pickRandomCards(this.uncommons, nUnc));
+        temp.addAll(this.pickRandomCards(cardsByRarity.get(CardRarity.Common), nCom));
+        temp.addAll(this.pickRandomCards(cardsByRarity.get(CardRarity.Uncommon), nUnc));
 
         if (nRareSlots > 0) {
-            temp.addAll(this.pickRandomRaresOrMythics(this.rares, this.mythics, nRareSlots));
+            temp.addAll(this.pickRandomRaresOrMythics(cardsByRarity.get(CardRarity.Rare), 
+                    cardsByRarity.get(CardRarity.MythicRare), nRareSlots));
         }
         if ((nRares > 0) || (nMythics > 0)) {
-            temp.addAll(this.pickRandomCards(this.rares, nRares));
-            temp.addAll(this.pickRandomCards(this.mythics, nMythics));
+            temp.addAll(this.pickRandomCards(cardsByRarity.get(CardRarity.Rare), nRares));
+            temp.addAll(this.pickRandomCards(cardsByRarity.get(CardRarity.MythicRare), nMythics));
         }
         if (nDoubls > 0) {
-            final int dblFacedRarity = MyRandom.getRandom().nextInt(14);
-            List<CardPrinted> listToUse;
-            if (dblFacedRarity < 9) { // Common
-                listToUse = this.doubleFacedCommons;
-            } else if (dblFacedRarity < 13) { // Uncommon
-                listToUse = this.doubleFacedUncommons;
-            } else { // Rare or Mythic
-                if (MyRandom.getRandom().nextInt(8) == 0) {
-                    listToUse = this.doubleFacedMythics;
-                } else {
-                    listToUse = this.doubleFacedRares;
-                }
-            }
-            temp.addAll(this.pickRandomCards(listToUse, nDoubls));
+            final int dblFacedRarity = MyRandom.getRandom().nextInt(nCom + nUnc + nRareSlots);
+            CardRarity rarityInSlot = CardRarity.MythicRare;
+            if( dblFacedRarity < nCom )
+                rarityInSlot = CardRarity.Common;
+            else if( dblFacedRarity < nCom + nUnc )
+                rarityInSlot = CardRarity.Uncommon;
+            else if( MyRandom.getRandom().nextInt(BOOSTERS_TO_FIND_MYTHIC) != 0 )
+                rarityInSlot = CardRarity.Rare;
+            
+            temp.addAll(this.pickRandomCards(twoFacedByRarity.get(rarityInSlot), nDoubls));
         }
 
-        temp.addAll(this.pickRandomCards(this.specials, nSpecs));
+        temp.addAll(this.pickRandomCards(cardsByRarity.get(CardRarity.Special), nSpecs));
 
         temp.addAll(this.pickRandomCards(this.allButLands, nAnyCard));
 
-        temp.addAll(this.pickRandomCards(this.basicLands, nLands));
+        temp.addAll(this.pickRandomCards(cardsByRarity.get(CardRarity.BasicLand), nLands));
 
         return temp;
     }
@@ -320,48 +318,15 @@ public class BoosterGenerator {
         if (c.getCard().isAltState()) {
             return;
         }
+        
+        CardRarity rarity = c.getRarity();
         if (c.getCard().isDoubleFaced() && (this.numDoubleFaced > 0)) {
-            switch (c.getRarity()) {
-            case Common:
-                this.doubleFacedCommons.add(c);
-                break;
-            case Uncommon:
-                this.doubleFacedUncommons.add(c);
-                break;
-            case Rare:
-                this.doubleFacedRares.add(c);
-                break;
-            case MythicRare:
-                this.doubleFacedMythics.add(c);
-                break;
-            default:
-                break;
-            }
+            twoFacedByRarity.get(rarity).add(c);
         } else {
-            switch (c.getRarity()) {
-            case Common:
-                this.commons.add(c);
-                break;
-            case Uncommon:
-                this.uncommons.add(c);
-                break;
-            case Rare:
-                this.rares.add(c);
-                break;
-            case MythicRare:
-                this.mythics.add(c);
-                break;
-            case Special:
-                this.specials.add(c);
-                break;
-            default:
-                break;
-            }
+            cardsByRarity.get(rarity).add(c);
         }
 
-        if (c.getCard().getType().isBasicLand()) {
-            this.basicLands.add(c);
-        } else {
+        if (!c.getCard().getType().isBasicLand()) {
             this.allButLands.add(c);
         }
     }

@@ -46,6 +46,7 @@ import com.google.code.jyield.YieldUtils;
 
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
+import forge.card.SetInfo;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;

@@ -46,7 +46,7 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public ItemPoolView<CardPrinted> nextChoice() {
         this.n--;
-        final BoosterGenerator pack = new BoosterGenerator(SetUtils.getSetByCode("M11"));
+        final BoosterGenerator pack = new BoosterGenerator(AllZone.getEditions().getEditionByCode("M11"));
         return ItemPool.createFrom(pack.getBoosterPack(), CardPrinted.class);
     }
 
