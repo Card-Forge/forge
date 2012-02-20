@@ -920,7 +920,7 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<String> getProduceableColors(final AbilityMana m, final Player player) {
+    /*public static ArrayList<String> getProduceableColors(final AbilityMana m, final Player player) {
         final ArrayList<String> colors = new ArrayList<String>();
 
         // if the mana ability is not avaiable move to the next one
@@ -949,7 +949,7 @@ public class ComputerUtil {
         }
 
         return colors;
-    }
+    }*/
 
     /**
      * <p>
@@ -1094,7 +1094,7 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<AbilityMana> sortForNeeded(final ManaCost cost, final ArrayList<AbilityMana> manaAbilities,
+    /*public static ArrayList<AbilityMana> sortForNeeded(final ManaCost cost, final ArrayList<AbilityMana> manaAbilities,
             final Player player) {
 
         ArrayList<String> colors;
@@ -1145,7 +1145,7 @@ public class ComputerUtil {
         }
 
         return res;
-    }
+    }*/
 
     /**
      * <p>
@@ -1189,19 +1189,19 @@ public class ComputerUtil {
                 colorlessSources.add(m);
 
                 // find possible colors
-                if (m.canProduce("W") || m.isAnyMana()) {
+                if (m.canProduce("W")) {
                     whiteSources.add(m);
                 }
-                if (m.canProduce("U") || m.isAnyMana()) {
+                if (m.canProduce("U")) {
                     blueSources.add(m);
                 }
-                if (m.canProduce("B") || m.isAnyMana()) {
+                if (m.canProduce("B")) {
                     blackSources.add(m);
                 }
-                if (m.canProduce("R") || m.isAnyMana()) {
+                if (m.canProduce("R")) {
                     redSources.add(m);
                 }
-                if (m.canProduce("G") || m.isAnyMana()) {
+                if (m.canProduce("G")) {
                     greenSources.add(m);
                 }
                 if (m.isSnow()) {

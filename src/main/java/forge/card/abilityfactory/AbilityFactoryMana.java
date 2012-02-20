@@ -391,7 +391,6 @@ public class AbilityFactoryMana {
     private static String generatedMana(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
         // Calculate generated mana here for stack description and resolving
         final HashMap<String, String> params = af.getMapParams();
-        final Card card = sa.getSourceCard();
         int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
                 params.get("Amount"), sa) : 1;
 
@@ -403,11 +402,6 @@ public class AbilityFactoryMana {
             }
         } else {
             baseMana = abMana.mana();
-        }
-
-        if (baseMana.equals("Chosen")) {
-            // this will only support 1 chosen color for now.
-            baseMana = InputPayManaCostUtil.getShortColorString(card.getChosenColor().get(0));
         }
 
         if (params.containsKey("Bonus")) {
@@ -769,7 +763,7 @@ public class AbilityFactoryMana {
             final ArrayList<String> colors) {
         for (final String col : Constant.Color.ONLY_COLORS) {
             final String s = InputPayManaCostUtil.getShortColorString(col);
-            if ((ab.canProduce(s) || ab.isAnyMana()) && !colors.contains(col)) {
+            if (ab.canProduce(s) && !colors.contains(col)) {
                 colors.add(col);
             }
         }

@@ -230,8 +230,7 @@ public class BoosterDraftAI {
                         final ArrayList<AbilityMana> maList = typeList.get(i).getManaAbility();
                         for (int j = 0; j < maList.size(); j++) {
                             if (maList.get(j).canProduce(this.playerColors.get(player).getMana1())
-                                    || maList.get(j).canProduce(this.playerColors.get(player).getMana2())
-                                    || maList.get(j).isAnyMana()) {
+                                    || maList.get(j).canProduce(this.playerColors.get(player).getMana2())) {
                                 wouldPick.add(typeList.get(i));
                             }
                         }

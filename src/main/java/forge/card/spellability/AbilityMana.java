@@ -25,6 +25,7 @@ import forge.Card;
 import forge.Player;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
+import forge.control.input.InputPayManaCostUtil;
 
 /**
  * <p>
@@ -228,7 +229,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
                     if (i != 0) {
                         sb.append(" ");
                     }
-                    sb.append(this.origProduced);
+                    sb.append(mana());
                 }
             }
         }
@@ -243,6 +244,12 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @return a {@link java.lang.String} object.
      */
     public final String mana() {
+        if (this.origProduced.contains("Chosen")) {
+            if (this.getSourceCard() != null && !this.getSourceCard().getChosenColor().isEmpty()) {
+                return InputPayManaCostUtil.getShortColorString(this.getSourceCard()
+                        .getChosenColor().get(0));
+            }
+        }
         return this.origProduced;
     }
 
@@ -367,7 +374,17 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @return a boolean.
      */
     public final boolean canProduce(final String s) {
-      //TODO: look at where this called from and take "Any" into account
+        if (isAnyMana()) {
+            return true;
+        }
+
+        if (this.origProduced.contains("Chosen")) {
+            if (this.getSourceCard() != null && !this.getSourceCard().getChosenColor().isEmpty()
+                    && InputPayManaCostUtil.getShortColorString(this.getSourceCard().getChosenColor().get(0))
+                    .contains(s)) {
+                return true;
+            }
+        }
         return this.origProduced.contains(s);
     }
 
@@ -379,7 +396,8 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * @return a boolean.
      */
     public final boolean isBasic() {
-        if (this.origProduced.length() != 1 && !this.origProduced.contains("Any")) {
+        if (this.origProduced.length() != 1 && !this.origProduced.contains("Any")
+                && !this.origProduced.contains("Chosen")) {
             return false;
         }
 

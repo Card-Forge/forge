@@ -670,6 +670,9 @@ public final class AbilityFactoryChoose {
                         if (logic.equals("MostProminentInHumanDeck")) {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame().getController(
                                     AllZone.getHumanPlayer()));
+                        } else if (logic.equals("MostProminentInComputerDeck")) {
+                            chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame().getController(
+                                    AllZone.getComputerPlayer()));
                         }
                         else if (logic.equals("MostProminentInGame")) {
                             chosen = CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame());

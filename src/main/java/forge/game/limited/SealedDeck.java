@@ -325,8 +325,7 @@ public class SealedDeck {
                 public boolean addCard(final Card c) {
                     final ArrayList<AbilityMana> maList = c.getManaAbility();
                     for (int j = 0; j < maList.size(); j++) {
-                        if (maList.get(j).canProduce(aiDC.mana1) || maList.get(j).canProduce(aiDC.mana2)
-                                || maList.get(j).isAnyMana()) {
+                        if (maList.get(j).canProduce(aiDC.mana1) || maList.get(j).canProduce(aiDC.mana2)) {
                             return true;
                         }
                     }
