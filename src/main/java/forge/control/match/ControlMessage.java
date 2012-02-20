@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import forge.AllZone;
 import forge.Constant;
 import forge.GuiInput;
+import forge.Singletons;
 import forge.view.match.ViewMessage;
 
 /**
@@ -34,7 +35,7 @@ public class ControlMessage {
 
     private final GuiInput inputControl;
 
-    private ActionListener alCancel = null, alOK = null;
+    private final ActionListener actCancel, actOK;
 
     /**
      * Child controller - handles operations related to input panel.
@@ -46,7 +47,7 @@ public class ControlMessage {
         this.view = v;
         this.inputControl = new GuiInput();
 
-        this.alOK = new ActionListener() {
+        this.actOK = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent evt) {
                 ControlMessage.this.btnOKActionPerformed(evt);
@@ -60,22 +61,24 @@ public class ControlMessage {
             }
         };
 
-        this.alCancel = new ActionListener() {
+        this.actCancel = new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent evt) {
                 ControlMessage.this.btnCancelActionPerformed(evt);
                 ControlMessage.this.view.getBtnOK().requestFocusInWindow();
             }
         };
+
+        addListeners();
     }
 
     /** Adds listeners to input area. */
     public void addListeners() {
-        this.view.getBtnCancel().removeActionListener(alCancel);
-        this.view.getBtnCancel().addActionListener(alCancel);
+        this.view.getBtnCancel().removeActionListener(actCancel);
+        this.view.getBtnCancel().addActionListener(actCancel);
 
-        this.view.getBtnOK().removeActionListener(alOK);
-        this.view.getBtnOK().addActionListener(alOK);
+        this.view.getBtnOK().removeActionListener(actOK);
+        this.view.getBtnOK().addActionListener(actOK);
     }
 
     /**
@@ -122,8 +125,8 @@ public class ControlMessage {
     /** Updates count label in input area. */
     public void updateGameCount() {
         view.getLblGames().setText("<html>Game #"
-                + (AllZone.getMatchState().getGamesPlayedCount() + 1)
-                + " of " + AllZone.getMatchState().getGamesPerMatch()
+                + (Singletons.getModel().getMatchState().getGamesPlayedCount() + 1)
+                + " of " + Singletons.getModel().getMatchState().getGamesPerMatch()
                 + "<br>" + Constant.Runtime.getGameType().toString() + " mode</html>");
     }
 

@@ -39,7 +39,7 @@ public class ViewWinLose {
     /** */
     public ViewWinLose() {
         final FOverlay overlay = Singletons.getView().getOverlay();
-        final FMatchState matchState = AllZone.getMatchState();
+        final FMatchState matchState = Singletons.getModel().getMatchState();
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();

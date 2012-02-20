@@ -64,7 +64,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     @Override
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(card)) {
-                            AllZone.getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card);
                         }
                     }
                 };
@@ -81,7 +81,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     @Override
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(card)) {
-                            AllZone.getGameAction().exile(card);
+                            Singletons.getModel().getGameAction().exile(card);
                         }
                     }
                 };
@@ -98,7 +98,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     @Override
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(card)) {
-                            AllZone.getGameAction().destroy(card);
+                            Singletons.getModel().getGameAction().destroy(card);
                         }
                     }
                 };
@@ -117,7 +117,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                         @Override
                         public void resolve() {
                             if (AllZoneUtil.isCardInPlay(card)) {
-                                AllZone.getGameAction().destroy(card);
+                                Singletons.getModel().getGameAction().destroy(card);
                             }
                         }
                     };
@@ -139,7 +139,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(vale)) {
                             vale.addController(vale.getController().getOpponent());
-                            // AllZone.getGameAction().changeController(
+                            // Singletons.getModel().getGameAction().changeController(
                             // new CardList(vale), vale.getController(),
                             // vale.getController().getOpponent());
 
@@ -180,7 +180,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     @Override
                     public void resolve() {
                         if (AllZoneUtil.isCardInPlay(source)) {
-                            AllZone.getGameAction().moveToHand(source);
+                            Singletons.getModel().getGameAction().moveToHand(source);
                         }
                     }
                 };

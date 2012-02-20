@@ -166,7 +166,7 @@ public class CostExile extends CostPartWithList {
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
-            AllZone.getGameAction().exile(c);
+            Singletons.getModel().getGameAction().exile(c);
         }
     }
 
@@ -282,7 +282,7 @@ public class CostExile extends CostPartWithList {
             while (itr.hasNext()) {
                 final Card c = itr.next();
                 part.addToList(c);
-                AllZone.getGameAction().exile(c);
+                Singletons.getModel().getGameAction().exile(c);
             }
             part.addListToHash(sa, "Exiled");
             payment.paidCost(part);
@@ -334,7 +334,7 @@ public class CostExile extends CostPartWithList {
                         final Card c = (Card) o;
                         this.typeList.remove(c);
                         part.addToList(c);
-                        AllZone.getGameAction().exile(c);
+                        Singletons.getModel().getGameAction().exile(c);
                         if (i == (nNeeded - 1)) {
                             this.done();
                         }
@@ -423,7 +423,7 @@ public class CostExile extends CostPartWithList {
                 if (this.typeList.contains(card)) {
                     this.nExiles++;
                     part.addToList(card);
-                    AllZone.getGameAction().exile(card);
+                    Singletons.getModel().getGameAction().exile(card);
                     this.typeList.remove(card);
                     // in case nothing else to exile
                     if (this.nExiles == nNeeded) {
@@ -483,7 +483,7 @@ public class CostExile extends CostPartWithList {
                             possibleValues[0]);
                     if (choice.equals(0)) {
                         payment.getAbility().addCostToHashList(card, "Exiled");
-                        AllZone.getGameAction().exile(card);
+                        Singletons.getModel().getGameAction().exile(card);
                         part.addToList(card);
                         this.stop();
                         part.addListToHash(sa, "Exiled");

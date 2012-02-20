@@ -182,7 +182,7 @@ public class MagicStack extends MyObservable {
         if (ability.isSpell()) {
             final Card source = ability.getSourceCard();
             if (!source.isCopiedSpell() && !source.isInZone(Constant.Zone.Stack)) {
-                ability.setSourceCard(AllZone.getGameAction().moveToStack(source));
+                ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
             }
         }
 
@@ -204,7 +204,7 @@ public class MagicStack extends MyObservable {
             this.add(sa);
         }
         if (checkState) {
-            AllZone.getGameAction().checkStateEffects();
+            Singletons.getModel().getGameAction().checkStateEffects();
         }
     }
 
@@ -294,7 +294,7 @@ public class MagicStack extends MyObservable {
         ManaCost manaCost = new ManaCost(sa.getManaCost());
         String mana = manaCost.toString();
 
-        int multiKickerPaid = AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaid();
+        int multiKickerPaid = Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid();
 
         String numberManaCost = " ";
 
@@ -313,12 +313,12 @@ public class MagicStack extends MyObservable {
 
                 if ((check - multiKickerPaid) < 0) {
                     multiKickerPaid = multiKickerPaid - check;
-                    AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
+                    Singletons.getModel().getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
                     mana = mana.replaceFirst(String.valueOf(check), "0");
                 } else {
                     mana = mana.replaceFirst(String.valueOf(check), String.valueOf(check - multiKickerPaid));
                     multiKickerPaid = 0;
-                    AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
+                    Singletons.getModel().getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
                 }
             }
             mana = mana.trim();
@@ -327,15 +327,15 @@ public class MagicStack extends MyObservable {
             }
             manaCost = new ManaCost(mana);
         }
-        final String colorCut = AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored();
+        final String colorCut = Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored();
 
         for (int colorCutIx = 0; colorCutIx < colorCut.length(); colorCutIx++) {
             if ("WUGRB".contains(colorCut.substring(colorCutIx, colorCutIx + 1))
                     && !mana.equals(mana.replaceFirst((colorCut.substring(colorCutIx, colorCutIx + 1)), ""))) {
                 mana = mana.replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
 
-                AllZone.getGameAction().setCostCuttingGetMultiMickerManaCostPaidColored(
-                        AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
+                Singletons.getModel().getGameAction().setCostCuttingGetMultiMickerManaCostPaidColored(
+                        Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
                                 .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), ""));
 
                 mana = mana.trim();
@@ -537,8 +537,8 @@ public class MagicStack extends MyObservable {
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
-                            if ((AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
-                                    && AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
+                            if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
+                                    && Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
                                             .equals("")) {
 
                                 AllZone.getInputControl().setInput(
@@ -553,13 +553,12 @@ public class MagicStack extends MyObservable {
                                                                 + sa.getSourceCard()
                                                                 + "\r\n"
                                                                 + "Mana in Reserve: "
-                                                                + ((AllZone.getGameAction()
-                                                                        .getCostCuttingGetMultiMickerManaCostPaid() != 0) ? AllZone
-                                                                        .getGameAction()
+                                                                + ((Singletons.getModel().getGameAction()
+                                                                        .getCostCuttingGetMultiMickerManaCostPaid() != 0) ?
+                                                                                Singletons.getModel().getGameAction()
                                                                         .getCostCuttingGetMultiMickerManaCostPaid()
                                                                         : "")
-                                                                + AllZone
-                                                                        .getGameAction()
+                                                                + Singletons.getModel().getGameAction()
                                                                         .getCostCuttingGetMultiMickerManaCostPaidColored()
                                                                 + "\r\n" + "Times Kicked: "
                                                                 + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
@@ -575,8 +574,8 @@ public class MagicStack extends MyObservable {
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
                     } else {
-                        if ((AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
-                                && AllZone.getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored().equals("")) {
+                        if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
+                                && Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored().equals("")) {
                             AllZone.getInputControl().setInput(
                                     new InputPayManaCostAbility("Multikicker for " + sa.getSourceCard() + "\r\n"
                                             + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
@@ -588,11 +587,11 @@ public class MagicStack extends MyObservable {
                                                     + sa.getSourceCard()
                                                     + "\r\n"
                                                     + "Mana in Reserve: "
-                                                    + ((AllZone.getGameAction()
-                                                            .getCostCuttingGetMultiMickerManaCostPaid() != 0) ? AllZone
-                                                            .getGameAction().getCostCuttingGetMultiMickerManaCostPaid()
+                                                    + ((Singletons.getModel().getGameAction()
+                                                            .getCostCuttingGetMultiMickerManaCostPaid() != 0) ?
+                                                                    Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid()
                                                             : "")
-                                                    + AllZone.getGameAction()
+                                                    + Singletons.getModel().getGameAction()
                                                             .getCostCuttingGetMultiMickerManaCostPaidColored() + "\r\n"
                                                     + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
                                                     + "\r\n", manaCost.toString(), paidCommand, unpaidCommand));
@@ -753,14 +752,14 @@ public class MagicStack extends MyObservable {
                         @Override
                         public void selectButtonCancel() {
                             AllZone.getStack().pop();
-                            AllZone.getGameAction().moveToGraveyard(sp.getSourceCard());
+                            Singletons.getModel().getGameAction().moveToGraveyard(sp.getSourceCard());
                             this.stop();
                         }
 
                         @Override
                         public void selectCard(final Card c, final PlayerZone zone) {
                             if (zone.is(Constant.Zone.Battlefield) && c.getController().isHuman() && c.isLand()) {
-                                AllZone.getGameAction().sacrifice(c);
+                                Singletons.getModel().getGameAction().sacrifice(c);
                                 this.stop();
                             }
                         }
@@ -775,7 +774,7 @@ public class MagicStack extends MyObservable {
                                 AllZone.getComputerPlayer().sacrificePermanent("prompt", lands);
                             } else {
                                 AllZone.getStack().pop();
-                                AllZone.getGameAction().moveToGraveyard(sp.getSourceCard());
+                                Singletons.getModel().getGameAction().moveToGraveyard(sp.getSourceCard());
                             }
                         }
                     }
@@ -920,7 +919,7 @@ public class MagicStack extends MyObservable {
             final Ability haunterDiesWork = new Ability(source, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.getGameAction().exile(source);
+                    Singletons.getModel().getGameAction().exile(source);
                     this.getTargetCard().addHauntedBy(source);
                 }
             };
@@ -992,9 +991,9 @@ public class MagicStack extends MyObservable {
         }
         // Handle cards that need to be moved differently
         else if (sa.isBuyBackAbility() && !fizzle) {
-            AllZone.getGameAction().moveToHand(source);
+            Singletons.getModel().getGameAction().moveToHand(source);
         } else if (sa.isFlashBackAbility()) {
-            AllZone.getGameAction().exile(source);
+            Singletons.getModel().getGameAction().exile(source);
             sa.setFlashBackAbility(false);
         } else if (source.hasKeyword("Rebound")
                 && source.getCastFrom() == Zone.Hand
@@ -1003,7 +1002,7 @@ public class MagicStack extends MyObservable {
         {
 
             //Move rebounding card to exile
-            AllZone.getGameAction().exile(source);
+            Singletons.getModel().getGameAction().exile(source);
             System.out.println("rebound1: " + source);
 
             //Setup a Rebound-trigger
@@ -1041,7 +1040,7 @@ public class MagicStack extends MyObservable {
                         return;
                     }
                     if (source.getOwner().isHuman()) {
-                        AllZone.getGameAction().playCardNoCost(source);
+                        Singletons.getModel().getGameAction().playCardNoCost(source);
                     } else {
                         System.out.println("rebound: " + source);
                         for (SpellAbility s : source.getSpells()) {
@@ -1055,7 +1054,7 @@ public class MagicStack extends MyObservable {
                         }
 
                     }
-                    AllZone.getGameAction().moveToGraveyard(source);
+                    Singletons.getModel().getGameAction().moveToGraveyard(source);
                 }
             };
 
@@ -1068,7 +1067,7 @@ public class MagicStack extends MyObservable {
         // replace its own movement
         else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery() || fizzle)
                 && source.isInZone(Constant.Zone.Stack)) {
-            AllZone.getGameAction().moveToGraveyard(source);
+            Singletons.getModel().getGameAction().moveToGraveyard(source);
         }
     }
 
@@ -1093,7 +1092,7 @@ public class MagicStack extends MyObservable {
         this.unfreezeStack();
         sa.resetOnceResolved();
 
-        AllZone.getGameAction().checkStateEffects();
+        Singletons.getModel().getGameAction().checkStateEffects();
 
         AllZone.getPhaseHandler().setNeedToNextPhase(false);
 
@@ -1391,18 +1390,18 @@ public class MagicStack extends MyObservable {
                 activePlayerSAs.remove(next);
 
                 if (next.isTrigger()) {
-                    AllZone.getGameAction().playSpellAbility(next);
+                    Singletons.getModel().getGameAction().playSpellAbility(next);
                 } else {
                     this.add(next);
                 }
             }
 
             if (activePlayerSAs.get(0).isTrigger()) {
-                AllZone.getGameAction().playSpellAbility(activePlayerSAs.get(0));
+                Singletons.getModel().getGameAction().playSpellAbility(activePlayerSAs.get(0));
             } else {
                 this.add(activePlayerSAs.get(0));
             }
-            // AllZone.getGameAction().playSpellAbility(activePlayerSAs.get(0));
+            // Singletons.getModel().getGameAction().playSpellAbility(activePlayerSAs.get(0));
         }
     }
 

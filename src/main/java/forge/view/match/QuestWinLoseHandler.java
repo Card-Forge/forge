@@ -39,6 +39,7 @@ import forge.control.match.ControlWinLose;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameLossReason;
+import forge.game.GameNew;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.gui.GuiUtils;
@@ -88,7 +89,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     public QuestWinLoseHandler(final ViewWinLose view0) {
         super(view0);
         this.view = view0;
-        matchState = AllZone.getMatchState();
+        matchState = Singletons.getModel().getMatchState();
         qData = AllZone.getQuestData();
         qEvent = AllZone.getQuestEvent();
         this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
@@ -126,7 +127,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 computerLife = ((QuestChallenge) qEvent).getAILife();
             }
 
-            AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
+            GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
                     humanList, computerList, humanLife, computerLife);
         } else {
             super.startNextRound();
@@ -151,14 +152,14 @@ public class QuestWinLoseHandler extends ControlWinLose {
         if (matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             if (isAnte) {
                 final CardList antes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
-                final List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteWon(antes);
+                final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteWon(antes);
                 this.anteWon(antesPrinted);
 
             }
         } else {
             if (isAnte) {
                 final CardList antes = AllZone.getHumanPlayer().getCardsIn(Zone.Ante);
-                final List<CardPrinted> antesPrinted = AllZone.getMatchState().addAnteLost(antes);
+                final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteLost(antes);
                 for (final CardPrinted ante : antesPrinted) {
                     //the last param here (should) determine if this is added to the Card Shop
                     AllZone.getQuestData().getCards().sellCard(ante, 0, false);
@@ -219,7 +220,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         // Add any antes won this match (regardless of Match Win/Lose to Card Pool
         // Note: Antes lost have already been remove from decks.
-        AllZone.getMatchState().addAnteWonToCardPool();
+        Singletons.getModel().getMatchState().addAnteWonToCardPool();
 
         return true;
     }
@@ -291,7 +292,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
         Singletons.getModel().getQuestPreferences().save();
         Singletons.getModel().savePrefs();
 
-        Singletons.getControl().getControlMatch().deinitMatch();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
         Singletons.getView().getViewHome().showQuestMenu();
         GuiUtils.closeOverlay();

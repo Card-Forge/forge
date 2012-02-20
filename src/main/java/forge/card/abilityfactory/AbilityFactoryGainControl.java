@@ -33,6 +33,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -429,7 +430,7 @@ public class AbilityFactoryGainControl {
             if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
 
                 tgtC.addController(newController);
-                // AllZone.getGameAction().changeController(new CardList(tgtC),
+                // Singletons.getModel().getGameAction().changeController(new CardList(tgtC),
                 // tgtC.getController(), newController.get(0));
 
                 if (this.bUntap) {
@@ -547,9 +548,9 @@ public class AbilityFactoryGainControl {
                     public void resolve() {
 
                         if (AbilityFactoryGainControl.this.bNoRegen) {
-                            AllZone.getGameAction().destroyNoRegeneration(c);
+                            Singletons.getModel().getGameAction().destroyNoRegeneration(c);
                         } else {
-                            AllZone.getGameAction().destroy(c);
+                            Singletons.getModel().getGameAction().destroy(c);
                         }
                     }
                 };
@@ -601,7 +602,7 @@ public class AbilityFactoryGainControl {
         }
         if (AllZoneUtil.isCardInPlay(c)) {
             c.removeController(host);
-            // AllZone.getGameAction().changeController(new CardList(c),
+            // Singletons.getModel().getGameAction().changeController(new CardList(c),
             // c.getController(), originalController);
 
             if (tapOnLose) {

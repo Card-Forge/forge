@@ -33,6 +33,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -431,7 +432,7 @@ public final class AbilityFactoryCopy {
                     if (c.isFaceDown()) {
                         c.setState("FaceDown");
                     }
-                    copy = AllZone.getGameAction().moveToPlay(copy);
+                    copy = Singletons.getModel().getGameAction().moveToPlay(copy);
 
                     copy.setCloneOrigin(hostCard);
                     sa.getSourceCard().addClone(copy);
@@ -456,9 +457,9 @@ public final class AbilityFactoryCopy {
                                 if (params.get("AtEOT").equals("Sacrifice")) {
                                     // maybe do a setSacrificeAtEOT, but
                                     // probably not.
-                                    AllZone.getGameAction().sacrifice(target[index]);
+                                    Singletons.getModel().getGameAction().sacrifice(target[index]);
                                 } else if (params.get("AtEOT").equals("Exile")) {
-                                    AllZone.getGameAction().exile(target[index]);
+                                    Singletons.getModel().getGameAction().exile(target[index]);
                                 }
 
                             }

@@ -11251,7 +11251,9 @@ src/main/java/forge/error/package-info.java svneol=native#text/plain
 src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text
 src/main/java/forge/game/GameLossReason.java -text
+src/main/java/forge/game/GameNew.java -text
 src/main/java/forge/game/GamePlayerRating.java -text
+src/main/java/forge/game/GameState.java -text
 src/main/java/forge/game/GameSummary.java svneol=native#text/plain
 src/main/java/forge/game/GameType.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
@@ -11317,7 +11319,6 @@ src/main/java/forge/item/ItemPoolView.java -text
 src/main/java/forge/item/PreconDeck.java -text
 src/main/java/forge/item/package-info.java -text
 src/main/java/forge/model/BuildInfo.java -text
-src/main/java/forge/model/FGameState.java -text
 src/main/java/forge/model/FMatchState.java svneol=native#text/plain
 src/main/java/forge/model/FModel.java svneol=native#text/plain
 src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
@@ -11472,7 +11473,6 @@ src/test/java/forge/BoosterDraft1Test.java svneol=native#text/plain
 src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
 src/test/java/forge/CardColorTest.java svneol=native#text/plain
 src/test/java/forge/CardReaderTest.java svneol=native#text/plain
-src/test/java/forge/GameActionTest.java svneol=native#text/plain
 src/test/java/forge/GuiDownloadPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiDownloadSetPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/plain

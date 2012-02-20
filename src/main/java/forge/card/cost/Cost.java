@@ -20,10 +20,10 @@ package forge.card.cost;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Constant;
 import forge.Counters;
+import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 
@@ -400,7 +400,7 @@ public class Cost {
 
                 final String mana = this.getTotalMana();
 
-                final ManaCost changedCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(mana));
+                final ManaCost changedCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost(mana));
 
                 costMana.setAdjustedMana(changedCost.toString(false));
             }

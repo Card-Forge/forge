@@ -27,6 +27,7 @@ import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.GameAction;
 import forge.GameActionUtil;
 import forge.PhaseHandler;
 import forge.PhaseUtil;
@@ -80,7 +81,7 @@ public class InputMulligan extends Input {
     public final int doMulligan(final Player player, final GamePlayerRating playerRating) {
         final CardList hand = player.getCardsIn(Zone.Hand);
         for (final Card c : hand) {
-            AllZone.getGameAction().moveToLibrary(c);
+            Singletons.getModel().getGameAction().moveToLibrary(c);
         }
         for (int i = 0; i < InputMulligan.MAGIC_NUMBER_OF_SHUFFLES; i++) {
             player.shuffle();
@@ -120,6 +121,7 @@ public class InputMulligan extends Input {
      */
     final void end() {
         // Computer mulligan
+        final GameAction ga = Singletons.getModel().getGameAction();
         final Player aiPlayer = AllZone.getComputerPlayer();
         final GamePlayerRating aiRating = Singletons.getModel().getGameSummary().getPlayerRating(aiPlayer.getName());
         boolean aiTakesMulligan = true;
@@ -154,13 +156,13 @@ public class InputMulligan extends Input {
                     if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
                         // If we ever let the AI memorize cards in the players
                         // hand, this would be a place to do so.
-                        AllZone.getGameAction().playSpellAbilityNoStack(effect, false);
+                        ga.playSpellAbilityNoStack(effect, false);
                     }
                 }
             }
             if (c.getName().startsWith("Leyline")) {
                 if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
-                    AllZone.getGameAction().moveToPlay(c);
+                    ga.moveToPlay(c);
                 }
             }
         }
@@ -190,24 +192,23 @@ public class InputMulligan extends Input {
             if (c.getName().startsWith("Leyline")
                     && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(Zone.Battlefield,
                             "Leyline of Singularity").size() > 0))) {
-                AllZone.getGameAction().moveToPlay(c);
-                AllZone.getGameAction().checkStateEffects();
+                ga.moveToPlay(c);
+                ga.checkStateEffects();
             }
         }
-        AllZone.getGameAction().checkStateEffects();
+        ga.checkStateEffects();
 
-        if (AllZone.getGameAction().isStartCut()
-                && !(humanOpeningHand.contains(AllZone.getGameAction().getHumanCut()) || aiOpeningHand.contains(AllZone
-                        .getGameAction().getComputerCut()))) {
-            AllZone.getGameAction().moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library),
-                    AllZone.getGameAction().getHumanCut());
-            AllZone.getGameAction().moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library),
-                    AllZone.getGameAction().getComputerCut());
+        if (ga.isStartCut() && !(humanOpeningHand.contains(ga.getHumanCut())
+                        || aiOpeningHand.contains(ga.getComputerCut()))) {
+            ga.moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library), ga.getHumanCut());
+            ga.moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library), ga.getComputerCut());
         }
-        AllZone.getGameAction().checkStateEffects();
+
+        ga.checkStateEffects();
         PhaseHandler.setGameBegins(1);
         AllZone.getPhaseHandler().setNeedToNextPhase(false);
         PhaseUtil.visuallyActivatePhase(AllZone.getPhaseHandler().getPhase());
+
         this.stop();
     }
 
@@ -218,7 +219,7 @@ public class InputMulligan extends Input {
             if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
                 CardList hand = c0.getController().getCardsIn(Zone.Hand);
                 for (Card c : hand) {
-                    AllZone.getGameAction().exile(c);
+                    Singletons.getModel().getGameAction().exile(c);
                 }
                 c0.getController().drawCards(hand.size());
             }

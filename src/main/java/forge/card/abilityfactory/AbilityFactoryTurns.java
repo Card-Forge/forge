@@ -24,6 +24,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Constant;
 import forge.Player;
+import forge.Singletons;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -409,7 +410,7 @@ public class AbilityFactoryTurns {
         // Time Stop, though it will continue to resolve. It also includes
         // spells and abilities that can't be countered.
         for (final Card c : AllZone.getStackZone().getCards()) {
-            AllZone.getGameAction().exile(c);
+            Singletons.getModel().getGameAction().exile(c);
         }
         AllZone.getStack().getStack().clear();
 
@@ -419,7 +420,7 @@ public class AbilityFactoryTurns {
 
         // 3) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.
-        AllZone.getGameAction().checkStateEffects();
+        Singletons.getModel().getGameAction().checkStateEffects();
 
         // 4) The current phase and/or step ends. The game skips straight to the
         // cleanup step. The cleanup step happens in its entirety.

@@ -152,7 +152,7 @@ public final class GameActionUtil {
                                         title.toString(), JOptionPane.YES_NO_OPTION);
 
                                 if (answer == JOptionPane.YES_OPTION) {
-                                    AllZone.getGameAction().playCardNoCost(cascadedCard);
+                                    Singletons.getModel().getGameAction().playCardNoCost(cascadedCard);
                                     revealed.remove(cascadedCard);
                                 }
                             } else {
@@ -178,7 +178,7 @@ public final class GameActionUtil {
                         }
                         revealed.shuffle();
                         for (final Card bottom : revealed) {
-                            AllZone.getGameAction().moveToBottomOfLibrary(bottom);
+                            Singletons.getModel().getGameAction().moveToBottomOfLibrary(bottom);
                         }
                     }
                 };
@@ -279,7 +279,7 @@ public final class GameActionUtil {
                                                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                                                 possibleValues, possibleValues[0]);
                                         if (q.equals(0)) {
-                                            AllZone.getGameAction().playCardNoCost(rippledCards[i]);
+                                            Singletons.getModel().getGameAction().playCardNoCost(rippledCards[i]);
                                             revealed.remove(rippledCards[i]);
                                         }
                                     } else {
@@ -306,7 +306,7 @@ public final class GameActionUtil {
                             }
                             revealed.shuffle();
                             for (final Card bottom : revealed) {
-                                AllZone.getGameAction().moveToBottomOfLibrary(bottom);
+                                Singletons.getModel().getGameAction().moveToBottomOfLibrary(bottom);
                             }
                         }
                     };
@@ -580,14 +580,14 @@ public final class GameActionUtil {
             final Ability ability = new Ability(source, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.getGameAction().destroy(affected);
+                    Singletons.getModel().getGameAction().destroy(affected);
                 }
             };
 
             final Ability ability2 = new Ability(source, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.getGameAction().destroyNoRegeneration(affected);
+                    Singletons.getModel().getGameAction().destroyNoRegeneration(affected);
                 }
             };
 
@@ -863,7 +863,7 @@ public final class GameActionUtil {
     private static void playerCombatDamageTreva(final Card c) {
         final SpellAbility[] sa = c.getSpellAbility();
         if (c.getController().isHuman()) {
-            AllZone.getGameAction().playSpellAbility(sa[1]);
+            Singletons.getModel().getGameAction().playSpellAbility(sa[1]);
         } else {
             ComputerUtil.playNoStack(sa[1]);
         }
@@ -1001,7 +1001,7 @@ public final class GameActionUtil {
 
                     for (int j = 0; j < max; j++) {
                         final Card c = libList.get(j);
-                        AllZone.getGameAction().exile(c);
+                        Singletons.getModel().getGameAction().exile(c);
                     }
                 }
             }; // ability

@@ -27,6 +27,7 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Zone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
@@ -188,7 +189,7 @@ public class InputPayManaCostUtil {
         // save off color needed for use by any mana and reflected mana
         chosen.setExpressChoice(colorsNeeded);
 
-        AllZone.getGameAction().playSpellAbility(chosen);
+        Singletons.getModel().getGameAction().playSpellAbility(chosen);
 
         manaCost = AllZone.getHumanPlayer().getManaPool().subtractMana(sa, manaCost, chosen);
 

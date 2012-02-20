@@ -19,7 +19,6 @@ package forge.card.cost;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
@@ -129,7 +128,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
-            AllZone.getGameAction().moveToHand(c);
+            Singletons.getModel().getGameAction().moveToHand(c);
         }
     }
 
@@ -246,7 +245,7 @@ public class CostReturn extends CostPartWithList {
                 if (this.typeList.contains(card)) {
                     this.nReturns++;
                     part.addToList(card);
-                    AllZone.getGameAction().moveToHand(card);
+                    Singletons.getModel().getGameAction().moveToHand(card);
                     this.typeList.remove(card);
                     // in case nothing else to return
                     if (this.nReturns == nNeeded) {
@@ -305,7 +304,7 @@ public class CostReturn extends CostPartWithList {
                             possibleValues[0]);
                     if (choice.equals(0)) {
                         part.addToList(card);
-                        AllZone.getGameAction().moveToHand(card);
+                        Singletons.getModel().getGameAction().moveToHand(card);
                         this.stop();
                         part.addListToHash(sa, "Returned");
                         payment.paidCost(part);

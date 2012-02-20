@@ -101,9 +101,9 @@ public class CardFactorySorceries {
                         final Player p1 = crd1.getController();
                         crd0.addController(p1);
                         crd1.addController(p0);
-                        // AllZone.getGameAction().changeController(new
+                        // Singletons.getModel().getGameAction().changeController(new
                         // CardList(crd0), p0, p1);
-                        // AllZone.getGameAction().changeController(new
+                        // Singletons.getModel().getGameAction().changeController(new
                         // CardList(crd1), p1, p0);
                     }
 
@@ -199,7 +199,7 @@ public class CardFactorySorceries {
                         }
 
                         target.removeController(card);
-                        // AllZone.getGameAction().changeController(new
+                        // Singletons.getModel().getGameAction().changeController(new
                         // CardList(target), card.getController(),
                         // controllerEOT.get(i));
 
@@ -225,7 +225,7 @@ public class CardFactorySorceries {
                             targets.add(i, target);
 
                             target.addController(card);
-                            // AllZone.getGameAction().changeController(new
+                            // Singletons.getModel().getGameAction().changeController(new
                             // CardList(target), target.getController(),
                             // card.getController());
 
@@ -275,7 +275,7 @@ public class CardFactorySorceries {
                     }
                     for (int i = 0; i < count; i++) {
                         exiled.add(lib.get(i));
-                        AllZone.getGameAction().exile(lib.get(i));
+                        Singletons.getModel().getGameAction().exile(lib.get(i));
                     }
                     final CardList pile1 = new CardList();
                     final CardList pile2 = new CardList();
@@ -415,7 +415,7 @@ public class CardFactorySorceries {
                                             JOptionPane.INFORMATION_MESSAGE);
                                 }
                             } else {
-                                AllZone.getGameAction().playCardNoCost(playing);
+                                Singletons.getModel().getGameAction().playCardNoCost(playing);
                             }
                             chosen.remove(playing);
                         }
@@ -454,7 +454,7 @@ public class CardFactorySorceries {
                         for (int i = 0; i < all.size(); i++) {
                             final Card c = all.get(i);
                             if (c.isCreature()) {
-                                AllZone.getGameAction().destroy(c);
+                                Singletons.getModel().getGameAction().destroy(c);
                             }
                         }
                     }
@@ -579,7 +579,7 @@ public class CardFactorySorceries {
                     // selected are sacrificed.
                     for (int i = 0; i < target.size(); i++) {
                         if (AllZoneUtil.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i))) {
-                            AllZone.getGameAction().sacrifice(target.get(i));
+                            Singletons.getModel().getGameAction().sacrifice(target.get(i));
                         }
                     }
                 } // resolve()
@@ -738,10 +738,10 @@ public class CardFactorySorceries {
                     for (final Card c : grave) {
                         final CardList remLib = lib.getName(c.getName());
                         for (final Card rem : remLib) {
-                            AllZone.getGameAction().exile(rem);
+                            Singletons.getModel().getGameAction().exile(rem);
                             lib.remove(rem);
                         }
-                        AllZone.getGameAction().exile(c);
+                        Singletons.getModel().getGameAction().exile(c);
                     }
                 }
             }; // SpellAbility
@@ -811,7 +811,7 @@ public class CardFactorySorceries {
                     if (compLand.size() > humLand.size()) {
                         compLand.shuffle();
                         for (int i = 0; i < (compLand.size() - humLand.size()); i++) {
-                            AllZone.getGameAction().sacrifice(compLand.get(i));
+                            Singletons.getModel().getGameAction().sacrifice(compLand.get(i));
                         }
                     } else if (humLand.size() > compLand.size()) {
                         final int diff = humLand.size() - compLand.size();
@@ -838,7 +838,7 @@ public class CardFactorySorceries {
                         CardListUtil.sortCMC(compCreats);
                         compCreats.reverse();
                         for (int i = 0; i < (compCreats.size() - humCreats.size()); i++) {
-                            AllZone.getGameAction().sacrifice(compCreats.get(i));
+                            Singletons.getModel().getGameAction().sacrifice(compCreats.get(i));
                         }
                     } else if (humCreats.size() > compCreats.size()) {
                         final int diff = humCreats.size() - compCreats.size();
@@ -1168,12 +1168,12 @@ public class CardFactorySorceries {
                     /*
                      * else { //computer
                      * card.getControler().discardRandom(numCards);
-                     * AllZone.getGameAction().exile(card); CardList grave =
+                     * Singletons.getModel().getGameAction().exile(card); CardList grave =
                      * AllZoneUtil.getPlayerGraveyard(card.getController());
                      * for(int i = 1; i <= numCards; i ++) { Card t1 =
                      * CardFactoryUtil.AI_getBestCreature(grave); if(null != t1)
                      * { t1 = grave.get(0); grave.remove(t1);
-                     * AllZone.getGameAction().moveToHand(t1); } } }
+                     * Singletons.getModel().getGameAction().moveToHand(t1); } } }
                      *
                 } // resolve()
             }; // SpellAbility
@@ -1286,7 +1286,7 @@ public class CardFactorySorceries {
                     bidded = bidded.getType("Creature");
                     for (final Card c : bidded) {
                         if (c.isType(input[1]) || (!input[0].equals("") && c.isType(input[0]))) {
-                            AllZone.getGameAction().moveToPlay(c);
+                            Singletons.getModel().getGameAction().moveToPlay(c);
                         }
                     }
                 } // resolve()
@@ -1376,7 +1376,7 @@ public class CardFactorySorceries {
 
                     // then, move revealed cards to bottom of library
                     for (final Card c : topCards) {
-                        AllZone.getGameAction().moveToBottomOfLibrary(c);
+                        Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
                     }
                 } // resolve()
 
@@ -1408,7 +1408,7 @@ public class CardFactorySorceries {
                     final CardList hand = player.getCardsIn(Zone.Hand);
 
                     for (final Card c : hand) {
-                        AllZone.getGameAction().moveToLibrary(c);
+                        Singletons.getModel().getGameAction().moveToLibrary(c);
                     }
 
                     // Shuffle library
@@ -1460,7 +1460,7 @@ public class CardFactorySorceries {
 
                     // move hand to library
                     for (final Card c : hand) {
-                        AllZone.getGameAction().moveToLibrary(c);
+                        Singletons.getModel().getGameAction().moveToLibrary(c);
                     }
 
                     // Shuffle library
@@ -1498,10 +1498,10 @@ public class CardFactorySorceries {
                 public void resolve() {
                     final Player player = card.getController();
                     for (final Card c : player.getCardsIn(Zone.Graveyard)) {
-                        AllZone.getGameAction().moveToHand(c);
+                        Singletons.getModel().getGameAction().moveToHand(c);
                     }
 
-                    AllZone.getGameAction().exile(card);
+                    Singletons.getModel().getGameAction().exile(card);
 
                     card.setSVar("HSStamp", "" + Player.getHandSizeStamp());
                     player.addHandSizeOperation(new HandSizeOp("=", -1, Integer.parseInt(card.getSVar("HSStamp"))));
@@ -1557,7 +1557,7 @@ public class CardFactorySorceries {
                         final Card c = ab1card[0];
                         if (c != null) {
                             if (card.getController().getZone(Zone.Graveyard).contains(c) && c.canBeTargetedBy(this)) {
-                                AllZone.getGameAction().moveToPlay(c);
+                                Singletons.getModel().getGameAction().moveToPlay(c);
                             }
                         }
                     }
@@ -1970,7 +1970,7 @@ public class CardFactorySorceries {
                         tgt.addDamage(5, card);
                         final CardList equipment = new CardList(tgt.getEquippedBy());
                         for (final Card eq : equipment) {
-                            AllZone.getGameAction().destroy(eq);
+                            Singletons.getModel().getGameAction().destroy(eq);
                         }
                     }
                 } // resolve()
@@ -2018,7 +2018,7 @@ public class CardFactorySorceries {
                     if (toSac != null) {
                         final Card c = (Card) toSac;
                         baseCMC = CardUtil.getConvertedManaCost(c);
-                        AllZone.getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c);
                     } else {
                         return;
                     }
@@ -2038,7 +2038,7 @@ public class CardFactorySorceries {
 
                     // if <= baseCMC, put it onto the battlefield
                     if (newCMC <= baseCMC) {
-                        AllZone.getGameAction().moveToPlay(newArtifact[0]);
+                        Singletons.getModel().getGameAction().moveToPlay(newArtifact[0]);
                     } else {
                         final String diffCost = String.valueOf(newCMC - baseCMC);
                         AllZone.getInputControl().setInput(new InputPayManaCostAbility(diffCost, new Command() {
@@ -2046,14 +2046,14 @@ public class CardFactorySorceries {
 
                             @Override
                             public void execute() {
-                                AllZone.getGameAction().moveToPlay(newArtifact[0]);
+                                Singletons.getModel().getGameAction().moveToPlay(newArtifact[0]);
                             }
                         }, new Command() {
                             private static final long serialVersionUID = -246036834856971935L;
 
                             @Override
                             public void execute() {
-                                AllZone.getGameAction().moveToGraveyard(newArtifact[0]);
+                                Singletons.getModel().getGameAction().moveToGraveyard(newArtifact[0]);
                             }
                         }));
                     }

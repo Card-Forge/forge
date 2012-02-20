@@ -83,7 +83,7 @@ public class InputPayManaCost extends InputMana {
                     AllZone.getStack().add(this.spell);
                 }
             } else {
-                this.manaCost = AllZone.getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
+                this.manaCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
             }
         } else {
             this.manaCost = new ManaCost(sa.getManaCost());
@@ -128,7 +128,7 @@ public class InputPayManaCost extends InputMana {
                     AllZone.getStack().add(this.spell);
                 }
             } else {
-                this.manaCost = manaCostToPay; // AllZone.getGameAction().getSpellCostChange(sa,
+                this.manaCost = manaCostToPay; // Singletons.getModel().getGameAction().getSpellCostChange(sa,
                                                // new
                                                // ManaCost(this.originalManaCost));
             }
@@ -218,7 +218,7 @@ public class InputPayManaCost extends InputMana {
             // if this is a spell, move it to the Stack ZOne
 
             if (this.spell.isSpell()) {
-                this.spell.setSourceCard(AllZone.getGameAction().moveToStack(this.originalCard));
+                this.spell.setSourceCard(Singletons.getModel().getGameAction().moveToStack(this.originalCard));
             }
 
             if (this.spell.getAfterPayMana() != null) {

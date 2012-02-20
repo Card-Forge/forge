@@ -86,7 +86,7 @@ public class PhaseUtil {
         }
         turn.incrementTurn();
 
-        AllZone.getGameAction().resetActivationsPerTurn();
+        Singletons.getModel().getGameAction().resetActivationsPerTurn();
 
         final CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn).filter(CardListFilter.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());

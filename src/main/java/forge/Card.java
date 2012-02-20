@@ -1557,7 +1557,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
 
                 if (hasVanish && AllZoneUtil.isCardInPlay(this)) {
-                    AllZone.getGameAction().sacrifice(this);
+                    Singletons.getModel().getGameAction().sacrifice(this);
                 }
 
                 if (this.hasSuspend() && AllZoneUtil.isCardExiled(this)) {
@@ -1569,7 +1569,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     // Any trigger should cause the phase not to skip
                     AllZone.getPhaseHandler().setSkipPhase(false);
                     if (c.getOwner().isHuman()) {
-                        AllZone.getGameAction().playCardNoCost(c);
+                        Singletons.getModel().getGameAction().playCardNoCost(c);
                     } else {
                         final ArrayList<SpellAbility> choices = this.getBasicSpells();
 
@@ -3852,8 +3852,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
             this.controllerObjects.add(controllerObject);
-            if ((AllZone.getGameAction() != null) && (prevController != null)) {
-                AllZone.getGameAction().controllerChangeZoneCorrection(this);
+            if ((Singletons.getModel().getGameAction() != null) && (prevController != null)) {
+                Singletons.getModel().getGameAction().controllerChangeZoneCorrection(this);
             }
 
             if (prevController != null) {
@@ -3878,7 +3878,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.controllerObjects.remove(controllerObject);
 
         if (!currentController.equals(this.getController())) {
-            AllZone.getGameAction().controllerChangeZoneCorrection(this);
+            Singletons.getModel().getGameAction().controllerChangeZoneCorrection(this);
 
             for (final Command c : this.changeControllerCommandList) {
                 c.execute();
@@ -6276,7 +6276,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Suppressed Exiling is as close as we can get to
             // "ceasing to exist"
             AllZone.getTriggerHandler().suppressMode("ChangesZone");
-            AllZone.getGameAction().exile(this);
+            Singletons.getModel().getGameAction().exile(this);
             AllZone.getTriggerHandler().clearSuppression("ChangesZone");
         }
         return true;
@@ -7462,7 +7462,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // ////////////////////////
 
     // all damage to cards is now handled in Card.java, no longer
-    // AllZone.getGameAction()...
+    // Singletons.getModel().getGameAction()...
     /**
      * <p>
      * addReceivedDamageFromThisTurn.
@@ -8203,7 +8203,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.addCounter(Counters.M1M1, damageToAdd);
         }
         if (source.hasKeyword("Deathtouch") && this.isCreature()) {
-            AllZone.getGameAction().destroy(this);
+            Singletons.getModel().getGameAction().destroy(this);
         } else if (AllZoneUtil.isCardInPlay(this) && !wither) {
             this.damage += damageToAdd;
         }

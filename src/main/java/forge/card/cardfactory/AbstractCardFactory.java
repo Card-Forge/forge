@@ -294,7 +294,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         }
 
         if (controller.isHuman()) {
-            AllZone.getGameAction().playSpellAbilityForFree(copySA);
+            Singletons.getModel().getGameAction().playSpellAbilityForFree(copySA);
         } else if (copySA.canPlayAI()) {
             ComputerUtil.playStackFree(copySA);
         }
@@ -386,7 +386,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         }
 
         if (source.getController().isHuman()) {
-            AllZone.getGameAction().playSpellAbilityForFree(copySA);
+            Singletons.getModel().getGameAction().playSpellAbilityForFree(copySA);
         } else if (copySA.canPlayAI()) {
             ComputerUtil.playStackFree(copySA);
         }
@@ -701,8 +701,8 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             if (o2 != null) {
                                 final Card c2 = (Card) o2;
                                 newGrave.remove(c2);
-                                AllZone.getGameAction().exile(c);
-                                AllZone.getGameAction().exile(c2);
+                                Singletons.getModel().getGameAction().exile(c);
+                                Singletons.getModel().getGameAction().exile(c2);
                                 this.once = true;
 
                                 AllZone.getStack().addSimultaneousStackEntry(nightSoil);
@@ -798,7 +798,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
          * targetHand.toArray());
          * 
          * final Card card = (Card) discard;
-         * AllZone.getGameAction().moveToLibrary(card); } else if
+         * Singletons.getModel().getGameAction().moveToLibrary(card); } else if
          * (target.isComputer()) { AllZone.getComputerPlayer().handToLibrary(1,
          * "Top"); } }
          * 
@@ -814,7 +814,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
          * private static final long serialVersionUID = -8990402917139817175L;
          * 
          * @Override public void resolve() {
-         * AllZone.getGameAction().destroy(card); }
+         * Singletons.getModel().getGameAction().destroy(card); }
          * 
          * @Override public boolean canPlay() { return super.canPlay(); }
          * 
@@ -862,7 +862,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         AllZone.getHumanPlayer().discard(c, null);
                         this.stop();
                     } else if (c.equals(card)) {
-                        AllZone.getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card);
                         this.stop();
                     }
                 }
@@ -873,7 +873,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                 public void resolve() {
                     if (card.getController().isHuman()) {
                         if (AllZone.getHumanPlayer().getZone(Zone.Hand).isEmpty()) {
-                            AllZone.getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card);
                         } else {
                             AllZone.getInputControl().setInput(discard);
                         }
@@ -991,7 +991,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                     } // while
                     GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
                     for (final Card revealedCard : revealed) {
-                        AllZone.getGameAction().moveToBottomOfLibrary(revealedCard);
+                        Singletons.getModel().getGameAction().moveToBottomOfLibrary(revealedCard);
                     }
 
                     if (this.getTargetCard() != null) {
@@ -1072,7 +1072,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             }
                             final Card c1 = (Card) o;
                             lands.remove(c1); // remove from the display list
-                            AllZone.getGameAction().moveToLibrary(c1, i - 1);
+                            Singletons.getModel().getGameAction().moveToLibrary(c1, i - 1);
                         }
                     } else { // Computer
                         // based on current AI, computer should always target
@@ -1084,7 +1084,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         }
 
                         for (int i = 0; i < max; i++) {
-                            AllZone.getGameAction().moveToLibrary(list.get(i));
+                            Singletons.getModel().getGameAction().moveToLibrary(list.get(i));
                         }
                     }
 
@@ -1244,7 +1244,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             public void done() {
                                 // exile those cards
                                 for (final Card c : this.exiled) {
-                                    AllZone.getGameAction().exile(c);
+                                    Singletons.getModel().getGameAction().exile(c);
                                 }
 
                                 // Put that many cards from the top of your
@@ -1253,7 +1253,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                 final PlayerZone lib = AllZone.getHumanPlayer().getZone(Constant.Zone.Library);
                                 int numCards = 0;
                                 while ((lib.size() > 0) && (numCards < this.exiled.size())) {
-                                    AllZone.getGameAction().moveToHand(lib.get(0));
+                                    Singletons.getModel().getGameAction().moveToHand(lib.get(0));
                                     numCards++;
                                 }
 
@@ -1267,7 +1267,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                     final Object o = GuiUtils.getChoice("Put a card on top of your library.",
                                             this.exiled.toArray());
                                     final Card c1 = (Card) o;
-                                    AllZone.getGameAction().moveToLibrary(c1);
+                                    Singletons.getModel().getGameAction().moveToLibrary(c1);
                                     this.exiled.remove(c1);
                                 }
 
@@ -1327,7 +1327,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                         JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
-                            AllZone.getGameAction().playCardNoCost(freeCard);
+                            Singletons.getModel().getGameAction().playCardNoCost(freeCard);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Error in " + cardName + ".  freeCard is null", "",
@@ -1567,7 +1567,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         AllZone.getTriggerHandler().clearSuppression("Transformed");
                     }
 
-                    AllZone.getGameAction().moveToPlay(card);
+                    Singletons.getModel().getGameAction().moveToPlay(card);
                 }
 
                 private void grantExtras() {
@@ -1649,7 +1649,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                             player.payLife(4, card);
                                             // card stays in hand
                                         } else {
-                                            AllZone.getGameAction().moveToLibrary(card);
+                                            Singletons.getModel().getGameAction().moveToLibrary(card);
                                         }
                                         this.stop();
                                     }

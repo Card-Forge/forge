@@ -112,7 +112,7 @@ public class AIPlayer extends Player {
 
     // //////////////////////////////
     // /
-    // / replaces AllZone.getGameAction().draw* methods
+    // / replaces Singletons.getModel().getGameAction().draw* methods
     // /
     // //////////////////////////////
 
@@ -151,11 +151,11 @@ public class AIPlayer extends Player {
             // rule 702.49a
             if (this.getDredgeNumber(c) <= this.getCardsIn(Zone.Library).size()) {
                 // dredge library, put card in hand
-                AllZone.getGameAction().moveToHand(c);
+                Singletons.getModel().getGameAction().moveToHand(c);
                 // put dredge number in graveyard
                 for (int i = 0; i < this.getDredgeNumber(c); i++) {
                     final Card c2 = this.getCardsIn(Zone.Library).get(0);
-                    AllZone.getGameAction().moveToGraveyard(c2);
+                    Singletons.getModel().getGameAction().moveToGraveyard(c2);
                 }
                 return true;
             }
@@ -165,7 +165,7 @@ public class AIPlayer extends Player {
 
     // //////////////////////////////
     // /
-    // / replaces AllZone.getGameAction().discard* methods
+    // / replaces Singletons.getModel().getGameAction().discard* methods
     // /
     // //////////////////////////////
 
@@ -230,17 +230,17 @@ public class AIPlayer extends Player {
                 if (blIH.size() > 0) {
                     final Card card = blIH.get(CardUtil.getRandomIndex(blIH));
 
-                    AllZone.getGameAction().moveToLibrary(card, position);
+                    Singletons.getModel().getGameAction().moveToLibrary(card, position);
                 } else {
                     CardListUtil.sortAttackLowFirst(hand);
                     CardListUtil.sortNonFlyingFirst(hand);
 
-                    AllZone.getGameAction().moveToLibrary(hand.get(0), position);
+                    Singletons.getModel().getGameAction().moveToLibrary(hand.get(0), position);
                 }
             } else {
                 CardListUtil.sortCMC(hand);
 
-                AllZone.getGameAction().moveToLibrary(hand.get(0), position);
+                Singletons.getModel().getGameAction().moveToLibrary(hand.get(0), position);
             }
         }
     }
@@ -286,7 +286,7 @@ public class AIPlayer extends Player {
             }
             if (bottom) {
                 final Card c = topN.get(i);
-                AllZone.getGameAction().moveToBottomOfLibrary(c);
+                Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
                 // topN.remove(c);
             }
         }
@@ -296,7 +296,7 @@ public class AIPlayer extends Player {
             final Random rndm = MyRandom.getRandom();
             final int r = rndm.nextInt(topN.size());
             final Card c = topN.get(r);
-            AllZone.getGameAction().moveToLibrary(c);
+            Singletons.getModel().getGameAction().moveToLibrary(c);
             topN.remove(r);
         }
     }
@@ -307,7 +307,7 @@ public class AIPlayer extends Player {
         if (choices.size() > 0) {
             // TODO - this could probably use better AI
             final Card c = CardFactoryUtil.getWorstPermanentAI(choices, false, false, false, false);
-            AllZone.getGameAction().sacrificeDestroy(c);
+            Singletons.getModel().getGameAction().sacrificeDestroy(c);
         }
     }
 
@@ -316,7 +316,7 @@ public class AIPlayer extends Player {
     protected final void clashMoveToTopOrBottom(final Card c) {
         // computer just puts the card back until such time it can make a
         // smarter decision
-        AllZone.getGameAction().moveToLibrary(c);
+        Singletons.getModel().getGameAction().moveToLibrary(c);
     }
 
     /*

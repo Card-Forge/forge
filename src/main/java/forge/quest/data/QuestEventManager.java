@@ -61,12 +61,6 @@ public class QuestEventManager {
     /** The all challenges. */
     private List<QuestChallenge> allChallenges = null;
 
-    private final QuestPreferences qpref;
-
-    /** */
-    public QuestEventManager() {
-        this.qpref = Singletons.getModel().getQuestPreferences();
-    }
     /**
      * <p>
      * assembleAllEvents.
@@ -105,6 +99,22 @@ public class QuestEventManager {
         this.assembleDuelDifficultyLists();
 
     } // End assembleAllEvents()
+
+    /**
+     * Retrieve single event, using its name.
+     * 
+     * @param s0 &emsp; {@link java.lang.String}
+     * @return {@link forge.data.QuestEvent}
+     */
+    public QuestEvent getEvent(final String s0) {
+        for (QuestEvent q : allDuels) {
+            if (q.getName().equals(s0)) { return q; } }
+
+        for (QuestChallenge q : allChallenges) {
+            if (q.getName().equals(s0)) { return q; } }
+
+        return null;
+    }
 
     /**
      * <p>
@@ -363,6 +373,7 @@ public class QuestEventManager {
      * @return an array of {@link java.lang.String} objects.
      */
     public final List<QuestDuel> generateDuels() {
+        final QuestPreferences qpref = Singletons.getModel().getQuestPreferences();
         if (AllZone.getQuestData() == null) { return null; }
 
         final int index = AllZone.getQuestData().getDifficultyIndex();

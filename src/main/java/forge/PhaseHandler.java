@@ -314,7 +314,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         final String phase = AllZone.getPhaseHandler().getPhase();
         final Player turn = AllZone.getPhaseHandler().getPlayerTurn();
         AllZone.getPhaseHandler().setSkipPhase(true);
-        AllZone.getGameAction().checkStateEffects();
+        Singletons.getModel().getGameAction().checkStateEffects();
 
         // UNTAP
         if (phase.equals(Constant.Phase.UNTAP)) {
@@ -383,7 +383,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                         Combat.dealAssignedDamage();
                     }
 
-                    AllZone.getGameAction().checkStateEffects();
+                    Singletons.getModel().getGameAction().checkStateEffects();
                     CombatUtil.showCombat();
                 }
             }
@@ -401,7 +401,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     Combat.dealAssignedDamage();
                 }
 
-                AllZone.getGameAction().checkStateEffects();
+                Singletons.getModel().getGameAction().checkStateEffects();
                 CombatUtil.showCombat();
             }
         }
@@ -579,6 +579,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // When consecutively skipping phases (like in combat) this section
         // pushes through that block
         this.updateObservers();
+
         if ((AllZone.getPhaseHandler() != null) && AllZone.getPhaseHandler().isNeedToNextPhase()) {
             AllZone.getPhaseHandler().setNeedToNextPhase(false);
             AllZone.getPhaseHandler().nextPhase();

@@ -20,17 +20,13 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.Random;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import forge.Constant.Zone;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryAttach;
 import forge.card.abilityfactory.AbilityFactoryCharm;
-import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
@@ -46,38 +42,21 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
-import forge.control.input.InputMulligan;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayManaCostUtil;
-import forge.deck.Deck;
 import forge.game.GameEndReason;
 import forge.game.GameSummary;
-import forge.game.GameType;
 import forge.gui.GuiUtils;
-import forge.item.CardPrinted;
-import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.GameAction.GameActionText;
-import forge.util.MyRandom;
 import forge.view.match.ViewWinLose;
 
 /**
- * <p>
- * GameAction class.
- * </p>
+ * Methods for common actions performed during a game.
  * 
  * @author Forge
  * @version $Id$
  */
 public class GameAction {
-
-    /**
-     * This variable prevents WinLose dialog from popping several times, ie on
-     * each state effect check after a win.
-     */
-    private boolean canShowWinLose = true;
-
     /**
      * <p>
      * resetActivationsPerTurn.
@@ -135,7 +114,7 @@ public class GameAction {
 
             if (AllZone.getReplacementHandler().run(repParams)) {
                 if (AllZone.getStack().isResolving(c) && !zone.is(Constant.Zone.Graveyard)) {
-                    return AllZone.getGameAction().moveToGraveyard(c);
+                    return Singletons.getModel().getGameAction().moveToGraveyard(c);
                 }
                 return c;
             }
@@ -449,7 +428,7 @@ public class GameAction {
 
                         @Override
                         public void execute() {
-                            AllZone.getGameAction().moveToHand(recoverable);
+                            Singletons.getModel().getGameAction().moveToHand(recoverable);
                         }
                     };
 
@@ -458,14 +437,14 @@ public class GameAction {
 
                         @Override
                         public void execute() {
-                            AllZone.getGameAction().exile(recoverable);
+                            Singletons.getModel().getGameAction().exile(recoverable);
                         }
                     };
 
                     final SpellAbility abRecover = new Ability(recoverable, recoverCost) {
                         @Override
                         public void resolve() {
-                            AllZone.getGameAction().moveToHand(recoverable);
+                            Singletons.getModel().getGameAction().moveToHand(recoverable);
                         }
 
                         @Override
@@ -490,7 +469,7 @@ public class GameAction {
                                 if (ComputerUtil.canPayCost(abRecover)) {
                                     ComputerUtil.playNoStack(abRecover);
                                 } else {
-                                    AllZone.getGameAction().exile(recoverable);
+                                    Singletons.getModel().getGameAction().exile(recoverable);
                                 }
                             }
                         }
@@ -652,7 +631,7 @@ public class GameAction {
 
         final PlayerZone removed = c.getOwner().getZone(Constant.Zone.Exile);
 
-        return AllZone.getGameAction().moveTo(removed, c);
+        return Singletons.getModel().getGameAction().moveTo(removed, c);
     }
 
     /**
@@ -819,7 +798,7 @@ public class GameAction {
             game.getPlayerRating(computer.getName()).setLossReason(computer.getLossState(),
                     computer.getLossConditionSource());
             game.getPlayerRating(human.getName()).setLossReason(human.getLossState(), human.getLossConditionSource());
-            AllZone.getMatchState().addGamePlayed(game);
+            Singletons.getModel().getMatchState().addGamePlayed(game);
         }
 
         return isGameDone;
@@ -900,10 +879,8 @@ public class GameAction {
             return;
         }
 
-        if (this.canShowWinLose && this.checkEndGameState()) {
+        if (this.checkEndGameState()) {
             new ViewWinLose();
-            this.canShowWinLose = false;
-            return;
         }
 
         // do this twice, sometimes creatures/permanents will survive when they
@@ -1057,7 +1034,7 @@ public class GameAction {
             c = list.get(i);
 
             if (c.getCounters(Counters.LOYALTY) <= 0) {
-                AllZone.getGameAction().moveToGraveyard(c);
+                Singletons.getModel().getGameAction().moveToGraveyard(c);
             }
 
             final ArrayList<String> types = c.getType();
@@ -1070,7 +1047,7 @@ public class GameAction {
 
                 if (cl.size() > 1) {
                     for (final Card crd : cl) {
-                        AllZone.getGameAction().moveToGraveyard(crd);
+                        Singletons.getModel().getGameAction().moveToGraveyard(crd);
                     }
                 }
             }
@@ -1097,7 +1074,7 @@ public class GameAction {
             a.remove(0);
             if (1 < b.size()) {
                 for (int i = 0; i < b.size(); i++) {
-                    AllZone.getGameAction().sacrificeDestroy(b.get(i));
+                    Singletons.getModel().getGameAction().sacrificeDestroy(b.get(i));
                 }
             }
         }
@@ -1356,485 +1333,10 @@ public class GameAction {
         return this.sacrificeDestroy(c);
     }
 
-    /**
-     * Constructor for new game allowing card lists to be put into play
-     * immediately, and life totals to be adjusted, for computer and human.
-     * 
-     * @param humanDeck
-     *            &emsp; {@link forge.deck.Deck} object.
-     * @param computerDeck
-     *            &emsp; {@link forge.deck.Deck} object.
-     * @param human
-     *            &emsp; {@link forge.CardList} object.
-     * @param computer
-     *            &emsp; {@link forge.CardList} object.
-     * @param humanLife
-     *            &emsp; int.
-     * @param computerLife
-     *            &emsp; int.
-     */
-    public final void newGame(final Deck humanDeck, final Deck computerDeck, final CardList human,
-            final CardList computer, final int humanLife, final int computerLife) {
-        AllZone.newGameCleanup();
-        AllZone.getComputerPlayer().setStartingLife(computerLife);
-        AllZone.getHumanPlayer().setStartingLife(humanLife);
-        AllZone.getHumanPlayer().updateObservers();
 
-        for (final Card c : human) {
-
-            AllZone.getHumanPlayer().getZone(Zone.Battlefield).add(c);
-            c.setSickness(true);
-        }
-
-        for (final Card c : computer) {
-
-            AllZone.getComputerPlayer().getZone(Zone.Battlefield).add(c);
-            c.setSickness(true);
-        }
-        Constant.Quest.FANTASY_QUEST[0] = true;
-
-        this.actuateGame(humanDeck, computerDeck);
-    }
 
     private boolean startCut = false;
 
-    /**
-     * The default constructor for a new game.
-     * 
-     * @param humanDeck
-     *            &emsp; {@link forge.deck.Deck} object.
-     * @param computerDeck
-     *            &emsp; {@link forge.deck.Deck} object.
-     */
-    public final void newGame(final Deck humanDeck, final Deck computerDeck) {
-        // AllZone.getComputer() = new ComputerAI_Input(new
-        // ComputerAI_General());
-        Constant.Quest.FANTASY_QUEST[0] = false;
-
-        AllZone.newGameCleanup();
-        AllZone.getComputerPlayer().setStartingLife(20);
-        AllZone.getHumanPlayer().setStartingLife(20);
-        this.actuateGame(humanDeck, computerDeck);
-    }
-
-    /**
-     * This must be separated from the newGame method since life totals and
-     * player details could be adjusted before the game is started.
-     * 
-     * That process (also cleanup and observer updates) should be done in
-     * newGame, then when all is ready, call this function.
-     */
-    private void actuateGame(final Deck humanDeck, final Deck computerDeck) {
-        this.canShowWinLose = true;
-        forge.card.trigger.Trigger.resetIDs();
-        AllZone.getTriggerHandler().clearTriggerSettings();
-        AllZone.getTriggerHandler().clearDelayedTrigger();
-        Singletons.getControl().getControlMatch().getMessageControl().updateGameCount();
-
-        // friendliness
-        final CardFactoryInterface c = AllZone.getCardFactory();
-        Card.resetUniqueNumber();
-        final boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
-                && Constant.Runtime.getGameType().equals(GameType.Constructed);
-        final Random generator = MyRandom.getRandom();
-
-        final ArrayList<String> hAnteRemoved = new ArrayList<String>();
-        final ArrayList<String> cAnteRemoved = new ArrayList<String>();
-
-        AllZone.getTriggerHandler().suppressMode("Transformed");
-        for (final Entry<CardPrinted, Integer> stackOfCards : humanDeck.getMain()) {
-            final CardPrinted cardPrinted = stackOfCards.getKey();
-            for (int i = 0; i < stackOfCards.getValue(); i++) {
-
-                final Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
-                card.setCurSetCode(cardPrinted.getSet());
-
-                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
-                if (cntVariants > 1) {
-                    card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
-                }
-
-                card.setImageFilename(CardUtil.buildFilename(card));
-
-                // Assign random foiling on approximately 1:20 cards
-                if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
-                    card.setFoil(iFoil);
-                }
-
-                if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
-                        && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                    hAnteRemoved.add(card.getName());
-                } else {
-                    AllZone.getHumanPlayer().getZone(Zone.Library).add(card);
-                }
-
-                if (card.hasAlternateState()) {
-                    if (card.isDoubleFaced()) {
-                        card.setState("Transformed");
-                    }
-                    if (card.isFlip()) {
-                        card.setState("Flipped");
-                    }
-
-                    card.setImageFilename(CardUtil.buildFilename(card));
-
-                    card.setState("Original");
-                }
-            }
-        }
-        final ArrayList<String> rAICards = new ArrayList<String>();
-        for (final Entry<CardPrinted, Integer> stackOfCards : computerDeck.getMain()) {
-            final CardPrinted cardPrinted = stackOfCards.getKey();
-            for (int i = 0; i < stackOfCards.getValue(); i++) {
-
-                final Card card = c.getCard(cardPrinted.getName(), AllZone.getComputerPlayer());
-                card.setCurSetCode(cardPrinted.getSet());
-
-                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getSet()).getCopiesCount();
-                if (cntVariants > 1) {
-                    card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
-                }
-
-                card.setImageFilename(CardUtil.buildFilename(card));
-
-                // Assign random foiling on approximately 1:20 cards
-                if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
-                    card.setFoil(iFoil);
-                }
-
-                if (card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")
-                        && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-                    cAnteRemoved.add(card.getName());
-                } else {
-                    AllZone.getComputerPlayer().getZone(Zone.Library).add(card);
-                }
-
-                if (card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
-                    rAICards.add(card.getName());
-                    // get card picture so that it is in the image cache
-                    // ImageCache.getImage(card);
-                }
-
-                if (card.hasAlternateState()) {
-                    if (card.isDoubleFaced()) {
-                        card.setState("Transformed");
-                    }
-                    if (card.isFlip()) {
-                        card.setState("Flipped");
-                    }
-
-                    card.setImageFilename(CardUtil.buildFilename(card));
-
-                    card.setState("Original");
-                }
-            }
-        }
-        AllZone.getTriggerHandler().clearSuppression("Transformed");
-        if (rAICards.size() > 0) {
-            final StringBuilder sb = new StringBuilder(
-                    "AI deck contains the following cards that it can't play or may be buggy:\n");
-            for (int i = 0; i < rAICards.size(); i++) {
-                sb.append(rAICards.get(i));
-                if (((i % 4) == 0) && (i > 0)) {
-                    sb.append("\n");
-                } else if (i != (rAICards.size() - 1)) {
-                    sb.append(", ");
-                }
-            }
-
-            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
-
-        }
-        if (hAnteRemoved.size() > 0) {
-            final StringBuilder sb = new StringBuilder("The following ante cards were removed from the human's deck:\n");
-            for (int i = 0; i < hAnteRemoved.size(); i++) {
-                sb.append(hAnteRemoved.get(i));
-                if (((i % 4) == 0) && (i > 0)) {
-                    sb.append("\n");
-                } else if (i != (hAnteRemoved.size() - 1)) {
-                    sb.append(", ");
-                }
-            }
-
-            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
-
-        }
-        if (cAnteRemoved.size() > 0) {
-            final StringBuilder sb = new StringBuilder(
-                    "The following ante cards were removed from the computer's deck:\n");
-            for (int i = 0; i < cAnteRemoved.size(); i++) {
-                sb.append(cAnteRemoved.get(i));
-                if (((i % 4) == 0) && (i > 0)) {
-                    sb.append("\n");
-                } else if (i != (cAnteRemoved.size() - 1)) {
-                    sb.append(", ");
-                }
-            }
-
-            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
-
-        }
-
-        for (int i = 0; i < 100; i++) {
-            AllZone.getHumanPlayer().shuffle();
-        }
-
-        // do this instead of shuffling Computer's deck
-        final boolean smoothLand = Constant.Runtime.SMOOTH[0];
-
-        if (smoothLand) {
-            final Card[] c1 = this.smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(Zone.Library)
-                    .toArray());
-            AllZone.getComputerPlayer().getZone(Zone.Library).setCards(c1);
-        } else {
-            // WTF? (it was so before refactor)
-            AllZone.getComputerPlayer().getZone(Zone.Library)
-                    .setCards(AllZone.getComputerPlayer().getCardsIn(Zone.Library).toArray());
-            AllZone.getComputerPlayer().shuffle();
-        }
-
-        // Only cut/coin toss if it's the first game of the match
-        if (AllZone.getMatchState().getGamesPlayedCount() == 0) {
-            // New code to determine who goes first. Delete this if it doesn't
-            // work properly
-            if (this.isStartCut()) {
-                this.seeWhoPlaysFirst();
-            } else {
-                this.seeWhoPlaysFirstCoinToss();
-            }
-        } else if (AllZone.getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
-            // if player won last, AI starts
-            this.computerStartsGame();
-        }
-
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-            final String nl = System.getProperty("line.separator");
-            final StringBuilder msg = new StringBuilder();
-            for (final Player p : AllZone.getPlayersInGame()) {
-                final CardList lib = p.getCardsIn(Zone.Library);
-                Card ante;
-                if ((lib.size() > 0) && (lib.getNotType("Basic").size() > 1)) {
-                    ante = CardUtil.getRandom(lib.toArray());
-                    while (ante.isBasicLand()) {
-                        ante = CardUtil.getRandom(lib.toArray());
-                    }
-                } else if (lib.size() > 1) {
-                    ante = lib.get(0);
-                } else {
-                    throw new RuntimeException(p + " library is empty.");
-                }
-                AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
-                this.moveTo(Zone.Ante, ante);
-                msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
-            }
-            JOptionPane.showConfirmDialog(null, msg, "Ante", JOptionPane.OK_CANCEL_OPTION);
-        }
-
-        for (int i = 0; i < 7; i++) {
-            AllZone.getHumanPlayer().drawCard();
-            AllZone.getComputerPlayer().drawCard();
-        }
-
-        Singletons.getControl().getControlMatch().setCard(AllZone.getHumanPlayer().getCardsIn(Zone.Hand).get(0));
-
-        AllZone.getInputControl().setInput(new InputMulligan());
-        PhaseHandler.setGameBegins(1);
-
-        AllZone.getGameLog().add("Turn",
-                "Turn " + AllZone.getPhaseHandler().getTurn() + " (" + AllZone.getPhaseHandler().getPlayerTurn() + ")",
-                0);
-    } // newGame()
-
-    // this is where the computer cheats
-    // changes AllZone.getComputerPlayer().getZone(Zone.Library)
-
-    /**
-     * <p>
-     * smoothComputerManaCurve.
-     * </p>
-     * 
-     * @param in
-     *            an array of {@link forge.Card} objects.
-     * @return an array of {@link forge.Card} objects.
-     */
-    final Card[] smoothComputerManaCurve(final Card[] in) {
-        final CardList library = new CardList(in);
-        library.shuffle();
-
-        // remove all land, keep non-basicland in there, shuffled
-        CardList land = library.getType("Land");
-        for (int i = 0; i < land.size(); i++) {
-            if (land.get(i).isLand()) {
-                library.remove(land.get(i));
-            }
-        }
-
-        try {
-            // mana weave, total of 7 land
-            // The Following have all been reduced by 1, to account for the
-            // computer starting first.
-            library.add(5, land.get(0));
-            library.add(6, land.get(1));
-            library.add(8, land.get(2));
-            library.add(9, land.get(3));
-            library.add(10, land.get(4));
-
-            library.add(12, land.get(5));
-            library.add(15, land.get(6));
-        } catch (final IndexOutOfBoundsException e) {
-            System.err.println("Error: cannot smooth mana curve, not enough land");
-            return in;
-        }
-
-        // add the rest of land to the end of the deck
-        for (int i = 0; i < land.size(); i++) {
-            if (!library.contains(land.get(i))) {
-                library.add(land.get(i));
-            }
-        }
-
-        // check
-        for (int i = 0; i < library.size(); i++) {
-            System.out.println(library.get(i));
-        }
-
-        return library.toArray();
-    } // smoothComputerManaCurve()
-
-    // decides who goes first when starting another game, used by newGame()
-    /**
-     * <p>
-     * seeWhoPlaysFirstCoinToss.
-     * </p>
-     */
-    public final void seeWhoPlaysFirstCoinToss() {
-        final Object[] possibleValues = { ForgeProps.getLocalized(GameActionText.HEADS),
-                ForgeProps.getLocalized(GameActionText.TAILS) };
-        final Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GameActionText.HEADS_OR_TAILS),
-                ForgeProps.getLocalized(GameActionText.COIN_TOSS), JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
-
-        final int flip = MyRandom.getRandom().nextInt(2);
-        String humanFlip = " ";
-        String computerFlip = " ";
-        // JOptionPane.showMessageDialog(null, q, "",
-        // JOptionPane.INFORMATION_MESSAGE);
-        if (q.equals(0)) {
-            humanFlip = ForgeProps.getLocalized(GameActionText.HEADS);
-            computerFlip = ForgeProps.getLocalized(GameActionText.TAILS);
-        } else {
-            humanFlip = ForgeProps.getLocalized(GameActionText.TAILS);
-            computerFlip = ForgeProps.getLocalized(GameActionText.HEADS);
-        }
-
-        if (((flip == 0) && q.equals(0)) || ((flip == 1) && q.equals(1))) {
-            JOptionPane.showMessageDialog(null, humanFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.HUMAN_WIN),
-                    "", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            this.computerStartsGame();
-            JOptionPane.showMessageDialog(null,
-                    computerFlip + "\r\n" + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN), "",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-    } // seeWhoPlaysFirst_CoinToss()
-
-    private Card humanCut = null;
-    private Card computerCut = null;
-
-    /**
-     * <p>
-     * seeWhoPlaysFirst.
-     * </p>
-     */
-    public final void seeWhoPlaysFirst() {
-
-        CardList hLibrary = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-        hLibrary = hLibrary.filter(CardListFilter.NON_LANDS);
-        CardList cLibrary = AllZone.getComputerPlayer().getCardsIn(Zone.Library);
-        cLibrary = cLibrary.filter(CardListFilter.NON_LANDS);
-
-        final boolean starterDetermined = false;
-        int cutCount = 0;
-        final int cutCountMax = 20;
-        for (int i = 0; i < cutCountMax; i++) {
-            if (starterDetermined) {
-                break;
-            }
-
-            if (hLibrary.size() > 0) {
-                this.setHumanCut(hLibrary.get(MyRandom.getRandom().nextInt(hLibrary.size())));
-            } else {
-                this.computerStartsGame();
-                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.HUMAN_MANA_COST) + "\r\n"
-                        + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            if (cLibrary.size() > 0) {
-                this.setComputerCut(cLibrary.get(MyRandom.getRandom().nextInt(cLibrary.size())));
-            } else {
-                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.COMPUTER_MANA_COST) + "\r\n"
-                        + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            cutCount = cutCount + 1;
-            AllZone.getGameAction().moveTo(AllZone.getHumanPlayer().getZone(Constant.Zone.Library),
-                    AllZone.getGameAction().getHumanCut());
-            AllZone.getGameAction().moveTo(AllZone.getComputerPlayer().getZone(Constant.Zone.Library),
-                    AllZone.getGameAction().getComputerCut());
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(ForgeProps.getLocalized(GameActionText.HUMAN_CUT) + this.getHumanCut().getName() + " ("
-                    + this.getHumanCut().getManaCost() + ")" + "\r\n");
-            sb.append(ForgeProps.getLocalized(GameActionText.COMPUTER_CUT) + this.getComputerCut().getName() + " ("
-                    + this.getComputerCut().getManaCost() + ")" + "\r\n");
-            sb.append("\r\n" + "Number of times the deck has been cut: " + cutCount + "\r\n");
-            if (CardUtil.getConvertedManaCost(this.getComputerCut().getManaCost()) > CardUtil.getConvertedManaCost(this
-                    .getHumanCut().getManaCost())) {
-                this.computerStartsGame();
-                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "",
-                        JOptionPane.INFORMATION_MESSAGE);
-                return;
-            } else if (CardUtil.getConvertedManaCost(this.getComputerCut().getManaCost()) < CardUtil
-                    .getConvertedManaCost(this.getHumanCut().getManaCost())) {
-                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "",
-                        JOptionPane.INFORMATION_MESSAGE);
-                return;
-            } else {
-                sb.append(ForgeProps.getLocalized(GameActionText.EQUAL_CONVERTED_MANA) + "\r\n");
-                if (i == (cutCountMax - 1)) {
-                    sb.append(ForgeProps.getLocalized(GameActionText.RESOLVE_STARTER));
-                    if (MyRandom.getRandom().nextInt(2) == 1) {
-                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
-                                JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        this.computerStartsGame();
-                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN),
-                                "", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    return;
-                } else {
-                    sb.append(ForgeProps.getLocalized(GameActionText.CUTTING_AGAIN));
-                }
-                JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } // for-loop for multiple card cutting
-
-    } // seeWhoPlaysFirst()
-
-    /**
-     * <p>
-     * computerStartsGame.
-     * </p>
-     */
-    public final void computerStartsGame() {
-        final Player computer = AllZone.getComputerPlayer();
-        AllZone.getPhaseHandler().setPlayerTurn(computer);
-        // AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
-    }
 
     // if Card had the type "Aura" this method would always return true, since
     // local enchantments are always attached to something
@@ -1992,7 +1494,7 @@ public class GameAction {
             if (sa.isSpell()) {
                 final Card c = sa.getSourceCard();
                 if (!c.isCopiedSpell()) {
-                    sa.setSourceCard(AllZone.getGameAction().moveToStack(c));
+                    sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(c));
                 }
             }
             boolean x = false;
@@ -2739,7 +2241,7 @@ public class GameAction {
                 if (sa.getAfterPayMana() == null) {
                     final Card source = sa.getSourceCard();
                     if (sa.isSpell() && !source.isCopiedSpell()) {
-                        sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
+                        sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
                     }
 
                     AllZone.getStack().add(sa);
@@ -2885,6 +2387,9 @@ public class GameAction {
         return this.startCut;
     }
 
+    private Card humanCut = null;
+    private Card computerCut = null;
+
     /**
      * <p>
      * setHumanCut.
@@ -2937,7 +2442,7 @@ public class GameAction {
     }
 
     /**
-     * Sets the cost cutting get multi micker mana cost paid colored.
+     * Sets the cost cutting get multi kicker mana cost paid colored.
      * 
      * @param costCuttingGetMultiMickerManaCostPaidColored0
      *            the costCuttingGetMultiMickerManaCostPaidColored to set

@@ -48,22 +48,15 @@ public final class Main {
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
         try {
-            final FModel model = new FModel();
-            final FView view = new FView();
-            final FControl control = FControl.SINGLETON_INSTANCE;
-
-            Singletons.setModel(model);
-            Singletons.setView(view);
-            Singletons.setControl(control);
-
-            // Instantiate FGameState for TriggerHandler on card objects created in preloader.
-            model.resetGameState();
+            Singletons.setModel(FModel.SINGLETON_INSTANCE);
+            Singletons.setView(new FView());
+            Singletons.setControl(FControl.SINGLETON_INSTANCE);
 
             // Start splash frame.
-            view.initialize();
+            Singletons.getView().initialize();
 
             // Start control on FView.
-            control.initialize();
+            Singletons.getControl().initialize();
 
             // Open previous menu on first run, or constructed.
             // Focus is reset when the frame becomes visible,
@@ -104,5 +97,19 @@ public final class Main {
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }
+    }
+
+    /**
+     * Destructor for FModel.
+     * 
+     * @throws Throwable
+     *             indirectly
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        // NOT WORKING
+        // this should call close in model,
+        // should probably be attached to frame close method
+        super.finalize();
     }
 }

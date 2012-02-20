@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Player;
+import forge.Singletons;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
@@ -260,7 +260,7 @@ public class ManaPool {
         for (final Mana m : manaList) {
             this.addManaToPool(this.floatingMana, m);
         }
-        AllZone.getGameAction().checkStateEffects();
+        Singletons.getModel().getGameAction().checkStateEffects();
         owner.updateObservers();
     }
 

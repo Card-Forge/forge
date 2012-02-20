@@ -18,12 +18,12 @@ import forge.CardList;
 import forge.Constant;
 import forge.PlayerType;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
+import forge.game.GameNew;
 import forge.game.GameType;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.IFolderMap;
@@ -224,7 +224,9 @@ public class ControlConstructed {
             deck = new Deck();
             deck.getMain().add(cards);
         }
-
+        else if (lst0.getName().equals("lstQuest")) {
+            deck = Singletons.getModel().getQuestEventManager().getEvent(selection[0]).getEventDeck();
+        }
         // Custom deck
         else {
             deck = AllZone.getDecks().getConstructed().get(selection[0]);
@@ -281,10 +283,8 @@ public class ControlConstructed {
                 view.getBtnStart().setVisible(true);
                 view.getBarProgress().setVisible(false);
 
-                Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-                Singletons.getControl().getControlMatch().initMatch();
-
-                AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
+                        new CardList(), new CardList(), 20, 20);
             }
         });
     }
@@ -332,13 +332,13 @@ public class ControlConstructed {
         final List<String> eventNames = new ArrayList<String>();
         eventNames.clear();
 
-        /*for (QuestEvent e : AllZone.getQuestEventManager().getAllChallenges()) {
+        /*for (QuestEvent e : Singletons.getModel().getQuestEventManager().getAllChallenges()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (QuestEvent e : AllZone.getQuestEventManager().getAllDuels()) {
+        for (QuestEvent e : Singletons.getModel().getQuestEventManager().getAllDuels()) {
             eventNames.add(e.getEventDeck().getName());
-        }*/
+        } */
 
         return oa2sa(eventNames.toArray());
     }

@@ -31,6 +31,7 @@ import forge.CardUtil;
 import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -542,11 +543,11 @@ public class AbilityFactoryDestroy {
         for (final Card tgtC : tgtCards) {
             if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 if (sac) {
-                    AllZone.getGameAction().sacrifice(tgtC);
+                    Singletons.getModel().getGameAction().sacrifice(tgtC);
                 } else if (noRegen) {
-                    AllZone.getGameAction().destroyNoRegeneration(tgtC);
+                    Singletons.getModel().getGameAction().destroyNoRegeneration(tgtC);
                 } else {
-                    AllZone.getGameAction().destroy(tgtC);
+                    Singletons.getModel().getGameAction().destroy(tgtC);
                 } if (remDestroyed) {
                     card.addRemembered(tgtC);
                 }
@@ -556,11 +557,11 @@ public class AbilityFactoryDestroy {
         for (final Card unTgtC : untargetedCards) {
             if (AllZoneUtil.isCardInPlay(unTgtC)) {
                 if (sac) {
-                    AllZone.getGameAction().sacrifice(unTgtC);
+                    Singletons.getModel().getGameAction().sacrifice(unTgtC);
                 } else if (noRegen) {
-                    AllZone.getGameAction().destroyNoRegeneration(unTgtC);
+                    Singletons.getModel().getGameAction().destroyNoRegeneration(unTgtC);
                 } else {
-                    AllZone.getGameAction().destroy(unTgtC);
+                    Singletons.getModel().getGameAction().destroy(unTgtC);
                 } if (remDestroyed) {
                     card.addRemembered(unTgtC);
                 }
@@ -896,13 +897,13 @@ public class AbilityFactoryDestroy {
 
         if (noRegen) {
             for (int i = 0; i < list.size(); i++) {
-                if (AllZone.getGameAction().destroyNoRegeneration(list.get(i)) && remDestroyed) {
+                if (Singletons.getModel().getGameAction().destroyNoRegeneration(list.get(i)) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }
         } else {
             for (int i = 0; i < list.size(); i++) {
-                if (AllZone.getGameAction().destroy(list.get(i)) && remDestroyed) {
+                if (Singletons.getModel().getGameAction().destroy(list.get(i)) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }

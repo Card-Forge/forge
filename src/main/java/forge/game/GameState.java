@@ -15,16 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.model;
+package forge.game;
 
 import forge.AIPlayer;
 import forge.Combat;
 import forge.Constant;
-import forge.Constant.Zone;
 import forge.DefaultPlayerZone;
 import forge.EndOfCombat;
 import forge.EndOfTurn;
-import forge.GameAction;
 import forge.GameLog;
 import forge.HumanPlayer;
 import forge.MagicStack;
@@ -32,17 +30,16 @@ import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
 import forge.StaticEffects;
-import forge.Upkeep;
 import forge.Untap;
+import forge.Upkeep;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameSummary;
 
 /**
  * Represents the state of a <i>single game</i> and is
  * "cleaned up" at each new game.
  */
-public class FGameState {
+public class GameState {
 
     /** The Constant HUMAN_PLAYER_NAME. */
     public static final String HUMAN_PLAYER_NAME = "Human";
@@ -50,18 +47,17 @@ public class FGameState {
     /** The Constant AI_PLAYER_NAME. */
     public static final String AI_PLAYER_NAME = "Computer";
 
-    private Player humanPlayer = new HumanPlayer(FGameState.HUMAN_PLAYER_NAME);
-    private Player computerPlayer = new AIPlayer(FGameState.AI_PLAYER_NAME);
+    private Player humanPlayer = new HumanPlayer(GameState.HUMAN_PLAYER_NAME);
+    private Player computerPlayer = new AIPlayer(GameState.AI_PLAYER_NAME);
     private EndOfTurn endOfTurn = new EndOfTurn();
     private EndOfCombat endOfCombat = new EndOfCombat();
     private Untap untap = new Untap();
     private Upkeep upkeep = new Upkeep();
     private PhaseHandler phaseHandler = new PhaseHandler();
     private MagicStack stack = new MagicStack();
-    private GameAction gameAction = new GameAction();
     private StaticEffects staticEffects = new StaticEffects();
     private TriggerHandler triggerHandler = new TriggerHandler();
-    private ReplacementHandler replacementHandler = new ReplacementHandler();
+    private final ReplacementHandler replacementHandler = new ReplacementHandler();
     private Combat combat = new Combat();
     private GameLog gameLog = new GameLog();
 
@@ -73,7 +69,7 @@ public class FGameState {
     /**
      * Constructor.
      */
-    public FGameState() { /* no more zones to map here */
+    public GameState() { /* no more zones to map here */
     }
 
     /**
@@ -209,16 +205,6 @@ public class FGameState {
     }
 
     /**
-     * Sets the phase.
-     * 
-     * @param phaseHandlerIn
-     *            the phaseHandler to set
-     */
-    protected final void setPhaseHandler(final PhaseHandler phaseHandlerIn) {
-        this.phaseHandler = phaseHandlerIn;
-    }
-
-    /**
      * Gets the stack.
      * 
      * @return the stack
@@ -235,25 +221,6 @@ public class FGameState {
      */
     protected final void setStack(final MagicStack stack0) {
         this.stack = stack0;
-    }
-
-    /**
-     * Gets the game action.
-     * 
-     * @return the gameAction
-     */
-    public final GameAction getGameAction() {
-        return this.gameAction;
-    }
-
-    /**
-     * Sets the game action.
-     * 
-     * @param gameAction0
-     *            the gameAction to set
-     */
-    protected final void setGameAction(final GameAction gameAction0) {
-        this.gameAction = gameAction0;
     }
 
     /**
@@ -389,27 +356,12 @@ public class FGameState {
     }
 
     /**
-     * Call this each time you start a new game, ok?.
+     * Sets the game info.
+     * 
+     * @param summary0 {@link forge.game.GameSummary}
      */
-    public final void newGameCleanup() {
-        this.gameSummary = new GameSummary(this.humanPlayer.getName(), this.computerPlayer.getName());
-
-        this.getHumanPlayer().reset();
-        this.getComputerPlayer().reset();
-
-        this.getPhaseHandler().reset();
-        this.getStack().reset();
-        this.getCombat().reset();
-
-        this.getGameLog().reset();
-
-        for (final Player p : this.getPlayers()) {
-            for (final Zone z : Player.ALL_ZONES) {
-                p.getZone(z).reset();
-            }
-        }
-
-        this.getStaticEffects().reset();
+    public final void setGameSummary(final GameSummary summary0) {
+        this.gameSummary = summary0;
     }
 
     /**

@@ -863,7 +863,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (choices.contains(card)) {
-                    AllZone.getGameAction().destroyNoRegeneration(card);
+                    Singletons.getModel().getGameAction().destroyNoRegeneration(card);
                     this.stop();
                 }
             }
@@ -890,7 +890,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                final Card card = AllZone.getGameAction().moveToPlay(sourceCard);
+                final Card card = Singletons.getModel().getGameAction().moveToPlay(sourceCard);
 
                 card.addIntrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
                 card.addIntrinsicKeyword("Haste");
@@ -937,7 +937,7 @@ public class CardFactoryUtil {
 
                 sourceCard.comesIntoPlay();
 
-                AllZone.getGameAction().moveToPlay(sourceCard);
+                Singletons.getModel().getGameAction().moveToPlay(sourceCard);
             }
 
             @Override
@@ -1138,7 +1138,7 @@ public class CardFactoryUtil {
 
                     sourceCard.getController().discard(sourceCard, this);
                     final Card c1 = (Card) o;
-                    AllZone.getGameAction().moveToHand(c1);
+                    Singletons.getModel().getGameAction().moveToHand(c1);
 
                 }
                 sourceCard.getController().shuffle();
@@ -1218,7 +1218,7 @@ public class CardFactoryUtil {
                     sourceCard.getController().discard(sourceCard, this);
                     final Card c1 = (Card) o;
 
-                    AllZone.getGameAction().moveToHand(c1);
+                    Singletons.getModel().getGameAction().moveToHand(c1);
 
                 }
                 sourceCard.getController().shuffle();
@@ -1278,7 +1278,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                final Card c = AllZone.getGameAction().exile(sourceCard);
+                final Card c = Singletons.getModel().getGameAction().exile(sourceCard);
                 c.addCounter(Counters.TIME, suspendCounters);
             }
         };
@@ -1670,7 +1670,7 @@ public class CardFactoryUtil {
                         if (o != null) {
 
                             final Card c1 = (Card) o;
-                            AllZone.getGameAction().moveToHand(c1);
+                            Singletons.getModel().getGameAction().moveToHand(c1);
                         }
                     }
                 } else {
@@ -1680,7 +1680,7 @@ public class CardFactoryUtil {
                     choice = sameCost.getCard(0);
 
                     if (!(choice == null)) {
-                        AllZone.getGameAction().moveToHand(choice);
+                        Singletons.getModel().getGameAction().moveToHand(choice);
                     }
                 }
             } // resolve()
@@ -1814,7 +1814,7 @@ public class CardFactoryUtil {
 
             @Override
             public void selectButtonCancel() {
-                AllZone.getGameAction().sacrifice(crd);
+                Singletons.getModel().getGameAction().sacrifice(crd);
                 this.stop();
             }
 
@@ -1822,11 +1822,11 @@ public class CardFactoryUtil {
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (choices.contains(card)) {
                     if (card == spell.getSourceCard()) {
-                        AllZone.getGameAction().sacrifice(spell.getSourceCard());
+                        Singletons.getModel().getGameAction().sacrifice(spell.getSourceCard());
                         this.stop();
                     } else {
                         spell.getSourceCard().setChampionedCard(card);
-                        AllZone.getGameAction().exile(card);
+                        Singletons.getModel().getGameAction().exile(card);
 
                         this.stop();
 
@@ -1911,7 +1911,7 @@ public class CardFactoryUtil {
 
             void done() {
                 Singletons.getControl().getMatchControl().showMessage("Returning cards to hand.");
-                AllZone.getGameAction().exile(recall);
+                Singletons.getModel().getGameAction().exile(recall);
                 final CardList grave = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
                 for (int i = 1; i <= this.n; i++) {
                     final String title = "Return card from grave to hand";
@@ -1921,7 +1921,7 @@ public class CardFactoryUtil {
                     }
                     final Card toHand = (Card) o;
                     grave.remove(toHand);
-                    AllZone.getGameAction().moveToHand(toHand);
+                    Singletons.getModel().getGameAction().moveToHand(toHand);
                 }
                 this.stop();
             }
@@ -3808,7 +3808,7 @@ public class CardFactoryUtil {
             temp.setToken(true);
             CardFactoryUtil.parseKeywords(temp, temp.getName());
             temp = CardFactoryUtil.postFactoryKeywords(temp);
-            AllZone.getGameAction().moveToPlay(temp);
+            Singletons.getModel().getGameAction().moveToPlay(temp);
             list.add(temp);
         }
         return list;
@@ -4092,7 +4092,7 @@ public class CardFactoryUtil {
      * "When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand."
      * ) ) { // || (c.isCreature() && AllZoneUtil.isCardInPlay("Cowardice"))
      * SpellAbility ability = new Ability(c, "0") { public void resolve() {
-     * AllZone.getGameAction().moveToHand(c); } }; StringBuilder sb = new
+     * Singletons.getModel().getGameAction().moveToHand(c); } }; StringBuilder sb = new
      * StringBuilder();
      * sb.append(c).append(" - return CARDNAME to its owner's hand.");
      * ability.setStackDescription(sb.toString());
@@ -4102,14 +4102,14 @@ public class CardFactoryUtil {
      * ) || AllZoneUtil.isCardInPlay("Horobi, Death's Wail")) {
      * 
      * SpellAbility ability = new Ability(c, "0") { public void resolve() {
-     * AllZone.getGameAction().destroy(c); } }; StringBuilder sb = new
+     * Singletons.getModel().getGameAction().destroy(c); } }; StringBuilder sb = new
      * StringBuilder(); sb.append(c).append(" - destroy CARDNAME.");
      * ability.setStackDescription(sb.toString());
      * 
      * AllZone.getStack().add(ability); } if (c.hasKeyword(
      * "When CARDNAME becomes the target of a spell or ability, sacrifice it."))
      * { SpellAbility ability = new Ability(c, "0") { public void resolve() {
-     * AllZone.getGameAction().sacrifice(c); } }; StringBuilder sb = new
+     * Singletons.getModel().getGameAction().sacrifice(c); } }; StringBuilder sb = new
      * StringBuilder(); sb.append(c).append(" - sacrifice CARDNAME.");
      * ability.setStackDescription(sb.toString());
      * 
@@ -4142,12 +4142,12 @@ public class CardFactoryUtil {
      * "for card \"" + c.getName() + "\""); }
      * 
      * if(action[0].startsWith("exile")) {
-     * AllZone.getGameAction().exile(target); } else
+     * Singletons.getModel().getGameAction().exile(target); } else
      * if(action[0].startsWith("destroy")) { if(noRegen) {
-     * AllZone.getGameAction().destroyNoRegeneration(target); } else {
-     * AllZone.getGameAction().destroy(target); } } else
+     * Singletons.getModel().getGameAction().destroyNoRegeneration(target); } else {
+     * Singletons.getModel().getGameAction().destroy(target); } } else
      * if(action[0].startsWith("sacrifice")) {
-     * AllZone.getGameAction().sacrifice(target); } else { throw new
+     * Singletons.getModel().getGameAction().sacrifice(target); } else { throw new
      * IllegalArgumentException("There is a problem in the keyword " + keyword +
      * "for card \"" + c.getName() + "\""); } } };
      * 
@@ -4289,7 +4289,7 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
                     card.setKicked(true);
-                    AllZone.getGameAction().moveToPlay(card);
+                    Singletons.getModel().getGameAction().moveToPlay(card);
                 }
             };
             final String parse = card.getKeyword().get(kicker).toString();
@@ -4350,7 +4350,7 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
                     card.setEvoked(true);
-                    AllZone.getGameAction().moveToPlay(card);
+                    Singletons.getModel().getGameAction().moveToPlay(card);
                 }
 
                 @Override
@@ -4719,7 +4719,7 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
                     this.getTargetCard().addHauntedBy(card);
-                    AllZone.getGameAction().exile(card);
+                    Singletons.getModel().getGameAction().exile(card);
                 }
             };
             haunterDiesWork.setDescription(hauntDescription);
@@ -4887,11 +4887,11 @@ public class CardFactoryUtil {
                     eff.addTrigger(copyTrigger);
 
                     AllZone.getTriggerHandler().suppressMode("ChangesZone");
-                    AllZone.getGameAction().moveToPlay(eff);
+                    Singletons.getModel().getGameAction().moveToPlay(eff);
                     AllZone.getTriggerHandler().clearSuppression("ChangesZone");
 
                     if (card.getController().isHuman()) {
-                        AllZone.getGameAction().playSpellAbilityNoStack(origSA, false);
+                        Singletons.getModel().getGameAction().playSpellAbilityNoStack(origSA, false);
                     } else {
                         ComputerUtil.playNoStack(origSA);
                     }
@@ -5064,7 +5064,7 @@ public class CardFactoryUtil {
                     final CardList cardsInPlay = AllZoneUtil.getCardsIn(Zone.Battlefield).getType("World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
-                        AllZone.getGameAction().sacrificeDestroy(cardsInPlay.get(i));
+                        Singletons.getModel().getGameAction().sacrificeDestroy(cardsInPlay.get(i));
                     }
                 } // execute()
             }; // Command
@@ -5158,7 +5158,7 @@ public class CardFactoryUtil {
                                 numCreatures[0] = selection.size();
                                 for (int m = 0; m < selection.size(); m++) {
                                     card.addDevoured(selection.get(m));
-                                    AllZone.getGameAction().sacrifice(selection.get(m));
+                                    Singletons.getModel().getGameAction().sacrifice(selection.get(m));
                                 }
                             }
 
@@ -5169,7 +5169,7 @@ public class CardFactoryUtil {
                                 final Card c = creats.get(i);
                                 if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3)) {
                                     card.addDevoured(c);
-                                    AllZone.getGameAction().sacrifice(c);
+                                    Singletons.getModel().getGameAction().sacrifice(c);
                                     count++;
                                 }
                                 // is this needed?

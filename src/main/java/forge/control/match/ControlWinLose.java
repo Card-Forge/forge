@@ -12,6 +12,7 @@ import forge.Constant.Zone;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
+import forge.game.GameNew;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -66,16 +67,15 @@ public class ControlWinLose {
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
-        AllZone.getMatchState().reset();
+        Singletons.getModel().getMatchState().reset();
         GuiUtils.closeOverlay();
         startNextRound();
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
-        AllZone.getMatchState().reset();
+        Singletons.getModel().getMatchState().reset();
         Singletons.getModel().savePrefs();
-        Singletons.getControl().getControlMatch().deinitMatch();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
         GuiUtils.closeOverlay();
     }
@@ -92,7 +92,7 @@ public class ControlWinLose {
         if (isAnte && !gameType.equals(GameType.Quest)) {
             Deck hDeck = Constant.Runtime.HUMAN_DECK[0];
             Deck cDeck = Constant.Runtime.COMPUTER_DECK[0];
-            if (AllZone.getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
+            if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
                 CardList compAntes = AllZone.getComputerPlayer().getCardsIn(Zone.Ante);
 
                 //remove compy's ante cards form his deck
@@ -122,7 +122,7 @@ public class ControlWinLose {
             }
         }
         Singletons.getModel().savePrefs();
-        AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+        GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
     }
 
     /**

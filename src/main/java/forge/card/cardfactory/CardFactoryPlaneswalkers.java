@@ -31,6 +31,7 @@ import forge.Counters;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -95,7 +96,7 @@ public class CardFactoryPlaneswalkers {
                     GuiUtils.getChoiceOptional("Revealed top card: ", showTop.toArray());
 
                     // now, move it to player's hand
-                    AllZone.getGameAction().moveToHand(topCard);
+                    Singletons.getModel().getGameAction().moveToHand(topCard);
 
                     // now, do X damage to Sarkhan
                     card.addDamage(convertedManaTopCard, card);
@@ -145,7 +146,7 @@ public class CardFactoryPlaneswalkers {
                     turn[0] = AllZone.getPhaseHandler().getTurn();
 
                     final Card target = this.getTargetCard();
-                    AllZone.getGameAction().sacrifice(target);
+                    Singletons.getModel().getGameAction().sacrifice(target);
                     // in makeToken, use target for source, so it goes into the
                     // correct Zone
                     CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", target.getController(), "R", new String[] {

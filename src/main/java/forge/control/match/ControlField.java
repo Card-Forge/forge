@@ -70,10 +70,10 @@ public class ControlField {
     private final Player player;
     private final ViewField view;
 
-    private MouseMotionListener maCardOver;
-    private MouseListener maAvatar, maLibrary, maHand, maExiled, maGraveyard, maFlashback, maCardClick;
-
-    private MouseAdapter maBlack, maBlue, maGreen, maRed, maWhite, maColorless;
+    private MouseMotionListener mmlCardOver;
+    private MouseListener madAvatar, madLibrary, madHand, madExiled,
+        madGraveyard, madFlashback, madCardClick, madBlack,
+        madBlue, madGreen, madRed, madWhite, madColorless;
 
     private Observer observerZones, observerDetails, observerPlay;
 
@@ -93,6 +93,9 @@ public class ControlField {
 
         initMouseAdapters();
         initObservers();
+
+        addObservers();
+        addListeners();
     }
 
     /**
@@ -128,45 +131,31 @@ public class ControlField {
      * 
      */
     public void addListeners() {
-        // When/if zone action properties become less specific, the conditional
-        // tests for computer/human players can be removed. If that's not ever
-        // going to happen, this comment can be removed. :) Doublestrike
-        // 29-10-11.
-
-        this.addZoneListeners();
-        this.addPoolListeners();
-
         // Battlefield card clicks
-        this.view.getTabletop().removeMouseListener(maCardClick);
-        this.view.getTabletop().addMouseListener(maCardClick);
+        this.view.getTabletop().removeMouseListener(madCardClick);
+        this.view.getTabletop().addMouseListener(madCardClick);
 
         // Battlefield card mouseover
-        this.view.getTabletop().removeMouseMotionListener(maCardOver);
-        this.view.getTabletop().addMouseMotionListener(maCardOver);
+        this.view.getTabletop().removeMouseMotionListener(mmlCardOver);
+        this.view.getTabletop().addMouseMotionListener(mmlCardOver);
 
         // Player select
-        this.view.getAvatarArea().removeMouseListener(maAvatar);
-        this.view.getAvatarArea().addMouseListener(maAvatar);
-    } // End addListeners()
+        this.view.getAvatarArea().removeMouseListener(madAvatar);
+        this.view.getAvatarArea().addMouseListener(madAvatar);
 
-    /**
-     * Adds listeners to "zone" labels: flashback, graveyard, etc. This method
-     * only exists to avoid the 150-line limit in the checkstyle rules.
-     */
-    private void addZoneListeners() {
         // Graveyard card list button
         ((FLabel) this.view.getLblGraveyard()).setHoverable(true);
-        this.view.getLblGraveyard().removeMouseListener(maGraveyard);
-        this.view.getLblGraveyard().addMouseListener(maGraveyard);
+        this.view.getLblGraveyard().removeMouseListener(madGraveyard);
+        this.view.getLblGraveyard().addMouseListener(madGraveyard);
         // Exile card list button
         ((FLabel) this.view.getLblExile()).setHoverable(true);
-        this.view.getLblExile().removeMouseListener(maExiled);
-        this.view.getLblExile().addMouseListener(maExiled);
+        this.view.getLblExile().removeMouseListener(madExiled);
+        this.view.getLblExile().addMouseListener(madExiled);
 
         // Library card list button
         if (Constant.Runtime.DEV_MODE[0]) {
-            this.view.getLblLibrary().removeMouseListener(maLibrary);
-            this.view.getLblLibrary().addMouseListener(maLibrary);
+            this.view.getLblLibrary().removeMouseListener(madLibrary);
+            this.view.getLblLibrary().addMouseListener(madLibrary);
 
             // Hand button
             ((FLabel) this.view.getLblHand()).setHoverable(true);
@@ -175,37 +164,37 @@ public class ControlField {
             ((FLabel) this.view.getLblLibrary()).setHoverable(false);
         }
 
-        this.view.getLblHand().removeMouseListener(maHand);
-        this.view.getLblHand().addMouseListener(maHand);
+        this.view.getLblHand().removeMouseListener(madHand);
+        this.view.getLblHand().addMouseListener(madHand);
 
         // Flashback card list button
         ((FLabel) this.view.getLblFlashback()).setHoverable(true);
-        this.view.getLblFlashback().removeMouseListener(maFlashback);
-        this.view.getLblFlashback().addMouseListener(maFlashback);
-    }
+        this.view.getLblFlashback().removeMouseListener(madFlashback);
+        this.view.getLblFlashback().addMouseListener(madFlashback);
 
-    /**
-     * Adds listeners to mana "pool" labels, for paying mana.
-     */
-    private void addPoolListeners() {
         ((FLabel) this.view.getLblBlack()).setHoverable(true);
-        this.view.getLblBlack().removeMouseListener(maBlack);
-        this.view.getLblBlack().addMouseListener(maBlack);
+        this.view.getLblBlack().removeMouseListener(madBlack);
+        this.view.getLblBlack().addMouseListener(madBlack);
+
         ((FLabel) this.view.getLblBlue()).setHoverable(true);
-        this.view.getLblBlue().removeMouseListener(maBlue);
-        this.view.getLblBlue().addMouseListener(maBlue);
+        this.view.getLblBlue().removeMouseListener(madBlue);
+        this.view.getLblBlue().addMouseListener(madBlue);
+
         ((FLabel) this.view.getLblGreen()).setHoverable(true);
-        this.view.getLblGreen().removeMouseListener(maGreen);
-        this.view.getLblGreen().addMouseListener(maGreen);
+        this.view.getLblGreen().removeMouseListener(madGreen);
+        this.view.getLblGreen().addMouseListener(madGreen);
+
         ((FLabel) this.view.getLblRed()).setHoverable(true);
-        this.view.getLblRed().removeMouseListener(maRed);
-        this.view.getLblRed().addMouseListener(maRed);
+        this.view.getLblRed().removeMouseListener(madRed);
+        this.view.getLblRed().addMouseListener(madRed);
+
         ((FLabel) this.view.getLblWhite()).setHoverable(true);
-        this.view.getLblWhite().removeMouseListener(maWhite);
-        this.view.getLblWhite().addMouseListener(maWhite);
+        this.view.getLblWhite().removeMouseListener(madWhite);
+        this.view.getLblWhite().addMouseListener(madWhite);
+
         ((FLabel) this.view.getLblColorless()).setHoverable(true);
-        this.view.getLblColorless().removeMouseListener(maColorless);
-        this.view.getLblColorless().addMouseListener(maColorless);
+        this.view.getLblColorless().removeMouseListener(madColorless);
+        this.view.getLblColorless().addMouseListener(madColorless);
     }
 
     /**
@@ -340,7 +329,7 @@ public class ControlField {
      */
     private void initMouseAdapters() {
         // Hand listener
-        maHand = new MouseAdapter() {
+        madHand = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
@@ -355,7 +344,7 @@ public class ControlField {
         };
 
         // Flashback listener
-        maFlashback = new MouseAdapter() {
+        madFlashback = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
@@ -372,7 +361,7 @@ public class ControlField {
 
                         @Override
                         protected void doAction(final Card c) {
-                            AllZone.getGameAction().playCard(c);
+                            Singletons.getModel().getGameAction().playCard(c);
                         }
                     } .actionPerformed(null);
                 } else {
@@ -389,7 +378,7 @@ public class ControlField {
 
                         @Override
                         protected void doAction(final Card c) {
-                            AllZone.getGameAction().playCard(c);
+                            Singletons.getModel().getGameAction().playCard(c);
                         }
                     } .actionPerformed(null);
                 }
@@ -397,7 +386,7 @@ public class ControlField {
         };
 
         // Library listener
-        maLibrary = new MouseAdapter() {
+        madLibrary = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (!ControlField.this.player.isComputer()) {
@@ -411,7 +400,7 @@ public class ControlField {
         };
 
         // Exiled adapter
-        maExiled = new MouseAdapter() {
+        madExiled = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -425,7 +414,7 @@ public class ControlField {
         };
 
         // Graveyard adapter
-        maGraveyard = new MouseAdapter() {
+        madGraveyard = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -439,7 +428,7 @@ public class ControlField {
         };
 
         // Avatar
-        maAvatar = new MouseAdapter() {
+        madAvatar = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -453,7 +442,7 @@ public class ControlField {
         };
 
         // Battlefield card mouse over
-        maCardOver = new MouseMotionAdapter() {
+        mmlCardOver = new MouseMotionAdapter() {
             @Override
             public void mouseMoved(final MouseEvent me) {
                 final Card c = ControlField.this.view.getTabletop().getCardFromMouseOverPanel();
@@ -464,7 +453,7 @@ public class ControlField {
         };
 
         // Battlefield card
-        maCardClick = new MouseAdapter() {
+        madCardClick = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
 
@@ -519,7 +508,7 @@ public class ControlField {
             }
         };
 
-        maBlack = new MouseAdapter() {
+        madBlack = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -535,7 +524,7 @@ public class ControlField {
             }
         };
 
-        maBlue = new MouseAdapter() {
+        madBlue = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -551,7 +540,7 @@ public class ControlField {
             }
         };
 
-        maGreen = new MouseAdapter() {
+        madGreen = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -567,7 +556,7 @@ public class ControlField {
             }
         };
 
-        maRed = new MouseAdapter() {
+        madRed = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -583,7 +572,7 @@ public class ControlField {
             }
         };
 
-        maWhite = new MouseAdapter() {
+        madWhite = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -599,7 +588,7 @@ public class ControlField {
             }
         };
 
-        maColorless = new MouseAdapter() {
+        madColorless = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (ControlField.this.player.isComputer()) {
@@ -615,5 +604,4 @@ public class ControlField {
             }
         };
     } // End initMouseAdapters()
-
 } // End class ControlField

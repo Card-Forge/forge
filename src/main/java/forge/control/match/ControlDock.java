@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 
 import forge.AllZone;
 import forge.Constant;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.ForgeAction;
 import forge.item.CardPrinted;
@@ -55,7 +56,7 @@ public class ControlDock {
     /** Concede game, bring up WinLose UI. */
     public void concede() {
         AllZone.getHumanPlayer().concede();
-        AllZone.getGameAction().checkStateEffects();
+        Singletons.getModel().getGameAction().checkStateEffects();
     }
 
     /**

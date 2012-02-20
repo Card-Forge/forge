@@ -28,9 +28,10 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.ComputerUtil;
+import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
-import forge.Constant.Zone;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
@@ -432,7 +433,7 @@ public final class AbilityFactoryPlay {
                     newSA.setPayCosts(cost);
                     newSA.setManaCost("");
                     newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
-                    AllZone.getGameAction().playSpellAbility(newSA);
+                    Singletons.getModel().getGameAction().playSpellAbility(newSA);
                 } else {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
@@ -444,7 +445,7 @@ public final class AbilityFactoryPlay {
                 }
             } else {
                 if (controller.isHuman()) {
-                    AllZone.getGameAction().playSpellAbility(tgtSA);
+                    Singletons.getModel().getGameAction().playSpellAbility(tgtSA);
                 } else if (tgtSA.canPlayAI()) {
                     ComputerUtil.playStack(tgtSA);
                 }

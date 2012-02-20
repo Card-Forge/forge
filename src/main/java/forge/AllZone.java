@@ -26,11 +26,10 @@ import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
-import forge.deck.CardCollections;
 import forge.control.input.InputControl;
+import forge.deck.CardCollections;
+import forge.game.GameState;
 import forge.game.limited.CardRatings;
-import forge.model.FGameState;
-import forge.model.FMatchState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
@@ -78,9 +77,6 @@ public final class AllZone {
     /** Constant <code>inputControl</code>. */
     private static InputControl inputControl = null;
 
-    /** */
-    private static FMatchState matchState = new FMatchState();
-
     // initialized at Runtime since it has to be the last object constructed
 
     // shared between Input_Attack, Input_Block, Input_CombatDamage ,
@@ -110,10 +106,8 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static Player getHumanPlayer() {
-        final FGameState gameState = Singletons.getModel().getGameState();
-
-        if (gameState != null) {
-            return gameState.getHumanPlayer();
+        if (Singletons.getModel() != null) {
+            return Singletons.getModel().getGameState().getHumanPlayer();
         }
 
         return null;
@@ -294,10 +288,8 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static PhaseHandler getPhaseHandler() {
-        final FGameState gameState = Singletons.getModel().getGameState();
-
-        if (gameState != null) {
-            return gameState.getPhaseHandler();
+        if (Singletons.getModel() != null) {
+            return Singletons.getModel().getGameState().getPhaseHandler();
         }
 
         return null;
@@ -312,7 +304,7 @@ public final class AllZone {
      * @since 1.2.0
      */
     public static GameLog getGameLog() {
-        final FGameState gameState = Singletons.getModel().getGameState();
+        final GameState gameState = Singletons.getModel().getGameState();
 
         if (gameState != null) {
             return gameState.getGameLog();
@@ -360,10 +352,8 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static MagicStack getStack() {
-        final FGameState gameState = Singletons.getModel().getGameState();
-
-        if (gameState != null) {
-            return gameState.getStack();
+        if (Singletons.getModel() != null) {
+            return Singletons.getModel().getGameState().getStack();
         }
 
         return null;
@@ -388,26 +378,6 @@ public final class AllZone {
 
     /**
      * <p>
-     * getGameAction.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.GameAction} object.
-     * @since 1.0.15
-     */
-    public static GameAction getGameAction() {
-        final FGameState gameState = Singletons.getModel().getGameState();
-
-        if (gameState != null) {
-            return gameState.getGameAction();
-        }
-
-        return null;
-    }
-
-    /**
-     * <p>
      * getStaticEffects.
      * </p>
      * 
@@ -417,7 +387,7 @@ public final class AllZone {
      * @since 1.0.15
      */
     public static StaticEffects getStaticEffects() {
-        final FGameState gameState = Singletons.getModel().getGameState();
+        final GameState gameState = Singletons.getModel().getGameState();
 
         if (gameState != null) {
             return gameState.getStaticEffects();
@@ -502,7 +472,7 @@ public final class AllZone {
      * @return a {@link forge.PlayerZone} object.
      */
     public static PlayerZone getZoneOf(final Card c) {
-        final FGameState gameState = Singletons.getModel().getGameState();
+        final GameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) {
             return null;
         }
@@ -534,7 +504,7 @@ public final class AllZone {
      * @return boolean
      */
     public static boolean isCardInZone(final Card c, final Constant.Zone zone) {
-        final FGameState gameState = Singletons.getModel().getGameState();
+        final GameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) {
             return false;
         }
@@ -560,7 +530,7 @@ public final class AllZone {
      * </p>
      */
     public static void resetZoneMoveTracking() {
-        final FGameState gameState = Singletons.getModel().getGameState();
+        final GameState gameState = Singletons.getModel().getGameState();
         if (gameState == null) {
             return;
         }
@@ -580,30 +550,6 @@ public final class AllZone {
      */
     public static long getNextTimestamp() {
         return Singletons.getModel().getGameState().getNextTimestamp();
-    }
-
-    /**
-     * <p>
-     * Resets everything possible to set a new game.
-     * </p>
-     */
-    public static void newGameCleanup() {
-        Singletons.getModel().getGameState().newGameCleanup();
-
-        Singletons.getControl().getControlMatch().showCombat("");
-        Singletons.getModel().loadPrefs();
-        AllZone.getInputControl().clearInput();
-        AllZone.getColorChanger().reset();
-        Singletons.getControl().getControlMatch().showStack();
-    }
-
-    /**
-     * Getter for matchState.
-     * 
-     * @return the matchState
-     */
-    public static FMatchState getMatchState() {
-        return AllZone.matchState;
     }
 
     /**

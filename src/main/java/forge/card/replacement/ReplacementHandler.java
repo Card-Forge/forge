@@ -27,6 +27,7 @@ import forge.ComputerUtil;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
@@ -174,7 +175,7 @@ public class ReplacementHandler {
         }
 
         if (replacementEffect.getHostCard().getController().isHuman()) {
-            AllZone.getGameAction().playSpellAbilityNoStack(effectSA, false);
+            Singletons.getModel().getGameAction().playSpellAbilityNoStack(effectSA, false);
         } else {
             ComputerUtil.playNoStack(effectSA);
         }

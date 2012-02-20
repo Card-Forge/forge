@@ -335,7 +335,7 @@ public class CardFactoryCreatures {
                 public void resolve() {
                     final CardList hand = card.getController().getCardsIn(Zone.Hand);
                     if (hand.size() == 0) {
-                        AllZone.getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card);
                     } else {
                         card.getController().discardRandom(this);
                     }
@@ -509,7 +509,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void selectCard(final Card c, final PlayerZone zone) {
                     if (zone.is(Constant.Zone.Hand) && !c.isLand()) {
-                        AllZone.getGameAction().exile(c);
+                        Singletons.getModel().getGameAction().exile(c);
                         chosen.push(c);
                         final StringBuilder sb = new StringBuilder();
                         sb.append(card.toString()).append(" - Suspending ").append(c.toString());
@@ -692,7 +692,7 @@ public class CardFactoryCreatures {
                         @Override
                         public void execute() {
                             if (AllZoneUtil.isCardInPlay(card)) {
-                                AllZone.getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card);
                             }
                         }
                     });
@@ -722,7 +722,7 @@ public class CardFactoryCreatures {
                     final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield, "Stangg Twin");
 
                     if (list.size() == 1) {
-                        AllZone.getGameAction().exile(list.get(0));
+                        Singletons.getModel().getGameAction().exile(list.get(0));
                     }
                 }
             });
@@ -744,7 +744,7 @@ public class CardFactoryCreatures {
 
                     if (card.getController().getZone(Zone.Graveyard).contains(c)) {
                         final PlayerZone play = c.getController().getZone(Constant.Zone.Battlefield);
-                        AllZone.getGameAction().moveTo(play, c);
+                        Singletons.getModel().getGameAction().moveTo(play, c);
                     }
                 } // resolve()
 
@@ -977,7 +977,7 @@ public class CardFactoryCreatures {
                                         @Override
                                         public void execute() {
                                             getTargetCard().addDamage(1, target);
-                                            AllZone.getGameAction().checkStateEffects();
+                                            Singletons.getModel().getGameAction().checkStateEffects();
                                         }
                                     }));
                         }
@@ -1068,7 +1068,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void resolve() {
                     int xCounters = card.getXManaCostPaid();
-                    final Card c = AllZone.getGameAction().moveToPlay(this.getSourceCard());
+                    final Card c = Singletons.getModel().getGameAction().moveToPlay(this.getSourceCard());
 
                     if (xCounters >= 5) {
                         xCounters = 2 * xCounters;
@@ -1172,7 +1172,7 @@ public class CardFactoryCreatures {
 
                         if (GameActionUtil.showYesNoDialog(card, question.toString())) {
                             if (card.getName().equals("Academy Rector")) {
-                                AllZone.getGameAction().exile(card);
+                                Singletons.getModel().getGameAction().exile(card);
                             }
                             CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
                             list = list.getType("Enchantment");
@@ -1184,7 +1184,7 @@ public class CardFactoryCreatures {
                                 if (objectSelected != null) {
 
                                     final Card c = (Card) objectSelected;
-                                    AllZone.getGameAction().moveToPlay(c);
+                                    Singletons.getModel().getGameAction().moveToPlay(c);
 
                                     if (c.isAura()) {
 
@@ -1295,9 +1295,9 @@ public class CardFactoryCreatures {
                         if (list.size() > 0) {
                             final Card c = CardFactoryUtil.getBestEnchantmentAI(list, this, false);
 
-                            AllZone.getGameAction().moveToPlay(c);
+                            Singletons.getModel().getGameAction().moveToPlay(c);
                             if (card.getName().equals("Academy Rector")) {
-                                AllZone.getGameAction().exile(card);
+                                Singletons.getModel().getGameAction().exile(card);
                             }
                             card.getController().shuffle();
                         }
@@ -1527,7 +1527,7 @@ public class CardFactoryCreatures {
                             for (int m = 0; m < selection.size(); m++) {
                                 intermSumPower += selection.get(m).getBaseAttack();
                                 intermSumToughness += selection.get(m).getBaseDefense();
-                                AllZone.getGameAction().exile(selection.get(m));
+                                Singletons.getModel().getGameAction().exile(selection.get(m));
                             }
                         }
 
@@ -1539,7 +1539,7 @@ public class CardFactoryCreatures {
                             if ((c.getNetAttack() <= 2) && (c.getNetDefense() <= 3)) {
                                 intermSumPower += c.getBaseAttack();
                                 intermSumToughness += c.getBaseDefense();
-                                AllZone.getGameAction().exile(c);
+                                Singletons.getModel().getGameAction().exile(c);
                                 count++;
                             }
                             // is this needed?
@@ -1730,7 +1730,7 @@ public class CardFactoryCreatures {
                 @Override
                 public void resolve() {
                     card.setKicked(true);
-                    AllZone.getGameAction().moveToPlay(card);
+                    Singletons.getModel().getGameAction().moveToPlay(card);
                     card.addCounterFromNonEffect(Counters.P1P1, 2);
                 }
 
@@ -1890,7 +1890,7 @@ public class CardFactoryCreatures {
                             @Override
                             public void selectButtonCancel() {
                                 toSac.clear();
-                                AllZone.getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card);
                                 this.stop();
                             }
 
@@ -1906,10 +1906,10 @@ public class CardFactoryCreatures {
                             private void done() {
                                 if (getTotalPower() >= 12) {
                                     for (final Card sac : toSac) {
-                                        AllZone.getGameAction().sacrifice(sac);
+                                        Singletons.getModel().getGameAction().sacrifice(sac);
                                     }
                                 } else {
-                                    AllZone.getGameAction().sacrifice(card);
+                                    Singletons.getModel().getGameAction().sacrifice(card);
                                 }
                                 toSac.clear();
                                 this.stop();
@@ -2037,7 +2037,7 @@ public class CardFactoryCreatures {
 
                     //keep the Clone card image for the cloned card
                     card.setImageFilename(imageFileName);
-                    AllZone.getGameAction().moveToPlay(card);
+                    Singletons.getModel().getGameAction().moveToPlay(card);
                 }
 
                 private void grantExtras() {
@@ -2342,14 +2342,14 @@ public class CardFactoryCreatures {
 
                             @Override
                             public void selectButtonCancel() {
-                                AllZone.getGameAction().sacrifice(card);
+                                Singletons.getModel().getGameAction().sacrifice(card);
                                 this.stop();
                             }
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
                                 if (zone.is(Constant.Zone.Battlefield) && arts.contains(c)) {
-                                    AllZone.getGameAction().moveToHand(c);
+                                    Singletons.getModel().getGameAction().moveToHand(c);
                                     this.stop();
                                 }
                             } // selectCard()

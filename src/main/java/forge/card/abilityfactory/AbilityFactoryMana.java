@@ -31,6 +31,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.Counters;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
@@ -368,7 +369,7 @@ public class AbilityFactoryMana {
             final int num = card.getCounters(Counters.getType(deplete));
             if (num == 0) {
                 abMana.setUndoable(false);
-                AllZone.getGameAction().sacrifice(card);
+                Singletons.getModel().getGameAction().sacrifice(card);
             }
         }
 

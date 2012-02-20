@@ -31,7 +31,6 @@ import forge.CardList;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GuiMultipleBlockers;
-import forge.ImageCache;
 import forge.Player;
 import forge.Singletons;
 import forge.control.match.ControlDetail;
@@ -86,22 +85,8 @@ public class ControlMatchUI implements CardContainer {
      * 
      */
     public void initMatch() {
-        // All child components have been assembled; observers and listeners can
-        // be added safely.
-        ControlMatchUI.this.getTabberControl().addObservers();
-        ControlMatchUI.this.getTabberControl().addListeners();
-
-        ControlMatchUI.this.getMessageControl().addListeners();
-
-        ControlMatchUI.this.getHandControl().addObservers();
-        ControlMatchUI.this.getHandControl().addListeners();
-
-        // Update all observers with values for start of match.
-        for (final ControlField f : ControlMatchUI.this.getFieldControls()) {
-            f.addObservers();
-            f.addListeners();
-            f.getPlayer().updateObservers();
-        }
+        ControlMatchUI.this.showCombat("");
+        ControlMatchUI.this.showStack();
 
         // Update avatars
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -131,32 +116,18 @@ public class ControlMatchUI implements CardContainer {
             ((FLabel) ((ViewField) views[i]).getLblAvatar()).getResizeTimer().start();
         }
 
+        // Update observers
+        AllZone.getHumanPlayer().updateObservers();
         AllZone.getHumanPlayer().getZone(Zone.Hand).updateObservers();
-        AllZone.getComputerPlayer().getZone(Zone.Hand).updateObservers();
-        AllZone.getStack().updateObservers();
         AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+
+        AllZone.getComputerPlayer().updateObservers();
+        AllZone.getComputerPlayer().getZone(Zone.Hand).updateObservers();
+        AllZone.getHumanPlayer().getZone(Zone.Battlefield).updateObservers();
+
+        AllZone.getStack().updateObservers();
         AllZone.getInputControl().updateObservers();
         ControlMatchUI.this.getTabberControl().updateObservers();
-    }
-
-    /**
-     * Deletes all observers for Match UI elements and clears the ImageCache.
-     */
-    public void deinitMatch() {
-
-        ImageCache.clear();
-
-        // Delete player observers
-        for (Player p : AllZone.getPlayersInGame()) {
-            p.deleteObservers();
-            p.getZone(Zone.Battlefield).deleteObservers();
-            p.getZone(Zone.Hand).deleteObservers();
-        }
-
-        AllZone.getStack().deleteObservers();
-        AllZone.getGameLog().deleteObservers();
-        AllZone.getInputControl().deleteObservers();
-        AllZone.getPhaseHandler().deleteObservers();
     }
 
     /**

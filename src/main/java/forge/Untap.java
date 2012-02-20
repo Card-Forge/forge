@@ -98,7 +98,7 @@ public class Untap extends Phase implements java.io.Serializable {
 
         for (final Card c : list) {
             if (c.getBounceAtUntap() && c.getName().contains("Undiscovered Paradise")) {
-                AllZone.getGameAction().moveToHand(c);
+                Singletons.getModel().getGameAction().moveToHand(c);
             }
         }
 

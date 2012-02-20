@@ -32,6 +32,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.PhaseHandler;
 import forge.Player;
+import forge.Singletons;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -470,7 +471,7 @@ public class AbilityFactoryEffect {
 
                 @Override
                 public void execute() {
-                    AllZone.getGameAction().exile(e);
+                    Singletons.getModel().getGameAction().exile(e);
                 }
             };
 
@@ -481,7 +482,7 @@ public class AbilityFactoryEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         AllZone.getTriggerHandler().suppressMode("ChangesZone");
-        AllZone.getGameAction().moveToPlay(eff);
+        Singletons.getModel().getGameAction().moveToPlay(eff);
         AllZone.getTriggerHandler().clearSuppression("ChangesZone");
     }
 

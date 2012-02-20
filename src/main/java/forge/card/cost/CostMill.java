@@ -27,6 +27,7 @@ import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 
@@ -112,7 +113,7 @@ public class CostMill extends CostPartWithList {
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
-            AllZone.getGameAction().moveToGraveyard(c);
+            Singletons.getModel().getGameAction().moveToGraveyard(c);
         }
     }
 
@@ -156,7 +157,7 @@ public class CostMill extends CostPartWithList {
             while (itr.hasNext()) {
                 final Card card = itr.next();
                 this.addToList(card);
-                AllZone.getGameAction().moveToGraveyard(card);
+                Singletons.getModel().getGameAction().moveToGraveyard(card);
             }
             this.addListToHash(ability, "Milled");
             payment.paidCost(this);

@@ -170,7 +170,7 @@ public class ComputerUtil {
         final Card source = sa.getSourceCard();
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
+            sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
         }
 
         final Cost cost = sa.getPayCosts();
@@ -333,7 +333,7 @@ public class ComputerUtil {
         final Card source = bestSA.getSourceCard();
 
         if (bestSA.isSpell() && !source.isCopiedSpell()) {
-            bestSA.setSourceCard(AllZone.getGameAction().moveToStack(source));
+            bestSA.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
         }
 
         final Cost cost = bestSA.getPayCosts();
@@ -367,7 +367,7 @@ public class ComputerUtil {
         if (ComputerUtil.canPayCost(sa)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
+                sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
             }
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
@@ -391,7 +391,7 @@ public class ComputerUtil {
 
         final Card source = sa.getSourceCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
+            sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
         }
 
         AllZone.getStack().add(sa);
@@ -426,7 +426,7 @@ public class ComputerUtil {
 
         final Card source = newSA.getSourceCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
-            newSA.setSourceCard(AllZone.getGameAction().moveToStack(source));
+            newSA.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
         }
 
         final CostPayment pay = new CostPayment(cost, newSA);
@@ -449,7 +449,7 @@ public class ComputerUtil {
         if (ComputerUtil.canPayCost(sa)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setSourceCard(AllZone.getGameAction().moveToStack(source));
+                sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
             }
 
             sa.setActivatingPlayer(AllZone.getComputerPlayer());
@@ -465,7 +465,7 @@ public class ComputerUtil {
             AbilityFactory.resolve(sa, false);
 
             // destroys creatures if they have lethal damage, etc..
-            AllZone.getGameAction().checkStateEffects();
+            Singletons.getModel().getGameAction().checkStateEffects();
         }
     } // play()
 
@@ -625,7 +625,7 @@ public class ComputerUtil {
         ManaCost cost = new ManaCost(mana);
 
         if ((sa.getPayCosts() == null) || !sa.getPayCosts().getNoManaCostChange()) {
-            cost = AllZone.getGameAction().getSpellCostChange(sa, cost);
+            cost = Singletons.getModel().getGameAction().getSpellCostChange(sa, cost);
         }
 
         final ManaPool manapool = player.getManaPool();
@@ -1821,11 +1821,11 @@ public class ComputerUtil {
                     }
                 }
                 if (destroy) {
-                    if (!AllZone.getGameAction().destroy(c)) {
+                    if (!Singletons.getModel().getGameAction().destroy(c)) {
                         continue;
                     }
                 } else {
-                    if (!AllZone.getGameAction().sacrifice(c)) {
+                    if (!Singletons.getModel().getGameAction().sacrifice(c)) {
                         continue;
                     }
                 }

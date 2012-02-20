@@ -31,6 +31,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.Player;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -88,7 +89,7 @@ public class SpellPermanent extends Spell {
 
             final CardList creature = (CardList) SpellPermanent.this.championGetCreature.execute();
             if (creature.size() == 0) {
-                AllZone.getGameAction().sacrifice(source);
+                Singletons.getModel().getGameAction().sacrifice(source);
                 return;
             } else if (controller.isHuman()) {
                 AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
@@ -102,7 +103,7 @@ public class SpellPermanent extends Spell {
                     final Card c = computer.get(0);
                     source.setChampionedCard(c);
                     if (AllZoneUtil.isCardInPlay(c)) {
-                        AllZone.getGameAction().exile(c);
+                        Singletons.getModel().getGameAction().exile(c);
                     }
 
                     // Run triggers
@@ -111,7 +112,7 @@ public class SpellPermanent extends Spell {
                     runParams.put("Championed", source.getChampionedCard());
                     AllZone.getTriggerHandler().runTrigger("Championed", runParams);
                 } else {
-                    AllZone.getGameAction().sacrifice(this.getSourceCard());
+                    Singletons.getModel().getGameAction().sacrifice(this.getSourceCard());
                 }
             } // computer
         } // resolve()
@@ -145,7 +146,7 @@ public class SpellPermanent extends Spell {
                 public void resolve() {
                     final Card c = this.getSourceCard().getChampionedCard();
                     if ((c != null) && !c.isToken() && AllZoneUtil.isCardExiled(c)) {
-                        AllZone.getGameAction().moveToPlay(c);
+                        Singletons.getModel().getGameAction().moveToPlay(c);
                     }
                 } // resolve()
             }; // SpellAbility
@@ -413,6 +414,6 @@ public class SpellPermanent extends Spell {
     public void resolve() {
         final Card c = this.getSourceCard();
         c.addController(this.getActivatingPlayer());
-        AllZone.getGameAction().moveTo(this.getActivatingPlayer().getZone(Constant.Zone.Battlefield), c);
+        Singletons.getModel().getGameAction().moveTo(this.getActivatingPlayer().getZone(Constant.Zone.Battlefield), c);
     }
 }

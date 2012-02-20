@@ -36,6 +36,7 @@ import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
@@ -398,7 +399,7 @@ public final class AbilityFactoryReveal {
                     if (params.containsKey("Reveal")) {
                         GuiUtils.getChoice("Revealing cards from library", top.toArray());
                         cardsRevealed = true;
-                        // AllZone.getGameAction().revealToCopmuter(top.toArray());
+                        // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                         // - for when it exists
                     } else if (params.containsKey("RevealOptional")) {
                         String question = "Reveal: ";
@@ -407,7 +408,7 @@ public final class AbilityFactoryReveal {
                         }
                         if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
                             GuiUtils.getChoice(host + "Revealing cards from library", top.toArray());
-                            // AllZone.getGameAction().revealToCopmuter(top.toArray());
+                            // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                             cardsRevealed = true;
                         } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
                             GuiUtils.getChoice(host + "Revealing cards from library", top.toArray());
@@ -424,7 +425,7 @@ public final class AbilityFactoryReveal {
                                 }
                             }
                         }
-                        // AllZone.getGameAction().revealToCopmuter(top.toArray());
+                        // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                         // - for when it exists
                     } else if (choser.isHuman()) {
                         // show the user the revealed cards
@@ -470,9 +471,9 @@ public final class AbilityFactoryReveal {
                                 }
                                 final PlayerZone zone = c.getOwner().getZone(destZone1);
                                 if (zone.is(Zone.Library)) {
-                                    AllZone.getGameAction().moveToLibrary(c, libraryPosition);
+                                    Singletons.getModel().getGameAction().moveToLibrary(c, libraryPosition);
                                 } else {
-                                    AllZone.getGameAction().moveTo(zone, c);
+                                    Singletons.getModel().getGameAction().moveTo(zone, c);
                                     if (destZone1.equals(Zone.Battlefield) && params.containsKey("Tapped")) {
                                         c.setTapped(true);
                                     }
@@ -509,9 +510,9 @@ public final class AbilityFactoryReveal {
                                     final PlayerZone zone = chosen.getOwner().getZone(destZone1);
                                     if (zone.is(Zone.Library)) {
                                         // System.out.println("Moving to lib position: "+libraryPosition);
-                                        AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
+                                        Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
-                                        final Card c = AllZone.getGameAction().moveTo(zone, chosen);
+                                        final Card c = Singletons.getModel().getGameAction().moveTo(zone, chosen);
                                         if (destZone1.equals(Zone.Battlefield) && !keywords.isEmpty()) {
                                             for (final String kw : keywords) {
                                                 c.addExtrinsicKeyword(kw);
@@ -521,7 +522,7 @@ public final class AbilityFactoryReveal {
                                             }
                                         }
                                     }
-                                    // AllZone.getGameAction().revealToComputer()
+                                    // Singletons.getModel().getGameAction().revealToComputer()
                                     // - for when this exists
                                     j++;
                                 }
@@ -538,9 +539,9 @@ public final class AbilityFactoryReveal {
                                     }
                                     final PlayerZone zone = chosen.getOwner().getZone(destZone1);
                                     if (zone.is(Zone.Library)) {
-                                        AllZone.getGameAction().moveToLibrary(chosen, libraryPosition);
+                                        Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition);
                                     } else {
-                                        final Card c = AllZone.getGameAction().moveTo(zone, chosen);
+                                        final Card c = Singletons.getModel().getGameAction().moveTo(zone, chosen);
                                         if (destZone1.equals(Zone.Battlefield) && !keywords.isEmpty()) {
                                             for (final String kw : keywords) {
                                                 chosen.addExtrinsicKeyword(kw);
@@ -582,12 +583,12 @@ public final class AbilityFactoryReveal {
                                     } else {
                                         chosen = rest.get(0);
                                     }
-                                    AllZone.getGameAction().moveToLibrary(chosen, libraryPosition2);
+                                    Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition2);
                                     rest.remove(chosen);
                                 }
                             } else { // Computer
                                 for (int i = 0; i < rest.size(); i++) {
-                                    AllZone.getGameAction().moveToLibrary(rest.get(i), libraryPosition2);
+                                    Singletons.getModel().getGameAction().moveToLibrary(rest.get(i), libraryPosition2);
                                 }
                             }
                         } else {
@@ -595,7 +596,7 @@ public final class AbilityFactoryReveal {
                             for (int i = 0; i < rest.size(); i++) {
                                 Card c = rest.get(i);
                                 final PlayerZone toZone = c.getOwner().getZone(destZone2);
-                                c = AllZone.getGameAction().moveTo(toZone, c);
+                                c = Singletons.getModel().getGameAction().moveTo(toZone, c);
                                 if (destZone2.equals(Zone.Battlefield) && !keywords.isEmpty()) {
                                     for (final String kw : keywords) {
                                         c.addExtrinsicKeyword(kw);
@@ -984,9 +985,9 @@ public final class AbilityFactoryReveal {
                         final Card c = itr.next();
                         if (params.containsKey("GainControl") && foundDest.equals(Zone.Battlefield)) {
                             c.addController(af.getHostCard());
-                            AllZone.getGameAction().moveTo(c.getController().getZone(foundDest), c);
+                            Singletons.getModel().getGameAction().moveTo(c.getController().getZone(foundDest), c);
                         } else {
-                            AllZone.getGameAction().moveTo(foundDest, c, foundLibPos);
+                            Singletons.getModel().getGameAction().moveTo(foundDest, c, foundLibPos);
                         }
                         revealed.remove(c);
                     }
@@ -1001,7 +1002,7 @@ public final class AbilityFactoryReveal {
                 final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {
                     final Card c = itr.next();
-                    AllZone.getGameAction().moveTo(revealedDest, c, revealedLibPos);
+                    Singletons.getModel().getGameAction().moveTo(revealedDest, c, revealedLibPos);
                 }
 
                 if (params.containsKey("Shuffle")) {
@@ -1921,7 +1922,7 @@ public final class AbilityFactoryReveal {
             }
             final Card c1 = (Card) o;
             topCards.remove(c1);
-            AllZone.getGameAction().moveToLibrary(c1, i - 1);
+            Singletons.getModel().getGameAction().moveToLibrary(c1, i - 1);
         }
         if (mayshuffle) {
             if (GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?")) {

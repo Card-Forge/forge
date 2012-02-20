@@ -1353,13 +1353,13 @@ public final class GuiDisplayUtil {
         AllZone.getCombat().reset();
         for (final Card c : humanDevSetup) {
             AllZone.getHumanPlayer().getZone(Zone.Hand).add(c);
-            AllZone.getGameAction().moveToPlay(c);
+            Singletons.getModel().getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         for (final Card c : computerDevSetup) {
             AllZone.getComputerPlayer().getZone(Zone.Hand).add(c);
-            AllZone.getGameAction().moveToPlay(c);
+            Singletons.getModel().getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
@@ -1400,7 +1400,7 @@ public final class GuiDisplayUtil {
             AllZone.getHumanPlayer().setLife(setHumanLife, null);
         }
 
-        AllZone.getGameAction().checkStateEffects();
+        Singletons.getModel().getGameAction().checkStateEffects();
         AllZone.getPhaseHandler().updateObservers();
         AllZone.getHumanPlayer().getZone(Zone.Exile).updateObservers();
         AllZone.getComputerPlayer().getZone(Zone.Exile).updateObservers();
@@ -1475,7 +1475,7 @@ public final class GuiDisplayUtil {
             return;
         } else {
             final Card c = (Card) o;
-            AllZone.getGameAction().moveToHand(c);
+            Singletons.getModel().getGameAction().moveToHand(c);
         }
     }
 

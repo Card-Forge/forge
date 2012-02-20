@@ -19,7 +19,6 @@ package forge.card.cost;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
@@ -128,7 +127,7 @@ public class CostSacrifice extends CostPartWithList {
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
         this.addListToHash(ability, "Sacrificed");
         for (final Card c : this.getList()) {
-            AllZone.getGameAction().sacrifice(c);
+            Singletons.getModel().getGameAction().sacrifice(c);
         }
     }
 
@@ -231,7 +230,7 @@ public class CostSacrifice extends CostPartWithList {
         // TODO Ask First
         for (final Card card : typeList) {
             payment.getAbility().addCostToHashList(card, "Sacrificed");
-            AllZone.getGameAction().sacrifice(card);
+            Singletons.getModel().getGameAction().sacrifice(card);
         }
 
         payment.setPaidManaPart(part, true);
@@ -288,7 +287,7 @@ public class CostSacrifice extends CostPartWithList {
                 if (typeList.contains(card)) {
                     this.nSacrifices++;
                     part.addToList(card);
-                    AllZone.getGameAction().sacrifice(card);
+                    Singletons.getModel().getGameAction().sacrifice(card);
                     typeList.remove(card);
                     // in case nothing else to sacrifice
                     if (this.nSacrifices == nNeeded) {
@@ -349,7 +348,7 @@ public class CostSacrifice extends CostPartWithList {
                     if (choice.equals(0)) {
                         part.addToList(card);
                         part.addListToHash(sa, "Sacrificed");
-                        AllZone.getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card);
                         this.stop();
                         payment.paidCost(part);
                     } else {

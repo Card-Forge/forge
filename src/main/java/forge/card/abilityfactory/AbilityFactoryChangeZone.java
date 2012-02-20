@@ -32,11 +32,12 @@ import forge.CardUtil;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.GameEntity;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
+import forge.GameEntity;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -887,7 +888,7 @@ public final class AbilityFactoryChangeZone {
                     if (origin.contains(Zone.Library) && (i < 1)) {
                         player.shuffle();
                     }
-                    movedCard = AllZone.getGameAction().moveToLibrary(c, libraryPos);
+                    movedCard = Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
                 } else if (destination.equals(Zone.Battlefield)) {
                     if (params.containsKey("Tapped")) {
                         c.setTapped(true);
@@ -916,14 +917,14 @@ public final class AbilityFactoryChangeZone {
                         AllZone.getCombat().addAttacker(c);
                     }
 
-                    movedCard = AllZone.getGameAction().moveTo(c.getController().getZone(destination), c);
+                    movedCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
                 } else if (destination.equals(Zone.Exile)) {
-                    movedCard = AllZone.getGameAction().exile(c);
+                    movedCard = Singletons.getModel().getGameAction().exile(c);
                     if (params.containsKey("ExileFaceDown")) {
                         movedCard.setState("FaceDown");
                     }
                 } else {
-                    movedCard = AllZone.getGameAction().moveTo(destZone, c);
+                    movedCard = Singletons.getModel().getGameAction().moveTo(destZone, c);
                 }
 
                 if (remember != null) {
@@ -1071,7 +1072,7 @@ public final class AbilityFactoryChangeZone {
             if (Zone.Library.equals(destination)) {
                 final int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params
                         .get("LibraryPosition")) : 0;
-                AllZone.getGameAction().moveToLibrary(c, libraryPos);
+                Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
             } else if (Zone.Battlefield.equals(destination)) {
                 if (params.containsKey("Tapped")) {
                     c.tap();
@@ -1107,14 +1108,14 @@ public final class AbilityFactoryChangeZone {
                     }
                 }
 
-                newCard = AllZone.getGameAction().moveTo(c.getController().getZone(destination), c);
+                newCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
             } else if (destination.equals(Zone.Exile)) {
-                newCard = AllZone.getGameAction().exile(c);
+                newCard = Singletons.getModel().getGameAction().exile(c);
                 if (params.containsKey("ExileFaceDown")) {
                     newCard.setState("FaceDown");
                 }
             } else {
-                newCard = AllZone.getGameAction().moveTo(destZone, c);
+                newCard = Singletons.getModel().getGameAction().moveTo(destZone, c);
             }
 
             if (remember != null) {
@@ -1885,7 +1886,7 @@ public final class AbilityFactoryChangeZone {
                     final int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params
                             .get("LibraryPosition")) : 0;
 
-                    movedCard = AllZone.getGameAction().moveToLibrary(tgtC, libraryPosition);
+                    movedCard = Singletons.getModel().getGameAction().moveToLibrary(tgtC, libraryPosition);
 
                     // for things like Gaea's Blessing
                     if (params.containsKey("Shuffle")) {
@@ -1923,14 +1924,14 @@ public final class AbilityFactoryChangeZone {
                             }
                         }
 
-                        movedCard = AllZone.getGameAction().moveTo(tgtC.getController().getZone(destination), tgtC);
+                        movedCard = Singletons.getModel().getGameAction().moveTo(tgtC.getController().getZone(destination), tgtC);
 
                         if (params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
                             AllZone.getCombat().addAttacker(tgtC);
                             AllZone.getCombat().addUnblockedAttacker(tgtC);
                         }
                     } else {
-                        movedCard = AllZone.getGameAction().moveTo(pl.getZone(destination), tgtC);
+                        movedCard = Singletons.getModel().getGameAction().moveTo(pl.getZone(destination), tgtC);
                         if (params.containsKey("ExileFaceDown")) {
                             movedCard.setState("FaceDown");
                         }
@@ -2349,9 +2350,9 @@ public final class AbilityFactoryChangeZone {
 
             if (params.containsKey("GainControl")) {
                 c.addController(af.getHostCard());
-                AllZone.getGameAction().moveToPlay(c, sa.getActivatingPlayer());
+                Singletons.getModel().getGameAction().moveToPlay(c, sa.getActivatingPlayer());
             } else {
-                final Card movedCard = AllZone.getGameAction().moveTo(destination, c, libraryPos);
+                final Card movedCard = Singletons.getModel().getGameAction().moveTo(destination, c, libraryPos);
                 if (params.containsKey("ExileFaceDown")) {
                     movedCard.setState("FaceDown");
                 }

@@ -32,6 +32,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameActionUtil;
 import forge.Player;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryCharm;
 import forge.card.cost.Cost;
@@ -358,12 +359,12 @@ public class TriggerHandler {
          * they //aren't yet. And even if it (correctly?) sent unattached
          * //auras to the graveyard,that would result in all auras //going
          * straight to the grave no matter what. this.suppressMode("Always");
-         * AllZone.getGameAction().checkStateEffects(true);
+         * Singletons.getModel().getGameAction().checkStateEffects(true);
          * this.clearSuppression("Always");
          */
         if (checkStatics) {
             this.suppressMode("Always");
-            AllZone.getGameAction().checkStaticAbilities();
+            Singletons.getModel().getGameAction().checkStaticAbilities();
             this.clearSuppression("Always");
         }
 
@@ -1052,7 +1053,7 @@ public class TriggerHandler {
                     // Card src =
                     // (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
                     // System.out.println("Trigger resolving for "+mode+".  Card = "+src);
-                    AllZone.getGameAction().playSpellAbilityNoStack(sa[0], true);
+                    Singletons.getModel().getGameAction().playSpellAbilityNoStack(sa[0], true);
                 } else {
                     // commented out because i don't think this should be called
                     // again here
@@ -1075,7 +1076,7 @@ public class TriggerHandler {
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         /*
          * if(host.getController().isHuman()) {
-         * AllZone.getGameAction().playSpellAbility(wrapperAbility); } else {
+         * Singletons.getModel().getGameAction().playSpellAbility(wrapperAbility); } else {
          * wrapperAbility.doTrigger(isMandatory);
          * ComputerUtil.playStack(wrapperAbility); }
          */
@@ -1084,7 +1085,7 @@ public class TriggerHandler {
         // System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
         if (params.containsKey("Static") && params.get("Static").equals("True")) {
-            AllZone.getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
+            Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
             AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
         }

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import forge.AllZone;
 import forge.Card;
 import forge.ComputerUtil;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -418,7 +419,7 @@ public class AbilityFactoryCounterMagic {
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && this.params.containsKey("DestroyPermanent")) {
-                AllZone.getGameAction().destroy(tgtSACard);
+                Singletons.getModel().getGameAction().destroy(tgtSACard);
             }
 
             if (this.params.containsKey("RememberTargets")) {
@@ -505,17 +506,17 @@ public class AbilityFactoryCounterMagic {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
         } else if (this.destination.equals("Graveyard")) {
-            AllZone.getGameAction().moveToGraveyard(tgtSA.getSourceCard());
+            Singletons.getModel().getGameAction().moveToGraveyard(tgtSA.getSourceCard());
         } else if (this.destination.equals("Exile")) {
-            AllZone.getGameAction().exile(tgtSA.getSourceCard());
+            Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
         } else if (this.destination.equals("TopOfLibrary")) {
-            AllZone.getGameAction().moveToLibrary(tgtSA.getSourceCard());
+            Singletons.getModel().getGameAction().moveToLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("Hand")) {
-            AllZone.getGameAction().moveToHand(tgtSA.getSourceCard());
+            Singletons.getModel().getGameAction().moveToHand(tgtSA.getSourceCard());
         } else if (this.destination.equals("BottomOfLibrary")) {
-            AllZone.getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("ShuffleIntoLibrary")) {
-            AllZone.getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
             tgtSA.getSourceCard().getController().shuffle();
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "

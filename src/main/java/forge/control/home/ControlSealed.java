@@ -19,9 +19,9 @@ import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
@@ -124,10 +124,7 @@ public class ControlSealed {
                 view.getBtnStart().setVisible(true);
                 view.getBarProgress().setVisible(false);
 
-                Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-                Singletons.getControl().getControlMatch().initMatch();
-
-                AllZone.getGameAction().newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+                GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
             }
         });
     }

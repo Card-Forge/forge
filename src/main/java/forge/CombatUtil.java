@@ -2495,7 +2495,7 @@ public class CombatUtil {
                             enchantments.toArray());
                     if (o != null) {
                         final Card crd = (Card) o;
-                        AllZone.getGameAction().moveToPlay(crd);
+                        Singletons.getModel().getGameAction().moveToPlay(crd);
 
                         if (crd.isAura()) {
                             Object obj = null;
@@ -2535,7 +2535,7 @@ public class CombatUtil {
                     });
                     if (enchantments.size() > 0) {
                         final Card card = CardFactoryUtil.getBestEnchantmentAI(enchantments, null, false);
-                        AllZone.getGameAction().moveToPlay(card);
+                        Singletons.getModel().getGameAction().moveToPlay(card);
                         c.getController().shuffle();
                     }
                 }
@@ -2609,7 +2609,7 @@ public class CombatUtil {
                     player.gainLife(top.getBaseDefense(), c);
                     player.loseLife(top.getBaseAttack(), c);
 
-                    AllZone.getGameAction().moveToHand(top);
+                    Singletons.getModel().getGameAction().moveToHand(top);
                 }
             }
         } // Sapling of Colfenor

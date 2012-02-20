@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import forge.AllZone;
 import forge.Card;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.CostPayment;
 
@@ -110,7 +111,7 @@ public class SpellAbilityRequirements {
                 final Card c = this.ability.getSourceCard();
 
                 this.fromZone = AllZone.getZoneOf(c);
-                this.ability.setSourceCard(AllZone.getGameAction().moveToStack(c));
+                this.ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(c));
             }
         }
 
@@ -141,7 +142,7 @@ public class SpellAbilityRequirements {
             final Card c = this.ability.getSourceCard();
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to where it came from
-                AllZone.getGameAction().moveTo(this.fromZone, c);
+                Singletons.getModel().getGameAction().moveTo(this.fromZone, c);
             }
 
             this.select.resetTargets();
@@ -189,12 +190,12 @@ public class SpellAbilityRequirements {
             }
 
             this.select.resetTargets();
-            AllZone.getGameAction().checkStateEffects();
+            Singletons.getModel().getGameAction().checkStateEffects();
         } else if (this.payment.isCanceled()) {
             final Card c = this.ability.getSourceCard();
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to Previous Zone
-                AllZone.getGameAction().moveTo(this.fromZone, c);
+                Singletons.getModel().getGameAction().moveTo(this.fromZone, c);
             }
 
             if (this.select != null) {

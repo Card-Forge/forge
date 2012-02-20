@@ -37,10 +37,10 @@ import forge.view.match.ViewTabber;
  */
 public class ControlTabber extends MyObservable {
     private final ViewTabber view;
-    private MouseListener maMilling, maUnlimited,
-        maMana, maSetup, maTutor, maCounter, maTap, maUntap, maLife;
+    private final MouseListener madMilling, madUnlimited,
+        madMana, madSetup, madTutor, madCounter, madTap, madUntap, madLife;
 
-    private Observer stackObserver, logObserver;
+    private Observer obsStack, obsLog;
 
     /** */
     public static final int STACK_PANEL = 0;
@@ -75,73 +75,98 @@ public class ControlTabber extends MyObservable {
             this.view.getLblUnlimitedLands().setEnabled(false);
         }
 
-        // Various mouse adapters for dev buttons
-        initMouseAdapters();
-
-        initObservers();
-    }
-
-    private void initObservers() {
-        // Stack
-        stackObserver = new Observer() {
-            @Override
+        // Observers and listeners
+        obsStack = new Observer() { @Override
             public void update(final Observable a, final Object b) {
-                ControlTabber.this.view.updateStack();
-            }
-        };
+                ControlTabber.this.view.updateStack(); } };
 
-        //Game Log
-        logObserver = new Observer() {
-            @Override
+        obsLog = new Observer() { @Override
             public void update(final Observable a, final Object b) {
-                ControlTabber.this.view.updateConsole();
-            }
-        };
+                ControlTabber.this.view.updateConsole(); } };
+
+        madMilling = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                ControlTabber.this.view.getLblMilling().toggleEnabled(); } };
+
+        madUnlimited = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                ControlTabber.this.view.getLblUnlimitedLands().toggleEnabled(); } };
+
+        madMana = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devModeGenerateMana(); } };
+
+        madSetup = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devSetupGameState(); } };
+
+        madTutor = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devModeTutor(); } };
+
+        madCounter = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devModeAddCounter(); } };
+
+        madTap = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devModeTapPerm(); } };
+
+        madUntap = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devModeUntapPerm(); } };
+
+        madLife = new MouseAdapter() { @Override
+            public void mousePressed(final MouseEvent e) {
+                GuiDisplayUtil.devModeSetLife(); } };
+
+        addListeners();
+        addObservers();
     }
 
     /** Adds observers to tabber. */
     public void addObservers() {
-        AllZone.getStack().addObserver(stackObserver);
-        AllZone.getGameLog().addObserver(logObserver);
+        AllZone.getStack().addObserver(obsStack);
+        AllZone.getGameLog().addObserver(obsLog);
     }
 
     /** Adds listeners to various components in tabber. */
     public void addListeners() {
         // Milling enable toggle
-        this.view.getLblMilling().removeMouseListener(maMilling);
-        this.view.getLblMilling().addMouseListener(maMilling);
+        this.view.getLblMilling().removeMouseListener(madMilling);
+        this.view.getLblMilling().addMouseListener(madMilling);
 
         // DevMode: Play unlimited land this turn toggle
-        this.view.getLblUnlimitedLands().removeMouseListener(maUnlimited);
-        this.view.getLblUnlimitedLands().addMouseListener(maUnlimited);
+        this.view.getLblUnlimitedLands().removeMouseListener(madUnlimited);
+        this.view.getLblUnlimitedLands().addMouseListener(madUnlimited);
 
         // DevMode: Generate mana
-        this.view.getLblGenerateMana().removeMouseListener(maMana);
-        this.view.getLblGenerateMana().addMouseListener(maMana);
+        this.view.getLblGenerateMana().removeMouseListener(madMana);
+        this.view.getLblGenerateMana().addMouseListener(madMana);
 
         // DevMode: Battlefield setup
-        this.view.getLblSetupGame().removeMouseListener(maSetup);
-        this.view.getLblSetupGame().addMouseListener(maSetup);
+        this.view.getLblSetupGame().removeMouseListener(madSetup);
+        this.view.getLblSetupGame().addMouseListener(madSetup);
 
         // DevMode: Tutor for card
-        this.view.getLblTutor().removeMouseListener(maTutor);
-        this.view.getLblTutor().addMouseListener(maTutor);
+        this.view.getLblTutor().removeMouseListener(madTutor);
+        this.view.getLblTutor().addMouseListener(madTutor);
 
         // DevMode: Add counter to permanent
-        this.view.getLblCounterPermanent().removeMouseListener(maCounter);
-        this.view.getLblCounterPermanent().addMouseListener(maCounter);
+        this.view.getLblCounterPermanent().removeMouseListener(madCounter);
+        this.view.getLblCounterPermanent().addMouseListener(madCounter);
 
         // DevMode: Tap permanent
-        this.view.getLblTapPermanent().removeMouseListener(maTap);
-        this.view.getLblTapPermanent().addMouseListener(maTap);
+        this.view.getLblTapPermanent().removeMouseListener(madTap);
+        this.view.getLblTapPermanent().addMouseListener(madTap);
 
         // DevMode: Untap permanent
-        this.view.getLblUntapPermanent().removeMouseListener(maUntap);
-        this.view.getLblUntapPermanent().addMouseListener(maUntap);
+        this.view.getLblUntapPermanent().removeMouseListener(madUntap);
+        this.view.getLblUntapPermanent().addMouseListener(madUntap);
 
         // DevMode: Set life
-        this.view.getLblSetLife().removeMouseListener(maLife);
-        this.view.getLblSetLife().addMouseListener(maLife);
+        this.view.getLblSetLife().removeMouseListener(madLife);
+        this.view.getLblSetLife().addMouseListener(madLife);
     }
 
     /**
@@ -190,73 +215,5 @@ public class ControlTabber extends MyObservable {
      */
     public void showPnlStack() {
         this.view.getVtpTabber().showTab(STACK_PANEL);
-    }
-
-    /** Simple method that inits the mouse adapters for listeners,
-     * here to simplify life in the constructor.
-     */
-    private void initMouseAdapters() {
-        maMilling = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                ControlTabber.this.view.getLblMilling().toggleEnabled();
-            }
-        };
-
-        maUnlimited = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                ControlTabber.this.view.getLblUnlimitedLands().toggleEnabled();
-            }
-        };
-
-        maMana = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devModeGenerateMana();
-            }
-        };
-
-        maSetup = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devSetupGameState();
-            }
-        };
-
-        maTutor = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devModeTutor();
-            }
-        };
-
-        maCounter = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devModeAddCounter();
-            }
-        };
-
-        maTap = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devModeTapPerm();
-            }
-        };
-
-        maUntap = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devModeUntapPerm();
-            }
-        };
-
-        maLife = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                GuiDisplayUtil.devModeSetLife();
-            }
-        };
     }
 }

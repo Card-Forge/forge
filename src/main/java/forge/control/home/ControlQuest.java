@@ -22,6 +22,7 @@ import forge.Constant;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
+import forge.game.GameNew;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DeckEditorQuest;
@@ -70,7 +71,7 @@ public class ControlQuest {
     public ControlQuest(ViewQuest v0) {
         // Inits
         this.view = v0;
-        this.qem = new QuestEventManager();
+        this.qem = Singletons.getModel().getQuestEventManager();
         this.qPrefs = Singletons.getModel().getQuestPreferences();
         AllZone.setQuestEventManager(this.qem);
 
@@ -324,6 +325,7 @@ public class ControlQuest {
         Singletons.getView().getViewHome().resetQuest();
     }   // New Quest
 
+    /** Changes between quest data files. */
     private void changeQuest() {
         AllZone.setQuestData(view.getLstQuests().getSelectedQuest());
         this.qData = AllZone.getQuestData();
@@ -567,10 +569,6 @@ public class ControlQuest {
                 view.getBtnStart().setVisible(true);
                 view.getBarProgress().setVisible(false);
 
-                Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-                Singletons.getControl().getControlMatch().initMatch();
-
-                AllZone.getMatchState().reset();
                 if (event.getEventType().equals("challenge")) {
                     setupChallenge(currentDeck);
                 } else {
@@ -593,7 +591,7 @@ public class ControlQuest {
         final Deck computer = event.getEventDeck();
         Constant.Runtime.COMPUTER_DECK[0] = computer;
 
-        AllZone.getGameAction().newGame(
+        GameNew.newGame(
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
                 QuestUtil.getHumanStartingCards(qData),
                 QuestUtil.getComputerStartingCards(qData),
@@ -615,7 +613,7 @@ public class ControlQuest {
             extraLife = 3;
         }
 
-        AllZone.getGameAction().newGame(
+        GameNew.newGame(
                 Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
                 QuestUtil.getHumanStartingCards(qData, event),
                 QuestUtil.getComputerStartingCards(qData, event),

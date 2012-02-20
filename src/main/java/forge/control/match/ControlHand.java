@@ -52,8 +52,8 @@ public class ControlHand {
     private final List<Card> cardsInPanel;
     private final ViewHand view;
 
-    private MouseListener maCardClick;
-    private MouseMotionListener maCardMove;
+    private final MouseListener madCardClick;
+    private final MouseMotionListener madCardMove;
 
     /** The o1. */
     private Observer o1;
@@ -69,7 +69,7 @@ public class ControlHand {
         this.view = v;
         this.cardsInPanel = new ArrayList<Card>();
 
-        maCardClick = new MouseAdapter() {
+        madCardClick = new MouseAdapter() {
             // Card click
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -84,7 +84,7 @@ public class ControlHand {
             }
         };
 
-        maCardMove = new MouseMotionAdapter() {
+        madCardMove = new MouseMotionAdapter() {
             // Card mouseover
             @Override
             public void mouseMoved(final MouseEvent me) {
@@ -162,6 +162,9 @@ public class ControlHand {
                 }
             }
         };
+
+        addObservers();
+        addListeners();
     }
 
     /** Adds observers to hand panel. */
@@ -171,11 +174,11 @@ public class ControlHand {
 
     /** Adds listeners to hand panel: clicks, mouseover, etc. */
     public void addListeners() {
-        view.getHandArea().removeMouseListener(maCardClick);
-        view.getHandArea().addMouseListener(maCardClick);
+        view.getHandArea().removeMouseListener(madCardClick);
+        view.getHandArea().addMouseListener(madCardClick);
 
-        view.getHandArea().removeMouseMotionListener(maCardMove);
-        view.getHandArea().addMouseMotionListener(maCardMove);
+        view.getHandArea().removeMouseMotionListener(madCardMove);
+        view.getHandArea().addMouseMotionListener(madCardMove);
     }
 
     /**

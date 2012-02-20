@@ -29,6 +29,7 @@ import forge.Constant.Zone;
 import forge.PhaseUtil;
 import forge.Player;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilitySub;
@@ -139,10 +140,10 @@ public class CardFactoryInstants {
                             JOptionPane
                                     .showMessageDialog(null, sbMsgP1.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                             for (int i = 0; i < pile1.size(); i++) {
-                                AllZone.getGameAction().moveTo(hand, pile1.get(i));
+                                Singletons.getModel().getGameAction().moveTo(hand, pile1.get(i));
                             }
                             for (int i = 0; i < pile2.size(); i++) {
-                                AllZone.getGameAction().moveToGraveyard(pile2.get(i));
+                                Singletons.getModel().getGameAction().moveToGraveyard(pile2.get(i));
                             }
                         } else {
                             final StringBuilder sbMsgP2 = new StringBuilder();
@@ -151,10 +152,10 @@ public class CardFactoryInstants {
                             JOptionPane
                                     .showMessageDialog(null, sbMsgP2.toString(), "", JOptionPane.INFORMATION_MESSAGE);
                             for (int i = 0; i < pile2.size(); i++) {
-                                AllZone.getGameAction().moveTo(hand, pile2.get(i));
+                                Singletons.getModel().getGameAction().moveTo(hand, pile2.get(i));
                             }
                             for (int i = 0; i < pile1.size(); i++) {
-                                AllZone.getGameAction().moveToGraveyard(pile1.get(i));
+                                Singletons.getModel().getGameAction().moveToGraveyard(pile1.get(i));
                             }
                         }
 
@@ -198,17 +199,17 @@ public class CardFactoryInstants {
                                 possibleValues[0]);
                         if (q.equals(0)) {
                             for (int i = 0; i < pile1.size(); i++) {
-                                AllZone.getGameAction().moveTo(hand, pile1.get(i));
+                                Singletons.getModel().getGameAction().moveTo(hand, pile1.get(i));
                             }
                             for (int i = 0; i < pile2.size(); i++) {
-                                AllZone.getGameAction().moveToGraveyard(pile2.get(i));
+                                Singletons.getModel().getGameAction().moveToGraveyard(pile2.get(i));
                             }
                         } else {
                             for (int i = 0; i < pile2.size(); i++) {
-                                AllZone.getGameAction().moveTo(hand, pile2.get(i));
+                                Singletons.getModel().getGameAction().moveTo(hand, pile2.get(i));
                             }
                             for (int i = 0; i < pile1.size(); i++) {
-                                AllZone.getGameAction().moveToGraveyard(pile1.get(i));
+                                Singletons.getModel().getGameAction().moveToGraveyard(pile1.get(i));
                             }
                         }
                     }
@@ -259,7 +260,7 @@ public class CardFactoryInstants {
                         Card thisArtifact = artifacts.get(i);
                         if (thisArtifact.getOwner().equals(player)) {
                             //moveToHand handles tokens
-                            AllZone.getGameAction().moveToHand(thisArtifact);
+                            Singletons.getModel().getGameAction().moveToHand(thisArtifact);
                         }
                     }
                 } //resolve()
@@ -318,10 +319,10 @@ public class CardFactoryInstants {
                     final Card choice = selectedCards.get(MyRandom.getRandom().nextInt(2));
 
                     selectedCards.remove(choice);
-                    AllZone.getGameAction().moveToHand(choice);
+                    Singletons.getModel().getGameAction().moveToHand(choice);
 
                     for (final Card trash : selectedCards) {
-                        AllZone.getGameAction().moveToGraveyard(trash);
+                        Singletons.getModel().getGameAction().moveToGraveyard(trash);
                     }
                 }
 
@@ -358,10 +359,10 @@ public class CardFactoryInstants {
                     final Card choice = (Card) o;
 
                     selectedCards.remove(choice);
-                    AllZone.getGameAction().moveToHand(choice);
+                    Singletons.getModel().getGameAction().moveToHand(choice);
 
                     for (final Card trash : selectedCards) {
-                        AllZone.getGameAction().moveToGraveyard(trash);
+                        Singletons.getModel().getGameAction().moveToGraveyard(trash);
                     }
                 }
 
@@ -407,13 +408,13 @@ public class CardFactoryInstants {
                             final Card c1 = (Card) o;
                             graveList.remove(c1); // remove from the display
                                                   // list
-                            AllZone.getGameAction().exile(c1);
+                            Singletons.getModel().getGameAction().exile(c1);
                         }
                     } else { // Computer
                         // Random random = MyRandom.random;
                         for (int j = 0; j < x; j++) {
                             // int index = random.nextInt(X-j);
-                            AllZone.getGameAction().exile(graveList.get(j));
+                            Singletons.getModel().getGameAction().exile(graveList.get(j));
                         }
                     }
 
@@ -497,7 +498,7 @@ public class CardFactoryInstants {
                                     if (AllZoneUtil.isCardInPlay(creature)) {
                                         // System.out.println("Siren's Call - destroying "+creature.getName());
                                         // this should probably go on the stack
-                                        AllZone.getGameAction().destroy(creature);
+                                        Singletons.getModel().getGameAction().destroy(creature);
                                     }
                                 }
                                 creature.setSirenAttackOrDestroy(false);
@@ -555,11 +556,11 @@ public class CardFactoryInstants {
                         final Object o = GuiUtils.getChoice(this.prompt[i], choices.toArray());
                         final Card c1 = (Card) o;
                         if (i == 0) {
-                            AllZone.getGameAction().moveToHand(c1);
+                            Singletons.getModel().getGameAction().moveToHand(c1);
                         } else if (i == 1) {
-                            AllZone.getGameAction().moveToLibrary(c1);
+                            Singletons.getModel().getGameAction().moveToLibrary(c1);
                         } else if (i == 2) {
-                            AllZone.getGameAction().moveToBottomOfLibrary(c1);
+                            Singletons.getModel().getGameAction().moveToBottomOfLibrary(c1);
                         }
 
                         choices.remove(c1);
@@ -600,12 +601,12 @@ public class CardFactoryInstants {
                         }
                     });
                     for (final Card c : toReturn) {
-                        AllZone.getGameAction().moveToHand(c);
+                        Singletons.getModel().getGameAction().moveToHand(c);
                     }
 
                     for (final Card c : ens) {
                         if (!toReturn.contains(c)) {
-                            AllZone.getGameAction().destroy(c);
+                            Singletons.getModel().getGameAction().destroy(c);
                         }
                     }
                 }

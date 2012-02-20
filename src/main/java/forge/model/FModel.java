@@ -32,13 +32,16 @@ import forge.ComputerAIGeneral;
 import forge.ComputerAIInput;
 import forge.Constant;
 import forge.ConstantStringArrayList;
+import forge.GameAction;
 import forge.Singletons;
 import forge.control.input.InputControl;
+import forge.game.GameState;
 import forge.game.GameSummary;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestEventManager;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
@@ -55,18 +58,22 @@ import forge.view.toolbox.FSkin;
  * In case we need to convert it into an interface in the future, all fields of
  * this class must be either private or public static final.
  */
-public class FModel {
+public enum FModel {
+    /** */
+    SINGLETON_INSTANCE;
     // private static final int NUM_INIT_PHASES = 1;
 
-    private final transient OutputStream logFileStream;
-    private final transient PrintStream oldSystemOut;
-    private final transient PrintStream oldSystemErr;
+    private final PrintStream oldSystemOut;
+    private final PrintStream oldSystemErr;
     private BuildInfo buildInfo;
+    private OutputStream logFileStream;
 
-    /** The preferences. */
+    private final GameAction gameAction;
     private final QuestPreferences questPreferences;
     private final ForgePreferences preferences;
-    private FGameState gameState;
+    private final QuestEventManager questEventManager;
+    private final GameState gameState;
+    private final FMatchState matchState;
 
     /**
      * Constructor.
@@ -74,7 +81,7 @@ public class FModel {
      * @throws FileNotFoundException
      *             if we could not find or write to the log file.
      */
-    public FModel() throws FileNotFoundException {
+    private FModel() {
         // Fire up log file
         final File logFile = new File("forge.log");
         final boolean deleteSucceeded = logFile.delete();
@@ -83,22 +90,29 @@ public class FModel {
             throw new IllegalStateException("Could not delete existing logFile:" + logFile.getAbsolutePath());
         }
 
-        this.logFileStream = new FileOutputStream(logFile);
+        try {
+            this.logFileStream = new FileOutputStream(logFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         this.oldSystemOut = System.out;
         System.setOut(new PrintStream(new MultiplexOutputStream(System.out, this.logFileStream), true));
         this.oldSystemErr = System.err;
         System.setErr(new PrintStream(new MultiplexOutputStream(System.err, this.logFileStream), true));
 
-        // Instantiate preferences
+        // Instantiate preferences: quest and regular
         try {
             this.preferences = new ForgePreferences();
         } catch (final Exception exn) {
             throw new RuntimeException(exn);
         }
 
-        // Instantiate quest preferences
+        this.gameAction = new GameAction();
+        this.gameState = new GameState();
+        this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
+        this.questEventManager = new QuestEventManager();
 
         // TODO this single setting from preferences should not be here, or,
         // it should be here with all the other settings at the same time.
@@ -247,32 +261,6 @@ public class FModel {
     }
 
     /**
-     * Destructor for FModel.
-     * 
-     * @throws Throwable
-     *             indirectly
-     */
-    @Override
-    protected final void finalize() throws Throwable {
-        this.close();
-        super.finalize();
-    }
-
-    /**
-     * Opposite of constructor; resets all system resources and closes the log
-     * file.
-     */
-    public final void close() {
-        System.setOut(this.oldSystemOut);
-        System.setErr(this.oldSystemErr);
-        try {
-            this.logFileStream.close();
-        } catch (final IOException e) {
-            // ignored
-        }
-    }
-
-    /**
      * Gets the builds the info.
      *
      * @return {@link forge.model.BuildInfo}
@@ -309,12 +297,39 @@ public class FModel {
     }
 
     /**
-     * Gets the game state.
+     * Gets the quest preferences.
      *
-     * @return {@link forge.model.FGameState}
+     * @return {@link forge.quest.data.QuestEventManager}
      */
-    public final FGameState getGameState() {
+    public final QuestEventManager getQuestEventManager() {
+        return this.questEventManager;
+    }
+
+    /**
+     * Gets the game action model.
+     *
+     * @return {@link forge.GameAction}
+     */
+    public final GameAction getGameAction() {
+        return this.gameAction;
+    }
+
+    /**
+     * Gets the game state model - that is, the data stored for a single game.
+     *
+     * @return {@link forge.game.GameState}
+     */
+    public final GameState getGameState() {
         return this.gameState;
+    }
+
+    /**
+     * Gets the match state model - that is, the data stored over multiple games.
+     *
+     * @return {@link forge.model.FMatchState}
+     */
+    public final FMatchState getMatchState() {
+        return this.matchState;
     }
 
     /**
@@ -324,16 +339,6 @@ public class FModel {
      */
     public final GameSummary getGameSummary() {
         return this.gameState.getGameSummary();
-    }
-
-    /**
-     * Create and return a new game state.
-     * 
-     * @return a fresh {@link forge.model.FGameState}
-     */
-    public final FGameState resetGameState() {
-        this.gameState = new FGameState();
-        return this.gameState;
     }
 
     /**
@@ -436,5 +441,20 @@ public class FModel {
 
         Singletons.getView().getViewMatch().setLayoutParams(fp.getPref(FPref.UI_LAYOUT_PARAMS));
         return true;
+    }
+
+    /**
+     * Finalizer, generally should be avoided, but here
+     * closes the log file stream and
+     * resets the system output streams.
+     */
+    public final void close() {
+        System.setOut(this.oldSystemOut);
+        System.setErr(this.oldSystemErr);
+        try {
+            this.logFileStream.close();
+        } catch (final IOException e) {
+            // ignored
+        }
     }
 }

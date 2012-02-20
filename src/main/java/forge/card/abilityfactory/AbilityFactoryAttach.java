@@ -36,6 +36,7 @@ import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Player;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
@@ -91,7 +92,7 @@ public class AbilityFactoryAttach {
                 public void resolve() {
                     // The Spell_Permanent (Auras) version of this AF needs to
                     // move the card into play before Attaching
-                    final Card c = AllZone.getGameAction().moveToPlay(this.getSourceCard());
+                    final Card c = Singletons.getModel().getGameAction().moveToPlay(this.getSourceCard());
                     this.setSourceCard(c);
                     AbilityFactoryAttach.attachResolve(this.af, this);
                 }

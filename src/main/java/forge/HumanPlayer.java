@@ -143,11 +143,11 @@ public class HumanPlayer extends Player {
 
                 // might have to make this more sophisticated
                 // dredge library, put card in hand
-                AllZone.getGameAction().moveToHand(c);
+                Singletons.getModel().getGameAction().moveToHand(c);
 
                 for (int i = 0; i < this.getDredgeNumber(c); i++) {
                     final Card c2 = AllZone.getHumanPlayer().getZone(Zone.Library).get(0);
-                    AllZone.getGameAction().moveToGraveyard(c2);
+                    Singletons.getModel().getGameAction().moveToGraveyard(c2);
                 }
                 dredged = true;
             } else {
@@ -214,7 +214,7 @@ public class HumanPlayer extends Player {
             if (o != null) {
                 final Card c = (Card) o;
                 topN.remove(c);
-                AllZone.getGameAction().moveToBottomOfLibrary(c);
+                Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
             } else {
                 // no card chosen for the bottom
                 break;
@@ -227,7 +227,7 @@ public class HumanPlayer extends Player {
             if (o != null) {
                 final Card c = (Card) o;
                 topN.remove(c);
-                AllZone.getGameAction().moveToLibrary(c);
+                Singletons.getModel().getGameAction().moveToLibrary(c);
             }
             // no else - a card must have been chosen
         }
@@ -249,9 +249,9 @@ public class HumanPlayer extends Player {
         choice = GuiUtils.getChoice(c.getName() + " - Top or bottom of Library", choices);
 
         if (choice.equals("bottom")) {
-            AllZone.getGameAction().moveToBottomOfLibrary(c);
+            Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
         } else {
-            AllZone.getGameAction().moveToLibrary(c);
+            Singletons.getModel().getGameAction().moveToLibrary(c);
         }
     }
 

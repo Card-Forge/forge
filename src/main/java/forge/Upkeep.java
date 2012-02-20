@@ -135,7 +135,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {
                         abMana.produceMana();
                     } else {
-                        AllZone.getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c);
                     }
 
                 }
@@ -172,7 +172,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     @Override
                     public void execute() {
-                        AllZone.getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c);
                     }
                 };
 
@@ -191,7 +191,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             if (ComputerUtil.canPayCost(aiPaid)) {
                                 ComputerUtil.playNoStack(aiPaid);
                             } else {
-                                AllZone.getGameAction().sacrifice(c);
+                                Singletons.getModel().getGameAction().sacrifice(c);
                             }
                         }
                     }
@@ -290,7 +290,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             if (c.getName().equals("Cosmic Horror")) {
                                 controller.addDamage(7, c);
                             }
-                            AllZone.getGameAction().destroy(c);
+                            Singletons.getModel().getGameAction().destroy(c);
                         }
                     };
 
@@ -313,7 +313,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     if (c.getName().equals("Cosmic Horror")) {
                                         controller.addDamage(7, c);
                                     }
-                                    AllZone.getGameAction().destroy(c);
+                                    Singletons.getModel().getGameAction().destroy(c);
                                 }
                             }
                         }
@@ -350,7 +350,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         @Override
                         public void execute() {
-                            AllZone.getGameAction().sacrifice(c);
+                            Singletons.getModel().getGameAction().sacrifice(c);
                         }
                     };
 
@@ -368,7 +368,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 if (ComputerUtil.canPayCost(aiPaid)) {
                                     ComputerUtil.playNoStack(aiPaid);
                                 } else {
-                                    AllZone.getGameAction().sacrifice(c);
+                                    Singletons.getModel().getGameAction().sacrifice(c);
                                 }
                             }
                         }
@@ -499,7 +499,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     // probably need to restrict by controller
                                     // also
                                     if (targets.contains(selected)) {
-                                        AllZone.getGameAction().destroyNoRegeneration(selected);
+                                        Singletons.getModel().getGameAction().destroyNoRegeneration(selected);
                                         this.stop();
                                     }
                                 } // selectCard()
@@ -509,13 +509,13 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         final CardList indestruct = targets.getKeyword("Indestructible");
                         if (indestruct.size() > 0) {
-                            AllZone.getGameAction().destroyNoRegeneration(indestruct.get(0));
+                            Singletons.getModel().getGameAction().destroyNoRegeneration(indestruct.get(0));
                         } else if (targets.size() > 0) {
                             final Card target = CardFactoryUtil.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
                             } else {
-                                AllZone.getGameAction().destroyNoRegeneration(target);
+                                Singletons.getModel().getGameAction().destroyNoRegeneration(target);
                             }
                         }
                     }
@@ -576,7 +576,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 // probably need to restrict by controller also
                                 if (artifact.isArtifact() && zone.is(Constant.Zone.Battlefield)
                                         && zone.getPlayer().isHuman()) {
-                                    AllZone.getGameAction().sacrifice(artifact);
+                                    Singletons.getModel().getGameAction().sacrifice(artifact);
                                     this.stop();
                                 }
                             } // selectCard()
@@ -586,7 +586,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         if (null == target) {
                             this.tapAndDamage(player);
                         } else {
-                            AllZone.getGameAction().sacrifice(target);
+                            Singletons.getModel().getGameAction().sacrifice(target);
                         }
                     }
                 } // resolve
@@ -635,7 +635,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * PlayerUtil.inputSacrificePermanent(creatures, c.getName() +
      * " - Select a creature to sacrifice.")); } else { // computer final Card
      * target = CardFactoryUtil.getWorstCreatureAI(creatures);
-     * AllZone.getGameAction().sacrifice(target); } } // resolve };
+     * Singletons.getModel().getGameAction().sacrifice(target); } } // resolve };
      * 
      * final Ability sevenDamage = new Ability(c, "") {
      * 
@@ -693,7 +693,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                             "Select creature with power: " + power + " to sacrifice."));
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
-                            AllZone.getGameAction().destroyNoRegeneration(compyTarget);
+                            Singletons.getModel().getGameAction().destroyNoRegeneration(compyTarget);
                         }
                     }
                 } // resolve
@@ -770,7 +770,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     } else {
                         final Card target = CardFactoryUtil.getBestLandAI(playerLand);
 
-                        AllZone.getGameAction().sacrifice(target);
+                        Singletons.getModel().getGameAction().sacrifice(target);
                     }
                 } // end resolve()
             }; // end noPay ability
@@ -1083,7 +1083,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     if (wantToPlayCard) {
                         if (player.isHuman()) {
                             final Card c = library.get(0);
-                            AllZone.getGameAction().playCardNoCost(c);
+                            Singletons.getModel().getGameAction().playCardNoCost(c);
                         }
                         // player isComputer()
                         else {
@@ -2029,7 +2029,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     public void resolve() {
                         final int fadeCounters = card.getCounters(Counters.FADE);
                         if (fadeCounters <= 0) {
-                            AllZone.getGameAction().sacrifice(card);
+                            Singletons.getModel().getGameAction().sacrifice(card);
                         } else {
                             card.subtractCounter(Counters.FADE, 1);
                         }
@@ -2100,10 +2100,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     final Card c = libraryList.get(i);
                                     cardsToReveal.add(c);
                                     if (c.isCreature()) {
-                                        AllZone.getGameAction().moveTo(battlefield, c);
+                                        Singletons.getModel().getGameAction().moveTo(battlefield, c);
                                         break;
                                     } else {
-                                        AllZone.getGameAction().moveToGraveyard(c);
+                                        Singletons.getModel().getGameAction().moveToGraveyard(c);
                                     }
                                 } // for loop
                                 if (cardsToReveal.size() > 0) {
@@ -2155,12 +2155,12 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 if (o != null) {
                                     final Card card = (Card) o;
 
-                                    AllZone.getGameAction().moveToHand(card);
+                                    Singletons.getModel().getGameAction().moveToHand(card);
                                 }
                             } else if (player.isComputer()) {
                                 final Card card = graveyardCreatures.get(0);
 
-                                AllZone.getGameAction().moveToHand(card);
+                                Singletons.getModel().getGameAction().moveToHand(card);
                             }
                         }
                     }
@@ -2456,7 +2456,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 @Override
                 public void selectButtonCancel() {
-                    AllZone.getGameAction().sacrifice(crd);
+                    Singletons.getModel().getGameAction().sacrifice(crd);
                     this.stop();
                 }
             }; // Input
@@ -2466,7 +2466,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 public void resolve() {
                     if (crd.getController().isHuman()) {
                         if (AllZone.getHumanPlayer().getZone(Zone.Hand).size() == 0) {
-                            AllZone.getGameAction().sacrifice(crd);
+                            Singletons.getModel().getGameAction().sacrifice(crd);
                         } else {
                             AllZone.getInputControl().setInput(discard);
                         }
@@ -2476,7 +2476,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         if (list.size() != 0) {
                             list.get(0).getController().discard(list.get(0), this);
                         } else {
-                            AllZone.getGameAction().sacrifice(crd);
+                            Singletons.getModel().getGameAction().sacrifice(crd);
                         }
                     } // else
                 } // resolve()
@@ -2511,7 +2511,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final CardList creats = AllZoneUtil.getCreaturesInPlay(player);
 
                     if (creats.size() < 1) {
-                        AllZone.getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card);
                         return;
                     }
 
@@ -2522,10 +2522,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             creats.shuffle();
                             sac = creats.get(0);
                         }
-                        AllZone.getGameAction().sacrifice(sac);
+                        Singletons.getModel().getGameAction().sacrifice(sac);
                     } else { // computer
                         CardListUtil.sortAttackLowFirst(creats);
-                        AllZone.getGameAction().sacrifice(creats.get(0));
+                        Singletons.getModel().getGameAction().sacrifice(creats.get(0));
                     }
                 }
             }; // ability

@@ -33,6 +33,7 @@ import forge.Command;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.PlayerZone;
+import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;
@@ -127,7 +128,7 @@ class CardFactoryAuras {
                         newType[0] = GuiUtils.getChoice("Select land type.", "Plains", "Island", "Swamp", "Mountain",
                                 "Forest");
                     }
-                    AllZone.getGameAction().moveToPlay(card);
+                    Singletons.getModel().getGameAction().moveToPlay(card);
 
                     final Card c = this.getTargetCard();
 
@@ -291,7 +292,7 @@ class CardFactoryAuras {
 
                 @Override
                 public void resolve() {
-                    AllZone.getGameAction().moveToPlay(card);
+                    Singletons.getModel().getGameAction().moveToPlay(card);
 
                     final Card c = this.getTargetCard();
 
@@ -398,7 +399,7 @@ class CardFactoryAuras {
 
                 @Override
                 public void resolve() {
-                    final Card aura = AllZone.getGameAction().moveToPlay(card);
+                    final Card aura = Singletons.getModel().getGameAction().moveToPlay(card);
 
                     final Card c = this.getTargetCard();
 
@@ -480,14 +481,14 @@ class CardFactoryAuras {
 
                     if (!grave.is(Constant.Zone.Graveyard)) {
                         // Animated Creature got removed before ability resolved
-                        AllZone.getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card);
                         return;
                     }
 
                     // Bring creature onto the battlefield under your control
                     // (should trigger etb Abilities)
                     animated.addController(card.getController());
-                    AllZone.getGameAction().moveToPlay(animated, card.getController());
+                    Singletons.getModel().getGameAction().moveToPlay(animated, card.getController());
                     if (cardName.equals("Dance of the Dead")) {
                         animated.tap();
                     }
@@ -496,7 +497,7 @@ class CardFactoryAuras {
 
                     if (CardFactoryUtil.hasProtectionFrom(card, animated)) {
                         // Animated a creature with protection
-                        AllZone.getGameAction().sacrifice(card);
+                        Singletons.getModel().getGameAction().sacrifice(card);
                         return;
                     }
 
@@ -515,7 +516,7 @@ class CardFactoryAuras {
                         // note: this should be a state-based action, but it doesn't work currently.
                         // I don't know if that because it's hard-coded or what, but this fixes
                         // these cards being put on the battlefield not attached to anything.
-                        AllZone.getGameAction().moveToGraveyard(card);
+                        Singletons.getModel().getGameAction().moveToGraveyard(card);
                     }
                 }
             };
@@ -529,7 +530,7 @@ class CardFactoryAuras {
                     final PlayerZone play = card.getController().getZone(Constant.Zone.Battlefield);
 
                     if (play.contains(c)) {
-                        AllZone.getGameAction().sacrifice(c);
+                        Singletons.getModel().getGameAction().sacrifice(c);
                     }
                 }
             }; // Detach

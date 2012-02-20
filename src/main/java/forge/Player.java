@@ -760,7 +760,7 @@ public abstract class Player extends GameEntity {
             for (int i = 0; i < damage; i++) {
                 final CardList lib = this.getCardsIn(Zone.Library);
                 if (lib.size() > 0) {
-                    AllZone.getGameAction().exile(lib.get(0));
+                    Singletons.getModel().getGameAction().exile(lib.get(0));
                 }
             }
             // return so things like Lifelink, etc do not trigger. This is a
@@ -1108,7 +1108,7 @@ public abstract class Player extends GameEntity {
 
     // //////////////////////////////
     // /
-    // / replaces AllZone.getGameAction().draw* methods
+    // / replaces Singletons.getModel().getGameAction().draw* methods
     // /
     // //////////////////////////////
 
@@ -1258,7 +1258,7 @@ public abstract class Player extends GameEntity {
         if (library.size() != 0) {
 
             Card c = library.get(0);
-            c = AllZone.getGameAction().moveToHand(c);
+            c = Singletons.getModel().getGameAction().moveToHand(c);
             drawn.add(c);
 
             if ((this.numDrawnThisTurn == 0) && this.isComputer()) {
@@ -1291,7 +1291,7 @@ public abstract class Player extends GameEntity {
             // Condition
             if (!this.cantLose()) {
                 this.loseConditionMet(GameLossReason.Milled, null);
-                AllZone.getGameAction().checkStateEffects();
+                Singletons.getModel().getGameAction().checkStateEffects();
             }
         }
         return drawn;
@@ -1458,7 +1458,7 @@ public abstract class Player extends GameEntity {
 
     // //////////////////////////////
     // /
-    // / replaces AllZone.getGameAction().discard* methods
+    // / replaces Singletons.getModel().getGameAction().discard* methods
     // /
     // //////////////////////////////
 
@@ -1527,7 +1527,7 @@ public abstract class Player extends GameEntity {
             sa.addCostToHashList(c, "Discarded");
         }
 
-        AllZone.getGameAction().discardMadness(c);
+        Singletons.getModel().getGameAction().discardMadness(c);
 
         if ((c.hasKeyword("If a spell or ability an opponent controls causes "
                 + "you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") || c
@@ -1535,9 +1535,9 @@ public abstract class Player extends GameEntity {
                         + "you to discard CARDNAME, put it onto the battlefield with two +1/+1 "
                         + "counters on it instead of putting it into your graveyard."))
                 && (null != sa) && !c.getController().equals(sa.getSourceCard().getController())) {
-            AllZone.getGameAction().discardPutIntoPlayInstead(c);
+            Singletons.getModel().getGameAction().discardPutIntoPlayInstead(c);
         } else {
-            AllZone.getGameAction().moveToGraveyard(c);
+            Singletons.getModel().getGameAction().moveToGraveyard(c);
         }
 
         // Run triggers
@@ -1673,9 +1673,9 @@ public abstract class Player extends GameEntity {
 
         for (int i = 0; i < max; i++) {
             if (bottom) {
-                milled.add(AllZone.getGameAction().moveTo(destination, lib.get(lib.size() - 1)));
+                milled.add(Singletons.getModel().getGameAction().moveTo(destination, lib.get(lib.size() - 1)));
             } else {
-                milled.add(AllZone.getGameAction().moveTo(destination, lib.get(i)));
+                milled.add(Singletons.getModel().getGameAction().moveTo(destination, lib.get(i)));
             }
         }
 
@@ -1786,13 +1786,13 @@ public abstract class Player extends GameEntity {
     public final void playLand(final Card land) {
         if (this.canPlayLand()) {
             land.addController(this);
-            AllZone.getGameAction().moveTo(this.getZone(Constant.Zone.Battlefield), land);
+            Singletons.getModel().getGameAction().moveTo(this.getZone(Constant.Zone.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
             this.numLandsPlayed++;
 
             // check state effects for static animate (Living Lands, Conversion,
             // etc...)
-            AllZone.getGameAction().checkStateEffects();
+            Singletons.getModel().getGameAction().checkStateEffects();
 
             // add to log
             AllZone.getGameLog().add("Land", this + " played " + land, 2);
