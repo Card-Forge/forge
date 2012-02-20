@@ -41,16 +41,16 @@ import forge.util.IItemReader;
 public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<T> {
 
     private final File directory;
-    
+
     protected final File getDirectory() {
         return directory;
     }
 
 
-    public DeckReaderBase(File deckDir0)
-    {
+    public DeckReaderBase(File deckDir0) {
+
         directory = deckDir0;
-        
+
         if (directory == null) {
             throw new IllegalArgumentException("No deck directory specified");
         }
@@ -68,12 +68,12 @@ public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<
             throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
         }
     }
-    
+
     public String deriveFileName(final String deckName) {
         // skips all but the listed characters
         return deckName.replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
-    }    
-    
+    }
+
     // only accepts numbers, letters or dashes up to 20 characters in length
     /**
      * 
@@ -95,17 +95,17 @@ public abstract class DeckReaderBase<T extends IHasName> implements IItemReader<
     }
 
 
-    
+
     @Override
-    public Map<String, T> readAll() {    
+    public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
         final List<String> decksThatFailedToLoad = new ArrayList<String>();
         final File[] files = directory.listFiles(getFileFilter());
         for (final File file : files) {
             try {
                 final T newDeck = read(file);
-                if ( null == newDeck )
-                {
+                if (null == newDeck) {
+
                     String msg =  "A deck or similiar object at " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
                     // JOptionPane.showMessageDialog(null, msg); -- This becomes bugged if uncommented, but i need these messages to debug other peoples decks // Max Mtg
                     continue;

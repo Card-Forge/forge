@@ -60,8 +60,8 @@ public class CustomLimited extends DeckBase {
 
     /** The Num cards. */
     private int numCards = 15;
-    
-    
+
+
     private final Map<CardRarity, Integer> numRarity = new EnumMap<CardRarity, Integer>(CardRarity.class);
 
     /** The Num packs. */
@@ -110,7 +110,7 @@ public class CustomLimited extends DeckBase {
         cd.numPacks = data.getInt("NumPacks");
 
         String deckName = data.get("DeckFile");
-        Deck deckCube = cubes.get(deckName); 
+        Deck deckCube = cubes.get(deckName);
         cd.cardPool = deckCube == null ? ItemPool.createFrom(CardDb.instance().getAllUniqueCards(), CardPrinted.class) : deckCube.getMain();
 
         return cd;

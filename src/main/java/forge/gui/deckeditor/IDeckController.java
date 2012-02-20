@@ -12,22 +12,22 @@ public interface IDeckController<T> {
     void newModel();
     void setModel(T model);
     T getModel();
-    /** Call this anytime model becomes different from the saved on disk state*/
+    /** Call this anytime model becomes different from the saved on disk state.*/
     void notifyModelChanged();
     Component getOwnerWindow();
     DeckEditorBase<?, T> getView();
-    /** Gets names of saved models in folder / questData */
+    /** Gets names of saved models in folder / questData. */
     List<String> getSavedNames();
     void load(String name);
     void save();
     void saveAs(String name0);
     boolean isSaved();
     void delete();
-    /** Returns true if no object exists with that name */
+    /** Returns true if no object exists with that name. */
     boolean isGoodName(String deckName);
-    /** Import in quest adds add cards to pool, unlike constructed */
+    /** Import in quest adds add cards to pool, unlike constructed. */
     void importDeck(T newDeck);
-    /** Tells if this deck was already saved to disk / questData */
+    /** Tells if this deck was already saved to disk / questData. */
     boolean isModelInStore();
     /**
      * TODO: Write javadoc for this method.
@@ -35,11 +35,11 @@ public interface IDeckController<T> {
      * @return
      */
     boolean fileExists(String deckName);
-    
+
     /*
      // IMPORT DECK CODE
         this.questData.addDeck(newDeck);
-    
+
         final ItemPool<CardPrinted> cardpool = ItemPool.createFrom(this.questData.getCards().getCardpool(),
                 CardPrinted.class);
         final ItemPool<CardPrinted> decklist = new ItemPool<CardPrinted>(CardPrinted.class);

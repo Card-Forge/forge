@@ -54,22 +54,25 @@ public class DeckGroupSerializer extends DeckReaderBase<DeckGroup> implements II
         FileUtil.writeFile(new File(f, "human.dck"), unit.getHumanDeck().save());
         List<Deck> aiDecks = unit.getAiDecks();
         for (int i = 1; i <= aiDecks.size(); i++) {
-            FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), aiDecks.get(i-1).save());
+            FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), aiDecks.get(i - 1).save());
         }
     }
 
-    protected final DeckGroup read(File file)
-    {
+    protected final DeckGroup read(File file) {
+
         Deck human = Deck.fromFile(new File(file, "human.dck"));
-        if ( null == human ) return null;
-        
+        if (null == human) {
+            return null;
+        }
+
         final DeckGroup d = new DeckGroup(human.getName());
         d.setHumanDeck(human);
         for (int i = 1; i < MAX_DRAFT_PLAYERS; i++) {
             File theFile = new File(file, "ai-" + i + ".dck");
-            if( !theFile.exists() ) 
+            if (!theFile.exists()) {
                 break;
-            
+            }
+
             d.addAiDeck(Deck.fromFile(theFile));
         }
         return d;
@@ -83,7 +86,7 @@ public class DeckGroupSerializer extends DeckReaderBase<DeckGroup> implements II
     public void erase(DeckGroup unit) {
         File dir = makeFileFor(unit);
         final File[] files = dir.listFiles();
-        for(File f : files) {
+        for (File f : files) {
             f.delete();
         }
         dir.delete();
@@ -99,7 +102,7 @@ public class DeckGroupSerializer extends DeckReaderBase<DeckGroup> implements II
     @Override
     protected FilenameFilter getFileFilter() {
         return new FilenameFilter() {
-            
+
             @Override
             public boolean accept(File dir, String name) {
                 return dir.isDirectory() && !dir.isHidden();

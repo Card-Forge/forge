@@ -65,7 +65,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
 
     private final JButton removeButton = new JButton();
     private final JButton addButton = new JButton();
-    
+
     private final JButton analysisButton = new JButton();
     private final JButton clearFilterButton = new JButton();
 
@@ -92,7 +92,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
         };
 
         final MenuLimited menu = new MenuLimited(getController(), exit);
-        
+
         this.setJMenuBar(menu);
 
         // do not change this!!!!
@@ -151,9 +151,9 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
-        Lambda0<DeckGroup> newCreator = new Lambda0<DeckGroup>(){ @Override public DeckGroup apply() { return new DeckGroup(""); } };
-        controller = new DeckController<DeckGroup>(deckMap, this, newCreator);        
+
+        Lambda0<DeckGroup> newCreator = new Lambda0<DeckGroup>() { @Override public DeckGroup apply() { return new DeckGroup(""); } };
+        controller = new DeckController<DeckGroup>(deckMap, this, newCreator);
     }
 
     private void jbInit() {
@@ -332,12 +332,12 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
         final CardPrinted card = (CardPrinted) item;
         this.getBottomTableWithCards().addCard(card);
         this.getTopTableWithCards().removeCard(card);
-        
+
         /* update model
-        Deck model = getSelectedDeck(getController().getModel()); 
+        Deck model = getSelectedDeck(getController().getModel());
         model.getMain().add(card);
         model.getSideboard().remove(card); */
-        
+
         this.getController().notifyModelChanged();
     }
 
@@ -368,10 +368,10 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
         this.getTopTableWithCards().addCard(card);
 
         /* update model
-        Deck model = getSelectedDeck(getController().getModel()); 
+        Deck model = getSelectedDeck(getController().getModel());
         model.getMain().remove(card);
         model.getSideboard().add(card);*/
-        
+
         this.getController().notifyModelChanged();
     }
 

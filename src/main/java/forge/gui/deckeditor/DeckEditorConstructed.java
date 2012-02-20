@@ -99,13 +99,13 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         // do not change this!!!!
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(final WindowEvent ev) {menu.close(); }
+            public void windowClosing(final WindowEvent ev) { menu.close(); }
         });
 
         this.setup();
-        
+
         this.controller.newModel();
-        
+
         this.getTopTableWithCards().sort(1, true);
         this.getBottomTableWithCards().sort(1, true);
 
@@ -152,8 +152,8 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
-        Lambda0<Deck> newCreator = new Lambda0<Deck>(){ @Override public Deck apply() { return new Deck(); } };
+
+        Lambda0<Deck> newCreator = new Lambda0<Deck>() { @Override public Deck apply() { return new Deck(); } };
         controller = new DeckController<Deck>(AllZone.getDecks().getConstructed(), this, newCreator);
     }
 

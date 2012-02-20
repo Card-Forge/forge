@@ -31,7 +31,9 @@ public class DeckGroup extends DeckBase implements IHasName {
     public final void setHumanDeck(Deck humanDeck) { this.humanDeck = humanDeck; }
 
     public final void addAiDeck(Deck aiDeck) {
-        if (aiDeck == null) return;
+        if (aiDeck == null) {
+            return;
+        }
         this.aiDecks.add(aiDeck);
     }
 

@@ -74,8 +74,8 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
     private FilterNameTypeSetPanel filterNameTypeSet;
 
     private final QuestData questData;
-    private final DeckController<Deck> controller ;
-    
+    private final DeckController<Deck> controller;
+
     /**
      * Show.
      * 
@@ -102,15 +102,17 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent ev) { menu.close(); }
-        });        
-        
+        });
+
         Deck deck = Constant.Runtime.HUMAN_DECK[0] == null ? null : this.questData.getMyDecks().get(Constant.Runtime.HUMAN_DECK[0].getName());
 
-        if ( deck == null ) deck = new Deck();
+        if (deck == null) {
+            deck = new Deck();
+        }
 
         // tell Gui_Quest_DeckEditor the name of the deck
 
-       
+
         this.getController().setModel(deck);
 
         // this affects the card pool
@@ -185,8 +187,8 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
-        Lambda0<Deck> newCreator = new Lambda0<Deck>(){ @Override public Deck apply() { return new Deck(); } };
+
+        Lambda0<Deck> newCreator = new Lambda0<Deck>() { @Override public Deck apply() { return new Deck(); } };
         controller = new DeckController<Deck>(questData2.getMyDecks(), this, newCreator);
     }
 
@@ -361,7 +363,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void updateView() {
-        Deck deck = controller.getModel(); 
+        Deck deck = controller.getModel();
 
         final ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>(CardPrinted.class);
         cardpool.addAll(this.questData.getCards().getCardpool());
@@ -369,7 +371,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         cardpool.removeAll(deck.getMain());
         // show cards, makes this user friendly
         getTopTableWithCards().setDeck(cardpool);
-        getBottomTableWithCards().setDeck(deck.getMain());        
+        getBottomTableWithCards().setDeck(deck.getMain());
     }
 
 }
