@@ -353,6 +353,30 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Quest decks are accessed from a class that implements IFolderMap (made a transient field for saves compatibility)
 - Removed the four subdirectories from the decks folder for the time being.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated some quest decks.
+- removed potential NPE at readDeckMetadata, DeckSetSerializer now skips hidden directories
+- Cleaned up some scripts.
+- Re-added the four new folders to the decks folder.
+- res/deck/cube dir is for decks that are intended to be cubes.
+- One can read values from KeyValue lines via FileSection class (it parses by itself and provides a default value for bad parses)
+- CustomLimited is more related to limited games and its moved to game.limited package
+- Deck.fromSections won't crash with NPE
+- Unnatural Schemes.dck had no section header
+- moved precon decks to FolderMapView rails, cleaned up DeckSerializerBase - it was just deckReader by functionality
+- mass-rename of deckSet into deckGroup to avoid confusing (set = 'edition' with set = 'several decks')
+- Trying to make deckreader more NPE-proof
+- I cannot show a messagebox! Have to do something
+- Hope someone will see my help request
+- cubes' correct place is now in their folder
+- CheckStyle.
+- Fixed Wayward Angel.
+- Tweaked Delver of Secrets. Now you will see it before choosing to reveal.
+- Tweaked Psychotic Episode. Now you see both the hand and top first before making your selection.
+- Ran scripts
+- The AI can now use mana abilities that produce the chosen color.
+- Refactoring to prevent duplicate code in AbilityMana. 
+- Commented out two unused functions in ComputerUtil.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -512,6 +536,14 @@ Scent of Nightshade
 Body Snatcher
 Jokulmorder
 Tornado Elemental
+Animal Magnetism
+Saffi Eriksdotter
+Psychotic Episode
+Plague Sliver
+Paradise Plume
+Descendant of Masumaro
+Coffin Queen
+Phyrexian Slayer
 
 
 end
