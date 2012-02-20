@@ -142,25 +142,7 @@ public abstract class AbilityMana extends AbilityActivated implements java.io.Se
      * </p>
      */
     public final void produceMana() {
-        final StringBuilder sb = new StringBuilder();
-        if (this.amount == 0) {
-            sb.append("0");
-        } else {
-            try {
-                // if baseMana is an integer(colorless), just multiply amount
-                // and baseMana
-                final int base = Integer.parseInt(this.origProduced);
-                sb.append(base * this.amount);
-            } catch (final NumberFormatException e) {
-                for (int i = 0; i < this.amount; i++) {
-                    if (i != 0) {
-                        sb.append(" ");
-                    }
-                    sb.append(this.origProduced);
-                }
-            }
-        }
-        this.produceMana(sb.toString(), this.getSourceCard().getController());
+        this.produceMana(this.getManaProduced(), this.getSourceCard().getController());
     }
 
     /**
