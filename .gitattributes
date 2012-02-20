@@ -1565,6 +1565,7 @@ res/cardsfolder/c/cockatrice.txt svneol=native#text/plain
 res/cardsfolder/c/coercion.txt svneol=native#text/plain
 res/cardsfolder/c/coffin_puppets.txt svneol=native#text/plain
 res/cardsfolder/c/coffin_purge.txt svneol=native#text/plain
+res/cardsfolder/c/coffin_queen.txt -text
 res/cardsfolder/c/cognivore.txt svneol=native#text/plain
 res/cardsfolder/c/coiled_tinviper.txt svneol=native#text/plain
 res/cardsfolder/c/coiling_oracle.txt svneol=native#text/plain
