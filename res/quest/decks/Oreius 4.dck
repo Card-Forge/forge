@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Oreius 4
+Title=Oreius
+Difficulty=very hard
+Description=GU Threshold deck
+Icon=Oreius.jpg
+Deck Type=constructed
+[main]
+4 Tropical Island
+1 Forest|ODY
+1 Island|ODY
+4 Misty Rainforest
+3 Scalding Tarn
+3 Flooded Strand
+3 Polluted Delta
+1 Mox Emerald
+1 Mox Sapphire
+1 Mox Jet
+1 Ancestral Recall
+4 Nimble Mongoose|ODY
+4 Delver of Secrets
+4 Mental Note
+4 Spell Snare
+3 Visions of Beyond
+1 Time Walk
+3 Mulch
+4 Tracker's Instincts
+2 Werebear|ODY
+4 Tarmogoyf
+1 Deep Analysis
+3 Fact or Fiction
+[sideboard]
