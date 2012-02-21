@@ -353,6 +353,8 @@ public final class GameActionUtil {
      * 
      * @param message
      *            a {@link java.lang.String} object.
+     * @param hostCard
+     *            a Card object.
      * @param manaCost
      *            a {@link java.lang.String} object.
      * @param paid

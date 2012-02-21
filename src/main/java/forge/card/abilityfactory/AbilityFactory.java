@@ -33,7 +33,8 @@ import forge.GameActionUtil;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.spellability.Ability;
+import forge.card.cost.CostUtil;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
@@ -2515,8 +2516,11 @@ public class AbilityFactory {
         if (unlessCost.equals("X")) {
             unlessCost = Integer.toString(AbilityFactory.calculateAmount(source, params.get("UnlessCost"), sa));
         }
+        final Cost cost = new Cost(unlessCost, source.getName(), true);
 
-        final Ability ability = new Ability(source, unlessCost) {
+        final SpellAbility ability = new AbilityActivated(source, cost, null) {
+            private static final long serialVersionUID = 2502577469482777440L;
+
             @Override
             public void resolve() {
                 // nothing to do
@@ -2552,10 +2556,10 @@ public class AbilityFactory {
         };
 
         if (payer.isHuman()) {
-            GameActionUtil.payManaDuringAbilityResolve(source + "\r\n", ability.getManaCost(), paidCommand,
+            GameActionUtil.payCostDuringAbilityResolve(source + "\r\n", source, unlessCost, paidCommand,
                     unpaidCommand);
         } else {
-            if (ComputerUtil.canPayCost(ability)) {
+            if (ComputerUtil.canPayCost(ability) && CostUtil.checkLifeCost(cost, source, 4)) {
                 ComputerUtil.playNoStack(ability); // Unless cost was payed - no
                                                    // resolve
                 AbilityFactory.resolveSubAbilities(sa);

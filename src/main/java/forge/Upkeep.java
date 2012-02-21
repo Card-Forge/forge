@@ -56,18 +56,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
         AllZone.getStack().freezeStack();
         Upkeep.upkeepBraidOfFire();
 
-        Upkeep.upkeepSlowtrips(); // for
-        // "Draw a card at the beginning of the next turn's upkeep."
+        Upkeep.upkeepSlowtrips(); // for "Draw a card at the beginning of the next turn's upkeep."
         Upkeep.upkeepUpkeepCost(); // sacrifice unless upkeep cost is paid
         Upkeep.upkeepEcho();
 
         Upkeep.upkeepTheAbyss();
         Upkeep.upkeepYawgmothDemon();
-        // Upkeep.upkeepLordOfThePit();
         Upkeep.upkeepDropOfHoney();
         Upkeep.upkeepDemonicHordes();
-        Upkeep.upkeepCarnophage();
-        Upkeep.upkeepSangrophage();
         Upkeep.upkeepTangleWire();
 
         Upkeep.upkeepVesuvanDoppelgangerKeyword();
@@ -86,8 +82,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepWinnowerPatrol();
         Upkeep.upkeepWolfSkullShaman();
 
-        // upkeep_Dragon_Broodmother(); //put this before bitterblossom and
-        // mycoloth, so that they will resolve FIRST
 
         Upkeep.upkeepKarma();
         Upkeep.upkeepOathOfDruids();
@@ -97,7 +91,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepFading();
         Upkeep.upkeepBlazeCounters();
         Upkeep.upkeepCurseOfMisfortunes();
-        // upkeep_Dark_Confidant(); // keep this one semi-last
         Upkeep.upkeepPowerSurge();
 
         AllZone.getStack().unfreezeStack();
@@ -605,60 +598,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
         } // end for
     }
 
-    /**
-     * <p>
-     * upkeepLordOfThePit.
-     * </p>
-     */
-    /*
-     * private static void upkeepLordOfThePit() {
-     * 
-     * At the beginning of your upkeep, sacrifice a creature other than Lord of
-     * the Pit. If you can't, Lord of the Pit deals 7 damage to you.
-     * 
-     * final Player player = AllZone.getPhaseHandler().getPlayerTurn(); final
-     * CardList lords = player.getCardsIn(Zone.Battlefield, "Lord of the Pit");
-     * lords.addAll(player.getCardsIn(Zone.Battlefield, "Liege of the Pit"));
-     * final CardList cards = lords;
-     * 
-     * for (int i = 0; i < cards.size(); i++) { final Card c = cards.get(i); if
-     * (c.isFaceDown()) { continue; }
-     * 
-     * final Ability sacrificeCreature = new Ability(c, "") {
-     * 
-     * @Override public void resolve() { // TODO - this should handle the case
-     * where you sacrifice 2 // LOTPs to each other final CardList creatures =
-     * AllZoneUtil.getCreaturesInPlay(player); creatures.remove(c); if
-     * (player.isHuman()) { AllZone.getInputControl().setInput(
-     * PlayerUtil.inputSacrificePermanent(creatures, c.getName() +
-     * " - Select a creature to sacrifice.")); } else { // computer final Card
-     * target = CardFactoryUtil.getWorstCreatureAI(creatures);
-     * Singletons.getModel().getGameAction().sacrifice(target); } } // resolve };
-     * 
-     * final Ability sevenDamage = new Ability(c, "") {
-     * 
-     * @Override public void resolve() { player.addDamage(7, c); } };
-     * 
-     * final CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
-     * creatures.remove(c); if (creatures.size() == 0) { // there are no
-     * creatures to sacrifice, so we must do the 7 // damage
-     * 
-     * final StringBuilder sb = new StringBuilder();
-     * sb.append(c.getName()).append(" - deals 7 damage to controller");
-     * sevenDamage.setStackDescription(sb.toString());
-     * 
-     * AllZone.getStack().addSimultaneousStackEntry(sevenDamage);
-     * 
-     * } else {
-     * 
-     * final StringBuilder sb = new StringBuilder();
-     * sb.append(c.getName()).append(" - sacrifice a creature.");
-     * sacrificeCreature.setStackDescription(sb.toString());
-     * 
-     * AllZone.getStack().addSimultaneousStackEntry(sacrificeCreature);
-     * 
-     * } } // end for } // upkeepLordOfThePit()
-     */
     /**
      * <p>
      * upkeepDropOfHoney.
@@ -2459,7 +2398,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * upkeepCarnophage.
      * </p>
      */
-    private static void upkeepCarnophage() {
+    /*private static void upkeepCarnophage() {
         final Player player = AllZone.getPhaseHandler().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Carnophage");
@@ -2484,14 +2423,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 }
             }
         }
-    } // upkeepCarnophage
+    }*/ // upkeepCarnophage
 
     /**
      * <p>
      * upkeepSangrophage.
      * </p>
      */
-    private static void upkeepSangrophage() {
+    /*private static void upkeepSangrophage() {
         final Player player = AllZone.getPhaseHandler().getPlayerTurn();
 
         final CardList list = player.getCardsIn(Zone.Battlefield, "Sangrophage");
@@ -2516,7 +2455,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 }
             }
         }
-    } // upkeepSangrophage
+    }*/ // upkeepSangrophage
 
     /**
      * <p>

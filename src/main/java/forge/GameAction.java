@@ -423,7 +423,7 @@ public class GameAction {
 
                     final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
                             .split(":")[1];
-                    final Cost cost = new Cost(recoverCost, c.getName(), true);
+                    final Cost cost = new Cost(recoverCost, recoverable.getName(), true);
 
                     final Command paidCommand = new Command() {
                         private static final long serialVersionUID = -6357156873861051845L;
