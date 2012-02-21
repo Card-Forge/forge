@@ -13,6 +13,7 @@ import forge.properties.ForgePreferences;
 /**
  * Tests FModel.
  */
+@Test(enabled = false)
 public class FModelTest {
 
     private FModel model;
@@ -50,7 +51,7 @@ public class FModelTest {
      * @throws FileNotFoundException
      *             if something is really wrong
      */
-    @Test
+    @Test(enabled = false)
     public final void test_ctor_close_ctor() throws FileNotFoundException {
         // by
         // Braids
@@ -73,7 +74,7 @@ public class FModelTest {
      * @throws FileNotFoundException
      *             if something is really wrong
      */
-    @Test
+    @Test(enabled = false)
     public final void test_getVersion() throws FileNotFoundException {
         final String version = this.model.getBuildInfo().getVersion();
 
@@ -86,7 +87,7 @@ public class FModelTest {
      * @throws FileNotFoundException
      *             if something is really wrong
      */
-    @Test
+    @Test(enabled = false)
     public final void test_getBuildID() throws FileNotFoundException {
         // by
         // Braids
@@ -104,7 +105,7 @@ public class FModelTest {
      * @throws FileNotFoundException
      *             indirectly
      */
-    @Test
+    @Test(enabled = false)
     public final void test_getPreferences() throws FileNotFoundException {
         final ForgePreferences prefs = this.model.getPreferences();
         Assert.assertNotNull(prefs, "prefs instance is not null");
@@ -113,7 +114,7 @@ public class FModelTest {
     /**
      * Test resetGameState and getGameState.
      */
-    @Test
+    @Test(enabled = false)
     public final void test_resetGameState_getGameState() {
         Singletons.setModel(this.model);
         Assert.assertNull(this.model.getGameState(), "game state has not yet been initialized");
