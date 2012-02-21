@@ -2216,12 +2216,16 @@ public final class AbilityFactoryReveal {
                     if (params.containsKey("Random")) {
                         revealed.add(CardUtil.getRandom(handChoices.toArray()));
                         GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
-                    } else if (params.containsKey("AnyNumber")) {
+                    } else {
                         CardList valid = new CardList(handChoices);
+                        int max = 1;
                         if (params.containsKey("RevealValid")) {
                             valid = valid.getValidCards(params.get("RevealValid"), p, host);
                         }
-                        revealed.addAll(AbilityFactoryReveal.getRevealedList(host, sa, valid));
+                        if (params.containsKey("AnyNumber")) {
+                            max = valid.size();
+                        }
+                        revealed.addAll(AbilityFactoryReveal.getRevealedList(host, sa, valid, max));
                         GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
                     }
 
@@ -2236,9 +2240,9 @@ public final class AbilityFactoryReveal {
         }
     }
 
-    private static CardList getRevealedList(final Card card, final SpellAbility sa, final CardList valid) {
+    private static CardList getRevealedList(final Card card, final SpellAbility sa, final CardList valid, final int max) {
         final CardList chosen = new CardList();
-        final int validamount = valid.size();
+        final int validamount = Math.min(valid.size(), max);
 
         if (sa.getActivatingPlayer().isHuman()) {
             for (int i = 0; i < validamount; i++) {

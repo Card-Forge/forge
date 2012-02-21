@@ -4324,6 +4324,7 @@ res/cardsfolder/i/infernal_kirin.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_medusa.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_plunge.txt -text
 res/cardsfolder/i/infernal_tribute.txt svneol=native#text/plain
+res/cardsfolder/i/infernal_tutor.txt -text
 res/cardsfolder/i/inferno.txt svneol=native#text/plain
 res/cardsfolder/i/inferno_elemental.txt -text
 res/cardsfolder/i/inferno_titan.txt svneol=native#text/plain
