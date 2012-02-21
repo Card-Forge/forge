@@ -407,6 +407,9 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - FPanel "fixed", that is, round corners for solid colors, square for images.
 - Ran set info script.
 - Ran oracle script.
+- Added the recent commit logs to changes.txt.
+- Fixed Mitotic Manipulation.
+- Fixed PlayerType when generating 5 color decks.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
