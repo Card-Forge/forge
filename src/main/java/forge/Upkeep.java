@@ -1936,6 +1936,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append(card.getName()).append(" - Vanishing - remove a time counter from it. ");
                 sb.append("When the last is removed, sacrifice it.)");
                 ability.setStackDescription(sb.toString());
+                ability.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
 
@@ -1977,6 +1978,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append(card.getName()).append(" - Fading - remove a fade counter from it. ");
                 sb.append("If you can't, sacrifice it.)");
                 ability.setStackDescription(sb.toString());
+                ability.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
 
@@ -2058,6 +2060,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append("reveals a creature card. If he or she does, that player puts that card onto the ");
                 sb.append("battlefield and all other cards revealed this way into his or her graveyard.");
                 ability.setStackDescription(sb.toString());
+                ability.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
 
@@ -2107,6 +2110,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append("At the beginning of each player's upkeep, Oath of Ghouls returns a creature ");
                 sb.append("from their graveyard to owner's hand if they have more than an opponent.");
                 ability.setStackDescription(sb.toString());
+                ability.setDescription(sb.toString());
 
                 AllZone.getStack().addSimultaneousStackEntry(ability);
 
@@ -2145,6 +2149,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Karma deals ").append(damage).append(" damage to ").append(player);
                     ability.setStackDescription(sb.toString());
+                    ability.setDescription(sb.toString());
 
                     AllZone.getStack().addSimultaneousStackEntry(ability);
 
@@ -2180,6 +2185,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(source).append(" - deals ").append(damage).append(" damage to ").append(player);
             ability.setStackDescription(sb.toString());
+            ability.setDescription(sb.toString());
 
             if (damage > 0) {
                 AllZone.getStack().addSimultaneousStackEntry(ability);
@@ -2351,6 +2357,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 }
             };
             ability.setStackDescription(source.getName() + " - " + player
+                    + " taps X artifacts, creatures or lands he or she controls.");
+            ability.setDescription(source.getName() + " - " + player
                     + " taps X artifacts, creatures or lands he or she controls.");
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
