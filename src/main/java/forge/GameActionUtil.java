@@ -345,6 +345,43 @@ public final class GameActionUtil {
         AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
         AllZone.getStack().setResolving(bResolving);
     }
+    
+    /**
+     * <p>
+     * payCostDuringAbilityResolve.
+     * </p>
+     * 
+     * @param message
+     *            a {@link java.lang.String} object.
+     * @param manaCost
+     *            a {@link java.lang.String} object.
+     * @param paid
+     *            a {@link forge.Command} object.
+     * @param unpaid
+     *            a {@link forge.Command} object.
+     */
+    public static void payCostDuringAbilityResolve(final String message, Card hostCard, final String manaCost,
+            final Command paid, final Command unpaid) {
+        if (manaCost.startsWith("PayLife")) {
+            String amountString = manaCost.split("<")[1].split(">")[0];
+            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString) : 
+                CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amountString));
+            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(hostCard, "Do you want to pay " +
+                amount + " life?")) {
+                AllZone.getHumanPlayer().payLife(amount, null);
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
+            return;
+        }
+        // temporarily disable the Resolve flag, so the user can payMana for the
+        // resolving Ability
+        final boolean bResolving = AllZone.getStack().getResolving();
+        AllZone.getStack().setResolving(false);
+        AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
+        AllZone.getStack().setResolving(bResolving);
+    }
 
     /**
      * <p>

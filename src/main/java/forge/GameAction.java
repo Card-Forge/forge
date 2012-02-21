@@ -34,6 +34,7 @@ import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
@@ -422,6 +423,7 @@ public class GameAction {
 
                     final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
                             .split(":")[1];
+                    final Cost cost = new Cost(recoverCost, c.getName(), true);
 
                     final Command paidCommand = new Command() {
                         private static final long serialVersionUID = -6357156873861051845L;
@@ -441,7 +443,9 @@ public class GameAction {
                         }
                     };
 
-                    final SpellAbility abRecover = new Ability(recoverable, recoverCost) {
+                    final SpellAbility abRecover = new AbilityActivated(recoverable, cost, null) {
+                        private static final long serialVersionUID = 8858061639236920054L;
+
                         @Override
                         public void resolve() {
                             Singletons.getModel().getGameAction().moveToHand(recoverable);
@@ -463,8 +467,8 @@ public class GameAction {
                         @Override
                         public void resolve() {
                             if (recoverable.getController().isHuman()) {
-                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), recoverCost, paidCommand,
-                                        unpaidCommand);
+                                GameActionUtil.payCostDuringAbilityResolve(sb.toString(), recoverable, recoverCost,
+                                        paidCommand, unpaidCommand);
                             } else { // computer
                                 if (ComputerUtil.canPayCost(abRecover)) {
                                     ComputerUtil.playNoStack(abRecover);
