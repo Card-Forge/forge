@@ -377,6 +377,37 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Refactoring to prevent duplicate code in AbilityMana. 
 - Commented out two unused functions in ComputerUtil.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated the medium and hard Frodo decks with new cards and made them a little less powerful.
+- Added a very hard version of Frodo.
+- Ran set info script.
+- Ran oracle script.
+- All new game methods consolidated into forge.game.GameNew.
+- GameAction moved from AllZone into FModel.
+- Singleton pattern enforced on FModel.
+- Match/game state reset persist bug fixed.
+- CheckStyle.
+- Added the decks Oreius 2-4.
+- Removed some more duplicate code in AbilityMana.
+- Conversion of the Masticores and Eldrazi Monument to script by squee1968.
+- renamed CardSet to CardEdition, moved static ???Utils classes to AllZone (not a best place, but better than just static classes) divided formats from sets
+- fixing AE on systems that mistreated 0xC6 character
+- this resolves double quest event manager initialization with race condition
+- renamed cardSet to cardEdition (to avoid using 'set' word - too many things can be called a set)
+- also probably broken QuestEventManager :D
+- FileSection now initializes outside of cycle a regexp to parse lines (this is some 25% faster)
+- Added RememberObjects parameter to AB Pump.
+- Rarity fix.
+- Converted Bazaar Trader and Zedruu the Greathearted to script.
+- Added a new function payCostDuringAbilityResolve which expands payManaDuringAbilityResolve.
+- Fixed Garza's Assassin.
+- Unlesscost now uses payCostDuringAbilityResolve.
+- Converted Carnophage and Sangrophage to script.
+- Added quest decks to constructed mode.
+- Fixed human-only bug in constructed deck generation.
+- FPanel "fixed", that is, round corners for solid colors, square for images.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -544,6 +575,10 @@ Paradise Plume
 Descendant of Masumaro
 Coffin Queen
 Phyrexian Slayer
+Murmurs from Beyond
+Govern the Guildless
+Paladin of Prahv
+Thran Weaponry
 
 
 end
