@@ -1220,13 +1220,16 @@ public class AbilityFactoryZoneAffecting {
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") || mode.equals("TgtChoose")) {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
-                    final CardList dPHand = p.getCardsIn(Zone.Hand);
+                    CardList dPHand = p.getCardsIn(Zone.Hand);
                     if (dPHand.size() != 0) {
+                        if (params.containsKey("RevealNumber")) { 
+                            String amountString = params.get("RevealNumber");
+                            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString) : 
+                                CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                            dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount);
+                        }
                         CardList dPChHand = new CardList(dPHand.toArray());
-
-                        if (params.containsKey("DiscardValid")) { // Restrict
-                                                                  // card
-                                                                  // choices
+                        if (params.containsKey("DiscardValid")) { // Restrict card choices
                             final String[] dValid = params.get("DiscardValid").split(",");
                             dPChHand = dPHand.getValidCards(dValid, source.getController(), source);
                         }

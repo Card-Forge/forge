@@ -797,6 +797,7 @@ res/cardsfolder/b/black_vise.txt svneol=native#text/plain
 res/cardsfolder/b/black_ward.txt svneol=native#text/plain
 res/cardsfolder/b/blackcleave_cliffs.txt svneol=native#text/plain
 res/cardsfolder/b/blackcleave_goblin.txt svneol=native#text/plain
+res/cardsfolder/b/blackmail.txt -text
 res/cardsfolder/b/blade_of_the_bloodchief.txt svneol=native#text/plain
 res/cardsfolder/b/blade_of_the_sixth_pride.txt svneol=native#text/plain
 res/cardsfolder/b/blade_sliver.txt svneol=native#text/plain
@@ -5558,6 +5559,7 @@ res/cardsfolder/m/mire_boa.txt svneol=native#text/plain
 res/cardsfolder/m/mire_kavu.txt svneol=native#text/plain
 res/cardsfolder/m/mire_shade.txt svneol=native#text/plain
 res/cardsfolder/m/miren_the_moaning_well.txt svneol=native#text/plain
+res/cardsfolder/m/mires_toll.txt -text
 res/cardsfolder/m/mirozel.txt svneol=native#text/plain
 res/cardsfolder/m/mirran_crusader.txt svneol=native#text/plain
 res/cardsfolder/m/mirran_mettle.txt svneol=native#text/plain

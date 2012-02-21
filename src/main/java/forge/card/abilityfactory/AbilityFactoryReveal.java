@@ -2225,7 +2225,7 @@ public final class AbilityFactoryReveal {
                         if (params.containsKey("AnyNumber")) {
                             max = valid.size();
                         }
-                        revealed.addAll(AbilityFactoryReveal.getRevealedList(host, sa, valid, max));
+                        revealed.addAll(AbilityFactoryReveal.getRevealedList(sa.getActivatingPlayer(), valid, max));
                         GuiUtils.getChoice("Revealed card(s)", revealed.toArray());
                     }
 
@@ -2240,12 +2240,13 @@ public final class AbilityFactoryReveal {
         }
     }
 
-    private static CardList getRevealedList(final Card card, final SpellAbility sa, final CardList valid, final int max) {
+    public static CardList getRevealedList(final Player player, final CardList valid, final int max) {
         final CardList chosen = new CardList();
         final int validamount = Math.min(valid.size(), max);
 
-        if (sa.getActivatingPlayer().isHuman()) {
-            for (int i = 0; i < validamount; i++) {
+        
+        for (int i = 0; i < validamount; i++) {
+            if (player.isHuman()) {
                 final Object o = GuiUtils.getChoiceOptional("Choose card(s) to reveal", valid.toArray());
                     if (o != null) {
                         chosen.add((Card) o);
@@ -2253,12 +2254,10 @@ public final class AbilityFactoryReveal {
                     } else {
                         break;
                     }
+            } else { //Computer
+                chosen.add(valid.get(0));
+                valid.remove(valid.get(0));
             }
-        }
-        if (sa.getActivatingPlayer().isComputer()) {
-            return valid;
-
-        } else {
         }
         return chosen;
     }
