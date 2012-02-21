@@ -207,7 +207,7 @@ public class ControlConstructed {
             else {
                 final Generate5ColorDeck gen = new Generate5ColorDeck(
                         selection[0], selection[1], selection[2], selection[3], selection[4]);
-                cards = gen.get5ColorDeck(60, PlayerType.HUMAN);
+                cards = gen.get5ColorDeck(60, player0);
             }
 
             // After generating card lists, build deck.
