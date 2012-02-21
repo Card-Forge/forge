@@ -3,30 +3,44 @@
 Name=Frodo 2
 Title=Frodo
 Difficulty=medium
-Description=WRG Zoo deck with some threat removal and Glorious Anthem
+Description=WRG Zoo deck
 Icon=Frodo.jpg
 Deck Type=constructed
 [main]
-4 Plateau
-4 Taiga
+3 Plateau
+3 Taiga
+3 Savannah
 2 Arid Mesa
-2 Wooded Foothills
+1 Wooded Foothills
+2 Grasslands
 1 Windswept Heath
+2 Mountain Valley
+3 Mountain|ZEN
+2 Forest|ZEN
+2 Plains|ZEN
 3 Kird Ape
-4 Striped Bears
-2 Lightning Helix
-2 Plains|M11
-4 Savannah Lions
+1 Lightning Helix
+1 Guerrilla Tactics
+3 Savannah Lions
 1 Glorious Anthem
 3 Plated Geopede
-1 Forest|M11
-3 Path to Exile
-2 Lightning Bolt
+1 Path to Exile
+1 Puncturing Light
+1 Journey to Nowhere
+1 Lightning Bolt
+1 Volcanic Hammer
 3 Loam Lion
-2 Serra's Blessing
-4 Barbary Apes
+1 Serra's Blessing
+1 Barbary Apes
 2 Steppe Lynx
-4 Savannah
 3 Wild Nacatl
-4 Mountain|M11
+1 Fledgling Griffin
+1 Summit Apes
+1 Hedge Troll
+1 Cerodon Yearling
+1 Skyknight Legionnaire
+1 Watchwolf
+1 Raging Kavu
+1 Rip-Clan Crasher
+1 Tattermunge Maniac
 [sideboard]

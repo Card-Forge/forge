@@ -1,8 +1,8 @@
 [duel]
 [metadata]
-Name=Frodo 3
+Name=Frodo 4
 Title=Frodo
-Difficulty=hard
+Difficulty=very hard
 Description=WRG Zoo deck
 Icon=Frodo.jpg
 Deck Type=constructed
@@ -12,21 +12,22 @@ Deck Type=constructed
 2 Savannah
 4 Arid Mesa
 4 Wooded Foothills
-4 Windswept Heath
+3 Windswept Heath
 1 Forest|ZEN
-1 Mountain|ZEN
-1 Plains|ZEN
+1 Mox Ruby
+1 Mox Pearl
+1 Mox Emerald
 4 Kird Ape
+4 Path to Exile
+4 Lightning Bolt
 4 Wild Nacatl
 4 Loam Lion
 4 Steppe Lynx
-1 Savannah Lions
-4 Path to Exile
-4 Lightning Bolt
+1 Isamaru, Hound of Konda
+3 Plated Geopede
+4 Lightning Helix
 1 Gaddock Teeg
-4 Plated Geopede
-3 Lightning Helix
-1 Watchwolf
-3 Woolly Thoctar
-2 Glorious Anthem
+4 Woolly Thoctar
+1 Glorious Anthem
+1 Wheel of Fortune
 [sideboard]
