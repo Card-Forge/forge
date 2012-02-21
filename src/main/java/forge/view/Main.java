@@ -107,6 +107,7 @@ public final class Main {
      */
     @Override
     protected void finalize() throws Throwable {
+        System.out.println("Running finalizer");
         // NOT WORKING
         // this should call close in model,
         // should probably be attached to frame close method
