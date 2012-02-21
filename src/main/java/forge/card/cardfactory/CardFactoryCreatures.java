@@ -2375,7 +2375,7 @@ public class CardFactoryCreatures {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
         } // *************** END ************ END **************************
-        */
+        
 
         // *************** START *********** START **************************
 
@@ -2475,7 +2475,7 @@ public class CardFactoryCreatures {
             ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
-
+*/
         // ***************************************************
         // end of card specific code
         // ***************************************************

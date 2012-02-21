@@ -1,8 +1,13 @@
 Name:Bazaar Trader
 ManaCost:1 R
 Types:Creature Goblin
-Text:T:Target player gains control of target artifact, creature, or land you control.
+Text:no text
 PT:1/1
+A:AB$ Pump | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBPumpRemember | SpellDescription$ Target player gains control of target artifact, creature, or land you control.
+SVar:DBPumpRemember:DB$ Pump | RememberObjects$ Targeted | Static$ True | SubAbility$ DBPumpPermanent
+SVar:DBPumpPermanent:DB$ Pump | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact, creature, or land you control | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | NewController$ Remembered | SubAbility$ DBForgetRemembered
+SVar:DBForgetRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_trader.jpg
