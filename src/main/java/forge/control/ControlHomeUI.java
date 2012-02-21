@@ -2,6 +2,7 @@ package forge.control;
 
 import forge.control.home.ControlConstructed;
 import forge.control.home.ControlDraft;
+import forge.control.home.ControlQuest;
 import forge.control.home.ControlSealed;
 import forge.control.home.ControlUtilities;
 import forge.view.ViewHomeUI;
@@ -41,6 +42,11 @@ public class ControlHomeUI {
     /** @return ControlSealed */
     public ControlSealed getControlSealed() {
         return view.getViewSealed().getControl();
+    }
+
+    /** @return ControlQuest */
+    public ControlQuest getControlQuest() {
+        return view.getViewQuest().getControl();
     }
 
     /** @return ControlUtilities */

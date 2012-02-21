@@ -307,6 +307,11 @@ public class ViewHomeUI extends FPanel {
         return this.sealed;
     }
 
+    /** @return {@link forge.view.home.ViewQuest} */
+    public ViewQuest getViewQuest() {
+        return this.quest;
+    }
+    
     /** @return {@link forge.view.home.ViewSettings} */
     public ViewSettings getViewSettings() {
         return this.settings;

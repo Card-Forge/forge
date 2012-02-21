@@ -90,7 +90,7 @@ public abstract class FolderStorageReader<T extends IHasName> implements IItemRe
                 if (null == newDeck) {
 
                     String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
-                    // JOptionPane.showMessageDialog(null, msg); -- This becomes bugged if uncommented, but i need these messages to debug other peoples decks // Max Mtg
+                    JOptionPane.showMessageDialog(null, msg); //-- This becomes bugged if uncommented, but i need these messages to debug other peoples decks // Max Mtg
                     continue;
                 }
                 result.put(newDeck.getName(), newDeck);

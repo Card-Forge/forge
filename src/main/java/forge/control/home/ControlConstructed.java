@@ -330,10 +330,6 @@ public class ControlConstructed {
     }
 
     private String[] getEventNames() {
-        // Probably a better place for this, but it's a time consuming method,
-        // and must be completed before UI is built, and a better spot is hard to find.
-        Singletons.getModel().getQuestEventManager().assembleAllEvents();
-
         final List<String> eventNames = new ArrayList<String>();
         eventNames.clear();
 

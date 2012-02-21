@@ -82,6 +82,7 @@ public enum FControl {
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 changeState(0);
+                Singletons.getControl().getControlHome().getControlQuest().refreshStats();
                 Singletons.getView().getViewHome().showQuestMenu();
             }
         };
@@ -98,6 +99,7 @@ public enum FControl {
     public void initialize() {
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = Singletons.getView().getLayeredContentPane();
+        Singletons.getModel().getQuestEventManager().assembleAllEvents();
 
         // Handles resizing in null layouts of layers in JLayeredPane.
         Singletons.getView().addComponentListener(new ComponentAdapter() {

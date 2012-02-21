@@ -17,8 +17,6 @@
  */
 package forge.view;
 
-import javax.swing.SwingUtilities;
-
 import forge.Singletons;
 import forge.control.FControl;
 import forge.error.ErrorViewer;
@@ -61,39 +59,34 @@ public final class Main {
             // Open previous menu on first run, or constructed.
             // Focus is reset when the frame becomes visible,
             // so the call to show the menu must happen here.
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    final ForgePreferences.HomeMenus lastMenu =
-                            ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
+            final ForgePreferences.HomeMenus lastMenu =
+                    ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
 
-                    switch(lastMenu) {
-                        case draft:
-                            Singletons.getView().getViewHome().getBtnDraft().grabFocus();
-                            Singletons.getView().getViewHome().showDraftMenu();
-                            break;
-                        case sealed:
-                            Singletons.getView().getViewHome().getBtnSealed().grabFocus();
-                            Singletons.getView().getViewHome().showSealedMenu();
-                            break;
-                        case quest:
-                            Singletons.getView().getViewHome().getBtnQuest().grabFocus();
-                            Singletons.getView().getViewHome().showQuestMenu();
-                            break;
-                        case settings:
-                            Singletons.getView().getViewHome().getBtnSettings().grabFocus();
-                            Singletons.getView().getViewHome().showSettingsMenu();
-                            break;
-                        case utilities:
-                            Singletons.getView().getViewHome().getBtnUtilities().grabFocus();
-                            Singletons.getView().getViewHome().showUtilitiesMenu();
-                            break;
-                        default:
-                            Singletons.getView().getViewHome().getBtnConstructed().grabFocus();
-                            Singletons.getView().getViewHome().showConstructedMenu();
-                    }
-                }
-            });
+            switch(lastMenu) {
+                case draft:
+                    Singletons.getView().getViewHome().getBtnDraft().grabFocus();
+                    Singletons.getView().getViewHome().showDraftMenu();
+                    break;
+                case sealed:
+                    Singletons.getView().getViewHome().getBtnSealed().grabFocus();
+                    Singletons.getView().getViewHome().showSealedMenu();
+                    break;
+                case quest:
+                    Singletons.getView().getViewHome().getBtnQuest().grabFocus();
+                    Singletons.getView().getViewHome().showQuestMenu();
+                    break;
+                case settings:
+                    Singletons.getView().getViewHome().getBtnSettings().grabFocus();
+                    Singletons.getView().getViewHome().showSettingsMenu();
+                    break;
+                case utilities:
+                    Singletons.getView().getViewHome().getBtnUtilities().grabFocus();
+                    Singletons.getView().getViewHome().showUtilitiesMenu();
+                    break;
+                default:
+                    Singletons.getView().getViewHome().getBtnConstructed().grabFocus();
+                    Singletons.getView().getViewHome().showConstructedMenu();
+            }
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }

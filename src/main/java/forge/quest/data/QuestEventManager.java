@@ -82,7 +82,7 @@ public class QuestEventManager {
 
         for (final File f : allFiles) {
             Map<String, List<String>> contents = SectionUtil.parseSections(FileUtil.readFile(f));
-            
+
             if (contents.containsKey("quest")) {
                 tempEvent = readChallenge(contents.get("quest"));
                 this.allChallenges.add((QuestChallenge) tempEvent);
@@ -163,7 +163,7 @@ public class QuestEventManager {
         int eqpos;
         String key, value;
 
-        final QuestChallenge qc = new QuestChallenge(); 
+        final QuestChallenge qc = new QuestChallenge();
         // Unique properties
         for (final String s : contents) {
             if (StringUtils.isBlank(s)) {
