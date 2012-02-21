@@ -26,6 +26,7 @@ import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.data.QuestEvent;
 import forge.util.IFolderMap;
 import forge.view.home.ViewConstructed;
 
@@ -34,9 +35,9 @@ import forge.view.home.ViewConstructed;
  *
  */
 public class ControlConstructed {
-    private ViewConstructed view;
+    private final ViewConstructed view;
     private JPanel selectedTab;
-    private MouseListener madStartGame, madTabHuman, madTabAI, madSingletons, madArtifacts, madRemoveSmall;
+    private final MouseListener madStartGame, madTabHuman, madTabAI, madSingletons, madArtifacts, madRemoveSmall;
 
     /**
      * 
@@ -44,20 +45,20 @@ public class ControlConstructed {
      * 
      * @param v0 &emsp; ViewConstructed
      */
-    public ControlConstructed(ViewConstructed v0) {
+    public ControlConstructed(final ViewConstructed v0) {
         this.view = v0;
 
         // Set action listeners
         madTabHuman = new MouseAdapter() { @Override
-            public void mouseClicked(MouseEvent e) { view.showHumanTab(); } };
+            public void mouseClicked(final MouseEvent e) { view.showHumanTab(); } };
 
         madTabAI = new MouseAdapter() { @Override
-            public void mouseClicked(MouseEvent e) { view.showAITab(); } };
+            public void mouseClicked(final MouseEvent e) { view.showAITab(); } };
 
         // Game start logic must happen outside of the EDT.
         madStartGame = new MouseAdapter() {
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(final MouseEvent e) {
                 final Thread t = new Thread() {
                     @Override
                     public void run() {
@@ -70,7 +71,7 @@ public class ControlConstructed {
 
         madSingletons = new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(final MouseEvent e) {
                 Singletons.getModel().getPreferences().setPref(
                         FPref.DECKGEN_SINGLETONS, String.valueOf(view.getCbSingletons().isSelected()));
             }
@@ -78,7 +79,7 @@ public class ControlConstructed {
 
         madArtifacts = new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(final MouseEvent e) {
                 Singletons.getModel().getPreferences().setPref(
                         FPref.DECKGEN_ARTIFACTS, String.valueOf(view.getCbArtifacts().isSelected()));
             }
@@ -86,7 +87,7 @@ public class ControlConstructed {
 
         madRemoveSmall = new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(final MouseEvent e) {
                 Singletons.getModel().getPreferences().setPref(
                         FPref.DECKGEN_NOSMALL, String.valueOf(view.getCbRemoveSmall().isSelected()));
             }
@@ -112,7 +113,7 @@ public class ControlConstructed {
      * Updates visual state of tabber.
      * @param tab0 &emsp; JPanel tab object (can pass SubTab too).
      */
-    public void updateTabber(JPanel tab0) {
+    public void updateTabber(final JPanel tab0) {
         if (selectedTab != null) {
             selectedTab.setEnabled(false);
         }
@@ -169,7 +170,7 @@ public class ControlConstructed {
     //========= DECK GENERATION
 
     /** Generates deck from current list selection(s). */
-    private Deck generateDeck(JList lst0) {
+    private Deck generateDeck(final JList lst0, final PlayerType player0) {
         CardList cards = null;
         final String[] selection = oa2sa(lst0.getSelectedValues());
         final Deck deck;
@@ -194,17 +195,17 @@ public class ControlConstructed {
 
             // 2, 3, and 5 colors.
             if (selection.length == 2) {
-                Generate2ColorDeck gen = new Generate2ColorDeck(
+                final Generate2ColorDeck gen = new Generate2ColorDeck(
                         selection[0], selection[1]);
-                cards = gen.get2ColorDeck(60, PlayerType.HUMAN);
+                cards = gen.get2ColorDeck(60, player0);
             }
             else if (selection.length == 3) {
-                Generate3ColorDeck gen = new Generate3ColorDeck(
+                final Generate3ColorDeck gen = new Generate3ColorDeck(
                         selection[0], selection[1], selection[2]);
-                cards = gen.get3ColorDeck(60, PlayerType.HUMAN);
+                cards = gen.get3ColorDeck(60, player0);
             }
             else {
-                Generate5ColorDeck gen = new Generate5ColorDeck(
+                final Generate5ColorDeck gen = new Generate5ColorDeck(
                         selection[0], selection[1], selection[2], selection[3], selection[4]);
                 cards = gen.get5ColorDeck(60, PlayerType.HUMAN);
             }
@@ -217,7 +218,7 @@ public class ControlConstructed {
 
         // Theme deck
         else if (lst0.getName().equals("lstTheme")) {
-            GenerateThemeDeck gen = new GenerateThemeDeck();
+            final GenerateThemeDeck gen = new GenerateThemeDeck();
             cards = gen.getThemeDeck(selection[0], 60);
 
             // After generating card lists, build deck.
@@ -259,12 +260,12 @@ public class ControlConstructed {
         SwingUtilities.invokeLater(new Runnable() { @Override
             public void run() { view.getBarProgress().increment(); } });
 
-        Constant.Runtime.HUMAN_DECK[0] = generateDeck(view.getPnlHuman().getLstCurrentSelected());
+        Constant.Runtime.HUMAN_DECK[0] = generateDeck(view.getPnlHuman().getLstCurrentSelected(), PlayerType.HUMAN);
 
         SwingUtilities.invokeLater(new Runnable() { @Override
             public void run() { view.getBarProgress().increment(); } });
 
-        Constant.Runtime.COMPUTER_DECK[0] = generateDeck(view.getPnlAI().getLstCurrentSelected());
+        Constant.Runtime.COMPUTER_DECK[0] = generateDeck(view.getPnlAI().getLstCurrentSelected(), PlayerType.COMPUTER);
 
         Constant.Runtime.setGameType(GameType.Constructed);
 
@@ -311,7 +312,7 @@ public class ControlConstructed {
         final List<String> themeNames = new ArrayList<String>();
         themeNames.clear();
 
-        for (String s : GenerateThemeDeck.getThemeNames()) {
+        for (final String s : GenerateThemeDeck.getThemeNames()) {
             themeNames.add(s);
         }
 
@@ -323,22 +324,26 @@ public class ControlConstructed {
         customNames.clear();
 
         final IFolderMap<Deck> allDecks = AllZone.getDecks().getConstructed();
-        for (Deck d : allDecks) { customNames.add(d.getName()); }
+        for (final Deck d : allDecks) { customNames.add(d.getName()); }
 
         return oa2sa(customNames.toArray());
     }
 
     private String[] getEventNames() {
+        // Probably a better place for this, but it's a time consuming method,
+        // and must be completed before UI is built, and a better spot is hard to find.
+        Singletons.getModel().getQuestEventManager().assembleAllEvents();
+
         final List<String> eventNames = new ArrayList<String>();
         eventNames.clear();
 
-        /*for (QuestEvent e : Singletons.getModel().getQuestEventManager().getAllChallenges()) {
+        for (final QuestEvent e : Singletons.getModel().getQuestEventManager().getAllChallenges()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (QuestEvent e : Singletons.getModel().getQuestEventManager().getAllDuels()) {
+        for (final QuestEvent e : Singletons.getModel().getQuestEventManager().getAllDuels()) {
             eventNames.add(e.getEventDeck().getName());
-        } */
+        }
 
         return oa2sa(eventNames.toArray());
     }
@@ -350,27 +355,27 @@ public class ControlConstructed {
      * @param colors0 &emsp; String[] of color names
      * @return boolean
      */
-    private boolean colorCheck(String[] colors0) {
+    private boolean colorCheck(final String[] colors0) {
         boolean result = true;
 
         if (colors0.length == 1) {
             JOptionPane.showMessageDialog(null,
                     "Sorry, single color generated decks aren't supported yet."
                     + "\n\rPlease choose at least one more color for this deck.",
-                    "Human deck: 1 color", JOptionPane.ERROR_MESSAGE);
+                    "Generate deck: 1 color", JOptionPane.ERROR_MESSAGE);
             result = false;
         }
         else if (colors0.length == 4) {
             JOptionPane.showMessageDialog(null,
                     "Sorry, four color generated decks aren't supported yet."
                     + "\n\rPlease use 2, 3, or 5 colors for this deck.",
-                    "Human deck: 4 colors", JOptionPane.ERROR_MESSAGE);
+                    "Generate deck: 4 colors", JOptionPane.ERROR_MESSAGE);
             result = false;
         }
         else if (colors0.length > 5) {
             JOptionPane.showMessageDialog(null,
-                    "Human deck: maximum five colors!",
-                    "Human deck: too many colors", JOptionPane.ERROR_MESSAGE);
+                    "Generate deck: maximum five colors!",
+                    "Generate deck: too many colors", JOptionPane.ERROR_MESSAGE);
             result = false;
         }
         return result;
@@ -383,8 +388,8 @@ public class ControlConstructed {
      * @param o0 &emsp; Object[]
      * @return String[]
      */
-    private String[] oa2sa(Object[] o0) {
-        String[] output = new String[o0.length];
+    private String[] oa2sa(final Object[] o0) {
+        final String[] output = new String[o0.length];
 
         for (int i = 0; i < o0.length; i++) {
             output[i] = o0[i].toString();

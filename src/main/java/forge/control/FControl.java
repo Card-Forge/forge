@@ -96,7 +96,6 @@ public enum FControl {
 
     /** After view and model have been initialized, control can start. */
     public void initialize() {
-        //Singletons.getModel().getQuestEventManager().assembleAllEvents();
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = Singletons.getView().getLayeredContentPane();
 
