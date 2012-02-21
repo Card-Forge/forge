@@ -935,6 +935,7 @@ public class AbilityFactoryPump {
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
         ArrayList<Player> tgtPlayers = new ArrayList<Player>();
+        String pumpRemembered = null;
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
             tgtPlayers = tgt.getTargetPlayers();
@@ -944,6 +945,16 @@ public class AbilityFactoryPump {
             }
             if (tgtPlayers.isEmpty()) {
                 tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
+            }
+        }
+
+        if (this.params.containsKey("RememberObjects")) {
+            pumpRemembered = params.get("RememberObjects");
+        }
+
+        if (pumpRemembered != null) {
+            for (final Object o : AbilityFactory.getDefinedObjects(this.hostCard, pumpRemembered, sa)) {
+                this.hostCard.addRemembered(o);
             }
         }
 

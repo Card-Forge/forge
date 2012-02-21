@@ -1,0 +1,15 @@
+Name:Thran Weaponry
+ManaCost:4
+Types:Artifact
+Text:no text
+K:Echo:4
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ 2 T | RememberObjects$ Self | Static$ True
+S:Mode$ Continuous | Affected$ Creature | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Card.Self+tapped | CheckSVar$ SolSauceX | SVarCompare$ EQ1 | Description$ All creatures get +2/+2 for as long as CARDNAME remains tapped.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
+SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
+SVar:SolSauceX:Remembered$Valid Card.Self
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_weaponry.jpg
+End
