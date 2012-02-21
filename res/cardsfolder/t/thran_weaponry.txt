@@ -12,4 +12,6 @@ SVar:SolSauceX:Remembered$Valid Card.Self
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_weaponry.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/135.jpg
+Oracle:Echo {4} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nYou may choose not to untap Thran Weaponry during your untap step.\n{2}, {T}: All creatures get +2/+2 for as long as Thran Weaponry remains tapped.
 End
