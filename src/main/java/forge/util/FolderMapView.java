@@ -43,7 +43,7 @@ public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMa
      * @param deckDir
      *            a {@link java.io.File} object.
      */
-    public FolderMapView(IItemReader<T> io ) {
+    public FolderMapView(IItemReader<T> io) {
         this.map = io.readAll();
     }
 

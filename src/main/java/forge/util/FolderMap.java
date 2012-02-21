@@ -38,7 +38,7 @@ public class FolderMap<T extends IHasName> extends FolderMapView<T> implements I
      * @param deckDir
      *            a {@link java.io.File} object.
      */
-    public FolderMap(IItemSerializer<T> io ) {
+    public FolderMap(IItemSerializer<T> io) {
         super(io);
         serializer = io;
     }
@@ -71,8 +71,8 @@ public class FolderMap<T extends IHasName> extends FolderMapView<T> implements I
     public final boolean isUnique(final String name) {
         return !this.getMap().containsKey(name);
     }
-    
-    
+
+
 
 
 }

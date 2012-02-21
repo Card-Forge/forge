@@ -11,14 +11,14 @@ import java.util.regex.Pattern;
 public class FileSection {
 
     private final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-            
-    private FileSection() {}
-    
+
+    private FileSection() { }
+
     public static FileSection parse(String line, String kvSeparator, String pairSeparator) {
         String[] pairs = line.split(Pattern.quote(pairSeparator));
         Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
         FileSection result = new FileSection();
-        
+
         for (final String dd : pairs) {
             final String[] v = splitter.split(dd, 2);
             result.lines.put(v[0], v.length > 1 ? v[1].trim() : "");
@@ -26,7 +26,7 @@ public class FileSection {
 
         return result;
     }
-    
+
     public static FileSection parse(Iterable<String> lines, String kvSeparator) {
         FileSection result = new FileSection();
         Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
@@ -37,26 +37,28 @@ public class FileSection {
 
         return result;
     }
-    
+
     public String get(String fieldName) {
         return lines.get(fieldName);
     }
 
     public int getInt(String fieldName) { return getInt(fieldName, 0); }
     public int getInt(String fieldName, int defaultValue) {
-        try{ 
+        try {
             return Integer.parseInt(get(fieldName));
-        } catch( NumberFormatException ex ) {
+        } catch (NumberFormatException ex) {
             return defaultValue;
         }
     }
-    
+
     public boolean getBoolean(String fieldName) { return getBoolean(fieldName, false); }
     public boolean getBoolean(String fieldName, boolean defaultValue) {
         String s = get(fieldName);
-        if ( s == null ) return defaultValue;
+        if (s == null) {
+            return defaultValue;
+        }
         return "true".equalsIgnoreCase(s);
     }
-    
-    
+
+
 }

@@ -57,22 +57,22 @@ public abstract class FileStorageReader<T extends IHasName> implements IItemRead
         final Map<String, T> result = new TreeMap<String, T>();
         final ArrayList<String> fData = FileUtil.readFile(file);
         Lambda1<Boolean, String> filter = getLineFilter();
-        
+
         for (final String s : fData) {
             if (!filter.apply(s)) {
                 continue;
             }
-            
+
             T item = read(s);
-            if ( null == item ) {
+            if (null == item) {
                 String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
                 JOptionPane.showMessageDialog(null, msg); // This becomes bugged if uncommented, but i need these messages to debug other peoples decks // Max Mtg
                 continue;
             }
-            
-            result.put( item.getName(), item );
+
+            result.put(item.getName(), item);
         }
-       
+
         return result;
     }
 
@@ -87,7 +87,7 @@ public abstract class FileStorageReader<T extends IHasName> implements IItemRead
 
     protected Lambda1<Boolean, String> getLineFilter() {
         return new Lambda1<Boolean, String>() {
-            
+
             @Override
             public Boolean apply(String arg1) {
                 return !StringUtils.isBlank(arg1) && !arg1.trim().startsWith("#");

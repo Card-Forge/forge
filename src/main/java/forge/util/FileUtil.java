@@ -152,7 +152,7 @@ public final class FileUtil {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
-        
+
         return list;
     } // readFile()
 
