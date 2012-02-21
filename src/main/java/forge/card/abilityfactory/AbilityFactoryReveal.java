@@ -627,7 +627,7 @@ public final class AbilityFactoryReveal {
         final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
-                if (p.getName().equals(c.getName())) {
+                if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {
                     toReturn.add(c);
                 }
             }
