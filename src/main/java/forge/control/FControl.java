@@ -216,6 +216,24 @@ public enum FControl {
         }
     }
 
+    /**
+     * Exhaustively converts object array to string array.
+     * Probably a much easier way to do this.
+     * And, there must be a better place for this.
+     * 
+     * @param o0 &emsp; Object[]
+     * @return String[]
+     */
+    public static String[] oa2sa(final Object[] o0) {
+        final String[] output = new String[o0.length];
+
+        for (int i = 0; i < o0.length; i++) {
+            output[i] = o0[i].toString();
+        }
+
+        return output;
+    }
+
     /** Sizes children of JLayeredPane to fully fit their layers. */
     private void sizeChildren() {
         Component[] children = display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
