@@ -24,9 +24,12 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import forge.Command;
@@ -54,6 +57,7 @@ public class FPanel extends JPanel {
     private Color   borderColor         = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private boolean borderToggle        = true;
     private int     cornerDiameter      = 20;
+    private int     foregroundAlign     = SwingConstants.CENTER;
 
     // Mouse handling
     private boolean selected, hovered;
@@ -142,6 +146,24 @@ public class FPanel extends JPanel {
     /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
     public void setForegroundImage(final ImageIcon ii0) {
         setForegroundImage(ii0.getImage());
+    }
+
+    /** Aligns NON-STRETCHED foreground image.
+     * Must use SwingConstants.
+     * @param i0 &emsp; int
+     */
+    public void setForegroundAlign(final int i0) {
+        // Only implemented for BOTTOM at present.
+        // More implementations can be added as necessary.
+        // See drawForegroundScaled().
+
+        final List<Integer> implemented = new ArrayList<Integer>();
+        implemented.add(SwingConstants.BOTTOM);
+        implemented.add(SwingConstants.CENTER);
+
+        if (!implemented.contains(i0)) { throw new IllegalArgumentException(); }
+        this.foregroundAlign = i0;
+        implemented.clear();
     }
 
     /** @param bool0 &emsp; boolean, stretch the foreground to fit */
@@ -268,8 +290,16 @@ public class FPanel extends JPanel {
         }
 
         // Scaling step 3: Center image in panel
-        tempX = (int) ((pnlW - scaledW) / 2);
-        tempY = (int) ((pnlH - scaledH) / 2);
+        switch(this.foregroundAlign) {
+            case SwingConstants.BOTTOM:
+                tempX = (int) ((pnlW - scaledW) / 2);
+                tempY = pnlH - scaledH;
+                break;
+            default:
+                tempX = (int) ((pnlW - scaledW) / 2);
+                tempY = (int) ((pnlH - scaledH) / 2);
+        }
+
         g2d0.drawImage(foregroundImage, tempX, tempY, scaledW + tempX, scaledH + tempY, 0, 0, imgW, imgH, null);
     }
 
