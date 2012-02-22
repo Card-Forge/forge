@@ -26,14 +26,14 @@ import org.apache.commons.lang3.StringUtils;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.FileUtil;
-import forge.util.FolderStorageReader;
+import forge.util.StorageReaderFolder;
 import forge.util.IItemSerializer;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public class DeckGroupSerializer extends FolderStorageReader<DeckGroup> implements IItemSerializer<DeckGroup> {
+public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implements IItemSerializer<DeckGroup> {
     /**
      * TODO: Write javadoc for Constructor.
      * @param deckDir0

@@ -32,11 +32,11 @@ import org.apache.commons.lang3.StringUtils;
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class FileStorageReader<T extends IHasName> implements IItemReader<T> {
+public abstract class StorageReaderFile<T extends IHasName> implements IItemReader<T> {
 
     private final File file;
 
-    public FileStorageReader(File file0) {
+    public StorageReaderFile(File file0) {
         file = file0;
     }
 

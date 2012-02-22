@@ -36,7 +36,7 @@ import forge.error.ErrorViewer;
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class FolderStorageReader<T extends IHasName> implements IItemReader<T> {
+public abstract class StorageReaderFolder<T extends IHasName> implements IItemReader<T> {
 
     private final File directory;
 
@@ -45,7 +45,7 @@ public abstract class FolderStorageReader<T extends IHasName> implements IItemRe
     }
 
 
-    public FolderStorageReader(File deckDir0) {
+    public StorageReaderFolder(File deckDir0) {
 
         directory = deckDir0;
 
@@ -90,7 +90,7 @@ public abstract class FolderStorageReader<T extends IHasName> implements IItemRe
                 if (null == newDeck) {
 
                     String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
-                    JOptionPane.showMessageDialog(null, msg); //-- This becomes bugged if uncommented, but i need these messages to debug other peoples decks // Max Mtg
+                    JOptionPane.showMessageDialog(null, msg);
                     continue;
                 }
                 result.put(newDeck.getName(), newDeck);
@@ -104,7 +104,7 @@ public abstract class FolderStorageReader<T extends IHasName> implements IItemRe
         if (!decksThatFailedToLoad.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     StringUtils.join(decksThatFailedToLoad, System.getProperty("line.separator")),
-                    "Some of your decks were not loaded.", JOptionPane.WARNING_MESSAGE);
+                    "Some of your objects were not loaded.", JOptionPane.WARNING_MESSAGE);
         }
 
         return result;

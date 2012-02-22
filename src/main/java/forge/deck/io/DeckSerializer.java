@@ -36,7 +36,7 @@ import forge.deck.Deck;
 import forge.item.CardPrinted;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.FolderStorageReader;
+import forge.util.StorageReaderFolder;
 import forge.util.IItemSerializer;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -47,7 +47,7 @@ import freemarker.template.TemplateException;
  * TODO: Write javadoc for this type.
  * 
  */
-public class DeckSerializer extends FolderStorageReader<Deck> implements IItemSerializer<Deck> {
+public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSerializer<Deck> {
 
     public DeckSerializer(File deckDir0) {
         super(deckDir0);

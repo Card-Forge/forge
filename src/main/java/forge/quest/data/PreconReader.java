@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FilenameFilter;
 import forge.deck.io.DeckSerializer;
 import forge.item.PreconDeck;
-import forge.util.FolderStorageReader;
+import forge.util.StorageReaderFolder;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class PreconReader extends FolderStorageReader<PreconDeck> {
+public class PreconReader extends StorageReaderFolder<PreconDeck> {
 
     /**
      * TODO: Write javadoc for Constructor.

@@ -11384,11 +11384,9 @@ src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/util/FileFinder.java svneol=native#text/plain
 src/main/java/forge/util/FileSection.java -text
-src/main/java/forge/util/FileStorageReader.java -text
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 src/main/java/forge/util/FolderMap.java svneol=native#text/plain
 src/main/java/forge/util/FolderMapView.java -text
-src/main/java/forge/util/FolderStorageReader.java -text
 src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
 src/main/java/forge/util/IFolderMap.java -text
 src/main/java/forge/util/IFolderMapView.java -text
@@ -11397,6 +11395,8 @@ src/main/java/forge/util/IItemReader.java -text
 src/main/java/forge/util/IItemSerializer.java -text
 src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 src/main/java/forge/util/SectionUtil.java -text
+src/main/java/forge/util/StorageReaderFile.java -text
+src/main/java/forge/util/StorageReaderFolder.java -text
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/FView.java svneol=native#text/plain
 src/main/java/forge/view/Main.java -text
