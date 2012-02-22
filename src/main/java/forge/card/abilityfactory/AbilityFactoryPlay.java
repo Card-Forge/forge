@@ -324,6 +324,7 @@ public final class AbilityFactoryPlay {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
+        boolean optional = params.containsKey("Optional");
         int amount = 1;
         if (params.containsKey("Amount")) {
             amount = AbilityFactory.calculateAmount(source, params.get("Amount"), sa);
@@ -386,7 +387,7 @@ public final class AbilityFactoryPlay {
             }
             final StringBuilder sb = new StringBuilder();
             sb.append("Do you want to play " + tgtCard + "?");
-            if (controller.isHuman() && params.containsKey("Optional")
+            if (controller.isHuman() && optional
                     && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
                 return;
             }
@@ -420,7 +421,7 @@ public final class AbilityFactoryPlay {
                 tgtSA = sas.get(0);
             }
 
-            if (tgtSA.getTarget() != null && !params.containsKey("Optional")) {
+            if (tgtSA.getTarget() != null && !optional) {
                 tgtSA.getTarget().setMandatory(true);
             }
 
@@ -441,8 +442,7 @@ public final class AbilityFactoryPlay {
                 } else {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
-                        if (spell.canPlayFromEffectAI(false, true)) {
-                            //System.out.println("canPlayFromEffectAI: " + this.getHostCard());
+                        if (spell.canPlayFromEffectAI(!optional, true) || !optional) {
                             ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
                         }
                     }
@@ -450,8 +450,13 @@ public final class AbilityFactoryPlay {
             } else {
                 if (controller.isHuman()) {
                     Singletons.getModel().getGameAction().playSpellAbility(tgtSA);
-                } else if (tgtSA.canPlayAI()) {
-                    ComputerUtil.playStack(tgtSA);
+                } else {
+                    if (tgtSA instanceof Spell) {
+                        Spell spell = (Spell) tgtSA;
+                        if (spell.canPlayFromEffectAI(!optional, false) || !optional) {
+                            ComputerUtil.playStack(tgtSA);
+                        }
+                    }
                 }
             }
         }
