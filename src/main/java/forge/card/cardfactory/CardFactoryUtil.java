@@ -1890,7 +1890,7 @@ public class CardFactoryUtil {
                     this.stop();
                 }
 
-                Singletons.getControl().getMatchControl().showMessage("Select a card to discard");
+                Singletons.getControl().getControlMatch().showMessage("Select a card to discard");
                 ButtonUtil.disableAll();
             }
 
@@ -1910,7 +1910,7 @@ public class CardFactoryUtil {
             }
 
             void done() {
-                Singletons.getControl().getMatchControl().showMessage("Returning cards to hand.");
+                Singletons.getControl().getControlMatch().showMessage("Returning cards to hand.");
                 Singletons.getModel().getGameAction().exile(recall);
                 final CardList grave = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
                 for (int i = 1; i <= this.n; i++) {

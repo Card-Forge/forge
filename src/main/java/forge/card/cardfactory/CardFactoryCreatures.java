@@ -2336,7 +2336,7 @@ public class CardFactoryCreatures {
 
                             @Override
                             public void showMessage() {
-                                Singletons.getControl().getMatchControl().showMessage(card + " - Select an artifact you control");
+                                Singletons.getControl().getControlMatch().showMessage(card + " - Select an artifact you control");
                                 ButtonUtil.enableOnlyCancel();
                             }
 
