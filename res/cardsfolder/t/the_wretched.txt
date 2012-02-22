@@ -8,4 +8,8 @@ SVar:WretchedDelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute
 SVar:WretchedTrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ TriggeredBlocker.blocking | LoseControl$ LoseControl,LeavesPlay
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_wretched.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/59.jpg
+SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/11.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/35.jpg
+Oracle:At end of combat, gain control of all creatures blocking The Wretched for as long as you control The Wretched.
 End
