@@ -6138,6 +6138,7 @@ res/cardsfolder/o/old_man_of_the_sea.txt svneol=native#text/plain
 res/cardsfolder/o/olivia_voldaren.txt -text
 res/cardsfolder/o/omega_myr.txt svneol=native#text/plain
 res/cardsfolder/o/omen.txt svneol=native#text/plain
+res/cardsfolder/o/omen_machine.txt -text svneol=unset#text/plain
 res/cardsfolder/o/omen_of_fire.txt svneol=native#text/plain
 res/cardsfolder/o/omnath_locus_of_mana.txt svneol=native#text/plain
 res/cardsfolder/o/omnibian.txt svneol=native#text/plain
