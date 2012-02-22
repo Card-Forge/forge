@@ -20,6 +20,9 @@ package forge.deck.io;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.FileUtil;
@@ -106,7 +109,7 @@ public class DeckGroupSerializer extends FolderStorageReader<DeckGroup> implemen
 
             @Override
             public boolean accept(File dir, String name) {
-                return dir.isDirectory() && !dir.isHidden();
+                return dir.isDirectory() && !dir.isHidden() && StringUtils.isNotEmpty(name) && !name.startsWith(".");
             }
         };
     }
