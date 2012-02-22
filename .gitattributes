@@ -11214,6 +11214,7 @@ src/main/java/forge/control/home/ControlQuest.java -text
 src/main/java/forge/control/home/ControlSealed.java -text
 src/main/java/forge/control/home/ControlSettings.java -text
 src/main/java/forge/control/home/ControlUtilities.java -text
+src/main/java/forge/control/home/IControlSubmenu.java -text
 src/main/java/forge/control/home/package-info.java -text svneol=native#text/plain
 src/main/java/forge/control/input/Input.java svneol=native#text/plain
 src/main/java/forge/control/input/InputAttack.java svneol=native#text/plain
@@ -11335,6 +11336,7 @@ src/main/java/forge/model/BuildInfo.java -text
 src/main/java/forge/model/FMatchState.java svneol=native#text/plain
 src/main/java/forge/model/FModel.java svneol=native#text/plain
 src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
+src/main/java/forge/model/home/MenuGroup.java -text
 src/main/java/forge/model/package-info.java svneol=native#text/plain
 src/main/java/forge/package-info.java svneol=native#text/plain
 src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
@@ -11410,6 +11412,7 @@ src/main/java/forge/view/bazaar/ViewStall.java svneol=native#text/plain
 src/main/java/forge/view/bazaar/package-info.java svneol=native#text/plain
 src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
 src/main/java/forge/view/home/ConstructedDeckSelectPanel.java -text
+src/main/java/forge/view/home/IViewSubmenu.java -text
 src/main/java/forge/view/home/QuestFileLister.java -text
 src/main/java/forge/view/home/QuestPreferencesHandler.java -text
 src/main/java/forge/view/home/StartButton.java -text
