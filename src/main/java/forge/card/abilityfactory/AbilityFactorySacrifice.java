@@ -437,7 +437,6 @@ public class AbilityFactorySacrifice {
         }
 
         String valid = params.get("SacValid");
-        System.out.println("Valid = " + valid);
         if (valid == null) {
             valid = "Self";
         }
