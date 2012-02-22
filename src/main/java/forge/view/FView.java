@@ -24,10 +24,10 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
-import forge.view.toolbox.CardFaceSymbols;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FSkin;
 
@@ -62,56 +62,70 @@ public final class FView extends JFrame {
         });
     }
 
-    /**
-     * Tell the view that the model has been bootstrapped, the initial stuff
-     * for the skin is in place, and data is ready for initial display.
-     */
+    /** Transitions between splash and main UI.  Called after everything is initialized. */
     public void initialize() {
+        SplashFrame.PROGRESS_BAR.setDescription("Creating display components.");
 
-        // Preloads all cards (using progress bar).
-        AllZone.getCardFactory();
+        // After events and shortcuts are assembled, instantiate all different state screens
+        Singletons.getView().instantiateCachedUIStates();
 
-        // Preloads skin components (using progress bar).
-        FSkin.loadFull();
+        // Open previous menu on first run, or constructed.
+        // Focus is reset when the frame becomes visible,
+        // so the call to show the menu must happen here.
+        final ForgePreferences.HomeMenus lastMenu =
+                ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
 
-        // Does not use progress bar, due to be deprecated with battlefield refactoring.
-        CardFaceSymbols.loadImages();
+        switch(lastMenu) {
+            case draft:
+                Singletons.getView().getViewHome().getBtnDraft().grabFocus();
+                Singletons.getView().getViewHome().showDraftMenu();
+                break;
+            case sealed:
+                Singletons.getView().getViewHome().getBtnSealed().grabFocus();
+                Singletons.getView().getViewHome().showSealedMenu();
+                break;
+            case quest:
+                Singletons.getView().getViewHome().getBtnQuest().grabFocus();
+                Singletons.getView().getViewHome().showQuestMenu();
+                break;
+            case settings:
+                Singletons.getView().getViewHome().getBtnSettings().grabFocus();
+                Singletons.getView().getViewHome().showSettingsMenu();
+                break;
+            case utilities:
+                Singletons.getView().getViewHome().getBtnUtilities().grabFocus();
+                Singletons.getView().getViewHome().showUtilitiesMenu();
+                break;
+            default:
+                Singletons.getView().getViewHome().getBtnConstructed().grabFocus();
+                Singletons.getView().getViewHome().showConstructedMenu();
+        }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SplashFrame.PROGRESS_BAR.setDescription("Creating display components.");
+        // Frame styling
+        FView.this.setMinimumSize(new Dimension(800, 600));
+        FView.this.setLocationRelativeTo(null);
+        FView.this.setExtendedState(FView.this.getExtendedState() | Frame.MAXIMIZED_BOTH);
+        FView.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        FView.this.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
+        FView.this.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
-                // Frame styling
-                FView.this.setMinimumSize(new Dimension(800, 600));
-                FView.this.setLocationRelativeTo(null);
-                FView.this.setExtendedState(FView.this.getExtendedState() | Frame.MAXIMIZED_BOTH);
-                FView.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                FView.this.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
-                FView.this.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
+        // Content pane
+        FView.this.lpnContent.setOpaque(true);
+        FView.this.setContentPane(FView.this.lpnContent);
 
-                // Content pane
-                FView.this.lpnContent.setOpaque(true);
-                FView.this.setContentPane(FView.this.lpnContent);
+        // Overlay
+        overlay.setBounds(0, 0, FView.this.getWidth(), FView.this.getHeight());
+        overlay.setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
+        FView.this.lpnContent.add(overlay, JLayeredPane.MODAL_LAYER);
 
-                // Overlay
-                overlay.setBounds(0, 0, FView.this.getWidth(), FView.this.getHeight());
-                overlay.setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
-                FView.this.lpnContent.add(overlay, JLayeredPane.MODAL_LAYER);
+        // All is ready to go - fire up home screen and discard splash frame.
+        Singletons.getControl().changeState(FControl.HOME_SCREEN);
 
-                // Instantiate all different state screens
-                instantiateCachedUIStates();
+        FView.this.splash.dispose();
+        FView.this.splash = null;
 
-                // All is ready to go - fire up home screen and discard splash frame.
-                Singletons.getControl().changeState(FControl.HOME_SCREEN);
-
-                FView.this.splash.dispose();
-                FView.this.splash = null;
-
-                FView.this.setVisible(true);
-            }
-        });
-    } // End FView()
+        FView.this.setVisible(true);
+    }
 
     /** @return {@link javax.swing.JLayeredPane} */
     public JLayeredPane getLayeredContentPane() {

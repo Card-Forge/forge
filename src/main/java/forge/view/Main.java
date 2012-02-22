@@ -17,13 +17,13 @@
  */
 package forge.view;
 
+import javax.swing.SwingUtilities;
+
 import forge.Singletons;
 import forge.control.FControl;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 
 /**
  * Main class for Forge's swing application view.
@@ -50,43 +50,12 @@ public final class Main {
             Singletons.setView(new FView());
             Singletons.setControl(FControl.SINGLETON_INSTANCE);
 
-            // Start splash frame.
-            Singletons.getView().initialize();
-
-            // Start control on FView.
+            // Use splash frame to initialize everything, then transition to core UI.
             Singletons.getControl().initialize();
 
-            // Open previous menu on first run, or constructed.
-            // Focus is reset when the frame becomes visible,
-            // so the call to show the menu must happen here.
-            final ForgePreferences.HomeMenus lastMenu =
-                    ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
+            SwingUtilities.invokeLater(new Runnable() { @Override
+                public void run() { Singletons.getView().initialize(); } });
 
-            switch(lastMenu) {
-                case draft:
-                    Singletons.getView().getViewHome().getBtnDraft().grabFocus();
-                    Singletons.getView().getViewHome().showDraftMenu();
-                    break;
-                case sealed:
-                    Singletons.getView().getViewHome().getBtnSealed().grabFocus();
-                    Singletons.getView().getViewHome().showSealedMenu();
-                    break;
-                case quest:
-                    Singletons.getView().getViewHome().getBtnQuest().grabFocus();
-                    Singletons.getView().getViewHome().showQuestMenu();
-                    break;
-                case settings:
-                    Singletons.getView().getViewHome().getBtnSettings().grabFocus();
-                    Singletons.getView().getViewHome().showSettingsMenu();
-                    break;
-                case utilities:
-                    Singletons.getView().getViewHome().getBtnUtilities().grabFocus();
-                    Singletons.getView().getViewHome().showUtilitiesMenu();
-                    break;
-                default:
-                    Singletons.getView().getViewHome().getBtnConstructed().grabFocus();
-                    Singletons.getView().getViewHome().showConstructedMenu();
-            }
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }

@@ -28,8 +28,11 @@ import java.util.List;
 import javax.swing.JLayeredPane;
 import javax.swing.WindowConstants;
 
+import forge.AllZone;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.view.toolbox.CardFaceSymbols;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -97,9 +100,20 @@ public enum FControl {
 
     /** After view and model have been initialized, control can start. */
     public void initialize() {
+        // Preloads all cards (using progress bar).
+        AllZone.getCardFactory();
+
+        // Preloads skin components (using progress bar).
+        FSkin.loadFull();
+
+        // Does not use progress bar, due to be deprecated with battlefield refactoring.
+        CardFaceSymbols.loadImages();
+
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = Singletons.getView().getLayeredContentPane();
         Singletons.getModel().getQuestEventManager().assembleAllEvents();
+
+        //Singletons.getView().initialize();
 
         // Handles resizing in null layouts of layers in JLayeredPane.
         Singletons.getView().addComponentListener(new ComponentAdapter() {
