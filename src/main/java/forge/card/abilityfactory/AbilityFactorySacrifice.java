@@ -437,6 +437,7 @@ public class AbilityFactorySacrifice {
         }
 
         String valid = params.get("SacValid");
+        System.out.println("Valid = " + valid);
         if (valid == null) {
             valid = "Self";
         }
@@ -450,9 +451,6 @@ public class AbilityFactorySacrifice {
 
         final boolean destroy = params.containsKey("Destroy");
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
-        if (remSacrificed) {
-            card.clearRemembered();
-        }
 
         if (valid.equals("Self")) {
             if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)) {
@@ -471,12 +469,20 @@ public class AbilityFactorySacrifice {
                     card.addRemembered(toSac);
                 }
             }
-        } else if (valid.equals("TriggeredCard")) {
+        } else if (valid.equals("TriggeredCard")) { 
             final Card equipee = (Card) sa.getTriggeringObject("Card");
             if (tgts.contains(card.getController()) && AllZoneUtil.isCardInPlay(equipee)) {
                 Singletons.getModel().getGameAction().sacrifice(equipee);
                 if (remSacrificed) {
                     card.addRemembered(equipee);
+                }
+            }
+        } else if (valid.equals("TriggeredAttacker")) {
+            final Card toSac = (Card) sa.getTriggeringObject("Attacker");
+            if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
+                Singletons.getModel().getGameAction().sacrifice(toSac);
+                if (remSacrificed) {
+                    card.addRemembered(toSac);
                 }
             }
         } else {
