@@ -33,6 +33,7 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.GameActionUtil;
 import forge.Constant.Zone;
 import forge.GameEntity;
 import forge.Player;
@@ -994,9 +995,14 @@ public class AbilityFactoryAttach {
      */
     public static void attachResolve(final AbilityFactory af, final SpellAbility sa) {
         final Map<String, String> params = af.getMapParams();
-        final Card card = sa.getSourceCard();
+        Card source = sa.getSourceCard();
+        Card card = sa.getSourceCard();
 
         ArrayList<Object> targets;
+
+        if (params.containsKey("Object")) {
+            card = AbilityFactory.getDefinedCards(source, params.get("Object"), sa).get(0);
+        }
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -1004,7 +1010,14 @@ public class AbilityFactoryAttach {
             // TODO Remove invalid targets (although more likely this will just
             // fizzle earlier)
         } else {
-            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+            targets = AbilityFactory.getDefinedObjects(source, params.get("Defined"), sa);
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Do you want to attach " + card + " to " + targets + "?");
+        if (sa.getActivatingPlayer().isHuman() && params.containsKey("Optional")
+                && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
+            return;
         }
 
         // If Cast Targets will be checked on the Stack
