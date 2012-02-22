@@ -6224,6 +6224,7 @@ res/cardsfolder/o/organ_grinder.txt svneol=native#text/plain
 res/cardsfolder/o/orgg.txt svneol=native#text/plain
 res/cardsfolder/o/origin_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/o/orim_samite_healer.txt svneol=native#text/plain
+res/cardsfolder/o/orims_chant.txt -text svneol=unset#text/plain
 res/cardsfolder/o/orims_prayer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_thunder.txt svneol=native#text/plain
 res/cardsfolder/o/orims_touch.txt -text svneol=unset#text/plain
