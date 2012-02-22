@@ -35,8 +35,11 @@ import forge.view.toolbox.FSkin;
  * The main view for Forge: a java swing application. All view class instances
  * should be accessible from here.
  */
-@SuppressWarnings("serial")
-public final class FView extends JFrame {
+public enum FView {
+    /** */
+    SINGLETON_INSTANCE;
+
+    private final JFrame frame = new JFrame();
     private final JLayeredPane lpnContent = new JLayeredPane();
     private final FOverlay overlay = new FOverlay();
 
@@ -50,9 +53,7 @@ public final class FView extends JFrame {
     //private static final FControl control;
 
     /** The splash frame is guaranteed to exist when this constructor exits. */
-    public FView() {
-        super();
-
+    private FView() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -70,19 +71,19 @@ public final class FView extends JFrame {
         Singletons.getView().instantiateCachedUIStates();
 
         // Frame styling
-        FView.this.setMinimumSize(new Dimension(800, 600));
-        FView.this.setLocationRelativeTo(null);
-        FView.this.setExtendedState(FView.this.getExtendedState() | Frame.MAXIMIZED_BOTH);
-        FView.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        FView.this.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
-        FView.this.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
+        frame.setMinimumSize(new Dimension(800, 600));
+        frame.setLocationRelativeTo(null);
+        frame.setExtendedState(frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setIconImage(FSkin.getIcon(FSkin.ForgeIcons.ICO_FAVICON).getImage());
+        frame.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
         // Content pane
         FView.this.lpnContent.setOpaque(true);
-        FView.this.setContentPane(FView.this.lpnContent);
+        frame.setContentPane(FView.this.lpnContent);
 
         // Overlay
-        overlay.setBounds(0, 0, FView.this.getWidth(), FView.this.getHeight());
+        overlay.setBounds(0, 0, frame.getWidth(), frame.getHeight());
         overlay.setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
         FView.this.lpnContent.add(overlay, JLayeredPane.MODAL_LAYER);
 
@@ -92,7 +93,7 @@ public final class FView extends JFrame {
         FView.this.splash.dispose();
         FView.this.splash = null;
 
-        FView.this.setVisible(true);
+        frame.setVisible(true);
 
         // Open previous menu on first run, or constructed.
         // Focus is reset when the frame becomes visible,
@@ -113,6 +114,11 @@ public final class FView extends JFrame {
     /** @return {@link javax.swing.JLayeredPane} */
     public JLayeredPane getLayeredContentPane() {
         return FView.this.lpnContent;
+    }
+
+    /** @return {@link javax.swing.JFrame} */
+    public JFrame getFrame() {
+        return this.frame;
     }
 
     /** @return {@link forge.view.toolbox.FOverlay} */

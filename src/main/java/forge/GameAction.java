@@ -878,7 +878,7 @@ public class GameAction {
         final boolean refreeze = AllZone.getStack().isFrozen();
         AllZone.getStack().setFrozen(true);
 
-        final JFrame frame = Singletons.getView();
+        final JFrame frame = Singletons.getView().getFrame();
         if (!frame.isDisplayable()) {
             return;
         }

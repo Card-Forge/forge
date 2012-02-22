@@ -39,60 +39,36 @@ public final class Singletons {
         // This line intentionally left blank.
     }
 
-    /**
-     * Gets the model.
-     * 
-     * @return the model
-     */
+    /** @return {@link forge.model.FModel} */
     public static FModel getModel() {
         return Singletons.model;
     }
 
-    /**
-     * Sets the model.
-     * 
-     * @param theModel
-     *            the model to set
-     */
-    public static void setModel(final FModel theModel) {
-        Singletons.model = theModel;
+    /** @param model0 &emsp; {@link forge.model.FModel} */
+    public static void setModel(final FModel model0) {
+        Singletons.model = model0;
     }
 
     /**
-     * Gets the view.
-     * 
-     * @return the view
-     */
+     * IMPORTANT - does not return view frame!  Must call
+     * getFrame() from FView for that.
+     * @return {@link forge.model.JFrame} */
     public static FView getView() {
         return Singletons.view;
     }
 
-    /**
-     * Sets the view.
-     * 
-     * @param theView
-     *            the view to set
-     */
-    public static void setView(final FView theView) {
-        Singletons.view = theView;
+    /** @param view0 &emsp; {@link forge.model.FView} */
+    public static void setView(final FView view0) {
+        Singletons.view = view0;
     }
 
-    /**
-     * Gets the control.
-     * 
-     * @return the view
-     */
+    /** @return {@link forge.control.FControl} */
     public static FControl getControl() {
         return Singletons.control;
     }
 
-    /**
-     * Sets the control.
-     * 
-     * @param theControl
-     *            the view to set
-     */
-    public static void setControl(final FControl theControl) {
-        Singletons.control = theControl;
+    /** @param control0 &emsp; {@link forge.control.FControl} */
+    public static void setControl(final FControl control0) {
+        Singletons.control = control0;
     }
 }

@@ -128,7 +128,7 @@ public class ControlHand {
                 diff = new ArrayList<Card>(Arrays.asList(c));
                 diff.removeAll(tmp);
 
-                JLayeredPane layeredPane = Singletons.getView().getLayeredPane();
+                JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
                 int fromZoneX = 0, fromZoneY = 0;
 
                 final Point zoneLocation = SwingUtilities.convertPoint(Singletons
@@ -153,7 +153,7 @@ public class ControlHand {
                     endX = toPos.x;
                     endY = toPos.y;
                     final arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
-                    if (Singletons.getView().isShowing()) {
+                    if (Singletons.getView().getFrame().isShowing()) {
                         Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel,
                                 layeredPane, 500);
                     } else {

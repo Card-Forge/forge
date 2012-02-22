@@ -47,7 +47,7 @@ public final class Main {
         ExceptionHandler.registerErrorHandling();
         try {
             Singletons.setModel(FModel.SINGLETON_INSTANCE);
-            Singletons.setView(new FView());
+            Singletons.setView(FView.SINGLETON_INSTANCE);
             Singletons.setControl(FControl.SINGLETON_INSTANCE);
 
             // Use splash frame to initialize everything, then transition to core UI.

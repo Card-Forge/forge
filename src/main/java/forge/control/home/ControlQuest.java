@@ -496,7 +496,7 @@ public class ControlQuest {
     /** */
     private void showBazaar() {
         Singletons.getControl().changeState(FControl.QUEST_BAZAAR);
-        Singletons.getView().validate();
+        Singletons.getView().getFrame().validate();
     }
 
     /** */

@@ -35,7 +35,7 @@ public class KeyboardShortcuts {
      */
     @SuppressWarnings("serial")
     public static List<Shortcut> attachKeyboardShortcuts() {
-        final JComponent c = (JComponent) Singletons.getView().getContentPane();
+        final JComponent c = (JComponent) Singletons.getView().getFrame().getContentPane();
         final InputMap im = c.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         final ActionMap am = c.getActionMap();
 

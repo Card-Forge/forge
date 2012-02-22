@@ -74,7 +74,7 @@ public enum FControl {
         this.waConcede = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Singletons.getView().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 Singletons.getControl().getControlMatch().getDockControl().concede();
             }
         };
@@ -83,7 +83,7 @@ public enum FControl {
         this.waLeaveBazaar = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Singletons.getView().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 changeState(0);
                 Singletons.getControl().getControlHome().getControlQuest().refreshStats();
                 Singletons.getView().getViewHome().showQuestMenu();
@@ -93,7 +93,7 @@ public enum FControl {
         // Default action on window close
         this.waDefault = new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                Singletons.getView().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             }
          };
     }
@@ -116,7 +116,7 @@ public enum FControl {
         //Singletons.getView().initialize();
 
         // Handles resizing in null layouts of layers in JLayeredPane.
-        Singletons.getView().addComponentListener(new ComponentAdapter() {
+        Singletons.getView().getFrame().addComponentListener(new ComponentAdapter() {
            @Override
            public void componentResized(final ComponentEvent e) {
                sizeChildren();
@@ -138,9 +138,9 @@ public enum FControl {
         this.state = i0;
 
         /// TODO should these be here?
-        Singletons.getView().removeWindowListener(waConcede);
-        Singletons.getView().removeWindowListener(waLeaveBazaar);
-        Singletons.getView().addWindowListener(waDefault);
+        Singletons.getView().getFrame().removeWindowListener(waConcede);
+        Singletons.getView().getFrame().removeWindowListener(waLeaveBazaar);
+        Singletons.getView().getFrame().addWindowListener(waDefault);
 
         // Fire up new state
         switch (i0) {
@@ -152,7 +152,7 @@ public enum FControl {
             case MATCH_SCREEN:
                 display.add(Singletons.getView().getViewMatch(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
-                Singletons.getView().addWindowListener(waConcede);
+                Singletons.getView().getFrame().addWindowListener(waConcede);
                 break;
 
             case DEFAULT_EDITOR:
@@ -162,7 +162,7 @@ public enum FControl {
             case QUEST_BAZAAR:
                 display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
-                Singletons.getView().addWindowListener(waLeaveBazaar);
+                Singletons.getView().getFrame().addWindowListener(waLeaveBazaar);
                 break;
 
             default:
