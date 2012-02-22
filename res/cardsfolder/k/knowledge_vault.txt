@@ -3,12 +3,12 @@ ManaCost:4
 Types:Artifact
 Text:no text
 A:AB$ ChangeZone | Cost$ 2 T | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SpellDescription$ Exile the top card of your library face down.
-A:AB$ Sacrifice | Cost$ 0 | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBDiscardHand | SpellDescription$ Sacrifice CARDNAME. If you do, discard your hand, then put all cards exiled with CARDNAME into their owner's hand.
-SVar:DBDiscardHand:DB$ Discard | Mode$ Hand | SubAbility$ DBChangeZoneAll
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ EQ1
+A:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBDiscardHand | SpellDescription$ Sacrifice CARDNAME. If you do, discard your hand, then put all cards exiled with CARDNAME into their owner's hand.
+SVar:DBDiscardHand:DB$ Discard | Mode$ Hand | SubAbility$ DBChangeZoneAll | ConditionCheckSVar$ VaultX | ConditionSVarCompare$ GT0
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile | Destination$ Hand | ConditionCheckSVar$ VaultX | ConditionSVarCompare$ GT0
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Hidden$ True | Execute$ TrigGraveyard | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards exiled with CARDNAME into their owner's graveyard.
-SVar:TrigGraveyard:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Remembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigGraveyard:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Remembered | Origin$ Exile | Destination$ Graveyard
+SVar:VaultX:Remembered$Valid Card.Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knowledge_vault.jpg
