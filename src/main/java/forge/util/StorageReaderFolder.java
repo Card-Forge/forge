@@ -33,7 +33,9 @@ import org.apache.commons.lang3.StringUtils;
 import forge.error.ErrorViewer;
 
 /**
- * TODO: Write javadoc for this type.
+ * This class treats every file in the given folder as a source for a named object. 
+ * The descendant should implement read method to deserialize a single item. 
+ * So that readAll will return a map of Name => Object as read from disk
  * 
  */
 public abstract class StorageReaderFolder<T extends IHasName> implements IItemReader<T> {
@@ -66,18 +68,6 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
             throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
         }
     }
-
-    // only accepts numbers, letters or dashes up to 20 characters in length
-    /**
-     * 
-     * Clean deck name.
-     * 
-     * @param in
-     *            a String
-     * @return a String
-     */
-
-
 
     @Override
     public Map<String, T> readAll() {
@@ -112,16 +102,16 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
 
 
     /**
-     * TODO: Write javadoc for this method.
+     * Read the object from file
      * @param file
-     * @return
+     * @return the object deserialized by inherited class
      */
     protected abstract T read(File file);
 
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     * @return FilenameFilter to pick only relevant objects for deserialization
      */
     protected abstract FilenameFilter getFileFilter();
 

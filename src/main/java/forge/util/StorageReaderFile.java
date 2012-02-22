@@ -24,12 +24,10 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
-import net.slightlymagic.braids.util.lambda.Lambda1;
-
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * TODO: Write javadoc for this type.
+ * This class treats every line of a given file as a source for a named object. 
  * 
  */
 public abstract class StorageReaderFile<T extends IHasName> implements IItemReader<T> {
@@ -56,17 +54,17 @@ public abstract class StorageReaderFile<T extends IHasName> implements IItemRead
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
         final ArrayList<String> fData = FileUtil.readFile(file);
-        Lambda1<Boolean, String> filter = getLineFilter();
+
 
         for (final String s : fData) {
-            if (!filter.apply(s)) {
+            if (!lineContainsObject(s)) {
                 continue;
             }
 
             T item = read(s);
             if (null == item) {
                 String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
-                JOptionPane.showMessageDialog(null, msg); // This becomes bugged if uncommented, but i need these messages to debug other peoples decks // Max Mtg
+                JOptionPane.showMessageDialog(null, msg);
                 continue;
             }
 
@@ -85,14 +83,8 @@ public abstract class StorageReaderFile<T extends IHasName> implements IItemRead
     protected abstract T read(String line);
 
 
-    protected Lambda1<Boolean, String> getLineFilter() {
-        return new Lambda1<Boolean, String>() {
-
-            @Override
-            public Boolean apply(String arg1) {
-                return !StringUtils.isBlank(arg1) && !arg1.trim().startsWith("#");
-            }
-        };
+    protected boolean lineContainsObject(String line) {
+        return !StringUtils.isBlank(line) && !line.trim().startsWith("#");
     }
 
 }

@@ -10,8 +10,8 @@ import forge.util.IFolderMap;
 
 
 /** 
- * TODO: Write javadoc for this type.
- *
+ * Holds editable maps of decks saved to disk. 
+ * Adding or removing items to(from) such map turns into immediate file update
  */
 public class CardCollections {
     private final IFolderMap<Deck> constructed;

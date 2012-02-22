@@ -34,10 +34,9 @@ import forge.util.IItemSerializer;
  * 
  */
 public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implements IItemSerializer<DeckGroup> {
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param deckDir0
-     */
+    private final String HUMAN_DECK_FILE = "human.dck";
+
+    
     public DeckGroupSerializer(File deckDir0) {
         super(deckDir0);
     }
@@ -55,7 +54,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
     public void save(DeckGroup unit) {
         final File f = makeFileFor(unit);
         f.mkdir();
-        FileUtil.writeFile(new File(f, "human.dck"), unit.getHumanDeck().save());
+        FileUtil.writeFile(new File(f, HUMAN_DECK_FILE), unit.getHumanDeck().save());
         List<Deck> aiDecks = unit.getAiDecks();
         for (int i = 1; i <= aiDecks.size(); i++) {
             FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), aiDecks.get(i - 1).save());
@@ -64,7 +63,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
 
     protected final DeckGroup read(File file) {
 
-        Deck human = Deck.fromFile(new File(file, "human.dck"));
+        Deck human = Deck.fromFile(new File(file, HUMAN_DECK_FILE));
         if (null == human) {
             return null;
         }
@@ -109,7 +108,9 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
 
             @Override
             public boolean accept(File dir, String name) {
-                return dir.isDirectory() && !dir.isHidden() && StringUtils.isNotEmpty(name) && !name.startsWith(".");
+                boolean isVisibleFolder = dir.isDirectory() && !dir.isHidden();
+                boolean hasGoodName = StringUtils.isNotEmpty(name) && !name.startsWith(".");
+                return isVisibleFolder && hasGoodName && new File(dir, HUMAN_DECK_FILE).exists();
             }
         };
     }

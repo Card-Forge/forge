@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import forge.AllZone;
 import forge.CardList;
 import forge.Constant;
 import forge.PlayerType;
@@ -230,7 +229,7 @@ public class ControlConstructed {
         }
         // Custom deck
         else {
-            deck = AllZone.getDecks().getConstructed().get(selection[0]);
+            deck = Singletons.getModel().getDecks().getConstructed().get(selection[0]);
         }
 
         return deck;
@@ -323,7 +322,7 @@ public class ControlConstructed {
         final List<String> customNames = new ArrayList<String>();
         customNames.clear();
 
-        final IFolderMap<Deck> allDecks = AllZone.getDecks().getConstructed();
+        final IFolderMap<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
         for (final Deck d : allDecks) { customNames.add(d.getName()); }
 
         return oa2sa(customNames.toArray());

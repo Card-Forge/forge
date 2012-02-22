@@ -29,7 +29,6 @@ import forge.card.cardfactory.PreloadingCardFactory;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputControl;
-import forge.deck.CardCollections;
 import forge.game.GameState;
 import forge.game.limited.CardRatings;
 import forge.properties.ForgeProps;
@@ -86,16 +85,6 @@ public final class AllZone {
 
     /** Constant <code>CARD_RATINGS</code>. */
     private static CardRatings cardRatings = new CardRatings();
-
-
-    private static CardCollections collections;
-
-    public static final CardCollections getDecks() {
-        if (null == collections) {
-            collections = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
-        }
-        return collections;
-    }
 
     /**
      * <p>

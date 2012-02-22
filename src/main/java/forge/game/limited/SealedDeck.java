@@ -31,6 +31,7 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.Constant;
+import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
@@ -138,7 +139,7 @@ public class SealedDeck {
             for (final String element : dList) {
                 if (element.endsWith(".sealed")) {
                     final ArrayList<String> dfData = FileUtil.readFile("res/sealed/" + element);
-                    final CustomLimited cs = CustomLimited.parse(dfData, AllZone.getDecks().getCubes());
+                    final CustomLimited cs = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
                     customs.add(cs);
                 }
             }

@@ -21,6 +21,7 @@ import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
+import forge.deck.CardCollections;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorConstructed;
@@ -367,13 +368,13 @@ public class DeckLister extends JPanel {
             cEditor.setVisible(true);
             break;
         case Sealed:
-            final DeckEditorLimited sEditor = new DeckEditorLimited(AllZone.getDecks().getSealed());
+            final DeckEditorLimited sEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
             sEditor.show(cmdEditorExit);
             sEditor.getController().load(d0.getName());
             sEditor.setVisible(true);
             break;
         case Draft:
-            final DeckEditorLimited dEditor = new DeckEditorLimited(AllZone.getDecks().getDraft());
+            final DeckEditorLimited dEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getDraft());
             dEditor.show(cmdEditorExit);
             dEditor.getController().load(d0.getName());
             dEditor.setVisible(true);
@@ -391,12 +392,14 @@ public class DeckLister extends JPanel {
         if (n == JOptionPane.NO_OPTION) {
             return;
         }
+        
+        final CardCollections deckManager = Singletons.getModel().getDecks();
 
         if (gametype.equals(GameType.Draft)) {
-            AllZone.getDecks().getDraft().delete(d0.getName());
+            deckManager.getDraft().delete(d0.getName());
         }
         else if (gametype.equals(GameType.Sealed)) {
-            AllZone.getDecks().getSealed().delete(d0.getName());
+            deckManager.getSealed().delete(d0.getName());
         }
         else if (gametype.equals(GameType.Quest)) {
             AllZone.getQuestData().getMyDecks().delete(d0.getName());
@@ -404,7 +407,7 @@ public class DeckLister extends JPanel {
             Singletons.getView().getViewHome().getBtnQuest().grabFocus();
         }
         else {
-            AllZone.getDecks().getConstructed().delete(d0.getName());
+            deckManager.getConstructed().delete(d0.getName());
         }
 
         this.remove(r0);

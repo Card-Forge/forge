@@ -21,7 +21,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -150,7 +149,7 @@ public class ConstructedDeckSelectPanel extends JPanel {
 
                 if (e.getClickCount() == 2 && ((JList) e.getSource()).getName().equals("lstCustom")) {
                     final String deckName = ((JList) e.getSource()).getSelectedValue().toString();
-                    showDecklist(AllZone.getDecks().getConstructed().get(deckName));
+                    showDecklist(Singletons.getModel().getDecks().getConstructed().get(deckName));
                 }
                 else if (e.getClickCount() == 2 && ((JList) e.getSource()).getName().equals("lstQuest")) {
                     final String deckName = ((JList) e.getSource()).getSelectedValue().toString();

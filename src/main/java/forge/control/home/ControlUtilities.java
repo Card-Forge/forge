@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import forge.AllZone;
 import forge.Command;
 import forge.GuiDownloadPicturesLQ;
 import forge.GuiDownloadPrices;
@@ -158,12 +157,10 @@ public class ControlUtilities {
         DeckEditorBase<?, T> editor = null;
         if (gt0 == GameType.Constructed) {
             editor = (DeckEditorBase<?, T>) new DeckEditorConstructed();
-        }
-        if (gt0 == GameType.Draft) {
-            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getDraft());
-        }
-        if (gt0 == GameType.Sealed) {
-            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(AllZone.getDecks().getSealed());
+        } else if (gt0 == GameType.Draft) {
+            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(Singletons.getModel().getDecks().getDraft());
+        } else if (gt0 == GameType.Sealed) {
+            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
         }
 
 

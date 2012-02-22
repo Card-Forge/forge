@@ -38,8 +38,8 @@ import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.braids.util.lambda.Lambda0;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.gui.deckeditor.elements.CardPanelHeavy;
@@ -154,7 +154,7 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         }
 
         Lambda0<Deck> newCreator = new Lambda0<Deck>() { @Override public Deck apply() { return new Deck(); } };
-        controller = new DeckController<Deck>(AllZone.getDecks().getConstructed(), this, newCreator);
+        controller = new DeckController<Deck>(Singletons.getModel().getDecks().getConstructed(), this, newCreator);
     }
 
     private void jbInit() {

@@ -37,7 +37,6 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
 import net.slightlymagic.maxmtg.Predicate;
-import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -326,13 +325,13 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
 
         final Deck human = this.getPlayersDeck();
 
-        final DeckGroup all = new DeckGroup("Draft " + s);
-        all.setHumanDeck(human);
-        all.addAiDecks(computer);
+        final DeckGroup finishedDraft = new DeckGroup("Draft " + s);
+        finishedDraft.setHumanDeck(human);
+        finishedDraft.addAiDecks(computer);
 
         // DeckManager deckManager = new
         // DeckManager(ForgeProps.getFile(NEW_DECKS));
-        AllZone.getDecks().getDraft().add(all); // write file right here
+        Singletons.getModel().getDecks().getDraft().add(finishedDraft); // write file right here
 
         // close and open next screen
         this.dispose();

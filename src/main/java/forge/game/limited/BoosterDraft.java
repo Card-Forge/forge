@@ -35,6 +35,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
+import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
@@ -208,7 +209,7 @@ public final class BoosterDraft implements IBoosterDraft {
         for (final String element : dList) {
             if (element.endsWith(fileExtension)) {
                 final List<String> dfData = FileUtil.readFile(lookupFolder + element);
-                customs.add(CustomLimited.parse(dfData, AllZone.getDecks().getCubes()));
+                customs.add(CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes()));
             }
         }
         return customs;

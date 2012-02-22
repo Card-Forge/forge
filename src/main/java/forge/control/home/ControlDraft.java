@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import forge.AllZone;
 import forge.Constant;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameNew;
@@ -122,7 +122,7 @@ public class ControlDraft {
             }
         });
 
-        DeckGroup opponentDecks = AllZone.getDecks().getDraft().get(human.getName());
+        DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -181,7 +181,7 @@ public class ControlDraft {
     public void updateHumanDecks() {
 
         List<Deck> human = new ArrayList<Deck>();
-        for (DeckGroup d : AllZone.getDecks().getDraft()) {
+        for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
             human.add(d.getHumanDeck());
         }
         view.getLstHumanDecks().setDecks(human);

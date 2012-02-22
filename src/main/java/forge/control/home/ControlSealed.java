@@ -15,7 +15,6 @@ import net.slightlymagic.braids.util.UtilFunctions;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -116,7 +115,7 @@ public class ControlSealed {
          });
 
         Constant.Runtime.HUMAN_DECK[0] = human;
-        Constant.Runtime.COMPUTER_DECK[0] = AllZone.getDecks().getSealed().get(human.getName()).getAiDecks().get(0);
+        Constant.Runtime.COMPUTER_DECK[0] = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().get(0);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -136,7 +135,7 @@ public class ControlSealed {
 
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
-        for (DeckGroup d : AllZone.getDecks().getSealed()) {
+        for (DeckGroup d : Singletons.getModel().getDecks().getSealed()) {
             aiDecks.put(d.getName(), d.getAiDecks().get(0));
             humanDecks.add(d.getHumanDeck());
         }
@@ -199,7 +198,7 @@ public class ControlSealed {
         DeckGroup sealed = new DeckGroup(sDeckName);
         sealed.setHumanDeck(deck);
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
-        AllZone.getDecks().getSealed().add(sealed);
+        Singletons.getModel().getDecks().getSealed().add(sealed);
 
         Singletons.getControl().getControlHome().getControlUtilities().showDeckEditor(GameType.Sealed, sealed);
 
