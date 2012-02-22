@@ -35,7 +35,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestEvent;
-import forge.quest.data.QuestEventManager;
 
 /**
  * Please use public getters and setters instead of direct field access.
