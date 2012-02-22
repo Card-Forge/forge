@@ -411,6 +411,38 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Fixed Mitotic Manipulation.
 - Fixed PlayerType when generating 5 color decks.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed bazaar refresh bug.
+- Fixed dialog popup in splash mode.
+- Added the optional parameter "RevealNumber" to AF Discard.
+- Disable FModel tests
+- Fixed descriptions of some upkeep abilities.
+- CheckStyle.
+- Fixed startup NPE.
+- Updated focus handling in home screen.
+- should no longer treat .svn as deckgroup
+- Renamed all instances and comments involving "MultiMicker" to "MultiKicker".
+- renamed StorageReaders
+- Tweaked The Wretched in lieu of Sol's regeneration explanation.
+- moved deckmanager from AllZone to FModel, had to set lazy initialization due to CardDb late initialization.
+- set even better filter on draft and sealed folders
+- How about I add the right card this time. The working Knowledge Vault.
+- Small updates to FPanel and FLabel.
+- Added foreground image alignment functionality to FPanel.
+- removed questEventManager from AllZone (it was already defined in FModel)
+- removed redundant re-initialiations of QuestEventManager, since it's initialized once in forge.control.FControl.initialize()
+- First stages home screen architecture update (will not affect build at all, should probably be a branch).
+- Update to FScrollPane constructors.
+- Minor bug fix.
+- Added support for mandatory targeting in AF Play.
+- SubmenuColors and udpates to submenu interface.
+- Fixed Opaline Sliver.
+- Enforced singleton pattern in FView.
+- Small update to FLabel.
+- Added a copy of Sol Ring to the Dino 4 deck.
+- changing Exception text to match changed function names (FControl)
+- change some commented code so that it isn't broken if uncommented (getMatchControl vs getControlMatch)
+- clean up Java warning (AllZone.java)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -582,6 +614,15 @@ Murmurs from Beyond
 Govern the Guildless
 Paladin of Prahv
 Thran Weaponry
+Infernal Tutor
+Blackmail
+Mire's Toll
+Ib Halfheart, Goblin Tactician
+Glyph of Life
+The Wretched
+Opaline Sliver
+Knowledge Vault
+Omen Machine
 
 
 end
