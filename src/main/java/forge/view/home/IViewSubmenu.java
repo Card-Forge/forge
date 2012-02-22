@@ -19,4 +19,7 @@ public interface IViewSubmenu {
      * 
      * @return {@link javax.swing.JPanel} */
     MenuGroup getGroup();
+
+    /** Removes all children and (re)populates panel components, independent of constructor.*/
+    void populate();
 }

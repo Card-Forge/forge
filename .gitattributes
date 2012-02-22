@@ -11423,6 +11423,7 @@ src/main/java/forge/view/home/ViewQuest.java -text
 src/main/java/forge/view/home/ViewSealed.java -text
 src/main/java/forge/view/home/ViewSettings.java -text
 src/main/java/forge/view/home/ViewUtilities.java -text
+src/main/java/forge/view/home/constructed/SubmenuColors.java -text
 src/main/java/forge/view/home/package-info.java svneol=native#text/plain
 src/main/java/forge/view/match/QuestWinLoseCardViewer.java -text
 src/main/java/forge/view/match/QuestWinLoseHandler.java -text
