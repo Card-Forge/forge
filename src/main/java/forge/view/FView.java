@@ -69,38 +69,6 @@ public final class FView extends JFrame {
         // After events and shortcuts are assembled, instantiate all different state screens
         Singletons.getView().instantiateCachedUIStates();
 
-        // Open previous menu on first run, or constructed.
-        // Focus is reset when the frame becomes visible,
-        // so the call to show the menu must happen here.
-        final ForgePreferences.HomeMenus lastMenu =
-                ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
-
-        switch(lastMenu) {
-            case draft:
-                Singletons.getView().getViewHome().getBtnDraft().grabFocus();
-                Singletons.getView().getViewHome().showDraftMenu();
-                break;
-            case sealed:
-                Singletons.getView().getViewHome().getBtnSealed().grabFocus();
-                Singletons.getView().getViewHome().showSealedMenu();
-                break;
-            case quest:
-                Singletons.getView().getViewHome().getBtnQuest().grabFocus();
-                Singletons.getView().getViewHome().showQuestMenu();
-                break;
-            case settings:
-                Singletons.getView().getViewHome().getBtnSettings().grabFocus();
-                Singletons.getView().getViewHome().showSettingsMenu();
-                break;
-            case utilities:
-                Singletons.getView().getViewHome().getBtnUtilities().grabFocus();
-                Singletons.getView().getViewHome().showUtilitiesMenu();
-                break;
-            default:
-                Singletons.getView().getViewHome().getBtnConstructed().grabFocus();
-                Singletons.getView().getViewHome().showConstructedMenu();
-        }
-
         // Frame styling
         FView.this.setMinimumSize(new Dimension(800, 600));
         FView.this.setLocationRelativeTo(null);
@@ -125,6 +93,21 @@ public final class FView extends JFrame {
         FView.this.splash = null;
 
         FView.this.setVisible(true);
+
+        // Open previous menu on first run, or constructed.
+        // Focus is reset when the frame becomes visible,
+        // so the call to show the menu must happen here.
+        final ForgePreferences.HomeMenus lastMenu =
+                ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
+
+        switch(lastMenu) {
+            case draft: Singletons.getView().getViewHome().showDraftMenu(); break;
+            case sealed: Singletons.getView().getViewHome().showSealedMenu(); break;
+            case quest: Singletons.getView().getViewHome().showQuestMenu(); break;
+            case settings: Singletons.getView().getViewHome().showSettingsMenu(); break;
+            case utilities: Singletons.getView().getViewHome().showUtilitiesMenu(); break;
+            default: Singletons.getView().getViewHome().showConstructedMenu();
+        }
     }
 
     /** @return {@link javax.swing.JLayeredPane} */

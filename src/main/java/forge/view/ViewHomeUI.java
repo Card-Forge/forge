@@ -179,14 +179,19 @@ public class ViewHomeUI extends FPanel {
     /** Opens menu for constructed mode. */
     public void showConstructedMenu() {
         clearToggles();
-        btnConstructed.setToggled(true);
-        btnConstructed.grabFocus();
         pnlContent.removeAll();
         pnlContent.add(constructed, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
 
         Singletons.getControl().getControlHome().getControlConstructed().updateDeckSelectionCheckboxes();
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() {
+                btnConstructed.setToggled(true);
+                btnConstructed.grabFocus();
+            }
+        });
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.constructed.toString());
@@ -196,13 +201,17 @@ public class ViewHomeUI extends FPanel {
     /** Opens menu for draft mode. */
     public void showDraftMenu() {
         clearToggles();
-        btnDraft.setToggled(true);
-        btnDraft.grabFocus();
-
         pnlContent.removeAll();
         pnlContent.add(draft, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() {
+                btnDraft.setToggled(true);
+                btnDraft.grabFocus();
+            }
+        });
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.draft.toString());
@@ -212,13 +221,17 @@ public class ViewHomeUI extends FPanel {
     /** Opens menu for sealed mode. */
     public void showSealedMenu() {
         clearToggles();
-        btnSealed.setToggled(true);
-        btnSealed.grabFocus();
-
         pnlContent.removeAll();
         pnlContent.add(sealed, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() {
+                btnSealed.setToggled(true);
+                btnSealed.grabFocus();
+            }
+        });
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.sealed.toString());
@@ -248,7 +261,6 @@ public class ViewHomeUI extends FPanel {
     /** Opens menu for settings. */
     public void showSettingsMenu() {
         clearToggles();
-
         pnlContent.removeAll();
         pnlContent.add(settings, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
         pnlContent.revalidate();
@@ -269,13 +281,17 @@ public class ViewHomeUI extends FPanel {
     /** Opens menu for utilities. */
     public void showUtilitiesMenu() {
         clearToggles();
-        btnUtilities.setToggled(true);
-        btnUtilities.grabFocus();
-
         pnlContent.removeAll();
         pnlContent.add(utilities, "w 100%!, h 100%!");
         pnlContent.revalidate();
         pnlContent.repaint();
+
+        SwingUtilities.invokeLater(new Runnable() { @Override
+            public void run() {
+                btnUtilities.setToggled(true);
+                btnUtilities.grabFocus();
+            }
+        });
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
                 ForgePreferences.HomeMenus.utilities.toString());
@@ -311,7 +327,7 @@ public class ViewHomeUI extends FPanel {
     public ViewQuest getViewQuest() {
         return this.quest;
     }
-    
+
     /** @return {@link forge.view.home.ViewSettings} */
     public ViewSettings getViewSettings() {
         return this.settings;
