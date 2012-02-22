@@ -174,7 +174,7 @@ public enum FControl {
      */
     public ControlMatchUI getControlMatch() {
         if (getState() != FControl.MATCH_SCREEN) {
-            throw new IllegalArgumentException("FControl$getMatchControl\n"
+            throw new IllegalArgumentException("FControl$getControlMatch\n"
                     + "may only be called while the match UI is showing.");
         }
         return Singletons.getView().getViewMatch().getControl();
@@ -184,7 +184,7 @@ public enum FControl {
      * @return {@link forge.control.home.ControlHomeUI} */
     public ControlHomeUI getControlHome() {
         if (getState() != FControl.HOME_SCREEN) {
-            throw new IllegalArgumentException("FControl$getHomeControl\n"
+            throw new IllegalArgumentException("FControl$getControlHome\n"
                     + "may only be called while the home UI is showing.");
         }
 
