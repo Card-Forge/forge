@@ -62,9 +62,6 @@ public final class AllZone {
     /** Global <code>QuestChallenge</code>. */
     private static QuestEvent questEvent = null;
 
-    /** Global <code>questEventManager</code>. */
-    private static QuestEventManager questEventManager = null;
-
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
 
@@ -174,30 +171,6 @@ public final class AllZone {
      */
     public static void setQuestEvent(final QuestEvent q) {
         AllZone.questEvent = q;
-    }
-
-    /**
-     * <p>
-     * getQuestEventManager.
-     * </p>
-     * 
-     * @return {@link forge.quest.data.QuestEventManager} object.
-     * @since 1.0.15
-     */
-    public static QuestEventManager getQuestEventManager() {
-        return AllZone.questEventManager;
-    }
-
-    /**
-     * <p>
-     * setQuestEventManager.
-     * </p>
-     * 
-     * @param qem
-     *            a {@link forge.quest.data.QuestEventManager} object
-     */
-    public static void setQuestEventManager(final QuestEventManager qem) {
-        AllZone.questEventManager = qem;
     }
 
     /**

@@ -357,7 +357,7 @@ public class ViewQuest extends JScrollPane {
         if (AllZone.getQuestData() == null) { return; }
 
         pnlChallenges.removeAll();
-        final List<QuestChallenge> challenges = control.getQEM().generateChallenges();
+        final List<QuestChallenge> challenges = control.getQEM().generateChallenges(AllZone.getQuestData());
 
         for (QuestChallenge c : challenges) {
             SelectablePanel temp = new SelectablePanel(c);

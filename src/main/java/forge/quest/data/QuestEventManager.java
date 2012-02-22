@@ -48,17 +48,17 @@ import forge.util.SectionUtil;
 public class QuestEventManager {
 
     /** The easy a iduels. */
-    private List<QuestDuel> easyAIduels = null;
+    private final List<QuestDuel> easyAIduels = new ArrayList<QuestDuel>();
 
     /** The medium a iduels. */
-    private List<QuestDuel> mediumAIduels = null;
+    private final List<QuestDuel> mediumAIduels = new ArrayList<QuestDuel>();
 
     /** The hard a iduels. */
-    private List<QuestDuel> hardAIduels = null;
+    private final List<QuestDuel> hardAIduels = new ArrayList<QuestDuel>();
 
     /** The very hard a iduels. */
-    private List<QuestDuel> veryHardAIduels = null;
-
+    private final List<QuestDuel> veryHardAIduels = new ArrayList<QuestDuel>();
+    
     /** The all duels. */
     private List<QuestDuel> allDuels = null;
 
@@ -236,15 +236,6 @@ public class QuestEventManager {
             s = s.trim();
             eqpos = s.indexOf('=');
 
-            if (s.equals("[main]")) {
-                break;
-            }
-            if (s.equals("[metadata]")) {
-                continue;
-            }
-            if (s.equals("")) {
-                continue;
-            }
             if (eqpos == -1) {
                 continue;
             }
@@ -297,10 +288,11 @@ public class QuestEventManager {
      * Assemble duel deck difficulty lists
      */
     private void assembleDuelDifficultyLists() {
-        this.easyAIduels = new ArrayList<QuestDuel>();
-        this.mediumAIduels = new ArrayList<QuestDuel>();
-        this.hardAIduels = new ArrayList<QuestDuel>();
-        this.veryHardAIduels = new ArrayList<QuestDuel>();
+
+        easyAIduels.clear();
+        mediumAIduels.clear();
+        hardAIduels.clear();
+        veryHardAIduels.clear();
         String s;
 
         for (final QuestDuel qd : this.allDuels) {
@@ -414,11 +406,7 @@ public class QuestEventManager {
      * 
      * @return a {@link java.util.List} object.
      */
-    public final List<QuestChallenge> generateChallenges() {
-        if (AllZone.getQuestData() == null) { return null; }
-
-        final forge.quest.data.QuestData questData = AllZone.getQuestData();
-
+    public final List<QuestChallenge> generateChallenges(QuestData questData) {
         final List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
 
         int maxChallenges = questData.getWin() / 10;

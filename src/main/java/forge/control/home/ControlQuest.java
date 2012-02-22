@@ -73,7 +73,6 @@ public class ControlQuest {
         this.view = v0;
         this.qem = Singletons.getModel().getQuestEventManager();
         this.qPrefs = Singletons.getModel().getQuestPreferences();
-        AllZone.setQuestEventManager(this.qem);
 
         //========= Listener inits
 
@@ -329,8 +328,6 @@ public class ControlQuest {
     private void changeQuest() {
         AllZone.setQuestData(view.getLstQuests().getSelectedQuest());
         this.qData = AllZone.getQuestData();
-        this.qem.assembleAllEvents();
-        AllZone.setQuestEventManager(this.qem);
 
         // Save in preferences.
         qPrefs.setPreference(QPref.CURRENT_QUEST, qData.getName() + ".dat");
@@ -391,10 +388,6 @@ public class ControlQuest {
         }
 
         this.qData = AllZone.getQuestData();
-
-        if (qem.getAllDuels() == null) {
-            qem.assembleAllEvents();
-        }
     }
 
     /** Resets decks, then retrieves and sets current deck. */
