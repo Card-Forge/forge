@@ -161,7 +161,7 @@ public class FLabel extends JLabel {
 
         this.setFontScaleBy(b0.bldFontScaleBy);
         this.setFontStyle(b0.bldFontStyle);
-        this.setFontSize(14);
+        this.setFontSize(b0.bldFontSize);
         this.setIconAlpha(b0.bldIconAlpha);
         this.setCommand(b0.bldCmd);
         this.setFontAlign(b0.bldFontAlign);
