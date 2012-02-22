@@ -41,7 +41,7 @@ import forge.Command;
 public class FLabel extends JLabel {
     /** 
      * Uses the Builder pattern to facilitate/encourage inline styling.
-     * Credit to Effective Java 2 (Joshua Bloch), a fantastic book.
+     * Credit to Effective Java 2 (Joshua Bloch).
      * Methods in builder can be chained. To declare:
      * <code>new FLabel.Builder().method1(foo).method2(bar).method3(baz)...</code>
      * <br>and then call build() to make the label (don't forget that part).
@@ -52,6 +52,7 @@ public class FLabel extends JLabel {
         private double  bldIconScaleFactor  = 0.8;
         private int     bldFontScaleBy      = SwingConstants.VERTICAL;
         private int     bldFontStyle        = Font.PLAIN;
+        private int     bldFontSize         = 14;
         private float   bldIconAlpha        = 1.0f;
 
         private boolean bldSelectable       = false;
@@ -102,6 +103,10 @@ public class FLabel extends JLabel {
         /**@param c0 &emsp; {@link forge.Command} to execute if clicked
          * @return {@link forge.view.toolbox.Builder} */
         public Builder cmdClick(Command c0) { this.bldCmd = c0; return this; }
+
+        /**@param i0 &emsp; int
+         * @return {@link forge.view.toolbox.Builder} */
+        public Builder fontSize(int i0) { this.bldFontSize = i0; return this; }
 
         /**@param i0 &emsp; Font.PLAIN, Font.BOLD, or Font.ITALIC
          * @return {@link forge.view.toolbox.Builder} */
@@ -156,6 +161,7 @@ public class FLabel extends JLabel {
 
         this.setFontScaleBy(b0.bldFontScaleBy);
         this.setFontStyle(b0.bldFontStyle);
+        this.setFontSize(14);
         this.setIconAlpha(b0.bldIconAlpha);
         this.setCommand(b0.bldCmd);
         this.setFontAlign(b0.bldFontAlign);
@@ -268,6 +274,14 @@ public class FLabel extends JLabel {
         }
 
         this.fontScaleBy = i0;
+    }
+
+    private void setFontSize(int i0) {
+        switch(this.fontStyle) {
+            case Font.BOLD: this.setFont(FSkin.getBoldFont(i0)); break;
+            case Font.ITALIC: this.setFont(FSkin.getItalicFont(i0)); break;
+            default: this.setFont(FSkin.getFont(i0));
+        }
     }
 
     /** @param i0 &emsp; Font.PLAIN, .BOLD, or .ITALIC */

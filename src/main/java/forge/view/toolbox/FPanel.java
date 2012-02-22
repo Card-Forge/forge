@@ -141,7 +141,7 @@ public class FPanel extends JPanel {
 
     /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
     public void setForegroundImage(final ImageIcon ii0) {
-        this.foregroundImage = ii0.getImage();
+        setForegroundImage(ii0.getImage());
     }
 
     /** @param bool0 &emsp; boolean, stretch the foreground to fit */
