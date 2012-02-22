@@ -364,9 +364,9 @@ public final class AbilityFactoryPlay {
                     tgtCards = tgtCards.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {
-                            ArrayList<SpellAbility> SpellAbilities = c.getBasicSpells();
+                            ArrayList<SpellAbility> spellAbilities = c.getBasicSpells();
                             ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-                            for (SpellAbility s : SpellAbilities) {
+                            for (SpellAbility s : spellAbilities) {
                                 Spell spell = (Spell) s;
                                 s.setActivatingPlayer(controller);
                                 SpellAbilityRestriction res = s.getRestrictions();
@@ -397,9 +397,9 @@ public final class AbilityFactoryPlay {
             }
 
             // get basic spells (no flashback, etc.)
-            ArrayList<SpellAbility> SpellAbilities = tgtCard.getBasicSpells();
+            ArrayList<SpellAbility> spellAbilities = tgtCard.getBasicSpells();
             ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-            for (SpellAbility s : SpellAbilities) {
+            for (SpellAbility s : spellAbilities) {
                 s.setActivatingPlayer(controller);
                 SpellAbilityRestriction res = s.getRestrictions();
                 // timing restrictions still apply
@@ -418,6 +418,10 @@ public final class AbilityFactoryPlay {
                 tgtSA = (SpellAbility) GuiUtils.getChoice("Select a spell to cast", sas.toArray());
             } else {
                 tgtSA = sas.get(0);
+            }
+
+            if (tgtSA.getTarget() != null && !params.containsKey("Optional")) {
+                tgtSA.getTarget().setMandatory(true);
             }
 
             if (params.containsKey("WithoutManaCost")) {

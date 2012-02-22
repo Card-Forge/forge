@@ -1121,7 +1121,7 @@ public abstract class Player extends GameEntity {
      * @return true if a player can draw a card, false otherwise
      */
     public final boolean canDraw() {
-        if (AllZoneUtil.isCardInPlay("Omen Machine") || AllZoneUtil.isCardInPlay("Maralen of the Mornsong")) 
+        if (AllZoneUtil.isCardInPlay("Omen Machine") || AllZoneUtil.isCardInPlay("Maralen of the Mornsong"))
         {
             return false;
         }
