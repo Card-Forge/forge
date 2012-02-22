@@ -1,0 +1,11 @@
+Name:Opaline Sliver
+ManaCost:1 W U
+Types:Creature Sliver
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Sliver | AddTrigger$ TrigTargetSpell | AddSVar$ TrigDraw | Description$ All Slivers have "Whenever this permanent becomes the target of a spell an opponent controls, you may draw a card."
+SVar:TrigTargetSpell:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Instant.YouDontCtrl,Sorcery.YouDontCtrl | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell an opponent controls, you may draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/opaline_sliver.jpg
+End

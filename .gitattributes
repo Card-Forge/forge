@@ -6169,6 +6169,7 @@ res/cardsfolder/o/opal_guardian.txt svneol=native#text/plain
 res/cardsfolder/o/opal_titan.txt -text svneol=unset#text/plain
 res/cardsfolder/o/opalescence.txt svneol=native#text/plain
 res/cardsfolder/o/opaline_bracers.txt svneol=native#text/plain
+res/cardsfolder/o/opaline_sliver.txt -text svneol=unset#text/plain
 res/cardsfolder/o/open_the_vaults.txt svneol=native#text/plain
 res/cardsfolder/o/ophidian.txt svneol=native#text/plain
 res/cardsfolder/o/ophidian_eye.txt svneol=native#text/plain
