@@ -1531,11 +1531,11 @@ public class GameAction {
         }
     }
 
-    /** The Cost cutting_ get multi micker mana cost paid. */
-    private int costCuttingGetMultiMickerManaCostPaid = 0;
+    /** The Cost cutting_ get multi kicker mana cost paid. */
+    private int costCuttingGetMultiKickerManaCostPaid = 0;
 
-    /** The Cost cutting_ get multi micker mana cost paid_ colored. */
-    private String costCuttingGetMultiMickerManaCostPaidColored = "";
+    /** The Cost cutting_ get multi kicker mana cost paid_ colored. */
+    private String costCuttingGetMultiKickerManaCostPaidColored = "";
 
     /**
      * <p>
@@ -1778,7 +1778,7 @@ public class GameAction {
         int xBonus = 0;
         final int max = 25;
         if (sa.isMultiKicker()) {
-            this.setCostCuttingGetMultiMickerManaCostPaidColored("");
+            this.setCostCuttingGetMultiKickerManaCostPaidColored("");
         }
 
         if (mana.toString().length() == 0) {
@@ -2135,10 +2135,10 @@ public class GameAction {
                                     // Not Included as X Costs are not in
                                     // Colored Mana
                                     if (sa.isMultiKicker()) {
-                                        this.setCostCuttingGetMultiMickerManaCostPaidColored(this
-                                                .getCostCuttingGetMultiMickerManaCostPaidColored() + k[3]);
+                                        this.setCostCuttingGetMultiKickerManaCostPaidColored(this
+                                                .getCostCuttingGetMultiKickerManaCostPaidColored() + k[3]);
                                         // JOptionPane.showMessageDialog(null,
-                                        // CostCutting_GetMultiMickerManaCostPaid_Colored,
+                                        // CostCutting_GetMultiKickerManaCostPaid_Colored,
                                         // "", JOptionPane.INFORMATION_MESSAGE);
                                     }
                                 } else {
@@ -2170,9 +2170,9 @@ public class GameAction {
             }
         }
         if (sa.isMultiKicker()) {
-            this.setCostCuttingGetMultiMickerManaCostPaid(0);
+            this.setCostCuttingGetMultiKickerManaCostPaid(0);
             for (int xPaid = 0; xPaid < xBonus; xPaid++) {
-                this.setCostCuttingGetMultiMickerManaCostPaid(this.getCostCuttingGetMultiMickerManaCostPaid() + 1);
+                this.setCostCuttingGetMultiKickerManaCostPaid(this.getCostCuttingGetMultiKickerManaCostPaid() + 1);
             }
         }
 
@@ -2418,41 +2418,41 @@ public class GameAction {
     }
 
     /**
-     * Gets the cost cutting get multi micker mana cost paid.
+     * Gets the cost cutting get multi kicker mana cost paid.
      * 
-     * @return the costCuttingGetMultiMickerManaCostPaid
+     * @return the costCuttingGetMultiKickerManaCostPaid
      */
-    public int getCostCuttingGetMultiMickerManaCostPaid() {
-        return this.costCuttingGetMultiMickerManaCostPaid;
+    public int getCostCuttingGetMultiKickerManaCostPaid() {
+        return this.costCuttingGetMultiKickerManaCostPaid;
     }
 
     /**
-     * Sets the cost cutting get multi micker mana cost paid.
+     * Sets the cost cutting get multi kicker mana cost paid.
      * 
-     * @param costCuttingGetMultiMickerManaCostPaid0
-     *            the costCuttingGetMultiMickerManaCostPaid to set
+     * @param costCuttingGetMultiKickerManaCostPaid0
+     *            the costCuttingGetMultiKickerManaCostPaid to set
      */
-    public void setCostCuttingGetMultiMickerManaCostPaid(final int costCuttingGetMultiMickerManaCostPaid0) {
-        this.costCuttingGetMultiMickerManaCostPaid = costCuttingGetMultiMickerManaCostPaid0;
+    public void setCostCuttingGetMultiKickerManaCostPaid(final int costCuttingGetMultiKickerManaCostPaid0) {
+        this.costCuttingGetMultiKickerManaCostPaid = costCuttingGetMultiKickerManaCostPaid0;
     }
 
     /**
-     * Gets the cost cutting get multi micker mana cost paid colored.
+     * Gets the cost cutting get multi kicker mana cost paid colored.
      * 
-     * @return the costCuttingGetMultiMickerManaCostPaidColored
+     * @return the costCuttingGetMultiKickerManaCostPaidColored
      */
-    public String getCostCuttingGetMultiMickerManaCostPaidColored() {
-        return this.costCuttingGetMultiMickerManaCostPaidColored;
+    public String getCostCuttingGetMultiKickerManaCostPaidColored() {
+        return this.costCuttingGetMultiKickerManaCostPaidColored;
     }
 
     /**
      * Sets the cost cutting get multi kicker mana cost paid colored.
      * 
-     * @param costCuttingGetMultiMickerManaCostPaidColored0
-     *            the costCuttingGetMultiMickerManaCostPaidColored to set
+     * @param costCuttingGetMultiKickerManaCostPaidColored0
+     *            the costCuttingGetMultiKickerManaCostPaidColored to set
      */
-    public void setCostCuttingGetMultiMickerManaCostPaidColored(
-            final String costCuttingGetMultiMickerManaCostPaidColored0) {
-        this.costCuttingGetMultiMickerManaCostPaidColored = costCuttingGetMultiMickerManaCostPaidColored0;
+    public void setCostCuttingGetMultiKickerManaCostPaidColored(
+            final String costCuttingGetMultiKickerManaCostPaidColored0) {
+        this.costCuttingGetMultiKickerManaCostPaidColored = costCuttingGetMultiKickerManaCostPaidColored0;
     }
 }

@@ -294,7 +294,7 @@ public class MagicStack extends MyObservable {
         ManaCost manaCost = new ManaCost(sa.getManaCost());
         String mana = manaCost.toString();
 
-        int multiKickerPaid = Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid();
+        int multiKickerPaid = Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid();
 
         String numberManaCost = " ";
 
@@ -313,12 +313,12 @@ public class MagicStack extends MyObservable {
 
                 if ((check - multiKickerPaid) < 0) {
                     multiKickerPaid = multiKickerPaid - check;
-                    Singletons.getModel().getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
+                    Singletons.getModel().getGameAction().setCostCuttingGetMultiKickerManaCostPaid(multiKickerPaid);
                     mana = mana.replaceFirst(String.valueOf(check), "0");
                 } else {
                     mana = mana.replaceFirst(String.valueOf(check), String.valueOf(check - multiKickerPaid));
                     multiKickerPaid = 0;
-                    Singletons.getModel().getGameAction().setCostCuttingGetMultiMickerManaCostPaid(multiKickerPaid);
+                    Singletons.getModel().getGameAction().setCostCuttingGetMultiKickerManaCostPaid(multiKickerPaid);
                 }
             }
             mana = mana.trim();
@@ -327,15 +327,15 @@ public class MagicStack extends MyObservable {
             }
             manaCost = new ManaCost(mana);
         }
-        final String colorCut = Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored();
+        final String colorCut = Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored();
 
         for (int colorCutIx = 0; colorCutIx < colorCut.length(); colorCutIx++) {
             if ("WUGRB".contains(colorCut.substring(colorCutIx, colorCutIx + 1))
                     && !mana.equals(mana.replaceFirst((colorCut.substring(colorCutIx, colorCutIx + 1)), ""))) {
                 mana = mana.replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
 
-                Singletons.getModel().getGameAction().setCostCuttingGetMultiMickerManaCostPaidColored(
-                        Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
+                Singletons.getModel().getGameAction().setCostCuttingGetMultiKickerManaCostPaidColored(
+                        Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored()
                                 .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), ""));
 
                 mana = mana.trim();
@@ -537,8 +537,8 @@ public class MagicStack extends MyObservable {
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
-                            if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
-                                    && Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored()
+                            if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid() == 0)
+                                    && Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored()
                                             .equals("")) {
 
                                 AllZone.getInputControl().setInput(
@@ -554,12 +554,12 @@ public class MagicStack extends MyObservable {
                                                                 + "\r\n"
                                                                 + "Mana in Reserve: "
                                                                 + ((Singletons.getModel().getGameAction()
-                                                                        .getCostCuttingGetMultiMickerManaCostPaid() != 0) ?
+                                                                        .getCostCuttingGetMultiKickerManaCostPaid() != 0) ?
                                                                                 Singletons.getModel().getGameAction()
-                                                                        .getCostCuttingGetMultiMickerManaCostPaid()
+                                                                        .getCostCuttingGetMultiKickerManaCostPaid()
                                                                         : "")
                                                                 + Singletons.getModel().getGameAction()
-                                                                        .getCostCuttingGetMultiMickerManaCostPaidColored()
+                                                                        .getCostCuttingGetMultiKickerManaCostPaidColored()
                                                                 + "\r\n" + "Times Kicked: "
                                                                 + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
                                                         manaCost.toString(), this, unpaidCommand));
@@ -574,8 +574,8 @@ public class MagicStack extends MyObservable {
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
                     } else {
-                        if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid() == 0)
-                                && Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaidColored().equals("")) {
+                        if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid() == 0)
+                                && Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored().equals("")) {
                             AllZone.getInputControl().setInput(
                                     new InputPayManaCostAbility("Multikicker for " + sa.getSourceCard() + "\r\n"
                                             + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
@@ -588,11 +588,11 @@ public class MagicStack extends MyObservable {
                                                     + "\r\n"
                                                     + "Mana in Reserve: "
                                                     + ((Singletons.getModel().getGameAction()
-                                                            .getCostCuttingGetMultiMickerManaCostPaid() != 0) ?
-                                                                    Singletons.getModel().getGameAction().getCostCuttingGetMultiMickerManaCostPaid()
+                                                            .getCostCuttingGetMultiKickerManaCostPaid() != 0) ?
+                                                                    Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid()
                                                             : "")
                                                     + Singletons.getModel().getGameAction()
-                                                            .getCostCuttingGetMultiMickerManaCostPaidColored() + "\r\n"
+                                                            .getCostCuttingGetMultiKickerManaCostPaidColored() + "\r\n"
                                                     + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
                                                     + "\r\n", manaCost.toString(), paidCommand, unpaidCommand));
                         }
