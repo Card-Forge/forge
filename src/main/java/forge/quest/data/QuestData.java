@@ -117,7 +117,7 @@ public final class QuestData {
     // Decks collected by player
     /** The my decks. */
     private final HashMap<String, Deck> myDecks = new HashMap<String, Deck>();
-    
+
     private transient IFolderMap<Deck> decks;
 
     // Cards associated with quest
@@ -199,8 +199,9 @@ public final class QuestData {
         this.initTransients();
         this.setName(s0);
 
-        QuestPreferences prefs = Singletons.getModel().getQuestPreferences(); 
-        ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands( prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS) );
+        QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
+        ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS),
+                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS));
         this.getCardPool().addAll(lands);
         this.randomizeOpponents();
     }
@@ -210,8 +211,7 @@ public final class QuestData {
         this.decks = new QuestDeckMap(myDecks);
         this.myCards = new QuestUtilCards(this);
 
-        
-        
+
         // to avoid NPE some pools will be created here if they are null
         if (null == this.getNewCardList()) {
             this.setNewCardList(new ItemPool<InventoryItem>(InventoryItem.class));

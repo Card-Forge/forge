@@ -424,10 +424,10 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         @SuppressWarnings("unchecked")
         @Override
         public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
-            return sorter.compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
+            return sorter.compare((Entry<InventoryItem, Integer>) o1, (Entry<InventoryItem, Integer>) o2);
         }
     }
-    
+
     /**
      * Resort.
      */

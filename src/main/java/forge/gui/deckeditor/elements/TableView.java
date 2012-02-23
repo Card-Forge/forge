@@ -67,9 +67,8 @@ public final class TableView<T extends InventoryItem> {
     /** The want unique. */
     private boolean wantUnique = false;
 
-    
     private final Class<T> genericType;
-    
+
     // need this to allow users place its contents
     /**
      * 
@@ -128,7 +127,7 @@ public final class TableView<T extends InventoryItem> {
     public TableView(final String title, final boolean showStats, final boolean forceUnique, Class<T> cls) {
         // components
         genericType = cls;
-        
+
         final Color gray = new Color(148, 145, 140);
         final TitledBorder titledBorder = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, gray), title);
 
@@ -277,7 +276,6 @@ public final class TableView<T extends InventoryItem> {
         this.setDeckImpl(pool);
     }
 
-    
     /**
      * 
      * setDeckImpl.

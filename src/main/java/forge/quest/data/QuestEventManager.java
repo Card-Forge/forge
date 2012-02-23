@@ -58,7 +58,7 @@ public class QuestEventManager {
 
     /** The very hard a iduels. */
     private final List<QuestDuel> veryHardAIduels = new ArrayList<QuestDuel>();
-    
+
     /** The all duels. */
     private List<QuestDuel> allDuels = null;
 

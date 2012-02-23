@@ -392,7 +392,7 @@ public class DeckLister extends JPanel {
         if (n == JOptionPane.NO_OPTION) {
             return;
         }
-        
+
         final CardCollections deckManager = Singletons.getModel().getDecks();
 
         if (gametype.equals(GameType.Draft)) {

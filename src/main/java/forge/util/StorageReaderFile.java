@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * This class treats every line of a given file as a source for a named object. 
+ * This class treats every line of a given file as a source for a named object.
  * 
  */
 public abstract class StorageReaderFile<T extends IHasName> implements IItemReader<T> {

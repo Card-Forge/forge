@@ -85,11 +85,12 @@ public class PreconDeck implements InventoryItemFromSet {
         String setProxy = "n/a";
 
         FileSection kv = FileSection.parse(sections.get("metadata"), "=");
-        
+
         imageFilename = kv.get("Image");
         description = kv.get("Description");
-        if( AllZone.getEditions().getEditionByCode(kv.get("set").toUpperCase()) != null )
-        { setProxy = kv.get("set"); }
+        if (AllZone.getEditions().getEditionByCode(kv.get("set").toUpperCase()) != null) {
+            setProxy = kv.get("set");
+        }
 
         this.set = setProxy;
         this.recommendedDeals = new SellRules(sections.get("shop"));

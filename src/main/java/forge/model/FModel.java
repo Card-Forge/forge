@@ -75,8 +75,8 @@ public enum FModel {
     private final QuestEventManager questEventManager;
     private final GameState gameState;
     private final FMatchState matchState;
-    
-    // have to implement lazy initialization - at the moment of FModel.ctor() CardDb is not ready yet. 
+
+    // have to implement lazy initialization - at the moment of FModel.ctor() CardDb is not ready yet.
     private CardCollections decks;
 
     /**
@@ -310,12 +310,13 @@ public enum FModel {
     }
 
     /**
-     * Returns all player's decks for constructed, sealed and whatever
+     * Returns all player's decks for constructed, sealed and whatever.
      * @return {@link forge.decks.CardCollections}
      */
     public final CardCollections getDecks() {
-        if (decks == null)
-            this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));            
+        if (decks == null) {
+            this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
+        }
         return decks;
     }
 

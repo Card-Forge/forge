@@ -14,15 +14,14 @@ import forge.util.IFolderMap;
  */
 public class QuestDeckMap implements IFolderMap<Deck> {
 
-    
     public QuestDeckMap() {
-        map = new HashMap<String,Deck>();
+        map = new HashMap<String, Deck>();
     }
-    
-    public QuestDeckMap(Map<String,Deck> inMap) { 
+
+    public QuestDeckMap(Map<String, Deck> inMap) {
         map = inMap;
     }
-    
+
     private final Map<String, Deck> map;
     /* (non-Javadoc)
      * @see forge.util.IFolderMapView#get(java.lang.String)

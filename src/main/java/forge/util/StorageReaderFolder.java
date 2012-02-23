@@ -33,8 +33,8 @@ import org.apache.commons.lang3.StringUtils;
 import forge.error.ErrorViewer;
 
 /**
- * This class treats every file in the given folder as a source for a named object. 
- * The descendant should implement read method to deserialize a single item. 
+ * This class treats every file in the given folder as a source for a named object.
+ * The descendant should implement read method to deserialize a single item.
  * So that readAll will return a map of Name => Object as read from disk
  * 
  */
@@ -102,7 +102,7 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
 
 
     /**
-     * Read the object from file
+     * Read the object from file.
      * @param file
      * @return the object deserialized by inherited class
      */

@@ -42,7 +42,7 @@ public class SellRules {
         if (null == questShop || questShop.isEmpty()) {
             return;
         }
-        
+
         FileSection section = FileSection.parse(questShop, "=");
         minWins = section.getInt("WinsToUnlock");
         cost = section.getInt("Credits", 250);
