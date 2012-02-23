@@ -1,15 +1,9 @@
-package forge.view.home;
+package forge.gui.home;
 
 import javax.swing.JPanel;
 
-import forge.control.home.IControlSubmenu;
-import forge.model.home.MenuGroup;
-
 /** Dictates methods required for a submenu view. */
-public interface IViewSubmenu {
-    /** @return {@link forge.control.home.IControlSubmenu} */
-    IControlSubmenu getControl();
-
+public interface IVSubmenu {
     /** Allows static factory creation by decoupling UI components.
      * @return {@link javax.swing.JPanel} */
     JPanel getPanel();
@@ -18,7 +12,7 @@ public interface IViewSubmenu {
      * functions such as expanding and collapsing in the menu area.
      * 
      * @return {@link javax.swing.JPanel} */
-    MenuGroup getGroup();
+    EMenuGroup getGroup();
 
     /** Removes all children and (re)populates panel components, independent of constructor.*/
     void populate();

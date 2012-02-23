@@ -11218,7 +11218,6 @@ src/main/java/forge/control/home/ControlQuest.java -text
 src/main/java/forge/control/home/ControlSealed.java -text
 src/main/java/forge/control/home/ControlSettings.java -text
 src/main/java/forge/control/home/ControlUtilities.java -text
-src/main/java/forge/control/home/IControlSubmenu.java -text
 src/main/java/forge/control/home/constructed/ControlSubmenuColors.java -text
 src/main/java/forge/control/home/constructed/ControlSubmenuCustom.java -text
 src/main/java/forge/control/home/package-info.java -text svneol=native#text/plain
@@ -11327,6 +11326,19 @@ src/main/java/forge/gui/game/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/CardPanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/CardPicturePanel.java svneol=native#text/plain
 src/main/java/forge/gui/game/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/home/EMenuGroup.java -text
+src/main/java/forge/gui/home/ICSubmenu.java -text
+src/main/java/forge/gui/home/IVSubmenu.java -text
+src/main/java/forge/gui/home/constructed/CSubmenuColors.java -text
+src/main/java/forge/gui/home/constructed/CSubmenuCustom.java -text
+src/main/java/forge/gui/home/constructed/CSubmenuQuestEvents.java -text
+src/main/java/forge/gui/home/constructed/CSubmenuThemes.java -text
+src/main/java/forge/gui/home/constructed/ESubmenuConstructedTypes.java -text
+src/main/java/forge/gui/home/constructed/SubmenuConstructedUtil.java -text
+src/main/java/forge/gui/home/constructed/VSubmenuColors.java -text
+src/main/java/forge/gui/home/constructed/VSubmenuCustom.java -text
+src/main/java/forge/gui/home/constructed/VSubmenuQuestEvents.java -text
+src/main/java/forge/gui/home/constructed/VSubmenuThemes.java -text
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
@@ -11418,7 +11430,6 @@ src/main/java/forge/view/bazaar/ViewStall.java svneol=native#text/plain
 src/main/java/forge/view/bazaar/package-info.java svneol=native#text/plain
 src/main/java/forge/view/editor/package-info.java svneol=native#text/plain
 src/main/java/forge/view/home/ConstructedDeckSelectPanel.java -text
-src/main/java/forge/view/home/IViewSubmenu.java -text
 src/main/java/forge/view/home/QuestFileLister.java -text
 src/main/java/forge/view/home/QuestPreferencesHandler.java -text
 src/main/java/forge/view/home/StartButton.java -text

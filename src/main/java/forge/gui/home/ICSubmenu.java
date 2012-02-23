@@ -1,9 +1,9 @@
-package forge.control.home;
+package forge.gui.home;
 
 import forge.Command;
 
 /** Dictates methods required for a submenu controller. */
-public interface IControlSubmenu {
+public interface ICSubmenu {
     /** @return {@link forge.Command} */
     Command getMenuCommand();
 
