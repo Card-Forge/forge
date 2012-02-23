@@ -7,6 +7,7 @@ import javax.swing.JList;
 
 import forge.Command;
 import forge.control.home.IControlSubmenu;
+import forge.view.home.IViewSubmenu;
 import forge.view.home.constructed.ViewSubmenuColors;
 
 /** 
@@ -63,5 +64,23 @@ public enum ControlSubmenuColors implements IControlSubmenu {
     /** */
     public void randomSelect() {
         
+    }
+
+    /* (non-Javadoc)
+     * @see forge.control.home.IControlSubmenu#getCommand()
+     */
+    @Override
+    public Command getCommand() {
+        // TODO This needs to be fixed 
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.control.home.IControlSubmenu#getView()
+     */
+    @Override
+    public IViewSubmenu getView() {
+     // TODO This needs to be fixed 
+        return null;
     }
 }

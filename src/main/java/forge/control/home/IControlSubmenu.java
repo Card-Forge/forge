@@ -13,4 +13,15 @@ public interface IControlSubmenu {
 
     /** Update whatever content is in the panel. */
     void update();
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    Command getMenuCommand();
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    void initialize();
 }
