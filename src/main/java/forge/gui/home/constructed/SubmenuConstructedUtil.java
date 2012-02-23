@@ -192,7 +192,7 @@ public class SubmenuConstructedUtil {
     /** Generates deck from current list selection(s). */
     private static Deck generateDeck(final JList lst0, final PlayerType player0) {
         CardList cards = null;
-        final String[] selection = oa2sa(lst0.getSelectedValuesList().toArray());
+        final String[] selection = oa2sa(lst0.getSelectedValues());
         final Deck deck;
 
         // Color deck

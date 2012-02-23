@@ -11218,8 +11218,6 @@ src/main/java/forge/control/home/ControlQuest.java -text
 src/main/java/forge/control/home/ControlSealed.java -text
 src/main/java/forge/control/home/ControlSettings.java -text
 src/main/java/forge/control/home/ControlUtilities.java -text
-src/main/java/forge/control/home/constructed/ControlSubmenuColors.java -text
-src/main/java/forge/control/home/constructed/ControlSubmenuCustom.java -text
 src/main/java/forge/control/home/package-info.java -text svneol=native#text/plain
 src/main/java/forge/control/input/Input.java svneol=native#text/plain
 src/main/java/forge/control/input/InputAttack.java svneol=native#text/plain
@@ -11339,6 +11337,8 @@ src/main/java/forge/gui/home/constructed/VSubmenuColors.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuCustom.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuQuestEvents.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuThemes.java -text
+src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
+src/main/java/forge/gui/home/quest/VSubmenuDuels.java -text
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
@@ -11439,8 +11439,6 @@ src/main/java/forge/view/home/ViewQuest.java -text
 src/main/java/forge/view/home/ViewSealed.java -text
 src/main/java/forge/view/home/ViewSettings.java -text
 src/main/java/forge/view/home/ViewUtilities.java -text
-src/main/java/forge/view/home/constructed/ViewSubmenuColors.java -text
-src/main/java/forge/view/home/constructed/ViewSubmenuCustom.java -text
 src/main/java/forge/view/home/package-info.java svneol=native#text/plain
 src/main/java/forge/view/match/QuestWinLoseCardViewer.java -text
 src/main/java/forge/view/match/QuestWinLoseHandler.java -text
