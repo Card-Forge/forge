@@ -1470,7 +1470,7 @@ public class CombatUtil {
                     return false;
                 }
             }
-        } else if (trigParams.get("Mode").equals("AttackerBlocked")) {
+        } else if (trigParams.get("Mode").equals("AttackerBlocked") && (defender != null)) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
                 if (!TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
@@ -1777,11 +1777,15 @@ public class CombatUtil {
             if (att.startsWith("+")) {
                 att = att.substring(1);
             }
-            try {
+            if (att.matches("[0-9][0-9]?")) {
                 power += Integer.parseInt(att);
-            } catch (final NumberFormatException nfe) {
-                // can't parse the number (X for example)
-                power += 0;
+            } else {
+                String bonus = new String(source.getSVar(att));
+                if (bonus.contains("TriggerCount$NumBlockers")) {
+                    bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
+                }
+                power += CardFactoryUtil.xCount(source, bonus);
+                
             }
         }
         return power;
@@ -1907,11 +1911,15 @@ public class CombatUtil {
             if (def.startsWith("+")) {
                 def = def.substring(1);
             }
-            try {
+            if (def.matches("[0-9][0-9]?")) {
                 toughness += Integer.parseInt(def);
-            } catch (final NumberFormatException nfe) {
-                // can't parse the number (X for example)
-                toughness += 0;
+            } else {
+                String bonus = new String(source.getSVar(def));
+                if (bonus.contains("TriggerCount$NumBlockers")) {
+                    bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
+                }
+                toughness += CardFactoryUtil.xCount(source, bonus);
+                
             }
         }
         return toughness;
