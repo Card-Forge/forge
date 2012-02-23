@@ -1730,8 +1730,8 @@ public class AbilityFactory {
             c = hostCard;
         }
 
-        else if (defined.equals("AbHost")) {
-            c = sa.getAbHost();
+        else if (defined.equals("OriginalHost")) {
+            c = sa.getOriginalHost();
         }
 
         else if (defined.equals("Equipped")) {

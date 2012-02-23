@@ -587,24 +587,24 @@ public abstract class SpellAbility {
 
     /**
      * <p>
-     * Setter for the field <code>abHost</code>.
+     * Setter for the field <code>originalHost</code>.
      * </p>
      * 
      * @param c
      *            a {@link forge.Card} object.
      */
-    public void setAbHost(final Card c) {
+    public void setOriginalHost(final Card c) {
         this.originalHost = c;
     }
 
     /**
      * <p>
-     * Getter for the field <code>abHost</code>.
+     * Getter for the field <code>originalHost</code>.
      * </p>
      * 
      * @return a {@link forge.Card} object.
      */
-    public Card getAbHost() {
+    public Card getOriginalHost() {
         return this.originalHost;
     }
 
