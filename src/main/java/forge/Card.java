@@ -7115,6 +7115,26 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isBlocking(source)) {
                 return false;
             }
+        } else if (property.startsWith("blockingHostRemembered")) {
+            Card rememberedcard;
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Card) {
+                    rememberedcard = (Card) o;
+                    if (!this.isBlocking(rememberedcard)) {
+                        return false;
+                    }
+                }
+            }
+        } else if (property.startsWith("blockedByHostRemembered")) {
+            Card rememberedcard;
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Card) {
+                    rememberedcard = (Card) o;
+                    if (!this.isBlockedBy(rememberedcard)) {
+                        return false;
+                    }
+                }
+            }
         } else if (property.startsWith("notblocking")) {
             if (this.isBlocking()) {
                 return false;
