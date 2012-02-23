@@ -11354,7 +11354,6 @@ src/main/java/forge/model/BuildInfo.java -text
 src/main/java/forge/model/FMatchState.java svneol=native#text/plain
 src/main/java/forge/model/FModel.java svneol=native#text/plain
 src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
-src/main/java/forge/model/home/MenuGroup.java -text
 src/main/java/forge/model/package-info.java svneol=native#text/plain
 src/main/java/forge/package-info.java svneol=native#text/plain
 src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
