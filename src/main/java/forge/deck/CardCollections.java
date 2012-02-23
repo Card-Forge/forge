@@ -10,7 +10,7 @@ import forge.util.IFolderMap;
 
 
 /** 
- * Holds editable maps of decks saved to disk. 
+ * Holds editable maps of decks saved to disk.
  * Adding or removing items to(from) such map turns into immediate file update
  */
 public class CardCollections {

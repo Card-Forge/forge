@@ -554,8 +554,8 @@ public class MagicStack extends MyObservable {
                                                                 + "\r\n"
                                                                 + "Mana in Reserve: "
                                                                 + ((Singletons.getModel().getGameAction()
-                                                                        .getCostCuttingGetMultiKickerManaCostPaid() != 0) ?
-                                                                                Singletons.getModel().getGameAction()
+                                                                        .getCostCuttingGetMultiKickerManaCostPaid() != 0)
+                                                                        ? Singletons.getModel().getGameAction()
                                                                         .getCostCuttingGetMultiKickerManaCostPaid()
                                                                         : "")
                                                                 + Singletons.getModel().getGameAction()
@@ -588,8 +588,8 @@ public class MagicStack extends MyObservable {
                                                     + "\r\n"
                                                     + "Mana in Reserve: "
                                                     + ((Singletons.getModel().getGameAction()
-                                                            .getCostCuttingGetMultiKickerManaCostPaid() != 0) ?
-                                                                    Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid()
+                                                            .getCostCuttingGetMultiKickerManaCostPaid() != 0)
+                                                            ? Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid()
                                                             : "")
                                                     + Singletons.getModel().getGameAction()
                                                             .getCostCuttingGetMultiKickerManaCostPaidColored() + "\r\n"

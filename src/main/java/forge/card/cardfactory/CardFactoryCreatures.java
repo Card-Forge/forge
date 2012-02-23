@@ -2375,7 +2375,6 @@ public class CardFactoryCreatures {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
         } // *************** END ************ END **************************
-        
 
         // *************** START *********** START **************************
 

@@ -36,7 +36,7 @@ import forge.util.IItemSerializer;
 public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implements IItemSerializer<DeckGroup> {
     private final String HUMAN_DECK_FILE = "human.dck";
 
-    
+
     public DeckGroupSerializer(File deckDir0) {
         super(deckDir0);
     }

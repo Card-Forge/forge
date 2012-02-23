@@ -68,7 +68,7 @@ public abstract class DeckBase implements IHasName, Serializable, Comparable<Dec
         cloneFieldsTo(obj);
         return obj;
     }
-    
+
     public final String getBestFileName() {
         final char[] c = getName().toCharArray();
         final StringBuilder sb = new StringBuilder();
@@ -79,5 +79,5 @@ public abstract class DeckBase implements IHasName, Serializable, Comparable<Dec
         }
         return sb.toString().replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
     }
-    
+
 }

@@ -345,7 +345,7 @@ public final class GameActionUtil {
         AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
         AllZone.getStack().setResolving(bResolving);
     }
-    
+
     /**
      * <p>
      * payCostDuringAbilityResolve.
@@ -366,10 +366,10 @@ public final class GameActionUtil {
             final Command paid, final Command unpaid) {
         if (manaCost.startsWith("PayLife")) {
             String amountString = manaCost.split("<")[1].split(">")[0];
-            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString) : 
-                CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amountString));
-            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(hostCard, "Do you want to pay " +
-                amount + " life?")) {
+            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                    : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amountString));
+            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(hostCard, "Do you want to pay "
+                    + amount + " life?")) {
                 AllZone.getHumanPlayer().payLife(amount, null);
                 paid.execute();
             } else {

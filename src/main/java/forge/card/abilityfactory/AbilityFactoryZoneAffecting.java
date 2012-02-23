@@ -1222,10 +1222,10 @@ public class AbilityFactoryZoneAffecting {
                     // being used?
                     CardList dPHand = p.getCardsIn(Zone.Hand);
                     if (dPHand.size() != 0) {
-                        if (params.containsKey("RevealNumber")) { 
+                        if (params.containsKey("RevealNumber")) {
                             String amountString = params.get("RevealNumber");
-                            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString) : 
-                                CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                             dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount);
                         }
                         CardList dPChHand = new CardList(dPHand.toArray());

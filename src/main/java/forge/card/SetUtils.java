@@ -186,7 +186,7 @@ public final class SetUtils {
     private List<CardBlock> loadBlockData() {
         final ArrayList<String> fData = FileUtil.readFile("res/blockdata/blocks.txt");
         final List<CardBlock> theBlocks = new ArrayList<CardBlock>();
-        
+
         for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;

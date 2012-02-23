@@ -2244,7 +2244,7 @@ public final class AbilityFactoryReveal {
         final CardList chosen = new CardList();
         final int validamount = Math.min(valid.size(), max);
 
-        
+
         for (int i = 0; i < validamount; i++) {
             if (player.isHuman()) {
                 final Object o = GuiUtils.getChoiceOptional("Choose card(s) to reveal", valid.toArray());

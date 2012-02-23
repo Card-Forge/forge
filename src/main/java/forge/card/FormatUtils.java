@@ -58,12 +58,12 @@ public final class FormatUtils {
 
     public FormatUtils() {
         final List<String> fData = FileUtil.readFile("res/blockdata/formats.txt");
-    
+
         for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
             }
-    
+
             String name = null;
             final List<String> sets = new ArrayList<String>(); // default: all
                                                                // sets
@@ -71,7 +71,7 @@ public final class FormatUtils {
             final List<String> bannedCards = new ArrayList<String>(); // default:
             // nothing
             // banned
-    
+
             final String[] sParts = s.trim().split("\\|");
             for (final String sPart : sParts) {
                 final String[] kv = sPart.split(":", 2);
@@ -88,11 +88,11 @@ public final class FormatUtils {
                 throw new RuntimeException("Format must have a name! Check formats.txt file");
             }
             final GameFormat thisFormat = new GameFormat(name, sets, bannedCards);
-            
+
             formats.put(name, thisFormat);
         }
     }
-    
+
     public abstract static class Predicates {
 
         public static final Predicate<CardEdition> isLegalInFormat(final GameFormat format) {
@@ -121,8 +121,8 @@ public final class FormatUtils {
 
         /** The Constant setsInModern. */
         public static final Predicate<CardEdition> SET_IN_MODERN = Predicates.isLegalInFormat(AllZone.getFormats().getModern());
-        
-    }    
+
+    }
 }
 
 /** 

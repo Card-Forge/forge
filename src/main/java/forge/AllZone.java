@@ -541,10 +541,10 @@ public final class AllZone {
     public static SetUtils getEditions() {
         return setUtils != null ? setUtils : (setUtils = new SetUtils());
     }
-    
+
     private static FormatUtils formats = null;
     public static FormatUtils getFormats() {
-        return formats != null ? formats : ( formats = new FormatUtils());  
+        return formats != null ? formats : (formats = new FormatUtils());
     }
 
 } // AllZone
