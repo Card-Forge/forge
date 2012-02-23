@@ -11262,6 +11262,7 @@ src/main/java/forge/deck/generate/package-info.java svneol=native#text/plain
 src/main/java/forge/deck/io/DeckFileHeader.java -text
 src/main/java/forge/deck/io/DeckGroupSerializer.java -text
 src/main/java/forge/deck/io/DeckSerializer.java -text
+src/main/java/forge/deck/io/OldDeckFileFormatException.java -text
 src/main/java/forge/deck/io/OldDeckParser.java -text
 src/main/java/forge/deck/package-info.java svneol=native#text/plain
 src/main/java/forge/error/BugzReporter.java svneol=native#text/plain
@@ -11406,6 +11407,7 @@ src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/util/FileFinder.java svneol=native#text/plain
 src/main/java/forge/util/FileSection.java -text
+src/main/java/forge/util/FileSectionManual.java -text
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 src/main/java/forge/util/FolderMap.java svneol=native#text/plain
 src/main/java/forge/util/FolderMapView.java -text

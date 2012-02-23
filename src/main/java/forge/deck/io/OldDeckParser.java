@@ -123,12 +123,12 @@ public class OldDeckParser {
 
            List<String> fileLines = FileUtil.readFile(f);
            Map<String, List<String>> sections = SectionUtil.parseSections(fileLines);
-           DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
+           DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections, false);
            String name = dh.getName();
 
            if (dh.isCustomPool()) {
                try {
-                   cube.add(Deck.fromLines(fileLines));
+                   cube.add(Deck.fromSections(sections));
                    importedOk = true;
                } catch (NoSuchElementException ex) {
                    if (!allowDeleteUnsupportedConstructed) {
@@ -145,7 +145,7 @@ public class OldDeckParser {
            switch(dh.getDeckType()) {
            case Constructed:
                try {
-                   constructed.add(Deck.fromLines(fileLines));
+                   constructed.add(Deck.fromSections(sections));
                    importedOk = true;
                } catch (NoSuchElementException ex) {
                    if (!allowDeleteUnsupportedConstructed) {
@@ -167,7 +167,7 @@ public class OldDeckParser {
                    stored = ImmutablePair.of(new DeckGroup(name), MutablePair.of((File) null, (File) null));
                }
 
-               Deck deck = Deck.fromLines(fileLines);
+               Deck deck = Deck.fromSections(sections);
                if (isAi) {
                    stored.getLeft().addAiDeck(deck);
                    stored.getRight().setRight(f);

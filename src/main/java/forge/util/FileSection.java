@@ -10,9 +10,13 @@ import java.util.regex.Pattern;
  */
 public class FileSection {
 
-    private final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+    protected final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
-    private FileSection() { }
+    protected final Map<String, String> getLines() {
+        return lines;
+    }
+
+    protected FileSection() { }
 
     public static FileSection parse(String line, String kvSeparator, String pairSeparator) {
         String[] pairs = line.split(Pattern.quote(pairSeparator));

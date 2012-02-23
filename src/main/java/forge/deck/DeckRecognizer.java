@@ -157,6 +157,7 @@ public class DeckRecognizer {
     // private static final Pattern searchNumbersInBack =
     // Pattern.compile("(.*)[^A-Za-wyz]*\\s+([\\d]{1,2})");
     private static final Pattern SEARCH_NUMBERS_IN_FRONT = Pattern.compile("([\\d]{1,2})[^A-Za-wyz]*\\s+(.*)");
+    //private static final Pattern READ_SEPARATED_EDITION = Pattern.compile("[[\\(\\{]([a-zA-Z0-9]){1,3})[]*\\s+(.*)");
 
     /**
      * Recognize line.
@@ -197,6 +198,9 @@ public class DeckRecognizer {
         if (CardDb.instance().isCardSupported(name)) {
             return Token.knownCard(CardDb.instance().getCard(name, true), n);
         }
+        
+        // TODO: recognize format: http://topdeck.ru/forum/index.php?showtopic=12711
+        //final Matcher foundEditionName = READ_SEPARATED_EDITION.matcher(name);
 
         final Token known = DeckRecognizer.recognizeNonCard(name, n);
         return null == known ? Token.unknownCard(name, n) : known;

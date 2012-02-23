@@ -140,19 +140,19 @@ public class Deck extends DeckBase implements Serializable, IHasName {
 
 
     public static Deck fromFile(final File deckFile) {
-        return fromLines(FileUtil.readFile(deckFile));
-    }
-
-    public static Deck fromLines(final List<String> deckFileLines) {
-        return Deck.fromSections(SectionUtil.parseSections(deckFileLines));
+        return fromSections(SectionUtil.parseSections(FileUtil.readFile(deckFile)));
     }
 
     public static Deck fromSections(Map<String, List<String>> sections) {
+        return fromSections(sections, false);
+    }
+    
+    public static Deck fromSections(Map<String, List<String>> sections, boolean canThrowExtendedErrors) {
         if (sections == null || sections.isEmpty()) {
             return null;
         }
 
-        DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
+        DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections, canThrowExtendedErrors);
         if (dh == null) {
            return null;
         }

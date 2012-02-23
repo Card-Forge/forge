@@ -31,11 +31,15 @@ import java.util.TreeMap;
 
 import javax.swing.filechooser.FileFilter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.deck.Deck;
 import forge.item.CardPrinted;
 import forge.util.FileSection;
+import forge.util.FileSectionManual;
 import forge.util.FileUtil;
+import forge.util.SectionUtil;
 import forge.util.StorageReaderFolder;
 import forge.util.IItemSerializer;
 import freemarker.template.Configuration;
@@ -235,7 +239,8 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
      */
     @Override
     protected Deck read(File file) {
-        return Deck.fromFile(file);
+        Map<String,List<String>> sections = SectionUtil.parseSections(FileUtil.readFile(file));
+        return Deck.fromSections(sections, true);
     }
 
     /* (non-Javadoc)
@@ -246,14 +251,25 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         return DCK_FILE_FILTER;
     }
 
-    public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map) {
+    public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map, boolean canThrow) {
         if (map == null) { return null; }
-        List<String> lines = map.get("metadata");
-        if (lines == null) { return null; }
-        DeckFileHeader d = new DeckFileHeader(FileSection.parse(lines, "="));
-
-
-        return d;
+        List<String> metadata = map.get("metadata");
+        if (metadata != null) { 
+            return new DeckFileHeader(FileSection.parse(metadata, "="));
+        } 
+        List<String> general = map.get("general");
+        if ( general != null )
+        {
+            if ( canThrow ) { 
+                throw new OldDeckFileFormatException();
+            }
+            FileSectionManual fs = new FileSectionManual();
+            fs.put(DeckFileHeader.NAME, StringUtils.join(map.get(""), " "));
+            fs.put(DeckFileHeader.DECK_TYPE, StringUtils.join(general, " "));
+            return new DeckFileHeader(fs);
+        }
+        
+        return null;
     }
 
 }

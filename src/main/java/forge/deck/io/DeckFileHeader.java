@@ -11,7 +11,7 @@ import forge.util.FileSection;
 public class DeckFileHeader {
 
     public static final String NAME = "Name";
-    private static final String DECK_TYPE = "Deck Type";
+    public static final String DECK_TYPE = "Deck Type";
     public static final String COMMENT = "Comment";
     private static final String PLAYER = "Player";
     private static final String CSTM_POOL = "Custom Pool";

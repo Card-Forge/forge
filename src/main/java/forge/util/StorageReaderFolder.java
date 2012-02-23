@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.deck.io.OldDeckFileFormatException;
 import forge.error.ErrorViewer;
 
 /**
@@ -74,16 +75,22 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
         final Map<String, T> result = new TreeMap<String, T>();
         final List<String> decksThatFailedToLoad = new ArrayList<String>();
         final File[] files = directory.listFiles(getFileFilter());
+        boolean hasWarnedOfOldFormat = false;
         for (final File file : files) {
             try {
                 final T newDeck = read(file);
                 if (null == newDeck) {
-
                     String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
                     JOptionPane.showMessageDialog(null, msg);
                     continue;
                 }
                 result.put(newDeck.getName(), newDeck);
+            } catch (final OldDeckFileFormatException ex ) {
+                if( !hasWarnedOfOldFormat ) {
+                    JOptionPane.showMessageDialog(null, "Found a deck in old fileformat in the storage.\nMoving this file and all similiar ones to parent folder.\n\nForge will try to convert them in a second.");
+                    hasWarnedOfOldFormat = true;
+                }
+                file.renameTo(new File(directory.getParentFile(), file.getName()));
             } catch (final NoSuchElementException ex) {
                 final String message = String.format("%s failed to load because ---- %s", file.getName(),
                         ex.getMessage());
