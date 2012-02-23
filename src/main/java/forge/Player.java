@@ -2419,7 +2419,6 @@ public abstract class Player extends GameEntity {
      */
     @Override
     public final boolean hasProperty(final String property, final Player sourceController, final Card source) {
-        System.out.println(property + this.assignedDamage);
         if (property.equals("You")) {
             if (!this.equals(sourceController)) {
                 return false;

@@ -848,17 +848,7 @@ public class AbilityFactoryAttach {
      */
     public static Player attachToPlayerAIPreferences(final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
-        final Target tgt = sa.getTarget();
         Player p;
-        if (tgt.canOnlyTgtOpponent()) {
-            // If can Only Target Opponent, do so.
-            p = AllZone.getHumanPlayer();
-            if (p.canBeTargetedBy(sa)) {
-                return p;
-            } else {
-                return null;
-            }
-        }
 
         if ("Curse".equals(af.getMapParams().get("AILogic"))) {
             p = AllZone.getHumanPlayer();
@@ -866,7 +856,7 @@ public class AbilityFactoryAttach {
             p = AllZone.getComputerPlayer();
         }
 
-        if (p.canBeTargetedBy(sa)) {
+        if (sa.canTarget(p)) {
             return p;
         }
 
@@ -875,7 +865,7 @@ public class AbilityFactoryAttach {
         }
 
         p = p.getOpponent();
-        if (p.canBeTargetedBy(sa)) {
+        if (sa.canTarget(p)) {
             return p;
         }
 
