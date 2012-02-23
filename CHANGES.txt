@@ -5,7 +5,18 @@ Forge Beta: 0#-##-2012 ver 1.2.# rev #####
 10### cards in total.
 
 
+We have reached a new milestone. All Modern legal sets are at least 80% complete and all Extended legal sets are at least 90% complete.
 
+A number of bugs were found and fixed. The mana pool bug which caused crash reports was fixed. We also have a performance fix relating to static abilities.
+
+The UI has a few new features including to pick an avatars. This can be accessed from the Settings -> Avatars tab.
+
+The organizational structure of the /res/decks/ folder has been improved and we now have these four subdirectories:
+
+/decks/constructed/
+/decks/cube/
+/decks/draft/
+/decks/sealed/
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
