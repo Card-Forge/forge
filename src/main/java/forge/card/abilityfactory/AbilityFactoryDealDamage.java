@@ -407,6 +407,9 @@ public class AbilityFactoryDealDamage {
         int restDamage = d;
         final Player human = AllZone.getHumanPlayer();
         final Player comp = AllZone.getComputerPlayer();
+        if (!sa.canTarget(human)) {
+            return false;
+        }
 
         if (!noPrevention) {
             restDamage = human.predictDamage(restDamage, this.abilityFactory.getHostCard(), false);
@@ -580,7 +583,7 @@ public class AbilityFactoryDealDamage {
                         || (AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN) && saMe.isAbility()
                                 && AllZone.getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()));
 
-                if (freePing && tgt.addTarget(AllZone.getHumanPlayer())) {
+                if (freePing && saMe.canTarget(AllZone.getHumanPlayer()) && tgt.addTarget(AllZone.getHumanPlayer())) {
                     continue;
                 }
             } else if (tgt.canTgtCreature()) {
@@ -593,7 +596,7 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (tgt.canTgtPlayer() && ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN)
+            else if (saMe.canTarget(AllZone.getHumanPlayer()) && ((AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN)
                     && AllZone.getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))
                     || saMe.getPayCosts() == null || isTrigger)) {
                 if (tgt.addTarget(AllZone.getHumanPlayer())) {
@@ -689,7 +692,7 @@ public class AbilityFactoryDealDamage {
                 }
             }
 
-            if (tgt.canTgtPlayer()) {
+            if (saMe.canTarget(AllZone.getComputerPlayer())) {
                 if (tgt.addTarget(AllZone.getComputerPlayer())) {
                     continue;
                 }
@@ -1032,7 +1035,7 @@ public class AbilityFactoryDealDamage {
         CardList computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (tgt != null && sa.canTarget(AllZone.getHumanPlayer())) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
             computerList = new CardList();
@@ -1437,7 +1440,7 @@ public class AbilityFactoryDealDamage {
 
         final Target tgt = sa.getTarget();
 
-        if (sa.getTarget() != null) {
+        if (tgt != null && sa.canTarget(AllZone.getHumanPlayer())) {
             tgt.resetTargets();
             sa.getTarget().addTarget(AllZone.getHumanPlayer());
         }

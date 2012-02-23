@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.Constant;
@@ -621,9 +622,9 @@ public class Target {
         boolean player = false;
         boolean opponent = false;
         for (final String s : this.validTgts) {
-            if (s.equals("Opponent")) {
+            if (s.startsWith("Opponent")) {
                 opponent = true;
-            } else if (s.equals("Player")) {
+            } else if (s.startsWith("Player")) {
                 player = true;
             }
         }
@@ -639,7 +640,7 @@ public class Target {
      */
     public final boolean canTgtPlayer() {
         for (final String s : this.validTgts) {
-            if (s.equals("Player") || s.equals("Opponent")) {
+            if (s.startsWith("Player") || s.startsWith("Opponent")) {
                 return true;
             }
         }
@@ -700,8 +701,10 @@ public class Target {
      * @return a boolean.
      */
     public final boolean hasCandidates(final SpellAbility sa, final boolean isTargeted) {
-        if (this.canTgtPlayer()) {
-            return true;
+        for (Player player : AllZone.getPlayersInGame()) {
+            if (sa.canTarget(player)) {
+                return true;
+            }
         }
 
         for (final Card c : AllZoneUtil.getCardsIn(this.tgtZone)) {

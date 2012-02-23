@@ -2419,7 +2419,7 @@ public abstract class Player extends GameEntity {
      */
     @Override
     public final boolean hasProperty(final String property, final Player sourceController, final Card source) {
-
+        System.out.println(property + this.assignedDamage);
         if (property.equals("You")) {
             if (!this.equals(sourceController)) {
                 return false;
@@ -2433,6 +2433,10 @@ public abstract class Player extends GameEntity {
                 return false;
             }
             if (this.isComputer() && !source.getDealtDmgToComputerThisGame()) {
+                return false;
+            }
+        }  else if (property.startsWith("wasDealtDamageThisTurn")) {
+            if (this.assignedDamage.isEmpty()) {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {

@@ -25,6 +25,7 @@ import forge.CardList;
 import forge.Command;
 import forge.CommandArgs;
 import forge.ComputerUtil;
+import forge.GameEntity;
 import forge.Player;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
@@ -1600,6 +1601,24 @@ public abstract class SpellAbility {
         }
 
         return res;
+    }
+    
+    /**
+     * <p>
+     * canTarget.
+     * </p>
+     * 
+     * @param entity
+     *            a GameEntity
+     * @return a boolean.
+     */
+    public final boolean canTarget(final GameEntity entity) {
+        if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard()) 
+                && entity.canBeTargetedBy(this)) {
+            return true;
+        }
+
+        return false;
     }
 
     // is this a wrapping ability (used by trigger abilities)
