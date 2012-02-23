@@ -260,9 +260,6 @@ public class AbilityFactoryPump {
      */
     private CardList getPumpCreatures(final int defense, final int attack, final SpellAbility sa) {
 
-        final boolean evasive = (this.keywords.contains("Flying") || this.keywords.contains("Horsemanship")
-                || this.keywords.contains("HIDDEN Unblockable") || this.keywords.contains("Fear") || this.keywords
-                .contains("Intimidate"));
         final ArrayList<String> keywords = this.keywords;
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
@@ -279,13 +276,6 @@ public class AbilityFactoryPump {
 
                 if (!ComputerUtil.containsUsefulKeyword(keywords, c)) {
                     return false;
-                }
-
-                // give evasive keywords to creatures that can attack
-                if (evasive && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && CombatUtil.canAttack(c)
-                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && (c.getNetCombatDamage() > 0)) {
-                    return true;
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?

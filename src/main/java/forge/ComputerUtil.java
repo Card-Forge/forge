@@ -1964,35 +1964,58 @@ public class ComputerUtil {
      * @return true, if is useful keyword
      */
     public static boolean isUsefulKeyword(final String keyword, final Card card) {
+        PhaseHandler ph = AllZone.getPhaseHandler();
+        Player computer = AllZone.getComputerPlayer();
+        Player human = AllZone.getHumanPlayer();
+        final boolean evasive = (keyword.endsWith("Flying") || keyword.endsWith("Horsemanship")
+                || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") 
+                || keyword.endsWith("Intimidate"));
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
-        if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
+        // give evasive keywords to creatures that can attack
+        if (evasive) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+                || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                || (card.getNetCombatDamage() <= 0)
+                || AllZoneUtil.getCreaturesInPlay(human).size() < 1) {
+                return false;
+            }
+        } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
             if (card.getController().isComputer()
-                    || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                    || ph.isPlayerTurn(computer)
                     || !CombatUtil.canAttack(card) || (card.getNetCombatDamage() <= 0)) {
                 return false;
             }
-        } else if (keyword.contains("CARDNAME can't block.")) {
-            if (card.getController().isComputer() || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
+        } else if (keyword.endsWith("CARDNAME can't block.")) {
+            if (card.getController().isComputer() || ph.isPlayerTurn(human)
                     || !CombatUtil.canBlock(card)) {
                 return false;
             }
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
-            if (AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)
-                    || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+            if (ph.isBefore(Constant.Phase.MAIN2) || card.isUntapped()
+                    || ph.isPlayerTurn(human)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
-            if (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || !CombatUtil.canAttack(card)
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
                     || !CombatUtil.canBeBlocked(card)) {
                 return false;
             }
-        } else if (keyword.endsWith("Haste")) {
-            if (!card.hasSickness() || AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
+        } else if (keyword.endsWith("Shroud")) {
+            //TODO: check stack for spells and abilities
+            return false;
+        } else if (keyword.startsWith("Rampage")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+                    || !CombatUtil.canBeBlocked(card) 
+                    || AllZoneUtil.getCreaturesInPlay(human).size() < 2) {
+                return false;
+            }
+        }    else if (keyword.endsWith("Haste")) {
+            if (!card.hasSickness() || ph.isPlayerTurn(human)
                     || !CombatUtil.canAttackNextTurn(card) || card.isTapped()
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
-                    || AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         }
