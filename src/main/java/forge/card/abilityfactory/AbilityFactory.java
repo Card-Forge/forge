@@ -1729,6 +1729,15 @@ public class AbilityFactory {
         if (defined.equals("Self")) {
             c = hostCard;
         }
+        
+        // The Wretched
+        else if (defined.equals("TriggeredBlocker.blocking")) {
+            final SpellAbility root = sa.getRootSpellAbility();
+            final Object crd = root.getTriggeringObject("Blocker");
+            if (AllZoneUtil.getCardState((Card) crd).isBlocking()); {
+                c = AllZoneUtil.getCardState((Card) crd);
+            }
+        }
 
         else if (defined.equals("OriginalHost")) {
             c = sa.getOriginalHost();
