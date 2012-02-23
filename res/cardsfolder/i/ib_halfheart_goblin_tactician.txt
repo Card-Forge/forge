@@ -12,4 +12,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:GoblinX:TriggeredAttacker$Valid Card.IsRemembered
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ib_halfheart_goblin_tactician.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/163.jpg
+Oracle:Whenever another Goblin you control becomes blocked, sacrifice it. If you do, it deals 4 damage to each creature blocking it.\nSacrifice two Mountains: Put two 1/1 red Goblin creature tokens onto the battlefield.
 End

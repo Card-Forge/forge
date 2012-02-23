@@ -8,4 +8,6 @@ A:SP$ Effect | Cost$ W W | Name$ Orim's Chant Effect | IsCurse$ True | StaticAbi
 SVar:CantAttack:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures can't attack this turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_chant.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/11.jpg
+Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nTarget player can't cast spells this turn.\nIf Orim's Chant was kicked, creatures can't attack this turn.
 End
