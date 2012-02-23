@@ -133,12 +133,11 @@ public class MenuQuest extends MenuBase<Deck> {
             // use standard forge's list selection dialog
             final ListChooser<String> c = new ListChooser<String>("Cheat - Add Card to Your Cardpool", 0, 1, cards);
             if (c.show()) {
-                ((DeckEditorQuest)getController().getView()).addCheatCard(CardDb.instance().getCard(c.getSelectedValue()));
+                ((DeckEditorQuest) getController().getView()).addCheatCard(CardDb.instance().getCard(c.getSelectedValue()));
             }
         }
     };
 
-    
     protected JMenu getDefaultFileMenu() {
         final JMenu deckMenu = super.getDefaultFileMenu();
 
@@ -150,8 +149,8 @@ public class MenuQuest extends MenuBase<Deck> {
         if (Constant.Runtime.DEV_MODE[0]) {
             deckMenu.addSeparator();
             deckMenu.add(addCard);
-        } 
-        
+        }
+
         deckMenu.addSeparator();
         this.addImportExport(deckMenu, true);
 
@@ -222,6 +221,6 @@ public class MenuQuest extends MenuBase<Deck> {
             return check.endsWith(".dck") ? file : new File(check + ".dck");
         }
         return null;
-    }    
+    }
 
 }

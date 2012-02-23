@@ -45,7 +45,7 @@ public final class MenuLimited extends MenuBase<DeckGroup> {
      *            a Command
      */
     public MenuLimited(final IDeckController<DeckGroup> ctrl, final Command exit) {
-        super( ctrl, exit );
+        super(ctrl, exit);
     }
 
     // deck.setName(currentDeckName);

@@ -62,7 +62,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
     public MenuBase(final IDeckController<T> ctrl, final Command exit) {
         this.controller = ctrl;
         this.exitCommand = exit;
-    
+
         this.setupMenu();
     }
 
@@ -70,12 +70,11 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         return controller;
     }
 
-    protected void setupMenu()
-    {
+    protected void setupMenu() {
         this.add(getDefaultFileMenu());
         this.add(getSortMenu());
     }
-    
+
     /**
      * New constructed.
      * 
@@ -103,7 +102,6 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
 
     // deck.setName(currentDeckName);
 
-    
     protected final void open() {
         if (!this.canLeaveCurrentDeck()) { return; }
         final String name = this.getUserInputOpenDeck();
@@ -126,15 +124,19 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         if (StringUtils.isBlank(name)) {
             final int n = JOptionPane.showConfirmDialog(null, "This name is incorrect. Enter another one?", "Cannot save", JOptionPane.YES_NO_OPTION);
 
-            if (n == JOptionPane.NO_OPTION) return;
+            if (n == JOptionPane.NO_OPTION) {
+                return;
+            }
         }
-        
-        if (controller.fileExists(name)) {
-            final int m = JOptionPane.showConfirmDialog(null, "There is already saved an item named '"+name+"'. Would you like to overwrite it?", "Confirm overwrite", JOptionPane.YES_NO_OPTION);
 
-            if (m == JOptionPane.NO_OPTION) return;
+        if (controller.fileExists(name)) {
+            final int m = JOptionPane.showConfirmDialog(null, "There is already saved an item named '" + name + "'. Would you like to overwrite it?", "Confirm overwrite", JOptionPane.YES_NO_OPTION);
+
+            if (m == JOptionPane.NO_OPTION) {
+                return;
+            }
         }
-        
+
         this.controller.saveAs(name);
     }
 
@@ -213,22 +215,21 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
 
     protected JMenu getDefaultFileMenu() {
         final JMenu fileMenu = new JMenu("Deck");
-    
+
         final JMenuItem newDoc = new JMenuItem("New");
         final JMenuItem open = new JMenuItem("Open");
         final JMenuItem save = new JMenuItem("Save");
         final JMenuItem saveAs = new JMenuItem("Save As...");
         final JMenuItem delete = new JMenuItem("Delete");
-        
-    
+
         fileMenu.add(newDoc);
         fileMenu.add(open);
         fileMenu.addSeparator();
-    
+
         fileMenu.add(save);
         fileMenu.add(saveAs);
         fileMenu.add(delete);
-        
+
         newDoc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
@@ -245,8 +246,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
                 }
             }
         });
-    
-    
+
         open.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
@@ -262,8 +262,8 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
                     throw new RuntimeException("Gui_DeckEditor_Menu : open() error - " + ex);
                 }
             }
-        });        
-        
+        });
+
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
@@ -280,7 +280,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
                 }
             }
         });
-    
+
         saveAs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
@@ -297,7 +297,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
                 }
             }
         });
-    
+
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
@@ -316,13 +316,12 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         });
         return fileMenu;
     }
-    
-    protected void appendCloseMenuItemTo(JMenu fileMenu)
-    {
+
+    protected void appendCloseMenuItemTo(JMenu fileMenu) {
         final JMenuItem close = new JMenuItem("Close");
         fileMenu.addSeparator();
-        fileMenu.add(close);        
-        
+        fileMenu.add(close);
+
         close.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
@@ -353,7 +352,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         final JMenuItem type = new JMenuItem("Type");
         final JMenuItem stats = new JMenuItem("Power/Toughness");
         final JMenuItem rarity = new JMenuItem("Rarity");
-    
+
         final JMenu menu = new JMenu("Sort By");
         menu.add(name);
         menu.add(cost);
@@ -361,14 +360,14 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         menu.add(type);
         menu.add(stats);
         menu.add(rarity);
-    
+
         name.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
                 (MenuBase.this.controller).getView().getTopTableModel().sort(1, true);
             }
         });
-    
+
         // 0 1 2 3 4 5 6
         // private String column[] = {"Qty", "Name", "Cost", "Color", "Type",
         // "Stats", "Rarity"};
@@ -378,28 +377,28 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
                 (MenuBase.this.controller).getView().getTopTableModel().sort(4).sort(3).sort(2);
             }
         });
-    
+
         color.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
                 (MenuBase.this.controller).getView().getTopTableModel().sort(4).sort(2).sort(3);
             }
         });
-    
+
         type.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
                 (MenuBase.this.controller).getView().getTopTableModel().sort(2).sort(3).sort(4);
             }
         });
-    
+
         stats.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
                 (MenuBase.this.controller).getView().getTopTableModel().sort(4).sort(2).sort(3).sort(5);
             }
         });
-    
+
         rarity.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent ev) {
@@ -407,7 +406,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
                 (MenuBase.this.controller).getView().getTopTableModel().sort(2).sort(4).sort(3).sort(6);
             }
         });
-        
+
         return menu;
     } // setupSortMenu()
 }

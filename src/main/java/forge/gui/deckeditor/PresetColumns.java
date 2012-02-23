@@ -37,7 +37,7 @@ import forge.item.InventoryItemFromSet;
 public abstract class PresetColumns {
 
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
-    
+
     private static CardManaCost toManaCost(final InventoryItem i) {
         return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : CardManaCost.EMPTY;
     }

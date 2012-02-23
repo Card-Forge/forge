@@ -67,7 +67,6 @@ public final class MenuCommon extends MenuBase<Deck> {
 
     }
 
-    
     private final void newRandomConstructed() {
         if (!this.canLeaveCurrentDeck()) {
             return;
@@ -86,7 +85,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         randomDeck.getMain().add("Mountain");
         randomDeck.getMain().add("Forest");
         randomDeck.getMain().add("Terramorphic Expanse");
-        
+
         getController().setModel(randomDeck);
     }
 
@@ -165,7 +164,6 @@ public final class MenuCommon extends MenuBase<Deck> {
         return null;
     }
 
-    
     /**
      * <p>
      * Generate Proxy for a Deck.
@@ -202,14 +200,10 @@ public final class MenuCommon extends MenuBase<Deck> {
         return null;
     }
 
-    
-
     // deck.setName(currentDeckName);
 
-    
     protected JMenu getDefaultFileMenu() {
         final JMenu fileMenu = super.getDefaultFileMenu();
-        
 
         final JMenuItem newRandomConstructed = new JMenuItem("New Deck - Generate Random Constructed Cardpool");
         final JMenuItem newGenerateConstructed = new JMenuItem("New Deck - Generate Constructed Deck");
@@ -240,7 +234,7 @@ public final class MenuCommon extends MenuBase<Deck> {
 
         fileMenu.add(newRandomConstructed);
         fileMenu.add(newGenerateConstructed);
-        
+
         appendCloseMenuItemTo(fileMenu);
 
         generateProxies.addActionListener(new ActionListener() {
@@ -258,8 +252,8 @@ public final class MenuCommon extends MenuBase<Deck> {
                     throw new RuntimeException("Gui_DeckEditor_Menu : generateProxies() error - " + ex);
                 }
             }
-        });        
-        
+        });
+
         // add listeners
         exportDeck.addActionListener(new ActionListener() {
             @Override

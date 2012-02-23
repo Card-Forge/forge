@@ -122,7 +122,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
         // newCardsList = questData.getCards().getNewCards();
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
         ownedItems.addAll(this.questData.getCards().getCardpool().getView());
-        
+
         getTopTableModel().setDeck(forSale);
         getBottomTableWithCards().setDeck(ownedItems);
 
