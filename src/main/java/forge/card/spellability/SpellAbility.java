@@ -64,6 +64,7 @@ public abstract class SpellAbility {
 
     private Card targetCard;
     private Card sourceCard;
+    private Card originalHost = null;
 
     private CardList targetList;
     // targetList doesn't appear to be used anymore
@@ -582,6 +583,29 @@ public abstract class SpellAbility {
      */
     public Card getSourceCard() {
         return this.sourceCard;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>abHost</code>.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public void setAbHost(final Card c) {
+        this.originalHost = c;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>abHost</code>.
+     * </p>
+     * 
+     * @return a {@link forge.Card} object.
+     */
+    public Card getAbHost() {
+        return this.originalHost;
     }
 
     /**

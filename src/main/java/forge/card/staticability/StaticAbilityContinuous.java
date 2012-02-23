@@ -264,6 +264,7 @@ public class StaticAbilityContinuous {
                         final AbilityFactory af = new AbilityFactory();
                         final SpellAbility sa = af.getAbility(abilty, affectedCard);
                         sa.setType("Temporary");
+                        sa.setAbHost(hostCard);
                         affectedCard.addSpellAbility(sa);
                     }
                 }

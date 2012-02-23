@@ -1730,6 +1730,10 @@ public class AbilityFactory {
             c = hostCard;
         }
 
+        else if (defined.equals("AbHost")) {
+            c = sa.getAbHost();
+        }
+
         else if (defined.equals("Equipped")) {
             c = hostCard.getEquippingCard();
         }
