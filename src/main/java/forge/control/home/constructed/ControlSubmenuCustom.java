@@ -11,7 +11,6 @@ import forge.control.FControl;
 import forge.control.home.IControlSubmenu;
 import forge.deck.Deck;
 import forge.util.IFolderMap;
-import forge.view.home.IViewSubmenu;
 import forge.view.home.constructed.ViewSubmenuCustom;
 
 /** 
@@ -55,24 +54,6 @@ public enum ControlSubmenuCustom implements IControlSubmenu {
 
     /** */
     public void randomSelect() {
-        
-    }
 
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @Override
-    public Command getCommand() {
-     // TODO This needs to be fixed 
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getView()
-     */
-    @Override
-    public IViewSubmenu getView() {
-     // TODO This needs to be fixed 
-        return null;
     }
 }
