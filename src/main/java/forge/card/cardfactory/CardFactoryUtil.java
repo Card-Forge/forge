@@ -2761,6 +2761,22 @@ public class CardFactoryUtil {
             }
             return highest;
         }
+        
+        if (l[0].contains("HighestCMCRemembered")) {
+            final CardList list = new CardList();
+            int highest = 0;
+            for (final Object o : c.getRemembered()) {
+                if (o instanceof Card) {
+                    list.add(AllZoneUtil.getCardState((Card) o));
+                }
+            }
+            for (final Card crd : list) {
+                if (crd.getCMC() > highest) {
+                    highest = crd.getCMC();
+                }
+            }
+            return highest;
+        }
 
         if (l[0].contains("RememberedSumPower")) {
             final CardList list = new CardList();
