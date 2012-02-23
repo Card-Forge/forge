@@ -443,6 +443,29 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - change some commented code so that it isn't broken if uncommented (getMatchControl vs getControlMatch)
 - clean up Java warning (AllZone.java)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- fix Puresteel Paladin's Metalcraft
+- fixed some bad characters in card texts
+- Fixed Conqueror's Pledge.
+- Controllers for color and custom submenus.
+- Update to submenu control interface.
+- Updated some SVars.
+- Improved handling of the "Optional" parameter in AF Play.
+- Added a corrected Ib Halfheart, Goblin Tactician. It now carries the trigger, etc.
+- Removed some debugging text.
+- Fixing Compile errors, not sure if this is how we wanted this.
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- Thanks @sol for last fix. This commit is what should have happened.
+- CheckStyle.
+- Small updates to FControl, FCheckBox.
+- Saving further progress on home screen rebuild.
+- Discovering backwards incompatibility of JRE 1.7.
+- Mistakes fixed.
+- Minor update.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -623,6 +646,9 @@ The Wretched
 Opaline Sliver
 Knowledge Vault
 Omen Machine
+Prince of Thralls
+Auriok Survivors
+Orim's Chant
 
 
 end
