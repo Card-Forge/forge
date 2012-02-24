@@ -477,6 +477,45 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Expanded isUsefulKeyword.
+- Removed the deprecated xCount option "NumBlockingMe".
+- Improved predictPowerBonusOfAttacker and predictToughnessBonusOfAttacker.
+- Updated some SVars.
+- Renamed "AbHost" to "OriginalHost", to make it a little more clear what is meant.
+- some code for The Wretched.
+- Added Jumzajedi's cube update dated 2-21-12.
+- Added a fluff piece to the changes.txt file.
+- ValidTgts now also uses isValid for players.
+- Added the property "wasDealtDamageThisTurn" for players.
+- Added some more canTarget checks to AI targeting (WIP).
+- Support for old decks
+- Text fix to Heretic's Punishment.
+- Changing the Ante popup from a Ok/Cancel to a Message
+- Common overlay templates added to GuiUtils.
+- Draft submenu rebuild.
+- Minor update.
+- SetInfo => EditionInfo, same rename for *utils
+- moved EditionUtils, FormatUtils from AllZone to FModel
+- BoosterUtils moved to quest (because it is not used from other packages)
+- Predicates for edition's legality in formats moved to CardEdition, so that global references in FormatUtils were eliminated
+- FileSection now trims its tree keys too, editions are parsed by FileSection class
+- delete obselete deck generators
+- Added some more canTarget checks to AI targeting (WIP).
+- Added canPlayFromEffectAI to some AF's.
+- replaced some cardFactory.getcard to CardPrinted.toForgeCard calls
+- still renaming set to edition
+- streamlined challenge reward generation
+- Fixed Orochi Eggwatcher.
+- Further work on home screen.
+- Fixed the activated ability of Ib Halfheart, Goblin Tactician.
+- Fixed Inquisitor's Snare.
+- checkstyle
+- checkstyle
+- checkstyle
+- package-info files
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -660,6 +699,11 @@ Omen Machine
 Prince of Thralls
 Auriok Survivors
 Orim's Chant
+Writ of Passage
+Rakdos Riteknife
+Needle Drop
+Gaze of the Gorgon
+Heretic's Punishment
 
 
 end
