@@ -11045,7 +11045,6 @@ src/main/java/forge/Untap.java -text
 src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
-src/main/java/forge/card/BoosterUtils.java svneol=native#text/plain
 src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardCharacteristics.java -text
 src/main/java/forge/card/CardColor.java -text
@@ -11370,6 +11369,7 @@ src/main/java/forge/properties/NewConstants.java svneol=native#text/plain
 src/main/java/forge/properties/Preferences.java svneol=native#text/plain
 src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/plain
 src/main/java/forge/properties/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
 src/main/java/forge/quest/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/SellRules.java -text
 src/main/java/forge/quest/data/PreconReader.java -text

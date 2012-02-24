@@ -25,9 +25,9 @@ import forge.CardList;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Player;
-import forge.card.BoosterUtils;
 import forge.card.CardRarity;
 import forge.item.CardPrinted;
+import forge.quest.BoosterUtils;
 
 /**
  * <p>

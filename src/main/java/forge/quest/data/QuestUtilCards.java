@@ -25,7 +25,6 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
-import forge.card.BoosterUtils;
 import forge.card.CardRarity;
 import forge.card.CardEdition;
 import forge.card.FormatUtils;
@@ -37,6 +36,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.item.PreconDeck;
+import forge.quest.BoosterUtils;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 
@@ -317,15 +317,16 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    private final Predicate<CardEdition> filterExt = FormatUtils.Predicates.SETS_IN_EXT;
+    private final FormatUtils formats = Singletons.getModel().getFormats();
+    private final Predicate<CardEdition> filterExt = CardEdition.Predicates.isLegalInFormat(formats.getExtended());
 
     /** The filter t2booster. */
     private final Predicate<CardEdition> filterT2booster = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            FormatUtils.Predicates.SETS_IN_STANDARD);
+            CardEdition.Predicates.isLegalInFormat(formats.getStandard()));
 
     /** The filter ext but t2. */
     private final Predicate<CardEdition> filterExtButT2 = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicate.and(this.filterExt, Predicate.not(FormatUtils.Predicates.SETS_IN_STANDARD)));
+            Predicate.and(this.filterExt, Predicate.not(CardEdition.Predicates.isLegalInFormat(formats.getStandard()))));
 
     /** The filter not ext. */
     private final Predicate<CardEdition> filterNotExt = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,

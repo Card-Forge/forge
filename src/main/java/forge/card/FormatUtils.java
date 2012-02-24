@@ -7,11 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.slightlymagic.maxmtg.Predicate;
-
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Singletons;
 import forge.game.GameFormat;
 import forge.util.FileUtil;
 
@@ -91,37 +88,6 @@ public final class FormatUtils {
 
             formats.put(name, thisFormat);
         }
-    }
-
-    public abstract static class Predicates {
-
-        public static final Predicate<CardEdition> isLegalInFormat(final GameFormat format) {
-            return new LegalInFormat(format);
-        }
-
-        private static class LegalInFormat extends Predicate<CardEdition> {
-            private final GameFormat format;
-
-            public LegalInFormat(final GameFormat fmt) {
-                this.format = fmt;
-            }
-
-            @Override
-            public boolean isTrue(final CardEdition subject) {
-                return this.format.isSetLegal(subject.getCode());
-            }
-        }
-
-        /** The Constant setsInT2. */
-        public static final Predicate<CardEdition> SETS_IN_STANDARD = Predicates
-                .isLegalInFormat(Singletons.getModel().getFormats().getStandard());
-
-        /** The Constant setsInExt. */
-        public static final Predicate<CardEdition> SETS_IN_EXT = Predicates.isLegalInFormat(Singletons.getModel().getFormats().getExtended());
-
-        /** The Constant setsInModern. */
-        public static final Predicate<CardEdition> SET_IN_MODERN = Predicates.isLegalInFormat(Singletons.getModel().getFormats().getModern());
-
     }
 }
 

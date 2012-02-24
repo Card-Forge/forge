@@ -26,6 +26,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.util.FileSection;
 import forge.util.FileUtil;
 
 /**
@@ -145,34 +146,23 @@ public final class EditionUtils {
     private List<CardEdition> loadSetData(final Map<String, CardEdition.BoosterData> boosters) {
         final ArrayList<String> fData = FileUtil.readFile("res/blockdata/setdata.txt");
 
+        
+        
         final List<CardEdition> allSets = new ArrayList<CardEdition>();
         for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
             }
 
-            final String[] sParts = s.trim().split("\\|");
-            String code = null, code2 = null, name = null;
+            FileSection section = FileSection.parse(s, ":", "|");
+            String code = section.get("code3");
+            int index = section.getInt("index", -1);
+            String code2 = section.get("code2");
+            String name = section.get("name");
+            String alias = section.get("alias");
 
-            int index = -1;
-            String alias = null;
-            for (final String sPart : sParts) {
-                final String[] kv = sPart.split(":", 2);
-                final String key = kv[0].toLowerCase();
-                if ("code3".equals(key)) {
-                    code = kv[1];
-                } else if ("code2".equals(key)) {
-                    code2 = kv[1];
-                } else if ("name".equals(key)) {
-                    name = kv[1];
-                } else if ("index".equals(key)) {
-                    index = Integer.parseInt(kv[1]);
-                } else if ("alias".equals(key)) {
-                    alias = kv[1];
-                }
-            }
             final CardEdition set = new CardEdition(index, name, code, code2, boosters.get(code));
-            boosters.remove(code);
+            //boosters.remove(code);
             setsByCode.put(code, set);
             if (alias != null) {
                 setsByCode.put(alias, set);

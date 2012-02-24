@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card;
+package forge.quest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +26,8 @@ import net.slightlymagic.maxmtg.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Constant;
+import forge.card.CardRarity;
+import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
@@ -293,7 +295,7 @@ public final class BoosterUtils {
      *            the color
      * @return the card printed
      */
-    public static CardPrinted findCardOfColor(final List<CardPrinted> in, final int color) {
+    private static CardPrinted findCardOfColor(final List<CardPrinted> in, final int color) {
         final Predicate<CardRules> filter = CardRules.Predicates.Presets.COLORS.get(color);
         if (null == filter) {
             return null;

@@ -17,6 +17,7 @@
  */
 package forge.card;
 
+import forge.game.GameFormat;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 
@@ -352,6 +353,23 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 return subject.canGenerateBooster();
             }
         }
+        
 
+        public final static Predicate<CardEdition> isLegalInFormat(final GameFormat format) {
+            return new LegalInFormat(format);
+        }
+
+        private static class LegalInFormat extends Predicate<CardEdition> {
+            private final GameFormat format;
+
+            public LegalInFormat(final GameFormat fmt) {
+                this.format = fmt;
+            }
+
+            @Override
+            public boolean isTrue(final CardEdition subject) {
+                return this.format.isSetLegal(subject.getCode());
+            }
+        }
     }
 }

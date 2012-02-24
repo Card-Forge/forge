@@ -25,7 +25,7 @@ public class FileSection {
 
         for (final String dd : pairs) {
             final String[] v = splitter.split(dd, 2);
-            result.lines.put(v[0], v.length > 1 ? v[1].trim() : "");
+            result.lines.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
         }
 
         return result;
@@ -36,7 +36,7 @@ public class FileSection {
         Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
         for (final String dd : lines) {
             final String[] v = splitter.split(dd, 2);
-            result.lines.put(v[0], v.length > 1 ? v[1].trim() : "");
+            result.lines.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
         }
 
         return result;
