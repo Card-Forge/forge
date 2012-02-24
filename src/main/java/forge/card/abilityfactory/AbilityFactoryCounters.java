@@ -134,6 +134,14 @@ public class AbilityFactoryCounters {
             public void resolve() {
                 AbilityFactoryCounters.putResolve(af, this);
             }
+            
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryCounters.putDoTriggerAINoCost(af, this, mandatory);
+                }
+                return AbilityFactoryCounters.putDoTriggerAI(af, this, mandatory);
+            }
 
         };
         return spPutCounter;
@@ -494,10 +502,26 @@ public class AbilityFactoryCounters {
      * @return a boolean.
      */
     private static boolean putDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        // if there is a cost, it's gotta be optional
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
+        return putDoTriggerAINoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * putDoTriggerAINoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean putDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
         final Target abTgt = sa.getTarget();

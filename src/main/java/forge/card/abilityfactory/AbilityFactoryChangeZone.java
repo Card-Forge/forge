@@ -133,6 +133,14 @@ public final class AbilityFactoryChangeZone {
             public String getStackDescription() {
                 return AbilityFactoryChangeZone.changeZoneDescription(af, this);
             }
+
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryChangeZone.changeZoneTriggerAINoCost(af, this, mandatory);
+                }
+                return AbilityFactoryChangeZone.changeZoneTriggerAI(af, this, mandatory);
+            }
         };
         AbilityFactoryChangeZone.setMiscellaneous(af, spChangeZone);
         return spChangeZone;
@@ -303,6 +311,27 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     private static boolean changeZoneTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+            return false;
+        }
+
+        return changeZoneTriggerAINoCost(af, sa, mandatory);
+    }
+    
+    /**
+     * <p>
+     * changeZoneTriggerAINoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean changeZoneTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         String origin = "";
         if (params.containsKey("Origin")) {

@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 import forge.AllZone;
 import forge.Card;
+import forge.ComputerUtil;
 import forge.Constant;
 import forge.Player;
 import forge.Singletons;
@@ -109,6 +110,14 @@ public class AbilityFactoryTurns {
             @Override
             public void resolve() {
                 AbilityFactoryTurns.addTurnResolve(af, this);
+            }
+
+            @Override
+            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+                if (withOutManaCost) {
+                    return AbilityFactoryTurns.addTurnTriggerAINoCost(af, this, mandatory);
+                }
+                return AbilityFactoryTurns.addTurnTriggerAI(af, this, mandatory);
             }
 
         };
@@ -219,9 +228,9 @@ public class AbilityFactoryTurns {
      * @return a boolean.
      */
     private static boolean addTurnCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return AbilityFactoryTurns.addTurnTriggerAI(af, sa, false);
+        return AbilityFactoryTurns.addTurnTriggerAINoCost(af, sa, false);
     }
-
+    
     /**
      * <p>
      * addTurnTriggerAI.
@@ -236,6 +245,26 @@ public class AbilityFactoryTurns {
      * @return a boolean.
      */
     private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+            return false;
+        }
+        return addTurnTriggerAINoCost(af, sa, mandatory);
+    }
+
+    /**
+     * <p>
+     * addTurnTriggerAINoCost.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean addTurnTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
@@ -243,7 +272,13 @@ public class AbilityFactoryTurns {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getComputerPlayer());
+            if (sa.canTarget(AllZone.getComputerPlayer())) {
+                sa.getTarget().addTarget(AllZone.getComputerPlayer());
+            } else if (mandatory && sa.canTarget(AllZone.getHumanPlayer())) {
+                sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            } else {
+                return false;
+            }
         } else {
             final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                     params.get("Defined"), sa);

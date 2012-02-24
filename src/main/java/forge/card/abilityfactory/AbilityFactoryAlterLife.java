@@ -749,8 +749,6 @@ public class AbilityFactoryAlterLife {
      */
     public static boolean loseLifeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
-            // payment it's usually
-            // not mandatory
             return false;
         }
         return loseLifeDoTriggerAINoCost(af, sa, mandatory);
