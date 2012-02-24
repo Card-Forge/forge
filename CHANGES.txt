@@ -23,6 +23,8 @@ The Forge archive includes a readme.txt file and we ask that you spend a few min
 
 We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
 
+Some people use the application 7zip for the Windows OS. This utility can be found at http://www.7-zip.org/download.html
+
 
 Fixes/Features:
 
