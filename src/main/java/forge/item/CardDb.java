@@ -31,8 +31,8 @@ import net.slightlymagic.maxmtg.Predicate;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.card.MtgDataParser;
@@ -392,10 +392,10 @@ public final class CardDb {
 
                 // Find card with maximal set index
                 result = namedCards.get(0);
-                int resIndex = AllZone.getEditions().getEditionByCode((result).getEdition()).getIndex();
+                int resIndex = Singletons.getModel().getEditions().getEditionByCode((result).getEdition()).getIndex();
                 for (final CardPrinted card : namedCards) {
 
-                    final int thisIndex = AllZone.getEditions().getEditionByCode((card).getEdition()).getIndex();
+                    final int thisIndex = Singletons.getModel().getEditions().getEditionByCode((card).getEdition()).getIndex();
                     if (thisIndex > resIndex) {
                         result = card;
                         resIndex = thisIndex;

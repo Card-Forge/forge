@@ -11,7 +11,7 @@ import net.slightlymagic.maxmtg.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.game.GameFormat;
 import forge.util.FileUtil;
 
@@ -114,13 +114,13 @@ public final class FormatUtils {
 
         /** The Constant setsInT2. */
         public static final Predicate<CardEdition> SETS_IN_STANDARD = Predicates
-                .isLegalInFormat(AllZone.getFormats().getStandard());
+                .isLegalInFormat(Singletons.getModel().getFormats().getStandard());
 
         /** The Constant setsInExt. */
-        public static final Predicate<CardEdition> SETS_IN_EXT = Predicates.isLegalInFormat(AllZone.getFormats().getExtended());
+        public static final Predicate<CardEdition> SETS_IN_EXT = Predicates.isLegalInFormat(Singletons.getModel().getFormats().getExtended());
 
         /** The Constant setsInModern. */
-        public static final Predicate<CardEdition> SET_IN_MODERN = Predicates.isLegalInFormat(AllZone.getFormats().getModern());
+        public static final Predicate<CardEdition> SET_IN_MODERN = Predicates.isLegalInFormat(Singletons.getModel().getFormats().getModern());
 
     }
 }

@@ -25,7 +25,7 @@ package forge.card;
  * @author Forge
  * @version $Id$
  */
-public class SetInfo {
+public class EditionInfo {
 
     /** The Code. */
     private String code;
@@ -44,7 +44,7 @@ public class SetInfo {
      * Constructor for SetInfo.
      * </p>
      */
-    public SetInfo() {
+    public EditionInfo() {
         this.setCode("");
         this.setRarity("");
         this.setUrl("");
@@ -63,7 +63,7 @@ public class SetInfo {
      * @param u
      *            a {@link java.lang.String} object.
      */
-    public SetInfo(final String c, final String r, final String u) {
+    public EditionInfo(final String c, final String r, final String u) {
         this.setCode(c);
         this.setRarity(r);
         this.setUrl(u);
@@ -84,7 +84,7 @@ public class SetInfo {
      * @param p
      *            a int.
      */
-    public SetInfo(final String c, final String r, final String u, final int p) {
+    public EditionInfo(final String c, final String r, final String u, final int p) {
         this.setCode(c);
         this.setRarity(r);
         this.setUrl(u);
@@ -99,7 +99,7 @@ public class SetInfo {
      * @param parse
      *            a {@link java.lang.String} object.
      */
-    public SetInfo(final String parse) {
+    public EditionInfo(final String parse) {
         final String[] pp = parse.split("\\|");
         this.setCode(pp[0]);
         this.setRarity(pp[1]);
@@ -126,8 +126,8 @@ public class SetInfo {
     /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object o) {
-        if (o instanceof SetInfo) {
-            final SetInfo siO = (SetInfo) o;
+        if (o instanceof EditionInfo) {
+            final EditionInfo siO = (EditionInfo) o;
             return this.getCode().equals(siO.getCode());
         } else {
             return false;

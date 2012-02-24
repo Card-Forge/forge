@@ -31,7 +31,6 @@ import javax.swing.JOptionPane;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Closure1;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
@@ -94,7 +93,7 @@ public final class BoosterDraft implements IBoosterDraft {
             break;
 
         case Block: // Draft from cards by block or set
-            final List<CardBlock> blocks = AllZone.getEditions().getBlocks();
+            final List<CardBlock> blocks = Singletons.getModel().getEditions().getBlocks();
 
             final Object o = GuiUtils.getChoice("Choose Block", blocks.toArray());
             final CardBlock block = (CardBlock) o;
@@ -125,12 +124,12 @@ public final class BoosterDraft implements IBoosterDraft {
                 final Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    final BoosterGenerator bpMulti = new BoosterGenerator(AllZone.getEditions().getEditionByCode(pp[i]));
+                    final BoosterGenerator bpMulti = new BoosterGenerator(Singletons.getModel().getEditions().getEditionByCode(pp[i]));
                     this.packs.add(BoosterGenerator.getSimplePicker(bpMulti));
                 }
 
             } else {
-                final BoosterGenerator bpOne = new BoosterGenerator(AllZone.getEditions().getEditionByCode(sets[0]));
+                final BoosterGenerator bpOne = new BoosterGenerator(Singletons.getModel().getEditions().getEditionByCode(sets[0]));
                 final Closure1<List<CardPrinted>, BoosterGenerator> pick1 = BoosterGenerator.getSimplePicker(bpOne);
                 for (int i = 0; i < nPacks; i++) {
                     this.packs.add(pick1);

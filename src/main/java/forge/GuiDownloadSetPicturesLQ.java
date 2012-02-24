@@ -71,7 +71,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         final String urlBase = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/fpics/";
 
         final String setCode3 = c.getEdition();
-        final CardEdition thisSet = AllZone.getEditions().getEditionByCode(setCode3);
+        final CardEdition thisSet = Singletons.getModel().getEditions().getEditionByCode(setCode3);
         final String setCode2 = thisSet.getCode2();
 
         final String imgFN = CardUtil.buildFilename(c, cardName);

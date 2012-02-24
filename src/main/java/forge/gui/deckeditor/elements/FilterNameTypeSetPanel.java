@@ -33,7 +33,7 @@ import net.slightlymagic.maxmtg.PredicateString.StringOp;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
@@ -91,10 +91,10 @@ public class FilterNameTypeSetPanel extends JComponent {
 
         this.searchSetCombo.removeAllItems();
         this.searchSetCombo.addItem("(all sets and formats)");
-        for (final GameFormat s : AllZone.getFormats().getFormats()) {
+        for (final GameFormat s : Singletons.getModel().getFormats().getFormats()) {
             this.searchSetCombo.addItem(s);
         }
-        for (final CardEdition s : AllZone.getEditions().getAllSets()) {
+        for (final CardEdition s : Singletons.getModel().getEditions().getAllSets()) {
             this.searchSetCombo.addItem(s);
         }
 

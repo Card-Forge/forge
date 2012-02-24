@@ -51,7 +51,7 @@ import javax.swing.event.ChangeListener;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.SetInfo;
+import forge.card.EditionInfo;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -493,12 +493,12 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
             // String url = c.getSVar("Picture");
             // String[] URLs = url.split("\\\\");
 
-            final ArrayList<SetInfo> cSetInfo = c.getSets();
+            final ArrayList<EditionInfo> cSetInfo = c.getSets();
             if (cSetInfo.size() > 0) {
                 for (int j = 0; j < cSetInfo.size(); j++) {
                     c.setCurSetCode(cSetInfo.get(j).getCode());
                     final String setCode3 = c.getCurSetCode();
-                    final String setCode2 = AllZone.getEditions().getCode2ByCode(c.getCurSetCode());
+                    final String setCode2 = Singletons.getModel().getEditions().getCode2ByCode(c.getCurSetCode());
 
                     int n = 0;
                     if (cSetInfo.get(j).getPicCount() > 0) {

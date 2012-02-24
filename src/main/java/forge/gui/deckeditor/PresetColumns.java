@@ -21,7 +21,7 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import forge.AllZone;
+import forge.Singletons;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRarity;
@@ -55,7 +55,7 @@ public abstract class PresetColumns {
     }
 
     private static CardEdition toSetCmp(final InventoryItem i) {
-        return i instanceof InventoryItemFromSet ? AllZone.getEditions().getEditionByCode(((InventoryItemFromSet) i).getEdition())
+        return i instanceof InventoryItemFromSet ? Singletons.getModel().getEditions().getEditionByCode(((InventoryItemFromSet) i).getEdition())
                 : CardEdition.UNKNOWN;
     }
 

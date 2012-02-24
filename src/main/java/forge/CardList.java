@@ -26,7 +26,7 @@ import java.util.List;
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
 
-import forge.card.SetInfo;
+import forge.card.EditionInfo;
 import forge.card.spellability.SpellAbility;
 import forge.util.MyRandom;
 
@@ -158,7 +158,7 @@ public class CardList implements Iterable<Card> {
     public final CardList getSets(final ArrayList<String> sets) {
         final CardList list = new CardList();
         for (final Card c : this) {
-            for (final SetInfo set : c.getSets()) {
+            for (final EditionInfo set : c.getSets()) {
                 if (sets.contains(set.toString())) {
                     list.add(c);
                     break;

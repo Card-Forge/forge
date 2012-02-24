@@ -33,7 +33,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Constant.Zone;
 import forge.card.CardCharacteristics;
-import forge.card.SetInfo;
+import forge.card.EditionInfo;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -8239,9 +8239,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param sInfo
-     *            a {@link forge.card.SetInfo} object.
+     *            a {@link forge.card.EditionInfo} object.
      */
-    public final void addSet(final SetInfo sInfo) {
+    public final void addSet(final EditionInfo sInfo) {
         this.getCharacteristics().getSets().add(sInfo);
     }
 
@@ -8252,7 +8252,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<SetInfo> getSets() {
+    public final ArrayList<EditionInfo> getSets() {
         return this.getCharacteristics().getSets();
     }
 
@@ -8264,7 +8264,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param siList
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setSets(final ArrayList<SetInfo> siList) {
+    public final void setSets(final ArrayList<EditionInfo> siList) {
         this.getCharacteristics().setSets(siList);
     }
 
@@ -8302,7 +8302,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         final Random r = MyRandom.getRandom();
-        final SetInfo si = this.getCharacteristics().getSets()
+        final EditionInfo si = this.getCharacteristics().getSets()
                 .get(r.nextInt(this.getCharacteristics().getSets().size()));
 
         this.curSetCode = si.getCode();

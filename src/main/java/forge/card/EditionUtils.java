@@ -36,7 +36,7 @@ import forge.util.FileUtil;
  * @author Forge
  * @version $Id$
  */
-public final class SetUtils {
+public final class EditionUtils {
 
     private final List<CardEdition> allSets;
 
@@ -44,7 +44,7 @@ public final class SetUtils {
         return allSets;
     }
 
-    public SetUtils() {
+    public EditionUtils() {
         allSets = loadSetData(loadBoosterData());
         allBlocks = loadBlockData();
     }

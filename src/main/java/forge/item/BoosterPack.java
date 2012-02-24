@@ -21,7 +21,7 @@ import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.AllZone;
+import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardRules;
 import forge.card.CardEdition;
@@ -52,7 +52,7 @@ public class BoosterPack implements InventoryItemFromSet {
      *            the set
      */
     public BoosterPack(final String set) {
-        this(AllZone.getEditions().getEditionByCodeOrThrow(set));
+        this(Singletons.getModel().getEditions().getEditionByCodeOrThrow(set));
     }
 
     /**
@@ -118,7 +118,7 @@ public class BoosterPack implements InventoryItemFromSet {
     }
 
     private CardPrinted getLandFromNearestSet() {
-        final List<CardEdition> sets = AllZone.getEditions().getAllSets();
+        final List<CardEdition> sets = Singletons.getModel().getEditions().getAllSets();
         final int iThisSet = sets.indexOf(this.cardSet);
         for (int iSet = iThisSet; iSet < sets.size(); iSet++) {
             final CardPrinted land = this.getRandomBasicLand(sets.get(iSet));
@@ -127,7 +127,7 @@ public class BoosterPack implements InventoryItemFromSet {
             }
         }
         // if not found (though that's impossible)
-        return this.getRandomBasicLand(AllZone.getEditions().getEditionByCode("M12"));
+        return this.getRandomBasicLand(Singletons.getModel().getEditions().getEditionByCode("M12"));
     }
 
     private void generate() {

@@ -23,7 +23,6 @@ import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
-import forge.AllZone;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.BoosterUtils;
@@ -343,7 +342,7 @@ public final class QuestUtilCards {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
             final Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
-            this.q.getShopList().addAllFlat(filter.random(AllZone.getEditions().getAllSets(), 1, BoosterPack.FN_FROM_SET));
+            this.q.getShopList().addAllFlat(filter.random(Singletons.getModel().getEditions().getAllSets(), 1, BoosterPack.FN_FROM_SET));
         }
     }
 

@@ -79,7 +79,7 @@ public class SealedDeck {
             this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getEdition();
         } else if (sealedType.equals("Block")) {
 
-            final Object o = GuiUtils.getChoice("Choose Block", AllZone.getEditions().getBlocks().toArray());
+            final Object o = GuiUtils.getChoice("Choose Block", Singletons.getModel().getEditions().getBlocks().toArray());
             final CardBlock block = (CardBlock) o;
 
             final CardEdition[] cardSets = block.getSets();
@@ -106,11 +106,11 @@ public class SealedDeck {
 
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    final BoosterGenerator bpMulti = new BoosterGenerator(AllZone.getEditions().getEditionByCode(pp[i]));
+                    final BoosterGenerator bpMulti = new BoosterGenerator(Singletons.getModel().getEditions().getEditionByCode(pp[i]));
                     this.packs.add(BoosterGenerator.getSimplePicker(bpMulti));
                 }
             } else {
-                final BoosterGenerator bpOne = new BoosterGenerator(AllZone.getEditions().getEditionByCode(sets[0]));
+                final BoosterGenerator bpOne = new BoosterGenerator(Singletons.getModel().getEditions().getEditionByCode(sets[0]));
                 final Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpOne);
                 for (int i = 0; i < nPacks; i++) {
                     this.packs.add(picker);

@@ -34,6 +34,8 @@ import forge.Constant;
 import forge.ConstantStringArrayList;
 import forge.GameAction;
 import forge.Singletons;
+import forge.card.EditionUtils;
+import forge.card.FormatUtils;
 import forge.control.input.InputControl;
 import forge.deck.CardCollections;
 import forge.game.GameState;
@@ -75,6 +77,10 @@ public enum FModel {
     private final QuestEventManager questEventManager;
     private final GameState gameState;
     private final FMatchState matchState;
+    
+    private final EditionUtils setUtils;
+    private final FormatUtils formats;
+
 
     // have to implement lazy initialization - at the moment of FModel.ctor() CardDb is not ready yet.
     private CardCollections decks;
@@ -117,6 +123,8 @@ public enum FModel {
         this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
         this.questEventManager = new QuestEventManager();
+        this.setUtils = new EditionUtils();
+        this.formats = new FormatUtils();
 
         // TODO this single setting from preferences should not be here, or,
         // it should be here with all the other settings at the same time.
@@ -146,6 +154,7 @@ public enum FModel {
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();
     }
+
 
     /**
      * Load dynamic gamedata.
@@ -355,6 +364,21 @@ public enum FModel {
     public final GameSummary getGameSummary() {
         return this.gameState.getGameSummary();
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    
+    public final EditionUtils getEditions() {
+        return setUtils;
+    }
+
+
+    public final FormatUtils getFormats() {
+        return formats;
+    }
+
 
     /**
      * TODO: Needs to be reworked for efficiency with rest of prefs saves in

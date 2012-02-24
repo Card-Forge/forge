@@ -25,7 +25,7 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import com.google.code.jyield.Generator;
 
-import forge.card.SetInfo;
+import forge.card.EditionInfo;
 
 /**
  * <p>
@@ -351,7 +351,7 @@ public class CardFilter {
                     return false;
                 }
 
-                for (final SetInfo set : c.getSets()) {
+                for (final EditionInfo set : c.getSets()) {
                     if ((set != null) && sets.contains(set.toString())) {
                         return true;
                     }

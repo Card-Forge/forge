@@ -46,7 +46,7 @@ import com.google.code.jyield.YieldUtils;
 
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
-import forge.card.SetInfo;
+import forge.card.EditionInfo;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
@@ -466,7 +466,7 @@ public class CardReader implements Runnable {
                     card.addReplacementEffect(ReplacementHandler.parseReplacement(value, card));
                 } else if (line.startsWith("SetInfo:")) {
                     final String value = line.substring("SetInfo:".length());
-                    card.addSet(new SetInfo(value));
+                    card.addSet(new EditionInfo(value));
                     // 8/18/11 11:08 PM
                 } else if (line.equals("ALTERNATE")) {
                     String mode;

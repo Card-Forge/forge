@@ -48,7 +48,7 @@ public class CardCharacteristics {
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
     private String imageFilename = "";
     private String imageName = "";
-    private ArrayList<SetInfo> sets = new ArrayList<SetInfo>();
+    private ArrayList<EditionInfo> sets = new ArrayList<EditionInfo>();
 
     /**
      * Gets the name.
@@ -321,7 +321,7 @@ public class CardCharacteristics {
      * 
      * @return the sets
      */
-    public final ArrayList<SetInfo> getSets() {
+    public final ArrayList<EditionInfo> getSets() {
         return this.sets;
     }
 
@@ -331,8 +331,8 @@ public class CardCharacteristics {
      * @param sets0
      *            the sets to set
      */
-    public final void setSets(final ArrayList<SetInfo> sets0) {
-        this.sets = new ArrayList<SetInfo>(sets0);
+    public final void setSets(final ArrayList<EditionInfo> sets0) {
+        this.sets = new ArrayList<EditionInfo>(sets0);
         // name.
     }
 

@@ -31,7 +31,7 @@ import net.slightlymagic.maxmtg.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
-import forge.card.SetInfo;
+import forge.card.EditionInfo;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityList;
@@ -676,13 +676,13 @@ public final class CardUtil {
         final boolean token = card.isToken() && !card.isCopiedToken();
 
         final String set = card.getCurSetCode();
-        final Predicate<SetInfo> findSetInfo = new Predicate<SetInfo>() {
+        final Predicate<EditionInfo> findSetInfo = new Predicate<EditionInfo>() {
             @Override
-            public boolean isTrue(final SetInfo subject) {
+            public boolean isTrue(final EditionInfo subject) {
                 return subject.getCode().equals(set);
             }
         };
-        final SetInfo neededSet = findSetInfo.first(card.getSets());
+        final EditionInfo neededSet = findSetInfo.first(card.getSets());
         final int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
         return CardUtil
                 .buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
@@ -732,7 +732,7 @@ public final class CardUtil {
             }
 
             // Second, try 2 letter set code with MWS filename format
-            final String mwsSet2 = String.format("%s/%s%s.full", AllZone.getEditions().getCode2ByCode(setName), mwsCardName, nn);
+            final String mwsSet2 = String.format("%s/%s%s.full", Singletons.getModel().getEditions().getCode2ByCode(setName), mwsCardName, nn);
             f = new File(path, mwsSet2 + ".jpg");
             if (f.exists()) {
                 return mwsSet2;
