@@ -23,11 +23,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
-import forge.Constant;
 import forge.Player;
-import forge.card.CardRarity;
-import forge.item.CardPrinted;
-import forge.quest.BoosterUtils;
 
 /**
  * <p>
@@ -159,47 +155,6 @@ public class QuestUtil {
         }
 
         return c;
-    }
-
-    /**
-     * <p>
-     * generateCardRewardList.
-     * </p>
-     * Takes a reward list string, parses, and returns list of cards rewarded.
-     * 
-     * @param s
-     *            Properties string of reward (97 multicolor rares)
-     * @return CardList
-     */
-    public static List<CardPrinted> generateCardRewardList(final String s) {
-        final String[] temp = s.split(" ");
-
-        final int qty = Integer.parseInt(temp[0]);
-        // Determine rarity
-        CardRarity rar = CardRarity.Uncommon;
-        if (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")) {
-            rar = CardRarity.Rare;
-        }
-
-        // Determine color ("random" defaults to null color)
-        String col = null;
-        if (temp[1].equalsIgnoreCase("black")) {
-            col = Constant.Color.BLACK;
-        } else if (temp[1].equalsIgnoreCase("blue")) {
-            col = Constant.Color.BLUE;
-        } else if (temp[1].equalsIgnoreCase("colorless")) {
-            col = Constant.Color.COLORLESS;
-        } else if (temp[1].equalsIgnoreCase("green")) {
-            col = Constant.Color.GREEN;
-        } else if (temp[1].equalsIgnoreCase("multicolor")) {
-            col = "Multicolor"; // Note: No constant color for this??
-        } else if (temp[1].equalsIgnoreCase("red")) {
-            col = Constant.Color.RED;
-        } else if (temp[1].equalsIgnoreCase("white")) {
-            col = Constant.Color.WHITE;
-        }
-
-        return BoosterUtils.generateCards(qty, rar, col);
     }
 
     /**

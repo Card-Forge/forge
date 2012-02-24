@@ -111,7 +111,6 @@ public class GameNew {
         Singletons.getControl().getControlMatch().getMessageControl().updateGameCount();
 
         // friendliness
-        final CardFactoryInterface c = AllZone.getCardFactory();
         Card.resetUniqueNumber();
         final boolean canRandomFoil = Constant.Runtime.RANDOM_FOIL[0]
                 && Constant.Runtime.getGameType().equals(GameType.Constructed);
@@ -125,15 +124,12 @@ public class GameNew {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
-                final Card card = c.getCard(cardPrinted.getName(), AllZone.getHumanPlayer());
-                card.setCurSetCode(cardPrinted.getEdition());
-
-                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getEdition()).getCopiesCount();
+                final Card card = cardPrinted.toForgeCard(AllZone.getHumanPlayer());
+                final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
                 if (cntVariants > 1) {
                     card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
+                    card.setImageFilename(CardUtil.buildFilename(card));
                 }
-
-                card.setImageFilename(CardUtil.buildFilename(card));
 
                 // Assign random foiling on approximately 1:20 cards
                 if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
@@ -167,15 +163,12 @@ public class GameNew {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
-                final Card card = c.getCard(cardPrinted.getName(), AllZone.getComputerPlayer());
-                card.setCurSetCode(cardPrinted.getEdition());
-
-                final int cntVariants = cardPrinted.getCard().getSetInfo(cardPrinted.getEdition()).getCopiesCount();
+                final Card card = cardPrinted.toForgeCard(AllZone.getComputerPlayer());
+                final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
                 if (cntVariants > 1) {
                     card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
+                    card.setImageFilename(CardUtil.buildFilename(card));
                 }
-
-                card.setImageFilename(CardUtil.buildFilename(card));
 
                 // Assign random foiling on approximately 1:20 cards
                 if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {

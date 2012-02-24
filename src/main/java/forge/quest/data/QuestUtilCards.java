@@ -25,7 +25,6 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
-import forge.card.CardRarity;
 import forge.card.CardEdition;
 import forge.card.FormatUtils;
 import forge.deck.Deck;
@@ -104,9 +103,9 @@ public final class QuestUtilCards {
         final int nRare = this.qpref.getPreferenceInt(QPref.BOOSTER_RARES);
 
         final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
-        newCards.addAll(BoosterUtils.generateCards(fSets, nCommon, CardRarity.Common, null));
-        newCards.addAll(BoosterUtils.generateCards(fSets, nUncommon, CardRarity.Uncommon, null));
-        newCards.addAll(BoosterUtils.generateCards(fSets, nRare, CardRarity.Rare, null));
+        newCards.addAll(BoosterUtils.generateDistinctCards(Predicate.and(fSets, CardPrinted.Predicates.Presets.IS_COMMON), nCommon));
+        newCards.addAll(BoosterUtils.generateDistinctCards(Predicate.and(fSets, CardPrinted.Predicates.Presets.IS_UNCOMMON), nUncommon));
+        newCards.addAll(BoosterUtils.generateDistinctCards(Predicate.and(fSets, CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC), nRare));
 
         this.addAllCards(newCards);
         return newCards;

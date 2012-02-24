@@ -29,6 +29,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
+import forge.Player;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 
@@ -83,7 +84,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @see forge.item.InventoryItemFromSet#getSet()
      */
     /**
-     * Gets the sets the.
+     * Gets the edition code of the card.
      * 
      * @return String
      */
@@ -274,8 +275,13 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @return the card
      */
-    public Card toForgeCard() {
-        final Card c = AllZone.getCardFactory().getCard(this.name, null);
+    public Card toForgeCard() { 
+        return toForgeCard(null);
+    }
+    
+    
+    public Card toForgeCard(Player owner) {
+        final Card c = AllZone.getCardFactory().getCard(this.name, owner);
         if (c != null) {
             c.setCurSetCode(this.getEdition());
             c.setRandomPicture(this.artIndex + 1);

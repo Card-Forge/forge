@@ -32,6 +32,7 @@ import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.BoosterUtils;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.FileUtil;
 import forge.util.SectionUtil;
@@ -186,7 +187,7 @@ public class QuestEventManager {
                 qc.setCreditsReward(Integer.parseInt(value));
             } else if (key.equalsIgnoreCase("Card Reward")) {
                 qc.setCardReward(value);
-                qc.setCardRewardList(QuestUtil.generateCardRewardList(value));
+                qc.setCardRewardList(BoosterUtils.generateCardRewardList(value));
             }
             // Human extra card list assembled here.
             else if (key.equalsIgnoreCase("HumanExtras") && !value.equals("")) {
@@ -213,7 +214,7 @@ public class QuestEventManager {
             // Card reward list assembled here.
             else if (key.equalsIgnoreCase("Card Reward")) {
                 qc.setCardReward(value);
-                qc.setCardRewardList(QuestUtil.generateCardRewardList(value));
+                qc.setCardRewardList(BoosterUtils.generateCardRewardList(value));
             }
         }
         return qc;

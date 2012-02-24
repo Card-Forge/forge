@@ -81,7 +81,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
             System.out.println("Oh snap!");
         }
         if (!foundSetImage) {
-            final int artsCnt = c.getCard().getSetInfo(setCode3).getCopiesCount();
+            final int artsCnt = c.getCard().getEditionInfo(setCode3).getCopiesCount();
             final String fn = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
             cList.add(new DownloadObject(fn, urlBase + setCode2 + "/" + Base64Coder.encodeString(fn, true),
                     this.picturesPath + File.separator + setCode3));

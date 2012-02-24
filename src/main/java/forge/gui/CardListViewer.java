@@ -37,9 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.AllZone;
 import forge.Card;
-import forge.CardUtil;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.item.CardPrinted;
@@ -217,10 +215,7 @@ public class CardListViewer {
                 this.cache = new Card[CardListViewer.this.list.size()];
             }
             if (null == this.cache[row]) {
-                final Card card = AllZone.getCardFactory().getCard(cp.getName(), null);
-                card.setCurSetCode(cp.getEdition());
-                card.setImageFilename(CardUtil.buildFilename(card));
-                this.cache[row] = card;
+                this.cache[row] = cp.toForgeCard();
             }
         }
     }

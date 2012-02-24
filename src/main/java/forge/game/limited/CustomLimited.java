@@ -21,7 +21,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.card.CardRarity;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -70,8 +69,7 @@ public class CustomLimited extends DeckBase {
     private transient ItemPoolView<CardPrinted> cardPool;
 
     /** The Land set code. */
-    private String landSetCode = AllZone.getCardFactory().getCard("Plains", AllZone.getHumanPlayer())
-            .getMostRecentSet();
+    private String landSetCode = CardDb.instance().getCard("Plains", true).getEdition();
 
     /*
      * (non-Javadoc)

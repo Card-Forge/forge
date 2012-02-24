@@ -304,7 +304,7 @@ public final class CardRules {
      *            the set code
      * @return the sets the info
      */
-    public CardInSet getSetInfo(final String setCode) {
+    public CardInSet getEditionInfo(final String setCode) {
         final CardInSet result = this.setsPrinted.get(setCode);
         if (result != null) {
             return result;

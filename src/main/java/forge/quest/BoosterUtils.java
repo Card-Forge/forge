@@ -22,14 +22,10 @@ import java.util.Collections;
 import java.util.List;
 
 import net.slightlymagic.maxmtg.Predicate;
-
-import org.apache.commons.lang3.StringUtils;
-
-import forge.Constant;
-import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.CardPrinted.Predicates;
 import forge.util.MyRandom;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
@@ -161,49 +157,16 @@ public final class BoosterUtils {
         return result;
     }
 
-    // Left if only for backwards compatibility
-    /**
-     * Generate cards.
-     * 
-     * @param num
-     *            the num
-     * @param rarity
-     *            the rarity
-     * @param color
-     *            the color
-     * @return the list
-     */
-    public static List<CardPrinted> generateCards(final int num, final CardRarity rarity, final String color) {
-        final Predicate<CardPrinted> whatYouWant = BoosterUtils.getPredicateForConditions(rarity, color);
-        return BoosterUtils.generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
-    }
-
-    /**
-     * Generate cards.
-     * 
-     * @param filter
-     *            the filter
-     * @param num
-     *            the num
-     * @param rarity
-     *            the rarity
-     * @param color
-     *            the color
-     * @return the list
-     */
-    public static List<CardPrinted> generateCards(final Predicate<CardPrinted> filter, final int num,
-            final CardRarity rarity, final String color) {
-        final Predicate<CardPrinted> whatYouWant = Predicate.and(filter,
-                BoosterUtils.getPredicateForConditions(rarity, color));
-        return BoosterUtils.generateDistinctCards(CardDb.instance().getAllUniqueCards(), whatYouWant, num);
-    }
-
-    private static List<CardPrinted> generateDistinctCards(final Iterable<CardPrinted> source,
+    public static List<CardPrinted> generateDistinctCards(final Predicate<CardPrinted> filter, final int cntNeeded) {
+        return generateDistinctCards(CardDb.instance().getAllCards(), filter, cntNeeded);
+    }    
+    
+    public static List<CardPrinted> generateDistinctCards(final Iterable<CardPrinted> source,
             final Predicate<CardPrinted> filter, final int cntNeeded) {
         final ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
         int cntMade = 0;
 
-        // This will prevent endless loop @ wh
+        // This will prevent endless loop @ while
         int allowedMisses = (2 + 2) * cntNeeded; // lol, 2+2 is not magic
                                                  // constant!
 
@@ -221,85 +184,45 @@ public final class BoosterUtils {
         return result;
     }
 
-    private static Predicate<CardPrinted> getPredicateForConditions(final CardRarity rarity, final String color) {
-        Predicate<CardPrinted> rFilter;
-        switch (rarity) {
-        case Rare:
-            rFilter = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
-            break;
-        case Common:
-            rFilter = CardPrinted.Predicates.Presets.IS_COMMON;
-            break;
-        case Uncommon:
-            rFilter = CardPrinted.Predicates.Presets.IS_UNCOMMON;
-            break;
-        default:
-            rFilter = Predicate.getTrue(CardPrinted.class);
-        }
-
-        Predicate<CardRules> colorFilter;
-        if (StringUtils.isBlank(color)) {
-            colorFilter = Predicate.getTrue(CardRules.class);
-        } else {
-            final String col = color.toLowerCase();
-            if (col.startsWith("wh")) {
-                colorFilter = CardRules.Predicates.Presets.IS_WHITE;
-            } else if (col.startsWith("bla")) {
-                colorFilter = CardRules.Predicates.Presets.IS_BLACK;
-            } else if (col.startsWith("blu")) {
-                colorFilter = CardRules.Predicates.Presets.IS_BLUE;
-            } else if (col.startsWith("re")) {
-                colorFilter = CardRules.Predicates.Presets.IS_RED;
-            } else if (col.startsWith("col")) {
-                colorFilter = CardRules.Predicates.Presets.IS_COLORLESS;
-            } else if (col.startsWith("gre")) {
-                colorFilter = CardRules.Predicates.Presets.IS_GREEN;
-            } else if (col.startsWith("mul")) {
-                colorFilter = CardRules.Predicates.Presets.IS_MULTICOLOR;
-            } else {
-                colorFilter = Predicate.getTrue(CardRules.class);
-            }
-        }
-        return Predicate.and(rFilter, colorFilter, CardPrinted.FN_GET_RULES);
-    }
-
-    // return List<CardPrinted> of 5 or 6 cards, one for each color and maybe an
-    // artifact
     /**
-     * Gets the variety.
+     * <p>
+     * generateCardRewardList.
+     * </p>
+     * Takes a reward list string, parses, and returns list of cards rewarded.
      * 
-     * @param in
-     *            the in
-     * @return the variety
+     * @param s
+     *            Properties string of reward (97 multicolor rares)
+     * @return CardList
      */
-    public static List<CardPrinted> getVariety(final List<CardPrinted> in) {
-        final List<CardPrinted> out = new ArrayList<CardPrinted>();
-        Collections.shuffle(in, MyRandom.getRandom());
-
-        for (int i = 0; i < Constant.Color.COLORS.length; i++) {
-            final CardPrinted check = BoosterUtils.findCardOfColor(in, i);
-            if (check != null) {
-                out.add(check);
-            }
+    public static List<CardPrinted> generateCardRewardList(final String s) {
+        final String[] temp = s.split(" ");
+    
+        final int qty = Integer.parseInt(temp[0]);
+        // Determine rarity
+        Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_UNCOMMON;
+        if (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")) {
+            rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
         }
-
-        return out;
-    } // getVariety()
-
-    /**
-     * Find card of color.
-     * 
-     * @param in
-     *            the in
-     * @param color
-     *            the color
-     * @return the card printed
-     */
-    private static CardPrinted findCardOfColor(final List<CardPrinted> in, final int color) {
-        final Predicate<CardRules> filter = CardRules.Predicates.Presets.COLORS.get(color);
-        if (null == filter) {
-            return null;
+    
+        
+        // Determine color ("random" defaults to null color)
+        Predicate<CardRules> col = Predicate.getTrue(CardRules.class);
+        if (temp[1].equalsIgnoreCase("black")) {
+            col = CardRules.Predicates.Presets.IS_BLACK;
+        } else if (temp[1].equalsIgnoreCase("blue")) {
+            col = CardRules.Predicates.Presets.IS_BLUE;
+        } else if (temp[1].equalsIgnoreCase("colorless")) {
+            col = CardRules.Predicates.Presets.IS_COLORLESS;
+        } else if (temp[1].equalsIgnoreCase("green")) {
+            col = CardRules.Predicates.Presets.IS_GREEN;
+        } else if (temp[1].equalsIgnoreCase("multicolor")) {
+            col = CardRules.Predicates.Presets.IS_MULTICOLOR;
+        } else if (temp[1].equalsIgnoreCase("red")) {
+            col = CardRules.Predicates.Presets.IS_RED;
+        } else if (temp[1].equalsIgnoreCase("white")) {
+            col = CardRules.Predicates.Presets.IS_WHITE;
         }
-        return filter.first(in, CardPrinted.FN_GET_RULES);
+    
+        return BoosterUtils.generateDistinctCards(Predicate.and(rar, col, CardPrinted.FN_GET_RULES), qty);
     }
 }
