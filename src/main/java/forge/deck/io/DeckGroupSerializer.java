@@ -34,7 +34,7 @@ import forge.util.StorageReaderFolder;
  * 
  */
 public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implements IItemSerializer<DeckGroup> {
-    private final String HUMAN_DECK_FILE = "human.dck";
+    private final String humanDeckFile = "human.dck";
 
     /**
      * Instantiates a new deck group serializer.
@@ -46,7 +46,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
     }
 
     /** The Constant MAX_DRAFT_PLAYERS. */
-    public final static int MAX_DRAFT_PLAYERS = 8;
+    public static final int MAX_DRAFT_PLAYERS = 8;
 
     /**
      * Write draft Decks.
@@ -57,7 +57,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
     public void save(final DeckGroup unit) {
         final File f = this.makeFileFor(unit);
         f.mkdir();
-        FileUtil.writeFile(new File(f, this.HUMAN_DECK_FILE), unit.getHumanDeck().save());
+        FileUtil.writeFile(new File(f, this.humanDeckFile), unit.getHumanDeck().save());
         final List<Deck> aiDecks = unit.getAiDecks();
         for (int i = 1; i <= aiDecks.size(); i++) {
             FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), aiDecks.get(i - 1).save());
@@ -70,7 +70,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
     @Override
     protected final DeckGroup read(final File file) {
 
-        final Deck human = Deck.fromFile(new File(file, this.HUMAN_DECK_FILE));
+        final Deck human = Deck.fromFile(new File(file, this.humanDeckFile));
         if (null == human) {
             return null;
         }
@@ -128,7 +128,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
                 final boolean isVisibleFolder = dir.isDirectory() && !dir.isHidden();
                 final boolean hasGoodName = StringUtils.isNotEmpty(name) && !name.startsWith(".");
                 return isVisibleFolder && hasGoodName
-                        && new File(dir, DeckGroupSerializer.this.HUMAN_DECK_FILE).exists();
+                        && new File(dir, DeckGroupSerializer.this.humanDeckFile).exists();
             }
         };
     }

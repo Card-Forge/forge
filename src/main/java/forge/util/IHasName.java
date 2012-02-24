@@ -22,7 +22,7 @@ package forge.util;
  * 
  */
 public interface IHasName {
-    
+
     /**
      * Gets the name.
      *

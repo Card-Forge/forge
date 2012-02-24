@@ -1,17 +1,39 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.deck.io;
 
 import forge.PlayerType;
 import forge.game.GameType;
 import forge.util.FileSection;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class DeckFileHeader {
 
+    /** The Constant NAME. */
     public static final String NAME = "Name";
+
+    /** The Constant DECK_TYPE. */
     public static final String DECK_TYPE = "Deck Type";
+
+    /** The Constant COMMENT. */
     public static final String COMMENT = "Comment";
     private static final String PLAYER = "Player";
     private static final String CSTM_POOL = "Custom Pool";
@@ -24,38 +46,65 @@ public class DeckFileHeader {
     private final String name;
     private final String comment;
 
-
     /**
      * TODO: Write javadoc for Constructor.
-     * @param parseKvPairs
+     * 
+     * @param kvPairs
+     *            the kv pairs
      */
-    public DeckFileHeader(FileSection kvPairs) {
-        name = kvPairs.get(NAME);
-        comment = kvPairs.get(COMMENT);
-        deckType = GameType.smartValueOf(kvPairs.get(DECK_TYPE), GameType.Constructed);
-        customPool = kvPairs.getBoolean(CSTM_POOL);
-        playerType = "computer".equalsIgnoreCase(kvPairs.get(PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(PLAYER_TYPE)) ? PlayerType.COMPUTER : PlayerType.HUMAN;
+    public DeckFileHeader(final FileSection kvPairs) {
+        this.name = kvPairs.get(DeckFileHeader.NAME);
+        this.comment = kvPairs.get(DeckFileHeader.COMMENT);
+        this.deckType = GameType.smartValueOf(kvPairs.get(DeckFileHeader.DECK_TYPE), GameType.Constructed);
+        this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
+        this.playerType = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER))
+                || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE)) ? PlayerType.COMPUTER
+                : PlayerType.HUMAN;
     }
 
-
-    public  final PlayerType getPlayerType() {
-        return playerType;
-    }
-    public  final boolean isCustomPool() {
-        return customPool;
-    }
-    public  final String getName() {
-        return name;
-    }
-    public  final String getComment() {
-        return comment;
+    /**
+     * Gets the player type.
+     * 
+     * @return the player type
+     */
+    public final PlayerType getPlayerType() {
+        return this.playerType;
     }
 
-
-    public  final GameType getDeckType() {
-        return deckType;
+    /**
+     * Checks if is custom pool.
+     * 
+     * @return true, if is custom pool
+     */
+    public final boolean isCustomPool() {
+        return this.customPool;
     }
 
+    /**
+     * Gets the name.
+     * 
+     * @return the name
+     */
+    public final String getName() {
+        return this.name;
+    }
 
+    /**
+     * Gets the comment.
+     * 
+     * @return the comment
+     */
+    public final String getComment() {
+        return this.comment;
+    }
+
+    /**
+     * Gets the deck type.
+     * 
+     * @return the deck type
+     */
+    public final GameType getDeckType() {
+        return this.deckType;
+    }
 
 }

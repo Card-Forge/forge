@@ -51,9 +51,11 @@ public final class MenuCommon extends MenuBase<Deck> {
 
     /**
      * Menu for Deck Editor.
-     *
-     * @param ctrl the ctrl
-     * @param exit a Command
+     * 
+     * @param ctrl
+     *            the ctrl
+     * @param exit
+     *            a Command
      */
     public MenuCommon(final IDeckController<Deck> ctrl, final Command exit) {
         super(ctrl, exit);
@@ -63,7 +65,7 @@ public final class MenuCommon extends MenuBase<Deck> {
 
     }
 
-    private final void newRandomConstructed() {
+    private void newRandomConstructed() {
         if (!this.canLeaveCurrentDeck()) {
             return;
         }
@@ -85,7 +87,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         this.getController().setModel(randomDeck);
     }
 
-    private final void newGenerateConstructed() {
+    private void newGenerateConstructed() {
         if (!this.canLeaveCurrentDeck()) {
             return;
         }
@@ -129,7 +131,7 @@ public final class MenuCommon extends MenuBase<Deck> {
      * exportDeck.
      * </p>
      */
-    private final void exportDeck() {
+    private void exportDeck() {
         final File filename = this.getExportFilename();
         if (filename == null) {
             return;
@@ -143,7 +145,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         }
     }
 
-    private final File getExportFilename() {
+    private File getExportFilename() {
         final JFileChooser save = new JFileChooser(MenuCommon.previousDirectory);
         save.setDialogTitle("Export Deck Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -165,7 +167,7 @@ public final class MenuCommon extends MenuBase<Deck> {
      * Generate Proxy for a Deck.
      * </p>
      */
-    private final void generateProxies() {
+    private void generateProxies() {
         final File filename = this.getProxiesFilename();
         if (filename == null) {
             return;
@@ -179,7 +181,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         }
     }
 
-    private final File getProxiesFilename() {
+    private File getProxiesFilename() {
         final JFileChooser save = new JFileChooser(MenuCommon.previousDirectory);
         save.setDialogTitle("Proxy HTML Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -198,7 +200,9 @@ public final class MenuCommon extends MenuBase<Deck> {
 
     // deck.setName(currentDeckName);
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.MenuBase#getDefaultFileMenu()
      */
     @Override

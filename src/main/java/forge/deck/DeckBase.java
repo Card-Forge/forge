@@ -61,6 +61,16 @@ public abstract class DeckBase implements IHasName, Serializable, Comparable<Dec
         return false;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return (this.name.hashCode() * 17) + this.name.hashCode();
+    }
+
     /* (non-Javadoc)
      * @see forge.util.IHasName#getName()
      */

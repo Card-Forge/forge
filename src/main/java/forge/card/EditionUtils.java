@@ -46,7 +46,7 @@ public final class EditionUtils {
      *
      * @return the all sets
      */
-    public final List<CardEdition> getAllSets() {
+    public List<CardEdition> getAllSets() {
         return this.allSets;
     }
 

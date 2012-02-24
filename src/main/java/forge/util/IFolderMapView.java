@@ -34,13 +34,13 @@ public interface IFolderMapView<T extends IHasName> extends Iterable<T> {
      * @param name the name
      * @return a {@link forge.deck.Deck} object.
      */
-    public abstract T get(final String name);
+    T get(final String name);
 
     /**
      * Get names of decks.
      *
      * @return a ArrayList<String>
      */
-    public abstract Collection<String> getNames();
+    Collection<String> getNames();
 
 }

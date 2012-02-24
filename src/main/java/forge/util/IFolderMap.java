@@ -32,7 +32,7 @@ public interface IFolderMap<T extends IHasName> extends IFolderMapView<T> {
      * @param deck
      *            a {@link forge.deck.Deck} object.
      */
-    public abstract void add(final T deck);
+    void add(final T deck);
 
     /**
      * <p>
@@ -42,7 +42,7 @@ public interface IFolderMap<T extends IHasName> extends IFolderMapView<T> {
      * @param deckName
      *            a {@link java.lang.String} object.
      */
-    public abstract void delete(final String deckName);
+    void delete(final String deckName);
 
     /**
      * <p>
@@ -52,6 +52,6 @@ public interface IFolderMap<T extends IHasName> extends IFolderMapView<T> {
      * @param name the name
      * @return a boolean.
      */
-    public abstract boolean isUnique(final String name);
+    boolean isUnique(final String name);
 
 }

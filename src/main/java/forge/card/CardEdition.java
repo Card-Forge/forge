@@ -360,7 +360,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
          * @param format the format
          * @return the predicate
          */
-        public final static Predicate<CardEdition> isLegalInFormat(final GameFormat format) {
+        public static final Predicate<CardEdition> isLegalInFormat(final GameFormat format) {
             return new LegalInFormat(format);
         }
 

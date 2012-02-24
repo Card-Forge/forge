@@ -25,7 +25,7 @@ import java.util.Map;
  * @param <T> the generic type
  */
 public interface IItemReader<T extends IHasName> {
-    
+
     /**
      * Read all.
      *

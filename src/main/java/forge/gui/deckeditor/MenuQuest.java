@@ -58,9 +58,11 @@ public class MenuQuest extends MenuBase<Deck> {
      * <p>
      * Constructor for Gui_Quest_DeckEditor_Menu.
      * </p>
-     *
-     * @param d a {@link forge.gui.deckeditor.IDeckDisplay} object.
-     * @param exit a {@link forge.Command} object.
+     * 
+     * @param d
+     *            a {@link forge.gui.deckeditor.IDeckDisplay} object.
+     * @param exit
+     *            a {@link forge.Command} object.
      */
     public MenuQuest(final IDeckController<Deck> d, final Command exit) {
 
@@ -74,7 +76,7 @@ public class MenuQuest extends MenuBase<Deck> {
      * importDeck.
      * </p>
      */
-    private final void importDeck() {
+    private void importDeck() {
         final File file = this.getImportFilename();
 
         if ((file != null) && file.getName().endsWith(".dck")) {
@@ -97,7 +99,7 @@ public class MenuQuest extends MenuBase<Deck> {
      * 
      * @return a {@link java.io.File} object.
      */
-    private final File getImportFilename() {
+    private File getImportFilename() {
         final JFileChooser chooser = new JFileChooser(MenuQuest.previousDirectory);
 
         chooser.addChoosableFileFilter(DeckSerializer.DCK_FILTER);
@@ -134,7 +136,9 @@ public class MenuQuest extends MenuBase<Deck> {
         }
     };
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.MenuBase#getDefaultFileMenu()
      */
     @Override
@@ -168,7 +172,7 @@ public class MenuQuest extends MenuBase<Deck> {
      * @param isHumanMenu
      *            a boolean.
      */
-    private final void addImportExport(final JMenu menu, final boolean isHumanMenu) {
+    private void addImportExport(final JMenu menu, final boolean isHumanMenu) {
         final JMenuItem import2 = new JMenuItem("Import");
         final JMenuItem export = new JMenuItem("Export");
 
@@ -191,7 +195,7 @@ public class MenuQuest extends MenuBase<Deck> {
 
     } // addImportExport()
 
-    private final void exportDeck() {
+    private void exportDeck() {
         final File filename = this.getExportFilename();
         if (filename == null) {
             return;
@@ -205,7 +209,7 @@ public class MenuQuest extends MenuBase<Deck> {
         }
     }
 
-    private final File getExportFilename() {
+    private File getExportFilename() {
         final JFileChooser save = new JFileChooser(MenuQuest.previousDirectory);
         save.setDialogTitle("Export Deck Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);

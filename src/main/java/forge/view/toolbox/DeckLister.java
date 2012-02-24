@@ -446,6 +446,8 @@ public class DeckLister extends JPanel {
             dEditor.getController().load(d0.getName());
             dEditor.setVisible(true);
             break;
+        default:
+            break;
         }
     }
 

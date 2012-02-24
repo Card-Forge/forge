@@ -1736,12 +1736,12 @@ public class AbilityFactory {
         else if (defined.equals("TriggeredBlocker.blocking")) {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getTriggeringObject("Blocker");
-            if (AllZoneUtil.getCardState((Card) crd).isBlocking()) {
-                ;
-            }
-            {
-                c = AllZoneUtil.getCardState((Card) crd);
-            }
+            // if (AllZoneUtil.getCardState((Card) crd).isBlocking()) {
+            // ;
+            // }
+            // {
+            c = AllZoneUtil.getCardState((Card) crd);
+            // }
         }
 
         else if (defined.equals("OriginalHost")) {

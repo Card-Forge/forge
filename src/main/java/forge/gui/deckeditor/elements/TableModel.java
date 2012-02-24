@@ -420,7 +420,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         /* (non-Javadoc)
          * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
          */
-        TableSorterCascade<InventoryItem> sorter = TableModel.this.sortOrders.getSorter();
+        private TableSorterCascade<InventoryItem> sorter = TableModel.this.sortOrders.getSorter();
         @SuppressWarnings("unchecked")
         @Override
         public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {

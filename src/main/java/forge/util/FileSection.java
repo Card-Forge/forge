@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class FileSection {
 
     /** The lines. */
-    protected final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
     /**
      * Gets the lines.

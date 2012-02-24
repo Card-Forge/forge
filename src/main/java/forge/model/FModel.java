@@ -62,7 +62,7 @@ import forge.view.toolbox.FSkin;
  * this class must be either private or public static final.
  */
 public enum FModel {
-    
+
     /** The SINGLETO n_ instance. */
     SINGLETON_INSTANCE;
     // private static final int NUM_INIT_PHASES = 1;

@@ -44,7 +44,7 @@ import forge.util.SectionUtil;
 public class OldDeckParser {
 
     /** Constant <code>BDKFileFilter</code>. */
-    public final static FilenameFilter bdkFileFilter = new FilenameFilter() {
+    public static final FilenameFilter BDK_FILE_FILTER = new FilenameFilter() {
         @Override
         public boolean accept(final File dir, final String name) {
             return name.endsWith(".bdk");
@@ -129,7 +129,7 @@ public class OldDeckParser {
     }
 
     private void convertDrafts() {
-        for (final File f : this.deckDir.listFiles(OldDeckParser.bdkFileFilter)) {
+        for (final File f : this.deckDir.listFiles(OldDeckParser.BDK_FILE_FILTER)) {
             boolean gotError = false;
             final Deck human = Deck.fromFile(new File(f, "0.dck"));
             final DeckGroup d = new DeckGroup(human.getName());
@@ -243,6 +243,8 @@ public class OldDeckParser {
                 } else {
                     sealedDecks.put(name, stored);
                 }
+                break;
+            default:
                 break;
             }
         }

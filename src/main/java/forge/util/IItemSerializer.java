@@ -23,7 +23,7 @@ package forge.util;
  * @param <T> the generic type
  */
 public interface IItemSerializer<T extends IHasName> extends IItemReader<T> {
-    
+
     /**
      * Save.
      *

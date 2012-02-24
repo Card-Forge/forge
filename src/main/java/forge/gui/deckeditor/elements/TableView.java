@@ -40,6 +40,8 @@ import forge.item.ItemPoolView;
 /**
  * TableWithCards.
  * 
+ * @param <T>
+ *            the generic type
  */
 public final class TableView<T extends InventoryItem> {
 
@@ -101,20 +103,20 @@ public final class TableView<T extends InventoryItem> {
     }
 
     /**
-     * 
      * TableWithCards.
      * 
      * @param title
      *            a String
      * @param showStats
      *            a boolean
+     * @param cls
+     *            the cls
      */
-    public TableView(final String title, final boolean showStats, Class<T> cls) {
+    public TableView(final String title, final boolean showStats, final Class<T> cls) {
         this(title, showStats, false, cls);
     }
 
     /**
-     * 
      * TableWithCards Constructor.
      * 
      * @param title
@@ -123,10 +125,12 @@ public final class TableView<T extends InventoryItem> {
      *            a boolean
      * @param forceUnique
      *            a boolean
+     * @param cls
+     *            the cls
      */
-    public TableView(final String title, final boolean showStats, final boolean forceUnique, Class<T> cls) {
+    public TableView(final String title, final boolean showStats, final boolean forceUnique, final Class<T> cls) {
         // components
-        genericType = cls;
+        this.genericType = cls;
 
         final Color gray = new Color(148, 145, 140);
         final TitledBorder titledBorder = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, gray), title);
@@ -154,7 +158,7 @@ public final class TableView<T extends InventoryItem> {
      *            a CardPanelBase
      */
     public void setup(final List<TableColumnInfo<InventoryItem>> columns, final CardPanelBase cardView) {
-        this.model = new TableModel<T>(cardView, columns, genericType);
+        this.model = new TableModel<T>(cardView, columns, this.genericType);
         this.model.addListeners(this.table);
         this.table.setModel(this.model);
         this.model.resizeCols(this.table);
@@ -180,9 +184,10 @@ public final class TableView<T extends InventoryItem> {
 
     // This should not be here, but still found no better place
     /**
-     * 
      * getStats.
      * 
+     * @param <T>
+     *            the generic type
      * @param deck
      *            an ItemPoolView<InventoryITem>
      * @return String
@@ -259,7 +264,7 @@ public final class TableView<T extends InventoryItem> {
      *            an Iterable<InventoryITem>
      */
     public void setDeck(final Iterable<InventoryItem> cards) {
-        this.setDeckImpl(ItemPool.createFrom(cards, genericType));
+        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType));
     }
 
     /**
@@ -269,9 +274,15 @@ public final class TableView<T extends InventoryItem> {
      *            an ItemPoolView
      */
     public void setDeck(final ItemPoolView<T> poolView) {
-        this.setDeckImpl(ItemPool.createFrom(poolView, genericType));
+        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType));
     }
 
+    /**
+     * Sets the deck.
+     * 
+     * @param pool
+     *            the new deck
+     */
     public void setDeck(final ItemPool<T> pool) {
         this.setDeckImpl(pool);
     }
