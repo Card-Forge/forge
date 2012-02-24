@@ -27,6 +27,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import net.slightlymagic.braids.util.UtilFunctions;
+
 import forge.AllZone;
 import forge.CardList;
 import forge.Constant;
@@ -518,8 +520,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * 
      */
     private void awardBooster() {
-        final GameFormat[] emptyFormatArray = {};
-        final GameFormat[] formats = Singletons.getModel().getFormats().getFormats().toArray(emptyFormatArray);
+        final GameFormat[] formats = UtilFunctions.iteratorToArray(Singletons.getModel().getFormats().iterator(), new GameFormat[]{});
         final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
 
         String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);

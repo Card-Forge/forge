@@ -109,4 +109,12 @@ public class QuestDeckMap implements IFolderMap<Deck> {
         return !this.map.containsKey(name);
     }
 
+    /* (non-Javadoc)
+     * @see forge.util.IFolderMapView#any(java.lang.String)
+     */
+    @Override
+    public boolean any(String name) {
+        return map.containsKey(name);
+    }
+
 }

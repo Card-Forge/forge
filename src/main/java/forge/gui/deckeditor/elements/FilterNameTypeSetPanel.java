@@ -91,10 +91,10 @@ public class FilterNameTypeSetPanel extends JComponent {
 
         this.searchSetCombo.removeAllItems();
         this.searchSetCombo.addItem("(all sets and formats)");
-        for (final GameFormat s : Singletons.getModel().getFormats().getFormats()) {
+        for (final GameFormat s : Singletons.getModel().getFormats()) {
             this.searchSetCombo.addItem(s);
         }
-        for (final CardEdition s : Singletons.getModel().getEditions().getAllSets()) {
+        for (final CardEdition s : Singletons.getModel().getEditions()) {
             this.searchSetCombo.addItem(s);
         }
 

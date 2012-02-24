@@ -28,6 +28,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.io.DeckFileHeader;
@@ -270,4 +272,11 @@ public class Deck extends DeckBase implements Serializable, IHasName {
         out.addAll(Deck.writeCardPool(this.getSideboard()));
         return out;
     }
+    
+    public final static Lambda1<String, Deck> FN_NAME_SELECTOR = new Lambda1<String, Deck>() {
+        @Override
+        public String apply(Deck arg1) {
+            return arg1.getName();
+        }
+    };
 }

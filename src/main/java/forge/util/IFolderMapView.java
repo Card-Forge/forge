@@ -24,7 +24,7 @@ import java.util.Collection;
  *
  * @param <T> the generic type
  */
-public interface IFolderMapView<T extends IHasName> extends Iterable<T> {
+public interface IFolderMapView<T> extends Iterable<T> {
 
     /**
      * <p>
@@ -42,5 +42,7 @@ public interface IFolderMapView<T extends IHasName> extends Iterable<T> {
      * @return a ArrayList<String>
      */
     Collection<String> getNames();
+    
+    boolean any(final String name);
 
 }

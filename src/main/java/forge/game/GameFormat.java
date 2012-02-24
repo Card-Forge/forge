@@ -20,6 +20,7 @@ package forge.game;
 import java.util.Collections;
 import java.util.List;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.card.CardRules;
 import forge.item.CardPrinted;
@@ -118,5 +119,12 @@ public final class GameFormat {
     public String toString() {
         return this.name + " (format)";
     }
+    
+    public static final Lambda1<String,GameFormat> FN_GET_NAME = new Lambda1<String, GameFormat>() {
+        @Override
+        public String apply(GameFormat arg1) {
+            return arg1.getName();
+        }
+    }; 
 
 }

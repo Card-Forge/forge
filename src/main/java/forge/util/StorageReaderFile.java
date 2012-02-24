@@ -24,6 +24,8 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -31,25 +33,25 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @param <T> the generic type
  */
-public abstract class StorageReaderFile<T extends IHasName> implements IItemReader<T> {
+public abstract class StorageReaderFile<T> implements IItemReader<T> {
 
     private final File file;
+    private final Lambda1<String,T> keySelector;
 
     /**
      * Instantiates a new storage reader file.
      *
      * @param file0 the file0
      */
-    public StorageReaderFile(final File file0) {
-        this.file = file0;
+    public StorageReaderFile(final String pathname, Lambda1<String,T> keySelector0) {
+        this(new File(pathname), keySelector0);
     }
 
-    // only accepts numbers, letters or dashes up to 20 characters in length
-    /**
-     * Clean deck name.
-     *
-     * @return a String
-     */
+    
+    public StorageReaderFile(final File file0, Lambda1<String,T> keySelector0) {
+        this.file = file0;
+        keySelector = keySelector0;
+    }
 
     @Override
     public Map<String, T> readAll() {
@@ -69,7 +71,7 @@ public abstract class StorageReaderFile<T extends IHasName> implements IItemRead
                 continue;
             }
 
-            result.put(item.getName(), item);
+            result.put(keySelector.apply(item), item);
         }
 
         return result;

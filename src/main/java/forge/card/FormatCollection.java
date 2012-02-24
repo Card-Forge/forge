@@ -19,22 +19,25 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.GameFormat;
-import forge.util.FileUtil;
+import forge.util.FolderMapView;
+import forge.util.StorageReaderFile;
 
 /**
  * The Class FormatUtils.
  */
-public final class FormatUtils {
+public final class FormatCollection extends FolderMapView<GameFormat> {
 
-    private final Map<String, GameFormat> formats = new TreeMap<String, GameFormat>(String.CASE_INSENSITIVE_ORDER);
+
+
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param io
+     */
+    public FormatCollection(String filename) {
+        super(new FormatReader(filename));
+    }
 
     /**
      * Gets the standard.
@@ -42,7 +45,7 @@ public final class FormatUtils {
      * @return the standard
      */
     public GameFormat getStandard() {
-        return formats.get("Standard");
+        return getMap().get("Standard");
     }
 
     /**
@@ -51,7 +54,7 @@ public final class FormatUtils {
      * @return the extended
      */
     public GameFormat getExtended() {
-        return formats.get("Extended");
+        return getMap().get("Extended");
     }
 
     /**
@@ -60,30 +63,29 @@ public final class FormatUtils {
      * @return the modern
      */
     public GameFormat getModern() {
-        return formats.get("Modern");
-    }
-
-    // list are immutable, no worries
-    /**
-     * Gets the formats.
-     * 
-     * @return the formats
-     */
-    public Collection<GameFormat> getFormats() {
-        return formats.values();
+        return getMap().get("Modern");
     }
 
     /**
      * Instantiates a new format utils.
      */
-    public FormatUtils() {
-        final List<String> fData = FileUtil.readFile("res/blockdata/formats.txt");
+    
+    public static class FormatReader extends StorageReaderFile<GameFormat> {
 
-        for (final String s : fData) {
-            if (StringUtils.isBlank(s)) {
-                continue;
-            }
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param file0
+         * @param keySelector0
+         */
+        public FormatReader(String file0) {
+            super(file0, GameFormat.FN_GET_NAME);
+        }
 
+        /* (non-Javadoc)
+         * @see forge.util.StorageReaderFile#read(java.lang.String)
+         */
+        @Override
+        protected GameFormat read(String line) {
             String name = null;
             final List<String> sets = new ArrayList<String>(); // default: all
                                                                // sets
@@ -92,7 +94,7 @@ public final class FormatUtils {
             // nothing
             // banned
 
-            final String[] sParts = s.trim().split("\\|");
+            final String[] sParts = line.trim().split("\\|");
             for (final String sPart : sParts) {
                 final String[] kv = sPart.split(":", 2);
                 final String key = kv[0].toLowerCase();
@@ -107,10 +109,10 @@ public final class FormatUtils {
             if (name == null) {
                 throw new RuntimeException("Format must have a name! Check formats.txt file");
             }
-            final GameFormat thisFormat = new GameFormat(name, sets, bannedCards);
+            return new GameFormat(name, sets, bannedCards);
 
-            formats.put(name, thisFormat);
         }
+        
     }
 }
 

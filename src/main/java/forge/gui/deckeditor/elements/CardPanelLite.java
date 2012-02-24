@@ -118,7 +118,7 @@ public class CardPanelLite extends CardPanelBase {
                 final BoosterPack booster = (BoosterPack) card;
                 final CardEdition set = Singletons.getModel().getEditions().getEditionByCodeOrThrow(booster.getEdition());
                 final String tpl = "%s booster pack.%n%nContains %d cards.%n%nBuy it to reveal the cards and add them to your inventory.";
-                this.description.setText(String.format(tpl, set.getName(), set.getBoosterData().getTotal()));
+                this.description.setText(String.format(tpl, set.getName(), booster.getTotalCards()));
             } else if (card instanceof PreconDeck) {
                 final PreconDeck deck = (PreconDeck) card;
                 final String desc = deck.getDescription();

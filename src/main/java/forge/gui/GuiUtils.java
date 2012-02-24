@@ -31,7 +31,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.Box;
@@ -45,7 +44,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
-import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Card;
 import forge.Singletons;
 import forge.properties.ForgeProps;
@@ -258,33 +256,6 @@ public final class GuiUtils {
         final List<T> choice = GuiUtils.getChoices(message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
     } // getChoiceOptional(String,T...)
-
-    /**
-     * Like getChoiceOptional, but this takes an Iterator instead of a variable
-     * number of arguments.
-     * 
-     * @param <T>
-     *            is automatically inferred.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            an Iterator over T objects.
-     * @return null if choices is missing, empty, or if the users' choices are
-     *         empty; otherwise, returns the first item in the List returned by
-     *         getChoices.
-     */
-    public static <T> T getChoiceOptional(final String message, final Iterator<T> choices) {
-        if ((choices == null) | !choices.hasNext()) {
-            return null;
-        }
-
-        // TODO this is an expensive operation; it would be better to
-        // update getChoices to accept an Iterator.
-        final T[] choicesArray = UtilFunctions.iteratorToArray(choices);
-
-        final List<T> choice = GuiUtils.getChoices(message, 0, 1, choicesArray);
-        return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,Iterator<T>)
 
     // returned Object will never be null
     /**

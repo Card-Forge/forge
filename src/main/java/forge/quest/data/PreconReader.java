@@ -36,7 +36,7 @@ public class PreconReader extends StorageReaderFolder<PreconDeck> {
      * @param deckDir0 the deck dir0
      */
     public PreconReader(final File deckDir0) {
-        super(deckDir0);
+        super(deckDir0, PreconDeck.FN_NAME_SELECTOR);
     }
 
     /*

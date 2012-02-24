@@ -56,7 +56,7 @@ public abstract class PresetColumns {
 
     private static CardEdition toSetCmp(final InventoryItem i) {
         return i instanceof InventoryItemFromSet ? Singletons.getModel().getEditions()
-                .getEditionByCode(((InventoryItemFromSet) i).getEdition()) : CardEdition.UNKNOWN;
+                .get(((InventoryItemFromSet) i).getEdition()) : CardEdition.UNKNOWN;
     }
 
     private static String toSetStr(final InventoryItem i) {

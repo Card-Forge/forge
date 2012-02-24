@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.quest.SellRules;
@@ -88,7 +90,7 @@ public class PreconDeck implements InventoryItemFromSet {
 
         imageFilename = kv.get("Image");
         description = kv.get("Description");
-        if (Singletons.getModel().getEditions().getEditionByCode(kv.get("set").toUpperCase()) != null) {
+        if (Singletons.getModel().getEditions().get(kv.get("set").toUpperCase()) != null) {
             setProxy = kv.get("set");
         }
 
@@ -133,5 +135,12 @@ public class PreconDeck implements InventoryItemFromSet {
     public final String getDescription() {
         return this.description;
     }
+    
+    public final static Lambda1<String, PreconDeck> FN_NAME_SELECTOR = new Lambda1<String, PreconDeck>() {
+        @Override
+        public String apply(PreconDeck arg1) {
+            return arg1.getName();
+        }
+    };    
 
 }

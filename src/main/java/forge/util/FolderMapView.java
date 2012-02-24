@@ -32,7 +32,7 @@ import java.util.Map;
  * @author Forge
  * @version $Id: DeckManager.java 13590 2012-01-27 20:46:27Z Max mtg $
  */
-public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMapView<T> {
+public class FolderMapView<T> implements Iterable<T>, IFolderMapView<T> {
     private final Map<String, T> map;
 
     /**
@@ -52,7 +52,7 @@ public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMa
      * @see forge.deck.IFolderMapView#get(java.lang.String)
      */
     @Override
-    public final T get(final String name) {
+    public T get(final String name) {
         return this.map.get(name);
     }
 
@@ -88,5 +88,13 @@ public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMa
     @Override
     public Iterator<T> iterator() {
         return this.map.values().iterator();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.util.IFolderMapView#any(java.lang.String)
+     */
+    @Override
+    public boolean any(String name) {
+        return this.map.containsKey(name);
     }
 }

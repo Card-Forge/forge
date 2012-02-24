@@ -19,7 +19,10 @@ package forge.card;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
+import forge.Singletons;
 import forge.game.GameFormat;
+import forge.util.FileSection;
+import forge.util.StorageReaderFile;
 
 /**
  * <p>
@@ -34,7 +37,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private final String code;
     private final String code2;
     private final String name;
-    private final BoosterData boosterData;
+    private final String alias;
 
     /**
      * Instantiates a new card set.
@@ -51,28 +54,13 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public CardEdition(final int index, final String name, final String code, final String code2) {
         this(index, name, code, code2, null);
     }
-
-    /**
-     * Instantiates a new card set.
-     * 
-     * @param index
-     *            the index
-     * @param name
-     *            the name
-     * @param code
-     *            the code
-     * @param code2
-     *            the code2
-     * @param booster
-     *            the booster
-     */
-    public CardEdition(final int index, final String name, final String code, final String code2,
-            final BoosterData booster) {
+    
+    public CardEdition(final int index, final String name, final String code, final String code2, final String alias0) {
         this.code = code;
         this.code2 = code2;
         this.index = index;
         this.name = name;
-        this.boosterData = booster;
+        this.alias = alias0;
     }
 
     /** The Constant unknown. */
@@ -114,29 +102,11 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return this.index;
     }
 
-    /**
-     * Can generate booster.
-     * 
-     * @return true, if successful
-     */
-    public boolean canGenerateBooster() {
-        return this.boosterData != null;
-    }
-
-    /**
-     * Gets the booster data.
-     * 
-     * @return the booster data
-     */
-    public BoosterData getBoosterData() {
-        return this.boosterData;
-    }
-
     /** The Constant fnGetName. */
-    public static final Lambda1<String, CardEdition> FN_GET_NAME = new Lambda1<String, CardEdition>() {
+    public static final Lambda1<String, CardEdition> FN_GET_CODE = new Lambda1<String, CardEdition>() {
         @Override
         public String apply(final CardEdition arg1) {
-            return arg1.name;
+            return arg1.getCode();
         }
     };
 
@@ -202,158 +172,26 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return this.name + " (set)";
     }
 
-    /**
-     * The Class BoosterData.
-     */
-    public static class BoosterData {
-        private final int nCommon;
-        private final int nUncommon;
-        private final int nRare;
-        private final int nSpecial;
-        private final int nDoubleFaced;
-        private final int nLand;
-        private final int foilRate;
-        private static final int CARDS_PER_BOOSTER = 15;
-
-        // private final String landCode;
-        /**
-         * Instantiates a new booster data.
-         * 
-         * @param nC
-         *            the n c
-         * @param nU
-         *            the n u
-         * @param nR
-         *            the n r
-         * @param nS
-         *            the n s
-         * @param nDF
-         *            the n df
-         */
-        public BoosterData(final int nC, final int nU, final int nR, final int nS, final int nDF) {
-            // if this booster has more that 10 cards, there must be a land in
-            // 15th slot unless it's already taken
-            this(nC, nU, nR, nS, nDF, (nC + nR + nU + nS + nDF) > 10 ? BoosterData.CARDS_PER_BOOSTER - nC - nR - nU
-                    - nS - nDF : 0, 68);
-        }
-
-        /**
-         * Instantiates a new booster data.
-         * 
-         * @param nC
-         *            the n c
-         * @param nU
-         *            the n u
-         * @param nR
-         *            the n r
-         * @param nS
-         *            the n s
-         * @param nDF
-         *            the n df
-         * @param nL
-         *            the n l
-         * @param oneFoilPer
-         *            the one foil per
-         */
-        public BoosterData(final int nC, final int nU, final int nR, final int nS, final int nDF, final int nL,
-                final int oneFoilPer) {
-            this.nCommon = nC;
-            this.nUncommon = nU;
-            this.nRare = nR;
-            this.nSpecial = nS;
-            this.nDoubleFaced = nDF;
-            this.nLand = nL > 0 ? nL : 0;
-            this.foilRate = oneFoilPer;
-        }
-
-        /**
-         * Gets the common.
-         * 
-         * @return the common
-         */
-        public final int getCommon() {
-            return this.nCommon;
-        }
-
-        /**
-         * Gets the uncommon.
-         * 
-         * @return the uncommon
-         */
-        public final int getUncommon() {
-            return this.nUncommon;
-        }
-
-        /**
-         * Gets the rare.
-         * 
-         * @return the rare
-         */
-        public final int getRare() {
-            return this.nRare;
-        }
-
-        /**
-         * Gets the special.
-         * 
-         * @return the special
-         */
-        public final int getSpecial() {
-            return this.nSpecial;
-        }
-
-        /**
-         * Gets the double faced.
-         * 
-         * @return the double faced
-         */
-        public final int getDoubleFaced() {
-            return this.nDoubleFaced;
-        }
-
-        /**
-         * Gets the land.
-         * 
-         * @return the land
-         */
-        public final int getLand() {
-            return this.nLand;
-        }
-
-        /**
-         * Gets the total.
-         * 
-         * @return the total
-         */
-        public final int getTotal() {
-            return this.nCommon + this.nUncommon + this.nRare + this.nSpecial + this.nDoubleFaced + this.nLand;
-        }
-
-        /**
-         * Gets the foil chance.
-         * 
-         * @return the foil chance
-         */
-        public final int getFoilChance() {
-            return this.foilRate;
-        }
+    public String getAlias() {
+        return alias;
     }
 
     /**
      * The Class Predicates.
      */
     public abstract static class Predicates {
-
+        
         /** The Constant canMakeBooster. */
         public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
 
         private static class CanMakeBooster extends Predicate<CardEdition> {
             @Override
             public boolean isTrue(final CardEdition subject) {
-                return subject.canGenerateBooster();
+                return Singletons.getModel().getBoosters().get(subject.getCode()) != null;
             }
         }
-
+        
+        
         /**
          * Checks if is legal in format.
          *
@@ -376,5 +214,28 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 return this.format.isSetLegal(subject.getCode());
             }
         }
+    }
+    
+    public static class Reader extends StorageReaderFile<CardEdition> {
+
+        public Reader(String pathname) {
+            super(pathname, CardEdition.FN_GET_CODE);
+        }
+
+        /* (non-Javadoc)
+         * @see forge.util.StorageReaderFile#read(java.lang.String)
+         */
+        @Override
+        protected CardEdition read(String line) {
+            final FileSection section = FileSection.parse(line, ":", "|");
+            final String code = section.get("code3");
+            final int index = section.getInt("index", -1);
+            final String code2 = section.get("code2");
+            final String name = section.get("name");
+            final String alias = section.get("alias");
+
+            return new CardEdition(index, name, code, code2, alias);
+        }
+        
     }
 }

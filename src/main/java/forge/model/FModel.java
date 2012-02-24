@@ -34,8 +34,10 @@ import forge.Constant;
 import forge.ConstantStringArrayList;
 import forge.GameAction;
 import forge.Singletons;
-import forge.card.EditionUtils;
-import forge.card.FormatUtils;
+import forge.card.BoosterData;
+import forge.card.CardBlock;
+import forge.card.EditionCollection;
+import forge.card.FormatCollection;
 import forge.control.input.InputControl;
 import forge.deck.CardCollections;
 import forge.game.GameState;
@@ -47,7 +49,9 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestEventManager;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
+import forge.util.FolderMapView;
 import forge.util.HttpUtil;
+import forge.util.IFolderMapView;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTabber;
 import forge.view.toolbox.FSkin;
@@ -79,12 +83,15 @@ public enum FModel {
     private final GameState gameState;
     private final FMatchState matchState;
 
-    private final EditionUtils setUtils;
-    private final FormatUtils formats;
-
+    private final EditionCollection editions;
+    private final FormatCollection formats;
+    private final IFolderMapView<BoosterData> boosters;
+    private final FolderMapView<CardBlock> blocks;
+    
     // have to implement lazy initialization - at the moment of FModel.ctor()
     // CardDb is not ready yet.
     private CardCollections decks;
+
 
     /**
      * Constructor.
@@ -124,9 +131,12 @@ public enum FModel {
         this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
         this.questEventManager = new QuestEventManager();
-        this.setUtils = new EditionUtils();
-        this.formats = new FormatUtils();
-
+        this.editions = new EditionCollection();
+        this.formats = new FormatCollection("res/blockdata/formats.txt");
+        this.boosters = new FolderMapView<BoosterData>(new BoosterData.Reader("res/blockdata/boosters.txt"));
+        this.blocks = new FolderMapView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
+        
+        
         // TODO this single setting from preferences should not be here, or,
         // it should be here with all the other settings at the same time.
         // Unfortunately, they're tied up in legacy code in the Display
@@ -154,6 +164,10 @@ public enum FModel {
 
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();
+    }
+
+    public final IFolderMapView<BoosterData> getBoosters() {
+        return boosters;
     }
 
     /**
@@ -374,8 +388,8 @@ public enum FModel {
      * @return the editions
      */
 
-    public final EditionUtils getEditions() {
-        return this.setUtils;
+    public final EditionCollection getEditions() {
+        return this.editions;
     }
 
     /**
@@ -383,7 +397,7 @@ public enum FModel {
      *
      * @return the formats
      */
-    public final FormatUtils getFormats() {
+    public final FormatCollection getFormats() {
         return this.formats;
     }
 
@@ -502,4 +516,10 @@ public enum FModel {
             // ignored
         }
     }
+
+    public FolderMapView<CardBlock> getBlocks() {
+        return blocks;
+    }
+
+
 }

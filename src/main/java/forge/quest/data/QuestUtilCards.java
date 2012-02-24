@@ -26,7 +26,7 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
-import forge.card.FormatUtils;
+import forge.card.FormatCollection;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
@@ -313,7 +313,7 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    private final FormatUtils formats = Singletons.getModel().getFormats();
+    private final FormatCollection formats = Singletons.getModel().getFormats();
     private final Predicate<CardEdition> filterExt = CardEdition.Predicates.isLegalInFormat(this.formats.getExtended());
 
     /** The filter t2booster. */
@@ -342,7 +342,7 @@ public final class QuestUtilCards {
             final Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
             this.q.getShopList().addAllFlat(
-                    filter.random(Singletons.getModel().getEditions().getAllSets(), 1, BoosterPack.FN_FROM_SET));
+                    filter.random(Singletons.getModel().getEditions(), 1, BoosterPack.FN_FROM_SET));
         }
     }
 

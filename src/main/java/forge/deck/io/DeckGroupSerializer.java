@@ -42,7 +42,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
      * @param deckDir0 the deck dir0
      */
     public DeckGroupSerializer(final File deckDir0) {
-        super(deckDir0);
+        super(deckDir0, DeckGroup.FN_NAME_SELECTOR);
     }
 
     /** The Constant MAX_DRAFT_PLAYERS. */

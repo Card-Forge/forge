@@ -59,7 +59,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
      * @param deckDir0 the deck dir0
      */
     public DeckSerializer(final File deckDir0) {
-        super(deckDir0);
+        super(deckDir0, Deck.FN_NAME_SELECTOR);
     }
 
     /** Constant <code>DCKFileFilter</code>. */

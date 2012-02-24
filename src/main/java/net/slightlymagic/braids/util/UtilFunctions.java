@@ -123,7 +123,7 @@ public final class UtilFunctions {
      * 
      * @return an array of (the rest of) the iterator's values
      */
-    public static <T> T[] iteratorToArray(final Iterator<T> iter) {
+    public static <T> T[] iteratorToArray(final Iterator<T> iter, T[] destArray) {
         final ArrayList<T> list = new ArrayList<T>();
 
         T item;
@@ -132,8 +132,7 @@ public final class UtilFunctions {
             list.add(item);
         }
 
-        @SuppressWarnings("unchecked")
-        final T[] result = (T[]) list.toArray();
+        final T[] result = list.toArray(destArray);
         return result;
     }
 

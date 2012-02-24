@@ -17,11 +17,14 @@
  */
 package forge.item;
 
+import java.util.Arrays;
 import java.util.List;
 
+import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
+import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRules;
 import forge.card.CardEdition;
@@ -40,7 +43,7 @@ public class BoosterPack implements InventoryItemFromSet {
         }
     };
 
-    private final CardEdition cardSet;
+    private final BoosterData contents;
     private final String name;
 
     private List<CardPrinted> cards = null;
@@ -62,8 +65,8 @@ public class BoosterPack implements InventoryItemFromSet {
      *            the set
      */
     public BoosterPack(final CardEdition set) {
-        this.cardSet = set;
-        this.name = this.cardSet.getName() + " Booster Pack";
+        this.contents = Singletons.getModel().getBoosters().get(set.getCode());
+        this.name = set.getName() + " Booster Pack";
     }
 
     /*
@@ -78,7 +81,7 @@ public class BoosterPack implements InventoryItemFromSet {
      */
     @Override
     public final String getEdition() {
-        return this.cardSet.getCode();
+        return this.contents.getEdition();
     }
 
     /*
@@ -108,7 +111,7 @@ public class BoosterPack implements InventoryItemFromSet {
      */
     @Override
     public final String getImageFilename() {
-        return "booster/" + this.cardSet.getCode() + ".png";
+        return "booster/" + this.contents.getEdition() + ".png";
     }
 
     private CardPrinted getRandomBasicLand(final CardEdition set) {
@@ -118,23 +121,23 @@ public class BoosterPack implements InventoryItemFromSet {
     }
 
     private CardPrinted getLandFromNearestSet() {
-        final List<CardEdition> sets = Singletons.getModel().getEditions().getAllSets();
-        final int iThisSet = sets.indexOf(this.cardSet);
-        for (int iSet = iThisSet; iSet < sets.size(); iSet++) {
-            final CardPrinted land = this.getRandomBasicLand(sets.get(iSet));
+        final CardEdition[] editions = UtilFunctions.iteratorToArray(Singletons.getModel().getEditions().iterator(), new CardEdition[]{});
+        final int iThisSet = Arrays.binarySearch(editions, this.contents);
+        for (int iSet = iThisSet; iSet < editions.length; iSet++) {
+            final CardPrinted land = this.getRandomBasicLand(editions[iSet]);
             if (null != land) {
                 return land;
             }
         }
         // if not found (though that's impossible)
-        return this.getRandomBasicLand(Singletons.getModel().getEditions().getEditionByCode("M12"));
+        return this.getRandomBasicLand(Singletons.getModel().getEditions().get("M12"));
     }
 
     private void generate() {
-        final BoosterGenerator gen = new BoosterGenerator(this.cardSet);
+        final BoosterGenerator gen = new BoosterGenerator(this.contents);
         this.cards = gen.getBoosterPack();
 
-        final int cntLands = this.cardSet.getBoosterData().getLand();
+        final int cntLands = this.contents.getLand();
         if (cntLands > 0) {
             this.cards.add(this.getLandFromNearestSet());
         }
@@ -166,7 +169,7 @@ public class BoosterPack implements InventoryItemFromSet {
     public final int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = (prime * result) + ((this.cardSet == null) ? 0 : this.cardSet.hashCode());
+        result = (prime * result) + ((this.contents == null) ? 0 : this.contents.hashCode());
         return result;
     }
 
@@ -187,11 +190,11 @@ public class BoosterPack implements InventoryItemFromSet {
             return false;
         }
         final BoosterPack other = (BoosterPack) obj;
-        if (this.cardSet == null) {
-            if (other.cardSet != null) {
+        if (this.contents == null) {
+            if (other.contents != null) {
                 return false;
             }
-        } else if (!this.cardSet.equals(other.cardSet)) {
+        } else if (!this.contents.equals(other.contents)) {
             return false;
         }
         return true;
@@ -224,8 +227,16 @@ public class BoosterPack implements InventoryItemFromSet {
      */
     @Override
     public final Object clone() {
-        return new BoosterPack(this.cardSet); // it's ok to share a reference to
+        return new BoosterPack(Singletons.getModel().getEditions().getEditionByCodeOrThrow(this.contents.getEdition())); // it's ok to share a reference to
         // cardSet which is static anyway
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public int getTotalCards() {
+        return contents.getTotal();
     }
 
 }

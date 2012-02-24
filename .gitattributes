@@ -11046,6 +11046,7 @@ src/main/java/forge/UndoCommand.java svneol=native#text/plain
 src/main/java/forge/Untap.java -text
 src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
+src/main/java/forge/card/BoosterData.java -text
 src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardCharacteristics.java -text
@@ -11061,9 +11062,9 @@ src/main/java/forge/card/CardRules.java -text
 src/main/java/forge/card/CardRulesReader.java svneol=native#text/plain
 src/main/java/forge/card/CardSuperType.java -text
 src/main/java/forge/card/CardType.java -text
+src/main/java/forge/card/EditionCollection.java svneol=native#text/plain
 src/main/java/forge/card/EditionInfo.java svneol=native#text/plain
-src/main/java/forge/card/EditionUtils.java svneol=native#text/plain
-src/main/java/forge/card/FormatUtils.java -text
+src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/MtgDataParser.java -text
 src/main/java/forge/card/TriggerReplacementBase.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/plain

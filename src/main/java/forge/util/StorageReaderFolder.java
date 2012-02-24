@@ -28,6 +28,8 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.io.OldDeckFileFormatException;
@@ -40,9 +42,10 @@ import forge.error.ErrorViewer;
  *
  * @param <T> the generic type
  */
-public abstract class StorageReaderFolder<T extends IHasName> implements IItemReader<T> {
+public abstract class StorageReaderFolder<T> implements IItemReader<T> {
 
     private final File directory;
+    private final Lambda1<String,T> keySelector;
 
     /**
      * Gets the directory.
@@ -58,9 +61,10 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
      *
      * @param deckDir0 the deck dir0
      */
-    public StorageReaderFolder(final File deckDir0) {
+    public StorageReaderFolder(final File deckDir0, Lambda1<String,T> keySelector0) {
 
         this.directory = deckDir0;
+        keySelector = keySelector0;
 
         if (this.directory == null) {
             throw new IllegalArgumentException("No deck directory specified");
@@ -99,7 +103,7 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
                     JOptionPane.showMessageDialog(null, msg);
                     continue;
                 }
-                result.put(newDeck.getName(), newDeck);
+                result.put(keySelector.apply(newDeck), newDeck);
             } catch (final OldDeckFileFormatException ex) {
                 if (!hasWarnedOfOldFormat) {
                     JOptionPane

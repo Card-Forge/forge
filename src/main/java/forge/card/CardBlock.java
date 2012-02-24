@@ -20,8 +20,10 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
 import forge.item.CardPrinted;
+import forge.util.StorageReaderFile;
 
 /**
  * This is a CardBlock class.
@@ -188,5 +190,62 @@ public final class CardBlock implements Comparable<CardBlock> {
     public String toString() {
         return this.name + " (block)";
     }
+    
+    public static final Lambda1<String, CardBlock> FN_GET_NAME = new Lambda1<String, CardBlock>() {
+        
+        @Override
+        public String apply(CardBlock arg1) {
+            return arg1.getName();
+        }
+    };
+    
+    public static class Reader extends StorageReaderFile<CardBlock>{
 
+        private final EditionCollection editions;
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param pathname
+         * @param keySelector0
+         */
+        public Reader(String pathname, EditionCollection editions0) {
+            super(pathname, CardBlock.FN_GET_NAME);
+            editions = editions0;
+        }
+
+        /* (non-Javadoc)
+         * @see forge.util.StorageReaderFile#read(java.lang.String)
+         */
+        @Override
+        protected CardBlock read(String line) {
+            final String[] sParts = line.trim().split("\\|");
+            
+            String name = null;
+            int index = -1;
+            final List<CardEdition> sets = new ArrayList<CardEdition>(4);
+            CardEdition landSet = null;
+            int draftBoosters = 3;
+            int sealedBoosters = 6;
+
+            for (final String sPart : sParts) {
+                final String[] kv = sPart.split(":", 2);
+                final String key = kv[0].toLowerCase();
+                if ("name".equals(key)) {
+                    name = kv[1];
+                } else if ("index".equals(key)) {
+                    index = Integer.parseInt(kv[1]);
+                } else if ("set0".equals(key) || "set1".equals(key) || "set2".equals(key)) {
+                    sets.add(editions.getEditionByCodeOrThrow(kv[1]));
+                } else if ("landsetcode".equals(key)) {
+                    landSet = editions.getEditionByCodeOrThrow(kv[1]);
+                } else if ("draftpacks".equals(key)) {
+                    draftBoosters = Integer.parseInt(kv[1]);
+                } else if ("sealedpacks".equals(key)) {
+                    sealedBoosters = Integer.parseInt(kv[1]);
+                }
+
+            }
+            return new CardBlock(index, name, sets, landSet, draftBoosters, sealedBoosters);
+        }
+        
+    }
 }

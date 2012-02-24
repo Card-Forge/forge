@@ -392,10 +392,10 @@ public final class CardDb {
 
                 // Find card with maximal set index
                 result = namedCards.get(0);
-                int resIndex = Singletons.getModel().getEditions().getEditionByCode((result).getEdition()).getIndex();
+                int resIndex = Singletons.getModel().getEditions().get((result).getEdition()).getIndex();
                 for (final CardPrinted card : namedCards) {
 
-                    final int thisIndex = Singletons.getModel().getEditions().getEditionByCode((card).getEdition()).getIndex();
+                    final int thisIndex = Singletons.getModel().getEditions().get((card).getEdition()).getIndex();
                     if (thisIndex > resIndex) {
                         result = card;
                         resIndex = thisIndex;

@@ -20,6 +20,8 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.IHasName;
@@ -110,5 +112,12 @@ public class DeckGroup extends DeckBase implements IHasName {
     protected DeckBase newInstance(final String name0) {
         return new DeckGroup(name0);
     }
+    
+    public final static Lambda1<String, DeckGroup> FN_NAME_SELECTOR = new Lambda1<String, DeckGroup>() {
+        @Override
+        public String apply(DeckGroup arg1) {
+            return arg1.getName();
+        }
+    };
 
 }

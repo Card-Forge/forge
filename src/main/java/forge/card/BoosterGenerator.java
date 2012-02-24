@@ -17,7 +17,6 @@
  */
 package forge.card;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -132,20 +131,16 @@ public class BoosterGenerator {
      * @param cardSet
      *            the card set
      */
-    public BoosterGenerator(final CardEdition cardSet) {
+    public BoosterGenerator(BoosterData booster) {
         this();
-        if (!cardSet.canGenerateBooster()) {
-            throw new InvalidParameterException("BoosterGenerator: Set " + cardSet + " cannot generate boosters!");
-        }
-        final CardEdition.BoosterData bs = cardSet.getBoosterData();
 
-        this.numCommons = bs.getCommon();
-        this.numUncommons = bs.getUncommon();
-        this.numRareSlots = bs.getRare();
-        this.numSpecials = bs.getSpecial();
-        this.numDoubleFaced = bs.getDoubleFaced();
+        this.numCommons = booster.getCommon();
+        this.numUncommons = booster.getUncommon();
+        this.numRareSlots = booster.getRare();
+        this.numSpecials = booster.getSpecial();
+        this.numDoubleFaced = booster.getDoubleFaced();
 
-        final Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(cardSet.getCode());
+        final Predicate<CardPrinted> filter = booster.getEditionFilter();
         final List<CardPrinted> cardsInThisSet = filter.select(CardDb.instance().getAllCards());
 
         for (final CardPrinted c : cardsInThisSet) {
