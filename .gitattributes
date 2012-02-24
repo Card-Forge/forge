@@ -11343,6 +11343,8 @@ src/main/java/forge/gui/home/constructed/VSubmenuColors.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuCustom.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuQuestEvents.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuThemes.java -text
+src/main/java/forge/gui/home/draft/CSubmenuDraft.java -text
+src/main/java/forge/gui/home/draft/VSubmenuDraft.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
 src/main/java/forge/gui/home/quest/VSubmenuDuels.java -text
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
