@@ -7,7 +7,7 @@ SVar:DBHereticDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Se
 SVar:DBHereticCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HereticX:Count$HighestCMCRemembered
 SVar:RemAIDeck:True
-SVar:RemRandomDeck
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heretics_punishment.jpg
 End
