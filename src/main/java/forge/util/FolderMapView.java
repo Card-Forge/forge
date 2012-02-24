@@ -22,13 +22,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
-
 //reads and writeDeck Deck objects
 /**
  * <p>
  * DeckManager class.
  * </p>
- * 
+ *
+ * @param <T> the generic type
  * @author Forge
  * @version $Id: DeckManager.java 13590 2012-01-27 20:46:27Z Max mtg $
  */
@@ -39,15 +39,16 @@ public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMa
      * <p>
      * Constructor for DeckManager.
      * </p>
-     * 
-     * @param deckDir
-     *            a {@link java.io.File} object.
+     *
+     * @param io the io
      */
-    public FolderMapView(IItemReader<T> io) {
+    public FolderMapView(final IItemReader<T> io) {
         this.map = io.readAll();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.IFolderMapView#get(java.lang.String)
      */
     @Override
@@ -55,22 +56,33 @@ public class FolderMapView<T extends IHasName> implements Iterable<T>, IFolderMa
         return this.map.get(name);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.IFolderMapView#getNames()
      */
     @Override
     public final Collection<String> getNames() {
-        return new ArrayList<String>(map.keySet());
+        return new ArrayList<String>(this.map.keySet());
     }
 
+    /**
+     * Gets the map.
+     *
+     * @return the map
+     */
     protected final Map<String, T> getMap() {
-        return map;
+        return this.map;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Iterable#iterator()
      */
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.IFolderMapView#iterator()
      */
     @Override

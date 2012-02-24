@@ -41,13 +41,21 @@ public final class EditionUtils {
 
     private final List<CardEdition> allSets;
 
+    /**
+     * Gets the all sets.
+     *
+     * @return the all sets
+     */
     public final List<CardEdition> getAllSets() {
-        return allSets;
+        return this.allSets;
     }
 
+    /**
+     * Instantiates a new edition utils.
+     */
     public EditionUtils() {
-        allSets = loadSetData(loadBoosterData());
-        allBlocks = loadBlockData();
+        this.allSets = this.loadSetData(this.loadBoosterData());
+        this.allBlocks = this.loadBlockData();
     }
 
     /** Constant <code>setData</code>. */
@@ -60,7 +68,7 @@ public final class EditionUtils {
      * @return the blocks
      */
     public List<CardBlock> getBlocks() {
-        return allBlocks;
+        return this.allBlocks;
     }
 
     /**
@@ -71,7 +79,7 @@ public final class EditionUtils {
      * @return the sets the by code
      */
     public CardEdition getEditionByCode(final String code) {
-        return setsByCode.get(code);
+        return this.setsByCode.get(code);
     }
 
     /**
@@ -82,7 +90,7 @@ public final class EditionUtils {
      * @return the sets the by code or throw
      */
     public CardEdition getEditionByCodeOrThrow(final String code) {
-        final CardEdition set = setsByCode.get(code);
+        final CardEdition set = this.setsByCode.get(code);
         if (null == set) {
             throw new RuntimeException(String.format("Edition with code '%s' not found", code));
         }
@@ -98,7 +106,7 @@ public final class EditionUtils {
      * @return the code2 by code
      */
     public String getCode2ByCode(final String code) {
-        final CardEdition set = setsByCode.get(code);
+        final CardEdition set = this.setsByCode.get(code);
         return set == null ? "" : set.getCode2();
     }
 
@@ -146,26 +154,24 @@ public final class EditionUtils {
     private List<CardEdition> loadSetData(final Map<String, CardEdition.BoosterData> boosters) {
         final ArrayList<String> fData = FileUtil.readFile("res/blockdata/setdata.txt");
 
-        
-        
         final List<CardEdition> allSets = new ArrayList<CardEdition>();
         for (final String s : fData) {
             if (StringUtils.isBlank(s)) {
                 continue;
             }
 
-            FileSection section = FileSection.parse(s, ":", "|");
-            String code = section.get("code3");
-            int index = section.getInt("index", -1);
-            String code2 = section.get("code2");
-            String name = section.get("name");
-            String alias = section.get("alias");
+            final FileSection section = FileSection.parse(s, ":", "|");
+            final String code = section.get("code3");
+            final int index = section.getInt("index", -1);
+            final String code2 = section.get("code2");
+            final String name = section.get("name");
+            final String alias = section.get("alias");
 
             final CardEdition set = new CardEdition(index, name, code, code2, boosters.get(code));
-            //boosters.remove(code);
-            setsByCode.put(code, set);
+            // boosters.remove(code);
+            this.setsByCode.put(code, set);
             if (alias != null) {
-                setsByCode.put(alias, set);
+                this.setsByCode.put(alias, set);
             }
             allSets.add(set);
         }
@@ -199,9 +205,9 @@ public final class EditionUtils {
                 } else if ("index".equals(key)) {
                     index = Integer.parseInt(kv[1]);
                 } else if ("set0".equals(key) || "set1".equals(key) || "set2".equals(key)) {
-                    sets.add(getEditionByCodeOrThrow(kv[1]));
+                    sets.add(this.getEditionByCodeOrThrow(kv[1]));
                 } else if ("landsetcode".equals(key)) {
-                    landSet = getEditionByCodeOrThrow(kv[1]);
+                    landSet = this.getEditionByCodeOrThrow(kv[1]);
                 } else if ("draftpacks".equals(key)) {
                     draftBoosters = Integer.parseInt(kv[1]);
                 } else if ("sealedpacks".equals(key)) {

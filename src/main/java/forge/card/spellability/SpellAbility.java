@@ -991,7 +991,7 @@ public abstract class SpellAbility {
 
     /**
      * Gets the replacing objects.
-     *
+     * 
      * @return the replacing objects
      */
     public HashMap<String, Object> getReplacingObjects() {
@@ -1000,8 +1000,9 @@ public abstract class SpellAbility {
 
     /**
      * Sets the all replacing objects.
-     *
-     * @param replacedObjects the replaced objects
+     * 
+     * @param replacedObjects
+     *            the replaced objects
      */
     public void setAllReplacingObjects(final HashMap<String, Object> replacedObjects) {
         this.replacingObjects = replacedObjects;
@@ -1009,9 +1010,11 @@ public abstract class SpellAbility {
 
     /**
      * Sets the replacing object.
-     *
-     * @param type the type
-     * @param o the o
+     * 
+     * @param type
+     *            the type
+     * @param o
+     *            the o
      */
     public void setReplacingObject(final String type, final Object o) {
         this.replacingObjects.put(type, o);
@@ -1019,19 +1022,21 @@ public abstract class SpellAbility {
 
     /**
      * Gets the replacing object.
-     *
-     * @param type the type
+     * 
+     * @param type
+     *            the type
      * @return the replacing object
      */
     public Object getReplacingObject(final String type) {
-        Object res = this.replacingObjects.get(type);
+        final Object res = this.replacingObjects.get(type);
         return res;
     }
 
     /**
      * Checks for replacing object.
-     *
-     * @param type the type
+     * 
+     * @param type
+     *            the type
      * @return true, if successful
      */
     public boolean hasReplacingObject(final String type) {
@@ -1602,7 +1607,7 @@ public abstract class SpellAbility {
 
         return res;
     }
-    
+
     /**
      * <p>
      * canTarget.
@@ -1613,7 +1618,7 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     public final boolean canTarget(final GameEntity entity) {
-        if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard()) 
+        if (entity.isValid(this.getTarget().getValidTgts(), this.getActivatingPlayer(), this.getSourceCard())
                 && entity.canBeTargetedBy(this)) {
             return true;
         }

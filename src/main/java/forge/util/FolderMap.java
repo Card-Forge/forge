@@ -17,62 +17,61 @@
  */
 package forge.util;
 
-
 //reads and writeDeck Deck objects
 /**
  * <p>
  * DeckManager class.
  * </p>
- * 
+ *
+ * @param <T> the generic type
  * @author Forge
  * @version $Id$
  */
 public class FolderMap<T extends IHasName> extends FolderMapView<T> implements IFolderMap<T> {
 
-    private IItemSerializer<T> serializer;
+    private final IItemSerializer<T> serializer;
+
     /**
      * <p>
      * Constructor for DeckManager.
      * </p>
-     * 
-     * @param deckDir
-     *            a {@link java.io.File} object.
+     *
+     * @param io the io
      */
-    public FolderMap(IItemSerializer<T> io) {
+    public FolderMap(final IItemSerializer<T> io) {
         super(io);
-        serializer = io;
+        this.serializer = io;
     }
 
-
-
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.IFolderMap#add(T)
      */
     @Override
     public final void add(final T deck) {
         this.getMap().put(deck.getName(), deck);
-        serializer.save(deck);
+        this.serializer.save(deck);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.IFolderMap#delete(java.lang.String)
      */
     @Override
     public final void delete(final String deckName) {
-        serializer.erase(this.getMap().remove(deckName));
+        this.serializer.erase(this.getMap().remove(deckName));
     }
 
-
-
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.IFolderMapView#isUnique(java.lang.String)
      */
     @Override
     public final boolean isUnique(final String name) {
         return !this.getMap().containsKey(name);
     }
-
-
-
 
 }

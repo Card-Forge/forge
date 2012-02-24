@@ -39,9 +39,9 @@ import forge.item.CardPrinted;
 import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
+import forge.util.IItemSerializer;
 import forge.util.SectionUtil;
 import forge.util.StorageReaderFolder;
-import forge.util.IItemSerializer;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -53,10 +53,14 @@ import freemarker.template.TemplateException;
  */
 public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSerializer<Deck> {
 
-    public DeckSerializer(File deckDir0) {
+    /**
+     * Instantiates a new deck serializer.
+     *
+     * @param deckDir0 the deck dir0
+     */
+    public DeckSerializer(final File deckDir0) {
         super(deckDir0);
     }
-
 
     /** Constant <code>DCKFileFilter</code>. */
     public static final FilenameFilter DCK_FILE_FILTER = new FilenameFilter() {
@@ -89,7 +93,6 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             return "Simple Deck File .html";
         }
     };
-
 
     /**
      * <p>
@@ -203,72 +206,85 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         }
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.deck.IDeckSerializer#save(forge.item.CardCollectionBase, java.io.File)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.deck.IDeckSerializer#save(forge.item.CardCollectionBase,
+     * java.io.File)
      */
     @Override
-    public void save(Deck unit) {
-        FileUtil.writeFile(makeFileFor(unit), unit.save());
+    public void save(final Deck unit) {
+        FileUtil.writeFile(this.makeFileFor(unit), unit.save());
     }
 
-    /* (non-Javadoc)
-     * @see forge.deck.IDeckSerializer#erase(forge.item.CardCollectionBase, java.io.File)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.deck.IDeckSerializer#erase(forge.item.CardCollectionBase,
+     * java.io.File)
      */
     @Override
-    public void erase(Deck unit) {
-        makeFileFor(unit).delete();
+    public void erase(final Deck unit) {
+        this.makeFileFor(unit).delete();
     }
 
     /**
-     * 
      * Make file name.
-     * 
-     * @param deckName
-     *            a String
-     * @param deckType
-     *            a GameType
+     *
+     * @param deck the deck
      * @return a File
      */
     public File makeFileFor(final Deck deck) {
-        return new File(getDirectory(), deck.getBestFileName() + ".dck");
+        return new File(this.getDirectory(), deck.getBestFileName() + ".dck");
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.io.DeckSerializerBase#read(java.io.File)
      */
     @Override
-    protected Deck read(File file) {
-        Map<String,List<String>> sections = SectionUtil.parseSections(FileUtil.readFile(file));
+    protected Deck read(final File file) {
+        final Map<String, List<String>> sections = SectionUtil.parseSections(FileUtil.readFile(file));
         return Deck.fromSections(sections, true);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.io.DeckSerializerBase#getFileFilter()
      */
     @Override
     protected FilenameFilter getFileFilter() {
-        return DCK_FILE_FILTER;
+        return DeckSerializer.DCK_FILE_FILTER;
     }
 
-    public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map, boolean canThrow) {
-        if (map == null) { return null; }
-        List<String> metadata = map.get("metadata");
-        if (metadata != null) { 
+    /**
+     * Read deck metadata.
+     *
+     * @param map the map
+     * @param canThrow the can throw
+     * @return the deck file header
+     */
+    public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map, final boolean canThrow) {
+        if (map == null) {
+            return null;
+        }
+        final List<String> metadata = map.get("metadata");
+        if (metadata != null) {
             return new DeckFileHeader(FileSection.parse(metadata, "="));
-        } 
-        List<String> general = map.get("general");
-        if ( general != null )
-        {
-            if ( canThrow ) { 
+        }
+        final List<String> general = map.get("general");
+        if (general != null) {
+            if (canThrow) {
                 throw new OldDeckFileFormatException();
             }
-            FileSectionManual fs = new FileSectionManual();
+            final FileSectionManual fs = new FileSectionManual();
             fs.put(DeckFileHeader.NAME, StringUtils.join(map.get(""), " "));
             fs.put(DeckFileHeader.DECK_TYPE, StringUtils.join(general, " "));
             return new DeckFileHeader(fs);
         }
-        
+
         return null;
     }
 

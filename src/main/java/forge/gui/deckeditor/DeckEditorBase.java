@@ -39,6 +39,9 @@ import forge.item.ItemPoolView;
 
 /**
  * The Class DeckEditorBase.
+ *
+ * @param <T> the generic type
+ * @param <TModel> the generic type
  */
 public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JFrame {
     private static final long serialVersionUID = -401223933343539977L;
@@ -78,6 +81,11 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getTop()
      */
+    /**
+     * Gets the top.
+     *
+     * @return the top
+     */
     public final ItemPoolView<T> getTop() {
         return this.getTopTableWithCards().getCards();
     }
@@ -88,11 +96,20 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
      * 
      * @see forge.gui.deckeditor.DeckDisplay#getBottom()
      */
+    /**
+     * Gets the bottom.
+     *
+     * @return the bottom
+     */
     public final ItemPoolView<T> getBottom() {
         return this.getBottomTableWithCards().getCards();
     }
 
-
+    /**
+     * Gets the controller.
+     *
+     * @return the controller
+     */
     public abstract IDeckController<TModel> getController();
 
     // THIS IS HERE FOR OVERLOADING!!!1
@@ -105,7 +122,13 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
      */
     protected abstract Predicate<T> buildFilter();
 
+    /**
+     * Show.
+     *
+     * @param exitCommand the exit command
+     */
     public abstract void show(final Command exitCommand);
+
     /**
      * Analysis button_action performed.
      * 
@@ -126,16 +149,16 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
         }
     }
 
-
     /*
      * (non-Javadoc)
      * 
      * @see forge.gui.deckeditor.DeckDisplay#setItems(forge.item.ItemPoolView,
      * forge.item.ItemPoolView, forge.game.GameType)
      */
+    /**
+     * Update view.
+     */
     public abstract void updateView();
-
-
 
     /**
      * Update display.

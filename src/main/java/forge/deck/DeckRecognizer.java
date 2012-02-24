@@ -198,7 +198,7 @@ public class DeckRecognizer {
         if (CardDb.instance().isCardSupported(name)) {
             return Token.knownCard(CardDb.instance().getCard(name, true), n);
         }
-        
+
         // TODO: recognize format: http://topdeck.ru/forum/index.php?showtopic=12711
         //final Matcher foundEditionName = READ_SEPARATED_EDITION.matcher(name);
 

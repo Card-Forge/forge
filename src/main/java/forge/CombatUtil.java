@@ -62,7 +62,7 @@ public class CombatUtil {
             return false;
         }
         for (final Card c : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
-            for (String keyword : c.getKeyword()) {
+            for (final String keyword : c.getKeyword()) {
                 if (keyword.equals("No more than one creature can block each combat.")
                         && (combat.getAllBlockers().size() > 0)) {
                     return false;
@@ -405,7 +405,8 @@ public class CombatUtil {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
                         if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                            CardList possibleBlockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+                            final CardList possibleBlockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield)
+                                    .getType("Creature");
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
                                 must = false;
@@ -422,7 +423,7 @@ public class CombatUtil {
         for (final Card attacker : attackers) {
             // don't accept one blocker for attackers with this keyword
             if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")
-                    && combat.getBlockers(attacker).size() == 1) {
+                    && (combat.getBlockers(attacker).size() == 1)) {
                 return false;
             }
         }
@@ -452,12 +453,12 @@ public class CombatUtil {
             return false;
         }
 
-        CardList attackers = new CardList(combat.getAttackers());
-        CardList attackersWithLure = new CardList();
-        for (Card attacker : attackers) {
+        final CardList attackers = new CardList(combat.getAttackers());
+        final CardList attackersWithLure = new CardList();
+        for (final Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
-                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
-                            && combat.getBlockers(attacker).isEmpty())) {
+                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker)
+                            .isEmpty())) {
                 attackersWithLure.add(attacker);
             }
         }
@@ -466,7 +467,8 @@ public class CombatUtil {
             if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                    CardList blockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+                    final CardList blockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield)
+                            .getType("Creature");
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
@@ -482,7 +484,8 @@ public class CombatUtil {
             if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                    CardList blockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+                    final CardList blockers = combat.getDefendingPlayer().getCardsIn(Zone.Battlefield)
+                            .getType("Creature");
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
@@ -707,7 +710,7 @@ public class CombatUtil {
     public static boolean canAttack(final Card c, final Combat combat) {
 
         for (final Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
-            for (String keyword : card.getKeyword()) {
+            for (final String keyword : card.getKeyword()) {
                 if (keyword.equals("No more than one creature can attack each combat.")
                         && (combat.getAttackers().length > 0)) {
                     return false;
@@ -721,8 +724,7 @@ public class CombatUtil {
                         && card.getController().getOpponent().isPlayer(c.getController())) {
                     return false;
                 }
-                if (keyword.equals("CARDNAME can only attack alone.")
-                        && card.isAttacking()) {
+                if (keyword.equals("CARDNAME can only attack alone.") && card.isAttacking()) {
                     return false;
                 }
             }
@@ -1063,8 +1065,9 @@ public class CombatUtil {
 
             final CardList blockers = combat.getBlockers(attacker);
 
-            if (blockers.size() == 0 || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
-                    + "as though it weren't blocked.")) {
+            if ((blockers.size() == 0)
+                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
+                            + "as though it weren't blocked.")) {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword("Trample")
                     && (CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker, blockers))) {
@@ -1104,8 +1107,9 @@ public class CombatUtil {
 
             final CardList blockers = combat.getBlockers(attacker);
 
-            if (blockers.size() == 0 || attacker.hasKeyword("You may have CARDNAME assign its combat damage"
-                    + " as though it weren't blocked.")) {
+            if ((blockers.size() == 0)
+                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage"
+                            + " as though it weren't blocked.")) {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword("Trample")
                     && (CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker, blockers))) {
@@ -1140,7 +1144,7 @@ public class CombatUtil {
             return false;
         }
 
-        //check for creatures that must be blocked
+        // check for creatures that must be blocked
         final CardList attackers = combat.sortAttackerByDefender()[0];
 
         for (final Card attacker : attackers) {
@@ -1194,7 +1198,7 @@ public class CombatUtil {
             return false;
         }
 
-        //check for creatures that must be blocked
+        // check for creatures that must be blocked
         final CardList attackers = combat.sortAttackerByDefender()[0];
 
         for (final Card attacker : attackers) {
@@ -1437,8 +1441,8 @@ public class CombatUtil {
             }
             if (trigParams.containsKey("ValidCard")) {
                 if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
-                        && !(combat.isAttacking(source) && TriggerReplacementBase.matchesValid(source, trigParams.get("ValidCard")
-                                .split(","), source))) {
+                        && !(combat.isAttacking(source) && TriggerReplacementBase.matchesValid(source,
+                                trigParams.get("ValidCard").split(","), source))) {
                     return false;
                 }
             }
@@ -1518,10 +1522,11 @@ public class CombatUtil {
 
         power += defender.getKeywordMagnitude("Bushido");
 
-        //look out for continuous static abilities that only care for blocking creatures
-        CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
-        for (Card card : cardList) {
-            for (StaticAbility stAb : card.getStaticAbilities()) {
+        // look out for continuous static abilities that only care for blocking
+        // creatures
+        final CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+        for (final Card card : cardList) {
+            for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
@@ -1529,7 +1534,7 @@ public class CombatUtil {
                 if (!params.containsKey("Affected") || !params.get("Affected").contains("blocking")) {
                     continue;
                 }
-                String valid = params.get("Affected").replace("blocking", "Creature");
+                final String valid = params.get("Affected").replace("blocking", "Creature");
                 if (!defender.isValid(valid, card.getController(), card)) {
                     continue;
                 }
@@ -1700,10 +1705,11 @@ public class CombatUtil {
             theTriggers.addAll(defender.getTriggers());
         }
 
-        //look out for continuous static abilities that only care for attacking creatures
-        CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
-        for (Card card : cardList) {
-            for (StaticAbility stAb : card.getStaticAbilities()) {
+        // look out for continuous static abilities that only care for attacking
+        // creatures
+        final CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+        for (final Card card : cardList) {
+            for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
@@ -1711,7 +1717,7 @@ public class CombatUtil {
                 if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
                     continue;
                 }
-                String valid = params.get("Affected").replace("attacking", "Creature");
+                final String valid = params.get("Affected").replace("attacking", "Creature");
                 if (!attacker.isValid(valid, card.getController(), card)) {
                     continue;
                 }
@@ -1785,7 +1791,7 @@ public class CombatUtil {
                     bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
                 }
                 power += CardFactoryUtil.xCount(source, bonus);
-                
+
             }
         }
         return power;
@@ -1815,10 +1821,11 @@ public class CombatUtil {
             theTriggers.addAll(defender.getTriggers());
         }
 
-        //look out for continuous static abilities that only care for attacking creatures
-        CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
-        for (Card card : cardList) {
-            for (StaticAbility stAb : card.getStaticAbilities()) {
+        // look out for continuous static abilities that only care for attacking
+        // creatures
+        final CardList cardList = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+        for (final Card card : cardList) {
+            for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
@@ -1826,7 +1833,7 @@ public class CombatUtil {
                 if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
                     continue;
                 }
-                String valid = params.get("Affected").replace("attacking", "Creature");
+                final String valid = params.get("Affected").replace("attacking", "Creature");
                 if (!attacker.isValid(valid, card.getController(), card)) {
                     continue;
                 }
@@ -1919,7 +1926,7 @@ public class CombatUtil {
                     bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
                 }
                 toughness += CardFactoryUtil.xCount(source, bonus);
-                
+
             }
         }
         return toughness;
@@ -1964,10 +1971,10 @@ public class CombatUtil {
 
         if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !withoutAbilities)) && !(defender
                 .hasKeyword("Wither") || defender.hasKeyword("Infect")))
-                || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(Counters.M1M1)
-                        && attacker.getCounters(Counters.M1M1) == 0)
-                || (attacker.hasKeyword("Undying") && !attacker.canHaveCountersPlacedOnIt(Counters.P1P1)
-                        && attacker.getCounters(Counters.P1P1) == 0)) {
+                || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(Counters.M1M1) && (attacker
+                        .getCounters(Counters.M1M1) == 0))
+                || (attacker.hasKeyword("Undying") && !attacker.canHaveCountersPlacedOnIt(Counters.P1P1) && (attacker
+                        .getCounters(Counters.P1P1) == 0))) {
             return false;
         }
 
@@ -2098,10 +2105,10 @@ public class CombatUtil {
 
         if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities)) && !(attacker
                 .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
-                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1)
-                    && defender.getCounters(Counters.M1M1) == 0)
-                || (defender.hasKeyword("Undying") && !defender.canHaveCountersPlacedOnIt(Counters.P1P1)
-                    && defender.getCounters(Counters.P1P1) == 0)) {
+                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1) && (defender
+                        .getCounters(Counters.M1M1) == 0))
+                || (defender.hasKeyword("Undying") && !defender.canHaveCountersPlacedOnIt(Counters.P1P1) && (defender
+                        .getCounters(Counters.P1P1) == 0))) {
             return false;
         }
 
@@ -2200,7 +2207,7 @@ public class CombatUtil {
      * @return a String
      */
     public static String getCombatAttackForLog() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
@@ -2215,7 +2222,7 @@ public class CombatUtil {
             }
 
             sb.append(combat.getAttackingPlayer()).append(" declared ");
-            for (Card attacker : attackers[def]) {
+            for (final Card attacker : attackers[def]) {
                 sb.append(attacker).append(" ");
             }
 
@@ -2231,7 +2238,7 @@ public class CombatUtil {
      * @return a String
      */
     public static String getCombatBlockForLog() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         Card[] defend = null;
 

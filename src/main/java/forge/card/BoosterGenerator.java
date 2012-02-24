@@ -243,6 +243,15 @@ public class BoosterGenerator {
         return temp;
     }
 
+    /**
+     * Gets the booster pack.
+     *
+     * @param numbers the numbers
+     * @param nRareSlots the n rare slots
+     * @param nDoubls the n doubls
+     * @param nAnyCard the n any card
+     * @return the booster pack
+     */
     public final List<CardPrinted> getBoosterPack(final Map<CardRarity, Integer> numbers,
             final int nRareSlots, final int nDoubls, final int nAnyCard) {
         return getBoosterPack(numbers.get(CardRarity.Common), numbers.get(CardRarity.Uncommon), nRareSlots,

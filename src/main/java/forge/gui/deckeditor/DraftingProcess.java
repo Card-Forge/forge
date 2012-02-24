@@ -331,7 +331,10 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
 
         // DeckManager deckManager = new
         // DeckManager(ForgeProps.getFile(NEW_DECKS));
-        Singletons.getModel().getDecks().getDraft().add(finishedDraft); // write file right here
+        Singletons.getModel().getDecks().getDraft().add(finishedDraft); // write
+                                                                        // file
+                                                                        // right
+                                                                        // here
 
         // close and open next screen
         this.dispose();
@@ -350,7 +353,9 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
         return Predicate.getTrue(CardPrinted.class);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
@@ -358,18 +363,22 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
         return null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#updateView()
      */
     @Override
     public void updateView() {
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#show(forge.Command)
      */
     @Override
-    public void show(Command exitCommand) {
+    public void show(final Command exitCommand) {
         this.setup();
         this.showChoices(this.boosterDraft.nextChoice());
         this.getBottomTableWithCards().setDeck((Iterable<InventoryItem>) null);

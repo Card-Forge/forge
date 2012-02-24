@@ -28,42 +28,43 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class treats every line of a given file as a source for a named object.
- * 
+ *
+ * @param <T> the generic type
  */
 public abstract class StorageReaderFile<T extends IHasName> implements IItemReader<T> {
 
     private final File file;
 
-    public StorageReaderFile(File file0) {
-        file = file0;
+    /**
+     * Instantiates a new storage reader file.
+     *
+     * @param file0 the file0
+     */
+    public StorageReaderFile(final File file0) {
+        this.file = file0;
     }
 
     // only accepts numbers, letters or dashes up to 20 characters in length
     /**
-     * 
      * Clean deck name.
-     * 
-     * @param in
-     *            a String
+     *
      * @return a String
      */
-
-
 
     @Override
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
-        final ArrayList<String> fData = FileUtil.readFile(file);
-
+        final ArrayList<String> fData = FileUtil.readFile(this.file);
 
         for (final String s : fData) {
-            if (!lineContainsObject(s)) {
+            if (!this.lineContainsObject(s)) {
                 continue;
             }
 
-            T item = read(s);
+            final T item = this.read(s);
             if (null == item) {
-                String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
+                final String msg = "An object stored in " + this.file.getPath()
+                        + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
                 JOptionPane.showMessageDialog(null, msg);
                 continue;
             }
@@ -74,16 +75,21 @@ public abstract class StorageReaderFile<T extends IHasName> implements IItemRead
         return result;
     }
 
-
     /**
      * TODO: Write javadoc for this method.
-     * @param file
-     * @return
+     *
+     * @param line the line
+     * @return the t
      */
     protected abstract T read(String line);
 
-
-    protected boolean lineContainsObject(String line) {
+    /**
+     * Line contains object.
+     *
+     * @param line the line
+     * @return true, if successful
+     */
+    protected boolean lineContainsObject(final String line) {
         return !StringUtils.isBlank(line) && !line.trim().startsWith("#");
     }
 

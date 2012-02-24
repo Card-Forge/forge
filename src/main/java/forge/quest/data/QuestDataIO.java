@@ -80,14 +80,14 @@ public class QuestDataIO {
      * loadData.
      * </p>
      * 
-     * @param xmlSaveFile &emsp; {@link java.io.File}
+     * @param xmlSaveFile
+     *            &emsp; {@link java.io.File}
      * @return {@link forge.quest.data.QuestData}
      */
     public static QuestData loadData(final File xmlSaveFile) {
         try {
             QuestData data = null;
-            String name = xmlSaveFile.getName()
-                    .substring(0, xmlSaveFile.getName().length() - 4);
+            final String name = xmlSaveFile.getName().substring(0, xmlSaveFile.getName().length() - 4);
 
             if (!xmlSaveFile.exists()) {
                 return new QuestData(name);
@@ -200,18 +200,19 @@ public class QuestDataIO {
             xStream.alias("CardPool", ItemPool.class);
             xStream.alias("DeckSection", DeckSection.class);
 
-            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + File.separator + qd.getName() + ".dat");
+            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + File.separator + qd.getName()
+                    + ".dat");
             final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
             final GZIPOutputStream zout = new GZIPOutputStream(bout);
             xStream.toXML(qd, zout);
             zout.flush();
             zout.close();
 
-            //BufferedOutputStream boutUnp = new BufferedOutputStream(new
-            //FileOutputStream(f + ".xml"));
-            //xStream.toXML(qd, boutUnp);
-            //boutUnp.flush();
-            //boutUnp.close();
+            // BufferedOutputStream boutUnp = new BufferedOutputStream(new
+            // FileOutputStream(f + ".xml"));
+            // xStream.toXML(qd, boutUnp);
+            // boutUnp.flush();
+            // boutUnp.close();
 
         } catch (final Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
@@ -258,7 +259,12 @@ public class QuestDataIO {
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
             final String value = reader.getValue();
-            return GameType.smartValueOf(value, GameType.Quest); // does not matter - this field is deprecated anyway
+            return GameType.smartValueOf(value, GameType.Quest); // does not
+                                                                 // matter -
+                                                                 // this field
+                                                                 // is
+                                                                 // deprecated
+                                                                 // anyway
         }
 
     }
@@ -332,7 +338,7 @@ public class QuestDataIO {
                 } else if ("booster".equals(nodename)) {
                     result.add(this.readBooster(reader), cnt);
                 } else if ("precon".equals(nodename)) {
-                    PreconDeck toAdd = this.readPreconDeck(reader);
+                    final PreconDeck toAdd = this.readPreconDeck(reader);
                     if (null != toAdd) {
                         result.add(toAdd, cnt);
                     }
@@ -344,7 +350,9 @@ public class QuestDataIO {
 
         protected PreconDeck readPreconDeck(final HierarchicalStreamReader reader) {
             String name = reader.getAttribute("name");
-            if (name == null) { name = reader.getAttribute("s"); }
+            if (name == null) {
+                name = reader.getAttribute("s");
+            }
             return QuestData.getPrecons().get(name);
         }
 
@@ -371,6 +379,7 @@ public class QuestDataIO {
         public boolean canConvert(final Class clasz) {
             return clasz.equals(DeckSection.class);
         }
+
         @Override
         public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
             for (final Entry<CardPrinted, Integer> e : (DeckSection) source) {

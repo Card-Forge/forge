@@ -76,12 +76,14 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
     private FilterNameTypeSetPanel filterNameTypeSet;
 
     private final IDeckController<Deck> controller;
+
     /**
      * Show.
      * 
      * @param exitCommand
      *            the exit command
      */
+    @Override
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
             private static final long serialVersionUID = 5210924838133689758L;
@@ -93,13 +95,15 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
             }
         };
 
-        final MenuCommon menu = new MenuCommon(getController(), exit);
+        final MenuCommon menu = new MenuCommon(this.getController(), exit);
         this.setJMenuBar(menu);
 
         // do not change this!!!!
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(final WindowEvent ev) { menu.close(); }
+            public void windowClosing(final WindowEvent ev) {
+                menu.close();
+            }
         });
 
         this.setup();
@@ -113,15 +117,24 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
 
     private void setup() {
         final List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
-        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE, PresetColumns.FN_QTY_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Name", 175, PresetColumns.FN_NAME_COMPARE, PresetColumns.FN_NAME_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Cost", 75, PresetColumns.FN_COST_COMPARE, PresetColumns.FN_COST_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Color", 60, PresetColumns.FN_COLOR_COMPARE, PresetColumns.FN_COLOR_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.FN_TYPE_COMPARE, PresetColumns.FN_TYPE_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Stats", 60, PresetColumns.FN_STATS_COMPARE, PresetColumns.FN_STATS_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("R", 25, PresetColumns.FN_RARITY_COMPARE, PresetColumns.FN_RARITY_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.FN_SET_COMPARE, PresetColumns.FN_SET_GET));
-        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.FN_AI_STATUS_COMPARE, PresetColumns.FN_AI_STATUS_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Qty", 30, PresetColumns.FN_QTY_COMPARE,
+                PresetColumns.FN_QTY_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Name", 175, PresetColumns.FN_NAME_COMPARE,
+                PresetColumns.FN_NAME_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Cost", 75, PresetColumns.FN_COST_COMPARE,
+                PresetColumns.FN_COST_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Color", 60, PresetColumns.FN_COLOR_COMPARE,
+                PresetColumns.FN_COLOR_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Type", 100, PresetColumns.FN_TYPE_COMPARE,
+                PresetColumns.FN_TYPE_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Stats", 60, PresetColumns.FN_STATS_COMPARE,
+                PresetColumns.FN_STATS_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("R", 25, PresetColumns.FN_RARITY_COMPARE,
+                PresetColumns.FN_RARITY_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("Set", 40, PresetColumns.FN_SET_COMPARE,
+                PresetColumns.FN_SET_GET));
+        columns.add(new TableColumnInfo<InventoryItem>("AI", 30, PresetColumns.FN_AI_STATUS_COMPARE,
+                PresetColumns.FN_AI_STATUS_GET));
         columns.get(2).setCellRenderer(new ManaCostRenderer());
 
         this.getTopTableWithCards().setup(columns, this.getCardView());
@@ -136,9 +149,7 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
 
     /**
      * Instantiates a new deck editor common.
-     * 
-     * @param gameType
-     *            the game type
+     *
      */
     public DeckEditorConstructed() {
         try {
@@ -153,8 +164,13 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
             ErrorViewer.showError(ex);
         }
 
-        Lambda0<Deck> newCreator = new Lambda0<Deck>() { @Override public Deck apply() { return new Deck(); } };
-        controller = new DeckController<Deck>(Singletons.getModel().getDecks().getConstructed(), this, newCreator);
+        final Lambda0<Deck> newCreator = new Lambda0<Deck>() {
+            @Override
+            public Deck apply() {
+                return new Deck();
+            }
+        };
+        this.controller = new DeckController<Deck>(Singletons.getModel().getDecks().getConstructed(), this, newCreator);
     }
 
     private void jbInit() {
@@ -206,7 +222,7 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         // Type filtering
         final Font f = new Font("Tahoma", Font.PLAIN, 10);
         for (final JCheckBox box : this.getFilterBoxes().getAllTypes()) {
-                box.setFont(f);
+            box.setFont(f);
             box.setOpaque(false);
         }
 
@@ -373,23 +389,26 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
         dImport.setVisible(true);
     }
 
-
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#updateView()
      */
     @Override
     public void updateView() {
         // if constructed, can add the all cards above
-        getTopTableWithCards().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class));
-        getBottomTableWithCards().setDeck(controller.getModel().getMain());
+        this.getTopTableWithCards().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class));
+        this.getBottomTableWithCards().setDeck(this.controller.getModel().getMain());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
     public IDeckController<Deck> getController() {
-        return controller;
+        return this.controller;
     }
 
 }

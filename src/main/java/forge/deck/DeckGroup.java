@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.deck;
 
 import java.util.ArrayList;
@@ -7,51 +24,90 @@ import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.IHasName;
 
-
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class DeckGroup extends DeckBase implements IHasName {
 
-    public DeckGroup(String name0) {
+    /**
+     * Instantiates a new deck group.
+     *
+     * @param name0 the name0
+     */
+    public DeckGroup(final String name0) {
         super(name0);
     }
 
     private static final long serialVersionUID = -1628725522049635829L;
     private Deck humanDeck;
-    private List<Deck> aiDecks = new ArrayList<Deck>();
+    private final List<Deck> aiDecks = new ArrayList<Deck>();
 
+    /**
+     * Gets the human deck.
+     *
+     * @return the human deck
+     */
     public final Deck getHumanDeck() {
-        return humanDeck;
+        return this.humanDeck;
     }
-    public final List<Deck> getAiDecks() {
-        return aiDecks;
-    }
-    public final void setHumanDeck(Deck humanDeck) { this.humanDeck = humanDeck; }
 
-    public final void addAiDeck(Deck aiDeck) {
+    /**
+     * Gets the ai decks.
+     *
+     * @return the ai decks
+     */
+    public final List<Deck> getAiDecks() {
+        return this.aiDecks;
+    }
+
+    /**
+     * Sets the human deck.
+     *
+     * @param humanDeck the new human deck
+     */
+    public final void setHumanDeck(final Deck humanDeck) {
+        this.humanDeck = humanDeck;
+    }
+
+    /**
+     * Adds the ai deck.
+     *
+     * @param aiDeck the ai deck
+     */
+    public final void addAiDeck(final Deck aiDeck) {
         if (aiDeck == null) {
             return;
         }
         this.aiDecks.add(aiDeck);
     }
 
+    /* (non-Javadoc)
+     * @see forge.deck.DeckBase#getCardPool()
+     */
     @Override
     public ItemPoolView<CardPrinted> getCardPool() {
-        return getHumanDeck().getMain();
+        return this.getHumanDeck().getMain();
     }
 
-    public void addAiDecks(Deck[] computer) {
-        for (int i = 0; i < computer.length; i++) {
-            aiDecks.add(computer[i]);
+    /**
+     * Adds the ai decks.
+     *
+     * @param computer the computer
+     */
+    public void addAiDecks(final Deck[] computer) {
+        for (final Deck element : computer) {
+            this.aiDecks.add(element);
         }
     }
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.DeckBase#newInstance(java.lang.String)
      */
     @Override
-    protected DeckBase newInstance(String name0) {
+    protected DeckBase newInstance(final String name0) {
         return new DeckGroup(name0);
     }
 

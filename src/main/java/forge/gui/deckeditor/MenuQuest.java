@@ -50,21 +50,17 @@ public class MenuQuest extends MenuBase<Deck> {
     /** Constant <code>serialVersionUID=-4052319220021158574L</code>. */
     private static final long serialVersionUID = -4052319220021158574L;
 
-
     // used for import and export, try to made the gui user friendly
     /** Constant <code>previousDirectory</code>. */
     private static File previousDirectory = null;
+
     /**
      * <p>
      * Constructor for Gui_Quest_DeckEditor_Menu.
      * </p>
-     * 
-     * @param q
-     *            the q
-     * @param d
-     *            a {@link forge.gui.deckeditor.IDeckDisplay} object.
-     * @param exit
-     *            a {@link forge.Command} object.
+     *
+     * @param d a {@link forge.gui.deckeditor.IDeckDisplay} object.
+     * @param exit a {@link forge.Command} object.
      */
     public MenuQuest(final IDeckController<Deck> d, final Command exit) {
 
@@ -72,7 +68,6 @@ public class MenuQuest extends MenuBase<Deck> {
 
         this.setupMenu();
     }
-
 
     /**
      * <p>
@@ -82,10 +77,10 @@ public class MenuQuest extends MenuBase<Deck> {
     private final void importDeck() {
         final File file = this.getImportFilename();
 
-        if (file != null && file.getName().endsWith(".dck")) {
+        if ((file != null) && file.getName().endsWith(".dck")) {
             try {
                 final Deck newDeck = Deck.fromFile(file);
-                getController().importDeck(newDeck);
+                this.getController().importDeck(newDeck);
 
             } catch (final Exception ex) {
                 ErrorViewer.showError(ex);
@@ -133,18 +128,22 @@ public class MenuQuest extends MenuBase<Deck> {
             // use standard forge's list selection dialog
             final ListChooser<String> c = new ListChooser<String>("Cheat - Add Card to Your Cardpool", 0, 1, cards);
             if (c.show()) {
-                ((DeckEditorQuest) getController().getView()).addCheatCard(CardDb.instance().getCard(c.getSelectedValue()));
+                ((DeckEditorQuest) MenuQuest.this.getController().getView()).addCheatCard(CardDb.instance().getCard(
+                        c.getSelectedValue()));
             }
         }
     };
 
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.MenuBase#getDefaultFileMenu()
+     */
+    @Override
     protected JMenu getDefaultFileMenu() {
         final JMenu deckMenu = super.getDefaultFileMenu();
 
         final JMenuItem addCard = new JMenuItem("Cheat - Add Card");
 
         addCard.addActionListener(this.addCardActionListener);
-
 
         if (Constant.Runtime.DEV_MODE[0]) {
             deckMenu.addSeparator();
@@ -154,8 +153,8 @@ public class MenuQuest extends MenuBase<Deck> {
         deckMenu.addSeparator();
         this.addImportExport(deckMenu, true);
 
-        appendCloseMenuItemTo(deckMenu);
-       return deckMenu;
+        this.appendCloseMenuItemTo(deckMenu);
+        return deckMenu;
 
     }
 
@@ -199,7 +198,7 @@ public class MenuQuest extends MenuBase<Deck> {
         }
 
         try {
-            DeckSerializer.writeDeck(getController().getModel(), filename);
+            DeckSerializer.writeDeck(this.getController().getModel(), filename);
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : exportDeck() error, " + ex);
@@ -207,7 +206,7 @@ public class MenuQuest extends MenuBase<Deck> {
     }
 
     private final File getExportFilename() {
-        final JFileChooser save = new JFileChooser(previousDirectory);
+        final JFileChooser save = new JFileChooser(MenuQuest.previousDirectory);
         save.setDialogTitle("Export Deck Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
         save.setFileFilter(DeckSerializer.DCK_FILTER);
@@ -216,7 +215,7 @@ public class MenuQuest extends MenuBase<Deck> {
             final File file = save.getSelectedFile();
             final String check = file.getAbsolutePath();
 
-            previousDirectory = file.getParentFile();
+            MenuQuest.previousDirectory = file.getParentFile();
 
             return check.endsWith(".dck") ? file : new File(check + ".dck");
         }

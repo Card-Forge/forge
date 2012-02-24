@@ -920,36 +920,29 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    /*public static ArrayList<String> getProduceableColors(final AbilityMana m, final Player player) {
-        final ArrayList<String> colors = new ArrayList<String>();
-
-        // if the mana ability is not avaiable move to the next one
-        m.setActivatingPlayer(player);
-        if (!m.canPlay()) {
-            return colors;
-        }
-
-        if (!colors.contains(Constant.Color.BLACK) && m.isBasic() && m.mana().equals("B")) {
-            colors.add(Constant.Color.BLACK);
-        }
-        if (!colors.contains(Constant.Color.WHITE) && m.isBasic() && m.mana().equals("W")) {
-            colors.add(Constant.Color.WHITE);
-        }
-        if (!colors.contains(Constant.Color.GREEN) && m.isBasic() && m.mana().equals("G")) {
-            colors.add(Constant.Color.GREEN);
-        }
-        if (!colors.contains(Constant.Color.RED) && m.isBasic() && m.mana().equals("R")) {
-            colors.add(Constant.Color.RED);
-        }
-        if (!colors.contains(Constant.Color.BLUE) && m.isBasic() && m.mana().equals("U")) {
-            colors.add(Constant.Color.BLUE);
-        }
-        if (!colors.contains(Constant.Color.COLORLESS) && m.isBasic() && m.mana().equals("1")) {
-            colors.add(Constant.Color.COLORLESS);
-        }
-
-        return colors;
-    }*/
+    /*
+     * public static ArrayList<String> getProduceableColors(final AbilityMana m,
+     * final Player player) { final ArrayList<String> colors = new
+     * ArrayList<String>();
+     * 
+     * // if the mana ability is not avaiable move to the next one
+     * m.setActivatingPlayer(player); if (!m.canPlay()) { return colors; }
+     * 
+     * if (!colors.contains(Constant.Color.BLACK) && m.isBasic() &&
+     * m.mana().equals("B")) { colors.add(Constant.Color.BLACK); } if
+     * (!colors.contains(Constant.Color.WHITE) && m.isBasic() &&
+     * m.mana().equals("W")) { colors.add(Constant.Color.WHITE); } if
+     * (!colors.contains(Constant.Color.GREEN) && m.isBasic() &&
+     * m.mana().equals("G")) { colors.add(Constant.Color.GREEN); } if
+     * (!colors.contains(Constant.Color.RED) && m.isBasic() &&
+     * m.mana().equals("R")) { colors.add(Constant.Color.RED); } if
+     * (!colors.contains(Constant.Color.BLUE) && m.isBasic() &&
+     * m.mana().equals("U")) { colors.add(Constant.Color.BLUE); } if
+     * (!colors.contains(Constant.Color.COLORLESS) && m.isBasic() &&
+     * m.mana().equals("1")) { colors.add(Constant.Color.COLORLESS); }
+     * 
+     * return colors; }
+     */
 
     /**
      * <p>
@@ -1094,58 +1087,43 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    /*public static ArrayList<AbilityMana> sortForNeeded(final ManaCost cost, final ArrayList<AbilityMana> manaAbilities,
-            final Player player) {
-
-        ArrayList<String> colors;
-
-        final ArrayList<String> colorsNeededToAvoidNegativeEffect = cost.getManaNeededToAvoidNegativeEffect();
-
-        final ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
-
-        final ManaCost onlyColored = new ManaCost(cost.toString());
-
-        onlyColored.removeColorlessMana();
-
-        for (final AbilityMana am : manaAbilities) {
-            colors = ComputerUtil.getProduceableColors(am, player);
-            for (int j = 0; j < colors.size(); j++) {
-                if (onlyColored.isNeeded(colors.get(j))) {
-                    res.add(am);
-                    break;
-                }
-                for (final String col : colorsNeededToAvoidNegativeEffect) {
-                    if (col.equalsIgnoreCase(colors.get(j))
-                            || CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
-                        res.add(am);
-                    }
-                }
-            }
-        }
-
-        for (final AbilityMana am : manaAbilities) {
-
-            if (res.contains(am)) {
-                break;
-            }
-
-            colors = ComputerUtil.getProduceableColors(am, player);
-            for (int j = 0; j < colors.size(); j++) {
-                if (cost.isNeeded(colors.get(j))) {
-                    res.add(am);
-                    break;
-                }
-                for (final String col : colorsNeededToAvoidNegativeEffect) {
-                    if (col.equalsIgnoreCase(colors.get(j))
-                            || CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
-                        res.add(am);
-                    }
-                }
-            }
-        }
-
-        return res;
-    }*/
+    /*
+     * public static ArrayList<AbilityMana> sortForNeeded(final ManaCost cost,
+     * final ArrayList<AbilityMana> manaAbilities, final Player player) {
+     * 
+     * ArrayList<String> colors;
+     * 
+     * final ArrayList<String> colorsNeededToAvoidNegativeEffect =
+     * cost.getManaNeededToAvoidNegativeEffect();
+     * 
+     * final ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
+     * 
+     * final ManaCost onlyColored = new ManaCost(cost.toString());
+     * 
+     * onlyColored.removeColorlessMana();
+     * 
+     * for (final AbilityMana am : manaAbilities) { colors =
+     * ComputerUtil.getProduceableColors(am, player); for (int j = 0; j <
+     * colors.size(); j++) { if (onlyColored.isNeeded(colors.get(j))) {
+     * res.add(am); break; } for (final String col :
+     * colorsNeededToAvoidNegativeEffect) { if
+     * (col.equalsIgnoreCase(colors.get(j)) ||
+     * CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
+     * res.add(am); } } } }
+     * 
+     * for (final AbilityMana am : manaAbilities) {
+     * 
+     * if (res.contains(am)) { break; }
+     * 
+     * colors = ComputerUtil.getProduceableColors(am, player); for (int j = 0; j
+     * < colors.size(); j++) { if (cost.isNeeded(colors.get(j))) { res.add(am);
+     * break; } for (final String col : colorsNeededToAvoidNegativeEffect) { if
+     * (col.equalsIgnoreCase(colors.get(j)) ||
+     * CardUtil.getShortColor(col).equalsIgnoreCase(colors.get(j))) {
+     * res.add(am); } } } }
+     * 
+     * return res; }
+     */
 
     /**
      * <p>
@@ -1942,9 +1920,11 @@ public class ComputerUtil {
 
     /**
      * Contains useful keyword.
-     *
-     * @param keywords the keywords
-     * @param card the card
+     * 
+     * @param keywords
+     *            the keywords
+     * @param card
+     *            the card
      * @return true, if successful
      */
     public static boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card) {
@@ -1958,62 +1938,56 @@ public class ComputerUtil {
 
     /**
      * Checks if is useful keyword.
-     *
-     * @param keyword the keyword
-     * @param card the card
+     * 
+     * @param keyword
+     *            the keyword
+     * @param card
+     *            the card
      * @return true, if is useful keyword
      */
     public static boolean isUsefulKeyword(final String keyword, final Card card) {
-        PhaseHandler ph = AllZone.getPhaseHandler();
-        Player computer = AllZone.getComputerPlayer();
-        Player human = AllZone.getHumanPlayer();
+        final PhaseHandler ph = AllZone.getPhaseHandler();
+        final Player computer = AllZone.getComputerPlayer();
+        final Player human = AllZone.getHumanPlayer();
         final boolean evasive = (keyword.endsWith("Flying") || keyword.endsWith("Horsemanship")
-                || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") 
-                || keyword.endsWith("Intimidate"));
+                || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate"));
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
         // give evasive keywords to creatures that can attack
         if (evasive) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
-                || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                || (card.getNetCombatDamage() <= 0)
-                || AllZoneUtil.getCreaturesInPlay(human).size() < 1) {
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || (card.getNetCombatDamage() <= 0) || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
         } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
-            if (card.getController().isComputer()
-                    || ph.isPlayerTurn(computer)
-                    || !CombatUtil.canAttack(card) || (card.getNetCombatDamage() <= 0)) {
+            if (card.getController().isComputer() || ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card)
+                    || (card.getNetCombatDamage() <= 0)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't block.")) {
-            if (card.getController().isComputer() || ph.isPlayerTurn(human)
-                    || !CombatUtil.canBlock(card)) {
+            if (card.getController().isComputer() || ph.isPlayerTurn(human) || !CombatUtil.canBlock(card)) {
                 return false;
             }
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
-            if (ph.isBefore(Constant.Phase.MAIN2) || card.isUntapped()
-                    || ph.isPlayerTurn(human)) {
+            if (ph.isBefore(Constant.Phase.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
-                    || !CombatUtil.canBeBlocked(card)) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)) {
                 return false;
             }
         } else if (keyword.endsWith("Shroud")) {
-            //TODO: check stack for spells and abilities
+            // TODO: check stack for spells and abilities
             return false;
         } else if (keyword.startsWith("Rampage")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
-                    || !CombatUtil.canBeBlocked(card) 
-                    || AllZoneUtil.getCreaturesInPlay(human).size() < 2) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+                    || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {
                 return false;
             }
-        }    else if (keyword.endsWith("Haste")) {
-            if (!card.hasSickness() || ph.isPlayerTurn(human)
-                    || !CombatUtil.canAttackNextTurn(card) || card.isTapped()
+        } else if (keyword.endsWith("Haste")) {
+            if (!card.hasSickness() || ph.isPlayerTurn(human) || !CombatUtil.canAttackNextTurn(card) || card.isTapped()
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
                 return false;

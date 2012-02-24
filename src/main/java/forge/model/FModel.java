@@ -62,7 +62,8 @@ import forge.view.toolbox.FSkin;
  * this class must be either private or public static final.
  */
 public enum FModel {
-    /** */
+    
+    /** The SINGLETO n_ instance. */
     SINGLETON_INSTANCE;
     // private static final int NUM_INIT_PHASES = 1;
 
@@ -77,12 +78,12 @@ public enum FModel {
     private final QuestEventManager questEventManager;
     private final GameState gameState;
     private final FMatchState matchState;
-    
+
     private final EditionUtils setUtils;
     private final FormatUtils formats;
 
-
-    // have to implement lazy initialization - at the moment of FModel.ctor() CardDb is not ready yet.
+    // have to implement lazy initialization - at the moment of FModel.ctor()
+    // CardDb is not ready yet.
     private CardCollections decks;
 
     /**
@@ -102,7 +103,7 @@ public enum FModel {
 
         try {
             this.logFileStream = new FileOutputStream(logFile);
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -154,7 +155,6 @@ public enum FModel {
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();
     }
-
 
     /**
      * Load dynamic gamedata.
@@ -275,7 +275,7 @@ public enum FModel {
 
     /**
      * Gets the builds the info.
-     *
+     * 
      * @return {@link forge.model.BuildInfo}
      */
     public final BuildInfo getBuildInfo() {
@@ -284,8 +284,9 @@ public enum FModel {
 
     /**
      * Sets the builds the info.
-     *
-     * @param bi0 &emsp; {@link forge.model.BuildInfo}
+     * 
+     * @param bi0
+     *            &emsp; {@link forge.model.BuildInfo}
      */
     protected final void setBuildInfo(final BuildInfo bi0) {
         this.buildInfo = bi0;
@@ -293,7 +294,7 @@ public enum FModel {
 
     /**
      * Gets the preferences.
-     *
+     * 
      * @return {@link forge.properties.ForgePreferences}
      */
     public final ForgePreferences getPreferences() {
@@ -302,7 +303,7 @@ public enum FModel {
 
     /**
      * Gets the quest preferences.
-     *
+     * 
      * @return {@link forge.quest.data.QuestPreferences}
      */
     public final QuestPreferences getQuestPreferences() {
@@ -311,7 +312,7 @@ public enum FModel {
 
     /**
      * Gets the quest preferences.
-     *
+     * 
      * @return {@link forge.quest.data.QuestEventManager}
      */
     public final QuestEventManager getQuestEventManager() {
@@ -320,18 +321,19 @@ public enum FModel {
 
     /**
      * Returns all player's decks for constructed, sealed and whatever.
+     * 
      * @return {@link forge.decks.CardCollections}
      */
     public final CardCollections getDecks() {
-        if (decks == null) {
+        if (this.decks == null) {
             this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
         }
-        return decks;
+        return this.decks;
     }
 
     /**
      * Gets the game action model.
-     *
+     * 
      * @return {@link forge.GameAction}
      */
     public final GameAction getGameAction() {
@@ -340,7 +342,7 @@ public enum FModel {
 
     /**
      * Gets the game state model - that is, the data stored for a single game.
-     *
+     * 
      * @return {@link forge.game.GameState}
      */
     public final GameState getGameState() {
@@ -348,8 +350,9 @@ public enum FModel {
     }
 
     /**
-     * Gets the match state model - that is, the data stored over multiple games.
-     *
+     * Gets the match state model - that is, the data stored over multiple
+     * games.
+     * 
      * @return {@link forge.model.FMatchState}
      */
     public final FMatchState getMatchState() {
@@ -358,7 +361,7 @@ public enum FModel {
 
     /**
      * Gets the game summary.
-     *
+     * 
      * @return {@link forge.game.GameSummary}
      */
     public final GameSummary getGameSummary() {
@@ -367,23 +370,27 @@ public enum FModel {
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return the editions
      */
-    
+
     public final EditionUtils getEditions() {
-        return setUtils;
+        return this.setUtils;
     }
 
-
+    /**
+     * Gets the formats.
+     *
+     * @return the formats
+     */
     public final FormatUtils getFormats() {
-        return formats;
+        return this.formats;
     }
-
 
     /**
      * TODO: Needs to be reworked for efficiency with rest of prefs saves in
      * codebase.
-     *
+     * 
      * @return true, if successful
      */
     public final boolean savePrefs() {
@@ -436,7 +443,7 @@ public enum FModel {
     /**
      * TODO: Needs to be reworked for efficiency with rest of prefs loads in
      * codebase.
-     *
+     * 
      * @return true, if successful
      */
     public final boolean loadPrefs() {
@@ -483,9 +490,8 @@ public enum FModel {
     }
 
     /**
-     * Finalizer, generally should be avoided, but here
-     * closes the log file stream and
-     * resets the system output streams.
+     * Finalizer, generally should be avoided, but here closes the log file
+     * stream and resets the system output streams.
      */
     public final void close() {
         System.setOut(this.oldSystemOut);

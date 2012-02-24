@@ -38,15 +38,21 @@ public class DeckSection extends ItemPool<CardPrinted> {
         super(CardPrinted.class);
     }
 
-    public DeckSection(Iterable<Entry<CardPrinted, Integer>> cards) {
+    /**
+     * Instantiates a new deck section.
+     *
+     * @param cards the cards
+     */
+    public DeckSection(final Iterable<Entry<CardPrinted, Integer>> cards) {
         this();
-        addAll(cards);
+        this.addAll(cards);
     }
 
     /**
      * Sets the.
-     *
-     * @param cardNames the card names
+     * 
+     * @param cardNames
+     *            the card names
      */
     public void set(final Iterable<String> cardNames) {
         this.clear();
@@ -55,8 +61,9 @@ public class DeckSection extends ItemPool<CardPrinted> {
 
     /**
      * Adds the.
-     *
-     * @param card the card
+     * 
+     * @param card
+     *            the card
      */
     public void add(final Card card) {
         this.add(CardDb.instance().getCard(card));
@@ -64,9 +71,11 @@ public class DeckSection extends ItemPool<CardPrinted> {
 
     /**
      * Adds the.
-     *
-     * @param cardName the card name
-     * @param setCode the set code
+     * 
+     * @param cardName
+     *            the card name
+     * @param setCode
+     *            the set code
      */
     public void add(final String cardName, final String setCode) {
         this.add(CardDb.instance().getCard(cardName, setCode));
@@ -77,15 +86,17 @@ public class DeckSection extends ItemPool<CardPrinted> {
      *
      * @param cardName the card name
      * @param setCode the set code
+     * @param amount the amount
      */
-    public void add(final String cardName, final String setCode, int amount) {
+    public void add(final String cardName, final String setCode, final int amount) {
         this.add(CardDb.instance().getCard(cardName, setCode), amount);
     }
 
     /**
      * Adds the.
-     *
-     * @param cardList the card list
+     * 
+     * @param cardList
+     *            the card list
      */
     public void add(final CardList cardList) {
         for (final Card c : cardList) {
@@ -95,9 +106,10 @@ public class DeckSection extends ItemPool<CardPrinted> {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param string
+     *
+     * @param cardName the card name
      */
-    public void add(String cardName) {
+    public void add(final String cardName) {
         this.add(CardDb.instance().getCard(cardName));
     }
 

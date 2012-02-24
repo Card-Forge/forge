@@ -1,27 +1,62 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.util;
 
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class FileSection {
 
+    /** The lines. */
     protected final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
+    /**
+     * Gets the lines.
+     *
+     * @return the lines
+     */
     protected final Map<String, String> getLines() {
-        return lines;
+        return this.lines;
     }
 
-    protected FileSection() { }
+    /**
+     * Instantiates a new file section.
+     */
+    protected FileSection() {
+    }
 
-    public static FileSection parse(String line, String kvSeparator, String pairSeparator) {
-        String[] pairs = line.split(Pattern.quote(pairSeparator));
-        Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
-        FileSection result = new FileSection();
+    /**
+     * Parses the.
+     *
+     * @param line the line
+     * @param kvSeparator the kv separator
+     * @param pairSeparator the pair separator
+     * @return the file section
+     */
+    public static FileSection parse(final String line, final String kvSeparator, final String pairSeparator) {
+        final String[] pairs = line.split(Pattern.quote(pairSeparator));
+        final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
+        final FileSection result = new FileSection();
 
         for (final String dd : pairs) {
             final String[] v = splitter.split(dd, 2);
@@ -31,9 +66,16 @@ public class FileSection {
         return result;
     }
 
-    public static FileSection parse(Iterable<String> lines, String kvSeparator) {
-        FileSection result = new FileSection();
-        Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
+    /**
+     * Parses the.
+     *
+     * @param lines the lines
+     * @param kvSeparator the kv separator
+     * @return the file section
+     */
+    public static FileSection parse(final Iterable<String> lines, final String kvSeparator) {
+        final FileSection result = new FileSection();
+        final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
         for (final String dd : lines) {
             final String[] v = splitter.split(dd, 2);
             result.lines.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
@@ -42,27 +84,64 @@ public class FileSection {
         return result;
     }
 
-    public String get(String fieldName) {
-        return lines.get(fieldName);
+    /**
+     * Gets the.
+     *
+     * @param fieldName the field name
+     * @return the string
+     */
+    public String get(final String fieldName) {
+        return this.lines.get(fieldName);
     }
 
-    public int getInt(String fieldName) { return getInt(fieldName, 0); }
-    public int getInt(String fieldName, int defaultValue) {
+    /**
+     * Gets the int.
+     *
+     * @param fieldName the field name
+     * @return the int
+     */
+    public int getInt(final String fieldName) {
+        return this.getInt(fieldName, 0);
+    }
+
+    /**
+     * Gets the int.
+     *
+     * @param fieldName the field name
+     * @param defaultValue the default value
+     * @return the int
+     */
+    public int getInt(final String fieldName, final int defaultValue) {
         try {
-            return Integer.parseInt(get(fieldName));
-        } catch (NumberFormatException ex) {
+            return Integer.parseInt(this.get(fieldName));
+        } catch (final NumberFormatException ex) {
             return defaultValue;
         }
     }
 
-    public boolean getBoolean(String fieldName) { return getBoolean(fieldName, false); }
-    public boolean getBoolean(String fieldName, boolean defaultValue) {
-        String s = get(fieldName);
+    /**
+     * Gets the boolean.
+     *
+     * @param fieldName the field name
+     * @return the boolean
+     */
+    public boolean getBoolean(final String fieldName) {
+        return this.getBoolean(fieldName, false);
+    }
+
+    /**
+     * Gets the boolean.
+     *
+     * @param fieldName the field name
+     * @param defaultValue the default value
+     * @return the boolean
+     */
+    public boolean getBoolean(final String fieldName, final boolean defaultValue) {
+        final String s = this.get(fieldName);
         if (s == null) {
             return defaultValue;
         }
         return "true".equalsIgnoreCase(s);
     }
-
 
 }

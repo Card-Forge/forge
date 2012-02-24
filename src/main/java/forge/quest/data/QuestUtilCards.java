@@ -26,6 +26,7 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
+import forge.card.CardRarity;
 import forge.card.FormatUtils;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
@@ -60,17 +61,14 @@ public final class QuestUtilCards {
 
     /**
      * Adds the basic lands.
-     * 
-     * @param pool
-     *            the pool
-     * @param nBasic
-     *            the n basic
-     * @param nSnow
-     *            the n snow
+     *
+     * @param nBasic the n basic
+     * @param nSnow the n snow
+     * @return the item pool view
      */
     public static ItemPoolView<CardPrinted> generateBasicLands(final int nBasic, final int nSnow) {
         final CardDb db = CardDb.instance();
-        ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
+        final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
         pool.add(db.getCard("Forest", "M10"), nBasic);
         pool.add(db.getCard("Mountain", "M10"), nBasic);
         pool.add(db.getCard("Swamp", "M10"), nBasic);
@@ -317,15 +315,17 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     private final FormatUtils formats = Singletons.getModel().getFormats();
-    private final Predicate<CardEdition> filterExt = CardEdition.Predicates.isLegalInFormat(formats.getExtended());
+    private final Predicate<CardEdition> filterExt = CardEdition.Predicates.isLegalInFormat(this.formats.getExtended());
 
     /** The filter t2booster. */
     private final Predicate<CardEdition> filterT2booster = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            CardEdition.Predicates.isLegalInFormat(formats.getStandard()));
+            CardEdition.Predicates.isLegalInFormat(this.formats.getStandard()));
 
     /** The filter ext but t2. */
-    private final Predicate<CardEdition> filterExtButT2 = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicate.and(this.filterExt, Predicate.not(CardEdition.Predicates.isLegalInFormat(formats.getStandard()))));
+    private final Predicate<CardEdition> filterExtButT2 = Predicate.and(
+            CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicate.and(this.filterExt,
+                    Predicate.not(CardEdition.Predicates.isLegalInFormat(this.formats.getStandard()))));
 
     /** The filter not ext. */
     private final Predicate<CardEdition> filterNotExt = Predicate.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
@@ -342,7 +342,8 @@ public final class QuestUtilCards {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
             final Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
-            this.q.getShopList().addAllFlat(filter.random(Singletons.getModel().getEditions().getAllSets(), 1, BoosterPack.FN_FROM_SET));
+            this.q.getShopList().addAllFlat(
+                    filter.random(Singletons.getModel().getEditions().getAllSets(), 1, BoosterPack.FN_FROM_SET));
         }
     }
 
@@ -355,7 +356,7 @@ public final class QuestUtilCards {
     public void generatePreconsInShop(final int count) {
         final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
         for (final PreconDeck deck : QuestData.getPrecons()) {
-            if (deck.getRecommendedDeals().meetsRequiremnts(q)) {
+            if (deck.getRecommendedDeals().meetsRequiremnts(this.q)) {
                 meetRequirements.add(deck);
             }
         }
@@ -379,7 +380,6 @@ public final class QuestUtilCards {
         final int levelPacks = this.q.getLevel() > 0 ? startPacks / this.q.getLevel() : startPacks;
         final int winPacks = this.q.getWin() / winsForPack;
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
-
 
         this.q.getShopList().clear();
         for (int i = 0; i < totalPacks; i++) {

@@ -468,7 +468,7 @@ public class AbilityFactorySacrifice {
                     card.addRemembered(toSac);
                 }
             }
-        } else if (valid.equals("TriggeredCard")) { 
+        } else if (valid.equals("TriggeredCard")) {
             final Card equipee = (Card) sa.getTriggeringObject("Card");
             if (tgts.contains(card.getController()) && AllZoneUtil.isCardInPlay(equipee)) {
                 Singletons.getModel().getGameAction().sacrifice(equipee);
@@ -549,7 +549,7 @@ public class AbilityFactorySacrifice {
      */
     private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
-        CardList saccedList = new CardList();
+        final CardList saccedList = new CardList();
         CardList list = p.getCardsIn(Zone.Battlefield);
         list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 

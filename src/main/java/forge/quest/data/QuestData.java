@@ -20,6 +20,7 @@ package forge.quest.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -121,7 +122,7 @@ public final class QuestData {
 
     // Cards associated with quest
     /** The card pool. */
-    private ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class); // player's
+    private final ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class); // player's
     // belonging
     /** The shop list. */
     private ItemPool<InventoryItem> shopList = new ItemPool<InventoryItem>(InventoryItem.class); // the
@@ -168,7 +169,8 @@ public final class QuestData {
     private transient QuestUtilCards myCards;
 
     // This is used by shop. Had no idea where else to place this
-    private static transient IFolderMapView<PreconDeck> preconManager = new FolderMapView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
+    private static transient IFolderMapView<PreconDeck> preconManager = new FolderMapView<PreconDeck>(new PreconReader(
+            ForgeProps.getFile(NewConstants.Quest.PRECONS)));
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -182,7 +184,9 @@ public final class QuestData {
             "What Do You Do With The Other Hand?", "Freelance Sorcerer, Works Weekends",
             "Should We Hire Commentators?", "Saltblasted For Your Talent", "Serra Angel Is Your Girlfriend", };
 
-    /** */
+    /**
+     * Instantiates a new quest data.
+     */
     public QuestData() {
         this("An Unknown Quest");
     }
@@ -192,24 +196,24 @@ public final class QuestData {
      * Constructor for QuestData.
      * </p>
      * 
-     * @param s0 &emsp; String name
+     * @param s0
+     *            &emsp; String name
      */
-    public QuestData(String s0) {
+    public QuestData(final String s0) {
         this.initTransients();
         this.setName(s0);
 
-        QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
-        ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS),
-                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS));
+        final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
+        final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
+                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS));
         this.getCardPool().addAll(lands);
         this.randomizeOpponents();
     }
 
     private void initTransients() {
         // These are helper classes that hold no data.
-        this.decks = new QuestDeckMap(myDecks);
+        this.decks = new QuestDeckMap(this.myDecks);
         this.myCards = new QuestUtilCards(this);
-
 
         // to avoid NPE some pools will be created here if they are null
         if (null == this.getNewCardList()) {
@@ -234,8 +238,8 @@ public final class QuestData {
     public void newGame(final int diff, final String m0de, final boolean standardStart) {
         this.setDifficulty(diff);
 
-        final Predicate<CardPrinted> filter = standardStart ? Singletons.getModel().getFormats().getStandard().getFilterPrinted()
-                : CardPrinted.Predicates.Presets.IS_TRUE;
+        final Predicate<CardPrinted> filter = standardStart ? Singletons.getModel().getFormats().getStandard()
+                .getFilterPrinted() : CardPrinted.Predicates.Presets.IS_TRUE;
 
         this.myCards.setupNewGameCardPool(filter, diff);
         this.setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
@@ -382,11 +386,11 @@ public final class QuestData {
     public void addLost() {
         this.lost++;
 
-        if (winstreakCurrent > winstreakBest) {
-            winstreakBest = winstreakCurrent;
+        if (this.winstreakCurrent > this.winstreakBest) {
+            this.winstreakBest = this.winstreakCurrent;
         }
 
-        winstreakCurrent = 0;
+        this.winstreakCurrent = 0;
     }
 
     /**
@@ -405,11 +409,12 @@ public final class QuestData {
         this.win++;
         this.winstreakCurrent++;
 
-        if (winstreakCurrent > winstreakBest) {
-            winstreakBest = winstreakCurrent;
+        if (this.winstreakCurrent > this.winstreakBest) {
+            this.winstreakBest = this.winstreakCurrent;
         }
 
-        final int winsToLvlUp = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_RANKUP, this.diffIndex);
+        final int winsToLvlUp = Singletons.getModel().getQuestPreferences()
+                .getPreferenceInt(QPref.WINS_RANKUP, this.diffIndex);
         if ((this.win % winsToLvlUp) == 0) {
             this.rankIndex++;
         }
@@ -427,7 +432,9 @@ public final class QuestData {
 
     /**
      * Adds n life to maximum.
-     * @param n &emsp; int
+     * 
+     * @param n
+     *            &emsp; int
      */
     public void addLife(final int n) {
         this.life += n;
@@ -435,7 +442,9 @@ public final class QuestData {
 
     /**
      * Removes n life from maximum.
-     * @param n &emsp; int
+     * 
+     * @param n
+     *            &emsp; int
      */
     public void removeLife(final int n) {
         this.life -= n;
@@ -542,17 +551,25 @@ public final class QuestData {
         return QuestData.RANK_TITLES[this.rankIndex];
     }
 
-    /** @return int */
+    /**
+     * Gets the win streak best.
+     *
+     * @return int
+     */
     public int getWinStreakBest() {
         return this.winstreakBest;
     }
 
-    /** @return int */
+    /**
+     * Gets the win streak current.
+     *
+     * @return int
+     */
     public int getWinStreakCurrent() {
         return this.winstreakCurrent;
     }
-    // decks management
 
+    // decks management
 
     // randomizer - related
     /**
@@ -599,7 +616,6 @@ public final class QuestData {
     public ItemPool<CardPrinted> getCardPool() {
         return this.cardPool;
     }
-
 
     /**
      * Gets the shop list.
@@ -648,10 +664,13 @@ public final class QuestData {
         return this.decks;
     }
 
-
-    /** @return QuestPreconManager */
+    /**
+     * Gets the precons.
+     *
+     * @return QuestPreconManager
+     */
     public static IFolderMapView<PreconDeck> getPrecons() {
-        return preconManager;
+        return QuestData.preconManager;
     }
 
     /**
@@ -693,12 +712,20 @@ public final class QuestData {
         this.versionNumber = versionNumber0;
     }
 
-    /** @param s0 &emsp; {@link java.lang.String} */
-    public void setName(String s0) {
+    /**
+     * Sets the name.
+     *
+     * @param s0 &emsp; {@link java.lang.String}
+     */
+    public void setName(final String s0) {
         this.name = s0;
     }
 
-    /** @return {@link java.lang.String} */
+    /**
+     * Gets the name.
+     *
+     * @return {@link java.lang.String}
+     */
     public String getName() {
         return this.name;
     }

@@ -68,7 +68,7 @@ public class AbilityFactory {
      * </p>
      * 
      * @param af
-     *           a AbilityFactory object.
+     *            a AbilityFactory object.
      */
     public AbilityFactory(final AbilityFactory af) {
         this.abCost = af.getAbCost();
@@ -100,11 +100,12 @@ public class AbilityFactory {
      * <p>
      * setHostCard.
      * </p>
+     * 
      * @param host
      *            a Card object.
      * 
      */
-    public final void setHostCard(Card host) {
+    public final void setHostCard(final Card host) {
         this.hostC = host;
     }
 
@@ -212,10 +213,11 @@ public class AbilityFactory {
      * <p>
      * Setter for the field <code>abTgt</code>.
      * </p>
+     * 
      * @param target
      *            a target object.
      */
-    public final void setAbTgt(Target target) {
+    public final void setAbTgt(final Target target) {
         this.abTgt = target;
     }
 
@@ -1487,7 +1489,7 @@ public class AbilityFactory {
 
     /**
      * <p>
-     * isInstantSpeed.  To be used for mana abilities like Lion's Eye Diamond
+     * isInstantSpeed. To be used for mana abilities like Lion's Eye Diamond
      * </p>
      * 
      * @param sa
@@ -1552,7 +1554,7 @@ public class AbilityFactory {
                 // Add whole Remembered list to handlePaid
                 final CardList list = new CardList();
                 if (card.getRemembered().isEmpty()) {
-                    Card newCard = AllZoneUtil.getCardState(card);
+                    final Card newCard = AllZoneUtil.getCardState(card);
                     for (final Object o : newCard.getRemembered()) {
                         if (o instanceof Card) {
                             list.add(AllZoneUtil.getCardState((Card) o));
@@ -1692,7 +1694,7 @@ public class AbilityFactory {
             // isn't made yet
             return 0;
         }
-        //cost hasn't been paid yet
+        // cost hasn't been paid yet
         if (amount.startsWith("Cost")) {
             return 0;
         }
@@ -1729,12 +1731,15 @@ public class AbilityFactory {
         if (defined.equals("Self")) {
             c = hostCard;
         }
-        
+
         // The Wretched
         else if (defined.equals("TriggeredBlocker.blocking")) {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getTriggeringObject("Blocker");
-            if (AllZoneUtil.getCardState((Card) crd).isBlocking()); {
+            if (AllZoneUtil.getCardState((Card) crd).isBlocking()) {
+                ;
+            }
+            {
                 c = AllZoneUtil.getCardState((Card) crd);
             }
         }
@@ -1749,10 +1754,9 @@ public class AbilityFactory {
 
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
-            if (c == null
-                && AbilityFactory.findRootAbility(sa) != null
-                && AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed") != null
-                && !AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").isEmpty()) {
+            if ((c == null) && (AbilityFactory.findRootAbility(sa) != null)
+                    && (AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed") != null)
+                    && !AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").isEmpty()) {
                 c = AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").get(0).getEnchantingCard();
             }
         }
@@ -1796,7 +1800,7 @@ public class AbilityFactory {
             }
         } else if (defined.equals("Remembered")) {
             if (hostCard.getRemembered().isEmpty()) {
-                Card newCard = AllZoneUtil.getCardState(hostCard);
+                final Card newCard = AllZoneUtil.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
                         cards.add(AllZoneUtil.getCardState((Card) o));
@@ -1915,7 +1919,7 @@ public class AbilityFactory {
             }
             for (final SpellAbility s : sas) {
                 final Player p = s.getActivatingPlayer();
-                //final Player p = s.getSourceCard().getController();
+                // final Player p = s.getSourceCard().getController();
                 if (!players.contains(p)) {
                     players.add(p);
                 }
@@ -2569,8 +2573,7 @@ public class AbilityFactory {
         };
 
         if (payer.isHuman()) {
-            GameActionUtil.payCostDuringAbilityResolve(source + "\r\n", source, unlessCost, paidCommand,
-                    unpaidCommand);
+            GameActionUtil.payCostDuringAbilityResolve(source + "\r\n", source, unlessCost, paidCommand, unpaidCommand);
         } else {
             if (ComputerUtil.canPayCost(ability) && CostUtil.checkLifeCost(cost, source, 4)) {
                 ComputerUtil.playNoStack(ability); // Unless cost was payed - no

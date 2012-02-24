@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.view.toolbox;
 
 import java.awt.Color;
@@ -28,40 +45,45 @@ import forge.gui.deckeditor.DeckEditorConstructed;
 import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.deckeditor.DeckEditorQuest;
 
-/** 
- * Creates deck list for selected decks for quick deleting, editing, and basic info.
- *
+/**
+ * Creates deck list for selected decks for quick deleting, editing, and basic
+ * info.
+ * 
  */
 @SuppressWarnings("serial")
 public class DeckLister extends JPanel {
-    private ImageIcon icoDelete;
-    private ImageIcon icoDeleteOver;
-    private ImageIcon icoEdit;
-    private ImageIcon icoEditOver;
+    private final ImageIcon icoDelete;
+    private final ImageIcon icoDeleteOver;
+    private final ImageIcon icoEdit;
+    private final ImageIcon icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
-    private GameType gametype;
+    private final GameType gametype;
     private Command cmdEditorExit, cmdDelete, cmdRowSelect;
     private final Color clrDefault, clrHover, clrActive, clrBorders;
 
     /**
-     * Creates deck list for selected decks for quick deleting, editing, and basic info.
-     * "selectable" and "editable" assumed true.
+     * Creates deck list for selected decks for quick deleting, editing, and
+     * basic info. "selectable" and "editable" assumed true.
      *
-     * @param gt0 {@link forge.game.GameType}
+     * @param gt0 the gt0
+     * {@link forge.game.GameType}
      */
-    public DeckLister(GameType gt0) {
+    public DeckLister(final GameType gt0) {
         this(gt0, null);
     }
 
     /**
-     * Creates deck list for selected decks for quick deleting, editing, and basic info.
-     * Set "selectable" and "editable" to show those buttons, or not.
-     * 
-     * @param gt0 {@link forge.game.GameType}
-     * @param cmd0 {@link forge.Command}, when exiting deck editor
+     * Creates deck list for selected decks for quick deleting, editing, and
+     * basic info. Set "selectable" and "editable" to show those buttons, or
+     * not.
+     *
+     * @param gt0 the gt0
+     * @param cmd0 the cmd0
+     * {@link forge.game.GameType}
+     * {@link forge.Command}, when exiting deck editor
      */
-    public DeckLister(GameType gt0, Command cmd0) {
+    public DeckLister(final GameType gt0, final Command cmd0) {
         super();
         this.gametype = gt0;
         this.cmdEditorExit = cmd0;
@@ -74,21 +96,27 @@ public class DeckLister extends JPanel {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        icoDelete = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
-        icoDeleteOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
-        icoEdit = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
-        icoEditOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
+        this.icoDelete = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE);
+        this.icoDeleteOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_DELETE_OVER);
+        this.icoEdit = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT);
+        this.icoEditOver = FSkin.getIcon(FSkin.ForgeIcons.ICO_EDIT_OVER);
     }
 
-    /** @param decks0 {@link forge.deck.Deck}[] */
-    public void setDecks(Iterable<Deck> decks0) {
+    /**
+     * Sets the decks.
+     *
+     * @param decks0 the new decks
+     * {@link forge.deck.Deck}[]
+     */
+    public void setDecks(final Iterable<Deck> decks0) {
         this.removeAll();
-        List<RowPanel> tempRows = new ArrayList<RowPanel>();
+        final List<RowPanel> tempRows = new ArrayList<RowPanel>();
 
         // Title row
         // Note: careful with the widths of the rows here;
-        // scroll panes will have difficulty dynamically resizing if 100% width is set.
-        JPanel rowTitle = new TitlePanel();
+        // scroll panes will have difficulty dynamically resizing if 100% width
+        // is set.
+        final JPanel rowTitle = new TitlePanel();
         rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
 
@@ -96,7 +124,8 @@ public class DeckLister extends JPanel {
                 "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Edit").fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Deck Name").fontAlign(SwingConstants.CENTER).build(), "w 60%!, h 20px!, gaptop 5px");
+        rowTitle.add(new FLabel.Builder().text("Deck Name").fontAlign(SwingConstants.CENTER).build(),
+                "w 60%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Main").fontAlign(SwingConstants.CENTER).build(),
                 "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Side").fontAlign(SwingConstants.CENTER).build(),
@@ -104,8 +133,10 @@ public class DeckLister extends JPanel {
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
-        for (Deck d : decks0) {
-            if (d.getName() == null) { continue; }
+        for (final Deck d : decks0) {
+            if (d.getName() == null) {
+                continue;
+            }
 
             row = new RowPanel(d);
             row.add(new DeleteButton(row), "w 10%!, h 20px!, gaptop 5px");
@@ -117,14 +148,18 @@ public class DeckLister extends JPanel {
             tempRows.add(row);
         }
 
-        rows = tempRows.toArray(new RowPanel[0]);
-        revalidate();
+        this.rows = tempRows.toArray(new RowPanel[0]);
+        this.revalidate();
     }
 
-    /** @return {@link forge.deck.Deck} */
+    /**
+     * Gets the selected deck.
+     *
+     * @return {@link forge.deck.Deck}
+     */
     public Deck getSelectedDeck() {
         Deck selectedDeck = null;
-        for (RowPanel r : rows) {
+        for (final RowPanel r : this.rows) {
             if (r.isSelected()) {
                 selectedDeck = r.getDeck();
             }
@@ -135,40 +170,42 @@ public class DeckLister extends JPanel {
     /** Prevent panel from repainting the whole screen. */
     public void repaintOnlyThisPanel() {
         final Dimension d = DeckLister.this.getSize();
-        repaint(0, 0, d.width, d.height);
+        this.repaint(0, 0, d.width, d.height);
     }
 
     private class DeleteButton extends JButton {
         public DeleteButton(final RowPanel r0) {
             super();
-            setRolloverEnabled(true);
-            setPressedIcon(icoDeleteOver);
-            setRolloverIcon(icoDeleteOver);
-            setIcon(icoDelete);
-            setOpaque(false);
-            setContentAreaFilled(false);
-            setBorder(null);
-            setBorderPainted(false);
-            setToolTipText("Delete this deck");
+            this.setRolloverEnabled(true);
+            this.setPressedIcon(DeckLister.this.icoDeleteOver);
+            this.setRolloverIcon(DeckLister.this.icoDeleteOver);
+            this.setIcon(DeckLister.this.icoDelete);
+            this.setOpaque(false);
+            this.setContentAreaFilled(false);
+            this.setBorder(null);
+            this.setBorderPainted(false);
+            this.setToolTipText("Delete this deck");
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(clrHover);
+                        r0.setBackground(DeckLister.this.clrHover);
                         r0.setOpaque(true);
                     }
                 }
+
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(clrDefault);
+                        r0.setBackground(DeckLister.this.clrDefault);
                         r0.setOpaque(false);
                     }
                 }
+
                 @Override
-                public void mouseClicked(MouseEvent e) {
-                    deleteDeck(r0);
+                public void mouseClicked(final MouseEvent e) {
+                    DeckLister.this.deleteDeck(r0);
                 }
             });
         }
@@ -177,217 +214,246 @@ public class DeckLister extends JPanel {
     private class EditButton extends JButton {
         public EditButton(final RowPanel r0) {
             super();
-            setRolloverEnabled(true);
-            setPressedIcon(icoEditOver);
-            setRolloverIcon(icoEditOver);
-            setIcon(icoEdit);
-            setOpaque(false);
-            setContentAreaFilled(false);
-            setBorder(null);
-            setBorderPainted(false);
-            setToolTipText("Edit this deck");
+            this.setRolloverEnabled(true);
+            this.setPressedIcon(DeckLister.this.icoEditOver);
+            this.setRolloverIcon(DeckLister.this.icoEditOver);
+            this.setIcon(DeckLister.this.icoEdit);
+            this.setOpaque(false);
+            this.setContentAreaFilled(false);
+            this.setBorder(null);
+            this.setBorderPainted(false);
+            this.setToolTipText("Edit this deck");
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(clrHover);
+                        r0.setBackground(DeckLister.this.clrHover);
                         r0.setOpaque(true);
                     }
                 }
+
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(clrDefault);
+                        r0.setBackground(DeckLister.this.clrDefault);
                         r0.setOpaque(false);
                     }
                 }
+
                 @Override
-                public void mouseClicked(MouseEvent e) {
-                    editDeck(r0.getDeck());
+                public void mouseClicked(final MouseEvent e) {
+                    DeckLister.this.editDeck(r0.getDeck());
                 }
             });
         }
     }
 
-    // Here only to prevent visual artifact problems from translucent skin colors.
+    // Here only to prevent visual artifact problems from translucent skin
+    // colors.
     private class TitlePanel extends JPanel {
         @Override
-        public void paintComponent(Graphics g) {
-            g.setColor(getBackground());
-            g.clearRect(0, 0, getWidth(), getHeight());
-            g.fillRect(0, 0, getWidth(), getHeight());
+        public void paintComponent(final Graphics g) {
+            g.setColor(this.getBackground());
+            g.clearRect(0, 0, this.getWidth(), this.getHeight());
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
             super.paintComponent(g);
         }
     }
 
     private class RowPanel extends JPanel {
         private boolean selected = false;
-        private Deck deck;
+        private final Deck deck;
 
-        public RowPanel(Deck d0) {
+        public RowPanel(final Deck d0) {
             super();
-            setOpaque(false);
-            setBackground(new Color(0, 0, 0, 0));
-            setLayout(new MigLayout("insets 0, gap 0"));
-            setBorder(new MatteBorder(0, 0, 1, 0, clrBorders));
-            deck = d0;
+            this.setOpaque(false);
+            this.setBackground(new Color(0, 0, 0, 0));
+            this.setLayout(new MigLayout("insets 0, gap 0"));
+            this.setBorder(new MatteBorder(0, 0, 1, 0, DeckLister.this.clrBorders));
+            this.deck = d0;
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
-                    if (!selected) {
-                        ((RowPanel) e.getSource()).setBackground(clrHover);
+                public void mouseEntered(final MouseEvent e) {
+                    if (!RowPanel.this.selected) {
+                        ((RowPanel) e.getSource()).setBackground(DeckLister.this.clrHover);
                         ((RowPanel) e.getSource()).setOpaque(true);
                     }
                 }
+
                 @Override
-                public void mouseExited(MouseEvent e) {
-                    if (!selected) {
-                        ((RowPanel) e.getSource()).setBackground(clrDefault);
+                public void mouseExited(final MouseEvent e) {
+                    if (!RowPanel.this.selected) {
+                        ((RowPanel) e.getSource()).setBackground(DeckLister.this.clrDefault);
                         ((RowPanel) e.getSource()).setOpaque(false);
                     }
                 }
+
                 @Override
-                public void mousePressed(MouseEvent e) {
-                    selectHandler((RowPanel) e.getSource());
+                public void mousePressed(final MouseEvent e) {
+                    DeckLister.this.selectHandler((RowPanel) e.getSource());
                 }
             });
         }
 
-        public void setSelected(boolean b0) {
-            selected = b0;
-            setOpaque(b0);
-            setBackground(b0 ? clrActive : clrHover);
+        public void setSelected(final boolean b0) {
+            this.selected = b0;
+            this.setOpaque(b0);
+            this.setBackground(b0 ? DeckLister.this.clrActive : DeckLister.this.clrHover);
         }
 
         public boolean isSelected() {
-            return selected;
+            return this.selected;
         }
 
         public Deck getDeck() {
-            return deck;
+            return this.deck;
         }
     }
 
     private class MainLabel extends JLabel {
-        public MainLabel(String txt0) {
+        public MainLabel(final String txt0) {
             super(txt0);
-            setOpaque(true);
+            this.setOpaque(true);
             if (Integer.parseInt(txt0) < 40) {
-                setBackground(Color.RED.brighter());
+                this.setBackground(Color.RED.brighter());
+            } else {
+                this.setBackground(Color.GREEN);
             }
-            else {
-                setBackground(Color.GREEN);
-            }
-            setHorizontalAlignment(SwingConstants.CENTER);
-            setFont(FSkin.getBoldFont(12));
-            setHorizontalAlignment(SwingConstants.CENTER);
+            this.setHorizontalAlignment(SwingConstants.CENTER);
+            this.setFont(FSkin.getBoldFont(12));
+            this.setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
 
     private class GenericLabel extends JLabel {
-        public GenericLabel(String txt0) {
+        public GenericLabel(final String txt0) {
             super(txt0);
-            setHorizontalAlignment(SwingConstants.CENTER);
-            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            setFont(FSkin.getBoldFont(12));
+            this.setHorizontalAlignment(SwingConstants.CENTER);
+            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            this.setFont(FSkin.getBoldFont(12));
         }
     }
 
-
-    /** @return {@link java.lang.Integer} */
+    /**
+     * Gets the selected index.
+     *
+     * @return {@link java.lang.Integer}
+     */
     public int getSelectedIndex() {
-        for (int i = 0; i < rows.length; i++) {
-            if (rows[i].isSelected()) { return i; }
+        for (int i = 0; i < this.rows.length; i++) {
+            if (this.rows[i].isSelected()) {
+                return i;
+            }
         }
         return -1;
     }
 
-    /** Selects a row programatically.
-     * @param i0 &emsp; int
+    /**
+     * Selects a row programatically.
+     * 
+     * @param i0
+     *            &emsp; int
      * @return boolean Was able to select, or not.
      */
-    public boolean setSelectedIndex(int i0) {
-        if (i0 >= rows.length) { return false; }
-        selectHandler(rows[i0]);
+    public boolean setSelectedIndex(final int i0) {
+        if (i0 >= this.rows.length) {
+            return false;
+        }
+        this.selectHandler(this.rows[i0]);
         return true;
     }
 
-    /** 
+    /**
+     * Sets the selected deck.
+     *
      * @param d0 &emsp; Deck object to select (if exists in list)
      * @return boolean Found deck, or didn't.
      */
-    public boolean setSelectedDeck(Deck d0) {
-        for (RowPanel r : rows) {
+    public boolean setSelectedDeck(final Deck d0) {
+        for (final RowPanel r : this.rows) {
             if (r.getDeck() == d0) {
-                selectHandler(r);
+                this.selectHandler(r);
                 return true;
             }
         }
         return false;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on delete. */
-    public void setDeleteCommand(Command c0) {
+    /**
+     * Sets the delete command.
+     *
+     * @param c0 &emsp; {@link forge.Command} command executed on delete.
+     */
+    public void setDeleteCommand(final Command c0) {
         this.cmdDelete = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on row select. */
-    public void setSelectCommand(Command c0) {
+    /**
+     * Sets the select command.
+     *
+     * @param c0 &emsp; {@link forge.Command} command executed on row select.
+     */
+    public void setSelectCommand(final Command c0) {
         this.cmdRowSelect = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on editor exit. */
-    public void setExitCommand(Command c0) {
+    /**
+     * Sets the exit command.
+     *
+     * @param c0 &emsp; {@link forge.Command} command executed on editor exit.
+     */
+    public void setExitCommand(final Command c0) {
         this.cmdEditorExit = c0;
     }
 
-    private void selectHandler(RowPanel r0) {
-        if (previousSelect != null) {
-            previousSelect.setSelected(false);
+    private void selectHandler(final RowPanel r0) {
+        if (this.previousSelect != null) {
+            this.previousSelect.setSelected(false);
         }
         r0.setSelected(true);
-        previousSelect = r0;
+        this.previousSelect = r0;
 
-        if (cmdRowSelect != null) { cmdRowSelect.execute(); }
+        if (this.cmdRowSelect != null) {
+            this.cmdRowSelect.execute();
+        }
     }
 
-    private void editDeck(Deck d0) {
-        switch(gametype) {
+    private void editDeck(final Deck d0) {
+        switch (this.gametype) {
         case Quest:
             Constant.Runtime.HUMAN_DECK[0] = d0;
             final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
-            editor.show(cmdEditorExit);
+            editor.show(this.cmdEditorExit);
             editor.setVisible(true);
             break;
         case Constructed:
             final DeckEditorConstructed cEditor = new DeckEditorConstructed();
-            cEditor.show(cmdEditorExit);
+            cEditor.show(this.cmdEditorExit);
             cEditor.getController().load(d0.getName());
             cEditor.setVisible(true);
             break;
         case Sealed:
             final DeckEditorLimited sEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
-            sEditor.show(cmdEditorExit);
+            sEditor.show(this.cmdEditorExit);
             sEditor.getController().load(d0.getName());
             sEditor.setVisible(true);
             break;
         case Draft:
             final DeckEditorLimited dEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getDraft());
-            dEditor.show(cmdEditorExit);
+            dEditor.show(this.cmdEditorExit);
             dEditor.getController().load(d0.getName());
             dEditor.setVisible(true);
             break;
         }
     }
 
-    private void deleteDeck(RowPanel r0) {
-        Deck d0 = r0.getDeck();
+    private void deleteDeck(final RowPanel r0) {
+        final Deck d0 = r0.getDeck();
 
-        final int n = JOptionPane.showConfirmDialog(null,
-                "Are you sure you want to delete \"" + d0.getName()
-                + "\" ?", "Delete Deck", JOptionPane.YES_NO_OPTION);
+        final int n = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete \"" + d0.getName() + "\" ?",
+                "Delete Deck", JOptionPane.YES_NO_OPTION);
 
         if (n == JOptionPane.NO_OPTION) {
             return;
@@ -395,18 +461,15 @@ public class DeckLister extends JPanel {
 
         final CardCollections deckManager = Singletons.getModel().getDecks();
 
-        if (gametype.equals(GameType.Draft)) {
+        if (this.gametype.equals(GameType.Draft)) {
             deckManager.getDraft().delete(d0.getName());
-        }
-        else if (gametype.equals(GameType.Sealed)) {
+        } else if (this.gametype.equals(GameType.Sealed)) {
             deckManager.getSealed().delete(d0.getName());
-        }
-        else if (gametype.equals(GameType.Quest)) {
+        } else if (this.gametype.equals(GameType.Quest)) {
             AllZone.getQuestData().getMyDecks().delete(d0.getName());
             AllZone.getQuestData().saveData();
             Singletons.getView().getViewHome().getBtnQuest().grabFocus();
-        }
-        else {
+        } else {
             deckManager.getConstructed().delete(d0.getName());
         }
 
@@ -414,6 +477,8 @@ public class DeckLister extends JPanel {
         this.repaintOnlyThisPanel();
         this.revalidate();
 
-        if (cmdDelete != null) { cmdDelete.execute(); }
+        if (this.cmdDelete != null) {
+            this.cmdDelete.execute();
+        }
     }
 }

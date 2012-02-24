@@ -34,33 +34,43 @@ import forge.deck.io.OldDeckFileFormatException;
 import forge.error.ErrorViewer;
 
 /**
- * This class treats every file in the given folder as a source for a named object.
- * The descendant should implement read method to deserialize a single item.
- * So that readAll will return a map of Name => Object as read from disk
- * 
+ * This class treats every file in the given folder as a source for a named
+ * object. The descendant should implement read method to deserialize a single
+ * item. So that readAll will return a map of Name => Object as read from disk
+ *
+ * @param <T> the generic type
  */
 public abstract class StorageReaderFolder<T extends IHasName> implements IItemReader<T> {
 
     private final File directory;
 
+    /**
+     * Gets the directory.
+     *
+     * @return the directory
+     */
     protected final File getDirectory() {
-        return directory;
+        return this.directory;
     }
 
+    /**
+     * Instantiates a new storage reader folder.
+     *
+     * @param deckDir0 the deck dir0
+     */
+    public StorageReaderFolder(final File deckDir0) {
 
-    public StorageReaderFolder(File deckDir0) {
+        this.directory = deckDir0;
 
-        directory = deckDir0;
-
-        if (directory == null) {
+        if (this.directory == null) {
             throw new IllegalArgumentException("No deck directory specified");
         }
         try {
-            if (directory.isFile()) {
+            if (this.directory.isFile()) {
                 throw new IOException("Not a directory");
             } else {
-                directory.mkdirs();
-                if (!directory.isDirectory()) {
+                this.directory.mkdirs();
+                if (!this.directory.isDirectory()) {
                     throw new IOException("Directory can't be created");
                 }
             }
@@ -70,27 +80,35 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
         }
     }
 
+    /* (non-Javadoc)
+     * @see forge.util.IItemReader#readAll()
+     */
     @Override
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
         final List<String> decksThatFailedToLoad = new ArrayList<String>();
-        final File[] files = directory.listFiles(getFileFilter());
+        final File[] files = this.directory.listFiles(this.getFileFilter());
         boolean hasWarnedOfOldFormat = false;
         for (final File file : files) {
             try {
-                final T newDeck = read(file);
+                final T newDeck = this.read(file);
                 if (null == newDeck) {
-                    String msg =  "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
+                    final String msg = "An object stored in "
+                            + file.getPath()
+                            + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
                     JOptionPane.showMessageDialog(null, msg);
                     continue;
                 }
                 result.put(newDeck.getName(), newDeck);
-            } catch (final OldDeckFileFormatException ex ) {
-                if( !hasWarnedOfOldFormat ) {
-                    JOptionPane.showMessageDialog(null, "Found a deck in old fileformat in the storage.\nMoving this file and all similiar ones to parent folder.\n\nForge will try to convert them in a second.");
+            } catch (final OldDeckFileFormatException ex) {
+                if (!hasWarnedOfOldFormat) {
+                    JOptionPane
+                            .showMessageDialog(
+                                    null,
+                                    "Found a deck in old fileformat in the storage.\nMoving this file and all similiar ones to parent folder.\n\nForge will try to convert them in a second.");
                     hasWarnedOfOldFormat = true;
                 }
-                file.renameTo(new File(directory.getParentFile(), file.getName()));
+                file.renameTo(new File(this.directory.getParentFile(), file.getName()));
             } catch (final NoSuchElementException ex) {
                 final String message = String.format("%s failed to load because ---- %s", file.getName(),
                         ex.getMessage());
@@ -107,17 +125,17 @@ public abstract class StorageReaderFolder<T extends IHasName> implements IItemRe
         return result;
     }
 
-
     /**
      * Read the object from file.
-     * @param file
+     *
+     * @param file the file
      * @return the object deserialized by inherited class
      */
     protected abstract T read(File file);
 
-
     /**
      * TODO: Write javadoc for this method.
+     * 
      * @return FilenameFilter to pick only relevant objects for deserialization
      */
     protected abstract FilenameFilter getFileFilter();

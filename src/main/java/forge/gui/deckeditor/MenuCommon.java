@@ -50,15 +50,10 @@ public final class MenuCommon extends MenuBase<Deck> {
     private static File previousDirectory = null;
 
     /**
-     * 
      * Menu for Deck Editor.
-     * 
-     * @param inDisplay
-     *            a DeckDisplay
-     * @param dckManager
-     *            a DeckManager
-     * @param exit
-     *            a Command
+     *
+     * @param ctrl the ctrl
+     * @param exit a Command
      */
     public MenuCommon(final IDeckController<Deck> ctrl, final Command exit) {
         super(ctrl, exit);
@@ -73,7 +68,7 @@ public final class MenuCommon extends MenuBase<Deck> {
             return;
         }
 
-        Deck randomDeck = new Deck();
+        final Deck randomDeck = new Deck();
 
         // The only remaining reference to global variable!
         final CardList random = new CardList(forge.AllZone.getCardFactory().getRandomCombinationWithoutRepetition(
@@ -87,7 +82,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         randomDeck.getMain().add("Forest");
         randomDeck.getMain().add("Terramorphic Expanse");
 
-        getController().setModel(randomDeck);
+        this.getController().setModel(randomDeck);
     }
 
     private final void newGenerateConstructed() {
@@ -95,9 +90,9 @@ public final class MenuCommon extends MenuBase<Deck> {
             return;
         }
 
-        Deck genConstructed = new Deck();
+        final Deck genConstructed = new Deck();
         genConstructed.getMain().add((new Generate2ColorDeck("AI", "AI")).get2ColorDeck(60, PlayerType.HUMAN));
-        getController().setModel(genConstructed);
+        this.getController().setModel(genConstructed);
     }
 
     private File getImportFilename() {
@@ -119,7 +114,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         if (file == null) {
         } else if (file.getName().endsWith(".dck")) {
             try {
-                getController().setModel(Deck.fromFile(file));
+                this.getController().setModel(Deck.fromFile(file));
 
             } catch (final Exception ex) {
                 ErrorViewer.showError(ex);
@@ -141,7 +136,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         }
 
         try {
-            DeckSerializer.writeDeck(getController().getModel(), filename);
+            DeckSerializer.writeDeck(this.getController().getModel(), filename);
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : exportDeck() error, " + ex);
@@ -177,7 +172,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         }
 
         try {
-            DeckSerializer.writeDeckHtml(getController().getModel(), filename);
+            DeckSerializer.writeDeckHtml(this.getController().getModel(), filename);
         } catch (final Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : printProxies() error, " + ex);
@@ -203,6 +198,10 @@ public final class MenuCommon extends MenuBase<Deck> {
 
     // deck.setName(currentDeckName);
 
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.MenuBase#getDefaultFileMenu()
+     */
+    @Override
     protected JMenu getDefaultFileMenu() {
         final JMenu fileMenu = super.getDefaultFileMenu();
 
@@ -213,11 +212,8 @@ public final class MenuCommon extends MenuBase<Deck> {
         final JMenuItem exportDeck = new JMenuItem("Export Deck...");
         // JMenuItem downloadDeck = new JMenuItem("Download Deck");
 
-
         // newDraftItem = newDraft;
         // newDraftItem.setEnabled(false);
-
-
 
         // fileMenu.add(newSealed);
         // fileMenu.add(newDraft);
@@ -229,14 +225,13 @@ public final class MenuCommon extends MenuBase<Deck> {
         final JMenuItem generateProxies = new JMenuItem("Generate Proxies...");
         fileMenu.add(generateProxies);
 
-
         // fileMenu.add(downloadDeck);
         fileMenu.addSeparator();
 
         fileMenu.add(newRandomConstructed);
         fileMenu.add(newGenerateConstructed);
 
-        appendCloseMenuItemTo(fileMenu);
+        this.appendCloseMenuItemTo(fileMenu);
 
         generateProxies.addActionListener(new ActionListener() {
             @Override

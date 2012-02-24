@@ -2240,21 +2240,28 @@ public final class AbilityFactoryReveal {
         }
     }
 
+    /**
+     * Gets the revealed list.
+     *
+     * @param player the player
+     * @param valid the valid
+     * @param max the max
+     * @return the revealed list
+     */
     public static CardList getRevealedList(final Player player, final CardList valid, final int max) {
         final CardList chosen = new CardList();
         final int validamount = Math.min(valid.size(), max);
 
-
         for (int i = 0; i < validamount; i++) {
             if (player.isHuman()) {
                 final Object o = GuiUtils.getChoiceOptional("Choose card(s) to reveal", valid.toArray());
-                    if (o != null) {
-                        chosen.add((Card) o);
-                        valid.remove((Card) o);
-                    } else {
-                        break;
-                    }
-            } else { //Computer
+                if (o != null) {
+                    chosen.add((Card) o);
+                    valid.remove((Card) o);
+                } else {
+                    break;
+                }
+            } else { // Computer
                 chosen.add(valid.get(0));
                 valid.remove(valid.get(0));
             }

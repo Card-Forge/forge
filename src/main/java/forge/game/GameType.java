@@ -56,9 +56,9 @@ public enum GameType {
 
     /**
      * Smart value of.
-     * 
-     * @param value
-     *            the value
+     *
+     * @param value the value
+     * @param defaultValue the default value
      * @return the game type
      */
     public static GameType smartValueOf(final String value, GameType defaultValue) {

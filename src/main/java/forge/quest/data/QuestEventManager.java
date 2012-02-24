@@ -82,14 +82,14 @@ public class QuestEventManager {
         final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckSerializer.DCK_FILE_FILTER);
 
         for (final File f : allFiles) {
-            Map<String, List<String>> contents = SectionUtil.parseSections(FileUtil.readFile(f));
+            final Map<String, List<String>> contents = SectionUtil.parseSections(FileUtil.readFile(f));
 
             if (contents.containsKey("quest")) {
-                tempEvent = readChallenge(contents.get("quest"));
+                tempEvent = this.readChallenge(contents.get("quest"));
                 this.allChallenges.add((QuestChallenge) tempEvent);
             } // End if([quest])
             else {
-                tempEvent = readDuel(contents.get("metadata"));
+                tempEvent = this.readDuel(contents.get("metadata"));
                 this.allDuels.add((QuestDuel) tempEvent);
             }
 
@@ -105,15 +105,22 @@ public class QuestEventManager {
     /**
      * Retrieve single event, using its name.
      * 
-     * @param s0 &emsp; {@link java.lang.String}
+     * @param s0
+     *            &emsp; {@link java.lang.String}
      * @return {@link forge.data.QuestEvent}
      */
     public QuestEvent getEvent(final String s0) {
-        for (QuestEvent q : allDuels) {
-            if (q.getName().equals(s0)) { return q; } }
+        for (final QuestEvent q : this.allDuels) {
+            if (q.getName().equals(s0)) {
+                return q;
+            }
+        }
 
-        for (QuestChallenge q : allChallenges) {
-            if (q.getName().equals(s0)) { return q; } }
+        for (final QuestChallenge q : this.allChallenges) {
+            if (q.getName().equals(s0)) {
+                return q;
+            }
+        }
 
         return null;
     }
@@ -133,7 +140,7 @@ public class QuestEventManager {
         String key, value;
 
         for (final String s : contents) {
-             if (s.equals("")) {
+            if (s.equals("")) {
                 continue;
             }
 
@@ -290,10 +297,10 @@ public class QuestEventManager {
      */
     private void assembleDuelDifficultyLists() {
 
-        easyAIduels.clear();
-        mediumAIduels.clear();
-        hardAIduels.clear();
-        veryHardAIduels.clear();
+        this.easyAIduels.clear();
+        this.mediumAIduels.clear();
+        this.hardAIduels.clear();
+        this.veryHardAIduels.clear();
         String s;
 
         for (final QuestDuel qd : this.allDuels) {
@@ -360,7 +367,9 @@ public class QuestEventManager {
      */
     public final List<QuestDuel> generateDuels() {
         final QuestPreferences qpref = Singletons.getModel().getQuestPreferences();
-        if (AllZone.getQuestData() == null) { return null; }
+        if (AllZone.getQuestData() == null) {
+            return null;
+        }
 
         final int index = AllZone.getQuestData().getDifficultyIndex();
         final List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
@@ -404,10 +413,11 @@ public class QuestEventManager {
      * </p>
      * Generates an array of new challenge opponents based on current win
      * conditions.
-     * 
+     *
+     * @param questData the quest data
      * @return a {@link java.util.List} object.
      */
-    public final List<QuestChallenge> generateChallenges(QuestData questData) {
+    public final List<QuestChallenge> generateChallenges(final QuestData questData) {
         final List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
 
         int maxChallenges = questData.getWin() / 10;

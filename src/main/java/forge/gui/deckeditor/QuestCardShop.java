@@ -70,7 +70,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
     private final JButton sellButton = new JButton();
 
     private final JLabel creditsLabel = new JLabel();
-    // We will remove the label below as the other deck editors do not display this text.
+    // We will remove the label below as the other deck editors do not display
+    // this text.
     // private final JLabel jLabel1 = new JLabel();
     private final JLabel sellPercentageLabel = new JLabel();
 
@@ -89,6 +90,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
      * @param exitCommand
      *            the exit command
      */
+    @Override
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
             private static final long serialVersionUID = -7428793574300520612L;
@@ -123,8 +125,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
         ownedItems.addAll(this.questData.getCards().getCardpool().getView());
 
-        getTopTableModel().setDeck(forSale);
-        getBottomTableWithCards().setDeck(ownedItems);
+        this.getTopTableModel().setDeck(forSale);
+        this.getBottomTableWithCards().setDeck(ownedItems);
 
         final double multiPercent = this.multiplier * 100;
         final NumberFormat formatter = new DecimalFormat("#0.00");
@@ -189,7 +191,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
         columnsBelow.add(new TableColumnInfo<InventoryItem>("Price", 45, this.fnPriceCompare, this.fnPriceSellGet));
         this.getBottomTableWithCards().setup(columnsBelow, this.getCardView());
 
-        // Window is too tall, lower height to min size used by constructed mode deck editor.
+        // Window is too tall, lower height to min size used by constructed mode
+        // deck editor.
         // this.setSize(1024, 768);
         this.setSize(1024, 740);
         GuiUtils.centerFrame(this);
@@ -263,7 +266,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
         this.sellPercentageLabel.setBounds(new Rectangle(380, 395, 450, 31));
         this.sellPercentageLabel.setText("(Sell percentage: " + this.multiplier + ")");
         this.sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 13));
-        // We will remove the label below as the other deck editors do not display this text.
+        // We will remove the label below as the other deck editors do not
+        // display this text.
         // this.jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         // this.jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
 
@@ -274,7 +278,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
         this.getContentPane().add(this.buyButton, null);
         this.getContentPane().add(this.sellButton, null);
         this.getContentPane().add(this.sellPercentageLabel, null);
-        // We will remove the label below as the other deck editors do not display this text.
+        // We will remove the label below as the other deck editors do not
+        // display this text.
         // this.getContentPane().add(this.jLabel1, null);
     }
 
@@ -342,10 +347,11 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
                 for (final CardPrinted card : deck.getDeck().getMain().toFlatList()) {
                     this.getBottomTableWithCards().addCard(card);
                 }
-                JOptionPane.showMessageDialog(null, String.format("Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.", deck.getName()), "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, String.format(
+                        "Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.",
+                        deck.getName()), "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
 
             }
-
 
             this.creditsLabel.setText("Total credits: " + this.questData.getCredits());
         } else {
@@ -416,7 +422,9 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
         }
     };
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
@@ -424,7 +432,9 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
         return null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#updateView()
      */
     @Override

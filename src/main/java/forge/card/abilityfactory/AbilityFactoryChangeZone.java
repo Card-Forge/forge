@@ -208,8 +208,8 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean isKnown(final String origin) {
-        return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield") || origin
-                .equals("Stack") || origin.equals("Ante"));
+        return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield")
+                || origin.equals("Stack") || origin.equals("Ante"));
     }
 
     /**
@@ -315,9 +315,9 @@ public final class AbilityFactoryChangeZone {
             return false;
         }
 
-        return changeZoneTriggerAINoCost(af, sa, mandatory);
+        return AbilityFactoryChangeZone.changeZoneTriggerAINoCost(af, sa, mandatory);
     }
-    
+
     /**
      * <p>
      * changeZoneTriggerAINoCost.
@@ -331,7 +331,8 @@ public final class AbilityFactoryChangeZone {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeZoneTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean changeZoneTriggerAINoCost(final AbilityFactory af, final SpellAbility sa,
+            final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         String origin = "";
         if (params.containsKey("Origin")) {
@@ -457,7 +458,7 @@ public final class AbilityFactoryChangeZone {
         if ((tgt != null) && tgt.canTgtPlayer()) {
             if (af.isCurse() && sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            } else if (!af.isCurse() && sa.canTarget(AllZone.getComputerPlayer())){
+            } else if (!af.isCurse() && sa.canTarget(AllZone.getComputerPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
             }
             pDefined = tgt.getTargetPlayers();
@@ -526,7 +527,7 @@ public final class AbilityFactoryChangeZone {
         if ((tgt != null) && tgt.canTgtPlayer()) {
             if (af.isCurse() && sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            } else if (!af.isCurse() && sa.canTarget(AllZone.getComputerPlayer())){
+            } else if (!af.isCurse() && sa.canTarget(AllZone.getComputerPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
             } else {
                 return false;
@@ -670,8 +671,7 @@ public final class AbilityFactoryChangeZone {
                     if (params.containsKey("ExileFaceDown")) {
                         sb.append(" face down");
                     }
-                }
-                else if (destination.equals("Ante")) {
+                } else if (destination.equals("Ante")) {
                     sb.append("Add the top card of your library to the ante");
                 }
                 sb.append(".");
@@ -848,14 +848,14 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
-        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card,
-                params.get("ChangeNum"), sa) : 1;
+        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"),
+                sa) : 1;
 
         CardList fetchList;
         if (defined) {
             fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
             if (!params.containsKey("ChangeNum")) {
-                changeNum =  fetchList.size();
+                changeNum = fetchList.size();
             }
         } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)) {
             fetchList = AllZoneUtil.getCardsIn(origin);
@@ -866,7 +866,8 @@ public final class AbilityFactoryChangeZone {
         if (!defined) {
             if (origin.contains(Zone.Library) && !defined) { // Look at whole
                                                              // library before
-                                                             // moving onto choosing
+                                                             // moving onto
+                                                             // choosing
                                                              // a card{
                 GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library",
                         player.getCardsIn(Zone.Library).toArray());
@@ -874,8 +875,8 @@ public final class AbilityFactoryChangeZone {
 
             // Look at opponents hand before moving onto choosing a card
             if (origin.contains(Zone.Hand) && player.isComputer()) {
-                GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Opponent's Hand",
-                        player.getCardsIn(Zone.Hand).toArray());
+                GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Opponent's Hand", player
+                        .getCardsIn(Zone.Hand).toArray());
             }
             fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
         }
@@ -929,12 +930,14 @@ public final class AbilityFactoryChangeZone {
                     }
 
                     if (params.containsKey("AttachedTo")) {
-                        ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                        final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                                params.get("AttachedTo"), sa);
                         if (!list.isEmpty()) {
-                            Card attachedTo = list.get(0);
+                            final Card attachedTo = list.get(0);
                             if (c.isEnchanting()) {
                                 // If this Card is already Enchanting something
-                                // Need to unenchant it, then clear out the commands
+                                // Need to unenchant it, then clear out the
+                                // commands
                                 final GameEntity oldEnchanted = c.getEnchanting();
                                 c.removeEnchanting(oldEnchanted);
                                 c.clearEnchantCommand();
@@ -1020,14 +1023,14 @@ public final class AbilityFactoryChangeZone {
             type = "Card";
         }
 
-        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card,
-                params.get("ChangeNum"), sa) : 1;
+        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"),
+                sa) : 1;
 
         CardList fetchList;
         if (defined) {
             fetchList = new CardList(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
             if (!params.containsKey("ChangeNum")) {
-                changeNum =  fetchList.size();
+                changeNum = fetchList.size();
             }
         } else if (!origin.contains(Zone.Library) && !origin.contains(Zone.Hand)) {
             fetchList = AllZoneUtil.getCardsIn(origin);
@@ -1113,9 +1116,10 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 if (params.containsKey("AttachedTo")) {
-                    ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                    final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                            params.get("AttachedTo"), sa);
                     if (!list.isEmpty()) {
-                        Card attachedTo = list.get(0);
+                        final Card attachedTo = list.get(0);
                         if (c.isEnchanting()) {
                             // If this Card is already Enchanting something
                             // Need to unenchant it, then clear out the commands
@@ -1521,7 +1525,8 @@ public final class AbilityFactoryChangeZone {
         if (origin.equals(Zone.Battlefield)
                 && destination.equals(Zone.Exile)
                 && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
-                && !(AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa.isAbility())) {
+                && !(AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
+                        .isAbility())) {
             return false;
         }
 
@@ -1704,9 +1709,10 @@ public final class AbilityFactoryChangeZone {
         if (sa.getTarget() == null) {
             // Just in case of Defined cases
             if (!mandatory && params.containsKey("AttachedTo")) {
-                ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                        params.get("AttachedTo"), sa);
                 if (!list.isEmpty()) {
-                    Card attachedTo = list.get(0);
+                    final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
                     if (attachedTo.getController().isHuman()) {
                         return false;
@@ -1932,12 +1938,15 @@ public final class AbilityFactoryChangeZone {
                             tgtC.addController(af.getHostCard());
                         }
                         if (params.containsKey("AttachedTo")) {
-                            ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("AttachedTo"), sa);
+                            final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                                    params.get("AttachedTo"), sa);
                             if (!list.isEmpty()) {
-                                Card attachedTo = list.get(0);
+                                final Card attachedTo = list.get(0);
                                 if (tgtC.isEnchanting()) {
-                                    // If this Card is already Enchanting something
-                                    // Need to unenchant it, then clear out the commands
+                                    // If this Card is already Enchanting
+                                    // something
+                                    // Need to unenchant it, then clear out the
+                                    // commands
                                     final GameEntity oldEnchanted = tgtC.getEnchanting();
                                     tgtC.removeEnchanting(oldEnchanted);
                                     tgtC.clearEnchantCommand();
@@ -1955,7 +1964,8 @@ public final class AbilityFactoryChangeZone {
                             }
                         }
 
-                        movedCard = Singletons.getModel().getGameAction().moveTo(tgtC.getController().getZone(destination), tgtC);
+                        movedCard = Singletons.getModel().getGameAction()
+                                .moveTo(tgtC.getController().getZone(destination), tgtC);
 
                         if (params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
                             AllZone.getCombat().addAttacker(tgtC);

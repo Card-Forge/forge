@@ -43,9 +43,10 @@ public class CustomLimited extends DeckBase {
 
     /**
      * TODO: Write javadoc for Constructor.
-     * @param name0
+     *
+     * @param name0 the name0
      */
-    public CustomLimited(String name0) {
+    public CustomLimited(final String name0) {
         super(name0);
     }
 
@@ -59,7 +60,6 @@ public class CustomLimited extends DeckBase {
 
     /** The Num cards. */
     private int numCards = 15;
-
 
     private final Map<CardRarity, Integer> numRarity = new EnumMap<CardRarity, Integer>(CardRarity.class);
 
@@ -83,14 +83,14 @@ public class CustomLimited extends DeckBase {
 
     /**
      * Parses the.
-     * 
-     * @param dfData
-     *            the df data
+     *
+     * @param dfData the df data
+     * @param cubes the cubes
      * @return the custom limited
      */
-    public static CustomLimited parse(final List<String> dfData, IFolderMapView<Deck> cubes) {
+    public static CustomLimited parse(final List<String> dfData, final IFolderMapView<Deck> cubes) {
 
-        FileSection data = FileSection.parse(dfData, ":");
+        final FileSection data = FileSection.parse(dfData, ":");
 
         final CustomLimited cd = new CustomLimited(data.get("Name"));
         cd.setIgnoreRarity(data.getBoolean("IgnoreRarity"));
@@ -107,9 +107,10 @@ public class CustomLimited extends DeckBase {
 
         cd.numPacks = data.getInt("NumPacks");
 
-        String deckName = data.get("DeckFile");
-        Deck deckCube = cubes.get(deckName);
-        cd.cardPool = deckCube == null ? ItemPool.createFrom(CardDb.instance().getAllUniqueCards(), CardPrinted.class) : deckCube.getMain();
+        final String deckName = data.get("DeckFile");
+        final Deck deckCube = cubes.get(deckName);
+        cd.cardPool = deckCube == null ? ItemPool.createFrom(CardDb.instance().getAllUniqueCards(), CardPrinted.class)
+                : deckCube.getMain();
 
         return cd;
     }
@@ -209,30 +210,33 @@ public class CustomLimited extends DeckBase {
         this.landSetCode = landSetCodeIn;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.CardCollectionBase#getCardPool()
      */
     @Override
     public ItemPoolView<CardPrinted> getCardPool() {
-        return cardPool;
+        return this.cardPool;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.DeckBase#getInstance(java.lang.String)
      */
     @Override
-    protected DeckBase newInstance(String name0) {
+    protected DeckBase newInstance(final String name0) {
         return new CustomLimited(name0);
     }
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     *
+     * @return the numbers by rarity
      */
     public Map<CardRarity, Integer> getNumbersByRarity() {
-        return numRarity;
+        return this.numRarity;
     }
-
-
 
 }

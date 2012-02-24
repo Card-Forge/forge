@@ -38,7 +38,8 @@ import forge.gui.GuiUtils;
  * <p>
  * Gui_DeckEditor_Menu class.
  * </p>
- * 
+ *
+ * @param <T> the generic type
  * @author Forge
  * @version $Id: DeckEditorCommonMenu.java 13590 2012-01-27 20:46:27Z Max mtg $
  */
@@ -49,15 +50,10 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
     private final IDeckController<T> controller;
 
     /**
-     * 
      * Menu for Deck Editor.
-     * 
-     * @param inDisplay
-     *            a DeckDisplay
-     * @param dckManager
-     *            a DeckManager
-     * @param exit
-     *            a Command
+     *
+     * @param ctrl the ctrl
+     * @param exit a Command
      */
     public MenuBase(final IDeckController<T> ctrl, final Command exit) {
         this.controller = ctrl;
@@ -66,13 +62,21 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         this.setupMenu();
     }
 
+    /**
+     * Gets the controller.
+     *
+     * @return the controller
+     */
     protected final IDeckController<T> getController() {
-        return controller;
+        return this.controller;
     }
 
+    /**
+     * Setup menu.
+     */
     protected void setupMenu() {
-        this.add(getDefaultFileMenu());
-        this.add(getSortMenu());
+        this.add(this.getDefaultFileMenu());
+        this.add(this.getSortMenu());
     }
 
     /**
@@ -89,6 +93,11 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         this.controller.newModel();
     }
 
+    /**
+     * Gets the user input open deck.
+     *
+     * @return the user input open deck
+     */
     protected final String getUserInputOpenDeck() {
         final List<String> choices = this.controller.getSavedNames();
         if (choices.isEmpty()) {
@@ -102,15 +111,25 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
 
     // deck.setName(currentDeckName);
 
+    /**
+     * Open.
+     */
     protected final void open() {
-        if (!this.canLeaveCurrentDeck()) { return; }
+        if (!this.canLeaveCurrentDeck()) {
+            return;
+        }
         final String name = this.getUserInputOpenDeck();
-        if (StringUtils.isBlank(name)) { return; }
-        controller.load(name);
+        if (StringUtils.isBlank(name)) {
+            return;
+        }
+        this.controller.load(name);
     }
 
+    /**
+     * Save.
+     */
     protected final void save() {
-        if (StringUtils.isBlank(controller.getModel().getName())) {
+        if (StringUtils.isBlank(this.controller.getModel().getName())) {
             this.saveAs();
             return;
         }
@@ -118,19 +137,24 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         this.controller.save();
     }
 
+    /**
+     * Save as.
+     */
     protected final void saveAs() {
         final String name = this.getDeckNameFromDialog();
 
         if (StringUtils.isBlank(name)) {
-            final int n = JOptionPane.showConfirmDialog(null, "This name is incorrect. Enter another one?", "Cannot save", JOptionPane.YES_NO_OPTION);
+            final int n = JOptionPane.showConfirmDialog(null, "This name is incorrect. Enter another one?",
+                    "Cannot save", JOptionPane.YES_NO_OPTION);
 
             if (n == JOptionPane.NO_OPTION) {
                 return;
             }
         }
 
-        if (controller.fileExists(name)) {
-            final int m = JOptionPane.showConfirmDialog(null, "There is already saved an item named '" + name + "'. Would you like to overwrite it?", "Confirm overwrite", JOptionPane.YES_NO_OPTION);
+        if (this.controller.fileExists(name)) {
+            final int m = JOptionPane.showConfirmDialog(null, "There is already saved an item named '" + name
+                    + "'. Would you like to overwrite it?", "Confirm overwrite", JOptionPane.YES_NO_OPTION);
 
             if (m == JOptionPane.NO_OPTION) {
                 return;
@@ -140,13 +164,16 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         this.controller.saveAs(name);
     }
 
+    /**
+     * Delete.
+     */
     protected final void delete() {
-        if (!controller.isModelInStore()) {
+        if (!this.controller.isModelInStore()) {
             return;
         }
 
-        final int n = JOptionPane.showConfirmDialog(null, "Do you want to delete this deck " + controller.getModel().getName()
-                + " ?", "Delete", JOptionPane.YES_NO_OPTION);
+        final int n = JOptionPane.showConfirmDialog(null, "Do you want to delete this deck "
+                + this.controller.getModel().getName() + " ?", "Delete", JOptionPane.YES_NO_OPTION);
 
         if (n == JOptionPane.NO_OPTION) {
             return;
@@ -166,8 +193,13 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         this.exitCommand.execute();
     }
 
+    /**
+     * Can leave current deck.
+     *
+     * @return true, if successful
+     */
     protected final boolean canLeaveCurrentDeck() {
-        if (controller.isSaved()) {
+        if (this.controller.isSaved()) {
             return true;
         }
         final String message = String.format("Do you wish to save changes you made to your current deck '%s'?",
@@ -182,11 +214,9 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
             return true;
         }
 
-        save();
+        this.save();
         return true;
     }
-
-
 
     /**
      * <p>
@@ -203,7 +233,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         }
 
         final String deckName = o.toString();
-        final boolean isGoodName = controller.isGoodName(deckName);
+        final boolean isGoodName = this.controller.isGoodName(deckName);
 
         if (isGoodName) {
             return deckName;
@@ -213,6 +243,11 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         return this.getDeckNameFromDialog();
     }
 
+    /**
+     * Gets the default file menu.
+     *
+     * @return the default file menu
+     */
     protected JMenu getDefaultFileMenu() {
         final JMenu fileMenu = new JMenu("Deck");
 
@@ -317,7 +352,12 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
         return fileMenu;
     }
 
-    protected void appendCloseMenuItemTo(JMenu fileMenu) {
+    /**
+     * Append close menu item to.
+     *
+     * @param fileMenu the file menu
+     */
+    protected void appendCloseMenuItemTo(final JMenu fileMenu) {
         final JMenuItem close = new JMenuItem("Close");
         fileMenu.addSeparator();
         fileMenu.add(close);
@@ -344,6 +384,8 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
      * <p>
      * setupSortMenu.
      * </p>
+     *
+     * @return the sort menu
      */
     protected final JMenuItem getSortMenu() {
         final JMenuItem name = new JMenuItem("Card Name");

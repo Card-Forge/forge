@@ -34,15 +34,10 @@ public final class MenuLimited extends MenuBase<DeckGroup> {
     private static final long serialVersionUID = -4037993759604768755L;
 
     /**
-     * 
      * Menu for Deck Editor.
-     * 
-     * @param inDisplay
-     *            a DeckDisplay
-     * @param dckManager
-     *            a DeckManager
-     * @param exit
-     *            a Command
+     *
+     * @param ctrl the ctrl
+     * @param exit a Command
      */
     public MenuLimited(final IDeckController<DeckGroup> ctrl, final Command exit) {
         super(ctrl, exit);

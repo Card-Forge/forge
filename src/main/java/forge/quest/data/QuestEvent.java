@@ -41,7 +41,7 @@ public class QuestEvent {
     /** The difficulty. */
     private String difficulty = "Medium";
 
-    /** Filename of the icon for this event.*/
+    /** Filename of the icon for this event. */
     private String iconFilename = "unknown";
 
     /** The name. */
@@ -191,7 +191,7 @@ public class QuestEvent {
      * Sets the icon filename.
      * 
      * @param s0
-     *           filename of the icon to set
+     *            filename of the icon to set
      */
     public void setIconFilename(final String s0) {
         this.iconFilename = s0;

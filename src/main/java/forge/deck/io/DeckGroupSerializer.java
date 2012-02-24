@@ -26,8 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.FileUtil;
-import forge.util.StorageReaderFolder;
 import forge.util.IItemSerializer;
+import forge.util.StorageReaderFolder;
 
 /**
  * TODO: Write javadoc for this type.
@@ -36,42 +36,49 @@ import forge.util.IItemSerializer;
 public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implements IItemSerializer<DeckGroup> {
     private final String HUMAN_DECK_FILE = "human.dck";
 
-
-    public DeckGroupSerializer(File deckDir0) {
+    /**
+     * Instantiates a new deck group serializer.
+     *
+     * @param deckDir0 the deck dir0
+     */
+    public DeckGroupSerializer(final File deckDir0) {
         super(deckDir0);
     }
 
+    /** The Constant MAX_DRAFT_PLAYERS. */
     public final static int MAX_DRAFT_PLAYERS = 8;
 
     /**
-     * 
      * Write draft Decks.
-     * 
-     * @param drafts
-     *            a Deck[]
+     *
+     * @param unit the unit
      */
     @Override
-    public void save(DeckGroup unit) {
-        final File f = makeFileFor(unit);
+    public void save(final DeckGroup unit) {
+        final File f = this.makeFileFor(unit);
         f.mkdir();
-        FileUtil.writeFile(new File(f, HUMAN_DECK_FILE), unit.getHumanDeck().save());
-        List<Deck> aiDecks = unit.getAiDecks();
+        FileUtil.writeFile(new File(f, this.HUMAN_DECK_FILE), unit.getHumanDeck().save());
+        final List<Deck> aiDecks = unit.getAiDecks();
         for (int i = 1; i <= aiDecks.size(); i++) {
             FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), aiDecks.get(i - 1).save());
         }
     }
 
-    protected final DeckGroup read(File file) {
+    /* (non-Javadoc)
+     * @see forge.util.StorageReaderFolder#read(java.io.File)
+     */
+    @Override
+    protected final DeckGroup read(final File file) {
 
-        Deck human = Deck.fromFile(new File(file, HUMAN_DECK_FILE));
+        final Deck human = Deck.fromFile(new File(file, this.HUMAN_DECK_FILE));
         if (null == human) {
             return null;
         }
 
         final DeckGroup d = new DeckGroup(human.getName());
         d.setHumanDeck(human);
-        for (int i = 1; i < MAX_DRAFT_PLAYERS; i++) {
-            File theFile = new File(file, "ai-" + i + ".dck");
+        for (int i = 1; i < DeckGroupSerializer.MAX_DRAFT_PLAYERS; i++) {
+            final File theFile = new File(file, "ai-" + i + ".dck");
             if (!theFile.exists()) {
                 break;
             }
@@ -81,25 +88,35 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
         return d;
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.deck.IDeckSerializer#erase(forge.item.CardCollectionBase, java.io.File)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.deck.IDeckSerializer#erase(forge.item.CardCollectionBase,
+     * java.io.File)
      */
     @Override
-    public void erase(DeckGroup unit) {
-        File dir = makeFileFor(unit);
+    public void erase(final DeckGroup unit) {
+        final File dir = this.makeFileFor(unit);
         final File[] files = dir.listFiles();
-        for (File f : files) {
+        for (final File f : files) {
             f.delete();
         }
         dir.delete();
     }
 
+    /**
+     * Make file for.
+     *
+     * @param decks the decks
+     * @return the file
+     */
     public File makeFileFor(final DeckGroup decks) {
-        return new File(getDirectory(), decks.getBestFileName());
+        return new File(this.getDirectory(), decks.getBestFileName());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.io.DeckSerializerBase#getFileFilter()
      */
     @Override
@@ -107,10 +124,11 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
         return new FilenameFilter() {
 
             @Override
-            public boolean accept(File dir, String name) {
-                boolean isVisibleFolder = dir.isDirectory() && !dir.isHidden();
-                boolean hasGoodName = StringUtils.isNotEmpty(name) && !name.startsWith(".");
-                return isVisibleFolder && hasGoodName && new File(dir, HUMAN_DECK_FILE).exists();
+            public boolean accept(final File dir, final String name) {
+                final boolean isVisibleFolder = dir.isDirectory() && !dir.isHidden();
+                final boolean hasGoodName = StringUtils.isNotEmpty(name) && !name.startsWith(".");
+                return isVisibleFolder && hasGoodName
+                        && new File(dir, DeckGroupSerializer.this.HUMAN_DECK_FILE).exists();
             }
         };
     }

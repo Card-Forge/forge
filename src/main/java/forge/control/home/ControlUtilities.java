@@ -1,3 +1,20 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.control.home;
 
 import java.awt.event.MouseAdapter;
@@ -25,54 +42,73 @@ import forge.properties.NewConstants.Lang;
 import forge.view.home.ViewUtilities;
 import forge.view.toolbox.FSkin;
 
-/** 
+/**
  * Controls logic and listeners for Utilities panel of the home screen.
- *
+ * 
  */
 public class ControlUtilities {
-    private ViewUtilities view;
+    private final ViewUtilities view;
     private final MouseListener madLicensing;
-    private final Command cmdDeckEditor, cmdPicDownload, cmdSetDownload,
-        cmdQuestImages, cmdReportBug, cmdImportPictures, cmdHowToPlay, cmdDownloadPrices;
+    private final Command cmdDeckEditor, cmdPicDownload, cmdSetDownload, cmdQuestImages, cmdReportBug,
+            cmdImportPictures, cmdHowToPlay, cmdDownloadPrices;
 
     /**
      * 
      * Controls logic and listeners for Utilities panel of the home screen.
      * 
-     * @param v0 &emsp; ViewUtilities
+     * @param v0
+     *            &emsp; ViewUtilities
      */
     @SuppressWarnings("serial")
-    public ControlUtilities(ViewUtilities v0) {
+    public ControlUtilities(final ViewUtilities v0) {
         this.view = v0;
 
-        madLicensing = new MouseAdapter() {
+        this.madLicensing = new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                view.showLicensing();
+            public void mouseClicked(final MouseEvent e) {
+                ControlUtilities.this.view.showLicensing();
             }
+
             @Override
-            public void mouseEntered(MouseEvent e) {
-                view.getLblLicensing().setForeground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
+            public void mouseEntered(final MouseEvent e) {
+                ControlUtilities.this.view.getLblLicensing().setForeground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
             }
+
             @Override
-            public void mouseExited(MouseEvent e) {
-                view.getLblLicensing().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            public void mouseExited(final MouseEvent e) {
+                ControlUtilities.this.view.getLblLicensing().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
         };
 
-        cmdDeckEditor = new Command() { @Override
-            public void execute() { showDeckEditor(GameType.Constructed, null); } };
+        this.cmdDeckEditor = new Command() {
+            @Override
+            public void execute() {
+                ControlUtilities.this.showDeckEditor(GameType.Constructed, null);
+            }
+        };
 
-        cmdPicDownload = new Command() { @Override
-            public void execute() { doDownloadPics(); } };
+        this.cmdPicDownload = new Command() {
+            @Override
+            public void execute() {
+                ControlUtilities.this.doDownloadPics();
+            }
+        };
 
-        cmdSetDownload = new Command() { @Override
-            public void execute() { doDownloadSetPics(); } };
+        this.cmdSetDownload = new Command() {
+            @Override
+            public void execute() {
+                ControlUtilities.this.doDownloadSetPics();
+            }
+        };
 
-        cmdQuestImages = new Command() { @Override
-            public void execute() { doDownloadQuestImages(); } };
+        this.cmdQuestImages = new Command() {
+            @Override
+            public void execute() {
+                ControlUtilities.this.doDownloadQuestImages();
+            }
+        };
 
-        cmdReportBug = new Command() {
+        this.cmdReportBug = new Command() {
             @Override
             public void execute() {
                 final BugzReporter br = new BugzReporter();
@@ -80,7 +116,7 @@ public class ControlUtilities {
             }
         };
 
-        cmdImportPictures = new Command() {
+        this.cmdImportPictures = new Command() {
             @Override
             public void execute() {
                 final GuiImportPicture ip = new GuiImportPicture(null);
@@ -88,7 +124,7 @@ public class ControlUtilities {
             }
         };
 
-        cmdHowToPlay = new Command() {
+        this.cmdHowToPlay = new Command() {
             @Override
             public void execute() {
                 final String text = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
@@ -104,7 +140,7 @@ public class ControlUtilities {
             }
         };
 
-        cmdDownloadPrices = new Command() {
+        this.cmdDownloadPrices = new Command() {
             @Override
             public void execute() {
                 final GuiDownloadPrices gdp = new GuiDownloadPrices();
@@ -112,27 +148,33 @@ public class ControlUtilities {
             }
         };
 
-        addListeners();
+        this.addListeners();
     }
 
-    /** @return ViewUtilities */
+    /**
+     * Gets the view.
+     *
+     * @return ViewUtilities
+     */
     public ViewUtilities getView() {
-        return view;
+        return this.view;
     }
 
-    /** */
+    /**
+     * Adds the listeners.
+     */
     public void addListeners() {
-        this.view.getBtnDownloadPics().setCommand(cmdPicDownload);
-        this.view.getBtnDownloadSetPics().setCommand(cmdSetDownload);
-        this.view.getBtnDownloadQuestImages().setCommand(cmdQuestImages);
-        this.view.getBtnReportBug().setCommand(cmdReportBug);
-        this.view.getBtnImportPictures().setCommand(cmdImportPictures);
-        this.view.getBtnHowToPlay().setCommand(cmdHowToPlay);
-        this.view.getBtnDownloadPrices().setCommand(cmdDownloadPrices);
-        this.view.getBtnDeckEditor().setCommand(cmdDeckEditor);
+        this.view.getBtnDownloadPics().setCommand(this.cmdPicDownload);
+        this.view.getBtnDownloadSetPics().setCommand(this.cmdSetDownload);
+        this.view.getBtnDownloadQuestImages().setCommand(this.cmdQuestImages);
+        this.view.getBtnReportBug().setCommand(this.cmdReportBug);
+        this.view.getBtnImportPictures().setCommand(this.cmdImportPictures);
+        this.view.getBtnHowToPlay().setCommand(this.cmdHowToPlay);
+        this.view.getBtnDownloadPrices().setCommand(this.cmdDownloadPrices);
+        this.view.getBtnDeckEditor().setCommand(this.cmdDeckEditor);
 
-        this.view.getLblLicensing().removeMouseListener(madLicensing);
-        this.view.getLblLicensing().addMouseListener(madLicensing);
+        this.view.getLblLicensing().removeMouseListener(this.madLicensing);
+        this.view.getLblLicensing().addMouseListener(this.madLicensing);
     }
 
     private void doDownloadPics() {
@@ -148,11 +190,14 @@ public class ControlUtilities {
     }
 
     /**
+     * Show deck editor.
+     *
+     * @param <T> the generic type
      * @param gt0 &emsp; GameType
      * @param d0 &emsp; Deck
      */
     @SuppressWarnings("unchecked")
-    public <T> void showDeckEditor(GameType gt0, T d0) {
+    public <T> void showDeckEditor(final GameType gt0, final T d0) {
 
         DeckEditorBase<?, T> editor = null;
         if (gt0 == GameType.Constructed) {
@@ -163,14 +208,13 @@ public class ControlUtilities {
             editor = (DeckEditorBase<?, T>) new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
         }
 
-
         final Command exit = new Command() {
             private static final long serialVersionUID = -9133358399503226853L;
 
             @Override
             public void execute() {
                 Singletons.getControl().getControlHome().getControlConstructed().updateDeckLists();
-                //view.getParentView().getControlSealed().updateDeckLists();
+                // view.getParentView().getControlSealed().updateDeckLists();
             }
         };
 

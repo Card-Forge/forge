@@ -23,9 +23,9 @@ import java.util.regex.Pattern;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Singletons;
 import forge.card.CardColor;
+import forge.card.CardEdition;
 import forge.card.CardManaCost;
 import forge.card.CardRarity;
-import forge.card.CardEdition;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
@@ -55,8 +55,8 @@ public abstract class PresetColumns {
     }
 
     private static CardEdition toSetCmp(final InventoryItem i) {
-        return i instanceof InventoryItemFromSet ? Singletons.getModel().getEditions().getEditionByCode(((InventoryItemFromSet) i).getEdition())
-                : CardEdition.UNKNOWN;
+        return i instanceof InventoryItemFromSet ? Singletons.getModel().getEditions()
+                .getEditionByCode(((InventoryItemFromSet) i).getEdition()) : CardEdition.UNKNOWN;
     }
 
     private static String toSetStr(final InventoryItem i) {
@@ -101,8 +101,8 @@ public abstract class PresetColumns {
     public static final Lambda1<Object, Entry<InventoryItem, Integer>> FN_NAME_GET = new Lambda1<Object, Entry<InventoryItem, Integer>>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            String name = from.getKey().getName();
-            return name.contains("AE") ? AE_FINDER.matcher(name).replaceAll("\u00C6") : name;
+            final String name = from.getKey().getName();
+            return name.contains("AE") ? PresetColumns.AE_FINDER.matcher(name).replaceAll("\u00C6") : name;
         }
     };
 

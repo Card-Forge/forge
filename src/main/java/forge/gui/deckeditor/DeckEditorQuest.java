@@ -27,6 +27,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 
@@ -82,6 +83,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
      * @param exitCommand
      *            the exit command
      */
+    @Override
     public void show(final Command exitCommand) {
         final Command exit = new Command() {
             private static final long serialVersionUID = -7428793574300520612L;
@@ -101,17 +103,19 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         // do not change this!!!!
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(final WindowEvent ev) { menu.close(); }
+            public void windowClosing(final WindowEvent ev) {
+                menu.close();
+            }
         });
 
-        Deck deck = Constant.Runtime.HUMAN_DECK[0] == null ? null : this.questData.getMyDecks().get(Constant.Runtime.HUMAN_DECK[0].getName());
+        Deck deck = Constant.Runtime.HUMAN_DECK[0] == null ? null : this.questData.getMyDecks().get(
+                Constant.Runtime.HUMAN_DECK[0].getName());
 
         if (deck == null) {
             deck = new Deck();
         }
 
         // tell Gui_Quest_DeckEditor the name of the deck
-
 
         this.getController().setModel(deck);
 
@@ -156,7 +160,8 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
 
         this.filterNameTypeSet.setListeners(new OnChangeTextUpdateDisplay(), this.getItemListenerUpdatesDisplay());
 
-        // Window is too tall, lower height to min size used by constructed mode deck editor
+        // Window is too tall, lower height to min size used by constructed mode
+        // deck editor
         // this.setSize(1024, 768);
         this.setSize(1024, 740);
         GuiUtils.centerFrame(this);
@@ -188,8 +193,13 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
             ErrorViewer.showError(ex);
         }
 
-        Lambda0<Deck> newCreator = new Lambda0<Deck>() { @Override public Deck apply() { return new Deck(); } };
-        controller = new DeckController<Deck>(questData2.getMyDecks(), this, newCreator);
+        final Lambda0<Deck> newCreator = new Lambda0<Deck>() {
+            @Override
+            public Deck apply() {
+                return new Deck();
+            }
+        };
+        this.controller = new DeckController<Deck>(questData2.getMyDecks(), this, newCreator);
     }
 
     private void jbInit() throws Exception {
@@ -255,7 +265,8 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         /**
          * Color filtering
          */
-        // Raise the color filtering boxes to top of window and move to the left.
+        // Raise the color filtering boxes to top of window and move to the
+        // left.
         this.getFilterBoxes().getWhite().setBounds(17, 10, 67, 20);
         this.getFilterBoxes().getBlue().setBounds(94, 10, 60, 20);
         this.getFilterBoxes().getBlack().setBounds(162, 10, 65, 20);
@@ -350,28 +361,32 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
         this.questData.getCards().getCardpool().add(card);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
     public IDeckController<Deck> getController() {
-        return controller;
+        return this.controller;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.gui.deckeditor.DeckEditorBase#updateView()
      */
     @Override
     public void updateView() {
-        Deck deck = controller.getModel();
+        final Deck deck = this.controller.getModel();
 
         final ItemPool<CardPrinted> cardpool = new ItemPool<CardPrinted>(CardPrinted.class);
         cardpool.addAll(this.questData.getCards().getCardpool());
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(deck.getMain());
         // show cards, makes this user friendly
-        getTopTableWithCards().setDeck(cardpool);
-        getBottomTableWithCards().setDeck(deck.getMain());
+        this.getTopTableWithCards().setDeck(cardpool);
+        this.getBottomTableWithCards().setDeck(deck.getMain());
     }
 
 }

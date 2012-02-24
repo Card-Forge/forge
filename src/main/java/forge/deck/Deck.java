@@ -66,9 +66,16 @@ public class Deck extends DeckBase implements Serializable, IHasName {
      * Decks have their named finalled.
      * </p>
      */
-    public Deck() { this(""); }
+    public Deck() {
+        this("");
+    }
 
-    public Deck(String name0) {
+    /**
+     * Instantiates a new deck.
+     *
+     * @param name0 the name0
+     */
+    public Deck(final String name0) {
         super(name0);
         this.main = new DeckSection();
         this.sideboard = new DeckSection();
@@ -92,7 +99,6 @@ public class Deck extends DeckBase implements Serializable, IHasName {
         return this.getName();
     }
 
-
     /**
      * <p>
      * Getter for the field <code>main</code>.
@@ -115,53 +121,79 @@ public class Deck extends DeckBase implements Serializable, IHasName {
         return this.sideboard;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.item.CardCollectionBase#getCardPool()
      */
     @Override
     public ItemPoolView<CardPrinted> getCardPool() {
-        return main;
+        return this.main;
     }
 
-    protected void cloneFieldsTo(DeckBase clone) {
+    /* (non-Javadoc)
+     * @see forge.deck.DeckBase#cloneFieldsTo(forge.deck.DeckBase)
+     */
+    @Override
+    protected void cloneFieldsTo(final DeckBase clone) {
         super.cloneFieldsTo(clone);
-        Deck result = (Deck) clone;
+        final Deck result = (Deck) clone;
         result.main.addAll(this.main);
         result.sideboard.addAll(this.sideboard);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see forge.deck.DeckBase#newInstance(java.lang.String)
      */
     @Override
-    protected DeckBase newInstance(String name0) {
+    protected DeckBase newInstance(final String name0) {
         return new Deck(name0);
     }
 
-
+    /**
+     * From file.
+     *
+     * @param deckFile the deck file
+     * @return the deck
+     */
     public static Deck fromFile(final File deckFile) {
-        return fromSections(SectionUtil.parseSections(FileUtil.readFile(deckFile)));
+        return Deck.fromSections(SectionUtil.parseSections(FileUtil.readFile(deckFile)));
     }
 
-    public static Deck fromSections(Map<String, List<String>> sections) {
-        return fromSections(sections, false);
+    /**
+     * From sections.
+     *
+     * @param sections the sections
+     * @return the deck
+     */
+    public static Deck fromSections(final Map<String, List<String>> sections) {
+        return Deck.fromSections(sections, false);
     }
-    
-    public static Deck fromSections(Map<String, List<String>> sections, boolean canThrowExtendedErrors) {
-        if (sections == null || sections.isEmpty()) {
+
+    /**
+     * From sections.
+     *
+     * @param sections the sections
+     * @param canThrowExtendedErrors the can throw extended errors
+     * @return the deck
+     */
+    public static Deck fromSections(final Map<String, List<String>> sections, final boolean canThrowExtendedErrors) {
+        if ((sections == null) || sections.isEmpty()) {
             return null;
         }
 
-        DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections, canThrowExtendedErrors);
+        final DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections, canThrowExtendedErrors);
         if (dh == null) {
-           return null;
+            return null;
         }
 
         final Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());
 
-        d.getMain().set(readCardList(sections.get("main")));
-        d.getSideboard().set(readCardList(sections.get("sideboard")));
+        d.getMain().set(Deck.readCardList(sections.get("main")));
+        d.getSideboard().set(Deck.readCardList(sections.get("sideboard")));
 
         return d;
     }
@@ -213,37 +245,29 @@ public class Deck extends DeckBase implements Serializable, IHasName {
         return out;
     }
 
-
-
     /**
      * <p>
      * writeDeck.
      * </p>
-     * 
-     * @param d
-     *            a {@link forge.deck.Deck} object.
-     * @param out
-     *            a {@link java.io.BufferedWriter} object.
-     * @throws java.io.IOException
-     *             if any.
+     *
+     * @return the list
      */
     public List<String> save() {
-
 
         final List<String> out = new ArrayList<String>();
         out.add(String.format("[metadata]"));
 
-        out.add(String.format("%s=%s", DeckFileHeader.NAME, getName().replaceAll("\n", "")));
+        out.add(String.format("%s=%s", DeckFileHeader.NAME, this.getName().replaceAll("\n", "")));
         // these are optional
-        if (getComment() != null) {
-            out.add(String.format("%s=%s", DeckFileHeader.COMMENT, getComment().replaceAll("\n", "")));
+        if (this.getComment() != null) {
+            out.add(String.format("%s=%s", DeckFileHeader.COMMENT, this.getComment().replaceAll("\n", "")));
         }
 
         out.add(String.format("%s", "[main]"));
-        out.addAll(writeCardPool(getMain()));
+        out.addAll(Deck.writeCardPool(this.getMain()));
 
         out.add(String.format("%s", "[sideboard]"));
-        out.addAll(writeCardPool(getSideboard()));
+        out.addAll(Deck.writeCardPool(this.getSideboard()));
         return out;
     }
 }

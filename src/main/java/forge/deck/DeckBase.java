@@ -1,13 +1,31 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Nate
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package forge.deck;
 
 import java.io.Serializable;
+
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.IHasName;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public abstract class DeckBase implements IHasName, Serializable, Comparable<DeckBase> {
     private static final long serialVersionUID = -7538150536939660052L;
@@ -16,10 +34,18 @@ public abstract class DeckBase implements IHasName, Serializable, Comparable<Dec
     private final String name;
     private String comment = null;
 
-    public DeckBase(String name0) {
-        name = name0;
+    /**
+     * Instantiates a new deck base.
+     *
+     * @param name0 the name0
+     */
+    public DeckBase(final String name0) {
+        this.name = name0;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
     public int compareTo(final DeckBase d) {
         return this.getName().compareTo(d.getName());
@@ -35,13 +61,26 @@ public abstract class DeckBase implements IHasName, Serializable, Comparable<Dec
         return false;
     }
 
+    /* (non-Javadoc)
+     * @see forge.util.IHasName#getName()
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Gets the card pool.
+     *
+     * @return the card pool
+     */
     public abstract ItemPoolView<CardPrinted> getCardPool();
 
+    /**
+     * Sets the comment.
+     *
+     * @param comment the new comment
+     */
     public void setComment(final String comment) {
         this.comment = comment;
     }
@@ -57,20 +96,42 @@ public abstract class DeckBase implements IHasName, Serializable, Comparable<Dec
         return this.comment;
     }
 
+    /**
+     * New instance.
+     *
+     * @param name0 the name0
+     * @return the deck base
+     */
     protected abstract DeckBase newInstance(String name0);
 
-    protected void cloneFieldsTo(DeckBase clone) {
+    /**
+     * Clone fields to.
+     *
+     * @param clone the clone
+     */
+    protected void cloneFieldsTo(final DeckBase clone) {
         clone.comment = this.comment;
     }
 
-    public DeckBase copyTo(String name0) {
-        DeckBase obj = newInstance(name0);
-        cloneFieldsTo(obj);
+    /**
+     * Copy to.
+     *
+     * @param name0 the name0
+     * @return the deck base
+     */
+    public DeckBase copyTo(final String name0) {
+        final DeckBase obj = this.newInstance(name0);
+        this.cloneFieldsTo(obj);
         return obj;
     }
 
+    /**
+     * Gets the best file name.
+     *
+     * @return the best file name
+     */
     public final String getBestFileName() {
-        final char[] c = getName().toCharArray();
+        final char[] c = this.getName().toCharArray();
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; (i < c.length) && (i < 20); i++) {
             if (Character.isLetterOrDigit(c[i]) || (c[i] == '-')) {

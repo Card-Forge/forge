@@ -17,9 +17,9 @@
  */
 package forge.card;
 
-import forge.game.GameFormat;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import net.slightlymagic.maxmtg.Predicate;
+import forge.game.GameFormat;
 
 /**
  * <p>
@@ -66,7 +66,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param booster
      *            the booster
      */
-    public CardEdition(final int index, final String name, final String code, final String code2, final BoosterData booster) {
+    public CardEdition(final int index, final String name, final String code, final String code2,
+            final BoosterData booster) {
         this.code = code;
         this.code2 = code2;
         this.index = index;
@@ -321,7 +322,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
         /**
          * Gets the total.
-         *
+         * 
          * @return the total
          */
         public final int getTotal() {
@@ -346,15 +347,19 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         /** The Constant canMakeBooster. */
         public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
 
-
         private static class CanMakeBooster extends Predicate<CardEdition> {
             @Override
             public boolean isTrue(final CardEdition subject) {
                 return subject.canGenerateBooster();
             }
         }
-        
 
+        /**
+         * Checks if is legal in format.
+         *
+         * @param format the format
+         * @return the predicate
+         */
         public final static Predicate<CardEdition> isLegalInFormat(final GameFormat format) {
             return new LegalInFormat(format);
         }
