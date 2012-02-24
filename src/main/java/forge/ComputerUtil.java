@@ -1928,12 +1928,15 @@ public class ComputerUtil {
      * @return true, if successful
      */
     public static boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card) {
+        if (keywords.isEmpty()) {
+            return true;
+        }
         for (final String keyword : keywords) {
-            if (!ComputerUtil.isUsefulKeyword(keyword, card)) {
-                return false;
+            if (ComputerUtil.isUsefulKeyword(keyword, card)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**

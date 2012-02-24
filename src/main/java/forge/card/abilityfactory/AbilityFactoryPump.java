@@ -274,13 +274,13 @@ public class AbilityFactoryPump {
                     return false;
                 }
 
-                if (!ComputerUtil.containsUsefulKeyword(keywords, c)) {
-                    return false;
+                if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
+                        && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(c)) {
+                    return true;
                 }
 
-                if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
-                        && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(this)) {
-                    return true;
+                if (!ComputerUtil.containsUsefulKeyword(keywords, c)) {
+                    return false;
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?
@@ -538,8 +538,8 @@ public class AbilityFactoryPump {
         if (!mandatory
                 && !sa.isTrigger()
                 && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && !(this.abilityFactory.isCurse() && ((defense < 0) || !this
-                        .containsCombatRelevantKeyword(this.keywords)))) {
+                && !(this.abilityFactory.isCurse() && (defense < 0)) 
+                && !this.containsCombatRelevantKeyword(this.keywords)) {
             return false;
         }
 
@@ -566,7 +566,6 @@ public class AbilityFactoryPump {
         }
 
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
-
         if (AllZone.getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block
