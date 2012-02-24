@@ -1207,12 +1207,10 @@ public class AbilityFactoryAttach {
             if (tgt.canTgtPlayer()) {
                 final ArrayList<Player> players = new ArrayList<Player>();
 
-                // TODO Once Player's are gaining Protection we need to add a
-                // check here
-
-                players.add(AllZone.getComputerPlayer());
-                if (!tgt.canOnlyTgtOpponent()) {
-                    players.add(AllZone.getHumanPlayer());
+                for (Player player : AllZone.getPlayersInGame()) {
+                    if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source)) {
+                        players.add(player);
+                    }
                 }
 
                 final Object o = GuiUtils.getChoice(source + " - Select a player to attach to.", players.toArray());

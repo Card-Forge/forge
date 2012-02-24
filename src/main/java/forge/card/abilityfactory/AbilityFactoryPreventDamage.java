@@ -336,7 +336,7 @@ public class AbilityFactoryPreventDamage {
 
         } // Protect combatants
         else if (AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            if (tgt.canTgtPlayer() && CombatUtil.wouldLoseLife(AllZone.getCombat())
+            if (sa.canTarget(AllZone.getComputerPlayer()) && CombatUtil.wouldLoseLife(AllZone.getCombat())
                     && (CombatUtil.lifeInDanger(AllZone.getCombat()) || sa.isAbility())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
                 chance = true;

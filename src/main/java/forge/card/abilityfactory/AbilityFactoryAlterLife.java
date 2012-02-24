@@ -327,10 +327,10 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(AllZone.getHumanPlayer());
-            } else {
+            if (sa.canTarget(AllZone.getComputerPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
+            } else {
+                return false;
             }
         }
 
@@ -387,10 +387,12 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (tgt.canOnlyTgtOpponent()) {
+            if (sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            } else {
+            } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())){
                 tgt.addTarget(AllZone.getComputerPlayer());
+            } else {
+                return false;
             }
         }
 
@@ -717,7 +719,11 @@ public class AbilityFactoryAlterLife {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(AllZone.getHumanPlayer())) {
+                sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            } else {
+                return false;
+            }
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
@@ -769,7 +775,13 @@ public class AbilityFactoryAlterLife {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            tgt.addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(AllZone.getHumanPlayer())) {
+                tgt.addTarget(AllZone.getHumanPlayer());
+            } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
+                tgt.addTarget(AllZone.getComputerPlayer());
+            } else {
+                return false;
+            }
         }
 
         final Card source = sa.getSourceCard();
@@ -791,7 +803,7 @@ public class AbilityFactoryAlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (tgtPlayers.contains(AllZone.getComputerPlayer())) {
+        if (!mandatory && tgtPlayers.contains(AllZone.getComputerPlayer())) {
             // For cards like Foul Imp, ETB you lose life
             if ((amount + 3) > AllZone.getComputerPlayer().getLife()) {
                 return false;

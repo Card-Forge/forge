@@ -384,8 +384,8 @@ public class AbilityFactoryZoneAffecting {
             // ability is targeted
             tgt.resetTargets();
 
-            final boolean canTgtHuman = AllZone.getHumanPlayer().canBeTargetedBy(sa);
-            final boolean canTgtComp = AllZone.getComputerPlayer().canBeTargetedBy(sa);
+            final boolean canTgtHuman = sa.canTarget(AllZone.getHumanPlayer());
+            final boolean canTgtComp = sa.canTarget(AllZone.getComputerPlayer());
             boolean tgtHuman = false;
 
             if (!canTgtHuman && !canTgtComp) {
@@ -425,14 +425,16 @@ public class AbilityFactoryZoneAffecting {
                 }
             }
 
-            if (numCards == 0) {
+            if (numCards == 0 && !mandatory) {
                 return false;
             }
 
             if ((!tgtHuman || !canTgtHuman) && canTgtComp) {
                 tgt.addTarget(AllZone.getComputerPlayer());
-            } else {
+            } else if (mandatory) {
                 tgt.addTarget(AllZone.getHumanPlayer());
+            } else {
+                return false;
             }
         } else {
             // TODO: consider if human is the defined player
@@ -859,8 +861,8 @@ public class AbilityFactoryZoneAffecting {
 
         if (tgt != null) {
             tgt.resetTargets();
-            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
-                if (mandatory && AllZone.getComputerPlayer().canBeTargetedBy(sa)) {
+            if (!sa.canTarget(AllZone.getHumanPlayer())) {
+                if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
                     tgt.addTarget(AllZone.getComputerPlayer());
                     return true;
                 }
@@ -1444,7 +1446,9 @@ public class AbilityFactoryZoneAffecting {
         final boolean humanHasHand = AllZone.getHumanPlayer().getCardsIn(Constant.Zone.Hand).size() > 0;
 
         if (tgt != null) {
-            AbilityFactoryZoneAffecting.discardTargetAI(af, sa);
+            if (!AbilityFactoryZoneAffecting.discardTargetAI(af, sa)) {
+                return false;
+            }
         } else {
             // TODO: Add appropriate restrictions
             final ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
@@ -1531,7 +1535,7 @@ public class AbilityFactoryZoneAffecting {
             return false;
         }
         if (tgt != null) {
-            if (AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+            if (sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
                 return true;
             }
@@ -1577,7 +1581,9 @@ public class AbilityFactoryZoneAffecting {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             if (!AbilityFactoryZoneAffecting.discardTargetAI(af, sa)) {
-                if (mandatory && AllZone.getComputerPlayer().canBeTargetedBy(sa)) {
+                if (mandatory && sa.canTarget(AllZone.getHumanPlayer())) {
+                    tgt.addTarget(AllZone.getHumanPlayer());
+                } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
                     tgt.addTarget(AllZone.getComputerPlayer());
                 } else {
                     return false;

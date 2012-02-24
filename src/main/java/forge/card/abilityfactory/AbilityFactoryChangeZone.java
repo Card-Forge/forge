@@ -428,7 +428,7 @@ public final class AbilityFactoryChangeZone {
         if ((tgt != null) && tgt.canTgtPlayer()) {
             if (af.isCurse() && sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            } else if (sa.canTarget(AllZone.getComputerPlayer())){
+            } else if (!af.isCurse() && sa.canTarget(AllZone.getComputerPlayer())){
                 tgt.addTarget(AllZone.getComputerPlayer());
             }
             pDefined = tgt.getTargetPlayers();
@@ -497,8 +497,10 @@ public final class AbilityFactoryChangeZone {
         if ((tgt != null) && tgt.canTgtPlayer()) {
             if (af.isCurse() && sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            } else if (sa.canTarget(AllZone.getComputerPlayer())){
+            } else if (!af.isCurse() && sa.canTarget(AllZone.getComputerPlayer())){
                 tgt.addTarget(AllZone.getComputerPlayer());
+            } else {
+                return false;
             }
         }
 
