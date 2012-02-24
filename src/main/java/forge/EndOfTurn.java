@@ -275,23 +275,13 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
     private static void removeAttackedBlockedThisTurn() {
         // resets the status of attacked/blocked this turn
-        final Player player = AllZone.getPhaseHandler().getPlayerTurn();
-        final CardList list = AllZoneUtil.getCreaturesInPlay(player);
+        final CardList list = AllZoneUtil.getCreaturesInPlay();
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
-            if (c.getCreatureAttackedThisCombat()) {
-                c.setCreatureAttackedThisCombat(false);
-            }
-            if (c.getCreatureBlockedThisCombat()) {
-                c.setCreatureBlockedThisCombat(false);
-                // do not reset setCreatureAttackedThisTurn(), this appears to
-                // be combat specific
-            }
-
-            if (c.getCreatureGotBlockedThisCombat()) {
-                c.setCreatureGotBlockedThisCombat(false);
-            }
+            c.setCreatureAttackedThisCombat(false);
+            c.setCreatureBlockedThisCombat(false);
+            c.setCreatureGotBlockedThisCombat(false);
         }
     }
 

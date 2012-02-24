@@ -2766,7 +2766,8 @@ public class CombatUtil {
         } // flanking
 
         a.setCreatureGotBlockedThisCombat(true);
-
+        b.addBlockedThisTurn(a);
+        a.addBlockedByThisTurn(b);
     }
 
     /**

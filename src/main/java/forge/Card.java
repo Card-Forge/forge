@@ -363,6 +363,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Map<Card, Integer> receivedDamageFromThisTurn = new TreeMap<Card, Integer>();
     private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<Card, Integer>();
     private final Map<Card, Integer> assignedDamageMap = new TreeMap<Card, Integer>();
+    private CardList blockedThisTurn = new CardList();
+    private CardList blockedByThisTurn = new CardList();
 
     private boolean drawnThisTurn = false;
     private boolean tapped = false;
@@ -1071,6 +1073,42 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean getCreatureGotBlockedThisTurn() {
         return this.creatureGotBlockedThisTurn;
+    }
+
+    /**
+     * @return the blockedThisTurn
+     */
+    public CardList getBlockedThisTurn() {
+        return blockedThisTurn;
+    }
+
+    /**
+     * @param attacker the blockedThisTurn to set
+     */
+    public void addBlockedThisTurn(Card attacker) {
+        this.blockedThisTurn.add(attacker);
+    }
+
+    void clearBlockedThisTurn() {
+        this.blockedThisTurn.clear();
+    }
+
+    /**
+     * @return the blockedByThisTurn
+     */
+    public CardList getBlockedByThisTurn() {
+        return blockedByThisTurn;
+    }
+
+    /**
+     * @param blockedByThisTurn0 the blockedByThisTurn to set
+     */
+    public void addBlockedByThisTurn(Card blocker) {
+        this.blockedByThisTurn.add(blocker);
+    }
+
+    void clearBlockedByThisTurn() {
+        this.blockedByThisTurn.clear();
     }
 
     /**
@@ -7115,22 +7153,22 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isBlocking(source)) {
                 return false;
             }
-        } else if (property.startsWith("blockingHostRemembered")) {
+        } else if (property.startsWith("blockedRemembered")) {
             Card rememberedcard;
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     rememberedcard = (Card) o;
-                    if (!this.isBlocking(rememberedcard)) {
+                    if (!this.getBlockedThisTurn().contains(rememberedcard)) {
                         return false;
                     }
                 }
             }
-        } else if (property.startsWith("blockedByHostRemembered")) {
+        } else if (property.startsWith("blockedByRemembered")) {
             Card rememberedcard;
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     rememberedcard = (Card) o;
-                    if (!this.isBlockedBy(rememberedcard)) {
+                    if (!this.getBlockedByThisTurn().contains(rememberedcard)) {
                         return false;
                     }
                 }
