@@ -17,6 +17,7 @@
  */
 package forge.gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,6 +25,8 @@ import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,17 +36,24 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.braids.util.UtilFunctions;
 import forge.Card;
 import forge.Singletons;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.view.toolbox.FLabel;
+import forge.view.toolbox.FOverlay;
+import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -401,6 +411,55 @@ public final class GuiUtils {
             System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
         return ttf;
+    }
+
+    /** @return {@forge.view.toolbox.FOverlay} */
+    public static FOverlay startGameOverlay() {
+        final FOverlay overlay = GuiUtils.genericOverlay();
+        final int w = overlay.getWidth();
+        final int h = overlay.getHeight();
+        final int pnlW = 400;
+        final int pnlH = 300;
+
+        // Adds the "loading" panel to generic overlay container
+        // (which is preset with null layout and close button)
+        final FPanel pnl = new FPanel();
+        pnl.setCornerDiameter(0);
+        pnl.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+        pnl.setBounds(new Rectangle(((w - pnlW) / 2), ((h - pnlH) / 2), pnlW, pnlH));
+
+        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO)).build(),
+                "h 200px!, align center");
+        pnl.add(new FLabel.Builder().text("Loading new game...")
+                .fontScaleAuto(false).fontSize(22).build(), "h 40px!, align center");
+
+        overlay.add(pnl);
+
+        return overlay;
+    }
+
+    /** @return {@forge.view.toolbox.FOverlay} */
+    public static FOverlay genericOverlay() {
+        final FOverlay overlay = Singletons.getView().getOverlay();
+        final int w = overlay.getWidth();
+
+        final JButton btnCloseTopRight = new JButton("X");
+        btnCloseTopRight.setBounds(w - 25, 10, 15, 15);
+        btnCloseTopRight.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        btnCloseTopRight.setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT), 1));
+        btnCloseTopRight.setOpaque(false);
+        btnCloseTopRight.setBackground(new Color(0, 0, 0));
+        btnCloseTopRight.setFocusPainted(false);
+        btnCloseTopRight.addActionListener(new ActionListener() { @Override
+            public void actionPerformed(ActionEvent arg0) { overlay.hideOverlay(); } });
+
+        overlay.removeAll();
+        overlay.setLayout(null);
+        overlay.add(btnCloseTopRight);
+
+        return overlay;
     }
 
     /** Removes child components and closes overlay. */
