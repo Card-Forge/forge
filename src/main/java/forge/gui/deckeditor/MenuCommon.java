@@ -28,8 +28,9 @@ import javax.swing.SwingUtilities;
 
 import forge.CardList;
 import forge.Command;
+import forge.PlayerType;
 import forge.deck.Deck;
-import forge.deck.generate.GenerateConstructedDeck;
+import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.io.DeckSerializer;
 import forge.error.ErrorViewer;
 
@@ -95,11 +96,11 @@ public final class MenuCommon extends MenuBase<Deck> {
         }
 
         Deck genConstructed = new Deck();
-        genConstructed.getMain().add((new GenerateConstructedDeck()).generateDeck());
+        genConstructed.getMain().add((new Generate2ColorDeck("AI", "AI")).get2ColorDeck(60, PlayerType.HUMAN));
         getController().setModel(genConstructed);
     }
 
-    private final File getImportFilename() {
+    private File getImportFilename() {
         final JFileChooser chooser = new JFileChooser(MenuCommon.previousDirectory);
 
         chooser.addChoosableFileFilter(DeckSerializer.DCK_FILTER);
@@ -113,7 +114,7 @@ public final class MenuCommon extends MenuBase<Deck> {
         return null;
     } // openFileDialog()
 
-    private final void importDeck() {
+    private void importDeck() {
         final File file = this.getImportFilename();
         if (file == null) {
         } else if (file.getName().endsWith(".dck")) {
