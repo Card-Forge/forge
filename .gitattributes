@@ -9655,6 +9655,7 @@ res/cardsfolder/v/vengeful_rebirth.txt -text svneol=unset#text/plain
 res/cardsfolder/v/vengeful_vampire.txt -text
 res/cardsfolder/v/vengevine.txt svneol=native#text/plain
 res/cardsfolder/v/venom.txt -text
+res/cardsfolder/v/venomous_breath.txt -text
 res/cardsfolder/v/venomous_dragonfly.txt svneol=native#text/plain
 res/cardsfolder/v/venomous_fangs.txt -text
 res/cardsfolder/v/venomous_vines.txt svneol=native#text/plain
