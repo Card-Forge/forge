@@ -7,8 +7,7 @@ package forge.gui.home;
  */
 public enum EMenuGroup { /** */
     CONSTRUCTED, /** */
-    SEALED, /** */
-    DRAFT, /** */
+    LIMITED, /** */
     QUEST, /** */
     SETTINGS, /** */
     UTILITIES;
