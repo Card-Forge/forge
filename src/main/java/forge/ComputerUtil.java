@@ -1929,11 +1929,11 @@ public class ComputerUtil {
      */
     public static boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card) {
         for (final String keyword : keywords) {
-            if (ComputerUtil.isUsefulKeyword(keyword, card)) {
-                return true;
+            if (!ComputerUtil.isUsefulKeyword(keyword, card)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -1978,9 +1978,6 @@ public class ComputerUtil {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)) {
                 return false;
             }
-        } else if (keyword.endsWith("Shroud")) {
-            // TODO: check stack for spells and abilities
-            return false;
         } else if (keyword.startsWith("Rampage")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {

@@ -2272,8 +2272,10 @@ public class AbilityFactory {
         ArrayList<Object> objects = new ArrayList<Object>();
         final ArrayList<Object> threatened = new ArrayList<Object>();
         String saviourApi = "";
+        HashMap<String, String> saviourParams = null;
         if (saviourAf != null) {
             saviourApi = saviourAf.getAPI();
+            saviourParams = saviourAf.getMapParams();
         }
 
         if (topStack == null) {
@@ -2299,7 +2301,7 @@ public class AbilityFactory {
             final String threatApi = topAf.getAPI();
             final HashMap<String, String> threatParams = topAf.getMapParams();
 
-            // Lethal Damage => prevent damage/regeneration/bounce
+            // Lethal Damage => prevent damage/regeneration/bounce/shroud
             if (threatApi.equals("DealDamage") || threatApi.equals("DamageAll")) {
                 // If PredictDamage is >= Lethal Damage
                 final int dmg = AbilityFactory.calculateAmount(topStack.getSourceCard(),
@@ -2320,6 +2322,13 @@ public class AbilityFactory {
 
                         // don't use it on creatures that can't be regenerated
                         if (saviourApi.equals("Regenerate") && !c.canBeShielded()) {
+                            continue;
+                        }
+
+                        // give Shroud to targeted creatures
+                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW") 
+                                && (saviourParams.get("KW").endsWith("Shroud") 
+                                        || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
                         }
 
@@ -2345,10 +2354,10 @@ public class AbilityFactory {
                     }
                 }
             }
-            // Destroy => regeneration/bounce
+            // Destroy => regeneration/bounce/shroud
             else if ((threatApi.equals("Destroy") || threatApi.equals("DestroyAll"))
                     && ((saviourApi.equals("Regenerate") && !threatParams.containsKey("NoRegen")) || saviourApi
-                            .equals("ChangeZone"))) {
+                            .equals("ChangeZone") || saviourApi.equals("Pump"))) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
@@ -2359,6 +2368,13 @@ public class AbilityFactory {
 
                         // already regenerated
                         if (c.getShield() > 0) {
+                            continue;
+                        }
+
+                        // give Shroud to targeted creatures
+                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW") 
+                                && (saviourParams.get("KW").endsWith("Shroud") 
+                                        || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
                         }
 
@@ -2376,13 +2392,21 @@ public class AbilityFactory {
                     }
                 }
             }
-            // Exiling => bounce
+            // Exiling => bounce/shroud
             else if ((threatApi.equals("ChangeZone") || threatApi.equals("ChangeZoneAll"))
-                    && saviourApi.equals("ChangeZone") && threatParams.containsKey("Destination")
+                    && (saviourApi.equals("ChangeZone") || saviourApi.equals("Pump")) 
+                    && threatParams.containsKey("Destination")
                     && threatParams.get("Destination").equals("Exile")) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
+                        // give Shroud to targeted creatures
+                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW") 
+                                && (saviourParams.get("KW").endsWith("Shroud") 
+                                        || saviourParams.get("KW").endsWith("Hexproof"))) {
+                            continue;
+                        }
+
                         // don't bounce or blink a permanent that the human
                         // player owns or is a token
                         if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken())) {

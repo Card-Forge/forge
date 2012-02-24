@@ -278,6 +278,11 @@ public class AbilityFactoryPump {
                     return false;
                 }
 
+                if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
+                        && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(this)) {
+                    return true;
+                }
+
                 // will the creature attack (only relevant for sorcery speed)?
                 if (CardFactoryUtil.doesCreatureAttackAI(c)
                         && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
@@ -372,15 +377,16 @@ public class AbilityFactoryPump {
     } // getCurseCreatures()
 
     private boolean containsCombatRelevantKeyword(final ArrayList<String> keywords) {
-        boolean flag = false;
         for (final String keyword : keywords) {
             // since most keywords are combat relevant check for those that are
             // not
-            if (!keyword.equals("HIDDEN This card doesn't untap during your next untap step.")) {
-                flag = true;
+            if (keyword.equals("HIDDEN This card doesn't untap during your next untap step.")
+                    || keyword.endsWith("Shroud") || keyword.endsWith("Hexproof")) {
+                continue;
             }
+            return true;
         }
-        return flag;
+        return false;
     }
 
     /**
@@ -426,11 +432,9 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (AllZone.getStack().size() > 0) {
-            // TODO: pump something only if the top thing on the stack will kill
-            // it via damage
-            // or if top thing on stack will pump it/enchant it and I want to
-            // kill it
-            return false;
+            if (!this.keywords.contains("Shroud") && !this.keywords.contains("Hexproof")) {
+                return false;
+            }
         }
 
         final int activations = restrict.getNumberTurnActivations();
@@ -479,21 +483,12 @@ public class AbilityFactoryPump {
                 return false;
             }
 
-            final boolean givesKws = !this.keywords.get(0).equals("none");
-            String[] kwPump = { "none" };
-            if (givesKws) {
-                kwPump = this.keywords.toArray(new String[this.keywords.size()]);
-            }
-            final String[] keywords = kwPump;
-
             // when this happens we need to expand AI to consider if its ok for
             // everything?
             for (final Card card : cards) {
                 final Random r = MyRandom.getRandom();
 
-                // Don't add duplicate keywords
-                final boolean hKW = card.hasAnyKeyword(keywords);
-                if (givesKws && hKW) {
+                if (!ComputerUtil.containsUsefulKeyword(this.keywords, card)) {
                     return false;
                 }
 
@@ -501,18 +496,14 @@ public class AbilityFactoryPump {
                     if (card.getController().isComputer()) {
                         return false;
                     }
-                    if (!ComputerUtil.containsUsefulKeyword(this.keywords, card)) {
-                        return false;
-                    }
 
                     return (r.nextFloat() <= Math.pow(.6667, activations));
                 }
                 if (((card.getNetDefense() + defense) > 0) && (!card.hasAnyKeyword(this.keywords))) {
-                    if (card.hasSickness() && this.keywords.contains("Haste")) {
-                        return true;
-                    } else if (card.hasSickness() ^ this.keywords.contains("Haste")) {
-                        return false;
-                    } else if (this.hostCard.equals(card)) {
+                    if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
+                        && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
+                        return (r.nextFloat() <= Math.pow(.6667, activations));
+                    } else if (this.hostCard.equals(card) && !this.keywords.contains("Haste")) {
                         if (r.nextFloat() <= Math.pow(.6667, activations)) {
                             return CardFactoryUtil.doesCreatureAttackAI(card) && !sa.getPayCosts().getTap();
                         }
