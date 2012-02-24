@@ -6,10 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -25,7 +23,6 @@ import forge.view.home.StartButton;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FList;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FScrollPane;
@@ -34,7 +31,7 @@ import forge.view.toolbox.FSkin;
 /** 
  * Singleton instance of "Draft" submenu in "Constructed" group.
  */
-public enum VSubmenuDraft implements IVSubmenu {
+public enum VSubmenuSealed implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
@@ -45,11 +42,10 @@ public enum VSubmenuDraft implements IVSubmenu {
     /** */
     private final JPanel pnl            = new JPanel();
     private final StartButton btnStart  = new StartButton();
-    private final DeckLister lstHumanDecks = new DeckLister(GameType.Draft, cmdExit);
-    private final JList lstAI           = new FList();
+    private final DeckLister lstDecks   = new DeckLister(GameType.Draft, cmdExit);
     private final JLabel btnBuildDeck   = new FLabel.Builder()
         .fontScaleAuto(false).fontSize(16)
-        .opaque(true).hoverable(true).text("Start A New Draft").build();
+        .opaque(true).hoverable(true).text("Build a Sealed Deck").build();
     private final JLabel btnDirections = new FLabel.Builder()
         .fontScaleAuto(false).fontSize(16)
         .text("Click For Directions").fontAlign(SwingConstants.CENTER).build();
@@ -61,33 +57,21 @@ public enum VSubmenuDraft implements IVSubmenu {
     public void populate() {
         pnl.removeAll();
         pnl.setOpaque(false);
-        pnl.setLayout(new MigLayout("insets 0, gap 0, hidemode 2"));
+        pnl.setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
 
-        lstAI.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         btnStart.setEnabled(false);
 
-        // Layout
-        final JLabel lblHuman = new JLabel("Select your deck: ");
-        lblHuman.setFont(FSkin.getBoldFont(16));
-        lblHuman.setHorizontalAlignment(SwingConstants.CENTER);
-        lblHuman.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        pnl.add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
+        // Title
+        final JLabel lblTitle = new JLabel("Select a deck for yourself, or build a new one: ");
+        lblTitle.setFont(FSkin.getBoldFont(14));
+        lblTitle.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
-        final JLabel lblAI = new JLabel("Who will you play?");
-        lblAI.setFont(FSkin.getBoldFont(16));
-        lblAI.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAI.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        pnl.add(lblAI, "w 25%!, gap 0 0 2% 2%, wrap");
-
-        pnl.add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
-
-        pnl.add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
-
-        pnl.add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
-
-        pnl.add(btnDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
-
-        pnl.add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1, wrap");
+        // Add components
+        pnl.add(lblTitle, "w 100%!, gap 0 0 2% 2%");
+        pnl.add(new FScrollPane(lstDecks), "w 90%!, h 35%!, gap 5% 0 2% 2%");
+        pnl.add(btnBuildDeck, "w 50%!, h 5%!, gap 25% 0 0 0");
+        pnl.add(btnStart, "ax center, gaptop 5%");
     }
 
     /* (non-Javadoc)
@@ -121,14 +105,9 @@ public enum VSubmenuDraft implements IVSubmenu {
         return this.btnStart;
     }
 
-    /** @return {@link javax.swing.JList} */
-    public JList getLstAIDecks() {
-        return lstAI;
-    }
-
     /** @return {@link forge.view.toolbox.DeckLister} */
-    public DeckLister getLstHumanDecks() {
-        return lstHumanDecks;
+    public DeckLister getLstDecks() {
+        return lstDecks;
     }
 
     /** */
@@ -136,20 +115,13 @@ public enum VSubmenuDraft implements IVSubmenu {
         final FOverlay overlay = GuiUtils.genericOverlay();
         final int w = overlay.getWidth();
 
-        final String instructions = "BOOSTER DRAFT MODE INSTRUCTIONS"
+        final String instructions = "SEALED DECK MODE INSTRUCTIONS"
                 + "\r\n\r\n"
-                + "In a booster draft, several players (usually eight) are seated "
-                + "around a table and each player is given three booster packs."
+                + "In Sealed Deck tournaments, each player receives six booster packs"
+                + "from which to build their deck."
                 + "\r\n\r\n"
-                + "Each player opens a pack, selects a card from it and passes the remaining "
-                + "cards to his or her left. Each player then selects one of the 14 remaining "
-                + "cards from the pack that was just passed to him or her, and passes the "
-                + "remaining cards to the left again. This continues until all of the cards "
-                + "are depleted. The process is repeated with the second and third packs, "
-                + "except that the cards are passed to the right in the second pack."
-                + "\r\n\r\n"
-                + "Players then build decks out of any of the cards that they selected "
-                + "during the drafting and add as many basic lands as they want."
+                + "Depending on which sets are to be used in a sealed deck event, "
+                + "the distribution of packs can vary greatly."
                 + "\r\n\r\n"
                 + "Credit: Wikipedia";
 
@@ -165,14 +137,14 @@ public enum VSubmenuDraft implements IVSubmenu {
         tpnDirections.setText(instructions);
 
         final StyledDocument doc = tpnDirections.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
+        final SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
         final JButton btnCloseBig = new FButton("OK");
         btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
         btnCloseBig.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(ActionEvent arg0) { overlay.hideOverlay(); } });
+            public void actionPerformed(final ActionEvent arg0) { overlay.hideOverlay(); } });
 
         final FPanel pnl = new FPanel();
         pnl.setCornerDiameter(0);

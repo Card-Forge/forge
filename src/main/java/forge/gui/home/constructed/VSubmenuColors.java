@@ -47,7 +47,7 @@ public enum VSubmenuColors implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroup() {
-        return null;
+        return EMenuGroup.CONSTRUCTED;
     }
 
     /* (non-Javadoc)

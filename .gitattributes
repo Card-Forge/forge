@@ -11340,9 +11340,17 @@ src/main/java/forge/gui/home/constructed/VSubmenuCustom.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuQuestEvents.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuThemes.java -text
 src/main/java/forge/gui/home/draft/CSubmenuDraft.java -text
+src/main/java/forge/gui/home/draft/CSubmenuSealed.java -text
 src/main/java/forge/gui/home/draft/VSubmenuDraft.java -text
+src/main/java/forge/gui/home/draft/VSubmenuSealed.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
 src/main/java/forge/gui/home/quest/VSubmenuDuels.java -text
+src/main/java/forge/gui/home/settings/CSubmenuAvatars.java -text
+src/main/java/forge/gui/home/settings/CSubmenuPreferences.java -text
+src/main/java/forge/gui/home/settings/VSubmenuAvatars.java -text
+src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text
+src/main/java/forge/gui/home/utilities/CSubmenuDeckEditor.java -text
+src/main/java/forge/gui/home/utilities/VSubmenuDeckEditor.java -text
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text

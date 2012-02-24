@@ -45,7 +45,7 @@ public enum VSubmenuCustom implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroup() {
-        return null;
+        return EMenuGroup.CONSTRUCTED;
     }
 
     /* (non-Javadoc)
