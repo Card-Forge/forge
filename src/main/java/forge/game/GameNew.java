@@ -308,7 +308,7 @@ public class GameNew {
                 Singletons.getModel().getGameAction().moveTo(Zone.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
-            JOptionPane.showConfirmDialog(null, msg, "Ante", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showMessageDialog(null, msg, "Ante", JOptionPane.INFORMATION_MESSAGE);
         }
 
         for (int i = 0; i < 7; i++) {
