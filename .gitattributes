@@ -3517,6 +3517,7 @@ res/cardsfolder/g/glowrider.txt svneol=native#text/plain
 res/cardsfolder/g/gluttonous_slime.txt svneol=native#text/plain
 res/cardsfolder/g/gluttonous_zombie.txt svneol=native#text/plain
 res/cardsfolder/g/glyph_of_destruction.txt svneol=native#text/plain
+res/cardsfolder/g/glyph_of_doom.txt -text
 res/cardsfolder/g/glyph_of_life.txt -text
 res/cardsfolder/g/gnarled_effigy.txt svneol=native#text/plain
 res/cardsfolder/g/gnarled_mass.txt svneol=native#text/plain
