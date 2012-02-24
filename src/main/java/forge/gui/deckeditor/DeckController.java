@@ -25,7 +25,7 @@ import net.slightlymagic.braids.util.lambda.Lambda0;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.DeckBase;
-import forge.util.IFolderMap;
+import forge.util.IStorage;
 
 /**
  * TODO: Write javadoc for this type.
@@ -37,7 +37,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
     private T model;
     private boolean saved;
     private boolean modelInStore;
-    private final IFolderMap<T> folder;
+    private final IStorage<T> folder;
     private final DeckEditorBase<?, T> view;
     private final Lambda0<T> newModelCreator;
 
@@ -48,7 +48,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * @param view0 the view0
      * @param newModelCreator0 the new model creator0
      */
-    public DeckController(final IFolderMap<T> folder0, final DeckEditorBase<?, T> view0,
+    public DeckController(final IStorage<T> folder0, final DeckEditorBase<?, T> view0,
             final Lambda0<T> newModelCreator0) {
         this.folder = folder0;
         this.view = view0;

@@ -26,7 +26,7 @@ import forge.game.GameNew;
 import forge.game.GameType;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestEvent;
-import forge.util.IFolderMap;
+import forge.util.IStorage;
 import forge.view.home.ViewConstructed;
 
 /** 
@@ -322,7 +322,7 @@ public class ControlConstructed {
         final List<String> customNames = new ArrayList<String>();
         customNames.clear();
 
-        final IFolderMap<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
+        final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
         for (final Deck d : allDecks) { customNames.add(d.getName()); }
 
         return oa2sa(customNames.toArray());

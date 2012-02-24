@@ -12,7 +12,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.home.ICSubmenu;
-import forge.util.IFolderMap;
+import forge.util.IStorage;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -68,7 +68,7 @@ public enum CSubmenuCustom implements ICSubmenu {
     @Override
     public void update() {
         final List<String> customNames = new ArrayList<String>();
-        final IFolderMap<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
+        final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
         for (final Deck d : allDecks) { customNames.add(d.getName()); }
 
         for (JList lst : VSubmenuCustom.SINGLETON_INSTANCE.getLists()) {

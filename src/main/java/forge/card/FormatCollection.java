@@ -21,13 +21,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import forge.game.GameFormat;
-import forge.util.FolderMapView;
+import forge.util.StorageView;
 import forge.util.StorageReaderFile;
 
 /**
  * The Class FormatUtils.
  */
-public final class FormatCollection extends FolderMapView<GameFormat> {
+public final class FormatCollection extends StorageView<GameFormat> {
 
 
 

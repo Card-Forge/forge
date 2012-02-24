@@ -34,9 +34,9 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
-import forge.util.FolderMapView;
-import forge.util.IFolderMap;
-import forge.util.IFolderMapView;
+import forge.util.StorageView;
+import forge.util.IStorage;
+import forge.util.IStorageView;
 import forge.util.MyRandom;
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
@@ -118,7 +118,7 @@ public final class QuestData {
     /** The my decks. */
     private final HashMap<String, Deck> myDecks = new HashMap<String, Deck>();
 
-    private transient IFolderMap<Deck> decks;
+    private transient IStorage<Deck> decks;
 
     // Cards associated with quest
     /** The card pool. */
@@ -169,7 +169,7 @@ public final class QuestData {
     private transient QuestUtilCards myCards;
 
     // This is used by shop. Had no idea where else to place this
-    private static transient IFolderMapView<PreconDeck> preconManager = new FolderMapView<PreconDeck>(new PreconReader(
+    private static transient IStorageView<PreconDeck> preconManager = new StorageView<PreconDeck>(new PreconReader(
             ForgeProps.getFile(NewConstants.Quest.PRECONS)));
 
     /** The Constant RANK_TITLES. */
@@ -660,7 +660,7 @@ public final class QuestData {
      * 
      * @return the myDecks
      */
-    public IFolderMap<Deck> getMyDecks() {
+    public IStorage<Deck> getMyDecks() {
         return this.decks;
     }
 
@@ -669,7 +669,7 @@ public final class QuestData {
      *
      * @return QuestPreconManager
      */
-    public static IFolderMapView<PreconDeck> getPrecons() {
+    public static IStorageView<PreconDeck> getPrecons() {
         return QuestData.preconManager;
     }
 

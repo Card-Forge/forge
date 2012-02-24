@@ -29,7 +29,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
-import forge.util.IFolderMapView;
+import forge.util.IStorageView;
 
 /**
  * <p>
@@ -88,7 +88,7 @@ public class CustomLimited extends DeckBase {
      * @param cubes the cubes
      * @return the custom limited
      */
-    public static CustomLimited parse(final List<String> dfData, final IFolderMapView<Deck> cubes) {
+    public static CustomLimited parse(final List<String> dfData, final IStorageView<Deck> cubes) {
 
         final FileSection data = FileSection.parse(dfData, ":");
 

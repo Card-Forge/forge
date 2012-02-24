@@ -23,13 +23,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 import forge.deck.Deck;
-import forge.util.IFolderMap;
+import forge.util.IStorage;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public class QuestDeckMap implements IFolderMap<Deck> {
+public class QuestDeckMap implements IStorage<Deck> {
 
     /**
      * Instantiates a new quest deck map.
@@ -113,7 +113,7 @@ public class QuestDeckMap implements IFolderMap<Deck> {
      * @see forge.util.IFolderMapView#any(java.lang.String)
      */
     @Override
-    public boolean any(String name) {
+    public boolean contains(String name) {
         return map.containsKey(name);
     }
 

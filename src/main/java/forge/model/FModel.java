@@ -49,9 +49,9 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestEventManager;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
-import forge.util.FolderMapView;
+import forge.util.StorageView;
 import forge.util.HttpUtil;
-import forge.util.IFolderMapView;
+import forge.util.IStorageView;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTabber;
 import forge.view.toolbox.FSkin;
@@ -85,8 +85,8 @@ public enum FModel {
 
     private final EditionCollection editions;
     private final FormatCollection formats;
-    private final IFolderMapView<BoosterData> boosters;
-    private final FolderMapView<CardBlock> blocks;
+    private final IStorageView<BoosterData> boosters;
+    private final StorageView<CardBlock> blocks;
     
     // have to implement lazy initialization - at the moment of FModel.ctor()
     // CardDb is not ready yet.
@@ -133,8 +133,8 @@ public enum FModel {
         this.questEventManager = new QuestEventManager();
         this.editions = new EditionCollection();
         this.formats = new FormatCollection("res/blockdata/formats.txt");
-        this.boosters = new FolderMapView<BoosterData>(new BoosterData.Reader("res/blockdata/boosters.txt"));
-        this.blocks = new FolderMapView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
+        this.boosters = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/boosters.txt"));
+        this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         
         
         // TODO this single setting from preferences should not be here, or,
@@ -166,7 +166,7 @@ public enum FModel {
         FModel.loadDynamicGamedata();
     }
 
-    public final IFolderMapView<BoosterData> getBoosters() {
+    public final IStorageView<BoosterData> getBoosters() {
         return boosters;
     }
 
@@ -517,7 +517,7 @@ public enum FModel {
         }
     }
 
-    public FolderMapView<CardBlock> getBlocks() {
+    public StorageView<CardBlock> getBlocks() {
         return blocks;
     }
 

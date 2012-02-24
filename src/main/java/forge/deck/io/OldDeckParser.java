@@ -34,7 +34,7 @@ import forge.PlayerType;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.FileUtil;
-import forge.util.IFolderMap;
+import forge.util.IStorage;
 import forge.util.SectionUtil;
 
 /**
@@ -60,8 +60,8 @@ public class OldDeckParser {
      * @param sealed2 the sealed2
      * @param cube2 the cube2
      */
-    public OldDeckParser(final File file, final IFolderMap<Deck> constructed2, final IFolderMap<DeckGroup> draft2,
-            final IFolderMap<DeckGroup> sealed2, final IFolderMap<Deck> cube2) {
+    public OldDeckParser(final File file, final IStorage<Deck> constructed2, final IStorage<DeckGroup> draft2,
+            final IStorage<DeckGroup> sealed2, final IStorage<Deck> cube2) {
         this.deckDir = file;
         this.sealed = sealed2;
         this.constructed = constructed2;
@@ -74,7 +74,7 @@ public class OldDeckParser {
      *
      * @return the sealed
      */
-    protected final IFolderMap<DeckGroup> getSealed() {
+    protected final IStorage<DeckGroup> getSealed() {
         return this.sealed;
     }
 
@@ -83,7 +83,7 @@ public class OldDeckParser {
      *
      * @return the constructed
      */
-    protected final IFolderMap<Deck> getConstructed() {
+    protected final IStorage<Deck> getConstructed() {
         return this.constructed;
     }
 
@@ -92,7 +92,7 @@ public class OldDeckParser {
      *
      * @return the draft
      */
-    protected final IFolderMap<DeckGroup> getDraft() {
+    protected final IStorage<DeckGroup> getDraft() {
         return this.draft;
     }
 
@@ -101,7 +101,7 @@ public class OldDeckParser {
      *
      * @return the cube
      */
-    protected final IFolderMap<Deck> getCube() {
+    protected final IStorage<Deck> getCube() {
         return this.cube;
     }
 
@@ -114,10 +114,10 @@ public class OldDeckParser {
         return this.deckDir;
     }
 
-    private final IFolderMap<DeckGroup> sealed;
-    private final IFolderMap<Deck> constructed;
-    private final IFolderMap<DeckGroup> draft;
-    private final IFolderMap<Deck> cube;
+    private final IStorage<DeckGroup> sealed;
+    private final IStorage<Deck> constructed;
+    private final IStorage<DeckGroup> draft;
+    private final IStorage<Deck> cube;
     private final File deckDir;
 
     /**

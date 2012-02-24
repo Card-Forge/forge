@@ -22,18 +22,18 @@ import java.io.File;
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.OldDeckParser;
-import forge.util.FolderMap;
-import forge.util.IFolderMap;
+import forge.util.StorageImmediatelySerialized;
+import forge.util.IStorage;
 
 /**
  * Holds editable maps of decks saved to disk. Adding or removing items to(from)
  * such map turns into immediate file update
  */
 public class CardCollections {
-    private final IFolderMap<Deck> constructed;
-    private final IFolderMap<DeckGroup> draft;
-    private final IFolderMap<DeckGroup> sealed;
-    private final IFolderMap<Deck> cube;
+    private final IStorage<Deck> constructed;
+    private final IStorage<DeckGroup> draft;
+    private final IStorage<DeckGroup> sealed;
+    private final IStorage<Deck> cube;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -41,10 +41,10 @@ public class CardCollections {
      * @param file the file
      */
     public CardCollections(final File file) {
-        this.constructed = new FolderMap<Deck>(new DeckSerializer(new File(file, "constructed")));
-        this.draft = new FolderMap<DeckGroup>(new DeckGroupSerializer(new File(file, "draft")));
-        this.sealed = new FolderMap<DeckGroup>(new DeckGroupSerializer(new File(file, "sealed")));
-        this.cube = new FolderMap<Deck>(new DeckSerializer(new File(file, "cube")));
+        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "constructed")));
+        this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "draft")));
+        this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "sealed")));
+        this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "cube")));
 
         // remove this after most people have been switched to new layout
         final OldDeckParser oldParser = new OldDeckParser(file, this.constructed, this.draft, this.sealed, this.cube);
@@ -56,7 +56,7 @@ public class CardCollections {
      *
      * @return the constructed
      */
-    public final IFolderMap<Deck> getConstructed() {
+    public final IStorage<Deck> getConstructed() {
         return this.constructed;
     }
 
@@ -65,7 +65,7 @@ public class CardCollections {
      *
      * @return the draft
      */
-    public final IFolderMap<DeckGroup> getDraft() {
+    public final IStorage<DeckGroup> getDraft() {
         return this.draft;
     }
 
@@ -74,7 +74,7 @@ public class CardCollections {
      *
      * @return the cubes
      */
-    public final IFolderMap<Deck> getCubes() {
+    public final IStorage<Deck> getCubes() {
         return this.cube;
     }
 
@@ -83,7 +83,7 @@ public class CardCollections {
      *
      * @return the sealed
      */
-    public IFolderMap<DeckGroup> getSealed() {
+    public IStorage<DeckGroup> getSealed() {
         return this.sealed;
     }
 

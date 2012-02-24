@@ -49,7 +49,7 @@ import forge.gui.deckeditor.elements.TableColumnInfo;
 import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
-import forge.util.IFolderMap;
+import forge.util.IStorage;
 
 /**
  * <p>
@@ -148,7 +148,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
      *
      * @param deckMap the deck map
      */
-    public DeckEditorLimited(final IFolderMap<DeckGroup> deckMap) {
+    public DeckEditorLimited(final IStorage<DeckGroup> deckMap) {
         try {
             this.setFilterBoxes(new FilterCheckBoxes(true));
             this.setTopTableWithCards(new TableView<CardPrinted>("Avaliable Cards", true, true, CardPrinted.class));

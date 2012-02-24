@@ -22,7 +22,7 @@ package forge.util;
  *
  * @param <T> the generic type
  */
-public interface IFolderMap<T extends IHasName> extends IFolderMapView<T> {
+public interface IStorage<T extends IHasName> extends IStorageView<T> {
 
     /**
      * <p>

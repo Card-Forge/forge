@@ -27,7 +27,7 @@ package forge.util;
  * @author Forge
  * @version $Id$
  */
-public class FolderMap<T extends IHasName> extends FolderMapView<T> implements IFolderMap<T> {
+public class StorageImmediatelySerialized<T extends IHasName> extends StorageView<T> implements IStorage<T> {
 
     private final IItemSerializer<T> serializer;
 
@@ -38,7 +38,7 @@ public class FolderMap<T extends IHasName> extends FolderMapView<T> implements I
      *
      * @param io the io
      */
-    public FolderMap(final IItemSerializer<T> io) {
+    public StorageImmediatelySerialized(final IItemSerializer<T> io) {
         super(io);
         this.serializer = io;
     }

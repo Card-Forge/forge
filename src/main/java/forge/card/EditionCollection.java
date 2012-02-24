@@ -20,9 +20,9 @@ package forge.card;
 import java.util.Map;
 import java.util.TreeMap;
 
-import forge.util.FolderMapView;
+import forge.util.StorageView;
 
-public final class EditionCollection extends FolderMapView<CardEdition> {
+public final class EditionCollection extends StorageView<CardEdition> {
 
     private final Map<String,CardEdition> aliasToEdition = new TreeMap<String, CardEdition>();
 

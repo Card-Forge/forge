@@ -24,7 +24,7 @@ import java.util.Collection;
  *
  * @param <T> the generic type
  */
-public interface IFolderMapView<T> extends Iterable<T> {
+public interface IStorageView<T> extends Iterable<T> {
 
     /**
      * <p>
@@ -43,6 +43,6 @@ public interface IFolderMapView<T> extends Iterable<T> {
      */
     Collection<String> getNames();
     
-    boolean any(final String name);
+    boolean contains(final String name);
 
 }
