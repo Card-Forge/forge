@@ -275,11 +275,16 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @return the card
      */
-    public Card toForgeCard() { 
+    public Card toForgeCard() {
         return toForgeCard(null);
     }
-    
-    
+
+    /**
+     * To forge card.
+     *
+     * @param owner the owner
+     * @return the card
+     */
     public Card toForgeCard(Player owner) {
         final Card c = AllZone.getCardFactory().getCard(this.name, owner);
         if (c != null) {

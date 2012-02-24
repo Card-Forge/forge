@@ -25,7 +25,6 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.item.CardPrinted.Predicates;
 import forge.util.MyRandom;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
@@ -157,10 +156,30 @@ public final class BoosterUtils {
         return result;
     }
 
+    /**
+     * Generate distinct cards.
+     * 
+     * @param filter
+     *            the filter
+     * @param cntNeeded
+     *            the cnt needed
+     * @return the list
+     */
     public static List<CardPrinted> generateDistinctCards(final Predicate<CardPrinted> filter, final int cntNeeded) {
-        return generateDistinctCards(CardDb.instance().getAllCards(), filter, cntNeeded);
-    }    
-    
+        return BoosterUtils.generateDistinctCards(CardDb.instance().getAllCards(), filter, cntNeeded);
+    }
+
+    /**
+     * Generate distinct cards.
+     * 
+     * @param source
+     *            the source
+     * @param filter
+     *            the filter
+     * @param cntNeeded
+     *            the cnt needed
+     * @return the list
+     */
     public static List<CardPrinted> generateDistinctCards(final Iterable<CardPrinted> source,
             final Predicate<CardPrinted> filter, final int cntNeeded) {
         final ArrayList<CardPrinted> result = new ArrayList<CardPrinted>();
@@ -196,15 +215,14 @@ public final class BoosterUtils {
      */
     public static List<CardPrinted> generateCardRewardList(final String s) {
         final String[] temp = s.split(" ");
-    
+
         final int qty = Integer.parseInt(temp[0]);
         // Determine rarity
         Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_UNCOMMON;
         if (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")) {
             rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
         }
-    
-        
+
         // Determine color ("random" defaults to null color)
         Predicate<CardRules> col = Predicate.getTrue(CardRules.class);
         if (temp[1].equalsIgnoreCase("black")) {
@@ -222,7 +240,7 @@ public final class BoosterUtils {
         } else if (temp[1].equalsIgnoreCase("white")) {
             col = CardRules.Predicates.Presets.IS_WHITE;
         }
-    
+
         return BoosterUtils.generateDistinctCards(Predicate.and(rar, col, CardPrinted.FN_GET_RULES), qty);
     }
 }

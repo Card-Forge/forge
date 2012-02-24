@@ -17,7 +17,6 @@ import forge.GameAction;
 import forge.PhaseHandler;
 import forge.Player;
 import forge.Singletons;
-import forge.card.cardfactory.CardFactoryInterface;
 import forge.control.FControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;

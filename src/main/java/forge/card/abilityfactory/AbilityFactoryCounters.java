@@ -134,7 +134,7 @@ public class AbilityFactoryCounters {
             public void resolve() {
                 AbilityFactoryCounters.putResolve(af, this);
             }
-            
+
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {

@@ -230,7 +230,7 @@ public class AbilityFactoryTurns {
     private static boolean addTurnCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         return AbilityFactoryTurns.addTurnTriggerAINoCost(af, sa, false);
     }
-    
+
     /**
      * <p>
      * addTurnTriggerAI.

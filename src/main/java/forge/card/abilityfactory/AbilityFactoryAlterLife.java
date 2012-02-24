@@ -389,7 +389,7 @@ public class AbilityFactoryAlterLife {
             tgt.resetTargets();
             if (sa.canTarget(AllZone.getHumanPlayer())) {
                 tgt.addTarget(AllZone.getHumanPlayer());
-            } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())){
+            } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
             } else {
                 return false;

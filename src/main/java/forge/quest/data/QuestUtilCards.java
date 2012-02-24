@@ -26,7 +26,6 @@ import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
-import forge.card.CardRarity;
 import forge.card.FormatUtils;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
