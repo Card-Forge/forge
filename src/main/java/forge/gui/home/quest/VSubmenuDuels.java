@@ -1,5 +1,7 @@
 package forge.gui.home.quest;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -18,10 +20,7 @@ import forge.view.toolbox.FPanel;
 import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+/**  */
 public enum VSubmenuDuels implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
@@ -29,28 +28,37 @@ public enum VSubmenuDuels implements IVSubmenu {
     //========== INSTANTIATION
     private final JPanel pnl        = new JPanel();
     private final JPanel pnlDuels   = new JPanel();
+    private final FPanel pnlTitle   = new FPanel();
+    private final JPanel pnlStats   = new JPanel();
+    private final JPanel pnlStart   = new JPanel();
+
     private final JButton btnStart  = new StartButton();
     private final JComboBox cbxPet  = new JComboBox();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
     private final JCheckBox cbZep   = new FCheckBox("Launch Zeppelin");
 
     private final FLabel lblLife      = new FLabel.Builder()
-        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE)).build();
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE))
+        .fontScaleAuto(false).fontSize(15).build();
     private final FLabel lblCredits   = new FLabel.Builder()
-        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK)).build();
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK))
+        .fontScaleAuto(false).fontSize(15).build();
     private final FLabel lblWins      = new FLabel.Builder()
-        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUS)).build();
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUS))
+        .fontScaleAuto(false).fontSize(15).build();
     private final FLabel lblLosses    = new FLabel.Builder()
-        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MINUS)).build();
-    private final FLabel lblNextChallengeInWins = new FLabel.Builder()
-        .text("No challenges available.").build();
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MINUS))
+        .fontScaleAuto(false).fontSize(15).build();
     private final FLabel lblWinStreak = new FLabel.Builder()
-        .build();
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUSPLUS))
+        .fontScaleAuto(false).fontSize(15).build();
     private final FLabel lblTitle     = new FLabel.Builder()
         .text("Title Hasn't Been Set Yet").fontAlign(SwingConstants.CENTER)
+        .fontScaleAuto(false).fontSize(16).build();
+    private final FLabel lblNextChallengeInWins = new FLabel.Builder()
         .fontScaleAuto(false).fontSize(15).build();
     private final FLabel btnCurrentDeck = new FLabel.Builder()
-        .opaque(true).hoverable(true).build();
+        .fontScaleAuto(false).fontSize(15).opaque(true).hoverable(true).build();
     private final FLabel btnBazaar = new FLabel.Builder()
         .selectable(true).opaque(true).hoverable(true).text("Bazaar")
         .fontScaleAuto(false).fontSize(14).tooltip("Peruse the Bazaar").build();
@@ -79,29 +87,60 @@ public enum VSubmenuDuels implements IVSubmenu {
      */
     @Override
     public void populate() {
-        final FPanel pnlTitle = new FPanel();
         pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
         pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitle.add(lblTitle, "w 100%, h 100%, gap 0 0 0 0");
 
-        final JPanel pnlStats = new JPanel();
-        pnlStats.setOpaque(false);
-        populateStats(pnlStats);
+        populateStats();
+        populateStart();
+        btnStart.setEnabled(false);
 
         final FScrollPane scrDuels = new FScrollPane(pnlDuels,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrDuels.setBorder(null);
         pnlDuels.setOpaque(false);
         pnlDuels.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
         pnl.setOpaque(false);
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnl.add(pnlTitle, "w 94%!, h 30px!, gap 3% 0 20px 20px");
+        pnl.add(pnlTitle, "w 94%!, h 30px!, gap 3% 0 15px 15px");
         pnl.add(pnlStats, "w 94%!, gap 3% 0 0 20px");
-        pnl.add(scrDuels, "w 94%!, h 50%!, gap 3% 0 0 10px");
-        pnl.add(cbxPet, "ax center, gap 3% 0 5px 0");
-        pnl.add(cbPlant, "ax center, gap 3% 0 5px 0");
-        pnl.add(cbZep, "ax center, gap 3% 0 5px 0");
-        pnl.add(btnStart, "ax center, gap 3% 0 5px 10px");
+        pnl.add(scrDuels, "w 94%!, pushy, growy, gap 3% 0 0 0");
+        pnl.add(pnlStart, "w 94%, gap 3% 0 15px 5%");
+    }
+
+    /** */
+    public void setCurrentDeckStatus() {
+        final JLabel btnCurrentDeck = VSubmenuDuels.SINGLETON_INSTANCE.getBtnCurrentDeck();
+        if (SubmenuQuestUtil.getCurrentDeck() == null) {
+            btnCurrentDeck.setBackground(Color.red.darker());
+            btnCurrentDeck.setText("  Build, then select a deck in the \"Decks\" submenu.  ");
+        }
+        else {
+            btnCurrentDeck.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+            btnCurrentDeck.setText("Current deck: "
+                    + SubmenuQuestUtil.getCurrentDeck().getName());
+        }
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlDuels() {
+        return pnlDuels;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public FPanel getPnlTitle() {
+        return pnlTitle;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlStats() {
+        return pnlStats;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JPanel getPnlStart() {
+        return pnlStart;
     }
 
     /** @return {@link javax.swing.JLabel} */
@@ -173,31 +212,33 @@ public enum VSubmenuDuels implements IVSubmenu {
         return btnStart;
     }
 
-    /** Stats panel has different layout depending on classic/fantasy quest. */
-    private void populateStats(final JPanel pnl0) {
-        pnl0.removeAll();
+    private void populateStats() {
+        final String constraints = "w 23%!, h 35px!, gap 1% 1% 5px 5px";
+        pnlStats.removeAll();
+        pnlStats.setOpaque(false);
+        pnlStats.setLayout(new MigLayout("insets 0, gap 0, hidemode 0"));
+        pnlStats.add(btnBazaar, constraints);
+        pnlStats.add(lblWins, constraints);
+        pnlStats.add(lblLosses, constraints);
+        pnlStats.add(lblLife, constraints + ", wrap");
 
-        if (true) { //(AllZone.getQuestData().isFantasy()) {
-            pnl0.setLayout(new MigLayout("insets 0, gap 0"));
-            pnl0.add(btnBazaar,     "w 15%!, h 70px!, gap 0 4% 10px 10px, span 1 2");
-            pnl0.add(lblWins,       "w 30%!, h 25px!, gap 0 2% 12px 0");
-            pnl0.add(lblLosses,     "w 30%!, h 25px!, gap 0 4% 12px 0");
-            pnl0.add(btnSpellShop,   "w 14.5%!, h 70px!, gap 0 0 10px 10px, span 1 2, wrap");
-            pnl0.add(lblCredits,    "w 30%!, h 25px!, gap 0 2% 0 0");
-            pnl0.add(lblLife,       "w 30%!, h 25px!, gap 0 4% 0 0 0, wrap");
-            pnl0.add(lblWinStreak, "h 20px!, align center, span 4 1, wrap");
-            pnl0.add(lblNextChallengeInWins, "h 20px!, align center, span 4 1, wrap");
-            pnl0.add(btnCurrentDeck, "w 40%!, h 26px!, align center, span 4 1, gap 0 0 0 5px");
-        }
-        else {
-            pnl0.setLayout(new MigLayout("insets 0, gap 0, align center"));
-            pnl0.add(lblWins,       "w 150px!, h 25px!, gap 0 50px 5px 5px, align center");
-            pnl0.add(lblCredits,    "w 150px!, h 25px!, gap 0 0 5px 5px, align center, wrap");
-            pnl0.add(lblLosses,     "w 150px!, h 25px!, gap 0 50px 0 5px, align center");
-            pnl0.add(btnSpellShop,  "w 150px!, h 25px!, gap 0 0 0 5px, align center, wrap");
-            pnl0.add(lblWinStreak, "h 20px!, align center, span 4 1, wrap");
-            pnl0.add(lblNextChallengeInWins, "h 20px!, align center, span 4 1, gap 0 0 10px 5px, wrap");
-            pnl0.add(btnCurrentDeck, "w 40%!, h 26px!, align center, span 4 1, gap 0 0 0 5px");
-        }
+        pnlStats.add(btnSpellShop, constraints);
+        pnlStats.add(lblWinStreak, "w 48%!, h 35px!, gap 1% 1% 5px 5px, span 2 1");
+        pnlStats.add(lblCredits, constraints + ", wrap");
+
+        pnlStats.add(lblNextChallengeInWins, "span 4 1, h 20px!, gap 0 0 5px 5px, ax center, wrap");
+        pnlStats.add(btnCurrentDeck, "span 4 1, w 350px!, h 30px!, gap 0 0 0 5px, ax center");
+    }
+
+    private void populateStart() {
+        final String constraints = "w 200px!, h 20px!, gap 0 10px 5px 5px";
+        pnlStart.removeAll();
+        pnlStart.setOpaque(false);
+        pnlStart.setLayout(new MigLayout("insets 0, gap 0, align center, hidemode 3"));
+
+        pnlStart.add(cbxPet, constraints);
+        pnlStart.add(btnStart, "ax center, span 1 3, wrap");
+        pnlStart.add(cbPlant, constraints + ", wrap");
+        pnlStart.add(cbZep, constraints);
     }
 }

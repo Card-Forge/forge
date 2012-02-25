@@ -243,7 +243,8 @@ public enum FSkin {
         ICO_BREW        (new int[] {560, 560, 80, 80}), /** */
 
         ICO_MINUS       (new int[] {560, 640, 80, 80}), /** */
-        ICO_PLUS        (new int[] {480, 640, 80, 80});
+        ICO_PLUS        (new int[] {480, 640, 80, 80}), /** */
+        ICO_PLUSPLUS    (new int[] {480, 720, 80, 80});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */

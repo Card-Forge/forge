@@ -1,16 +1,15 @@
 package forge.gui.home.quest;
 
-import java.io.File;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.home.ICSubmenu;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import forge.quest.data.QuestData;
-import forge.quest.data.QuestDataIO;
-import forge.quest.data.QuestPreferences.QPref;
+import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
+import forge.quest.data.QuestDuel;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -31,10 +30,23 @@ public enum CSubmenuDuels implements ICSubmenu {
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#initialize()
      */
+    @SuppressWarnings("serial")
     @Override
     public void initialize() {
         VSubmenuDuels.SINGLETON_INSTANCE.populate();
         CSubmenuDuels.SINGLETON_INSTANCE.update();
+
+        VSubmenuDuels.SINGLETON_INSTANCE.getBtnSpellShop().setCommand(
+                new Command() { @Override
+                    public void execute() { SubmenuQuestUtil.showSpellShop(); } });
+
+        VSubmenuDuels.SINGLETON_INSTANCE.getBtnSpellShop().setCommand(
+                new Command() { @Override
+                    public void execute() { SubmenuQuestUtil.showBazaar(); } });
+
+        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().addActionListener(
+                new ActionListener() { @Override
+            public void actionPerformed(final ActionEvent e) { SubmenuQuestUtil.startGame(); } });
     }
 
     /* (non-Javadoc)
@@ -42,16 +54,21 @@ public enum CSubmenuDuels implements ICSubmenu {
      */
     @Override
     public void update() {
-        QuestData qData = AllZone.getQuestData();
-        if (qData == null) {
-            final String questname = Singletons.getModel()
-                    .getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
+        SubmenuQuestUtil.updateStatsAndPet();
 
-            qData = QuestDataIO.loadData(new File(
-                    ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + questname + ".dat"));
-            System.out.println("asdf current quest data and credits: " + questname + " " + qData.getCredits());
+        final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
+
+        if (AllZone.getQuestData() != null) {
+            view.getLblTitle().setText("Duels: " + AllZone.getQuestData().getRank());
+
+            view.getPnlDuels().removeAll();
+            final List<QuestDuel> duels =
+                    Singletons.getModel().getQuestEventManager().generateDuels();
+
+            for (final QuestDuel d : duels) {
+                final SelectablePanel temp = new SelectablePanel(d);
+                view.getPnlDuels().add(temp, "w 96%!, h 86px!, gap 2% 0 5px 5px");
+            }
         }
-
-        //lblTitle.setText("Duels: " + control.getRankString());
     }
 }

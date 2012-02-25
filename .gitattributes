@@ -11351,8 +11351,15 @@ src/main/java/forge/gui/home/draft/VSubmenuDraft.java -text
 src/main/java/forge/gui/home/draft/VSubmenuSealed.java -text
 src/main/java/forge/gui/home/draft/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
+src/main/java/forge/gui/home/quest/CSubmenuQuestData.java -text
+src/main/java/forge/gui/home/quest/CSubmenuQuestPrefs.java -text
+src/main/java/forge/gui/home/quest/SubmenuQuestUtil.java -text
+src/main/java/forge/gui/home/quest/VSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/VSubmenuDuels.java -text
+src/main/java/forge/gui/home/quest/VSubmenuQuestData.java -text
+src/main/java/forge/gui/home/quest/VSubmenuQuestPrefs.java -text
 src/main/java/forge/gui/home/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/settings/CSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/CSubmenuPreferences.java -text

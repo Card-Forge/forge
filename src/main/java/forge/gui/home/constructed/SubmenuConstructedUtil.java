@@ -44,7 +44,7 @@ import forge.view.toolbox.FSkin;
 
 /** 
  * Utilities for the constructed submenu, all over the MVC spectrum.
- *
+ * If a piece of code can be reused, it's dumped here.
  */
 public class SubmenuConstructedUtil {
     /**
@@ -337,9 +337,6 @@ public class SubmenuConstructedUtil {
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     public static void startGame(final List<JList> lists0) {
-        final Deck deckHuman = generateDeck(lists0.get(0), PlayerType.HUMAN);
-        final Deck deckAI = generateDeck(lists0.get(1), PlayerType.COMPUTER);
-
         final FOverlay overlay = Singletons.getView().getOverlay();
         overlay.setLayout(new MigLayout("insets 0, gap 0, align center"));
 
@@ -355,7 +352,9 @@ public class SubmenuConstructedUtil {
         overlay.add(pnl, "h 300px!, w 400px!");
 
         overlay.showOverlay();
-        GameNew.newGame(deckHuman, deckAI);
+        GameNew.newGame(
+                generateDeck(lists0.get(0), PlayerType.HUMAN),
+                generateDeck(lists0.get(1), PlayerType.COMPUTER));
         overlay.hideOverlay();
     }
 
