@@ -14,13 +14,13 @@ public class UnOpenedProduct {
     private final Lambda1<List<CardPrinted>, BoosterGenerator> openBooster;
     private final BoosterGenerator generator;
     private final BoosterData booster;
-    
+
     public UnOpenedProduct(Lambda1<List<CardPrinted>, BoosterGenerator> identityPick, BoosterGenerator bpFull) {
         openBooster = identityPick;
         generator = bpFull;
         booster = null;
     }
-    
+
     /**
      * TODO: Write javadoc for Constructor.
      * @param boosterData

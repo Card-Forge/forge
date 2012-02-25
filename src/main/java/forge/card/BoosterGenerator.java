@@ -257,7 +257,7 @@ public class BoosterGenerator {
             final int nLands) {
 
         final List<CardPrinted> temp = new ArrayList<CardPrinted>();
-        final Map<CardRarity, List<CardPrinted>> commonCardsMap = nDoubls != 0 ? singleFacedByRarity : cardsByRarity; 
+        final Map<CardRarity, List<CardPrinted>> commonCardsMap = nDoubls != 0 ? singleFacedByRarity : cardsByRarity;
 
         temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Common), nCom));
         temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Uncommon), nUnc));

@@ -10,7 +10,7 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
  * The Class BoosterData.
  */
 public class BoosterData {
-    private final String edition; 
+    private final String edition;
     public final String getEdition() {
         return edition;
     }
@@ -88,7 +88,7 @@ public class BoosterData {
     public final Predicate<CardPrinted> getEditionFilter() {
         return CardPrinted.Predicates.printedInSets(edition);
     }
-    
+
     /**
      * Gets the uncommon.
      * 
@@ -151,15 +151,15 @@ public class BoosterData {
     public final int getFoilChance() {
         return this.foilRate;
     }
-    
+
     public static final Lambda1<String, BoosterData> FN_GET_CODE = new Lambda1<String, BoosterData>() {
-        
+
         @Override
         public String apply(BoosterData arg1) {
             return arg1.edition;
         }
     };
-    
+
     public static final class Reader extends StorageReaderFile<BoosterData> {
 
         public Reader(String pathname) {
@@ -181,5 +181,5 @@ public class BoosterData {
             int nFoilRate = section.getInt("FoilRate", 68);
             return new BoosterData(section.get("Set"), nC, nU, nR, nS, nDf, nLand, nFoilRate);
         }
-    }    
+    }
 }

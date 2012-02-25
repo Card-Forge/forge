@@ -190,16 +190,16 @@ public final class CardBlock implements Comparable<CardBlock> {
     public String toString() {
         return this.name + " (block)";
     }
-    
+
     public static final Lambda1<String, CardBlock> FN_GET_NAME = new Lambda1<String, CardBlock>() {
-        
+
         @Override
         public String apply(CardBlock arg1) {
             return arg1.getName();
         }
     };
-    
-    public static class Reader extends StorageReaderFile<CardBlock>{
+
+    public static class Reader extends StorageReaderFile<CardBlock> {
 
         private final EditionCollection editions;
         /**
@@ -218,7 +218,7 @@ public final class CardBlock implements Comparable<CardBlock> {
         @Override
         protected CardBlock read(String line) {
             final String[] sParts = line.trim().split("\\|");
-            
+
             String name = null;
             int index = -1;
             final List<CardEdition> sets = new ArrayList<CardEdition>(4);
@@ -246,6 +246,6 @@ public final class CardBlock implements Comparable<CardBlock> {
             }
             return new CardBlock(index, name, sets, landSet, draftBoosters, sealedBoosters);
         }
-        
+
     }
 }

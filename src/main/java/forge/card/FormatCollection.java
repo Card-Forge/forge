@@ -69,7 +69,6 @@ public final class FormatCollection extends StorageView<GameFormat> {
     /**
      * Instantiates a new format utils.
      */
-    
     public static class FormatReader extends StorageReaderFile<GameFormat> {
 
         /**
@@ -112,7 +111,7 @@ public final class FormatCollection extends StorageView<GameFormat> {
             return new GameFormat(name, sets, bannedCards);
 
         }
-        
+
     }
 }
 

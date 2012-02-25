@@ -24,16 +24,17 @@ import forge.util.StorageView;
 
 public final class EditionCollection extends StorageView<CardEdition> {
 
-    private final Map<String,CardEdition> aliasToEdition = new TreeMap<String, CardEdition>();
+    private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>();
 
     public EditionCollection() {
         super(new CardEdition.Reader("res/blockdata/setdata.txt"));
-        
-        for( CardEdition ee : this )
-        {
+
+        for (CardEdition ee : this) {
+
             String alias = ee.getAlias();
-            if ( null != alias ) 
+            if (null != alias) {
                 aliasToEdition.put(alias, ee);
+            }
         }
     }
 
