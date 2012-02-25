@@ -54,6 +54,7 @@ import forge.game.GameType;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.FatPack;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.PreconDeck;
@@ -111,7 +112,7 @@ public class QuestDataIO {
             }
 
             final IgnoringXStream xStream = new IgnoringXStream();
-            xStream.registerConverter(new CardPoolToXml());
+            xStream.registerConverter(new ItemPoolToXml());
             xStream.registerConverter(new DeckSectionToXml());
             xStream.registerConverter(new GameTypeToXml());
             xStream.alias("CardPool", ItemPool.class);
@@ -199,7 +200,7 @@ public class QuestDataIO {
     public static void saveData(final QuestData qd) {
         try {
             final XStream xStream = new XStream();
-            xStream.registerConverter(new CardPoolToXml());
+            xStream.registerConverter(new ItemPoolToXml());
             xStream.registerConverter(new DeckSectionToXml());
             xStream.alias("CardPool", ItemPool.class);
             xStream.alias("DeckSection", DeckSection.class);
@@ -273,7 +274,7 @@ public class QuestDataIO {
 
     }
 
-    private static class CardPoolToXml implements Converter {
+    private static class ItemPoolToXml implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(final Class clasz) {
@@ -301,13 +302,20 @@ public class QuestDataIO {
             writer.endNode();
         }
 
+        protected void write(final FatPack fatpack, final Integer count, final HierarchicalStreamWriter writer) {
+            writer.startNode("fpack");
+            writer.addAttribute("s", fatpack.getEdition());
+            writer.addAttribute("n", count.toString());
+            writer.endNode();
+        }               
+        
         protected void write(final TournamentPack booster, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("tpack");
             writer.addAttribute("s", booster.getEdition());
             writer.addAttribute("n", count.toString());
             writer.endNode();
-        }
-
+        }        
+        
         protected void write(final PreconDeck deck, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("precon");
             writer.addAttribute("name", deck.getName());
@@ -327,7 +335,9 @@ public class QuestDataIO {
                 } else if (item instanceof BoosterPack) {
                     this.write((BoosterPack) item, count, writer);
                 } else if (item instanceof TournamentPack) {
-                    this.write((TournamentPack) item, count, writer);
+                    this.write((TournamentPack) item, count, writer);                    
+                } else if (item instanceof FatPack) {
+                    this.write((FatPack) item, count, writer);                    
                 } else if (item instanceof PreconDeck) {
                     this.write((PreconDeck) item, count, writer);
                 }
@@ -352,6 +362,8 @@ public class QuestDataIO {
                     result.add(this.readBooster(reader), cnt);
                 } else if ("tpack".equals(nodename)) {
                     result.add(this.readTournamentPack(reader), cnt);
+                } else if ("fpack".equals(nodename)) {
+                    result.add(this.readFatPack(reader), cnt);
                 } else if ("precon".equals(nodename)) {
                     final PreconDeck toAdd = this.readPreconDeck(reader);
                     if (null != toAdd) {
@@ -372,17 +384,18 @@ public class QuestDataIO {
         }
 
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
-            final String set = reader.getAttribute("s");
-            CardEdition ed = Singletons.getModel().getEditions().get(set);
-            BoosterData bd = Singletons.getModel().getBoosters().get(set);
-            return new BoosterPack(ed.getName(), bd);
+            CardEdition ed = Singletons.getModel().getEditions().get(reader.getAttribute("s"));
+            return BoosterPack.FN_FROM_SET.apply(ed);
         }
 
         protected TournamentPack readTournamentPack(final HierarchicalStreamReader reader) {
-            final String set = reader.getAttribute("s");
-            CardEdition ed = Singletons.getModel().getEditions().get(set);
-            BoosterData bd = Singletons.getModel().getTournamentPacks().get(set);
-            return new TournamentPack(ed.getName(), bd);
+            CardEdition ed = Singletons.getModel().getEditions().get(reader.getAttribute("s"));
+            return TournamentPack.FN_FROM_SET.apply(ed);
+        }
+
+        protected FatPack readFatPack(final HierarchicalStreamReader reader) {
+            CardEdition ed = Singletons.getModel().getEditions().get(reader.getAttribute("s"));
+            return FatPack.FN_FROM_SET.apply(ed);
         }
 
         protected CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
@@ -396,7 +409,7 @@ public class QuestDataIO {
         }
     }
 
-    private static class DeckSectionToXml extends CardPoolToXml {
+    private static class DeckSectionToXml extends ItemPoolToXml {
 
         @SuppressWarnings("rawtypes")
         @Override

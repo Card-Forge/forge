@@ -37,6 +37,7 @@ import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.CardBlock;
 import forge.card.EditionCollection;
+import forge.card.FatPackData;
 import forge.card.FormatCollection;
 import forge.control.input.InputControl;
 import forge.deck.CardCollections;
@@ -87,7 +88,8 @@ public enum FModel {
     private final FormatCollection formats;
     private final IStorageView<BoosterData> boosters;
     private final IStorageView<BoosterData> tournaments;
-    private final StorageView<CardBlock> blocks;
+    private final IStorageView<FatPackData> fatPacks;
+    private final IStorageView<CardBlock> blocks;
 
     // have to implement lazy initialization - at the moment of FModel.ctor()
     // CardDb is not ready yet.
@@ -137,6 +139,7 @@ public enum FModel {
         this.formats = new FormatCollection("res/blockdata/formats.txt");
         this.boosters = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/boosters.txt"));
         this.tournaments = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/starters.txt"));
+        this.fatPacks = new StorageView<FatPackData>(new FatPackData.Reader("res/blockdata/fatpacks.txt"));
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
 
         // TODO this single setting from preferences should not be here, or,
@@ -523,8 +526,12 @@ public enum FModel {
         }
     }
 
-    public StorageView<CardBlock> getBlocks() {
+    public IStorageView<CardBlock> getBlocks() {
         return blocks;
+    }
+
+    public IStorageView<FatPackData> getFatPacks() {
+        return fatPacks;
     }
 
 

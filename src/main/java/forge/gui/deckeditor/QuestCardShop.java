@@ -45,6 +45,7 @@ import forge.gui.deckeditor.elements.TableColumnInfo;
 import forge.gui.deckeditor.elements.TableView;
 import forge.item.BoosterPack;
 import forge.item.CardPrinted;
+import forge.item.FatPack;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -308,6 +309,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
             return 395;
         } else if (card instanceof TournamentPack) {
             return 995;
+        } else if (card instanceof FatPack) {
+            return 2365;
         } else if (card instanceof PreconDeck) {
             return ((PreconDeck) card).getRecommendedDeals().getCost();
         }
@@ -339,6 +342,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
                     booster = (BoosterPack) ((BoosterPack) item).clone();
                 } else if (item instanceof TournamentPack) {
                     booster = (TournamentPack) ((TournamentPack) item).clone();
+                } else if (item instanceof FatPack) {
+                    booster = (FatPack) ((FatPack) item).clone();
                 }
                 this.questData.getCards().buyPack(booster, value);
                 final List<CardPrinted> newCards = booster.getCards();

@@ -17,26 +17,30 @@
  */
 package forge.item;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Singletons;
-import forge.card.BoosterData;
 import forge.card.CardEdition;
+import forge.card.FatPackData;
 
 /**
  * TODO Write javadoc for this type.
  * 
  */
-public class BoosterPack extends OpenablePack {
+public class FatPack extends OpenablePack {
 
     /** The Constant fnFromSet. */
-    public static final Lambda1<BoosterPack, CardEdition> FN_FROM_SET = new Lambda1<BoosterPack, CardEdition>() {
+    public static final Lambda1<FatPack, CardEdition> FN_FROM_SET = new Lambda1<FatPack, CardEdition>() {
         @Override
-        public BoosterPack apply(final CardEdition arg1) {
-            BoosterData d = Singletons.getModel().getBoosters().get(arg1.getCode());
-            return new BoosterPack(arg1.getName(), d);
+        public FatPack apply(final CardEdition arg1) {
+            FatPackData d = Singletons.getModel().getFatPacks().get(arg1.getCode());
+            return new FatPack(arg1.getName(), d);
         }
     };
+    
+    private final FatPackData fpData;
 
     /**
      * Instantiates a new booster pack.
@@ -44,28 +48,31 @@ public class BoosterPack extends OpenablePack {
      * @param set
      *            the set
      */
-    public BoosterPack(final String name0, final BoosterData boosterData) {
-        super(name0, boosterData);
+    public FatPack(final String name0, final FatPackData fpData0) {
+        super(name0, Singletons.getModel().getBoosters().get(fpData0.getEdition()));    
+        fpData = fpData0;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getImageFilename()
-     */
-    /**
-     * Gets the image filename.
-     * 
-     * @return String
-     */
+
     @Override
     public final String getImageFilename() {
-        return "booster/" + this.contents.getEdition() + ".png";
+        return "fatpacks/" + this.contents.getEdition() + ".png";
     }
+
 
     @Override
     public final String getType() {
-        return "Booster Pack";
+        return "Fat Pack";
+    }
+
+    protected List<CardPrinted> generate() {
+        List<CardPrinted> result = new ArrayList<CardPrinted>();
+        for( int i = 0; i < fpData.getCntBoosters(); i++ ) {
+            result.addAll(super.generate());
+        }
+        CardEdition landEdition = Singletons.getModel().getEditions().get(fpData.getLandsEdition());
+        result.addAll(getRandomBasicLands(landEdition, fpData.getCntLands()));
+        return result; 
     }
 
     /*
@@ -80,7 +87,7 @@ public class BoosterPack extends OpenablePack {
      */
     @Override
     public final Object clone() {
-        return new BoosterPack(name, contents); 
+        return new FatPack(name, fpData);
     }
 
 

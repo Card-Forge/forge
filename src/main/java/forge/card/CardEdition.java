@@ -54,7 +54,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public CardEdition(final int index, final String name, final String code, final String code2) {
         this(index, name, code, code2, null);
     }
-
+    
     public CardEdition(final int index, final String name, final String code, final String code2, final String alias0) {
         this.code = code;
         this.code2 = code2;
@@ -180,7 +180,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * The Class Predicates.
      */
     public abstract static class Predicates {
-
+        
         /** The Constant canMakeBooster. */
         public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
 
@@ -190,16 +190,22 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 return Singletons.getModel().getBoosters().contains(subject.getCode());
             }
         }
-
+        
         public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
-
         private static class CanMakeStarter extends Predicate<CardEdition> {
             @Override
             public boolean isTrue(final CardEdition subject) {
                 return Singletons.getModel().getTournamentPacks().contains(subject.getCode());
             }
         }
-
+        
+        public static final Predicate<CardEdition> HAS_FAT_PACK = new CanMakeFatPack();
+        private static class CanMakeFatPack extends Predicate<CardEdition> {
+            @Override
+            public boolean isTrue(final CardEdition subject) {
+                return Singletons.getModel().getFatPacks().contains(subject.getCode());
+            }
+        }        
         /**
          * Checks if is legal in format.
          *
@@ -223,7 +229,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
         }
     }
-
+    
     public static class Reader extends StorageReaderFile<CardEdition> {
 
         public Reader(String pathname) {
@@ -244,6 +250,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
             return new CardEdition(index, name, code, code2, alias);
         }
-
+        
     }
 }

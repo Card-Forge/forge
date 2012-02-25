@@ -30,6 +30,7 @@ import forge.deck.Deck;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.FatPack;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -209,6 +210,7 @@ public final class QuestUtilCards {
         }
     }
 
+   
     /**
      * Buy precon deck.
      * 
@@ -356,7 +358,12 @@ public final class QuestUtilCards {
      */
     public void generateTournamentsInShop(final int count) {
         Predicate<CardEdition> hasTournament = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
-        this.q.getShopList().addAllFlat(hasTournament.random(Singletons.getModel().getEditions(), count, TournamentPack.FN_FROM_SET));
+        this.q.getShopList().addAllFlat( hasTournament.random(Singletons.getModel().getEditions(), count, TournamentPack.FN_FROM_SET));            
+    }
+
+    public void generateFatPacksInShop(final int count) {
+        Predicate<CardEdition> hasPack = CardEdition.Predicates.HAS_FAT_PACK;
+        this.q.getShopList().addAllFlat( hasPack.random(Singletons.getModel().getEditions(), count, FatPack.FN_FROM_SET));            
     }
 
     /**
@@ -401,6 +408,7 @@ public final class QuestUtilCards {
         this.generateBoostersInShop(totalPacks);
         this.generatePreconsInShop(totalPacks);
         this.generateTournamentsInShop(totalPacks);
+        this.generateFatPacksInShop(totalPacks);
         this.q.getShopList().addAll(QuestUtilCards.generateBasicLands(10, 5));
     }
 
