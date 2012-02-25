@@ -9,7 +9,7 @@ We have reached a new milestone. All Modern legal sets are at least 80% complete
 
 A number of bugs were found and fixed. The mana pool bug which caused crash reports was fixed. We also have a performance fix relating to static abilities.
 
-The UI has a few new features including to pick an avatars. This can be accessed from the Settings -> Avatars tab.
+The UI has a few new features including the option to pick an avatars from a collection of pictures. This can be accessed from the Settings -> Avatars tab.
 
 The organizational structure of the /res/decks/ folder has been improved and we now have these four subdirectories:
 
@@ -23,7 +23,7 @@ The Forge archive includes a readme.txt file and we ask that you spend a few min
 
 We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
 
-Some people use the application 7zip for the Windows OS. This utility can be found at http://www.7-zip.org/download.html
+Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html
 
 
 Fixes/Features:
@@ -518,6 +518,27 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- The AI can now use spellAbilities giving shroud to creatures to protect them from spellAbilities on the stack.
+- The AI can now use targeted spellAbilities giving shroud to creatures to protect them from spellAbilities on the stack.
+- Deleted Gaze of the Gorgon.
+- Fixed Omen Machine.
+- Added the 2-23-12 updated version of the juzamjedi cube.
+- Added a fluff piece to the changes.txt file with the 7zip link.
+- Fixing Feast of Flesh Precon pricing
+- Editions, Boosters, Blocks - all moved to their own collections in FModel, using base classes from util
+- renamed FolderMap* to Storage* (more neutral, because collections can store something that is not a folder)
+- Continued work on home screen rebuild.
+- Minor rename.
+- replaced IHasName with Lambda1<String,T> selectors (this allows any field to be used as key. Not just name)
+- parseSections moved to FileSection
+- fixed deckgroup filter
+- BoosterGenerator refactored - does not hold numbers of cards of each rarity to generate per run.
+- Predicates moved to utils
+- Further work on home screen rebuild.
+- Ran set info script.
+- Ran oracle script.
+- tornament packs contents
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -706,6 +727,10 @@ Rakdos Riteknife
 Needle Drop
 Gaze of the Gorgon
 Heretic's Punishment
+Gaze of the Gorgon
+Venomous Breath
+Glyph of Doom
+Djinn of Wishes
 
 
 end
