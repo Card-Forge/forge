@@ -1,7 +1,7 @@
 Index:0|Code2:MBP|Code3:MBP|Name:Media Insert Promo|Alias:PRO
 Index:1|Code2:A|Code3:LEA|Name:Limited Edition Alpha
 Index:2|Code2:B|Code3:LEB|Name:Limited Edition Beta
-Index:3|Code2:U|Code3:2ED|Name:Unlimited
+Index:3|Code2:U|Code3:2ED|Name:Unlimited Edition
 Index:4|Code2:AN|Code3:ARN|Name:Arabian Nights
 Index:5|Code2:AQ|Code3:ATQ|Name:Antiquities
 Index:6|Code2:R|Code3:3ED|Name:Revised Edition
