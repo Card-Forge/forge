@@ -89,6 +89,11 @@ public class FatPack extends OpenablePack {
     public final Object clone() {
         return new FatPack(name, fpData);
     }
+    
+    @Override
+    public int getTotalCards(){
+        return super.getTotalCards() * fpData.getCntBoosters() + fpData.getCntLands();
+    }
 
 
 }

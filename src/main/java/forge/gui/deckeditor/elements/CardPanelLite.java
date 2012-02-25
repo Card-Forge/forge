@@ -37,6 +37,7 @@ import forge.gui.game.CardPicturePanel;
 import forge.item.BoosterPack;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 
 /**
@@ -114,11 +115,11 @@ public class CardPanelLite extends CardPanelBase {
                 }
             }
         } else {
-            if (card instanceof BoosterPack) {
-                final BoosterPack booster = (BoosterPack) card;
+            if (card instanceof OpenablePack) {
+                final OpenablePack booster = (OpenablePack) card;
                 final CardEdition set = Singletons.getModel().getEditions().getEditionByCodeOrThrow(booster.getEdition());
-                final String tpl = "%s booster pack.%n%nContains %d cards.%n%nBuy it to reveal the cards and add them to your inventory.";
-                this.description.setText(String.format(tpl, set.getName(), booster.getTotalCards()));
+                final String tpl = "%s %s.%n%nContains %d cards.%n%nBuy it to reveal the cards and add them to your inventory.";
+                this.description.setText(String.format(tpl, set.getName(), booster.getType(), booster.getTotalCards()));
             } else if (card instanceof PreconDeck) {
                 final PreconDeck deck = (PreconDeck) card;
                 final String desc = deck.getDescription();
