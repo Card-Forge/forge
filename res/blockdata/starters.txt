@@ -16,7 +16,7 @@ Set:ONS|Commons:32|Uncommons:10|Rares:3|BasicLands:30
 Set:MRD|Commons:32|Uncommons:10|Rares:3|BasicLands:30
 Set:CHK|Commons:32|Uncommons:10|Rares:3|BasicLands:30
 Set:RAV|Commons:32|Uncommons:10|Rares:3|BasicLands:30
-Set:TSP|Commons:32|Uncommons:10|Rares:3|BasicLands:30
+Set:TSP|Commons:29|Uncommons:10|Rares:3|BasicLands:30|Special:3
 Set:LRW|Commons:32|Uncommons:10|Rares:3|BasicLands:30
 Set:SHM|Commons:32|Uncommons:10|Rares:3|BasicLands:30
 Set:ALA|Commons:32|Uncommons:10|Rares:3|BasicLands:30
