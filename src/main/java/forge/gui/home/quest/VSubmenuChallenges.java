@@ -31,7 +31,7 @@ public enum VSubmenuChallenges implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroup() {
-        return null;
+        return EMenuGroup.QUEST;
     }
 
     /* (non-Javadoc)

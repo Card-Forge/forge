@@ -79,7 +79,7 @@ public enum VSubmenuDuels implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroup() {
-        return null;
+        return EMenuGroup.QUEST;
     }
 
     /* (non-Javadoc)

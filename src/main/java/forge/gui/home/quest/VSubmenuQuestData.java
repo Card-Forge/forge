@@ -120,7 +120,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroup() {
-        return null;
+        return EMenuGroup.QUEST;
     }
 
     /* (non-Javadoc)

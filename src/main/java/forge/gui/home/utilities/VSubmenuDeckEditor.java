@@ -36,7 +36,7 @@ public enum VSubmenuDeckEditor implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroup() {
-        return EMenuGroup.CONSTRUCTED;
+        return EMenuGroup.UTILITIES;
     }
 
     /* (non-Javadoc)

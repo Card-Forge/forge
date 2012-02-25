@@ -45,7 +45,7 @@ public enum VSubmenuQuestEvents implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroup() {
-        return EMenuGroup.QUEST;
+        return EMenuGroup.CONSTRUCTED;
     }
 
     /* (non-Javadoc)
