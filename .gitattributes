@@ -2255,6 +2255,7 @@ res/cardsfolder/d/divinity_of_pride.txt svneol=native#text/plain
 res/cardsfolder/d/dizzy_spell.txt svneol=native#text/plain
 res/cardsfolder/d/dizzying_gaze.txt -text
 res/cardsfolder/d/djinn_of_the_lamp.txt svneol=native#text/plain
+res/cardsfolder/d/djinn_of_wishes.txt -text svneol=unset#text/plain
 res/cardsfolder/d/do_or_die.txt svneol=native#text/plain
 res/cardsfolder/d/dodecapod.txt svneol=native#text/plain
 res/cardsfolder/d/dogged_hunter.txt svneol=native#text/plain

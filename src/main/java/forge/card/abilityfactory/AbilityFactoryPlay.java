@@ -325,6 +325,7 @@ public final class AbilityFactoryPlay {
         final Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
         boolean optional = params.containsKey("Optional");
+        boolean remember = params.containsKey("RememberPlayed");
         int amount = 1;
         if (params.containsKey("Amount")) {
             amount = AbilityFactory.calculateAmount(source, params.get("Amount"), sa);
@@ -394,6 +395,9 @@ public final class AbilityFactoryPlay {
             // lands will be played
             if (tgtCard.isLand()) {
                 controller.playLand(tgtCard);
+                if (remember && controller.canPlayLand()) {
+                    source.addRemembered(tgtCard);
+                }
                 return;
             }
 
@@ -439,22 +443,34 @@ public final class AbilityFactoryPlay {
                     newSA.setManaCost("");
                     newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                     Singletons.getModel().getGameAction().playSpellAbility(newSA);
+                    if (remember) {
+                        source.addRemembered(tgtSA.getSourceCard());
+                    }
                 } else {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, true) || !optional) {
                             ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
+                            if (remember) {
+                                source.addRemembered(tgtSA.getSourceCard());
+                            }
                         }
                     }
                 }
             } else {
                 if (controller.isHuman()) {
                     Singletons.getModel().getGameAction().playSpellAbility(tgtSA);
+                    if (remember) {
+                        source.addRemembered(tgtSA.getSourceCard());
+                    }
                 } else {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, false) || !optional) {
                             ComputerUtil.playStack(tgtSA);
+                            if (remember) {
+                                source.addRemembered(tgtSA.getSourceCard());
+                            }
                         }
                     }
                 }
