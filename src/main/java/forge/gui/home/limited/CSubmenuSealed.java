@@ -1,4 +1,4 @@
-package forge.gui.home.draft;
+package forge.gui.home.limited;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

@@ -11345,11 +11345,11 @@ src/main/java/forge/gui/home/constructed/VSubmenuCustom.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuQuestEvents.java -text
 src/main/java/forge/gui/home/constructed/VSubmenuThemes.java -text
 src/main/java/forge/gui/home/constructed/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/home/draft/CSubmenuDraft.java -text
-src/main/java/forge/gui/home/draft/CSubmenuSealed.java -text
-src/main/java/forge/gui/home/draft/VSubmenuDraft.java -text
-src/main/java/forge/gui/home/draft/VSubmenuSealed.java -text
-src/main/java/forge/gui/home/draft/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/home/limited/CSubmenuDraft.java -text
+src/main/java/forge/gui/home/limited/CSubmenuSealed.java -text
+src/main/java/forge/gui/home/limited/VSubmenuDraft.java -text
+src/main/java/forge/gui/home/limited/VSubmenuSealed.java -text
+src/main/java/forge/gui/home/limited/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text

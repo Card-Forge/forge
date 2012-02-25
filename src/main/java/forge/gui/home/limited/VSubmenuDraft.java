@@ -1,4 +1,4 @@
-package forge.gui.home.draft;
+package forge.gui.home.limited;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
