@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Command;
 import forge.gui.deckeditor.elements.CardPanelBase;
@@ -37,6 +36,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.util.Predicate;
 
 /**
  * The Class DeckEditorBase.

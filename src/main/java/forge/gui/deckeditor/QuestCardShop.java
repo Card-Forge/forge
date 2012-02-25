@@ -34,7 +34,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
@@ -52,6 +51,7 @@ import forge.item.ItemPoolView;
 import forge.item.PreconDeck;
 import forge.quest.ReadPriceList;
 import forge.quest.data.QuestData;
+import forge.util.Predicate;
 
 /**
  * <p>

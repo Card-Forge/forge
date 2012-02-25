@@ -22,12 +22,12 @@ import java.util.List;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRules;
 import forge.card.CardEdition;
+import forge.util.Predicate;
 
 /**
  * TODO Write javadoc for this type.

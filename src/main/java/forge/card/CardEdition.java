@@ -18,10 +18,10 @@
 package forge.card;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.util.FileSection;
+import forge.util.Predicate;
 import forge.util.StorageReaderFile;
 
 /**

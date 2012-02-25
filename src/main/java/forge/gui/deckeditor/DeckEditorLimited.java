@@ -36,7 +36,6 @@ import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.braids.util.lambda.Lambda0;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -50,6 +49,7 @@ import forge.gui.deckeditor.elements.TableView;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.util.IStorage;
+import forge.util.Predicate;
 
 /**
  * <p>

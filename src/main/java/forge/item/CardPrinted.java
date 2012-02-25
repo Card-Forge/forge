@@ -21,8 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
-import net.slightlymagic.maxmtg.PredicateString;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -32,6 +30,8 @@ import forge.CardUtil;
 import forge.Player;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.util.Predicate;
+import forge.util.PredicateString;
 
 /**
  * <p>

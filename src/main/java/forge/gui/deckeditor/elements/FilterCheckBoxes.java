@@ -23,10 +23,10 @@ import java.util.List;
 
 import javax.swing.JCheckBox;
 
-import net.slightlymagic.maxmtg.Predicate;
 
 import forge.card.CardRules;
 import forge.item.CardPrinted;
+import forge.util.Predicate;
 
 /**
  * A structural class for some checkboxes need for a deck editor, contains no

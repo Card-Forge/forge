@@ -30,13 +30,13 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 
-import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Constant;
 import forge.card.CardRules;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.util.Predicate;
 
 /**
  * TableWithCards.

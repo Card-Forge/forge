@@ -36,7 +36,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
-import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Command;
 import forge.Constant;
@@ -56,6 +55,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiBoosterDraft;
+import forge.util.Predicate;
 
 /**
  * <p>

@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
@@ -38,6 +37,7 @@ import forge.item.PreconDeck;
 import forge.quest.BoosterUtils;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
+import forge.util.Predicate;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been

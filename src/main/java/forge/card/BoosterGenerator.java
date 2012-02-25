@@ -25,11 +25,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.MyRandom;
+import forge.util.Predicate;
 
 /**
  * <p>

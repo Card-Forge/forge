@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.item.CardPrinted;
+import forge.util.Predicate;
 import forge.util.StorageReaderFile;
 
 /**

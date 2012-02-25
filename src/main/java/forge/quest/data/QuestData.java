@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import net.slightlymagic.maxmtg.Predicate;
 
 import forge.Singletons;
 import forge.deck.Deck;
@@ -35,6 +34,7 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
+import forge.util.Predicate;
 import forge.util.StorageView;
 import forge.util.IStorage;
 import forge.util.IStorageView;

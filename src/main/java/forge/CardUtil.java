@@ -27,7 +27,6 @@ import java.util.Random;
 import java.util.Set;
 
 
-import net.slightlymagic.maxmtg.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -41,6 +40,7 @@ import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.MyRandom;
+import forge.util.Predicate;
 
 /**
  * <p>

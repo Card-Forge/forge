@@ -2,9 +2,9 @@ package forge.card;
 
 import forge.item.CardPrinted;
 import forge.util.FileSection;
+import forge.util.Predicate;
 import forge.util.StorageReaderFile;
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 
 /**
  * The Class BoosterData.

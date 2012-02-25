@@ -21,9 +21,9 @@ import java.util.Collections;
 import java.util.List;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.card.CardRules;
 import forge.item.CardPrinted;
+import forge.util.Predicate;
 
 /**
  * TODO: Write javadoc for this type.

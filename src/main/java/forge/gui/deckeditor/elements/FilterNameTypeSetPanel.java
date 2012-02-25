@@ -28,8 +28,6 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentListener;
 
 import net.miginfocom.swing.MigLayout;
-import net.slightlymagic.maxmtg.Predicate;
-import net.slightlymagic.maxmtg.PredicateString.StringOp;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,6 +36,8 @@ import forge.card.CardRules;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.item.CardPrinted;
+import forge.util.Predicate;
+import forge.util.PredicateString.StringOp;
 
 /**
  * A panel that holds Name, Type, Rules text fields aligned horizontally

@@ -26,7 +26,6 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -36,6 +35,7 @@ import forge.Singletons;
 import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.card.MtgDataParser;
+import forge.util.Predicate;
 
 /**
  * <p>

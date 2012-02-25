@@ -37,7 +37,6 @@ import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 import net.slightlymagic.braids.util.lambda.Lambda0;
-import net.slightlymagic.maxmtg.Predicate;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -52,6 +51,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
+import forge.util.Predicate;
 
 /**
  * <p>

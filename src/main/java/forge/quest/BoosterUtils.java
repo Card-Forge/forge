@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.slightlymagic.maxmtg.Predicate;
 
 import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
+import forge.util.Predicate;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 /**

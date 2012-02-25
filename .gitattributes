@@ -11443,6 +11443,8 @@ src/main/java/forge/util/IItemSerializer.java -text
 src/main/java/forge/util/IStorage.java -text
 src/main/java/forge/util/IStorageView.java -text
 src/main/java/forge/util/MyRandom.java svneol=native#text/plain
+src/main/java/forge/util/Predicate.java -text
+src/main/java/forge/util/PredicateString.java -text
 src/main/java/forge/util/StorageImmediatelySerialized.java svneol=native#text/plain
 src/main/java/forge/util/StorageReaderFile.java -text
 src/main/java/forge/util/StorageReaderFolder.java -text
@@ -11522,9 +11524,6 @@ src/main/java/net/slightlymagic/braids/util/progress_monitor/BaseProgressMonitor
 src/main/java/net/slightlymagic/braids/util/progress_monitor/BraidsProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
-src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
-src/main/java/net/slightlymagic/maxmtg/PredicateString.java -text
-src/main/java/net/slightlymagic/maxmtg/package-info.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyElement.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyType.java svneol=native#text/plain
 src/main/java/tree/properties/TreeProperties.java svneol=native#text/plain
