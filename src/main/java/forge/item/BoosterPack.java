@@ -88,7 +88,7 @@ public class BoosterPack implements InventoryItemFromSet {
      */
     @Override
     public final String getName() {
-        return this.name;
+        return this.name + " " + this.getType();
     }
 
     /*

@@ -45,7 +45,6 @@ public class TournamentPack implements InventoryItemFromSet {
 
     private List<CardPrinted> cards = null;
 
-
     /**
      * Instantiates a new booster pack.
      * 
@@ -84,7 +83,7 @@ public class TournamentPack implements InventoryItemFromSet {
      */
     @Override
     public final String getName() {
-        return this.name;
+        return this.name + " " + this.getType();
     }
 
     /*
@@ -191,11 +190,12 @@ public class TournamentPack implements InventoryItemFromSet {
      */
     @Override
     public final Object clone() {
-        return new TournamentPack(name, contents); 
+        return new TournamentPack(name, contents);
     }
 
     /**
      * TODO: Write javadoc for this method.
+     * 
      * @return
      */
     public int getTotalCards() {
