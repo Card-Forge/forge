@@ -86,6 +86,7 @@ public enum FModel {
     private final EditionCollection editions;
     private final FormatCollection formats;
     private final IStorageView<BoosterData> boosters;
+    private final IStorageView<BoosterData> tournaments;
     private final StorageView<CardBlock> blocks;
     
     // have to implement lazy initialization - at the moment of FModel.ctor()
@@ -131,9 +132,11 @@ public enum FModel {
         this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
         this.questEventManager = new QuestEventManager();
+        
         this.editions = new EditionCollection();
         this.formats = new FormatCollection("res/blockdata/formats.txt");
         this.boosters = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/boosters.txt"));
+        this.tournaments = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/starters.txt"));
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         
         
@@ -164,6 +167,10 @@ public enum FModel {
 
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();
+    }
+
+    public final IStorageView<BoosterData> getTournamentPacks() {
+        return tournaments;
     }
 
     public final IStorageView<BoosterData> getBoosters() {

@@ -187,7 +187,16 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         private static class CanMakeBooster extends Predicate<CardEdition> {
             @Override
             public boolean isTrue(final CardEdition subject) {
-                return Singletons.getModel().getBoosters().get(subject.getCode()) != null;
+                return Singletons.getModel().getBoosters().contains(subject.getCode());
+            }
+        }
+        
+        public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
+
+        private static class CanMakeStarter extends Predicate<CardEdition> {
+            @Override
+            public boolean isTrue(final CardEdition subject) {
+                return Singletons.getModel().getTournamentPacks().contains(subject.getCode());
             }
         }
         

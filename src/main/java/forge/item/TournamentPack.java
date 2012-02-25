@@ -17,30 +17,26 @@
  */
 package forge.item;
 
-import java.util.Arrays;
 import java.util.List;
 
-import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
-import forge.card.CardRules;
 import forge.card.CardEdition;
-import forge.util.Predicate;
 
 /**
  * TODO Write javadoc for this type.
  * 
  */
-public class BoosterPack implements InventoryItemFromSet {
+public class TournamentPack implements InventoryItemFromSet {
 
     /** The Constant fnFromSet. */
-    public static final Lambda1<BoosterPack, CardEdition> FN_FROM_SET = new Lambda1<BoosterPack, CardEdition>() {
+    public static final Lambda1<TournamentPack, CardEdition> FN_FROM_SET = new Lambda1<TournamentPack, CardEdition>() {
         @Override
-        public BoosterPack apply(final CardEdition arg1) {
-            BoosterData d = Singletons.getModel().getBoosters().get(arg1.getCode());
-            return new BoosterPack(arg1.getName(), d);
+        public TournamentPack apply(final CardEdition arg1) {
+            BoosterData d = Singletons.getModel().getTournamentPacks().get(arg1.getCode());
+            return new TournamentPack(arg1.getName(), d);
         }
     };
 
@@ -56,7 +52,7 @@ public class BoosterPack implements InventoryItemFromSet {
      * @param set
      *            the set
      */
-    public BoosterPack(final String name0, final BoosterData boosterData) {
+    public TournamentPack(final String name0, final BoosterData boosterData) {
         this.contents = boosterData;
         this.name = name0;
     }
@@ -103,36 +99,12 @@ public class BoosterPack implements InventoryItemFromSet {
      */
     @Override
     public final String getImageFilename() {
-        return "booster/" + this.contents.getEdition() + ".png";
-    }
-
-    private CardPrinted getRandomBasicLand(final CardEdition set) {
-        return Predicate.and(CardPrinted.Predicates.printedInSets(set.getCode()),
-                CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES).random(
-                CardDb.instance().getAllCards());
-    }
-
-    private CardPrinted getLandFromNearestSet() {
-        final CardEdition[] editions = UtilFunctions.iteratorToArray(Singletons.getModel().getEditions().iterator(), new CardEdition[]{});
-        final int iThisSet = Arrays.binarySearch(editions, this.contents);
-        for (int iSet = iThisSet; iSet < editions.length; iSet++) {
-            final CardPrinted land = this.getRandomBasicLand(editions[iSet]);
-            if (null != land) {
-                return land;
-            }
-        }
-        // if not found (though that's impossible)
-        return this.getRandomBasicLand(Singletons.getModel().getEditions().get("M12"));
+        return "tournamentpacks/" + this.contents.getEdition() + ".png";
     }
 
     private void generate() {
         final BoosterGenerator gen = new BoosterGenerator(this.contents.getEditionFilter());
         this.cards = gen.getBoosterPack(this.contents);
-
-        final int cntLands = this.contents.getLand();
-        if (cntLands > 0) {
-            this.cards.add(this.getLandFromNearestSet());
-        }
     }
 
     /**
@@ -181,7 +153,7 @@ public class BoosterPack implements InventoryItemFromSet {
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        final BoosterPack other = (BoosterPack) obj;
+        final TournamentPack other = (TournamentPack) obj;
         if (this.contents == null) {
             if (other.contents != null) {
                 return false;
@@ -204,7 +176,7 @@ public class BoosterPack implements InventoryItemFromSet {
      */
     @Override
     public final String getType() {
-        return "Booster Pack";
+        return "Tournament Pack";
     }
 
     /*
@@ -219,7 +191,7 @@ public class BoosterPack implements InventoryItemFromSet {
      */
     @Override
     public final Object clone() {
-        return new BoosterPack(name, contents); 
+        return new TournamentPack(name, contents); 
     }
 
     /**

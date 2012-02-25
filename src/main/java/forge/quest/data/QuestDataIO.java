@@ -45,6 +45,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 
+import forge.Singletons;
+import forge.card.BoosterData;
+import forge.card.CardEdition;
 import forge.deck.DeckSection;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
@@ -54,6 +57,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.PreconDeck;
+import forge.item.TournamentPack;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
@@ -297,6 +301,13 @@ public class QuestDataIO {
             writer.endNode();
         }
 
+        protected void write(final TournamentPack booster, final Integer count, final HierarchicalStreamWriter writer) {
+            writer.startNode("tpack");
+            writer.addAttribute("s", booster.getEdition());
+            writer.addAttribute("n", count.toString());
+            writer.endNode();
+        }        
+        
         protected void write(final PreconDeck deck, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("precon");
             writer.addAttribute("name", deck.getName());
@@ -315,6 +326,8 @@ public class QuestDataIO {
                     this.write((CardPrinted) item, count, writer);
                 } else if (item instanceof BoosterPack) {
                     this.write((BoosterPack) item, count, writer);
+                } else if (item instanceof TournamentPack) {
+                    this.write((TournamentPack) item, count, writer);                    
                 } else if (item instanceof PreconDeck) {
                     this.write((PreconDeck) item, count, writer);
                 }
@@ -337,6 +350,8 @@ public class QuestDataIO {
                     result.add(this.readCardPrinted(reader), cnt);
                 } else if ("booster".equals(nodename)) {
                     result.add(this.readBooster(reader), cnt);
+                } else if ("tpack".equals(nodename)) {
+                    result.add(this.readTournamentPack(reader), cnt);                    
                 } else if ("precon".equals(nodename)) {
                     final PreconDeck toAdd = this.readPreconDeck(reader);
                     if (null != toAdd) {
@@ -358,9 +373,18 @@ public class QuestDataIO {
 
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
             final String set = reader.getAttribute("s");
-            return new BoosterPack(set);
+            CardEdition ed = Singletons.getModel().getEditions().get(set);
+            BoosterData bd = Singletons.getModel().getBoosters().get(set);
+            return new BoosterPack(ed.getName(), bd);
         }
 
+        protected TournamentPack readTournamentPack(final HierarchicalStreamReader reader) {
+            final String set = reader.getAttribute("s");
+            CardEdition ed = Singletons.getModel().getEditions().get(set);
+            BoosterData bd = Singletons.getModel().getTournamentPacks().get(set);
+            return new TournamentPack(ed.getName(), bd);
+        }
+        
         protected CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
             final String name = reader.getAttribute("c");
             final String set = reader.getAttribute("s");

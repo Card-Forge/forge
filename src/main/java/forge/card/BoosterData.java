@@ -177,7 +177,9 @@ public class BoosterData {
             int nR = section.getInt("Rares", 0);
             int nS = section.getInt("Special", 0);
             int nDf = section.getInt("DoubleFaced", 0);
-            return new BoosterData(section.get("Set"), nC, nU, nR, nS, nDf);
+            int nLand = section.getInt("BasicLands", 0);
+            int nFoilRate = section.getInt("FoilRate", 68);
+            return new BoosterData(section.get("Set"), nC, nU, nR, nS, nDf, nLand, nFoilRate);
         }
     }    
 }

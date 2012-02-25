@@ -34,6 +34,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.item.PreconDeck;
+import forge.item.TournamentPack;
 import forge.quest.BoosterUtils;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
@@ -207,6 +208,14 @@ public final class QuestUtilCards {
         }
     }
 
+    public void buyTournamentPack(final TournamentPack booster, final int value) {
+        if (this.q.getCredits() >= value) {
+            this.q.setCredits(this.q.getCredits() - value);
+            this.q.getShopList().remove(booster);
+            this.addAllCards(booster.getCards());
+        }
+    }    
+    
     /**
      * Buy precon deck.
      * 
@@ -352,6 +361,17 @@ public final class QuestUtilCards {
      * @param count
      *            the count
      */
+    public void generateTournamentsInShop(final int count) {
+        Predicate<CardEdition> hasTournament = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
+        this.q.getShopList().addAllFlat( hasTournament.random(Singletons.getModel().getEditions(), count, TournamentPack.FN_FROM_SET));            
+    }    
+    
+    /**
+     * Generate precons in shop.
+     * 
+     * @param count
+     *            the count
+     */
     public void generatePreconsInShop(final int count) {
         final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
         for (final PreconDeck deck : QuestData.getPrecons()) {
@@ -387,6 +407,7 @@ public final class QuestUtilCards {
 
         this.generateBoostersInShop(totalPacks);
         this.generatePreconsInShop(totalPacks);
+        this.generateTournamentsInShop(totalPacks);
         this.q.getShopList().addAll(QuestUtilCards.generateBasicLands(10, 5));
     }
 

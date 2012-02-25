@@ -49,6 +49,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.item.PreconDeck;
+import forge.item.TournamentPack;
 import forge.quest.ReadPriceList;
 import forge.quest.data.QuestData;
 import forge.util.Predicate;
@@ -304,6 +305,8 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
             }
         } else if (card instanceof BoosterPack) {
             return 395;
+        } else if (card instanceof TournamentPack) {
+            return 995;
         } else if (card instanceof PreconDeck) {
             return ((PreconDeck) card).getRecommendedDeals().getCost();
         }
@@ -332,6 +335,18 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
 
                 final BoosterPack booster = (BoosterPack) ((BoosterPack) item).clone();
                 this.questData.getCards().buyBooster(booster, value);
+                final List<CardPrinted> newCards = booster.getCards();
+                for (final CardPrinted card : newCards) {
+                    this.getBottomTableWithCards().addCard(card);
+                }
+                final CardListViewer c = new CardListViewer(booster.getName(),
+                        "You have found the following cards inside:", newCards);
+                c.show();
+            } else if (item instanceof TournamentPack) {
+                this.getTopTableWithCards().removeCard(item);
+
+                final TournamentPack booster = (TournamentPack) ((TournamentPack) item).clone();
+                this.questData.getCards().buyTournamentPack(booster, value);
                 final List<CardPrinted> newCards = booster.getCards();
                 for (final CardPrinted card : newCards) {
                     this.getBottomTableWithCards().addCard(card);

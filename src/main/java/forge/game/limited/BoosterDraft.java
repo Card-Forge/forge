@@ -34,7 +34,6 @@ import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Singletons;
-import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardEdition;

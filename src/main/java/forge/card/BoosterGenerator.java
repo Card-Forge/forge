@@ -199,7 +199,7 @@ public class BoosterGenerator {
      * @return the singleton booster pack
      */
     public final List<CardPrinted> getSingletonBoosterPack(final int nAnyCard) {
-        return this.pickRandomCards(this.allButLands, nAnyCard, true);
+        return this.pickRandomCards(new ArrayList<CardPrinted>(this.allButLands), nAnyCard, true);
     }
 
     /**
@@ -209,7 +209,7 @@ public class BoosterGenerator {
      */
     public final List<CardPrinted> getBoosterPack(BoosterData booster) {
         return this.getBoosterPack(booster.getCommon(), booster.getUncommon(), booster.getRare(), 0, 0, booster.getSpecial(),
-                booster.getDoubleFaced(), 0, 0);
+                booster.getDoubleFaced(), 0, booster.getLand());
     }
 
     /**
