@@ -59,7 +59,7 @@ public class TournamentPack extends OpenablePack {
 
     @Override
     public final String getType() {
-        return "Tournament Pack";
+        return contents.getCommon() == 30 ? "Tournament Pack" : "Starter Deck";
     }
 
     protected List<CardPrinted> generate() {
