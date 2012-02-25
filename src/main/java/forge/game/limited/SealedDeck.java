@@ -106,10 +106,10 @@ public class SealedDeck {
 
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));              
+                    this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
                 }
             } else {
-                final UnOpenedProduct product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0])); 
+                final UnOpenedProduct product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0]));
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(product1);
                 }

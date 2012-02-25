@@ -88,7 +88,7 @@ public enum FModel {
     private final IStorageView<BoosterData> boosters;
     private final IStorageView<BoosterData> tournaments;
     private final StorageView<CardBlock> blocks;
-    
+
     // have to implement lazy initialization - at the moment of FModel.ctor()
     // CardDb is not ready yet.
     private CardCollections decks;
@@ -132,14 +132,13 @@ public enum FModel {
         this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
         this.questEventManager = new QuestEventManager();
-        
+
         this.editions = new EditionCollection();
         this.formats = new FormatCollection("res/blockdata/formats.txt");
         this.boosters = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/boosters.txt"));
         this.tournaments = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/starters.txt"));
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
-        
-        
+
         // TODO this single setting from preferences should not be here, or,
         // it should be here with all the other settings at the same time.
         // Unfortunately, they're tied up in legacy code in the Display

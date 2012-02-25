@@ -134,12 +134,12 @@ public class PreconDeck implements InventoryItemFromSet {
     public final String getDescription() {
         return this.description;
     }
-    
+
     public final static Lambda1<String, PreconDeck> FN_NAME_SELECTOR = new Lambda1<String, PreconDeck>() {
         @Override
         public String apply(PreconDeck arg1) {
             return arg1.getName();
         }
-    };    
+    };
 
 }

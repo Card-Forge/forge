@@ -45,7 +45,7 @@ import forge.error.ErrorViewer;
 public abstract class StorageReaderFolder<T> implements IItemReader<T> {
 
     private final File directory;
-    private final Lambda1<String,T> keySelector;
+    private final Lambda1<String, T> keySelector;
 
     /**
      * Gets the directory.
@@ -61,7 +61,7 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
      *
      * @param deckDir0 the deck dir0
      */
-    public StorageReaderFolder(final File deckDir0, Lambda1<String,T> keySelector0) {
+    public StorageReaderFolder(final File deckDir0, Lambda1<String, T> keySelector0) {
 
         this.directory = deckDir0;
         keySelector = keySelector0;
@@ -143,7 +143,7 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
      * @return FilenameFilter to pick only relevant objects for deserialization
      */
     protected abstract FilenameFilter getFileFilter();
-    
+
     public String getItemKey(T item) {
         return keySelector.apply(item);
     }

@@ -271,7 +271,7 @@ public class Deck extends DeckBase implements Serializable {
         out.addAll(Deck.writeCardPool(this.getSideboard()));
         return out;
     }
-    
+
     public final static Lambda1<String, Deck> FN_NAME_SELECTOR = new Lambda1<String, Deck>() {
         @Override
         public String apply(Deck arg1) {

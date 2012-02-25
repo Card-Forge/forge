@@ -119,12 +119,12 @@ public final class GameFormat {
     public String toString() {
         return this.name + " (format)";
     }
-    
-    public static final Lambda1<String,GameFormat> FN_GET_NAME = new Lambda1<String, GameFormat>() {
+
+    public static final Lambda1<String, GameFormat> FN_GET_NAME = new Lambda1<String, GameFormat>() {
         @Override
         public String apply(GameFormat arg1) {
             return arg1.getName();
         }
-    }; 
+    };
 
 }

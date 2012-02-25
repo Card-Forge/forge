@@ -99,9 +99,6 @@ public class BoosterPack extends OpenablePack {
         return myCards;
     }
 
-
- 
-
     @Override
     public final String getType() {
         return "Booster Pack";
@@ -119,7 +116,7 @@ public class BoosterPack extends OpenablePack {
      */
     @Override
     public final Object clone() {
-        return new BoosterPack(name, contents); 
+        return new BoosterPack(name, contents);
     }
 
 

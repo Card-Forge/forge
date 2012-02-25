@@ -33,6 +33,6 @@ public interface IItemReader<T> {
      */
     Map<String, T> readAll();
     // T read(File file);
-    
+
     String getItemKey(T item);
 }

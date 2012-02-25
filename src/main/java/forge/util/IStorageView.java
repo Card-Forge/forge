@@ -42,8 +42,8 @@ public interface IStorageView<T> extends Iterable<T> {
      * @return a ArrayList<String>
      */
     Collection<String> getNames();
-    
+
     boolean contains(final String name);
     int getCount();
-    
+
 }

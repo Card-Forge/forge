@@ -36,19 +36,18 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class StorageReaderFile<T> implements IItemReader<T> {
 
     private final File file;
-    private final Lambda1<String,T> keySelector;
+    private final Lambda1<String, T> keySelector;
 
     /**
      * Instantiates a new storage reader file.
      *
      * @param file0 the file0
      */
-    public StorageReaderFile(final String pathname, Lambda1<String,T> keySelector0) {
+    public StorageReaderFile(final String pathname, Lambda1<String, T> keySelector0) {
         this(new File(pathname), keySelector0);
     }
 
-    
-    public StorageReaderFile(final File file0, Lambda1<String,T> keySelector0) {
+    public StorageReaderFile(final File file0, Lambda1<String, T> keySelector0) {
         this.file = file0;
         keySelector = keySelector0;
     }
@@ -94,7 +93,7 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
     protected boolean lineContainsObject(final String line) {
         return !StringUtils.isBlank(line) && !line.trim().startsWith("#");
     }
-    
+
     @Override
     public String getItemKey(T item) {
         return keySelector.apply(item);

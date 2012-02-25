@@ -209,7 +209,6 @@ public final class QuestUtilCards {
         }
     }
 
-   
     /**
      * Buy precon deck.
      * 
@@ -357,9 +356,9 @@ public final class QuestUtilCards {
      */
     public void generateTournamentsInShop(final int count) {
         Predicate<CardEdition> hasTournament = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
-        this.q.getShopList().addAllFlat( hasTournament.random(Singletons.getModel().getEditions(), count, TournamentPack.FN_FROM_SET));            
-    }    
-    
+        this.q.getShopList().addAllFlat(hasTournament.random(Singletons.getModel().getEditions(), count, TournamentPack.FN_FROM_SET));
+    }
+
     /**
      * Generate precons in shop.
      * 

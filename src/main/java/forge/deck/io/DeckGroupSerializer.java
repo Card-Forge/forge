@@ -128,7 +128,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
                 final File testSubject = new File(dir, name);
                 final boolean isVisibleFolder = testSubject.isDirectory() && !testSubject.isHidden();
                 final boolean hasGoodName = StringUtils.isNotEmpty(name) && !name.startsWith(".");
-                final File fileHumanDeck = new File(testSubject, DeckGroupSerializer.this.humanDeckFile); 
+                final File fileHumanDeck = new File(testSubject, DeckGroupSerializer.this.humanDeckFile);
                 return isVisibleFolder && hasGoodName && fileHumanDeck.exists();
             }
         };

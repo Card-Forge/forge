@@ -306,8 +306,8 @@ public class QuestDataIO {
             writer.addAttribute("s", booster.getEdition());
             writer.addAttribute("n", count.toString());
             writer.endNode();
-        }        
-        
+        }
+
         protected void write(final PreconDeck deck, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("precon");
             writer.addAttribute("name", deck.getName());
@@ -327,7 +327,7 @@ public class QuestDataIO {
                 } else if (item instanceof BoosterPack) {
                     this.write((BoosterPack) item, count, writer);
                 } else if (item instanceof TournamentPack) {
-                    this.write((TournamentPack) item, count, writer);                    
+                    this.write((TournamentPack) item, count, writer);
                 } else if (item instanceof PreconDeck) {
                     this.write((PreconDeck) item, count, writer);
                 }
@@ -351,7 +351,7 @@ public class QuestDataIO {
                 } else if ("booster".equals(nodename)) {
                     result.add(this.readBooster(reader), cnt);
                 } else if ("tpack".equals(nodename)) {
-                    result.add(this.readTournamentPack(reader), cnt);                    
+                    result.add(this.readTournamentPack(reader), cnt);
                 } else if ("precon".equals(nodename)) {
                     final PreconDeck toAdd = this.readPreconDeck(reader);
                     if (null != toAdd) {
@@ -384,7 +384,7 @@ public class QuestDataIO {
             BoosterData bd = Singletons.getModel().getTournamentPacks().get(set);
             return new TournamentPack(ed.getName(), bd);
         }
-        
+
         protected CardPrinted readCardPrinted(final HierarchicalStreamReader reader) {
             final String name = reader.getAttribute("c");
             final String set = reader.getAttribute("s");

@@ -159,7 +159,7 @@ public class FileSection {
         final Map<String, List<String>> result = new HashMap<String, List<String>>();
         String currentSection = "";
         List<String> currentList = null;
-    
+
         for (final String s : source) {
             final String st = s.trim();
             if (st.length() == 0) {
@@ -173,7 +173,7 @@ public class FileSection {
                     }
                     result.put(currentSection, currentList);
                 }
-    
+
                 final String newSection = st.substring(1, st.length() - 1);
                 currentSection = newSection;
                 currentList = null;
@@ -184,7 +184,7 @@ public class FileSection {
                 currentList.add(st);
             }
         }
-    
+
         // save final block
         if ((currentList != null) && (currentList.size() > 0)) {
             final Object oldVal = result.get(currentSection);
@@ -193,7 +193,7 @@ public class FileSection {
             }
             result.put(currentSection, currentList);
         }
-    
+
         return result;
     }
 

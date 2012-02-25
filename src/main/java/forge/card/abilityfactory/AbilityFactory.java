@@ -2326,8 +2326,8 @@ public class AbilityFactory {
                         }
 
                         // give Shroud to targeted creatures
-                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW") 
-                                && (saviourParams.get("KW").endsWith("Shroud") 
+                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW")
+                                && (saviourParams.get("KW").endsWith("Shroud")
                                         || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
                         }
@@ -2372,8 +2372,8 @@ public class AbilityFactory {
                         }
 
                         // give Shroud to targeted creatures
-                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW") 
-                                && (saviourParams.get("KW").endsWith("Shroud") 
+                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW")
+                                && (saviourParams.get("KW").endsWith("Shroud")
                                         || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
                         }
@@ -2394,15 +2394,15 @@ public class AbilityFactory {
             }
             // Exiling => bounce/shroud
             else if ((threatApi.equals("ChangeZone") || threatApi.equals("ChangeZoneAll"))
-                    && (saviourApi.equals("ChangeZone") || saviourApi.equals("Pump")) 
+                    && (saviourApi.equals("ChangeZone") || saviourApi.equals("Pump"))
                     && threatParams.containsKey("Destination")
                     && threatParams.get("Destination").equals("Exile")) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
                         // give Shroud to targeted creatures
-                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW") 
-                                && (saviourParams.get("KW").endsWith("Shroud") 
+                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW")
+                                && (saviourParams.get("KW").endsWith("Shroud")
                                         || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
                         }
