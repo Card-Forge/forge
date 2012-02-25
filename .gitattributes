@@ -11391,6 +11391,7 @@ src/main/java/forge/item/InventoryItem.java -text
 src/main/java/forge/item/InventoryItemFromSet.java -text
 src/main/java/forge/item/ItemPool.java -text
 src/main/java/forge/item/ItemPoolView.java -text
+src/main/java/forge/item/OpenablePack.java -text
 src/main/java/forge/item/PreconDeck.java -text
 src/main/java/forge/item/TournamentPack.java -text
 src/main/java/forge/item/package-info.java -text

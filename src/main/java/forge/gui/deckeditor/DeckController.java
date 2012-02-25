@@ -153,9 +153,12 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#load(java.lang.String)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void load(final String name) {
-        this.setModel(this.folder.get(name), true);
+        T newModel = this.folder.get(name);
+        if (null != newModel)
+            this.setModel((T)newModel.copyTo(name), true);
     }
 
     /*

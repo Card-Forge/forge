@@ -33,6 +33,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.BoosterUtils;
@@ -200,7 +201,7 @@ public final class QuestUtilCards {
      * @param value
      *            the value
      */
-    public void buyBooster(final BoosterPack booster, final int value) {
+    public void buyPack(final OpenablePack booster, final int value) {
         if (this.q.getCredits() >= value) {
             this.q.setCredits(this.q.getCredits() - value);
             this.q.getShopList().remove(booster);
@@ -208,14 +209,7 @@ public final class QuestUtilCards {
         }
     }
 
-    public void buyTournamentPack(final TournamentPack booster, final int value) {
-        if (this.q.getCredits() >= value) {
-            this.q.setCredits(this.q.getCredits() - value);
-            this.q.getShopList().remove(booster);
-            this.addAllCards(booster.getCards());
-        }
-    }    
-    
+   
     /**
      * Buy precon deck.
      * 

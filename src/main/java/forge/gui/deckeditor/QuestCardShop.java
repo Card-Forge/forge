@@ -48,6 +48,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
+import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.ReadPriceList;
@@ -330,23 +331,16 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
                 this.getBottomTableWithCards().addCard(card);
                 this.questData.getCards().buyCard(card, value);
 
-            } else if (item instanceof BoosterPack) {
+            } else if (item instanceof OpenablePack) { 
                 this.getTopTableWithCards().removeCard(item);
-
-                final BoosterPack booster = (BoosterPack) ((BoosterPack) item).clone();
-                this.questData.getCards().buyBooster(booster, value);
-                final List<CardPrinted> newCards = booster.getCards();
-                for (final CardPrinted card : newCards) {
-                    this.getBottomTableWithCards().addCard(card);
+                
+                OpenablePack booster = null;
+                if (item instanceof BoosterPack) {
+                    booster = (BoosterPack) ((BoosterPack) item).clone();
+                } else if (item instanceof TournamentPack) {
+                    booster = (TournamentPack) ((TournamentPack) item).clone();
                 }
-                final CardListViewer c = new CardListViewer(booster.getName(),
-                        "You have found the following cards inside:", newCards);
-                c.show();
-            } else if (item instanceof TournamentPack) {
-                this.getTopTableWithCards().removeCard(item);
-
-                final TournamentPack booster = (TournamentPack) ((TournamentPack) item).clone();
-                this.questData.getCards().buyTournamentPack(booster, value);
+                this.questData.getCards().buyPack(booster, value);
                 final List<CardPrinted> newCards = booster.getCards();
                 for (final CardPrinted card : newCards) {
                     this.getBottomTableWithCards().addCard(card);

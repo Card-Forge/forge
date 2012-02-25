@@ -29,7 +29,7 @@ import forge.card.CardEdition;
  * TODO Write javadoc for this type.
  * 
  */
-public class TournamentPack implements InventoryItemFromSet {
+public class TournamentPack extends OpenablePack {
 
     /** The Constant fnFromSet. */
     public static final Lambda1<TournamentPack, CardEdition> FN_FROM_SET = new Lambda1<TournamentPack, CardEdition>() {
@@ -40,11 +40,6 @@ public class TournamentPack implements InventoryItemFromSet {
         }
     };
 
-    private final BoosterData contents;
-    private final String name;
-
-    private List<CardPrinted> cards = null;
-
     /**
      * Instantiates a new booster pack.
      * 
@@ -52,130 +47,24 @@ public class TournamentPack implements InventoryItemFromSet {
      *            the set
      */
     public TournamentPack(final String name0, final BoosterData boosterData) {
-        this.contents = boosterData;
-        this.name = name0;
+        super(name0, boosterData);    
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getSet()
-     */
-    /**
-     * Gets the sets the.
-     * 
-     * @return String
-     */
-    @Override
-    public final String getEdition() {
-        return this.contents.getEdition();
-    }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getName()
-     */
-    /**
-     * Gets the name.
-     * 
-     * @return String
-     */
-    @Override
-    public final String getName() {
-        return this.name + " " + this.getType();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getImageFilename()
-     */
-    /**
-     * Gets the image filename.
-     * 
-     * @return String
-     */
     @Override
     public final String getImageFilename() {
         return "tournamentpacks/" + this.contents.getEdition() + ".png";
     }
 
-    private void generate() {
-        final BoosterGenerator gen = new BoosterGenerator(this.contents.getEditionFilter());
-        this.cards = gen.getBoosterPack(this.contents);
-    }
 
-    /**
-     * Gets the cards.
-     * 
-     * @return the cards
-     */
-    public final List<CardPrinted> getCards() {
-        if (null == this.cards) {
-            this.generate();
-        }
-        return this.cards;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-    /**
-     * Hash code.
-     * 
-     * @return int
-     */
-    @Override
-    public final int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((this.contents == null) ? 0 : this.contents.hashCode());
-        return result;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public final boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
-        final TournamentPack other = (TournamentPack) obj;
-        if (this.contents == null) {
-            if (other.contents != null) {
-                return false;
-            }
-        } else if (!this.contents.equals(other.contents)) {
-            return false;
-        }
-        return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItem#getType()
-     */
-    /**
-     * Gets the type.
-     * 
-     * @return String
-     */
     @Override
     public final String getType() {
         return "Tournament Pack";
+    }
+
+    protected List<CardPrinted> generate() {
+        final BoosterGenerator gen = new BoosterGenerator(this.contents.getEditionFilter());
+        return gen.getBoosterPack(this.contents);
     }
 
     /*
@@ -193,13 +82,5 @@ public class TournamentPack implements InventoryItemFromSet {
         return new TournamentPack(name, contents);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * 
-     * @return
-     */
-    public int getTotalCards() {
-        return contents.getTotal();
-    }
 
 }
