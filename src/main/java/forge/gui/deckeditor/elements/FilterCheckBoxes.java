@@ -24,6 +24,7 @@ import java.util.List;
 import javax.swing.JCheckBox;
 
 import net.slightlymagic.maxmtg.Predicate;
+
 import forge.card.CardRules;
 import forge.item.CardPrinted;
 

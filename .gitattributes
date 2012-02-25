@@ -11068,6 +11068,7 @@ src/main/java/forge/card/EditionInfo.java svneol=native#text/plain
 src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/MtgDataParser.java -text
 src/main/java/forge/card/TriggerReplacementBase.java -text
+src/main/java/forge/card/UnOpenedProduct.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAnimate.java svneol=native#text/plain
@@ -11521,7 +11522,6 @@ src/main/java/net/slightlymagic/braids/util/progress_monitor/BaseProgressMonitor
 src/main/java/net/slightlymagic/braids/util/progress_monitor/BraidsProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
-src/main/java/net/slightlymagic/maxmtg/Closure1.java -text
 src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
 src/main/java/net/slightlymagic/maxmtg/PredicateString.java -text
 src/main/java/net/slightlymagic/maxmtg/package-info.java svneol=native#text/plain

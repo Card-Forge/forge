@@ -31,6 +31,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 
 import net.slightlymagic.maxmtg.Predicate;
+
 import forge.Constant;
 import forge.card.CardRules;
 import forge.item.InventoryItem;

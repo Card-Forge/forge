@@ -23,12 +23,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
 import net.slightlymagic.maxmtg.Predicate;
+import net.slightlymagic.maxmtg.PredicateString;
 import net.slightlymagic.maxmtg.Predicate.ComparableOp;
 import net.slightlymagic.maxmtg.Predicate.PredicatesOp;
-import net.slightlymagic.maxmtg.PredicateString;
 
 import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * <p>

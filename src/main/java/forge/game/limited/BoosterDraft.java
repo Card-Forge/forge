@@ -30,15 +30,15 @@ import javax.swing.JOptionPane;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.lambda.Lambda1;
-import net.slightlymagic.maxmtg.Closure1;
-
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
 import forge.Singletons;
+import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
+import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -68,7 +68,7 @@ public final class BoosterDraft implements IBoosterDraft {
     private final Map<String, Float> draftPicks = new TreeMap<String, Float>();
     private final CardPoolLimitation draftFormat;
 
-    private final ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>> packs = new ArrayList<Closure1<List<CardPrinted>, BoosterGenerator>>();
+    private final ArrayList<UnOpenedProduct> product = new ArrayList<UnOpenedProduct>();
 
     /**
      * <p>
@@ -85,9 +85,8 @@ public final class BoosterDraft implements IBoosterDraft {
         switch (draftType) {
         case Full: // Draft from all cards in Forge
             final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
-            final Closure1<List<CardPrinted>, BoosterGenerator> picker = BoosterGenerator.getSimplePicker(bpFull);
             for (int i = 0; i < 3; i++) {
-                this.packs.add(picker);
+                this.product.add(new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpFull));
             }
 
             IBoosterDraft.LAND_SET_CODE[0] = CardDb.instance().getCard("Plains").getEdition();
@@ -124,15 +123,13 @@ public final class BoosterDraft implements IBoosterDraft {
                 final Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    final BoosterGenerator bpMulti = new BoosterGenerator(Singletons.getModel().getBoosters().get(pp[i]));
-                    this.packs.add(BoosterGenerator.getSimplePicker(bpMulti));
+                    this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
                 }
 
             } else {
-                final BoosterGenerator bpOne = new BoosterGenerator(Singletons.getModel().getBoosters().get(sets[0]));
-                final Closure1<List<CardPrinted>, BoosterGenerator> pick1 = BoosterGenerator.getSimplePicker(bpOne);
+                final UnOpenedProduct product1 = new UnOpenedProduct(Singletons.getModel().getBoosters().get(sets[0])); 
                 for (int i = 0; i < nPacks; i++) {
-                    this.packs.add(pick1);
+                    this.product.add(product1);
                 }
             }
 
@@ -179,10 +176,8 @@ public final class BoosterDraft implements IBoosterDraft {
             }
         };
 
-        final Closure1<List<CardPrinted>, BoosterGenerator> picker = new Closure1<List<CardPrinted>, BoosterGenerator>(
-                fnPick, bpCustom);
         for (int i = 0; i < draft.getNumPacks(); i++) {
-            this.packs.add(picker);
+            this.product.add(new UnOpenedProduct(fnPick, bpCustom));
         }
 
         IBoosterDraft.LAND_SET_CODE[0] = draft.getLandSetCode();
@@ -239,13 +234,13 @@ public final class BoosterDraft implements IBoosterDraft {
      * @return an array of {@link forge.CardList} objects.
      */
     public List<List<CardPrinted>> get8BoosterPack() {
-        if (this.nextBoosterGroup >= this.packs.size()) {
+        if (this.nextBoosterGroup >= this.product.size()) {
             return null;
         }
 
         final List<List<CardPrinted>> list = new ArrayList<List<CardPrinted>>();
         for (int i = 0; i < 8; i++) {
-            list.add(this.packs.get(this.nextBoosterGroup).apply());
+            list.add(this.product.get(this.nextBoosterGroup).open());
         }
 
         this.nextBoosterGroup++;
@@ -307,7 +302,7 @@ public final class BoosterDraft implements IBoosterDraft {
      */
     @Override
     public boolean hasNextChoice() {
-        final boolean isLastGroup = this.nextBoosterGroup >= this.packs.size();
+        final boolean isLastGroup = this.nextBoosterGroup >= this.product.size();
         final boolean isBoosterDepleted = this.currentBoosterPick >= this.currentBoosterSize;
         final boolean noMoreCards = isLastGroup && isBoosterDepleted;
         return !noMoreCards;

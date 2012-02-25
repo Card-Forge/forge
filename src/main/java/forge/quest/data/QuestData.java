@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.slightlymagic.maxmtg.Predicate;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.item.CardPrinted;

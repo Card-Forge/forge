@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.slightlymagic.maxmtg.Predicate;
+
 import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;

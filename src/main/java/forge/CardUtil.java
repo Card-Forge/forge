@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+
 import net.slightlymagic.maxmtg.Predicate;
 
 import org.apache.commons.lang3.StringUtils;

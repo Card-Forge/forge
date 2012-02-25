@@ -37,6 +37,7 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
 import net.slightlymagic.maxmtg.Predicate;
+
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;

@@ -27,6 +27,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import net.slightlymagic.maxmtg.Predicate;
+
 import forge.Command;
 import forge.gui.deckeditor.elements.CardPanelBase;
 import forge.gui.deckeditor.elements.DeckAnalysis;

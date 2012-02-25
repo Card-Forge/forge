@@ -134,8 +134,8 @@ public class BoosterPack implements InventoryItemFromSet {
     }
 
     private void generate() {
-        final BoosterGenerator gen = new BoosterGenerator(this.contents);
-        this.cards = gen.getBoosterPack();
+        final BoosterGenerator gen = new BoosterGenerator(this.contents.getEditionFilter());
+        this.cards = gen.getBoosterPack(this.contents);
 
         final int cntLands = this.contents.getLand();
         if (cntLands > 0) {
