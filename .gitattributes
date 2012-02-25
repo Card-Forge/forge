@@ -391,6 +391,7 @@ res/cardsfolder/a/ardent_soldier.txt svneol=native#text/plain
 res/cardsfolder/a/arena_of_the_ancients.txt svneol=native#text/plain
 res/cardsfolder/a/arensons_aura.txt svneol=native#text/plain
 res/cardsfolder/a/argent_mutation.txt svneol=native#text/plain
+res/cardsfolder/a/argent_sphinx.txt -text
 res/cardsfolder/a/argentum_armor.txt svneol=native#text/plain
 res/cardsfolder/a/argivian_archaeologist.txt svneol=native#text/plain
 res/cardsfolder/a/argivian_blacksmith.txt svneol=native#text/plain
@@ -10460,6 +10461,7 @@ res/pics/precons/phyrexian_poison.jpg -text
 res/pics/precons/reign_of_vampirism.jpg -text
 res/pics/precons/relentless_dead.jpg -text
 res/pics/precons/relic_breaker.jpg -text
+res/pics/precons/repel_the_dark.jpg -text
 res/pics/precons/spectral_legions.jpg -text
 res/pics/precons/swift_justice.jpg -text
 res/pics/precons/unnatural_schemes.jpg -text
