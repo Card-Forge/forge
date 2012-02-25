@@ -1,7 +1,7 @@
-Set:LEA|Commons:26|Uncommons:9|Rares:2|BasicLands:23
-Set:LEB|Commons:26|Uncommons:9|Rares:2|BasicLands:23
-Set:2ED|Commons:26|Uncommons:9|Rares:2|BasicLands:23
-Set:3ED|Commons:26|Uncommons:9|Rares:2|BasicLands:23
+Set:LEA|Commons:23|Uncommons:13|Rares:2|BasicLands:22
+Set:LEB|Commons:23|Uncommons:13|Rares:2|BasicLands:22
+Set:2ED|Commons:23|Uncommons:13|Rares:2|BasicLands:22
+Set:3ED|Commons:23|Uncommons:13|Rares:2|BasicLands:22
 Set:4ED|Commons:26|Uncommons:9|Rares:3|BasicLands:22
 Set:ICE|Commons:26|Uncommons:9|Rares:3|BasicLands:22
 Set:5ED|Commons:26|Uncommons:9|Rares:3|BasicLands:22
