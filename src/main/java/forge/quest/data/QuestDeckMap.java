@@ -117,4 +117,12 @@ public class QuestDeckMap implements IStorage<Deck> {
         return map.containsKey(name);
     }
 
+    /* (non-Javadoc)
+     * @see forge.util.IStorageView#getCount()
+     */
+    @Override
+    public int getCount() {
+        return map.size();
+    }
+
 }

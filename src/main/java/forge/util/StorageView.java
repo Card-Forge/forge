@@ -97,4 +97,9 @@ public class StorageView<T> implements Iterable<T>, IStorageView<T> {
     public boolean contains(String name) {
         return this.map.containsKey(name);
     }
+    
+    @Override
+    public int getCount() { 
+        return this.map.size();
+    }
 }
