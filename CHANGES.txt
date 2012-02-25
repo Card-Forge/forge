@@ -538,6 +538,11 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Ran set info script.
 - Ran oracle script.
 - tornament packs contents
+- Added the recent commit logs to changes.txt.
+- Tournament packs ready. quick but working
+- Added the precon Reign of Vampirism.
+- fix boosters and tournaments
+- unlimited had wrong name
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
