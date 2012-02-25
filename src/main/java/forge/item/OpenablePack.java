@@ -3,7 +3,6 @@ package forge.item;
 import java.util.List;
 
 import forge.card.BoosterData;
-import forge.card.BoosterGenerator;
 
 /**
  * TODO: Write javadoc for this type.

@@ -21,8 +21,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.slightlymagic.braids.util.lambda.Lambda1;
 
+
+import forge.card.BoosterGenerator;
 import forge.card.CardRules;
+import forge.card.UnOpenedProduct;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
@@ -214,7 +218,7 @@ public final class BoosterUtils {
      *            Properties string of reward (97 multicolor rares)
      * @return CardList
      */
-    public static List<CardPrinted> generateCardRewardList(final String s) {
+    public static UnOpenedProduct generateCardRewardList(final String s) {
         final String[] temp = s.split(" ");
 
         final int qty = Integer.parseInt(temp[0]);
@@ -242,6 +246,12 @@ public final class BoosterUtils {
             col = CardRules.Predicates.Presets.IS_WHITE;
         }
 
-        return BoosterUtils.generateDistinctCards(Predicate.and(rar, col, CardPrinted.FN_GET_RULES), qty);
+        Lambda1<List<CardPrinted>, BoosterGenerator> openWay = new Lambda1<List<CardPrinted>, BoosterGenerator>() {
+            @Override
+            public List<CardPrinted> apply(BoosterGenerator arg1) {
+                return arg1.getSingletonBoosterPack(qty);
+            }
+        };
+        return new UnOpenedProduct(openWay, new BoosterGenerator(Predicate.and(rar, col, CardPrinted.FN_GET_RULES))); // qty))
     }
 }

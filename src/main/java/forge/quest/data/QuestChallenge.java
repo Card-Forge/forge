@@ -20,6 +20,7 @@ package forge.quest.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.card.UnOpenedProduct;
 import forge.item.CardPrinted;
 
 /**
@@ -60,7 +61,7 @@ public class QuestChallenge extends QuestEvent {
     private List<String> aiExtraCards = new ArrayList<String>();
 
     /** The card reward list. */
-    private List<CardPrinted> cardRewardList = new ArrayList<CardPrinted>();
+    private UnOpenedProduct cardRewardList;
 
     /**
      * Instantiates a new quest challenge.
@@ -168,7 +169,7 @@ public class QuestChallenge extends QuestEvent {
      * @return the card reward list
      */
     public final List<CardPrinted> getCardRewardList() {
-        return this.cardRewardList;
+        return this.cardRewardList.open();
     }
 
     /**
@@ -274,7 +275,7 @@ public class QuestChallenge extends QuestEvent {
      * @param cardRewardList0
      *            the cardRewardList to set
      */
-    public void setCardRewardList(final List<CardPrinted> cardRewardList0) {
+    public void setCardRewardList(final UnOpenedProduct cardRewardList0) {
         this.cardRewardList = cardRewardList0;
     }
 
