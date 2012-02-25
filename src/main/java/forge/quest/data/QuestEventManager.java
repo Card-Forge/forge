@@ -34,8 +34,8 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.BoosterUtils;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.SectionUtil;
 
 /**
  * <p>
@@ -82,7 +82,7 @@ public class QuestEventManager {
         final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckSerializer.DCK_FILE_FILTER);
 
         for (final File f : allFiles) {
-            final Map<String, List<String>> contents = SectionUtil.parseSections(FileUtil.readFile(f));
+            final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(f));
 
             if (contents.containsKey("quest")) {
                 tempEvent = this.readChallenge(contents.get("quest"));

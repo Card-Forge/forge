@@ -17,6 +17,9 @@
  */
 package forge.util;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -142,6 +145,56 @@ public class FileSection {
             return defaultValue;
         }
         return "true".equalsIgnoreCase(s);
+    }
+
+    /**
+     * Parses the sections.
+     * 
+     * @param source
+     *            the source
+     * @return the map
+     */
+    @SuppressWarnings("unchecked")
+    public static Map<String, List<String>> parseSections(final List<String> source) {
+        final Map<String, List<String>> result = new HashMap<String, List<String>>();
+        String currentSection = "";
+        List<String> currentList = null;
+    
+        for (final String s : source) {
+            final String st = s.trim();
+            if (st.length() == 0) {
+                continue;
+            }
+            if (st.startsWith("[") && st.endsWith("]")) {
+                if ((currentList != null) && (currentList.size() > 0)) {
+                    final Object oldVal = result.get(currentSection);
+                    if ((oldVal != null) && (oldVal instanceof List<?>)) {
+                        currentList.addAll((List<String>) oldVal);
+                    }
+                    result.put(currentSection, currentList);
+                }
+    
+                final String newSection = st.substring(1, st.length() - 1);
+                currentSection = newSection;
+                currentList = null;
+            } else {
+                if (currentList == null) {
+                    currentList = new ArrayList<String>();
+                }
+                currentList.add(st);
+            }
+        }
+    
+        // save final block
+        if ((currentList != null) && (currentList.size() > 0)) {
+            final Object oldVal = result.get(currentSection);
+            if ((oldVal != null) && (oldVal instanceof List<?>)) {
+                currentList.addAll((List<String>) oldVal);
+            }
+            result.put(currentSection, currentList);
+        }
+    
+        return result;
     }
 
 }

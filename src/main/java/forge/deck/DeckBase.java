@@ -21,13 +21,12 @@ import java.io.Serializable;
 
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
-import forge.util.IHasName;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class DeckBase implements IHasName, Serializable, Comparable<DeckBase> {
+public abstract class DeckBase implements Serializable, Comparable<DeckBase> {
     private static final long serialVersionUID = -7538150536939660052L;
     // gameType is from Constant.GameType, like GameType.Regular
 
@@ -74,7 +73,6 @@ public abstract class DeckBase implements IHasName, Serializable, Comparable<Dec
     /* (non-Javadoc)
      * @see forge.util.IHasName#getName()
      */
-    @Override
     public String getName() {
         return this.name;
     }

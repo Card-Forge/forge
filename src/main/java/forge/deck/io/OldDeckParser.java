@@ -33,9 +33,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.PlayerType;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IStorage;
-import forge.util.SectionUtil;
 
 /**
  * TODO: Write javadoc for this type.
@@ -172,7 +172,7 @@ public class OldDeckParser {
             boolean importedOk = false;
 
             final List<String> fileLines = FileUtil.readFile(f);
-            final Map<String, List<String>> sections = SectionUtil.parseSections(fileLines);
+            final Map<String, List<String>> sections = FileSection.parseSections(fileLines);
             final DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections, false);
             String name = dh.getName();
 

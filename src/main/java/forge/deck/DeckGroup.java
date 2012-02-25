@@ -24,13 +24,12 @@ import net.slightlymagic.braids.util.lambda.Lambda1;
 
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
-import forge.util.IHasName;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public class DeckGroup extends DeckBase implements IHasName {
+public class DeckGroup extends DeckBase {
 
     /**
      * Instantiates a new deck group.

@@ -37,9 +37,8 @@ import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.elements.TableSorter;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.IHasName;
-import forge.util.SectionUtil;
 
 /**
  * <p>
@@ -53,7 +52,7 @@ import forge.util.SectionUtil;
  * @author Forge
  * @version $Id$
  */
-public class Deck extends DeckBase implements Serializable, IHasName {
+public class Deck extends DeckBase implements Serializable {
     /**
      *
      */
@@ -161,7 +160,7 @@ public class Deck extends DeckBase implements Serializable, IHasName {
      * @return the deck
      */
     public static Deck fromFile(final File deckFile) {
-        return Deck.fromSections(SectionUtil.parseSections(FileUtil.readFile(deckFile)));
+        return Deck.fromSections(FileSection.parseSections(FileUtil.readFile(deckFile)));
     }
 
     /**

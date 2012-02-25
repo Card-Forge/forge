@@ -28,7 +28,6 @@ import forge.deck.Deck;
 import forge.quest.SellRules;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.SectionUtil;
 
 /**
  * TODO: Write javadoc for this type.
@@ -81,7 +80,7 @@ public class PreconDeck implements InventoryItemFromSet {
      */
     public PreconDeck(final File f) {
         final List<String> deckLines = FileUtil.readFile(f);
-        final Map<String, List<String>> sections = SectionUtil.parseSections(deckLines);
+        final Map<String, List<String>> sections = FileSection.parseSections(deckLines);
         this.deck = Deck.fromSections(sections);
 
         String setProxy = "n/a";

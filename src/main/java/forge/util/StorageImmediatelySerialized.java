@@ -27,10 +27,9 @@ package forge.util;
  * @author Forge
  * @version $Id$
  */
-public class StorageImmediatelySerialized<T extends IHasName> extends StorageView<T> implements IStorage<T> {
+public class StorageImmediatelySerialized<T> extends StorageView<T> implements IStorage<T> {
 
     private final IItemSerializer<T> serializer;
-
     /**
      * <p>
      * Constructor for DeckManager.
@@ -50,7 +49,8 @@ public class StorageImmediatelySerialized<T extends IHasName> extends StorageVie
      */
     @Override
     public final void add(final T deck) {
-        this.getMap().put(deck.getName(), deck);
+        String name = serializer.getItemKey(deck);
+        this.getMap().put(name, deck);
         this.serializer.save(deck);
     }
 

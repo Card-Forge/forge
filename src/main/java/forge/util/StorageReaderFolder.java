@@ -143,5 +143,9 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
      * @return FilenameFilter to pick only relevant objects for deserialization
      */
     protected abstract FilenameFilter getFileFilter();
+    
+    public String getItemKey(T item) {
+        return keySelector.apply(item);
+    }
 
 }

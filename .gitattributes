@@ -11437,13 +11437,11 @@ src/main/java/forge/util/FileSection.java -text
 src/main/java/forge/util/FileSectionManual.java -text
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
-src/main/java/forge/util/IHasName.java -text
 src/main/java/forge/util/IItemReader.java -text
 src/main/java/forge/util/IItemSerializer.java -text
 src/main/java/forge/util/IStorage.java -text
 src/main/java/forge/util/IStorageView.java -text
 src/main/java/forge/util/MyRandom.java svneol=native#text/plain
-src/main/java/forge/util/SectionUtil.java -text
 src/main/java/forge/util/StorageImmediatelySerialized.java svneol=native#text/plain
 src/main/java/forge/util/StorageReaderFile.java -text
 src/main/java/forge/util/StorageReaderFolder.java -text

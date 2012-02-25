@@ -40,7 +40,6 @@ import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
 import forge.util.IItemSerializer;
-import forge.util.SectionUtil;
 import forge.util.StorageReaderFolder;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -245,7 +244,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
      */
     @Override
     protected Deck read(final File file) {
-        final Map<String, List<String>> sections = SectionUtil.parseSections(FileUtil.readFile(file));
+        final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(file));
         return Deck.fromSections(sections, true);
     }
 

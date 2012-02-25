@@ -94,5 +94,10 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
     protected boolean lineContainsObject(final String line) {
         return !StringUtils.isBlank(line) && !line.trim().startsWith("#");
     }
+    
+    @Override
+    public String getItemKey(T item) {
+        return keySelector.apply(item);
+    }
 
 }
