@@ -823,7 +823,6 @@ public class AbilityFactoryPump {
         // when damageStackDescription is called, just build exactly what is
         // happening
         final StringBuilder sb = new StringBuilder();
-        final String name = af.getHostCard().getName();
         ArrayList<GameEntity> tgts = new ArrayList<GameEntity>();
 
         final Target tgt = sa.getTarget();
@@ -844,7 +843,7 @@ public class AbilityFactoryPump {
             if (sa instanceof AbilitySub) {
                 sb.append(" ");
             } else {
-                sb.append(name).append(" - ");
+                sb.append(af.getHostCard()).append(" - ");
             }
 
             if (params.containsKey("StackDescription")) {
@@ -852,7 +851,7 @@ public class AbilityFactoryPump {
             }
             else {
                 for (final GameEntity c : tgts) {
-                    sb.append(c.getName()).append(" ");
+                    sb.append(c).append(" ");
                 }
 
                 if (af.getMapParams().containsKey("Radiance")) {
