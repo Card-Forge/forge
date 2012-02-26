@@ -53,7 +53,7 @@ public class TournamentPack extends OpenablePack {
 
     @Override
     public final String getImageFilename() {
-        return "tournamentpacks/" + this.contents.getEdition() + ".png";
+        return "tournamentpacks/" + this.contents.getEdition();
     }
 
 

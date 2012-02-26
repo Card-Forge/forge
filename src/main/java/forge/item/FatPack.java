@@ -56,7 +56,7 @@ public class FatPack extends OpenablePack {
 
     @Override
     public final String getImageFilename() {
-        return "fatpacks/" + this.contents.getEdition() + ".png";
+        return "fatpacks/" + this.contents.getEdition();
     }
 
 
