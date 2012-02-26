@@ -498,6 +498,7 @@ res/cardsfolder/a/aura_shards.txt svneol=native#text/plain
 res/cardsfolder/a/auramancer.txt svneol=native#text/plain
 res/cardsfolder/a/auramancers_guise.txt -text
 res/cardsfolder/a/auratog.txt svneol=native#text/plain
+res/cardsfolder/a/auratouched_mage.txt -text
 res/cardsfolder/a/aurification.txt -text
 res/cardsfolder/a/auriok_bladewarden.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_champion.txt svneol=native#text/plain

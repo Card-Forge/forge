@@ -350,18 +350,6 @@ public class TriggerHandler {
             }
         }
 
-        /*
-         * //This was supposed to make sure that things like Adaptive Automaton
-         * //that used a static trigger to start pumping something
-         * //"As they ETB" to make sure they then trigger cards //already on the
-         * bf that would react to it. //However, this broke auras because
-         * checkStateEffects //expect auras to be attached to something, which
-         * they //aren't yet. And even if it (correctly?) sent unattached
-         * //auras to the graveyard,that would result in all auras //going
-         * straight to the grave no matter what. this.suppressMode("Always");
-         * Singletons.getModel().getGameAction().checkStateEffects(true);
-         * this.clearSuppression("Always");
-         */
         if (checkStatics) {
             this.suppressMode("Always");
             Singletons.getModel().getGameAction().checkStaticAbilities();

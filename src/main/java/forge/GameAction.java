@@ -926,9 +926,7 @@ public class GameAction {
 
                     if (entity instanceof Card) {
                         final Card perm = (Card) entity;
-                        if (!AllZoneUtil.isCardInPlay(perm) || perm.hasProtectionFrom(c)
-                                || perm.hasKeyword("CARDNAME can't be enchanted.")
-                                || ((tgt != null) && !perm.isValid(tgt.getValidTgts(), c.getController(), c))) {
+                        if (!AllZoneUtil.isCardInPlay(perm) || !perm.canBeEnchantedBy(c)) {
                             c.unEnchantEntity(perm);
                             this.moveToGraveyard(c);
                             checkAgain = true;

@@ -43,6 +43,7 @@ import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
+import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.item.CardDb;
@@ -1101,7 +1102,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * @param blockedByThisTurn0 the blockedByThisTurn to set
+     * @param blocker the blockedByThisTurn to set
      */
     public void addBlockedByThisTurn(Card blocker) {
         this.blockedByThisTurn.add(blocker);
@@ -6778,6 +6779,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.equals(this.enchanting)) {
                 return false;
             }
+        } else if (property.startsWith("CanEnchantSource")) {
+            if (!source.canBeEnchantedBy(this)) {
+                return false;
+            }
         } else if (property.startsWith("EquippedBy")) {
             if (!this.equippedBy.contains(source)) {
                 return false;
@@ -8774,6 +8779,27 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
+        }
+        return true;
+    }
+
+    /**
+     * canBeEnchantedBy.
+     * 
+     * @param aura
+     *            a Card
+     * @return a boolean
+     */
+    public final boolean canBeEnchantedBy(final Card aura) {
+        final SpellAbility sa = aura.getSpellPermanent();
+        Target tgt = null;
+        if (sa != null) {
+            tgt = sa.getTarget();
+        }
+
+        if (this.hasProtectionFrom(aura) || this.hasKeyword("CARDNAME can't be enchanted.")
+                || ((tgt != null) && !this.isValid(tgt.getValidTgts(), aura.getController(), aura))) {
+            return false;
         }
         return true;
     }
