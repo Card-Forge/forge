@@ -837,9 +837,6 @@ public class GameAction {
             }
         }
 
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        AllZone.getTriggerHandler().runTrigger("Always", runParams);
-
         // card state effects like Glorious Anthem
         for (final String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
             final Command com = GameActionUtil.getCommands().get(effect);
@@ -881,6 +878,9 @@ public class GameAction {
             boolean checkAgain = false;
 
             this.checkStaticAbilities();
+
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            AllZone.getTriggerHandler().runTrigger("Always", runParams);
 
             final CardList list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             Card c;

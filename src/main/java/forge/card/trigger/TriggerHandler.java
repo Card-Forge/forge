@@ -351,9 +351,7 @@ public class TriggerHandler {
         }
 
         if (checkStatics) {
-            this.suppressMode("Always");
             Singletons.getModel().getGameAction().checkStaticAbilities();
-            this.clearSuppression("Always");
         }
 
         // AP
