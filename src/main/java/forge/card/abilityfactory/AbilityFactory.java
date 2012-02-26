@@ -2477,55 +2477,82 @@ public class AbilityFactory {
         // Mishra and Lobotomy
 
         Card source = sa.getSourceCard();
-        if (type.contains("Triggered")) {
-            final Object o = sa.getTriggeringObject("Card");
+        final Object o;
+        if (type.startsWith("Triggered")) {
+            if (type.contains("Card")) {
+                o = sa.getTriggeringObject("Card");
+            } else if (type.contains("Attacker")) {
+                o = sa.getTriggeringObject("Attacker");
+            } else if (type.contains("Blocker")) {
+                o = sa.getTriggeringObject("Blocker");
+            } else {
+                o = sa.getTriggeringObject("Card");
+            }
 
-            // I won't the card attached to the Triggering object
             if (!(o instanceof Card)) {
                 return new CardList();
             }
 
-            source = (Card) (o);
-            type = type.replace("Triggered", "Card");
-        } else if (type.contains("Targeted")) {
-            source = null;
-            final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
-            if (parent != null) {
-                if (parent.getTarget() != null) {
-                    if (!parent.getTarget().getTargetCards().isEmpty()) {
-                        source = parent.getTarget().getTargetCards().get(0);
-                    } else if (!parent.getTarget().getTargetSAs().isEmpty()) {
-                        source = parent.getTarget().getTargetSAs().get(0).getSourceCard();
-                    }
-                }
-            }
-            if (source == null) {
-                return new CardList();
-            }
-            type = type.replace("Targeted", "Card");
-        } else if (type.startsWith("Remembered")) {
-            boolean hasRememberedCard = false;
-            for (final Object o : source.getRemembered()) {
-                if (o instanceof Card) {
-                    hasRememberedCard = true;
-                    source = (Card) o;
-                    type = type.replace("Remembered", "Card");
-                    break;
-                }
+            if (type.equals("Triggered") || (type.equals("TriggeredCard")) || (type.equals("TriggeredAttacker")) || (type.equals("TriggeredBlocker"))) {
+                type = "Card.Self";
             }
 
-            if (!hasRememberedCard) {
-                return new CardList();
+            source = (Card) (o);
+            if (type.contains("TriggeredCard")) {
+                type = type.replace("TriggeredCard", "Card");
+            } else if (type.contains("TriggeredAttacker")) {
+                type = type.replace("TriggeredAttacker", "Card");
+            } else if (type.contains("TriggeredBlocker")) {
+                type = type.replace("TriggeredBlocker", "Card");
             }
-        }
+
+            } else if (type.contains("Targeted")) {
+                source = null;
+                final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
+                if (parent != null) {
+                    if (parent.getTarget() != null) {
+                        if (!parent.getTarget().getTargetCards().isEmpty()) {
+                            source = parent.getTarget().getTargetCards().get(0);
+                        } else if (!parent.getTarget().getTargetSAs().isEmpty()) {
+                            source = parent.getTarget().getTargetSAs().get(0).getSourceCard();
+                        }
+                    }
+                }
+                if (source == null) {
+                    return new CardList();
+                }
+
+                if (type.startsWith("TargetedCard")) {
+                    type = type.replace("TargetedCard", "Card");
+                } else {
+                    type = type.replace("Targeted", "Card");
+                }
+
+            } else if (type.startsWith("Remembered")) {
+                boolean hasRememberedCard = false;
+                for (final Object object : source.getRemembered()) {
+                    if (object instanceof Card) {
+                        hasRememberedCard = true;
+                        source = (Card) object;
+                        type = type.replace("Remembered", "Card");
+                        break;
+                    }
+                }
+
+                if (!hasRememberedCard) {
+                    return new CardList();
+                }
+             } else if (type.equals("Card.AttachedBy")) {
+                 source = source.getEnchantingCard();
+                 type = type.replace("Card.AttachedBy", "Card.Self");
+             }
 
         String valid = type;
         if (valid.contains("EQX")) {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
         }
-
         return list.getValidCards(valid.split(","), sa.getActivatingPlayer(), source);
-    }
+      }
 
     /**
      * <p>

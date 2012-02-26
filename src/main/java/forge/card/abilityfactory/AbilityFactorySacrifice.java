@@ -459,32 +459,7 @@ public class AbilityFactorySacrifice {
                 card.addRemembered(card);
             }
         }
-        // TODO - maybe this can be done smarter...
-        else if (valid.equals("Card.AttachedBy")) {
-            final Card toSac = card.getEnchantingCard();
-            if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
-                Singletons.getModel().getGameAction().sacrifice(toSac);
-                if (remSacrificed) {
-                    card.addRemembered(toSac);
-                }
-            }
-        } else if (valid.equals("TriggeredCard")) {
-            final Card equipee = (Card) sa.getTriggeringObject("Card");
-            if (tgts.contains(card.getController()) && AllZoneUtil.isCardInPlay(equipee)) {
-                Singletons.getModel().getGameAction().sacrifice(equipee);
-                if (remSacrificed) {
-                    card.addRemembered(equipee);
-                }
-            }
-        } else if (valid.equals("TriggeredAttacker")) {
-            final Card toSac = (Card) sa.getTriggeringObject("Attacker");
-            if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
-                Singletons.getModel().getGameAction().sacrifice(toSac);
-                if (remSacrificed) {
-                    card.addRemembered(toSac);
-                }
-            }
-        } else {
+        else {
             CardList sacList = null;
             for (final Player p : tgts) {
                 if (p.isComputer()) {
@@ -504,7 +479,6 @@ public class AbilityFactorySacrifice {
             }
 
         }
-
     }
 
     /**
@@ -523,10 +497,9 @@ public class AbilityFactorySacrifice {
      */
     private static CardList sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy) {
-        CardList list = p.getCardsIn(Zone.Battlefield);
-        list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-
-        final CardList sacList = ComputerUtil.sacrificePermanents(amount, list, destroy);
+        CardList battlefield = p.getCardsIn(Zone.Battlefield);
+        CardList sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
+        sacList = ComputerUtil.sacrificePermanents(amount, sacList, destroy);
 
         return sacList;
     }
@@ -549,39 +522,38 @@ public class AbilityFactorySacrifice {
      */
     private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
-        final CardList saccedList = new CardList();
-        CardList list = p.getCardsIn(Zone.Battlefield);
-        list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+        CardList battlefield = p.getCardsIn(Zone.Battlefield);
+        CardList sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
 
         for (int i = 0; i < amount; i++) {
-            if (list.isEmpty()) {
+            if (sacList.isEmpty()) {
                 break;
             }
             Object o;
             if (optional) {
-                o = GuiUtils.getChoiceOptional("Select a card to sacrifice", list.toArray());
+                o = GuiUtils.getChoiceOptional("Select a card to sacrifice", sacList.toArray());
             } else {
-                o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
+                o = GuiUtils.getChoice("Select a card to sacrifice", sacList.toArray());
             }
             if (o != null) {
                 final Card c = (Card) o;
 
                 if (destroy) {
                     if (Singletons.getModel().getGameAction().destroy(c)) {
-                        saccedList.add(c);
+                        sacList.add(c);
                     }
                 } else {
                     if (Singletons.getModel().getGameAction().sacrifice(c)) {
-                        saccedList.add(c);
+                        sacList.add(c);
                     }
                 }
 
-                list.remove(c);
+                sacList.remove(c);
             } else {
-                return saccedList;
+                return sacList;
             }
         }
-        return saccedList;
+        return sacList;
     }
 
     // **************************************************************
