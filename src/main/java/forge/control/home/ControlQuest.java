@@ -532,7 +532,7 @@ public class ControlQuest {
         });
 
         event = view.getSelectedOpponent().getEvent();
-        AllZone.setQuestEvent(event);
+        AllZone.getQuestData().setCurrentEvent(event);
         Constant.Runtime.setGameType(GameType.Quest);
         final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
         zeppelin.setZeppelinUsed(false);

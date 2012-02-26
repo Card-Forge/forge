@@ -49,19 +49,19 @@ public class GameState {
 
     private Player humanPlayer = new HumanPlayer(GameState.HUMAN_PLAYER_NAME);
     private Player computerPlayer = new AIPlayer(GameState.AI_PLAYER_NAME);
-    private EndOfTurn endOfTurn = new EndOfTurn();
-    private EndOfCombat endOfCombat = new EndOfCombat();
-    private Untap untap = new Untap();
-    private Upkeep upkeep = new Upkeep();
-    private PhaseHandler phaseHandler = new PhaseHandler();
-    private MagicStack stack = new MagicStack();
-    private StaticEffects staticEffects = new StaticEffects();
-    private TriggerHandler triggerHandler = new TriggerHandler();
+    private final EndOfTurn endOfTurn = new EndOfTurn();
+    private final EndOfCombat endOfCombat = new EndOfCombat();
+    private final Untap untap = new Untap();
+    private final Upkeep upkeep = new Upkeep();
+    private final PhaseHandler phaseHandler = new PhaseHandler();
+    private final MagicStack stack = new MagicStack();
+    private final StaticEffects staticEffects = new StaticEffects();
+    private final TriggerHandler triggerHandler = new TriggerHandler();
     private final ReplacementHandler replacementHandler = new ReplacementHandler();
     private Combat combat = new Combat();
-    private GameLog gameLog = new GameLog();
+    private final GameLog gameLog = new GameLog();
 
-    private PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
+    private final PlayerZone stackZone = new DefaultPlayerZone(Constant.Zone.Stack, null);
 
     private long timestamp = 0;
     private GameSummary gameSummary;
@@ -129,32 +129,12 @@ public class GameState {
     }
 
     /**
-     * Sets the end of turn.
-     * 
-     * @param endOfTurn0
-     *            the endOfTurn to set
-     */
-    protected final void setEndOfTurn(final EndOfTurn endOfTurn0) {
-        this.endOfTurn = endOfTurn0;
-    }
-
-    /**
      * Gets the end of combat.
      * 
      * @return the endOfCombat
      */
     public final EndOfCombat getEndOfCombat() {
         return this.endOfCombat;
-    }
-
-    /**
-     * Sets the end of combat.
-     * 
-     * @param endOfCombat0
-     *            the endOfCombat to set
-     */
-    protected final void setEndOfCombat(final EndOfCombat endOfCombat0) {
-        this.endOfCombat = endOfCombat0;
     }
 
     /**
@@ -167,32 +147,12 @@ public class GameState {
     }
 
     /**
-     * Sets the upkeep.
-     * 
-     * @param upkeep0
-     *            the upkeep to set
-     */
-    protected final void setUpkeep(final Upkeep upkeep0) {
-        this.upkeep = upkeep0;
-    }
-
-    /**
      * Gets the untap.
      * 
      * @return the upkeep
      */
     public final Untap getUntap() {
         return this.untap;
-    }
-
-    /**
-     * Sets the untap.
-     * 
-     * @param untap0
-     *            the upkeep to set
-     */
-    protected final void setUntap(final Untap untap0) {
-        this.untap = untap0;
     }
 
     /**
@@ -214,16 +174,6 @@ public class GameState {
     }
 
     /**
-     * Sets the stack.
-     * 
-     * @param stack0
-     *            the stack to set
-     */
-    protected final void setStack(final MagicStack stack0) {
-        this.stack = stack0;
-    }
-
-    /**
      * Gets the static effects.
      * 
      * @return the staticEffects
@@ -233,32 +183,12 @@ public class GameState {
     }
 
     /**
-     * Sets the static effects.
-     * 
-     * @param staticEffects0
-     *            the staticEffects to set
-     */
-    protected final void setStaticEffects(final StaticEffects staticEffects0) {
-        this.staticEffects = staticEffects0;
-    }
-
-    /**
      * Gets the trigger handler.
      * 
      * @return the triggerHandler
      */
     public final TriggerHandler getTriggerHandler() {
         return this.triggerHandler;
-    }
-
-    /**
-     * Sets the trigger handler.
-     * 
-     * @param triggerHandler0
-     *            the triggerHandler to set
-     */
-    protected final void setTriggerHandler(final TriggerHandler triggerHandler0) {
-        this.triggerHandler = triggerHandler0;
     }
 
     /**
@@ -290,31 +220,12 @@ public class GameState {
     }
 
     /**
-     * Sets the game log.
-     *
-     * @param gl the new game log
-     */
-    public final void setgameLog(final GameLog gl) {
-        this.gameLog = gl;
-    }
-
-    /**
      * Gets the stack zone.
      * 
      * @return the stackZone
      */
     public final PlayerZone getStackZone() {
         return this.stackZone;
-    }
-
-    /**
-     * Sets the stack zone.
-     * 
-     * @param stackZone0
-     *            the stackZone to set
-     */
-    protected final void setStackZone(final PlayerZone stackZone0) {
-        this.stackZone = stackZone0;
     }
 
     /**

@@ -46,7 +46,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 
 import forge.Singletons;
-import forge.card.BoosterData;
 import forge.card.CardEdition;
 import forge.deck.DeckSection;
 import forge.error.ErrorViewer;

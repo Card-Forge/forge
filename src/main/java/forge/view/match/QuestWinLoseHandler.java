@@ -92,7 +92,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.view = view0;
         matchState = Singletons.getModel().getMatchState();
         qData = AllZone.getQuestData();
-        qEvent = AllZone.getQuestEvent();
+        qEvent = qData.getCurrentEvent();
         this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
@@ -287,7 +287,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         matchState.reset();
-        AllZone.setQuestEvent(null);
+        
+        qData.setCurrentEvent(null);
 
         qData.saveData();
         Singletons.getModel().getQuestPreferences().save();
@@ -319,7 +320,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         final int base = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_BASE);
         double multiplier = 1;
 
-        String diff = AllZone.getQuestEvent().getDifficulty();
+        String diff = qEvent.getDifficulty();
         diff = diff.substring(0, 1).toUpperCase() + diff.substring(1);
 
         if (diff.equalsIgnoreCase("medium")) {

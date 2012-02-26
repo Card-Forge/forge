@@ -34,7 +34,6 @@ import forge.Singletons;
 import forge.card.CardEdition;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
-import forge.item.BoosterPack;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.OpenablePack;

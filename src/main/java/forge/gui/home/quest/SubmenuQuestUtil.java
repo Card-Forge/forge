@@ -261,7 +261,7 @@ public class SubmenuQuestUtil {
         Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
         Constant.Quest.OPP_ICON_NAME[0] = event.getIconFilename();
         Constant.Runtime.setGameType(GameType.Quest);
-        AllZone.setQuestEvent(event);
+        qData.setCurrentEvent(event);
         qData.saveData();
 
         if (qData.isFantasy()) {

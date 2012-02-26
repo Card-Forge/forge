@@ -28,11 +28,9 @@ import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputControl;
 import forge.game.GameState;
-import forge.game.limited.CardRatings;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestEvent;
 
 /**
  * Please use public getters and setters instead of direct field access.
@@ -56,9 +54,6 @@ public final class AllZone {
     /** Global <code>questData</code>. */
     private static forge.quest.data.QuestData questData = null;
 
-    /** Global <code>QuestChallenge</code>. */
-    private static QuestEvent questEvent = null;
-
     /** Constant <code>NAME_CHANGER</code>. */
     private static final NameChanger NAME_CHANGER = new NameChanger();
 
@@ -76,9 +71,6 @@ public final class AllZone {
 
     // shared between Input_Attack, Input_Block, Input_CombatDamage ,
     // InputState_Computer
-
-    /** Constant <code>CARD_RATINGS</code>. */
-    private static CardRatings cardRatings = new CardRatings();
 
     /**
      * <p>
@@ -144,30 +136,6 @@ public final class AllZone {
      */
     public static void setQuestData(final QuestData questData0) {
         AllZone.questData = questData0;
-    }
-
-    /**
-     * <p>
-     * getQuestEvent.
-     * </p>
-     * 
-     * @return a {@link forge.quest.data.QuestEvent} object.
-     * @since 1.0.15
-     */
-    public static QuestEvent getQuestEvent() {
-        return AllZone.questEvent;
-    }
-
-    /**
-     * <p>
-     * setQuestEvent.
-     * </p>
-     * 
-     * @param q
-     *            a {@link forge.quest.data.QuestEvent} object.
-     */
-    public static void setQuestEvent(final QuestEvent q) {
-        AllZone.questEvent = q;
     }
 
     /**
@@ -520,15 +488,6 @@ public final class AllZone {
      */
     public static ColorChanger getColorChanger() {
         return AllZone.COLOR_CHANGER;
-    }
-
-    /**
-     *  Gets the CardRatings object.
-     * 
-     * @return the CardRatings object
-     */
-    public static CardRatings getCardRatings() {
-        return AllZone.cardRatings;
     }
 
 
