@@ -36,6 +36,7 @@ import javax.swing.JOptionPane;
 import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Command;
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.error.ErrorViewer;
 import forge.gui.CardListViewer;
 import forge.gui.GuiUtils;
@@ -64,7 +65,7 @@ import forge.util.Predicate;
  * @author Forge
  * @version $Id$
  */
-public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
+public final class QuestCardShop extends DeckEditorBase<InventoryItem, DeckBase> {
 
     /** Constant <code>serialVersionUID=3988857075791576483L</code>. */
     private static final long serialVersionUID = 3988857075791576483L;
@@ -442,7 +443,7 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckController<Object> getController() {
+    public DeckController<DeckBase> getController() {
         return null;
     }
 

@@ -367,7 +367,7 @@ public final class DeckEditorQuest extends DeckEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckController<Deck> getController() {
+    public DeckController<Deck> getController() {
         return this.controller;
     }
 

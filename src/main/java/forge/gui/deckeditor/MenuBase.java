@@ -47,7 +47,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
 
     private static final long serialVersionUID = -4037993759604768755L;
     private final Command exitCommand;
-    private final IDeckController<T> controller;
+    private final DeckController<T> controller;
 
     /**
      * Menu for Deck Editor.
@@ -55,7 +55,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
      * @param ctrl the ctrl
      * @param exit a Command
      */
-    public MenuBase(final IDeckController<T> ctrl, final Command exit) {
+    public MenuBase(final DeckController<T> ctrl, final Command exit) {
         this.controller = ctrl;
         this.exitCommand = exit;
 
@@ -67,7 +67,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
      *
      * @return the controller
      */
-    protected final IDeckController<T> getController() {
+    protected final DeckController<T> getController() {
         return this.controller;
     }
 

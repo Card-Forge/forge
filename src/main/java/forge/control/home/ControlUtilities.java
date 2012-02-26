@@ -32,6 +32,7 @@ import forge.GuiDownloadQuestImages;
 import forge.GuiDownloadSetPicturesLQ;
 import forge.GuiImportPicture;
 import forge.Singletons;
+import forge.deck.DeckBase;
 import forge.error.BugzReporter;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorBase;
@@ -197,7 +198,7 @@ public class ControlUtilities {
      * @param d0 &emsp; Deck
      */
     @SuppressWarnings("unchecked")
-    public <T> void showDeckEditor(final GameType gt0, final T d0) {
+    public <T extends DeckBase> void showDeckEditor(final GameType gt0, final T d0) {
 
         DeckEditorBase<?, T> editor = null;
         if (gt0 == GameType.Constructed) {

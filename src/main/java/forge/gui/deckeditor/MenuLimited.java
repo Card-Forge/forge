@@ -39,7 +39,7 @@ public final class MenuLimited extends MenuBase<DeckGroup> {
      * @param ctrl the ctrl
      * @param exit a Command
      */
-    public MenuLimited(final IDeckController<DeckGroup> ctrl, final Command exit) {
+    public MenuLimited(final DeckController<DeckGroup> ctrl, final Command exit) {
         super(ctrl, exit);
     }
 

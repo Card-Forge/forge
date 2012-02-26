@@ -358,7 +358,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckController<DeckGroup> getController() {
+    public DeckController<DeckGroup> getController() {
         return null;
     }
 

@@ -75,7 +75,7 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
     private final JLabel jLabelAnalysisGap = new JLabel("");
     private FilterNameTypeSetPanel filterNameTypeSet;
 
-    private final IDeckController<Deck> controller;
+    private final DeckController<Deck> controller;
 
     /**
      * Show.
@@ -407,7 +407,7 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckController<Deck> getController() {
+    public DeckController<Deck> getController() {
         return this.controller;
     }
 

@@ -2,6 +2,7 @@ package forge.gui.home.utilities;
 
 import forge.Command;
 import forge.Singletons;
+import forge.deck.DeckBase;
 import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorBase;
 import forge.gui.deckeditor.DeckEditorConstructed;
@@ -47,7 +48,7 @@ public enum CSubmenuDeckEditor implements ICSubmenu {
      * @param d0 &emsp; Deck
      */
     @SuppressWarnings("unchecked")
-    public <T> void showDeckEditor(GameType gt0, T d0) {
+    public <T extends DeckBase> void showDeckEditor(GameType gt0, T d0) {
 
         DeckEditorBase<?, T> editor = null;
         if (gt0 == GameType.Constructed) {

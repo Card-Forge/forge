@@ -32,7 +32,7 @@ import forge.util.IStorage;
  *
  * @param <T> the generic type
  */
-public class DeckController<T extends DeckBase> implements IDeckController<T> {
+public class DeckController<T extends DeckBase> {
 
     private T model;
     private boolean saved;
@@ -63,7 +63,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      *
      * @return the document
      */
-    @Override
     public T getModel() {
         return this.model;
     }
@@ -73,7 +72,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      *
      * @param document the new model
      */
-    @Override
     public void setModel(final T document) {
         this.setModel(document, false);
     }
@@ -112,7 +110,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      *
      * @return the view
      */
-    @Override
     public DeckEditorBase<?, T> getView() {
         return this.view;
     }
@@ -122,7 +119,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#notifyModelChanged()
      */
-    @Override
     public void notifyModelChanged() {
         this.saved = false;
         // view.setTitle();
@@ -133,7 +129,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#getOwnerWindow()
      */
-    @Override
     public Component getOwnerWindow() {
         return this.getView();
     }
@@ -143,7 +138,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#getSavedModelNames()
      */
-    @Override
     public ArrayList<String> getSavedNames() {
         return new ArrayList<String>(this.folder.getNames());
     }
@@ -154,7 +148,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * @see forge.gui.deckeditor.IDeckController#load(java.lang.String)
      */
     @SuppressWarnings("unchecked")
-    @Override
     public void load(final String name) {
         T newModel = this.folder.get(name);
         if (null != newModel) {
@@ -167,7 +160,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#save()
      */
-    @Override
     public void save() {
         this.folder.add(this.model);
         this.saved = true;
@@ -180,7 +172,6 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * @see forge.gui.deckeditor.IDeckController#rename(java.lang.String)
      */
     @SuppressWarnings("unchecked")
-    @Override
     public void saveAs(final String name0) {
         this.setModel((T) this.model.copyTo(name0), false);
         this.save();
@@ -191,7 +182,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#isSaved()
      */
-    @Override
+    
     public boolean isSaved() {
         return this.saved;
     }
@@ -201,7 +192,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#delete()
      */
-    @Override
+    
     public void delete() {
         if (StringUtils.isNotBlank(this.model.getName())) {
             this.folder.delete(this.model.getName());
@@ -216,7 +207,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * @see forge.gui.deckeditor.IDeckController#isGoodName(java.lang.String)
      */
 
-    @Override
+    
     public boolean fileExists(final String deckName) {
         return !this.folder.isUnique(deckName);
     }
@@ -224,7 +215,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.IDeckController#isGoodName(java.lang.String)
      */
-    @Override
+    
     public boolean isGoodName(final String deckName) {
         return StringUtils.isNotBlank(deckName) && this.folder.isUnique(deckName);
     }
@@ -234,7 +225,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#importDeck(forge.deck.Deck)
      */
-    @Override
+    
     public void importDeck(final T newDeck) {
         this.setModel(newDeck);
     }
@@ -244,7 +235,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#isModelInStore()
      */
-    @Override
+    
     public boolean isModelInStore() {
         return this.modelInStore;
     }
@@ -254,7 +245,7 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
      * 
      * @see forge.gui.deckeditor.IDeckController#newModel()
      */
-    @Override
+    
     public void newModel() {
         this.model = this.newModelCreator.apply();
         this.saved = true;

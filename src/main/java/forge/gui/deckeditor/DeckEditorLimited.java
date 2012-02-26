@@ -398,7 +398,7 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
      * @see forge.gui.deckeditor.DeckEditorBase#getController()
      */
     @Override
-    public IDeckController<DeckGroup> getController() {
+    public DeckController<DeckGroup> getController() {
         return this.controller;
     }
 

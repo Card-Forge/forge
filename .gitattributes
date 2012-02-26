@@ -11346,7 +11346,6 @@ src/main/java/forge/gui/deckeditor/DeckEditorLimited.java -text
 src/main/java/forge/gui/deckeditor/DeckEditorQuest.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
 src/main/java/forge/gui/deckeditor/DraftingProcess.java svneol=native#text/plain
-src/main/java/forge/gui/deckeditor/IDeckController.java -text
 src/main/java/forge/gui/deckeditor/MenuBase.java -text
 src/main/java/forge/gui/deckeditor/MenuCommon.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/MenuLimited.java -text

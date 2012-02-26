@@ -28,6 +28,7 @@ import javax.swing.event.DocumentListener;
 
 
 import forge.Command;
+import forge.deck.DeckBase;
 import forge.gui.deckeditor.elements.CardPanelBase;
 import forge.gui.deckeditor.elements.DeckAnalysis;
 import forge.gui.deckeditor.elements.FilterCheckBoxes;
@@ -44,7 +45,7 @@ import forge.util.Predicate;
  * @param <T> the generic type
  * @param <TModel> the generic type
  */
-public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JFrame {
+public abstract class DeckEditorBase<T extends InventoryItem, TModel extends DeckBase> extends JFrame {
     private static final long serialVersionUID = -401223933343539977L;
 
     /** The filter boxes. */
@@ -111,7 +112,7 @@ public abstract class DeckEditorBase<T extends InventoryItem, TModel> extends JF
      *
      * @return the controller
      */
-    public abstract IDeckController<TModel> getController();
+    public abstract DeckController<TModel> getController();
 
     // THIS IS HERE FOR OVERLOADING!!!1
     // or may be return abstract getFilter from derived class + this filter ...
