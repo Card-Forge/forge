@@ -3338,6 +3338,7 @@ res/cardsfolder/g/gate_to_phyrexia.txt svneol=native#text/plain
 res/cardsfolder/g/gatekeeper_of_malakir.txt svneol=native#text/plain
 res/cardsfolder/g/gathan_raiders.txt svneol=native#text/plain
 res/cardsfolder/g/gather_courage.txt -text
+res/cardsfolder/g/gather_specimens.txt -text svneol=unset#text/plain
 res/cardsfolder/g/gather_the_townsfolk.txt -text
 res/cardsfolder/g/gatherer_of_graces.txt svneol=native#text/plain
 res/cardsfolder/g/gatstaf_shepherd_gatstaf_howler.txt -text
