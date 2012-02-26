@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Green Hornet 2
+Title=Green Hornet
+Difficulty=medium
+Description=WU Delver of Secrets Tempo deck
+Icon=Green Hornet.jpg
+Deck Type=constructed
+[main]
+4 Glacial Fortress
+10 Island
+2 Moorland Haunt
+3 Plains
+4 Sejiri Refuge
+4 Delver of Secrets
+4 Cloud Sprite
+4 AEther Figment
+3 Puncturing Light
+4 Divination
+2 Runeboggle
+2 Frightful Delusion
+2 Runechanter's Pike
+2 Bonesplitter
+3 Sunlance
+4 Vapor Snag
+1 Jace, Memory Adept
+1 Jace Beleren
+[sideboard]

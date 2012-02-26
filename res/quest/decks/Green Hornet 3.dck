@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Green Hornet 3
+Title=Green Hornet
+Difficulty=hard
+Description=WU Delver of Secrets Tempo deck
+Icon=Green Hornet.jpg
+Deck Type=constructed
+[main]
+4 Glacial Fortress
+9 Island
+3 Moorland Haunt
+1 Plains
+4 Tundra
+1 Mox Sapphire
+1 Mox Pearl
+4 Delver of Secrets
+4 Geist of Saint Traft
+4 Invisible Stalker
+2 Condemn
+4 Counterspell
+4 Force Spike
+3 Runechanter's Pike
+2 Sword of War and Peace
+2 Sword of Fire and Ice
+1 Personal Tutor
+1 Sunlance
+4 Vapor Snag
+1 Time Walk
+1 Ancestral Recall
+[sideboard]
