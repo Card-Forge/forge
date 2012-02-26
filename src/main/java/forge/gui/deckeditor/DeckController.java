@@ -161,8 +161,13 @@ public class DeckController<T extends DeckBase> {
      * 
      * @see forge.gui.deckeditor.IDeckController#save()
      */
+    @SuppressWarnings("unchecked")
     public void save() {
+        if ( null == model ) 
+            return;
         this.folder.add(this.model);
+        // copy to new instance which will be edited and left if unsaved
+        this.setModel((T) this.model.copyTo(this.model.getName()), true);
         this.saved = true;
         this.modelInStore = true;
     }
