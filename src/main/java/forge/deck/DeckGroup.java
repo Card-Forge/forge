@@ -70,18 +70,18 @@ public class DeckGroup extends DeckBase {
     public final void setHumanDeck(final Deck humanDeck) {
         this.humanDeck = humanDeck;
     }
-    
+
     protected void cloneFieldsTo(final DeckBase clone) {
         super.cloneFieldsTo(clone);
-        
+
         DeckGroup myClone = (DeckGroup) clone;
-        myClone.setHumanDeck((Deck)this.getHumanDeck().copyTo(this.getHumanDeck().getName()));
-        
-        for(int i = 0; i < this.getAiDecks().size(); i++) {
+        myClone.setHumanDeck((Deck) this.getHumanDeck().copyTo(this.getHumanDeck().getName()));
+
+        for (int i = 0; i < this.getAiDecks().size(); i++) {
             Deck src = this.getAiDecks().get(i);
-            myClone.addAiDeck((Deck)src.copyTo(src.getName()));
+            myClone.addAiDeck((Deck) src.copyTo(src.getName()));
         }
-    }    
+    }
 
     /**
      * Adds the ai deck.

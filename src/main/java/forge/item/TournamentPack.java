@@ -47,7 +47,7 @@ public class TournamentPack extends OpenablePack {
      *            the set
      */
     public TournamentPack(final String name0, final BoosterData boosterData) {
-        super(name0, boosterData);    
+        super(name0, boosterData);
     }
 
 

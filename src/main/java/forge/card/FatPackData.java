@@ -9,16 +9,16 @@ import forge.util.StorageReaderFile;
  *
  */
 public class FatPackData {
-    private final String edition; 
+    private final String edition;
     public final String getEdition() {
         return edition;
     }
 
-    private final String landsEdition; 
+    private final String landsEdition;
     public final String getLandsEdition() {
         return landsEdition == null ? edition : landsEdition;
     }
-    
+
     public int getCntBoosters() {
         return cntBoosters;
     }
@@ -29,23 +29,23 @@ public class FatPackData {
 
     private final int cntBoosters;
     private final int cntLands;
-        
-    public FatPackData(String edition0, String landsEdition0, int nBoosters, int nBasicLands )
+
+    public FatPackData(String edition0, String landsEdition0, int nBoosters, int nBasicLands)
     {
         cntBoosters = nBoosters;
         cntLands = nBasicLands;
         edition = edition0;
         landsEdition = landsEdition0;
     }
-    
+
     public static final Lambda1<String, FatPackData> FN_GET_CODE = new Lambda1<String, FatPackData>() {
-        
+
         @Override
         public String apply(FatPackData arg1) {
             return arg1.edition;
         }
-    };    
-    
+    };
+
     public static final class Reader extends StorageReaderFile<FatPackData> {
 
         public Reader(String pathname) {
@@ -62,5 +62,5 @@ public class FatPackData {
             int nLand = section.getInt("BasicLands", 0);
             return new FatPackData(section.get("Set"), section.get("LandSet"), nBoosters, nLand);
         }
-    }       
+    }
 }

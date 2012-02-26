@@ -325,7 +325,7 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
         final Deck[] computer = this.boosterDraft.getDecks();
 
         final DeckGroup finishedDraft = new DeckGroup("Draft " + s);
-        finishedDraft.setHumanDeck((Deck)this.getPlayersDeck().copyTo(s));
+        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
         finishedDraft.addAiDecks(computer);
 
         // DeckManager deckManager = new

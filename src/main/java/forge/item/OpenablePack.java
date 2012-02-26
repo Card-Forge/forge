@@ -19,25 +19,24 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     protected final BoosterData contents;
     protected final String name;
     private List<CardPrinted> cards = null;
-    
-    private BoosterGenerator generator = null; 
+
+    private BoosterGenerator generator = null;
 
     public OpenablePack(final String name0, final BoosterData boosterData) {
         this.contents = boosterData;
         this.name = name0;
-    }    
+    }
 
-    
     @Override
     public final String getName() {
         return this.name + " " + this.getType();
-    }    
-    
+    }
+
     @Override
     public final String getEdition() {
         return this.contents.getEdition();
-    }    
-    
+    }
+
     /**
      * Gets the cards.
      * 
@@ -48,8 +47,8 @@ public abstract class OpenablePack implements InventoryItemFromSet {
             cards = this.generate();
         }
         return this.cards;
-    }    
-    
+    }
+
 
     public int getTotalCards() {
         return contents.getTotal();
@@ -104,11 +103,11 @@ public abstract class OpenablePack implements InventoryItemFromSet {
 
 
     protected List<CardPrinted> generate() {
-        if ( null == generator ) {
+        if (null == generator) {
             generator = new BoosterGenerator(this.contents.getEditionFilter());
         }
         List<CardPrinted> myCards = generator.getBoosterPack(this.contents);
-    
+
         final int cntLands = this.contents.getLand();
         if (cntLands > 0) {
             myCards.add(this.getLandFromNearestSet());
@@ -131,14 +130,14 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     }
 
 
-    protected CardPrinted getRandomBasicLand(final CardEdition set) { 
+    protected CardPrinted getRandomBasicLand(final CardEdition set) {
         return getRandomBasicLands(set, 1).get(0);
     }
-    
+
     protected List<CardPrinted> getRandomBasicLands(final CardEdition set, int count) {
         return Predicate.and(CardPrinted.Predicates.printedInSets(set.getCode()),
                 CardRules.Predicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES)
                 .random(CardDb.instance().getAllCards(), count);
     }
-    
+
 }

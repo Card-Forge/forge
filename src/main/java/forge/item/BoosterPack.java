@@ -80,7 +80,7 @@ public class BoosterPack extends OpenablePack {
      */
     @Override
     public final Object clone() {
-        return new BoosterPack(name, contents); 
+        return new BoosterPack(name, contents);
     }
 
 

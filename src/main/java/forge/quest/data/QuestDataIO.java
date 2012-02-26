@@ -307,15 +307,15 @@ public class QuestDataIO {
             writer.addAttribute("s", fatpack.getEdition());
             writer.addAttribute("n", count.toString());
             writer.endNode();
-        }               
-        
+        }
+
         protected void write(final TournamentPack booster, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("tpack");
             writer.addAttribute("s", booster.getEdition());
             writer.addAttribute("n", count.toString());
             writer.endNode();
-        }        
-        
+        }
+
         protected void write(final PreconDeck deck, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("precon");
             writer.addAttribute("name", deck.getName());
@@ -335,9 +335,9 @@ public class QuestDataIO {
                 } else if (item instanceof BoosterPack) {
                     this.write((BoosterPack) item, count, writer);
                 } else if (item instanceof TournamentPack) {
-                    this.write((TournamentPack) item, count, writer);                    
+                    this.write((TournamentPack) item, count, writer);
                 } else if (item instanceof FatPack) {
-                    this.write((FatPack) item, count, writer);                    
+                    this.write((FatPack) item, count, writer);
                 } else if (item instanceof PreconDeck) {
                     this.write((PreconDeck) item, count, writer);
                 }

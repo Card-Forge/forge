@@ -157,8 +157,9 @@ public class DeckController<T extends DeckBase> implements IDeckController<T> {
     @Override
     public void load(final String name) {
         T newModel = this.folder.get(name);
-        if (null != newModel)
-            this.setModel((T)newModel.copyTo(name), true);
+        if (null != newModel) {
+            this.setModel((T) newModel.copyTo(name), true);
+        }
     }
 
     /*

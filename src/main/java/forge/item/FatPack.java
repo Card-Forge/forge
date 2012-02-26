@@ -39,7 +39,7 @@ public class FatPack extends OpenablePack {
             return new FatPack(arg1.getName(), d);
         }
     };
-    
+
     private final FatPackData fpData;
 
     /**
@@ -49,7 +49,7 @@ public class FatPack extends OpenablePack {
      *            the set
      */
     public FatPack(final String name0, final FatPackData fpData0) {
-        super(name0, Singletons.getModel().getBoosters().get(fpData0.getEdition()));    
+        super(name0, Singletons.getModel().getBoosters().get(fpData0.getEdition()));
         fpData = fpData0;
     }
 
@@ -67,12 +67,12 @@ public class FatPack extends OpenablePack {
 
     protected List<CardPrinted> generate() {
         List<CardPrinted> result = new ArrayList<CardPrinted>();
-        for( int i = 0; i < fpData.getCntBoosters(); i++ ) {
+        for (int i = 0; i < fpData.getCntBoosters(); i++) {
             result.addAll(super.generate());
         }
         CardEdition landEdition = Singletons.getModel().getEditions().get(fpData.getLandsEdition());
         result.addAll(getRandomBasicLands(landEdition, fpData.getCntLands()));
-        return result; 
+        return result;
     }
 
     /*
@@ -89,9 +89,9 @@ public class FatPack extends OpenablePack {
     public final Object clone() {
         return new FatPack(name, fpData);
     }
-    
+
     @Override
-    public int getTotalCards(){
+    public int getTotalCards() {
         return super.getTotalCards() * fpData.getCntBoosters() + fpData.getCntLands();
     }
 

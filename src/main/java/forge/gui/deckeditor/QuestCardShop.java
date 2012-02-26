@@ -334,9 +334,9 @@ public final class QuestCardShop extends DeckEditorBase<InventoryItem, Object> {
                 this.getBottomTableWithCards().addCard(card);
                 this.questData.getCards().buyCard(card, value);
 
-            } else if (item instanceof OpenablePack) { 
+            } else if (item instanceof OpenablePack) {
                 this.getTopTableWithCards().removeCard(item);
-                
+
                 OpenablePack booster = null;
                 if (item instanceof BoosterPack) {
                     booster = (BoosterPack) ((BoosterPack) item).clone();
