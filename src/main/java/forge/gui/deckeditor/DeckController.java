@@ -153,6 +153,7 @@ public class DeckController<T extends DeckBase> {
         if (null != newModel) {
             this.setModel((T) newModel.copyTo(name), true);
         }
+        saved = true;
     }
 
     /*
