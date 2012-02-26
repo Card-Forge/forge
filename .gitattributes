@@ -4012,6 +4012,7 @@ res/cardsfolder/h/helium_squirter.txt -text
 res/cardsfolder/h/helix_pinnacle.txt svneol=native#text/plain
 res/cardsfolder/h/hell_bent_raider.txt svneol=native#text/plain
 res/cardsfolder/h/hell_swarm.txt svneol=native#text/plain
+res/cardsfolder/h/hellcarver_demon.txt -text svneol=unset#text/plain
 res/cardsfolder/h/helldozer.txt svneol=native#text/plain
 res/cardsfolder/h/hellfire.txt svneol=native#text/plain
 res/cardsfolder/h/hellfire_mongrel.txt svneol=native#text/plain
