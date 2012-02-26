@@ -390,14 +390,17 @@ public class AbilityFactoryGainControl {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private void gainControlResolve(final SpellAbility sa) {
-        ArrayList<Card> tgtCards;
+        CardList tgtCards = new CardList();
         final boolean self = this.params.containsKey("Defined") && this.params.get("Defined").equals("Self");
 
         final Target tgt = sa.getTarget();
-        if ((tgt != null) && !this.params.containsKey("Defined")) {
-            tgtCards = tgt.getTargetCards();
+        if (this.params.containsKey("AllValid")) {
+            tgtCards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
+            tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
+        } else if ((tgt != null) && !this.params.containsKey("Defined")) {
+            tgtCards.addAll(tgt.getTargetCards().toArray());
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa);
+            tgtCards.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa).toArray());
         }
         // tgtCards.add(hostCard);
 

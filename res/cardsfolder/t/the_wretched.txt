@@ -3,9 +3,8 @@ ManaCost:3 B B
 Types:Creature Demon
 Text:no text
 PT:2/5
-T:Mode$ Blocks | ValidCard$ Creature.YouDontCtrl | ValidBlocked$ Card.Self | DelayedTrigger$ WretchedDelTrig | TriggerZones$ Battlefield | TriggerDescription$ At end of combat, gain control of all creatures blocking CARDNAME for as long as you control CARDNAME.
-SVar:WretchedDelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ WretchedTrigGainControl | IsPresent$ Card.Self+attackedThisTurn | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At end of combat, gain control of all creatures blocking CARDNAME for as long as you control CARDNAME.
-SVar:WretchedTrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ TriggeredBlocker.blocking | LoseControl$ LoseControl,LeavesPlay
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ At end of combat, gain control of all creatures blocking CARDNAME for as long as you control CARDNAME.
+SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | AllValid$ Card.blockingSource | LoseControl$ LoseControl,LeavesPlay
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_wretched.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/59.jpg
