@@ -724,7 +724,7 @@ public class CombatUtil {
                         && card.getController().getOpponent().isPlayer(c.getController())) {
                     return false;
                 }
-                if (keyword.equals("CARDNAME can only attack alone.") && card.isAttacking()) {
+                if (keyword.equals("CARDNAME can only attack alone.") && combat.isAttacking(card)) {
                     return false;
                 }
             }
