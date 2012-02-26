@@ -544,6 +544,31 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - fix boosters and tournaments
 - unlimited had wrong name
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated starters.txt (the first editions had 13 uncommons).
+- Added prices for Tournament packs.
+- common base class for booster and starter,
+- the deck you load in deckeditor is not modified if you choose not to save
+- quest challenges rewards will not repeat that much.
+- Updated starters.txt to include 3 timeshifted cards in Timespiral tournament packs.
+- renamed some packs to starter decks
+- TournamentPack to Starter Deck (code part)
+- wrong fix
+- CheckStyle.
+- CheckStyle.
+- added FatPack support
+- fatpacks.txt
+- displays info in cardshop for tournaments and fatpacks
+- fixed: human deck after draft was saved with empty name
+- fixing NPE on draft deck opened in editor
+- extension png => jpg for starters and fp's. May save png file as *.jpg - will look nice
+- Fixed Szadek, Lord of Secrets.
+- tournamentpacks
+- Fixed Sway of the Stars.
+- Remove the "force" parameter from checkStateEffects, which was never successfully used.
+- better box picture
+- better picture starter 6ed
+- Moved "Always" triggers out of checkStaticAbilities.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -736,6 +761,9 @@ Gaze of the Gorgon
 Venomous Breath
 Glyph of Doom
 Djinn of Wishes
+Argent Sphinx
+Martyr's Bond
+Auratouched Mage
 
 
 end
