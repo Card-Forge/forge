@@ -1381,6 +1381,7 @@ res/cardsfolder/c/chancellor_of_the_dross.txt -text
 res/cardsfolder/c/chancellor_of_the_forge.txt -text
 res/cardsfolder/c/chancellor_of_the_tangle.txt -text
 res/cardsfolder/c/chandler.txt svneol=native#text/plain
+res/cardsfolder/c/chandra_ablaze.txt -text svneol=unset#text/plain
 res/cardsfolder/c/chandra_nalaar.txt svneol=native#text/plain
 res/cardsfolder/c/chandra_the_firebrand.txt -text
 res/cardsfolder/c/chandras_outrage.txt svneol=native#text/plain
