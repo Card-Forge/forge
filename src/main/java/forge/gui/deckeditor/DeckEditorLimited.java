@@ -409,8 +409,9 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
      */
     @Override
     public void updateView() {
-        this.getTopTableWithCards().setDeck(this.getSelectedDeck(this.controller.getModel()).getSideboard());
-        this.getBottomTableWithCards().setDeck(this.getSelectedDeck(this.controller.getModel()).getMain());
+        Deck toEdit = this.getSelectedDeck(this.controller.getModel());
+        this.getTopTableWithCards().setDeck(toEdit.getSideboard());
+        this.getBottomTableWithCards().setDeck(toEdit.getMain());
     }
 
 }
