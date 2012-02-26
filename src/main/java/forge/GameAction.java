@@ -808,15 +808,6 @@ public class GameAction {
         return isGameDone;
     }
 
-    /**
-     * <p>
-     * checkStateEffects.
-     * </p>
-     */
-    public final void checkStateEffects() {
-        this.checkStateEffects(false);
-    }
-
     /** */
     public final void checkStaticAbilities() {
         // remove old effects
@@ -862,16 +853,12 @@ public class GameAction {
      * <p>
      * checkStateEffects.
      * </p>
-     * 
-     * @param force
-     *            a boolean. States wether or not state effect checking should
-     *            be forced, even if a spell is in the middle of resolving.
      */
-    public final void checkStateEffects(final boolean force) {
+    public final void checkStateEffects() {
 
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
-        if (AllZone.getStack().getResolving() && !force) {
+        if (AllZone.getStack().getResolving()) {
             return;
         }
 
