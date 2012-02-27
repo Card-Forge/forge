@@ -439,6 +439,9 @@ public class StaticAbility {
         }
 
         if (this.mapParams.containsKey("TopCardOfLibraryIs")) {
+            if (controller.getCardsIn(Zone.Library).isEmpty()) {
+                return false;
+            }
             final Card topCard = controller.getCardsIn(Zone.Library).get(0);
             if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
                 return false;

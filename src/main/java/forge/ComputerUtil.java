@@ -63,10 +63,9 @@ public class ComputerUtil {
     public static boolean playSpellAbilities(final SpellAbility[] all) {
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
-        // MyRandom.shuffle(all);
 
         for (final SpellAbility sa : all) {
-            // Don't add Counterspells to the "normal" playcard lookupss
+            // Don't add Counterspells to the "normal" playcard lookups
             final AbilityFactory af = sa.getAbilityFactory();
             if ((af != null) && af.getAPI().equals("Counter")) {
                 continue;
@@ -141,7 +140,7 @@ public class ComputerUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a boolean.
      */
-    public static boolean playAbilities(final ArrayList<SpellAbility> all) {
+    public static boolean playSpellAbilities(final ArrayList<SpellAbility> all) {
         final SpellAbility[] sas = new SpellAbility[all.size()];
         for (int i = 0; i < sas.length; i++) {
             sas[i] = all.get(i);
