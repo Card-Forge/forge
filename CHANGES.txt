@@ -7,7 +7,7 @@ Forge Beta: 0#-##-2012 ver 1.2.# rev #####
 
 We have reached a new milestone. All Modern legal sets are at least 80% complete and all Extended legal sets are at least 90% complete.
 
-A number of bugs were found and fixed. The mana pool bug which caused crash reports was fixed. We also have a performance fix relating to static abilities.
+A number of bugs were found and fixed. The mana pool bug which caused crash reports was fixed. We also have a performance fix relating to static abilities. These reported bugs were also fixed: Avatar index bug, Quest opponent refresh, Avatar switch bug and Win streak (stats) not refreshing.
 
 The UI has a few new features including the option to pick an avatars from a collection of pictures. This can be accessed from the Settings -> Avatars tab.
 
@@ -17,6 +17,8 @@ The organizational structure of the /res/decks/ folder has been improved and we 
 /decks/cube/
 /decks/draft/
 /decks/sealed/
+
+You can now buy PreCon decks, Starter packs, Tournament packs and Fat packs from the quest mode card shop.
 
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove usefull. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
@@ -569,6 +571,28 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - better picture starter 6ed
 - Moved "Always" triggers out of checkStaticAbilities.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a bug with "CARDNAME can only attack alone.".
+- CheckStyle.
+- Tweaked the stack description of AF Pump (it now shows unique numbers).
+- questEvent moved from AllZone to QuestData as transient
+- remove useless getters from gamestate
+- Added the Green Hornet 2 and 3 decks by lazylockie.
+- Little tweak.
+- better pictures for starters
+- didn't need the IDeckController for a single class
+- removed word 'draft'
+- Added the parameter "AllValid" to AF GainControl.
+- Fixed The Wretched.
+- recently loaded deck should be thought of as saved
+- fp images
+- create copy on save (to abandon if player choses not to save changes)
+- Fixed avatar switch bug.
+- Avatar indexing bug fixed.
+- Stats refresh bug fixed.
+- Duels/challenges refresh bug fixed.
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -764,6 +788,9 @@ Djinn of Wishes
 Argent Sphinx
 Martyr's Bond
 Auratouched Mage
+Gather Specimens
+Hellcarver Demon
+Chandra Ablaze
 
 
 end
