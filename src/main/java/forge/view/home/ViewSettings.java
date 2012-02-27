@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -226,12 +227,14 @@ public class ViewSettings extends JPanel {
     } // End populatePrefs()
 
     private void populateAvatars() {
+        final Map<Integer, Image> avatarMap = FSkin.getAvatars();
+
         pnlAvatars.setLayout(new WrapLayout());
 
         lstAvatars = new ArrayList<AvatarLabel>();
-        int counter = 0;
-        for (final Image i : FSkin.getAvatars().values()) {
-            lstAvatars.add(new AvatarLabel(i, counter++));
+
+        for (final Integer i : avatarMap.keySet()) {
+            lstAvatars.add(new AvatarLabel(avatarMap.get(i), i));
             pnlAvatars.add(lstAvatars.get(lstAvatars.size() - 1));
         }
 
