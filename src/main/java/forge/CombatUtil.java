@@ -31,6 +31,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputPayManaCostAbility;
 import forge.gui.GuiUtils;
 
@@ -1932,6 +1933,88 @@ public class CombatUtil {
         return toughness;
     }
 
+    // Sylvan Basilisk and friends
+    /**
+     * <p>
+     * checkDestroyBlockerTrigger.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
+     * @param defender
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(attacker.getTriggers());
+        for (Trigger trigger : theTriggers) {
+            HashMap<String, String> trigParams = trigger.getMapParams();
+            final Card source = trigger.getHostCard();
+
+            if (!CombatUtil.combatTriggerWillTrigger(attacker, defender, trigger, null)) {
+                continue;
+            }
+            //consider delayed triggers
+            if (trigParams.containsKey("DelayedTrigger")) {
+                String sVarName = trigParams.get("DelayedTrigger");
+                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
+                trigParams = trigger.getMapParams();
+            }
+            String ability = source.getSVar(trigParams.get("Execute"));
+            AbilityFactory abilityFactory = new AbilityFactory();
+            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            // Destroy triggers
+            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
+                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
+                if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // Cockatrice and friends
+    /**
+     * <p>
+     * checkDestroyBlockerTrigger.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
+     * @param defender
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean checkDestroyAttackerTrigger(final Card attacker, final Card defender) {
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(defender.getTriggers());
+        for (Trigger trigger : theTriggers) {
+            HashMap<String, String> trigParams = trigger.getMapParams();
+            final Card source = trigger.getHostCard();
+
+            if (!CombatUtil.combatTriggerWillTrigger(attacker, defender, trigger, null)) {
+                continue;
+            }
+            //consider delayed triggers
+            if (trigParams.containsKey("DelayedTrigger")) {
+                String sVarName = trigParams.get("DelayedTrigger");
+                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
+                trigParams = trigger.getMapParams();
+            }
+            String ability = source.getSVar(trigParams.get("Execute"));
+            AbilityFactory abilityFactory = new AbilityFactory();
+            final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+            // Destroy triggers
+            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
+                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
+                if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // can the blocker destroy the attacker?
     /**
      * <p>
@@ -1976,6 +2059,9 @@ public class CombatUtil {
                 || (attacker.hasKeyword("Undying") && !attacker.canHaveCountersPlacedOnIt(Counters.P1P1) && (attacker
                         .getCounters(Counters.P1P1) == 0))) {
             return false;
+        }
+        if (checkDestroyAttackerTrigger(attacker, defender) && !attacker.hasKeyword("Indestructible")) {
+            return true;
         }
 
         int defenderDamage = defender.getNetAttack() + CombatUtil.predictPowerBonusOfBlocker(attacker, defender);
@@ -2112,7 +2198,7 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) {
+        if (checkDestroyBlockerTrigger(attacker, defender) && !defender.hasKeyword("Indestructible")) {
             return true;
         }
 
