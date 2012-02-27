@@ -1551,7 +1551,10 @@ public class CombatUtil {
             }
         }
 
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(defender.getTriggers());
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        for (Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
         theTriggers.addAll(attacker.getTriggers());
         for (final Trigger trigger : theTriggers) {
             final HashMap<String, String> trigParams = trigger.getMapParams();
@@ -1623,7 +1626,10 @@ public class CombatUtil {
 
         toughness += defender.getKeywordMagnitude("Bushido");
 
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(defender.getTriggers());
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        for (Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
         theTriggers.addAll(attacker.getTriggers());
         for (final Trigger trigger : theTriggers) {
             final HashMap<String, String> trigParams = trigger.getMapParams();
@@ -1636,6 +1642,25 @@ public class CombatUtil {
             final String ability = source.getSVar(trigParams.get("Execute"));
             final AbilityFactory abilityFactory = new AbilityFactory();
             final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
+
+            // DealDamage triggers
+            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
+                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
+                if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                    continue;
+                }
+                int damage = 0;
+                try {
+                    damage = Integer.parseInt(abilityParams.get("NumDmg"));
+                } catch (final NumberFormatException nfe) {
+                    // can't parse the number (X for example)
+                    continue;
+                }
+                toughness -= defender.predictDamage(damage, 0, source, false);
+                continue;
+            }
+
+            // Pump triggers
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -1693,7 +1718,10 @@ public class CombatUtil {
 
         power += attacker.getKeywordMagnitude("Bushido");
 
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(attacker.getTriggers());
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        for (Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
         // if the defender has first strike and wither the attacker will deal
         // less damage than expected
         if (null != defender) {
@@ -1816,7 +1844,10 @@ public class CombatUtil {
     public static int predictToughnessBonusOfAttacker(final Card attacker, final Card defender, final Combat combat) {
         int toughness = 0;
 
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(attacker.getTriggers());
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        for (Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
         if (defender != null) {
             toughness += attacker.getKeywordMagnitude("Bushido");
             theTriggers.addAll(defender.getTriggers());
