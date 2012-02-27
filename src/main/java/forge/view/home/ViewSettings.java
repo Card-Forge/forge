@@ -317,7 +317,7 @@ public class ViewSettings extends JPanel {
         }
 
         Singletons.getModel().getPreferences().setPref(
-                FPref.UI_AVATARS, avatarHuman.getIndex() + "," + avatarAI.getIndex());
+                FPref.UI_AVATARS, avatarAI.getIndex() + "," + avatarHuman.getIndex());
         Singletons.getModel().getPreferences().save();
     }
 
