@@ -1362,20 +1362,23 @@ public class GameAction {
                 boolean extraMode = false;
 
                 // check for flashback keywords
-                if (zone.is(Constant.Zone.Graveyard) && sa.isSpell() && (c.isInstant() || c.isSorcery())) {
+                if (zone.is(Constant.Zone.Graveyard) && sa.isSpell()
+                        && (c.isInstant() || c.isSorcery())) {
                     for (final String keyword : c.getKeyword()) {
                         if (keyword.startsWith("Flashback")) {
-                            final SpellAbility flashback = sa.copy();
-                            flashback.setFlashBackAbility(true);
+                            if (sa.isBasicSpell()) {
+                                final SpellAbility flashback = sa.copy();
+                                flashback.setFlashBackAbility(true);
 
-                            // there is a flashback cost (and not the cards
-                            // cost)
-                            if (!keyword.equals("Flashback")) {
-                                final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
-                                flashback.setPayCosts(fbCost);
+                                // there is a flashback cost (and not the cards
+                                // cost)
+                                if (!keyword.equals("Flashback")) {
+                                    final Cost fbCost = new Cost(keyword.substring(10), c.getName(), false);
+                                    flashback.setPayCosts(fbCost);
+                                }
+                                choices.add(flashback.toString());
+                                map.put(flashback.toString(), flashback);
                             }
-                            choices.add(flashback.toString());
-                            map.put(flashback.toString(), flashback);
                             extraMode = true;
                         }
                     }

@@ -71,6 +71,7 @@ public abstract class SpellAbility {
     // targetList doesn't appear to be used anymore
 
     private boolean spell;
+    private boolean basicSpell = true;
     private boolean trigger = false;
     private boolean optionalTrigger = false;
     private int sourceTrigger = -1;
@@ -1395,6 +1396,32 @@ public abstract class SpellAbility {
             return null;
         }
         return this.targetPlayer;
+    }
+
+    /**
+     * <p>
+     * isBasicAbility.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean isBasicSpell() {
+        if (this.isFlashBackAbility() || this.isBuyBackAbility()) {
+            return false;
+        }
+        return this.basicSpell;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>setBasicSpell</code>.
+     * </p>
+     * 
+     * @param basicSpell
+     *            a boolean.
+     */
+    public void setBasicSpell(final boolean basicSpell) {
+        this.basicSpell = basicSpell;
     }
 
     /**

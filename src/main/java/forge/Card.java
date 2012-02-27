@@ -3140,7 +3140,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
 
         for (final SpellAbility sa : s) {
-            if (sa.isSpell() && !sa.isFlashBackAbility() && !sa.isBuyBackAbility()) {
+            if (sa.isSpell() && sa.isBasicSpell()) {
                 res.add(sa);
             }
         }

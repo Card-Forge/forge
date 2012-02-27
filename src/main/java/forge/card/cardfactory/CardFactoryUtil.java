@@ -4666,8 +4666,8 @@ public class CardFactoryUtil {
                     restriction.setZone(Constant.Zone.Hand);
                 }
                 altCostSA.setRestrictions(restriction);
-
                 altCostSA.setDescription(sb.toString());
+                altCostSA.setBasicSpell(false);
 
                 card.addSpellAbility(altCostSA);
             }
