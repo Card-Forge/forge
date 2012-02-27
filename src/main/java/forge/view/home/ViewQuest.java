@@ -419,6 +419,7 @@ public class ViewQuest extends JScrollPane {
         setCurrentDeckStatus();
         updateDuels();
         updateStats();
+        control.refreshStats();
         lblTitle.setText("Duels: " + control.getRankString());
 
         // Select first event.
@@ -451,6 +452,7 @@ public class ViewQuest extends JScrollPane {
         setCurrentDeckStatus();
         updateChallenges();
         updateStats();
+        control.refreshStats();
         lblTitle.setText("Challenges: " + control.getRankString());
 
         // Select first event.

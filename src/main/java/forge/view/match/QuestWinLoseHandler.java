@@ -28,7 +28,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import net.slightlymagic.braids.util.UtilFunctions;
-
 import forge.AllZone;
 import forge.CardList;
 import forge.Constant;
@@ -287,7 +286,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         matchState.reset();
-        
+
         qData.setCurrentEvent(null);
 
         qData.saveData();
@@ -295,6 +294,15 @@ public class QuestWinLoseHandler extends ControlWinLose {
         Singletons.getModel().savePrefs();
 
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
+
+        // Update as necessary.
+        if ((Singletons.getView().getViewHome().getViewQuest().getPnlDuels().isVisible())) {
+            Singletons.getView().getViewHome().getViewQuest().showDuelsTab();
+        }
+        else if (Singletons.getView().getViewHome().getViewQuest().getPnlChallenges().isVisible()) {
+            Singletons.getView().getViewHome().getViewQuest().showChallengesTab();
+        }
+
         Singletons.getView().getViewHome().showQuestMenu();
         GuiUtils.closeOverlay();
     }
