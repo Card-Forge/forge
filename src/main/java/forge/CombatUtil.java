@@ -1946,7 +1946,10 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(attacker.getTriggers());
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        for (Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
         for (Trigger trigger : theTriggers) {
             HashMap<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
@@ -1966,7 +1969,13 @@ public class CombatUtil {
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
-                if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                if (!abilityParams.containsKey("Defined")) {
+                    continue;
+                }
+                if (abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                    return true;
+                }
+                if (abilityParams.get("Defined").equals("Self") && source.equals(defender)) {
                     return true;
                 }
             }
@@ -1987,7 +1996,10 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean checkDestroyAttackerTrigger(final Card attacker, final Card defender) {
-        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>(defender.getTriggers());
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+        for (Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
         for (Trigger trigger : theTriggers) {
             HashMap<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
@@ -2007,7 +2019,13 @@ public class CombatUtil {
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
-                if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker")) {
+                if (!abilityParams.containsKey("Defined")) {
+                    continue;
+                }
+                if (abilityParams.get("Defined").equals("TriggeredAttacker")) {
+                    return true;
+                }
+                if (abilityParams.get("Defined").equals("Self") && source.equals(attacker)) {
                     return true;
                 }
             }
