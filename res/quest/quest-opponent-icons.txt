@@ -60,8 +60,10 @@ http://www.cardforge.org/fpics/questAvatars/Dungeon%20Crawling%20Gold.jpg
 http://www.cardforge.org/fpics/questAvatars/Dungeon%20Crawling%20Green.jpg
 http://www.cardforge.org/fpics/questAvatars/Dungeon%20Crawling%20Red.jpg
 http://www.cardforge.org/fpics/questAvatars/Dungeon%20Crawling%20White.jpg
+http://www.cardforge.org/fpics/questAvatars/Edna%20Krabappel.jpg
 http://www.cardforge.org/fpics/questAvatars/Electro.jpg
 http://www.cardforge.org/fpics/questAvatars/Elrond.jpg
+http://www.cardforge.org/fpics/questAvatars/El%20Sabah%20Nur.jpg
 http://www.cardforge.org/fpics/questAvatars/Endora.jpg
 http://www.cardforge.org/fpics/questAvatars/Eomer.jpg
 http://www.cardforge.org/fpics/questAvatars/Ezio.jpg
@@ -79,6 +81,7 @@ http://www.cardforge.org/fpics/questAvatars/Gimli.jpg
 http://www.cardforge.org/fpics/questAvatars/Gold%20Finger.jpg
 http://www.cardforge.org/fpics/questAvatars/Grampa%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Green%20Arrow.jpg
+http://www.cardforge.org/fpics/questAvatars/Green%20Hornet.jpg
 http://www.cardforge.org/fpics/questAvatars/Green%20Lantern.jpg
 http://www.cardforge.org/fpics/questAvatars/Grumpy.jpg
 http://www.cardforge.org/fpics/questAvatars/Hagrid.jpg
@@ -126,6 +129,7 @@ http://www.cardforge.org/fpics/questAvatars/Newton.jpg
 http://www.cardforge.org/fpics/questAvatars/Oberon.jpg
 http://www.cardforge.org/fpics/questAvatars/Odin.jpg
 http://www.cardforge.org/fpics/questAvatars/Optimus%20Prime.jpg
+http://www.cardforge.org/fpics/questAvatars/Oreius.jpg
 http://www.cardforge.org/fpics/questAvatars/Owlman.jpg
 http://www.cardforge.org/fpics/questAvatars/Pebbles%20Flintstone.jpg
 http://www.cardforge.org/fpics/questAvatars/Picard.jpg
@@ -134,7 +138,6 @@ http://www.cardforge.org/fpics/questAvatars/Pointy%20Haired%20Boss.jpg
 http://www.cardforge.org/fpics/questAvatars/Princess%20Selenia.jpg
 http://www.cardforge.org/fpics/questAvatars/Private%20Domain.jpg
 http://www.cardforge.org/fpics/questAvatars/Professor%20X.jpg
-http://www.cardforge.org/fpics/questAvatars/questAIicons.txt
 http://www.cardforge.org/fpics/questAvatars/R2-D2.jpg
 http://www.cardforge.org/fpics/questAvatars/Radagast.jpg
 http://www.cardforge.org/fpics/questAvatars/Radiant.jpg
@@ -178,6 +181,7 @@ http://www.cardforge.org/fpics/questAvatars/The%20Desert%20Caravan.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Great%20Gazoo.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Kings%20Contest.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Pied%20Piper.jpg
+http://www.cardforge.org/fpics/questAvatars/The%20Spectre.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Thing.jpg
 http://www.cardforge.org/fpics/questAvatars/Tom%20Bombadil.jpg
 http://www.cardforge.org/fpics/questAvatars/Totoro.jpg
