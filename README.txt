@@ -10,7 +10,9 @@ After downloading and installing a newer version of Forge you may want to move c
 
 The /res/images/icons/ folder contains the quest opponent icons, small quest pet/plant icons (non-tokens) and some icons that are used by forge's quest mode. While several of these pictures ship with the forge archive most of them have to be downloaded using the Home screen -> Utilities -> Download Quest Images command.
 
-2) The /res/decks/ folder contains your deck files. You should copy over the files with the extension ".dck".
+2) The /res/decks/ folder contains your deck files. You should copy over the files with the extension ".dck". In version 1.2.4 and later the /decks/ folder contains 4 subdirectories named constructed, cube, draft and sealed.
+
+You can place your deck files from an earlier version of Forge into the /res/decks/ folder. When you next launch Forge these decks will be converted to a newer format and will be moved into the proper subdirectory.
 
 3) The /res/draft/ and the /res/sealed/ folders contains files for the sealed and draft mode. You should copy over your files inside of these folders that end in the extension ".draft" or ".zsealed".
 
