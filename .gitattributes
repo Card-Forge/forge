@@ -2090,6 +2090,7 @@ res/cardsfolder/d/delusions_of_mediocrity.txt svneol=native#text/plain
 res/cardsfolder/d/delver_of_secrets_insectile_aberration.txt -text
 res/cardsfolder/d/dematerialize.txt svneol=native#text/plain
 res/cardsfolder/d/dementia_bat.txt svneol=native#text/plain
+res/cardsfolder/d/dementia_sliver.txt -text svneol=unset#text/plain
 res/cardsfolder/d/demigod_of_revenge.txt svneol=native#text/plain
 res/cardsfolder/d/demolish.txt svneol=native#text/plain
 res/cardsfolder/d/demon_of_deaths_gate.txt svneol=native#text/plain

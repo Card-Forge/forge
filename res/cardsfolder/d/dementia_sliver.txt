@@ -1,0 +1,14 @@
+Name:Dementia Sliver
+ManaCost:3 U B
+Types:Creature Sliver
+Text:no text
+PT:3/3
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ ABDementiaNameCard | AddSVar$ DBDementiaReveal & DBDementiaDiscard | Description$ All Slivers have "Tap: Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it. Activate this ability only during your turn."
+SVar:ABDementiaNameCard:AB$ NameCard | Cost$ T | Defined$ You | SubAbility$ DBDementiaReveal | SpellDescription$ Name a card. Target opponent reveals a card at random from his or her hand. If it's the named card, that player discards it. Activate this ability only during your turn."
+SVar:DBDementiaReveal:DB$ Reveal | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Random$ True | PlayerTurn$ True | SubAbility$ DBDementiaDiscard
+SVar:DBDementiaDiscard:DB$ Discard | DiscardValid$ Card.NamedCard | Mode$ TgtChoose | Defined$ Targeted
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dementia_sliver.jpg
+End
