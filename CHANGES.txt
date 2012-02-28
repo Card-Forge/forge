@@ -595,6 +595,22 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Ran set info script.
 - Ran oracle script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed metadata of the Chief Clancy Wiggum deck.
+- The AI will now predict triggers of cards like Cockatrice.
+- The AI will now predict triggers of cards like Arrogant Bloodlord and Ceremonial Guard.
+- The AI will now predict triggers of cards like Powerstone Minefield.
+- SpellAbilities created by alternate costs will now be recognized as non basic spells and not be available when flashed back.
+- Added the missing LQ pic URL to Tetravus.
+- Restructured some code in ComputerAIGeneral to prevent duplicate checks.
+- Updated the README.txt file to include info about the new subdirectories that were added to the decks folder.
+- Added a fluff piece to the changes.txt file.
+- CheckStyle.
+- Quest deck select persist bug fixed.
+- Avatar rebuild, also fixing indexing bug #2.
+- Fixed a possible NPE in CombatUtil.
+- Performance updates in AF Pump and AF Protection.
+- Updated quest opponent download links.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -793,6 +809,7 @@ Auratouched Mage
 Gather Specimens
 Hellcarver Demon
 Chandra Ablaze
+Vebulid
 
 
 end
