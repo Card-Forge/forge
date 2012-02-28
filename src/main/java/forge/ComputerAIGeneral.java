@@ -111,7 +111,7 @@ public class ComputerAIGeneral implements Computer {
         // Card list of all cards to consider
         CardList hand = computer.getCardsIn(Zone.Hand);
 
-        final boolean hasACardGivingHaste = this.hasACardGivingHaste();
+        final boolean hasACardGivingHaste = ComputerAIGeneral.hasACardGivingHaste();
 
         // If mana pool is not empty try to play anything
         if (computer.getManaPool().isEmpty()) {
@@ -204,7 +204,7 @@ public class ComputerAIGeneral implements Computer {
      * 
      * @return a boolean.
      */
-    public boolean hasACardGivingHaste() {
+    public static boolean hasACardGivingHaste() {
         final CardList all = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
         all.addAll(AllZone.getComputerPlayer().getCardsIn(Zone.Hand));
@@ -239,38 +239,7 @@ public class ComputerAIGeneral implements Computer {
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     private CardList getMain2() {
-        final Player computer = AllZone.getComputerPlayer();
-        final Player human = AllZone.getHumanPlayer();
-        // Card list of all cards to consider
-        CardList all = computer.getCardsIn(Zone.Hand);
-        // Don't play permanents with Flash before humans declare attackers step
-        all = all.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                if (c.isPermanent()
-                        && c.hasKeyword("Flash")
-                        && (AllZone.getPhaseHandler().isPlayerTurn(computer) || AllZone.getPhaseHandler()
-                                .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
-                    return false;
-                }
-                return true;
-            }
-        });
-        all.addAll(computer.getCardsIn(Zone.Exile));
-        all.addAll(computer.getCardsIn(Zone.Graveyard));
-        if (!computer.getCardsIn(Zone.Library).isEmpty()) {
-            all.add(computer.getCardsIn(Zone.Library).get(0));
-        }
-        all.addAll(human.getCardsIn(Zone.Exile));
-
-        // Prevent the computer from summoning Ball Lightning type creatures
-        // during main phase 2
-        all = all.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-
-        all.addAll(computer.getCardsIn(Zone.Battlefield));
-        all.addAll(human.getCardsIn(Zone.Battlefield));
-
-        return all;
+        return getAvailableSpellAbilities();
     } // getMain2()
 
     /**
@@ -284,20 +253,6 @@ public class ComputerAIGeneral implements Computer {
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
         CardList all = computer.getCardsIn(Zone.Hand);
-        // Don't play permanents with Flash before humans declare attackers step
-        all = all.filter(new CardListFilter() {
-            @Override
-            public boolean addCard(final Card c) {
-                if (c.isPermanent()
-                        && c.hasKeyword("Flash")
-                        && !hasETBTrigger(c)
-                        && (AllZone.getPhaseHandler().isPlayerTurn(computer) || AllZone.getPhaseHandler()
-                                .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
-                    return false;
-                }
-                return true;
-            }
-        });
         all.addAll(computer.getCardsIn(Zone.Battlefield));
         all.addAll(computer.getCardsIn(Zone.Exile));
         all.addAll(computer.getCardsIn(Zone.Graveyard));
@@ -318,7 +273,7 @@ public class ComputerAIGeneral implements Computer {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public boolean hasETBTrigger(final Card card) {
+    public static boolean hasETBTrigger(final Card card) {
         final ArrayList<Trigger> triggers = card.getTriggers();
         for (final Trigger tr : triggers) {
             final HashMap<String, String> params = tr.getMapParams();
@@ -448,7 +403,6 @@ public class ComputerAIGeneral implements Computer {
 
         for (final Card element : att) {
             // tapping of attackers happens after Propaganda is paid for
-            // if (!att[i].hasKeyword("Vigilance")) att[i].tap();
             final StringBuilder sb = new StringBuilder();
             sb.append("Computer just assigned ");
             sb.append(element.getName()).append(" as an attacker.");

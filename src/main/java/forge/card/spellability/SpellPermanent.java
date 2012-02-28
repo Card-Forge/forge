@@ -27,6 +27,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.CommandReturn;
+import forge.ComputerAIGeneral;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
@@ -274,7 +275,31 @@ public class SpellPermanent extends Spell {
             }
             card.setSVar("PayX", Integer.toString(xPay));
         }
+        // save cards with flash for surprise blocking
+        if (card.hasKeyword("Flash")
+                && !ComputerAIGeneral.hasETBTrigger(card)
+                && (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) || AllZone.getPhaseHandler()
+                        .isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
+            return false;
+        }
+        // Prevent the computer from summoning Ball Lightning type creatures after attacking
+        if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
+                && (AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer()) || AllZone.getPhaseHandler()
+                        .isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS))) {
+            return false;
+        }
 
+        return canPlayFromEffectAI(false, true);
+    } // canPlayAI()
+    
+    /** {@inheritDoc} */
+    @Override
+    public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+        if (mandatory) {
+            return true;
+        }
+        final Card card = this.getSourceCard();
+        String mana = this.getPayCosts().getTotalMana();
         // check on legendary
         if (card.isType("Legendary")) {
             final CardList list = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
@@ -319,13 +344,11 @@ public class SpellPermanent extends Spell {
                 return false;
             }
         }
-
         if (!SpellPermanent.checkETBEffects(card, this, null)) {
             return false;
         }
-
         return super.canPlayAI();
-    } // canPlayAI()
+    }
 
     /**
      * <p>
