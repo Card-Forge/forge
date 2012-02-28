@@ -316,6 +316,11 @@ public class FLabel extends JLabel {
         return this.resizeTimer;
     }
 
+    /** @return boolean */
+    public boolean isSelected() {
+        return selected;
+    }
+
     @Override
     // Must be public.
     public void setIcon(final Icon i0) {
