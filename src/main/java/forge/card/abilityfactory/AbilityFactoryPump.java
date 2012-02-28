@@ -99,8 +99,6 @@ public class AbilityFactoryPump {
             for (final String element : kk) {
                 this.keywords.add(element);
             }
-        } else {
-            this.keywords.add("none");
         }
     }
 
@@ -313,6 +311,11 @@ public class AbilityFactoryPump {
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {
                 return false;
             }
+        } else if (keyword.startsWith("Infect")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                return false;
+            }
         } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
             if (card.getController().isComputer() || ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card)
                     || (card.getNetCombatDamage() <= 0)) {
@@ -336,7 +339,7 @@ public class AbilityFactoryPump {
         }
         return true;
     }
-    
+
     private boolean shouldPumpCard(final SpellAbility sa, final Card c) {
         int attack = getNumAttack(sa);
         int defense = getNumDefense(sa);
@@ -392,11 +395,12 @@ public class AbilityFactoryPump {
 
         // if the life of the computer is in danger, try to pump
         // potential blockers before declaring blocks
-        if (CombatUtil.lifeInDanger(AllZone.getCombat())
-                && phase.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+        if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                 && phase.isBefore(Constant.Phase.MAIN2)
+                && phase.isPlayerTurn(AllZone.getHumanPlayer())
+                && AllZone.getCombat().getAttackers().length > 0
                 && CombatUtil.canBlock(c, AllZone.getCombat())
-                && phase.isPlayerTurn(AllZone.getHumanPlayer())) {
+                && CombatUtil.lifeInDanger(AllZone.getCombat())) {
             return true;
         }
 
@@ -965,9 +969,7 @@ public class AbilityFactoryPump {
                 }
 
                 for (int i = 0; i < this.keywords.size(); i++) {
-                    if (!this.keywords.get(i).equals("none")) {
-                        sb.append(this.keywords.get(i)).append(" ");
-                    }
+                    sb.append(this.keywords.get(i)).append(" ");
                 }
 
                 if (!this.params.containsKey("Permanent")) {
@@ -1080,9 +1082,7 @@ public class AbilityFactoryPump {
         applyTo.addTempDefenseBoost(d);
 
         for (int i = 0; i < this.keywords.size(); i++) {
-            if (!this.keywords.get(i).equals("none")) {
-                applyTo.addExtrinsicKeyword(this.keywords.get(i));
-            }
+            applyTo.addExtrinsicKeyword(this.keywords.get(i));
         }
 
         if (!this.params.containsKey("Permanent")) {
@@ -1097,9 +1097,7 @@ public class AbilityFactoryPump {
 
                     if (AbilityFactoryPump.this.keywords.size() > 0) {
                         for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
-                            if (!AbilityFactoryPump.this.keywords.get(i).equals("none")) {
-                                applyTo.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
-                            }
+                            applyTo.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
                         }
                     }
                 }
@@ -1120,9 +1118,7 @@ public class AbilityFactoryPump {
     private void applyPump(final SpellAbility sa, final Player p) {
 
         for (int i = 0; i < this.keywords.size(); i++) {
-            if (!this.keywords.get(i).equals("none")) {
-                p.addKeyword(this.keywords.get(i));
-            }
+            p.addKeyword(this.keywords.get(i));
         }
 
         if (!this.params.containsKey("Permanent")) {
@@ -1135,9 +1131,7 @@ public class AbilityFactoryPump {
 
                     if (AbilityFactoryPump.this.keywords.size() > 0) {
                         for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
-                            if (!AbilityFactoryPump.this.keywords.get(i).equals("none")) {
-                                p.removeKeyword(AbilityFactoryPump.this.keywords.get(i));
-                            }
+                            p.removeKeyword(AbilityFactoryPump.this.keywords.get(i));
                         }
                     }
                 }
@@ -1414,9 +1408,7 @@ public class AbilityFactoryPump {
             tgtC.addTempDefenseBoost(d);
 
             for (int i = 0; i < this.keywords.size(); i++) {
-                if (!this.keywords.get(i).equals("none")) {
-                    tgtC.addExtrinsicKeyword(this.keywords.get(i));
-                }
+                tgtC.addExtrinsicKeyword(this.keywords.get(i));
             }
 
             if (!this.params.containsKey("Permanent")) {
@@ -1432,9 +1424,7 @@ public class AbilityFactoryPump {
 
                             if (AbilityFactoryPump.this.keywords.size() > 0) {
                                 for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
-                                    if (!AbilityFactoryPump.this.keywords.get(i).equals("none")) {
-                                        tgtC.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
-                                    }
+                                    tgtC.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
                                 }
                             }
                         }
