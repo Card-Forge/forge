@@ -46,11 +46,11 @@ import forge.view.home.ViewQuest;
  * 
  */
 public class ControlQuest {
-    private ViewQuest view;
+    private final ViewQuest view;
     private QuestEvent event;
     private QuestData qData;
-    private QuestPreferences qPrefs;
-    private QuestEventManager qem;
+    private final QuestPreferences qPrefs;
+    private final QuestEventManager qem;
     private JPanel selectedTab;
 
     private final MouseListener madStartGame, madDuels, madChallenges,
@@ -172,6 +172,7 @@ public class ControlQuest {
             public void execute() {
                 currentDeck = view.getLstDecks().getSelectedDeck();
                 qPrefs.setPreference(QPref.CURRENT_DECK, currentDeck.toString());
+                qPrefs.save();
                 view.setCurrentDeckStatus();
             }
         };
