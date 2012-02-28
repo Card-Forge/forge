@@ -581,7 +581,6 @@ public class AbilityFactoryPump {
             // when this happens we need to expand AI to consider if its ok for
             // everything?
             for (final Card card : cards) {
-
                 if (this.abilityFactory.isCurse()) {
                     if (card.getController().isComputer()) {
                         return false;
@@ -591,13 +590,13 @@ public class AbilityFactoryPump {
                         continue;
                     }
 
-                    break;
+                    return r.nextFloat() <= Math.pow(.6667, activations);
                 }
                 if (shouldPumpCard(sa, card)) {
-                    break;
+                    return r.nextFloat() <= Math.pow(.6667, activations);
                 }
             }
-            return r.nextFloat() <= Math.pow(.6667, activations);
+            return false;
         }
         //Targeted
         return this.pumpTgtAI(sa, defense, attack, false);
