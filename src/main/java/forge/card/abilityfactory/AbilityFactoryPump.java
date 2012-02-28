@@ -33,6 +33,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameEntity;
+import forge.PhaseHandler;
 import forge.Player;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -248,82 +249,174 @@ public class AbilityFactoryPump {
     }
 
     /**
+     * Contains useful keyword.
+     * 
+     * @param keywords
+     *            the keywords
+     * @param card
+     *            the card
+     * @return true, if successful
+     */
+    public static boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card) {
+        for (final String keyword : keywords) {
+            if (isUsefulKeyword(keyword, card)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if is useful keyword.
+     * 
+     * @param keyword
+     *            the keyword
+     * @param card
+     *            the card
+     * @return true, if is useful keyword
+     */
+    public static boolean isUsefulKeyword(final String keyword, final Card card) {
+        final PhaseHandler ph = AllZone.getPhaseHandler();
+        final Player computer = AllZone.getComputerPlayer();
+        final Player human = AllZone.getHumanPlayer();
+        if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
+            return false;
+        }
+        final boolean evasive = (keyword.endsWith("Flying") || keyword.endsWith("Horsemanship")
+                || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate"));
+        final boolean combatRelevant = (keyword.endsWith("First Strike") || keyword.endsWith("Double Strike")
+                || keyword.contains("Bushido") || keyword.endsWith("Wither") || keyword.endsWith("Deathtouch")
+                || keyword.contains("Trample") || keyword.endsWith("Lifelink"));
+        // give evasive keywords to creatures that can attack
+        if (evasive) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || (card.getNetCombatDamage() <= 0) || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
+                return false;
+            }
+        } else if (keyword.endsWith("Haste")) {
+            if (!card.hasSickness() || ph.isPlayerTurn(human) || card.isTapped()
+                    || card.hasKeyword("CARDNAME can attack as though it had haste.")
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                    || !CombatUtil.canAttackNextTurn(card)) {
+                return false;
+            }
+        } else if (combatRelevant) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                    || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
+                return false;
+            }
+        } else if (keyword.startsWith("Rampage")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                    || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {
+                return false;
+            }
+        } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
+            if (card.getController().isComputer() || ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card)
+                    || (card.getNetCombatDamage() <= 0)) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME can't block.")) {
+            if (card.getController().isComputer() || ph.isPlayerTurn(human) || !CombatUtil.canBlock(card)) {
+                return false;
+            }
+        } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
+            if (ph.isBefore(Constant.Phase.MAIN2) || card.isUntapped() || ph.isPlayerTurn(human)) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)) {
+                return false;
+            }
+        } else if (keyword.equals("Shroud") || keyword.equals("Heyproof")) {
+            // These are handled elsewhere
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean shouldPumpCard(final SpellAbility sa, final Card c) {
+        int attack = getNumAttack(sa);
+        int defense = getNumDefense(sa);
+        PhaseHandler phase = AllZone.getPhaseHandler();
+
+        if (!c.canBeTargetedBy(sa)) {
+            return false;
+        }
+
+        if ((c.getNetDefense() + defense) <= 0) {
+            return false;
+        }
+
+        if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
+                && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(c)) {
+            return true;
+        }
+
+        if (containsUsefulKeyword(keywords, c)) {
+            return true;
+        }
+
+        // will the creature attack (only relevant for sorcery speed)?
+        if (phase.isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                && phase.isPlayerTurn(AllZone.getComputerPlayer())
+                && CardFactoryUtil.doesCreatureAttackAI(c)
+                && attack > 0) {
+            return true;
+        }
+
+        // is the creature blocking and unable to destroy the attacker
+        // or would be destroyed itself?
+        if (c.isBlocking()
+                && (CombatUtil.blockerWouldBeDestroyed(c) || !CombatUtil.attackerWouldBeDestroyed(AllZone
+                        .getCombat().getAttackerBlockedBy(c)))) {
+            return true;
+        }
+
+        // is the creature unblocked and the spell will pump its power?
+        if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isUnblocked(c) && (attack > 0)) {
+            return true;
+        }
+
+        // is the creature blocked and the blocker would survive
+        if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS) && (attack > 0)
+                && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
+                && AllZone.getCombat().getBlockers(c) != null
+                && !AllZone.getCombat().getBlockers(c).isEmpty()
+                && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
+            return true;
+        }
+
+        // if the life of the computer is in danger, try to pump
+        // potential blockers before declaring blocks
+        if (CombatUtil.lifeInDanger(AllZone.getCombat())
+                && phase.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                && phase.isBefore(Constant.Phase.MAIN2)
+                && CombatUtil.canBlock(c, AllZone.getCombat())
+                && phase.isPlayerTurn(AllZone.getHumanPlayer())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * <p>
      * getPumpCreatures.
      * </p>
      * 
-     * @param defense
-     *            a int.
-     * @param attack
-     *            a int.
      * @return a {@link forge.CardList} object.
      */
-    private CardList getPumpCreatures(final int defense, final int attack, final SpellAbility sa) {
-
-        final ArrayList<String> keywords = this.keywords;
+    private CardList getPumpCreatures(final SpellAbility sa) {
 
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
-                if (!c.canBeTargetedBy(sa)) {
-                    return false;
-                }
-
-                if ((c.getNetDefense() + defense) <= 0) {
-                    return false;
-                }
-
-                if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
-                        && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(c)) {
-                    return true;
-                }
-
-                if (!ComputerUtil.containsUsefulKeyword(keywords, c)) {
-                    return false;
-                }
-
-                // will the creature attack (only relevant for sorcery speed)?
-                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
-                        && CardFactoryUtil.doesCreatureAttackAI(c)) {
-                    return true;
-                }
-
-                // is the creature blocking and unable to destroy the attacker
-                // or would be destroyed itself?
-                if (c.isBlocking()
-                        && (CombatUtil.blockerWouldBeDestroyed(c) || !CombatUtil.attackerWouldBeDestroyed(AllZone
-                                .getCombat().getAttackerBlockedBy(c)))) {
-                    return true;
-                }
-
-                // is the creature unblocked and the spell will pump its power?
-                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
-                        && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isUnblocked(c) && (attack > 0)) {
-                    return true;
-                }
-
-                // is the creature blocked and the blocker would survive
-                if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS) && (attack > 0)
-                        && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
-                        && AllZone.getCombat().getBlockers(c) != null
-                        && !AllZone.getCombat().getBlockers(c).isEmpty()
-                        && !CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
-                    return true;
-                }
-
-                // if the life of the computer is in danger, try to pump
-                // potential blockers before declaring blocks
-                if (CombatUtil.lifeInDanger(AllZone.getCombat())
-                        && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.MAIN2)
-                        && CombatUtil.canBlock(c, AllZone.getCombat())
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
-                    return true;
-                }
-
-                return false;
+                return shouldPumpCard(sa, c);
             }
         });
         return list;
@@ -367,7 +460,7 @@ public class AbilityFactoryPump {
                 list = list.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
-                        return ComputerUtil.containsUsefulKeyword(keywords, c);
+                        return containsUsefulKeyword(keywords, c);
                     }
                 });
             }
@@ -475,6 +568,7 @@ public class AbilityFactoryPump {
             attack = this.getNumAttack(sa);
         }
 
+        //Untargeted
         if ((this.abilityFactory.getAbTgt() == null) || !this.abilityFactory.getAbTgt().doesTarget()) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                     this.params.get("Defined"), sa);
@@ -482,37 +576,31 @@ public class AbilityFactoryPump {
             if (cards.size() == 0) {
                 return false;
             }
+            final Random r = MyRandom.getRandom();
 
             // when this happens we need to expand AI to consider if its ok for
             // everything?
             for (final Card card : cards) {
-                final Random r = MyRandom.getRandom();
-
-                if (!ComputerUtil.containsUsefulKeyword(this.keywords, card)) {
-                    return false;
-                }
 
                 if (this.abilityFactory.isCurse()) {
                     if (card.getController().isComputer()) {
                         return false;
                     }
 
-                    return (r.nextFloat() <= Math.pow(.6667, activations));
-                }
-                if (card.getNetDefense() + defense > 0) {
-                    if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
-                        && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
-                        return (r.nextFloat() <= Math.pow(.6667, activations));
-                    } else if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-                        return (r.nextFloat() <= Math.pow(.6667, activations));
+                    if (!containsUsefulKeyword(this.keywords, card)) {
+                        continue;
                     }
+
+                    break;
+                }
+                if (shouldPumpCard(sa, card)) {
+                    break;
                 }
             }
-        } else {
-            return this.pumpTgtAI(sa, defense, attack, false);
+            return r.nextFloat() <= Math.pow(.6667, activations);
         }
-
-        return false;
+        //Targeted
+        return this.pumpTgtAI(sa, defense, attack, false);
     } // pumpPlayAI()
 
     /**
@@ -553,7 +641,7 @@ public class AbilityFactoryPump {
                 Zone zone = tgt.getZone().get(0);
                 list = AllZoneUtil.getCardsIn(zone);
             } else {
-                list = this.getPumpCreatures(defense, attack, sa);
+                list = this.getPumpCreatures(sa);
             }
             if (sa.canTarget(AllZone.getComputerPlayer())) {
                 tgt.addTarget(AllZone.getComputerPlayer());
