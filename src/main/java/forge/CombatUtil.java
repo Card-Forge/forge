@@ -1994,6 +1994,9 @@ public class CombatUtil {
                 trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
                 trigParams = trigger.getMapParams();
             }
+            if (!trigParams.containsKey("Execute")) {
+                continue;
+            }
             String ability = source.getSVar(trigParams.get("Execute"));
             AbilityFactory abilityFactory = new AbilityFactory();
             final HashMap<String, String> abilityParams = abilityFactory.getMapParams(ability, source);
@@ -2043,6 +2046,9 @@ public class CombatUtil {
                 String sVarName = trigParams.get("DelayedTrigger");
                 trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
                 trigParams = trigger.getMapParams();
+            }
+            if (!trigParams.containsKey("Execute")) {
+                continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
             AbilityFactory abilityFactory = new AbilityFactory();
