@@ -163,8 +163,9 @@ public class DeckController<T extends DeckBase> {
      */
     @SuppressWarnings("unchecked")
     public void save() {
-        if ( null == model ) 
+        if (null == model) {
             return;
+        }
         this.folder.add(this.model);
         // copy to new instance which will be edited and left if unsaved
         this.setModel((T) this.model.copyTo(this.model.getName()), true);
@@ -188,7 +189,7 @@ public class DeckController<T extends DeckBase> {
      * 
      * @see forge.gui.deckeditor.IDeckController#isSaved()
      */
-    
+
     public boolean isSaved() {
         return this.saved;
     }
@@ -198,7 +199,7 @@ public class DeckController<T extends DeckBase> {
      * 
      * @see forge.gui.deckeditor.IDeckController#delete()
      */
-    
+
     public void delete() {
         if (StringUtils.isNotBlank(this.model.getName())) {
             this.folder.delete(this.model.getName());
@@ -213,7 +214,6 @@ public class DeckController<T extends DeckBase> {
      * @see forge.gui.deckeditor.IDeckController#isGoodName(java.lang.String)
      */
 
-    
     public boolean fileExists(final String deckName) {
         return !this.folder.isUnique(deckName);
     }
@@ -221,7 +221,7 @@ public class DeckController<T extends DeckBase> {
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.IDeckController#isGoodName(java.lang.String)
      */
-    
+
     public boolean isGoodName(final String deckName) {
         return StringUtils.isNotBlank(deckName) && this.folder.isUnique(deckName);
     }
@@ -231,7 +231,7 @@ public class DeckController<T extends DeckBase> {
      * 
      * @see forge.gui.deckeditor.IDeckController#importDeck(forge.deck.Deck)
      */
-    
+
     public void importDeck(final T newDeck) {
         this.setModel(newDeck);
     }
@@ -241,7 +241,7 @@ public class DeckController<T extends DeckBase> {
      * 
      * @see forge.gui.deckeditor.IDeckController#isModelInStore()
      */
-    
+
     public boolean isModelInStore() {
         return this.modelInStore;
     }
@@ -251,7 +251,7 @@ public class DeckController<T extends DeckBase> {
      * 
      * @see forge.gui.deckeditor.IDeckController#newModel()
      */
-    
+
     public void newModel() {
         this.model = this.newModelCreator.apply();
         this.saved = true;

@@ -168,7 +168,7 @@ public final class QuestData {
     // Moved some methods there that otherwise would make this class even more
     // complex
     private transient QuestUtilCards myCards;
-    
+
     private transient QuestEvent currentEvent;
 
     // This is used by shop. Had no idea where else to place this
@@ -225,7 +225,7 @@ public final class QuestData {
         if (null == this.getShopList()) {
             this.setShopList(new ItemPool<InventoryItem>(InventoryItem.class));
         }
-        
+
         currentEvent = null;
 
     }
@@ -740,6 +740,6 @@ public final class QuestData {
     }
 
     public void setCurrentEvent(QuestEvent currentEvent) {
-        this.currentEvent = currentEvent; 
+        this.currentEvent = currentEvent;
     }
 }
