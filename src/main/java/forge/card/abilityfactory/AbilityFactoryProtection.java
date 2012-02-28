@@ -232,9 +232,9 @@ public final class AbilityFactoryProtection {
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?
-                if (CardFactoryUtil.doesCreatureAttackAI(c)
-                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                        && CardFactoryUtil.doesCreatureAttackAI(c)) {
                     return true;
                 }
 

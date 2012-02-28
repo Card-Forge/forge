@@ -284,9 +284,9 @@ public class AbilityFactoryPump {
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?
-                if (CardFactoryUtil.doesCreatureAttackAI(c)
-                        && AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (AllZone.getPhaseHandler().isBefore(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                        && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
+                        && CardFactoryUtil.doesCreatureAttackAI(c)) {
                     return true;
                 }
 
@@ -499,15 +499,11 @@ public class AbilityFactoryPump {
 
                     return (r.nextFloat() <= Math.pow(.6667, activations));
                 }
-                if (((card.getNetDefense() + defense) > 0) && (!card.hasAnyKeyword(this.keywords))) {
+                if (card.getNetDefense() + defense > 0) {
                     if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
                         && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
                         return (r.nextFloat() <= Math.pow(.6667, activations));
-                    } else if (this.hostCard.equals(card) && !this.keywords.contains("Haste")) {
-                        if (r.nextFloat() <= Math.pow(.6667, activations)) {
-                            return CardFactoryUtil.doesCreatureAttackAI(card) && !sa.getPayCosts().getTap();
-                        }
-                    } else {
+                    } else if (AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                         return (r.nextFloat() <= Math.pow(.6667, activations));
                     }
                 }
