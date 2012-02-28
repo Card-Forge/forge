@@ -18,6 +18,8 @@ The organizational structure of the /res/decks/ folder has been improved and we 
 /decks/draft/
 /decks/sealed/
 
+You can place your deck files from an earlier version of Forge into the /res/decks/ folder. When you next launch Forge these decks will be converted to a newer format and will be moved into the proper subdirectory.
+
 You can now buy PreCon decks, Starter packs, Tournament packs and Fat packs from the quest mode card shop.
 
 
