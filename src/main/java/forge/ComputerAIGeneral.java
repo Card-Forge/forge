@@ -89,7 +89,7 @@ public class ComputerAIGeneral implements Computer {
      *            a {@link java.lang.String} object.
      */
     private void playCards(final String phase) {
-        final CardList list = phase.equals(Constant.Phase.MAIN1) ? this.getMain1() : this.getMain2();
+        final CardList list = getAvailableSpellAbilities();
 
         final boolean nextPhase = ComputerUtil.playSpellAbilities(getSpellAbilities(list));
 
@@ -97,105 +97,6 @@ public class ComputerAIGeneral implements Computer {
             AllZone.getPhaseHandler().passPriority();
         }
     } // playCards()
-
-    /**
-     * <p>
-     * getMain1.
-     * </p>
-     * 
-     * @return an array of {@link forge.card.spellability.SpellAbility} objects.
-     */
-    private CardList getMain1() {
-        final Player computer = AllZone.getComputerPlayer();
-        final Player human = AllZone.getHumanPlayer();
-        // Card list of all cards to consider
-        CardList hand = computer.getCardsIn(Zone.Hand);
-
-        final boolean hasACardGivingHaste = ComputerAIGeneral.hasACardGivingHaste();
-
-        // If mana pool is not empty try to play anything
-        if (computer.getManaPool().isEmpty()) {
-            hand = hand.filter(new CardListFilter() {
-                @Override
-                public boolean addCard(final Card c) {
-
-                    if (c.getSVar("PlayMain1").equals("TRUE")) {
-                        return true;
-                    }
-
-                    // timing should be handled by the AF's
-                    if (c.isSorcery() || c.isAura()) {
-                        return true;
-                    }
-
-                    if ((c.isCreature() && (hasACardGivingHaste || c.hasKeyword("Haste"))) || c.hasKeyword("Exalted")) {
-                        return true;
-                    }
-
-                    // get all cards the computer controls with BuffedBy
-                    final CardList buffed = computer.getCardsIn(Zone.Battlefield);
-                    for (int j = 0; j < buffed.size(); j++) {
-                        final Card buffedcard = buffed.get(j);
-                        if (buffedcard.getSVar("BuffedBy").length() > 0) {
-                            final String buffedby = buffedcard.getSVar("BuffedBy");
-                            final String[] bffdby = buffedby.split(",");
-                            if (c.isValid(bffdby, c.getController(), c)) {
-                                return true;
-                            }
-                        }
-                    } // BuffedBy
-
-                    // get all cards the human controls with AntiBuffedBy
-                    final CardList antibuffed = human.getCardsIn(Zone.Battlefield);
-                    for (int k = 0; k < antibuffed.size(); k++) {
-                        final Card buffedcard = antibuffed.get(k);
-                        if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
-                            final String buffedby = buffedcard.getSVar("AntiBuffedBy");
-                            final String[] bffdby = buffedby.split(",");
-                            if (c.isValid(bffdby, c.getController(), c)) {
-                                return true;
-                            }
-                        }
-                    } // AntiBuffedBy
-
-                    if (c.isLand()) {
-                        return false;
-                    }
-
-                    final CardList vengevines = computer.getCardsIn(Zone.Graveyard, "Vengevine");
-                    if (vengevines.size() > 0) {
-                        final CardList creatures = computer.getCardsIn(Zone.Hand);
-                        final CardList creatures2 = new CardList();
-                        for (int i = 0; i < creatures.size(); i++) {
-                            if (creatures.get(i).isCreature()
-                                    && (CardUtil.getConvertedManaCost(creatures.get(i).getManaCost()) <= 3)) {
-                                creatures2.add(creatures.get(i));
-                            }
-                        }
-                        if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0))
-                                .size()) > 1)
-                                && c.isCreature()
-                                && (CardUtil.getConvertedManaCost(c.getManaCost()) <= 3)) {
-                            return true;
-                        }
-                    } // AI Improvement for Vengevine
-                      // Beached As End
-                    return false;
-                }
-            });
-        }
-        final CardList all = computer.getCardsIn(Zone.Battlefield);
-        all.addAll(computer.getCardsIn(Zone.Exile));
-        all.addAll(computer.getCardsIn(Zone.Graveyard));
-        if (!computer.getCardsIn(Zone.Library).isEmpty()) {
-            all.add(computer.getCardsIn(Zone.Library).get(0));
-        }
-        all.addAll(human.getCardsIn(Zone.Battlefield));
-        all.addAll(human.getCardsIn(Zone.Exile));
-        all.addAll(hand);
-
-        return all;
-    } // getMain1()
 
     /**
      * <p>
@@ -230,17 +131,6 @@ public class ComputerAIGeneral implements Computer {
 
         return false;
     } // hasACardGivingHaste
-
-    /**
-     * <p>
-     * getMain2.
-     * </p>
-     * 
-     * @return an array of {@link forge.card.spellability.SpellAbility} objects.
-     */
-    private CardList getMain2() {
-        return getAvailableSpellAbilities();
-    } // getMain2()
 
     /**
      * <p>

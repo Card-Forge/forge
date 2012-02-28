@@ -25,6 +25,7 @@ import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
+import forge.CardUtil;
 import forge.Command;
 import forge.CommandReturn;
 import forge.ComputerAIGeneral;
@@ -274,6 +275,62 @@ public class SpellPermanent extends Spell {
                 return false;
             }
             card.setSVar("PayX", Integer.toString(xPay));
+        }
+        // Wait for Main2 if possible
+        if (AllZone.getPhaseHandler().is(Constant.Phase.MAIN1)) {
+            boolean wait = true;
+            if (card.getSVar("PlayMain1").equals("TRUE")) {
+                wait = false;
+            }
+            if ((card.isCreature() && (ComputerAIGeneral.hasACardGivingHaste() 
+                    || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
+                wait = false;
+            }
+            // get all cards the computer controls with BuffedBy
+            final CardList buffed = AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield);
+            for (int j = 0; j < buffed.size(); j++) {
+                final Card buffedcard = buffed.get(j);
+                if (buffedcard.getSVar("BuffedBy").length() > 0) {
+                    final String buffedby = buffedcard.getSVar("BuffedBy");
+                    final String[] bffdby = buffedby.split(",");
+                    if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                        wait = false;
+                    }
+                }
+            } // BuffedBy
+
+            // get all cards the human controls with AntiBuffedBy
+            final CardList antibuffed = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield);
+            for (int k = 0; k < antibuffed.size(); k++) {
+                final Card buffedcard = antibuffed.get(k);
+                if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
+                    final String buffedby = buffedcard.getSVar("AntiBuffedBy");
+                    final String[] bffdby = buffedby.split(",");
+                    if (card.isValid(bffdby, buffedcard.getController(), buffedcard)) {
+                        wait = false;
+                    }
+                }
+            } // AntiBuffedBy
+            final CardList vengevines = AllZone.getComputerPlayer().getCardsIn(Zone.Graveyard, "Vengevine");
+            if (vengevines.size() > 0) {
+                final CardList creatures = AllZone.getComputerPlayer().getCardsIn(Zone.Hand);
+                final CardList creatures2 = new CardList();
+                for (int i = 0; i < creatures.size(); i++) {
+                    if (creatures.get(i).isCreature()
+                            && (CardUtil.getConvertedManaCost(creatures.get(i).getManaCost()) <= 3)) {
+                        creatures2.add(creatures.get(i));
+                    }
+                }
+                if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0))
+                        .size()) > 1)
+                        && card.isCreature()
+                        && (CardUtil.getConvertedManaCost(card.getManaCost()) <= 3)) {
+                    wait = false;
+                }
+            } // AI Improvement for Vengevine Beached As End
+            if (wait) {
+                return false;
+            }
         }
         // save cards with flash for surprise blocking
         if (card.hasKeyword("Flash")
