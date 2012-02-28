@@ -505,6 +505,8 @@ public class AbilityFactoryCounterMagic {
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
+        } else if (tgtSA.isFlashBackAbility())  {
+            Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
         } else if (this.destination.equals("Graveyard")) {
             Singletons.getModel().getGameAction().moveToGraveyard(tgtSA.getSourceCard());
         } else if (this.destination.equals("Exile")) {
