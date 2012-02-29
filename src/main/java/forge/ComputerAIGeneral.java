@@ -227,7 +227,7 @@ public class ComputerAIGeneral implements Computer {
     }
 
     /**
-     * Returns the spellAbilities from the card list
+     * Returns the spellAbilities from the card list.
      * 
      * @param l
      *            a {@link forge.CardList} object.

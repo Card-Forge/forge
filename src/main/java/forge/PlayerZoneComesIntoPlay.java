@@ -353,12 +353,13 @@ public class PlayerZoneComesIntoPlay extends DefaultPlayerZone {
         // Battlefield filters out Phased Out cards by default. Needs to call
         // getCards(false) to get Phased Out cards
 
-        if (!filter) 
+        if (!filter) {
             return new ArrayList<Card>(this.getCardList());
+        }
 
         final ArrayList<Card> list = new ArrayList<Card>();
-        for(Card crd : this.getCardList())
-        {
+        for (Card crd : this.getCardList()) {
+
             if (!crd.isPhasedOut()) {
                 list.add(crd);
             }

@@ -714,7 +714,7 @@ public class CombatUtil {
         int cntAttackers = combat.getAttackers().size();
         for (final Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
             for (final String keyword : card.getKeyword()) {
-                if (keyword.equals("No more than one creature can attack each combat.") && cntAttackers > 0 ) {
+                if (keyword.equals("No more than one creature can attack each combat.") && cntAttackers > 0) {
                     return false;
                 }
                 if (keyword.equals("No more than two creatures can attack each combat.") && cntAttackers > 1) {

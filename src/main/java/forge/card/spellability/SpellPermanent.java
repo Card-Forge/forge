@@ -282,7 +282,7 @@ public class SpellPermanent extends Spell {
             if (card.getSVar("PlayMain1").equals("TRUE")) {
                 wait = false;
             }
-            if ((card.isCreature() && (ComputerAIGeneral.hasACardGivingHaste() 
+            if ((card.isCreature() && (ComputerAIGeneral.hasACardGivingHaste()
                     || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
                 wait = false;
             }
@@ -348,7 +348,7 @@ public class SpellPermanent extends Spell {
 
         return canPlayFromEffectAI(false, true);
     } // canPlayAI()
-    
+
     /** {@inheritDoc} */
     @Override
     public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {

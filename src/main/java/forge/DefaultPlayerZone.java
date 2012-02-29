@@ -199,9 +199,10 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     @Override
     public final void setCards(final Iterable<Card> cards) {
         List<Card> toSet = new ArrayList<Card>();
-        for(Card c : cards)
+        for (Card c : cards) {
             toSet.add(c);
-        this.setCardList( toSet );
+        }
+        this.setCardList(toSet);
         this.update();
     }
 
@@ -313,7 +314,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @return an array of {@link forge.Card} objects.
      */
     @Override
-    public final List<Card>getCards() {
+    public final List<Card> getCards() {
         return this.getCards(true);
     }
 

@@ -71,12 +71,14 @@ public final class CardUtil {
      * @return a {@link forge.Card} object.
      */
     public static <T> T getRandom(final T[] o) {
-        if ( o == null ) throw new IllegalArgumentException("CardUtil : getRandom(T) recieved null instead of array.");
+        if (o == null) {
+            throw new IllegalArgumentException("CardUtil : getRandom(T) recieved null instead of array.");
+        }
         int len = o.length;
-        switch(len) { 
-            case 0: throw new IllegalArgumentException("CardUtil : getRandom(T) recieved an empty array."); 
+        switch(len) {
+            case 0: throw new IllegalArgumentException("CardUtil : getRandom(T) recieved an empty array.");
             case 1: return o[0];
-            default: return o[CardUtil.RANDOM.nextInt(len)]; 
+            default: return o[CardUtil.RANDOM.nextInt(len)];
         }
     }
 

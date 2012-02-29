@@ -941,7 +941,7 @@ public class Combat {
      */
     public final List<Card> getUnblockedAttackers() {
         final List<Card> out = new ArrayList<Card>();
-        for(Card c : this.unblockedMap.keySet()) {
+        for (Card c : this.unblockedMap.keySet()) {
             if (!c.hasFirstStrike()) {
                 out.add(c);
             }
@@ -958,7 +958,7 @@ public class Combat {
      */
     public final List<Card> getUnblockedFirstStrikeAttackers() {
         final List<Card> out = new ArrayList<Card>();
-        for(Card c : this.unblockedMap.keySet()) { // only add creatures without firstStrike to this
+        for (Card c : this.unblockedMap.keySet()) { // only add creatures without firstStrike to this
             if (c.hasFirstStrike() || c.hasDoubleStrike()) {
                 out.add(c);
             }
