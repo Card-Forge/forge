@@ -107,7 +107,7 @@ interface IPlayerZone {
      * @param c
      *            an array of {@link forge.Card} objects.
      */
-    void setCards(Card[] c);
+    void setCards(Iterable<Card> c);
 
     /**
      * <p>
@@ -118,14 +118,14 @@ interface IPlayerZone {
      *            the filter
      * @return an array of {@link forge.Card} objects.
      */
-    Card[] getCards(boolean filter);
+    List<Card> getCards(boolean filter);
 
     /**
      * Gets the cards.
      * 
      * @return the cards
      */
-    Card[] getCards();
+    List<Card> getCards();
 
     /**
      * Gets the cards.
@@ -134,7 +134,7 @@ interface IPlayerZone {
      *            the n
      * @return the cards
      */
-    Card[] getCards(int n);
+    List<Card> getCards(int n);
 
     /**
      * Contains.

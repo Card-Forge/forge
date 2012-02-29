@@ -19,6 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -2351,7 +2352,7 @@ public class CombatUtil {
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final Combat combat = AllZone.getCombat();
-        final ArrayList<Object> defenders = combat.getDefenders();
+        final List<GameEntity> defenders = combat.getDefenders();
         final CardList[] attackers = combat.sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here
@@ -2384,7 +2385,7 @@ public class CombatUtil {
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final Combat combat = AllZone.getCombat();
-        final ArrayList<Object> defenders = combat.getDefenders();
+        final List<GameEntity> defenders = combat.getDefenders();
         final CardList[] attackers = combat.sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here
@@ -2425,7 +2426,7 @@ public class CombatUtil {
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-        final ArrayList<Object> defenders = AllZone.getCombat().getDefenders();
+        final List<GameEntity> defenders = AllZone.getCombat().getDefenders();
         final CardList[] attackers = AllZone.getCombat().sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here

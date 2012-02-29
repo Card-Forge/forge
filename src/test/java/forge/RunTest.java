@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -265,7 +266,7 @@ public class RunTest {
         c2.setUniqueNumber(2);
 
         // test CardList
-        final CardList cardList = new CardList(new Card[] { c, c2 });
+        final CardList cardList = new CardList(Arrays.asList(new Card[] { c, c2 }));
         this.check("111", cardList.contains(c));
         this.check("112", cardList.contains(c2));
         this.check("113", cardList.containsName(c));

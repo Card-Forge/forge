@@ -24,7 +24,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -289,7 +288,7 @@ public class ControlField {
         }
 
         protected Iterable<Card> getCardsAsIterable() {
-            return new ImmutableIterableFrom<Card>(Arrays.asList(this.zone.getCards()));
+            return new ImmutableIterableFrom<Card>(this.zone.getCards());
         }
 
         protected void doAction(final Card c) {
@@ -318,8 +317,7 @@ public class ControlField {
             @Override
             public void update(final Observable a, final Object b) {
                 final PlayerZone pZone = (PlayerZone) a;
-                final Card[] c = pZone.getCards(false);
-                GuiDisplayUtil.setupPlayZone(ControlField.this.view.getTabletop(), c);
+                GuiDisplayUtil.setupPlayZone(ControlField.this.view.getTabletop(), pZone.getCards(false));
             }
         };
     }

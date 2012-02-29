@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
-
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
 
@@ -69,8 +67,8 @@ public class CardList implements Iterable<Card> {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public CardList(final Card... c) {
-        this.addAll(c);
+    public CardList(final Card c) {
+        this.add(c);
     }
 
     /**
@@ -81,21 +79,8 @@ public class CardList implements Iterable<Card> {
      * @param al
      *            a {@link java.util.ArrayList} object.
      */
-    public CardList(final List<Card> al) {
+    public CardList(final Iterable<Card> al) {
         this.addAll(al);
-    }
-
-    /**
-     * Make a shallow copy of an Iterable's contents; this could be another
-     * CardList.
-     * 
-     * @param iterable
-     *            we traverse this and copy its contents into a local field.
-     */
-    public CardList(final Iterable<Card> iterable) {
-        for (final Card card : iterable) {
-            this.add(card);
-        }
     }
 
     /**

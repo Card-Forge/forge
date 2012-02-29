@@ -1321,7 +1321,7 @@ public abstract class Player extends GameEntity {
      * @return a CardList with all the cards currently in requested zone
      */
     public final CardList getCardsIn(final Constant.Zone zone) {
-        final Card[] cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone).getCards();
+        final List<Card> cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone).getCards();
         return new CardList(cards);
     }
 
@@ -1342,7 +1342,7 @@ public abstract class Player extends GameEntity {
      * @return the cards include phasing in
      */
     public final CardList getCardsIncludePhasingIn(final Constant.Zone zone) {
-        final Card[] cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone)
+        final List<Card> cards = zone == Zone.Stack ? AllZone.getStackZone().getCards() : this.getZone(zone)
                 .getCards(false);
         return new CardList(cards);
     }
@@ -1712,7 +1712,7 @@ public abstract class Player extends GameEntity {
             return;
         }
 
-        final ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(c));
+        final ArrayList<Card> list = new ArrayList<Card>(Arrays.asList(c));
         // overdone but wanted to make sure it was really random
         final Random random = MyRandom.getRandom();
         Collections.shuffle(list, random);
@@ -1722,7 +1722,7 @@ public abstract class Player extends GameEntity {
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
 
-        Object o;
+        Card o;
         for (int i = 0; i < list.size(); i++) {
             o = list.remove(random.nextInt(list.size()));
             list.add(random.nextInt(list.size()), o);
@@ -1735,8 +1735,7 @@ public abstract class Player extends GameEntity {
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
 
-        list.toArray(c);
-        library.setCards(c);
+        library.setCards(list);
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -2304,7 +2303,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean hasThreshold() {
-        return this.getZone(Zone.Graveyard).getCards().length >= 7;
+        return this.getZone(Zone.Graveyard).getCards().size() >= 7;
     }
 
     /**
@@ -2315,7 +2314,7 @@ public abstract class Player extends GameEntity {
      * @return a boolean.
      */
     public final boolean hasHellbent() {
-        return this.getZone(Zone.Hand).getCards().length == 0;
+        return this.getZone(Zone.Hand).getCards().isEmpty();
     }
 
     /**

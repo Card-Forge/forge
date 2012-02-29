@@ -25,7 +25,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -103,7 +102,7 @@ public class ControlHand {
                 final Rectangle rctLibraryLabel = Singletons.getControl()
                         .getControlMatch().getFieldControls().get(1)
                         .getView().getLblLibrary().getBounds();
-                final Card[] c = pZone.getCards();
+                final List<Card> c = pZone.getCards();
 
                 // Animation starts from the library label.
                 // This check prevents animation running if label hasn't been realised yet.
@@ -117,7 +116,7 @@ public class ControlHand {
                     tmp.add(cpa.getGameCard());
                 }
                 diff = new ArrayList<Card>(tmp);
-                diff.removeAll(Arrays.asList(c));
+                diff.removeAll(c);
                 if (diff.size() == p.getCardPanels().size()) {
                     p.clear();
                 } else {
@@ -125,7 +124,7 @@ public class ControlHand {
                         p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
                     }
                 }
-                diff = new ArrayList<Card>(Arrays.asList(c));
+                diff = new ArrayList<Card>(c);
                 diff.removeAll(tmp);
 
                 JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();

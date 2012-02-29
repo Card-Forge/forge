@@ -404,7 +404,7 @@ public class CardFactoryCreatures {
                             }
                         });
 
-                        CardList list = new CardList(art.toArray());
+                        CardList list = new CardList(art);
                         list = list.filter(new CardListFilter() {
                             @Override
                             public boolean addCard(final Card c) {

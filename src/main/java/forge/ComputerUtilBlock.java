@@ -17,7 +17,7 @@
  */
 package forge;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.card.cardfactory.CardFactoryUtil;
 
@@ -260,7 +260,7 @@ public class ComputerUtilBlock {
         final CardList[] attackerLists = combat.sortAttackerByDefender();
         final CardList sortedAttackers = new CardList();
 
-        final ArrayList<Object> defenders = combat.getDefenders();
+        final List<GameEntity> defenders = combat.getDefenders();
 
         // Begin with the attackers that pose the biggest threat
         CardListUtil.sortByEvaluateCreature(attackerLists[0]);
@@ -317,7 +317,7 @@ public class ComputerUtilBlock {
      */
     private static Combat makeGoodBlocks(final Combat combat) {
 
-        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
 
@@ -364,7 +364,7 @@ public class ComputerUtilBlock {
                 combat.addBlocker(attacker, blocker);
             }
         }
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers.toArray()));
+        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
         return combat;
     }
 
@@ -380,7 +380,7 @@ public class ComputerUtilBlock {
      */
     private static Combat makeGangBlocks(final Combat combat) {
 
-        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
         currentAttackers = currentAttackers.getKeywordsDontContain("Rampage");
         currentAttackers = currentAttackers
                 .getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
@@ -424,8 +424,8 @@ public class ComputerUtilBlock {
             }
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers.toArray()));
-        currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
+        currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
 
         // Try to block an attacker with two blockers of which only one will die
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
@@ -493,7 +493,7 @@ public class ComputerUtilBlock {
             }
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers.toArray()));
+        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
         return combat;
     }
 
@@ -509,7 +509,7 @@ public class ComputerUtilBlock {
      */
     private static Combat makeTradeBlocks(final Combat combat) {
 
-        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
         CardList killingBlockers;
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
@@ -528,7 +528,7 @@ public class ComputerUtilBlock {
                 ComputerUtilBlock.getBlockersLeft().remove(blocker);
             }
         }
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers.toArray()));
+        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
         return combat;
     }
 
@@ -544,7 +544,7 @@ public class ComputerUtilBlock {
      */
     private static Combat makeChumpBlocks(final Combat combat) {
 
-        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft().toArray());
+        CardList currentAttackers = new CardList(ComputerUtilBlock.getAttackersLeft());
         CardList chumpBlockers;
 
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
@@ -564,7 +564,7 @@ public class ComputerUtilBlock {
                 ComputerUtilBlock.getBlockersLeft().remove(blocker);
             }
         }
-        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers.toArray()));
+        ComputerUtilBlock.setAttackersLeft(new CardList(currentAttackers));
         return combat;
     }
 
@@ -672,7 +672,7 @@ public class ComputerUtilBlock {
                 safeBlockers = blockers.getKeyword("First Strike");
                 safeBlockers.addAll(blockers.getKeyword("Double Strike"));
             } else {
-                safeBlockers = new CardList(blockers.toArray());
+                safeBlockers = new CardList(blockers);
             }
 
             for (final Card blocker : safeBlockers) {
@@ -713,13 +713,13 @@ public class ComputerUtilBlock {
             combat.removeFromCombat(blocker);
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers().toArray())); // keeps
+        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers())); // keeps
                                                                                                       // track
         // of all
         // currently
         // unblocked
         // attackers
-        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers.toArray())); // keeps
+        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers)); // keeps
         // track of
         // all
         // unassigned
@@ -755,13 +755,13 @@ public class ComputerUtilBlock {
             return combat;
         }
 
-        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers().toArray())); // keeps
+        ComputerUtilBlock.setAttackersLeft(new CardList(ComputerUtilBlock.getAttackers())); // keeps
                                                                                                       // track
         // of all
         // currently
         // unblocked
         // attackers
-        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers.toArray())); // keeps
+        ComputerUtilBlock.setBlockersLeft(new CardList(possibleBlockers)); // keeps
         // track of
         // all
         // unassigned

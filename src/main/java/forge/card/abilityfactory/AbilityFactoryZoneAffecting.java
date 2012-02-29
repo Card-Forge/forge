@@ -1230,7 +1230,7 @@ public class AbilityFactoryZoneAffecting {
                                     : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                             dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount);
                         }
-                        CardList dPChHand = new CardList(dPHand.toArray());
+                        CardList dPChHand = new CardList(dPHand);
                         if (params.containsKey("DiscardValid")) { // Restrict card choices
                             final String[] dValid = params.get("DiscardValid").split(",");
                             dPChHand = dPHand.getValidCards(dValid, source.getController(), source);

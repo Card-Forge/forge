@@ -26,7 +26,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -1097,14 +1096,14 @@ public final class GuiDisplayUtil {
      * @param c
      *            an array of {@link forge.Card} objects.
      */
-    public static void setupPlayZone(final PlayArea p, final Card[] c) {
+    public static void setupPlayZone(final PlayArea p, final List<Card> c) {
         List<Card> tmp, diff;
         tmp = new ArrayList<Card>();
         for (final arcane.ui.CardPanel cpa : p.getCardPanels()) {
             tmp.add(cpa.getGameCard());
         }
         diff = new ArrayList<Card>(tmp);
-        diff.removeAll(Arrays.asList(c));
+        diff.removeAll(c);
         if (diff.size() == p.getCardPanels().size()) {
             p.clear();
         } else {
@@ -1112,7 +1111,7 @@ public final class GuiDisplayUtil {
                 p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
             }
         }
-        diff = new ArrayList<Card>(Arrays.asList(c));
+        diff = new ArrayList<Card>(c);
         diff.removeAll(tmp);
 
         arcane.ui.CardPanel toPanel = null;
@@ -1364,31 +1363,31 @@ public final class GuiDisplayUtil {
         }
 
         if (computerDevGraveyardSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Graveyard).setCards(computerDevGraveyardSetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Graveyard).setCards(computerDevGraveyardSetup);
         }
         if (humanDevGraveyardSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Graveyard).setCards(humanDevGraveyardSetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Graveyard).setCards(humanDevGraveyardSetup);
         }
 
         if (computerDevHandSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Hand).setCards(computerDevHandSetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Hand).setCards(computerDevHandSetup);
         }
         if (humanDevHandSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Hand).setCards(humanDevHandSetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Hand).setCards(humanDevHandSetup);
         }
 
         if (humanDevLibrarySetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Library).setCards(humanDevLibrarySetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Library).setCards(humanDevLibrarySetup);
         }
         if (computerDevLibrarySetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Library).setCards(computerDevLibrarySetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Library).setCards(computerDevLibrarySetup);
         }
 
         if (humanDevExileSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(Zone.Exile).setCards(humanDevExileSetup.toArray());
+            AllZone.getHumanPlayer().getZone(Zone.Exile).setCards(humanDevExileSetup);
         }
         if (computerDevExileSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(Zone.Exile).setCards(computerDevExileSetup.toArray());
+            AllZone.getComputerPlayer().getZone(Zone.Exile).setCards(computerDevExileSetup);
         }
 
         AllZone.getTriggerHandler().clearSuppression("ChangesZone");

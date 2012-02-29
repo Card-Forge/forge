@@ -280,7 +280,7 @@ class CardFactoryLands {
 
                     if (this.player.isComputer()) {
                         if (land.size() > 0) {
-                            CardList tappedLand = new CardList(land.toArray());
+                            CardList tappedLand = new CardList(land);
                             tappedLand = tappedLand.filter(CardListFilter.TAPPED);
                             // if any are tapped, sacrifice it
                             // else sacrifice random
@@ -366,7 +366,7 @@ class CardFactoryLands {
 
                     if (this.player.isComputer()) {
                         if (plains.size() > 1) {
-                            CardList tappedPlains = new CardList(plains.toArray());
+                            CardList tappedPlains = new CardList(plains);
                             tappedPlains = tappedPlains.getType("Basic");
                             for (final Card c : tappedPlains) {
                                 Singletons.getModel().getGameAction().sacrifice(c);
@@ -653,7 +653,7 @@ class CardFactoryLands {
 
                     if (player.isComputer()) {
                         if (land.size() > 0) {
-                            CardList tappedLand = new CardList(land.toArray());
+                            CardList tappedLand = new CardList(land);
                             tappedLand = tappedLand.filter(CardListFilter.TAPPED);
                             if (tappedLand.size() > 0) {
                                 Singletons.getModel().getGameAction().moveToHand(CardFactoryUtil.getWorstLand(tappedLand));

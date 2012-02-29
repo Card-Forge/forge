@@ -49,7 +49,7 @@ public class Combat {
 
     // Defenders are the Defending Player + Each Planeswalker that player
     // controls
-    private ArrayList<Object> defenders = new ArrayList<Object>();
+    private List<GameEntity> defenders = new ArrayList<GameEntity>();
     private int currentDefender = 0;
     private int nextDefender = 0;
 
@@ -159,7 +159,7 @@ public class Combat {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Object> getDefenders() {
+    public final List<GameEntity> getDefenders() {
         return this.defenders;
     }
 
@@ -171,7 +171,7 @@ public class Combat {
      * @param newDef
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setDefenders(final ArrayList<Object> newDef) {
+    public final void setDefenders(final List<GameEntity> newDef) {
         this.defenders = newDef;
     }
 
@@ -182,15 +182,12 @@ public class Combat {
      * 
      * @return an array of {@link forge.Card} objects.
      */
-    public final Card[] getDefendingPlaneswalkers() {
-        final Card[] pwDefending = new Card[this.defenders.size() - 1];
+    public final List<Card> getDefendingPlaneswalkers() {
+        final List<Card> pwDefending = new ArrayList<Card>();
 
-        int i = 0;
-
-        for (final Object o : this.defenders) {
+        for (final GameEntity o : this.defenders) {
             if (o instanceof Card) {
-                pwDefending[i] = (Card) o;
-                i++;
+                pwDefending.add((Card) o);
             }
         }
 
@@ -942,18 +939,14 @@ public class Combat {
      * 
      * @return an array of {@link forge.Card} objects.
      */
-    public final Card[] getUnblockedAttackers() {
-        final CardList out = new CardList();
-        final Iterator<Card> it = this.unblockedMap.keySet().iterator();
-        while (it.hasNext()) { // only add creatures without firstStrike to this
-            // list.
-            final Card c = it.next();
+    public final List<Card> getUnblockedAttackers() {
+        final List<Card> out = new ArrayList<Card>();
+        for(Card c : this.unblockedMap.keySet()) {
             if (!c.hasFirstStrike()) {
                 out.add(c);
             }
         }
-
-        return out.toArray();
+        return out;
     } // getUnblockedAttackers()
 
     /**
@@ -963,18 +956,14 @@ public class Combat {
      * 
      * @return an array of {@link forge.Card} objects.
      */
-    public final Card[] getUnblockedFirstStrikeAttackers() {
-        final CardList out = new CardList();
-        final Iterator<Card> it = this.unblockedMap.keySet().iterator();
-        while (it.hasNext()) { // only add creatures without firstStrike to this
-            // list.
-            final Card c = it.next();
+    public final List<Card> getUnblockedFirstStrikeAttackers() {
+        final List<Card> out = new ArrayList<Card>();
+        for(Card c : this.unblockedMap.keySet()) { // only add creatures without firstStrike to this
             if (c.hasFirstStrike() || c.hasDoubleStrike()) {
                 out.add(c);
             }
         }
-
-        return out.toArray();
+        return out;
     } // getUnblockedAttackers()
 
     /**

@@ -19,6 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import forge.Constant.Zone;
@@ -57,31 +58,17 @@ public class ComputerUtilAttack {
      * </p>
      * 
      * @param possibleAttackers
-     *            an array of {@link forge.Card} objects.
-     * @param possibleBlockers
-     *            an array of {@link forge.Card} objects.
-     */
-    public ComputerUtilAttack(final Card[] possibleAttackers, final Card[] possibleBlockers) {
-        this(new CardList(possibleAttackers), new CardList(possibleBlockers));
-    }
-
-    /**
-     * <p>
-     * Constructor for ComputerUtil_Attack2.
-     * </p>
-     * 
-     * @param possibleAttackers
      *            a {@link forge.CardList} object.
      * @param possibleBlockers
      *            a {@link forge.CardList} object.
      */
     public ComputerUtilAttack(final CardList possibleAttackers, final CardList possibleBlockers) {
-        this.humanList = new CardList(possibleBlockers.toArray());
+        this.humanList = new CardList(possibleBlockers);
         this.humanList = this.humanList.getType("Creature");
 
-        this.computerList = new CardList(possibleAttackers.toArray());
+        this.computerList = new CardList(possibleAttackers);
         this.computerList = this.computerList.getType("Creature");
-        this.playerCreatures = new CardList(possibleBlockers.toArray());
+        this.playerCreatures = new CardList(possibleBlockers);
         this.playerCreatures = this.playerCreatures.getType("Creature");
 
         this.attackers = this.getPossibleAttackers(possibleAttackers);
@@ -169,7 +156,7 @@ public class ComputerUtilAttack {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getPossibleAttackers(final CardList in) {
-        CardList list = new CardList(in.toArray());
+        CardList list = new CardList(in);
         list = list.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -191,8 +178,8 @@ public class ComputerUtilAttack {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getPossibleBlockers(final CardList blockers, final CardList attackers) {
-        CardList possibleBlockers = new CardList(blockers.toArray());
-        final CardList attackerList = new CardList(attackers.toArray());
+        CardList possibleBlockers = new CardList(blockers);
+        final CardList attackerList = new CardList(attackers);
         possibleBlockers = possibleBlockers.filter(new CardListFilter() {
             @Override
             public boolean addCard(final Card c) {
@@ -225,7 +212,7 @@ public class ComputerUtilAttack {
      * @return a {@link forge.CardList} object.
      */
     public final CardList notNeededAsBlockers(final CardList attackers, final Combat combat) {
-        final CardList notNeededAsBlockers = new CardList(attackers.toArray());
+        final CardList notNeededAsBlockers = new CardList(attackers);
         CardListUtil.sortAttackLowFirst(attackers);
         int blockersNeeded = attackers.size();
 
@@ -343,8 +330,8 @@ public class ComputerUtilAttack {
 
         CardListUtil.sortAttack(this.attackers);
 
-        final CardList remainingAttackers = new CardList(this.attackers.toArray());
-        final CardList blockableAttackers = new CardList(this.attackers.toArray());
+        final CardList remainingAttackers = new CardList(this.attackers);
+        final CardList blockableAttackers = new CardList(this.attackers);
         final Player human = AllZone.getHumanPlayer();
         final Player computer = AllZone.getComputerPlayer();
 
@@ -386,7 +373,7 @@ public class ComputerUtilAttack {
     public final void chooseDefender(final Combat c, final boolean bAssault) {
         // TODO split attackers to different planeswalker/human
         // AI will only attack one Defender per combat for now
-        final ArrayList<Object> defs = c.getDefenders();
+        final List<GameEntity> defs = c.getDefenders();
 
         // Randomly determine who EVERYONE is attacking
         // would be better to determine more individually
@@ -394,7 +381,7 @@ public class ComputerUtilAttack {
 
         final Object entity = AllZone.getComputerPlayer().getMustAttackEntity();
         if (null != entity) {
-            final ArrayList<Object> defenders = AllZone.getCombat().getDefenders();
+            final List<GameEntity> defenders = AllZone.getCombat().getDefenders();
             n = defenders.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
@@ -438,7 +425,7 @@ public class ComputerUtilAttack {
         // Determine who will be attacked
         this.chooseDefender(combat, bAssault);
 
-        CardList attackersLeft = new CardList(this.attackers.toArray());
+        CardList attackersLeft = new CardList(this.attackers);
 
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {

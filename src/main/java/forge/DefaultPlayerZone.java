@@ -18,7 +18,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 
@@ -198,8 +197,11 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      *            an array of {@link forge.Card} objects.
      */
     @Override
-    public final void setCards(final Card[] c) {
-        this.setCardList(new ArrayList<Card>(Arrays.asList(c)));
+    public final void setCards(final Iterable<Card> cards) {
+        List<Card> toSet = new ArrayList<Card>();
+        for(Card c : cards)
+            toSet.add(c);
+        this.setCardList( toSet );
         this.update();
     }
 
@@ -311,7 +313,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @return an array of {@link forge.Card} objects.
      */
     @Override
-    public final Card[] getCards() {
+    public final List<Card>getCards() {
         return this.getCards(true);
     }
 
@@ -321,11 +323,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @see forge.IPlayerZone#getCards(boolean)
      */
     @Override
-    public Card[] getCards(final boolean filter) {
+    public List<Card> getCards(final boolean filter) {
         // Non-Battlefield PlayerZones don't care about the filter
-        final Card[] c = new Card[this.getCardList().size()];
-        this.getCardList().toArray(c);
-        return c;
+        return new ArrayList<Card>(this.getCardList());
     }
 
     /*
@@ -334,12 +334,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      * @see forge.IPlayerZone#getCards(int)
      */
     @Override
-    public final Card[] getCards(final int n) {
-        final Card[] c = new Card[Math.min(this.getCardList().size(), n)];
-        for (int i = 0; i < c.length; i++) {
-            c[i] = this.getCardList().get(i);
-        }
-        return c;
+    public final List<Card> getCards(final int n) {
+        return this.getCardList().subList(0, Math.min(this.getCardList().size(), n));
     }
 
     /*

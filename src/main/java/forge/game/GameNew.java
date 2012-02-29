@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map.Entry;
 import java.util.Random;
 
@@ -256,13 +257,12 @@ public class GameNew {
         final boolean smoothLand = Constant.Runtime.SMOOTH[0];
 
         if (smoothLand) {
-            final Card[] c1 = GameNew.smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(Zone.Library)
-                    .toArray());
+            final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(AllZone.getComputerPlayer().getCardsIn(Zone.Library));
             AllZone.getComputerPlayer().getZone(Zone.Library).setCards(c1);
         } else {
             // WTF? (it was so before refactor)
             AllZone.getComputerPlayer().getZone(Zone.Library)
-                    .setCards(AllZone.getComputerPlayer().getCardsIn(Zone.Library).toArray());
+                    .setCards(AllZone.getComputerPlayer().getCardsIn(Zone.Library));
             AllZone.getComputerPlayer().shuffle();
         }
 
@@ -363,7 +363,7 @@ public class GameNew {
      *            an array of {@link forge.Card} objects.
      * @return an array of {@link forge.Card} objects.
      */
-    private static Card[] smoothComputerManaCurve(final Card[] in) {
+    private static Iterable<Card> smoothComputerManaCurve(final Iterable<Card> in) {
         final CardList library = new CardList(in);
         library.shuffle();
 
@@ -404,7 +404,7 @@ public class GameNew {
             System.out.println(library.get(i));
         }
 
-        return library.toArray();
+        return Arrays.asList(library.toArray());
     } // smoothComputerManaCurve()
 
     // decides who goes first when starting another game, used by newGame()
