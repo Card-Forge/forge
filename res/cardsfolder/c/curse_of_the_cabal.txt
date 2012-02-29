@@ -1,0 +1,15 @@
+Name:Curse of the Cabal
+ManaCost:9 B
+Types:Sorcery
+Text:no text
+K:Suspend:2:2 B B
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigPayUP | TriggerZones$ Exile | TriggerDescription$ At the beginning of each player's upkeep, if CARDNAME is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on CARDNAME.
+A:SP$ Sacrifice | Cost$ 9 B | ValidTgts$ Player | TgtPrompt$ Select target player | Amount$ X | SacValid$ Permanent | SpellDescription$ Target player sacrifices half the permanents he or she controls, rounded down.
+SVar:TrigPayUP:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ Permanent | Defined$ TriggeredPlayer | Optional$ True | RememberSacrificed$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ TIME | CounterNum$ 2 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GT0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TargetedPlayer$Valid Permanent.YouCtrl/HalfDown
+SVar:Y:Remembered$Amount
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_cabal.jpg
+End

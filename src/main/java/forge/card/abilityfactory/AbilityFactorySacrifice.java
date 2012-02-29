@@ -449,7 +449,7 @@ public class AbilityFactorySacrifice {
         msg = "Sacrifice a " + msg;
 
         final boolean destroy = params.containsKey("Destroy");
-        final boolean remSacrificed = params.containsKey("RememberSacrificed");
+        final boolean remSacrificed = true;
 
         if (valid.equals("Self")) {
             if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)) {
@@ -523,17 +523,18 @@ public class AbilityFactorySacrifice {
     private static CardList sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
         CardList battlefield = p.getCardsIn(Zone.Battlefield);
-        CardList sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
+        CardList list = AbilityFactory.filterListByType(battlefield, valid, sa);
+        CardList sacList = new CardList();
 
         for (int i = 0; i < amount; i++) {
-            if (sacList.isEmpty()) {
+            if (list.isEmpty()) {
                 break;
             }
             Object o;
             if (optional) {
-                o = GuiUtils.getChoiceOptional("Select a card to sacrifice", sacList.toArray());
+                o = GuiUtils.getChoiceOptional("Select a card to sacrifice", list.toArray());
             } else {
-                o = GuiUtils.getChoice("Select a card to sacrifice", sacList.toArray());
+                o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
             }
             if (o != null) {
                 final Card c = (Card) o;
@@ -547,8 +548,9 @@ public class AbilityFactorySacrifice {
                         sacList.add(c);
                     }
                 }
-
-                sacList.remove(c);
+                
+                list.remove(c);
+                
             } else {
                 return sacList;
             }
