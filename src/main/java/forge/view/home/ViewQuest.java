@@ -1,6 +1,8 @@
 package forge.view.home;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
 
@@ -557,6 +559,13 @@ public class ViewQuest extends JScrollPane {
 
             // Description
             final FTextArea tarDesc = new FTextArea();
+            tarDesc.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    SelectablePanel.this.setHovered(true);
+                    SelectablePanel.this.repaint();
+                }
+            });
             tarDesc.setText(event.getDescription());
             tarDesc.setFont(FSkin.getItalicFont(12));
             this.add(tarDesc, "w 80%!, h 30px!");

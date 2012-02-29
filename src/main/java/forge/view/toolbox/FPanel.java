@@ -195,6 +195,11 @@ public class FPanel extends JPanel {
         this.borderColor = clr0;
     }
 
+    /** @param b0 &emsp; boolean */
+    public void setHovered(final boolean b0) {
+        this.hovered = b0;
+    }
+
     @Override
     public void setBorder(final Border bord0) {
         // Intentionally empty
@@ -255,7 +260,7 @@ public class FPanel extends JPanel {
 
         while (this.tempX < this.pnlW) {
             while (this.tempY < this.pnlH) {
-                g2d0.drawImage(this.backgroundTexture, (int) this.tempX, (int) this.tempY, null);
+                g2d0.drawImage(this.backgroundTexture, this.tempX, this.tempY, null);
                 this.tempY += this.textureH;
             }
             this.tempX += this.textureW;
@@ -292,12 +297,12 @@ public class FPanel extends JPanel {
         // Scaling step 3: Center image in panel
         switch(this.foregroundAlign) {
             case SwingConstants.BOTTOM:
-                tempX = (int) ((pnlW - scaledW) / 2);
+                tempX = ((pnlW - scaledW) / 2);
                 tempY = pnlH - scaledH;
                 break;
             default:
-                tempX = (int) ((pnlW - scaledW) / 2);
-                tempY = (int) ((pnlH - scaledH) / 2);
+                tempX = ((pnlW - scaledW) / 2);
+                tempY = ((pnlH - scaledH) / 2);
         }
 
         g2d0.drawImage(foregroundImage, tempX, tempY, scaledW + tempX, scaledH + tempY, 0, 0, imgW, imgH, null);
