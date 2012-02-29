@@ -10,4 +10,6 @@ SVar:FirstTargetDMG:Remembered$CardPower
 SVar:SecondTargetDMG:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_feud.jpg
+SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/83.jpg
+Oracle:Target creature fights another target creature. (Each deals damage equal to its power to the other.)
 End

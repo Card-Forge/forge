@@ -611,6 +611,28 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Performance updates in AF Pump and AF Protection.
 - Updated quest opponent download links.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Restructured some code in the AI part of AF Pump.
+- More Restructuring in ComputerAIGeneral.
+- Little addition
+- Fixed Martyr's Bond (it will now only compare card types).
+- Small fix.
+- More Restructuring in ComputerAIGeneral.
+- Tweaked untargeted pumping AI.
+- Added NoMove parameter to Mishra's Bauble.
+- Countered spells cast with flashback are now exiled.
+- Fixed the AI not playing cards like Tinker and Natural Order.
+- More improvements and cleanup in pumpPlayA.
+- Text fixes on Olivia Voldaren.
+- Fixed avatar switch in quest mode.
+- Updated quest selectable panel JTextArea to pass mouseEntered event to parent (finally).
+- removed CardPrintedCharacteristics.java
+- new prefix for sealed magic product images (to store them in a different folder)
+- removed CardList.allAll(Array) and matching ctor, added addAll(Iterable<Card>) - in most cases of usage list was converted to array and while added to cardlist it was added to underlying list again.
+- Combat.getAttackers() returns a list - code became less complicated
+- removed CardList constructor from array, and thus removed redundant toArray conversions (while lists were passed)
+- Ran set info script.
+- Ran oracle script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -810,6 +832,8 @@ Gather Specimens
 Hellcarver Demon
 Chandra Ablaze
 Vebulid
+Blood Feud
+Dementia Sliver
 
 
 end
