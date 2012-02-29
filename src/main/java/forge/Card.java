@@ -7187,7 +7187,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.equals("blocked")) {
-            if (!AllZone.getCombat().isBlocked(this)) {
+            if (!this.isBlocked()) {
                 return false;
             }
         } else if (property.startsWith("blockedBySource")) {
@@ -7514,6 +7514,17 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isBlocking() {
         final CardList blockers = AllZone.getCombat().getAllBlockers();
         return blockers.contains(this);
+    }
+
+    /**
+     * <p>
+     * isBlocked.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isBlocked() {
+        return AllZone.getCombat().isBlocked(this);
     }
 
     /**

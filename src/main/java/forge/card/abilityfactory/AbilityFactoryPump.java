@@ -255,9 +255,9 @@ public class AbilityFactoryPump {
      *            the card
      * @return true, if successful
      */
-    public static boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card) {
+    public boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
         for (final String keyword : keywords) {
-            if (isUsefulKeyword(keyword, card)) {
+            if (isUsefulKeyword(keyword, card, sa)) {
                 return true;
             }
         }
@@ -273,7 +273,7 @@ public class AbilityFactoryPump {
      *            the card
      * @return true, if is useful keyword
      */
-    public static boolean isUsefulKeyword(final String keyword, final Card card) {
+    public boolean isUsefulKeyword(final String keyword, final Card card, final SpellAbility sa) {
         final PhaseHandler ph = AllZone.getPhaseHandler();
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
@@ -282,9 +282,9 @@ public class AbilityFactoryPump {
         }
         final boolean evasive = (keyword.endsWith("Flying") || keyword.endsWith("Horsemanship")
                 || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate"));
-        final boolean combatRelevant = (keyword.endsWith("First Strike") || keyword.endsWith("Double Strike")
-                || keyword.contains("Bushido") || keyword.endsWith("Wither") || keyword.endsWith("Deathtouch")
-                || keyword.contains("Trample") || keyword.endsWith("Lifelink"));
+        final boolean combatRelevant = (keyword.endsWith("First Strike")
+                || keyword.contains("Bushido") || keyword.endsWith("Deathtouch")
+                || keyword.contains("Trample"));
         // give evasive keywords to creatures that can attack
         if (evasive) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
@@ -305,6 +305,11 @@ public class AbilityFactoryPump {
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
+        } else if (keyword.startsWith("Double Strike")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || card.getNetCombatDamage() <= 0
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                return false;
+            }
         } else if (keyword.startsWith("Rampage")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
@@ -312,8 +317,39 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.startsWith("Infect")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+            if (card.getNetCombatDamage() <= 0) {
+                return false;
+            }
+            if (card.isBlocking()) {
+                return true;
+            }
+            if ((ph.isPlayerTurn(human))
+                    || !CombatUtil.canAttack(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                return false;
+            }
+        } else if (keyword.startsWith("Wither")) {
+            if (card.getNetCombatDamage() <= 0) {
+                return false;
+            }
+            if (card.isBlocking()) {
+                return true;
+            }
+            if (card.isAttacking() && card.isBlocked()){
+                return true;
+            }
+            return false;
+        } else if (keyword.startsWith("Lifelink")) {
+            if (card.getNetCombatDamage() <= 0) {
+                return false;
+            }
+            if (!card.isBlocking() && !card.isAttacking()) {
+                return false;
+            }
+        } else if (keyword.startsWith("Vigilance")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
+                    || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
         } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
@@ -334,8 +370,9 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Heyproof")) {
-            // These are handled elsewhere
-            return false;
+            if (!AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
+                return false;
+            }
         }
         return true;
     }
@@ -353,12 +390,7 @@ public class AbilityFactoryPump {
             return false;
         }
 
-        if ((keywords.contains("Shroud") || keywords.contains("Hexproof"))
-                && AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(c)) {
-            return true;
-        }
-
-        if (containsUsefulKeyword(keywords, c)) {
+        if (containsUsefulKeyword(keywords, c, sa)) {
             return true;
         }
 
@@ -464,7 +496,7 @@ public class AbilityFactoryPump {
                 list = list.filter(new CardListFilter() {
                     @Override
                     public boolean addCard(final Card c) {
-                        return containsUsefulKeyword(keywords, c);
+                        return containsUsefulKeyword(keywords, c, sa);
                     }
                 });
             }
@@ -473,15 +505,14 @@ public class AbilityFactoryPump {
         return list;
     } // getCurseCreatures()
 
-    private boolean containsCombatRelevantKeyword(final ArrayList<String> keywords) {
+    private boolean containsNonCombatKeyword(final ArrayList<String> keywords) {
         for (final String keyword : keywords) {
             // since most keywords are combat relevant check for those that are
             // not
             if (keyword.equals("HIDDEN This card doesn't untap during your next untap step.")
                     || keyword.endsWith("Shroud") || keyword.endsWith("Hexproof")) {
-                continue;
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -590,7 +621,7 @@ public class AbilityFactoryPump {
                         return false;
                     }
 
-                    if (!containsUsefulKeyword(this.keywords, card)) {
+                    if (!containsUsefulKeyword(this.keywords, card, sa)) {
                         continue;
                     }
 
@@ -626,7 +657,7 @@ public class AbilityFactoryPump {
                 && !sa.isTrigger()
                 && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(this.abilityFactory.isCurse() && (defense < 0))
-                && !this.containsCombatRelevantKeyword(this.keywords)) {
+                && !this.containsNonCombatKeyword(this.keywords)) {
             return false;
         }
 
