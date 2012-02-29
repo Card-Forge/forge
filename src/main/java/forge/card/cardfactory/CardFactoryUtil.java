@@ -127,7 +127,7 @@ public class CardFactoryUtil {
             int curCMC = card.getCMC();
 
             // Add all cost of all auras with the same controller
-            final CardList auras = new CardList(card.getEnchantedBy().toArray());
+            final CardList auras = new CardList(card.getEnchantedBy());
             auras.getController(card.getController());
             curCMC += auras.getTotalConvertedManaCost() + auras.size();
 

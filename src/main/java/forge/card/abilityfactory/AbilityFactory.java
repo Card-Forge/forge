@@ -1636,7 +1636,7 @@ public class AbilityFactory {
                             }
                         } else {
                             final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
-                            list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
+                            list = new CardList(saTargeting.getTarget().getTargetCards());
                         }
                     } else {
                         final SpellAbility parent = AbilityFactory.findParentsTargetedCard(ability);
@@ -1650,7 +1650,7 @@ public class AbilityFactory {
                             }
                         } else {
                             final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
-                            list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
+                            list = new CardList(saTargeting.getTarget().getTargetCards());
                         }
                     }
                 } else if (calcX[0].startsWith("Triggered")) {

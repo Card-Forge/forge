@@ -63,23 +63,6 @@ public final class CardUtil {
 
     /**
      * <p>
-     * getRandomIndex.
-     * </p>
-     * 
-     * @param o
-     *            an array of {@link java.lang.Object} objects.
-     * @return a int.
-     */
-    public static int getRandomIndex(final Object[] o) {
-        if ((o == null) || (o.length == 0)) {
-            throw new RuntimeException("CardUtil : getRandomIndex() argument is null or length is 0");
-        }
-
-        return CardUtil.RANDOM.nextInt(o.length);
-    }
-
-    /**
-     * <p>
      * getRandom.
      * </p>
      * 
@@ -87,8 +70,14 @@ public final class CardUtil {
      *            an array of {@link forge.Card} objects.
      * @return a {@link forge.Card} object.
      */
-    public static Card getRandom(final Card[] o) {
-        return o[CardUtil.getRandomIndex(o)];
+    public static <T> T getRandom(final T[] o) {
+        if ( o == null ) throw new IllegalArgumentException("CardUtil : getRandom(T) recieved null instead of array.");
+        int len = o.length;
+        switch(len) { 
+            case 0: throw new IllegalArgumentException("CardUtil : getRandom(T) recieved an empty array."); 
+            case 1: return o[0];
+            default: return o[CardUtil.RANDOM.nextInt(len)]; 
+        }
     }
 
     /**

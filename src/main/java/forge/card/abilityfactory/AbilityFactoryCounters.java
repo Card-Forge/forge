@@ -536,7 +536,7 @@ public class AbilityFactoryCounters {
 
         if (abTgt == null) {
             // No target. So must be defined
-            list = new CardList(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa).toArray());
+            list = new CardList(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa));
 
             if (!mandatory) {
                 // TODO - If Trigger isn't mandatory, when wouldn't we want to

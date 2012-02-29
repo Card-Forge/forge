@@ -11469,7 +11469,6 @@ src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/CardPrinted.java -text
-src/main/java/forge/item/CardPrintedCharacteristics.java -text
 src/main/java/forge/item/FatPack.java -text
 src/main/java/forge/item/InventoryItem.java -text
 src/main/java/forge/item/InventoryItemFromSet.java -text

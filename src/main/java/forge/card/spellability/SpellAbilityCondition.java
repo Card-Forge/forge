@@ -252,7 +252,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getIsPresent() != null) {
             CardList list = new CardList();
             if (this.getPresentDefined() != null) {
-                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa).toArray());
+                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
             } else {
                 list = AllZoneUtil.getCardsIn(Zone.Battlefield);
             }

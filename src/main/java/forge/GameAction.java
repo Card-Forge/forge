@@ -1108,7 +1108,7 @@ public class GameAction {
         }
 
         if (c.isEnchanted()) {
-            CardList list = new CardList(c.getEnchantedBy().toArray());
+            CardList list = new CardList(c.getEnchantedBy());
             list = list.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card crd) {
@@ -1291,7 +1291,7 @@ public class GameAction {
         }
 
         if (c.isEnchanted()) {
-            CardList list = new CardList(c.getEnchantedBy().toArray());
+            CardList list = new CardList(c.getEnchantedBy());
             list = list.filter(new CardListFilter() {
                 @Override
                 public boolean addCard(final Card crd) {

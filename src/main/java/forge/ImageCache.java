@@ -70,6 +70,7 @@ public class ImageCache {
     /** Constant <code>NORMAL="#Normal"</code> */
     /** Constant <code>TAPPED="#Tapped"</code>. */
     private static final String TOKEN = "#Token", NORMAL = "#Normal", TAPPED = "#Tapped";
+    private static final String SEALED_PRODUCT = "sealed://";
 
     static {
         IMAGE_CACHE = CacheBuilder.newBuilder()
@@ -110,6 +111,9 @@ public class ImageCache {
                         if (key.endsWith(ImageCache.TOKEN)) {
                             key = key.substring(0, key.length() - ImageCache.TOKEN.length());
                             path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
+                        } else if (key.startsWith(SEALED_PRODUCT)) {
+                            key = key.substring(SEALED_PRODUCT.length());
+                            path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
                         } else {
                             path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
                         }

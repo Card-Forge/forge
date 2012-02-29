@@ -83,7 +83,7 @@ public class CardList implements Iterable<Card> {
      *            a {@link java.util.ArrayList} object.
      */
     public CardList(final List<Card> al) {
-        this.addAll(al.toArray());
+        this.addAll(al);
     }
 
     /**
@@ -97,18 +97,6 @@ public class CardList implements Iterable<Card> {
         for (final Card card : iterable) {
             this.add(card);
         }
-    }
-
-    /**
-     * <p>
-     * Constructor for CardList.
-     * </p>
-     * 
-     * @param c
-     *            an array of {@link java.lang.Object} objects.
-     */
-    public CardList(final Object[] c) {
-        this.addAll(c);
     }
 
     /**
@@ -337,8 +325,10 @@ public class CardList implements Iterable<Card> {
      * @param in
      *            - CardList to add to the current CardList
      */
-    public final void addAll(final CardList in) {
-        this.addAll(in.toArray());
+    public final void addAll(final Iterable<Card> in) {
+        for (final Card element : in) {
+            this.list.add(element);
+        }
     }
 
     /**
@@ -349,7 +339,7 @@ public class CardList implements Iterable<Card> {
      * @param c
      *            an array of {@link java.lang.Object} objects.
      */
-    public final void addAll(final Object[] c) {
+    public final void addAll(final Card[] c) {
         for (final Object element : c) {
             this.list.add((Card) element);
         }

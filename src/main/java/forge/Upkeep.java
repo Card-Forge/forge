@@ -2482,8 +2482,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     CardList enchantmentsInLibrary = source.getController().getCardsIn(Zone.Library);
-                    final CardList enchantmentsAttached = new CardList(source.getEnchantingPlayer().getEnchantedBy()
-                            .toArray());
+                    final CardList enchantmentsAttached = new CardList(source.getEnchantingPlayer().getEnchantedBy());
                     enchantmentsInLibrary = enchantmentsInLibrary.filter(new CardListFilter() {
                         @Override
                         public boolean addCard(final Card c) {

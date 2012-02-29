@@ -398,9 +398,9 @@ public class AbilityFactoryGainControl {
             tgtCards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield);
             tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
         } else if ((tgt != null) && !this.params.containsKey("Defined")) {
-            tgtCards.addAll(tgt.getTargetCards().toArray());
+            tgtCards.addAll(tgt.getTargetCards());
         } else {
-            tgtCards.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa).toArray());
+            tgtCards.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa));
         }
         // tgtCards.add(hostCard);
 
