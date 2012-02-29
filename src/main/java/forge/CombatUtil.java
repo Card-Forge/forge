@@ -710,18 +710,16 @@ public class CombatUtil {
      */
     public static boolean canAttack(final Card c, final Combat combat) {
 
+        int cntAttackers = combat.getAttackers().size();
         for (final Card card : AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)) {
             for (final String keyword : card.getKeyword()) {
-                if (keyword.equals("No more than one creature can attack each combat.")
-                        && (combat.getAttackers().length > 0)) {
+                if (keyword.equals("No more than one creature can attack each combat.") && cntAttackers > 0 ) {
                     return false;
                 }
-                if (keyword.equals("No more than two creatures can attack each combat.")
-                        && (combat.getAttackers().length > 1)) {
+                if (keyword.equals("No more than two creatures can attack each combat.") && cntAttackers > 1) {
                     return false;
                 }
-                if (keyword.equals("No more than two creatures can attack you each combat.")
-                        && (combat.getAttackers().length > 1)
+                if (keyword.equals("No more than two creatures can attack you each combat.") && cntAttackers > 1
                         && card.getController().getOpponent().isPlayer(c.getController())) {
                     return false;
                 }
@@ -731,11 +729,11 @@ public class CombatUtil {
             }
         }
 
-        if ((combat.getAttackers().length > 0) && c.hasKeyword("CARDNAME can only attack alone.")) {
+        if (cntAttackers > 0 && c.hasKeyword("CARDNAME can only attack alone.")) {
             return false;
         }
 
-        if ((combat.getAttackers().length > 0) && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
+        if (cntAttackers > 0 && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
             return false;
         }
 

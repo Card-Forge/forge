@@ -355,7 +355,7 @@ public class ViewTabber extends JPanel {
         final Border border = new MatteBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
 
         this.vtpTabber.getAllVTabs().get(ControlTabber.COMBAT_PANEL)
-                .setText("Combat : " + AllZone.getCombat().getAttackers().length);
+                .setText("Combat : " + AllZone.getCombat().getAttackers().size());
 
         final JTextArea tar = new JTextArea(s);
         tar.setOpaque(false);

@@ -330,7 +330,7 @@ public final class AbilityFactoryAnimate {
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
         if ((!AllZone.getPhaseHandler().is(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
-                .getAttackers().length == 0)) && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                .getAttackers().isEmpty())) && AllZone.getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
             return false;
         }
 

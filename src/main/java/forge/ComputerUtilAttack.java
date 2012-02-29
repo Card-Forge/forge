@@ -649,7 +649,7 @@ public class ComputerUtilAttack {
         // ****************
 
         // Exalted
-        if ((combat.getAttackers().length == 0)
+        if ((combat.getAttackers().isEmpty())
                 && ((this.countExaltedBonus(AllZone.getComputerPlayer()) >= 3)
                         || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
                         || (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2) || ((AllZone

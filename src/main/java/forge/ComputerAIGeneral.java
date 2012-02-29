@@ -19,6 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -286,8 +287,8 @@ public class ComputerAIGeneral implements Computer {
 
         AllZone.setCombat(ComputerUtil.getAttackers());
 
-        final Card[] att = AllZone.getCombat().getAttackers();
-        if (att.length > 0) {
+        final List<Card> att = AllZone.getCombat().getAttackers();
+        if (!att.isEmpty()) {
             AllZone.getPhaseHandler().setCombat(true);
         }
 

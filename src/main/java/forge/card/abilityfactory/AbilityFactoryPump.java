@@ -398,7 +398,7 @@ public class AbilityFactoryPump {
         if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                 && phase.isBefore(Constant.Phase.MAIN2)
                 && phase.isPlayerTurn(AllZone.getHumanPlayer())
-                && AllZone.getCombat().getAttackers().length > 0
+                && !AllZone.getCombat().getAttackers().isEmpty()
                 && CombatUtil.canBlock(c, AllZone.getCombat())
                 && CombatUtil.lifeInDanger(AllZone.getCombat())) {
             return true;

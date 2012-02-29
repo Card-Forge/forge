@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -479,15 +480,8 @@ public class Combat {
      * 
      * @return an array of {@link forge.Card} objects.
      */
-    public final Card[] getAttackers() {
-        final CardList out = new CardList();
-        final Iterator<Card> it = this.map.keySet().iterator();
-
-        while (it.hasNext()) {
-            out.add(it.next());
-        }
-
-        return out.toArray();
+    public final List<Card> getAttackers() {
+        return new ArrayList<Card>(this.map.keySet());
     } // getAttackers()
 
     /**

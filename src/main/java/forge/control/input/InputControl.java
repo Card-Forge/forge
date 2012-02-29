@@ -221,7 +221,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 this.aiInput.getComputer().declareBlockers();
                 return null;
             } else {
-                if (this.model.getGameState().getCombat().getAttackers().length == 0) {
+                if (this.model.getGameState().getCombat().getAttackers().isEmpty()) {
                     // no active attackers, skip the Blocking phase
                     this.model.getGameState().getPhaseHandler().setNeedToNextPhase(true);
                     return null;

@@ -35,7 +35,6 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.CardUtil;
-import forge.Combat;
 import forge.CombatUtil;
 import forge.Command;
 import forge.CommandArgs;
@@ -360,8 +359,7 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean doesCreatureAttackAI(final Card card) {
-        final Combat combat = ComputerUtil.getAttackers();
-        final Card[] att = combat.getAttackers();
+        final List<Card> att = ComputerUtil.getAttackers().getAttackers();
         for (final Card element : att) {
             if (element.equals(card)) {
                 return true;

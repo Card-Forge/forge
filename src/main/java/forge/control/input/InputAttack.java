@@ -76,7 +76,7 @@ public class InputAttack extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (AllZone.getCombat().getAttackers().length > 0) {
+        if (!AllZone.getCombat().getAttackers().isEmpty()) {
             AllZone.getPhaseHandler().setCombat(true);
         }
 

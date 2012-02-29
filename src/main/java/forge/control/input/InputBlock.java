@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import forge.AllZone;
 import forge.ButtonUtil;
 import forge.Card;
-import forge.CardUtil;
 import forge.CombatUtil;
 import forge.Command;
 import forge.Constant;
@@ -102,7 +101,7 @@ public class InputBlock extends Input {
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
         // is attacking?
-        if (CardUtil.toList(AllZone.getCombat().getAttackers()).contains(card)) {
+        if (AllZone.getCombat().getAttackers().contains(card)) {
             this.currentAttacker = card;
         } else if (zone.is(Constant.Zone.Battlefield, AllZone.getHumanPlayer()) && card.isCreature()
                 && CombatUtil.canBlock(this.currentAttacker, card, AllZone.getCombat())
