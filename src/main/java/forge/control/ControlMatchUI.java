@@ -94,7 +94,7 @@ public class ControlMatchUI implements CardContainer {
         for (int i = 0; i < views.length; i++) {
             final Image img;
             // Update AI quest icon
-            if (i > 0 && Constant.Runtime.getGameType() == GameType.Quest) {
+            if (i != 1 && Constant.Runtime.getGameType() == GameType.Quest) {
                     String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
 
                     if (Constant.Quest.OPP_ICON_NAME[0] != null) {
