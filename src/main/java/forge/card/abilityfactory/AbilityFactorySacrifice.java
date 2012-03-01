@@ -449,7 +449,7 @@ public class AbilityFactorySacrifice {
         msg = "Sacrifice a " + msg;
 
         final boolean destroy = params.containsKey("Destroy");
-        final boolean remSacrificed = true;
+        final boolean remSacrificed = params.containsKey("RememberSacrificed");
 
         if (valid.equals("Self")) {
             if (AllZone.getZoneOf(card).is(Constant.Zone.Battlefield)) {
