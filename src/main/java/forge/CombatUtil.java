@@ -2617,6 +2617,7 @@ public class CombatUtil {
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Annihilator - Defending player sacrifices ").append(a).append(" permanents.");
                     ability.setStackDescription(sb.toString());
+                    ability.setDescription(sb.toString());
 
                     AllZone.getStack().add(ability);
                 } // find
@@ -2632,7 +2633,7 @@ public class CombatUtil {
             }
         } // Mijae Djinn
 
-        if (c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
+        /*if (c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
             // hack, to make sure this doesn't break grabbing an oblivion ring:
             c.setCreatureAttackedThisCombat(true);
 
@@ -2695,7 +2696,7 @@ public class CombatUtil {
                     }
                 }
             } // enchantments.size > 0
-        } // Zur the enchanter
+        }*/ // Zur the enchanter
 
         else if (c.getName().equals("Spectral Bears")) {
             final Player opp = c.getController().getOpponent();
@@ -2899,6 +2900,7 @@ public class CombatUtil {
             final StringBuilder sb2 = new StringBuilder();
             sb2.append(b.getName()).append(" - gets -").append(mag).append("/-").append(mag).append(" until EOT.");
             ability2.setStackDescription(sb2.toString());
+            ability2.setDescription(sb2.toString());
 
             AllZone.getStack().add(ability2);
             Log.debug("Adding Flanking!");
@@ -2953,6 +2955,7 @@ public class CombatUtil {
             final StringBuilder sb = new StringBuilder();
             sb.append(c).append(" - (Exalted) gets +1/+1 until EOT.");
             ability.setStackDescription(sb.toString());
+            ability.setDescription(sb.toString());
 
             AllZone.getStack().addSimultaneousStackEntry(ability);
         }
