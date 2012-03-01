@@ -9835,6 +9835,7 @@ res/cardsfolder/v/voice_of_the_woods.txt svneol=native#text/plain
 res/cardsfolder/v/voice_of_truth.txt svneol=native#text/plain
 res/cardsfolder/v/voiceless_spirit.txt -text
 res/cardsfolder/v/voices_from_the_void.txt svneol=native#text/plain
+res/cardsfolder/v/void.txt -text svneol=unset#text/plain
 res/cardsfolder/v/voidmage_apprentice.txt -text svneol=unset#text/plain
 res/cardsfolder/v/voidmage_husher.txt svneol=native#text/plain
 res/cardsfolder/v/voidmage_prodigy.txt svneol=native#text/plain
