@@ -151,7 +151,7 @@ public class ControlSealed {
         sealedTypes.add("Custom");
 
         final String prompt = "Choose Sealed Deck Format:";
-        final Object o = GuiUtils.getChoice(prompt, sealedTypes.toArray());
+        final Object o = GuiUtils.chooseOne(prompt, sealedTypes.toArray());
 
         SealedDeck sd = null;
 

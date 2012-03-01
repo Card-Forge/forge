@@ -79,7 +79,7 @@ public class SealedDeck {
             this.getLandSetCode()[0] = CardDb.instance().getCard("Plains").getEdition();
         } else if (sealedType.equals("Block")) {
 
-            final Object o = GuiUtils.getChoice("Choose Block", UtilFunctions.iteratorToArray(Singletons.getModel().getBlocks().iterator(), new CardBlock[]{}));
+            final Object o = GuiUtils.chooseOne("Choose Block", UtilFunctions.iteratorToArray(Singletons.getModel().getBlocks().iterator(), new CardBlock[]{}));
             final CardBlock block = (CardBlock) o;
 
             final CardEdition[] cardSets = block.getSets();
@@ -102,7 +102,7 @@ public class SealedDeck {
             }
 
             if (sets.length > 1) {
-                final Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
+                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos.toArray());
 
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
@@ -147,7 +147,7 @@ public class SealedDeck {
                 JOptionPane.showMessageDialog(null, "No custom sealed files found.", "",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
-                final CustomLimited draft = (CustomLimited) GuiUtils.getChoice("Choose Custom Sealed Pool",
+                final CustomLimited draft = (CustomLimited) GuiUtils.chooseOne("Choose Custom Sealed Pool",
                         customs.toArray());
 
                 final BoosterGenerator bpCustom = new BoosterGenerator(draft.getCardPool());

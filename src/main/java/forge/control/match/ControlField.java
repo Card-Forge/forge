@@ -261,7 +261,7 @@ public class ControlField {
             final ArrayList<Card> choices2 = new ArrayList<Card>();
 
             if (choices.isEmpty()) {
-                GuiUtils.getChoiceOptional(this.title, new String[] { "no cards" });
+                GuiUtils.chooseOneOrNone(this.title, new String[] { "no cards" });
             } else {
                 for (int i = 0; i < choices.size(); i++) {
                     final Card crd = choices.get(i);
@@ -276,7 +276,7 @@ public class ControlField {
                     }
                 }
                 // System.out.println("Face down cards replaced: "+choices2);
-                final Card choice = (Card) GuiUtils.getChoiceOptional(this.title, choices2.toArray());
+                final Card choice = (Card) GuiUtils.chooseOneOrNone(this.title, choices2.toArray());
                 if (choice != null) {
                     this.doAction(choice);
                     /*

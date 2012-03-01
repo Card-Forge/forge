@@ -532,9 +532,9 @@ public class AbilityFactorySacrifice {
             }
             Object o;
             if (optional) {
-                o = GuiUtils.getChoiceOptional("Select a card to sacrifice", list.toArray());
+                o = GuiUtils.chooseOneOrNone("Select a card to sacrifice", list.toArray());
             } else {
-                o = GuiUtils.getChoice("Select a card to sacrifice", list.toArray());
+                o = GuiUtils.chooseOne("Select a card to sacrifice", list.toArray());
             }
             if (o != null) {
                 final Card c = (Card) o;

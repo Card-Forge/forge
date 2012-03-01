@@ -1276,7 +1276,7 @@ public abstract class Player extends GameEntity {
                     }
                 }
                 if (reveal) {
-                    GuiUtils.getChoice("Revealing the first card drawn", drawn.toArray());
+                    GuiUtils.chooseOne("Revealing the first card drawn", drawn.toArray());
                 }
             }
 

@@ -606,7 +606,7 @@ class CardFactoryLands {
                     for (int j = 0; j <= num[0]; j++) {
                         choices[j] = "" + j;
                     }
-                    final String answer = (GuiUtils.getChoiceOptional("Storage counters to remove", choices));
+                    final String answer = (GuiUtils.chooseOneOrNone("Storage counters to remove", choices));
                     if (answer == null) {
                         this.stop();
                         return;
@@ -616,7 +616,7 @@ class CardFactoryLands {
 
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Number of ").append(primary).append(" to add");
-                    final String splitNum = (GuiUtils.getChoiceOptional(sb.toString(), choices));
+                    final String splitNum = (GuiUtils.chooseOneOrNone(sb.toString(), choices));
                     if (splitNum == null) {
                         this.stop();
                         return;

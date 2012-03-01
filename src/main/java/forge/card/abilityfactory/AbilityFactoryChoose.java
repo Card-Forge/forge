@@ -309,7 +309,7 @@ public final class AbilityFactoryChoose {
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
                             final Object o = GuiUtils
-                                    .getChoice("Choose a card type", CardUtil.getCardTypes().toArray());
+                                    .chooseOne("Choose a card type", CardUtil.getCardTypes().toArray());
                             if (null == o) {
                                 return;
                             }
@@ -335,7 +335,7 @@ public final class AbilityFactoryChoose {
                             for (final String s : invalidTypes) {
                                 validChoices.remove(s);
                             }
-                            final Object o = GuiUtils.getChoice("Choose a creature type", validChoices.toArray());
+                            final Object o = GuiUtils.chooseOne("Choose a creature type", validChoices.toArray());
                             if (null == o) {
                                 return;
                             }
@@ -372,7 +372,7 @@ public final class AbilityFactoryChoose {
                             if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
                                 chosen = "Sliver";
                             }
-                            GuiUtils.getChoice("Computer picked: ", chosen);
+                            GuiUtils.chooseOne("Computer picked: ", chosen);
                             chosenType = chosen;
                         }
                         if (CardUtil.isACreatureType(chosenType) && !invalidTypes.contains(chosenType)) {
@@ -384,7 +384,7 @@ public final class AbilityFactoryChoose {
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            final Object o = GuiUtils.getChoice("Choose a basic land type", CardUtil.getBasicTypes()
+                            final Object o = GuiUtils.chooseOne("Choose a basic land type", CardUtil.getBasicTypes()
                                     .toArray());
                             if (null == o) {
                                 return;
@@ -404,7 +404,7 @@ public final class AbilityFactoryChoose {
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
                             final Object o = GuiUtils
-                                    .getChoice("Choose a land type", CardUtil.getLandTypes().toArray());
+                                    .chooseOne("Choose a land type", CardUtil.getLandTypes().toArray());
                             if (null == o) {
                                 return;
                             }
@@ -650,11 +650,11 @@ public final class AbilityFactoryChoose {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (params.containsKey("OrColors")) {
-                        final List<String> o = GuiUtils.getChoices("Choose a color or colors",
+                        final List<String> o = GuiUtils.chooseOneOrMany("Choose a color or colors",
                                 Constant.Color.ONLY_COLORS);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else {
-                        final Object o = GuiUtils.getChoice("Choose a color", Constant.Color.ONLY_COLORS);
+                        final Object o = GuiUtils.chooseOne("Choose a color", Constant.Color.ONLY_COLORS);
                         if (null == o) {
                             return;
                         }
@@ -701,7 +701,7 @@ public final class AbilityFactoryChoose {
                     if (chosen.equals("")) {
                         chosen = Constant.Color.GREEN;
                     }
-                    GuiUtils.getChoice("Computer picked: ", chosen);
+                    GuiUtils.chooseOne("Computer picked: ", chosen);
                     final ArrayList<String> colorTemp = new ArrayList<String>();
                     colorTemp.add(chosen);
                     card.setChosenColor(colorTemp);
@@ -942,7 +942,7 @@ public final class AbilityFactoryChoose {
                         final String message = "Randomly chosen number: " + chosen;
                         JOptionPane.showMessageDialog(null, message, "" + card, JOptionPane.PLAIN_MESSAGE);
                     } else {
-                        final Object o = GuiUtils.getChoice("Choose a number", choices);
+                        final Object o = GuiUtils.chooseOne("Choose a number", choices);
                         if (null == o) {
                             return;
                         }
@@ -1176,7 +1176,7 @@ public final class AbilityFactoryChoose {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
-                    final Object o = GuiUtils.getChoice("Choose a player", choices.toArray());
+                    final Object o = GuiUtils.chooseOne("Choose a player", choices.toArray());
                     if (null == o) {
                         return;
                     }
@@ -1496,7 +1496,7 @@ public final class AbilityFactoryChoose {
                         if (chosen == "") {
                             chosen = "Morphling";
                         }
-                        GuiUtils.getChoice("Computer picked: ", chosen);
+                        GuiUtils.chooseOne("Computer picked: ", chosen);
                         host.setNamedCard(chosen);
                         ok = true;
                     }
@@ -1729,7 +1729,7 @@ public final class AbilityFactoryChoose {
                         final CardList cl = land.getType(type);
                         if (cl.size() > 0) {
                             final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
-                            final Object o = GuiUtils.getChoice(prompt, cl.toArray());
+                            final Object o = GuiUtils.chooseOne(prompt, cl.toArray());
                             if (null != o) {
                                 final Card c = (Card) o;
                                 chosen.add(c);
@@ -1949,7 +1949,7 @@ public final class AbilityFactoryChoose {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                String choice = (String) GuiUtils.getChoice("Choose one", choices.values().toArray());
+                String choice = (String) GuiUtils.chooseOne("Choose one", choices.values().toArray());
                 AbilityFactory afChoice = new AbilityFactory();
                 final SpellAbility chosenSA = afChoice.getAbility(host.getSVar(choices.inverse().get(choice)), host);
 

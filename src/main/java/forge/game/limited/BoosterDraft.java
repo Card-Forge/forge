@@ -93,7 +93,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
         case Block: // Draft from cards by block or set
 
-            final Object o = GuiUtils.getChoice("Choose Block", UtilFunctions.iteratorToArray(Singletons.getModel().getBlocks().iterator(), new CardBlock[]{}));
+            final Object o = GuiUtils.chooseOne("Choose Block", UtilFunctions.iteratorToArray(Singletons.getModel().getBlocks().iterator(), new CardBlock[]{}));
             final CardBlock block = (CardBlock) o;
 
             final CardEdition[] cardSets = block.getSets();
@@ -119,7 +119,7 @@ public final class BoosterDraft implements IBoosterDraft {
             }
 
             if (sets.length > 1) {
-                final Object p = GuiUtils.getChoice("Choose Set Combination", setCombos.toArray());
+                final Object p = GuiUtils.chooseOne("Choose Set Combination", setCombos.toArray());
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
                     this.product.add(new UnOpenedProduct(Singletons.getModel().getBoosters().get(pp[i])));
@@ -142,7 +142,7 @@ public final class BoosterDraft implements IBoosterDraft {
                 JOptionPane
                         .showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                final CustomLimited draft = (CustomLimited) GuiUtils.getChoice("Choose Custom Draft",
+                final CustomLimited draft = (CustomLimited) GuiUtils.chooseOne("Choose Custom Draft",
                         myDrafts.toArray());
                 this.setupCustomDraft(draft);
             }

@@ -569,7 +569,7 @@ public class AbilityFactoryZoneAffecting {
                 } else {
                     final CardList drawn = p.drawCards(numCards);
                     if (params.containsKey("Reveal")) {
-                        GuiUtils.getChoice("Revealing drawn cards", drawn.toArray());
+                        GuiUtils.chooseOne("Revealing drawn cards", drawn.toArray());
                     }
                     if (params.containsKey("RememberDrawn")) {
                         for (final Card c : drawn) {
@@ -1201,7 +1201,7 @@ public class AbilityFactoryZoneAffecting {
                     if (p.isHuman()) {
                         // "reveal to computer" for information gathering
                     } else {
-                        GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+                        GuiUtils.chooseOneOrNone("Revealed computer hand", dPHand.toArray());
                     }
 
                     String valid = params.get("DiscardValid");
@@ -1269,7 +1269,7 @@ public class AbilityFactoryZoneAffecting {
                                     if (mode.startsWith("Reveal")) {
                                         final CardList dCs = new CardList();
                                         dCs.add(dC);
-                                        GuiUtils.getChoiceOptional("Computer has chosen", dCs.toArray());
+                                        GuiUtils.chooseOneOrNone("Computer has chosen", dCs.toArray());
                                     }
                                     discarded.add(dC);
                                     p.discard(dC, sa);
@@ -1278,17 +1278,17 @@ public class AbilityFactoryZoneAffecting {
                         } else {
                             // human
                             if (mode.startsWith("Reveal")) {
-                                GuiUtils.getChoiceOptional("Revealed " + p + "  hand", dPHand.toArray());
+                                GuiUtils.chooseOneOrNone("Revealed " + p + "  hand", dPHand.toArray());
                             }
 
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
                                     Card dC = null;
                                     if (params.containsKey("Optional")) {
-                                        dC = GuiUtils.getChoiceOptional("Choose a card to be discarded",
+                                        dC = GuiUtils.chooseOneOrNone("Choose a card to be discarded",
                                                 dPChHand.toArray());
                                     } else {
-                                    dC = GuiUtils.getChoice("Choose a card to be discarded",
+                                    dC = GuiUtils.chooseOne("Choose a card to be discarded",
                                             dPChHand.toArray());
                                     } if (dC != null) {
                                         dPChHand.remove(dC);

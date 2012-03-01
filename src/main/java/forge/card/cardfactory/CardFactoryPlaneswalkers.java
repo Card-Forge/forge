@@ -93,7 +93,7 @@ public class CardFactoryPlaneswalkers {
                     final int convertedManaTopCard = CardUtil.getConvertedManaCost(topCard.getManaCost());
                     final CardList showTop = new CardList();
                     showTop.add(topCard);
-                    GuiUtils.getChoiceOptional("Revealed top card: ", showTop.toArray());
+                    GuiUtils.chooseOneOrNone("Revealed top card: ", showTop.toArray());
 
                     // now, move it to player's hand
                     Singletons.getModel().getGameAction().moveToHand(topCard);

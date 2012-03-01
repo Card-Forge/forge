@@ -1123,7 +1123,7 @@ public class GameAction {
                     crd = list.get(0);
                 } else {
                     if (c.getController().isHuman()) {
-                        crd = GuiUtils.getChoiceOptional("Select totem armor to destroy", list.toArray());
+                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list.toArray());
                     } else {
                         crd = list.get(0);
                     }
@@ -1306,7 +1306,7 @@ public class GameAction {
                     crd = list.get(0);
                 } else {
                     if (c.getController().isHuman()) {
-                        crd = GuiUtils.getChoiceOptional("Select totem armor to destroy", list.toArray());
+                        crd = GuiUtils.chooseOneOrNone("Select totem armor to destroy", list.toArray());
                     } else {
                         crd = list.get(0);
                     }
@@ -1413,7 +1413,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             choice = choices.get(0);
         } else {
-            choice = (String) GuiUtils.getChoiceOptional("Choose", choices.toArray());
+            choice = (String) GuiUtils.chooseOneOrNone("Choose", choices.toArray());
         }
 
         if (choice == null) {
@@ -1451,7 +1451,7 @@ public class GameAction {
         } else if (choices.size() == 1) {
             sa = choices.get(0);
         } else {
-            sa = (SpellAbility) GuiUtils.getChoiceOptional("Choose", choices.toArray());
+            sa = (SpellAbility) GuiUtils.chooseOneOrNone("Choose", choices.toArray());
         }
 
         if (sa == null) {
@@ -1592,12 +1592,12 @@ public class GameAction {
                 if (originalCard.getController().isHuman()) {
 
                     final int chosenAmount = (Integer) GuiUtils
-                            .getChoice("Exile how many cards?", choiceList.toArray());
+                            .chooseOne("Exile how many cards?", choiceList.toArray());
                     System.out.println("Delve for " + chosenAmount);
                     final CardList choices = AllZone.getHumanPlayer().getCardsIn(Zone.Graveyard);
                     final CardList chosen = new CardList();
                     for (int i = 0; i < chosenAmount; i++) {
-                        final Card nowChosen = GuiUtils.getChoiceOptional("Exile which card?", choices.toArray());
+                        final Card nowChosen = GuiUtils.chooseOneOrNone("Exile which card?", choices.toArray());
 
                         if (nowChosen == null) {
                             // User canceled,abort delving.
@@ -1674,7 +1674,7 @@ public class GameAction {
                     ManaCost newCost = new ManaCost(originalCost.toString());
                     Object tapForConvoke = null;
                     if (sa.getActivatingPlayer().isHuman()) {
-                        tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(),
+                        tapForConvoke = GuiUtils.chooseOneOrNone("Tap for Convoke? " + newCost.toString(),
                                 choices.toArray());
                     } else {
                         // TODO: AI to choose a creature to tap would go here
@@ -1689,7 +1689,7 @@ public class GameAction {
                             String chosenColor = usableColors.get(0);
                             if (usableColors.size() > 1) {
                                 if (sa.getActivatingPlayer().isHuman()) {
-                                    chosenColor = (String) GuiUtils.getChoice("Convoke for which color?",
+                                    chosenColor = (String) GuiUtils.chooseOne("Convoke for which color?",
                                             usableColors.toArray());
                                 } else {
                                     // TODO: AI for choosing which color to
@@ -1717,7 +1717,7 @@ public class GameAction {
                         }
 
                         if (sa.getActivatingPlayer().isHuman()) {
-                            tapForConvoke = GuiUtils.getChoiceOptional("Tap for Convoke? " + newCost.toString(),
+                            tapForConvoke = GuiUtils.chooseOneOrNone("Tap for Convoke? " + newCost.toString(),
                                     choices.toArray());
                         } else {
                             // TODO: AI to choose a creature to tap would go

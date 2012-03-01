@@ -78,8 +78,8 @@ public class ListChooser<T> {
     // initialized before; listeners may be added to it
     private JList jList;
     // Temporarily stored for event handlers during show
-    private JDialog d;
-    private JOptionPane p;
+    private JDialog dialog;
+    private JOptionPane optionPane;
     private Action ok, cancel;
 
     /**
@@ -304,21 +304,10 @@ public class ListChooser<T> {
             this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         }
 
-        this.p = new JOptionPane(new Object[] { message, new JScrollPane(this.jList) }, JOptionPane.QUESTION_MESSAGE,
+        this.optionPane = new JOptionPane(new Object[] { message, new JScrollPane(this.jList) }, JOptionPane.QUESTION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options, options[0]);
         this.jList.getSelectionModel().addListSelectionListener(new SelListener());
         this.jList.addMouseListener(new DblListener());
-    }
-
-    /**
-     * <p>
-     * getChoices.
-     * </p>
-     * 
-     * @return a {@link java.util.List} object.
-     */
-    public List<T> getChoices() {
-        return this.list;
     }
 
     /**
@@ -348,14 +337,14 @@ public class ListChooser<T> {
         }
         Integer value;
         do {
-            this.d = this.p.createDialog(this.p.getParent(), this.title);
+            this.dialog = this.optionPane.createDialog(this.optionPane.getParent(), this.title);
             if (this.minChoices != 0) {
-                this.d.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                this.dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             }
 
             this.jList.setSelectedIndex(index0);
 
-            this.d.addWindowFocusListener(new WindowFocusListener() {
+            this.dialog.addWindowFocusListener(new WindowFocusListener() {
                 @Override
                 public void windowGainedFocus(final WindowEvent e) {
                     ListChooser.this.jList.grabFocus();
@@ -365,9 +354,9 @@ public class ListChooser<T> {
                 public void windowLostFocus(final WindowEvent e) {
                 }
             });
-            this.d.setVisible(true);
-            this.d.dispose();
-            value = (Integer) this.p.getValue();
+            this.dialog.setVisible(true);
+            this.dialog.dispose();
+            value = (Integer) this.optionPane.getValue();
             if ((value == null) || (value != JOptionPane.OK_OPTION)) {
                 this.jList.clearSelection();
                 // can't stop closing by ESC, so repeat if cancelled
@@ -390,7 +379,7 @@ public class ListChooser<T> {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        return (Integer) this.p.getValue() == JOptionPane.OK_OPTION;
+        return (Integer) this.optionPane.getValue() == JOptionPane.OK_OPTION;
     }
 
     /**
@@ -398,22 +387,11 @@ public class ListChooser<T> {
      * 
      * @return a {@link java.util.List} object.
      */
-    public List<Integer> getSelectedIndices() {
+    public int[] getSelectedIndices() {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        final int[] indices = this.jList.getSelectedIndices();
-        return new AbstractList<Integer>() {
-            @Override
-            public int size() {
-                return indices.length;
-            }
-
-            @Override
-            public Integer get(final int index) {
-                return indices[index];
-            }
-        };
+        return this.jList.getSelectedIndices();
     }
 
     /**
@@ -452,7 +430,7 @@ public class ListChooser<T> {
         }
         return this.jList.getSelectedIndex();
     }
-
+    
     /**
      * Returns the (first) selected value, or null.
      * 
@@ -473,7 +451,7 @@ public class ListChooser<T> {
      */
     private void commit() {
         if (this.ok.isEnabled()) {
-            this.p.setValue(JOptionPane.OK_OPTION);
+            this.optionPane.setValue(JOptionPane.OK_OPTION);
         }
     }
 
@@ -504,7 +482,7 @@ public class ListChooser<T> {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            ListChooser.this.p.setValue(this.value);
+            ListChooser.this.optionPane.setValue(this.value);
         }
     }
 

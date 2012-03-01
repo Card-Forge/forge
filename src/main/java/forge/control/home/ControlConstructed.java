@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import forge.CardList;
 import forge.Constant;
 import forge.PlayerType;
@@ -26,6 +28,7 @@ import forge.game.GameNew;
 import forge.game.GameType;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestEvent;
+import forge.quest.data.QuestEventManager;
 import forge.util.IStorage;
 import forge.view.home.ViewConstructed;
 
@@ -330,17 +333,17 @@ public class ControlConstructed {
 
     private String[] getEventNames() {
         final List<String> eventNames = new ArrayList<String>();
-        eventNames.clear();
-
-        for (final QuestEvent e : Singletons.getModel().getQuestEventManager().getAllChallenges()) {
+        final QuestEventManager qm = Singletons.getModel().getQuestEventManager();
+        
+        for (final QuestEvent e : qm.getAllChallenges()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (final QuestEvent e : Singletons.getModel().getQuestEventManager().getAllDuels()) {
+        for (final QuestEvent e : qm.getAllDuels()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        return oa2sa(eventNames.toArray());
+        return eventNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /** 

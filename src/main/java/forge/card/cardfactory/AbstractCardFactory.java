@@ -559,7 +559,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         imageName = "B 1 1 Thrull";
                         color = "B";
                     } else if (player.isHuman()) {
-                        final Object q = GuiUtils.getChoiceOptional("Select type of creature", choices);
+                        final Object q = GuiUtils.chooseOneOrNone("Select type of creature", choices);
                         if (q != null) {
                             if (q.equals("Citizen")) {
                                 type = "Citizen";
@@ -684,7 +684,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             chooseGrave.addAll(grave);
                         }
 
-                        final Object o = GuiUtils.getChoice("Choose first creature to exile", chooseGrave.toArray());
+                        final Object o = GuiUtils.chooseOne("Choose first creature to exile", chooseGrave.toArray());
                         if (o != null) {
                             CardList newGrave;
                             final Card c = (Card) o;
@@ -697,7 +697,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             newGrave = newGrave.getType("Creature");
                             newGrave.remove(c);
 
-                            final Object o2 = GuiUtils.getChoice("Choose second creature to exile", newGrave.toArray());
+                            final Object o2 = GuiUtils.chooseOne("Choose second creature to exile", newGrave.toArray());
                             if (o2 != null) {
                                 final Card c2 = (Card) o2;
                                 newGrave.remove(c2);
@@ -989,7 +989,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             }
                         }
                     } // while
-                    GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
+                    GuiUtils.chooseOneOrNone("Revealed cards:", revealed.toArray());
                     for (final Card revealedCard : revealed) {
                         Singletons.getModel().getGameAction().moveToBottomOfLibrary(revealedCard);
                     }
@@ -1066,7 +1066,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                             if (i == 4) {
                                 title = "Put fourth from top of library: ";
                             }
-                            final Object o = GuiUtils.getChoiceOptional(title, lands.toArray());
+                            final Object o = GuiUtils.chooseOneOrNone(title, lands.toArray());
                             if (o == null) {
                                 break;
                             }
@@ -1190,7 +1190,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                         for (int j = 0; j <= num; j++) {
                             choices[j] = "" + j;
                         }
-                        final String answer = (GuiUtils.getChoiceOptional("Life to pay:", choices));
+                        final String answer = (GuiUtils.chooseOneOrNone("Life to pay:", choices));
                         lifeToPay = Integer.parseInt(answer);
                     } else {
                         // not implemented for Compy
@@ -1264,7 +1264,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
                                 while (this.exiled.size() > 0) {
-                                    final Object o = GuiUtils.getChoice("Put a card on top of your library.",
+                                    final Object o = GuiUtils.chooseOne("Put a card on top of your library.",
                                             this.exiled.toArray());
                                     final Card c1 = (Card) o;
                                     Singletons.getModel().getGameAction().moveToLibrary(c1);

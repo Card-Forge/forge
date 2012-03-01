@@ -452,7 +452,7 @@ public class ManaPool {
                 Object o;
 
                 if (this.owner.isHuman()) {
-                    o = GuiUtils.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
+                    o = GuiUtils.chooseOneOrNone("Pay Mana from Mana Pool", alChoice.toArray());
                 } else {
                     o = alChoice.get(0); // owner is computer
                 }

@@ -360,7 +360,7 @@ public final class AbilityFactoryPlay {
             Card tgtCard = tgtCards.get(0);
             if (tgtCards.size() > 1) {
                 if (controller.isHuman()) {
-                    tgtCard = (Card) GuiUtils.getChoice("Select a card to play", tgtCards.toArray());
+                    tgtCard = (Card) GuiUtils.chooseOne("Select a card to play", tgtCards.toArray());
                 } else {
                     // AI
                     tgtCards = tgtCards.filter(new CardListFilter() {
@@ -420,7 +420,7 @@ public final class AbilityFactoryPlay {
             if (sas.size() == 1) {
                 tgtSA = sas.get(0);
             } else if (sa.getActivatingPlayer().isHuman()) {
-                tgtSA = (SpellAbility) GuiUtils.getChoice("Select a spell to cast", sas.toArray());
+                tgtSA = (SpellAbility) GuiUtils.chooseOne("Select a spell to cast", sas.toArray());
             } else {
                 tgtSA = sas.get(0);
             }

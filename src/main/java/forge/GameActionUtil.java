@@ -137,7 +137,7 @@ public final class GameActionUtil {
                             }
 
                         } // while
-                        GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
+                        GuiUtils.chooseOneOrNone("Revealed cards:", revealed.toArray());
 
                         if (cascadedCard != null) {
 
@@ -268,7 +268,7 @@ public final class GameActionUtil {
                                     rippledCards[i] = crd;
                                 }
                             } // for
-                            GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
+                            GuiUtils.chooseOneOrNone("Revealed cards:", revealed.toArray());
                             for (int i = 0; i < rippleMax; i++) {
                                 if (rippledCards[i] != null) {
 
@@ -463,7 +463,7 @@ public final class GameActionUtil {
 
         final boolean flip = MyRandom.getRandom().nextBoolean();
         if (caller.isHuman()) {
-            choice = GuiUtils.getChoice(source.getName() + " - Call coin flip", choices);
+            choice = GuiUtils.chooseOne(source.getName() + " - Call coin flip", choices);
         } else {
             choice = choices[MyRandom.getRandom().nextInt(2)];
         }
@@ -505,7 +505,7 @@ public final class GameActionUtil {
 
         Object q = null;
 
-        q = GuiUtils.getChoiceOptional("Use " + c + " Landfall?", choices);
+        q = GuiUtils.chooseOneOrNone("Use " + c + " Landfall?", choices);
 
         return (q != null) && q.equals("Yes");
     }
@@ -524,7 +524,7 @@ public final class GameActionUtil {
             public void resolve() {
                 String color = "";
 
-                final Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.ONLY_COLORS);
+                final Object o = GuiUtils.chooseOne("Choose mana color", Constant.Color.ONLY_COLORS);
                 color = InputPayManaCostUtil.getShortColorString((String) o);
 
                 final AbilityMana abMana = new AbilityMana(c, "0", color) {

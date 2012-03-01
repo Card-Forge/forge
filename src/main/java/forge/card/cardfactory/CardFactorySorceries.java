@@ -285,12 +285,12 @@ public class CardFactorySorceries {
 
                     final StringBuilder msg = new StringBuilder();
                     msg.append("Revealing top ").append(count).append(" cards of library: ");
-                    GuiUtils.getChoice(msg.toString(), cards.toArray());
+                    GuiUtils.chooseOne(msg.toString(), cards.toArray());
                     // Human chooses
                     if (card.getController().isComputer()) {
                         for (int i = 0; i < count; i++) {
                             if (!stop) {
-                                choice = GuiUtils.getChoiceOptional("Choose cards to put into the first pile: ",
+                                choice = GuiUtils.chooseOneOrNone("Choose cards to put into the first pile: ",
                                         cards.toArray());
                                 if (choice != null) {
                                     pile1.add(choice);
@@ -400,7 +400,7 @@ public class CardFactorySorceries {
 
                         final int numChosen = chosen.size();
                         for (int i = 0; i < numChosen; i++) {
-                            final Object check = GuiUtils.getChoiceOptional("Select spells to play in reverse order: ",
+                            final Object check = GuiUtils.chooseOneOrNone("Select spells to play in reverse order: ",
                                     chosen.toArray());
                             if (check == null) {
                                 break;
@@ -1369,7 +1369,7 @@ public class CardFactorySorceries {
                     final int num = CardFactoryUtil.getNumberOfManaSymbolsByColor("U", topCards);
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Revealed cards - ").append(num).append(" U mana symbols");
-                    GuiUtils.getChoiceOptional(sb.toString(), topCards.toArray());
+                    GuiUtils.chooseOneOrNone(sb.toString(), topCards.toArray());
 
                     // opponent moves this many cards to graveyard
                     opp.mill(num);
@@ -1747,7 +1747,7 @@ public class CardFactorySorceries {
                         }
                     });
 
-                    final Object check = GuiUtils.getChoiceOptional("Select target creature with CMC < X",
+                    final Object check = GuiUtils.chooseOneOrNone("Select target creature with CMC < X",
                             grave.toArray());
                     if (check != null) {
                         final Card c = (Card) check;
@@ -1837,7 +1837,7 @@ public class CardFactorySorceries {
                         for (int i = 0; i <= card.getController().getLife(); i++) {
                             choices.add("" + i);
                         }
-                        final Object o = GuiUtils.getChoice("Choose X", choices.toArray());
+                        final Object o = GuiUtils.chooseOne("Choose X", choices.toArray());
                         // everything stops here if user cancelled
                         if (o == null) {
                             this.stop();
@@ -1927,7 +1927,7 @@ public class CardFactorySorceries {
 
                 private ArrayList<String> chooseTwo(final ArrayList<String> choices) {
                     final ArrayList<String> out = new ArrayList<String>();
-                    Object o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
+                    Object o = GuiUtils.chooseOneOrNone("Choose Two", choices.toArray());
                     if (o == null) {
                         return null;
                     }
@@ -1935,7 +1935,7 @@ public class CardFactorySorceries {
                     out.add((String) o);
                     card.addSpellChoice((String) o);
                     choices.remove(out.get(0));
-                    o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
+                    o = GuiUtils.chooseOneOrNone("Choose Two", choices.toArray());
                     if (o == null) {
                         return null;
                     }
@@ -2014,7 +2014,7 @@ public class CardFactorySorceries {
                     // Sacrifice an artifact
                     CardList arts = p.getCardsIn(Constant.Zone.Battlefield);
                     arts = arts.filter(CardListFilter.ARTIFACTS);
-                    final Object toSac = GuiUtils.getChoiceOptional("Sacrifice an artifact", arts.toArray());
+                    final Object toSac = GuiUtils.chooseOneOrNone("Sacrifice an artifact", arts.toArray());
                     if (toSac != null) {
                         final Card c = (Card) toSac;
                         baseCMC = CardUtil.getConvertedManaCost(c);
@@ -2025,9 +2025,9 @@ public class CardFactorySorceries {
 
                     // Search your library for an artifact
                     final CardList lib = p.getCardsIn(Zone.Library);
-                    GuiUtils.getChoiceOptional("Looking at Library", lib.toArray());
+                    GuiUtils.chooseOneOrNone("Looking at Library", lib.toArray());
                     final CardList libArts = lib.filter(CardListFilter.ARTIFACTS);
-                    final Object o = GuiUtils.getChoiceOptional("Search for artifact", libArts.toArray());
+                    final Object o = GuiUtils.chooseOneOrNone("Search for artifact", libArts.toArray());
                     if (o != null) {
                         newArtifact[0] = (Card) o;
                     } else {

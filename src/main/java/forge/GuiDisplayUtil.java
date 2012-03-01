@@ -1469,7 +1469,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTutor() {
         final CardList lib = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
-        final Object o = GuiUtils.getChoiceOptional("Choose a card", lib.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Choose a card", lib.toArray());
         if (null == o) {
             return;
         } else {
@@ -1487,12 +1487,12 @@ public final class GuiDisplayUtil {
      */
     public static void devModeAddCounter() {
         final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        final Object o = GuiUtils.getChoiceOptional("Add counters to which card?", play.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Add counters to which card?", play.toArray());
         if (null == o) {
             return;
         } else {
             final Card c = (Card) o;
-            final Counters counter = GuiUtils.getChoiceOptional("Which type of counter?", Counters.values());
+            final Counters counter = GuiUtils.chooseOneOrNone("Which type of counter?", Counters.values());
             if (null == counter) {
                 return;
             } else {
@@ -1500,7 +1500,7 @@ public final class GuiDisplayUtil {
                 for (int j = 0; j < 99; j++) {
                     integers[j] = Integer.valueOf(j);
                 }
-                final Integer i = GuiUtils.getChoiceOptional("How many counters?", integers);
+                final Integer i = GuiUtils.chooseOneOrNone("How many counters?", integers);
                 if (null == i) {
                     return;
                 } else {
@@ -1519,7 +1519,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTapPerm() {
         final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        final Object o = GuiUtils.getChoiceOptional("Choose a permanent", play.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play.toArray());
         if (null == o) {
             return;
         } else {
@@ -1537,7 +1537,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeUntapPerm() {
         final CardList play = AllZoneUtil.getCardsIn(Zone.Battlefield);
-        final Object o = GuiUtils.getChoiceOptional("Choose a permanent", play.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Choose a permanent", play.toArray());
         if (null == o) {
             return;
         } else {
@@ -1566,7 +1566,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeSetLife() {
         final List<Player> players = AllZone.getPlayersInGame();
-        final Object o = GuiUtils.getChoiceOptional("Set life for which player?", players.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Set life for which player?", players.toArray());
         if (null == o) {
             return;
         } else {
@@ -1575,7 +1575,7 @@ public final class GuiDisplayUtil {
             for (int j = 0; j < 99; j++) {
                 integers[j] = Integer.valueOf(j);
             }
-            final Integer i = GuiUtils.getChoiceOptional("Set life to what?", integers);
+            final Integer i = GuiUtils.chooseOneOrNone("Set life to what?", integers);
             if (null == i) {
                 return;
             } else {

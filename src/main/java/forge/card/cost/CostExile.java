@@ -328,7 +328,7 @@ public class CostExile extends CostPartWithList {
                     }
 
                     final Object o = GuiUtils
-                            .getChoiceOptional("Exile from " + part.getFrom(), this.typeList.toArray());
+                            .chooseOneOrNone("Exile from " + part.getFrom(), this.typeList.toArray());
 
                     if (o != null) {
                         final Card c = (Card) o;

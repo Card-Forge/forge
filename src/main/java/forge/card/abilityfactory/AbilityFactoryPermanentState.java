@@ -2054,7 +2054,7 @@ public class AbilityFactoryPermanentState {
             if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
-                    final Object z = GuiUtils.getChoiceOptional("Tap or Untap " + tgtC + "?", tapOrUntap);
+                    final Object z = GuiUtils.chooseOneOrNone("Tap or Untap " + tgtC + "?", tapOrUntap);
                     if (null == z) {
                         continue;
                     }

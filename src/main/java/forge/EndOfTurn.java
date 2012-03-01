@@ -215,7 +215,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     }
 
                     if (player.isHuman()) {
-                        final Object o = GuiUtils.getChoiceOptional(
+                        final Object o = GuiUtils.chooseOneOrNone(
                                 "Select target creature for Wall of Reverence life gain", creats.toArray());
                         if (o != null) {
                             final Card c = (Card) o;

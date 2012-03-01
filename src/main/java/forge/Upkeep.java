@@ -837,7 +837,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -939,7 +939,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1039,7 +1039,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1136,7 +1136,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1221,7 +1221,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1320,7 +1320,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1412,7 +1412,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1498,7 +1498,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1582,7 +1582,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1687,7 +1687,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1771,7 +1771,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -1858,7 +1858,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                 private void revealTopCard(final String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        GuiUtils.getChoice(title, peek[0]);
+                        GuiUtils.chooseOne(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 } // revealTopCard()
@@ -2046,7 +2046,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     }
                                 } // for loop
                                 if (cardsToReveal.size() > 0) {
-                                    GuiUtils.getChoice("Revealed cards", cardsToReveal.toArray());
+                                    GuiUtils.chooseOne("Revealed cards", cardsToReveal.toArray());
                                 }
                             }
                         }
@@ -2090,7 +2090,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {
-                                final Object o = GuiUtils.getChoiceOptional("Pick a creature to return to hand",
+                                final Object o = GuiUtils.chooseOneOrNone("Pick a creature to return to hand",
                                         graveyardCreatures.toArray());
                                 if (o != null) {
                                     final Card card = (Card) o;
@@ -2499,7 +2499,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             final Card crd = enchantmentsInLibrary.get(j);
                             target[j] = crd;
                         }
-                        final Object check = GuiUtils.getChoiceOptional("Select Curse to attach", target);
+                        final Object check = GuiUtils.chooseOneOrNone("Select Curse to attach", target);
                         if (check != null) {
                             enchantment = ((Card) check);
                         }

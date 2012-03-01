@@ -290,7 +290,7 @@ public class CardFactoryInstants {
                     final CardList libraryList = AllZone.getHumanPlayer().getCardsIn(Zone.Library);
                     final CardList selectedCards = new CardList();
 
-                    Object o = GuiUtils.getChoiceOptional("Select first card", libraryList.toArray());
+                    Object o = GuiUtils.chooseOneOrNone("Select first card", libraryList.toArray());
                     if (o != null) {
                         final Card c1 = (Card) o;
                         libraryList.remove(c1);
@@ -298,7 +298,7 @@ public class CardFactoryInstants {
                     } else {
                         return;
                     }
-                    o = GuiUtils.getChoiceOptional("Select second card", libraryList.toArray());
+                    o = GuiUtils.chooseOneOrNone("Select second card", libraryList.toArray());
                     if (o != null) {
                         final Card c2 = (Card) o;
                         libraryList.remove(c2);
@@ -306,7 +306,7 @@ public class CardFactoryInstants {
                     } else {
                         return;
                     }
-                    o = GuiUtils.getChoiceOptional("Select third card", libraryList.toArray());
+                    o = GuiUtils.chooseOneOrNone("Select third card", libraryList.toArray());
                     if (o != null) {
                         final Card c3 = (Card) o;
                         libraryList.remove(c3);
@@ -354,7 +354,7 @@ public class CardFactoryInstants {
 
                     // NOTE: Using getChoiceOptional() results in a null error
                     // when you click on Cancel.
-                    final Object o = GuiUtils.getChoice("Select card to give to computer", selectedCards.toArray());
+                    final Object o = GuiUtils.chooseOne("Select card to give to computer", selectedCards.toArray());
 
                     final Card choice = (Card) o;
 
@@ -401,7 +401,7 @@ public class CardFactoryInstants {
 
                     if (player.isHuman()) {
                         for (int i = 0; i < x; i++) {
-                            final Object o = GuiUtils.getChoice("Remove from game", graveList.toArray());
+                            final Object o = GuiUtils.chooseOne("Remove from game", graveList.toArray());
                             if (o == null) {
                                 break;
                             }
@@ -553,7 +553,7 @@ public class CardFactoryInstants {
                     }
 
                     for (int i = 0; (i < 3) && !choices.isEmpty(); i++) {
-                        final Object o = GuiUtils.getChoice(this.prompt[i], choices.toArray());
+                        final Object o = GuiUtils.chooseOne(this.prompt[i], choices.toArray());
                         final Card c1 = (Card) o;
                         if (i == 0) {
                             Singletons.getModel().getGameAction().moveToHand(c1);
@@ -640,12 +640,12 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final String[] choices = new String[] { "Artifact", "Creature", "Land" };
-                    final Object o = GuiUtils.getChoice("Select permanent type", choices);
+                    final Object o = GuiUtils.chooseOne("Select permanent type", choices);
                     final String cardType = (String) o;
                     final CardList list = this.getTargetPlayer().getCardsIn(Zone.Battlefield).getType(cardType);
 
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
-                    final Object z = GuiUtils.getChoice("Tap or Untap?", tapOrUntap);
+                    final Object z = GuiUtils.chooseOne("Tap or Untap?", tapOrUntap);
                     final boolean tap = (z.equals("Tap")) ? true : false;
 
                     for (final Card c : list) {

@@ -187,7 +187,7 @@ public enum CSubmenuDraft implements ICSubmenu {
         draftTypes.add("Custom");
 
         final String prompt = "Choose Draft Format:";
-        final Object o = GuiUtils.getChoice(prompt, draftTypes.toArray());
+        final Object o = GuiUtils.chooseOne(prompt, draftTypes.toArray());
 
         if (o.toString().equals(draftTypes.get(0))) {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Full));

@@ -135,9 +135,9 @@ public class HumanPlayer extends Player {
     public final boolean dredge() {
         boolean dredged = false;
         final String[] choices = { "Yes", "No" };
-        final Object o = GuiUtils.getChoice("Do you want to dredge?", choices);
+        final Object o = GuiUtils.chooseOne("Do you want to dredge?", choices);
         if (o.equals("Yes")) {
-            final Card c = GuiUtils.getChoice("Select card to dredge", this.getDredge().toArray());
+            final Card c = GuiUtils.chooseOne("Select card to dredge", this.getDredge().toArray());
             // rule 702.49a
             if (this.getDredgeNumber(c) <= AllZone.getHumanPlayer().getZone(Zone.Library).size()) {
 
@@ -198,7 +198,7 @@ public class HumanPlayer extends Player {
                 s += "s";
             }
 
-            final Object o = GuiUtils.getChoice("Do you want to put the " + s
+            final Object o = GuiUtils.chooseOne("Do you want to put the " + s
                     + " on the top or bottom of your library?", new Object[] { "top", "bottom" });
             libPos = o.toString();
         }
@@ -210,7 +210,7 @@ public class HumanPlayer extends Player {
     protected final void doScry(final CardList topN, final int n) {
         int num = n;
         for (int i = 0; i < num; i++) {
-            final Object o = GuiUtils.getChoiceOptional("Put on bottom of library.", topN.toArray());
+            final Object o = GuiUtils.chooseOneOrNone("Put on bottom of library.", topN.toArray());
             if (o != null) {
                 final Card c = (Card) o;
                 topN.remove(c);
@@ -223,7 +223,7 @@ public class HumanPlayer extends Player {
         num = topN.size();
         for (int i = 0; i < num; i++) {
             Object o;
-            o = GuiUtils.getChoice("Put on top of library.", topN.toArray());
+            o = GuiUtils.chooseOne("Put on top of library.", topN.toArray());
             if (o != null) {
                 final Card c = (Card) o;
                 topN.remove(c);
@@ -246,7 +246,7 @@ public class HumanPlayer extends Player {
         String choice = "";
         final String[] choices = { "top", "bottom" };
         Singletons.getControl().getControlMatch().setCard(c);
-        choice = GuiUtils.getChoice(c.getName() + " - Top or bottom of Library", choices);
+        choice = GuiUtils.chooseOne(c.getName() + " - Top or bottom of Library", choices);
 
         if (choice.equals("bottom")) {
             Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);

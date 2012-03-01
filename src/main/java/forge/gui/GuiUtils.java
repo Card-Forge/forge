@@ -249,7 +249,7 @@ public final class GuiUtils {
      *         getChoices.
      * @see #getChoices(String, int, int, Object...)
      */
-    public static <T> T getChoiceOptional(final String message, final T... choices) {
+    public static <T> T chooseOneOrNone(final String message, final T... choices) {
         if ((choices == null) || (choices.length == 0)) {
             return null;
         }
@@ -271,12 +271,18 @@ public final class GuiUtils {
      *            a T object.
      * @return a T object.
      */
-    public static <T> T getChoice(final String message, final T... choices) {
+    public static <T> T chooseOne(final String message, final T... choices) {
         final List<T> choice = GuiUtils.getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
     } // getChoice()
 
+    public static <T> T chooseOne(final String message, final List<T> choices) {
+        final List<T> choice = GuiUtils.getChoices(message, 1, 1, choices);
+        assert choice.size() == 1;
+        return choice.get(0);
+    }    
+    
     // returned Object will never be null
     /**
      * <p>
@@ -291,7 +297,7 @@ public final class GuiUtils {
      *            a T object.
      * @return a {@link java.util.List} object.
      */
-    public static <T> List<T> getChoicesOptional(final String message, final T... choices) {
+    public static <T> List<T> chooseNoneOrMany(final String message, final T... choices) {
         return GuiUtils.getChoices(message, 0, choices.length, choices);
     } // getChoice()
 
@@ -309,7 +315,7 @@ public final class GuiUtils {
      *            a T object.
      * @return a {@link java.util.List} object.
      */
-    public static <T> List<T> getChoices(final String message, final T... choices) {
+    public static <T> List<T> chooseOneOrMany(final String message, final T... choices) {
         return GuiUtils.getChoices(message, 1, choices.length, choices);
     } // getChoice()
 
@@ -331,8 +337,18 @@ public final class GuiUtils {
      *            a T object.
      * @return a {@link java.util.List} object.
      */
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final T... choices) {
+    private static <T> List<T> getChoices(final String message, final int min, final int max, final T... choices) {
         final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+        return getChoices(c);
+    }    
+    
+    private static <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices) {
+        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+        return getChoices(c);
+    }
+     
+    private static <T> List<T> getChoices(final ListChooser<T> c) 
+    {
         final JList list = c.getJList();
         list.addListSelectionListener(new ListSelectionListener() {
             @Override

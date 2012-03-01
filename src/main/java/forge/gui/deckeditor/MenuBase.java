@@ -105,7 +105,7 @@ public class MenuBase<T extends DeckBase> extends JMenuBar {
             return null;
         }
 
-        final Object o = GuiUtils.getChoiceOptional("Open Deck", choices.toArray());
+        final Object o = GuiUtils.chooseOneOrNone("Open Deck", choices.toArray());
         return o == null ? null : o.toString();
     }
 

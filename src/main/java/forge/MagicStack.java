@@ -1384,7 +1384,7 @@ public class MagicStack extends MyObservable {
         } else {
             while (activePlayerSAs.size() > 1) {
 
-                final SpellAbility next = (SpellAbility) GuiUtils.getChoice(
+                final SpellAbility next = (SpellAbility) GuiUtils.chooseOne(
                         "Choose which spell or ability to put on the stack next.", activePlayerSAs.toArray());
 
                 activePlayerSAs.remove(next);

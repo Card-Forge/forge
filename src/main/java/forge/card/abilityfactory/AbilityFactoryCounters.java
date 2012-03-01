@@ -698,7 +698,7 @@ public class AbilityFactoryCounters {
             for (int j = 0; j <= counterAmount; j++) {
                 integers[j] = Integer.valueOf(j);
             }
-            final Integer i = GuiUtils.getChoiceOptional("How many counters?", integers);
+            final Integer i = GuiUtils.chooseOneOrNone("How many counters?", integers);
             if (null == i) {
                 return;
             } else {
@@ -1125,7 +1125,7 @@ public class AbilityFactoryCounters {
                             }
                             if (typeChoices.size() > 1) {
                                 String prompt = "Select type counters to remove";
-                                o = GuiUtils.getChoice(prompt, typeChoices.toArray());
+                                o = GuiUtils.chooseOne(prompt, typeChoices.toArray());
                             }
                             else {
                                 o = typeChoices.get(0);
@@ -1141,7 +1141,7 @@ public class AbilityFactoryCounters {
                                     choices.add("" + i);
                                 }
                                 String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
-                                o = GuiUtils.getChoice(prompt, choices.toArray());
+                                o = GuiUtils.chooseOne(prompt, choices.toArray());
                                 chosenAmount = Integer.parseInt((String) o);
                             }
                         }
@@ -1177,7 +1177,7 @@ public class AbilityFactoryCounters {
                                 choices.add("" + i);
                             }
                             final String prompt = "Select the number of " + type + " counters to remove";
-                            final Object o = GuiUtils.getChoice(prompt, choices.toArray());
+                            final Object o = GuiUtils.chooseOne(prompt, choices.toArray());
                             counterAmount = Integer.parseInt((String) o);
                         }
                     }
@@ -1436,7 +1436,7 @@ public class AbilityFactoryCounters {
                     }
                     if (choices.size() > 0) {
                         card.addCounter(
-                                Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.getChoice(
+                                Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.chooseOne(
                                         "Select counter type", choices.toArray()).toString())), 1);
                     }
                 }

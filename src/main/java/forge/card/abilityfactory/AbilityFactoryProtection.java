@@ -694,7 +694,7 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                final Object o = GuiUtils.getChoice("Choose a protection", choices.toArray());
+                final Object o = GuiUtils.chooseOne("Choose a protection", choices.toArray());
 
                 if (null == o) {
                     return;
@@ -1084,7 +1084,7 @@ public final class AbilityFactoryProtection {
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
-                final Object o = GuiUtils.getChoice("Choose a protection", choices.toArray());
+                final Object o = GuiUtils.chooseOne("Choose a protection", choices.toArray());
 
                 if (null == o) {
                     return;

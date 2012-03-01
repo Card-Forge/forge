@@ -276,7 +276,7 @@ public class CostUtil {
         for (int i = 0; i < choiceArray.length; i++) {
             choiceArray[i] = i;
         }
-        final Object o = GuiUtils.getChoice(card.toString() + " - Choose a Value for X", choiceArray);
+        final Object o = GuiUtils.chooseOne(card.toString() + " - Choose a Value for X", choiceArray);
         final int chosenX = (Integer) o;
         card.setSVar("ChosenX", "Number$" + Integer.toString(chosenX));
 
@@ -302,7 +302,7 @@ public class CostUtil {
         for (int i = 0; i < choiceArray.length; i++) {
             choiceArray[i] = i;
         }
-        final Object o = GuiUtils.getChoice(card.toString() + " - Choose a Value for Y", choiceArray);
+        final Object o = GuiUtils.chooseOne(card.toString() + " - Choose a Value for Y", choiceArray);
         final int chosenY = (Integer) o;
         card.setSVar("ChosenY", "Number$" + Integer.toString(chosenY));
 

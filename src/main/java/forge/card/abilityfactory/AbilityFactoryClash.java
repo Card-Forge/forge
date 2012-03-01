@@ -696,7 +696,7 @@ public final class AbilityFactoryClash {
 
                 // first, separate the cards into piles
                 if (separator.isHuman()) {
-                    final List<Card> l = GuiUtils.getChoicesOptional("Put into pile 1 (multi-select)", pool.toArray());
+                    final List<Card> l = GuiUtils.chooseNoneOrMany("Put into pile 1 (multi-select)", pool.toArray());
                     for (final Card c : l) {
                         pile1.add(c);
                     }
@@ -753,7 +753,7 @@ public final class AbilityFactoryClash {
                     // make sure Pile 1 or Pile 2 is clicked on
                     boolean chosen = false;
                     while (!chosen) {
-                        final Object o = GuiUtils.getChoice("Choose a pile", disp);
+                        final Object o = GuiUtils.chooseOne("Choose a pile", disp);
                         final Card c = (Card) o;
                         if (c.getName().equals("Pile 1")) {
                             chosen = true;

@@ -103,7 +103,7 @@ public class ControlWinLose {
 
                 Constant.Runtime.COMPUTER_DECK[0] = cDeck;
 
-                List<Card> o = GuiUtils.getChoicesOptional("Select cards to add to your deck", compAntes.toArray());
+                List<Card> o = GuiUtils.chooseNoneOrMany("Select cards to add to your deck", compAntes.toArray());
                 if (null != o) {
                     for (Card c : o) {
                         hDeck.getMain().add(c);

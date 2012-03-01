@@ -870,13 +870,13 @@ public final class AbilityFactoryChangeZone {
                                                              // moving onto
                                                              // choosing
                                                              // a card{
-                GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library",
+                GuiUtils.chooseOneOrNone(af.getHostCard().getName() + " - Looking at Library",
                         player.getCardsIn(Zone.Library).toArray());
             }
 
             // Look at opponents hand before moving onto choosing a card
             if (origin.contains(Zone.Hand) && player.isComputer()) {
-                GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Opponent's Hand", player
+                GuiUtils.chooseOneOrNone(af.getHostCard().getName() + " - Looking at Opponent's Hand", player
                         .getCardsIn(Zone.Hand).toArray());
             }
             fetchList = AbilityFactory.filterListByType(fetchList, params.get("ChangeType"), sa);
@@ -900,11 +900,11 @@ public final class AbilityFactoryChangeZone {
             if (params.containsKey("AtRandom")) {
                 o = CardUtil.getRandom(fetchList.toArray());
             } else if (params.containsKey("Mandatory")) {
-                o = GuiUtils.getChoice("Select a card", fetchList.toArray());
+                o = GuiUtils.chooseOne("Select a card", fetchList.toArray());
             } else if (params.containsKey("Defined")) {
                 o = fetchList.get(0);
             } else {
-                o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
+                o = GuiUtils.chooseOneOrNone("Select a card", fetchList.toArray());
             }
 
             if (o != null) {
@@ -916,7 +916,7 @@ public final class AbilityFactoryChangeZone {
                     // do not shuffle the library once we have placed a fetched
                     // card on top.
                     if (params.containsKey("Reveal")) {
-                        GuiUtils.getChoice(card + " - Revealed card: ", c);
+                        GuiUtils.chooseOne(card + " - Revealed card: ", c);
                     }
                     if (origin.contains(Zone.Library) && (i < 1)) {
                         player.shuffle();
@@ -1166,9 +1166,9 @@ public final class AbilityFactoryChangeZone {
         if (!Zone.Battlefield.equals(destination) && !"Card".equals(type) && !defined) {
             final String picked = af.getHostCard().getName() + " - Computer picked:";
             if (fetched.size() > 0) {
-                GuiUtils.getChoice(picked, fetched.toArray());
+                GuiUtils.chooseOne(picked, fetched.toArray());
             } else {
-                GuiUtils.getChoice(picked, new String[] { "<Nothing>" });
+                GuiUtils.chooseOne(picked, new String[] { "<Nothing>" });
             }
         }
     } // end changeHiddenOriginResolveAI

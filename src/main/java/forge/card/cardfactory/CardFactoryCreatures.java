@@ -271,7 +271,7 @@ public class CardFactoryCreatures {
                     final String[] choices = { "3/3", "2/2 with flying", "1/6 with defender" };
 
                     if (card.getController().isHuman()) {
-                        choice = GuiUtils.getChoice("Choose one", choices);
+                        choice = GuiUtils.chooseOne("Choose one", choices);
                     } else {
                         choice = choices[MyRandom.getRandom().nextInt(3)];
                     }
@@ -630,7 +630,7 @@ public class CardFactoryCreatures {
                     if (card.getController().isHuman()) {
                         final String[] colors = Constant.Color.ONLY_COLORS;
 
-                        final Object o = GuiUtils.getChoice("Choose color", colors);
+                        final Object o = GuiUtils.chooseOne("Choose color", colors);
                         color[0] = (String) o;
                     } else {
                         // AI chooses the color that appears in the keywords of
@@ -831,7 +831,7 @@ public class CardFactoryCreatures {
                     int lifeGain = 0;
                     if (card.getController().isHuman()) {
                         final String[] choices = { "white", "blue", "black", "red", "green" };
-                        final Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
+                        final Object o = GuiUtils.chooseOneOrNone("Select Color: ", choices);
                         Log.debug("Treva, the Renewer", "Color:" + o);
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
 
@@ -874,7 +874,7 @@ public class CardFactoryCreatures {
                     final CardList cl = new CardList();
                     cl.add(lib.get(0));
 
-                    GuiUtils.getChoiceOptional("Top card", cl.toArray());
+                    GuiUtils.chooseOneOrNone("Top card", cl.toArray());
                 }
 
                 @Override
@@ -1178,7 +1178,7 @@ public class CardFactoryCreatures {
                             list = list.getType("Enchantment");
 
                             if (list.size() > 0) {
-                                final Object objectSelected = GuiUtils.getChoiceOptional("Choose an enchantment",
+                                final Object objectSelected = GuiUtils.chooseOneOrNone("Choose an enchantment",
                                         list.toArray());
 
                                 if (objectSelected != null) {
@@ -1520,7 +1520,7 @@ public class CardFactoryCreatures {
 
                     if (card.getController().isHuman()) {
                         if (creats.size() > 0) {
-                            final List<Card> selection = GuiUtils.getChoicesOptional("Select creatures to sacrifice",
+                            final List<Card> selection = GuiUtils.chooseNoneOrMany("Select creatures to sacrifice",
                                     creats.toArray());
 
                             numCreatures[0] = selection.size();
@@ -1600,7 +1600,7 @@ public class CardFactoryCreatures {
                         life[i] = String.valueOf(i);
                     }
 
-                    final Object o = GuiUtils.getChoice("Nameless Race - pay X life", life);
+                    final Object o = GuiUtils.chooseOne("Nameless Race - pay X life", life);
                     final String answer = (String) o;
                     int loseLife = 0;
                     try {
@@ -2125,7 +2125,7 @@ public class CardFactoryCreatures {
                 public void showMessage() {
                     final String message = "Select a creature in a graveyard";
                     final CardList choices = AllZoneUtil.getCardsIn(Zone.Graveyard);
-                    final Object o = GuiUtils.getChoiceOptional(message, choices.toArray());
+                    final Object o = GuiUtils.chooseOneOrNone(message, choices.toArray());
                     if (null == o) {
                         this.stop();
                     } else {
@@ -2179,9 +2179,9 @@ public class CardFactoryCreatures {
                         hand.remove(random);
                     }
                     if (!revealed.isEmpty()) {
-                        GuiUtils.getChoice("Revealed at random", revealed.toArray());
+                        GuiUtils.chooseOne("Revealed at random", revealed.toArray());
                     } else {
-                        GuiUtils.getChoice("Revealed at random", new String[] { "Nothing to reveal" });
+                        GuiUtils.chooseOne("Revealed at random", new String[] { "Nothing to reveal" });
                     }
 
                     for (final Card c : revealed) {

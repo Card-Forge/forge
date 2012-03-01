@@ -807,7 +807,7 @@ public class CardFactoryUtil {
                     this.stop();
                 }
                 Singletons.getControl().getControlMatch().showMessage("Select target Spell: ");
-                final Card choice = GuiUtils.getChoiceOptional("Choose a Spell", choices.toArray());
+                final Card choice = GuiUtils.chooseOneOrNone("Choose a Spell", choices.toArray());
                 if (choice != null) {
                     spell.setTargetCard(choice);
                     this.done();
@@ -1130,7 +1130,7 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Object o = GuiUtils.getChoiceOptional("Select a card", sameType.toArray());
+                final Object o = GuiUtils.chooseOneOrNone("Select a card", sameType.toArray());
                 if (o != null) {
                     // ability.setTargetCard((Card)o);
 
@@ -1209,7 +1209,7 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Object o = GuiUtils.getChoiceOptional("Select a card", sameCost.toArray());
+                final Object o = GuiUtils.chooseOneOrNone("Select a card", sameCost.toArray());
                 if (o != null) {
                     // ability.setTargetCard((Card)o);
 
@@ -1665,7 +1665,7 @@ public class CardFactoryUtil {
                     question.append(manacost).append(" or less from your graveyard to your hand?");
 
                     if (GameActionUtil.showYesNoDialog(sourceCard, question.toString())) {
-                        final Object o = GuiUtils.getChoiceOptional("Select a card", sameCost.toArray());
+                        final Object o = GuiUtils.chooseOneOrNone("Select a card", sameCost.toArray());
                         if (o != null) {
 
                             final Card c1 = (Card) o;
@@ -5146,7 +5146,7 @@ public class CardFactoryUtil {
                         card.clearDevoured();
                         if (card.getController().isHuman()) {
                             if (creats.size() > 0) {
-                                final List<Card> selection = GuiUtils.getChoicesOptional(
+                                final List<Card> selection = GuiUtils.chooseNoneOrMany(
                                         "Select creatures to sacrifice", creats.toArray());
 
                                 numCreatures[0] = selection.size();

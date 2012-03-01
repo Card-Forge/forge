@@ -2759,7 +2759,7 @@ public class CombatUtil {
             if (lib.size() > 0) {
                 final CardList cl = new CardList();
                 cl.add(lib.get(0));
-                GuiUtils.getChoiceOptional("Top card", cl.toArray());
+                GuiUtils.chooseOneOrNone("Top card", cl.toArray());
                 final Card top = lib.get(0);
                 if (top.isCreature()) {
                     player.gainLife(top.getBaseDefense(), c);
@@ -3021,7 +3021,7 @@ public class CombatUtil {
                                 final Card crd = enchantments.get(j);
                                 target[j] = crd;
                             }
-                            final Object check = GuiUtils.getChoiceOptional(
+                            final Object check = GuiUtils.chooseOneOrNone(
                                     "Select enchantment to enchant exalted creature", target);
                             if (check != null) {
                                 enchantment = ((Card) check);

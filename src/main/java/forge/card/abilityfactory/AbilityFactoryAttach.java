@@ -1213,7 +1213,7 @@ public class AbilityFactoryAttach {
                     }
                 }
 
-                final Object o = GuiUtils.getChoice(source + " - Select a player to attach to.", players.toArray());
+                final Object o = GuiUtils.chooseOne(source + " - Select a player to attach to.", players);
                 if (o instanceof Player) {
                     AbilityFactoryAttach.handleAura(source, (Player) o, false);
                     //source.enchantEntity((Player) o);
@@ -1223,7 +1223,7 @@ public class AbilityFactoryAttach {
                 CardList list = AllZoneUtil.getCardsIn(tgt.getZone());
                 list = list.getValidCards(tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
-                final Object o = GuiUtils.getChoice(source + " - Select a card to attach to.", list.toArray());
+                final Object o = GuiUtils.chooseOne(source + " - Select a card to attach to.", list.toArray());
                 if (o instanceof Card) {
                     AbilityFactoryAttach.handleAura(source, (Card) o, gainControl);
                     //source.enchantEntity((Card) o);

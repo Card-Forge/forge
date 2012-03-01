@@ -417,7 +417,7 @@ public class TargetSelection {
             // is there a more elegant way of doing this?
             choicesWithDone.add(dummy);
         }
-        final Object check = GuiUtils.getChoiceOptional(message, choicesWithDone.toArray());
+        final Object check = GuiUtils.chooseOneOrNone(message, choicesWithDone.toArray());
         if (check != null) {
             final Card c = (Card) check;
             if (c.equals(dummy)) {
@@ -460,7 +460,7 @@ public class TargetSelection {
         if (choices.length == 0) {
             select.setCancel(true);
         } else {
-            final String madeChoice = GuiUtils.getChoiceOptional(message, choices);
+            final String madeChoice = GuiUtils.chooseOneOrNone(message, choices);
 
             if (madeChoice != null) {
                 tgt.addTarget(map.get(madeChoice));

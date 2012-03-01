@@ -183,7 +183,7 @@ public class InputPayManaCostUtil {
             for (final AbilityMana am : abilities) {
                 ability.put(am.toString(), am);
             }
-            chosen = (AbilityMana) GuiUtils.getChoice("Choose mana ability", abilities.toArray());
+            chosen = GuiUtils.chooseOne("Choose mana ability", abilities);
         }
 
         // save off color needed for use by any mana and reflected mana

@@ -743,7 +743,7 @@ public final class AbilityFactoryCopy {
         if (tgtSpells.size() == 1) {
             chosenSA = tgtSpells.get(0);
         } else if (sa.getActivatingPlayer().isHuman()) {
-            chosenSA = (SpellAbility) GuiUtils.getChoice("Select a spell to copy", tgtSpells.toArray());
+            chosenSA = (SpellAbility) GuiUtils.chooseOne("Select a spell to copy", tgtSpells.toArray());
         } else {
             chosenSA = tgtSpells.get(0);
         }
