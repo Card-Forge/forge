@@ -11127,7 +11127,6 @@ src/main/java/forge/ImageCache.java svneol=native#text/plain
 src/main/java/forge/ImagePreviewPanel.java svneol=native#text/plain
 src/main/java/forge/MagicStack.java svneol=native#text/plain
 src/main/java/forge/Move.java svneol=native#text/plain
-src/main/java/forge/MyButton.java svneol=native#text/plain
 src/main/java/forge/MyObservable.java svneol=native#text/plain
 src/main/java/forge/NameChanger.java svneol=native#text/plain
 src/main/java/forge/Phase.java svneol=native#text/plain

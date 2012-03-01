@@ -2487,8 +2487,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         @Override
                         public boolean addCard(final Card c) {
                             return (c.isEnchantment() && c.hasKeyword("Enchant player")
-                                    && !source.getEnchantingPlayer().hasProtectionFrom(c) && !enchantmentsAttached
-                                    .containsName(c));
+                                    && !source.getEnchantingPlayer().hasProtectionFrom(c) 
+                                    && !enchantmentsAttached.containsName(c));
                         }
                     });
                     final Player player = source.getController();

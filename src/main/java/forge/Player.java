@@ -20,6 +20,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -2483,24 +2484,11 @@ public abstract class Player extends GameEntity {
      * </p>
      */
     public final void sortHandSizeOperations() {
-        if (this.handSizeOperations.size() < 2) {
-            return;
-        }
-
-        int changes = 1;
-
-        while (changes > 0) {
-            changes = 0;
-            for (int i = 1; i < this.handSizeOperations.size(); i++) {
-                if (this.handSizeOperations.get(i).getHsTimeStamp() < this.handSizeOperations.get(i - 1)
-                        .getHsTimeStamp()) {
-                    final HandSizeOp tmp = this.handSizeOperations.get(i);
-                    this.handSizeOperations.set(i, this.handSizeOperations.get(i - 1));
-                    this.handSizeOperations.set(i - 1, tmp);
-                    changes++;
-                }
+        Collections.sort(handSizeOperations, new Comparator<HandSizeOp>() {
+            @Override public int compare(HandSizeOp o1, HandSizeOp o2) {
+                return o1.getHsTimeStamp() - o2.getHsTimeStamp();
             }
-        }
+        });
     }
 
     /**

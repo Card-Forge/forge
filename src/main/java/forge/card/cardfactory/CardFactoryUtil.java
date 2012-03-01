@@ -4510,19 +4510,12 @@ public class CardFactoryUtil {
                 @Override
                 public void execute() {
                     Log.debug("HandSize", "Control changed: " + card.getController());
-                    if (card.getController().isHuman()) {
-                        AllZone.getHumanPlayer().removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        AllZone.getComputerPlayer().addHandSizeOperation(
-                                new HandSizeOp(mode, amount, Integer.parseInt(card.getSVar("HSStamp"))));
-
-                        AllZone.getComputerPlayer().sortHandSizeOperations();
-                    } else if (card.getController().isComputer()) {
-                        AllZone.getComputerPlayer().removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        AllZone.getHumanPlayer().addHandSizeOperation(
-                                new HandSizeOp(mode, amount, Integer.parseInt(card.getSVar("HSStamp"))));
-
-                        AllZone.getHumanPlayer().sortHandSizeOperations();
-                    }
+                    Player oldController = card.getController();
+                    Player newController = oldController.getOpponent();
+                    
+                    oldController.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                    newController.addHandSizeOperation(new HandSizeOp(mode, amount, Integer.parseInt(card.getSVar("HSStamp"))));
+                    newController.sortHandSizeOperations();
                 }
             };
 

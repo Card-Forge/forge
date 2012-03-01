@@ -28,13 +28,13 @@ package forge;
 public class HandSizeOp {
 
     /** The Mode. */
-    private String mode;
+    private final String mode;
 
     /** The hs time stamp. */
-    private int hsTimeStamp;
+    private final int hsTimeStamp;
 
     /** The Amount. */
-    private int amount;
+    private final int amount;
 
     /**
      * <p>
@@ -49,9 +49,9 @@ public class HandSizeOp {
      *            a int.
      */
     public HandSizeOp(final String m, final int a, final int ts) {
-        this.setMode(m);
-        this.setAmount(a);
-        this.setHsTimeStamp(ts);
+        mode = m;
+        amount = a;
+        hsTimeStamp = ts;
     }
 
     /**
@@ -76,16 +76,6 @@ public class HandSizeOp {
     }
 
     /**
-     * Sets the amount.
-     * 
-     * @param amount0
-     *            the amount to set
-     */
-    public void setAmount(final int amount0) {
-        this.amount = amount0;
-    }
-
-    /**
      * Gets the mode.
      * 
      * @return the mode
@@ -95,31 +85,11 @@ public class HandSizeOp {
     }
 
     /**
-     * Sets the mode.
-     * 
-     * @param mode0
-     *            the mode to set
-     */
-    public void setMode(final String mode0) {
-        this.mode = mode0;
-    }
-
-    /**
      * Gets the hs time stamp.
      * 
      * @return the hsTimeStamp
      */
     public int getHsTimeStamp() {
         return this.hsTimeStamp;
-    }
-
-    /**
-     * Sets the hs time stamp.
-     * 
-     * @param hsTimeStamp0
-     *            the hsTimeStamp to set
-     */
-    public void setHsTimeStamp(final int hsTimeStamp0) {
-        this.hsTimeStamp = hsTimeStamp0;
     }
 }
