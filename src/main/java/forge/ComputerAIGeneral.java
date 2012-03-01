@@ -51,35 +51,20 @@ public class ComputerAIGeneral implements Computer {
 
     /**
      * <p>
-     * main1.
+     * main.
      * </p>
      */
     @Override
-    public final void main1() {
+    public final void main() {
         ComputerUtil.chooseLandsToPlay();
 
         if (AllZone.getStack().size() == 0) {
-            this.playCards(Constant.Phase.MAIN1);
+            this.playCards();
         } else {
             this.stackResponse();
         }
-    } // main1()
+    } // main()
 
-    /**
-     * <p>
-     * main2.
-     * </p>
-     */
-    @Override
-    public final void main2() {
-        ComputerUtil.chooseLandsToPlay();
-
-        if (AllZone.getStack().size() == 0) {
-            this.playCards(Constant.Phase.MAIN2);
-        } else {
-            this.stackResponse();
-        }
-    }
 
     /**
      * <p>
@@ -89,7 +74,7 @@ public class ComputerAIGeneral implements Computer {
      * @param phase
      *            a {@link java.lang.String} object.
      */
-    private void playCards(final String phase) {
+    private void playCards() {
         final CardList list = getAvailableSpellAbilities();
 
         final boolean nextPhase = ComputerUtil.playSpellAbilities(getSpellAbilities(list));

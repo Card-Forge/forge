@@ -28,10 +28,10 @@ package forge;
 public interface Computer {
     /**
      * <p>
-     * main1.
+     * main.
      * </p>
      */
-    void main1();
+    void main();
 
     /**
      * <p>
@@ -75,13 +75,6 @@ public interface Computer {
      * </p>
      */
     void endOfCombat();
-
-    /**
-     * <p>
-     * main2.
-     * </p>
-     */
-    void main2();
 
     /**
      * <p>

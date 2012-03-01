@@ -1226,7 +1226,7 @@ public class ComputerUtil {
         CardList landList = computer.getCardsIn(Zone.Hand);
         landList = landList.filter(CardListFilter.LANDS);
 
-        final CardList lands = computer.getCardsIn(Zone.Graveyard).getType("Land");
+        final CardList lands = computer.getCardsIn(Zone.Graveyard);
         for (final Card crd : lands) {
             if (crd.isLand() && crd.hasStartOfKeyword("May be played")) {
                 landList.add(crd);

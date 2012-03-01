@@ -95,7 +95,7 @@ public class ComputerAIInput extends Input {
             this.computer.stackNotEmpty();
         } else if (phase.equals(Constant.Phase.MAIN1)) {
             Log.debug("Computer main1");
-            this.computer.main1();
+            this.computer.main();
         } else if (phase.equals(Constant.Phase.COMBAT_BEGIN)) {
             this.computer.beginCombat();
         } else if (phase.equals(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
@@ -108,7 +108,7 @@ public class ComputerAIInput extends Input {
             this.computer.endOfCombat();
         } else if (phase.equals(Constant.Phase.MAIN2)) {
             Log.debug("Computer main2");
-            this.computer.main2();
+            this.computer.main();
         } else {
             this.computer.stackNotEmpty();
         }
