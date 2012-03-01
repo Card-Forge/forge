@@ -171,17 +171,6 @@ public class ComputerAIGeneral implements Computer {
 
     /**
      * <p>
-     * getPossibleCounters.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    private ArrayList<SpellAbility> getPossibleCounters() {
-        return this.getPlayableCounters(this.getAvailableSpellAbilities());
-    }
-
-    /**
-     * <p>
      * getPossibleETBCounters.
      * </p>
      * 
@@ -362,9 +351,9 @@ public class ComputerAIGeneral implements Computer {
      */
     public final void stackResponse() {
         // if top of stack is empty
-        final ArrayList<SpellAbility> sas = this.getSpellAbilities(this.getAvailableSpellAbilities());
+        final CardList cards = getAvailableSpellAbilities();
         if (AllZone.getStack().size() == 0) {
-
+            final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
             boolean pass = (sas.size() == 0)
                     || AllZone.getPhaseHandler().is(Constant.Phase.END_OF_TURN, AllZone.getComputerPlayer());
             if (!pass) { // Each AF should check the phase individually
@@ -386,11 +375,10 @@ public class ComputerAIGeneral implements Computer {
         }
 
         // top of stack is owned by human,
-        ArrayList<SpellAbility> possibleCounters = this.getPossibleCounters();
+        ArrayList<SpellAbility> possibleCounters = getPlayableCounters(cards);
 
         if ((possibleCounters.size() > 0) && ComputerUtil.playCounterSpell(possibleCounters)) {
-            // Responding CounterSpell is on the Stack trying to Counter the
-            // Spell
+            // Responding CounterSpell is on the Stack trying to Counter the Spell
             // If playCounterSpell returns true, a Spell is hitting the Stack
             return;
         }
@@ -402,7 +390,7 @@ public class ComputerAIGeneral implements Computer {
             // AllZone.getPhaseHandler().passPriority();
             return;
         }
-
+        final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
         if (sas.size() > 0) {
             // Spell not Countered
             if (!ComputerUtil.playSpellAbilities(sas)) {
