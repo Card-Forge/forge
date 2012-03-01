@@ -1,0 +1,16 @@
+Name:Clockwork Hydra
+ManaCost:5
+Types:Artifact Creature Hydra
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to target creature or player.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to target creature or player.
+SVar:TrigClockworkRemoveCounter:AB$ RemoveCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBClockworkDamage
+SVar:DBClockworkDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | ConditionCheckSVar$ ClockworkX | ConditionSVarCompare$ GE1 | SubAbility$ DBClockworkCleanup
+A:AB$ PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1  | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:DBClockworkCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:ClockworkX:Count$RememberedSize
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_hydra.jpg
+End
