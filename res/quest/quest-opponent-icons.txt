@@ -183,6 +183,7 @@ http://www.cardforge.org/fpics/questAvatars/The%20Kings%20Contest.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Pied%20Piper.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Spectre.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Thing.jpg
+http://www.cardforge.org/fpics/questAvatars/The%20Torpor%20Orb.jpg
 http://www.cardforge.org/fpics/questAvatars/Tom%20Bombadil.jpg
 http://www.cardforge.org/fpics/questAvatars/Totoro.jpg
 http://www.cardforge.org/fpics/questAvatars/Treebeard.jpg
