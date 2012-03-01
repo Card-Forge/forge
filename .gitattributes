@@ -878,7 +878,6 @@ res/cardsfolder/b/blockbuster.txt svneol=native#text/plain
 res/cardsfolder/b/blood_celebrant.txt svneol=native#text/plain
 res/cardsfolder/b/blood_crypt.txt svneol=native#text/plain
 res/cardsfolder/b/blood_cultist.txt svneol=native#text/plain
-res/cardsfolder/b/blood_feud.txt -text svneol=unset#text/plain
 res/cardsfolder/b/blood_frenzy.txt svneol=native#text/plain
 res/cardsfolder/b/blood_hound.txt svneol=native#text/plain
 res/cardsfolder/b/blood_knight.txt svneol=native#text/plain
