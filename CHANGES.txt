@@ -649,6 +649,21 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Converted Zur the Enchanter to script.
 - Fixed Nezumi Shortfang.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the canPlay function of the Morph ability.
+- Removed forcing of RememberSacrificed from AF Sacrifice.
+- Removed some duplicate AI code.
+- More cleanup in ComputerAIGeneral.
+- Added the deck: Edna Krabappel 3.
+- Fixed Talara's Battalion.
+- Corrected three cards with CantBeCast abilities.
+- Removed Blood Feud.
+- GuiUtils.getChoice renamed to clear and simple names
+- added possibility to pass List<T> as options (to avoid useless list -> array -> list conversions)
+- Added avatar support to individual skins.
+- Fixed dev mode tab display.
+- Removed the "awful" and "shocking" method-which-shall-not-be-named.
+- Updated mouse event handling for match UI.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -848,9 +863,13 @@ Gather Specimens
 Hellcarver Demon
 Chandra Ablaze
 Vebulid
-Blood Feud
 Dementia Sliver
 Curse of the Cabal
+Clockwork Hydra
+War Barge
+Void
+Bala Ged Thief
+Thieving Sprite
 
 
 end
