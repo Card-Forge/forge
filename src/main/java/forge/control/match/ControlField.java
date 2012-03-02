@@ -468,7 +468,7 @@ public class ControlField {
                         }
                     }
 
-                    final CardList att = new CardList(AllZone.getCombat().getAttackers());
+                    final CardList att = AllZone.getCombat().getAttackerList();
                     if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                             && (input instanceof InputAttack)) {
                         final arcane.ui.CardPanel cardPanel = ControlField.this.view.getTabletop().getCardPanel(

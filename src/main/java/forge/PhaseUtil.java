@@ -264,8 +264,7 @@ public class PhaseUtil {
      */
     public static void handleDeclareAttackers() {
         PhaseUtil.verifyCombat();
-        final CardList list = new CardList();
-        list.addAll(AllZone.getCombat().getAttackers());
+        final CardList list = AllZone.getCombat().getAttackerList();
 
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player
@@ -284,8 +283,7 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleAttackingTriggers() {
-        final CardList list = new CardList();
-        list.addAll(AllZone.getCombat().getAttackers());
+        final CardList list = AllZone.getCombat().getAttackerList();
         AllZone.getStack().freezeStack();
         // Then run other Attacker bonuses
         // check for exalted:
@@ -337,8 +335,7 @@ public class PhaseUtil {
             }
         });
 
-        final CardList attList = new CardList();
-        attList.addAll(AllZone.getCombat().getAttackers());
+        final CardList attList = AllZone.getCombat().getAttackerList();
 
         CombatUtil.checkDeclareBlockers(list);
 

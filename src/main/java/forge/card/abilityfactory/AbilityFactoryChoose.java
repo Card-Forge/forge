@@ -694,8 +694,8 @@ public final class AbilityFactoryChoose {
                             chosen = CardFactoryUtil.getMostProminentColor(list);
                         }
                         else if (logic.equals("MostProminentAttackers")) {
-                            chosen = CardFactoryUtil.getMostProminentColor(new CardList(AllZone.getCombat()
-                                    .getAttackers()));
+                            chosen = CardFactoryUtil.getMostProminentColor(AllZone.getCombat()
+                                    .getAttackerList());
                         }
                     }
                     if (chosen.equals("")) {

@@ -392,7 +392,7 @@ public class CombatUtil {
     public static boolean finishedMandatoryBlocks(final Combat combat) {
 
         final CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        final CardList attackers = new CardList(combat.getAttackers());
+        final CardList attackers = combat.getAttackerList();
 
         // if a creature does not block but should, return false
         for (final Card blocker : blockers) {
@@ -455,7 +455,7 @@ public class CombatUtil {
             return false;
         }
 
-        final CardList attackers = new CardList(combat.getAttackers());
+        final CardList attackers = combat.getAttackerList();
         final CardList attackersWithLure = new CardList();
         for (final Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
@@ -2584,7 +2584,7 @@ public class CombatUtil {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", c);
-        final CardList otherAttackers = new CardList(AllZone.getCombat().getAttackers());
+        final CardList otherAttackers = AllZone.getCombat().getAttackerList();
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
         runParams.put("Attacked", AllZone.getCombat().getDefenderByAttacker(c));

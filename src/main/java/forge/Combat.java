@@ -297,7 +297,7 @@ public class Combat {
      */
     public final void setDefendingDamage() {
         this.defendingDamageMap.clear();
-        final CardList att = new CardList(this.getAttackers());
+        final CardList att = this.getAttackerList();
         // sum unblocked attackers' power
         for (int i = 0; i < att.size(); i++) {
             if (!this.isBlocked(att.get(i))
@@ -326,7 +326,7 @@ public class Combat {
     public final boolean setDefendingFirstStrikeDamage() {
         boolean needsFirstStrike = false;
         this.defendingDamageMap.clear();
-        final CardList att = new CardList(this.getAttackers());
+        final CardList att = this.getAttackerList();
         // sum unblocked attackers' power
         for (int i = 0; i < att.size(); i++) {
             if (!this.isBlocked(att.get(i))
@@ -483,6 +483,17 @@ public class Combat {
 
     /**
      * <p>
+     * getAttackerList.
+     * </p>
+     * 
+     * @return an array of {@link forge.Card} objects.
+     */
+    public final CardList getAttackerList() {
+        return new CardList(this.map.keySet());
+    } // getAttackers()
+
+    /**
+     * <p>
      * isBlocked.
      * </p>
      * 
@@ -517,7 +528,7 @@ public class Combat {
     public final void resetBlockers() {
         this.reset();
 
-        final CardList att = new CardList(this.getAttackers());
+        final CardList att = this.getAttackerList();
         for (int i = 0; i < att.size(); i++) {
             this.addAttacker(att.get(i));
         }
@@ -531,7 +542,7 @@ public class Combat {
      * @return a {@link forge.CardList} object.
      */
     public final CardList getAllBlockers() {
-        final CardList att = new CardList(this.getAttackers());
+        final CardList att = this.getAttackerList();
         final CardList block = new CardList();
 
         for (int i = 0; i < att.size(); i++) {
@@ -568,7 +579,7 @@ public class Combat {
      * @return a {@link forge.Card} object.
      */
     public final Card getAttackerBlockedBy(final Card blocker) {
-        final CardList att = new CardList(this.getAttackers());
+        final CardList att = this.getAttackerList();
 
         for (int i = 0; i < att.size(); i++) {
             if (this.getBlockers(att.get(i)).contains(blocker)) {
@@ -602,7 +613,7 @@ public class Combat {
      */
     public final void removeFromCombat(final Card c) {
         // is card an attacker?
-        final CardList att = new CardList(this.getAttackers());
+        final CardList att = this.getAttackerList();
         if (att.contains(c)) {
             this.map.remove(c);
             this.attackerToDefender.remove(c);
@@ -644,7 +655,7 @@ public class Combat {
      * </p>
      */
     public final void setUnblocked() {
-        final CardList attacking = new CardList(this.getAttackers());
+        final CardList attacking = this.getAttackerList();
 
         for (final Card attacker : attacking) {
             final CardList block = this.getBlockers(attacker);
@@ -676,7 +687,7 @@ public class Combat {
         boolean needFirstStrike = this.setDefendingFirstStrikeDamage();
 
         CardList block;
-        final CardList attacking = new CardList(this.getAttackers());
+        final CardList attacking = this.getAttackerList();
 
         for (int i = 0; i < attacking.size(); i++) {
 
@@ -731,7 +742,7 @@ public class Combat {
         this.setDefendingDamage();
 
         CardList block;
-        final CardList attacking = new CardList(this.getAttackers());
+        final CardList attacking = this.getAttackerList();
         for (int i = 0; i < attacking.size(); i++) {
 
             final Card attacker = attacking.get(i);

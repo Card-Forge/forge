@@ -305,7 +305,7 @@ public class AbilityFactoryPump {
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
                 return false;
             }
-        } else if (keyword.startsWith("Double Strike")) {
+        } else if (keyword.equals("Double Strike")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || card.getNetCombatDamage() <= 0
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
@@ -316,7 +316,7 @@ public class AbilityFactoryPump {
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {
                 return false;
             }
-        } else if (keyword.startsWith("Infect")) {
+        } else if (keyword.equals("Infect")) {
             if (card.getNetCombatDamage() <= 0) {
                 return false;
             }
@@ -328,28 +328,35 @@ public class AbilityFactoryPump {
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
-        } else if (keyword.startsWith("Wither")) {
+        } else if (keyword.endsWith("Wither")) {
             if (card.getNetCombatDamage() <= 0) {
                 return false;
             }
             if (card.isBlocking()) {
                 return true;
             }
-            if (card.isAttacking() && card.isBlocked()){
+            if (card.isAttacking() && card.isBlocked()) {
                 return true;
             }
             return false;
-        } else if (keyword.startsWith("Lifelink")) {
+        } else if (keyword.equals("Lifelink")) {
             if (card.getNetCombatDamage() <= 0) {
                 return false;
             }
             if (!card.isBlocking() && !card.isAttacking()) {
                 return false;
             }
-        } else if (keyword.startsWith("Vigilance")) {
+        } else if (keyword.equals("Vigilance")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)) {
+                return false;
+            }
+        } else if (keyword.equals("Reach")) {
+            if (ph.isPlayerTurn(computer)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+                    || !AllZone.getCombat().getAttackerList().getKeyword("Flying").isEmpty()
+                    || !card.hasKeyword("Flying")) {
                 return false;
             }
         } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
