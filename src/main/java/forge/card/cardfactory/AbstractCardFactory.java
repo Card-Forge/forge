@@ -1453,7 +1453,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Triangle of War")) {
+        /*else if (cardName.equals("Triangle of War")) {
 
             final Target t2 = new Target(card, "Select target creature an opponent controls",
                     "Creature.YouDontCtrl".split(","));
@@ -1511,7 +1511,7 @@ public abstract class AbstractCardFactory implements CardFactoryInterface {
             sbStack.append(card).append(" - Each creature deals damage equal to its power to the other.");
             ability.setStackDescription(sbStack.toString());
             card.addSpellAbility(ability);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Copy Artifact") || cardName.equals("Sculpting Steel")) {
