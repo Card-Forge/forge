@@ -1,8 +1,8 @@
-Forge Beta: 0#-##-2012 ver 1.2.# rev #####
+Forge Beta: 03-02-2012 ver 1.2.4 rev 14490
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-10### cards in total.
+10382 cards in total.
 
 
 We have reached a new milestone. All Modern legal sets are at least 80% complete and all Extended legal sets are at least 90% complete.
@@ -664,212 +664,231 @@ Note: waiting pre-game management debugging for quest event deck availability.
 - Removed the "awful" and "shocking" method-which-shall-not-be-named.
 - Updated mouse event handling for match UI.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Agetian
+ArsenalNut
+Corwin72
+Dave
+Doublestrike
+Friar Sol
+Hellfish
+Jeff Wadsworth
+Marc
+Max mtg
+NicoAndCo
+Rob Cashwalker
+Roujin
+Slapshot5
+Sloth
+Squee1968
+Timmermac
+WompWomp
+Chris H
 
 
 Added many cards, including:
 
-Dragon Wings
-Dragon Shadow
-Veiling Oddity
-Izzet Guildmage
-Fiend of the Shadows
-Serendib Djinn
-Thada Adel, Acquisitor
-Knacksaw Clique
-Ornate Kanzashi
-Patriarch's Desire
-Graceful Antelope
-Sins of the Past
-Shifting Sky
-Alloy Golem
-Keeper of Progenitus
-Banewasp Affliction
-Druidic Satchel
-Inquisitors Flail
-Puresteel Paladin
-Fatigue
-Brine Elemental
-Gilded Light
-Shisato, Whispering Hunter
-Curse of Echoes
-Voyager Staff
-Dungeon Geists
-Rathi Dragon
-Ferropede
-Hex Parasite
-Medicine Runner
-Spinal Parasite
-Jace's Archivist
-Increasing Vengeance
-Mold Demon
-Primeval Force
-Plant Elemental
-Rogue Elephant
-Scythe Tiger
-Vulshok War Boar
-Drake Familiar
-Wheel of Sun and Moon
 Aegis Angel
-Immortal Coil
-Demoralize
-Heartbeat of Spring
-Realm Razer
-Sigil of Distinction
-Ivory Gargoyle
-Trophy Hunter
-Gaea's Balance
-Gerrard Capashen
-Darigaaz the Igniter
-Gabriel Angelfire
-Molten Firebird
-Lim-Dul's Paladin
-Hidden Horror
-Mercenary Knight
-Fallow Wurm
-Thundering Wurm
-Avatar of Discord
-Deathcoil Wurm
-Lone Wolf
-Thorn Elemental
-Wolf Pack
-Pride of Lions
-Rhox
-Spinebiter
-Entrails Feaster
-Blinding Angel
-Moment of Silence
-Guided Passage
-Notorious Throng
-Harvest Wurm
-Living Tsunami
-Waterspout Djinn
-Anurid Scavenger
-Barrow Ghoul
-Mindblaze
-Pyromancer Ascension
-Putrid Warrior
-Suppress
-Endless Wurm
-Lithophage
-Vapor Snare
-Sacred Mesa
-Soulblast
-Aven Mimeomancer
-Etherwrought Page
-Intimidation Bolt
-Spellbound Dragon
-Thought Hemorrhage
-Unscythe, Killer of Kings
-Soul Nova
-Martyrs of Korlis
-Vengeful Rebirth
-Sundial of the Infinite
-Time Stop
-Ovinomancer
-Tundra Kavu
-Tetravus
-Stonehorn Dignitary
-Neko Te
-Custody Battle
-Ogre Marauder
-Spirit Flare
-Pitchstone Wall
-Transcendence
-Violent Eruption
-Elder Spawn
-Dark Supplicant
-Weaver of Lies
-Dermoplasm
-Opal Titan
-Insist
-Overmaster
-Glissa Sunseeker
-Lurking Evil
-Lifeline
-Hunter's Insight
-Hidden Stag
-Flesh Reaver
-Disorder
-Solitary Confinement
-Sphinx of Uthuun
-Death or Glory
-Diabolic Servitude
-Breakthrough
-Wake of Destruction
+Alloy Golem
 Angel's Trumpet
-Memory Plunder
-Wrexial, the Risen Deep
-Galvanoth
-Toshiro Umezawa
-Sisters of Stone Death
-Jaddi Lifestrider
-Maelstrom Archangel
-Mindleech Mass
-Counterlash
-Stomping Slabs
-Scrying Glass
-Opal Avenger
-Private Research
-Lurking Jackals
-Private Research
-Lurking Jackals
-Impatience
-Scent of Nightshade
-Body Snatcher
-Jokulmorder
-Tornado Elemental
 Animal Magnetism
-Saffi Eriksdotter
-Psychotic Episode
-Plague Sliver
-Paradise Plume
-Descendant of Masumaro
-Coffin Queen
-Phyrexian Slayer
-Murmurs from Beyond
-Govern the Guildless
-Paladin of Prahv
-Thran Weaponry
-Infernal Tutor
-Blackmail
-Mire's Toll
-Ib Halfheart, Goblin Tactician
-Glyph of Life
-The Wretched
-Opaline Sliver
-Knowledge Vault
-Omen Machine
-Prince of Thralls
-Auriok Survivors
-Orim's Chant
-Writ of Passage
-Rakdos Riteknife
-Needle Drop
-Gaze of the Gorgon
-Heretic's Punishment
-Gaze of the Gorgon
-Venomous Breath
-Glyph of Doom
-Djinn of Wishes
+Anurid Scavenger
 Argent Sphinx
-Martyr's Bond
 Auratouched Mage
-Gather Specimens
-Hellcarver Demon
-Chandra Ablaze
-Vebulid
-Dementia Sliver
-Curse of the Cabal
-Clockwork Hydra
-War Barge
-Void
+Auriok Survivors
+Avatar of Discord
+Aven Mimeomancer
 Bala Ged Thief
+Banewasp Affliction
+Barrow Ghoul
+Blackmail
+Blinding Angel
+Body Snatcher
+Breakthrough
+Brine Elemental
+Chandra Ablaze
+Clockwork Hydra
+Coffin Queen
+Counterlash
+Curse of Echoes
+Curse of the Cabal
+Custody Battle
+Darigaaz the Igniter
+Dark Supplicant
+Death or Glory
+Deathcoil Wurm
+Dementia Sliver
+Demoralize
+Dermoplasm
+Descendant of Masumaro
+Diabolic Servitude
+Disorder
+Djinn of Wishes
+Dragon Shadow
+Dragon Wings
+Drake Familiar
+Druidic Satchel
+Dungeon Geists
+Elder Spawn
+Endless Wurm
+Entrails Feaster
+Etherwrought Page
+Fallow Wurm
+Fatigue
+Ferropede
+Fiend of the Shadows
+Flesh Reaver
+Gabriel Angelfire
+Gaea's Balance
+Galvanoth
+Gather Specimens
+Gaze of the Gorgon
+Gaze of the Gorgon
+Gerrard Capashen
+Gilded Light
+Glissa Sunseeker
+Glyph of Doom
+Glyph of Life
+Govern the Guildless
+Graceful Antelope
+Guided Passage
+Harvest Wurm
+Heartbeat of Spring
+Hellcarver Demon
+Heretic's Punishment
+Hex Parasite
+Hidden Horror
+Hidden Stag
+Hunter's Insight
+Ib Halfheart, Goblin Tactician
+Immortal Coil
+Impatience
+Increasing Vengeance
+Infernal Tutor
+Inquisitors Flail
+Insist
+Intimidation Bolt
+Ivory Gargoyle
+Izzet Guildmage
+Jace's Archivist
+Jaddi Lifestrider
+Jokulmorder
+Keeper of Progenitus
+Knacksaw Clique
+Knowledge Vault
+Lifeline
+Lim-Dul's Paladin
+Lithophage
+Living Tsunami
+Lone Wolf
+Lurking Evil
+Lurking Jackals
+Lurking Jackals
+Maelstrom Archangel
+Martyr's Bond
+Martyrs of Korlis
+Medicine Runner
+Memory Plunder
+Mercenary Knight
+Mindblaze
+Mindleech Mass
+Mire's Toll
+Mold Demon
+Molten Firebird
+Moment of Silence
+Murmurs from Beyond
+Needle Drop
+Neko Te
+Notorious Throng
+Ogre Marauder
+Omen Machine
+Opal Avenger
+Opal Titan
+Opaline Sliver
+Orim's Chant
+Ornate Kanzashi
+Overmaster
+Ovinomancer
+Paladin of Prahv
+Paradise Plume
+Patriarch's Desire
+Phyrexian Slayer
+Pitchstone Wall
+Plague Sliver
+Plant Elemental
+Pride of Lions
+Primeval Force
+Prince of Thralls
+Private Research
+Private Research
+Psychotic Episode
+Puresteel Paladin
+Putrid Warrior
+Pyromancer Ascension
+Rakdos Riteknife
+Rathi Dragon
+Realm Razer
+Rhox
+Rogue Elephant
+Sacred Mesa
+Saffi Eriksdotter
+Scent of Nightshade
+Scrying Glass
+Scythe Tiger
+Serendib Djinn
+Shifting Sky
+Shisato, Whispering Hunter
+Sigil of Distinction
+Sins of the Past
+Sisters of Stone Death
+Solitary Confinement
+Soul Nova
+Soulblast
+Spellbound Dragon
+Sphinx of Uthuun
+Spinal Parasite
+Spinebiter
+Spirit Flare
+Stomping Slabs
+Stonehorn Dignitary
+Sundial of the Infinite
+Suppress
+Tetravus
+Thada Adel, Acquisitor
+The Wretched
 Thieving Sprite
+Thorn Elemental
+Thought Hemorrhage
+Thran Weaponry
+Thundering Wurm
+Time Stop
+Tornado Elemental
+Toshiro Umezawa
+Transcendence
+Trophy Hunter
+Tundra Kavu
+Unscythe, Killer of Kings
+Vapor Snare
+Vebulid
+Veiling Oddity
+Vengeful Rebirth
+Venomous Breath
+Violent Eruption
+Void
+Voyager Staff
+Vulshok War Boar
+Wake of Destruction
+War Barge
+Waterspout Djinn
+Weaver of Lies
+Wheel of Sun and Moon
+Wolf Pack
+Wrexial, the Risen Deep
+Writ of Passage
 
 
 end
