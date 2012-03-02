@@ -48,7 +48,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.CardList;
 import forge.CardUtil;
-import forge.Constant;
 import forge.Constant.Zone;
 import forge.GameLog;
 import forge.MagicStack;
@@ -143,10 +142,7 @@ public class ViewTabber extends JPanel {
         this.pnlDev.setOpaque(false);
         this.pnlDev.setLayout(new MigLayout(constraints));
         this.pnlDev.setToolTipText("Developer Mode");
-
-        if (Constant.Runtime.DEV_MODE[0]) {
-            this.panelList.add(this.pnlDev);
-        }
+        this.panelList.add(this.pnlDev);
 
         // Populate the various panels in the tabber.
         this.populatePnlDev();
@@ -396,12 +392,6 @@ public class ViewTabber extends JPanel {
         jsp.getViewport().setOpaque(false);
 
         this.pnlConsole.add(jsp, "w 95%!, gapleft 3%, gaptop 1%");
-
-        /*
-         * We do not need to keep track for now. In the future, we may need this
-         * if we change how the log is displayed.
-         */
-        // consoleTARs.add(tar);
     }
 
     /**

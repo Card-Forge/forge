@@ -126,7 +126,7 @@ public class FVerticalTabPanel extends JPanel {
             }
 
             this.add(tab, "w " + pctTabW + "%!, h " + pctTabH + "%!,"
-                    + " gap 0 0 " + pctSpacing + " " + pctSpacing + "%!");
+                    + " gap 0 0 " + pctSpacing + " " + pctSpacing + "%!, ay center");
             this.allVTabs.add(tab);
 
             // Add card to content panel

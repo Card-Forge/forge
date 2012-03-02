@@ -346,6 +346,13 @@ public class GameNew {
     private static void newMatchCleanup() {
         if (Singletons.getModel().getMatchState().getGamesPlayedCount() != 0) { return; }
 
+        // Toggle dev mode panel; should probably be moved somehwere else after
+        // match UI refactor.
+        if (Constant.Runtime.DEV_MODE[0]) { Singletons.getView().getViewMatch()
+            .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(true); }
+        else { Singletons.getView().getViewMatch()
+            .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(false); }
+
         AllZone.getInputControl().resetInput();
         Singletons.getModel().getMatchState().reset();
         Singletons.getModel().loadPrefs();
