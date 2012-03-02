@@ -2,6 +2,7 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 
@@ -26,6 +27,8 @@ import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.util.MyRandom;
+import forge.view.match.ViewField;
+import forge.view.toolbox.FLabel;
 
 /** 
  * Methods for all things related to starting a new game.
@@ -346,12 +349,27 @@ public class GameNew {
     private static void newMatchCleanup() {
         if (Singletons.getModel().getMatchState().getGamesPlayedCount() != 0) { return; }
 
-        // Toggle dev mode panel; should probably be moved somehwere else after
-        // match UI refactor.
-        if (Constant.Runtime.DEV_MODE[0]) { Singletons.getView().getViewMatch()
-            .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(true); }
-        else { Singletons.getView().getViewMatch()
-            .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(false); }
+        // Update mouse events in case of dev mode toggle
+        if (Constant.Runtime.DEV_MODE[0]) {
+            Singletons.getView().getViewMatch()
+                .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(true);
+            final List<ViewField> allFields = Singletons.getView().getViewMatch().getFieldViews();
+
+            for (final ViewField field : allFields) {
+                ((FLabel) field.getLblHand()).setHoverable(true);
+                ((FLabel) field.getLblLibrary()).setHoverable(true);
+            }
+        }
+        else {
+            Singletons.getView().getViewMatch()
+                .getViewTabber().getVtpTabber().getAllVTabs().get(4).setVisible(false);
+            final List<ViewField> allFields = Singletons.getView().getViewMatch().getFieldViews();
+
+            for (final ViewField field : allFields) {
+                ((FLabel) field.getLblHand()).setHoverable(false);
+                ((FLabel) field.getLblLibrary()).setHoverable(false);
+            }
+        }
 
         AllZone.getInputControl().resetInput();
         Singletons.getModel().getMatchState().reset();

@@ -152,16 +152,8 @@ public class ControlField {
         this.view.getLblExile().addMouseListener(madExiled);
 
         // Library card list button
-        if (Constant.Runtime.DEV_MODE[0]) {
-            this.view.getLblLibrary().removeMouseListener(madLibrary);
-            this.view.getLblLibrary().addMouseListener(madLibrary);
-
-            // Hand button
-            ((FLabel) this.view.getLblHand()).setHoverable(true);
-        }
-        else {
-            ((FLabel) this.view.getLblLibrary()).setHoverable(false);
-        }
+        this.view.getLblLibrary().removeMouseListener(madLibrary);
+        this.view.getLblLibrary().addMouseListener(madLibrary);
 
         this.view.getLblHand().removeMouseListener(madHand);
         this.view.getLblHand().addMouseListener(madHand);
@@ -387,6 +379,8 @@ public class ControlField {
         madLibrary = new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
+                if (!Constant.Runtime.DEV_MODE[0]) { return; }
+
                 if (!ControlField.this.player.isComputer()) {
                     new ZoneAction(ControlField.this.player.getZone(Zone.Library), HumanLibrary.BASE)
                     .actionPerformed(null);
