@@ -344,8 +344,9 @@ public enum FSkin {
     private static int[] tempCoords;
 
     /**
-     * FSkin constructor, using skin name. Generates custom skin settings,
-     * fonts, and backgrounds.
+     * Loads a "light" version of FSkin, just enough for the splash screen:
+     * skin name. Generates custom skin settings, fonts, and backgrounds.
+     * 
      * 
      * @param skinName
      *            the skin name
@@ -435,7 +436,9 @@ public enum FSkin {
         final File f1 = new File(DEFAULT_DIR + FILE_ICON_SPRITE);
         final File f2 = new File(preferredDir + FILE_ICON_SPRITE);
         final File f3 = new File(DEFAULT_DIR + FILE_FOIL_SPRITE);
-        final File f4 = new File(DEFAULT_DIR + FILE_AVATAR_SPRITE);
+
+        File f4 = new File(preferredDir + FILE_AVATAR_SPRITE);
+        if (!f4.exists()) { f4 = new File(DEFAULT_DIR + FILE_AVATAR_SPRITE); }
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
