@@ -41,7 +41,6 @@ public class ComputerUtilAttack {
     // possible attackers and blockers
     private final CardList attackers;
     private final CardList blockers;
-    private CardList playerCreatures;
 
     private final Random random = MyRandom.getRandom();
     private final int randomInt = this.random.nextInt();
@@ -68,8 +67,6 @@ public class ComputerUtilAttack {
 
         this.computerList = new CardList(possibleAttackers);
         this.computerList = this.computerList.getType("Creature");
-        this.playerCreatures = new CardList(possibleBlockers);
-        this.playerCreatures = this.playerCreatures.getType("Creature");
 
         this.attackers = this.getPossibleAttackers(possibleAttackers);
         this.blockers = this.getPossibleBlockers(possibleBlockers, this.attackers);
@@ -421,11 +418,24 @@ public class ComputerUtilAttack {
 
         combat.setDefenders(AllZone.getCombat().getDefenders());
 
+        if (this.attackers.isEmpty()) {
+            return combat;
+        }
+
         final boolean bAssault = this.doAssault();
         // Determine who will be attacked
         this.chooseDefender(combat, bAssault);
-
         CardList attackersLeft = new CardList(this.attackers);
+        if (bAssault) {
+            System.out.println("Assault");
+            CardListUtil.sortAttack(attackersLeft);
+            for (int i = 0; i < attackersLeft.size(); i++) {
+                if (CombatUtil.canAttack(attackersLeft.get(i), combat)) {
+                    combat.addAttacker(attackersLeft.get(i));
+                }
+            }
+            return combat;
+        }
 
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
@@ -440,9 +450,33 @@ public class ComputerUtilAttack {
                 attackersLeft.remove(attacker);
             }
         }
+        if (attackersLeft.isEmpty()) {
+            return combat;
+        }
+        // Exalted
+        if ((combat.getAttackers().isEmpty())
+                && ((this.countExaltedBonus(AllZone.getComputerPlayer()) >= 3)
+                        || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
+                        || (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2)
+                        || ((AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1)
+                                && AllZone.getPhaseHandler().isFirstCombat()))) {
+            int biggest = 0;
+            Card att = null;
+            for (int i = 0; i < attackersLeft.size(); i++) {
+                if (this.getAttack(attackersLeft.get(i)) > biggest) {
+                    biggest = this.getAttack(attackersLeft.get(i));
+                    att = attackersLeft.get(i);
+                }
+            }
+            if ((att != null) && CombatUtil.canAttack(att, combat)) {
+                combat.addAttacker(att);
+            }
+            System.out.println("Exalted");
+            return combat;
+        }
 
         // *******************
-        // start of edits
+        // Evaluate the creature forces
         // *******************
 
         int computerForces = 0;
@@ -453,7 +487,7 @@ public class ComputerUtilAttack {
         final CardList nextTurnAttackers = new CardList();
         int candidateCounterAttackDamage = 0;
         // int candidateTotalBlockDamage = 0;
-        for (final Card pCard : this.playerCreatures) {
+        for (final Card pCard : this.humanList) {
 
             // if the creature can attack next turn add it to counter attackers
             // list
@@ -632,64 +666,30 @@ public class ComputerUtilAttack {
         System.out.println(String.valueOf(this.aiAggression) + " = ai aggression");
 
         // ****************
-        // End of edits
+        // Evaluation the end
         // ****************
 
-        // Exalted
-        if ((combat.getAttackers().isEmpty())
-                && ((this.countExaltedBonus(AllZone.getComputerPlayer()) >= 3)
-                        || AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getComputerPlayer())
-                        || (AllZone.getComputerPlayer().getCardsIn(Zone.Battlefield, "Battlegrace Angel").size() >= 2) || ((AllZone
-                        .getComputerPlayer().getCardsIn(Zone.Battlefield, "Finest Hour").size() >= 1) && AllZone
-                        .getPhaseHandler().isFirstCombat())) && !bAssault) {
-            int biggest = 0;
-            Card att = null;
-            for (int i = 0; i < attackersLeft.size(); i++) {
-                if (this.getAttack(attackersLeft.get(i)) > biggest) {
-                    biggest = this.getAttack(attackersLeft.get(i));
-                    att = attackersLeft.get(i);
-                }
-            }
-            if ((att != null) && CombatUtil.canAttack(att, combat)) {
-                combat.addAttacker(att);
+        System.out.println("Normal attack");
+
+        attackersLeft = this.notNeededAsBlockers(attackersLeft, combat);
+        System.out.println(attackersLeft.size());
+
+        attackersLeft = this.sortAttackers(attackersLeft);
+
+        for (int i = 0; i < attackersLeft.size(); i++) {
+            final Card attacker = attackersLeft.get(i);
+            int totalFirstStrikeBlockPower = 0;
+            if (!attacker.hasFirstStrike() && !attacker.hasDoubleStrike()) {
+                totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attacker,
+                        AllZone.getHumanPlayer());
             }
 
-            System.out.println("Exalted");
+            if (this.shouldAttack(attacker, this.blockers, combat)
+                    && ((totalFirstStrikeBlockPower < attacker.getKillDamage()) || (this.aiAggression == 5))
+                    && CombatUtil.canAttack(attacker, combat)) {
+                combat.addAttacker(attacker);
+            }
         }
-
-        // do assault (all creatures attack) if the computer would win the game
-        // or if the computer has 4 creatures and the player has 1
-        else if (bAssault) {
-            System.out.println("Assault");
-            CardListUtil.sortAttack(attackersLeft);
-            for (int i = 0; i < attackersLeft.size(); i++) {
-                if (CombatUtil.canAttack(attackersLeft.get(i), combat)) {
-                    combat.addAttacker(attackersLeft.get(i));
-                }
-            }
-        } else {
-            System.out.println("Normal attack");
-
-            attackersLeft = this.notNeededAsBlockers(attackersLeft, combat);
-            System.out.println(attackersLeft.size());
-
-            attackersLeft = this.sortAttackers(attackersLeft);
-
-            for (int i = 0; i < attackersLeft.size(); i++) {
-                final Card attacker = attackersLeft.get(i);
-                int totalFirstStrikeBlockPower = 0;
-                if (!attacker.hasFirstStrike() && !attacker.hasDoubleStrike()) {
-                    totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attacker,
-                            AllZone.getHumanPlayer());
-                }
-
-                if (this.shouldAttack(attacker, this.blockers, combat)
-                        && ((totalFirstStrikeBlockPower < attacker.getKillDamage()) || (this.aiAggression == 5))
-                        && CombatUtil.canAttack(attacker, combat)) {
-                    combat.addAttacker(attacker);
-                }
-            }
-        } // getAttackers()
 
         return combat;
     } // getAttackers()
