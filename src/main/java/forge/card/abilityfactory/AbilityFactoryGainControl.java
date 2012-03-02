@@ -67,7 +67,7 @@ import forge.card.spellability.Target;
  */
 public class AbilityFactoryGainControl {
 
-    private final Card[] movedCards = new Card[1];
+    private final CardList movedCards = new CardList();
 
     private AbilityFactory af = null;
     private HashMap<String, String> params = null;
@@ -425,7 +425,7 @@ public class AbilityFactoryGainControl {
             final Card tgtC = tgtCards.get(j);
             final Player originalController = tgtC.getController();
 
-            this.movedCards[j] = tgtC;
+            this.movedCards.add(tgtC);
             if (!self) {
                 this.hostCard.addGainControlTarget(tgtC);
             }
@@ -545,7 +545,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public void execute() {
-                final Card c = AbilityFactoryGainControl.this.movedCards[i];
+                final Card c = AbilityFactoryGainControl.this.movedCards.get(i);
                 final Ability ability = new Ability(AbilityFactoryGainControl.this.hostCard, "0") {
                     @Override
                     public void resolve() {
@@ -584,7 +584,7 @@ public class AbilityFactoryGainControl {
      * @return a {@link forge.Command} object.
      */
     private Command getLoseControlCommand(final int i, final Player originalController) {
-        final Card c = this.movedCards[i];
+        final Card c = this.movedCards.get(i);
         final Command loseControl = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
