@@ -21,10 +21,7 @@ Colors:green
 Types:Creature Werewolf
 Text:no text
 PT:4/4
-A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME fights target creature. (Each deals damage equal to its power to the other.)
-SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
-SVar:X:Count$CardPower
-SVar:Y:Targeted$CardPower
+A:AB$ Fight | Cost$ R T | Defined$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME fights target creature. (Each deals damage equal to its power to the other.)
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:Picture1:http://www.wizards.com/global/images/magic/general/nightfall_predator.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/176b.jpg
