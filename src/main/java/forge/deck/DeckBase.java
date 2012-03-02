@@ -139,14 +139,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase> {
      * @return the best file name
      */
     public final String getBestFileName() {
-        final char[] c = this.getName().toCharArray();
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; (i < c.length) && (i < 20); i++) {
-            if (Character.isLetterOrDigit(c[i]) || (c[i] == '-')) {
-                sb.append(c[i]);
-            }
-        }
-        return sb.toString().replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
+        return this.getName().replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
     }
 
 }
