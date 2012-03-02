@@ -784,6 +784,17 @@ public class AbilityFactory {
             }
         }
 
+        else if (this.api.equals("Fight")) {
+            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
+            if (this.isAb) {
+                spellAbility = dd.getAbilityFight();
+            } else if (this.isSp) {
+                spellAbility = dd.getSpellFight();
+            } else if (this.isDb) {
+                spellAbility = dd.getDrawbackFight();
+            }
+        }
+
         else if (this.api.equals("FlipACoin")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryClash.createAbilityFlip(this);
