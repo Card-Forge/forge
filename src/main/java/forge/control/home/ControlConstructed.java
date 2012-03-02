@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,7 +175,7 @@ public class ControlConstructed {
     /** Generates deck from current list selection(s). */
     private Deck generateDeck(final JList lst0, final PlayerType player0) {
         CardList cards = null;
-        final String[] selection = oa2sa(lst0.getSelectedValues());
+        final String[] selection = Arrays.copyOf(lst0.getSelectedValues(), lst0.getSelectedValues().length, String[].class);
         final Deck deck;
 
         // Color deck
@@ -318,7 +319,7 @@ public class ControlConstructed {
             themeNames.add(s);
         }
 
-        return oa2sa(themeNames.toArray());
+        return themeNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     private String[] getCustomNames() {
@@ -328,13 +329,13 @@ public class ControlConstructed {
         final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
         for (final Deck d : allDecks) { customNames.add(d.getName()); }
 
-        return oa2sa(customNames.toArray());
+        return customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     private String[] getEventNames() {
         final List<String> eventNames = new ArrayList<String>();
         final QuestEventManager qm = Singletons.getModel().getQuestEventManager();
-        
+
         for (final QuestEvent e : qm.getAllChallenges()) {
             eventNames.add(e.getEventDeck().getName());
         }
@@ -377,22 +378,5 @@ public class ControlConstructed {
             result = false;
         }
         return result;
-    }
-
-    /**
-     * Exhaustively converts object array to string array.
-     * Probably a much easier way to do this.
-     * 
-     * @param o0 &emsp; Object[]
-     * @return String[]
-     */
-    private String[] oa2sa(final Object[] o0) {
-        final String[] output = new String[o0.length];
-
-        for (int i = 0; i < o0.length; i++) {
-            output[i] = o0[i].toString();
-        }
-
-        return output;
     }
 }
