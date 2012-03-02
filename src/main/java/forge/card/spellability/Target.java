@@ -44,6 +44,7 @@ public class Target {
     private Card srcCard;
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
+    private boolean differentZone = false;
     private TargetChoices choice = null;
 
     /**
@@ -770,5 +771,19 @@ public class Target {
             System.err.println(e);
         }
         return clone;
+    }
+
+    /**
+     * @return the differentZone
+     */
+    public boolean isDifferentZone() {
+        return differentZone;
+    }
+
+    /**
+     * @param different the differentZone to set
+     */
+    public void setDifferentZone(boolean different) {
+        this.differentZone = different;
     }
 }

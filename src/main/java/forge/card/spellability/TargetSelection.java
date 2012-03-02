@@ -285,6 +285,10 @@ public class TargetSelection {
         if (tgt.isSingleZone() && !targeted.isEmpty()) {
             choices = choices.getController(targeted.get(0).getController());
         }
+        // If all cards must be from different zones
+        if (tgt.isDifferentZone() && !targeted.isEmpty()) {
+            choices = choices.getController(targeted.get(0).getController().getOpponent());
+        }
 
         if (zone.contains(Constant.Zone.Battlefield)) {
             AllZone.getInputControl().setInput(this.inputTargetSpecific(choices, true, mandatory, objects));
