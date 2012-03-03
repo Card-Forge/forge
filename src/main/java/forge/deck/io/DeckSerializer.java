@@ -57,8 +57,16 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
      *
      * @param deckDir0 the deck dir0
      */
+    private final boolean moveWronglyNamedDecks;
+    private static final String FILE_EXTENSION = ".dck"; 
+    
     public DeckSerializer(final File deckDir0) {
+        this(deckDir0, false);
+    }
+    
+    public DeckSerializer(final File deckDir0, boolean moveWrongDecks) {
         super(deckDir0, Deck.FN_NAME_SELECTOR);
+        moveWronglyNamedDecks = moveWrongDecks;
     }
 
     /** Constant <code>DCKFileFilter</code>. */
@@ -234,7 +242,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
      * @return a File
      */
     public File makeFileFor(final Deck deck) {
-        return new File(this.getDirectory(), deck.getBestFileName() + ".dck");
+        return new File(this.getDirectory(), deck.getBestFileName() + FILE_EXTENSION );
     }
 
     /*
@@ -245,7 +253,23 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
     @Override
     protected Deck read(final File file) {
         final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(file));
-        return Deck.fromSections(sections, true);
+        Deck result = Deck.fromSections(sections, true);
+
+        if ( moveWronglyNamedDecks ) {
+            adjustFileLocation(file, result);
+        }
+        return result;
+    }
+    
+    private final void adjustFileLocation(File file, Deck result) {
+        if( result == null ) {
+            file.delete();
+        } else {
+            String destFilename = result == null ? null : result.getBestFileName() + FILE_EXTENSION;
+            if ( file.getName() != destFilename ) {
+                file.renameTo( new File( file.getParentFile().getParentFile(), destFilename ) );
+            }
+        }        
     }
 
     /*

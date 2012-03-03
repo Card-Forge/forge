@@ -41,7 +41,7 @@ public class CardCollections {
      * @param file the file
      */
     public CardCollections(final File file) {
-        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "constructed")));
+        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "constructed"), true));
         this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "draft")));
         this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "sealed")));
         this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "cube")));
