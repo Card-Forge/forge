@@ -182,17 +182,6 @@ public enum FControl {
         return Singletons.getView().getViewMatch().getControl();
     }
 
-    /** Gets the home controller.
-     * @return {@link forge.control.home.ControlHomeUI} */
-    public ControlHomeUI getControlHome() {
-        if (getState() != FControl.HOME_SCREEN) {
-            throw new IllegalArgumentException("FControl$getControlHome\n"
-                    + "may only be called while the home UI is showing.");
-        }
-
-        throw new NullPointerException("Fix Me"); //return Singletons.getView().getViewHome().getControl();
-    }
-
     /** 
      * Returns the int reflecting the current state of the top level frame
      * (see field definitions and class methods for details).
