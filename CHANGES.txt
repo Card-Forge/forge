@@ -17,7 +17,23 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Cleared out the changes.txt file, now ready for new material.
+- Cleanup and performance updates in ComputerUtilAttack.
+- Added Combat.getAttackerList() which returns a CardList - replaces Combat.getAttackers in most cases.
+- Little improvement in AF Pump AI.
+- Fixed a bug with the "AllValid" parameter in AF GainControl.
+- fixing file derivation algorithm
+- Added AF Fight.
+- Converted Nightfall Predator to use AF Fight.
+- Added the optional parameter "TargetsFromDifferentZone" (allows only targets with different controllers).
+- Fixed Tormod's Crypt.
+- Converted Triangle of War to script.
+- Fixed Fledgling Osprey and Skyrider Trainee.
+- Fixed Ironclaw Curse.
+- Fixed possible NPE's in findParentsTargetedCard.
+- Converted Insurrection to script.
+- Fixed Damia, Sage of Stone.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -27,7 +43,12 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added many cards, including:
 
-
+Homeward Path
+Brand
+Aura Thief
+Blood Feud
+Prey Upon
+Karrthus, Tyrant of Jund
 
 
 end
