@@ -67,8 +67,6 @@ import forge.card.spellability.Target;
  */
 public class AbilityFactoryGainControl {
 
-    private final CardList movedCards = new CardList();
-
     private AbilityFactory af = null;
     private HashMap<String, String> params = null;
     private Card hostCard = null;
@@ -424,7 +422,6 @@ public class AbilityFactoryGainControl {
             final Card tgtC = tgtCards.get(j);
             final Player originalController = tgtC.getController();
 
-            this.movedCards.add(tgtC);
             if (!tgtC.equals(this.hostCard)) {
                 this.hostCard.addGainControlTarget(tgtC);
             }
@@ -450,35 +447,33 @@ public class AbilityFactoryGainControl {
 
             if (this.lose != null) {
                 if (this.lose.contains("LeavesPlay")) {
-                    this.hostCard.addLeavesPlayCommand(this.getLoseControlCommand(j, originalController));
+                    this.hostCard.addLeavesPlayCommand(this.getLoseControlCommand(tgtC, originalController));
                 }
                 if (this.lose.contains("Untap")) {
-                    this.hostCard.addUntapCommand(this.getLoseControlCommand(j, originalController));
+                    this.hostCard.addUntapCommand(this.getLoseControlCommand(tgtC, originalController));
                 }
                 if (this.lose.contains("LoseControl")) {
-                    this.hostCard.addChangeControllerCommand(this.getLoseControlCommand(j, originalController));
+                    this.hostCard.addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController));
                 }
                 if (this.lose.contains("EOT")) {
-                    AllZone.getEndOfTurn().addAt(this.getLoseControlCommand(j, originalController));
+                    AllZone.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController));
                 }
             }
 
             if (this.destroyOn != null) {
                 if (this.destroyOn.contains("LeavesPlay")) {
-                    this.hostCard.addLeavesPlayCommand(this.getDestroyCommand(j));
+                    this.hostCard.addLeavesPlayCommand(this.getDestroyCommand(tgtC));
                 }
                 if (this.destroyOn.contains("Untap")) {
-                    this.hostCard.addUntapCommand(this.getDestroyCommand(j));
+                    this.hostCard.addUntapCommand(this.getDestroyCommand(tgtC));
                 }
                 if (this.destroyOn.contains("LoseControl")) {
-                    this.hostCard.addChangeControllerCommand(this.getDestroyCommand(j));
+                    this.hostCard.addChangeControllerCommand(this.getDestroyCommand(tgtC));
                 }
             }
 
-            // for Old Man of the Sea - 0 is hardcoded since it only allows 1
-            // target
             this.hostCard.clearGainControlReleaseCommands();
-            this.hostCard.addGainControlReleaseCommand(this.getLoseControlCommand(0, originalController));
+            this.hostCard.addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, originalController));
 
         } // end foreach target
     }
@@ -549,13 +544,12 @@ public class AbilityFactoryGainControl {
      *            a int.
      * @return a {@link forge.Command} object.
      */
-    private Command getDestroyCommand(final int i) {
+    private Command getDestroyCommand(final Card c) {
         final Command destroy = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
             public void execute() {
-                final Card c = AbilityFactoryGainControl.this.movedCards.get(i);
                 final Ability ability = new Ability(AbilityFactoryGainControl.this.hostCard, "0") {
                     @Override
                     public void resolve() {
@@ -593,8 +587,7 @@ public class AbilityFactoryGainControl {
      *            a {@link forge.Player} object.
      * @return a {@link forge.Command} object.
      */
-    private Command getLoseControlCommand(final int i, final Player originalController) {
-        final Card c = this.movedCards.get(i);
+    private Command getLoseControlCommand(final Card c, final Player originalController) {
         final Command loseControl = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
