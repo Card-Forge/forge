@@ -391,7 +391,6 @@ public class AbilityFactoryGainControl {
      */
     private void gainControlResolve(final SpellAbility sa) {
         CardList tgtCards = new CardList();
-        final boolean self = this.params.containsKey("Defined") && this.params.get("Defined").equals("Self");
 
         final Target tgt = sa.getTarget();
         if (this.params.containsKey("AllValid")) {
@@ -426,11 +425,11 @@ public class AbilityFactoryGainControl {
             final Player originalController = tgtC.getController();
 
             this.movedCards.add(tgtC);
-            if (!self) {
+            if (!tgtC.equals(this.hostCard)) {
                 this.hostCard.addGainControlTarget(tgtC);
             }
 
-            if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
+            if (AllZoneUtil.isCardInPlay(tgtC)) {
 
                 tgtC.addController(newController);
                 // Singletons.getModel().getGameAction().changeController(new CardList(tgtC),
