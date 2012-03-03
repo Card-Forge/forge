@@ -36,7 +36,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
-
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -49,6 +48,7 @@ import forge.gui.deckeditor.elements.CardPanelLite;
 import forge.gui.deckeditor.elements.ManaCostRenderer;
 import forge.gui.deckeditor.elements.TableColumnInfo;
 import forge.gui.deckeditor.elements.TableView;
+import forge.gui.home.limited.CSubmenuDraft;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -128,7 +128,8 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
                         ForgeProps.getLocalized(GuiBoosterDraft.CLOSE_MESSAGE), "", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     DraftingProcess.this.dispose();
-                    Singletons.getControl().getControlHome().getControlDraft().updateHumanDecks();
+                    CSubmenuDraft.SINGLETON_INSTANCE.update();
+                    GuiUtils.closeOverlay();
                 }
             } // windowClosing()
         });
@@ -336,10 +337,9 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
                                                                         // here
 
         // close and open next screen
-        this.dispose();
-
-        Singletons.getControl().getControlHome().getControlDraft().updateHumanDecks();
-
+        DraftingProcess.this.dispose();
+        CSubmenuDraft.SINGLETON_INSTANCE.update();
+        GuiUtils.closeOverlay();
     } /* saveDraft() */
 
     /*
@@ -386,5 +386,6 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
         this.getBottomTableWithCards().sort(1, true);
 
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 }

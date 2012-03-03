@@ -16,8 +16,8 @@ import javax.swing.KeyStroke;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.gui.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.home.ViewSettings.KeyboardShortcutField;
 
 /** 
  * Consolidates keyboard shortcut assembly into one location

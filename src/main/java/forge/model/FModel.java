@@ -50,9 +50,9 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestEventManager;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
-import forge.util.StorageView;
 import forge.util.HttpUtil;
 import forge.util.IStorageView;
+import forge.util.StorageView;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTabber;
 import forge.view.toolbox.FSkin;
@@ -108,7 +108,7 @@ public enum FModel {
         final boolean deleteSucceeded = logFile.delete();
 
         if (logFile.exists() && !deleteSucceeded && (logFile.length() != 0)) {
-            throw new IllegalStateException("Could not delete existing logFile:" + logFile.getAbsolutePath());
+           // throw new IllegalStateException("Could not delete existing logFile:" + logFile.getAbsolutePath());
         }
 
         try {

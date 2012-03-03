@@ -6,9 +6,16 @@ package forge.gui.home;
  * and collapsing in the menu.
  */
 public enum EMenuGroup { /** */
-    CONSTRUCTED, /** */
-    LIMITED, /** */
-    QUEST, /** */
-    SETTINGS, /** */
-    UTILITIES;
+    SANCTIONED ("Sanctioned Game Formats"), /** */
+    QUEST ("Quest Mode"), /** */
+    SETTINGS ("Game Settings"), /** */
+    UTILITIES ("Tools");
+
+    private final String strTitle;
+
+    /** @param {@link java.lang.String} */
+    private EMenuGroup(final String s0) { strTitle = s0; }
+
+    /** @return {@link java.lang.String} */
+    public String getTitle() { return this.strTitle; }
 }

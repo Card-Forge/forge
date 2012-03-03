@@ -31,6 +31,8 @@ import javax.swing.WindowConstants;
 import forge.AllZone;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.gui.home.quest.SubmenuQuestUtil;
+import forge.view.ViewHomeUI;
 import forge.view.toolbox.CardFaceSymbols;
 import forge.view.toolbox.FSkin;
 
@@ -85,8 +87,7 @@ public enum FControl {
             public void windowClosing(final WindowEvent e) {
                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 changeState(0);
-                Singletons.getControl().getControlHome().getControlQuest().refreshStats();
-                Singletons.getView().getViewHome().showQuestMenu();
+                SubmenuQuestUtil.updateStatsAndPet();
             }
         };
 
@@ -146,7 +147,7 @@ public enum FControl {
         // Fire up new state
         switch (i0) {
             case HOME_SCREEN:
-                display.add(Singletons.getView().getViewHome(), JLayeredPane.DEFAULT_LAYER);
+                display.add(ViewHomeUI.SINGLETON_INSTANCE.getPanel(), JLayeredPane.DEFAULT_LAYER);
                 sizeChildren();
                 break;
 
@@ -189,7 +190,7 @@ public enum FControl {
                     + "may only be called while the home UI is showing.");
         }
 
-        return Singletons.getView().getViewHome().getControl();
+        throw new NullPointerException("Fix Me"); //return Singletons.getView().getViewHome().getControl();
     }
 
     /** 

@@ -16,6 +16,8 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
@@ -129,7 +131,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
+    public EMenuGroup getGroupEnum() {
         return EMenuGroup.QUEST;
     }
 
@@ -139,6 +141,30 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
     @Override
     public JPanel getPanel() {
         return pnl;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "Quest Preferences";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.QUEST_PREFS.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuQuestPrefs.SINGLETON_INSTANCE;
     }
 
     /** @return {@link javax.swing.JLabel} */

@@ -17,371 +17,303 @@
  */
 package forge.view;
 
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
+import forge.AllZone;
+import forge.Command;
 import forge.Singletons;
-import forge.control.ControlHomeUI;
-import forge.game.GameType;
+import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.IVSubmenu;
+import forge.gui.home.limited.VSubmenuConstructed;
+import forge.gui.home.limited.VSubmenuDraft;
+import forge.gui.home.limited.VSubmenuSealed;
+import forge.gui.home.quest.VSubmenuChallenges;
+import forge.gui.home.quest.VSubmenuDuels;
+import forge.gui.home.quest.VSubmenuQuestData;
+import forge.gui.home.quest.VSubmenuQuestDecks;
+import forge.gui.home.quest.VSubmenuQuestPrefs;
+import forge.gui.home.settings.VSubmenuAvatars;
+import forge.gui.home.settings.VSubmenuPreferences;
+import forge.gui.home.utilities.VSubmenuDeckEditor;
+import forge.gui.home.utilities.VSubmenuUtilities;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.home.ViewConstructed;
-import forge.view.home.ViewDraft;
-import forge.view.home.ViewQuest;
-import forge.view.home.ViewSealed;
-import forge.view.home.ViewSettings;
-import forge.view.home.ViewUtilities;
-import forge.view.toolbox.FButton;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+import forge.quest.data.QuestDataIO;
+import forge.quest.data.QuestPreferences.QPref;
+import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
+import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
-/**
- * - Lays out containers and borders for main menu and submenus<br>
- * - Instantiates top-level controller for submenus.<br>
- * - Has access methods for all child controllers<br>
- * 
+/** Singleton instance of home screen UI.
+ * Use "getPanel()" to work with the main container.
+ * <br><br>
+ * Generates a card layout with grouped submenus automatically.<br>
+ * To add a menu to the home UI:<br>
+ * - Register its name in the EMenuItem enum<br>
+ * - Build a view implementing IVSubmenu<br>
+ * - Build a controller impelementing ICSubmenu<br>
+ * - Add its singleton instance to the map storing the views for the card layout.
  */
 
-@SuppressWarnings("serial")
-public class ViewHomeUI extends FPanel {
-    private JPanel pnlMenu, pnlContent;
-    private FButton btnDraft, btnConstructed, btnSealed, btnQuest, btnSettings, btnUtilities, btnExit, btnDeckEditor;
-    private String constraints;
-    private ControlHomeUI control;
+public enum ViewHomeUI {
+    /** */
+    SINGLETON_INSTANCE;
 
-    private ViewConstructed constructed;
-    private ViewSealed sealed;
-    private ViewDraft draft;
-    private ViewQuest quest;
-    private ViewSettings settings;
-    private ViewUtilities utilities;
+    private final CardLayout cards = new CardLayout();
+    private final FPanel pnlParent = new FPanel();
+    private final FPanel pnlLeft = new FPanel();
+    private final FPanel pnlRight = new FPanel(cards);
+    private final JPanel pnlMenu = new JPanel();
 
     private final int insets = 10;
-    private final int menuWidthPx = 350;
+    private final int leftWidthPx = 250;
+    private final List<IVSubmenu> allSubmenus = new ArrayList<IVSubmenu>();
+    private final Map<EMenuItem, FLabel> allSubmenuLabels = new HashMap<EMenuItem, FLabel>();
+    private FLabel lblPreviousSelected;
 
-    /**
-     * Instantiates a new home top level.
-     */
-    public ViewHomeUI() {
-        super();
+    /** Mostly, assembles child singletons for the home screen UI.  */
+    public void initialize() {
+        // There's d a better home for this (model?)
+        final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
+        final String questname = Singletons.getModel()
+                .getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
+        final File data = new File(dirQuests.getPath() + File.separator + questname);
 
-        constructed = new ViewConstructed();
-        sealed = new ViewSealed();
-        draft = new ViewDraft();
-        quest = new ViewQuest();
-        settings = new ViewSettings();
-        utilities = new ViewUtilities();
+        if (data.exists()) {
+            AllZone.setQuestData(QuestDataIO.loadData(data));
+        }        //////////////////////////////
 
-        this.setCornerDiameter(0);
-        this.setBorderToggle(false);
-        this.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
-        this.setLayout(null);
-        this.addComponentListener(new ComponentAdapter() {
+
+        // Add new menu items here (order doesn't matter).
+        allSubmenus.clear();
+        allSubmenus.add(VSubmenuConstructed.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuDraft.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuSealed.SINGLETON_INSTANCE);
+
+        allSubmenus.add(VSubmenuDuels.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuChallenges.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuQuestDecks.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuQuestData.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuQuestPrefs.SINGLETON_INSTANCE);
+
+        allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);
+
+        allSubmenus.add(VSubmenuDeckEditor.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuUtilities.SINGLETON_INSTANCE);
+
+        // Parent layout
+        pnlParent.setCornerDiameter(0);
+        pnlParent.setBorderToggle(false);
+        pnlParent.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        pnlParent.setLayout(null);
+
+        pnlParent.add(pnlLeft);
+        pnlParent.add(pnlRight);
+
+        // Left pane holds scroller with menu panel.
+        final FScrollPane scrMenu = new FScrollPane(pnlMenu,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrMenu.setBorder(null);
+
+        pnlLeft.setLayout(new MigLayout("insets 0, gap 0, align center, wrap"));
+        pnlLeft.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO))
+                .iconScaleFactor(1.0f).build(), "w 150px!, h 150px!, align center");
+
+        pnlLeft.add(scrMenu, "pushy, growy, w 98%!, gap 1% 0 1% 0");
+
+        populateMenu();
+
+        // Select previous
+        EMenuItem selected = null;
+        try {
+            selected = EMenuItem.valueOf(Singletons.getModel()
+                .getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
+        } catch (final Exception e) { }
+
+        if (selected != null && allSubmenuLabels.get(selected) != null) {
+            itemClick(selected);
+        }
+        else {
+            itemClick(EMenuItem.CONSTRUCTED);
+        }
+
+        pnlParent.addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent e) {
-                int w = getWidth();
-                int h = getHeight();
-                pnlContent.setBounds(new Rectangle(
-                        2 * insets + menuWidthPx, insets,
-                        w - menuWidthPx - 3 * insets, h - 2 * insets));
-                pnlMenu.setBounds(new Rectangle(
+            public void componentResized(final ComponentEvent e) {
+                final int w = pnlParent.getWidth();
+                final int h = pnlParent.getHeight();
+                pnlRight.setBounds(new Rectangle(
+                        2 * insets + leftWidthPx, insets,
+                        w - leftWidthPx - 3 * insets, h - 2 * insets));
+                pnlLeft.setBounds(new Rectangle(
                         insets, insets,
-                        menuWidthPx, h - 2 * insets
+                        leftWidthPx, h - 2 * insets
                         ));
-                revalidate();
-            }
-        });
-
-        pnlMenu = new FPanel();
-        pnlMenu.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-
-        pnlContent = new FPanel();
-        pnlContent.setLayout(new MigLayout("insets 0, gap 0"));
-
-        btnConstructed = new FButton();
-        btnConstructed.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { showConstructedMenu(); }
-        });
-        btnConstructed.setText("Constructed");
-
-        btnSealed = new FButton();
-        btnSealed.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { showSealedMenu(); }
-        });
-        btnSealed.setText("Sealed");
-
-        btnDraft = new FButton();
-        btnDraft.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { showDraftMenu(); }
-        });
-        btnDraft.setText("Draft");
-
-        btnQuest = new FButton();
-        btnQuest.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { showQuestMenu(); }
-        });
-        btnQuest.setText("Quest");
-
-        btnDeckEditor = new FButton();
-        btnDeckEditor.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) {
-                Singletons.getControl().getControlHome().getControlUtilities().showDeckEditor(GameType.Constructed, null);
-            }
-        });
-        btnDeckEditor.setText("Deck Editor");
-
-        btnSettings = new FButton();
-        btnSettings.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { showSettingsMenu(); }
-        });
-        btnSettings.setText("Settings");
-
-        btnUtilities = new FButton();
-        btnUtilities.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { showUtilitiesMenu(); }
-        });
-        btnUtilities.setText("Utilities");
-
-        btnExit = new FButton();
-        btnExit.setAction(new AbstractAction() {
-            public void actionPerformed(ActionEvent arg0) { control.exit(); }
-        });
-        btnExit.setText("Exit");
-
-        add(pnlMenu, "w 36%!, h 96%!, gap 2% 2% 2% 2%");
-        add(pnlContent, "w 58%!, h 96%!, gap 0% 2% 2% 2%");
-
-        JLabel lblIcon = new JLabel(FSkin.getIcon(FSkin.ForgeIcons.ICO_LOGO));
-        pnlMenu.add(lblIcon, "gapleft 10%, ax center");
-
-        constraints = "w 80%!, gapleft 10%, gaptop 1%, gapbottom 1%, h 40px!";
-        pnlMenu.add(btnConstructed, constraints);
-        pnlMenu.add(btnSealed, constraints);
-        pnlMenu.add(btnDraft, constraints);
-        pnlMenu.add(btnQuest, constraints);
-        //pnlMenu.add(btnDeckEditor, constraints);
-        pnlMenu.add(btnSettings, constraints);
-        pnlMenu.add(btnUtilities, constraints);
-        pnlMenu.add(btnExit, constraints);
-
-        control = new ControlHomeUI(this);
-    }
-
-    /** Opens menu for constructed mode. */
-    public void showConstructedMenu() {
-        clearToggles();
-        pnlContent.removeAll();
-        pnlContent.add(constructed, "w 100%!, h 100%!");
-        pnlContent.revalidate();
-        pnlContent.repaint();
-
-        Singletons.getControl().getControlHome().getControlConstructed().updateDeckSelectionCheckboxes();
-
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() {
-                btnConstructed.setToggled(true);
-                btnConstructed.grabFocus();
-            }
-        });
-
-        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
-                ForgePreferences.HomeMenus.constructed.toString());
-        Singletons.getModel().getPreferences().save();
-    }
-
-    /** Opens menu for draft mode. */
-    public void showDraftMenu() {
-        clearToggles();
-        pnlContent.removeAll();
-        pnlContent.add(draft, "w 100%!, h 100%!");
-        pnlContent.revalidate();
-        pnlContent.repaint();
-
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() {
-                btnDraft.setToggled(true);
-                btnDraft.grabFocus();
-            }
-        });
-
-        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
-                ForgePreferences.HomeMenus.draft.toString());
-        Singletons.getModel().getPreferences().save();
-    }
-
-    /** Opens menu for sealed mode. */
-    public void showSealedMenu() {
-        clearToggles();
-        pnlContent.removeAll();
-        pnlContent.add(sealed, "w 100%!, h 100%!");
-        pnlContent.revalidate();
-        pnlContent.repaint();
-
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() {
-                btnSealed.setToggled(true);
-                btnSealed.grabFocus();
-            }
-        });
-
-        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
-                ForgePreferences.HomeMenus.sealed.toString());
-        Singletons.getModel().getPreferences().save();
-    }
-
-    /** Opens menu for quest mode. */
-    public void showQuestMenu() {
-        clearToggles();
-        pnlContent.removeAll();
-        pnlContent.add(quest, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
-        pnlContent.revalidate();
-        pnlContent.repaint();
-
-        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
-                ForgePreferences.HomeMenus.quest.toString());
-        Singletons.getModel().getPreferences().save();
-
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() {
-                btnQuest.setToggled(true);
-                btnQuest.grabFocus();
+                pnlParent.revalidate();
             }
         });
     }
 
-    /** Opens menu for settings. */
-    public void showSettingsMenu() {
-        clearToggles();
-        pnlContent.removeAll();
-        pnlContent.add(settings, "w 99%!, h 95%!, gaptop 2.5%, gapleft 0.5%");
-        pnlContent.revalidate();
-        pnlContent.repaint();
+    /** Generates expand/collapse menu using cards in layout, and EMenuGroup enum.
+     * No further hardcoding should be required in this method. */
+    private void populateMenu() {
+        final SortedMap<EMenuGroup, JPanel> allGroupPanels = new TreeMap<EMenuGroup, JPanel>();
+        final Map<EMenuGroup, JLabel> allGroupLabels = new HashMap<EMenuGroup, JLabel>();
 
-        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
-                ForgePreferences.HomeMenus.settings.toString());
-        Singletons.getModel().getPreferences().save();
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        final String strTitleConstraints = "w 90%!, gap 5% 0 5px 10px";
+        final String strGroupConstraints = "w 85%!, gap 10% 0 0 0";
+        final String strItemConstraints = "w 100%!, h 26px!, gap 0 0 1px 1px";
 
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() {
-                btnSettings.setToggled(true);
-                btnSettings.grabFocus();
+        pnlMenu.removeAll();
+        pnlMenu.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
+        pnlMenu.setOpaque(false);
+
+        // For each group: init its panel
+        for (final EMenuGroup e : EMenuGroup.values()) {
+            allGroupPanels.put(e, new JPanel());
+            allGroupPanels.get(e).setOpaque(false);
+            allGroupPanels.get(e).setVisible(false);
+            allGroupPanels.get(e).setLayout(new MigLayout("insets 0, gap 0, wrap"));
+            allGroupPanels.get(e).setName(e.toString());
+        }
+
+        // For each item: Add to its group, and add to the card layout in right panel.
+        allSubmenuLabels.clear();
+        for (final IVSubmenu item : allSubmenus) {
+            allSubmenuLabels.put(EMenuItem.valueOf(item.getItemEnum()), makeItemLabel(item));
+            pnlRight.add(item.getItemEnum(), item.getPanel());
+            allGroupPanels.get(item.getGroupEnum()).add(
+                    allSubmenuLabels.get(EMenuItem.valueOf(item.getItemEnum())), strItemConstraints);
+            item.getControl().initialize();
+        }
+
+        // For each group: add its title, then its panel, then "click" if necessary.
+        for (final EMenuGroup e : allGroupPanels.keySet()) {
+            allGroupLabels.put(e, makeTitleLabel(e));
+            pnlMenu.add(allGroupLabels.get(e), strTitleConstraints);
+            pnlMenu.add(allGroupPanels.get(e), strGroupConstraints);
+
+            // Expand groups expanded from previous session
+            if (prefs.getPrefBoolean(FPref.valueOf("SUBMENU_" + e.toString()))) {
+                groupClick(e, allGroupLabels.get(e));
             }
-        });
+        }
     }
 
-    /** Opens menu for utilities. */
-    public void showUtilitiesMenu() {
-        clearToggles();
-        pnlContent.removeAll();
-        pnlContent.add(utilities, "w 100%!, h 100%!");
-        pnlContent.revalidate();
-        pnlContent.repaint();
+    private void groupClick(final EMenuGroup e0, final JLabel lbl0) {
+        final Component[] menuObjects = pnlMenu.getComponents();
+        for (final Component c : menuObjects) {
+            if (c.getName() != null && c.getName().equals(e0.toString())) {
+                if (c.isVisible()) {
+                    lbl0.setText("+ " + e0.getTitle());
+                    c.setVisible(false);
+                    Singletons.getModel().getPreferences().setPref(
+                            FPref.valueOf("SUBMENU_" + e0.toString()), "false");
+                }
+                else {
+                    lbl0.setText("- " + e0.getTitle());
+                    c.setVisible(true);
+                    Singletons.getModel().getPreferences().setPref(
+                            FPref.valueOf("SUBMENU_" + e0.toString()), "true");
+                }
 
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() {
-                btnUtilities.setToggled(true);
-                btnUtilities.grabFocus();
+                Singletons.getModel().getPreferences().save();
+                break;
             }
-        });
-
-        Singletons.getModel().getPreferences().setPref(FPref.UI_HOMEMENU,
-                ForgePreferences.HomeMenus.utilities.toString());
-        Singletons.getModel().getPreferences().save();
+        }
     }
 
-    private void clearToggles() {
-        btnConstructed.setToggled(false);
-        btnSealed.setToggled(false);
-        btnDraft.setToggled(false);
-        btnQuest.setToggled(false);
-        btnDeckEditor.setToggled(false);
-        btnSettings.setToggled(false);
-        btnUtilities.setToggled(false);
+    /** Custom title label styling. */
+    @SuppressWarnings("serial")
+    private JLabel makeTitleLabel(final EMenuGroup e0) {
+        final FLabel lbl = new FLabel.Builder().fontScaleAuto(false).fontSize(16)
+                .hoverable(true).fontAlign(SwingConstants.LEFT).build();
+
+        lbl.setBorder(BorderFactory.createCompoundBorder(
+                new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)),
+                new EmptyBorder(2, 2, 2, 2)));
+
+        lbl.setCommand(new Command() { @Override
+            public void execute() { groupClick(e0, lbl); } });
+
+        lbl.setText("+ " + e0.getTitle());
+        return lbl;
     }
 
-    /** @return {@link forge.view.home.ViewConstructed} */
-    public ViewConstructed getViewConstructed() {
-        return this.constructed;
+    /** Custom subsection label styling. */
+    @SuppressWarnings("serial")
+    private FLabel makeItemLabel(final IVSubmenu item) {
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+
+        final FLabel lbl = new FLabel.Builder().fontScaleAuto(false).fontSize(15)
+                .hoverable(true).selectable(true).text(item.getMenuTitle())
+                .fontAlign(SwingConstants.LEFT).build();
+
+        final Command cmdOnClick = new Command() {
+            @Override
+            public void execute() {
+                if (lblPreviousSelected != null) { lblPreviousSelected.setSelected(false); }
+
+                cards.show(pnlRight, item.getItemEnum());
+                lblPreviousSelected = lbl;
+
+                prefs.setPref(FPref.SUBMENU_CURRENTMENU, item.getItemEnum());
+                Singletons.getModel().getPreferences().save();
+
+                // Make sure this is called last, so it doesn't interfere
+                // with the selection display process.
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        if (item.getControl().getMenuCommand() != null) {
+                            item.getControl().getMenuCommand().execute();
+                        }
+                    }
+                });
+            }
+        };
+
+        lbl.setCommand(cmdOnClick);
+        lbl.setBorder(new EmptyBorder(0, 10, 0, 0));
+
+        return lbl;
     }
 
-    /** @return {@link forge.view.home.ViewDraft} */
-    public ViewDraft getViewDraft() {
-        return this.draft;
+    /** Programatically selects a menu item.
+     * @param e0 &emsp; {@forge.gui.home.EMenuItem} */
+    public void itemClick(final EMenuItem e0) {
+        allSubmenuLabels.get(e0).getCommand().execute();
+        allSubmenuLabels.get(e0).setSelected(true);
     }
 
-    /** @return {@link forge.view.home.ViewSealed} */
-    public ViewSealed getViewSealed() {
-        return this.sealed;
-    }
-
-    /** @return {@link forge.view.home.ViewQuest} */
-    public ViewQuest getViewQuest() {
-        return this.quest;
-    }
-
-    /** @return {@link forge.view.home.ViewSettings} */
-    public ViewSettings getViewSettings() {
-        return this.settings;
-    }
-
-    /** @return {@link forge.view.home.ViewUtilities} */
-    public ViewUtilities getViewUtilities() {
-        return this.utilities;
-    }
-
-    /** */
-    public void resetQuest() {
-        quest = new ViewQuest();
-        showQuestMenu();
-    }
-
-    /** */
-    public void resetSettings() {
-        settings = new ViewSettings();
-        showSettingsMenu();
-    }
-
-    /** @return ControlHomeUI */
-    public ControlHomeUI getControl() {
-        return control;
-    }
-
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnConstructed() {
-        return this.btnConstructed;
-    }
-
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnSealed() {
-        return this.btnSealed;
-    }
-
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnDraft() {
-        return this.btnDraft;
-    }
-
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnQuest() {
-        return this.btnQuest;
-    }
-
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnSettings() {
-        return this.btnSettings;
-    }
-
-    /** @return {@link javax.swing.JButton} */
-    public JButton getBtnUtilities() {
-        return this.btnUtilities;
+    /** @return {@link javax.swing.JPanel} the parent panel containing the home UI. */
+    public JPanel getPanel() {
+        return pnlParent;
     }
 }

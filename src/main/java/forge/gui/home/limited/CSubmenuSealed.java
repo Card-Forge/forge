@@ -24,6 +24,7 @@ import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
 import forge.gui.home.ICSubmenu;
+import forge.gui.home.utilities.CSubmenuDeckEditor;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgeProps;
@@ -34,11 +35,27 @@ import forge.view.toolbox.FSkin;
  * TODO: Write javadoc for this type.
  *
  */
+@SuppressWarnings("serial")
 public enum CSubmenuSealed implements ICSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
     private Map<String, Deck> aiDecks;
+
+    private final Command cmdDeckExit = new Command() {
+        @Override
+        public void execute() {
+            update();
+            GuiUtils.closeOverlay();
+        }
+    };
+
+    private final Command cmdDeckSelect = new Command() {
+        @Override
+        public void execute() {
+            VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+        }
+    };
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -49,6 +66,9 @@ public enum CSubmenuSealed implements ICSubmenu {
 
         view.populate();
         CSubmenuSealed.SINGLETON_INSTANCE.update();
+
+        VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setExitCommand(cmdDeckExit);
+        VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setSelectCommand(cmdDeckSelect);
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnBuildDeck().addMouseListener(
                 new MouseAdapter() { @Override
@@ -184,6 +204,6 @@ public enum CSubmenuSealed implements ICSubmenu {
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
-        Singletons.getControl().getControlHome().getControlUtilities().showDeckEditor(GameType.Sealed, sealed);
+        CSubmenuDeckEditor.SINGLETON_INSTANCE.showDeckEditor(GameType.Sealed, sealed);
     }
 }

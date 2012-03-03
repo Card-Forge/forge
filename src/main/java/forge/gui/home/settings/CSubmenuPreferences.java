@@ -2,18 +2,15 @@ package forge.gui.home.settings;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.SwingWorker;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import org.apache.commons.lang3.text.WordUtils;
 
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
-import forge.control.FControl;
+import forge.control.RestartUtil;
 import forge.gui.home.ICSubmenu;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -39,10 +36,9 @@ public enum CSubmenuPreferences implements ICSubmenu {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
 
-        view.getLstChooseSkin().addListSelectionListener(new ListSelectionListener() {
+        view.getLstChooseSkin().addMouseListener(new MouseAdapter() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (e.getValueIsAdjusting()) { return; }
+            public void mouseClicked(final MouseEvent e) {
                 updateSkin();
             }
         });
@@ -145,7 +141,7 @@ public enum CSubmenuPreferences implements ICSubmenu {
             @Override
             public void execute() {
                 Singletons.getModel().getPreferences().reset();
-                Singletons.getView().getViewHome().resetSettings();
+                update();
             }
         });
     }
@@ -199,30 +195,16 @@ public enum CSubmenuPreferences implements ICSubmenu {
     private void updateSkin() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-
-        view.getLblTitleSkin().setText(" Loading...");
-        view.getLblTitleSkin().setIcon(new ImageIcon("res/images/skins/default/loader.gif"));
-
         final String name = view.getLstChooseSkin().getSelectedValue().toString();
 
-        final SwingWorker<Object, Object> w = new SwingWorker<Object, Object>() {
-            @Override
-            public String doInBackground() {
-                FSkin.loadLight(name);
-                FSkin.loadFull();
+        if (name.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
 
+        RestartUtil.restartApplication(new Runnable() {
+            @Override
+            public void run() {
                 prefs.setPref(FPref.UI_SKIN, name);
                 prefs.save();
-                return null;
             }
-
-            @Override
-            protected void done() {
-                Singletons.getView().instantiateCachedUIStates();
-                Singletons.getControl().changeState(FControl.HOME_SCREEN);
-                Singletons.getView().getViewHome().showSettingsMenu();
-            }
-        };
-        w.execute();
+        });
     }
 }

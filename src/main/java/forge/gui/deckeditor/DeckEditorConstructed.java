@@ -91,7 +91,9 @@ public final class DeckEditorConstructed extends DeckEditorBase<CardPrinted, Dec
             @Override
             public void execute() {
                 DeckEditorConstructed.this.dispose();
-                exitCommand.execute();
+                if (exitCommand != null) {
+                    exitCommand.execute();
+                }
             }
         };
 

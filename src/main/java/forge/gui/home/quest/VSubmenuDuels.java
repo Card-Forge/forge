@@ -12,8 +12,10 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
-import forge.view.home.StartButton;
+import forge.gui.home.StartButton;
 import forge.view.toolbox.FCheckBox;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
@@ -21,7 +23,7 @@ import forge.view.toolbox.FScrollPane;
 import forge.view.toolbox.FSkin;
 
 /**  */
-public enum VSubmenuDuels implements IVSubmenu {
+public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet {
     /** */
     SINGLETON_INSTANCE;
 
@@ -60,7 +62,7 @@ public enum VSubmenuDuels implements IVSubmenu {
     private final FLabel btnCurrentDeck = new FLabel.Builder()
         .fontScaleAuto(false).fontSize(15).opaque(true).hoverable(true).build();
     private final FLabel btnBazaar = new FLabel.Builder()
-        .selectable(true).opaque(true).hoverable(true).text("Bazaar")
+        .opaque(true).hoverable(true).text("Bazaar")
         .fontScaleAuto(false).fontSize(14).tooltip("Peruse the Bazaar").build();
     private final FLabel btnSpellShop = new FLabel.Builder()
         .opaque(true).hoverable(true).text("Spell Shop")
@@ -78,8 +80,32 @@ public enum VSubmenuDuels implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
+    public EMenuGroup getGroupEnum() {
         return EMenuGroup.QUEST;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "Duels";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.QUEST_DUELS.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuDuels.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)
@@ -110,7 +136,7 @@ public enum VSubmenuDuels implements IVSubmenu {
     }
 
     /** */
-    public void setCurrentDeckStatus() {
+    public void updateCurrentDeckStatus() {
         final JLabel btnCurrentDeck = VSubmenuDuels.SINGLETON_INSTANCE.getBtnCurrentDeck();
         if (SubmenuQuestUtil.getCurrentDeck() == null) {
             btnCurrentDeck.setBackground(Color.red.darker());
@@ -133,12 +159,12 @@ public enum VSubmenuDuels implements IVSubmenu {
         return pnlTitle;
     }
 
-    /** @return {@link javax.swing.JPanel} */
+    /** @return {@link forge.view.toolbox.FPanel} */
     public JPanel getPnlStats() {
         return pnlStats;
     }
 
-    /** @return {@link javax.swing.JPanel} */
+    /** @return {@link forge.view.toolbox.FPanel} */
     public JPanel getPnlStart() {
         return pnlStart;
     }
@@ -147,32 +173,33 @@ public enum VSubmenuDuels implements IVSubmenu {
     public JLabel getLblTitle() {
         return lblTitle;
     }
-    /** @return {@link javax.swing.FLabel} */
+
+    @Override
     public FLabel getLblLife() {
         return lblLife;
     }
 
-    /** @return {@link javax.swing.FLabel} */
+    @Override
     public FLabel getLblCredits() {
         return lblCredits;
     }
 
-    /** @return {@link javax.swing.FLabel} */
+    @Override
     public FLabel getLblWins() {
         return lblWins;
     }
 
-    /** @return {@link javax.swing.FLabel} */
+    @Override
     public FLabel getLblLosses() {
         return lblLosses;
     }
 
-    /** @return {@link javax.swing.FLabel} */
+    @Override
     public FLabel getLblNextChallengeInWins() {
         return lblNextChallengeInWins;
     }
 
-    /** @return {@link javax.swing.FLabel} */
+    @Override
     public FLabel getLblWinStreak() {
         return lblWinStreak;
     }
@@ -182,27 +209,27 @@ public enum VSubmenuDuels implements IVSubmenu {
         return btnCurrentDeck;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    @Override
     public FLabel getBtnBazaar() {
         return btnBazaar;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    @Override
     public FLabel getBtnSpellShop() {
         return btnSpellShop;
     }
 
-    /** @return {@link javax.swing.JCheckBox} */
+    @Override
     public JCheckBox getCbPlant() {
         return cbPlant;
     }
 
-    /** @return {@link javax.swing.JCheckBox} */
+    @Override
     public JCheckBox getCbZep() {
         return cbZep;
     }
 
-    /** @return {@link javax.swing.JComboBox} */
+    @Override
     public JComboBox getCbxPet() {
         return cbxPet;
     }
@@ -217,14 +244,14 @@ public enum VSubmenuDuels implements IVSubmenu {
         pnlStats.removeAll();
         pnlStats.setOpaque(false);
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, hidemode 0"));
-        pnlStats.add(btnBazaar, constraints);
+        pnlStats.add(btnSpellShop, constraints);
         pnlStats.add(lblWins, constraints);
         pnlStats.add(lblLosses, constraints);
-        pnlStats.add(lblLife, constraints + ", wrap");
-
-        pnlStats.add(btnSpellShop, constraints);
-        pnlStats.add(lblWinStreak, "w 48%!, h 35px!, gap 1% 1% 5px 5px, span 2 1");
         pnlStats.add(lblCredits, constraints + ", wrap");
+
+        pnlStats.add(btnBazaar, constraints);
+        pnlStats.add(lblWinStreak, "w 48%!, h 35px!, gap 1% 1% 5px 5px, span 2 1");
+        pnlStats.add(lblLife, constraints + ", wrap");
 
         pnlStats.add(lblNextChallengeInWins, "span 4 1, h 20px!, gap 0 0 5px 5px, ax center, wrap");
         pnlStats.add(btnCurrentDeck, "span 4 1, w 350px!, h 30px!, gap 0 0 0 5px, ax center");

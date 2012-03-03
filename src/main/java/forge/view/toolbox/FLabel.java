@@ -316,6 +316,11 @@ public class FLabel extends JLabel {
         return this.resizeTimer;
     }
 
+    /** @return {@link forge.Command} */
+    public Command getCommand() {
+        return this.cmdClick;
+    }
+
     /** @return boolean */
     public boolean isSelected() {
         return selected;

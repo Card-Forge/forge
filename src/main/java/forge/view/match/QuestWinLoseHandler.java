@@ -296,15 +296,16 @@ public class QuestWinLoseHandler extends ControlWinLose {
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
 
         // Update as necessary.
-        if ((Singletons.getView().getViewHome().getViewQuest().getPnlDuels().isVisible())) {
+       /* if ((Singletons.getView().getViewHome().getViewQuest().getPnlDuels().isVisible())) {
             Singletons.getView().getViewHome().getViewQuest().showDuelsTab();
         }
         else if (Singletons.getView().getViewHome().getViewQuest().getPnlChallenges().isVisible()) {
             Singletons.getView().getViewHome().getViewQuest().showChallengesTab();
         }
 
-        Singletons.getView().getViewHome().showQuestMenu();
+        Singletons.getView().getViewHome().showQuestMenu();*/
         GuiUtils.closeOverlay();
+        throw new NullPointerException("Fix me");
     }
 
     /**

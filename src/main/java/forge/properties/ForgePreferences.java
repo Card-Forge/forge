@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.gui.home.EMenuItem;
+
 /**
  * Holds default preference values in an enum.
  * Loads preferred values when instantiated.
@@ -60,7 +62,12 @@ public class ForgePreferences {
         UI_BUGZ_PWD (""), /** */
         UI_ANTE ("false"), /** */
         UI_SKIN ("default"), /** */
-        UI_HOMEMENU (HomeMenus.constructed.toString()), /** */
+
+        SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()), /** */
+        SUBMENU_SANCTIONED ("false"), /** */
+        SUBMENU_QUEST ("false"), /** */
+        SUBMENU_SETTINGS ("false"), /** */
+        SUBMENU_UTILITIES ("false"), /** */
 
         DEV_MODE_ENABLED ("false"), /** */
         DEV_MILLING_LOSS ("true"), /** */

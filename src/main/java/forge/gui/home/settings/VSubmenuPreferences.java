@@ -29,6 +29,8 @@ import forge.Singletons;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
@@ -154,7 +156,7 @@ public enum VSubmenuPreferences implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
+    public EMenuGroup getGroupEnum() {
         return EMenuGroup.SETTINGS;
     }
 
@@ -164,6 +166,30 @@ public enum VSubmenuPreferences implements IVSubmenu {
     @Override
     public JPanel getPanel() {
         return pnl;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "Preferences";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.SETTINGS_PREFS.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuPreferences.SINGLETON_INSTANCE;
     }
 
     /** Consolidates checkbox styling in one place. */
@@ -347,11 +373,6 @@ public enum VSubmenuPreferences implements IVSubmenu {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
-    }
-
-    /** @return {@link javax.swing.FLabel} */
-    public FLabel getLblTitleSkin() {
-        return lblTitleSkin;
     }
 
     /** @return {@link forge.view.toolbox.FLabel} */

@@ -19,7 +19,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
@@ -37,7 +36,6 @@ import forge.view.toolbox.FTextArea;
  */
 public class SubmenuQuestUtil {
     private static SelectablePanel selectedOpponent;
-    private static Deck currentDeck;
 
     /**
      * <p>
@@ -66,132 +64,82 @@ public class SubmenuQuestUtil {
 
     /** Updates stats, pets panels for both duels and challenges. */
     public static void updateStatsAndPet() {
-        final QuestData qData;
-        final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
+        final QuestData qData = AllZone.getQuestData();
 
-        ////////// TODO - THIS SHOULD NOT BE HERE AND WILL BE MOVED EVENTUALLY.
-        if (AllZone.getQuestData() == null) {
-            final String questname = Singletons.getModel()
-                    .getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
+        if (qData == null) { return; }
 
-            qData = QuestDataIO.loadData(new File(
-                    ForgeProps.getFile(NewConstants.Quest.DATA_DIR) + questname + ".dat"));
-            AllZone.setQuestData(qData);
-        }
-        else {
-            qData = AllZone.getQuestData();
-        }
-        ////////////////////////////////////////////////////////////////////////
+        final IStatsAndPet[] viewsToUpdate = new IStatsAndPet[] {
+                VSubmenuDuels.SINGLETON_INSTANCE,
+                VSubmenuChallenges.SINGLETON_INSTANCE
+        };
 
-        // Stats panel
-        view.getLblCredits().setText("Credits: " + qData.getCredits());
-        view.getLblLife().setText("Life: " + qData.getLife());
-        view.getLblWins().setText("Wins: " + qData.getWin());
-        view.getLblLosses().setText("Losses: " + qData.getLost());
-        view.setCurrentDeckStatus();
 
-        final int num = SubmenuQuestUtil.nextChallengeInWins();
-        if (num == 0) {
-            view.getLblNextChallengeInWins().setText("Next challenge available now.");
-        }
-        else {
-            view.getLblNextChallengeInWins().setText("Next challenge available in " + num + " wins.");
-        }
+        for (final IStatsAndPet view : viewsToUpdate) {
+            // Fantasy UI display
+            view.getLblNextChallengeInWins().setVisible(true);
+            view.getBtnBazaar().setVisible(true);
+            view.getLblLife().setVisible(true);
 
-        view.getLblWinStreak().setText(
-                "Win streak: " + qData.getWinStreakCurrent()
-                + " (Best:" + qData.getWinStreakBest() + ")");
+            // Stats panel
+            view.getLblCredits().setText("Credits: " + qData.getCredits());
+            view.getLblLife().setText("Life: " + qData.getLife());
+            view.getLblWins().setText("Wins: " + qData.getWin());
+            view.getLblLosses().setText("Losses: " + qData.getLost());
+            view.updateCurrentDeckStatus();
 
-        // Start panel: pet, plant, zep.
-        if (qData.getMode().equals(QuestData.FANTASY)) {
-            final Set<String> petList = qData.getPetManager().getAvailablePetNames();
-            final QuestPetAbstract currentPet = qData.getPetManager().getSelectedPet();
+            final int num = SubmenuQuestUtil.nextChallengeInWins();
+            if (num == 0) {
+                view.getLblNextChallengeInWins().setText("Next challenge available now.");
+            }
+            else {
+                view.getLblNextChallengeInWins().setText("Next challenge available in " + num + " wins.");
+            }
 
-            view.getCbxPet().removeAllItems();
-            // Pet list visibility
-            if (petList.size() > 0) {
-                view.getCbxPet().setEnabled(true);
-                view.getCbxPet().addItem("Don't summon a pet");
-                for (final String pet : petList) {
-                    view.getCbxPet().addItem("Summon " + pet);
+            view.getLblWinStreak().setText(
+                    "Win streak: " + qData.getWinStreakCurrent()
+                    + " (Best:" + qData.getWinStreakBest() + ")");
+
+            // Start panel: pet, plant, zep.
+            if (qData.getMode().equals(QuestData.FANTASY)) {
+                final Set<String> petList = qData.getPetManager().getAvailablePetNames();
+                final QuestPetAbstract currentPet = qData.getPetManager().getSelectedPet();
+
+                view.getCbxPet().removeAllItems();
+                // Pet list visibility
+                if (petList.size() > 0) {
+                    view.getCbxPet().setEnabled(true);
+                    view.getCbxPet().addItem("Don't summon a pet");
+                    for (final String pet : petList) {
+                        view.getCbxPet().addItem("Summon " + pet);
+                    }
+
+                    if (currentPet != null) { view.getCbxPet().setSelectedItem("Summon " + currentPet.getName()); }
+                } else {
+                    view.getCbxPet().setVisible(false);
                 }
 
-                if (currentPet != null) { view.getCbxPet().setSelectedItem("Summon " + currentPet.getName()); }
-            } else {
+                // Plant visiblity
+                if (qData.getPetManager().getPlant().getLevel() == 0) {
+                    view.getCbPlant().setVisible(false);
+                }
+                else {
+                    view.getCbPlant().setVisible(true);
+                    view.getCbPlant().setSelected(qData.getPetManager().shouldPlantBeUsed());
+                }
+
+                // Zeppelin visibility
+                final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
+                view.getCbZep().setVisible(zeppelin.hasBeenUsed());
+            }
+            else {
+                // Classic mode display changes
                 view.getCbxPet().setVisible(false);
-            }
-
-            // Plant visiblity
-            if (qData.getPetManager().getPlant().getLevel() == 0) {
                 view.getCbPlant().setVisible(false);
+                view.getCbZep().setVisible(false);
+                view.getLblNextChallengeInWins().setVisible(false);
+                view.getBtnBazaar().setVisible(false);
+                view.getLblLife().setVisible(false);
             }
-            else {
-                view.getCbPlant().setVisible(true);
-                view.getCbPlant().setSelected(qData.getPetManager().shouldPlantBeUsed());
-            }
-
-            // Zeppelin visibility
-            final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
-            view.getCbZep().setVisible(zeppelin.hasBeenUsed());
-        }
-        else {
-            view.getCbxPet().setVisible(false);
-            view.getCbPlant().setVisible(false);
-            view.getCbZep().setVisible(false);
-        }
-    }
-
-    /** Selectable panels for duels and challenges. */
-    @SuppressWarnings("serial")
-    public static class SelectablePanel extends FPanel {
-        private final QuestEvent event;
-
-        /** @param e0 &emsp; QuestEvent */
-        public SelectablePanel(final QuestEvent e0) {
-            super();
-            this.event = e0;
-            this.setSelectable(true);
-            this.setHoverable(true);
-            this.setLayout(new MigLayout("insets 0, gap 0"));
-
-            this.setCommand(new Command() {
-                @Override
-                public void execute() {
-                    if (selectedOpponent != null) { selectedOpponent.setSelected(false); }
-                    else { VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(true); }
-
-                    selectedOpponent = SubmenuQuestUtil.SelectablePanel.this;
-                }
-            });
-
-            // Icon
-            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-            final File file = new File(base, event.getIconFilename());
-
-            final FLabel lblIcon = new FLabel.Builder().iconScaleFactor(1).build();
-            if (!file.exists()) {
-                lblIcon.setIcon(FSkin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
-            }
-            else {
-                lblIcon.setIcon(new ImageIcon(file.toString()));
-            }
-            this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
-
-            // Name
-            final FLabel lblName = new FLabel.Builder()
-                    .text(event.getTitle() + ": " + event.getDifficulty()).hoverable(false).build();
-            this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
-
-            // Description
-            final FTextArea tarDesc = new FTextArea();
-            tarDesc.setText(event.getDescription());
-            tarDesc.setFont(FSkin.getItalicFont(12));
-            this.add(tarDesc, "w 80%!, h 30px!");
-       }
-
-        /** @return QuestEvent */
-        public QuestEvent getEvent() {
-            return event;
         }
     }
 
@@ -200,14 +148,16 @@ public class SubmenuQuestUtil {
         return selectedOpponent;
     }
 
-    /** @param deck0 &emsp; {@link forge.deck.Deck} */
-    public static void setCurrentDeck(final Deck deck0) {
-        currentDeck = deck0;
-    }
-
     /** @return {@link forge.deck.Deck} */
     public static Deck getCurrentDeck() {
-        return currentDeck;
+        Deck d = null;
+
+        if (AllZone.getQuestData() != null) {
+            d = AllZone.getQuestData().getMyDecks().get(
+                Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_DECK));
+        }
+
+        return d;
     }
 
     /** */
@@ -221,8 +171,9 @@ public class SubmenuQuestUtil {
             }
         };
 
-        QuestCardShop g = new QuestCardShop(AllZone.getQuestData());
+        final QuestCardShop g = new QuestCardShop(AllZone.getQuestData());
         g.show(exit);
+        g.setAlwaysOnTop(true);
         g.setVisible(true);
     }
 
@@ -257,7 +208,7 @@ public class SubmenuQuestUtil {
         zeppelin.setZeppelinUsed(false);
         qData.randomizeOpponents();
 
-        Constant.Runtime.HUMAN_DECK[0] = currentDeck;
+        Constant.Runtime.HUMAN_DECK[0] = SubmenuQuestUtil.getCurrentDeck();
         Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
         Constant.Quest.OPP_ICON_NAME[0] = event.getIconFilename();
         Constant.Runtime.setGameType(GameType.Quest);
@@ -286,10 +237,69 @@ public class SubmenuQuestUtil {
                     lifeHuman, lifeAI);
         } // End isFantasy
         else {
-            GameNew.newGame(currentDeck, event.getEventDeck());
+            GameNew.newGame(SubmenuQuestUtil.getCurrentDeck(), event.getEventDeck());
         }
 
         // Start transisiton to match UI.
         overlay.hideOverlay();
+    }
+
+    /** Selectable panels for duels and challenges. */
+    @SuppressWarnings("serial")
+    public static class SelectablePanel extends FPanel {
+        private final QuestEvent event;
+
+        /** @param e0 &emsp; QuestEvent */
+        public SelectablePanel(final QuestEvent e0) {
+            super();
+            this.event = e0;
+            this.setSelectable(true);
+            this.setHoverable(true);
+            this.setLayout(new MigLayout("insets 0, gap 0"));
+
+            this.setCommand(new Command() {
+                @Override
+                public void execute() {
+                    if (selectedOpponent != null) { selectedOpponent.setSelected(false); }
+                    else if (VSubmenuDuels.SINGLETON_INSTANCE.getPanel().isShowing() && getCurrentDeck() != null) {
+                        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+                    }
+                    else if (getCurrentDeck() != null) {
+                        VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+                    }
+
+                    selectedOpponent = SubmenuQuestUtil.SelectablePanel.this;
+                }
+            });
+
+            // Icon
+            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+            final File file = new File(base, event.getIconFilename());
+
+            final FLabel lblIcon = new FLabel.Builder().iconScaleFactor(1).build();
+            if (!file.exists()) {
+                lblIcon.setIcon(FSkin.getIcon(FSkin.ForgeIcons.ICO_UNKNOWN));
+            }
+            else {
+                lblIcon.setIcon(new ImageIcon(file.toString()));
+            }
+            this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
+
+            // Name
+            final FLabel lblName = new FLabel.Builder()
+                    .text(event.getTitle() + ": " + event.getDifficulty()).hoverable(false).build();
+            this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
+
+            // Description
+            final FTextArea tarDesc = new FTextArea();
+            tarDesc.setText(event.getDescription());
+            tarDesc.setFont(FSkin.getItalicFont(12));
+            this.add(tarDesc, "w 80%!, h 30px!");
+       }
+
+        /** @return QuestEvent */
+        public QuestEvent getEvent() {
+            return event;
+        }
     }
 }

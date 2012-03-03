@@ -59,22 +59,13 @@ public enum CSubmenuDeckEditor implements ICSubmenu {
             editor = (DeckEditorBase<?, T>) new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
         }
 
-
-        final Command exit = new Command() {
-            private static final long serialVersionUID = -9133358399503226853L;
-
-            @Override
-            public void execute() {
-                Singletons.getControl().getControlHome().getControlConstructed().updateDeckLists();
-            }
-        };
-
-        editor.show(exit);
+        editor.show(null);
 
         if (d0 != null) {
             editor.getController().setModel(d0);
         }
 
+        editor.setAlwaysOnTop(true);
         editor.setVisible(true);
     }
 }

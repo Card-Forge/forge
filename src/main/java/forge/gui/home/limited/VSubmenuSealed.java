@@ -14,12 +14,13 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Command;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
-import forge.view.home.StartButton;
+import forge.gui.home.StartButton;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FButton;
 import forge.view.toolbox.FLabel;
@@ -35,14 +36,10 @@ public enum VSubmenuSealed implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
-    @SuppressWarnings("serial")
-    private final Command cmdExit = new Command() { @Override
-        public void execute() { CSubmenuDraft.SINGLETON_INSTANCE.update(); } };
-
     /** */
     private final JPanel pnl            = new JPanel();
     private final StartButton btnStart  = new StartButton();
-    private final DeckLister lstDecks   = new DeckLister(GameType.Draft, cmdExit);
+    private final DeckLister lstDecks   = new DeckLister(GameType.Sealed);
     private final JLabel btnBuildDeck   = new FLabel.Builder()
         .fontScaleAuto(false).fontSize(16)
         .opaque(true).hoverable(true).text("Build a Sealed Deck").build();
@@ -78,8 +75,32 @@ public enum VSubmenuSealed implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
-        return EMenuGroup.LIMITED;
+    public EMenuGroup getGroupEnum() {
+        return EMenuGroup.SANCTIONED;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "Sealed Mode";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.LIMITED_SEALED.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuSealed.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)

@@ -8,11 +8,24 @@ public interface IVSubmenu {
      * @return {@link javax.swing.JPanel} */
     JPanel getPanel();
 
+    /** Retrives control object associated with this instance.
+     * @return {@link forge.gui.home.ICSubmenu}
+     */
+    ICSubmenu getControl();
+
     /** Returns parent menu grouping of this submenu, useful for
      * functions such as expanding and collapsing in the menu area.
      * 
      * @return {@link javax.swing.JPanel} */
-    EMenuGroup getGroup();
+    EMenuGroup getGroupEnum();
+
+    /** Display title string for this menu item.
+     * @return {@link java.lang.String} */
+    String getMenuTitle();
+
+    /** Enum registration for this menu item, in EMenuItem.
+     * @return {@link java.lang.String} */
+    String getItemEnum();
 
     /** Removes all children and (re)populates panel components, independent of constructor.*/
     void populate();

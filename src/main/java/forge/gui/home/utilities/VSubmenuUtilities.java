@@ -20,6 +20,8 @@ import javax.swing.text.StyledDocument;
 import net.miginfocom.swing.MigLayout;
 import forge.gui.GuiUtils;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
@@ -123,7 +125,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
+    public EMenuGroup getGroupEnum() {
         return EMenuGroup.UTILITIES;
     }
 
@@ -264,5 +266,29 @@ public enum VSubmenuUtilities implements IVSubmenu {
         overlay.add(btnCloseBig);
         overlay.add(scr);
         overlay.showOverlay();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "Content Downloaders";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.UTILITIES_DOWNLOADS.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuUtilities.SINGLETON_INSTANCE;
     }
 }

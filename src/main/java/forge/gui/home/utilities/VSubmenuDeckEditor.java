@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.view.toolbox.FLabel;
 
@@ -35,7 +37,7 @@ public enum VSubmenuDeckEditor implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
+    public EMenuGroup getGroupEnum() {
         return EMenuGroup.UTILITIES;
     }
 
@@ -45,5 +47,29 @@ public enum VSubmenuDeckEditor implements IVSubmenu {
     @Override
     public JPanel getPanel() {
         return pnl;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "Deck Editor";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.UTILITIES_EDITOR.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuDeckEditor.SINGLETON_INSTANCE;
     }
 }

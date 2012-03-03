@@ -1,4 +1,4 @@
-package forge.view.home;
+package forge.gui.home;
 
 import javax.swing.JButton;
 

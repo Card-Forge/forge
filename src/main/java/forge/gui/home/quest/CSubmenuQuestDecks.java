@@ -7,9 +7,11 @@ import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.deckeditor.DeckEditorQuest;
+import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.view.ViewHomeUI;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -26,7 +28,6 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         public void execute() {
             AllZone.getQuestData().saveData();
             update();
-            Singletons.getView().getViewHome().getBtnQuest().grabFocus();
         }
     };
 
@@ -35,12 +36,28 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         public void execute() {
             currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
             Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, currentDeck.toString());
-            VSubmenuDuels.SINGLETON_INSTANCE.setCurrentDeckStatus();
+            Singletons.getModel().getQuestPreferences().save();
+            VSubmenuDuels.SINGLETON_INSTANCE.updateCurrentDeckStatus();
+            VSubmenuChallenges.SINGLETON_INSTANCE.updateCurrentDeckStatus();
         }
     };
 
     private final Command cmdDeckDelete = new Command() { @Override
         public void execute() { update(); } };
+
+    /* (non-Javadoc)
+     * @see forge.control.home.IControlSubmenu#getCommand()
+     */
+    @Override
+    public Command getMenuCommand() {
+        return new Command() {
+            public void execute() {
+                if (AllZone.getQuestData() == null) {
+                    ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DATA);
+                }
+            }
+        };
+    }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -61,14 +78,6 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @Override
-    public Command getMenuCommand() {
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
     @Override
@@ -83,8 +92,9 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
 
         if (qData != null) {
             final String cd = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_DECK);
+
             for (Deck d : qData.getMyDecks()) {
-                if (d.getName().equals(cd)) {
+                if (d.getName() != null && d.getName().equals(cd)) {
                     currentDeck = d;
                     view.getLstDecks().setSelectedDeck(d);
                     break;
@@ -99,7 +109,15 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         view.getLstDecks().setDeleteCommand(cmdDeckDelete);
         view.getLstDecks().setExitCommand(cmdDeckExit);
 
-        VSubmenuDuels.SINGLETON_INSTANCE.setCurrentDeckStatus();
+        if (view.getLstDecks().getSelectedDeck() != null) {
+            Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, view.getLstDecks().getSelectedDeck().getName());
+        }
+        else {
+            Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());
+        }
+
+        VSubmenuDuels.SINGLETON_INSTANCE.updateCurrentDeckStatus();
+        VSubmenuChallenges.SINGLETON_INSTANCE.updateCurrentDeckStatus();
     }
 
     /** @return forge.deck.Deck */

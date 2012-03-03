@@ -21,12 +21,14 @@ import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DraftingProcess;
 import forge.gui.home.ICSubmenu;
+import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
+@SuppressWarnings("serial")
 public enum CSubmenuDraft implements ICSubmenu {
     /** */
     SINGLETON_INSTANCE;
@@ -72,6 +74,21 @@ public enum CSubmenuDraft implements ICSubmenu {
             "Walter", "Wilfred", "William", "Winston"
     };
 
+    private final Command cmdDeckExit = new Command() {
+        @Override
+        public void execute() {
+            update();
+            GuiUtils.closeOverlay();
+        }
+    };
+
+    private final Command cmdDeckSelect = new Command() {
+        @Override
+        public void execute() {
+            VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+        }
+    };
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -82,11 +99,14 @@ public enum CSubmenuDraft implements ICSubmenu {
         view.populate();
         CSubmenuDraft.SINGLETON_INSTANCE.update();
 
-        VSubmenuDraft.SINGLETON_INSTANCE.getBtnBuildDeck().addMouseListener(
+        view.getLstHumanDecks().setExitCommand(cmdDeckExit);
+        view.getLstHumanDecks().setSelectCommand(cmdDeckSelect);
+
+        view.getBtnBuildDeck().addMouseListener(
                 new MouseAdapter() { @Override
                     public void mousePressed(MouseEvent e) { setupDraft(); } });
 
-        VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().addMouseListener(
+        view.getBtnStart().addMouseListener(
                 new MouseAdapter() {
                     @Override
                     public void mouseReleased(final MouseEvent e) {
@@ -99,7 +119,7 @@ public enum CSubmenuDraft implements ICSubmenu {
                     }
                 });
 
-        VSubmenuDraft.SINGLETON_INSTANCE.getBtnDirections().addMouseListener(new MouseAdapter() {
+        view.getBtnDirections().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 view.showDirections();
@@ -136,6 +156,7 @@ public enum CSubmenuDraft implements ICSubmenu {
         for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
             human.add(d.getHumanDeck());
         }
+
         VSubmenuDraft.SINGLETON_INSTANCE.getLstHumanDecks().setDecks(human);
 
         if (human.size() > 1) {
@@ -178,6 +199,9 @@ public enum CSubmenuDraft implements ICSubmenu {
 
     /** */
     private void setupDraft() {
+        final FOverlay overlay = Singletons.getView().getOverlay();
+        overlay.showOverlay();
+
         final DraftingProcess draft = new DraftingProcess();
 
         // Determine what kind of booster draft to run
@@ -200,7 +224,6 @@ public enum CSubmenuDraft implements ICSubmenu {
         else if (o.toString().equals(draftTypes.get(2))) {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Custom));
         }
-
     }
 
     private String[] generateNames() {

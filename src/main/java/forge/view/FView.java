@@ -26,8 +26,6 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.control.FControl;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.view.toolbox.FOverlay;
 import forge.view.toolbox.FSkin;
 
@@ -44,13 +42,9 @@ public enum FView {
     private final FOverlay overlay = new FOverlay();
 
     private SplashFrame splash;
-    private ViewHomeUI home = null;
     private ViewMatchUI match = null;
     private ViewEditorUI editor = null;
     private ViewBazaarUI bazaar = null;
-
-  //private static final JLayeredPane lpnContent;
-    //private static final FControl control;
 
     /** The splash frame is guaranteed to exist when this constructor exits. */
     private FView() {
@@ -94,21 +88,6 @@ public enum FView {
         FView.this.splash = null;
 
         frame.setVisible(true);
-
-        // Open previous menu on first run, or constructed.
-        // Focus is reset when the frame becomes visible,
-        // so the call to show the menu must happen here.
-        final ForgePreferences.HomeMenus lastMenu =
-                ForgePreferences.HomeMenus.valueOf(Singletons.getModel().getPreferences().getPref(FPref.UI_HOMEMENU));
-
-        switch(lastMenu) {
-            case draft: Singletons.getView().getViewHome().showDraftMenu(); break;
-            case sealed: Singletons.getView().getViewHome().showSealedMenu(); break;
-            case quest: Singletons.getView().getViewHome().showQuestMenu(); break;
-            case settings: Singletons.getView().getViewHome().showSettingsMenu(); break;
-            case utilities: Singletons.getView().getViewHome().showUtilitiesMenu(); break;
-            default: Singletons.getView().getViewHome().showConstructedMenu();
-        }
     }
 
     /** @return {@link javax.swing.JLayeredPane} */
@@ -124,15 +103,6 @@ public enum FView {
     /** @return {@link forge.view.toolbox.FOverlay} */
     public FOverlay getOverlay() {
         return FView.this.overlay;
-    }
-
-    /** @return {@link forge.view.ViewHomeUI} */
-    public ViewHomeUI getViewHome() {
-        if (Singletons.getControl().getState() != FControl.HOME_SCREEN) {
-            throw new IllegalArgumentException("FView$getViewHome\n"
-                    + "may only be called while the home UI is showing.");
-        }
-        return FView.this.home;
     }
 
     /** @return {@link forge.view.ViewMatchUI} */
@@ -164,9 +134,9 @@ public enum FView {
 
     /** Like it says. */
     public void instantiateCachedUIStates() {
-        FView.this.home = new ViewHomeUI();
         FView.this.match = new ViewMatchUI();
         FView.this.editor = new ViewEditorUI();
         FView.this.bazaar = new ViewBazaarUI();
+        ViewHomeUI.SINGLETON_INSTANCE.initialize();
     }
 }

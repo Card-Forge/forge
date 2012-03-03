@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.view.toolbox.DeckLister;
 import forge.view.toolbox.FLabel;
@@ -50,7 +52,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
+    public EMenuGroup getGroupEnum() {
         return EMenuGroup.QUEST;
     }
 
@@ -60,6 +62,30 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
     @Override
     public JPanel getPanel() {
         return pnl;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "Quest Decks";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.QUEST_DECKS.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuQuestDecks.SINGLETON_INSTANCE;
     }
 
     /** @return {@link forge.view.toolbox.DeckLister} */

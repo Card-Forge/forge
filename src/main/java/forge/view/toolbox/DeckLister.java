@@ -421,30 +421,36 @@ public class DeckLister extends JPanel {
     }
 
     private void editDeck(final Deck d0) {
+        Singletons.getView().getOverlay().showOverlay();
+
         switch (this.gametype) {
         case Quest:
             Constant.Runtime.HUMAN_DECK[0] = d0;
             final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
             editor.show(this.cmdEditorExit);
             editor.setVisible(true);
+            editor.setAlwaysOnTop(true);
             break;
         case Constructed:
             final DeckEditorConstructed cEditor = new DeckEditorConstructed();
             cEditor.show(this.cmdEditorExit);
             cEditor.getController().load(d0.getName());
             cEditor.setVisible(true);
+            cEditor.setAlwaysOnTop(true);
             break;
         case Sealed:
             final DeckEditorLimited sEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
             sEditor.show(this.cmdEditorExit);
             sEditor.getController().load(d0.getName());
             sEditor.setVisible(true);
+            sEditor.setAlwaysOnTop(true);
             break;
         case Draft:
             final DeckEditorLimited dEditor = new DeckEditorLimited(Singletons.getModel().getDecks().getDraft());
             dEditor.show(this.cmdEditorExit);
             dEditor.getController().load(d0.getName());
             dEditor.setVisible(true);
+            dEditor.setAlwaysOnTop(true);
             break;
         default:
             break;
@@ -470,7 +476,6 @@ public class DeckLister extends JPanel {
         } else if (this.gametype.equals(GameType.Quest)) {
             AllZone.getQuestData().getMyDecks().delete(d0.getName());
             AllZone.getQuestData().saveData();
-            Singletons.getView().getViewHome().getBtnQuest().grabFocus();
         } else {
             deckManager.getConstructed().delete(d0.getName());
         }

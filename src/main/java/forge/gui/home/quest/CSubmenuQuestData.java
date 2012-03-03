@@ -22,16 +22,22 @@ import forge.quest.data.QuestPreferences.QPref;
  * TODO: Write javadoc for this type.
  *
  */
+@SuppressWarnings("serial")
 public enum CSubmenuQuestData implements ICSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
     private final Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
 
+    private final Command cmdQuestSelect = new Command() { @Override
+        public void execute() { changeQuest(); } };
+
+    private final Command cmdQuestDelete = new Command() { @Override
+        public void execute() { update(); } };
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
-    @SuppressWarnings("serial")
     @Override
     public void initialize() {
         VSubmenuQuestData.SINGLETON_INSTANCE.populate();
@@ -54,75 +60,8 @@ public enum CSubmenuQuestData implements ICSubmenu {
      */
     @Override
     public void update() {
-        refreshQuests();
-    }
-
-    /**
-     * The actuator for new quests.
-     */
-    private void newQuest() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
-        int difficulty = 0;
-        QuestData newdata = new QuestData();
-
-        final String mode = view.getRadFantasy().isSelected()
-                ? forge.quest.data.QuestData.FANTASY
-                : forge.quest.data.QuestData.CLASSIC;
-
-        if (view.getRadEasy().isSelected()) {
-            difficulty = 0;
-        } else if (view.getRadMedium().isSelected()) {
-            difficulty = 1;
-        } else if (view.getRadHard().isSelected()) {
-            difficulty = 2;
-        } else if (view.getRadExpert().isSelected()) {
-            difficulty = 3;
-        } else {
-            throw new IllegalStateException(
-                    "ControlQuest() > newQuest(): Error starting new quest!");
-        }
-
-        final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
-
-        if (o == null) { return; }
-
-        final String questName = GuiUtils.cleanString(o.toString());
-
-        if (getAllQuests().get(questName) != null || questName.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please pick another quest name, a quest already has that name.");
-            return;
-        }
-
-        // Give the user a few cards to build a deck
-        newdata.newGame(difficulty, mode, view.getCbStandardStart().isSelected());
-        newdata.setName(questName);
-        newdata.saveData();
-
-        // Save in preferences.
-        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST, questName + ".dat");
-        Singletons.getModel().getQuestPreferences().save();
-
-        Singletons.getView().getViewHome().resetQuest();
-    }   // New Quest
-
-    /** Changes between quest data files. */
-    private void changeQuest() {
-        AllZone.setQuestData(VSubmenuQuestData.SINGLETON_INSTANCE
-                .getLstQuests().getSelectedQuest());
-
-        // Save in preferences.
-        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST,
-                AllZone.getQuestData().getName() + ".dat");
-        Singletons.getModel().getQuestPreferences().save();
-
-        //refreshDecks();
-        //refreshStats();
-    }
-
-    /** Resets quests, then retrieves and sets current quest. */
-    public void refreshQuests() {
-        final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
-        File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
+        final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
 
         // Temporary transition code between v1.2.2 and v1.2.3.
         // Can be safely deleted after release of 1.2.3.
@@ -170,6 +109,74 @@ public enum CSubmenuQuestData implements ICSubmenu {
         else {
             AllZone.setQuestData(null);
         }
+
+        view.getLstQuests().setSelectCommand(cmdQuestSelect);
+        view.getLstQuests().setDeleteCommand(cmdQuestDelete);
+    }
+
+    /**
+     * The actuator for new quests.
+     */
+    private void newQuest() {
+        final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
+        int difficulty = 0;
+        QuestData newdata = new QuestData();
+
+        final String mode = view.getRadFantasy().isSelected()
+                ? forge.quest.data.QuestData.FANTASY
+                : forge.quest.data.QuestData.CLASSIC;
+
+        if (view.getRadEasy().isSelected()) {
+            difficulty = 0;
+        } else if (view.getRadMedium().isSelected()) {
+            difficulty = 1;
+        } else if (view.getRadHard().isSelected()) {
+            difficulty = 2;
+        } else if (view.getRadExpert().isSelected()) {
+            difficulty = 3;
+        } else {
+            throw new IllegalStateException(
+                    "ControlQuest() > newQuest(): Error starting new quest!");
+        }
+
+        final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
+
+        if (o == null) { return; }
+
+        final String questName = GuiUtils.cleanString(o.toString());
+
+        if (getAllQuests().get(questName) != null || questName.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please pick another quest name, a quest already has that name.");
+            return;
+        }
+
+        // Give the user a few cards to build a deck
+        newdata.newGame(difficulty, mode, view.getCbStandardStart().isSelected());
+        newdata.setName(questName);
+        newdata.saveData();
+
+        // Save in preferences.
+        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST, questName + ".dat");
+        Singletons.getModel().getQuestPreferences().save();
+
+        update();
+    }   // New Quest
+
+    /** Changes between quest data files. */
+    private void changeQuest() {
+        AllZone.setQuestData(VSubmenuQuestData.SINGLETON_INSTANCE
+                .getLstQuests().getSelectedQuest());
+
+        // Save in preferences.
+        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST,
+                AllZone.getQuestData().getName() + ".dat");
+        Singletons.getModel().getQuestPreferences().save();
+
+        SubmenuQuestUtil.updateStatsAndPet();
+
+        CSubmenuDuels.SINGLETON_INSTANCE.update();
+        CSubmenuChallenges.SINGLETON_INSTANCE.update();
+        CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
     }
 
     /** @return  */

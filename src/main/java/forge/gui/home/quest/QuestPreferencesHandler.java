@@ -1,4 +1,4 @@
-package forge.view.home;
+package forge.gui.home.quest;
 
 import java.awt.Color;
 import java.awt.Font;

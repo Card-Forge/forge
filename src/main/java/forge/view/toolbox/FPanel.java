@@ -18,9 +18,11 @@
 package forge.view.toolbox;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -67,9 +69,16 @@ public class FPanel extends JPanel {
     // Image aspect ratio (width / height)
     private double iar;
 
-    /** Core panel used in UI. See class javadoc for more details. */
+    /** */
     public FPanel() {
-        super();
+        this(new FlowLayout());
+    }
+
+    /** Core panel used in UI. See class javadoc for more details.
+     * @param lm0 &emsp; {@link java.awt.LayoutManager}
+     */
+    public FPanel(final LayoutManager lm0) {
+        super(lm0);
 
         // Opacity must be removed for proper rounded corner drawing
         this.setOpaque(false);

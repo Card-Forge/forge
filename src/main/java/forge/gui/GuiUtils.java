@@ -36,9 +36,11 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -62,6 +64,7 @@ import forge.view.toolbox.FSkin;
  * @version $Id$
  */
 public final class GuiUtils {
+    private static int counter = 0;
 
     private GuiUtils() {
         throw new AssertionError();
@@ -423,6 +426,43 @@ public final class GuiUtils {
                 .fontScaleAuto(false).fontSize(22).build(), "h 40px!, align center");
 
         overlay.add(pnl);
+
+        return overlay;
+    }
+
+    /** @param msg0 &emsp; {@link java.lang.String}
+        @return {@forge.view.toolbox.FOverlay} */
+    // NOTE: This animation happens on the EDT; if the EDT is tied up doing something
+    // else, the animation is effectively frozen.  So, this needs some work.
+    public static FOverlay loadingOverlay(final String msg0) {
+        final FOverlay overlay = GuiUtils.genericOverlay();
+        final FPanel pnlLoading = new FPanel();
+        final int w = overlay.getWidth();
+        final int h = overlay.getHeight();
+
+        final JLabel lblLoading = new JLabel("");
+        lblLoading.setOpaque(true);
+        lblLoading.setBackground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        lblLoading.setMinimumSize(new Dimension(0, 20));
+
+        pnlLoading.setBounds((int) ((w - 170) / 2), (int) ((h - 80) / 2), 170, 80);
+        pnlLoading.setLayout(new MigLayout("wrap, align center"));
+        pnlLoading.add(new FLabel.Builder().fontSize(18)
+                .fontScaleAuto(false).text(msg0).build(), "h 20px!, w 140px!, gap 0 0 5px 0");
+        pnlLoading.add(lblLoading, "gap 0 0 0 10px");
+
+        overlay.add(pnlLoading);
+
+        GuiUtils.counter = 0;
+        final Timer timer = new Timer(300, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                lblLoading.setMinimumSize(new Dimension(10 * (GuiUtils.counter++), 20));
+                lblLoading.revalidate();
+                if (GuiUtils.counter > 13) { GuiUtils.counter = 0; }
+            }
+        });
+        timer.start();
 
         return overlay;
     }

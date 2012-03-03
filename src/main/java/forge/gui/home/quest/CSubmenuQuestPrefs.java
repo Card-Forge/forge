@@ -25,19 +25,19 @@ public enum CSubmenuQuestPrefs implements ICSubmenu {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#getCommand()
-     */
-    @Override
-    public Command getMenuCommand() {
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {
 
+    }
+
+    /* (non-Javadoc)
+     * @see forge.control.home.IControlSubmenu#getCommand()
+     */
+    @Override
+    public Command getMenuCommand() {
+        return null;
     }
 
     /**

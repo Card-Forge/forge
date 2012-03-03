@@ -720,8 +720,8 @@ public enum FSkin {
         final int aw = bimAvatars.getWidth();
         final int ah = bimAvatars.getHeight();
 
-        for (int j = 0; j < aw; j += 100) {
-            for (int i = 0; i < ah; i += 100) {
+        for (int j = 0; j < ah; j += 100) {
+            for (int i = 0; i < aw; i += 100) {
                 if (i == 0 && j == 0) { continue; }
                 pxTest = FSkin.getColorFromPixel(bimAvatars.getRGB(i + 50, j + 50));
                 if (pxTest.getAlpha() == 0) { continue; }

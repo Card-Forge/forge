@@ -8,8 +8,9 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.home.EMenuGroup;
+import forge.gui.home.EMenuItem;
+import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
-import forge.view.home.QuestFileLister;
 import forge.view.toolbox.FCheckBox;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FPanel;
@@ -119,7 +120,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
      * @see forge.view.home.IViewSubmenu#getGroup()
      */
     @Override
-    public EMenuGroup getGroup() {
+    public EMenuGroup getGroupEnum() {
         return EMenuGroup.QUEST;
     }
 
@@ -131,7 +132,32 @@ public enum VSubmenuQuestData implements IVSubmenu {
         return pnl;
     }
 
-    /** @return {@link forge.view.home.QuestFileLister} */
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuTitle()
+     */
+    @Override
+    public String getMenuTitle() {
+        return "New / Load Quest";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getMenuName()
+     */
+    @Override
+    public String getItemEnum() {
+        return EMenuItem.QUEST_DATA.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.home.IVSubmenu#getControl()
+     */
+    @Override
+    public ICSubmenu getControl() {
+        return CSubmenuQuestData.SINGLETON_INSTANCE;
+    }
+
+    /** @return {@link forge.gui.home.quest.QuestFileLister} */
     public QuestFileLister getLstQuests() {
         return this.lstQuests;
     }
