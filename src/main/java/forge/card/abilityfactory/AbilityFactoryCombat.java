@@ -950,10 +950,9 @@ public final class AbilityFactoryCombat {
 
         boolean chance = false;
 
-        CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
-        list = list.getTargetableCards(sa);
-
         if (abTgt != null) {
+            CardList list = AllZone.getHumanPlayer().getCardsIn(Zone.Battlefield).getType("Creature");
+            list = list.getTargetableCards(sa);
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
             list = list.filter(new CardListFilter() {
                 @Override
@@ -970,15 +969,15 @@ public final class AbilityFactoryCombat {
                     return true;
                 }
             });
-            if (!list.isEmpty()) {
-                final Card blocker = CardFactoryUtil.getBestCreatureAI(list);
-                if (blocker == null) {
-                    return false;
-                }
-                abTgt.addTarget(CardFactoryUtil.getBestCreatureAI(list));
-                chance = true; // TODO change this to true, once the human input
-                               // takes mustblocks into account
+            if (list.isEmpty()) {
+                return false;
             }
+            final Card blocker = CardFactoryUtil.getBestCreatureAI(list);
+            if (blocker == null) {
+                return false;
+            }
+            abTgt.addTarget(blocker);
+            chance = true;
         } else {
             return false;
         }

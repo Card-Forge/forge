@@ -176,12 +176,12 @@ public class CardFactorySorceries {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Insurrection")) {
+        /*else if (cardName.equals("Insurrection")) {
             /*
              * Untap all creatures and gain control of them until end of turn.
              * They gain haste until end of turn.
              */
-            final ArrayList<PlayerZone> orig = new ArrayList<PlayerZone>();
+            /*final ArrayList<PlayerZone> orig = new ArrayList<PlayerZone>();
             final PlayerZone[] newZone = new PlayerZone[1];
             final ArrayList<Player> controllerEOT = new ArrayList<Player>();
             final ArrayList<Card> targets = new ArrayList<Card>();
@@ -245,7 +245,7 @@ public class CardFactorySorceries {
             }; // SpellAbility
             card.addSpellAbility(spell);
             card.setSVar("PlayMain1", "TRUE");
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Brilliant Ultimatum")) {
@@ -1135,56 +1135,6 @@ public class CardFactorySorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(input);
         } // *************** END ************ END **************************
-
-        /*************** START *********** START **************************
-        else if (cardName.equals("Recall")) {
-            /*
-             * Discard X cards, then return a card from your graveyard to your
-             * hand for each card discarded this way. Exile Recall.
-             *
-            final Cost cost = new Cost(card.getManaCost(), cardName, false);
-            final SpellAbility spell = new Spell(card, cost, null) {
-                private static final long serialVersionUID = -3935814273439962834L;
-
-                @Override
-                public boolean canPlayAI() {
-                    // for compy to play this wisely, it should check hand, and if there
-                    // are no spells that canPlayAI(), then use recall. maybe.
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    int numCards = card.getXManaCostPaid();
-                    final Player player = card.getController();
-                    final int maxCards = player.getCardsIn(Zone.Hand).size();
-                    if (numCards != 0) {
-                        numCards = Math.min(numCards, maxCards);
-                        if (player.isHuman()) {
-                            AllZone.getInputControl()
-                                    .setInput(CardFactoryUtil.inputDiscardRecall(numCards, card, this));
-                        }
-                    }
-                    /*
-                     * else { //computer
-                     * card.getControler().discardRandom(numCards);
-                     * Singletons.getModel().getGameAction().exile(card); CardList grave =
-                     * AllZoneUtil.getPlayerGraveyard(card.getController());
-                     * for(int i = 1; i <= numCards; i ++) { Card t1 =
-                     * CardFactoryUtil.AI_getBestCreature(grave); if(null != t1)
-                     * { t1 = grave.get(0); grave.remove(t1);
-                     * Singletons.getModel().getGameAction().moveToHand(t1); } } }
-                     *
-                } // resolve()
-            }; // SpellAbility
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - discard X cards and return X cards to your hand.");
-            spell.setStackDescription(sb.toString());
-
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
-        */
 
         // *************** START *********** START **************************
         else if (cardName.equals("Windfall")) {

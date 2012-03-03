@@ -521,7 +521,18 @@ public class AbilityFactoryGainControl {
      */
     private boolean gainControlDrawbackAI(final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            // all is good
+            if (this.params.containsKey("AllValid")) {
+                CardList tgtCards = AllZoneUtil.getCardsIn(Constant.Zone.Battlefield)
+                        .getController(AllZone.getHumanPlayer());
+                tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
+                if (tgtCards.isEmpty()) {
+                    return false;
+                }
+            }
+            if ((this.lose != null) && this.lose.contains("EOT")
+                    && AllZone.getPhaseHandler().isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
         } else {
             return this.gainControlTgtAI(sa);
         }

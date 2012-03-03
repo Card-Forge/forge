@@ -192,7 +192,7 @@ public class AbilityFactoryPermanentState {
             sb.append("up to ").append(params.get("Amount")).append(" ");
             sb.append(params.get("UntapType")).append("s");
         } else {
-            ArrayList<Card> tgtCards;
+            ArrayList<Card> tgtCards = new ArrayList<Card>();
             final Target tgt = sa.getTarget();
             if (tgt != null) {
                 tgtCards = tgt.getTargetCards();
@@ -1325,9 +1325,11 @@ public class AbilityFactoryPermanentState {
      * @return a boolean.
      */
     private static boolean untapAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        /*
-         * All cards using this currently have SVar:RemAIDeck:True
-         */
+        // check SubAbilities DoTrigger?
+        final AbilitySub abSub = sa.getSubAbility();
+        if (abSub != null && abSub.chkAIDrawback()) {
+            return true;
+        }
         return false;
     }
 

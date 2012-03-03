@@ -1788,7 +1788,7 @@ public class AbilityFactory {
         else if (defined.equals("Targeted")) {
             final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
             if (parent != null) {
-                if (parent.getTarget() != null) {
+                if (parent.getTarget() != null && parent.getTarget().getTargetCards() != null) {
                     cards.addAll(parent.getTarget().getTargetCards());
                 }
             }
@@ -2194,11 +2194,13 @@ public class AbilityFactory {
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof AbilitySub)) {
+            if (!(parent instanceof AbilitySub) || ((AbilitySub) parent).getParent() == null) {
                 return parent;
             }
             parent = ((AbilitySub) parent).getParent();
-        } while ((parent.getTarget() == null) || (parent.getTarget().getTargetCards().size() == 0));
+        } while (parent.getTarget() == null
+                || parent.getTarget().getTargetCards() == null
+                || parent.getTarget().getTargetCards().size() == 0);
 
         return parent;
     }
