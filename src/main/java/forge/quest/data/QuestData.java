@@ -208,7 +208,7 @@ public final class QuestData {
 
         final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
         final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
-                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS));
+                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_SNOW_LANDS));
         this.getCardPool().addAll(lands);
         this.randomizeOpponents();
     }
