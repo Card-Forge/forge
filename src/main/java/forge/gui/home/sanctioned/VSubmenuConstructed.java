@@ -1,4 +1,4 @@
-package forge.gui.home.limited;
+package forge.gui.home.sanctioned;
 
 import java.awt.Font;
 

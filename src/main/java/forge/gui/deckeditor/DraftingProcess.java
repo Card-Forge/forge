@@ -48,7 +48,7 @@ import forge.gui.deckeditor.elements.CardPanelLite;
 import forge.gui.deckeditor.elements.ManaCostRenderer;
 import forge.gui.deckeditor.elements.TableColumnInfo;
 import forge.gui.deckeditor.elements.TableView;
-import forge.gui.home.limited.CSubmenuDraft;
+import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;

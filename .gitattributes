@@ -11440,13 +11440,6 @@ src/main/java/forge/gui/home/EMenuItem.java -text
 src/main/java/forge/gui/home/ICSubmenu.java -text
 src/main/java/forge/gui/home/IVSubmenu.java -text
 src/main/java/forge/gui/home/StartButton.java -text
-src/main/java/forge/gui/home/limited/CSubmenuConstructed.java -text
-src/main/java/forge/gui/home/limited/CSubmenuDraft.java -text
-src/main/java/forge/gui/home/limited/CSubmenuSealed.java -text
-src/main/java/forge/gui/home/limited/VSubmenuConstructed.java -text
-src/main/java/forge/gui/home/limited/VSubmenuDraft.java -text
-src/main/java/forge/gui/home/limited/VSubmenuSealed.java -text
-src/main/java/forge/gui/home/limited/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
@@ -11463,6 +11456,13 @@ src/main/java/forge/gui/home/quest/VSubmenuQuestData.java -text
 src/main/java/forge/gui/home/quest/VSubmenuQuestDecks.java -text
 src/main/java/forge/gui/home/quest/VSubmenuQuestPrefs.java -text
 src/main/java/forge/gui/home/quest/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/home/sanctioned/CSubmenuConstructed.java -text
+src/main/java/forge/gui/home/sanctioned/CSubmenuDraft.java -text
+src/main/java/forge/gui/home/sanctioned/CSubmenuSealed.java -text
+src/main/java/forge/gui/home/sanctioned/VSubmenuConstructed.java -text
+src/main/java/forge/gui/home/sanctioned/VSubmenuDraft.java -text
+src/main/java/forge/gui/home/sanctioned/VSubmenuSealed.java -text
+src/main/java/forge/gui/home/sanctioned/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/settings/CSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/CSubmenuPreferences.java -text
 src/main/java/forge/gui/home/settings/VSubmenuAvatars.java -text
