@@ -17,28 +17,19 @@
  */
 package forge.quest.data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.item.CardPrinted;
-import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
-import forge.item.PreconDeck;
+import forge.item.*;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
-import forge.util.Predicate;
-import forge.util.StorageView;
-import forge.util.IStorage;
-import forge.util.IStorageView;
-import forge.util.MyRandom;
+import forge.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
 //you have to call one of these two methods below
@@ -172,8 +163,8 @@ public final class QuestData {
     private transient QuestEvent currentEvent;
 
     // This is used by shop. Had no idea where else to place this
-    private static transient IStorageView<PreconDeck> preconManager = new StorageView<PreconDeck>(new PreconReader(
-            ForgeProps.getFile(NewConstants.Quest.PRECONS)));
+    private static transient IStorageView<PreconDeck> preconManager =
+            new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -235,22 +226,34 @@ public final class QuestData {
      * 
      * @param diff
      *            the diff
-     * @param m0de
-     *            the m0de
-     * @param standardStart
-     *            the standard start
+     * @param mode
+     *            the mode
+     * @param startPool
+     *            the start type
      */
-    public void newGame(final int diff, final String m0de, final boolean standardStart) {
+    public void newGame(final int diff, final String mode, final QuestStartPool startPool, final String preconName) {
         this.setDifficulty(diff);
 
-        final Predicate<CardPrinted> filter = standardStart ? Singletons.getModel().getFormats().getStandard()
-                .getFilterPrinted() : CardPrinted.Predicates.Presets.IS_TRUE;
-
-        this.myCards.setupNewGameCardPool(filter, diff);
-        this.setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
-
-        this.mode = m0de;
+        this.mode = mode;
         this.life = this.mode.equals(QuestData.FANTASY) ? 15 : 20;
+
+        final Predicate<CardPrinted> filter;
+        switch (startPool) {
+            case PRECON:
+                myCards.addPreconDeck(preconManager.get(preconName));
+                return;
+
+            case STANDARD:
+                filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
+                break;
+            
+            default: //Unrestricted
+                filter = CardPrinted.Predicates.Presets.IS_TRUE;
+                break;
+        }
+
+        this.setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
+        this.myCards.setupNewGameCardPool(filter, diff);
     }
 
     // All belongings

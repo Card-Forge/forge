@@ -11529,6 +11529,7 @@ src/main/java/forge/quest/data/QuestDuel.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestEvent.java -text
 src/main/java/forge/quest/data/QuestEventManager.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestStartPool.java -text
 src/main/java/forge/quest/data/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestUtilCards.java -text
 src/main/java/forge/quest/data/bazaar/QuestStallDefinition.java svneol=native#text/plain

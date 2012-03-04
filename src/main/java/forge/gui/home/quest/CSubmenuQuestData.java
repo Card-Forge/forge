@@ -1,12 +1,5 @@
 package forge.gui.home.quest;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.JOptionPane;
-
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
@@ -17,6 +10,15 @@ import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.data.QuestStartPool;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.HashMap;
+import java.util.Map;
+
+import static forge.quest.data.QuestStartPool.*;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -139,6 +141,16 @@ public enum CSubmenuQuestData implements ICSubmenu {
                     "ControlQuest() > newQuest(): Error starting new quest!");
         }
 
+        final QuestStartPool startPool;
+        final String startPrecon  = view.getPrecon();
+        if (view.getRadCompleteStart().isSelected()) {
+            startPool = COMPLETE;
+        } else if (view.getRadStandardStart().isSelected()) {
+            startPool = STANDARD;
+        } else {
+            startPool = PRECON;
+        }
+
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
 
         if (o == null) { return; }
@@ -151,7 +163,7 @@ public enum CSubmenuQuestData implements ICSubmenu {
         }
 
         // Give the user a few cards to build a deck
-        newdata.newGame(difficulty, mode, view.getCbStandardStart().isSelected());
+        newdata.newGame(difficulty, mode, startPool, startPrecon);
         newdata.setName(questName);
         newdata.saveData();
 

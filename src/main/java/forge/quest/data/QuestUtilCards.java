@@ -17,30 +17,21 @@
  */
 package forge.quest.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
-import net.slightlymagic.braids.util.lambda.Lambda1;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
-import forge.item.BoosterPack;
-import forge.item.CardDb;
-import forge.item.CardPrinted;
-import forge.item.FatPack;
-import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
-import forge.item.OpenablePack;
-import forge.item.PreconDeck;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.quest.BoosterUtils;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 import forge.util.Predicate;
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -222,9 +213,13 @@ public final class QuestUtilCards {
         if (this.q.getCredits() >= value) {
             this.q.setCredits(this.q.getCredits() - value);
             this.q.getShopList().remove(precon);
-            this.q.getMyDecks().add(precon.getDeck());
-            this.addAllCards(precon.getDeck().getMain().toFlatList());
+            addPreconDeck(precon);
         }
+    }
+
+    void addPreconDeck(PreconDeck precon) {
+        this.q.getMyDecks().add(precon.getDeck());
+        this.addAllCards(precon.getDeck().getMain().toFlatList());
     }
 
     /**
@@ -357,7 +352,9 @@ public final class QuestUtilCards {
      */
     public void generateTournamentsInShop(final int count) {
         Predicate<CardEdition> hasTournament = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
-        this.q.getShopList().addAllFlat(hasTournament.random(Singletons.getModel().getEditions(), count, TournamentPack.FN_FROM_SET));
+        this.q.getShopList().addAllFlat(hasTournament.random(Singletons.getModel().getEditions(),
+                count,
+                TournamentPack.FN_FROM_SET));
     }
 
     public void generateFatPacksInShop(final int count) {

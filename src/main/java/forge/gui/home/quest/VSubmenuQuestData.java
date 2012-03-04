@@ -1,22 +1,17 @@
 package forge.gui.home.quest;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.*;
+import forge.quest.data.QuestData;
+
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /** 
  * Singleton instance of "Colors" submenu in "Constructed" group.
@@ -35,10 +30,15 @@ public enum VSubmenuQuestData implements IVSubmenu {
     private final JRadioButton radMedium = new FRadioButton("Medium");
     private final JRadioButton radHard = new FRadioButton("Hard");
     private final JRadioButton radExpert = new FRadioButton("Expert");
+
     private final JRadioButton radFantasy = new FRadioButton("Fantasy");
     private final JRadioButton radClassic = new FRadioButton("Classic");
 
-    private final JCheckBox cbStandardStart = new FCheckBox("Standard (Type 2) Starting Pool");
+    private final JRadioButton radCompleteStart = new FRadioButton("Unrestricted Starting Pool");
+    private final JRadioButton radStandardStart = new FRadioButton("Standard (Type 2) Starting Pool");
+    private final JRadioButton radPreconStart = new FRadioButton("Preconstructed Deck: ");
+    private final JComboBox cbxPrecon = new JComboBox();
+
     private final FLabel btnEmbark = new FLabel.Builder().opaque(true).hoverable(true).text("Embark!").build();
 
     /* (non-Javadoc)
@@ -73,14 +73,32 @@ public enum VSubmenuQuestData implements IVSubmenu {
         group1.add(radMedium);
         group1.add(radHard);
         group1.add(radExpert);
-
         radEasy.setSelected(true);
-        radClassic.setSelected(true);
 
         final ButtonGroup group2 = new ButtonGroup();
         group2.add(radFantasy);
         group2.add(radClassic);
+        radClassic.setSelected(true);
 
+        final ActionListener preconListener = new ActionListener() {
+            @Override public void actionPerformed(ActionEvent actionEvent) {
+                cbxPrecon.setEnabled(radPreconStart.isSelected());
+            }
+        };
+
+        for (String preconDeck : QuestData.getPrecons().getNames()) {
+            cbxPrecon.addItem(preconDeck);
+        }
+
+        final ButtonGroup group3 = new ButtonGroup();
+        group3.add(radCompleteStart);
+        radCompleteStart.addActionListener(preconListener);
+        group3.add(radStandardStart);
+        radStandardStart.addActionListener(preconListener);
+        group3.add(radPreconStart);
+        radPreconStart.addActionListener(preconListener);
+        radCompleteStart.setSelected(true);
+        cbxPrecon.setEnabled(false);
         final JPanel pnlOptions = new JPanel();
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 0"));
@@ -91,8 +109,11 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlOptions.add(radMedium, constraints + ", gap 7.5% 2.5% 0 0");
         pnlOptions.add(radClassic, constraints + ", wrap");
         pnlOptions.add(radHard, constraints + ", gap 7.5% 2.5% 0 0");
-        pnlOptions.add(cbStandardStart, constraints + ", wrap");
-        pnlOptions.add(radExpert, constraints + ", gap 7.5% 2.5% 0 0, wrap");
+        pnlOptions.add(radCompleteStart, constraints + ", wrap");
+        pnlOptions.add(radExpert, constraints + ", gap 7.5% 2.5% 0 0 ");
+        pnlOptions.add(radStandardStart, constraints + ", wrap");
+        pnlOptions.add(radPreconStart, constraints + ", wrap, skip");
+        pnlOptions.add(cbxPrecon, "gap 20 0, w 30%!, h 35px!, wrap, skip");
 
         pnlOptions.add(btnEmbark, "w 40%!, h 30px!, gap 30% 0 20px 0, span 3 1");
 
@@ -111,7 +132,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlViewport.add(scr, "w 96%!, pushy, growy, gap 2% 0 0 30px");
 
         pnlViewport.add(pnlTitleNew, "w 96%, h 36px!, gap 2% 0 0 10px");
-        pnlViewport.add(pnlOptions, "w 96%!, h 200px!, gap 2% 0 0 20px");
+        pnlViewport.add(pnlOptions, "w 96%!, h 250px!, gap 2% 0 0 20px");
 
         pnl.add(new FScrollPane(pnlViewport), "w 100%!, h 100%!");
     }
@@ -192,10 +213,23 @@ public enum VSubmenuQuestData implements IVSubmenu {
         return radClassic;
     }
 
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbStandardStart() {
-        return cbStandardStart;
+    public JRadioButton getRadCompleteStart() {
+        return radCompleteStart;
     }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JRadioButton getRadStandardStart() {
+        return radStandardStart;
+    }
+
+    public JRadioButton getRadPreconStart() {
+        return radPreconStart;
+    }
+    
+    public String getPrecon() {
+        return (String) cbxPrecon.getSelectedItem();
+    }
+    
 
     /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnEmbark() {
