@@ -1,12 +1,9 @@
 package forge.gui.home.utilities;
 
 import forge.Command;
-import forge.Singletons;
 import forge.deck.DeckBase;
-import forge.game.GameType;
 import forge.gui.deckeditor.DeckEditorBase;
 import forge.gui.deckeditor.DeckEditorConstructed;
-import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.home.ICSubmenu;
 
 /** 
@@ -33,7 +30,7 @@ public enum CSubmenuDeckEditor implements ICSubmenu {
     @Override
     public Command getMenuCommand() {
         return new Command() { @Override
-            public void execute() { showDeckEditor(GameType.Constructed, null); } };
+            public void execute() { showDeckEditor(); } };
     }
 
     /* (non-Javadoc)
@@ -43,28 +40,13 @@ public enum CSubmenuDeckEditor implements ICSubmenu {
     public void update() { }
 
     /**
-     * @param <T> &emsp;
-     * @param gt0 &emsp; GameType
-     * @param d0 &emsp; Deck
+     * Shows constructed mode editor.
+     * @param <T> extends DeckBase
      */
     @SuppressWarnings("unchecked")
-    public <T extends DeckBase> void showDeckEditor(GameType gt0, T d0) {
-
-        DeckEditorBase<?, T> editor = null;
-        if (gt0 == GameType.Constructed) {
-            editor = (DeckEditorBase<?, T>) new DeckEditorConstructed();
-        } else if (gt0 == GameType.Draft) {
-            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(Singletons.getModel().getDecks().getDraft());
-        } else if (gt0 == GameType.Sealed) {
-            editor = (DeckEditorBase<?, T>) new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
-        }
-
+    private <T extends DeckBase> void showDeckEditor() {
+        DeckEditorBase<?, T> editor = (DeckEditorBase<?, T>) new DeckEditorConstructed();
         editor.show(null);
-
-        if (d0 != null) {
-            editor.getController().setModel(d0);
-        }
-
         editor.setAlwaysOnTop(true);
         editor.setVisible(true);
     }

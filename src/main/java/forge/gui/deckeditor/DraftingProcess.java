@@ -112,7 +112,6 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
         this.show(null);
-
     }
 
     /**
@@ -338,6 +337,8 @@ public class DraftingProcess extends DeckEditorBase<CardPrinted, DeckGroup> {
 
         // close and open next screen
         DraftingProcess.this.dispose();
+
+        // This should be handled in the exit command of the editor, not here.
         CSubmenuDraft.SINGLETON_INSTANCE.update();
         GuiUtils.closeOverlay();
     } /* saveDraft() */

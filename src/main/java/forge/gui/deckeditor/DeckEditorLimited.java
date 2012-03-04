@@ -88,7 +88,9 @@ public final class DeckEditorLimited extends DeckEditorBase<CardPrinted, DeckGro
             @Override
             public void execute() {
                 DeckEditorLimited.this.dispose();
-                exitCommand.execute();
+                if (exitCommand != null) {
+                    exitCommand.execute();
+                }
             }
         };
 

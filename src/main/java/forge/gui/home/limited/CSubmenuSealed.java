@@ -18,13 +18,14 @@ import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
 import forge.game.GameNew;
-import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
+import forge.gui.deckeditor.DeckEditorBase;
+import forge.gui.deckeditor.DeckEditorLimited;
 import forge.gui.home.ICSubmenu;
-import forge.gui.home.utilities.CSubmenuDeckEditor;
 import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
@@ -42,7 +43,7 @@ public enum CSubmenuSealed implements ICSubmenu {
 
     private Map<String, Deck> aiDecks;
 
-    private final Command cmdDeckExit = new Command() {
+    private final Command cmdExit = new Command() {
         @Override
         public void execute() {
             update();
@@ -67,7 +68,7 @@ public enum CSubmenuSealed implements ICSubmenu {
         view.populate();
         CSubmenuSealed.SINGLETON_INSTANCE.update();
 
-        VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setExitCommand(cmdDeckExit);
+        VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setExitCommand(cmdExit);
         VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setSelectCommand(cmdDeckSelect);
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnBuildDeck().addMouseListener(
@@ -148,7 +149,8 @@ public enum CSubmenuSealed implements ICSubmenu {
     }
 
     /** */
-    private void setupSealed() {
+    @SuppressWarnings("unchecked")
+    private <T extends DeckBase> void setupSealed() {
         ArrayList<String> sealedTypes = new ArrayList<String>();
         sealedTypes.add("Full Cardpool");
         sealedTypes.add("Block / Set");
@@ -204,6 +206,12 @@ public enum CSubmenuSealed implements ICSubmenu {
         sealed.addAiDeck(sd.buildAIDeck(sDeck.toForgeCardList()));
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
-        CSubmenuDeckEditor.SINGLETON_INSTANCE.showDeckEditor(GameType.Sealed, sealed);
+        DeckEditorBase<?, T> editor = (DeckEditorBase<?, T>)
+                new DeckEditorLimited(Singletons.getModel().getDecks().getSealed());
+
+        editor.show(cmdExit);
+        editor.getController().setModel((T) sealed);
+        editor.setAlwaysOnTop(true);
+        editor.setVisible(true);
     }
 }
