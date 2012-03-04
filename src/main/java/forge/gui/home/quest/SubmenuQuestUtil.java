@@ -127,9 +127,15 @@ public class SubmenuQuestUtil {
                     view.getCbPlant().setSelected(qData.getPetManager().shouldPlantBeUsed());
                 }
 
-                // Zeppelin visibility
-                final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
-                view.getCbZep().setVisible(zeppelin.hasBeenUsed());
+                // Zeppelin visibility: everything about the zeppelin is screwy right now
+                // for some reason, needs a large overhaul, disabled for now. 4-03-12
+                if (false) {//view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
+                    final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
+                    view.getCbZep().setVisible(zeppelin.isAvailableForPurchase() ? true : false);
+                }
+                else {
+                    view.getCbZep().setVisible(false);
+                }
             }
             else {
                 // Classic mode display changes
@@ -204,14 +210,12 @@ public class SubmenuQuestUtil {
         overlay.showOverlay();
 
         // Logic
-        final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
-        zeppelin.setZeppelinUsed(false);
-        qData.randomizeOpponents();
-
         Constant.Runtime.HUMAN_DECK[0] = SubmenuQuestUtil.getCurrentDeck();
         Constant.Runtime.COMPUTER_DECK[0] = event.getEventDeck();
         Constant.Quest.OPP_ICON_NAME[0] = event.getIconFilename();
         Constant.Runtime.setGameType(GameType.Quest);
+
+        qData.randomizeOpponents();
         qData.setCurrentEvent(event);
         qData.saveData();
 
@@ -223,18 +227,23 @@ public class SubmenuQuestUtil {
             if (selectedOpponent.getEvent().getEventType().equals("challenge")) {
                 int extraLife = 0;
 
-                if (qData.getInventory().getItemLevel("Gear") == 2) {
-                    extraLife = 3;
+                // If zeppelin has been purchased, gear will be at level 2.
+                if (event.getEventType().equalsIgnoreCase("challenge")
+                    && !qData.getInventory().getItem("Zeppelin").isAvailableForPurchase()
+                    && VSubmenuChallenges.SINGLETON_INSTANCE.getCbZep().isSelected()) {
+                        extraLife = 3;
                 }
                 lifeAI = ((QuestChallenge) event).getAILife();
                 lifeHuman = qData.getLife() + extraLife;
             }
 
             GameNew.newGame(
-                    Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0],
+                    Constant.Runtime.HUMAN_DECK[0],
+                    Constant.Runtime.COMPUTER_DECK[0],
                     QuestUtil.getHumanStartingCards(qData),
                     QuestUtil.getComputerStartingCards(qData),
-                    lifeHuman, lifeAI);
+                    lifeHuman,
+                    lifeAI);
         } // End isFantasy
         else {
             GameNew.newGame(SubmenuQuestUtil.getCurrentDeck(), event.getEventDeck());

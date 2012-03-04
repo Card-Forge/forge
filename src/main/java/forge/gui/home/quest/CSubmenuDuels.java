@@ -42,27 +42,56 @@ public enum CSubmenuDuels implements ICSubmenu {
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        VSubmenuDuels.SINGLETON_INSTANCE.populate();
+        final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
+        view.populate();
         CSubmenuDuels.SINGLETON_INSTANCE.update();
 
-        VSubmenuDuels.SINGLETON_INSTANCE.getBtnSpellShop().setCommand(
+        view.getBtnSpellShop().setCommand(
                 new Command() { @Override
                     public void execute() { SubmenuQuestUtil.showSpellShop(); } });
 
-        VSubmenuDuels.SINGLETON_INSTANCE.getBtnBazaar().setCommand(
+        view.getBtnBazaar().setCommand(
                 new Command() { @Override
                     public void execute() { SubmenuQuestUtil.showBazaar(); } });
 
-        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().addActionListener(
+        view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
             public void actionPerformed(final ActionEvent e) { SubmenuQuestUtil.startGame(); } });
 
-        VSubmenuDuels.SINGLETON_INSTANCE.getBtnCurrentDeck().setCommand(
+        view.getBtnCurrentDeck().setCommand(
                 new Command() { @Override
                     public void execute() {
                         ViewHomeUI.SINGLETON_INSTANCE.itemClick(EMenuItem.QUEST_DECKS);
                     }
                 });
+
+        view.getCbPlant().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                AllZone.getQuestData().getPetManager().setUsePlant(view.getCbPlant().isSelected());
+            }
+        });
+
+        view.getCbZep().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                AllZone.getQuestData().getPetManager().setUsePlant(view.getCbZep().isSelected());
+            }
+        });
+
+        view.getCbxPet().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                final int index = view.getCbxPet().getSelectedIndex();
+                if (index != -1 && index != 0) {
+                    final String pet = ((String) view.getCbxPet().getSelectedItem());
+                    AllZone.getQuestData().getPetManager().setSelectedPet(pet.substring(7));
+                }
+                else {
+                    AllZone.getQuestData().getPetManager().setSelectedPet(null);
+                }
+            }
+        });
     }
 
     /* (non-Javadoc)
