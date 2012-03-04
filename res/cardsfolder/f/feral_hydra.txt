@@ -1,6 +1,6 @@
 Name:Feral Hydra
 ManaCost:X G
-Types:Creature Hydra
+Types:Creature Hydra Beast
 Text:no text
 PT:0/0
 K:etbCounter:P1P1:X
