@@ -1,7 +1,5 @@
 package forge.gui.home.quest;
 
-import java.util.ArrayList;
-
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
@@ -12,6 +10,8 @@ import forge.gui.home.ICSubmenu;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.view.ViewHomeUI;
+
+import java.util.ArrayList;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -27,6 +27,7 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         @Override
         public void execute() {
             AllZone.getQuestData().saveData();
+            Singletons.getView().getOverlay().hideOverlay();
             update();
         }
     };
@@ -67,14 +68,15 @@ public enum CSubmenuQuestDecks implements ICSubmenu {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.populate();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
 
-        VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck()
-            .setCommand(new Command() { @Override
-                public void execute() {
-                    final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
-                    editor.show(cmdDeckExit);
-                    editor.setVisible(true);
-                }
-            });
+        VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
+            @Override
+            public void execute() {
+                final DeckEditorQuest editor = new DeckEditorQuest(AllZone.getQuestData());
+                editor.show(cmdDeckExit);
+                Singletons.getView().getOverlay().showOverlay();
+                editor.setVisible(true);
+            }
+        });
     }
 
     /* (non-Javadoc)
