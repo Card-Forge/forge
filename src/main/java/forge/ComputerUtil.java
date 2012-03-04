@@ -406,13 +406,16 @@ public class ComputerUtil {
      */
     public static final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
         final SpellAbility newSA = sa.copy();
-        final Cost cost = sa.getPayCosts();
-        for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostMana) {
-                ((CostMana) part).setMana("0");
+        final Cost cost = new Cost("", sa.getSourceCard().getName(), false);
+        if (newSA.getPayCosts() != null) {
+            for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                if (!(part instanceof CostMana)) {
+                    cost.getCostParts().add(part);
+                }
             }
         }
         cost.setNoManaCostChange(true);
+        newSA.setPayCosts(cost);
         newSA.setManaCost("0");
         final StringBuilder sb = new StringBuilder();
         sb.append(sa.getDescription()).append(" (without paying its mana cost)");

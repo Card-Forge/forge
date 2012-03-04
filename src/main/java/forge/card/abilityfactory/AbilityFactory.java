@@ -37,6 +37,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -1034,10 +1035,6 @@ public class AbilityFactory {
             } else if (this.isDb) {
                 spellAbility = afPump.getDrawbackPump();
             }
-
-            if (this.isAb || this.isSp) {
-                hostCard.setSVar("PlayMain1", "TRUE");
-            }
         }
 
         else if (this.api.equals("PumpAll")) {
@@ -1049,10 +1046,6 @@ public class AbilityFactory {
                 spellAbility = afPump.getSpellPumpAll();
             } else if (this.isDb) {
                 spellAbility = afPump.getDrawbackPumpAll();
-            }
-
-            if (this.isAb || this.isSp) {
-                hostCard.setSVar("PlayMain1", "TRUE");
             }
         }
 
@@ -1355,10 +1348,9 @@ public class AbilityFactory {
             spellAbility.setDescription("");
         }
 
-        // StackDescriptions are overwritten by the AF type instead of through
-        // this
-        // if (!isTargeted)
-        // SA.setStackDescription(hostCard.getName());
+        if (this.mapParams.containsKey("NonBasicSpell")) {
+            spellAbility.setBasicSpell(false);
+        }
 
         this.makeRestrictions(spellAbility);
         this.makeConditions(spellAbility);
