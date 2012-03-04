@@ -25,6 +25,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import forge.CardList;
 import forge.Command;
+import forge.Constant;
 import forge.PlayerType;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -353,9 +354,13 @@ public enum CSubmenuConstructed implements ICSubmenu {
         overlay.add(pnl, "h 300px!, w 400px!");
 
         overlay.showOverlay();
-        GameNew.newGame(
-                generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN),
-                generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER));
+
+        Constant.Runtime.HUMAN_DECK[0] =
+                generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
+        Constant.Runtime.COMPUTER_DECK[0] =
+                generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
+
+        GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
         overlay.hideOverlay();
     }
 
