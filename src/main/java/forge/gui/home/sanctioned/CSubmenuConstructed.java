@@ -395,6 +395,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
                 cards = gen.get3ColorDeck(60, player0);
             }
             else {
+                System.out.println("asdf " + selection[0] + " " + selection[1] + " " +  selection[2] + " " +  selection[3] + " " +  selection[4]);
                 final Generate5ColorDeck gen = new Generate5ColorDeck(
                         selection[0], selection[1], selection[2], selection[3], selection[4]);
                 cards = gen.get5ColorDeck(60, player0);

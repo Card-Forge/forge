@@ -44,6 +44,8 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
+import forge.gui.home.quest.CSubmenuChallenges;
+import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.model.FMatchState;
@@ -286,9 +288,10 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         matchState.reset();
+        CSubmenuDuels.SINGLETON_INSTANCE.update();
+        CSubmenuChallenges.SINGLETON_INSTANCE.update();
 
         qData.setCurrentEvent(null);
-
         qData.saveData();
         Singletons.getModel().getQuestPreferences().save();
         Singletons.getModel().savePrefs();

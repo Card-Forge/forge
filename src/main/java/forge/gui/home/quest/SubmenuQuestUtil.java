@@ -270,7 +270,6 @@ public class SubmenuQuestUtil {
                 @Override
                 public void execute() {
                     if (selectedOpponent != null) {
-                        System.err.println("here2 here2 here2");
                         selectedOpponent.setSelected(false);
                     }
 
