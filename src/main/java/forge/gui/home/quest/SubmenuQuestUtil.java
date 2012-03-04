@@ -129,7 +129,7 @@ public class SubmenuQuestUtil {
 
                 // Zeppelin visibility: everything about the zeppelin is screwy right now
                 // for some reason, needs a large overhaul, disabled for now. 4-03-12
-                if (false) {//view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
+                if (false) { //view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
                     final QuestItemZeppelin zeppelin = (QuestItemZeppelin) qData.getInventory().getItem("Zeppelin");
                     view.getCbZep().setVisible(zeppelin.isAvailableForPurchase() ? true : false);
                 }

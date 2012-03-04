@@ -246,7 +246,7 @@ public final class QuestData {
             case STANDARD:
                 filter = Singletons.getModel().getFormats().getStandard().getFilterPrinted();
                 break;
-            
+
             default: //Unrestricted
                 filter = CardPrinted.Predicates.Presets.IS_TRUE;
                 break;

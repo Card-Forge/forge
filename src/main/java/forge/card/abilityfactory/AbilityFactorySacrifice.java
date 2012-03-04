@@ -548,9 +548,9 @@ public class AbilityFactorySacrifice {
                         sacList.add(c);
                     }
                 }
-                
+
                 list.remove(c);
-                
+
             } else {
                 return sacList;
             }

@@ -430,7 +430,7 @@ public class ListChooser<T> {
         }
         return this.jList.getSelectedIndex();
     }
-    
+
     /**
      * Returns the (first) selected value, or null.
      * 

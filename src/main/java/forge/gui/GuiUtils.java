@@ -284,8 +284,8 @@ public final class GuiUtils {
         final List<T> choice = GuiUtils.getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
-    }    
-    
+    }
+
     // returned Object will never be null
     /**
      * <p>
@@ -343,15 +343,15 @@ public final class GuiUtils {
     private static <T> List<T> getChoices(final String message, final int min, final int max, final T... choices) {
         final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
         return getChoices(c);
-    }    
-    
+    }
+
     private static <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices) {
         final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
         return getChoices(c);
     }
-     
-    private static <T> List<T> getChoices(final ListChooser<T> c) 
-    {
+
+    private static <T> List<T> getChoices(final ListChooser<T> c) {
+
         final JList list = c.getJList();
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
