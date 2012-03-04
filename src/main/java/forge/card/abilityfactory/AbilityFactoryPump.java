@@ -315,8 +315,14 @@ public class AbilityFactoryPump {
             }
         } else if (keyword.startsWith("Rampage")) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
-                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || (AllZoneUtil.getCreaturesInPlay(human).size() < 2)) {
+                return false;
+            }
+        } else if (keyword.startsWith("Flanking")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Flanking").size() < 1) {
                 return false;
             }
         } else if (keyword.equals("Infect")) {
@@ -421,7 +427,7 @@ public class AbilityFactoryPump {
         }
 
         // is the creature unblocked and the spell will pump its power?
-        if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS)
+        if (phase.is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isUnblocked(c) && (attack > 0)) {
             return true;
         }

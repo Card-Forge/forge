@@ -1,18 +1,26 @@
 Changeling
+Convoke
 Deathtouch
 Defender
+Delve
 Double Strike
 Fear
 First Strike
 Flash
 Flying
 Haste
+Hexproof
 Horsemanship
 Infect
 Intimidate
 Lifelink
+Phasing
 Reach
+Rebound
+Shadow
 Shroud
+Split Second 
 Trample
+Unblockable
 Vigilance
 Wither
