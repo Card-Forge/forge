@@ -260,11 +260,17 @@ public class SubmenuQuestUtil {
             this.setCommand(new Command() {
                 @Override
                 public void execute() {
-                    if (selectedOpponent != null) { selectedOpponent.setSelected(false); }
-                    else if (VSubmenuDuels.SINGLETON_INSTANCE.getPanel().isShowing() && getCurrentDeck() != null) {
-                        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+                    if (selectedOpponent != null) {
+                        System.err.println("here2 here2 here2");
+                        selectedOpponent.setSelected(false);
                     }
-                    else if (getCurrentDeck() != null) {
+
+                    if (VSubmenuDuels.SINGLETON_INSTANCE.getPanel().isShowing() && getCurrentDeck() != null) {
+                        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+                        VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(false);
+                    }
+                    else if (VSubmenuChallenges.SINGLETON_INSTANCE.getPanel().isShowing() &&  getCurrentDeck() != null) {
+                        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(false);
                         VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
                     }
 
