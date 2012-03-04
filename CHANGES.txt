@@ -34,6 +34,41 @@ Fixes/Features:
 - Converted Insurrection to script.
 - Fixed Damia, Sage of Stone.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Full home UI rebuild: singleton design pattern, better menu structure, improved resizing dynamics, constructed mode rebuild.
+- Minor fix.
+- Cleanup in AF GainControl.
+- Quest starting lands incorrectly using Basic Land # instead of Snow Land #
+- Fixed Twinstrike.
+- Fixed Spiteful Shadows.
+- Fixed Chancellor of the Forge.
+- automatic filename repair in constructed folder
+- Refactored QuestEventManager to be a static factory.
+- Fixed start button bug in quest submenu.
+- forge.view.toolbox -> forge.gui.toolbox
+- Removed redundant and deprecated getPhaseHandler from AllZone in favor of model singleton getPhaseHandler.
+- Added some quest-related temp. files to .gitignore
+- Added option to start quests with a precon deck
+- Fixed sealed deck update problem.
+- Fixed overlay persistent bug in draft mode new game.
+- Returned exit button to main menu.
+- Updated broken finalizer in main with shutdown hook.
+- Removed deprecated ControlHomeUI.
+- Added tooltip text containing the deck description to the quest deck selector.
+- Minor update.
+- Small visual update in content download section.
+- Bugfix: NPE-after-1-game in constructed mode.
+- Rename: forge.gui.home.limited -> forge.gui.home.sanctioned
+- Fixed overlay for quest deck editor.
+- Bugfix: Random color select in constructed submenu.
+- Added a boolean variable "GameOver" to GameState to prevent multiple wins/losses per game.
+- Bugfix: Quest pet/plant handling. Zeppelin has deeper issues and needs a larger overhaul, will happen soon, not working at present.
+- Bugfix: Refresh quest events/stats across matches.
+- Fixes and improvements for AF Play.
+- Fixed Hellcarver Demon.
+- Added the optional parameter "NonBasicSpell" to all AF's (to mark all pseudo spells that are really alternative costs).
+- Marked all retrace spellAbilities as non basic.
+- Fixed Moonbow Illusionist.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
