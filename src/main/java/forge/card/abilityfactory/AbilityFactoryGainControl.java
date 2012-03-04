@@ -247,7 +247,7 @@ public class AbilityFactoryGainControl {
 
         ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                 this.params.get("NewController"), sa);
-        if ((tgt != null) && (tgt.getTargetPlayers() != null)) {
+        if ((tgt != null) && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
             newController = tgt.getTargetPlayers();
         }
         if (newController.size() == 0) {
@@ -399,7 +399,6 @@ public class AbilityFactoryGainControl {
         } else {
             tgtCards.addAll(AbilityFactory.getDefinedCards(this.hostCard, this.params.get("Defined"), sa));
         }
-        // tgtCards.add(hostCard);
 
         ArrayList<Player> controllers = new ArrayList<Player>();
 
