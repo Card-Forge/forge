@@ -45,6 +45,15 @@ public final class Main {
      */
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Only works if the program is not ABORTed / KILLed.
+                // Used instead of a finalizer to avoid leak issues.
+                Singletons.getModel().close();
+            }
+        }));
+
         try {
             Singletons.setModel(FModel.SINGLETON_INSTANCE);
             Singletons.setView(FView.SINGLETON_INSTANCE);
@@ -59,20 +68,5 @@ public final class Main {
         } catch (final Throwable exn) {
             ErrorViewer.showError(exn);
         }
-    }
-
-    /**
-     * Destructor for FModel.
-     * 
-     * @throws Throwable
-     *             indirectly
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        System.out.println("Running finalizer");
-        // NOT WORKING
-        // this should call close in model,
-        // should probably be attached to frame close method
-        super.finalize();
     }
 }
