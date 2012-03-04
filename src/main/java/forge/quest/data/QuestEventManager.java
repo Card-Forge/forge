@@ -38,45 +38,30 @@ import forge.util.FileSection;
 import forge.util.FileUtil;
 
 /**
- * <p>
  * QuestEventManager.
- * </p>
- * MODEL - Manages collections of quest events (duelsquests, etc.)
  * 
  * @author Forge
  * @version $Id$
  */
-public class QuestEventManager {
+public enum QuestEventManager {
+    /** */
+    SINGLETON_INSTANCE;
 
-    /** The easy a iduels. */
-    private final List<QuestDuel> easyAIduels = new ArrayList<QuestDuel>();
+    /** */
+    private static final List<QuestDuel> EASY_DUELS = new ArrayList<QuestDuel>();
+    /** */
+    private static final List<QuestDuel> MEDIUM_DUELS = new ArrayList<QuestDuel>();
+    /** */
+    private static final List<QuestDuel> HARD_DUELS = new ArrayList<QuestDuel>();
+    /** */
+    private static final List<QuestDuel> EXPERT_DUELS = new ArrayList<QuestDuel>();
+    /** */
+    public static final List<QuestDuel> ALL_DUELS = new ArrayList<QuestDuel>();
+    /** */
+    public static final List<QuestChallenge> ALL_CHALLENGES = new ArrayList<QuestChallenge>();
 
-    /** The medium a iduels. */
-    private final List<QuestDuel> mediumAIduels = new ArrayList<QuestDuel>();
-
-    /** The hard a iduels. */
-    private final List<QuestDuel> hardAIduels = new ArrayList<QuestDuel>();
-
-    /** The very hard a iduels. */
-    private final List<QuestDuel> veryHardAIduels = new ArrayList<QuestDuel>();
-
-    /** The all duels. */
-    private List<QuestDuel> allDuels = null;
-
-    /** The all challenges. */
-    private List<QuestChallenge> allChallenges = null;
-
-    /**
-     * <p>
-     * assembleAllEvents.
-     * </p>
-     * * Reads all duel and challenge files and instantiates all events, and
-     * difficulty lists accordingly. Should be used sparingly.
-     */
-    public final void assembleAllEvents() {
-        this.allDuels = new ArrayList<QuestDuel>();
-        this.allChallenges = new ArrayList<QuestChallenge>();
-
+    /** Instantiate all events and difficulty lists. */
+    static {
         QuestEvent tempEvent;
 
         final File[] allFiles = ForgeProps.getFile(NewConstants.Quest.DECKS).listFiles(DeckSerializer.DCK_FILE_FILTER);
@@ -85,21 +70,20 @@ public class QuestEventManager {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(f));
 
             if (contents.containsKey("quest")) {
-                tempEvent = this.readChallenge(contents.get("quest"));
-                this.allChallenges.add((QuestChallenge) tempEvent);
-            } // End if([quest])
+                tempEvent = QuestEventManager.readChallenge(contents.get("quest"));
+                ALL_CHALLENGES.add((QuestChallenge) tempEvent);
+            }
             else {
-                tempEvent = this.readDuel(contents.get("metadata"));
-                this.allDuels.add((QuestDuel) tempEvent);
+                tempEvent = QuestEventManager.readDuel(contents.get("metadata"));
+                ALL_DUELS.add((QuestDuel) tempEvent);
             }
 
             // Assemble metadata (may not be necessary later) and deck object.
-            this.readMetadata(contents.get("metadata"), tempEvent);
+            QuestEventManager.readMetadata(contents.get("metadata"), tempEvent);
             tempEvent.setEventDeck(Deck.fromSections(contents));
         } // End for(allFiles)
 
-        this.assembleDuelDifficultyLists();
-
+        QuestEventManager.assembleDuelDifficultyLists();
     } // End assembleAllEvents()
 
     /**
@@ -109,20 +93,112 @@ public class QuestEventManager {
      *            &emsp; {@link java.lang.String}
      * @return {@link forge.data.QuestEvent}
      */
-    public QuestEvent getEvent(final String s0) {
-        for (final QuestEvent q : this.allDuels) {
+    public static QuestEvent getEvent(final String s0) {
+        for (final QuestEvent q : ALL_DUELS) {
             if (q.getName().equals(s0)) {
                 return q;
             }
         }
 
-        for (final QuestChallenge q : this.allChallenges) {
+        for (final QuestChallenge q : ALL_CHALLENGES) {
             if (q.getName().equals(s0)) {
                 return q;
             }
         }
 
         return null;
+    }
+
+    /** Generates an array of new duel opponents based on current win conditions.
+     * 
+     * @return an array of {@link java.lang.String} objects.
+     */
+    public static final List<QuestDuel> generateDuels() {
+        final QuestPreferences qpref = Singletons.getModel().getQuestPreferences();
+        if (AllZone.getQuestData() == null) {
+            return null;
+        }
+
+        final int index = AllZone.getQuestData().getDifficultyIndex();
+        final List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
+
+        if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.EASY_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.EASY_DUELS, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.EASY_DUELS, 2));
+        } else if (AllZone.getQuestData().getWin() == qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.EASY_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.MEDIUM_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.MEDIUM_DUELS, 1));
+        } else if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.MEDIUM_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.MEDIUM_DUELS, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.MEDIUM_DUELS, 2));
+        }
+
+        else if (AllZone.getQuestData().getWin() == qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.MEDIUM_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.HARD_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.HARD_DUELS, 1));
+        }
+
+        else if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_EXPERTAI, index)) {
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.HARD_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.HARD_DUELS, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.HARD_DUELS, 2));
+        } else {
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.HARD_DUELS, 0));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.HARD_DUELS, 1));
+            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(QuestEventManager.EXPERT_DUELS, 2));
+        }
+
+        return duelOpponents;
+    }
+
+    /** Generates an array of new challenge opponents based on current win conditions.
+     *
+     * @return a {@link java.util.List} object.
+     */
+    public static final List<QuestChallenge> generateChallenges() {
+        final List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
+        final QuestData qData = AllZone.getQuestData();
+
+        int maxChallenges = qData.getWin() / 10;
+        if (maxChallenges > 5) {
+            maxChallenges = 5;
+        }
+
+        // Generate IDs as needed.
+        if ((qData.getAvailableChallenges() == null) || (qData.getAvailableChallenges().size() < maxChallenges)) {
+
+            final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
+            final List<Integer> availableChallengeIds = new ArrayList<Integer>();
+
+            for (final QuestChallenge qc : QuestEventManager.ALL_CHALLENGES) {
+                if ((qc.getWinsReqd() <= qData.getWin())
+                        && !qData.getCompletedChallenges().contains(qc.getId())) {
+                    unlockedChallengeIds.add(qc.getId());
+                }
+            }
+
+            Collections.shuffle(unlockedChallengeIds);
+
+            maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
+
+            for (int i = 0; i < maxChallenges; i++) {
+                availableChallengeIds.add(unlockedChallengeIds.get(i));
+            }
+
+            qData.setAvailableChallenges(availableChallengeIds);
+            qData.saveData();
+        }
+
+        // Finally, pull challenge events from available IDs and return.
+        for (final int i : qData.getAvailableChallenges()) {
+            challengeOpponents.add(QuestEventManager.getChallengeEventByNumber(i));
+        }
+
+        return challengeOpponents;
     }
 
     /**
@@ -134,7 +210,7 @@ public class QuestEventManager {
      * @param contents
      * @param qd
      */
-    private QuestDuel readDuel(final List<String> contents) {
+    private static QuestDuel readDuel(final List<String> contents) {
         final QuestDuel qd = new QuestDuel();
         int eqpos;
         String key, value;
@@ -167,7 +243,7 @@ public class QuestEventManager {
      * @param contents
      * @param qc
      */
-    private QuestChallenge readChallenge(final List<String> contents) {
+    private static QuestChallenge readChallenge(final List<String> contents) {
         int eqpos;
         String key, value;
 
@@ -236,7 +312,7 @@ public class QuestEventManager {
      * @param contents
      * @param qe
      */
-    private void readMetadata(final List<String> contents, final QuestEvent qe) {
+    private static void readMetadata(final List<String> contents, final QuestEvent qe) {
         int eqpos;
         String key, value;
 
@@ -267,52 +343,27 @@ public class QuestEventManager {
 
     /**
      * <p>
-     * getAllDuels.
-     * </p>
-     * Returns complete list of all duel objects.
-     * 
-     * @return a {@link java.util.List} object.
-     */
-    public final List<QuestDuel> getAllDuels() {
-        return this.allDuels;
-    }
-
-    /**
-     * <p>
-     * getAllChallenges.
-     * </p>
-     * Returns complete list of all challenge objects.
-     * 
-     * @return a {@link java.util.List} object.
-     */
-    public final List<QuestChallenge> getAllChallenges() {
-        return this.allChallenges;
-    }
-
-    /**
-     * <p>
      * assembleDuelDifficultyLists.
      * </p>
      * Assemble duel deck difficulty lists
      */
-    private void assembleDuelDifficultyLists() {
-
-        this.easyAIduels.clear();
-        this.mediumAIduels.clear();
-        this.hardAIduels.clear();
-        this.veryHardAIduels.clear();
+    private static void assembleDuelDifficultyLists() {
+        EASY_DUELS.clear();
+        MEDIUM_DUELS.clear();
+        HARD_DUELS.clear();
+        EXPERT_DUELS.clear();
         String s;
 
-        for (final QuestDuel qd : this.allDuels) {
+        for (final QuestDuel qd : ALL_DUELS) {
             s = qd.getDifficulty();
             if (s.equalsIgnoreCase("easy")) {
-                this.easyAIduels.add(qd);
+                EASY_DUELS.add(qd);
             } else if (s.equalsIgnoreCase("medium")) {
-                this.mediumAIduels.add(qd);
+                MEDIUM_DUELS.add(qd);
             } else if (s.equalsIgnoreCase("hard")) {
-                this.hardAIduels.add(qd);
+                HARD_DUELS.add(qd);
             } else if (s.equalsIgnoreCase("very hard")) {
-                this.veryHardAIduels.add(qd);
+                EXPERT_DUELS.add(qd);
             }
         }
     }
@@ -348,114 +399,12 @@ public class QuestEventManager {
      * @param n
      * @return
      */
-    private QuestChallenge getChallengeEventByNumber(final int n) {
-        for (final QuestChallenge qc : this.allChallenges) {
+    private static QuestChallenge getChallengeEventByNumber(final int n) {
+        for (final QuestChallenge qc : ALL_CHALLENGES) {
             if (qc.getId() == n) {
                 return qc;
             }
         }
         return null;
     }
-
-    /**
-     * <p>
-     * generateDuels.
-     * </p>
-     * Generates an array of new duel opponents based on current win conditions.
-     * 
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public final List<QuestDuel> generateDuels() {
-        final QuestPreferences qpref = Singletons.getModel().getQuestPreferences();
-        if (AllZone.getQuestData() == null) {
-            return null;
-        }
-
-        final int index = AllZone.getQuestData().getDifficultyIndex();
-        final List<QuestDuel> duelOpponents = new ArrayList<QuestDuel>();
-
-        if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 1));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 2));
-        } else if (AllZone.getQuestData().getWin() == qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.easyAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 1));
-        } else if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 1));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 2));
-        }
-
-        else if (AllZone.getQuestData().getWin() == qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.mediumAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
-        }
-
-        else if (AllZone.getQuestData().getWin() < qpref.getPreferenceInt(QPref.WINS_EXPERTAI, index)) {
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 2));
-        } else {
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 0));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.hardAIduels, 1));
-            duelOpponents.add(QuestEventManager.getDuelOpponentByNumber(this.veryHardAIduels, 2));
-        }
-
-        return duelOpponents;
-    }
-
-    /**
-     * <p>
-     * generateChallenges.
-     * </p>
-     * Generates an array of new challenge opponents based on current win
-     * conditions.
-     *
-     * @param questData the quest data
-     * @return a {@link java.util.List} object.
-     */
-    public final List<QuestChallenge> generateChallenges(final QuestData questData) {
-        final List<QuestChallenge> challengeOpponents = new ArrayList<QuestChallenge>();
-
-        int maxChallenges = questData.getWin() / 10;
-        if (maxChallenges > 5) {
-            maxChallenges = 5;
-        }
-
-        // Generate IDs as needed.
-        if ((questData.getAvailableChallenges() == null) || (questData.getAvailableChallenges().size() < maxChallenges)) {
-
-            final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
-            final List<Integer> availableChallengeIds = new ArrayList<Integer>();
-
-            for (final QuestChallenge qc : this.allChallenges) {
-                if ((qc.getWinsReqd() <= questData.getWin())
-                        && !questData.getCompletedChallenges().contains(qc.getId())) {
-                    unlockedChallengeIds.add(qc.getId());
-                }
-            }
-
-            Collections.shuffle(unlockedChallengeIds);
-
-            maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
-
-            for (int i = 0; i < maxChallenges; i++) {
-                availableChallengeIds.add(unlockedChallengeIds.get(i));
-            }
-
-            questData.setAvailableChallenges(availableChallengeIds);
-            questData.saveData();
-        }
-
-        // Finally, pull challenge events from available IDs and return.
-        for (final int i : questData.getAvailableChallenges()) {
-            challengeOpponents.add(this.getChallengeEventByNumber(i));
-        }
-
-        return challengeOpponents;
-    }
-
 }

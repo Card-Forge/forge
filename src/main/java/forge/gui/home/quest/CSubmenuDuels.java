@@ -6,11 +6,11 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Command;
-import forge.Singletons;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.quest.data.QuestDuel;
+import forge.quest.data.QuestEventManager;
 import forge.view.ViewHomeUI;
 
 /** 
@@ -78,8 +78,7 @@ public enum CSubmenuDuels implements ICSubmenu {
             view.getLblTitle().setText("Duels: " + AllZone.getQuestData().getRank());
 
             view.getPnlDuels().removeAll();
-            final List<QuestDuel> duels =
-                    Singletons.getModel().getQuestEventManager().generateDuels();
+            final List<QuestDuel> duels = QuestEventManager.generateDuels();
 
             for (final QuestDuel d : duels) {
                 final SelectablePanel temp = new SelectablePanel(d);

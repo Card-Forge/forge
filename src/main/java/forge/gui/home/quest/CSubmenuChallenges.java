@@ -10,11 +10,11 @@ import javax.swing.border.EmptyBorder;
 
 import forge.AllZone;
 import forge.Command;
-import forge.Singletons;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
 import forge.quest.data.QuestChallenge;
+import forge.quest.data.QuestEventManager;
 import forge.view.ViewHomeUI;
 import forge.view.toolbox.FLabel;
 
@@ -84,7 +84,7 @@ public enum CSubmenuChallenges implements ICSubmenu {
 
             view.getPnlChallenges().removeAll();
             final List<QuestChallenge> challenges =
-                    Singletons.getModel().getQuestEventManager().generateChallenges(AllZone.getQuestData());
+                    QuestEventManager.generateChallenges();
 
             for (final QuestChallenge c : challenges) {
                 final SelectablePanel temp = new SelectablePanel(c);
@@ -103,39 +103,4 @@ public enum CSubmenuChallenges implements ICSubmenu {
             }
         }
     }
-
-    /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
-     */
-   /* @Override
-    public void update() {
-        SubmenuQuestUtil.updateStatsAndPet();
-
-        final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
-        VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(false);
-
-        if (AllZone.getQuestData() != null) {
-            VSubmenuChallenges.SINGLETON_INSTANCE.getLblTitle().setText("Challenges: " + AllZone.getQuestData().getRank());
-
-            view.getPnlChallenges().removeAll();
-            final List<QuestChallenge> challenges =
-                    Singletons.getModel().getQuestEventManager().generateChallenges(AllZone.getQuestData());
-
-            for (final QuestChallenge c : challenges) {
-                final SelectablePanel temp = new SelectablePanel(c);
-                view.getPnlChallenges().add(temp, "w 96%!, h 86px!, gap 2% 0 5px 5px");
-            }
-
-            if (challenges.size() == 0) {
-                final FLabel lbl = new FLabel.Builder()
-                    .text(VSubmenuChallenges.SINGLETON_INSTANCE.getLblNextChallengeInWins().getText())
-                    .fontAlign(SwingConstants.CENTER).build();
-                lbl.setForeground(Color.red);
-                lbl.setBackground(Color.white);
-                lbl.setBorder(new EmptyBorder(10, 10, 10, 10));
-                lbl.setOpaque(true);
-                view.getPnlChallenges().add(lbl, "w 50%!, h 30px!, gap 25% 0 50px 0");
-            }
-        }
-    }*/
 }

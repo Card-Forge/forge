@@ -113,7 +113,6 @@ public enum FControl {
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = Singletons.getView().getLayeredContentPane();
-        Singletons.getModel().getQuestEventManager().assembleAllEvents();
 
         //Singletons.getView().initialize();
 

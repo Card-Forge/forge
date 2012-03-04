@@ -38,6 +38,7 @@ import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestEvent;
+import forge.quest.data.QuestEventManager;
 import forge.util.IStorage;
 import forge.view.toolbox.FLabel;
 import forge.view.toolbox.FOverlay;
@@ -279,11 +280,11 @@ public enum CSubmenuConstructed implements ICSubmenu {
 
         final List<String> eventNames = new ArrayList<String>();
 
-        for (final QuestEvent e : Singletons.getModel().getQuestEventManager().getAllChallenges()) {
+        for (final QuestEvent e : QuestEventManager.ALL_DUELS) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (final QuestEvent e : Singletons.getModel().getQuestEventManager().getAllDuels()) {
+        for (final QuestEvent e : QuestEventManager.ALL_CHALLENGES) {
             eventNames.add(e.getEventDeck().getName());
         }
 
@@ -405,7 +406,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             deck.getMain().add(cards);
         }
         else if (lst0.getName().equals(ESubmenuConstructedTypes.QUESTEVENTS.toString())) {
-            deck = Singletons.getModel().getQuestEventManager().getEvent(selection[0]).getEventDeck();
+            deck = QuestEventManager.getEvent(selection[0]).getEventDeck();
         }
         // Custom deck
         else if (lst0.getName().equals(ESubmenuConstructedTypes.CUSTOM.toString())) {
@@ -430,7 +431,7 @@ public enum CSubmenuConstructed implements ICSubmenu {
             deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
         }
         else {
-            deck = Singletons.getModel().getQuestEventManager().getEvent(deckName).getEventDeck();
+            deck = QuestEventManager.getEvent(deckName).getEventDeck();
         }
 
         // Dump into map and display.

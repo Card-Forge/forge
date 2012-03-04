@@ -47,7 +47,6 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.data.QuestEventManager;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
@@ -80,7 +79,6 @@ public enum FModel {
     private final GameAction gameAction;
     private final QuestPreferences questPreferences;
     private final ForgePreferences preferences;
-    private final QuestEventManager questEventManager;
     private final GameState gameState;
     private final FMatchState matchState;
 
@@ -133,7 +131,6 @@ public enum FModel {
         this.gameState = new GameState();
         this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
-        this.questEventManager = new QuestEventManager();
 
         this.editions = new EditionCollection();
         this.formats = new FormatCollection("res/blockdata/formats.txt");
@@ -331,15 +328,6 @@ public enum FModel {
      */
     public final QuestPreferences getQuestPreferences() {
         return this.questPreferences;
-    }
-
-    /**
-     * Gets the quest preferences.
-     * 
-     * @return {@link forge.quest.data.QuestEventManager}
-     */
-    public final QuestEventManager getQuestEventManager() {
-        return this.questEventManager;
     }
 
     /**
