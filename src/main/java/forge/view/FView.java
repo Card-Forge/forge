@@ -26,8 +26,8 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.control.FControl;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FSkin;
 
 /**
  * The main view for Forge: a java swing application. All view class instances
@@ -100,7 +100,7 @@ public enum FView {
         return this.frame;
     }
 
-    /** @return {@link forge.view.toolbox.FOverlay} */
+    /** @return {@link forge.gui.toolbox.FOverlay} */
     public FOverlay getOverlay() {
         return FView.this.overlay;
     }

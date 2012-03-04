@@ -32,12 +32,12 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FList;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
 
 /** 
  * Singleton instance of "Draft" submenu in "Constructed" group.
@@ -375,7 +375,7 @@ public enum VSubmenuPreferences implements IVSubmenu {
         return cbDevMode;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnReset() {
         return btnReset;
     }

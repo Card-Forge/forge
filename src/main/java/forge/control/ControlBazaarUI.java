@@ -6,9 +6,9 @@ import java.awt.event.ComponentListener;
 
 import javax.swing.SwingUtilities;
 
+import forge.gui.toolbox.FLabel;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.view.ViewBazaarUI;
-import forge.view.toolbox.FLabel;
 
 /** 
  * TODO: Write javadoc for this type.

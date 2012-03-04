@@ -34,16 +34,16 @@ import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.gui.home.ICSubmenu;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestEventManager;
 import forge.util.IStorage;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -19,11 +19,11 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gui.GuiUtils;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FSkin;
 
 /** 
  * Creates file list/table for quick deleting, editing, and basic info.

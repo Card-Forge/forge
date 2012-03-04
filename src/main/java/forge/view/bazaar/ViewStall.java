@@ -32,13 +32,13 @@ import javax.swing.text.StyledDocument;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.control.bazaar.ControlStall;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 import forge.quest.data.bazaar.QuestStallDefinition;
 import forge.quest.data.bazaar.QuestStallManager;
 import forge.quest.data.bazaar.QuestStallPurchasable;
 import forge.view.ViewBazaarUI;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -108,7 +108,7 @@ public class ViewStall extends JPanel {
         pnlInventory.add(lblEmpty, "w 90%!, h 30px!, gap 5% 0 50px 50px");
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getLblStallName() {
         return lblStallName;
     }
@@ -118,12 +118,12 @@ public class ViewStall extends JPanel {
         return tpnFluff;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getLblStats() {
         return lblStats;
     }
 
-    /** @return {@link forge.view.toolbox.FScrollPane} */
+    /** @return {@link forge.gui.toolbox.FScrollPane} */
     public FScrollPane getScrInventory() {
         return scrInventory;
     }

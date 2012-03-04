@@ -12,9 +12,9 @@ import forge.Constant;
 import forge.Singletons;
 import forge.control.RestartUtil;
 import forge.gui.home.ICSubmenu;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -1,4 +1,4 @@
-package forge.view.toolbox;
+package forge.gui.toolbox;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -68,76 +68,76 @@ public class FLabel extends JLabel {
         private Command bldCmd;
 
         // Build!
-        /** @return {@link forge.view.toolbox.FLabel} */
+        /** @return {@link forge.gui.toolbox.FLabel} */
         public FLabel build() { return new FLabel(this); }
 
         // Begin builder methods.
         /**@param s0 &emsp; {@link java.lang.String}
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder text(String s0) { this.bldText = s0; return this; }
 
         /**@param s0 &emsp; {@link java.lang.String}
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder tooltip(String s0) { this.bldToolTip = s0; return this; }
 
         /**@param i0 &emsp; {@link javax.swing.ImageIcon}
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder icon(ImageIcon i0) { this.bldIcon = i0; return this; }
 
         /**@param i0 &emsp; SwingConstants.CENTER, .LEFT, or .RIGHT
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder fontAlign(int i0) { this.bldFontAlign = i0; return this; }
 
         /**@param b0 &emsp; boolean
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder opaque(boolean b0) { this.bldOpaque = b0; return this; }
 
         /**@param b0 &emsp; boolean
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder hoverable(boolean b0) { this.bldHoverable = b0; return this; }
 
         /**@param b0 &emsp; boolean
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder selectable(boolean b0) { this.bldSelectable = b0; return this; }
 
         /**@param c0 &emsp; {@link forge.Command} to execute if clicked
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder cmdClick(Command c0) { this.bldCmd = c0; return this; }
 
         /**@param i0 &emsp; int
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder fontSize(int i0) { this.bldFontSize = i0; return this; }
 
         /**@param i0 &emsp; Font.PLAIN, Font.BOLD, or Font.ITALIC
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder fontStyle(int i0) { this.bldFontStyle = i0; return this; }
 
         /**@param b0 &emsp; boolean
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder fontScaleAuto(boolean b0) { this.bldFontScaleAuto = b0; return this; }
 
         /**@param d0 &emsp; double between 0 and 1, 0.6 by default
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder fontScaleFactor(double d0) { this.bldFontScaleFactor = d0; return this; }
 
         /**@param i0 &emsp; SwingConstants.HORIZONTAL or .VERTICAL
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder fontScaleBy(int i0) { this.bldFontScaleBy = i0; return this; }
 
         /**@param b0 &emsp; boolean
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconScaleAuto(boolean b0) { this.bldIconScaleAuto = b0; return this; }
 
         /**@param d0 &emsp; double between 0 and 1, 0.8 by default
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconScaleFactor(double d0) { this.bldIconScaleFactor = d0; return this; }
 
         /**@param b0 &emsp; boolean, icon will be drawn independent of text
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconInBackground(boolean b0) { this.bldIconInBackground = b0; return this; }
 
         /**@param f0 &emsp; 0.0f - 1.0f. If icon is in background, this alpha is applied.
-         * @return {@link forge.view.toolbox.Builder} */
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconAlpha(float f0) { this.bldIconAlpha = f0; return this; }
     }
 

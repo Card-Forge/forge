@@ -42,10 +42,10 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.control.match.ControlField;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
-import forge.view.toolbox.FSkin.SkinProp;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinProp;
 
 /**
  * Assembles Swing components of player field instance.

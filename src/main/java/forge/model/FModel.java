@@ -43,6 +43,7 @@ import forge.control.input.InputControl;
 import forge.deck.CardCollections;
 import forge.game.GameState;
 import forge.game.GameSummary;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
@@ -54,7 +55,6 @@ import forge.util.IStorageView;
 import forge.util.StorageView;
 import forge.view.match.ViewField;
 import forge.view.match.ViewTabber;
-import forge.view.toolbox.FSkin;
 
 /**
  * The default Model implementation for Forge.

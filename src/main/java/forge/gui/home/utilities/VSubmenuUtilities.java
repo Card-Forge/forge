@@ -23,14 +23,14 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
-import forge.view.toolbox.FButton;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
 
 /** 
  * Singleton instance of "Colors" submenu in "Constructed" group.
@@ -137,42 +137,42 @@ public enum VSubmenuUtilities implements IVSubmenu {
         return pnl;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnDownloadPics() {
         return btnDownloadPics;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnDownloadSetPics() {
         return btnDownloadSetPics;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnDownloadQuestImages() {
         return btnDownloadQuestImages;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnReportBug() {
         return btnReportBug;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnImportPictures() {
         return btnImportPictures;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnHowToPlay() {
         return btnHowToPlay;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnDownloadPrices() {
         return btnDownloadPrices;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnLicensing() {
         return btnLicensing;
     }

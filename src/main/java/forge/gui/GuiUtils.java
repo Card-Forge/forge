@@ -48,12 +48,12 @@ import javax.swing.event.ListSelectionListener;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.Singletons;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
 
 /**
  * <p>
@@ -403,7 +403,7 @@ public final class GuiUtils {
         return ttf;
     }
 
-    /** @return {@forge.view.toolbox.FOverlay} */
+    /** @return {@forge.gui.toolbox.FOverlay} */
     public static FOverlay startGameOverlay() {
         final FOverlay overlay = GuiUtils.genericOverlay();
         final int w = overlay.getWidth();
@@ -431,7 +431,7 @@ public final class GuiUtils {
     }
 
     /** @param msg0 &emsp; {@link java.lang.String}
-        @return {@forge.view.toolbox.FOverlay} */
+        @return {@forge.gui.toolbox.FOverlay} */
     // NOTE: This animation happens on the EDT; if the EDT is tied up doing something
     // else, the animation is effectively frozen.  So, this needs some work.
     public static FOverlay loadingOverlay(final String msg0) {
@@ -467,7 +467,7 @@ public final class GuiUtils {
         return overlay;
     }
 
-    /** @return {@forge.view.toolbox.FOverlay} */
+    /** @return {@forge.gui.toolbox.FOverlay} */
     public static FOverlay genericOverlay() {
         final FOverlay overlay = Singletons.getView().getOverlay();
         final int w = overlay.getWidth();

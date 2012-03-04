@@ -20,7 +20,7 @@ package forge.view.match;
 import net.miginfocom.swing.MigLayout;
 import forge.control.match.ControlPicture;
 import forge.gui.game.CardPicturePanel;
-import forge.view.toolbox.FPanel;
+import forge.gui.toolbox.FPanel;
 
 /** 
  * TODO: Write javadoc for this type.

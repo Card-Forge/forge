@@ -32,9 +32,9 @@ import forge.AllZone;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.gui.home.quest.SubmenuQuestUtil;
+import forge.gui.toolbox.CardFaceSymbols;
+import forge.gui.toolbox.FSkin;
 import forge.view.ViewHomeUI;
-import forge.view.toolbox.CardFaceSymbols;
-import forge.view.toolbox.FSkin;
 
 /**
  * <p>

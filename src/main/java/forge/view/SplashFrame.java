@@ -35,8 +35,8 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import forge.view.toolbox.FProgressBar;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FProgressBar;
+import forge.gui.toolbox.FSkin;
 
 /**
  * Shows the splash frame as the application starts.

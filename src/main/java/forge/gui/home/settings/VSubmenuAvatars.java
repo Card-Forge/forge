@@ -15,11 +15,11 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.WrapLayout;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
-import forge.view.toolbox.WrapLayout;
 
 /** 
  * Singleton instance of "Draft" submenu in "Constructed" group.

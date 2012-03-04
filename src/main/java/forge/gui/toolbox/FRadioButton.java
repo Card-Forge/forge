@@ -1,4 +1,4 @@
-package forge.view.toolbox;
+package forge.gui.toolbox;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

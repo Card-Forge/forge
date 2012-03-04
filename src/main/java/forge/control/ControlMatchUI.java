@@ -41,13 +41,13 @@ import forge.control.match.ControlMessage;
 import forge.control.match.ControlPicture;
 import forge.control.match.ControlTabber;
 import forge.game.GameType;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.ViewMatchUI;
 import forge.view.match.ViewField;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FSkin;
 
 /**
  * <p>

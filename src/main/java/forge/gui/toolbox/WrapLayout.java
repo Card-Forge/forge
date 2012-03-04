@@ -1,4 +1,4 @@
-package forge.view.toolbox;
+package forge.gui.toolbox;
 
 import java.awt.Component;
 import java.awt.Container;

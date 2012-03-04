@@ -22,13 +22,13 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
+import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.util.MyRandom;
 import forge.view.match.ViewField;
-import forge.view.toolbox.FLabel;
 
 /** 
  * Methods for all things related to starting a new game.

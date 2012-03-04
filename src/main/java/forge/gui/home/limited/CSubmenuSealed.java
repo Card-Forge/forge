@@ -25,11 +25,11 @@ import forge.game.limited.SealedDeck;
 import forge.gui.GuiUtils;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.utilities.CSubmenuDeckEditor;
+import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

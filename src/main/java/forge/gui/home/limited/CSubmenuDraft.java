@@ -21,8 +21,8 @@ import forge.game.limited.CardPoolLimitation;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.DraftingProcess;
 import forge.gui.home.ICSubmenu;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

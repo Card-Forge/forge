@@ -29,11 +29,11 @@ import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
+import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
-import forge.view.toolbox.FList;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..

@@ -45,8 +45,8 @@ import forge.CardContainer;
 import forge.Counters;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
-import forge.view.toolbox.CardFaceSymbols;
 
 /**
  * <p>

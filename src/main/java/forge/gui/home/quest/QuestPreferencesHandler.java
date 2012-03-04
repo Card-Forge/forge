@@ -14,10 +14,10 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -8,11 +8,11 @@ import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTextArea;
 import forge.quest.data.bazaar.QuestStallPurchasable;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
-import forge.view.toolbox.FTextArea;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")

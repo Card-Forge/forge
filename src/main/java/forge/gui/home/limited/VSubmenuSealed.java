@@ -21,13 +21,13 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
-import forge.view.toolbox.DeckLister;
-import forge.view.toolbox.FButton;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.DeckLister;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * Singleton instance of "Draft" submenu in "Constructed" group.
@@ -126,7 +126,7 @@ public enum VSubmenuSealed implements IVSubmenu {
         return this.btnStart;
     }
 
-    /** @return {@link forge.view.toolbox.DeckLister} */
+    /** @return {@link forge.gui.toolbox.DeckLister} */
     public DeckLister getLstDecks() {
         return lstDecks;
     }

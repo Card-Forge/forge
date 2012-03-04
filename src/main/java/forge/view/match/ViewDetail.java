@@ -20,8 +20,8 @@ package forge.view.match;
 import net.miginfocom.swing.MigLayout;
 import forge.control.match.ControlDetail;
 import forge.gui.game.CardDetailPanel;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

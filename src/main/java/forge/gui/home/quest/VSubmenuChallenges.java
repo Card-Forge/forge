@@ -16,11 +16,11 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
-import forge.view.toolbox.FCheckBox;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 
 /**  */
 public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet {
@@ -159,12 +159,12 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet {
         return pnlTitle;
     }
 
-    /** @return {@link forge.view.toolbox.FPanel} */
+    /** @return {@link forge.gui.toolbox.FPanel} */
     public JPanel getPnlStats() {
         return pnlStats;
     }
 
-    /** @return {@link forge.view.toolbox.FPanel} */
+    /** @return {@link forge.gui.toolbox.FPanel} */
     public JPanel getPnlStart() {
         return pnlStart;
     }
@@ -204,7 +204,7 @@ public enum VSubmenuChallenges implements IVSubmenu, IStatsAndPet {
         return lblWinStreak;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnCurrentDeck() {
         return btnCurrentDeck;
     }

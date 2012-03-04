@@ -44,6 +44,7 @@ import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.gui.GuiUtils;
 import forge.gui.ListChooser;
+import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.model.FMatchState;
 import forge.properties.ForgePreferences.FPref;
@@ -53,7 +54,6 @@ import forge.quest.data.QuestEvent;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.util.MyRandom;
-import forge.view.toolbox.FSkin;
 
 /**
  * <p>

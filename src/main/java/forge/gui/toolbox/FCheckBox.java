@@ -1,4 +1,4 @@
-package forge.view.toolbox;
+package forge.gui.toolbox;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;

@@ -57,10 +57,10 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.match.ControlTabber;
 import forge.gui.ForgeAction;
 import forge.gui.MultiLineLabelUI;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FVerticalTabPanel;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
-import forge.view.toolbox.FSkin;
-import forge.view.toolbox.FVerticalTabPanel;
 
 /**
  * Vertical tab panel for viewing stack, combat, etc. Unfortunately, cannot

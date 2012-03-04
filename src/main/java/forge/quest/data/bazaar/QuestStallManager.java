@@ -25,7 +25,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import forge.AllZone;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FSkin;
 
 /**
  * <p>

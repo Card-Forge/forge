@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import forge.card.CardManaCost;
 import forge.card.CardManaCostShard;
-import forge.view.toolbox.CardFaceSymbols;
+import forge.gui.toolbox.CardFaceSymbols;
 
 /**
  * Displays mana cost as symbols.

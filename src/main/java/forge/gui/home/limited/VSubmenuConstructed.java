@@ -17,11 +17,11 @@ import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
-import forge.view.toolbox.FCheckBox;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FList;
-import forge.view.toolbox.FRadioButton;
-import forge.view.toolbox.FScrollPane;
+import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FRadioButton;
+import forge.gui.toolbox.FScrollPane;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -200,12 +200,12 @@ public enum VSubmenuConstructed implements IVSubmenu {
         return this.btnStart;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnHumanRandom() {
         return this.btnHumanRandom;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnAIRandom() {
         return this.btnAIRandom;
     }

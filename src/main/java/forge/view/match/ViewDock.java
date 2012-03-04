@@ -35,10 +35,10 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.control.match.ControlDock;
-import forge.view.toolbox.FButton;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
 
 /**
  * Swing component for button dock.

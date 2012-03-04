@@ -50,6 +50,7 @@ import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
+import forge.gui.toolbox.FLabel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
@@ -57,7 +58,6 @@ import forge.properties.NewConstants.Lang.GuiDisplay.ComputerLibrary;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 import forge.view.match.ViewField;
-import forge.view.toolbox.FLabel;
 
 /**
  * Child controller, applied to single field in battlefield. Manages player view

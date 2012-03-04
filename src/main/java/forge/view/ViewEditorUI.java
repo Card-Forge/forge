@@ -17,7 +17,7 @@
  */
 package forge.view;
 
-import forge.view.toolbox.FPanel;
+import forge.gui.toolbox.FPanel;
 
 /**
  * Lays out battle, sidebar, user areas in locked % vals and repaints as

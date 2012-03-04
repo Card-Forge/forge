@@ -58,16 +58,16 @@ import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.utilities.VSubmenuDeckEditor;
 import forge.gui.home.utilities.VSubmenuUtilities;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestDataIO;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
 
 /** Singleton instance of home screen UI.
  * Use "getPanel()" to work with the main container.

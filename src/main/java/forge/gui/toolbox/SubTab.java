@@ -1,4 +1,4 @@
-package forge.view.toolbox;
+package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Cursor;

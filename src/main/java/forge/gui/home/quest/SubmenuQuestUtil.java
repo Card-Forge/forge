@@ -15,6 +15,11 @@ import forge.deck.Deck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.gui.deckeditor.QuestCardShop;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTextArea;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestChallenge;
@@ -24,11 +29,6 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.data.QuestUtil;
 import forge.quest.data.item.QuestItemZeppelin;
 import forge.quest.data.pet.QuestPetAbstract;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
-import forge.view.toolbox.FTextArea;
 
 /** 
  * Utilities for the quest submenu, all over the MVC spectrum.

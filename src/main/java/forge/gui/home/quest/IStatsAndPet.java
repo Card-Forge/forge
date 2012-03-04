@@ -4,15 +4,15 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import forge.view.toolbox.FLabel;
+import forge.gui.toolbox.FLabel;
 
 /** Dictates methods required for a panel with stats/pet display. */
 
 public interface IStatsAndPet {
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     FLabel getBtnBazaar();
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     FLabel getBtnSpellShop();
 
     /** @return {@link javax.swing.JLabel} */

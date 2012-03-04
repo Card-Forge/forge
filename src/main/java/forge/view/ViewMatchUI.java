@@ -30,6 +30,8 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.control.ControlMatchUI;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
 import forge.view.match.ViewBattlefield;
 import forge.view.match.ViewDetail;
 import forge.view.match.ViewDock;
@@ -38,8 +40,6 @@ import forge.view.match.ViewHand;
 import forge.view.match.ViewMessage;
 import forge.view.match.ViewPicture;
 import forge.view.match.ViewTabber;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
 
 /**
  * - Lays out containers and borders for resizeable layout.<br>

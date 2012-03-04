@@ -30,11 +30,11 @@ import forge.CardReader;
 import forge.card.CardRules;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
+import forge.gui.toolbox.FProgressBar;
 import forge.item.CardDb;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.SplashFrame;
-import forge.view.toolbox.FProgressBar;
 
 /**
  * <p>

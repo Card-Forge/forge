@@ -11,12 +11,12 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
-import forge.view.toolbox.FCheckBox;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FRadioButton;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FRadioButton;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * Singleton instance of "Colors" submenu in "Constructed" group.
@@ -197,7 +197,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
         return cbStandardStart;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnEmbark() {
         return btnEmbark;
     }

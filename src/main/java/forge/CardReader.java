@@ -50,8 +50,8 @@ import forge.card.EditionInfo;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
+import forge.gui.toolbox.FProgressBar;
 import forge.view.SplashFrame;
-import forge.view.toolbox.FProgressBar;
 
 /**
  * <p>

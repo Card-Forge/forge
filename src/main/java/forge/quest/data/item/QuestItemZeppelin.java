@@ -20,8 +20,8 @@ package forge.quest.data.item;
 import javax.swing.ImageIcon;
 
 import forge.AllZone;
+import forge.gui.toolbox.FSkin;
 import forge.quest.data.bazaar.QuestStallManager;
-import forge.view.toolbox.FSkin;
 
 /**
  * <p>

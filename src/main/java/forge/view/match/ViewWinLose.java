@@ -17,15 +17,15 @@ import forge.Player;
 import forge.Singletons;
 import forge.control.match.ControlWinLose;
 import forge.game.GameType;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTextArea;
 import forge.model.FMatchState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
-import forge.view.toolbox.FButton;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FOverlay;
-import forge.view.toolbox.FScrollPane;
-import forge.view.toolbox.FSkin;
-import forge.view.toolbox.FTextArea;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -160,17 +160,17 @@ public class ViewWinLose {
         overlay.showOverlay();
     }
 
-    /** @return {@link forge.view.toolbox.FButton} */
+    /** @return {@link forge.gui.toolbox.FButton} */
     public FButton getBtnContinue() {
         return this.btnContinue;
     }
 
-    /** @return {@link forge.view.toolbox.FButton} */
+    /** @return {@link forge.gui.toolbox.FButton} */
     public FButton getBtnRestart() {
         return this.btnRestart;
     }
 
-    /** @return {@link forge.view.toolbox.FButton} */
+    /** @return {@link forge.gui.toolbox.FButton} */
     public FButton getBtnQuit() {
         return this.btnQuit;
     }

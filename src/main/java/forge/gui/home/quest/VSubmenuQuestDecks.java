@@ -8,9 +8,9 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
-import forge.view.toolbox.DeckLister;
-import forge.view.toolbox.FLabel;
-import forge.view.toolbox.FScrollPane;
+import forge.gui.toolbox.DeckLister;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 
 /** 
  * Singleton instance of "Colors" submenu in "Constructed" group.
@@ -88,12 +88,12 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
         return CSubmenuQuestDecks.SINGLETON_INSTANCE;
     }
 
-    /** @return {@link forge.view.toolbox.DeckLister} */
+    /** @return {@link forge.gui.toolbox.DeckLister} */
     public DeckLister getLstDecks() {
         return this.lstDecks;
     }
 
-    /** @return {@link forge.view.toolbox.FLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnNewDeck() {
         return this.btnNewDeck;
     }

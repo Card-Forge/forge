@@ -13,10 +13,10 @@ import forge.Command;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.quest.SubmenuQuestUtil.SelectablePanel;
+import forge.gui.toolbox.FLabel;
 import forge.quest.data.QuestChallenge;
 import forge.quest.data.QuestEventManager;
 import forge.view.ViewHomeUI;
-import forge.view.toolbox.FLabel;
 
 /** 
  * TODO: Write javadoc for this type.

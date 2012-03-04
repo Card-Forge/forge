@@ -7,7 +7,7 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.EMenuItem;
 import forge.gui.home.ICSubmenu;
 import forge.gui.home.IVSubmenu;
-import forge.view.toolbox.FLabel;
+import forge.gui.toolbox.FLabel;
 
 /** 
  * Singleton instance of "Colors" submenu in "Constructed" group.

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.view.toolbox;
+package forge.gui.toolbox;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

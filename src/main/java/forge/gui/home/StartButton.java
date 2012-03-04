@@ -2,7 +2,7 @@ package forge.gui.home;
 
 import javax.swing.JButton;
 
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * TODO: Write javadoc for this type.

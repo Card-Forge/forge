@@ -32,9 +32,9 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.control.match.ControlMessage;
-import forge.view.toolbox.FButton;
-import forge.view.toolbox.FPanel;
-import forge.view.toolbox.FSkin;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FSkin;
 
 /**
  * Assembles Swing components of input area.

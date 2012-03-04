@@ -22,8 +22,8 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import arcane.ui.HandArea;
 import forge.control.match.ControlHand;
+import forge.gui.toolbox.FPanel;
 import forge.view.ViewMatchUI;
-import forge.view.toolbox.FPanel;
 
 /**
  * VIEW - Swing components for user hand.
