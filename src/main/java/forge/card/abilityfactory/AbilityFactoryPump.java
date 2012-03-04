@@ -280,14 +280,15 @@ public class AbilityFactoryPump {
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
         final Player computer = AllZone.getComputerPlayer();
         final Player human = AllZone.getHumanPlayer();
+        int attack = getNumAttack(sa);
+        //int defense = getNumDefense(sa);
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
         final boolean evasive = (keyword.endsWith("Flying") || keyword.endsWith("Horsemanship")
                 || keyword.endsWith("Unblockable") || keyword.endsWith("Fear") || keyword.endsWith("Intimidate"));
         final boolean combatRelevant = (keyword.endsWith("First Strike")
-                || keyword.contains("Bushido") || keyword.endsWith("Deathtouch")
-                || keyword.contains("Trample"));
+                || keyword.contains("Bushido") || keyword.endsWith("Deathtouch"));
         // give evasive keywords to creatures that can attack
         if (evasive) {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
@@ -323,6 +324,13 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
                     || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || AllZoneUtil.getCreaturesInPlay(human).getNotKeyword("Flanking").size() < 1) {
+                return false;
+            }
+        } else if (keyword.startsWith("Trample")) {
+            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+                    || ph.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                    || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)
+                    || card.getNetCombatDamage() + attack <= 1) {
                 return false;
             }
         } else if (keyword.equals("Infect")) {
@@ -433,7 +441,7 @@ public class AbilityFactoryPump {
         }
 
         // is the creature blocked and the blocker would survive
-        if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_BLOCKERS) && (attack > 0)
+        if (phase.is(Constant.Phase.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && (attack > 0)
                 && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
                 && AllZone.getCombat().getBlockers(c) != null
                 && !AllZone.getCombat().getBlockers(c).isEmpty()
@@ -444,7 +452,7 @@ public class AbilityFactoryPump {
         // if the life of the computer is in danger, try to pump
         // potential blockers before declaring blocks
         if (phase.isAfter(Constant.Phase.COMBAT_DECLARE_ATTACKERS)
-                && phase.isBefore(Constant.Phase.MAIN2)
+                && phase.isBefore(Constant.Phase.COMBAT_DAMAGE)
                 && phase.isPlayerTurn(AllZone.getHumanPlayer())
                 && !AllZone.getCombat().getAttackers().isEmpty()
                 && CombatUtil.canBlock(c, AllZone.getCombat())
