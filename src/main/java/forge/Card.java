@@ -6900,6 +6900,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!shares) {
                     return false;
                }
+            } else if (restriction.equals("YourBattlefield")) {
+                final CardList list = sourceController.getCardsIn(Zone.Battlefield);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                boolean shares = false;
+                for (final Card card : sourceController.getCardsIn(Constant.Zone.Battlefield)) {
+                    if (this.getName().equals(card.getName())) {
+                        shares = true;
+                    }
+                    if (!shares) {
+                        return false;
+                    }
+                }
             }
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
