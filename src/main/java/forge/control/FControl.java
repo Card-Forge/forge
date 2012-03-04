@@ -50,7 +50,7 @@ public enum FControl {
 
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
-    private int state;
+    private int state = -1;
 
     private WindowListener waDefault, waConcede, waLeaveBazaar;
 

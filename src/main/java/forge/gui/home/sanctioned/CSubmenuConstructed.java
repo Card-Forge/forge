@@ -34,6 +34,7 @@ import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
+import forge.gui.GuiUtils;
 import forge.gui.home.ICSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -360,8 +361,11 @@ public enum CSubmenuConstructed implements ICSubmenu {
         Constant.Runtime.COMPUTER_DECK[0] =
                 generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
 
-        GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
-        overlay.hideOverlay();
+        if (Constant.Runtime.HUMAN_DECK[0] != null && Constant.Runtime.COMPUTER_DECK[0] != null) {
+            GameNew.newGame(Constant.Runtime.HUMAN_DECK[0], Constant.Runtime.COMPUTER_DECK[0]);
+        }
+
+        GuiUtils.closeOverlay();
     }
 
     /** Generates deck from current list selection(s). */
@@ -488,10 +492,10 @@ public enum CSubmenuConstructed implements ICSubmenu {
         while (x == -1 || x == 1 || x == 4) {
             x = (int) Math.ceil(Math.random() * 5);
         }
-        final int colorCount = x;
+        final Integer colorCount = x;
 
         final int maxCount = lst0.getModel().getSize();
-        int[] selectedIndices = new int[colorCount];
+        Integer[] selectedIndices = new Integer[colorCount];
 
         x = -1;
         for (int i = 0; i < colorCount; i++) {
@@ -502,8 +506,8 @@ public enum CSubmenuConstructed implements ICSubmenu {
             }
             x = -1;
         }
-        lst0.setSelectedIndices(selectedIndices);
-        selectedIndices = null;
+
+        lst0.setSelectedIndices(ArrayUtils.toPrimitive(selectedIndices));
     }
 
     /** @param lst0 &emsp; {@link javax.swing.JList} */
