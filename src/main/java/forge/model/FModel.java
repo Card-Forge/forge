@@ -106,7 +106,7 @@ public enum FModel {
         final boolean deleteSucceeded = logFile.delete();
 
         if (logFile.exists() && !deleteSucceeded && (logFile.length() != 0)) {
-           // throw new IllegalStateException("Could not delete existing logFile:" + logFile.getAbsolutePath());
+            throw new IllegalStateException("Could not delete existing logFile:" + logFile.getAbsolutePath());
         }
 
         try {
