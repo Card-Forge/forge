@@ -6274,6 +6274,7 @@ res/cardsfolder/o/oubliette.txt svneol=native#text/plain
 res/cardsfolder/o/ouphe_vandals.txt -text svneol=unset#text/plain
 res/cardsfolder/o/oust.txt svneol=native#text/plain
 res/cardsfolder/o/outbreak.txt svneol=native#text/plain
+res/cardsfolder/o/outmaneuver.txt -text
 res/cardsfolder/o/outrage_shaman.txt svneol=native#text/plain
 res/cardsfolder/o/outrider_of_jhess.txt svneol=native#text/plain
 res/cardsfolder/o/overbeing_of_myth.txt svneol=native#text/plain
